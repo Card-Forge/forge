@@ -19,8 +19,11 @@ package forge.card.cost;
 
 import java.util.List;
 
+import com.google.common.base.Predicate;
+
 import forge.AllZone;
 import forge.Card;
+import forge.CardPredicates;
 
 import forge.CardListUtil;
 import forge.card.abilityfactory.AbilityFactory;
@@ -112,7 +115,7 @@ public class CostDiscard extends CostPartWithList {
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
         List<Card> handList = activator.getCardsIn(ZoneType.Hand);
-        final String type = this.getType();
+        String type = this.getType();
         final Integer amount = this.convertAmount();
 
         if (this.getThis()) {
@@ -128,8 +131,21 @@ public class CostDiscard extends CostPartWithList {
             if (ability.isSpell()) {
                 handList.remove(source);// can't pay for itself
             }
+            boolean sameName = false;
+            if (type.contains("+WithSameName")) {
+                sameName = true;
+                type = type.replace("+WithSameName", "");
+            }
             if (!type.equals("Random")) {
                 handList = CardListUtil.getValidCards(handList, type.split(";"), activator, source);
+            }
+            if (sameName) {
+                for (Card c : handList) {
+                    if (CardListUtil.filter(handList, CardPredicates.nameEquals(c.getName())).size() > 1) {
+                        return true;
+                    }
+                }
+                return false;
             }
             if ((amount != null) && (amount > handList.size())) {
                 // not enough cards in hand to pay
@@ -165,7 +181,7 @@ public class CostDiscard extends CostPartWithList {
     public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
         final Player activator = ability.getActivatingPlayer();
         List<Card> handList = activator.getCardsIn(ZoneType.Hand);
-        final String discType = this.getType();
+        String discType = this.getType();
         final String amount = this.getAmount();
         this.resetList();
 
@@ -205,8 +221,28 @@ public class CostDiscard extends CostPartWithList {
                 this.setList(activator.discardRandom(c, ability));
                 payment.setPaidManaPart(this);
             } else {
-                final String[] validType = discType.split(";");
+                String type = new String(discType);
+                boolean sameName = false;
+                if (type.contains("+WithSameName")) {
+                    sameName = true;
+                    type = type.replace("+WithSameName", "");
+                }
+                final String[] validType = type.split(";");
                 handList = CardListUtil.getValidCards(handList, validType, activator, ability.getSourceCard());
+                final List<Card> landList2 = handList;
+                if (sameName) {
+                    handList = CardListUtil.filter(handList, new Predicate<Card>() {
+                        @Override
+                        public boolean apply(final Card c) {
+                            for (Card card : landList2) {
+                                if (!card.equals(c) && card.getName().equals(c.getName())) {
+                                    return true;
+                                }
+                            }
+                            return false;
+                        }
+                    });
+                }
 
                 if (c == null) {
                     final String sVar = ability.getSVar(amount);
@@ -259,6 +295,9 @@ public class CostDiscard extends CostPartWithList {
         }
 
         else {
+            if (type.contains("WithSameName")) {
+                return false;
+            }
             Integer c = this.convertAmount();
             if (c == null) {
                 final String sVar = ability.getSVar(this.getAmount());
@@ -306,6 +345,7 @@ public class CostDiscard extends CostPartWithList {
             private static final long serialVersionUID = -329993322080934435L;
 
             private int nDiscard = 0;
+            private boolean sameName = discType.contains("WithSameName");
 
             @Override
             public void showMessage() {
@@ -343,22 +383,25 @@ public class CostDiscard extends CostPartWithList {
             @Override
             public void selectCard(final Card card, final PlayerZone zone) {
                 if (zone.is(ZoneType.Hand) && handList.contains(card)) {
-                    // send in List<Card> for Typing
-                    card.getController().discard(card, sp);
-                    part.addToList(card);
-                    handList.remove(card);
-                    this.nDiscard++;
-
-                    // in case no more cards in hand
-                    if (this.nDiscard == nNeeded) {
-                        this.done();
-                    } else if (AllZone.getHumanPlayer().getZone(ZoneType.Hand).size() == 0) {
-                        // really
-                        // shouldn't
-                        // happen
-                        this.cancel();
-                    } else {
-                        this.showMessage();
+                    if (!sameName || part.getList().isEmpty() 
+                            || part.getList().get(0).getName().equals(card.getName())) {
+                        // send in List<Card> for Typing
+                        card.getController().discard(card, sp);
+                        part.addToList(card);
+                        handList.remove(card);
+                        this.nDiscard++;
+    
+                        // in case no more cards in hand
+                        if (this.nDiscard == nNeeded) {
+                            this.done();
+                        } else if (AllZone.getHumanPlayer().getZone(ZoneType.Hand).size() == 0) {
+                            // really
+                            // shouldn't
+                            // happen
+                            this.cancel();
+                        } else {
+                            this.showMessage();
+                        }
                     }
                 }
             }
