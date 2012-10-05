@@ -29,7 +29,6 @@ import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
-import forge.CardPredicates;
 import forge.Command;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;

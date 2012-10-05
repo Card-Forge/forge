@@ -794,7 +794,7 @@ public class CombatUtil {
                     return false;
                 }
                 if (keyword.equals("No more than two creatures can attack you each combat.") && cntAttackers > 1
-                        && card.getController().getOpponent().isPlayer(c.getController())) {
+                        && card.getController().getOpponent().equals(c.getController())) {
                     return false;
                 }
                 if (keyword.equals("CARDNAME can only attack alone.") && combat.isAttacking(card)) {

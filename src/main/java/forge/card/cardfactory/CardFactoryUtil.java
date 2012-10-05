@@ -29,6 +29,7 @@ import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.AllZone;
 import forge.AllZoneUtil;
@@ -1878,15 +1879,15 @@ public class CardFactoryUtil {
      */
     public static List<Card> getActivateablesFromZone(final PlayerZone zone, final Player activator) {
 
-        List<Card> cl = new ArrayList<Card>(zone.getCards());
+        Iterable<Card> cl = zone.getCards();
 
         // Only check the top card of the library
-        if (zone.is(ZoneType.Library) && !cl.isEmpty()) {
-            cl = CardLists.createCardList(cl.get(0));
+        if (zone.is(ZoneType.Library)) {
+            cl = Iterables.limit(cl, 1);
         }
 
-        if (activator.isPlayer(zone.getPlayer())) {
-            cl = CardLists.filter(cl, new Predicate<Card>() {
+        if (activator.equals(zone.getPlayer())) {
+            cl = Iterables.filter(cl, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
                     if (zone.is(ZoneType.Graveyard) && c.hasUnearth()) {
@@ -1920,7 +1921,7 @@ public class CardFactoryUtil {
             });
         } else {
             // the activator is not the owner of the card
-            cl = CardLists.filter(cl, new Predicate<Card>() {
+            cl = Iterables.filter(cl, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
 
@@ -1932,7 +1933,7 @@ public class CardFactoryUtil {
                 }
             });
         }
-        return cl;
+        return Lists.newArrayList(cl);
     }
 
     /**

@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -1082,7 +1081,7 @@ public class GameAction {
                         final Player pl = (Player) entity;
                         boolean invalid = false;
 
-                        if (tgt.canOnlyTgtOpponent() && !c.getController().getOpponent().isPlayer(pl)) {
+                        if (tgt.canOnlyTgtOpponent() && !c.getController().getOpponent().equals(pl)) {
                             invalid = true;
                         } else {
                             if (pl.hasProtectionFrom(c)) {

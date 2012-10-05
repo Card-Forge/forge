@@ -430,13 +430,13 @@ public class CardFactoryInstants {
                             final Card enchanting = c.getEnchantingCard();
 
                             if (enchanting != null) {
-                                if ((enchanting.isAttacking() && enchanting.getController().isPlayer(you.getOpponent()))
-                                        || enchanting.getController().isPlayer(you)) {
+                                if ((enchanting.isAttacking() && enchanting.getController().equals(you.getOpponent()))
+                                        || enchanting.getController().equals(you)) {
                                     return true;
                                 }
                             }
 
-                            return (c.getOwner().isPlayer(you) && c.getController().isPlayer(you));
+                            return (c.getOwner().equals(you) && c.getController().equals(you));
                         }
                     });
                     for (final Card c : toReturn) {

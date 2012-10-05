@@ -888,10 +888,10 @@ public final class GameActionUtil {
             GameActionUtil.playerCombatDamageWhirlingDervish(c);
         }
 
-        if (player.isPlayer(AllZone.getHumanPlayer())) {
+        if (player.equals(AllZone.getHumanPlayer())) {
             c.getDamageHistory().setDealtDmgToHumanThisTurn(true);
         }
-        if (player.isPlayer(AllZone.getComputerPlayer())) {
+        if (player.equals(AllZone.getComputerPlayer())) {
             c.getDamageHistory().setDealtDmgToComputerThisTurn(true);
         }
     }
@@ -978,10 +978,10 @@ public final class GameActionUtil {
             GameActionUtil.executeCelestialMantle(c);
         }
 
-        if (player.isPlayer(AllZone.getHumanPlayer())) {
+        if (player.equals(AllZone.getHumanPlayer())) {
             c.getDamageHistory().setDealtCombatDmgToHumanThisTurn(true);
         }
-        if (player.isPlayer(AllZone.getComputerPlayer())) {
+        if (player.equals(AllZone.getComputerPlayer())) {
             c.getDamageHistory().setDealtCombatDmgToComputerThisTurn(true);
         }
     } // executeCombatDamageToPlayerEffects

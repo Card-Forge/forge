@@ -20,7 +20,6 @@ package forge.gui.deckeditor.controllers;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import forge.AllZone;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;

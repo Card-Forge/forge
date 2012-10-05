@@ -300,38 +300,38 @@ public class CardLists {
         Collections.shuffle(list, MyRandom.getRandom());
     }
 
-    public static List<Card> filterControlledBy(List<Card> cardList, Player player) {
+    public static List<Card> filterControlledBy(Iterable<Card> cardList, Player player) {
         return CardLists.filter(cardList, CardPredicates.isController(player));
     }
 
 
-    public static List<Card> getValidCards(List<Card> cardList, String[] restrictions, Player sourceController, Card source) {
+    public static List<Card> getValidCards(Iterable<Card> cardList, String[] restrictions, Player sourceController, Card source) {
         return CardLists.filter(cardList, CardPredicates.restriction(restrictions, sourceController, source));
     }
 
-    public static List<Card> getValidCards(List<Card> cardList, String restriction, Player sourceController, Card source) {
+    public static List<Card> getValidCards(Iterable<Card> cardList, String restriction, Player sourceController, Card source) {
         return CardLists.filter(cardList, CardPredicates.restriction(restriction.split(","), sourceController, source));
     }
 
-    public static List<Card> getTargetableCards(List<Card> cardList, SpellAbility source) {
+    public static List<Card> getTargetableCards(Iterable<Card> cardList, SpellAbility source) {
         return CardLists.filter(cardList, CardPredicates.isTargetableBy(source));
     }
 
-    public static List<Card> getKeyword(List<Card> cardList, String keyword) {
+    public static List<Card> getKeyword(Iterable<Card> cardList, String keyword) {
         return CardLists.filter(cardList, CardPredicates.hasKeyword(keyword));
     }
 
-    public static List<Card> getNotKeyword(List<Card> cardList, String keyword) {
+    public static List<Card> getNotKeyword(Iterable<Card> cardList, String keyword) {
         return CardLists.filter(cardList, Predicates.not(CardPredicates.hasKeyword(keyword)));
     }
 
     // cardType is like "Land" or "Goblin", returns a new ArrayList<Card> that is a
     // subset of current CardList
-    public static List<Card> getNotType(List<Card> cardList, String cardType) {
+    public static List<Card> getNotType(Iterable<Card> cardList, String cardType) {
         return CardLists.filter(cardList, Predicates.not(CardPredicates.isType(cardType)));
     }
 
-    public static List<Card> getType(List<Card> cardList, String cardType) {
+    public static List<Card> getType(Iterable<Card> cardList, String cardType) {
         return CardLists.filter(cardList, CardPredicates.isType(cardType));
     }
 
@@ -344,7 +344,7 @@ public class CardLists {
      * @return a subset of this List<Card> whose items meet the filtering
      *         criteria; may be empty, but never null.
      */
-    public static List<Card> filter(List<Card> cardList, Predicate<Card> filt) {
+    public static List<Card> filter(Iterable<Card> cardList, Predicate<Card> filt) {
         return Lists.newArrayList(Iterables.filter(cardList, filt));
     }
 

@@ -2066,7 +2066,7 @@ public class ComputerUtil {
                     // TODO: choose "worst" controlled enchanting Aura
                     for (int j = 0; j < auras.size(); j++) {
                         final Card aura = auras.get(j);
-                        if (aura.getController().isPlayer(c.getController()) && list.contains(aura)) {
+                        if (aura.getController().equals(c.getController()) && list.contains(aura)) {
                             c = aura;
                             break;
                         }

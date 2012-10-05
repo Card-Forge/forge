@@ -43,7 +43,7 @@ public final class CardPredicates {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return c.getController().isPlayer(p);
+                return c.getController().equals(p);
             }
         };
     }
@@ -51,7 +51,7 @@ public final class CardPredicates {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return c.getOwner().isPlayer(p);
+                return c.getOwner().equals(p);
             }
         };
     }

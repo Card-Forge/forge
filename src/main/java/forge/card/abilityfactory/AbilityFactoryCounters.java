@@ -409,7 +409,7 @@ public class AbilityFactoryCounters {
                     params.get("Defined"), sa);
             // Don't activate Curse abilities on my cards and non-curse abilites
             // on my opponents
-            if (cards.isEmpty() || !cards.get(0).getController().isPlayer(player)) {
+            if (cards.isEmpty() || !cards.get(0).getController().equals(player)) {
                 return false;
             }
 

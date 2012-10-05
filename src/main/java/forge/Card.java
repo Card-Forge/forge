@@ -6472,17 +6472,17 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("YouCtrl")) {
-            if (!this.getController().isPlayer(sourceController)) {
+            if (!this.getController().equals(sourceController)) {
                 return false;
             }
         } else if (property.startsWith("YouDontCtrl")) {
-            if (this.getController().isPlayer(sourceController)) {
+            if (this.getController().equals(sourceController)) {
                 return false;
             }
         } else if (property.startsWith("EnchantedPlayerCtrl")) {
             final Object o = source.getEnchanting();
             if (o instanceof Player) {
-                if (!this.getController().isPlayer((Player) o)) {
+                if (!this.getController().equals((Player) o)) {
                     return false;
                 }
             } else { // source not enchanting a player
@@ -6493,7 +6493,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 final Card newCard = AllZoneUtil.getCardState(source);
                 for (final Object o : newCard.getRemembered()) {
                     if (o instanceof Player) {
-                        if (!this.getController().isPlayer((Player) o)) {
+                        if (!this.getController().equals((Player) o)) {
                             return false;
                           }
                     }
@@ -6502,7 +6502,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
             for (final Object o : source.getRemembered()) {
                 if (o instanceof Player) {
-                    if (!this.getController().isPlayer((Player) o)) {
+                    if (!this.getController().equals((Player) o)) {
                         return false;
                       }
                 }
@@ -6514,7 +6514,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     if (parent.getTarget() != null) {
                         for (final Object o : parent.getTarget().getTargetPlayers()) {
                             if (o instanceof Player) {
-                                if (!this.getController().isPlayer((Player) o)) {
+                                if (!this.getController().equals((Player) o)) {
                                     return false;
                                 }
                             }
@@ -6528,13 +6528,13 @@ public class Card extends GameEntity implements Comparable<Card> {
                 final ArrayList<SpellAbility> sas = AbilityFactory.getDefinedSpellAbilities(source, "Targeted", sa);
                 for (final Card c : list) {
                     final Player p = c.getController();
-                    if (!this.getController().isPlayer(p)) {
+                    if (!this.getController().equals(p)) {
                         return false;
                     }
                 }
                 for (final SpellAbility s : sas) {
                     final Player p = s.getSourceCard().getController();
-                    if (!this.getController().isPlayer(p)) {
+                    if (!this.getController().equals(p)) {
                         return false;
                     }
                 }
@@ -6548,11 +6548,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("YouOwn")) {
-            if (!this.getOwner().isPlayer(sourceController)) {
+            if (!this.getOwner().equals(sourceController)) {
                 return false;
             }
         } else if (property.startsWith("YouDontOwn")) {
-            if (this.getOwner().isPlayer(sourceController)) {
+            if (this.getOwner().equals(sourceController)) {
                 return false;
             }
         } else if (property.startsWith("OwnedBy")) {
@@ -6561,7 +6561,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("OwnerDoesntControl")) {
-            if (this.getOwner().isPlayer(this.getController())) {
+            if (this.getOwner().equals(this.getController())) {
                 return false;
             }
         } else if (property.startsWith("ControllerControls")) {
@@ -6925,15 +6925,15 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("controllerWasDealtCombatDamageByThisTurn")) {
-            if (!(source.getDamageHistory().getDealtCombatDmgToHumanThisTurn() && this.getController().isPlayer(AllZone.getHumanPlayer()))
-                    && !(source.getDamageHistory().getDealtCombatDmgToComputerThisTurn() && this.getController().isPlayer(
+            if (!(source.getDamageHistory().getDealtCombatDmgToHumanThisTurn() && this.getController().equals(AllZone.getHumanPlayer()))
+                    && !(source.getDamageHistory().getDealtCombatDmgToComputerThisTurn() && this.getController().equals(
                             AllZone.getComputerPlayer()))) {
                 return false;
             }
         } else if (property.startsWith("controllerWasDealtDamageByThisTurn")) {
-            if (!(source.getDamageHistory().getDealtDmgToHumanThisTurn() && this.getController().isPlayer(AllZone.getHumanPlayer()))
+            if (!(source.getDamageHistory().getDealtDmgToHumanThisTurn() && this.getController().equals(AllZone.getHumanPlayer()))
                     && !(source.getDamageHistory().getDealtDmgToComputerThisTurn() && this.getController()
-                            .isPlayer(AllZone.getComputerPlayer()))) {
+                            .equals(AllZone.getComputerPlayer()))) {
                 return false;
             }
         } else if (property.startsWith("wasDealtDamageThisTurn")) {

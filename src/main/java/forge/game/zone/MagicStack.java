@@ -984,7 +984,7 @@ public class MagicStack extends MyObservable {
         } else if (source.hasKeyword("Rebound")
                 && source.getCastFrom() == ZoneType.Hand
                 && AllZone.getZoneOf(source).is(ZoneType.Stack)
-                && source.getOwner().isPlayer(source.getController())) //"If you cast this spell from your hand"
+                && source.getOwner().equals(source.getController())) //"If you cast this spell from your hand"
         {
             
             //Move rebounding card to exile

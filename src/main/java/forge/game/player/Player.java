@@ -243,19 +243,6 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
 
     /**
      * <p>
-     * isPlayer.
-     * </p>
-     * 
-     * @param p1
-     *            a {@link forge.game.player.Player} object.
-     * @return a boolean.
-     */
-    public final boolean isPlayer(final Player p1) {
-        return (p1 != null) && p1.getName().equals(this.getName());
-    }
-
-    /**
-     * <p>
      * getOpponent.
      * </p>
      * 
@@ -1067,7 +1054,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      */
     @Override
     public final boolean canBeTargetedBy(final SpellAbility sa) {
-        if (this.hasKeyword("Shroud") || (!this.isPlayer(sa.getActivatingPlayer()) && this.hasKeyword("Hexproof"))
+        if (this.hasKeyword("Shroud") || (!this.equals(sa.getActivatingPlayer()) && this.hasKeyword("Hexproof"))
                 || this.hasProtectionFrom(sa.getSourceCard())) {
             return false;
         }

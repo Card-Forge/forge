@@ -283,7 +283,7 @@ public class DefaultPlayerZone extends PlayerZone implements java.io.Serializabl
      */
     @Override
     public final boolean is(final ZoneType zone, final Player player) {
-        return (zone.equals(this.zoneName) && this.player.isPlayer(player));
+        return (zone.equals(this.zoneName) && this.player.equals(player));
     }
 
     /**
