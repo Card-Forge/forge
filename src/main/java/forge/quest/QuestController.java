@@ -25,6 +25,7 @@ import com.google.common.base.Predicates;
 
 import forge.Singletons;
 import forge.deck.Deck;
+import forge.game.GameFormatQuest;
 import forge.item.CardPrinted;
 import forge.item.PreconDeck;
 import forge.properties.ForgeProps;
@@ -53,6 +54,8 @@ public class QuestController {
     // Moved some methods there that otherwise would make this class even more
     // complex
     private QuestUtilCards myCards;
+
+    private GameFormatQuest questFormat;
 
     private QuestEvent currentEvent;
 
@@ -126,6 +129,15 @@ public class QuestController {
     }
 
     /**
+     * Gets the current format if any.
+     * 
+     * @return GameFormatQuest, the game format (if persistent).
+     */
+    public GameFormatQuest getFormat() {
+        return this.questFormat;
+    }
+
+    /**
      * Gets the current event.
      *
      * @return the current event
@@ -162,7 +174,11 @@ public class QuestController {
         // These are helper classes that hold no data.
         this.decks = this.model == null ? null : this.model.getAssets().getDeckStorage();
         this.myCards = this.model == null ? null : new QuestUtilCards(this);
+        this.questFormat = this.model == null ? null : this.model.getFormat();
         this.currentEvent = null;
+
+        // if (questFormat == null) { System.out.println("No quest."); }
+        // else { System.out.println("Quest = " + questFormat.getName()); }
 
         this.getChallengesManager().randomizeOpponents();
         this.getDuelsManager().randomizeOpponents();
@@ -195,11 +211,17 @@ public class QuestController {
      * @param startPool the start type
      * @param startFormat the format of starting pool
      * @param preconName the precon name
+     * @param persist
+     *      enforce the format for the whole quest
      */
     public void newGame(final String name, final int diff, final QuestMode mode, final QuestStartPool startPool,
-            final String startFormat, final String preconName) {
+            final String startFormat, final String preconName, final boolean persist) {
 
-        this.load(new QuestData(name, diff, mode));
+        if (persist && startPool == QuestStartPool.Rotating) {
+            this.load(new QuestData(name, diff, mode, startFormat));
+        } else {
+            this.load(new QuestData(name, diff, mode, null));
+        }
 
         final Predicate<CardPrinted> filter;
         switch (startPool) {

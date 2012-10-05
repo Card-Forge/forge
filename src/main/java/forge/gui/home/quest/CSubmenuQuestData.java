@@ -158,7 +158,7 @@ public enum CSubmenuQuestData implements ICDoc {
         }
 
         // Give the user a few cards to build a deck
-        AllZone.getQuest().newGame(questName, difficulty, mode, startPool, rotatingFormat, startPrecon);
+        AllZone.getQuest().newGame(questName, difficulty, mode, startPool, rotatingFormat, startPrecon, view.getBoxPersist().isSelected());
         AllZone.getQuest().save();
 
         // Save in preferences.

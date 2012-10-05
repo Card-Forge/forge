@@ -57,6 +57,7 @@ import forge.card.CardEdition;
 import forge.deck.DeckSection;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
+import forge.game.GameFormatQuest;
 import forge.item.BoosterPack;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
@@ -98,6 +99,7 @@ public class QuestDataIO {
         xStream.registerConverter(new ItemPoolToXml());
         xStream.registerConverter(new DeckSectionToXml());
         xStream.registerConverter(new GameTypeToXml());
+        xStream.registerConverter(new GameFormatQuestToXml());
         xStream.registerConverter(new QuestModeToXml());
         xStream.autodetectAnnotations(true);
         xStream.alias("CardPool", ItemPool.class);
@@ -351,7 +353,7 @@ public class QuestDataIO {
 
             final File f = new File(ForgeProps.getFile(NewConstants.Quest.DATA_DIR), qd.getName());
             QuestDataIO.savePacked(f + ".dat", xStream, qd);
-            //QuestDataIO.saveUnpacked(f + ".xml", xStream, qd);
+            // QuestDataIO.saveUnpacked(f + ".xml", xStream, qd);
 
         } catch (final Exception ex) {
             ErrorViewer.showError(ex, "Error saving Quest Data.");
@@ -373,6 +375,58 @@ public class QuestDataIO {
         xStream.toXML(qd, boutUnp);
         boutUnp.flush();
         boutUnp.close();
+    }
+
+    private static class GameFormatQuestToXml implements Converter {
+        @SuppressWarnings("rawtypes")
+        @Override
+        public boolean canConvert(final Class clasz) {
+            return clasz.equals(GameFormatQuest.class);
+        }
+
+        @Override
+        public void marshal(final Object source, final HierarchicalStreamWriter writer, final MarshallingContext context) {
+
+            writer.startNode("format");
+            GameFormatQuest format = (GameFormatQuest) source;
+            writer.addAttribute("name", format.getName());
+            writer.endNode();
+
+            for (String set : format.getAllowedSetCodes()) {
+                writer.startNode("set");
+                writer.addAttribute("s", set);
+                writer.endNode();
+            }
+            for (String ban : format.getBannedCardNames()) {
+                writer.startNode("ban");
+                writer.addAttribute("s", ban);
+                writer.endNode();
+            }
+        }
+
+        @Override
+        public Object unmarshal(final HierarchicalStreamReader reader, final UnmarshallingContext context) {
+            reader.moveDown();
+            GameFormatQuest format = new GameFormatQuest(reader.getAttribute("name"));
+            reader.moveUp();
+            while (reader.hasMoreChildren()) {
+                reader.moveDown();
+                final String nodename = reader.getNodeName();
+                if (nodename.equals("ban")) {
+                    String toBan = reader.getAttribute("s");
+                    format.addBannedCard(toBan);
+                    // System.out.println("Added + " + toBan + " to banned cards");
+                }
+                else if (nodename.equals("set")) {
+                    String toSets = reader.getAttribute("s");
+                    format.addAllowedSet(toSets);
+                    // System.out.println("Added + " + toSets + " to legal sets");
+                }
+                reader.moveUp();
+            }
+            format.updateFilters();
+            return format;
+        }
     }
 
     private static class GameTypeToXml implements Converter {

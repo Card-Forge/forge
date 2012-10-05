@@ -17,6 +17,8 @@
  */
 package forge.quest.data;
 
+import forge.Singletons;
+import forge.game.GameFormatQuest;
 import forge.quest.QuestMode;
 import forge.quest.io.QuestDataIO;
 
@@ -43,6 +45,7 @@ public final class QuestData {
     /** The version number. */
     private int versionNumber = QuestData.CURRENT_VERSION_NUMBER;
 
+    private GameFormatQuest format;
     private final String name;
 
     // Quest mode - there should be an enum :(
@@ -58,12 +61,22 @@ public final class QuestData {
     /**
      * Instantiates a new quest data.
      * @param mode2
+     *      quest mode
      * @param diff
+     *  achievement diff
      * @param name2
+     *      quest name
+     * @param formatString
+     *      String, persistent format for the quest (null if none).
      */
-    public QuestData(String name2, int diff, QuestMode mode2) {
+    public QuestData(String name2, int diff, QuestMode mode2, final String formatString) {
         this.name = name2;
 
+        if (formatString == null) {
+            format = null;
+        } else {
+            format = new GameFormatQuest(Singletons.getModel().getFormats().getFormat(formatString));
+        }
         this.mode = mode2;
         this.achievements = new QuestAchievements(diff);
         this.assets = new QuestAssets();
@@ -76,6 +89,15 @@ public final class QuestData {
      */
     public QuestMode getMode() {
         return this.mode;
+    }
+
+    /**
+     * Gets the persistent format, null if not assigned.
+     * 
+     * @return GameFormatQuest, the persistent format
+     */
+    public GameFormatQuest getFormat() {
+        return this.format;
     }
 
 

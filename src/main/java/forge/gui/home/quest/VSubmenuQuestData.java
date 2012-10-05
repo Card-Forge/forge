@@ -61,6 +61,7 @@ public enum VSubmenuQuestData implements IVSubmenu {
     private final JRadioButton radExpert = new FRadioButton("Expert");
 
     private final JCheckBox boxFantasy = new FCheckBox("Fantasy Mode");
+    private final JCheckBox boxFormatPersist = new FCheckBox("Enforce format during quest");
 
     private final JRadioButton radCompleteStart = new FRadioButton("Unrestricted Starting Pool");
     private final JRadioButton radRotatingStart = new FRadioButton("Format: ");
@@ -113,6 +114,7 @@ public enum VSubmenuQuestData implements IVSubmenu {
             public void actionPerformed(ActionEvent actionEvent) {
                 cbxPrecon.setEnabled(radPreconStart.isSelected());
                 cbxFormat.setEnabled(radRotatingStart.isSelected());
+                boxFormatPersist.setEnabled(radRotatingStart.isSelected());
             }
         };
 
@@ -155,6 +157,8 @@ public enum VSubmenuQuestData implements IVSubmenu {
         radRotatingStart.addActionListener(preconListener);
         group3.add(radPreconStart);
         cbxFormat.setEnabled(false);
+        boxFormatPersist.setSelected(true);
+        boxFormatPersist.setEnabled(false);
         radPreconStart.addActionListener(preconListener);
         radCompleteStart.setSelected(true);
         cbxPrecon.setEnabled(false);
@@ -177,9 +181,9 @@ public enum VSubmenuQuestData implements IVSubmenu {
         pnlOptions.add(radRotatingStart, constraints + ", wrap");
         pnlOptions.add(radExpert, constraints + ", gap 7.5% 2.5% 0 0 ");
         pnlOptions.add(cbxFormat, constraints + ", gap 20 0, w 30%!, wrap");
+        pnlOptions.add(boxFormatPersist, constraints + ", wrap, skip");
         pnlOptions.add(radPreconStart, constraints + ", wrap, skip");
         pnlOptions.add(cbxPrecon, "gap 20 0, w 30%!, h 35px!, wrap, skip");
-
         pnlOptions.add(btnEmbark, "w 40%!, h 30px!, gap 30% 0 20px 0, span 3 1");
 
         // Final layout
@@ -197,7 +201,7 @@ public enum VSubmenuQuestData implements IVSubmenu {
         pnlViewport.add(scr, "w 96%!, pushy, growy, gap 2% 0 0 30px");
 
         pnlViewport.add(pnlTitleNew, "w 96%, h 36px!, gap 2% 0 0 10px");
-        pnlViewport.add(pnlOptions, "w 96%!, h 250px!, gap 2% 0 0 20px");
+        pnlViewport.add(pnlOptions, "w 96%!, h 280px!, gap 2% 0 0 20px");
 
         scrContent.setBorder(null);
     }
@@ -275,6 +279,13 @@ public enum VSubmenuQuestData implements IVSubmenu {
      */
     public JCheckBox getBoxFantasy() {
         return boxFantasy;
+    }
+
+    /**
+     * @return {@link javax.swing.JCheckBox}
+     */
+    public JCheckBox getBoxPersist() {
+        return boxFormatPersist;
     }
 
     /**

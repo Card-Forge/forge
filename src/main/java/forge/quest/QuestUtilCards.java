@@ -20,8 +20,11 @@ package forge.quest;
 import forge.Singletons;
 import forge.card.BoosterGenerator;
 import forge.card.CardEdition;
+import forge.card.CardRules;
+import forge.card.CardRulesPredicates;
 import forge.card.FormatCollection;
 import forge.deck.Deck;
+import forge.game.GameFormatQuest;
 import forge.item.*;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestAssets;
@@ -145,7 +148,12 @@ public final class QuestUtilCards {
      * @return the card printed
      */
     public CardPrinted addRandomRare() {
-        final CardPrinted card = Aggregates.random(Iterables.filter(CardDb.instance().getAllCards(), QuestUtilCards.RARE_PREDICATE));
+        Predicate<CardPrinted> myFilter = QuestUtilCards.RARE_PREDICATE;
+
+        if (qc.getFormat() != null) {
+            myFilter = Predicates.and(QuestUtilCards.RARE_PREDICATE, qc.getFormat().getFilterPrinted());
+        }
+        final CardPrinted card = Aggregates.random(Iterables.filter(CardDb.instance().getAllCards(), myFilter));
         this.addSingleCard(card);
         return card;
     }
@@ -158,7 +166,13 @@ public final class QuestUtilCards {
      * @return the list
      */
     public List<CardPrinted> addRandomRare(final int n) {
-        final List<CardPrinted> newCards = Aggregates.random(Iterables.filter(CardDb.instance().getAllCards(), QuestUtilCards.RARE_PREDICATE), n); 
+        Predicate<CardPrinted> myFilter = QuestUtilCards.RARE_PREDICATE;
+
+        if (qc.getFormat() != null) {
+            myFilter = Predicates.and(QuestUtilCards.RARE_PREDICATE, qc.getFormat().getFilterPrinted());
+        }
+
+        final List<CardPrinted> newCards = Aggregates.random(Iterables.filter(CardDb.instance().getAllCards(), myFilter), n);
         this.addAllCards(newCards);
         return newCards;
     }
@@ -339,6 +353,17 @@ public final class QuestUtilCards {
             Predicates.not(this.filterExt));
 
     /**
+     * Helper predicate for shops: is legal in quest format.
+     * 
+     * @param qFormat
+     *            the quest format
+     * @return the predicate
+     */
+    public static Predicate<CardEdition> isLegalInQuestFormat(final GameFormatQuest qFormat) {
+        return CardEdition.Predicates.isLegalInFormatQuest(qFormat);
+    }
+
+    /**
      * Generate boosters in shop.
      * 
      * @param count
@@ -347,8 +372,11 @@ public final class QuestUtilCards {
     public void generateBoostersInShop(final int count) {
         for (int i = 0; i < count; i++) {
             final int rollD100 = MyRandom.getRandom().nextInt(100);
-            final Predicate<CardEdition> filter = rollD100 < 40 ? this.filterT2booster
+            Predicate<CardEdition> filter = rollD100 < 40 ? this.filterT2booster
                     : (rollD100 < 75 ? this.filterExtButT2 : this.filterNotExt);
+            if (qc.getFormat() != null) {
+                filter = isLegalInQuestFormat(qc.getFormat());
+            }
             Iterable<CardEdition> rightEditions = Iterables.filter(Singletons.getModel().getEditions(), filter);
             this.qa.getShopList().add(BoosterPack.FN_FROM_SET.apply(Aggregates.random(rightEditions)));
         }
@@ -361,12 +389,26 @@ public final class QuestUtilCards {
      *            the count
      */
     public void generateTournamentsInShop(final int count) {
-        Iterable<CardEdition> rightEditions = Iterables.filter(Singletons.getModel().getEditions(), CardEdition.Predicates.HAS_TOURNAMENT_PACK);
+        Predicate<CardEdition> formatFilter = CardEdition.Predicates.HAS_TOURNAMENT_PACK;
+        if (qc.getFormat() != null) {
+            formatFilter = Predicates.and(formatFilter, isLegalInQuestFormat(qc.getFormat()));
+        }
+        Iterable<CardEdition> rightEditions = Iterables.filter(Singletons.getModel().getEditions(), formatFilter);
         this.qa.getShopList().addAllFlat(Aggregates.random(Iterables.transform(rightEditions, TournamentPack.FN_FROM_SET), count));
     }
 
+    /**
+     * Generate precons in shop.
+     * 
+     * @param count
+     *            the count
+     */
     public void generateFatPacksInShop(final int count) {
-        Iterable<CardEdition> rightEditions = Iterables.filter(Singletons.getModel().getEditions(), CardEdition.Predicates.HAS_FAT_PACK);
+        Predicate<CardEdition> formatFilter = CardEdition.Predicates.HAS_FAT_PACK;
+        if (qc.getFormat() != null) {
+            formatFilter = Predicates.and(formatFilter, isLegalInQuestFormat(qc.getFormat()));
+        }
+        Iterable<CardEdition> rightEditions = Iterables.filter(Singletons.getModel().getEditions(), formatFilter);
         this.qa.getShopList().addAllFlat(Aggregates.random(Iterables.transform(rightEditions, FatPack.FN_FROM_SET), count));
     }
 
@@ -390,7 +432,15 @@ public final class QuestUtilCards {
      * Generate cards in shop.
      */
     public void generateCardsInShop() {
-        final BoosterGenerator pack = new BoosterGenerator(CardDb.instance().getAllCards());
+
+        Iterable<CardPrinted> cardList = null;
+        if (qc.getFormat() == null) {
+              cardList = CardDb.instance().getAllCards(); }
+        else {
+            cardList = Iterables.filter(CardDb.instance().getAllCards(), qc.getFormat().getFilterPrinted());
+        }
+
+        final BoosterGenerator pack = new BoosterGenerator(cardList);
 
         int nLevel = this.qc.getAchievements().getLevel();
 

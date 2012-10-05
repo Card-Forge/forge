@@ -84,6 +84,24 @@ public final class GameFormat {
     }
 
     /**
+     * Gets the set list (for GameFormatQuest).
+     * 
+     * @return list of allowed set codes
+     */
+    public List<String> getAllowedSetCodes() {
+        return this.allowedSetCodes;
+    }
+
+    /**
+     * Gets the banned cards (for GameFormatQuest).
+     * 
+     * @return list of banned card names
+     */
+    public List<String> getBannedCardNames() {
+        return this.bannedCardNames;
+    }
+
+    /**
      * Gets the filter rules.
      * 
      * @return the filter rules

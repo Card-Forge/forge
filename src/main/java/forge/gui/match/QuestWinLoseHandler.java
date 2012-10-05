@@ -553,21 +553,9 @@ public class QuestWinLoseHandler extends ControlWinLose {
      */
     private void awardBooster() {
 
-        // Do not enable booster selection in this way...
-        final boolean allowSetSelection = false;
-
-        final List<String> boosterTypes = new ArrayList<String>();
-        boosterTypes.add("Format");
-        boosterTypes.add("Set");
-
-        final String prompt = "Choose bonus booster type:";
-        Object o = null;
-        if (allowSetSelection) {
-            o = GuiChoose.one(prompt, boosterTypes);
-        }
         List<CardPrinted> cardsWon = null;
 
-        if (o == null || o.toString().equals(boosterTypes.get(0))) {
+        if (qData.getFormat() == null) {
             final List<GameFormat> formats = new ArrayList<GameFormat>();
             String prefferedFormat = Singletons.getModel().getQuestPreferences().getPreference(QPref.BOOSTER_FORMAT);
 
@@ -595,14 +583,59 @@ public class QuestWinLoseHandler extends ControlWinLose {
             final List<String> sets = new ArrayList<String>();
 
             for (BoosterData bd : Singletons.getModel().getBoosters()) {
-                sets.add(bd.getEdition());
+                if (qData.getFormat().isSetLegal(bd.getEdition())) {
+                    sets.add(bd.getEdition());
+                }
             }
+
+            List<String> chooseSets = new ArrayList<String>();
+
+            int maxChoices = 1;
+
+            if (this.wonMatch) {
+                maxChoices++;
+                final int wins = qData.getAchievements().getWin();
+                if (wins > 0 && wins % 5 == 0) { maxChoices++; }
+                if (wins > 0 && wins % 20 == 0) { maxChoices++; }
+                if (wins > 0 && wins % 50 == 0) { maxChoices++; }
+            }
+
+            if (sets.size() > maxChoices) {
+                if (maxChoices > 1) {
+                    Boolean[] choices = new Boolean[sets.size()];
+                    for (int i = 0; i < sets.size(); i++) {
+                        choices[i] = false;
+                    }
+
+                    int toEnable = maxChoices;
+
+                    while (toEnable > 0) {
+                        int index = MyRandom.getRandom().nextInt(sets.size());
+                        if (!choices[index]) {
+                            choices[index] = true;
+                            toEnable--;
+                        }
+                    }
+
+                    for (int i = 0; i < sets.size(); i++) {
+                        if (choices[i]) {
+                            chooseSets.add(sets.get(i));
+                        }
+                    }
+                } else {
+                    chooseSets.add(sets.get(MyRandom.getRandom().nextInt(sets.size())));
+                }
+
+            } else {
+                chooseSets.addAll(sets);
+            }
+
             final String setPrompt = "Choose bonus booster set:";
-            final String chSet = GuiChoose.one(setPrompt, sets);
+            final String chSet = GuiChoose.one(setPrompt, chooseSets);
 
             cardsWon = (new UnOpenedProduct(Singletons.getModel().getBoosters().get(chSet))).open();
             qData.getCards().addAllCards(cardsWon);
-            this.lblTemp1 = new TitleLabel("Bonus booster pack from the \"" + chSet + "\" booster!");
+            this.lblTemp1 = new TitleLabel("Bonus \"" + chSet + "\" booster pack!");
         }
 
         if (cardsWon != null) {
