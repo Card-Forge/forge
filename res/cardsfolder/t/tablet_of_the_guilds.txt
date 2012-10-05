@@ -4,7 +4,7 @@ Types:Artifact
 Text:no text
 K:ETBReplacement:Other:ChooseColors
 SVar:ChooseColors:DB$ ChooseColor | Defined$ You | TwoColors$ True | AILogic$ MostProminentDualInComputerDeck | SpellDescription$ As CARDNAME enters the battlefield, choose two colors.
-T:Mode$ SpellCast | ValidCard$ Card.AnyChosenColor | Execute$ TrigGainFirstLife | TriggerDescription$ Whenever you cast a spell, if it's at least one of the chosen colors, you gain 1 life for each of the chosen colors it is.
+T:Mode$ SpellCast | ValidCard$ Card.AnyChosenColor | ValidActivatingPlayer$ You | Execute$ TrigGainFirstLife | TriggerDescription$ Whenever you cast a spell, if it's at least one of the chosen colors, you gain 1 life for each of the chosen colors it is.
 SVar:TrigGainFirstLife:DB$ GainLife | LifeAmount$ 1 | SubAbility$ GainSecondLife
 SVar:GainSecondLife:DB$ GainLife | LifeAmount$ 1 | ConditionCheckSVar$ AllCols
 SVar:AllCols:TriggeredCard$Valid Card.AllChosenColors
