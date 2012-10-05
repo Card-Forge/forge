@@ -50,7 +50,7 @@ public class GuiChoose {
         final List<T> choice = GuiChoose.getChoices(message, 0, 1, choices);
         return choice.isEmpty() ? null : choice.get(0);
     } // getChoiceOptional(String,T...)
-    
+
     // returned Object will never be null
     /**
      * <p>
@@ -123,7 +123,7 @@ public class GuiChoose {
     public static <T> List<T> oneOrMany(final String message, final T[] choices) {
         return GuiChoose.getChoices(message, 1, choices.length, choices);
     } // getChoice()
-    
+
     //returned Object will never be null
     /**
      * <p>
@@ -140,16 +140,16 @@ public class GuiChoose {
         if ((choices == null) || (choices.length == 0) || choices.length < amount) {
             return null;
         }
-        
-        return GuiChoose.getChoices(message, amount, amount, choices);        
+
+        return GuiChoose.getChoices(message, amount, amount, choices);
     }
-    
+
     public static <T> List<T> amount(final String message, final Collection<T> choices, final int amount) {
         if ((choices == null) || (choices.size() == 0) || choices.size() < amount) {
             return null;
         }
-        
-        return GuiChoose.getChoices(message, amount, amount, choices);        
+
+        return GuiChoose.getChoices(message, amount, amount, choices);
     }
 
     // returned Object will never be null
@@ -181,7 +181,6 @@ public class GuiChoose {
     }
 
     private static <T> List<T> getChoices(final ListChooser<T> c) {
-    
         final JList list = c.getJList();
         list.addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -195,17 +194,18 @@ public class GuiChoose {
         return c.getSelectedValues();
     } // getChoice()
 
-    public static List<Object> getOrderChoices(final String title, final String top, int remainingObjects, final Object[] sourceChoices, Object[] destChoices) {
+    public static List<Object> getOrderChoices(final String title, final String top, int remainingObjects,
+            final Object[] sourceChoices, Object[] destChoices, Card referenceCard) {
         // An input box for handling the order of choices.
         final JFrame frame = new JFrame();
-        DualListBox dual = new DualListBox(remainingObjects, top, sourceChoices, destChoices);
-    
+        DualListBox dual = new DualListBox(remainingObjects, top, sourceChoices, destChoices, referenceCard);
+
         frame.setLayout(new BorderLayout());
         frame.setSize(dual.getPreferredSize());
         frame.add(dual);
         frame.setTitle(title);
         frame.setVisible(false);
-    
+
         final JDialog dialog = new JDialog(frame, true);
         dialog.setTitle(title);
         dialog.setContentPane(dual);
@@ -213,12 +213,13 @@ public class GuiChoose {
         dialog.setLocationRelativeTo(null);
         dialog.pack();
         dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        if (referenceCard != null) {
+            CMatchUI.SINGLETON_INSTANCE.setCard(referenceCard);
+        }
         dialog.setVisible(true);
-    
+
         List<Object> objects = dual.getOrderedList();
-    
         dialog.dispose();
         return objects;
     }
-
 }

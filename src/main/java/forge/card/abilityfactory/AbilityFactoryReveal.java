@@ -2050,7 +2050,7 @@ public final class AbilityFactoryReveal {
             topCards.add(lib.get(j));
         }
 
-        List<Object> orderedCards = GuiChoose.getOrderChoices("Select order to Rearrange", "Top of Library", 0, topCards.toArray(), null);
+        List<Object> orderedCards = GuiChoose.getOrderChoices("Select order to Rearrange", "Top of Library", 0, topCards.toArray(), null, src);
         for (int i = maxCards - 1; i >= 0; i--) {
             Card next = (Card) orderedCards.get(i);
             Singletons.getModel().getGameAction().moveToLibrary(next, 0);
@@ -2414,7 +2414,7 @@ public final class AbilityFactoryReveal {
         final int validamount = Math.min(valid.size(), max);
 
         if (anyNumber && player.isHuman() && validamount > 0) {
-            final List<Object> selection = GuiChoose.getOrderChoices("Choose Which Cards to Reveal", "Revealed", -1, valid.toArray(), null);
+            final List<Object> selection = GuiChoose.getOrderChoices("Choose Which Cards to Reveal", "Revealed", -1, valid.toArray(), null, null);
             for (final Object o : selection) {
                 if (o != null && o instanceof Card) {
                     chosen.add((Card) o);

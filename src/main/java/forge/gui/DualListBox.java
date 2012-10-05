@@ -23,15 +23,14 @@ import javax.swing.event.ListSelectionListener;
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 import forge.gui.match.CMatchUI;
-import forge.gui.UnsortedListModel;
 
-// An input box for handling the order of choices. 
+// An input box for handling the order of choices.
 // Left box has the original choices
 // Right box has the final order
 // Top string will be like Top of the Stack or Top of the Library
 // Bottom string will be like Bottom of the Stack or Bottom of the Library
 // Single Arrows in between left box and right box for ordering
-// Multi Arrows for moving everything in order 
+// Multi Arrows for moving everything in order
 // Up/down arrows on the right of the right box for swapping
 // Single ok button, disabled until left box is empty
 
@@ -50,16 +49,20 @@ public class DualListBox extends JPanel {
 
     private JButton removeButton;
     private JButton removeAllButton;
-    
+
     private JButton okButton;
     private JButton autoButton;
-    
+
     private JLabel orderedLabel;
 
     private int remainingObjects = 0;
-    
-    public DualListBox(int remainingObjects, String label, Object[] sourceElements, Object[] destElements) {
+
+    private Card refCard = null;
+
+    public DualListBox(int remainingObjects, String label, Object[] sourceElements, Object[] destElements,
+            Card referenceCard) {
         this.remainingObjects = remainingObjects;
+        this.refCard = referenceCard;
         initScreen();
         orderedLabel.setText(label);
         if (sourceElements != null) {
@@ -131,12 +134,12 @@ public class DualListBox extends JPanel {
         }
         destList.getSelectionModel().clearSelection();
     }
-    
+
     public List<Object> getOrderedList() {
         this.setVisible(false);
         return destListModel.model;
     }
-    
+
     private static void addCardViewListener(final JList list) {
         list.addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -145,18 +148,17 @@ public class DualListBox extends JPanel {
                 Object obj = list.getSelectedValue();
                 if (obj instanceof Card) {
                     card = (Card) obj;
+                } else if (obj instanceof SpellAbility) {
+                    card = ((SpellAbility) obj).getSourceCard();
                 }
-                else if (obj instanceof SpellAbility) {
-                    card = ((SpellAbility)obj).getSourceCard();
-                }
-                
+
                 if (card != null) {
                     CMatchUI.SINGLETON_INSTANCE.setCard(card);
                 }
             }
-        });  
+        });
     }
-    
+
     private void initScreen() {
         setPreferredSize(new Dimension(650, 300));
         setLayout(new GridLayout(0, 3));
@@ -172,7 +174,7 @@ public class DualListBox extends JPanel {
         removeButton.addActionListener(new RemoveListener());
         removeAllButton = new JButton("<<");
         removeAllButton.addActionListener(new RemoveAllListener());
-        
+
         // Dual List Complete Buttons
         okButton = new JButton("OK");
         okButton.addActionListener(new OkListener());
@@ -195,19 +197,19 @@ public class DualListBox extends JPanel {
         centerPanel.add(addAllButton);
         centerPanel.add(removeButton);
         centerPanel.add(removeAllButton);
-        
+
         orderedLabel = new JLabel("Selected Elements:");
-        
+
         JPanel rightPanel = new JPanel(new BorderLayout());
         rightPanel.setSize(300, 300);
         rightPanel.add(orderedLabel, BorderLayout.NORTH);
         rightPanel.add(new JScrollPane(destList), BorderLayout.CENTER);
         rightPanel.add(autoButton, BorderLayout.SOUTH);
-        
+
         add(leftPanel);
         add(centerPanel);
         add(rightPanel);
-        
+
         addCardViewListener(sourceList);
         addCardViewListener(destList);
     }
@@ -222,22 +224,22 @@ public class DualListBox extends JPanel {
             setButtonState();
         }
     }
-    
+
     private void addAll() {
         Iterator<Object> itr = sourceListModel.iterator();
-        
+
         ArrayList<Object> objects = new ArrayList<Object>();
-        
+
         while (itr.hasNext()) {
             Object obj = itr.next();
             objects.add(obj);
         }
-        
+
         addDestinationElements(objects.toArray());
         clearSourceListModel();
         setButtonState();
     }
-    
+
     private class AddAllListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -255,58 +257,57 @@ public class DualListBox extends JPanel {
             setButtonState();
         }
     }
-    
+
     private class RemoveAllListener implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent e) {   
+        public void actionPerformed(ActionEvent e) {
             Iterator<Object> itr = destListModel.iterator();
-            
+
             ArrayList<Object> objects = new ArrayList<Object>();
-            
+
             while (itr.hasNext()) {
                 Object obj = itr.next();
                 objects.add(obj);
             }
-            
+
             addSourceElements(objects.toArray());
             clearDestinationListModel();
             setButtonState();
         }
     }
-    
+
     public void setButtonState() {
         if (remainingObjects != -1) {
             okButton.setEnabled(sourceListModel.getSize() == remainingObjects);
         }
-		if (remainingObjects < 1) {
+        if (remainingObjects < 1) {
             autoButton.setEnabled(sourceListModel.getSize() != remainingObjects);
+        } else {
+            autoButton.setEnabled(false);
         }
-		else {
-		    autoButton.setEnabled(false);
-		}
 
         removeButton.setEnabled(destListModel.getSize() != 0);
         removeAllButton.setEnabled(destListModel.getSize() != 0);
         addButton.setEnabled(sourceListModel.getSize() != 0);
         addAllButton.setEnabled(sourceListModel.getSize() != 0);
     }
-    
+
     private void finishOrdering() {
         System.out.println("Attempting to finish.");
         this.setVisible(false);
-        
+
         Container grandpa = this.getParent().getParent();
-        JDialog dialog = (JDialog)grandpa.getParent();
+        JDialog dialog = (JDialog) grandpa.getParent();
         dialog.dispose();
     }
-    
+
     private class OkListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             finishOrdering();
         }
     }
-    
+
     private class AutoListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
