@@ -241,8 +241,19 @@ public final class AbilityFactoryChangeZone {
      * @return a boolean.
      */
     public static boolean isHidden(final String origin, final boolean hiddenOverride) {
-        ZoneType zone = ZoneType.smartValueOf(origin);
-        return hiddenOverride || (zone != null && zone.isHidden());
+        List<ZoneType> zone = ZoneType.listValueOf(origin);
+        
+        if (hiddenOverride || zone == null) {
+            return true;
+        }
+        
+        
+        for (ZoneType z : zone) {
+            if (z.isHidden()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -255,8 +266,7 @@ public final class AbilityFactoryChangeZone {
      * @return a boolean.
      */
     public static boolean isKnown(final String origin) {
-        ZoneType zone = ZoneType.smartValueOf(origin);
-        return zone != null && zone.isKnown();
+        return !isHidden(origin, false);
     }
 
     /**
@@ -2150,14 +2160,16 @@ public final class AbilityFactoryChangeZone {
         final Card hostCard = sa.getSourceCard();
 
         final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));
-        final ZoneType origin = ZoneType.smartValueOf(params.get("Origin"));
+        final List<ZoneType> origin = ZoneType.listValueOf(params.get("Origin"));
 
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
             tgtCards = new ArrayList<Card>();
-            for (final Card c : AbilityFactoryChangeZone.knownDetermineDefined(sa, params.get("Defined"), origin)) {
-                tgtCards.add(c);
+            for(ZoneType o : origin) {
+                for (final Card c : AbilityFactoryChangeZone.knownDetermineDefined(sa, params.get("Defined"), o)) {
+                    tgtCards.add(c);
+                }
             }
         }
 
@@ -2203,25 +2215,13 @@ public final class AbilityFactoryChangeZone {
                     continue;
                 }
                 final PlayerZone originZone = AllZone.getZoneOf(tgtC);
-                
-                ZoneType actingOrigin = origin;
-                
-                if (actingOrigin == null && originZone != null) {
-                    actingOrigin = originZone.getZoneType();
-                }
-                
+
                 // if Target isn't in the expected Zone, continue
-                if (originZone == null || !originZone.is(actingOrigin)) {
+
+                if (originZone == null || !origin.contains(originZone.getZoneType())) {
                     continue;
                 }
-
-                if ((tgt != null) && actingOrigin.equals(ZoneType.Battlefield)) {
-                    // check targeting
-                    if (!tgtC.canBeTargetedBy(sa)) {
-                        continue;
-                    }
-                }
-
+                
                 Card movedCard = null;
 
                 if (destination.equals(ZoneType.Library)) {
