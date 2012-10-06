@@ -409,7 +409,7 @@ public final class AbilityFactoryCopy {
                 for (int i = 0; i < multiplier; i++) {
                     // TODO Use central copy methods
                     Card copy;
-                    if (!c.isToken()) {
+                    if (!c.isToken() || c.isCopiedToken()) {
                         // copy creature and put it onto the battlefield
 
                         copy = AllZone.getCardFactory().getCard(CardDb.instance().getCard(c), sa.getActivatingPlayer());
