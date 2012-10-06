@@ -29,6 +29,8 @@ import forge.control.input.InputMulligan;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
+import forge.gui.framework.EDocID;
+import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.VMatchUI;
 import forge.gui.match.controllers.CMessage;
@@ -56,9 +58,15 @@ public class GameNew {
      */
     public static void newGame(final PlayerStartsGame... players) {
         Singletons.getControl().changeState(FControl.MATCH_SCREEN);
+        SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
         
-        GameNew.newGameCleanup();
-        GameNew.newMatchCleanup();
+        // Update observers
+        AllZone.getStack().updateObservers();
+        AllZone.getInputControl().updateObservers();
+        AllZone.getGameLog().updateObservers();
+        
+        newGameCleanup();
+        newMatchCleanup();
         
         Card.resetUniqueNumber();
         
@@ -77,6 +85,7 @@ public class GameNew {
                 }
             }
             bf.updateObservers();
+            p.getPlayer().getZone(ZoneType.Hand).updateObservers();
         }
         
         GameNew.actuateGame(players);

@@ -65,8 +65,6 @@ public enum CMatchUI implements CardContainer {
      * 
      */
     public void initMatch(final String strAvatarIcon) {
-        SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
-
         // Update avatars
         final String[] indices = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
         int i = 0;
@@ -95,19 +93,6 @@ public enum CMatchUI implements CardContainer {
             view.getLblAvatar().setIcon(new ImageIcon(img));
             view.getLblAvatar().getResizeTimer().start();
         }
-
-        // Update observers
-        AllZone.getHumanPlayer().updateObservers();
-        AllZone.getHumanPlayer().getZone(ZoneType.Hand).updateObservers();
-        AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
-
-        AllZone.getComputerPlayer().updateObservers();
-        AllZone.getComputerPlayer().getZone(ZoneType.Hand).updateObservers();
-        AllZone.getComputerPlayer().getZone(ZoneType.Battlefield).updateObservers();
-
-        AllZone.getStack().updateObservers();
-        AllZone.getInputControl().updateObservers();
-        AllZone.getGameLog().updateObservers();
     }
 
     /**
