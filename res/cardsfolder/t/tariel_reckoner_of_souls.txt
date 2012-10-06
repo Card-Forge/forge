@@ -5,7 +5,7 @@ Text:no text
 PT:4/7
 K:Flying
 K:Vigilance
-A:AB$ ChangeZone | Cost$ T | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ChangeType$ Creature | ChangeNum$ 1 | Hidden$ True | Origin$ Graveyard | AtRandom$ True | Destination$ Battlefield | GainControl$ True | SpellDescription$ Choose a creature card at random from target opponent's graveyard. Put that card onto the battlefield under your control.
+A:AB$ ChangeZone | Cost$ T | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ChangeType$ Creature.YouDontOwn | ChangeNum$ 1 | Hidden$ True | Origin$ Graveyard | AtRandom$ True | Destination$ Battlefield | GainControl$ True | SpellDescription$ Choose a creature card at random from target opponent's graveyard. Put that card onto the battlefield under your control.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tariel_reckoner_of_souls.jpg
 SetInfo:COM|Mythic|http://magiccards.info/scans/en/cmd/229.jpg
