@@ -37,7 +37,28 @@ Some people use the Windows application 7zip. This utility can be found at http:
 
 Fixes/Features:
 
-
+- Added keyboard shortcuts for Alpha Strike and Targeting Overlay
+- Added experimental 'limited Quest mode'. If selected, it will impose format-based restrictions on the available cards during the game. Current exceptions: theme decks in spell stores (deliberate). enemy decks (more in-format enemy decks would be needed first).
+- Divided by 0 check for DivideEvenly.
+- Re-added the code for Guild Feud.
+- Fixed Tablet of the Guilds.
+- newGame routine
+- eliminating global references to getXXXXplayer
+- CardListUtil => CardLists (as they call Collections class)
+- missing files?
+- Player: isPlayer was duplicating equals method
+- CardLists may accept any iterable<card> for filtering 
+- warnings
+- GetOrderChoices will now show the reference card when it first pops up.
+- PlayerZone empty class removed
+- PlayerZoneComesIntoPlay is now PlayerZoneBattlefield
+- PlayerZone is R/O Iterable on its cards
+- ante code no longer depends on get*Player
+- Aggregates.min
+- CardFactoryUtil uses player Aggregates
+- Multizone support in AF_ChangeZone (removed target recheck that shouldn't be necessary)
+- Cleared out the changes.txt file, now ready for new material.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -47,7 +68,9 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 Added the following cards:
 
-
+Epic Experiment
+Sphinx of the Chimes
+Angel of Serenity
 
 
 end
