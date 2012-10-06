@@ -1101,7 +1101,7 @@ public final class AbilityFactoryChangeZone {
         }
 
         if ((origin.contains(ZoneType.Library) && !destination.equals(ZoneType.Library) && !defined)
-                || params.containsKey("Shuffle")) {
+                || (params.containsKey("Shuffle") && "True".equals(params.get("Shuffle")))) {
             player.shuffle();
         }
     }
@@ -1277,16 +1277,17 @@ public final class AbilityFactoryChangeZone {
             fetchList.remove(c);
         }
 
-        if (origin.contains(ZoneType.Library) && !defined) {
+        if ((origin.contains(ZoneType.Library) && !defined && !"False".equals(params.get("Shuffle")))
+                || (params.containsKey("Shuffle") && "True".equals(params.get("Shuffle")))) {
             player.shuffle();
         }
 
         for (final Card c : fetched) {
-            Card newCard = null;
+            Card movedCard = null;
             if (ZoneType.Library.equals(destination)) {
                 final int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params
                         .get("LibraryPosition")) : 0;
-                Singletons.getModel().getGameAction().moveToLibrary(c, libraryPos);
+                movedCard = Singletons.getModel().getGameAction().moveToLibrary(c, libraryPos);
             } else if (ZoneType.Battlefield.equals(destination)) {
                 if (params.containsKey("Tapped")) {
                     c.setTapped(true);
@@ -1323,28 +1324,28 @@ public final class AbilityFactoryChangeZone {
                     }
                 }
 
-                newCard = Singletons.getModel().getGameAction().moveTo(c.getController().getZone(destination), c);
+                movedCard = Singletons.getModel().getGameAction().moveTo(c.getController().getZone(destination), c);
                 if (params.containsKey("Tapped")) {
-                    newCard.setTapped(true);
+                    movedCard.setTapped(true);
                 }
             } else if (destination.equals(ZoneType.Exile)) {
-                newCard = Singletons.getModel().getGameAction().exile(c);
+                movedCard = Singletons.getModel().getGameAction().exile(c);
                 if (params.containsKey("ExileFaceDown")) {
-                    newCard.setState(CardCharacteristicName.FaceDown);
+                    movedCard.setState(CardCharacteristicName.FaceDown);
                 }
             } else {
-                newCard = Singletons.getModel().getGameAction().moveTo(destination, c);
+                movedCard = Singletons.getModel().getGameAction().moveTo(destination, c);
             }
 
             if (remember != null) {
-                card.addRemembered(newCard);
+                card.addRemembered(movedCard);
             }
             if (forget != null) {
-                sa.getSourceCard().getRemembered().remove(newCard);
+                sa.getSourceCard().getRemembered().remove(movedCard);
             }
             // for imprinted since this doesn't use Target
             if (imprint != null) {
-                card.addImprinted(newCard);
+                card.addImprinted(movedCard);
             }
         }
 
