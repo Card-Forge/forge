@@ -76,7 +76,7 @@ public class GuiAssignDamageFrame extends JFrame {
     private final JPanel buttonPanel = new JPanel();
     private final BoxLayout buttonLayout = new BoxLayout(buttonPanel, BoxLayout.X_AXIS);
     
-    private UnsortedListModel recipientsListModel = new UnsortedListModel();
+    private UnsortedListModel<GameEntity> recipientsListModel = new UnsortedListModel<GameEntity>();
     private final JList recipientsList = new JList(recipientsListModel);
     
     private final JButton oneDamageButton = new JButton("Assign 1");

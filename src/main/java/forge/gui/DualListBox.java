@@ -6,8 +6,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -35,14 +34,14 @@ import forge.gui.match.CMatchUI;
 // Single ok button, disabled until left box is empty
 
 @SuppressWarnings("serial")
-public class DualListBox extends JPanel {
+public class DualListBox<T> extends JPanel {
     private JList sourceList;
 
-    private UnsortedListModel sourceListModel;
+    private UnsortedListModel<T> sourceListModel;
 
     private JList destList;
 
-    private UnsortedListModel destListModel;
+    private UnsortedListModel<T> destListModel;
 
     private JButton addButton;
     private JButton addAllButton;
@@ -59,7 +58,7 @@ public class DualListBox extends JPanel {
 
     private Card refCard = null;
 
-    public DualListBox(int remainingObjects, String label, Object[] sourceElements, Object[] destElements,
+    public DualListBox(int remainingObjects, String label, List<T> sourceElements, List<T> destElements,
             Card referenceCard) {
         this.remainingObjects = remainingObjects;
         this.refCard = referenceCard;
@@ -91,31 +90,32 @@ public class DualListBox extends JPanel {
         addSourceElements(newValue);
     }
 
+    public void addDestinationElements(List<T> newValue) {
+        fillListModel(destListModel, newValue);
+    }
+
     public void addDestinationElements(ListModel newValue) {
         fillListModel(destListModel, newValue);
     }
 
-    private void fillListModel(UnsortedListModel model, ListModel newValues) {
+    @SuppressWarnings("unchecked") // Java 7 has type parameterized ListModel
+    private void fillListModel(UnsortedListModel<T> model, ListModel newValues) {
         int size = newValues.getSize();
         for (int i = 0; i < size; i++) {
-            model.add(newValues.getElementAt(i));
+            model.add((T)newValues.getElementAt(i));
         }
     }
 
-    public void addSourceElements(Object[] newValue) {
+    public void addSourceElements(List<T> newValue) {
         fillListModel(sourceListModel, newValue);
     }
 
-    public void setSourceElements(Object[] newValue) {
+    public void setSourceElements(List<T> newValue) {
         clearSourceListModel();
         addSourceElements(newValue);
     }
 
-    public void addDestinationElements(Object[] newValue) {
-        fillListModel(destListModel, newValue);
-    }
-
-    private void fillListModel(UnsortedListModel model, Object[] newValues) {
+    private void fillListModel(UnsortedListModel<T> model, List<T> newValues) {
         model.addAll(newValues);
     }
 
@@ -135,7 +135,7 @@ public class DualListBox extends JPanel {
         destList.getSelectionModel().clearSelection();
     }
 
-    public List<Object> getOrderedList() {
+    public List<T> getOrderedList() {
         this.setVisible(false);
         return destListModel.model;
     }
@@ -162,7 +162,7 @@ public class DualListBox extends JPanel {
     private void initScreen() {
         setPreferredSize(new Dimension(650, 300));
         setLayout(new GridLayout(0, 3));
-        sourceListModel = new UnsortedListModel();
+        sourceListModel = new UnsortedListModel<T>();
         sourceList = new JList(sourceListModel);
 
         // Dual List control buttons
@@ -182,7 +182,7 @@ public class DualListBox extends JPanel {
         autoButton = new JButton("Auto");
         autoButton.addActionListener(new AutoListener());
 
-        destListModel = new UnsortedListModel();
+        destListModel = new UnsortedListModel<T>();
         destList = new JList(destListModel);
 
         JPanel leftPanel = new JPanel(new BorderLayout());
@@ -217,7 +217,8 @@ public class DualListBox extends JPanel {
     private class AddListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            Object[] selected = sourceList.getSelectedValues();
+            @SuppressWarnings("unchecked")
+            List<T> selected = (List<T>) Arrays.asList(sourceList.getSelectedValues());
             addDestinationElements(selected);
             clearSourceSelected();
             sourceList.validate();
@@ -226,16 +227,7 @@ public class DualListBox extends JPanel {
     }
 
     private void addAll() {
-        Iterator<Object> itr = sourceListModel.iterator();
-
-        ArrayList<Object> objects = new ArrayList<Object>();
-
-        while (itr.hasNext()) {
-            Object obj = itr.next();
-            objects.add(obj);
-        }
-
-        addDestinationElements(objects.toArray());
+        addDestinationElements(sourceListModel);
         clearSourceListModel();
         setButtonState();
     }
@@ -251,7 +243,8 @@ public class DualListBox extends JPanel {
     private class RemoveListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            Object[] selected = destList.getSelectedValues();
+            @SuppressWarnings("unchecked")
+            List<T> selected = (List<T>) Arrays.asList(destList.getSelectedValues());
             addSourceElements(selected);
             clearDestinationSelected();
             setButtonState();
@@ -261,16 +254,7 @@ public class DualListBox extends JPanel {
     private class RemoveAllListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            Iterator<Object> itr = destListModel.iterator();
-
-            ArrayList<Object> objects = new ArrayList<Object>();
-
-            while (itr.hasNext()) {
-                Object obj = itr.next();
-                objects.add(obj);
-            }
-
-            addSourceElements(objects.toArray());
+            addSourceElements(destListModel);
             clearDestinationListModel();
             setButtonState();
         }

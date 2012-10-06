@@ -194,11 +194,11 @@ public class GuiChoose {
         return c.getSelectedValues();
     } // getChoice()
 
-    public static List<Object> getOrderChoices(final String title, final String top, int remainingObjects,
-            final Object[] sourceChoices, Object[] destChoices, Card referenceCard) {
+    public static <T> List<T> getOrderChoices(final String title, final String top, int remainingObjects,
+            final List<T> sourceChoices, List<T> destChoices, Card referenceCard) {
         // An input box for handling the order of choices.
         final JFrame frame = new JFrame();
-        DualListBox dual = new DualListBox(remainingObjects, top, sourceChoices, destChoices, referenceCard);
+        DualListBox<T> dual = new DualListBox<T>(remainingObjects, top, sourceChoices, destChoices, referenceCard);
 
         frame.setLayout(new BorderLayout());
         frame.setSize(dual.getPreferredSize());
@@ -218,7 +218,7 @@ public class GuiChoose {
         }
         dialog.setVisible(true);
 
-        List<Object> objects = dual.getOrderedList();
+        List<T> objects = dual.getOrderedList();
         dialog.dispose();
         return objects;
     }

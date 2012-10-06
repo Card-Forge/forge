@@ -440,7 +440,7 @@ public class CombatUtil {
          
             List<Card> orderedBlockers = null;
             if (player.isHuman()) {
-                List<Object> ordered = GuiChoose.getOrderChoices("Choose Blocking Order", "Damaged First", 0, blockers.toArray(), null, attacker);
+                List<Card> ordered = GuiChoose.getOrderChoices("Choose Blocking Order", "Damaged First", 0, blockers, null, attacker);
                 
                 orderedBlockers = new ArrayList<Card>();
                 for(Object o : ordered) {
@@ -468,7 +468,7 @@ public class CombatUtil {
          
             List<Card> orderedAttacker = null;
             if (player.isHuman()) {
-                List<Object> ordered = GuiChoose.getOrderChoices("Choose Blocking Order", "Damaged First", 0, attackers.toArray(), null, blocker);
+                List<Card> ordered = GuiChoose.getOrderChoices("Choose Blocking Order", "Damaged First", 0, attackers, null, blocker);
                 
                 orderedAttacker = new ArrayList<Card>();
                 for(Object o : ordered) {
