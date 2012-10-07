@@ -22,8 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import com.google.common.base.Predicate;
-
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
