@@ -42,6 +42,7 @@ import forge.game.GameState;
 import forge.game.GameSummary;
 import forge.game.player.ComputerAIGeneral;
 import forge.game.player.ComputerAIInput;
+import forge.gauntlet.GauntletData;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
@@ -78,6 +79,7 @@ public enum FModel {
     private final ForgePreferences preferences;
     private final GameState gameState;
     private final FMatchState matchState;
+    private GauntletData gauntletData;
 
     private final EditionCollection editions;
     private final FormatCollection formats;
@@ -129,6 +131,7 @@ public enum FModel {
         this.gameState = new GameState();
         this.matchState = new FMatchState();
         this.questPreferences = new QuestPreferences();
+        this.gauntletData = new GauntletData();
 
         this.editions = new EditionCollection();
         this.formats = new FormatCollection("res/blockdata/formats.txt");
@@ -309,6 +312,10 @@ public enum FModel {
         return this.questPreferences;
     }
 
+    /** @return {@link forge.gui.home.gauntlet} */
+    public GauntletData getGauntletData() {
+        return this.gauntletData;
+    }
     /**
      * Returns all player's decks for constructed, sealed and whatever.
      * 
@@ -435,5 +442,13 @@ public enum FModel {
     /** @return {@link forge.util.IStorageView}<{@link forge.card.BoosterData}> */
     public final IStorageView<BoosterData> getBoosters() {
         return boosters;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param data0 {@link forge.gauntlet.GauntletData}
+     */
+    public void setGauntletData(GauntletData data0) {
+        this.gauntletData = data0;
     }
 }

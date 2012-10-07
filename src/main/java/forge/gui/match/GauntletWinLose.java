@@ -17,19 +17,18 @@ package forge.gui.match;
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import forge.AllZone;
-import forge.Singletons;
-import javax.swing.JLabel;
-
-import forge.gui.toolbox.FSkin;
-import forge.model.FMatchState;
-import forge.game.limited.GauntletMini;
-
 import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import forge.AllZone;
+import forge.Singletons;
+import forge.game.limited.GauntletMini;
+import forge.gui.toolbox.FSkin;
+import forge.model.FMatchState;
 
 /**
  * The Win/Lose handler for 'gauntlet' type tournament
@@ -37,8 +36,8 @@ import javax.swing.SwingConstants;
  */
 public class GauntletWinLose extends ControlWinLose {
 
-    private final transient boolean wonMatch;
-    private transient ViewWinLose view;
+    private final boolean wonMatch;
+    private ViewWinLose view;
     private GauntletMini gauntlet;
     private boolean nextRound = false;
 
@@ -46,9 +45,9 @@ public class GauntletWinLose extends ControlWinLose {
     private static final String CONSTRAINTS_TITLE = "w 95%!, gap 0 0 20px 10px";
     private static final String CONSTRAINTS_TEXT = "w 95%!,, h 180px!, gap 0 0 0 20px";
 
-    private transient JLabel lblTemp1;
-    private transient JLabel lblTemp2;
-    private final transient FMatchState matchState;
+    private JLabel lblTemp1;
+    private JLabel lblTemp2;
+    private final FMatchState matchState;
 
     /**
      * Instantiates a new gauntlet win/lose handler.
@@ -60,7 +59,7 @@ public class GauntletWinLose extends ControlWinLose {
         this.view = view0;
         gauntlet = AllZone.getGauntlet();
         matchState = Singletons.getModel().getMatchState();
-        this.wonMatch = matchState.isMatchWonBy(AllZone.getHumanPlayer().getName());
+        this.wonMatch = matchState.isMatchWonBy(AllZone.getHumanPlayer());
     }
 
 

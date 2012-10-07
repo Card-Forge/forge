@@ -31,7 +31,9 @@ public enum GameType {
     /** The Commander. */
     Commander(false),
     /** The Quest. */
-    Quest(true);
+    Quest(true),
+    /** */
+    Gauntlet(true);
 
     private final boolean bLimited;
 

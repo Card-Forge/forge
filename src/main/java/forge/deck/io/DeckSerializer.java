@@ -60,10 +60,15 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
     private final boolean moveWronglyNamedDecks;
     private static final String FILE_EXTENSION = ".dck";
 
+    /** @param deckDir0 {@link java.io.File} */
     public DeckSerializer(final File deckDir0) {
         this(deckDir0, false);
     }
 
+    /**
+     * @param deckDir0 {@link java.io.File}
+     * @param moveWrongDecks boolean
+     */
     public DeckSerializer(final File deckDir0, boolean moveWrongDecks) {
         super(deckDir0, Deck.FN_NAME_SELECTOR);
         moveWronglyNamedDecks = moveWrongDecks;
@@ -88,6 +93,7 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
             return "Simple Deck File .dck";
         }
     };
+
     /** The Constant HTML_FILTER. */
     public static final FileFilter HTML_FILTER = new FileFilter() {
         @Override
@@ -261,7 +267,12 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
         return result;
     }
 
-    private final void adjustFileLocation(File file, Deck result) {
+    /**
+     * 
+     * @param file {@link java.io.File}
+     * @param result {@link forge.deck.Deck}
+     */
+    private void adjustFileLocation(final File file, final Deck result) {
         if (result == null) {
             file.delete();
         } else {

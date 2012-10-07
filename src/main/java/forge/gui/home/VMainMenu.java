@@ -42,6 +42,10 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
+import forge.gui.home.gauntlet.VSubmenuGauntletBuild;
+import forge.gui.home.gauntlet.VSubmenuGauntletContests;
+import forge.gui.home.gauntlet.VSubmenuGauntletLoad;
+import forge.gui.home.gauntlet.VSubmenuGauntletQuick;
 import forge.gui.home.quest.VSubmenuChallenges;
 import forge.gui.home.quest.VSubmenuDuels;
 import forge.gui.home.quest.VSubmenuQuestData;
@@ -99,6 +103,11 @@ public enum VMainMenu implements IVDoc {
         allSubmenus.add(VSubmenuQuestDecks.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuQuestData.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuQuestPrefs.SINGLETON_INSTANCE);
+
+        allSubmenus.add(VSubmenuGauntletQuick.SINGLETON_INSTANCE);
+        allSubmenus.add(VSubmenuGauntletBuild.SINGLETON_INSTANCE);
+        allSubmenus.add(VSubmenuGauntletLoad.SINGLETON_INSTANCE);
+        allSubmenus.add(VSubmenuGauntletContests.SINGLETON_INSTANCE);
 
         allSubmenus.add(VSubmenuPreferences.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuAvatars.SINGLETON_INSTANCE);

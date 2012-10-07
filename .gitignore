@@ -271,6 +271,7 @@ res/decks/constructed/*.dck
 res/decks/draft/*
 res/decks/o1.bdk
 res/decks/sealed/*
+res/gauntlet
 res/images
 res/layouts/*.xml
 res/oracleScript.log

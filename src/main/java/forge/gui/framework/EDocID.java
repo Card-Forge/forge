@@ -12,6 +12,10 @@ import forge.gui.deckeditor.views.VFilters;
 import forge.gui.deckeditor.views.VProbabilities;
 import forge.gui.deckeditor.views.VStatistics;
 import forge.gui.home.VMainMenu;
+import forge.gui.home.gauntlet.VSubmenuGauntletBuild;
+import forge.gui.home.gauntlet.VSubmenuGauntletContests;
+import forge.gui.home.gauntlet.VSubmenuGauntletLoad;
+import forge.gui.home.gauntlet.VSubmenuGauntletQuick;
 import forge.gui.home.quest.VSubmenuChallenges;
 import forge.gui.home.quest.VSubmenuDuels;
 import forge.gui.home.quest.VSubmenuQuestData;
@@ -61,6 +65,10 @@ public enum EDocID { /** */
     HOME_QUESTDATA (VSubmenuQuestData.SINGLETON_INSTANCE), /** */
     HOME_QUESTDECKS (VSubmenuQuestDecks.SINGLETON_INSTANCE), /** */
     HOME_QUESTPREFS (VSubmenuQuestPrefs.SINGLETON_INSTANCE), /** */
+    HOME_GAUNTLETBUILD (VSubmenuGauntletBuild.SINGLETON_INSTANCE), /** */
+    HOME_GAUNTLETLOAD (VSubmenuGauntletLoad.SINGLETON_INSTANCE), /** */
+    HOME_GAUNTLETQUICK (VSubmenuGauntletQuick.SINGLETON_INSTANCE), /** */
+    HOME_GAUNTLETCONTESTS (VSubmenuGauntletContests.SINGLETON_INSTANCE), /** */
     HOME_PREFERENCES (VSubmenuPreferences.SINGLETON_INSTANCE), /** */
     HOME_AVATARS (VSubmenuAvatars.SINGLETON_INSTANCE), /** */
     HOME_DECKEDITOR (VSubmenuDeckEditor.SINGLETON_INSTANCE), /** */

@@ -62,6 +62,9 @@ public class ViewWinLose {
 
             control = new GauntletWinLose(this);
         }
+        else if (Singletons.getModel().getMatchState().getGameType() == GameType.Gauntlet) {
+            control = new OtherGauntletWinLose(this);
+        }
         else {
             control = new ControlWinLose(this);
         }
@@ -100,7 +103,7 @@ public class ViewWinLose {
 
         // Show Wins and Loses
         final Player human = AllZone.getHumanPlayer();
-        final int humanWins = matchState.countGamesWonBy(human.getName());
+        final int humanWins = matchState.countGamesWonBy(human);
         final int humanLosses = matchState.getGamesPlayedCount() - humanWins;
 
         lblStats.setText(ForgeProps.getLocalized(WinLoseText.WON) + humanWins

@@ -24,9 +24,9 @@ import java.util.Map;
 
 import forge.AllZone;
 import forge.Card;
-
 import forge.game.GameSummary;
 import forge.game.GameType;
+import forge.game.player.Player;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 
@@ -39,12 +39,9 @@ import forge.item.CardPrinted;
  */
 
 public class FMatchState {
-
-    /** The Constant GAMES_PER_MATCH. */
-    public static final int GAMES_PER_MATCH = 3;
-
-    /** The Constant MIN_GAMES_TO_WIN_MATCH. */
-    public static final int MIN_GAMES_TO_WIN_MATCH = 2;
+    private GameType gameType = GameType.Constructed;
+    private int gamesPerMatch = 3;
+    private int gamesToWinMatch = 2;
 
     private final List<GameSummary> gamesPlayed = new ArrayList<GameSummary>();
 
@@ -72,6 +69,16 @@ public class FMatchState {
         return this.gamesPlayed;
     }
 
+    /** @return int */
+    public int getGamesPerMatch() {
+        return gamesPerMatch;
+    }
+
+    /** @return int */
+    public int getGamesToWinMatch() {
+        return gamesToWinMatch;
+    }
+
     /**
      * Gets the games played count.
      *
@@ -79,15 +86,6 @@ public class FMatchState {
      */
     public final Integer getGamesPlayedCount() {
         return this.gamesPlayed.size();
-    }
-
-    /**
-     * Gets the games per match.
-     *
-     * @return java.lang.Integer
-     */
-    public final Integer getGamesPerMatch() {
-        return GAMES_PER_MATCH;
     }
 
     /**
@@ -124,19 +122,19 @@ public class FMatchState {
             maxWins = Math.max(maxWins, win);
         }
 
-        return (maxWins >= FMatchState.MIN_GAMES_TO_WIN_MATCH) || (totalGames >= FMatchState.GAMES_PER_MATCH);
+        return (maxWins >= this.gamesToWinMatch) || (totalGames >= this.gamesPerMatch);
     }
 
     /**
      * Count games won by.
      * 
-     * @param name &emsp; the name
+     * @param player {@link forge.game.Player}
      * @return java.lang.Integer
      */
-    public final int countGamesWonBy(final String name) {
+    public final int countGamesWonBy(final Player player) {
         int wins = 0;
         for (final GameSummary game : this.gamesPlayed) {
-            if (game.isWinner(name)) {
+            if (game.isWinner(player.toString())) {
                 wins++;
             }
         }
@@ -146,12 +144,12 @@ public class FMatchState {
     /**
      * Checks if is match won by.
      * 
-     * @param name
-     *            the name
+     * @param player0
+     *            the player
      * @return true, if is match won by
      */
-    public final boolean isMatchWonBy(final String name) {
-        return this.countGamesWonBy(name) >= FMatchState.MIN_GAMES_TO_WIN_MATCH;
+    public final boolean isMatchWonBy(final Player player0) {
+        return this.countGamesWonBy(player0) >= this.gamesToWinMatch;
     }
 
     /**
@@ -214,13 +212,14 @@ public class FMatchState {
         this.antesWon.clear();
         this.antesLost.clear();
     }
-    
-    private GameType gameType = GameType.Constructed;
+
+    /** @return {@link forge.game.GameType} */
     public GameType getGameType() {
         return gameType;
     }
+
+    /** @param gameType0 {@link forge.game.GameType} */
     public void setGameType(final GameType gameType0) {
         gameType = gameType0;
     }
-    
 }

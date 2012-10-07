@@ -101,7 +101,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         matchState = Singletons.getModel().getMatchState();
         qData = AllZone.getQuest();
         qEvent = qData.getCurrentEvent();
-        this.wonMatch = matchState.isMatchWonBy(AllZone.getHumanPlayer().getName());
+        this.wonMatch = matchState.isMatchWonBy(AllZone.getHumanPlayer());
         this.isAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
     }
 

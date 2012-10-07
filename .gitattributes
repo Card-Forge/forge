@@ -11487,6 +11487,8 @@ res/draft/rare.txt svneol=native#text/plain
 res/draft/uncommon.txt svneol=native#text/plain
 res/gamedata/NonStackingKWList.txt svneol=native#text/plain
 res/gamedata/TypeLists.txt svneol=native#text/plain
+res/gauntlet/LOCKED_DotP[!!-~]Preconstructed.dat -text
+res/gauntlet/LOCKED_Swimming[!!-~]With[!!-~]Sharks.dat -text
 res/lang/de.properties svneol=native#text/plain
 res/lang/en.properties svneol=native#text/plain
 res/lang/howTo/de.properties svneol=native#text/plain
@@ -12652,6 +12654,9 @@ src/main/java/forge/game/zone/PlayerZone.java svneol=native#text/plain
 src/main/java/forge/game/zone/PlayerZoneBattlefield.java svneol=native#text/plain
 src/main/java/forge/game/zone/ZoneType.java -text
 src/main/java/forge/game/zone/package-info.java svneol=native#text/plain
+src/main/java/forge/gauntlet/GauntletData.java -text
+src/main/java/forge/gauntlet/GauntletDeckUtil.java -text
+src/main/java/forge/gauntlet/GauntletIO.java -text
 src/main/java/forge/gui/CardContainer.java svneol=native#text/plain
 src/main/java/forge/gui/CardDetailPanel.java svneol=native#text/plain
 src/main/java/forge/gui/CardListViewer.java -text
@@ -12745,6 +12750,16 @@ src/main/java/forge/gui/home/IVSubmenu.java -text
 src/main/java/forge/gui/home/StartButton.java -text
 src/main/java/forge/gui/home/VHomeUI.java -text
 src/main/java/forge/gui/home/VMainMenu.java -text
+src/main/java/forge/gui/home/gauntlet/CSubmenuGauntletBuild.java -text
+src/main/java/forge/gui/home/gauntlet/CSubmenuGauntletContests.java -text
+src/main/java/forge/gui/home/gauntlet/CSubmenuGauntletLoad.java -text
+src/main/java/forge/gui/home/gauntlet/CSubmenuGauntletQuick.java -text
+src/main/java/forge/gui/home/gauntlet/ContestGauntletLister.java -text
+src/main/java/forge/gui/home/gauntlet/QuickGauntletLister.java -text
+src/main/java/forge/gui/home/gauntlet/VSubmenuGauntletBuild.java -text
+src/main/java/forge/gui/home/gauntlet/VSubmenuGauntletContests.java -text
+src/main/java/forge/gui/home/gauntlet/VSubmenuGauntletLoad.java -text
+src/main/java/forge/gui/home/gauntlet/VSubmenuGauntletQuick.java -text
 src/main/java/forge/gui/home/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/home/quest/CSubmenuChallenges.java -text
 src/main/java/forge/gui/home/quest/CSubmenuDuels.java -text
@@ -12783,6 +12798,7 @@ src/main/java/forge/gui/home/utilities/package-info.java svneol=native#text/plai
 src/main/java/forge/gui/match/CMatchUI.java -text
 src/main/java/forge/gui/match/ControlWinLose.java -text
 src/main/java/forge/gui/match/GauntletWinLose.java -text
+src/main/java/forge/gui/match/OtherGauntletWinLose.java -text
 src/main/java/forge/gui/match/QuestWinLoseCardViewer.java -text
 src/main/java/forge/gui/match/QuestWinLoseHandler.java -text
 src/main/java/forge/gui/match/TargetingOverlay.java -text

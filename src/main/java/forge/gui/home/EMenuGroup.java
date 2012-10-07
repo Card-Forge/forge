@@ -10,6 +10,7 @@ package forge.gui.home;
 public enum EMenuGroup { /** */
     SANCTIONED ("Sanctioned Game Formats"), /** */
     QUEST ("Quest Mode"), /** */
+    GAUNTLET ("Gauntlets"), /** */
     SETTINGS ("Game Settings"), /** */
     UTILITIES ("Tools");
 
