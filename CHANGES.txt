@@ -59,6 +59,17 @@ Fixes/Features:
 - Multizone support in AF_ChangeZone (removed target recheck that shouldn't be necessary)
 - Cleared out the changes.txt file, now ready for new material.
 - Added the recent commit logs to changes.txt.
+- Fixed Tariel, Reckoner of Souls.
+- Fixed type of Norn's Annex.
+- GuiChoose.getOrderChoice is properly parameterized now
+- newGame: observers update before matchState was changed lead to new hanging thread creation
+- Fixed AI for Jarad's Orders.
+- Copies of the Copies of Pack Rat will now have all the abilities of Pack Rat.
+- Fixed Death's Presence.
+- uncommented the ping functionality from FModel (yesterday site was down ping took too much time)
+- Test NET_CONN no longer should slowdown the main thread
+- Removed Braids progress monitor (unused)
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
