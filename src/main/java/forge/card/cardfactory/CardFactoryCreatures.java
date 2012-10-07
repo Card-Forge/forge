@@ -214,40 +214,6 @@ public class CardFactoryCreatures {
         card.addComesIntoPlayCommand(intoPlay);
     }
 
-    /*private static void getCard_SkySwallower(final Card card, final String cardName) {
-        final SpellAbility ability = new Ability(card, "0") {
-
-            @Override
-            public void resolve() {
-                // TODO - this needs to be targeted
-                final Player opp = card.getController().getOpponent();
-
-                List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-                list = list.getValidCards("Card.Other+YouCtrl".split(","), card.getController(), card);
-
-                for (final Card c : list) {
-                    c.addController(opp);
-                }
-            } // resolve()
-        }; // SpellAbility
-
-        final Command intoPlay = new Command() {
-            private static final long serialVersionUID = -453410206437839334L;
-
-            @Override
-            public void execute() {
-                final StringBuilder sb = new StringBuilder();
-                sb.append(card.getController().getOpponent());
-                sb.append(" gains control of all other permanents you control");
-                ability.setStackDescription(sb.toString());
-
-                AllZone.getStack().addSimultaneousStackEntry(ability);
-
-            }
-        };
-        card.addComesIntoPlayCommand(intoPlay);
-    }*/
-
     private static void getCard_PainterServant(final Card card, final String cardName) {
         final long[] timeStamp = new long[1];
         final String[] color = new String[1];

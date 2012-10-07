@@ -489,7 +489,7 @@ class CardFactoryArtifacts {
 
                             @Override
                             public void selectCard(final Card c, final PlayerZone zone) {
-                                if (zone.is(ZoneType.Hand, AllZone.getHumanPlayer()) && !this.exiled.contains(c)) {
+                                if (zone.is(ZoneType.Hand, card.getController()) && !this.exiled.contains(c)) {
                                     this.exiled.add(c);
                                     this.showMessage();
                                 }
@@ -504,7 +504,7 @@ class CardFactoryArtifacts {
                                 // Put that many cards from the top of your
                                 // library into your hand.
                                 // Ruling: This is not a draw...
-                                final PlayerZone lib = AllZone.getHumanPlayer().getZone(ZoneType.Library);
+                                final PlayerZone lib = card.getController().getZone(ZoneType.Library);
                                 int numCards = 0;
                                 while ((lib.size() > 0) && (numCards < this.exiled.size())) {
                                     Singletons.getModel().getGameAction().moveToHand(lib.get(0));
