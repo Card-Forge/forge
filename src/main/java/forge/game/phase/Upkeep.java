@@ -196,12 +196,13 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 final Ability sacAbility = new Ability(c, "0") {
                     @Override
                     public void resolve() {
-                        if (c.getController().isHuman()) {
+                        Player controller = c.getController();
+                        if (controller.isHuman()) {
                             Cost cost = new Cost(c, c.getEchoCost().trim(), true);
                             GameActionUtil.payCostDuringAbilityResolve(blankAbility, cost, paidCommand, unpaidCommand, null);
                         } else { // computer
-                            if (ComputerUtil.canPayCost(blankAbility)) {
-                                ComputerUtil.playNoStack(blankAbility);
+                            if (ComputerUtil.canPayCost(blankAbility, controller)) {
+                                ComputerUtil.playNoStack(controller, blankAbility);
                             } else {
                                 Singletons.getModel().getGameAction().sacrifice(c, null);
                             }
@@ -319,8 +320,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                 GameActionUtil.payManaDuringAbilityResolve(sb.toString(), upkeepCost, paidCommand,
                                         unpaidCommand);
                             } else { // computer
-                                if (ComputerUtil.canPayCost(aiPaid) && !c.hasKeyword("Indestructible")) {
-                                    ComputerUtil.playNoStack(aiPaid);
+                                if (ComputerUtil.canPayCost(aiPaid, controller) && !c.hasKeyword("Indestructible")) {
+                                    ComputerUtil.playNoStack(controller, aiPaid);
                                 } else {
                                     if (c.getName().equals("Cosmic Horror")) {
                                         controller.addDamage(7, c);
@@ -377,8 +378,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                 GameActionUtil.payCostDuringAbilityResolve(blankAbility, blankAbility.getPayCosts(),
                                         paidCommand, unpaidCommand, null);
                             } else { // computer
-                                if (ComputerUtil.shouldPayCost(c, upkeepCost) && ComputerUtil.canPayCost(blankAbility)) {
-                                    ComputerUtil.playNoStack(blankAbility);
+                                if (ComputerUtil.shouldPayCost(c, upkeepCost) && ComputerUtil.canPayCost(blankAbility, controller)) {
+                                    ComputerUtil.playNoStack(controller, blankAbility);
                                 } else {
                                     Singletons.getModel().getGameAction().sacrifice(c, null);
                                 }
@@ -420,10 +421,10 @@ public class Upkeep extends Phase implements java.io.Serializable {
                             if (controller.isHuman()) {
                                 GameActionUtil.payManaDuringAbilityResolve(sb.toString(), upkeepCost, paidCommand,
                                         unpaidCommand);
-                            } else { // computer
-                                if (ComputerUtil.canPayCost(aiPaid)
+                            } else { // computers
+                                if (ComputerUtil.canPayCost(aiPaid, controller)
                                         && (controller.predictDamage(upkeepDamage, c, false) > 0)) {
-                                    ComputerUtil.playNoStack(aiPaid);
+                                    ComputerUtil.playNoStack(controller, aiPaid);
                                 } else {
                                     controller.addDamage(upkeepDamage, c);
                                 }
@@ -653,7 +654,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 } // end resolve()
             }; // end noPay ability
 
-            if (c.getController().isHuman()) {
+            Player cp = c.getController(); 
+            if (cp.isHuman()) {
                 final String question = "Pay Demonic Hordes upkeep cost?";
                 if (GameActionUtil.showYesNoDialog(c, question)) {
                     final Ability pay = new Ability(c, "0") {
@@ -682,7 +684,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 }
             } // end human
             else { // computer
-                if ((c.getController().isComputer() && (ComputerUtil.canPayCost(noPay)))) {
+                if (cp.isComputer() && ComputerUtil.canPayCost(noPay, cp)) {
                     final Ability computerPay = new Ability(c, "0") {
                         @Override
                         public void resolve() {

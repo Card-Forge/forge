@@ -31,6 +31,7 @@ import forge.card.spellability.Target;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
@@ -94,7 +95,7 @@ public final class AbilityFactoryBond {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryBond.bondTriggerAI(af, this, mandatory);
+                return AbilityFactoryBond.bondTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abBond = new AbilityBond(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -266,8 +267,8 @@ public final class AbilityFactoryBond {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean bondTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa)) { // If there is a cost payment
+    private static boolean bondTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai)) { // If there is a cost payment
             return false;
         }
 

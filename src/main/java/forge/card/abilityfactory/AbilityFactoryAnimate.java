@@ -110,7 +110,7 @@ public final class AbilityFactoryAnimate {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryAnimate.animateTriggerAI(af, this, mandatory);
+                return AbilityFactoryAnimate.animateTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abAnimate = new AbilityAnimate(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -191,7 +191,7 @@ public final class AbilityFactoryAnimate {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryAnimate.animateTriggerAI(af, this, mandatory);
+                return AbilityFactoryAnimate.animateTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbAnimate = new DrawbackAnimate(af.getHostCard(), af.getAbTgt());
@@ -472,8 +472,8 @@ public final class AbilityFactoryAnimate {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean animateTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa)) { // If there is a cost payment
+    private static boolean animateTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai)) { // If there is a cost payment
             return false;
         }
 
@@ -981,7 +981,7 @@ public final class AbilityFactoryAnimate {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryAnimate.animateAllTriggerAI(af, this, mandatory);
+                return AbilityFactoryAnimate.animateAllTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abAnimateAll = new AbilityAnimateAll(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -1062,7 +1062,7 @@ public final class AbilityFactoryAnimate {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryAnimate.animateAllTriggerAI(af, this, mandatory);
+                return AbilityFactoryAnimate.animateAllTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbAnimateAll = new DrawbackAnimateAll(af.getHostCard(), af.getAbTgt());
@@ -1166,8 +1166,8 @@ public final class AbilityFactoryAnimate {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean animateAllTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa)) { // If there is a cost payment
+    private static boolean animateAllTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai)) { // If there is a cost payment
             return false;
         }
 

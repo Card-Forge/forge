@@ -2709,8 +2709,8 @@ public class CombatUtil {
             if (c.getController().isHuman()) {
                 GameActionUtil.payCostDuringAbilityResolve(ability, attackCost, paidCommand, unpaidCommand, null);
             } else { // computer
-                if (ComputerUtil.canPayCost(ability)) {
-                    ComputerUtil.playNoStack(ability);
+                if (ComputerUtil.canPayCost(ability, c.getController())) {
+                    ComputerUtil.playNoStack(c.getController(), ability);
                     if (!crd.hasKeyword("Vigilance")) {
                         crd.tap();
                     }

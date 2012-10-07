@@ -359,7 +359,7 @@ public class AbilityFactoryCounters {
 
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            amount = ComputerUtil.determineLeftoverMana(sa);
+            amount = ComputerUtil.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(amount));
         }
 
@@ -538,7 +538,7 @@ public class AbilityFactoryCounters {
      * @return a boolean.
      */
     private static boolean putDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
             return false;
         }
         return putDoTriggerAINoCost(ai, af, sa, mandatory);
@@ -815,7 +815,7 @@ public class AbilityFactoryCounters {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryCounters.removeDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryCounters.removeDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abRemCounter = new AbilityRemoveCounters(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -902,7 +902,7 @@ public class AbilityFactoryCounters {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryCounters.removeDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryCounters.removeDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility spRemoveCounter = new DrawbackRemoveCounters(af.getHostCard(), af.getAbTgt());
@@ -1118,7 +1118,7 @@ public class AbilityFactoryCounters {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean removeDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean removeDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the
         // expected targets could be
@@ -1130,7 +1130,7 @@ public class AbilityFactoryCounters {
         // fewer are not mandatory
         // Since the targeting portion of this would be what
 
-        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
             return false;
         }
 
@@ -1892,7 +1892,7 @@ public class AbilityFactoryCounters {
         final int amount;
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            amount = ComputerUtil.determineLeftoverMana(sa);
+            amount = ComputerUtil.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(amount));
         } else {
             amount = AbilityFactory.calculateAmount(sa.getSourceCard(), amountStr, sa);
@@ -2548,7 +2548,7 @@ public class AbilityFactoryCounters {
         boolean preferred = true;
 
         // if there is a cost, it's gotta be optional
-        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
             return false;
         }
 

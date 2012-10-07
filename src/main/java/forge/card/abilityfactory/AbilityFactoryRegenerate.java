@@ -41,6 +41,7 @@ import forge.card.spellability.Target;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 /**
@@ -103,7 +104,7 @@ public class AbilityFactoryRegenerate {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryRegenerate.doTriggerAI(af, this, mandatory);
+                return AbilityFactoryRegenerate.doTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abRegenerate = new AbilityRegenerate(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -187,7 +188,7 @@ public class AbilityFactoryRegenerate {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryRegenerate.doTriggerAI(af, this, mandatory);
+                return AbilityFactoryRegenerate.doTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbRegen = new DrawbackRegenerate(af.getHostCard(), af.getAbTgt());
@@ -377,10 +378,10 @@ public class AbilityFactoryRegenerate {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean doTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean doTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         boolean chance = false;
 
-        if (!ComputerUtil.canPayCost(sa)) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
 
@@ -557,7 +558,7 @@ public class AbilityFactoryRegenerate {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryRegenerate.regenerateAllDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryRegenerate.regenerateAllDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abRegenerateAll = new AbilityRegenerateAll(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -641,7 +642,7 @@ public class AbilityFactoryRegenerate {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryRegenerate.regenerateAllDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryRegenerate.regenerateAllDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
 
         }
@@ -781,11 +782,11 @@ public class AbilityFactoryRegenerate {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean regenerateAllDoTriggerAI(final AbilityFactory af, final SpellAbility sa,
+    private static boolean regenerateAllDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory) {
         boolean chance = true;
 
-        if (!ComputerUtil.canPayCost(sa)) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
 

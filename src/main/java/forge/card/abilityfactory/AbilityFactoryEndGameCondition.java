@@ -94,7 +94,7 @@ public final class AbilityFactoryEndGameCondition {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryEndGameCondition.winsGameDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryEndGameCondition.winsGameDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abWinsGame = new AbilityWinsGame(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -195,7 +195,7 @@ public final class AbilityFactoryEndGameCondition {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryEndGameCondition.winsGameDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryEndGameCondition.winsGameDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbWinsGame = new DrawbackWinsGame(af.getHostCard(), af.getAbTgt());
@@ -272,9 +272,9 @@ public final class AbilityFactoryEndGameCondition {
      *            a boolean.
      * @return a boolean.
      */
-    public static boolean winsGameDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    public static boolean winsGameDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         // If there is a cost payment it's usually not mandatory
-        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
             return false;
         }
 
@@ -358,7 +358,7 @@ public final class AbilityFactoryEndGameCondition {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryEndGameCondition.losesGameDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryEndGameCondition.losesGameDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abLosesGame = new AbilityLosesGame(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -459,7 +459,7 @@ public final class AbilityFactoryEndGameCondition {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryEndGameCondition.losesGameDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryEndGameCondition.losesGameDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbLosesGame = new DrawbackLosesGame(af.getHostCard(), af.getAbTgt());
@@ -553,9 +553,9 @@ public final class AbilityFactoryEndGameCondition {
      *            a boolean.
      * @return a boolean.
      */
-    public static boolean losesGameDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    public static boolean losesGameDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         // If there is a cost payment it's usually not mandatory
-        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
             return false;
         }
 
@@ -563,14 +563,14 @@ public final class AbilityFactoryEndGameCondition {
         // (Final Fortune would need to attach it's delayed trigger to a
         // specific turn, which can't be done yet)
 
-        if (!mandatory && AllZone.getHumanPlayer().cantLose()) {
+        if (!mandatory && ai.getOpponent().cantLose()) {
             return false;
         }
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
-            tgt.addTarget(AllZone.getHumanPlayer());
+            tgt.addTarget(ai.getOpponent());
         }
 
         // WinGame abilities usually don't have subAbilities but for

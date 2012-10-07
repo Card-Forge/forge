@@ -127,7 +127,7 @@ public class AbilityFactoryPump {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryPump.this.pumpPlayAI(this);
+                return AbilityFactoryPump.this.pumpPlayAI(getActivatingPlayer(), this);
             }
 
             @Override
@@ -143,10 +143,10 @@ public class AbilityFactoryPump {
             @Override
             public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
                 if (withOutManaCost) {
-                    return AbilityFactoryPump.this.pumpTriggerAINoCost(
+                    return AbilityFactoryPump.this.pumpTriggerAINoCost(getActivatingPlayer(), 
                             AbilityFactoryPump.this.abilityFactory, this, mandatory);
                 }
-                return AbilityFactoryPump.this.pumpTriggerAI(
+                return AbilityFactoryPump.this.pumpTriggerAI(getActivatingPlayer(), 
                         AbilityFactoryPump.this.abilityFactory, this, mandatory);
             }
         }; // SpellAbility
@@ -179,7 +179,7 @@ public class AbilityFactoryPump {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryPump.this.pumpPlayAI(this);
+                return AbilityFactoryPump.this.pumpPlayAI(getActivatingPlayer(), this);
             }
 
             @Override
@@ -194,7 +194,7 @@ public class AbilityFactoryPump {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryPump.this.pumpTriggerAI(AbilityFactoryPump.this.abilityFactory, this, mandatory);
+                return AbilityFactoryPump.this.pumpTriggerAI(getActivatingPlayer(), AbilityFactoryPump.this.abilityFactory, this, mandatory);
             }
         }
         final SpellAbility abPump = new AbilityPump(this.hostCard, this.abilityFactory.getAbCost(),
@@ -228,7 +228,7 @@ public class AbilityFactoryPump {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryPump.this.pumpPlayAI(this);
+                return AbilityFactoryPump.this.pumpPlayAI(getActivatingPlayer(), this);
             }
 
             @Override
@@ -248,7 +248,7 @@ public class AbilityFactoryPump {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryPump.this.pumpTriggerAI(AbilityFactoryPump.this.abilityFactory, this, mandatory);
+                return AbilityFactoryPump.this.pumpTriggerAI(getActivatingPlayer(), AbilityFactoryPump.this.abilityFactory, this, mandatory);
             }
         }
         final SpellAbility dbPump = new DrawbackPump(this.hostCard, this.abilityFactory.getAbTgt()); // SpellAbility
@@ -816,7 +816,7 @@ public class AbilityFactoryPump {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private boolean pumpPlayAI(final SpellAbility sa) {
+    private boolean pumpPlayAI(final Player ai, final SpellAbility sa) {
         final Cost cost = sa.getPayCosts();
         final PhaseHandler ph = Singletons.getModel().getGameState().getPhaseHandler();
 
@@ -875,7 +875,7 @@ public class AbilityFactoryPump {
         int defense;
         if (this.numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtil.determineLeftoverMana(sa);
+            final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(xPay));
             defense = xPay;
             if (this.numDefense.equals("-X")) {
@@ -891,7 +891,7 @@ public class AbilityFactoryPump {
             final String toPay = source.getSVar("PayX");
 
             if (toPay.equals("")) {
-                final int xPay = ComputerUtil.determineLeftoverMana(sa);
+                final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
                 source.setSVar("PayX", Integer.toString(xPay));
                 attack = xPay;
             } else {
@@ -1159,11 +1159,11 @@ public class AbilityFactoryPump {
      *            a boolean.
      * @return a boolean.
      */
-    private boolean pumpTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa)) {
+    private boolean pumpTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
-        return pumpTriggerAINoCost(af, sa, mandatory);
+        return pumpTriggerAINoCost(ai, af, sa, mandatory);
     }
 
     /**
@@ -1179,13 +1179,13 @@ public class AbilityFactoryPump {
      *            a boolean.
      * @return a boolean.
      */
-    private boolean pumpTriggerAINoCost(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private boolean pumpTriggerAINoCost(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getSourceCard();
 
         int defense;
         if (this.numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtil.determineLeftoverMana(sa);
+            final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(xPay));
             defense = xPay;
         } else {
@@ -1198,7 +1198,7 @@ public class AbilityFactoryPump {
             final String toPay = source.getSVar("PayX");
 
             if (toPay.equals("")) {
-                final int xPay = ComputerUtil.determineLeftoverMana(sa);
+                final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
                 source.setSVar("PayX", Integer.toString(xPay));
                 attack = xPay;
             } else {
@@ -1605,7 +1605,7 @@ public class AbilityFactoryPump {
             @Override
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryPump.this
-                        .pumpAllTriggerAI(AbilityFactoryPump.this.abilityFactory, this, mandatory);
+                        .pumpAllTriggerAI(getActivatingPlayer(), AbilityFactoryPump.this.abilityFactory, this, mandatory);
             }
         }
         final SpellAbility abPumpAll = new AbilityPumpAll(this.hostCard, this.abilityFactory.getAbCost(),
@@ -1691,7 +1691,7 @@ public class AbilityFactoryPump {
             @Override
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryPump.this
-                        .pumpAllTriggerAI(AbilityFactoryPump.this.abilityFactory, this, mandatory);
+                        .pumpAllTriggerAI(getActivatingPlayer(), AbilityFactoryPump.this.abilityFactory, this, mandatory);
             }
         }
         final SpellAbility dbPumpAll = new DrawbackPumpAll(this.hostCard, this.abilityFactory.getAbTgt()); // SpellAbility
@@ -1909,8 +1909,8 @@ public class AbilityFactoryPump {
      *            a boolean.
      * @return a boolean.
      */
-    private boolean pumpAllTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa)) {
+    private boolean pumpAllTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
 

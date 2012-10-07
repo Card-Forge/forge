@@ -110,7 +110,7 @@ public class ComputerUtil {
             }
             sa.setActivatingPlayer(computer);
 
-            if (ComputerUtil.canBePlayedAndPayedByAI(sa) && ComputerUtil.handlePlayingSpellAbility(sa)) {
+            if (ComputerUtil.canBePlayedAndPayedByAI(computer, sa) && ComputerUtil.handlePlayingSpellAbility(sa)) {
                 return false;
             }
         }
@@ -296,7 +296,7 @@ public class ComputerUtil {
             SpellAbility currentSA = sa;
             sa.setActivatingPlayer(computer);
             // check everything necessary
-            if (ComputerUtil.canBePlayedAndPayedByAI(currentSA)) {
+            if (ComputerUtil.canBePlayedAndPayedByAI(computer, currentSA)) {
                 if (bestSA == null) {
                     bestSA = currentSA;
                     bestRestriction = ComputerUtil.counterSpellRestriction(currentSA);
@@ -353,9 +353,9 @@ public class ComputerUtil {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static final void playStack(final SpellAbility sa) {
-        sa.setActivatingPlayer(AllZone.getComputerPlayer());
-        if (ComputerUtil.canPayCost(sa)) {
+    public static final void playStack(final SpellAbility sa, final Player ai) {
+        sa.setActivatingPlayer(ai);
+        if (ComputerUtil.canPayCost(sa, ai)) {
             final Card source = sa.getSourceCard();
             if (sa.isSpell() && !source.isCopiedSpell()) {
                 sa.setSourceCard(Singletons.getModel().getGameAction().moveToStack(source));
@@ -440,16 +440,16 @@ public class ComputerUtil {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static final void playNoStack(final SpellAbility sa) {
+    public static final void playNoStack(final Player ai, final SpellAbility sa) {
         // TODO: We should really restrict what doesn't use the Stack
 
-        if (ComputerUtil.canPayCost(sa)) {
+        if (ComputerUtil.canPayCost(sa, ai)) {
             final Card source = sa.getSourceCard();
             if (sa.isSpell() && !source.isCopiedSpell()) {
                 sa.setSourceCard(Singletons.getModel().getGameAction().moveToStack(source));
             }
 
-            sa.setActivatingPlayer(AllZone.getComputerPlayer());
+            sa.setActivatingPlayer(ai);
 
             final Cost cost = sa.getPayCosts();
             if (cost == null) {
@@ -477,8 +477,8 @@ public class ComputerUtil {
      * @return a boolean.
      * @since 1.0.15
      */
-    public static boolean canBePlayedAndPayedByAI(final SpellAbility sa) {
-        return sa.canPlay() && sa.canPlayAI() && ComputerUtil.canPayCost(sa);
+    public static boolean canBePlayedAndPayedByAI(final Player ai, final SpellAbility sa) {
+        return sa.canPlay() && sa.canPlayAI() && ComputerUtil.canPayCost(sa, ai);
     }
 
     /**
@@ -517,19 +517,6 @@ public class ComputerUtil {
      * 
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
-    public static boolean canPayCost(final SpellAbility sa) {
-        return ComputerUtil.canPayCost(sa, AllZone.getComputerPlayer());
-    } // canPayCost()
-
-    /**
-     * <p>
-     * canPayCost.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
      * @param player
      *            a {@link forge.game.player.Player} object.
      * @return a boolean.
@@ -541,19 +528,6 @@ public class ComputerUtil {
 
         return ComputerUtil.canPayAdditionalCosts(sa, player);
     } // canPayCost()
-
-    /**
-     * <p>
-     * determineLeftoverMana.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a int.
-     */
-    public static int determineLeftoverMana(final SpellAbility sa) {
-        return ComputerUtil.determineLeftoverMana(sa, AllZone.getComputerPlayer());
-    }
 
     /**
      * <p>

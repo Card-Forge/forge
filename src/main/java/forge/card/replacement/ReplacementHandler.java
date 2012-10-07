@@ -234,10 +234,11 @@ public class ReplacementHandler {
             }
         }
 
-        if (replacementEffect.getHostCard().getController().isHuman()) {
+        Player player = replacementEffect.getHostCard().getController(); 
+        if (player.isHuman()) {
             Singletons.getModel().getGameAction().playSpellAbilityNoStack(effectSA, false);
         } else {
-            ComputerUtil.playNoStack(effectSA);
+            ComputerUtil.playNoStack(player, effectSA);
         }
 
         return ReplacementResult.Replaced;

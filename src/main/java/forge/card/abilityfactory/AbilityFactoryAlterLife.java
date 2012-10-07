@@ -293,17 +293,17 @@ public class AbilityFactoryAlterLife {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean gainLifeCanPlayAI(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa) {
+    public static boolean gainLifeCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         final Random r = MyRandom.getRandom();
         final HashMap<String, String> params = af.getMapParams();
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
-        final int life = aiPlayer.getLife();
+        final int life = ai.getLife();
         final String amountStr = params.get("LifeAmount");
         int lifeAmount = 0;
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtil.determineLeftoverMana(sa);
+            final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(xPay));
             lifeAmount = xPay;
         } else {
@@ -351,7 +351,7 @@ public class AbilityFactoryAlterLife {
             }
         }
 
-        if (!aiPlayer.canGainLife()) {
+        if (!ai.canGainLife()) {
             return false;
         }
 
@@ -377,8 +377,8 @@ public class AbilityFactoryAlterLife {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
-            if (sa.canTarget(aiPlayer)) {
-                tgt.addTarget(aiPlayer);
+            if (sa.canTarget(ai)) {
+                tgt.addTarget(ai);
             } else {
                 return false;
             }
@@ -405,13 +405,13 @@ public class AbilityFactoryAlterLife {
      *            a boolean.
      * @return a boolean.
      */
-    public static boolean gainLifeDoTriggerAI(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+    public static boolean gainLifeDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
             // payment it's usually
             // not mandatory
             return false;
         }
-        return gainLifeDoTriggerAINoCost(aiPlayer, af, sa, mandatory);
+        return gainLifeDoTriggerAINoCost(ai, af, sa, mandatory);
     }
 
     /**
@@ -427,7 +427,7 @@ public class AbilityFactoryAlterLife {
      *            a boolean.
      * @return a boolean.
      */
-    public static boolean gainLifeDoTriggerAINoCost(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    public static boolean gainLifeDoTriggerAINoCost(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
 
         final HashMap<String, String> params = af.getMapParams();
 
@@ -437,10 +437,10 @@ public class AbilityFactoryAlterLife {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
-            if (sa.canTarget(aiPlayer)) {
-                tgt.addTarget(aiPlayer);
-            } else if (mandatory && sa.canTarget(aiPlayer.getOpponent())) {
-                tgt.addTarget(aiPlayer.getOpponent());
+            if (sa.canTarget(ai)) {
+                tgt.addTarget(ai);
+            } else if (mandatory && sa.canTarget(ai.getOpponent())) {
+                tgt.addTarget(ai.getOpponent());
             } else {
                 return false;
             }
@@ -450,7 +450,7 @@ public class AbilityFactoryAlterLife {
         final String amountStr = params.get("LifeAmount");
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtil.determineLeftoverMana(sa);
+            final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(xPay));
         }
 
@@ -731,7 +731,7 @@ public class AbilityFactoryAlterLife {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean loseLifeCanPlayAI(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa) {
+    public static boolean loseLifeCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
@@ -746,7 +746,7 @@ public class AbilityFactoryAlterLife {
 
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            amount = ComputerUtil.determineLeftoverMana(sa);
+            amount = ComputerUtil.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(amount));
         }
 
@@ -773,7 +773,7 @@ public class AbilityFactoryAlterLife {
             }
         }
         
-        Player opp = aiPlayer.getOpponent(); 
+        Player opp = ai.getOpponent(); 
 
         if (!opp.canLoseLife()) {
             return false;
@@ -829,11 +829,11 @@ public class AbilityFactoryAlterLife {
      *            a boolean.
      * @return a boolean.
      */
-    public static boolean loseLifeDoTriggerAI(final Player aiPlayer,final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+    public static boolean loseLifeDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
             return false;
         }
-        return loseLifeDoTriggerAINoCost(aiPlayer, af, sa, mandatory);
+        return loseLifeDoTriggerAINoCost(ai, af, sa, mandatory);
     }
 
     /**
@@ -849,16 +849,16 @@ public class AbilityFactoryAlterLife {
      *            a boolean.
      * @return a boolean.
      */
-    public static boolean loseLifeDoTriggerAINoCost(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    public static boolean loseLifeDoTriggerAINoCost(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
 
         final HashMap<String, String> params = af.getMapParams();
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
-            if (sa.canTarget(aiPlayer.getOpponent())) {
-                tgt.addTarget(aiPlayer.getOpponent());
-            } else if (mandatory && sa.canTarget(aiPlayer)) {
-                tgt.addTarget(aiPlayer);
+            if (sa.canTarget(ai.getOpponent())) {
+                tgt.addTarget(ai.getOpponent());
+            } else if (mandatory && sa.canTarget(ai)) {
+                tgt.addTarget(ai);
             } else {
                 return false;
             }
@@ -869,7 +869,7 @@ public class AbilityFactoryAlterLife {
         int amount = 0;
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtil.determineLeftoverMana(sa);
+            final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(xPay));
             amount = xPay;
         } else {
@@ -883,9 +883,9 @@ public class AbilityFactoryAlterLife {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        if (!mandatory && tgtPlayers.contains(aiPlayer)) {
+        if (!mandatory && tgtPlayers.contains(ai)) {
             // For cards like Foul Imp, ETB you lose life
-            if ((amount + 3) > aiPlayer.getLife()) {
+            if ((amount + 3) > ai.getLife()) {
                 return false;
             }
         }
@@ -1102,8 +1102,8 @@ public class AbilityFactoryAlterLife {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean poisonDoTriggerAI(final Player aiPlayer,final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+    private static boolean poisonDoTriggerAI(final Player ai,final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
             // payment it's usually
             // not mandatory
             return false;
@@ -1113,7 +1113,7 @@ public class AbilityFactoryAlterLife {
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
-            tgt.addTarget(aiPlayer.getOpponent());
+            tgt.addTarget(ai.getOpponent());
         } else {
             final ArrayList<Player> players = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
                     params.get("Defined"), sa);
@@ -1499,17 +1499,17 @@ public class AbilityFactoryAlterLife {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean setLifeCanPlayAI(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa) {
+    private static boolean setLifeCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         final Random r = MyRandom.getRandom();
         // Ability_Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
-        final int myLife = aiPlayer.getLife();
-        final Player opponent = aiPlayer.getOpponent();
+        final int myLife = ai.getLife();
+        final Player opponent = ai.getOpponent();
         final int hlife = opponent.getLife();
         final HashMap<String, String> params = af.getMapParams();
         final String amountStr = params.get("LifeAmount");
 
-        if (!aiPlayer.canGainLife()) {
+        if (!ai.canGainLife()) {
             return false;
         }
 
@@ -1524,7 +1524,7 @@ public class AbilityFactoryAlterLife {
         // we shouldn't have to worry too much about PayX for SetLife
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtil.determineLeftoverMana(sa);
+            final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(xPay));
             amount = xPay;
         } else {
@@ -1548,11 +1548,11 @@ public class AbilityFactoryAlterLife {
                 }
             } else {
                 if ((amount > myLife) && (myLife <= 10)) {
-                    tgt.addTarget(aiPlayer);
+                    tgt.addTarget(ai);
                 } else if (hlife > amount) {
                     tgt.addTarget(opponent);
                 } else if (amount > myLife) {
-                    tgt.addTarget(aiPlayer);
+                    tgt.addTarget(ai);
                 } else {
                     return false;
                 }
@@ -1593,23 +1593,23 @@ public class AbilityFactoryAlterLife {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean setLifeDoTriggerAI(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        final int myLife = aiPlayer.getLife();
-        final Player opponent = aiPlayer.getOpponent();
+    private static boolean setLifeDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        final int myLife = ai.getLife();
+        final Player opponent = ai.getOpponent();
         final int hlife = opponent.getLife();
         final Card source = sa.getSourceCard();
         final HashMap<String, String> params = af.getMapParams();
         final String amountStr = params.get("LifeAmount");
 
         // If there is a cost payment it's usually not mandatory
-        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
             return false;
         }
 
         int amount;
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtil.determineLeftoverMana(sa);
+            final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(xPay));
             amount = xPay;
         } else {
@@ -1632,11 +1632,11 @@ public class AbilityFactoryAlterLife {
                 tgt.addTarget(opponent);
             } else {
                 if ((amount > myLife) && (myLife <= 10)) {
-                    tgt.addTarget(aiPlayer);
+                    tgt.addTarget(ai);
                 } else if (hlife > amount) {
                     tgt.addTarget(opponent);
                 } else if (amount > myLife) {
-                    tgt.addTarget(aiPlayer);
+                    tgt.addTarget(ai);
                 } else {
                     return false;
                 }

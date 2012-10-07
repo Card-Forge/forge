@@ -555,7 +555,7 @@ public final class AbilityFactoryDebuff {
      * @return a boolean.
      */
     private static boolean debuffTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa)) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
 
@@ -674,7 +674,7 @@ public final class AbilityFactoryDebuff {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryDebuff.debuffAllTriggerAI(af, this, mandatory);
+                return AbilityFactoryDebuff.debuffAllTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abDebuffAll = new AbilityDebuffAll(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -758,7 +758,7 @@ public final class AbilityFactoryDebuff {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryDebuff.debuffAllTriggerAI(af, this, mandatory);
+                return AbilityFactoryDebuff.debuffAllTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
 
@@ -885,8 +885,8 @@ public final class AbilityFactoryDebuff {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean debuffAllTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa)) {
+    private static boolean debuffAllTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
 

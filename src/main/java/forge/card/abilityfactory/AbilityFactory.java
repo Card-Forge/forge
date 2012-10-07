@@ -2847,12 +2847,12 @@ public class AbilityFactory {
         if (payer.isHuman()) {
             GameActionUtil.payCostDuringAbilityResolve(ability, cost, paidCommand, unpaidCommand, sa);
         } else {
-            if (ComputerUtil.canPayCost(ability) && CostUtil.checkLifeCost(cost, source, 4, sa)
+            if (ComputerUtil.canPayCost(ability, payer) && CostUtil.checkLifeCost(cost, source, 4, sa)
                     && CostUtil.checkDamageCost(cost, source, 4)) {
                 // AI was crashing because the blank ability used to pay costs
                 // Didn't have any of the data on the original SA to pay dependant costs
                 ability.setTarget(sa.getTarget());
-                ComputerUtil.playNoStack(ability); // Unless cost was payed - no
+                ComputerUtil.playNoStack(payer, ability); // Unless cost was payed - no
                                                    // resolve
                 AbilityFactory.resolveSubAbilities(sa);
                 if (usedStack) {

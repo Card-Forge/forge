@@ -27,7 +27,6 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
-import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharacteristicName;
@@ -102,7 +101,7 @@ public final class AbilityFactoryReveal {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryReveal.digCanPlayAI(af, this);
+                return AbilityFactoryReveal.digCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -112,7 +111,7 @@ public final class AbilityFactoryReveal {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryReveal.digTriggerAI(af, this, mandatory);
+                return AbilityFactoryReveal.digTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
 
         }
@@ -140,7 +139,7 @@ public final class AbilityFactoryReveal {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryReveal.digCanPlayAI(af, this);
+                return AbilityFactoryReveal.digCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -189,7 +188,7 @@ public final class AbilityFactoryReveal {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryReveal.digCanPlayAI(af, this);
+                return AbilityFactoryReveal.digCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -199,7 +198,7 @@ public final class AbilityFactoryReveal {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryReveal.digTriggerAI(af, this, mandatory);
+                return AbilityFactoryReveal.digTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbDig = new DrawbackDig(af.getHostCard(), af.getAbTgt());
@@ -278,7 +277,7 @@ public final class AbilityFactoryReveal {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean digCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean digCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         double chance = .4; // 40 percent chance with instant speed stuff
         if (AbilityFactory.isSorcerySpeed(sa)) {
@@ -288,17 +287,18 @@ public final class AbilityFactoryReveal {
         final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
 
+        Player opp = ai.getOpponent();
         final Target tgt = sa.getTarget();
-        Player libraryOwner = AllZone.getComputerPlayer();
+        Player libraryOwner = ai;
 
         if (sa.getTarget() != null) {
             tgt.resetTargets();
-            if (!AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
+            if (!opp.canBeTargetedBy(sa)) {
                 return false;
             } else {
-                sa.getTarget().addTarget(AllZone.getHumanPlayer());
+                sa.getTarget().addTarget(opp);
             }
-            libraryOwner = AllZone.getHumanPlayer();
+            libraryOwner = opp;
         }
 
         // return false if nothing to dig into
@@ -339,8 +339,8 @@ public final class AbilityFactoryReveal {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean digTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa)) {
+    private static boolean digTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
 
@@ -348,7 +348,7 @@ public final class AbilityFactoryReveal {
 
         if (sa.getTarget() != null) {
             tgt.resetTargets();
-            sa.getTarget().addTarget(AllZone.getComputerPlayer());
+            sa.getTarget().addTarget(ai);
         }
 
         return true;
@@ -717,7 +717,7 @@ public final class AbilityFactoryReveal {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryReveal.digUntilCanPlayAI(af, this);
+                return AbilityFactoryReveal.digUntilCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -727,7 +727,7 @@ public final class AbilityFactoryReveal {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryReveal.digUntilTriggerAI(af, this, mandatory);
+                return AbilityFactoryReveal.digUntilTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
 
         }
@@ -755,7 +755,7 @@ public final class AbilityFactoryReveal {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryReveal.digUntilCanPlayAI(af, this);
+                return AbilityFactoryReveal.digUntilCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -809,7 +809,7 @@ public final class AbilityFactoryReveal {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryReveal.digUntilTriggerAI(af, this, mandatory);
+                return AbilityFactoryReveal.digUntilTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbDig = new DrawbackDigUntil(af.getHostCard(), af.getAbTgt());
@@ -911,7 +911,7 @@ public final class AbilityFactoryReveal {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean digUntilCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean digUntilCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
 
         double chance = .4; // 40 percent chance with instant speed stuff
         if (AbilityFactory.isSorcerySpeed(sa)) {
@@ -922,16 +922,17 @@ public final class AbilityFactoryReveal {
         final boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
 
         final Target tgt = sa.getTarget();
-        Player libraryOwner = AllZone.getComputerPlayer();
+        Player libraryOwner = ai;
+        Player opp = ai.getOpponent();
 
         if (sa.getTarget() != null) {
             tgt.resetTargets();
-            if (!AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
+            if (!opp.canBeTargetedBy(sa)) {
                 return false;
             } else {
-                sa.getTarget().addTarget(AllZone.getHumanPlayer());
+                sa.getTarget().addTarget(opp);
             }
-            libraryOwner = AllZone.getHumanPlayer();
+            libraryOwner = opp;
         }
 
         // return false if nothing to dig into
@@ -962,8 +963,8 @@ public final class AbilityFactoryReveal {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean digUntilTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa)) {
+    private static boolean digUntilTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
 
@@ -971,7 +972,7 @@ public final class AbilityFactoryReveal {
 
         if (sa.getTarget() != null) {
             tgt.resetTargets();
-            sa.getTarget().addTarget(AllZone.getComputerPlayer());
+            sa.getTarget().addTarget(ai);
         }
 
         return true;
@@ -1119,7 +1120,7 @@ public final class AbilityFactoryReveal {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryReveal.revealHandCanPlayAI(af, this);
+                return AbilityFactoryReveal.revealHandCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -1129,7 +1130,7 @@ public final class AbilityFactoryReveal {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryReveal.revealHandTrigger(af, this, mandatory);
+                return AbilityFactoryReveal.revealHandTrigger(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abRevealHand = new AbilityRevealHand(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -1157,7 +1158,7 @@ public final class AbilityFactoryReveal {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryReveal.revealHandCanPlayAI(af, this);
+                return AbilityFactoryReveal.revealHandCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -1208,12 +1209,12 @@ public final class AbilityFactoryReveal {
 
             @Override
             public boolean chkAIDrawback() {
-                return AbilityFactoryReveal.revealHandTargetAI(af, this, false, false);
+                return AbilityFactoryReveal.revealHandTargetAI(getActivatingPlayer(), af, this, false, false);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryReveal.revealHandTrigger(af, this, mandatory);
+                return AbilityFactoryReveal.revealHandTrigger(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbRevealHand = new DrawbackRevealHand(af.getHostCard(), af.getAbTgt());
@@ -1281,7 +1282,7 @@ public final class AbilityFactoryReveal {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean revealHandCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean revealHandCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
@@ -1306,7 +1307,7 @@ public final class AbilityFactoryReveal {
 
         }
 
-        final boolean bFlag = AbilityFactoryReveal.revealHandTargetAI(af, sa, true, false);
+        final boolean bFlag = AbilityFactoryReveal.revealHandTargetAI(ai, af, sa, true, false);
 
         if (!bFlag) {
             return false;
@@ -1341,22 +1342,23 @@ public final class AbilityFactoryReveal {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean revealHandTargetAI(final AbilityFactory af, final SpellAbility sa, final boolean primarySA,
+    private static boolean revealHandTargetAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean primarySA,
             final boolean mandatory) {
         final Target tgt = sa.getTarget();
 
-        final int humanHandSize = AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand).size();
+        Player opp = ai.getOpponent();
+        final int humanHandSize = opp.getCardsIn(ZoneType.Hand).size();
 
         if (tgt != null) {
             // ability is targeted
             tgt.resetTargets();
 
-            final boolean canTgtHuman = AllZone.getHumanPlayer().canBeTargetedBy(sa);
+            final boolean canTgtHuman = opp.canBeTargetedBy(sa);
 
             if (!canTgtHuman || (humanHandSize == 0)) {
                 return false;
             } else {
-                tgt.addTarget(AllZone.getHumanPlayer());
+                tgt.addTarget(opp);
             }
         } else {
             // if it's just defined, no big deal
@@ -1378,12 +1380,12 @@ public final class AbilityFactoryReveal {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean revealHandTrigger(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa)) {
+    private static boolean revealHandTrigger(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
 
-        if (!AbilityFactoryReveal.revealHandTargetAI(af, sa, false, mandatory)) {
+        if (!AbilityFactoryReveal.revealHandTargetAI(ai, af, sa, false, mandatory)) {
             return false;
         }
 
@@ -1490,7 +1492,7 @@ public final class AbilityFactoryReveal {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryReveal.scryTriggerAI(af, this);
+                return AbilityFactoryReveal.scryTriggerAI(getActivatingPlayer(), af, this);
             }
         }
         final SpellAbility abScry = new AbilityScry(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -1569,12 +1571,12 @@ public final class AbilityFactoryReveal {
 
             @Override
             public boolean chkAIDrawback() {
-                return AbilityFactoryReveal.scryTargetAI(af, this);
+                return AbilityFactoryReveal.scryTargetAI(getActivatingPlayer(), af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryReveal.scryTriggerAI(af, this);
+                return AbilityFactoryReveal.scryTriggerAI(getActivatingPlayer(), af, this);
             }
         }
         final SpellAbility dbScry = new DrawbackScry(af.getHostCard(), af.getAbTgt());
@@ -1627,14 +1629,14 @@ public final class AbilityFactoryReveal {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean scryTargetAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean scryTargetAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         final Target tgt = sa.getTarget();
 
         if (tgt != null) { // It doesn't appear that Scry ever targets
             // ability is targeted
             tgt.resetTargets();
 
-            tgt.addTarget(AllZone.getComputerPlayer());
+            tgt.addTarget(ai);
         }
 
         return true;
@@ -1651,12 +1653,12 @@ public final class AbilityFactoryReveal {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean scryTriggerAI(final AbilityFactory af, final SpellAbility sa) {
-        if (!ComputerUtil.canPayCost(sa)) {
+    private static boolean scryTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
 
-        return AbilityFactoryReveal.scryTargetAI(af, sa);
+        return AbilityFactoryReveal.scryTargetAI(ai, af, sa);
     } // scryTargetAI()
 
     /**
@@ -1785,7 +1787,7 @@ public final class AbilityFactoryReveal {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryReveal.rearrangeTopOfLibraryTrigger(af, this, mandatory);
+                return AbilityFactoryReveal.rearrangeTopOfLibraryTrigger(getActivatingPlayer(), af, this, mandatory);
             }
 
             @Override
@@ -1823,7 +1825,7 @@ public final class AbilityFactoryReveal {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryReveal.rearrangeTopOfLibraryTrigger(af, this, mandatory);
+                return AbilityFactoryReveal.rearrangeTopOfLibraryTrigger(getActivatingPlayer(), af, this, mandatory);
             }
 
             @Override
@@ -1880,7 +1882,7 @@ public final class AbilityFactoryReveal {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryReveal.rearrangeTopOfLibraryTrigger(af, this, mandatory);
+                return AbilityFactoryReveal.rearrangeTopOfLibraryTrigger(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbDraw = new DrawbackRearrangeTopOfLibrary(af.getHostCard(), af.getAbTgt());
@@ -1959,7 +1961,7 @@ public final class AbilityFactoryReveal {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean rearrangeTopOfLibraryTrigger(final AbilityFactory af, final SpellAbility sa,
+    private static boolean rearrangeTopOfLibraryTrigger(final Player ai, final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory) {
 
         final Target tgt = sa.getTarget();
@@ -1968,12 +1970,13 @@ public final class AbilityFactoryReveal {
             // ability is targeted
             tgt.resetTargets();
 
-            final boolean canTgtHuman = AllZone.getHumanPlayer().canBeTargetedBy(sa);
+            Player opp = ai.getOpponent();
+            final boolean canTgtHuman = opp.canBeTargetedBy(sa);
 
             if (!canTgtHuman) {
                 return false;
             } else {
-                tgt.addTarget(AllZone.getHumanPlayer());
+                tgt.addTarget(opp);
             }
         } else {
             // if it's just defined, no big deal
@@ -2098,7 +2101,7 @@ public final class AbilityFactoryReveal {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryReveal.revealCanPlayAI(af, this);
+                return AbilityFactoryReveal.revealCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -2108,7 +2111,7 @@ public final class AbilityFactoryReveal {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryReveal.revealTrigger(af, this, mandatory);
+                return AbilityFactoryReveal.revealTrigger(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abReveal = new AbilityReveal(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -2136,7 +2139,7 @@ public final class AbilityFactoryReveal {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryReveal.revealCanPlayAI(af, this);
+                return AbilityFactoryReveal.revealCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -2188,12 +2191,12 @@ public final class AbilityFactoryReveal {
             @Override
             public boolean chkAIDrawback() {
                 // reuse code from RevealHand
-                return AbilityFactoryReveal.revealHandTargetAI(af, this, false, false);
+                return AbilityFactoryReveal.revealHandTargetAI(getActivatingPlayer(), af, this, false, false);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryReveal.revealTrigger(af, this, mandatory);
+                return AbilityFactoryReveal.revealTrigger(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbReveal = new DrawbackReveal(af.getHostCard(), af.getAbTgt());
@@ -2265,7 +2268,7 @@ public final class AbilityFactoryReveal {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean revealCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean revealCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
@@ -2291,7 +2294,7 @@ public final class AbilityFactoryReveal {
         }
 
         // we can reuse this function here...
-        final boolean bFlag = AbilityFactoryReveal.revealHandTargetAI(af, sa, true, false);
+        final boolean bFlag = AbilityFactoryReveal.revealHandTargetAI(ai, af, sa, true, false);
 
         if (!bFlag) {
             return false;
@@ -2324,12 +2327,12 @@ public final class AbilityFactoryReveal {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean revealTrigger(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa)) {
+    private static boolean revealTrigger(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
 
-        if (!AbilityFactoryReveal.revealHandTargetAI(af, sa, false, mandatory)) {
+        if (!AbilityFactoryReveal.revealHandTargetAI(ai, af, sa, false, mandatory)) {
             return false;
         }
 

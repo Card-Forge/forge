@@ -362,12 +362,12 @@ public final class AbilityFactoryChangeZone {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean changeZoneTriggerAI(final Player aiPlayer,final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+    private static boolean changeZoneTriggerAI(final Player ai,final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
             return false;
         }
 
-        return AbilityFactoryChangeZone.changeZoneTriggerAINoCost(aiPlayer, af, sa, mandatory);
+        return AbilityFactoryChangeZone.changeZoneTriggerAINoCost(ai, af, sa, mandatory);
     }
 
     /**
@@ -475,14 +475,14 @@ public final class AbilityFactoryChangeZone {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean changeHiddenOriginCanPlayAI(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa) {
+    private static boolean changeHiddenOriginCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         // Fetching should occur fairly often as it helps cast more spells, and
         // have access to more mana
         final Cost abCost = af.getAbCost();
         final Card source = sa.getSourceCard();
         final HashMap<String, String> params = af.getMapParams();
         ZoneType origin = null;
-        final Player opponent = aiPlayer.getOpponent();
+        final Player opponent = ai.getOpponent();
         
         if (params.containsKey("Origin")) {
             origin = ZoneType.smartValueOf(params.get("Origin"));
@@ -515,7 +515,7 @@ public final class AbilityFactoryChangeZone {
             //Ninjutsu
             if (params.containsKey("Ninjutsu")) {
                 if (source.isType("Legendary") && !AllZoneUtil.isCardInPlay("Mirror Gallery")) {
-                    final List<Card> list = aiPlayer.getCardsIn(ZoneType.Battlefield);
+                    final List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
                     if (Iterables.any(list, CardPredicates.nameEquals(source.getName()))) {
                         return false;
                     }
@@ -559,8 +559,8 @@ public final class AbilityFactoryChangeZone {
         if ((tgt != null) && tgt.canTgtPlayer()) {
             if (af.isCurse() && sa.canTarget(opponent)) {
                 tgt.addTarget(opponent);
-            } else if (!af.isCurse() && sa.canTarget(aiPlayer)) {
-                tgt.addTarget(aiPlayer);
+            } else if (!af.isCurse() && sa.canTarget(ai)) {
+                tgt.addTarget(ai);
             }
             pDefined = tgt.getTargetPlayers();
         } else {
@@ -575,7 +575,7 @@ public final class AbilityFactoryChangeZone {
         if (type != null) {
             if (type.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                final int xPay = ComputerUtil.determineLeftoverMana(sa);
+                final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
                 source.setSVar("PayX", Integer.toString(xPay));
                 type = type.replace("X", Integer.toString(xPay));
             }
@@ -601,7 +601,7 @@ public final class AbilityFactoryChangeZone {
                 return false;
             }
             // Only tutor something in main1 if hand is almost empty
-            if (aiPlayer.getCardsIn(ZoneType.Hand).size() > 1 && destination.equals("Hand")) {
+            if (ai.getCardsIn(ZoneType.Hand).size() > 1 && destination.equals("Hand")) {
                 return false;
             }
         }
@@ -658,7 +658,7 @@ public final class AbilityFactoryChangeZone {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean changeHiddenTriggerAI(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean changeHiddenTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         // Fetching should occur fairly often as it helps cast more spells, and
         // have access to more mana
 
@@ -675,24 +675,24 @@ public final class AbilityFactoryChangeZone {
         final String type = params.get("ChangeType");
         if ((type != null) && type.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtil.determineLeftoverMana(sa);
+            final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(xPay));
         }
 
         ArrayList<Player> pDefined;
         final Target tgt = sa.getTarget();
         if ((tgt != null) && tgt.canTgtPlayer()) {
-            final Player opp = aiPlayer.getOpponent();
+            final Player opp = ai.getOpponent();
 
             if (af.isCurse()) {
                 if (sa.canTarget(opp)) {
                     tgt.addTarget(opp);
-                } else if (mandatory && sa.canTarget(aiPlayer)) {
-                    tgt.addTarget(aiPlayer);
+                } else if (mandatory && sa.canTarget(ai)) {
+                    tgt.addTarget(ai);
                 }
             } else {
-                if (sa.canTarget(aiPlayer)) {
-                    tgt.addTarget(aiPlayer);
+                if (sa.canTarget(ai)) {
+                    tgt.addTarget(ai);
                 } else if (mandatory && sa.canTarget(opp)) {
                     tgt.addTarget(opp);
                 }
@@ -1989,7 +1989,7 @@ public final class AbilityFactoryChangeZone {
     private static boolean changeKnownOriginTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory) {
         final HashMap<String, String> params = af.getMapParams();
-        if (!ComputerUtil.canPayCost(sa)) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
 
@@ -2731,7 +2731,7 @@ public final class AbilityFactoryChangeZone {
      * @return a boolean.
      */
     public static boolean changeZoneAllDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
             // payment it's usually
             // not mandatory
             return false;

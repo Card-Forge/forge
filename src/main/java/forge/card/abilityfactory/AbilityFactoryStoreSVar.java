@@ -28,6 +28,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.cost.Cost;
 import forge.card.spellability.Target;
 import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
 
 /**
  * <p>
@@ -81,7 +82,7 @@ public class AbilityFactoryStoreSVar {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryStoreSVar.storeSVarDoTriggerAI(this.af, this, mandatory);
+                return AbilityFactoryStoreSVar.storeSVarDoTriggerAI(getActivatingPlayer(), this.af, this, mandatory);
             }
         }
         final SpellAbility abStoreSVar = new AbilityStoreSVar(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
@@ -183,7 +184,7 @@ public class AbilityFactoryStoreSVar {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryStoreSVar.storeSVarDoTriggerAI(this.af, this, mandatory);
+                return AbilityFactoryStoreSVar.storeSVarDoTriggerAI(getActivatingPlayer(), this.af, this, mandatory);
             }
         }
         final SpellAbility dbStoreSVar = new DrawbackStoreSVar(abilityFactory.getHostCard(), abilityFactory.getAbTgt());
@@ -262,8 +263,8 @@ public class AbilityFactoryStoreSVar {
      *            a boolean.
      * @return a boolean.
      */
-    public static boolean storeSVarDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+    public static boolean storeSVarDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
             // payment it's usually
             // not mandatory
             return false;

@@ -107,7 +107,7 @@ public class AbilityFactoryEffect {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryEffect.effectDoTriggerAI(this.af, this, mandatory);
+                return AbilityFactoryEffect.effectDoTriggerAI(getActivatingPlayer(), this.af, this, mandatory);
             }
         }
         final SpellAbility abEffect = new AbilityEffect(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
@@ -204,7 +204,7 @@ public class AbilityFactoryEffect {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryEffect.effectDoTriggerAI(this.af, this, mandatory);
+                return AbilityFactoryEffect.effectDoTriggerAI(getActivatingPlayer(), this.af, this, mandatory);
             }
         }
         final SpellAbility dbEffect = new DrawbackEffect(abilityFactory.getHostCard(), abilityFactory.getAbTgt());
@@ -367,8 +367,8 @@ public class AbilityFactoryEffect {
      *            a boolean.
      * @return a boolean.
      */
-    public static boolean effectDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+    public static boolean effectDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
             // payment it's usually
             // not mandatory
             return false;

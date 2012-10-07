@@ -105,7 +105,7 @@ public final class AbilityFactoryCombat {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryCombat.fogDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryCombat.fogDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abFog = new AbilityFog(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -184,7 +184,7 @@ public final class AbilityFactoryCombat {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryCombat.fogDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryCombat.fogDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbFog = new DrawbackFog(af.getHostCard(), af.getAbTgt());
@@ -305,9 +305,9 @@ public final class AbilityFactoryCombat {
      *            a boolean.
      * @return a boolean.
      */
-    public static boolean fogDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    public static boolean fogDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         // If there is a cost payment it's usually not mandatory
-        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
             return false;
         }
 
@@ -394,7 +394,7 @@ public final class AbilityFactoryCombat {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryCombat.mustAttackDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryCombat.mustAttackDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abMustAttack = new AbilityMustAttack(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -471,7 +471,7 @@ public final class AbilityFactoryCombat {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryCombat.mustAttackDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryCombat.mustAttackDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbMustAttack = new DrawbackMustAttack(af.getHostCard(), af.getAbTgt());
@@ -542,9 +542,9 @@ public final class AbilityFactoryCombat {
         return chance;
     }
 
-    private static boolean mustAttackDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean mustAttackDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         // If there is a cost payment it's usually not mandatory
-        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
             return false;
         }
 
@@ -637,7 +637,7 @@ public final class AbilityFactoryCombat {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryCombat.removeFromCombatDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryCombat.removeFromCombatDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abRemCombat = new AbilityRemoveFromCombat(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -714,7 +714,7 @@ public final class AbilityFactoryCombat {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryCombat.removeFromCombatDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryCombat.removeFromCombatDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbRemCombat = new DrawbackRemoveFromCombat(af.getHostCard(), af.getAbTgt());
@@ -780,10 +780,10 @@ public final class AbilityFactoryCombat {
         return chance;
     }
 
-    private static boolean removeFromCombatDoTriggerAI(final AbilityFactory af, final SpellAbility sa,
+    private static boolean removeFromCombatDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory) {
         // If there is a cost payment it's usually not mandatory
-        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
             return false;
         }
 
@@ -873,7 +873,7 @@ public final class AbilityFactoryCombat {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryCombat.mustBlockDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryCombat.mustBlockDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abMustBlock = new AbilityMustBlock(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -954,7 +954,7 @@ public final class AbilityFactoryCombat {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryCombat.mustBlockDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryCombat.mustBlockDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbMustBlock = new DrawbackMustBlock(af.getHostCard(), af.getAbTgt());
@@ -1027,13 +1027,13 @@ public final class AbilityFactoryCombat {
         return chance;
     }
 
-    private static boolean mustBlockDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean mustBlockDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         final HashMap<String, String> params = af.getMapParams();
         final Card source = sa.getSourceCard();
         final Target abTgt = sa.getTarget();
 
         // If there is a cost payment it's usually not mandatory
-        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
             return false;
         }
 
@@ -1062,7 +1062,7 @@ public final class AbilityFactoryCombat {
         boolean chance = false;
 
         if (abTgt != null) {
-            List<Card> list = CardLists.filter(AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+            List<Card> list = CardLists.filter(ai.getOpponent().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
             list = CardLists.getTargetableCards(list, sa);
             list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
             list = CardLists.filter(list, new Predicate<Card>() {

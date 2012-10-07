@@ -349,7 +349,7 @@ public class AbilityFactoryDealDamage {
         int dmg;
         if (this.damage.equals("X") && sa.getSVar(this.damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            dmg = ComputerUtil.determineLeftoverMana(sa);
+            dmg = ComputerUtil.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(dmg));
         } else {
             dmg = this.getNumDamage(sa);
@@ -382,7 +382,7 @@ public class AbilityFactoryDealDamage {
         int dmg = 0;
         if (this.damage.equals("X") && saMe.getSVar(this.damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            dmg = ComputerUtil.determineLeftoverMana(saMe);
+            dmg = ComputerUtil.determineLeftoverMana(saMe, ai);
             source.setSVar("PayX", Integer.toString(dmg));
         } else {
             dmg = this.getNumDamage(saMe);
@@ -775,7 +775,7 @@ public class AbilityFactoryDealDamage {
     }
 
     private boolean dealDamageDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
             return false;
         }
         return dealDamageDoTriggerAINoCost(ai, af, sa, mandatory);
@@ -800,7 +800,7 @@ public class AbilityFactoryDealDamage {
         int dmg;
         if (this.damage.equals("X") && sa.getSVar(this.damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            dmg = ComputerUtil.determineLeftoverMana(sa);
+            dmg = ComputerUtil.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(dmg));
         } else {
             dmg = this.getNumDamage(sa);
@@ -1159,7 +1159,7 @@ public class AbilityFactoryDealDamage {
         int dmg;
         if (this.damage.equals("X") && sa.getSVar(this.damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            dmg = ComputerUtil.determineLeftoverMana(sa);
+            dmg = ComputerUtil.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(dmg));
         } else {
             dmg = this.getNumDamage(sa);
@@ -1283,7 +1283,7 @@ public class AbilityFactoryDealDamage {
      * @return a boolean.
      */
     private boolean damageAllDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
             return false;
         }
 
@@ -1294,7 +1294,7 @@ public class AbilityFactoryDealDamage {
         int dmg;
         if (this.damage.equals("X") && sa.getSVar(this.damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            dmg = ComputerUtil.determineLeftoverMana(sa);
+            dmg = ComputerUtil.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(dmg));
         } else {
             dmg = this.getNumDamage(sa);
@@ -1629,7 +1629,7 @@ public class AbilityFactoryDealDamage {
     }
 
     private boolean eachDamageDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
             return false;
         }
 
@@ -1744,7 +1744,7 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryDealDamage.this.fightDoTriggerAI(
+                return AbilityFactoryDealDamage.this.fightDoTriggerAI(getActivatingPlayer(), 
                         AbilityFactoryDealDamage.this.abilityFactory, this, mandatory);
             }
         }
@@ -1829,7 +1829,7 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryDealDamage.this.fightDoTriggerAI(
+                return AbilityFactoryDealDamage.this.fightDoTriggerAI(getActivatingPlayer(), 
                         AbilityFactoryDealDamage.this.abilityFactory, this, mandatory);
             }
         }
@@ -1963,8 +1963,8 @@ public class AbilityFactoryDealDamage {
         return false;
     }
 
-    private boolean fightDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+    private boolean fightDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
             return false;
         }
 

@@ -91,7 +91,7 @@ public class AbilityFactoryTurns {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryTurns.addTurnTriggerAI(af, this, mandatory);
+                return AbilityFactoryTurns.addTurnTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abAddTurn = new AbilityAddTurn(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -132,7 +132,7 @@ public class AbilityFactoryTurns {
                 if (withOutManaCost) {
                     return AbilityFactoryTurns.addTurnTriggerAINoCost(af, this, mandatory);
                 }
-                return AbilityFactoryTurns.addTurnTriggerAI(af, this, mandatory);
+                return AbilityFactoryTurns.addTurnTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
 
         };
@@ -181,7 +181,7 @@ public class AbilityFactoryTurns {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryTurns.addTurnTriggerAI(af, this, mandatory);
+                return AbilityFactoryTurns.addTurnTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbAddTurn = new DrawbackAddTurn(af.getHostCard(), af.getAbTgt());
@@ -272,8 +272,8 @@ public class AbilityFactoryTurns {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean addTurnTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+    private static boolean addTurnTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
             return false;
         }
         return addTurnTriggerAINoCost(af, sa, mandatory);

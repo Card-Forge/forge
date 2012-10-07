@@ -92,7 +92,7 @@ public class AbilityFactoryAttach {
 
                 @Override
                 public boolean canPlayAI() {
-                    return AbilityFactoryAttach.attachCanPlayAI(abilityFactory, this);
+                    return AbilityFactoryAttach.attachCanPlayAI(getActivatingPlayer(), abilityFactory, this);
                 }
 
                 @Override
@@ -123,7 +123,7 @@ public class AbilityFactoryAttach {
 
                 @Override
                 public boolean canPlayAI() {
-                    return AbilityFactoryAttach.attachCanPlayAI(abilityFactory, this);
+                    return AbilityFactoryAttach.attachCanPlayAI(getActivatingPlayer(), abilityFactory, this);
                 }
 
                 @Override
@@ -161,7 +161,7 @@ public class AbilityFactoryAttach {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryAttach.attachCanPlayAI(abilityFactory, this);
+                return AbilityFactoryAttach.attachCanPlayAI(getActivatingPlayer(), abilityFactory, this);
             }
 
             @Override
@@ -176,7 +176,7 @@ public class AbilityFactoryAttach {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryAttach.attachDoTriggerAI(abilityFactory, this, mandatory);
+                return AbilityFactoryAttach.attachDoTriggerAI(getActivatingPlayer(), abilityFactory, this, mandatory);
             }
         }
         final SpellAbility abAttach = new AbilityAttach(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
@@ -220,7 +220,7 @@ public class AbilityFactoryAttach {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryAttach.attachCanPlayAI(this.af, this);
+                return AbilityFactoryAttach.attachCanPlayAI(getActivatingPlayer(), this.af, this);
             }
 
             @Override
@@ -236,7 +236,7 @@ public class AbilityFactoryAttach {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryAttach.attachDoTriggerAI(this.af, this, mandatory);
+                return AbilityFactoryAttach.attachDoTriggerAI(getActivatingPlayer(), this.af, this, mandatory);
             }
         }
         final SpellAbility dbAttach = new DrawbackAttach(abilityFactory.getHostCard(), abilityFactory.getAbTgt());
@@ -1082,7 +1082,7 @@ public class AbilityFactoryAttach {
      *            the sa
      * @return true, if successful
      */
-    public static boolean attachCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    public static boolean attachCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         final Random r = MyRandom.getRandom();
         final Map<String, String> params = af.getMapParams();
         final Cost abCost = sa.getPayCosts();
@@ -1107,7 +1107,7 @@ public class AbilityFactoryAttach {
         if (abCost.getTotalMana().contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value. (Endless Scream and Venarian
             // Gold)
-            final int xPay = ComputerUtil.determineLeftoverMana(sa);
+            final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
 
             if (xPay == 0) {
                 return false;
@@ -1135,11 +1135,11 @@ public class AbilityFactoryAttach {
      *            the mandatory
      * @return true, if successful
      */
-    public static boolean attachDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    public static boolean attachDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         final Map<String, String> params = af.getMapParams();
         final Card card = sa.getSourceCard();
 
-        if (!ComputerUtil.canPayCost(sa)) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             // usually not mandatory
             return false;
         }
@@ -1475,7 +1475,7 @@ public class AbilityFactoryAttach {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryAttach.unattachAllCanPlayAI(af, this);
+                return AbilityFactoryAttach.unattachAllCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -1490,7 +1490,7 @@ public class AbilityFactoryAttach {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryAttach.unattachAllDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryAttach.unattachAllDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abUnattachAll = new AbilityUnattachAll(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -1511,7 +1511,7 @@ public class AbilityFactoryAttach {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryAttach.unattachAllCanPlayAI(af, this);
+                return AbilityFactoryAttach.unattachAllCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -1558,7 +1558,7 @@ public class AbilityFactoryAttach {
 
             @Override
             public boolean chkAIDrawback() {
-                return AbilityFactoryAttach.unattachAllPlayDrawbackAI(af, this);
+                return AbilityFactoryAttach.unattachAllPlayDrawbackAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -1568,7 +1568,7 @@ public class AbilityFactoryAttach {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryAttach.unattachAllDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryAttach.unattachAllDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbUnattachAll = new DrawbackUnattachAll(af.getHostCard(), af.getAbTgt());
@@ -1618,7 +1618,7 @@ public class AbilityFactoryAttach {
         return sb.toString();
     }
 
-    private static boolean unattachAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean unattachAllCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
@@ -1637,7 +1637,7 @@ public class AbilityFactoryAttach {
         }
 
         if (abCost.getTotalMana().contains("X") && source.getSVar("X").equals("Count$xPaid")) {
-            final int xPay = ComputerUtil.determineLeftoverMana(sa);
+            final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
 
             if (xPay == 0) {
                 return false;
@@ -1654,11 +1654,11 @@ public class AbilityFactoryAttach {
         return chance;
     }
 
-    private static boolean unattachAllDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean unattachAllDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         final Map<String, String> params = af.getMapParams();
         final Card card = sa.getSourceCard();
 
-        if (!ComputerUtil.canPayCost(sa)) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             // usually not mandatory
             return false;
         }
@@ -1836,9 +1836,9 @@ public class AbilityFactoryAttach {
     }
     */
 
-    private static boolean unattachAllPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean unattachAllPlayDrawbackAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         // AI should only activate this during Human's turn
-        boolean chance = AbilityFactoryAttach.unattachAllCanPlayAI(af, sa);
+        boolean chance = AbilityFactoryAttach.unattachAllCanPlayAI(ai, af, sa);
 
         final AbilitySub subAb = sa.getSubAbility();
         if (subAb != null) {

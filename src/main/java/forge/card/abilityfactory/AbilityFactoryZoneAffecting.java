@@ -95,7 +95,7 @@ public class AbilityFactoryZoneAffecting {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryZoneAffecting.drawCanPlayAI(af, this);
+                return AbilityFactoryZoneAffecting.drawCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -105,7 +105,7 @@ public class AbilityFactoryZoneAffecting {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryZoneAffecting.drawTrigger(af, this, mandatory);
+                return AbilityFactoryZoneAffecting.drawTrigger(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abDraw = new AbilityDraw(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -133,7 +133,7 @@ public class AbilityFactoryZoneAffecting {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryZoneAffecting.drawCanPlayAI(af, this);
+                return AbilityFactoryZoneAffecting.drawCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -144,9 +144,9 @@ public class AbilityFactoryZoneAffecting {
             @Override
             public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
                 if (withOutManaCost) {
-                    return AbilityFactoryZoneAffecting.drawTriggerNoCost(af, this, mandatory);
+                    return AbilityFactoryZoneAffecting.drawTriggerNoCost(getActivatingPlayer(), af, this, mandatory);
                 }
-                return AbilityFactoryZoneAffecting.drawTrigger(af, this, mandatory);
+                return AbilityFactoryZoneAffecting.drawTrigger(getActivatingPlayer(), af, this, mandatory);
             }
 
         };
@@ -185,7 +185,7 @@ public class AbilityFactoryZoneAffecting {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryZoneAffecting.drawCanPlayAI(af, this);
+                return AbilityFactoryZoneAffecting.drawCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -195,12 +195,12 @@ public class AbilityFactoryZoneAffecting {
 
             @Override
             public boolean chkAIDrawback() {
-                return AbilityFactoryZoneAffecting.drawTargetAI(af, this, false, false);
+                return AbilityFactoryZoneAffecting.drawTargetAI(getActivatingPlayer(), af, this, false, false);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryZoneAffecting.drawTrigger(af, this, mandatory);
+                return AbilityFactoryZoneAffecting.drawTrigger(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbDraw = new DrawbackDraw(af.getHostCard(), af.getAbTgt());
@@ -292,7 +292,7 @@ public class AbilityFactoryZoneAffecting {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean drawCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean drawCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
 
         final Target tgt = sa.getTarget();
@@ -330,7 +330,7 @@ public class AbilityFactoryZoneAffecting {
 
         }
 
-        final boolean bFlag = AbilityFactoryZoneAffecting.drawTargetAI(af, sa, true, false);
+        final boolean bFlag = AbilityFactoryZoneAffecting.drawTargetAI(ai, af, sa, true, false);
 
         if (!bFlag) {
             return false;
@@ -392,16 +392,18 @@ public class AbilityFactoryZoneAffecting {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean drawTargetAI(final AbilityFactory af, final SpellAbility sa, final boolean primarySA,
+    private static boolean drawTargetAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean primarySA,
             final boolean mandatory) {
         final Target tgt = sa.getTarget();
         final HashMap<String, String> params = af.getMapParams();
         final Card source = sa.getSourceCard();
 
-        int computerHandSize = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand).size();
-        final int humanLibrarySize = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library).size();
-        final int computerLibrarySize = AllZone.getComputerPlayer().getCardsIn(ZoneType.Library).size();
-        final int computerMaxHandSize = AllZone.getComputerPlayer().getMaxHandSize();
+        Player opp = ai.getOpponent();
+        
+        int computerHandSize = ai.getCardsIn(ZoneType.Hand).size();
+        final int humanLibrarySize = opp.getCardsIn(ZoneType.Library).size();
+        final int computerLibrarySize = ai.getCardsIn(ZoneType.Library).size();
+        final int computerMaxHandSize = ai.getMaxHandSize();
 
         //if a spell is used don't count the card
         if (sa.isSpell() && source.isInZone(ZoneType.Hand)) {
@@ -420,7 +422,7 @@ public class AbilityFactoryZoneAffecting {
             if (sa instanceof AbilitySub) {
                 numCards = Integer.parseInt(source.getSVar("PayX"));
             } else {
-                numCards = ComputerUtil.determineLeftoverMana(sa);
+                numCards = ComputerUtil.determineLeftoverMana(sa, ai);
                 source.setSVar("PayX", Integer.toString(numCards));
             }
             xPaid = true;
@@ -435,17 +437,17 @@ public class AbilityFactoryZoneAffecting {
             // ability is targeted
             tgt.resetTargets();
 
-            final boolean canTgtHuman = sa.canTarget(AllZone.getHumanPlayer());
-            final boolean canTgtComp = sa.canTarget(AllZone.getComputerPlayer());
+            final boolean canTgtHuman = sa.canTarget(opp);
+            final boolean canTgtComp = sa.canTarget(ai);
             boolean tgtHuman = false;
 
             if (!canTgtHuman && !canTgtComp) {
                 return false;
             }
 
-            if (canTgtHuman && !AllZone.getHumanPlayer().cantLose() && (numCards >= humanLibrarySize)) {
+            if (canTgtHuman && !opp.cantLose() && (numCards >= humanLibrarySize)) {
                 // Deck the Human? DO IT!
-                tgt.addTarget(AllZone.getHumanPlayer());
+                tgt.addTarget(opp);
                 return true;
             }
 
@@ -481,9 +483,9 @@ public class AbilityFactoryZoneAffecting {
             }
 
             if ((!tgtHuman || !canTgtHuman) && canTgtComp) {
-                tgt.addTarget(AllZone.getComputerPlayer());
+                tgt.addTarget(ai);
             } else if (mandatory && canTgtHuman) {
-                tgt.addTarget(AllZone.getHumanPlayer());
+                tgt.addTarget(opp);
             } else {
                 return false;
             }
@@ -528,11 +530,11 @@ public class AbilityFactoryZoneAffecting {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean drawTrigger(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa)) {
+    private static boolean drawTrigger(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
-        return drawTriggerNoCost(af, sa, mandatory);
+        return drawTriggerNoCost(ai, af, sa, mandatory);
     }
 
     /**
@@ -548,9 +550,9 @@ public class AbilityFactoryZoneAffecting {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean drawTriggerNoCost(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean drawTriggerNoCost(final Player ai,final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
 
-        if (!AbilityFactoryZoneAffecting.drawTargetAI(af, sa, false, mandatory)) {
+        if (!AbilityFactoryZoneAffecting.drawTargetAI(ai, af, sa, false, mandatory)) {
             return false;
         }
 
@@ -675,7 +677,7 @@ public class AbilityFactoryZoneAffecting {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryZoneAffecting.millCanPlayAI(af, this);
+                return AbilityFactoryZoneAffecting.millCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -685,7 +687,7 @@ public class AbilityFactoryZoneAffecting {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryZoneAffecting.millTrigger(af, this, mandatory);
+                return AbilityFactoryZoneAffecting.millTrigger(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abMill = new AbilityMill(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -713,7 +715,7 @@ public class AbilityFactoryZoneAffecting {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryZoneAffecting.millCanPlayAI(af, this);
+                return AbilityFactoryZoneAffecting.millCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -724,9 +726,9 @@ public class AbilityFactoryZoneAffecting {
             @Override
             public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
                 if (withOutManaCost) {
-                    return AbilityFactoryZoneAffecting.millTriggerNoCost(af, this, mandatory);
+                    return AbilityFactoryZoneAffecting.millTriggerNoCost(getActivatingPlayer(), af, this, mandatory);
                 }
-                return AbilityFactoryZoneAffecting.millTrigger(af, this, mandatory);
+                return AbilityFactoryZoneAffecting.millTrigger(getActivatingPlayer(), af, this, mandatory);
             }
         };
         return spMill;
@@ -769,12 +771,12 @@ public class AbilityFactoryZoneAffecting {
 
             @Override
             public boolean chkAIDrawback() {
-                return AbilityFactoryZoneAffecting.millDrawback(af, this);
+                return AbilityFactoryZoneAffecting.millDrawback(getActivatingPlayer(), af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryZoneAffecting.millTrigger(af, this, mandatory);
+                return AbilityFactoryZoneAffecting.millTrigger(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbMill = new DrawbackMill(af.getHostCard(), af.getAbTgt());
@@ -865,7 +867,7 @@ public class AbilityFactoryZoneAffecting {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean millCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean millCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
 
         final Card source = sa.getSourceCard();
@@ -891,7 +893,7 @@ public class AbilityFactoryZoneAffecting {
 
         }
 
-        if (!AbilityFactoryZoneAffecting.millTargetAI(af, sa, false)) {
+        if (!AbilityFactoryZoneAffecting.millTargetAI(ai, af, sa, false)) {
             return false;
         }
 
@@ -922,7 +924,7 @@ public class AbilityFactoryZoneAffecting {
 
         if (params.get("NumCards").equals("X") && source.getSVar("X").startsWith("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa), AllZone.getHumanPlayer()
+            final int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa, ai), AllZone.getHumanPlayer()
                     .getCardsIn(ZoneType.Library).size());
             source.setSVar("PayX", Integer.toString(cardsToDiscard));
             if (cardsToDiscard <= 0) {
@@ -951,15 +953,16 @@ public class AbilityFactoryZoneAffecting {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean millTargetAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean millTargetAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         final Target tgt = sa.getTarget();
         final HashMap<String, String> params = af.getMapParams();
+        Player opp = ai.getOpponent();
 
         if (tgt != null) {
             tgt.resetTargets();
-            if (!sa.canTarget(AllZone.getHumanPlayer())) {
-                if (mandatory && sa.canTarget(AllZone.getComputerPlayer())) {
-                    tgt.addTarget(AllZone.getComputerPlayer());
+            if (!sa.canTarget(opp)) {
+                if (mandatory && sa.canTarget(ai)) {
+                    tgt.addTarget(ai);
                     return true;
                 }
                 return false;
@@ -967,20 +970,20 @@ public class AbilityFactoryZoneAffecting {
 
             final int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
 
-            final List<Card> pLibrary = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library);
+            final List<Card> pLibrary = opp.getCardsIn(ZoneType.Library);
 
             if (pLibrary.size() == 0) { // deck already empty, no need to mill
                 if (!mandatory) {
                     return false;
                 }
 
-                tgt.addTarget(AllZone.getHumanPlayer());
+                tgt.addTarget(opp);
                 return true;
             }
 
             if (numCards >= pLibrary.size()) {
                 // Can Mill out Human's deck? Do it!
-                tgt.addTarget(AllZone.getHumanPlayer());
+                tgt.addTarget(opp);
                 return true;
             }
 
@@ -989,7 +992,7 @@ public class AbilityFactoryZoneAffecting {
             // if (AI wants to mill self)
             // tgt.addTarget(AllZone.getComputerPlayer());
             // else
-            tgt.addTarget(AllZone.getHumanPlayer());
+            tgt.addTarget(opp);
         }
         return true;
     }
@@ -1005,8 +1008,8 @@ public class AbilityFactoryZoneAffecting {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean millDrawback(final AbilityFactory af, final SpellAbility sa) {
-        if (!AbilityFactoryZoneAffecting.millTargetAI(af, sa, true)) {
+    private static boolean millDrawback(final Player ai, final AbilityFactory af, final SpellAbility sa) {
+        if (!AbilityFactoryZoneAffecting.millTargetAI(ai, af, sa, true)) {
             return false;
         }
 
@@ -1019,16 +1022,16 @@ public class AbilityFactoryZoneAffecting {
         return true;
     }
 
-    private static boolean millTrigger(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa)) {
+    private static boolean millTrigger(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
 
-        return millTriggerNoCost(af, sa, mandatory);
+        return millTriggerNoCost(ai, af, sa, mandatory);
     }
 
-    private static boolean millTriggerNoCost(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!AbilityFactoryZoneAffecting.millTargetAI(af, sa, mandatory)) {
+    private static boolean millTriggerNoCost(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!AbilityFactoryZoneAffecting.millTargetAI(ai, af, sa, mandatory)) {
             return false;
         }
 
@@ -1037,7 +1040,7 @@ public class AbilityFactoryZoneAffecting {
         final Card source = sa.getSourceCard();
         if (params.get("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa), AllZone.getHumanPlayer()
+            final int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa, ai), ai.getOpponent()
                     .getCardsIn(ZoneType.Library).size());
             source.setSVar("PayX", Integer.toString(cardsToDiscard));
         }
@@ -1158,7 +1161,7 @@ public class AbilityFactoryZoneAffecting {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryZoneAffecting.discardCanPlayAI(af, this);
+                return AbilityFactoryZoneAffecting.discardCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -1168,7 +1171,7 @@ public class AbilityFactoryZoneAffecting {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryZoneAffecting.discardTrigger(af, this, mandatory);
+                return AbilityFactoryZoneAffecting.discardTrigger(getActivatingPlayer(), af, this, mandatory);
             }
         }
 
@@ -1197,7 +1200,7 @@ public class AbilityFactoryZoneAffecting {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryZoneAffecting.discardCanPlayAI(af, this) && super.canPlayAI();
+                return AbilityFactoryZoneAffecting.discardCanPlayAI(getActivatingPlayer(), af, this) && super.canPlayAI();
             }
 
             @Override
@@ -1208,9 +1211,9 @@ public class AbilityFactoryZoneAffecting {
             @Override
             public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
                 if (withOutManaCost) {
-                    return AbilityFactoryZoneAffecting.discardTriggerNoCost(af, this, mandatory);
+                    return AbilityFactoryZoneAffecting.discardTriggerNoCost(getActivatingPlayer(), af, this, mandatory);
                 }
-                return AbilityFactoryZoneAffecting.discardTrigger(af, this, mandatory);
+                return AbilityFactoryZoneAffecting.discardTrigger(getActivatingPlayer(), af, this, mandatory);
             }
 
         };
@@ -1254,17 +1257,17 @@ public class AbilityFactoryZoneAffecting {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryZoneAffecting.discardCanPlayAI(af, this);
+                return AbilityFactoryZoneAffecting.discardCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
             public boolean chkAIDrawback() {
-                return AbilityFactoryZoneAffecting.discardCheckDrawbackAI(af, this);
+                return AbilityFactoryZoneAffecting.discardCheckDrawbackAI(getActivatingPlayer(), af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryZoneAffecting.discardTrigger(af, this, mandatory);
+                return AbilityFactoryZoneAffecting.discardTrigger(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbDiscard = new DrawbackDiscard(af.getHostCard(), af.getAbTgt());
@@ -1590,7 +1593,7 @@ public class AbilityFactoryZoneAffecting {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean discardCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean discardCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
 
         final Target tgt = sa.getTarget();
@@ -1617,10 +1620,10 @@ public class AbilityFactoryZoneAffecting {
 
         }
 
-        final boolean humanHasHand = AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand).size() > 0;
+        final boolean humanHasHand = ai.getOpponent().getCardsIn(ZoneType.Hand).size() > 0;
 
         if (tgt != null) {
-            if (!AbilityFactoryZoneAffecting.discardTargetAI(af, sa)) {
+            if (!AbilityFactoryZoneAffecting.discardTargetAI(ai, af, sa)) {
                 return false;
             }
         } else {
@@ -1649,7 +1652,7 @@ public class AbilityFactoryZoneAffecting {
         if (!params.get("Mode").equals("Hand") && !params.get("Mode").equals("RevealDiscardAll")) {
             if (params.get("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                final int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa), AllZone.getHumanPlayer()
+                final int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa, ai), ai.getOpponent()
                         .getCardsIn(ZoneType.Hand).size());
                 source.setSVar("PayX", Integer.toString(cardsToDiscard));
             }
@@ -1689,14 +1692,15 @@ public class AbilityFactoryZoneAffecting {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean discardTargetAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean discardTargetAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         final Target tgt = sa.getTarget();
-        if (AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand).size() < 1) {
+        Player opp = ai.getOpponent();
+        if (opp.getCardsIn(ZoneType.Hand).size() < 1) {
             return false;
         }
         if (tgt != null) {
-            if (sa.canTarget(AllZone.getHumanPlayer())) {
-                tgt.addTarget(AllZone.getHumanPlayer());
+            if (sa.canTarget(opp)) {
+                tgt.addTarget(opp);
                 return true;
             }
         }
@@ -1716,11 +1720,11 @@ public class AbilityFactoryZoneAffecting {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean discardTrigger(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa)) {
+    private static boolean discardTrigger(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
-        return discardTriggerNoCost(af, sa, mandatory);
+        return discardTriggerNoCost(ai, af, sa, mandatory);
     }
 
     /**
@@ -1736,15 +1740,16 @@ public class AbilityFactoryZoneAffecting {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean discardTriggerNoCost(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean discardTriggerNoCost(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
-            if (!AbilityFactoryZoneAffecting.discardTargetAI(af, sa)) {
-                if (mandatory && sa.canTarget(AllZone.getHumanPlayer())) {
-                    tgt.addTarget(AllZone.getHumanPlayer());
-                } else if (mandatory && sa.canTarget(AllZone.getComputerPlayer())) {
-                    tgt.addTarget(AllZone.getComputerPlayer());
+            Player opp = ai.getOpponent();
+            if (!AbilityFactoryZoneAffecting.discardTargetAI(ai, af, sa)) {
+                if (mandatory && sa.canTarget(opp)) {
+                    tgt.addTarget(opp);
+                } else if (mandatory && sa.canTarget(ai)) {
+                    tgt.addTarget(ai);
                 } else {
                     return false;
                 }
@@ -1765,12 +1770,12 @@ public class AbilityFactoryZoneAffecting {
      *            a {@link forge.card.spellability.AbilitySub} object.
      * @return a boolean.
      */
-    private static boolean discardCheckDrawbackAI(final AbilityFactory af, final AbilitySub subAb) {
+    private static boolean discardCheckDrawbackAI(final Player ai, final AbilityFactory af, final AbilitySub subAb) {
         // Drawback AI improvements
         // if parent draws cards, make sure cards in hand + cards drawn > 0
         final Target tgt = af.getAbTgt();
         if (tgt != null) {
-            return AbilityFactoryZoneAffecting.discardTargetAI(af, subAb);
+            return AbilityFactoryZoneAffecting.discardTargetAI(ai, af, subAb);
         }
         // TODO: check for some extra things
         return true;
@@ -1822,7 +1827,7 @@ public class AbilityFactoryZoneAffecting {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryZoneAffecting.shuffleTrigger(af, this, mandatory);
+                return AbilityFactoryZoneAffecting.shuffleTrigger(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abShuffle = new AbilityShuffle(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -1904,7 +1909,7 @@ public class AbilityFactoryZoneAffecting {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryZoneAffecting.shuffleTrigger(af, this, mandatory);
+                return AbilityFactoryZoneAffecting.shuffleTrigger(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbShuffle = new DrawbackShuffle(af.getHostCard(), af.getAbTgt());
@@ -2038,8 +2043,8 @@ public class AbilityFactoryZoneAffecting {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean shuffleTrigger(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa)) {
+    private static boolean shuffleTrigger(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
 

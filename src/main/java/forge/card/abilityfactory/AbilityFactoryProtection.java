@@ -140,7 +140,7 @@ public final class AbilityFactoryProtection {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryProtection.protectTriggerAI(af, this, mandatory);
+                return AbilityFactoryProtection.protectTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abProtect = new AbilityProtection(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -195,7 +195,7 @@ public final class AbilityFactoryProtection {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryProtection.protectTriggerAI(af, this, mandatory);
+                return AbilityFactoryProtection.protectTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbProtect = new DrawbackProtection(af.getHostCard(), af.getAbTgt()); // SpellAbility
@@ -575,8 +575,8 @@ public final class AbilityFactoryProtection {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean protectTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa)) {
+    private static boolean protectTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
 
@@ -953,7 +953,7 @@ public final class AbilityFactoryProtection {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryProtection.protectAllTriggerAI(af, this, mandatory);
+                return AbilityFactoryProtection.protectAllTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abProtectAll = new AbilityProtectionAll(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -1003,12 +1003,12 @@ public final class AbilityFactoryProtection {
 
             @Override
             public boolean chkAIDrawback() {
-                return AbilityFactoryProtection.protectAllDrawbackAI(af, this);
+                return AbilityFactoryProtection.protectAllDrawbackAI(getActivatingPlayer(), af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryProtection.protectAllTriggerAI(af, this, mandatory);
+                return AbilityFactoryProtection.protectAllTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbProtectAll = new DrawbackProtectionAll(af.getHostCard(), af.getAbTgt()); // SpellAbility
@@ -1069,8 +1069,8 @@ public final class AbilityFactoryProtection {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean protectAllTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa)) {
+    private static boolean protectAllTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
 
@@ -1088,8 +1088,8 @@ public final class AbilityFactoryProtection {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean protectAllDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
-        return AbilityFactoryProtection.protectAllTriggerAI(af, sa, false);
+    private static boolean protectAllDrawbackAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
+        return AbilityFactoryProtection.protectAllTriggerAI(ai, af, sa, false);
     } // protectAllDrawbackAI()
 
     /**

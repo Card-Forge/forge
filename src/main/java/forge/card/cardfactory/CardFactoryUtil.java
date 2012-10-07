@@ -823,11 +823,11 @@ public class CardFactoryUtil {
 
             @Override
             public boolean canPlayAI() {
-                if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.MAIN1)
-                        || Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
+                PhaseHandler phase = Singletons.getModel().getGameState().getPhaseHandler(); 
+                if (phase.getPhase().isAfter(PhaseType.MAIN1) || phase.isPlayerTurn(AllZone.getHumanPlayer())) {
                     return false;
                 }
-                return ComputerUtil.canPayCost(this);
+                return ComputerUtil.canPayCost(this, getActivatingPlayer());
             }
         }
         final AbilityActivated unearth = new AbilityUnearth(sourceCard, cost, null);
@@ -4337,7 +4337,7 @@ public class CardFactoryUtil {
                     if (card.getController().isHuman()) {
                         Singletons.getModel().getGameAction().playSpellAbilityNoStack(origSA, false);
                     } else {
-                        ComputerUtil.playNoStack(origSA);
+                        ComputerUtil.playNoStack(card.getController(), origSA);
                     }
                 }
             };

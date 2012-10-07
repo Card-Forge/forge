@@ -129,7 +129,7 @@ public class AbilityFactoryGainControl {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryGainControl.this.gainControlTgtAI(this);
+                return AbilityFactoryGainControl.this.gainControlTgtAI(getActivatingPlayer(), this);
             }
 
             @Override
@@ -172,7 +172,7 @@ public class AbilityFactoryGainControl {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryGainControl.this.gainControlTgtAI(this);
+                return AbilityFactoryGainControl.this.gainControlTgtAI(getActivatingPlayer(), this);
             }
 
             @Override
@@ -187,7 +187,7 @@ public class AbilityFactoryGainControl {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryGainControl.this.gainControlTgtAI(this);
+                return AbilityFactoryGainControl.this.gainControlTgtAI(getActivatingPlayer(), this);
             }
         }
         final SpellAbility abControl = new AbilityGainControl(this.hostCard, this.af.getAbCost(), this.af.getAbTgt());
@@ -221,7 +221,7 @@ public class AbilityFactoryGainControl {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryGainControl.this.gainControlTgtAI(this);
+                return AbilityFactoryGainControl.this.gainControlTgtAI(getActivatingPlayer(), this);
             }
 
             @Override
@@ -236,12 +236,12 @@ public class AbilityFactoryGainControl {
 
             @Override
             public boolean chkAIDrawback() {
-                return AbilityFactoryGainControl.this.gainControlDrawbackAI(this);
+                return AbilityFactoryGainControl.this.gainControlDrawbackAI(getActivatingPlayer(), this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryGainControl.this.gainControlTriggerAI(this, mandatory);
+                return AbilityFactoryGainControl.this.gainControlTriggerAI(getActivatingPlayer(), this, mandatory);
             }
         }
         final SpellAbility dbControl = new DrawbackGainControl(this.hostCard, this.af.getAbTgt()); // SpellAbility
@@ -314,13 +314,14 @@ public class AbilityFactoryGainControl {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private boolean gainControlTgtAI(final SpellAbility sa) {
+    private boolean gainControlTgtAI(final Player ai, final SpellAbility sa) {
         boolean hasCreature = false;
         boolean hasArtifact = false;
         boolean hasEnchantment = false;
         boolean hasLand = false;
 
         final Target tgt = sa.getTarget();
+        Player opp = ai.getOpponent();
 
         // if Defined, then don't worry about targeting
         if (tgt == null) {
@@ -328,14 +329,14 @@ public class AbilityFactoryGainControl {
         } else {
             tgt.resetTargets();
             if (tgt.canOnlyTgtOpponent()) {
-                if (!AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
+                if (!opp.canBeTargetedBy(sa)) {
                     return false;
                 }
-                tgt.addTarget(AllZone.getHumanPlayer());
+                tgt.addTarget(opp);
             }
         }
 
-        List<Card> list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        List<Card> list = opp.getCardsIn(ZoneType.Battlefield);
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getSourceCard().getController(), sa.getSourceCard());
         // AI won't try to grab cards that are filtered out of AI decks on
         // purpose
@@ -533,8 +534,8 @@ public class AbilityFactoryGainControl {
      *            a boolean.
      * @return a boolean.
      */
-    private boolean gainControlTriggerAI(final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa)) {
+    private boolean gainControlTriggerAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
 
@@ -543,7 +544,7 @@ public class AbilityFactoryGainControl {
                 return true;
             }
         } else {
-            return this.gainControlTgtAI(sa);
+            return this.gainControlTgtAI(ai, sa);
         }
 
         return true;
@@ -558,10 +559,10 @@ public class AbilityFactoryGainControl {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private boolean gainControlDrawbackAI(final SpellAbility sa) {
+    private boolean gainControlDrawbackAI(final Player ai, final SpellAbility sa) {
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
             if (this.params.containsKey("AllValid")) {
-                List<Card> tgtCards = CardLists.filterControlledBy(AllZoneUtil.getCardsIn(ZoneType.Battlefield), AllZone.getHumanPlayer());
+                List<Card> tgtCards = CardLists.filterControlledBy(AllZoneUtil.getCardsIn(ZoneType.Battlefield), ai.getOpponent());
                 tgtCards = AbilityFactory.filterListByType(tgtCards, this.params.get("AllValid"), sa);
                 if (tgtCards.isEmpty()) {
                     return false;
@@ -572,7 +573,7 @@ public class AbilityFactoryGainControl {
                 return false;
             }
         } else {
-            return this.gainControlTgtAI(sa);
+            return this.gainControlTgtAI(ai, sa);
         }
 
         return true;
@@ -703,7 +704,7 @@ public class AbilityFactoryGainControl {
 
             @Override
             public boolean canPlayAI() {
-                return exchangeControlCanPlayAI(this.af, this);
+                return exchangeControlCanPlayAI(getActivatingPlayer(), this.af, this);
             }
 
             @Override
@@ -713,7 +714,7 @@ public class AbilityFactoryGainControl {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return exchangeControlDoTriggerAI(this.af, this, mandatory);
+                return exchangeControlDoTriggerAI(getActivatingPlayer(), this.af, this, mandatory);
             }
         }
 
@@ -743,7 +744,7 @@ public class AbilityFactoryGainControl {
 
             @Override
             public boolean canPlayAI() {
-                return exchangeControlCanPlayAI(this.af, this);
+                return exchangeControlCanPlayAI(getActivatingPlayer(), this.af, this);
             }
 
             @Override
@@ -797,7 +798,7 @@ public class AbilityFactoryGainControl {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return exchangeControlDoTriggerAI(this.af, this, mandatory);
+                return exchangeControlDoTriggerAI(getActivatingPlayer(), this.af, this, mandatory);
             }
         }
         final SpellAbility dbExchangeControl = new DrawbackExchangeControl(this.af.getHostCard(), this.af.getAbTgt());
@@ -848,15 +849,15 @@ public class AbilityFactoryGainControl {
         return sb.toString();
     }
 
-    private boolean exchangeControlCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private boolean exchangeControlCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         Card object1 = null;
         Card object2 = null;
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
 
-        List<Card> list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), AllZone.getComputerPlayer(), sa.getSourceCard());
+        List<Card> list = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), ai, sa.getSourceCard());
         // AI won't try to grab cards that are filtered out of AI decks on
         // purpose
         list = CardLists.filter(list, new Predicate<Card>() {
@@ -870,8 +871,8 @@ public class AbilityFactoryGainControl {
         if (params.containsKey("Defined")) {
             object2 = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa).get(0);
         } else if (tgt.getMinTargets(sa.getSourceCard(), sa) > 1) {
-            List<Card> list2 = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-            list2 = CardLists.getValidCards(list2, tgt.getValidTgts(), AllZone.getComputerPlayer(), sa.getSourceCard());
+            List<Card> list2 = ai.getCardsIn(ZoneType.Battlefield);
+            list2 = CardLists.getValidCards(list2, tgt.getValidTgts(), ai, sa.getSourceCard());
             object2 = CardFactoryUtil.getWorstAI(list2);
             tgt.addTarget(object2);
         }
@@ -885,8 +886,8 @@ public class AbilityFactoryGainControl {
         return false;
     }
 
-    private boolean exchangeControlDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+    private boolean exchangeControlDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
             return false;
         }
 

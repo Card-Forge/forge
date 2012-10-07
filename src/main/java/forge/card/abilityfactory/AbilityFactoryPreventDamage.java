@@ -100,7 +100,7 @@ public class AbilityFactoryPreventDamage {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryPreventDamage.preventDamageDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryPreventDamage.preventDamageDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abPrevent = new AbilityPreventDamage(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -184,7 +184,7 @@ public class AbilityFactoryPreventDamage {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryPreventDamage.preventDamageDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryPreventDamage.preventDamageDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbPrevent = new DrawbackPreventDamage(af.getHostCard(), af.getAbTgt());
@@ -415,11 +415,11 @@ public class AbilityFactoryPreventDamage {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean preventDamageDoTriggerAI(final AbilityFactory af, final SpellAbility sa,
+    private static boolean preventDamageDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory) {
         boolean chance = false;
 
-        if (!ComputerUtil.canPayCost(sa)) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
 
@@ -601,7 +601,7 @@ public class AbilityFactoryPreventDamage {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryPreventDamage.preventDamageAllDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryPreventDamage.preventDamageAllDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abPreventAll = new AbilityPreventDamageAll(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -684,7 +684,7 @@ public class AbilityFactoryPreventDamage {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryPreventDamage.preventDamageAllDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryPreventDamage.preventDamageAllDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbPreventAll = new DrawbackPreventDamageAll(af.getHostCard(), af.getAbTgt());
@@ -758,11 +758,11 @@ public class AbilityFactoryPreventDamage {
         return chance;
     }
 
-    private static boolean preventDamageAllDoTriggerAI(final AbilityFactory af, final SpellAbility sa,
+    private static boolean preventDamageAllDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory) {
         boolean chance = false;
 
-        if (!ComputerUtil.canPayCost(sa)) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
         chance = true;

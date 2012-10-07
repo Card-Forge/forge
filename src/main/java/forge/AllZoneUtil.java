@@ -218,8 +218,10 @@ public abstract class AllZoneUtil {
      * @return a List<Card> of all cards in play of a given color
      */
     public static List<Card> getColorInPlay(final String color) {
-        final List<Card> cards = AllZoneUtil.getPlayerColorInPlay(AllZone.getComputerPlayer(), color);
-        cards.addAll(AllZoneUtil.getPlayerColorInPlay(AllZone.getHumanPlayer(), color));
+        final List<Card> cards = new ArrayList<Card>();
+        for(Player p : AllZone.getPlayersInGame()) {
+            cards.addAll(getPlayerColorInPlay(p, color));
+        }
         return cards;
     }
 

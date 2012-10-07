@@ -1004,7 +1004,7 @@ public class TriggerHandler {
                     // commented out because i don't think this should be called
                     // again here
                     // sa[0].doTrigger(isMandatory);
-                    ComputerUtil.playNoStack(sa[0]);
+                    ComputerUtil.playNoStack(controller[0], sa[0]);
                 }
 
                 // Add eventual delayed trigger.
@@ -1035,7 +1035,7 @@ public class TriggerHandler {
                 Singletons.getModel().getGameAction().playSpellAbilityNoStack(wrapperAbility, false);
             } else {
                 wrapperAbility.doTrigger(isMandatory);
-                ComputerUtil.playNoStack(wrapperAbility);
+                ComputerUtil.playNoStack(controller[0], wrapperAbility);
             }
             //Singletons.getModel().getGameAction().playSpellAbilityNoStack(wrapperAbility, false);
         } else {

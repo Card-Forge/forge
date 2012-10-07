@@ -179,7 +179,8 @@ public class InputMulligan extends Input {
         }
 
         // Computer Leylines & Chancellors
-        final List<Card> aiOpeningHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
+        Player ai = AllZone.getComputerPlayer();
+        final List<Card> aiOpeningHand = ai.getCardsIn(ZoneType.Hand);
         for (final Card c : aiOpeningHand) {
             if (!c.getName().startsWith("Leyline")) {
                 final ArrayList<String> kws = c.getKeyword();
@@ -195,7 +196,7 @@ public class InputMulligan extends Input {
                         if (effect.doTrigger(false)) {
                             GameActionUtil.showInfoDialg("Computer reveals " + c.getName() + "(" + c.getUniqueNumber()
                                     + ").");
-                            ComputerUtil.playNoStack(effect);
+                            ComputerUtil.playNoStack(ai, effect);
                         }
                     }
                 }

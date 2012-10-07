@@ -102,7 +102,7 @@ public final class AbilityFactoryClone {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryClone.cloneTriggerAI(af, this, mandatory);
+                return AbilityFactoryClone.cloneTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
 
@@ -183,7 +183,7 @@ public final class AbilityFactoryClone {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryClone.cloneTriggerAI(af, this, mandatory);
+                return AbilityFactoryClone.cloneTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
 
@@ -372,8 +372,8 @@ public final class AbilityFactoryClone {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean cloneTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa)) { // If there is a cost payment
+    private static boolean cloneTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai)) { // If there is a cost payment
             return false;
         }
 

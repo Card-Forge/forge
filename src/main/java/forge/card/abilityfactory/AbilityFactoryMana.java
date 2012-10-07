@@ -1051,7 +1051,7 @@ public class AbilityFactoryMana {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryMana.drainManaTrigger(af, this, mandatory);
+                return AbilityFactoryMana.drainManaTrigger(getActivatingPlayer(), af, this, mandatory);
             }
         }
 
@@ -1136,7 +1136,7 @@ public class AbilityFactoryMana {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryMana.drainManaTrigger(af, this, mandatory);
+                return AbilityFactoryMana.drainManaTrigger(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbDrainMana = new DrawbackDrainMana(af.getHostCard(), af.getAbTgt());
@@ -1248,8 +1248,8 @@ public class AbilityFactoryMana {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean drainManaTrigger(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa)) {
+    private static boolean drainManaTrigger(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
 

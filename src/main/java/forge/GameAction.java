@@ -539,12 +539,13 @@ public class GameAction {
                     final Ability recoverAbility = new Ability(recoverable, "0") {
                         @Override
                         public void resolve() {
-                            if (recoverable.getController().isHuman()) {
+                            Player p = recoverable.getController();
+                            if (p.isHuman()) {
                                 GameActionUtil.payCostDuringAbilityResolve(abRecover, abRecover.getPayCosts(),
                                         paidCommand, unpaidCommand, null);
                             } else { // computer
-                                if (ComputerUtil.canPayCost(abRecover)) {
-                                    ComputerUtil.playNoStack(abRecover);
+                                if (ComputerUtil.canPayCost(abRecover, p)) {
+                                    ComputerUtil.playNoStack(p, abRecover);
                                 } else {
                                     Singletons.getModel().getGameAction().exile(recoverable);
                                 }
@@ -804,7 +805,7 @@ public class GameAction {
                 } else {
                     Spell spell = (Spell) miracle;
                     if (spell.canPlayFromEffectAI(false, false)) {
-                        ComputerUtil.playStack(miracle);
+                        ComputerUtil.playStack(miracle, card.getOwner());
                     }
                 }
             }
@@ -869,7 +870,7 @@ public class GameAction {
                 } else {
                     Spell spell = (Spell) madness;
                     if (spell.canPlayFromEffectAI(false, false)) {
-                        ComputerUtil.playStack(madness);
+                        ComputerUtil.playStack(madness, card.getOwner());
                     }
                 }
             }

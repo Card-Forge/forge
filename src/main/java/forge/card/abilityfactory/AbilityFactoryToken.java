@@ -37,6 +37,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -170,7 +171,7 @@ public class AbilityFactoryToken extends AbilityFactory {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryToken.this.tokenCanPlayAI(this);
+                return AbilityFactoryToken.this.tokenCanPlayAI(getActivatingPlayer(), this);
             }
 
             @Override
@@ -185,7 +186,7 @@ public class AbilityFactoryToken extends AbilityFactory {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryToken.this.tokenDoTriggerAI(this, mandatory);
+                return AbilityFactoryToken.this.tokenDoTriggerAI(getActivatingPlayer(), this, mandatory);
             }
         }
         final SpellAbility abToken = new AbilityToken(this.abilityFactory.getHostCard(),
@@ -208,7 +209,7 @@ public class AbilityFactoryToken extends AbilityFactory {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryToken.this.tokenCanPlayAI(this);
+                return AbilityFactoryToken.this.tokenCanPlayAI(getActivatingPlayer(), this);
             }
 
             @Override
@@ -224,9 +225,9 @@ public class AbilityFactoryToken extends AbilityFactory {
             @Override
             public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
                 if (withOutManaCost) {
-                    return AbilityFactoryToken.this.tokenDoTriggerAINoCost(this, mandatory);
+                    return AbilityFactoryToken.this.tokenDoTriggerAINoCost(getActivatingPlayer(), this, mandatory);
                 }
-                return AbilityFactoryToken.this.tokenDoTriggerAI(this, mandatory);
+                return AbilityFactoryToken.this.tokenDoTriggerAI(getActivatingPlayer(), this, mandatory);
             }
         };
 
@@ -273,7 +274,7 @@ public class AbilityFactoryToken extends AbilityFactory {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryToken.this.tokenDoTriggerAI(this, mandatory);
+                return AbilityFactoryToken.this.tokenDoTriggerAI(getActivatingPlayer(), this, mandatory);
             }
         }
         final SpellAbility dbToken = new DrawbackToken(this.abilityFactory.getHostCard(),
@@ -291,15 +292,16 @@ public class AbilityFactoryToken extends AbilityFactory {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private boolean tokenCanPlayAI(final SpellAbility sa) {
+    private boolean tokenCanPlayAI(final Player ai, final SpellAbility sa) {
         final Cost cost = sa.getPayCosts();
         final AbilityFactory af = sa.getAbilityFactory();
         final HashMap<String, String> mapParams = af.getMapParams();
 
+        Player opp = ai.getOpponent();
         for (final String type : this.tokenTypes) {
             if (type.equals("Legendary")) {
                 // Don't kill AIs Legendary tokens
-                if (AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield, this.tokenName).size() > 0) {
+                if (ai.getCardsIn(ZoneType.Battlefield, this.tokenName).size() > 0) {
                     return false;
                 }
             }
@@ -317,21 +319,22 @@ public class AbilityFactoryToken extends AbilityFactory {
             }
         }
 
+        PhaseHandler ph = Singletons.getModel().getGameState().getPhaseHandler(); 
         // Don't generate tokens without haste before main 2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
-                && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) && !haste
+        if (ph.getPhase().isBefore(PhaseType.MAIN2)
+                && ph.isPlayerTurn(ai) && !haste
                 && !mapParams.containsKey("ActivationPhases")) {
             return false;
         }
-        if ((Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())
-                || Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(
+        if ((ph.isPlayerTurn(ai)
+                || ph.getPhase().isBefore(
                         PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))
                 && !mapParams.containsKey("ActivationPhases") && !mapParams.containsKey("PlayerTurn")
                 && !AbilityFactory.isSorcerySpeed(sa) && !haste) {
             return false;
         }
-        if ((Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN) || Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(
-                AllZone.getHumanPlayer()))
+        if ((ph.getPhase().isAfter(PhaseType.COMBAT_BEGIN) || Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(
+                opp))
                 && oneShot) {
             return false;
         }
@@ -345,9 +348,9 @@ public class AbilityFactoryToken extends AbilityFactory {
         if (tgt != null) {
             tgt.resetTargets();
             if (tgt.canOnlyTgtOpponent()) {
-                tgt.addTarget(AllZone.getHumanPlayer());
+                tgt.addTarget(opp);
             } else {
-                tgt.addTarget(AllZone.getComputerPlayer());
+                tgt.addTarget(ai);
             }
         }
 
@@ -373,7 +376,7 @@ public class AbilityFactoryToken extends AbilityFactory {
             int x = AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(), this.tokenAmount, sa);
             if (source.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                x = ComputerUtil.determineLeftoverMana(sa);
+                x = ComputerUtil.determineLeftoverMana(sa, ai);
                 source.setSVar("PayX", Integer.toString(x));
             }
             if (x <= 0) {
@@ -406,12 +409,12 @@ public class AbilityFactoryToken extends AbilityFactory {
      *            a boolean.
      * @return a boolean.
      */
-    private boolean tokenDoTriggerAI(final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa)) {
+    private boolean tokenDoTriggerAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
 
-        return tokenDoTriggerAINoCost(sa, mandatory);
+        return tokenDoTriggerAINoCost(ai, sa, mandatory);
     }
 
     /**
@@ -425,22 +428,22 @@ public class AbilityFactoryToken extends AbilityFactory {
      *            a boolean.
      * @return a boolean.
      */
-    private boolean tokenDoTriggerAINoCost(final SpellAbility sa, final boolean mandatory) {
+    private boolean tokenDoTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getSourceCard();
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
             if (tgt.canOnlyTgtOpponent()) {
-                tgt.addTarget(AllZone.getHumanPlayer());
+                tgt.addTarget(ai.getOpponent());
             } else {
-                tgt.addTarget(AllZone.getComputerPlayer());
+                tgt.addTarget(ai);
             }
         }
         if (this.tokenAmount.equals("X") || this.tokenPower.equals("X") || this.tokenToughness.equals("X")) {
             int x = AbilityFactory.calculateAmount(this.abilityFactory.getHostCard(), this.tokenAmount, sa);
             if (source.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                x = ComputerUtil.determineLeftoverMana(sa);
+                x = ComputerUtil.determineLeftoverMana(sa, ai);
                 source.setSVar("PayX", Integer.toString(x));
             }
             if (x <= 0) {

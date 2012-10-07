@@ -522,7 +522,7 @@ public final class AbilityFactoryPlay {
                     if (tgtSA instanceof Spell) {
                         Spell spell = (Spell) tgtSA;
                         if (spell.canPlayFromEffectAI(!optional, false) || !optional) {
-                            ComputerUtil.playStack(tgtSA);
+                            ComputerUtil.playStack(tgtSA, controller);
                             if (remember) {
                                 source.addRemembered(tgtSA.getSourceCard());
                             }

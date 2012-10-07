@@ -99,7 +99,7 @@ public final class AbilityFactoryCopy {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryCopy.copyPermanentCanPlayAI(af, this);
+                return AbilityFactoryCopy.copyPermanentCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -109,7 +109,7 @@ public final class AbilityFactoryCopy {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryCopy.copyPermanentTriggerAI(af, this, mandatory);
+                return AbilityFactoryCopy.copyPermanentTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abCopyPermanent = new AbilityCopyPermanent(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -136,7 +136,7 @@ public final class AbilityFactoryCopy {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryCopy.copyPermanentCanPlayAI(af, this);
+                return AbilityFactoryCopy.copyPermanentCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -190,7 +190,7 @@ public final class AbilityFactoryCopy {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryCopy.copyPermanentTriggerAI(af, this, mandatory);
+                return AbilityFactoryCopy.copyPermanentTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbCopyPermanent = new DrawbackCopyPermanent(af.getHostCard(), af.getAbTgt());
@@ -257,7 +257,7 @@ public final class AbilityFactoryCopy {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean copyPermanentCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean copyPermanentCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         // Card source = sa.getSourceCard();
         // TODO - I'm sure someone can do this AI better
 
@@ -272,7 +272,7 @@ public final class AbilityFactoryCopy {
             }
             final Random r = MyRandom.getRandom();
             if (r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1)) {
-                return AbilityFactoryCopy.copyPermanentTriggerAI(af, sa, false);
+                return AbilityFactoryCopy.copyPermanentTriggerAI(ai, af, sa, false);
             } else {
                 return false;
             }
@@ -292,12 +292,12 @@ public final class AbilityFactoryCopy {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean copyPermanentTriggerAI(final AbilityFactory af, final SpellAbility sa,
+    private static boolean copyPermanentTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory) {
         // HashMap<String,String> params = af.getMapParams();
         final Card source = sa.getSourceCard();
 
-        if (!ComputerUtil.canPayCost(sa) && !mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
             return false;
         }
 

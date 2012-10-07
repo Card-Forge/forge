@@ -35,6 +35,7 @@ import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
 import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
 import forge.util.MyRandom;
 
 //Destination - send countered spell to: (only applies to Spells; ignored for Abilities)
@@ -121,7 +122,7 @@ public class AbilityFactoryCounterMagic {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryCounterMagic.this.counterCanPlayAI(AbilityFactoryCounterMagic.this.af, this);
+                return AbilityFactoryCounterMagic.this.counterCanPlayAI(getActivatingPlayer(), AbilityFactoryCounterMagic.this.af, this);
             }
 
             @Override
@@ -131,7 +132,7 @@ public class AbilityFactoryCounterMagic {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryCounterMagic.this.counterCanPlayAI(AbilityFactoryCounterMagic.this.af, this);
+                return AbilityFactoryCounterMagic.this.counterCanPlayAI(getActivatingPlayer(), AbilityFactoryCounterMagic.this.af, this);
             }
         }
         final SpellAbility abCounter = new AbilityCounter(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
@@ -161,7 +162,7 @@ public class AbilityFactoryCounterMagic {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryCounterMagic.this.counterCanPlayAI(AbilityFactoryCounterMagic.this.af, this)
+                return AbilityFactoryCounterMagic.this.counterCanPlayAI(getActivatingPlayer(), AbilityFactoryCounterMagic.this.af, this)
                         && super.canPlayAI();
             }
 
@@ -208,7 +209,7 @@ public class AbilityFactoryCounterMagic {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryCounterMagic.this.counterCanPlayAI(AbilityFactoryCounterMagic.this.af, this);
+                return AbilityFactoryCounterMagic.this.counterCanPlayAI(getActivatingPlayer(), AbilityFactoryCounterMagic.this.af, this);
             }
 
             @Override
@@ -218,13 +219,13 @@ public class AbilityFactoryCounterMagic {
 
             @Override
             public boolean chkAIDrawback() {
-                return AbilityFactoryCounterMagic.this.counterDoTriggerAI(AbilityFactoryCounterMagic.this.af, this,
+                return AbilityFactoryCounterMagic.this.counterDoTriggerAI(getActivatingPlayer(), AbilityFactoryCounterMagic.this.af, this,
                         true);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryCounterMagic.this.counterDoTriggerAI(AbilityFactoryCounterMagic.this.af, this,
+                return AbilityFactoryCounterMagic.this.counterDoTriggerAI(getActivatingPlayer(), AbilityFactoryCounterMagic.this.af, this,
                         mandatory);
             }
         }
@@ -244,7 +245,7 @@ public class AbilityFactoryCounterMagic {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private boolean counterCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private boolean counterCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         boolean toReturn = true;
         final Cost abCost = af.getAbCost();
         final Card source = sa.getSourceCard();
@@ -286,12 +287,12 @@ public class AbilityFactoryCounterMagic {
 
         if (this.unlessCost != null && !this.unlessCost.startsWith("Damage")) {
             // Is this Usable Mana Sources? Or Total Available Mana?
-            final int usableManaSources = CardFactoryUtil.getUsableManaSources(AllZone.getHumanPlayer());
+            final int usableManaSources = CardFactoryUtil.getUsableManaSources(ai.getOpponent());
             int toPay = 0;
             boolean setPayX = false;
             if (this.unlessCost.equals("X") && source.getSVar(this.unlessCost).equals("Count$xPaid")) {
                 setPayX = true;
-                toPay = ComputerUtil.determineLeftoverMana(sa);
+                toPay = ComputerUtil.determineLeftoverMana(sa, ai);
             } else {
                 toPay = AbilityFactory.calculateAmount(source, this.unlessCost, sa);
             }
@@ -341,7 +342,7 @@ public class AbilityFactoryCounterMagic {
      *            a boolean.
      * @return a boolean.
      */
-    private boolean counterDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private boolean counterDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         boolean toReturn = true;
         if (AllZone.getStack().size() < 1) {
             return false;
@@ -364,12 +365,12 @@ public class AbilityFactoryCounterMagic {
             final Card source = sa.getSourceCard();
             if (this.unlessCost != null) {
                 // Is this Usable Mana Sources? Or Total Available Mana?
-                final int usableManaSources = CardFactoryUtil.getUsableManaSources(AllZone.getHumanPlayer());
+                final int usableManaSources = CardFactoryUtil.getUsableManaSources(ai.getOpponent());
                 int toPay = 0;
                 boolean setPayX = false;
                 if (this.unlessCost.equals("X") && source.getSVar(this.unlessCost).equals("Count$xPaid")) {
                     setPayX = true;
-                    toPay = ComputerUtil.determineLeftoverMana(sa);
+                    toPay = ComputerUtil.determineLeftoverMana(sa, ai);
                 } else {
                     toPay = AbilityFactory.calculateAmount(source, this.unlessCost, sa);
                 }

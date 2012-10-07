@@ -514,7 +514,8 @@ public class MagicStack extends MyObservable {
                 };
 
                 final Card crd = sa.getSourceCard();
-                if (sp.getSourceCard().getController().isHuman()) {
+                Player player = sp.getSourceCard().getController();
+                if (player.isHuman()) {
                     AllZone.getInputControl().setInput(
                             new InputPayManaCostAbility("Pay X cost for " + sp.getSourceCard().getName() + " (X="
                                     + crd.getXManaCostPaid() + ")\r\n", ability.getManaCost(), paidCommand,
@@ -523,8 +524,8 @@ public class MagicStack extends MyObservable {
                     // computer
                     final int neededDamage = CardFactoryUtil.getNeededXDamage(sa);
 
-                    while (ComputerUtil.canPayCost(ability) && (neededDamage != sa.getSourceCard().getXManaCostPaid())) {
-                        ComputerUtil.playNoStack(ability);
+                    while (ComputerUtil.canPayCost(ability, player) && (neededDamage != sa.getSourceCard().getXManaCostPaid())) {
+                        ComputerUtil.playNoStack(player, ability);
                     }
                     this.push(sa);
                 }
@@ -590,8 +591,9 @@ public class MagicStack extends MyObservable {
                         }
                     }
                 };
+                Player activating = sp.getActivatingPlayer(); 
 
-                if (sp.getActivatingPlayer().isHuman()) {
+                if (activating.isHuman()) {
                     final ManaCost manaCost = this.getMultiKickerSpellCostChange(ability);
 
                     if (manaCost.isPaid()) {
@@ -623,8 +625,8 @@ public class MagicStack extends MyObservable {
                 } else {
                     // computer
 
-                    while (ComputerUtil.canPayCost(ability)) {
-                        ComputerUtil.playNoStack(ability);
+                    while (ComputerUtil.canPayCost(ability, activating)) {
+                        ComputerUtil.playNoStack(activating, ability);
                     }
 
                     this.push(sa);
@@ -673,7 +675,8 @@ public class MagicStack extends MyObservable {
                     }
                 };
 
-                if (sp.getSourceCard().getController().isHuman()) {
+                Player controller = sp.getSourceCard().getController();
+                if (controller.isHuman()) {
                     final ManaCost manaCost = this.getMultiKickerSpellCostChange(ability);
 
                     if (manaCost.isPaid()) {
@@ -686,8 +689,8 @@ public class MagicStack extends MyObservable {
                     }
                 } else {
                     // computer
-                    while (ComputerUtil.canPayCost(ability)) {
-                        ComputerUtil.playNoStack(ability);
+                    while (ComputerUtil.canPayCost(ability, controller)) {
+                        ComputerUtil.playNoStack(controller, ability);
                     }
 
                     this.push(sa);
@@ -1341,7 +1344,7 @@ public class MagicStack extends MyObservable {
         if (activePlayer.isComputer()) {
             for (final SpellAbility sa : activePlayerSAs) {
                 sa.doTrigger(sa.isMandatory());
-                ComputerUtil.playStack(sa);
+                ComputerUtil.playStack(sa, activePlayer);
             }
         } else {
             // If only one, just add as necessary

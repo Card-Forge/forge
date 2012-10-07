@@ -283,7 +283,7 @@ public final class AbilityFactoryChoose {
      * @return a boolean.
      */
     private static boolean chooseTypeTriggerAI(final Player ai,final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa)) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
 
@@ -2038,7 +2038,7 @@ public final class AbilityFactoryChoose {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryChoose.chooseGenericCanPlayAI(af, this);
+                return AbilityFactoryChoose.chooseGenericCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -2048,7 +2048,7 @@ public final class AbilityFactoryChoose {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryChoose.chooseGenericTriggerAI(af, this, mandatory);
+                return AbilityFactoryChoose.chooseGenericTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abChooseGeneric = new AbilityChooseGeneric(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -2078,7 +2078,7 @@ public final class AbilityFactoryChoose {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryChoose.chooseGenericCanPlayAI(af, this);
+                return AbilityFactoryChoose.chooseGenericCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -2134,7 +2134,7 @@ public final class AbilityFactoryChoose {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryChoose.chooseGenericTriggerAI(af, this, mandatory);
+                return AbilityFactoryChoose.chooseGenericTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbChooseGeneric = new DrawbackChooseGeneric(af.getHostCard(), af.getAbTgt());
@@ -2179,13 +2179,13 @@ public final class AbilityFactoryChoose {
         return sb.toString();
     }
 
-    private static boolean chooseGenericCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean chooseGenericCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         if (!params.containsKey("AILogic")) {
             return false;
         }
 
-        return AbilityFactoryChoose.chooseGenericTriggerAI(af, sa, false);
+        return AbilityFactoryChoose.chooseGenericTriggerAI(ai, af, sa, false);
     }
 
     /**
@@ -2201,8 +2201,8 @@ public final class AbilityFactoryChoose {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean chooseGenericTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa)) {
+    private static boolean chooseGenericTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
 

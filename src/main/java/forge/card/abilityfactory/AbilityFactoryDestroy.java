@@ -103,7 +103,7 @@ public class AbilityFactoryDestroy {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryDestroy.destroyDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryDestroy.destroyDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abDestroy = new AbilityDestroy(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -144,7 +144,7 @@ public class AbilityFactoryDestroy {
                 if (withOutManaCost) {
                     return AbilityFactoryDestroy.destroyDoTriggerAINoCost(af, this, mandatory);
                 }
-                return AbilityFactoryDestroy.destroyDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryDestroy.destroyDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
 
         };
@@ -198,7 +198,7 @@ public class AbilityFactoryDestroy {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryDestroy.destroyDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryDestroy.destroyDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final AbilitySub dbDestroy = new DrawbackDestroy(af.getHostCard(), af.getAbTgt());
@@ -348,8 +348,8 @@ public class AbilityFactoryDestroy {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean destroyDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa)) {
+    private static boolean destroyDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
         return destroyDoTriggerAINoCost(af, sa, mandatory);
@@ -927,7 +927,7 @@ public class AbilityFactoryDestroy {
 
         if (valid.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtil.determineLeftoverMana(sa);
+            final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(xPay));
             valid = valid.replace("X", Integer.toString(xPay));
         }
