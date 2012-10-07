@@ -1282,7 +1282,10 @@ public class ComputerUtil {
         List<Card> landList = CardLists.filter(hand, Presets.LANDS);
         List<Card> nonLandList = CardLists.filter(hand, Predicates.not(CardPredicates.Presets.LANDS));
 
-        final List<Card> lands = computer.getCardsIn(ZoneType.Graveyard);
+        List<Card> lands = computer.getCardsIn(ZoneType.Graveyard);
+        if (!computer.getCardsIn(ZoneType.Library).isEmpty()) {
+            lands.add(computer.getCardsIn(ZoneType.Library).get(0));
+        }
         for (final Card crd : lands) {
             if (crd.isLand() && crd.hasKeyword("May be played")) {
                 landList.add(crd);
