@@ -232,7 +232,7 @@ class CardFactoryArtifacts {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Lodestone Bauble")) {
+        /*else if (cardName.equals("Lodestone Bauble")) {
             /*
              * 1, Tap, Sacrifice Lodestone Bauble: Put up to four target basic
              * land cards from a player's graveyard on top of his or her library
@@ -240,7 +240,7 @@ class CardFactoryArtifacts {
              * next turn's upkeep.
              */
 
-            class AbilityLodestoneBauble extends AbilityActivated {
+            /*class AbilityLodestoneBauble extends AbilityActivated {
                 public AbilityLodestoneBauble(final Card ca, final Cost co, final Target t) {
                     super(ca, co, t);
                 }
@@ -330,7 +330,7 @@ class CardFactoryArtifacts {
             sb.append("beginning of the next turn's upkeep.");
             ability.setDescription(sb.toString());
             card.addSpellAbility(ability);
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Grindstone")) {

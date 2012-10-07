@@ -2,6 +2,8 @@ Name:Lodestone Bauble
 ManaCost:0
 Types:Artifact
 Text:no text
+A:AB$ ChangeZone | Cost$ 1 T Sac<1/CARDNAME> | TargetMin$ 0 | TargetMax$ 4 | TargetsFromSingleZone$ True | Origin$ Graveyard | Destination$ Library | LibraryPosition$ 0 | TgtPrompt$ Choose target basic land card in a graveyard | ValidTgts$ Land.Basic | SubAbility$ DBDraw | SpellDescription$ Put up to four target basic land cards from a player's graveyard on top of his or her library in any order. That player draws a card at the beginning of the next turn's upkeep.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | NextUpkeep$ True | Defined$ TargetedController
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lodestone_bauble.jpg
