@@ -92,7 +92,7 @@ public class AbilityFactoryAlterLife {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryAlterLife.gainLifeCanPlayAI(this.af, this);
+                return AbilityFactoryAlterLife.gainLifeCanPlayAI(getActivatingPlayer(), this.af, this);
             }
 
             @Override
@@ -102,7 +102,7 @@ public class AbilityFactoryAlterLife {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryAlterLife.gainLifeDoTriggerAI(this.af, this, mandatory);
+                return AbilityFactoryAlterLife.gainLifeDoTriggerAI(getActivatingPlayer(), this.af, this, mandatory);
             }
 
         }
@@ -142,7 +142,7 @@ public class AbilityFactoryAlterLife {
                 // then call xCount with that card to properly calculate the
                 // amount
                 // Or choosing how many to sacrifice
-                return AbilityFactoryAlterLife.gainLifeCanPlayAI(this.af, this);
+                return AbilityFactoryAlterLife.gainLifeCanPlayAI(getActivatingPlayer(), this.af, this);
             }
 
             @Override
@@ -153,9 +153,9 @@ public class AbilityFactoryAlterLife {
             @Override
             public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
                 if (withOutManaCost) {
-                    return AbilityFactoryAlterLife.gainLifeDoTriggerAINoCost(af, this, mandatory);
+                    return AbilityFactoryAlterLife.gainLifeDoTriggerAINoCost(this.getActivatingPlayer(), af, this, mandatory);
                 }
-                return AbilityFactoryAlterLife.gainLifeDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryAlterLife.gainLifeDoTriggerAI(this.getActivatingPlayer(), af, this, mandatory);
             }
 
         };
@@ -204,7 +204,7 @@ public class AbilityFactoryAlterLife {
                 // then call xCount with that card to properly calculate the
                 // amount
                 // Or choosing how many to sacrifice
-                return AbilityFactoryAlterLife.gainLifeCanPlayAI(this.af, this);
+                return AbilityFactoryAlterLife.gainLifeCanPlayAI(getActivatingPlayer(), this.af, this);
             }
 
             @Override
@@ -219,7 +219,7 @@ public class AbilityFactoryAlterLife {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryAlterLife.gainLifeDoTriggerAI(this.af, this, mandatory);
+                return AbilityFactoryAlterLife.gainLifeDoTriggerAI(getActivatingPlayer(), this.af, this, mandatory);
             }
         }
         final SpellAbility dbGainLife = new DrawbackGainLife(abilityFactory.getHostCard(), abilityFactory.getAbTgt());
@@ -293,12 +293,12 @@ public class AbilityFactoryAlterLife {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean gainLifeCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    public static boolean gainLifeCanPlayAI(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa) {
         final Random r = MyRandom.getRandom();
         final HashMap<String, String> params = af.getMapParams();
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
-        final int life = AllZone.getComputerPlayer().getLife();
+        final int life = aiPlayer.getLife();
         final String amountStr = params.get("LifeAmount");
         int lifeAmount = 0;
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
@@ -351,7 +351,7 @@ public class AbilityFactoryAlterLife {
             }
         }
 
-        if (!AllZone.getComputerPlayer().canGainLife()) {
+        if (!aiPlayer.canGainLife()) {
             return false;
         }
 
@@ -377,8 +377,8 @@ public class AbilityFactoryAlterLife {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
-            if (sa.canTarget(AllZone.getComputerPlayer())) {
-                tgt.addTarget(AllZone.getComputerPlayer());
+            if (sa.canTarget(aiPlayer)) {
+                tgt.addTarget(aiPlayer);
             } else {
                 return false;
             }
@@ -405,13 +405,13 @@ public class AbilityFactoryAlterLife {
      *            a boolean.
      * @return a boolean.
      */
-    public static boolean gainLifeDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    public static boolean gainLifeDoTriggerAI(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         if (!ComputerUtil.canPayCost(sa) && !mandatory) {
             // payment it's usually
             // not mandatory
             return false;
         }
-        return gainLifeDoTriggerAINoCost(af, sa, mandatory);
+        return gainLifeDoTriggerAINoCost(aiPlayer, af, sa, mandatory);
     }
 
     /**
@@ -427,7 +427,7 @@ public class AbilityFactoryAlterLife {
      *            a boolean.
      * @return a boolean.
      */
-    public static boolean gainLifeDoTriggerAINoCost(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    public static boolean gainLifeDoTriggerAINoCost(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
 
         final HashMap<String, String> params = af.getMapParams();
 
@@ -437,10 +437,10 @@ public class AbilityFactoryAlterLife {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
-            if (sa.canTarget(AllZone.getComputerPlayer())) {
-                tgt.addTarget(AllZone.getComputerPlayer());
-            } else if (mandatory && sa.canTarget(AllZone.getHumanPlayer())) {
-                tgt.addTarget(AllZone.getHumanPlayer());
+            if (sa.canTarget(aiPlayer)) {
+                tgt.addTarget(aiPlayer);
+            } else if (mandatory && sa.canTarget(aiPlayer.getOpponent())) {
+                tgt.addTarget(aiPlayer.getOpponent());
             } else {
                 return false;
             }
@@ -538,7 +538,7 @@ public class AbilityFactoryAlterLife {
                 // then call xCount with that card to properly calculate the
                 // amount
                 // Or choosing how many to sacrifice
-                return AbilityFactoryAlterLife.loseLifeCanPlayAI(this.af, this);
+                return AbilityFactoryAlterLife.loseLifeCanPlayAI(getActivatingPlayer(), this.af, this);
             }
 
             @Override
@@ -548,7 +548,7 @@ public class AbilityFactoryAlterLife {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryAlterLife.loseLifeDoTriggerAI(this.af, this, mandatory);
+                return AbilityFactoryAlterLife.loseLifeDoTriggerAI(getActivatingPlayer(), this.af, this, mandatory);
             }
         }
         final SpellAbility abLoseLife = new AbilityLoseLife(abilityFactory.getHostCard(), abilityFactory.getAbCost(),
@@ -587,7 +587,7 @@ public class AbilityFactoryAlterLife {
                 // then call xCount with that card to properly calculate the
                 // amount
                 // Or choosing how many to sacrifice
-                return AbilityFactoryAlterLife.loseLifeCanPlayAI(this.af, this);
+                return AbilityFactoryAlterLife.loseLifeCanPlayAI(getActivatingPlayer(), this.af, this);
             }
 
             @Override
@@ -598,9 +598,9 @@ public class AbilityFactoryAlterLife {
             @Override
             public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
                 if (withOutManaCost) {
-                    return AbilityFactoryAlterLife.loseLifeDoTriggerAINoCost(af, this, mandatory);
+                    return AbilityFactoryAlterLife.loseLifeDoTriggerAINoCost(getActivatingPlayer(), af, this, mandatory);
                 }
-                return AbilityFactoryAlterLife.loseLifeDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryAlterLife.loseLifeDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         };
 
@@ -648,7 +648,7 @@ public class AbilityFactoryAlterLife {
                 // then call xCount with that card to properly calculate the
                 // amount
                 // Or choosing how many to sacrifice
-                return AbilityFactoryAlterLife.loseLifeCanPlayAI(this.af, this);
+                return AbilityFactoryAlterLife.loseLifeCanPlayAI(getActivatingPlayer(), this.af, this);
             }
 
             @Override
@@ -658,12 +658,12 @@ public class AbilityFactoryAlterLife {
 
             @Override
             public boolean chkAIDrawback() {
-                return loseLifeDoTriggerAINoCost(this.af, this, false);
+                return loseLifeDoTriggerAINoCost(getActivatingPlayer(), this.af, this, false);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryAlterLife.loseLifeDoTriggerAI(this.af, this, mandatory);
+                return AbilityFactoryAlterLife.loseLifeDoTriggerAI(getActivatingPlayer(), this.af, this, mandatory);
             }
         }
         final SpellAbility dbLoseLife = new DrawbackLoseLife(abilityFactory.getHostCard(), abilityFactory.getAbTgt());
@@ -731,7 +731,7 @@ public class AbilityFactoryAlterLife {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean loseLifeCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    public static boolean loseLifeCanPlayAI(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa) {
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
@@ -772,12 +772,14 @@ public class AbilityFactoryAlterLife {
                 return false;
             }
         }
+        
+        Player opp = aiPlayer.getOpponent(); 
 
-        if (!AllZone.getHumanPlayer().canLoseLife()) {
+        if (!opp.canLoseLife()) {
             return false;
         }
 
-        if (amount >= AllZone.getHumanPlayer().getLife()) {
+        if (amount >= opp.getLife()) {
             priority = true; // killing the human should be done asap
         }
 
@@ -799,8 +801,8 @@ public class AbilityFactoryAlterLife {
 
         if (sa.getTarget() != null) {
             tgt.resetTargets();
-            if (sa.canTarget(AllZone.getHumanPlayer())) {
-                sa.getTarget().addTarget(AllZone.getHumanPlayer());
+            if (sa.canTarget(opp)) {
+                sa.getTarget().addTarget(opp);
             } else {
                 return false;
             }
@@ -827,11 +829,11 @@ public class AbilityFactoryAlterLife {
      *            a boolean.
      * @return a boolean.
      */
-    public static boolean loseLifeDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    public static boolean loseLifeDoTriggerAI(final Player aiPlayer,final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         if (!ComputerUtil.canPayCost(sa) && !mandatory) {
             return false;
         }
-        return loseLifeDoTriggerAINoCost(af, sa, mandatory);
+        return loseLifeDoTriggerAINoCost(aiPlayer, af, sa, mandatory);
     }
 
     /**
@@ -847,16 +849,16 @@ public class AbilityFactoryAlterLife {
      *            a boolean.
      * @return a boolean.
      */
-    public static boolean loseLifeDoTriggerAINoCost(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    public static boolean loseLifeDoTriggerAINoCost(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
 
         final HashMap<String, String> params = af.getMapParams();
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
-            if (sa.canTarget(AllZone.getHumanPlayer())) {
-                tgt.addTarget(AllZone.getHumanPlayer());
-            } else if (mandatory && sa.canTarget(AllZone.getComputerPlayer())) {
-                tgt.addTarget(AllZone.getComputerPlayer());
+            if (sa.canTarget(aiPlayer.getOpponent())) {
+                tgt.addTarget(aiPlayer.getOpponent());
+            } else if (mandatory && sa.canTarget(aiPlayer)) {
+                tgt.addTarget(aiPlayer);
             } else {
                 return false;
             }
@@ -881,9 +883,9 @@ public class AbilityFactoryAlterLife {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
 
-        if (!mandatory && tgtPlayers.contains(AllZone.getComputerPlayer())) {
+        if (!mandatory && tgtPlayers.contains(aiPlayer)) {
             // For cards like Foul Imp, ETB you lose life
-            if ((amount + 3) > AllZone.getComputerPlayer().getLife()) {
+            if ((amount + 3) > aiPlayer.getLife()) {
                 return false;
             }
         }
@@ -971,7 +973,7 @@ public class AbilityFactoryAlterLife {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryAlterLife.poisonCanPlayAI(af, this);
+                return AbilityFactoryAlterLife.poisonCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -981,7 +983,7 @@ public class AbilityFactoryAlterLife {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryAlterLife.poisonDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryAlterLife.poisonDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abPoison = new AbilityPoison(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -1014,7 +1016,7 @@ public class AbilityFactoryAlterLife {
                 // then call xCount with that card to properly calculate the
                 // amount
                 // Or choosing how many to sacrifice
-                return AbilityFactoryAlterLife.poisonCanPlayAI(af, this);
+                return AbilityFactoryAlterLife.poisonCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -1064,7 +1066,7 @@ public class AbilityFactoryAlterLife {
                 // then call xCount with that card to properly calculate the
                 // amount
                 // Or choosing how many to sacrifice
-                return AbilityFactoryAlterLife.poisonCanPlayAI(af, this);
+                return AbilityFactoryAlterLife.poisonCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -1079,7 +1081,7 @@ public class AbilityFactoryAlterLife {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryAlterLife.poisonDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryAlterLife.poisonDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbPoison = new DrawbackPoison(af.getHostCard(), af.getAbTgt());
@@ -1100,7 +1102,7 @@ public class AbilityFactoryAlterLife {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean poisonDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean poisonDoTriggerAI(final Player aiPlayer,final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         if (!ComputerUtil.canPayCost(sa) && !mandatory) {
             // payment it's usually
             // not mandatory
@@ -1111,7 +1113,7 @@ public class AbilityFactoryAlterLife {
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
-            tgt.addTarget(AllZone.getHumanPlayer());
+            tgt.addTarget(aiPlayer.getOpponent());
         } else {
             final ArrayList<Player> players = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
                     params.get("Defined"), sa);
@@ -1240,7 +1242,7 @@ public class AbilityFactoryAlterLife {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean poisonCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean poisonCanPlayAI(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa) {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
         final HashMap<String, String> params = af.getMapParams();
@@ -1278,7 +1280,7 @@ public class AbilityFactoryAlterLife {
 
         if (sa.getTarget() != null) {
             tgt.resetTargets();
-            sa.getTarget().addTarget(AllZone.getHumanPlayer());
+            sa.getTarget().addTarget(aiPlayer.getOpponent());
         }
 
         return true;
@@ -1320,7 +1322,7 @@ public class AbilityFactoryAlterLife {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryAlterLife.setLifeCanPlayAI(af, this);
+                return AbilityFactoryAlterLife.setLifeCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -1330,7 +1332,7 @@ public class AbilityFactoryAlterLife {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryAlterLife.setLifeDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryAlterLife.setLifeDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abSetLife = new AbilitySetLife(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -1363,7 +1365,7 @@ public class AbilityFactoryAlterLife {
                 // then call xCount with that card to properly calculate the
                 // amount
                 // Or choosing how many to sacrifice
-                return AbilityFactoryAlterLife.setLifeCanPlayAI(af, this);
+                return AbilityFactoryAlterLife.setLifeCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -1413,7 +1415,7 @@ public class AbilityFactoryAlterLife {
                 // then call xCount with that card to properly calculate the
                 // amount
                 // Or choosing how many to sacrifice
-                return AbilityFactoryAlterLife.setLifeCanPlayAI(af, this);
+                return AbilityFactoryAlterLife.setLifeCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -1428,7 +1430,7 @@ public class AbilityFactoryAlterLife {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryAlterLife.setLifeDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryAlterLife.setLifeDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbSetLife = new DrawbackSetLife(af.getHostCard(), af.getAbTgt());
@@ -1497,16 +1499,17 @@ public class AbilityFactoryAlterLife {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean setLifeCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean setLifeCanPlayAI(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa) {
         final Random r = MyRandom.getRandom();
         // Ability_Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
-        final int life = AllZone.getComputerPlayer().getLife();
-        final int hlife = AllZone.getHumanPlayer().getLife();
+        final int myLife = aiPlayer.getLife();
+        final Player opponent = aiPlayer.getOpponent();
+        final int hlife = opponent.getLife();
         final HashMap<String, String> params = af.getMapParams();
         final String amountStr = params.get("LifeAmount");
 
-        if (!AllZone.getComputerPlayer().canGainLife()) {
+        if (!aiPlayer.canGainLife()) {
             return false;
         }
 
@@ -1535,21 +1538,21 @@ public class AbilityFactoryAlterLife {
         if (tgt != null) {
             tgt.resetTargets();
             if (tgt.canOnlyTgtOpponent()) {
-                tgt.addTarget(AllZone.getHumanPlayer());
+                tgt.addTarget(opponent);
                 // if we can only target the human, and the Human's life would
                 // go up, don't play it.
                 // possibly add a combo here for Magister Sphinx and Higedetsu's
                 // (sp?) Second Rite
-                if ((amount > hlife) || !AllZone.getHumanPlayer().canLoseLife()) {
+                if ((amount > hlife) || !opponent.canLoseLife()) {
                     return false;
                 }
             } else {
-                if ((amount > life) && (life <= 10)) {
-                    tgt.addTarget(AllZone.getComputerPlayer());
+                if ((amount > myLife) && (myLife <= 10)) {
+                    tgt.addTarget(aiPlayer);
                 } else if (hlife > amount) {
-                    tgt.addTarget(AllZone.getHumanPlayer());
-                } else if (amount > life) {
-                    tgt.addTarget(AllZone.getComputerPlayer());
+                    tgt.addTarget(opponent);
+                } else if (amount > myLife) {
+                    tgt.addTarget(aiPlayer);
                 } else {
                     return false;
                 }
@@ -1558,19 +1561,19 @@ public class AbilityFactoryAlterLife {
             if (params.containsKey("Each") && params.get("Defined").equals("Each")) {
                 if (amount == 0) {
                     return false;
-                } else if (life > amount) { // will decrease computer's life
-                    if ((life < 5) || ((life - amount) > (hlife - amount))) {
+                } else if (myLife > amount) { // will decrease computer's life
+                    if ((myLife < 5) || ((myLife - amount) > (hlife - amount))) {
                         return false;
                     }
                 }
             }
-            if (amount < life) {
+            if (amount < myLife) {
                 return false;
             }
         }
 
         // if life is in danger, always activate
-        if ((life < 3) && (amount > life)) {
+        if ((myLife < 3) && (amount > myLife)) {
             return true;
         }
 
@@ -1590,9 +1593,10 @@ public class AbilityFactoryAlterLife {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean setLifeDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        final int life = AllZone.getComputerPlayer().getLife();
-        final int hlife = AllZone.getHumanPlayer().getLife();
+    private static boolean setLifeDoTriggerAI(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        final int myLife = aiPlayer.getLife();
+        final Player opponent = aiPlayer.getOpponent();
+        final int hlife = opponent.getLife();
         final Card source = sa.getSourceCard();
         final HashMap<String, String> params = af.getMapParams();
         final String amountStr = params.get("LifeAmount");
@@ -1613,7 +1617,7 @@ public class AbilityFactoryAlterLife {
         }
 
         if (source.getName().equals("Eternity Vessel")
-                && (AllZoneUtil.isCardInPlay("Vampire Hexmage", AllZone.getHumanPlayer()) || (source
+                && (AllZoneUtil.isCardInPlay("Vampire Hexmage", opponent) || (source
                         .getCounters(Counters.CHARGE) == 0))) {
             return false;
         }
@@ -1625,14 +1629,14 @@ public class AbilityFactoryAlterLife {
         if (tgt != null) {
             tgt.resetTargets();
             if (tgt.canOnlyTgtOpponent()) {
-                tgt.addTarget(AllZone.getHumanPlayer());
+                tgt.addTarget(opponent);
             } else {
-                if ((amount > life) && (life <= 10)) {
-                    tgt.addTarget(AllZone.getComputerPlayer());
+                if ((amount > myLife) && (myLife <= 10)) {
+                    tgt.addTarget(aiPlayer);
                 } else if (hlife > amount) {
-                    tgt.addTarget(AllZone.getHumanPlayer());
-                } else if (amount > life) {
-                    tgt.addTarget(AllZone.getComputerPlayer());
+                    tgt.addTarget(opponent);
+                } else if (amount > myLife) {
+                    tgt.addTarget(aiPlayer);
                 } else {
                     return false;
                 }
@@ -1714,7 +1718,7 @@ public class AbilityFactoryAlterLife {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryAlterLife.exchangeLifeCanPlayAI(af, this);
+                return AbilityFactoryAlterLife.exchangeLifeCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -1752,7 +1756,7 @@ public class AbilityFactoryAlterLife {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryAlterLife.exchangeLifeCanPlayAI(af, this);
+                return AbilityFactoryAlterLife.exchangeLifeCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -1796,7 +1800,7 @@ public class AbilityFactoryAlterLife {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryAlterLife.exchangeLifeCanPlayAI(af, this);
+                return AbilityFactoryAlterLife.exchangeLifeCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -1878,12 +1882,13 @@ public class AbilityFactoryAlterLife {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean exchangeLifeCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean exchangeLifeCanPlayAI(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa) {
         final Random r = MyRandom.getRandom();
-        final int life = AllZone.getComputerPlayer().getLife();
-        final int hLife = AllZone.getHumanPlayer().getLife();
+        final int myLife = aiPlayer.getLife();
+        Player opponent = aiPlayer.getOpponent();
+        final int hLife = opponent.getLife();
 
-        if (!AllZone.getComputerPlayer().canGainLife()) {
+        if (!aiPlayer.canGainLife()) {
             return false;
         }
 
@@ -1898,22 +1903,22 @@ public class AbilityFactoryAlterLife {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
-            if (AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
+            if (opponent.canBeTargetedBy(sa)) {
                 // never target self, that would be silly for exchange
-                tgt.addTarget(AllZone.getHumanPlayer());
-                if (!AllZone.getHumanPlayer().canLoseLife()) {
+                tgt.addTarget(opponent);
+                if (!opponent.canLoseLife()) {
                     return false;
                 }
             }
         }
 
         // if life is in danger, always activate
-        if ((life < 5) && (hLife > life)) {
+        if ((myLife < 5) && (hLife > myLife)) {
             return true;
         }
 
         // cost includes sacrifice probably, so make sure it's worth it
-        chance &= (hLife > (life + 8));
+        chance &= (hLife > (myLife + 8));
 
         return ((r.nextFloat() < .6667) && chance);
     }

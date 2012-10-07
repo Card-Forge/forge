@@ -2436,7 +2436,7 @@ public class AbilityFactory {
      * @return a {@link java.util.ArrayList} object.
      * @since 1.0.15
      */
-    public static ArrayList<Object> predictThreatenedObjects(final AbilityFactory saviourAf) {
+    public static ArrayList<Object> predictThreatenedObjects(final Player aiPlayer, final AbilityFactory saviourAf) {
         final ArrayList<Object> objects = new ArrayList<Object>();
         if (AllZone.getStack().size() == 0) {
             return objects;
@@ -2444,7 +2444,7 @@ public class AbilityFactory {
 
         // check stack for something that will kill this
         final SpellAbility topStack = AllZone.getStack().peekAbility();
-        objects.addAll(AbilityFactory.predictThreatenedObjects(saviourAf, topStack));
+        objects.addAll(AbilityFactory.predictThreatenedObjects(aiPlayer, saviourAf, topStack));
 
         return objects;
     }
@@ -2461,7 +2461,7 @@ public class AbilityFactory {
      * @return a {@link java.util.ArrayList} object.
      * @since 1.0.15
      */
-    public static ArrayList<Object> predictThreatenedObjects(final AbilityFactory saviourAf, final SpellAbility topStack) {
+    public static ArrayList<Object> predictThreatenedObjects(final Player aiPlayer, final AbilityFactory saviourAf, final SpellAbility topStack) {
         ArrayList<Object> objects = new ArrayList<Object>();
         final ArrayList<Object> threatened = new ArrayList<Object>();
         String saviourApi = "";
@@ -2487,7 +2487,7 @@ public class AbilityFactory {
                 if (threatParams.containsKey("Defined")) {
                     objects = AbilityFactory.getDefinedObjects(source, threatParams.get("Defined"), topStack);
                 } else if (threatParams.containsKey("ValidCards")) {
-                    List<Card> battleField = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+                    List<Card> battleField = aiPlayer.getCardsIn(ZoneType.Battlefield);
                     List<Card> cards = CardLists.getValidCards(battleField, threatParams.get("ValidCards").split(","), source.getController(), source);
                     for (Card card : cards) {
                         objects.add(card);
@@ -2620,7 +2620,7 @@ public class AbilityFactory {
             }
         }
 
-        threatened.addAll(AbilityFactory.predictThreatenedObjects(saviourAf, topStack.getSubAbility()));
+        threatened.addAll(AbilityFactory.predictThreatenedObjects(aiPlayer, saviourAf, topStack.getSubAbility()));
         return threatened;
     }
 
@@ -2861,7 +2861,7 @@ public class AbilityFactory {
             } else {
                 sa.resolve();
                 if (params.containsKey("PowerSink")) {
-                    GameActionUtil.doPowerSink(AllZone.getComputerPlayer());
+                    GameActionUtil.doPowerSink(payer);
                 }
                 AbilityFactory.resolveSubAbilities(sa);
                 if (usedStack) {

@@ -305,7 +305,7 @@ public class AbilityFactoryPreventDamage {
 
             // react to threats on the stack
             if (AllZone.getStack().size() > 0) {
-                final ArrayList<Object> threatenedObjects = AbilityFactory.predictThreatenedObjects(af);
+                final ArrayList<Object> threatenedObjects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(), af);
                 for (final Object o : objects) {
                     if (threatenedObjects.contains(o)) {
                         chance = true;

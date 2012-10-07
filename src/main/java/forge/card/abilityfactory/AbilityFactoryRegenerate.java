@@ -289,7 +289,7 @@ public class AbilityFactoryRegenerate {
             final ArrayList<Card> list = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
 
             if (AllZone.getStack().size() > 0) {
-                final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(af);
+                final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(),af);
 
                 for (final Card c : list) {
                     if (objects.contains(c)) {
@@ -325,7 +325,7 @@ public class AbilityFactoryRegenerate {
             if (AllZone.getStack().size() > 0) {
                 // check stack for something on the stack will kill anything i
                 // control
-                final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(af);
+                final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(), af);
 
                 final List<Card> threatenedTargets = new ArrayList<Card>();
 
@@ -737,7 +737,7 @@ public class AbilityFactoryRegenerate {
 
         int numSaved = 0;
         if (AllZone.getStack().size() > 0) {
-            final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(af);
+            final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(),af);
 
             for (final Card c : list) {
                 if (objects.contains(c) && c.getShield() == 0) {

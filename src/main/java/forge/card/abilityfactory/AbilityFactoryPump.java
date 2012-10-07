@@ -580,7 +580,7 @@ public class AbilityFactoryPump {
                 return false;
             }
         } else if (keyword.equals("Shroud") || keyword.equals("Hexproof")) {
-            if (!AbilityFactory.predictThreatenedObjects(sa.getAbilityFactory()).contains(card)) {
+            if (!AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(), sa.getAbilityFactory()).contains(card)) {
                 return false;
             }
         } else if (keyword.equals("Islandwalk")) {
