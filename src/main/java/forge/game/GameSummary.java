@@ -17,6 +17,7 @@
  */
 package forge.game;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,11 +60,15 @@ public final class GameSummary {
      *            the names
      */
     public GameSummary(final String... names) {
-        for (final String n : names) {
-            this.playerRating.put(n, new GamePlayerRating());
-        }
+        this(Arrays.asList(names));
     }
 
+    public GameSummary(final Iterable<String> list) {
+        for (final String n : list) {
+            this.playerRating.put(n, new GamePlayerRating());
+        }
+    }    
+    
     /**
      * End.
      * 

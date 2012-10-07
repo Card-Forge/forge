@@ -118,6 +118,21 @@ public class Aggregates {
             }
         }
         return result;
+    }
+
+
+    public static <TItem, TField> TItem firstFieldEquals(List<TItem> source, Function<TItem, TField> valueAccessor, TField valueEquals) {
+        if (source == null) { return null; }  
+        if( valueEquals == null ) {
+            for (final TItem c : source)
+                if ( null == valueAccessor.apply(c) )
+                    return c;
+        } else {
+            for (final TItem c : source)
+                if ( valueEquals.equals(valueAccessor.apply(c)) )
+                    return c;
+        }
+        return null;
     }    
 
 }

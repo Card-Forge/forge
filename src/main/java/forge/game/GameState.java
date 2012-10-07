@@ -17,6 +17,10 @@
  */
 package forge.game;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import forge.GameLog;
 import forge.StaticEffects;
 import forge.card.replacement.ReplacementHandler;
@@ -47,8 +51,8 @@ public class GameState {
     /** The Constant AI_PLAYER_NAME. */
     public static final String AI_PLAYER_NAME = "Computer";
 
-    private Player humanPlayer = new HumanPlayer(GameState.HUMAN_PLAYER_NAME);
-    private Player computerPlayer = new AIPlayer(GameState.AI_PLAYER_NAME);
+    private final List<Player> players = new ArrayList<Player>(); 
+    private final List<Player> roPlayers;
     private final Cleanup cleanup = new Cleanup();
     private final EndOfTurn endOfTurn = new EndOfTurn();
     private final EndOfCombat endOfCombat = new EndOfCombat();
@@ -72,24 +76,10 @@ public class GameState {
      * Constructor.
      */
     public GameState() { /* no more zones to map here */
-    }
-
-    /**
-     * Gets the human player.
-     * 
-     * @return the humanPlayer
-     */
-    public final Player getHumanPlayer() {
-        return this.humanPlayer;
-    }
-
-    /**
-     * Gets the computer player.
-     * 
-     * @return the computerPlayer
-     */
-    public final Player getComputerPlayer() {
-        return this.computerPlayer;
+        players.add(new HumanPlayer(GameState.HUMAN_PLAYER_NAME));
+        players.add(new AIPlayer(GameState.AI_PLAYER_NAME));
+        
+        roPlayers = Collections.unmodifiableList(players);
     }
 
     /**
@@ -97,8 +87,8 @@ public class GameState {
      * 
      * @return the players
      */
-    public final Player[] getPlayers() {
-        return new Player[] { this.humanPlayer, this.computerPlayer };
+    public final List<Player> getPlayers() {
+        return roPlayers;
     }
 
     /**

@@ -2705,6 +2705,20 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
                 return input.getLife();
             }
         };
+
+        public static Function<Player, PlayerType> FN_GET_TYPE = new Function<Player, PlayerType>(){
+            @Override
+            public PlayerType apply(Player input) {
+                return input.getType();
+            }
+        };
+
+        public static Function<Player, String> FN_GET_NAME = new Function<Player, String>(){
+            @Override
+            public String apply(Player input) {
+                return input.getName();
+            }
+        };
         
         public static Function<Player, Integer> countCardsInZone(final ZoneType zone){
             return new Function<Player, Integer>(){

@@ -20,6 +20,8 @@ package forge;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.common.collect.Iterables;
+
 import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryInterface;
 import forge.card.replacement.ReplacementHandler;
@@ -30,12 +32,14 @@ import forge.game.limited.GauntletMini;
 import forge.game.phase.Combat;
 import forge.game.phase.EndOfTurn;
 import forge.game.player.Player;
+import forge.game.player.PlayerType;
 import forge.game.zone.MagicStack;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
+import forge.util.Aggregates;
 
 
 /**
@@ -93,11 +97,10 @@ public final class AllZone {
      */
     @Deprecated
     public static Player getHumanPlayer() {
-        if (Singletons.getModel() != null) {
-            return Singletons.getModel().getGameState().getHumanPlayer();
-        }
+        if (Singletons.getModel() == null) 
+            return null;
 
-        return null;
+        return Aggregates.firstFieldEquals(Singletons.getModel().getGameState().getPlayers(), Player.Accessors.FN_GET_TYPE, PlayerType.COMPUTER);
     }
 
     /**
@@ -112,7 +115,8 @@ public final class AllZone {
      */
     @Deprecated
     public static Player getComputerPlayer() {
-        return Singletons.getModel().getGameState().getComputerPlayer();
+        List<Player> players = Singletons.getModel().getGameState().getPlayers();
+        return Aggregates.firstFieldEquals(players, Player.Accessors.FN_GET_TYPE, PlayerType.COMPUTER);
     }
 
     /**
@@ -121,7 +125,7 @@ public final class AllZone {
      * @return a list of all player participating in this game
      */
     public static List<Player> getPlayersInGame() {
-        return Arrays.asList(Singletons.getModel().getGameState().getPlayers());
+        return Singletons.getModel().getGameState().getPlayers();
     }
 
     /**

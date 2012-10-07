@@ -263,8 +263,7 @@ public class GameNew {
     private static void newGameCleanup() {
         final GameState gs = Singletons.getModel().getGameState();
 
-        gs.setGameSummary(
-                new GameSummary(gs.getHumanPlayer().getName(), gs.getComputerPlayer().getName()));
+        gs.setGameSummary(new GameSummary(Iterables.transform(gs.getPlayers(), Player.Accessors.FN_GET_NAME)));
 
         gs.getPhaseHandler().reset();
         gs.getStack().reset();
