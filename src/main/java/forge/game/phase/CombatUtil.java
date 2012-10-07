@@ -1098,7 +1098,7 @@ public class CombatUtil {
      *            a {@link forge.game.phase.Combat} object.
      * @return a int.
      */
-    public static int lifeThatWouldRemain(final Combat combat) {
+    public static int lifeThatWouldRemain(final Player ai, final Combat combat) {
 
         int damage = 0;
 
@@ -1121,13 +1121,13 @@ public class CombatUtil {
             }
         }
 
-        damage += CombatUtil.sumDamageIfUnblocked(unblocked, AllZone.getComputerPlayer());
+        damage += CombatUtil.sumDamageIfUnblocked(unblocked, ai);
 
-        if (!AllZone.getComputerPlayer().canLoseLife()) {
+        if (!ai.canLoseLife()) {
             damage = 0;
         }
 
-        return AllZone.getComputerPlayer().getLife() - damage;
+        return ai.getLife() - damage;
     }
 
     // calculates the amount of poison counters after the attack
@@ -1140,7 +1140,7 @@ public class CombatUtil {
      *            a {@link forge.game.phase.Combat} object.
      * @return a int.
      */
-    public static int resultingPoison(final Combat combat) {
+    public static int resultingPoison(final Player ai, final Combat combat) {
 
         int poison = 0;
 
@@ -1166,9 +1166,9 @@ public class CombatUtil {
             }
         }
 
-        poison += CombatUtil.sumPoisonIfUnblocked(unblocked, AllZone.getComputerPlayer());
+        poison += CombatUtil.sumPoisonIfUnblocked(unblocked, ai);
 
-        return AllZone.getComputerPlayer().getPoisonCounters() + poison;
+        return ai.getPoisonCounters() + poison;
     }
 
     // Checks if the life of the attacked Player/Planeswalker is in danger
@@ -1181,10 +1181,9 @@ public class CombatUtil {
      *            a {@link forge.game.phase.Combat} object.
      * @return a boolean.
      */
-    public static boolean lifeInDanger(final Combat combat) {
-        // life in danger only cares about the player's life. Not about a
-        // Planeswalkers life
-        if (AllZone.getComputerPlayer().cantLose()) {
+    public static boolean lifeInDanger(final Player ai, final Combat combat) {
+        // life in danger only cares about the player's life. Not Planeswalkers' life
+        if (ai.cantLose()) {
             return false;
         }
 
@@ -1202,12 +1201,12 @@ public class CombatUtil {
             }
         }
 
-        if ((CombatUtil.lifeThatWouldRemain(combat) < Math.min(4, AllZone.getComputerPlayer().getLife()))
-                && !AllZone.getComputerPlayer().cantLoseForZeroOrLessLife()) {
+        if ((CombatUtil.lifeThatWouldRemain(ai, combat) < Math.min(4, ai.getLife()))
+                && !ai.cantLoseForZeroOrLessLife()) {
             return true;
         }
 
-        return (CombatUtil.resultingPoison(combat) > Math.max(7, AllZone.getComputerPlayer().getPoisonCounters()));
+        return (CombatUtil.resultingPoison(ai, combat) > Math.max(7, ai.getPoisonCounters()));
     }
 
     // Checks if the life of the attacked Player would be reduced
@@ -1220,9 +1219,9 @@ public class CombatUtil {
      *            a {@link forge.game.phase.Combat} object.
      * @return a boolean.
      */
-    public static boolean wouldLoseLife(final Combat combat) {
+    public static boolean wouldLoseLife(final Player ai, final Combat combat) {
 
-        return (CombatUtil.lifeThatWouldRemain(combat) < AllZone.getComputerPlayer().getLife());
+        return (CombatUtil.lifeThatWouldRemain(ai, combat) < ai.getLife());
     }
 
     // Checks if the life of the attacked Player/Planeswalker is in danger
@@ -1235,10 +1234,10 @@ public class CombatUtil {
      *            a {@link forge.game.phase.Combat} object.
      * @return a boolean.
      */
-    public static boolean lifeInSeriousDanger(final Combat combat) {
+    public static boolean lifeInSeriousDanger(final Player ai, final Combat combat) {
         // life in danger only cares about the player's life. Not about a
         // Planeswalkers life
-        if (AllZone.getComputerPlayer().cantLose()) {
+        if (ai.cantLose()) {
             return false;
         }
 
@@ -1256,11 +1255,11 @@ public class CombatUtil {
             }
         }
 
-        if ((CombatUtil.lifeThatWouldRemain(combat) < 1) && !AllZone.getComputerPlayer().cantLoseForZeroOrLessLife()) {
+        if ((CombatUtil.lifeThatWouldRemain(ai, combat) < 1) && !ai.cantLoseForZeroOrLessLife()) {
             return true;
         }
 
-        return (CombatUtil.resultingPoison(combat) > 9);
+        return (CombatUtil.resultingPoison(ai, combat) > 9);
     }
 
     // This calculates the amount of damage a blockgang can deal to the attacker
@@ -2760,11 +2759,12 @@ public class CombatUtil {
                     final Ability ability = new Ability(c, "0") {
                         @Override
                         public void resolve() {
-                            if (crd.getController().isHuman()) {
-                                final List<Card> list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                                ComputerUtil.sacrificePermanents(a, list, false, this);
+                            final Player cp = crd.getController(); 
+                            if (cp.isHuman()) {
+                                final List<Card> list = cp.getOpponent().getCardsIn(ZoneType.Battlefield);
+                                ComputerUtil.sacrificePermanents(cp.getOpponent(),  a, list, false, this);
                             } else {
-                                AbilityFactorySacrifice.sacrificeHuman(AllZone.getHumanPlayer(), a, "Permanent", this,
+                                AbilityFactorySacrifice.sacrificeHuman(cp.getOpponent(), a, "Permanent", this,
                                         false, false);
                             }
 

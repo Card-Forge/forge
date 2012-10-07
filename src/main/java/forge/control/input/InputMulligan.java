@@ -210,12 +210,6 @@ public class InputMulligan extends Input {
         }
         //ga.checkStateEffects();
 
-        if (ga.isStartCut() && !(humanOpeningHand.contains(ga.getHumanCut())
-                        || aiOpeningHand.contains(ga.getComputerCut()))) {
-            ga.moveTo(AllZone.getHumanPlayer().getZone(ZoneType.Library), ga.getHumanCut());
-            ga.moveTo(AllZone.getComputerPlayer().getZone(ZoneType.Library), ga.getComputerCut());
-        }
-
         ga.checkStateEffects();
         PhaseHandler.setGameBegins(1);
         AllZone.getGameLog().add("Turn",

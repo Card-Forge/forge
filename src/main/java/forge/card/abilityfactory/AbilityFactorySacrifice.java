@@ -544,7 +544,7 @@ public class AbilityFactorySacrifice {
             final boolean destroy) {
         List<Card> battlefield = p.getCardsIn(ZoneType.Battlefield);
         List<Card> sacList = AbilityFactory.filterListByType(battlefield, valid, sa);
-        sacList = ComputerUtil.sacrificePermanents(amount, sacList, destroy, sa);
+        sacList = ComputerUtil.sacrificePermanents(p, amount, sacList, destroy, sa);
 
         return sacList;
     }

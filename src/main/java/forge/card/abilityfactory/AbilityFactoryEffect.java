@@ -280,7 +280,7 @@ public class AbilityFactoryEffect {
                 if (Singletons.getModel().getGameState().getPhaseHandler().isPreventCombatDamageThisTurn()) {
                     return false;
                 }
-                if (!CombatUtil.lifeInDanger(AllZone.getCombat())) {
+                if (!CombatUtil.lifeInDanger(ai, AllZone.getCombat())) {
                     return false;
                 }
                 final Target tgt = sa.getTarget();

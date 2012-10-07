@@ -412,8 +412,9 @@ public class GameAction {
         }
 
         AllZone.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        ((PlayerZoneBattlefield) AllZone.getHumanPlayer().getZone(ZoneType.Battlefield)).setTriggers(false);
-        ((PlayerZoneBattlefield) AllZone.getComputerPlayer().getZone(ZoneType.Battlefield)).setTriggers(false);
+        for (Player p: AllZone.getPlayersInGame()) {
+            ((PlayerZoneBattlefield)p.getZone(ZoneType.Battlefield)).setTriggers(false);
+        }
 
         final int tiz = c.getTurnInZone();
 
@@ -432,8 +433,9 @@ public class GameAction {
         AllZone.getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams);
 
         AllZone.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-        ((PlayerZoneBattlefield) AllZone.getHumanPlayer().getZone(ZoneType.Battlefield)).setTriggers(true);
-        ((PlayerZoneBattlefield) AllZone.getComputerPlayer().getZone(ZoneType.Battlefield)).setTriggers(true);
+        for (Player p: AllZone.getPlayersInGame()) {
+            ((PlayerZoneBattlefield)p.getZone(ZoneType.Battlefield)).setTriggers(true);
+        }
     }
 
     /**
@@ -936,8 +938,7 @@ public class GameAction {
         final boolean isGameDone = humanWins || computerWins;
         if (isGameDone) {
             Singletons.getModel().getGameState().setGameOver(true);
-            game.getPlayerRating(computer.getName()).setLossReason(computer.getLossState(),
-                    computer.getLossConditionSource());
+            game.getPlayerRating(computer.getName()).setLossReason(computer.getLossState(), computer.getLossConditionSource());
             game.getPlayerRating(human.getName()).setLossReason(human.getLossState(), human.getLossConditionSource());
             Singletons.getModel().getMatchState().addGamePlayed(game);
         }
@@ -1529,10 +1530,6 @@ public class GameAction {
         return this.sacrificeDestroy(c);
     }
 
-    private boolean startCut = false;
-
-
-
     /**
      * <p>
      * playCard.
@@ -1548,7 +1545,7 @@ public class GameAction {
         final ArrayList<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
         final ArrayList<SpellAbility> abilities = c.getSpellAbilities();
         final ArrayList<String> choices = new ArrayList<String>();
-        final Player human = AllZone.getHumanPlayer();
+        final Player human = Singletons.getControl().getPlayer();
         final PlayerZone zone = AllZone.getZoneOf(c);
 
         if (c.isLand() && human.canPlayLand()) {
@@ -1585,7 +1582,7 @@ public class GameAction {
         }
 
         if (choice.equals("Play land")) {
-            AllZone.getHumanPlayer().playLand(c);
+            human.playLand(c);
             return true;
         }
 
@@ -1625,7 +1622,7 @@ public class GameAction {
         // Ripple causes a crash because it doesn't set the activatingPlayer in
         // this entrance
         if (sa.getActivatingPlayer() == null) {
-            sa.setActivatingPlayer(AllZone.getHumanPlayer());
+            sa.setActivatingPlayer(Singletons.getControl().getPlayer());
         }
         this.playSpellAbilityForFree(sa);
     }
@@ -1698,7 +1695,8 @@ public class GameAction {
             if (spell.getIsDelve()) {
                 final int cardsInGrave = originalCard.getController().getCardsIn(ZoneType.Graveyard).size();
 
-                if (originalCard.getController().isHuman()) {
+                final Player pc = originalCard.getController(); 
+                if (pc.isHuman()) {
                     final Integer[] cntChoice = new Integer[cardsInGrave+1];
                     for (int i = 0; i <= cardsInGrave; i++) {
                         cntChoice[i] = Integer.valueOf(i);
@@ -1706,7 +1704,7 @@ public class GameAction {
                     
                     final Integer chosenAmount = GuiChoose.one("Exile how many cards?", cntChoice);
                     System.out.println("Delve for " + chosenAmount);
-                    final List<Card> choices = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
+                    final List<Card> choices = pc.getCardsIn(ZoneType.Graveyard);
                     final List<Card> chosen = new ArrayList<Card>();
                     for (int i = 0; i < chosenAmount; i++) {
                         final Card nowChosen = GuiChoose.oneOrNone("Exile which card?", choices);
@@ -1739,7 +1737,7 @@ public class GameAction {
                     }
 
                     for (int i = 0; i < numToExile; i++) {
-                        final List<Card> grave = new ArrayList<Card>(AllZone.getComputerPlayer().getZone(ZoneType.Graveyard)
+                        final List<Card> grave = new ArrayList<Card>(pc.getZone(ZoneType.Graveyard)
                                 .getCards());
                         Card chosen = null;
                         for (final Card c : grave) { // Exile noncreatures first
@@ -1903,7 +1901,7 @@ public class GameAction {
         final HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
         final ArrayList<SpellAbility> abilities = GameActionUtil.getOptionalAdditionalCosts(original);
         final ArrayList<String> choices = new ArrayList<String>();
-        final Player human = AllZone.getHumanPlayer();
+        final Player human = Singletons.getControl().getPlayer();
         if (!original.isSpell()) {
             return original;
         }
@@ -1936,7 +1934,7 @@ public class GameAction {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void playSpellAbility(SpellAbility sa) {
-        sa.setActivatingPlayer(AllZone.getHumanPlayer());
+        sa.setActivatingPlayer(Singletons.getControl().getPlayer());
 
         sa = AbilityFactoryCharm.setupCharmSAs(sa);
         sa = GameAction.chooseOptionalAdditionalCosts(sa);
@@ -2011,7 +2009,7 @@ public class GameAction {
      *            a boolean.
      */
     public final void playSpellAbilityNoStack(final SpellAbility sa, final boolean skipTargeting) {
-        sa.setActivatingPlayer(AllZone.getHumanPlayer());
+        sa.setActivatingPlayer(Singletons.getControl().getPlayer());
 
         if (sa.getPayCosts() != null) {
             final TargetSelection ts = new TargetSelection(sa.getTarget(), sa);
@@ -2053,77 +2051,6 @@ public class GameAction {
         }
     }
 
-    /**
-     * <p>
-     * setComputerCut.
-     * </p>
-     * 
-     * @param computerCut
-     *            a {@link forge.Card} object.
-     */
-    public final void setComputerCut(final Card computerCut) {
-        this.computerCut = computerCut;
-    }
-
-    /**
-     * <p>
-     * getComputerCut.
-     * </p>
-     * 
-     * @return a {@link forge.Card} object.
-     */
-    public final Card getComputerCut() {
-        return this.computerCut;
-    }
-
-    /**
-     * <p>
-     * setStartCut.
-     * </p>
-     * 
-     * @param startCutIn
-     *            a boolean.
-     */
-    public final void setStartCut(final boolean startCutIn) {
-        this.startCut = startCutIn;
-    }
-
-    /**
-     * <p>
-     * isStartCut.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isStartCut() {
-        return this.startCut;
-    }
-
-    private Card humanCut = null;
-    private Card computerCut = null;
-
-    /**
-     * <p>
-     * setHumanCut.
-     * </p>
-     * 
-     * @param humanCut
-     *            a {@link forge.Card} object.
-     */
-    public final void setHumanCut(final Card humanCut) {
-        this.humanCut = humanCut;
-    }
-
-    /**
-     * <p>
-     * getHumanCut.
-     * </p>
-     * 
-     * @return a {@link forge.Card} object.
-     */
-    public final Card getHumanCut() {
-        return this.humanCut;
-    }
 
     /**
      * Gets the cost cutting get multi kicker mana cost paid.

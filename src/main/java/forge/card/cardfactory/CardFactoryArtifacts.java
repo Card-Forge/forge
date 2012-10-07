@@ -9,9 +9,6 @@ import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
-import forge.CardLists;
-import forge.CardPredicates;
-import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.Counters;
 import forge.Singletons;
@@ -227,7 +224,7 @@ class CardFactoryArtifacts {
             sb.append("revealed cards on the bottom of your library in any order.");
             ability.setDescription(sb.toString());
 
-            ability.setChooseTargetAI(CardFactoryUtil.targetHumanAI());
+            ability.setChooseTargetAI(CardFactoryUtil.targetHumanAI);
             card.addSpellAbility(ability);
         } // *************** END ************ END **************************
 
@@ -257,12 +254,12 @@ class CardFactoryArtifacts {
 
                 @Override
                 public boolean canPlayAI() {
-                    return this.getComputerLands().size() >= 4;
+                    return this.getComputerLands(getActivatingPlayer()).size() >= 4;
                 }
 
                 @Override
                 public void chooseTargetAI() {
-                    this.setTargetPlayer(AllZone.getComputerPlayer());
+                    this.setTargetPlayer(getActivatingPlayer());
                 } // chooseTargetAI()
 
                 @Override
@@ -300,7 +297,7 @@ class CardFactoryArtifacts {
                     } else { // Computer
                         // based on current AI, computer should always target
                         // himself.
-                        final List<Card> list = this.getComputerLands();
+                        final List<Card> list = this.getComputerLands(card.getController());
                         int max = list.size();
                         if (max > limit) {
                             max = limit;
@@ -314,9 +311,8 @@ class CardFactoryArtifacts {
                     player.addSlowtripList(card);
                 }
 
-                private List<Card> getComputerLands() {
-                    final List<Card> list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
-                    return CardLists.filter(list, CardPredicates.Presets.BASIC_LANDS);
+                private List<Card> getComputerLands(final Player ai) {
+                    return CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.BASIC_LANDS);
                 }
             }
             final Cost abCost = new Cost(card, "1 T Sac<1/CARDNAME>", true);
@@ -345,7 +341,7 @@ class CardFactoryArtifacts {
                     AbilityActivated res = new AbilityGrindstone(getSourceCard(),
                             getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                     CardFactoryUtil.copySpellAbility(this, res);
-                    res.setChooseTargetAI(CardFactoryUtil.targetHumanAI());
+                    res.setChooseTargetAI(CardFactoryUtil.targetHumanAI);
                     return res;
                 }
 
@@ -353,10 +349,10 @@ class CardFactoryArtifacts {
 
                 @Override
                 public boolean canPlayAI() {
-                    final List<Card> libList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library);
+                    final List<Card> libList = getActivatingPlayer().getOpponent().getCardsIn(ZoneType.Library);
                     // List<Card> list =
                     // AllZoneUtil.getCardsInPlay("Painter's Servant");
-                    return libList.size() > 0; // && list.size() > 0;
+                    return !libList.isEmpty(); // && list.size() > 0;
                 }
 
                 @Override
@@ -394,7 +390,7 @@ class CardFactoryArtifacts {
             final Cost abCost = new Cost(card, "3 T", true);
             final AbilityActivated ab1 = new AbilityGrindstone(card, abCost, target);
 
-            ab1.setChooseTargetAI(CardFactoryUtil.targetHumanAI());
+            ab1.setChooseTargetAI(CardFactoryUtil.targetHumanAI);
             final StringBuilder sb = new StringBuilder();
             sb.append(abCost);
             sb.append("Put the top two cards of target player's library into that player's graveyard. ");

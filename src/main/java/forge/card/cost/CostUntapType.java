@@ -210,7 +210,7 @@ public class CostUntapType extends CostPartWithList {
             }
         }
 
-        this.setList(ComputerUtil.chooseUntapType(this.getType(), source, untap, c));
+        this.setList(ComputerUtil.chooseUntapType(ai, this.getType(), source, untap, c));
 
         if (this.getList() == null) {
             System.out.println("Couldn't find a valid card to untap for: " + source.getName());

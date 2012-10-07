@@ -1253,6 +1253,7 @@ public class AbilityFactoryMana {
         if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
+        final Player opp = ai.getOpponent();
 
         final HashMap<String, String> params = af.getMapParams();
         final Target tgt = sa.getTarget();
@@ -1264,7 +1265,7 @@ public class AbilityFactoryMana {
             } else {
                 final ArrayList<Player> defined = AbilityFactory.getDefinedPlayers(source, params.get("Defined"), sa);
 
-                if (!defined.contains(AllZone.getHumanPlayer())) {
+                if (!defined.contains(opp)) {
                     return false;
                 }
             }
@@ -1272,7 +1273,7 @@ public class AbilityFactoryMana {
             return true;
         } else {
             tgt.resetTargets();
-            tgt.addTarget(AllZone.getHumanPlayer());
+            tgt.addTarget(opp);
         }
 
         return true;

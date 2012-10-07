@@ -22,13 +22,15 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.google.common.base.Supplier;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
 import forge.Command;
-import forge.CommandArgs;
 import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
@@ -637,7 +639,7 @@ public class TriggerHandler {
             }
 
             @Override
-            public CommandArgs getChooseTargetAI() {
+            public Supplier<Player> getChooseTargetAI() {
                 return sa[0].getChooseTargetAI();
             }
 
@@ -813,7 +815,7 @@ public class TriggerHandler {
             }
 
             @Override
-            public void setChooseTargetAI(final CommandArgs c) {
+            public void setChooseTargetAI(final Supplier<Player> c) {
                 sa[0].setChooseTargetAI(c);
             }
 

@@ -407,13 +407,11 @@ public class StaticAbilityContinuous {
 
         final String[] strngs = params.get("Affected").split(",");
 
-        if (AllZone.getHumanPlayer().isValid(strngs, controller, hostCard)) {
-            players.add(AllZone.getHumanPlayer());
-        }
-
-        if (AllZone.getComputerPlayer().isValid(strngs, controller, hostCard)) {
-            players.add(AllZone.getComputerPlayer());
-        }
+        for(Player p : AllZone.getPlayersInGame())
+            if (p.isValid(strngs, controller, hostCard)) {
+                players.add(p);
+            }
+    
 
         return players;
     }

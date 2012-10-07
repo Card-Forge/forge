@@ -246,7 +246,7 @@ public class CardFactorySorceries {
 
             @Override
             public boolean canPlayAI() {
-                final List<Card> cards = AllZone.getComputerPlayer().getCardsIn(ZoneType.Library);
+                final List<Card> cards = getActivatingPlayer().getCardsIn(ZoneType.Library);
                 return cards.size() >= 8;
             }
         }; // SpellAbility
@@ -259,8 +259,10 @@ public class CardFactorySorceries {
 
             @Override
             public boolean canPlayAI() {
-                List<Card> humTokenCreats = CardLists.filter(AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer()), Presets.TOKEN);
-                List<Card> compTokenCreats = CardLists.filter(AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer()), Presets.TOKEN);
+                final Player ai = getActivatingPlayer();
+                final Player opp = ai.getOpponent();
+                List<Card> humTokenCreats = CardLists.filter(AllZoneUtil.getCreaturesInPlay(opp), Presets.TOKEN);
+                List<Card> compTokenCreats = CardLists.filter(AllZoneUtil.getCreaturesInPlay(ai), Presets.TOKEN);
 
                 return compTokenCreats.size() > humTokenCreats.size();
             } // canPlayAI()
@@ -482,10 +484,12 @@ public class CardFactorySorceries {
             public boolean canPlayAI() {
                 // Haunting Echoes shouldn't be cast if only basic land in
                 // graveyard or library is empty
-                final List<Card> graveyard = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
-                final List<Card> library = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library);
+                final Player ai = getActivatingPlayer();
+                final Player opp = ai.getOpponent();
+                final List<Card> graveyard = opp.getCardsIn(ZoneType.Graveyard);
+                final List<Card> library = opp.getCardsIn(ZoneType.Library);
 
-                this.setTargetPlayer(AllZone.getHumanPlayer());
+                this.setTargetPlayer(opp);
 
                 return Iterables.any(graveyard, nonBasicLands) && !library.isEmpty();
             }
@@ -573,6 +577,7 @@ public class CardFactorySorceries {
             @Override
             public void resolve() {
                 // Lands:
+                
                 final List<Card> humLand = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
                 final List<Card> compLand = AllZoneUtil.getPlayerLandsInPlay(AllZone.getComputerPlayer());
 
@@ -617,17 +622,19 @@ public class CardFactorySorceries {
             @Override
             public boolean canPlayAI() {
                 int diff = 0;
-                final List<Card> humLand = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
-                final List<Card> compLand = AllZoneUtil.getPlayerLandsInPlay(AllZone.getComputerPlayer());
+                final Player ai = getActivatingPlayer();
+                final Player opp = ai.getOpponent();
+                final List<Card> humLand = AllZoneUtil.getPlayerLandsInPlay(opp);
+                final List<Card> compLand = AllZoneUtil.getPlayerLandsInPlay(ai);
                 diff += humLand.size() - compLand.size();
 
-                final List<Card> humCreats = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-                List<Card> compCreats = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
+                final List<Card> humCreats = AllZoneUtil.getCreaturesInPlay(opp);
+                List<Card> compCreats = AllZoneUtil.getCreaturesInPlay(ai);
                 compCreats = CardLists.filter(compCreats, CardPredicates.Presets.CREATURES);
                 diff += 1.5 * (humCreats.size() - compCreats.size());
 
-                final List<Card> humHand = AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand);
-                final List<Card> compHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
+                final List<Card> humHand = opp.getCardsIn(ZoneType.Hand);
+                final List<Card> compHand = ai.getCardsIn(ZoneType.Hand);
                 diff += 0.5 * (humHand.size() - compHand.size());
 
                 return diff > 2;
@@ -647,7 +654,7 @@ public class CardFactorySorceries {
                 // turn
                 // is structured, it will already have played land to it's
                 // limit
-                return Iterables.any(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS);
+                return Iterables.any(getActivatingPlayer().getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS);
             }
 
             @Override
@@ -681,7 +688,7 @@ public class CardFactorySorceries {
                 // turn
                 // is structured, it will already have played its first
                 // land.
-                return Iterables.any(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS);
+                return Iterables.any(getActivatingPlayer().getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS);
             }
 
             @Override
@@ -713,8 +720,10 @@ public class CardFactorySorceries {
                 /*
                  * We want compy to have less cards in hand than the human
                  */
-                final List<Card> humanHand = AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand);
-                final List<Card> computerHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
+                final Player ai = getActivatingPlayer();
+                final Player opp = ai.getOpponent();
+                final List<Card> humanHand = opp.getCardsIn(ZoneType.Hand);
+                final List<Card> computerHand = ai.getCardsIn(ZoneType.Hand);
                 return computerHand.size() < humanHand.size();
             }
 
@@ -830,17 +839,19 @@ public class CardFactorySorceries {
 
             @Override
             public boolean canPlayAI() {
-                final int humanPoison = AllZone.getHumanPlayer().getPoisonCounters();
-                final int compPoison = AllZone.getComputerPlayer().getPoisonCounters();
+                final Player ai = getActivatingPlayer();
+                final Player opp = ai.getOpponent();
+                final int humanPoison = opp.getPoisonCounters();
+                final int compPoison = ai.getPoisonCounters();
 
-                if (AllZone.getHumanPlayer().getLife() <= humanPoison) {
-                    tgt.addTarget(AllZone.getHumanPlayer());
+                if (opp.getLife() <= humanPoison) {
+                    tgt.addTarget(opp);
                     return true;
                 }
 
-                if ((((2 * (11 - compPoison)) < AllZone.getComputerPlayer().getLife()) || (compPoison > 7))
-                        && (compPoison < (AllZone.getComputerPlayer().getLife() - 2))) {
-                    tgt.addTarget(AllZone.getComputerPlayer());
+                if ((((2 * (11 - compPoison)) < ai.getLife()) || (compPoison > 7))
+                        && (compPoison < (ai.getLife() - 2))) {
+                    tgt.addTarget(ai);
                     return true;
                 }
 
@@ -891,7 +902,7 @@ public class CardFactorySorceries {
 
             @Override
             public boolean canPlayAI() {
-                return !AllZone.getComputerPlayer().getZone(ZoneType.Library).isEmpty();
+                return !getActivatingPlayer().getZone(ZoneType.Library).isEmpty();
             }
 
         };

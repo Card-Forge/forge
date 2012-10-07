@@ -12,17 +12,18 @@ import forge.game.player.Player;
 public class CardDamageHistory {
 
     private boolean creatureAttackedThisTurn = false;
-    private boolean creatureAttackedLastHumanTurn = false;
-    private boolean creatureAttackedLastComputerTurn = false;
     private boolean creatureAttackedThisCombat = false;
     private boolean creatureBlockedThisCombat = false;
     private boolean creatureBlockedThisTurn = false;
     private boolean creatureGotBlockedThisCombat = false;
     private boolean creatureGotBlockedThisTurn = false;
+
+    private boolean creatureAttackedLastHumanTurn = false;
+    private boolean creatureAttackedLastComputerTurn = false;
     
-    private final List<Player> thisTurnDamaged = new ArrayList<Player>(2);
-    private final List<Player> thisTurnCombatDamaged = new ArrayList<Player>(2);
-    private final List<Player> thisGameDamaged = new ArrayList<Player>(2);
+    private final List<Player> damagedThisTurn = new ArrayList<Player>(2);
+    private final List<Player> damagedThisTurnInCombat = new ArrayList<Player>(2);
+    private final List<Player> damagedThisGame = new ArrayList<Player>(2);
     // used to see if an attacking creature with a triggering attack ability
     // triggered this phase:
     /**
@@ -204,36 +205,36 @@ public class CardDamageHistory {
         return this.creatureGotBlockedThisTurn;
     }
     public final List<Player> getThisTurnDamaged() {
-        return thisTurnDamaged;
+        return damagedThisTurn;
     }
     public final List<Player> getThisTurnCombatDamaged() {
-        return thisTurnCombatDamaged;
+        return damagedThisTurnInCombat;
     }
     public final List<Player> getThisGameDamaged() {
-        return thisGameDamaged;
+        return damagedThisGame;
     }
     /**
      * TODO: Write javadoc for this method.
      * @param player
      */
     public void registerCombatDamage(Player player) {
-        if ( !thisTurnCombatDamaged.contains(player) )
-            thisTurnCombatDamaged.add(player);
+        if ( !damagedThisTurnInCombat.contains(player) )
+            damagedThisTurnInCombat.add(player);
     }
     /**
      * TODO: Write javadoc for this method.
      */
     public void newTurn() {
-        thisTurnCombatDamaged.clear();
-        thisTurnDamaged.clear();
+        damagedThisTurnInCombat.clear();
+        damagedThisTurn.clear();
     }
     /**
      * TODO: Write javadoc for this method.
      * @param player
      */
     public void registerDamage(Player player) {
-        if ( !thisTurnDamaged.contains(player) )
-            thisTurnDamaged.add(player);        
+        if ( !damagedThisTurn.contains(player) )
+            damagedThisTurn.add(player);        
     }
 
 }

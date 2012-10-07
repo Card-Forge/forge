@@ -260,7 +260,7 @@ public class CostExile extends CostPartWithList {
             if (this.from.equals(ZoneType.Library)) {
                 this.setList(ai.getCardsIn(ZoneType.Library, c));
             } else {
-                this.setList(ComputerUtil.chooseExileFrom(this.getFrom(), this.getType(), source,
+                this.setList(ComputerUtil.chooseExileFrom(ai, this.getFrom(), this.getType(), source,
                         ability.getTargetCard(), c));
             }
             if ((this.getList() == null) || (this.getList().size() < c)) {

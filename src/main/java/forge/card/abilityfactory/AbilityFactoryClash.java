@@ -82,7 +82,7 @@ public final class AbilityFactoryClash {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryClash.clashCanPlayAI(this);
+                return AbilityFactoryClash.clashCanPlayAI(getActivatingPlayer(), this);
             }
 
             @Override
@@ -121,7 +121,7 @@ public final class AbilityFactoryClash {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryClash.clashCanPlayAI(this);
+                return AbilityFactoryClash.clashCanPlayAI(getActivatingPlayer(), this);
             }
 
             @Override
@@ -199,14 +199,15 @@ public final class AbilityFactoryClash {
         return dbClash;
     }
 
-    private static boolean clashCanPlayAI(final SpellAbility sa) {
+    private static boolean clashCanPlayAI(final Player ai, final SpellAbility sa) {
         final Target tgt = sa.getTarget();
+        final Player opp = ai.getOpponent();
         if (tgt != null) {
-            if (!AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
+            if (!opp.canBeTargetedBy(sa)) {
                 return false;
             }
             tgt.resetTargets();
-            tgt.addTarget(AllZone.getHumanPlayer());
+            tgt.addTarget(opp);
         }
         return true;
     }

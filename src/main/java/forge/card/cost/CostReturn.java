@@ -184,7 +184,7 @@ public class CostReturn extends CostPartWithList {
                 c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
             }
 
-            this.setList(ComputerUtil.chooseReturnType(this.getType(), source, ability.getTargetCard(), c));
+            this.setList(ComputerUtil.chooseReturnType(ai, this.getType(), source, ability.getTargetCard(), c));
             if (this.getList() == null) {
                 return false;
             }

@@ -198,7 +198,7 @@ public class CostTapType extends CostPartWithList {
             }
         }
 
-        this.setList(ComputerUtil.chooseTapType(this.getType(), source, tap, c));
+        this.setList(ComputerUtil.chooseTapType(ai, this.getType(), source, tap, c));
 
         if (this.getList() == null) {
             System.out.println("Couldn't find a valid card to tap for: " + source.getName());

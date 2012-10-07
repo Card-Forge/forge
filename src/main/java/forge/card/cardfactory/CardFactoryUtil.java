@@ -28,6 +28,7 @@ import java.util.TreeMap;
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.base.Supplier;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -42,7 +43,6 @@ import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Command;
-import forge.CommandArgs;
 import forge.Constant;
 import forge.Counters;
 import forge.GameActionUtil;
@@ -331,8 +331,8 @@ public class CardFactoryUtil {
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public static boolean doesCreatureAttackAI(final Card card) {
-        final List<Card> att = ComputerUtil.getAttackers().getAttackers();
+    public static boolean doesCreatureAttackAI(final Player ai, final Card card) {
+        final List<Card> att = ComputerUtil.getAttackers(ai).getAttackers();
 
         return att.contains(card);
     }
@@ -1583,17 +1583,12 @@ public class CardFactoryUtil {
      * 
      * @return a {@link forge.CommandArgs} object.
      */
-    public static CommandArgs targetHumanAI() {
-        return new CommandArgs() {
-            private static final long serialVersionUID = 8406907523134006697L;
-
-            @Override
-            public void execute(final Object o) {
-                final SpellAbility sa = (SpellAbility) o;
-                sa.setTargetPlayer(AllZone.getHumanPlayer());
-            }
-        };
-    } // targetHumanAI()
+    public static Supplier<Player> targetHumanAI = new Supplier<Player>() {
+        @Override
+        public Player get() {
+            return AllZone.getHumanPlayer();
+        }
+    };
 
     /**
      * <p>
@@ -4204,7 +4199,7 @@ public class CardFactoryUtil {
                         AllZone.getInputControl().setInput(target);
                     } else {
                         // AI choosing what to haunt
-                        final List<Card> oppCreats = CardLists.filterControlledBy(creats, AllZone.getHumanPlayer());
+                        final List<Card> oppCreats = CardLists.filterControlledBy(creats, card.getController().getOpponent());
                         if (oppCreats.size() != 0) {
                             haunterDiesWork.setTargetCard(CardFactoryUtil.getWorstCreatureAI(oppCreats));
                         } else {
@@ -4862,8 +4857,6 @@ public class CardFactoryUtil {
                                     Singletons.getModel().getGameAction().sacrifice(c, null);
                                     count++;
                                 }
-                                // is this needed?
-                                AllZone.getComputerPlayer().getZone(ZoneType.Battlefield).updateObservers();
                             }
                             numCreatures[0] = count;
                         }

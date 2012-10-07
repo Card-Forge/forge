@@ -95,7 +95,7 @@ public final class AbilityFactoryCombat {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryCombat.fogCanPlayAI(af, this);
+                return AbilityFactoryCombat.fogCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -135,7 +135,7 @@ public final class AbilityFactoryCombat {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryCombat.fogCanPlayAI(af, this);
+                return AbilityFactoryCombat.fogCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -234,7 +234,7 @@ public final class AbilityFactoryCombat {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean fogCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    public static boolean fogCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         // AI should only activate this during Human's Declare Blockers phase
         if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
             return false;
@@ -261,7 +261,7 @@ public final class AbilityFactoryCombat {
         }
 
         // Cast it if life is in danger
-        return CombatUtil.lifeInDanger(AllZone.getCombat());
+        return CombatUtil.lifeInDanger(ai, AllZone.getCombat());
     }
 
     /**

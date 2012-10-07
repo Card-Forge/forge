@@ -104,14 +104,7 @@ public final class GameActionUtil {
             public void execute() {
 
                 if (!c.isCopiedSpell()) {
-                    final List<Card> humanNexus = AllZone.getHumanPlayer()
-                            .getCardsIn(ZoneType.Battlefield, "Maelstrom Nexus");
-                    final List<Card> computerNexus = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield,
-                            "Maelstrom Nexus");
-
-                    final List<Card> maelstromNexii = new ArrayList<Card>();
-                    maelstromNexii.addAll(humanNexus);
-                    maelstromNexii.addAll(computerNexus);
+                    final List<Card> maelstromNexii = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Maelstrom Nexus");
 
                     for (final Card nexus : maelstromNexii) {
                         if (CardUtil.getThisTurnCast("Card.YouCtrl", nexus).size() == 1) {
@@ -230,21 +223,11 @@ public final class GameActionUtil {
             @Override
             public void execute() {
 
-                final List<Card> humanThrummingStone = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield,
-                        "Thrumming Stone");
-                final List<Card> computerThrummingStone = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield,
-                        "Thrumming Stone");
-
-                for (int i = 0; i < humanThrummingStone.size(); i++) {
-                    if (c.getController().isHuman()) {
-                        c.addExtrinsicKeyword("Ripple:4");
-                    }
+                final List<Card> thrummingStones = controller.getCardsIn(ZoneType.Battlefield, "Thrumming Stone");
+                for(Card c : thrummingStones) {
+                    c.addExtrinsicKeyword("Ripple:4");
                 }
-                for (int i = 0; i < computerThrummingStone.size(); i++) {
-                    if (c.getController().isComputer()) {
-                        c.addExtrinsicKeyword("Ripple:4");
-                    }
-                }
+                
                 final ArrayList<String> a = c.getKeyword();
                 for (int x = 0; x < a.size(); x++) {
                     if (a.get(x).toString().startsWith("Ripple")) {
@@ -478,9 +461,9 @@ public final class GameActionUtil {
 
             final int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
                     : AbilityFactory.calculateAmount(source, amountString, sourceAbility);
-            if (AllZone.getHumanPlayer().canPayLife(amount) && showYesNoDialog(source, "Do you want to pay "
-                    + amount + " life?")) {
-                AllZone.getHumanPlayer().payLife(amount, null);
+            Player p = Singletons.getControl().getPlayer();
+            if (p.canPayLife(amount) && showYesNoDialog(source, "Do you want to pay " + amount + " life?")) {
+                p.payLife(amount, null);
                 paid.execute();
             } else {
                 unpaid.execute();
@@ -492,9 +475,9 @@ public final class GameActionUtil {
             String amountString = costPart.getAmount();
             final int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
                     : CardFactoryUtil.xCount(source, source.getSVar(amountString));
-            if (AllZone.getHumanPlayer().canPayLife(amount) && showYesNoDialog(source, "Do you want " + source
-                    + " to deal " + amount + " damage to you?")) {
-                AllZone.getHumanPlayer().addDamage(amount, source);
+            Player p = Singletons.getControl().getPlayer();
+            if (p.canPayLife(amount) && showYesNoDialog(source, "Do you want " + source + " to deal " + amount + " damage to you?")) {
+                p.addDamage(amount, source);
                 paid.execute();
             } else {
                 unpaid.execute();

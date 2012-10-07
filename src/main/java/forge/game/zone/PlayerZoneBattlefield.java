@@ -220,8 +220,8 @@ public class PlayerZoneBattlefield extends PlayerZone {
                 final String[] k = keyword.split(":");
                 addMax = -Integer.valueOf(k[2]);
                 if (k[1].equals("Each")) {
-                    AllZone.getHumanPlayer().addMaxLandsToPlay(addMax);
-                    AllZone.getComputerPlayer().addMaxLandsToPlay(addMax);
+                    for(Player p: AllZone.getPlayersInGame())
+                        p.addMaxLandsToPlay(addMax);
                 } else {
                     c.getController().addMaxLandsToPlay(addMax);
                 }

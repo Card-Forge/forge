@@ -150,7 +150,7 @@ public class ComputerUtil {
         final Target tgt = sa.getTarget();
 
         if (cost == null) {
-            ComputerUtil.payManaCost(sa);
+            ComputerUtil.payManaCost(ai, sa);
             sa.chooseTargetAI();
             sa.getBeforePayManaAI().execute();
             AllZone.getStack().addAndUnfreeze(sa);
@@ -310,7 +310,7 @@ public class ComputerUtil {
 
         if (cost == null) {
             // Honestly Counterspells shouldn't use this branch
-            ComputerUtil.payManaCost(bestSA);
+            ComputerUtil.payManaCost(ai, bestSA);
             bestSA.chooseTargetAI();
             bestSA.getBeforePayManaAI().execute();
             AllZone.getStack().addAndUnfreeze(bestSA);
@@ -342,7 +342,7 @@ public class ComputerUtil {
             }
             final Cost cost = sa.getPayCosts();
             if (cost == null) {
-                ComputerUtil.payManaCost(sa);
+                ComputerUtil.payManaCost(ai, sa);
                 AllZone.getStack().add(sa);
             } else {
                 final CostPayment pay = new CostPayment(cost, sa);
@@ -433,7 +433,7 @@ public class ComputerUtil {
 
             final Cost cost = sa.getPayCosts();
             if (cost == null) {
-                ComputerUtil.payManaCost(sa);
+                ComputerUtil.payManaCost(ai, sa);
             } else {
                 final CostPayment pay = new CostPayment(cost, sa);
                 pay.payComputerCosts(ai);
@@ -578,8 +578,8 @@ public class ComputerUtil {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static void payManaCost(final SpellAbility sa) {
-        ComputerUtil.payManaCost(sa, AllZone.getComputerPlayer(), false, 0, true);
+    public static void payManaCost(final Player ai, final SpellAbility sa) {
+        ComputerUtil.payManaCost(sa, ai, false, 0, true);
     }
 
     /**
@@ -589,7 +589,7 @@ public class ComputerUtil {
      * 
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param player
+     * @param ai
      *            a {@link forge.game.player.Player} object.
      * @param test
      *            (is for canPayCost, if true does not change the game state)
@@ -600,11 +600,11 @@ public class ComputerUtil {
      * @return a boolean.
      * @since 1.0.15
      */
-    public static boolean payManaCost(final SpellAbility sa, final Player player, final boolean test,
+    public static boolean payManaCost(final SpellAbility sa, final Player ai, final boolean test,
             final int extraMana, boolean checkPlayable) {
         ManaCost cost = calculateManaCost(sa, test, extraMana);
 
-        final ManaPool manapool = player.getManaPool();
+        final ManaPool manapool = ai.getManaPool();
 
         cost = manapool.payManaFromPool(sa, cost);
 
@@ -615,12 +615,12 @@ public class ComputerUtil {
         }
 
         // get map of mana abilities
-        final HashMap<String, ArrayList<AbilityMana>> manaAbilityMap = ComputerUtil.mapManaSources(player, checkPlayable);
+        final HashMap<String, ArrayList<AbilityMana>> manaAbilityMap = ComputerUtil.mapManaSources(ai, checkPlayable);
         // initialize ArrayList list for mana needed
         final ArrayList<ArrayList<AbilityMana>> partSources = new ArrayList<ArrayList<AbilityMana>>();
         final ArrayList<Integer> partPriority = new ArrayList<Integer>();
         final String[] costParts = cost.toString().replace("X ", "").split(" ");
-        Boolean foundAllSources = findManaSources(manaAbilityMap, partSources, partPriority, costParts);
+        Boolean foundAllSources = findManaSources(ai, manaAbilityMap, partSources, partPriority, costParts);
         if (!foundAllSources) {
             if (!test) {
                 // real payment should not arrive here
@@ -651,10 +651,10 @@ public class ComputerUtil {
                 }
 
                 // Check if AI can still play this mana ability
-                m.setActivatingPlayer(player);
+                m.setActivatingPlayer(ai);
                 // if the AI can't pay the additional costs skip the mana ability
                 if (m.getPayCosts() != null && checkPlayable) {
-                    if (!ComputerUtil.canPayAdditionalCosts(m, player)) {
+                    if (!ComputerUtil.canPayAdditionalCosts(m, ai)) {
                         continue;
                     }
                 } else if (sourceCard.isTapped() && checkPlayable) {
@@ -674,7 +674,7 @@ public class ComputerUtil {
                     if (m.isComboMana()) {
                         String colorChoice = costParts[nPart];
                         m.setExpressChoice(colorChoice);
-                        colorChoice = getComboManaChoice(m, sa, cost);
+                        colorChoice = getComboManaChoice(ai, m, sa, cost);
                         m.setExpressChoice(colorChoice);
                     }
                     // check if ability produces any color
@@ -724,7 +724,7 @@ public class ComputerUtil {
                     // Pay additional costs
                     if (m.getPayCosts() != null) {
                         final CostPayment pay = new CostPayment(m.getPayCosts(), m);
-                        if (!pay.payComputerCosts(player)) {
+                        if (!pay.payComputerCosts(ai)) {
                             continue;
                         }
                     } else {
@@ -751,10 +751,10 @@ public class ComputerUtil {
         } // end of cost parts loop
 
         //check for phyrexian mana
-        if (!cost.isPaid() && cost.containsPhyrexianMana() && AllZone.getComputerPlayer().getLife() > 5) {
+        if (!cost.isPaid() && cost.containsPhyrexianMana() && ai.getLife() > 5) {
             cost.payPhyrexian();
             if (!test) {
-                AllZone.getComputerPlayer().payLife(2, sa.getSourceCard());
+                ai.payLife(2, sa.getSourceCard());
             }
         }
 
@@ -787,7 +787,7 @@ public class ComputerUtil {
      * @param foundAllSources
      * @return Were all mana sources found?
      */
-    private static Boolean findManaSources(final HashMap<String, ArrayList<AbilityMana>> manaAbilityMap,
+    private static Boolean findManaSources(final Player ai, final HashMap<String, ArrayList<AbilityMana>> manaAbilityMap,
             final ArrayList<ArrayList<AbilityMana>> partSources, final ArrayList<Integer> partPriority,
             final String[] costParts) {
         final String[] shortColors = { "W", "U", "B", "R", "G" };
@@ -825,7 +825,7 @@ public class ComputerUtil {
                     String newPart = costParts[nPart].replace("/P", "");
                     if (manaAbilityMap.containsKey(newPart)) {
                         srcFound.addAll(manaAbilityMap.get(newPart));
-                    } else if (AllZone.getComputerPlayer().getLife() > 8) { //Pay with life
+                    } else if (ai.getLife() > 8) { //Pay with life
                         partSources.add(nPart, srcFound);
                         continue;
                     }
@@ -941,33 +941,20 @@ public class ComputerUtil {
      * <p>
      * getAvailableMana.
      * </p>
-     * @param checkPlayable
      * 
-     * @return a {@link forge.CardList} object.
-     */
-    public static List<Card> getAvailableMana(boolean checkPlayable) {
-        return ComputerUtil.getAvailableMana(AllZone.getComputerPlayer(), checkPlayable);
-    } // getAvailableMana()
-
-    // gets available mana sources and sorts them
-    /**
-     * <p>
-     * getAvailableMana.
-     * </p>
-     * 
-     * @param player
+     * @param ai
      *            a {@link forge.game.player.Player} object.
      * @param checkPlayable
      * @return a {@link forge.CardList} object.
      */
-    public static List<Card> getAvailableMana(final Player player, final boolean checkPlayable) {
-        final List<Card> list = player.getCardsIn(ZoneType.Battlefield);
+    public static List<Card> getAvailableMana(final Player ai, final boolean checkPlayable) {
+        final List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
         final List<Card> manaSources = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 if (checkPlayable) {
                     for (final AbilityMana am : c.getAIPlayableMana()) {
-                        am.setActivatingPlayer(player);
+                        am.setActivatingPlayer(ai);
                         if (am.canPlay()) {
                             return true;
                         }
@@ -1022,9 +1009,9 @@ public class ComputerUtil {
 
                 // if the AI can't pay the additional costs skip the mana
                 // ability
-                m.setActivatingPlayer(AllZone.getComputerPlayer());
+                m.setActivatingPlayer(ai);
                 if (cost != null) {
-                    if (!ComputerUtil.canPayAdditionalCosts(m, player)) {
+                    if (!ComputerUtil.canPayAdditionalCosts(m, ai)) {
                         continue;
                     }
                 }
@@ -1080,12 +1067,12 @@ public class ComputerUtil {
      * mapManaSources.
      * </p>
      * 
-     * @param player
+     * @param ai
      *            a {@link forge.game.player.Player} object.
      * @param checkPlayable TODO
      * @return HashMap<String, List<Card>>
      */
-    public static HashMap<String, ArrayList<AbilityMana>> mapManaSources(final Player player, boolean checkPlayable) {
+    public static HashMap<String, ArrayList<AbilityMana>> mapManaSources(final Player ai, boolean checkPlayable) {
         final HashMap<String, ArrayList<AbilityMana>> manaMap = new HashMap<String, ArrayList<AbilityMana>>();
 
         final ArrayList<AbilityMana> whiteSources = new ArrayList<AbilityMana>();
@@ -1097,7 +1084,7 @@ public class ComputerUtil {
         final ArrayList<AbilityMana> snowSources = new ArrayList<AbilityMana>();
 
         // Get list of current available mana sources
-        final List<Card> manaSources = ComputerUtil.getAvailableMana(checkPlayable);
+        final List<Card> manaSources = ComputerUtil.getAvailableMana(ai, checkPlayable);
 
         // Loop over all mana sources
         for (int i = 0; i < manaSources.size(); i++) {
@@ -1106,7 +1093,7 @@ public class ComputerUtil {
 
             // Loop over all mana abilities for a source
             for (final AbilityMana m : manaAbilities) {
-                m.setActivatingPlayer(AllZone.getComputerPlayer());
+                m.setActivatingPlayer(ai);
                 if (!m.canPlay() && checkPlayable) {
                     continue;
                 }
@@ -1182,7 +1169,7 @@ public class ComputerUtil {
      *            a {@link forge.card.mana.ManaCost} object.
      * @return String
      */
-    public static String getComboManaChoice(final AbilityMana abMana, final SpellAbility sa, final ManaCost cost) {
+    public static String getComboManaChoice(final Player ai, final AbilityMana abMana, final SpellAbility sa, final ManaCost cost) {
 
         final AbilityFactory af = abMana.getAbilityFactory();
         final HashMap<String, String> params = af.getMapParams();
@@ -1224,7 +1211,7 @@ public class ComputerUtil {
                     }
                 }
                 // check if combo mana can produce most common color in hand
-                String commonColor = CardFactoryUtil.getMostProminentColor(AllZone.getComputerPlayer().getCardsIn(
+                String commonColor = CardFactoryUtil.getMostProminentColor(ai.getCardsIn(
                         ZoneType.Hand));
                 if (!commonColor.isEmpty() && abMana.getComboColors().contains(InputPayManaCostUtil.getShortColorString(commonColor))) {
                     choice = InputPayManaCostUtil.getShortColorString(commonColor);
@@ -1579,7 +1566,7 @@ public class ComputerUtil {
             if (hand.size() <= 0) {
                 continue;
             }
-            List<Card> aiCards = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+            List<Card> aiCards = ai.getCardsIn(ZoneType.Battlefield);
             final int numLandsInPlay = Iterables.size(Iterables.filter(aiCards, CardPredicates.Presets.LANDS));
             final List<Card> landsInHand = CardLists.filter(hand, CardPredicates.Presets.LANDS);
             final int numLandsInHand = landsInHand.size();
@@ -1611,84 +1598,7 @@ public class ComputerUtil {
         return discardList;
     }
 
-    /**
-     * <p>
-     * chooseExileType.
-     * </p>
-     * 
-     * @param type
-     *            a {@link java.lang.String} object.
-     * @param activate
-     *            a {@link forge.Card} object.
-     * @param target
-     *            a {@link forge.Card} object.
-     * @param amount
-     *            a int.
-     * @return a {@link forge.CardList} object.
-     */
-    public static List<Card> chooseExileType(final String type, final Card activate, final Card target, final int amount) {
-        return ComputerUtil.chooseExileFrom(ZoneType.Battlefield, type, activate, target, amount);
-    }
 
-    /**
-     * <p>
-     * chooseExileFromHandType.
-     * </p>
-     * 
-     * @param type
-     *            a {@link java.lang.String} object.
-     * @param activate
-     *            a {@link forge.Card} object.
-     * @param target
-     *            a {@link forge.Card} object.
-     * @param amount
-     *            a int.
-     * @return a {@link forge.CardList} object.
-     */
-    public static List<Card> chooseExileFromHandType(final String type, final Card activate, final Card target,
-            final int amount) {
-        return ComputerUtil.chooseExileFrom(ZoneType.Hand, type, activate, target, amount);
-    }
-
-    /**
-     * <p>
-     * chooseExileFromGraveType.
-     * </p>
-     * 
-     * @param type
-     *            a {@link java.lang.String} object.
-     * @param activate
-     *            a {@link forge.Card} object.
-     * @param target
-     *            a {@link forge.Card} object.
-     * @param amount
-     *            a int.
-     * @return a {@link forge.CardList} object.
-     */
-    public static List<Card> chooseExileFromGraveType(final String type, final Card activate, final Card target,
-            final int amount) {
-        return ComputerUtil.chooseExileFrom(ZoneType.Graveyard, type, activate, target, amount);
-    }
-
-    /**
-     * <p>
-     * chooseExileFromStackType.
-     * </p>
-     * 
-     * @param type
-     *            a {@link java.lang.String} object.
-     * @param activate
-     *            a {@link forge.Card} object.
-     * @param target
-     *            a {@link forge.Card} object.
-     * @param amount
-     *            a int.
-     * @return a {@link forge.CardList} object.
-     */
-    public static List<Card> chooseExileFromStackType(final String type, final Card activate, final Card target,
-            final int amount) {
-        return ComputerUtil.chooseExileFrom(ZoneType.Stack, type, activate, target, amount);
-    }
 
     /**
      * <p>
@@ -1707,7 +1617,7 @@ public class ComputerUtil {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public static List<Card> chooseExileFrom(final ZoneType zone, final String type, final Card activate,
+    public static List<Card> chooseExileFrom(final Player ai, final ZoneType zone, final String type, final Card activate,
             final Card target, final int amount) {
         List<Card> typeList = new ArrayList<Card>();
         if (zone.equals(ZoneType.Stack)) {
@@ -1716,7 +1626,7 @@ public class ComputerUtil {
                 typeList = CardLists.getValidCards(typeList, type.split(","), activate.getController(), activate);
             }
         } else {
-            typeList = AllZone.getComputerPlayer().getCardsIn(zone);
+            typeList = ai.getCardsIn(zone);
             typeList = CardLists.getValidCards(typeList, type.split(","), activate.getController(), activate);
         }
         if ((target != null) && target.getController().isComputer() && typeList.contains(target)) {
@@ -1751,8 +1661,8 @@ public class ComputerUtil {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public static List<Card> chooseTapType(final String type, final Card activate, final boolean tap, final int amount) {
-        List<Card> typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+    public static List<Card> chooseTapType(final Player ai, final String type, final Card activate, final boolean tap, final int amount) {
+        List<Card> typeList = ai.getCardsIn(ZoneType.Battlefield);
         typeList = CardLists.getValidCards(typeList, type.split(","), activate.getController(), activate);
 
         // is this needed?
@@ -1791,8 +1701,8 @@ public class ComputerUtil {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public static List<Card> chooseUntapType(final String type, final Card activate, final boolean untap, final int amount) {
-        List<Card> typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+    public static List<Card> chooseUntapType(final Player ai, final String type, final Card activate, final boolean untap, final int amount) {
+        List<Card> typeList = ai.getCardsIn(ZoneType.Battlefield);
         typeList = CardLists.getValidCards(typeList, type.split(","), activate.getController(), activate);
 
         // is this needed?
@@ -1831,8 +1741,8 @@ public class ComputerUtil {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public static List<Card> chooseReturnType(final String type, final Card activate, final Card target, final int amount) {
-        List<Card> typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+    public static List<Card> chooseReturnType(final Player ai, final String type, final Card activate, final Card target, final int amount) {
+        List<Card> typeList = ai.getCardsIn(ZoneType.Battlefield);
         typeList = CardLists.getValidCards(typeList, type.split(","), activate.getController(), activate);
         if ((target != null) && target.getController().isComputer() && typeList.contains(target)) {
             // bounce
@@ -1863,11 +1773,12 @@ public class ComputerUtil {
      * 
      * @return a {@link forge.game.phase.Combat} object.
      */
-    public static Combat getAttackers() {
-        final ComputerUtilAttack att = new ComputerUtilAttack(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield),
-                AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield));
+    public static Combat getAttackers(final Player ai) {
+        final Player opp = ai.getOpponent();
+        final ComputerUtilAttack att = new ComputerUtilAttack(ai.getCardsIn(ZoneType.Battlefield),
+                opp.getCardsIn(ZoneType.Battlefield));
 
-        return att.getAttackers();
+        return att.getAttackers(ai);
     }
 
     /**
@@ -1877,10 +1788,10 @@ public class ComputerUtil {
      * 
      * @return a {@link forge.game.phase.Combat} object.
      */
-    public static Combat getBlockers() {
-        final List<Card> blockers = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+    public static Combat getBlockers(final Player ai) {
+        final List<Card> blockers = ai.getCardsIn(ZoneType.Battlefield);
 
-        return ComputerUtilBlock.getBlockers(AllZone.getCombat(), blockers);
+        return ComputerUtilBlock.getBlockers(ai, AllZone.getCombat(), blockers);
     }
 
     /**
@@ -1957,7 +1868,7 @@ public class ComputerUtil {
      *            the source SpellAbility
      * @return the card list
      */
-    public static List<Card> sacrificePermanents(final int amount, final List<Card> list, final boolean destroy,
+    public static List<Card> sacrificePermanents(final Player ai, final int amount, final List<Card> list, final boolean destroy,
             SpellAbility source) {
         final List<Card> sacList = new ArrayList<Card>();
         // used in Annihilator and AF_Sacrifice
@@ -1992,7 +1903,7 @@ public class ComputerUtil {
                 if (CardLists.getNotType(list, "Creature").size() == 0) {
                     c = CardFactoryUtil.getWorstCreatureAI(list);
                 } else if (CardLists.getNotType(list, "Land").size() == 0) {
-                    c = CardFactoryUtil.getWorstLand(AllZone.getComputerPlayer());
+                    c = CardFactoryUtil.getWorstLand(ai);
                 } else {
                     c = CardFactoryUtil.getWorstPermanentAI(list, false, false, false, false);
                 }
@@ -2216,8 +2127,8 @@ public class ComputerUtil {
                     combat.addAttacker(att);
                 }
             }
-            combat = ComputerUtilBlock.getBlockers(combat, AllZoneUtil.getCreaturesInPlay(ai));
-            if (!CombatUtil.lifeInDanger(combat)) {
+            combat = ComputerUtilBlock.getBlockers(ai, combat, AllZoneUtil.getCreaturesInPlay(ai));
+            if (!CombatUtil.lifeInDanger(ai, combat)) {
                 // Otherwise, return false. Do not play now.
                 ret = false;
             }

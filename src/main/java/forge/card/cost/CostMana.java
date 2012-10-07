@@ -198,7 +198,7 @@ public class CostMana extends CostPart {
      */
     @Override
     public final void payAI(final SpellAbility ability, final Card source, final CostPayment payment) {
-        ComputerUtil.payManaCost(ability);
+        ComputerUtil.payManaCost(ability.getActivatingPlayer(), ability);
     }
 
     /*

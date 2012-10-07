@@ -337,14 +337,14 @@ public class CField implements ICDoc {
     /** */
     private void flashbackAction() {
         if (!CField.this.player.isComputer()) {
-            new ZoneAction(AllZone.getHumanPlayer().getZone(ZoneType.Graveyard),
+            new ZoneAction(player.getZone(ZoneType.Graveyard),
                     NewConstants.Lang.GuiDisplay.HUMAN_FLASHBACK) {
 
                 private static final long serialVersionUID = 8120331222693706164L;
 
                 @Override
                 protected List<Card> getCardsAsIterable() {
-                    return CardFactoryUtil.getExternalZoneActivationCards(AllZone.getHumanPlayer());
+                    return CardFactoryUtil.getExternalZoneActivationCards(player);
                 }
 
                 @Override
@@ -361,7 +361,7 @@ public class CField implements ICDoc {
 
                 @Override
                 protected List<Card> getCardsAsIterable() {
-                    return CardFactoryUtil.getExternalZoneActivationCards(AllZone.getComputerPlayer());
+                    return CardFactoryUtil.getExternalZoneActivationCards(player);
                 }
 
                 @Override
@@ -407,13 +407,7 @@ public class CField implements ICDoc {
     }
 
     private void avatarAction() {
-        if (CField.this.player.isComputer()) {
-            CMessage.SINGLETON_INSTANCE
-                .getInputControl().selectPlayer(AllZone.getComputerPlayer());
-        } else {
-            CMessage.SINGLETON_INSTANCE
-                .getInputControl().selectPlayer(AllZone.getHumanPlayer());
-        }
+        CMessage.SINGLETON_INSTANCE.getInputControl().selectPlayer(player);
     }
 
     /** */

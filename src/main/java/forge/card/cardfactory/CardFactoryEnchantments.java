@@ -158,8 +158,8 @@ class CardFactoryEnchantments {
 
                 @Override
                 public boolean canPlayAI() {
-                    final List<Card> compCreats = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
-                    final List<Card> humCreats = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+                    final List<Card> compCreats = AllZoneUtil.getCreaturesInPlay(getActivatingPlayer());
+                    final List<Card> humCreats = AllZoneUtil.getCreaturesInPlay(getActivatingPlayer().getOpponent());
 
                     // only play standstill if comp controls more creatures than
                     // human

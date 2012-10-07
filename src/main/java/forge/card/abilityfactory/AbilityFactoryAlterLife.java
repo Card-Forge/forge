@@ -331,7 +331,7 @@ public class AbilityFactoryAlterLife {
         }
         boolean lifeCritical = life <= 5;
         lifeCritical |= (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DAMAGE)
-                && CombatUtil.lifeInDanger(AllZone.getCombat()));
+                && CombatUtil.lifeInDanger(ai, AllZone.getCombat()));
 
         if (abCost != null && !lifeCritical) {
             if (!CostUtil.checkSacrificeCost(ai, abCost, source, false)) {

@@ -323,8 +323,8 @@ public class AbilityFactoryPreventDamage {
                             // Don't need to worry about Combat Damage during AI's turn
                             final Player p = (Player) o;
                             if (!handler.isPlayerTurn(p)) {
-                                flag |= (p.isComputer() && ((CombatUtil.wouldLoseLife(AllZone.getCombat()) && sa
-                                        .isAbility()) || CombatUtil.lifeInDanger(AllZone.getCombat())));
+                                flag |= (p.isComputer() && ((CombatUtil.wouldLoseLife(ai, AllZone.getCombat()) && sa
+                                        .isAbility()) || CombatUtil.lifeInDanger(ai, AllZone.getCombat())));
                             }
                         }
                     }
@@ -368,8 +368,8 @@ public class AbilityFactoryPreventDamage {
 
         } // Protect combatants
         else if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
-            if (sa.canTarget(ai) && CombatUtil.wouldLoseLife(AllZone.getCombat())
-                    && (CombatUtil.lifeInDanger(AllZone.getCombat()) || sa.isAbility())
+            if (sa.canTarget(ai) && CombatUtil.wouldLoseLife(ai, AllZone.getCombat())
+                    && (CombatUtil.lifeInDanger(ai, AllZone.getCombat()) || sa.isAbility())
                     && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(ai.getOpponent())) {
                 tgt.addTarget(ai);
                 chance = true;

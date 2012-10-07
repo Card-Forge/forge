@@ -1663,6 +1663,7 @@ public class AbilityFactoryAttach {
             return false;
         }
 
+        final Player opp = ai.getOpponent();
         // Check if there are any valid targets
         ArrayList<Object> targets = new ArrayList<Object>();
         final Target tgt = sa.getTarget();
@@ -1673,7 +1674,7 @@ public class AbilityFactoryAttach {
         if (!mandatory && card.isEquipment() && !targets.isEmpty()) {
             Card newTarget = (Card) targets.get(0);
             //don't equip human creatures
-            if (newTarget.getController().equals(AllZone.getHumanPlayer())) {
+            if (newTarget.getController().equals(opp)) {
                 return false;
             }
 

@@ -428,7 +428,7 @@ public class AbilityFactoryPump {
                     && !CardLists.getKeyword(AllZone.getCombat().getAttackerList(), "Flying").isEmpty()
                     && !card.hasKeyword("Reach")
                     && CombatUtil.canBlock(card)
-                    && CombatUtil.lifeInDanger(AllZone.getCombat())) {
+                    && CombatUtil.lifeInDanger(ai, AllZone.getCombat())) {
                 return true;
             }
             Predicate<Card> flyingOrReach = Predicates.or(CardPredicates.hasKeyword("Flying"), CardPredicates.hasKeyword("Reach"));
@@ -442,7 +442,7 @@ public class AbilityFactoryPump {
                     && ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     && !CardLists.getKeyword(AllZone.getCombat().getAttackerList(), "Horsemanship").isEmpty()
                     && CombatUtil.canBlock(card)
-                    && CombatUtil.lifeInDanger(AllZone.getCombat())) {
+                    && CombatUtil.lifeInDanger(ai, AllZone.getCombat())) {
                 return true;
             }
             if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
@@ -638,7 +638,7 @@ public class AbilityFactoryPump {
         if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                 && phase.isPlayerTurn(ai)
                 && attack > 0
-                && CardFactoryUtil.doesCreatureAttackAI(c)) {
+                && CardFactoryUtil.doesCreatureAttackAI(ai, c)) {
             return true;
         }
 
@@ -683,7 +683,7 @@ public class AbilityFactoryPump {
                 && c.isBlocking()
                 && defense > 0
                 && attackerHasTrample
-                && (sa.isAbility() || CombatUtil.lifeInDanger(AllZone.getCombat()))) {
+                && (sa.isAbility() || CombatUtil.lifeInDanger(ai, AllZone.getCombat()))) {
             return true;
         }
 

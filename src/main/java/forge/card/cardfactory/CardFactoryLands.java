@@ -95,29 +95,31 @@ class CardFactoryLands {
 
                 public void computerExecute() {
                     boolean needsTheMana = false;
-                    if (AllZone.getComputerPlayer().getLife() > 3) {
-                        final int landsize = AllZoneUtil.getPlayerLandsInPlay(AllZone.getComputerPlayer()).size();
-                        for (Card c : AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand)) {
+                    final Player ai = card.getController();
+                    if (ai.getLife() > 3) {
+                        final int landsize = AllZoneUtil.getPlayerLandsInPlay(ai).size();
+                        for (Card c : ai.getCardsIn(ZoneType.Hand)) {
                             if (landsize == c.getCMC()) {
                                 needsTheMana = true;
                             }
                         }
                     }
                     if (needsTheMana) {
-                        AllZone.getComputerPlayer().payLife(2, card);
+                        ai.payLife(2, card);
                     } else {
                         this.tapCard();
                     }
                 }
 
                 public void humanExecute() {
-                    final int life = card.getController().getLife();
+                    final Player human = card.getController();
+                    final int life = human.getLife();
                     if (2 < life) {
 
                         final String question = String.format("Pay 2 life? If you don't, %s enters the battlefield tapped.", card.getName());
 
                         if (GameActionUtil.showYesNoDialog(card, question.toString())) {
-                            AllZone.getHumanPlayer().payLife(2, card);
+                            human.payLife(2, card);
                         } else {
                             this.tapCard();
                         }
@@ -172,7 +174,7 @@ class CardFactoryLands {
                         return false;
                     }
                     this.inPlay.clear();
-                    this.inPlay.addAll(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield));
+                    this.inPlay.addAll(getActivatingPlayer().getCardsIn(ZoneType.Battlefield));
                     return (CardLists.filter(this.inPlay, targets).size() > 1) && super.canPlayAI();
                 }
 
@@ -279,7 +281,7 @@ class CardFactoryLands {
                 }
 
                 public void computerExecute() {
-                    List<Card> hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
+                    List<Card> hand = card.getController().getCardsIn(ZoneType.Hand);
                     hand = CardLists.getType(hand, type);
                     if (hand.size() > 0) {
                         this.revealCard(hand.get(0));

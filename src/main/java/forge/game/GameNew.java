@@ -18,11 +18,9 @@ import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
-import forge.CardPredicates.Presets;
 import forge.CardPredicates;
 import forge.CardUtil;
 import forge.Constant.Preferences;
-import forge.GameAction;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.control.input.InputMulligan;
@@ -39,8 +37,6 @@ import forge.gui.match.views.VAntes;
 import forge.gui.toolbox.FLabel;
 import forge.item.CardPrinted;
 import forge.properties.ForgePreferences.FPref;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants.Lang.GameAction.GameActionText;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 
@@ -219,13 +215,8 @@ public class GameNew {
 
         // Only cut/coin toss if it's the first game of the match
         if (Singletons.getModel().getMatchState().getGamesPlayedCount() == 0) {
-            // New code to determine who goes first. Delete this if it doesn't
-            // work properly
-            if (Singletons.getModel().getGameAction().isStartCut()) {
-                GameNew.seeWhoPlaysFirst();
-            } else {
-                GameNew.seeWhoPlaysFirstDice();
-            }
+            GameNew.seeWhoPlaysFirstDice();
+
         } else if (Singletons.getModel().getMatchState().hasWonLastGame(AllZone.getHumanPlayer().getName())) {
             // if player won last, AI starts
             GameNew.computerPlayOrDraw("Computer lost the last game.");
@@ -385,88 +376,6 @@ public class GameNew {
             computerPlayOrDraw(dieRollMessage(playerDie, computerDie));
         }
     } // seeWhoPlaysFirstDice()
-
-    /**
-     * <p>
-     * seeWhoPlaysFirst.
-     * </p>
-     */
-    private static void seeWhoPlaysFirst() {
-        final GameAction ga = Singletons.getModel().getGameAction();
-        Predicate<Card> nonLand = Predicates.not(Presets.LANDS);
-        Iterable<Card> hLibrary = Iterables.filter(AllZone.getHumanPlayer().getCardsIn(ZoneType.Library), nonLand);
-        Iterable<Card> cLibrary = Iterables.filter(AllZone.getComputerPlayer().getCardsIn(ZoneType.Library), nonLand);
-
-
-        final boolean starterDetermined = false;
-        int cutCount = 0;
-        final int cutCountMax = 20;
-        for (int i = 0; i < cutCountMax; i++) {
-            if (starterDetermined) {
-                break;
-            }
-
-            Card hRandom = Aggregates.random(hLibrary);
-            if ( null != hRandom ) {
-                ga.setHumanCut(hRandom);
-            } else {
-                GameNew.computerStartsGame();
-                JOptionPane.showMessageDialog(null, ForgeProps.getLocalized(GameActionText.HUMAN_MANA_COST) + "\r\n"
-                        + ForgeProps.getLocalized(GameActionText.COMPUTER_STARTS), "", JOptionPane.INFORMATION_MESSAGE);
-                return;
-            }
-
-            Card cRandom = Aggregates.random(cLibrary);
-            if (cRandom != null) {
-                ga.setComputerCut(cRandom);
-            } else {
-                JOptionPane.showMessageDialog(null, ForgeProps.getLocalized(GameActionText.COMPUTER_MANA_COST) + "\r\n"
-                        + ForgeProps.getLocalized(GameActionText.HUMAN_STARTS), "", JOptionPane.INFORMATION_MESSAGE);
-                return;
-            }
-
-            cutCount = cutCount + 1;
-            ga.moveTo(AllZone.getHumanPlayer().getZone(ZoneType.Library),
-                    ga.getHumanCut());
-            ga.moveTo(AllZone.getComputerPlayer().getZone(ZoneType.Library),
-                    ga.getComputerCut());
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(ForgeProps.getLocalized(GameActionText.HUMAN_CUT) + ga.getHumanCut().getName() + " ("
-                    + ga.getHumanCut().getManaCost() + ")" + "\r\n");
-            sb.append(ForgeProps.getLocalized(GameActionText.COMPUTER_CUT) + ga.getComputerCut().getName() + " ("
-                    + ga.getComputerCut().getManaCost() + ")" + "\r\n");
-            sb.append("\r\n" + "Number of times the deck has been cut: " + cutCount + "\r\n");
-            if (ga.getComputerCut().getManaCost().getCMC() > ga.getHumanCut().getManaCost().getCMC()) {
-                GameNew.computerStartsGame();
-                JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GameActionText.COMPUTER_STARTS), "",
-                        JOptionPane.INFORMATION_MESSAGE);
-                return;
-            } else if (ga.getComputerCut().getManaCost().getCMC() < ga.getHumanCut().getManaCost().getCMC()) {
-                JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GameActionText.HUMAN_STARTS), "",
-                        JOptionPane.INFORMATION_MESSAGE);
-                return;
-            } else {
-                sb.append(ForgeProps.getLocalized(GameActionText.EQUAL_CONVERTED_MANA) + "\r\n");
-                if (i == (cutCountMax - 1)) {
-                    sb.append(ForgeProps.getLocalized(GameActionText.RESOLVE_STARTER));
-                    if (MyRandom.getRandom().nextInt(2) == 1) {
-                        JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GameActionText.HUMAN_WIN), "",
-                                JOptionPane.INFORMATION_MESSAGE);
-                    } else {
-                        GameNew.computerStartsGame();
-                        JOptionPane.showMessageDialog(null, sb + ForgeProps.getLocalized(GameActionText.COMPUTER_WIN),
-                                "", JOptionPane.INFORMATION_MESSAGE);
-                    }
-                    return;
-                } else {
-                    sb.append(ForgeProps.getLocalized(GameActionText.CUTTING_AGAIN));
-                }
-                JOptionPane.showMessageDialog(null, sb, "", JOptionPane.INFORMATION_MESSAGE);
-            }
-        } // for-loop for multiple card cutting
-
-    } // seeWhoPlaysFirst()
 
 
     private static void computerStartsGame() {

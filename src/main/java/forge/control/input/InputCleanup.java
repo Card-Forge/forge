@@ -21,6 +21,7 @@ import forge.AllZone;
 import forge.Card;
 import forge.Singletons;
 import forge.game.phase.CombatUtil;
+import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
@@ -41,13 +42,14 @@ public class InputCleanup extends Input {
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().isComputer()) {
-            this.aiCleanupDiscard();
+        final Player active = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn(); 
+        if (active.isComputer()) {
+            this.aiCleanupDiscard(active);
             return;
         }
 
-        final int n = AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand).size();
-        final int max = AllZone.getHumanPlayer().getMaxHandSize();
+        final int n = active.getCardsIn(ZoneType.Hand).size();
+        final int max = active.getMaxHandSize();
         // goes to the next phase
         if (n <= max || max <= -1) {
             CombatUtil.removeAllDamage();
@@ -83,12 +85,12 @@ public class InputCleanup extends Input {
      * AI_CleanupDiscard.
      * </p>
      */
-    public void aiCleanupDiscard() {
-        final int size = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand).size();
+    public void aiCleanupDiscard(final Player ai) {
+        final int size = ai.getCardsIn(ZoneType.Hand).size();
 
-        if (AllZone.getComputerPlayer().getMaxHandSize() != -1) {
-            final int numDiscards = size - AllZone.getComputerPlayer().getMaxHandSize();
-            AllZone.getComputerPlayer().discard(numDiscards, null, false);
+        if (ai.getMaxHandSize() != -1) {
+            final int numDiscards = size - ai.getMaxHandSize();
+            ai.discard(numDiscards, null, false);
         }
         CombatUtil.removeAllDamage();
 

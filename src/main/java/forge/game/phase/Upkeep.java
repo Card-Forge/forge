@@ -654,7 +654,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 } // end resolve()
             }; // end noPay ability
 
-            Player cp = c.getController(); 
+            final Player cp = c.getController(); 
             if (cp.isHuman()) {
                 final String question = "Pay Demonic Hordes upkeep cost?";
                 if (GameActionUtil.showYesNoDialog(c, question)) {
@@ -688,7 +688,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     final Ability computerPay = new Ability(c, "0") {
                         @Override
                         public void resolve() {
-                            ComputerUtil.payManaCost(noPay);
+                            ComputerUtil.payManaCost(cp, noPay);
                         }
                     };
                     computerPay.setStackDescription("Computer pays Demonic Hordes upkeep cost");

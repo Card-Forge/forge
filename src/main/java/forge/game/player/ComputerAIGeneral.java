@@ -281,7 +281,7 @@ public class ComputerAIGeneral implements Computer {
     public final void declareAttackers() {
         // 12/2/10(sol) the decision making here has moved to getAttackers()
 
-        AllZone.setCombat(ComputerUtil.getAttackers());
+        AllZone.setCombat(ComputerUtil.getAttackers(player));
 
         final List<Card> att = AllZone.getCombat().getAttackers();
         if (!att.isEmpty()) {
@@ -310,7 +310,7 @@ public class ComputerAIGeneral implements Computer {
     public final void declareBlockers() {
         final List<Card> blockers = AllZoneUtil.getCreaturesInPlay(player);
 
-        AllZone.setCombat(ComputerUtilBlock.getBlockers(AllZone.getCombat(), blockers));
+        AllZone.setCombat(ComputerUtilBlock.getBlockers(player, AllZone.getCombat(), blockers));
         
         CombatUtil.orderMultipleCombatants(AllZone.getCombat());
 

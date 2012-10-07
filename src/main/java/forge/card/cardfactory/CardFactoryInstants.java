@@ -129,7 +129,7 @@ public class CardFactoryInstants {
                 }
 
                 public void humanResolve() {
-                    final List<Card> libraryList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library);
+                    final List<Card> libraryList = card.getController().getCardsIn(ZoneType.Library);
                     final List<Card> selectedCards = new ArrayList<Card>();
 
                     Object o = GuiChoose.oneOrNone("Select first card", libraryList);
@@ -169,7 +169,7 @@ public class CardFactoryInstants {
                 }
 
                 public void computerResolve() {
-                    final List<Card> list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Library);
+                    final List<Card> list = card.getController().getCardsIn(ZoneType.Library);
                     final List<Card> selectedCards = new ArrayList<Card>();
 
                     // pick best creature
@@ -214,7 +214,7 @@ public class CardFactoryInstants {
 
                 @Override
                 public boolean canPlayAI() {
-                    Iterable<Card> creature = Iterables.filter(AllZone.getComputerPlayer().getCardsIn(ZoneType.Library), CardPredicates.Presets.CREATURES); 
+                    Iterable<Card> creature = Iterables.filter(getActivatingPlayer().getCardsIn(ZoneType.Library), CardPredicates.Presets.CREATURES); 
                     return Iterables.size(creature) >= 3;
                 }
             }; // SpellAbility
@@ -264,15 +264,16 @@ public class CardFactoryInstants {
 
                 @Override
                 public void chooseTargetAI() {
-                    this.setTargetPlayer(AllZone.getHumanPlayer());
+                    this.setTargetPlayer(getActivatingPlayer().getOpponent());
                 } // chooseTargetAI()
 
                 @Override
                 public boolean canPlayAI() {
-                    final List<Card> graveList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
+                    final Player ai = getActivatingPlayer();
+                    final Player opp = ai.getOpponent();
 
-                    final int maxX = ComputerUtil.getAvailableMana(true).size() - 1;
-                    return (maxX >= 3) && (graveList.size() > 0);
+                    final int maxX = ComputerUtil.getAvailableMana(ai, true).size() - 1;
+                    return (maxX >= 3) && !opp.getZone(ZoneType.Graveyard).isEmpty();
                 }
             };
 

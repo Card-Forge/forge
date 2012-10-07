@@ -41,6 +41,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
+import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -83,9 +84,10 @@ class CardFactoryAuras {
                     if (!super.canPlayAI()) {
                         return false;
                     }
+                    final Player opp = getActivatingPlayer().getOpponent();
                     final String[] landTypes = new String[] { "Plains", "Island", "Swamp", "Mountain", "Forest" };
                     final HashMap<String, Integer> humanLandCount = new HashMap<String, Integer>();
-                    final List<Card> humanlands = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
+                    final List<Card> humanlands = AllZoneUtil.getPlayerLandsInPlay(opp);
 
                     for (final String landType : landTypes) {
                         humanLandCount.put(landType, 0);
@@ -113,7 +115,7 @@ class CardFactoryAuras {
                     }
 
                     newType[0] = landTypes[minAt];
-                    List<Card> list = AllZoneUtil.getPlayerLandsInPlay(AllZone.getHumanPlayer());
+                    List<Card> list = AllZoneUtil.getPlayerLandsInPlay(opp);
                     list = CardLists.getNotType(list, newType[0]); // Don't enchant lands
                                                         // that already have the
                                                         // type
@@ -266,7 +268,7 @@ class CardFactoryAuras {
 
                 @Override
                 public boolean canPlayAI() {
-                    List<Card> list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+                    List<Card> list = AllZoneUtil.getCreaturesInPlay(getActivatingPlayer().getOpponent());
                     list = CardLists.getKeyword(list, "Flying");
                     if (list.isEmpty()) {
                         return false;
@@ -370,13 +372,13 @@ class CardFactoryAuras {
                 @Override
                 public boolean canPlayAI() {
 
-                    final List<Card> stuffy = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield, "Stuffy Doll");
+                    final List<Card> stuffy = getActivatingPlayer().getCardsIn(ZoneType.Battlefield, "Stuffy Doll");
 
                     if (stuffy.size() > 0) {
                         this.setTargetCard(stuffy.get(0));
                         return true;
                     } else {
-                        final List<Card> list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+                        final List<Card> list = AllZoneUtil.getCreaturesInPlay(getActivatingPlayer().getOpponent());
 
                         if (list.isEmpty()) {
                             return false;

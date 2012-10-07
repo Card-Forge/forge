@@ -17,7 +17,6 @@
  */
 package forge.card.cost;
 
-import forge.AllZone;
 import forge.Card;
 import forge.GameActionUtil;
 import forge.card.abilityfactory.AbilityFactory;
@@ -111,7 +110,7 @@ public class CostPayLife extends CostPart {
      */
     @Override
     public final void payAI(final SpellAbility ability, final Card source, final CostPayment payment) {
-        AllZone.getComputerPlayer().payLife(this.getLastPaidAmount(), null);
+        ability.getActivatingPlayer().payLife(this.getLastPaidAmount(), null);
     }
 
     /*

@@ -22,10 +22,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
+import com.google.common.base.Supplier;
+
 import forge.Card;
 
 import forge.Command;
-import forge.CommandArgs;
 import forge.GameEntity;
 import forge.card.CardManaCost;
 import forge.card.abilityfactory.AbilityFactory;
@@ -117,14 +118,7 @@ public abstract class SpellAbility {
 
     private Command beforePayManaAI = Command.BLANK;
 
-    private CommandArgs randomTarget = new CommandArgs() {
-
-        private static final long serialVersionUID = 1795025064923737374L;
-
-        @Override
-        public void execute(final Object o) {
-        }
-    };
+    private Supplier<Player> randomTarget = null;
 
     private List<Card> tappedForConvoke = new ArrayList<Card>();
 
@@ -214,7 +208,7 @@ public abstract class SpellAbility {
      * </p>
      */
     public void chooseTargetAI() {
-        this.randomTarget.execute(this);
+        setTargetPlayer(this.randomTarget.get());
     }
 
     /**
@@ -225,7 +219,7 @@ public abstract class SpellAbility {
      * @param c
      *            a {@link forge.CommandArgs} object.
      */
-    public void setChooseTargetAI(final CommandArgs c) {
+    public void setChooseTargetAI(final Supplier<Player> c) {
         this.randomTarget = c;
     }
 
@@ -236,7 +230,7 @@ public abstract class SpellAbility {
      * 
      * @return a {@link forge.CommandArgs} object.
      */
-    public CommandArgs getChooseTargetAI() {
+    public Supplier<Player> getChooseTargetAI() {
         return this.randomTarget;
     }
 

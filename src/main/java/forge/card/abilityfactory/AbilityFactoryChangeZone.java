@@ -1455,9 +1455,9 @@ public final class AbilityFactoryChangeZone {
         for (Card att : attackers) {
             combat.addAttacker(att);
         }
-        combat = ComputerUtilBlock.getBlockers(combat, AllZoneUtil.getCreaturesInPlay(ai));
+        combat = ComputerUtilBlock.getBlockers(ai, combat, AllZoneUtil.getCreaturesInPlay(ai));
 
-        if (CombatUtil.lifeInDanger(combat)) {
+        if (CombatUtil.lifeInDanger(ai, combat)) {
             // need something AI can cast now
             CardLists.sortByEvaluateCreature(list);
             for (Card c : list) {

@@ -265,7 +265,7 @@ public final class AbilityFactoryProtection {
                 // will the creature attack (only relevant for sorcery speed)?
                 if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                         && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(ai)
-                        && CardFactoryUtil.doesCreatureAttackAI(c)) {
+                        && CardFactoryUtil.doesCreatureAttackAI(ai, c)) {
                     return true;
                 }
 

@@ -128,24 +128,25 @@ public class ComputerUtilAttack {
      *            a {@link forge.game.phase.Combat} object.
      * @return a boolean.
      */
-    public final boolean isEffectiveAttacker(final Card attacker, final Combat combat) {
+    public final boolean isEffectiveAttacker(final Player ai, final Card attacker, final Combat combat) {
 
         // if the attacker will die when attacking don't attack
         if ((attacker.getNetDefense() + CombatUtil.predictToughnessBonusOfAttacker(attacker, null, combat)) <= 0) {
             return false;
         }
 
-        if (CombatUtil.damageIfUnblocked(attacker, AllZone.getHumanPlayer(), combat) > 0) {
+        final Player opp = ai.getOpponent();
+        if (CombatUtil.damageIfUnblocked(attacker, opp, combat) > 0) {
             return true;
         }
-        if (CombatUtil.poisonIfUnblocked(attacker, AllZone.getHumanPlayer(), combat) > 0) {
+        if (CombatUtil.poisonIfUnblocked(attacker, opp, combat) > 0) {
             return true;
         }
         if (this.attackers.size() == 1 && attacker.hasKeyword("Exalted")) {
             return true;
         }
 
-        final List<Card> controlledByCompy = AllZone.getComputerPlayer().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
+        final List<Card> controlledByCompy = ai.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
         for (final Card c : controlledByCompy) {
             for (final Trigger trigger : c.getTriggers()) {
                 if (CombatUtil.combatTriggerWillTrigger(attacker, null, trigger, combat)) {
@@ -237,7 +238,7 @@ public class ComputerUtilAttack {
      *            a {@link forge.game.phase.Combat} object.
      * @return a {@link forge.CardList} object.
      */
-    public final List<Card> notNeededAsBlockers(final List<Card> attackers, final Combat combat) {
+    public final List<Card> notNeededAsBlockers(final Player ai, final List<Card> attackers, final Combat combat) {
         final List<Card> notNeededAsBlockers = new ArrayList<Card>(attackers);
         int fixedBlockers = 0;
         final List<Card> vigilantes = new ArrayList<Card>();
@@ -272,7 +273,7 @@ public class ComputerUtilAttack {
 
         //Calculate the amount of creatures necessary
         for (int i = 0; i < list.size(); i++) {
-            if (!this.doesHumanAttackAndWin(i)) {
+            if (!this.doesHumanAttackAndWin(ai, i)) {
                 blockersNeeded = i;
                 break;
             }
@@ -290,16 +291,18 @@ public class ComputerUtilAttack {
             return notNeededAsBlockers;
         }
 
+        final Player opp = ai.getOpponent();
+        
         // Increase the total number of blockers needed by 1 if Finest Hour in
         // play
         // (human will get an extra first attack with a creature that untaps)
         // In addition, if the computer guesses it needs no blockers, make sure
         // that
         // it won't be surprised by Exalted
-        final int humanExaltedBonus = this.countExaltedBonus(AllZone.getHumanPlayer());
+        final int humanExaltedBonus = this.countExaltedBonus(opp);
 
         if (humanExaltedBonus > 0) {
-            final int nFinestHours = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield, "Finest Hour").size();
+            final int nFinestHours = opp.getCardsIn(ZoneType.Battlefield, "Finest Hour").size();
 
             if (((blockersNeeded == 0) || (nFinestHours > 0)) && (this.humanList.size() > 0)) {
                 //
@@ -311,9 +314,9 @@ public class ComputerUtilAttack {
                     // bonus TWICE
                     humanBaseAttack = humanBaseAttack + humanExaltedBonus;
                 }
-                final int totalExaltedAttack = AllZoneUtil.isCardInPlay("Rafiq of the Many", AllZone.getHumanPlayer()) ? 2 * humanBaseAttack
+                final int totalExaltedAttack = AllZoneUtil.isCardInPlay("Rafiq of the Many", opp) ? 2 * humanBaseAttack
                         : humanBaseAttack;
-                if ((AllZone.getComputerPlayer().getLife() - 3) <= totalExaltedAttack) {
+                if (ai.getLife() - 3 <= totalExaltedAttack) {
                     // We will lose if there is an Exalted attack -- keep one
                     // blocker
                     if ((blockersNeeded == 0) && (notNeededAsBlockers.size() > 0)) {
@@ -341,12 +344,12 @@ public class ComputerUtilAttack {
      *            a int.
      * @return a boolean.
      */
-    public final boolean doesHumanAttackAndWin(final int nBlockingCreatures) {
+    public final boolean doesHumanAttackAndWin(final Player ai, final int nBlockingCreatures) {
         int totalAttack = 0;
         int totalPoison = 0;
         int blockersLeft = nBlockingCreatures;
 
-        if (AllZone.getComputerPlayer().cantLose()) {
+        if (ai.cantLose()) {
             return false;
         }
 
@@ -358,16 +361,16 @@ public class ComputerUtilAttack {
                 blockersLeft--;
                 continue;
             }
-            totalAttack += CombatUtil.damageIfUnblocked(attacker, AllZone.getComputerPlayer(), null);
-            totalPoison += CombatUtil.poisonIfUnblocked(attacker, AllZone.getComputerPlayer(), null);
+            totalAttack += CombatUtil.damageIfUnblocked(attacker, ai, null);
+            totalPoison += CombatUtil.poisonIfUnblocked(attacker, ai, null);
         }
 
-        if (AllZone.getComputerPlayer().getLife() <= totalAttack
-                && !AllZone.getComputerPlayer().cantLoseForZeroOrLessLife()
-                && AllZone.getComputerPlayer().canLoseLife()) {
+        if (ai.getLife() <= totalAttack
+                && !ai.cantLoseForZeroOrLessLife()
+                && ai.canLoseLife()) {
             return true;
         }
-        return AllZone.getComputerPlayer().getPoisonCounters() + totalPoison > 9;
+        return ai.getPoisonCounters() + totalPoison > 9;
     }
 
     /**
@@ -377,11 +380,11 @@ public class ComputerUtilAttack {
      * 
      * @return a boolean.
      */
-    private boolean doAssault() {
+    private boolean doAssault(final Player ai) {
         // Beastmaster Ascension
-        if (AllZoneUtil.isCardInPlay("Beastmaster Ascension", AllZone.getComputerPlayer())
+        if (AllZoneUtil.isCardInPlay("Beastmaster Ascension", ai)
                 && (this.attackers.size() > 1)) {
-            final List<Card> beastions = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield, "Beastmaster Ascension");
+            final List<Card> beastions = ai.getCardsIn(ZoneType.Battlefield, "Beastmaster Ascension");
             int minCreatures = 7;
             for (final Card beastion : beastions) {
                 final int counters = beastion.getCounters(Counters.QUEST);
@@ -397,8 +400,8 @@ public class ComputerUtilAttack {
         final List<Card> unblockedAttackers = new ArrayList<Card>();
         final List<Card> remainingAttackers = new ArrayList<Card>(this.attackers);
         final List<Card> remainingBlockers = new ArrayList<Card>(this.blockers);
-        final Player human = AllZone.getHumanPlayer();
-        final Player computer = AllZone.getComputerPlayer();
+        final Player opp = ai.getOpponent();
+
 
         for (int i = 0; i < this.attackers.size(); i++) {
             if (!CombatUtil.canBeBlocked(this.attackers.get(i), this.blockers)
@@ -434,14 +437,13 @@ public class ComputerUtilAttack {
         }
         unblockedAttackers.addAll(remainingAttackers);
 
-        if ((CombatUtil.sumDamageIfUnblocked(remainingAttackers, human) >= human.getLife())
-                && AllZone.getHumanPlayer().canLoseLife()
-                && !((human.cantLoseForZeroOrLessLife() || computer.cantWin()) && (human.getLife() < 1))) {
+        if ((CombatUtil.sumDamageIfUnblocked(remainingAttackers, opp) >= opp.getLife())
+                && opp.canLoseLife()
+                && !((opp.cantLoseForZeroOrLessLife() || ai.cantWin()) && (opp.getLife() < 1))) {
             return true;
         }
 
-        if (CombatUtil.sumPoisonIfUnblocked(remainingAttackers, AllZone.getHumanPlayer()) >= (10 - AllZone
-                .getHumanPlayer().getPoisonCounters())) {
+        if (CombatUtil.sumPoisonIfUnblocked(remainingAttackers, opp) >= (10 - opp.getPoisonCounters())) {
             return true;
         }
 
@@ -458,13 +460,13 @@ public class ComputerUtilAttack {
      * @param bAssault
      *            a boolean.
      */
-    public final void chooseDefender(final Combat c, final boolean bAssault) {
+    public final void chooseDefender(final Player ai, final Combat c, final boolean bAssault) {
         final List<GameEntity> defs = c.getDefenders();
 
         // Start with last planeswalker
         int n = defs.size() - 1;
 
-        final Object entity = AllZone.getComputerPlayer().getMustAttackEntity();
+        final Object entity = ai.getMustAttackEntity();
         if (null != entity) {
             final List<GameEntity> defenders = AllZone.getCombat().getDefenders();
             n = defenders.indexOf(entity);
@@ -492,7 +494,7 @@ public class ComputerUtilAttack {
      * 
      * @return a {@link forge.game.phase.Combat} object.
      */
-    public final Combat getAttackers() {
+    public final Combat getAttackers(final Player ai) {
         // if this method is called multiple times during a turn,
         // it will always return the same value
         // randomInt is used so that the computer doesn't always
@@ -511,9 +513,9 @@ public class ComputerUtilAttack {
             return combat;
         }
 
-        final boolean bAssault = this.doAssault();
+        final boolean bAssault = this.doAssault(ai);
         // Determine who will be attacked
-        this.chooseDefender(combat, bAssault);
+        this.chooseDefender(ai, combat, bAssault);
         List<Card> attackersLeft = new ArrayList<Card>(this.attackers);
         // Attackers that don't really have a choice
         for (final Card attacker : this.attackers) {
@@ -544,7 +546,7 @@ public class ComputerUtilAttack {
             System.out.println("Assault");
             CardLists.sortAttack(attackersLeft);
             for (Card attacker : attackersLeft) {
-                if (CombatUtil.canAttack(attacker, combat) && this.isEffectiveAttacker(attacker, combat)) {
+                if (CombatUtil.canAttack(attacker, combat) && this.isEffectiveAttacker(ai, attacker, combat)) {
                     combat.addAttacker(attacker);
                 }
             }
@@ -555,7 +557,7 @@ public class ComputerUtilAttack {
         if (combat.getAttackers().isEmpty()) {
             boolean exalted = false;
             int exaltedCount = 0;
-            for (Card c : AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield)) {
+            for (Card c : ai.getCardsIn(ZoneType.Battlefield)) {
                 if (c.getName().equals("Rafiq of the Many") || c.getName().equals("Battlegrace Angel")) {
                     exalted = true;
                     break;
@@ -578,7 +580,7 @@ public class ComputerUtilAttack {
                 System.out.println("Exalted");
                 this.aiAggression = 6;
                 for (Card attacker : this.attackers) {
-                    if (CombatUtil.canAttack(attacker, combat) && this.shouldAttack(attacker, this.blockers, combat)) {
+                    if (CombatUtil.canAttack(attacker, combat) && this.shouldAttack(ai, attacker, this.blockers, combat)) {
                         combat.addAttacker(attacker);
                         return combat;
                     }
@@ -620,9 +622,10 @@ public class ComputerUtilAttack {
         // find the potential counter attacking damage compared to AI life total
         double aiLifeToPlayerDamageRatio = 1000000;
         if (candidateCounterAttackDamage > 0) {
-            aiLifeToPlayerDamageRatio = (double) AllZone.getComputerPlayer().getLife() / candidateCounterAttackDamage;
+            aiLifeToPlayerDamageRatio = (double) ai.getLife() / candidateCounterAttackDamage;
         }
 
+        final Player opp = ai.getOpponent();
         // get the potential damage and strength of the AI forces
         final List<Card> candidateAttackers = new ArrayList<Card>();
         int candidateUnblockedDamage = 0;
@@ -632,7 +635,7 @@ public class ComputerUtilAttack {
             if (CombatUtil.canAttackNextTurn(pCard)) {
                 candidateAttackers.add(pCard);
                 if (pCard.getNetCombatDamage() > 0) {
-                    candidateUnblockedDamage += CombatUtil.damageIfUnblocked(pCard, AllZone.getHumanPlayer(), null);
+                    candidateUnblockedDamage += CombatUtil.damageIfUnblocked(pCard, opp, null);
                     computerForces += 1;
                 }
 
@@ -642,7 +645,7 @@ public class ComputerUtilAttack {
         // find the potential damage ratio the AI can cause
         double humanLifeToDamageRatio = 1000000;
         if (candidateUnblockedDamage > 0) {
-            humanLifeToDamageRatio = (double) AllZone.getHumanPlayer().getLife() / candidateUnblockedDamage;
+            humanLifeToDamageRatio = (double) opp.getLife() / candidateUnblockedDamage;
         }
 
         /*
@@ -684,7 +687,7 @@ public class ComputerUtilAttack {
         // get list of attackers ordered from low power to high
         CardLists.sortAttackLowFirst(this.attackers);
         // get player life total
-        int humanLife = AllZone.getHumanPlayer().getLife();
+        int humanLife = opp.getLife();
         // get the list of attackers up to the first blocked one
         final List<Card> attritionalAttackers = new ArrayList<Card>();
         for (int x = 0; x < (this.attackers.size() - humanForces); x++) {
@@ -735,7 +738,7 @@ public class ComputerUtilAttack {
                 }
             }
             if (isUnblockableCreature) {
-                unblockableDamage += CombatUtil.damageIfUnblocked(attacker, AllZone.getHumanPlayer(), combat);
+                unblockableDamage += CombatUtil.damageIfUnblocked(attacker, opp, combat);
             }
         }
         for (final Card attacker : nextTurnAttackers) {
@@ -749,15 +752,14 @@ public class ComputerUtilAttack {
                 }
             }
             if (isUnblockableCreature) {
-                nextUnblockableDamage += CombatUtil.damageIfUnblocked(attacker, AllZone.getHumanPlayer(), null);
+                nextUnblockableDamage += CombatUtil.damageIfUnblocked(attacker, opp, null);
             }
         }
-        if (unblockableDamage > 0 && !AllZone.getHumanPlayer().cantLoseForZeroOrLessLife()
-                && AllZone.getHumanPlayer().canLoseLife()) {
-            turnsUntilDeathByUnblockable = 1+ (AllZone.getHumanPlayer().getLife() - unblockableDamage)
-                    / nextUnblockableDamage;
+        if (unblockableDamage > 0 && !opp.cantLoseForZeroOrLessLife()
+                && opp.canLoseLife()) {
+            turnsUntilDeathByUnblockable = 1 + (opp.getLife() - unblockableDamage) / nextUnblockableDamage;
         }
-        if (unblockableDamage > AllZone.getHumanPlayer().getLife() && AllZone.getHumanPlayer().canLoseLife()) {
+        if (unblockableDamage > opp.getLife() && opp.canLoseLife()) {
             doUnblockableAttack = true;
         }
         // *****************
@@ -795,7 +797,7 @@ public class ComputerUtilAttack {
 
         System.out.println("Normal attack");
 
-        attackersLeft = this.notNeededAsBlockers(attackersLeft, combat);
+        attackersLeft = this.notNeededAsBlockers(ai, attackersLeft, combat);
         System.out.println(attackersLeft.size());
 
         attackersLeft = this.sortAttackers(attackersLeft);
@@ -808,7 +810,7 @@ public class ComputerUtilAttack {
                 continue;
             }
 
-            if (this.shouldAttack(attacker, this.blockers, combat)
+            if (this.shouldAttack(ai, attacker, this.blockers, combat)
                     && CombatUtil.canAttack(attacker, combat)) {
                 combat.addAttacker(attacker);
                 // check if attackers are enough to finish the attacked planeswalker 
@@ -821,7 +823,7 @@ public class ComputerUtilAttack {
                     CardLists.sortAttackLowFirst(attacking);
                     for (Card atta : attacking) {
                         if (attackNum >= blockNum || !CombatUtil.canBeBlocked(attacker, this.blockers)) {
-                            damage += CombatUtil.damageIfUnblocked(atta, AllZone.getHumanPlayer(), null);
+                            damage += CombatUtil.damageIfUnblocked(atta, opp, null);
                         } else if (CombatUtil.canBeBlocked(attacker, this.blockers)) {
                             attackNum++;
                         }
@@ -890,7 +892,7 @@ public class ComputerUtilAttack {
      *            a {@link forge.game.phase.Combat} object.
      * @return a boolean.
      */
-    public final boolean shouldAttack(final Card attacker, final List<Card> defenders, final Combat combat) {
+    public final boolean shouldAttack(final Player ai, final Card attacker, final List<Card> defenders, final Combat combat) {
         boolean canBeKilledByOne = false; // indicates if the attacker can be
                                           // killed by a single blocker
         boolean canKillAll = true; // indicates if the attacker can kill all
@@ -902,7 +904,7 @@ public class ComputerUtilAttack {
         boolean canBeBlocked = false;
         int numberOfPossibleBlockers = 0;
 
-        if (!this.isEffectiveAttacker(attacker, combat)) {
+        if (!this.isEffectiveAttacker(ai, attacker, combat)) {
             return false;
         }
         boolean hasAttackEffect = attacker.getSVar("HasAttackEffect").equals("TRUE") || attacker.hasStartOfKeyword("Annihilator");

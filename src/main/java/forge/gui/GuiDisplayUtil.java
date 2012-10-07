@@ -134,8 +134,9 @@ public final class GuiDisplayUtil {
      */
     public static void devModeGenerateMana() {
         final Card dummy = new Card();
-        dummy.setOwner(AllZone.getHumanPlayer());
-        dummy.addController(AllZone.getHumanPlayer());
+        final Player human = Singletons.getControl().getPlayer();
+        dummy.setOwner(human);
+        dummy.addController(human);
         final AbilityMana abMana = new AbilityMana(dummy, "0", "W U B G R 1", 10) {
             private static final long serialVersionUID = -2164401486331182356L;
 
@@ -326,11 +327,11 @@ public final class GuiDisplayUtil {
      * </p>
      */
     public static void updateGUI() {
-        AllZone.getComputerPlayer().getZone(ZoneType.Battlefield).updateObservers();
-        AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
-        //AllZone.getHumanPlayer().getZone(ZoneType.Hand).updateObservers();
-        AllZone.getComputerPlayer().updateObservers();
-        AllZone.getHumanPlayer().updateObservers();
+        for( Player p : AllZone.getPlayersInGame())
+        {
+            p.getZone(ZoneType.Battlefield).updateObservers();
+            p.getZone(ZoneType.Battlefield).updateObservers();
+        }
     }
 
     /**
@@ -445,123 +446,118 @@ public final class GuiDisplayUtil {
         List<Card> humanDevExileSetup = new ArrayList<Card>();
         List<Card> computerDevExileSetup = new ArrayList<Card>();
 
+        final Player human = Singletons.getControl().getPlayer();
+        final Player ai = human.getOpponent();
+        
         if (!tChangePlayer.trim().toLowerCase().equals("none")) {
             if (tChangePlayer.trim().toLowerCase().equals("human")) {
-                Singletons.getModel().getGameState().getPhaseHandler().setPlayerTurn(AllZone.getHumanPlayer());
+                Singletons.getModel().getGameState().getPhaseHandler().setPlayerTurn(human);
             }
             if (tChangePlayer.trim().toLowerCase().equals("ai")) {
-                Singletons.getModel().getGameState().getPhaseHandler().setPlayerTurn(AllZone.getComputerPlayer());
+                Singletons.getModel().getGameState().getPhaseHandler().setPlayerTurn(ai);
             }
         }
 
+
+        
         if (!tChangePhase.trim().toLowerCase().equals("none")) {
             Singletons.getModel().getGameState().getPhaseHandler().setDevPhaseState(forge.game.phase.PhaseType.smartValueOf(tChangePhase));
         }
 
         if (!tHumanSetupCardsInPlay.trim().toLowerCase().equals("none")) {
-            humanDevSetup = GuiDisplayUtil.devProcessCardsForZone(humanSetupCardsInPlay, AllZone.getHumanPlayer());
+            humanDevSetup = GuiDisplayUtil.devProcessCardsForZone(humanSetupCardsInPlay, human);
         }
 
         if (!tHumanSetupCardsInHand.trim().toLowerCase().equals("none")) {
-            humanDevHandSetup = GuiDisplayUtil.devProcessCardsForZone(humanSetupCardsInHand, AllZone.getHumanPlayer());
+            humanDevHandSetup = GuiDisplayUtil.devProcessCardsForZone(humanSetupCardsInHand, human);
         }
 
         if (!tComputerSetupCardsInPlay.trim().toLowerCase().equals("none")) {
-            computerDevSetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupCardsInPlay,
-                    AllZone.getComputerPlayer());
+            computerDevSetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupCardsInPlay, human);
         }
 
         if (!tComputerSetupCardsInHand.trim().toLowerCase().equals("none")) {
-            computerDevHandSetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupCardsInHand,
-                    AllZone.getComputerPlayer());
+            computerDevHandSetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupCardsInHand, human);
         }
 
         if (!tComputerSetupGraveyard.trim().toLowerCase().equals("none")) {
-            computerDevGraveyardSetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupGraveyard,
-                    AllZone.getComputerPlayer());
+            computerDevGraveyardSetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupGraveyard, human);
         }
 
         if (!tHumanSetupGraveyard.trim().toLowerCase().equals("none")) {
-            humanDevGraveyardSetup = GuiDisplayUtil.devProcessCardsForZone(humanSetupGraveyard,
-                    AllZone.getHumanPlayer());
+            humanDevGraveyardSetup = GuiDisplayUtil.devProcessCardsForZone(humanSetupGraveyard, human);
         }
 
         if (!tHumanSetupLibrary.trim().toLowerCase().equals("none")) {
-            humanDevLibrarySetup = GuiDisplayUtil.devProcessCardsForZone(humanSetupLibrary, AllZone.getHumanPlayer());
+            humanDevLibrarySetup = GuiDisplayUtil.devProcessCardsForZone(humanSetupLibrary, human);
         }
 
         if (!tComputerSetupLibrary.trim().toLowerCase().equals("none")) {
-            computerDevLibrarySetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupLibrary,
-                    AllZone.getComputerPlayer());
+            computerDevLibrarySetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupLibrary, human);
         }
 
         if (!tHumanSetupExile.trim().toLowerCase().equals("none")) {
-            humanDevExileSetup = GuiDisplayUtil.devProcessCardsForZone(humanSetupExile, AllZone.getHumanPlayer());
+            humanDevExileSetup = GuiDisplayUtil.devProcessCardsForZone(humanSetupExile, human);
         }
 
         if (!tComputerSetupExile.trim().toLowerCase().equals("none")) {
-            computerDevExileSetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupExile,
-                    AllZone.getComputerPlayer());
+            computerDevExileSetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupExile, human);
         }
 
         AllZone.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         AllZone.getCombat().reset();
         for (final Card c : humanDevSetup) {
-            AllZone.getHumanPlayer().getZone(ZoneType.Hand).add(c);
+            human.getZone(ZoneType.Hand).add(c);
             Singletons.getModel().getGameAction().moveToPlay(c);
             c.setSickness(false);
         }
 
         for (final Card c : computerDevSetup) {
-            AllZone.getComputerPlayer().getZone(ZoneType.Hand).add(c);
+            ai.getZone(ZoneType.Hand).add(c);
             Singletons.getModel().getGameAction().moveToPlay(c);
             c.setSickness(false);
         }
 
         if (computerDevGraveyardSetup.size() > 0) {
-            AllZone.getComputerPlayer().getZone(ZoneType.Graveyard).setCards(computerDevGraveyardSetup);
+            ai.getZone(ZoneType.Graveyard).setCards(computerDevGraveyardSetup);
         }
         if (humanDevGraveyardSetup.size() > 0) {
-            AllZone.getHumanPlayer().getZone(ZoneType.Graveyard).setCards(humanDevGraveyardSetup);
+            human.getZone(ZoneType.Graveyard).setCards(humanDevGraveyardSetup);
         }
 
         if (computerDevHandSetup.size() > 0) {
-            AllZone.getComputerPlayer().getZone(ZoneType.Hand).setCards(computerDevHandSetup);
+            ai.getZone(ZoneType.Hand).setCards(computerDevHandSetup);
         }
         if (humanDevHandSetup.size() > 0) {
-            AllZone.getHumanPlayer().getZone(ZoneType.Hand).setCards(humanDevHandSetup);
+            human.getZone(ZoneType.Hand).setCards(humanDevHandSetup);
         }
 
         if (humanDevLibrarySetup.size() > 0) {
-            AllZone.getHumanPlayer().getZone(ZoneType.Library).setCards(humanDevLibrarySetup);
+            human.getZone(ZoneType.Library).setCards(humanDevLibrarySetup);
         }
         if (computerDevLibrarySetup.size() > 0) {
-            AllZone.getComputerPlayer().getZone(ZoneType.Library).setCards(computerDevLibrarySetup);
+            ai.getZone(ZoneType.Library).setCards(computerDevLibrarySetup);
         }
 
         if (humanDevExileSetup.size() > 0) {
-            AllZone.getHumanPlayer().getZone(ZoneType.Exile).setCards(humanDevExileSetup);
+            human.getZone(ZoneType.Exile).setCards(humanDevExileSetup);
         }
         if (computerDevExileSetup.size() > 0) {
-            AllZone.getComputerPlayer().getZone(ZoneType.Exile).setCards(computerDevExileSetup);
+            ai.getZone(ZoneType.Exile).setCards(computerDevExileSetup);
         }
 
         AllZone.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
         if (setComputerLife > 0) {
-            AllZone.getComputerPlayer().setLife(setComputerLife, null);
+            ai.setLife(setComputerLife, null);
         }
         if (setHumanLife > 0) {
-            AllZone.getHumanPlayer().setLife(setHumanLife, null);
+            human.setLife(setHumanLife, null);
         }
 
         Singletons.getModel().getGameAction().checkStateEffects();
         Singletons.getModel().getGameState().getPhaseHandler().updateObservers();
-        AllZone.getHumanPlayer().updateObservers();
-        AllZone.getHumanPlayer().getZone(ZoneType.Hand).updateObservers();
-        AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
-        AllZone.getComputerPlayer().updateObservers();
-        AllZone.getComputerPlayer().getZone(ZoneType.Battlefield).updateObservers();
+        updateGUI();
     }
 
     /**
@@ -619,7 +615,7 @@ public final class GuiDisplayUtil {
      * @since 1.0.15
      */
     public static void devModeTutor() {
-        final List<Card> lib = AllZone.getHumanPlayer().getCardsIn(ZoneType.Library);
+        final List<Card> lib = Singletons.getControl().getPlayer().getCardsIn(ZoneType.Library);
         final Object o = GuiChoose.oneOrNone("Choose a card", lib);
         if (null == o) {
             return;
@@ -648,7 +644,7 @@ public final class GuiDisplayUtil {
         final ListChooser<String> c = new ListChooser<String>("Name the card", 0, 1, cards);
         if (c.show()) {
             CardPrinted cp = CardDb.instance().getCard(c.getSelectedValue());
-            Card forgeCard = cp.toForgeCard(AllZone.getHumanPlayer());
+            Card forgeCard = cp.toForgeCard(Singletons.getControl().getPlayer());
             Singletons.getModel().getGameAction().moveToHand(forgeCard);
         }
     }
@@ -672,7 +668,7 @@ public final class GuiDisplayUtil {
         final ListChooser<String> c = new ListChooser<String>("Name the card", 0, 1, cards);
         if (c.show()) {
             CardPrinted cp = CardDb.instance().getCard(c.getSelectedValue());
-            Card forgeCard = cp.toForgeCard(AllZone.getComputerPlayer());
+            Card forgeCard = cp.toForgeCard(Singletons.getControl().getPlayer().getOpponent());
             Singletons.getModel().getGameAction().moveToHand(forgeCard);
         }
     }
@@ -752,7 +748,7 @@ public final class GuiDisplayUtil {
      * @since 1.0.16
      */
     public static void devModeUnlimitedLand() {
-        AllZone.getHumanPlayer().addMaxLandsToPlay(100);
+        Singletons.getControl().getPlayer().addMaxLandsToPlay(100);
     }
 
     /**
