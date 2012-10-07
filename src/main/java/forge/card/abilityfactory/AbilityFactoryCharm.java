@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-import forge.AllZone;
 import forge.Card;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
@@ -30,6 +29,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
+import forge.game.player.Player;
 import forge.gui.GuiChoose;
 import forge.util.MyRandom;
 
@@ -76,7 +76,7 @@ public final class AbilityFactoryCharm {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryCharm.charmCanPlayAI(af, this, false);
+                return AbilityFactoryCharm.charmCanPlayAI(getActivatingPlayer(), af, this, false);
             }
 
             @Override
@@ -91,7 +91,7 @@ public final class AbilityFactoryCharm {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryCharm.charmCanPlayAI(af, this, mandatory);
+                return AbilityFactoryCharm.charmCanPlayAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abCharm = new AbilityCharm(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -114,7 +114,7 @@ public final class AbilityFactoryCharm {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryCharm.charmCanPlayAI(af, this, false);
+                return AbilityFactoryCharm.charmCanPlayAI(getActivatingPlayer(), af, this, false);
             }
 
             @Override
@@ -152,13 +152,12 @@ public final class AbilityFactoryCharm {
         return sb.toString();
     }
 
-    private static boolean charmCanPlayAI(final AbilityFactory af, final SpellAbility sa, boolean mandatory) {
+    private static boolean charmCanPlayAI(final Player ai,final AbilityFactory af, final SpellAbility sa, boolean mandatory) {
         final Random r = MyRandom.getRandom();
         final HashMap<String, String> params = af.getMapParams();
         final Card source = sa.getSourceCard();
         //this resets all previous choices
         sa.setSubAbility(null);
-        sa.setActivatingPlayer(AllZone.getComputerPlayer());
         final int num = Integer.parseInt(params.containsKey("CharmNum") ? params.get("CharmNum")
                 : "1");
         final String[] saChoices = params.get("Choices").split(",");
@@ -175,7 +174,7 @@ public final class AbilityFactoryCharm {
         for (int i = 0; i < num; i++) {
             AbilitySub chosen = null;
             for (SpellAbility sub : choices) {
-                sub.setActivatingPlayer(AllZone.getComputerPlayer());
+                sub.setActivatingPlayer(ai);
                 if (!timingRight && sub.canPlayAI()) {
                     chosen = (AbilitySub) sub;
                     choices.remove(sub);

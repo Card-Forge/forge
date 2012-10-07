@@ -106,7 +106,7 @@ public final class AbilityFactoryChoose {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryChoose.chooseTypeCanPlayAI(af, this);
+                return AbilityFactoryChoose.chooseTypeCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -116,7 +116,7 @@ public final class AbilityFactoryChoose {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryChoose.chooseTypeTriggerAI(af, this, mandatory);
+                return AbilityFactoryChoose.chooseTypeTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abChooseType = new AbilityChooseType(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -144,7 +144,7 @@ public final class AbilityFactoryChoose {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryChoose.chooseTypeCanPlayAI(af, this);
+                return AbilityFactoryChoose.chooseTypeCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -198,7 +198,7 @@ public final class AbilityFactoryChoose {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryChoose.chooseTypeTriggerAI(af, this, mandatory);
+                return AbilityFactoryChoose.chooseTypeTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbChooseType = new DrawbackChooseType(af.getHostCard(), af.getAbTgt());
@@ -260,13 +260,13 @@ public final class AbilityFactoryChoose {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean chooseTypeCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean chooseTypeCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         if (!params.containsKey("AILogic")) {
             return false;
         }
 
-        return AbilityFactoryChoose.chooseTypeTriggerAI(af, sa, false);
+        return AbilityFactoryChoose.chooseTypeTriggerAI(ai, af, sa, false);
     }
 
     /**
@@ -282,7 +282,7 @@ public final class AbilityFactoryChoose {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean chooseTypeTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean chooseTypeTriggerAI(final Player ai,final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         if (!ComputerUtil.canPayCost(sa)) {
             return false;
         }
@@ -291,7 +291,7 @@ public final class AbilityFactoryChoose {
 
         if (sa.getTarget() != null) {
             tgt.resetTargets();
-            sa.getTarget().addTarget(AllZone.getComputerPlayer());
+            sa.getTarget().addTarget(ai);
         } else {
             final ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), af.getMapParams()
                     .get("Defined"), sa);
@@ -1325,12 +1325,12 @@ public final class AbilityFactoryChoose {
                 } else {
                     if (params.containsKey("AILogic")) {
                         if (params.get("AILogic").equals("Curse")) {
-                            card.setChosenPlayer(AllZone.getHumanPlayer());
+                            card.setChosenPlayer(p.getOpponent());
                         } else {
-                            card.setChosenPlayer(AllZone.getComputerPlayer());
+                            card.setChosenPlayer(p);
                         }
                     } else {
-                        card.setChosenPlayer(AllZone.getComputerPlayer());
+                        card.setChosenPlayer(p);
                     }
                 }
             }
@@ -1374,7 +1374,7 @@ public final class AbilityFactoryChoose {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryChoose.nameCardCanPlayAI(af, this);
+                return AbilityFactoryChoose.nameCardCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -1413,7 +1413,7 @@ public final class AbilityFactoryChoose {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryChoose.nameCardCanPlayAI(af, this);
+                return AbilityFactoryChoose.nameCardCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -1529,7 +1529,7 @@ public final class AbilityFactoryChoose {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean nameCardCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean nameCardCanPlayAI(final Player ai,final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
 
         if (params.containsKey("AILogic")) {
@@ -1542,9 +1542,9 @@ public final class AbilityFactoryChoose {
             if (tgt != null) {
                 tgt.resetTargets();
                 if (tgt.canOnlyTgtOpponent()) {
-                    tgt.addTarget(AllZone.getHumanPlayer());
+                    tgt.addTarget(ai.getOpponent());
                 } else {
-                    tgt.addTarget(AllZone.getComputerPlayer());
+                    tgt.addTarget(ai);
                 }
             }
             return true;
@@ -1647,7 +1647,7 @@ public final class AbilityFactoryChoose {
                                         .getCardsIn(ZoneType.Library));
                             }
                         } else {
-                            List<Card> list = CardLists.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer());
+                            List<Card> list = CardLists.filterControlledBy(AllZoneUtil.getCardsInGame(), p.getOpponent());
                             list = CardLists.filter(list, Predicates.not(Presets.LANDS));
                             if (!list.isEmpty()) {
                                 chosen = list.get(0).getName();
@@ -1701,7 +1701,7 @@ public final class AbilityFactoryChoose {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryChoose.chooseCardCanPlayAI(af, this);
+                return AbilityFactoryChoose.chooseCardCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -1711,7 +1711,7 @@ public final class AbilityFactoryChoose {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryChoose.chooseCardTriggerAI(af, this, mandatory);
+                return AbilityFactoryChoose.chooseCardTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abChooseCard = new AbilityChooseCard(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -1740,7 +1740,7 @@ public final class AbilityFactoryChoose {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryChoose.chooseCardCanPlayAI(af, this);
+                return AbilityFactoryChoose.chooseCardCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -1789,12 +1789,12 @@ public final class AbilityFactoryChoose {
 
             @Override
             public boolean chkAIDrawback() {
-                return AbilityFactoryChoose.chooseCardCanPlayAI(af, this);
+                return AbilityFactoryChoose.chooseCardCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryChoose.chooseCardTriggerAI(af, this, mandatory);
+                return AbilityFactoryChoose.chooseCardTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbChooseCard = new DrawbackChooseCard(af.getHostCard(), af.getAbTgt());
@@ -1855,15 +1855,15 @@ public final class AbilityFactoryChoose {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean chooseCardCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean chooseCardCanPlayAI(final Player ai,final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         final Card host = sa.getSourceCard();
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
-            if (sa.canTarget(AllZone.getHumanPlayer())) {
-                tgt.addTarget(AllZone.getHumanPlayer());
+            if (sa.canTarget(ai.getOpponent())) {
+                tgt.addTarget(ai.getOpponent());
             } else {
                 return false;
             }
@@ -1908,8 +1908,8 @@ public final class AbilityFactoryChoose {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean chooseCardTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        return chooseCardCanPlayAI(af, sa);
+    private static boolean chooseCardTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+        return chooseCardCanPlayAI(ai, af, sa);
     }
 
     /**

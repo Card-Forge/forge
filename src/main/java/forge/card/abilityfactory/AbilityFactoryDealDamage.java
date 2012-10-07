@@ -25,7 +25,6 @@ import java.util.Random;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
-import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
@@ -107,7 +106,7 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryDealDamage.this.dealDamageCanPlayAI(this);
+                return AbilityFactoryDealDamage.this.dealDamageCanPlayAI(getActivatingPlayer(), this);
             }
 
             @Override
@@ -123,7 +122,7 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryDealDamage.this.dealDamageDoTriggerAI(
+                return AbilityFactoryDealDamage.this.dealDamageDoTriggerAI(getActivatingPlayer(), 
                         AbilityFactoryDealDamage.this.abilityFactory, this, mandatory);
             }
         }
@@ -148,7 +147,7 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryDealDamage.this.dealDamageCanPlayAI(this);
+                return AbilityFactoryDealDamage.this.dealDamageCanPlayAI(getActivatingPlayer(), this);
 
             }
 
@@ -166,10 +165,10 @@ public class AbilityFactoryDealDamage {
             @Override
             public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
                 if (withOutManaCost) {
-                    return AbilityFactoryDealDamage.this.dealDamageDoTriggerAINoCost(
+                    return AbilityFactoryDealDamage.this.dealDamageDoTriggerAINoCost(getActivatingPlayer(), 
                             AbilityFactoryDealDamage.this.abilityFactory, this, mandatory);
                 }
-                return AbilityFactoryDealDamage.this.dealDamageDoTriggerAI(
+                return AbilityFactoryDealDamage.this.dealDamageDoTriggerAI(getActivatingPlayer(), 
                         AbilityFactoryDealDamage.this.abilityFactory, this, mandatory);
             }
         }; // Spell
@@ -203,12 +202,12 @@ public class AbilityFactoryDealDamage {
             @Override
             public boolean chkAIDrawback() {
                 // Make sure there is a valid target
-                return AbilityFactoryDealDamage.this.damageDrawback(this);
+                return AbilityFactoryDealDamage.this.damageDrawback(getActivatingPlayer(), this);
             }
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryDealDamage.this.dealDamageCanPlayAI(this);
+                return AbilityFactoryDealDamage.this.dealDamageCanPlayAI(getActivatingPlayer(), this);
             }
 
             @Override
@@ -224,7 +223,7 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryDealDamage.this.dealDamageDoTriggerAI(
+                return AbilityFactoryDealDamage.this.dealDamageDoTriggerAI(getActivatingPlayer(), 
                         AbilityFactoryDealDamage.this.abilityFactory, this, mandatory);
             }
         }
@@ -345,7 +344,7 @@ public class AbilityFactoryDealDamage {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private boolean damageDrawback(final SpellAbility sa) {
+    private boolean damageDrawback(final Player ai, final SpellAbility sa) {
         final Card source = sa.getSourceCard();
         int dmg;
         if (this.damage.equals("X") && sa.getSVar(this.damage).equals("Count$xPaid")) {
@@ -355,7 +354,7 @@ public class AbilityFactoryDealDamage {
         } else {
             dmg = this.getNumDamage(sa);
         }
-        if(!this.damageTargetAI(sa, dmg)) {
+        if(!this.damageTargetAI(ai, sa, dmg)) {
             return false;
         }
         
@@ -375,7 +374,7 @@ public class AbilityFactoryDealDamage {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private boolean dealDamageCanPlayAI(final SpellAbility saMe) {
+    private boolean dealDamageCanPlayAI(final Player ai, final SpellAbility saMe) {
 
         final Cost abCost = this.abilityFactory.getAbCost();
         final Card source = saMe.getSourceCard();
@@ -410,7 +409,7 @@ public class AbilityFactoryDealDamage {
         if (source.getName().equals("Stuffy Doll")) {
             // Now stuffy sits around for blocking
             // TODO(sol): this should also happen if Stuffy is going to die
-            return Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.END_OF_TURN, AllZone.getHumanPlayer());
+            return Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.END_OF_TURN, ai.getOpponent());
         }
 
         if (this.abilityFactory.isAbility()) {
@@ -421,7 +420,7 @@ public class AbilityFactoryDealDamage {
             }
         }
 
-        final boolean bFlag = this.damageTargetAI(saMe, dmg);
+        final boolean bFlag = this.damageTargetAI(ai, saMe, dmg);
         if (!bFlag) {
             return false;
         }
@@ -463,29 +462,28 @@ public class AbilityFactoryDealDamage {
      *            a boolean.
      * @return a boolean.
      */
-    private boolean shouldTgtP(final SpellAbility sa, final int d, final boolean noPrevention) {
+    private boolean shouldTgtP(final Player comp, final SpellAbility sa, final int d, final boolean noPrevention) {
         int restDamage = d;
-        final Player human = AllZone.getHumanPlayer();
-        final Player comp = AllZone.getComputerPlayer();
-        if (!sa.canTarget(human)) {
+        final Player enemy = comp.getOpponent();
+        if (!sa.canTarget(enemy)) {
             return false;
         }
         // burn Planeswalkers
-        if (Iterables.any(human.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS)) {
+        if (Iterables.any(enemy.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS)) {
             return true;
         }
 
         if (!noPrevention) {
-            restDamage = human.predictDamage(restDamage, this.abilityFactory.getHostCard(), false);
+            restDamage = enemy.predictDamage(restDamage, this.abilityFactory.getHostCard(), false);
         } else {
-            restDamage = human.staticReplaceDamage(restDamage, this.abilityFactory.getHostCard(), false);
+            restDamage = enemy.staticReplaceDamage(restDamage, this.abilityFactory.getHostCard(), false);
         }
 
         if (restDamage == 0) {
             return false;
         }
 
-        if (!human.canLoseLife()) {
+        if (!enemy.canLoseLife()) {
             return false;
         }
 
@@ -499,7 +497,7 @@ public class AbilityFactoryDealDamage {
             }
         }
 
-        if ((human.getLife() - restDamage) < 5) {
+        if ((enemy.getLife() - restDamage) < 5) {
             // drop the human to less than 5
             // life
             return true;
@@ -523,13 +521,13 @@ public class AbilityFactoryDealDamage {
      *            a boolean.
      * @return a {@link forge.Card} object.
      */
-    private Card dealDamageChooseTgtC(final SpellAbility saMe, final int d, final boolean noPrevention,
+    private Card dealDamageChooseTgtC(final Player ai, final SpellAbility saMe, final int d, final boolean noPrevention,
             final Player pl, final boolean mandatory) {
         final Target tgt = saMe.getTarget();
         final Card source = saMe.getSourceCard();
         final HashMap<String, String> params = this.abilityFactory.getMapParams();
         List<Card> hPlay = pl.getCardsIn(ZoneType.Battlefield);
-        hPlay = CardLists.getValidCards(hPlay, tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
+        hPlay = CardLists.getValidCards(hPlay, tgt.getValidTgts(), ai, source);
 
         final ArrayList<Object> objects = tgt.getTargets();
         if (params.containsKey("TargetUnique")) {
@@ -588,14 +586,14 @@ public class AbilityFactoryDealDamage {
      *            a int.
      * @return a boolean.
      */
-    private boolean damageTargetAI(final SpellAbility saMe, final int dmg) {
+    private boolean damageTargetAI(final Player ai,final SpellAbility saMe, final int dmg) {
         final Target tgt = saMe.getTarget();
 
         if (tgt == null) {
             return this.damageChooseNontargeted(saMe, dmg);
         }
 
-        return this.damageChoosingTargets(saMe, tgt, dmg, false, false);
+        return this.damageChoosingTargets(ai, saMe, tgt, dmg, false, false);
     }
 
     /**
@@ -613,25 +611,26 @@ public class AbilityFactoryDealDamage {
      *            a boolean.
      * @return a boolean.
      */
-    private boolean damageChoosingTargets(final SpellAbility saMe, final Target tgt, final int dmg,
+    private boolean damageChoosingTargets(final Player ai, final SpellAbility saMe, final Target tgt, final int dmg,
             final boolean isTrigger, final boolean mandatory) {
         final boolean noPrevention = this.abilityFactory.getMapParams().containsKey("NoPrevention");
         final PhaseHandler phase = Singletons.getModel().getGameState().getPhaseHandler();
 
         // target loop
         tgt.resetTargets();
-
+        Player enemy = ai.getOpponent(); 
+        
         while (tgt.getNumTargeted() < tgt.getMaxTargets(saMe.getSourceCard(), saMe)) {
 
             if (tgt.canTgtCreatureAndPlayer()) {
 
-                if (this.shouldTgtP(saMe, dmg, noPrevention)) {
-                    if (tgt.addTarget(AllZone.getHumanPlayer())) {
+                if (this.shouldTgtP(ai, saMe, dmg, noPrevention)) {
+                    if (tgt.addTarget(enemy)) {
                         continue;
                     }
                 }
 
-                final Card c = this.dealDamageChooseTgtC(saMe, dmg, noPrevention, AllZone.getHumanPlayer(), false);
+                final Card c = this.dealDamageChooseTgtC(ai, saMe, dmg, noPrevention, enemy, false);
                 if (c != null) {
                     tgt.addTarget(c);
                     continue;
@@ -648,11 +647,11 @@ public class AbilityFactoryDealDamage {
                         || (phase.is(PhaseType.END_OF_TURN) && saMe.isAbility() && phase.isNextTurn(PlayerType.COMPUTER))
                             || (phase.is(PhaseType.MAIN2) && saMe.getRestrictions().getPlaneswalker());
 
-                if (freePing && saMe.canTarget(AllZone.getHumanPlayer()) && tgt.addTarget(AllZone.getHumanPlayer())) {
+                if (freePing && saMe.canTarget(ai.getOpponent()) && tgt.addTarget(enemy)) {
                     continue;
                 }
             } else if (tgt.canTgtCreature()) {
-                final Card c = this.dealDamageChooseTgtC(saMe, dmg, noPrevention, AllZone.getHumanPlayer(), mandatory);
+                final Card c = this.dealDamageChooseTgtC(ai, saMe, dmg, noPrevention, enemy, mandatory);
                 if (c != null) {
                     tgt.addTarget(c);
                     continue;
@@ -661,16 +660,16 @@ public class AbilityFactoryDealDamage {
 
             // TODO: Improve Damage, we shouldn't just target the player just
             // because we can
-            else if (saMe.canTarget(AllZone.getHumanPlayer())) {
+            else if (saMe.canTarget(enemy)) {
 
                 if ((phase.is(PhaseType.END_OF_TURN) && phase.isNextTurn(PlayerType.COMPUTER))
                         || (AbilityFactory.isSorcerySpeed(saMe) && phase.is(PhaseType.MAIN2))
                         || saMe.getPayCosts() == null || isTrigger) {
-                    tgt.addTarget(AllZone.getHumanPlayer());
+                    tgt.addTarget(enemy);
                     continue;
                 }
-                if (this.shouldTgtP(saMe, dmg, noPrevention)) {
-                    tgt.addTarget(AllZone.getHumanPlayer());
+                if (this.shouldTgtP(ai, saMe, dmg, noPrevention)) {
+                    tgt.addTarget(enemy);
                     continue;
                 }
             }
@@ -682,7 +681,7 @@ public class AbilityFactoryDealDamage {
                 } else {
                     // If the trigger is mandatory, gotta choose my own stuff
                     // now
-                    return this.damageChooseRequiredTargets(saMe, tgt, dmg, mandatory);
+                    return this.damageChooseRequiredTargets(ai, saMe, tgt, dmg, mandatory);
                 }
             } else {
                 // TODO is this good enough? for up to amounts?
@@ -746,7 +745,7 @@ public class AbilityFactoryDealDamage {
      *            a boolean.
      * @return a boolean.
      */
-    private boolean damageChooseRequiredTargets(final SpellAbility saMe, final Target tgt, final int dmg,
+    private boolean damageChooseRequiredTargets(final Player ai, final SpellAbility saMe, final Target tgt, final int dmg,
             final boolean mandatory) {
         // this is for Triggered targets that are mandatory
         final boolean noPrevention = this.abilityFactory.getMapParams().containsKey("NoPrevention");
@@ -754,7 +753,7 @@ public class AbilityFactoryDealDamage {
         while (tgt.getNumTargeted() < tgt.getMinTargets(saMe.getSourceCard(), saMe)) {
             // TODO: Consider targeting the planeswalker
             if (tgt.canTgtCreature()) {
-                final Card c = this.dealDamageChooseTgtC(saMe, dmg, noPrevention, AllZone.getComputerPlayer(),
+                final Card c = this.dealDamageChooseTgtC(ai, saMe, dmg, noPrevention, ai,
                         mandatory);
                 if (c != null) {
                     tgt.addTarget(c);
@@ -762,8 +761,8 @@ public class AbilityFactoryDealDamage {
                 }
             }
 
-            if (saMe.canTarget(AllZone.getComputerPlayer())) {
-                if (tgt.addTarget(AllZone.getComputerPlayer())) {
+            if (saMe.canTarget(ai)) {
+                if (tgt.addTarget(ai)) {
                     continue;
                 }
             }
@@ -775,11 +774,11 @@ public class AbilityFactoryDealDamage {
         return true;
     }
 
-    private boolean dealDamageDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private boolean dealDamageDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         if (!ComputerUtil.canPayCost(sa) && !mandatory) {
             return false;
         }
-        return dealDamageDoTriggerAINoCost(af, sa, mandatory);
+        return dealDamageDoTriggerAINoCost(ai, af, sa, mandatory);
     }
 
     /**
@@ -795,7 +794,7 @@ public class AbilityFactoryDealDamage {
      *            a boolean.
      * @return a boolean.
      */
-    private boolean dealDamageDoTriggerAINoCost(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private boolean dealDamageDoTriggerAINoCost(final Player ai,final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
 
         final Card source = sa.getSourceCard();
         int dmg;
@@ -814,7 +813,7 @@ public class AbilityFactoryDealDamage {
                 return false;
             }
         } else {
-            if (!this.damageChoosingTargets(sa, tgt, dmg, true, mandatory) && !mandatory) {
+            if (!this.damageChoosingTargets(ai, sa, tgt, dmg, true, mandatory) && !mandatory) {
                 return false;
             }
 
@@ -970,7 +969,7 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryDealDamage.this.damageAllCanPlayAI(this.af, this);
+                return AbilityFactoryDealDamage.this.damageAllCanPlayAI(getActivatingPlayer(), this.af, this);
             }
 
             @Override
@@ -980,7 +979,7 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryDealDamage.this.damageAllDoTriggerAI(AbilityFactoryDealDamage.this.abilityFactory,
+                return AbilityFactoryDealDamage.this.damageAllDoTriggerAI(getActivatingPlayer(), AbilityFactoryDealDamage.this.abilityFactory,
                         this, mandatory);
             }
         }
@@ -1016,7 +1015,7 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryDealDamage.this.damageAllCanPlayAI(this.af, this);
+                return AbilityFactoryDealDamage.this.damageAllCanPlayAI(getActivatingPlayer(), this.af, this);
             }
 
             @Override
@@ -1060,7 +1059,7 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryDealDamage.this.damageAllCanPlayAI(this.af, this);
+                return AbilityFactoryDealDamage.this.damageAllCanPlayAI(getActivatingPlayer(), this.af, this);
             }
 
             @Override
@@ -1076,7 +1075,7 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryDealDamage.this.damageAllDoTriggerAI(AbilityFactoryDealDamage.this.abilityFactory,
+                return AbilityFactoryDealDamage.this.damageAllDoTriggerAI(getActivatingPlayer(), AbilityFactoryDealDamage.this.abilityFactory,
                         this, mandatory);
             }
         }
@@ -1147,7 +1146,7 @@ public class AbilityFactoryDealDamage {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private boolean damageAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private boolean damageAllCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the expected targets could be
         final Random r = MyRandom.getRandom();
@@ -1170,13 +1169,16 @@ public class AbilityFactoryDealDamage {
             validP = params.get("ValidPlayers");
         }
 
-        final List<Card> humanList = this.getKillableCreatures(af, sa, AllZone.getHumanPlayer(), dmg);
-        List<Card> computerList = this.getKillableCreatures(af, sa, AllZone.getComputerPlayer(), dmg);
+        Player opp = ai.getOpponent();
+        
+        final List<Card> humanList = this.getKillableCreatures(af, sa, opp, dmg);
+        List<Card> computerList = this.getKillableCreatures(af, sa, ai, dmg);
 
+        
         final Target tgt = sa.getTarget();
-        if (tgt != null && sa.canTarget(AllZone.getHumanPlayer())) {
+        if (tgt != null && sa.canTarget(opp)) {
             tgt.resetTargets();
-            sa.getTarget().addTarget(AllZone.getHumanPlayer());
+            sa.getTarget().addTarget(opp);
             computerList = new ArrayList<Card>();
         }
 
@@ -1192,14 +1194,14 @@ public class AbilityFactoryDealDamage {
         // max life
         // Don't kill yourself
         if (validP.contains("Each")
-                && (AllZone.getComputerPlayer().getLife() <= AllZone.getComputerPlayer().predictDamage(dmg, source,
+                && (ai.getLife() <= ai.predictDamage(dmg, source,
                         false))) {
             return false;
         }
 
         // if we can kill human, do it
         if ((validP.contains("Each") || validP.contains("EachOpponent"))
-                && (AllZone.getHumanPlayer().getLife() <= AllZone.getHumanPlayer().predictDamage(dmg, source, false))) {
+                && (opp.getLife() <= opp.predictDamage(dmg, source, false))) {
             return true;
         }
 
@@ -1280,7 +1282,7 @@ public class AbilityFactoryDealDamage {
      *            a boolean.
      * @return a boolean.
      */
-    private boolean damageAllDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private boolean damageAllDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         if (!ComputerUtil.canPayCost(sa) && !mandatory) {
             return false;
         }
@@ -1302,6 +1304,7 @@ public class AbilityFactoryDealDamage {
             validP = params.get("ValidPlayers");
         }
 
+        Player enemy = ai.getOpponent();
         final Target tgt = sa.getTarget();
         do { // A little trick to still check the SubAbilities, once we know we
              // want to play it
@@ -1312,21 +1315,21 @@ public class AbilityFactoryDealDamage {
                 } else {
                     // Don't get yourself killed
                     if (validP.contains("Each")
-                            && (AllZone.getComputerPlayer().getLife() <= AllZone.getComputerPlayer().predictDamage(dmg,
+                            && (ai.getLife() <= ai.predictDamage(dmg,
                                     source, false))) {
                         return false;
                     }
 
                     // if we can kill human, do it
                     if ((validP.contains("Each") || validP.contains("EachOpponent") || validP.contains("Targeted"))
-                            && (AllZone.getHumanPlayer().getLife() <= AllZone.getHumanPlayer().predictDamage(dmg,
+                            && (enemy.getLife() <= enemy.predictDamage(dmg,
                                     source, false))) {
                         break;
                     }
 
                     // Evaluate creatures getting killed
-                    final List<Card> humanList = this.getKillableCreatures(af, sa, AllZone.getHumanPlayer(), dmg);
-                    final List<Card> computerList = this.getKillableCreatures(af, sa, AllZone.getComputerPlayer(), dmg);
+                    final List<Card> humanList = this.getKillableCreatures(af, sa, enemy, dmg);
+                    final List<Card> computerList = this.getKillableCreatures(af, sa, ai, dmg);
                     if ((CardFactoryUtil.evaluateCreatureList(computerList) + 50) >= CardFactoryUtil
                             .evaluateCreatureList(humanList)) {
                         return false;
@@ -1436,7 +1439,7 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryDealDamage.this.eachDamageCanPlayAI(this.af, this);
+                return AbilityFactoryDealDamage.this.eachDamageCanPlayAI(getActivatingPlayer(), this.af, this);
             }
 
             @Override
@@ -1446,7 +1449,7 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryDealDamage.this.eachDamageDoTriggerAI(
+                return AbilityFactoryDealDamage.this.eachDamageDoTriggerAI(getActivatingPlayer(), 
                         AbilityFactoryDealDamage.this.abilityFactory, this, mandatory);
             }
         }
@@ -1483,7 +1486,7 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryDealDamage.this.eachDamageCanPlayAI(this.af, this);
+                return AbilityFactoryDealDamage.this.eachDamageCanPlayAI(getActivatingPlayer(), this.af, this);
             }
 
             @Override
@@ -1538,7 +1541,7 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryDealDamage.this.eachDamageDoTriggerAI(
+                return AbilityFactoryDealDamage.this.eachDamageDoTriggerAI(getActivatingPlayer(), 
                         AbilityFactoryDealDamage.this.abilityFactory, this, mandatory);
             }
         }
@@ -1613,19 +1616,19 @@ public class AbilityFactoryDealDamage {
         return sb.toString();
     }
 
-    private boolean eachDamageCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private boolean eachDamageCanPlayAI(final Player ai,final AbilityFactory af, final SpellAbility sa) {
 
         final Target tgt = sa.getTarget();
 
-        if (tgt != null && sa.canTarget(AllZone.getHumanPlayer())) {
+        if (tgt != null && sa.canTarget(ai.getOpponent())) {
             tgt.resetTargets();
-            sa.getTarget().addTarget(AllZone.getHumanPlayer());
+            sa.getTarget().addTarget(ai.getOpponent());
         }
 
-        return this.shouldTgtP(sa, this.getNumDamage(sa), false);
+        return this.shouldTgtP(ai, sa, this.getNumDamage(sa), false);
     }
 
-    private boolean eachDamageDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private boolean eachDamageDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         if (!ComputerUtil.canPayCost(sa) && !mandatory) {
             return false;
         }
@@ -1634,7 +1637,7 @@ public class AbilityFactoryDealDamage {
             return sa.getSubAbility().doTrigger(mandatory);
         }
 
-        return this.eachDamageCanPlayAI(af, sa);
+        return this.eachDamageCanPlayAI(ai, af, sa);
     }
 
     private void eachDamageResolve(final AbilityFactory af, final SpellAbility sa) {
@@ -1731,7 +1734,7 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryDealDamage.this.fightCanPlayAI(this.af, this);
+                return AbilityFactoryDealDamage.this.fightCanPlayAI(getActivatingPlayer(), this.af, this);
             }
 
             @Override
@@ -1772,7 +1775,7 @@ public class AbilityFactoryDealDamage {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryDealDamage.this.fightCanPlayAI(this.af, this);
+                return AbilityFactoryDealDamage.this.fightCanPlayAI(getActivatingPlayer(), this.af, this);
             }
 
             @Override
@@ -1896,12 +1899,12 @@ public class AbilityFactoryDealDamage {
         return sb.toString();
     }
 
-    private boolean fightCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private boolean fightCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         Target tgt = sa.getTarget();
         tgt.resetTargets();
 
-        List<Card> aiCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
+        List<Card> aiCreatures = AllZoneUtil.getCreaturesInPlay(ai);
         aiCreatures = CardLists.getTargetableCards(aiCreatures, sa);
         aiCreatures = CardLists.filter(aiCreatures, new Predicate<Card>() {
             @Override
@@ -1910,7 +1913,7 @@ public class AbilityFactoryDealDamage {
             }
         });
 
-        List<Card> humCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+        List<Card> humCreatures = AllZoneUtil.getCreaturesInPlay(ai.getOpponent());
         humCreatures = CardLists.getTargetableCards(humCreatures, sa);
 
         final Random r = MyRandom.getRandom();

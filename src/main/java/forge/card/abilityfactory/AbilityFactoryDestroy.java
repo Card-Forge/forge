@@ -93,7 +93,7 @@ public class AbilityFactoryDestroy {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryDestroy.destroyCanPlayAI(af, this);
+                return AbilityFactoryDestroy.destroyCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -131,7 +131,7 @@ public class AbilityFactoryDestroy {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryDestroy.destroyCanPlayAI(af, this);
+                return AbilityFactoryDestroy.destroyCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -183,12 +183,12 @@ public class AbilityFactoryDestroy {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryDestroy.destroyCanPlayAI(af, this);
+                return AbilityFactoryDestroy.destroyCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
             public boolean chkAIDrawback() {
-                return AbilityFactoryDestroy.destroyCanPlayAI(af, this);
+                return AbilityFactoryDestroy.destroyCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -217,7 +217,7 @@ public class AbilityFactoryDestroy {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean destroyCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean destroyCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the expected targets could be
         final Random r = MyRandom.getRandom();
@@ -248,7 +248,7 @@ public class AbilityFactoryDestroy {
         // Targeting
         if (abTgt != null) {
             abTgt.resetTargets();
-            list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+            list = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
             list = CardLists.getTargetableCards(list, sa);
             list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
             if (params.containsKey("AITgts")) {
@@ -320,7 +320,7 @@ public class AbilityFactoryDestroy {
             if (params.containsKey("Defined")) {
                 list = new ArrayList<Card>(AbilityFactory.getDefinedCards(af.getHostCard(), params.get("Defined"), sa));
                 if (list.isEmpty()
-                        || !CardLists.filterControlledBy(list, AllZone.getComputerPlayer()).isEmpty()
+                        || !CardLists.filterControlledBy(list, ai).isEmpty()
                         || CardLists.getNotKeyword(list, "Indestructible").isEmpty()) {
                     return false;
                 }
@@ -661,7 +661,7 @@ public class AbilityFactoryDestroy {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryDestroy.destroyAllCanPlayAI(af, this, this.noRegen);
+                return AbilityFactoryDestroy.destroyAllCanPlayAI(getActivatingPlayer(), af, this, this.noRegen);
             }
 
             @Override
@@ -671,7 +671,7 @@ public class AbilityFactoryDestroy {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryDestroy.destroyAllCanPlayAI(af, this, this.noRegen);
+                return AbilityFactoryDestroy.destroyAllCanPlayAI(getActivatingPlayer(), af, this, this.noRegen);
             }
         }
         final SpellAbility abDestroyAll = new AbilityDestroyAll(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -702,7 +702,7 @@ public class AbilityFactoryDestroy {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryDestroy.destroyAllCanPlayAI(af, this, this.noRegen);
+                return AbilityFactoryDestroy.destroyAllCanPlayAI(getActivatingPlayer(), af, this, this.noRegen);
             }
 
             @Override
@@ -749,7 +749,7 @@ public class AbilityFactoryDestroy {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryDestroy.destroyAllCanPlayAI(af, this, this.noRegen);
+                return AbilityFactoryDestroy.destroyAllCanPlayAI(getActivatingPlayer(), af, this, this.noRegen);
             }
 
             @Override
@@ -764,7 +764,7 @@ public class AbilityFactoryDestroy {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryDestroy.destroyAllTriggerAI(af, this, mandatory);
+                return AbilityFactoryDestroy.destroyAllTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbDestroyAll = new DrawbackDestroyAll(af.getHostCard(), af.getAbTgt());
@@ -843,7 +843,7 @@ public class AbilityFactoryDestroy {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean destroyAllTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean destroyAllTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         final Card source = sa.getSourceCard();
         final HashMap<String, String> params = af.getMapParams();
         final Target tgt = sa.getTarget();
@@ -851,11 +851,11 @@ public class AbilityFactoryDestroy {
         if (params.containsKey("ValidCards")) {
             valid = params.get("ValidCards");
         }
-        List<Card> humanlist = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-        List<Card> computerlist = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+        List<Card> humanlist = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
+        List<Card> computerlist = ai.getCardsIn(ZoneType.Battlefield);
         if (sa.getTarget() != null) {
             tgt.resetTargets();
-            sa.getTarget().addTarget(AllZone.getHumanPlayer());
+            sa.getTarget().addTarget(ai.getOpponent());
             computerlist.clear();
         }
         if (mandatory) {
@@ -912,7 +912,7 @@ public class AbilityFactoryDestroy {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean destroyAllCanPlayAI(final AbilityFactory af, final SpellAbility sa, final boolean noRegen) {
+    private static boolean destroyAllCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean noRegen) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the expected targets could be
         final Random r = MyRandom.getRandom();
@@ -932,14 +932,14 @@ public class AbilityFactoryDestroy {
             valid = valid.replace("X", Integer.toString(xPay));
         }
 
-        List<Card> humanlist = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-        List<Card> computerlist = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+        List<Card> humanlist = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
+        List<Card> computerlist = ai.getCardsIn(ZoneType.Battlefield);
 
         final Target tgt = sa.getTarget();
 
         if (sa.getTarget() != null) {
             tgt.resetTargets();
-            sa.getTarget().addTarget(AllZone.getHumanPlayer());
+            sa.getTarget().addTarget(ai.getOpponent());
             computerlist.clear();
         }
 

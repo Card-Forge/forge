@@ -37,8 +37,10 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
 
 /**
  * <p>
@@ -85,7 +87,7 @@ public final class AbilityFactoryClone {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryClone.cloneCanPlayAI(af, this);
+                return AbilityFactoryClone.cloneCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -123,7 +125,7 @@ public final class AbilityFactoryClone {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryClone.cloneCanPlayAI(af, this);
+                return AbilityFactoryClone.cloneCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -248,7 +250,7 @@ public final class AbilityFactoryClone {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean cloneCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean cloneCanPlayAI(final Player ai,final AbilityFactory af, final SpellAbility sa) {
 
         final HashMap<String, String> params = af.getMapParams();
         final Target tgt = sa.getTarget();
@@ -268,23 +270,24 @@ public final class AbilityFactoryClone {
         // TODO - add some kind of check for during human turn to answer
         // "Can I use this to block something?"
 
+        PhaseHandler phase = Singletons.getModel().getGameState().getPhaseHandler(); 
         // don't use instant speed clone abilities outside computers
         // Combat_Begin step
-        if (!Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_BEGIN)
-                && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) && !AbilityFactory.isSorcerySpeed(sa)
+        if (!phase.is(PhaseType.COMBAT_BEGIN)
+                && phase.isPlayerTurn(ai) && !AbilityFactory.isSorcerySpeed(sa)
                 && !params.containsKey("ActivationPhases") && !params.containsKey("Permanent")) {
             return false;
         }
 
         // don't use instant speed clone abilities outside humans
         // Combat_Declare_Attackers_InstantAbility step
-        if ((!Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || (AllZone.getCombat()
-                .getAttackers().isEmpty())) && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
+        if ( (!phase.is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || AllZone.getCombat().getAttackers().isEmpty())
+           && !phase.isPlayerTurn(ai)) {
             return false;
         }
 
         // don't activate during main2 unless this effect is permanent
-        if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.MAIN2) && !params.containsKey("Permanent")) {
+        if (phase.is(PhaseType.MAIN2) && !params.containsKey("Permanent")) {
             return false;
         }
 
@@ -293,7 +296,7 @@ public final class AbilityFactoryClone {
 
             boolean bFlag = false;
             for (final Card c : defined) {
-                bFlag |= (!c.isCreature() && !c.isTapped() && !(c.getTurnInZone() == Singletons.getModel().getGameState().getPhaseHandler().getTurn()));
+                bFlag |= (!c.isCreature() && !c.isTapped() && !(c.getTurnInZone() == phase.getTurn()));
 
                 // for creatures that could be improved (like Figure of Destiny)
                 if (c.isCreature() && (params.containsKey("Permanent") || (!c.isTapped() && !c.isSick()))) {

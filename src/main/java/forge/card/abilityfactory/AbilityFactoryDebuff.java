@@ -45,6 +45,7 @@ import forge.card.spellability.Target;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
@@ -99,7 +100,7 @@ public final class AbilityFactoryDebuff {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryDebuff.debuffCanPlayAI(af, this);
+                return AbilityFactoryDebuff.debuffCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -109,7 +110,7 @@ public final class AbilityFactoryDebuff {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryDebuff.debuffTriggerAI(af, this, mandatory);
+                return AbilityFactoryDebuff.debuffTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abDebuff = new AbilityDebuff(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -137,7 +138,7 @@ public final class AbilityFactoryDebuff {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryDebuff.debuffCanPlayAI(af, this);
+                return AbilityFactoryDebuff.debuffCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -186,12 +187,12 @@ public final class AbilityFactoryDebuff {
 
             @Override
             public boolean chkAIDrawback() {
-                return AbilityFactoryDebuff.debuffDrawbackAI(af, this);
+                return AbilityFactoryDebuff.debuffDrawbackAI(getActivatingPlayer(), af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryDebuff.debuffTriggerAI(af, this, mandatory);
+                return AbilityFactoryDebuff.debuffTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbDebuff = new DrawbackDebuff(af.getHostCard(), af.getAbTgt());
@@ -293,7 +294,7 @@ public final class AbilityFactoryDebuff {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean debuffCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean debuffCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         // if there is no target and host card isn't in play, don't activate
         final Card source = sa.getSourceCard();
         if ((sa.getTarget() == null) && !AllZoneUtil.isCardInPlay(source)) {
@@ -340,7 +341,7 @@ public final class AbilityFactoryDebuff {
                 return false;
             }
         } else {
-            return AbilityFactoryDebuff.debuffTgtAI(af, sa, AbilityFactoryDebuff.getKeywords(params), false);
+            return AbilityFactoryDebuff.debuffTgtAI(ai, af, sa, AbilityFactoryDebuff.getKeywords(params), false);
         }
 
         return false;
@@ -357,13 +358,13 @@ public final class AbilityFactoryDebuff {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean debuffDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean debuffDrawbackAI(final Player ai,final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
             // TODO - copied from AF_Pump.pumpDrawbackAI() - what should be
             // here?
         } else {
-            return AbilityFactoryDebuff.debuffTgtAI(af, sa, AbilityFactoryDebuff.getKeywords(params), false);
+            return AbilityFactoryDebuff.debuffTgtAI(ai, af, sa, AbilityFactoryDebuff.getKeywords(params), false);
         }
 
         return true;
@@ -384,7 +385,7 @@ public final class AbilityFactoryDebuff {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean debuffTgtAI(final AbilityFactory af, final SpellAbility sa, final ArrayList<String> kws,
+    private static boolean debuffTgtAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final ArrayList<String> kws,
             final boolean mandatory) {
         // this would be for evasive things like Flying, Unblockable, etc
         if (!mandatory && Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
@@ -404,7 +405,7 @@ public final class AbilityFactoryDebuff {
         // 3a. remove Persist?
 
         if (list.isEmpty()) {
-            return mandatory && AbilityFactoryDebuff.debuffMandatoryTarget(af, sa, mandatory);
+            return mandatory && AbilityFactoryDebuff.debuffMandatoryTarget(ai, af, sa, mandatory);
         }
 
         while (tgt.getNumTargeted() < tgt.getMaxTargets(sa.getSourceCard(), sa)) {
@@ -414,7 +415,7 @@ public final class AbilityFactoryDebuff {
             if (list.isEmpty()) {
                 if ((tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) || (tgt.getNumTargeted() == 0)) {
                     if (mandatory) {
-                        return AbilityFactoryDebuff.debuffMandatoryTarget(af, sa, mandatory);
+                        return AbilityFactoryDebuff.debuffMandatoryTarget(ai, af, sa, mandatory);
                     }
 
                     tgt.resetTargets();
@@ -477,7 +478,7 @@ public final class AbilityFactoryDebuff {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean debuffMandatoryTarget(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean debuffMandatoryTarget(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         final Target tgt = sa.getTarget();
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
@@ -492,8 +493,8 @@ public final class AbilityFactoryDebuff {
             list.remove(c);
         }
 
-        final List<Card> pref = CardLists.filterControlledBy(list, AllZone.getHumanPlayer());
-        final List<Card> forced = CardLists.filterControlledBy(list, AllZone.getComputerPlayer());
+        final List<Card> pref = CardLists.filterControlledBy(list, ai.getOpponent());
+        final List<Card> forced = CardLists.filterControlledBy(list, ai);
         final Card source = sa.getSourceCard();
 
         while (tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
@@ -553,7 +554,7 @@ public final class AbilityFactoryDebuff {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean debuffTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean debuffTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         if (!ComputerUtil.canPayCost(sa)) {
             return false;
         }
@@ -567,7 +568,7 @@ public final class AbilityFactoryDebuff {
                 return true;
             }
         } else {
-            return AbilityFactoryDebuff.debuffTgtAI(af, sa, kws, mandatory);
+            return AbilityFactoryDebuff.debuffTgtAI(ai, af, sa, kws, mandatory);
         }
 
         return true;
@@ -658,7 +659,7 @@ public final class AbilityFactoryDebuff {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryDebuff.debuffAllCanPlayAI(af, this);
+                return AbilityFactoryDebuff.debuffAllCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -697,7 +698,7 @@ public final class AbilityFactoryDebuff {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryDebuff.debuffAllCanPlayAI(af, this);
+                return AbilityFactoryDebuff.debuffAllCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -777,7 +778,7 @@ public final class AbilityFactoryDebuff {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean debuffAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean debuffAllCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         String valid = "";
         final Random r = MyRandom.getRandom();
         // final Card source = sa.getSourceCard();
@@ -793,9 +794,9 @@ public final class AbilityFactoryDebuff {
             valid = params.get("ValidCards");
         }
 
-        List<Card> comp = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+        List<Card> comp = ai.getCardsIn(ZoneType.Battlefield);
         comp = CardLists.getValidCards(comp, valid, hostCard.getController(), hostCard);
-        List<Card> human = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        List<Card> human = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
         human = CardLists.getValidCards(human, valid, hostCard.getController(), hostCard);
 
         // TODO - add blocking situations here also

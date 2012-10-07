@@ -84,7 +84,7 @@ public final class AbilityFactoryEndGameCondition {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryEndGameCondition.winsGameCanPlayAI(af, this);
+                return AbilityFactoryEndGameCondition.winsGameCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -129,7 +129,7 @@ public final class AbilityFactoryEndGameCondition {
                 // then call xCount with that card to properly calculate the
                 // amount
                 // Or choosing how many to sacrifice
-                return AbilityFactoryEndGameCondition.winsGameCanPlayAI(af, this);
+                return AbilityFactoryEndGameCondition.winsGameCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -180,7 +180,7 @@ public final class AbilityFactoryEndGameCondition {
                 // then call xCount with that card to properly calculate the
                 // amount
                 // Or choosing how many to sacrifice
-                return AbilityFactoryEndGameCondition.winsGameCanPlayAI(af, this);
+                return AbilityFactoryEndGameCondition.winsGameCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -245,8 +245,8 @@ public final class AbilityFactoryEndGameCondition {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean winsGameCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        if (AllZone.getComputerPlayer().cantWin()) {
+    public static boolean winsGameCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
+        if (ai.cantWin()) {
             return false;
         }
 

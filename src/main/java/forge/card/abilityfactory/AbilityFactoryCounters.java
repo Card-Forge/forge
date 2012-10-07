@@ -103,7 +103,7 @@ public class AbilityFactoryCounters {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryCounters.putCanPlayAI(af, this);
+                return AbilityFactoryCounters.putCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -113,7 +113,7 @@ public class AbilityFactoryCounters {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryCounters.putDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryCounters.putDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abPutCounter = new AbilityPutCounters(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -146,7 +146,7 @@ public class AbilityFactoryCounters {
                 // then call xCount with that card to properly calculate the
                 // amount
                 // Or choosing how many to sacrifice
-                return AbilityFactoryCounters.putCanPlayAI(af, this);
+                return AbilityFactoryCounters.putCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -157,9 +157,9 @@ public class AbilityFactoryCounters {
             @Override
             public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
                 if (withOutManaCost) {
-                    return AbilityFactoryCounters.putDoTriggerAINoCost(af, this, mandatory);
+                    return AbilityFactoryCounters.putDoTriggerAINoCost(getActivatingPlayer(), af, this, mandatory);
                 }
-                return AbilityFactoryCounters.putDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryCounters.putDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
 
         };
@@ -203,17 +203,17 @@ public class AbilityFactoryCounters {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryCounters.putCanPlayAI(af, this);
+                return AbilityFactoryCounters.putCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
             public boolean chkAIDrawback() {
-                return AbilityFactoryCounters.putPlayDrawbackAI(af, this);
+                return AbilityFactoryCounters.putPlayDrawbackAI(getActivatingPlayer(), af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryCounters.putDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryCounters.putDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbPutCounter = new DrawbackPutCounters(af.getHostCard(), af.getAbTgt());
@@ -298,7 +298,7 @@ public class AbilityFactoryCounters {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean putCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean putCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on
         // what the expected targets could be
@@ -312,7 +312,7 @@ public class AbilityFactoryCounters {
         final String type = params.get("CounterType");
         final String amountStr = params.get("CounterNum");
 
-        final Player player = af.isCurse() ? AllZone.getHumanPlayer() : AllZone.getComputerPlayer();
+        final Player player = af.isCurse() ? ai.getOpponent() : ai;
 
         list = player.getCardsIn(ZoneType.Battlefield);
         list = CardLists.filter(list, new Predicate<Card>() {
@@ -454,7 +454,7 @@ public class AbilityFactoryCounters {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean putPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean putPlayDrawbackAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         boolean chance = true;
         final Target abTgt = sa.getTarget();
@@ -465,7 +465,7 @@ public class AbilityFactoryCounters {
         final String amountStr = params.get("CounterNum");
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), amountStr, sa);
 
-        final Player player = af.isCurse() ? AllZone.getHumanPlayer() : AllZone.getComputerPlayer();
+        final Player player = af.isCurse() ? ai.getOpponent() : ai;
 
         list = player.getCardsIn(ZoneType.Battlefield);
 
@@ -537,11 +537,11 @@ public class AbilityFactoryCounters {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean putDoTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean putDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         if (!ComputerUtil.canPayCost(sa) && !mandatory) {
             return false;
         }
-        return putDoTriggerAINoCost(af, sa, mandatory);
+        return putDoTriggerAINoCost(ai, af, sa, mandatory);
     }
 
     /**
@@ -557,7 +557,7 @@ public class AbilityFactoryCounters {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean putDoTriggerAINoCost(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean putDoTriggerAINoCost(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
 
         final HashMap<String, String> params = af.getMapParams();
         final Target abTgt = sa.getTarget();
@@ -565,7 +565,7 @@ public class AbilityFactoryCounters {
         // boolean chance = true;
         boolean preferred = true;
         List<Card> list;
-        final Player player = af.isCurse() ? AllZone.getHumanPlayer() : AllZone.getComputerPlayer();
+        final Player player = af.isCurse() ? ai.getOpponent() : ai;
         final String type = params.get("CounterType");
         final String amountStr = params.get("CounterNum");
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), amountStr, sa);
@@ -1687,7 +1687,7 @@ public class AbilityFactoryCounters {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryCounters.putAllCanPlayAI(af, this);
+                return AbilityFactoryCounters.putAllCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -1697,7 +1697,7 @@ public class AbilityFactoryCounters {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryCounters.putAllCanPlayAI(af, this);
+                return AbilityFactoryCounters.putAllCanPlayAI(getActivatingPlayer(), af, this);
             }
         }
         final SpellAbility abPutCounterAll = new AbilityPutCounterAll(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -1725,7 +1725,7 @@ public class AbilityFactoryCounters {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryCounters.putAllCanPlayAI(af, this);
+                return AbilityFactoryCounters.putAllCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -1774,12 +1774,12 @@ public class AbilityFactoryCounters {
 
             @Override
             public boolean chkAIDrawback() {
-                return AbilityFactoryCounters.putAllPlayDrawbackAI(af, this);
+                return AbilityFactoryCounters.putAllPlayDrawbackAI(getActivatingPlayer(), af, this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryCounters.putAllPlayDrawbackAI(af, this);
+                return AbilityFactoryCounters.putAllPlayDrawbackAI(getActivatingPlayer(), af, this);
             }
         }
         final SpellAbility dbPutCounterAll = new DrawbackPutCounterAll(af.getHostCard(), af.getAbTgt());
@@ -1842,7 +1842,7 @@ public class AbilityFactoryCounters {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean putAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean putAllCanPlayAI(final Player ai,final AbilityFactory af, final SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what
         // the expected targets could be
@@ -1858,8 +1858,8 @@ public class AbilityFactoryCounters {
         final boolean curse = af.isCurse();
         final Target tgt = sa.getTarget();
 
-        hList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
-        cList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+        hList = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
+        cList = ai.getCardsIn(ZoneType.Battlefield);
 
         hList = CardLists.getValidCards(hList, valid, source.getController(), source);
         cList = CardLists.getValidCards(cList, valid, source.getController(), source);
@@ -1880,13 +1880,7 @@ public class AbilityFactoryCounters {
         }
 
         if (tgt != null) {
-            Player pl;
-            if (curse) {
-                pl = AllZone.getHumanPlayer();
-            } else {
-                pl = AllZone.getComputerPlayer();
-            }
-
+            Player pl = curse ? ai.getOpponent(): ai; 
             tgt.addTarget(pl);
 
             hList = CardLists.filterControlledBy(hList, pl);
@@ -1974,8 +1968,8 @@ public class AbilityFactoryCounters {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean putAllPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
-        return AbilityFactoryCounters.putAllCanPlayAI(af, sa);
+    private static boolean putAllPlayDrawbackAI(final Player ai,final AbilityFactory af, final SpellAbility sa) {
+        return AbilityFactoryCounters.putAllCanPlayAI(ai, af, sa);
     }
 
     /**
@@ -2315,7 +2309,7 @@ public class AbilityFactoryCounters {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryCounters.moveCounterDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryCounters.moveCounterDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abMoveCounter = new AbilityMoveCounters(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -2397,7 +2391,7 @@ public class AbilityFactoryCounters {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryCounters.moveCounterDoTriggerAI(af, this, mandatory);
+                return AbilityFactoryCounters.moveCounterDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbMoveCounter = new DrawbackMoveCounters(af.getHostCard(), af.getAbTgt());
@@ -2542,7 +2536,7 @@ public class AbilityFactoryCounters {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean moveCounterDoTriggerAI(final AbilityFactory af, final SpellAbility sa,
+    private static boolean moveCounterDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory) {
         final HashMap<String, String> params = af.getMapParams();
         final Card host = sa.getSourceCard();
@@ -2573,7 +2567,7 @@ public class AbilityFactoryCounters {
                 chance = true;
             }
         } else { // targeted
-            final Player player = af.isCurse() ? AllZone.getHumanPlayer() : AllZone.getComputerPlayer();
+            final Player player = af.isCurse() ? ai.getOpponent() : ai;
             List<Card> list = player.getCardsIn(ZoneType.Battlefield);
             list = CardLists.getTargetableCards(list, sa);
             list = CardLists.getValidCards(list, abTgt.getValidTgts(), host.getController(), host);
