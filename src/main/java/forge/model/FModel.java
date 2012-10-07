@@ -148,7 +148,7 @@ public enum FModel {
         // Set gameplay preferences and constants
         final HttpUtil pinger = new HttpUtil();
         final String url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/ping.php";
-        Constant.Runtime.NET_CONN = false; // (pinger.getURL(url).equals("pong") ? true : false);
+        Constant.Runtime.NET_CONN = (pinger.getURL(url).equals("pong") ? true : false);
 
         this.setBuildInfo(new BuildInfo());
         FModel.loadDynamicGamedata();

@@ -24,18 +24,14 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.Singletons;
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.zone.ZoneType;
 import forge.gui.CardContainer;
 import forge.gui.GuiAssignDamageFrame;
-import forge.gui.framework.EDocID;
-import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CMessage;
 import forge.gui.match.controllers.CPicture;
