@@ -158,8 +158,9 @@ public final class GameActionUtil {
                         GuiChoose.oneOrNone("Revealed cards:", revealed);
 
                         if (cascadedCard != null) {
+                            Player p = cascadedCard.getController();
 
-                            if (cascadedCard.getController().isHuman()) {
+                            if (p.isHuman()) {
                                 final StringBuilder title = new StringBuilder();
                                 title.append(cascCard.getName()).append(" - Cascade Ability");
                                 final StringBuilder question = new StringBuilder();
@@ -188,7 +189,7 @@ public final class GameActionUtil {
                                             continue;
                                         }
                                     }
-                                    ComputerUtil.playSpellAbilityWithoutPayingManaCost(sa);
+                                    ComputerUtil.playSpellAbilityWithoutPayingManaCost(p, sa);
                                     revealed.remove(cascadedCard);
                                     break;
                                 }
@@ -290,8 +291,9 @@ public final class GameActionUtil {
                             GuiChoose.oneOrNone("Revealed cards:", revealed);
                             for (int i = 0; i < rippleMax; i++) {
                                 if (rippledCards[i] != null) {
+                                    Player p = rippledCards[i].getController(); 
 
-                                    if (rippledCards[i].getController().isHuman()) {
+                                    if (p.isHuman()) {
                                         final Object[] possibleValues = { "Yes", "No" };
                                         final Object q = JOptionPane.showOptionDialog(null,
                                                 "Cast " + rippledCards[i].getName() + "?", "Ripple",
@@ -316,7 +318,7 @@ public final class GameActionUtil {
                                                     continue;
                                                 }
                                             }
-                                            ComputerUtil.playSpellAbilityWithoutPayingManaCost(sa);
+                                            ComputerUtil.playSpellAbilityWithoutPayingManaCost(p, sa);
                                             revealed.remove(rippledCards[i]);
                                             break;
                                         }
@@ -887,13 +889,8 @@ public final class GameActionUtil {
         if (c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw")) {
             GameActionUtil.playerCombatDamageWhirlingDervish(c);
         }
-
-        if (player.equals(AllZone.getHumanPlayer())) {
-            c.getDamageHistory().setDealtDmgToHumanThisTurn(true);
-        }
-        if (player.equals(AllZone.getComputerPlayer())) {
-            c.getDamageHistory().setDealtDmgToComputerThisTurn(true);
-        }
+        
+        c.getDamageHistory().registerDamage(player);
     }
 
     // restricted to combat damage, restricted to players
@@ -978,12 +975,7 @@ public final class GameActionUtil {
             GameActionUtil.executeCelestialMantle(c);
         }
 
-        if (player.equals(AllZone.getHumanPlayer())) {
-            c.getDamageHistory().setDealtCombatDmgToHumanThisTurn(true);
-        }
-        if (player.equals(AllZone.getComputerPlayer())) {
-            c.getDamageHistory().setDealtCombatDmgToComputerThisTurn(true);
-        }
+        c.getDamageHistory().registerCombatDamage(player);
     } // executeCombatDamageToPlayerEffects
 
     /**

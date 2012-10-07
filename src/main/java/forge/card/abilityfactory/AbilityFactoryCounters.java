@@ -337,15 +337,15 @@ public class AbilityFactoryCounters {
                 return false;
             }
 
-            if (!CostUtil.checkDiscardCost(abCost, source)) {
+            if (!CostUtil.checkDiscardCost(ai, abCost, source)) {
                 return false;
             }
 
-            if (!CostUtil.checkSacrificeCost(abCost, source)) {
+            if (!CostUtil.checkSacrificeCost(ai, abCost, source)) {
                 return false;
             }
 
-            if (!CostUtil.checkCreatureSacrificeCost(abCost, source)) {
+            if (!CostUtil.checkCreatureSacrificeCost(ai, abCost, source)) {
                 return false;
             }
 
@@ -805,7 +805,7 @@ public class AbilityFactoryCounters {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryCounters.removeCanPlayAI(af, this);
+                return AbilityFactoryCounters.removeCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -848,7 +848,7 @@ public class AbilityFactoryCounters {
                 // then call xCount with that card to properly calculate the
                 // amount
                 // Or choosing how many to sacrifice
-                return AbilityFactoryCounters.removeCanPlayAI(af, this);
+                return AbilityFactoryCounters.removeCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -989,7 +989,7 @@ public class AbilityFactoryCounters {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean removeCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean removeCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what
         // the expected targets could be
@@ -1015,11 +1015,11 @@ public class AbilityFactoryCounters {
                 return false;
             }
 
-            if (!CostUtil.checkDiscardCost(abCost, source)) {
+            if (!CostUtil.checkDiscardCost(ai, abCost, source)) {
                 return false;
             }
 
-            if (!CostUtil.checkSacrificeCost(abCost, source)) {
+            if (!CostUtil.checkSacrificeCost(ai, abCost, source)) {
                 return false;
             }
 
@@ -1870,11 +1870,11 @@ public class AbilityFactoryCounters {
                 return false;
             }
 
-            if (!CostUtil.checkDiscardCost(abCost, source)) {
+            if (!CostUtil.checkDiscardCost(ai, abCost, source)) {
                 return false;
             }
 
-            if (!CostUtil.checkSacrificeCost(abCost, source)) {
+            if (!CostUtil.checkSacrificeCost(ai, abCost, source)) {
                 return false;
             }
         }

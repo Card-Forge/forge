@@ -21,7 +21,6 @@ import java.util.List;
 
 import forge.Card;
 
-import forge.AllZone;
 import forge.CardLists;
 import forge.Counters;
 import forge.card.abilityfactory.AbilityFactory;
@@ -268,10 +267,10 @@ public class CostRemoveCounter extends CostPartWithList {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final boolean decideAIPayment(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
-        Player computer = AllZone.getComputerPlayer();
+
 
         if (c == null) {
             final String sVar = ability.getSVar(amount);
@@ -287,8 +286,7 @@ public class CostRemoveCounter extends CostPartWithList {
 
         if (!this.getThis()) {
             this.getList().clear();
-            final List<Card> typeList = CardLists
-                    .getValidCards(computer.getCardsIn(this.getZone()), this.getType().split(";"), computer, source);
+            final List<Card> typeList = CardLists.getValidCards(ai.getCardsIn(this.getZone()), this.getType().split(";"), ai, source);
             for (Card card : typeList) {
                 if (card.getCounters(this.getCounter()) >= c) {
                     this.addToList(card);

@@ -97,7 +97,7 @@ public class AbilityFactoryEffect {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryEffect.effectCanPlayAI(this.af, this);
+                return AbilityFactoryEffect.effectCanPlayAI(getActivatingPlayer(), this.af, this);
             }
 
             @Override
@@ -141,7 +141,7 @@ public class AbilityFactoryEffect {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryEffect.effectCanPlayAI(this.af, this);
+                return AbilityFactoryEffect.effectCanPlayAI(getActivatingPlayer(), this.af, this);
             }
 
             @Override
@@ -189,7 +189,7 @@ public class AbilityFactoryEffect {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryEffect.effectCanPlayAI(this.af, this);
+                return AbilityFactoryEffect.effectCanPlayAI(getActivatingPlayer(), this.af, this);
             }
 
             @Override
@@ -253,7 +253,7 @@ public class AbilityFactoryEffect {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean effectCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    public static boolean effectCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         final Random r = MyRandom.getRandom();
         final HashMap<String, String> params = af.getMapParams();
         boolean randomReturn = r.nextFloat() <= .6667;
@@ -263,7 +263,7 @@ public class AbilityFactoryEffect {
             logic = params.get("AILogic");
             final PhaseHandler phase = Singletons.getModel().getGameState().getPhaseHandler();
             if (logic.equals("BeginningOfOppTurn")) {
-                if (phase.isPlayerTurn(AllZone.getComputerPlayer()) || phase.getPhase().isAfter(PhaseType.DRAW)) {
+                if (phase.isPlayerTurn(ai.getOpponent()) || phase.getPhase().isAfter(PhaseType.DRAW)) {
                     return false;
                 }
                 randomReturn = true;
@@ -299,8 +299,8 @@ public class AbilityFactoryEffect {
             } else if (logic.equals("Always")) {
                 randomReturn = true;
             } else if (logic.equals("Evasion")) {
-                List<Card> comp = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
-                List<Card> human = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+                List<Card> comp = AllZoneUtil.getCreaturesInPlay(ai);
+                List<Card> human = AllZoneUtil.getCreaturesInPlay(ai.getOpponent());
 
                 // only count creatures that can attack or block
                 comp = CardLists.filter(comp, new Predicate<Card>() {
@@ -340,9 +340,9 @@ public class AbilityFactoryEffect {
         if (tgt != null && tgt.canTgtPlayer()) {
             tgt.resetTargets();
             if (tgt.canOnlyTgtOpponent() || logic.equals("BeginningOfOppTurn")) {
-                tgt.addTarget(AllZone.getHumanPlayer());
+                tgt.addTarget(ai.getOpponent());
             } else {
-                tgt.addTarget(AllZone.getComputerPlayer());
+                tgt.addTarget(ai);
             }
         }
 

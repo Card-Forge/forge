@@ -155,7 +155,7 @@ public class AIPlayer extends Player {
     public final List<Card> discard(final int num, final SpellAbility sa, final boolean duringResolution) {
         int max = this.getCardsIn(ZoneType.Hand).size();
         max = Math.min(max, num);
-        final List<Card> discarded = ComputerUtil.discardNumTypeAI(max, null, sa);
+        final List<Card> discarded = ComputerUtil.discardNumTypeAI(this, max, null, sa);
         for (int i = 0; i < discarded.size(); i++) {
             this.doDiscard(discarded.get(i), sa);
         }

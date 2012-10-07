@@ -255,7 +255,7 @@ public class AbilityFactoryCounterMagic {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkSacrificeCost(abCost, source)) {
+            if (!CostUtil.checkSacrificeCost(ai, abCost, source)) {
                 return false;
             }
             if (!CostUtil.checkLifeCost(abCost, source, 4, null)) {

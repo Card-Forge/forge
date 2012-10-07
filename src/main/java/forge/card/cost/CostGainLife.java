@@ -156,8 +156,8 @@ public class CostGainLife extends CostPart {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
-        final Player activator = ability.getActivatingPlayer();
+    public final boolean decideAIPayment(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
+
 
         Integer c = this.convertAmount();
         if (c == null) {
@@ -169,7 +169,7 @@ public class CostGainLife extends CostPart {
                 c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
             }
         }
-        if (!activator.getOpponent().canGainLife()) {
+        if (!ai.getOpponent().canGainLife()) {
             return false;
         }
         this.setLastPaidAmount(c);

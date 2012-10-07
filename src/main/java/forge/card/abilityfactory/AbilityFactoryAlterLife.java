@@ -334,7 +334,7 @@ public class AbilityFactoryAlterLife {
                 && CombatUtil.lifeInDanger(AllZone.getCombat()));
 
         if (abCost != null && !lifeCritical) {
-            if (!CostUtil.checkSacrificeCost(abCost, source, false)) {
+            if (!CostUtil.checkSacrificeCost(ai, abCost, source, false)) {
                 return false;
             }
 
@@ -342,7 +342,7 @@ public class AbilityFactoryAlterLife {
                 return false;
             }
 
-            if (!CostUtil.checkDiscardCost(abCost, source)) {
+            if (!CostUtil.checkDiscardCost(ai, abCost, source)) {
                 return false;
             }
 
@@ -760,11 +760,11 @@ public class AbilityFactoryAlterLife {
                 return false;
             }
 
-            if (!CostUtil.checkDiscardCost(abCost, source)) {
+            if (!CostUtil.checkDiscardCost(ai, abCost, source)) {
                 return false;
             }
 
-            if (!CostUtil.checkSacrificeCost(abCost, source)) {
+            if (!CostUtil.checkSacrificeCost(ai, abCost, source)) {
                 return false;
             }
 
@@ -1242,7 +1242,7 @@ public class AbilityFactoryAlterLife {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean poisonCanPlayAI(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa) {
+    private static boolean poisonCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
         final HashMap<String, String> params = af.getMapParams();
@@ -1261,7 +1261,7 @@ public class AbilityFactoryAlterLife {
                 return false;
             }
 
-            if (!CostUtil.checkSacrificeCost(abCost, source)) {
+            if (!CostUtil.checkSacrificeCost(ai, abCost, source)) {
                 return false;
             }
         }
@@ -1280,7 +1280,7 @@ public class AbilityFactoryAlterLife {
 
         if (sa.getTarget() != null) {
             tgt.resetTargets();
-            sa.getTarget().addTarget(aiPlayer.getOpponent());
+            sa.getTarget().addTarget(ai.getOpponent());
         }
 
         return true;

@@ -237,7 +237,7 @@ public class CostExile extends CostPartWithList {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final boolean decideAIPayment(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         this.resetList();
         if (this.getThis()) {
             this.getList().add(source);
@@ -258,7 +258,7 @@ public class CostExile extends CostPartWithList {
             }
 
             if (this.from.equals(ZoneType.Library)) {
-                this.setList(AllZone.getComputerPlayer().getCardsIn(ZoneType.Library, c));
+                this.setList(ai.getCardsIn(ZoneType.Library, c));
             } else {
                 this.setList(ComputerUtil.chooseExileFrom(this.getFrom(), this.getType(), source,
                         ability.getTargetCard(), c));

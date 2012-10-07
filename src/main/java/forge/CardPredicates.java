@@ -106,10 +106,19 @@ public final class CardPredicates {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return (c.isCreature() && CombatUtil.canBlock(attacker, c));
+                return c.isCreature() && CombatUtil.canBlock(attacker, c);
             }
         };
     }
+    
+    public final static Predicate<Card> possibleBlockerForAtLeastOne(final Iterable<Card> attackers) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return c.isCreature() && CombatUtil.canBlockAtLeastOne(c, attackers);
+            }
+        };
+    }    
     
     public static final Predicate<Card> possibleAttackers = new Predicate<Card>() {
         @Override
@@ -181,7 +190,7 @@ public final class CardPredicates {
                 return c.isCreature() && CombatUtil.canAttack(c);
             }
         };
-        
+
         /**
          * a Predicate<Card> to get all enchantments.
          */

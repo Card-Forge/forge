@@ -1362,7 +1362,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                                     continue;
                                 }
                             }
-                            ComputerUtil.playSpellAbilityWithoutPayingManaCost(sa);
+                            ComputerUtil.playSpellAbilityWithoutPayingManaCost(c.getOwner(), sa);
                             break;
                         }
                     }
@@ -6920,20 +6920,15 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("dealtDamageToYouThisTurn")) {
-            if (!(this.getDamageHistory().getDealtDmgToHumanThisTurn() && sourceController.isHuman())
-                    && !(this.getDamageHistory().getDealtDmgToComputerThisTurn() && sourceController.isComputer())) {
+            if ( !this.getDamageHistory().getThisTurnDamaged().contains(sourceController) ) {
                 return false;
             }
         } else if (property.startsWith("controllerWasDealtCombatDamageByThisTurn")) {
-            if (!(source.getDamageHistory().getDealtCombatDmgToHumanThisTurn() && this.getController().equals(AllZone.getHumanPlayer()))
-                    && !(source.getDamageHistory().getDealtCombatDmgToComputerThisTurn() && this.getController().equals(
-                            AllZone.getComputerPlayer()))) {
+            if ( !this.getDamageHistory().getThisTurnCombatDamaged().contains(sourceController) ) {
                 return false;
             }
         } else if (property.startsWith("controllerWasDealtDamageByThisTurn")) {
-            if (!(source.getDamageHistory().getDealtDmgToHumanThisTurn() && this.getController().equals(AllZone.getHumanPlayer()))
-                    && !(source.getDamageHistory().getDealtDmgToComputerThisTurn() && this.getController()
-                            .equals(AllZone.getComputerPlayer()))) {
+            if ( !this.getDamageHistory().getThisTurnDamaged().contains(sourceController) ) {
                 return false;
             }
         } else if (property.startsWith("wasDealtDamageThisTurn")) {

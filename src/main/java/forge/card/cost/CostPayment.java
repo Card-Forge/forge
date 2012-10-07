@@ -281,13 +281,12 @@ public class CostPayment {
      * 
      * @return a boolean.
      */
-    public final boolean payComputerCosts() {
+    public final boolean payComputerCosts(final Player ai) {
         // canPayAdditionalCosts now Player Agnostic
 
         // Just in case it wasn't set, but honestly it shouldn't have gotten
         // here without being set
-        final Player activator = AllZone.getComputerPlayer();
-        this.ability.setActivatingPlayer(activator);
+        this.ability.setActivatingPlayer(ai);
 
         final Card source = this.ability.getSourceCard();
         final ArrayList<CostPart> parts = this.cost.getCostParts();
@@ -298,7 +297,7 @@ public class CostPayment {
 
         // Set all of the decisions before attempting to pay anything
         for (final CostPart part : parts) {
-            if (!part.decideAIPayment(this.ability, source, this)) {
+            if (!part.decideAIPayment(ai, this.ability, source, this)) {
                 return false;
             }
         }

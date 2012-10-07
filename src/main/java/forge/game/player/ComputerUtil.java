@@ -18,7 +18,6 @@
 package forge.game.player;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -85,20 +84,19 @@ public class ComputerUtil {
      *            objects.
      * @return a boolean.
      */
-    public static boolean playSpellAbilities(final SpellAbility[] all) {
-        Player computer = AllZone.getComputerPlayer();
+    public static boolean playSpellAbilities(final Player ai, final List<SpellAbility> all) {
         // not sure "playing biggest spell" matters?
         ComputerUtil.sortSpellAbilityByCost(all);
         ArrayList<SpellAbility> abilities = new ArrayList<SpellAbility>();
         final ArrayList<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
         for (SpellAbility sa : all) {
             abilities.add(abilities.size(), sa);
-            sa.setActivatingPlayer(computer);
+            sa.setActivatingPlayer(ai);
             //add alternative costs as additional spell abilities
             abilities.addAll(GameActionUtil.getAlternativeCosts(sa));
         }
         for (SpellAbility sa : abilities) {
-            sa.setActivatingPlayer(computer);
+            sa.setActivatingPlayer(ai);
             newAbilities.addAll(GameActionUtil.getOptionalAdditionalCosts(sa));
         }
         abilities = newAbilities;
@@ -108,30 +106,13 @@ public class ComputerUtil {
             if ((af != null) && af.getAPI().equals("Counter")) {
                 continue;
             }
-            sa.setActivatingPlayer(computer);
+            sa.setActivatingPlayer(ai);
 
-            if (ComputerUtil.canBePlayedAndPayedByAI(computer, sa) && ComputerUtil.handlePlayingSpellAbility(sa)) {
+            if (ComputerUtil.canBePlayedAndPayedByAI(ai, sa) && ComputerUtil.handlePlayingSpellAbility(ai, sa)) {
                 return false;
             }
         }
         return true;
-    } // playCards()
-
-    /**
-     * <p>
-     * playAbilities.
-     * </p>
-     * 
-     * @param all
-     *            a {@link java.util.ArrayList} object.
-     * @return a boolean.
-     */
-    public static boolean playSpellAbilities(final ArrayList<SpellAbility> all) {
-        final SpellAbility[] sas = new SpellAbility[all.size()];
-        for (int i = 0; i < sas.length; i++) {
-            sas[i] = all.get(i);
-        }
-        return ComputerUtil.playSpellAbilities(sas);
     } // playCards()
 
     /**
@@ -143,15 +124,15 @@ public class ComputerUtil {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean handlePlayingSpellAbility(final SpellAbility sa) {
+    public static boolean handlePlayingSpellAbility(final Player ai, final SpellAbility sa) {
 
         if (sa instanceof AbilityStatic) {
             final Cost cost = sa.getPayCosts();
-            if (cost == null && ComputerUtil.payManaCost(sa, AllZone.getComputerPlayer(), false, 0, true)) {
+            if (cost == null && ComputerUtil.payManaCost(sa, ai, false, 0, true)) {
                 sa.resolve();
             } else {
                 final CostPayment pay = new CostPayment(cost, sa);
-                if (pay.payComputerCosts()) {
+                if (pay.payComputerCosts(ai)) {
                     sa.resolve();
                 }
             }
@@ -180,7 +161,7 @@ public class ComputerUtil {
             }
 
             final CostPayment pay = new CostPayment(cost, sa);
-            if (pay.payComputerCosts()) {
+            if (pay.payComputerCosts(ai)) {
                 AllZone.getStack().addAndUnfreeze(sa);
                 if (sa.getSplicedCards() != null && !sa.getSplicedCards().isEmpty()) {
                     GuiChoose.oneOrNone("Computer reveals spliced cards:", sa.getSplicedCards());
@@ -204,7 +185,7 @@ public class ComputerUtil {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a int.
      */
-    public static int counterSpellRestriction(final SpellAbility sa) {
+    public static int counterSpellRestriction(final Player ai, final SpellAbility sa) {
         // Move this to AF?
         // Restriction Level is Based off a handful of factors
 
@@ -223,7 +204,7 @@ public class ComputerUtil {
         // Consider the costs here for relative "scoring"
         if (CostUtil.hasDiscardHandCost(cost)) {
             // Null Brooch aid
-            restrict -= (AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand).size() * 20);
+            restrict -= (ai.getCardsIn(ZoneType.Hand).size() * 20);
         }
 
         // Abilities before Spells (card advantage)
@@ -241,7 +222,7 @@ public class ComputerUtil {
         if (unless != null) {
             final int amount = AbilityFactory.calculateAmount(source, unless, sa);
 
-            final int usableManaSources = CardFactoryUtil.getUsableManaSources(AllZone.getHumanPlayer());
+            final int usableManaSources = CardFactoryUtil.getUsableManaSources(ai.getOpponent());
 
             // If the Unless isn't enough, this should be less likely to be used
             if (amount > usableManaSources) {
@@ -275,34 +256,33 @@ public class ComputerUtil {
      *            a {@link java.util.ArrayList} object.
      * @return a boolean.
      */
-    public static boolean playCounterSpell(final ArrayList<SpellAbility> possibleCounters) {
-        Player computer = AllZone.getComputerPlayer();
+    public static boolean playCounterSpell(final Player ai, final ArrayList<SpellAbility> possibleCounters) {
         SpellAbility bestSA = null;
         int bestRestriction = Integer.MIN_VALUE;
         final ArrayList<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
         for (SpellAbility sa : possibleCounters) {
-            sa.setActivatingPlayer(computer);
+            sa.setActivatingPlayer(ai);
             //add alternative costs as additional spell abilities
             newAbilities.addAll(GameActionUtil.getAlternativeCosts(sa));
         }
         possibleCounters.addAll(newAbilities);
         newAbilities.clear();
         for (SpellAbility sa : possibleCounters) {
-            sa.setActivatingPlayer(computer);
+            sa.setActivatingPlayer(ai);
             newAbilities.addAll(GameActionUtil.getOptionalAdditionalCosts(sa));
         }
         possibleCounters.addAll(newAbilities);
         for (final SpellAbility sa : possibleCounters) {
             SpellAbility currentSA = sa;
-            sa.setActivatingPlayer(computer);
+            sa.setActivatingPlayer(ai);
             // check everything necessary
-            if (ComputerUtil.canBePlayedAndPayedByAI(computer, currentSA)) {
+            if (ComputerUtil.canBePlayedAndPayedByAI(ai, currentSA)) {
                 if (bestSA == null) {
                     bestSA = currentSA;
-                    bestRestriction = ComputerUtil.counterSpellRestriction(currentSA);
+                    bestRestriction = ComputerUtil.counterSpellRestriction(ai, currentSA);
                 } else {
                     // Compare bestSA with this SA
-                    final int restrictionLevel = ComputerUtil.counterSpellRestriction(currentSA);
+                    final int restrictionLevel = ComputerUtil.counterSpellRestriction(ai, currentSA);
 
                     if (restrictionLevel > bestRestriction) {
                         bestRestriction = restrictionLevel;
@@ -336,7 +316,7 @@ public class ComputerUtil {
             AllZone.getStack().addAndUnfreeze(bestSA);
         } else {
             final CostPayment pay = new CostPayment(cost, bestSA);
-            if (pay.payComputerCosts()) {
+            if (pay.payComputerCosts(ai)) {
                 AllZone.getStack().addAndUnfreeze(bestSA);
             }
         }
@@ -366,7 +346,7 @@ public class ComputerUtil {
                 AllZone.getStack().add(sa);
             } else {
                 final CostPayment pay = new CostPayment(cost, sa);
-                if (pay.payComputerCosts()) {
+                if (pay.payComputerCosts(ai)) {
                     AllZone.getStack().add(sa);
                 }
             }
@@ -381,8 +361,8 @@ public class ComputerUtil {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static final void playStackFree(final SpellAbility sa) {
-        sa.setActivatingPlayer(AllZone.getComputerPlayer());
+    public static final void playStackFree(final Player ai, final SpellAbility sa) {
+        sa.setActivatingPlayer(ai);
 
         final Card source = sa.getSourceCard();
         if (sa.isSpell() && !source.isCopiedSpell()) {
@@ -400,7 +380,7 @@ public class ComputerUtil {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static final void playSpellAbilityWithoutPayingManaCost(final SpellAbility sa) {
+    public static final void playSpellAbilityWithoutPayingManaCost(final Player ai, final SpellAbility sa) {
         final SpellAbility newSA = sa.copy();
         final Cost cost = new Cost(sa.getSourceCard(), "", false);
         if (newSA.getPayCosts() != null) {
@@ -415,9 +395,9 @@ public class ComputerUtil {
         final StringBuilder sb = new StringBuilder();
         sb.append(sa.getDescription()).append(" (without paying its mana cost)");
         newSA.setDescription(sb.toString());
-        newSA.setActivatingPlayer(AllZone.getComputerPlayer());
+        newSA.setActivatingPlayer(ai);
 
-        if (!ComputerUtil.canPayAdditionalCosts(newSA)) {
+        if (!ComputerUtil.canPayAdditionalCosts(ai, newSA)) {
             return;
         }
 
@@ -427,7 +407,7 @@ public class ComputerUtil {
         }
 
         final CostPayment pay = new CostPayment(cost, newSA);
-        pay.payComputerCosts();
+        pay.payComputerCosts(ai);
 
         AllZone.getStack().add(newSA);
     }
@@ -456,7 +436,7 @@ public class ComputerUtil {
                 ComputerUtil.payManaCost(sa);
             } else {
                 final CostPayment pay = new CostPayment(cost, sa);
-                pay.payComputerCosts();
+                pay.payComputerCosts(ai);
             }
 
             AbilityFactory.resolve(sa, false);
@@ -492,12 +472,12 @@ public class ComputerUtil {
      *            a {@link java.lang.String} object.
      * @return a boolean.
      */
-    public static boolean shouldPayCost(final Card hostCard, final String costString) {
+    public static boolean shouldPayCost(final Player ai, final Card hostCard, final String costString) {
         final Cost cost = new Cost(hostCard, costString, false);
 
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostPayLife) {
-                final int remainingLife = AllZone.getComputerPlayer().getLife();
+                final int remainingLife = ai.getLife();
                 final int lifeCost = ((CostPayLife) part).convertAmount();
                 if ((remainingLife - lifeCost) < 10) {
                     return false; //Don't pay life if it would put AI under 10 life
@@ -564,8 +544,8 @@ public class ComputerUtil {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean canPayAdditionalCosts(final SpellAbility sa) {
-        return ComputerUtil.canPayAdditionalCosts(sa, AllZone.getComputerPlayer());
+    public static boolean canPayAdditionalCosts(final Player ai, final SpellAbility sa) {
+        return ComputerUtil.canPayAdditionalCosts(sa, ai);
     }
 
     /**
@@ -744,7 +724,7 @@ public class ComputerUtil {
                     // Pay additional costs
                     if (m.getPayCosts() != null) {
                         final CostPayment pay = new CostPayment(m.getPayCosts(), m);
-                        if (!pay.payComputerCosts()) {
+                        if (!pay.payComputerCosts(player)) {
                             continue;
                         }
                     } else {
@@ -1273,18 +1253,17 @@ public class ComputerUtil {
      * 
      * @return a boolean.
      */
-    public static boolean chooseLandsToPlay() {
-        final Player computer = AllZone.getComputerPlayer();
-        if (!computer.canPlayLand()) {
+    public static boolean chooseLandsToPlay(final Player ai) {
+        if (!ai.canPlayLand()) {
             return false;
         }
-        final List<Card> hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
+        final List<Card> hand = ai.getCardsIn(ZoneType.Hand);
         List<Card> landList = CardLists.filter(hand, Presets.LANDS);
         List<Card> nonLandList = CardLists.filter(hand, Predicates.not(CardPredicates.Presets.LANDS));
 
-        List<Card> lands = computer.getCardsIn(ZoneType.Graveyard);
-        if (!computer.getCardsIn(ZoneType.Library).isEmpty()) {
-            lands.add(computer.getCardsIn(ZoneType.Library).get(0));
+        final List<Card> lands = ai.getCardsIn(ZoneType.Graveyard);
+        if (!ai.getCardsIn(ZoneType.Library).isEmpty()) {
+            lands.add(ai.getCardsIn(ZoneType.Library).get(0));
         }
         for (final Card crd : lands) {
             if (crd.isLand() && crd.hasKeyword("May be played")) {
@@ -1295,9 +1274,9 @@ public class ComputerUtil {
             return false;
         }
         if (landList.size() == 1 && nonLandList.size() < 3) {
-            List<Card> cardsInPlay = computer.getCardsIn(ZoneType.Battlefield);
+            List<Card> cardsInPlay = ai.getCardsIn(ZoneType.Battlefield);
             List<Card> landsInPlay = CardLists.filter(cardsInPlay, Presets.LANDS);
-            List<Card> allCards = computer.getCardsIn(ZoneType.Graveyard);
+            List<Card> allCards = ai.getCardsIn(ZoneType.Graveyard);
             allCards.addAll(cardsInPlay);
             int maxCmcInHand = Aggregates.max(hand, CardPredicates.Accessors.fnGetCmc);
             int max = Math.max(maxCmcInHand, 6);
@@ -1330,7 +1309,7 @@ public class ComputerUtil {
                     }
                 }
                 if (c.isType("Legendary") && !c.getName().equals("Flagstones of Trokair")) {
-                    final List<Card> list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+                    final List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
                     if (Iterables.any(list, CardPredicates.nameEquals(c.getName()))) {
                         return false;
                     }
@@ -1340,8 +1319,8 @@ public class ComputerUtil {
                 // available
                 final ArrayList<SpellAbility> spellAbilities = c.getSpellAbilities();
 
-                final List<Card> hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
-                List<Card> lands = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+                final List<Card> hand = ai.getCardsIn(ZoneType.Hand);
+                List<Card> lands = ai.getCardsIn(ZoneType.Battlefield);
                 lands.addAll(hand);
                 lands = CardLists.filter(lands, CardPredicates.Presets.LANDS);
                 int maxCmcInHand = Aggregates.max(hand, CardPredicates.Accessors.fnGetCmc);
@@ -1356,7 +1335,7 @@ public class ComputerUtil {
             }
         });
 
-        while (!landList.isEmpty() && computer.canPlayLand()) {
+        while (!landList.isEmpty() && ai.canPlayLand()) {
             // play as many lands as you can
             int ix = 0;
             while (landList.get(ix).isReflectedLand() && ((ix + 1) < landList.size())) {
@@ -1368,7 +1347,7 @@ public class ComputerUtil {
             Card land = landList.get(ix);
             //play basic lands that are needed the most
             if (!Iterables.any(landList, CardPredicates.Presets.BASIC_LANDS)) {
-                final List<Card> combined = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+                final List<Card> combined = ai.getCardsIn(ZoneType.Battlefield);
 
                 final ArrayList<String> basics = new ArrayList<String>();
 
@@ -1400,7 +1379,7 @@ public class ComputerUtil {
                 land = landList.get(0);
             }
             landList.remove(land);
-            computer.playLand(land);
+            ai.playLand(land);
 
             if (AllZone.getStack().size() != 0) {
                 return true;
@@ -1422,7 +1401,7 @@ public class ComputerUtil {
      *            a {@link forge.CardList} object.
      * @return a {@link forge.Card} object.
      */
-    public static Card getCardPreference(final Card activate, final String pref, final List<Card> typeList) {
+    public static Card getCardPreference(final Player ai, final Card activate, final String pref, final List<Card> typeList) {
 
         if (activate != null) {
             final String[] prefValid = activate.getSVar("AIPreference").split("\\$");
@@ -1458,7 +1437,7 @@ public class ComputerUtil {
                 final int priority = 6 - ip;
                 for (Card c : typeList) {
                     if (priority == 3 && c.isLand()
-                            && !AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield, "Crucible of Worlds").isEmpty()) {
+                            && !ai.getCardsIn(ZoneType.Battlefield, "Crucible of Worlds").isEmpty()) {
                         return c;
                     }
                     if (!c.getSVar("DiscardMe").equals("") && (Integer.parseInt(c.getSVar("DiscardMe")) == priority)) {
@@ -1470,8 +1449,8 @@ public class ComputerUtil {
             // Discard lands
             final List<Card> landsInHand = CardLists.getType(typeList, "Land");
             if (!landsInHand.isEmpty()) {
-                final List<Card> landsInPlay = CardLists.getType(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), "Land");
-                final List<Card> nonLandsInHand = CardLists.getNotType(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand), "Land");
+                final List<Card> landsInPlay = CardLists.getType(ai.getCardsIn(ZoneType.Battlefield), "Land");
+                final List<Card> nonLandsInHand = CardLists.getNotType(ai.getCardsIn(ZoneType.Hand), "Land");
                 final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, CardPredicates.Accessors.fnGetCmc));
                 if (landsInPlay.size() >= highestCMC
                         || (landsInPlay.size() + landsInHand.size() > 6 && landsInHand.size() > 1)) {
@@ -1499,12 +1478,11 @@ public class ComputerUtil {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    public static List<Card> chooseSacrificeType(final String type, final Card activate, final Card target,
+    public static List<Card> chooseSacrificeType(final Player ai, final String type, final Card activate, final Card target,
             final int amount) {
-        Player activator = AllZone.getComputerPlayer();
-        List<Card> typeList = activator.getCardsIn(ZoneType.Battlefield);
+        List<Card> typeList = ai.getCardsIn(ZoneType.Battlefield);
         typeList = CardLists.getValidCards(typeList, type.split(";"), activate.getController(), activate);
-        if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
+        if (ai.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
             typeList = CardLists.getNotType(typeList, "Creature");
         }
 
@@ -1520,7 +1498,7 @@ public class ComputerUtil {
         int count = 0;
 
         while (count < amount) {
-            final Card prefCard = ComputerUtil.getCardPreference(activate, "SacCost", typeList);
+            final Card prefCard = ComputerUtil.getCardPreference(ai, activate, "SacCost", typeList);
             if (prefCard != null) {
                 sacList.add(prefCard);
                 typeList.remove(prefCard);
@@ -1552,8 +1530,8 @@ public class ComputerUtil {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a List<Card> of discarded cards.
      */
-    public static List<Card> discardNumTypeAI(final int numDiscard, final String[] uTypes, final SpellAbility sa) {
-        List<Card> hand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
+    public static List<Card> discardNumTypeAI(final Player ai, final int numDiscard, final String[] uTypes, final SpellAbility sa) {
+        List<Card> hand = ai.getCardsIn(ZoneType.Hand);
         Card sourceCard = null;
 
         if ((uTypes != null) && (sa != null)) {
@@ -1583,7 +1561,7 @@ public class ComputerUtil {
                 }
             }
             if (prefCard == null) {
-                prefCard = ComputerUtil.getCardPreference(sourceCard, "DiscardCost", hand);
+                prefCard = ComputerUtil.getCardPreference(ai, sourceCard, "DiscardCost", hand);
             }
             if (prefCard != null) {
                 discardList.add(prefCard);
@@ -1880,24 +1858,6 @@ public class ComputerUtil {
 
     /**
      * <p>
-     * getPossibleAttackers.
-     * </p>
-     * 
-     * @return a {@link forge.CardList} object.
-     */
-    public static List<Card> getPossibleAttackers() {
-        List<Card> list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-        list = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return CombatUtil.canAttack(c);
-            }
-        });
-        return list;
-    }
-
-    /**
-     * <p>
      * getAttackers.
      * </p>
      * 
@@ -1932,7 +1892,7 @@ public class ComputerUtil {
      *            an array of {@link forge.card.spellability.SpellAbility}
      *            objects.
      */
-    static void sortSpellAbilityByCost(final SpellAbility[] sa) {
+    static void sortSpellAbilityByCost(final List<SpellAbility> sa) {
         // sort from highest cost to lowest
         // we want the highest costs first
         final Comparator<SpellAbility> c = new Comparator<SpellAbility>() {
@@ -1954,7 +1914,7 @@ public class ComputerUtil {
                 return b1 - a1;
             }
         }; // Comparator
-        Arrays.sort(sa, c);
+        Collections.sort(sa, c);
     } // sortSpellAbilityByCost()
 
     public static int getSpellAbilityPriority(SpellAbility sa) {
@@ -2176,18 +2136,18 @@ public class ComputerUtil {
      *            a SpellAbility object.
      * @return a boolean.
      */
-    public static boolean castPermanentInMain1(final SpellAbility sa) {
+    public static boolean castPermanentInMain1(final SpellAbility sa, final Player ai) {
         final Card card = sa.getSourceCard();
         if (card.getSVar("PlayMain1").equals("TRUE")) {
             return true;
         }
-        if ((card.isCreature() && (ComputerAIGeneral.hasACardGivingHaste()
+        if ((card.isCreature() && (ComputerAIGeneral.hasACardGivingHaste(ai)
                 || card.hasKeyword("Haste"))) || card.hasKeyword("Exalted")) {
             return true;
         }
 
         // get all cards the computer controls with BuffedBy
-        final List<Card> buffed = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+        final List<Card> buffed = ai.getCardsIn(ZoneType.Battlefield);
         for (int j = 0; j < buffed.size(); j++) {
             final Card buffedcard = buffed.get(j);
             if (buffedcard.getSVar("BuffedBy").length() > 0) {
@@ -2209,7 +2169,7 @@ public class ComputerUtil {
         } // BuffedBy
 
         // get all cards the human controls with AntiBuffedBy
-        final List<Card> antibuffed = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        final List<Card> antibuffed = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
         for (int k = 0; k < antibuffed.size(); k++) {
             final Card buffedcard = antibuffed.get(k);
             if (buffedcard.getSVar("AntiBuffedBy").length() > 0) {
@@ -2220,9 +2180,9 @@ public class ComputerUtil {
                 }
             }
         } // AntiBuffedBy
-        final List<Card> vengevines = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard, "Vengevine");
+        final List<Card> vengevines = ai.getCardsIn(ZoneType.Graveyard, "Vengevine");
         if (vengevines.size() > 0) {
-            final List<Card> creatures = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
+            final List<Card> creatures = ai.getCardsIn(ZoneType.Hand);
             final List<Card> creatures2 = new ArrayList<Card>();
             for (int i = 0; i < creatures.size(); i++) {
                 if (creatures.get(i).isCreature() && creatures.get(i).getManaCost().getCMC() <= 3) {
@@ -2242,21 +2202,21 @@ public class ComputerUtil {
      * @param source the source Card
      * @return true if it's OK to cast this Card for less than the max targets
      */
-    public static boolean shouldCastLessThanMax(final Card source) {
+    public static boolean shouldCastLessThanMax(final Player ai, final Card source) {
         boolean ret = true;
         if (source.getManaCost().countX() > 0) {
             // If TargetMax is MaxTgts (i.e., an "X" cost), this is fine because AI is limited by mana available.
         } else {
             // Otherwise, if life is possibly in danger, then this is fine.
             Combat combat = new Combat();
-            combat.initiatePossibleDefenders(AllZone.getComputerPlayer());
-            List<Card> attackers = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+            combat.initiatePossibleDefenders(ai);
+            List<Card> attackers = AllZoneUtil.getCreaturesInPlay(ai.getOpponent());
             for (Card att : attackers) {
                 if (CombatUtil.canAttackNextTurn(att)) {
                     combat.addAttacker(att);
                 }
             }
-            combat = ComputerUtilBlock.getBlockers(combat, AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer()));
+            combat = ComputerUtilBlock.getBlockers(combat, AllZoneUtil.getCreaturesInPlay(ai));
             if (!CombatUtil.lifeInDanger(combat)) {
                 // Otherwise, return false. Do not play now.
                 ret = false;
@@ -2270,13 +2230,13 @@ public class ComputerUtil {
      * @param discard Card to discard
      * @return boolean
      */
-    public static boolean isWorseThanDraw(Card discard) {
+    public static boolean isWorseThanDraw(final Player ai, Card discard) {
         if (!discard.getSVar("DiscardMe").equals("")) {
             return true;
         }
-        final List<Card> landsInPlay = CardLists.filter(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS);
-        final List<Card> landsInHand = CardLists.filter(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS);
-        final List<Card> nonLandsInHand = CardLists.getNotType(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand), "Land");
+        final List<Card> landsInPlay = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS);
+        final List<Card> landsInHand = CardLists.filter(ai.getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS);
+        final List<Card> nonLandsInHand = CardLists.getNotType(ai.getCardsIn(ZoneType.Hand), "Land");
         final int highestCMC = Math.max(6, Aggregates.max(nonLandsInHand, CardPredicates.Accessors.fnGetCmc));
         final int discardCMC = discard.getCMC();
         if (discard.isLand()) {
@@ -2290,7 +2250,7 @@ public class ComputerUtil {
             if (discardCMC > landsInPlay.size() + landsInHand.size() + 2) {
                 // not castable for some time.
                 return true;
-            } else if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())
+            } else if (!Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(ai)
                     && Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.MAIN2)
                     && discardCMC > landsInPlay.size() + landsInHand.size()
                     && discardCMC > landsInPlay.size() + 1
@@ -2298,7 +2258,7 @@ public class ComputerUtil {
                 // not castable for at least one other turn.
                 return true;
             } else if (landsInPlay.size() > 5 && discard.getCMC() <= 1
-                    && !discard.hasProperty("hasXCost", AllZone.getComputerPlayer(), null)) {
+                    && !discard.hasProperty("hasXCost", ai, null)) {
                 // Probably don't need small stuff now.
                 return true;
             }

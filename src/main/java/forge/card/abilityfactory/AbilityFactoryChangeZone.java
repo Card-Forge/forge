@@ -491,7 +491,7 @@ public final class AbilityFactoryChangeZone {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkSacrificeCost(abCost, source)
+            if (!CostUtil.checkSacrificeCost(ai, abCost, source)
                     && !(destination.equals("Battlefield") && !source.isLand())) {
                 return false;
             }
@@ -500,12 +500,12 @@ public final class AbilityFactoryChangeZone {
                 return false;
             }
 
-            if (!CostUtil.checkDiscardCost(abCost, source)) {
+            if (!CostUtil.checkDiscardCost(ai, abCost, source)) {
                 for (final CostPart part : abCost.getCostParts()) {
                     if (part instanceof CostDiscard) {
                         CostDiscard cd = (CostDiscard) part;
                         // this is mainly for typecycling
-                        if (!cd.getThis() || !ComputerUtil.isWorseThanDraw(source)) {
+                        if (!cd.getThis() || !ComputerUtil.isWorseThanDraw(ai, source)) {
                             return false;
                         }
                     }
@@ -1491,7 +1491,7 @@ public final class AbilityFactoryChangeZone {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean changeKnownOriginCanPlayAI(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa) {
+    private static boolean changeKnownOriginCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         // Retrieve either this card, or target Cards in Graveyard
         final Cost abCost = af.getAbCost();
         final Card source = sa.getSourceCard();
@@ -1504,7 +1504,7 @@ public final class AbilityFactoryChangeZone {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkSacrificeCost(abCost, source)) {
+            if (!CostUtil.checkSacrificeCost(ai, abCost, source)) {
                 return false;
             }
 
@@ -1512,7 +1512,7 @@ public final class AbilityFactoryChangeZone {
                 return false;
             }
 
-            if (!CostUtil.checkDiscardCost(abCost, source)) {
+            if (!CostUtil.checkDiscardCost(ai, abCost, source)) {
                 return false;
             }
 
@@ -1526,7 +1526,7 @@ public final class AbilityFactoryChangeZone {
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
-            if (!AbilityFactoryChangeZone.changeKnownPreferredTarget(aiPlayer, af, sa, false)) {
+            if (!AbilityFactoryChangeZone.changeKnownPreferredTarget(ai, af, sa, false)) {
                 return false;
             }
         } else {
@@ -1563,7 +1563,7 @@ public final class AbilityFactoryChangeZone {
                     return false;
                 }
 
-                final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(aiPlayer, af);
+                final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(ai, af);
                 boolean contains = false;
                 for (final Card c : retrieval) {
                     if (objects.contains(c)) {
@@ -1577,7 +1577,7 @@ public final class AbilityFactoryChangeZone {
         }
         // don't return something to your hand if your hand is full of good stuff
         if (destination.equals(ZoneType.Hand) && origin.equals(ZoneType.Graveyard)) {
-            int handSize = aiPlayer.getCardsIn(ZoneType.Hand).size();
+            int handSize = ai.getCardsIn(ZoneType.Hand).size();
             if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN1)) {
                 return false;
             }
@@ -1585,8 +1585,8 @@ public final class AbilityFactoryChangeZone {
                     && handSize > 1) {
                 return false;
             }
-            if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(aiPlayer)
-                    && handSize >= aiPlayer.getMaxHandSize()) {
+            if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(ai)
+                    && handSize >= ai.getMaxHandSize()) {
                 return false;
             }
         }
@@ -1848,7 +1848,7 @@ public final class AbilityFactoryChangeZone {
                     }
                     return false;
                 } else {
-                    if (!ComputerUtil.shouldCastLessThanMax(source)) {
+                    if (!ComputerUtil.shouldCastLessThanMax(ai, source)) {
                         return false;
                     }
                     break;
@@ -1959,7 +1959,7 @@ public final class AbilityFactoryChangeZone {
                     tgt.resetTargets();
                     return false;
                 } else {
-                    if (!ComputerUtil.shouldCastLessThanMax(source)) {
+                    if (!ComputerUtil.shouldCastLessThanMax(ai, source)) {
                         return false;
                     }
                     break;
@@ -2575,7 +2575,7 @@ public final class AbilityFactoryChangeZone {
                 return false;
             }
 
-            if (!CostUtil.checkDiscardCost(abCost, source)) {
+            if (!CostUtil.checkDiscardCost(ai, abCost, source)) {
                 return false;
             }
 

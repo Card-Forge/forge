@@ -305,7 +305,7 @@ public class CombatUtil {
      *            the attackers
      * @return true, if one can be blocked
      */
-    public static boolean canBlockAtLeastOne(final Card blocker, final List<Card> attackers) {
+    public static boolean canBlockAtLeastOne(final Card blocker, final Iterable<Card> attackers) {
         for (Card attacker : attackers) {
             if (CombatUtil.canBlock(attacker, blocker)) {
                 return true;

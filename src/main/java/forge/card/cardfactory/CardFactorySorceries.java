@@ -148,7 +148,7 @@ public class CardFactorySorceries {
 
                             for (final SpellAbility sa : choices) {
                                 if (sa.canPlayAI()) {
-                                    ComputerUtil.playStackFree(sa);
+                                    ComputerUtil.playStackFree(sa.getActivatingPlayer(), sa);
                                     if (pile1.get(i).isPermanent()) {
                                         exiled.remove(pile1.get(i));
                                     }
@@ -164,7 +164,7 @@ public class CardFactorySorceries {
 
                             for (final SpellAbility sa : choices) {
                                 if (sa.canPlayAI()) {
-                                    ComputerUtil.playStackFree(sa);
+                                    ComputerUtil.playStackFree(sa.getActivatingPlayer(), sa);
                                     if (pile2.get(i).isPermanent()) {
                                         exiled.remove(pile2.get(i));
                                     }

@@ -375,6 +375,8 @@ public final class AbilityFactoryChoose {
                                 card.setChosenType(choice);
                             }
                         } else {
+                            Player ai = sa.getActivatingPlayer();
+                            Player opp = ai.getOpponent();
                             String chosen = "";
                             if (params.containsKey("AILogic")) {
                                 final String logic = params.get("AILogic");
@@ -383,22 +385,19 @@ public final class AbilityFactoryChoose {
                                             .getCardsIn(ZoneType.Battlefield));
                                 }
                                 if (logic.equals("MostProminentComputerControls")) {
-                                    chosen = CardFactoryUtil.getMostProminentCreatureType(AllZone.getComputerPlayer()
-                                            .getCardsIn(ZoneType.Battlefield));
+                                    chosen = CardFactoryUtil.getMostProminentCreatureType(ai.getCardsIn(ZoneType.Battlefield));
                                 }
                                 if (logic.equals("MostProminentHumanControls")) {
-                                    chosen = CardFactoryUtil.getMostProminentCreatureType(AllZone.getHumanPlayer()
-                                            .getCardsIn(ZoneType.Battlefield));
+                                    chosen = CardFactoryUtil.getMostProminentCreatureType(opp.getCardsIn(ZoneType.Battlefield));
                                     if (!CardUtil.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
-                                        chosen = CardFactoryUtil.getMostProminentCreatureType(CardLists.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer()));
+                                        chosen = CardFactoryUtil.getMostProminentCreatureType(CardLists.filterControlledBy(AllZoneUtil.getCardsInGame(), opp));
                                     }
                                 }
                                 if (logic.equals("MostProminentInComputerDeck")) {
-                                    chosen = CardFactoryUtil.getMostProminentCreatureType(CardLists.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getComputerPlayer()));
+                                    chosen = CardFactoryUtil.getMostProminentCreatureType(CardLists.filterControlledBy(AllZoneUtil.getCardsInGame(), ai));
                                 }
                                 if (logic.equals("MostProminentInComputerGraveyard")) {
-                                    chosen = CardFactoryUtil.getMostProminentCreatureType(AllZone.getComputerPlayer()
-                                            .getCardsIn(ZoneType.Graveyard));
+                                    chosen = CardFactoryUtil.getMostProminentCreatureType(ai.getCardsIn(ZoneType.Graveyard));
                                 }
                             }
                             if (!CardUtil.isACreatureType(chosen) || invalidTypes.contains(chosen)) {
@@ -725,14 +724,16 @@ public final class AbilityFactoryChoose {
                     }
                 } else {
                     List<String> chosen = new ArrayList<String>();
+                    Player ai = sa.getActivatingPlayer();
+                    Player opp = ai.getOpponent();
                     if (params.containsKey("AILogic")) {
                         final String logic = params.get("AILogic");
                         if (logic.equals("MostProminentInHumanDeck")) {
-                            chosen.add(CardFactoryUtil.getMostProminentColor(CardLists.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer())));
+                            chosen.add(CardFactoryUtil.getMostProminentColor(CardLists.filterControlledBy(AllZoneUtil.getCardsInGame(), opp)));
                         } else if (logic.equals("MostProminentInComputerDeck")) {
-                            chosen.add(CardFactoryUtil.getMostProminentColor(CardLists.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getComputerPlayer())));
+                            chosen.add(CardFactoryUtil.getMostProminentColor(CardLists.filterControlledBy(AllZoneUtil.getCardsInGame(), ai)));
                         } else if (logic.equals("MostProminentDualInComputerDeck")) {
-                            List<String> prominence = CardFactoryUtil.getColorByProminence(CardLists.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getComputerPlayer()));
+                            List<String> prominence = CardFactoryUtil.getColorByProminence(CardLists.filterControlledBy(AllZoneUtil.getCardsInGame(), ai));
                             chosen.add(prominence.get(0));
                             chosen.add(prominence.get(1));
                         }
@@ -740,15 +741,14 @@ public final class AbilityFactoryChoose {
                             chosen.add(CardFactoryUtil.getMostProminentColor(AllZoneUtil.getCardsInGame()));
                         }
                         else if (logic.equals("MostProminentHumanCreatures")) {
-                            List<Card> list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+                            List<Card> list = AllZoneUtil.getCreaturesInPlay(opp);
                             if (list.isEmpty()) {
-                                list = CardLists.filter(CardLists.filterControlledBy(AllZoneUtil.getCardsInGame(), AllZone.getHumanPlayer()), CardPredicates.Presets.CREATURES);
+                                list = CardLists.filter(CardLists.filterControlledBy(AllZoneUtil.getCardsInGame(), opp), CardPredicates.Presets.CREATURES);
                             }
                             chosen.add(CardFactoryUtil.getMostProminentColor(list));
                         }
                         else if (logic.equals("MostProminentComputerControls")) {
-                            chosen.add(CardFactoryUtil.getMostProminentColor(AllZone.getComputerPlayer().getCardsIn(
-                                    ZoneType.Battlefield)));
+                            chosen.add(CardFactoryUtil.getMostProminentColor(ai.getCardsIn(ZoneType.Battlefield)));
                         }
                         else if (logic.equals("MostProminentPermanent")) {
                             final List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
@@ -1640,11 +1640,9 @@ public final class AbilityFactoryChoose {
                         if (params.containsKey("AILogic")) {
                             final String logic = params.get("AILogic");
                             if (logic.equals("MostProminentInComputerDeck")) {
-                                chosen = CardFactoryUtil.getMostProminentCardName(AllZone.getComputerPlayer()
-                                        .getCardsIn(ZoneType.Library));
+                                chosen = CardFactoryUtil.getMostProminentCardName(p.getCardsIn(ZoneType.Library));
                             } else if (logic.equals("MostProminentInHumanDeck")) {
-                                chosen = CardFactoryUtil.getMostProminentCardName(AllZone.getHumanPlayer()
-                                        .getCardsIn(ZoneType.Library));
+                                chosen = CardFactoryUtil.getMostProminentCardName(p.getOpponent().getCardsIn(ZoneType.Library));
                             }
                         } else {
                             List<Card> list = CardLists.filterControlledBy(AllZoneUtil.getCardsInGame(), p.getOpponent());

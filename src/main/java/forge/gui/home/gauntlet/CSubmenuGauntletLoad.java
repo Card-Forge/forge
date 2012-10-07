@@ -12,6 +12,7 @@ import javax.swing.SwingWorker;
 import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
+import forge.deck.Deck;
 import forge.game.GameNew;
 import forge.game.GameType;
 import forge.game.PlayerStartsGame;
@@ -103,16 +104,14 @@ public enum CSubmenuGauntletLoad implements ICDoc {
             public Object doInBackground() {
                 final GauntletData gd = FModel.SINGLETON_INSTANCE.getGauntletData();
 
-                AllZone.getHumanPlayer().setDeck(gd.getUserDeck());
-                AllZone.getComputerPlayer().setDeck(gd.getDecks().get(gd.getCompleted()));
+                Deck human = gd.getUserDeck();
+                Deck aiDeck = gd.getDecks().get(gd.getCompleted());                
+                
                 Singletons.getModel().getMatchState().setGameType(GameType.Gauntlet);
 
-                if (AllZone.getHumanPlayer().getDeck() != null && AllZone.getComputerPlayer().getDeck() != null) {
-                    GameNew.newGame(new PlayerStartsGame(
-                            AllZone.getHumanPlayer(),
-                            AllZone.getHumanPlayer().getDeck()),
-                            new PlayerStartsGame(AllZone.getComputerPlayer(),
-                            AllZone.getComputerPlayer().getDeck()));
+                if (human != null && aiDeck != null) {
+                    GameNew.newGame(new PlayerStartsGame(AllZone.getHumanPlayer(), human),
+                            new PlayerStartsGame(AllZone.getComputerPlayer(), aiDeck));
                 }
                 return null;
             }

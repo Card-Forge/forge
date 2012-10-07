@@ -304,7 +304,7 @@ public final class AbilityFactoryDebuff {
         final Cost cost = sa.getPayCosts();
 
         // temporarily disabled until AI is improved
-        if (!CostUtil.checkCreatureSacrificeCost(cost, source)) {
+        if (!CostUtil.checkCreatureSacrificeCost(ai, cost, source)) {
             return false;
         }
 

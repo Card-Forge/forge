@@ -229,7 +229,7 @@ public class AbilityFactoryDestroy {
         List<Card> list;
 
         if (abCost != null) {
-            if (!CostUtil.checkSacrificeCost(abCost, source)) {
+            if (!CostUtil.checkSacrificeCost(ai, abCost, source)) {
                 return false;
             }
 
@@ -237,7 +237,7 @@ public class AbilityFactoryDestroy {
                 return false;
             }
 
-            if (!CostUtil.checkDiscardCost(abCost, source)) {
+            if (!CostUtil.checkDiscardCost(ai, abCost, source)) {
                 return false;
             }
         }

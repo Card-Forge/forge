@@ -338,8 +338,9 @@ public class AbilityFactoryMana {
                 int amount = params.containsKey("Amount") ? AbilityFactory.calculateAmount(af.getHostCard(),
                         params.get("Amount"), sa) : 1;
                 if (tgt == null || p.canBeTargetedBy(sa)) {
+                    Player activator = sa.getActivatingPlayer(); 
                     // AI color choice is set in ComputerUtils so only human players need to make a choice
-                    if (sa.getActivatingPlayer().isHuman()) {
+                    if (activator.isHuman()) {
                         //String colorsNeeded = abMana.getExpressChoice();
                         String[] colorsProduced = abMana.getComboColors().split(" ");
                         final StringBuilder choiceString = new StringBuilder();
@@ -378,7 +379,7 @@ public class AbilityFactoryMana {
                             final String logic = params.get("AILogic");
                             String chosen = Constant.Color.BLACK;
                             if (logic.equals("MostProminentInComputerHand")) {
-                                chosen = CardFactoryUtil.getMostProminentColor(AllZone.getComputerPlayer().getCardsIn(
+                                chosen = CardFactoryUtil.getMostProminentColor(activator.getCardsIn(
                                         ZoneType.Hand));
                             }
                             GuiChoose.one("Computer picked: ", new String[]{chosen});
@@ -397,8 +398,9 @@ public class AbilityFactoryMana {
         else if (abMana.isAnyMana()) {
             for (Player p : tgtPlayers) {
                 if (tgt == null || p.canBeTargetedBy(sa)) {
+                    Player act = sa.getActivatingPlayer(); 
                     // AI color choice is set in ComputerUtils so only human players need to make a choice
-                    if (sa.getActivatingPlayer().isHuman()) {
+                    if (act.isHuman()) {
                         String colorsNeeded = abMana.getExpressChoice();
                         String choice = "";
                         if (colorsNeeded.length() == 1) {
@@ -433,8 +435,7 @@ public class AbilityFactoryMana {
                             final String logic = params.get("AILogic");
                             String chosen = Constant.Color.BLACK;
                             if (logic.equals("MostProminentInComputerHand")) {
-                                chosen = CardFactoryUtil.getMostProminentColor(AllZone.getComputerPlayer().getCardsIn(
-                                        ZoneType.Hand));
+                                chosen = CardFactoryUtil.getMostProminentColor(act.getCardsIn(ZoneType.Hand));
                             }
                             GuiChoose.one("Computer picked: ", new String[]{chosen});
                             abMana.setExpressChoice(InputPayManaCostUtil.getShortColorString(chosen));
@@ -1131,7 +1132,7 @@ public class AbilityFactoryMana {
 
             @Override
             public boolean chkAIDrawback() {
-                return AbilityFactoryMana.drainManaPlayDrawbackAI(af, this);
+                return AbilityFactoryMana.drainManaPlayDrawbackAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -1288,7 +1289,7 @@ public class AbilityFactoryMana {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean drainManaPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean drainManaPlayDrawbackAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
         final HashMap<String, String> params = af.getMapParams();
         final Target tgt = sa.getTarget();
@@ -1299,12 +1300,12 @@ public class AbilityFactoryMana {
         if (tgt == null) {
             final ArrayList<Player> defined = AbilityFactory.getDefinedPlayers(source, params.get("Defined"), sa);
 
-            if (defined.contains(AllZone.getComputerPlayer())) {
+            if (defined.contains(ai)) {
                 return false;
             }
         } else {
             tgt.resetTargets();
-            tgt.addTarget(AllZone.getHumanPlayer());
+            tgt.addTarget(ai.getOpponent());
         }
 
         final AbilitySub subAb = sa.getSubAbility();

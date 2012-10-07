@@ -89,7 +89,7 @@ public class AbilityFactoryRegenerate {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryRegenerate.regenerateCanPlayAI(af, this);
+                return AbilityFactoryRegenerate.regenerateCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -128,7 +128,7 @@ public class AbilityFactoryRegenerate {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryRegenerate.regenerateCanPlayAI(af, this);
+                return AbilityFactoryRegenerate.regenerateCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -263,7 +263,7 @@ public class AbilityFactoryRegenerate {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean regenerateCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean regenerateCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         final Card hostCard = af.getHostCard();
         boolean chance = false;
@@ -274,11 +274,11 @@ public class AbilityFactoryRegenerate {
                 return false;
             }
 
-            if (!CostUtil.checkSacrificeCost(abCost, hostCard)) {
+            if (!CostUtil.checkSacrificeCost(ai, abCost, hostCard)) {
                 return false;
             }
 
-            if (!CostUtil.checkCreatureSacrificeCost(abCost, hostCard)) {
+            if (!CostUtil.checkCreatureSacrificeCost(ai, abCost, hostCard)) {
                 return false;
             }
         }
@@ -316,8 +316,8 @@ public class AbilityFactoryRegenerate {
         } else {
             tgt.resetTargets();
             // filter AIs battlefield by what I can target
-            List<Card> targetables = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-            targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
+            List<Card> targetables = ai.getCardsIn(ZoneType.Battlefield);
+            targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, hostCard);
 
             if (targetables.size() == 0) {
                 return false;
@@ -390,7 +390,7 @@ public class AbilityFactoryRegenerate {
             // If there's no target on the trigger, just say yes.
             chance = true;
         } else {
-            chance = AbilityFactoryRegenerate.regenMandatoryTarget(af, sa, mandatory);
+            chance = AbilityFactoryRegenerate.regenMandatoryTarget(ai, af, sa, mandatory);
         }
 
         final AbilitySub subAb = sa.getSubAbility();
@@ -414,14 +414,14 @@ public class AbilityFactoryRegenerate {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean regenMandatoryTarget(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean regenMandatoryTarget(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         final Card hostCard = af.getHostCard();
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
         // filter AIs battlefield by what I can target
         List<Card> targetables = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-        targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
-        final List<Card> compTargetables = CardLists.filterControlledBy(targetables, AllZone.getComputerPlayer());
+        targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, hostCard);
+        final List<Card> compTargetables = CardLists.filterControlledBy(targetables, ai);
 
         if (targetables.size() == 0) {
             return false;
@@ -543,7 +543,7 @@ public class AbilityFactoryRegenerate {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryRegenerate.regenerateAllCanPlayAI(af, this);
+                return AbilityFactoryRegenerate.regenerateAllCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -582,7 +582,7 @@ public class AbilityFactoryRegenerate {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryRegenerate.regenerateAllCanPlayAI(af, this);
+                return AbilityFactoryRegenerate.regenerateAllCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -701,18 +701,18 @@ public class AbilityFactoryRegenerate {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean regenerateAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean regenerateAllCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         final Card hostCard = af.getHostCard();
         boolean chance = false;
         final Cost abCost = af.getAbCost();
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkSacrificeCost(abCost, hostCard)) {
+            if (!CostUtil.checkSacrificeCost(ai, abCost, hostCard)) {
                 return false;
             }
 
-            if (!CostUtil.checkCreatureSacrificeCost(abCost, hostCard)) {
+            if (!CostUtil.checkCreatureSacrificeCost(ai, abCost, hostCard)) {
                 return false;
             }
 
@@ -730,7 +730,7 @@ public class AbilityFactoryRegenerate {
 
         List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         list = CardLists.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
-        list = CardLists.filter(list, CardPredicates.isController(AllZone.getComputerPlayer()));
+        list = CardLists.filter(list, CardPredicates.isController(ai));
 
         if (list.size() == 0) {
             return false;

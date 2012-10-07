@@ -191,7 +191,7 @@ public abstract class CostPart {
      *            the payment
      * @return true, if successful
      */
-    public abstract boolean decideAIPayment(SpellAbility ability, Card source, CostPayment payment);
+    public abstract boolean decideAIPayment(final Player ai, SpellAbility ability, Card source, CostPayment payment);
 
     /**
      * Pay ai.

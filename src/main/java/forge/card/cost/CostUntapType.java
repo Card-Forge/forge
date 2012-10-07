@@ -190,7 +190,7 @@ public class CostUntapType extends CostPartWithList {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final boolean decideAIPayment(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         final boolean untap = payment.getCost().getUntap();
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
@@ -198,7 +198,7 @@ public class CostUntapType extends CostPartWithList {
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
                 List<Card> typeList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-                typeList = CardLists.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
+                typeList = CardLists.getValidCards(typeList, this.getType().split(";"), ai, ability.getSourceCard());
                 if (untap) {
                     typeList.remove(source);
                 }

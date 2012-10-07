@@ -217,10 +217,10 @@ public class CardFactory implements CardFactoryInterface {
         } else if (copySA instanceof Spell) {
             Spell spell = (Spell) copySA;
             if (spell.canPlayFromEffectAI(false, true)) {
-                ComputerUtil.playStackFree(copySA);
+                ComputerUtil.playStackFree(controller, copySA);
             }
         } else if (copySA.canPlayAI()) {
-            ComputerUtil.playStackFree(copySA);
+            ComputerUtil.playStackFree(controller, copySA);
         }
 
         c.addController(originalController);

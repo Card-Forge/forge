@@ -204,19 +204,18 @@ public class CostPutCounter extends CostPartWithList {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final boolean decideAIPayment(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         this.resetList();
         if (this.getThis()) {
             this.addToList(source);
             return true;
         } else {
-            final Player activator = ability.getActivatingPlayer();
             Integer c = this.convertAmount();
             if (c == null) {
                 c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
             }
 
-            final List<Card> typeList = CardLists.getValidCards(activator.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), activator, source);
+            final List<Card> typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), ai, source);
 
             Card card = null;
             if (this.getType().equals("Creature.YouCtrl")) {

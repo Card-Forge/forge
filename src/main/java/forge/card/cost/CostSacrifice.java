@@ -199,7 +199,7 @@ public class CostSacrifice extends CostPartWithList {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final boolean decideAIPayment(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         this.resetList();
         final Player activator = ability.getActivatingPlayer();
         if (this.getThis()) {
@@ -221,7 +221,7 @@ public class CostSacrifice extends CostPartWithList {
 
                 c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
             }
-            this.setList(ComputerUtil.chooseSacrificeType(this.getType(), source, ability.getTargetCard(), c));
+            this.setList(ComputerUtil.chooseSacrificeType(activator, this.getType(), source, ability.getTargetCard(), c));
             if (this.getList() == null) {
                 return false;
             }

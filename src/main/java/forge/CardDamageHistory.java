@@ -1,5 +1,10 @@
 package forge;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import forge.game.player.Player;
+
 /** 
  * TODO: Write javadoc for this type.
  *
@@ -14,12 +19,10 @@ public class CardDamageHistory {
     private boolean creatureBlockedThisTurn = false;
     private boolean creatureGotBlockedThisCombat = false;
     private boolean creatureGotBlockedThisTurn = false;
-    private boolean dealtDmgToHumanThisTurn = false;
-    private boolean dealtDmgToComputerThisTurn = false;
-    private boolean dealtDmgToHumanThisGame = false;
-    private boolean dealtDmgToComputerThisGame = false;
-    private boolean dealtCombatDmgToHumanThisTurn = false;
-    private boolean dealtCombatDmgToComputerThisTurn = false;
+    
+    private final List<Player> thisTurnDamaged = new ArrayList<Player>(2);
+    private final List<Player> thisTurnCombatDamaged = new ArrayList<Player>(2);
+    private final List<Player> thisGameDamaged = new ArrayList<Player>(2);
     // used to see if an attacking creature with a triggering attack ability
     // triggered this phase:
     /**
@@ -200,137 +203,37 @@ public class CardDamageHistory {
     public final boolean getCreatureGotBlockedThisTurn() {
         return this.creatureGotBlockedThisTurn;
     }
-    /**
-     * <p>
-     * Setter for the field <code>dealtDmgToHumanThisTurn</code>.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setDealtDmgToHumanThisTurn(final boolean b) {
-        this.dealtDmgToHumanThisTurn = b;
-        if (b) {
-            this.setDealtDmgToHumanThisGame(true);
-        }
+    public final List<Player> getThisTurnDamaged() {
+        return thisTurnDamaged;
+    }
+    public final List<Player> getThisTurnCombatDamaged() {
+        return thisTurnCombatDamaged;
+    }
+    public final List<Player> getThisGameDamaged() {
+        return thisGameDamaged;
     }
     /**
-     * <p>
-     * Getter for the field <code>dealtDmgToHumanThisTurn</code>.
-     * </p>
-     * 
-     * @return a boolean.
+     * TODO: Write javadoc for this method.
+     * @param player
      */
-    public final boolean getDealtDmgToHumanThisTurn() {
-        return this.dealtDmgToHumanThisTurn;
+    public void registerCombatDamage(Player player) {
+        if ( !thisTurnCombatDamaged.contains(player) )
+            thisTurnCombatDamaged.add(player);
     }
     /**
-     * <p>
-     * Setter for the field <code>dealtDmgToComputerThisTurn</code>.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
+     * TODO: Write javadoc for this method.
      */
-    public final void setDealtDmgToComputerThisTurn(final boolean b) {
-        this.dealtDmgToComputerThisTurn = b;
-        if (b) {
-            this.setDealtDmgToComputerThisGame(true);
-        }
+    public void newTurn() {
+        thisTurnCombatDamaged.clear();
+        thisTurnDamaged.clear();
     }
     /**
-     * <p>
-     * Getter for the field <code>dealtCombatDmgToComputerThisGame</code>.
-     * </p>
-     * 
-     * @return a boolean.
+     * TODO: Write javadoc for this method.
+     * @param player
      */
-    public final boolean getDealtDmgToComputerThisTurn() {
-        return this.dealtDmgToComputerThisTurn;
-    }
-    /**
-     * <p>
-     * Setter for the field <code>dealtDmgToHumanThisGame</code>.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setDealtDmgToHumanThisGame(final boolean b) {
-        this.dealtDmgToHumanThisGame = b;
-    }
-    /**
-     * <p>
-     * Getter for the field <code>dealtDmgToHumanThisGame</code>.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean getDealtDmgToHumanThisGame() {
-        return this.dealtDmgToHumanThisGame;
-    }
-    /**
-     * <p>
-     * Setter for the field <code>dealtDmgToComputerThisGame</code>.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setDealtDmgToComputerThisGame(final boolean b) {
-        this.dealtDmgToComputerThisGame = b;
-    }
-    /**
-     * <p>
-     * Getter for the field <code>dealtCombatDmgToComputerThisGame</code>.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean getDealtDmgToComputerThisGame() {
-        return this.dealtDmgToComputerThisGame;
-    }
-    /**
-     * <p>
-     * Setter for the field <code>dealtCombatDmgToHumanThisTurn</code>.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setDealtCombatDmgToHumanThisTurn(final boolean b) {
-        this.dealtCombatDmgToHumanThisTurn = b;
-    }
-    /**
-     * <p>
-     * Getter for the field <code>dealtDmgToHumanThisTurn</code>.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean getDealtCombatDmgToHumanThisTurn() {
-        return this.dealtCombatDmgToHumanThisTurn;
-    }
-    /**
-     * <p>
-     * Setter for the field <code>dealtCombatDmgToComputerThisTurn</code>.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setDealtCombatDmgToComputerThisTurn(final boolean b) {
-        this.dealtCombatDmgToComputerThisTurn = b;
-    }
-    /**
-     * <p>
-     * Getter for the field <code>dealtDmgToComputerThisTurn</code>.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean getDealtCombatDmgToComputerThisTurn() {
-        return this.dealtCombatDmgToComputerThisTurn;
+    public void registerDamage(Player player) {
+        if ( !thisTurnDamaged.contains(player) )
+            thisTurnDamaged.add(player);        
     }
 
 }

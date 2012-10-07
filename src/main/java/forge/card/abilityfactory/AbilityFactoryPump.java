@@ -243,7 +243,7 @@ public class AbilityFactoryPump {
 
             @Override
             public boolean chkAIDrawback() {
-                return AbilityFactoryPump.this.pumpDrawbackAI(this);
+                return AbilityFactoryPump.this.pumpDrawbackAI(getActivatingPlayer(), this);
             }
 
             @Override
@@ -292,12 +292,12 @@ public class AbilityFactoryPump {
      * @param sa SpellAbility
      * @return true, if successful
      */
-    public boolean containsUsefulKeyword(final ArrayList<String> keywords, final Card card, final SpellAbility sa) {
+    public boolean containsUsefulKeyword(final Player ai, final ArrayList<String> keywords, final Card card, final SpellAbility sa) {
         for (final String keyword : keywords) {
-            if (!sa.getAbilityFactory().isCurse() && isUsefulPumpKeyword(keyword, card, sa)) {
+            if (!sa.getAbilityFactory().isCurse() && isUsefulPumpKeyword(ai, keyword, card, sa)) {
                 return true;
             }
-            if (sa.getAbilityFactory().isCurse() && isUsefulCurseKeyword(keyword, card, sa)) {
+            if (sa.getAbilityFactory().isCurse() && isUsefulCurseKeyword(ai, keyword, card, sa)) {
                 return true;
             }
         }
@@ -314,16 +314,15 @@ public class AbilityFactoryPump {
      * @param sa SpellAbility
      * @return true, if is useful keyword
      */
-    public boolean isUsefulCurseKeyword(final String keyword, final Card card, final SpellAbility sa) {
+    public boolean isUsefulCurseKeyword(final Player ai, final String keyword, final Card card, final SpellAbility sa) {
         final PhaseHandler ph = Singletons.getModel().getGameState().getPhaseHandler();
-        final Player computer = AllZone.getComputerPlayer();
-        final Player human = AllZone.getHumanPlayer();
+        final Player human = ai.getOpponent();
         //int attack = getNumAttack(sa);
         //int defense = getNumDefense(sa);
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
             return false;
         } else if (keyword.equals("Defender") || keyword.endsWith("CARDNAME can't attack.")) {
-            if (ph.isPlayerTurn(computer) || !CombatUtil.canAttack(card)
+            if (ph.isPlayerTurn(ai) || !CombatUtil.canAttack(card)
                     || (card.getNetCombatDamage() <= 0)
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
@@ -341,7 +340,7 @@ public class AbilityFactoryPump {
                     return false;
                 }
 
-                List<Card> attackers = CardLists.filter(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.possibleAttackers);
+                List<Card> attackers = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.possibleAttackers);
                 if (!CombatUtil.canBlockAtLeastOne(card, attackers)) {
                     return false;
                 }
@@ -352,7 +351,7 @@ public class AbilityFactoryPump {
                 return false;
             }
 
-            List<Card> attackers = CardLists.filter(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.possibleAttackers);
+            List<Card> attackers = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.possibleAttackers);
             if (!CombatUtil.canBlockAtLeastOne(card, attackers)) {
                 return false;
             }
@@ -363,11 +362,11 @@ public class AbilityFactoryPump {
             }
         } else if (keyword.endsWith("Prevent all combat damage that would be dealt by CARDNAME.")
                 || keyword.endsWith("Prevent all damage that would be dealt by CARDNAME.")) {
-            if (ph.isPlayerTurn(computer) && (!(CombatUtil.canBlock(card) || card.isBlocking())
+            if (ph.isPlayerTurn(ai) && (!(CombatUtil.canBlock(card) || card.isBlocking())
                     || card.getNetCombatDamage() <= 0
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                     || ph.getPhase().isBefore(PhaseType.MAIN1)
-                    || CardLists.getNotKeyword(AllZoneUtil.getCreaturesInPlay(computer), "Defender").isEmpty())) {
+                    || CardLists.getNotKeyword(AllZoneUtil.getCreaturesInPlay(ai), "Defender").isEmpty())) {
                 return false;
             }
             if (ph.isPlayerTurn(human) && (!card.isAttacking()
@@ -375,7 +374,7 @@ public class AbilityFactoryPump {
                 return false;
             }
         } else if (keyword.endsWith("CARDNAME attacks each turn if able.")) {
-            if (ph.isPlayerTurn(computer) || !CombatUtil.canAttack(card) || !CombatUtil.canBeBlocked(card)
+            if (ph.isPlayerTurn(ai) || !CombatUtil.canAttack(card) || !CombatUtil.canBeBlocked(card)
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
             }
@@ -399,10 +398,9 @@ public class AbilityFactoryPump {
      * @param sa SpellAbility
      * @return true, if is useful keyword
      */
-    public boolean isUsefulPumpKeyword(final String keyword, final Card card, final SpellAbility sa) {
+    public boolean isUsefulPumpKeyword(final Player ai, final String keyword, final Card card, final SpellAbility sa) {
         final PhaseHandler ph = Singletons.getModel().getGameState().getPhaseHandler();
-        final Player computer = AllZone.getComputerPlayer();
-        final Player human = AllZone.getHumanPlayer();
+        final Player opp = ai.getOpponent();
         int attack = getNumAttack(sa);
         //int defense = getNumDefense(sa);
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
@@ -410,7 +408,7 @@ public class AbilityFactoryPump {
         }
 
         Predicate<Card> opBlockers = CardPredicates.possibleBlockers(card);
-        List<Card> cardsCanBlock = CardLists.filter(AllZoneUtil.getCreaturesInPlay(human), opBlockers);
+        List<Card> cardsCanBlock = CardLists.filter(AllZoneUtil.getCreaturesInPlay(opp), opBlockers);
 
         final boolean evasive = (keyword.endsWith("Unblockable") || keyword.endsWith("Fear")
                 || keyword.endsWith("Intimidate") || keyword.endsWith("Shadow"));
@@ -418,14 +416,14 @@ public class AbilityFactoryPump {
                 || keyword.contains("Bushido"));
         // give evasive keywords to creatures that can or do attack
         if (evasive) {
-            if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0
                     || cardsCanBlock.isEmpty()) {
                 return false;
             }
         } else if (keyword.endsWith("Flying")) {
-            if (ph.isPlayerTurn(human)
+            if (ph.isPlayerTurn(opp)
                     && ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     && !CardLists.getKeyword(AllZone.getCombat().getAttackerList(), "Flying").isEmpty()
                     && !card.hasKeyword("Reach")
@@ -434,27 +432,27 @@ public class AbilityFactoryPump {
                 return true;
             }
             Predicate<Card> flyingOrReach = Predicates.or(CardPredicates.hasKeyword("Flying"), CardPredicates.hasKeyword("Reach"));
-            if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0 || !Iterables.any(cardsCanBlock, Predicates.not(flyingOrReach))) {
                 return false;
             }
         } else if (keyword.endsWith("Horsemanship")) {
-            if (ph.isPlayerTurn(human)
+            if (ph.isPlayerTurn(opp)
                     && ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     && !CardLists.getKeyword(AllZone.getCombat().getAttackerList(), "Horsemanship").isEmpty()
                     && CombatUtil.canBlock(card)
                     && CombatUtil.lifeInDanger(AllZone.getCombat())) {
                 return true;
             }
-            if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0
                     || CardLists.getNotKeyword(cardsCanBlock, "Horsemanship").isEmpty()) {
                 return false;
             }
         } else if (keyword.endsWith("Haste")) {
-            if (!card.hasSickness() || ph.isPlayerTurn(human) || card.isTapped()
+            if (!card.hasSickness() || ph.isPlayerTurn(opp) || card.isTapped()
                     || card.getNetCombatDamage() <= 0
                     || card.hasKeyword("CARDNAME can attack as though it had haste.")
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
@@ -465,7 +463,7 @@ public class AbilityFactoryPump {
             return true;
         } else if (keyword.endsWith("Deathtouch")) {
             Combat combat = AllZone.getCombat();
-            if (ph.isPlayerTurn(human) && ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
+            if (ph.isPlayerTurn(opp) && ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
                 List<Card> attackers = combat.getAttackers();
                 for (Card attacker : attackers) {
                     if (CombatUtil.canBlock(attacker, card, combat)
@@ -473,9 +471,9 @@ public class AbilityFactoryPump {
                         return true;
                     }
                 }
-            } else if (ph.isPlayerTurn(computer) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
+            } else if (ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && CombatUtil.canAttack(card)) {
-                List<Card> blockers = AllZoneUtil.getCreaturesInPlay(human);
+                List<Card> blockers = AllZoneUtil.getCreaturesInPlay(opp);
                 for (Card blocker : blockers) {
                     if (CombatUtil.canBlock(card, blocker, combat)
                             && !CombatUtil.canDestroyBlocker(blocker, card, combat, false)) {
@@ -485,32 +483,32 @@ public class AbilityFactoryPump {
             }
             return false;
         } else if (combatRelevant) {
-            if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
-                    || (AllZoneUtil.getCreaturesInPlay(human).size() < 1)
+                    || (AllZoneUtil.getCreaturesInPlay(opp).size() < 1)
                     || cardsCanBlock.isEmpty()) {
                 return false;
             }
         } else if (keyword.equals("Double Strike")) {
-            if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || card.getNetCombatDamage() <= 0
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 return false;
             }
         } else if (keyword.startsWith("Rampage")) {
-            if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || cardsCanBlock.size() < 2) {
                 return false;
             }
         } else if (keyword.startsWith("Flanking")) {
-            if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || CardLists.getNotKeyword(cardsCanBlock, "Flanking").isEmpty()) {
                 return false;
             }
         } else if (keyword.startsWith("Trample")) {
-            if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || !CombatUtil.canBeBlocked(card)
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || cardsCanBlock.isEmpty()
@@ -524,7 +522,7 @@ public class AbilityFactoryPump {
             if (card.isBlocking()) {
                 return true;
             }
-            if ((ph.isPlayerTurn(human))
+            if ((ph.isPlayerTurn(opp))
                     || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 return false;
@@ -548,13 +546,13 @@ public class AbilityFactoryPump {
                 return false;
             }
         } else if (keyword.equals("Vigilance")) {
-            if (ph.isPlayerTurn(human) || !CombatUtil.canAttack(card)
+            if (ph.isPlayerTurn(opp) || !CombatUtil.canAttack(card)
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                    || CardLists.getNotKeyword(AllZoneUtil.getCreaturesInPlay(human), "Defender").size() < 1) {
+                    || CardLists.getNotKeyword(AllZoneUtil.getCreaturesInPlay(opp), "Defender").size() < 1) {
                 return false;
             }
         } else if (keyword.equals("Reach")) {
-            if (ph.isPlayerTurn(computer)
+            if (ph.isPlayerTurn(ai)
                     || !ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || CardLists.getKeyword(AllZone.getCombat().getAttackerList(), "Flying").isEmpty()
                     || card.hasKeyword("Flying")
@@ -562,7 +560,7 @@ public class AbilityFactoryPump {
                 return false;
             }
         } else if (keyword.endsWith("CARDNAME can block an additional creature.")) {
-            if (ph.isPlayerTurn(computer)
+            if (ph.isPlayerTurn(ai)
                     || !ph.getPhase().equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
                 return false;
             }
@@ -584,34 +582,34 @@ public class AbilityFactoryPump {
                 return false;
             }
         } else if (keyword.equals("Islandwalk")) {
-            if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0
-                    || CardLists.getType(AllZoneUtil.getPlayerLandsInPlay(human), "Island").isEmpty()
+                    || CardLists.getType(AllZoneUtil.getPlayerLandsInPlay(opp), "Island").isEmpty()
                     || cardsCanBlock.isEmpty()) {
                 return false;
             }
         } else if (keyword.equals("Swampwalk")) {
-            if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0
-                    || CardLists.getType(AllZoneUtil.getPlayerLandsInPlay(human), "Swamp").isEmpty()
+                    || CardLists.getType(AllZoneUtil.getPlayerLandsInPlay(opp), "Swamp").isEmpty()
                     || cardsCanBlock.isEmpty()) {
                 return false;
             }
         } else if (keyword.equals("Mountainwalk")) {
-            if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0
-                    || CardLists.getType(AllZoneUtil.getPlayerLandsInPlay(human), "Mountain").isEmpty()
+                    || CardLists.getType(AllZoneUtil.getPlayerLandsInPlay(opp), "Mountain").isEmpty()
                     || cardsCanBlock.isEmpty()) {
                 return false;
             }
         } else if (keyword.equals("Forestwalk")) {
-            if (ph.isPlayerTurn(human) || !(CombatUtil.canAttack(card) || card.isAttacking())
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0
-                    || CardLists.getType(AllZoneUtil.getPlayerLandsInPlay(human), "Forest").isEmpty()
+                    || CardLists.getType(AllZoneUtil.getPlayerLandsInPlay(opp), "Forest").isEmpty()
                     || cardsCanBlock.isEmpty()) {
                 return false;
             }
@@ -619,7 +617,7 @@ public class AbilityFactoryPump {
         return true;
     }
 
-    private boolean shouldPumpCard(final SpellAbility sa, final Card c) {
+    private boolean shouldPumpCard(final Player ai, final SpellAbility sa, final Card c) {
         int attack = getNumAttack(sa);
         int defense = getNumDefense(sa);
         PhaseHandler phase = Singletons.getModel().getGameState().getPhaseHandler();
@@ -632,13 +630,13 @@ public class AbilityFactoryPump {
             return false;
         }
 
-        if (containsUsefulKeyword(keywords, c, sa)) {
+        if (containsUsefulKeyword(ai, keywords, c, sa)) {
             return true;
         }
 
         // will the creature attack (only relevant for sorcery speed)?
         if (phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                && phase.isPlayerTurn(AllZone.getComputerPlayer())
+                && phase.isPlayerTurn(ai)
                 && attack > 0
                 && CardFactoryUtil.doesCreatureAttackAI(c)) {
             return true;
@@ -681,7 +679,7 @@ public class AbilityFactoryPump {
         }
 
         if (phase.getPhase().equals(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
-                && phase.isPlayerTurn(AllZone.getHumanPlayer())
+                && phase.isPlayerTurn(ai.getOpponent())
                 && c.isBlocking()
                 && defense > 0
                 && attackerHasTrample
@@ -699,13 +697,13 @@ public class AbilityFactoryPump {
      * 
      * @return a {@link forge.CardList} object.
      */
-    private List<Card> getPumpCreatures(final SpellAbility sa) {
+    private List<Card> getPumpCreatures(final Player ai, final SpellAbility sa) {
 
-        List<Card> list = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
+        List<Card> list = AllZoneUtil.getCreaturesInPlay(ai);
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return shouldPumpCard(sa, c);
+                return shouldPumpCard(ai, sa, c);
             }
         });
         return list;
@@ -724,8 +722,8 @@ public class AbilityFactoryPump {
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    private List<Card> getCurseCreatures(final SpellAbility sa, final int defense, final int attack) {
-        List<Card> list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+    private List<Card> getCurseCreatures(final Player ai, final SpellAbility sa, final int defense, final int attack) {
+        List<Card> list = AllZoneUtil.getCreaturesInPlay(ai.getOpponent());
         list = CardLists.getTargetableCards(list, sa);
         if ((defense < 0) && !list.isEmpty()) { // with spells that give -X/-X,
                                                 // compi will try to destroy a
@@ -760,7 +758,7 @@ public class AbilityFactoryPump {
                             if (!c.isAttacking()) {
                                 return false;
                             }
-                            if (c.getNetAttack() > 0 && AllZone.getComputerPlayer().getLife() < 5) {
+                            if (c.getNetAttack() > 0 && ai.getLife() < 5) {
                                 return true;
                             }
                             //Don't waste a -7/-0 spell on a 1/1 creature
@@ -784,7 +782,7 @@ public class AbilityFactoryPump {
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        return containsUsefulKeyword(keywords, c, sa);
+                        return containsUsefulKeyword(ai, keywords, c, sa);
                     }
                 });
             } else {
@@ -824,11 +822,11 @@ public class AbilityFactoryPump {
             return false;
         }
 
-        if (!CostUtil.checkDiscardCost(cost, sa.getSourceCard())) {
+        if (!CostUtil.checkDiscardCost(ai, cost, sa.getSourceCard())) {
             return false;
         }
 
-        if (!CostUtil.checkCreatureSacrificeCost(cost, sa.getSourceCard())) {
+        if (!CostUtil.checkCreatureSacrificeCost(ai, cost, sa.getSourceCard())) {
             return false;
         }
 
@@ -837,10 +835,10 @@ public class AbilityFactoryPump {
         }
 
         if (AllZone.getStack().isEmpty() && CostUtil.hasTapCost(cost, sa.getSourceCard())) {
-                if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && ph.isPlayerTurn(AllZone.getComputerPlayer())) {
+                if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && ph.isPlayerTurn(ai)) {
                     return false;
                 }
-                if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS) && ph.isPlayerTurn(AllZone.getHumanPlayer())) {
+                if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS) && ph.isPlayerTurn(ai.getOpponent())) {
                     return false;
                 }
         }
@@ -924,20 +922,20 @@ public class AbilityFactoryPump {
                         return false;
                     }
 
-                    if (!containsUsefulKeyword(this.keywords, card, sa)) {
+                    if (!containsUsefulKeyword(ai, this.keywords, card, sa)) {
                         continue;
                     }
 
                     return r.nextFloat() <= Math.pow(.9, activations);
                 }
-                if (shouldPumpCard(sa, card)) {
+                if (shouldPumpCard(ai, sa, card)) {
                     return r.nextFloat() <= Math.pow(.9, activations);
                 }
             }
             return false;
         }
         //Targeted
-        if (!this.pumpTgtAI(sa, defense, attack, false)) {
+        if (!this.pumpTgtAI(ai, sa, defense, attack, false)) {
             return false;
         }
 
@@ -964,7 +962,7 @@ public class AbilityFactoryPump {
      *            a boolean.
      * @return a boolean.
      */
-    private boolean pumpTgtAI(final SpellAbility sa, final int defense, final int attack, final boolean mandatory) {
+    private boolean pumpTgtAI(final Player ai, final SpellAbility sa, final int defense, final int attack, final boolean mandatory) {
         if (!mandatory
                 && !sa.isTrigger()
                 && Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
@@ -973,6 +971,7 @@ public class AbilityFactoryPump {
             return false;
         }
 
+        final Player opp = ai.getOpponent();
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
         List<Card> list = new ArrayList<Card>();
@@ -989,20 +988,20 @@ public class AbilityFactoryPump {
                 }
             }
         } else if (this.abilityFactory.isCurse()) {
-            if (sa.canTarget(AllZone.getHumanPlayer())) {
-                tgt.addTarget(AllZone.getHumanPlayer());
+            if (sa.canTarget(opp)) {
+                tgt.addTarget(opp);
                 return true;
             }
-            list = this.getCurseCreatures(sa, defense, attack);
+            list = this.getCurseCreatures(ai, sa, defense, attack);
         } else {
             if (!tgt.canTgtCreature()) {
                 ZoneType zone = tgt.getZone().get(0);
                 list = AllZoneUtil.getCardsIn(zone);
             } else {
-                list = this.getPumpCreatures(sa);
+                list = this.getPumpCreatures(ai, sa);
             }
-            if (sa.canTarget(AllZone.getComputerPlayer())) {
-                tgt.addTarget(AllZone.getComputerPlayer());
+            if (sa.canTarget(ai)) {
+                tgt.addTarget(ai);
                 return true;
             }
         }
@@ -1013,18 +1012,18 @@ public class AbilityFactoryPump {
             // attack/block
             if ((sa.getPayCosts() != null) && sa.getPayCosts().getTap()) {
                 if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                        && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())) {
+                        && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(ai)) {
                     list.remove(sa.getSourceCard());
                 }
                 if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                        && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
+                        && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(opp)) {
                     list.remove(sa.getSourceCard());
                 }
             }
         }
 
         if (list.isEmpty()) {
-            return mandatory && this.pumpMandatoryTarget(this.abilityFactory, sa, mandatory);
+            return mandatory && this.pumpMandatoryTarget(ai, this.abilityFactory, sa, mandatory);
         }
 
         if (!this.abilityFactory.isCurse()) {
@@ -1044,7 +1043,7 @@ public class AbilityFactoryPump {
             if (list.isEmpty()) {
                 if ((tgt.getNumTargeted() < tgt.getMinTargets(sa.getSourceCard(), sa)) || (tgt.getNumTargeted() == 0)) {
                     if (mandatory) {
-                        return this.pumpMandatoryTarget(this.abilityFactory, sa, mandatory);
+                        return this.pumpMandatoryTarget(ai, this.abilityFactory, sa, mandatory);
                     }
 
                     tgt.resetTargets();
@@ -1076,9 +1075,10 @@ public class AbilityFactoryPump {
      *            a boolean.
      * @return a boolean.
      */
-    private boolean pumpMandatoryTarget(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private boolean pumpMandatoryTarget(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
         final Target tgt = sa.getTarget();
+        final Player opp = ai.getOpponent();
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
         list = CardLists.getTargetableCards(list, sa);
 
@@ -1097,11 +1097,11 @@ public class AbilityFactoryPump {
         final Card source = sa.getSourceCard();
 
         if (af.isCurse()) {
-            pref = CardLists.filterControlledBy(list, AllZone.getHumanPlayer());
-            forced = CardLists.filterControlledBy(list, AllZone.getComputerPlayer());
+            pref = CardLists.filterControlledBy(list, opp);
+            forced = CardLists.filterControlledBy(list, ai);
         } else {
-            pref = CardLists.filterControlledBy(list, AllZone.getComputerPlayer());
-            forced = CardLists.filterControlledBy(list, AllZone.getHumanPlayer());
+            pref = CardLists.filterControlledBy(list, ai);
+            forced = CardLists.filterControlledBy(list, opp);
         }
 
         while (tgt.getNumTargeted() < tgt.getMaxTargets(source, sa)) {
@@ -1213,7 +1213,7 @@ public class AbilityFactoryPump {
                 return true;
             }
         } else {
-            return this.pumpTgtAI(sa, defense, attack, mandatory);
+            return this.pumpTgtAI(ai, sa, defense, attack, mandatory);
         }
 
         return true;
@@ -1228,7 +1228,7 @@ public class AbilityFactoryPump {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private boolean pumpDrawbackAI(final SpellAbility sa) {
+    private boolean pumpDrawbackAI(final Player ai, final SpellAbility sa) {
         final Card source = sa.getSourceCard();
         int defense;
         if (this.numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
@@ -1256,7 +1256,7 @@ public class AbilityFactoryPump {
             }
         } else {
             //Targeted
-            if (!this.pumpTgtAI(sa, defense, attack, false)) {
+            if (!this.pumpTgtAI(ai, sa, defense, attack, false)) {
                 return false;
             }
 
@@ -1589,7 +1589,7 @@ public class AbilityFactoryPump {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryPump.this.pumpAllCanPlayAI(this);
+                return AbilityFactoryPump.this.pumpAllCanPlayAI(getActivatingPlayer(), this);
             }
 
             @Override
@@ -1628,7 +1628,7 @@ public class AbilityFactoryPump {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryPump.this.pumpAllCanPlayAI(this);
+                return AbilityFactoryPump.this.pumpAllCanPlayAI(getActivatingPlayer(), this);
             }
 
             @Override
@@ -1680,7 +1680,7 @@ public class AbilityFactoryPump {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryPump.this.pumpAllCanPlayAI(this);
+                return AbilityFactoryPump.this.pumpAllCanPlayAI(getActivatingPlayer(), this);
             }
 
             @Override
@@ -1708,7 +1708,7 @@ public class AbilityFactoryPump {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private boolean pumpAllCanPlayAI(final SpellAbility sa) {
+    private boolean pumpAllCanPlayAI(final Player ai, final SpellAbility sa) {
         String valid = "";
         final Random r = MyRandom.getRandom();
         final Card source = sa.getSourceCard();
@@ -1724,15 +1724,16 @@ public class AbilityFactoryPump {
             valid = this.params.get("ValidCards");
         }
 
-        List<Card> comp = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+        final Player opp = ai.getOpponent();
+        List<Card> comp = ai.getCardsIn(ZoneType.Battlefield);
         comp = CardLists.getValidCards(comp, valid, source.getController(), source);
-        List<Card> human = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        List<Card> human = opp.getCardsIn(ZoneType.Battlefield);
         human = CardLists.getValidCards(human, valid, source.getController(), source);
 
         final Target tgt = sa.getTarget();
-        if (tgt != null && sa.canTarget(AllZone.getHumanPlayer()) && params.containsKey("IsCurse")) {
+        if (tgt != null && sa.canTarget(opp) && params.containsKey("IsCurse")) {
             tgt.resetTargets();
-            sa.getTarget().addTarget(AllZone.getHumanPlayer());
+            sa.getTarget().addTarget(opp);
             comp = new ArrayList<Card>();
         }
 
@@ -1775,7 +1776,7 @@ public class AbilityFactoryPump {
         comp = CardLists.filter(comp, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                if (power <= 0 && !containsUsefulKeyword(keywords, c, sa)) {
+                if (power <= 0 && !containsUsefulKeyword(ai, keywords, c, sa)) {
                     return false;
                 }
                 if (phase.equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) && c.isAttacking()) {

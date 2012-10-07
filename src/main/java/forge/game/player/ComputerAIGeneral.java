@@ -49,13 +49,14 @@ import forge.game.zone.ZoneType;
  */
 public class ComputerAIGeneral implements Computer {
 
+    final private Player player;
     /**
      * <p>
      * Constructor for ComputerAI_General.
      * </p>
      */
-    public ComputerAIGeneral() {
-
+    public ComputerAIGeneral(Player computerPlayer) {
+        player = computerPlayer;
     }
 
     /**
@@ -65,7 +66,7 @@ public class ComputerAIGeneral implements Computer {
      */
     @Override
     public final void main() {
-        ComputerUtil.chooseLandsToPlay();
+        ComputerUtil.chooseLandsToPlay(player);
         this.playSpellAbilitiesStackEmpty();
     } // main()
 
@@ -81,7 +82,7 @@ public class ComputerAIGeneral implements Computer {
     private void playSpellAbilitiesStackEmpty() {
         final List<Card> list = getAvailableCards();
 
-        final boolean nextPhase = ComputerUtil.playSpellAbilities(getSpellAbilities(list));
+        final boolean nextPhase = ComputerUtil.playSpellAbilities(player, getSpellAbilities(list));
 
         if (nextPhase) {
             Singletons.getModel().getGameState().getPhaseHandler().passPriority();
@@ -95,10 +96,10 @@ public class ComputerAIGeneral implements Computer {
      * 
      * @return a boolean.
      */
-    public static boolean hasACardGivingHaste() {
-        final List<Card> all = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-        all.addAll(CardFactoryUtil.getExternalZoneActivationCards(AllZone.getComputerPlayer()));
-        all.addAll(AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand));
+    public static boolean hasACardGivingHaste(final Player ai) {
+        final List<Card> all = ai.getCardsIn(ZoneType.Battlefield);
+        all.addAll(CardFactoryUtil.getExternalZoneActivationCards(ai));
+        all.addAll(ai.getCardsIn(ZoneType.Hand));
 
         for (final Card c : all) {
             for (final SpellAbility sa : c.getSpellAbility()) {
@@ -130,17 +131,17 @@ public class ComputerAIGeneral implements Computer {
      * @return a {@link forge.CardList} object.
      */
     private List<Card> getAvailableCards() {
-        final Player computer = AllZone.getComputerPlayer();
-        final Player human = AllZone.getHumanPlayer();
-        List<Card> all = computer.getCardsIn(ZoneType.Hand);
-        all.addAll(computer.getCardsIn(ZoneType.Battlefield));
-        all.addAll(computer.getCardsIn(ZoneType.Exile));
-        all.addAll(computer.getCardsIn(ZoneType.Graveyard));
-        if (!computer.getCardsIn(ZoneType.Library).isEmpty()) {
-            all.add(computer.getCardsIn(ZoneType.Library).get(0));
+
+        final Player opp = player.getOpponent();
+        List<Card> all = player.getCardsIn(ZoneType.Hand);
+        all.addAll(player.getCardsIn(ZoneType.Battlefield));
+        all.addAll(player.getCardsIn(ZoneType.Exile));
+        all.addAll(player.getCardsIn(ZoneType.Graveyard));
+        if (!player.getCardsIn(ZoneType.Library).isEmpty()) {
+            all.add(player.getCardsIn(ZoneType.Library).get(0));
         }
-        all.addAll(human.getCardsIn(ZoneType.Exile));
-        all.addAll(human.getCardsIn(ZoneType.Battlefield));
+        all.addAll(opp.getCardsIn(ZoneType.Exile));
+        all.addAll(opp.getCardsIn(ZoneType.Battlefield));
         return all;
     }
 
@@ -208,15 +209,15 @@ public class ComputerAIGeneral implements Computer {
      * @return a {@link java.util.ArrayList} object.
      */
     private ArrayList<SpellAbility> getPossibleETBCounters() {
-        final Player computer = AllZone.getComputerPlayer();
-        final Player human = AllZone.getHumanPlayer();
-        List<Card> all = computer.getCardsIn(ZoneType.Hand);
-        all.addAll(computer.getCardsIn(ZoneType.Exile));
-        all.addAll(computer.getCardsIn(ZoneType.Graveyard));
-        if (!computer.getCardsIn(ZoneType.Library).isEmpty()) {
-            all.add(computer.getCardsIn(ZoneType.Library).get(0));
+
+        final Player opp = player.getOpponent();
+        List<Card> all = player.getCardsIn(ZoneType.Hand);
+        all.addAll(player.getCardsIn(ZoneType.Exile));
+        all.addAll(player.getCardsIn(ZoneType.Graveyard));
+        if (!player.getCardsIn(ZoneType.Library).isEmpty()) {
+            all.add(player.getCardsIn(ZoneType.Library).get(0));
         }
-        all.addAll(human.getCardsIn(ZoneType.Exile));
+        all.addAll(opp.getCardsIn(ZoneType.Exile));
 
         final ArrayList<SpellAbility> spellAbilities = new ArrayList<SpellAbility>();
         for (final Card c : all) {
@@ -295,7 +296,7 @@ public class ComputerAIGeneral implements Computer {
             Log.debug(sb.toString());
         }
 
-        AllZone.getComputerPlayer().getZone(ZoneType.Battlefield).updateObservers();
+        player.getZone(ZoneType.Battlefield).updateObservers();
 
         Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
     }
@@ -307,7 +308,7 @@ public class ComputerAIGeneral implements Computer {
      */
     @Override
     public final void declareBlockers() {
-        final List<Card> blockers = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
+        final List<Card> blockers = AllZoneUtil.getCreaturesInPlay(player);
 
         AllZone.setCombat(ComputerUtilBlock.getBlockers(AllZone.getCombat(), blockers));
         
@@ -351,7 +352,7 @@ public class ComputerAIGeneral implements Computer {
         // top of stack is owned by human,
         ArrayList<SpellAbility> possibleCounters = getPlayableCounters(cards);
 
-        if ((possibleCounters.size() > 0) && ComputerUtil.playCounterSpell(possibleCounters)) {
+        if ((possibleCounters.size() > 0) && ComputerUtil.playCounterSpell(player, possibleCounters)) {
             // Responding CounterSpell is on the Stack trying to Counter the Spell
             // If playCounterSpell returns true, a Spell is hitting the Stack
             return;
@@ -359,7 +360,7 @@ public class ComputerAIGeneral implements Computer {
 
         possibleCounters.clear();
         possibleCounters = this.getPossibleETBCounters();
-        if ((possibleCounters.size() > 0) && !ComputerUtil.playSpellAbilities(possibleCounters)) {
+        if ((possibleCounters.size() > 0) && !ComputerUtil.playSpellAbilities(player, possibleCounters)) {
             // Responding Permanent w/ ETB Counter is on the Stack
             // If playSpellAbilities returns false, a Spell is hitting the Stack
             return;
@@ -367,7 +368,7 @@ public class ComputerAIGeneral implements Computer {
         final ArrayList<SpellAbility> sas = this.getSpellAbilities(cards);
         if (sas.size() > 0) {
             // Spell not Countered
-            if (!ComputerUtil.playSpellAbilities(sas)) {
+            if (!ComputerUtil.playSpellAbilities(player, sas)) {
                 return;
             }
         }

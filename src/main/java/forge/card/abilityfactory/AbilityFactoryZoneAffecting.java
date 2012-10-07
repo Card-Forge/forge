@@ -25,7 +25,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -301,7 +300,7 @@ public class AbilityFactoryZoneAffecting {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkCreatureSacrificeCost(abCost, source)) {
+            if (!CostUtil.checkCreatureSacrificeCost(ai, abCost, source)) {
                 return false;
             }
 
@@ -309,14 +308,14 @@ public class AbilityFactoryZoneAffecting {
                 return false;
             }
 
-            if (!CostUtil.checkDiscardCost(abCost, source)) {
+            if (!CostUtil.checkDiscardCost(ai, abCost, source)) {
                 for (final CostPart part : abCost.getCostParts()) {
                     if (part instanceof CostDiscard) {
                         CostDiscard cd = (CostDiscard) part;
-                        cd.decideAIPayment(sa, sa.getSourceCard(), null);
+                        cd.decideAIPayment(ai, sa, sa.getSourceCard(), null);
                         List<Card> discards = cd.getList();
                         for (Card discard : discards) {
-                            if (!ComputerUtil.isWorseThanDraw(discard)) {
+                            if (!ComputerUtil.isWorseThanDraw(ai, discard)) {
                                 return false;
                             }
                         }
@@ -879,11 +878,11 @@ public class AbilityFactoryZoneAffecting {
                 return false;
             }
 
-            if (!CostUtil.checkDiscardCost(abCost, source)) {
+            if (!CostUtil.checkDiscardCost(ai, abCost, source)) {
                 return false;
             }
 
-            if (!CostUtil.checkSacrificeCost(abCost, source)) {
+            if (!CostUtil.checkSacrificeCost(ai, abCost, source)) {
                 return false;
             }
 
@@ -924,8 +923,7 @@ public class AbilityFactoryZoneAffecting {
 
         if (params.get("NumCards").equals("X") && source.getSVar("X").startsWith("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa, ai), AllZone.getHumanPlayer()
-                    .getCardsIn(ZoneType.Library).size());
+            final int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa, ai), ai.getOpponent().getCardsIn(ZoneType.Library).size());
             source.setSVar("PayX", Integer.toString(cardsToDiscard));
             if (cardsToDiscard <= 0) {
                 return false;
@@ -1413,7 +1411,7 @@ public class AbilityFactoryZoneAffecting {
                             if (p.isComputer()) { // discard AI cards
                                 int max = chooser.getCardsIn(ZoneType.Hand).size();
                                 max = Math.min(max, numCards);
-                                List<Card> list = ComputerUtil.discardNumTypeAI(max, dValid, sa);
+                                List<Card> list = ComputerUtil.discardNumTypeAI(p, max, dValid, sa);
                                 if (mode.startsWith("Reveal")) {
                                     GuiChoose.oneOrNone("Computer has chosen", list);
                                 }
@@ -1602,7 +1600,7 @@ public class AbilityFactoryZoneAffecting {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkSacrificeCost(abCost, source)) {
+            if (!CostUtil.checkSacrificeCost(ai, abCost, source)) {
                 return false;
             }
 
@@ -1610,7 +1608,7 @@ public class AbilityFactoryZoneAffecting {
                 return false;
             }
 
-            if (!CostUtil.checkDiscardCost(abCost, source)) {
+            if (!CostUtil.checkDiscardCost(ai, abCost, source)) {
                 return false;
             }
 

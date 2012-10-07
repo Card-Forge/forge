@@ -270,16 +270,16 @@ public class CostDiscard extends CostPartWithList {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final boolean decideAIPayment(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         final String type = this.getType();
-        final Player activator = ability.getActivatingPlayer();
-        final List<Card> hand = activator.getCardsIn(ZoneType.Hand);
+
+        final List<Card> hand = ai.getCardsIn(ZoneType.Hand);
         this.resetList();
         if (type.equals("LastDrawn")) {
-            if (!hand.contains(activator.getLastDrawnCard())) {
+            if (!hand.contains(ai.getLastDrawnCard())) {
                 return false;
             }
-            this.addToList(activator.getLastDrawnCard());
+            this.addToList(ai.getLastDrawnCard());
         }
 
         else if (this.getThis()) {
@@ -310,7 +310,7 @@ public class CostDiscard extends CostPartWithList {
             if (type.equals("Random")) {
                 this.setList(CardLists.getRandomSubList(hand, c));
             } else {
-                this.setList(ComputerUtil.discardNumTypeAI(c, type.split(";"), ability));
+                this.setList(ComputerUtil.discardNumTypeAI(ai, c, type.split(";"), ability));
             }
         }
         return this.getList() != null;

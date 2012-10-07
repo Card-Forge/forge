@@ -85,7 +85,7 @@ public class AbilityFactoryPreventDamage {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryPreventDamage.preventDamageCanPlayAI(af, this);
+                return AbilityFactoryPreventDamage.preventDamageCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -124,7 +124,7 @@ public class AbilityFactoryPreventDamage {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryPreventDamage.preventDamageCanPlayAI(af, this);
+                return AbilityFactoryPreventDamage.preventDamageCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -272,7 +272,7 @@ public class AbilityFactoryPreventDamage {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean preventDamageCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean preventDamageCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         final Card hostCard = af.getHostCard();
         boolean chance = false;
@@ -284,11 +284,11 @@ public class AbilityFactoryPreventDamage {
             return false;
         }
 
-        if (!CostUtil.checkDiscardCost(cost, hostCard)) {
+        if (!CostUtil.checkDiscardCost(ai, cost, hostCard)) {
             return false;
         }
 
-        if (!CostUtil.checkSacrificeCost(cost, hostCard)) {
+        if (!CostUtil.checkSacrificeCost(ai, cost, hostCard)) {
             return false;
         }
 
@@ -345,14 +345,14 @@ public class AbilityFactoryPreventDamage {
             final ArrayList<Object> objects = new ArrayList<Object>();
             // AbilityFactory.predictThreatenedObjects(af);
 
-            if (objects.contains(AllZone.getComputerPlayer())) {
-                tgt.addTarget(AllZone.getComputerPlayer());
+            if (objects.contains(ai)) {
+                tgt.addTarget(ai);
             }
 
             final List<Card> threatenedTargets = new ArrayList<Card>();
             // filter AIs battlefield by what I can target
-            List<Card> targetables = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-            targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
+            List<Card> targetables = ai.getCardsIn(ZoneType.Battlefield);
+            targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, hostCard);
 
             for (final Card c : targetables) {
                 if (objects.contains(c)) {
@@ -368,15 +368,15 @@ public class AbilityFactoryPreventDamage {
 
         } // Protect combatants
         else if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
-            if (sa.canTarget(AllZone.getComputerPlayer()) && CombatUtil.wouldLoseLife(AllZone.getCombat())
+            if (sa.canTarget(ai) && CombatUtil.wouldLoseLife(AllZone.getCombat())
                     && (CombatUtil.lifeInDanger(AllZone.getCombat()) || sa.isAbility())
-                    && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
-                tgt.addTarget(AllZone.getComputerPlayer());
+                    && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(ai.getOpponent())) {
+                tgt.addTarget(ai);
                 chance = true;
             } else {
                 // filter AIs battlefield by what I can target
-                List<Card> targetables = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
-                targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
+                List<Card> targetables = ai.getCardsIn(ZoneType.Battlefield);
+                targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, hostCard);
 
                 if (targetables.size() == 0) {
                     return false;
@@ -428,7 +428,7 @@ public class AbilityFactoryPreventDamage {
             // If there's no target on the trigger, just say yes.
             chance = true;
         } else {
-            chance = AbilityFactoryPreventDamage.preventDamageMandatoryTarget(af, sa, mandatory);
+            chance = AbilityFactoryPreventDamage.preventDamageMandatoryTarget(ai, af, sa, mandatory);
         }
 
         final AbilitySub subAb = sa.getSubAbility();
@@ -452,15 +452,15 @@ public class AbilityFactoryPreventDamage {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean preventDamageMandatoryTarget(final AbilityFactory af, final SpellAbility sa,
+    private static boolean preventDamageMandatoryTarget(final Player ai, final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory) {
         final Card hostCard = af.getHostCard();
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
         // filter AIs battlefield by what I can target
         List<Card> targetables = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-        targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), AllZone.getComputerPlayer(), hostCard);
-        final List<Card> compTargetables = CardLists.filterControlledBy(targetables, AllZone.getComputerPlayer());
+        targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, hostCard);
+        final List<Card> compTargetables = CardLists.filterControlledBy(targetables, ai);
 
         if (targetables.size() == 0) {
             return false;
@@ -586,7 +586,7 @@ public class AbilityFactoryPreventDamage {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryPreventDamage.preventDamageAllCanPlayAI(af, this);
+                return AbilityFactoryPreventDamage.preventDamageAllCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -624,7 +624,7 @@ public class AbilityFactoryPreventDamage {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryPreventDamage.preventDamageAllCanPlayAI(af, this);
+                return AbilityFactoryPreventDamage.preventDamageAllCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -718,7 +718,7 @@ public class AbilityFactoryPreventDamage {
         return sb.toString();
     }
 
-    private static boolean preventDamageAllCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean preventDamageAllCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         final Card hostCard = af.getHostCard();
         boolean chance = false;
 
@@ -729,11 +729,11 @@ public class AbilityFactoryPreventDamage {
             return false;
         }
 
-        if (!CostUtil.checkDiscardCost(cost, hostCard)) {
+        if (!CostUtil.checkDiscardCost(ai, cost, hostCard)) {
             return false;
         }
 
-        if (!CostUtil.checkSacrificeCost(cost, hostCard)) {
+        if (!CostUtil.checkSacrificeCost(ai, cost, hostCard)) {
             return false;
         }
 

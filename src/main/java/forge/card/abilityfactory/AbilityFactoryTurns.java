@@ -81,7 +81,7 @@ public class AbilityFactoryTurns {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryTurns.addTurnCanPlayAI(af, this);
+                return AbilityFactoryTurns.addTurnCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -119,7 +119,7 @@ public class AbilityFactoryTurns {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryTurns.addTurnCanPlayAI(af, this);
+                return AbilityFactoryTurns.addTurnCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -130,7 +130,7 @@ public class AbilityFactoryTurns {
             @Override
             public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
                 if (withOutManaCost) {
-                    return AbilityFactoryTurns.addTurnTriggerAINoCost(af, this, mandatory);
+                    return AbilityFactoryTurns.addTurnTriggerAINoCost(getActivatingPlayer(), af, this, mandatory);
                 }
                 return AbilityFactoryTurns.addTurnTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
@@ -255,8 +255,8 @@ public class AbilityFactoryTurns {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean addTurnCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        return AbilityFactoryTurns.addTurnTriggerAINoCost(af, sa, false);
+    private static boolean addTurnCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
+        return AbilityFactoryTurns.addTurnTriggerAINoCost(ai, af, sa, false);
     }
 
     /**
@@ -276,7 +276,7 @@ public class AbilityFactoryTurns {
         if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
             return false;
         }
-        return addTurnTriggerAINoCost(af, sa, mandatory);
+        return addTurnTriggerAINoCost(ai, af, sa, mandatory);
     }
 
     /**
@@ -292,18 +292,19 @@ public class AbilityFactoryTurns {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean addTurnTriggerAINoCost(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean addTurnTriggerAINoCost(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
 
         final HashMap<String, String> params = af.getMapParams();
 
+        final Player opp = ai.getOpponent();
         final Target tgt = sa.getTarget();
 
         if (sa.getTarget() != null) {
             tgt.resetTargets();
-            if (sa.canTarget(AllZone.getComputerPlayer())) {
-                sa.getTarget().addTarget(AllZone.getComputerPlayer());
-            } else if (mandatory && sa.canTarget(AllZone.getHumanPlayer())) {
-                sa.getTarget().addTarget(AllZone.getHumanPlayer());
+            if (sa.canTarget(ai)) {
+                sa.getTarget().addTarget(ai);
+            } else if (mandatory && sa.canTarget(opp)) {
+                sa.getTarget().addTarget(opp);
             } else {
                 return false;
             }
@@ -520,10 +521,10 @@ public class AbilityFactoryTurns {
 
         // Update observers
         AllZone.getStack().updateObservers();
-        AllZone.getComputerPlayer().updateObservers();
-        AllZone.getHumanPlayer().updateObservers();
-        AllZone.getComputerPlayer().updateLabelObservers();
-        AllZone.getHumanPlayer().updateLabelObservers();
+        for (Player p : AllZone.getPlayersInGame()) {
+            p.updateObservers();
+            p.updateLabelObservers();
+        }
     }
 
 } // end class AbilityFactory_Turns

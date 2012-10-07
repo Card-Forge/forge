@@ -295,7 +295,7 @@ public class SpellPermanent extends Spell {
         }
         // Wait for Main2 if possible
         if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.MAIN1)
-                && !ComputerUtil.castPermanentInMain1(this)) {
+                && !ComputerUtil.castPermanentInMain1(this, ai)) {
             return false;
         }
         // save cards with flash for surprise blocking
@@ -327,6 +327,7 @@ public class SpellPermanent extends Spell {
         if (mandatory) {
             return true;
         }
+        final Player ai = getActivatingPlayer(); 
         final Card card = this.getSourceCard();
         String mana = this.getPayCosts().getTotalMana();
         final Cost cost = this.getPayCosts();
@@ -337,11 +338,11 @@ public class SpellPermanent extends Spell {
                 return false;
             }
 
-            if (!CostUtil.checkDiscardCost(cost, card)) {
+            if (!CostUtil.checkDiscardCost(ai, cost, card)) {
                 return false;
             }
 
-            if (!CostUtil.checkSacrificeCost(cost, card)) {
+            if (!CostUtil.checkSacrificeCost(ai, cost, card)) {
                 return false;
             }
 
@@ -352,13 +353,13 @@ public class SpellPermanent extends Spell {
         
         // check on legendary
         if (card.isType("Legendary") && !AllZoneUtil.isCardInPlay("Mirror Gallery")) {
-            final List<Card> list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+            final List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
             if (Iterables.any(list, CardPredicates.nameEquals(card.getName()))) {
                 return false;
             }
         }
         if (card.isPlaneswalker()) {
-            List<Card> list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+            List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
             list = CardLists.filter(list, CardPredicates.Presets.PLANEWALKERS);
 
             for (int i = 0; i < list.size(); i++) {
@@ -372,7 +373,7 @@ public class SpellPermanent extends Spell {
             }
         }
         if (card.isType("World")) {
-            List<Card> list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+            List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
             list = CardLists.getType(list, "World");
             if (list.size() > 0) {
                 return false;

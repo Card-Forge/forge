@@ -181,14 +181,14 @@ public class CostTapType extends CostPartWithList {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final boolean decideAIPayment(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         final boolean tap = payment.getCost().getTap();
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         if (c == null) {
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
-                List<Card> typeList = ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield);
+                List<Card> typeList = ai.getCardsIn(ZoneType.Battlefield);
                 typeList = CardLists.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
                 typeList = CardLists.filter(typeList, Presets.UNTAPPED);
                 c = typeList.size();

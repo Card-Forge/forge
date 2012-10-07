@@ -42,12 +42,15 @@ import forge.game.GameState;
 import forge.game.GameSummary;
 import forge.game.player.ComputerAIGeneral;
 import forge.game.player.ComputerAIInput;
+import forge.game.player.Player;
+import forge.game.player.PlayerType;
 import forge.gauntlet.GauntletData;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestPreferences;
+import forge.util.Aggregates;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
 import forge.util.IStorageView;
@@ -146,7 +149,9 @@ public enum FModel {
 
         // Instantiate AI
         AllZone.setInputControl(new InputControl(FModel.this));
-        AllZone.getInputControl().setComputer(new ComputerAIInput(new ComputerAIGeneral()));
+        Player computerPlayer = Aggregates.firstFieldEquals(gameState.getPlayers(), Player.Accessors.FN_GET_TYPE, PlayerType.COMPUTER);
+        AllZone.getInputControl().setComputer(new ComputerAIInput(new ComputerAIGeneral(computerPlayer)));
+        /// Wrong direction here. It is computer that lives inside player, not a player in computer
 
         testNetworkConnection();
         

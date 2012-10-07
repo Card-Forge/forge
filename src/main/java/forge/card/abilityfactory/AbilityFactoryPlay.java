@@ -96,7 +96,7 @@ public final class AbilityFactoryPlay {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryPlay.playCanPlayAI(af, this);
+                return AbilityFactoryPlay.playCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -106,7 +106,7 @@ public final class AbilityFactoryPlay {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryPlay.playTriggerAI(af, this, mandatory);
+                return AbilityFactoryPlay.playTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility abCopySpell = new AbilityPlay(af.getHostCard(), af.getAbCost(), af.getAbTgt());
@@ -134,7 +134,7 @@ public final class AbilityFactoryPlay {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryPlay.playCanPlayAI(af, this);
+                return AbilityFactoryPlay.playCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -144,7 +144,7 @@ public final class AbilityFactoryPlay {
 
             @Override
             public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
-                return AbilityFactoryPlay.playTriggerAI(af, this, mandatory);
+                return AbilityFactoryPlay.playTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
 
         };
@@ -193,7 +193,7 @@ public final class AbilityFactoryPlay {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryPlay.playTriggerAI(af, this, mandatory);
+                return AbilityFactoryPlay.playTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         }
         final SpellAbility dbCopySpell = new DrawbackPlay(af.getHostCard(), af.getAbTgt());
@@ -266,7 +266,7 @@ public final class AbilityFactoryPlay {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean playCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean playCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         final Cost abCost = af.getAbCost();
         final Card source = af.getHostCard();
         final HashMap<String, String> params = af.getMapParams();
@@ -274,7 +274,7 @@ public final class AbilityFactoryPlay {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkSacrificeCost(abCost, source)) {
+            if (!CostUtil.checkSacrificeCost(ai, abCost, source)) {
                 return false;
             }
 
@@ -282,7 +282,7 @@ public final class AbilityFactoryPlay {
                 return false;
             }
 
-            if (!CostUtil.checkDiscardCost(abCost, source)) {
+            if (!CostUtil.checkDiscardCost(ai, abCost, source)) {
                 return false;
             }
 
@@ -304,7 +304,7 @@ public final class AbilityFactoryPlay {
         if (tgt != null) {
             ZoneType zone = tgt.getZone().get(0);
             cards = AllZoneUtil.getCardsIn(zone);
-            cards = CardLists.getValidCards(cards, tgt.getValidTgts(), AllZone.getComputerPlayer(), source);
+            cards = CardLists.getValidCards(cards, tgt.getValidTgts(), ai, source);
             if (cards.isEmpty()) {
                 return false;
             }
@@ -331,13 +331,13 @@ public final class AbilityFactoryPlay {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean playTriggerAI(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean playTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
 
         if (mandatory) {
             return true;
         }
 
-        return playCanPlayAI(af, sa);
+        return playCanPlayAI(ai, af, sa);
     }
 
     /**
@@ -505,7 +505,7 @@ public final class AbilityFactoryPlay {
                     if (tgtSA instanceof Spell) {
                         Spell spell = (Spell) tgtSA;
                         if (spell.canPlayFromEffectAI(!optional, true) || !optional) {
-                            ComputerUtil.playSpellAbilityWithoutPayingManaCost(tgtSA);
+                            ComputerUtil.playSpellAbilityWithoutPayingManaCost(controller, tgtSA);
                             if (remember) {
                                 source.addRemembered(tgtSA.getSourceCard());
                             }

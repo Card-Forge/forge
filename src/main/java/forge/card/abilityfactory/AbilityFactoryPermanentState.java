@@ -42,7 +42,6 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
@@ -638,7 +637,7 @@ public class AbilityFactoryPermanentState {
             if (p.isHuman()) {
                 AllZone.getInputControl().setInput(CardFactoryUtil.inputUntapUpToNType(num, valid));
             } else {
-                List<Card> list = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+                List<Card> list = p.getCardsIn(ZoneType.Battlefield);
                 list = CardLists.getType(list, valid);
                 list = CardLists.filter(list, Presets.TAPPED);
 
@@ -940,7 +939,7 @@ public class AbilityFactoryPermanentState {
                 return true;
             } else if (mandatory) {
                 // not enough preferred targets, but mandatory so keep going:
-                return AbilityFactoryPermanentState.tapUnpreferredTargeting(af, sa, mandatory);
+                return AbilityFactoryPermanentState.tapUnpreferredTargeting(ai, af, sa, mandatory);
             }
         }
 
@@ -1024,7 +1023,7 @@ public class AbilityFactoryPermanentState {
                     }
                     return false;
                 } else {
-                    if (!ComputerUtil.shouldCastLessThanMax(source)) {
+                    if (!ComputerUtil.shouldCastLessThanMax(ai, source)) {
                         return false;
                     }
                     break;
@@ -1036,37 +1035,20 @@ public class AbilityFactoryPermanentState {
                     && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 // Tap creatures possible blockers before combat during AI's turn.
 
+                List<Card> attackers;
                 if (phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                     //Combat has already started
-                    final List<Card> attackers = AllZone.getCombat().getAttackerList();
-                    List<Card> creatureList = CardLists.filter(tapList, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            if (c.isCreature()) {
-                                return CombatUtil.canBlockAtLeastOne(c, attackers);
-                            }
-                            return false;
-                        }
-                    });
-                    if (!attackers.isEmpty() && !creatureList.isEmpty()) {
-                        choice = CardFactoryUtil.getBestCreatureAI(creatureList);
-                    }
+                    attackers = AllZone.getCombat().getAttackerList();
                 } else {
-                    final List<Card> attackers = ComputerUtil.getPossibleAttackers();
+                    attackers = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES_CAN_ATTACK);
                     attackers.remove(sa.getSourceCard());
-                    List<Card> creatureList = CardLists.filter(tapList, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            if (c.isCreature()) {
-                                return CombatUtil.canBlockAtLeastOne(c, attackers);
-                            }
-                            return false;
-                        }
-                    });
-                    if (!attackers.isEmpty() && creatureList.size() == 1) {
-                        choice = CardFactoryUtil.getBestCreatureAI(creatureList);
-                    }
                 }
+                Predicate<Card> findBlockers = CardPredicates.possibleBlockerForAtLeastOne(attackers);
+                List<Card> creatureList = CardLists.filter(tapList, findBlockers);
+                if (!attackers.isEmpty() && !creatureList.isEmpty()) {
+                    choice = CardFactoryUtil.getBestCreatureAI(creatureList);
+                }
+                
             } else if (phase.isPlayerTurn(opp)
                     && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 // Tap creatures possible blockers before combat during AI's turn.
@@ -1087,7 +1069,7 @@ public class AbilityFactoryPermanentState {
                     }
                     return false;
                 } else {
-                    if (!ComputerUtil.shouldCastLessThanMax(source)) {
+                    if (!ComputerUtil.shouldCastLessThanMax(ai, source)) {
                         return false;
                     }
                     break;
@@ -1114,7 +1096,7 @@ public class AbilityFactoryPermanentState {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean tapUnpreferredTargeting(final AbilityFactory af, final SpellAbility sa,
+    private static boolean tapUnpreferredTargeting(final Player ai, final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory) {
         final Card source = sa.getSourceCard();
         final Target tgt = sa.getTarget();
@@ -1127,21 +1109,21 @@ public class AbilityFactoryPermanentState {
         final String[] tappablePermanents = { "Enchantment", "Planeswalker" };
         List<Card> tapList = CardLists.getValidCards(list, tappablePermanents, source.getController(), source);
 
-        if (AbilityFactoryPermanentState.tapTargetList(af, sa, tapList, mandatory)) {
+        if (AbilityFactoryPermanentState.tapTargetList(ai, af, sa, tapList, mandatory)) {
             return true;
         }
 
         // try to just tap already tapped things
         tapList = CardLists.filter(list, Presets.TAPPED);
 
-        if (AbilityFactoryPermanentState.tapTargetList(af, sa, tapList, mandatory)) {
+        if (AbilityFactoryPermanentState.tapTargetList(ai, af, sa, tapList, mandatory)) {
             return true;
         }
 
         // just tap whatever we can
         tapList = list;
 
-        if (AbilityFactoryPermanentState.tapTargetList(af, sa, tapList, mandatory)) {
+        if (AbilityFactoryPermanentState.tapTargetList(ai, af, sa, tapList, mandatory)) {
             return true;
         }
 
@@ -1163,7 +1145,7 @@ public class AbilityFactoryPermanentState {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean tapTargetList(final AbilityFactory af, final SpellAbility sa, final List<Card> tapList,
+    private static boolean tapTargetList(final Player ai, final AbilityFactory af, final SpellAbility sa, final List<Card> tapList,
             final boolean mandatory) {
         final Card source = sa.getSourceCard();
         final Target tgt = sa.getTarget();
@@ -1186,7 +1168,7 @@ public class AbilityFactoryPermanentState {
                     }
                     return false;
                 } else {
-                    if (!ComputerUtil.shouldCastLessThanMax(source)) {
+                    if (!ComputerUtil.shouldCastLessThanMax(ai, source)) {
                         return false;
                     }
                     break;
@@ -1207,7 +1189,7 @@ public class AbilityFactoryPermanentState {
                     }
                     return false;
                 } else {
-                    if (!ComputerUtil.shouldCastLessThanMax(source)) {
+                    if (!ComputerUtil.shouldCastLessThanMax(ai, source)) {
                         return false;
                     }
                     break;
@@ -2180,7 +2162,7 @@ public class AbilityFactoryPermanentState {
                 return true;
             } else if (mandatory) {
                 // not enough preferred targets, but mandatory so keep going:
-                return AbilityFactoryPermanentState.tapUnpreferredTargeting(af, sa, mandatory);
+                return AbilityFactoryPermanentState.tapUnpreferredTargeting(ai, af, sa, mandatory);
             }
         }
 

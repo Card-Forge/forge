@@ -50,8 +50,8 @@ public class CostUtil {
      *            the source
      * @return true, if successful
      */
-    public static boolean checkSacrificeCost(final Cost cost, final Card source) {
-        return checkSacrificeCost(cost, source, true);
+    public static boolean checkSacrificeCost(final Player ai, final Cost cost, final Card source) {
+        return checkSacrificeCost(ai, cost, source, true);
     }
 
     /**
@@ -65,7 +65,7 @@ public class CostUtil {
      *            is the gain important enough?
      * @return true, if successful
      */
-    public static boolean checkSacrificeCost(final Cost cost, final Card source, final boolean important) {
+    public static boolean checkSacrificeCost(final Player ai, final Cost cost, final Card source, final boolean important) {
         if (cost == null) {
             return true;
         }
@@ -86,9 +86,9 @@ public class CostUtil {
                     continue;
                 }
 
-                List<Card> typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+                List<Card> typeList = ai.getCardsIn(ZoneType.Battlefield);
                 typeList = CardLists.getValidCards(typeList, type.split(","), source.getController(), source);
-                if (ComputerUtil.getCardPreference(source, "SacCost", typeList) == null) {
+                if (ComputerUtil.getCardPreference(ai, source, "SacCost", typeList) == null) {
                     return false;
                 }
             }
@@ -105,7 +105,7 @@ public class CostUtil {
      *            the source
      * @return true, if successful
      */
-    public static boolean checkCreatureSacrificeCost(final Cost cost, final Card source) {
+    public static boolean checkCreatureSacrificeCost(final Player ai, final Cost cost, final Card source) {
         if (cost == null) {
             return true;
         }
@@ -121,9 +121,9 @@ public class CostUtil {
                     continue;
                 }
 
-                List<Card> typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+                List<Card> typeList = ai.getCardsIn(ZoneType.Battlefield);
                 typeList = CardLists.getValidCards(typeList, type.split(","), source.getController(), source);
-                if (ComputerUtil.getCardPreference(source, "SacCost", typeList) == null) {
+                if (ComputerUtil.getCardPreference(ai, source, "SacCost", typeList) == null) {
                     return false;
                 }
             }
@@ -207,7 +207,7 @@ public class CostUtil {
      *            the source
      * @return true, if successful
      */
-    public static boolean checkDiscardCost(final Cost cost, final Card source) {
+    public static boolean checkDiscardCost(final Player ai, final Cost cost, final Card source) {
         if (cost == null) {
             return true;
         }
@@ -216,12 +216,12 @@ public class CostUtil {
                 final CostDiscard disc = (CostDiscard) part;
 
                 final String type = disc.getType();
-                List<Card> typeList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
-                if (typeList.size() > AllZone.getComputerPlayer().getMaxHandSize()) {
+                List<Card> typeList = ai.getCardsIn(ZoneType.Hand);
+                if (typeList.size() > ai.getMaxHandSize()) {
                     continue;
                 }
                 typeList = CardLists.getValidCards(typeList, type.split(","), source.getController(), source);
-                if (ComputerUtil.getCardPreference(source, "DiscardCost", typeList) == null) {
+                if (ComputerUtil.getCardPreference(ai, source, "DiscardCost", typeList) == null) {
                     return false;
                 }
             }

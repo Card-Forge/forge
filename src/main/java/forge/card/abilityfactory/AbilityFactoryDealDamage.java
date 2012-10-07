@@ -398,7 +398,7 @@ public class AbilityFactoryDealDamage {
             return false;
         }
 
-        if (!CostUtil.checkSacrificeCost(abCost, source)) {
+        if (!CostUtil.checkSacrificeCost(ai, abCost, source)) {
             return false;
         }
 

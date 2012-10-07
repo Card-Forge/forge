@@ -20,7 +20,6 @@ package forge.card.cost;
 import java.util.Iterator;
 import java.util.List;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.GameActionUtil;
@@ -81,7 +80,7 @@ public class CostMill extends CostPartWithList {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final boolean decideAIPayment(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         this.resetList();
 
         Integer c = this.convertAmount();
@@ -95,7 +94,7 @@ public class CostMill extends CostPartWithList {
             c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
         }
 
-        this.setList(AllZone.getComputerPlayer().getCardsIn(ZoneType.Library, c));
+        this.setList(ai.getCardsIn(ZoneType.Library, c));
 
         if ((this.getList() == null) || (this.getList().size() < c)) {
             return false;

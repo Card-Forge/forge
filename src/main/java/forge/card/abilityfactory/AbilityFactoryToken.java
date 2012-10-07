@@ -359,11 +359,11 @@ public class AbilityFactoryToken extends AbilityFactory {
                 return false;
             }
 
-            if (!CostUtil.checkDiscardCost(cost, source)) {
+            if (!CostUtil.checkDiscardCost(ai, cost, source)) {
                 return false;
             }
 
-            if (!CostUtil.checkSacrificeCost(cost, source)) {
+            if (!CostUtil.checkSacrificeCost(ai, cost, source)) {
                 return false;
             }
 

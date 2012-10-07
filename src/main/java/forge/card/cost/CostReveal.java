@@ -96,10 +96,9 @@ public class CostReveal extends CostPartWithList {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final boolean decideAIPayment(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         final String type = this.getType();
-        final Player activator = ability.getActivatingPlayer();
-        List<Card> hand = activator.getCardsIn(ZoneType.Hand);
+        List<Card> hand = ai.getCardsIn(ZoneType.Hand);
         this.resetList();
 
         if (this.getThis()) {
@@ -109,10 +108,10 @@ public class CostReveal extends CostPartWithList {
 
             this.getList().add(source);
         } else if (this.getType().equals("Hand")) {
-            this.setList(activator.getCardsIn(ZoneType.Hand));
+            this.setList(ai.getCardsIn(ZoneType.Hand));
             return true;
         } else {
-            hand = CardLists.getValidCards(hand, type.split(";"), activator, source);
+            hand = CardLists.getValidCards(hand, type.split(";"), ai, source);
             Integer c = this.convertAmount();
             if (c == null) {
                 final String sVar = ability.getSVar(this.getAmount());
@@ -123,7 +122,7 @@ public class CostReveal extends CostPartWithList {
                 }
             }
 
-            this.setList(ComputerUtil.discardNumTypeAI(c, type.split(";"), ability));
+            this.setList(ComputerUtil.discardNumTypeAI(ai, c, type.split(";"), ability));
         }
         return this.getList() != null;
     }
