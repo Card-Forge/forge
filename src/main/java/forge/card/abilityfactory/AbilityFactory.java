@@ -44,6 +44,7 @@ import forge.card.spellability.Target;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.game.player.PlayerType;
 import forge.game.zone.ZoneType;
 
 /**
@@ -1500,8 +1501,8 @@ public class AbilityFactory {
             return true;
         }
 
-        return (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.END_OF_TURN) && Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(
-                AllZone.getComputerPlayer()));
+        return (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.END_OF_TURN) 
+             && Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(PlayerType.COMPUTER));
     }
 
     // returns true if it's better to wait until blockers are declared
@@ -1519,7 +1520,7 @@ public class AbilityFactory {
         return (sa.getSourceCard().isCreature() 
                 && sa.getPayCosts().getTap() 
                 && (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY) 
-                 || Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(AllZone.getHumanPlayer())));
+                 || Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(PlayerType.HUMAN)));
     }
 
     /**
@@ -2224,11 +2225,10 @@ public class AbilityFactory {
                 players.add(sa.getActivatingPlayer().getOpponent());
             }
         } else {
-            if (AllZone.getHumanPlayer().isValid(defined, sa.getActivatingPlayer(), sa.getSourceCard())) {
-                players.add(AllZone.getHumanPlayer());
-            }
-            if (AllZone.getComputerPlayer().isValid(defined, sa.getActivatingPlayer(), sa.getSourceCard())) {
-                players.add(AllZone.getComputerPlayer());
+            for (Player p : AllZone.getPlayersInGame()) {
+                if (p.isValid(defined, sa.getActivatingPlayer(), sa.getSourceCard())) {
+                    players.add(p);
+                }
             }
         }
         return players;
@@ -2487,7 +2487,8 @@ public class AbilityFactory {
                 if (threatParams.containsKey("Defined")) {
                     objects = AbilityFactory.getDefinedObjects(source, threatParams.get("Defined"), topStack);
                 } else if (threatParams.containsKey("ValidCards")) {
-                    List<Card> cards = CardLists.getValidCards(AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield), threatParams.get("ValidCards").split(","), source.getController(), source);
+                    List<Card> battleField = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+                    List<Card> cards = CardLists.getValidCards(battleField, threatParams.get("ValidCards").split(","), source.getController(), source);
                     for (Card card : cards) {
                         objects.add(card);
                     }

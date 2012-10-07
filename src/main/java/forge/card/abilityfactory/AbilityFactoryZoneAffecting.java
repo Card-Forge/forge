@@ -45,6 +45,7 @@ import forge.card.spellability.Target;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.game.player.PlayerType;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.util.MyRandom;
@@ -361,7 +362,7 @@ public class AbilityFactoryZoneAffecting {
             randomReturn = true;
         }
         if ((Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.END_OF_TURN)
-                && Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(AllZone.getComputerPlayer()))) {
+                && Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(PlayerType.COMPUTER))) {
             randomReturn = true;
         }
 
@@ -912,8 +913,8 @@ public class AbilityFactoryZoneAffecting {
             chance = .667; // 66.7% chance for sorcery speed
         }
 
-        if ((Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.END_OF_TURN) && Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(
-                AllZone.getComputerPlayer()))) {
+        if ((Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.END_OF_TURN) 
+                && Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(PlayerType.COMPUTER))) {
             chance = .9; // 90% for end of opponents turn
         }
 

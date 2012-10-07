@@ -91,6 +91,7 @@ public final class AllZone {
      * @return a {@link forge.game.player.Player} object.
      * @since 1.0.15
      */
+    @Deprecated
     public static Player getHumanPlayer() {
         if (Singletons.getModel() != null) {
             return Singletons.getModel().getGameState().getHumanPlayer();
@@ -109,6 +110,7 @@ public final class AllZone {
      * @return a {@link forge.game.player.Player} object.
      * @since 1.0.15
      */
+    @Deprecated
     public static Player getComputerPlayer() {
         return Singletons.getModel().getGameState().getComputerPlayer();
     }

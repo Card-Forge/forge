@@ -34,6 +34,7 @@ import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.player.Player;
+import forge.game.player.PlayerType;
 import forge.game.zone.ZoneType;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.MyObservable;
@@ -753,9 +754,9 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
-    public final boolean isNextTurn(final Player pl) {
+    public final boolean isNextTurn(final PlayerType pt) {
         final Player next = this.getNextTurn();
-        return (pl.equals(next));
+        return next.getType() == pt;
     }
 
     /**

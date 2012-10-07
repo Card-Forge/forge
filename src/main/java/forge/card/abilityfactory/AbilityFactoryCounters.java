@@ -46,6 +46,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.game.player.PlayerType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -1946,7 +1947,7 @@ public class AbilityFactoryCounters {
             if (type.equals("P1P1") && sa.isAbility() && source.isCreature()
                     && sa.getPayCosts() != null && sa.getPayCosts().getTap()
                     && sa instanceof AbilitySub
-                    && (phase.isNextTurn(AllZone.getHumanPlayer())
+                    && (phase.isNextTurn(PlayerType.HUMAN)
                     || phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY))) {
                 boolean combatants = false;
                 for (Card c : hList) {

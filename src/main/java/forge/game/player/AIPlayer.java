@@ -102,6 +102,7 @@ public class AIPlayer extends Player {
         return false;
     }
 
+    
     /**
      * <p>
      * isComputer.
@@ -188,7 +189,7 @@ public class AIPlayer extends Player {
                                                               // to doDiscard basically
             return;
         }
-        AllZone.getComputerPlayer().discard(num, sa, false);
+        this.discard(num, sa, false);
     }
 
     // /////////////////////////
@@ -200,13 +201,13 @@ public class AIPlayer extends Player {
         for (int i = 0; i < num; i++) {
             boolean bottom = false;
             if (topN.get(i).isBasicLand()) {
-                List<Card> bl = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+                List<Card> bl = this.getCardsIn(ZoneType.Battlefield);
                 int nBasicLands = Iterables.size(Iterables.filter(bl, CardPredicates.Presets.BASIC_LANDS));
 
                 bottom = nBasicLands > 5; // if control more than 5 Basic land,
                                         // probably don't need more
             } else if (topN.get(i).isCreature()) {
-                List<Card> cl = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+                List<Card> cl = this.getCardsIn(ZoneType.Battlefield);
                 cl = CardLists.filter(cl, CardPredicates.Presets.CREATURES);
                 bottom = cl.size() > 5; // if control more than 5 Creatures,
                                         // probably don't need more
@@ -257,4 +258,11 @@ public class AIPlayer extends Player {
         this.drawCard();
     }
 
+    /* (non-Javadoc)
+     * @see forge.game.player.Player#getType()
+     */
+    @Override
+    public PlayerType getType() {
+        return PlayerType.COMPUTER;
+    }
 } // end AIPlayer class

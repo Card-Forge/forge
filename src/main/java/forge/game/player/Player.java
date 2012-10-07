@@ -240,6 +240,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @return a boolean.
      */
     public abstract boolean isComputer();
+    public abstract PlayerType getType();
 
     /**
      * <p>

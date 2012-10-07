@@ -87,7 +87,6 @@ public class GameNew {
             bf.updateObservers();
             p.getPlayer().getZone(ZoneType.Hand).updateObservers();
         }
-        
         GameNew.actuateGame(players);
     }
 

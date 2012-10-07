@@ -226,4 +226,12 @@ public class HumanPlayer extends Player {
         }
     }
 
+    /* (non-Javadoc)
+     * @see forge.game.player.Player#getType()
+     */
+    @Override
+    public PlayerType getType() {
+        return PlayerType.HUMAN;
+    }
+
 } // end HumanPlayer class
