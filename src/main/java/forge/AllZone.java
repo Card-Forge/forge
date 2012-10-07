@@ -17,10 +17,7 @@
  */
 package forge;
 
-import java.util.Arrays;
 import java.util.List;
-
-import com.google.common.collect.Iterables;
 
 import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryInterface;
@@ -100,7 +97,7 @@ public final class AllZone {
         if (Singletons.getModel() == null) 
             return null;
 
-        return Aggregates.firstFieldEquals(Singletons.getModel().getGameState().getPlayers(), Player.Accessors.FN_GET_TYPE, PlayerType.COMPUTER);
+        return Aggregates.firstFieldEquals(Singletons.getModel().getGameState().getPlayers(), Player.Accessors.FN_GET_TYPE, PlayerType.HUMAN);
     }
 
     /**
