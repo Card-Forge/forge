@@ -112,6 +112,7 @@ public class ControlWinLose {
      */
     private void executeAnte() {
         List<GameSummary> games = Singletons.getModel().getMatchState().getGamesPlayed();
+        if ( games.isEmpty() ) return;
         GameSummary lastGame = games.get(games.size()-1);
         for (Player p: AllZone.getPlayersInGame()) {
             if (!p.getName().equals(lastGame.getWinner())) continue; // not a loser
