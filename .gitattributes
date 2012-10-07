@@ -5999,6 +5999,7 @@ res/cardsfolder/m/meltdown.txt svneol=native#text/plain
 res/cardsfolder/m/melting.txt -text
 res/cardsfolder/m/memnarch.txt svneol=native#text/plain
 res/cardsfolder/m/memnite.txt svneol=native#text/plain
+res/cardsfolder/m/memoricide.txt -text
 res/cardsfolder/m/memory_erosion.txt svneol=native#text/plain
 res/cardsfolder/m/memory_jar.txt -text
 res/cardsfolder/m/memory_lapse.txt svneol=native#text/plain
