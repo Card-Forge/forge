@@ -148,7 +148,7 @@ public enum FModel {
         testNetworkConnection();
         
         this.setBuildInfo(new BuildInfo());
-        FModel.loadDynamicGamedata();
+        this.loadDynamicGamedata();
     }
 
     /**
@@ -172,7 +172,7 @@ public enum FModel {
     /**
      * Load dynamic gamedata.
      */
-    public static void loadDynamicGamedata() {
+    public void loadDynamicGamedata() {
         if (!Constant.CardTypes.LOADED[0]) {
             final List<String> typeListFile = FileUtil.readFile("res/gamedata/TypeLists.txt");
 

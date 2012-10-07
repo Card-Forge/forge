@@ -12670,7 +12670,6 @@ src/main/java/forge/gui/GuiUtils.java svneol=native#text/plain
 src/main/java/forge/gui/ListChooser.java svneol=native#text/plain
 src/main/java/forge/gui/MultiLineLabel.java svneol=native#text/plain
 src/main/java/forge/gui/MultiLineLabelUI.java svneol=native#text/plain
-src/main/java/forge/gui/MultiPhaseProgressMonitorWithETA.java svneol=native#text/plain
 src/main/java/forge/gui/SOverlayUtils.java -text
 src/main/java/forge/gui/UnsortedListModel.java -text
 src/main/java/forge/gui/WrapLayout.java -text
@@ -12945,10 +12944,6 @@ src/main/java/forge/view/arcane/util/ImageUtil.java svneol=native#text/plain
 src/main/java/forge/view/arcane/util/UI.java svneol=native#text/plain
 src/main/java/forge/view/arcane/util/package-info.java svneol=native#text/plain
 src/main/java/forge/view/package-info.java svneol=native#text/plain
-src/main/java/net/slightlymagic/braids/BaseProgressMonitor.java svneol=native#text/plain
-src/main/java/net/slightlymagic/braids/BraidsProgressMonitor.java svneol=native#text/plain
-src/main/java/net/slightlymagic/braids/LICENSE.txt svneol=native#text/plain
-src/main/java/net/slightlymagic/braids/package-info.java svneol=native#text/plain
 src/main/java/tree/properties/PropertyElement.java svneol=native#text/plain
 src/main/java/tree/properties/PropertyType.java svneol=native#text/plain
 src/main/java/tree/properties/TreeProperties.java svneol=native#text/plain
