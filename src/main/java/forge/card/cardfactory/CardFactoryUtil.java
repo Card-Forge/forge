@@ -854,15 +854,11 @@ public class CardFactoryUtil {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility abilityMorphDown(final Card sourceCard) {
-        final SpellAbility morphDown = new Spell(sourceCard) {
+        final Spell morphDown = new Spell(sourceCard) {
             private static final long serialVersionUID = -1438810964807867610L;
 
             @Override
             public void resolve() {
-                sourceCard.turnFaceDown();
-
-                sourceCard.comesIntoPlay();
-
                 Singletons.getModel().getGameAction().moveToPlay(sourceCard);
             }
 
@@ -877,12 +873,12 @@ public class CardFactoryUtil {
                     return sourceCard.getSpellPermanent().canPlay();
                 }
             }
-
         };
 
         morphDown.setManaCost("3");
         morphDown.setDescription("(You may cast this face down as a 2/2 creature for 3.)");
         morphDown.setStackDescription("Morph - Creature 2/2");
+        morphDown.setCastFaceDown(true);
 
         return morphDown;
     }

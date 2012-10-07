@@ -314,6 +314,9 @@ public class GameAction {
                     copied.removeHiddenExtrinsicKeyword(s);
                 }
             }
+            if (copied.isFaceDown()) {
+                copied.turnFaceUp();
+            }
         }
 
         return copied;

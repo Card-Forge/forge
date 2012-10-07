@@ -40,6 +40,7 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.AbilityTriggered;
+import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.Target;
@@ -193,8 +194,6 @@ public class MagicStack extends MyObservable {
             this.frozen = false;
         }
 
-        this.add(ability);
-
         // if the ability is a spell, but not a copied spell and its not already
         // on the stack zone, move there
         if (ability.isSpell()) {
@@ -203,6 +202,8 @@ public class MagicStack extends MyObservable {
                 ability.setSourceCard(Singletons.getModel().getGameAction().moveToStack(source));
             }
         }
+
+        this.add(ability);
 
         if (ability.isTrigger()) {
             this.unfreezeStack();
@@ -414,6 +415,13 @@ public class MagicStack extends MyObservable {
             sp.resetOnceResolved();
             AllZone.getGameLog().add("Mana", sp.getSourceCard() + " - " + sp.getDescription(), 4);
             return;
+        }
+
+        if (sp.isSpell()) {
+            Spell spell = (Spell) sp;
+            if (spell.isCastFaceDown()) {
+                sp.getSourceCard().turnFaceDown();
+            }
         }
 
         if (this.frozen) {

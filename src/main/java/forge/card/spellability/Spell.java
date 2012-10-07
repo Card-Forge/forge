@@ -46,6 +46,8 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
 
     /** Constant <code>serialVersionUID=-7930920571482203460L</code>. */
     private static final long serialVersionUID = -7930920571482203460L;
+    
+    private boolean castFaceDown = false;
 
     /**
      * <p>
@@ -205,4 +207,19 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     public boolean canPlayFromEffectAI(boolean mandatory, boolean withOutManaCost) {
         return canPlayAI();
     }
+
+    /**
+     * @return the castFaceDown
+     */
+    public boolean isCastFaceDown() {
+        return castFaceDown;
+    }
+
+    /**
+     * @param faceDown the castFaceDown to set
+     */
+    public void setCastFaceDown(boolean faceDown) {
+        this.castFaceDown = faceDown; 
+    }
+    
 }
