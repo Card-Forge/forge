@@ -95,7 +95,7 @@ public final class AbilityFactoryAnimate {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryAnimate.animateCanPlayAI(af, this);
+                return AbilityFactoryAnimate.animateCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -133,7 +133,7 @@ public final class AbilityFactoryAnimate {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryAnimate.animateCanPlayAI(af, this);
+                return AbilityFactoryAnimate.animateCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -347,7 +347,7 @@ public final class AbilityFactoryAnimate {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean animateCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean animateCanPlayAI(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa) {
 
         final HashMap<String, String> params = af.getMapParams();
         final Target tgt = sa.getTarget();
@@ -363,17 +363,18 @@ public final class AbilityFactoryAnimate {
         // don't use instant speed animate abilities outside computers
         // Combat_Begin step
         if (!Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_BEGIN)
-                && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer()) 
+                && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(aiPlayer) 
                 && !AbilityFactory.isSorcerySpeed(sa)
                 && !params.containsKey("ActivationPhases") && !params.containsKey("Permanent")) {
             return false;
         }
 
+        Player opponent = aiPlayer.getOpponent();
         // don't animate if the AI won't attack anyway
-        if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getComputerPlayer())
-                && AllZone.getComputerPlayer().getLife() < 6 
-                && AllZone.getHumanPlayer().getLife() > 6
-                && Iterables.any(AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES)) {
+        if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(aiPlayer)
+                && aiPlayer.getLife() < 6 
+                && opponent.getLife() > 6
+                && Iterables.any(opponent.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES)) {
             return false;
         }
 
@@ -381,7 +382,7 @@ public final class AbilityFactoryAnimate {
         // Combat_Declare_Attackers_InstantAbility step
         if ((!Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) 
                 || (AllZone.getCombat().getAttackers().isEmpty())) 
-                && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(AllZone.getHumanPlayer())) {
+                && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(opponent)) {
             return false;
         }
 

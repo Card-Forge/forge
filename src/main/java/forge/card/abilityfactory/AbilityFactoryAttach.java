@@ -310,9 +310,9 @@ public class AbilityFactoryAttach {
             final Map<String, String> params, final Target tgt, final boolean mandatory) {
         Object o;
         if (tgt.canTgtPlayer()) {
-            o = AbilityFactoryAttach.attachToPlayerAIPreferences(af, sa, mandatory);
+            o = AbilityFactoryAttach.attachToPlayerAIPreferences(sa.getActivatingPlayer(),  af, sa, mandatory);
         } else {
-            o = AbilityFactoryAttach.attachToCardAIPreferences(af, sa, params, mandatory);
+            o = AbilityFactoryAttach.attachToCardAIPreferences(sa.getActivatingPlayer(), af, sa, params, mandatory);
         }
 
         if (o == null) {
@@ -336,7 +336,7 @@ public class AbilityFactoryAttach {
      *            the mandatory
      * @return the card
      */
-    public static Card attachToCardAIPreferences(final AbilityFactory af, final SpellAbility sa,
+    public static Card attachToCardAIPreferences(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa,
             final Map<String, String> params, final boolean mandatory) {
         final Target tgt = sa.getTarget();
         final Card attachSource = sa.getSourceCard();
@@ -368,7 +368,7 @@ public class AbilityFactoryAttach {
             return null;
         }
 
-        Card c = AbilityFactoryAttach.attachGeneralAI(sa, list, mandatory, attachSource, params.get("AILogic"));
+        Card c = AbilityFactoryAttach.attachGeneralAI(aiPlayer, sa, list, mandatory, attachSource, params.get("AILogic"));
 
         if ((c == null) && mandatory) {
             CardLists.shuffle(list);
@@ -393,11 +393,11 @@ public class AbilityFactoryAttach {
      *            the logic
      * @return the card
      */
-    public static Card attachGeneralAI(final SpellAbility sa, final List<Card> list, final boolean mandatory,
+    public static Card attachGeneralAI(final Player aiPlayer, final SpellAbility sa, final List<Card> list, final boolean mandatory,
             final Card attachSource, final String logic) {
-        Player prefPlayer = AllZone.getHumanPlayer();
+        Player prefPlayer = aiPlayer.getOpponent();
         if ("Pump".equals(logic) || "Animate".equals(logic) ) {
-            prefPlayer = AllZone.getComputerPlayer();
+            prefPlayer = aiPlayer;
         }
         // Some ChangeType cards are beneficial, and PrefPlayer should be
         // changed to represent that
@@ -592,7 +592,7 @@ public class AbilityFactoryAttach {
      */
     public static boolean isUsefulAttachKeyword(final String keyword, final Card card, final SpellAbility sa) {
         final PhaseHandler ph = Singletons.getModel().getGameState().getPhaseHandler();
-        final Player human = AllZone.getHumanPlayer();
+        final Player human = sa.getActivatingPlayer().getOpponent();
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
             return false;
         }
@@ -1047,14 +1047,14 @@ public class AbilityFactoryAttach {
      *            the mandatory
      * @return the player
      */
-    public static Player attachToPlayerAIPreferences(final AbilityFactory af, final SpellAbility sa,
+    public static Player attachToPlayerAIPreferences(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory) {
         Player p;
 
         if ("Curse".equals(af.getMapParams().get("AILogic"))) {
-            p = AllZone.getHumanPlayer();
+            p = aiPlayer.getOpponent();
         } else {
-            p = AllZone.getComputerPlayer();
+            p = aiPlayer;
         }
 
         if (sa.canTarget(p)) {
