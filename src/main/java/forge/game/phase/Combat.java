@@ -612,6 +612,7 @@ public class Combat {
                 }
             }
         }
+        this.blockerMap.remove(blocker);
     } // undoBlockingAssignment(Card)
 
     /**
