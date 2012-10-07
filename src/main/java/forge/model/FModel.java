@@ -145,13 +145,28 @@ public enum FModel {
         AllZone.setInputControl(new InputControl(FModel.this));
         AllZone.getInputControl().setComputer(new ComputerAIInput(new ComputerAIGeneral()));
 
-        // Set gameplay preferences and constants
-        final HttpUtil pinger = new HttpUtil();
-        final String url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/ping.php";
-        Constant.Runtime.NET_CONN = (pinger.getURL(url).equals("pong") ? true : false);
-
+        testNetworkConnection();
+        
         this.setBuildInfo(new BuildInfo());
         FModel.loadDynamicGamedata();
+    }
+
+    /**
+     * Tests if draft upload is technically possible.
+     * Separate thread, no more hangs when network connection is limited 
+     */
+    private void testNetworkConnection() {
+     // 
+        Runnable runNetworkTest = new Runnable() { 
+            @Override
+            public void run() {
+                final HttpUtil pinger = new HttpUtil();
+                final String url = ForgeProps.getProperty(NewConstants.CARDFORGE_URL) + "/draftAI/ping.php";
+                Constant.Runtime.NET_CONN = pinger.getURL(url).equals("pong");
+            }
+        };
+        Thread testNetConnection = new Thread(runNetworkTest, "CheckRemoteDraftAI");
+        testNetConnection.start();        
     }
 
     /**

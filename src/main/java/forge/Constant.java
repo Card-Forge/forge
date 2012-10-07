@@ -50,7 +50,7 @@ public final class Constant {
     
     public static class Runtime {
         /** The Constant NetConn. */
-        public static boolean NET_CONN = false;
+        public static volatile boolean NET_CONN = false;
 
         /** The Constant width. */
         public static final int WIDTH = 300;
