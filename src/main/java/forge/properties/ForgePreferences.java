@@ -80,6 +80,7 @@ public class ForgePreferences {
         SUBMENU_QUEST ("false"), /** */
         SUBMENU_SETTINGS ("false"), /** */
         SUBMENU_UTILITIES ("false"), /** */
+        SUBMENU_GAUNTLET ("false"), /** */
 
         DEV_MODE_ENABLED ("false"), /** */
         DEV_MILLING_LOSS ("true"), /** */
