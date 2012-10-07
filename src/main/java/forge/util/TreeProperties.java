@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package tree.properties;
+package forge.util;
 
 /**
  *  TreeProperties.java
@@ -33,15 +33,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.NoSuchElementException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.Properties;
 import java.util.Set;
 
-import tree.properties.types.FileType;
 
 /**
  * The class TreeProperties. This class allows for a tree-like structure of
@@ -112,8 +111,8 @@ import tree.properties.types.FileType;
  * @author Clemens Koza
  * @version V0.0 19.08.2009
  * @see Properties
- */
-public class TreeProperties implements Iterable<PropertyElement> {
+ */ 
+public class TreeProperties /* implements Iterable<PropertyElement> */{
     /** Constant <code>suffixes</code>. */
     private static final Map<String, PropertyType<?>> SUFFIXES;
     /** Constant <code>types</code>. */
@@ -328,7 +327,7 @@ public class TreeProperties implements Iterable<PropertyElement> {
      * 
      * @param key
      *            a {@link java.lang.String} object.
-     * @return a {@link tree.properties.TreeProperties} object.
+     * @return a {@link forge.util.TreeProperties} object.
      */
     public final TreeProperties getChildProperties(final String key) {
         return (TreeProperties) getProperty(key, "--" + CHILD, true);
@@ -339,7 +338,7 @@ public class TreeProperties implements Iterable<PropertyElement> {
      * 
      * @param key
      *            a {@link java.lang.String} object.
-     * @return a {@link tree.properties.TreeProperties} object.
+     * @return a {@link forge.util.TreeProperties} object.
      */
     public final TreeProperties getTransparentProperties(final String key) {
         return (TreeProperties) getProperty(key, "--" + TRANSPARENT, true);
@@ -426,115 +425,107 @@ public class TreeProperties implements Iterable<PropertyElement> {
         return null;
     }
 
-    /**
-     * Returns an iterator over all the regular entries of this object. That
-     * means that transparent or child tree properties are not included.
-     * 
-     * @return a {@link java.util.Iterator} object.
-     */
-    @Override
-    public final Iterator<PropertyElement> iterator() {
-        return iterator("");
-    };
+    public interface PropertyType<T> {
+        /**
+         * The suffix, not including "--", that identifies this content type.
+         * 
+         * @return a {@link java.lang.String} object.
+         */
+        String getSuffix();
 
-    /**
-     * <p>
-     * iterator.
-     * </p>
-     * 
-     * @param prefix
-     *            a {@link java.lang.String} object.
-     * @return a {@link tree.properties.TreeProperties.TreePropertiesIterator}
-     *         object.
-     */
-    private TreePropertiesIterator iterator(final String prefix) {
-        return new TreePropertiesIterator(prefix);
-    }
+        /**
+         * The class that identifies this content type.
+         * 
+         * @return a {@link java.lang.Class} object.
+         */
+        Class<T> getType();
 
-    private final class TreePropertiesIterator implements Iterator<PropertyElement> {
-        private final String prefix;
-        private Iterator<Entry<String, Object>> entries;
-        private TreePropertiesIterator child;
-        private PropertyElement next;
+        /**
+         * Returns an object for the specified value, in the context of a
+         * TreeProperties.
+         * 
+         * @param p
+         *            a {@link forge.util.TreeProperties} object.
+         * @param s
+         *            a {@link java.lang.String} object.
+         * @return a T object.
+         */
+        T toObject(TreeProperties p, String s);
+    }    
+    
+    public static class FileType implements PropertyType<File> {
+        /** Constant <code>suffix="file"</code>. */
+        public static final String SUFFIX = "file";
+        /** Constant <code>type</code>. */
+        public static final Class<File> TYPE = File.class;
 
-        private TreePropertiesIterator(final String prefix) {
-            entries = properties.entrySet().iterator();
-            this.prefix = prefix;
+        /**
+         * <p>
+         * Getter for the field <code>suffix</code>.
+         * </p>
+         * 
+         * @return a {@link java.lang.String} object.
+         */
+        @Override
+        public final String getSuffix() {
+            return SUFFIX;
         }
 
-        // After this call, the next element is determined, or the child
-        // iterator has next
-
+        /**
+         * <p>
+         * Getter for the field <code>type</code>.
+         * </p>
+         * 
+         * @return a {@link java.lang.Class} object.
+         */
         @Override
-        public boolean hasNext() {
-            if (next != null) {
-                return true;
-            } else if (child != null && child.hasNext()) {
-                return true;
-            } else if (entries.hasNext()) {
-                Entry<String, Object> entry = entries.next();
-                final String[] parts = entry.getKey().split("--");
-                final Class<?> cls;
-                final Object value = entry.getValue();
+        public final Class<File> getType() {
+            return TYPE;
+        }
 
-                if (parts.length == 1) {
-                    cls = String.class;
-                } else if (parts[1].equals(TRANSPARENT)) {
-                    child = ((TreeProperties) entry.getValue()).iterator(prefix);
-                    // recursive, for the case that the child iterator is empty
-                    return hasNext();
-                } else if (parts[1].equals(TreeProperties.CHILD)) {
-                    child = ((TreeProperties) entry.getValue()).iterator(prefix + parts[0] + "/");
-                    // recursive, for the case that the child iterator is empty
-                    return hasNext();
+        /** {@inheritDoc} */
+        @Override
+        public final File toObject(final TreeProperties p, final String s) {
+            String path = getPath(s);
+            File f = new File(path);
+            if (f.isAbsolute()) {
+                return f;
+            } else {
+                return new File(p.getPath(), path);
+            }
+        }
+
+        /**
+         * Returns a path path from a property value. Three substitutions are
+         * applied:
+         * <ul>
+         * <li>A "~/" or "~\" at the beginning is replaced with the user's home
+         * directory</li>
+         * <li>A "$$" anywhere is replaced with a single "$"</li>
+         * <li>A "${*}", where * is any string without "}", is replaced by
+         *
+         * @param s a {@link java.lang.String} object.
+         * @return a {@link java.lang.String} object.
+         * {@link System#getProperty(String)}</li>
+         * </ul>
+         */
+        public static String getPath(String s) {
+            if (s.startsWith("~/")) {
+                s = System.getProperty("user.home") + "/" + s.substring(2);
+            } else if (s.startsWith("~\\")) {
+                s = System.getProperty("user.home") + "\\" + s.substring(2);
+            }
+            Matcher m = Pattern.compile("\\$\\$|\\$\\{([^\\}]*)\\}").matcher(s);
+            StringBuffer result = new StringBuffer();
+            while (m.find()) {
+                if (m.group().equals("$$")) {
+                    m.appendReplacement(result, Matcher.quoteReplacement("$"));
                 } else {
-                    // class is determined by the content type
-                    PropertyType<?> t = instanceSuffixes.get(parts[1]);
-                    cls = t.getType();
+                    m.appendReplacement(result, Matcher.quoteReplacement(System.getProperty(m.group(1))));
                 }
-                next = new PropertyElement() {
-
-                    @Override
-                    public String getKey() {
-                        return prefix + parts[0];
-                    }
-
-                    @Override
-                    public Class<?> getType() {
-                        return cls;
-                    }
-
-                    @Override
-                    public Object getValue() {
-                        return value;
-                    }
-
-                    @Override
-                    public void setValue(final String value) {
-                    }
-                };
-                return true;
-            } else {
-                return false;
             }
-        }
-
-        @Override
-        public PropertyElement next() {
-            if (!hasNext()) {
-                throw new NoSuchElementException();
-            } else if (next != null) {
-                PropertyElement next = this.next;
-                this.next = null;
-                return next;
-            } else {
-                return child.next();
-            }
-        }
-
-        @Override
-        public void remove() {
-            throw new UnsupportedOperationException();
+            m.appendTail(result);
+            return result.toString();
         }
     }
 }

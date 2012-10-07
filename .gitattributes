@@ -12922,6 +12922,7 @@ src/main/java/forge/util/StorageReaderFolder.java -text
 src/main/java/forge/util/StorageView.java -text
 src/main/java/forge/util/TextUtil.java -text
 src/main/java/forge/util/ThreadUtil.java svneol=native#text/plain
+src/main/java/forge/util/TreeProperties.java svneol=native#text/plain
 src/main/java/forge/util/XmlUtil.java -text
 src/main/java/forge/util/package-info.java -text
 src/main/java/forge/view/ButtonUtil.java svneol=native#text/plain
@@ -12944,12 +12945,6 @@ src/main/java/forge/view/arcane/util/ImageUtil.java svneol=native#text/plain
 src/main/java/forge/view/arcane/util/UI.java svneol=native#text/plain
 src/main/java/forge/view/arcane/util/package-info.java svneol=native#text/plain
 src/main/java/forge/view/package-info.java svneol=native#text/plain
-src/main/java/tree/properties/PropertyElement.java svneol=native#text/plain
-src/main/java/tree/properties/PropertyType.java svneol=native#text/plain
-src/main/java/tree/properties/TreeProperties.java svneol=native#text/plain
-src/main/java/tree/properties/package-info.java svneol=native#text/plain
-src/main/java/tree/properties/types/FileType.java svneol=native#text/plain
-src/main/java/tree/properties/types/package-info.java svneol=native#text/plain
 src/main/resources/proxy-template.ftl -text
 src/site/apt/index.apt -text
 src/test/java/forge/BoosterDraft1Test.java svneol=native#text/plain

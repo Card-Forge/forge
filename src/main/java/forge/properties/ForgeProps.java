@@ -27,8 +27,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
 
-import tree.properties.TreeProperties;
 import forge.error.ErrorViewer;
+import forge.util.TreeProperties;
 
 /**
  * The class ForgeProps. Wrapper around TreeProperties to support the uses in
@@ -56,7 +56,7 @@ public class ForgeProps {
     /**
      * Returns the tree properties of forge.
      * 
-     * @return a {@link tree.properties.TreeProperties} object.
+     * @return a {@link forge.util.TreeProperties} object.
      */
     public static TreeProperties getProperties() {
         return ForgeProps.PROPERTIES;
