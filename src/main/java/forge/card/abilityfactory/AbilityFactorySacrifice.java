@@ -22,6 +22,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import com.google.common.base.Predicate;
+
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
@@ -408,6 +410,7 @@ public class AbilityFactorySacrifice {
         }
 
         final String defined = params.get("Defined");
+        final String valid = params.get("SacValid");
         if (defined == null) {
             // Self Sacrifice.
         } else if (defined.equals("Each")
@@ -417,7 +420,6 @@ public class AbilityFactorySacrifice {
             // Only cast it if AI doesn't have the full amount of Valid
             // TODO: Cast if the type is favorable: my "worst" valid is
             // worse than his "worst" valid
-            final String valid = params.get("SacValid");
             final String num = params.containsKey("Amount") ? params.get("Amount") : "1";
             int amount = AbilityFactory.calculateAmount(card, num, sa);
 
@@ -440,6 +442,15 @@ public class AbilityFactorySacrifice {
             if (humanList.size() < amount) {
                 return false;
             }
+        } else if (defined.equals("You")) {
+            List<Card> computerList = ai.getCardsIn(ZoneType.Battlefield);
+            computerList = CardLists.getValidCards(computerList, valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+            for (Card c : computerList) {
+                if (!c.getSVar("SacMe").equals("") || CardFactoryUtil.evaluateCreature(c) <= 135) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         return true;
