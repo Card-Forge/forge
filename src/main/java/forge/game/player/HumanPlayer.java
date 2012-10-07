@@ -68,18 +68,6 @@ public class HumanPlayer extends Player {
         super(myName, myLife, myPoisonCounters);
     }
 
-    /**
-     * <p>
-     * getOpponent.
-     * </p>
-     * 
-     * @return a {@link forge.game.player.Player} object.
-     */
-    @Override
-    public final Player getOpponent() {
-        return AllZone.getComputerPlayer();
-    }
-
     // //////////////
     // /
     // / Methods to ease transition to Abstract Player class

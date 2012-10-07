@@ -21,8 +21,6 @@ import java.util.List;
 import java.util.Random;
 
 import com.google.common.collect.Iterables;
-
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -72,24 +70,12 @@ public class AIPlayer extends Player {
         super(myName, myLife, myPoisonCounters);
     }
 
-    /**
-     * <p>
-     * getOpponent.
-     * </p>
-     * 
-     * @return a {@link forge.game.player.Player} object.
-     */
-    @Override
-    public final Player getOpponent() {
-        return AllZone.getHumanPlayer();
-    }
-
+    
     // //////////////
     // /
     // / Methods to ease transition to Abstract Player class
     // /
     // /////////////
-
     /**
      * <p>
      * isHuman.
