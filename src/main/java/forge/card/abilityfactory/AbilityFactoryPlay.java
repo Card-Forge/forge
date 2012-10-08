@@ -48,6 +48,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.item.CardDb;
 import forge.util.MyRandom;
 
 /**
@@ -443,6 +444,14 @@ public final class AbilityFactoryPlay {
             }
             if (params.containsKey("ForgetRemembered")) {
                 source.clearRemembered();
+            }
+            if (params.containsKey("CopyCard")) {
+                tgtCard = AllZone.getCardFactory().getCard(CardDb.instance().getCard(tgtCard), sa.getActivatingPlayer());
+                // when copying something stolen:
+                tgtCard.addController(sa.getActivatingPlayer());
+
+                tgtCard.setToken(true);
+                tgtCard.setCopiedSpell(true);
             }
             // lands will be played
             if (tgtCard.isLand()) {

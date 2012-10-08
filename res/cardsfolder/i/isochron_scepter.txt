@@ -4,7 +4,7 @@ Types:Artifact
 Text:no text
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ Imprint - When CARDNAME enters the battlefield, you may exile an instant card with converted mana cost 2 or less from your hand.
 SVar:TrigExile:AB$ChangeZone | Cost$ 0 | Imprint$ True | Origin$ Hand | Destination$ Exile | ChangeType$ Instant.cmcLE2 | ChangeNum$ 1
-A:AB$ CopySpell | Cost$ 2 T | Defined$ Imprinted | SpellDescription$ You may copy the exiled card. If you do, you may cast the copy without paying its mana cost.
+A:AB$ Play | Cost$ 2 T | Defined$ Imprinted | WithoutManaCost$ True | Optional$ True | CopyCard$ True | SpellDescription$ You may copy the exiled card. If you do, you may cast the copy without paying its mana cost.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/isochron_scepter.jpg
