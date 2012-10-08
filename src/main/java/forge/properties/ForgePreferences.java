@@ -81,7 +81,6 @@ public class ForgePreferences {
         SUBMENU_QUEST ("false"), /** */
         SUBMENU_SETTINGS ("false"), /** */
         SUBMENU_UTILITIES ("false"), /** */
-        SUBMENU_GAUNTLET ("false"), /** */
 
         DEV_MODE_ENABLED ("false"), /** */
         DEV_MILLING_LOSS ("true"), /** */
@@ -337,10 +336,16 @@ public class ForgePreferences {
         preferenceValues.put(q0, s0);
     }
 
+    /**
+     * 
+     * TODO: Write javadoc for this method.
+     * @param q0 FPref
+     * @param val boolean
+     */
     public void setPref(FPref q0, boolean val) {
         setPref(q0, String.valueOf(val));
-    }    
-    
+    }
+
     /**
      * Returns a non-difficulty-indexed preference value.
      * 
