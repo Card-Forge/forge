@@ -28,7 +28,6 @@ import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.deckeditor.controllers.CEditorLimited;
 import forge.gui.framework.ICDoc;
-import forge.gui.toolbox.FSkin;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;
 import forge.properties.ForgeProps;
@@ -84,14 +83,6 @@ public enum CSubmenuSealed implements ICDoc {
             @Override
             public void mouseClicked(final MouseEvent e) {
                 VSubmenuSealed.SINGLETON_INSTANCE.showDirections();
-            }
-            @Override
-            public void mouseEntered(final MouseEvent e) {
-                VSubmenuSealed.SINGLETON_INSTANCE.getBtnDirections().setForeground(FSkin.getColor(FSkin.Colors.CLR_HOVER));
-            }
-            @Override
-            public void mouseExited(final MouseEvent e) {
-                VSubmenuSealed.SINGLETON_INSTANCE.getBtnDirections().setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
             }
         });
     }

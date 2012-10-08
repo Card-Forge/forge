@@ -24,6 +24,7 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FScrollPane;
+import forge.gui.toolbox.FSkin;
 
 /** 
  * Assembles Swing components of constructed submenu singleton.
@@ -40,6 +41,10 @@ public enum VSubmenuConstructed implements IVSubmenu {
     private final DragTab tab = new DragTab("Constructed Mode");
 
     /** */
+    private final FLabel lblTitle = new FLabel.Builder()
+        .text("Sanctioned Format: Constructed").fontAlign(SwingConstants.CENTER)
+        .fontSize(16).opaque(true).build();
+
     private final JPanel pnlDecksHuman = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
     private final JPanel pnlDecksAI = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
     private final JPanel pnlRadiosHuman = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
@@ -79,26 +84,26 @@ public enum VSubmenuConstructed implements IVSubmenu {
     private VSubmenuConstructed() {
         // Radio button group: Human
         final ButtonGroup grpRadiosHuman = new ButtonGroup();
-        grpRadiosHuman.add(radColorsHuman);
-        grpRadiosHuman.add(radThemesHuman);
         grpRadiosHuman.add(radCustomHuman);
         grpRadiosHuman.add(radQuestsHuman);
+        grpRadiosHuman.add(radColorsHuman);
+        grpRadiosHuman.add(radThemesHuman);
 
         // Radio button group: AI
         final ButtonGroup grpRadiosAI = new ButtonGroup();
-        grpRadiosAI.add(radColorsAI);
-        grpRadiosAI.add(radThemesAI);
         grpRadiosAI.add(radCustomAI);
         grpRadiosAI.add(radQuestsAI);
+        grpRadiosAI.add(radColorsAI);
+        grpRadiosAI.add(radThemesAI);
 
-        // Add deck scrollers and random buttons: Human and AI
+        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+
+        // Deck scrollers
         pnlDecksHuman.setOpaque(false);
         pnlDecksHuman.add(scrHumanDecks, "w 100%!, pushy, growy");
-        pnlDecksHuman.add(btnHumanRandom, "w 100%!, h 30px!, gap 0 0 10px 10px");
 
         pnlDecksAI.setOpaque(false);
         pnlDecksAI.add(scrAIDecks, "w 100%!, pushy, growy");
-        pnlDecksAI.add(btnAIRandom, "w 100%!, h 30px!, gap 0 0 10px 0");
 
         // Radio button panels: Human and AI
         final String strRadioConstraints = "w 100%!, h 30px!";
@@ -107,19 +112,21 @@ public enum VSubmenuConstructed implements IVSubmenu {
         pnlRadiosHuman.add(new FLabel.Builder().text("Select your deck:")
                 .fontStyle(Font.BOLD).fontSize(16)
                 .fontAlign(SwingConstants.LEFT).build(), strRadioConstraints);
-        pnlRadiosHuman.add(radColorsHuman, strRadioConstraints);
-        pnlRadiosHuman.add(radThemesHuman, strRadioConstraints);
         pnlRadiosHuman.add(radCustomHuman, strRadioConstraints);
         pnlRadiosHuman.add(radQuestsHuman, strRadioConstraints);
+        pnlRadiosHuman.add(radColorsHuman, strRadioConstraints);
+        pnlRadiosHuman.add(radThemesHuman, strRadioConstraints);
+        pnlRadiosHuman.add(btnHumanRandom, "w 200px!, h 30px!, gap 0 0 10px 0, ax center");
 
         pnlRadiosAI.setOpaque(false);
         pnlRadiosAI.add(new FLabel.Builder().text("Select an AI deck:")
                 .fontStyle(Font.BOLD).fontSize(16)
                 .fontAlign(SwingConstants.LEFT).build(), strRadioConstraints);
-        pnlRadiosAI.add(radColorsAI, strRadioConstraints);
-        pnlRadiosAI.add(radThemesAI, strRadioConstraints);
         pnlRadiosAI.add(radCustomAI, strRadioConstraints);
         pnlRadiosAI.add(radQuestsAI, strRadioConstraints);
+        pnlRadiosAI.add(radColorsAI, strRadioConstraints);
+        pnlRadiosAI.add(radThemesAI, strRadioConstraints);
+        pnlRadiosAI.add(btnAIRandom, "w 200px!, h 30px!, gap 0 0 10px 0, ax center");
 
         final String strCheckboxConstraints = "w 200px!, h 30px!, gap 0 20px 0 0";
         pnlStart.setOpaque(false);
@@ -158,15 +165,13 @@ public enum VSubmenuConstructed implements IVSubmenu {
      */
     @Override
     public void populate() {
-        final String strLeftConstraints = "w 200px, pushy, growy, gap 0 20px 25px 25px";
-        final String strRightConstraints = "w 30%!, pushy, growy, gap 0 20px 25px 25px";
-
-        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap 2, align center"));
-        parentCell.getBody().add(pnlRadiosAI, strLeftConstraints);
-        parentCell.getBody().add(pnlDecksAI, strRightConstraints);
-        parentCell.getBody().add(pnlRadiosHuman, strLeftConstraints);
-        parentCell.getBody().add(pnlDecksHuman, strRightConstraints);
-        parentCell.getBody().add(pnlStart, "w 220px + 30%, span 2 1, gap 0 0 0 50px");
+        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
+        parentCell.getBody().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px, span 2");
+        parentCell.getBody().add(pnlRadiosAI, "w 45%!, gap 1% 8% 20px 20px");
+        parentCell.getBody().add(pnlRadiosHuman, "w 45%!, gap 0 0 20px 20px");
+        parentCell.getBody().add(pnlDecksAI, "w 45%!, gap 1% 8% 0 0, growy, pushy");
+        parentCell.getBody().add(pnlDecksHuman, "w 45%!, growy, pushy");
+        parentCell.getBody().add(pnlStart, "span 2, gap 1% 0 50px 50px, ax center");
     }
 
     /** @return {@link javax.swing.JList} */

@@ -47,25 +47,26 @@ public enum VSubmenuDraft implements IVSubmenu {
     private final DragTab tab = new DragTab("Draft Mode");
 
     /** */
+    private final FLabel lblTitle = new FLabel.Builder()
+        .text("Sanctioned Format: Draft").fontAlign(SwingConstants.CENTER)
+        .fontSize(16).opaque(true).build();
+
     private final StartButton btnStart  = new StartButton();
-    private final JButton btnPlayThisOpponent = new JButton("Play this opponent");
+
     private final DeckLister lstHumanDecks = new DeckLister(GameType.Draft);
-    private final JList lstAI           = new FList();
+    private final JList lstAI = new FList();
 
     private final JLabel lblAI = new FLabel.Builder()
-        .text("Who will you play?").fontSize(16)
-        .fontAlign(SwingConstants.CENTER).build();
+        .text("Who will you play?").fontSize(16).fontAlign(SwingConstants.CENTER).build();
 
     private final JLabel lblHuman = new FLabel.Builder()
-        .text("Select your deck:").fontSize(16)
-        .fontAlign(SwingConstants.CENTER).build();
-
-    private final JLabel btnBuildDeck   = new FLabel.Builder()
-        .fontSize(16)
-        .opaque(true).hoverable(true).text("Start A New Draft").build();
+        .text("Select your deck:").fontSize(16).fontAlign(SwingConstants.CENTER).build();
+    private final JLabel btnPlayThisOpponent = new FLabel.Builder()
+        .fontSize(16).opaque(true).hoverable(true).text("Play this opponent").build();
+    private final JLabel btnBuildDeck = new FLabel.Builder()
+        .fontSize(16).opaque(true).hoverable(true).text("Start A New Draft").build();
     private final JLabel btnDirections = new FLabel.Builder()
-        .fontSize(16)
-        .text("Click For Directions").fontAlign(SwingConstants.CENTER).build();
+        .fontSize(16).opaque(true).hoverable(true).text("How To Play").build();
 
     /**
      * Constructor.
@@ -73,6 +74,8 @@ public enum VSubmenuDraft implements IVSubmenu {
     private VSubmenuDraft() {
         lstAI.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         btnStart.setEnabled(false);
+
+        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
     }
 
     /* (non-Javadoc)
@@ -115,7 +118,7 @@ public enum VSubmenuDraft implements IVSubmenu {
     }
 
     /** @return {@link javax.swing.JButton} */
-    public JButton getBtnPlayThisOpponent() {
+    public JLabel getBtnPlayThisOpponent() {
         return this.btnPlayThisOpponent;
     }
 
@@ -193,16 +196,19 @@ public enum VSubmenuDraft implements IVSubmenu {
     @Override
     public void populate() {
         parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap 2, hidemode 2"));
-        parentCell.getBody().add(lblHuman, "w 60%!, gap 5% 5% 2% 2%");
-        parentCell.getBody().add(lblAI, "w 25%!, gap 0 0 2% 2%");
+        parentCell.getBody().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px, span 2");
 
-        parentCell.getBody().add(new FScrollPane(lstHumanDecks), "w 60%!, h 30%!, gap 5% 5% 2% 2%");
-        parentCell.getBody().add(new FScrollPane(lstAI), "w 25%!, h 37%!, gap 0 0 2% 0, span 1 2, wrap");
+        parentCell.getBody().add(lblHuman, "w 60%!, gap 1% 8% 0 15px");
+        parentCell.getBody().add(lblAI, "w 30%!, gap 0 0 0 15px");
 
-        parentCell.getBody().add(btnBuildDeck, "w 60%!, h 5%!, gap 5% 5% 0 0, wrap");
-        parentCell.getBody().add(btnDirections, "alignx center, span 2 1, gap 5% 5% 5% 2%, wrap");
-        parentCell.getBody().add(btnStart, "gap 5% 5% 0 0, ax center, span 2 1");
-        parentCell.getBody().add((btnPlayThisOpponent), "cell 1 3, ax center, wrap");
+        parentCell.getBody().add(new FScrollPane(lstHumanDecks), "w 60%!, gap 1% 8% 0 0, pushy, growy");
+        parentCell.getBody().add(new FScrollPane(lstAI), "w 30%!, pushy, growy");
+
+        parentCell.getBody().add(btnBuildDeck, "w 60%!, h 30px!, gap 1% 5% 10px 0");
+        parentCell.getBody().add(btnPlayThisOpponent, "w 30%!, h 30px!, gap 0 0 10px 0");
+
+        parentCell.getBody().add(btnDirections, "w 200px!, h 30px!, gap 1% 0 20px 0, span 2, ax center");
+        parentCell.getBody().add(btnStart, "w 98%!, gap 1% 0 50px 50px, ax center, span 2");
     }
 
     /* (non-Javadoc)
