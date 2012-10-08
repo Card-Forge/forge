@@ -107,7 +107,7 @@ public class SpellPermanent extends Spell {
             } else if (controller.isHuman()) {
                 AllZone.getInputControl().setInput(SpellPermanent.this.championInputComes);
             } else { // Computer
-                List<Card> computer = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+                List<Card> computer = controller.getCardsIn(ZoneType.Battlefield);
                 computer = CardLists.getValidCards(computer, SpellPermanent.this.championValid, controller, source);
                 computer.remove(source);
 
