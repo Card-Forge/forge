@@ -17,6 +17,7 @@
  */
 package forge.quest.data;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -181,7 +182,7 @@ public final class GameFormatQuest {
      * @return list of allowed set codes
      */
     public List<String> getAllowedSetCodes() {
-        return this.allowedSetCodes;
+        return Collections.unmodifiableList(this.allowedSetCodes);
     }
 
     /**
@@ -190,7 +191,7 @@ public final class GameFormatQuest {
      * @return list of banned card names
      */
     public List<String> getBannedCardNames() {
-        return this.bannedCardNames;
+        return Collections.unmodifiableList(this.bannedCardNames);
     }
 
     /**
