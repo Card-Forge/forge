@@ -33,6 +33,8 @@ import java.awt.event.KeyEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
+import forge.gui.framework.ILocalRepaint;
+
 /**
  * The core JButton used throughout the Forge project. Follows skin font and
  * theme button styling.
