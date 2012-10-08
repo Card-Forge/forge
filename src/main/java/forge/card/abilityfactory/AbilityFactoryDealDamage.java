@@ -871,11 +871,7 @@ public class AbilityFactoryDealDamage {
         if (params.containsKey("DivideEvenly")) {
             String evenly = params.get("DivideEvenly");
             if (evenly.equals("RoundedDown")) {
-                if (tgts.size() == 0) {
-                    dmg = 0;
-                } else {
-                    dmg = dmg / tgts.size();
-                }
+                dmg = tgts.isEmpty() ? 0 : dmg / tgts.size();
             }
         }
 

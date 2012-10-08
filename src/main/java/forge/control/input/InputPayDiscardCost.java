@@ -19,7 +19,6 @@ package forge.control.input;
 
 import java.util.List;
 
-import forge.AllZone;
 import forge.Card;
 import forge.Singletons;
 
@@ -28,6 +27,7 @@ import forge.Command;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.CostDiscard;
 import forge.card.spellability.SpellAbility;
+import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
@@ -74,10 +74,11 @@ public class InputPayDiscardCost extends Input {
     public InputPayDiscardCost(final CostDiscard cost, final SpellAbility sa, final Command paidCommand,
             final Command unpaidCommand) {
         final Card source = sa.getSourceCard();
+        final Player human = Singletons.getControl().getPlayer();
 
         this.ability = sa;
         this.discardCost = cost;
-        this.choiceList = CardLists.getValidCards(AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand), cost.getType().split(";"), AllZone.getHumanPlayer(), source);
+        this.choiceList = CardLists.getValidCards(human.getCardsIn(ZoneType.Hand), cost.getType().split(";"), human, source);
         String amountString = cost.getAmount();
         this.numRequired = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
                 : CardFactoryUtil.xCount(source, source.getSVar(amountString));

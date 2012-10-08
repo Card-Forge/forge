@@ -12364,7 +12364,6 @@ src/main/java/forge/GameActionUtil.java svneol=native#text/plain
 src/main/java/forge/GameEntity.java -text
 src/main/java/forge/GameLog.java -text
 src/main/java/forge/ImageCache.java svneol=native#text/plain
-src/main/java/forge/NameChanger.java svneol=native#text/plain
 src/main/java/forge/Singletons.java svneol=native#text/plain
 src/main/java/forge/StaticEffect.java svneol=native#text/plain
 src/main/java/forge/StaticEffects.java svneol=native#text/plain

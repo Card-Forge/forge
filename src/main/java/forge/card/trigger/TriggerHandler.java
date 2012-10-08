@@ -65,10 +65,7 @@ public class TriggerHandler {
      * Clean up temporary triggers.
      */
     public final void cleanUpTemporaryTriggers() {
-        final List<Card> absolutelyAllCards = new ArrayList<Card>();
-        absolutelyAllCards.addAll(AllZone.getHumanPlayer().getAllCards());
-        absolutelyAllCards.addAll(AllZone.getComputerPlayer().getAllCards());
-
+        final List<Card> absolutelyAllCards = AllZoneUtil.getCardsInGame();
         for (final Card c : absolutelyAllCards) {
             for (int i = 0; i < c.getTriggers().size(); i++) {
                 if (c.getTriggers().get(i).isTemporary()) {

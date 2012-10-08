@@ -28,8 +28,6 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import com.google.common.collect.Lists;
-
 import forge.AllZone;
 import forge.Card;
 
@@ -282,8 +280,7 @@ public class CField implements ICDoc {
          */
         @Override
         public void actionPerformed(final ActionEvent e) {
-            final List<Card> src = this.getCardsAsIterable();
-            final List<Card> choices = AllZone.getNameChanger().shouldChangeCardName() ? Lists.transform(src, AllZone.getNameChanger().fnTransformCard) : getCardsAsIterable();
+            final List<Card> choices = this.getCardsAsIterable();
 
             final ArrayList<Card> choices2 = new ArrayList<Card>();
 

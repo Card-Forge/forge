@@ -64,9 +64,6 @@ public final class AllZone {
     /** Global <code>gauntletData</code>. */
     private static forge.game.limited.GauntletMini gauntlet = null;
 
-    /** Constant <code>NAME_CHANGER</code>. */
-    private static final NameChanger NAME_CHANGER = new NameChanger();
-
     /** Constant <code>COLOR_CHANGER</code>. */
     private static final ColorChanger COLOR_CHANGER = new ColorChanger();
 
@@ -154,18 +151,6 @@ public final class AllZone {
             gauntlet = new GauntletMini();
         }
         return AllZone.gauntlet;
-    }
-
-    /**
-     * <p>
-     * getNameChanger.
-     * </p>
-     * 
-     * @return a {@link forge.NameChanger} object.
-     * @since 1.0.15
-     */
-    public static NameChanger getNameChanger() {
-        return AllZone.NAME_CHANGER;
     }
 
     /**
