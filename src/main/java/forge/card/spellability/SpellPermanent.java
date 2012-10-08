@@ -17,6 +17,7 @@
  */
 package forge.card.spellability;
 
+import java.security.InvalidParameterException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -404,20 +405,15 @@ public class SpellPermanent extends Spell {
         return super.canPlayAI();
     }
 
-    /**
-     * <p>
-     * checkETBEffects.
-     * </p>
-     * 
-     * @param card
-     *            a {@link forge.Card} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param api
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
     public static boolean checkETBEffects(final Card card, final SpellAbility sa, final String api) {
+        return checkETBEffects(card, sa, api, null);
+    }
+    
+    public static boolean checkETBEffects(final Card card, final Player ai, final String api) {
+        return checkETBEffects(card, null, api, ai);
+    }
+
+    private static boolean checkETBEffects(final Card card, final SpellAbility sa, final String api, final Player ai) {
 
         if (card.isCreature() && AllZoneUtil.isCardInPlay("Torpor Orb")) {
             return true;
@@ -490,9 +486,10 @@ public class SpellPermanent extends Spell {
 
             if (sa != null) {
                 exSA.setActivatingPlayer(sa.getActivatingPlayer());
-            } else {
-                exSA.setActivatingPlayer(AllZone.getComputerPlayer());
-            }
+            } else if ( ai != null ) {
+                exSA.setActivatingPlayer(ai);
+            } else 
+                throw new InvalidParameterException("Either ai or sa must be not null!");
 
             // Run non-mandatory trigger.
             // These checks only work if the Executing SpellAbility is an

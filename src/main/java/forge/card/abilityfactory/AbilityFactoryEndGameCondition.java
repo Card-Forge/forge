@@ -19,7 +19,6 @@ package forge.card.abilityfactory;
 
 import java.util.ArrayList;
 
-import forge.AllZone;
 import forge.Card;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
@@ -348,7 +347,7 @@ public final class AbilityFactoryEndGameCondition {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryEndGameCondition.losesGameCanPlayAI(af, this);
+                return AbilityFactoryEndGameCondition.losesGameCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -393,7 +392,7 @@ public final class AbilityFactoryEndGameCondition {
                 // then call xCount with that card to properly calculate the
                 // amount
                 // Or choosing how many to sacrifice
-                return AbilityFactoryEndGameCondition.losesGameCanPlayAI(af, this);
+                return AbilityFactoryEndGameCondition.losesGameCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -444,7 +443,7 @@ public final class AbilityFactoryEndGameCondition {
                 // then call xCount with that card to properly calculate the
                 // amount
                 // Or choosing how many to sacrifice
-                return AbilityFactoryEndGameCondition.losesGameCanPlayAI(af, this);
+                return AbilityFactoryEndGameCondition.losesGameCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -521,8 +520,9 @@ public final class AbilityFactoryEndGameCondition {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean losesGameCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        if (AllZone.getHumanPlayer().cantLose()) {
+    public static boolean losesGameCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
+        final Player opp = ai.getOpponent();
+        if (opp.cantLose()) {
             return false;
         }
 
@@ -532,7 +532,7 @@ public final class AbilityFactoryEndGameCondition {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
-            tgt.addTarget(AllZone.getHumanPlayer());
+            tgt.addTarget(opp);
         }
 
         // In general, don't return true.

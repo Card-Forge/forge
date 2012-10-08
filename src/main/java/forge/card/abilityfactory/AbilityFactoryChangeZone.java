@@ -1631,7 +1631,7 @@ public final class AbilityFactoryChangeZone {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean changeKnownPreferredTarget(Player ai, final AbilityFactory af, final SpellAbility sa,
+    private static boolean changeKnownPreferredTarget(final Player ai, final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory) {
         final HashMap<String, String> params = af.getMapParams();
         final Card source = sa.getSourceCard();
@@ -1726,7 +1726,7 @@ public final class AbilityFactoryChangeZone {
                             // counters TODO check good and
                             // bad counters
                             // checks only if there is a dangerous ETB effect
-                            return SpellPermanent.checkETBEffects(c, null, null);
+                            return SpellPermanent.checkETBEffects(c, ai, null);
                         }
                     });
                     if (!aiPermanents.isEmpty()) {

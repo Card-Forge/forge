@@ -983,15 +983,17 @@ public class CardFactoryCreatures {
             @Override
             public void execute() {
                 final Player player = card.getController();
-                final List<Card> list = CardFactoryUtil.getHumanCreatureAI(ability, true);
-
+                
                 if (player.isHuman()) {
                     AllZone.getInputControl().setInput(playerInput);
-                } else if (list.size() != 0) {
-                    final Card target = CardFactoryUtil.getBestCreatureAI(list);
-                    ability.setTargetCard(target);
-                    AllZone.getStack().addSimultaneousStackEntry(ability);
-
+                } else  {
+                    List<Card> list = AllZoneUtil.getCreaturesInPlay(player.getOpponent());
+                    list = CardLists.getTargetableCards(list, ability);
+                    if ( !list.isEmpty() )
+                    {
+                        ability.setTargetCard(CardFactoryUtil.getBestCreatureAI(list));
+                        AllZone.getStack().addSimultaneousStackEntry(ability);
+                    }
                 }
             } // execute()
         };

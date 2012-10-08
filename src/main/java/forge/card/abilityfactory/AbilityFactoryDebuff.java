@@ -394,7 +394,7 @@ public final class AbilityFactoryDebuff {
 
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
-        List<Card> list = AbilityFactoryDebuff.getCurseCreatures(af, sa, kws);
+        List<Card> list = AbilityFactoryDebuff.getCurseCreatures(ai, af, sa, kws);
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
         // several uses here:
@@ -447,9 +447,10 @@ public final class AbilityFactoryDebuff {
      *            a {@link java.util.ArrayList} object.
      * @return a {@link forge.CardList} object.
      */
-    private static List<Card> getCurseCreatures(final AbilityFactory af, final SpellAbility sa,
+    private static List<Card> getCurseCreatures(final Player ai, final AbilityFactory af, final SpellAbility sa,
             final ArrayList<String> kws) {
-        List<Card> list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+        final Player opp = ai.getOpponent();
+        List<Card> list = AllZoneUtil.getCreaturesInPlay(opp);
         list = CardLists.getTargetableCards(list, sa);
 
         if (!list.isEmpty()) {

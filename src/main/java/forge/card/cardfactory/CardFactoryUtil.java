@@ -1457,7 +1457,7 @@ public class CardFactoryUtil {
             @Override
             public void showMessage() {
                 // get all creatures you control
-                final List<Card> list = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
+                final List<Card> list = AllZoneUtil.getCreaturesInPlay(Singletons.getControl().getPlayer());
 
                 this.stopSetNext(CardFactoryUtil.inputTargetSpecific(equip, list, "Select target creature to equip",
                         true, false));
@@ -1555,25 +1555,6 @@ public class CardFactoryUtil {
             }
         };
         return modularInput;
-    }
-
-    /**
-     * <p>
-     * getHumanCreatureAI.
-     * </p>
-     * 
-     * @param spell
-     *            a {@link forge.Card} object.
-     * @param targeted
-     *            a boolean.
-     * @return a {@link forge.CardList} object.
-     */
-    public static List<Card> getHumanCreatureAI(final SpellAbility spell, final boolean targeted) {
-        List<Card> creature = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-        if (targeted) {
-            creature = CardLists.getTargetableCards(creature, spell);
-        }
-        return creature;
     }
 
     /**

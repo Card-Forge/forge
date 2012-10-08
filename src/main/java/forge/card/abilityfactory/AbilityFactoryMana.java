@@ -25,7 +25,6 @@ import java.util.Random;
 
 import com.google.common.collect.Iterables;
 
-import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
@@ -1042,7 +1041,7 @@ public class AbilityFactoryMana {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryMana.drainManaCanPlayAI(af, this);
+                return AbilityFactoryMana.drainManaCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -1082,7 +1081,7 @@ public class AbilityFactoryMana {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryMana.drainManaCanPlayAI(af, this);
+                return AbilityFactoryMana.drainManaCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -1204,13 +1203,13 @@ public class AbilityFactoryMana {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean drainManaCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean drainManaCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
 
         final HashMap<String, String> params = af.getMapParams();
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
-
+        final Player opp = ai.getOpponent();
         final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
@@ -1220,12 +1219,12 @@ public class AbilityFactoryMana {
             // those.
             final ArrayList<Player> defined = AbilityFactory.getDefinedPlayers(source, params.get("Defined"), sa);
 
-            if (!defined.contains(AllZone.getHumanPlayer())) {
+            if (!defined.contains(opp)) {
                 return false;
             }
         } else {
             tgt.resetTargets();
-            tgt.addTarget(AllZone.getHumanPlayer());
+            tgt.addTarget(opp);
         }
 
         final AbilitySub subAb = sa.getSubAbility();

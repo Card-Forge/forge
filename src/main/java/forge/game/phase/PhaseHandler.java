@@ -606,13 +606,13 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         AllZone.getStack().setCardsCastLastTurn();
         AllZone.getStack().clearCardsCastThisTurn();
         AllZone.resetZoneMoveTracking();
-        AllZone.getComputerPlayer().resetProwl();
-        AllZone.getHumanPlayer().resetProwl();
-        AllZone.getComputerPlayer().setLifeLostThisTurn(0);
-        AllZone.getHumanPlayer().setLifeLostThisTurn(0);
-        for (Player player : AllZone.getPlayersInGame()) {
-            player.removeKeyword("At the beginning of this turn's end step, you lose the game.");
-            player.removeKeyword("Skip the untap step of this turn.");
+        for( Player p : AllZone.getPlayersInGame() )
+        {
+            p.resetProwl();
+            p.setLifeLostThisTurn(0);
+
+            p.removeKeyword("At the beginning of this turn's end step, you lose the game.");
+            p.removeKeyword("Skip the untap step of this turn.");
         }
 
         return getNextActivePlayer();

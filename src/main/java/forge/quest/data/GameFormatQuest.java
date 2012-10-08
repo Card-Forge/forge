@@ -24,8 +24,6 @@ import java.util.ArrayList;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-
 import forge.card.CardEdition;
 import forge.card.CardRulesPredicates;
 import forge.game.GameFormat;

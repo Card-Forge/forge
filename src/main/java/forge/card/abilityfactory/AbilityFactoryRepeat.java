@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardLists;
@@ -34,6 +33,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 /**
@@ -78,12 +78,12 @@ public final class AbilityFactoryRepeat {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryRepeat.repeatCanPlayAI(this);
+                return AbilityFactoryRepeat.repeatCanPlayAI(getActivatingPlayer(), this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryRepeat.repeatCanPlayAI(this) || mandatory;
+                return AbilityFactoryRepeat.repeatCanPlayAI(getActivatingPlayer(), this) || mandatory;
             }
 
             @Override
@@ -117,12 +117,12 @@ public final class AbilityFactoryRepeat {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryRepeat.repeatCanPlayAI(this);
+                return AbilityFactoryRepeat.repeatCanPlayAI(getActivatingPlayer(), this);
             }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryRepeat.repeatCanPlayAI(this) || mandatory;
+                return AbilityFactoryRepeat.repeatCanPlayAI(getActivatingPlayer(), this) || mandatory;
             }
 
             @Override
@@ -176,7 +176,7 @@ public final class AbilityFactoryRepeat {
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryRepeat.repeatCanPlayAI(this) || mandatory;
+                return AbilityFactoryRepeat.repeatCanPlayAI(getActivatingPlayer(), this) || mandatory;
             }
 
             @Override
@@ -194,14 +194,15 @@ public final class AbilityFactoryRepeat {
         return dbRepeat;
     }
 
-    private static boolean repeatCanPlayAI(final SpellAbility sa) {
+    private static boolean repeatCanPlayAI(final Player ai, final SpellAbility sa) {
         final Target tgt = sa.getTarget();
+        final Player opp = ai.getOpponent();
         if (tgt != null) {
-            if (!AllZone.getHumanPlayer().canBeTargetedBy(sa)) {
+            if (!opp.canBeTargetedBy(sa)) {
                 return false;
             }
             tgt.resetTargets();
-            tgt.addTarget(AllZone.getHumanPlayer());
+            tgt.addTarget(opp);
         }
         return true;
     }

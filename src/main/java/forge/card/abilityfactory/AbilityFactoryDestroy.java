@@ -25,7 +25,6 @@ import java.util.Random;
 
 import com.google.common.base.Predicate;
 
-import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
@@ -142,7 +141,7 @@ public class AbilityFactoryDestroy {
             @Override
             public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
                 if (withOutManaCost) {
-                    return AbilityFactoryDestroy.destroyDoTriggerAINoCost(af, this, mandatory);
+                    return AbilityFactoryDestroy.destroyDoTriggerAINoCost(getActivatingPlayer(), af, this, mandatory);
                 }
                 return AbilityFactoryDestroy.destroyDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
@@ -352,7 +351,7 @@ public class AbilityFactoryDestroy {
         if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
-        return destroyDoTriggerAINoCost(af, sa, mandatory);
+        return destroyDoTriggerAINoCost(ai, af, sa, mandatory);
     }
 
     /**
@@ -368,13 +367,13 @@ public class AbilityFactoryDestroy {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean destroyDoTriggerAINoCost(final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
+    private static boolean destroyDoTriggerAINoCost(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
 
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
         final HashMap<String, String> params = af.getMapParams();
         final boolean noRegen = params.containsKey("NoRegen");
-
+        final Player opp = ai.getOpponent();
         if (tgt != null) {
             List<Card> list;
             list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
@@ -388,7 +387,7 @@ public class AbilityFactoryDestroy {
             tgt.resetTargets();
 
             List<Card> preferred = CardLists.getNotKeyword(list, "Indestructible");
-            preferred = CardLists.filterControlledBy(preferred, AllZone.getHumanPlayer());
+            preferred = CardLists.filterControlledBy(preferred, opp);
 
             // If NoRegen is not set, filter out creatures that have a
             // regeneration shield
