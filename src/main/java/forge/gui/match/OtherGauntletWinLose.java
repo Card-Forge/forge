@@ -97,7 +97,7 @@ public class OtherGauntletWinLose extends ControlWinLose {
                         .text("You made it through the gauntlet!").build();
 
                     this.getView().getBtnContinue().setVisible(false);
-                    this.getView().getBtnContinue().repaintOnlyThisButton();
+                    this.getView().getBtnContinue().repaintSelf();
                     this.getView().getBtnQuit().setText("OK");
 
                     // Remove save file if it's a quickie, or just reset it.

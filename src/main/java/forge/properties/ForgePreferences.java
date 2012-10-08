@@ -77,6 +77,7 @@ public class ForgePreferences {
 
         SUBMENU_CURRENTMENU (EMenuItem.CONSTRUCTED.toString()), /** */
         SUBMENU_SANCTIONED ("false"), /** */
+        SUBMENU_GAUNTLET ("false"), /** */
         SUBMENU_QUEST ("false"), /** */
         SUBMENU_SETTINGS ("false"), /** */
         SUBMENU_UTILITIES ("false"), /** */

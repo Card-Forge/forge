@@ -39,7 +39,7 @@ import javax.swing.JButton;
  *
  */
 @SuppressWarnings("serial")
-public class FButton extends JButton {
+public class FButton extends JButton implements ILocalRepaint {
 
     /** The img r. */
     private Image imgL;
@@ -209,19 +209,19 @@ public class FButton extends JButton {
             FButton.this.imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_LEFT).getImage();
             FButton.this.imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_CENTER).getImage();
             FButton.this.imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_UP_RIGHT).getImage();
-            repaintOnlyThisButton();
+            repaintSelf();
         }
         else {
             FButton.this.imgL = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_LEFT).getImage();
             FButton.this.imgM = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_CENTER).getImage();
             FButton.this.imgR = FSkin.getIcon(FSkin.ButtonImages.IMG_BTN_DISABLED_RIGHT).getImage();
-            repaintOnlyThisButton();
+            repaintSelf();
         }
         this.toggle = b0;
     }
 
     /** Prevent button from repainting the whole screen. */
-    public void repaintOnlyThisButton() {
+    public void repaintSelf() {
         final Dimension d = FButton.this.getSize();
         repaint(0, 0, d.width, d.height);
     }
