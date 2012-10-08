@@ -21,7 +21,6 @@ import forge.gui.home.IVSubmenu;
 import forge.gui.home.StartButton;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FList;
-import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
@@ -41,10 +40,9 @@ public enum VSubmenuGauntletContests implements IVSubmenu {
     private final DragTab tab = new DragTab("Gauntlet Contests");
 
     // Other fields
-    private final FPanel pnlTitle = new FPanel();
     private final FLabel lblTitle = new FLabel.Builder()
         .text("Gauntlet Contests").fontAlign(SwingConstants.CENTER)
-        .fontSize(16).build();
+        .opaque(true).fontSize(16).build();
 
     private final StartButton btnStart  = new StartButton();
 
@@ -77,17 +75,14 @@ public enum VSubmenuGauntletContests implements IVSubmenu {
         .text("A gauntlet that has been started will keep the same deck until it is finished.").build();
 
     private VSubmenuGauntletContests() {
+        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+
         // Radio button grouping
         final ButtonGroup grpRight = new ButtonGroup();
         grpRight.add(radUserDecks);
         grpRight.add(radQuestDecks);
         grpRight.add(radColorDecks);
         grpRight.add(radThemeDecks);
-
-        pnlTitle.setLayout(new MigLayout("insets 0, gap 0"));
-        pnlTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        pnlTitle.add(lblTitle, "w 100%, h 100%, gap 0 0 0 0");
-        pnlTitle.setCornerDiameter(0);
 
         scrLeft.setBorder(null);
         pnlLoad.setLayout(new MigLayout("insets 0, gap 0, wrap"));
@@ -139,7 +134,7 @@ public enum VSubmenuGauntletContests implements IVSubmenu {
     @Override
     public void populate() {
         parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
-        parentCell.getBody().add(pnlTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px, span 2");
+        parentCell.getBody().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px, span 2");
 
         parentCell.getBody().add(lblDesc1, "gap 0 0 0 15px, ax center, span 2");
 

@@ -44,12 +44,11 @@ public enum VSubmenuGauntletQuick implements IVSubmenu {
     private final DragTab tab = new DragTab("Quick Gauntlets");
 
     // Other fields
-    private final FPanel pnlTitle = new FPanel();
     private final FPanel pnlOptions = new FPanel(new MigLayout("insets 0, gap 0, wrap"));
     private final FPanel pnlDecks = new FPanel();
     private final FLabel lblTitle = new FLabel.Builder()
         .text("Quick Gauntlet Builder").fontAlign(SwingConstants.CENTER)
-        .fontSize(16).build();
+        .opaque(true).fontSize(16).build();
 
     private JSlider sliOpponents = new JSlider(JSlider.HORIZONTAL, 5, 50, 20);
     //private JSlider sliGamesPerMatch = new JSlider(JSlider.HORIZONTAL, 1, 7, 3);
@@ -94,6 +93,8 @@ public enum VSubmenuGauntletQuick implements IVSubmenu {
     private final StartButton btnStart  = new StartButton();
 
     private VSubmenuGauntletQuick() {
+        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+
         boxUserDecks.setSelected(true);
         boxQuestDecks.setSelected(true);
         boxThemeDecks.setSelected(true);
@@ -132,10 +133,6 @@ public enum VSubmenuGauntletQuick implements IVSubmenu {
         grpRadDecks.add(radRandomColor);
         grpRadDecks.add(radThemeDecks);
 
-        pnlTitle.setCornerDiameter(0);
-        pnlTitle.setLayout(new MigLayout("insets 0, gap 0"));
-        pnlTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        pnlTitle.add(lblTitle, "w 98%!, h 100%!, gap 1% 0 0 0");
         lstDecks.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         pnlOptions.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
@@ -192,7 +189,7 @@ public enum VSubmenuGauntletQuick implements IVSubmenu {
     @Override
     public void populate() {
         parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
-        parentCell.getBody().add(pnlTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px, span 2");
+        parentCell.getBody().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px, span 2");
 
         parentCell.getBody().add(lblDesc, "ax center, gap 0 0 0 15px, span 2");
         parentCell.getBody().add(pnlOptions, "w 40%!, gap 1% 1% 0 0, pushy, growy");

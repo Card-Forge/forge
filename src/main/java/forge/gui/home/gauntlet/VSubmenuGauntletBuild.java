@@ -23,7 +23,6 @@ import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FList;
-import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
@@ -45,10 +44,9 @@ public enum VSubmenuGauntletBuild implements IVSubmenu {
     private final DragTab tab = new DragTab("Gauntlet Builder");
 
     // Other fields
-    private final FPanel pnlTitle   = new FPanel();
     private final FLabel lblTitle     = new FLabel.Builder()
         .text("Gauntlet Builder").fontAlign(SwingConstants.CENTER)
-        .fontSize(16).build();
+        .opaque(true).fontSize(16).build();
 
     private final JPanel pnlFileHandling = new JPanel(new MigLayout("insets 0, gap 0, align center"));
     private final JPanel pnlRadios = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
@@ -128,17 +126,14 @@ public enum VSubmenuGauntletBuild implements IVSubmenu {
     private final JTextField txfSearch = new FTextField();
 
     private VSubmenuGauntletBuild() {
+        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+
         // Radio button grouping
         final ButtonGroup grpRadios = new ButtonGroup();
         grpRadios.add(radUserDecks);
         grpRadios.add(radQuestDecks);
         grpRadios.add(radColorDecks);
         grpRadios.add(radThemeDecks);
-
-        pnlTitle.setLayout(new MigLayout("insets 0, gap 0"));
-        pnlTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        pnlTitle.add(lblTitle, "w 100%, h 100%, gap 0 0 0 0");
-        pnlTitle.setCornerDiameter(0);
 
         // Text areas
         txfFilename.setText(GauntletIO.TXF_PROMPT);
@@ -232,7 +227,7 @@ public enum VSubmenuGauntletBuild implements IVSubmenu {
     @Override
     public void populate() {
         parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap 3"));
-        parentCell.getBody().add(pnlTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px, span 3");
+        parentCell.getBody().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px, span 3");
         parentCell.getBody().add(pnlFileHandling, "w 98%!, gap 1% 0 1% 5px, span 3");
 
         parentCell.getBody().add(pnlRadios, "w 48% - 20px!, gap 1% 0 0 15px");

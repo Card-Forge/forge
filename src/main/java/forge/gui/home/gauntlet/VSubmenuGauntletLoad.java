@@ -14,7 +14,6 @@ import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.StartButton;
 import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 
@@ -33,10 +32,9 @@ public enum VSubmenuGauntletLoad implements IVSubmenu {
     private final DragTab tab = new DragTab("Quick Gauntlets");
 
     // Other fields
-    private final FPanel pnlTitle = new FPanel();
     private final FLabel lblTitle = new FLabel.Builder()
         .text("Load a gauntlet").fontAlign(SwingConstants.CENTER)
-        .fontSize(16).build();
+        .opaque(true).fontSize(16).build();
 
     private final QuickGauntletLister gauntletList = new QuickGauntletLister();
 
@@ -49,10 +47,7 @@ public enum VSubmenuGauntletLoad implements IVSubmenu {
     private final StartButton btnStart  = new StartButton();
 
     private VSubmenuGauntletLoad() {
-        pnlTitle.setCornerDiameter(0);
-        pnlTitle.setLayout(new MigLayout("insets 0, gap 0"));
-        pnlTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        pnlTitle.add(lblTitle, "w 98%!, h 100%!, gap 1% 0 0 0");
+        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         scrLoad.setBorder(null);
     }
@@ -87,7 +82,7 @@ public enum VSubmenuGauntletLoad implements IVSubmenu {
     @Override
     public void populate() {
         parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap"));
-        parentCell.getBody().add(pnlTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px");
+        parentCell.getBody().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px");
         parentCell.getBody().add(lblDesc, "ax center, gap 0 0 0 5px");
         parentCell.getBody().add(scrLoad, "w 98%!, gap 1% 0 5px 20px, pushy, growy");
         parentCell.getBody().add(btnStart, "w 98%!, ax center, gap 1% 0 20px 20px");
