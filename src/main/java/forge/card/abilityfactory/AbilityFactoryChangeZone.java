@@ -918,7 +918,7 @@ public final class AbilityFactoryChangeZone {
     private static void changeHiddenOriginResolveHuman(final AbilityFactory af, final SpellAbility sa, Player player) {
         final HashMap<String, String> params = af.getMapParams();
         final Card card = sa.getSourceCard();
-        final List<Card> reveal = new ArrayList<Card>();
+        final List<Card> movedCards = new ArrayList<Card>();
         final boolean defined = params.containsKey("Defined");
 
         final Target tgt = sa.getTarget();
@@ -1007,6 +1007,11 @@ public final class AbilityFactoryChangeZone {
         }
 
         for (int i = 0; i < changeNum; i++) {
+            if (params.containsKey("DifferentNames")) {
+                for (Card c : movedCards) {
+                    fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.nameEquals(c.getName())));
+                }
+            }
             if ((fetchList.size() == 0) || (destination == null)) {
                 break;
             }
@@ -1030,9 +1035,6 @@ public final class AbilityFactoryChangeZone {
                 if (destination.equals(ZoneType.Library)) {
                     // do not shuffle the library once we have placed a fetched
                     // card on top.
-                    if (params.containsKey("Reveal")) {
-                        reveal.add(c);
-                    }
                     if (origin.contains(ZoneType.Library) && (i < 1) && "False".equals(params.get("Shuffle"))) {
                         player.shuffle();
                     }
@@ -1080,6 +1082,7 @@ public final class AbilityFactoryChangeZone {
                 } else {
                     movedCard = Singletons.getModel().getGameAction().moveTo(destination, c);
                 }
+                movedCards.add(movedCard);
 
                 if (remember != null) {
                     card.addRemembered(movedCard);
@@ -1102,8 +1105,8 @@ public final class AbilityFactoryChangeZone {
                 }
             }
         }
-        if (params.containsKey("Reveal") && !reveal.isEmpty()) {
-            GuiChoose.one(card + " - Revealed card: ", reveal.toArray());
+        if (params.containsKey("Reveal") && !movedCards.isEmpty()) {
+            GuiChoose.one(card + " - Revealed card: ", movedCards.toArray());
         }
 
         if ((origin.contains(ZoneType.Library) && !destination.equals(ZoneType.Library) && !defined)
@@ -1178,6 +1181,11 @@ public final class AbilityFactoryChangeZone {
         }
 
         for (int i = 0; i < changeNum; i++) {
+            if (params.containsKey("DifferentNames")) {
+                for (Card c : fetched) {
+                    fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.nameEquals(c.getName())));
+                }
+            }
             if ((fetchList.size() == 0) || (destination == null)) {
                 break;
             }

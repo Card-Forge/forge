@@ -1,0 +1,12 @@
+Name:Three Dreams
+ManaCost:4 W
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZone | Cost$ 4 W | Origin$ Library | Destination$ Hand | ChangeType$ Aura | ChangeNum$ 3 | DifferentNames$ True | SpellDescription$ Search your library for up to three Aura cards with different names, reveal them, and put them into your hand. Then shuffle your library.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/three_dreams.jpg
+SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/32.jpg
+SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/13.jpg
+Oracle:Search your library for up to three Aura cards with different names, reveal them, and put them into your hand. Then shuffle your library.
+End
