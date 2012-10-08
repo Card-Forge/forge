@@ -1,5 +1,5 @@
 Name:Slum Reaper
-ManaCost:4 B
+ManaCost:3 B
 Types:Creature Horror
 Text:no text
 PT:4/2
