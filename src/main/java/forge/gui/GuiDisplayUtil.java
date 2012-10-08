@@ -473,15 +473,15 @@ public final class GuiDisplayUtil {
         }
 
         if (!tComputerSetupCardsInPlay.trim().toLowerCase().equals("none")) {
-            computerDevSetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupCardsInPlay, human);
+            computerDevSetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupCardsInPlay, ai);
         }
 
         if (!tComputerSetupCardsInHand.trim().toLowerCase().equals("none")) {
-            computerDevHandSetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupCardsInHand, human);
+            computerDevHandSetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupCardsInHand, ai);
         }
 
         if (!tComputerSetupGraveyard.trim().toLowerCase().equals("none")) {
-            computerDevGraveyardSetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupGraveyard, human);
+            computerDevGraveyardSetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupGraveyard, ai);
         }
 
         if (!tHumanSetupGraveyard.trim().toLowerCase().equals("none")) {
@@ -493,7 +493,7 @@ public final class GuiDisplayUtil {
         }
 
         if (!tComputerSetupLibrary.trim().toLowerCase().equals("none")) {
-            computerDevLibrarySetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupLibrary, human);
+            computerDevLibrarySetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupLibrary, ai);
         }
 
         if (!tHumanSetupExile.trim().toLowerCase().equals("none")) {
@@ -501,7 +501,7 @@ public final class GuiDisplayUtil {
         }
 
         if (!tComputerSetupExile.trim().toLowerCase().equals("none")) {
-            computerDevExileSetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupExile, human);
+            computerDevExileSetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupExile, ai);
         }
 
         AllZone.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
