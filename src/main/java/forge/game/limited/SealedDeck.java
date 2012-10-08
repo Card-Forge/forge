@@ -52,7 +52,7 @@ public class SealedDeck extends LimitedDeck {
         }
 
         Iterable<CardRules> rules = Iterables.transform(colorChooserList, CardPrinted.FN_GET_RULES);
-        
+
         int white = Iterables.size(Iterables.filter(rules, CardRulesPredicates.Presets.IS_WHITE));
         int blue = Iterables.size(Iterables.filter(rules, CardRulesPredicates.Presets.IS_BLUE));
         int black = Iterables.size(Iterables.filter(rules, CardRulesPredicates.Presets.IS_BLACK));

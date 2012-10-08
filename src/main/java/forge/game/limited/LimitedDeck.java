@@ -30,7 +30,6 @@ import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.util.MyRandom;
 
-
 /**
  * Limited format deck.
  * 
@@ -47,11 +46,11 @@ public class LimitedDeck {
     private List<CardPrinted> deckList = new ArrayList<CardPrinted>();
     private List<String> setsWithBasicLands = new ArrayList<String>();
     // Views for aiPlayable
-    
+
     private Iterable<CardPrinted> colorList;
     private Iterable<CardPrinted> onColorCreatures;
     private Iterable<CardPrinted> onColorNonCreatures;
-    
+
     private static ReadDraftRankings draftRankings = new ReadDraftRankings();
 
     /**
@@ -67,15 +66,15 @@ public class LimitedDeck {
         this.availableList = dList;
         this.deckColors = pClrs;
         this.colors = pClrs.getCardColors();
-        
+
         // removeUnplayables();
-        Iterable<CardPrinted> playables = Iterables.filter(availableList, Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, CardPrinted.FN_GET_RULES));
+        Iterable<CardPrinted> playables = Iterables.filter(availableList,
+                Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, CardPrinted.FN_GET_RULES));
         this.aiPlayables = Lists.newArrayList(playables);
         this.availableList.removeAll(getAiPlayables());
-        
+
         findBasicLandSets();
-        
-        
+
     }
 
     /**
@@ -85,7 +84,7 @@ public class LimitedDeck {
      *            Cards to build the deck from.
      */
     public LimitedDeck(List<CardPrinted> list) {
-        this( list, new DeckColors() );
+        this(list, new DeckColors());
     }
 
     /**
@@ -96,26 +95,27 @@ public class LimitedDeck {
      * @return the new Deck.
      */
     public Deck buildDeck() {
-
         // -1. Prepare
         hasColor = Predicates.or(new GenerateDeckUtil.ContainsAllColorsFrom(colors), GenerateDeckUtil.COLORLESS_CARDS);
         colorList = Iterables.filter(aiPlayables, Predicates.compose(hasColor, CardPrinted.FN_GET_RULES));
-        onColorCreatures = Iterables.filter(colorList, Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, CardPrinted.FN_GET_RULES));
-        onColorNonCreatures = Iterables.filter(colorList, Predicates.compose(CardRulesPredicates.Presets.IS_NON_CREATURE_SPELL, CardPrinted.FN_GET_RULES));
-        // Guava iterables do not copy the collection contents, instead they act as filters and 
-        // iterate over _source_ collection each time. So even if aiPlayable has changed, 
-        // there is no need to create a new iterable. 
+        onColorCreatures = Iterables.filter(colorList,
+                Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, CardPrinted.FN_GET_RULES));
+        onColorNonCreatures = Iterables.filter(colorList,
+                Predicates.compose(CardRulesPredicates.Presets.IS_NON_CREATURE_SPELL, CardPrinted.FN_GET_RULES));
+        // Guava iterables do not copy the collection contents, instead they act
+        // as filters and iterate over _source_ collection each time. So even if
+        // aiPlayable has changed, there is no need to create a new iterable.
 
         // 0. Add any planeswalkers
-        Iterable<CardPrinted> onColorWalkers = Iterables.filter(colorList, Predicates.compose(CardRulesPredicates.Presets.IS_PLANESWALKER, CardPrinted.FN_GET_RULES));
+        Iterable<CardPrinted> onColorWalkers = Iterables.filter(colorList,
+                Predicates.compose(CardRulesPredicates.Presets.IS_PLANESWALKER, CardPrinted.FN_GET_RULES));
         List<CardPrinted> walkers = Lists.newArrayList(onColorWalkers);
         deckList.addAll(walkers);
         aiPlayables.removeAll(walkers);
-        
+
         if (walkers.size() > 0) {
             System.out.println("Planeswalker: " + walkers.get(0).getName());
         }
-
 
         // 1. Add creatures, trying to follow mana curve
         addManaCurveCreatures(rankCards(onColorCreatures), 15);
@@ -123,20 +123,23 @@ public class LimitedDeck {
         // 2.Try to fill up to 22 with on-color non-creature cards
         addNonCreatures(rankCards(onColorNonCreatures), numSpellsNeeded - deckList.size());
 
-        // 3.If we couldn't get up to 22, try to fill up to 22 with on-color creature cards
+        // 3.If we couldn't get up to 22, try to fill up to 22 with on-color
+        // creature cards
         addCreatures(rankCards(onColorCreatures), numSpellsNeeded - deckList.size());
 
-        // 4. If there are still on-color cards and the average cmc is low add a 23rd card.
-        Iterable<CardPrinted> nonLands = colorList;
+        // 4. If there are still on-color cards and the average cmc is low add a
+        // 23rd card.
+        Iterable<CardPrinted> nonLands = Iterables.filter(colorList,
+                Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, CardPrinted.FN_GET_RULES));
         if (deckList.size() == numSpellsNeeded && getAverageCMC(deckList) < 3) {
             List<Pair<Double, CardPrinted>> list = rankCards(nonLands);
-            if ( !list.isEmpty() ) {
+            if (!list.isEmpty()) {
                 CardPrinted c = list.get(0).getValue();
                 deckList.add(c);
                 getAiPlayables().remove(c);
                 landsNeeded--;
                 if (Preferences.DEV_MODE) {
-                    System.out.println("Low CMC:" + c.getName());
+                    System.out.println("Low CMC: " + c.getName());
                 }
             }
         }
@@ -150,9 +153,7 @@ public class LimitedDeck {
 
         // 7. If it's not a mono color deck, add non-basic lands that were
         // drafted.
-        // Commenting out because it adds worthless lands (e.g., a R/B land
-        // to a U/W deck).
-        // addNonBasicLands();
+        addNonBasicLands();
 
         // 8. Fill up with basic lands.
         final CCnt[] clrCnts = calculateLandNeeds();
@@ -250,7 +251,6 @@ public class LimitedDeck {
             }
         }
     }
-
 
     /**
      * Find the sets that have basic lands for the available cards.
@@ -379,23 +379,29 @@ public class LimitedDeck {
     /**
      * Add non-basic lands to the deck.
      */
-    // private void addNonBasicLands() {
-    // List<Card> lands = getAiPlayables().getType("Land");
-    // while (!getColors().getColor1().equals(getColors().getColor2()) &&
-    // landsNeeded > 0 && lands.size() > 0) {
-    // final Card c = lands.get(0);
-    //
-    // deckList.add(c);
-    // landsNeeded--;
-    // getAiPlayables().remove(c);
-    //
-    // lands = getAiPlayables().getType("Land");
-    //
-    // if (Constant.Runtime.DEV_MODE) {
-    // System.out.println("Land:" + c.getName());
-    // }
-    // }
-    // }
+    private void addNonBasicLands() {
+        List<String> inverseDuals = GenerateDeckUtil.getInverseDualLandList(colors);
+        Iterable<CardPrinted> lands = Iterables.filter(aiPlayables,
+                Predicates.compose(CardRulesPredicates.Presets.IS_NONBASIC_LAND, CardPrinted.FN_GET_RULES));
+        List<Pair<Double, CardPrinted>> ranked = rankCards(lands);
+        for (Pair<Double, CardPrinted> bean : ranked) {
+            if (landsNeeded > 0) {
+                // Throw out any dual-lands for the wrong colors. Assume
+                // everything else is either
+                // (a) dual-land of the correct two colors, or
+                // (b) a land that generates colorless mana and has some other
+                // beneficial effect.
+                if (!inverseDuals.contains(bean.getValue().getName())) {
+                    deckList.add(bean.getValue());
+                    aiPlayables.remove(bean.getValue());
+                    landsNeeded--;
+                    if (Preferences.DEV_MODE) {
+                        System.out.println("NonBasicLand[" + landsNeeded + "]:" + bean.getValue().getName());
+                    }
+                }
+            }
+        }
+    }
 
     /**
      * Add random cards to the deck.
@@ -403,7 +409,8 @@ public class LimitedDeck {
      * @param nCards
      */
     private void addRandomCards(int nCards) {
-        Iterable<CardPrinted> others = Iterables.filter(aiPlayables, Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, CardPrinted.FN_GET_RULES));
+        Iterable<CardPrinted> others = Iterables.filter(aiPlayables,
+                Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, CardPrinted.FN_GET_RULES));
         List<Pair<Double, CardPrinted>> ranked = rankCards(others);
         for (Pair<Double, CardPrinted> bean : ranked) {
             if (nCards > 0) {
@@ -459,7 +466,8 @@ public class LimitedDeck {
         if (cardToAdd.getCard().getDeckHints() != null
                 && cardToAdd.getCard().getDeckHints().getType() != DeckHints.Type.NONE) {
             DeckHints hints = cardToAdd.getCard().getDeckHints();
-            Iterable<CardPrinted> onColor = Iterables.filter(aiPlayables, Predicates.compose(hasColor, CardPrinted.FN_GET_RULES));
+            Iterable<CardPrinted> onColor = Iterables.filter(aiPlayables,
+                    Predicates.compose(hasColor, CardPrinted.FN_GET_RULES));
             List<CardPrinted> comboCards = hints.filter(onColor);
             if (Preferences.DEV_MODE) {
                 System.out.println("Found " + comboCards.size() + " cards for " + cardToAdd.getName());
@@ -578,7 +586,8 @@ public class LimitedDeck {
         for (int i = 1; i < 7; i++) {
             creatureCosts.put(i, 0);
         }
-        Predicate<CardPrinted> filter = Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, CardPrinted.FN_GET_RULES);
+        Predicate<CardPrinted> filter = Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE,
+                CardPrinted.FN_GET_RULES);
         for (CardPrinted creature : Iterables.filter(deckList, filter)) {
             int cmc = creature.getCard().getManaCost().getCMC();
             if (cmc < 1) {
@@ -691,6 +700,5 @@ public class LimitedDeck {
     public List<CardPrinted> getAiPlayables() {
         return aiPlayables;
     }
-
 
 }

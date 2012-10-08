@@ -10,8 +10,8 @@ import forge.util.ComparableOp;
 import forge.util.PredicateString;
 
 /**
- * Filtering conditions specific for CardRules class, defined here along
- * with some presets.
+ * Filtering conditions specific for CardRules class, defined here along with
+ * some presets.
  */
 public final class CardRulesPredicates {
 
@@ -47,7 +47,7 @@ public final class CardRulesPredicates {
     }
 
     /**
-     *
+     * 
      * @param op
      *            the op
      * @param what
@@ -59,16 +59,16 @@ public final class CardRulesPredicates {
     }
 
     /**
-    *
-    * @param op
-    *            the op
-    * @param what
-    *            the what
-    * @return the predicate
-    */
-   public static Predicate<CardRules> toughness(final ComparableOp op, final int what) {
-       return new LeafNumber(LeafNumber.CardField.TOUGHNESS, op, what);
-   }
+     * 
+     * @param op
+     *            the op
+     * @param what
+     *            the what
+     * @return the predicate
+     */
+    public static Predicate<CardRules> toughness(final ComparableOp op, final int what) {
+        return new LeafNumber(LeafNumber.CardField.TOUGHNESS, op, what);
+    }
 
     // P/T
     /**
@@ -256,10 +256,17 @@ public final class CardRulesPredicates {
         return new LeafColor(LeafColor.ColorOperator.HasAnyOf, thatColor);
     }
 
+    /**
+     * Checks if is exactly that color.
+     * 
+     * @param thatColor
+     *            color to check
+     * @return the predicate
+     */
     public static Predicate<CardRules> isMonoColor(final byte thatColor) {
         return new LeafColor(LeafColor.ColorOperator.Equals, thatColor);
     }
-    
+
     /**
      * Checks for cnt colors.
      * 
@@ -297,12 +304,10 @@ public final class CardRulesPredicates {
             case NAME:
                 return this.op(card.getName(), this.operand);
             case SUBTYPE:
-                shouldContain = (this.getOperator() == StringOp.CONTAINS)
-                        || (this.getOperator() == StringOp.EQUALS);
+                shouldContain = (this.getOperator() == StringOp.CONTAINS) || (this.getOperator() == StringOp.EQUALS);
                 return shouldContain == card.getType().subTypeContains(this.operand);
             case RULES:
-                shouldContain = (this.getOperator() == StringOp.CONTAINS)
-                        || (this.getOperator() == StringOp.EQUALS);
+                shouldContain = (this.getOperator() == StringOp.CONTAINS) || (this.getOperator() == StringOp.EQUALS);
                 return shouldContain == card.rulesContain(this.operand);
             case JOINED_TYPE:
                 return this.op(card.getType().toString(), this.operand);
@@ -334,18 +339,18 @@ public final class CardRulesPredicates {
         @Override
         public boolean apply(final CardRules subject) {
             switch (this.op) {
-                case CountColors:
-                    return subject.getColor().countColors() == this.color;
-                case CountColorsGreaterOrEqual:
-                    return subject.getColor().countColors() >= this.color;
-                case Equals:
-                    return subject.getColor().isEqual(this.color);
-                case HasAllOf:
-                    return subject.getColor().hasAllColors(this.color);
-                case HasAnyOf:
-                    return subject.getColor().hasAnyColor(this.color);
-                default:
-                    return false;
+            case CountColors:
+                return subject.getColor().countColors() == this.color;
+            case CountColorsGreaterOrEqual:
+                return subject.getColor().countColors() >= this.color;
+            case Equals:
+                return subject.getColor().isEqual(this.color);
+            case HasAllOf:
+                return subject.getColor().hasAllColors(this.color);
+            case HasAnyOf:
+                return subject.getColor().hasAnyColor(this.color);
+            default:
+                return false;
             }
         }
     }
@@ -471,10 +476,12 @@ public final class CardRulesPredicates {
     public static class Presets {
 
         /** The Constant isCreature. */
-        public static final Predicate<CardRules> IS_CREATURE = CardRulesPredicates.coreType(true, CardCoreType.Creature);
+        public static final Predicate<CardRules> IS_CREATURE = CardRulesPredicates
+                .coreType(true, CardCoreType.Creature);
 
         /** The Constant isArtifact. */
-        public static final Predicate<CardRules> IS_ARTIFACT = CardRulesPredicates.coreType(true, CardCoreType.Artifact);
+        public static final Predicate<CardRules> IS_ARTIFACT = CardRulesPredicates
+                .coreType(true, CardCoreType.Artifact);
 
         /** The Constant isLand. */
         public static final Predicate<CardRules> IS_LAND = CardRulesPredicates.coreType(true, CardCoreType.Land);
@@ -484,6 +491,14 @@ public final class CardRulesPredicates {
             @Override
             public boolean apply(final CardRules subject) {
                 return subject.getType().isBasicLand();
+            }
+        };
+
+        /** The Constant isNonBasicLand. */
+        public static final Predicate<CardRules> IS_NONBASIC_LAND = new Predicate<CardRules>() {
+            @Override
+            public boolean apply(final CardRules subject) {
+                return subject.getType().isLand() && !subject.getType().isBasicLand();
             }
         };
 
@@ -505,14 +520,14 @@ public final class CardRulesPredicates {
         public static final Predicate<CardRules> IS_NON_LAND = CardRulesPredicates.coreType(false, CardCoreType.Land);
 
         /** The Constant isNonCreatureSpell. */
-        public static final Predicate<CardRules> IS_NON_CREATURE_SPELL = Predicates.not(Predicates.or(Presets.IS_CREATURE,Presets.IS_LAND));
+        public static final Predicate<CardRules> IS_NON_CREATURE_SPELL = Predicates.not(Predicates.or(
+                Presets.IS_CREATURE, Presets.IS_LAND));
 
+        /** The Constant IS_NONCREATURE_SPELL_FOR_GENERATOR. **/
         @SuppressWarnings("unchecked")
-        public static final Predicate<CardRules> IS_NONCREATURE_SPELL_FOR_GENERATOR = 
-            com.google.common.base.Predicates.or(
-                Presets.IS_SORCERY, Presets.IS_INSTANT, Presets.IS_PLANESWALKER, Presets.IS_ENCHANTMENT,
-                Predicates.and(Presets.IS_ARTIFACT, Predicates.not(Presets.IS_CREATURE))
-        );
+        public static final Predicate<CardRules> IS_NONCREATURE_SPELL_FOR_GENERATOR = com.google.common.base.Predicates
+                .or(Presets.IS_SORCERY, Presets.IS_INSTANT, Presets.IS_PLANESWALKER, Presets.IS_ENCHANTMENT,
+                        Predicates.and(Presets.IS_ARTIFACT, Predicates.not(Presets.IS_CREATURE)));
 
         /** The Constant isWhite. */
         public static final Predicate<CardRules> IS_WHITE = CardRulesPredicates.isColor(CardColor.WHITE);
@@ -549,23 +564,23 @@ public final class CardRulesPredicates {
         // Think twice before using these, since rarity is a prop of printed
         // card.
         /** The Constant isInLatestSetCommon. */
-        public static final Predicate<CardRules> IS_IN_LATEST_SET_COMMON = CardRulesPredicates.rarityInCardsLatestSet(true,
-                CardRarity.Common);
+        public static final Predicate<CardRules> IS_IN_LATEST_SET_COMMON = CardRulesPredicates.rarityInCardsLatestSet(
+                true, CardRarity.Common);
 
         /** The Constant isInLatestSetUncommon. */
-        public static final Predicate<CardRules> IS_IN_LATEST_SET_UNCOMMON = CardRulesPredicates.rarityInCardsLatestSet(
-                true, CardRarity.Uncommon);
+        public static final Predicate<CardRules> IS_IN_LATEST_SET_UNCOMMON = CardRulesPredicates
+                .rarityInCardsLatestSet(true, CardRarity.Uncommon);
 
         /** The Constant isInLatestSetRare. */
-        public static final Predicate<CardRules> IS_IN_LATEST_SET_RARE = CardRulesPredicates.rarityInCardsLatestSet(true,
-                CardRarity.Rare);
+        public static final Predicate<CardRules> IS_IN_LATEST_SET_RARE = CardRulesPredicates.rarityInCardsLatestSet(
+                true, CardRarity.Rare);
 
         /** The Constant isInLatestSetMythicRare. */
-        public static final Predicate<CardRules> IS_IN_LATEST_SET_MYTHIC_RARE = CardRulesPredicates.rarityInCardsLatestSet(
-                true, CardRarity.MythicRare);
+        public static final Predicate<CardRules> IS_IN_LATEST_SET_MYTHIC_RARE = CardRulesPredicates
+                .rarityInCardsLatestSet(true, CardRarity.MythicRare);
 
         /** The Constant isInLatestSetSpecial. */
-        public static final Predicate<CardRules> IS_IN_LATEST_SET_SPECIAL = CardRulesPredicates.rarityInCardsLatestSet(true,
-                CardRarity.Special);
+        public static final Predicate<CardRules> IS_IN_LATEST_SET_SPECIAL = CardRulesPredicates.rarityInCardsLatestSet(
+                true, CardRarity.Special);
     }
 }

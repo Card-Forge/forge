@@ -29,7 +29,6 @@ import forge.card.CardColor;
 import forge.card.CardManaCost;
 import forge.card.CardRules;
 
-
 /**
  * <p>
  * GenerateDeckUtil class.
@@ -64,6 +63,7 @@ public class GenerateDeckUtil {
 
     public static class ContainsAllColorsFrom implements Predicate<CardRules> {
         private final CardColor allowedColor;
+
         public ContainsAllColorsFrom(CardColor color) {
             allowedColor = color;
         }
@@ -79,7 +79,8 @@ public class GenerateDeckUtil {
         private final int max;
 
         public FilterCMC(int from, int to) {
-            min = from; max = to;
+            min = from;
+            max = to;
         }
 
         @Override
@@ -92,19 +93,33 @@ public class GenerateDeckUtil {
 
     private static Map<Integer, String[]> dualLands = new HashMap<Integer, String[]>();
     static {
-        dualLands.put(CardColor.WHITE | CardColor.BLUE, new String[]{"Tundra", "Hallowed Fountain", "Flooded Strand"});
-        dualLands.put(CardColor.BLACK | CardColor.BLUE, new String[]{"Underground Sea", "Watery Grave", "Polluted Delta"});
-        dualLands.put(CardColor.BLACK | CardColor.RED, new String[]{"Badlands", "Blood Crypt", "Bloodstained Mire"});
-        dualLands.put(CardColor.GREEN | CardColor.RED, new String[]{"Taiga", "Stomping Ground", "Wooded Foothills"});
-        dualLands.put(CardColor.GREEN | CardColor.WHITE, new String[]{"Savannah", "Temple Garden", "Windswept Heath"});
+        dualLands.put(CardColor.WHITE | CardColor.BLUE, new String[] { "Tundra", "Hallowed Fountain", "Flooded Strand",
+                "Azorius Guildgate" });
+        dualLands.put(CardColor.BLACK | CardColor.BLUE, new String[] { "Underground Sea", "Watery Grave",
+                "Polluted Delta" });
+        dualLands.put(CardColor.BLACK | CardColor.RED, new String[] { "Badlands", "Blood Crypt", "Bloodstained Mire",
+                "Rakdos Guildgate" });
+        dualLands.put(CardColor.GREEN | CardColor.RED, new String[] { "Taiga", "Stomping Ground", "Wooded Foothills" });
+        dualLands.put(CardColor.GREEN | CardColor.WHITE, new String[] { "Savannah", "Temple Garden", "Windswept Heath",
+                "Selesnya Guildgate" });
 
-        dualLands.put(CardColor.WHITE | CardColor.BLACK, new String[]{"Scrubland", "Godless Shrine", "Marsh Flats"});
-        dualLands.put(CardColor.BLUE | CardColor.RED, new String[]{"Volcanic Island", "Steam Vents", "Scalding Tarn"});
-        dualLands.put(CardColor.BLACK | CardColor.GREEN, new String[]{"Bayou", "Overgrown Tomb", "Verdant Catacombs"});
-        dualLands.put(CardColor.WHITE | CardColor.RED, new String[]{"Plateau", "Sacred Foundry", "Arid Mesa"});
-        dualLands.put(CardColor.GREEN | CardColor.BLUE, new String[]{"Tropical Island", "Breeding Pool", "Misty Rainforest"});
+        dualLands.put(CardColor.WHITE | CardColor.BLACK, new String[] { "Scrubland", "Godless Shrine", "Marsh Flats" });
+        dualLands.put(CardColor.BLUE | CardColor.RED, new String[] { "Volcanic Island", "Steam Vents", "Scalding Tarn",
+                "Izzet Guildgate" });
+        dualLands.put(CardColor.BLACK | CardColor.GREEN, new String[] { "Bayou", "Overgrown Tomb", "Verdant Catacombs",
+                "Golgari Guildgate" });
+        dualLands.put(CardColor.WHITE | CardColor.RED, new String[] { "Plateau", "Sacred Foundry", "Arid Mesa" });
+        dualLands.put(CardColor.GREEN | CardColor.BLUE, new String[] { "Tropical Island", "Breeding Pool",
+                "Misty Rainforest" });
     }
 
+    /**
+     * Get list of dual lands for this color combo.
+     * 
+     * @param color
+     *            the color
+     * @return dual land names
+     */
     public static List<String> getDualLandList(final CardColor color) {
 
         final List<String> dLands = new ArrayList<String>();
@@ -128,4 +143,27 @@ public class GenerateDeckUtil {
 
         return dLands;
     }
+
+    /**
+     * Get all dual lands that do not match this color combo.
+     * 
+     * @param color
+     *            the color
+     * @return dual land names
+     */
+    public static List<String> getInverseDualLandList(final CardColor color) {
+
+        final List<String> dLands = new ArrayList<String>();
+
+        for (Entry<Integer, String[]> dual : dualLands.entrySet()) {
+            if (!color.hasAllColors(dual.getKey())) {
+                for (String s : dual.getValue()) {
+                    dLands.add(s);
+                }
+            }
+        }
+
+        return dLands;
+    }
+
 }
