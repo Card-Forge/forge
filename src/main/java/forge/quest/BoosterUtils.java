@@ -29,7 +29,6 @@ import com.google.common.collect.Iterables;
 
 
 import forge.AllZone;
-import forge.Singletons;
 import forge.card.BoosterGenerator;
 import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
@@ -88,9 +87,9 @@ public final class BoosterUtils {
 
         final Iterable<CardPrinted> cardpool = CardDb.instance().getAllUniqueCards();
 
-        final Predicate<CardPrinted> pCommon = Predicates.and(filter, CardPrinted.Predicates.Presets.IS_COMMON); 
+        final Predicate<CardPrinted> pCommon = Predicates.and(filter, CardPrinted.Predicates.Presets.IS_COMMON);
         cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, pCommon, numCommon, colorFilters));
-        
+
         final Predicate<CardPrinted> pUncommon = Predicates.and(filter, CardPrinted.Predicates.Presets.IS_UNCOMMON);
         cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, pUncommon, numUncommon, colorFilters));
 
