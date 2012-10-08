@@ -17,20 +17,16 @@
  */
 package forge.properties;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.google.common.io.Files;
 
 import forge.Constant;
 import forge.Constant.Preferences;
@@ -38,6 +34,7 @@ import forge.gui.home.EMenuItem;
 import forge.gui.match.VMatchUI;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VDev;
+import forge.util.FileUtil;
 
 /**
  * Holds default preference values in an enum.
@@ -165,25 +162,16 @@ public class ForgePreferences {
             // This code is here temporarily to facilitate this transfer.
             // After a while, this can be deleted.  Doublestrike 21-5-12
             final File oldFile = new File("forge.preferences");
+            
             if (oldFile.exists()) {
                 final File newFile = new File(NewConstants.PREFS_GLOBAL_FILE);
-                final InputStream in = new FileInputStream(oldFile);
-                final OutputStream out = new FileOutputStream(newFile);
-
-                byte[] buf = new byte[1024];
-                int len;
-                while ((len = in.read(buf)) > 0) {
-                    out.write(buf, 0, len);
-                }
-                in.close();
-                out.close();
-
+                Files.copy(oldFile, newFile);
                 oldFile.delete();
             }  // END TEMPORARY CONSOLIDATION FACILITATION
 
-            final BufferedReader input = new BufferedReader(new FileReader(NewConstants.PREFS_GLOBAL_FILE));
-            String line = null;
-            while ((line = input.readLine()) != null) {
+            List<String> lines = FileUtil.readFile(NewConstants.PREFS_GLOBAL_FILE);
+            for( String line :lines ) {
+          
                 if (line.startsWith("#") || (line.length() == 0)) {
                     continue;
                 }

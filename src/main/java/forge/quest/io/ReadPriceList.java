@@ -17,18 +17,17 @@
  */
 package forge.quest.io;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.error.ErrorViewer;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.util.FileUtil;
 import forge.util.MyRandom;
 
 /**
@@ -76,61 +75,52 @@ public class ReadPriceList {
      * @return a {@link java.util.HashMap} object.
      */
     private HashMap<String, Integer> readFile(final File file) {
-        BufferedReader in;
         final HashMap<String, Integer> map = new HashMap<String, Integer>();
         final Random r = MyRandom.getRandom();
-        try {
+        
+        List<String> lines = FileUtil.readFile(file);
+        for (String line : lines) {
+            if ( line.trim().length() == 0 ) break;
+            
+            if (line.startsWith(ReadPriceList.COMMENT)) 
+                continue; 
+            
+            final String[] s = line.split("=");
+            final String name = s[0].trim();
+            final String price = s[1].trim();
 
-            in = new BufferedReader(new FileReader(file));
-            String line = in.readLine();
+            // System.out.println("Name: " + name + ", Price: " +
+            // price);
 
-            // stop reading if end of file or blank line is read
-            while ((line != null) && (line.trim().length() != 0)) {
-                if (!line.startsWith(ReadPriceList.COMMENT)) {
-                    final String[] s = line.split("=");
-                    final String name = s[0].trim();
-                    final String price = s[1].trim();
+            try {
+                int val = Integer.parseInt(price.trim());
 
-                    // System.out.println("Name: " + name + ", Price: " +
-                    // price);
+                if (!(name.equals("Plains") || name.equals("Island") || name.equals("Swamp")
+                        || name.equals("Mountain") || name.equals("Forest")
+                        || name.equals("Snow-Covered Plains") || name.equals("Snow-Covered Island")
+                        || name.equals("Snow-Covered Swamp") || name.equals("Snow-Covered Mountain") || name
+                            .equals("Snow-Covered Forest"))) {
+                    float ff = 0;
+                    if (r.nextInt(100) < 90) {
+                        ff = r.nextInt(10) * (float) .01;
+                    } else {
+                        // +/- 50%
+                        ff = r.nextInt(50) * (float) .01;
+                    }
 
-                    try {
-                        int val = Integer.parseInt(price.trim());
-
-                        if (!(name.equals("Plains") || name.equals("Island") || name.equals("Swamp")
-                                || name.equals("Mountain") || name.equals("Forest")
-                                || name.equals("Snow-Covered Plains") || name.equals("Snow-Covered Island")
-                                || name.equals("Snow-Covered Swamp") || name.equals("Snow-Covered Mountain") || name
-                                    .equals("Snow-Covered Forest"))) {
-                            float ff = 0;
-                            if (r.nextInt(100) < 90) {
-                                ff = r.nextInt(10) * (float) .01;
-                            } else {
-                                // +/- 50%
-                                ff = r.nextInt(50) * (float) .01;
-                            }
-
-                            if (r.nextInt(100) < 50) {
-                                val = (int) (val * (1 - ff));
-                            } else {
-                                // +ff%
-                                val = (int) (val * (1 + ff));
-                            }
-                        }
-
-                        map.put(name, val);
-                    } catch (final NumberFormatException nfe) {
-                        Log.warn("NumberFormatException: " + nfe.getMessage());
+                    if (r.nextInt(100) < 50) {
+                        val = (int) (val * (1 - ff));
+                    } else {
+                        // +ff%
+                        val = (int) (val * (1 + ff));
                     }
                 }
-                line = in.readLine();
-            } // if
 
-        } catch (final Exception ex) {
-            ErrorViewer.showError(ex);
-            throw new RuntimeException("ReadPriceList : readFile error, " + ex);
-        }
-
+                map.put(name, val);
+            } catch (final NumberFormatException nfe) {
+                Log.warn("NumberFormatException: " + nfe.getMessage());
+            }
+        } 
         return map;
     } // readFile()
 

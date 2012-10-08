@@ -22,8 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-import com.google.common.base.Supplier;
-
 import forge.Card;
 
 import forge.Command;

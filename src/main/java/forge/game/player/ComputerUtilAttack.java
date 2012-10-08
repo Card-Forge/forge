@@ -805,7 +805,7 @@ public class ComputerUtilAttack {
         for (int i = 0; i < attackersLeft.size(); i++) {
             final Card attacker = attackersLeft.get(i);
             if (this.aiAggression < 5 && !attacker.hasFirstStrike() && !attacker.hasDoubleStrike()
-                    && CombatUtil.getTotalFirstStrikeBlockPower(attacker, AllZone.getHumanPlayer())
+                    && CombatUtil.getTotalFirstStrikeBlockPower(attacker, ai.getOpponent())
                     >= attacker.getKillDamage()) {
                 continue;
             }

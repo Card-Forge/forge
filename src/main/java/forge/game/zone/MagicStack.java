@@ -957,7 +957,7 @@ public class MagicStack extends MyObservable {
                     AllZone.getInputControl().setInput(target);
                 } else {
                     // AI choosing what to haunt
-                    final List<Card> oppCreats = CardLists.filterControlledBy(creats, AllZone.getHumanPlayer());
+                    final List<Card> oppCreats = CardLists.filterControlledBy(creats, source.getController().getOpponent());
                     if (oppCreats.size() != 0) {
                         haunterDiesWork.setTargetCard(CardFactoryUtil.getWorstCreatureAI(oppCreats));
                     } else {

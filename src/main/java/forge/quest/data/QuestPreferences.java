@@ -17,18 +17,18 @@
  */
 package forge.quest.data;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Quest;
+import forge.util.FileUtil;
 
 /**
  * Holds default preference values in an enum. Loads preferred values when
@@ -226,24 +226,19 @@ public class QuestPreferences implements Serializable {
     /** Instantiates a QuestPreferences object. */
     public QuestPreferences() {
         this.preferenceValues = new HashMap<QPref, String>();
-        try {
-            final BufferedReader input = new BufferedReader(new FileReader(ForgeProps.getFile(Quest.PREFS)));
-            String line = null;
-            while ((line = input.readLine()) != null) {
-                if (line.startsWith("#") || (line.length() == 0)) {
-                    continue;
-                }
-
-                final String[] split = line.split("=");
-
-                if (split.length == 2) {
-                    this.setPreference(split[0], split[1]);
-                }
+        
+        List<String> lines = FileUtil.readFile(ForgeProps.getFile(Quest.PREFS));
+        
+        for (String line : lines ) {
+            if (line.startsWith("#") || (line.length() == 0)) {
+                continue;
             }
-        } catch (final FileNotFoundException ex) {
-            // ex.printStackTrace();
-        } catch (final IOException ex) {
-            // ex.printStackTrace();
+
+            final String[] split = line.split("=");
+
+            if (split.length == 2) {
+                this.setPreference(split[0], split[1]);
+            }
         }
     }
 

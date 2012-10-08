@@ -108,6 +108,7 @@ public class HttpUtil {
                 httpOut.write(bufferBytesRead);
                 httpOut.flush();
             }
+            uploadFileReader.close();
         } catch (final IOException e) {
             return;
         }
