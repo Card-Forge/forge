@@ -258,7 +258,7 @@ public class AbilityFactoryCounterMagic {
             if (!CostUtil.checkSacrificeCost(ai, abCost, source)) {
                 return false;
             }
-            if (!CostUtil.checkLifeCost(abCost, source, 4, null)) {
+            if (!CostUtil.checkLifeCost(ai, abCost, source, 4, null)) {
                 return false;
             }
         }

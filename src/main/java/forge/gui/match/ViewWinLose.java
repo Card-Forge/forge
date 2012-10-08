@@ -51,18 +51,19 @@ public class ViewWinLose {
         btnContinue = new FButton();
         btnRestart = new FButton();
         btnQuit = new FButton();
+        
+        final Player human = Singletons.getControl().getPlayer();
 
         // Control of the win/lose is handled differently for various game modes.
         ControlWinLose control;
-        if (Singletons.getModel().getMatchState().getGameType() == GameType.Quest) {
+        if (matchState.getGameType() == GameType.Quest) {
             control = new QuestWinLoseHandler(this);
         }
-        else if (Singletons.getModel().getMatchState().getGameType() == GameType.Sealed
-                || (Singletons.getModel().getMatchState().getGameType() == GameType.Draft && AllZone.getGauntlet().getGauntletDraft())) {
-
+        else if (matchState.getGameType() == GameType.Sealed
+             || (matchState.getGameType() == GameType.Draft && AllZone.getGauntlet().isGauntletDraft())) {
             control = new GauntletWinLose(this);
         }
-        else if (Singletons.getModel().getMatchState().getGameType() == GameType.Gauntlet) {
+        else if (matchState.getGameType() == GameType.Gauntlet) {
             control = new OtherGauntletWinLose(this);
         }
         else {
@@ -102,7 +103,7 @@ public class ViewWinLose {
         }
 
         // Show Wins and Loses
-        final Player human = AllZone.getHumanPlayer();
+        
         final int humanWins = matchState.countGamesWonBy(human);
         final int humanLosses = matchState.getGamesPlayedCount() - humanWins;
 

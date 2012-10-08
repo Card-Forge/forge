@@ -153,59 +153,58 @@ public class InputMulligan extends Input {
         // Human Leylines & Chancellors
         ButtonUtil.reset();
         final AbilityFactory af = new AbilityFactory();
-        final List<Card> humanOpeningHand = AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand);
-
-        for (final Card c : humanOpeningHand) {
-            final ArrayList<String> kws = c.getKeyword();
-            for (int i = 0; i < kws.size(); i++) {
-                final String kw = kws.get(i);
-
-                if (kw.startsWith("MayEffectFromOpeningHand")) {
-                    final String effName = kw.split(":")[1];
-
-                    final SpellAbility effect = af.getAbility(c.getSVar(effName), c);
-                    if (GameActionUtil.showYesNoDialog(c, "Use this card's ability?")) {
-                        // If we ever let the AI memorize cards in the players
-                        // hand, this would be a place to do so.
-                        ga.playSpellAbilityNoStack(effect, false);
-                    }
-                }
-            }
-            if (c.getName().startsWith("Leyline")) {
-                if (GameActionUtil.showYesNoDialog(c, "Use this card's ability?")) {
-                    ga.moveToPlay(c);
-                }
-            }
-        }
-
-        // Computer Leylines & Chancellors
-        Player ai = AllZone.getComputerPlayer();
-        final List<Card> aiOpeningHand = ai.getCardsIn(ZoneType.Hand);
-        for (final Card c : aiOpeningHand) {
-            if (!c.getName().startsWith("Leyline")) {
-                final ArrayList<String> kws = c.getKeyword();
-                for (int i = 0; i < kws.size(); i++) {
-                    final String kw = kws.get(i);
-
-                    if (kw.startsWith("MayEffectFromOpeningHand")) {
-                        final String effName = kw.split(":")[1];
-
-                        final SpellAbility effect = af.getAbility(c.getSVar(effName), c);
-
-                        // Is there a better way for the AI to decide this?
-                        if (effect.doTrigger(false)) {
-                            GameActionUtil.showInfoDialg("Computer reveals " + c.getName() + "(" + c.getUniqueNumber()
-                                    + ").");
-                            ComputerUtil.playNoStack(ai, effect);
+        
+        for (Player p : AllZone.getPlayersInGame()) {
+            final List<Card> openingHand = p.getCardsIn(ZoneType.Hand);
+    
+            for (final Card c : openingHand) {
+                if ( p.isHuman() ) {
+                    final ArrayList<String> kws = c.getKeyword();
+                    for (int i = 0; i < kws.size(); i++) {
+                        final String kw = kws.get(i);
+        
+                        if (kw.startsWith("MayEffectFromOpeningHand")) {
+                            final String effName = kw.split(":")[1];
+        
+                            final SpellAbility effect = af.getAbility(c.getSVar(effName), c);
+                            if (GameActionUtil.showYesNoDialog(c, "Use this card's ability?")) {
+                                // If we ever let the AI memorize cards in the players
+                                // hand, this would be a place to do so.
+                                ga.playSpellAbilityNoStack(effect, false);
+                            }
                         }
                     }
+                    if (c.getName().startsWith("Leyline")) {
+                        if (GameActionUtil.showYesNoDialog(c, "Use this card's ability?")) {
+                            ga.moveToPlay(c);
+                        }
+                    }
+                } else { // Computer Leylines & Chancellors
+                    if (!c.getName().startsWith("Leyline")) {
+                        final ArrayList<String> kws = c.getKeyword();
+                        for (int i = 0; i < kws.size(); i++) {
+                            final String kw = kws.get(i);
+        
+                            if (kw.startsWith("MayEffectFromOpeningHand")) {
+                                final String effName = kw.split(":")[1];
+        
+                                final SpellAbility effect = af.getAbility(c.getSVar(effName), c);
+        
+                                // Is there a better way for the AI to decide this?
+                                if (effect.doTrigger(false)) {
+                                    GameActionUtil.showInfoDialg("Computer reveals " + c.getName() + "(" + c.getUniqueNumber() + ").");
+                                    ComputerUtil.playNoStack(p, effect);
+                                }
+                            }
+                        }
+                    }
+                    if (c.getName().startsWith("Leyline")
+                            && !(c.getName().startsWith("Leyline of Singularity") && (AllZoneUtil.getCardsIn(ZoneType.Battlefield,
+                                    "Leyline of Singularity").size() > 0))) {
+                        ga.moveToPlay(c);
+                        //ga.checkStateEffects();
+                    }
                 }
-            }
-            if (c.getName().startsWith("Leyline")
-                    && !(c.getName().startsWith("Leyline of Singularity") && (AllZoneUtil.getCardsIn(ZoneType.Battlefield,
-                            "Leyline of Singularity").size() > 0))) {
-                ga.moveToPlay(c);
-                //ga.checkStateEffects();
             }
         }
         //ga.checkStateEffects();

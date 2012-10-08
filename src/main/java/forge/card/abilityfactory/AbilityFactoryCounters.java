@@ -333,7 +333,7 @@ public class AbilityFactoryCounters {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkLifeCost(abCost, source, 4, null)) {
+            if (!CostUtil.checkLifeCost(ai, abCost, source, 4, null)) {
                 return false;
             }
 
@@ -1011,7 +1011,7 @@ public class AbilityFactoryCounters {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkLifeCost(abCost, source, 4, null)) {
+            if (!CostUtil.checkLifeCost(ai, abCost, source, 4, null)) {
                 return false;
             }
 
@@ -1866,7 +1866,7 @@ public class AbilityFactoryCounters {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkLifeCost(abCost, source, 8, null)) {
+            if (!CostUtil.checkLifeCost(ai, abCost, source, 8, null)) {
                 return false;
             }
 

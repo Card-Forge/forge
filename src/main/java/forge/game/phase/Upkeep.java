@@ -1216,13 +1216,6 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     boolean wantDamageCreatures = false;
                     final String[] smallCreatures = { "Creature.toughnessLE2" };
 
-                    List<Card> humanCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getHumanPlayer());
-                    humanCreatures = CardLists.getValidCards(humanCreatures, smallCreatures, k.getController(), k);
-                    humanCreatures = CardLists.getNotKeyword(humanCreatures, "Indestructible");
-
-                    List<Card> computerCreatures = AllZoneUtil.getCreaturesInPlay(AllZone.getComputerPlayer());
-                    computerCreatures = CardLists.getValidCards(computerCreatures, smallCreatures, k.getController(), k);
-                    computerCreatures = CardLists.getNotKeyword(computerCreatures, "Indestructible");
 
                     // We assume that both players will want to peek, ask if
                     // they want to reveal.
@@ -1242,6 +1235,15 @@ public class Upkeep extends Phase implements java.io.Serializable {
                         }
                         // player isComputer()
                         else {
+                            List<Card> humanCreatures = AllZoneUtil.getCreaturesInPlay(player.getOpponent());
+                            humanCreatures = CardLists.getValidCards(humanCreatures, smallCreatures, k.getController(), k);
+                            humanCreatures = CardLists.getNotKeyword(humanCreatures, "Indestructible");
+
+                            List<Card> computerCreatures = AllZoneUtil.getCreaturesInPlay(player);
+                            computerCreatures = CardLists.getValidCards(computerCreatures, smallCreatures, k.getController(), k);
+                            computerCreatures = CardLists.getNotKeyword(computerCreatures, "Indestructible");
+                            
+                            
                             if (humanCreatures.size() > computerCreatures.size()) {
                                 final String title = "Computer reveals";
                                 this.revealTopCard(title);
@@ -2203,7 +2205,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                                 @Override
                                 public void selectCard(final Card card, final PlayerZone zone) {
-                                    if (zone.is(ZoneType.Battlefield, AllZone.getHumanPlayer())
+                                    if (zone.is(ZoneType.Battlefield, player)
                                             && list.contains(card)) {
                                         card.tap();
                                         list.remove(card);

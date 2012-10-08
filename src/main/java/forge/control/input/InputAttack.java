@@ -27,6 +27,7 @@ import forge.Card;
 import forge.CardPredicates;
 import forge.Singletons;
 import forge.game.phase.CombatUtil;
+import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.SDisplayUtil;
@@ -98,7 +99,8 @@ public class InputAttack extends Input {
             return;
         }
 
-        if (zone.is(ZoneType.Battlefield, AllZone.getHumanPlayer())
+        final Player human = Singletons.getControl().getPlayer();
+        if (zone.is(ZoneType.Battlefield, human)
                 && CombatUtil.canAttack(card, AllZone.getCombat())) {
 
             // TODO add the propaganda code here and remove it in
@@ -109,7 +111,7 @@ public class InputAttack extends Input {
             AllZone.getCombat().addAttacker(card);
 
             // just to make sure the attack symbol is marked
-            AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
+            human.getZone(ZoneType.Battlefield).updateObservers();
             CombatUtil.showCombat();
         }
         else {

@@ -793,69 +793,46 @@ public class CardFactorySorceries {
     }
 
     private final static SpellAbility getPatriarchsBidding( final Card card ) {
-        final String[] input = new String[2];
 
         final SpellAbility spell = new Spell(card) {
             private static final long serialVersionUID = -2182173662547136798L;
 
             @Override
             public void resolve() {
-                input[0] = "";
-                while (input[0] == "") {
-                    input[0] = JOptionPane.showInputDialog(null, "Which creature type?", "Pick type",
-                            JOptionPane.QUESTION_MESSAGE);
-                    if (input[0] == null) {
-                        break;
-                    }
-                    if (!CardUtil.isACreatureType(input[0])) {
-                        input[0] = "";
-                        // TODO some more input validation,
-                        // case-sensitivity,
-                        // etc.
-                    }
-
-                    input[0] = input[0].trim(); // this is to prevent
-                                                // "cheating", and selecting
-                                                // multiple creature
-                                                // types,eg "Goblin Soldier"
-                }
-
-                if (input[0] == null) {
-                    input[0] = "";
-                }
-
-                final HashMap<String, Integer> countInGraveyard = new HashMap<String, Integer>();
-                final List<Card> allGrave = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
-                for (final Card c : Iterables.filter(allGrave, CardPredicates.Presets.CREATURES)) {
-                    for (final String type : c.getType()) {
-                        if (CardUtil.isACreatureType(type)) {
-                            if (countInGraveyard.containsKey(type)) {
-                                countInGraveyard.put(type, countInGraveyard.get(type) + 1);
-                            } else {
-                                countInGraveyard.put(type, 1);
+                List<String> types = new ArrayList<String>();
+                for(Player p : AllZone.getPlayersInGame()) {
+                    if ( p.isHuman() ) {
+                         types.add(GuiChoose.one("Which creature type?", Constant.CardTypes.CREATURE_TYPES));
+                    } else {
+                        final HashMap<String, Integer> countInGraveyard = new HashMap<String, Integer>();
+                        final List<Card> aiGrave = p.getCardsIn(ZoneType.Graveyard);
+                        for (final Card c : Iterables.filter(aiGrave, CardPredicates.Presets.CREATURES)) {
+                            for (final String type : c.getType()) {
+                                if (CardUtil.isACreatureType(type)) {
+                                    Integer oldVal = countInGraveyard.get(type);
+                                    countInGraveyard.put(type, 1 + ( oldVal != null ? oldVal : 0 ));
+                                 }
                             }
                         }
+                        String maxKey = "";
+                        int maxCount = -1;
+                        for (final Entry<String, Integer> entry : countInGraveyard.entrySet()) {
+                            if (entry.getValue() > maxCount) {
+                                maxKey = entry.getKey();
+                                maxCount = entry.getValue();
+                            }
+                        }
+                        types.add( maxKey.equals("") ? "Sliver" : maxKey );    
                     }
-                }
-                String maxKey = "";
-                int maxCount = -1;
-                for (final Entry<String, Integer> entry : countInGraveyard.entrySet()) {
-                    if (entry.getValue() > maxCount) {
-                        maxKey = entry.getKey();
-                        maxCount = entry.getValue();
-                    }
-                }
-                if (!maxKey.equals("")) {
-                    input[1] = maxKey;
-                } else {
-                    input[1] = "Sliver";
                 }
 
-                // Actually put everything on the battlefield
                 List<Card> bidded = CardLists.filter(AllZoneUtil.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
                 for (final Card c : bidded) {
-                    if (c.isType(input[1]) || (!input[0].equals("") && c.isType(input[0]))) {
-                        Singletons.getModel().getGameAction().moveToPlay(c);
+                    for(int i = 0; i < types.size(); i++) {
+                        if (c.isType(types.get(i))) {
+                            Singletons.getModel().getGameAction().moveToPlay(c);
+                            i = types.size(); // break inner loop
+                        }
                     }
                 }
             } // resolve()

@@ -197,8 +197,8 @@ public class CostMana extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final SpellAbility ability, final Card source, final CostPayment payment) {
-        ComputerUtil.payManaCost(ability.getActivatingPlayer(), ability);
+    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
+        ComputerUtil.payManaCost(ai, ability);
     }
 
     /*

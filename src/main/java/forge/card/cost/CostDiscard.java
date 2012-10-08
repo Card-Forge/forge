@@ -163,10 +163,9 @@ public class CostDiscard extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final SpellAbility ability, final Card source, final CostPayment payment) {
-        final Player activator = ability.getActivatingPlayer();
+    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         for (final Card c : this.getList()) {
-            activator.discard(c, ability);
+            ai.discard(c, ability);
         }
     }
 

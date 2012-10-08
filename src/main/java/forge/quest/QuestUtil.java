@@ -17,11 +17,9 @@
  */
 package forge.quest;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.card.cardfactory.CardFactory;
-import forge.game.player.Player;
 import forge.item.CardDb;
 import forge.quest.bazaar.QuestPetController;
 
@@ -70,7 +68,7 @@ public class QuestUtil {
             final List<String> extras = ((QuestEventChallenge) qe).getAIExtraCards();
 
             for (final String s : extras) {
-                list.add(QuestUtil.readExtraCard(s, AllZone.getComputerPlayer()));
+                list.add(QuestUtil.readExtraCard(s));
             }
         }
 
@@ -97,9 +95,8 @@ public class QuestUtil {
             if (pet != null) {
                 Card c = pet.getPetCard(qc.getAssets());
                 if (c != null) {
-                    Card copy = CardFactory.getCard2(c, AllZone.getHumanPlayer());
+                    Card copy = CardFactory.getCard2(c, null);
                     copy.setSickness(true);
-                    copy.addController(AllZone.getHumanPlayer());
                     copy.setImageName(c.getImageName());
                     copy.setToken(true);
                     list.add(copy);
@@ -130,7 +127,7 @@ public class QuestUtil {
             final List<String> extras = ((QuestEventChallenge) qe).getHumanExtraCards();
 
             for (final String s : extras) {
-                list.add(QuestUtil.readExtraCard(s, AllZone.getHumanPlayer()));
+                list.add(QuestUtil.readExtraCard(s));
             }
         }
 
@@ -181,17 +178,15 @@ public class QuestUtil {
      *            the owner
      * @return the card
      */
-    public static Card readExtraCard(final String name, final Player owner) {
+    public static Card readExtraCard(final String name) {
         // Token card creation
         Card tempcard;
         if (name.startsWith("TOKEN")) {
             tempcard = QuestUtil.createToken(name);
-            tempcard.addController(owner);
-            tempcard.setOwner(owner);
         }
         // Standard card creation
         else {
-            tempcard = CardDb.instance().getCard(name, true).toForgeCard(owner);
+            tempcard = CardDb.instance().getCard(name, true).toForgeCard();
         }
         return tempcard;
     }

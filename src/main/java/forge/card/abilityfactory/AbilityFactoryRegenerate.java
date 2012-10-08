@@ -270,7 +270,7 @@ public class AbilityFactoryRegenerate {
         final Cost abCost = af.getAbCost();
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkLifeCost(abCost, hostCard, 4, null)) {
+            if (!CostUtil.checkLifeCost(ai, abCost, hostCard, 4, null)) {
                 return false;
             }
 
@@ -716,7 +716,7 @@ public class AbilityFactoryRegenerate {
                 return false;
             }
 
-            if (!CostUtil.checkLifeCost(abCost, hostCard, 4, null)) {
+            if (!CostUtil.checkLifeCost(ai, abCost, hostCard, 4, null)) {
                 return false;
             }
         }

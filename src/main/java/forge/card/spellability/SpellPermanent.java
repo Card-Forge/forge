@@ -335,7 +335,7 @@ public class SpellPermanent extends Spell {
         
         if (cost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkLifeCost(cost, card, 4, null)) {
+            if (!CostUtil.checkLifeCost(ai, cost, card, 4, null)) {
                 return false;
             }
 

@@ -67,13 +67,16 @@ public class GameNew {
         Card.resetUniqueNumber();
         
         for( PlayerStartsGame p : players ) {
-            p.getPlayer().setStartingLife(p.initialLives);
+            final Player player = p.getPlayer();
+            player.setStartingLife(p.initialLives);
             // what if I call it for AI player?
-            p.getPlayer().updateObservers();
-            p.getPlayer().setDeck(p.getDeck());
-            PlayerZone bf = p.getPlayer().getZone(ZoneType.Battlefield);
+            player.updateObservers();
+            player.setDeck(p.getDeck());
+            PlayerZone bf = player.getZone(ZoneType.Battlefield);
             if (p.cardsOnBattlefield != null) {
                 for (final Card c : p.cardsOnBattlefield) {
+                    c.addController(player);
+                    c.setOwner(player);
                     bf.add(c, false);
                     c.setSickness(true);
                     c.setStartsGameInPlay(true);

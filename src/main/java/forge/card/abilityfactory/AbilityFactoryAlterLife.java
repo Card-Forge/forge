@@ -338,7 +338,7 @@ public class AbilityFactoryAlterLife {
                 return false;
             }
 
-            if (!CostUtil.checkLifeCost(abCost, source, 4, null)) {
+            if (!CostUtil.checkLifeCost(ai, abCost, source, 4, null)) {
                 return false;
             }
 
@@ -756,7 +756,7 @@ public class AbilityFactoryAlterLife {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkLifeCost(abCost, source, amount, null)) {
+            if (!CostUtil.checkLifeCost(ai, abCost, source, amount, null)) {
                 return false;
             }
 
@@ -1257,7 +1257,7 @@ public class AbilityFactoryAlterLife {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkLifeCost(abCost, source, 1, null)) {
+            if (!CostUtil.checkLifeCost(ai, abCost, source, 1, null)) {
                 return false;
             }
 

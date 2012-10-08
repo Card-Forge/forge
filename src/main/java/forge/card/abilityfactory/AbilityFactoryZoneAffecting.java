@@ -304,7 +304,7 @@ public class AbilityFactoryZoneAffecting {
                 return false;
             }
 
-            if (!CostUtil.checkLifeCost(abCost, source, 4, null)) {
+            if (!CostUtil.checkLifeCost(ai, abCost, source, 4, null)) {
                 return false;
             }
 
@@ -874,7 +874,7 @@ public class AbilityFactoryZoneAffecting {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkLifeCost(abCost, source, 4, null)) {
+            if (!CostUtil.checkLifeCost(ai, abCost, source, 4, null)) {
                 return false;
             }
 
@@ -1604,7 +1604,7 @@ public class AbilityFactoryZoneAffecting {
                 return false;
             }
 
-            if (!CostUtil.checkLifeCost(abCost, source, 4, null)) {
+            if (!CostUtil.checkLifeCost(ai, abCost, source, 4, null)) {
                 return false;
             }
 

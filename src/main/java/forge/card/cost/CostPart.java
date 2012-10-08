@@ -203,7 +203,7 @@ public abstract class CostPart {
      * @param payment
      *            the payment
      */
-    public abstract void payAI(SpellAbility ability, Card source, CostPayment payment);
+    public abstract void payAI(final Player ai, SpellAbility ability, Card source, CostPayment payment);
 
     /**
      * Pay human.

@@ -279,7 +279,7 @@ public final class AbilityFactoryPlay {
                 return false;
             }
 
-            if (!CostUtil.checkLifeCost(abCost, source, 4, null)) {
+            if (!CostUtil.checkLifeCost(ai, abCost, source, 4, null)) {
                 return false;
             }
 

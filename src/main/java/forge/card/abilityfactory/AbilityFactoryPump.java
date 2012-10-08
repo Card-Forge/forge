@@ -818,7 +818,7 @@ public class AbilityFactoryPump {
         final Cost cost = sa.getPayCosts();
         final PhaseHandler ph = Singletons.getModel().getGameState().getPhaseHandler();
 
-        if (!CostUtil.checkLifeCost(cost, sa.getSourceCard(), 4, null)) {
+        if (!CostUtil.checkLifeCost(ai, cost, sa.getSourceCard(), 4, null)) {
             return false;
         }
 

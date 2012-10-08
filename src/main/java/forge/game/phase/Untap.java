@@ -237,8 +237,9 @@ public class Untap extends Phase implements java.io.Serializable {
             }
         }
         if (AllZoneUtil.isCardInPlay("Damping Field") || AllZoneUtil.isCardInPlay("Imi Statue")) {
-            if (Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().isComputer()) {
-                List<Card> artList = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+            final Player turnOwner = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn(); 
+            if (turnOwner.isComputer()) {
+                List<Card> artList = turnOwner.getCardsIn(ZoneType.Battlefield);
                 artList = CardLists.filter(artList, Presets.ARTIFACTS);
                 artList = CardLists.filter(artList, tappedCanUntap);
                 if (artList.size() > 0) {
@@ -268,7 +269,7 @@ public class Untap extends Phase implements java.io.Serializable {
                         }
                     } // selectCard()
                 }; // Input
-                List<Card> artList = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+                List<Card> artList = turnOwner.getCardsIn(ZoneType.Battlefield);
                 artList = CardLists.filter(artList, Presets.ARTIFACTS);
                 artList = CardLists.filter(artList, tappedCanUntap);
                 if (artList.size() > 0) {

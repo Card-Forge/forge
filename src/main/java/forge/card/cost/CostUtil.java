@@ -143,7 +143,7 @@ public class CostUtil {
      * @param sourceAbility TODO
      * @return true, if successful
      */
-    public static boolean checkLifeCost(final Cost cost, final Card source, final int remainingLife, SpellAbility sourceAbility) {
+    public static boolean checkLifeCost(final Player ai, final Cost cost, final Card source, final int remainingLife, SpellAbility sourceAbility) {
         // TODO - Pass in SA for everything else that calls this function
         if (cost == null) {
             return true;
@@ -157,7 +157,7 @@ public class CostUtil {
                     amount = AbilityFactory.calculateAmount(source, payLife.getAmount(), sourceAbility);
                 }
 
-                if ((AllZone.getComputerPlayer().getLife() - amount) < remainingLife) {
+                if ((ai.getLife() - amount) < remainingLife) {
                     return false;
                 }
             }
@@ -176,21 +176,20 @@ public class CostUtil {
      *            the remaining life
      * @return true, if successful
      */
-    public static boolean checkDamageCost(final Cost cost, final Card source, final int remainingLife) {
+    public static boolean checkDamageCost(final Player ai, final Cost cost, final Card source, final int remainingLife) {
         if (cost == null) {
             return true;
         }
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostDamage) {
                 final CostDamage pay = (CostDamage) part;
-                Player computer = AllZone.getComputerPlayer();
-                int realDamage = computer.predictDamage(pay.convertAmount(), source, false);
-                if (computer.getLife() - realDamage < remainingLife
-                        && realDamage > 0 && !computer.cantLoseForZeroOrLessLife()
-                        && computer.canLoseLife()) {
+                int realDamage = ai.predictDamage(pay.convertAmount(), source, false);
+                if (ai.getLife() - realDamage < remainingLife
+                        && realDamage > 0 && !ai.cantLoseForZeroOrLessLife()
+                        && ai.canLoseLife()) {
                     return false;
                 }
-                if (source.getName().equals("Skullscorch") && computer.getCardsIn(ZoneType.Hand).size() < 2) {
+                if (source.getName().equals("Skullscorch") && ai.getCardsIn(ZoneType.Hand).size() < 2) {
                     return false;
                 }
             }

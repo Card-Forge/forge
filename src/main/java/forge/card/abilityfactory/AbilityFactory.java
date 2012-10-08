@@ -2835,7 +2835,7 @@ public class AbilityFactory {
             public void execute() {
                 sa.resolve();
                 if (params.containsKey("PowerSink")) {
-                    GameActionUtil.doPowerSink(AllZone.getHumanPlayer());
+                    GameActionUtil.doPowerSink(sa.getActivatingPlayer());
                 }
                 AbilityFactory.resolveSubAbilities(sa);
                 if (usedStack) {
@@ -2847,8 +2847,8 @@ public class AbilityFactory {
         if (payer.isHuman()) {
             GameActionUtil.payCostDuringAbilityResolve(ability, cost, paidCommand, unpaidCommand, sa);
         } else {
-            if (ComputerUtil.canPayCost(ability, payer) && CostUtil.checkLifeCost(cost, source, 4, sa)
-                    && CostUtil.checkDamageCost(cost, source, 4)) {
+            if (ComputerUtil.canPayCost(ability, payer) && CostUtil.checkLifeCost(payer, cost, source, 4, sa)
+                    && CostUtil.checkDamageCost(payer, cost, source, 4)) {
                 // AI was crashing because the blank ability used to pay costs
                 // Didn't have any of the data on the original SA to pay dependant costs
                 ability.setTarget(sa.getTarget());

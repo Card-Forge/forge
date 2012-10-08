@@ -6311,6 +6311,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean isType(String type) {
+        if ( type == null ) return false;
+        
         type = this.toMixedCase(type);
 
         if (this.typeContains(type)

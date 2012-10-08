@@ -109,8 +109,8 @@ public class CostPayLife extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final SpellAbility ability, final Card source, final CostPayment payment) {
-        ability.getActivatingPlayer().payLife(this.getLastPaidAmount(), null);
+    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
+        ai.payLife(this.getLastPaidAmount(), null);
     }
 
     /*

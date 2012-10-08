@@ -303,7 +303,7 @@ public class CostPayment {
         }
 
         for (final CostPart part : parts) {
-            part.payAI(this.ability, this.ability.getSourceCard(), this);
+            part.payAI(ai, this.ability, this.ability.getSourceCard(), this);
         }
         return true;
     }

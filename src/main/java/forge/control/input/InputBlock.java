@@ -109,7 +109,7 @@ public class InputBlock extends Input {
         } else {
             // Make sure this card is valid to even be a blocker
             if (this.currentAttacker != null && card.isCreature() && card.getController().isHuman() 
-                    && zone.is(ZoneType.Battlefield, AllZone.getHumanPlayer())) {
+                    && zone.is(ZoneType.Battlefield, Singletons.getControl().getPlayer())) {
                 // Create a new blockedBy list if it doesn't exist
                 if (!this.allBlocking.containsKey(card)) {
                     this.allBlocking.put(card, new ArrayList<Card>());

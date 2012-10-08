@@ -231,7 +231,7 @@ public class GauntletMini {
      * Draft mode status.
      * @return boolean, gauntletDraft
      */
-    public final boolean getGauntletDraft() {
+    public final boolean isGauntletDraft() {
         return gauntletDraft;
     }
 
