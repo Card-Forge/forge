@@ -208,7 +208,8 @@ public abstract class SpellAbility {
      * </p>
      */
     public void chooseTargetAI() {
-        setTargetPlayer(this.randomTarget.get());
+        if ( this.randomTarget != null )
+            setTargetPlayer(this.randomTarget.get());
     }
 
     /**

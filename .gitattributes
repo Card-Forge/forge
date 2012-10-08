@@ -12355,7 +12355,6 @@ src/main/java/forge/CardUtil.java svneol=native#text/plain
 src/main/java/forge/Color.java svneol=native#text/plain
 src/main/java/forge/ColorChanger.java -text
 src/main/java/forge/Command.java svneol=native#text/plain
-src/main/java/forge/CommandArgs.java svneol=native#text/plain
 src/main/java/forge/CommandList.java svneol=native#text/plain
 src/main/java/forge/CommandReturn.java svneol=native#text/plain
 src/main/java/forge/Constant.java svneol=native#text/plain
