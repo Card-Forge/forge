@@ -147,19 +147,13 @@ public class ComputerUtil {
         }
 
         final Cost cost = sa.getPayCosts();
-        final Target tgt = sa.getTarget();
 
         if (cost == null) {
             ComputerUtil.payManaCost(ai, sa);
-            sa.chooseTargetAI();
             sa.getBeforePayManaAI().execute();
             AllZone.getStack().addAndUnfreeze(sa);
             return true;
         } else {
-            if ((tgt != null) && tgt.doesTarget()) {
-                sa.chooseTargetAI();
-            }
-
             final CostPayment pay = new CostPayment(cost, sa);
             if (pay.payComputerCosts(ai)) {
                 AllZone.getStack().addAndUnfreeze(sa);
@@ -311,7 +305,6 @@ public class ComputerUtil {
         if (cost == null) {
             // Honestly Counterspells shouldn't use this branch
             ComputerUtil.payManaCost(ai, bestSA);
-            bestSA.chooseTargetAI();
             bestSA.getBeforePayManaAI().execute();
             AllZone.getStack().addAndUnfreeze(bestSA);
         } else {
@@ -2175,5 +2168,18 @@ public class ComputerUtil {
             }
         }
         return false;
+    }
+    
+    
+    public static boolean targetHumanAI(final SpellAbility sa) {
+        if (sa == null || sa.getActivatingPlayer() == null) {
+            return false;
+        }
+        Player human = sa.getActivatingPlayer().getOpponent();
+        if (!sa.canTarget(human)) {
+            return false;
+        }
+        sa.setTargetPlayer(human);
+        return true;
     }
 }

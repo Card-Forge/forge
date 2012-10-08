@@ -118,8 +118,6 @@ public abstract class SpellAbility {
 
     private Command beforePayManaAI = Command.BLANK;
 
-    private Supplier<Player> randomTarget = null;
-
     private List<Card> tappedForConvoke = new ArrayList<Card>();
 
     private HashMap<String, String> sVars = new HashMap<String, String>();
@@ -200,39 +198,6 @@ public abstract class SpellAbility {
      */
     public boolean doTrigger(final boolean mandatory) {
         return false;
-    }
-
-    /**
-     * <p>
-     * chooseTargetAI.
-     * </p>
-     */
-    public void chooseTargetAI() {
-        if ( this.randomTarget != null )
-            setTargetPlayer(this.randomTarget.get());
-    }
-
-    /**
-     * <p>
-     * setChooseTargetAI.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.CommandArgs} object.
-     */
-    public void setChooseTargetAI(final Supplier<Player> c) {
-        this.randomTarget = c;
-    }
-
-    /**
-     * <p>
-     * getChooseTargetAI.
-     * </p>
-     * 
-     * @return a {@link forge.CommandArgs} object.
-     */
-    public Supplier<Player> getChooseTargetAI() {
-        return this.randomTarget;
     }
 
     /**

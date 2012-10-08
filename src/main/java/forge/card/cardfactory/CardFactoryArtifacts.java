@@ -18,6 +18,7 @@ import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
+import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -168,6 +169,14 @@ class CardFactoryArtifacts {
                 }
 
                 private static final long serialVersionUID = -840041589720758423L;
+                
+                @Override
+                public boolean canPlayAI() {
+                    this.getTarget().resetTargets();
+                    final List<Card> libList = getActivatingPlayer().getCardsIn(ZoneType.Library);
+                    return !libList.isEmpty() && ComputerUtil.targetHumanAI(this);
+                }
+
 
                 @Override
                 public void resolve() {
@@ -224,109 +233,8 @@ class CardFactoryArtifacts {
             sb.append("revealed cards on the bottom of your library in any order.");
             ability.setDescription(sb.toString());
 
-            ability.setChooseTargetAI(CardFactoryUtil.targetHumanAI);
             card.addSpellAbility(ability);
         } // *************** END ************ END **************************
-
-        // *************** START *********** START **************************
-        /*else if (cardName.equals("Lodestone Bauble")) {
-            /*
-             * 1, Tap, Sacrifice Lodestone Bauble: Put up to four target basic
-             * land cards from a player's graveyard on top of his or her library
-             * in any order. That player draws a card at the beginning of the
-             * next turn's upkeep.
-             */
-
-            /*class AbilityLodestoneBauble extends AbilityActivated {
-                public AbilityLodestoneBauble(final Card ca, final Cost co, final Target t) {
-                    super(ca, co, t);
-                }
-
-                @Override
-                public AbilityActivated getCopy() {
-                    AbilityActivated res = new AbilityLodestoneBauble(getSourceCard(),
-                            getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
-                    CardFactoryUtil.copySpellAbility(this, res);
-                    return res;
-                }
-
-                private static final long serialVersionUID = -6711849408085138636L;
-
-                @Override
-                public boolean canPlayAI() {
-                    return this.getComputerLands(getActivatingPlayer()).size() >= 4;
-                }
-
-                @Override
-                public void chooseTargetAI() {
-                    this.setTargetPlayer(getActivatingPlayer());
-                } // chooseTargetAI()
-
-                @Override
-                public void resolve() {
-                    final int limit = 4; // at most, this can target 4 cards
-                    final Player player = this.getTargetPlayer();
-
-                    List<Card> lands = player.getCardsIn(ZoneType.Graveyard);
-                    lands = CardLists.filter(lands, Presets.BASIC_LANDS);
-                    if (card.getController().isHuman()) {
-                        // now, select up to four lands
-                        int end = -1;
-                        end = Math.min(lands.size(), limit);
-                        // TODO - maybe pop a message box here that no basic
-                        // lands found (if necessary)
-                        for (int i = 1; i <= end; i++) {
-                            String title = "Put on top of library: ";
-                            if (i == 2) {
-                                title = "Put second from top of library: ";
-                            }
-                            if (i == 3) {
-                                title = "Put third from top of library: ";
-                            }
-                            if (i == 4) {
-                                title = "Put fourth from top of library: ";
-                            }
-                            final Object o = GuiChoose.oneOrNone(title, lands);
-                            if (o == null) {
-                                break;
-                            }
-                            final Card c1 = (Card) o;
-                            lands.remove(c1); // remove from the display list
-                            Singletons.getModel().getGameAction().moveToLibrary(c1, i - 1);
-                        }
-                    } else { // Computer
-                        // based on current AI, computer should always target
-                        // himself.
-                        final List<Card> list = this.getComputerLands(card.getController());
-                        int max = list.size();
-                        if (max > limit) {
-                            max = limit;
-                        }
-
-                        for (int i = 0; i < max; i++) {
-                            Singletons.getModel().getGameAction().moveToLibrary(list.get(i));
-                        }
-                    }
-
-                    player.addSlowtripList(card);
-                }
-
-                private List<Card> getComputerLands(final Player ai) {
-                    return CardLists.filter(ai.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.BASIC_LANDS);
-                }
-            }
-            final Cost abCost = new Cost(card, "1 T Sac<1/CARDNAME>", true);
-            final Target target = new Target(card, "Select target player", new String[] { "Player" });
-            final AbilityActivated ability = new AbilityLodestoneBauble(card, abCost, target);
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(abCost);
-            sb.append("Put up to four target basic land cards from a player's graveyard on top ");
-            sb.append("of his or her library in any order. That player draws a card at the ");
-            sb.append("beginning of the next turn's upkeep.");
-            ability.setDescription(sb.toString());
-            card.addSpellAbility(ability);
-        }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Grindstone")) {
@@ -341,7 +249,6 @@ class CardFactoryArtifacts {
                     AbilityActivated res = new AbilityGrindstone(getSourceCard(),
                             getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                     CardFactoryUtil.copySpellAbility(this, res);
-                    res.setChooseTargetAI(CardFactoryUtil.targetHumanAI);
                     return res;
                 }
 
@@ -349,10 +256,9 @@ class CardFactoryArtifacts {
 
                 @Override
                 public boolean canPlayAI() {
+                    this.getTarget().resetTargets();
                     final List<Card> libList = getActivatingPlayer().getOpponent().getCardsIn(ZoneType.Library);
-                    // List<Card> list =
-                    // AllZoneUtil.getCardsInPlay("Painter's Servant");
-                    return !libList.isEmpty(); // && list.size() > 0;
+                    return !libList.isEmpty() && ComputerUtil.targetHumanAI(this);
                 }
 
                 @Override
@@ -390,7 +296,6 @@ class CardFactoryArtifacts {
             final Cost abCost = new Cost(card, "3 T", true);
             final AbilityActivated ab1 = new AbilityGrindstone(card, abCost, target);
 
-            ab1.setChooseTargetAI(CardFactoryUtil.targetHumanAI);
             final StringBuilder sb = new StringBuilder();
             sb.append(abCost);
             sb.append("Put the top two cards of target player's library into that player's graveyard. ");

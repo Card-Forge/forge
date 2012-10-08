@@ -28,7 +28,6 @@ import java.util.TreeMap;
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import com.google.common.base.Supplier;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
@@ -1556,20 +1555,6 @@ public class CardFactoryUtil {
         };
         return modularInput;
     }
-
-    /**
-     * <p>
-     * targetHumanAI.
-     * </p>
-     * 
-     * @return a {@link forge.CommandArgs} object.
-     */
-    public static Supplier<Player> targetHumanAI = new Supplier<Player>() {
-        @Override
-        public Player get() {
-            return AllZone.getHumanPlayer();
-        }
-    };
 
     /**
      * <p>
@@ -3767,25 +3752,7 @@ public class CardFactoryUtil {
                     sa.addOptionalAdditionalCosts("Kicker");
                 }
                 card.addSpellAbility(sa);
-
-                /*final String bbCost = card.getSVar("Buyback");
-                if (!bbCost.equals("")) {
-                    final SpellAbility bbSA = sa.copy();
-                    final String newCost = CardUtil.addManaCosts(card.getManaCost().toString(), bbCost);
-                    if (bbSA.getPayCosts() != null) {
-                        // create new Cost
-                        bbSA.setPayCosts(new Cost(card, newCost, false));
-                    }
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append("Buyback ").append(bbCost).append(" (You may pay an additional ").append(bbCost);
-                    sb.append(" as you cast this spell. If you do, put this card into your hand as it resolves.)");
-                    bbSA.setDescription(sb.toString());
-                    bbSA.setIsBuyBackAbility(true);
-
-                    card.addSpellAbility(bbSA);
-                }*/
             }
-
         }
     }
 
@@ -4476,45 +4443,6 @@ public class CardFactoryUtil {
                 card.addReplacementEffect(re);
             }
         }
-
-        /*int etbcounter = CardFactoryUtil.hasKeyword(card, "etbCounter");
-        if (etbcounter != -1) {
-            String parse = card.getKeyword().get(etbcounter);
-            card.removeIntrinsicKeyword(parse);
-
-            String[] splitkw = parse.split(":");
-
-            AbilityFactory af = new AbilityFactory();
-            String desc = "CARDNAME enters the battlefield with " + splitkw[2] + " " + splitkw[1] + " counters on it.";
-            String extraparams = "";
-            String amount = splitkw[2];
-            if (splitkw.length > 3) {
-                if (!splitkw[3].equals("no Condition")) {
-                    extraparams = splitkw[3];
-                }
-            }
-            if (splitkw.length > 4) {
-                desc = splitkw[4];
-            }
-            String repStr = "DB$ PutCounter | Defined$ Self | CounterType$ " + splitkw[1] + " | CounterNum$ " + amount;
-            try {
-                Integer.parseInt(amount);
-            }
-            catch (NumberFormatException ignored) {
-                repStr += " | References$ " + amount;
-            }
-            SpellAbility repAb = af.getAbility(repStr, card);
-            setupETBReplacementAbility(repAb);
-
-            String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield | Description$ " + desc + (!extraparams.equals("") ? " | " + extraparams : "");
-
-            ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card);
-            re.setLayer(ReplacementLayer.Other);
-            re.setOverridingAbility(repAb);
-
-            card.addReplacementEffect(re);
-        }*/
-
     }
 
     public static void setupETBReplacementAbility(SpellAbility sa) {
@@ -4966,7 +4894,6 @@ public class CardFactoryUtil {
 
             card.addTrigger(stormTrigger);
         } // Storm
-
     }
 
 } // end class CardFactoryUtil

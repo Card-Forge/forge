@@ -119,28 +119,21 @@ public class CardFactoryCreatures {
             }
 
             @Override
-            public void chooseTargetAI() {
-                List<Card> perms = getActivatingPlayer().getCardsIn(ZoneType.Battlefield);
-                perms = CardLists.filter(CardLists.getTargetableCards(perms, this), new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        return (c.sumAllCounters() > 0);
-                    }
-                });
-                CardLists.shuffle(perms);
-                this.setTargetCard(perms.get(0)); // TODO improve this.
-            }
-
-            @Override
             public boolean canPlayAI() {
                 List<Card> perms = getActivatingPlayer().getCardsIn(ZoneType.Battlefield);
                 perms = CardLists.filter(CardLists.getTargetableCards(perms, this), new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
+                        //if (c.getCounters().isEmpty())
                         return (c.sumAllCounters() > 0);
                     }
                 });
-                return perms.size() > 0;
+                if (perms.isEmpty()) {
+                    return false;
+                }
+                CardLists.shuffle(perms);
+                this.setTargetCard(perms.get(0));
+                return true;
             }
 
             @Override

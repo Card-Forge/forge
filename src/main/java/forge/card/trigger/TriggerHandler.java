@@ -23,8 +23,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Supplier;
-
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
@@ -594,11 +592,6 @@ public class TriggerHandler {
             }
 
             @Override
-            public void chooseTargetAI() {
-                sa[0].chooseTargetAI();
-            }
-
-            @Override
             public SpellAbility copy() {
                 return sa[0].copy();
             }
@@ -636,11 +629,6 @@ public class TriggerHandler {
             @Override
             public Command getBeforePayManaAI() {
                 return sa[0].getBeforePayManaAI();
-            }
-
-            @Override
-            public Supplier<Player> getChooseTargetAI() {
-                return sa[0].getChooseTargetAI();
             }
 
             @Override
@@ -812,11 +800,6 @@ public class TriggerHandler {
             @Override
             public void setBeforePayManaAI(final Command c) {
                 sa[0].setBeforePayManaAI(c);
-            }
-
-            @Override
-            public void setChooseTargetAI(final Supplier<Player> c) {
-                sa[0].setChooseTargetAI(c);
             }
 
             @Override

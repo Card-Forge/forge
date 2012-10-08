@@ -83,14 +83,12 @@ public class CardFactoryInstants {
 
                 @Override
                 public boolean canPlayAI() {
-                    List<Card> humanCards = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+                    Player human = this.getActivatingPlayer().getOpponent();
+                    List<Card> humanCards = human.getCardsIn(ZoneType.Battlefield);
+                    this.getTarget().resetTargets();
+                    this.setTargetPlayer(human);
                     return Iterables.any(humanCards, CardPredicates.Presets.ARTIFACTS);
                 } //canPlayAI
-
-                @Override
-                public void chooseTargetAI() {
-                    setTargetPlayer(AllZone.getHumanPlayer());
-                } //chooseTargetAI()
 
                 @Override
                 public void resolve() {
@@ -263,16 +261,13 @@ public class CardFactoryInstants {
                 }
 
                 @Override
-                public void chooseTargetAI() {
-                    this.setTargetPlayer(getActivatingPlayer().getOpponent());
-                } // chooseTargetAI()
-
-                @Override
                 public boolean canPlayAI() {
                     final Player ai = getActivatingPlayer();
                     final Player opp = ai.getOpponent();
 
                     final int maxX = ComputerUtil.getAvailableMana(ai, true).size() - 1;
+                    this.getTarget().resetTargets();
+                    this.setTargetPlayer(opp);
                     return (maxX >= 3) && !opp.getZone(ZoneType.Graveyard).isEmpty();
                 }
             };
