@@ -72,19 +72,19 @@ public class ManaCostShard {
         public static final int COLORLESS = 1 << 0;
 
         /** The Constant WHITE. */
-        public static final int WHITE = 1 << 1;
+        public static final int WHITE = CardColor.WHITE; // 1 << 1;
 
         /** The Constant BLUE. */
-        public static final int BLUE = 1 << 2;
+        public static final int BLUE = CardColor.BLUE; // 1 << 2;
 
         /** The Constant BLACK. */
-        public static final int BLACK = 1 << 3;
+        public static final int BLACK = CardColor.BLACK; // 1 << 3;
 
         /** The Constant RED. */
-        public static final int RED = 1 << 4;
+        public static final int RED = CardColor.RED; // 1 << 4;
 
         /** The Constant GREEN. */
-        public static final int GREEN = 1 << 5;
+        public static final int GREEN = CardColor.GREEN; // 1 << 5;
 
         /** The Constant IS_X. */
         public static final int IS_X = 1 << 8;
@@ -353,5 +353,19 @@ public class ManaCostShard {
      */
     public boolean isOr2Colorless() {
         return (this.shard & Atom.OR_2_COLORLESS) != 0;
+    }
+
+    /**
+     * TODO: Can pay for this shard with unlimited mana of given color combination?
+     * @param color
+     * @return
+     */
+    public boolean canBePaidWithManaOfColor(CardColor color) {
+        // can pay with life?
+        if ( (this.shard & Atom.OR_2_LIFE) != 0 ) return true;
+        // can pay with any color?
+        if ( (this.shard & Atom.OR_2_COLORLESS) != 0 || 0 != ( this.shard & Atom.COLORLESS ) ) return true;
+        // either colored part is empty, or there are same colors in shard and mana source
+        return ( 0xFF & this.shard ) == 0 || ( color.getColor() & this.shard ) > 0;
     }
 }

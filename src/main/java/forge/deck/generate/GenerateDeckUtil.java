@@ -70,7 +70,9 @@ public class GenerateDeckUtil {
 
         @Override
         public boolean apply(CardRules subject) {
-            return allowedColor.containsAllColorsFrom(subject.getManaCost().getColorProfile());
+            CardManaCost mc = subject.getManaCost(); 
+            return !mc.isPureGeneric() && mc.canBePaidWithManaOfColor(allowedColor);
+            // return allowedColor.containsAllColorsFrom(mc.getColorProfile());
         }
     }
 
