@@ -49,6 +49,7 @@ import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
+import forge.quest.QuestController;
 import forge.quest.data.QuestPreferences;
 import forge.util.Aggregates;
 import forge.util.FileUtil;
@@ -83,6 +84,8 @@ public enum FModel {
     private final GameState gameState;
     private final FMatchState matchState;
     private GauntletData gauntletData;
+    
+    private final QuestController quest;
 
     private final EditionCollection editions;
     private final FormatCollection formats;
@@ -144,6 +147,7 @@ public enum FModel {
         this.blocks = new StorageView<CardBlock>(new CardBlock.Reader("res/blockdata/blocks.txt", editions));
         this.fantasyBlocks = new StorageView<CardBlock>(new CardBlock.Reader("res/blockdata/fantasyblocks.txt", editions));
 
+        this.quest = new QuestController();
         // TODO - there's got to be a better place for this...oblivion?
         Preferences.DEV_MODE = this.preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
 
@@ -157,6 +161,10 @@ public enum FModel {
         
         this.setBuildInfo(new BuildInfo());
         this.loadDynamicGamedata();
+    }
+
+    public final QuestController getQuest() {
+        return quest;
     }
 
     /**

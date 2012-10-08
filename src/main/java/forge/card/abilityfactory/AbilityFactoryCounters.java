@@ -1565,7 +1565,7 @@ public class AbilityFactoryCounters {
                 }
             }
 
-            List<Player> players = AllZone.getPlayersInGame();
+            List<Player> players = Singletons.getModel().getGameState().getPlayers();
 
             @Override
             public void selectPlayer(final Player player) {

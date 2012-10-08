@@ -114,12 +114,12 @@ public class ControlWinLose {
         List<GameSummary> games = Singletons.getModel().getMatchState().getGamesPlayed();
         if ( games.isEmpty() ) return;
         GameSummary lastGame = games.get(games.size()-1);
-        for (Player p: AllZone.getPlayersInGame()) {
+        for (Player p: Singletons.getModel().getGameState().getPlayers()) {
             if (!p.getName().equals(lastGame.getWinner())) continue; // not a loser
             
             // remove all the lost cards from owners' decks
             List<CardPrinted> losses = new ArrayList<CardPrinted>();
-            for (Player loser: AllZone.getPlayersInGame()) {
+            for (Player loser: Singletons.getModel().getGameState().getPlayers()) {
                 if( loser.equals(p)) continue; // not a loser
                 
                 List<Card> compAntes = loser.getCardsIn(ZoneType.Ante);

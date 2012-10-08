@@ -29,7 +29,7 @@ import javax.swing.JOptionPane;
 
 import com.google.common.base.Function;
 
-import forge.AllZone;
+import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.gui.CardListViewer;
@@ -399,7 +399,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     @Override
     public boolean exit() {
         SSubmenuQuestUtil.updateStatsAndPet();
-        AllZone.getQuest().save();
+        Singletons.getModel().getQuest().save();
         CSubmenuQuestDecks.SINGLETON_INSTANCE.update();
 
         // undo Card Shop Specifics

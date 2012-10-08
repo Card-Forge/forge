@@ -327,7 +327,7 @@ public final class GuiDisplayUtil {
      * </p>
      */
     public static void updateGUI() {
-        for( Player p : AllZone.getPlayersInGame())
+        for( Player p : Singletons.getModel().getGameState().getPlayers())
         {
             p.getZone(ZoneType.Battlefield).updateObservers();
             p.getZone(ZoneType.Battlefield).updateObservers();
@@ -759,7 +759,7 @@ public final class GuiDisplayUtil {
      * @since 1.1.3
      */
     public static void devModeSetLife() {
-        final List<Player> players = AllZone.getPlayersInGame();
+        final List<Player> players = Singletons.getModel().getGameState().getPlayers();
         final Player o = GuiChoose.oneOrNone("Set life for which player?", players);
         if (null == o) {
             return;
@@ -779,7 +779,7 @@ public final class GuiDisplayUtil {
     }
 
     public static void devModeBreakpoint() {
-        List<Player> Players = AllZone.getPlayersInGame();
+        List<Player> Players = Singletons.getModel().getGameState().getPlayers();
 /*
         Combat CombatHandler = AllZone.getCombat();
         TriggerHandler Triggers = AllZone.getTriggerHandler();

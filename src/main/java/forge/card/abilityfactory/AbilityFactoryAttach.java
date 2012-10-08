@@ -27,7 +27,6 @@ import java.util.Random;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
-import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 
@@ -1405,7 +1404,7 @@ public class AbilityFactoryAttach {
             if (tgt.canTgtPlayer()) {
                 final ArrayList<Player> players = new ArrayList<Player>();
 
-                for (Player player : AllZone.getPlayersInGame()) {
+                for (Player player : Singletons.getModel().getGameState().getPlayers()) {
                     if (player.isValid(tgt.getValidTgts(), aura.getActivatingPlayer(), source)) {
                         players.add(player);
                     }

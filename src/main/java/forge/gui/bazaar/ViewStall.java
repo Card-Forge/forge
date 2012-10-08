@@ -30,7 +30,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 import net.miginfocom.swing.MigLayout;
-import forge.AllZone;
+import forge.Singletons;
 import forge.control.bazaar.ControlStall;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
@@ -148,7 +148,7 @@ public class ViewStall extends JPanel {
      * new panels if necessary.
      */
     public void updateStall() {
-        final QuestController qData = AllZone.getQuest();
+        final QuestController qData = Singletons.getModel().getQuest();
         if (qData.getAssets() == null) {
             return;
         }

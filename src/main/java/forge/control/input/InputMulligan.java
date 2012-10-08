@@ -114,7 +114,7 @@ public class InputMulligan extends Input {
 
         final int newHand = this.doMulligan(humanPlayer, humanRating);
 
-        final QuestController quest = AllZone.getQuest();
+        final QuestController quest = Singletons.getModel().getQuest();
         if (quest.isLoaded() && quest.getAssets().hasItem(QuestItemType.SLEIGHT) && (humanRating.getMulliganCount() == 1)) {
             AllZone.getHumanPlayer().drawCard();
             humanRating.notifyOpeningHandSize(newHand + 1);
@@ -154,7 +154,7 @@ public class InputMulligan extends Input {
         ButtonUtil.reset();
         final AbilityFactory af = new AbilityFactory();
         
-        for (Player p : AllZone.getPlayersInGame()) {
+        for (Player p : Singletons.getModel().getGameState().getPlayers()) {
             final List<Card> openingHand = p.getCardsIn(ZoneType.Hand);
     
             for (final Card c : openingHand) {

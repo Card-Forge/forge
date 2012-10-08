@@ -27,7 +27,6 @@ import java.util.Random;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.AllZone;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.io.DeckSerializer;
@@ -116,11 +115,11 @@ public class QuestEventManager {
      */
     public final List<QuestEventDuel> generateDuels() {
         final QuestPreferences qpref = Singletons.getModel().getQuestPreferences();
-        if (AllZone.getQuest().getAchievements() == null) {
+        if (Singletons.getModel().getQuest().getAchievements() == null) {
             return null;
         }
 
-        final QuestController qCtrl = AllZone.getQuest();
+        final QuestController qCtrl = Singletons.getModel().getQuest();
         final int cntWins = qCtrl.getAchievements().getWin();
 
         final int index = qCtrl.getAchievements().getDifficulty();
@@ -164,7 +163,7 @@ public class QuestEventManager {
      * @return a {@link java.util.List} object.
      */
     public final List<QuestEventChallenge> generateChallenges() {
-        final QuestController qCtrl = AllZone.getQuest();
+        final QuestController qCtrl = Singletons.getModel().getQuest();
         final QuestAchievements achievements = qCtrl.getAchievements();
         final List<QuestEventChallenge> challengeOpponents = new ArrayList<QuestEventChallenge>();
         final List<Integer> unlockedChallengeIds = new ArrayList<Integer>();
@@ -212,11 +211,11 @@ public class QuestEventManager {
      * @return int
      */
     public int getTurnsToUnlockChallenge() {
-        if (AllZone.getQuest().getAssets().hasItem(QuestItemType.ZEPPELIN)) {
+        if (Singletons.getModel().getQuest().getAssets().hasItem(QuestItemType.ZEPPELIN)) {
             return 8;
         }
         // User may have MAP and ZEPPELIN, so MAP must be tested second.
-        else if (AllZone.getQuest().getAssets().hasItem(QuestItemType.MAP)) {
+        else if (Singletons.getModel().getQuest().getAssets().hasItem(QuestItemType.MAP)) {
             return 9;
         }
 

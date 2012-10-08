@@ -2977,7 +2977,7 @@ public final class AbilityFactoryChangeZone {
         // if Shuffle parameter exists, and any amount of cards were owned by
         // that player, then shuffle that library
         if (params.containsKey("Shuffle")) {
-            for( Player p : AllZone.getPlayersInGame()) {
+            for( Player p : Singletons.getModel().getGameState().getPlayers()) {
                 if (Iterables.any(cards, CardPredicates.isOwner(p))) {
                     p.shuffle();
                 }

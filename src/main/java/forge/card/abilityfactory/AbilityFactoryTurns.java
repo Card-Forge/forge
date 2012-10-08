@@ -521,7 +521,7 @@ public class AbilityFactoryTurns {
 
         // Update observers
         AllZone.getStack().updateObservers();
-        for (Player p : AllZone.getPlayersInGame()) {
+        for (Player p : Singletons.getModel().getGameState().getPlayers()) {
             p.updateObservers();
             p.updateLabelObservers();
         }

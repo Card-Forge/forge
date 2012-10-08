@@ -22,8 +22,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import forge.AllZone;
 import forge.Card;
+import forge.Singletons;
 import forge.game.GameSummary;
 import forge.game.GameType;
 import forge.game.player.Player;
@@ -184,7 +184,7 @@ public class FMatchState {
      * @since 1.2.3
      */
     public final void addAnteWonToCardPool() {
-        AllZone.getQuest().getCards().addAllCards(antesWon);
+        Singletons.getModel().getQuest().getCards().addAllCards(antesWon);
     }
 
     /**

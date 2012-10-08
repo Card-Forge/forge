@@ -73,7 +73,7 @@ class CardFactoryEnchantments {
                 @Override
                 public boolean canPlay() {
                     boolean haveGraveWithSomeCreatures = false;
-                    for( Player p : AllZone.getPlayersInGame()) {
+                    for( Player p : Singletons.getModel().getGameState().getPlayers()) {
                         Iterable<Card> grave = CardLists.filter(p.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
                         if( Iterables.size(grave) > 1)
                         {

@@ -14,7 +14,6 @@ import java.util.Map;
 
 import javax.swing.JOptionPane;
 
-import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
 import forge.gui.framework.ICDoc;
@@ -77,7 +76,7 @@ public enum CSubmenuQuestData implements ICDoc {
     public void update() {
         final VSubmenuQuestData view = VSubmenuQuestData.SINGLETON_INSTANCE;
         final File dirQuests = ForgeProps.getFile(NewConstants.Quest.DATA_DIR);
-        final QuestController qc = AllZone.getQuest();
+        final QuestController qc = Singletons.getModel().getQuest();
 
         // Temporary transition code between v1.2.2 and v1.2.3.
         // Can be safely deleted after release of 1.2.3.
@@ -175,8 +174,8 @@ public enum CSubmenuQuestData implements ICDoc {
         }
 
         // Give the user a few cards to build a deck
-        AllZone.getQuest().newGame(questName, difficulty, mode, startPool, rotatingFormat, startPrecon, view.getBoxPersist().isSelected());
-        AllZone.getQuest().save();
+        Singletons.getModel().getQuest().newGame(questName, difficulty, mode, startPool, rotatingFormat, startPrecon, view.getBoxPersist().isSelected());
+        Singletons.getModel().getQuest().save();
 
         // Save in preferences.
         Singletons.getModel().getQuestPreferences().setPreference(QPref.CURRENT_QUEST, questName + ".dat");
@@ -187,12 +186,12 @@ public enum CSubmenuQuestData implements ICDoc {
 
     /** Changes between quest data files. */
     private void changeQuest() {
-        AllZone.getQuest().load(VSubmenuQuestData.SINGLETON_INSTANCE
+        Singletons.getModel().getQuest().load(VSubmenuQuestData.SINGLETON_INSTANCE
                 .getLstQuests().getSelectedQuest());
 
         // Save in preferences.
         Singletons.getModel().getQuestPreferences().setPreference(QPref.CURRENT_QUEST,
-                AllZone.getQuest().getName() + ".dat");
+                Singletons.getModel().getQuest().getName() + ".dat");
         Singletons.getModel().getQuestPreferences().save();
 
         SSubmenuQuestUtil.updateStatsAndPet();

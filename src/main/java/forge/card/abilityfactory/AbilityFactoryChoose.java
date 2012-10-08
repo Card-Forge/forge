@@ -39,6 +39,7 @@ import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Constant;
+import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
@@ -1305,7 +1306,7 @@ public final class AbilityFactoryChoose {
         }
 
         final ArrayList<Player> choices = params.containsKey("Choices") ? AbilityFactory.getDefinedPlayers(
-                sa.getSourceCard(), params.get("Choices"), sa) : new ArrayList<Player>(AllZone.getPlayersInGame());
+                sa.getSourceCard(), params.get("Choices"), sa) : new ArrayList<Player>(Singletons.getModel().getGameState().getPlayers());
 
         final String choiceDesc = params.containsKey("ChoiceTitle") ? params.get("ChoiceTitle") : "Choose a player";
 

@@ -36,7 +36,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
-import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
 import forge.control.FControl;
@@ -424,7 +423,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
     private <T extends DeckBase> void editDeck(final Deck d0) {
         switch (this.gametype) {
             case Quest:
-                    final CEditorQuest qEditor = new CEditorQuest(AllZone.getQuest());
+                    final CEditorQuest qEditor = new CEditorQuest(Singletons.getModel().getQuest());
                     CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(qEditor);
                     FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_QUEST);
                 break;
@@ -472,8 +471,8 @@ public class DeckLister extends JPanel implements ILocalRepaint {
         } else if (this.gametype.equals(GameType.Sealed)) {
             deckManager.getSealed().delete(d0.getName());
         } else if (this.gametype.equals(GameType.Quest)) {
-            AllZone.getQuest().getMyDecks().delete(d0.getName());
-            AllZone.getQuest().save();
+            Singletons.getModel().getQuest().getMyDecks().delete(d0.getName());
+            Singletons.getModel().getQuest().save();
         } else {
             deckManager.getConstructed().delete(d0.getName());
         }

@@ -2225,7 +2225,7 @@ public class AbilityFactory {
                 players.add(sa.getActivatingPlayer().getOpponent());
             }
         } else {
-            for (Player p : AllZone.getPlayersInGame()) {
+            for (Player p : Singletons.getModel().getGameState().getPlayers()) {
                 if (p.isValid(defined, sa.getActivatingPlayer(), sa.getSourceCard())) {
                     players.add(p);
                 }

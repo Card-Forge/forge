@@ -68,7 +68,7 @@ public enum VPlayers implements IVDoc {
         final JPanel pnl = parentCell.getBody();
         pnl.setLayout(new MigLayout("insets 0, gap 0, wrap"));
 
-        final List<Player> players = AllZone.getPlayersInGame();
+        final List<Player> players = Singletons.getModel().getGameState().getPlayers();
         this.infoLBLs = new HashMap<Player, JLabel[]>();
 
         final String constraints = "w 97%!, gapleft 2%, gapbottom 1%";

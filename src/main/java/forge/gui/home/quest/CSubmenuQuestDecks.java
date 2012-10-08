@@ -2,7 +2,6 @@ package forge.gui.home.quest;
 
 import java.util.ArrayList;
 
-import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
 import forge.control.FControl;
@@ -49,7 +48,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
         VSubmenuQuestDecks.SINGLETON_INSTANCE.getBtnNewDeck().setCommand(new Command() {
             @Override
             public void execute() {
-                CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(new CEditorQuest(AllZone.getQuest()));
+                CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(new CEditorQuest(Singletons.getModel().getQuest()));
                 FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_QUEST);
             }
         });
@@ -61,7 +60,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
     @Override
     public void update() {
         final VSubmenuQuestDecks view = VSubmenuQuestDecks.SINGLETON_INSTANCE;
-        final QuestController qData = AllZone.getQuest();
+        final QuestController qData = Singletons.getModel().getQuest();
         boolean hasQuest = qData.getAssets() != null;
         // Retrieve and set all decks
         view.getLstDecks().setDecks(hasQuest ? qData.getMyDecks() : new ArrayList<Deck>());
@@ -108,7 +107,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
      */
     @Override
     public Command getCommandOnSelect() {
-        final QuestController qc = AllZone.getQuest();
+        final QuestController qc = Singletons.getModel().getQuest();
         return new Command() {
             @Override
             public void execute() {

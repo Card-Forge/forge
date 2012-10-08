@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import forge.AllZone;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.generate.Generate2ColorDeck;
@@ -126,7 +125,7 @@ public class GauntletDeckUtil {
      * @return {@link forge.deck.Deck}
      */
     public static Deck buildQuestDeck(final String[] selection) {
-        return AllZone.getQuest().getDuelsManager().getEvent(selection[0]).getEventDeck();
+        return Singletons.getModel().getQuest().getDuelsManager().getEvent(selection[0]).getEventDeck();
     }
 
     /** @return {@link forge.deck.Deck} */
@@ -160,7 +159,7 @@ public class GauntletDeckUtil {
     /** @return {@link forge.deck.Deck} */
     public static Deck getRandomQuestDeck() {
         final List<Deck> allQuestDecks = new ArrayList<Deck>();
-        final QuestEventManager manager = AllZone.getQuest().getDuelsManager();
+        final QuestEventManager manager = Singletons.getModel().getQuest().getDuelsManager();
 
         for (final QuestEvent e : manager.getAllDuels()) {
             allQuestDecks.add(e.getEventDeck());
@@ -228,7 +227,7 @@ public class GauntletDeckUtil {
             deck = Singletons.getModel().getDecks().getConstructed().get(deckName);
         }
         else {
-            deck = AllZone.getQuest().getDuelsManager().getEvent(deckName).getEventDeck();
+            deck = Singletons.getModel().getQuest().getDuelsManager().getEvent(deckName).getEventDeck();
         }
 
         // Dump into map and display.

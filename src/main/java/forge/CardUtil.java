@@ -627,7 +627,7 @@ public final class CardUtil {
             final Card src) {
         List<Card> res = new ArrayList<Card>();
         if (to != ZoneType.Stack) {
-            for (Player p : AllZone.getPlayersInGame())
+            for (Player p : Singletons.getModel().getGameState().getPlayers())
                 res.addAll(p.getZone(to).getCardsAddedThisTurn(from));
         } else {
             res.addAll(AllZone.getStackZone().getCardsAddedThisTurn(from));

@@ -16,7 +16,6 @@ import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
 
-import forge.AllZone;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.gui.deckeditor.VDeckEditorUI;
@@ -211,7 +210,7 @@ public enum FView {
 
     /** */
     private void cacheUIStates() {
-        FView.this.bazaar = new ViewBazaarUI(AllZone.getQuest().getBazaar());
+        FView.this.bazaar = new ViewBazaarUI(Singletons.getModel().getQuest().getBazaar());
         VMatchUI.SINGLETON_INSTANCE.instantiate();
         VHomeUI.SINGLETON_INSTANCE.instantiate();
         VDeckEditorUI.SINGLETON_INSTANCE.instantiate();

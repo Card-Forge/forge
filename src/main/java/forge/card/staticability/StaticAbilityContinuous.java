@@ -25,6 +25,7 @@ import java.util.List;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
+import forge.Singletons;
 
 import forge.CardLists;
 import forge.CardUtil;
@@ -407,7 +408,7 @@ public class StaticAbilityContinuous {
 
         final String[] strngs = params.get("Affected").split(",");
 
-        for(Player p : AllZone.getPlayersInGame())
+        for(Player p : Singletons.getModel().getGameState().getPlayers())
             if (p.isValid(strngs, controller, hostCard)) {
                 players.add(p);
             }

@@ -32,6 +32,7 @@ import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.GameActionUtil;
+import forge.Singletons;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
@@ -107,7 +108,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
                 final String[] k = keyword.split(":");
                 addMax = Integer.valueOf(k[2]);
                 if (k[1].equals("Each")) {
-                    for( Player p : AllZone.getPlayersInGame() ){
+                    for( Player p : Singletons.getModel().getGameState().getPlayers() ){
                         p.addMaxLandsToPlay(addMax);
                     }
                 } else {
@@ -220,7 +221,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
                 final String[] k = keyword.split(":");
                 addMax = -Integer.valueOf(k[2]);
                 if (k[1].equals("Each")) {
-                    for(Player p: AllZone.getPlayersInGame())
+                    for(Player p: Singletons.getModel().getGameState().getPlayers())
                         p.addMaxLandsToPlay(addMax);
                 } else {
                     c.getController().addMaxLandsToPlay(addMax);

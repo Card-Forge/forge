@@ -35,7 +35,6 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import forge.quest.QuestController;
 import forge.util.Aggregates;
 
 
@@ -57,9 +56,6 @@ public final class AllZone {
     private AllZone() {
         // blank
     }
-
-    /** Global <code>questData</code>. */
-    private static forge.quest.QuestController quest = null;
 
     /** Global <code>gauntletData</code>. */
     private static forge.game.limited.GauntletMini gauntlet = null;
@@ -111,30 +107,6 @@ public final class AllZone {
     public static Player getComputerPlayer() {
         List<Player> players = Singletons.getModel().getGameState().getPlayers();
         return Aggregates.firstFieldEquals(players, Player.Accessors.FN_GET_TYPE, PlayerType.COMPUTER);
-    }
-
-    /**
-     * get a list of all players participating in this game.
-     * 
-     * @return a list of all player participating in this game
-     */
-    public static List<Player> getPlayersInGame() {
-        return Singletons.getModel().getGameState().getPlayers();
-    }
-
-    /**
-     * <p>
-     * getQuestData.
-     * </p>
-     * 
-     * @return a {@link forge.quest.data.QuestData} object.
-     * @since 1.0.15
-     */
-    public static forge.quest.QuestController getQuest() {
-        if (null == quest) {
-            quest = new QuestController();
-        }
-        return AllZone.quest;
     }
 
     /**

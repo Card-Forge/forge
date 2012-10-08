@@ -57,11 +57,11 @@ public class SSubmenuQuestUtil {
      * @return a int.
      */
     public static int nextChallengeInWins() {
-        final QuestController qData = AllZone.getQuest();
+        final QuestController qData = Singletons.getModel().getQuest();
         final int challengesPlayed = qData.getAchievements().getChallengesPlayed();
 
         final int wins = qData.getAchievements().getWin();
-        final int turnsToUnlock = AllZone.getQuest().getChallengesManager().getTurnsToUnlockChallenge();
+        final int turnsToUnlock = Singletons.getModel().getQuest().getChallengesManager().getTurnsToUnlockChallenge();
         final int delta;
 
         // First challenge unlocks after minimum wins reached.
@@ -135,7 +135,7 @@ public class SSubmenuQuestUtil {
 
     /** Updates stats, pets panels for both duels and challenges. */
     public static void updateStatsAndPet() {
-        final QuestController qCtrl = AllZone.getQuest();
+        final QuestController qCtrl = Singletons.getModel().getQuest();
         final QuestAchievements qA = qCtrl.getAchievements();
         final QuestAssets qS = qCtrl.getAssets();
 
@@ -196,8 +196,8 @@ public class SSubmenuQuestUtil {
     public static Deck getCurrentDeck() {
         Deck d = null;
 
-        if (AllZone.getQuest().getAssets() != null) {
-            d = AllZone.getQuest().getMyDecks().get(
+        if (Singletons.getModel().getQuest().getAssets() != null) {
+            d = Singletons.getModel().getQuest().getMyDecks().get(
                 Singletons.getModel().getQuestPreferences().getPreference(QPref.CURRENT_DECK));
         }
 
@@ -207,7 +207,7 @@ public class SSubmenuQuestUtil {
     /** */
     public static void showSpellShop() {
         CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(
-                new CEditorQuestCardShop(AllZone.getQuest()));
+                new CEditorQuestCardShop(Singletons.getModel().getQuest()));
         FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_QUEST);
     }
 
@@ -219,7 +219,7 @@ public class SSubmenuQuestUtil {
 
     /** */
     public static void startGame() {
-        final QuestController qData = AllZone.getQuest();
+        final QuestController qData = Singletons.getModel().getQuest();
         final QuestEvent event = selectedOpponent.getEvent();
 
         SwingUtilities.invokeLater(new Runnable() {

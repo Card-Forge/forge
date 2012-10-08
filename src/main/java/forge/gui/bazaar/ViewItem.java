@@ -5,7 +5,6 @@ import java.awt.Font;
 import javax.swing.SwingUtilities;
 
 import net.miginfocom.swing.MigLayout;
-import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
 import forge.gui.toolbox.FLabel;
@@ -46,13 +45,13 @@ public class ViewItem extends FPanel {
         this.btnPurchase.setCommand(new Command() {
             @Override
             public void execute() {
-                final QuestAssets qA = AllZone.getQuest().getAssets();
+                final QuestAssets qA = Singletons.getModel().getQuest().getAssets();
                 final int cost = ViewItem.this.getItem().getBuyingPrice(qA);
                 if (cost >= 0 && (qA.getCredits() - cost) >= 0) {
                     qA.subtractCredits(cost);
                     qA.addCredits(ViewItem.this.getItem().getSellingPrice(qA));
                     ViewItem.this.getItem().onPurchase(qA);
-                    AllZone.getQuest().save();
+                    Singletons.getModel().getQuest().save();
                 }
                 Singletons.getView().getViewBazaar().refreshLastInstance();
             }
@@ -77,7 +76,7 @@ public class ViewItem extends FPanel {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                final QuestAssets qA = AllZone.getQuest().getAssets();
+                final QuestAssets qA = Singletons.getModel().getQuest().getAssets();
                 IQuestBazaarItem bazaarItem = ViewItem.this.getItem();
 
                 ViewItem.this.lblIcon.setIcon(bazaarItem.getIcon(qA));

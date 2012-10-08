@@ -160,7 +160,7 @@ public enum FControl {
         final String questname = Singletons.getModel().getQuestPreferences().getPreference(QPref.CURRENT_QUEST);
         final File data = new File(dirQuests.getPath(), questname);
         if (data.exists()) {
-            AllZone.getQuest().load(QuestDataIO.loadData(data));
+            Singletons.getModel().getQuest().load(QuestDataIO.loadData(data));
         }
 
         // Handles resizing in null layouts of layers in JLayeredPane.

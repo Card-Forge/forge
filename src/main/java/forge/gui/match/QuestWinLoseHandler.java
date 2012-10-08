@@ -100,7 +100,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         super(view0);
         this.view = view0;
         matchState = Singletons.getModel().getMatchState();
-        qData = AllZone.getQuest();
+        qData = Singletons.getModel().getQuest();
         qEvent = qData.getCurrentEvent();
         this.wonMatch = matchState.isMatchWonBy(AllZone.getHumanPlayer());
         this.isAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
@@ -173,7 +173,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
                 final List<CardPrinted> antesPrinted = Singletons.getModel().getMatchState().addAnteLost(antes);
                 for (final CardPrinted ante : antesPrinted) {
                     //the last param here (should) determine if this is added to the Card Shop
-                    AllZone.getQuest().getCards().sellCard(ante, 0, false);
+                    Singletons.getModel().getQuest().getCards().sellCard(ante, 0, false);
                 }
                 this.anteLost(antesPrinted);
             }

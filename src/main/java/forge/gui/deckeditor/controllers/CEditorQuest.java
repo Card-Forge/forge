@@ -26,7 +26,7 @@ import java.util.Map.Entry;
 import com.google.common.base.Function;
 import com.google.common.base.Supplier;
 
-import forge.AllZone;
+import forge.Singletons;
 import forge.deck.Deck;
 import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.SEditorUtil;
@@ -239,7 +239,7 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
     public boolean exit() {
         final boolean okToExit = SEditorIO.confirmSaveChanges();
         if (okToExit) {
-            AllZone.getQuest().save();
+            Singletons.getModel().getQuest().save();
             CSubmenuQuestDecks.SINGLETON_INSTANCE.update();
         }
         return okToExit;

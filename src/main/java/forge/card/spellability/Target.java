@@ -21,10 +21,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardUtil;
+import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -705,7 +705,7 @@ public class Target {
      * @return a boolean.
      */
     public final boolean hasCandidates(final SpellAbility sa, final boolean isTargeted) {
-        for (Player player : AllZone.getPlayersInGame()) {
+        for (Player player : Singletons.getModel().getGameState().getPlayers()) {
             if (sa.canTarget(player)) {
                 return true;
             }

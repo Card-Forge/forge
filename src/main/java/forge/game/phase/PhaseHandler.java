@@ -446,7 +446,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
                 AllZone.getEndOfTurn().executeUntil();
 
-                for (Player player : AllZone.getPlayersInGame()) {
+                for (Player player : Singletons.getModel().getGameState().getPlayers()) {
                     for (Card c : player.getCardsIn(ZoneType.Hand))
                         c.setDrawnThisTurn(false);
 
@@ -508,7 +508,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         }
         this.bPhaseEffects = true;
         if (!AllZoneUtil.isCardInPlay("Upwelling")) {
-            for (Player p : AllZone.getPlayersInGame()) {
+            for (Player p : Singletons.getModel().getGameState().getPlayers()) {
                 int burn = p.getManaPool().clearPool();
                 if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN)) {
                     p.loseLife(burn, null);
@@ -597,7 +597,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         AllZone.getStack().setCardsCastLastTurn();
         AllZone.getStack().clearCardsCastThisTurn();
         AllZone.resetZoneMoveTracking();
-        for( Player p : AllZone.getPlayersInGame() )
+        for( Player p : Singletons.getModel().getGameState().getPlayers() )
         {
             p.resetProwl();
             p.setLifeLostThisTurn(0);

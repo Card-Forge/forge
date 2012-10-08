@@ -2367,13 +2367,13 @@ public class CardFactoryUtil {
         // Count$HighestLifeTotal
         if (sq[0].contains("HighestLifeTotal")) {
             return CardFactoryUtil.doXMath(
-                    Aggregates.max(AllZone.getPlayersInGame(), Player.Accessors.FN_GET_LIFE), m, c);
+                    Aggregates.max(Singletons.getModel().getGameState().getPlayers(), Player.Accessors.FN_GET_LIFE), m, c);
         }
 
         // Count$LowestLifeTotal
         if (sq[0].contains("LowestLifeTotal")) {
             return CardFactoryUtil.doXMath(
-                    Aggregates.min(AllZone.getPlayersInGame(), Player.Accessors.FN_GET_LIFE), m, c);
+                    Aggregates.min(Singletons.getModel().getGameState().getPlayers(), Player.Accessors.FN_GET_LIFE), m, c);
         }
 
         // Count$TopOfLibraryCMC
@@ -2394,7 +2394,7 @@ public class CardFactoryUtil {
 
         // Count$LowestLibrary
         if (sq[0].contains("LowestLibrary")) {
-            return Aggregates.min(AllZone.getPlayersInGame(), Player.Accessors.countCardsInZone(ZoneType.Library));
+            return Aggregates.min(Singletons.getModel().getGameState().getPlayers(), Player.Accessors.countCardsInZone(ZoneType.Library));
         }
 
         // Count$Chroma.<mana letter>
@@ -2466,7 +2466,7 @@ public class CardFactoryUtil {
         }
 
         if (sq[0].contains("GraveyardWithGE20Cards")) {
-            if (Aggregates.max(AllZone.getPlayersInGame(), Player.Accessors.countCardsInZone(ZoneType.Graveyard)) >= 20) {
+            if (Aggregates.max(Singletons.getModel().getGameState().getPlayers(), Player.Accessors.countCardsInZone(ZoneType.Graveyard)) >= 20) {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c);
             } else {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c);

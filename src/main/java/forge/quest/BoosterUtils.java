@@ -28,7 +28,7 @@ import com.google.common.collect.Iterables;
 
 
 
-import forge.AllZone;
+import forge.Singletons;
 import forge.card.BoosterGenerator;
 import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
@@ -260,8 +260,8 @@ public final class BoosterUtils {
         };
         Predicate<CardPrinted> colorPred = Predicates.compose(col, CardPrinted.FN_GET_RULES);
         Predicate<CardPrinted> rarAndColor = Predicates.and(rar, colorPred);
-        if (AllZone.getQuest().getFormat() != null) {
-            rarAndColor = Predicates.and(AllZone.getQuest().getFormat().getFilterPrinted(), rarAndColor);
+        if (Singletons.getModel().getQuest().getFormat() != null) {
+            rarAndColor = Predicates.and(Singletons.getModel().getQuest().getFormat().getFilterPrinted(), rarAndColor);
         }
         return new UnOpenedProduct(openWay, new BoosterGenerator(rarAndColor)); // qty))
     }

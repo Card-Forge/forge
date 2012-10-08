@@ -4,8 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import forge.AllZone;
 import forge.Command;
+import forge.Singletons;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.CMainMenu;
@@ -51,7 +51,7 @@ public enum CSubmenuDuels implements ICDoc {
                     }
                 });
 
-        final QuestController quest = AllZone.getQuest();
+        final QuestController quest = Singletons.getModel().getQuest();
         view.getCbPlant().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -80,11 +80,11 @@ public enum CSubmenuDuels implements ICDoc {
 
         final VSubmenuDuels view = VSubmenuDuels.SINGLETON_INSTANCE;
 
-        if (AllZone.getQuest().getAchievements() != null) {
-            view.getLblTitle().setText("Duels: " + AllZone.getQuest().getRank());
+        if (Singletons.getModel().getQuest().getAchievements() != null) {
+            view.getLblTitle().setText("Duels: " + Singletons.getModel().getQuest().getRank());
 
             view.getPnlDuels().removeAll();
-            final List<QuestEventDuel> duels = AllZone.getQuest().getDuelsManager().generateDuels();
+            final List<QuestEventDuel> duels = Singletons.getModel().getQuest().getDuelsManager().generateDuels();
 
             for (final QuestEventDuel d : duels) {
                 final SelectablePanel temp = new SelectablePanel(d);
@@ -99,7 +99,7 @@ public enum CSubmenuDuels implements ICDoc {
     @SuppressWarnings("serial")
     @Override
     public Command getCommandOnSelect() {
-        final QuestController qc = AllZone.getQuest();
+        final QuestController qc = Singletons.getModel().getQuest();
         return new Command() {
             @Override
             public void execute() {

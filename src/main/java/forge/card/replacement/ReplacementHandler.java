@@ -103,7 +103,7 @@ public class ReplacementHandler {
         }
 
         // Round up Static replacement effects
-        for (final Player p : AllZone.getPlayersInGame()) {
+        for (final Player p : Singletons.getModel().getGameState().getPlayers()) {
             for (final Card crd : p.getAllCards()) {
                 for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
                     if (replacementEffect.requirementsCheck()) {

@@ -56,7 +56,7 @@ public abstract class AllZoneUtil {
         if (zone == ZoneType.Stack) {
             cards.addAll(AllZone.getStackZone().getCards());
         } else {
-            for (final Player p : AllZone.getPlayersInGame()) {
+            for (final Player p : Singletons.getModel().getGameState().getPlayers()) {
                 cards.addAll(p.getZone(zone).getCards());
             }
         }
@@ -219,7 +219,7 @@ public abstract class AllZoneUtil {
      */
     public static List<Card> getColorInPlay(final String color) {
         final List<Card> cards = new ArrayList<Card>();
-        for(Player p : AllZone.getPlayersInGame()) {
+        for(Player p : Singletons.getModel().getGameState().getPlayers()) {
             cards.addAll(getPlayerColorInPlay(p, color));
         }
         return cards;
@@ -313,7 +313,7 @@ public abstract class AllZoneUtil {
      */
     public static List<Card> getCardsInGame() {
         final List<Card> all = new ArrayList<Card>();
-        for (final Player player : AllZone.getPlayersInGame()) {
+        for (final Player player : Singletons.getModel().getGameState().getPlayers()) {
             all.addAll(player.getZone(ZoneType.Graveyard).getCards());
             all.addAll(player.getZone(ZoneType.Hand).getCards());
             all.addAll(player.getZone(ZoneType.Library).getCards());

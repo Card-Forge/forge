@@ -87,7 +87,7 @@ public enum CSubmenuConstructed implements ICDoc {
         }
     };
 
-    private final QuestController quest = AllZone.getQuest();
+    private final QuestController quest = Singletons.getModel().getQuest();
 
     static {
         COLOR_VALS.clear();

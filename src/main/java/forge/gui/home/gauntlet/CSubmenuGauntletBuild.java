@@ -17,7 +17,6 @@ import javax.swing.filechooser.FileFilter;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
@@ -185,7 +184,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
     /** Handles all control for "quest event" radio button click. */
     private void updateQuestDecks() {
         final List<String> eventNames = new ArrayList<String>();
-        QuestController quest = AllZone.getQuest();
+        QuestController quest = Singletons.getModel().getQuest();
 
         for (final QuestEvent e : quest.getDuelsManager().getAllDuels()) {
             eventNames.add(e.getEventDeck().getName());

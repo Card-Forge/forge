@@ -574,7 +574,7 @@ public class CardFactorySorceries {
     private final static void balanceLands(Spell card)
     {
         List<List<Card>> lands = new ArrayList<List<Card>>();
-        for (Player p : AllZone.getPlayersInGame())
+        for (Player p : Singletons.getModel().getGameState().getPlayers())
         {
             lands.add(AllZoneUtil.getPlayerLandsInPlay(p));
         }
@@ -585,7 +585,7 @@ public class CardFactorySorceries {
             min = Math.min(min, s);
         }
         Iterator<List<Card>> ll = lands.iterator();
-        for (Player p : AllZone.getPlayersInGame())
+        for (Player p : Singletons.getModel().getGameState().getPlayers())
         {
             List<Card> l = ll.next();
             int sac = l.size() - min;
@@ -603,7 +603,7 @@ public class CardFactorySorceries {
     
     private final static void balanceHands(Spell card) {
         List<List<Card>> hands = new ArrayList<List<Card>>();
-        for (Player p : AllZone.getPlayersInGame())
+        for (Player p : Singletons.getModel().getGameState().getPlayers())
         {
             hands.add(p.getCardsIn(ZoneType.Hand));
         }
@@ -613,7 +613,7 @@ public class CardFactorySorceries {
             min = Math.min(min, s);
         }
         Iterator<List<Card>> hh = hands.iterator();
-        for (Player p : AllZone.getPlayersInGame())
+        for (Player p : Singletons.getModel().getGameState().getPlayers())
         {
             List<Card> h = hh.next();
             int sac = h.size() - min;
@@ -624,7 +624,7 @@ public class CardFactorySorceries {
     
     private final static void balanceCreatures(Spell card) {
         List<List<Card>> creats = new ArrayList<List<Card>>();
-        for (Player p : AllZone.getPlayersInGame())
+        for (Player p : Singletons.getModel().getGameState().getPlayers())
         {
             creats.add(AllZoneUtil.getCreaturesInPlay(p));
         }
@@ -634,7 +634,7 @@ public class CardFactorySorceries {
             min = Math.min(min, s);
         }
         Iterator<List<Card>> cc = creats.iterator();
-        for (Player p : AllZone.getPlayersInGame())
+        for (Player p : Singletons.getModel().getGameState().getPlayers())
         {
             List<Card> c = cc.next();
             int sac = c.size() - min;
@@ -774,12 +774,12 @@ public class CardFactorySorceries {
             @Override
             public void resolve() {
                 int max = Integer.MIN_VALUE;
-                for (Player p : AllZone.getPlayersInGame())
+                for (Player p : Singletons.getModel().getGameState().getPlayers())
                 {
                     int s = p.getZone(ZoneType.Hand).size();
                     max = Math.max(max, s);
                 }
-                for (Player p : AllZone.getPlayersInGame())
+                for (Player p : Singletons.getModel().getGameState().getPlayers())
                 {
                     this.discardDraw(p, max);
                 }
@@ -800,7 +800,7 @@ public class CardFactorySorceries {
             @Override
             public void resolve() {
                 List<String> types = new ArrayList<String>();
-                for(Player p : AllZone.getPlayersInGame()) {
+                for(Player p : Singletons.getModel().getGameState().getPlayers()) {
                     if ( p.isHuman() ) {
                          types.add(GuiChoose.one("Which creature type?", Constant.CardTypes.CREATURE_TYPES));
                     } else {
@@ -1306,7 +1306,7 @@ public class CardFactorySorceries {
                     List<Card> grave = card.getController().getCardsIn(ZoneType.Graveyard);
                     grave = CardLists.filter(grave, Presets.CREATURES);
 
-                    for (Player p : AllZone.getPlayersInGame()) {
+                    for (Player p : Singletons.getModel().getGameState().getPlayers()) {
                         if (p.canBeTargetedBy(spell)) {
                             display.add("Target player loses X life");
                             break;

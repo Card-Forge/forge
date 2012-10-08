@@ -174,7 +174,7 @@ public class GameNew {
 
         // Shuffling
         final boolean smoothLand = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SMOOTH_LAND);
-        for( Player player : AllZone.getPlayersInGame() ) 
+        for( Player player : Singletons.getModel().getGameState().getPlayers() ) 
         {
             if ( player.isHuman() ) {
                 for (int i = 0; i < 100; i++) {
@@ -200,7 +200,7 @@ public class GameNew {
         if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
             final String nl = System.getProperty("line.separator");
             final StringBuilder msg = new StringBuilder();
-            for (final Player p : AllZone.getPlayersInGame()) {
+            for (final Player p : Singletons.getModel().getGameState().getPlayers()) {
                 final List<Card> lib = p.getCardsIn(ZoneType.Library);
                 Predicate<Card> goodForAnte = Predicates.not(CardPredicates.Presets.BASIC_LANDS);
                 Card ante = Aggregates.random(Iterables.filter(lib, goodForAnte));
@@ -229,7 +229,7 @@ public class GameNew {
 
 
         // Draw 7 cards 
-        for (final Player p : AllZone.getPlayersInGame())
+        for (final Player p : Singletons.getModel().getGameState().getPlayers())
         {
             for (int i = 0; i < 7; i++) {
                 p.drawCard();

@@ -798,7 +798,7 @@ public class AbilityFactoryPreventDamage {
         }
 
         if (!players.equals("")) {
-            final ArrayList<Player> playerList = new ArrayList<Player>(AllZone.getPlayersInGame());
+            final ArrayList<Player> playerList = new ArrayList<Player>(Singletons.getModel().getGameState().getPlayers());
             for (final Player p : playerList) {
                 if (p.isValid(players, source.getController(), source)) {
                     p.addPreventNextDamage(numDam);

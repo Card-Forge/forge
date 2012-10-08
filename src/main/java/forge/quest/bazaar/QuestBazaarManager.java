@@ -41,7 +41,7 @@ import org.xml.sax.SAXException;
 
 import com.thoughtworks.xstream.XStream;
 
-import forge.AllZone;
+import forge.Singletons;
 import forge.quest.QuestController;
 import forge.quest.data.QuestAssets;
 import forge.util.IgnoringXStream;
@@ -173,7 +173,7 @@ public class QuestBazaarManager {
 
         final List<IQuestBazaarItem> ret = new ArrayList<IQuestBazaarItem>();
 
-        QuestAssets qA = AllZone.getQuest().getAssets();
+        QuestAssets qA = Singletons.getModel().getQuest().getAssets();
         for (final IQuestBazaarItem purchasable : itemsOnStalls.get(stallName)) {
             if (purchasable.isAvailableForPurchase(qA)) {
                 ret.add(purchasable);

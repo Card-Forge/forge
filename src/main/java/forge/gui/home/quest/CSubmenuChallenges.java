@@ -8,7 +8,6 @@ import java.util.List;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
 import forge.gui.framework.EDocID;
@@ -55,8 +54,8 @@ public enum CSubmenuChallenges implements ICDoc {
                 new Command() {
                     @Override
                     public void execute() {
-                        AllZone.getQuest().getAchievements().setCurrentChallenges(null);
-                        AllZone.getQuest().getAssets().setItemLevel(QuestItemType.ZEPPELIN, 2);
+                        Singletons.getModel().getQuest().getAchievements().setCurrentChallenges(null);
+                        Singletons.getModel().getQuest().getAssets().setItemLevel(QuestItemType.ZEPPELIN, 2);
                         update();
                     }
                 });
@@ -68,7 +67,7 @@ public enum CSubmenuChallenges implements ICDoc {
                     }
                 });
 
-        final QuestController quest = AllZone.getQuest();
+        final QuestController quest = Singletons.getModel().getQuest();
         view.getCbPlant().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent arg0) {
@@ -96,7 +95,7 @@ public enum CSubmenuChallenges implements ICDoc {
         SSubmenuQuestUtil.updateStatsAndPet();
 
         final VSubmenuChallenges view = VSubmenuChallenges.SINGLETON_INSTANCE;
-        final QuestController qCtrl = AllZone.getQuest();
+        final QuestController qCtrl = Singletons.getModel().getQuest();
 
         if (qCtrl.getAchievements() != null) {
             view.getLblTitle().setText("Challenges: " + qCtrl.getRank());
@@ -130,7 +129,7 @@ public enum CSubmenuChallenges implements ICDoc {
     @SuppressWarnings("serial")
     @Override
     public Command getCommandOnSelect() {
-        final QuestController qc = AllZone.getQuest();
+        final QuestController qc = Singletons.getModel().getQuest();
         return new Command() {
             @Override
             public void execute() {

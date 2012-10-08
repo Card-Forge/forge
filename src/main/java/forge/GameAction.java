@@ -412,7 +412,7 @@ public class GameAction {
         }
 
         AllZone.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        for (Player p: AllZone.getPlayersInGame()) {
+        for (Player p: Singletons.getModel().getGameState().getPlayers()) {
             ((PlayerZoneBattlefield)p.getZone(ZoneType.Battlefield)).setTriggers(false);
         }
 
@@ -433,7 +433,7 @@ public class GameAction {
         AllZone.getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams);
 
         AllZone.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-        for (Player p: AllZone.getPlayersInGame()) {
+        for (Player p: Singletons.getModel().getGameState().getPlayers()) {
             ((PlayerZoneBattlefield)p.getZone(ZoneType.Battlefield)).setTriggers(true);
         }
     }
