@@ -121,6 +121,14 @@ Fixes/Features:
 - remove warnings, use FileUtil to read text files
 - Renamed TableModel to less confusing EditorTableModel.
 - Added the recent commit logs to changes.txt.
+- Bugfix: "Double-click for decklist" crash on random generated decks (colors and themes).
+- Further standardized messages and font sizes.
+- A little checkstyle.
+- removed NameChanger.java
+- removed warnings, 
+- remoevd AllZone.getXXXplayer calls
+- add a check to ignore .svn directories
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
