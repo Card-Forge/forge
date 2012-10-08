@@ -152,7 +152,7 @@ public class GauntletDeckUtil {
     /** @return {@link forge.deck.Deck} */
     public static Deck getRandomCustomDeck() {
         final IStorage<Deck> allDecks = Singletons.getModel().getDecks().getConstructed();
-        final int rand = (int) (Math.round(Math.random() * allDecks.getCount()));
+        final int rand = (int) (Math.floor(Math.random() * allDecks.getCount()));
         final String name = allDecks.getNames().toArray(new String[0])[rand];
         return allDecks.get(name);
     }
@@ -170,7 +170,7 @@ public class GauntletDeckUtil {
             allQuestDecks.add(e.getEventDeck());
         }
 
-        final int rand = (int) (Math.round(Math.random() * allQuestDecks.size()));
+        final int rand = (int) (Math.floor(Math.random() * allQuestDecks.size()));
         return allQuestDecks.get(rand);
     }
 
