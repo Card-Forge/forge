@@ -62,7 +62,8 @@ class CardFactoryEnchantments {
             final SpellAbility nightSoil = new Ability(card, "1") {
                 @Override
                 public void resolve() {
-                    CardFactoryUtil.makeTokenSaproling(card.getController());
+                    CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", card.getController(), "G", new String[] { "Creature",
+                    "Saproling" }, 1, 1, new String[] { "" });
                 }
 
                 @Override

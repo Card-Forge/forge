@@ -86,8 +86,7 @@ public class CardFactoryInstants {
                     Player human = this.getActivatingPlayer().getOpponent();
                     List<Card> humanCards = human.getCardsIn(ZoneType.Battlefield);
                     this.getTarget().resetTargets();
-                    this.setTargetPlayer(human);
-                    return Iterables.any(humanCards, CardPredicates.Presets.ARTIFACTS);
+                    return ComputerUtil.targetHumanAI(this) && Iterables.any(humanCards, CardPredicates.Presets.ARTIFACTS);
                 } //canPlayAI
 
                 @Override
@@ -267,8 +266,7 @@ public class CardFactoryInstants {
 
                     final int maxX = ComputerUtil.getAvailableMana(ai, true).size() - 1;
                     this.getTarget().resetTargets();
-                    this.setTargetPlayer(opp);
-                    return (maxX >= 3) && !opp.getZone(ZoneType.Graveyard).isEmpty();
+                    return ComputerUtil.targetHumanAI(this) && (maxX >= 3) && !opp.getZone(ZoneType.Graveyard).isEmpty();
                 }
             };
 

@@ -1348,31 +1348,6 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * inputEquipCreature.
-     * </p>
-     * 
-     * @param equip
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public static Input inputEquipCreature(final SpellAbility equip) {
-        final Input runtime = new Input() {
-            private static final long serialVersionUID = 2029801495067540196L;
-
-            @Override
-            public void showMessage() {
-                // get all creatures you control
-                final List<Card> list = AllZoneUtil.getCreaturesInPlay(Singletons.getControl().getPlayer());
-
-                this.stopSetNext(CardFactoryUtil.inputTargetSpecific(equip, list, "Select target creature to equip",
-                        true, false));
-            }
-        }; // Input
-        return runtime;
-    }
-
-    /**
-     * <p>
      * masterOfTheWildHuntInputTargetCreature.
      * </p>
      * 
@@ -1460,28 +1435,6 @@ public class CardFactoryUtil {
             }
         };
         return modularInput;
-    }
-
-    /**
-     * <p>
-     * getNumberOfPermanentsByColor.
-     * </p>
-     * 
-     * @param color
-     *            a {@link java.lang.String} object.
-     * @return a int.
-     */
-    public static int getNumberOfPermanentsByColor(final String color) {
-        final List<Card> cards = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
-
-        final List<Card> coloredPerms = new ArrayList<Card>();
-
-        for (int i = 0; i < cards.size(); i++) {
-            if (CardUtil.getColors(cards.get(i)).contains(color)) {
-                coloredPerms.add(cards.get(i));
-            }
-        }
-        return coloredPerms.size();
     }
 
     /**
@@ -3213,20 +3166,6 @@ public class CardFactoryUtil {
 
     /**
      * <p>
-     * makeTokenSaproling.
-     * </p>
-     * 
-     * @param controller
-     *            a {@link forge.game.player.Player} object.
-     * @return a {@link forge.CardList} object.
-     */
-    public static List<Card> makeTokenSaproling(final Player controller) {
-        return CardFactoryUtil.makeToken("Saproling", "G 1 1 Saproling", controller, "G", new String[] { "Creature",
-                "Saproling" }, 1, 1, new String[] { "" });
-    }
-
-    /**
-     * <p>
      * makeToken.
      * </p>
      * 
@@ -3255,9 +3194,6 @@ public class CardFactoryUtil {
         final Card c = new Card();
         c.setName(name);
         c.setImageName(imageName);
-
-        // c.setController(controller);
-        // c.setOwner(controller);
 
         // TODO - most tokens mana cost is 0, this needs to be fixed
         // c.setManaCost(manaCost);
