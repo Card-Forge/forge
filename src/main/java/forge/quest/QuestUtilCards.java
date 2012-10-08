@@ -468,7 +468,11 @@ public final class QuestUtilCards {
         this.generatePreconsInShop(totalPacks);
         this.generateTournamentsInShop(totalPacks);
         this.generateFatPacksInShop(totalPacks);
-        this.qa.getShopList().addAll(QuestUtilCards.generateBasicLands(10, 5));
+        int numberSnowLands = 5;
+        if (qc.getFormat() != null && !qc.getFormat().hasSnowLands()) {
+            numberSnowLands = 0;
+        }
+        this.qa.getShopList().addAll(QuestUtilCards.generateBasicLands(10, numberSnowLands));
     }
 
     /**

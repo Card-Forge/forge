@@ -204,6 +204,15 @@ public final class GameFormatQuest {
     public boolean isSetLegal(final String setCode) {
         return this.allowedSetCodes.isEmpty() || this.allowedSetCodes.contains(setCode);
     }
+    
+    /**
+     * Checks if the current format contains sets with snow-land (horrible hack...)
+     * @return boolean, contains snow-land sets.
+     * 
+     */
+    public boolean hasSnowLands() {
+        return (this.isSetLegal("ICE") || this.isSetLegal("CSP"));
+    }
 
     /*
      * (non-Javadoc)
