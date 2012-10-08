@@ -38,6 +38,8 @@ public class GauntletIO {
     public static final String REGEX_QUICK = "^" + GauntletIO.PREFIX_QUICK + "[0-9]+\\.dat$";
     /** Regex for locked gauntlet save files. */
     public static final String REGEX_LOCKED = "^LOCKED_.+\\.dat$";
+    /** Regex for Subversion files. */
+    public static final String SVN_IGNORE = "^\\.svn$";
 
     /**
      * Gets the serializer.
@@ -57,7 +59,8 @@ public class GauntletIO {
     public static File[] getGauntletFilesUnlocked() {
         final FilenameFilter filter = new FilenameFilter() {
             public boolean accept(File dir, String name) {
-                return !name.matches(GauntletIO.REGEX_LOCKED);
+                return (!name.matches(GauntletIO.REGEX_LOCKED)
+                        && !name.matches(GauntletIO.SVN_IGNORE));
             }
         };
 
@@ -69,7 +72,8 @@ public class GauntletIO {
     public static File[] getGauntletFilesQuick() {
         final FilenameFilter filter = new FilenameFilter() {
             public boolean accept(File dir, String name) {
-                return name.matches(GauntletIO.REGEX_QUICK);
+                return (name.matches(GauntletIO.REGEX_QUICK)
+                        && !name.matches(GauntletIO.SVN_IGNORE));
             }
         };
 
@@ -81,7 +85,8 @@ public class GauntletIO {
     public static File[] getGauntletFilesLocked() {
         final FilenameFilter filter = new FilenameFilter() {
             public boolean accept(File dir, String name) {
-                return name.matches(GauntletIO.REGEX_LOCKED);
+                return (name.matches(GauntletIO.REGEX_LOCKED)
+                        && !name.matches(GauntletIO.SVN_IGNORE));
             }
         };
 
