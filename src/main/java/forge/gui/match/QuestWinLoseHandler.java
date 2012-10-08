@@ -24,6 +24,7 @@ import forge.Singletons;
 import forge.control.FControl;
 
 import forge.card.BoosterData;
+import forge.card.CardEdition;
 import forge.card.UnOpenedProduct;
 import forge.game.GameEndReason;
 import forge.game.GameFormat;
@@ -632,11 +633,15 @@ public class QuestWinLoseHandler extends ControlWinLose {
             }
 
             final String setPrompt = "Choose bonus booster set:";
-            final String chSet = GuiChoose.one(setPrompt, chooseSets);
+            List<CardEdition> chooseEditions = new ArrayList<CardEdition>();
+            for (String ed : chooseSets) {
+                chooseEditions.add(Singletons.getModel().getEditions().get(ed));
+            }
+            final CardEdition chooseEd = GuiChoose.one(setPrompt, chooseEditions);
 
-            cardsWon = (new UnOpenedProduct(Singletons.getModel().getBoosters().get(chSet))).open();
+            cardsWon = (new UnOpenedProduct(Singletons.getModel().getBoosters().get(chooseEd.getCode()))).open();
             qData.getCards().addAllCards(cardsWon);
-            this.lblTemp1 = new TitleLabel("Bonus \"" + chSet + "\" booster pack!");
+            this.lblTemp1 = new TitleLabel("Bonus " + chooseEd.getName() + " booster pack!");
         }
 
         if (cardsWon != null) {
