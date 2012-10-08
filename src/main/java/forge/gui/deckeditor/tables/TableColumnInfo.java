@@ -26,7 +26,7 @@ import com.google.common.base.Function;
 import forge.gui.deckeditor.tables.SColumnUtil.SortState;
 
 /**
- * A column object in a TableModel in the card editor.
+ * A column object in a EditorTableModel in the card editor.
  * Requires a sorting function and a display function
  * (to extract information as appropriate for table row data).
  * 
@@ -84,7 +84,7 @@ public class TableColumnInfo<T> extends TableColumn {
         this.sortPriority = position0;
     }
 
-    /** @return {@link forge.gui.deckeditor.tables.TableModel.SortState} */
+    /** @return {@link forge.gui.deckeditor.tables.EditorTableModel.SortState} */
     public SortState getSortState() {
         return this.sortstate;
     }

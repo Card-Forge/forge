@@ -46,9 +46,9 @@ import forge.util.Aggregates;
  * @param <T>
  *            the generic type
  */
-public final class TableView<T extends InventoryItem> {
+public final class EditorTableView<T extends InventoryItem> {
     private ItemPool<T> pool;
-    private TableModel<T> model;
+    private EditorTableModel<T> model;
     private final JTable table = new JTable();
     private Predicate<T> filter = null;
     private boolean wantUnique = false;
@@ -71,7 +71,7 @@ public final class TableView<T extends InventoryItem> {
      * @param cls
      *            the cls
      */
-    public TableView(final Class<T> cls) {
+    public EditorTableView(final Class<T> cls) {
         this(false, cls);
     }
 
@@ -82,7 +82,7 @@ public final class TableView<T extends InventoryItem> {
      *            a boolean
      * @param type0 the cls
      */
-    public TableView(final boolean forceUnique, final Class<T> type0) {
+    public EditorTableView(final boolean forceUnique, final Class<T> type0) {
         this.genericType = type0;
         this.wantUnique = forceUnique;
 
@@ -93,7 +93,7 @@ public final class TableView<T extends InventoryItem> {
     }
 
     /**
-     * Applies a TableModel and a model listener to this instance's JTable.
+     * Applies a EditorTableModel and a model listener to this instance's JTable.
      * 
      * @param view0 &emsp; the {@link javax.gui.deckeditor.views.ITableCOntainer}
      * @param cols0 &emsp; List<TableColumnInfo<InventoryItem>> of additional columns for this
@@ -107,7 +107,7 @@ public final class TableView<T extends InventoryItem> {
             if (item.isShowing()) { colmodel.addColumn(item); }
         }
 
-        this.model = new TableModel<T>(this.table, this.genericType);
+        this.model = new EditorTableModel<T>(this.table, this.genericType);
         this.model.addListeners();
         this.table.setModel(this.model);
         this.table.setColumnModel(colmodel);
@@ -121,7 +121,7 @@ public final class TableView<T extends InventoryItem> {
         this.model.addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(final TableModelEvent ev) {
-                final List<T> deck = TableView.this.model.getCards().toFlatList();
+                final List<T> deck = EditorTableView.this.model.getCards().toFlatList();
                 final ItemPool<T> filteredDeck = new ItemPool<T>((Class<T>) CardPrinted.class);
 
                 // Filter out non-card items (booster packs, etc.)

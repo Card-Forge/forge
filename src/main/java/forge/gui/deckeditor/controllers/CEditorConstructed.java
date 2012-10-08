@@ -29,7 +29,7 @@ import forge.gui.deckeditor.tables.DeckController;
 import forge.gui.deckeditor.tables.SColumnUtil;
 import forge.gui.deckeditor.tables.SColumnUtil.ColumnName;
 import forge.gui.deckeditor.tables.TableColumnInfo;
-import forge.gui.deckeditor.tables.TableView;
+import forge.gui.deckeditor.tables.EditorTableView;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.EDocID;
@@ -61,8 +61,8 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
     public CEditorConstructed() {
         super();
 
-        final TableView<CardPrinted> tblCatalog = new TableView<CardPrinted>(true, CardPrinted.class);
-        final TableView<CardPrinted> tblDeck = new TableView<CardPrinted>(true, CardPrinted.class);
+        final EditorTableView<CardPrinted> tblCatalog = new EditorTableView<CardPrinted>(true, CardPrinted.class);
+        final EditorTableView<CardPrinted> tblDeck = new EditorTableView<CardPrinted>(true, CardPrinted.class);
 
         VCardCatalog.SINGLETON_INSTANCE.setTableView(tblCatalog.getTable());
         VCurrentDeck.SINGLETON_INSTANCE.setTableView(tblDeck.getTable());

@@ -278,7 +278,7 @@ public final class SColumnUtil {
 
     /**
      * Convenience method to get a column's index in the model (that is,
-     * in the TableModel, NOT the TableColumnModel).
+     * in the EditorTableModel, NOT the TableColumnModel).
      * 
      * @param id0 &emsp; {@link forge.gui.deckeditor.SEditorUtil.CatalogColumnName}
      * @return int

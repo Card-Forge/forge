@@ -52,7 +52,7 @@ import forge.item.ItemPoolView;
 
 /**
  * <p>
- * TableModel class.
+ * EditorTableModel class.
  * </p>
  * 
  * @param <T>
@@ -61,7 +61,7 @@ import forge.item.ItemPoolView;
  * @version $Id$
  */
 @SuppressWarnings("serial")
-public final class TableModel<T extends InventoryItem> extends AbstractTableModel {
+public final class EditorTableModel<T extends InventoryItem> extends AbstractTableModel {
     private final ItemPool<T> data;
     private final JTable table;
     private final CascadeManager cascadeManager = new CascadeManager();
@@ -74,7 +74,7 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
      * @param table0 &emsp; {@link javax.swing.JTable}
      * @param class0 &emsp; Generic type <T>
      */
-    public TableModel(final JTable table0, final Class<T> class0) {
+    public EditorTableModel(final JTable table0, final Class<T> class0) {
         this.table = table0;
         this.data = new ItemPool<T>(class0);
     }
@@ -213,7 +213,7 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
 
             @Override
             public void valueChanged(final ListSelectionEvent arg0) {
-                TableModel.this.showSelectedCard(table);
+                EditorTableModel.this.showSelectedCard(table);
             }
         });
         table.addFocusListener(new FocusListener() {
@@ -224,7 +224,7 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
 
             @Override
             public void focusGained(final FocusEvent e) {
-                TableModel.this.showSelectedCard(table);
+                EditorTableModel.this.showSelectedCard(table);
             }
         });
 
@@ -252,7 +252,7 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
 
     @SuppressWarnings("unchecked")
     private void headerClicked(final MouseEvent e) {
-        final TableColumnModel colModel = TableModel.this.table.getColumnModel();
+        final TableColumnModel colModel = EditorTableModel.this.table.getColumnModel();
         final int columnModelIndex = colModel.getColumnIndexAtX(e.getX());
         final int modelIndex = colModel.getColumn(columnModelIndex).getModelIndex();
 
@@ -263,11 +263,11 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
         // This will invert if needed
         // 2012/07/21 - Changed from modelIndex to ColumnModelIndex due to a crash
         // Crash was: Hide 2 columns, then search by last column.
-        TableModel.this.cascadeManager.add((TableColumnInfo<T>) this.table.getColumnModel().getColumn(columnModelIndex));
-        TableModel.this.refreshSort();
-        TableModel.this.table.tableChanged(new TableModelEvent(TableModel.this));
-        TableModel.this.table.repaint();
-        TableModel.this.table.setRowSelectionInterval(0, 0);
+        EditorTableModel.this.cascadeManager.add((TableColumnInfo<T>) this.table.getColumnModel().getColumn(columnModelIndex));
+        EditorTableModel.this.refreshSort();
+        EditorTableModel.this.table.tableChanged(new TableModelEvent(EditorTableModel.this));
+        EditorTableModel.this.table.repaint();
+        EditorTableModel.this.table.setRowSelectionInterval(0, 0);
         SEditorIO.savePreferences();
     }
 
@@ -384,7 +384,7 @@ public final class TableModel<T extends InventoryItem> extends AbstractTableMode
         @SuppressWarnings("unchecked")
         @Override
         public int compare(Entry<T, Integer> o1, Entry<T, Integer> o2) {
-            return TableModel.this.cascadeManager.getSorter().compare(
+            return EditorTableModel.this.cascadeManager.getSorter().compare(
                     (Entry<InventoryItem, Integer>) o1, (Entry<InventoryItem, Integer>) o2);
         }
     }

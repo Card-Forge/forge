@@ -19,7 +19,7 @@ package forge.gui.deckeditor.controllers;
 
 import forge.deck.DeckBase;
 import forge.gui.deckeditor.tables.DeckController;
-import forge.gui.deckeditor.tables.TableView;
+import forge.gui.deckeditor.tables.EditorTableView;
 import forge.item.InventoryItem;
 
 /**
@@ -39,8 +39,8 @@ import forge.item.InventoryItem;
  */
 public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends DeckBase> {
 
-    private TableView<TItem> tblCatalog;
-    private TableView<TItem> tblDeck;
+    private EditorTableView<TItem> tblCatalog;
+    private EditorTableView<TItem> tblDeck;
     /** 
      * Operation to add one of selected card to current deck.
      */
@@ -77,38 +77,38 @@ public abstract class ACEditorBase<TItem extends InventoryItem, TModel extends D
     public abstract void init();
 
     /**
-     * Gets the TableView holding the cards in the current deck.
+     * Gets the EditorTableView holding the cards in the current deck.
      * 
-     * @return {@link forge.gui.deckeditor.tables.TableView}
+     * @return {@link forge.gui.deckeditor.tables.EditorTableView}
      */
-    public TableView<TItem> getTableDeck() {
+    public EditorTableView<TItem> getTableDeck() {
         return this.tblDeck;
     }
 
     /**
-     * Sets the TableView holding the cards in the current deck.
+     * Sets the EditorTableView holding the cards in the current deck.
      * 
-     * @param table0 &emsp; {@link forge.gui.deckeditor.tables.TableView}
+     * @param table0 &emsp; {@link forge.gui.deckeditor.tables.EditorTableView}
      */
-    public void setTableDeck(final TableView<TItem> table0) {
+    public void setTableDeck(final EditorTableView<TItem> table0) {
         this.tblDeck = table0;
     }
 
     /**
-     * Gets the TableView holding the cards in the current catalog.
+     * Gets the EditorTableView holding the cards in the current catalog.
      * 
-     * @return {@link forge.gui.deckeditor.tables.TableView}
+     * @return {@link forge.gui.deckeditor.tables.EditorTableView}
      */
-    public TableView<TItem> getTableCatalog() {
+    public EditorTableView<TItem> getTableCatalog() {
         return this.tblCatalog;
     }
 
     /**
-     * Sets the TableView holding the cards in the current catalog.
+     * Sets the EditorTableView holding the cards in the current catalog.
      * 
-     * @param table0 &emsp; {@link forge.gui.deckeditor.tables.TableView}
+     * @param table0 &emsp; {@link forge.gui.deckeditor.tables.EditorTableView}
      */
-    public void setTableCatalog(final TableView<TItem> table0) {
+    public void setTableCatalog(final EditorTableView<TItem> table0) {
         this.tblCatalog = table0;
     }
 

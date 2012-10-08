@@ -38,7 +38,7 @@ import forge.gui.deckeditor.tables.DeckController;
 import forge.gui.deckeditor.tables.SColumnUtil;
 import forge.gui.deckeditor.tables.SColumnUtil.ColumnName;
 import forge.gui.deckeditor.tables.TableColumnInfo;
-import forge.gui.deckeditor.tables.TableView;
+import forge.gui.deckeditor.tables.EditorTableView;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.home.quest.CSubmenuQuestDecks;
@@ -96,8 +96,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     public CEditorQuestCardShop(final QuestController qd) {
         this.questData = qd;
 
-        final TableView<InventoryItem> tblCatalog = new TableView<InventoryItem>(false, InventoryItem.class);
-        final TableView<InventoryItem> tblDeck = new TableView<InventoryItem>(false, InventoryItem.class);
+        final EditorTableView<InventoryItem> tblCatalog = new EditorTableView<InventoryItem>(false, InventoryItem.class);
+        final EditorTableView<InventoryItem> tblDeck = new EditorTableView<InventoryItem>(false, InventoryItem.class);
 
         VCardCatalog.SINGLETON_INSTANCE.setTableView(tblCatalog.getTable());
         VCurrentDeck.SINGLETON_INSTANCE.setTableView(tblDeck.getTable());

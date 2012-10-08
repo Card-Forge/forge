@@ -34,7 +34,7 @@ import forge.gui.deckeditor.tables.DeckController;
 import forge.gui.deckeditor.tables.SColumnUtil;
 import forge.gui.deckeditor.tables.SColumnUtil.ColumnName;
 import forge.gui.deckeditor.tables.TableColumnInfo;
-import forge.gui.deckeditor.tables.TableView;
+import forge.gui.deckeditor.tables.EditorTableView;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.home.quest.CSubmenuQuestDecks;
@@ -88,8 +88,8 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
     public CEditorQuest(final QuestController questData0) {
         this.questData = questData0;
 
-        final TableView<CardPrinted> tblCatalog = new TableView<CardPrinted>(false, CardPrinted.class);
-        final TableView<CardPrinted> tblDeck = new TableView<CardPrinted>(false, CardPrinted.class);
+        final EditorTableView<CardPrinted> tblCatalog = new EditorTableView<CardPrinted>(false, CardPrinted.class);
+        final EditorTableView<CardPrinted> tblDeck = new EditorTableView<CardPrinted>(false, CardPrinted.class);
 
         VCardCatalog.SINGLETON_INSTANCE.setTableView(tblCatalog.getTable());
         VCurrentDeck.SINGLETON_INSTANCE.setTableView(tblDeck.getTable());

@@ -12703,14 +12703,14 @@ src/main/java/forge/gui/deckeditor/controllers/CProbabilities.java -text
 src/main/java/forge/gui/deckeditor/controllers/CStatistics.java -text
 src/main/java/forge/gui/deckeditor/package-info.java -text
 src/main/java/forge/gui/deckeditor/tables/DeckController.java -text
+src/main/java/forge/gui/deckeditor/tables/EditorTableModel.java svneol=native#text/plain
+src/main/java/forge/gui/deckeditor/tables/EditorTableView.java -text
 src/main/java/forge/gui/deckeditor/tables/IntegerRenderer.java -text
 src/main/java/forge/gui/deckeditor/tables/ManaCostRenderer.java -text
 src/main/java/forge/gui/deckeditor/tables/SColumnUtil.java -text
 src/main/java/forge/gui/deckeditor/tables/TableColumnInfo.java -text
-src/main/java/forge/gui/deckeditor/tables/TableModel.java svneol=native#text/plain
 src/main/java/forge/gui/deckeditor/tables/TableSorter.java svneol=native#text/plain
 src/main/java/forge/gui/deckeditor/tables/TableSorterCascade.java -text
-src/main/java/forge/gui/deckeditor/tables/TableView.java -text
 src/main/java/forge/gui/deckeditor/tables/package-info.java -text
 src/main/java/forge/gui/deckeditor/views/ITableContainer.java -text
 src/main/java/forge/gui/deckeditor/views/VAllDecks.java -text
