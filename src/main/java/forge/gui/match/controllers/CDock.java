@@ -68,7 +68,7 @@ public enum CDock implements ICDoc {
             return;
         }
 
-        AllZone.getHumanPlayer().concede();
+        Singletons.getControl().getPlayer().concede();
         Singletons.getModel().getGameAction().checkStateEffects();
     }
 
@@ -137,7 +137,7 @@ public enum CDock implements ICDoc {
      * View deck list.
      */
     private void viewDeckList() {
-        showDeck(AllZone.getHumanPlayer().getDeck());
+        showDeck(Singletons.getControl().getPlayer().getDeck());
     }
 
     /** Attack with everyone. */

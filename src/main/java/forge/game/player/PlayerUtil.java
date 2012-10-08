@@ -21,7 +21,6 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -94,7 +93,7 @@ public final class PlayerUtil {
 
             @Override
             public void showMessage() {
-                if (AllZone.getHumanPlayer().getZone(ZoneType.Hand).size() == 0) {
+                if (Singletons.getControl().getPlayer().getZone(ZoneType.Hand).size() == 0) {
                     this.stop();
                 }
                 CMatchUI.SINGLETON_INSTANCE.showMessage(
@@ -116,7 +115,7 @@ public final class PlayerUtil {
                     if (card.isType(uType.toString())) {
                         this.stop();
                     } else {
-                        if ((this.n == nCards) || (AllZone.getHumanPlayer().getZone(ZoneType.Hand).size() == 0)) {
+                        if ((this.n == nCards) || (Singletons.getControl().getPlayer().getZone(ZoneType.Hand).size() == 0)) {
                             this.stop();
                         } else {
                             this.showMessage();
@@ -150,7 +149,7 @@ public final class PlayerUtil {
 
             @Override
             public void showMessage() {
-                if (AllZone.getHumanPlayer().getZone(ZoneType.Hand).size() == 0) {
+                if (Singletons.getControl().getPlayer().getZone(ZoneType.Hand).size() == 0) {
                     this.stop();
                 }
                 if (nCards == 0) {
@@ -168,7 +167,7 @@ public final class PlayerUtil {
                     this.n++;
 
                     // in case no more cards in hand
-                    if ((this.n == nCards) || (AllZone.getHumanPlayer().getZone(ZoneType.Hand).size() == 0)) {
+                    if ((this.n == nCards) || (Singletons.getControl().getPlayer().getZone(ZoneType.Hand).size() == 0)) {
                         this.stop();
                     } else {
                         this.showMessage();
@@ -192,7 +191,7 @@ public final class PlayerUtil {
 
             @Override
             public void showMessage() {
-                if (AllZone.getHumanPlayer().getZone(ZoneType.Hand).size() == 0) {
+                if (Singletons.getControl().getPlayer().getZone(ZoneType.Hand).size() == 0) {
                     this.stop();
                 }
 
@@ -244,7 +243,7 @@ public final class PlayerUtil {
      * @since 1.0.15
      */
     public static Input inputSacrificePermanents(final int nCards) {
-        final List<Card> list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        final List<Card> list = Singletons.getControl().getPlayer().getCardsIn(ZoneType.Battlefield);
         return PlayerUtil.inputSacrificePermanentsFromList(nCards, list, "Select a permanent to sacrifice");
     } // input_sacrificePermanents()
 
@@ -261,7 +260,7 @@ public final class PlayerUtil {
      * @since 1.0.15
      */
     public static Input inputSacrificePermanents(final int nCards, final String type) {
-        List<Card> list = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+        List<Card> list = Singletons.getControl().getPlayer().getCardsIn(ZoneType.Battlefield);
 
         list = CardLists.getType(list, type);
         return PlayerUtil.inputSacrificePermanentsFromList(nCards, list, "Select a " + type + " to sacrifice");
@@ -300,7 +299,7 @@ public final class PlayerUtil {
 
             @Override
             public void selectCard(final Card card, final PlayerZone zone) {
-                if (zone.equals(AllZone.getHumanPlayer().getZone(ZoneType.Battlefield)) && list.contains(card)) {
+                if (zone.equals(Singletons.getControl().getPlayer().getZone(ZoneType.Battlefield)) && list.contains(card)) {
                     Singletons.getModel().getGameAction().sacrifice(card, null);
                     this.n++;
                     list.remove(card);

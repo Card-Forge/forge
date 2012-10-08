@@ -436,12 +436,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     c.getDamageHistory().newTurn();
                     c.setRegeneratedThisTurn(0);
                     c.clearMustBlockCards();
-                    if (this.isPlayerTurn(AllZone.getComputerPlayer())) {
-                        c.getDamageHistory().setCreatureAttackedLastComputerTurn(c.getDamageHistory().getCreatureAttackedThisTurn());
-                    }
-                    if (this.isPlayerTurn(AllZone.getHumanPlayer())) {
-                        c.getDamageHistory().setCreatureAttackedLastHumanTurn(c.getDamageHistory().getCreatureAttackedThisTurn());
-                    }
+                    c.getDamageHistory().setCreatureAttackedLastTurnOf(playerTurn, c.getDamageHistory().getCreatureAttackedThisTurn());
                     c.getDamageHistory().setCreatureAttackedThisTurn(false);
                     c.getDamageHistory().setCreatureBlockedThisTurn(false);
                     c.getDamageHistory().setCreatureGotBlockedThisTurn(false);
@@ -450,15 +445,11 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 }
 
                 AllZone.getEndOfTurn().executeUntil();
-                final List<Card> cHand = AllZone.getComputerPlayer().getCardsIn(ZoneType.Hand);
-                final List<Card> hHand = AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand);
-                for (final Card c : cHand) {
-                    c.setDrawnThisTurn(false);
-                }
-                for (final Card c : hHand) {
-                    c.setDrawnThisTurn(false);
-                }
+
                 for (Player player : AllZone.getPlayersInGame()) {
+                    for (Card c : player.getCardsIn(ZoneType.Hand))
+                        c.setDrawnThisTurn(false);
+
                     player.resetPreventNextDamage();
                     player.resetNumDrawnThisTurn();
                     player.setAttackedWithCreatureThisTurn(false);

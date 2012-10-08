@@ -823,7 +823,7 @@ public class CardFactoryUtil {
             @Override
             public boolean canPlayAI() {
                 PhaseHandler phase = Singletons.getModel().getGameState().getPhaseHandler(); 
-                if (phase.getPhase().isAfter(PhaseType.MAIN1) || phase.isPlayerTurn(AllZone.getHumanPlayer())) {
+                if (phase.getPhase().isAfter(PhaseType.MAIN1) || !phase.isPlayerTurn(getActivatingPlayer())) {
                     return false;
                 }
                 return ComputerUtil.canPayCost(this, getActivatingPlayer());
@@ -4807,7 +4807,7 @@ public class CardFactoryUtil {
                     public void execute() {
                         // Target as Modular is Destroyed
                         if (card.getController().isComputer()) {
-                            List<Card> choices = AllZone.getComputerPlayer().getCardsIn(ZoneType.Battlefield);
+                            List<Card> choices = card.getController().getCardsIn(ZoneType.Battlefield);
                             choices = CardLists.filter(choices, new Predicate<Card>() {
                                 @Override
                                 public boolean apply(final Card c) {

@@ -66,7 +66,7 @@ public class InputAttack extends Input {
 
         if (AllZone.getCombat().getRemainingDefenders() == 0) {
             // Nothing left to attack, has to attack this defender
-            List<Card> possibleAttackers = AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield);
+            List<Card> possibleAttackers = Singletons.getControl().getPlayer().getCardsIn(ZoneType.Battlefield);
             for (Card c : Iterables.filter(possibleAttackers, CardPredicates.Presets.CREATURES)) {
                 if (c.hasKeyword("CARDNAME attacks each turn if able.") && CombatUtil.canAttack(c, AllZone.getCombat())
                         && !c.isAttacking()) {

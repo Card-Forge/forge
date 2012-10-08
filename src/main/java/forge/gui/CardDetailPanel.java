@@ -34,10 +34,10 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
-import forge.AllZone;
 import forge.Card;
 import forge.Counters;
 import forge.GameEntity;
+import forge.Singletons;
 import forge.game.zone.ZoneType;
 
 /**
@@ -162,7 +162,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
             return;
         }
 
-        final boolean faceDown = card.isFaceDown() && (card.getController() != AllZone.getHumanPlayer());
+        final boolean faceDown = card.isFaceDown() && (card.getController() != Singletons.getControl().getPlayer());
         if (!faceDown) {
             if (card.getManaCost().toString().equals("") || card.isLand()) {
                 this.nameCostLabel.setText(card.getName());

@@ -353,7 +353,7 @@ public class CostDiscard extends CostPartWithList {
                     this.done();
                 }
 
-                if (AllZone.getHumanPlayer().getZone(ZoneType.Hand).size() == 0) {
+                if (AllZone.getHumanPlayer().getZone(ZoneType.Hand).isEmpty()) {
                     this.stop();
                 }
                 final StringBuilder type = new StringBuilder("");

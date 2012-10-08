@@ -72,7 +72,7 @@ public class InputCleanup extends Input {
     /** {@inheritDoc} */
     @Override
     public final void selectCard(final Card card, final PlayerZone zone) {
-        if (zone.is(ZoneType.Hand, AllZone.getHumanPlayer())) {
+        if (zone.is(ZoneType.Hand, Singletons.getControl().getPlayer())) {
             card.getController().discard(card, null);
             if (AllZone.getStack().size() == 0) {
                 this.showMessage();

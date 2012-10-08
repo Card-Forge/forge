@@ -30,7 +30,6 @@ import java.util.Observer;
 import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
 
-import forge.AllZone;
 import forge.Card;
 import forge.Command;
 import forge.Singletons;
@@ -111,7 +110,7 @@ public class CHand implements ICDoc {
                 if (e.getButton() != MouseEvent.BUTTON1) { return; }
 
                 CMessage.SINGLETON_INSTANCE.getInputControl()
-                        .selectCard(cardobj, AllZone.getHumanPlayer().getZone(ZoneType.Hand));
+                        .selectCard(cardobj, Singletons.getControl().getPlayer().getZone(ZoneType.Hand));
             }
         });
     }

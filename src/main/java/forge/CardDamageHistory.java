@@ -18,9 +18,7 @@ public class CardDamageHistory {
     private boolean creatureGotBlockedThisCombat = false;
     private boolean creatureGotBlockedThisTurn = false;
 
-    private boolean creatureAttackedLastHumanTurn = false;
-    private boolean creatureAttackedLastComputerTurn = false;
-    
+    private final List<Player> creatureAttackedLastTurnOf = new ArrayList<Player>(2);
     private final List<Player> damagedThisTurn = new ArrayList<Player>(2);
     private final List<Player> damagedThisTurnInCombat = new ArrayList<Player>(2);
     private final List<Player> damagedThisGame = new ArrayList<Player>(2);
@@ -80,8 +78,10 @@ public class CardDamageHistory {
      * @param b
      *            a boolean.
      */
-    public final void setCreatureAttackedLastHumanTurn(final boolean b) {
-        this.creatureAttackedLastHumanTurn = b;
+    public final void setCreatureAttackedLastTurnOf(final Player p, boolean value) {
+        if ( value && !creatureAttackedLastTurnOf.contains(p) )
+            creatureAttackedLastTurnOf.add(p);
+        while ( !value && creatureAttackedLastTurnOf.remove(p)) {} // remove should return false once no player is found in collection
     }
     /**
      * <p>
@@ -90,29 +90,8 @@ public class CardDamageHistory {
      * 
      * @return a boolean.
      */
-    public final boolean getCreatureAttackedLastHumanTurn() {
-        return this.creatureAttackedLastHumanTurn;
-    }
-    /**
-     * <p>
-     * Setter for the field <code>creatureAttackedLastTurn</code>.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setCreatureAttackedLastComputerTurn(final boolean b) {
-        this.creatureAttackedLastComputerTurn = b;
-    }
-    /**
-     * <p>
-     * Getter for the field <code>creatureAttackedLastTurn</code>.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean getCreatureAttackedLastComputerTurn() {
-        return this.creatureAttackedLastComputerTurn;
+    public final boolean getCreatureAttackedLastTurnOf(final Player p) {
+        return creatureAttackedLastTurnOf.contains(p);
     }
     /**
      * <p>

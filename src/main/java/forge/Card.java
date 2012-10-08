@@ -6954,12 +6954,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("attackedLastTurn")) {
-            if (this.getController().isComputer() && !this.getDamageHistory().getCreatureAttackedLastComputerTurn()) {
-                return false;
-            }
-            if (this.getController().isHuman() && !this.getDamageHistory().getCreatureAttackedLastHumanTurn()) {
-                return false;
-            }
+            return this.getDamageHistory().getCreatureAttackedLastTurnOf(this.getController());
         } else if (property.startsWith("blockedThisTurn")) {
             if (!this.getDamageHistory().getCreatureBlockedThisTurn()) {
                 return false;
@@ -6973,12 +6968,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("notAttackedLastTurn")) {
-            if (this.getController().isComputer() && this.getDamageHistory().getCreatureAttackedLastComputerTurn()) {
-                return false;
-            }
-            if (this.getController().isHuman() && this.getDamageHistory().getCreatureAttackedLastHumanTurn()) {
-                return false;
-            }
+            return !this.getDamageHistory().getCreatureAttackedLastTurnOf(this.getController());
         } else if (property.startsWith("notBlockedThisTurn")) {
             if (this.getDamageHistory().getCreatureBlockedThisTurn()) {
                 return false;

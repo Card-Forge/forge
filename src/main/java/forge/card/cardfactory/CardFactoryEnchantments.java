@@ -91,8 +91,9 @@ class CardFactoryEnchantments {
 
                 @Override
                 public void showMessage() {
-                    List<Card> grave = AllZone.getHumanPlayer().getCardsIn(ZoneType.Graveyard);
-                    List<Card> aiGrave = AllZone.getComputerPlayer().getCardsIn(ZoneType.Graveyard);
+                    final Player human = Singletons.getControl().getPlayer();
+                    List<Card> grave = human.getCardsIn(ZoneType.Graveyard);
+                    List<Card> aiGrave = human.getOpponent().getCardsIn(ZoneType.Graveyard);
                     grave = CardLists.filter(grave, CardPredicates.Presets.CREATURES);
                     aiGrave = CardLists.filter(aiGrave, CardPredicates.Presets.CREATURES);
 
@@ -234,7 +235,7 @@ class CardFactoryEnchantments {
                         final String cardQuestion = "Pay 4 life and keep in hand?";
                         player.drawCards(2);
                         int numPutBack = 0;
-                        for (Card c : AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand)) {
+                        for (Card c : player.getCardsIn(ZoneType.Hand)) {
                             if (c.getDrawnThisTurn()) {
                                 numPutBack++;
                             }
@@ -250,7 +251,7 @@ class CardFactoryEnchantments {
 
                                 @Override
                                 public void showMessage() {
-                                    if (AllZone.getHumanPlayer().getZone(ZoneType.Hand).size() == 0) {
+                                    if (player.getZone(ZoneType.Hand).size() == 0) {
                                         this.stop();
                                     }
                                     CMatchUI.SINGLETON_INSTANCE.showMessage(prompt);

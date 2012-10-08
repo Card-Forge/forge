@@ -535,7 +535,7 @@ public final class AbilityFactoryClash {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryClash.twoPilesCanPlayAI(af, this);
+                return AbilityFactoryClash.twoPilesCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -574,7 +574,7 @@ public final class AbilityFactoryClash {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryClash.twoPilesCanPlayAI(af, this);
+                return AbilityFactoryClash.twoPilesCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -676,7 +676,7 @@ public final class AbilityFactoryClash {
         return sb.toString();
     }
 
-    private static boolean twoPilesCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean twoPilesCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         final HashMap<String, String> params = af.getMapParams();
         final Card card = sa.getSourceCard();
         ZoneType zone = null;
@@ -691,12 +691,13 @@ public final class AbilityFactoryClash {
         }
 
         ArrayList<Player> tgtPlayers;
+        final Player opp = ai.getOpponent();
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
             if (tgt.canTgtPlayer()) {
-                tgt.addTarget(AllZone.getHumanPlayer());
+                tgt.addTarget(opp);
             }
             tgtPlayers = tgt.getTargetPlayers();
         } else {
