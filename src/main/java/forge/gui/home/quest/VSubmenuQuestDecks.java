@@ -1,6 +1,6 @@
 package forge.gui.home.quest;
 
-import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
 import forge.game.GameType;
@@ -13,6 +13,7 @@ import forge.gui.home.IVSubmenu;
 import forge.gui.toolbox.DeckLister;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
+import forge.gui.toolbox.FSkin;
 
 /** 
  * Assembles Swing components of quest decks submenu singleton.
@@ -29,25 +30,24 @@ public enum VSubmenuQuestDecks implements IVSubmenu {
     private final DragTab tab = new DragTab("Constructed Mode");
 
     /** */
-    private final JPanel pnlDecks = new JPanel();
+    private final FLabel lblTitle = new FLabel.Builder()
+        .text("Quest Decks").fontAlign(SwingConstants.CENTER)
+        .opaque(true).fontSize(16).build();
+
     private final DeckLister lstDecks = new DeckLister(GameType.Quest);
     private final FLabel btnNewDeck = new FLabel.Builder().opaque(true)
-            .hoverable(true).text("Build a New Deck").fontSize(18).build();
+            .hoverable(true).text("Build a New Deck").fontSize(16).build();
+
+    private final FScrollPane scr = new FScrollPane(lstDecks);
 
     /**
      * Constructor.
      */
     private VSubmenuQuestDecks() {
-        final FScrollPane scr = new FScrollPane(lstDecks);
+        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         scr.setBorder(null);
         scr.getViewport().setBorder(null);
-
-        pnlDecks.setOpaque(false);
-        pnlDecks.setLayout(new MigLayout("insets 0, wrap, alignx center, wrap"));
-
-        pnlDecks.add(scr, "w 90%!, h 350px!");
-        pnlDecks.add(btnNewDeck, "w 40%!, h 35px!, gap 25%! 0 20px 0");
     }
 
     /* (non-Javadoc)
@@ -55,8 +55,10 @@ public enum VSubmenuQuestDecks implements IVSubmenu {
      */
     @Override
     public void populate() {
-        parentCell.getBody().setLayout(new MigLayout("insets 0"));
-        parentCell.getBody().add(pnlDecks, "w 90%!, gap 5% 0 5% 0");
+        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap"));
+        parentCell.getBody().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px");
+        parentCell.getBody().add(scr, "w 98%!, growy, pushy, gap 1% 0 0 0");
+        parentCell.getBody().add(btnNewDeck, "w 300px!, h 30px!, gap 0 0 50px 50px, ax center");
     }
 
     /* (non-Javadoc)

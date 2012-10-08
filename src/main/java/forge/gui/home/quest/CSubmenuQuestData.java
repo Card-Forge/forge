@@ -4,6 +4,8 @@ import static forge.quest.QuestStartPool.Complete;
 import static forge.quest.QuestStartPool.Precon;
 import static forge.quest.QuestStartPool.Rotating;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
@@ -38,19 +40,34 @@ public enum CSubmenuQuestData implements ICDoc {
 
     private final Map<String, QuestData> arrQuests = new HashMap<String, QuestData>();
 
+    private final VSubmenuQuestData view = VSubmenuQuestData.SINGLETON_INSTANCE;
+
     private final Command cmdQuestSelect = new Command() { @Override
         public void execute() { changeQuest(); } };
 
     private final Command cmdQuestDelete = new Command() { @Override
         public void execute() { update(); } };
 
+    private final ActionListener preconListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            view.getCbxFormat().setEnabled(view.getRadPreconStart().isSelected());
+            view.getCbxPrecon().setEnabled(view.getRadRotatingStart().isSelected());
+            view.getBoxPersist().setEnabled(view.getRadRotatingStart().isSelected());
+        }
+    };
+
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
      */
     @Override
     public void initialize() {
-        VSubmenuQuestData.SINGLETON_INSTANCE.getBtnEmbark().setCommand(
+        view.getBtnEmbark().setCommand(
                 new Command() { @Override public void execute() { newQuest(); } });
+
+        view.getRadUnrestricted().addActionListener(preconListener);
+        view.getRadRotatingStart().addActionListener(preconListener);
+        view.getRadPreconStart().addActionListener(preconListener);
     }
 
     /* (non-Javadoc)
@@ -138,7 +155,7 @@ public enum CSubmenuQuestData implements ICDoc {
         final QuestStartPool startPool;
         final String startPrecon  = view.getPrecon();
         final String rotatingFormat = view.getFormat();
-        if (view.getRadCompleteStart().isSelected()) {
+        if (view.getRadUnrestricted().isSelected()) {
             startPool = Complete;
         } else if (view.getRadRotatingStart().isSelected()) {
             startPool = Rotating;

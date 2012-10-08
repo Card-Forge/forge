@@ -21,7 +21,6 @@ import forge.gui.home.IVSubmenu;
 import forge.gui.home.StartButton;
 import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 
@@ -40,7 +39,6 @@ public enum VSubmenuDuels implements IVSubmenu, IStatsAndPet, IVDoc {
 
     //========== INSTANTIATION
     private final JPanel pnlDuels   = new JPanel();
-    private final FPanel pnlTitle   = new FPanel();
     private final JPanel pnlStats   = new JPanel();
     private final JPanel pnlStart   = new JPanel();
 
@@ -68,9 +66,9 @@ public enum VSubmenuDuels implements IVSubmenu, IStatsAndPet, IVDoc {
     private final FLabel lblWinStreak = new FLabel.Builder()
         .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_PLUSPLUS))
         .fontSize(15).build();
-    private final FLabel lblTitle     = new FLabel.Builder()
+    private final FLabel lblTitle = new FLabel.Builder()
         .text("Title Hasn't Been Set Yet").fontAlign(SwingConstants.CENTER)
-        .fontSize(16).build();
+        .opaque(true).fontSize(16).build();
     private final FLabel lblNextChallengeInWins = new FLabel.Builder()
         .fontSize(15).build();
     private final FLabel btnCurrentDeck = new FLabel.Builder()
@@ -86,9 +84,7 @@ public enum VSubmenuDuels implements IVSubmenu, IStatsAndPet, IVDoc {
      * Constructor.
      */
     private VSubmenuDuels() {
-        pnlTitle.setLayout(new MigLayout("insets 0, gap 0"));
-        pnlTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        pnlTitle.add(lblTitle, "w 100%, h 100%, gap 0 0 0 0");
+        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         populateStats();
         populateStart();
@@ -130,10 +126,10 @@ public enum VSubmenuDuels implements IVSubmenu, IStatsAndPet, IVDoc {
     public void populate() {
         parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap"));
 
-        parentCell.getBody().add(pnlTitle, "w 94%!, h 30px!, gap 3% 0 15px 15px");
-        parentCell.getBody().add(pnlStats, "w 94%!, gap 3% 0 0 20px");
-        parentCell.getBody().add(scrDuels, "w 94%!, pushy, growy, gap 3% 0 0 0");
-        parentCell.getBody().add(pnlStart, "w 94%, gap 3% 0 15px 5%");
+        parentCell.getBody().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px");
+        parentCell.getBody().add(pnlStats, "w 98%!, gap 1% 0 0 20px");
+        parentCell.getBody().add(scrDuels, "w 98%!, pushy, growy, gap 1% 0 0 0");
+        parentCell.getBody().add(pnlStart, "w 98%, gap 1% 0 20px 50px");
     }
 
     /** */
@@ -154,11 +150,6 @@ public enum VSubmenuDuels implements IVSubmenu, IStatsAndPet, IVDoc {
     /** @return {@link javax.swing.JPanel} */
     public JPanel getPnlDuels() {
         return pnlDuels;
-    }
-
-    /** @return {@link javax.swing.JPanel} */
-    public FPanel getPnlTitle() {
-        return pnlTitle;
     }
 
     /** @return {@link forge.gui.toolbox.FPanel} */
@@ -242,7 +233,7 @@ public enum VSubmenuDuels implements IVSubmenu, IStatsAndPet, IVDoc {
     }
 
     private void populateStats() {
-        final String constraints = "w 23%!, h 35px!, gap 1% 1% 5px 5px";
+        final String constraints = "w 23%!, h 35px!, gap 0 0 5px 5px";
         pnlStats.removeAll();
         pnlStats.setOpaque(false);
         pnlStats.setLayout(new MigLayout("insets 0, gap 0, hidemode 0"));

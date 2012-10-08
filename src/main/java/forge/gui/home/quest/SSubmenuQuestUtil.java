@@ -240,10 +240,9 @@ public class SSubmenuQuestUtil {
                 qData.setCurrentEvent(event);
                 qData.save();
 
-                
                 PlayerStartsGame p1 = new PlayerStartsGame(AllZone.getHumanPlayer(), SSubmenuQuestUtil.getCurrentDeck());
                 PlayerStartsGame p2 = new PlayerStartsGame(AllZone.getComputerPlayer(), event.getEventDeck());
-                
+
                 if (qData.getMode() == QuestMode.Fantasy) {
                     int lifeAI = 20;
                     int extraLifeHuman = 0;
@@ -257,11 +256,11 @@ public class SSubmenuQuestUtil {
                     }
 
                     p1.initialLives = qData.getAssets().getLife(qData.getMode()) + extraLifeHuman;
-                    p1.cardsOnBattlefield = QuestUtil.getHumanStartingCards(qData, event); 
+                    p1.cardsOnBattlefield = QuestUtil.getHumanStartingCards(qData, event);
                     p2.initialLives = lifeAI;
                     p2.cardsOnBattlefield = QuestUtil.getComputerStartingCards(event);
                 } // End isFantasy
-                
+
                 CMatchUI.SINGLETON_INSTANCE.initMatch(event.getIconFilename());
                 GameNew.newGame(p1, p2);
                 return null;
@@ -358,13 +357,13 @@ public class SSubmenuQuestUtil {
     public static String cleanString(final String in) {
         final StringBuffer out = new StringBuffer();
         final char[] c = in.toCharArray();
-    
+
         for (int i = 0; (i < c.length) && (i < 20); i++) {
             if (Character.isLetterOrDigit(c[i]) || (c[i] == '-') || (c[i] == '_') || (c[i] == ' ')) {
                 out.append(c[i]);
             }
         }
-    
+
         return out.toString();
     }
 }

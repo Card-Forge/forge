@@ -1,14 +1,13 @@
 package forge.gui.home.quest;
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -29,7 +28,6 @@ import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
@@ -51,9 +49,20 @@ public enum VSubmenuQuestData implements IVSubmenu {
     private final DragTab tab = new DragTab("Quest Data");
 
     /** */
-    private final JPanel pnlViewport = new JPanel();
-    private final FScrollPane scrContent = new FScrollPane(pnlViewport);
+    private final FLabel lblTitle = new FLabel.Builder()
+        .text("Load Quest Data").fontAlign(SwingConstants.CENTER)
+        .opaque(true).fontSize(16).build();
+
+    private final JLabel lblTitleNew = new FLabel.Builder().text("Start a new Quest")
+            .opaque(true).fontSize(16).build();
+
+    private final JLabel lblOldQuests = new FLabel.Builder().text("Old quest data? Put into "
+            + "res/quest/data, and restart Forge.")
+            .fontAlign(SwingConstants.CENTER).fontSize(12).build();
+
     private final QuestFileLister lstQuests = new QuestFileLister();
+    private final FScrollPane scrQuests = new FScrollPane(lstQuests);
+    private final JPanel pnlOptions = new JPanel();
 
     private final JRadioButton radEasy = new FRadioButton("Easy");
     private final JRadioButton radMedium = new FRadioButton("Medium");
@@ -63,36 +72,24 @@ public enum VSubmenuQuestData implements IVSubmenu {
     private final JCheckBox boxFantasy = new FCheckBox("Fantasy Mode");
     private final JCheckBox boxFormatPersist = new FCheckBox("Enforce format during quest");
 
-    private final JRadioButton radCompleteStart = new FRadioButton("Unrestricted Starting Pool");
+    private final JRadioButton radUnrestricted = new FRadioButton("Unrestricted Starting Pool");
     private final JRadioButton radRotatingStart = new FRadioButton("Format: ");
     private final JComboBox cbxFormat = new JComboBox();
 
     private final JRadioButton radPreconStart = new FRadioButton("Preconstructed Deck: ");
     private final JComboBox cbxPrecon = new JComboBox();
 
-    private final FLabel btnEmbark = new FLabel.Builder().opaque(true).hoverable(true).text("Embark!").build();
+    private final FLabel btnEmbark = new FLabel.Builder().opaque(true)
+            .fontSize(16).hoverable(true).text("Embark!").build();
 
     /**
      * Constructor.
      */
     private VSubmenuQuestData() {
-        // Load quest
-        final FPanel pnlTitleLoad = new FPanel();
-        pnlTitleLoad.setLayout(new MigLayout("insets 0, align center"));
-        pnlTitleLoad.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        pnlTitleLoad.add(new FLabel.Builder().text("Load a previous Quest")
-                .fontSize(16).build(), "h 95%!, gap 0 0 2.5% 0");
+        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        lblTitleNew.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
-        final FScrollPane scr = new FScrollPane(lstQuests);
-        scr.setBorder(null);
-        scr.getViewport().setBorder(null);
-
-        // New quest
-        final FPanel pnlTitleNew = new FPanel();
-        pnlTitleNew.setLayout(new MigLayout("insets 0, align center"));
-        pnlTitleNew.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        pnlTitleNew.add(new FLabel.Builder().text("Start a new Quest")
-                .fontSize(16).build(), "h 95%!, gap 0 0 2.5% 0");
+        scrQuests.setBorder(null);
 
         final ButtonGroup group1 = new ButtonGroup();
         group1.add(radEasy);
@@ -101,22 +98,11 @@ public enum VSubmenuQuestData implements IVSubmenu {
         group1.add(radExpert);
         radEasy.setSelected(true);
 
-
         cbxFormat.removeAllItems();
 
         for (GameFormat gf : Singletons.getModel().getFormats()) {
             cbxFormat.addItem(gf.getName());
         }
-
-        // TODO: Listeners should be in controller, not in view.
-        final ActionListener preconListener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                cbxPrecon.setEnabled(radPreconStart.isSelected());
-                cbxFormat.setEnabled(radRotatingStart.isSelected());
-                boxFormatPersist.setEnabled(radRotatingStart.isSelected());
-            }
-        };
 
         final Map<String, String> preconDescriptions = new HashMap<String, String>();
         IStorageView<PreconDeck> preconDecks = QuestController.getPrecons();
@@ -151,59 +137,42 @@ public enum VSubmenuQuestData implements IVSubmenu {
         });
 
         final ButtonGroup group3 = new ButtonGroup();
-        group3.add(radCompleteStart);
-        radCompleteStart.addActionListener(preconListener);
+        group3.add(radUnrestricted);
         group3.add(radRotatingStart);
-        radRotatingStart.addActionListener(preconListener);
         group3.add(radPreconStart);
+
         cbxFormat.setEnabled(false);
         boxFormatPersist.setSelected(true);
         boxFormatPersist.setEnabled(false);
-        radPreconStart.addActionListener(preconListener);
-        radCompleteStart.setSelected(true);
+        radUnrestricted.setSelected(true);
         cbxPrecon.setEnabled(false);
         radMedium.setEnabled(true);
 
-        // Fantasy box is Enabled by Default
+        // Fantasy box enabled by Default
         boxFantasy.setSelected(true);
         boxFantasy.setEnabled(true);
 
-        final JPanel pnlOptions = new JPanel();
         pnlOptions.setOpaque(false);
-        pnlOptions.setLayout(new MigLayout("insets 0, gap 0"));
+        pnlOptions.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
 
-        final String constraints = "w 40%!, h 30px!";
-        pnlOptions.add(radEasy, constraints + ", gap 7.5% 2.5% 0 0");
-        pnlOptions.add(boxFantasy, constraints + ", wrap");
-        pnlOptions.add(radMedium, constraints + ", gap 7.5% 2.5% 0 0");
-        pnlOptions.add(radCompleteStart, constraints + ", wrap");
-        pnlOptions.add(radHard, constraints + ", gap 7.5% 2.5% 0 0");
-        pnlOptions.add(radRotatingStart, constraints + ", wrap");
-        pnlOptions.add(radExpert, constraints + ", gap 7.5% 2.5% 0 0 ");
-        pnlOptions.add(cbxFormat, constraints + ", gap 20 0, w 30%!, wrap");
-        pnlOptions.add(boxFormatPersist, constraints + ", wrap, skip");
-        pnlOptions.add(radPreconStart, constraints + ", wrap, skip");
-        pnlOptions.add(cbxPrecon, "gap 20 0, w 30%!, h 35px!, wrap, skip");
-        pnlOptions.add(btnEmbark, "w 40%!, h 30px!, gap 30% 0 20px 0, span 3 1");
+        final String constraints = "w 47%!, h 27px!";
+        pnlOptions.add(radEasy, constraints + ", gap 1% 4% 0 5px");
+        pnlOptions.add(radUnrestricted, constraints);
 
-        // Final layout
-        pnlViewport.removeAll();
-        pnlViewport.setOpaque(false);
-        pnlViewport.setLayout(new MigLayout("insets 0, gap 0, wrap"));
+        pnlOptions.add(radMedium, constraints + ", gap 1% 4% 0 5px");
+        pnlOptions.add(radRotatingStart, constraints);
 
-        pnlViewport.add(pnlTitleLoad, "w 96%, h 36px!, gap 2% 0 20px 10px");
+        pnlOptions.add(radHard, constraints + ", gap 1% 4% 0 5px");
+        pnlOptions.add(cbxFormat, constraints);
 
-        pnlViewport.add(new FLabel.Builder().text("Old quest data? Put into "
-                + "res/quest/data, and restart Forge.")
-                .fontAlign(SwingConstants.CENTER).fontSize(12)
-                .build(), "w 96%!, h 18px!, gap 2% 0 0 4px");
+        pnlOptions.add(radExpert, constraints + ", gap 1% 4% 0 5px");
+        pnlOptions.add(boxFormatPersist, constraints);
 
-        pnlViewport.add(scr, "w 96%!, pushy, growy, gap 2% 0 0 30px");
+        pnlOptions.add(boxFantasy, constraints + ", gap 1% 4% 0 5px");
+        pnlOptions.add(radPreconStart, constraints);
 
-        pnlViewport.add(pnlTitleNew, "w 96%, h 36px!, gap 2% 0 0 10px");
-        pnlViewport.add(pnlOptions, "w 96%!, h 280px!, gap 2% 0 0 20px");
-
-        scrContent.setBorder(null);
+        pnlOptions.add(cbxPrecon, constraints + ", skip 1");
+        pnlOptions.add(btnEmbark, "w 300px!, h 30px!, ax center, span 2, gap 0 0 15px 30px");
     }
 
     /* (non-Javadoc)
@@ -211,8 +180,12 @@ public enum VSubmenuQuestData implements IVSubmenu {
      */
     @Override
     public void populate() {
-        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
-        parentCell.getBody().add(scrContent, "w 100%!, h 100%!");
+        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap"));
+        parentCell.getBody().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px");
+        parentCell.getBody().add(lblOldQuests, "w 98%, h 30px!, gap 1% 0 0 5px");
+        parentCell.getBody().add(scrQuests, "w 98%!, growy, pushy, gap 1% 0 0 20px");
+        parentCell.getBody().add(lblTitleNew, "w 98%, h 30px!, gap 1% 0 0 10px");
+        parentCell.getBody().add(pnlOptions, "w 98%!, gap 1% 0 0 0");
     }
 
     /* (non-Javadoc)
@@ -291,8 +264,8 @@ public enum VSubmenuQuestData implements IVSubmenu {
     /**
      * @return {@link javax.swing.JRadioButton}
      */
-    public JRadioButton getRadCompleteStart() {
-        return radCompleteStart;
+    public JRadioButton getRadUnrestricted() {
+        return radUnrestricted;
     }
 
     /** @return {@link javax.swing.JCheckBox} */
@@ -303,6 +276,16 @@ public enum VSubmenuQuestData implements IVSubmenu {
     /** @return {@link javax.swing.JRadioButton} */
     public JRadioButton getRadPreconStart() {
         return radPreconStart;
+    }
+
+    /** @return {@link javax.swing.JComboBox} */
+    public JComboBox getCbxFormat() {
+        return this.cbxFormat;
+    }
+
+    /** @return {@link javax.swing.JComboBox} */
+    public JComboBox getCbxPrecon() {
+        return this.cbxPrecon;
     }
 
     /** @return {@link java.lang.String} */

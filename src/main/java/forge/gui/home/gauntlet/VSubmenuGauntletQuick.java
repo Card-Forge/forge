@@ -155,7 +155,7 @@ public enum VSubmenuGauntletQuick implements IVSubmenu {
         pnlDecks.add(radQuestDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
         pnlDecks.add(radRandomColor, "w 96%!, h 30px!, gap 2% 0 0 5px");
         pnlDecks.add(radThemeDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
-        pnlDecks.add(btnRandom, "h 30px!, w 50%!, gap 25% 0 0 10px");
+        pnlDecks.add(btnRandom, "h 30px!, w 200px!, gap 25% 0 0 10px");
         pnlDecks.add(scrDecks, "w 94%!, pushy, growy, gap 3% 0 0 10px");
     }
 

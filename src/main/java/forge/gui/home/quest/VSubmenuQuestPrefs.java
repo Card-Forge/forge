@@ -43,6 +43,10 @@ public enum VSubmenuQuestPrefs implements IVSubmenu {
     private final DragTab tab = new DragTab("Quest Preferences");
 
     /** */
+    private final FLabel lblTitle = new FLabel.Builder()
+        .text("Quest Preferences").fontAlign(SwingConstants.CENTER)
+        .opaque(true).fontSize(16).build();
+
     private final JPanel pnlContent = new JPanel();
     private final FScrollPane scrContent = new FScrollPane(pnlContent, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
             JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -71,6 +75,8 @@ public enum VSubmenuQuestPrefs implements IVSubmenu {
      * Constructor.
      */
     private VSubmenuQuestPrefs() {
+        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+
         pnlContent.setOpaque(false);
         pnlContent.setLayout(new MigLayout("insets 0, gap 0, wrap"));
 
@@ -135,8 +141,9 @@ public enum VSubmenuQuestPrefs implements IVSubmenu {
     public void populate() {
         CSubmenuQuestPrefs.resetErrors();
 
-        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
-        parentCell.getBody().add(scrContent, "w 100%!, growy, pushy, gap 0 0 10px 10px");
+        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap"));
+        parentCell.getBody().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px");
+        parentCell.getBody().add(scrContent, "w 98%!, growy, pushy, gap 1% 0 0 20px");
     }
 
     /* (non-Javadoc)
