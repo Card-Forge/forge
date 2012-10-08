@@ -140,17 +140,26 @@ public final class QuestUtilCards {
 
     private static final Predicate<CardPrinted> RARE_PREDICATE = CardPrinted.Predicates.Presets.IS_RARE_OR_MYTHIC;
 
+
+    /**
+     * A predicate that takes into account the Quest Format (if any).
+     * @param source
+     *  the predicate to be added to the format predicate.
+     * @return the composite predicate.
+     */
+    public Predicate<CardPrinted> applyFormatFilter(Predicate<CardPrinted> source) {
+       return qc.getFormat() == null ? source : Predicates.and(source, qc.getFormat().getFilterPrinted());
+    }
+
     /**
      * Adds the random rare.
      * 
      * @return the card printed
      */
     public CardPrinted addRandomRare() {
-        Predicate<CardPrinted> myFilter = QuestUtilCards.RARE_PREDICATE;
 
-        if (qc.getFormat() != null) {
-            myFilter = Predicates.and(QuestUtilCards.RARE_PREDICATE, qc.getFormat().getFilterPrinted());
-        }
+        final Predicate<CardPrinted> myFilter = applyFormatFilter(QuestUtilCards.RARE_PREDICATE);
+
         final CardPrinted card = Aggregates.random(Iterables.filter(CardDb.instance().getAllCards(), myFilter));
         this.addSingleCard(card);
         return card;
@@ -164,11 +173,7 @@ public final class QuestUtilCards {
      * @return the list
      */
     public List<CardPrinted> addRandomRare(final int n) {
-        Predicate<CardPrinted> myFilter = QuestUtilCards.RARE_PREDICATE;
-
-        if (qc.getFormat() != null) {
-            myFilter = Predicates.and(QuestUtilCards.RARE_PREDICATE, qc.getFormat().getFilterPrinted());
-        }
+        final Predicate<CardPrinted> myFilter = applyFormatFilter(QuestUtilCards.RARE_PREDICATE);
 
         final List<CardPrinted> newCards = Aggregates.random(Iterables.filter(CardDb.instance().getAllCards(), myFilter), n);
         this.addAllCards(newCards);
