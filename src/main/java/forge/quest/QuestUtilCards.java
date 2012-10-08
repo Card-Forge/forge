@@ -22,7 +22,7 @@ import forge.card.BoosterGenerator;
 import forge.card.CardEdition;
 import forge.card.FormatCollection;
 import forge.deck.Deck;
-import forge.game.GameFormatQuest;
+import forge.quest.data.GameFormatQuest;
 import forge.item.*;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestAssets;
@@ -358,7 +358,7 @@ public final class QuestUtilCards {
      * @return the predicate
      */
     public static Predicate<CardEdition> isLegalInQuestFormat(final GameFormatQuest qFormat) {
-        return CardEdition.Predicates.isLegalInFormatQuest(qFormat);
+        return GameFormatQuest.Predicates.isLegalInFormatQuest(qFormat);
     }
 
     /**

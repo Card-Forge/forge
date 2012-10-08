@@ -18,7 +18,6 @@
 package forge.quest.data;
 
 import forge.Singletons;
-import forge.game.GameFormatQuest;
 import forge.quest.QuestMode;
 import forge.quest.io.QuestDataIO;
 

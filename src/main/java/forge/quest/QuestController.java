@@ -25,7 +25,7 @@ import com.google.common.base.Predicates;
 
 import forge.Singletons;
 import forge.deck.Deck;
-import forge.game.GameFormatQuest;
+import forge.quest.data.GameFormatQuest;
 import forge.item.CardPrinted;
 import forge.item.PreconDeck;
 import forge.properties.ForgeProps;

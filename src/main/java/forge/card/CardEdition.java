@@ -22,7 +22,6 @@ import com.google.common.base.Predicate;
 
 import forge.Singletons;
 import forge.game.GameFormat;
-import forge.game.GameFormatQuest;
 import forge.util.FileSection;
 import forge.util.StorageReaderFile;
 
@@ -225,28 +224,6 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
             }
         }
 
-        /**
-         * Checks if is legal in quest format.
-         *
-         * @param qFormat the format
-         * @return the predicate
-         */
-        public static final Predicate<CardEdition> isLegalInFormatQuest(final GameFormatQuest qFormat) {
-            return new LegalInFormatQuest(qFormat);
-        }
-
-        private static class LegalInFormatQuest implements Predicate<CardEdition> {
-            private final GameFormatQuest qFormat;
-
-            public LegalInFormatQuest(final GameFormatQuest fmt) {
-                this.qFormat = fmt;
-            }
-
-            @Override
-            public boolean apply(final CardEdition subject) {
-                return this.qFormat.isSetLegal(subject.getCode());
-            }
-        }
     }
 
     public static class Reader extends StorageReaderFile<CardEdition> {

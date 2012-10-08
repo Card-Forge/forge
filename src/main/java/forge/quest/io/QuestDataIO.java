@@ -57,7 +57,7 @@ import forge.card.CardEdition;
 import forge.deck.DeckSection;
 import forge.error.ErrorViewer;
 import forge.game.GameType;
-import forge.game.GameFormatQuest;
+import forge.quest.data.GameFormatQuest;
 import forge.item.BoosterPack;
 import forge.item.CardDb;
 import forge.item.CardPrinted;

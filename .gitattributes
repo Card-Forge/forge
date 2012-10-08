@@ -12598,7 +12598,6 @@ src/main/java/forge/error/ExceptionHandler.java svneol=native#text/plain
 src/main/java/forge/error/package-info.java svneol=native#text/plain
 src/main/java/forge/game/GameEndReason.java -text
 src/main/java/forge/game/GameFormat.java -text
-src/main/java/forge/game/GameFormatQuest.java -text
 src/main/java/forge/game/GameLossReason.java -text
 src/main/java/forge/game/GameNew.java -text
 src/main/java/forge/game/GamePlayerRating.java -text
@@ -12902,6 +12901,7 @@ src/main/java/forge/quest/bazaar/QuestPetStats.java -text
 src/main/java/forge/quest/bazaar/QuestPetStorage.java -text
 src/main/java/forge/quest/bazaar/QuestStallDefinition.java svneol=native#text/plain
 src/main/java/forge/quest/bazaar/package-info.java svneol=native#text/plain
+src/main/java/forge/quest/data/GameFormatQuest.java -text
 src/main/java/forge/quest/data/QuestAchievements.java -text
 src/main/java/forge/quest/data/QuestAssets.java -text
 src/main/java/forge/quest/data/QuestData.java svneol=native#text/plain

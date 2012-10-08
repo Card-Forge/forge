@@ -15,16 +15,19 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.game;
+package forge.quest.data;
 
 import java.util.List;
 import java.util.ArrayList;
+
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
+import forge.card.CardEdition;
 import forge.card.CardRulesPredicates;
+import forge.game.GameFormat;
 import forge.item.CardPrinted;
 
 
@@ -105,7 +108,7 @@ public final class GameFormatQuest {
         if (this.allowedSetCodes == null || this.allowedSetCodes.isEmpty()) {
             return banNames;
         }
-        return Predicates.and(banNames, CardPrinted.Predicates.printedInSets(this.allowedSetCodes, true));
+        return com.google.common.base.Predicates.and(banNames, CardPrinted.Predicates.printedInSets(this.allowedSetCodes, true));
     }
 
     private Predicate<CardPrinted> buildFilterRules() {
@@ -113,7 +116,7 @@ public final class GameFormatQuest {
         if (this.allowedSetCodes == null || this.allowedSetCodes.isEmpty()) {
             return banNames;
         }
-        return Predicates.and(banNames, Predicates.compose(CardRulesPredicates.wasPrintedInSets(this.allowedSetCodes), CardPrinted.FN_GET_RULES));
+        return com.google.common.base.Predicates.and(banNames, com.google.common.base.Predicates.compose(CardRulesPredicates.wasPrintedInSets(this.allowedSetCodes), CardPrinted.FN_GET_RULES));
     }
 
     /**
@@ -209,6 +212,35 @@ public final class GameFormatQuest {
     @Override
     public String toString() {
         return this.name + " (format)";
+    }
+
+
+    /**
+     * The Class Predicates.
+     */
+    public abstract static class Predicates {
+        /**
+         * Checks if is legal in quest format.
+         *
+         * @param qFormat the format
+         * @return the predicate
+         */
+        public static Predicate<CardEdition> isLegalInFormatQuest(final GameFormatQuest qFormat) {
+            return new LegalInFormatQuest(qFormat);
+        }
+
+      private static class LegalInFormatQuest implements Predicate<CardEdition> {
+        private final GameFormatQuest qFormat;
+
+        public LegalInFormatQuest(final GameFormatQuest fmt) {
+            this.qFormat = fmt;
+        }
+
+        @Override
+        public boolean apply(final CardEdition subject) {
+            return this.qFormat.isSetLegal(subject.getCode());
+        }
+      }
     }
 
     public static final Function<GameFormat, String> FN_GET_NAME = new Function<GameFormat, String>() {
