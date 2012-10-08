@@ -44,7 +44,6 @@ import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
 import forge.Counters;
-import forge.GameActionUtil;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.CardCharacteristics;
@@ -1204,99 +1203,6 @@ public class CardFactoryUtil {
     public static Command vanishing(final Card sourceCard, final int power) {
         return entersBattleFieldWithCounters(sourceCard, Counters.TIME, power);
     } // vanishing
-
-    /**
-     * <p>
-     * abilitySoulshift.
-     * </p>
-     * 
-     * @param sourceCard
-     *            a {@link forge.Card} object.
-     * @param manacost
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.Command} object.
-     */
-    public static Command abilitySoulshift(final Card sourceCard, final String manacost) {
-        final Command soulshift = new Command() {
-            private static final long serialVersionUID = -4960704261761785512L;
-
-            @Override
-            public void execute() {
-                AllZone.getStack().add(CardFactoryUtil.soulshiftTrigger(sourceCard, manacost));
-            }
-
-        };
-
-        return soulshift;
-    } // abilitySoulshift()
-
-    /**
-     * <p>
-     * soulshiftTrigger.
-     * </p>
-     * 
-     * @param sourceCard
-     *            a {@link forge.Card} object.
-     * @param manacost
-     *            a {@link java.lang.String} object.
-     * @return a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public static SpellAbility soulshiftTrigger(final Card sourceCard, final String manacost) {
-        final SpellAbility desc = new Ability(sourceCard, "0") {
-            @Override
-            public void resolve() {
-                final List<Card> cards = sourceCard.getController().getCardsIn(ZoneType.Graveyard);
-                final List<Card> sameCost = new ArrayList<Card>();
-                final int cost = CardUtil.getConvertedManaCost(manacost);
-                for (int i = 0; i < cards.size(); i++) {
-                    if (cards.get(i).getManaCost().getCMC() <= cost && cards.get(i).isType("Spirit")) {
-                        sameCost.add(cards.get(i));
-                    }
-                }
-
-                if (sameCost.size() == 0) {
-                    return;
-                }
-
-                if (sourceCard.getController().isHuman()) {
-                    final StringBuilder question = new StringBuilder();
-                    question.append("Return target Spirit card with converted mana cost ");
-                    question.append(manacost).append(" or less from your graveyard to your hand?");
-
-                    if (GameActionUtil.showYesNoDialog(sourceCard, question.toString())) {
-                        final Card o = GuiChoose.oneOrNone("Select a card", sameCost);
-                        if (o != null) {
-
-                            final Card c1 = o;
-                            Singletons.getModel().getGameAction().moveToHand(c1);
-                        }
-                    }
-                } else {
-                    // Wiser choice should be here
-                    Card choice = null;
-                    choice = CardFactoryUtil.getBestCreatureAI(sameCost);
-
-                    if (!(choice == null)) {
-                        Singletons.getModel().getGameAction().moveToHand(choice);
-                    }
-                }
-            } // resolve()
-        }; // SpellAbility desc
-
-        // The spell description below fails to appear in the card detail panel
-        final StringBuilder sbDesc = new StringBuilder();
-        sbDesc.append("Soulshift ").append(manacost);
-        sbDesc.append(" - When this permanent is put into a graveyard from play, ");
-        sbDesc.append("you may return target Spirit card with converted mana cost ");
-        sbDesc.append(manacost).append(" or less from your graveyard to your hand.");
-        desc.setDescription(sbDesc.toString());
-
-        final StringBuilder sbStack = new StringBuilder();
-        sbStack.append(sourceCard.getName()).append(" - Soulshift ").append(manacost);
-        desc.setStackDescription(sbStack.toString());
-
-        return desc;
-    } // soulshiftTrigger()
 
     // List<Card> choices are the only cards the user can successful select
     /**
@@ -3882,16 +3788,23 @@ public class CardFactoryUtil {
             }
         } // transmute
 
-        // Sol's Soulshift fix
         int shiftPos = CardFactoryUtil.hasKeyword(card, "Soulshift");
         while (shiftPos != -1) {
             final int n = shiftPos;
             final String parse = card.getKeyword().get(n).toString();
-
-            final String[] k = parse.split(":");
-            final String manacost = k[1];
-
-            card.addDestroyCommand(CardFactoryUtil.abilitySoulshift(card, manacost));
+            final String[] k = parse.split(" ");
+            final int manacost = Integer.parseInt(k[1]);
+            
+            final String actualTrigger = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard" +
+            		"| OptionalDecider$ You | ValidCard$ Card.Self | Execute$ SoulshiftAbility" +
+            		"| TriggerController$ TriggeredCardController | TriggerDescription$ " + parse + 
+            		" (When this creature dies, you may return target Spirit card with converted mana cost "
+            		+ manacost + " or less from your graveyard to your hand.)";
+            final String abString = "DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand" +
+            		"| ValidTgts$ Spirit.YouOwn+cmcLE" + manacost;
+            final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, true);
+            card.addTrigger(parsedTrigger);
+            card.setSVar("SoulshiftAbility", abString);
             shiftPos = CardFactoryUtil.hasKeyword(card, "Soulshift", n + 1);
         } // Soulshift
 
@@ -4523,7 +4436,6 @@ public class CardFactoryUtil {
         return -1;
     }
 
-    // Sol's Soulshift fix
     /**
      * <p>
      * hasKeyword.

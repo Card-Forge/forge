@@ -2238,7 +2238,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 String k = keywords.get(i);
                 k = k.replace("Curse", "");
                 sbLong.append(k).append("\r\n");
-            } else if (keyword.startsWith("Soulshift") || keyword.startsWith("Fading")
+            } else if (keyword.startsWith("Fading")
                     || keyword.startsWith("Ripple") || keywords.get(i).startsWith("Unearth")
                     || keyword.startsWith("Vanishing") || keywords.get(i).startsWith("Madness")) {
                 String k = keywords.get(i);
@@ -2339,16 +2339,13 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                     sbLong.append(" on it.)").append("\r\n");
                 }
-            } else if (keyword.startsWith("Modular")) {
+            } else if (keyword.startsWith("Modular") || keyword.startsWith("Soulshift") 
+                    || keyword.startsWith("ETBReplacement") || keyword.startsWith("MayEffectFromOpeningHand")) {
                 continue;
             } else if (keyword.startsWith("Provoke")) {
                 sbLong.append(keywords.get(i));
                 sbLong.append(" (When this attacks, you may have target creature ");
                 sbLong.append("defending player controls untap and block it if able.)");
-            } else if (keyword.startsWith("MayEffectFromOpeningHand")) {
-                continue;
-            } else if (keyword.startsWith("ETBReplacement")) {
-                continue;
             } else if (keyword.contains("Haunt")) {
                 sb.append("\r\nHaunt (");
                 if (this.isCreature()) {

@@ -4,7 +4,7 @@ Types:Creature Spirit
 Text:no text
 PT:2/2
 K:Fear
-K:Soulshift:5
+K:Soulshift 5
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crawling_filth.jpg

@@ -5,7 +5,7 @@ Text:no text
 PT:3/2
 K:Flying
 K:First Strike
-K:Soulshift:5
+K:Soulshift 5
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kami_of_the_palace_fields.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/24.jpg

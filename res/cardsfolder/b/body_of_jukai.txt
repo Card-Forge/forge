@@ -4,7 +4,7 @@ Types:Creature Spirit
 Text:no text
 PT:8/5
 K:Trample
-K:Soulshift:8
+K:Soulshift 8
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/body_of_jukai.jpg
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/121.jpg

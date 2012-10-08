@@ -4,7 +4,7 @@ Types:Creature Spirit
 Text:no text
 PT:3/3
 K:Vigilance
-K:Soulshift:4
+K:Soulshift 4
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card87342.jpg
 SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/30.jpg
