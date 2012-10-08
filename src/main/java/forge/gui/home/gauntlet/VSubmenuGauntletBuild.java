@@ -26,7 +26,6 @@ import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FTextArea;
 import forge.gui.toolbox.FTextField;
 
 /** 
@@ -70,11 +69,17 @@ public enum VSubmenuGauntletBuild implements IVSubmenu {
 
     private final JTextField txfFilename = new FTextField();
 
-    private final FTextArea tarDesc1 = new FTextArea(
-            "Use the left or right arrows to add or remove decks from the gauntlet.");
+    private final FLabel lblDesc1 = new FLabel.Builder()
+        .text("Left/right arrows add or remove decks.")
+        .fontSize(12).build();
 
-    private final FTextArea tarDesc2 = new FTextArea(
-            "Change the order of the opponents by using the up and down arrows.");
+    private final FLabel lblDesc2 = new FLabel.Builder()
+        .text("Up/down arrows change opponent order.")
+        .fontSize(12).build();
+
+    private final FLabel lblDecklist = new FLabel.Builder()
+        .text("Double click a non-random deck for its decklist.")
+        .fontSize(12).build();
 
     private final JLabel lblSave = new FLabel.Builder().text("Changes not yet saved.")
             .build();
@@ -123,8 +128,6 @@ public enum VSubmenuGauntletBuild implements IVSubmenu {
         .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_OPEN))
         .text(" ").hoverable(true).build();
 
-    private final JTextField txfSearch = new FTextField();
-
     private VSubmenuGauntletBuild() {
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
@@ -155,37 +158,25 @@ public enum VSubmenuGauntletBuild implements IVSubmenu {
         pnlFileHandling.add(btnNew, "h 30px!, w 30px!, gap 0 5px 0 0");
         pnlFileHandling.add(btnOpen, "h 30px!, w 30px!, gap 0 5px 0 0");
 
-        // Radio button panel
-        txfSearch.setText("Search");
-        txfSearch.setMargin(new Insets(5, 5, 5, 5));
-        txfSearch.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        txfSearch.setOpaque(true);
-        txfSearch.setEditable(true);
-        txfSearch.setFocusable(true);
-        txfSearch.setOpaque(true);
-        txfSearch.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-
+        // Radios panel
         pnlRadios.setOpaque(false);
         pnlRadios.add(radUserDecks, "h 30px!, gap 0 0 0 5px");
         pnlRadios.add(radQuestDecks, "h 30px!, gap 0 0 0 5px");
         pnlRadios.add(radColorDecks, "h 30px!, gap 0 0 0 5px");
         pnlRadios.add(radThemeDecks, "h 30px!, gap 0 0 0 5px");
-        //pnlRadios.add(txfSearch, "h 30px!, w 100%!, gap 0 0 0 5px");
 
         // Directions panel
         final JPanel pnlSpacer = new JPanel();
         pnlSpacer.setOpaque(false);
-        tarDesc1.setFont(FSkin.getFont(14));
-        tarDesc2.setFont(FSkin.getFont(14));
-
         pnlStrut.setOpaque(false);
         lblSave.setForeground(Color.red);
         lblSave.setVisible(false);
         pnlDirections.setOpaque(false);
         pnlDirections.setLayout(new MigLayout("insets 0, gap 0, wrap"));
-        pnlDirections.add(pnlSpacer, "pushy, growy");
-        pnlDirections.add(tarDesc1, "w 98%!, gap 1% 0 0 10px");
-        pnlDirections.add(tarDesc2, "w 98%!, gap 1% 0 0 20px");
+        pnlDirections.add(pnlSpacer, "w 100%!, pushy, growy");
+        pnlDirections.add(lblDesc1, "gap 1% 0 0 10px");
+        pnlDirections.add(lblDesc2, "gap 1% 0 0 10px");
+        pnlDirections.add(lblDecklist, "gap 1% 0 0 20px");
         pnlDirections.add(lblSave, "ax center, gap 0 0 0 5px");
 
         // Deck movement panel
@@ -234,9 +225,9 @@ public enum VSubmenuGauntletBuild implements IVSubmenu {
         parentCell.getBody().add(pnlStrut, "w 40px!, gap 1% 1% 0 15px");
         parentCell.getBody().add(pnlDirections, "w 48% - 20px!, gap 0 0 0 15px");
 
-        parentCell.getBody().add(scrLeft, "w 48% - 20px!, gap 1% 0 0 15px, pushy, growy");
-        parentCell.getBody().add(pnlButtons, "w 40px!, gap 1% 1% 0 15px, pushy, growy");
-        parentCell.getBody().add(scrRight, "w 48% - 20px!, gap 0 0 0 15px, pushy, growy");
+        parentCell.getBody().add(scrLeft, "w 48% - 20px!, gap 1% 0 0 25px, pushy, growy");
+        parentCell.getBody().add(pnlButtons, "w 40px!, gap 1% 1% 0 25px, pushy, growy");
+        parentCell.getBody().add(scrRight, "w 48% - 20px!, gap 0 0 0 25px, pushy, growy");
     }
 
     /** @return {@link javax.swing.JList} */
@@ -307,11 +298,6 @@ public enum VSubmenuGauntletBuild implements IVSubmenu {
     /** @return {@link javax.swing.JLabel} */
     public JLabel getLblSave() {
         return lblSave;
-    }
-
-    /** @return {@link forge.gui.toolbox.FLabel} */
-    public JTextField getTxfSearch() {
-        return this.txfSearch;
     }
 
     /** @return {@link javax.swing.JTextField} */

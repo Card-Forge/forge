@@ -57,6 +57,7 @@ import forge.util.IStorage;
 public enum CSubmenuConstructed implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
+    private final VSubmenuConstructed view = VSubmenuConstructed.SINGLETON_INSTANCE;
 
     private enum ESubmenuConstructedTypes { /** */
         COLORS, /** */
@@ -70,7 +71,19 @@ public enum CSubmenuConstructed implements ICDoc {
     private final MouseAdapter madDecklist = new MouseAdapter() {
         @Override
         public void mouseClicked(final MouseEvent e) {
-            if (e.getClickCount() == 2) { showDecklist(((JList) e.getSource())); }
+            if (e.getClickCount() == 2) {
+                final JList src = ((JList) e.getSource());
+                if (src.equals(view.getLstAIDecks())) {
+                    if (view.getRadColorsAI().isSelected()) { return; }
+                    if (view.getRadThemesAI().isSelected()) { return; }
+                }
+                else {
+                    if (view.getRadColorsHuman().isSelected()) { return; }
+                    if (view.getRadThemesHuman().isSelected()) { return; }
+                }
+
+                showDecklist(src);
+            }
         }
     };
 
@@ -103,7 +116,6 @@ public enum CSubmenuConstructed implements ICDoc {
     @Override
     public void initialize() {
         final ForgePreferences prefs = Singletons.getModel().getPreferences();
-        final VSubmenuConstructed view = VSubmenuConstructed.SINGLETON_INSTANCE;
 
         // Radio button event handling
         view.getRadColorsAI().addActionListener(new ActionListener() { @Override
@@ -347,13 +359,13 @@ public enum CSubmenuConstructed implements ICDoc {
             public Object doInBackground() {
                 Deck humanDeck = generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstHumanDecks(), PlayerType.HUMAN);
                 Deck aiDeck = generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstAIDecks(), PlayerType.COMPUTER);
-                
+
                 CMatchUI.SINGLETON_INSTANCE.initMatch(null);
                 Singletons.getModel().getMatchState().setGameType(GameType.Constructed);
 
                 if (humanDeck != null && aiDeck != null) {
-                    GameNew.newGame( new PlayerStartsGame(AllZone.getHumanPlayer(), humanDeck),
-                                     new PlayerStartsGame(AllZone.getComputerPlayer(), aiDeck) );
+                    GameNew.newGame(new PlayerStartsGame(AllZone.getHumanPlayer(), humanDeck),
+                                     new PlayerStartsGame(AllZone.getComputerPlayer(), aiDeck));
                 }
                 return null;
             }

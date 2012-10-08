@@ -50,6 +50,10 @@ public enum VSubmenuGauntletQuick implements IVSubmenu {
         .text("Quick Gauntlet Builder").fontAlign(SwingConstants.CENTER)
         .opaque(true).fontSize(16).build();
 
+    private final FLabel lblDecklist = new FLabel.Builder()
+        .text("Double click a non-random deck for its decklist.")
+        .fontSize(12).build();
+
     private JSlider sliOpponents = new JSlider(JSlider.HORIZONTAL, 5, 50, 20);
     //private JSlider sliGamesPerMatch = new JSlider(JSlider.HORIZONTAL, 1, 7, 3);
 
@@ -88,7 +92,7 @@ public enum VSubmenuGauntletQuick implements IVSubmenu {
 
     private final JLabel lblDesc = new FLabel.Builder().text(
             "A new quick gauntlet is auto-saved. They can be loaded in the \"Load Gauntlet\" screen.")
-            .build();
+            .fontSize(12).build();
 
     private final StartButton btnStart  = new StartButton();
 
@@ -109,17 +113,6 @@ public enum VSubmenuGauntletQuick implements IVSubmenu {
         sliOpponents.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         sliOpponents.setFont(FSkin.getFont(12));
 
-        /*
-        sliGamesPerMatch.setMajorTickSpacing(2);
-        sliGamesPerMatch.setMinorTickSpacing(0);
-        sliGamesPerMatch.setPaintTicks(false);
-        sliGamesPerMatch.setPaintLabels(true);
-        sliGamesPerMatch.setSnapToTicks(true);
-        sliGamesPerMatch.setOpaque(false);
-        sliGamesPerMatch.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        sliGamesPerMatch.setFont(FSkin.getFont(12));
-        */
-
         btnRandom.setOpaque(true);
 
         scrLoad.setOpaque(false);
@@ -139,7 +132,6 @@ public enum VSubmenuGauntletQuick implements IVSubmenu {
         pnlOptions.add(lblOptions, "h 30px!, w 96%!, gap 2% 0 0 5px");
         pnlOptions.add(sliOpponents, "h 40px!, w 96%!, gap 2% 0 0 5px, ax center");
         pnlOptions.add(lblDesc1, "w 96%!, gap 2% 0 0 20px");
-        //pnlOptions.add(sliGamesPerMatch, "h 24px!, w 96%!, gap 2% 0 0 5px, ax center");
         pnlOptions.add(lblDesc3, "w 96%!, gap 2% 0 0 0");
         pnlOptions.setCornerDiameter(0);
         pnlOptions.add(boxUserDecks, "w 96%!, h 30px!, gap 2% 0 0 5px");
@@ -190,8 +182,8 @@ public enum VSubmenuGauntletQuick implements IVSubmenu {
     public void populate() {
         parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
         parentCell.getBody().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px, span 2");
-
-        parentCell.getBody().add(lblDesc, "ax center, gap 0 0 0 15px, span 2");
+        parentCell.getBody().add(lblDesc, "ax center, gap 0 0 0 5px, span 2");
+        parentCell.getBody().add(lblDecklist, "ax center, gap 0 0 0 15px, span 2");
         parentCell.getBody().add(pnlOptions, "w 40%!, gap 1% 1% 0 0, pushy, growy");
         parentCell.getBody().add(pnlDecks, "w 57%!, pushy, growy");
 

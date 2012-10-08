@@ -51,6 +51,9 @@ public enum CSubmenuGauntletQuick implements ICDoc {
         @Override
         public void mouseClicked(final MouseEvent e) {
             if (e.getClickCount() == 2) {
+                if (view.getRadColorDecks().isSelected()) { return; }
+                if (view.getRadThemeDecks().isSelected()) { return; }
+
                 GauntletDeckUtil.showDecklist(((JList) e.getSource())); }
         }
     };
@@ -293,9 +296,9 @@ public enum CSubmenuGauntletQuick implements ICDoc {
                 Singletons.getModel().getMatchState().setGameType(GameType.Gauntlet);
 
                 Deck human = gd.getUserDeck();
-                Deck aiDeck = gd.getDecks().get(gd.getCompleted()); 
+                Deck aiDeck = gd.getDecks().get(gd.getCompleted());
                 if (human != null && aiDeck != null) {
-                    GameNew.newGame(new PlayerStartsGame( AllZone.getHumanPlayer(), human),
+                    GameNew.newGame(new PlayerStartsGame(AllZone.getHumanPlayer(), human),
                             new PlayerStartsGame(AllZone.getComputerPlayer(), aiDeck));
                 }
                 return null;

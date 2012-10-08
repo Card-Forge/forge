@@ -72,7 +72,11 @@ public enum CSubmenuGauntletBuild implements ICDoc {
     private final MouseAdapter madDecklist = new MouseAdapter() {
         @Override
         public void mouseClicked(final MouseEvent e) {
-            if (e.getClickCount() == 2) { GauntletDeckUtil.showDecklist(((JList) e.getSource())); }
+            if (e.getClickCount() == 2) {
+                if (view.getRadColorDecks().isSelected()) { return; }
+                if (view.getRadThemeDecks().isSelected()) { return; }
+
+                GauntletDeckUtil.showDecklist(((JList) e.getSource())); }
         }
     };
 

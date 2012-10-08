@@ -45,6 +45,10 @@ public enum VSubmenuConstructed implements IVSubmenu {
         .text("Sanctioned Format: Constructed").fontAlign(SwingConstants.CENTER)
         .fontSize(16).opaque(true).build();
 
+    private final FLabel lblDecklist = new FLabel.Builder()
+        .text("Double click a non-random deck for its decklist.")
+        .fontSize(12).build();
+
     private final JPanel pnlDecksHuman = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
     private final JPanel pnlDecksAI = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
     private final JPanel pnlRadiosHuman = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
@@ -167,6 +171,7 @@ public enum VSubmenuConstructed implements IVSubmenu {
     public void populate() {
         parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
         parentCell.getBody().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px, span 2");
+        parentCell.getBody().add(lblDecklist, "h 20px!, span 2, ax center");
         parentCell.getBody().add(pnlRadiosAI, "w 45%!, gap 1% 8% 20px 20px");
         parentCell.getBody().add(pnlRadiosHuman, "w 45%!, gap 0 0 20px 20px");
         parentCell.getBody().add(pnlDecksAI, "w 45%!, gap 1% 8% 0 0, growy, pushy");
