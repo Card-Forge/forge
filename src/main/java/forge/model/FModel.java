@@ -85,7 +85,7 @@ public enum FModel {
     private final FMatchState matchState;
     private GauntletData gauntletData;
     
-    private final QuestController quest;
+    private QuestController quest = null;
 
     private final EditionCollection editions;
     private final FormatCollection formats;
@@ -147,7 +147,6 @@ public enum FModel {
         this.blocks = new StorageView<CardBlock>(new CardBlock.Reader("res/blockdata/blocks.txt", editions));
         this.fantasyBlocks = new StorageView<CardBlock>(new CardBlock.Reader("res/blockdata/fantasyblocks.txt", editions));
 
-        this.quest = new QuestController();
         // TODO - there's got to be a better place for this...oblivion?
         Preferences.DEV_MODE = this.preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
 
@@ -164,6 +163,9 @@ public enum FModel {
     }
 
     public final QuestController getQuest() {
+        if (quest == null) {
+            this.quest = new QuestController();
+        }
         return quest;
     }
 
