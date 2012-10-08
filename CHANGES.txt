@@ -70,6 +70,57 @@ Fixes/Features:
 - Test NET_CONN no longer should slowdown the main thread
 - Removed Braids progress monitor (unused)
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed undoBlockingAssignment.
+- TreeProperties: removed unused functionality, moved the remaining class to forge.util
+- Gauntlet Mode has landed.
+- get****Player methods are depreacated. Do not use them in new code.
+- Exile zone marked as containing hidden information
+- Players have getType method to learn if certain player is AI or human
+- GameState stores player list instead of harcoded 2 players
+- fixing error
+- Removing getXXXXPlayer calls - they mostly refer to AI now, so that I get current AI player from sa activatingPlayer
+- ChangeZone - removed getComputer/HumanPlayer
+- removed some old code from counters
+- Players have getAllies/Opponents methods
+- Another portion of AI files cleaned from getHuman/ComputerPlayer
+- Removing calls to getComputer/Human player. Hope AI is still alive
+- The AI will now play lands from the top of the library with Oracle of Mul Daya.
+- Fixed AI of Victimize.
+- Added SVar:RemAIDeck:True to Chimeric Idol.
+- Another portion of removal of global getters getXXXPlayer
+- this fixes 1st exception from /viewtopic.php?f=52&t=8301
+- Reverted changes made to main.properties in r17383.
+- Cleanup.
+- Morph spells will now truly be cast face down.
+- Converted Lodestone Bauble to script.
+- removal of another hundred of calls to global getPlayer
+- avoid possible OoB exception
+- Bugfix: Math.round produced OoB on random deck generation for quick gauntlets, now Math.floor.
+- Cleaning up some sealed deck AI for non basic lands
+- Move the GameFormatQuest to the proper place in class hierarchy, removed outside references.
+- Made sure that certain methods of GameFormatQuest return immutable objects too.
+- Simplified the predicates in QuestUtilCards.java.
+- Spell shop no longer sells snow-covered lands if enforcing a format that doesn't contain snow-covered land sets (Ice Age, Coldsnap).
+- NPE @ forge.card.spellability.SpellAbility.chooseTargetAI(SpellAbility.java:211)
+- CommandArgs.java not used any longer
+- Booster pack choice now shows more verbose set names; tiny cleanup
+- as asked in /forum/viewtopic.php?f=52&t=8312
+- Updated the quest deck Doc Holiday 1 with Ixidron.
+- The challenge rewards now honor the persistent format if enforced.
+- Fixed devSetupGameState().
+- 30 less global calls for special player
+- Removed chooseTargetAI and related stuff.
+- Removed an unnecessary import added automatically by the over-zealous Eclipse.
+- Small update to FButton.
+- Small fix to FButton.
+- SVN difficulties...fixed now.
+- Standardizing home screen appearance: Sanctioned submenu (all)
+- Standardizing home screen appearance: Gauntlet submenu (all)
+- 1 call less
+- Standardizing home screen appearance: Quest submenu (all)
+- remove warnings, use FileUtil to read text files
+- Renamed TableModel to less confusing EditorTableModel.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -82,6 +133,7 @@ Added the following cards:
 Epic Experiment
 Sphinx of the Chimes
 Angel of Serenity
+Memoricide
 
 
 end
