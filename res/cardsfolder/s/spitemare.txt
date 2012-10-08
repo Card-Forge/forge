@@ -6,6 +6,7 @@ PT:3/3
 T:Mode$ DamageDone | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to target creature or player.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | NumDmg$ X | References$ X | Tgt$ TgtCP
 SVar:X:TriggerCount$DamageAmount
+SVar:HasCombatEffect:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spitemare.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/147.jpg
