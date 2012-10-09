@@ -163,6 +163,9 @@ public class GameAction {
             for (final ReplacementEffect repl : copied.getReplacementEffects()) {
                 repl.setHostCard(copied);
             }
+            if (c.getName().equals("Skullbriar, the Walking Grave")) {
+                copied.setCounters(c.getCounters());
+            }
         }
 
         if (!suppress) {
@@ -234,9 +237,6 @@ public class GameAction {
             return copied;
         }
 
-        // remove all counters from the card if destination is not the
-        // battlefield
-        // UNLESS we're dealing with Skullbriar, the Walking Grave
         if (zoneFrom.is(ZoneType.Battlefield)) {
             copied.setSuspendCast(false);
             // remove all counters from the card if destination is not the battlefield
