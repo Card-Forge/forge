@@ -29,7 +29,6 @@ import forge.AllZone;
 import forge.Constant;
 import forge.Constant.Preferences;
 import forge.GameAction;
-import forge.Singletons;
 import forge.card.BoosterData;
 import forge.card.CardBlock;
 import forge.card.EditionCollection;
@@ -397,27 +396,6 @@ public enum FModel {
      */
     public final FormatCollection getFormats() {
         return this.formats;
-    }
-
-    /**
-     * TODO: Remove this method completely.
-     * @return true, if successful
-     */
-    public final boolean savePrefs() {
-        this.preferences.writeMatchPreferences();
-        this.preferences.save();
-        return true;
-    }
-
-    /**
-     * TODO: Remove this method completely.
-     * 
-     * @return true, if successful
-     */
-    public final boolean loadPrefs() {
-        final ForgePreferences fp = Singletons.getModel().getPreferences();
-        fp.actuateMatchPreferences();
-        return true;
     }
 
     /**

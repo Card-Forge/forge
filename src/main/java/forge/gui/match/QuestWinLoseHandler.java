@@ -115,7 +115,9 @@ public class QuestWinLoseHandler extends ControlWinLose {
      */
     @Override
     public final void startNextRound() {
-        Singletons.getModel().savePrefs();
+        Singletons.getModel().getPreferences().writeMatchPreferences();
+        Singletons.getModel().getPreferences().save();
+
         SOverlayUtils.hideOverlay();
         Singletons.getModel().getQuestPreferences().save();
 
@@ -324,7 +326,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
         qData.setCurrentEvent(null);
         qData.save();
         Singletons.getModel().getQuestPreferences().save();
-        Singletons.getModel().savePrefs();
+        Singletons.getModel().getPreferences().writeMatchPreferences();
+        Singletons.getModel().getPreferences().save();
 
         Singletons.getControl().changeState(FControl.HOME_SCREEN);
 

@@ -26,7 +26,8 @@ public enum CDev implements ICDoc {
     private final MouseListener madMilling = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
             VDev.SINGLETON_INSTANCE.getLblMilling().toggleEnabled();
-            Singletons.getModel().savePrefs();
+            Singletons.getModel().getPreferences().writeMatchPreferences();
+            Singletons.getModel().getPreferences().save();
     } };
 
     private final MouseListener madUnlimited = new MouseAdapter() { @Override

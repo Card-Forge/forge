@@ -16,7 +16,6 @@ import com.google.common.collect.Lists;
 
 import forge.AllZone;
 import forge.Card;
-
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardUtil;
@@ -298,7 +297,8 @@ public class GameNew {
         VAntes.SINGLETON_INSTANCE.clearAnteCards();
         AllZone.getInputControl().resetInput();
         Singletons.getModel().getMatchState().reset();
-        Singletons.getModel().loadPrefs();
+
+        Singletons.getModel().getPreferences().actuateMatchPreferences();
     }
 
  // this is where the computer cheats

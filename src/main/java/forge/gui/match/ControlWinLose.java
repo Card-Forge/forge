@@ -89,7 +89,8 @@ public class ControlWinLose {
 
         // Reset other stuff
         Singletons.getModel().getMatchState().reset();
-        Singletons.getModel().savePrefs();
+        Singletons.getModel().getPreferences().writeMatchPreferences();
+        Singletons.getModel().getPreferences().save();
         Singletons.getControl().changeState(FControl.HOME_SCREEN);
         SOverlayUtils.hideOverlay();
     }
@@ -106,7 +107,10 @@ public class ControlWinLose {
         if (isAnte && !gameType.equals(GameType.Quest)) {
             executeAnte();
         }
-        Singletons.getModel().savePrefs();
+
+        Singletons.getModel().getPreferences().writeMatchPreferences();
+        Singletons.getModel().getPreferences().save();
+
         CMatchUI.SINGLETON_INSTANCE.initMatch(null);
         GameNew.newGame( new PlayerStartsGame(AllZone.getHumanPlayer(), AllZone.getHumanPlayer().getDeck()), 
                          new PlayerStartsGame(AllZone.getComputerPlayer(), AllZone.getComputerPlayer().getDeck()));
