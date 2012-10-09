@@ -1326,7 +1326,7 @@ public class ComputerUtil {
 
             Card land = landList.get(ix);
             //play basic lands that are needed the most
-            if (!Iterables.any(landList, CardPredicates.Presets.BASIC_LANDS)) {
+            if (Iterables.any(landList, CardPredicates.Presets.BASIC_LANDS)) {
                 final List<Card> combined = ai.getCardsIn(ZoneType.Battlefield);
 
                 final ArrayList<String> basics = new ArrayList<String>();
@@ -1351,6 +1351,7 @@ public class ComputerUtil {
                         minSize = num;
                     }
                 }
+                System.out.println("AI lands: " + landList + combined + basics + minType);
 
                 if (minType != null) {
                     landList = CardLists.getType(landList, minType);
