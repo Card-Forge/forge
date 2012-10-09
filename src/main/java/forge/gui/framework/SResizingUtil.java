@@ -1,5 +1,6 @@
 package forge.gui.framework;
 
+import java.awt.Cursor;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -41,6 +42,16 @@ public final class SResizingUtil {
 
     private static final MouseListener MAD_RESIZE_X = new MouseAdapter() {
         @Override
+        public void mouseEntered(final MouseEvent e) {
+            FView.SINGLETON_INSTANCE.getLpnDocument().setCursor(Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(final MouseEvent e) {
+            FView.SINGLETON_INSTANCE.getLpnDocument().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+        }
+
+        @Override
         public void mousePressed(final MouseEvent e) {
             SResizingUtil.startResizeX(e);
         }
@@ -52,6 +63,16 @@ public final class SResizingUtil {
     };
 
     private static final MouseListener MAD_RESIZE_Y = new MouseAdapter() {
+        @Override
+        public void mouseEntered(final MouseEvent e) {
+            FView.SINGLETON_INSTANCE.getLpnDocument().setCursor(Cursor.getPredefinedCursor(Cursor.N_RESIZE_CURSOR));
+        }
+
+        @Override
+        public void mouseExited(final MouseEvent e) {
+            FView.SINGLETON_INSTANCE.getLpnDocument().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+        }
+
         @Override
         public void mousePressed(final MouseEvent e) {
             SResizingUtil.startResizeY(e);

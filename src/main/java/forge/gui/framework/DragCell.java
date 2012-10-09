@@ -1,7 +1,6 @@
 package forge.gui.framework;
 
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -81,12 +80,10 @@ public final class DragCell extends JPanel implements ILocalRepaint {
         lblOverflow.setToolTipText("Other tabs");
 
         pnlBorderRight.setOpaque(false);
-        pnlBorderRight.setCursor(Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR));
         pnlBorderRight.addMouseListener(SResizingUtil.getResizeXListener());
         pnlBorderRight.addMouseMotionListener(SResizingUtil.getDragXListener());
 
         pnlBorderBottom.setOpaque(false);
-        pnlBorderBottom.setCursor(Cursor.getPredefinedCursor(Cursor.N_RESIZE_CURSOR));
         pnlBorderBottom.addMouseListener(SResizingUtil.getResizeYListener());
         pnlBorderBottom.addMouseMotionListener(SResizingUtil.getDragYListener());
 
@@ -341,6 +338,8 @@ public final class DragCell extends JPanel implements ILocalRepaint {
         this.removeAll();
         // These cause the cell to be "bumped" over...hopefully can
         // just slice out?  Doublestrike 18-09-12
+        // Looks good so far... Doublestrike 09-10-12
+
        // this.add(pnlBorderRight, "w " + SLayoutConstants.BORDER_T + "px!, "
        //         + "h 100% - " + SLayoutConstants.BORDER_T + "px!, span 1 2");
         this.add(pnlBody, "w 100% - " + SLayoutConstants.BORDER_T + "px!, "
