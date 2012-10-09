@@ -1,4 +1,4 @@
-package forge.gauntlet;
+package forge.deck;
 
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
@@ -17,7 +17,6 @@ import javax.swing.JOptionPane;
 import org.apache.commons.lang3.ArrayUtils;
 
 import forge.Singletons;
-import forge.deck.Deck;
 import forge.deck.generate.Generate2ColorDeck;
 import forge.deck.generate.Generate3ColorDeck;
 import forge.deck.generate.Generate5ColorDeck;
@@ -33,9 +32,11 @@ import forge.util.IStorage;
  * Utility collection for various types of decks.
  * - Builders (builds or retrieves deck based on a selection)
  * - Randomizers (retrieves random deck of selected type)
+ * - Color checker (see javadoc)
+ * - Decklist display-er
  */
 // TODO This class can be used for home menu constructed deck generation as well.
-public class GauntletDeckUtil {
+public class DeckgenUtil {
     /** */
     public static final Map<String, String> COLOR_VALS = new HashMap<String, String>();
 
@@ -137,7 +138,7 @@ public class GauntletDeckUtil {
         // A simulated selection of "random 1" will trigger the AI selection process.
         for (int i = 0; i < count; i++) { selection[i] = "Random 1"; }
 
-        return GauntletDeckUtil.buildColorDeck(selection);
+        return DeckgenUtil.buildColorDeck(selection);
     }
 
     /** @return {@link forge.deck.Deck} */
@@ -145,7 +146,7 @@ public class GauntletDeckUtil {
         final List<String> themeNames = new ArrayList<String>();
         for (final String s : GenerateThemeDeck.getThemeNames()) { themeNames.add(s); }
         final int rand = (int) (Math.floor(Math.random() * themeNames.size()));
-        return GauntletDeckUtil.buildThemeDeck(new String[] {themeNames.get(rand)});
+        return DeckgenUtil.buildThemeDeck(new String[] {themeNames.get(rand)});
     }
 
     /** @return {@link forge.deck.Deck} */

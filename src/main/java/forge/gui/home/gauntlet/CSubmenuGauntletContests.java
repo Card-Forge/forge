@@ -20,13 +20,13 @@ import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
+import forge.deck.DeckgenUtil;
+import forge.deck.DeckgenUtil.DeckTypes;
 import forge.deck.generate.GenerateThemeDeck;
 import forge.game.GameNew;
 import forge.game.GameType;
 import forge.game.PlayerStartsGame;
 import forge.gauntlet.GauntletData;
-import forge.gauntlet.GauntletDeckUtil;
-import forge.gauntlet.GauntletDeckUtil.DeckTypes;
 import forge.gauntlet.GauntletIO;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
@@ -53,7 +53,7 @@ public enum CSubmenuGauntletContests implements ICDoc {
         @Override
         public void mouseClicked(final MouseEvent e) {
             if (e.getClickCount() == 2) {
-                GauntletDeckUtil.showDecklist(((JList) e.getSource())); }
+                DeckgenUtil.showDecklist(((JList) e.getSource())); }
         }
     };
 
@@ -67,14 +67,14 @@ public enum CSubmenuGauntletContests implements ICDoc {
     private final Command cmdRandomRegular = new Command() {
         @Override
         public void execute() {
-            GauntletDeckUtil.randomSelect(view.getLstDecks());
+            DeckgenUtil.randomSelect(view.getLstDecks());
         }
     };
 
     private final Command cmdRandomColors = new Command() {
         @Override
         public void execute() {
-            view.getLstDecks().setSelectedIndices(GauntletDeckUtil.randomSelectColors());
+            view.getLstDecks().setSelectedIndices(DeckgenUtil.randomSelectColors());
         }
     };
 
@@ -219,17 +219,17 @@ public enum CSubmenuGauntletContests implements ICDoc {
                     view.getLstDecks().getSelectedValues()).toArray(new String[0]);
 
             if (view.getRadColorDecks().isSelected()) {
-                if (!GauntletDeckUtil.colorCheck(selection)) { return; }
-                userDeck = GauntletDeckUtil.buildColorDeck(selection);
+                if (!DeckgenUtil.colorCheck(selection)) { return; }
+                userDeck = DeckgenUtil.buildColorDeck(selection);
             }
             else if (view.getRadQuestDecks().isSelected()) {
-                userDeck = GauntletDeckUtil.buildQuestDeck(selection);
+                userDeck = DeckgenUtil.buildQuestDeck(selection);
             }
             else if (view.getRadThemeDecks().isSelected()) {
-                userDeck = GauntletDeckUtil.buildThemeDeck(selection);
+                userDeck = DeckgenUtil.buildThemeDeck(selection);
             }
             else {
-                userDeck = GauntletDeckUtil.buildCustomDeck(selection);
+                userDeck = DeckgenUtil.buildCustomDeck(selection);
             }
             gd.setUserDeck(userDeck);
         }

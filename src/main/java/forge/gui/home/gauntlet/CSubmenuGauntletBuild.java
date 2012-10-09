@@ -20,10 +20,10 @@ import org.apache.commons.lang3.ArrayUtils;
 import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
+import forge.deck.DeckgenUtil;
+import forge.deck.DeckgenUtil.DeckTypes;
 import forge.deck.generate.GenerateThemeDeck;
 import forge.gauntlet.GauntletData;
-import forge.gauntlet.GauntletDeckUtil;
-import forge.gauntlet.GauntletDeckUtil.DeckTypes;
 import forge.gauntlet.GauntletIO;
 import forge.gui.framework.ICDoc;
 import forge.quest.QuestController;
@@ -75,7 +75,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
                 if (view.getRadColorDecks().isSelected()) { return; }
                 if (view.getRadThemeDecks().isSelected()) { return; }
 
-                GauntletDeckUtil.showDecklist(((JList) e.getSource())); }
+                DeckgenUtil.showDecklist(((JList) e.getSource())); }
         }
     };
 
@@ -234,17 +234,17 @@ public enum CSubmenuGauntletBuild implements ICDoc {
         if (selection.length == 0) { return; }
 
         if (view.getRadColorDecks().isSelected()) {
-            if (!GauntletDeckUtil.colorCheck(selection)) { return; }
-            deckToAdd = GauntletDeckUtil.buildColorDeck(selection);
+            if (!DeckgenUtil.colorCheck(selection)) { return; }
+            deckToAdd = DeckgenUtil.buildColorDeck(selection);
         }
         else if (view.getRadQuestDecks().isSelected()) {
-            deckToAdd = GauntletDeckUtil.buildQuestDeck(selection);
+            deckToAdd = DeckgenUtil.buildQuestDeck(selection);
         }
         else if (view.getRadThemeDecks().isSelected()) {
-            deckToAdd = GauntletDeckUtil.buildThemeDeck(selection);
+            deckToAdd = DeckgenUtil.buildThemeDeck(selection);
         }
         else {
-            deckToAdd = GauntletDeckUtil.buildCustomDeck(selection);
+            deckToAdd = DeckgenUtil.buildCustomDeck(selection);
         }
 
         workingDecks.add(deckToAdd);

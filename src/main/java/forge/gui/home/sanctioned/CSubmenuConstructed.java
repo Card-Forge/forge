@@ -1,22 +1,16 @@
 package forge.gui.home.sanctioned;
 
-import java.awt.Toolkit;
-import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Random;
 
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
@@ -27,9 +21,7 @@ import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
-import forge.deck.generate.Generate2ColorDeck;
-import forge.deck.generate.Generate3ColorDeck;
-import forge.deck.generate.Generate5ColorDeck;
+import forge.deck.DeckgenUtil;
 import forge.deck.generate.GenerateThemeDeck;
 import forge.game.GameNew;
 import forge.game.GameType;
@@ -39,8 +31,6 @@ import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.CMatchUI;
 import forge.gui.toolbox.FLabel;
-import forge.item.CardPrinted;
-import forge.item.ItemPoolView;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
@@ -82,7 +72,7 @@ public enum CSubmenuConstructed implements ICDoc {
                     if (view.getRadThemesHuman().isSelected()) { return; }
                 }
 
-                showDecklist(src);
+                DeckgenUtil.showDecklist(src);
             }
         }
     };
@@ -217,7 +207,8 @@ public enum CSubmenuConstructed implements ICDoc {
                   : VSubmenuConstructed.SINGLETON_INSTANCE.getBtnAIRandom());
 
         btn.setCommand(new Command() { @Override
-                    public void execute() { randomSelectColors(lst); } });
+                    public void execute() { lst.setSelectedIndices(
+                            DeckgenUtil.randomSelectColors()); } });
 
         // Init basic two color deck
         lst.setSelectedIndices(new int[]{0, 1});
@@ -246,7 +237,7 @@ public enum CSubmenuConstructed implements ICDoc {
                   : VSubmenuConstructed.SINGLETON_INSTANCE.getBtnAIRandom());
 
         btn.setCommand(new Command() { @Override
-                    public void execute() { randomSelectRegular(lst); } });
+                    public void execute() { DeckgenUtil.randomSelect(lst); } });
 
         // Init first in list
         lst.setSelectedIndex(0);
@@ -273,7 +264,7 @@ public enum CSubmenuConstructed implements ICDoc {
                   : VSubmenuConstructed.SINGLETON_INSTANCE.getBtnAIRandom());
 
         btn.setCommand(new Command() { @Override
-                    public void execute() { randomSelectRegular(lst); } });
+                    public void execute() { DeckgenUtil.randomSelect(lst); } });
 
         // Init first in list
         lst.setSelectedIndex(0);
@@ -306,42 +297,10 @@ public enum CSubmenuConstructed implements ICDoc {
                   : VSubmenuConstructed.SINGLETON_INSTANCE.getBtnAIRandom());
 
         btn.setCommand(new Command() { @Override
-                    public void execute() { randomSelectRegular(lst); } });
+                    public void execute() { DeckgenUtil.randomSelect(lst); } });
 
         // Init first in list
         lst.setSelectedIndex(0);
-    }
-    /** 
-     * Checks lengths of selected values for color lists
-     * to see if a deck generator exists. Alert and visual reminder if fail.
-     * 
-     * @param colors0 &emsp; String[] of color names
-     * @return boolean
-     */
-    private static boolean colorCheck(final String[] colors0) {
-        boolean result = true;
-
-        if (colors0.length == 1) {
-            JOptionPane.showMessageDialog(null,
-                    "Sorry, single color generated decks aren't supported yet."
-                    + "\n\rPlease choose at least one more color for this deck.",
-                    "Generate deck: 1 color", JOptionPane.ERROR_MESSAGE);
-            result = false;
-        }
-        else if (colors0.length == 4) {
-            JOptionPane.showMessageDialog(null,
-                    "Sorry, four color generated decks aren't supported yet."
-                    + "\n\rPlease use 2, 3, or 5 colors for this deck.",
-                    "Generate deck: 4 colors", JOptionPane.ERROR_MESSAGE);
-            result = false;
-        }
-        else if (colors0.length > 5) {
-            JOptionPane.showMessageDialog(null,
-                    "Generate deck: maximum five colors!",
-                    "Generate deck: too many colors", JOptionPane.ERROR_MESSAGE);
-            result = false;
-        }
-        return result;
     }
 
     /** @param lists0 &emsp; {@link java.util.List}<{@link javax.swing.JList}> */
@@ -380,7 +339,6 @@ public enum CSubmenuConstructed implements ICDoc {
 
     /** Generates deck from current list selection(s). */
     private Deck generateDeck(final JList lst0, final PlayerType player0) {
-        ItemPoolView<CardPrinted> cards = null;
         final String[] selection = Arrays.copyOf(lst0.getSelectedValues(),
                 lst0.getSelectedValues().length, String[].class);
 
@@ -388,50 +346,18 @@ public enum CSubmenuConstructed implements ICDoc {
 
         if (selection.length == 0) { return null; }
 
-        // Color deck
-        if (lst0.getName().equals(ESubmenuConstructedTypes.COLORS.toString()) && colorCheck(selection)) {
-            // Replace "random" with "AI" for deck generation code
-            for (int i = 0; i < selection.length; i++) {
-                selection[i] = COLOR_VALS.get(selection[i]);
-            }
-
-            // 2, 3, and 5 colors.
-            if (selection.length == 2) {
-                final Generate2ColorDeck gen = new Generate2ColorDeck(
-                        selection[0], selection[1]);
-                cards = gen.get2ColorDeck(60, player0);
-            }
-            else if (selection.length == 3) {
-                final Generate3ColorDeck gen = new Generate3ColorDeck(
-                        selection[0], selection[1], selection[2]);
-                cards = gen.get3ColorDeck(60, player0);
-            }
-            else {
-                System.out.println("asdf " + selection[0] + " " + selection[1] + " " +  selection[2] + " " +  selection[3] + " " +  selection[4]);
-                final Generate5ColorDeck gen = new Generate5ColorDeck();
-                cards = gen.get5ColorDeck(60, player0);
-            }
-
-            // After generating card lists, build deck.
-            deck = new Deck();
-            deck.getMain().addAll(cards);
+        if (lst0.getName().equals(ESubmenuConstructedTypes.COLORS.toString()) && DeckgenUtil.colorCheck(selection)) {
+            deck = DeckgenUtil.buildColorDeck(selection);
         }
-
-        // Theme deck
         else if (lst0.getName().equals(ESubmenuConstructedTypes.THEMES.toString())) {
-            final GenerateThemeDeck gen = new GenerateThemeDeck();
-            cards = gen.getThemeDeck(selection[0], 60);
-
-            // After generating card lists, build deck.
-            deck = new Deck();
-            deck.getMain().addAll(cards);
+            deck = DeckgenUtil.buildThemeDeck(selection);
         }
         else if (lst0.getName().equals(ESubmenuConstructedTypes.QUESTEVENTS.toString())) {
-            deck = quest.getDuelsManager().getEvent(selection[0]).getEventDeck();
+            deck = DeckgenUtil.buildQuestDeck(selection);
         }
         // Custom deck
         else if (lst0.getName().equals(ESubmenuConstructedTypes.CUSTOM.toString())) {
-            deck = Singletons.getModel().getDecks().getConstructed().get(selection[0]);
+            deck = DeckgenUtil.buildCustomDeck(selection);
         }
         // Failure, for some reason
         else {
@@ -439,100 +365,6 @@ public enum CSubmenuConstructed implements ICDoc {
         }
 
         return deck;
-    }
-
-    /** Shows decklist dialog for a given deck.
-     * @param d0 &emsp; {@link forge.deck.Deck} */
-    private void showDecklist(final JList lst0) {
-        final String deckName = lst0.getSelectedValue().toString();
-        final Deck deck;
-
-        // Retrieve from custom or quest deck maps
-        if (lst0.getName().equals(ESubmenuConstructedTypes.CUSTOM.toString())) {
-            deck = Singletons.getModel().getDecks().getConstructed().get(deckName);
-        }
-        else {
-            deck = quest.getDuelsManager().getEvent(deckName).getEventDeck();
-        }
-
-        // Dump into map and display.
-        final HashMap<String, Integer> deckMap = new HashMap<String, Integer>();
-
-        for (final Entry<CardPrinted, Integer> s : deck.getMain()) {
-            deckMap.put(s.getKey().getName(), s.getValue());
-        }
-
-        final String nl = System.getProperty("line.separator");
-        final StringBuilder deckList = new StringBuilder();
-        final String dName = deck.getName();
-
-        deckList.append(dName == null ? "" : dName + nl + nl);
-
-        final ArrayList<String> dmKeys = new ArrayList<String>();
-        for (final String s : deckMap.keySet()) {
-            dmKeys.add(s);
-        }
-
-        Collections.sort(dmKeys);
-
-        for (final String s : dmKeys) {
-            deckList.append(deckMap.get(s) + " x " + s + nl);
-        }
-
-        final StringBuilder msg = new StringBuilder();
-        if (deckMap.keySet().size() <= 32) {
-            msg.append(deckList.toString() + nl);
-        } else {
-            msg.append("Decklist too long for dialog." + nl + nl);
-        }
-
-        msg.append("Copy Decklist to Clipboard?");
-
-        // Output
-        final int rcMsg = JOptionPane.showConfirmDialog(null, msg, "Decklist", JOptionPane.OK_CANCEL_OPTION);
-        if (rcMsg == JOptionPane.OK_OPTION) {
-            final StringSelection ss = new StringSelection(deckList.toString());
-            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-        }
-    } // End showDecklist
-
-    /** @param lst0 &emsp; {@link javax.swing.JList} */
-    private void randomSelectColors(final JList lst0) {
-     // Color select algorithm
-        int x = -1;
-        // HACK because 1 and 4 color decks are not supported yet. :(
-        while (x == -1 || x == 1 || x == 4) {
-            x = (int) Math.ceil(Math.random() * 5);
-        }
-        final Integer colorCount = x;
-
-        final int maxCount = lst0.getModel().getSize();
-        Integer[] selectedIndices = new Integer[colorCount];
-
-        x = -1;
-        for (int i = 0; i < colorCount; i++) {
-            while (x == -1) {
-                x = (int) Math.floor(Math.random() * maxCount);
-                if (Arrays.asList(selectedIndices).contains(x)) { x = -1; }
-                else { selectedIndices[i] = x; }
-            }
-            x = -1;
-        }
-
-        lst0.setSelectedIndices(ArrayUtils.toPrimitive(selectedIndices));
-    }
-
-    /** @param lst0 &emsp; {@link javax.swing.JList} */
-    private void randomSelectRegular(final JList lst0) {
-        final int size = lst0.getModel().getSize();
-
-        if (size > 0) {
-            final Random r = new Random();
-            final int i = r.nextInt(size);
-
-            lst0.setSelectedIndex(i);
-            lst0.ensureIndexIsVisible(lst0.getSelectedIndex());
-        }
     }
 
     /* (non-Javadoc)

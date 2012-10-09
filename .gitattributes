@@ -12577,6 +12577,7 @@ src/main/java/forge/deck/DeckBase.java -text
 src/main/java/forge/deck/DeckGroup.java -text
 src/main/java/forge/deck/DeckRecognizer.java -text
 src/main/java/forge/deck/DeckSection.java -text
+src/main/java/forge/deck/DeckgenUtil.java -text
 src/main/java/forge/deck/generate/CCnt.java -text
 src/main/java/forge/deck/generate/Generate2ColorDeck.java svneol=native#text/plain
 src/main/java/forge/deck/generate/Generate3ColorDeck.java svneol=native#text/plain
@@ -12655,7 +12656,6 @@ src/main/java/forge/game/zone/PlayerZoneBattlefield.java svneol=native#text/plai
 src/main/java/forge/game/zone/ZoneType.java -text
 src/main/java/forge/game/zone/package-info.java svneol=native#text/plain
 src/main/java/forge/gauntlet/GauntletData.java -text
-src/main/java/forge/gauntlet/GauntletDeckUtil.java -text
 src/main/java/forge/gauntlet/GauntletIO.java -text
 src/main/java/forge/gui/CardContainer.java svneol=native#text/plain
 src/main/java/forge/gui/CardDetailPanel.java svneol=native#text/plain

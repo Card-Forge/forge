@@ -20,13 +20,13 @@ import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
+import forge.deck.DeckgenUtil;
+import forge.deck.DeckgenUtil.DeckTypes;
 import forge.deck.generate.GenerateThemeDeck;
 import forge.game.GameNew;
 import forge.game.GameType;
 import forge.game.PlayerStartsGame;
 import forge.gauntlet.GauntletData;
-import forge.gauntlet.GauntletDeckUtil;
-import forge.gauntlet.GauntletDeckUtil.DeckTypes;
 import forge.gauntlet.GauntletIO;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
@@ -54,21 +54,21 @@ public enum CSubmenuGauntletQuick implements ICDoc {
                 if (view.getRadColorDecks().isSelected()) { return; }
                 if (view.getRadThemeDecks().isSelected()) { return; }
 
-                GauntletDeckUtil.showDecklist(((JList) e.getSource())); }
+                DeckgenUtil.showDecklist(((JList) e.getSource())); }
         }
     };
 
     private final Command cmdRandomRegular = new Command() {
         @Override
         public void execute() {
-            GauntletDeckUtil.randomSelect(view.getLstDecks());
+            DeckgenUtil.randomSelect(view.getLstDecks());
         }
     };
 
     private final Command cmdRandomColors = new Command() {
         @Override
         public void execute() {
-            view.getLstDecks().setSelectedIndices(GauntletDeckUtil.randomSelectColors());
+            view.getLstDecks().setSelectedIndices(DeckgenUtil.randomSelectColors());
         }
     };
 
@@ -229,17 +229,17 @@ public enum CSubmenuGauntletQuick implements ICDoc {
                 view.getLstDecks().getSelectedValues()).toArray(new String[0]);
 
         if (view.getRadColorDecks().isSelected()) {
-            if (!GauntletDeckUtil.colorCheck(selection)) { return; }
-            userDeck = GauntletDeckUtil.buildColorDeck(selection);
+            if (!DeckgenUtil.colorCheck(selection)) { return; }
+            userDeck = DeckgenUtil.buildColorDeck(selection);
         }
         else if (view.getRadQuestDecks().isSelected()) {
-            userDeck = GauntletDeckUtil.buildQuestDeck(selection);
+            userDeck = DeckgenUtil.buildQuestDeck(selection);
         }
         else if (view.getRadThemeDecks().isSelected()) {
-            userDeck = GauntletDeckUtil.buildThemeDeck(selection);
+            userDeck = DeckgenUtil.buildThemeDeck(selection);
         }
         else {
-            userDeck = GauntletDeckUtil.buildCustomDeck(selection);
+            userDeck = DeckgenUtil.buildCustomDeck(selection);
         }
 
         // Generate gauntlet decks
@@ -258,19 +258,19 @@ public enum CSubmenuGauntletQuick implements ICDoc {
         for (int i = 0; i < numOpponents; i++) {
             randType = (int) Math.round(Math.random() * (lstDecktypes.size() - 1));
             if (lstDecktypes.get(randType).equals(DeckTypes.COLORS)) {
-                tempDeck = GauntletDeckUtil.getRandomColorDeck();
+                tempDeck = DeckgenUtil.getRandomColorDeck();
                 lstEventNames.add("Random colors deck");
             }
             else if (lstDecktypes.get(randType).equals(DeckTypes.THEMES)) {
-                tempDeck = GauntletDeckUtil.getRandomThemeDeck();
+                tempDeck = DeckgenUtil.getRandomThemeDeck();
                 lstEventNames.add("Random theme deck");
             }
             else if (lstDecktypes.get(randType).equals(DeckTypes.CUSTOM)) {
-                tempDeck =  GauntletDeckUtil.getRandomCustomDeck();
+                tempDeck =  DeckgenUtil.getRandomCustomDeck();
                 lstEventNames.add(tempDeck.getName());
             }
             else {
-                tempDeck =  GauntletDeckUtil.getRandomQuestDeck();
+                tempDeck =  DeckgenUtil.getRandomQuestDeck();
                 lstEventNames.add(tempDeck.getName());
             }
 
