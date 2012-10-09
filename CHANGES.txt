@@ -5,7 +5,13 @@ Forge Beta: 1#-##-2012 ver 1.2.16
 11### cards in total.
 
 
+Some large scale changes are being made to the code at this time and this portion of the project is not yet finished. The Forge snapshot builds should be considered unstable. Most people will want to play the last beta rather then help test the new snapshot builds for the next seveal weeks.
 
+--
+
+The new damage dialog now uses the new UI.
+
+A new Gauntlet mode has been added.
 
 --
 
@@ -129,6 +135,27 @@ Fixes/Features:
 - remoevd AllZone.getXXXplayer calls
 - add a check to ignore .svn directories
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Converted Isochron Scepter and three other cards to use AF Play instead of AF Copy.
+- Fixed casting cost of Slum Reaper.
+- Added the option "DifferentNames" to AF ChangeZone.
+- 100 warnings remain
+- 20 global calls less (80 to go)
+- Converted Soulshift to a macro script.
+- QuestController moved to FModel,
+- AllZone.getPlayersInGame() inlined as gameState.getPlayers
+- Cleanup.
+- Added "SVar:HasCombatEffect:TRUE" to some cards.
+- Temporary fix so QuestController is instantiated when it's first requested, instead of when FModel is, since that's too early
+- Minor fix for quest saves tooltip
+- Gussied up damage assignment dialog.
+- Added a GU morph opponent: Jesse James 1.
+- Fixed Skullbriar, the Walking Grave.
+- You may edit quest decks now
+- Fixed a logic error in chooseLandsToPlay.
+- Restored resizing cursor on resizeable panels.
+- Resolved NPE on "Remove 4" button, if no card in current deck.
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -142,6 +169,7 @@ Epic Experiment
 Sphinx of the Chimes
 Angel of Serenity
 Memoricide
+Three Dreams
 
 
 end
