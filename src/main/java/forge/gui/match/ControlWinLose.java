@@ -9,7 +9,6 @@ import javax.swing.JButton;
 
 import forge.AllZone;
 import forge.Card;
-
 import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
@@ -21,6 +20,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
+import forge.gui.match.nonsingleton.VHand;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.properties.ForgePreferences.FPref;
@@ -80,6 +80,14 @@ public class ControlWinLose {
 
     /** Action performed when "quit" button is pressed in default win/lose UI. */
     public void actionOnQuit() {
+        // Clear cards off of playing areas
+        final List<VHand> hands = VMatchUI.SINGLETON_INSTANCE.getHandViews();
+        for (VHand h : hands) {
+            h.getPlayer().getZone(ZoneType.Battlefield).reset();
+            h.getPlayer().getZone(ZoneType.Hand).reset();
+        }
+
+        // Reset other stuff
         Singletons.getModel().getMatchState().reset();
         Singletons.getModel().savePrefs();
         Singletons.getControl().changeState(FControl.HOME_SCREEN);
