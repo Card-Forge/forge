@@ -244,4 +244,12 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
         }
         return okToExit;
     }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param d0
+     */
+    public void load(Deck deck) {
+        controller.setModel(deck);
+    }
 }

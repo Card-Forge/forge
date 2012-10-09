@@ -425,6 +425,7 @@ public class DeckLister extends JPanel implements ILocalRepaint {
             case Quest:
                     final CEditorQuest qEditor = new CEditorQuest(Singletons.getModel().getQuest());
                     CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(qEditor);
+                    qEditor.load(d0);
                     FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_QUEST);
                 break;
             case Constructed:
