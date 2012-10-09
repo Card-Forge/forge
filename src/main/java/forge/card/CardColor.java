@@ -344,4 +344,8 @@ public final class CardColor implements Comparable<CardColor> {
     public boolean sharesColorWith(CardColor ccOther) {
         return (this.myColor & ccOther.myColor) != 0;
     }
+    
+    public CardColor getOffColors(CardColor ccOther) {
+        return CardColor.fromMask(~this.myColor & ccOther.myColor);
+    }
 }

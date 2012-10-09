@@ -20,8 +20,8 @@ import com.google.common.collect.Lists;
 import forge.Constant.Preferences;
 import forge.card.CardColor;
 import forge.card.CardManaCost;
-import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
+import forge.card.CardRulesPredicates;
 import forge.card.DeckHints;
 import forge.card.mana.ManaCostShard;
 import forge.deck.Deck;
@@ -95,7 +95,7 @@ public class LimitedDeck {
      * @return the new Deck.
      */
     public Deck buildDeck() {
-        // -1. Prepare
+        // 1. Prepare
         hasColor = Predicates.or(new GenerateDeckUtil.ContainsAllColorsFrom(colors), GenerateDeckUtil.COLORLESS_CARDS);
         colorList = Iterables.filter(aiPlayables, Predicates.compose(hasColor, CardPrinted.FN_GET_RULES));
         onColorCreatures = Iterables.filter(colorList,
@@ -106,7 +106,7 @@ public class LimitedDeck {
         // as filters and iterate over _source_ collection each time. So even if
         // aiPlayable has changed, there is no need to create a new iterable.
 
-        // 0. Add any planeswalkers
+        // 2. Add any planeswalkers
         Iterable<CardPrinted> onColorWalkers = Iterables.filter(colorList,
                 Predicates.compose(CardRulesPredicates.Presets.IS_PLANESWALKER, CardPrinted.FN_GET_RULES));
         List<CardPrinted> walkers = Lists.newArrayList(onColorWalkers);
@@ -117,18 +117,18 @@ public class LimitedDeck {
             System.out.println("Planeswalker: " + walkers.get(0).getName());
         }
 
-        // 1. Add creatures, trying to follow mana curve
+        // 3. Add creatures, trying to follow mana curve
         addManaCurveCreatures(rankCards(onColorCreatures), 15);
 
-        // 2.Try to fill up to 22 with on-color non-creature cards
+        // 4.Try to fill up to 22 with on-color non-creature cards
         addNonCreatures(rankCards(onColorNonCreatures), numSpellsNeeded - deckList.size());
 
-        // 3.If we couldn't get up to 22, try to fill up to 22 with on-color
+        // 5.If we couldn't get up to 22, try to fill up to 22 with on-color
         // creature cards
         addCreatures(rankCards(onColorCreatures), numSpellsNeeded - deckList.size());
 
-        // 4. If there are still on-color cards and the average cmc is low add a
-        // 23rd card.
+        // 6. If there are still on-color cards, and the average cmc is low, add
+        // a 23rd card.
         Iterable<CardPrinted> nonLands = Iterables.filter(colorList,
                 Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, CardPrinted.FN_GET_RULES));
         if (deckList.size() == numSpellsNeeded && getAverageCMC(deckList) < 3) {
@@ -144,18 +144,21 @@ public class LimitedDeck {
             }
         }
 
-        // 5. Check for DeckNeeds cards.
+        // 7. If not enough cards yet, try to add a third color,
+        // to try and avoid adding purely random cards.
+        addThirdColorCards(numSpellsNeeded - deckList.size());
+
+        // 8. Check for DeckNeeds cards.
         checkRemRandomDeckCards();
 
-        // 6. If there are still less than 22 non-land cards add off-color
+        // 9. If there are still less than 22 non-land cards add off-color
         // cards. This should be avoided.
         addRandomCards(numSpellsNeeded - deckList.size());
 
-        // 7. If it's not a mono color deck, add non-basic lands that were
-        // drafted.
+        // 10. Add non-basic lands that were drafted.
         addNonBasicLands();
 
-        // 8. Fill up with basic lands.
+        // 11. Fill up with basic lands.
         final CCnt[] clrCnts = calculateLandNeeds();
         if (landsNeeded > 0) {
             addLands(clrCnts);
@@ -340,7 +343,10 @@ public class LimitedDeck {
     }
 
     /**
-     * attempt to optimize basic land counts according to color representation.
+     * Attempt to optimize basic land counts according to color representation.
+     * Only consider colors that are supposed to be in the deck. It's not worth
+     * putting one land in for that random off-color card we had to stick in at
+     * the end...
      * 
      * @return CCnt
      */
@@ -356,19 +362,19 @@ public class LimitedDeck {
             for (ManaCostShard shard : mc.getShards()) {
                 byte mask = shard.getColorMask();
 
-                if ((mask & CardColor.WHITE) > 0) {
+                if ((mask & CardColor.WHITE) > 0 && colors.hasWhite()) {
                     clrCnts[0].setCount(clrCnts[0].getCount() + 1);
                 }
-                if ((mask & CardColor.BLUE) > 0) {
+                if ((mask & CardColor.BLUE) > 0 && colors.hasBlue()) {
                     clrCnts[1].setCount(clrCnts[1].getCount() + 1);
                 }
-                if ((mask & CardColor.BLACK) > 0) {
+                if ((mask & CardColor.BLACK) > 0 && colors.hasBlack()) {
                     clrCnts[2].setCount(clrCnts[2].getCount() + 1);
                 }
-                if ((mask & CardColor.RED) > 0) {
+                if ((mask & CardColor.RED) > 0 && colors.hasRed()) {
                     clrCnts[3].setCount(clrCnts[3].getCount() + 1);
                 }
-                if ((mask & CardColor.GREEN) > 0) {
+                if ((mask & CardColor.GREEN) > 0 && colors.hasGreen()) {
                     clrCnts[4].setCount(clrCnts[4].getCount() + 1);
                 }
             }
@@ -398,6 +404,46 @@ public class LimitedDeck {
                     if (Preferences.DEV_MODE) {
                         System.out.println("NonBasicLand[" + landsNeeded + "]:" + bean.getValue().getName());
                     }
+                }
+            }
+        }
+    }
+
+    /**
+     * Add a third color to the deck.
+     * 
+     * @param nCards
+     */
+    private void addThirdColorCards(int nCards) {
+        if (nCards > 0) {
+            Iterable<CardPrinted> others = Iterables.filter(aiPlayables,
+                    Predicates.compose(CardRulesPredicates.Presets.IS_NON_LAND, CardPrinted.FN_GET_RULES));
+            List<Pair<Double, CardPrinted>> ranked = rankCards(others);
+            for (Pair<Double, CardPrinted> bean : ranked) {
+                // Want a card that has just one "off" color.
+                CardColor off = colors.getOffColors(bean.getValue().getCard().getColor());
+                if (off.isWhite() || off.isBlue() || off.isBlack() || off.isRed() || off.isGreen()) {
+                    colors = CardColor.fromMask(colors.getColor() | off.getColor());
+                    break;
+                }
+            }
+
+            hasColor = Predicates.or(new GenerateDeckUtil.ContainsAllColorsFrom(colors),
+                    GenerateDeckUtil.COLORLESS_CARDS);
+            Iterable<CardPrinted> threeColorList = Iterables.filter(aiPlayables,
+                    Predicates.compose(hasColor, CardPrinted.FN_GET_RULES));
+            ranked = rankCards(threeColorList);
+            for (Pair<Double, CardPrinted> bean : ranked) {
+                if (nCards > 0) {
+                    deckList.add(bean.getValue());
+                    aiPlayables.remove(bean.getValue());
+                    nCards--;
+                    if (Preferences.DEV_MODE) {
+                        System.out.println("Third Color[" + nCards + "]:" + bean.getValue().getName() + "("
+                                + bean.getValue().getCard().getManaCost() + ")");
+                    }
+                } else {
+                    break;
                 }
             }
         }
