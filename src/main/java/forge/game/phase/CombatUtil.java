@@ -288,7 +288,7 @@ public class CombatUtil {
         final Player defendingPlayer = attacker.getController().getOpponent();
         List<Card> defendingLands = defendingPlayer.getCardsIn(ZoneType.Battlefield);
         for (Card c : defendingLands) {
-            if (c.isValid(valid, defendingPlayer, attacker)) {
+            if (c.isValid(valid.split(","), defendingPlayer, attacker)) {
                 return true;
             }
         }
