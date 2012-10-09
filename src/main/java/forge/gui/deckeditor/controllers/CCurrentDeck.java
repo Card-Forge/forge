@@ -99,6 +99,8 @@ public enum CCurrentDeck implements ICDoc {
                 final InventoryItem item = CDeckEditorUI.SINGLETON_INSTANCE
                         .getCurrentEditorController().getTableDeck().getSelectedCard();
 
+                if (item == null) { return; }
+
                 for (int i = 0; i < 4; i++) {
                     if (item.equals(CDeckEditorUI.SINGLETON_INSTANCE
                             .getCurrentEditorController().getTableDeck().getSelectedCard())) {
