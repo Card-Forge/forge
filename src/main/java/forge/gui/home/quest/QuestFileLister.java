@@ -162,7 +162,7 @@ public class QuestFileLister extends JPanel {
             setContentAreaFilled(false);
             setBorder(null);
             setBorderPainted(false);
-            setToolTipText("Edit this deck");
+            setToolTipText("Rename this quest");
 
             this.addMouseListener(new MouseAdapter() {
                 @Override
