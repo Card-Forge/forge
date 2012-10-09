@@ -176,9 +176,10 @@ public enum CDock implements ICDoc {
      * Receives click and programmatic requests for viewing a player's library
      * (typically used in dev mode). Allows copy of the cardlist to clipboard.
      * 
+     * @param targetDeck {@link forge.deck.Deck}
      */
-    private final void showDeck(Deck targetDeck) {
-        if ( null == targetDeck ) {
+    private void showDeck(Deck targetDeck) {
+        if (null == targetDeck) {
             return;
         }
 
