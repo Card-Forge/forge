@@ -213,7 +213,7 @@ public class ComputerUtil {
 
         // Unless Cost gets significant bonus + 10-Payment Amount
         final String unless = params.get("UnlessCost");
-        if (unless != null) {
+        if (unless != null && !unless.startsWith("Damage")) {
             final int amount = AbilityFactory.calculateAmount(source, unless, sa);
 
             final int usableManaSources = CardFactoryUtil.getUsableManaSources(ai.getOpponent());
