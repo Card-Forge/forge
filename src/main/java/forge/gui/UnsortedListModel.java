@@ -9,7 +9,7 @@ import javax.swing.AbstractListModel;
 
 
 @SuppressWarnings("serial")
-class UnsortedListModel<T> extends AbstractListModel { // Java 7 has a generic version. In 6 we have to cast types
+public class UnsortedListModel<T> extends AbstractListModel { // Java 7 has a generic version. In 6 we have to cast types
     List<T> model;
 
     public UnsortedListModel() {

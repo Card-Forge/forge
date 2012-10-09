@@ -25,13 +25,11 @@ import java.util.List;
 import javax.swing.ImageIcon;
 
 import forge.Card;
-
 import forge.Singletons;
 import forge.game.GameType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.gui.CardContainer;
-import forge.gui.GuiAssignDamageFrame;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CMessage;
 import forge.gui.match.controllers.CPicture;
@@ -143,8 +141,8 @@ public enum CMatchUI implements CardContainer {
             firstBlocker.addAssignedDamage(damage, attacker);
             return;
         }
-        
-        new GuiAssignDamageFrame(attacker, blockers, damage);
+
+        new VAssignDamage(attacker, blockers, damage);
     }
 
     /**

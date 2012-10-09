@@ -12659,11 +12659,9 @@ src/main/java/forge/gauntlet/GauntletIO.java -text
 src/main/java/forge/gui/CardContainer.java svneol=native#text/plain
 src/main/java/forge/gui/CardDetailPanel.java svneol=native#text/plain
 src/main/java/forge/gui/CardListViewer.java -text
-src/main/java/forge/gui/CardPanel.java svneol=native#text/plain
 src/main/java/forge/gui/CardPicturePanel.java svneol=native#text/plain
 src/main/java/forge/gui/DualListBox.java -text
 src/main/java/forge/gui/ForgeAction.java svneol=native#text/plain
-src/main/java/forge/gui/GuiAssignDamageFrame.java svneol=native#text/plain
 src/main/java/forge/gui/GuiChoose.java -text
 src/main/java/forge/gui/GuiDisplayUtil.java svneol=native#text/plain
 src/main/java/forge/gui/GuiImportPicture.java svneol=native#text/plain
@@ -12801,6 +12799,7 @@ src/main/java/forge/gui/match/OtherGauntletWinLose.java -text
 src/main/java/forge/gui/match/QuestWinLoseCardViewer.java -text
 src/main/java/forge/gui/match/QuestWinLoseHandler.java -text
 src/main/java/forge/gui/match/TargetingOverlay.java -text
+src/main/java/forge/gui/match/VAssignDamage.java svneol=native#text/plain
 src/main/java/forge/gui/match/VMatchUI.java -text
 src/main/java/forge/gui/match/ViewWinLose.java -text
 src/main/java/forge/gui/match/controllers/CAntes.java -text
