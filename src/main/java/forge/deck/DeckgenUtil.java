@@ -65,7 +65,7 @@ public class DeckgenUtil {
      * @param selection {@link java.lang.String} array
      * @return {@link forge.deck.Deck}
      */
-    public static Deck buildColorDeck(final String[] selection) {
+    public static Deck buildColorDeck(final String[] selection, PlayerType pt) {
         ItemPoolView<CardPrinted> cards = null;
         final Deck deck;
 
@@ -78,16 +78,16 @@ public class DeckgenUtil {
         if (selection.length == 2) {
             final Generate2ColorDeck gen = new Generate2ColorDeck(
                     selection[0], selection[1]);
-            cards = gen.get2ColorDeck(60, PlayerType.HUMAN);
+            cards = gen.get2ColorDeck(60, pt);
         }
         else if (selection.length == 3) {
             final Generate3ColorDeck gen = new Generate3ColorDeck(
                     selection[0], selection[1], selection[2]);
-            cards = gen.get3ColorDeck(60, PlayerType.HUMAN);
+            cards = gen.get3ColorDeck(60, pt);
         }
         else {
             final Generate5ColorDeck gen = new Generate5ColorDeck();
-            cards = gen.get5ColorDeck(60, PlayerType.HUMAN);
+            cards = gen.get5ColorDeck(60, pt);
         }
 
         // After generating card lists, build deck.
@@ -130,7 +130,7 @@ public class DeckgenUtil {
     }
 
     /** @return {@link forge.deck.Deck} */
-    public static Deck getRandomColorDeck() {
+    public static Deck getRandomColorDeck(PlayerType pt) {
         final int[] colorCount = new int[] {2, 3, 5};
         final int count = colorCount[(int) (Math.round(Math.random() * 2))];
         final String[] selection = new String[count];
@@ -138,7 +138,7 @@ public class DeckgenUtil {
         // A simulated selection of "random 1" will trigger the AI selection process.
         for (int i = 0; i < count; i++) { selection[i] = "Random 1"; }
 
-        return DeckgenUtil.buildColorDeck(selection);
+        return DeckgenUtil.buildColorDeck(selection, pt);
     }
 
     /** @return {@link forge.deck.Deck} */

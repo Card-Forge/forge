@@ -347,7 +347,7 @@ public enum CSubmenuConstructed implements ICDoc {
         if (selection.length == 0) { return null; }
 
         if (lst0.getName().equals(ESubmenuConstructedTypes.COLORS.toString()) && DeckgenUtil.colorCheck(selection)) {
-            deck = DeckgenUtil.buildColorDeck(selection);
+            deck = DeckgenUtil.buildColorDeck(selection, player0);
         }
         else if (lst0.getName().equals(ESubmenuConstructedTypes.THEMES.toString())) {
             deck = DeckgenUtil.buildThemeDeck(selection);

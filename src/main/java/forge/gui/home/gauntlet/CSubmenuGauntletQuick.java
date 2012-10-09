@@ -26,6 +26,7 @@ import forge.deck.generate.GenerateThemeDeck;
 import forge.game.GameNew;
 import forge.game.GameType;
 import forge.game.PlayerStartsGame;
+import forge.game.player.PlayerType;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gui.SOverlayUtils;
@@ -230,7 +231,7 @@ public enum CSubmenuGauntletQuick implements ICDoc {
 
         if (view.getRadColorDecks().isSelected()) {
             if (!DeckgenUtil.colorCheck(selection)) { return; }
-            userDeck = DeckgenUtil.buildColorDeck(selection);
+            userDeck = DeckgenUtil.buildColorDeck(selection, PlayerType.HUMAN);
         }
         else if (view.getRadQuestDecks().isSelected()) {
             userDeck = DeckgenUtil.buildQuestDeck(selection);
@@ -258,7 +259,7 @@ public enum CSubmenuGauntletQuick implements ICDoc {
         for (int i = 0; i < numOpponents; i++) {
             randType = (int) Math.round(Math.random() * (lstDecktypes.size() - 1));
             if (lstDecktypes.get(randType).equals(DeckTypes.COLORS)) {
-                tempDeck = DeckgenUtil.getRandomColorDeck();
+                tempDeck = DeckgenUtil.getRandomColorDeck(PlayerType.COMPUTER);
                 lstEventNames.add("Random colors deck");
             }
             else if (lstDecktypes.get(randType).equals(DeckTypes.THEMES)) {

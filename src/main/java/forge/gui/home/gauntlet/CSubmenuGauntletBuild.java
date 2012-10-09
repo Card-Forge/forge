@@ -23,6 +23,7 @@ import forge.deck.Deck;
 import forge.deck.DeckgenUtil;
 import forge.deck.DeckgenUtil.DeckTypes;
 import forge.deck.generate.GenerateThemeDeck;
+import forge.game.player.PlayerType;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gui.framework.ICDoc;
@@ -235,7 +236,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
 
         if (view.getRadColorDecks().isSelected()) {
             if (!DeckgenUtil.colorCheck(selection)) { return; }
-            deckToAdd = DeckgenUtil.buildColorDeck(selection);
+            deckToAdd = DeckgenUtil.buildColorDeck(selection, PlayerType.HUMAN);
         }
         else if (view.getRadQuestDecks().isSelected()) {
             deckToAdd = DeckgenUtil.buildQuestDeck(selection);
