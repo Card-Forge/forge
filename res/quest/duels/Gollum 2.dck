@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Gollum 2
+Title=Gollum
+Difficulty=medium
+Description=BG +1/+1 counter deck with Corpsejack Menace
+Icon=Gollum.jpg
+Deck Type=constructed
+[main]
+4 Corpsejack Menace
+2 Doubling Season
+4 Woodland Cemetery
+4 Verdant Catacombs
+7 Swamp
+7 Forest
+1 Bramblewood Paragon
+1 Champion of Lambholt
+1 Consumptive Goo
+1 Cytoplast Root-Kin
+1 Death's Presence
+1 Dirtcowl Wurm
+1 Dreg Mangler
+1 Drudge Beetle
+1 Feral Hydra
+1 Forgotten Ancient
+1 Fungal Behemoth
+1 Hunting Moa
+1 Kavu Titan
+1 Korozda Monitor
+1 Lumberknot
+1 Mephidross Vampire
+1 Mirri the Cursed
+1 Oona's Blackguard
+1 Primordial Hydra
+1 Quirion Dryad
+1 Rite of Passage
+1 Scute Mob
+1 Sengir Vampire
+1 Skullbriar, the Walking Grave
+1 Slitherhead
+1 Sluiceway Scorpion
+1 Spiritmonger
+1 Sporeback Troll
+1 Vigor
+1 Vigor Mortis
+1 Vinelasher Kudzu
+1 Vulturous Zombie
+[sideboard]
