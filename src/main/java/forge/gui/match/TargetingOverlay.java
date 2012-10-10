@@ -29,6 +29,7 @@ import java.util.Map;
 
 import javax.swing.JPanel;
 
+import forge.AllZone;
 import forge.Card;
 import forge.control.FControl;
 import forge.gui.match.nonsingleton.CField;
@@ -90,13 +91,29 @@ public enum TargetingOverlay {
         }
 
         List<Card> temp = new ArrayList<Card>();
+
+        // Global cards
         for (CardPanel c : cardPanels) {
             if (!c.isShowing()) { continue; }
+
+            // Enchantments
+            // Doesn't work for global enchantments?! Doublestrike 10-10-12
             temp = c.getCard().getEnchantedBy();
             for (Card enchantingCard : temp) {
                 arcs.add(new Point[] {
                     endpoints.get(c.getCard().getUniqueNumber()),
                     endpoints.get(enchantingCard.getUniqueNumber())
+                });
+            }
+        }
+
+        // Combat cards
+        for (Card attackingCard : AllZone.getCombat().getAttackers()) {
+            temp = AllZone.getCombat().getBlockers(attackingCard);
+            for (Card blockingCard : temp) {
+                arcs.add(new Point[] {
+                    endpoints.get(attackingCard.getUniqueNumber()),
+                    endpoints.get(blockingCard.getUniqueNumber())
                 });
             }
         }
