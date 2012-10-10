@@ -1291,8 +1291,7 @@ public final class AbilityFactoryChangeZone {
             fetchList.remove(c);
         }
 
-        if ((origin.contains(ZoneType.Library) && !defined && !"False".equals(params.get("Shuffle")))
-                || (params.containsKey("Shuffle") && "True".equals(params.get("Shuffle")))) {
+        if (origin.contains(ZoneType.Library) && !defined && !"False".equals(params.get("Shuffle"))) {
             player.shuffle();
         }
 
@@ -1361,6 +1360,11 @@ public final class AbilityFactoryChangeZone {
             if (imprint != null) {
                 card.addImprinted(movedCard);
             }
+        }
+        
+        if ((origin.contains(ZoneType.Library) && !destination.equals(ZoneType.Library) && !defined)
+                || (params.containsKey("Shuffle") && "True".equals(params.get("Shuffle")))) {
+            player.shuffle();
         }
 
         if (!ZoneType.Battlefield.equals(destination) && !"Card".equals(type) && !defined) {
