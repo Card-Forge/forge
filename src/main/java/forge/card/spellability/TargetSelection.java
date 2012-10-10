@@ -717,7 +717,7 @@ public class TargetSelection {
      */
     private static boolean matchesValidSA(final SpellAbility sa, final String[] valids, final SpellAbility source) {
         final Card srcCard = source.getSourceCard();
-        final Player activatingPlayer = sa.getActivatingPlayer();
+        final Player activatingPlayer = source.getActivatingPlayer();
         final Card c = sa.getSourceCard();
         return c.isValid(valids, activatingPlayer, srcCard);
     }

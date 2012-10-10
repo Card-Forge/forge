@@ -1351,7 +1351,6 @@ public class ComputerUtil {
                         minSize = num;
                     }
                 }
-                System.out.println("AI lands: " + landList + combined + basics + minType);
 
                 if (minType != null) {
                     landList = CardLists.getType(landList, minType);
