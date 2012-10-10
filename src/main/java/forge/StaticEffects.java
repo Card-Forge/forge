@@ -70,6 +70,13 @@ public class StaticEffects {
     }
 
     /**
+     * @return the staticEffects
+     */
+    public ArrayList<StaticEffect> getStaticEffects() {
+        return staticEffects;
+    }
+
+    /**
      * removeStaticEffect TODO Write javadoc for this method.
      * 
      * @param se
