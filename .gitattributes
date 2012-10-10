@@ -9489,6 +9489,7 @@ res/cardsfolder/s/stonecloaker.txt svneol=native#text/plain
 res/cardsfolder/s/stonefare_crocodile.txt -text
 res/cardsfolder/s/stoneforge_mystic.txt svneol=native#text/plain
 res/cardsfolder/s/stonehands.txt svneol=native#text/plain
+res/cardsfolder/s/stonehewer_giant.txt -text
 res/cardsfolder/s/stonehorn_dignitary.txt -text
 res/cardsfolder/s/stonewood_invocation.txt svneol=native#text/plain
 res/cardsfolder/s/stonewood_invoker.txt svneol=native#text/plain
