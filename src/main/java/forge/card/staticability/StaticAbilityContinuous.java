@@ -65,6 +65,7 @@ public class StaticAbilityContinuous {
         se.setAffectedPlayers(affectedPlayers);
         se.setParams(params);
         se.setTimestamp(hostCard.getTimestamp());
+        se.setSource(hostCard);
         AllZone.getStaticEffects().addStaticEffect(se);
 
         int powerBonus = 0;
