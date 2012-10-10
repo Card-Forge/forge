@@ -267,7 +267,7 @@ public class PlayerZone extends MyObservable implements IPlayerZone, Observer, j
      */
     @Override
     public final boolean is(final ZoneType zone) {
-        return zone.equals(this.zoneName);
+        return zone == this.zoneName;
     }
 
     /*
@@ -291,7 +291,7 @@ public class PlayerZone extends MyObservable implements IPlayerZone, Observer, j
      */
     @Override
     public final boolean is(final ZoneType zone, final Player player) {
-        return (zone.equals(this.zoneName) && this.player.equals(player));
+        return (zone == this.zoneName && this.player.equals(player));
     }
 
     /**

@@ -402,7 +402,7 @@ public class GameAction {
     public final void controllerChangeZoneCorrection(final Card c) {
         System.out.println("Correcting zone for " + c.toString());
         final PlayerZone oldBattlefield = AllZone.getZoneOf(c);
-        if (oldBattlefield == null) {
+        if (oldBattlefield == null || oldBattlefield.getZoneType() == ZoneType.Stack) {
             return;
         }
         final PlayerZone newBattlefield = c.getController().getZone(oldBattlefield.getZoneType());
@@ -590,7 +590,7 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public final Card moveToPlay(final Card c) {
-        final PlayerZone play = c.getOwner().getZone(ZoneType.Battlefield);
+        final PlayerZone play = c.getController().getZone(ZoneType.Battlefield);
         return this.moveTo(play, c);
     }
 

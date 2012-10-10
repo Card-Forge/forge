@@ -47,7 +47,6 @@ public class ReplaceMoved extends ReplacementEffect {
                 return false;
             }
         }
-
         return true;
     }
 

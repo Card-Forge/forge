@@ -39,7 +39,7 @@ import forge.gui.GuiChoose;
  */
 public class ReplacementHandler {
 
-    private final List<ReplacementEffect> tmpEffects = new ArrayList<ReplacementEffect>();
+    //private final List<ReplacementEffect> tmpEffects = new ArrayList<ReplacementEffect>();
 
     public ReplacementResult run(final HashMap<String, Object> runParams) {
         final Object affected = runParams.get("Affected");
@@ -96,23 +96,23 @@ public class ReplacementHandler {
         final List<ReplacementEffect> possibleReplacers = new ArrayList<ReplacementEffect>();
         // Round up Non-static replacement effects ("Until EOT," or
         // "The next time you would..." etc)
-        for (final ReplacementEffect replacementEffect : this.tmpEffects) {
+        /*for (final ReplacementEffect replacementEffect : this.tmpEffects) {
             if (!replacementEffect.hasRun() && replacementEffect.canReplace(runParams) && replacementEffect.getLayer() == layer) {
                 possibleReplacers.add(replacementEffect);
             }
-        }
+        }*/
 
         // Round up Static replacement effects
         for (final Player p : Singletons.getModel().getGameState().getPlayers()) {
             for (final Card crd : p.getAllCards()) {
                 for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
-                    if (replacementEffect.requirementsCheck()) {
-                        if (!replacementEffect.hasRun() && replacementEffect.canReplace(runParams) 
-                                && replacementEffect.getLayer() == layer
-                                && !possibleReplacers.contains(replacementEffect)
-                                && replacementEffect.zonesCheck(AllZone.getZoneOf(crd))) {
-                            possibleReplacers.add(replacementEffect);
-                        }
+                    if (!replacementEffect.hasRun()
+                            && replacementEffect.getLayer() == layer
+                            && replacementEffect.requirementsCheck()
+                            && replacementEffect.canReplace(runParams) 
+                            && !possibleReplacers.contains(replacementEffect)
+                            && replacementEffect.zonesCheck(AllZone.getZoneOf(crd))) {
+                        possibleReplacers.add(replacementEffect);
                     }
                 }
             }
