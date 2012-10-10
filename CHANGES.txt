@@ -156,6 +156,18 @@ Fixes/Features:
 - Resolved NPE on "Remove 4" button, if no card in current deck.
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Consolidated all home screen deck generation and retrieval lists into forge.deck.DeckgenUtil (only affects Gauntlet mode and Constructed).
+- A wee bit o' checkstyle.
+- Removed persistent cards on new game start from battlefield and hand.
+- Cleanup: removed savePrefs and loadPrefs methods from model.
+- Random deck generation will once again differentiate between human and computer decks.
+- Fixed cards with multiple landwalk abilities.
+- Fixed Molten Influence.
+- Improvement for LimitedDeck AI so that less random cards are added when not enough on-color cards can be found.
+- Added combat attacking/blocking to targeting arcs.
+- applyContinuousAbility will now set the source card.
+- Added getStaticEffects() to StaticEffects.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
