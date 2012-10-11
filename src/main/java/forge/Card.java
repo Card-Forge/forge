@@ -6922,6 +6922,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if ( !this.getDamageHistory().getThisTurnDamaged().contains(sourceController) ) {
                 return false;
             }
+        } else if (property.startsWith("dealtDamageToOppThisTurn")) {
+            if ( !this.getDamageHistory().getThisTurnDamaged().contains(sourceController.getOpponent()) ) {
+                return false;
+            }
         } else if (property.startsWith("controllerWasDealtCombatDamageByThisTurn")) {
             if ( !this.getDamageHistory().getThisTurnCombatDamaged().contains(sourceController) ) {
                 return false;

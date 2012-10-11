@@ -355,76 +355,6 @@ public final class GameActionUtil {
      * payCostDuringAbilityResolve.
      * </p>
      * 
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param hostCard
-     *            a Card object.
-     * @param manaCost
-     *            a {@link java.lang.String} object.
-     * @param paid
-     *            a {@link forge.Command} object.
-     * @param unpaid
-     *            a {@link forge.Command} object.
-     */
-    /*public static void payCostDuringAbilityResolve(final String message, Card hostCard, final String manaCost,
-            final Command paid, final Command unpaid) {
-        if (manaCost.startsWith("PayLife")) {
-            String amountString = manaCost.split("<")[1].split(">")[0];
-            int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
-                    : CardFactoryUtil.xCount(hostCard, hostCard.getSVar(amountString));
-            if (AllZone.getHumanPlayer().canPayLife(amount) && showYesNoDialog(hostCard, "Do you want to pay "
-                    + amount + " life?")) {
-                AllZone.getHumanPlayer().payLife(amount, null);
-                paid.execute();
-            } else {
-                unpaid.execute();
-            }
-            return;
-        }
-        else if (manaCost.startsWith("AddCounter")) {
-            String amountString = manaCost.split("<")[1].split("\\/")[0];
-            String counterName = manaCost.split("<")[1].split("\\/")[1].split(">")[0];
-            Counters counterType = Counters.valueOf(counterName);
-            int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
-                    : CardFactoryUtil.xCount(hostCard, hostCard.getSVar(amountString));
-            String plural = amount > 1 ? "s" : "";
-            if (showYesNoDialog(hostCard, "Do you want to put " + amount + " " + counterType.getName()
-                    + " counter" + plural + " on " + hostCard + "?")) {
-                if (hostCard.canHaveCountersPlacedOnIt(counterType)) {
-                    hostCard.addCounterFromNonEffect(counterType, amount);
-                    paid.execute();
-                } else {
-                    unpaid.execute();
-                    AllZone.getGameLog().add("ResolveStack", "Trying to pay upkeep for " + hostCard + " but it can't have "
-                    + counterType.getName() + " counters put on it.", 2);
-                }
-            } else {
-                unpaid.execute();
-            }
-            return;
-        }
-        if (manaCost.equals("0")) {
-            if (showYesNoDialog(hostCard, "Do you want to pay 0?")) {
-                paid.execute();
-            } else {
-                unpaid.execute();
-            }
-            return;
-        }
-
-        // temporarily disable the Resolve flag, so the user can payMana for the
-        // resolving Ability
-        final boolean bResolving = AllZone.getStack().getResolving();
-        AllZone.getStack().setResolving(false);
-        AllZone.getInputControl().setInput(new InputPayManaCostAbility(message, manaCost, paid, unpaid));
-        AllZone.getStack().setResolving(bResolving);
-    }*/
-
-    /**
-     * <p>
-     * payCostDuringAbilityResolve.
-     * </p>
-     * 
      * @param ability
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param cost
@@ -626,78 +556,6 @@ public final class GameActionUtil {
         return winFlip;
     }
 
-    /**
-     * <p>
-     * executeLandfallEffects.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     *//*
-    public static void executeLandfallEffects(final Card c) {
-        if (c.getName().equals("Lotus Cobra")) {
-            GameActionUtil.landfallLotusCobra(c);
-        }
-    }
-
-    *//**
-     * <p>
-     * showLandfallDialog.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a boolean.
-     *//*
-    private static boolean showLandfallDialog(final Card c) {
-        CMatchUI.SINGLETON_INSTANCE.setCard(c);
-        final String[] choices = { "Yes", "No" };
-
-        Object q = null;
-
-        q = GuiUtils.chooseOneOrNone("Use " + c + " Landfall?", choices);
-
-        return (q != null) && q.equals("Yes");
-    }
-
-    *//**
-     * <p>
-     * landfallLotusCobra.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     *//*
-    private static void landfallLotusCobra(final Card c) {
-        final Ability ability = new Ability(c, "0") {
-            @Override
-            public void resolve() {
-                String color = "";
-
-                final String o = GuiUtils.chooseOne("Choose mana color", Constant.Color.ONLY_COLORS);
-                color = InputPayManaCostUtil.getShortColorString(o);
-
-                final AbilityMana abMana = new AbilityMana(c, "0", color) {
-                    private static final long serialVersionUID = -2182129023960978132L;
-                };
-                abMana.produceMana();
-            }
-        };
-
-        final StringBuilder sb = new StringBuilder();
-        sb.append(c.getName()).append(" - add one mana of any color to your mana pool.");
-        ability.setStackDescription(sb.toString());
-
-        if (c.getController().isHuman()) {
-            if (GameActionUtil.showLandfallDialog(c)) {
-                AllZone.getStack().addSimultaneousStackEntry(ability);
-            }
-        } else {
-            // TODO once AI has a mana pool he should choose add Ability and
-            // choose a mana as appropriate
-        }
-    }*/
-
     // not restricted to combat damage, not restricted to dealing damage to
     // creatures/players
     /**
@@ -867,11 +725,6 @@ public final class GameActionUtil {
             AllZone.getStack().addSimultaneousStackEntry(ability);
 
         }
-
-
-        if (c.getName().equals("Whirling Dervish") || c.getName().equals("Dunerider Outlaw")) {
-            GameActionUtil.playerCombatDamageWhirlingDervish(c);
-        }
         
         c.getDamageHistory().registerDamage(player);
     }
@@ -987,44 +840,6 @@ public final class GameActionUtil {
 
             }
         }
-    }
-
-    /**
-     * <p>
-     * playerCombatDamageWhirlingDervish.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    private static void playerCombatDamageWhirlingDervish(final Card c) {
-        final int power = c.getNetAttack();
-        final Card card = c;
-
-        if (power > 0) {
-            final Ability ability2 = new Ability(c, "0") {
-                @Override
-                public void resolve() {
-                    card.addCounter(Counters.P1P1, 1);
-                }
-            }; // ability2
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(c.getName()).append(" - gets a +1/+1 counter.");
-            ability2.setStackDescription(sb.toString());
-
-            final Command dealtDmg = new Command() {
-                private static final long serialVersionUID = 2200679209414069339L;
-
-                @Override
-                public void execute() {
-                    AllZone.getStack().addSimultaneousStackEntry(ability2);
-
-                }
-            };
-            AllZone.getEndOfTurn().addAt(dealtDmg);
-
-        } // if
     }
 
     /**
