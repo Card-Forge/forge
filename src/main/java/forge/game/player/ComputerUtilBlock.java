@@ -491,13 +491,14 @@ public class ComputerUtilBlock {
                 final int damageNeeded = attacker.getKillDamage()
                         + CombatUtil.predictToughnessBonusOfAttacker(attacker, blocker, combat);
                 if ((damageNeeded > currentDamage || CombatUtil.needsBlockers(attacker) > blockGang.size())
-                        && (!(damageNeeded > currentDamage + additionalDamage)
+                        && !(damageNeeded > currentDamage + additionalDamage)
                         // The attacker will be killed
                         && (absorbedDamage2 + absorbedDamage > attacker.getNetCombatDamage()
                         // only one blocker can be killed
-                        || currentValue + addedValue - 50 <= CardFactoryUtil.evaluateCreature(attacker)))
+                        || currentValue + addedValue - 50 <= CardFactoryUtil.evaluateCreature(attacker)
                         // or attacker is worth more
-                        || (lifeInDanger && CombatUtil.lifeInDanger(ai, combat))
+                        || (lifeInDanger && CombatUtil.lifeInDanger(ai, combat)))
+                        // or life is in danger
                         && CombatUtil.canBlock(attacker, blocker, combat)) {
                     // this is needed for attackers that can't be blocked by
                     // more than 1
