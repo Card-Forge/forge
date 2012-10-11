@@ -50,8 +50,8 @@ public enum CSubmenuQuestData implements ICDoc {
     private final ActionListener preconListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            view.getCbxFormat().setEnabled(view.getRadPreconStart().isSelected());
-            view.getCbxPrecon().setEnabled(view.getRadRotatingStart().isSelected());
+            view.getCbxFormat().setEnabled(view.getRadRotatingStart().isSelected());
+            view.getCbxPrecon().setEnabled(view.getRadPreconStart().isSelected());
             view.getBoxPersist().setEnabled(view.getRadRotatingStart().isSelected());
         }
     };
