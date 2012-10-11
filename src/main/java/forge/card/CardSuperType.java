@@ -26,8 +26,8 @@ public enum CardSuperType {
     Basic,
     /** The Legendary. */
     Legendary,
-    /** The Show. */
-    Show,
+    /** The Snow. */
+    Snow,
     /** The Ongoing. */
     Ongoing,
     /** The World. */

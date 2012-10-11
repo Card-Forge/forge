@@ -19,7 +19,6 @@ package forge.card.cost;
 
 import java.util.List;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -295,7 +294,7 @@ public class CostReveal extends CostPartWithList {
                     // in case no more cards in hand
                     if (this.nReveal == nNeeded) {
                         this.done();
-                    } else if (AllZone.getHumanPlayer().getZone(ZoneType.Hand).size() == 0) {
+                    } else if (sa.getActivatingPlayer().getZone(ZoneType.Hand).size() == 0) {
                         // really
                         // shouldn't
                         // happen

@@ -411,26 +411,4 @@ public abstract class AllZoneUtil {
         return false;
     }
 
-    /**
-     * <p>
-     * matchesValid.
-     * </p>
-     * 
-     * @param o
-     *            a {@link java.lang.Object} object.
-     * @param valids
-     *            an array of {@link java.lang.String} objects.
-     * @param srcCard
-     *            a {@link forge.Card} object.
-     * @return a boolean.
-     */
-    /*public static boolean matchesValid(final Object o, final String[] valids, final Card srcCard) {
-        if (o instanceof GameEntity) {
-            final GameEntity c = (GameEntity) o;
-            return c.isValid(valids, srcCard.getController(), srcCard);
-        }
-
-        return false;
-    }*/
-
 } // end class AllZoneUtil

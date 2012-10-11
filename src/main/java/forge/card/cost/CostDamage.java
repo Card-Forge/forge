@@ -17,7 +17,6 @@
  */
 package forge.card.cost;
 
-import forge.AllZone;
 import forge.Card;
 import forge.GameActionUtil;
 import forge.card.abilityfactory.AbilityFactory;
@@ -101,7 +100,7 @@ public class CostDamage extends CostPart {
      */
     @Override
     public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
-        AllZone.getComputerPlayer().addDamage(this.getLastPaidAmount(), source);
+        ability.getActivatingPlayer().addDamage(this.getLastPaidAmount(), source);
     }
 
     /*

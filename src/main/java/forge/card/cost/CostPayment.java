@@ -19,7 +19,6 @@ package forge.card.cost;
 
 import java.util.ArrayList;
 
-import forge.AllZone;
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRequirements;
@@ -271,7 +270,7 @@ public class CostPayment {
         }
 
         // Move this to CostMana
-        AllZone.getHumanPlayer().getManaPool().refundManaPaid(this.ability, false);
+        this.ability.getActivatingPlayer().getManaPool().refundManaPaid(this.ability, false);
     }
 
     /**

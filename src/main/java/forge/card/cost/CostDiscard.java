@@ -21,7 +21,6 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 
-import forge.AllZone;
 import forge.Card;
 import forge.CardPredicates;
 
@@ -352,7 +351,7 @@ public class CostDiscard extends CostPartWithList {
                     this.done();
                 }
 
-                if (AllZone.getHumanPlayer().getZone(ZoneType.Hand).isEmpty()) {
+                if (sa.getActivatingPlayer().getZone(ZoneType.Hand).isEmpty()) {
                     this.stop();
                 }
                 final StringBuilder type = new StringBuilder("");
@@ -393,7 +392,7 @@ public class CostDiscard extends CostPartWithList {
                         // in case no more cards in hand
                         if (this.nDiscard == nNeeded) {
                             this.done();
-                        } else if (AllZone.getHumanPlayer().getZone(ZoneType.Hand).size() == 0) {
+                        } else if (sa.getActivatingPlayer().getZone(ZoneType.Hand).size() == 0) {
                             // really
                             // shouldn't
                             // happen
