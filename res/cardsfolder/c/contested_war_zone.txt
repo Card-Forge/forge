@@ -1,7 +1,9 @@
 Name:Contested War Zone
 ManaCost:no cost
 Types:Land
-Text:Whenever a creature deals combat damage to you, that creature's controller gains control of CARDNAME.
+Text:no text
+T:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ You  | CombatDamage$ True | Execute$ TrigControl | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature deals combat damage to you, that creature's controller gains control of CARDNAME.
+SVar:TrigControl:AB$ GainControl | Cost$ 0 | Defined$ Self | NewController$ TriggeredSourceController
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ PumpAll | Cost$ 1 T | ValidCards$ Creature.attacking | NumAtt$ +1 | SpellDescription$ Attacking creatures get +1/+0 until end of turn.
 SVar:Rarity:Rare

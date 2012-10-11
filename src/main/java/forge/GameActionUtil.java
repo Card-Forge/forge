@@ -748,24 +748,6 @@ public final class GameActionUtil {
             return;
         }
 
-        if (c.isCreature() && AllZoneUtil.isCardInPlay("Contested War Zone", player)) {
-            final List<Card> zones = player.getCardsIn(ZoneType.Battlefield, "Contested War Zone");
-            for (final Card zone : zones) {
-                final Ability ability = new Ability(zone, "0") {
-                    @Override
-                    public void resolve() {
-                        if (AllZoneUtil.isCardInPlay(zone)) {
-                            zone.addController(c.getController());
-                        }
-                    }
-                };
-                ability.setStackDescription(zone + " - " + c.getController() + " gains control of " + zone);
-
-                AllZone.getStack().addSimultaneousStackEntry(ability);
-
-            }
-        }
-
         if (c.hasStartOfKeyword("Poisonous")) {
             final int keywordPosition = c.getKeywordPosition("Poisonous");
             final String parse = c.getKeyword().get(keywordPosition).toString();
@@ -807,7 +789,8 @@ public final class GameActionUtil {
 
         if (c.getName().equals("Scalpelexis")) {
             GameActionUtil.playerCombatDamageScalpelexis(c);
-        } else if (c.isEnchantedBy("Celestial Mantle")) {
+        }
+        if (c.isEnchantedBy("Celestial Mantle")) {
             GameActionUtil.executeCelestialMantle(c);
         }
 
