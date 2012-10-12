@@ -248,7 +248,6 @@ public final class AbilityFactoryChangeZone {
             return true;
         }
         
-        
         for (ZoneType z : zone) {
             if (z.isHidden()) {
                 return true;
@@ -2348,11 +2347,7 @@ public final class AbilityFactoryChangeZone {
 
         for (final Card c : list) {
             final Card actualCard = AllZoneUtil.getCardState(c);
-            if (actualCard != null) {
-                ret.add(actualCard);
-            } else {
-                ret.add(c);
-            }
+            ret.add(actualCard);
         }
         return ret;
     }
