@@ -6,8 +6,8 @@ PT:3/4
 K:Flash
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Creature.Self | Origin$ Any | Destination$ Battlefield | Execute$ RestorationExile | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, you may exile target non-Angel creature you control, then return that creature to the battlefield under your control.
-SVar:RestorationExile:AB$ChangeZone | Cost$ 0 | ValidTgts$ Creature.nonAngel+YouCtrl | TgtPrompt$ Select target non-Angel creature you control | Origin$ Battlefield | Destination$ Exile | SubAbility$ RestorationReturn
-SVar:RestorationReturn:DB$ChangeZone | Defined$ Targeted | Origin$ Exile | Destination$ Battlefield | GainControl$ True
+SVar:RestorationExile:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature.nonAngel+YouCtrl | TgtPrompt$ Select target non-Angel creature you control | Origin$ Battlefield | Destination$ Exile | RememberTargets$ True | ForgetOtherTargets$ True | SubAbility$ RestorationReturn
+SVar:RestorationReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | GainControl$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/restoration_angel.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/32.jpg
