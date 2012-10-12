@@ -641,6 +641,11 @@ public class AbilityFactoryRegenerate {
             public boolean chkAIDrawback() {
                 return true;
             }
+            
+            @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryRegenerate.regenerateAllCanPlayAI(getActivatingPlayer(), af, this);
+            }
 
             @Override
             public boolean doTrigger(final boolean mandatory) {
