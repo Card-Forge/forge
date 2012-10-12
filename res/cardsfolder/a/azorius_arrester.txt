@@ -4,7 +4,8 @@ Types:Creature Human Soldier
 Text:no text
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ Detain | TriggerDescription$ When CARDNAME enters the battlefield, detain target creature an opponent controls. (Until your next turn, that creature can't attack or block and its activated abilities can't be activated.)
-SVar:Detain:DB$Pump | KW$ HIDDEN CARDNAME can't attack or block. & HIDDEN CARDNAME's activated abilities can't be activated. | IsCurse$ True | UntilYourNextTurn$ True | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature your opponent controls to detain.
+SVar:Detain:DB$ Pump | KW$ HIDDEN CARDNAME can't attack or block. & HIDDEN CARDNAME's activated abilities can't be activated. | IsCurse$ True | UntilYourNextTurn$ True | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature your opponent controls to detain.
+SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/azorius_arrester.jpg
 SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/5.jpg

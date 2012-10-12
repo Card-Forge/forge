@@ -328,6 +328,12 @@ public class AbilityFactoryPump {
                 return false;
             }
         } else if (keyword.endsWith("CARDNAME can't attack or block.")) {
+            if (sa.getAbilityFactory().getMapParams().containsKey("UntilYourNextTurn")) {
+                if (CombatUtil.canAttack(card) || CombatUtil.canBlock(card, true)) {
+                    return true;
+                }
+                return false;
+            }
             if (ph.isPlayerTurn(human)) {
                 if (!CombatUtil.canAttack(card)
                         || (card.getNetCombatDamage() <= 0)
@@ -776,7 +782,6 @@ public class AbilityFactoryPump {
         else if (!list.isEmpty()) {
             final ArrayList<String> keywords = this.keywords;
             final boolean addsKeywords = this.keywords.size() > 0;
-
             if (addsKeywords) {
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
@@ -966,7 +971,8 @@ public class AbilityFactoryPump {
                 && !sa.isTrigger()
                 && Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                 && !(this.abilityFactory.isCurse() && (defense < 0))
-                && !this.containsNonCombatKeyword(this.keywords)) {
+                && !this.containsNonCombatKeyword(this.keywords)
+                && !sa.getAbilityFactory().getMapParams().containsKey("UntilYourNextTurn")) {
             return false;
         }
 
