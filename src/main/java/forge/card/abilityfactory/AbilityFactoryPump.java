@@ -772,7 +772,6 @@ public class AbilityFactoryPump {
                     list = new ArrayList<Card>();
                 }
             }
-            Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_BEGIN);
         } // -X/0 end
         else if (!list.isEmpty()) {
             final ArrayList<String> keywords = this.keywords;
@@ -1758,6 +1757,32 @@ public class AbilityFactoryPump {
                     }
                 }); // leaves all creatures that will be destroyed
             } // -X/-X end
+            else if (power < 0) { // -X/-0
+                if (phase.isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
+                        || phase.isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
+                        || Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())
+                        || Singletons.getModel().getGameState().getPhaseHandler().isPreventCombatDamageThisTurn()) {
+                    return false;
+                }
+                int totalPower = 0;
+                for (Card c : human) {
+                    if (!c.isAttacking()) {
+                        continue;
+                    }
+                    totalPower += Math.min(c.getNetAttack(), power * -1);
+                    if (phase == PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY 
+                            && AllZone.getCombat().getUnblockedAttackers().contains(c)) {
+                        if (CombatUtil.lifeInDanger(sa.getActivatingPlayer(), AllZone.getCombat())) {
+                            return true;
+                        }
+                        totalPower += Math.min(c.getNetAttack(), power * -1);
+                    }
+                    if (totalPower >= power * -2) {
+                        return true;
+                    }
+                }
+                return false;
+            } // -X/-0 end
 
             // evaluate both lists and pass only if human creatures are more
             // valuable
