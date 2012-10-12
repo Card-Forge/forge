@@ -21,7 +21,7 @@ public enum ZoneType {
     Battlefield(false),
 
     /** The Exile. */
-    Exile(true), // Some cards get exiled face down (ex: Clone Shell)
+    Exile(false),
 
     /** The Command. */
     Command(false),
