@@ -187,6 +187,11 @@ public class AbilityFactoryRegenerate {
             }
 
             @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryRegenerate.regenerateCanPlayAI(getActivatingPlayer(), af, this);
+            }
+
+            @Override
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryRegenerate.doTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }

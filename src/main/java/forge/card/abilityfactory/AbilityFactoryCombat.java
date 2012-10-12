@@ -183,6 +183,11 @@ public final class AbilityFactoryCombat {
             }
 
             @Override
+            public boolean canPlayAI() {
+                return AbilityFactoryCombat.fogCanPlayAI(getActivatingPlayer(), af, this);
+            }
+
+            @Override
             public boolean doTrigger(final boolean mandatory) {
                 return AbilityFactoryCombat.fogDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
