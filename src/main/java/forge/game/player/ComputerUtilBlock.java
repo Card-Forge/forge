@@ -196,13 +196,17 @@ public class ComputerUtilBlock {
      *            a {@link forge.game.phase.Combat} object.
      * @return a {@link forge.CardList} object.
      */
-    private static List<Card> getPossibleBlockers(final Card attacker, final List<Card> blockersLeft, final Combat combat) {
+    private static List<Card> getPossibleBlockers(final Card attacker, final List<Card> blockersLeft, final Combat combat
+            , final boolean solo) {
         final List<Card> blockers = new ArrayList<Card>();
 
         for (final Card blocker : blockersLeft) {
             // if the blocker can block a creature with lure it can't block a
             // creature without
             if (CombatUtil.canBlock(attacker, blocker, combat)) {
+                if (solo && blocker.hasKeyword("CARDNAME can't attack or block alone.")) {
+                    continue;
+                }
                 blockers.add(blocker);
             }
         }
@@ -345,7 +349,7 @@ public class ComputerUtilBlock {
             Card blocker = null;
 
             final List<Card> blockers = ComputerUtilBlock.getPossibleBlockers(attacker,
-                    ComputerUtilBlock.getBlockersLeft(), combat);
+                    ComputerUtilBlock.getBlockersLeft(), combat, true);
 
             final List<Card> safeBlockers = ComputerUtilBlock.getSafeBlockers(attacker, blockers, combat);
             List<Card> killingBlockers;
@@ -409,7 +413,7 @@ public class ComputerUtilBlock {
         // Try to block an attacker without first strike with a gang of first strikers
         for (final Card attacker : ComputerUtilBlock.getAttackersLeft()) {
             if (!attacker.hasKeyword("First Strike") && !attacker.hasKeyword("Double Strike")) {
-                blockers = ComputerUtilBlock.getPossibleBlockers(attacker, ComputerUtilBlock.getBlockersLeft(), combat);
+                blockers = ComputerUtilBlock.getPossibleBlockers(attacker, ComputerUtilBlock.getBlockersLeft(), combat, false);
                 final List<Card> firstStrikeBlockers = new ArrayList<Card>();
                 final List<Card> blockGang = new ArrayList<Card>();
                 for (int i = 0; i < blockers.size(); i++) {
@@ -448,7 +452,7 @@ public class ComputerUtilBlock {
 
         // Try to block an attacker with two blockers of which only one will die
         for (final Card attacker : ComputerUtilBlock.getAttackersLeft()) {
-            blockers = ComputerUtilBlock.getPossibleBlockers(attacker, ComputerUtilBlock.getBlockersLeft(), combat);
+            blockers = ComputerUtilBlock.getPossibleBlockers(attacker, ComputerUtilBlock.getBlockersLeft(), combat, false);
             List<Card> usableBlockers;
             final List<Card> blockGang = new ArrayList<Card>();
             int absorbedDamage = 0; // The amount of damage needed to kill the
@@ -538,7 +542,7 @@ public class ComputerUtilBlock {
             }
 
             killingBlockers = ComputerUtilBlock.getKillingBlockers(attacker,
-                    ComputerUtilBlock.getPossibleBlockers(attacker, ComputerUtilBlock.getBlockersLeft(), combat),
+                    ComputerUtilBlock.getPossibleBlockers(attacker, ComputerUtilBlock.getBlockersLeft(), combat, true),
                     combat);
             if ((killingBlockers.size() > 0) && CombatUtil.lifeInDanger(ai, combat)) {
                 final Card blocker = CardFactoryUtil.getWorstCreatureAI(killingBlockers);
@@ -573,7 +577,7 @@ public class ComputerUtilBlock {
             }
 
             chumpBlockers = ComputerUtilBlock
-                    .getPossibleBlockers(attacker, ComputerUtilBlock.getBlockersLeft(), combat);
+                    .getPossibleBlockers(attacker, ComputerUtilBlock.getBlockersLeft(), combat, true);
             if ((chumpBlockers.size() > 0) && CombatUtil.lifeInDanger(ai, combat)) {
                 final Card blocker = CardFactoryUtil.getWorstCreatureAI(chumpBlockers);
                 combat.addBlocker(attacker, blocker);
@@ -616,7 +620,7 @@ public class ComputerUtilBlock {
             }
 
             chumpBlockers = ComputerUtilBlock
-                    .getPossibleBlockers(attacker, ComputerUtilBlock.getBlockersLeft(), combat);
+                    .getPossibleBlockers(attacker, ComputerUtilBlock.getBlockersLeft(), combat, false);
             chumpBlockers.removeAll(combat.getBlockers(attacker));
             for (final Card blocker : chumpBlockers) {
                 // Add an additional blocker if the current blockers are not
@@ -655,7 +659,7 @@ public class ComputerUtilBlock {
         // "Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it."
 
         for (final Card attacker : targetAttackers) {
-            blockers = ComputerUtilBlock.getPossibleBlockers(attacker, ComputerUtilBlock.getBlockersLeft(), combat);
+            blockers = ComputerUtilBlock.getPossibleBlockers(attacker, ComputerUtilBlock.getBlockersLeft(), combat, false);
             blockers.removeAll(combat.getBlockers(attacker));
 
             // Try to use safe blockers first
@@ -897,7 +901,7 @@ public class ComputerUtilBlock {
         if (!chumpBlockers.isEmpty()) {
             CardLists.shuffle(ComputerUtilBlock.getAttackers());
             for (final Card attacker : ComputerUtilBlock.getAttackers()) {
-                blockers = ComputerUtilBlock.getPossibleBlockers(attacker, chumpBlockers, combat);
+                blockers = ComputerUtilBlock.getPossibleBlockers(attacker, chumpBlockers, combat, false);
                 for (final Card blocker : blockers) {
                     if (CombatUtil.canBlock(attacker, blocker, combat) && ComputerUtilBlock.getBlockersLeft().contains(blocker)
                             && (CombatUtil.mustBlockAnAttacker(blocker, combat)
