@@ -79,7 +79,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
         final Card c = (Card) o;
 
         if (this.trigger) {
-            if (c.hasKeyword("CARDNAME enters the battlefield tapped.") || c.hasKeyword("Hideaway")) {
+            if (c.hasKeyword("Hideaway")) {
                 // it enters the battlefield this way, and should not fire
                 // triggers
                 c.setTapped(true);

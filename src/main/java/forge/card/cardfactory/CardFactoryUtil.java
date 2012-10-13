@@ -4290,6 +4290,24 @@ public class CardFactoryUtil {
                 re.setLayer(ReplacementLayer.Other);
 
                 card.addReplacementEffect(re);
+            } else if(kw.equals("CARDNAME enters the battlefield tapped.")) {
+                String parse = kw;
+                card.removeIntrinsicKeyword(parse);
+                
+                String abStr = "AB$ Tap | Cost$ 0 | Defined$ Self | ETB$ True | SubAbility$ MoveETB";
+                String dbStr = "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield" +
+                        "| Defined$ ReplacedCard";
+
+                card.setSVar("ETBTappedSVar", abStr);
+                card.setSVar("MoveETB", dbStr);
+
+                String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield " +
+                        "| ReplaceWith$ ETBTappedSVar | Description$ CARDNAME enters the battlefield tapped.";
+
+                ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card);
+                re.setLayer(ReplacementLayer.Other);
+
+                card.addReplacementEffect(re);
             }
         }
     }
