@@ -3838,6 +3838,7 @@ res/cardsfolder/g/gift_of_granite.txt svneol=native#text/plain
 res/cardsfolder/g/gift_of_the_deity.txt svneol=native#text/plain
 res/cardsfolder/g/gift_of_the_gargantuan.txt -text
 res/cardsfolder/g/gift_of_the_woods.txt svneol=native#text/plain
+res/cardsfolder/g/gifts_ungiven.txt -text
 res/cardsfolder/g/gigadrowse.txt svneol=native#text/plain
 res/cardsfolder/g/gigantiform.txt -text
 res/cardsfolder/g/gigantomancer.txt svneol=native#text/plain
@@ -7709,6 +7710,7 @@ res/cardsfolder/r/reality_ripple.txt -text
 res/cardsfolder/r/reality_spasm.txt svneol=native#text/plain
 res/cardsfolder/r/reality_strobe.txt svneol=native#text/plain
 res/cardsfolder/r/realm_razer.txt -text svneol=unset#text/plain
+res/cardsfolder/r/realms_uncharted.txt -text
 res/cardsfolder/r/reanimate.txt svneol=native#text/plain
 res/cardsfolder/r/reap_and_sow.txt svneol=native#text/plain
 res/cardsfolder/r/reap_the_seagraf.txt -text
