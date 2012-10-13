@@ -271,6 +271,7 @@ public final class DragCell extends JPanel implements ILocalRepaint {
     /** Adds a document to the tabs.
      * @param doc0 &emsp; {@link forge.gui.framework.IVDoc} */
     public void addDoc(final IVDoc doc0) {
+        if (doc0 instanceof VEmptyDoc) { return; }
         allDocs.add(doc0);
         doc0.setParentCell(this);
         pnlHead.add(doc0.getTabLabel(), "h 100%!, gap " + tabPaddingPx + "px " + tabPaddingPx + "px 0 0", allDocs.size() - 1);

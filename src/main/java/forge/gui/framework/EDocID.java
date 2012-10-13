@@ -16,6 +16,7 @@ import forge.gui.home.gauntlet.VSubmenuGauntletBuild;
 import forge.gui.home.gauntlet.VSubmenuGauntletContests;
 import forge.gui.home.gauntlet.VSubmenuGauntletLoad;
 import forge.gui.home.gauntlet.VSubmenuGauntletQuick;
+import forge.gui.home.multiplayer.VSubmenuMultiTest;
 import forge.gui.home.quest.VSubmenuChallenges;
 import forge.gui.home.quest.VSubmenuDuels;
 import forge.gui.home.quest.VSubmenuQuestData;
@@ -69,6 +70,7 @@ public enum EDocID { /** */
     HOME_GAUNTLETLOAD (VSubmenuGauntletLoad.SINGLETON_INSTANCE), /** */
     HOME_GAUNTLETQUICK (VSubmenuGauntletQuick.SINGLETON_INSTANCE), /** */
     HOME_GAUNTLETCONTESTS (VSubmenuGauntletContests.SINGLETON_INSTANCE), /** */
+    HOME_MULTITEST (VSubmenuMultiTest.SINGLETON_INSTANCE), /** */
     HOME_PREFERENCES (VSubmenuPreferences.SINGLETON_INSTANCE), /** */
     HOME_AVATARS (VSubmenuAvatars.SINGLETON_INSTANCE), /** */
     HOME_DECKEDITOR (VSubmenuDeckEditor.SINGLETON_INSTANCE), /** */
@@ -91,10 +93,18 @@ public enum EDocID { /** */
     // Non-user battlefields (AI or teammate), use setDoc to register.
     FIELD_0 (null), /** */
     FIELD_1 (null), /** */
+    FIELD_2 (null), /** */
+    FIELD_3 (null), /** */
+    FIELD_4 (null), /** */
+    FIELD_5 (null), /** */
+    FIELD_6 (null), /** */
+    FIELD_7 (null), /** */
 
     // Non-user hands (AI or teammate), use setDoc to register.
     HAND_0 (null), /** */
-    HAND_1 (null);
+    HAND_1 (null), /** */
+    HAND_2 (null), /** */
+    HAND_3 (null);
 
     // End enum declarations, start enum methods.
     private IVDoc vDoc;

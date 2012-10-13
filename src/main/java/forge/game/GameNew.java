@@ -62,7 +62,8 @@ public class GameNew {
         
         newGameCleanup();
         newMatchCleanup();
-        
+
+        Singletons.getModel().getPreferences().actuateMatchPreferences();
         Card.resetUniqueNumber();
         
         for( PlayerStartsGame p : players ) {
@@ -284,9 +285,9 @@ public class GameNew {
     private static void newMatchCleanup() {
         if (Singletons.getModel().getMatchState().getGamesPlayedCount() != 0) { return; }
 
-
         // TODO restore this functionality!!!
         //VMatchUI.SINGLETON_INSTANCE.getViewDevMode().getDocument().setVisible(Preferences.DEV_MODE);
+
         final List<VField> allFields = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
 
         for (final VField field : allFields) {
@@ -297,8 +298,6 @@ public class GameNew {
         VAntes.SINGLETON_INSTANCE.clearAnteCards();
         AllZone.getInputControl().resetInput();
         Singletons.getModel().getMatchState().reset();
-
-        Singletons.getModel().getPreferences().actuateMatchPreferences();
     }
 
  // this is where the computer cheats

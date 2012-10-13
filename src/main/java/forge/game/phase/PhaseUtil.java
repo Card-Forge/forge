@@ -26,7 +26,6 @@ import com.google.common.base.Predicate;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-
 import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.Singletons;
@@ -426,8 +425,8 @@ public class PhaseUtil {
         final Player p = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
         final CMatchUI t = CMatchUI.SINGLETON_INSTANCE;
 
-        // Index of field; computer is 0, human is 1
-        int i = p.isComputer() ? 0 : 1;
+        // Index of field; computer is 1, human is 0
+        int i = p.isComputer() ? 1 : 0;
 
         switch(s) {
             case UPKEEP:

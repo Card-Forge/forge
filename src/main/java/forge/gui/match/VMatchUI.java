@@ -6,14 +6,13 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
 
-import forge.AllZone;
 import forge.Singletons;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
-import forge.gui.framework.IVDoc;
 import forge.gui.framework.IVTopLevelUI;
 import forge.gui.framework.SLayoutIO;
 import forge.gui.framework.SRearrangingUtil;
+import forge.gui.framework.VEmptyDoc;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.nonsingleton.VHand;
 import forge.gui.match.views.VDev;
@@ -32,16 +31,25 @@ public enum VMatchUI implements IVTopLevelUI {
     /** */
     SINGLETON_INSTANCE;
 
-    // Instantiate non-singleton tab instances
-    private final IVDoc field0 = new VField(EDocID.FIELD_0, AllZone.getComputerPlayer());
-    private final IVDoc field1 = new VField(EDocID.FIELD_1, AllZone.getHumanPlayer());
-
-    private final IVDoc hand0 = new VHand(EDocID.HAND_0, AllZone.getComputerPlayer());
-    private final IVDoc hand1 = new VHand(EDocID.HAND_1, AllZone.getHumanPlayer());
-
+    private List<VField> lstFields = new ArrayList<VField>();
+    private List<VHand> lstHands = new ArrayList<VHand>();
 
     // Other instantiations
     private final CMatchUI control = null;
+
+    private VMatchUI() {
+        // Create empty docs for all field slots
+        for (int i = 0; i < 8; i++) {
+            EDocID.valueOf("FIELD_" + i).setDoc(
+                    new VEmptyDoc(EDocID.valueOf("FIELD_" + i)));
+        }
+
+        // Create empty docs for all hand slots
+        for (int i = 0; i < 4; i++) {
+            EDocID.valueOf("HAND_" + i).setDoc(
+                    new VEmptyDoc(EDocID.valueOf("HAND_" + i)));
+        }
+    }
 
     /** */
     @Override
@@ -73,6 +81,31 @@ public enum VMatchUI implements IVTopLevelUI {
             }
         }
 
+        // Add extra players alternatively to existing user/AI field panels.
+        for (int i = 2; i < lstFields.size(); i++) {
+            // If already in layout, no need to add again.
+            if (lstFields.get(i).getParentCell() != null) {
+                continue;
+            }
+
+            if (i % 2 == 0) {
+                lstFields.get(0).getParentCell().addDoc(lstFields.get(i));
+            }
+            else {
+                lstFields.get(1).getParentCell().addDoc(lstFields.get(i));
+            }
+        }
+
+        // Add extra hands to existing hand panel.
+        for (int i = 0; i < lstHands.size(); i++) {
+            // If already in layout, no need to add again.
+            if (lstHands.get(i).getParentCell() != null) {
+                continue;
+            }
+
+            lstHands.get(0).getParentCell().addDoc(lstHands.get(i));
+        }
+
         // Fill in gaps
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -94,20 +127,24 @@ public enum VMatchUI implements IVTopLevelUI {
         return this.control;
     }
 
-    /** @return {@link java.util.List}<{@link forge.gui.match.nonsigleton.VField}> */
+    /** @param lst0 List<VField> */
+    public void setFieldViews(final List<VField> lst0) {
+        this.lstFields = lst0;
+    }
+
+    /** @return {@link java.util.List}<{@link forge.gui.match.nonsigleton.VHand}> */
     public List<VField> getFieldViews() {
-        final List<VField> lst = new ArrayList<VField>();
-        lst.add((VField) field0);
-        lst.add((VField) field1);
-        return lst;
+        return lstFields;
+    }
+
+    /** @param lst0 List<VField> */
+    public void setHandViews(final List<VHand> lst0) {
+        this.lstHands = lst0;
     }
 
     /** @return {@link java.util.List}<{@link forge.gui.match.nonsigleton.VHand}> */
     public List<VHand> getHandViews() {
-        final List<VHand> lst = new ArrayList<VHand>();
-        lst.add((VHand) hand0);
-        lst.add((VHand) hand1);
-        return lst;
+        return lstHands;
     }
 
     /** @return {@link javax.swing.JButton} */

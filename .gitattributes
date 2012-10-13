@@ -12744,6 +12744,7 @@ src/main/java/forge/gui/framework/SLayoutIO.java -text
 src/main/java/forge/gui/framework/SOverflowUtil.java -text
 src/main/java/forge/gui/framework/SRearrangingUtil.java -text
 src/main/java/forge/gui/framework/SResizingUtil.java -text
+src/main/java/forge/gui/framework/VEmptyDoc.java -text
 src/main/java/forge/gui/framework/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/home/CMainMenu.java -text
 src/main/java/forge/gui/home/EMenuGroup.java -text
@@ -12762,6 +12763,8 @@ src/main/java/forge/gui/home/gauntlet/VSubmenuGauntletBuild.java -text
 src/main/java/forge/gui/home/gauntlet/VSubmenuGauntletContests.java -text
 src/main/java/forge/gui/home/gauntlet/VSubmenuGauntletLoad.java -text
 src/main/java/forge/gui/home/gauntlet/VSubmenuGauntletQuick.java -text
+src/main/java/forge/gui/home/multiplayer/CSubmenuMultiTest.java -text
+src/main/java/forge/gui/home/multiplayer/VSubmenuMultiTest.java -text
 src/main/java/forge/gui/home/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/home/quest/CSubmenuChallenges.java -text
 src/main/java/forge/gui/home/quest/CSubmenuDuels.java -text
@@ -12818,6 +12821,7 @@ src/main/java/forge/gui/match/controllers/CPicture.java -text
 src/main/java/forge/gui/match/controllers/CPlayers.java -text
 src/main/java/forge/gui/match/controllers/CStack.java -text
 src/main/java/forge/gui/match/controllers/package-info.java svneol=native#text/plain
+src/main/java/forge/gui/match/nonsingleton/CEmptyDoc.java -text
 src/main/java/forge/gui/match/nonsingleton/CField.java -text
 src/main/java/forge/gui/match/nonsingleton/CHand.java -text
 src/main/java/forge/gui/match/nonsingleton/VField.java -text

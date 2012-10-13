@@ -58,7 +58,13 @@ public class VHand implements IVDoc {
     public VHand(final EDocID id0, final Player player0) {
         docID = id0;
         id0.setDoc(this);
-        tab.setText(player0.getName() + " Hand");
+
+        if (player0 == null) {
+            tab.setText("NO PLAYER Hand");
+        }
+        else {
+            tab.setText(player0.getName() + " Hand");
+        }
 
         player = player0;
 

@@ -17,28 +17,21 @@
  */
 package forge.gui.match;
 
-import java.awt.Image;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
-
+import forge.AllZone;
 import forge.Card;
-import forge.Singletons;
-import forge.game.GameType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.gui.CardContainer;
+import forge.gui.framework.EDocID;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CMessage;
 import forge.gui.match.controllers.CPicture;
 import forge.gui.match.nonsingleton.CField;
 import forge.gui.match.nonsingleton.VField;
-import forge.gui.toolbox.FSkin;
-import forge.properties.ForgePreferences.FPref;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
+import forge.gui.match.nonsingleton.VHand;
 
 /**
  * Constructs instance of match UI controller, used as a single point of
@@ -53,19 +46,31 @@ public enum CMatchUI implements CardContainer {
     SINGLETON_INSTANCE;
 
     /**
-     * Fires up controllers for each component of UI.
+     * Due to be deprecated with new multiplayer changes. Doublestrike 13-10-12.
      * 
      * @param strAvatarIcon &emsp; Filename of non-default avatar icon, if desired.
      * 
      */
     public void initMatch(final String strAvatarIcon) {
+        this.initMatch(2, 1);
+    }
+
+    /**
+     * Instantiates at a match with a specified number of players
+     * and hands.
+     * 
+     * @param numFieldPanels int
+     * @param numHandPanels int
+     */
+    public void initMatch(int numFieldPanels, int numHandPanels) {
+        // TODO fix for use with multiplayer
         // Update avatars
-        final String[] indices = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
+        /*final String[] indices = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
         int i = 0;
         for (VField view : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
             final Image img;
             // Update AI quest icon
-            if (i != 1 && Singletons.getModel().getMatchState().getGameType() == GameType.Quest) {
+            if (i == 1 && Singletons.getModel().getMatchState().getGameType() == GameType.Quest) {
                     String filename = ForgeProps.getFile(NewConstants.IMAGE_ICON) + File.separator;
 
                     if (strAvatarIcon != null) {
@@ -86,7 +91,45 @@ public enum CMatchUI implements CardContainer {
 
             view.getLblAvatar().setIcon(new ImageIcon(img));
             view.getLblAvatar().getResizeTimer().start();
+        }*/
+
+        // Instantiate all required field slots (user at 0)
+        final List<VField> fields = new ArrayList<VField>();
+        for (int i = 0; i < numFieldPanels; i++) {
+            switch (i) {
+                case 0:
+                    fields.add(0, new VField(EDocID.FIELD_0, AllZone.getHumanPlayer()));
+                    fields.get(0).getLayoutControl().initialize();
+                    break;
+                case 1:
+                    fields.add(1, new VField(EDocID.FIELD_1, AllZone.getComputerPlayer()));
+                    fields.get(1).getLayoutControl().initialize();
+                    break;
+                default:
+                    // A field must be initialized after it's instantiated, to update player info.
+                    // No player, no init.
+                    fields.add(i, new VField(EDocID.valueOf("FIELD_" + i), null));
+            }
         }
+
+        // Instantiate all required hand slots (user at 0)
+        final List<VHand> hands = new ArrayList<VHand>();
+        for (int i = 0; i < numHandPanels; i++) {
+            switch (i) {
+                case 0:
+                    // A hand must be initialized after it's instantiated, to update player info.
+                    // No player, no init.
+                    hands.add(0, new VHand(EDocID.HAND_0, AllZone.getHumanPlayer()));
+                    hands.get(0).getLayoutControl().initialize();
+                    break;
+                default:
+                    hands.add(i, new VHand(EDocID.valueOf("HAND_" + i), null));
+            }
+        }
+
+        // Replace old instances
+        VMatchUI.SINGLETON_INSTANCE.setFieldViews(fields);
+        VMatchUI.SINGLETON_INSTANCE.setHandViews(hands);
     }
 
     /**
@@ -156,8 +199,8 @@ public enum CMatchUI implements CardContainer {
     public final boolean stopAtPhase(final Player turn, final PhaseType phase) {
         final List<CField> fieldControllers = CMatchUI.this.getFieldControls();
 
-        // AI field is at index [0]
-        int index = turn.isComputer() ? 0 : 1;
+        // Index of field; computer is 1, human is 0
+        int index = turn.isComputer() ? 1 : 0;
         VField vf = fieldControllers.get(index).getView();
 
         switch (phase) {

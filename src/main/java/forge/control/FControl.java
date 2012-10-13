@@ -270,7 +270,8 @@ public enum FControl {
         children = display.getComponentsInLayer(JLayeredPane.MODAL_LAYER);
         if (children.length != 0) { children[0].setSize(display.getSize()); }
     }
-    
+
+    /** @return {@link forge.game.player.Player} */
     public Player getPlayer() {
         return AllZone.getHumanPlayer();
     }

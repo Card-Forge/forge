@@ -30,7 +30,6 @@ import com.google.common.collect.Iterables;
 import forge.AllZone;
 import forge.AllZoneUtil;
 import forge.Card;
-
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;

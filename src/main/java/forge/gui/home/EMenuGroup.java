@@ -11,6 +11,7 @@ public enum EMenuGroup { /** */
     SANCTIONED ("Sanctioned Game Formats"), /** */
     QUEST ("Quest Mode"), /** */
     GAUNTLET ("Gauntlets"), /** */
+    MULTIPLAYER ("Multiplayer"), /** */
     SETTINGS ("Game Settings"), /** */
     UTILITIES ("Tools");
 

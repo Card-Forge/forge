@@ -83,6 +83,7 @@ public class ControlWinLose {
         // Clear cards off of playing areas
         final List<VHand> hands = VMatchUI.SINGLETON_INSTANCE.getHandViews();
         for (VHand h : hands) {
+            if (h.getPlayer() == null) { continue; }
             h.getPlayer().getZone(ZoneType.Battlefield).reset();
             h.getPlayer().getZone(ZoneType.Hand).reset();
         }
@@ -112,7 +113,7 @@ public class ControlWinLose {
         Singletons.getModel().getPreferences().save();
 
         CMatchUI.SINGLETON_INSTANCE.initMatch(null);
-        GameNew.newGame( new PlayerStartsGame(AllZone.getHumanPlayer(), AllZone.getHumanPlayer().getDeck()), 
+        GameNew.newGame(new PlayerStartsGame(AllZone.getHumanPlayer(), AllZone.getHumanPlayer().getDeck()),
                          new PlayerStartsGame(AllZone.getComputerPlayer(), AllZone.getComputerPlayer().getDeck()));
 
     }
@@ -124,27 +125,33 @@ public class ControlWinLose {
      */
     private void executeAnte() {
         List<GameSummary> games = Singletons.getModel().getMatchState().getGamesPlayed();
-        if ( games.isEmpty() ) return;
-        GameSummary lastGame = games.get(games.size()-1);
-        for (Player p: Singletons.getModel().getGameState().getPlayers()) {
-            if (!p.getName().equals(lastGame.getWinner())) continue; // not a loser
-            
+        if (games.isEmpty()) {
+            return;
+        }
+        GameSummary lastGame = games.get(games.size() - 1);
+        for (Player p : Singletons.getModel().getGameState().getPlayers()) {
+            if (!p.getName().equals(lastGame.getWinner())) {
+                continue; // not a loser
+            }
+
             // remove all the lost cards from owners' decks
             List<CardPrinted> losses = new ArrayList<CardPrinted>();
-            for (Player loser: Singletons.getModel().getGameState().getPlayers()) {
-                if( loser.equals(p)) continue; // not a loser
-                
+            for (Player loser : Singletons.getModel().getGameState().getPlayers()) {
+                if (loser.equals(p)) {
+                    continue; // not a loser
+                }
+
                 List<Card> compAntes = loser.getCardsIn(ZoneType.Ante);
-                Deck cDeck = loser.getDeck(); 
+                Deck cDeck = loser.getDeck();
 
                 for (Card c : compAntes) {
                     CardPrinted toRemove = CardDb.instance().getCard(c);
                     cDeck.getMain().remove(toRemove);
                 }
             }
-            
+
             // offer to winner, if he is human
-            if( p.isHuman() ) {
+            if (p.isHuman()) {
                 List<CardPrinted> o = GuiChoose.noneOrMany("Select cards to add to your deck", losses);
                 if (null != o) {
                     for (CardPrinted c : o) {
@@ -152,7 +159,7 @@ public class ControlWinLose {
                     }
                 }
             }
-            
+
             break; // expect no other winners
         }
 
