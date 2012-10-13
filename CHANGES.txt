@@ -13,6 +13,10 @@ The new damage dialog now uses the new UI.
 
 A new Gauntlet mode has been added.
 
+Match UI is now ready for multiplayer (except for avatars). Added slots for up to 8 fields (more/less if you want, pretty easy) and up to 4 hands (also easy to adjust). A little ahead of schedule 
+
+Please delete the layout called "match_preferred.xml". Had to make a small addressing change that will affect previous saves. Everything else should dovetail neatly.
+
 --
 
 On several occasions people have noticed that the forge deck editor and/or quest mode card shop would not open or display. We have also received reports that some of the tabs/panels in the deck editor are missing. Try deleting the file named "editor_preferred.xml" which is found in the "res/layouts" folder. This should force forge to then use the "editor_default.xml" file instead.
@@ -182,6 +186,21 @@ Fixes/Features:
 - Fixed Restoration Angel.
 - Added AI support for mass -X/-0 pump spells.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Reverted Exile zone to a public zone and not a hidden one (see Rule 400.2).
+- Cleanup in AF ChangeZone.
+- Added the quest opponent Tombstone 3 (thanks to Nordos).
+- Fixed AF Regenerate AI targeting creatures with shroud.
+- Fixed Golgari Charm.
+- Made some more AF's compatible with charms.
+- Improved AI using Detain abilities.
+- fixed NPE issue due to activating player not set in replacement effects
+- Match UI multiplayer go for takeoff. Please delete your old match_preferred.xml layout; old match layouts are invalid.
+1 Up to 8 fields can be used
+2 Up to 4 hands can be used
+3 Multiplayer submenu added in home screen
+- Updated the deck Hermione Granger 3 with RtR cards.
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -197,6 +216,8 @@ Angel of Serenity
 Memoricide
 Three Dreams
 Stonehewer Giant
+Gifts Ungiven
+Realms Uncharted
 
 
 end
