@@ -672,7 +672,7 @@ public class Combat {
                     assignedDamage = true;
                     if (this.getAttackingPlayer().isComputer()) { // ai attacks
                         if (attackers.size() > 1) {
-                            CMatchUI.SINGLETON_INSTANCE.assignDamage(blocker, attackers, damage);
+                            CMatchUI.SINGLETON_INSTANCE.assignDamage(blocker, attackers, damage, null);
                         } else {
                             attackers.get(0).addAssignedDamage(damage, blocker);
                         }
@@ -724,7 +724,7 @@ public class Combat {
                         this.addDefendingDamage(damageDealt, attacker);
                     } else {
                         if (trampler || (blockers.size() > 1)) {
-                            CMatchUI.SINGLETON_INSTANCE.assignDamage(attacker, blockers, damageDealt);
+                            CMatchUI.SINGLETON_INSTANCE.assignDamage(attacker, blockers, damageDealt, this.getDefenderByAttacker(attacker));
                         } else {
                             blockers.get(0).addAssignedDamage(damageDealt, attacker);
                         }

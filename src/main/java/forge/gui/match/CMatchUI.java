@@ -22,6 +22,7 @@ import java.util.List;
 
 import forge.AllZone;
 import forge.Card;
+import forge.GameEntity;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.gui.CardContainer;
@@ -173,7 +174,7 @@ public enum CMatchUI implements CardContainer {
      * @param blockers &emsp; {@link forge.CardList}
      * @param damage &emsp; int
      */
-    public void assignDamage(final Card attacker, final List<Card> blockers, final int damage) {
+    public void assignDamage(final Card attacker, final List<Card> blockers, final int damage, GameEntity defender) {
         if (damage <= 0) {
             return;
         }
@@ -185,7 +186,7 @@ public enum CMatchUI implements CardContainer {
             return;
         }
 
-        new VAssignDamage(attacker, blockers, damage);
+        new VAssignDamage(attacker, blockers, damage, defender);
     }
 
     /**
