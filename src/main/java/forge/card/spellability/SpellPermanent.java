@@ -408,7 +408,7 @@ public class SpellPermanent extends Spell {
     public static boolean checkETBEffects(final Card card, final SpellAbility sa, final String api) {
         return checkETBEffects(card, sa, api, null);
     }
-    
+
     public static boolean checkETBEffects(final Card card, final Player ai, final String api) {
         return checkETBEffects(card, null, api, ai);
     }
@@ -433,16 +433,16 @@ public class SpellPermanent extends Spell {
             }
 
             if (params.containsKey("ValidCard")) {
-                if(!params.get("ValidCard").contains("Self")) {
+                if (!params.get("ValidCard").contains("Self")) {
                     continue;
                 }
                 if (params.get("ValidCard").contains("notkicked")) {
-                    if(sa.isKicked()) {
+                    if (sa.isKicked()) {
                         continue;
                     }
                 } else if (params.get("ValidCard").contains("kicked")) {
                     if (!params.get("ValidCard").contains("kicked ")) {
-                        if(!sa.isKicked()) {
+                        if (!sa.isKicked()) {
                             continue;
                         }
                     } else {
@@ -459,7 +459,7 @@ public class SpellPermanent extends Spell {
                             continue;
                         }
                     }
-                    
+
                 }
             }
 
@@ -486,10 +486,13 @@ public class SpellPermanent extends Spell {
 
             if (sa != null) {
                 exSA.setActivatingPlayer(sa.getActivatingPlayer());
-            } else if ( ai != null ) {
+            }
+            else if (ai != null) {
                 exSA.setActivatingPlayer(ai);
-            } else 
+            }
+            else {
                 throw new InvalidParameterException("Either ai or sa must be not null!");
+            }
 
             // Run non-mandatory trigger.
             // These checks only work if the Executing SpellAbility is an
@@ -505,7 +508,7 @@ public class SpellPermanent extends Spell {
                 // otherwise, return false 50% of the time?
             }
         }
-        
+
         // Replacement effects
         for (final ReplacementEffect re : card.getReplacementEffects()) {
             // These Replacements all care for ETB effects
@@ -520,16 +523,16 @@ public class SpellPermanent extends Spell {
             }
 
             if (params.containsKey("ValidCard")) {
-                if(!params.get("ValidCard").contains("Self")) {
+                if (!params.get("ValidCard").contains("Self")) {
                     continue;
                 }
                 if (params.get("ValidCard").contains("notkicked")) {
-                    if(sa.isKicked()) {
+                    if (sa.isKicked()) {
                         continue;
                     }
                 } else if (params.get("ValidCard").contains("kicked")) {
                     if (!params.get("ValidCard").contains("kicked ")) {
-                        if(!sa.isKicked()) {
+                        if (!sa.isKicked()) {
                             continue;
                         }
                     } else {
@@ -546,7 +549,6 @@ public class SpellPermanent extends Spell {
                             continue;
                         }
                     }
-                    
                 }
             }
 
@@ -555,14 +557,20 @@ public class SpellPermanent extends Spell {
             }
             final SpellAbility exSA = re.getOverridingAbility();
             
-            if(exSA != null) {
+            if (exSA != null) {
                 if (sa != null) {
                     exSA.setActivatingPlayer(sa.getActivatingPlayer());
-                } else if ( ai != null ) {
+                }
+                else if (ai != null) {
                     exSA.setActivatingPlayer(ai);
-                } else { 
+                }
+                else {
                     throw new InvalidParameterException("Either ai or sa must be not null!");
                 }
+            }
+
+            if (exSA.getActivatingPlayer() == null) {
+                throw new InvalidParameterException("Executing SpellAbility for Replacement Effect has no activating player");
             }
             // ETBReplacement uses overriding abilities.
             // These checks only work if the Executing SpellAbility is an

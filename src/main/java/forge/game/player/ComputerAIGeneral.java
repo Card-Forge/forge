@@ -223,6 +223,10 @@ public class ComputerAIGeneral implements Computer {
         for (final Card c : all) {
             for (final SpellAbility sa : c.getNonManaSpellAbilities()) {
                 if (sa instanceof SpellPermanent) {
+                    // TODO ArsenalNut (13 Oct 2012) added line to set activating player to fix NPE problem
+                    // in checkETBEffects.  There is SpellPermanent.checkETBEffects where the player can be
+                    // directly input but it is currently a private method.
+                    sa.setActivatingPlayer(player);
                     if (SpellPermanent.checkETBEffects(c, sa, "Counter")) {
                         spellAbilities.add(sa);
                     }
