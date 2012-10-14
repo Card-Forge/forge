@@ -975,6 +975,7 @@ res/cardsfolder/b/blockade_runner.txt svneol=native#text/plain
 res/cardsfolder/b/blockbuster.txt svneol=native#text/plain
 res/cardsfolder/b/blood_artist.txt -text
 res/cardsfolder/b/blood_celebrant.txt svneol=native#text/plain
+res/cardsfolder/b/blood_clock.txt -text
 res/cardsfolder/b/blood_crypt.txt svneol=native#text/plain
 res/cardsfolder/b/blood_cultist.txt svneol=native#text/plain
 res/cardsfolder/b/blood_feud.txt -text
@@ -10450,6 +10451,7 @@ res/cardsfolder/u/ulvenwald_bear.txt -text
 res/cardsfolder/u/ulvenwald_mystics_ulvenwald_primordials.txt -text
 res/cardsfolder/u/ulvenwald_tracker.txt -text
 res/cardsfolder/u/umara_raptor.txt svneol=native#text/plain
+res/cardsfolder/u/umbilicus.txt -text
 res/cardsfolder/u/umbra_mystic.txt -text
 res/cardsfolder/u/umbra_stalker.txt svneol=native#text/plain
 res/cardsfolder/u/umbral_mantle.txt svneol=native#text/plain
