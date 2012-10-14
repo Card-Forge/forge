@@ -556,7 +556,7 @@ public class SpellPermanent extends Spell {
                 continue;
             }
             final SpellAbility exSA = re.getOverridingAbility();
-            
+
             if (exSA != null) {
                 if (sa != null) {
                     exSA.setActivatingPlayer(sa.getActivatingPlayer());
@@ -567,11 +567,12 @@ public class SpellPermanent extends Spell {
                 else {
                     throw new InvalidParameterException("Either ai or sa must be not null!");
                 }
+                
+                if (exSA.getActivatingPlayer() == null) {
+                    throw new InvalidParameterException("Executing SpellAbility for Replacement Effect has no activating player");
+                }
             }
-
-            if (exSA.getActivatingPlayer() == null) {
-                throw new InvalidParameterException("Executing SpellAbility for Replacement Effect has no activating player");
-            }
+            
             // ETBReplacement uses overriding abilities.
             // These checks only work if the Executing SpellAbility is an
             // Ability_Sub.
