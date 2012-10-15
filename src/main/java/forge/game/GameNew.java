@@ -414,5 +414,5 @@ public class GameNew {
                 "Play or Draw?", JOptionPane.INFORMATION_MESSAGE);
         
         computerStartsGame();
-    }  
+    }
 }

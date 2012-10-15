@@ -38,6 +38,7 @@ import forge.deck.io.DeckSerializer;
 import forge.gui.deckeditor.tables.TableSorter;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
+import forge.game.GameType;
 import forge.game.limited.ReadDraftRankings;
 import forge.util.FileSection;
 import forge.util.FileUtil;
@@ -316,6 +317,18 @@ public class Deck extends DeckBase implements Serializable {
         return (20.0 / (best + (2 * value)));
     }
 
+    public boolean meetsGameTypeRequirements(GameType type) {
+        int deckSize = main.countAll();
+        int deckDistinct = main.countDistinct();
+        Integer max = type.getDeckMaximum();
+        
+        if (deckSize < type.getDeckMinimum() || (max != null && deckSize > max) ||
+                (type.isSingleton() && deckDistinct != deckSize)) {
+            return false;
+        }
+        
+        return true;
+    }
 
     public static final Function<Deck, String> FN_NAME_SELECTOR = new Function<Deck, String>() {
         @Override

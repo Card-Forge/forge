@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
@@ -221,6 +222,14 @@ public class SSubmenuQuestUtil {
     public static void startGame() {
         final QuestController qData = Singletons.getModel().getQuest();
         final QuestEvent event = selectedOpponent.getEvent();
+
+        Deck deck = SSubmenuQuestUtil.getCurrentDeck();
+        if (!deck.meetsGameTypeRequirements(GameType.Quest)) {
+            String msg = "Chosen Deck doesn't meet the requirements (Minimum 40 cards). Please edit or choose a different deck.";
+            JOptionPane.showMessageDialog(null, msg);
+            System.out.println(msg);
+            return;
+        }
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override

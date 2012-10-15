@@ -23,19 +23,22 @@ package forge.game;
 public enum GameType {
 
     /** The Constructed. */
-    Constructed(false),
+    Constructed(false, 60),
     /** The Sealed. */
-    Sealed(true),
+    Sealed(true, 40),
     /** The Draft. */
-    Draft(true),
+    Draft(true, 40),
     /** The Commander. */
-    Commander(false),
+    Commander(false, 100, 100, true),
     /** The Quest. */
-    Quest(true),
+    Quest(true, 40),
     /** */
-    Gauntlet(true);
+    Gauntlet(true, 40);
 
     private final boolean bLimited;
+    private final int deckMinimum;
+    private final Integer deckMaximum;
+    private final boolean singleton;
 
     /**
      * Checks if is limited.
@@ -45,15 +48,35 @@ public enum GameType {
     public final boolean isLimited() {
         return this.bLimited;
     }
+    
+    public final int getDeckMinimum() {
+        return this.deckMinimum;
+    }
+    
+    public final Integer getDeckMaximum() {
+        return this.deckMaximum;
+    }
+    
+    public final boolean isSingleton() {
+        return this.singleton;
+    }
 
+    GameType(final boolean isLimited, int min) {
+        this(isLimited, min, null, false);
+    }
+    
+    
     /**
      * Instantiates a new game type.
      * 
      * @param isLimited
      *            the is limited
      */
-    GameType(final boolean isLimited) {
+    GameType(final boolean isLimited, int min, Integer max, boolean singleton) {
         this.bLimited = isLimited;
+        this.deckMinimum = min;
+        this.deckMaximum = max;
+        this.singleton = singleton;
     }
 
     /**
