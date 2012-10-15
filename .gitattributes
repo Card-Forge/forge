@@ -12757,6 +12757,7 @@ src/main/java/forge/gui/home/EMenuGroup.java -text
 src/main/java/forge/gui/home/EMenuItem.java -text
 src/main/java/forge/gui/home/IVSubmenu.java -text
 src/main/java/forge/gui/home/LblGroup.java -text
+src/main/java/forge/gui/home/LblHeader.java -text
 src/main/java/forge/gui/home/LblMenuItem.java -text
 src/main/java/forge/gui/home/PnlGroup.java -text
 src/main/java/forge/gui/home/StartButton.java -text

@@ -30,7 +30,7 @@ import forge.game.player.PlayerType;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.CMatchUI;
-import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.ExperimentalLabel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestController;
@@ -63,7 +63,7 @@ public enum CSubmenuConstructed implements ICDoc {
         public void mouseClicked(final MouseEvent e) {
             if (e.getClickCount() == 2) {
                 final JList src = ((JList) e.getSource());
-                if (src.equals(view.getLstAIDecks())) {
+                if (src.equals(view.getLstDecksAI())) {
                     if (view.getRadColorsAI().isSelected()) { return; }
                     if (view.getRadThemesAI().isSelected()) { return; }
                 }
@@ -192,8 +192,8 @@ public enum CSubmenuConstructed implements ICDoc {
     /** Handles all control for "colors" radio button click. */
     private void updateColors(final PlayerType player0) {
         final JList lst = (player0.equals(PlayerType.HUMAN)
-                ? VSubmenuConstructed.SINGLETON_INSTANCE.getLstHumanDecks()
-                : VSubmenuConstructed.SINGLETON_INSTANCE.getLstAIDecks());
+                ? VSubmenuConstructed.SINGLETON_INSTANCE.getLstUserDecks()
+                : VSubmenuConstructed.SINGLETON_INSTANCE.getLstDecksAI());
         lst.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 
         lst.setListData(new String[] {"Random 1", "Random 2", "Random 3",
@@ -202,7 +202,7 @@ public enum CSubmenuConstructed implements ICDoc {
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
 
-        final FLabel btn = (player0.equals(PlayerType.HUMAN)
+        final ExperimentalLabel btn = (player0.equals(PlayerType.HUMAN)
                 ? VSubmenuConstructed.SINGLETON_INSTANCE.getBtnHumanRandom()
                   : VSubmenuConstructed.SINGLETON_INSTANCE.getBtnAIRandom());
 
@@ -217,8 +217,8 @@ public enum CSubmenuConstructed implements ICDoc {
     /** Handles all control for "themes" radio button click. */
     private void updateThemes(final PlayerType player0) {
         final JList lst = (player0.equals(PlayerType.HUMAN)
-                ? VSubmenuConstructed.SINGLETON_INSTANCE.getLstHumanDecks()
-                : VSubmenuConstructed.SINGLETON_INSTANCE.getLstAIDecks());
+                ? VSubmenuConstructed.SINGLETON_INSTANCE.getLstUserDecks()
+                : VSubmenuConstructed.SINGLETON_INSTANCE.getLstDecksAI());
         lst.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         lst.setName(ESubmenuConstructedTypes.COLORS.toString());
@@ -232,7 +232,7 @@ public enum CSubmenuConstructed implements ICDoc {
         lst.setName(ESubmenuConstructedTypes.THEMES.toString());
         lst.removeMouseListener(madDecklist);
 
-        final FLabel btn = (player0.equals(PlayerType.HUMAN)
+        final ExperimentalLabel btn = (player0.equals(PlayerType.HUMAN)
                 ? VSubmenuConstructed.SINGLETON_INSTANCE.getBtnHumanRandom()
                   : VSubmenuConstructed.SINGLETON_INSTANCE.getBtnAIRandom());
 
@@ -246,8 +246,8 @@ public enum CSubmenuConstructed implements ICDoc {
     /** Handles all control for "custom" radio button click. */
     private void updateCustom(final PlayerType player0) {
         final JList lst = (player0.equals(PlayerType.HUMAN)
-                ? VSubmenuConstructed.SINGLETON_INSTANCE.getLstHumanDecks()
-                : VSubmenuConstructed.SINGLETON_INSTANCE.getLstAIDecks());
+                ? VSubmenuConstructed.SINGLETON_INSTANCE.getLstUserDecks()
+                : VSubmenuConstructed.SINGLETON_INSTANCE.getLstDecksAI());
         lst.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         final List<String> customNames = new ArrayList<String>();
@@ -259,7 +259,7 @@ public enum CSubmenuConstructed implements ICDoc {
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
 
-        final FLabel btn = (player0.equals(PlayerType.HUMAN)
+        final ExperimentalLabel btn = (player0.equals(PlayerType.HUMAN)
                 ? VSubmenuConstructed.SINGLETON_INSTANCE.getBtnHumanRandom()
                   : VSubmenuConstructed.SINGLETON_INSTANCE.getBtnAIRandom());
 
@@ -273,8 +273,8 @@ public enum CSubmenuConstructed implements ICDoc {
     /** Handles all control for "quest event" radio button click. */
     private void updateQuestEvents(final PlayerType player0) {
         final JList lst = (player0.equals(PlayerType.HUMAN)
-                ? VSubmenuConstructed.SINGLETON_INSTANCE.getLstHumanDecks()
-                : VSubmenuConstructed.SINGLETON_INSTANCE.getLstAIDecks());
+                ? VSubmenuConstructed.SINGLETON_INSTANCE.getLstUserDecks()
+                : VSubmenuConstructed.SINGLETON_INSTANCE.getLstDecksAI());
         lst.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
         final List<String> eventNames = new ArrayList<String>();
@@ -292,7 +292,7 @@ public enum CSubmenuConstructed implements ICDoc {
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
 
-        final FLabel btn = (player0.equals(PlayerType.HUMAN)
+        final ExperimentalLabel btn = (player0.equals(PlayerType.HUMAN)
                 ? VSubmenuConstructed.SINGLETON_INSTANCE.getBtnHumanRandom()
                   : VSubmenuConstructed.SINGLETON_INSTANCE.getBtnAIRandom());
 
@@ -316,8 +316,8 @@ public enum CSubmenuConstructed implements ICDoc {
         final SwingWorker<Object, Void> worker = new SwingWorker<Object, Void>() {
             @Override
             public Object doInBackground() {
-                Deck humanDeck = generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstHumanDecks(), PlayerType.HUMAN);
-                Deck aiDeck = generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstAIDecks(), PlayerType.COMPUTER);
+                Deck humanDeck = generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstUserDecks(), PlayerType.HUMAN);
+                Deck aiDeck = generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstDecksAI(), PlayerType.COMPUTER);
 
                 CMatchUI.SINGLETON_INSTANCE.initMatch(null);
                 Singletons.getModel().getMatchState().setGameType(GameType.Constructed);
