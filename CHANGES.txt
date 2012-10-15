@@ -209,6 +209,20 @@ Fixes/Features:
 - Turned keyword "CARDNAME enters the battlefield tapped." into an ETBReplacement Macro.
 - fixed another NPE issue due to activating player not set in replacement effects
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- minor change to last NPE fix
+- Fixed Grave Betrayal.
+- Updating VAssignDamage to fix all of the rules interactions that were a bit off.
+- Fixed Braids, Conjurer Adept.
+- Adding game type requirements
+- Quests now enforcing game type requirements
+- Hooking up Auto and Reset functions in Assign Damage. (I can't quite figure out how to get the alignment of the buttons to work, if some kind soul would like to add it, that'd be great)
+- New ExperimentalLabel class with improved aesthetics added. Not in use yet.
+- Fixed type of Niv-Mizzet, Dracogenius.
+- Constructed submenu aesthetic update complete.
+- Improved separation of view/control in new home UI code.
+- Deprecated VMainMenu class.
+- Renamed CMainMenu to CHomeUI.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -226,6 +240,10 @@ Three Dreams
 Stonehewer Giant
 Gifts Ungiven
 Realms Uncharted
+Cloudstone Curio
+Blood Clock
+Umbilicus
+Vectis Dominator
 
 
 end
