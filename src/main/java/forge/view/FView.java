@@ -108,7 +108,7 @@ public enum FView {
 
         // All is ready to go - fire up home screen and discard splash frame.
         Singletons.getControl().changeState(FControl.HOME_SCREEN);
-        CMainMenu.SINGLETON_INSTANCE.selectPrevious();
+        //CMainMenu.SINGLETON_INSTANCE.selectPrevious();
 
         FView.this.frmSplash.dispose();
         FView.this.frmSplash = null;

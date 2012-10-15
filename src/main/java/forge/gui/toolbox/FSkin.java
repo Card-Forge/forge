@@ -725,6 +725,45 @@ public enum FSkin {
         return avatars;
     }
 
+    /** Steps RGB components of a color up or down.
+     * Returns opaque (non-alpha) stepped color.
+     * Plus for lighter, minus for darker.
+     *
+     * @param clr0 {@link java.awt.Color}
+     * @param step int
+     * @return {@link java.awt.Color}
+     */
+    public static Color stepColor(Color clr0, int step) {
+        int r = clr0.getRed();
+        int g = clr0.getGreen();
+        int b = clr0.getBlue();
+
+        // Darker
+        if (step < 0) {
+            r =  ((r + step > 0) ? r + step : 0);
+            g =  ((g + step > 0) ? g + step : 0);
+            b =  ((b + step > 0) ? b + step : 0);
+        }
+        else {
+            r =  ((r + step < 255) ? r + step : 255);
+            g =  ((g + step < 255) ? g + step : 255);
+            b =  ((b + step < 255) ? b + step : 255);
+        }
+
+        return new Color(r, g, b);
+    }
+
+    /** Returns RGB components of a color, with a new
+     * value for alpha. 0 = transparent, 255 = opaque.
+     *
+     * @param clr0 {@link java.awt.Color}
+     * @param alpha int
+     * @return {@link java.awt.Color}
+     */
+    public static Color alphaColor(Color clr0, int alpha) {
+        return new Color(clr0.getRed(), clr0.getGreen(), clr0.getBlue(), alpha);
+    }
+
     /**
      * <p>
      * getColorFromPixel.

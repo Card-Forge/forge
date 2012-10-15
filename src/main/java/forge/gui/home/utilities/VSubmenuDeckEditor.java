@@ -9,6 +9,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
+import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FLabel;
 
 /** 
@@ -41,8 +42,13 @@ public enum VSubmenuDeckEditor implements IVSubmenu {
                 .hoverable(true).cmdClick(CSubmenuDeckEditor.SINGLETON_INSTANCE.getCommandOnSelect())
                 .fontSize(16).build(), "w 200px!, h 40px!");
 
-        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
-        parentCell.getBody().add(pnl, "w 98%!, h 98%!, gap 1% 0 1% 0");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0"));
+
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnl, "w 98%!, h 98%!, gap 1% 0 1% 0");
+
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
     }
 
     /* (non-Javadoc)

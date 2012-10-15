@@ -26,6 +26,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
+import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FRadioButton;
@@ -180,12 +181,17 @@ public enum VSubmenuQuestData implements IVSubmenu {
      */
     @Override
     public void populate() {
-        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap"));
-        parentCell.getBody().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px");
-        parentCell.getBody().add(lblOldQuests, "w 98%, h 30px!, gap 1% 0 0 5px");
-        parentCell.getBody().add(scrQuests, "w 98%!, growy, pushy, gap 1% 0 0 20px");
-        parentCell.getBody().add(lblTitleNew, "w 98%, h 30px!, gap 1% 0 0 10px");
-        parentCell.getBody().add(pnlOptions, "w 98%!, gap 1% 0 0 0");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap"));
+
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblOldQuests, "w 98%, h 30px!, gap 1% 0 0 5px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(scrQuests, "w 98%!, growy, pushy, gap 1% 0 0 20px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitleNew, "w 98%, h 30px!, gap 1% 0 0 10px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlOptions, "w 98%!, gap 1% 0 0 0");
+
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
     }
 
     /* (non-Javadoc)

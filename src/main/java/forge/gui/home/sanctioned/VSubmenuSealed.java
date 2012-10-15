@@ -23,6 +23,7 @@ import forge.gui.framework.ICDoc;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.StartButton;
+import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.DeckLister;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
@@ -77,14 +78,18 @@ public enum VSubmenuSealed implements IVSubmenu {
      */
     @Override
     public void populate() {
-        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, hidemode 2, wrap"));
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, hidemode 2, wrap"));
 
-        parentCell.getBody().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px");
-        parentCell.getBody().add(lblInfo, "w 100%!, gap 0 0 30px 15px");
-        parentCell.getBody().add(new FScrollPane(lstDecks), "w 98%!, growy, pushy, gap 1% 0 0 0");
-        parentCell.getBody().add(btnBuildDeck, "w 300px!, h 30px!, gap 0 0 15px 15px, ax center");
-        parentCell.getBody().add(btnDirections, "w 200px!, h 30px!, ax center");
-        parentCell.getBody().add(btnStart, "w 98%!, gap 1% 0 50px 50px, span 2");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblInfo, "w 100%!, gap 0 0 30px 15px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(new FScrollPane(lstDecks), "w 98%!, growy, pushy, gap 1% 0 0 0");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnBuildDeck, "w 300px!, h 30px!, gap 0 0 15px 15px, ax center");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnDirections, "w 200px!, h 30px!, ax center");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStart, "w 98%!, gap 1% 0 50px 50px, span 2");
+
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
     }
 
     /* (non-Javadoc)

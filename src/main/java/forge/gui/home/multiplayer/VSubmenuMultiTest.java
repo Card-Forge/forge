@@ -16,6 +16,7 @@ import forge.gui.framework.ICDoc;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.StartButton;
+import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FRadioButton;
@@ -99,17 +100,21 @@ public enum VSubmenuMultiTest implements IVSubmenu {
      */
     @Override
     public void populate() {
-        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
 
-        parentCell.getBody().add(pnlFields, "w 41%!, gap 6% 6% 50px 0, growy, pushy");
-        parentCell.getBody().add(pnlHands, "w 41%!, gap 0 0 50px 0, growy, pushy");
-        parentCell.getBody().add(new FLabel.Builder()
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlFields, "w 41%!, gap 6% 6% 50px 0, growy, pushy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlHands, "w 41%!, gap 0 0 50px 0, growy, pushy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(new FLabel.Builder()
             .text("Starts a new game with preconstructed 2 color decks for each field.")
             .build(), "gap 0 0 50px 5px, ax center, span 2");
-        parentCell.getBody().add(new FLabel.Builder()
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(new FLabel.Builder()
             .text("Field 0 is Human, the rest are AI [AllZone.getComputerPlayer()].")
             .build(), "gap 0 0 0 5px, ax center, span 2");
-        parentCell.getBody().add(btnStart, "gap 0 0 50px 50px, ax center, span 2");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStart, "gap 0 0 50px 50px, ax center, span 2");
+
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
     }
 
     /* (non-Javadoc)

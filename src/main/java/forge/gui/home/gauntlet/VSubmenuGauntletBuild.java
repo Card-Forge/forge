@@ -21,6 +21,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
+import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FRadioButton;
@@ -217,17 +218,20 @@ public enum VSubmenuGauntletBuild implements IVSubmenu {
      */
     @Override
     public void populate() {
-        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap 3"));
-        parentCell.getBody().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px, span 3");
-        parentCell.getBody().add(pnlFileHandling, "w 98%!, gap 1% 0 1% 5px, span 3");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap 3"));
 
-        parentCell.getBody().add(pnlRadios, "w 48% - 20px!, gap 1% 0 0 15px");
-        parentCell.getBody().add(pnlStrut, "w 40px!, gap 1% 1% 0 15px");
-        parentCell.getBody().add(pnlDirections, "w 48% - 20px!, gap 0 0 0 15px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px, span 3");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlFileHandling, "w 98%!, gap 1% 0 1% 5px, span 3");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlRadios, "w 48% - 20px!, gap 1% 0 0 15px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStrut, "w 40px!, gap 1% 1% 0 15px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlDirections, "w 48% - 20px!, gap 0 0 0 15px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(scrLeft, "w 48% - 20px!, gap 1% 0 0 25px, pushy, growy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlButtons, "w 40px!, gap 1% 1% 0 25px, pushy, growy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(scrRight, "w 48% - 20px!, gap 0 0 0 25px, pushy, growy");
 
-        parentCell.getBody().add(scrLeft, "w 48% - 20px!, gap 1% 0 0 25px, pushy, growy");
-        parentCell.getBody().add(pnlButtons, "w 40px!, gap 1% 1% 0 25px, pushy, growy");
-        parentCell.getBody().add(scrRight, "w 48% - 20px!, gap 0 0 0 25px, pushy, growy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
     }
 
     /** @return {@link javax.swing.JList} */

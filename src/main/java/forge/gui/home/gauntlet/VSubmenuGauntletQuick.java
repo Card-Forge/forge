@@ -21,6 +21,7 @@ import forge.gui.framework.ICDoc;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.StartButton;
+import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FList;
@@ -54,13 +55,13 @@ public enum VSubmenuGauntletQuick implements IVSubmenu {
         .text("Double click a non-random deck for its decklist.")
         .fontSize(12).build();
 
-    private JSlider sliOpponents = new JSlider(JSlider.HORIZONTAL, 5, 50, 20);
+    private final JSlider sliOpponents = new JSlider(JSlider.HORIZONTAL, 5, 50, 20);
     //private JSlider sliGamesPerMatch = new JSlider(JSlider.HORIZONTAL, 1, 7, 3);
 
-    private JCheckBox boxUserDecks = new FCheckBox("Custom User Decks");
-    private JCheckBox boxQuestDecks = new FCheckBox("Quest Decks");
-    private JCheckBox boxColorDecks = new FCheckBox("Fully random color Decks");
-    private JCheckBox boxThemeDecks = new FCheckBox("Semi-random theme Decks");
+    private final JCheckBox boxUserDecks = new FCheckBox("Custom User Decks");
+    private final JCheckBox boxQuestDecks = new FCheckBox("Quest Decks");
+    private final JCheckBox boxColorDecks = new FCheckBox("Fully random color Decks");
+    private final JCheckBox boxThemeDecks = new FCheckBox("Semi-random theme Decks");
 
     private final JRadioButton radUserDecks = new FRadioButton("Custom user decks");
     private final JRadioButton radQuestDecks = new FRadioButton("Quest Events");
@@ -180,14 +181,18 @@ public enum VSubmenuGauntletQuick implements IVSubmenu {
      */
     @Override
     public void populate() {
-        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
-        parentCell.getBody().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px, span 2");
-        parentCell.getBody().add(lblDesc, "ax center, gap 0 0 0 5px, span 2");
-        parentCell.getBody().add(lblDecklist, "ax center, gap 0 0 0 15px, span 2");
-        parentCell.getBody().add(pnlOptions, "w 40%!, gap 1% 1% 0 0, pushy, growy");
-        parentCell.getBody().add(pnlDecks, "w 57%!, pushy, growy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
 
-        parentCell.getBody().add(btnStart, "w 98%!, ax center, gap 1% 0 20px 20px, span 2");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px, span 2");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblDesc, "ax center, gap 0 0 0 5px, span 2");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblDecklist, "ax center, gap 0 0 0 15px, span 2");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlOptions, "w 40%!, gap 1% 1% 0 0, pushy, growy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlDecks, "w 57%!, pushy, growy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStart, "w 98%!, ax center, gap 1% 0 20px 20px, span 2");
+
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
     }
 
     /** @return {@link javax.swing.JList} */

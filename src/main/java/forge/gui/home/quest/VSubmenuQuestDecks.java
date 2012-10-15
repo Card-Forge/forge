@@ -10,6 +10,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
+import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.DeckLister;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
@@ -55,10 +56,15 @@ public enum VSubmenuQuestDecks implements IVSubmenu {
      */
     @Override
     public void populate() {
-        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap"));
-        parentCell.getBody().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px");
-        parentCell.getBody().add(scr, "w 98%!, growy, pushy, gap 1% 0 0 0");
-        parentCell.getBody().add(btnNewDeck, "w 300px!, h 30px!, gap 0 0 50px 50px, ax center");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap"));
+
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(scr, "w 98%!, growy, pushy, gap 1% 0 0 0");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnNewDeck, "w 300px!, h 30px!, gap 0 0 50px 50px, ax center");
+
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
     }
 
     /* (non-Javadoc)

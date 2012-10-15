@@ -25,6 +25,7 @@ import forge.gui.framework.ICDoc;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.StartButton;
+import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.DeckLister;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
@@ -195,20 +196,24 @@ public enum VSubmenuDraft implements IVSubmenu {
      */
     @Override
     public void populate() {
-        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap 2, hidemode 2"));
-        parentCell.getBody().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px, span 2");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap 2, hidemode 2"));
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px, span 2");
 
-        parentCell.getBody().add(lblHuman, "w 60%!, gap 1% 8% 0 15px");
-        parentCell.getBody().add(lblAI, "w 30%!, gap 0 0 0 15px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblHuman, "w 60%!, gap 1% 8% 0 15px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblAI, "w 30%!, gap 0 0 0 15px");
 
-        parentCell.getBody().add(new FScrollPane(lstHumanDecks), "w 60%!, gap 1% 8% 0 0, pushy, growy");
-        parentCell.getBody().add(new FScrollPane(lstAI), "w 30%!, pushy, growy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(new FScrollPane(lstHumanDecks), "w 60%!, gap 1% 8% 0 0, pushy, growy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(new FScrollPane(lstAI), "w 30%!, pushy, growy");
 
-        parentCell.getBody().add(btnBuildDeck, "w 60%!, h 30px!, gap 1% 5% 10px 0");
-        parentCell.getBody().add(btnPlayThisOpponent, "w 30%!, h 30px!, gap 0 0 10px 0");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnBuildDeck, "w 60%!, h 30px!, gap 1% 5% 10px 0");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnPlayThisOpponent, "w 30%!, h 30px!, gap 0 0 10px 0");
 
-        parentCell.getBody().add(btnDirections, "w 200px!, h 30px!, gap 1% 0 20px 0, span 2, ax center");
-        parentCell.getBody().add(btnStart, "w 98%!, gap 1% 0 50px 50px, ax center, span 2");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnDirections, "w 200px!, h 30px!, gap 1% 0 20px 0, span 2, ax center");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStart, "w 98%!, gap 1% 0 50px 50px, ax center, span 2");
+
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaint();
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
     }
 
     /* (non-Javadoc)

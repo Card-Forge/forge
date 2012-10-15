@@ -1,5 +1,6 @@
 package forge.gui.framework;
 
+import java.awt.BorderLayout;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -8,6 +9,7 @@ import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
 import javax.xml.stream.XMLEventFactory;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLEventWriter;
@@ -132,6 +134,12 @@ public final class SLayoutIO {
         final FView view = FView.SINGLETON_INSTANCE;
         final XMLInputFactory inputFactory = XMLInputFactory.newInstance();
         SLayoutIO.setFilesForState();
+
+        view.getPnlInsets().removeAll();
+        view.getPnlInsets().setLayout(new BorderLayout());
+        view.getPnlInsets().add(view.getPnlContent(), BorderLayout.CENTER);
+        view.getPnlInsets().setBorder(new EmptyBorder(
+                SLayoutConstants.BORDER_T, SLayoutConstants.BORDER_T, 0, 0));
 
         final XMLEventReader reader;
         if (f != null && f.exists()) {

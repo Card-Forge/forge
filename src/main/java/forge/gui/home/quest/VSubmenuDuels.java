@@ -19,6 +19,7 @@ import forge.gui.framework.IVDoc;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.StartButton;
+import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
@@ -124,12 +125,16 @@ public enum VSubmenuDuels implements IVSubmenu, IStatsAndPet, IVDoc {
      */
     @Override
     public void populate() {
-        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap"));
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap"));
 
-        parentCell.getBody().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px");
-        parentCell.getBody().add(pnlStats, "w 98%!, gap 1% 0 0 20px");
-        parentCell.getBody().add(scrDuels, "w 98%!, pushy, growy, gap 1% 0 0 0");
-        parentCell.getBody().add(pnlStart, "w 98%, gap 1% 0 20px 50px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStats, "w 98%!, gap 1% 0 0 20px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(scrDuels, "w 98%!, pushy, growy, gap 1% 0 0 0");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "w 98%, gap 1% 0 20px 50px");
+
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
     }
 
     /** */

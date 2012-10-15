@@ -19,6 +19,7 @@ import forge.gui.framework.ICDoc;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.StartButton;
+import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FList;
@@ -169,14 +170,19 @@ public enum VSubmenuConstructed implements IVSubmenu {
      */
     @Override
     public void populate() {
-        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
-        parentCell.getBody().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px, span 2");
-        parentCell.getBody().add(lblDecklist, "h 20px!, span 2, ax center");
-        parentCell.getBody().add(pnlRadiosAI, "w 45%!, gap 1% 8% 20px 20px");
-        parentCell.getBody().add(pnlRadiosHuman, "w 45%!, gap 0 0 20px 20px");
-        parentCell.getBody().add(pnlDecksAI, "w 45%!, gap 1% 8% 0 0, growy, pushy");
-        parentCell.getBody().add(pnlDecksHuman, "w 45%!, growy, pushy");
-        parentCell.getBody().add(pnlStart, "span 2, gap 1% 0 50px 50px, ax center");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
+
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px, span 2");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblDecklist, "h 20px!, span 2, ax center");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlRadiosAI, "w 45%!, gap 1% 8% 20px 20px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlRadiosHuman, "w 45%!, gap 0 0 20px 20px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlDecksAI, "w 45%!, gap 1% 8% 0 0, growy, pushy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlDecksHuman, "w 45%!, growy, pushy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "span 2, gap 1% 0 50px 50px, ax center");
+
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
     }
 
     /** @return {@link javax.swing.JList} */

@@ -25,6 +25,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
+import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
@@ -126,8 +127,13 @@ public enum VSubmenuUtilities implements IVSubmenu {
      */
     @Override
     public void populate() {
-        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0"));
-        parentCell.getBody().add(scrContent, "w 98%!, h 98%!, gap 1% 0 1% 0");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
+
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0"));
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(scrContent, "w 98%!, h 98%!, gap 1% 0 1% 0");
+
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
     }
 
     /* (non-Javadoc)
