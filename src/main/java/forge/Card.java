@@ -6720,6 +6720,13 @@ public class Card extends GameEntity implements Comparable<Card> {
                             return false;
                         }
                     }
+                } else if (restriction.equals("MostProminentColor")) {
+                    for (final String color : CardUtil.getColors(this)) {
+                        if (CardFactoryUtil.isMostProminentColor(AllZoneUtil.getCardsIn(ZoneType.Battlefield), color)) {
+                            return true;
+                        }
+                    }
+                    return false;
                 } else {
                     boolean shares = false;
                     for (final Card card : sourceController.getCardsIn(ZoneType.Battlefield)) {

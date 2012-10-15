@@ -3071,6 +3071,47 @@ public class CardFactoryUtil {
 
     /**
      * <p>
+     * isMostProminentColor.
+     * </p>
+     * 
+     * @param list
+     *            a {@link forge.CardList} object.
+     * @return a boolean.
+     */
+    public static boolean isMostProminentColor(final List<Card> list, final String color) {
+
+        final Map<String, Integer> map = new HashMap<String, Integer>();
+
+        for (final Card c : list) {
+            for (final String color2 : CardUtil.getColors(c)) {
+                if (color2.equals("colorless")) {
+                    // nothing to do
+                } else if (!map.containsKey(color2)) {
+                    map.put(color2, 1);
+                } else {
+                    map.put(color2, map.get(color2) + 1);
+                }
+            }
+        } // for
+
+        if (map.isEmpty() || !map.containsKey(color)) {
+            return false;
+        }
+
+        int num = map.get(color);
+
+        for (final Entry<String, Integer> entry : map.entrySet()) {
+
+            if (num < entry.getValue()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    
+    /**
+     * <p>
      * getMostProminentColor.
      * </p>
      * 
