@@ -1,0 +1,12 @@
+Name:Tsabo's Assassin
+ManaCost:2 B B
+Types:Creature Zombie Assassin
+Text:no text
+PT:1/1
+A:AB$ Destroy | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NoRegen$ True | AITgts$ Creature.SharesColorWith MostProminentColor | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | SpellDescription$ Destroy target creature if it shares a color with the most common color among all permanents or a color tied for most common. A creature destroyed this way can't be regenerated.
+SVar:X:Targeted$Valid Creature.SharesColorWith MostProminentColor
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tsabos_assassin.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/128.jpg
+Oracle:{T}: Destroy target creature if it shares a color with the most common color among all permanents or a color tied for most common. A creature destroyed this way can't be regenerated.
+End

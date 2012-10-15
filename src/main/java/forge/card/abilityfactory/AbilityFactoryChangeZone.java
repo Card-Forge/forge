@@ -1668,6 +1668,9 @@ public final class AbilityFactoryChangeZone {
 
         List<Card> list = AllZoneUtil.getCardsIn(origin);
         list = CardLists.getValidCards(list, tgt.getValidTgts(), ai, source);
+        if (params.containsKey("AITgts")) {
+            list = CardLists.getValidCards(list, params.get("AITgts"), sa.getActivatingPlayer(), source);
+        }
         if (source.isInZone(ZoneType.Hand)) {
             list = CardLists.filter(list, Predicates.not(CardPredicates.nameEquals(source.getName()))); // Don't get the same card back.
         }

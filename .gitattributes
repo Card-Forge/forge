@@ -10392,6 +10392,7 @@ res/cardsfolder/t/trusted_forcemage.txt -text
 res/cardsfolder/t/trusty_machete.txt svneol=native#text/plain
 res/cardsfolder/t/trygon_predator.txt svneol=native#text/plain
 res/cardsfolder/t/tsabo_tavoc.txt svneol=native#text/plain
+res/cardsfolder/t/tsabos_assassin.txt -text
 res/cardsfolder/t/tsabos_decree.txt -text
 res/cardsfolder/t/tsunami.txt svneol=native#text/plain
 res/cardsfolder/t/tukatongue_thallid.txt svneol=native#text/plain
