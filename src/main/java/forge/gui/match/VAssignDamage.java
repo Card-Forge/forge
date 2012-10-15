@@ -69,7 +69,11 @@ public class VAssignDamage {
     private Integer activeIndex = 0;
 
     private final JLabel lblTotalDamage = new FLabel.Builder().text("Available damage points: Unknown").build();
+
+    //  Label Buttons
     private final FLabel lblOK = new FLabel.Builder().text("OK").hoverable(true).opaque(true).fontSize(16).build();
+    private final FLabel lblReset = new FLabel.Builder().text("Reset").hoverable(true).opaque(true).fontSize(16).build();
+    private final FLabel lblAuto = new FLabel.Builder().text("Auto").hoverable(true).opaque(true).fontSize(16).build();
     
     // TODO Add Auto and Reset Buttons and hook them up to created functions
 
@@ -244,6 +248,12 @@ public class VAssignDamage {
 
     private final Command cmdOK = new Command() { @Override
         public void execute() { finish(); } };
+        
+    private final Command cmdReset = new Command() { @Override
+        public void execute() { resetAssignDamage(); } };
+        
+    private final Command cmdAuto = new Command() { @Override
+        public void execute() { autoAssignDamage(); } };
 
     /** Constructor.
      * 
@@ -327,13 +337,17 @@ public class VAssignDamage {
         }
 
         lblOK.setCommand(cmdOK);
+        lblReset.setCommand(cmdReset);
+        lblAuto.setCommand(cmdAuto);
 
         // Final UI layout
         pnlMain.setLayout(new MigLayout("insets 0, gap 0, wrap 2, ax center"));
         pnlMain.add(pnlAttacker, "w 125px!, h 160px!, gap 50px 0 0 15px");
         pnlMain.add(pnlInfo, "gap 20px 0 0 15px");
         pnlMain.add(scrDefenders, "w 96%!, gap 2% 0 0 0, pushy, growy, ax center, span 2");
+        
         pnlMain.add(lblOK, "w 100px!, h 30px!, gap 0 0 5px 10px, ax center, span 2");
+        // TODO Align lblAuto and lblRest on same row as OK button. Auto, Ok, Reset
 
         overlay.add(pnlMain);
 
