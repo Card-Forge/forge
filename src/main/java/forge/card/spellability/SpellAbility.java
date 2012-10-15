@@ -131,6 +131,14 @@ public abstract class SpellAbility {
     public Set<String> getSVars() {
         return sVars.keySet();
     }
+    
+    /**
+     * <p>
+     * Constructor for SpellAbility.
+     * </p>
+     */
+    public SpellAbility() {
+    }
 
     /**
      * <p>
