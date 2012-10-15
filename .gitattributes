@@ -10628,6 +10628,7 @@ res/cardsfolder/v/vault_skyward.txt svneol=native#text/plain
 res/cardsfolder/v/vebulid.txt -text
 res/cardsfolder/v/vec_townships.txt svneol=native#text/plain
 res/cardsfolder/v/vectis_agents.txt svneol=native#text/plain
+res/cardsfolder/v/vectis_dominator.txt -text
 res/cardsfolder/v/vectis_silencers.txt svneol=native#text/plain
 res/cardsfolder/v/vector_asp.txt svneol=native#text/plain
 res/cardsfolder/v/vedalken_aethermage.txt svneol=native#text/plain

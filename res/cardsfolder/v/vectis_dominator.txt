@@ -1,0 +1,11 @@
+Name:Vectis Dominator
+ManaCost:1 W B
+Types:Artifact Creature Human Wizard
+PT:0/2
+Text:no text
+A:AB$ Tap | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Select target creature | UnlessCost$ PayLife<2> | UnlessPayer$ TargetedController | SpellDescription$ Tap target creature unless its controller pays 2 life.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/vectis_dominator.jpg
+SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/84.jpg
+Oracle:{T}: Tap target creature unless its controller pays 2 life.
+End
