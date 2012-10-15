@@ -1,6 +1,6 @@
 Name:Niv-Mizzet, Dracogenius
 ManaCost:2 U U R R
-Types:Legendary Creature Dragon
+Types:Legendary Creature Dragon Wizard
 Text:no text
 PT:5/5
 K:Flying
