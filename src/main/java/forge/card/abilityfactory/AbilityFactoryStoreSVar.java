@@ -19,6 +19,7 @@ package forge.card.abilityfactory;
 
 import java.util.HashMap;
 
+import forge.AllZone;
 import forge.Card;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilityActivated;
@@ -27,6 +28,7 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.cost.Cost;
 import forge.card.spellability.Target;
+import forge.game.phase.CombatUtil;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 
@@ -215,7 +217,7 @@ public class AbilityFactoryStoreSVar {
         }
 
         if (params.containsKey("StackDescription")) {
-            sb.append(params.get("StackDescription"));
+            sb.append(params.get("StackDescription").replaceAll("CARDNAME", sa.getSourceCard().getName()));
             return sb.toString();
         }
 
@@ -241,13 +243,19 @@ public class AbilityFactoryStoreSVar {
      * @return a boolean.
      */
     public static boolean storeSVarCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
-        boolean randomReturn = true;
+        //Tree of Redemption
+        final Player ai = sa.getActivatingPlayer();
+        final Card source = sa.getSourceCard();
+        if (AbilityFactory.waitForBlocking(sa) || ai.getLife() + 1 >= source.getNetDefense() 
+                || (ai.getLife() > 5 && !CombatUtil.lifeInSeriousDanger(ai, AllZone.getCombat()))) {
+            return false;
+        }
         final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            randomReturn &= subAb.chkAIDrawback();
+        if (subAb != null && !subAb.chkAIDrawback()) {
+            return false;
         }
 
-        return randomReturn;
+        return true;
     }
 
     /**
