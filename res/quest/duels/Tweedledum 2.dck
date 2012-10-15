@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Tweedledum 2
+Title=Tweedledum
+Difficulty=medium
+Description=Mono G land ramp deck with Oracle of Mul Daya
+Icon=Tweedledum.jpg
+Deck Type=Constructed
+[main]
+2 Azusa, Lost but Seeking
+1 Baru, Fist of Krosa
+3 Budoka Gardener
+3 Crucible of Worlds
+80 Forest
+1 Garruk, Primal Hunter
+4 Grazing Gladehart
+1 Molimo, Maro-Sorcerer
+2 Mulch
+4 Oracle of Mul Daya
+2 Rites of Flourishing
+4 Rowen
+2 Scute Mob
+2 Seed the Land
+4 Seek the Horizon
+2 Seer's Sundial
+3 Zuran Orb
+[sideboard]
