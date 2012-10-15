@@ -716,7 +716,8 @@ public class Target {
         } else {
             for (final Card c : AllZoneUtil.getCardsIn(this.tgtZone)) {
                 if (c.isValid(this.validTgts, this.srcCard.getController(), this.srcCard)
-                        && (!isTargeted || c.canBeTargetedBy(sa))) {
+                        && (!isTargeted || c.canBeTargetedBy(sa))
+                        && !this.getTargetCards().contains(c)) {
                     return true;
                 }
             }
