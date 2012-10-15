@@ -3424,6 +3424,7 @@ res/cardsfolder/f/flash_of_defiance.txt svneol=native#text/plain
 res/cardsfolder/f/flash_of_insight.txt -text
 res/cardsfolder/f/flashfires.txt svneol=native#text/plain
 res/cardsfolder/f/flashfreeze.txt svneol=native#text/plain
+res/cardsfolder/f/flay.txt -text
 res/cardsfolder/f/flayed_nim.txt svneol=native#text/plain
 res/cardsfolder/f/flayer_husk.txt svneol=native#text/plain
 res/cardsfolder/f/flayer_of_the_hatebound.txt -text
