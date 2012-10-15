@@ -12,7 +12,7 @@ import forge.Command;
 import forge.Singletons;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
-import forge.gui.home.CMainMenu;
+import forge.gui.home.CHomeUI;
 import forge.gui.home.quest.SSubmenuQuestUtil.SelectablePanel;
 import forge.gui.toolbox.FLabel;
 import forge.quest.QuestController;
@@ -63,7 +63,7 @@ public enum CSubmenuChallenges implements ICDoc {
         view.getBtnCurrentDeck().setCommand(
                 new Command() { @Override
                     public void execute() {
-                        CMainMenu.SINGLETON_INSTANCE.itemClick(EDocID.HOME_QUESTDECKS);
+                        CHomeUI.SINGLETON_INSTANCE.itemClick(EDocID.HOME_QUESTDECKS);
                     }
                 });
 
@@ -134,7 +134,7 @@ public enum CSubmenuChallenges implements ICDoc {
             @Override
             public void execute() {
                 if (qc.getAchievements() == null) {
-                    CMainMenu.SINGLETON_INSTANCE.itemClick(EDocID.HOME_QUESTDATA);
+                    CHomeUI.SINGLETON_INSTANCE.itemClick(EDocID.HOME_QUESTDATA);
                 }
             }
         };

@@ -10,7 +10,7 @@ import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.CEditorQuest;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
-import forge.gui.home.CMainMenu;
+import forge.gui.home.CHomeUI;
 import forge.quest.QuestController;
 import forge.quest.data.QuestPreferences.QPref;
 
@@ -112,7 +112,7 @@ public enum CSubmenuQuestDecks implements ICDoc {
             @Override
             public void execute() {
                 if (qc.getAchievements() == null) {
-                    CMainMenu.SINGLETON_INSTANCE.itemClick(EDocID.HOME_QUESTDATA);
+                    CHomeUI.SINGLETON_INSTANCE.itemClick(EDocID.HOME_QUESTDATA);
                 }
             }
         };

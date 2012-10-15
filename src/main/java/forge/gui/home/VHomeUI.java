@@ -58,7 +58,6 @@ import forge.gui.home.utilities.VSubmenuExit;
 import forge.gui.home.utilities.VSubmenuUtilities;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
-import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
 import forge.view.FView;
 
@@ -73,8 +72,6 @@ import forge.view.FView;
 public enum VHomeUI implements IVTopLevelUI {
     /** */
     SINGLETON_INSTANCE;
-
-    private LblMenuItem lblSelected;
 
     private final Color clrTheme = FSkin.getColor(FSkin.Colors.CLR_THEME);
     private final Color l00 = FSkin.stepColor(clrTheme, 0);
@@ -162,31 +159,6 @@ public enum VHomeUI implements IVTopLevelUI {
         return pnlDisplay;
     }
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblSelected() {
-        return lblSelected;
-    }
-
-    /** @param id0 {@link forge.gui.framework.EDocID} */
-    public void itemClick(EDocID id0) {
-        final ForgePreferences prefs = Singletons.getModel().getPreferences();
-
-        if (lblSelected != null) {
-            lblSelected.setSelected(false);
-            lblSelected.repaintSelf();
-        }
-
-        if (!id0.equals(EDocID.HOME_EXIT)) {
-            id0.getDoc().populate();
-            id0.getDoc().getLayoutControl().update();
-            lblSelected = allSubmenuLabels.get(id0);
-            lblSelected.setSelected(true);
-
-            prefs.setPref(FPref.SUBMENU_CURRENTMENU, id0.toString());
-            Singletons.getModel().getPreferences().save();
-        }
-    }
-
     /**
      * 
      * @return Map<EMenuItem, FLabel>
@@ -214,19 +186,6 @@ public enum VHomeUI implements IVTopLevelUI {
 
         pnl.add(pnlMenu, "w 300px!, growy, pushy");
         pnl.add(pnlDisplay, "w 100% - 300px!, growy, pushy");
-
-        /*
-         * SLayoutIO.loadLayout(null);
-
-        // Adjust cells to lock in the home view
-        for (final DragCell d : FView.SINGLETON_INSTANCE.getDragCells()) {
-            d.hideHead();
-        }
-
-        CMainMenu.SINGLETON_INSTANCE.selectPrevious();
-        */
-
-        itemClick(EDocID.HOME_CONSTRUCTED);
     }
 
     /** */
@@ -264,6 +223,7 @@ public enum VHomeUI implements IVTopLevelUI {
 
         @Override
         public void paintComponent(Graphics g) {
+            final LblMenuItem lblSelected = CHomeUI.SINGLETON_INSTANCE.getLblSelected();
             final Graphics2D g2d = (Graphics2D) g.create();
             final int w = getWidth();
             final int h = getHeight();

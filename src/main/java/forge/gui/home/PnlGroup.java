@@ -36,7 +36,7 @@ public class PnlGroup extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
-        final JLabel lbl = VHomeUI.SINGLETON_INSTANCE.getLblSelected();
+        final JLabel lbl = CHomeUI.SINGLETON_INSTANCE.getLblSelected();
         int yTop = (lbl.getY() + lbl.getParent().getY());
 
         //super.paintComponent(g);

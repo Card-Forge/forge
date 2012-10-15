@@ -12752,7 +12752,7 @@ src/main/java/forge/gui/framework/SRearrangingUtil.java -text
 src/main/java/forge/gui/framework/SResizingUtil.java -text
 src/main/java/forge/gui/framework/VEmptyDoc.java -text
 src/main/java/forge/gui/framework/package-info.java svneol=native#text/plain
-src/main/java/forge/gui/home/CMainMenu.java -text
+src/main/java/forge/gui/home/CHomeUI.java -text
 src/main/java/forge/gui/home/EMenuGroup.java -text
 src/main/java/forge/gui/home/EMenuItem.java -text
 src/main/java/forge/gui/home/IVSubmenu.java -text

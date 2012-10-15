@@ -272,7 +272,7 @@ public enum VMainMenu implements IVDoc {
      */
     @Override
     public ICDoc getLayoutControl() {
-        return CMainMenu.SINGLETON_INSTANCE;
+        return CHomeUI.SINGLETON_INSTANCE;
     }
 
     /* (non-Javadoc)

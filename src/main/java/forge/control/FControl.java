@@ -39,6 +39,7 @@ import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.VDeckEditorUI;
 import forge.gui.framework.SOverflowUtil;
 import forge.gui.framework.SResizingUtil;
+import forge.gui.home.CHomeUI;
 import forge.gui.home.VHomeUI;
 import forge.gui.home.quest.SSubmenuQuestUtil;
 import forge.gui.match.VMatchUI;
@@ -200,6 +201,7 @@ public enum FControl {
         switch (i0) {
             case HOME_SCREEN:
                 VHomeUI.SINGLETON_INSTANCE.populate();
+                CHomeUI.SINGLETON_INSTANCE.selectPrevious();
                 //FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
                 FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(new ImageIcon());
                 Singletons.getView().getFrame().addWindowListener(waDefault);

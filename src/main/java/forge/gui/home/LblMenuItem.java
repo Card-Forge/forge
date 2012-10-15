@@ -46,7 +46,7 @@ public class LblMenuItem extends JLabel implements ILocalRepaint {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(final MouseEvent e) {
-                VHomeUI.SINGLETON_INSTANCE.itemClick(doc0.getDocumentID());
+                CHomeUI.SINGLETON_INSTANCE.itemClick(doc0.getDocumentID());
             }
 
             @Override
