@@ -223,6 +223,23 @@ Fixes/Features:
 - Deprecated VMainMenu class.
 - Renamed CMainMenu to CHomeUI.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Unless costs will now also work on subabilities.
+- Added the property "SharesColorWith MostProminentColor".
+- Fixed some FindBugs reports.
+- Added the quest opponent Tweedledum 2 by Nordos.
+- Added AI support for Tree of Redemption.
+- Fixed Extra Arms.
+- Fixed possibility of getting stuck with Sea Drake and only one land.
+- Further home menu aesthetic improvements:
+* Removed "utilities" menu
+* Added "exit forge" and "deck editor" buttons directly to menu panel
+* Restored functionality to exit forge button
+* Removed forge.gui.home.utilities package
+* Removed deprecated VMainMenu.
+- Temp fix for vertical sizing (small screens) home menu problem.
+- Sealed and Draft now funnel through meetsGameTypeRequirements
+- Added experimental new expansion unlocking scheme to limited-format quests. Once per every 100 wins, you get the option of using credits to "unlock" a new set and add it to your enforced format.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -244,6 +261,10 @@ Cloudstone Curio
 Blood Clock
 Umbilicus
 Vectis Dominator
+Brine Seer
+Barrin's Unmaking
+Tsabo's Assassin
+Flay
 
 
 end
