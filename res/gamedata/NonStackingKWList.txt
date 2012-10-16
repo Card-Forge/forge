@@ -24,6 +24,7 @@ Persist
 Phasing
 Plainswalk
 Prevent all combat damage that would be dealt by CARDNAME.
+Prevent all combat damage that would be dealt to and dealt by CARDNAME.
 Reach
 Rebound
 Shadow
