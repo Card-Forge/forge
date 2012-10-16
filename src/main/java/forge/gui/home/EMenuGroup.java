@@ -12,8 +12,7 @@ public enum EMenuGroup { /** */
     QUEST ("Quest Mode"), /** */
     GAUNTLET ("Gauntlets"), /** */
     MULTIPLAYER ("Multiplayer"), /** */
-    SETTINGS ("Game Settings"), /** */
-    UTILITIES ("Tools");
+    SETTINGS ("Game Settings");
 
     private final String strTitle;
 

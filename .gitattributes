@@ -12767,7 +12767,6 @@ src/main/java/forge/gui/home/LblMenuItem.java -text
 src/main/java/forge/gui/home/PnlGroup.java -text
 src/main/java/forge/gui/home/StartButton.java -text
 src/main/java/forge/gui/home/VHomeUI.java -text
-src/main/java/forge/gui/home/VMainMenu.java -text
 src/main/java/forge/gui/home/gauntlet/CSubmenuGauntletBuild.java -text
 src/main/java/forge/gui/home/gauntlet/CSubmenuGauntletContests.java -text
 src/main/java/forge/gui/home/gauntlet/CSubmenuGauntletLoad.java -text
@@ -12804,17 +12803,12 @@ src/main/java/forge/gui/home/sanctioned/VSubmenuDraft.java -text
 src/main/java/forge/gui/home/sanctioned/VSubmenuSealed.java -text
 src/main/java/forge/gui/home/sanctioned/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/home/settings/CSubmenuAvatars.java -text
+src/main/java/forge/gui/home/settings/CSubmenuDownloaders.java -text
 src/main/java/forge/gui/home/settings/CSubmenuPreferences.java -text
 src/main/java/forge/gui/home/settings/VSubmenuAvatars.java -text
+src/main/java/forge/gui/home/settings/VSubmenuDownloaders.java -text
 src/main/java/forge/gui/home/settings/VSubmenuPreferences.java -text
 src/main/java/forge/gui/home/settings/package-info.java svneol=native#text/plain
-src/main/java/forge/gui/home/utilities/CSubmenuDeckEditor.java -text
-src/main/java/forge/gui/home/utilities/CSubmenuExit.java -text
-src/main/java/forge/gui/home/utilities/CSubmenuUtilities.java -text
-src/main/java/forge/gui/home/utilities/VSubmenuDeckEditor.java -text
-src/main/java/forge/gui/home/utilities/VSubmenuExit.java -text
-src/main/java/forge/gui/home/utilities/VSubmenuUtilities.java -text
-src/main/java/forge/gui/home/utilities/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/match/CMatchUI.java -text
 src/main/java/forge/gui/match/ControlWinLose.java -text
 src/main/java/forge/gui/match/GauntletWinLose.java -text

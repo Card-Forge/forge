@@ -11,7 +11,6 @@ import forge.gui.deckeditor.views.VEditorPreferences;
 import forge.gui.deckeditor.views.VFilters;
 import forge.gui.deckeditor.views.VProbabilities;
 import forge.gui.deckeditor.views.VStatistics;
-import forge.gui.home.VMainMenu;
 import forge.gui.home.gauntlet.VSubmenuGauntletBuild;
 import forge.gui.home.gauntlet.VSubmenuGauntletContests;
 import forge.gui.home.gauntlet.VSubmenuGauntletLoad;
@@ -26,10 +25,8 @@ import forge.gui.home.sanctioned.VSubmenuConstructed;
 import forge.gui.home.sanctioned.VSubmenuDraft;
 import forge.gui.home.sanctioned.VSubmenuSealed;
 import forge.gui.home.settings.VSubmenuAvatars;
+import forge.gui.home.settings.VSubmenuDownloaders;
 import forge.gui.home.settings.VSubmenuPreferences;
-import forge.gui.home.utilities.VSubmenuDeckEditor;
-import forge.gui.home.utilities.VSubmenuExit;
-import forge.gui.home.utilities.VSubmenuUtilities;
 import forge.gui.match.views.VAntes;
 import forge.gui.match.views.VCombat;
 import forge.gui.match.views.VDetail;
@@ -73,13 +70,10 @@ public enum EDocID { /** */
     HOME_MULTITEST (VSubmenuMultiTest.SINGLETON_INSTANCE), /** */
     HOME_PREFERENCES (VSubmenuPreferences.SINGLETON_INSTANCE), /** */
     HOME_AVATARS (VSubmenuAvatars.SINGLETON_INSTANCE), /** */
-    HOME_DECKEDITOR (VSubmenuDeckEditor.SINGLETON_INSTANCE), /** */
-    HOME_UTILITIES (VSubmenuUtilities.SINGLETON_INSTANCE), /** */
+    HOME_UTILITIES (VSubmenuDownloaders.SINGLETON_INSTANCE), /** */
     HOME_CONSTRUCTED (VSubmenuConstructed.SINGLETON_INSTANCE), /** */
     HOME_DRAFT (VSubmenuDraft.SINGLETON_INSTANCE), /** */
     HOME_SEALED (VSubmenuSealed.SINGLETON_INSTANCE), /** */
-    HOME_MAINMENU (VMainMenu.SINGLETON_INSTANCE), /** */
-    HOME_EXIT (VSubmenuExit.SINGLETON_INSTANCE), /** */
 
     REPORT_MESSAGE (VMessage.SINGLETON_INSTANCE), /** */
     REPORT_STACK (VStack.SINGLETON_INSTANCE), /** */

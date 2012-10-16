@@ -1,4 +1,4 @@
-package forge.gui.home.utilities;
+package forge.gui.home.settings;
 
 import forge.Command;
 import forge.error.BugzReporter;
@@ -16,12 +16,12 @@ import forge.gui.framework.ICDoc;
  *
  */
 @SuppressWarnings("serial")
-public enum CSubmenuUtilities implements ICDoc {
+public enum CSubmenuDownloaders implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
     private final Command cmdLicensing = new Command() { @Override
-        public void execute() { VSubmenuUtilities.SINGLETON_INSTANCE.showLicensing(); } };
+        public void execute() { VSubmenuDownloaders.SINGLETON_INSTANCE.showLicensing(); } };
     private final Command cmdPicDownload  = new Command() { @Override
         public void execute() { new GuiDownloadPicturesLQ(); } };
     private final Command cmdSetDownload = new Command() { @Override
@@ -31,7 +31,7 @@ public enum CSubmenuUtilities implements ICDoc {
     private final Command cmdDownloadPrices = new Command() { @Override
         public void execute() { new GuiDownloadPrices(); } };
     private final Command cmdHowToPlay = new Command() { @Override
-        public void execute() { VSubmenuUtilities.SINGLETON_INSTANCE.showHowToPlay(); } };
+        public void execute() { VSubmenuDownloaders.SINGLETON_INSTANCE.showHowToPlay(); } };
 
     private final Command cmdImportPictures = new Command() {
         @Override
@@ -53,7 +53,7 @@ public enum CSubmenuUtilities implements ICDoc {
      */
     @Override
     public void initialize() {
-        final VSubmenuUtilities view = VSubmenuUtilities.SINGLETON_INSTANCE;
+        final VSubmenuDownloaders view = VSubmenuDownloaders.SINGLETON_INSTANCE;
         view.getBtnDownloadPics().setCommand(cmdPicDownload);
         view.getBtnDownloadSetPics().setCommand(cmdSetDownload);
         view.getBtnDownloadQuestImages().setCommand(cmdQuestImages);

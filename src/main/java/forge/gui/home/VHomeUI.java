@@ -52,10 +52,9 @@ import forge.gui.home.sanctioned.VSubmenuConstructed;
 import forge.gui.home.sanctioned.VSubmenuDraft;
 import forge.gui.home.sanctioned.VSubmenuSealed;
 import forge.gui.home.settings.VSubmenuAvatars;
+import forge.gui.home.settings.VSubmenuDownloaders;
 import forge.gui.home.settings.VSubmenuPreferences;
-import forge.gui.home.utilities.VSubmenuDeckEditor;
-import forge.gui.home.utilities.VSubmenuExit;
-import forge.gui.home.utilities.VSubmenuUtilities;
+import forge.gui.toolbox.ExperimentalLabel;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences.FPref;
@@ -88,6 +87,9 @@ public enum VHomeUI implements IVTopLevelUI {
         .iconAlignX(SwingConstants.CENTER)
         .iconInBackground(true).iconScaleFactor(1.0).build();
 
+    private ExperimentalLabel lblExit = new ExperimentalLabel("Exit Forge");
+    private ExperimentalLabel lblEditor = new ExperimentalLabel("Deck Editor");
+
     private VHomeUI() {
         pnlMenu.add(lblLogo, "w 200px!, h 200px!, gap 0 0 5px 10px, ax center");
 
@@ -109,10 +111,10 @@ public enum VHomeUI implements IVTopLevelUI {
 
         allSubmenus.add(VSubmenuPreferences.SINGLETON_INSTANCE);
         allSubmenus.add(VSubmenuAvatars.SINGLETON_INSTANCE);
+        allSubmenus.add(VSubmenuDownloaders.SINGLETON_INSTANCE);
 
-        allSubmenus.add(VSubmenuDeckEditor.SINGLETON_INSTANCE);
-        allSubmenus.add(VSubmenuUtilities.SINGLETON_INSTANCE);
-        allSubmenus.add(VSubmenuExit.SINGLETON_INSTANCE);
+        //allSubmenus.add(VSubmenuDeckEditor.SINGLETON_INSTANCE);
+        //allSubmenus.add(VSubmenuExit.SINGLETON_INSTANCE);
 
         allSubmenus.add(VSubmenuMultiTest.SINGLETON_INSTANCE);
 
@@ -144,10 +146,25 @@ public enum VHomeUI implements IVTopLevelUI {
             }
         }
 
-        //pnlMenu.setBackground(l00);
+        JPanel pnlButtons = new JPanel(new MigLayout("insets 0, gap 0"));
+        pnlButtons.setOpaque(false);
+
+        pnlButtons.add(lblExit, "w 135px!, h 30px!, gap 0 10px 0 0");
+        pnlButtons.add(lblEditor, "w 135px!, h 30px!");
+
+        pnlMenu.add(pnlButtons, "w 280px!, gap 10px 0 10px 10px");
         pnlDisplay.setBackground(FSkin.alphaColor(l00, 100));
     }
 
+    /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
+    public ExperimentalLabel getLblExit() {
+        return this.lblExit;
+    }
+
+    /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
+    public ExperimentalLabel getLblEditor() {
+        return this.lblEditor;
+    }
 
     /** @return {@link javax.swing.JPanel} */
     public JPanel getPnlMenu() {

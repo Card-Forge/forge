@@ -1,4 +1,4 @@
-package forge.gui.home.utilities;
+package forge.gui.home.settings;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -40,7 +40,7 @@ import forge.properties.NewConstants.Lang;
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  *
  */
-public enum VSubmenuUtilities implements IVSubmenu {
+public enum VSubmenuDownloaders implements IVSubmenu {
     /** */
     SINGLETON_INSTANCE;
 
@@ -72,7 +72,7 @@ public enum VSubmenuUtilities implements IVSubmenu {
     /**
      * Constructor.
      */
-    private VSubmenuUtilities() {
+    private VSubmenuDownloaders() {
         final String constraintsLBL = "w 90%!, h 20px!, gap 5% 0 3px 8px";
         final String constraintsBTN = "h 30px!, w 50%!, gap 25% 0 0 0";
 
@@ -141,7 +141,7 @@ public enum VSubmenuUtilities implements IVSubmenu {
      */
     @Override
     public EMenuGroup getGroupEnum() {
-        return EMenuGroup.UTILITIES;
+        return EMenuGroup.SETTINGS;
     }
 
     /** @return {@link forge.gui.toolbox.FLabel} */
@@ -314,7 +314,7 @@ public enum VSubmenuUtilities implements IVSubmenu {
      */
     @Override
     public ICDoc getLayoutControl() {
-        return CSubmenuUtilities.SINGLETON_INSTANCE;
+        return CSubmenuDownloaders.SINGLETON_INSTANCE;
     }
 
     /* (non-Javadoc)

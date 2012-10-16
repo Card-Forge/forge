@@ -201,7 +201,7 @@ public enum FControl {
         switch (i0) {
             case HOME_SCREEN:
                 VHomeUI.SINGLETON_INSTANCE.populate();
-                CHomeUI.SINGLETON_INSTANCE.selectPrevious();
+                CHomeUI.SINGLETON_INSTANCE.initialize();
                 //FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
                 FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(new ImageIcon());
                 Singletons.getView().getFrame().addWindowListener(waDefault);

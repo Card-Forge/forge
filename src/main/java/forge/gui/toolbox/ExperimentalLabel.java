@@ -73,7 +73,7 @@ public class ExperimentalLabel extends JLabel implements ILocalRepaint {
             public void mouseReleased(final MouseEvent e) {
                 down = false;
                 repaintSelf();
-                cmdClick.execute();
+                if (cmdClick != null) { cmdClick.execute(); }
             }
         });
     }
