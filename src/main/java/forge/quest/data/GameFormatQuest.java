@@ -24,6 +24,8 @@ import java.util.ArrayList;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
+
+import forge.Singletons;
 import forge.card.CardEdition;
 import forge.card.CardRulesPredicates;
 import forge.game.GameFormat;
@@ -177,16 +179,54 @@ public final class GameFormatQuest {
     /**
      * Gets the set list.
      * 
-     * @return list of allowed set codes
+     * @return unmodifiable list of allowed set codes
      */
     public List<String> getAllowedSetCodes() {
         return Collections.unmodifiableList(this.allowedSetCodes);
     }
 
     /**
+     * Get the list of excluded sets.
+     * 
+     * @return unmodifiable list of excluded sets.
+     */
+    public List<String> getExcludedSetCodes() {
+        if (this.allowedSetCodes == null || this.allowedSetCodes.isEmpty()) {
+            return null;
+        }
+
+        List<String> exSets = new ArrayList<String>();
+
+        for (CardEdition ce : Singletons.getModel().getEditions()) {
+            if (!isSetLegal(ce.getCode())) {
+                // System.out.println("Added " + ce.getCode() + " to the list.");
+                exSets.add(ce.getCode());
+            }
+        }
+        return Collections.unmodifiableList(exSets);
+    }
+
+    /**
+     * Add a set to allowed set codes.
+     * 
+     * @param setCode String, set code.
+     */
+    public void addSet(final String setCode) {
+        if (this.allowedSetCodes == null) {
+            this.allowedSetCodes = new ArrayList<String>(); // this should never happen.
+        } else if (this.allowedSetCodes.isEmpty()) {
+            return; // We are already allowing all sets!
+        } else if (this.allowedSetCodes.contains(setCode)) {
+            return; // Already on the list
+        }
+        // System.out.println("Adding " + setCode + " to allowed sets!");
+        this.allowedSetCodes.add(setCode);
+    }
+
+    /**
      * Gets the banned cards.
      * 
-     * @return list of banned card names
+     * @return unmodifiable list of banned card names
      */
     public List<String> getBannedCardNames() {
         return Collections.unmodifiableList(this.bannedCardNames);
