@@ -3,7 +3,7 @@ ManaCost:X G
 Types:Sorcery
 Text:no text
 A:SP$ Tap | Cost$ X G | ValidTgts$ Creature | TgtPrompt$ Select target creature | TargetMin$ 0 | TargetMax$ MaxTgts | References$ X,MaxTgts | RememberTargets$ True | SubAbility$ DBDamage | SpellDescription$ Tap X target creatures.
-SVar:DBDamage:DB$ DamageAll | NumDmg$ 2 | ValidCards$ Remembered.withFlying | SpellDescription$ CARDNAME deals 2 damage to each of those creatures with flying.
+SVar:DBDamage:DB$ DamageAll | NumDmg$ 2 | ValidCards$ Card.IsRemembered+withFlying | SpellDescription$ CARDNAME deals 2 damage to each of those creatures with flying.
 SVar:X:Targeted$Amount
 SVar:MaxTgts:Count$Valid Creature
 SVar:Rarity:Uncommon
