@@ -201,8 +201,8 @@ public enum VHomeUI implements IVTopLevelUI {
         pnl.setBorder(null);
         pnl.setLayout(new MigLayout("insets 0, gap 0"));
 
-        pnl.add(pnlMenu, "w 300px!, growy, pushy");
-        pnl.add(pnlDisplay, "w 100% - 300px!, growy, pushy");
+        pnl.add(pnlMenu, "w 300px!, h 100%!");
+        pnl.add(pnlDisplay, "w 100% - 300px!, h 100%!");
     }
 
     /** */
