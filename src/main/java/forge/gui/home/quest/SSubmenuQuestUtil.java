@@ -224,9 +224,14 @@ public class SSubmenuQuestUtil {
         final QuestEvent event = selectedOpponent.getEvent();
 
         Deck deck = SSubmenuQuestUtil.getCurrentDeck();
-        if (!deck.meetsGameTypeRequirements(GameType.Quest)) {
+        if (deck == null) {
+            String msg = "Please select a Quest Deck.";
+            JOptionPane.showMessageDialog(null, msg, "No Deck", JOptionPane.ERROR_MESSAGE);
+            System.out.println(msg);
+            return;
+        } else if (!deck.meetsGameTypeRequirements(GameType.Quest)) {
             String msg = "Chosen Deck doesn't meet the requirements (Minimum 40 cards). Please edit or choose a different deck.";
-            JOptionPane.showMessageDialog(null, msg);
+            JOptionPane.showMessageDialog(null, msg, "Invalid Deck", JOptionPane.ERROR_MESSAGE);
             System.out.println(msg);
             return;
         }

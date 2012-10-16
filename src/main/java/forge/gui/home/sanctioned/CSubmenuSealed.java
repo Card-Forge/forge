@@ -113,6 +113,12 @@ public enum CSubmenuSealed implements ICDoc {
                     "Please build and/or select a deck for yourself.",
                     "No deck", JOptionPane.ERROR_MESSAGE);
             return;
+        } else if (!human.meetsGameTypeRequirements(GameType.Sealed)) {
+            JOptionPane.showMessageDialog(null,
+                    "The selected deck doesn't have enough cards to play (minimum 40)."
+                    + "\r\nUse the deck editor to choose the cards you want before starting.",
+                    "Invalid deck", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
         int rounds = Singletons.getModel().getDecks().getSealed().get(human.getName()).getAiDecks().size();
