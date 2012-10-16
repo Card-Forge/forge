@@ -780,12 +780,9 @@ public class QuestWinLoseHandler extends ControlWinLose {
         }
 
         qData.getAssets().subtractCredits(price);
-        if (qData.getAssets().getCredits() < price) {
-            JOptionPane.showMessageDialog(null, "You have successfully unlocked " + chooseEd.getName() + "!",
-                    chooseEd.getName() + " unlocked!",
-                    JOptionPane.PLAIN_MESSAGE);
-            return null;
-        }
+        JOptionPane.showMessageDialog(null, "You have successfully unlocked " + chooseEd.getName() + "!",
+                chooseEd.getName() + " unlocked!",
+                JOptionPane.PLAIN_MESSAGE);
 
         return chooseEd;
     }
