@@ -15,9 +15,11 @@ A new Gauntlet mode has been added.
 
 Match UI is now ready for multiplayer (except for avatars). Added slots for up to 8 fields (more/less if you want, pretty easy) and up to 4 hands (also easy to adjust). A little ahead of schedule 
 
-Please delete the layout called "match_preferred.xml". Had to make a small addressing change that will affect previous saves. Everything else should dovetail neatly.
+The older match layout files are incompatible with the new multiplayer mode. The original match_default.xml, match_preferred.xml and the match_preferred.xml saved to a different name files have to go and can no longer be used. You can keep your editor_preferred.xml file. But you will have to setup your match view panels using the new match_default.xml file.
 
 Some people reported that the new targeting arcs are not being redrawn when the target moves to another area. This is a work in progress and we hope to fix it at some point in the future. If this happens, you should try turning the targeting arcs to off and then back on again.
+
+Several people have asked if it is still possible to resize (change the width) of the columns in the deck editors. In version 1.2.15 the mouse cursor would not change. This has been fixed in later versions.
 
 --
 
