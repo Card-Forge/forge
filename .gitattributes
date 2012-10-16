@@ -6393,6 +6393,7 @@ res/cardsfolder/m/multani_maro_sorcerer.txt svneol=native#text/plain
 res/cardsfolder/m/multanis_acolyte.txt svneol=native#text/plain
 res/cardsfolder/m/multanis_decree.txt svneol=native#text/plain
 res/cardsfolder/m/multanis_harmony.txt -text svneol=unset#text/plain
+res/cardsfolder/m/mundungu.txt -text
 res/cardsfolder/m/mungha_wurm.txt svneol=native#text/plain
 res/cardsfolder/m/muraganda_petroglyphs.txt svneol=native#text/plain
 res/cardsfolder/m/murasa_pyromancer.txt svneol=native#text/plain

@@ -369,9 +369,7 @@ public final class GameActionUtil {
             final Command unpaid, SpellAbility sourceAbility) {
         final Card source = ability.getSourceCard();
         final ArrayList<CostPart> parts =  cost.getCostParts();
-        if (parts.size() > 1) {
-            throw new RuntimeException("GameActionUtil::payCostDuringAbilityResolve - Too many payment types - " + source);
-        }
+        ArrayList<CostPart> remainingParts =  new ArrayList<CostPart>(cost.getCostParts());
         CostPart costPart = null;
         if (!parts.isEmpty()) {
             costPart = parts.get(0);
@@ -384,60 +382,72 @@ public final class GameActionUtil {
             }
             return;
         }
+        boolean hasPaid = true;
+        //the three following costs do not need inputs
+        for (CostPart part : parts) {
+            if (part instanceof CostPayLife) {
+                String amountString = part.getAmount();
 
-        if (costPart instanceof CostPayLife) {
-            String amountString = costPart.getAmount();
-            //CardFactoryUtil.xCount(source, source.getSVar(amountString))
-
-            final int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
-                    : AbilityFactory.calculateAmount(source, amountString, sourceAbility);
-            Player p = Singletons.getControl().getPlayer();
-            if (p.canPayLife(amount) && showYesNoDialog(source, "Do you want to pay " + amount + " life?")) {
-                p.payLife(amount, null);
-                paid.execute();
-            } else {
-                unpaid.execute();
-            }
-            return;
-        }
-
-        if (costPart instanceof CostDamage) {
-            String amountString = costPart.getAmount();
-            final int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
-                    : CardFactoryUtil.xCount(source, source.getSVar(amountString));
-            Player p = Singletons.getControl().getPlayer();
-            if (p.canPayLife(amount) && showYesNoDialog(source, "Do you want " + source + " to deal " + amount + " damage to you?")) {
-                p.addDamage(amount, source);
-                paid.execute();
-            } else {
-                unpaid.execute();
-            }
-            return;
-        }
-
-        else if (costPart instanceof CostPutCounter) {
-            String amountString = costPart.getAmount();
-            Counters counterType = ((CostPutCounter) costPart).getCounter();
-            int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
-                    : CardFactoryUtil.xCount(source, source.getSVar(amountString));
-            String plural = amount > 1 ? "s" : "";
-            if (showYesNoDialog(source, "Do you want to put " + amount + " " + counterType.getName()
-                    + " counter" + plural + " on " + source + "?")) {
-                if (source.canHaveCountersPlacedOnIt(counterType)) {
-                    source.addCounterFromNonEffect(counterType, amount);
-                    paid.execute();
+                final int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
+                        : AbilityFactory.calculateAmount(source, amountString, sourceAbility);
+                Player p = Singletons.getControl().getPlayer();
+                if (p.canPayLife(amount) && showYesNoDialog(source, "Do you want to pay " + amount + " life?")) {
+                    p.payLife(amount, null);
                 } else {
-                    unpaid.execute();
-                    AllZone.getGameLog().add("ResolveStack", "Trying to pay upkeep for " + source + " but it can't have "
-                    + counterType.getName() + " counters put on it.", 2);
+                    hasPaid = false;
                 }
-            } else {
-                unpaid.execute();
+                remainingParts.remove(part);
             }
+
+            else if (part instanceof CostDamage) {
+                String amountString = part.getAmount();
+                final int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
+                        : CardFactoryUtil.xCount(source, source.getSVar(amountString));
+                Player p = Singletons.getControl().getPlayer();
+                if (p.canPayLife(amount) && showYesNoDialog(source, "Do you want " + source + " to deal " + amount + " damage to you?")) {
+                    p.addDamage(amount, source);
+                } else {
+                    hasPaid = false;
+                }
+                remainingParts.remove(part);
+            }
+
+            else if (part instanceof CostPutCounter) {
+                String amountString = part.getAmount();
+                Counters counterType = ((CostPutCounter) part).getCounter();
+                int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
+                        : CardFactoryUtil.xCount(source, source.getSVar(amountString));
+                String plural = amount > 1 ? "s" : "";
+                if (showYesNoDialog(source, "Do you want to put " + amount + " " + counterType.getName()
+                        + " counter" + plural + " on " + source + "?")) {
+                    if (source.canHaveCountersPlacedOnIt(counterType)) {
+                        source.addCounterFromNonEffect(counterType, amount);
+                    } else {
+                        hasPaid = false;
+                        AllZone.getGameLog().add("ResolveStack", "Trying to pay upkeep for " + source + " but it can't have "
+                        + counterType.getName() + " counters put on it.", 2);
+                    }
+                } else {
+                    hasPaid = false;
+                }
+                remainingParts.remove(part);
+            }
+        }
+        if (!hasPaid) {
+            unpaid.execute();
+            return;
+        } 
+        if (remainingParts.isEmpty()) {
+            paid.execute();
             return;
         }
+        if (remainingParts.size() > 1) {
+            throw new RuntimeException("GameActionUtil::payCostDuringAbilityResolve - Too many payment types - " + source);
+        }
+        costPart = remainingParts.get(0);
 
-        else if (costPart instanceof CostSacrifice) {
+        //the following costs need inputs and can't be combined at the moment
+        if (costPart instanceof CostSacrifice) {
             final boolean bResolving = AllZone.getStack().getResolving();
             AllZone.getStack().setResolving(false);
             AllZone.getInputControl().setInput(new InputPaySacCost((CostSacrifice) costPart, ability, paid, unpaid));

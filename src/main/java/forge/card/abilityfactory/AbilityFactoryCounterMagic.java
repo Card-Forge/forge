@@ -285,7 +285,7 @@ public class AbilityFactoryCounterMagic {
             return false;
         }
 
-        if (this.unlessCost != null && !this.unlessCost.startsWith("Damage")) {
+        if (this.unlessCost != null && !this.unlessCost.endsWith(">")) {
             // Is this Usable Mana Sources? Or Total Available Mana?
             final int usableManaSources = CardFactoryUtil.getUsableManaSources(ai.getOpponent());
             int toPay = 0;
