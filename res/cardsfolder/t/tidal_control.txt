@@ -1,5 +1,5 @@
 Name:Tidal Control
-ManaCost:2 U U
+ManaCost:1 U U
 Types:Enchantment
 Text:no text
 K:Cumulative upkeep:2
