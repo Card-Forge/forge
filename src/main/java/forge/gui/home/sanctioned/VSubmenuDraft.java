@@ -1,36 +1,32 @@
 package forge.gui.home.sanctioned;
 
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Font;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JTextPane;
+import javax.swing.JRadioButton;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
 
 import net.miginfocom.swing.MigLayout;
 import forge.game.GameType;
-import forge.gui.SOverlayUtils;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
+import forge.gui.home.LblHeader;
 import forge.gui.home.StartButton;
 import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.DeckLister;
-import forge.gui.toolbox.FButton;
+import forge.gui.toolbox.ExperimentalLabel;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FList;
-import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 
@@ -48,26 +44,27 @@ public enum VSubmenuDraft implements IVSubmenu {
     private final DragTab tab = new DragTab("Draft Mode");
 
     /** */
-    private final FLabel lblTitle = new FLabel.Builder()
-        .text("Sanctioned Format: Draft").fontAlign(SwingConstants.CENTER)
-        .fontSize(16).opaque(true).build();
+    private final LblHeader lblTitle = new LblHeader("Sanctioned Format: Draft");
 
+    private final JPanel pnlStart = new JPanel();
     private final StartButton btnStart  = new StartButton();
 
     private final DeckLister lstHumanDecks = new DeckLister(GameType.Draft);
     private final JList lstAI = new FList();
 
-    private final JLabel lblAI = new FLabel.Builder()
-        .text("Who will you play?").fontSize(16).fontAlign(SwingConstants.CENTER).build();
+    private final JRadioButton radSingle = new FRadioButton("Play one opponent");
+    private final JRadioButton radAll = new FRadioButton("Play all 8 opponents");
 
     private final JLabel lblHuman = new FLabel.Builder()
-        .text("Select your deck:").fontSize(16).fontAlign(SwingConstants.CENTER).build();
-    private final JLabel btnPlayThisOpponent = new FLabel.Builder()
-        .fontSize(16).opaque(true).hoverable(true).text("Play this opponent").build();
-    private final JLabel btnBuildDeck = new FLabel.Builder()
-        .fontSize(16).opaque(true).hoverable(true).text("Start A New Draft").build();
-    private final JLabel btnDirections = new FLabel.Builder()
-        .fontSize(16).opaque(true).hoverable(true).text("How To Play").build();
+        .fontAlign(SwingConstants.LEFT).fontSize(16).fontStyle(Font.BOLD)
+        .text("Build or select a deck").build();
+
+    private final FLabel lblDirections = new FLabel.Builder()
+        .text("In Draft mode, three booster packs are rotated around eight players. Build a deck from the cards you choose.")
+        .fontSize(12).build();
+
+    private final ExperimentalLabel btnBuildDeck = new ExperimentalLabel("Start A New Draft");
+
 
     /**
      * Constructor.
@@ -77,6 +74,17 @@ public enum VSubmenuDraft implements IVSubmenu {
         btnStart.setEnabled(false);
 
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+
+        final ButtonGroup grp = new ButtonGroup();
+        grp.add(radSingle);
+        grp.add(radAll);
+        radSingle.setSelected(true);
+
+        pnlStart.setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
+        pnlStart.setOpaque(false);
+        pnlStart.add(radSingle, "w 200px!, h 30px!, gap 0 20px 0 0");
+        pnlStart.add(btnStart, "span 1 2, growx, pushx");
+        pnlStart.add(radAll, "w 200px!, h 30px!, gap 0 20px 0 0");
     }
 
     /* (non-Javadoc)
@@ -103,13 +111,8 @@ public enum VSubmenuDraft implements IVSubmenu {
         return EDocID.HOME_DRAFT;
     }
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getBtnDirections() {
-        return this.btnDirections;
-    }
-
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getBtnBuildDeck() {
+    /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
+    public ExperimentalLabel getBtnBuildDeck() {
         return this.btnBuildDeck;
     }
 
@@ -118,75 +121,14 @@ public enum VSubmenuDraft implements IVSubmenu {
         return this.btnStart;
     }
 
-    /** @return {@link javax.swing.JButton} */
-    public JLabel getBtnPlayThisOpponent() {
-        return this.btnPlayThisOpponent;
-    }
-
-    /** @return {@link javax.swing.JList} */
-    public JList getLstAIDecks() {
-        return lstAI;
+    /** @return {@link javax.swing.JRadioButton} */
+    public JRadioButton getRadSingle() {
+        return this.radSingle;
     }
 
     /** @return {@link forge.gui.toolbox.DeckLister} */
     public DeckLister getLstHumanDecks() {
         return lstHumanDecks;
-    }
-
-    /** */
-    public void showDirections() {
-        final JPanel overlay = SOverlayUtils.genericOverlay();
-        final int w = overlay.getWidth();
-
-        final String instructions = "BOOSTER DRAFT MODE INSTRUCTIONS"
-                + "\r\n\r\n"
-                + "In a booster draft, several players (usually eight) are seated "
-                + "around a table and each player is given three booster packs."
-                + "\r\n\r\n"
-                + "Each player opens a pack, selects a card from it and passes the remaining "
-                + "cards to his or her left. Each player then selects one of the 14 remaining "
-                + "cards from the pack that was just passed to him or her, and passes the "
-                + "remaining cards to the left again. This continues until all of the cards "
-                + "are depleted. The process is repeated with the second and third packs, "
-                + "except that the cards are passed to the right in the second pack."
-                + "\r\n\r\n"
-                + "Players then build decks out of any of the cards that they selected "
-                + "during the drafting and add as many basic lands as they want."
-                + "\r\n\r\n"
-                + "Credit: Wikipedia";
-
-        // Init directions text pane
-        final JTextPane tpnDirections = new JTextPane();
-        tpnDirections.setOpaque(false);
-        tpnDirections.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
-        tpnDirections.setFont(FSkin.getFont(15));
-        tpnDirections.setAlignmentX(SwingConstants.CENTER);
-        tpnDirections.setFocusable(false);
-        tpnDirections.setEditable(false);
-        tpnDirections.setBorder(null);
-        tpnDirections.setText(instructions);
-
-        final StyledDocument doc = tpnDirections.getStyledDocument();
-        final SimpleAttributeSet center = new SimpleAttributeSet();
-        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
-        doc.setParagraphAttributes(0, doc.getLength(), center, false);
-
-        final JButton btnCloseBig = new FButton("OK");
-        btnCloseBig.setBounds(new Rectangle((w / 2 - 100), 510, 200, 30));
-        btnCloseBig.addActionListener(new ActionListener() { @Override
-            public void actionPerformed(final ActionEvent arg0) { SOverlayUtils.hideOverlay(); } });
-
-        final FPanel pnl = new FPanel();
-        pnl.setCornerDiameter(0);
-        pnl.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));
-        pnl.setLayout(new MigLayout("insets 0, gap 0"));
-        pnl.add(tpnDirections, "w 90%!, h 90%!, gap 5% 0 5% 0");
-        pnl.setBounds(new Rectangle((w / 2 - 250), 80, 500, 400));
-
-        overlay.setLayout(null);
-        overlay.add(btnCloseBig);
-        overlay.add(pnl);
-        SOverlayUtils.showOverlay();
     }
 
     //========== Overridden from IVDoc
@@ -197,20 +139,16 @@ public enum VSubmenuDraft implements IVSubmenu {
     @Override
     public void populate() {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap 2, hidemode 2"));
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px, span 2");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap, ax right"));
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 80%!, h 40px!, gap 0 0 15px 15px, ax right");
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblHuman, "w 60%!, gap 1% 8% 0 15px");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblAI, "w 30%!, gap 0 0 0 15px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblHuman, "w 80%!, h 30px!, gap 0 10% 20px 0");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblDirections, "gap 0 0 0 20px");
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(new FScrollPane(lstHumanDecks), "w 60%!, gap 1% 8% 0 0, pushy, growy");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(new FScrollPane(lstAI), "w 30%!, pushy, growy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnBuildDeck, "w 200px!, h 30px!, ax center, gap 0 10% 0 20px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(new FScrollPane(lstHumanDecks), "w 80%!, gap 0 10% 0 0, pushy, growy");
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnBuildDeck, "w 60%!, h 30px!, gap 1% 5% 10px 0");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnPlayThisOpponent, "w 30%!, h 30px!, gap 0 0 10px 0");
-
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnDirections, "w 200px!, h 30px!, gap 1% 0 20px 0, span 2, ax center");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStart, "w 98%!, gap 1% 0 50px 50px, ax center, span 2");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "gap 0 10% 50px 50px, ax center");
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaint();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();

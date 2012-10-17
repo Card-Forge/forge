@@ -54,8 +54,6 @@ public enum VSubmenuConstructed implements IVSubmenu {
         .text("Double click a non-random deck for its decklist.")
         .fontSize(12).build();
 
-    private final JPanel pnlDecksHuman = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
-    private final JPanel pnlDecksAI = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
     private final JPanel pnlRadiosHuman = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
     private final JPanel pnlRadiosAI = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
     private final JPanel pnlStart = new JPanel(new MigLayout("insets 0, gap 0, wrap 2"));
@@ -85,12 +83,7 @@ public enum VSubmenuConstructed implements IVSubmenu {
             JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
     private final ExperimentalLabel btnHumanRandom = new ExperimentalLabel("Random");
-            //new FLabel.Builder().text("Random").fontSize(14).opaque(true)
-            //.hoverable(true).build();
-
     private final ExperimentalLabel btnAIRandom = new ExperimentalLabel("Random");
-            //new FLabel.Builder().text("Random").fontSize(14).opaque(true)
-            //.hoverable(true).build();
 
     private VSubmenuConstructed() {
         // Radio button group: Human
@@ -178,7 +171,7 @@ public enum VSubmenuConstructed implements IVSubmenu {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlRadiosHuman, "w 44%!, gap 4% 4% 20px 20px");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(scrDecksAI, "w 44%!, growy, pushy");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(scrDecksUser, "w 44%!, gap 4% 4% 0 0, growy, pushy");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "span 2, gap 1% 0 50px 50px, ax center");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "span 2, gap 0 0 50px 50px, ax center");
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
