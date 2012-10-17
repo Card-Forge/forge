@@ -1,5 +1,6 @@
 package forge.gui.home.sanctioned;
 
+import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,9 +23,11 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
+import forge.gui.home.LblHeader;
 import forge.gui.home.StartButton;
 import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.DeckLister;
+import forge.gui.toolbox.ExperimentalLabel;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
@@ -45,20 +48,28 @@ public enum VSubmenuSealed implements IVSubmenu {
     private final DragTab tab = new DragTab("Sealed Mode");
 
     /** */
-    private final FLabel lblTitle = new FLabel.Builder()
-        .text("Sanctioned Format: Sealed").fontAlign(SwingConstants.CENTER)
-        .fontSize(16).opaque(true).build();
+    private final LblHeader lblTitle = new LblHeader("Sanctioned Format: Sealed");
 
     private final StartButton btnStart  = new StartButton();
     private final DeckLister lstDecks   = new DeckLister(GameType.Sealed);
 
     private final JLabel lblInfo = new FLabel.Builder()
-        .text("Select a game, or build a new one.")
-        .fontSize(16).fontAlign(SwingConstants.CENTER).build();
+        .fontAlign(SwingConstants.LEFT).fontSize(16).fontStyle(Font.BOLD)
+        .text("Select a game, or build a new one").build();
 
-    private final JLabel btnBuildDeck   = new FLabel.Builder()
-        .fontSize(16).opaque(true).hoverable(true)
-        .text("Build a Sealed Deck Game").build();
+    private final FLabel lblDir1 = new FLabel.Builder()
+        .text("In Sealed mode, you build a deck from booster packs (maximum 10).")
+        .fontSize(12).build();
+
+    private final FLabel lblDir2 = new FLabel.Builder()
+        .text("Build a deck from the cards you receive. A number of AI opponents will do the same.")
+        .fontSize(12).build();
+
+    private final FLabel lblDir3 = new FLabel.Builder()
+        .text("Then, you will play against each of the AI opponents.")
+        .fontSize(12).build();
+
+    private final ExperimentalLabel btnBuildDeck = new ExperimentalLabel("New Sealed Mode Game");
 
     private final JLabel btnDirections = new FLabel.Builder()
         .fontSize(16).opaque(true).hoverable(true)
@@ -79,14 +90,17 @@ public enum VSubmenuSealed implements IVSubmenu {
     @Override
     public void populate() {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, hidemode 2, wrap"));
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap, ax right"));
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 80%!, h 40px!, gap 0 0 15px 15px, ax right");
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblInfo, "w 100%!, gap 0 0 30px 15px");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(new FScrollPane(lstDecks), "w 98%!, growy, pushy, gap 1% 0 0 0");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnBuildDeck, "w 300px!, h 30px!, gap 0 0 15px 15px, ax center");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnDirections, "w 200px!, h 30px!, ax center");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStart, "w 98%!, gap 1% 0 50px 50px, span 2");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblInfo, "w 80%!, h 30px!, gap 0 10% 20px 5px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblDir1, "gap 0 0 0 5px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblDir2, "gap 0 0 0 5px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblDir3, "gap 0 0 0 20px");
+
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnBuildDeck, "w 250px!, h 30px!, ax center, gap 0 10% 0 20px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(new FScrollPane(lstDecks), "w 80%!, gap 0 10% 0 0, pushy, growy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStart, "gap 0 10% 50px 50px, ax center");
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();

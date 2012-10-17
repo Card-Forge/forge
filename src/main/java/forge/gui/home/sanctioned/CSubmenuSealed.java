@@ -121,9 +121,9 @@ public enum CSubmenuSealed implements ICDoc {
             return;
         }
 
-        int rounds = Singletons.getModel().getDecks().getSealed().get(human.getName()).getAiDecks().size();
+        int matches = Singletons.getModel().getDecks().getSealed().get(human.getName()).getAiDecks().size();
 
-        AllZone.getGauntlet().launch(rounds, human, GameType.Sealed);
+        AllZone.getGauntlet().launch(matches, human, GameType.Sealed);
     }
 
     /** */
@@ -174,7 +174,7 @@ public enum CSubmenuSealed implements ICDoc {
             integers[i] = Integer.valueOf(i + 1);
         }
 
-        Integer rounds = GuiChoose.one("How many rounds?", integers);
+        Integer rounds = GuiChoose.one("How many matches?", integers);
 
         // System.out.println("You selected " + rounds + " rounds.");
 

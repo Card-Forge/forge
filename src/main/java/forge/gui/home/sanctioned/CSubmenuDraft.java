@@ -52,7 +52,7 @@ public enum CSubmenuDraft implements ICDoc {
     public void initialize() {
         final VSubmenuDraft view = VSubmenuDraft.SINGLETON_INSTANCE;
 
-        view.getLstHumanDecks().setSelectCommand(cmdDeckSelect);
+        view.getLstDecks().setSelectCommand(cmdDeckSelect);
 
         view.getBtnBuildDeck().setCommand(new Command() { @Override
                     public void execute() { setupDraft(); } });
@@ -81,7 +81,7 @@ public enum CSubmenuDraft implements ICDoc {
             human.add(d.getHumanDeck());
         }
 
-        VSubmenuDraft.SINGLETON_INSTANCE.getLstHumanDecks().setDecks(human);
+        VSubmenuDraft.SINGLETON_INSTANCE.getLstDecks().setDecks(human);
 
         if (human.size() > 1) {
             VSubmenuDraft.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
@@ -91,7 +91,7 @@ public enum CSubmenuDraft implements ICDoc {
     private void startGame() {
         final boolean gauntlet = VSubmenuDraft.SINGLETON_INSTANCE.getRadSingle().isSelected() ? false : true;
 
-        final Deck human = VSubmenuDraft.SINGLETON_INSTANCE.getLstHumanDecks().getSelectedDeck();
+        final Deck human = VSubmenuDraft.SINGLETON_INSTANCE.getLstDecks().getSelectedDeck();
         final int aiIndex = (int) Math.floor(Math.random() * 8);
 
         if (human == null) {

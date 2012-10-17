@@ -49,21 +49,29 @@ public enum VSubmenuDraft implements IVSubmenu {
     private final JPanel pnlStart = new JPanel();
     private final StartButton btnStart  = new StartButton();
 
-    private final DeckLister lstHumanDecks = new DeckLister(GameType.Draft);
+    private final DeckLister lstDecks = new DeckLister(GameType.Draft);
     private final JList lstAI = new FList();
 
     private final JRadioButton radSingle = new FRadioButton("Play one opponent");
     private final JRadioButton radAll = new FRadioButton("Play all 8 opponents");
 
-    private final JLabel lblHuman = new FLabel.Builder()
+    private final JLabel lblInfo = new FLabel.Builder()
         .fontAlign(SwingConstants.LEFT).fontSize(16).fontStyle(Font.BOLD)
         .text("Build or select a deck").build();
 
-    private final FLabel lblDirections = new FLabel.Builder()
-        .text("In Draft mode, three booster packs are rotated around eight players. Build a deck from the cards you choose.")
+    private final FLabel lblDir1 = new FLabel.Builder()
+        .text("In Draft mode, three booster packs are rotated around eight players.")
         .fontSize(12).build();
 
-    private final ExperimentalLabel btnBuildDeck = new ExperimentalLabel("Start A New Draft");
+    private final FLabel lblDir2 = new FLabel.Builder()
+        .text("Build a deck from the cards you choose. The AI will do the same.")
+        .fontSize(12).build();
+
+    private final FLabel lblDir3 = new FLabel.Builder()
+        .text("Then, play against one or all of the AI opponents.")
+        .fontSize(12).build();
+
+    private final ExperimentalLabel btnBuildDeck = new ExperimentalLabel("New Draft Mode Game");
 
 
     /**
@@ -127,8 +135,8 @@ public enum VSubmenuDraft implements IVSubmenu {
     }
 
     /** @return {@link forge.gui.toolbox.DeckLister} */
-    public DeckLister getLstHumanDecks() {
-        return lstHumanDecks;
+    public DeckLister getLstDecks() {
+        return lstDecks;
     }
 
     //========== Overridden from IVDoc
@@ -142,11 +150,13 @@ public enum VSubmenuDraft implements IVSubmenu {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap, ax right"));
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 80%!, h 40px!, gap 0 0 15px 15px, ax right");
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblHuman, "w 80%!, h 30px!, gap 0 10% 20px 0");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblDirections, "gap 0 0 0 20px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblInfo, "w 80%!, h 30px!, gap 0 10% 20px 5px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblDir1, "gap 0 0 0 5px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblDir2, "gap 0 0 0 5px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblDir3, "gap 0 0 0 20px");
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnBuildDeck, "w 200px!, h 30px!, ax center, gap 0 10% 0 20px");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(new FScrollPane(lstHumanDecks), "w 80%!, gap 0 10% 0 0, pushy, growy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnBuildDeck, "w 250px!, h 30px!, ax center, gap 0 10% 0 20px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(new FScrollPane(lstDecks), "w 80%!, gap 0 10% 0 0, pushy, growy");
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "gap 0 10% 50px 50px, ax center");
 
