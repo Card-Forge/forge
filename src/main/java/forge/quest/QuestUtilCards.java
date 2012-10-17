@@ -378,7 +378,7 @@ public final class QuestUtilCards {
             Predicate<CardEdition> filter = rollD100 < 40 ? this.filterT2booster
                     : (rollD100 < 75 ? this.filterExtButT2 : this.filterNotExt);
             if (qc.getFormat() != null) {
-                filter = isLegalInQuestFormat(qc.getFormat());
+                filter = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER, isLegalInQuestFormat(qc.getFormat()));
             }
             Iterable<CardEdition> rightEditions = Iterables.filter(Singletons.getModel().getEditions(), filter);
             this.qa.getShopList().add(BoosterPack.FN_FROM_SET.apply(Aggregates.random(rightEditions)));
