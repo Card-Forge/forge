@@ -242,6 +242,21 @@ Fixes/Features:
 - Sealed and Draft now funnel through meetsGameTypeRequirements
 - Added experimental new expansion unlocking scheme to limited-format quests. Once per every 100 wins, you get the option of using credits to "unlock" a new set and add it to your enforced format.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed a silly brain-fart in my previous commit.
+- Added a fluff piece to the changes.txt file.
+- Fixed Palace Guard and Tidal Control.
+- Fixed Winter Blast.
+- The three following unless costs can now be combined with other unless costs: CostPayLife, CostDamage and CostPutCounter.
+- Added "Prevent all combat damage that would be dealt to and dealt by CARDNAME." to nonStackingKeywords.
+- Aesthetic update to draft submenu.
+- Aesthetic update to sealed submenu.
+- Updated "directions" blurbs in draft submenu.
+- Small antialiasing fix to Blue Marble sprite.
+- Fixed Terrifying Presence.
+- Sliced 50px off home menu bar.
+- Aesthetic update to quest Duels and Challenges screens 70% finished. A few architectural changes were necessary also.
+- Checkstyle.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -267,6 +282,8 @@ Brine Seer
 Barrin's Unmaking
 Tsabo's Assassin
 Flay
+Vile Consumption
+Mundungu
 
 
 end
