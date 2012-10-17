@@ -149,10 +149,10 @@ public enum VHomeUI implements IVTopLevelUI {
         JPanel pnlButtons = new JPanel(new MigLayout("insets 0, gap 0"));
         pnlButtons.setOpaque(false);
 
-        pnlButtons.add(lblExit, "w 135px!, h 30px!, gap 0 10px 0 0");
-        pnlButtons.add(lblEditor, "w 135px!, h 30px!");
+        pnlButtons.add(lblExit, "w 110px!, h 30px!, gap 0 10px 0 0");
+        pnlButtons.add(lblEditor, "w 110px!, h 30px!");
 
-        pnlMenu.add(pnlButtons, "w 280px!, gap 10px 0 10px 10px");
+        pnlMenu.add(pnlButtons, "w 230px!, gap 10px 0 10px 10px");
         pnlDisplay.setBackground(FSkin.alphaColor(l00, 100));
     }
 
@@ -201,8 +201,8 @@ public enum VHomeUI implements IVTopLevelUI {
         pnl.setBorder(null);
         pnl.setLayout(new MigLayout("insets 0, gap 0"));
 
-        pnl.add(pnlMenu, "w 300px!, h 100%!");
-        pnl.add(pnlDisplay, "w 100% - 300px!, h 100%!");
+        pnl.add(pnlMenu, "w 250px!, h 100%!");
+        pnl.add(pnlDisplay, "w 100% - 250px!, h 100%!");
     }
 
     /** */

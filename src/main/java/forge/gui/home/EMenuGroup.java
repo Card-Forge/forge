@@ -8,7 +8,7 @@ package forge.gui.home;
  * <br><br><i>(E at beginning of class name denotes an enum.)</i>
  */
 public enum EMenuGroup { /** */
-    SANCTIONED ("Sanctioned Game Formats"), /** */
+    SANCTIONED ("Sanctioned Formats"), /** */
     QUEST ("Quest Mode"), /** */
     GAUNTLET ("Gauntlets"), /** */
     MULTIPLAYER ("Multiplayer"), /** */
