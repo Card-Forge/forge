@@ -28,6 +28,8 @@ import forge.CardCharacteristicName;
 import forge.CardUtil;
 import forge.Singletons;
 import forge.card.CardRules;
+import forge.card.cost.Cost;
+import forge.card.mana.ManaCost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
@@ -155,10 +157,6 @@ public class CardFactory implements CardFactoryInterface {
             final boolean bCopyDetails) {
         Player originalController = original.getController();
         Player controller = sa.getActivatingPlayer();
-        /*if (sa.getPayCosts() == null) {
-            this.copySpellontoStack(source, original, bCopyDetails);
-            return;
-        }*/
         final Card c = AllZone.getCardFactory().copyCard(original);
 
         // change the color of the copy (eg: Fork)
@@ -185,16 +183,12 @@ public class CardFactory implements CardFactoryInterface {
         c.refreshUniqueNumber();
 
         final SpellAbility copySA = sa.copy();
+        //remove all costs
+        copySA.setPayCosts(new Cost(c, "", sa.isAbility()));
         if (sa.getTarget() != null) {
             Target target = new Target(sa.getTarget());
             target.setSourceCard(c);
             copySA.setTarget(target);
-            /*if (copySA.getAbilityFactory() != null) {
-                AbilityFactory af = new AbilityFactory(sa.getAbilityFactory());
-                af.setAbTgt(target);
-                af.setHostCard(source);
-                copySA.setAbilityFactory(af);
-            }*/
         }
         copySA.setSourceCard(c);
 

@@ -467,11 +467,18 @@ public final class AbilityFactoryPlay {
             ArrayList<SpellAbility> spellAbilities = tgtCard.getBasicSpells();
             ArrayList<SpellAbility> sas = new ArrayList<SpellAbility>();
             for (SpellAbility s : spellAbilities) {
-                s.setActivatingPlayer(controller);
-                SpellAbilityRestriction res = s.getRestrictions();
+                final SpellAbility newSA = s.copy();
+                newSA.setActivatingPlayer(controller);
+                SpellAbilityRestriction res = new SpellAbilityRestriction();
                 // timing restrictions still apply
-                if (res.checkTimingRestrictions(tgtCard, s)) {
-                    sas.add(s);
+                res.setPlayerTurn(s.getRestrictions().getPlayerTurn());
+                res.setOpponentTurn(s.getRestrictions().getOpponentTurn());
+                res.setPhases(s.getRestrictions().getPhases());
+                res.setZone(null);
+                newSA.setRestrictions(res);
+                // timing restrictions still apply
+                if (res.checkTimingRestrictions(tgtCard, newSA)) {
+                    sas.add(newSA);
                 }
             }
             if (sas.isEmpty()) {

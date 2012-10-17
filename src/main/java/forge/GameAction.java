@@ -1969,7 +1969,6 @@ public class GameAction {
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
                 manaCost = new ManaCost("0");
             } else {
-
                 manaCost = this.getSpellCostChange(sa, new ManaCost(sa.getManaCost()));
             }
             if (manaCost.isPaid() && (sa.getBeforePayMana() == null)) {
@@ -2027,7 +2026,6 @@ public class GameAction {
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
                 manaCost = new ManaCost("0");
             } else {
-
                 manaCost = this.getSpellCostChange(sa, new ManaCost(sa.getManaCost()));
             }
             if (manaCost.isPaid() && (sa.getBeforePayMana() == null)) {

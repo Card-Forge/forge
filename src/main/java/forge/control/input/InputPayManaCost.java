@@ -130,9 +130,7 @@ public class InputPayManaCost extends InputMana {
                     AllZone.getStack().add(this.spell);
                 }
             } else {
-                this.manaCost = manaCostToPay; // Singletons.getModel().getGameAction().getSpellCostChange(sa,
-                                               // new
-                                               // ManaCost(this.originalManaCost));
+                this.manaCost = manaCostToPay;
             }
         } else {
             this.manaCost = new ManaCost(sa.getManaCost());

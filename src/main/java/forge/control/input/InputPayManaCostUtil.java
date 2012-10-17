@@ -471,13 +471,9 @@ public class InputPayManaCostUtil {
         final ManaCost manaCost;
     
         if (PhaseHandler.getGameBegins() == 1) {
-            if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
-                manaCost = new ManaCost("0");
-            } else {
-                final String mana = costMana.getManaToPay();
-                manaCost = new ManaCost(mana);
-                manaCost.increaseColorlessMana(manaToAdd);
-            }
+            final String mana = costMana.getManaToPay();
+            manaCost = new ManaCost(mana);
+            manaCost.increaseColorlessMana(manaToAdd);
         } else {
             System.out.println("Is input_payMana ever called when the Game isn't in progress?");
             manaCost = new ManaCost(sa.getManaCost());
