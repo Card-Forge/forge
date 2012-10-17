@@ -1452,7 +1452,10 @@ public class GameAction {
                 }
             };
             persistAb.setStackDescription(newCard.getName() + " - Returning from Persist");
-            AllZone.getStack().add(persistAb);
+            persistAb.setDescription(newCard.getName() + " - Returning from Persist");
+            persistAb.setActivatingPlayer(c.getController());
+
+            AllZone.getStack().addSimultaneousStackEntry(persistAb);
         }
 
         if (undying) {
@@ -1469,7 +1472,10 @@ public class GameAction {
                 }
             };
             undyingAb.setStackDescription(newCard.getName() + " - Returning from Undying");
-            AllZone.getStack().add(undyingAb);
+            undyingAb.setDescription(newCard.getName() + " - Returning from Undying");
+            undyingAb.setActivatingPlayer(c.getController());
+            
+            AllZone.getStack().addSimultaneousStackEntry(undyingAb);
         }
         return true;
     } // sacrificeDestroy()
