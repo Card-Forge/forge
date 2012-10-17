@@ -4,16 +4,16 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
-import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.ExperimentalLabel;
 
 /** Dictates methods required for a panel with stats/pet display. */
 
-public interface IStatsAndPet {
-    /** @return {@link forge.gui.toolbox.FLabel} */
-    FLabel getBtnBazaar();
+public interface IVQuestStats {
+    /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
+    ExperimentalLabel getBtnBazaar();
 
-    /** @return {@link forge.gui.toolbox.FLabel} */
-    FLabel getBtnSpellShop();
+    /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
+    ExperimentalLabel getBtnSpellShop();
 
     /** @return {@link javax.swing.JLabel} */
     JLabel getLblCredits();
@@ -31,6 +31,9 @@ public interface IStatsAndPet {
     JLabel getLblNextChallengeInWins();
 
     /** @return {@link javax.swing.JLabel} */
+    JLabel getLblCurrentDeck();
+
+    /** @return {@link javax.swing.JLabel} */
     JLabel getLblWinStreak();
 
     /** @return {@link javax.swing.JComboBox} */
@@ -41,7 +44,4 @@ public interface IStatsAndPet {
 
     /** @return {@link javax.swing.JLabel} */
     JLabel getLblZep();
-
-    /** */
-    void updateCurrentDeckStatus();
 }

@@ -60,13 +60,6 @@ public enum CSubmenuChallenges implements ICDoc {
                     }
                 });
 
-        view.getBtnCurrentDeck().setCommand(
-                new Command() { @Override
-                    public void execute() {
-                        CHomeUI.SINGLETON_INSTANCE.itemClick(EDocID.HOME_QUESTDECKS);
-                    }
-                });
-
         final QuestController quest = Singletons.getModel().getQuest();
         view.getCbPlant().addActionListener(new ActionListener() {
             @Override
@@ -92,7 +85,7 @@ public enum CSubmenuChallenges implements ICDoc {
      */
     @Override
     public void update() {
-        SSubmenuQuestUtil.updateStatsAndPet();
+        SSubmenuQuestUtil.updateQuestView(VSubmenuChallenges.SINGLETON_INSTANCE);
 
         final VSubmenuChallenges view = VSubmenuChallenges.SINGLETON_INSTANCE;
         final QuestController qCtrl = Singletons.getModel().getQuest();

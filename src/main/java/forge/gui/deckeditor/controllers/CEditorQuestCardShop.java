@@ -35,14 +35,13 @@ import forge.deck.DeckBase;
 import forge.gui.CardListViewer;
 import forge.gui.deckeditor.SEditorUtil;
 import forge.gui.deckeditor.tables.DeckController;
+import forge.gui.deckeditor.tables.EditorTableView;
 import forge.gui.deckeditor.tables.SColumnUtil;
 import forge.gui.deckeditor.tables.SColumnUtil.ColumnName;
 import forge.gui.deckeditor.tables.TableColumnInfo;
-import forge.gui.deckeditor.tables.EditorTableView;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.home.quest.CSubmenuQuestDecks;
-import forge.gui.home.quest.SSubmenuQuestUtil;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.item.BoosterPack;
@@ -398,7 +397,6 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
      */
     @Override
     public boolean exit() {
-        SSubmenuQuestUtil.updateStatsAndPet();
         Singletons.getModel().getQuest().save();
         CSubmenuQuestDecks.SINGLETON_INSTANCE.update();
 

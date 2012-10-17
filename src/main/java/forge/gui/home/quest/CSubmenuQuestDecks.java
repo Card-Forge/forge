@@ -32,8 +32,6 @@ public enum CSubmenuQuestDecks implements ICDoc {
             currentDeck = VSubmenuQuestDecks.SINGLETON_INSTANCE.getLstDecks().getSelectedDeck();
             Singletons.getModel().getQuestPreferences().setPreference(QPref.CURRENT_DECK, currentDeck.toString());
             Singletons.getModel().getQuestPreferences().save();
-            VSubmenuDuels.SINGLETON_INSTANCE.updateCurrentDeckStatus();
-            VSubmenuChallenges.SINGLETON_INSTANCE.updateCurrentDeckStatus();
         }
     };
 
@@ -92,9 +90,6 @@ public enum CSubmenuQuestDecks implements ICDoc {
         else {
             Singletons.getModel().getQuestPreferences().setPreference(QPref.CURRENT_DECK, QPref.CURRENT_DECK.getDefault());
         }
-
-        VSubmenuDuels.SINGLETON_INSTANCE.updateCurrentDeckStatus();
-        VSubmenuChallenges.SINGLETON_INSTANCE.updateCurrentDeckStatus();
     }
 
     /** @return forge.deck.Deck */

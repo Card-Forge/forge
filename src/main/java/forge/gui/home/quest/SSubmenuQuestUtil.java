@@ -1,9 +1,11 @@
 package forge.gui.home.quest;
 
+import java.awt.Color;
 import java.io.File;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
@@ -89,7 +91,7 @@ public class SSubmenuQuestUtil {
         return (delta > 0) ? delta : 0;
     }
 
-    private static void updatePlantAndPetForView(final IStatsAndPet view, final QuestController qCtrl) {
+    private static void updatePlantAndPetForView(final IVQuestStats view, final QuestController qCtrl) {
         for (int iSlot = 0; iSlot < QuestController.MAX_PET_SLOTS; iSlot++) {
             final List<QuestPetController> petList = qCtrl.getPetsStorage().getAvaliablePets(iSlot, qCtrl.getAssets());
             final String currentPetName = qCtrl.getSelectedPet(iSlot);
@@ -134,57 +136,77 @@ public class SSubmenuQuestUtil {
         }
     }
 
-    /** Updates stats, pets panels for both duels and challenges. */
-    public static void updateStatsAndPet() {
+    /**
+     * Updates all quest info in a view, using
+     * retrieval methods dictated in IVQuestStats.<br>
+     * - Stats<br>
+     * - Pets<br>
+     * - Current deck info<br>
+     * - "Challenge In" info<br>
+     * 
+     * @param view0 {@link forge.gui.home.quest.IVQuestStats}
+     */
+    public static void updateQuestView(final IVQuestStats view0) {
         final QuestController qCtrl = Singletons.getModel().getQuest();
         final QuestAchievements qA = qCtrl.getAchievements();
         final QuestAssets qS = qCtrl.getAssets();
 
         if (qA == null) { return; }
 
-        final IStatsAndPet[] viewsToUpdate = new IStatsAndPet[] {
-            VSubmenuDuels.SINGLETON_INSTANCE,
-            VSubmenuChallenges.SINGLETON_INSTANCE
-        };
+        // Fantasy UI display
+        view0.getLblNextChallengeInWins().setVisible(true);
+        view0.getBtnBazaar().setVisible(true);
+        view0.getLblLife().setVisible(true);
 
-        for (final IStatsAndPet view : viewsToUpdate) {
-            // Fantasy UI display
-            view.getLblNextChallengeInWins().setVisible(true);
-            view.getBtnBazaar().setVisible(true);
-            view.getLblLife().setVisible(true);
+        // Stats panel
+        view0.getLblCredits().setText("Credits: " + qS.getCredits());
+        view0.getLblLife().setText("Life: " + qS.getLife(qCtrl.getMode()));
+        view0.getLblWins().setText("Wins: " + qA.getWin());
+        view0.getLblLosses().setText("Losses: " + qA.getLost());
 
-            // Stats panel
-            view.getLblCredits().setText("Credits: " + qS.getCredits());
-            view.getLblLife().setText("Life: " + qS.getLife(qCtrl.getMode()));
-            view.getLblWins().setText("Wins: " + qA.getWin());
-            view.getLblLosses().setText("Losses: " + qA.getLost());
-            view.updateCurrentDeckStatus();
+        // Challenge in wins
+        final int num = SSubmenuQuestUtil.nextChallengeInWins();
+        final String str;
+        if (num == 0) {
+            str = "Your exploits have been noticed. An opponent has challenged you.";
+        }
+        else if (num == 1) {
+            str = "A new challenge will be available after 1 more win.";
+        }
+        else {
+            str = "A new challenge will be available in " + num + " wins.";
+        }
 
-            final int num = SSubmenuQuestUtil.nextChallengeInWins();
-            if (num == 0) {
-                view.getLblNextChallengeInWins().setText("Next challenge available now.");
-            }
-            else {
-                view.getLblNextChallengeInWins().setText("Next challenge available in " + num + " wins.");
-            }
+        view0.getLblNextChallengeInWins().setText(str);
 
-            view.getLblWinStreak().setText(
-                    "Win streak: " + qA.getWinStreakCurrent()
-                    + " (Best:" + qA.getWinStreakBest() + ")");
+        view0.getLblWinStreak().setText(
+                "Win streak: " + qA.getWinStreakCurrent()
+                + " (Best:" + qA.getWinStreakBest() + ")");
 
-            // Start panel: pet, plant, zep.
-            if (qCtrl.getMode() == QuestMode.Fantasy) {
-                updatePlantAndPetForView(view, qCtrl);
-            }
-            else {
-                // Classic mode display changes
-                view.getCbxPet().setVisible(false);
-                view.getCbPlant().setVisible(false);
-                view.getLblZep().setVisible(false);
-                view.getLblNextChallengeInWins().setVisible(false);
-                view.getBtnBazaar().setVisible(false);
-                view.getLblLife().setVisible(false);
-            }
+        // Current deck message
+        final JLabel lblCurrentDeck = view0.getLblCurrentDeck();
+        if (SSubmenuQuestUtil.getCurrentDeck() == null) {
+            lblCurrentDeck.setForeground(Color.red.darker());
+            lblCurrentDeck.setText("Build, then select a deck in the \"Decks\" submenu.  ");
+        }
+        else {
+            lblCurrentDeck.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+            lblCurrentDeck.setText("Your current deck is \""
+                    + SSubmenuQuestUtil.getCurrentDeck().getName() + "\".");
+        }
+
+        // Start panel: pet, plant, zep.
+        if (qCtrl.getMode() == QuestMode.Fantasy) {
+            updatePlantAndPetForView(view0, qCtrl);
+        }
+        else {
+            // Classic mode display changes
+            view0.getCbxPet().setVisible(false);
+            view0.getCbPlant().setVisible(false);
+            view0.getLblZep().setVisible(false);
+            view0.getLblNextChallengeInWins().setVisible(false);
+            view0.getBtnBazaar().setVisible(false);
+            view0.getLblLife().setVisible(false);
         }
     }
 

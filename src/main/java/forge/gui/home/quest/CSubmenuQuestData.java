@@ -194,7 +194,7 @@ public enum CSubmenuQuestData implements ICDoc {
                 Singletons.getModel().getQuest().getName() + ".dat");
         Singletons.getModel().getQuestPreferences().save();
 
-        SSubmenuQuestUtil.updateStatsAndPet();
+        //SSubmenuQuestUtil.updateQuestInfo();
 
         CSubmenuDuels.SINGLETON_INSTANCE.update();
         CSubmenuChallenges.SINGLETON_INSTANCE.update();

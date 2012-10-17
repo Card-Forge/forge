@@ -1,6 +1,6 @@
 package forge.gui.home.quest;
 
-import java.awt.Color;
+import java.awt.Font;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -18,8 +18,10 @@ import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
+import forge.gui.home.LblHeader;
 import forge.gui.home.StartButton;
 import forge.gui.home.VHomeUI;
+import forge.gui.toolbox.ExperimentalLabel;
 import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
@@ -30,18 +32,18 @@ import forge.gui.toolbox.FSkin;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VSubmenuDuels implements IVSubmenu, IStatsAndPet, IVDoc {
+public enum VSubmenuDuels implements IVSubmenu, IVQuestStats, IVDoc {
     /** */
     SINGLETON_INSTANCE;
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
-    private final DragTab tab = new DragTab("Constructed Mode");
+    private final DragTab tab = new DragTab("Quest Duels");
 
-    //========== INSTANTIATION
-    private final JPanel pnlDuels   = new JPanel();
-    private final JPanel pnlStats   = new JPanel();
-    private final JPanel pnlStart   = new JPanel();
+    // Other fields
+    private final JPanel pnlDuels = new JPanel();
+    private final JPanel pnlStats = new JPanel();
+    private final JPanel pnlStart = new JPanel();
 
     private final FScrollPane scrDuels = new FScrollPane(pnlDuels,
             JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -52,48 +54,65 @@ public enum VSubmenuDuels implements IVSubmenu, IStatsAndPet, IVDoc {
     private final JLabel lblZep   = new FLabel.Builder().text("Launch Zeppelin")
             .fontSize(14).build();
 
-    private final FLabel lblLife      = new FLabel.Builder()
+    private final FLabel lblLife = new FLabel.Builder()
         .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_LIFE))
         .fontSize(15).build();
-    private final FLabel lblCredits   = new FLabel.Builder()
+    private final FLabel lblCredits = new FLabel.Builder()
         .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_COINSTACK))
         .fontSize(15).build();
-    private final FLabel lblWins      = new FLabel.Builder()
+    private final FLabel lblWins = new FLabel.Builder()
         .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_PLUS))
         .fontSize(15).build();
-    private final FLabel lblLosses    = new FLabel.Builder()
+    private final FLabel lblLosses = new FLabel.Builder()
         .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_MINUS))
         .fontSize(15).build();
     private final FLabel lblWinStreak = new FLabel.Builder()
         .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_PLUSPLUS))
         .fontSize(15).build();
-    private final FLabel lblTitle = new FLabel.Builder()
-        .text("Title Hasn't Been Set Yet").fontAlign(SwingConstants.CENTER)
-        .opaque(true).fontSize(16).build();
+    private final LblHeader lblTitle = new LblHeader("Quest Mode: Duels");
+
+    private final JLabel lblInfo = new FLabel.Builder().text("Select your next duel.")
+            .fontStyle(Font.BOLD).fontSize(16)
+            .fontAlign(SwingConstants.LEFT).build();
+
+    private final FLabel lblCurrentDeck = new FLabel.Builder()
+        .text("Current deck hasn't been set yet.")
+        .fontSize(12).build();
+
     private final FLabel lblNextChallengeInWins = new FLabel.Builder()
-        .fontSize(15).build();
-    private final FLabel btnCurrentDeck = new FLabel.Builder()
-        .fontSize(15).opaque(true).hoverable(true).build();
-    private final FLabel btnBazaar = new FLabel.Builder()
-        .opaque(true).hoverable(true).text("Bazaar")
-        .fontSize(14).tooltip("Peruse the Bazaar").build();
-    private final FLabel btnSpellShop = new FLabel.Builder()
-        .opaque(true).hoverable(true).text("Spell Shop")
-        .fontSize(14).tooltip("Travel to the Spell Shop").build();
+        .text("Next challenge in wins hasn't been set yet.")
+        .fontSize(12).build();
+
+    private final ExperimentalLabel btnBazaar = new ExperimentalLabel("Bazaar");
+    private final ExperimentalLabel btnSpellShop = new ExperimentalLabel("Spell Shop");
 
     /**
      * Constructor.
      */
     private VSubmenuDuels() {
-        lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        pnlStart.removeAll();
+        pnlStart.setOpaque(false);
+        pnlStart.setLayout(new MigLayout("insets 0, gap 0, align center, hidemode 3"));
 
-        populateStats();
-        populateStart();
+        pnlStart.add(cbxPet, "h 20px!, ax center, gap 0 10px 10px 0");
+        pnlStart.add(btnStart, "ax center, span 1 2");
+        pnlStart.add(cbPlant, "newline, h 30px!, gap 0 10px 10px 10px");
         btnStart.setEnabled(false);
 
         scrDuels.setBorder(null);
         pnlDuels.setOpaque(false);
-        pnlDuels.setLayout(new MigLayout("insets 0, gap 0, wrap"));
+        pnlDuels.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center"));
+
+        final String constraints = "h 30px!, gap 0 0 0 5px";
+        pnlStats.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 0"));
+        pnlStats.add(btnSpellShop, "w 150px!, h 30px!, gap 0 0 0 10px");
+        pnlStats.add(btnBazaar, "w 150px!, h 30px!, gap 0 0 0 10px");
+        pnlStats.add(lblWins, constraints);
+        pnlStats.add(lblLosses, constraints);
+        pnlStats.add(lblCredits, constraints);
+        pnlStats.add(lblWinStreak, constraints);
+        pnlStats.add(lblLife, constraints);
+        pnlStats.setOpaque(false);
     }
 
     /* (non-Javadoc)
@@ -126,30 +145,19 @@ public enum VSubmenuDuels implements IVSubmenu, IStatsAndPet, IVDoc {
     @Override
     public void populate() {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap"));
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap 2, ax right"));
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 80%!, h 40px!, gap 0 0 15px 35px, span 2, ax right");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblInfo, "h 30px!, span 2");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblCurrentDeck, "span 2");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblNextChallengeInWins, "span 2, gap 0 0 0 20px");
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 98%!, h 30px!, gap 1% 0 15px 15px");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStats, "w 98%!, gap 1% 0 0 20px");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(scrDuels, "w 98%!, pushy, growy, gap 1% 0 0 0");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "w 98%, gap 1% 0 20px 50px");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(scrDuels, "w 88% - 175px!, pushy, growy");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStats, "w 175px!, pushy, growy, gap 4% 4% 0 0");
+
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "gap 0 10% 50px 50px, span 2, ax center");
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
-    }
-
-    /** */
-    @Override
-    public void updateCurrentDeckStatus() {
-        final JLabel btnCurrentDeck = VSubmenuDuels.SINGLETON_INSTANCE.getBtnCurrentDeck();
-        if (SSubmenuQuestUtil.getCurrentDeck() == null) {
-            btnCurrentDeck.setBackground(Color.red.darker());
-            btnCurrentDeck.setText("  Build, then select a deck in the \"Decks\" submenu.  ");
-        }
-        else {
-            btnCurrentDeck.setBackground(FSkin.getColor(FSkin.Colors.CLR_INACTIVE));
-            btnCurrentDeck.setText("Current deck: "
-                    + SSubmenuQuestUtil.getCurrentDeck().getName());
-        }
     }
 
     /** @return {@link javax.swing.JPanel} */
@@ -193,7 +201,7 @@ public enum VSubmenuDuels implements IVSubmenu, IStatsAndPet, IVDoc {
     }
 
     @Override
-    public FLabel getLblNextChallengeInWins() {
+    public JLabel getLblNextChallengeInWins() {
         return lblNextChallengeInWins;
     }
 
@@ -202,18 +210,18 @@ public enum VSubmenuDuels implements IVSubmenu, IStatsAndPet, IVDoc {
         return lblWinStreak;
     }
 
-    /** @return {@link forge.gui.toolbox.FLabel} */
-    public FLabel getBtnCurrentDeck() {
-        return btnCurrentDeck;
+    @Override
+    public JLabel getLblCurrentDeck() {
+        return lblCurrentDeck;
     }
 
     @Override
-    public FLabel getBtnBazaar() {
+    public ExperimentalLabel getBtnBazaar() {
         return btnBazaar;
     }
 
     @Override
-    public FLabel getBtnSpellShop() {
+    public ExperimentalLabel getBtnSpellShop() {
         return btnSpellShop;
     }
 
@@ -235,35 +243,6 @@ public enum VSubmenuDuels implements IVSubmenu, IStatsAndPet, IVDoc {
     /** @return {@link javax.swing.JButton} */
     public JButton getBtnStart() {
         return btnStart;
-    }
-
-    private void populateStats() {
-        final String constraints = "w 23%!, h 35px!, gap 0 0 5px 5px";
-        pnlStats.removeAll();
-        pnlStats.setOpaque(false);
-        pnlStats.setLayout(new MigLayout("insets 0, gap 0, hidemode 0"));
-        pnlStats.add(btnSpellShop, constraints);
-        pnlStats.add(lblWins, constraints);
-        pnlStats.add(lblLosses, constraints);
-        pnlStats.add(lblCredits, constraints + ", wrap");
-
-        pnlStats.add(btnBazaar, constraints);
-        pnlStats.add(lblWinStreak, "w 48%!, h 35px!, gap 1% 1% 5px 5px, span 2 1");
-        pnlStats.add(lblLife, constraints + ", wrap");
-
-        pnlStats.add(lblNextChallengeInWins, "span 4 1, h 20px!, gap 0 0 5px 5px, ax center, wrap");
-        pnlStats.add(btnCurrentDeck, "span 4 1, w 350px!, h 30px!, gap 0 0 0 5px, ax center");
-    }
-
-    private void populateStart() {
-        pnlStart.removeAll();
-        pnlStart.setOpaque(false);
-        pnlStart.setLayout(new MigLayout("insets 0, gap 0, align center, hidemode 3"));
-
-        pnlStart.add(cbxPet, "h 20px!, ax center, gap 0 10px 10px 0");
-        pnlStart.add(btnStart, "ax center, span 1 2");
-        pnlStart.add(lblZep, "w 130px!, h 80px!, ax center, span 1 2, gap 10px 0 0 0");
-        pnlStart.add(cbPlant, "newline, h 30px!, gap 0 10px 10px 10px");
     }
 
     //========== Overridden from IVDoc

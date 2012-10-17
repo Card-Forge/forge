@@ -12787,7 +12787,7 @@ src/main/java/forge/gui/home/quest/CSubmenuDuels.java -text
 src/main/java/forge/gui/home/quest/CSubmenuQuestData.java -text
 src/main/java/forge/gui/home/quest/CSubmenuQuestDecks.java -text
 src/main/java/forge/gui/home/quest/CSubmenuQuestPrefs.java -text
-src/main/java/forge/gui/home/quest/IStatsAndPet.java -text
+src/main/java/forge/gui/home/quest/IVQuestStats.java -text
 src/main/java/forge/gui/home/quest/QuestFileLister.java -text
 src/main/java/forge/gui/home/quest/QuestPreferencesHandler.java -text
 src/main/java/forge/gui/home/quest/SSubmenuQuestUtil.java -text

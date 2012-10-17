@@ -41,7 +41,6 @@ import forge.gui.framework.SOverflowUtil;
 import forge.gui.framework.SResizingUtil;
 import forge.gui.home.CHomeUI;
 import forge.gui.home.VHomeUI;
-import forge.gui.home.quest.SSubmenuQuestUtil;
 import forge.gui.match.VMatchUI;
 import forge.gui.match.controllers.CDock;
 import forge.gui.toolbox.CardFaceSymbols;
@@ -125,7 +124,6 @@ public enum FControl {
                         WindowConstants.DO_NOTHING_ON_CLOSE);
 
                 changeState(FControl.HOME_SCREEN);
-                SSubmenuQuestUtil.updateStatsAndPet();
             }
         };
 

@@ -44,13 +44,6 @@ public enum CSubmenuDuels implements ICDoc {
                 new ActionListener() { @Override
             public void actionPerformed(final ActionEvent e) { SSubmenuQuestUtil.startGame(); } });
 
-        view.getBtnCurrentDeck().setCommand(
-                new Command() { @Override
-                    public void execute() {
-                        CHomeUI.SINGLETON_INSTANCE.itemClick(EDocID.HOME_QUESTDECKS);
-                    }
-                });
-
         final QuestController quest = Singletons.getModel().getQuest();
         view.getCbPlant().addActionListener(new ActionListener() {
             @Override
@@ -76,7 +69,7 @@ public enum CSubmenuDuels implements ICDoc {
      */
     @Override
     public void update() {
-        SSubmenuQuestUtil.updateStatsAndPet();
+        SSubmenuQuestUtil.updateQuestView(VSubmenuDuels.SINGLETON_INSTANCE);
 
         final VSubmenuDuels view = VSubmenuDuels.SINGLETON_INSTANCE;
 
