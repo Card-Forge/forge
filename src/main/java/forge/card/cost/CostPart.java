@@ -183,12 +183,10 @@ public abstract class CostPart {
     /**
      * Decide ai payment.
      * 
-     * @param ability
-     *            the ability
-     * @param source
-     *            the source
-     * @param payment
-     *            the payment
+     * @param ai {@link forge.player.Player}
+     * @param ability {@link forge.card.spellability.SpellAbility}
+     * @param source {@link forge.Card}
+     * @param payment {@link forge.card.cost.CostPayment}
      * @return true, if successful
      */
     public abstract boolean decideAIPayment(final Player ai, SpellAbility ability, Card source, CostPayment payment);
@@ -196,24 +194,19 @@ public abstract class CostPart {
     /**
      * Pay ai.
      * 
-     * @param ability
-     *            the ability
-     * @param source
-     *            the source
-     * @param payment
-     *            the payment
+     * @param ai {@link forge.player.Player}
+     * @param ability {@link forge.card.spellability.SpellAbility}
+     * @param source {@link forge.Card}
+     * @param payment {@link forge.card.cost.CostPayment}
      */
     public abstract void payAI(final Player ai, SpellAbility ability, Card source, CostPayment payment);
 
     /**
      * Pay human.
      * 
-     * @param ability
-     *            the ability
-     * @param source
-     *            the source
-     * @param payment
-     *            the payment
+     * @param ability {@link forge.card.spellability.SpellAbility}
+     * @param source {@link forge.Card}
+     * @param payment {@link forge.card.cost.CostPayment}
      * @return true, if successful
      */
     public abstract boolean payHuman(SpellAbility ability, Card source, CostPayment payment);
