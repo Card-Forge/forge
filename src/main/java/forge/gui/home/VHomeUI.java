@@ -91,7 +91,7 @@ public enum VHomeUI implements IVTopLevelUI {
     private ExperimentalLabel lblEditor = new ExperimentalLabel("Deck Editor");
 
     private VHomeUI() {
-        pnlMenu.add(lblLogo, "w 200px!, h 200px!, gap 0 0 5px 10px, ax center");
+        pnlMenu.add(lblLogo, "w 150px!, h 150px!, gap 0 0 5px 10px, ax center");
 
         // Add new menu items here (order doesn't matter).
         allSubmenus.add(VSubmenuConstructed.SINGLETON_INSTANCE);
