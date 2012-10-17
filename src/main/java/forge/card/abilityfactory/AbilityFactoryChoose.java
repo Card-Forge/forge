@@ -1876,6 +1876,9 @@ public final class AbilityFactoryChoose {
             if (params.containsKey("Choices")) {
                 choices = CardLists.getValidCards(choices, params.get("Choices"), host.getController(), host);
             }
+            if (params.containsKey("TargetControls")) {
+                choices = CardLists.filterControlledBy(choices, ai.getOpponent());
+            }
             if (params.get("AILogic").equals("AtLeast1")) {
                 if (choices.size() < 1) {
                     return false;
@@ -1941,6 +1944,9 @@ public final class AbilityFactoryChoose {
         List<Card> choices = AllZoneUtil.getCardsIn(choiceZone);
         if (params.containsKey("Choices")) {
             choices = CardLists.getValidCards(choices, params.get("Choices"), host.getController(), host);
+        }
+        if (params.containsKey("TargetControls")) {
+            choices = CardLists.filterControlledBy(choices, tgtPlayers.get(0));
         }
 
         final String numericAmount = params.containsKey("Amount") ? params.get("Amount") : "1";

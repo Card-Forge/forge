@@ -1326,6 +1326,15 @@ public class AbilityFactoryZoneAffecting {
                     continue;
                 }
 
+                if (mode.equals("NotRemembered")) {
+                    List<Card> dPHand = p.getCardsIn(ZoneType.Hand);
+                    dPHand = CardLists.getValidCards(dPHand, "Card.IsNotRemembered", source.getController(), source);
+                    for (final Card c : dPHand) {
+                        p.discard(c, sa);
+                        discarded.add(c);
+                    }
+                }
+
                 int numCards = 1;
                 if (params.containsKey("NumCards")) {
                     numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
