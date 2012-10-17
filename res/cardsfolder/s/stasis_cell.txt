@@ -1,0 +1,14 @@
+Name:Stasis Cell
+ManaCost:4 U
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 4 U | ValidTgts$ Creature | AILogic$ KeepTapped
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ HIDDEN CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step.
+A:AB$ Attach | Cost$ 3 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | AILogic$ KeepTapped | SpellDescription$ Attach CARDNAME to target creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/stasis_cell.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/65.jpg
+Oracle:Enchant creature\nEnchanted creature doesn't untap during its controller's untap step.\n{3}{U}: Attach Stasis Cell to target creature.
+End

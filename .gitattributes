@@ -2391,6 +2391,7 @@ res/cardsfolder/d/destroy_the_evidence.txt -text
 res/cardsfolder/d/destructive_flow.txt svneol=native#text/plain
 res/cardsfolder/d/destructive_force.txt svneol=native#text/plain
 res/cardsfolder/d/destructive_urge.txt svneol=native#text/plain
+res/cardsfolder/d/detainment_spell.txt -text
 res/cardsfolder/d/detention_sphere.txt -text
 res/cardsfolder/d/detonate.txt svneol=native#text/plain
 res/cardsfolder/d/detritivore.txt -text
@@ -5283,6 +5284,7 @@ res/cardsfolder/k/kjeldoran_home_guard.txt svneol=native#text/plain
 res/cardsfolder/k/kjeldoran_javelineer.txt svneol=native#text/plain
 res/cardsfolder/k/kjeldoran_outpost.txt svneol=native#text/plain
 res/cardsfolder/k/kjeldoran_outrider.txt svneol=native#text/plain
+res/cardsfolder/k/kjeldoran_pride.txt -text
 res/cardsfolder/k/kjeldoran_royal_guard.txt -text
 res/cardsfolder/k/kjeldoran_war_cry.txt svneol=native#text/plain
 res/cardsfolder/k/knacksaw_clique.txt -text
@@ -9411,6 +9413,7 @@ res/cardsfolder/s/starlit_sanctum.txt svneol=native#text/plain
 res/cardsfolder/s/starstorm.txt svneol=native#text/plain
 res/cardsfolder/s/starved_rusalka.txt svneol=native#text/plain
 res/cardsfolder/s/stasis.txt svneol=native#text/plain
+res/cardsfolder/s/stasis_cell.txt -text
 res/cardsfolder/s/stasis_cocoon.txt svneol=native#text/plain
 res/cardsfolder/s/statecraft.txt svneol=native#text/plain
 res/cardsfolder/s/staunch_defenders.txt svneol=native#text/plain

@@ -1,0 +1,14 @@
+Name:Kjeldoran Pride
+ManaCost:1 W
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 W | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 2 | Description$ Enchanted creature gets +1/+2.
+A:AB$ Attach | Cost$ 2 U | ValidTgts$ Creature.NotEnchantedBy | TgtPrompt$ Select target creature other than enchanted creature | AILogic$ Pump | SpellDescription$ Attach CARDNAME to target creature other than enchanted creature.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_pride.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/135.jpg
+Oracle:Enchant creature\nEnchanted creature gets +1/+2.\n{2}{U}: Attach Kjeldoran Pride to target creature other than enchanted creature.
+End
