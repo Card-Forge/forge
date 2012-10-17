@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Instant
 Text:no text
 A:SP$ Effect | Cost$ 1 G | Name$ Terrifying Presence Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature | StaticAbilities$ STPrevent | RememberObjects$ Targeted | SpellDescription$ Prevent all damage that would be dealt this turn by creatures other than target creature.
-SVar:STPrevent:Mode$ PreventDamage | Source$ Creature.IsNotRemembered | Description$ Prevent all damage that would be dealt this turn by creatures other than target creature.
+SVar:STPrevent:Mode$ PreventDamage | Source$ Creature.IsNotRemembered | CombatDamage$ True | Description$ Prevent all damage that would be dealt this turn by creatures other than target creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/terrifying_presence.jpg
