@@ -22,7 +22,6 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 
-import forge.AllZone;
 import forge.Card;
 import forge.GameActionUtil;
 import forge.Singletons;
@@ -147,7 +146,7 @@ public class ReplacementHandler {
             ReplacementResult res = this.executeReplacement(runParams, chosenRE, decider);
             if (res != ReplacementResult.NotReplaced) {
                 chosenRE.setHasRun(false);
-                AllZone.getGameLog().add("ReplacementEffect", chosenRE.toString(), 2);
+                Singletons.getModel().getGameState().getGameLog().add("ReplacementEffect", chosenRE.toString(), 2);
                 return res;
             } else {
                 if (possibleReplacers.size() == 0) {

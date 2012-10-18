@@ -23,7 +23,6 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 
-import forge.AllZone;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
@@ -336,7 +335,7 @@ public class PhaseUtil {
 
         }
 
-        AllZone.getGameLog().add("Combat", CombatUtil.getCombatAttackForLog(), 1);
+        Singletons.getModel().getGameState().getGameLog().add("Combat", CombatUtil.getCombatAttackForLog(), 1);
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Attackers", list);
@@ -394,7 +393,7 @@ public class PhaseUtil {
 
         Singletons.getModel().getGameState().getStack().unfreezeStack();
 
-        AllZone.getGameLog().add("Combat", CombatUtil.getCombatBlockForLog(), 1);
+        Singletons.getModel().getGameState().getGameLog().add("Combat", CombatUtil.getCombatBlockForLog(), 1);
     }
 
     // ***** Combat Utility **********

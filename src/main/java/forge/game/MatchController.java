@@ -136,7 +136,7 @@ public class MatchController {
             // Update observers
             Singletons.getModel().getGameState().getStack().updateObservers();
             AllZone.getInputControl().updateObservers();
-            AllZone.getGameLog().updateObservers();
+            Singletons.getModel().getGameState().getGameLog().updateObservers();
 
             
             for( Player p : currentGame.getPlayers() ) {

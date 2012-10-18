@@ -531,13 +531,13 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             }
         }
 
-        AllZone.getGameLog().add("Phase", this.getPlayerTurn() + " " + this.getPhase().Name, 6);
+        Singletons.getModel().getGameState().getGameLog().add("Phase", this.getPlayerTurn() + " " + this.getPhase().Name, 6);
 
         // **** Anything BELOW Here is actually in the next phase. Maybe move
         // this to handleBeginPhase
         if (this.getPhase() == PhaseType.UNTAP) {
             this.turn++;
-            AllZone.getGameLog().add("Turn", "Turn " + this.turn + " (" + this.getPlayerTurn() + ")", 0);
+            Singletons.getModel().getGameState().getGameLog().add("Turn", "Turn " + this.turn + " (" + this.getPlayerTurn() + ")", 0);
         }
 
         PhaseUtil.visuallyActivatePhase(this.getPhase());

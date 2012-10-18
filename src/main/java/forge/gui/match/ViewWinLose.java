@@ -120,7 +120,7 @@ public class ViewWinLose {
 
         // Assemble game log scroller.
         txtLog = new FTextArea();
-        txtLog.setText(AllZone.getGameLog().getLogText());
+        txtLog.setText(Singletons.getModel().getGameState().getGameLog().getLogText());
         txtLog.setFont(FSkin.getFont(14));
 
         // Add all components accordingly.

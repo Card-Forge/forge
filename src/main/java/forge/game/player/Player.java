@@ -33,7 +33,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -922,7 +921,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     public final void addPoisonCounters(final int num, final Card source) {
         if (!this.hasKeyword("You can't get poison counters")) {
             this.poisonCounters += num;
-            AllZone.getGameLog().add("Poison", this + " receives a poison counter from " + source, 3);
+            Singletons.getModel().getGameState().getGameLog().add("Poison", this + " receives a poison counter from " + source, 3);
             this.updateObservers();
         }
     }
@@ -1234,7 +1233,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         for (int i = 0; i < newHand; i++) {
             drawCard();
         }
-        AllZone.getGameLog().add("Mulligan", this + " has mulliganed down to " + newHand + " cards.", 0);
+        Singletons.getModel().getGameState().getGameLog().add("Mulligan", this + " has mulliganed down to " + newHand + " cards.", 0);
         stats.notifyHasMulliganed();
         stats.notifyOpeningHandSize(newHand);
         return newHand;
@@ -1802,7 +1801,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             Singletons.getModel().getGameAction().checkStateEffects();
 
             // add to log
-            AllZone.getGameLog().add("Land", this + " played " + land, 2);
+            Singletons.getModel().getGameState().getGameLog().add("Land", this + " played " + land, 2);
 
             // Run triggers
             final HashMap<String, Object> runParams = new HashMap<String, Object>();

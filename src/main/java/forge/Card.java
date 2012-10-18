@@ -4003,7 +4003,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void equipCard(final Card c) {
         if (c.hasKeyword("CARDNAME can't be equipped.")) {
-            AllZone.getGameLog().add("ResolveStack", "Trying to equip " + c.getName()
+            Singletons.getModel().getGameState().getGameLog().add("ResolveStack", "Trying to equip " + c.getName()
             + " but it can't be equipped.", 2);
             return;
         }
@@ -4189,7 +4189,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void enchantEntity(final GameEntity entity) {
         if (entity.hasKeyword("CARDNAME can't be enchanted.")) {
-            AllZone.getGameLog().add("ResolveStack", "Trying to enchant " + entity.getName()
+            Singletons.getModel().getGameState().getGameLog().add("ResolveStack", "Trying to enchant " + entity.getName()
             + " but it can't be enchanted.", 2);
             return;
         }

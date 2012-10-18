@@ -20,7 +20,6 @@ package forge.control.input;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -172,7 +171,7 @@ public class InputMulligan extends Input {
 
         ga.checkStateEffects();
 
-        AllZone.getGameLog().add("Turn",
+        Singletons.getModel().getGameState().getGameLog().add("Turn",
                 "Turn " + Singletons.getModel().getGameState().getPhaseHandler().getTurn()
                     + " (" + Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn() + ")",
                 0);

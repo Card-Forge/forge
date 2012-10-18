@@ -413,7 +413,7 @@ public class MagicStack extends MyObservable {
         if (sp instanceof AbilityMana) { // Mana Abilities go straight through
             sp.resolve();
             sp.resetOnceResolved();
-            AllZone.getGameLog().add("Mana", sp.getSourceCard() + " - " + sp.getDescription(), 4);
+            Singletons.getModel().getGameState().getGameLog().add("Mana", sp.getSourceCard() + " - " + sp.getDescription(), 4);
             return;
         }
 
@@ -456,7 +456,7 @@ public class MagicStack extends MyObservable {
         }
         sb.append(".");
 
-        AllZone.getGameLog().add("AddToStack", sb.toString(), 2);
+        Singletons.getModel().getGameState().getGameLog().add("AddToStack", sb.toString(), 2);
         //============= GameLog ======================
 
         // if activating player slips through the cracks, assign activating
@@ -897,14 +897,14 @@ public class MagicStack extends MyObservable {
         if (this.hasFizzled(sa, source, false)) { // Fizzle
             // TODO: Spell fizzles, what's the best way to alert player?
             Log.debug(source.getName() + " ability fizzles.");
-            AllZone.getGameLog().add("ResolveStack", source.getName() + " ability fizzles.", 2);
+            Singletons.getModel().getGameState().getGameLog().add("ResolveStack", source.getName() + " ability fizzles.", 2);
             this.finishResolving(sa, true);
         } else if (sa.getAbilityFactory() != null) {
-            AllZone.getGameLog().add("ResolveStack", sa.getStackDescription(), 2);
+            Singletons.getModel().getGameState().getGameLog().add("ResolveStack", sa.getStackDescription(), 2);
             AbilityFactory.handleRemembering(sa, sa.getAbilityFactory());
             AbilityFactory.resolve(sa, true);
         } else {
-            AllZone.getGameLog().add("ResolveStack", sa.getStackDescription(), 2);
+            Singletons.getModel().getGameState().getGameLog().add("ResolveStack", sa.getStackDescription(), 2);
             sa.resolve();
             this.finishResolving(sa, false);
         }

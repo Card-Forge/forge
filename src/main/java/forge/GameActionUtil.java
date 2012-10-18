@@ -425,7 +425,7 @@ public final class GameActionUtil {
                         source.addCounterFromNonEffect(counterType, amount);
                     } else {
                         hasPaid = false;
-                        AllZone.getGameLog().add("ResolveStack", "Trying to pay upkeep for " + source + " but it can't have "
+                        Singletons.getModel().getGameState().getGameLog().add("ResolveStack", "Trying to pay upkeep for " + source + " but it can't have "
                         + counterType.getName() + " counters put on it.", 2);
                     }
                 } else {

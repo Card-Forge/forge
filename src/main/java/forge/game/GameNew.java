@@ -172,7 +172,7 @@ public class GameNew {
                 if (ante == null) {
                     throw new RuntimeException(p + " library is empty.");                        
                 }
-                AllZone.getGameLog().add("Ante", p + " anted " + ante, 0);
+                Singletons.getModel().getGameState().getGameLog().add("Ante", p + " anted " + ante, 0);
                 VAntes.SINGLETON_INSTANCE.addAnteCard(p, ante);
                 Singletons.getModel().getGameAction().moveTo(ZoneType.Ante, ante);
                 msg.append(p.getName()).append(" ante: ").append(ante).append(nl);

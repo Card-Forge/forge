@@ -20,7 +20,6 @@ package forge;
 import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryInterface;
 import forge.control.input.InputControl;
-import forge.game.GameState;
 import forge.game.limited.GauntletMini;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -77,24 +76,6 @@ public final class AllZone {
             gauntlet = new GauntletMini();
         }
         return AllZone.gauntlet;
-    }
-
-    /**
-     * <p>
-     * getGameLog.
-     * </p>
-     * 
-     * @return a {@link forge.GameLog} object; may be null.
-     * @since 1.2.0
-     */
-    public static GameLog getGameLog() {
-        final GameState gameState = Singletons.getModel().getGameState();
-
-        if (gameState != null) {
-            return gameState.getGameLog();
-        }
-
-        return null;
     }
 
     /**

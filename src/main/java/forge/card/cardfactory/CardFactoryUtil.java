@@ -910,7 +910,7 @@ public class CardFactoryUtil {
                     StringBuilder sb = new StringBuilder();
                     sb.append(this.getActivatingPlayer()).append(" has unmorphed ");
                     sb.append(sourceCard.getName());
-                    AllZone.getGameLog().add("ResolveStack", sb.toString(), 2);
+                    Singletons.getModel().getGameState().getGameLog().add("ResolveStack", sb.toString(), 2);
                 }
             }
 
@@ -1133,7 +1133,7 @@ public class CardFactoryUtil {
                 sb.append(this.getActivatingPlayer()).append(" has suspended ");
                 sb.append(c.getName()).append("with ");
                 sb.append(counters).append(" time counters on it.");
-                AllZone.getGameLog().add("ResolveStack", sb.toString(), 2);
+                Singletons.getModel().getGameState().getGameLog().add("ResolveStack", sb.toString(), 2);
             }
         };
         final StringBuilder sbDesc = new StringBuilder();
