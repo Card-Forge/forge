@@ -96,7 +96,10 @@ public class CostExile extends CostPartWithList {
                 sb.append(" from your ").append(this.from);
             }
             return sb.toString();
-        }
+        } else if (this.getType().equals("All")) {
+            sb.append(" all cards from your ").append(this.from);
+            return sb.toString();
+        } 
 
         if (this.from.equals(ZoneType.Battlefield)) {
             final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
@@ -146,6 +149,9 @@ public class CostExile extends CostPartWithList {
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
         List<Card> typeList = new ArrayList<Card>();
+        if (this.getType().equals("All")) {
+            return true; // this will always work
+        } 
         if (this.getFrom().equals(ZoneType.Stack)) {
             for (int i = 0; i < Singletons.getModel().getGameState().getStack().size(); i++) {
                 typeList.add(Singletons.getModel().getGameState().getStack().peekAbility(i).getSourceCard());
@@ -202,6 +208,13 @@ public class CostExile extends CostPartWithList {
         Integer c = this.convertAmount();
         final Player activator = ability.getActivatingPlayer();
         List<Card> list = activator.getCardsIn(this.getFrom());
+        if (this.getType().equals("All")) {
+            this.setList(list);
+            for (final Card card : list) {
+                Singletons.getModel().getGameAction().exile(card);
+            }
+            payment.paidCost(this);
+        } 
         list = CardLists.getValidCards(list, this.getType().split(";"), activator, source);
         if (c == null) {
             final String sVar = ability.getSVar(amount);
@@ -240,6 +253,8 @@ public class CostExile extends CostPartWithList {
         this.resetList();
         if (this.getThis()) {
             this.getList().add(source);
+        } else if (this.getType().equals("All")) {
+            this.setList(ability.getActivatingPlayer().getCardsIn(this.getFrom()));
         } else {
             Integer c = this.convertAmount();
             if (c == null) {
