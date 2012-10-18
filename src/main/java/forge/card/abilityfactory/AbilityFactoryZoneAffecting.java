@@ -25,6 +25,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import com.google.common.base.Predicate;
+
 import forge.Card;
 
 import forge.CardLists;
@@ -1433,23 +1435,37 @@ public class AbilityFactoryZoneAffecting {
                             // discard human cards
                             for (int i = 0; i < numCards; i++) {
                                 if (dPChHand.size() > 0) {
+                                    List<Card> goodChoices = CardLists.filter(dPChHand, new Predicate<Card>() {
+                                        @Override
+                                        public boolean apply(final Card c) {
+                                            if (c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME," +
+                                                    " put it onto the battlefield instead of putting it into your graveyard.")
+                                                    || !c.getSVar("DiscardMe").equals("")) {
+                                                return false;
+                                            }
+                                            return true;
+                                        }
+                                    });
+                                    if (goodChoices.isEmpty()) {
+                                        goodChoices = dPChHand;
+                                    }
                                     final List<Card> dChoices = new ArrayList<Card>();
                                     if (params.containsKey("DiscardValid")) {
                                         final String validString = params.get("DiscardValid");
                                         if (validString.contains("Creature") && !validString.contains("nonCreature")) {
-                                            final Card c = CardFactoryUtil.getBestCreatureAI(dPChHand);
+                                            final Card c = CardFactoryUtil.getBestCreatureAI(goodChoices);
                                             if (c != null) {
-                                                dChoices.add(CardFactoryUtil.getBestCreatureAI(dPChHand));
+                                                dChoices.add(CardFactoryUtil.getBestCreatureAI(goodChoices));
                                             }
                                         }
                                     }
 
-                                    Collections.sort(dPChHand, CardLists.TextLenReverseComparator);
+                                    Collections.sort(goodChoices, CardLists.TextLenReverseComparator);
 
-                                    CardLists.sortCMC(dPChHand);
-                                    dChoices.add(dPChHand.get(0));
+                                    CardLists.sortCMC(goodChoices);
+                                    dChoices.add(goodChoices.get(0));
 
-                                    final Card dC = dChoices.get(CardUtil.getRandomIndex(dChoices));
+                                    final Card dC = goodChoices.get(CardUtil.getRandomIndex(goodChoices));
                                     dPChHand.remove(dC);
 
                                     if (mode.startsWith("Reveal")) {
