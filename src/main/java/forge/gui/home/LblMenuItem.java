@@ -40,7 +40,7 @@ public class LblMenuItem extends JLabel implements ILocalRepaint {
      */
     public LblMenuItem(final IVSubmenu doc0) {
         super("      " + doc0.getMenuTitle());
-        this.setFont(FSkin.getFont(16));
+        this.setFont(FSkin.getFont(14));
         this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
 
         this.addMouseListener(new MouseAdapter() {

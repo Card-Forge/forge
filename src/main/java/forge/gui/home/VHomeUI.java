@@ -149,6 +149,8 @@ public enum VHomeUI implements IVTopLevelUI {
         JPanel pnlButtons = new JPanel(new MigLayout("insets 0, gap 0"));
         pnlButtons.setOpaque(false);
 
+        lblExit.setFont(FSkin.getFont(14));
+        lblEditor.setFont(FSkin.getFont(14));
         pnlButtons.add(lblExit, "w 110px!, h 30px!, gap 0 10px 0 0");
         pnlButtons.add(lblEditor, "w 110px!, h 30px!");
 
