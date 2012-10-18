@@ -23,8 +23,8 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import forge.AllZone;
 import forge.Card;
+import forge.Singletons;
 
 import forge.CardLists;
 import forge.GameActionUtil;
@@ -252,7 +252,7 @@ public final class AbilityFactoryClash {
             runParams.put("Won", "False");
         }
 
-        AllZone.getTriggerHandler().runTrigger(TriggerType.Clashed, runParams);
+        Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.Clashed, runParams);
     }
 
     // *************************************************************************

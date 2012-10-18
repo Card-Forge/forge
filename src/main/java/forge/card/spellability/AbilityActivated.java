@@ -20,8 +20,8 @@ package forge.card.spellability;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.AllZone;
 import forge.Card;
+import forge.Singletons;
 
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
@@ -83,7 +83,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
     /** {@inheritDoc} */
     @Override
     public boolean canPlay() {
-        if (AllZone.getStack().isSplitSecondOnStack()) {
+        if (Singletons.getModel().getGameState().getStack().isSplitSecondOnStack()) {
             return false;
         }
 

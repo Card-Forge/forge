@@ -28,7 +28,6 @@ import java.util.TreeMap;
 import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 
-import forge.AllZone;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
@@ -148,8 +147,8 @@ public enum CDock implements ICDoc {
 
         if (ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, human)) {
             for (Card c : CardLists.filter(human.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
-                if (!c.isAttacking() && CombatUtil.canAttack(c, AllZone.getCombat())) {
-                    AllZone.getCombat().addAttacker(c);
+                if (!c.isAttacking() && CombatUtil.canAttack(c, Singletons.getModel().getGameState().getCombat())) {
+                    Singletons.getModel().getGameState().getCombat().addAttacker(c);
                 }
             }
             //human.updateObservers();

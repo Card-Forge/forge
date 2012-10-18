@@ -24,7 +24,6 @@ import java.util.Random;
 
 import com.google.common.base.Predicate;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -274,19 +273,19 @@ public class AbilityFactoryEffect {
                 if (!Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     return false;
                 }
-                if (AllZone.getStack().size() != 0) {
+                if (Singletons.getModel().getGameState().getStack().size() != 0) {
                     return false;
                 }
                 if (Singletons.getModel().getGameState().getPhaseHandler().isPreventCombatDamageThisTurn()) {
                     return false;
                 }
-                if (!CombatUtil.lifeInDanger(ai, AllZone.getCombat())) {
+                if (!CombatUtil.lifeInDanger(ai, Singletons.getModel().getGameState().getCombat())) {
                     return false;
                 }
                 final Target tgt = sa.getTarget();
                 if (tgt != null) {
                     tgt.resetTargets();
-                    List<Card> list = AllZone.getCombat().getAttackerList();
+                    List<Card> list = Singletons.getModel().getGameState().getCombat().getAttackerList();
                     list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
                     list = CardLists.getTargetableCards(list, sa);
                     Card target = CardFactoryUtil.getBestCreatureAI(list);
@@ -570,13 +569,13 @@ public class AbilityFactoryEffect {
             };
 
             if ((duration == null) || duration.equals("EndOfTurn")) {
-                AllZone.getEndOfTurn().addUntil(endEffect);
+                Singletons.getModel().getGameState().getEndOfTurn().addUntil(endEffect);
             }
             else if (duration.equals("UntilHostLeavesPlay")) {
                 card.addLeavesPlayCommand(endEffect);
             }
             else if (duration.equals("HostLeavesOrEOT")) {
-                AllZone.getEndOfTurn().addUntil(endEffect);
+                Singletons.getModel().getGameState().getEndOfTurn().addUntil(endEffect);
                 card.addLeavesPlayCommand(endEffect);
             }
             else if (duration.equals("UntilYourNextTurn")) {
@@ -585,9 +584,9 @@ public class AbilityFactoryEffect {
         }
 
         // TODO: Add targeting to the effect so it knows who it's dealing with
-        AllZone.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+        Singletons.getModel().getGameState().getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         Singletons.getModel().getGameAction().moveToPlay(eff);
-        AllZone.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        Singletons.getModel().getGameState().getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }
 
 } // end class AbilityFactoryEffect

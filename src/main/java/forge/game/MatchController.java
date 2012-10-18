@@ -134,7 +134,7 @@ public class MatchController {
 
             CMessage.SINGLETON_INSTANCE.updateGameInfo(this);
             // Update observers
-            AllZone.getStack().updateObservers();
+            Singletons.getModel().getGameState().getStack().updateObservers();
             AllZone.getInputControl().updateObservers();
             AllZone.getGameLog().updateObservers();
 

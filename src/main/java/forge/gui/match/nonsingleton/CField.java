@@ -436,7 +436,7 @@ public class CField implements ICDoc {
                 }
             }
 
-            final List<Card> att = AllZone.getCombat().getAttackerList();
+            final List<Card> att = Singletons.getModel().getGameState().getCombat().getAttackerList();
             if ((c.isTapped() || c.hasSickness() || ((c.hasKeyword("Vigilance")) && att.contains(c)))
                     && (input instanceof InputAttack)) {
                 final forge.view.arcane.CardPanel cardPanel = CField.this.view.getTabletop().getCardPanel(
@@ -452,11 +452,11 @@ public class CField implements ICDoc {
                 if (att.contains(c) && (input instanceof InputAttack)
                         && !c.hasKeyword("CARDNAME attacks each turn if able.")) {
                     c.untap();
-                    AllZone.getCombat().removeFromCombat(c);
+                    Singletons.getModel().getGameState().getCombat().removeFromCombat(c);
                     CombatUtil.showCombat();
                 } else if (input instanceof InputBlock) {
                     if (c.getController().isHuman()) {
-                        AllZone.getCombat().removeFromCombat(c);
+                        Singletons.getModel().getGameState().getCombat().removeFromCombat(c);
                     }
                     ((InputBlock) input).removeFromAllBlocking(c);
                     CombatUtil.showCombat();

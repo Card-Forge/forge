@@ -21,7 +21,6 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -65,7 +64,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
         // reset mustAttackEntity for me
         Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().setMustAttackEntity(null);
 
-        AllZone.getStaticEffects().rePopulateStateBasedList();
+        Singletons.getModel().getGameState().getStaticEffects().rePopulateStateBasedList();
 
         for (final Card c : all) {
             if (!c.isFaceDown() && c.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")) {
@@ -83,7 +82,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                 sac.setStackDescription(sb.toString());
                 sac.setDescription(sb.toString());
 
-                AllZone.getStack().addSimultaneousStackEntry(sac);
+                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(sac);
 
             }
             if (!c.isFaceDown() && c.hasKeyword("At the beginning of the end step, exile CARDNAME.")) {
@@ -101,7 +100,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                 exile.setStackDescription(sb.toString());
                 exile.setDescription(sb.toString());
 
-                AllZone.getStack().addSimultaneousStackEntry(exile);
+                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(exile);
 
             }
             if (!c.isFaceDown() && c.hasKeyword("At the beginning of the end step, destroy CARDNAME.")) {
@@ -119,7 +118,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                 destroy.setStackDescription(sb.toString());
                 destroy.setDescription(sb.toString());
 
-                AllZone.getStack().addSimultaneousStackEntry(destroy);
+                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(destroy);
 
             }
             // Berserk is using this, so don't check isFaceDown()
@@ -139,7 +138,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                     sac.setStackDescription(sb.toString());
                     sac.setDescription(sb.toString());
 
-                    AllZone.getStack().addSimultaneousStackEntry(sac);
+                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(sac);
 
                 } else {
                     c.removeAllExtrinsicKeyword("At the beginning of the next end step, "
@@ -167,7 +166,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                 change.setStackDescription(sb.toString());
                 change.setDescription(sb.toString());
 
-                AllZone.getStack().addSimultaneousStackEntry(change);
+                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(change);
 
             }
             if (c.getName().equals("Erg Raiders") && !c.getDamageHistory().getCreatureAttackedThisTurn() && !c.hasSickness()
@@ -186,7 +185,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                 change.setStackDescription(sb.toString());
                 change.setDescription(sb.toString());
 
-                AllZone.getStack().addSimultaneousStackEntry(change);
+                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(change);
 
             }
             if (c.hasKeyword("At the beginning of your end step, return CARDNAME to its owner's hand.")
@@ -205,7 +204,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                 change.setStackDescription(sb.toString());
                 change.setDescription(sb.toString());
 
-                AllZone.getStack().addSimultaneousStackEntry(change);
+                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(change);
 
             }
 
@@ -223,7 +222,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
             change.setDescription("At the beginning of this turn's end step, you lose the game.");
             change.setActivatingPlayer(activePlayer);
 
-            AllZone.getStack().addSimultaneousStackEntry(change);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(change);
         }
 
         this.execute(this.getAt());
@@ -257,7 +256,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
             ability.setStackDescription(sb.toString());
             ability.setDescription(sb.toString());
 
-            AllZone.getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
         }
     }

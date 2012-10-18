@@ -28,7 +28,6 @@ import org.apache.commons.lang3.StringUtils;
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -1429,10 +1428,10 @@ public class CombatUtil {
      * @return a boolean.
      */
     public static boolean attackerWouldBeDestroyed(final Card attacker) {
-        final List<Card> blockers = AllZone.getCombat().getBlockers(attacker);
+        final List<Card> blockers = Singletons.getModel().getGameState().getCombat().getBlockers(attacker);
 
         for (final Card defender : blockers) {
-            if (CombatUtil.canDestroyAttacker(attacker, defender, AllZone.getCombat(), true)
+            if (CombatUtil.canDestroyAttacker(attacker, defender, Singletons.getModel().getGameState().getCombat(), true)
                     && !(defender.hasKeyword("Wither") || defender.hasKeyword("Infect"))) {
                 return true;
             }
@@ -1463,10 +1462,10 @@ public class CombatUtil {
         boolean willTrigger = false;
         final Card source = trigger.getHostCard();
         if (combat == null) {
-            combat = AllZone.getCombat();
+            combat = Singletons.getModel().getGameState().getCombat();
         }
 
-        if (!trigger.zonesCheck(AllZone.getZoneOf(trigger.getHostCard()))) {
+        if (!trigger.zonesCheck(GameState.getZoneOf(trigger.getHostCard()))) {
             return false;
         }
         if (!trigger.requirementsCheck()) {
@@ -2330,10 +2329,10 @@ public class CombatUtil {
     public static boolean blockerWouldBeDestroyed(final Card blocker) {
         // TODO THis function only checks if a single attacker at a time would destroy a blocker
         // This needs to expand to tally up damage
-        final List<Card> attackers = AllZone.getCombat().getAttackersBlockedBy(blocker);
+        final List<Card> attackers = Singletons.getModel().getGameState().getCombat().getAttackersBlockedBy(blocker);
 
         for(Card attacker : attackers) {
-            if (CombatUtil.canDestroyBlocker(blocker, attacker, AllZone.getCombat(), true)
+            if (CombatUtil.canDestroyBlocker(blocker, attacker, Singletons.getModel().getGameState().getCombat(), true)
                     && !(attacker.hasKeyword("Wither") || attacker.hasKeyword("Infect"))) {
                 return true;
             }
@@ -2495,7 +2494,7 @@ public class CombatUtil {
 
         // Loop through Defenders
         // Append Defending Player/Planeswalker
-        final Combat combat = AllZone.getCombat();
+        final Combat combat = Singletons.getModel().getGameState().getCombat();
         final List<GameEntity> defenders = combat.getDefenders();
         final List<List<Card>> attackers = combat.sortAttackerByDefender();
 
@@ -2529,7 +2528,7 @@ public class CombatUtil {
 
         // Loop through Defenders
         // Append Defending Player/Planeswalker
-        final Combat combat = AllZone.getCombat();
+        final Combat combat = Singletons.getModel().getGameState().getCombat();
         final List<GameEntity> defenders = combat.getDefenders();
         final List<List<Card>> attackers = combat.sortAttackerByDefender();
 
@@ -2540,7 +2539,7 @@ public class CombatUtil {
             for (final Card attacker : list) {
                 sb.append(combat.getDefendingPlayer()).append(" assigned ");
 
-                defend = AllZone.getCombat().getBlockers(attacker);
+                defend = Singletons.getModel().getGameState().getCombat().getBlockers(attacker);
 
                 if (!defend.isEmpty()) {
                     // loop through blockers
@@ -2574,8 +2573,8 @@ public class CombatUtil {
 
         // Loop through Defenders
         // Append Defending Player/Planeswalker
-        final List<GameEntity> defenders = AllZone.getCombat().getDefenders();
-        final List<List<Card>> attackers = AllZone.getCombat().sortAttackerByDefender();
+        final List<GameEntity> defenders = Singletons.getModel().getGameState().getCombat().getDefenders();
+        final List<List<Card>> attackers = Singletons.getModel().getGameState().getCombat().sortAttackerByDefender();
 
         // Not a big fan of the triple nested loop here
         for (int def = 0; def < defenders.size(); def++) {
@@ -2597,7 +2596,7 @@ public class CombatUtil {
                 display.append("-> ");
                 display.append(CombatUtil.combatantToString(c)).append("\n");
 
-                List<Card> blockers = AllZone.getCombat().getBlockers(c);
+                List<Card> blockers = Singletons.getModel().getGameState().getCombat().getBlockers(c);
 
                 // loop through blockers
                 for (final Card element : blockers) {
@@ -2648,7 +2647,7 @@ public class CombatUtil {
         for (Card card : GameState.getCardsIn(ZoneType.Battlefield)) {
             final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
-                Cost additionalCost = stAb.getCostAbility("CantAttackUnless", c, AllZone.getCombat().getDefenderByAttacker(c));
+                Cost additionalCost = stAb.getCostAbility("CantAttackUnless", c, Singletons.getModel().getGameState().getCombat().getDefenderByAttacker(c));
                 attackCost = CostUtil.combineCosts(attackCost, additionalCost);
             }
         }
@@ -2681,7 +2680,7 @@ public class CombatUtil {
 
                 @Override
                 public void execute() {
-                    AllZone.getCombat().removeFromCombat(crd);
+                    Singletons.getModel().getGameState().getCombat().removeFromCombat(crd);
 
                     if (bLast) {
                         PhaseUtil.handleAttackingTriggers();
@@ -2716,7 +2715,7 @@ public class CombatUtil {
                 } else {
                     // TODO remove the below line after Propaganda occurs
                     // during Declare_Attackers
-                    AllZone.getCombat().removeFromCombat(crd);
+                    Singletons.getModel().getGameState().getCombat().removeFromCombat(crd);
                 }
                 if (bLast) {
                     PhaseUtil.handleAttackingTriggers();
@@ -2738,11 +2737,11 @@ public class CombatUtil {
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Attacker", c);
-        final List<Card> otherAttackers = AllZone.getCombat().getAttackerList();
+        final List<Card> otherAttackers = Singletons.getModel().getGameState().getCombat().getAttackerList();
         otherAttackers.remove(c);
         runParams.put("OtherAttackers", otherAttackers);
-        runParams.put("Attacked", AllZone.getCombat().getDefenderByAttacker(c));
-        AllZone.getTriggerHandler().runTrigger(TriggerType.Attacks, runParams);
+        runParams.put("Attacked", Singletons.getModel().getGameState().getCombat().getDefenderByAttacker(c));
+        Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.Attacks, runParams);
 
         // Annihilator:
         if (!c.getDamageHistory().getCreatureAttackedThisCombat()) {
@@ -2776,7 +2775,7 @@ public class CombatUtil {
                     ability.setDescription(sb.toString());
                     ability.setActivatingPlayer(c.getController());
 
-                    AllZone.getStack().add(ability);
+                    Singletons.getModel().getGameState().getStack().add(ability);
                 } // find
             } // for
         } // creatureAttacked
@@ -2785,7 +2784,7 @@ public class CombatUtil {
         // Mijae Djinn
         if (c.getName().equals("Mijae Djinn")) {
             if (!GameActionUtil.flipACoin(c.getController(), c)) {
-                AllZone.getCombat().removeFromCombat(c);
+                Singletons.getModel().getGameState().getCombat().removeFromCombat(c);
                 c.tap();
             }
         } // Mijae Djinn
@@ -2810,7 +2809,7 @@ public class CombatUtil {
                     if (GameState.isCardInPlay(charger)) {
                         charger.addIntrinsicKeyword("Trample");
 
-                        AllZone.getEndOfTurn().addUntil(untilEOT);
+                        Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
                     }
                 } // resolve
             }; // ability
@@ -2819,7 +2818,7 @@ public class CombatUtil {
             sb2.append(c.getName()).append(" - gains trample until end of turn if its power is 10 or greater.");
             ability2.setStackDescription(sb2.toString());
 
-            AllZone.getStack().add(ability2);
+            Singletons.getModel().getGameState().getStack().add(ability2);
 
         } // Witch-Maw Nephilim
 
@@ -2860,7 +2859,7 @@ public class CombatUtil {
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", c);
-        AllZone.getTriggerHandler().runTrigger(TriggerType.AttackerUnblocked, runParams);
+        Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.AttackerUnblocked, runParams);
     }
 
     /**
@@ -2875,7 +2874,7 @@ public class CombatUtil {
         for (final Card c : cl) {
             if (!c.getDamageHistory().getCreatureBlockedThisCombat()) {
                 for (final Ability ab : CardFactoryUtil.getBushidoEffects(c)) {
-                    AllZone.getStack().add(ab);
+                    Singletons.getModel().getGameState().getStack().add(ab);
                 }
             }
 
@@ -2901,16 +2900,16 @@ public class CombatUtil {
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Attacker", a);
         runParams.put("Blocker", b);
-        AllZone.getTriggerHandler().runTrigger(TriggerType.Blocks, runParams);
+        Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.Blocks, runParams);
 
         if (!a.getDamageHistory().getCreatureGotBlockedThisCombat()) {
-            final int blockers = AllZone.getCombat().getBlockers(a).size();
+            final int blockers = Singletons.getModel().getGameState().getCombat().getBlockers(a).size();
             runParams.put("NumBlockers", blockers);
-            AllZone.getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams);
+            Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams);
 
             // Bushido
             for (final Ability ab : CardFactoryUtil.getBushidoEffects(a)) {
-                AllZone.getStack().add(ab);
+                Singletons.getModel().getGameState().getStack().add(ab);
             }
 
             // Rampage
@@ -2922,7 +2921,7 @@ public class CombatUtil {
                 if (m.find()) {
                     final String[] k = keyword.split(" ");
                     final int magnitude = Integer.valueOf(k[1]);
-                    final int numBlockers = AllZone.getCombat().getBlockers(a).size();
+                    final int numBlockers = Singletons.getModel().getGameState().getCombat().getBlockers(a).size();
                     if (numBlockers > 1) {
                         CombatUtil.executeRampageAbility(a, magnitude, numBlockers);
                     }
@@ -2964,7 +2963,7 @@ public class CombatUtil {
                         blocker.addTempAttackBoost(-mag);
                         blocker.addTempDefenseBoost(-mag);
 
-                        AllZone.getEndOfTurn().addUntil(untilEOT);
+                        Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
                         System.out.println("Flanking!");
                     }
                 } // resolve
@@ -2976,7 +2975,7 @@ public class CombatUtil {
             ability2.setStackDescription(sb2.toString());
             ability2.setDescription(sb2.toString());
 
-            AllZone.getStack().add(ability2);
+            Singletons.getModel().getGameState().getStack().add(ability2);
             Log.debug("Adding Flanking!");
 
         } // flanking
@@ -3020,7 +3019,7 @@ public class CombatUtil {
                         crd.addTempAttackBoost(1);
                         crd.addTempDefenseBoost(1);
 
-                        AllZone.getEndOfTurn().addUntil(untilEOT);
+                        Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
                     }
                 } // resolve
 
@@ -3032,7 +3031,7 @@ public class CombatUtil {
             ability.setDescription(sb.toString());
             ability.setActivatingPlayer(c.getController());
 
-            AllZone.getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
         }
 
         final Player phasingPlayer = c.getController();
@@ -3052,7 +3051,7 @@ public class CombatUtil {
             fhUntap.setDescription(sbUntap.toString());
             fhUntap.setStackDescription(sbUntap.toString());
 
-            AllZone.getStack().addSimultaneousStackEntry(fhUntap);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(fhUntap);
 
             // If any Finest Hours, queue up a new combat phase
             for (int ix = 0; ix < phasingPlayer.getCardsIn(ZoneType.Battlefield, "Finest Hour").size(); ix++) {
@@ -3068,7 +3067,7 @@ public class CombatUtil {
                 fhAddCombat.setDescription(sbACom.toString());
                 fhAddCombat.setStackDescription(sbACom.toString());
 
-                AllZone.getStack().addSimultaneousStackEntry(fhAddCombat);
+                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(fhAddCombat);
             }
         }
 
@@ -3107,7 +3106,7 @@ public class CombatUtil {
                             enchantment = CardFactoryUtil.getBestEnchantmentAI(enchantments, this, false);
                         }
                         if ((enchantment != null) && GameState.isCardInPlay(attacker)) {
-                            GameAction.changeZone(AllZone.getZoneOf(enchantment),
+                            GameAction.changeZone(GameState.getZoneOf(enchantment),
                                     enchantment.getOwner().getZone(ZoneType.Battlefield), enchantment, null);
                             enchantment.enchantEntity(attacker);
                         }
@@ -3122,7 +3121,7 @@ public class CombatUtil {
                 ability4.setDescription(sb4.toString());
                 ability4.setStackDescription(sb4.toString());
 
-                AllZone.getStack().addSimultaneousStackEntry(ability4);
+                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability4);
             } // For
         }
     }
@@ -3164,7 +3163,7 @@ public class CombatUtil {
                         crd.addTempAttackBoost(pump);
                         crd.addTempDefenseBoost(pump);
 
-                        AllZone.getEndOfTurn().addUntil(untilEOT);
+                        Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
                     }
                 } // resolve
 
@@ -3174,7 +3173,7 @@ public class CombatUtil {
             sb.append(c).append(" - (Rampage) gets +").append(pump).append("/+").append(pump).append(" until EOT.");
             ability.setStackDescription(sb.toString());
 
-            AllZone.getStack().add(ability);
+            Singletons.getModel().getGameState().getStack().add(ability);
         }
     }
 

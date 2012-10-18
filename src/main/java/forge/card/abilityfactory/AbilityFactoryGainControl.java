@@ -25,7 +25,6 @@ import java.util.Map;
 
 import com.google.common.base.Predicate;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -501,7 +500,7 @@ public class AbilityFactoryGainControl {
                     sa.getSourceCard().addChangeControllerCommand(this.getLoseControlCommand(tgtC, originalController, newController));
                 }
                 if (this.lose.contains("EOT")) {
-                    AllZone.getEndOfTurn().addAt(this.getLoseControlCommand(tgtC, originalController, newController));
+                    Singletons.getModel().getGameState().getEndOfTurn().addAt(this.getLoseControlCommand(tgtC, originalController, newController));
                 }
             }
 
@@ -613,7 +612,7 @@ public class AbilityFactoryGainControl {
                 }
                 ability.setStackDescription(sb.toString());
 
-                AllZone.getStack().addSimultaneousStackEntry(ability);
+                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
             }
 
         };

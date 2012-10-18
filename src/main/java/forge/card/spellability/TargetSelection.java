@@ -25,6 +25,7 @@ import com.google.common.base.Predicate;
 
 import forge.AllZone;
 import forge.Card;
+import forge.Singletons;
 
 import forge.CardLists;
 import forge.card.abilityfactory.AbilityFactory;
@@ -594,8 +595,8 @@ public class TargetSelection {
     public static ArrayList<SpellAbility> getTargetableOnStack(final SpellAbility sa, final Target tgt) {
         final ArrayList<SpellAbility> choosables = new ArrayList<SpellAbility>();
 
-        for (int i = 0; i < AllZone.getStack().size(); i++) {
-            choosables.add(AllZone.getStack().peekAbility(i));
+        for (int i = 0; i < Singletons.getModel().getGameState().getStack().size(); i++) {
+            choosables.add(Singletons.getModel().getGameState().getStack().peekAbility(i));
         }
 
         for (int i = 0; i < choosables.size(); i++) {

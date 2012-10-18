@@ -19,10 +19,10 @@ package forge.card.replacement;
 
 import java.util.HashMap;
 
-import forge.AllZoneUtil;
 import forge.Card;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
+import forge.util.Expressions;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -72,7 +72,7 @@ public class ReplaceDamage extends ReplacementEffect {
                 intoperand = CardFactoryUtil.xCount(getHostCard(), getHostCard().getSVar(operand));
             }
 
-            if (!AllZoneUtil.compare((Integer) runParams.get("DamageAmount"), operator, intoperand)) {
+            if (!Expressions.compare((Integer) runParams.get("DamageAmount"), operator, intoperand)) {
                 return false;
             }
         }

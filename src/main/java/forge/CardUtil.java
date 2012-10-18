@@ -631,7 +631,7 @@ public final class CardUtil {
             for (Player p : Singletons.getModel().getGameState().getPlayers())
                 res.addAll(p.getZone(to).getCardsAddedThisTurn(from));
         } else {
-            res.addAll(AllZone.getStackZone().getCardsAddedThisTurn(from));
+            res.addAll(Singletons.getModel().getGameState().getStackZone().getCardsAddedThisTurn(from));
         }
 
         res = CardLists.getValidCards(res, valid, src.getController(), src);
@@ -651,7 +651,7 @@ public final class CardUtil {
     public static List<Card> getThisTurnCast(final String valid, final Card src) {
         List<Card> res = new ArrayList<Card>();
 
-        res.addAll(AllZone.getStack().getCardsCastThisTurn());
+        res.addAll(Singletons.getModel().getGameState().getStack().getCardsCastThisTurn());
 
         res = CardLists.getValidCards(res, valid, src.getController(), src);
 
@@ -670,7 +670,7 @@ public final class CardUtil {
     public static List<Card> getLastTurnCast(final String valid, final Card src) {
         List<Card> res = new ArrayList<Card>();
 
-        res.addAll(AllZone.getStack().getCardsCastLastTurn());
+        res.addAll(Singletons.getModel().getGameState().getStack().getCardsCastLastTurn());
 
         res = CardLists.getValidCards(res, valid, src.getController(), src);
 

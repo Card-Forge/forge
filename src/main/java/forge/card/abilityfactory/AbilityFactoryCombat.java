@@ -23,7 +23,6 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -249,7 +248,7 @@ public final class AbilityFactoryCombat {
         }
 
         // Only cast when Stack is empty, so Human uses spells/abilities first
-        if (AllZone.getStack().size() != 0) {
+        if (Singletons.getModel().getGameState().getStack().size() != 0) {
             return false;
         }
 
@@ -266,7 +265,7 @@ public final class AbilityFactoryCombat {
         }
 
         // Cast it if life is in danger
-        return CombatUtil.lifeInDanger(ai, AllZone.getCombat());
+        return CombatUtil.lifeInDanger(ai, Singletons.getModel().getGameState().getCombat());
     }
 
     /**
@@ -820,7 +819,7 @@ public final class AbilityFactoryCombat {
 
         for (final Card c : tgtCards) {
             if ((tgt == null) || c.canBeTargetedBy(sa)) {
-                AllZone.getCombat().removeFromCombat(c);
+                Singletons.getModel().getGameState().getCombat().removeFromCombat(c);
             }
         }
 

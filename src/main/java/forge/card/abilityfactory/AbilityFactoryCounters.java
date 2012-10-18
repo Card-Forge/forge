@@ -756,7 +756,7 @@ public class AbilityFactoryCounters {
                 if (max != -1) {
                     counterAmount = max - tgtCard.getCounters(Counters.valueOf(type));
                 }
-                final PlayerZone zone = AllZone.getZoneOf(tgtCard);
+                final PlayerZone zone = GameState.getZoneOf(tgtCard);
                 if (zone == null) {
                     // Do nothing, token disappeared
                 } else if (zone.is(ZoneType.Battlefield)) {
@@ -1177,7 +1177,7 @@ public class AbilityFactoryCounters {
         }
         for (final Card tgtCard : tgtCards) {
             if ((tgt == null) || tgtCard.canBeTargetedBy(sa)) {
-                final PlayerZone zone = AllZone.getZoneOf(tgtCard);
+                final PlayerZone zone = GameState.getZoneOf(tgtCard);
                 if (params.get("CounterNum").equals("All")) {
                     counterAmount = tgtCard.getCounters(Counters.valueOf(type));
                 }
@@ -1542,7 +1542,7 @@ public class AbilityFactoryCounters {
                 // counters being put on. They used
                 // to wait for another priority passing after proliferate
                 // finished.
-                AllZone.getStack().chooseOrderOfSimultaneousStackEntryAll();
+                Singletons.getModel().getGameState().getStack().chooseOrderOfSimultaneousStackEntryAll();
                 this.stop();
             }
 
@@ -2000,7 +2000,7 @@ public class AbilityFactoryCounters {
         }
 
         for (final Card tgtCard : cards) {
-            if (AllZone.getZoneOf(tgtCard).is(ZoneType.Battlefield)) {
+            if (GameState.getZoneOf(tgtCard).is(ZoneType.Battlefield)) {
                 tgtCard.addCounter(Counters.valueOf(type), counterAmount);
             } else {
                 // adding counters to something like re-suspend cards

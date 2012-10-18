@@ -31,8 +31,8 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import net.miginfocom.swing.MigLayout;
-import forge.AllZone;
 import forge.CardUtil;
+import forge.Singletons;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.game.zone.MagicStack;
 import forge.gui.ForgeAction;
@@ -121,7 +121,7 @@ public enum VStack implements IVDoc {
         // No need to update this unless it's showing
         if (!parentCell.getSelected().equals(this)) { return; }
 
-        final MagicStack stack = AllZone.getStack();
+        final MagicStack stack = Singletons.getModel().getGameState().getStack();
 
         int count = 1;
         JTextArea tar;
@@ -245,7 +245,7 @@ public enum VStack implements IVDoc {
 
                 @Override
                 public final void actionPerformed(final ActionEvent e) {
-                    AllZone.getTriggerHandler().setAlwaysAcceptTrigger(TriggerReactionMenu.this.workTrigID);
+                    Singletons.getModel().getGameState().getTriggerHandler().setAlwaysAcceptTrigger(TriggerReactionMenu.this.workTrigID);
                 }
             };
 
@@ -254,7 +254,7 @@ public enum VStack implements IVDoc {
 
                 @Override
                 public final void actionPerformed(final ActionEvent e) {
-                    AllZone.getTriggerHandler().setAlwaysDeclineTrigger(TriggerReactionMenu.this.workTrigID);
+                    Singletons.getModel().getGameState().getTriggerHandler().setAlwaysDeclineTrigger(TriggerReactionMenu.this.workTrigID);
                 }
             };
 
@@ -263,7 +263,7 @@ public enum VStack implements IVDoc {
 
                 @Override
                 public final void actionPerformed(final ActionEvent e) {
-                    AllZone.getTriggerHandler().setAlwaysAskTrigger(TriggerReactionMenu.this.workTrigID);
+                    Singletons.getModel().getGameState().getTriggerHandler().setAlwaysAskTrigger(TriggerReactionMenu.this.workTrigID);
                 }
             };
 
@@ -279,11 +279,11 @@ public enum VStack implements IVDoc {
         public void setTrigger(final int trigID) {
             this.workTrigID = trigID;
 
-            if (AllZone.getTriggerHandler().isAlwaysAccepted(trigID)) {
+            if (Singletons.getModel().getGameState().getTriggerHandler().isAlwaysAccepted(trigID)) {
                 ((JCheckBoxMenuItem) this.getComponent(0)).setState(true);
                 ((JCheckBoxMenuItem) this.getComponent(1)).setState(false);
                 ((JCheckBoxMenuItem) this.getComponent(2)).setState(false);
-            } else if (AllZone.getTriggerHandler().isAlwaysDeclined(trigID)) {
+            } else if (Singletons.getModel().getGameState().getTriggerHandler().isAlwaysDeclined(trigID)) {
                 ((JCheckBoxMenuItem) this.getComponent(0)).setState(false);
                 ((JCheckBoxMenuItem) this.getComponent(1)).setState(true);
                 ((JCheckBoxMenuItem) this.getComponent(2)).setState(false);

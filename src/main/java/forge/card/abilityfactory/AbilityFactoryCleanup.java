@@ -19,8 +19,8 @@ package forge.card.abilityfactory;
 
 import java.util.HashMap;
 
-import forge.AllZone;
 import forge.Card;
+import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
@@ -118,7 +118,7 @@ public final class AbilityFactoryCleanup {
             source.setSVar("ChosenY", "");
         }
         if (params.containsKey("ClearTriggered")) {
-            AllZone.getTriggerHandler().clearDelayedTrigger(source);
+            Singletons.getModel().getGameState().getTriggerHandler().clearDelayedTrigger(source);
         }
     }
 

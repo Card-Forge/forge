@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -304,7 +303,7 @@ public class AbilityFactoryPreventDamage {
                     params.get("Defined"), sa);
 
             // react to threats on the stack
-            if (AllZone.getStack().size() > 0) {
+            if (Singletons.getModel().getGameState().getStack().size() > 0) {
                 final ArrayList<Object> threatenedObjects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(), af);
                 for (final Object o : objects) {
                     if (threatenedObjects.contains(o)) {
@@ -323,8 +322,8 @@ public class AbilityFactoryPreventDamage {
                             // Don't need to worry about Combat Damage during AI's turn
                             final Player p = (Player) o;
                             if (!handler.isPlayerTurn(p)) {
-                                flag |= (p.isComputer() && ((CombatUtil.wouldLoseLife(ai, AllZone.getCombat()) && sa
-                                        .isAbility()) || CombatUtil.lifeInDanger(ai, AllZone.getCombat())));
+                                flag |= (p.isComputer() && ((CombatUtil.wouldLoseLife(ai, Singletons.getModel().getGameState().getCombat()) && sa
+                                        .isAbility()) || CombatUtil.lifeInDanger(ai, Singletons.getModel().getGameState().getCombat())));
                             }
                         }
                     }
@@ -338,7 +337,7 @@ public class AbilityFactoryPreventDamage {
         } // targeted
 
         // react to threats on the stack
-        else if (AllZone.getStack().size() > 0) {
+        else if (Singletons.getModel().getGameState().getStack().size() > 0) {
             tgt.resetTargets();
             // check stack for something on the stack will kill anything i
             // control
@@ -368,8 +367,8 @@ public class AbilityFactoryPreventDamage {
 
         } // Protect combatants
         else if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
-            if (sa.canTarget(ai) && CombatUtil.wouldLoseLife(ai, AllZone.getCombat())
-                    && (CombatUtil.lifeInDanger(ai, AllZone.getCombat()) || sa.isAbility())
+            if (sa.canTarget(ai) && CombatUtil.wouldLoseLife(ai, Singletons.getModel().getGameState().getCombat())
+                    && (CombatUtil.lifeInDanger(ai, Singletons.getModel().getGameState().getCombat()) || sa.isAbility())
                     && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(ai.getOpponent())) {
                 tgt.addTarget(ai);
                 chance = true;
@@ -741,7 +740,7 @@ public class AbilityFactoryPreventDamage {
             return false;
         }
 
-        if (AllZone.getStack().size() > 0) {
+        if (Singletons.getModel().getGameState().getStack().size() > 0) {
             // TODO check stack for something on the stack will kill anything i
             // control
 

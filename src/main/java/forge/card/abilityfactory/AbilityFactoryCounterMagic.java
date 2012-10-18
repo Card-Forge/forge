@@ -20,7 +20,6 @@ package forge.card.abilityfactory;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import forge.AllZone;
 import forge.Card;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -249,7 +248,7 @@ public class AbilityFactoryCounterMagic {
         boolean toReturn = true;
         final Cost abCost = af.getAbCost();
         final Card source = sa.getSourceCard();
-        if (AllZone.getStack().size() < 1) {
+        if (Singletons.getModel().getGameState().getStack().size() < 1) {
             return false;
         }
 
@@ -266,7 +265,7 @@ public class AbilityFactoryCounterMagic {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
 
-            final SpellAbility topSA = AllZone.getStack().peekAbility();
+            final SpellAbility topSA = Singletons.getModel().getGameState().getStack().peekAbility();
             if (!CardFactoryUtil.isCounterableBy(topSA.getSourceCard(), sa) || topSA.getActivatingPlayer().isComputer()) {
                 return false;
             }
@@ -344,13 +343,13 @@ public class AbilityFactoryCounterMagic {
      */
     private boolean counterDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         boolean toReturn = true;
-        if (AllZone.getStack().size() < 1) {
+        if (Singletons.getModel().getGameState().getStack().size() < 1) {
             return false;
         }
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
-            final SpellAbility topSA = AllZone.getStack().peekAbility();
+            final SpellAbility topSA = Singletons.getModel().getGameState().getStack().peekAbility();
             if (!CardFactoryUtil.isCounterableBy(topSA.getSourceCard(), sa) || topSA.getActivatingPlayer().isComputer()) {
                 return false;
             }
@@ -427,8 +426,8 @@ public class AbilityFactoryCounterMagic {
         final Target tgt = sa.getTarget();
         if (params.containsKey("AllType")) {
             sas = new ArrayList<SpellAbility>();
-            for (int i=0; i < AllZone.getStack().size(); i++) {
-                SpellAbility spell = AllZone.getStack().peekAbility(i);
+            for (int i=0; i < Singletons.getModel().getGameState().getStack().size(); i++) {
+                SpellAbility spell = Singletons.getModel().getGameState().getStack().peekAbility(i);
                 if (params.get("AllType").equals("Spell") && !spell.isSpell()) {
                     continue;
                 }
@@ -458,7 +457,7 @@ public class AbilityFactoryCounterMagic {
                 continue;
             }
 
-            final SpellAbilityStackInstance si = AllZone.getStack().getInstanceFromSpellAbility(tgtSA);
+            final SpellAbilityStackInstance si = Singletons.getModel().getGameState().getStack().getInstanceFromSpellAbility(tgtSA);
             if (si == null) {
                 continue;
             }
@@ -504,8 +503,8 @@ public class AbilityFactoryCounterMagic {
         final Target tgt = sa.getTarget();
         if (params.containsKey("AllType")) {
             sas = new ArrayList<SpellAbility>();
-            for (int i=0; i < AllZone.getStack().size(); i++) {
-                SpellAbility spell = AllZone.getStack().peekAbility(i);
+            for (int i=0; i < Singletons.getModel().getGameState().getStack().size(); i++) {
+                SpellAbility spell = Singletons.getModel().getGameState().getStack().peekAbility(i);
                 if (params.get("AllType").equals("Spell") && !spell.isSpell()) {
                     continue;
                 }
@@ -562,7 +561,7 @@ public class AbilityFactoryCounterMagic {
      *            object.
      */
     private void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si) {
-        AllZone.getStack().remove(si);
+        Singletons.getModel().getGameState().getStack().remove(si);
 
         if (tgtSA.isAbility()) {
             // For Ability-targeted counterspells - do not move it anywhere,

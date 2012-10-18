@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -35,6 +33,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
+import forge.util.Expressions;
 
 /**
  * <p>
@@ -188,7 +187,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         if (this.getZone() == null) {
             return true;
         }
-        PlayerZone cardZone = AllZone.getZoneOf(c);
+        PlayerZone cardZone = GameState.getZoneOf(c);
         Player activator = sa.getActivatingPlayer();
         if (cardZone == null || !cardZone.is(this.getZone())) {
             // If Card is not in the default activating zone, do some additional checks
@@ -370,7 +369,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
             final int left = list.size();
 
-            if (!AllZoneUtil.compare(left, this.getPresentCompare(), right)) {
+            if (!Expressions.compare(left, this.getPresentCompare(), right)) {
                 return false;
             }
         }
@@ -392,7 +391,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 right = Integer.parseInt(this.getLifeAmount().substring(2));
             }
 
-            if (!AllZoneUtil.compare(life, this.getLifeAmount(), right)) {
+            if (!Expressions.compare(life, this.getLifeAmount(), right)) {
                 return false;
             }
         }
@@ -413,7 +412,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             final int svarValue = AbilityFactory.calculateAmount(c, this.getsVarToCheck(), sa);
             final int operandValue = AbilityFactory.calculateAmount(c, this.getsVarOperand(), sa);
 
-            if (!AllZoneUtil.compare(svarValue, this.getsVarOperator(), operandValue)) {
+            if (!Expressions.compare(svarValue, this.getsVarOperator(), operandValue)) {
                 return false;
             }
 

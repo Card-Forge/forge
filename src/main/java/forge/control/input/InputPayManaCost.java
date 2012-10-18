@@ -81,7 +81,7 @@ public class InputPayManaCost extends InputMana {
                     this.stopSetNext(this.spell.getAfterPayMana());
                 } else {
                     this.manaCost = new ManaCost("0");
-                    AllZone.getStack().add(this.spell);
+                    Singletons.getModel().getGameState().getStack().add(this.spell);
                 }
             } else {
                 this.manaCost = Singletons.getModel().getGameAction().getSpellCostChange(sa, new ManaCost(this.originalManaCost));
@@ -126,7 +126,7 @@ public class InputPayManaCost extends InputMana {
                     this.stopSetNext(this.spell.getAfterPayMana());
                 } else {
                     this.manaCost = new ManaCost("0");
-                    AllZone.getStack().add(this.spell);
+                    Singletons.getModel().getGameState().getStack().add(this.spell);
                 }
             } else {
                 this.manaCost = manaCostToPay;
@@ -226,7 +226,7 @@ public class InputPayManaCost extends InputMana {
                 if (this.skipStack) {
                     this.spell.resolve();
                 } else {
-                    AllZone.getStack().add(this.spell);
+                    Singletons.getModel().getGameState().getStack().add(this.spell);
                 }
                 AllZone.getInputControl().resetInput();
             }
@@ -240,12 +240,12 @@ public class InputPayManaCost extends InputMana {
             // tapped for convoke)
 
             if (this.spell.getTappedForConvoke() != null) {
-                AllZone.getTriggerHandler().suppressMode(TriggerType.Untaps);
+                Singletons.getModel().getGameState().getTriggerHandler().suppressMode(TriggerType.Untaps);
                 for (final Card c : this.spell.getTappedForConvoke()) {
                     c.untap();
                     c.tap();
                 }
-                AllZone.getTriggerHandler().clearSuppression(TriggerType.Untaps);
+                Singletons.getModel().getGameState().getTriggerHandler().clearSuppression(TriggerType.Untaps);
                 this.spell.clearTappedForConvoke();
             }
         }
@@ -256,11 +256,11 @@ public class InputPayManaCost extends InputMana {
     public final void selectButtonCancel() {
         // If this is a spell with convoke, untap all creatures used for it.
         if (this.spell.getTappedForConvoke() != null) {
-            AllZone.getTriggerHandler().suppressMode(TriggerType.Untaps);
+            Singletons.getModel().getGameState().getTriggerHandler().suppressMode(TriggerType.Untaps);
             for (final Card c : this.spell.getTappedForConvoke()) {
                 c.untap();
             }
-            AllZone.getTriggerHandler().clearSuppression(TriggerType.Untaps);
+            Singletons.getModel().getGameState().getTriggerHandler().clearSuppression(TriggerType.Untaps);
             this.spell.clearTappedForConvoke();
         }
 

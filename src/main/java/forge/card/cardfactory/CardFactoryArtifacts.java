@@ -135,7 +135,7 @@ class CardFactoryArtifacts {
                     sb.append("choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling.");
                     ability.setStackDescription(sb.toString());
 
-                    AllZone.getStack().addSimultaneousStackEntry(ability);
+                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
                 }
             };
@@ -535,7 +535,7 @@ class CardFactoryArtifacts {
 
                         card.addSpellAbility(freeCast);
                         card.addExtrinsicKeyword("Play with the top card of your library revealed.");
-                        AllZone.getEndOfTurn().addUntil(new Command() {
+                        Singletons.getModel().getGameState().getEndOfTurn().addUntil(new Command() {
                             private static final long serialVersionUID = -2860753262177388046L;
 
                             @Override

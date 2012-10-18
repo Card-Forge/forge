@@ -17,7 +17,6 @@
  */
 package forge.control.input;
 
-import forge.AllZone;
 import forge.Card;
 import forge.Singletons;
 import forge.game.phase.CombatUtil;
@@ -74,7 +73,7 @@ public class InputCleanup extends Input {
     public final void selectCard(final Card card, final PlayerZone zone) {
         if (zone.is(ZoneType.Hand, Singletons.getControl().getPlayer())) {
             card.getController().discard(card, null);
-            if (AllZone.getStack().size() == 0) {
+            if (Singletons.getModel().getGameState().getStack().size() == 0) {
                 this.showMessage();
             }
         }

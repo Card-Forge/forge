@@ -125,7 +125,7 @@ class CardFactoryEnchantments {
                                 Singletons.getModel().getGameAction().exile(c2);
                                 this.once = true;
 
-                                AllZone.getStack().addAndUnfreeze(nightSoil);
+                                Singletons.getModel().getGameState().getStack().addAndUnfreeze(nightSoil);
 
                             }
                         }
@@ -193,7 +193,7 @@ class CardFactoryEnchantments {
                     sb.append(" loses life equal to his or her life total.");
                     loseAllLife.setStackDescription(sb.toString());
 
-                    AllZone.getStack().addSimultaneousStackEntry(loseAllLife);
+                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(loseAllLife);
 
                 }
             };
@@ -216,7 +216,7 @@ class CardFactoryEnchantments {
                     sb.append("loses the game.");
                     loseGame.setStackDescription(sb.toString());
 
-                    AllZone.getStack().addSimultaneousStackEntry(loseGame);
+                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(loseGame);
 
                 }
             };

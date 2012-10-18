@@ -200,7 +200,7 @@ public final class GameActionUtil {
                 ability.setStackDescription(sb.toString());
                 ability.setActivatingPlayer(controller);
 
-                AllZone.getStack().addSimultaneousStackEntry(ability);
+                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
             }
         };
@@ -319,7 +319,7 @@ public final class GameActionUtil {
                     sb.append(c).append(" - Ripple.");
                     ability.setStackDescription(sb.toString());
 
-                    AllZone.getStack().addSimultaneousStackEntry(ability);
+                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
                 }
             }
@@ -345,10 +345,10 @@ public final class GameActionUtil {
             final Command unpaid) {
         // temporarily disable the Resolve flag, so the user can payMana for the
         // resolving Ability
-        final boolean bResolving = AllZone.getStack().getResolving();
-        AllZone.getStack().setResolving(false);
+        final boolean bResolving = Singletons.getModel().getGameState().getStack().getResolving();
+        Singletons.getModel().getGameState().getStack().setResolving(false);
         AllZone.getInputControl().setInput(new InputPayManaCostAbility(message, manaCost, paid, unpaid));
-        AllZone.getStack().setResolving(bResolving);
+        Singletons.getModel().getGameState().getStack().setResolving(bResolving);
     }
 
     /**
@@ -449,30 +449,30 @@ public final class GameActionUtil {
 
         //the following costs need inputs and can't be combined at the moment
         if (costPart instanceof CostSacrifice) {
-            final boolean bResolving = AllZone.getStack().getResolving();
-            AllZone.getStack().setResolving(false);
+            final boolean bResolving = Singletons.getModel().getGameState().getStack().getResolving();
+            Singletons.getModel().getGameState().getStack().setResolving(false);
             AllZone.getInputControl().setInput(new InputPaySacCost((CostSacrifice) costPart, ability, paid, unpaid));
-            AllZone.getStack().setResolving(bResolving);
+            Singletons.getModel().getGameState().getStack().setResolving(bResolving);
         }
         else if (costPart instanceof CostReturn) {
-            final boolean bResolving = AllZone.getStack().getResolving();
-            AllZone.getStack().setResolving(false);
+            final boolean bResolving = Singletons.getModel().getGameState().getStack().getResolving();
+            Singletons.getModel().getGameState().getStack().setResolving(false);
             AllZone.getInputControl().setInput(new InputPayReturnCost((CostReturn) costPart, ability, paid, unpaid));
-            AllZone.getStack().setResolving(bResolving);
+            Singletons.getModel().getGameState().getStack().setResolving(bResolving);
         }
         else if (costPart instanceof CostDiscard) {
-            final boolean bResolving = AllZone.getStack().getResolving();
-            AllZone.getStack().setResolving(false);
+            final boolean bResolving = Singletons.getModel().getGameState().getStack().getResolving();
+            Singletons.getModel().getGameState().getStack().setResolving(false);
             AllZone.getInputControl().setInput(new InputPayDiscardCost((CostDiscard) costPart, ability, paid, unpaid));
-            AllZone.getStack().setResolving(bResolving);
+            Singletons.getModel().getGameState().getStack().setResolving(bResolving);
         }
         else if (costPart instanceof CostMana) {
             // temporarily disable the Resolve flag, so the user can payMana for the
             // resolving Ability
-            final boolean bResolving = AllZone.getStack().getResolving();
-            AllZone.getStack().setResolving(false);
+            final boolean bResolving = Singletons.getModel().getGameState().getStack().getResolving();
+            Singletons.getModel().getGameState().getStack().setResolving(false);
             AllZone.getInputControl().setInput(new InputPayManaCostAbility(source + "\r\n", ability.getManaCost(), paid, unpaid));
-            AllZone.getStack().setResolving(bResolving);
+            Singletons.getModel().getGameState().getStack().setResolving(bResolving);
         }
     }
 
@@ -634,12 +634,12 @@ public final class GameActionUtil {
                     .getAmountOfKeyword("When CARDNAME is dealt damage, destroy it. It can't be regenerated.");
 
             for (int i = 0; i < amount; i++) {
-                AllZone.getStack().addSimultaneousStackEntry(ability2);
+                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability2);
             }
             final int amount2 = affected.getAmountOfKeyword("When CARDNAME is dealt damage, destroy it.");
 
             for (int i = 0; i < amount2; i++) {
-                AllZone.getStack().addSimultaneousStackEntry(ability);
+                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
             }
         }
     }
@@ -686,7 +686,7 @@ public final class GameActionUtil {
                 }
                 ability2.setStackDescription(sb.toString());
 
-                AllZone.getStack().addSimultaneousStackEntry(ability2);
+                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability2);
 
             }
         }
@@ -733,7 +733,7 @@ public final class GameActionUtil {
             sb.append(" sacrifices ").append(damage).append(" nontoken permanents.");
             ability.setStackDescription(sb.toString());
 
-            AllZone.getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
         }
         
@@ -792,7 +792,7 @@ public final class GameActionUtil {
 
             for (int i = 0; i < keywords.size(); i++) {
                 if (keywords.get(i).startsWith("Poisonous")) {
-                    AllZone.getStack().addSimultaneousStackEntry(ability);
+                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
                 }
 
             }
@@ -830,7 +830,7 @@ public final class GameActionUtil {
                 doubleLife.setStackDescription(aura.getName() + " - " + enchanted.getController()
                         + " doubles his or her life total.");
 
-                AllZone.getStack().addSimultaneousStackEntry(doubleLife);
+                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(doubleLife);
 
             }
         }
@@ -911,7 +911,7 @@ public final class GameActionUtil {
             sb.append("If two or more of those cards have the same name, repeat this process.");
             ability.setStackDescription(sb.toString());
 
-            AllZone.getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
         }
     }

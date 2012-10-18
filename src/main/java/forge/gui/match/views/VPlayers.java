@@ -26,7 +26,6 @@ import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
-import forge.AllZone;
 import forge.Card;
 
 import forge.Singletons;
@@ -180,7 +179,7 @@ public enum VPlayers implements IVDoc {
         // No need to update if this panel isn't showing
         if (!parentCell.getSelected().equals(this)) { return; }
 
-        stormLabel.setText("Storm count: " + AllZone.getStack().getCardsCastThisTurn().size());
+        stormLabel.setText("Storm count: " + Singletons.getModel().getGameState().getStack().getCardsCastThisTurn().size());
     }
 
     //========= Custom class handling

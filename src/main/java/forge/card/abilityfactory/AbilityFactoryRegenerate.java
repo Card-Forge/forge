@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -294,7 +293,7 @@ public class AbilityFactoryRegenerate {
             // them
             final ArrayList<Card> list = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
 
-            if (AllZone.getStack().size() > 0) {
+            if (Singletons.getModel().getGameState().getStack().size() > 0) {
                 final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(),af);
 
                 for (final Card c : list) {
@@ -329,7 +328,7 @@ public class AbilityFactoryRegenerate {
                 return false;
             }
 
-            if (AllZone.getStack().size() > 0) {
+            if (Singletons.getModel().getGameState().getStack().size() > 0) {
                 // check stack for something on the stack will kill anything i
                 // control
                 final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(), af);
@@ -514,7 +513,7 @@ public class AbilityFactoryRegenerate {
 
             if (GameState.isCardInPlay(tgtC) && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
                 tgtC.addShield();
-                AllZone.getEndOfTurn().addUntil(untilEOT);
+                Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
             }
         }
     } // regenerateResolve
@@ -749,7 +748,7 @@ public class AbilityFactoryRegenerate {
         }
 
         int numSaved = 0;
-        if (AllZone.getStack().size() > 0) {
+        if (Singletons.getModel().getGameState().getStack().size() > 0) {
             final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(),af);
 
             for (final Card c : list) {
@@ -844,7 +843,7 @@ public class AbilityFactoryRegenerate {
 
             if (GameState.isCardInPlay(c)) {
                 c.addShield();
-                AllZone.getEndOfTurn().addUntil(untilEOT);
+                Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
             }
         }
     } // regenerateAllResolve

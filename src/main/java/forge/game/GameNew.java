@@ -103,8 +103,8 @@ public class GameNew {
         Card.resetUniqueNumber();
         // need this code here, otherwise observables fail
         forge.card.trigger.Trigger.resetIDs();
-        AllZone.getTriggerHandler().clearTriggerSettings();
-        AllZone.getTriggerHandler().clearDelayedTrigger();
+        Singletons.getModel().getGameState().getTriggerHandler().clearTriggerSettings();
+        Singletons.getModel().getGameState().getTriggerHandler().clearDelayedTrigger();
 
         // friendliness
         final Map<Player, List<String>> removedAnteCards = new HashMap<Player, List<String>>();

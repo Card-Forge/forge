@@ -714,7 +714,7 @@ public class CardFactorySorceries {
                         thePlayer.addMaxLandsToPlay(-3);
                     }
                 };
-                AllZone.getEndOfTurn().addUntil(untilEOT);
+                Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
             }
         };
 
@@ -748,7 +748,7 @@ public class CardFactorySorceries {
                         thePlayer.addMaxLandsToPlay(-1);
                     }
                 };
-                AllZone.getEndOfTurn().addUntil(untilEOT);
+                Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
 
                 thePlayer.drawCard();
             }
@@ -1004,7 +1004,7 @@ public class CardFactorySorceries {
                                         }
                                     }
                                 };
-                                AllZone.getEndOfTurn().addUntil(untilEOT);
+                                Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
                             }
                         }
                     }
@@ -1027,7 +1027,7 @@ public class CardFactorySorceries {
                                     }
                                 }
                             };
-                            AllZone.getEndOfTurn().addUntil(untilEOT);
+                            Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
                         }
                     }
                 } // end ab[3]

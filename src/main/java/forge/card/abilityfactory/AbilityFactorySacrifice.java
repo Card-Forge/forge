@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -496,7 +495,7 @@ public class AbilityFactorySacrifice {
         final boolean remSacrificed = params.containsKey("RememberSacrificed");
 
         if (valid.equals("Self")) {
-            if (AllZone.getZoneOf(card).is(ZoneType.Battlefield)) {
+            if (GameState.getZoneOf(card).is(ZoneType.Battlefield)) {
                 if (Singletons.getModel().getGameAction().sacrifice(card, sa) && remSacrificed) {
                     card.addRemembered(card);
                 }

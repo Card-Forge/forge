@@ -12951,6 +12951,7 @@ src/main/java/forge/util/Base64Coder.java svneol=native#text/plain
 src/main/java/forge/util/BinaryUtil.java -text
 src/main/java/forge/util/ComparableOp.java -text
 src/main/java/forge/util/CopyFiles.java svneol=native#text/plain
+src/main/java/forge/util/Expressions.java -text
 src/main/java/forge/util/FileFinder.java svneol=native#text/plain
 src/main/java/forge/util/FileSection.java -text
 src/main/java/forge/util/FileSectionManual.java -text

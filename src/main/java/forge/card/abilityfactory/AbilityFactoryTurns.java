@@ -20,7 +20,6 @@ package forge.card.abilityfactory;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import forge.AllZone;
 import forge.Card;
 import forge.Singletons;
 import forge.card.spellability.AbilityActivated;
@@ -503,13 +502,13 @@ public class AbilityFactoryTurns {
         // 1) All spells and abilities on the stack are exiled. This includes
         // Time Stop, though it will continue to resolve. It also includes
         // spells and abilities that can't be countered.
-        for (final Card c : AllZone.getStackZone().getCards()) {
+        for (final Card c : Singletons.getModel().getGameState().getStackZone().getCards()) {
             Singletons.getModel().getGameAction().exile(c);
         }
-        AllZone.getStack().getStack().clear();
+        Singletons.getModel().getGameState().getStack().getStack().clear();
 
         // 2) All attacking and blocking creatures are removed from combat.
-        AllZone.getCombat().reset();
+        Singletons.getModel().getGameState().getCombat().reset();
 
         // 3) State-based actions are checked. No player gets priority, and no
         // triggered abilities are put onto the stack.
@@ -520,7 +519,7 @@ public class AbilityFactoryTurns {
         Singletons.getModel().getGameState().getPhaseHandler().setPhaseState(PhaseType.CLEANUP);
 
         // Update observers
-        AllZone.getStack().updateObservers();
+        Singletons.getModel().getGameState().getStack().updateObservers();
         for (Player p : Singletons.getModel().getGameState().getPlayers()) {
             p.updateObservers();
             p.updateLabelObservers();

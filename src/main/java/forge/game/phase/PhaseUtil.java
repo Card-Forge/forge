@@ -90,9 +90,9 @@ public class PhaseUtil {
         Singletons.getModel().getGameState().notifyNextTurn();
         CMessage.SINGLETON_INSTANCE.updateGameInfo(Singletons.getModel().getMatch());
 
-        AllZone.getCombat().reset();
-        AllZone.getCombat().setAttackingPlayer(turn);
-        AllZone.getCombat().setDefendingPlayer(turn.getOpponent());
+        Singletons.getModel().getGameState().getCombat().reset();
+        Singletons.getModel().getGameState().getCombat().setAttackingPlayer(turn);
+        Singletons.getModel().getGameState().getCombat().setDefendingPlayer(turn.getOpponent());
 
         // Tokens starting game in play now actually suffer from Sum. Sickness again
         final List<Card> list = turn.getCardsIncludePhasingIn(ZoneType.Battlefield);
@@ -220,7 +220,7 @@ public class PhaseUtil {
      * </p>
      */
     public static void verifyCombat() {
-        AllZone.getCombat().verifyCreaturesInPlay();
+        Singletons.getModel().getGameState().getCombat().verifyCreaturesInPlay();
     }
 
     /**
@@ -290,16 +290,16 @@ public class PhaseUtil {
         PhaseUtil.verifyCombat();
 
         // Handles removing cards like Mogg Flunkies from combat if group attack didn't occur
-        final List<Card> filterList = AllZone.getCombat().getAttackerList();
+        final List<Card> filterList = Singletons.getModel().getGameState().getCombat().getAttackerList();
         for (Card c : filterList) {
             if (c.hasKeyword("CARDNAME can't attack or block alone.") && c.isAttacking()) {
-                if (AllZone.getCombat().getAttackers().size() < 2) {
-                    AllZone.getCombat().removeFromCombat(c);
+                if (Singletons.getModel().getGameState().getCombat().getAttackers().size() < 2) {
+                    Singletons.getModel().getGameState().getCombat().removeFromCombat(c);
                 }
             }
         }
 
-        final List<Card> list = AllZone.getCombat().getAttackerList();
+        final List<Card> list = Singletons.getModel().getGameState().getCombat().getAttackerList();
 
         // TODO move propaganda to happen as the Attacker is Declared
         // Remove illegal Propaganda attacks first only for attacking the Player
@@ -318,12 +318,12 @@ public class PhaseUtil {
      * </p>
      */
     public static void handleAttackingTriggers() {
-        final List<Card> list = AllZone.getCombat().getAttackerList();
-        AllZone.getStack().freezeStack();
+        final List<Card> list = Singletons.getModel().getGameState().getCombat().getAttackerList();
+        Singletons.getModel().getGameState().getStack().freezeStack();
         // Then run other Attacker bonuses
         // check for exalted:
         if (list.size() == 1) {
-            final Player attackingPlayer = AllZone.getCombat().getAttackingPlayer();
+            final Player attackingPlayer = Singletons.getModel().getGameState().getCombat().getAttackingPlayer();
             int exaltedMagnitude = 0;
             for (Card card : attackingPlayer.getCardsIn(ZoneType.Battlefield)) {
                 exaltedMagnitude += card.getKeywordAmount("Exalted");
@@ -340,13 +340,13 @@ public class PhaseUtil {
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Attackers", list);
-        runParams.put("AttackingPlayer", AllZone.getCombat().getAttackingPlayer());
-        AllZone.getTriggerHandler().runTrigger(TriggerType.AttackersDeclared, runParams);
+        runParams.put("AttackingPlayer", Singletons.getModel().getGameState().getCombat().getAttackingPlayer());
+        Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.AttackersDeclared, runParams);
 
         for (final Card c : list) {
             CombatUtil.checkDeclareAttackers(c);
         }
-        AllZone.getStack().unfreezeStack();
+        Singletons.getModel().getGameState().getStack().unfreezeStack();
     }
 
     /**
@@ -358,21 +358,21 @@ public class PhaseUtil {
         PhaseUtil.verifyCombat();
 
         // Handles removing cards like Mogg Flunkies from combat if group block didn't occur
-        final List<Card> filterList = AllZone.getCombat().getAllBlockers();
+        final List<Card> filterList = Singletons.getModel().getGameState().getCombat().getAllBlockers();
         for (Card c : filterList) {
             if (c.hasKeyword("CARDNAME can't attack or block alone.") && c.isBlocking()) {
-                if (AllZone.getCombat().getAllBlockers().size() < 2) {
-                    AllZone.getCombat().undoBlockingAssignment(c);
+                if (Singletons.getModel().getGameState().getCombat().getAllBlockers().size() < 2) {
+                    Singletons.getModel().getGameState().getCombat().undoBlockingAssignment(c);
                 }
             }
         }
 
-        AllZone.getStack().freezeStack();
+        Singletons.getModel().getGameState().getStack().freezeStack();
 
-        AllZone.getCombat().setUnblocked();
+        Singletons.getModel().getGameState().getCombat().setUnblocked();
 
         List<Card> list = new ArrayList<Card>();
-        list.addAll(AllZone.getCombat().getAllBlockers());
+        list.addAll(Singletons.getModel().getGameState().getCombat().getAllBlockers());
 
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
@@ -381,18 +381,18 @@ public class PhaseUtil {
             }
         });
 
-        final List<Card> attList = AllZone.getCombat().getAttackerList();
+        final List<Card> attList = Singletons.getModel().getGameState().getCombat().getAttackerList();
 
         CombatUtil.checkDeclareBlockers(list);
 
         for (final Card a : attList) {
-            final List<Card> blockList = AllZone.getCombat().getBlockers(a);
+            final List<Card> blockList = Singletons.getModel().getGameState().getCombat().getBlockers(a);
             for (final Card b : blockList) {
                 CombatUtil.checkBlockedAttackers(a, b);
             }
         }
 
-        AllZone.getStack().unfreezeStack();
+        Singletons.getModel().getGameState().getStack().unfreezeStack();
 
         AllZone.getGameLog().add("Combat", CombatUtil.getCombatBlockForLog(), 1);
     }

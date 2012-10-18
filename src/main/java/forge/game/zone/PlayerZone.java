@@ -25,11 +25,11 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.util.MyObservable;
 
@@ -83,7 +83,7 @@ public class PlayerZone extends MyObservable implements IPlayerZone, Observer, j
         // don't want to log those.
         if (!c.isImmutable()) {
             this.cardsAddedThisTurn.add(c);
-            final PlayerZone zone = AllZone.getZoneOf(c);
+            final PlayerZone zone = GameState.getZoneOf(c);
             if (zone != null) {
                 this.cardsAddedThisTurnSource.add(zone.getZoneType());
             } else {
@@ -112,9 +112,9 @@ public class PlayerZone extends MyObservable implements IPlayerZone, Observer, j
         c.setTurnInZone(Singletons.getModel().getGameState().getPhaseHandler().getTurn());
 
         if (!this.is(ZoneType.Battlefield) && c.isTapped()) {
-            AllZone.getTriggerHandler().suppressMode(TriggerType.Untaps);
+            Singletons.getModel().getGameState().getTriggerHandler().suppressMode(TriggerType.Untaps);
             c.untap();
-            AllZone.getTriggerHandler().clearSuppression(TriggerType.Untaps);
+            Singletons.getModel().getGameState().getTriggerHandler().clearSuppression(TriggerType.Untaps);
         }
 
         this.cardList.add(c);
@@ -163,7 +163,7 @@ public class PlayerZone extends MyObservable implements IPlayerZone, Observer, j
         // don't want to log those.
         if (!c.isImmutable()) {
             this.cardsAddedThisTurn.add(c);
-            final PlayerZone zone = AllZone.getZoneOf(c);
+            final PlayerZone zone = GameState.getZoneOf(c);
             if (zone != null) {
                 this.cardsAddedThisTurnSource.add(zone.getZoneType());
             } else {
@@ -172,9 +172,9 @@ public class PlayerZone extends MyObservable implements IPlayerZone, Observer, j
         }
 
         if (!this.is(ZoneType.Battlefield) && c.isTapped()) {
-            AllZone.getTriggerHandler().suppressMode(TriggerType.Untaps);
+            Singletons.getModel().getGameState().getTriggerHandler().suppressMode(TriggerType.Untaps);
             c.untap();
-            AllZone.getTriggerHandler().clearSuppression(TriggerType.Untaps);
+            Singletons.getModel().getGameState().getTriggerHandler().clearSuppression(TriggerType.Untaps);
         }
 
         this.cardList.add(index, c);

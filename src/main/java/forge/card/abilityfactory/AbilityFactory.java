@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -2189,12 +2188,12 @@ public class AbilityFactory {
                 }
             }
         } else if (defined.equals("AttackingPlayer")) {
-            final Player p = AllZone.getCombat().getAttackingPlayer();
+            final Player p = Singletons.getModel().getGameState().getCombat().getAttackingPlayer();
             if (!players.contains(p)) {
                 players.add(p);
             }
         } else if (defined.equals("DefendingPlayer")) {
-            final Player p = AllZone.getCombat().getDefendingPlayer();
+            final Player p = Singletons.getModel().getGameState().getCombat().getDefendingPlayer();
             if (!players.contains(p)) {
                 players.add(p);
             }
@@ -2428,12 +2427,12 @@ public class AbilityFactory {
      */
     public static ArrayList<Object> predictThreatenedObjects(final Player aiPlayer, final AbilityFactory saviourAf) {
         final ArrayList<Object> objects = new ArrayList<Object>();
-        if (AllZone.getStack().size() == 0) {
+        if (Singletons.getModel().getGameState().getStack().size() == 0) {
             return objects;
         }
 
         // check stack for something that will kill this
-        final SpellAbility topStack = AllZone.getStack().peekAbility();
+        final SpellAbility topStack = Singletons.getModel().getGameState().getStack().peekAbility();
         objects.addAll(AbilityFactory.predictThreatenedObjects(aiPlayer, saviourAf, topStack));
 
         return objects;
@@ -2908,7 +2907,7 @@ public class AbilityFactory {
             // every resolving spellAbility will end here
             if (usedStack) {
                 SpellAbility root = sa.getRootSpellAbility();
-                AllZone.getStack().finishResolving(root, false);
+                Singletons.getModel().getGameState().getStack().finishResolving(root, false);
             }
             return;
         }

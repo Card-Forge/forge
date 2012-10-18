@@ -20,10 +20,10 @@ package forge.card.staticability;
 import java.util.HashMap;
 import java.util.List;
 
-import forge.AllZone;
 import forge.Card;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -64,7 +64,7 @@ public class StaticAbilityCantBeCast {
 
         if (params.containsKey("Origin")) {
             List<ZoneType> src = ZoneType.listValueOf(params.get("Origin"));
-            if (!src.contains(AllZone.getZoneOf(card).getZoneType())) {
+            if (!src.contains(GameState.getZoneOf(card).getZoneType())) {
                 return false;
             }
         }

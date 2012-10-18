@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -33,6 +32,7 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.util.Expressions;
 
 /**
  * <p>
@@ -274,7 +274,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
             final int left = list.size();
 
-            if (!AllZoneUtil.compare(left, this.getPresentCompare(), right)) {
+            if (!Expressions.compare(left, this.getPresentCompare(), right)) {
                 return false;
             }
         }
@@ -296,7 +296,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
                 right = Integer.parseInt(this.getLifeAmount().substring(2));
             }
 
-            if (!AllZoneUtil.compare(life, this.getLifeAmount(), right)) {
+            if (!Expressions.compare(life, this.getLifeAmount(), right)) {
                 return false;
             }
         }
@@ -311,7 +311,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             final int svarValue = AbilityFactory.calculateAmount(sa.getSourceCard(), this.getsVarToCheck(), sa);
             final int operandValue = AbilityFactory.calculateAmount(sa.getSourceCard(), this.getsVarOperand(), sa);
 
-            if (!AllZoneUtil.compare(svarValue, this.getsVarOperator(), operandValue)) {
+            if (!Expressions.compare(svarValue, this.getsVarOperator(), operandValue)) {
                 return false;
             }
 

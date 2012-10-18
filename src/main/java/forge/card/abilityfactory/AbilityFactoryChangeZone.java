@@ -26,7 +26,6 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
-import forge.AllZone;
 import forge.Card;
 import forge.CardCharacteristicName;
 
@@ -523,7 +522,7 @@ public final class AbilityFactoryChangeZone {
                     return false;
                 }
                 List<Card> attackers = new ArrayList<Card>();
-                attackers.addAll(AllZone.getCombat().getUnblockedAttackers());
+                attackers.addAll(Singletons.getModel().getGameState().getCombat().getUnblockedAttackers());
                 boolean lowerCMC = false;
                 for (Card attacker : attackers) {
                     if (attacker.getCMC() < source.getCMC()) {
@@ -1066,7 +1065,7 @@ public final class AbilityFactoryChangeZone {
                     }
 
                     if (params.containsKey("Attacking")) {
-                        AllZone.getCombat().addAttacker(c);
+                        Singletons.getModel().getGameState().getCombat().addAttacker(c);
                     }
 
                     movedCard = Singletons.getModel().getGameAction().moveTo(c.getController().getZone(destination), c);
@@ -1326,7 +1325,7 @@ public final class AbilityFactoryChangeZone {
                 }
 
                 if (params.containsKey("Attacking")) {
-                    AllZone.getCombat().addAttacker(c);
+                    Singletons.getModel().getGameState().getCombat().addAttacker(c);
                 }
                 // Auras without Candidates stay in their current location
                 if (c.isAura()) {
@@ -1558,7 +1557,7 @@ public final class AbilityFactoryChangeZone {
             // in general this should only be used to protect from Imminent Harm
             // (dying or losing control of)
             if (origin.equals(ZoneType.Battlefield)) {
-                if (AllZone.getStack().size() == 0) {
+                if (Singletons.getModel().getGameState().getStack().size() == 0) {
                     return false;
                 }
 
@@ -1700,7 +1699,7 @@ public final class AbilityFactoryChangeZone {
 
                 // check stack for something on the stack that will kill
                 // anything i control
-                if (AllZone.getStack().size() > 0) {
+                if (Singletons.getModel().getGameState().getStack().size() > 0) {
                     final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(ai, af);
 
                     final List<Card> threatenedTargets = new ArrayList<Card>();
@@ -2207,7 +2206,7 @@ public final class AbilityFactoryChangeZone {
                 continue;
             }
 
-            final SpellAbilityStackInstance si = AllZone.getStack().getInstanceFromSpellAbility(tgtSA);
+            final SpellAbilityStackInstance si = Singletons.getModel().getGameState().getStack().getInstanceFromSpellAbility(tgtSA);
             if (si == null) {
                 continue;
             }
@@ -2236,7 +2235,7 @@ public final class AbilityFactoryChangeZone {
                         && !GameActionUtil.showYesNoDialog(hostCard, sb.toString())) {
                     continue;
                 }
-                final PlayerZone originZone = AllZone.getZoneOf(tgtC);
+                final PlayerZone originZone = GameState.getZoneOf(tgtC);
 
                 // if Target isn't in the expected Zone, continue
 
@@ -2296,8 +2295,8 @@ public final class AbilityFactoryChangeZone {
                                 .moveTo(tgtC.getController().getZone(destination), tgtC);
 
                         if (params.containsKey("Ninjutsu") || params.containsKey("Attacking")) {
-                            AllZone.getCombat().addAttacker(tgtC);
-                            AllZone.getCombat().addUnblockedAttacker(tgtC);
+                            Singletons.getModel().getGameState().getCombat().addAttacker(tgtC);
+                            Singletons.getModel().getGameState().getCombat().addUnblockedAttacker(tgtC);
                         }
                         if (params.containsKey("Tapped") || params.containsKey("Ninjutsu")) {
                             tgtC.setTapped(true);
@@ -2309,8 +2308,8 @@ public final class AbilityFactoryChangeZone {
                             ArrayList<SpellAbility> spells = tgtC.getSpellAbilities();
                             for (SpellAbility spell : spells) {
                                 if (tgtC.isInZone(ZoneType.Exile)) {
-                                    final SpellAbilityStackInstance si = AllZone.getStack().getInstanceFromSpellAbility(spell);
-                                    AllZone.getStack().remove(si);
+                                    final SpellAbilityStackInstance si = Singletons.getModel().getGameState().getStack().getInstanceFromSpellAbility(spell);
+                                    Singletons.getModel().getGameState().getStack().remove(si);
                                 }
                             }
                         }
@@ -2369,7 +2368,7 @@ public final class AbilityFactoryChangeZone {
      *            object.
      */
     private static void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si) {
-        AllZone.getStack().remove(si);
+        Singletons.getModel().getGameState().getStack().remove(si);
 
         final AbilityFactory af = srcSA.getAbilityFactory();
         final HashMap<String, String> params = af.getMapParams();

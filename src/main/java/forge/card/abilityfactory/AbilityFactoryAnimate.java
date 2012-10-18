@@ -381,7 +381,7 @@ public final class AbilityFactoryAnimate {
         // don't use instant speed animate abilities outside humans
         // Combat_Declare_Attackers_InstantAbility step
         if ((!Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) 
-                || (AllZone.getCombat().getAttackers().isEmpty())) 
+                || (Singletons.getModel().getGameState().getCombat().getAttackers().isEmpty())) 
                 && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(opponent)) {
             return false;
         }
@@ -769,7 +769,7 @@ public final class AbilityFactoryAnimate {
 
             if (!permanent) {
                 if (params.containsKey("UntilEndOfCombat")) {
-                    AllZone.getEndOfCombat().addUntil(unanimate);
+                    Singletons.getModel().getGameState().getEndOfCombat().addUntil(unanimate);
                 } else if (params.containsKey("UntilHostLeavesPlay")) {
                     host.addLeavesPlayCommand(unanimate);
                 } else if (params.containsKey("UntilYourNextUpkeep")) {
@@ -779,7 +779,7 @@ public final class AbilityFactoryAnimate {
                 } else if (params.containsKey("UntilYourNextTurn")) {
                     Singletons.getModel().getGameState().getCleanup().addUntilYourNextTurn(host.getController(), unanimate);
                 } else {
-                    AllZone.getEndOfTurn().addUntil(unanimate);
+                    Singletons.getModel().getGameState().getEndOfTurn().addUntil(unanimate);
                 }
             }
         }
@@ -1406,9 +1406,9 @@ public final class AbilityFactoryAnimate {
 
             if (!permanent) {
                 if (params.containsKey("UntilEndOfCombat")) {
-                    AllZone.getEndOfCombat().addUntil(unanimate);
+                    Singletons.getModel().getGameState().getEndOfCombat().addUntil(unanimate);
                 } else {
-                    AllZone.getEndOfTurn().addUntil(unanimate);
+                    Singletons.getModel().getGameState().getEndOfTurn().addUntil(unanimate);
                 }
             }
         }

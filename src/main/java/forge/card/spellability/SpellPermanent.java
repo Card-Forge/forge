@@ -123,7 +123,7 @@ public class SpellPermanent extends Spell {
                     final HashMap<String, Object> runParams = new HashMap<String, Object>();
                     runParams.put("Card", source);
                     runParams.put("Championed", source.getChampionedCard());
-                    AllZone.getTriggerHandler().runTrigger(TriggerType.Championed, runParams);
+                    Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.Championed, runParams);
                 } else {
                     Singletons.getModel().getGameAction().sacrifice(this.getSourceCard(), null);
                 }
@@ -142,7 +142,7 @@ public class SpellPermanent extends Spell {
             sb.append(SpellPermanent.this.getSourceCard()).append(
                     " - When CARDNAME enters the battlefield, sacrifice it unless you exile a creature you control.");
             SpellPermanent.this.championAbilityComes.setStackDescription(sb.toString());
-            AllZone.getStack().addSimultaneousStackEntry(SpellPermanent.this.championAbilityComes);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(SpellPermanent.this.championAbilityComes);
         } // execute()
     }; // championCommandComes
 
@@ -169,7 +169,7 @@ public class SpellPermanent extends Spell {
                     " - When CARDNAME leaves the battlefield, exiled card returns to the battlefield.");
             ability.setStackDescription(sb.toString());
 
-            AllZone.getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
         } // execute()
     }; // championCommandLeavesPlay
 

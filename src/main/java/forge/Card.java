@@ -58,6 +58,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.item.CardDb;
+import forge.util.Expressions;
 import forge.util.MyRandom;
 
 /**
@@ -263,7 +264,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 || (cur == CardCharacteristicName.Transformed && state == CardCharacteristicName.Original)) {
             HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Transformer", this);
-            AllZone.getTriggerHandler().runTrigger(TriggerType.Transformed, runParams);
+            Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.Transformed, runParams);
         }
 
         return true;
@@ -1266,7 +1267,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         runParams.put("Card", this);
         runParams.put("CounterType", counterName);
         for (int i = 0; i < n; i++) {
-            AllZone.getTriggerHandler().runTrigger(TriggerType.CounterAdded, runParams);
+            Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.CounterAdded, runParams);
         }
 
         this.updateObservers();
@@ -1299,7 +1300,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         runParams.put("Card", this);
         runParams.put("CounterType", counterName);
         for (int i = 0; i < (multiplier * n); i++) {
-            AllZone.getTriggerHandler().runTrigger(TriggerType.CounterAdded, runParams);
+            Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.CounterAdded, runParams);
         }
 
         this.updateObservers();
@@ -1328,7 +1329,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             runParams.put("Card", this);
             runParams.put("CounterType", counterName);
             for (int i = 0; i < n; i++) {
-                AllZone.getTriggerHandler().runTrigger(TriggerType.CounterRemoved, runParams);
+                Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.CounterRemoved, runParams);
             }
 
             if (counterName.equals(Counters.TIME) && (aux == 0)) {
@@ -4032,7 +4033,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         final Map<String, Object> runParams = new TreeMap<String, Object>();
         runParams.put("Equipment", this);
         runParams.put("Card", c);
-        AllZone.getTriggerHandler().runTrigger(TriggerType.Unequip, runParams);
+        Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.Unequip, runParams);
     }
 
     /**
@@ -5038,7 +5039,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             // Run triggers
             final Map<String, Object> runParams = new TreeMap<String, Object>();
             runParams.put("Card", this);
-            AllZone.getTriggerHandler().runTrigger(TriggerType.Taps, runParams);
+            Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.Taps, runParams);
         }
         this.setTapped(true);
     }
@@ -5053,7 +5054,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             // Run triggers
             final Map<String, Object> runParams = new TreeMap<String, Object>();
             runParams.put("Card", this);
-            AllZone.getTriggerHandler().runTrigger(TriggerType.Untaps, runParams);
+            Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.Untaps, runParams);
 
         }
 
@@ -6078,9 +6079,9 @@ public class Card extends GameEntity implements Comparable<Card> {
 
             // Suppressed Exiling is as close as we can get to
             // "ceasing to exist"
-            AllZone.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+            Singletons.getModel().getGameState().getTriggerHandler().suppressMode(TriggerType.ChangesZone);
             Singletons.getModel().getGameAction().exile(this);
-            AllZone.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+            Singletons.getModel().getGameState().getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         }
         return true;
     }
@@ -7081,7 +7082,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 x = CardFactoryUtil.xCount(source, source.getSVar(rhs));
             }
 
-            if (!AllZoneUtil.compare(y, property, x)) {
+            if (!Expressions.compare(y, property, x)) {
                 return false;
             }
         }
@@ -7119,7 +7120,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
             final int actualnumber = this.getCounters(Counters.getType(counterType));
 
-            if (!AllZoneUtil.compare(actualnumber, comparator, number)) {
+            if (!Expressions.compare(actualnumber, comparator, number)) {
                 return false;
             }
         } else if (property.startsWith("attacking")) {
@@ -7171,7 +7172,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("unblocked")) {
-            if (!AllZone.getCombat().isUnblocked(this)) {
+            if (!Singletons.getModel().getGameState().getCombat().isUnblocked(this)) {
                 return false;
             }
         } else if (property.startsWith("kicked")) {
@@ -7528,7 +7529,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean isAttacking() {
-        return AllZone.getCombat().isAttacking(this);
+        return Singletons.getModel().getGameState().getCombat().isAttacking(this);
     }
 
     /**
@@ -7539,7 +7540,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean isBlocking() {
-        final List<Card> blockers = AllZone.getCombat().getAllBlockers();
+        final List<Card> blockers = Singletons.getModel().getGameState().getCombat().getAllBlockers();
         return blockers.contains(this);
     }
 
@@ -7551,7 +7552,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean isBlocked() {
-        return AllZone.getCombat().isBlocked(this);
+        return Singletons.getModel().getGameState().getCombat().isBlocked(this);
     }
 
     /**
@@ -7564,7 +7565,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean isBlocking(final Card attacker) {
-        return AllZone.getCombat().getAttackersBlockedBy(this).contains(attacker);
+        return Singletons.getModel().getGameState().getCombat().getAttackersBlockedBy(this).contains(attacker);
     }
 
     /**
@@ -7577,7 +7578,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean isBlockedBy(final Card blocker) {
-        return AllZone.getCombat().getAttackersBlockedBy(blocker).contains(this);
+        return Singletons.getModel().getGameState().getCombat().getAttackersBlockedBy(blocker).contains(this);
     }
 
     // /////////////////////////
@@ -8159,7 +8160,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         repParams.put("IsCombat", isCombat);
         repParams.put("Prevention", true);
 
-        if (AllZone.getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
+        if (Singletons.getModel().getGameState().getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
             return 0;
         }
 
@@ -8286,7 +8287,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         repParams.put("DamageAmount", damageIn);
         repParams.put("IsCombat", isCombat);
 
-        if (AllZone.getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
+        if (Singletons.getModel().getGameState().getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
             return 0;
         }
 
@@ -8351,7 +8352,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         runParams.put("DamageTarget", this);
         runParams.put("DamageAmount", damageToAdd);
         runParams.put("IsCombatDamage", isCombat);
-        AllZone.getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams);
+        Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams);
 
         if (this.isPlaneswalker()) {
             this.subtractCounter(Counters.LOYALTY, damageToAdd);
@@ -8868,7 +8869,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return boolean
      */
     public boolean isInZone(final ZoneType zone) {
-        return AllZone.isCardInZone(this, zone);
+        return GameState.isCardInZone(this, zone);
     }
 
     /**

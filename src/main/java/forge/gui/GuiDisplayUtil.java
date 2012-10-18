@@ -504,8 +504,8 @@ public final class GuiDisplayUtil {
             computerDevExileSetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupExile, ai);
         }
 
-        AllZone.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        AllZone.getCombat().reset();
+        Singletons.getModel().getGameState().getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+        Singletons.getModel().getGameState().getCombat().reset();
         for (final Card c : humanDevSetup) {
             human.getZone(ZoneType.Hand).add(c);
             Singletons.getModel().getGameAction().moveToPlay(c);
@@ -546,7 +546,7 @@ public final class GuiDisplayUtil {
             ai.getZone(ZoneType.Exile).setCards(computerDevExileSetup);
         }
 
-        AllZone.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        Singletons.getModel().getGameState().getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
         if (setComputerLife > 0) {
             ai.setLife(setComputerLife, null);

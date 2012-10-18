@@ -24,7 +24,6 @@ import java.util.List;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
-import forge.AllZone;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
@@ -294,6 +293,85 @@ public class GameState {
     // They must once become non-static members of this class 
     
     /**
+     * <p>
+     * getZone.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @return a {@link forge.game.zone.PlayerZone} object.
+     */
+    public static PlayerZone getZoneOf(final Card c) {
+        final GameState gameState = Singletons.getModel().getGameState();
+        if (gameState == null) {
+            return null;
+        }
+    
+        if (gameState.getStackZone().contains(c)) {
+            return gameState.getStackZone();
+        }
+    
+        for (final Player p : gameState.getPlayers()) {
+            for (final ZoneType z : Player.ALL_ZONES) {
+                final PlayerZone pz = p.getZone(z);
+                if (pz.contains(c)) {
+                    return pz;
+                }
+            }
+        }
+    
+        return null;
+    }
+
+    /**
+     * 
+     * isCardInZone.
+     * 
+     * @param c
+     *            Card
+     * @param zone
+     *            Constant.Zone
+     * @return boolean
+     */
+    public static boolean isCardInZone(final Card c, final ZoneType zone) {
+        final GameState gameState = Singletons.getModel().getGameState();
+        if (gameState == null) {
+            return false;
+        }
+    
+        if (zone.equals(ZoneType.Stack)) {
+            if (gameState.getStackZone().contains(c)) {
+                return true;
+            }
+        } else {
+            for (final Player p : gameState.getPlayers()) {
+                if (p.getZone(zone).contains(c)) {
+                    return true;
+                }
+            }
+        }
+    
+        return false;
+    }
+
+    /**
+     * <p>
+     * resetZoneMoveTracking.
+     * </p>
+     */
+    public static void resetZoneMoveTracking() {
+        final GameState gameState = Singletons.getModel().getGameState();
+        if (gameState == null) {
+            return;
+        }
+        for (final Player p : gameState.getPlayers()) {
+            for (final ZoneType z : Player.ALL_ZONES) {
+                p.getZone(z).resetCardsAddedThisTurn();
+            }
+        }
+    }
+
+    /**
      * gets a list of all cards owned by both players that have are currently in
      * the given zone.
      * 
@@ -303,7 +381,7 @@ public class GameState {
      */
     public static List<Card> getCardsIn(final ZoneType zone) {
         if (zone == ZoneType.Stack) {
-            return AllZone.getStackZone().getCards();
+            return Singletons.getModel().getGameState().getStackZone().getCards();
         } else {
             List<Card> cards = null;
             for (final Player p : Singletons.getModel().getGameState().getPlayers()) {
@@ -547,7 +625,7 @@ public class GameState {
             all.addAll(player.getZone(ZoneType.Battlefield).getCards(false));
             all.addAll(player.getZone(ZoneType.Exile).getCards());
         }
-        all.addAll(AllZone.getStackZone().getCards());
+        all.addAll(Singletons.getModel().getGameState().getStackZone().getCards());
         return all;
     }
 

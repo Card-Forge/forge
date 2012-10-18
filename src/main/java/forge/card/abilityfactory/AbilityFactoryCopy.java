@@ -506,11 +506,11 @@ public final class AbilityFactoryCopy {
                         @Override
                         public void execute() {
                             sac.setStackDescription(params.get("AtEOT") + " " + target[index] + ".");
-                            AllZone.getStack().addSimultaneousStackEntry(sac);
+                            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(sac);
                         }
                     }; // Command
                     if (params.containsKey("AtEOT")) {
-                        AllZone.getEndOfTurn().addAt(atEOT);
+                        Singletons.getModel().getGameState().getEndOfTurn().addAt(atEOT);
                     }
                     // end copied Kiki code
 

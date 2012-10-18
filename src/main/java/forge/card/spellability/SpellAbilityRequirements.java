@@ -19,11 +19,11 @@ package forge.card.spellability;
 
 import java.util.ArrayList;
 
-import forge.AllZone;
 import forge.Card;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.CostPayment;
+import forge.game.GameState;
 import forge.game.zone.PlayerZone;
 
 /**
@@ -111,7 +111,7 @@ public class SpellAbilityRequirements {
             if (!this.ability.getSourceCard().isCopiedSpell()) {
                 final Card c = this.ability.getSourceCard();
 
-                this.fromZone = AllZone.getZoneOf(c);
+                this.fromZone = GameState.getZoneOf(c);
                 this.zonePosition = this.fromZone.getPosition(c);
                 this.ability.setSourceCard(Singletons.getModel().getGameAction().moveToStack(c));
             }
@@ -119,7 +119,7 @@ public class SpellAbilityRequirements {
 
         // freeze Stack. No abilities should go onto the stack while I'm filling
         // requirements.
-        AllZone.getStack().freezeStack();
+        Singletons.getModel().getGameState().getStack().freezeStack();
 
         // Skip to paying if parent ability doesn't target and has no
         // subAbilities.
@@ -148,7 +148,7 @@ public class SpellAbilityRequirements {
             }
 
             this.select.resetTargets();
-            AllZone.getStack().removeFromFrozenStack(this.ability);
+            Singletons.getModel().getGameState().getStack().removeFromFrozenStack(this.ability);
             return;
         } else {
             this.needPayment();
@@ -207,7 +207,7 @@ public class SpellAbilityRequirements {
 
             this.ability.resetOnceResolved();
             this.payment.cancelPayment();
-            AllZone.getStack().clearFrozen();
+            Singletons.getModel().getGameState().getStack().clearFrozen();
         }
     }
 
@@ -235,6 +235,6 @@ public class SpellAbilityRequirements {
         }
 
         this.ability.getActivatingPlayer().getManaPool().clearManaPaid(this.ability, false);
-        AllZone.getStack().addAndUnfreeze(this.ability);
+        Singletons.getModel().getGameState().getStack().addAndUnfreeze(this.ability);
     }
 }

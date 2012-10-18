@@ -24,7 +24,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -142,7 +141,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
                     sb.append(source).append(" - tap all lands ");
                     sb.append(tisLand.getController()).append(" controls.");
                     ability.setStackDescription(sb.toString());
-                    AllZone.getStack().addSimultaneousStackEntry(ability);
+                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
                 }
 
@@ -167,16 +166,16 @@ public class PlayerZoneBattlefield extends PlayerZone {
                     // (pLands - 1) because this land is in play, and the
                     // ability is before it is in play
                     if (oLands.size() <= (pLands.size() - 1)) {
-                        AllZone.getStack().addSimultaneousStackEntry(ability);
+                        Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
                     }
                 }
             } // isLand()
         }
 
-        if (AllZone.getStaticEffects().getCardToEffectsList().containsKey(c.getName())) {
-            final String[] effects = AllZone.getStaticEffects().getCardToEffectsList().get(c.getName());
+        if (Singletons.getModel().getGameState().getStaticEffects().getCardToEffectsList().containsKey(c.getName())) {
+            final String[] effects = Singletons.getModel().getGameState().getStaticEffects().getCardToEffectsList().get(c.getName());
             for (final String effect : effects) {
-                AllZone.getStaticEffects().addStateBasedEffect(effect);
+                Singletons.getModel().getGameState().getStaticEffects().addStateBasedEffect(effect);
             }
         }
     } // end add()
@@ -233,12 +232,12 @@ public class PlayerZoneBattlefield extends PlayerZone {
             c.leavesPlay();
         }
 
-        if (AllZone.getStaticEffects().getCardToEffectsList().containsKey(c.getName())) {
-            final String[] effects = AllZone.getStaticEffects().getCardToEffectsList().get(c.getName());
+        if (Singletons.getModel().getGameState().getStaticEffects().getCardToEffectsList().containsKey(c.getName())) {
+            final String[] effects = Singletons.getModel().getGameState().getStaticEffects().getCardToEffectsList().get(c.getName());
             String tempEffect = "";
             for (final String effect : effects) {
                 tempEffect = effect;
-                AllZone.getStaticEffects().removeStateBasedEffect(effect);
+                Singletons.getModel().getGameState().getStaticEffects().removeStateBasedEffect(effect);
                 // this is to make sure cards reset correctly
                 final Command comm = GameActionUtil.getCommands().get(tempEffect);
                 comm.execute();

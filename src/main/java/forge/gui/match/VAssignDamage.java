@@ -32,10 +32,10 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
-import forge.AllZone;
 import forge.Card;
 import forge.Command;
 import forge.GameEntity;
+import forge.Singletons;
 import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
@@ -499,7 +499,7 @@ public class VAssignDamage {
     // be modified.
     private void finish() {
         if (trample) {
-            AllZone.getCombat().addDefendingDamage(this.damageToOpponent, this.attacker);
+            Singletons.getModel().getGameState().getCombat().addDefendingDamage(this.damageToOpponent, this.attacker);
         }
 
         for (int i = 0; i < lstDefenders.size(); i++) {

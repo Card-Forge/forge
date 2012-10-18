@@ -322,7 +322,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         repParams.put("Event", "GainLife");
         repParams.put("Affected", this);
         repParams.put("LifeGained", toGain);
-        if (AllZone.getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
+        if (Singletons.getModel().getGameState().getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
             return false;
         }
 
@@ -341,7 +341,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Player", this);
             runParams.put("LifeAmount", lifeGain);
-            AllZone.getTriggerHandler().runTrigger(TriggerType.LifeGained, runParams);
+            Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.LifeGained, runParams);
         } else {
             System.out.println("Player - trying to gain negative or 0 life");
         }
@@ -398,7 +398,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Player", this);
         runParams.put("LifeAmount", toLose);
-        AllZone.getTriggerHandler().runTrigger(TriggerType.LifeLost, runParams);
+        Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.LifeLost, runParams);
 
         return lifeLost;
     }
@@ -537,7 +537,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         runParams.put("DamageTarget", this);
         runParams.put("DamageAmount", damageToDo);
         runParams.put("IsCombatDamage", isCombat);
-        AllZone.getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams);
+        Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams);
 
         return true;
     }
@@ -747,7 +747,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         repParams.put("DamageAmount", damage);
         repParams.put("IsCombat", isCombat);
 
-        if (AllZone.getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
+        if (Singletons.getModel().getGameState().getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
             return 0;
         }
 
@@ -797,7 +797,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         repParams.put("IsCombat", isCombat);
         repParams.put("Prevention", true);
 
-        if (AllZone.getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
+        if (Singletons.getModel().getGameState().getReplacementHandler().run(repParams) != ReplacementResult.NotReplaced) {
             return 0;
         }
 
@@ -1256,7 +1256,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         repRunParams.put("Event", "Draw");
         repRunParams.put("Affected", this);
 
-        if (AllZone.getReplacementHandler().run(repRunParams) != ReplacementResult.NotReplaced) {
+        if (Singletons.getModel().getGameState().getReplacementHandler().run(repRunParams) != ReplacementResult.NotReplaced) {
             return drawn;
         }
 
@@ -1295,7 +1295,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Card", c);
             runParams.put("Number", this.numDrawnThisTurn);
-            AllZone.getTriggerHandler().runTrigger(TriggerType.Drawn, runParams);
+            Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.Drawn, runParams);
         }
         // lose:
         else if (!Preferences.DEV_MODE || Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_MILLING_LOSS)) {
@@ -1335,7 +1335,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         List<Card> result;
         if (zoneType == ZoneType.Stack) {
             result = new ArrayList<Card>();
-            for (Card c : AllZone.getStackZone().getCards()) {
+            for (Card c : Singletons.getModel().getGameState().getStackZone().getCards()) {
                 if (c.getOwner().equals(this)) {
                     result.add(c);
                 }
@@ -1570,7 +1570,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         runParams.put("Player", this);
         runParams.put("Card", c);
         runParams.put("Cause", cause);
-        AllZone.getTriggerHandler().runTrigger(TriggerType.Discarded, runParams);
+        Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.Discarded, runParams);
 
     } // end doDiscard
 
@@ -1744,7 +1744,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Player", this);
-        AllZone.getTriggerHandler().runTrigger(TriggerType.Shuffled, runParams);
+        Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.Shuffled, runParams);
 
     } // shuffle
       // //////////////////////////////
@@ -1807,10 +1807,10 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             // Run triggers
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Card", land);
-            AllZone.getTriggerHandler().runTrigger(TriggerType.LandPlayed, runParams);
+            Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.LandPlayed, runParams);
         }
 
-        AllZone.getStack().unfreezeStack();
+        Singletons.getModel().getGameState().getStack().unfreezeStack();
     }
 
     /**
@@ -2131,7 +2131,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             runParams.put("Affected", this);
             runParams.put("Event", "GameLoss");
     
-            if (AllZone.getReplacementHandler().run(runParams) != ReplacementResult.NotReplaced) {
+            if (Singletons.getModel().getGameState().getReplacementHandler().run(runParams) != ReplacementResult.NotReplaced) {
                 return false;
             }
         }

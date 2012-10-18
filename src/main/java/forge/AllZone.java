@@ -19,17 +19,9 @@ package forge;
 
 import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryInterface;
-import forge.card.replacement.ReplacementHandler;
-import forge.card.trigger.TriggerHandler;
 import forge.control.input.InputControl;
 import forge.game.GameState;
 import forge.game.limited.GauntletMini;
-import forge.game.phase.Combat;
-import forge.game.phase.EndOfTurn;
-import forge.game.player.Player;
-import forge.game.zone.MagicStack;
-import forge.game.zone.PlayerZone;
-import forge.game.zone.ZoneType;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
@@ -89,35 +81,6 @@ public final class AllZone {
 
     /**
      * <p>
-     * getEndOfTurn.
-     * </p>
-     * 
-     * Will eventually be marked deprecated.
-     * 
-     * @return a {@link forge.game.phase.EndOfTurn} object.
-     * @since 1.0.15
-     */
-    public static EndOfTurn getEndOfTurn() {
-        return Singletons.getModel().getGameState().getEndOfTurn();
-    }
-
-    /**
-     * <p>
-     * getEndOfCombat.
-     * </p>
-     * 
-     * Will eventually be marked deprecated.
-     * 
-     * @return a {@link forge.game.phase.EndOfCombat} object.
-     * @since 1.0.15
-     */
-    public static forge.game.phase.EndOfCombat getEndOfCombat() {
-        return Singletons.getModel().getGameState().getEndOfCombat();
-    }
-
-
-    /**
-     * <p>
      * getGameLog.
      * </p>
      * 
@@ -163,24 +126,6 @@ public final class AllZone {
 
     /**
      * <p>
-     * getStack.
-     * </p>
-     * 
-     * Will eventually be marked deprecated.
-     * 
-     * @return a {@link forge.game.zone.MagicStack} object.
-     * @since 1.0.15
-     */
-    public static MagicStack getStack() {
-        if (Singletons.getModel() != null) {
-            return Singletons.getModel().getGameState().getStack();
-        }
-
-        return null;
-    }
-
-    /**
-     * <p>
      * getInputControl.
      * </p>
      * 
@@ -194,171 +139,6 @@ public final class AllZone {
     /** @param i0 &emsp; {@link forge.control.input.InputControl} */
     public static void setInputControl(InputControl i0) {
         AllZone.inputControl = i0;
-    }
-
-    /**
-     * <p>
-     * getStaticEffects.
-     * </p>
-     * 
-     * Will eventually be marked deprecated.
-     * 
-     * @return a {@link forge.StaticEffects} object.
-     * @since 1.0.15
-     */
-    public static StaticEffects getStaticEffects() {
-        final GameState gameState = Singletons.getModel().getGameState();
-
-        if (gameState != null) {
-            return gameState.getStaticEffects();
-        }
-
-        return null;
-    }
-
-    /**
-     * <p>
-     * getTriggerHandler.
-     * </p>
-     * 
-     * Will eventually be marked deprecated.
-     * 
-     * @return a {@link forge.card.trigger.TriggerHandler} object.
-     * @since 1.0.15
-     */
-    public static TriggerHandler getTriggerHandler() {
-        return Singletons.getModel().getGameState().getTriggerHandler();
-    }
-
-    /**
-     * Gets the replacement handler.
-     *
-     * @return the replacement handler
-     */
-    public static ReplacementHandler getReplacementHandler() {
-        return Singletons.getModel().getGameState().getReplacementHandler();
-    }
-
-    /**
-     * <p>
-     * getCombat.
-     * </p>
-     * 
-     * Will eventually be marked deprecated.
-     * 
-     * @return a {@link forge.game.phase.Combat} object.
-     * @since 1.0.15
-     */
-    public static Combat getCombat() {
-        return Singletons.getModel().getGameState().getCombat();
-    }
-
-    /**
-     * <p>
-     * setCombat.
-     * </p>
-     * 
-     * Will eventually be marked deprecated.
-     * 
-     * @param attackers
-     *            a {@link forge.game.phase.Combat} object.
-     * @since 1.0.15
-     */
-    public static void setCombat(final Combat attackers) {
-        Singletons.getModel().getGameState().setCombat(attackers);
-    }
-
-    /**
-     * <p>
-     * getStackZone.
-     * </p>
-     * 
-     * Will eventually be marked deprecated.
-     * 
-     * @return a {@link forge.game.zone.PlayerZone} object.
-     * @since 1.0.15
-     */
-    public static PlayerZone getStackZone() {
-        return Singletons.getModel().getGameState().getStackZone();
-    }
-
-    /**
-     * <p>
-     * getZone.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a {@link forge.game.zone.PlayerZone} object.
-     */
-    public static PlayerZone getZoneOf(final Card c) {
-        final GameState gameState = Singletons.getModel().getGameState();
-        if (gameState == null) {
-            return null;
-        }
-
-        if (gameState.getStackZone().contains(c)) {
-            return gameState.getStackZone();
-        }
-
-        for (final Player p : gameState.getPlayers()) {
-            for (final ZoneType z : Player.ALL_ZONES) {
-                final PlayerZone pz = p.getZone(z);
-                if (pz.contains(c)) {
-                    return pz;
-                }
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * 
-     * isCardInZone.
-     * 
-     * @param c
-     *            Card
-     * @param zone
-     *            Constant.Zone
-     * @return boolean
-     */
-    public static boolean isCardInZone(final Card c, final ZoneType zone) {
-        final GameState gameState = Singletons.getModel().getGameState();
-        if (gameState == null) {
-            return false;
-        }
-
-        if (zone.equals(ZoneType.Stack)) {
-            if (gameState.getStackZone().contains(c)) {
-                return true;
-            }
-        } else {
-            for (final Player p : gameState.getPlayers()) {
-                if (p.getZone(zone).contains(c)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * <p>
-     * resetZoneMoveTracking.
-     * </p>
-     */
-    public static void resetZoneMoveTracking() {
-        final GameState gameState = Singletons.getModel().getGameState();
-        if (gameState == null) {
-            return;
-        }
-        for (final Player p : gameState.getPlayers()) {
-            for (final ZoneType z : Player.ALL_ZONES) {
-                p.getZone(z).resetCardsAddedThisTurn();
-            }
-        }
     }
 
     /**

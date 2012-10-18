@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import forge.AllZone;
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardUtil;
@@ -281,7 +280,7 @@ public final class AbilityFactoryClone {
 
         // don't use instant speed clone abilities outside humans
         // Combat_Declare_Attackers_InstantAbility step
-        if ( (!phase.is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || AllZone.getCombat().getAttackers().isEmpty())
+        if ( (!phase.is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || Singletons.getModel().getGameState().getCombat().getAttackers().isEmpty())
            && !phase.isPlayerTurn(ai)) {
             return false;
         }

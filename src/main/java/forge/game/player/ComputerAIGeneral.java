@@ -23,7 +23,6 @@ import java.util.List;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.Singletons;
@@ -285,9 +284,9 @@ public class ComputerAIGeneral implements Computer {
     public final void declareAttackers() {
         // 12/2/10(sol) the decision making here has moved to getAttackers()
 
-        AllZone.setCombat(ComputerUtil.getAttackers(player));
+        Singletons.getModel().getGameState().setCombat(ComputerUtil.getAttackers(player));
 
-        final List<Card> att = AllZone.getCombat().getAttackers();
+        final List<Card> att = Singletons.getModel().getGameState().getCombat().getAttackers();
         if (!att.isEmpty()) {
             Singletons.getModel().getGameState().getPhaseHandler().setCombat(true);
         }
@@ -314,9 +313,9 @@ public class ComputerAIGeneral implements Computer {
     public final void declareBlockers() {
         final List<Card> blockers = GameState.getCreaturesInPlay(player);
 
-        AllZone.setCombat(ComputerUtilBlock.getBlockers(player, AllZone.getCombat(), blockers));
+        Singletons.getModel().getGameState().setCombat(ComputerUtilBlock.getBlockers(player, Singletons.getModel().getGameState().getCombat(), blockers));
         
-        CombatUtil.orderMultipleCombatants(AllZone.getCombat());
+        CombatUtil.orderMultipleCombatants(Singletons.getModel().getGameState().getCombat());
 
         Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
     }
@@ -340,13 +339,13 @@ public class ComputerAIGeneral implements Computer {
      */
     @Override
     public final void playSpellAbilities() {
-        if (AllZone.getStack().isEmpty()) {
+        if (Singletons.getModel().getGameState().getStack().isEmpty()) {
             this.playSpellAbilitiesStackEmpty();
             return;
         }
 
         // if top of stack is owned by me
-        if (AllZone.getStack().peekInstance().getActivatingPlayer().isComputer()) {
+        if (Singletons.getModel().getGameState().getStack().peekInstance().getActivatingPlayer().isComputer()) {
             // probably should let my stuff resolve to force Human to respond to
             // it
             Singletons.getModel().getGameState().getPhaseHandler().passPriority();

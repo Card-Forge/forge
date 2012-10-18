@@ -481,7 +481,7 @@ class CardFactoryAuras {
                     }
 
                     final Card animated = targetC[0];
-                    final PlayerZone grave = AllZone.getZoneOf(animated);
+                    final PlayerZone grave = GameState.getZoneOf(animated);
 
                     if (!grave.is(ZoneType.Graveyard)) {
                         // Animated Creature got removed before ability resolved
@@ -554,7 +554,7 @@ class CardFactoryAuras {
                     final PlayerZone play = card.getController().getZone(ZoneType.Battlefield);
 
                     if (play.contains(c)) {
-                        AllZone.getStack().addSimultaneousStackEntry(detach);
+                        Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(detach);
                     }
 
                 }

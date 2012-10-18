@@ -199,7 +199,7 @@ public class CardFactoryCreatures {
             @Override
             public boolean canPlayAI() {
                 return Iterables.any(getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.ARTIFACTS)
-                     && AllZone.getZoneOf(this.getSourceCard()).is(ZoneType.Hand);
+                     && GameState.getZoneOf(this.getSourceCard()).is(ZoneType.Hand);
             }
         });
         card.addComesIntoPlayCommand(intoPlay);
@@ -294,7 +294,7 @@ public class CardFactoryCreatures {
 
             @Override
             public void execute() {
-                AllZone.getStack().addSimultaneousStackEntry(ability);
+                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
             }
         });
@@ -611,7 +611,7 @@ public class CardFactoryCreatures {
                 sb.append("Kinsbaile Borderguard enters the battlefield with a ");
                 sb.append("+1/+1 counter on it for each other Kithkin you control.");
                 ability.setStackDescription(sb.toString());
-                AllZone.getStack().addSimultaneousStackEntry(ability);
+                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
             }
         };
@@ -640,7 +640,7 @@ public class CardFactoryCreatures {
                 sb.append("from play, put a 1/1 white Kithkin Soldier creature ");
                 sb.append("token onto the battlefield for each counter on it.");
                 ability2.setStackDescription(sb.toString());
-                AllZone.getStack().addSimultaneousStackEntry(ability2);
+                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability2);
 
             }
         };
@@ -668,7 +668,7 @@ public class CardFactoryCreatures {
 
             @Override
             public void execute() {
-                AllZone.getStack().addSimultaneousStackEntry(ability);
+                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
             }
         };
@@ -869,7 +869,7 @@ public class CardFactoryCreatures {
 
             @Override
             public void execute() {
-                AllZone.getStack().addSimultaneousStackEntry(ability);
+                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
             }
         };
@@ -931,7 +931,7 @@ public class CardFactoryCreatures {
                 //adding ability to stack first cause infinite loop (with observers notification)
                 //so it has to be stop first and add ability later
                 this.stop();
-                AllZone.getStack().add(ability);
+                Singletons.getModel().getGameState().getStack().add(ability);
             }
 
             @Override
@@ -985,7 +985,7 @@ public class CardFactoryCreatures {
                     if ( !list.isEmpty() )
                     {
                         ability.setTargetCard(CardFactoryUtil.getBestCreatureAI(list));
-                        AllZone.getStack().addSimultaneousStackEntry(ability);
+                        Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
                     }
                 }
             } // execute()

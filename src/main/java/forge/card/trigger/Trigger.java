@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -36,6 +35,7 @@ import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
+import forge.util.Expressions;
 
 /**
  * <p>
@@ -326,7 +326,7 @@ public abstract class Trigger extends TriggerReplacementBase {
                 right = CardFactoryUtil.xCount(this.getHostCard(), this.getHostCard().getSVar(rightString));
             }
 
-            if (!AllZoneUtil.compare(life, lifeCompare, right)) {
+            if (!Expressions.compare(life, lifeCompare, right)) {
                 return false;
             }
 
@@ -365,7 +365,7 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
             final int left = list.size();
 
-            if (!AllZoneUtil.compare(left, presentCompare, right)) {
+            if (!Expressions.compare(left, presentCompare, right)) {
                 return false;
             }
 
@@ -404,7 +404,7 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
             final int left = list.size();
 
-            if (!AllZoneUtil.compare(left, presentCompare, right)) {
+            if (!Expressions.compare(left, presentCompare, right)) {
                 return false;
             }
 
@@ -421,7 +421,7 @@ public abstract class Trigger extends TriggerReplacementBase {
             final String svarOperand = comparator.substring(2);
             final int operandValue = AbilityFactory.calculateAmount(GameState.getCardState(this.getHostCard()),
                     svarOperand, null);
-            if (!AllZoneUtil.compare(sVar, svarOperator, operandValue)) {
+            if (!Expressions.compare(sVar, svarOperator, operandValue)) {
                 return false;
             }
         }

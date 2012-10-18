@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.Singletons;
@@ -638,7 +637,7 @@ public class AbilityFactoryToken extends AbilityFactory {
                     c.setTapped(true);
                 }
                 if (this.tokenAttacking) {
-                    AllZone.getCombat().addAttacker(c);
+                    Singletons.getModel().getGameState().getCombat().addAttacker(c);
                 }
                 if (remember != null) {
                     GameState.getCardState(sa.getSourceCard()).addRemembered(c);

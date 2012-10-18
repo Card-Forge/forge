@@ -57,7 +57,7 @@ public class StaticEffects {
         }
         this.staticEffects = new ArrayList<StaticEffect>();
 
-        AllZone.getTriggerHandler().cleanUpTemporaryTriggers();
+        Singletons.getModel().getGameState().getTriggerHandler().cleanUpTemporaryTriggers();
     }
 
     /**

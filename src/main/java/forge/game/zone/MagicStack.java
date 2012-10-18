@@ -717,23 +717,23 @@ public class MagicStack extends MyObservable {
             runParams.put("Player", sp.getSourceCard().getController());
             runParams.put("Activator", sp.getActivatingPlayer());
             runParams.put("CastSA", sp);
-            AllZone.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams);
+            Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams);
 
             // Run SpellCast triggers
             if (sp.isSpell()) {
-                AllZone.getTriggerHandler().runTrigger(TriggerType.SpellCast, runParams);
+                Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.SpellCast, runParams);
             }
 
             // Run AbilityCast triggers
             if (sp.isAbility() && !sp.isTrigger()) {
-                AllZone.getTriggerHandler().runTrigger(TriggerType.AbilityCast, runParams);
+                Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.AbilityCast, runParams);
             }
 
             // Run Cycled triggers
             if (sp.isCycling()) {
                 runParams.clear();
                 runParams.put("Card", sp.getSourceCard());
-                AllZone.getTriggerHandler().runTrigger(TriggerType.Cycled, runParams);
+                Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.Cycled, runParams);
             }
 
             // Run BecomesTarget triggers
@@ -745,7 +745,7 @@ public class MagicStack extends MyObservable {
                         for (final Object tgt : tc.getTargets()) {
                             runParams.put("Target", tgt);
 
-                            AllZone.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
+                            Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
                         }
                     }
                 }
@@ -756,17 +756,17 @@ public class MagicStack extends MyObservable {
             else if (sp.getTargetCard() != null) {
                 runParams.put("Target", sp.getTargetCard());
 
-                AllZone.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
+                Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
             } else if ((sp.getTargetList() != null) && (sp.getTargetList().size() > 0)) {
                 for (final Card ctgt : sp.getTargetList()) {
                     runParams.put("Target", ctgt);
 
-                    AllZone.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
+                    Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
                 }
             } else if (sp.getTargetPlayer() != null) {
                 runParams.put("Target", sp.getTargetPlayer());
 
-                AllZone.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
+                Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
             }
         }
 
@@ -797,8 +797,8 @@ public class MagicStack extends MyObservable {
                     final SpellAbility counter = new Ability(bazaar, "0") {
                         @Override
                         public void resolve() {
-                            if (AllZone.getStack().size() > 0) {
-                                AllZone.getStack().pop();
+                            if (Singletons.getModel().getGameState().getStack().size() > 0) {
+                                Singletons.getModel().getGameState().getStack().pop();
                             }
                         } // resolve()
                     }; // SpellAbility
@@ -911,7 +911,7 @@ public class MagicStack extends MyObservable {
         sa.getSourceCard().setXManaCostPaid(0);
 
         if (source.hasStartOfKeyword("Haunt") && !source.isCreature()
-                && AllZone.getZoneOf(source).is(ZoneType.Graveyard)) {
+                && GameState.getZoneOf(source).is(ZoneType.Graveyard)) {
             final List<Card> creats = GameState.getCreaturesInPlay();
             final Ability haunterDiesWork = new Ability(source, "0") {
                 @Override
@@ -994,7 +994,7 @@ public class MagicStack extends MyObservable {
             sa.setFlashBackAbility(false);
         } else if (source.hasKeyword("Rebound")
                 && source.getCastFrom() == ZoneType.Hand
-                && AllZone.getZoneOf(source).is(ZoneType.Stack)
+                && GameState.getZoneOf(source).is(ZoneType.Stack)
                 && source.getOwner().equals(source.getController())) //"If you cast this spell from your hand"
         {
             
@@ -1010,7 +1010,7 @@ public class MagicStack extends MyObservable {
             		"| TriggerDescription$ At the beginning of your next upkeep, you may cast " + source.toString() 
             		+ " without paying it's manacost.", source, true);
 
-            AllZone.getTriggerHandler().registerDelayedTrigger(reboundTrigger);
+            Singletons.getModel().getGameState().getTriggerHandler().registerDelayedTrigger(reboundTrigger);
         }
 
         // If Spell and still on the Stack then let it goto the graveyard or

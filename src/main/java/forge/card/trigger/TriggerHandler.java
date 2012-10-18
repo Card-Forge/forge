@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -319,7 +318,7 @@ public class TriggerHandler {
         if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
             Card card = (Card) runParams.get("Card");
             if (playerAP.equals(card.getController()) && !allCards.contains(card) 
-                    && (AllZone.getZoneOf(card) == null || AllZone.getZoneOf(card).getZoneType().isHidden())) {
+                    && (GameState.getZoneOf(card) == null || GameState.getZoneOf(card).getZoneType().isHidden())) {
                 allCards.add(card);
             }
         }
@@ -345,7 +344,7 @@ public class TriggerHandler {
         if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
             Card card = (Card) runParams.get("Card");
             if (!playerAP.equals(card.getController()) && !allCards.contains(card)
-                    && (AllZone.getZoneOf(card) == null || AllZone.getZoneOf(card).getZoneType().isHidden())) {
+                    && (GameState.getZoneOf(card) == null || GameState.getZoneOf(card).getZoneType().isHidden())) {
                 allCards.add(card);
             }
         }
@@ -399,7 +398,7 @@ public class TriggerHandler {
             return false; // Morphed cards only have pumped triggers go off.
         }
         if (regtrig instanceof TriggerAlways) {
-            if (AllZone.getStack().hasStateTrigger(regtrig.getId())) {
+            if (Singletons.getModel().getGameState().getStack().hasStateTrigger(regtrig.getId())) {
                 return false; // State triggers that are already on the stack
                               // don't trigger again.
             }
@@ -411,7 +410,7 @@ public class TriggerHandler {
         if (regtrig.isSuppressed()) {
             return false; // Trigger removed by effect
         }
-        if (!regtrig.zonesCheck(AllZone.getZoneOf(regtrig.getHostCard()))) {
+        if (!regtrig.zonesCheck(GameState.getZoneOf(regtrig.getHostCard()))) {
             return false; // Host card isn't where it needs to be.
         }
 
@@ -1021,7 +1020,7 @@ public class TriggerHandler {
             }
             //Singletons.getModel().getGameAction().playSpellAbilityNoStack(wrapperAbility, false);
         } else {
-            AllZone.getStack().addSimultaneousStackEntry(wrapperAbility);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(wrapperAbility);
         }
         regtrig.setTriggeredSA(wrapperAbility);
         return true;

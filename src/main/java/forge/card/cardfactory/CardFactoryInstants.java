@@ -23,7 +23,6 @@ import java.util.List;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -351,10 +350,10 @@ public class CardFactoryInstants {
                             destroy.setDescription(sb.toString());
                             destroy.setStackDescription(sb.toString());
 
-                            AllZone.getStack().addSimultaneousStackEntry(destroy);
+                            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(destroy);
                         } // execute
                     }; // Command
-                    AllZone.getEndOfTurn().addAt(atEOT);
+                    Singletons.getModel().getGameState().getEndOfTurn().addAt(atEOT);
                 } // resolve
             }; // SpellAbility
 

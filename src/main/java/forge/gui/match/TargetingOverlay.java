@@ -29,8 +29,8 @@ import java.util.Map;
 
 import javax.swing.JPanel;
 
-import forge.AllZone;
 import forge.Card;
+import forge.Singletons;
 import forge.control.FControl;
 import forge.gui.match.nonsingleton.CField;
 import forge.gui.toolbox.FSkin;
@@ -108,8 +108,8 @@ public enum TargetingOverlay {
         }
 
         // Combat cards
-        for (Card attackingCard : AllZone.getCombat().getAttackers()) {
-            temp = AllZone.getCombat().getBlockers(attackingCard);
+        for (Card attackingCard : Singletons.getModel().getGameState().getCombat().getAttackers()) {
+            temp = Singletons.getModel().getGameState().getCombat().getBlockers(attackingCard);
             for (Card blockingCard : temp) {
                 arcs.add(new Point[] {
                     endpoints.get(attackingCard.getUniqueNumber()),

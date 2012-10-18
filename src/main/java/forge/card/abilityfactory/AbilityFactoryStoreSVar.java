@@ -19,8 +19,8 @@ package forge.card.abilityfactory;
 
 import java.util.HashMap;
 
-import forge.AllZone;
 import forge.Card;
+import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
@@ -247,7 +247,7 @@ public class AbilityFactoryStoreSVar {
         final Player ai = sa.getActivatingPlayer();
         final Card source = sa.getSourceCard();
         if (AbilityFactory.waitForBlocking(sa) || ai.getLife() + 1 >= source.getNetDefense() 
-                || (ai.getLife() > 5 && !CombatUtil.lifeInSeriousDanger(ai, AllZone.getCombat()))) {
+                || (ai.getLife() > 5 && !CombatUtil.lifeInSeriousDanger(ai, Singletons.getModel().getGameState().getCombat()))) {
             return false;
         }
         final AbilitySub subAb = sa.getSubAbility();

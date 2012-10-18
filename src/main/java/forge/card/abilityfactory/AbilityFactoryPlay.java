@@ -293,7 +293,7 @@ public final class AbilityFactoryPlay {
         }
 
         // don't use this as a response
-        if (AllZone.getStack().size() != 0) {
+        if (Singletons.getModel().getGameState().getStack().size() != 0) {
             return false;
         }
 

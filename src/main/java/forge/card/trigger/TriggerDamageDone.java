@@ -19,9 +19,9 @@ package forge.card.trigger;
 
 import java.util.HashMap;
 
-import forge.AllZoneUtil;
 import forge.Card;
 import forge.card.spellability.SpellAbility;
+import forge.util.Expressions;
 
 /**
  * <p>
@@ -87,7 +87,7 @@ public class TriggerDamageDone extends Trigger {
             final int operand = Integer.parseInt(fullParam.substring(2));
             final int actualAmount = (Integer) runParams2.get("DamageAmount");
 
-            if (!AllZoneUtil.compare(actualAmount, operator, operand)) {
+            if (!Expressions.compare(actualAmount, operator, operand)) {
                 return false;
             }
 

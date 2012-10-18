@@ -27,7 +27,6 @@ import javax.swing.JOptionPane;
 
 import com.google.common.base.Predicate;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -278,8 +277,8 @@ public final class AbilityFactoryProtection {
 
                 // is the creature in blocked and the blocker would survive
                 if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                        && AllZone.getCombat().isAttacking(c) && AllZone.getCombat().isBlocked(c)
-                        && CombatUtil.blockerWouldBeDestroyed(AllZone.getCombat().getBlockers(c).get(0))) {
+                        && Singletons.getModel().getGameState().getCombat().isAttacking(c) && Singletons.getModel().getGameState().getCombat().isBlocked(c)
+                        && CombatUtil.blockerWouldBeDestroyed(Singletons.getModel().getGameState().getCombat().getBlockers(c).get(0))) {
                     return true;
                 }
 
@@ -328,13 +327,13 @@ public final class AbilityFactoryProtection {
         }
 
         // Phase Restrictions
-        if ((AllZone.getStack().size() == 0) && Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE)) {
+        if ((Singletons.getModel().getGameState().getStack().size() == 0) && Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE)) {
             // Instant-speed protections should not be cast outside of combat
             // when the stack is empty
             if (!AbilityFactory.isSorcerySpeed(sa)) {
                 return false;
             }
-        } else if (AllZone.getStack().size() > 0) {
+        } else if (Singletons.getModel().getGameState().getStack().size() > 0) {
             // TODO protection something only if the top thing on the stack will
             // kill it via damage or destroy
             return false;
@@ -398,7 +397,7 @@ public final class AbilityFactoryProtection {
          * Or, add protection (to make it unblockable) when Compy is attacking.
          */
 
-        if (AllZone.getStack().size() == 0) {
+        if (Singletons.getModel().getGameState().getStack().size() == 0) {
             // If the cost is tapping, don't activate before declare
             // attack/block
             if ((sa.getPayCosts() != null) && sa.getPayCosts().getTap()) {
@@ -816,9 +815,9 @@ public final class AbilityFactoryProtection {
                     }
                 };
                 if (params.containsKey("UntilEndOfCombat")) {
-                    AllZone.getEndOfCombat().addUntil(untilEOT);
+                    Singletons.getModel().getGameState().getEndOfCombat().addUntil(untilEOT);
                 } else {
-                    AllZone.getEndOfTurn().addUntil(untilEOT);
+                    Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
                 }
             }
         }
@@ -848,9 +847,9 @@ public final class AbilityFactoryProtection {
                     }
                 };
                 if (params.containsKey("UntilEndOfCombat")) {
-                    AllZone.getEndOfCombat().addUntil(untilEOT);
+                    Singletons.getModel().getGameState().getEndOfCombat().addUntil(untilEOT);
                 } else {
-                    AllZone.getEndOfTurn().addUntil(untilEOT);
+                    Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
                 }
             }
         }
@@ -1216,9 +1215,9 @@ public final class AbilityFactoryProtection {
                             }
                         };
                         if (params.containsKey("UntilEndOfCombat")) {
-                            AllZone.getEndOfCombat().addUntil(untilEOT);
+                            Singletons.getModel().getGameState().getEndOfCombat().addUntil(untilEOT);
                         } else {
-                            AllZone.getEndOfTurn().addUntil(untilEOT);
+                            Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
                         }
                     }
                 }
@@ -1250,9 +1249,9 @@ public final class AbilityFactoryProtection {
                         }
                     };
                     if (params.containsKey("UntilEndOfCombat")) {
-                        AllZone.getEndOfCombat().addUntil(untilEOT);
+                        Singletons.getModel().getGameState().getEndOfCombat().addUntil(untilEOT);
                     } else {
-                        AllZone.getEndOfTurn().addUntil(untilEOT);
+                        Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
                     }
                 }
             }

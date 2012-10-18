@@ -77,7 +77,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      */
     @Override
     public final void executeAt() {
-        AllZone.getStack().freezeStack();
+        Singletons.getModel().getGameState().getStack().freezeStack();
         Upkeep.upkeepBraidOfFire();
 
         Upkeep.upkeepSlowtrips(); // for "Draw a card at the beginning of the next turn's upkeep."
@@ -114,7 +114,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
         Upkeep.upkeepCurseOfMisfortunes();
         Upkeep.upkeepPowerSurge();
 
-        AllZone.getStack().unfreezeStack();
+        Singletons.getModel().getGameState().getStack().unfreezeStack();
     }
 
     // UPKEEP CARDS:
@@ -154,7 +154,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             };
             upkeepAbility.setStackDescription(sb.toString());
 
-            AllZone.getStack().addSimultaneousStackEntry(upkeepAbility);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(upkeepAbility);
 
         }
     } // upkeepBraidOfFire
@@ -212,7 +212,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 sacAbility.setStackDescription(sb.toString());
                 sacAbility.setDescription(sb.toString());
 
-                AllZone.getStack().addSimultaneousStackEntry(sacAbility);
+                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(sacAbility);
 
                 c.removeAllExtrinsicKeyword("(Echo unpaid)");
             }
@@ -244,7 +244,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             slowtrip.setStackDescription(card + " - Draw a card.");
             slowtrip.setDescription(card + " - Draw a card.");
 
-            AllZone.getStack().addSimultaneousStackEntry(slowtrip);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(slowtrip);
 
         }
         player.clearSlowtripList();
@@ -269,7 +269,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             slowtrip.setStackDescription(card.getName() + " - Draw a card");
             slowtrip.setDescription(card + " - Draw a card.");
 
-            AllZone.getStack().addSimultaneousStackEntry(slowtrip);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(slowtrip);
 
         }
         opponent.clearSlowtripList();
@@ -334,7 +334,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     upkeepAbility.setStackDescription(sb.toString());
                     upkeepAbility.setDescription(sb.toString());
 
-                    AllZone.getStack().addSimultaneousStackEntry(upkeepAbility);
+                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(upkeepAbility);
                 } // destroy
 
                 // sacrifice
@@ -389,7 +389,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     upkeepAbility.setStackDescription(sb.toString());
                     upkeepAbility.setDescription(sb.toString());
 
-                    AllZone.getStack().addSimultaneousStackEntry(upkeepAbility);
+                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(upkeepAbility);
                 } // sacrifice
 
                 // destroy
@@ -434,7 +434,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     upkeepAbility.setStackDescription(sb.toString());
                     upkeepAbility.setDescription(sb.toString());
 
-                    AllZone.getStack().addSimultaneousStackEntry(upkeepAbility);
+                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(upkeepAbility);
                 } // destroy
             }
 
@@ -536,7 +536,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             final StringBuilder sb = new StringBuilder();
             sb.append(abyss.getName()).append(" - destroy a nonartifact creature of your choice.");
             sacrificeCreature.setStackDescription(sb.toString());
-            AllZone.getStack().addAndUnfreeze(sacrificeCreature);
+            Singletons.getModel().getGameState().getStack().addAndUnfreeze(sacrificeCreature);
         } // end for
     } // The Abyss
 
@@ -610,7 +610,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(c.getName()).append(" - destroy 1 creature with lowest power.");
             ability.setStackDescription(sb.toString());
 
-            AllZone.getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
         } // end for
     } // upkeepDropOfHoney()
@@ -661,7 +661,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     final Ability pay = new Ability(c, "0") {
                         @Override
                         public void resolve() {
-                            if (AllZone.getZoneOf(c).is(ZoneType.Battlefield)) {
+                            if (GameState.getZoneOf(c).is(ZoneType.Battlefield)) {
                                 final StringBuilder cost = new StringBuilder();
                                 cost.append("Pay cost for ").append(c).append("\r\n");
                                 GameActionUtil.payManaDuringAbilityResolve(cost.toString(), noPay.getManaCost(),
@@ -671,7 +671,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     }; // end pay ability
                     pay.setStackDescription("Demonic Hordes - Upkeep Cost");
 
-                    AllZone.getStack().addSimultaneousStackEntry(pay);
+                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(pay);
 
                 } // end choice
                 else {
@@ -679,7 +679,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     sb.append(c.getName()).append(" - is tapped and you must sacrifice a land of opponent's choice");
                     noPay.setStackDescription(sb.toString());
 
-                    AllZone.getStack().addSimultaneousStackEntry(noPay);
+                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(noPay);
 
                 }
             } // end human
@@ -693,10 +693,10 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     };
                     computerPay.setStackDescription("Computer pays Demonic Hordes upkeep cost");
 
-                    AllZone.getStack().addSimultaneousStackEntry(computerPay);
+                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(computerPay);
 
                 } else {
-                    AllZone.getStack().addSimultaneousStackEntry(noPay);
+                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(noPay);
 
                 }
             } // end computer
@@ -791,7 +791,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
 
-            AllZone.getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
         } // for
     } // upkeepInkDissolver()
@@ -876,7 +876,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                 k.removeExtrinsicKeyword("Vigilance");
                             }
                         };
-                        AllZone.getEndOfTurn().addUntil(untilEOT);
+                        Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
                     }
                 } // resolve()
 
@@ -893,7 +893,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
 
-            AllZone.getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
         } // for
     } // upkeepKithkinZephyrnaut()
@@ -993,7 +993,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
 
-            AllZone.getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
         } // for
     } // upkeepLeafCrownedElder()
@@ -1073,7 +1073,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                 k.addTempDefenseBoost(-1);
                             }
                         };
-                        AllZone.getEndOfTurn().addUntil(untilEOT);
+                        Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
                     }
                 } // resolve()
 
@@ -1090,7 +1090,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
 
-            AllZone.getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
         } // for
     } // upkeepMudbuttonClanger()
@@ -1175,7 +1175,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
 
-            AllZone.getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
         } // for
     } // upkeepNightshadeSchemers()
@@ -1276,7 +1276,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
 
-            AllZone.getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
         } // for
     } // upkeepPyroclastConsul()
@@ -1368,7 +1368,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
 
-            AllZone.getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
         } // for
     } // upkeepSensationGorger()
@@ -1454,7 +1454,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
 
-            AllZone.getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
         } // for
     } // upkeepSqueakingPieGrubfellows()
@@ -1538,7 +1538,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
 
-            AllZone.getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
         } // for
     } // upkeepWanderingGraybeard()
@@ -1626,7 +1626,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                 }
                             }
                         };
-                        AllZone.getEndOfTurn().addUntil(untilEOT);
+                        Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
                     }
                 } // resolve()
 
@@ -1643,7 +1643,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
 
-            AllZone.getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
         } // for
     } // upkeepWaterspoutWeavers()
@@ -1727,7 +1727,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
 
-            AllZone.getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
         } // for
     } // upkeepWinnowerPatrol()
@@ -1814,7 +1814,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
 
-            AllZone.getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
         } // for
     } // upkeep_Wolf_Skull_Shaman()
@@ -1883,7 +1883,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 ability.setStackDescription(sb.toString());
                 ability.setDescription(sb.toString());
 
-                AllZone.getStack().addSimultaneousStackEntry(ability);
+                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
             }
         }
@@ -1925,7 +1925,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 ability.setStackDescription(sb.toString());
                 ability.setDescription(sb.toString());
 
-                AllZone.getStack().addSimultaneousStackEntry(ability);
+                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
             }
         }
@@ -2006,7 +2006,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 ability.setStackDescription(sb.toString());
                 ability.setDescription(sb.toString());
 
-                AllZone.getStack().addSimultaneousStackEntry(ability);
+                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
             }
         }
@@ -2055,7 +2055,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 ability.setStackDescription(sb.toString());
                 ability.setDescription(sb.toString());
 
-                AllZone.getStack().addSimultaneousStackEntry(ability);
+                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
             }
         }
@@ -2094,7 +2094,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     ability.setStackDescription(sb.toString());
                     ability.setDescription(sb.toString());
 
-                    AllZone.getStack().addSimultaneousStackEntry(ability);
+                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
                 }
             }
@@ -2131,7 +2131,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             ability.setDescription(sb.toString());
 
             if (damage > 0) {
-                AllZone.getStack().addSimultaneousStackEntry(ability);
+                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
             }
         } // for
     } // upkeepPowerSurge()
@@ -2222,7 +2222,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             ability.setDescription(source.getName() + " - " + player
                     + " taps X artifacts, creatures or lands he or she controls.");
 
-            AllZone.getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
         } // foreach(wire)
     } // upkeepTangleWire()
@@ -2257,7 +2257,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(player).append(".");
             ability.setStackDescription(sb.toString());
 
-            AllZone.getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
 
         }
     }
@@ -2304,7 +2304,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                         enchantment = CardFactoryUtil.getBestEnchantmentAI(enchantmentsInLibrary, this, false);
                     }
                     if (enchantment != null) {
-                        GameAction.changeZone(AllZone.getZoneOf(enchantment),
+                        GameAction.changeZone(GameState.getZoneOf(enchantment),
                                 enchantment.getOwner().getZone(ZoneType.Battlefield), enchantment, null);
                         enchantment.enchantEntity(source.getEnchantingPlayer());
                     }
@@ -2318,7 +2318,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                             + " the same name as a Curse attached to enchanted player, "
                             + "put it onto the battlefield attached to that player, then shuffle you library.");
             ability.setStackDescription(sb.toString());
-            AllZone.getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
         }
     } // upkeepCurseOfMisfortunes
 

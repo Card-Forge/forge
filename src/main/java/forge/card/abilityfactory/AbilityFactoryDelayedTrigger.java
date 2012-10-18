@@ -19,8 +19,8 @@ package forge.card.abilityfactory;
 
 import java.util.HashMap;
 
-import forge.AllZone;
 import forge.Card;
+import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilityActivated;
@@ -299,6 +299,6 @@ public class AbilityFactoryDelayedTrigger {
 
         final Trigger delTrig = TriggerHandler.parseTrigger(mapParams, spellAbility.getSourceCard(), true);
 
-        AllZone.getTriggerHandler().registerDelayedTrigger(delTrig);
+        Singletons.getModel().getGameState().getTriggerHandler().registerDelayedTrigger(delTrig);
     }
 }

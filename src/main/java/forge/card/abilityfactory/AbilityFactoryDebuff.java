@@ -26,7 +26,6 @@ import java.util.Random;
 
 import com.google.common.base.Predicate;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -320,7 +319,7 @@ public final class AbilityFactoryDebuff {
         final SpellAbilityRestriction restrict = sa.getRestrictions();
 
         // Phase Restrictions
-        if ((AllZone.getStack().size() == 0) && Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
+        if ((Singletons.getModel().getGameState().getStack().size() == 0) && Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
             if (!AbilityFactory.isSorcerySpeed(sa)) {
@@ -611,7 +610,7 @@ public final class AbilityFactoryDebuff {
                 }
             }
             if (!params.containsKey("Permanent")) {
-                AllZone.getEndOfTurn().addUntil(new Command() {
+                Singletons.getModel().getGameState().getEndOfTurn().addUntil(new Command() {
                     private static final long serialVersionUID = 5387486776282932314L;
 
                     @Override
@@ -857,7 +856,7 @@ public final class AbilityFactoryDebuff {
                 }
             }
             if (!params.containsKey("Permanent")) {
-                AllZone.getEndOfTurn().addUntil(new Command() {
+                Singletons.getModel().getGameState().getEndOfTurn().addUntil(new Command() {
                     private static final long serialVersionUID = 7486231071095628674L;
 
                     @Override

@@ -19,8 +19,8 @@ package forge.card.spellability;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.AllZone;
 import forge.Card;
+import forge.Singletons;
 import forge.game.GameState;
 
 /**
@@ -69,7 +69,7 @@ public abstract class Ability extends SpellAbility {
     /** {@inheritDoc} */
     @Override
     public boolean canPlay() {
-        if (AllZone.getStack().isSplitSecondOnStack()) {
+        if (Singletons.getModel().getGameState().getStack().isSplitSecondOnStack()) {
             return false;
         }
 

@@ -1038,7 +1038,7 @@ public class AbilityFactoryPermanentState {
                 List<Card> attackers;
                 if (phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                     //Combat has already started
-                    attackers = AllZone.getCombat().getAttackerList();
+                    attackers = Singletons.getModel().getGameState().getCombat().getAttackerList();
                 } else {
                     attackers = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES_CAN_ATTACK);
                     attackers.remove(sa.getSourceCard());

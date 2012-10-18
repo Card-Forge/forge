@@ -23,7 +23,6 @@ import java.util.Random;
 
 import com.google.common.base.Predicate;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -468,7 +467,7 @@ public class ComputerUtilAttack {
 
         final Object entity = ai.getMustAttackEntity();
         if (null != entity) {
-            final List<GameEntity> defenders = AllZone.getCombat().getDefenders();
+            final List<GameEntity> defenders = Singletons.getModel().getGameState().getCombat().getDefenders();
             n = defenders.indexOf(entity);
             if (-1 == n) {
                 System.out.println("getMustAttackEntity() returned something not in defenders.");
@@ -503,11 +502,11 @@ public class ComputerUtilAttack {
         this.random.setSeed(Singletons.getModel().getGameState().getPhaseHandler().getTurn() + this.randomInt);
 
         final Combat combat = new Combat();
-        combat.setAttackingPlayer(AllZone.getCombat().getAttackingPlayer());
-        combat.setDefendingPlayer(AllZone.getCombat().getDefendingPlayer());
+        combat.setAttackingPlayer(Singletons.getModel().getGameState().getCombat().getAttackingPlayer());
+        combat.setDefendingPlayer(Singletons.getModel().getGameState().getCombat().getDefendingPlayer());
 
-        AllZone.getCombat().initiatePossibleDefenders(AllZone.getCombat().getDefendingPlayer());
-        combat.setDefenders(AllZone.getCombat().getDefenders());
+        Singletons.getModel().getGameState().getCombat().initiatePossibleDefenders(Singletons.getModel().getGameState().getCombat().getDefendingPlayer());
+        combat.setDefenders(Singletons.getModel().getGameState().getCombat().getDefenders());
 
         if (this.attackers.isEmpty()) {
             return combat;

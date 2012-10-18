@@ -19,7 +19,6 @@ package forge.game.player;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.AllZone;
 import forge.Singletons;
 import forge.control.input.Input;
 import forge.game.phase.PhaseType;
@@ -94,7 +93,7 @@ public class ComputerAIInput extends Input {
         // TODO instead of setNextPhase, pass priority
         final PhaseType phase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
 
-        if (AllZone.getStack().size() > 0) {
+        if (Singletons.getModel().getGameState().getStack().size() > 0) {
             this.computer.playSpellAbilities();
         } else {
             switch(phase) {

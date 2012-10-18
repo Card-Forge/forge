@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import forge.AllZone;
 import forge.Card;
 import forge.Singletons;
 
@@ -66,7 +65,7 @@ public class StaticAbilityContinuous {
         se.setParams(params);
         se.setTimestamp(hostCard.getTimestamp());
         se.setSource(hostCard);
-        AllZone.getStaticEffects().addStaticEffect(se);
+        Singletons.getModel().getGameState().getStaticEffects().addStaticEffect(se);
 
         int powerBonus = 0;
         int toughnessBonus = 0;

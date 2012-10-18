@@ -21,8 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 import forge.GameEntity;
 import forge.Singletons;
@@ -30,9 +28,11 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.util.Expressions;
 
 /**
  * The Class StaticAbility.
@@ -457,7 +457,7 @@ public class StaticAbility {
         if (this.mapParams.containsKey("EffectZone")) {
             if (!this.mapParams.get("EffectZone").equals("All")
                     && !ZoneType.listValueOf(this.mapParams.get("EffectZone"))
-                        .contains(AllZone.getZoneOf(this.hostCard).getZoneType())) {
+                        .contains(GameState.getZoneOf(this.hostCard).getZoneType())) {
                 return false;
             }
         } else {
@@ -532,7 +532,7 @@ public class StaticAbility {
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
             final int operandValue = AbilityFactory.calculateAmount(this.hostCard, svarOperand, null);
-            if (!AllZoneUtil.compare(sVar, svarOperator, operandValue)) {
+            if (!Expressions.compare(sVar, svarOperator, operandValue)) {
                 return false;
             }
         }
@@ -546,7 +546,7 @@ public class StaticAbility {
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
             final int operandValue = AbilityFactory.calculateAmount(this.hostCard, svarOperand, null);
-            if (!AllZoneUtil.compare(sVar, svarOperator, operandValue)) {
+            if (!Expressions.compare(sVar, svarOperator, operandValue)) {
                 return false;
             }
         }
@@ -560,7 +560,7 @@ public class StaticAbility {
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
             final int operandValue = AbilityFactory.calculateAmount(this.hostCard, svarOperand, null);
-            if (!AllZoneUtil.compare(sVar, svarOperator, operandValue)) {
+            if (!Expressions.compare(sVar, svarOperator, operandValue)) {
                 return false;
             }
         }
@@ -574,7 +574,7 @@ public class StaticAbility {
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
             final int operandValue = AbilityFactory.calculateAmount(this.hostCard, svarOperand, null);
-            if (!AllZoneUtil.compare(sVar, svarOperator, operandValue)) {
+            if (!Expressions.compare(sVar, svarOperator, operandValue)) {
                 return false;
             }
         }

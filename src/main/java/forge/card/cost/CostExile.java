@@ -23,7 +23,6 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -148,8 +147,8 @@ public class CostExile extends CostPartWithList {
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
         List<Card> typeList = new ArrayList<Card>();
         if (this.getFrom().equals(ZoneType.Stack)) {
-            for (int i = 0; i < AllZone.getStack().size(); i++) {
-                typeList.add(AllZone.getStack().peekAbility(i).getSourceCard());
+            for (int i = 0; i < Singletons.getModel().getGameState().getStack().size(); i++) {
+                typeList.add(Singletons.getModel().getGameState().getStack().peekAbility(i).getSourceCard());
             }
         } else {
             typeList = activator.getCardsIn(this.getFrom());
@@ -182,8 +181,8 @@ public class CostExile extends CostPartWithList {
                 ArrayList<SpellAbility> spells = c.getSpellAbilities();
                 for (SpellAbility spell : spells) {
                     if (c.isInZone(ZoneType.Exile)) {
-                        final SpellAbilityStackInstance si = AllZone.getStack().getInstanceFromSpellAbility(spell);
-                        AllZone.getStack().remove(si);
+                        final SpellAbilityStackInstance si = Singletons.getModel().getGameState().getStack().getInstanceFromSpellAbility(spell);
+                        Singletons.getModel().getGameState().getStack().remove(si);
                     }
                 }
             }
@@ -414,9 +413,9 @@ public class CostExile extends CostPartWithList {
                 saList = new ArrayList<SpellAbility>();
                 descList = new ArrayList<String>();
 
-                for (int i = 0; i < AllZone.getStack().size(); i++) {
-                    final Card stC = AllZone.getStack().peekAbility(i).getSourceCard();
-                    final SpellAbility stSA = AllZone.getStack().peekAbility(i).getRootSpellAbility();
+                for (int i = 0; i < Singletons.getModel().getGameState().getStack().size(); i++) {
+                    final Card stC = Singletons.getModel().getGameState().getStack().peekAbility(i).getSourceCard();
+                    final SpellAbility stSA = Singletons.getModel().getGameState().getStack().peekAbility(i).getRootSpellAbility();
                     if (stC.isValid(type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard()) && stSA.isSpell()) {
                         this.saList.add(stSA);
                         if (stC.isCopiedSpell()) {
@@ -446,8 +445,8 @@ public class CostExile extends CostPartWithList {
                         if (i == (nNeeded - 1)) {
                             this.done();
                         }
-                        final SpellAbilityStackInstance si = AllZone.getStack().getInstanceFromSpellAbility(toExile);
-                        AllZone.getStack().remove(si);
+                        final SpellAbilityStackInstance si = Singletons.getModel().getGameState().getStack().getInstanceFromSpellAbility(toExile);
+                        Singletons.getModel().getGameState().getStack().remove(si);
                     } else {
                         this.cancel();
                         break;
