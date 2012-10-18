@@ -171,4 +171,12 @@ public final class GameOutcome implements Iterable<Entry<LobbyPlayer, PlayerStat
         return playerRating.entrySet().iterator();
     }
 
+    /**
+     * TODO: Write javadoc for this method.
+     * @param turnNumber
+     */
+    public void setTurnsPlayed(int turnNumber) {
+        lastTurnNumber = turnNumber;
+    }
+
 }
