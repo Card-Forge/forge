@@ -1,0 +1,10 @@
+Name:Tyrannize
+ManaCost:3 BR BR
+Types:Sorcery
+Text:no text
+A:SP$ Discard | Cost$ 3 BR BR | ValidTgts$ Player | TgtPrompt$ Select target player | Mode$ Hand | UnlessCost$ PayLife<7> | UnlessPayer$ Targeted | SpellDescription$ Target player discards his or her hand unless he or she pays 7 life.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tyrannize.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/201.jpg
+Oracle:Target player discards his or her hand unless he or she pays 7 life.
+End
