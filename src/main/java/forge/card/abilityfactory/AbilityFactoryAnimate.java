@@ -26,7 +26,6 @@ import java.util.Map;
 import com.google.common.collect.Iterables;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -45,6 +44,7 @@ import forge.card.cost.Cost;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
+import forge.game.GameState;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -538,7 +538,7 @@ public final class AbilityFactoryAnimate {
 
         //if host is not on the battlefield don't apply
         if (params.containsKey("UntilHostLeavesPlay")
-                && !AllZoneUtil.isCardInPlay(sa.getSourceCard())) {
+                && !GameState.isCardInPlay(sa.getSourceCard())) {
             return;
         }
 
@@ -1296,7 +1296,7 @@ public final class AbilityFactoryAnimate {
         }
 
         if ((tgtPlayers == null) || tgtPlayers.isEmpty()) {
-            list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            list = GameState.getCardsIn(ZoneType.Battlefield);
         } else {
             list = tgtPlayers.get(0).getCardsIn(ZoneType.Battlefield);
         }

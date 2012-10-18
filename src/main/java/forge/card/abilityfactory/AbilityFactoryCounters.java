@@ -28,7 +28,6 @@ import java.util.Random;
 import com.google.common.base.Predicate;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -43,6 +42,7 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
+import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
@@ -1526,7 +1526,7 @@ public class AbilityFactoryCounters {
     }
     
     private static void proliferateResolveHuman(final AbilityFactory af, final SpellAbility sa) {
-        final List<Card> unchosen = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        final List<Card> unchosen = GameState.getCardsIn(ZoneType.Battlefield);
         AllZone.getInputControl().setInput(new Input() {
             private static final long serialVersionUID = -1779224307654698954L;
 
@@ -1599,7 +1599,7 @@ public class AbilityFactoryCounters {
             }
         };
 
-        List<Card> cardsToProliferate = CardLists.filter(AllZoneUtil.getCardsIn(ZoneType.Battlefield), predProliferate);
+        List<Card> cardsToProliferate = CardLists.filter(GameState.getCardsIn(ZoneType.Battlefield), predProliferate);
         List<Player> playersToPoison = new ArrayList<Player>();
         for( Player e : enemies ) {
             if ( e.getPoisonCounters() > 0 ) 
@@ -1990,7 +1990,7 @@ public class AbilityFactoryCounters {
         final String valid = params.get("ValidCards");
         final ZoneType zone = params.containsKey("ValidZone") ? ZoneType.smartValueOf(params.get("ValidZone")) : ZoneType.Battlefield;
 
-        List<Card> cards = AllZoneUtil.getCardsIn(zone);
+        List<Card> cards = GameState.getCardsIn(zone);
         cards = CardLists.getValidCards(cards, valid, sa.getSourceCard().getController(), sa.getSourceCard());
 
         final Target tgt = sa.getTarget();
@@ -2245,7 +2245,7 @@ public class AbilityFactoryCounters {
         final String valid = params.get("ValidCards");
         final ZoneType zone = params.containsKey("ValidZone") ? ZoneType.smartValueOf(params.get("ValidZone")) : ZoneType.Battlefield;
 
-        List<Card> cards = AllZoneUtil.getCardsIn(zone);
+        List<Card> cards = GameState.getCardsIn(zone);
         cards = CardLists.getValidCards(cards, valid, sa.getSourceCard().getController(), sa.getSourceCard());
 
         final Target tgt = sa.getTarget();

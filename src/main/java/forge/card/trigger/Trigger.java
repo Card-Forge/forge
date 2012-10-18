@@ -33,6 +33,7 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
 
@@ -410,7 +411,7 @@ public abstract class Trigger extends TriggerReplacementBase {
         }
 
         if (this.getMapParams().containsKey("CheckSVar")) {
-            final int sVar = AbilityFactory.calculateAmount(AllZoneUtil.getCardState(this.getHostCard()), this
+            final int sVar = AbilityFactory.calculateAmount(GameState.getCardState(this.getHostCard()), this
                     .getMapParams().get("CheckSVar"), null);
             String comparator = "GE1";
             if (this.getMapParams().containsKey("SVarCompare")) {
@@ -418,7 +419,7 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
-            final int operandValue = AbilityFactory.calculateAmount(AllZoneUtil.getCardState(this.getHostCard()),
+            final int operandValue = AbilityFactory.calculateAmount(GameState.getCardState(this.getHostCard()),
                     svarOperand, null);
             if (!AllZoneUtil.compare(sVar, svarOperator, operandValue)) {
                 return false;

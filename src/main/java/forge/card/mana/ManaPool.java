@@ -21,12 +21,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import forge.AllZoneUtil;
 import forge.Constant;
 import forge.Singletons;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayManaCostUtil;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
@@ -185,7 +185,7 @@ public class ManaPool {
             return numRemoved;
         }
 
-        if (AllZoneUtil.isCardInPlay("Omnath, Locus of Mana", this.owner)) {
+        if (GameState.isCardInPlay("Omnath, Locus of Mana", this.owner)) {
             // Omnath in play, clear all non-green mana
             int i = 0;
             while (i < this.floatingMana.size()) {

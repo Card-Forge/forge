@@ -25,7 +25,6 @@ import java.util.Random;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -41,6 +40,7 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
+import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
@@ -904,7 +904,7 @@ public class AbilityFactoryDealDamage {
         for (final Object o : tgts) {
             if (o instanceof Card) {
                 final Card c = (Card) o;
-                if (AllZoneUtil.isCardInPlay(c) && (!targeted || c.canBeTargetedBy(saMe))) {
+                if (GameState.isCardInPlay(c) && (!targeted || c.canBeTargetedBy(saMe))) {
                     if (noPrevention) {
                         c.addDamageWithoutPrevention(dmg, source);
                     } else if (combatDmg) {
@@ -1376,7 +1376,7 @@ public class AbilityFactoryDealDamage {
         }
 
         if (params.containsKey("ValidCards")) {
-            list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            list = GameState.getCardsIn(ZoneType.Battlefield);
         }
 
         if (targetPlayer != null) {
@@ -1640,7 +1640,7 @@ public class AbilityFactoryDealDamage {
         final HashMap<String, String> params = af.getMapParams();
         final Card card = sa.getSourceCard();
 
-        List<Card> sources = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> sources = GameState.getCardsIn(ZoneType.Battlefield);
         if (params.containsKey("ValidCards")) {
             sources = CardLists.getValidCards(sources, params.get("ValidCards"), card.getController(), card);
         }
@@ -1660,7 +1660,7 @@ public class AbilityFactoryDealDamage {
                 // System.out.println(source+" deals "+dmg+" damage to "+o.toString());
                 if (o instanceof Card) {
                     final Card c = (Card) o;
-                    if (AllZoneUtil.isCardInPlay(c) && (!targeted || c.canBeTargetedBy(sa))) {
+                    if (GameState.isCardInPlay(c) && (!targeted || c.canBeTargetedBy(sa))) {
                         c.addDamage(dmg, source);
                     }
 
@@ -1900,7 +1900,7 @@ public class AbilityFactoryDealDamage {
         Target tgt = sa.getTarget();
         tgt.resetTargets();
 
-        List<Card> aiCreatures = AllZoneUtil.getCreaturesInPlay(ai);
+        List<Card> aiCreatures = GameState.getCreaturesInPlay(ai);
         aiCreatures = CardLists.getTargetableCards(aiCreatures, sa);
         aiCreatures = CardLists.filter(aiCreatures, new Predicate<Card>() {
             @Override
@@ -1909,7 +1909,7 @@ public class AbilityFactoryDealDamage {
             }
         });
 
-        List<Card> humCreatures = AllZoneUtil.getCreaturesInPlay(ai.getOpponent());
+        List<Card> humCreatures = GameState.getCreaturesInPlay(ai.getOpponent());
         humCreatures = CardLists.getTargetableCards(humCreatures, sa);
 
         final Random r = MyRandom.getRandom();
@@ -1993,8 +1993,8 @@ public class AbilityFactoryDealDamage {
             fighter2 = tgts.get(1);
         }
 
-        if (fighter1 == null || fighter2 == null || !AllZoneUtil.isCardInPlay(fighter1)
-                || !AllZoneUtil.isCardInPlay(fighter2)) {
+        if (fighter1 == null || fighter2 == null || !GameState.isCardInPlay(fighter1)
+                || !GameState.isCardInPlay(fighter2)) {
             return;
         }
 

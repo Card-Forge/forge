@@ -53,6 +53,7 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
+import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -1224,7 +1225,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             return false;
         }
         if (this.isCreature() && counterName.equals(Counters.M1M1)) {
-            for (final Card c : AllZoneUtil.getCreaturesInPlay(this.getController())) { // look
+            for (final Card c : GameState.getCreaturesInPlay(this.getController())) { // look
                                                                                         // for
                                                                                         // Melira,
                                                                                         // Sylvok
@@ -1285,7 +1286,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (!this.canHaveCountersPlacedOnIt(counterName)) {
             return;
         }
-        final int multiplier = AllZoneUtil.getCounterDoublersMagnitude(this.getController(),counterName);
+        final int multiplier = GameState.getCounterDoublersMagnitude(this.getController(),counterName);
         if (this.counters.containsKey(counterName)) {
             final Integer aux = this.counters.get(counterName) + (multiplier * n);
             this.counters.put(counterName, aux);
@@ -1333,11 +1334,11 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (counterName.equals(Counters.TIME) && (aux == 0)) {
                 final boolean hasVanish = CardFactoryUtil.hasKeyword(this, "Vanishing") != -1;
 
-                if (hasVanish && AllZoneUtil.isCardInPlay(this)) {
+                if (hasVanish && GameState.isCardInPlay(this)) {
                     Singletons.getModel().getGameAction().sacrifice(this, null);
                 }
 
-                if (this.hasSuspend() && AllZoneUtil.isCardExiled(this)) {
+                if (this.hasSuspend() && GameState.isCardExiled(this)) {
                     final Card c = this;
 
                     c.setSuspendCast(true);
@@ -4751,7 +4752,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             return 0;
         }
 
-        if (AllZoneUtil.isCardInPlay("Doran, the Siege Tower")) {
+        if (GameState.isCardInPlay("Doran, the Siege Tower")) {
             return this.getNetDefense();
         }
         return this.getNetAttack();
@@ -6489,7 +6490,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.startsWith("RememberedPlayerCtrl")) {
             if (source.getRemembered().isEmpty()) {
-                final Card newCard = AllZoneUtil.getCardState(source);
+                final Card newCard = GameState.getCardState(source);
                 for (final Object o : newCard.getRemembered()) {
                     if (o instanceof Player) {
                         if (!this.getController().equals((Player) o)) {
@@ -6722,7 +6723,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 } else if (restriction.equals("MostProminentColor")) {
                     for (final String color : CardUtil.getColors(this)) {
-                        if (CardFactoryUtil.isMostProminentColor(AllZoneUtil.getCardsIn(ZoneType.Battlefield), color)) {
+                        if (CardFactoryUtil.isMostProminentColor(GameState.getCardsIn(ZoneType.Battlefield), color)) {
                             return true;
                         }
                     }
@@ -6811,12 +6812,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                         return false;
                     }
                 } else if (restriction.equals(ZoneType.Battlefield.toString())) {
-                    final List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+                    final List<Card> list = GameState.getCardsIn(ZoneType.Battlefield);
                     if (list.isEmpty()) {
                         return false;
                     }
                     boolean shares = false;
-                    for (final Card card : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
+                    for (final Card card : GameState.getCardsIn(ZoneType.Battlefield)) {
                         if (this.getName().equals(card.getName())) {
                             shares = true;
                         }
@@ -6984,28 +6985,28 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("greatestPower")) {
-            final List<Card> list = AllZoneUtil.getCreaturesInPlay();
+            final List<Card> list = GameState.getCreaturesInPlay();
             for (final Card crd : list) {
                 if (crd.getNetAttack() > this.getNetAttack()) {
                     return false;
                 }
             }
         } else if (property.startsWith("leastPower")) {
-            final List<Card> list = AllZoneUtil.getCreaturesInPlay();
+            final List<Card> list = GameState.getCreaturesInPlay();
             for (final Card crd : list) {
                 if (crd.getNetAttack() < this.getNetAttack()) {
                     return false;
                 }
             }
         } else if (property.startsWith("greatestCMC")) {
-            final List<Card> list = AllZoneUtil.getCreaturesInPlay();
+            final List<Card> list = GameState.getCreaturesInPlay();
             for (final Card crd : list) {
                 if (crd.getCMC() > this.getCMC()) {
                     return false;
                 }
             }
         } else if (property.startsWith("lowestCMC")) {
-            final List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            final List<Card> list = GameState.getCardsIn(ZoneType.Battlefield);
             for (final Card crd : list) {
                 if (!crd.isLand() && !crd.isImmutable() && (crd.getCMC() < this.getCMC())) {
                     return false;
@@ -7050,7 +7051,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
         } else if (property.startsWith("suspended")) {
-            if (!this.hasSuspend() || !AllZoneUtil.isCardExiled(this)
+            if (!this.hasSuspend() || !GameState.isCardExiled(this)
                     || !(this.getCounters(Counters.getType("TIME")) >= 1)) {
                 return false;
             }
@@ -7271,7 +7272,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("OnBattlefield")) {
-            final List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            final List<Card> list = GameState.getCardsIn(ZoneType.Battlefield);
             if (!list.contains(this)) {
                 return false;
             }
@@ -7950,7 +7951,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             map.put(source, damageToAdd);
         }
 
-        if (AllZoneUtil.isCardInPlay(this)) {
+        if (GameState.isCardInPlay(this)) {
             this.addDamage(map);
         }
     }
@@ -8004,7 +8005,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final int staticDamagePrevention(final int damage, final int possiblePrvenetion, final Card source,
             final boolean isCombat) {
 
-        if (AllZoneUtil.isCardInPlay("Leyline of Punishment")) {
+        if (GameState.isCardInPlay("Leyline of Punishment")) {
             return damage;
         }
 
@@ -8033,7 +8034,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     @Override
     public final int staticDamagePrevention(final int damageIn, final Card source, final boolean isCombat) {
 
-        if (AllZoneUtil.isCardInPlay("Leyline of Punishment")) {
+        if (GameState.isCardInPlay("Leyline of Punishment")) {
             return damageIn;
         }
 
@@ -8096,7 +8097,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // Prevent Damage static abilities
-        final List<Card> allp = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        final List<Card> allp = GameState.getCardsIn(ZoneType.Battlefield);
         for (final Card ca : allp) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
@@ -8110,7 +8111,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return 0;
             }
 
-            if ((source.isCreature() && AllZoneUtil.isCardInPlay("Well-Laid Plans") && source.sharesColorWith(this))) {
+            if ((source.isCreature() && GameState.isCardInPlay("Well-Laid Plans") && source.sharesColorWith(this))) {
                 return 0;
             }
         } // Creature end
@@ -8138,7 +8139,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     @Override
     public final int preventDamage(final int damage, final Card source, final boolean isCombat) {
 
-        if (AllZoneUtil.isCardInPlay("Leyline of Punishment")
+        if (GameState.isCardInPlay("Leyline of Punishment")
                 || source.hasKeyword("Damage that would be dealt by CARDNAME can't be prevented.")) {
             return damage;
         }
@@ -8204,7 +8205,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final int staticReplaceDamage(final int damage, final Card source, final boolean isCombat) {
 
         int restDamage = damage;
-        for (Card c : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
+        for (Card c : GameState.getCardsIn(ZoneType.Battlefield)) {
             if (c.getName().equals("Sulfuric Vapors")) {
                 if (source.isSpell() && source.isRed()) {
                     restDamage += 1;
@@ -8363,12 +8364,12 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         GameActionUtil.executeDamageToCreatureEffects(source, this, damageToAdd);
 
-        if (AllZoneUtil.isCardInPlay(this) && wither) {
+        if (GameState.isCardInPlay(this) && wither) {
             this.addCounter(Counters.M1M1, damageToAdd);
         }
         if (source.hasKeyword("Deathtouch") && this.isCreature()) {
             Singletons.getModel().getGameAction().destroy(this);
-        } else if (AllZoneUtil.isCardInPlay(this) && !wither) {
+        } else if (GameState.isCardInPlay(this) && !wither) {
             this.damage += damageToAdd;
         }
         return true;
@@ -8885,7 +8886,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // CantTarget static abilities
-        final List<Card> allp = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        final List<Card> allp = GameState.getCardsIn(ZoneType.Battlefield);
         for (final Card ca : allp) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {

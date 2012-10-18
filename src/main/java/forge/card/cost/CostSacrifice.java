@@ -21,7 +21,6 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -29,6 +28,7 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
@@ -120,7 +120,7 @@ public class CostSacrifice extends CostPartWithList {
             // choice, it can be Paid even if it's 0
         }
         else {
-            if (!AllZoneUtil.isCardInPlay(source)) {
+            if (!GameState.isCardInPlay(source)) {
                 return false;
             }
             else if (source.isCreature() && activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
@@ -357,7 +357,7 @@ public class CostSacrifice extends CostPartWithList {
             @Override
             public void showMessage() {
                 final Card card = sa.getSourceCard();
-                if (card.getController().isHuman() && AllZoneUtil.isCardInPlay(card)) {
+                if (card.getController().isHuman() && GameState.isCardInPlay(card)) {
                     final StringBuilder sb = new StringBuilder();
                     sb.append(card.getName());
                     sb.append(" - Sacrifice?");

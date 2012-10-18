@@ -24,7 +24,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -38,6 +37,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.phase.PhaseUtil;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -92,7 +92,7 @@ public class CardFactoryInstants {
                 @Override
                 public void resolve() {
                     Player player = getTargetPlayer();
-                    List<Card> artifacts = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+                    List<Card> artifacts = GameState.getCardsIn(ZoneType.Battlefield);
                     artifacts = CardLists.filter(artifacts, CardPredicates.Presets.ARTIFACTS);
 
                     for (int i = 0; i < artifacts.size(); i++) {
@@ -304,7 +304,7 @@ public class CardFactoryInstants {
                     // the siren flag
                     final Player player = card.getController();
                     final Player opponent = player.getOpponent();
-                    final List<Card> creatures = AllZoneUtil.getCreaturesInPlay(opponent);
+                    final List<Card> creatures = GameState.getCreaturesInPlay(opponent);
                     for (final Card creature : creatures) {
                         // skip walls, skip creatures with summoning sickness
                         // also skip creatures with haste if they came onto the
@@ -320,7 +320,7 @@ public class CardFactoryInstants {
                         public void resolve() {
                             final Player player = card.getController();
                             final Player opponent = player.getOpponent();
-                            final List<Card> creatures = AllZoneUtil.getCreaturesInPlay(opponent);
+                            final List<Card> creatures = GameState.getCreaturesInPlay(opponent);
 
                             for (final Card creature : creatures) {
                                 // System.out.println("Siren's Call - EOT - "+creature.getName()
@@ -328,7 +328,7 @@ public class CardFactoryInstants {
                                 // System.out.println("Siren's Call - EOT - "+creature.getName()
                                 // +" attacked?: "+creature.getCreatureAttackedThisCombat());
                                 if (creature.getSirenAttackOrDestroy() && !creature.getDamageHistory().getCreatureAttackedThisTurn()) {
-                                    if (AllZoneUtil.isCardInPlay(creature)) {
+                                    if (GameState.isCardInPlay(creature)) {
                                         // System.out.println("Siren's Call - destroying "+creature.getName());
                                         // this should probably go on the stack
                                         Singletons.getModel().getGameAction().destroy(creature);
@@ -417,7 +417,7 @@ public class CardFactoryInstants {
                 @Override
                 public void resolve() {
                     final Player you = card.getController();
-                    final List<Card> ens = CardLists.filter(AllZoneUtil.getCardsIn(ZoneType.Battlefield), Presets.ENCHANTMENTS);
+                    final List<Card> ens = CardLists.filter(GameState.getCardsIn(ZoneType.Battlefield), Presets.ENCHANTMENTS);
                     final List<Card> toReturn = CardLists.filter(ens, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
@@ -521,7 +521,7 @@ public class CardFactoryInstants {
                 public void resolve() {
                     final Card myc = this.getParent().getTargetCard();
                     final Card tgt = this.getTargetCard();
-                    if (AllZoneUtil.isCardInPlay(myc) && AllZoneUtil.isCardInPlay(tgt)) {
+                    if (GameState.isCardInPlay(myc) && GameState.isCardInPlay(tgt)) {
                         if (myc.canBeTargetedBy(this) && tgt.canBeTargetedBy(this)) {
                             tgt.addDamage(myc.getNetAttack(), myc);
                         }

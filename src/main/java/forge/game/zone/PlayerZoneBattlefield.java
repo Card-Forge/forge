@@ -25,7 +25,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -36,6 +35,7 @@ import forge.Singletons;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
+import forge.game.GameState;
 import forge.game.player.Player;
 
 /**
@@ -85,7 +85,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
                 c.setTapped(true);
             } else {
                 // ETBTapped static abilities
-                final List<Card> allp = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+                final List<Card> allp = GameState.getCardsIn(ZoneType.Battlefield);
                 for (final Card ca : allp) {
                     final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
                     for (final StaticAbility stAb : staticAbilities) {
@@ -124,7 +124,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
             if (c.isLand()) {
 
                 // Tectonic Instability
-                final List<Card> tis = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Tectonic Instability");
+                final List<Card> tis = GameState.getCardsIn(ZoneType.Battlefield, "Tectonic Instability");
                 final Card tisLand = c;
                 for (final Card ti : tis) {
                     final Card source = ti;
@@ -153,7 +153,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
                     final SpellAbility ability = new Ability(source, "") {
                         @Override
                         public void resolve() {
-                            final List<Card> lands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner());
+                            final List<Card> lands = GameState.getPlayerLandsInPlay(lesLand.getOwner());
                             lesLand.getOwner().sacrificePermanent(source.getName() + " - Select a land to sacrifice",
                                     lands);
                         }
@@ -162,8 +162,8 @@ public class PlayerZoneBattlefield extends PlayerZone {
                     sb.append(source).append(" - ");
                     sb.append(tisLand.getController()).append(" sacrifices a land.");
                     ability.setStackDescription(sb.toString());
-                    final List<Card> pLands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner());
-                    final List<Card> oLands = AllZoneUtil.getPlayerLandsInPlay(lesLand.getOwner().getOpponent());
+                    final List<Card> pLands = GameState.getPlayerLandsInPlay(lesLand.getOwner());
+                    final List<Card> oLands = GameState.getPlayerLandsInPlay(lesLand.getOwner().getOpponent());
                     // (pLands - 1) because this land is in play, and the
                     // ability is before it is in play
                     if (oLands.size() <= (pLands.size() - 1)) {

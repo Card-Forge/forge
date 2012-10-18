@@ -77,7 +77,7 @@ public class GameAction {
      * </p>
      */
     public final void resetActivationsPerTurn() {
-        final List<Card> all = AllZoneUtil.getCardsInGame();
+        final List<Card> all = GameState.getCardsInGame();
 
         // Reset Activations per Turn
         for (final Card card : all) {
@@ -256,7 +256,7 @@ public class GameAction {
             if (copied.isEquipped()) {
                 final List<Card> equipments = new ArrayList<Card>(copied.getEquippedBy());
                 for (final Card equipment : equipments) {
-                    if (AllZoneUtil.isCardInPlay(equipment)) {
+                    if (GameState.isCardInPlay(equipment)) {
                         equipment.unEquipCard(copied);
                     }
                 }
@@ -265,7 +265,7 @@ public class GameAction {
             if (copied.isEquipped()) {
                 final List<Card> equipments = new ArrayList<Card>(copied.getEquippedBy());
                 for (final Card equipment : equipments) {
-                    if (AllZoneUtil.isCardInPlay(equipment)) {
+                    if (GameState.isCardInPlay(equipment)) {
                         equipment.unEquipCard(copied);
                     }
                 }
@@ -273,7 +273,7 @@ public class GameAction {
             // equipment moving off battlefield
             if (copied.isEquipping()) {
                 final Card equippedCreature = copied.getEquipping().get(0);
-                if (AllZoneUtil.isCardInPlay(equippedCreature)) {
+                if (GameState.isCardInPlay(equippedCreature)) {
                     copied.unEquipCard(equippedCreature);
                 }
             }
@@ -723,7 +723,7 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public final Card exile(final Card c) {
-        if (AllZoneUtil.isCardExiled(c)) {
+        if (GameState.isCardExiled(c)) {
             return c;
         }
 
@@ -943,7 +943,7 @@ public class GameAction {
         AllZone.getStaticEffects().clearStaticEffects();
 
         // search for cards with static abilities
-        final List<Card> allCards = AllZoneUtil.getCardsInGame();
+        final List<Card> allCards = GameState.getCardsInGame();
         final ArrayList<StaticAbility> staticAbilities = new ArrayList<StaticAbility>();
         for (final Card card : allCards) {
             for (StaticAbility sa : card.getStaticAbilities()) {
@@ -1010,7 +1010,7 @@ public class GameAction {
         if (this.checkEndGameState(match, match.getCurrentGame())) {
             // Clear Simultaneous triggers at the end of the game
             new ViewWinLose(match);
-            Singletons.getModel().getGameState().getStack().clearSimultaneousStack();
+            match.getCurrentGame().getStack().clearSimultaneousStack();
             if (!refreeze) {
                 AllZone.getStack().unfreezeStack();
             }
@@ -1028,12 +1028,12 @@ public class GameAction {
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             AllZone.getTriggerHandler().runTrigger(TriggerType.Always, runParams);
 
-            for (Card c : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
+            for (Card c : GameState.getCardsIn(ZoneType.Battlefield)) {
                 
                 if (c.isEquipped()) {
                     final List<Card> equipments = new ArrayList<Card>(c.getEquippedBy());
                     for (final Card equipment : equipments) {
-                        if (!AllZoneUtil.isCardInPlay(equipment)) {
+                        if (!GameState.isCardInPlay(equipment)) {
                             equipment.unEquipCard(c);
                             checkAgain = true;
                         }
@@ -1042,7 +1042,7 @@ public class GameAction {
 
                 if (c.isEquipping()) {
                     final Card equippedCreature = c.getEquipping().get(0);
-                    if (!equippedCreature.isCreature() || !AllZoneUtil.isCardInPlay(equippedCreature)) {
+                    if (!equippedCreature.isCreature() || !GameState.isCardInPlay(equippedCreature)) {
                         c.unEquipCard(equippedCreature);
                         checkAgain = true;
                     }
@@ -1066,7 +1066,7 @@ public class GameAction {
 
                     if (entity instanceof Card) {
                         final Card perm = (Card) entity;
-                        if (!AllZoneUtil.isCardInPlay(perm) || !perm.canBeEnchantedBy(c)) {
+                        if (!GameState.isCardInPlay(perm) || !perm.canBeEnchantedBy(c)) {
                             c.unEnchantEntity(perm);
                             this.moveToGraveyard(c);
                             checkAgain = true;
@@ -1089,7 +1089,7 @@ public class GameAction {
                         }
                     }
 
-                    if (AllZoneUtil.isCardInPlay(c) && !c.isEnchanting()) {
+                    if (GameState.isCardInPlay(c) && !c.isEnchanting()) {
                         this.moveToGraveyard(c);
                         checkAgain = true;
                     }
@@ -1203,7 +1203,7 @@ public class GameAction {
      */
     private void destroyPlaneswalkers() {
         // get all Planeswalkers
-        final List<Card> list = CardLists.filter(AllZoneUtil.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
+        final List<Card> list = CardLists.filter(GameState.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
 
         Card c;
         for (int i = 0; i < list.size(); i++) {
@@ -1236,13 +1236,13 @@ public class GameAction {
      * </p>
      */
     private void destroyLegendaryCreatures() {
-        final List<Card> a = CardLists.getType(AllZoneUtil.getCardsIn(ZoneType.Battlefield), "Legendary");
-        if (a.isEmpty() || AllZoneUtil.isCardInPlay("Mirror Gallery")) {
+        final List<Card> a = CardLists.getType(GameState.getCardsIn(ZoneType.Battlefield), "Legendary");
+        if (a.isEmpty() || GameState.isCardInPlay("Mirror Gallery")) {
             return;
         }
 
         while (!a.isEmpty()) {
-            List<Card> b = AllZoneUtil.getCardsIn(ZoneType.Battlefield, a.get(0).getName());
+            List<Card> b = GameState.getCardsIn(ZoneType.Battlefield, a.get(0).getName());
             b = CardLists.getType(b, "Legendary");
             b = CardLists.filter(b, new Predicate<Card>() {
                 @Override
@@ -1300,7 +1300,7 @@ public class GameAction {
      * @return a boolean.
      */
     public final boolean destroyNoRegeneration(final Card c) {
-        if (!AllZoneUtil.isCardInPlay(c) || c.hasKeyword("Indestructible")) {
+        if (!GameState.isCardInPlay(c) || c.hasKeyword("Indestructible")) {
             return false;
         }
 
@@ -1365,7 +1365,7 @@ public class GameAction {
 
             @Override
             public void execute() {
-                if (AllZoneUtil.isCardInPlay(c) && c.isCreature()) {
+                if (GameState.isCardInPlay(c) && c.isCreature()) {
                     c.addExtrinsicKeyword("Haste");
                 }
             } // execute()
@@ -1400,7 +1400,7 @@ public class GameAction {
      * @return a boolean.
      */
     public final boolean sacrificeDestroy(final Card c) {
-        if (!AllZoneUtil.isCardInPlay(c)) {
+        if (!GameState.isCardInPlay(c)) {
             return false;
         }
 
@@ -1479,7 +1479,7 @@ public class GameAction {
      * @return a boolean.
      */
     public final boolean destroy(final Card c) {
-        if (!AllZoneUtil.isCardInPlay(c)
+        if (!GameState.isCardInPlay(c)
                 || (c.hasKeyword("Indestructible") && (!c.isCreature() || (c.getNetDefense() > 0)))) {
             return false;
         }
@@ -1848,7 +1848,7 @@ public class GameAction {
             }
         } // isSpell
 
-        List<Card> cardsOnBattlefield = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> cardsOnBattlefield = GameState.getCardsIn(ZoneType.Battlefield);
         cardsOnBattlefield.add(originalCard);
         final ArrayList<StaticAbility> raiseAbilities = new ArrayList<StaticAbility>();
         final ArrayList<StaticAbility> reduceAbilities = new ArrayList<StaticAbility>();

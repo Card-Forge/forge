@@ -29,7 +29,6 @@ import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -55,6 +54,7 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
+import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.ComputerUtilBlock;
 import forge.game.player.Player;
@@ -101,7 +101,7 @@ public class CombatUtil {
             return false;
         }
 
-        for (final Card c : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
+        for (final Card c : GameState.getCardsIn(ZoneType.Battlefield)) {
             for (final String keyword : c.getKeyword()) {
                 if (keyword.equals("No more than one creature can block each combat.")
                         && (combat.getAllBlockers().size() > 0)) {
@@ -114,7 +114,7 @@ public class CombatUtil {
             }
         }
 
-        if (combat.getAllBlockers().size() > 0 && AllZoneUtil.isCardInPlay("Dueling Grounds")) {
+        if (combat.getAllBlockers().size() > 0 && GameState.isCardInPlay("Dueling Grounds")) {
             return false;
         }
 
@@ -160,7 +160,7 @@ public class CombatUtil {
             return false;
         }
 
-        final List<Card> list = AllZoneUtil.getCreaturesInPlay(blocker.getController());
+        final List<Card> list = GameState.getCreaturesInPlay(blocker.getController());
         if (list.size() < 2 && blocker.hasKeyword("CARDNAME can't attack or block alone.")) {
             return false;
         }
@@ -382,7 +382,7 @@ public class CombatUtil {
      */
     public static boolean finishedMandatoryBlocks(final Combat combat) {
 
-        final List<Card> blockers = AllZoneUtil.getCreaturesInPlay(Singletons.getControl().getPlayer());
+        final List<Card> blockers = GameState.getCreaturesInPlay(Singletons.getControl().getPlayer());
         final List<Card> attackers = combat.getAttackerList();
 
         // if a creature does not block but should, return false
@@ -761,7 +761,7 @@ public class CombatUtil {
             return false;
         }
 
-        if (AllZoneUtil.isCardInPlay("Shifting Sliver")) {
+        if (GameState.isCardInPlay("Shifting Sliver")) {
             if (attacker.isType("Sliver") && !blocker.isType("Sliver")) {
                 return false;
             }
@@ -785,7 +785,7 @@ public class CombatUtil {
     public static boolean canAttack(final Card c, final Combat combat) {
 
         int cntAttackers = combat.getAttackers().size();
-        for (final Card card : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
+        for (final Card card : GameState.getCardsIn(ZoneType.Battlefield)) {
             for (final String keyword : card.getKeyword()) {
                 if (keyword.equals("No more than one creature can attack each combat.") && cntAttackers > 0) {
                     return false;
@@ -803,7 +803,7 @@ public class CombatUtil {
             }
         }
 
-        final List<Card> list = AllZoneUtil.getCreaturesInPlay(c.getController());
+        final List<Card> list = GameState.getCreaturesInPlay(c.getController());
         if (list.size() < 2 && c.hasKeyword("CARDNAME can't attack or block alone.")) {
             return false;
         }
@@ -812,7 +812,7 @@ public class CombatUtil {
             return false;
         }
 
-        if (cntAttackers > 0 && AllZoneUtil.isCardInPlay("Dueling Grounds")) {
+        if (cntAttackers > 0 && GameState.isCardInPlay("Dueling Grounds")) {
             return false;
         }
 
@@ -880,7 +880,7 @@ public class CombatUtil {
                 if (asSeparateWords[12].matches("[0-9][0-9]?")) {
                     powerLimit[0] = Integer.parseInt((asSeparateWords[12]).trim());
 
-                    List<Card> list = AllZoneUtil.getCreaturesInPlay(c.getController().getOpponent());
+                    List<Card> list = GameState.getCreaturesInPlay(c.getController().getOpponent());
                     list = CardLists.filter(list, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card ct) {
@@ -959,7 +959,7 @@ public class CombatUtil {
     public static int getTotalFirstStrikeBlockPower(final Card attacker, final Player player) {
         final Card att = attacker;
 
-        List<Card> list = AllZoneUtil.getCreaturesInPlay(player);
+        List<Card> list = GameState.getCreaturesInPlay(player);
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -1322,7 +1322,7 @@ public class CombatUtil {
         }
 
         int defenderDamage = defender.getNetAttack() + CombatUtil.predictPowerBonusOfBlocker(attacker, defender, true);
-        if (AllZoneUtil.isCardInPlay("Doran, the Siege Tower")) {
+        if (GameState.isCardInPlay("Doran, the Siege Tower")) {
             defenderDamage = defender.getNetDefense() + CombatUtil.predictToughnessBonusOfBlocker(attacker, defender, true);
         }
 
@@ -1582,7 +1582,7 @@ public class CombatUtil {
 
         // look out for continuous static abilities that only care for blocking
         // creatures
-        final List<Card> cardList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        final List<Card> cardList = GameState.getCardsIn(ZoneType.Battlefield);
         for (final Card card : cardList) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
                 final HashMap<String, String> params = stAb.getMapParams();
@@ -1609,7 +1609,7 @@ public class CombatUtil {
         }
 
         final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
-        for (Card card : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
+        for (Card card : GameState.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }
         theTriggers.addAll(attacker.getTriggers());
@@ -1708,7 +1708,7 @@ public class CombatUtil {
         toughness += defender.getKeywordMagnitude("Bushido");
 
         final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
-        for (Card card : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
+        for (Card card : GameState.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }
         theTriggers.addAll(attacker.getTriggers());
@@ -1830,7 +1830,7 @@ public class CombatUtil {
         }
 
         final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
-        for (Card card : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
+        for (Card card : GameState.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }
         // if the defender has first strike and wither the attacker will deal
@@ -1847,7 +1847,7 @@ public class CombatUtil {
 
         // look out for continuous static abilities that only care for attacking
         // creatures
-        final List<Card> cardList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        final List<Card> cardList = GameState.getCardsIn(ZoneType.Battlefield);
         for (final Card card : cardList) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
                 final HashMap<String, String> params = stAb.getMapParams();
@@ -1962,7 +1962,7 @@ public class CombatUtil {
         }
 
         final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
-        for (Card card : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
+        for (Card card : GameState.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }
         if (defender != null) {
@@ -1972,7 +1972,7 @@ public class CombatUtil {
 
         // look out for continuous static abilities that only care for attacking
         // creatures
-        final List<Card> cardList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        final List<Card> cardList = GameState.getCardsIn(ZoneType.Battlefield);
         for (final Card card : cardList) {
             for (final StaticAbility stAb : card.getStaticAbilities()) {
                 final HashMap<String, String> params = stAb.getMapParams();
@@ -2093,7 +2093,7 @@ public class CombatUtil {
      */
     public static boolean checkDestroyBlockerTrigger(final Card attacker, final Card defender) {
         final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
-        for (Card card : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
+        for (Card card : GameState.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }
         for (Trigger trigger : theTriggers) {
@@ -2148,7 +2148,7 @@ public class CombatUtil {
      */
     public static boolean checkDestroyAttackerTrigger(final Card attacker, final Card defender) {
         final ArrayList<Trigger> theTriggers = new ArrayList<Trigger>();
-        for (Card card : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
+        for (Card card : GameState.getCardsIn(ZoneType.Battlefield)) {
             theTriggers.addAll(card.getTriggers());
         }
         for (Trigger trigger : theTriggers) {
@@ -2242,7 +2242,7 @@ public class CombatUtil {
                 + CombatUtil.predictPowerBonusOfBlocker(attacker, defender, withoutAbilities);
         int attackerDamage = attacker.getNetAttack()
                 + CombatUtil.predictPowerBonusOfAttacker(attacker, defender, combat);
-        if (AllZoneUtil.isCardInPlay("Doran, the Siege Tower")) {
+        if (GameState.isCardInPlay("Doran, the Siege Tower")) {
             defenderDamage = defender.getNetDefense()
                     + CombatUtil.predictToughnessBonusOfBlocker(attacker, defender, withoutAbilities);
             attackerDamage = attacker.getNetDefense()
@@ -2390,7 +2390,7 @@ public class CombatUtil {
                 + CombatUtil.predictPowerBonusOfBlocker(attacker, defender, withoutAbilities);
         int attackerDamage = attacker.getNetAttack()
                 + CombatUtil.predictPowerBonusOfAttacker(attacker, defender, combat);
-        if (AllZoneUtil.isCardInPlay("Doran, the Siege Tower")) {
+        if (GameState.isCardInPlay("Doran, the Siege Tower")) {
             defenderDamage = defender.getNetDefense()
                     + CombatUtil.predictToughnessBonusOfBlocker(attacker, defender, withoutAbilities);
             attackerDamage = attacker.getNetDefense()
@@ -2479,7 +2479,7 @@ public class CombatUtil {
      * </p>
      */
     public static void removeAllDamage() {
-        final List<Card> cl = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        final List<Card> cl = GameState.getCardsIn(ZoneType.Battlefield);
         for (final Card c : cl) {
             c.setDamage(0);
         }
@@ -2645,7 +2645,7 @@ public class CombatUtil {
     public static void checkPropagandaEffects(final Card c, final boolean bLast) {
         Cost attackCost = new Cost(c, "0", true);
         // Sort abilities to apply them in proper order
-        for (Card card : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
+        for (Card card : GameState.getCardsIn(ZoneType.Battlefield)) {
             final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 Cost additionalCost = stAb.getCostAbility("CantAttackUnless", c, AllZone.getCombat().getDefenderByAttacker(c));
@@ -2801,13 +2801,13 @@ public class CombatUtil {
 
                         @Override
                         public void execute() {
-                            if (AllZoneUtil.isCardInPlay(charger)) {
+                            if (GameState.isCardInPlay(charger)) {
                                 charger.removeIntrinsicKeyword("Trample");
                             }
                         }
                     }; // Command
 
-                    if (AllZoneUtil.isCardInPlay(charger)) {
+                    if (GameState.isCardInPlay(charger)) {
                         charger.addIntrinsicKeyword("Trample");
 
                         AllZone.getEndOfTurn().addUntil(untilEOT);
@@ -2953,14 +2953,14 @@ public class CombatUtil {
 
                         @Override
                         public void execute() {
-                            if (AllZoneUtil.isCardInPlay(blocker)) {
+                            if (GameState.isCardInPlay(blocker)) {
                                 blocker.addTempAttackBoost(mag);
                                 blocker.addTempDefenseBoost(mag);
                             }
                         }
                     }; // Command
 
-                    if (AllZoneUtil.isCardInPlay(blocker)) {
+                    if (GameState.isCardInPlay(blocker)) {
                         blocker.addTempAttackBoost(-mag);
                         blocker.addTempDefenseBoost(-mag);
 
@@ -3009,14 +3009,14 @@ public class CombatUtil {
 
                         @Override
                         public void execute() {
-                            if (AllZoneUtil.isCardInPlay(crd)) {
+                            if (GameState.isCardInPlay(crd)) {
                                 crd.addTempAttackBoost(-1);
                                 crd.addTempDefenseBoost(-1);
                             }
                         }
                     }; // Command
 
-                    if (AllZoneUtil.isCardInPlay(crd)) {
+                    if (GameState.isCardInPlay(crd)) {
                         crd.addTempAttackBoost(1);
                         crd.addTempDefenseBoost(1);
 
@@ -3106,7 +3106,7 @@ public class CombatUtil {
                         } else {
                             enchantment = CardFactoryUtil.getBestEnchantmentAI(enchantments, this, false);
                         }
-                        if ((enchantment != null) && AllZoneUtil.isCardInPlay(attacker)) {
+                        if ((enchantment != null) && GameState.isCardInPlay(attacker)) {
                             GameAction.changeZone(AllZone.getZoneOf(enchantment),
                                     enchantment.getOwner().getZone(ZoneType.Battlefield), enchantment, null);
                             enchantment.enchantEntity(attacker);
@@ -3153,14 +3153,14 @@ public class CombatUtil {
 
                         @Override
                         public void execute() {
-                            if (AllZoneUtil.isCardInPlay(crd)) {
+                            if (GameState.isCardInPlay(crd)) {
                                 crd.addTempAttackBoost(-pump);
                                 crd.addTempDefenseBoost(-pump);
                             }
                         }
                     }; // Command
 
-                    if (AllZoneUtil.isCardInPlay(crd)) {
+                    if (GameState.isCardInPlay(crd)) {
                         crd.addTempAttackBoost(pump);
                         crd.addTempDefenseBoost(pump);
 

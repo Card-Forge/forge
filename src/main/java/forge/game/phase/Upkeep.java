@@ -24,7 +24,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -42,6 +41,7 @@ import forge.card.spellability.AbilityMana;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.player.PlayerUtil;
@@ -476,8 +476,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
          * regenerated.
          */
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final List<Card> the = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "The Abyss");
-        final List<Card> magus = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Magus of the Abyss");
+        final List<Card> the = GameState.getCardsIn(ZoneType.Battlefield, "The Abyss");
+        final List<Card> magus = GameState.getCardsIn(ZoneType.Battlefield, "Magus of the Abyss");
 
         final List<Card> cards = new ArrayList<Card>();
         cards.addAll(the);
@@ -486,7 +486,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
         for (final Card c : cards) {
             final Card abyss = c;
 
-            final List<Card> abyssGetTargets = CardLists.filter(AllZoneUtil.getCreaturesInPlay(player), Presets.NON_ARTIFACTS);
+            final List<Card> abyssGetTargets = CardLists.filter(GameState.getCreaturesInPlay(player), Presets.NON_ARTIFACTS);
 
             final Ability sacrificeCreature = new Ability(abyss, "") {
                 @Override
@@ -562,7 +562,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             final Ability ability = new Ability(c, "") {
                 @Override
                 public void resolve() {
-                    final List<Card> creatures = AllZoneUtil.getCreaturesInPlay();
+                    final List<Card> creatures = GameState.getCreaturesInPlay();
                     if (creatures.size() > 0) {
                         CardLists.sortAttackLowFirst(creatures);
                         final int power = creatures.get(0).getNetAttack();
@@ -637,7 +637,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             final Ability noPay = new Ability(c, "B B B") {
                 @Override
                 public void resolve() {
-                    final List<Card> playerLand = AllZoneUtil.getPlayerLandsInPlay(player);
+                    final List<Card> playerLand = GameState.getPlayerLandsInPlay(player);
 
                     c.tap();
                     if (c.getController().isComputer()) {
@@ -1235,11 +1235,11 @@ public class Upkeep extends Phase implements java.io.Serializable {
                         }
                         // player isComputer()
                         else {
-                            List<Card> humanCreatures = AllZoneUtil.getCreaturesInPlay(player.getOpponent());
+                            List<Card> humanCreatures = GameState.getCreaturesInPlay(player.getOpponent());
                             humanCreatures = CardLists.getValidCards(humanCreatures, smallCreatures, k.getController(), k);
                             humanCreatures = CardLists.getNotKeyword(humanCreatures, "Indestructible");
 
-                            List<Card> computerCreatures = AllZoneUtil.getCreaturesInPlay(player);
+                            List<Card> computerCreatures = GameState.getCreaturesInPlay(player);
                             computerCreatures = CardLists.getValidCards(computerCreatures, smallCreatures, k.getController(), k);
                             computerCreatures = CardLists.getNotKeyword(computerCreatures, "Indestructible");
                             
@@ -1256,7 +1256,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     }
 
                     if (wantDamageCreatures) {
-                        final List<Card> allCreatures = AllZoneUtil.getCreaturesInPlay();
+                        final List<Card> allCreatures = GameState.getCreaturesInPlay();
                         for (final Card crd : allCreatures) {
                             crd.addDamage(2, k);
                         }
@@ -1607,7 +1607,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     }
 
                     if (wantMerfolkBuff) {
-                        final List<Card> creatures = AllZoneUtil.getCreaturesInPlay(player);
+                        final List<Card> creatures = GameState.getCreaturesInPlay(player);
                         for (int i = 0; i < creatures.size(); i++) {
                             if (!creatures.get(i).hasKeyword("Flying")) {
                                 creatures.get(i).addExtrinsicKeyword("Flying");
@@ -1618,7 +1618,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                             @Override
                             public void execute() {
-                                final List<Card> creatures = AllZoneUtil.getCreaturesInPlay(player);
+                                final List<Card> creatures = GameState.getCreaturesInPlay(player);
                                 for (int i = 0; i < creatures.size(); i++) {
                                     if (creatures.get(i).hasKeyword("Flying")) {
                                         creatures.get(i).removeExtrinsicKeyword("Flying");
@@ -1937,14 +1937,14 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepOathOfDruids() {
-        final List<Card> oathList = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Oath of Druids");
+        final List<Card> oathList = GameState.getCardsIn(ZoneType.Battlefield, "Oath of Druids");
         if (oathList.isEmpty()) {
             return;
         }
 
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
 
-        if (AllZoneUtil.compareTypeAmountInPlay(player, "Creature") < 0) {
+        if (GameState.compareTypeAmountInPlay(player, "Creature") < 0) {
             for (int i = 0; i < oathList.size(); i++) {
                 final Card oath = oathList.get(i);
                 final Ability ability = new Ability(oath, "0") {
@@ -1954,7 +1954,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                         final PlayerZone battlefield = player.getZone(ZoneType.Battlefield);
                         boolean oathFlag = true;
 
-                        if (AllZoneUtil.compareTypeAmountInPlay(player, "Creature") < 0) {
+                        if (GameState.compareTypeAmountInPlay(player, "Creature") < 0) {
                             if (player.isHuman()) {
                                 final StringBuilder question = new StringBuilder();
                                 question.append("Reveal cards from the top of your library and place ");
@@ -2018,21 +2018,21 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepOathOfGhouls() {
-        final List<Card> oathList = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Oath of Ghouls");
+        final List<Card> oathList = GameState.getCardsIn(ZoneType.Battlefield, "Oath of Ghouls");
         if (oathList.isEmpty()) {
             return;
         }
 
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
 
-        if (AllZoneUtil.compareTypeAmountInGraveyard(player, "Creature") > 0) {
+        if (GameState.compareTypeAmountInGraveyard(player, "Creature") > 0) {
             for (int i = 0; i < oathList.size(); i++) {
                 final Ability ability = new Ability(oathList.get(0), "0") {
                     @Override
                     public void resolve() {
                         final List<Card> graveyardCreatures = CardLists.filter(player.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
 
-                        if (AllZoneUtil.compareTypeAmountInGraveyard(player, "Creature") > 0) {
+                        if (GameState.compareTypeAmountInGraveyard(player, "Creature") > 0) {
                             if (player.isHuman()) {
                                 final Card o = GuiChoose.oneOrNone("Pick a creature to return to hand", graveyardCreatures);
                                 if (o != null) {
@@ -2068,7 +2068,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      */
     private static void upkeepKarma() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final List<Card> karmas = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Karma");
+        final List<Card> karmas = GameState.getCardsIn(ZoneType.Battlefield, "Karma");
         final List<Card> swamps = CardLists.getType(player.getCardsIn(ZoneType.Battlefield), "Swamp");
 
         // determine how much damage to deal the current player
@@ -2113,7 +2113,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
          * controlled at the beginning of this turn.
          */
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Power Surge");
+        final List<Card> list = GameState.getCardsIn(ZoneType.Battlefield, "Power Surge");
         final int damage = player.getNumPowerSurgeLands();
 
         for (final Card surge : list) {
@@ -2143,7 +2143,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      */
     private static void upkeepTangleWire() {
         final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final List<Card> wires = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Tangle Wire");
+        final List<Card> wires = GameState.getCardsIn(ZoneType.Battlefield, "Tangle Wire");
 
         for (final Card source : wires) {
             final SpellAbility ability = new Ability(source, "0") {

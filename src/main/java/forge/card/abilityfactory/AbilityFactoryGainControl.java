@@ -26,7 +26,6 @@ import java.util.Map;
 import com.google.common.base.Predicate;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -41,6 +40,7 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.cost.Cost;
+import forge.game.GameState;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -425,7 +425,7 @@ public class AbilityFactoryGainControl {
 
         final Target tgt = sa.getTarget();
         if (this.params.containsKey("AllValid")) {
-            tgtCards = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            tgtCards = GameState.getCardsIn(ZoneType.Battlefield);
             tgtCards = AbilityFactory.filterListByType(tgtCards, this.params.get("AllValid"), sa);
         } else if ((tgt != null) && !this.params.containsKey("Defined")) {
             tgtCards.addAll(tgt.getTargetCards());
@@ -469,7 +469,7 @@ public class AbilityFactoryGainControl {
                 sa.getSourceCard().addGainControlTarget(tgtC);
             }
 
-            if (AllZoneUtil.isCardInPlay(tgtC)) {
+            if (GameState.isCardInPlay(tgtC)) {
 
                 if (!tgtC.equals(newController)) {
                     tgtC.addController(newController);
@@ -562,7 +562,7 @@ public class AbilityFactoryGainControl {
     private boolean gainControlDrawbackAI(final Player ai, final SpellAbility sa) {
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
             if (this.params.containsKey("AllValid")) {
-                List<Card> tgtCards = CardLists.filterControlledBy(AllZoneUtil.getCardsIn(ZoneType.Battlefield), ai.getOpponent());
+                List<Card> tgtCards = CardLists.filterControlledBy(GameState.getCardsIn(ZoneType.Battlefield), ai.getOpponent());
                 tgtCards = AbilityFactory.filterListByType(tgtCards, this.params.get("AllValid"), sa);
                 if (tgtCards.isEmpty()) {
                     return false;
@@ -651,7 +651,7 @@ public class AbilityFactoryGainControl {
         if (null == c) {
             return;
         }
-        if (AllZoneUtil.isCardInPlay(c)) {
+        if (GameState.isCardInPlay(c)) {
             c.removeController(newController);
             // Singletons.getModel().getGameAction().changeController(new ArrayList<Card>(c),
             // c.getController(), originalController);
@@ -909,8 +909,8 @@ public class AbilityFactoryGainControl {
             object2 = tgts.get(1);
         }
 
-        if (object1 == null || object2 == null || !AllZoneUtil.isCardInPlay(object1)
-                || !AllZoneUtil.isCardInPlay(object2)) {
+        if (object1 == null || object2 == null || !GameState.isCardInPlay(object1)
+                || !GameState.isCardInPlay(object2)) {
             return;
         }
 

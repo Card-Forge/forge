@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 import forge.Singletons;
 
@@ -37,6 +36,7 @@ import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -233,7 +233,7 @@ public class StaticAbilityContinuous {
                 }
             }
 
-            List<Card> cardsIGainedAbilitiesFrom = AllZoneUtil.getCardsIn(validZones);
+            List<Card> cardsIGainedAbilitiesFrom = GameState.getCardsIn(validZones);
             cardsIGainedAbilitiesFrom = CardLists.getValidCards(cardsIGainedAbilitiesFrom, valids, hostCard.getController(), hostCard);
 
             if (cardsIGainedAbilitiesFrom.size() > 0) {
@@ -431,9 +431,9 @@ public class StaticAbilityContinuous {
         List<Card> affectedCards = new ArrayList<Card>();
 
         if (params.containsKey("AffectedZone")) {
-            affectedCards.addAll(AllZoneUtil.getCardsIn(ZoneType.listValueOf(params.get("AffectedZone"))));
+            affectedCards.addAll(GameState.getCardsIn(ZoneType.listValueOf(params.get("AffectedZone"))));
         } else {
-            affectedCards = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            affectedCards = GameState.getCardsIn(ZoneType.Battlefield);
         }
 
         if (params.containsKey("Affected") && !params.get("Affected").contains(",")) {

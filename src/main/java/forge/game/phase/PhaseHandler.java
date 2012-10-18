@@ -23,7 +23,6 @@ import java.util.Stack;
 
 import com.esotericsoftware.minlog.Log;
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -32,6 +31,7 @@ import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.player.PlayerType;
 import forge.game.zone.ZoneType;
@@ -394,7 +394,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
             case CLEANUP:
                 // Reset Damage received map
-                final List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+                final List<Card> list = GameState.getCardsIn(ZoneType.Battlefield);
                 for (final Card c : list) {
                     c.resetPreventNextDamage();
                     c.resetReceivedDamageFromThisTurn();
@@ -474,7 +474,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             return;
         }
         this.bPhaseEffects = true;
-        if (!AllZoneUtil.isCardInPlay("Upwelling")) {
+        if (!GameState.isCardInPlay("Upwelling")) {
             for (Player p : Singletons.getModel().getGameState().getPlayers()) {
                 int burn = p.getManaPool().clearPool();
                 if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN)) {
@@ -938,7 +938,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         final Card source = sa.getRootSpellAbility().getSourceCard();
         boolean onlyThis = true;
         if (AllZone.getStack().size() != 0) {
-            for (final Card card : AllZoneUtil.getCardsIn(ZoneType.Stack)) {
+            for (final Card card : GameState.getCardsIn(ZoneType.Stack)) {
                 if (card != source) {
                     onlyThis = false;
                     //System.out.println("StackCard: " + card + " vs SourceCard: " + source);

@@ -36,11 +36,11 @@ import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
-import forge.AllZoneUtil;
 import forge.Card;
 import forge.Counters;
 import forge.ImageCache;
 import forge.Singletons;
+import forge.game.GameState;
 import forge.gui.CardContainer;
 import forge.gui.toolbox.CardFaceSymbols;
 import forge.properties.ForgePreferences.FPref;
@@ -414,7 +414,7 @@ public class CardPanel extends JPanel implements CardContainer {
                     (this.cardYOffset + this.cardHeight) - (this.cardHeight / 8) - 16);
         }
 
-        if (this.getCard().isSick() && AllZoneUtil.isCardInPlay(this.getCard())) {
+        if (this.getCard().isSick() && GameState.isCardInPlay(this.getCard())) {
             CardFaceSymbols.drawSymbol("summonsick", g, (this.cardXOffset + (this.cardWidth / 2)) - 16,
                     (this.cardYOffset + this.cardHeight) - (this.cardHeight / 8) - 16);
         }

@@ -27,7 +27,6 @@ import java.util.Random;
 import com.google.common.base.Predicate;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -42,6 +41,7 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
@@ -297,7 +297,7 @@ public final class AbilityFactoryDebuff {
     private static boolean debuffCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         // if there is no target and host card isn't in play, don't activate
         final Card source = sa.getSourceCard();
-        if ((sa.getTarget() == null) && !AllZoneUtil.isCardInPlay(source)) {
+        if ((sa.getTarget() == null) && !GameState.isCardInPlay(source)) {
             return false;
         }
 
@@ -450,7 +450,7 @@ public final class AbilityFactoryDebuff {
     private static List<Card> getCurseCreatures(final Player ai, final AbilityFactory af, final SpellAbility sa,
             final ArrayList<String> kws) {
         final Player opp = ai.getOpponent();
-        List<Card> list = AllZoneUtil.getCreaturesInPlay(opp);
+        List<Card> list = GameState.getCreaturesInPlay(opp);
         list = CardLists.getTargetableCards(list, sa);
 
         if (!list.isEmpty()) {
@@ -480,7 +480,7 @@ public final class AbilityFactoryDebuff {
      * @return a boolean.
      */
     private static boolean debuffMandatoryTarget(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = GameState.getCardsIn(ZoneType.Battlefield);
         final Target tgt = sa.getTarget();
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
@@ -601,7 +601,7 @@ public final class AbilityFactoryDebuff {
 
         for (final Card tgtC : tgtCards) {
             final ArrayList<String> hadIntrinsic = new ArrayList<String>();
-            if (AllZoneUtil.isCardInPlay(tgtC) && tgtC.canBeTargetedBy(sa)) {
+            if (GameState.isCardInPlay(tgtC) && tgtC.canBeTargetedBy(sa)) {
                 for (final String kw : kws) {
                     if (tgtC.getIntrinsicKeyword().contains(kw)) {
                         hadIntrinsic.add(kw);
@@ -616,7 +616,7 @@ public final class AbilityFactoryDebuff {
 
                     @Override
                     public void execute() {
-                        if (AllZoneUtil.isCardInPlay(tgtC)) {
+                        if (GameState.isCardInPlay(tgtC)) {
                             for (final String kw : hadIntrinsic) {
                                 tgtC.addIntrinsicKeyword(kw);
                             }
@@ -842,12 +842,12 @@ public final class AbilityFactoryDebuff {
             valid = params.get("ValidCards");
         }
 
-        List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = GameState.getCardsIn(ZoneType.Battlefield);
         list = CardLists.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
 
         for (final Card tgtC : list) {
             final ArrayList<String> hadIntrinsic = new ArrayList<String>();
-            if (AllZoneUtil.isCardInPlay(tgtC) && tgtC.canBeTargetedBy(sa)) {
+            if (GameState.isCardInPlay(tgtC) && tgtC.canBeTargetedBy(sa)) {
                 for (final String kw : kws) {
                     if (tgtC.getIntrinsicKeyword().contains(kw)) {
                         hadIntrinsic.add(kw);
@@ -862,7 +862,7 @@ public final class AbilityFactoryDebuff {
 
                     @Override
                     public void execute() {
-                        if (AllZoneUtil.isCardInPlay(tgtC)) {
+                        if (GameState.isCardInPlay(tgtC)) {
                             for (final String kw : hadIntrinsic) {
                                 tgtC.addIntrinsicKeyword(kw);
                             }

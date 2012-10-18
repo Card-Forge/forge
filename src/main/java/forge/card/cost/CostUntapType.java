@@ -19,7 +19,6 @@ package forge.card.cost;
 
 import java.util.List;
 
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -27,6 +26,7 @@ import forge.CardPredicates.Presets;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
@@ -120,7 +120,7 @@ public class CostUntapType extends CostPartWithList {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
-        List<Card> typeList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> typeList = GameState.getCardsIn(ZoneType.Battlefield);
 
         typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
 
@@ -160,7 +160,7 @@ public class CostUntapType extends CostPartWithList {
     @Override
     public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
         final boolean untap = payment.getCost().getUntap();
-        List<Card> typeList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> typeList = GameState.getCardsIn(ZoneType.Battlefield);
         typeList = CardLists.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
         typeList = CardLists.filter(typeList, Presets.TAPPED);
         if (untap) {
@@ -197,7 +197,7 @@ public class CostUntapType extends CostPartWithList {
         if (c == null) {
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
-                List<Card> typeList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+                List<Card> typeList = GameState.getCardsIn(ZoneType.Battlefield);
                 typeList = CardLists.getValidCards(typeList, this.getType().split(";"), ai, ability.getSourceCard());
                 if (untap) {
                     typeList.remove(source);

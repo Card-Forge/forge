@@ -21,7 +21,6 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -29,6 +28,7 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
@@ -116,7 +116,7 @@ public class CostReturn extends CostPartWithList {
             if ((amount != null) && (typeList.size() < amount)) {
                 return false;
             }
-        } else if (!AllZoneUtil.isCardInPlay(source)) {
+        } else if (!GameState.isCardInPlay(source)) {
             return false;
         }
 
@@ -297,7 +297,7 @@ public class CostReturn extends CostPartWithList {
             @Override
             public void showMessage() {
                 final Card card = sa.getSourceCard();
-                if (card.getController().isHuman() && AllZoneUtil.isCardInPlay(card)) {
+                if (card.getController().isHuman() && GameState.isCardInPlay(card)) {
                     final StringBuilder sb = new StringBuilder();
                     sb.append(card.getName());
                     sb.append(" - Return to Hand?");

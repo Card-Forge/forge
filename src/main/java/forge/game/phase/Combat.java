@@ -27,7 +27,6 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -36,6 +35,7 @@ import forge.GameActionUtil;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
@@ -626,7 +626,7 @@ public class Combat {
         all.addAll(this.getAllBlockers());
 
         for (int i = 0; i < all.size(); i++) {
-            if (!AllZoneUtil.isCardInPlay(all.get(i))) {
+            if (!GameState.isCardInPlay(all.get(i))) {
                 this.removeFromCombat(all.get(i));
             }
         }

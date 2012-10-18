@@ -24,7 +24,6 @@ import java.util.List;
 import com.esotericsoftware.minlog.Log;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.Singletons;
@@ -36,6 +35,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
+import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.zone.ZoneType;
 
@@ -312,7 +312,7 @@ public class ComputerAIGeneral implements Computer {
      */
     @Override
     public final void declareBlockers() {
-        final List<Card> blockers = AllZoneUtil.getCreaturesInPlay(player);
+        final List<Card> blockers = GameState.getCreaturesInPlay(player);
 
         AllZone.setCombat(ComputerUtilBlock.getBlockers(player, AllZone.getCombat(), blockers));
         

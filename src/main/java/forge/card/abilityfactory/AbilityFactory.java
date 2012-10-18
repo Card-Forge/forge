@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -41,6 +40,7 @@ import forge.card.spellability.SpellAbilityCondition;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -1632,10 +1632,10 @@ public class AbilityFactory {
                 // Add whole Remembered list to handlePaid
                 final List<Card> list = new ArrayList<Card>();
                 if (card.getRemembered().isEmpty()) {
-                    final Card newCard = AllZoneUtil.getCardState(card);
+                    final Card newCard = GameState.getCardState(card);
                     for (final Object o : newCard.getRemembered()) {
                         if (o instanceof Card) {
-                            list.add(AllZoneUtil.getCardState((Card) o));
+                            list.add(GameState.getCardState((Card) o));
                         }
                     }
                 }
@@ -1649,7 +1649,7 @@ public class AbilityFactory {
                 } else {
                     for (final Object o : card.getRemembered()) {
                         if (o instanceof Card) {
-                            list.add(AllZoneUtil.getCardState((Card) o));
+                            list.add(GameState.getCardState((Card) o));
                         }
                     }
                 }
@@ -1659,7 +1659,7 @@ public class AbilityFactory {
                 // Add whole Imprinted list to handlePaid
                 final List<Card> list = new ArrayList<Card>();
                 for (final Card c : card.getImprinted()) {
-                    list.add(AllZoneUtil.getCardState(c));
+                    list.add(GameState.getCardState(c));
                 }
 
                 return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
@@ -1669,7 +1669,7 @@ public class AbilityFactory {
                 if (card.isEnchanting()) {
                     Object o = card.getEnchanting();
                     if (o instanceof Card) {
-                        list.add(AllZoneUtil.getCardState((Card) o));
+                        list.add(GameState.getCardState((Card) o));
                     }
                 }
                 return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
@@ -1929,7 +1929,7 @@ public class AbilityFactory {
             else {
                 final Object crd = root.getTriggeringObject(defined.substring(9));
                 if (crd instanceof Card) {
-                    c = AllZoneUtil.getCardState((Card) crd);
+                    c = GameState.getCardState((Card) crd);
                     c = (Card) crd;
                 } else if (crd instanceof List<?>) {
                     for (final Card cardItem : (List<Card>) crd) {
@@ -1941,7 +1941,7 @@ public class AbilityFactory {
             final SpellAbility root = sa.getRootSpellAbility();
             final Object crd = root.getReplacingObject(defined.substring(8));
             if (crd instanceof Card) {
-                c = AllZoneUtil.getCardState((Card) crd);
+                c = GameState.getCardState((Card) crd);
             } else if (crd instanceof List<?>) {
                 for (final Card cardItem : (List<Card>) crd) {
                     cards.add(cardItem);
@@ -1949,26 +1949,26 @@ public class AbilityFactory {
             }
         } else if (defined.equals("Remembered")) {
             if (hostCard.getRemembered().isEmpty()) {
-                final Card newCard = AllZoneUtil.getCardState(hostCard);
+                final Card newCard = GameState.getCardState(hostCard);
                 for (final Object o : newCard.getRemembered()) {
                     if (o instanceof Card) {
-                        cards.add(AllZoneUtil.getCardState((Card) o));
+                        cards.add(GameState.getCardState((Card) o));
                     }
                 }
             }
 
             for (final Object o : hostCard.getRemembered()) {
                 if (o instanceof Card) {
-                    cards.add(AllZoneUtil.getCardState((Card) o));
+                    cards.add(GameState.getCardState((Card) o));
                 }
             }
         } else if (defined.equals("Clones")) {
             for (final Card clone : hostCard.getClones()) {
-                cards.add(AllZoneUtil.getCardState(clone));
+                cards.add(GameState.getCardState(clone));
             }
         } else if (defined.equals("Imprinted")) {
             for (final Card imprint : hostCard.getImprinted()) {
-                cards.add(AllZoneUtil.getCardState(imprint));
+                cards.add(GameState.getCardState(imprint));
             }
         } else if (defined.startsWith("ThisTurnEntered")) {
             final String[] workingCopy = defined.split("_");
@@ -2264,7 +2264,7 @@ public class AbilityFactory {
             for (final Object o : card.getRemembered()) {
                 if (o instanceof Card) {
                     final Card rem = (Card) o;
-                    sas.addAll(AllZoneUtil.getCardState(rem).getSpellAbilities());
+                    sas.addAll(GameState.getCardState(rem).getSpellAbilities());
                 }
             }
         } else if (defined.equals("Imprinted")) {
@@ -2285,7 +2285,7 @@ public class AbilityFactory {
             final SpellAbility root = sa.getRootSpellAbility();
             final Object crd = root.getTriggeringObject("Card");
             if (crd instanceof Card) {
-                triggeredCard = AllZoneUtil.getCardState((Card) crd);
+                triggeredCard = GameState.getCardState((Card) crd);
             } //find the imprinted card that does not share a name with the triggered card
             for (final SpellAbility spell : imprintedCards) {
                 if (!spell.getSourceCard().getName().equals(triggeredCard.getName())) {

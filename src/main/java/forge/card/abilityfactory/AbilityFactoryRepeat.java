@@ -33,6 +33,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -278,7 +279,7 @@ public final class AbilityFactoryRepeat {
             if (params.containsKey("RepeatDefined")) {
                 list.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("RepeatDefined"), sa));
             } else {
-                list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+                list = GameState.getCardsIn(ZoneType.Battlefield);
             }
 
             list = CardLists.getValidCards(list, repeatPresent.split(","), sa.getActivatingPlayer(), sa.getSourceCard());

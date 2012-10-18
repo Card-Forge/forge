@@ -24,7 +24,6 @@ import java.util.List;
 import com.google.common.collect.Iterables;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -41,6 +40,7 @@ import forge.card.replacement.ReplacementEffect;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
+import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerAIGeneral;
@@ -115,7 +115,7 @@ public class SpellPermanent extends Spell {
                 if (computer.size() != 0) {
                     final Card c = computer.get(0);
                     source.setChampionedCard(c);
-                    if (AllZoneUtil.isCardInPlay(c)) {
+                    if (GameState.isCardInPlay(c)) {
                         Singletons.getModel().getGameAction().exile(c);
                     }
 
@@ -158,7 +158,7 @@ public class SpellPermanent extends Spell {
                 @Override
                 public void resolve() {
                     final Card c = this.getSourceCard().getChampionedCard();
-                    if ((c != null) && !c.isToken() && AllZoneUtil.isCardExiled(c)) {
+                    if ((c != null) && !c.isToken() && GameState.isCardExiled(c)) {
                         Singletons.getModel().getGameAction().moveToPlay(c);
                     }
                 } // resolve()
@@ -353,7 +353,7 @@ public class SpellPermanent extends Spell {
         }
         
         // check on legendary
-        if (card.isType("Legendary") && !AllZoneUtil.isCardInPlay("Mirror Gallery")) {
+        if (card.isType("Legendary") && !GameState.isCardInPlay("Mirror Gallery")) {
             final List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
             if (Iterables.any(list, CardPredicates.nameEquals(card.getName()))) {
                 return false;
@@ -415,7 +415,7 @@ public class SpellPermanent extends Spell {
 
     private static boolean checkETBEffects(final Card card, final SpellAbility sa, final String api, final Player ai) {
 
-        if (card.isCreature() && AllZoneUtil.isCardInPlay("Torpor Orb")) {
+        if (card.isCreature() && GameState.isCardInPlay("Torpor Orb")) {
             return true;
         }
 

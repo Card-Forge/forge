@@ -27,7 +27,6 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
-import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharacteristicName;
 
@@ -43,6 +42,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -669,7 +669,7 @@ public final class AbilityFactoryReveal {
      */
     private static List<Card> sharesNameWithCardOnBattlefield(final List<Card> list) {
         final List<Card> toReturn = new ArrayList<Card>();
-        final List<Card> play = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        final List<Card> play = GameState.getCardsIn(ZoneType.Battlefield);
         for (final Card c : list) {
             for (final Card p : play) {
                 if (p.getName().equals(c.getName()) && !toReturn.contains(c)) {

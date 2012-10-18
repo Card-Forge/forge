@@ -25,7 +25,6 @@ import javax.swing.JOptionPane;
 import com.google.common.base.Predicate;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -37,6 +36,7 @@ import forge.card.cost.Cost;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
+import forge.game.GameState;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
@@ -97,7 +97,7 @@ class CardFactoryLands {
                     boolean needsTheMana = false;
                     final Player ai = card.getController();
                     if (ai.getLife() > 3) {
-                        final int landsize = AllZoneUtil.getPlayerLandsInPlay(ai).size();
+                        final int landsize = GameState.getPlayerLandsInPlay(ai).size();
                         for (Card c : ai.getCardsIn(ZoneType.Hand)) {
                             if (landsize == c.getCMC()) {
                                 needsTheMana = true;
@@ -145,7 +145,7 @@ class CardFactoryLands {
 
                 @Override
                 public boolean apply(final Card c) {
-                    return AllZoneUtil.isCardInPlay(c) && c.isCreature()
+                    return GameState.isCardInPlay(c) && c.isCreature()
                             && (c.getTurnInZone() == Singletons.getModel().getGameState().getPhaseHandler().getTurn());
                 }
             };
@@ -181,7 +181,7 @@ class CardFactoryLands {
                 @Override
                 public void resolve() {
                     this.inPlay.clear();
-                    this.inPlay.addAll(AllZoneUtil.getCardsIn(ZoneType.Battlefield));
+                    this.inPlay.addAll(GameState.getCardsIn(ZoneType.Battlefield));
                     for (final Card targ : CardLists.filter(this.inPlay, targets)) {
                         targ.addCounter(Counters.P1P1, 1);
                     }

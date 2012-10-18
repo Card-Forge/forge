@@ -26,7 +26,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -41,6 +40,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -87,7 +87,7 @@ class CardFactoryAuras {
                     final Player opp = getActivatingPlayer().getOpponent();
                     final String[] landTypes = new String[] { "Plains", "Island", "Swamp", "Mountain", "Forest" };
                     final HashMap<String, Integer> humanLandCount = new HashMap<String, Integer>();
-                    final List<Card> humanlands = AllZoneUtil.getPlayerLandsInPlay(opp);
+                    final List<Card> humanlands = GameState.getPlayerLandsInPlay(opp);
 
                     for (final String landType : landTypes) {
                         humanLandCount.put(landType, 0);
@@ -115,7 +115,7 @@ class CardFactoryAuras {
                     }
 
                     newType[0] = landTypes[minAt];
-                    List<Card> list = AllZoneUtil.getPlayerLandsInPlay(opp);
+                    List<Card> list = GameState.getPlayerLandsInPlay(opp);
                     list = CardLists.getNotType(list, newType[0]); // Don't enchant lands
                                                         // that already have the
                                                         // type
@@ -136,7 +136,7 @@ class CardFactoryAuras {
 
                     final Card c = this.getTargetCard();
 
-                    if (AllZoneUtil.isCardInPlay(c) && c.canBeTargetedBy(this)) {
+                    if (GameState.isCardInPlay(c) && c.canBeTargetedBy(this)) {
                         card.enchantEntity(c);
                     }
 
@@ -250,7 +250,7 @@ class CardFactoryAuras {
 
                 @Override
                 public void showMessage() {
-                    final List<Card> land = AllZoneUtil.getLandsInPlay();
+                    final List<Card> land = GameState.getLandsInPlay();
                     this.stopSetNext(CardFactoryUtil
                             .inputTargetSpecific(spell, land, "Select target land", true, false));
                 }
@@ -268,7 +268,7 @@ class CardFactoryAuras {
 
                 @Override
                 public boolean canPlayAI() {
-                    List<Card> list = AllZoneUtil.getCreaturesInPlay(getActivatingPlayer().getOpponent());
+                    List<Card> list = GameState.getCreaturesInPlay(getActivatingPlayer().getOpponent());
                     list = CardLists.getKeyword(list, "Flying");
                     if (list.isEmpty()) {
                         return false;
@@ -300,7 +300,7 @@ class CardFactoryAuras {
 
                     final Card c = this.getTargetCard();
 
-                    if (AllZoneUtil.isCardInPlay(c) && c.canBeTargetedBy(this)) {
+                    if (GameState.isCardInPlay(c) && c.canBeTargetedBy(this)) {
                         card.enchantEntity(c);
                         Log.debug("Enchanted: " + this.getTargetCard());
                     }
@@ -378,7 +378,7 @@ class CardFactoryAuras {
                         this.setTargetCard(stuffy.get(0));
                         return true;
                     } else {
-                        final List<Card> list = AllZoneUtil.getCreaturesInPlay(getActivatingPlayer().getOpponent());
+                        final List<Card> list = GameState.getCreaturesInPlay(getActivatingPlayer().getOpponent());
 
                         if (list.isEmpty()) {
                             return false;
@@ -407,7 +407,7 @@ class CardFactoryAuras {
 
                     final Card c = this.getTargetCard();
 
-                    if (AllZoneUtil.isCardInPlay(c) && c.canBeTargetedBy(this)) {
+                    if (GameState.isCardInPlay(c) && c.canBeTargetedBy(this)) {
                         aura.enchantEntity(c);
                     }
                 } // resolve()
@@ -427,7 +427,7 @@ class CardFactoryAuras {
                     // This includes creatures Animate Dead can't enchant once
                     // in play.
                     // The human may try to Animate them, the AI will not.
-                    return CardLists.filter(AllZoneUtil.getCardsIn(ZoneType.Graveyard), Presets.CREATURES);
+                    return CardLists.filter(GameState.getCardsIn(ZoneType.Graveyard), Presets.CREATURES);
                 }
 
                 @Override

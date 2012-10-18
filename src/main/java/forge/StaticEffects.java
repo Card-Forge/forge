@@ -27,6 +27,7 @@ import com.esotericsoftware.minlog.Log;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -325,7 +326,7 @@ public class StaticEffects {
     public final void rePopulateStateBasedList() {
         this.reset();
 
-        final List<Card> cards = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        final List<Card> cards = GameState.getCardsIn(ZoneType.Battlefield);
 
         Log.debug("== Start add state effects ==");
         for (int i = 0; i < cards.size(); i++) {

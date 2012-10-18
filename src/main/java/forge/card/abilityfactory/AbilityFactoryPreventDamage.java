@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -37,6 +36,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -458,7 +458,7 @@ public class AbilityFactoryPreventDamage {
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
         // filter AIs battlefield by what I can target
-        List<Card> targetables = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> targetables = GameState.getCardsIn(ZoneType.Battlefield);
         targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, hostCard);
         final List<Card> compTargetables = CardLists.filterControlledBy(targetables, ai);
 
@@ -536,7 +536,7 @@ public class AbilityFactoryPreventDamage {
         for (final Object o : tgts) {
             if (o instanceof Card) {
                 final Card c = (Card) o;
-                if (AllZoneUtil.isCardInPlay(c) && (!targeted || c.canBeTargetedBy(sa))) {
+                if (GameState.isCardInPlay(c) && (!targeted || c.canBeTargetedBy(sa))) {
                     c.addPreventNextDamage(numDam);
                 }
 
@@ -549,7 +549,7 @@ public class AbilityFactoryPreventDamage {
         }
 
         for (final Card c : untargetedCards) {
-            if (AllZoneUtil.isCardInPlay(c)) {
+            if (GameState.isCardInPlay(c)) {
                 c.addPreventNextDamage(numDam);
             }
         }
@@ -788,7 +788,7 @@ public class AbilityFactoryPreventDamage {
         }
 
         if (params.containsKey("ValidCards")) {
-            list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            list = GameState.getCardsIn(ZoneType.Battlefield);
         }
 
         list = AbilityFactory.filterListByType(list, params.get("ValidCards"), sa);

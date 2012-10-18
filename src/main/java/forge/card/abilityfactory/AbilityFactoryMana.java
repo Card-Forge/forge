@@ -25,7 +25,6 @@ import java.util.Random;
 
 import com.google.common.collect.Iterables;
 
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -42,6 +41,7 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.control.input.InputPayManaCostUtil;
+import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -772,7 +772,7 @@ public class AbilityFactoryMana {
                 cards.add(c);
             }
         } else {
-            cards = CardLists.getValidCards(AllZoneUtil.getCardsIn(ZoneType.Battlefield), validCard, abMana.getActivatingPlayer(), card);
+            cards = CardLists.getValidCards(GameState.getCardsIn(ZoneType.Battlefield), validCard, abMana.getActivatingPlayer(), card);
         }
 
         // remove anything cards that is already in parents

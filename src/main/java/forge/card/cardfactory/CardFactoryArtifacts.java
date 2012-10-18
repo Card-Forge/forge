@@ -6,7 +6,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.Command;
@@ -18,6 +17,7 @@ import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
+import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
@@ -212,7 +212,7 @@ class CardFactoryArtifacts {
                     }
 
                     if (this.getTargetCard() != null) {
-                        if (AllZoneUtil.isCardInPlay(this.getTargetCard())
+                        if (GameState.isCardInPlay(this.getTargetCard())
                                 && this.getTargetCard().canBeTargetedBy(this)) {
                             this.getTargetCard().addDamage(damage, card);
                         }

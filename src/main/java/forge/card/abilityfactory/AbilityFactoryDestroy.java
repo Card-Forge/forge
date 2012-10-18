@@ -25,7 +25,6 @@ import java.util.Random;
 
 import com.google.common.base.Predicate;
 
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -40,6 +39,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -376,7 +376,7 @@ public class AbilityFactoryDestroy {
         final Player opp = ai.getOpponent();
         if (tgt != null) {
             List<Card> list;
-            list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            list = GameState.getCardsIn(ZoneType.Battlefield);
             list = CardLists.getTargetableCards(list, sa);
             list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
 
@@ -591,7 +591,7 @@ public class AbilityFactoryDestroy {
         }
 
         for (final Card tgtC : tgtCards) {
-            if (AllZoneUtil.isCardInPlay(tgtC) && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
+            if (GameState.isCardInPlay(tgtC) && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
                 boolean destroyed = false;
                 if (sac) {
                     destroyed = Singletons.getModel().getGameAction().sacrifice(tgtC, sa);
@@ -606,7 +606,7 @@ public class AbilityFactoryDestroy {
         }
 
         for (final Card unTgtC : untargetedCards) {
-            if (AllZoneUtil.isCardInPlay(unTgtC)) {
+            if (GameState.isCardInPlay(unTgtC)) {
                 boolean destroyed = false;
                 if (sac) {
                     destroyed = Singletons.getModel().getGameAction().sacrifice(unTgtC, sa);
@@ -1037,7 +1037,7 @@ public class AbilityFactoryDestroy {
             valid = valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(card, "X", sa)));
         }
 
-        List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = GameState.getCardsIn(ZoneType.Battlefield);
 
         if (targetPlayer != null) {
             list = CardLists.filterControlledBy(list, targetPlayer);

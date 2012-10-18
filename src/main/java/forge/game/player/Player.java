@@ -34,7 +34,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -52,6 +51,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.GameLossReason;
+import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
@@ -584,7 +584,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     @Override
     public final int staticDamagePrevention(final int damage, final Card source, final boolean isCombat) {
 
-        if (AllZoneUtil.isCardInPlay("Leyline of Punishment")) {
+        if (GameState.isCardInPlay("Leyline of Punishment")) {
             return damage;
         }
 
@@ -616,7 +616,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Prevent Damage static abilities
-        final List<Card> allp = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        final List<Card> allp = GameState.getCardsIn(ZoneType.Battlefield);
         for (final Card ca : allp) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
@@ -625,12 +625,12 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
 
         // specific cards
-        if (AllZoneUtil.isCardInPlay("Spirit of Resistance", this)) {
-            if ((AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.BLACK).size() > 0)
-                    && (AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.BLUE).size() > 0)
-                    && (AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.GREEN).size() > 0)
-                    && (AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.RED).size() > 0)
-                    && (AllZoneUtil.getPlayerColorInPlay(this, Constant.Color.WHITE).size() > 0)) {
+        if (GameState.isCardInPlay("Spirit of Resistance", this)) {
+            if ((GameState.getPlayerColorInPlay(this, Constant.Color.BLACK).size() > 0)
+                    && (GameState.getPlayerColorInPlay(this, Constant.Color.BLUE).size() > 0)
+                    && (GameState.getPlayerColorInPlay(this, Constant.Color.GREEN).size() > 0)
+                    && (GameState.getPlayerColorInPlay(this, Constant.Color.RED).size() > 0)
+                    && (GameState.getPlayerColorInPlay(this, Constant.Color.WHITE).size() > 0)) {
                 return 0;
             }
         }
@@ -663,7 +663,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
 
         int restDamage = damage;
 
-        for (Card c : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
+        for (Card c : GameState.getCardsIn(ZoneType.Battlefield)) {
             if (c.getName().equals("Sulfuric Vapors")) {
                 if (source.isSpell() && source.isRed()) {
                     restDamage += 1;
@@ -751,7 +751,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             return 0;
         }
 
-        if (AllZoneUtil.isCardInPlay("Crumbling Sanctuary")) {
+        if (GameState.isCardInPlay("Crumbling Sanctuary")) {
             for (int i = 0; i < damage; i++) {
                 final List<Card> lib = this.getCardsIn(ZoneType.Library);
                 if (lib.size() > 0) {
@@ -782,7 +782,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     @Override
     public final int preventDamage(final int damage, final Card source, final boolean isCombat) {
 
-        if (AllZoneUtil.isCardInPlay("Leyline of Punishment")
+        if (GameState.isCardInPlay("Leyline of Punishment")
                 || source.hasKeyword("Damage that would be dealt by CARDNAME can't be prevented.")) {
             return damage;
         }
@@ -1195,7 +1195,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
                 }
             }
 
-            if (!firstFromDraw && AllZoneUtil.isCardInPlay("Chains of Mephistopheles")) {
+            if (!firstFromDraw && GameState.isCardInPlay("Chains of Mephistopheles")) {
                 if (!this.getZone(ZoneType.Hand).isEmpty()) {
                     if (this.isHuman()) {
                         this.discardChainsOfMephistopheles();
@@ -1828,7 +1828,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
 
         // CantBeCast static abilities
-        final List<Card> allp = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        final List<Card> allp = GameState.getCardsIn(ZoneType.Battlefield);
         for (final Card ca : allp) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {

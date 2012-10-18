@@ -27,7 +27,6 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -46,6 +45,7 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
@@ -372,7 +372,7 @@ public class AbilityFactoryPump {
                     || card.getNetCombatDamage() <= 0
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                     || ph.getPhase().isBefore(PhaseType.MAIN1)
-                    || CardLists.getNotKeyword(AllZoneUtil.getCreaturesInPlay(ai), "Defender").isEmpty())) {
+                    || CardLists.getNotKeyword(GameState.getCreaturesInPlay(ai), "Defender").isEmpty())) {
                 return false;
             }
             if (ph.isPlayerTurn(human) && (!card.isAttacking()
@@ -414,7 +414,7 @@ public class AbilityFactoryPump {
         }
 
         Predicate<Card> opBlockers = CardPredicates.possibleBlockers(card);
-        List<Card> cardsCanBlock = CardLists.filter(AllZoneUtil.getCreaturesInPlay(opp), opBlockers);
+        List<Card> cardsCanBlock = CardLists.filter(GameState.getCreaturesInPlay(opp), opBlockers);
 
         final boolean evasive = (keyword.endsWith("Unblockable") || keyword.endsWith("Fear")
                 || keyword.endsWith("Intimidate") || keyword.endsWith("Shadow"));
@@ -479,7 +479,7 @@ public class AbilityFactoryPump {
                 }
             } else if (ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     && CombatUtil.canAttack(card)) {
-                List<Card> blockers = AllZoneUtil.getCreaturesInPlay(opp);
+                List<Card> blockers = GameState.getCreaturesInPlay(opp);
                 for (Card blocker : blockers) {
                     if (CombatUtil.canBlock(card, blocker, combat)
                             && !CombatUtil.canDestroyBlocker(blocker, card, combat, false)) {
@@ -491,7 +491,7 @@ public class AbilityFactoryPump {
         } else if (combatRelevant) {
             if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
-                    || (AllZoneUtil.getCreaturesInPlay(opp).size() < 1)
+                    || (GameState.getCreaturesInPlay(opp).size() < 1)
                     || cardsCanBlock.isEmpty()) {
                 return false;
             }
@@ -554,7 +554,7 @@ public class AbilityFactoryPump {
         } else if (keyword.equals("Vigilance")) {
             if (ph.isPlayerTurn(opp) || !CombatUtil.canAttack(card)
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                    || CardLists.getNotKeyword(AllZoneUtil.getCreaturesInPlay(opp), "Defender").size() < 1) {
+                    || CardLists.getNotKeyword(GameState.getCreaturesInPlay(opp), "Defender").size() < 1) {
                 return false;
             }
         } else if (keyword.equals("Reach")) {
@@ -591,7 +591,7 @@ public class AbilityFactoryPump {
             if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0
-                    || CardLists.getType(AllZoneUtil.getPlayerLandsInPlay(opp), "Island").isEmpty()
+                    || CardLists.getType(GameState.getPlayerLandsInPlay(opp), "Island").isEmpty()
                     || cardsCanBlock.isEmpty()) {
                 return false;
             }
@@ -599,7 +599,7 @@ public class AbilityFactoryPump {
             if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0
-                    || CardLists.getType(AllZoneUtil.getPlayerLandsInPlay(opp), "Swamp").isEmpty()
+                    || CardLists.getType(GameState.getPlayerLandsInPlay(opp), "Swamp").isEmpty()
                     || cardsCanBlock.isEmpty()) {
                 return false;
             }
@@ -607,7 +607,7 @@ public class AbilityFactoryPump {
             if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0
-                    || CardLists.getType(AllZoneUtil.getPlayerLandsInPlay(opp), "Mountain").isEmpty()
+                    || CardLists.getType(GameState.getPlayerLandsInPlay(opp), "Mountain").isEmpty()
                     || cardsCanBlock.isEmpty()) {
                 return false;
             }
@@ -615,7 +615,7 @@ public class AbilityFactoryPump {
             if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0
-                    || CardLists.getType(AllZoneUtil.getPlayerLandsInPlay(opp), "Forest").isEmpty()
+                    || CardLists.getType(GameState.getPlayerLandsInPlay(opp), "Forest").isEmpty()
                     || cardsCanBlock.isEmpty()) {
                 return false;
             }
@@ -705,7 +705,7 @@ public class AbilityFactoryPump {
      */
     private List<Card> getPumpCreatures(final Player ai, final SpellAbility sa) {
 
-        List<Card> list = AllZoneUtil.getCreaturesInPlay(ai);
+        List<Card> list = GameState.getCreaturesInPlay(ai);
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -729,7 +729,7 @@ public class AbilityFactoryPump {
      * @return a {@link forge.CardList} object.
      */
     private List<Card> getCurseCreatures(final Player ai, final SpellAbility sa, final int defense, final int attack) {
-        List<Card> list = AllZoneUtil.getCreaturesInPlay(ai.getOpponent());
+        List<Card> list = GameState.getCreaturesInPlay(ai.getOpponent());
         list = CardLists.getTargetableCards(list, sa);
         if ((defense < 0) && !list.isEmpty()) { // with spells that give -X/-X,
                                                 // compi will try to destroy a
@@ -982,7 +982,7 @@ public class AbilityFactoryPump {
         List<Card> list = new ArrayList<Card>();
         if (this.abilityFactory.getMapParams().containsKey("AILogic")) {
             if (this.abilityFactory.getMapParams().get("AILogic").equals("HighestPower")) {
-                list = CardLists.getValidCards(AllZoneUtil.getCreaturesInPlay(), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+                list = CardLists.getValidCards(GameState.getCreaturesInPlay(), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
                 list = CardLists.getTargetableCards(list, sa);
                 CardLists.sortAttack(list);
                 if (!list.isEmpty()) {
@@ -1001,7 +1001,7 @@ public class AbilityFactoryPump {
         } else {
             if (!tgt.canTgtCreature()) {
                 ZoneType zone = tgt.getZone().get(0);
-                list = AllZoneUtil.getCardsIn(zone);
+                list = GameState.getCardsIn(zone);
             } else {
                 list = this.getPumpCreatures(ai, sa);
             }
@@ -1081,7 +1081,7 @@ public class AbilityFactoryPump {
      * @return a boolean.
      */
     private boolean pumpMandatoryTarget(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = GameState.getCardsIn(ZoneType.Battlefield);
         final Target tgt = sa.getTarget();
         final Player opp = ai.getOpponent();
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
@@ -1445,7 +1445,7 @@ public class AbilityFactoryPump {
             final Card tgtC = tgtCards.get(j);
 
             // only pump things in PumpZone
-            if (!AllZoneUtil.getCardsIn(pumpZone).contains(tgtC)) {
+            if (!GameState.getCardsIn(pumpZone).contains(tgtC)) {
                 continue;
             }
 
@@ -1460,7 +1460,7 @@ public class AbilityFactoryPump {
         for (int i = 0; i < untargetedCards.size(); i++) {
             final Card tgtC = untargetedCards.get(i);
             // only pump things in PumpZone
-            if (!AllZoneUtil.getCardsIn(pumpZone).contains(tgtC)) {
+            if (!GameState.getCardsIn(pumpZone).contains(tgtC)) {
                 continue;
             }
 
@@ -1480,7 +1480,7 @@ public class AbilityFactoryPump {
 
         //if host is not on the battlefield don't apply
         if (this.params.containsKey("UntilLoseControlOfHost")
-                && !AllZoneUtil.isCardInPlay(sa.getSourceCard())) {
+                && !GameState.isCardInPlay(sa.getSourceCard())) {
             return;
         }
         final int a = this.getNumAttack(sa);
@@ -1859,7 +1859,7 @@ public class AbilityFactoryPump {
         list = new ArrayList<Card>();
         if ((tgtPlayers == null) || tgtPlayers.isEmpty()) {
             for (final ZoneType zone : affectedZones) {
-                list.addAll(AllZoneUtil.getCardsIn(zone));
+                list.addAll(GameState.getCardsIn(zone));
             }
 
         } else {
@@ -1907,7 +1907,7 @@ public class AbilityFactoryPump {
 
                     @Override
                     public void execute() {
-                        if (AllZoneUtil.isCardInPlay(tgtC)) {
+                        if (GameState.isCardInPlay(tgtC)) {
                             tgtC.addTempAttackBoost(-1 * a);
                             tgtC.addTempDefenseBoost(-1 * d);
 

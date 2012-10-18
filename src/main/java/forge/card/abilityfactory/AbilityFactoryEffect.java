@@ -25,7 +25,6 @@ import java.util.Random;
 import com.google.common.base.Predicate;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -43,6 +42,7 @@ import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
+import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -299,8 +299,8 @@ public class AbilityFactoryEffect {
             } else if (logic.equals("Always")) {
                 randomReturn = true;
             } else if (logic.equals("Evasion")) {
-                List<Card> comp = AllZoneUtil.getCreaturesInPlay(ai);
-                List<Card> human = AllZoneUtil.getCreaturesInPlay(ai.getOpponent());
+                List<Card> comp = GameState.getCreaturesInPlay(ai);
+                List<Card> human = GameState.getCreaturesInPlay(ai.getOpponent());
 
                 // only count creatures that can attack or block
                 comp = CardLists.filter(comp, new Predicate<Card>() {
@@ -448,7 +448,7 @@ public class AbilityFactoryEffect {
         }
 
         // Unique Effects shouldn't be duplicated
-        if (params.containsKey("Unique") && AllZoneUtil.isCardInPlay(name)) {
+        if (params.containsKey("Unique") && GameState.isCardInPlay(name)) {
             return;
         }
 
@@ -554,7 +554,7 @@ public class AbilityFactoryEffect {
 
         // Remember created effect
         if (params.containsKey("RememberEffect")) {
-            AllZoneUtil.getCardState(card).addRemembered(eff);
+            GameState.getCardState(card).addRemembered(eff);
         }
 
         // Duration

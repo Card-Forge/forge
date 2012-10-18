@@ -25,7 +25,6 @@ import java.util.Stack;
 import com.esotericsoftware.minlog.Log;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -50,6 +49,7 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCostAbility;
+import forge.game.GameState;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -775,11 +775,11 @@ public class MagicStack extends MyObservable {
          * name is in a graveyard or a nontoken permanent with the same name is
          * on the battlefield.
          */
-        if (sp.isSpell() && AllZoneUtil.isCardInPlay("Bazaar of Wonders")) {
+        if (sp.isSpell() && GameState.isCardInPlay("Bazaar of Wonders")) {
             boolean found = false;
-            List<Card> all = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            List<Card> all = GameState.getCardsIn(ZoneType.Battlefield);
             all = CardLists.filter(all, Presets.NON_TOKEN);
-            final List<Card> graves = AllZoneUtil.getCardsIn(ZoneType.Graveyard);
+            final List<Card> graves = GameState.getCardsIn(ZoneType.Graveyard);
             all.addAll(graves);
 
             for (final Card c : all) {
@@ -789,7 +789,7 @@ public class MagicStack extends MyObservable {
             }
 
             if (found) {
-                final List<Card> bazaars = AllZoneUtil.getCardsIn(ZoneType.Battlefield, "Bazaar of Wonders"); // should
+                final List<Card> bazaars = GameState.getCardsIn(ZoneType.Battlefield, "Bazaar of Wonders"); // should
                 // only
                 // be
                 // 1...
@@ -912,7 +912,7 @@ public class MagicStack extends MyObservable {
 
         if (source.hasStartOfKeyword("Haunt") && !source.isCreature()
                 && AllZone.getZoneOf(source).is(ZoneType.Graveyard)) {
-            final List<Card> creats = AllZoneUtil.getCreaturesInPlay();
+            final List<Card> creats = GameState.getCreaturesInPlay();
             final Ability haunterDiesWork = new Ability(source, "0") {
                 @Override
                 public void resolve() {
@@ -1058,7 +1058,7 @@ public class MagicStack extends MyObservable {
         final Card tmp = sa.getSourceCard();
         tmp.setCanCounter(true); // reset mana pumped counter magic flag
         if (tmp.getClones().size() > 0) {
-            for (final Card c : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
+            for (final Card c : GameState.getCardsIn(ZoneType.Battlefield)) {
                 if (c.equals(tmp)) {
                     c.setClones(tmp.getClones());
                 }
@@ -1106,7 +1106,7 @@ public class MagicStack extends MyObservable {
                     }
                     else if (o instanceof Card) {
                         final Card card = (Card) o;
-                        Card current = AllZoneUtil.getCardState(card);
+                        Card current = GameState.getCardState(card);
                         
                         invalidTarget = current.getTimestamp() != card.getTimestamp();
                         

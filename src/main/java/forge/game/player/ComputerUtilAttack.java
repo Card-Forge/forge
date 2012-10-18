@@ -24,7 +24,6 @@ import java.util.Random;
 import com.google.common.base.Predicate;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -35,6 +34,7 @@ import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
+import forge.game.GameState;
 import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.zone.ZoneType;
@@ -314,7 +314,7 @@ public class ComputerUtilAttack {
                     // bonus TWICE
                     humanBaseAttack = humanBaseAttack + humanExaltedBonus;
                 }
-                final int totalExaltedAttack = AllZoneUtil.isCardInPlay("Rafiq of the Many", opp) ? 2 * humanBaseAttack
+                final int totalExaltedAttack = GameState.isCardInPlay("Rafiq of the Many", opp) ? 2 * humanBaseAttack
                         : humanBaseAttack;
                 if (ai.getLife() - 3 <= totalExaltedAttack) {
                     // We will lose if there is an Exalted attack -- keep one
@@ -382,7 +382,7 @@ public class ComputerUtilAttack {
      */
     private boolean doAssault(final Player ai) {
         // Beastmaster Ascension
-        if (AllZoneUtil.isCardInPlay("Beastmaster Ascension", ai)
+        if (GameState.isCardInPlay("Beastmaster Ascension", ai)
                 && (this.attackers.size() > 1)) {
             final List<Card> beastions = ai.getCardsIn(ZoneType.Battlefield, "Beastmaster Ascension");
             int minCreatures = 7;

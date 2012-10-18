@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -30,6 +29,7 @@ import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.phase.PhaseUtil;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -160,7 +160,7 @@ public class InputMulligan extends Input {
                         }
                     }
                     if (c.getName().startsWith("Leyline")
-                            && !(c.getName().startsWith("Leyline of Singularity") && (AllZoneUtil.getCardsIn(ZoneType.Battlefield,
+                            && !(c.getName().startsWith("Leyline of Singularity") && (GameState.getCardsIn(ZoneType.Battlefield,
                                     "Leyline of Singularity").size() > 0))) {
                         ga.moveToPlay(c);
                         //ga.checkStateEffects();

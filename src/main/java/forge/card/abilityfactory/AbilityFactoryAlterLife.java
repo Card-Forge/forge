@@ -23,7 +23,6 @@ import java.util.Iterator;
 import java.util.Random;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 import forge.Counters;
 import forge.Singletons;
@@ -35,6 +34,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
@@ -1617,7 +1617,7 @@ public class AbilityFactoryAlterLife {
         }
 
         if (source.getName().equals("Eternity Vessel")
-                && (AllZoneUtil.isCardInPlay("Vampire Hexmage", opponent) || (source
+                && (GameState.isCardInPlay("Vampire Hexmage", opponent) || (source
                         .getCounters(Counters.CHARGE) == 0))) {
             return false;
         }

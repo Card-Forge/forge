@@ -21,12 +21,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.staticability.StaticAbility;
+import forge.game.GameState;
 import forge.game.zone.ZoneType;
 
 /**
@@ -94,7 +94,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
         }
 
         // CantBeActivated static abilities
-        final List<Card> allp = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        final List<Card> allp = GameState.getCardsIn(ZoneType.Battlefield);
         for (final Card ca : allp) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
@@ -108,7 +108,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
             return false;
         }
 
-        if (this.isCycling() && AllZoneUtil.isCardInPlay("Stabilizer")) {
+        if (this.isCycling() && GameState.isCardInPlay("Stabilizer")) {
             return false;
         }
 

@@ -27,7 +27,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -42,6 +41,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
@@ -476,7 +476,7 @@ public class AbilityFactoryPermanentState {
         final Card source = sa.getSourceCard();
         final Target tgt = sa.getTarget();
 
-        List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = GameState.getCardsIn(ZoneType.Battlefield);
 
         list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
         list = CardLists.getTargetableCards(list, sa);
@@ -606,7 +606,7 @@ public class AbilityFactoryPermanentState {
             }
 
             for (final Card tgtC : tgtCards) {
-                if (AllZoneUtil.isCardInPlay(tgtC) && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
+                if (GameState.isCardInPlay(tgtC) && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
                     tgtC.untap();
                 }
             }
@@ -1101,7 +1101,7 @@ public class AbilityFactoryPermanentState {
         final Card source = sa.getSourceCard();
         final Target tgt = sa.getTarget();
 
-        List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = GameState.getCardsIn(ZoneType.Battlefield);
         list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
         list = CardLists.getTargetableCards(list, sa);
 
@@ -1230,7 +1230,7 @@ public class AbilityFactoryPermanentState {
         }
 
         for (final Card tgtC : tgtCards) {
-            if ((AllZoneUtil.isCardInPlay(tgtC) || params.containsKey("ETB")) && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
+            if ((GameState.isCardInPlay(tgtC) || params.containsKey("ETB")) && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
                 if (tgtC.isUntapped() && (remTapped)) {
                     card.addRemembered(tgtC);
                 }
@@ -1421,7 +1421,7 @@ public class AbilityFactoryPermanentState {
         }
 
         if ((tgtPlayers == null) || tgtPlayers.isEmpty()) {
-            list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            list = GameState.getCardsIn(ZoneType.Battlefield);
         } else {
             list = tgtPlayers.get(0).getCardsIn(ZoneType.Battlefield);
         }
@@ -1679,7 +1679,7 @@ public class AbilityFactoryPermanentState {
         }
 
         if ((tgtPlayers == null) || tgtPlayers.isEmpty()) {
-            cards = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            cards = GameState.getCardsIn(ZoneType.Battlefield);
         } else {
             cards = tgtPlayers.get(0).getCardsIn(ZoneType.Battlefield);
         }
@@ -1723,7 +1723,7 @@ public class AbilityFactoryPermanentState {
             valid = params.get("ValidCards");
         }
 
-        List<Card> validTappables = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> validTappables = GameState.getCardsIn(ZoneType.Battlefield);
 
         final Target tgt = sa.getTarget();
 
@@ -1774,7 +1774,7 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.CardList} object.
      */
     private static List<Card> getTapAllTargets(final String valid, final Card source) {
-        List<Card> tmpList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> tmpList = GameState.getCardsIn(ZoneType.Battlefield);
         tmpList = CardLists.getValidCards(tmpList, valid, source.getController(), source);
         tmpList = CardLists.filter(tmpList, Presets.UNTAPPED);
         return tmpList;
@@ -2227,7 +2227,7 @@ public class AbilityFactoryPermanentState {
         }
 
         for (final Card tgtC : tgtCards) {
-            if (AllZoneUtil.isCardInPlay(tgtC) && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
+            if (GameState.isCardInPlay(tgtC) && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
                 if (sa.getActivatingPlayer().isHuman()) {
                     final String[] tapOrUntap = new String[] { "Tap", "Untap" };
                     final Object z = GuiChoose.oneOrNone("Tap or Untap " + tgtC + "?", tapOrUntap);
@@ -2602,7 +2602,7 @@ public class AbilityFactoryPermanentState {
         final Card source = sa.getSourceCard();
         final Target tgt = sa.getTarget();
 
-        List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = GameState.getCardsIn(ZoneType.Battlefield);
         list = CardLists.getTargetableCards(CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source), sa);
 
         return false;

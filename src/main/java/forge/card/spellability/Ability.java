@@ -20,8 +20,8 @@ package forge.card.spellability;
 import com.esotericsoftware.minlog.Log;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
+import forge.game.GameState;
 
 /**
  * <p>
@@ -73,6 +73,6 @@ public abstract class Ability extends SpellAbility {
             return false;
         }
 
-        return AllZoneUtil.isCardInPlay(this.getSourceCard()) && !this.getSourceCard().isFaceDown();
+        return GameState.isCardInPlay(this.getSourceCard()) && !this.getSourceCard().isFaceDown();
     }
 }

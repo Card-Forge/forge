@@ -28,6 +28,7 @@ import forge.CardLists;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -227,18 +228,18 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
         if (this.isAllM12Empires()) {
             final Player p = sa.getSourceCard().getController();
-            boolean has = AllZoneUtil.isCardInPlay("Crown of Empires", p);
-            has &= AllZoneUtil.isCardInPlay("Scepter of Empires", p);
-            has &= AllZoneUtil.isCardInPlay("Throne of Empires", p);
+            boolean has = GameState.isCardInPlay("Crown of Empires", p);
+            has &= GameState.isCardInPlay("Scepter of Empires", p);
+            has &= GameState.isCardInPlay("Throne of Empires", p);
             if (!has) {
                 return false;
             }
         }
         if (this.isNotAllM12Empires()) {
             final Player p = sa.getSourceCard().getController();
-            boolean has = AllZoneUtil.isCardInPlay("Crown of Empires", p);
-            has &= AllZoneUtil.isCardInPlay("Scepter of Empires", p);
-            has &= AllZoneUtil.isCardInPlay("Throne of Empires", p);
+            boolean has = GameState.isCardInPlay("Crown of Empires", p);
+            has &= GameState.isCardInPlay("Scepter of Empires", p);
+            has &= GameState.isCardInPlay("Throne of Empires", p);
             if (has) {
                 return false;
             }
@@ -256,7 +257,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (this.getPresentDefined() != null) {
                 list.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), this.getPresentDefined(), sa));
             } else {
-                list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+                list = GameState.getCardsIn(ZoneType.Battlefield);
             }
 
             list = CardLists.getValidCards(list, this.getIsPresent().split(","), sa.getActivatingPlayer(), sa.getSourceCard());

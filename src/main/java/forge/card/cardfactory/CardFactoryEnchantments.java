@@ -5,7 +5,6 @@ import java.util.List;
 import com.google.common.collect.Iterables;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -19,6 +18,7 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.control.input.Input;
 import forge.game.GameLossReason;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -160,8 +160,8 @@ class CardFactoryEnchantments {
 
                 @Override
                 public boolean canPlayAI() {
-                    final List<Card> compCreats = AllZoneUtil.getCreaturesInPlay(getActivatingPlayer());
-                    final List<Card> humCreats = AllZoneUtil.getCreaturesInPlay(getActivatingPlayer().getOpponent());
+                    final List<Card> compCreats = GameState.getCreaturesInPlay(getActivatingPlayer());
+                    final List<Card> humCreats = GameState.getCreaturesInPlay(getActivatingPlayer().getOpponent());
 
                     // only play standstill if comp controls more creatures than
                     // human

@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Random;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.Singletons;
@@ -37,6 +36,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
+import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
@@ -641,10 +641,10 @@ public class AbilityFactoryToken extends AbilityFactory {
                     AllZone.getCombat().addAttacker(c);
                 }
                 if (remember != null) {
-                    AllZoneUtil.getCardState(sa.getSourceCard()).addRemembered(c);
+                    GameState.getCardState(sa.getSourceCard()).addRemembered(c);
                 }
                 if (this.abilityFactory.getMapParams().get("RememberSource") != null) {
-                    AllZoneUtil.getCardState(c).addRemembered(host);
+                    GameState.getCardState(c).addRemembered(host);
                 }
             }
         }

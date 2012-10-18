@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Random;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardCharacteristicName;
 
@@ -41,6 +40,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -307,7 +307,7 @@ public final class AbilityFactoryCopy {
         final Target abTgt = sa.getTarget();
 
         if (abTgt != null) {
-            List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            List<Card> list = GameState.getCardsIn(ZoneType.Battlefield);
             list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
             list = CardLists.getTargetableCards(list, sa);
             abTgt.resetTargets();
@@ -402,7 +402,7 @@ public final class AbilityFactoryCopy {
                 }
 
                 // start copied Kiki code
-                int multiplier = AllZoneUtil.getTokenDoublersMagnitude(hostCard.getController());
+                int multiplier = GameState.getTokenDoublersMagnitude(hostCard.getController());
                 multiplier *= numCopies;
                 final Card[] crds = new Card[multiplier];
 
@@ -487,7 +487,7 @@ public final class AbilityFactoryCopy {
                         public void resolve() {
                             // technically your opponent could steal the token
                             // and the token shouldn't be sacrificed
-                            if (AllZoneUtil.isCardInPlay(target[index])) {
+                            if (GameState.isCardInPlay(target[index])) {
                                 if (params.get("AtEOT").equals("Sacrifice")) {
                                     // maybe do a setSacrificeAtEOT, but
                                     // probably not.

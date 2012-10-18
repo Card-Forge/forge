@@ -24,12 +24,12 @@ import java.util.List;
 import com.google.common.base.Predicate;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.control.input.Input;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -269,7 +269,7 @@ public class TargetSelection {
             return;
         }
 
-        List<Card> choices = CardLists.getTargetableCards(CardLists.getValidCards(AllZoneUtil
+        List<Card> choices = CardLists.getTargetableCards(CardLists.getValidCards(GameState
                 .getCardsIn(zone), this.target.getValidTgts(), this.ability.getActivatingPlayer(), this.ability.getSourceCard()), this.ability);
 
         ArrayList<Object> objects = new ArrayList<Object>();
@@ -461,15 +461,15 @@ public class TargetSelection {
         final List<Card> crdsLibrary = new ArrayList<Card>();
         final List<Card> crdsStack = new ArrayList<Card>();
         for (final Card inZone : choicesZoneUnfiltered) {
-            if (AllZoneUtil.getCardsIn(ZoneType.Battlefield).contains(inZone)) {
+            if (GameState.getCardsIn(ZoneType.Battlefield).contains(inZone)) {
                 crdsBattle.add(inZone);
-            } else if (AllZoneUtil.getCardsIn(ZoneType.Exile).contains(inZone)) {
+            } else if (GameState.getCardsIn(ZoneType.Exile).contains(inZone)) {
                 crdsExile.add(inZone);
-            } else if (AllZoneUtil.getCardsIn(ZoneType.Graveyard).contains(inZone)) {
+            } else if (GameState.getCardsIn(ZoneType.Graveyard).contains(inZone)) {
                 crdsGrave.add(inZone);
-            } else if (AllZoneUtil.getCardsIn(ZoneType.Library).contains(inZone)) {
+            } else if (GameState.getCardsIn(ZoneType.Library).contains(inZone)) {
                 crdsLibrary.add(inZone);
-            } else if (AllZoneUtil.getCardsIn(ZoneType.Stack).contains(inZone)) {
+            } else if (GameState.getCardsIn(ZoneType.Stack).contains(inZone)) {
                 crdsStack.add(inZone);
             }
         }

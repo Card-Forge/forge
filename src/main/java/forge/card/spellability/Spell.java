@@ -30,6 +30,7 @@ import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.staticability.StaticAbility;
 import forge.error.ErrorViewer;
+import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -124,7 +125,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         }
 
         // CantBeCast static abilities
-        final List<Card> allp = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+        final List<Card> allp = GameState.getCardsIn(ZoneType.Battlefield);
         allp.add(card);
         for (final Card ca : allp) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
@@ -144,7 +145,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         final Card card = this.getSourceCard();
         if (card.getSVar("NeedsToPlay").length() > 0) {
             final String needsToPlay = card.getSVar("NeedsToPlay");
-            List<Card> list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            List<Card> list = GameState.getCardsIn(ZoneType.Battlefield);
 
             list = CardLists.getValidCards(list, needsToPlay.split(","), card.getController(), card);
             if (list.isEmpty()) {

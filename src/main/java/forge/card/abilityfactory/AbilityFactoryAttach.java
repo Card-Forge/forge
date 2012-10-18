@@ -27,7 +27,6 @@ import java.util.Random;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -47,6 +46,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
+import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -347,7 +347,7 @@ public class AbilityFactoryAttach {
             return null;
         }
 
-        List<Card> list = AllZoneUtil.getCardsIn(tgt.getZone());
+        List<Card> list = GameState.getCardsIn(tgt.getZone());
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource);
         if (params.containsKey("AITgts")) {
             list = CardLists.getValidCards(list, params.get("AITgts"), sa.getActivatingPlayer(), attachSource);
@@ -1313,7 +1313,7 @@ public class AbilityFactoryAttach {
                         return;
                     }
 
-                    if (AllZoneUtil.isCardInPlay(crd)) {
+                    if (GameState.isCardInPlay(crd)) {
                         crd.removeController(card);
                     }
 
@@ -1417,7 +1417,7 @@ public class AbilityFactoryAttach {
                     return true;
                 }
             } else {
-                List<Card> list = AllZoneUtil.getCardsIn(tgt.getZone());
+                List<Card> list = GameState.getCardsIn(tgt.getZone());
                 list = CardLists.getValidCards(list, tgt.getValidTgts(), aura.getActivatingPlayer(), source);
 
                 final Object o = GuiChoose.one(source + " - Select a card to attach to.", list);
@@ -1711,7 +1711,7 @@ public class AbilityFactoryAttach {
         // If Cast Targets will be checked on the Stack
         for (final Object o : targets) {
             String valid = params.get("UnattachValid");
-            List<Card> unattachList = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            List<Card> unattachList = GameState.getCardsIn(ZoneType.Battlefield);
             unattachList = CardLists.getValidCards(unattachList, valid.split(","), source.getController(), source);
             for (final Card c : unattachList) {
                 AbilityFactoryAttach.handleUnattachment(o, c, af);

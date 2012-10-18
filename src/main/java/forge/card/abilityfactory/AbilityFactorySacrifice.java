@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Random;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 
 import forge.CardLists;
@@ -37,6 +36,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -935,7 +935,7 @@ public class AbilityFactorySacrifice {
         if (params.containsKey("Defined")) {
             list = new ArrayList<Card>(AbilityFactory.getDefinedCards(af.getHostCard(), params.get("Defined"), sa));
         } else {
-            list = AllZoneUtil.getCardsIn(ZoneType.Battlefield);
+            list = GameState.getCardsIn(ZoneType.Battlefield);
         }
 
         final boolean remSacrificed = params.containsKey("RememberSacrificed");

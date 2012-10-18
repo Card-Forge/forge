@@ -24,12 +24,12 @@ import java.util.List;
 import com.google.common.base.Predicate;
 
 import forge.AllZone;
-import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
@@ -66,7 +66,7 @@ public class PhaseUtil {
             return true;
         }
 
-        if (AllZoneUtil.isCardInPlay("Sands of Time") || AllZoneUtil.isCardInPlay("Stasis")) {
+        if (GameState.isCardInPlay("Sands of Time") || GameState.isCardInPlay("Stasis")) {
             return true;
         }
 
@@ -105,7 +105,7 @@ public class PhaseUtil {
 
         Singletons.getModel().getGameAction().resetActivationsPerTurn();
 
-        final List<Card> lands = CardLists.filter(AllZoneUtil.getPlayerLandsInPlay(turn), Presets.UNTAPPED);
+        final List<Card> lands = CardLists.filter(GameState.getPlayerLandsInPlay(turn), Presets.UNTAPPED);
         turn.setNumPowerSurgeLands(lands.size());
 
         // anything before this point happens regardless of whether the Untap
@@ -155,13 +155,13 @@ public class PhaseUtil {
      * @return a boolean.
      */
     public static boolean skipUpkeep() {
-        if (AllZoneUtil.isCardInPlay("Eon Hub")) {
+        if (GameState.isCardInPlay("Eon Hub")) {
             return true;
         }
 
         final Player turn = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
 
-        if ((turn.getCardsIn(ZoneType.Hand).size() == 0) && AllZoneUtil.isCardInPlay("Gibbering Descent", turn)) {
+        if ((turn.getCardsIn(ZoneType.Hand).size() == 0) && GameState.isCardInPlay("Gibbering Descent", turn)) {
             return true;
         }
 

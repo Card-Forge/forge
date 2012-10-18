@@ -21,11 +21,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import forge.AllZoneUtil;
 import forge.Card;
 import forge.CardUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -714,7 +714,7 @@ public class Target {
         if (this.tgtZone.contains(ZoneType.Stack)) {
             return true;
         } else {
-            for (final Card c : AllZoneUtil.getCardsIn(this.tgtZone)) {
+            for (final Card c : GameState.getCardsIn(this.tgtZone)) {
                 if (c.isValid(this.validTgts, this.srcCard.getController(), this.srcCard)
                         && (!isTargeted || c.canBeTargetedBy(sa))
                         && !this.getTargetCards().contains(c)) {
