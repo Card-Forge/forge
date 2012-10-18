@@ -12800,6 +12800,7 @@ src/main/java/forge/gui/home/quest/CSubmenuDuels.java -text
 src/main/java/forge/gui/home/quest/CSubmenuQuestData.java -text
 src/main/java/forge/gui/home/quest/CSubmenuQuestDecks.java -text
 src/main/java/forge/gui/home/quest/CSubmenuQuestPrefs.java -text
+src/main/java/forge/gui/home/quest/DialogCustomFormat.java -text
 src/main/java/forge/gui/home/quest/IVQuestStats.java -text
 src/main/java/forge/gui/home/quest/PnlEvent.java -text
 src/main/java/forge/gui/home/quest/QuestFileLister.java -text

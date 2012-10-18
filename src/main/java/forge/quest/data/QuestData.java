@@ -67,11 +67,15 @@ public final class QuestData {
      *      quest name
      * @param formatString
      *      String, persistent format for the quest (null if none).
+     * @param userFormat
+     *      user-defined format, if any (null if none).
      */
-    public QuestData(String name2, int diff, QuestMode mode2, final String formatString) {
+    public QuestData(String name2, int diff, QuestMode mode2, final String formatString, GameFormatQuest userFormat) {
         this.name = name2;
 
-        if (formatString == null) {
+        if (userFormat != null) {
+            format = userFormat;
+        } else if (formatString == null) {
             format = null;
         } else {
             format = new GameFormatQuest(Singletons.getModel().getFormats().getFormat(formatString));

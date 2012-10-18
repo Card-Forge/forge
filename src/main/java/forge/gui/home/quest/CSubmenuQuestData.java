@@ -22,6 +22,7 @@ import forge.properties.NewConstants;
 import forge.quest.QuestController;
 import forge.quest.QuestMode;
 import forge.quest.QuestStartPool;
+import forge.quest.data.GameFormatQuest;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
@@ -37,6 +38,8 @@ public enum CSubmenuQuestData implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
+    private GameFormatQuest userFormat = new GameFormatQuest("Custom", new ArrayList<String>(), new ArrayList<String>());
+
     private final Map<String, QuestData> arrQuests = new HashMap<String, QuestData>();
 
     private final VSubmenuQuestData view = VSubmenuQuestData.SINGLETON_INSTANCE;
@@ -50,10 +53,23 @@ public enum CSubmenuQuestData implements ICDoc {
     private final ActionListener preconListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            view.getCbxFormat().setEnabled(view.getRadRotatingStart().isSelected());
+            view.getCbxFormat().setEnabled(view.getRadRotatingStart().isSelected() && !view.getBoxCustom().isSelected());
             view.getCbxPrecon().setEnabled(view.getRadPreconStart().isSelected());
             view.getBoxPersist().setEnabled(view.getRadRotatingStart().isSelected());
+            view.getBoxCustom().setEnabled(view.getRadRotatingStart().isSelected());
+            view.getBtnCustom().setEnabled(view.getRadRotatingStart().isSelected() && view.getBoxCustom().isSelected());
         }
+    };
+     private final ActionListener customFormatListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            if (actionEvent.getActionCommand().equals("Define")) {
+                new DialogCustomFormat(userFormat);
+            } else {
+                System.out.println("Custom Format button event = " + actionEvent.getActionCommand());
+            }
+        }
+
     };
 
     /* (non-Javadoc)
@@ -67,6 +83,8 @@ public enum CSubmenuQuestData implements ICDoc {
         view.getRadUnrestricted().addActionListener(preconListener);
         view.getRadRotatingStart().addActionListener(preconListener);
         view.getRadPreconStart().addActionListener(preconListener);
+        view.getBoxCustom().addActionListener(preconListener);
+        view.getBtnFormatCustom().addActionListener(customFormatListener);
     }
 
     /* (non-Javadoc)
@@ -174,7 +192,13 @@ public enum CSubmenuQuestData implements ICDoc {
         }
 
         // Give the user a few cards to build a deck
-        Singletons.getModel().getQuest().newGame(questName, difficulty, mode, startPool, rotatingFormat, startPrecon, view.getBoxPersist().isSelected());
+        final boolean useCustomFormat = (view.getRadRotatingStart().isSelected() && view.getBoxCustom().isSelected());
+        if (useCustomFormat && userFormat != null) {
+            userFormat.updateFilters();
+        }
+        Singletons.getModel().getQuest().newGame(questName, difficulty, mode, startPool, rotatingFormat, startPrecon,
+                useCustomFormat ? userFormat : null,
+                 view.getBoxPersist().isSelected());
         Singletons.getModel().getQuest().save();
 
         // Save in preferences.

@@ -199,7 +199,6 @@ public final class GameFormatQuest {
 
         for (CardEdition ce : Singletons.getModel().getEditions()) {
             if (!isSetLegal(ce.getCode())) {
-                // System.out.println("Added " + ce.getCode() + " to the list.");
                 exSets.add(ce.getCode());
             }
         }
@@ -219,8 +218,8 @@ public final class GameFormatQuest {
         } else if (this.allowedSetCodes.contains(setCode)) {
             return; // Already on the list
         }
-        // System.out.println("Adding " + setCode + " to allowed sets!");
         this.allowedSetCodes.add(setCode);
+        updateFilters();
     }
 
     /**
