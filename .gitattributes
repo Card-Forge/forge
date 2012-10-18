@@ -545,6 +545,7 @@ res/cardsfolder/a/aunties_hovel.txt svneol=native#text/plain
 res/cardsfolder/a/aunties_snitch.txt -text
 res/cardsfolder/a/aura_blast.txt svneol=native#text/plain
 res/cardsfolder/a/aura_extraction.txt svneol=native#text/plain
+res/cardsfolder/a/aura_finesse.txt -text
 res/cardsfolder/a/aura_flux.txt svneol=native#text/plain
 res/cardsfolder/a/aura_fracture.txt svneol=native#text/plain
 res/cardsfolder/a/aura_gnarlid.txt svneol=native#text/plain
@@ -6293,6 +6294,7 @@ res/cardsfolder/m/mongrel_pack.txt svneol=native#text/plain
 res/cardsfolder/m/monk_idealist.txt svneol=native#text/plain
 res/cardsfolder/m/monk_realist.txt svneol=native#text/plain
 res/cardsfolder/m/monkey_cage.txt svneol=native#text/plain
+res/cardsfolder/m/monomania.txt -text
 res/cardsfolder/m/monss_goblin_raiders.txt svneol=native#text/plain
 res/cardsfolder/m/monstrify.txt svneol=native#text/plain
 res/cardsfolder/m/monstrous_carabid.txt svneol=native#text/plain
