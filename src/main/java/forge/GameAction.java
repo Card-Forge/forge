@@ -54,6 +54,7 @@ import forge.control.input.InputPayManaCostUtil;
 import forge.game.GameEndReason;
 import forge.game.GameLossReason;
 import forge.game.GameState;
+import forge.game.MatchController;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
@@ -897,7 +898,7 @@ public class GameAction {
      * 
      * @return a boolean.
      */
-    public final boolean checkEndGameState(final GameState game) {
+    public final boolean checkEndGameState(final MatchController match, final GameState game) {
         // if game is already over return true
         if (game.isGameOver()) {
             return true;
@@ -930,7 +931,7 @@ public class GameAction {
         
         if (reason != null) {
             game.setGameOver();
-            Singletons.getModel().getMatch().addGamePlayed(reason, game);
+            match.addGamePlayed(reason, game);
         }
 
         return reason != null;
@@ -1005,9 +1006,10 @@ public class GameAction {
             return;
         }
 
-        if (this.checkEndGameState(Singletons.getModel().getGameState())) {
+        MatchController match = Singletons.getModel().getMatch();
+        if (this.checkEndGameState(match, match.getCurrentGame())) {
             // Clear Simultaneous triggers at the end of the game
-            new ViewWinLose();
+            new ViewWinLose(match);
             Singletons.getModel().getGameState().getStack().clearSimultaneousStack();
             if (!refreeze) {
                 AllZone.getStack().unfreezeStack();

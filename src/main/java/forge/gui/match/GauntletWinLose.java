@@ -47,19 +47,18 @@ public class GauntletWinLose extends ControlWinLose {
 
     private JLabel lblTemp1;
     private JLabel lblTemp2;
-    private final MatchController matchState;
 
     /**
      * Instantiates a new gauntlet win/lose handler.
      * 
      * @param view0 ViewWinLose object
+     * @param match 
      */
-    public GauntletWinLose(final ViewWinLose view0) {
-        super(view0);
+    public GauntletWinLose(final ViewWinLose view0, MatchController match) {
+        super(view0, match);
         this.view = view0;
         gauntlet = AllZone.getGauntlet();
-        matchState = Singletons.getModel().getMatch();
-        this.wonMatch = matchState.isWonBy(Singletons.getControl().getPlayer().getLobbyPlayer());
+        this.wonMatch = match.isWonBy(Singletons.getControl().getPlayer().getLobbyPlayer());
     }
 
 
@@ -82,16 +81,15 @@ public class GauntletWinLose extends ControlWinLose {
 
 
 
-        if (Singletons.getModel().getMatch().getLastGameOutcome().isWinner(Singletons.getControl().getPlayer().getLobbyPlayer())) {
+        if (match.getLastGameOutcome().isWinner(Singletons.getControl().getPlayer().getLobbyPlayer())) {
             gauntlet.addWin();
-        }
-        else {
+        } else {
             gauntlet.addLoss();
         }
 
         view.getBtnRestart().setText("Restart Round");
 
-        if (!matchState.isMatchOver()) {
+        if (!match.isMatchOver()) {
             showTournamentInfo("Tournament Info");
             return true;
         } else {

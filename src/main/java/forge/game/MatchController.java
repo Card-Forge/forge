@@ -111,7 +111,7 @@ public class MatchController {
             CStack.SINGLETON_INSTANCE.subscribe(currentGame);
 
             
-            GameNew.newGame(startConditions);
+            GameNew.newGame(startConditions, gameType);
 
             Player computerPlayer = Aggregates.firstFieldEquals(currentGame.getPlayers(), Player.Accessors.FN_GET_TYPE, PlayerType.COMPUTER);
             AllZone.getInputControl().setComputer(new ComputerAIInput(new ComputerAIGeneral(computerPlayer)));

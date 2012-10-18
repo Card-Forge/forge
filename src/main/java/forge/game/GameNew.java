@@ -35,13 +35,10 @@ import forge.util.MyRandom;
  * All of these methods can and should be static.
  */
 public class GameNew {
-    private static void prepareSingleLibrary(final Player player, final Deck deck, final Map<Player, List<String>> removedAnteCards, final List<String> rAICards) {
+    private static void prepareSingleLibrary(final Player player, final Deck deck, final Map<Player, List<String>> removedAnteCards, final List<String> rAICards, boolean canRandomFoil) {
         final Random generator = MyRandom.getRandom();
         boolean useAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
-        final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL)
-                && Singletons.getModel().getMatch().getGameType() == GameType.Constructed;
-                
-        
+
         PlayerZone library = player.getZone(ZoneType.Library);
         for (final Entry<CardPrinted, Integer> stackOfCards : deck.getMain()) {
             final CardPrinted cardPrinted = stackOfCards.getKey();
@@ -99,7 +96,7 @@ public class GameNew {
      * TODO: Accept something like match state as parameter. Match should be aware of players, 
      * their decks and other special starting conditions. 
      */
-    public static void newGame(final Map<Player, PlayerStartConditions> playersConditions) {
+    public static void newGame(final Map<Player, PlayerStartConditions> playersConditions, GameType gameType) {
         AllZone.getInputControl().clearInput();
         AllZone.getColorChanger().reset();
 
@@ -113,6 +110,8 @@ public class GameNew {
         final Map<Player, List<String>> removedAnteCards = new HashMap<Player, List<String>>();
         final List<String> rAICards = new ArrayList<String>();
 
+        final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL) && gameType == GameType.Constructed;
+        
         for( Entry<Player, PlayerStartConditions> p : playersConditions.entrySet() ) {
             final Player player = p.getKey();
             player.setStartingLife(p.getValue().getStartingLife());
@@ -129,7 +128,7 @@ public class GameNew {
                 }
             }
             
-            prepareSingleLibrary(player, p.getValue().getDeck(), removedAnteCards, rAICards);
+            prepareSingleLibrary(player, p.getValue().getDeck(), removedAnteCards, rAICards, canRandomFoil);
             player.updateObservers();
             bf.updateObservers();
             player.getZone(ZoneType.Hand).updateObservers();
@@ -182,12 +181,13 @@ public class GameNew {
         }
 
 
+        GameOutcome lastGameOutcome = Singletons.getModel().getMatch().getLastGameOutcome(); 
         // Only cut/coin toss if it's the first game of the match
-        if (Singletons.getModel().getMatch().getPlayedGames().isEmpty()) {
+        if (lastGameOutcome == null) {
             GameNew.seeWhoPlaysFirstDice();
         } else {
             Player human = Singletons.getControl().getPlayer();
-            Player goesFirst = Singletons.getModel().getMatch().getLastGameOutcome().isWinner(human.getLobbyPlayer()) ? human.getOpponent() : human;
+            Player goesFirst = lastGameOutcome.isWinner(human.getLobbyPlayer()) ? human.getOpponent() : human;
             setPlayersFirstTurn(goesFirst);
         }
             

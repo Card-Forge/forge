@@ -89,7 +89,6 @@ public class QuestWinLoseHandler extends ControlWinLose {
     private static final String CONSTRAINTS_TEXT = "w 95%!,, h 180px!, gap 0 0 0 20px";
     private static final String CONSTRAINTS_CARDS = "w 95%!, h 330px!, gap 0 0 0 20px";
 
-    private final transient MatchController match;
     private final transient QuestController qData;
     private final transient QuestEvent qEvent;
 
@@ -97,11 +96,11 @@ public class QuestWinLoseHandler extends ControlWinLose {
      * Instantiates a new quest win lose handler.
      * 
      * @param view0 ViewWinLose object
+     * @param match2 
      */
-    public QuestWinLoseHandler(final ViewWinLose view0) {
-        super(view0);
+    public QuestWinLoseHandler(final ViewWinLose view0, MatchController match2) {
+        super(view0, match2);
         this.view = view0;
-        match = Singletons.getModel().getMatch();
         qData = Singletons.getModel().getQuest();
         qEvent = qData.getCurrentEvent();
         this.wonMatch = match.isWonBy(Singletons.getControl().getLobby().getQuestPlayer());

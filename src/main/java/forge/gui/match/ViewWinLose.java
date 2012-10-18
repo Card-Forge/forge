@@ -33,10 +33,10 @@ public class ViewWinLose {
     private final JPanel pnlCustom;
     private final FTextArea txtLog;
 
-    /** */
-    public ViewWinLose() {
+    /**
+     * @param match  */
+    public ViewWinLose(MatchController match) {
         final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
-        final MatchController match = Singletons.getModel().getMatch();
 
         final JPanel pnlLeft = new JPanel();
         final JPanel pnlRight = new JPanel();
@@ -54,21 +54,23 @@ public class ViewWinLose {
 
         // Control of the win/lose is handled differently for various game modes.
         ControlWinLose control = null;
-        switch (Singletons.getModel().getMatch().getGameType()) {
+        switch (match.getGameType()) {
             case Quest:
-                control = new QuestWinLoseHandler(this);
+                control = new QuestWinLoseHandler(this, match);
                 break;
             case Draft:
                 if (!AllZone.getGauntlet().isGauntletDraft()) break;
             case Sealed:
-                control = new GauntletWinLose(this);
+                control = new GauntletWinLose(this, match);
                 break;
             case Gauntlet:
-                control = new OtherGauntletWinLose(this);
+                control = new OtherGauntletWinLose(this, match);
+                break;
+            default: // will catch it after switch
                 break;
         }
         if( null == control) 
-            control = new ControlWinLose(this);
+            control = new ControlWinLose(this, match);
         
 
         pnlLeft.setOpaque(false);

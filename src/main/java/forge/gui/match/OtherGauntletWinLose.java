@@ -44,9 +44,10 @@ public class OtherGauntletWinLose extends ControlWinLose {
      * Instantiates a new gauntlet win/lose handler.
      * 
      * @param view0 ViewWinLose object
+     * @param match 
      */
-    public OtherGauntletWinLose(final ViewWinLose view0) {
-        super(view0);
+    public OtherGauntletWinLose(final ViewWinLose view0, MatchController match) {
+        super(view0, match);
     }
 
     /**
@@ -58,7 +59,6 @@ public class OtherGauntletWinLose extends ControlWinLose {
     @Override
     public final boolean populateCustomPanel() {
         final GauntletData gd = FModel.SINGLETON_INSTANCE.getGauntletData();
-        final MatchController match = FModel.SINGLETON_INSTANCE.getMatch();
         final List<String> lstEventNames = gd.getEventNames();
         final List<Deck> lstDecks = gd.getDecks();
         final List<String> lstEventRecords = gd.getEventRecords();
