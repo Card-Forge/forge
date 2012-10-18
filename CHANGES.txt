@@ -257,6 +257,25 @@ Fixes/Features:
 - Aesthetic update to quest Duels and Challenges screens 70% finished. A few architectural changes were necessary also.
 - Checkstyle.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Scaled down logo in home menu to better match changed menu width.
+- Spells cast with Isochron Scepter can now be kicked (and buybacked, etc.).
+- Persist and Undying now use addSimultaneousStackEntry.
+- Fixed a problem with spell shop booster generation in limited quest mode.
+- Fixed Frostling.
+- For public discussion and contributions, created the hotseat branch.
+- Current state of hotseat branch
+- Restored all observers, lacking some updates befor the game starts.
+- Adjusted fields and hand(s) creation. Crashes on endgame
+- Clear remembered in Galepowder Mage after returning the flickerd creature
+- Scaled down font size in home menu panel.
+- Quest Duels and Challenges aesthetic update is complete.
+- GameOutcome calculation works
+- Freed hordes of testers who were previously stuck inside the quest bazaar, unable to find an exit. A hellish scenario. Time for a break.
+- changes from 17550-17560 integrated
+- Removed hardcoded players
+- last turn passed to GameOutcome
+- Added a dialog to allow defining custom quest formats.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -284,6 +303,14 @@ Tsabo's Assassin
 Flay
 Vile Consumption
 Mundungu
+Detainment Spell
+Kjeldoran Pride
+Stasis Cell
+Monomania
+Aura Finesse
+Shifting Borders
+Tyrannize
+Measure of Wickedness
 
 
 end
