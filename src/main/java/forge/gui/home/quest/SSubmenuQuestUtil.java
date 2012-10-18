@@ -1,21 +1,14 @@
 package forge.gui.home.quest;
 
 import java.awt.Color;
-import java.io.File;
 import java.util.List;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
-import net.miginfocom.swing.MigLayout;
-
-import org.apache.commons.lang3.StringUtils;
-
 import forge.AllZone;
-import forge.Command;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
@@ -26,12 +19,7 @@ import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.CEditorQuestCardShop;
 import forge.gui.match.CMatchUI;
-import forge.gui.toolbox.FLabel;
-import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
-import forge.gui.toolbox.FTextArea;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
@@ -50,7 +38,7 @@ import forge.quest.data.QuestPreferences.QPref;
  * <br><br><i>(S at beginning of class name denotes a static factory.)</i>
  */
 public class SSubmenuQuestUtil {
-    private static SelectablePanel selectedOpponent;
+    private static QuestEvent event;
 
     /**
      * <p>
@@ -130,6 +118,8 @@ public class SSubmenuQuestUtil {
             view.getLblZep().setVisible(qCtrl.getAssets().hasItem(QuestItemType.ZEPPELIN));
             view.getLblZep().setEnabled(qCtrl.getAssets().getItemLevel(
                     QuestItemType.ZEPPELIN) == 2 ? false : true);
+            view.getLblZep().setForeground(qCtrl.getAssets().getItemLevel(
+                    QuestItemType.ZEPPELIN) == 2 ? Color.gray : FSkin.getColor(FSkin.Colors.CLR_TEXT));
         }
         else {
             view.getLblZep().setVisible(false);
@@ -210,11 +200,6 @@ public class SSubmenuQuestUtil {
         }
     }
 
-    /** @return {@link forge.view.home.ViewQuest.SelectablePanel} */
-    public static SelectablePanel getSelectedOpponent() {
-        return selectedOpponent;
-    }
-
     /** @return {@link forge.deck.Deck} */
     public static Deck getCurrentDeck() {
         Deck d = null;
@@ -225,6 +210,13 @@ public class SSubmenuQuestUtil {
         }
 
         return d;
+    }
+
+    /** Updates the current selected quest event, used when game is started.
+     * @param event0 {@link forge.quest.QuestEvent}
+     */
+    public static void setEvent(final QuestEvent event0) {
+        SSubmenuQuestUtil.event = event0;
     }
 
     /** */
@@ -243,7 +235,6 @@ public class SSubmenuQuestUtil {
     /** */
     public static void startGame() {
         final QuestController qData = Singletons.getModel().getQuest();
-        final QuestEvent event = selectedOpponent.getEvent();
 
         Deck deck = SSubmenuQuestUtil.getCurrentDeck();
         if (deck == null) {
@@ -283,7 +274,7 @@ public class SSubmenuQuestUtil {
                     int lifeAI = 20;
                     int extraLifeHuman = 0;
 
-                    if (selectedOpponent.getEvent() instanceof QuestEventChallenge) {
+                    if (event instanceof QuestEventChallenge) {
                         lifeAI = ((QuestEventChallenge) event).getAILife();
 
                         if (qData.getAssets().hasItem(QuestItemType.ZEPPELIN)) {
@@ -308,79 +299,6 @@ public class SSubmenuQuestUtil {
             }
         };
         worker.execute();
-    }
-
-    /** Selectable panels for duels and challenges. */
-    @SuppressWarnings("serial")
-    public static class SelectablePanel extends FPanel {
-        private final QuestEvent event;
-
-        /** @param e0 &emsp; QuestEvent */
-        public SelectablePanel(final QuestEvent e0) {
-            super();
-            this.event = e0;
-            this.setSelectable(true);
-            this.setHoverable(true);
-            this.setLayout(new MigLayout("insets 0, gap 0"));
-
-            this.setCommand(new Command() {
-                @Override
-                public void execute() {
-                    if (selectedOpponent != null) {
-                        selectedOpponent.setSelected(false);
-                    }
-
-                    if (VSubmenuDuels.SINGLETON_INSTANCE.getPnlDuels().isShowing() && getCurrentDeck() != null) {
-                        VSubmenuDuels.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
-                        VSubmenuChallenges.SINGLETON_INSTANCE.getBtnStart().setEnabled(false);
-                    }
-                    else if (VSubmenuChallenges.SINGLETON_INSTANCE.getPnlChallenges().isShowing() &&  getCurrentDeck() != null) {
-                        VSubmenuDuels.SINGLETON_INSTANCE.getBtnStart().setEnabled(false);
-                        VSubmenuChallenges.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
-                    }
-
-                    selectedOpponent = SSubmenuQuestUtil.SelectablePanel.this;
-                }
-            });
-
-            // Icon
-            final File base = ForgeProps.getFile(NewConstants.IMAGE_ICON);
-            final File file = new File(base, event.getIconFilename());
-
-            final FLabel lblIcon = new FLabel.Builder().iconScaleFactor(1).build();
-            if (!file.exists()) {
-                lblIcon.setIcon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_UNKNOWN));
-            }
-            else {
-                lblIcon.setIcon(new ImageIcon(file.toString()));
-            }
-            this.add(lblIcon, "h 60px!, w 60px!, gap 10px 10px 10px 0, span 1 2");
-
-            // Name
-            final FLabel lblName = new FLabel.Builder().hoverable(false).build();
-            if (event instanceof QuestEventChallenge) {
-                lblName.setText(event.getTitle() + ": "
-                        + StringUtils.capitalize(event.getDifficulty())
-                        + (((QuestEventChallenge) event).isRepeatable() ? ", Repeatable" : ""));
-            }
-            else {
-                lblName.setText(event.getTitle() + ": "
-                        + StringUtils.capitalize(event.getDifficulty()));
-            }
-            this.add(lblName, "h 31px!, gap 0 0 10px 5px, wrap");
-
-            // Description
-            final FTextArea tarDesc = new FTextArea();
-            tarDesc.setText(event.getDescription());
-
-            tarDesc.setFont(FSkin.getItalicFont(12));
-            this.add(tarDesc, "w 80%!, h 30px!");
-       }
-
-        /** @return QuestEvent */
-        public QuestEvent getEvent() {
-            return event;
-        }
     }
 
     /** Duplicate in DeckEditorQuestMenu and

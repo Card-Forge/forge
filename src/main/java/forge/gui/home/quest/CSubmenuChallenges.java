@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.ButtonGroup;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
@@ -13,7 +14,6 @@ import forge.Singletons;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.CHomeUI;
-import forge.gui.home.quest.SSubmenuQuestUtil.SelectablePanel;
 import forge.gui.toolbox.FLabel;
 import forge.quest.QuestController;
 import forge.quest.QuestEventChallenge;
@@ -96,9 +96,13 @@ public enum CSubmenuChallenges implements ICDoc {
             view.getPnlChallenges().removeAll();
             final List<QuestEventChallenge> challenges = qCtrl.getChallengesManager().generateChallenges();
 
-            for (final QuestEventChallenge c : challenges) {
-                final SelectablePanel temp = new SelectablePanel(c);
-                view.getPnlChallenges().add(temp, "w 96%!, h 86px!, gap 2% 0 5px 5px");
+            ButtonGroup grp = new ButtonGroup();
+
+            for (int i = 0; i < challenges.size(); i++) {
+                final PnlEvent temp = new PnlEvent(challenges.get(i));
+                grp.add(temp.getRad());
+                if (i == 0) { temp.getRad().setSelected(true); }
+                view.getPnlChallenges().add(temp, "w 96%!, h 135px!, gap 2% 0 15px 15px");
             }
 
             if (challenges.size() == 0) {

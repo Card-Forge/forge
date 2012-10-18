@@ -4,12 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import javax.swing.ButtonGroup;
+
 import forge.Command;
 import forge.Singletons;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.home.CHomeUI;
-import forge.gui.home.quest.SSubmenuQuestUtil.SelectablePanel;
 import forge.quest.QuestController;
 import forge.quest.QuestEventDuel;
 import forge.quest.bazaar.QuestPetController;
@@ -79,9 +80,13 @@ public enum CSubmenuDuels implements ICDoc {
             view.getPnlDuels().removeAll();
             final List<QuestEventDuel> duels = Singletons.getModel().getQuest().getDuelsManager().generateDuels();
 
-            for (final QuestEventDuel d : duels) {
-                final SelectablePanel temp = new SelectablePanel(d);
-                view.getPnlDuels().add(temp, "w 96%!, h 86px!, gap 2% 0 5px 5px");
+            ButtonGroup grp = new ButtonGroup();
+
+            for (int i = 0; i < duels.size(); i++) {
+                final PnlEvent temp = new PnlEvent(duels.get(i));
+                grp.add(temp.getRad());
+                if (i == 0) { temp.getRad().setSelected(true); }
+                view.getPnlDuels().add(temp, "w 96%!, h 135px!, gap 2% 0 15px 15px");
             }
         }
     }

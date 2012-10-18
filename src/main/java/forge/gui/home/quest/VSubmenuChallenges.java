@@ -91,22 +91,12 @@ public enum VSubmenuChallenges implements IVSubmenu, IVQuestStats, IVDoc {
      * Constructor.
      */
     private VSubmenuChallenges() {
-        pnlStart.removeAll();
-        pnlStart.setOpaque(false);
-        pnlStart.setLayout(new MigLayout("insets 0, gap 0, align center, hidemode 3"));
-
-        pnlStart.add(cbxPet, "h 20px!, ax center, gap 0 10px 10px 0");
-        pnlStart.add(btnStart, "ax center, span 1 2");
-        pnlStart.add(lblZep, "w 130px!, h 80px!, ax center, span 1 2, gap 10px 0 0 0");
-        pnlStart.add(cbPlant, "newline, h 30px!, gap 0 10px 10px 10px");
-        btnStart.setEnabled(false);
-
         scrChallenges.setBorder(null);
         pnlChallenges.setOpaque(false);
         pnlChallenges.setLayout(new MigLayout("insets 0, gap 0, wrap"));
 
         final String constraints = "h 30px!, gap 0 0 0 5px";
-        pnlStats.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 0"));
+        pnlStats.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 3"));
         pnlStats.add(btnSpellShop, "w 150px!, h 30px!, gap 0 0 0 10px");
         pnlStats.add(btnBazaar, "w 150px!, h 30px!, gap 0 0 0 10px");
         pnlStats.add(lblWins, constraints);
@@ -114,6 +104,9 @@ public enum VSubmenuChallenges implements IVSubmenu, IVQuestStats, IVDoc {
         pnlStats.add(lblCredits, constraints);
         pnlStats.add(lblWinStreak, constraints);
         pnlStats.add(lblLife, constraints);
+        pnlStats.add(cbPlant, constraints);
+        pnlStats.add(cbxPet, constraints);
+        pnlStats.add(lblZep, "w 130px!, h 60px!, gap 0 0 0 5px");
         pnlStats.setOpaque(false);
     }
 
@@ -154,9 +147,8 @@ public enum VSubmenuChallenges implements IVSubmenu, IVQuestStats, IVDoc {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblNextChallengeInWins, "span 2, gap 0 0 0 20px");
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(scrChallenges, "w 88% - 175px!, pushy, growy");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStats, "w 175px!, pushy, growy, gap 4% 4% 0 0");
-
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "gap 0 10% 50px 50px, span 2, ax center");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStats, "w 175px!, pushy, growy, gap 4% 4% 0 0, span 1 2");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStart, "gap 0 0 50px 50px, ax center");
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();

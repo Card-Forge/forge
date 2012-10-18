@@ -43,7 +43,6 @@ public enum VSubmenuDuels implements IVSubmenu, IVQuestStats, IVDoc {
     // Other fields
     private final JPanel pnlDuels = new JPanel();
     private final JPanel pnlStats = new JPanel();
-    private final JPanel pnlStart = new JPanel();
 
     private final FScrollPane scrDuels = new FScrollPane(pnlDuels,
             JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -90,15 +89,6 @@ public enum VSubmenuDuels implements IVSubmenu, IVQuestStats, IVDoc {
      * Constructor.
      */
     private VSubmenuDuels() {
-        pnlStart.removeAll();
-        pnlStart.setOpaque(false);
-        pnlStart.setLayout(new MigLayout("insets 0, gap 0, align center, hidemode 3"));
-
-        pnlStart.add(cbxPet, "h 20px!, ax center, gap 0 10px 10px 0");
-        pnlStart.add(btnStart, "ax center, span 1 2");
-        pnlStart.add(cbPlant, "newline, h 30px!, gap 0 10px 10px 10px");
-        btnStart.setEnabled(false);
-
         scrDuels.setBorder(null);
         pnlDuels.setOpaque(false);
         pnlDuels.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center"));
@@ -112,6 +102,8 @@ public enum VSubmenuDuels implements IVSubmenu, IVQuestStats, IVDoc {
         pnlStats.add(lblCredits, constraints);
         pnlStats.add(lblWinStreak, constraints);
         pnlStats.add(lblLife, constraints);
+        pnlStats.add(cbPlant, constraints);
+        pnlStats.add(cbxPet, constraints);
         pnlStats.setOpaque(false);
     }
 
@@ -152,9 +144,9 @@ public enum VSubmenuDuels implements IVSubmenu, IVQuestStats, IVDoc {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblNextChallengeInWins, "span 2, gap 0 0 0 20px");
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(scrDuels, "w 88% - 175px!, pushy, growy");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStats, "w 175px!, pushy, growy, gap 4% 4% 0 0");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStats, "w 175px!, pushy, growy, gap 4% 4% 0 0, span 1 2");
 
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "gap 0 10% 50px 50px, span 2, ax center");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStart, "gap 0 0 50px 50px, ax center");
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
@@ -168,11 +160,6 @@ public enum VSubmenuDuels implements IVSubmenu, IVQuestStats, IVDoc {
     /** @return {@link forge.gui.toolbox.FPanel} */
     public JPanel getPnlStats() {
         return pnlStats;
-    }
-
-    /** @return {@link forge.gui.toolbox.FPanel} */
-    public JPanel getPnlStart() {
-        return pnlStart;
     }
 
     /** @return {@link javax.swing.JLabel} */
