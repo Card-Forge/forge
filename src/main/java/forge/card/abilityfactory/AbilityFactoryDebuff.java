@@ -42,6 +42,7 @@ import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
 import forge.game.GameState;
 import forge.game.phase.CombatUtil;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -317,9 +318,12 @@ public final class AbilityFactoryDebuff {
 
         final HashMap<String, String> params = af.getMapParams();
         final SpellAbilityRestriction restrict = sa.getRestrictions();
+        final PhaseHandler ph =  Singletons.getModel().getGameState().getPhaseHandler();
 
         // Phase Restrictions
-        if ((Singletons.getModel().getGameState().getStack().size() == 0) && Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
+        if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
+                || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
+                || !Singletons.getModel().getGameState().getStack().isEmpty()) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
             if (!AbilityFactory.isSorcerySpeed(sa)) {
@@ -335,15 +339,28 @@ public final class AbilityFactoryDebuff {
         }
 
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
-            final ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
-            if (cards.size() == 0) {
+            List<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+
+            if (!cards.isEmpty()) {
+                cards = CardLists.filter(cards, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        if (!c.isBlocking() && !c.isAttacking()) {
+                            return false;
+                        }
+                        // don't add duplicate negative keywords
+                        return c.hasAnyKeyword(AbilityFactoryDebuff.getKeywords(params)); 
+                    }
+                });
+            }
+            if (cards.isEmpty()) {
                 return false;
             }
         } else {
             return AbilityFactoryDebuff.debuffTgtAI(ai, af, sa, AbilityFactoryDebuff.getKeywords(params), false);
         }
 
-        return false;
+        return true;
     }
 
     /**

@@ -3899,6 +3899,8 @@ res/cardsfolder/g/glissas_scorn.txt svneol=native#text/plain
 res/cardsfolder/g/glistener_elf.txt svneol=native#text/plain
 res/cardsfolder/g/glistening_oil.txt svneol=native#text/plain
 res/cardsfolder/g/glitterfang.txt svneol=native#text/plain
+res/cardsfolder/g/glittering_lion.txt -text
+res/cardsfolder/g/glittering_lynx.txt -text
 res/cardsfolder/g/global_ruin.txt svneol=native#text/plain
 res/cardsfolder/g/gloom.txt svneol=native#text/plain
 res/cardsfolder/g/gloom_surgeon.txt -text
