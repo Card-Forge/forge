@@ -922,7 +922,7 @@ public class ComputerUtilAttack {
         // context that will be relevant to the attackers decision according to
         // the selected strategy
         for (final Card defender : defenders) {
-            if (CombatUtil.canBlock(attacker, defender)) { // , combat )) {
+            if (CombatUtil.canBlock(attacker, defender)) { 
                 numberOfPossibleBlockers += 1;
                 if (CombatUtil.canDestroyAttacker(attacker, defender, combat, false)
                         && !(attacker.hasKeyword("Undying") && attacker.getCounters(Counters.P1P1) == 0)) {
@@ -931,7 +931,8 @@ public class ComputerUtilAttack {
                                              // the creature
                     // see if the defending creature is of higher or lower
                     // value. We don't want to attack only to lose value
-                    if (CardFactoryUtil.evaluateCreature(defender) <= CardFactoryUtil.evaluateCreature(attacker)) {
+                    if (isWorthLessThanAllKillers && attacker.getSVar("SacMe").equals("") 
+                            && CardFactoryUtil.evaluateCreature(defender) <= CardFactoryUtil.evaluateCreature(attacker)) {
                         isWorthLessThanAllKillers = false;
                     }
                 }
@@ -939,6 +940,9 @@ public class ComputerUtilAttack {
                 // not record that it can't kill everything
                 if (!CombatUtil.canDestroyBlocker(defender, attacker, combat, false)) {
                     canKillAll = false;
+                    if (!canKillAllDangerous) {
+                        continue;
+                    }
                     if (defender.getSVar("HasCombatEffect").equals("TRUE")) {
                         canKillAllDangerous = false;
                     } else {
