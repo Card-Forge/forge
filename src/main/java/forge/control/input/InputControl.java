@@ -21,6 +21,7 @@ import java.util.LinkedList;
 import java.util.Stack;
 
 import forge.AllZone;
+import forge.Singletons;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerAIInput;
@@ -198,7 +199,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             return this.input;
         }
 
-        if ((PhaseHandler.getGameBegins() != 0) && handler.doPhaseEffects()) {
+        if (Singletons.getModel().getGameState() != null && handler.doPhaseEffects()) {
             // Handle begin phase stuff, then start back from the top
             handler.handleBeginPhase();
             return this.updateInput();
@@ -215,7 +216,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             this.model.getGameState().getStack().freezeStack();
 
             if (playerTurn.isHuman() && !handler.getAutoPass()) {
-                AllZone.getCombat().initiatePossibleDefenders(AllZone.getComputerPlayer());
+                AllZone.getCombat().initiatePossibleDefenders(playerTurn.getOpponent());
                 return new InputAttack();
             }
         } else if (phase == PhaseType.COMBAT_DECLARE_BLOCKERS) {

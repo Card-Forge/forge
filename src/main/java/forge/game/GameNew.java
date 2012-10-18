@@ -19,21 +19,12 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardUtil;
-import forge.Constant.Preferences;
 import forge.Singletons;
-import forge.control.FControl;
-import forge.control.input.InputMulligan;
+import forge.deck.Deck;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.framework.EDocID;
-import forge.gui.framework.SDisplayUtil;
-import forge.gui.match.CMatchUI;
-import forge.gui.match.VMatchUI;
-import forge.gui.match.controllers.CMessage;
-import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VAntes;
-import forge.gui.toolbox.FLabel;
 import forge.item.CardPrinted;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
@@ -44,6 +35,63 @@ import forge.util.MyRandom;
  * All of these methods can and should be static.
  */
 public class GameNew {
+    private static void prepareSingleLibrary(final Player player, final Deck deck, final Map<Player, List<String>> removedAnteCards, final List<String> rAICards) {
+        final Random generator = MyRandom.getRandom();
+        boolean useAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
+        final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL)
+                && Singletons.getModel().getMatch().getGameType() == GameType.Constructed;
+                
+        
+        PlayerZone library = player.getZone(ZoneType.Library);
+        for (final Entry<CardPrinted, Integer> stackOfCards : deck.getMain()) {
+            final CardPrinted cardPrinted = stackOfCards.getKey();
+            for (int i = 0; i < stackOfCards.getValue(); i++) {
+
+                final Card card = cardPrinted.toForgeCard(player);
+                
+                // apply random pictures for cards
+                if ( player.isComputer() ) {
+                    final int cntVariants = cardPrinted.getCard().getEditionInfo(cardPrinted.getEdition()).getCopiesCount();
+                    if (cntVariants > 1) {
+                        card.setRandomPicture(generator.nextInt(cntVariants - 1) + 1);
+                        card.setImageFilename(CardUtil.buildFilename(card));
+                    }
+                }
+
+                // Assign random foiling on approximately 1:20 cards
+                if (cardPrinted.isFoil() || (canRandomFoil && MyRandom.percentTrue(5))) {
+                    final int iFoil = MyRandom.getRandom().nextInt(9) + 1;
+                    card.setFoil(iFoil);
+                }
+
+                if (!useAnte && card.hasKeyword("Remove CARDNAME from your deck before playing if you're not playing for ante.")) {
+                    if(!removedAnteCards.containsKey(player))
+                        removedAnteCards.put(player, new ArrayList<String>());
+                    removedAnteCards.get(player).add(card.getName());
+                } else {
+                    library.add(card);
+                }
+                
+                // mark card as difficult for AI to play
+                if ( player.isComputer() && card.getSVar("RemAIDeck").equals("True") && !rAICards.contains(card.getName())) {
+                    rAICards.add(card.getName());
+                    // get card picture so that it is in the image cache
+                    // ImageCache.getImage(card);
+                }
+            }
+        }
+        
+        // Shuffling
+        // Ai may cheat 
+        if ( player.isComputer() && Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SMOOTH_LAND) ) {
+            // do this instead of shuffling Computer's deck
+            final Iterable<Card> c1 = GameNew.smoothComputerManaCurve(player.getCardsIn(ZoneType.Library));
+            player.getZone(ZoneType.Library).setCards(c1);
+        } else
+            player.shuffle();
+    }
+    
+    
     /**
      * Constructor for new game allowing card lists to be put into play
      * immediately, and life totals to be adjusted, for computer and human.
@@ -51,30 +99,27 @@ public class GameNew {
      * TODO: Accept something like match state as parameter. Match should be aware of players, 
      * their decks and other special starting conditions. 
      */
-    public static void newGame(final PlayerStartsGame... players) {
-        Singletons.getControl().changeState(FControl.MATCH_SCREEN);
-        SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
-        
-        // Update observers
-        AllZone.getStack().updateObservers();
-        AllZone.getInputControl().updateObservers();
-        AllZone.getGameLog().updateObservers();
-        
-        newGameCleanup();
-        newMatchCleanup();
+    public static void newGame(final Map<Player, PlayerStartConditions> playersConditions) {
+        AllZone.getInputControl().clearInput();
+        AllZone.getColorChanger().reset();
 
-        Singletons.getModel().getPreferences().actuateMatchPreferences();
         Card.resetUniqueNumber();
-        
-        for( PlayerStartsGame p : players ) {
-            final Player player = p.getPlayer();
-            player.setStartingLife(p.initialLives);
+        // need this code here, otherwise observables fail
+        forge.card.trigger.Trigger.resetIDs();
+        AllZone.getTriggerHandler().clearTriggerSettings();
+        AllZone.getTriggerHandler().clearDelayedTrigger();
+
+        // friendliness
+        final Map<Player, List<String>> removedAnteCards = new HashMap<Player, List<String>>();
+        final List<String> rAICards = new ArrayList<String>();
+
+        for( Entry<Player, PlayerStartConditions> p : playersConditions.entrySet() ) {
+            final Player player = p.getKey();
+            player.setStartingLife(p.getValue().getStartingLife());
             // what if I call it for AI player?
-            player.updateObservers();
-            player.setDeck(p.getDeck());
             PlayerZone bf = player.getZone(ZoneType.Battlefield);
-            if (p.cardsOnBattlefield != null) {
-                for (final Card c : p.cardsOnBattlefield) {
+            if (p.getValue().getCardsOnTable() != null) {
+                for (final Card c : p.getValue().getCardsOnTable()) {
                     c.addController(player);
                     c.setOwner(player);
                     bf.add(c, false);
@@ -83,77 +128,14 @@ public class GameNew {
                     c.refreshUniqueNumber();
                 }
             }
+            
+            prepareSingleLibrary(player, p.getValue().getDeck(), removedAnteCards, rAICards);
+            player.updateObservers();
             bf.updateObservers();
-            p.getPlayer().getZone(ZoneType.Hand).updateObservers();
+            player.getZone(ZoneType.Hand).updateObservers();
         }
-        GameNew.actuateGame(players);
-    }
-
-    /**
-     * This must be separated from the newGame method since life totals and
-     * player details could be adjusted before the game is started.
-     * 
-     * That process (also cleanup and observer updates) should be done in
-     * newGame, then when all is ready, call this function.
-     */
-    private static void actuateGame(final PlayerStartsGame... players) {
-        forge.card.trigger.Trigger.resetIDs();
-        AllZone.getTriggerHandler().clearTriggerSettings();
-        AllZone.getTriggerHandler().clearDelayedTrigger();
-        CMessage.SINGLETON_INSTANCE.updateGameInfo();
-
-        // friendliness
-        final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL)
-                && Singletons.getModel().getMatchState().getGameType().equals(GameType.Constructed);
-        final Random generator = MyRandom.getRandom();
-
-        
-        boolean useAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
-        final Map<Player, List<String>> removedAnteCards = new HashMap<Player, List<String>>();
-        final List<String> rAICards = new ArrayList<String>();
-        
-        // Create Card libraries out of decks (CardPrinted) 
-        for( PlayerStartsGame p : players ) 
-        {
-            PlayerZone library = p.getPlayer().getZone(ZoneType.Library);
-            for (final Entry<CardPrinted, Integer> stackOfCards : p.getDeck().getMain()) {
-                final CardPrinted cardPrinted = stackOfCards.getKey();
-                for (int i = 0; i < stackOfCards.getValue(); i++) {
-
-                    final Card card = cardPrinted.toForgeCard(p.getPlayer());
-                    
-                    // apply random pictures for cards
-                    if ( p.getPlayer().isComputer() ) {
-                        final int cntVariants = cardPrinted.getCard().getEditionInfo(cardPrinted.getEdition()).getCopiesCount();
-                        if (cntVariants > 1) {
-                            card.setRandomPicture(generator.nextInt(cntVariants - 1) + 1);
-                            card.setImageFilename(CardUtil.buildFilename(card));
-                        }
-                    }
-
-                    // Assign random foiling on approximately 1:20 cards
-                    if (cardPrinted.isFoil() || (canRandomFoil && MyRandom.percentTrue(5))) {
-                        final int iFoil = MyRandom.getRandom().nextInt(9) + 1;
-                        card.setFoil(iFoil);
-                    }
-
-                    if (!useAnte && card.hasKeyword("Remove CARDNAME from your deck before playing if you're not playing for ante.")) {
-                        if(!removedAnteCards.containsKey(p.getPlayer()))
-                            removedAnteCards.put(p.getPlayer(), new ArrayList<String>());
-                        removedAnteCards.get(p.getPlayer()).add(card.getName());
-                    } else {
-                        library.add(card);
-                    }
-                    
-                    // mark card as difficult for AI to play
-                    if ( p.getPlayer().isComputer() && card.getSVar("RemAIDeck").equals("True") && !rAICards.contains(card.getName())) {
-                        rAICards.add(card.getName());
-                        // get card picture so that it is in the image cache
-                        // ImageCache.getImage(card);
-                    }
-                }
-            }
-        }
+    
+    
         
         if (rAICards.size() > 0) {
             String message = buildFourColumnList("AI deck contains the following cards that it can't play or may be buggy:", rAICards);
@@ -167,34 +149,18 @@ public class GameNew {
             }
             JOptionPane.showMessageDialog(null, ante.toString(), "", JOptionPane.INFORMATION_MESSAGE);
         }
-        
 
-        // It is supposed that some code to-be-written adds all players passed to this method into game here.
-        // So, the upcoming code already refers to AllZone.getPlayersInGame()
+        GameNew.actuateGame();
+    }
 
-        // Shuffling
-        final boolean smoothLand = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SMOOTH_LAND);
-        for( Player player : Singletons.getModel().getGameState().getPlayers() ) 
-        {
-            if ( player.isHuman() ) {
-                for (int i = 0; i < 100; i++) {
-                    player.shuffle();
-                }
-            }
-            
-            // Ai may cheat
-            if ( player.isComputer() ) {
-                if (smoothLand) {
-                    // do this instead of shuffling Computer's deck
-                    final Iterable<Card> c1 = GameNew.smoothComputerManaCurve(player.getCardsIn(ZoneType.Library));
-                    player.getZone(ZoneType.Library).setCards(c1);
-                } else {
-                    player.shuffle();
-                }
-            }
-            
-        }
-        
+    /**
+     * This must be separated from the newGame method since life totals and
+     * player details could be adjusted before the game is started.
+     * 
+     * That process (also cleanup and observer updates) should be done in
+     * newGame, then when all is ready, call this function.
+     */
+    private static void actuateGame() {
 
         // Deciding which cards go to ante 
         if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
@@ -217,15 +183,14 @@ public class GameNew {
 
 
         // Only cut/coin toss if it's the first game of the match
-        if (Singletons.getModel().getMatchState().getGamesPlayedCount() == 0) {
+        if (Singletons.getModel().getMatch().getPlayedGames().isEmpty()) {
             GameNew.seeWhoPlaysFirstDice();
-
-        } else if (Singletons.getModel().getMatchState().hasWonLastGame(AllZone.getHumanPlayer().getName())) {
-            // if player won last, AI starts
-            GameNew.computerPlayOrDraw("Computer lost the last game.");
         } else {
-            GameNew.humanPlayOrDraw("Human lost the last game.");
+            Player human = Singletons.getControl().getPlayer();
+            Player goesFirst = Singletons.getModel().getMatch().getLastGameOutcome().isWinner(human.getLobbyPlayer()) ? human.getOpponent() : human;
+            setPlayersFirstTurn(goesFirst);
         }
+            
 
 
         // Draw 7 cards 
@@ -235,9 +200,6 @@ public class GameNew {
                 p.drawCard();
             }
         }
-
-        CMatchUI.SINGLETON_INSTANCE.setCard(AllZone.getHumanPlayer().getCardsIn(ZoneType.Hand).get(0));
-        AllZone.getInputControl().setInput(new InputMulligan());
     } // newGame()
     
     private static String buildFourColumnList(String firstLine, List<String> cAnteRemoved ) {
@@ -252,52 +214,6 @@ public class GameNew {
             }
         }
         return sb.toString();
-    }
-
-    private static void newGameCleanup() {
-        final GameState gs = Singletons.getModel().getGameState();
-
-        gs.setGameSummary(new GameSummary(Iterables.transform(gs.getPlayers(), Player.Accessors.FN_GET_NAME)));
-
-        gs.getPhaseHandler().reset();
-        gs.getStack().reset();
-        gs.getCombat().reset();
-        gs.getEndOfTurn().reset();
-        gs.getEndOfCombat().reset();
-        gs.getUntap().reset();
-        gs.getUpkeep().reset();
-        gs.getGameLog().reset();
-        gs.setGameOver(false);
-
-        for (final Player p : gs.getPlayers()) {
-            p.reset();
-            for (final ZoneType z : Player.ALL_ZONES) {
-                p.getZone(z).reset();
-            }
-        }
-
-        gs.getStaticEffects().reset();
-
-        AllZone.getInputControl().clearInput();
-        AllZone.getColorChanger().reset();
-    }
-
-    private static void newMatchCleanup() {
-        if (Singletons.getModel().getMatchState().getGamesPlayedCount() != 0) { return; }
-
-        // TODO restore this functionality!!!
-        //VMatchUI.SINGLETON_INSTANCE.getViewDevMode().getDocument().setVisible(Preferences.DEV_MODE);
-
-        final List<VField> allFields = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
-
-        for (final VField field : allFields) {
-            ((FLabel) field.getLblHand()).setHoverable(Preferences.DEV_MODE);
-            ((FLabel) field.getLblLibrary()).setHoverable(Preferences.DEV_MODE);
-        }
-
-        VAntes.SINGLETON_INSTANCE.clearAnteCards();
-        AllZone.getInputControl().resetInput();
-        Singletons.getModel().getMatchState().reset();
     }
 
  // this is where the computer cheats
@@ -371,48 +287,34 @@ public class GameNew {
             computerDie = MyRandom.getRandom().nextInt(20);
         }
         
-        if (playerDie > computerDie) {
-            humanPlayOrDraw(dieRollMessage(playerDie, computerDie));
+        List<Player> allPlayers = Singletons.getModel().getGameState().getPlayers();
+        setPlayersFirstTurn(allPlayers.get(MyRandom.getRandom().nextInt(allPlayers.size())));
+    }
+    
+    private static void setPlayersFirstTurn(Player goesFirst) 
+    { 
+        String message = goesFirst + " has won the coin toss.";
+        if ( goesFirst.isHuman() ) {
+            if( !humanPlayOrDraw(message) );
+            
+        } else {
+            computerPlayOrDraw(message);
         }
-        else {
-            computerPlayOrDraw(dieRollMessage(playerDie, computerDie));
-        }
+        Singletons.getModel().getGameState().getPhaseHandler().setPlayerTurn(goesFirst);
     } // seeWhoPlaysFirstDice()
 
-
-    private static void computerStartsGame() {
-        final Player computer = AllZone.getComputerPlayer();
-        Singletons.getModel().getGameState().getPhaseHandler().setPlayerTurn(computer);
-        // AllZone.getGameInfo().setPlayerWhoGotFirstTurn(computer.getName());
-    }
-    
-    private static String dieRollMessage(int playerDie, int computerDie) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Human has rolled a: ");
-        sb.append(playerDie);
-        sb.append(". ");
-        sb.append("Computer has rolled a: ");
-        sb.append(computerDie);
-        sb.append(".");
-        return sb.toString();
-    }
-    
-    private static void humanPlayOrDraw(String message) {
+    private static boolean humanPlayOrDraw(String message) {
         final Object[] possibleValues = { "Play", "Draw" };
         
         final Object playDraw = JOptionPane.showOptionDialog(null, message + "\n\nWould you like to play or draw?", 
                 "Play or Draw?", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, 
                 possibleValues, possibleValues[0]);
         
-        if (playDraw.equals(1)) {
-            computerStartsGame();
-        }
+        return !playDraw.equals(1);
     }
     
     private static void computerPlayOrDraw(String message) {
         JOptionPane.showMessageDialog(null, message + "\nComputer Going First", 
                 "Play or Draw?", JOptionPane.INFORMATION_MESSAGE);
-        
-        computerStartsGame();
     }
 }

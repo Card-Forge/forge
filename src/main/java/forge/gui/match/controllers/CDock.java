@@ -137,7 +137,7 @@ public enum CDock implements ICDoc {
      * View deck list.
      */
     private void viewDeckList() {
-        showDeck(Singletons.getControl().getPlayer().getDeck());
+        showDeck(Singletons.getModel().getMatch().getPlayersDeck(Singletons.getControl().getPlayer().getLobbyPlayer()));
     }
 
     /** Attack with everyone. */
@@ -290,4 +290,5 @@ public enum CDock implements ICDoc {
     @Override
     public void update() {
     }
+
 }

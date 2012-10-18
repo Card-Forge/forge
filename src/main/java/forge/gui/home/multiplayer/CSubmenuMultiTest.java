@@ -2,23 +2,21 @@ package forge.gui.home.multiplayer;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JRadioButton;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
-import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
+import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.deck.DeckgenUtil;
-import forge.game.GameNew;
 import forge.game.GameType;
-import forge.game.PlayerStartsGame;
+import forge.game.MatchController;
+import forge.game.MatchStartHelper;
 import forge.game.player.PlayerType;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
-import forge.gui.match.CMatchUI;
 
 /** 
  * Controls the deck editor submenu option in the home UI.
@@ -92,13 +90,16 @@ public enum CSubmenuMultiTest implements ICDoc {
                 Deck humanDeck = DeckgenUtil.getRandomColorDeck(PlayerType.HUMAN);
                 Deck aiDeck = DeckgenUtil.getRandomColorDeck(PlayerType.COMPUTER);
 
-                CMatchUI.SINGLETON_INSTANCE.initMatch(numFields, numHands);
-                Singletons.getModel().getMatchState().setGameType(GameType.Constructed);
-
-                if (humanDeck != null && aiDeck != null) {
-                    GameNew.newGame(new PlayerStartsGame(AllZone.getHumanPlayer(), humanDeck),
-                                     new PlayerStartsGame(AllZone.getComputerPlayer(), aiDeck));
-                }
+                MatchStartHelper starter = new MatchStartHelper();
+                Lobby lobby = Singletons.getControl().getLobby();
+                starter.addPlayer(lobby.findLocalPlayer(PlayerType.HUMAN), humanDeck);
+                for( int i = 1; i < numFields; i++ )
+                    starter.addPlayer(lobby.findLocalPlayer(PlayerType.COMPUTER), aiDeck);
+                
+                MatchController mc = Singletons.getModel().getMatch(); 
+                mc.initMatch(GameType.Constructed, starter.getPlayerMap());
+                mc.startRound();
+                
                 return null;
             }
 

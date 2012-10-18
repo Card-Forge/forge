@@ -12,9 +12,8 @@ import javax.swing.SwingConstants;
 import net.miginfocom.swing.MigLayout;
 import forge.AllZone;
 import forge.Singletons;
-import forge.game.GameType;
-import forge.game.phase.PhaseHandler;
-import forge.game.player.Player;
+import forge.game.MatchController;
+import forge.game.player.LobbyPlayer;
 import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
@@ -22,7 +21,6 @@ import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTextArea;
-import forge.model.FMatchState;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants.Lang.GuiWinLose.WinLoseText;
 
@@ -38,7 +36,7 @@ public class ViewWinLose {
     /** */
     public ViewWinLose() {
         final JPanel overlay = FOverlay.SINGLETON_INSTANCE.getPanel();
-        final FMatchState matchState = Singletons.getModel().getMatchState();
+        final MatchController match = Singletons.getModel().getMatch();
 
         final JPanel pnlLeft = new JPanel();
         final JPanel pnlRight = new JPanel();
@@ -52,23 +50,26 @@ public class ViewWinLose {
         btnRestart = new FButton();
         btnQuit = new FButton();
         
-        final Player human = Singletons.getControl().getPlayer();
+        final LobbyPlayer human = Singletons.getControl().getPlayer().getLobbyPlayer();
 
         // Control of the win/lose is handled differently for various game modes.
-        ControlWinLose control;
-        if (matchState.getGameType() == GameType.Quest) {
-            control = new QuestWinLoseHandler(this);
+        ControlWinLose control = null;
+        switch (Singletons.getModel().getMatch().getGameType()) {
+            case Quest:
+                control = new QuestWinLoseHandler(this);
+                break;
+            case Draft:
+                if (!AllZone.getGauntlet().isGauntletDraft()) break;
+            case Sealed:
+                control = new GauntletWinLose(this);
+                break;
+            case Gauntlet:
+                control = new OtherGauntletWinLose(this);
+                break;
         }
-        else if (matchState.getGameType() == GameType.Sealed
-             || (matchState.getGameType() == GameType.Draft && AllZone.getGauntlet().isGauntletDraft())) {
-            control = new GauntletWinLose(this);
-        }
-        else if (matchState.getGameType() == GameType.Gauntlet) {
-            control = new OtherGauntletWinLose(this);
-        }
-        else {
+        if( null == control) 
             control = new ControlWinLose(this);
-        }
+        
 
         pnlLeft.setOpaque(false);
         pnlRight.setOpaque(false);
@@ -94,24 +95,22 @@ public class ViewWinLose {
         btnQuit.setText(ForgeProps.getLocalized(WinLoseText.QUIT));
         btnQuit.setFont(FSkin.getFont(22));
 
-        // End game and set state of "continue" button
-        PhaseHandler.setGameBegins(0);
 
-        if (matchState.isMatchOver()) {
+        if (match.isMatchOver()) {
             this.getBtnContinue().setEnabled(false);
             this.getBtnQuit().grabFocus();
         }
 
         // Show Wins and Loses
         
-        final int humanWins = matchState.countGamesWonBy(human);
-        final int humanLosses = matchState.getGamesPlayedCount() - humanWins;
+        final int humanWins = match.getGamesWonBy(human);
+        final int humanLosses = match.getPlayedGames().size() - humanWins;
 
         lblStats.setText(ForgeProps.getLocalized(WinLoseText.WON) + humanWins
                 + ForgeProps.getLocalized(WinLoseText.LOST) + humanLosses);
 
         // Show "You Won" or "You Lost"
-        if (matchState.hasWonLastGame(human.getName())) {
+        if (match.getLastGameOutcome().isWinner(human)) {
             lblTitle.setText(ForgeProps.getLocalized(WinLoseText.WIN));
         } else {
             lblTitle.setText(ForgeProps.getLocalized(WinLoseText.LOSE));

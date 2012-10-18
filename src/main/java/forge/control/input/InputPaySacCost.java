@@ -19,7 +19,6 @@ package forge.control.input;
 
 import java.util.List;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -28,6 +27,7 @@ import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.CostSacrifice;
 import forge.card.spellability.SpellAbility;
+import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
@@ -77,7 +77,8 @@ public class InputPaySacCost extends Input {
 
         this.ability = sa;
         this.sacCost = cost;
-        this.choiceList = CardLists.getValidCards(AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), AllZone.getHumanPlayer(), source);
+        Player human = Singletons.getControl().getPlayer();
+        this.choiceList = CardLists.getValidCards(human.getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), human, source);
         String amountString = cost.getAmount();
         this.numRequired = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
                 : CardFactoryUtil.xCount(source, source.getSVar(amountString));

@@ -13,19 +13,21 @@ import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
 import forge.control.FControl;
+import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
-import forge.game.GameNew;
 import forge.game.GameType;
-import forge.game.PlayerStartsGame;
+import forge.game.MatchController;
+import forge.game.MatchStartHelper;
 import forge.game.limited.BoosterDraft;
 import forge.game.limited.CardPoolLimitation;
+import forge.game.player.LobbyPlayer;
+import forge.game.player.PlayerType;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.CEditorDraftingProcess;
 import forge.gui.framework.ICDoc;
-import forge.gui.match.CMatchUI;
 
 /** 
  * Controls the draft submenu in the home UI.
@@ -44,6 +46,7 @@ public enum CSubmenuDraft implements ICDoc {
             VSubmenuDraft.SINGLETON_INSTANCE.getBtnStart().setEnabled(true);
         }
     };
+    private LobbyPlayer[] opponents;
 
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
@@ -69,7 +72,7 @@ public enum CSubmenuDraft implements ICDoc {
                         });
                     }
                 });
-    }
+                            }
 
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
@@ -90,16 +93,15 @@ public enum CSubmenuDraft implements ICDoc {
 
     private void startGame() {
         final boolean gauntlet = VSubmenuDraft.SINGLETON_INSTANCE.getRadSingle().isSelected() ? false : true;
-
-        final Deck human = VSubmenuDraft.SINGLETON_INSTANCE.getLstDecks().getSelectedDeck();
+        final Deck humanDeck = VSubmenuDraft.SINGLETON_INSTANCE.getLstDecks().getSelectedDeck();
         final int aiIndex = (int) Math.floor(Math.random() * 8);
 
-        if (human == null) {
+        if (humanDeck == null) {
             JOptionPane.showMessageDialog(null,
                     "No deck selected for human!\r\n(You may need to build a new deck.)",
                     "No deck", JOptionPane.ERROR_MESSAGE);
             return;
-        } else if (!human.meetsGameTypeRequirements(GameType.Draft)) {
+        } else if (!humanDeck.meetsGameTypeRequirements(GameType.Draft)) {
             JOptionPane.showMessageDialog(null,
                     "The selected deck doesn't have enough cards to play (minimum 40)."
                     + "\r\nUse the deck editor to choose the cards you want before starting.",
@@ -110,8 +112,8 @@ public enum CSubmenuDraft implements ICDoc {
         AllZone.getGauntlet().resetGauntletDraft();
 
         if (gauntlet) {
-            int rounds = Singletons.getModel().getDecks().getDraft().get(human.getName()).getAiDecks().size();
-            AllZone.getGauntlet().launch(rounds, human, GameType.Draft);
+            int rounds = Singletons.getModel().getDecks().getDraft().get(humanDeck.getName()).getAiDecks().size();
+            AllZone.getGauntlet().launch(rounds, humanDeck, GameType.Draft);
             return;
         }
 
@@ -126,17 +128,20 @@ public enum CSubmenuDraft implements ICDoc {
         final SwingWorker<Object, Void> worker = new SwingWorker<Object, Void>() {
             @Override
             public Object doInBackground() {
-                DeckGroup opponentDecks = Singletons.getModel().getDecks().getDraft().get(human.getName());
-
+                DeckGroup opponentDecks = Singletons.getModel().getDecks().getDraft().get(humanDeck.getName());
                 Deck aiDeck = opponentDecks.getAiDecks().get(aiIndex);
                 if (aiDeck == null) {
                     throw new IllegalStateException("Draft: Computer deck is null!");
                 }
-
-                CMatchUI.SINGLETON_INSTANCE.initMatch(null);
-                Singletons.getModel().getMatchState().setGameType(GameType.Draft);
-                GameNew.newGame(new PlayerStartsGame(AllZone.getHumanPlayer(), human),
-                                 new PlayerStartsGame(AllZone.getComputerPlayer(), aiDeck));
+                
+                MatchStartHelper starter = new MatchStartHelper();
+                starter.addPlayer(Singletons.getControl().getLobby().findLocalPlayer(PlayerType.HUMAN), humanDeck);
+                starter.addPlayer(opponents[aiIndex], aiDeck);
+                
+                MatchController mc = Singletons.getModel().getMatch(); 
+                mc.initMatch(GameType.Draft, starter.getPlayerMap());
+                mc.startRound();
+                
                 return null;
             }
 
@@ -180,6 +185,22 @@ public enum CSubmenuDraft implements ICDoc {
 
         FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_LIMITED);
         CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(draft);
+        opponents = generatePlayers();
+    }
+
+    private LobbyPlayer[] generatePlayers() {
+        Lobby lobby = Singletons.getControl().getLobby();
+        LobbyPlayer[] ai = {
+                lobby.findLocalPlayer(PlayerType.COMPUTER),
+                lobby.findLocalPlayer(PlayerType.COMPUTER),
+                lobby.findLocalPlayer(PlayerType.COMPUTER),
+                lobby.findLocalPlayer(PlayerType.COMPUTER),
+                lobby.findLocalPlayer(PlayerType.COMPUTER),
+                lobby.findLocalPlayer(PlayerType.COMPUTER),
+                lobby.findLocalPlayer(PlayerType.COMPUTER)
+        };
+
+        return ai;
     }
 
     /* (non-Javadoc)

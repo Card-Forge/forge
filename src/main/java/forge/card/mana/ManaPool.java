@@ -64,7 +64,6 @@ public class ManaPool {
      */
     public ManaPool(final Player player) {
         owner = player;
-        owner.updateObservers();
         clearPool();
         ManaPool.MAP.put(Constant.Color.WHITE, 0);
         ManaPool.MAP.put(Constant.Color.BLUE, 1);

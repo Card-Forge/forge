@@ -29,7 +29,6 @@ import forge.CardUtil;
 import forge.Singletons;
 import forge.card.CardRules;
 import forge.card.cost.Cost;
-import forge.card.mana.ManaCost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;

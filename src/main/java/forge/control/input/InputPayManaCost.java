@@ -23,7 +23,6 @@ import forge.Singletons;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
-import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -76,7 +75,7 @@ public class InputPayManaCost extends InputMana {
 
         this.spell = sa;
 
-        if (PhaseHandler.getGameBegins() == 1) {
+        if (Singletons.getModel().getGameState() != null) {
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
                 if (this.spell.getAfterPayMana() != null) {
                     this.stopSetNext(this.spell.getAfterPayMana());
@@ -121,7 +120,7 @@ public class InputPayManaCost extends InputMana {
 
         this.spell = sa;
 
-        if (PhaseHandler.getGameBegins() == 1) {
+        if (Singletons.getModel().getGameState() != null ) {
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
                 if (this.spell.getAfterPayMana() != null) {
                     this.stopSetNext(this.spell.getAfterPayMana());
@@ -266,8 +265,9 @@ public class InputPayManaCost extends InputMana {
         }
 
         this.resetManaCost();
-        AllZone.getHumanPlayer().getManaPool().refundManaPaid(this.spell, true);
-        AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers(); // DO
+        Player human = Singletons.getControl().getPlayer();
+        human.getManaPool().refundManaPaid(this.spell, true);
+        human.getZone(ZoneType.Battlefield).updateObservers(); // DO
 
         this.stop();
     }

@@ -17,7 +17,6 @@
  */
 package forge.control.input;
 
-import forge.AllZone;
 import forge.Card;
 import forge.Command;
 import forge.Singletons;
@@ -202,7 +201,7 @@ public class InputPayManaCostAbility extends InputMana {
     public final void selectButtonCancel() {
         this.unpaidCommand.execute();
         this.resetManaCost();
-        AllZone.getHumanPlayer().getManaPool().refundManaPaid(this.fakeAbility, true);
+        Singletons.getControl().getPlayer().getManaPool().refundManaPaid(this.fakeAbility, true);
         this.stop();
     }
 

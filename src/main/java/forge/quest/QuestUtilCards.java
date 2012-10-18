@@ -84,9 +84,6 @@ public final class QuestUtilCards {
         return pool;
     }
 
-    // adds 11 cards, to the current card pool
-    // (I chose 11 cards instead of 15 in order to make things more challenging)
-
     /**
      * <p>
      * addCards.
@@ -261,6 +258,10 @@ public final class QuestUtilCards {
         this.sellCard(card, price, true);
     }
 
+    public void loseCard(final CardPrinted card) {
+        this.sellCard(card, 0, false);
+    }    
+    
     /**
      * Sell card.
      * 
@@ -271,7 +272,7 @@ public final class QuestUtilCards {
      * @param addToShop
      *            true if this card should be added to the shop, false otherwise
      */
-    public void sellCard(final CardPrinted card, final int price, final boolean addToShop) {
+    private void sellCard(final CardPrinted card, final int price, final boolean addToShop) {
         if (price > 0) {
             this.qa.setCredits(this.qa.getCredits() + price);
         }

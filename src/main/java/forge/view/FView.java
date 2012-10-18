@@ -22,7 +22,6 @@ import forge.gui.deckeditor.VDeckEditorUI;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SLayoutConstants;
-import forge.gui.home.CHomeUI;
 import forge.gui.home.VHomeUI;
 import forge.gui.match.TargetingOverlay;
 import forge.gui.match.VMatchUI;

@@ -7,15 +7,12 @@ import java.util.List;
 
 import javax.swing.JButton;
 
-import forge.AllZone;
 import forge.Card;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
-import forge.game.GameNew;
-import forge.game.GameSummary;
+import forge.game.GameOutcome;
 import forge.game.GameType;
-import forge.game.PlayerStartsGame;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -68,14 +65,24 @@ public class ControlWinLose {
     /** Action performed when "continue" button is pressed in default win/lose UI. */
     public void actionOnContinue() {
         SOverlayUtils.hideOverlay();
-        startNextRound();
+        saveOptions();
+        
+        boolean isAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
+        GameType gameType = Singletons.getModel().getMatch().getGameType();
+
+        //This is called from QuestWinLoseHandler also.  If we're in a quest, this is already handled elsewhere
+        if (isAnte && !gameType.equals(GameType.Quest)) {
+            executeAnte();
+        }        
+        
+        Singletons.getModel().getMatch().startRound();
     }
 
     /** Action performed when "restart" button is pressed in default win/lose UI. */
     public void actionOnRestart() {
-        Singletons.getModel().getMatchState().reset();
         SOverlayUtils.hideOverlay();
-        startNextRound();
+        saveOptions();
+        Singletons.getModel().getMatch().replayRound();
     }
 
     /** Action performed when "quit" button is pressed in default win/lose UI. */
@@ -89,9 +96,7 @@ public class ControlWinLose {
         }
 
         // Reset other stuff
-        Singletons.getModel().getMatchState().reset();
-        Singletons.getModel().getPreferences().writeMatchPreferences();
-        Singletons.getModel().getPreferences().save();
+        saveOptions();
         Singletons.getControl().changeState(FControl.HOME_SCREEN);
         SOverlayUtils.hideOverlay();
     }
@@ -100,22 +105,9 @@ public class ControlWinLose {
      * Either continues or restarts a current game. May be overridden for use
      * with other game modes.
      */
-    public void startNextRound() {
-        boolean isAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
-        GameType gameType = Singletons.getModel().getMatchState().getGameType();
-
-        //This is called from QuestWinLoseHandler also.  If we're in a quest, this is already handled elsewhere
-        if (isAnte && !gameType.equals(GameType.Quest)) {
-            executeAnte();
-        }
-
+    public void saveOptions() {
         Singletons.getModel().getPreferences().writeMatchPreferences();
         Singletons.getModel().getPreferences().save();
-
-        CMatchUI.SINGLETON_INSTANCE.initMatch(null);
-        GameNew.newGame(new PlayerStartsGame(AllZone.getHumanPlayer(), AllZone.getHumanPlayer().getDeck()),
-                         new PlayerStartsGame(AllZone.getComputerPlayer(), AllZone.getComputerPlayer().getDeck()));
-
     }
 
     /**
@@ -124,16 +116,13 @@ public class ControlWinLose {
      * @param cDeck
      */
     private void executeAnte() {
-        List<GameSummary> games = Singletons.getModel().getMatchState().getGamesPlayed();
-        if (games.isEmpty()) {
-            return;
-        }
-        GameSummary lastGame = games.get(games.size() - 1);
-        for (Player p : Singletons.getModel().getGameState().getPlayers()) {
-            if (!p.getName().equals(lastGame.getWinner())) {
-                continue; // not a loser
-            }
+        List<GameOutcome> games = Singletons.getModel().getMatch().getPlayedGames();
+        if ( games.isEmpty() ) return;
 
+        GameOutcome lastGame = games.get(games.size()-1);
+        for (Player p: Singletons.getModel().getGameState().getPlayers()) {
+            if (!p.getName().equals(lastGame.getWinner())) continue; // not a loser
+            
             // remove all the lost cards from owners' decks
             List<CardPrinted> losses = new ArrayList<CardPrinted>();
             for (Player loser : Singletons.getModel().getGameState().getPlayers()) {
@@ -142,7 +131,7 @@ public class ControlWinLose {
                 }
 
                 List<Card> compAntes = loser.getCardsIn(ZoneType.Ante);
-                Deck cDeck = loser.getDeck();
+                Deck cDeck = Singletons.getModel().getMatch().getPlayersDeck(loser.getLobbyPlayer());
 
                 for (Card c : compAntes) {
                     CardPrinted toRemove = CardDb.instance().getCard(c);
@@ -152,10 +141,11 @@ public class ControlWinLose {
 
             // offer to winner, if he is human
             if (p.isHuman()) {
-                List<CardPrinted> o = GuiChoose.noneOrMany("Select cards to add to your deck", losses);
-                if (null != o) {
-                    for (CardPrinted c : o) {
-                        p.getDeck().getMain().add(c);
+                List<CardPrinted> chosen = GuiChoose.noneOrMany("Select cards to add to your deck", losses);
+                if (null != chosen) {
+                    Deck d = Singletons.getModel().getMatch().getPlayersDeck(p.getLobbyPlayer());
+                    for (CardPrinted c : chosen) {
+                        d.getMain().add(c);
                     }
                 }
             }

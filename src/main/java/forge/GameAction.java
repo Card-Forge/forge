@@ -26,6 +26,7 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.AbilityFactoryAttach;
@@ -51,8 +52,8 @@ import forge.card.trigger.TriggerType;
 import forge.control.input.InputPayManaCost;
 import forge.control.input.InputPayManaCostUtil;
 import forge.game.GameEndReason;
-import forge.game.GameSummary;
-import forge.game.phase.PhaseHandler;
+import forge.game.GameLossReason;
+import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
@@ -896,54 +897,43 @@ public class GameAction {
      * 
      * @return a boolean.
      */
-    public final boolean checkEndGameState() {
+    public final boolean checkEndGameState(final GameState game) {
         // if game is already over return true
-        if (Singletons.getModel().getGameState().isGameOver()) {
+        if (game.isGameOver()) {
             return true;
         }
-        // Win / Lose
-        final GameSummary game = Singletons.getModel().getGameSummary();
-        boolean humanWins = false;
-        boolean computerWins = false;
-        final Player computer = AllZone.getComputerPlayer();
-        final Player human = AllZone.getHumanPlayer();
 
-        // Winning Conditions can be worth more than losing conditions
-        if (human.hasWon() || computer.hasLost()) {
-            humanWins = true;
-
-            if (human.getAltWin()) {
-                game.end(GameEndReason.WinsGameSpellEffect, human.getName(), human.getWinConditionSource());
-            } else {
-                game.end(GameEndReason.AllOpponentsLost, human.getName(), null);
-            }
+        GameEndReason reason = null;
+        // award loses as SBE
+        for (Player p : game.getPlayers() ) {
+            p.checkLoseCondition(); // this will set appropriate outcomes
         }
-
-        if (computer.hasWon() || human.hasLost()) {
-            if (humanWins) {
-                // both players won/lost at the same time.
-                game.end(GameEndReason.Draw, null, null);
-            } else {
-                computerWins = true;
-
-                if (computer.getAltWin()) {
-                    game.end(GameEndReason.WinsGameSpellEffect, computer.getName(), computer.getWinConditionSource());
-                } else {
-                    game.end(GameEndReason.AllOpponentsLost, computer.getName(), null);
+        
+        // Has anyone won by spelleffect?
+        for (Player p : game.getPlayers() ) {
+            if( p.hasWon() ) { // then the rest have lost!
+                reason = GameEndReason.WinsGameSpellEffect;
+                for (Player pl : game.getPlayers() ) {
+                    if( !pl.equals(p) )
+                        if ( !pl.loseConditionMet(GameLossReason.OpponentWon, p.getOutcome().altWinSourceName) )
+                            reason = null; // they cannot lose!
                 }
-
+                break;
             }
         }
-
-        final boolean isGameDone = humanWins || computerWins;
-        if (isGameDone) {
-            Singletons.getModel().getGameState().setGameOver(true);
-            game.getPlayerRating(computer.getName()).setLossReason(computer.getLossState(), computer.getLossConditionSource());
-            game.getPlayerRating(human.getName()).setLossReason(human.getLossState(), human.getLossConditionSource());
-            Singletons.getModel().getMatchState().addGamePlayed(game);
+        
+        // still unclear why this has not caught me conceding
+        if ( reason == null && Iterables.size(Iterables.filter(game.getPlayers(), Player.Predicates.NOT_LOST)) == 1 )
+        {
+            reason = GameEndReason.AllOpponentsLost;
+        }
+        
+        if (reason != null) {
+            game.setGameOver();
+            Singletons.getModel().getMatch().addGamePlayed(reason, game);
         }
 
-        return isGameDone;
+        return reason != null;
     }
 
     /** */
@@ -1015,7 +1005,7 @@ public class GameAction {
             return;
         }
 
-        if (this.checkEndGameState()) {
+        if (this.checkEndGameState(Singletons.getModel().getGameState())) {
             // Clear Simultaneous triggers at the end of the game
             new ViewWinLose();
             Singletons.getModel().getGameState().getStack().clearSimultaneousStack();
@@ -1030,9 +1020,6 @@ public class GameAction {
         for (int q = 0; q < 9; q++) {
 
             boolean checkAgain = false;
-
-            AllZone.getHumanPlayer().setMaxHandSize(7);
-            AllZone.getComputerPlayer().setMaxHandSize(7);
 
             this.checkStaticAbilities();
 
@@ -1693,7 +1680,7 @@ public class GameAction {
             originalCard.setXManaCostPaid(0);
         }
 
-        if (PhaseHandler.getGameBegins() != 1 || sa.isTrigger()) {
+        if (Singletons.getModel().getGameState() != null || sa.isTrigger()) {
             return manaCost;
         }
 

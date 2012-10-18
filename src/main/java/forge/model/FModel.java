@@ -38,11 +38,8 @@ import forge.control.input.InputControl;
 import forge.deck.CardCollections;
 import forge.error.ExceptionHandler;
 import forge.game.GameState;
-import forge.game.GameSummary;
-import forge.game.player.ComputerAIGeneral;
-import forge.game.player.ComputerAIInput;
-import forge.game.player.Player;
-import forge.game.player.PlayerType;
+import forge.game.MatchController;
+import forge.game.player.LobbyPlayer;
 import forge.gauntlet.GauntletData;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -50,7 +47,6 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
 import forge.quest.data.QuestPreferences;
-import forge.util.Aggregates;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
 import forge.util.IStorageView;
@@ -80,11 +76,11 @@ public enum FModel {
     private final GameAction gameAction;
     private final QuestPreferences questPreferences;
     private final ForgePreferences preferences;
-    private final GameState gameState;
-    private final FMatchState matchState;
+    private GameState gameState;
     private GauntletData gauntletData;
     
     private QuestController quest = null;
+    private final MatchController match;
 
     private final EditionCollection editions;
     private final FormatCollection formats;
@@ -133,8 +129,6 @@ public enum FModel {
         }
 
         this.gameAction = new GameAction();
-        this.gameState = new GameState();
-        this.matchState = new FMatchState();
         this.questPreferences = new QuestPreferences();
         this.gauntletData = new GauntletData();
 
@@ -146,13 +140,12 @@ public enum FModel {
         this.blocks = new StorageView<CardBlock>(new CardBlock.Reader("res/blockdata/blocks.txt", editions));
         this.fantasyBlocks = new StorageView<CardBlock>(new CardBlock.Reader("res/blockdata/fantasyblocks.txt", editions));
 
+        this.match = new MatchController();
         // TODO - there's got to be a better place for this...oblivion?
         Preferences.DEV_MODE = this.preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
 
         // Instantiate AI
         AllZone.setInputControl(new InputControl(FModel.this));
-        Player computerPlayer = Aggregates.firstFieldEquals(gameState.getPlayers(), Player.Accessors.FN_GET_TYPE, PlayerType.COMPUTER);
-        AllZone.getInputControl().setComputer(new ComputerAIInput(new ComputerAIGeneral(computerPlayer)));
         /// Wrong direction here. It is computer that lives inside player, not a player in computer
 
         testNetworkConnection();
@@ -361,25 +354,6 @@ public enum FModel {
     }
 
     /**
-     * Gets the match state model - that is, the data stored over multiple
-     * games.
-     * 
-     * @return {@link forge.model.FMatchState}
-     */
-    public final FMatchState getMatchState() {
-        return this.matchState;
-    }
-
-    /**
-     * Gets the game summary.
-     * 
-     * @return {@link forge.game.GameSummary}
-     */
-    public final GameSummary getGameSummary() {
-        return this.gameState.getGameSummary();
-    }
-
-    /**
      * TODO: Write javadoc for this method.
      *
      * @return the editions
@@ -443,5 +417,18 @@ public enum FModel {
      */
     public void setGauntletData(GauntletData data0) {
         this.gauntletData = data0;
+    }
+
+    public MatchController getMatch() {
+        return match;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param players 
+     */
+    public GameState newGame(Iterable<LobbyPlayer> players) {
+        gameState = new GameState(players);
+        return gameState;
     }
 }

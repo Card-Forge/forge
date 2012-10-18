@@ -33,7 +33,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 
 import net.miginfocom.swing.MigLayout;
-import forge.AllZone;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.game.player.Player;
@@ -122,8 +121,7 @@ public class VField implements IVDoc {
 
         // TODO player is hard-coded into tabletop...should be dynamic
         // (haven't looked into it too deeply). Doublestrike 12-04-12
-        tabletop = new PlayArea(scroller,
-                AllZone.getComputerPlayer().equals(player) ? true : false);
+        tabletop = new PlayArea(scroller, id0 == EDocID.FIELD_1 );
 
         control = new CField(player, this);
 

@@ -86,7 +86,7 @@ public class InputPassPriority extends Input implements java.io.Serializable {
     @Override
     public final void selectCard(final Card card, final PlayerZone zone) {
         if (Singletons.getModel().getGameAction().playCard(card)) {
-            Singletons.getModel().getGameState().getPhaseHandler().setPriority(AllZone.getHumanPlayer());
+            Singletons.getModel().getGameState().getPhaseHandler().setPriority(Singletons.getControl().getPlayer());
         }
         else {
             SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);

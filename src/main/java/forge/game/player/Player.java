@@ -51,7 +51,6 @@ import forge.card.replacement.ReplacementResult;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
-import forge.deck.Deck;
 import forge.game.GameLossReason;
 import forge.game.phase.PhaseHandler;
 import forge.game.zone.PlayerZone;
@@ -69,15 +68,15 @@ import forge.util.MyRandom;
  * @author Forge
  * @version $Id$
  */
-public abstract class Player extends GameEntity  implements Comparable<Player> {
+public abstract class Player extends GameEntity implements Comparable<Player> {
     /** The poison counters. */
-    private int poisonCounters;
+    private int poisonCounters = 0;
 
     /** The life. */
-    private int life;
+    private int life = 20;
 
     /** The life this player started the game with. */
-    private int startingLife;
+    private int startingLife = 20;
 
     /** The assigned damage. */
     private final Map<Card, Integer> assignedDamage = new HashMap<Card, Integer>();
@@ -87,24 +86,6 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
 
     /** The num power surge lands. */
     private int numPowerSurgeLands;
-
-    /** The alt win. */
-    private boolean altWin = false;
-
-    /** The alt win source name. */
-    private String altWinSourceName;
-
-    /** The alt lose. */
-    // private boolean altLose = false;
-
-    /** The loss state. */
-    private GameLossReason lossState = GameLossReason.DidNotLoseYet;
-
-    /** The lose condition spell. */
-    private String loseConditionSpell;
-
-    /** The n turns. */
-    private int nTurns = 0;
 
     /** The skip next untap. */
     private boolean skipNextUntap = false;
@@ -122,7 +103,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
     private int maxHandSize = 7;
 
     /** The last drawn card. */
-    private Card lastDrawnCard;
+    private Card lastDrawnCard = null;
 
     /** The num drawn this turn. */
     private int numDrawnThisTurn = 0;
@@ -134,7 +115,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
     private ArrayList<String> keywords = new ArrayList<String>();
 
     /** The mana pool. */
-    private ManaPool manaPool = null;
+    private ManaPool manaPool = new ManaPool(this);
 
     /** The must attack entity. */
     private Object mustAttackEntity = null;
@@ -148,24 +129,19 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
     /** The zones. */
     private final Map<ZoneType, PlayerZone> zones = new EnumMap<ZoneType, PlayerZone>(ZoneType.class);
 
+    private PlayerStatistics stats = new PlayerStatistics();
+
     /** The Constant ALL_ZONES. */
     public static final List<ZoneType> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(ZoneType.Battlefield,
-            ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante, ZoneType.Stack));
+            ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante));
 
     
-    // Moved deck here from Constants.Runtime
-    private Deck deck; 
     
-    /**
-     * <p>
-     * Constructor for Player.
-     * </p>
-     * 
-     * @param myName
-     *            a {@link java.lang.String} object.
-     */
-    public Player(final String myName) {
-        this(myName, 20, 0);
+    
+    private LobbyPlayer lobbyPlayer; 
+    
+    public final PlayerOutcome getOutcome() {
+        return stats.getOutcome();
     }
 
     /**
@@ -180,48 +156,19 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @param myPoisonCounters
      *            a int.
      */
-    public Player(final String myName, final int myLife, final int myPoisonCounters) {
+    public Player(LobbyPlayer lobbyPlayer0) {
+        lobbyPlayer = lobbyPlayer0;
         for (final ZoneType z : Player.ALL_ZONES) {
-            final PlayerZone toPut = z == ZoneType.Battlefield ? new PlayerZoneBattlefield(z, this)
+            final PlayerZone toPut = z == ZoneType.Battlefield 
+                    ? new PlayerZoneBattlefield(z, this)
                     : new PlayerZone(z, this);
             this.zones.put(z, toPut);
         }
-
-        this.reset();
-
-        this.setName(myName);
-        this.life = myLife;
-        this.poisonCounters = myPoisonCounters;
+        this.setName(lobbyPlayer.getName());
     }
 
-    /**
-     * <p>
-     * reset.
-     * </p>
-     */
-    public final void reset() {
-        this.life = 20;
-        this.lifeLostThisTurn = 0;
-        this.poisonCounters = 0;
-        this.assignedDamage.clear();
-        this.setPreventNextDamage(0);
-        this.lastDrawnCard = null;
-        this.numDrawnThisTurn = 0;
-        this.slowtripList = new ArrayList<Card>();
-        this.nTurns = 0;
-        this.altWin = false;
-        this.altWinSourceName = null;
-        // altLose = false;
-        this.lossState = GameLossReason.DidNotLoseYet;
-        this.loseConditionSpell = null;
-        this.maxLandsToPlay = 1;
-        this.numLandsPlayed = 0;
-        this.prowl = new ArrayList<String>();
-
-        this.keywords.clear();
-        this.manaPool = new ManaPool(this);
-
-        this.updateObservers();
+    public final PlayerStatistics getStats() {
+        return stats;
     }
 
     /**
@@ -1266,6 +1213,32 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
         }
         return drawn;
     }
+    
+    /**
+     * 
+     * TODO Write javadoc for this method.
+     * 
+     * @param player
+     *            a Player object
+     * @param playerRating
+     *            a GamePlayerRating object
+     * @return an int
+     */
+    public  int doMulligan() {
+        final List<Card> hand = getCardsIn(ZoneType.Hand);
+        for (final Card c : hand) {
+            Singletons.getModel().getGameAction().moveToLibrary(c);
+        }
+        shuffle();
+        final int newHand = hand.size() - 1;
+        for (int i = 0; i < newHand; i++) {
+            drawCard();
+        }
+        AllZone.getGameLog().add("Mulligan", this + " has mulliganed down to " + newHand + " cards.", 0);
+        stats.notifyHasMulliganed();
+        stats.notifyOpeningHandSize(newHand);
+        return newHand;
+    }    
 
     /**
      * <p>
@@ -1307,7 +1280,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
                 }
             }
 
-            if (PhaseHandler.getGameBegins() == 1) {
+            if (Singletons.getModel().getGameState() != null) {
                 this.setLastDrawnCard(c);
                 c.setDrawnThisTurn(true);
                 this.numDrawnThisTurn++;
@@ -1441,7 +1414,9 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @return the all cards
      */
     public final List<Card> getAllCards() {
-        return this.getCardsIn(Player.ALL_ZONES);
+        List<Card> allExcStack = this.getCardsIn(Player.ALL_ZONES);
+        allExcStack.addAll(getCardsIn(ZoneType.Stack));
+        return allExcStack;
     }
 
     /**
@@ -2035,7 +2010,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @return a int.
      */
     public final int getTurn() {
-        return this.nTurns;
+        return this.stats.getTurnsPlayed();
     }
 
     /**
@@ -2044,7 +2019,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * </p>
      */
     public final void incrementTurn() {
-        this.nTurns++;
+        this.stats.nextTurn();
     }
 
     /**
@@ -2118,48 +2093,6 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
 
     /**
      * <p>
-     * Getter for the field <code>altWin</code>.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean getAltWin() {
-        return this.altWin;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>winCondition</code>.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public final String getWinConditionSource() {
-        return this.altWinSourceName;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>loseCondition</code>.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public final GameLossReason getLossState() {
-        return this.lossState;
-    }
-
-    /**
-     * Gets the loss condition source.
-     * 
-     * @return the loss condition source
-     */
-    public final String getLossConditionSource() {
-        return this.loseConditionSpell;
-    }
-
-    /**
-     * <p>
      * altWinConditionMet.
      * </p>
      * 
@@ -2171,8 +2104,8 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
             System.out.println("Tried to win, but currently can't.");
             return;
         }
-        this.altWin = true;
-        this.altWinSourceName = sourceName;
+        this.setOutcome(PlayerOutcome.altWin(sourceName));
+
     }
 
     /**
@@ -2187,22 +2120,23 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @return a boolean.
      */
     public final boolean loseConditionMet(final GameLossReason state, final String spellName) {
-        if (this.cantLose()) {
-            System.out.println("Tried to lose, but currently can't.");
-            return false;
+        if ( state != GameLossReason.OpponentWon ) {
+            if (this.cantLose()) {
+                System.out.println("Tried to lose, but currently can't.");
+                return false;
+            }
+    
+            // Replacement effects
+            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            runParams.put("Affected", this);
+            runParams.put("Event", "GameLoss");
+    
+            if (AllZone.getReplacementHandler().run(runParams) != ReplacementResult.NotReplaced) {
+                return false;
+            }
         }
 
-        // Replacement effects
-        final HashMap<String, Object> runParams = new HashMap<String, Object>();
-        runParams.put("Affected", this);
-        runParams.put("Event", "GameLoss");
-
-        if (AllZone.getReplacementHandler().run(runParams) != ReplacementResult.NotReplaced) {
-            return false;
-        }
-
-        this.lossState = state;
-        this.loseConditionSpell = spellName;
+        setOutcome(PlayerOutcome.loss(state, spellName));
         return true;
     }
 
@@ -2210,8 +2144,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * Concede.
      */
     public final void concede() { // No cantLose checks - just lose
-        this.lossState = GameLossReason.Conceded;
-        this.loseConditionSpell = null;
+        setOutcome(PlayerOutcome.concede());
     }
 
     /**
@@ -2222,7 +2155,7 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * @return a boolean.
      */
     public final boolean cantLose() {
-        if (this.lossState == GameLossReason.Conceded) {
+        if (this.getOutcome() != null && this.getOutcome().lossState == GameLossReason.Conceded) {
             return false;
         }
 
@@ -2258,11 +2191,10 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
      * 
      * @return a boolean.
      */
-    public final boolean hasLost() {
-
-        if (this.lossState != GameLossReason.DidNotLoseYet) {
-            return this.loseConditionMet(this.lossState, null);
-        }
+    public final boolean checkLoseCondition() {
+        
+        if ( this.getOutcome() != null )
+            return this.getOutcome().lossState != null;
 
         if (this.poisonCounters >= 10) {
             return this.loseConditionMet(GameLossReason.Poisoned, null);
@@ -2287,8 +2219,10 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
         if (this.cantWin()) {
             return false;
         }
+        // in multiplayer game one player's win is replaced by all other's lose (rule 103.4h)
+        // so if someone cannot lose, the game appears to continue
 
-        return this.altWin;
+        return this.getOutcome() != null && this.getOutcome().lossState == null;
     }
 
     /**
@@ -2714,15 +2648,14 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
         return (41 * (41 + this.getName().hashCode()));
     }
 
-    public Deck getDeck() {
-        return deck;
-    }
-
-    public void setDeck(Deck deck) {
-        this.deck = deck; 
-    }
-    
     public static class Predicates { 
+
+        public static final Predicate<Player> NOT_LOST = new Predicate<Player>() {
+            @Override
+            public boolean apply(Player p) {
+                return p.getOutcome() == null || p.getOutcome().hasWon();
+            }
+        };
 
         public static Predicate<Player> isType(final PlayerType type) {
             return new Predicate<Player>() {
@@ -2735,6 +2668,13 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
     }
     
     public static class Accessors {
+        public static Function<Player, LobbyPlayer> FN_GET_LOBBY_PLAYER = new Function<Player, LobbyPlayer>(){
+            @Override
+            public LobbyPlayer apply(Player input) {
+                return input.getLobbyPlayer();
+            }
+        };
+        
         public static Function<Player, Integer> FN_GET_LIFE = new Function<Player, Integer>(){
             @Override
             public Integer apply(Player input) {
@@ -2764,5 +2704,25 @@ public abstract class Player extends GameEntity  implements Comparable<Player> {
                 }
             };
         }
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public LobbyPlayer getLobbyPlayer() {
+        return lobbyPlayer;
+    }
+
+    private void setOutcome(PlayerOutcome outcome) {
+        stats.setOutcome(outcome); 
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     */
+    public void onGameOver() {
+        if ( null == stats.getOutcome() ) // not lost?  
+            setOutcome(PlayerOutcome.win()); // then won!
     }
 }

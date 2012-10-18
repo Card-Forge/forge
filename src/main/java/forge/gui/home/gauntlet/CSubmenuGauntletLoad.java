@@ -9,13 +9,14 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
-import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
+import forge.control.Lobby;
 import forge.deck.Deck;
-import forge.game.GameNew;
 import forge.game.GameType;
-import forge.game.PlayerStartsGame;
+import forge.game.MatchController;
+import forge.game.MatchStartHelper;
+import forge.game.player.PlayerType;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gui.SOverlayUtils;
@@ -103,16 +104,16 @@ public enum CSubmenuGauntletLoad implements ICDoc {
             @Override
             public Object doInBackground() {
                 final GauntletData gd = FModel.SINGLETON_INSTANCE.getGauntletData();
-
-                Deck human = gd.getUserDeck();
-                Deck aiDeck = gd.getDecks().get(gd.getCompleted());                
+                final Deck aiDeck = gd.getDecks().get(gd.getCompleted());
                 
-                Singletons.getModel().getMatchState().setGameType(GameType.Gauntlet);
-
-                if (human != null && aiDeck != null) {
-                    GameNew.newGame(new PlayerStartsGame(AllZone.getHumanPlayer(), human),
-                            new PlayerStartsGame(AllZone.getComputerPlayer(), aiDeck));
-                }
+                MatchStartHelper starter = new MatchStartHelper();
+                Lobby lobby = Singletons.getControl().getLobby();
+                starter.addPlayer(lobby.findLocalPlayer(PlayerType.HUMAN), gd.getUserDeck());
+                starter.addPlayer(lobby.findLocalPlayer(PlayerType.COMPUTER), aiDeck);
+                
+                MatchController mc = Singletons.getModel().getMatch(); 
+                mc.initMatch(GameType.Gauntlet, starter.getPlayerMap());
+                mc.startRound();
                 return null;
             }
 

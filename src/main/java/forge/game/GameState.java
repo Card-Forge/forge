@@ -32,8 +32,7 @@ import forge.game.phase.EndOfTurn;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.Untap;
 import forge.game.phase.Upkeep;
-import forge.game.player.AIPlayer;
-import forge.game.player.HumanPlayer;
+import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.MagicStack;
@@ -51,14 +50,13 @@ public class GameState {
     /** The Constant AI_PLAYER_NAME. */
     public static final String AI_PLAYER_NAME = "Computer";
 
-    private final List<Player> players = new ArrayList<Player>(); 
     private final List<Player> roPlayers;
     private final Cleanup cleanup = new Cleanup();
     private final EndOfTurn endOfTurn = new EndOfTurn();
     private final EndOfCombat endOfCombat = new EndOfCombat();
     private final Untap untap = new Untap();
     private final Upkeep upkeep = new Upkeep();
-    private final PhaseHandler phaseHandler = new PhaseHandler();
+    private PhaseHandler phaseHandler = new PhaseHandler();
     private final MagicStack stack = new MagicStack();
     private final StaticEffects staticEffects = new StaticEffects();
     private final TriggerHandler triggerHandler = new TriggerHandler();
@@ -70,15 +68,17 @@ public class GameState {
     private final PlayerZone stackZone = new PlayerZone(ZoneType.Stack, null);
 
     private long timestamp = 0;
-    private GameSummary gameSummary;
-
+    private int nTurn = 0;
+    
     /**
      * Constructor.
+     * @param players2 
      */
-    public GameState() { /* no more zones to map here */
-        players.add(new HumanPlayer(GameState.HUMAN_PLAYER_NAME));
-        players.add(new AIPlayer(GameState.AI_PLAYER_NAME));
-        
+    public GameState(Iterable<LobbyPlayer> players2) { /* no more zones to map here */
+        List<Player> players = new ArrayList<Player>();
+        for(LobbyPlayer p : players2) {
+            players.add(p.getIngamePlayer());
+        }
         roPlayers = Collections.unmodifiableList(players);
     }
 
@@ -238,23 +238,6 @@ public class GameState {
         this.timestamp = timestamp0;
     }
 
-    /**
-     * Gets the game info.
-     * 
-     * @return the game info
-     */
-    public final GameSummary getGameSummary() {
-        return this.gameSummary;
-    }
-
-    /**
-     * Sets the game info.
-     * 
-     * @param summary0 {@link forge.game.GameSummary}
-     */
-    public final void setGameSummary(final GameSummary summary0) {
-        this.gameSummary = summary0;
-    }
 
     /**
      * @return the replacementHandler
@@ -273,8 +256,25 @@ public class GameState {
     /**
      * @param go the gameOver to set
      */
-    public void setGameOver(boolean go) {
-        this.gameOver = go;
+    public void setGameOver() {
+        this.gameOver = true;
+        for(Player p : roPlayers) {
+            p.onGameOver();
+        }
     }
 
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public int getTurnNumber() {
+        return nTurn;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     */
+    public void notifyNextTurn() {
+        nTurn++;
+    }
 }

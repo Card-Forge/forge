@@ -25,13 +25,14 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
-import forge.AllZone;
+import forge.Singletons;
 import forge.deck.Deck;
+import forge.game.MatchController;
+import forge.game.player.LobbyPlayer;
 import forge.gauntlet.GauntletData;
 import forge.gauntlet.GauntletIO;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
-import forge.model.FMatchState;
 import forge.model.FModel;
 
 /**
@@ -57,7 +58,7 @@ public class OtherGauntletWinLose extends ControlWinLose {
     @Override
     public final boolean populateCustomPanel() {
         final GauntletData gd = FModel.SINGLETON_INSTANCE.getGauntletData();
-        final FMatchState matchState = FModel.SINGLETON_INSTANCE.getMatchState();
+        final MatchController match = FModel.SINGLETON_INSTANCE.getMatch();
         final List<String> lstEventNames = gd.getEventNames();
         final List<Deck> lstDecks = gd.getDecks();
         final List<String> lstEventRecords = gd.getEventRecords();
@@ -78,15 +79,14 @@ public class OtherGauntletWinLose extends ControlWinLose {
         // the player can restart Forge to replay a match.
         // Pretty sure this can't be fixed until in-game states can be
         // saved. Doublestrike 07-10-12
-        if (matchState.isMatchOver()) {
+        LobbyPlayer questPlayer = Singletons.getControl().getLobby().getQuestPlayer();
+        if (match.isMatchOver()) {
             // In all cases, update stats.
-            lstEventRecords.set(gd.getCompleted(),
-                    matchState.countGamesWonBy(AllZone.getHumanPlayer())
-                    + " - " + matchState.countGamesWonBy(AllZone.getComputerPlayer()));
+            lstEventRecords.set(gd.getCompleted(), match.getGamesWonBy(questPlayer) + " - " + ( match.getPlayedGames().size() - match.getGamesWonBy(questPlayer) ) );
             gd.setCompleted(gd.getCompleted() + 1);
 
             // Win match case
-            if (matchState.isMatchWonBy(AllZone.getHumanPlayer())) {
+            if (match.isWonBy(questPlayer)) {
                 // Gauntlet complete: Remove save file
                 if (gd.getCompleted() == lstDecks.size()) {
                     lblGraphic = new FLabel.Builder()
@@ -112,8 +112,6 @@ public class OtherGauntletWinLose extends ControlWinLose {
                 else {
                     gd.stamp();
                     GauntletIO.saveGauntlet(gd);
-                    matchState.reset();
-                    AllZone.getComputerPlayer().setDeck(lstDecks.get(gd.getCompleted()));
 
                     this.getView().getBtnContinue().setVisible(true);
                     this.getView().getBtnContinue().setEnabled(true);

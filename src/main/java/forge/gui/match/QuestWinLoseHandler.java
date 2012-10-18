@@ -16,8 +16,6 @@
  */
 package forge.gui.match;
 
-import forge.AllZone;
-
 import javax.swing.JOptionPane;
 
 import forge.Card;
@@ -30,10 +28,11 @@ import forge.card.UnOpenedProduct;
 import forge.game.GameEndReason;
 import forge.game.GameFormat;
 import forge.game.GameLossReason;
-import forge.game.GameNew;
-import forge.game.GamePlayerRating;
-import forge.game.GameSummary;
-import forge.game.PlayerStartsGame;
+import forge.game.GameOutcome;
+import forge.game.MatchController;
+import forge.game.player.LobbyPlayer;
+import forge.game.player.PlayerOutcome;
+import forge.game.player.PlayerStatistics;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -42,16 +41,13 @@ import forge.gui.SOverlayUtils;
 import forge.gui.home.quest.CSubmenuChallenges;
 import forge.gui.home.quest.CSubmenuDuels;
 import forge.gui.toolbox.FSkin;
+import forge.item.CardDb;
 import forge.item.CardPrinted;
-import forge.model.FMatchState;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestEventChallenge;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
-import forge.quest.QuestMode;
-import forge.quest.QuestUtil;
 import forge.quest.bazaar.QuestItemType;
-import forge.quest.data.QuestAssets;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.ReadPriceList;
 import forge.util.MyRandom;
@@ -63,6 +59,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import javax.swing.BorderFactory;
@@ -92,7 +89,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
     private static final String CONSTRAINTS_TEXT = "w 95%!,, h 180px!, gap 0 0 0 20px";
     private static final String CONSTRAINTS_CARDS = "w 95%!, h 330px!, gap 0 0 0 20px";
 
-    private final transient FMatchState matchState;
+    private final transient MatchController match;
     private final transient QuestController qData;
     private final transient QuestEvent qEvent;
 
@@ -104,53 +101,13 @@ public class QuestWinLoseHandler extends ControlWinLose {
     public QuestWinLoseHandler(final ViewWinLose view0) {
         super(view0);
         this.view = view0;
-        matchState = Singletons.getModel().getMatchState();
+        match = Singletons.getModel().getMatch();
         qData = Singletons.getModel().getQuest();
         qEvent = qData.getCurrentEvent();
-        this.wonMatch = matchState.isMatchWonBy(AllZone.getHumanPlayer());
+        this.wonMatch = match.isWonBy(Singletons.getControl().getLobby().getQuestPlayer());
         this.isAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
     }
 
-    /**
-     * <p>
-     * startNextRound.
-     * </p>
-     * Either continues or restarts a current game.
-     * 
-     */
-    @Override
-    public final void startNextRound() {
-        Singletons.getModel().getPreferences().writeMatchPreferences();
-        Singletons.getModel().getPreferences().save();
-
-        SOverlayUtils.hideOverlay();
-        Singletons.getModel().getQuestPreferences().save();
-
-        QuestAssets qa = qData.getAssets();
-        if (qData.getMode() == QuestMode.Fantasy) {
-            int extraLife = 0;
-
-            if (qEvent instanceof QuestEventChallenge) {
-                if (qa.hasItem(QuestItemType.ZEPPELIN)) {
-                    extraLife = 3;
-                }
-            }
-
-            CMatchUI.SINGLETON_INSTANCE.initMatch(qEvent.getIconFilename());
-            
-            PlayerStartsGame p1 = new PlayerStartsGame(AllZone.getHumanPlayer(),AllZone.getHumanPlayer().getDeck() );
-            p1.cardsOnBattlefield = QuestUtil.getHumanStartingCards(qData, qEvent);
-            p1.initialLives =  qa.getLife(qData.getMode()) + extraLife;
-            
-            PlayerStartsGame p2 = new PlayerStartsGame(AllZone.getComputerPlayer(), AllZone.getComputerPlayer().getDeck());
-            p2.cardsOnBattlefield = QuestUtil.getComputerStartingCards(qEvent);
-            p2.initialLives = qEvent instanceof QuestEventChallenge ? ((QuestEventChallenge) qEvent).getAILife() : 20;
-            
-            GameNew.newGame( p1, p2 );
-        } else {
-            super.startNextRound();
-        }
-    }
 
     /**
      * <p>
@@ -165,28 +122,29 @@ public class QuestWinLoseHandler extends ControlWinLose {
     public final boolean populateCustomPanel() {
         this.getView().getBtnRestart().setVisible(false);
         qData.getCards().resetNewList();
-
+        QuestController qc = Singletons.getModel().getQuest(); 
+        LobbyPlayer questPlayer = Singletons.getControl().getLobby().getQuestPlayer();
+        if (isAnte) {
         //do per-game actions
-        if (matchState.hasWonLastGame(AllZone.getHumanPlayer().getName())) {
-            if (isAnte) {
-                final List<Card> antes = AllZone.getComputerPlayer().getCardsIn(ZoneType.Ante);
-                final List<CardPrinted> antesPrinted = Singletons.getModel().getMatchState().addAnteWon(antes);
-                this.anteWon(antesPrinted);
-
+            boolean isHumanWinner = match.isWonBy(questPlayer); 
+            final List<CardPrinted> anteCards = new ArrayList<CardPrinted>();
+            for( Player p : Singletons.getModel().getGameState().getPlayers() ) {
+                if (p.getLobbyPlayer().equals(questPlayer) == isHumanWinner) continue;
+                for(Card c : p.getCardsIn(ZoneType.Ante))
+                    anteCards.add(CardDb.instance().getCard(c));
             }
-        } else {
-            if (isAnte) {
-                final List<Card> antes = AllZone.getHumanPlayer().getCardsIn(ZoneType.Ante);
-                final List<CardPrinted> antesPrinted = Singletons.getModel().getMatchState().addAnteLost(antes);
-                for (final CardPrinted ante : antesPrinted) {
-                    //the last param here (should) determine if this is added to the Card Shop
-                    Singletons.getModel().getQuest().getCards().sellCard(ante, 0, false);
-                }
-                this.anteLost(antesPrinted);
+                
+            if (isHumanWinner) {
+                qc.getCards().addAllCards(anteCards);
+                this.anteWon(anteCards);
+            } else {
+                for(CardPrinted c : anteCards)
+                    qc.getCards().loseCard(c);
+                this.anteLost(anteCards);
             }
         }
 
-        if (!matchState.isMatchOver()) {
+        if (!match.isMatchOver()) {
             this.getView().getBtnQuit().setText("Quit (15 Credits)");
             return isAnte;
         } else {
@@ -243,10 +201,6 @@ public class QuestWinLoseHandler extends ControlWinLose {
                 this.awardBooster();
             }
         }
-
-        // Add any antes won this match (regardless of Match Win/Lose to Card Pool
-        // Note: Antes lost have already been remove from decks.
-        Singletons.getModel().getMatchState().addAnteWonToCardPool();
 
         return true;
     }
@@ -329,7 +283,6 @@ public class QuestWinLoseHandler extends ControlWinLose {
             qData.getAchievements().addChallengesPlayed();
         }
 
-        matchState.reset();
         CSubmenuDuels.SINGLETON_INSTANCE.update();
         CSubmenuChallenges.SINGLETON_INSTANCE.update();
 
@@ -384,41 +337,51 @@ public class QuestWinLoseHandler extends ControlWinLose {
         sb.append(diff + " opponent: " + credBase + " credits.<br>");
         // Gameplay bonuses (for each game win)
         boolean hasNeverLost = true;
-        final Player computer = AllZone.getComputerPlayer();
-        for (final GameSummary game : matchState.getGamesPlayed()) {
-            if (game.isWinner(computer.getName())) {
+        
+        LobbyPlayer localHuman = Singletons.getControl().getLobby().getQuestPlayer(); 
+        for (final GameOutcome game : match.getPlayedGames()) {
+            if (!game.isWinner(localHuman)) {
                 hasNeverLost = false;
                 continue; // no rewards for losing a game
             }
             // Alternate win
-            final GamePlayerRating aiRating = game.getPlayerRating(computer.getName());
-            final GamePlayerRating humanRating = game.getPlayerRating(AllZone.getHumanPlayer().getName());
-            final GameLossReason whyAiLost = aiRating.getLossReason();
-            final int altReward = this.getCreditsRewardForAltWin(whyAiLost);
-
-            if (altReward > 0) {
-                String winConditionName = "Unknown (bug)";
-                if (game.getWinCondition() == GameEndReason.WinsGameSpellEffect) {
-                    winConditionName = game.getWinSpellEffect();
-                } else {
-                    switch (whyAiLost) {
-                    case Poisoned:
-                        winConditionName = "Poison";
-                        break;
-                    case Milled:
-                        winConditionName = "Milled";
-                        break;
-                    case SpellEffect:
-                        winConditionName = aiRating.getLossSpellName();
-                        break;
-                    default:
-                        break;
-                    }
+            
+//            final PlayerStatistics aiRating = game.getStatistics(computer.getName());
+            PlayerStatistics humanRating = null;
+            for(Entry<LobbyPlayer, PlayerStatistics> aiRating : game ) {
+                if( aiRating.getValue().equals(localHuman)) {
+                    humanRating = aiRating.getValue();
+                    continue;
                 }
+                
+                final PlayerOutcome outcome = aiRating.getValue().getOutcome();
+                final GameLossReason whyAiLost = outcome.lossState;
+                final int altReward = this.getCreditsRewardForAltWin(whyAiLost);
 
-                credGameplay += 50;
-                sb.append(String.format("Alternate win condition: <u>%s</u>! " + "Bonus: %d credits.<br>",
-                        winConditionName, 50));
+                if (altReward > 0) {
+                    String winConditionName = "Unknown (bug)";
+                    if (game.getWinCondition() == GameEndReason.WinsGameSpellEffect) {
+                        winConditionName = game.getWinSpellEffect();
+                    } else {
+                        switch (whyAiLost) {
+                        case Poisoned:
+                            winConditionName = "Poison";
+                            break;
+                        case Milled:
+                            winConditionName = "Milled";
+                            break;
+                        case SpellEffect:
+                            winConditionName = outcome.loseConditionSpell;
+                            break;
+                        default:
+                            break;
+                        }
+                    }
+    
+                    credGameplay += 50;
+                    sb.append(String.format("Alternate win condition: <u>%s</u>! " + "Bonus: %d credits.<br>",
+                            winConditionName, 50));
+                }
             }
             // Mulligan to zero
             final int cntCardsHumanStartedWith = humanRating.getOpeningHandSize();
@@ -945,6 +908,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
      * @return int
      */
     private int getCreditsRewardForAltWin(final GameLossReason whyAiLost) {
+        if ( null == whyAiLost) // Felidar, Helix Pinnacle, etc.
+            return Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_UNDEFEATED);
         switch (whyAiLost) {
         case LifeReachedZero:
             return 0; // nothing special here, ordinary kill
@@ -952,8 +917,6 @@ public class QuestWinLoseHandler extends ControlWinLose {
             return Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_MILLED);
         case Poisoned:
             return Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_POISON);
-        case DidNotLoseYet: // Felidar, Helix Pinnacle, etc.
-            return Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_UNDEFEATED);
         case SpellEffect: // Door to Nothingness, etc.
             return Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_UNDEFEATED);
         default:

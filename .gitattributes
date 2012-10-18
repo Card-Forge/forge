@@ -12577,6 +12577,7 @@ src/main/java/forge/card/trigger/package-info.java svneol=native#text/plain
 src/main/java/forge/control/ControlBazaarUI.java -text
 src/main/java/forge/control/FControl.java -text
 src/main/java/forge/control/KeyboardShortcuts.java -text
+src/main/java/forge/control/Lobby.java -text
 src/main/java/forge/control/RestartUtil.java -text
 src/main/java/forge/control/bazaar/ControlStall.java -text
 src/main/java/forge/control/bazaar/package-info.java svneol=native#text/plain
@@ -12626,11 +12627,12 @@ src/main/java/forge/game/GameEndReason.java -text
 src/main/java/forge/game/GameFormat.java -text
 src/main/java/forge/game/GameLossReason.java -text
 src/main/java/forge/game/GameNew.java -text
-src/main/java/forge/game/GamePlayerRating.java -text
+src/main/java/forge/game/GameOutcome.java -text
 src/main/java/forge/game/GameState.java -text
-src/main/java/forge/game/GameSummary.java svneol=native#text/plain
 src/main/java/forge/game/GameType.java -text
-src/main/java/forge/game/PlayerStartsGame.java -text
+src/main/java/forge/game/MatchController.java -text
+src/main/java/forge/game/MatchStartHelper.java -text
+src/main/java/forge/game/PlayerStartConditions.java -text
 src/main/java/forge/game/limited/BoosterDeck.java -text
 src/main/java/forge/game/limited/BoosterDraft.java svneol=native#text/plain
 src/main/java/forge/game/limited/BoosterDraftAI.java svneol=native#text/plain
@@ -12670,7 +12672,10 @@ src/main/java/forge/game/player/ComputerUtil.java svneol=native#text/plain
 src/main/java/forge/game/player/ComputerUtilAttack.java svneol=native#text/plain
 src/main/java/forge/game/player/ComputerUtilBlock.java svneol=native#text/plain
 src/main/java/forge/game/player/HumanPlayer.java svneol=native#text/plain
+src/main/java/forge/game/player/LobbyPlayer.java -text
 src/main/java/forge/game/player/Player.java svneol=native#text/plain
+src/main/java/forge/game/player/PlayerOutcome.java -text
+src/main/java/forge/game/player/PlayerStatistics.java -text
 src/main/java/forge/game/player/PlayerType.java svneol=native#text/plain
 src/main/java/forge/game/player/PlayerUtil.java svneol=native#text/plain
 src/main/java/forge/game/player/package-info.java svneol=native#text/plain
@@ -12892,7 +12897,6 @@ src/main/java/forge/item/PreconDeck.java -text
 src/main/java/forge/item/TournamentPack.java -text
 src/main/java/forge/item/package-info.java -text
 src/main/java/forge/model/BuildInfo.java -text
-src/main/java/forge/model/FMatchState.java svneol=native#text/plain
 src/main/java/forge/model/FModel.java svneol=native#text/plain
 src/main/java/forge/model/MultipleForgeJarsFoundError.java -text
 src/main/java/forge/model/package-info.java svneol=native#text/plain

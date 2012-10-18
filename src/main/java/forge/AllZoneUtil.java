@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 import forge.CardPredicates.Presets;
 import forge.game.player.Player;
@@ -47,33 +48,24 @@ public abstract class AllZoneUtil {
      * @return a List<Card> with all cards currently in a graveyard
      */
     public static List<Card> getCardsIn(final ZoneType zone) {
-        final List<Card> cards = new ArrayList<Card>();
-        getCardsIn(zone, cards);
-        return cards;
-    }
-
-    private static void getCardsIn(final ZoneType zone, final List<Card> cards) {
         if (zone == ZoneType.Stack) {
-            cards.addAll(AllZone.getStackZone().getCards());
+            return AllZone.getStackZone().getCards();
         } else {
+            List<Card> cards = null;
             for (final Player p : Singletons.getModel().getGameState().getPlayers()) {
-                cards.addAll(p.getZone(zone).getCards());
+                if ( cards == null ) 
+                    cards = p.getZone(zone).getCards();
+                else
+                    cards.addAll(p.getZone(zone).getCards());
             }
+            return cards;
         }
     }
 
     public static List<Card> getCardsIn(final Iterable<ZoneType> zones) {
         final List<Card> cards = new ArrayList<Card>();
         for (final ZoneType z : zones) {
-            getCardsIn(z, cards);
-        }
-        return cards;
-    }
-
-    public static List<Card> getCardsIn(final ZoneType[] zones) {
-        final List<Card> cards = new ArrayList<Card>();
-        for (final ZoneType z : zones) {
-            getCardsIn(z, cards);
+            cards.addAll(getCardsIn(z));
         }
         return cards;
     }
@@ -182,10 +174,9 @@ public abstract class AllZoneUtil {
      * @return true is the card is in play, false otherwise
      */
     public static boolean isCardInPlay(final String cardName) {
-        for (Card card : AllZoneUtil.getCardsIn(ZoneType.Battlefield)) {
-            if (card.getName().equals(cardName)) {
+        for (final Player p : Singletons.getModel().getGameState().getPlayers()) {
+            if (isCardInPlay(cardName, p))
                 return true;
-            }
         }
         return false;
     }
@@ -200,12 +191,7 @@ public abstract class AllZoneUtil {
      * @return true if that player has that card in play, false otherwise
      */
     public static boolean isCardInPlay(final String cardName, final Player player) {
-        for (Card card : player.getCardsIn(ZoneType.Battlefield)) {
-            if (card.getName().equals(cardName)) {
-                return true;
-            }
-        }
-        return false;
+        return Iterables.any(player.getZone(ZoneType.Battlefield), CardPredicates.nameEquals(cardName));
     }
 
     // ////////////// getting all cards of a given color

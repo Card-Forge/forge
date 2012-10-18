@@ -19,7 +19,6 @@ package forge.control.input;
 
 import java.util.List;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -77,7 +76,7 @@ public class InputPayReturnCost extends Input {
 
         this.ability = sa;
         this.returnCost = cost;
-        this.choiceList = CardLists.getValidCards(AllZone.getHumanPlayer().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), AllZone.getHumanPlayer(), source);
+        this.choiceList = CardLists.getValidCards(Singletons.getControl().getPlayer().getCardsIn(ZoneType.Battlefield), cost.getType().split(";"), Singletons.getControl().getPlayer(), source);
         String amountString = cost.getAmount();
         this.numRequired = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
                 : CardFactoryUtil.xCount(source, source.getSVar(amountString));

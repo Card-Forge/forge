@@ -46,7 +46,7 @@ public class PlayerZone extends MyObservable implements IPlayerZone, Observer, j
     private static final long serialVersionUID = -5687652485777639176L;
 
     /** The cards. */
-    protected final List<Card> cardList;
+    protected final List<Card> cardList = new ArrayList<Card>();
     protected final Collection<Card> roCardList;    
     private final ZoneType zoneName;
     private final Player player;
@@ -70,7 +70,6 @@ public class PlayerZone extends MyObservable implements IPlayerZone, Observer, j
     public PlayerZone(final ZoneType zone, final Player inPlayer) {
         this.zoneName = zone;
         this.player = inPlayer;
-        this.cardList = new ArrayList<Card>();
         this.roCardList = Collections.unmodifiableCollection(cardList);
     }
 

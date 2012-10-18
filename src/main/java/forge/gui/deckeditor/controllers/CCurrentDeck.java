@@ -245,4 +245,5 @@ public enum CCurrentDeck implements ICDoc {
         }
         return null;
     }
+
 }

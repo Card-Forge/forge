@@ -46,6 +46,8 @@ public enum CAllDecks implements ICDoc {
                 public void execute() { importDeck(); } });
     }
 
+    
+    
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#update()
      */

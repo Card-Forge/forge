@@ -50,24 +50,8 @@ public class AIPlayer extends Player {
      * @param myName
      *            a {@link java.lang.String} object.
      */
-    public AIPlayer(final String myName) {
-        this(myName, 20, 0);
-    }
-
-    /**
-     * <p>
-     * Constructor for AIPlayer.
-     * </p>
-     * 
-     * @param myName
-     *            a {@link java.lang.String} object.
-     * @param myLife
-     *            a int.
-     * @param myPoisonCounters
-     *            a int.
-     */
-    public AIPlayer(final String myName, final int myLife, final int myPoisonCounters) {
-        super(myName, myLife, myPoisonCounters);
+    public AIPlayer(final LobbyPlayer player) {
+        super(player);
     }
 
     

@@ -32,4 +32,5 @@ public interface ICDoc {
      * Update whatever content is in the panel.
      */
     void update();
+
 }

@@ -22,6 +22,8 @@ import java.awt.event.ActionListener;
 
 import forge.Command;
 import forge.Singletons;
+import forge.game.GameState;
+import forge.game.MatchController;
 import forge.gui.GuiInput;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
@@ -36,7 +38,7 @@ public enum CMessage implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
-    private final GuiInput inputControl = new GuiInput();
+    private GuiInput inputControl = new GuiInput();
     private final ActionListener actCancel = new ActionListener() {
         @Override
         public void actionPerformed(final ActionEvent evt) {
@@ -59,6 +61,10 @@ public enum CMessage implements ICDoc {
         }
     };
 
+    public void subscribe(GameState game) {
+        inputControl.subscribe(game);
+    }
+    
     @Override
     public void initialize() {
         VMessage.SINGLETON_INSTANCE.getBtnCancel().removeActionListener(actCancel);
@@ -82,13 +88,15 @@ public enum CMessage implements ICDoc {
         VMessage.SINGLETON_INSTANCE.getTarMessage().setText(s0);
     }
 
-    /** Updates counter label in message area. */
-    public void updateGameInfo() {
+    /** Updates counter label in message area. 
+     * @param match 
+     * @param gameState */
+    public void updateGameInfo(MatchController match) {
         VMessage.SINGLETON_INSTANCE.getLblGames().setText(
-                Singletons.getModel().getMatchState().getGameType().toString() + ": Game #"
-                + (Singletons.getModel().getMatchState().getGamesPlayedCount() + 1)
-                + " of " + Singletons.getModel().getMatchState().getGamesPerMatch()
-                + ", turn " + Singletons.getModel().getGameSummary().getLastTurnNumber());
+                match.getGameType().toString() + ": Game #"
+                + (match.getPlayedGames().size() + 1)
+                + " of " + match.getGamesPerMatch()
+                + ", turn " + match.getCurrentGame().getTurnNumber());
     }
 
     /** Flashes animation on input panel if play is currently waiting on input. */

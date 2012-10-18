@@ -15,14 +15,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.game;
+package forge.game.player;
 
 /**
  * The Class GamePlayerRating.
  * 
  * @author Max
  */
-public class GamePlayerRating {
+public class PlayerStatistics {
 
     /** The opening hand size. */
     private int openingHandSize = 7;
@@ -30,42 +30,10 @@ public class GamePlayerRating {
     /** The times mulliganed. */
     private int timesMulliganed = 0;
 
-    /** The loss reason. */
-    private GameLossReason lossReason = GameLossReason.DidNotLoseYet;
+    private int turnsPlayed = 0;
 
-    /** The loss spell name. */
-    private String lossSpellName;
-
-    /**
-     * Gets the loss reason.
-     * 
-     * @return the loss reason
-     */
-    public final GameLossReason getLossReason() {
-        return this.lossReason;
-    }
-
-    /**
-     * Sets the loss reason.
-     * 
-     * @param loseCondition
-     *            the lose condition
-     * @param spellName
-     *            the spell name
-     */
-    public void setLossReason(final GameLossReason loseCondition, final String spellName) {
-        this.lossReason = loseCondition;
-        this.lossSpellName = spellName;
-    }
-
-    /**
-     * Gets the loss spell name.
-     * 
-     * @return the loss spell name
-     */
-    public String getLossSpellName() {
-        return this.lossSpellName;
-    }
+    
+    private PlayerOutcome outcome;
 
     /**
      * Gets the opening hand size.
@@ -100,6 +68,22 @@ public class GamePlayerRating {
      */
     public final void notifyOpeningHandSize(final int newHand) {
         this.openingHandSize = newHand;
+    }
+
+    public int getTurnsPlayed() {
+        return turnsPlayed;
+    }
+
+    public void nextTurn() {
+        this.turnsPlayed++; 
+    }
+
+    public PlayerOutcome getOutcome() {
+        return outcome;
+    }
+
+    public void setOutcome(PlayerOutcome gameOutcome) {
+        this.outcome = gameOutcome; 
     }
 
 }

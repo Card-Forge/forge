@@ -1,6 +1,7 @@
 package forge.game.zone;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -33,7 +34,7 @@ public enum ZoneType {
     /** Ante. */
     Ante(false);
 
-    public static final ZoneType[] STATIC_ABILITIES_SOURCE_ZONES = new ZoneType[]{Battlefield, Graveyard, Exile/*, Hand*/};
+    public static final List<ZoneType> STATIC_ABILITIES_SOURCE_ZONES = Arrays.asList(new ZoneType[]{Battlefield, Graveyard, Exile/*, Hand*/});
 
     private final boolean holdsHiddenInfo;
     private ZoneType(boolean holdsHidden) {

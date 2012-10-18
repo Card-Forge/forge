@@ -19,16 +19,17 @@ package forge.game.limited;
 
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+
 import java.util.List;
 
-import forge.AllZone;
 import forge.Singletons;
+import forge.control.Lobby;
 import forge.deck.Deck;
-import forge.game.GameNew;
 import forge.game.GameType;
-import forge.game.PlayerStartsGame;
+import forge.game.MatchController;
+import forge.game.MatchStartHelper;
+import forge.game.player.PlayerType;
 import forge.gui.SOverlayUtils;
-import forge.gui.match.CMatchUI;
 
 /**
  * <p>
@@ -158,10 +159,15 @@ public class GauntletMini {
             @Override
 
             public Object doInBackground() {
-                CMatchUI.SINGLETON_INSTANCE.initMatch(null);
-                Singletons.getModel().getMatchState().setGameType(gauntletType);
-                GameNew.newGame( new PlayerStartsGame(AllZone.getHumanPlayer(), humanDeck),
-                                 new PlayerStartsGame(AllZone.getComputerPlayer(), aiDecks.get(currentRound)));
+                
+                MatchStartHelper starter = new MatchStartHelper();
+                Lobby lobby = Singletons.getControl().getLobby();
+                starter.addPlayer(lobby.findLocalPlayer(PlayerType.HUMAN), humanDeck);
+                starter.addPlayer(lobby.findLocalPlayer(PlayerType.COMPUTER), aiDecks.get(currentRound));
+                
+                MatchController mc = Singletons.getModel().getMatch(); 
+                mc.initMatch(gauntletType, starter.getPlayerMap());
+                mc.startRound();   
                 return null;
             }
 

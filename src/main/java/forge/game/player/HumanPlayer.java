@@ -29,6 +29,8 @@ import forge.control.input.Input;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
+import forge.quest.QuestController;
+import forge.quest.bazaar.QuestItemType;
 
 /**
  * <p>
@@ -48,24 +50,8 @@ public class HumanPlayer extends Player {
      * @param myName
      *            a {@link java.lang.String} object.
      */
-    public HumanPlayer(final String myName) {
-        this(myName, 20, 0);
-    }
-
-    /**
-     * <p>
-     * Constructor for HumanPlayer.
-     * </p>
-     * 
-     * @param myName
-     *            a {@link java.lang.String} object.
-     * @param myLife
-     *            a int.
-     * @param myPoisonCounters
-     *            a int.
-     */
-    public HumanPlayer(final String myName, final int myLife, final int myPoisonCounters) {
-        super(myName, myLife, myPoisonCounters);
+    public HumanPlayer(final LobbyPlayer player) {
+        super(player);
     }
 
     // //////////////
@@ -222,4 +208,15 @@ public class HumanPlayer extends Player {
         return PlayerType.HUMAN;
     }
 
+    @Override
+    public final int doMulligan() {
+        int newHand = super.doMulligan();
+        final QuestController quest = Singletons.getModel().getQuest();
+        if (quest.isLoaded() && quest.getAssets().hasItem(QuestItemType.SLEIGHT) && (getStats().getMulliganCount() == 1)) {
+            drawCard();
+            newHand++;
+            getStats().notifyOpeningHandSize(newHand);
+        }
+        return newHand;
+    }
 } // end HumanPlayer class

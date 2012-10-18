@@ -21,10 +21,6 @@ package forge.game;
  * The Enum GameLossReason.
  */
 public enum GameLossReason {
-
-    /** The Did not lose yet. */
-    DidNotLoseYet, // a winner must have this status by the end of the game
-
     /** The Conceded. */
     Conceded, // rule 104.3a
     /** The Life reached zero. */
@@ -36,7 +32,9 @@ public enum GameLossReason {
 
     // 104.3e and others
     /** The Spell effect. */
-    SpellEffect
+    SpellEffect, 
+    
+    OpponentWon
 
     /*
      * DoorToNothingness, // Door To Nothingness's ability activated

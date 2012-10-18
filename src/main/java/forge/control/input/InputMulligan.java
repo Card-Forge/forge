@@ -30,8 +30,6 @@ import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
-import forge.game.GamePlayerRating;
-import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseUtil;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -41,8 +39,6 @@ import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.VMatchUI;
 import forge.gui.match.views.VMessage;
-import forge.quest.QuestController;
-import forge.quest.bazaar.QuestItemType;
 import forge.view.ButtonUtil;
  /**
   * <p>
@@ -56,7 +52,6 @@ public class InputMulligan extends Input {
     /** Constant <code>serialVersionUID=-8112954303001155622L</code>. */
     private static final long serialVersionUID = -8112954303001155622L;
 
-    private static final int MAGIC_NUMBER_OF_SHUFFLES = 100;
     private static final int AI_MULLIGAN_THRESHOLD = 5;
 
     /** {@inheritDoc} */
@@ -67,7 +62,7 @@ public class InputMulligan extends Input {
         VMatchUI.SINGLETON_INSTANCE.getBtnCancel().setText("Yes");
 
         final String str =
-                (Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().equals(AllZone.getHumanPlayer())
+                (Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().equals(Singletons.getControl().getPlayer())
                         ? "You're going first. " : "The computer is going first. ");
         CMatchUI.SINGLETON_INSTANCE.showMessage(str + "Do you want to Mulligan?");
     }
@@ -78,82 +73,48 @@ public class InputMulligan extends Input {
         this.end();
     }
 
-    /**
-     * 
-     * TODO Write javadoc for this method.
-     * 
-     * @param player
-     *            a Player object
-     * @param playerRating
-     *            a GamePlayerRating object
-     * @return an int
-     */
-    public final int doMulligan(final Player player, final GamePlayerRating playerRating) {
-        final List<Card> hand = player.getCardsIn(ZoneType.Hand);
-        for (final Card c : hand) {
-            Singletons.getModel().getGameAction().moveToLibrary(c);
-        }
-        for (int i = 0; i < InputMulligan.MAGIC_NUMBER_OF_SHUFFLES; i++) {
-            player.shuffle();
-        }
-        final int newHand = hand.size() - 1;
-        for (int i = 0; i < newHand; i++) {
-            player.drawCard();
-        }
-        AllZone.getGameLog().add("Mulligan", player + " has mulliganed down to " + newHand + " cards.", 0);
-        playerRating.notifyHasMulliganed();
-        playerRating.notifyOpeningHandSize(newHand);
-        return newHand;
-    }
+
 
     /** {@inheritDoc} */
     @Override
     public final void selectButtonCancel() {
-        final Player humanPlayer = AllZone.getHumanPlayer();
-        final GamePlayerRating humanRating = Singletons.getModel().getGameSummary().getPlayerRating(humanPlayer.getName());
+        final Player humanPlayer = Singletons.getControl().getPlayer();
+        
 
-        final int newHand = this.doMulligan(humanPlayer, humanRating);
-
-        final QuestController quest = Singletons.getModel().getQuest();
-        if (quest.isLoaded() && quest.getAssets().hasItem(QuestItemType.SLEIGHT) && (humanRating.getMulliganCount() == 1)) {
-            AllZone.getHumanPlayer().drawCard();
-            humanRating.notifyOpeningHandSize(newHand + 1);
-        }
+        final int newHand = humanPlayer.doMulligan();
 
         if (newHand == 0) {
             this.end();
         }
     } // selectButtonOK()
 
-    /**
-     * <p>
-     * end.
-     * </p>
-     */
     final void end() {
         // Computer mulligan
-        final GameAction ga = Singletons.getModel().getGameAction();
-        final Player aiPlayer = AllZone.getComputerPlayer();
-        final GamePlayerRating aiRating = Singletons.getModel().getGameSummary().getPlayerRating(aiPlayer.getName());
-        boolean aiTakesMulligan = true;
 
-        // Computer mulligans if there are no cards with converted mana cost of
-        // 0 in its hand
-        while (aiTakesMulligan) {
-
-            final List<Card> handList = aiPlayer.getCardsIn(ZoneType.Hand);
-            final boolean hasLittleCmc0Cards = CardLists.getValidCards(handList, "Card.cmcEQ0", aiPlayer, null).size() < 2;
-            aiTakesMulligan = (handList.size() > InputMulligan.AI_MULLIGAN_THRESHOLD) && hasLittleCmc0Cards;
-
-            if (aiTakesMulligan) {
-                this.doMulligan(aiPlayer, aiRating);
+        for (Player ai : Singletons.getModel().getGameState().getPlayers()) {
+            if ( ai.isHuman() ) continue;
+            
+            boolean aiTakesMulligan = true;
+    
+            // Computer mulligans if there are no cards with converted mana cost of
+            // 0 in its hand
+            while (aiTakesMulligan) {
+    
+                final List<Card> handList = ai.getCardsIn(ZoneType.Hand);
+                final boolean hasLittleCmc0Cards = CardLists.getValidCards(handList, "Card.cmcEQ0", ai, null).size() < 2;
+                aiTakesMulligan = (handList.size() > InputMulligan.AI_MULLIGAN_THRESHOLD) && hasLittleCmc0Cards;
+    
+                if (aiTakesMulligan) {
+                    ai.doMulligan();
+                }
             }
         }
 
         // Human Leylines & Chancellors
         ButtonUtil.reset();
         final AbilityFactory af = new AbilityFactory();
-        
+
+        final GameAction ga = Singletons.getModel().getGameAction();
         for (Player p : Singletons.getModel().getGameState().getPlayers()) {
             final List<Card> openingHand = p.getCardsIn(ZoneType.Hand);
     
@@ -210,7 +171,7 @@ public class InputMulligan extends Input {
         //ga.checkStateEffects();
 
         ga.checkStateEffects();
-        PhaseHandler.setGameBegins(1);
+
         AllZone.getGameLog().add("Turn",
                 "Turn " + Singletons.getModel().getGameState().getPhaseHandler().getTurn()
                     + " (" + Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn() + ")",

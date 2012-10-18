@@ -26,9 +26,9 @@ import javax.swing.SwingConstants;
 
 import forge.AllZone;
 import forge.Singletons;
+import forge.game.MatchController;
 import forge.game.limited.GauntletMini;
 import forge.gui.toolbox.FSkin;
-import forge.model.FMatchState;
 
 /**
  * The Win/Lose handler for 'gauntlet' type tournament
@@ -47,7 +47,7 @@ public class GauntletWinLose extends ControlWinLose {
 
     private JLabel lblTemp1;
     private JLabel lblTemp2;
-    private final FMatchState matchState;
+    private final MatchController matchState;
 
     /**
      * Instantiates a new gauntlet win/lose handler.
@@ -58,8 +58,8 @@ public class GauntletWinLose extends ControlWinLose {
         super(view0);
         this.view = view0;
         gauntlet = AllZone.getGauntlet();
-        matchState = Singletons.getModel().getMatchState();
-        this.wonMatch = matchState.isMatchWonBy(AllZone.getHumanPlayer());
+        matchState = Singletons.getModel().getMatch();
+        this.wonMatch = matchState.isWonBy(Singletons.getControl().getPlayer().getLobbyPlayer());
     }
 
 
@@ -82,7 +82,7 @@ public class GauntletWinLose extends ControlWinLose {
 
 
 
-        if (Singletons.getModel().getMatchState().hasWonLastGame(AllZone.getHumanPlayer().getName())) {
+        if (Singletons.getModel().getMatch().getLastGameOutcome().isWinner(Singletons.getControl().getPlayer().getLobbyPlayer())) {
             gauntlet.addWin();
         }
         else {

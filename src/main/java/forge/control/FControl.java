@@ -35,6 +35,7 @@ import forge.AllZone;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
 import forge.game.player.Player;
+import forge.game.player.PlayerType;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.VDeckEditorUI;
 import forge.gui.framework.SOverflowUtil;
@@ -49,6 +50,7 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
+import forge.util.Aggregates;
 import forge.view.FView;
 
 /**
@@ -273,6 +275,20 @@ public enum FControl {
 
     /** @return {@link forge.game.player.Player} */
     public Player getPlayer() {
-        return AllZone.getHumanPlayer();
+        if (Singletons.getModel() == null) 
+            return null;
+
+        return Aggregates.firstFieldEquals(Singletons.getModel().getGameState().getPlayers(), Player.Accessors.FN_GET_TYPE, PlayerType.HUMAN);
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    private Lobby lobby = null;
+    public Lobby getLobby() {
+        if( lobby == null )
+            lobby = new Lobby();
+        return lobby;
     }
 }

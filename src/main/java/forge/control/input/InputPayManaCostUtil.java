@@ -37,7 +37,6 @@ import forge.card.mana.ManaPool;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
-import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -418,7 +417,7 @@ public class InputPayManaCostUtil {
             public void selectButtonCancel() {
                 this.stop();
                 payment.cancelCost();
-                AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
+                Singletons.getControl().getPlayer().getZone(ZoneType.Battlefield).updateObservers();
             }
     
             @Override
@@ -470,7 +469,7 @@ public class InputPayManaCostUtil {
             final int manaToAdd) {
         final ManaCost manaCost;
     
-        if (PhaseHandler.getGameBegins() == 1) {
+        if (Singletons.getModel().getGameState() != null ) {
             final String mana = costMana.getManaToPay();
             manaCost = new ManaCost(mana);
             manaCost.increaseColorlessMana(manaToAdd);
@@ -574,7 +573,7 @@ public class InputPayManaCostUtil {
                 this.stop();
                 this.resetManaCost();
                 payment.cancelCost();
-                AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
+                Singletons.getControl().getPlayer().getZone(ZoneType.Battlefield).updateObservers();
             }
     
             @Override

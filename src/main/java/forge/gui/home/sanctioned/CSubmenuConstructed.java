@@ -17,19 +17,18 @@ import javax.swing.SwingWorker;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
+import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.deck.DeckgenUtil;
 import forge.deck.generate.GenerateThemeDeck;
-import forge.game.GameNew;
 import forge.game.GameType;
-import forge.game.PlayerStartsGame;
+import forge.game.MatchController;
+import forge.game.MatchStartHelper;
 import forge.game.player.PlayerType;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
-import forge.gui.match.CMatchUI;
 import forge.gui.toolbox.ExperimentalLabel;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -319,13 +318,15 @@ public enum CSubmenuConstructed implements ICDoc {
                 Deck humanDeck = generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstUserDecks(), PlayerType.HUMAN);
                 Deck aiDeck = generateDeck(VSubmenuConstructed.SINGLETON_INSTANCE.getLstDecksAI(), PlayerType.COMPUTER);
 
-                CMatchUI.SINGLETON_INSTANCE.initMatch(null);
-                Singletons.getModel().getMatchState().setGameType(GameType.Constructed);
-
-                if (humanDeck != null && aiDeck != null) {
-                    GameNew.newGame(new PlayerStartsGame(AllZone.getHumanPlayer(), humanDeck),
-                                     new PlayerStartsGame(AllZone.getComputerPlayer(), aiDeck));
-                }
+                MatchStartHelper starter = new MatchStartHelper();
+                Lobby lobby = Singletons.getControl().getLobby();
+                starter.addPlayer(lobby.findLocalPlayer(PlayerType.HUMAN), humanDeck);
+                starter.addPlayer(lobby.findLocalPlayer(PlayerType.COMPUTER), aiDeck);
+                
+                MatchController mc = Singletons.getModel().getMatch(); 
+                mc.initMatch(GameType.Constructed, starter.getPlayerMap());
+                mc.startRound();
+                
                 return null;
             }
 

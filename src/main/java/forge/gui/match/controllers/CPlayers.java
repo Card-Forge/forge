@@ -1,7 +1,8 @@
 package forge.gui.match.controllers;
 
-import forge.AllZone;
 import forge.Command;
+import forge.Singletons;
+import forge.game.player.Player;
 import forge.gui.framework.ICDoc;
 import forge.gui.match.views.VPlayers;
 
@@ -35,8 +36,9 @@ public enum CPlayers implements ICDoc {
      */
     @Override
     public void update() {
-        VPlayers.SINGLETON_INSTANCE.updatePlayerLabels(AllZone.getComputerPlayer());
-        VPlayers.SINGLETON_INSTANCE.updatePlayerLabels(AllZone.getHumanPlayer());
+        for(Player p : Singletons.getModel().getGameState().getPlayers())
+            VPlayers.SINGLETON_INSTANCE.updatePlayerLabels(p);
+        
         VPlayers.SINGLETON_INSTANCE.updateStormLabel();
     }
 

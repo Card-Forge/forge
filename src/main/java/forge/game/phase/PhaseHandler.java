@@ -19,7 +19,6 @@ package forge.game.phase;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Observer;
 import java.util.Stack;
 
 import com.esotericsoftware.minlog.Log;
@@ -53,26 +52,38 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     /** Constant <code>serialVersionUID=5207222278370963197L</code>. */
     private static final long serialVersionUID = 5207222278370963197L;
 
-    private int phaseIndex;
-    private int turn;
-
-    // Please use getX, setX, and incrementX methods instead of directly
-    // accessing the following:
-    /** Constant <code>GameBegins=0</code>. */
-    private static int gameBegins = 0;
+    private int phaseIndex = 0;
+    private int turn = 1;
 
     private final Stack<ExtraTurn> extraTurns = new Stack<ExtraTurn>();
 
-    private int extraCombats;
+    private int extraCombats = 0;
 
-    private int nCombatsThisTurn;
-    private boolean bPreventCombatDamageThisTurn;
+    private int nCombatsThisTurn = 0;
+    private boolean bPreventCombatDamageThisTurn  = false;
 
-    private Player playerTurn = AllZone.getHumanPlayer();
+    private Player playerTurn = null;
 
-    private Player skipToTurn = AllZone.getHumanPlayer();
+    private Player skipToTurn = null;
     private PhaseType skipToPhase = PhaseType.CLEANUP;
     private boolean autoPass = false;
+
+    // priority player
+    
+    private Player pPlayerPriority = null;
+    private Player pFirstPriority = null;
+    private boolean bPhaseEffects = true;
+    private boolean bSkipPhase = true;
+    private boolean bCombat = false;
+    private boolean bRepeat = false;
+
+    /** The need to next phase. */
+    private boolean needToNextPhase = false;
+
+    // This should only be true four times! that is for the initial nextPhases
+    // in MyObservable
+    /** The need to next phase init. */
+    private int needToNextPhaseInit = 0;
 
     /**
      * <p>
@@ -112,8 +123,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
     // priority player
 
-    private Player pPlayerPriority = AllZone.getHumanPlayer();
-
     /**
      * <p>
      * getPriorityPlayer.
@@ -136,8 +145,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     public final void setPriorityPlayer(final Player p) {
         this.pPlayerPriority = p;
     }
-
-    private Player pFirstPriority = AllZone.getHumanPlayer();
 
     /**
      * <p>
@@ -188,8 +195,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         this.setPriority(this.playerTurn);
     }
 
-    private boolean bPhaseEffects = true;
-
     /**
      * <p>
      * doPhaseEffects.
@@ -212,8 +217,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     public final void setPhaseEffects(final boolean b) {
         this.bPhaseEffects = b;
     }
-
-    private boolean bSkipPhase = true;
 
     /**
      * <p>
@@ -238,8 +241,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         this.bSkipPhase = b;
     }
 
-    private boolean bCombat = false;
-
     /**
      * <p>
      * inCombat.
@@ -263,8 +264,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         this.bCombat = b;
     }
 
-    private boolean bRepeat = false;
-
     /**
      * <p>
      * repeatPhase.
@@ -272,38 +271,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      */
     public final void repeatPhase() {
         this.bRepeat = true;
-    }
-
-    /**
-     * <p>
-     * Constructor for PhaseHandler.
-     * </p>
-     */
-    public PhaseHandler() {
-        this.reset();
-    }
-
-    /**
-     * <p>
-     * reset.
-     * </p>
-     */
-    public final void reset() {
-        this.turn = 1;
-        this.playerTurn = AllZone.getHumanPlayer();
-        this.resetPriority();
-        this.bPhaseEffects = true;
-        this.needToNextPhase = false;
-        PhaseHandler.setGameBegins(0);
-        this.phaseIndex = 0;
-        this.extraTurns.clear();
-        this.nCombatsThisTurn = 0;
-        this.extraCombats = 0;
-        this.bPreventCombatDamageThisTurn = false;
-        this.bCombat = false;
-        this.bRepeat = false;
-        this.autoPass = false;
-        this.updateObservers();
     }
 
     /**
@@ -902,15 +869,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         }
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public final void addObserver(final Observer o) {
-        super.addObserver(o);
-    }
-
-    /** The need to next phase. */
-    private boolean needToNextPhase = false;
-
     /**
      * <p>
      * Setter for the field <code>needToNextPhase</code>.
@@ -933,11 +891,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     public final boolean isNeedToNextPhase() {
         return this.needToNextPhase;
     }
-
-    // This should only be true four times! that is for the initial nextPhases
-    // in MyObservable
-    /** The need to next phase init. */
-    private int needToNextPhaseInit = 0;
 
     /**
      * <p>
@@ -996,31 +949,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         //System.out.println("now.getPhase().isMain() - " + now.getPhase().isMain());
         //System.out.println("onlyThis - " + onlyThis);
         return now.isPlayerTurn(player) && now.getPhase().isMain() && onlyThis;
-    }
-
-
-
-    /**
-     * <p>
-     * setGameBegins.
-     * </p>
-     * 
-     * @param gameBegins
-     *            a int.
-     */
-    public static void setGameBegins(final int gameBegins) {
-        PhaseHandler.gameBegins = gameBegins;
-    }
-
-    /**
-     * <p>
-     * getGameBegins.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public static int getGameBegins() {
-        return PhaseHandler.gameBegins;
     }
 
     // this is a hack for the setup game state mode, do not use outside of

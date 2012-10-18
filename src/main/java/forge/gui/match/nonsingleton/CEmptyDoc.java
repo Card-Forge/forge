@@ -30,5 +30,4 @@ public class CEmptyDoc implements ICDoc {
     @Override
     public void update() {
     }
-
 }
