@@ -5,7 +5,7 @@ Text:no text
 PT:6/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ Whenever CARDNAME attacks or blocks, sacrifice a land.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigSac | Secondary$ True | TriggerDescription$ Whenever CARDNAME attacks or blocks, sacrifice a land.
-SVar:TrigSac:AB$Sacrifice | Cost$ 0 | SacValid$ Land | ChangeNum$ 1
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Land
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lesser_gargadon.jpg
 SetInfo:PCY|Uncommon|http://magiccards.info/scans/en/pr/97.jpg

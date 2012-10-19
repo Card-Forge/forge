@@ -397,6 +397,7 @@ public final class GameActionUtil {
                     p.payLife(amount, null);
                 } else {
                     hasPaid = false;
+                    break;
                 }
                 remainingParts.remove(part);
             }
@@ -410,6 +411,7 @@ public final class GameActionUtil {
                     p.addDamage(amount, source);
                 } else {
                     hasPaid = false;
+                    break;
                 }
                 remainingParts.remove(part);
             }
@@ -428,22 +430,50 @@ public final class GameActionUtil {
                         hasPaid = false;
                         Singletons.getModel().getGameState().getGameLog().add("ResolveStack", "Trying to pay upkeep for " + source + " but it can't have "
                         + counterType.getName() + " counters put on it.", 2);
+                        break;
                     }
                 } else {
                     hasPaid = false;
+                    break;
                 }
                 remainingParts.remove(part);
             }
-            if (part instanceof CostExile && "All".equals(part.getType())) {
+            else if (part instanceof CostExile) {
                 Player p = Singletons.getControl().getPlayer();
-                if (showYesNoDialog(source, "Do you want to exile all cards in your graveyard?")) {
-                    for (final Card card : p.getCardsIn(ZoneType.Graveyard)) {
-                        Singletons.getModel().getGameAction().exile(card);
+                if ("All".equals(part.getType())) {
+                    if (showYesNoDialog(source, "Do you want to exile all cards in your graveyard?")) {
+                        for (final Card card : p.getCardsIn(ZoneType.Graveyard)) {
+                            Singletons.getModel().getGameAction().exile(card);
+                        }
+                    } else {
+                        hasPaid = false;
+                        break;
                     }
+                    remainingParts.remove(part);
                 } else {
-                    hasPaid = false;
+                    CostExile costExile = (CostExile) part;
+                    ZoneType from = costExile.getFrom();
+                    List<Card> list = p.getCardsIn(from);
+                    list = CardLists.getValidCards(list, part.getType().split(";"), p, source);
+                    final int nNeeded = AbilityFactory.calculateAmount(source, part.getAmount(), ability);
+                    if (list.size() >= nNeeded) {
+                        for (int i = 0; i < nNeeded; i++) {
+
+                            final Card c = GuiChoose.oneOrNone("Exile from " + from, list);
+
+                            if (c != null) {
+                                list.remove(c);
+                                Singletons.getModel().getGameAction().exile(c);
+                            } else {
+                                hasPaid = false;
+                                break;
+                            }
+                        }
+                    } else {
+                        hasPaid = false;
+                        break;
+                    }
                 }
-                remainingParts.remove(part);
             }
         }
         if (!hasPaid) {
