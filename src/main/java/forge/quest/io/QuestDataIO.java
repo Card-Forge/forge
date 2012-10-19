@@ -185,7 +185,7 @@ public class QuestDataIO {
         final int saveVersion = newData.getVersionNumber();
 
         if (saveVersion < 3) {
-            QuestDataIO.setFinalField(QuestData.class, "assets", newData, new QuestAssets());
+            QuestDataIO.setFinalField(QuestData.class, "assets", newData, new QuestAssets(null));
 
             final int diffIdx = Integer.parseInt(document.getElementsByTagName("diffIndex").item(0).getTextContent());
             QuestDataIO.setFinalField(QuestData.class, "achievements", newData, new QuestAchievements(diffIdx));

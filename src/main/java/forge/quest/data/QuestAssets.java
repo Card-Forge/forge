@@ -165,10 +165,14 @@ public class QuestAssets {
     /**
      * Instantiates a new quest assets.
      */
-    public QuestAssets() {
+    public QuestAssets(GameFormatQuest useFormat) {
         final QuestPreferences prefs = Singletons.getModel().getQuestPreferences();
+        int snowLands = prefs.getPreferenceInt(QPref.STARTING_SNOW_LANDS);
+        if (useFormat != null && !useFormat.hasSnowLands()) {
+            snowLands = 0;
+        }
         final ItemPoolView<CardPrinted> lands = QuestUtilCards.generateBasicLands(
-                prefs.getPreferenceInt(QPref.STARTING_BASIC_LANDS), prefs.getPreferenceInt(QPref.STARTING_SNOW_LANDS));
+                prefs.getPreferenceInt(QPref.STARTING_BASIC_LANDS), snowLands);
         this.getCardPool().addAll(lands);
     }
 

@@ -82,7 +82,7 @@ public final class QuestData {
         }
         this.mode = mode2;
         this.achievements = new QuestAchievements(diff);
-        this.assets = new QuestAssets();
+        this.assets = new QuestAssets(format);
     }
 
     /**
