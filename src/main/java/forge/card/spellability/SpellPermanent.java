@@ -98,7 +98,7 @@ public class SpellPermanent extends Spell {
 
             final List<Card> creature = SpellPermanent.this.championGetCreature.get();
             if (creature.size() == 0) {
-                Singletons.getModel().getGameAction().sacrifice(source, null);
+                Singletons.getModel().getGame().getAction().sacrifice(source, null);
                 return;
             } else if (controller.isHuman()) {
                 Singletons.getModel().getMatch().getInput().setInput(SpellPermanent.this.championInputComes);
@@ -112,16 +112,16 @@ public class SpellPermanent extends Spell {
                     final Card c = computer.get(0);
                     source.setChampionedCard(c);
                     if (c.isInPlay()) {
-                        Singletons.getModel().getGameAction().exile(c);
+                        Singletons.getModel().getGame().getAction().exile(c);
                     }
 
                     // Run triggers
                     final HashMap<String, Object> runParams = new HashMap<String, Object>();
                     runParams.put("Card", source);
                     runParams.put("Championed", source.getChampionedCard());
-                    Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.Championed, runParams);
+                    Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Championed, runParams);
                 } else {
-                    Singletons.getModel().getGameAction().sacrifice(this.getSourceCard(), null);
+                    Singletons.getModel().getGame().getAction().sacrifice(this.getSourceCard(), null);
                 }
             } // computer
         } // resolve()
@@ -138,7 +138,7 @@ public class SpellPermanent extends Spell {
             sb.append(SpellPermanent.this.getSourceCard()).append(
                     " - When CARDNAME enters the battlefield, sacrifice it unless you exile a creature you control.");
             SpellPermanent.this.championAbilityComes.setStackDescription(sb.toString());
-            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(SpellPermanent.this.championAbilityComes);
+            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(SpellPermanent.this.championAbilityComes);
         } // execute()
     }; // championCommandComes
 
@@ -154,8 +154,8 @@ public class SpellPermanent extends Spell {
                 @Override
                 public void resolve() {
                     final Card c = this.getSourceCard().getChampionedCard();
-                    if ((c != null) && !c.isToken() && Singletons.getModel().getGameState().isCardExiled(c)) {
-                        Singletons.getModel().getGameAction().moveToPlay(c);
+                    if ((c != null) && !c.isToken() && Singletons.getModel().getGame().isCardExiled(c)) {
+                        Singletons.getModel().getGame().getAction().moveToPlay(c);
                     }
                 } // resolve()
             }; // SpellAbility
@@ -165,7 +165,7 @@ public class SpellPermanent extends Spell {
                     " - When CARDNAME leaves the battlefield, exiled card returns to the battlefield.");
             ability.setStackDescription(sb.toString());
 
-            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
         } // execute()
     }; // championCommandLeavesPlay
 
@@ -263,7 +263,7 @@ public class SpellPermanent extends Spell {
     public boolean canPlay() {
         final Card source = this.getSourceCard();
 
-        final Player turn = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player turn = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
 
         if (source.getName().equals("Serra Avenger")) {
             if (turn.equals(source.getController()) && (turn.getTurn() <= 3)) {
@@ -291,21 +291,21 @@ public class SpellPermanent extends Spell {
             card.setSVar("PayX", Integer.toString(xPay));
         }
         // Wait for Main2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.MAIN1)
+        if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.MAIN1)
                 && !ComputerUtil.castPermanentInMain1(this, ai)) {
             return false;
         }
         // save cards with flash for surprise blocking
         if (card.hasKeyword("Flash")
                 && !ComputerAIGeneral.hasETBTrigger(card)
-                && (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(ai)
-                     || Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))) {
+                && (Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai)
+                     || Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))) {
             return false;
         }
         // Prevent the computer from summoning Ball Lightning type creatures after attacking
         if (card.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")
-                && (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(ai.getOpponent())
-                     || Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS))) {
+                && (Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai.getOpponent())
+                     || Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS))) {
             return false;
         }
 
@@ -349,7 +349,7 @@ public class SpellPermanent extends Spell {
         }
         
         // check on legendary
-        if (card.isType("Legendary") && !Singletons.getModel().getGameState().isCardInPlay("Mirror Gallery")) {
+        if (card.isType("Legendary") && !Singletons.getModel().getGame().isCardInPlay("Mirror Gallery")) {
             final List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
             if (Iterables.any(list, CardPredicates.nameEquals(card.getName()))) {
                 return false;
@@ -410,7 +410,7 @@ public class SpellPermanent extends Spell {
 
     private static boolean checkETBEffects(final Card card, final SpellAbility sa, final String api, final Player ai) {
 
-        if (card.isCreature() && Singletons.getModel().getGameState().isCardInPlay("Torpor Orb")) {
+        if (card.isCreature() && Singletons.getModel().getGame().isCardInPlay("Torpor Orb")) {
             return true;
         }
 
@@ -584,6 +584,6 @@ public class SpellPermanent extends Spell {
     public void resolve() {
         Card c = this.getSourceCard();
         c.addController(this.getActivatingPlayer());
-        Singletons.getModel().getGameAction().moveTo(ZoneType.Battlefield, c);
+        Singletons.getModel().getGame().getAction().moveTo(ZoneType.Battlefield, c);
     }
 }

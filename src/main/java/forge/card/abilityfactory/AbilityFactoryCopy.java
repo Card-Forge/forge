@@ -260,7 +260,7 @@ public final class AbilityFactoryCopy {
         // TODO - I'm sure someone can do this AI better
 
         final HashMap<String, String> params = af.getMapParams();
-        if (params.containsKey("AtEOT") && !Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.MAIN1)) {
+        if (params.containsKey("AtEOT") && !Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.MAIN1)) {
             return false;
         } else {
             double chance = .4; // 40 percent chance with instant speed stuff
@@ -305,7 +305,7 @@ public final class AbilityFactoryCopy {
         final Target abTgt = sa.getTarget();
 
         if (abTgt != null) {
-            List<Card> list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+            List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
             list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
             list = CardLists.getTargetableCards(list, sa);
             abTgt.resetTargets();
@@ -462,7 +462,7 @@ public final class AbilityFactoryCopy {
                     if (c.isFaceDown()) {
                         c.setState(CardCharacteristicName.FaceDown);
                     }
-                    copy = Singletons.getModel().getGameAction().moveToPlay(copy);
+                    copy = Singletons.getModel().getGame().getAction().moveToPlay(copy);
 
                     copy.setCloneOrigin(hostCard);
                     sa.getSourceCard().addClone(copy);
@@ -489,9 +489,9 @@ public final class AbilityFactoryCopy {
                                 if (params.get("AtEOT").equals("Sacrifice")) {
                                     // maybe do a setSacrificeAtEOT, but
                                     // probably not.
-                                    Singletons.getModel().getGameAction().sacrifice(target[index], sa);
+                                    Singletons.getModel().getGame().getAction().sacrifice(target[index], sa);
                                 } else if (params.get("AtEOT").equals("Exile")) {
-                                    Singletons.getModel().getGameAction().exile(target[index]);
+                                    Singletons.getModel().getGame().getAction().exile(target[index]);
                                 }
 
                             }
@@ -504,11 +504,11 @@ public final class AbilityFactoryCopy {
                         @Override
                         public void execute() {
                             sac.setStackDescription(params.get("AtEOT") + " " + target[index] + ".");
-                            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(sac);
+                            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(sac);
                         }
                     }; // Command
                     if (params.containsKey("AtEOT")) {
-                        Singletons.getModel().getGameState().getEndOfTurn().addAt(atEOT);
+                        Singletons.getModel().getGame().getEndOfTurn().addAt(atEOT);
                     }
                     // end copied Kiki code
 

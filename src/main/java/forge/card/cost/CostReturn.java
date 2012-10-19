@@ -131,7 +131,7 @@ public class CostReturn extends CostPartWithList {
     @Override
     public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         for (final Card c : this.getList()) {
-            Singletons.getModel().getGameAction().moveToHand(c);
+            Singletons.getModel().getGame().getAction().moveToHand(c);
         }
     }
 
@@ -247,7 +247,7 @@ public class CostReturn extends CostPartWithList {
                 if (this.typeList.contains(card)) {
                     this.nReturns++;
                     part.addToList(card);
-                    Singletons.getModel().getGameAction().moveToHand(card);
+                    Singletons.getModel().getGame().getAction().moveToHand(card);
                     this.typeList.remove(card);
                     // in case nothing else to return
                     if (this.nReturns == nNeeded) {
@@ -306,7 +306,7 @@ public class CostReturn extends CostPartWithList {
                             possibleValues[0]);
                     if (choice.equals(0)) {
                         part.addToList(card);
-                        Singletons.getModel().getGameAction().moveToHand(card);
+                        Singletons.getModel().getGame().getAction().moveToHand(card);
                         this.stop();
                         part.addListToHash(sa, "Returned");
                         payment.paidCost(part);

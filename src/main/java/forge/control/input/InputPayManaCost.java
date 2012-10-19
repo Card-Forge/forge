@@ -74,16 +74,16 @@ public class InputPayManaCost extends InputMana {
 
         this.spell = sa;
 
-        if (Singletons.getModel().getGameState() != null) {
+        if (Singletons.getModel().getGame() != null) {
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
                 if (this.spell.getAfterPayMana() != null) {
                     this.stopSetNext(this.spell.getAfterPayMana());
                 } else {
                     this.manaCost = new ManaCost("0");
-                    Singletons.getModel().getGameState().getStack().add(this.spell);
+                    Singletons.getModel().getGame().getStack().add(this.spell);
                 }
             } else {
-                this.manaCost = Singletons.getModel().getGameAction().getSpellCostChange(sa, new ManaCost(this.originalManaCost));
+                this.manaCost = Singletons.getModel().getGame().getAction().getSpellCostChange(sa, new ManaCost(this.originalManaCost));
             }
         } else {
             this.manaCost = new ManaCost(sa.getManaCost());
@@ -119,13 +119,13 @@ public class InputPayManaCost extends InputMana {
 
         this.spell = sa;
 
-        if (Singletons.getModel().getGameState() != null ) {
+        if (Singletons.getModel().getGame() != null ) {
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
                 if (this.spell.getAfterPayMana() != null) {
                     this.stopSetNext(this.spell.getAfterPayMana());
                 } else {
                     this.manaCost = new ManaCost("0");
-                    Singletons.getModel().getGameState().getStack().add(this.spell);
+                    Singletons.getModel().getGame().getStack().add(this.spell);
                 }
             } else {
                 this.manaCost = manaCostToPay;
@@ -216,7 +216,7 @@ public class InputPayManaCost extends InputMana {
             // if this is a spell, move it to the Stack ZOne
 
             if (this.spell.isSpell()) {
-                this.spell.setSourceCard(Singletons.getModel().getGameAction().moveToStack(this.originalCard));
+                this.spell.setSourceCard(Singletons.getModel().getGame().getAction().moveToStack(this.originalCard));
             }
 
             if (this.spell.getAfterPayMana() != null) {
@@ -225,7 +225,7 @@ public class InputPayManaCost extends InputMana {
                 if (this.skipStack) {
                     this.spell.resolve();
                 } else {
-                    Singletons.getModel().getGameState().getStack().add(this.spell);
+                    Singletons.getModel().getGame().getStack().add(this.spell);
                 }
                 Singletons.getModel().getMatch().getInput().resetInput();
             }
@@ -239,12 +239,12 @@ public class InputPayManaCost extends InputMana {
             // tapped for convoke)
 
             if (this.spell.getTappedForConvoke() != null) {
-                Singletons.getModel().getGameState().getTriggerHandler().suppressMode(TriggerType.Untaps);
+                Singletons.getModel().getGame().getTriggerHandler().suppressMode(TriggerType.Untaps);
                 for (final Card c : this.spell.getTappedForConvoke()) {
                     c.untap();
                     c.tap();
                 }
-                Singletons.getModel().getGameState().getTriggerHandler().clearSuppression(TriggerType.Untaps);
+                Singletons.getModel().getGame().getTriggerHandler().clearSuppression(TriggerType.Untaps);
                 this.spell.clearTappedForConvoke();
             }
         }
@@ -255,11 +255,11 @@ public class InputPayManaCost extends InputMana {
     public final void selectButtonCancel() {
         // If this is a spell with convoke, untap all creatures used for it.
         if (this.spell.getTappedForConvoke() != null) {
-            Singletons.getModel().getGameState().getTriggerHandler().suppressMode(TriggerType.Untaps);
+            Singletons.getModel().getGame().getTriggerHandler().suppressMode(TriggerType.Untaps);
             for (final Card c : this.spell.getTappedForConvoke()) {
                 c.untap();
             }
-            Singletons.getModel().getGameState().getTriggerHandler().clearSuppression(TriggerType.Untaps);
+            Singletons.getModel().getGame().getTriggerHandler().clearSuppression(TriggerType.Untaps);
             this.spell.clearTappedForConvoke();
         }
 

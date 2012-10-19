@@ -56,7 +56,7 @@ public class StaticEffects {
         }
         this.staticEffects = new ArrayList<StaticEffect>();
 
-        Singletons.getModel().getGameState().getTriggerHandler().cleanUpTemporaryTriggers();
+        Singletons.getModel().getGame().getTriggerHandler().cleanUpTemporaryTriggers();
     }
 
     /**
@@ -325,7 +325,7 @@ public class StaticEffects {
     public final void rePopulateStateBasedList() {
         this.reset();
 
-        final List<Card> cards = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+        final List<Card> cards = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
 
         Log.debug("== Start add state effects ==");
         for (int i = 0; i < cards.size(); i++) {

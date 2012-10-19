@@ -306,7 +306,7 @@ public final class AbilityFactoryReveal {
         }
 
         // Don't use draw abilities before main 2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !params.containsKey("ActivationPhases")
+        if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !params.containsKey("ActivationPhases")
                 && !params.containsKey("DestinationZone")) {
             return false;
         }
@@ -583,9 +583,9 @@ public final class AbilityFactoryReveal {
                         }
                         final PlayerZone zone = c.getOwner().getZone(destZone1);
                         if (zone.is(ZoneType.Library)) {
-                            Singletons.getModel().getGameAction().moveToLibrary(c, libraryPosition);
+                            Singletons.getModel().getGame().getAction().moveToLibrary(c, libraryPosition);
                         } else {
-                            c = Singletons.getModel().getGameAction().moveTo(zone, c);
+                            c = Singletons.getModel().getGame().getAction().moveTo(zone, c);
                             if (destZone1.equals(ZoneType.Battlefield)) {
                                 for (final String kw : keywords) {
                                     c.addExtrinsicKeyword(kw);
@@ -628,12 +628,12 @@ public final class AbilityFactoryReveal {
                                 } else {
                                     chosen = rest.get(0);
                                 }
-                                Singletons.getModel().getGameAction().moveToLibrary(chosen, libraryPosition2);
+                                Singletons.getModel().getGame().getAction().moveToLibrary(chosen, libraryPosition2);
                                 rest.remove(chosen);
                             }
                         } else { // Computer
                             for (int i = 0; i < rest.size(); i++) {
-                                Singletons.getModel().getGameAction().moveToLibrary(rest.get(i), libraryPosition2);
+                                Singletons.getModel().getGame().getAction().moveToLibrary(rest.get(i), libraryPosition2);
                             }
                         }
                     } else {
@@ -641,7 +641,7 @@ public final class AbilityFactoryReveal {
                         for (int i = 0; i < rest.size(); i++) {
                             Card c = rest.get(i);
                             final PlayerZone toZone = c.getOwner().getZone(destZone2);
-                            c = Singletons.getModel().getGameAction().moveTo(toZone, c);
+                            c = Singletons.getModel().getGame().getAction().moveTo(toZone, c);
                             if (destZone2.equals(ZoneType.Battlefield) && !keywords.isEmpty()) {
                                 for (final String kw : keywords) {
                                     c.addExtrinsicKeyword(kw);
@@ -668,7 +668,7 @@ public final class AbilityFactoryReveal {
      */
     private static List<Card> sharesNameWithCardOnBattlefield(final List<Card> list) {
         final List<Card> toReturn = new ArrayList<Card>();
-        final List<Card> play = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+        final List<Card> play = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         for (final Card c : list) {
             for (final Card p : play) {
                 if (p.getName().equals(c.getName()) && !toReturn.contains(c)) {
@@ -1056,9 +1056,9 @@ public final class AbilityFactoryReveal {
                         final Card c = itr.next();
                         if (params.containsKey("GainControl") && foundDest.equals(ZoneType.Battlefield)) {
                             c.addController(af.getHostCard());
-                            Singletons.getModel().getGameAction().moveTo(c.getController().getZone(foundDest), c);
+                            Singletons.getModel().getGame().getAction().moveTo(c.getController().getZone(foundDest), c);
                         } else {
-                            Singletons.getModel().getGameAction().moveTo(foundDest, c, foundLibPos);
+                            Singletons.getModel().getGame().getAction().moveTo(foundDest, c, foundLibPos);
                         }
                         revealed.remove(c);
                     }
@@ -1073,7 +1073,7 @@ public final class AbilityFactoryReveal {
                 final Iterator<Card> itr = revealed.iterator();
                 while (itr.hasNext()) {
                     final Card c = itr.next();
-                    Singletons.getModel().getGameAction().moveTo(revealedDest, c, revealedLibPos);
+                    Singletons.getModel().getGame().getAction().moveTo(revealedDest, c, revealedLibPos);
                 }
 
                 if (params.containsKey("Shuffle")) {
@@ -2055,7 +2055,7 @@ public final class AbilityFactoryReveal {
         List<Card> orderedCards = GuiChoose.getOrderChoices("Select order to Rearrange", "Top of Library", 0, topCards, null, src);
         for (int i = maxCards - 1; i >= 0; i--) {
             Card next = (Card) orderedCards.get(i);
-            Singletons.getModel().getGameAction().moveToLibrary(next, 0);
+            Singletons.getModel().getGame().getAction().moveToLibrary(next, 0);
         }
         if (mayshuffle) {
             if (GameActionUtil.showYesNoDialog(src, "Do you want to shuffle the library?")) {

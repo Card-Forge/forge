@@ -108,11 +108,11 @@ public class HumanPlayer extends Player {
 
                 // might have to make this more sophisticated
                 // dredge library, put card in hand
-                Singletons.getModel().getGameAction().moveToHand(c);
+                Singletons.getModel().getGame().getAction().moveToHand(c);
 
                 for (int i = 0; i < this.getDredgeNumber(c); i++) {
                     final Card c2 = getZone(ZoneType.Library).get(0);
-                    Singletons.getModel().getGameAction().moveToGraveyard(c2);
+                    Singletons.getModel().getGame().getAction().moveToGraveyard(c2);
                 }
                 dredged = true;
             } else {
@@ -160,7 +160,7 @@ public class HumanPlayer extends Player {
             final Card c = GuiChoose.oneOrNone("Put on bottom of library.", topN);
             if (c != null) {
                 topN.remove(c);
-                Singletons.getModel().getGameAction().moveToBottomOfLibrary(c);
+                Singletons.getModel().getGame().getAction().moveToBottomOfLibrary(c);
             } else {
                 // no card chosen for the bottom
                 break;
@@ -171,7 +171,7 @@ public class HumanPlayer extends Player {
             final Card c = GuiChoose.one("Put on top of library.", topN);
             if (c != null) {
                 topN.remove(c);
-                Singletons.getModel().getGameAction().moveToLibrary(c);
+                Singletons.getModel().getGame().getAction().moveToLibrary(c);
             }
             // no else - a card must have been chosen
         }
@@ -193,9 +193,9 @@ public class HumanPlayer extends Player {
         choice = GuiChoose.one(c.getName() + " - Top or bottom of Library", choices);
 
         if (choice.equals("bottom")) {
-            Singletons.getModel().getGameAction().moveToBottomOfLibrary(c);
+            Singletons.getModel().getGame().getAction().moveToBottomOfLibrary(c);
         } else {
-            Singletons.getModel().getGameAction().moveToLibrary(c);
+            Singletons.getModel().getGame().getAction().moveToLibrary(c);
         }
     }
 

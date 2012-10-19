@@ -47,6 +47,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.player.PlayerType;
 import forge.game.zone.PlayerZone;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
@@ -423,7 +424,7 @@ public class AbilityFactoryCounters {
         }
 
         // Don't use non P1P1/M1M1 counters before main 2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
+        if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && !params.containsKey("ActivationPhases")
                 && !(type.equals("P1P1") || type.equals("M1M1"))) {
             return false;
@@ -754,7 +755,7 @@ public class AbilityFactoryCounters {
                 if (max != -1) {
                     counterAmount = max - tgtCard.getCounters(Counters.valueOf(type));
                 }
-                final PlayerZone zone = Singletons.getModel().getGameState().getZoneOf(tgtCard);
+                final Zone zone = Singletons.getModel().getGame().getZoneOf(tgtCard);
                 if (zone == null) {
                     // Do nothing, token disappeared
                 } else if (zone.is(ZoneType.Battlefield)) {
@@ -1037,7 +1038,7 @@ public class AbilityFactoryCounters {
             return false;
         }
 
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
+        if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && !params.containsKey("ActivationPhases")
                 && !type.equals("M1M1")) {
             return false;
@@ -1175,7 +1176,7 @@ public class AbilityFactoryCounters {
         }
         for (final Card tgtCard : tgtCards) {
             if ((tgt == null) || tgtCard.canBeTargetedBy(sa)) {
-                final PlayerZone zone = Singletons.getModel().getGameState().getZoneOf(tgtCard);
+                final Zone zone = Singletons.getModel().getGame().getZoneOf(tgtCard);
                 if (params.get("CounterNum").equals("All")) {
                     counterAmount = tgtCard.getCounters(Counters.valueOf(type));
                 }
@@ -1524,7 +1525,7 @@ public class AbilityFactoryCounters {
     }
     
     private static void proliferateResolveHuman(final AbilityFactory af, final SpellAbility sa) {
-        final List<Card> unchosen = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+        final List<Card> unchosen = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         Singletons.getModel().getMatch().getInput().setInput(new Input() {
             private static final long serialVersionUID = -1779224307654698954L;
 
@@ -1540,7 +1541,7 @@ public class AbilityFactoryCounters {
                 // counters being put on. They used
                 // to wait for another priority passing after proliferate
                 // finished.
-                Singletons.getModel().getGameState().getStack().chooseOrderOfSimultaneousStackEntryAll();
+                Singletons.getModel().getGame().getStack().chooseOrderOfSimultaneousStackEntryAll();
                 this.stop();
             }
 
@@ -1563,7 +1564,7 @@ public class AbilityFactoryCounters {
                 }
             }
 
-            List<Player> players = Singletons.getModel().getGameState().getPlayers();
+            List<Player> players = Singletons.getModel().getGame().getPlayers();
 
             @Override
             public void selectPlayer(final Player player) {
@@ -1597,7 +1598,7 @@ public class AbilityFactoryCounters {
             }
         };
 
-        List<Card> cardsToProliferate = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), predProliferate);
+        List<Card> cardsToProliferate = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), predProliferate);
         List<Player> playersToPoison = new ArrayList<Player>();
         for( Player e : enemies ) {
             if ( e.getPoisonCounters() > 0 ) 
@@ -1924,7 +1925,7 @@ public class AbilityFactoryCounters {
             }
 
             //Check for cards that could profit from the ability
-            PhaseHandler phase = Singletons.getModel().getGameState().getPhaseHandler();
+            PhaseHandler phase = Singletons.getModel().getGame().getPhaseHandler();
             if (type.equals("P1P1") && sa.isAbility() && source.isCreature()
                     && sa.getPayCosts() != null && sa.getPayCosts().getTap()
                     && sa instanceof AbilitySub
@@ -1988,7 +1989,7 @@ public class AbilityFactoryCounters {
         final String valid = params.get("ValidCards");
         final ZoneType zone = params.containsKey("ValidZone") ? ZoneType.smartValueOf(params.get("ValidZone")) : ZoneType.Battlefield;
 
-        List<Card> cards = Singletons.getModel().getGameState().getCardsIn(zone);
+        List<Card> cards = Singletons.getModel().getGame().getCardsIn(zone);
         cards = CardLists.getValidCards(cards, valid, sa.getSourceCard().getController(), sa.getSourceCard());
 
         final Target tgt = sa.getTarget();
@@ -1998,7 +1999,7 @@ public class AbilityFactoryCounters {
         }
 
         for (final Card tgtCard : cards) {
-            if (Singletons.getModel().getGameState().getZoneOf(tgtCard).is(ZoneType.Battlefield)) {
+            if (Singletons.getModel().getGame().getZoneOf(tgtCard).is(ZoneType.Battlefield)) {
                 tgtCard.addCounter(Counters.valueOf(type), counterAmount);
             } else {
                 // adding counters to something like re-suspend cards
@@ -2243,7 +2244,7 @@ public class AbilityFactoryCounters {
         final String valid = params.get("ValidCards");
         final ZoneType zone = params.containsKey("ValidZone") ? ZoneType.smartValueOf(params.get("ValidZone")) : ZoneType.Battlefield;
 
-        List<Card> cards = Singletons.getModel().getGameState().getCardsIn(zone);
+        List<Card> cards = Singletons.getModel().getGame().getCardsIn(zone);
         cards = CardLists.getValidCards(cards, valid, sa.getSourceCard().getController(), sa.getSourceCard());
 
         final Target tgt = sa.getTarget();

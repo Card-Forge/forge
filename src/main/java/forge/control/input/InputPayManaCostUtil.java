@@ -203,7 +203,7 @@ public class InputPayManaCostUtil {
         // save off color needed for use by any mana and reflected mana
         chosen.setExpressChoice(colorsNeeded);
 
-        Singletons.getModel().getGameAction().playSpellAbility(chosen);
+        Singletons.getModel().getGame().getAction().playSpellAbility(chosen);
 
         manaCost = Singletons.getControl().getPlayer().getManaPool().payManaFromAbility(sa, manaCost, chosen);
 
@@ -468,7 +468,7 @@ public class InputPayManaCostUtil {
             final int manaToAdd) {
         final ManaCost manaCost;
     
-        if (Singletons.getModel().getGameState() != null ) {
+        if (Singletons.getModel().getGame() != null ) {
             final String mana = costMana.getManaToPay();
             manaCost = new ManaCost(mana);
             manaCost.increaseColorlessMana(manaToAdd);
@@ -545,12 +545,12 @@ public class InputPayManaCostUtil {
                 // being tapped for convoke)
     
                 if (sa.getTappedForConvoke() != null) {
-                    Singletons.getModel().getGameState().getTriggerHandler().suppressMode(TriggerType.Untaps);
+                    Singletons.getModel().getGame().getTriggerHandler().suppressMode(TriggerType.Untaps);
                     for (final Card c : sa.getTappedForConvoke()) {
                         c.untap();
                         c.tap();
                     }
-                    Singletons.getModel().getGameState().getTriggerHandler().clearSuppression(TriggerType.Untaps);
+                    Singletons.getModel().getGame().getTriggerHandler().clearSuppression(TriggerType.Untaps);
                     sa.clearTappedForConvoke();
                 }
     
@@ -561,11 +561,11 @@ public class InputPayManaCostUtil {
                 // If we're paying for a spell with convoke, untap all creatures
                 // used for it.
                 if (sa.getTappedForConvoke() != null) {
-                    Singletons.getModel().getGameState().getTriggerHandler().suppressMode(TriggerType.Untaps);
+                    Singletons.getModel().getGame().getTriggerHandler().suppressMode(TriggerType.Untaps);
                     for (final Card c : sa.getTappedForConvoke()) {
                         c.untap();
                     }
-                    Singletons.getModel().getGameState().getTriggerHandler().clearSuppression(TriggerType.Untaps);
+                    Singletons.getModel().getGame().getTriggerHandler().clearSuppression(TriggerType.Untaps);
                     sa.clearTappedForConvoke();
                 }
     

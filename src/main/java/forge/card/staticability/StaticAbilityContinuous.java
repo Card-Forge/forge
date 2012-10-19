@@ -64,7 +64,7 @@ public class StaticAbilityContinuous {
         se.setParams(params);
         se.setTimestamp(hostCard.getTimestamp());
         se.setSource(hostCard);
-        Singletons.getModel().getGameState().getStaticEffects().addStaticEffect(se);
+        Singletons.getModel().getGame().getStaticEffects().addStaticEffect(se);
 
         int powerBonus = 0;
         int toughnessBonus = 0;
@@ -231,7 +231,7 @@ public class StaticAbilityContinuous {
                 }
             }
 
-            List<Card> cardsIGainedAbilitiesFrom = Singletons.getModel().getGameState().getCardsIn(validZones);
+            List<Card> cardsIGainedAbilitiesFrom = Singletons.getModel().getGame().getCardsIn(validZones);
             cardsIGainedAbilitiesFrom = CardLists.getValidCards(cardsIGainedAbilitiesFrom, valids, hostCard.getController(), hostCard);
 
             if (cardsIGainedAbilitiesFrom.size() > 0) {
@@ -407,7 +407,7 @@ public class StaticAbilityContinuous {
 
         final String[] strngs = params.get("Affected").split(",");
 
-        for(Player p : Singletons.getModel().getGameState().getPlayers())
+        for(Player p : Singletons.getModel().getGame().getPlayers())
             if (p.isValid(strngs, controller, hostCard)) {
                 players.add(p);
             }
@@ -429,9 +429,9 @@ public class StaticAbilityContinuous {
         List<Card> affectedCards = new ArrayList<Card>();
 
         if (params.containsKey("AffectedZone")) {
-            affectedCards.addAll(Singletons.getModel().getGameState().getCardsIn(ZoneType.listValueOf(params.get("AffectedZone"))));
+            affectedCards.addAll(Singletons.getModel().getGame().getCardsIn(ZoneType.listValueOf(params.get("AffectedZone"))));
         } else {
-            affectedCards = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+            affectedCards = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         }
 
         if (params.containsKey("Affected") && !params.get("Affected").contains(",")) {

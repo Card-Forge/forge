@@ -53,7 +53,7 @@ public class InputAttack extends Input {
 
         ButtonUtil.enableOnlyOK();
 
-        final Object o = Singletons.getModel().getGameState().getCombat().nextDefender();
+        final Object o = Singletons.getModel().getGame().getCombat().nextDefender();
         if (o == null) {
             return;
         }
@@ -64,13 +64,13 @@ public class InputAttack extends Input {
 
         CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
 
-        if (Singletons.getModel().getGameState().getCombat().getRemainingDefenders() == 0) {
+        if (Singletons.getModel().getGame().getCombat().getRemainingDefenders() == 0) {
             // Nothing left to attack, has to attack this defender
             List<Card> possibleAttackers = Singletons.getControl().getPlayer().getCardsIn(ZoneType.Battlefield);
             for (Card c : Iterables.filter(possibleAttackers, CardPredicates.Presets.CREATURES)) {
-                if (c.hasKeyword("CARDNAME attacks each turn if able.") && CombatUtil.canAttack(c, Singletons.getModel().getGameState().getCombat())
+                if (c.hasKeyword("CARDNAME attacks each turn if able.") && CombatUtil.canAttack(c, Singletons.getModel().getGame().getCombat())
                         && !c.isAttacking()) {
-                    Singletons.getModel().getGameState().getCombat().addAttacker(c);
+                    Singletons.getModel().getGame().getCombat().addAttacker(c);
                 }
             }
         }
@@ -79,15 +79,15 @@ public class InputAttack extends Input {
     /** {@inheritDoc} */
     @Override
     public final void selectButtonOK() {
-        if (!Singletons.getModel().getGameState().getCombat().getAttackers().isEmpty()) {
-            Singletons.getModel().getGameState().getPhaseHandler().setCombat(true);
+        if (!Singletons.getModel().getGame().getCombat().getAttackers().isEmpty()) {
+            Singletons.getModel().getGame().getPhaseHandler().setCombat(true);
         }
 
-        if (Singletons.getModel().getGameState().getCombat().getRemainingDefenders() != 0) {
-            Singletons.getModel().getGameState().getPhaseHandler().repeatPhase();
+        if (Singletons.getModel().getGame().getCombat().getRemainingDefenders() != 0) {
+            Singletons.getModel().getGame().getPhaseHandler().repeatPhase();
         }
 
-        Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
+        Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(true);
         Singletons.getModel().getMatch().getInput().resetInput();
     }
 
@@ -100,14 +100,14 @@ public class InputAttack extends Input {
 
         final Player human = Singletons.getControl().getPlayer();
         if (zone.is(ZoneType.Battlefield, human)
-                && CombatUtil.canAttack(card, Singletons.getModel().getGameState().getCombat())) {
+                && CombatUtil.canAttack(card, Singletons.getModel().getGame().getCombat())) {
 
             // TODO add the propaganda code here and remove it in
             // Phase.nextPhase()
             // if (!CombatUtil.checkPropagandaEffects(card))
             // return;
 
-            Singletons.getModel().getGameState().getCombat().addAttacker(card);
+            Singletons.getModel().getGame().getCombat().addAttacker(card);
 
             // just to make sure the attack symbol is marked
             human.getZone(ZoneType.Battlefield).updateObservers();

@@ -323,13 +323,13 @@ public class AbilityFactoryAlterLife {
                 return false;
             }
         }
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
+        if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
                 && !params.containsKey("ActivationPhases")) {
             return false;
         }
         boolean lifeCritical = life <= 5;
-        lifeCritical |= (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DAMAGE)
-                && CombatUtil.lifeInDanger(ai, Singletons.getModel().getGameState().getCombat()));
+        lifeCritical |= (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DAMAGE)
+                && CombatUtil.lifeInDanger(ai, Singletons.getModel().getGame().getCombat()));
 
         if (abCost != null && !lifeCritical) {
             if (!CostUtil.checkSacrificeCost(ai, abCost, source, false)) {
@@ -355,7 +355,7 @@ public class AbilityFactoryAlterLife {
 
         // Don't use lifegain before main 2 if possible
         if (!lifeCritical
-                && Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) 
+                && Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) 
                 && !params.containsKey("ActivationPhases")) {
             return false;
         }
@@ -782,7 +782,7 @@ public class AbilityFactoryAlterLife {
         }
 
         // Don't use loselife before main 2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
+        if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && !params.containsKey("ActivationPhases") && !priority) {
             return false;
         }
@@ -1265,7 +1265,7 @@ public class AbilityFactoryAlterLife {
         }
 
         // Don't use poison before main 2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !params.containsKey("ActivationPhases")) {
+        if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !params.containsKey("ActivationPhases")) {
             return false;
         }
 
@@ -1512,7 +1512,7 @@ public class AbilityFactoryAlterLife {
         }
 
         // Don't use setLife before main 2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !params.containsKey("ActivationPhases")) {
+        if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !params.containsKey("ActivationPhases")) {
             return false;
         }
 

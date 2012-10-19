@@ -61,7 +61,7 @@ public class InputMulligan extends Input {
         VMatchUI.SINGLETON_INSTANCE.getBtnCancel().setText("Yes");
 
         final String str =
-                (Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().equals(Singletons.getControl().getPlayer())
+                (Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().equals(Singletons.getControl().getPlayer())
                         ? "You're going first. " : "The computer is going first. ");
         CMatchUI.SINGLETON_INSTANCE.showMessage(str + "Do you want to Mulligan?");
     }
@@ -90,7 +90,7 @@ public class InputMulligan extends Input {
     final void end() {
         // Computer mulligan
 
-        for (Player ai : Singletons.getModel().getGameState().getPlayers()) {
+        for (Player ai : Singletons.getModel().getGame().getPlayers()) {
             if ( ai.isHuman() ) continue;
             
             boolean aiTakesMulligan = true;
@@ -113,8 +113,8 @@ public class InputMulligan extends Input {
         ButtonUtil.reset();
         final AbilityFactory af = new AbilityFactory();
 
-        final GameAction ga = Singletons.getModel().getGameAction();
-        for (Player p : Singletons.getModel().getGameState().getPlayers()) {
+        final GameAction ga = Singletons.getModel().getGame().getAction();
+        for (Player p : Singletons.getModel().getGame().getPlayers()) {
             final List<Card> openingHand = p.getCardsIn(ZoneType.Hand);
     
             for (final Card c : openingHand) {
@@ -159,7 +159,7 @@ public class InputMulligan extends Input {
                         }
                     }
                     if (c.getName().startsWith("Leyline")
-                            && !(c.getName().startsWith("Leyline of Singularity") && (CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Leyline of Singularity")).size() > 0))) {
+                            && !(c.getName().startsWith("Leyline of Singularity") && (CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Leyline of Singularity")).size() > 0))) {
                         ga.moveToPlay(c);
                         //ga.checkStateEffects();
                     }
@@ -170,12 +170,12 @@ public class InputMulligan extends Input {
 
         ga.checkStateEffects();
 
-        Singletons.getModel().getGameState().getGameLog().add("Turn",
-                "Turn " + Singletons.getModel().getGameState().getPhaseHandler().getTurn()
-                    + " (" + Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn() + ")",
+        Singletons.getModel().getGame().getGameLog().add("Turn",
+                "Turn " + Singletons.getModel().getGame().getPhaseHandler().getTurn()
+                    + " (" + Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn() + ")",
                 0);
-        Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(false);
-        PhaseUtil.visuallyActivatePhase(Singletons.getModel().getGameState().getPhaseHandler().getPhase());
+        Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(false);
+        PhaseUtil.visuallyActivatePhase(Singletons.getModel().getGame().getPhaseHandler().getPhase());
 
         this.stop();
     }
@@ -187,7 +187,7 @@ public class InputMulligan extends Input {
             if (GameActionUtil.showYesNoDialog(c0, "Use " + c0.getName() + "'s ability?")) {
                 List<Card> hand = c0.getController().getCardsIn(ZoneType.Hand);
                 for (Card c : hand) {
-                    Singletons.getModel().getGameAction().exile(c);
+                    Singletons.getModel().getGame().getAction().exile(c);
                 }
                 c0.getController().drawCards(hand.size());
             }

@@ -279,7 +279,7 @@ public final class AbilityFactoryRepeat {
             if (params.containsKey("RepeatDefined")) {
                 list.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("RepeatDefined"), sa));
             } else {
-                list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+                list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
             }
 
             list = CardLists.getValidCards(list, repeatPresent.split(","), sa.getActivatingPlayer(), sa.getSourceCard());

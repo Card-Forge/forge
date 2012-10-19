@@ -59,7 +59,7 @@ public class TriggerSpellAbilityCast extends Trigger {
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         final SpellAbility spellAbility = (SpellAbility) runParams2.get("CastSA");
         final Card cast = spellAbility.getSourceCard();
-        final SpellAbilityStackInstance si = Singletons.getModel().getGameState().getStack().getInstanceFromSpellAbility(spellAbility);
+        final SpellAbilityStackInstance si = Singletons.getModel().getGame().getStack().getInstanceFromSpellAbility(spellAbility);
 
         if (this.getMode() == TriggerType.SpellCast) {
             if (!spellAbility.isSpell()) {

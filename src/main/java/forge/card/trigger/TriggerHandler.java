@@ -63,7 +63,7 @@ public class TriggerHandler {
      * Clean up temporary triggers.
      */
     public final void cleanUpTemporaryTriggers() {
-        final List<Card> absolutelyAllCards = Singletons.getModel().getGameState().getCardsInGame();
+        final List<Card> absolutelyAllCards = Singletons.getModel().getGame().getCardsInGame();
         for (final Card c : absolutelyAllCards) {
             for (int i = 0; i < c.getTriggers().size(); i++) {
                 if (c.getTriggers().get(i).isTemporary()) {
@@ -271,7 +271,7 @@ public class TriggerHandler {
             return;
         }
 
-        final Player playerAP = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player playerAP = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
         if (playerAP == null) {
             // This should only happen outside of games, so it's safe to just
             // abort.
@@ -285,8 +285,8 @@ public class TriggerHandler {
         // This is done to allow the list of triggers to be modified while
         // triggers are running.
         final ArrayList<Trigger> delayedTriggersWorkingCopy = new ArrayList<Trigger>(this.delayedTriggers);
-        List<Card> allCards = Singletons.getModel().getGameState().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
-        allCards.addAll(Singletons.getModel().getGameState().getCardsIn(ZoneType.Stack));
+        List<Card> allCards = Singletons.getModel().getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
+        allCards.addAll(Singletons.getModel().getGame().getCardsIn(ZoneType.Stack));
         boolean checkStatics = false;
 
         // Static triggers
@@ -301,23 +301,23 @@ public class TriggerHandler {
         }
 
         if (checkStatics) {
-            Singletons.getModel().getGameAction().checkStaticAbilities();
+            Singletons.getModel().getGame().getAction().checkStaticAbilities();
         } else if (runParams.containsKey("Destination")){
             // Check static abilities when a card enters the battlefield
             String type = (String) runParams.get("Destination");
             if (type.equals("Battlefield")) {
-                Singletons.getModel().getGameAction().checkStaticAbilities();
+                Singletons.getModel().getGame().getAction().checkStaticAbilities();
             }
         }
 
         // AP
         allCards = playerAP.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
-        allCards.addAll(CardLists.filterControlledBy(Singletons.getModel().getGameState().getCardsIn(ZoneType.Stack), playerAP));
+        allCards.addAll(CardLists.filterControlledBy(Singletons.getModel().getGame().getCardsIn(ZoneType.Stack), playerAP));
         // add cards that move to hidden zones
         if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
             Card card = (Card) runParams.get("Card");
             if (playerAP.equals(card.getController()) && !allCards.contains(card) 
-                    && (Singletons.getModel().getGameState().getZoneOf(card) == null || Singletons.getModel().getGameState().getZoneOf(card).getZoneType().isHidden())) {
+                    && (Singletons.getModel().getGame().getZoneOf(card) == null || Singletons.getModel().getGame().getZoneOf(card).getZoneType().isHidden())) {
                 allCards.add(card);
             }
         }
@@ -338,12 +338,12 @@ public class TriggerHandler {
 
         // NAP
         allCards = playerAP.getOpponent().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
-        allCards.addAll(CardLists.filterControlledBy(Singletons.getModel().getGameState().getCardsIn(ZoneType.Stack), playerAP.getOpponent()));
+        allCards.addAll(CardLists.filterControlledBy(Singletons.getModel().getGame().getCardsIn(ZoneType.Stack), playerAP.getOpponent()));
         // add cards that move to hidden zones
         if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
             Card card = (Card) runParams.get("Card");
             if (!playerAP.equals(card.getController()) && !allCards.contains(card)
-                    && (Singletons.getModel().getGameState().getZoneOf(card) == null || Singletons.getModel().getGameState().getZoneOf(card).getZoneType().isHidden())) {
+                    && (Singletons.getModel().getGame().getZoneOf(card) == null || Singletons.getModel().getGame().getZoneOf(card).getZoneType().isHidden())) {
                 allCards.add(card);
             }
         }
@@ -397,7 +397,7 @@ public class TriggerHandler {
             return false; // Morphed cards only have pumped triggers go off.
         }
         if (regtrig instanceof TriggerAlways) {
-            if (Singletons.getModel().getGameState().getStack().hasStateTrigger(regtrig.getId())) {
+            if (Singletons.getModel().getGame().getStack().hasStateTrigger(regtrig.getId())) {
                 return false; // State triggers that are already on the stack
                               // don't trigger again.
             }
@@ -409,7 +409,7 @@ public class TriggerHandler {
         if (regtrig.isSuppressed()) {
             return false; // Trigger removed by effect
         }
-        if (!regtrig.zonesCheck(Singletons.getModel().getGameState().getZoneOf(regtrig.getHostCard()))) {
+        if (!regtrig.zonesCheck(Singletons.getModel().getGame().getZoneOf(regtrig.getHostCard()))) {
             return false; // Host card isn't where it needs to be.
         }
 
@@ -419,7 +419,7 @@ public class TriggerHandler {
                 String dest = (String) runParams.get("Destination");
                 if (dest.equals("Battlefield") && runParams.get("Card") instanceof Card) {
                     Card card = (Card) runParams.get("Card");
-                    if (card.isCreature() && Singletons.getModel().getGameState().isCardInPlay("Torpor Orb")) {
+                    if (card.isCreature() && Singletons.getModel().getGame().isCardInPlay("Torpor Orb")) {
                         return false;
                     }
                 }
@@ -431,7 +431,7 @@ public class TriggerHandler {
         final Player[] controller = new Player[1];
 
         // Any trigger should cause the phase not to skip
-        Singletons.getModel().getGameState().getPhaseHandler().setSkipPhase(false);
+        Singletons.getModel().getGame().getPhaseHandler().setSkipPhase(false);
 
         regtrig.setRunParams(runParams);
 
@@ -446,7 +446,7 @@ public class TriggerHandler {
         final AbilityFactory abilityFactory = new AbilityFactory();
 
         final SpellAbility[] sa = new SpellAbility[1];
-        Card host = Singletons.getModel().getGameState().getCardState(regtrig.getHostCard());
+        Card host = Singletons.getModel().getGame().getCardState(regtrig.getHostCard());
 
         if (host == null) {
             host = regtrig.getHostCard();
@@ -979,7 +979,7 @@ public class TriggerHandler {
                 }
 
                 if (controller[0].isHuman()) {
-                    Singletons.getModel().getGameAction().playSpellAbilityNoStack(sa[0], true);
+                    Singletons.getModel().getGame().getAction().playSpellAbilityNoStack(sa[0], true);
                 } else {
                     // commented out because i don't think this should be called
                     // again here
@@ -1012,14 +1012,14 @@ public class TriggerHandler {
 
         if (regtrig.isStatic()) {
             if (controller[0].isHuman()) {
-                Singletons.getModel().getGameAction().playSpellAbilityNoStack(wrapperAbility, false);
+                Singletons.getModel().getGame().getAction().playSpellAbilityNoStack(wrapperAbility, false);
             } else {
                 wrapperAbility.doTrigger(isMandatory);
                 ComputerUtil.playNoStack(controller[0], wrapperAbility);
             }
             //Singletons.getModel().getGameAction().playSpellAbilityNoStack(wrapperAbility, false);
         } else {
-            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(wrapperAbility);
+            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(wrapperAbility);
         }
         regtrig.setTriggeredSA(wrapperAbility);
         return true;

@@ -325,7 +325,7 @@ public final class AbilityFactoryBond {
         }
 
         // find list of valid cards to pair with
-        List<Card> cards = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+        List<Card> cards = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         cards = AbilityFactory.filterListByType(cards, params.get("ValidCards"), sa);
         if (cards.isEmpty()) {
             return;

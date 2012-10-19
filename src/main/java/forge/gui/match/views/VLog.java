@@ -118,7 +118,7 @@ public enum VLog implements IVDoc {
 
         // TODO - some option to make this configurable is probably desirable
         // By default, grab everything log level 3 or less.
-        final List<LogEntry> data = Singletons.getModel().getGameState().getGameLog().getLogEntries(3);
+        final List<LogEntry> data = Singletons.getModel().getGame().getGameLog().getLogEntries(3);
         final int size = data.size();
 
         pnl.removeAll();

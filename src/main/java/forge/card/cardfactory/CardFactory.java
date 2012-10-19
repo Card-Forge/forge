@@ -205,7 +205,7 @@ public class CardFactory implements CardFactoryInterface {
         }
 
         if (controller.isHuman()) {
-            Singletons.getModel().getGameAction().playSpellAbilityForFree(copySA);
+            Singletons.getModel().getGame().getAction().playSpellAbilityForFree(copySA);
         } else if (copySA instanceof Spell) {
             Spell spell = (Spell) copySA;
             if (spell.canPlayFromEffectAI(false, true)) {

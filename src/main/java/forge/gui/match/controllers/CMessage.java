@@ -51,10 +51,10 @@ public enum CMessage implements ICDoc {
         public void actionPerformed(final ActionEvent evt) {
             inputControl.selectButtonOK();
 
-            if (Singletons.getModel().getGameState().getPhaseHandler().isNeedToNextPhase()) {
+            if (Singletons.getModel().getGame().getPhaseHandler().isNeedToNextPhase()) {
                 // moves to next turn
-                Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(false);
-                Singletons.getModel().getGameState().getPhaseHandler().nextPhase();
+                Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(false);
+                Singletons.getModel().getGame().getPhaseHandler().nextPhase();
             }
             VMessage.SINGLETON_INSTANCE.getBtnOK().requestFocusInWindow();
         }

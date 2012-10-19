@@ -95,21 +95,19 @@ public class GameNew {
      * TODO: Accept something like match state as parameter. Match should be aware of players, 
      * their decks and other special starting conditions. 
      */
-    public static void newGame(final Map<Player, PlayerStartConditions> playersConditions, GameType gameType) {
+    public static void newGame(final Map<Player, PlayerStartConditions> playersConditions, final GameState game, final boolean canRandomFoil ) {
         Singletons.getModel().getMatch().getInput().clearInput();
 
         Card.resetUniqueNumber();
         // need this code here, otherwise observables fail
         forge.card.trigger.Trigger.resetIDs();
-        Singletons.getModel().getGameState().getTriggerHandler().clearTriggerSettings();
-        Singletons.getModel().getGameState().getTriggerHandler().clearDelayedTrigger();
+        game.getTriggerHandler().clearTriggerSettings();
+        game.getTriggerHandler().clearDelayedTrigger();
 
         // friendliness
         final Map<Player, List<String>> removedAnteCards = new HashMap<Player, List<String>>();
         final List<String> rAICards = new ArrayList<String>();
 
-        final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL) && gameType == GameType.Constructed;
-        
         for( Entry<Player, PlayerStartConditions> p : playersConditions.entrySet() ) {
             final Player player = p.getKey();
             player.setStartingLife(p.getValue().getStartingLife());
@@ -147,7 +145,7 @@ public class GameNew {
             JOptionPane.showMessageDialog(null, ante.toString(), "", JOptionPane.INFORMATION_MESSAGE);
         }
 
-        GameNew.actuateGame();
+        GameNew.actuateGame(game);
     }
 
     /**
@@ -157,22 +155,22 @@ public class GameNew {
      * That process (also cleanup and observer updates) should be done in
      * newGame, then when all is ready, call this function.
      */
-    private static void actuateGame() {
+    private static void actuateGame(final GameState game) {
 
         // Deciding which cards go to ante 
         if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE)) {
             final String nl = System.getProperty("line.separator");
             final StringBuilder msg = new StringBuilder();
-            for (final Player p : Singletons.getModel().getGameState().getPlayers()) {
+            for (final Player p : game.getPlayers()) {
                 final List<Card> lib = p.getCardsIn(ZoneType.Library);
                 Predicate<Card> goodForAnte = Predicates.not(CardPredicates.Presets.BASIC_LANDS);
                 Card ante = Aggregates.random(Iterables.filter(lib, goodForAnte));
                 if (ante == null) {
                     throw new RuntimeException(p + " library is empty.");                        
                 }
-                Singletons.getModel().getGameState().getGameLog().add("Ante", p + " anted " + ante, 0);
+                game.getGameLog().add("Ante", p + " anted " + ante, 0);
                 VAntes.SINGLETON_INSTANCE.addAnteCard(p, ante);
-                Singletons.getModel().getGameAction().moveTo(ZoneType.Ante, ante);
+                game.getAction().moveTo(ZoneType.Ante, ante);
                 msg.append(p.getName()).append(" ante: ").append(ante).append(nl);
             }
             JOptionPane.showMessageDialog(null, msg, "Ante", JOptionPane.INFORMATION_MESSAGE);
@@ -192,7 +190,7 @@ public class GameNew {
 
 
         // Draw 7 cards 
-        for (final Player p : Singletons.getModel().getGameState().getPlayers())
+        for (final Player p : game.getPlayers())
         {
             for (int i = 0; i < 7; i++) {
                 p.drawCard();
@@ -285,7 +283,7 @@ public class GameNew {
             computerDie = MyRandom.getRandom().nextInt(20);
         }
         
-        List<Player> allPlayers = Singletons.getModel().getGameState().getPlayers();
+        List<Player> allPlayers = Singletons.getModel().getGame().getPlayers();
         setPlayersFirstTurn(allPlayers.get(MyRandom.getRandom().nextInt(allPlayers.size())));
     }
     
@@ -298,7 +296,7 @@ public class GameNew {
         } else {
             computerPlayOrDraw(message);
         }
-        Singletons.getModel().getGameState().getPhaseHandler().setPlayerTurn(goesFirst);
+        Singletons.getModel().getGame().getPhaseHandler().setPlayerTurn(goesFirst);
     } // seeWhoPlaysFirstDice()
 
     private static boolean humanPlayOrDraw(String message) {

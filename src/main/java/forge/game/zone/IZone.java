@@ -20,7 +20,6 @@ package forge.game.zone;
 import java.util.List;
 
 import forge.Card;
-import forge.game.player.Player;
 
 /**
  * <p>
@@ -30,7 +29,7 @@ import forge.game.player.Player;
  * @author Forge
  * @version $Id$
  */
-interface IPlayerZone {
+interface IZone {
     /**
      * <p>
      * setUpdate.
@@ -166,13 +165,6 @@ interface IPlayerZone {
      */
     boolean isEmpty();
 
-    // removes all cards
-    /**
-     * <p>
-     * reset.
-     * </p>
-     */
-    void reset();
 
     /**
      * <p>
@@ -193,28 +185,6 @@ interface IPlayerZone {
      * @return true, if successful
      */
     boolean is(List<ZoneType> zones);
-
-    /**
-     * <p>
-     * is.
-     * </p>
-     * 
-     * @param zone
-     *            a {@link java.lang.String} object.
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     * @return a boolean.
-     */
-    boolean is(ZoneType zone, Player player);
-
-    /**
-     * <p>
-     * getPlayer.
-     * </p>
-     * 
-     * @return a {@link forge.game.player.Player} object.
-     */
-    Player getPlayer(); // the Player that owns this zone
 
     /**
      * <p>

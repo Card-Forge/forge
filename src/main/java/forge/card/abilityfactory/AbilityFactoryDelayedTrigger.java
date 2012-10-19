@@ -299,6 +299,6 @@ public class AbilityFactoryDelayedTrigger {
 
         final Trigger delTrig = TriggerHandler.parseTrigger(mapParams, spellAbility.getSourceCard(), true);
 
-        Singletons.getModel().getGameState().getTriggerHandler().registerDelayedTrigger(delTrig);
+        Singletons.getModel().getGame().getTriggerHandler().registerDelayedTrigger(delTrig);
     }
 }

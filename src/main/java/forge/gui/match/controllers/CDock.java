@@ -68,14 +68,14 @@ public enum CDock implements ICDoc {
         }
 
         Singletons.getControl().getPlayer().concede();
-        Singletons.getModel().getGameAction().checkStateEffects();
+        Singletons.getModel().getGame().getAction().checkStateEffects();
     }
 
     /**
      * End turn.
      */
     public void endTurn() {
-        Singletons.getModel().getGameState().getPhaseHandler().autoPassToCleanup();
+        Singletons.getModel().getGame().getPhaseHandler().autoPassToCleanup();
     }
 
     private void revertLayout() {
@@ -141,14 +141,14 @@ public enum CDock implements ICDoc {
 
     /** Attack with everyone. */
     public void alphaStrike() {
-        final PhaseHandler ph = Singletons.getModel().getGameState().getPhaseHandler();
+        final PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler();
 
         final Player human = Singletons.getControl().getPlayer();
 
         if (ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, human)) {
             for (Card c : CardLists.filter(human.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
-                if (!c.isAttacking() && CombatUtil.canAttack(c, Singletons.getModel().getGameState().getCombat())) {
-                    Singletons.getModel().getGameState().getCombat().addAttacker(c);
+                if (!c.isAttacking() && CombatUtil.canAttack(c, Singletons.getModel().getGame().getCombat())) {
+                    Singletons.getModel().getGame().getCombat().addAttacker(c);
                 }
             }
             //human.updateObservers();

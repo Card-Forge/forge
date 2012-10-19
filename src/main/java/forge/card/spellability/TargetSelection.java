@@ -268,7 +268,7 @@ public class TargetSelection {
             return;
         }
 
-        List<Card> choices = CardLists.getTargetableCards(CardLists.getValidCards(Singletons.getModel().getGameState().getCardsIn(zone), this.target.getValidTgts(), this.ability.getActivatingPlayer(), this.ability.getSourceCard()), this.ability);
+        List<Card> choices = CardLists.getTargetableCards(CardLists.getValidCards(Singletons.getModel().getGame().getCardsIn(zone), this.target.getValidTgts(), this.ability.getActivatingPlayer(), this.ability.getSourceCard()), this.ability);
 
         ArrayList<Object> objects = new ArrayList<Object>();
         if (tgt.isUniqueTargets()) {
@@ -459,15 +459,15 @@ public class TargetSelection {
         final List<Card> crdsLibrary = new ArrayList<Card>();
         final List<Card> crdsStack = new ArrayList<Card>();
         for (final Card inZone : choicesZoneUnfiltered) {
-            if (Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield).contains(inZone)) {
+            if (Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield).contains(inZone)) {
                 crdsBattle.add(inZone);
-            } else if (Singletons.getModel().getGameState().getCardsIn(ZoneType.Exile).contains(inZone)) {
+            } else if (Singletons.getModel().getGame().getCardsIn(ZoneType.Exile).contains(inZone)) {
                 crdsExile.add(inZone);
-            } else if (Singletons.getModel().getGameState().getCardsIn(ZoneType.Graveyard).contains(inZone)) {
+            } else if (Singletons.getModel().getGame().getCardsIn(ZoneType.Graveyard).contains(inZone)) {
                 crdsGrave.add(inZone);
-            } else if (Singletons.getModel().getGameState().getCardsIn(ZoneType.Library).contains(inZone)) {
+            } else if (Singletons.getModel().getGame().getCardsIn(ZoneType.Library).contains(inZone)) {
                 crdsLibrary.add(inZone);
-            } else if (Singletons.getModel().getGameState().getCardsIn(ZoneType.Stack).contains(inZone)) {
+            } else if (Singletons.getModel().getGame().getCardsIn(ZoneType.Stack).contains(inZone)) {
                 crdsStack.add(inZone);
             }
         }
@@ -592,8 +592,8 @@ public class TargetSelection {
     public static ArrayList<SpellAbility> getTargetableOnStack(final SpellAbility sa, final Target tgt) {
         final ArrayList<SpellAbility> choosables = new ArrayList<SpellAbility>();
 
-        for (int i = 0; i < Singletons.getModel().getGameState().getStack().size(); i++) {
-            choosables.add(Singletons.getModel().getGameState().getStack().peekAbility(i));
+        for (int i = 0; i < Singletons.getModel().getGame().getStack().size(); i++) {
+            choosables.add(Singletons.getModel().getGame().getStack().peekAbility(i));
         }
 
         for (int i = 0; i < choosables.size(); i++) {

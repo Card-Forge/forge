@@ -302,7 +302,7 @@ public class AbilityFactoryPreventDamage {
                     params.get("Defined"), sa);
 
             // react to threats on the stack
-            if (Singletons.getModel().getGameState().getStack().size() > 0) {
+            if (Singletons.getModel().getGame().getStack().size() > 0) {
                 final ArrayList<Object> threatenedObjects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(), af);
                 for (final Object o : objects) {
                     if (threatenedObjects.contains(o)) {
@@ -310,7 +310,7 @@ public class AbilityFactoryPreventDamage {
                     }
                 }
             } else {
-                PhaseHandler handler = Singletons.getModel().getGameState().getPhaseHandler();
+                PhaseHandler handler = Singletons.getModel().getGame().getPhaseHandler();
                 if (handler.is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     boolean flag = false;
                     for (final Object o : objects) {
@@ -321,8 +321,8 @@ public class AbilityFactoryPreventDamage {
                             // Don't need to worry about Combat Damage during AI's turn
                             final Player p = (Player) o;
                             if (!handler.isPlayerTurn(p)) {
-                                flag |= (p.isComputer() && ((CombatUtil.wouldLoseLife(ai, Singletons.getModel().getGameState().getCombat()) && sa
-                                        .isAbility()) || CombatUtil.lifeInDanger(ai, Singletons.getModel().getGameState().getCombat())));
+                                flag |= (p.isComputer() && ((CombatUtil.wouldLoseLife(ai, Singletons.getModel().getGame().getCombat()) && sa
+                                        .isAbility()) || CombatUtil.lifeInDanger(ai, Singletons.getModel().getGame().getCombat())));
                             }
                         }
                     }
@@ -336,7 +336,7 @@ public class AbilityFactoryPreventDamage {
         } // targeted
 
         // react to threats on the stack
-        else if (Singletons.getModel().getGameState().getStack().size() > 0) {
+        else if (Singletons.getModel().getGame().getStack().size() > 0) {
             tgt.resetTargets();
             // check stack for something on the stack will kill anything i
             // control
@@ -365,10 +365,10 @@ public class AbilityFactoryPreventDamage {
             }
 
         } // Protect combatants
-        else if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
-            if (sa.canTarget(ai) && CombatUtil.wouldLoseLife(ai, Singletons.getModel().getGameState().getCombat())
-                    && (CombatUtil.lifeInDanger(ai, Singletons.getModel().getGameState().getCombat()) || sa.isAbility())
-                    && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(ai.getOpponent())) {
+        else if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+            if (sa.canTarget(ai) && CombatUtil.wouldLoseLife(ai, Singletons.getModel().getGame().getCombat())
+                    && (CombatUtil.lifeInDanger(ai, Singletons.getModel().getGame().getCombat()) || sa.isAbility())
+                    && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai.getOpponent())) {
                 tgt.addTarget(ai);
                 chance = true;
             } else {
@@ -456,7 +456,7 @@ public class AbilityFactoryPreventDamage {
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
         // filter AIs battlefield by what I can target
-        List<Card> targetables = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+        List<Card> targetables = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, hostCard);
         final List<Card> compTargetables = CardLists.filterControlledBy(targetables, ai);
 
@@ -471,7 +471,7 @@ public class AbilityFactoryPreventDamage {
         if (compTargetables.size() > 0) {
             final List<Card> combatants = CardLists.filter(compTargetables, CardPredicates.Presets.CREATURES);
             CardLists.sortByEvaluateCreature(combatants);
-            if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+            if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 for (final Card c : combatants) {
                     if (CombatUtil.combatantWouldBeDestroyed(c)) {
                         tgt.addTarget(c);
@@ -739,12 +739,12 @@ public class AbilityFactoryPreventDamage {
             return false;
         }
 
-        if (Singletons.getModel().getGameState().getStack().size() > 0) {
+        if (Singletons.getModel().getGame().getStack().size() > 0) {
             // TODO check stack for something on the stack will kill anything i
             // control
 
         } // Protect combatants
-        else if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+        else if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
             // TODO
         }
 
@@ -786,7 +786,7 @@ public class AbilityFactoryPreventDamage {
         }
 
         if (params.containsKey("ValidCards")) {
-            list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+            list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         }
 
         list = AbilityFactory.filterListByType(list, params.get("ValidCards"), sa);
@@ -796,7 +796,7 @@ public class AbilityFactoryPreventDamage {
         }
 
         if (!players.equals("")) {
-            final ArrayList<Player> playerList = new ArrayList<Player>(Singletons.getModel().getGameState().getPlayers());
+            final ArrayList<Player> playerList = new ArrayList<Player>(Singletons.getModel().getGame().getPlayers());
             for (final Player p : playerList) {
                 if (p.isValid(players, source.getController(), source)) {
                     p.addPreventNextDamage(numDam);

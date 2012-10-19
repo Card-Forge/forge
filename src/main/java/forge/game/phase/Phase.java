@@ -85,7 +85,7 @@ public abstract class Phase implements java.io.Serializable {
      */
     public final void addUntil(Player p, final Command c) {
         if (null == p) {
-            p = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+            p = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
         }
 
         if (this.untilMap.containsKey(p)) {
@@ -121,7 +121,7 @@ public abstract class Phase implements java.io.Serializable {
      */
     public final void addUntilYourNextTurn(Player p, final Command command) {
         if (null == p) {
-            p = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+            p = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
         }
 
         if (this.untilMap.containsKey(p)) {

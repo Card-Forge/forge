@@ -117,7 +117,7 @@ public class FModelTest {
     @Test(enabled = false)
     public final void test_resetGameState_getGameState() {
         Singletons.setModel(this.model);
-        Assert.assertNull(this.model.getGameState(), "game state has not yet been initialized");
+        Assert.assertNull(this.model.getGame(), "game state has not yet been initialized");
 
         /*final GameState state1 = this.model.resetGameState();
         Assert.assertNotNull(state1, "first state is OK");

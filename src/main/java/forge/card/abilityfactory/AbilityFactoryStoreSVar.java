@@ -247,7 +247,7 @@ public class AbilityFactoryStoreSVar {
         final Player ai = sa.getActivatingPlayer();
         final Card source = sa.getSourceCard();
         if (AbilityFactory.waitForBlocking(sa) || ai.getLife() + 1 >= source.getNetDefense() 
-                || (ai.getLife() > 5 && !CombatUtil.lifeInSeriousDanger(ai, Singletons.getModel().getGameState().getCombat()))) {
+                || (ai.getLife() > 5 && !CombatUtil.lifeInSeriousDanger(ai, Singletons.getModel().getGame().getCombat()))) {
             return false;
         }
         final AbilitySub subAb = sa.getSubAbility();

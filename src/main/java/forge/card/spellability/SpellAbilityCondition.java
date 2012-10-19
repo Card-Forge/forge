@@ -198,11 +198,11 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             return false;
         }
 
-        if (this.isPlayerTurn() && !Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(activator)) {
+        if (this.isPlayerTurn() && !Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(activator)) {
             return false;
         }
 
-        if (this.isOpponentTurn() && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(activator)) {
+        if (this.isOpponentTurn() && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(activator)) {
             return false;
         }
 
@@ -212,7 +212,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
 
         if (this.getPhases().size() > 0) {
             boolean isPhase = false;
-            final PhaseType currPhase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
+            final PhaseType currPhase = Singletons.getModel().getGame().getPhaseHandler().getPhase();
             for (final PhaseType s : this.getPhases()) {
                 if (s == currPhase) {
                     isPhase = true;
@@ -256,7 +256,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             if (this.getPresentDefined() != null) {
                 list.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), this.getPresentDefined(), sa));
             } else {
-                list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+                list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
             }
 
             list = CardLists.getValidCards(list, this.getIsPresent().split(","), sa.getActivatingPlayer(), sa.getSourceCard());

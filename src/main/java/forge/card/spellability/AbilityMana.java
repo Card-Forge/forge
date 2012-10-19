@@ -238,7 +238,7 @@ public class AbilityMana extends AbilityActivated implements java.io.Serializabl
         runParams.put("Player", player);
         runParams.put("AbilityMana", this);
         runParams.put("Produced", produced);
-        Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.TapsForMana, runParams);
+        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.TapsForMana, runParams);
 
     } // end produceMana(String)
 

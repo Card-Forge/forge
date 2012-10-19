@@ -99,7 +99,7 @@ public abstract class Input implements java.io.Serializable {
         // clears a "temp" Input like Input_PayManaCost if there is one
         Singletons.getModel().getMatch().getInput().resetInput();
 
-        PhaseHandler ph = Singletons.getModel().getGameState().getPhaseHandler(); 
+        PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler(); 
         if (ph.isNeedToNextPhase()) {
             // mulligan needs this to move onto next phase
             ph.setNeedToNextPhase(false);

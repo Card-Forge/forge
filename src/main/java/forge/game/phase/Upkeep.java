@@ -75,7 +75,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      */
     @Override
     public final void executeAt() {
-        Singletons.getModel().getGameState().getStack().freezeStack();
+        Singletons.getModel().getGame().getStack().freezeStack();
         Upkeep.upkeepBraidOfFire();
 
         Upkeep.upkeepSlowtrips(); // for "Draw a card at the beginning of the next turn's upkeep."
@@ -112,7 +112,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
         Upkeep.upkeepCurseOfMisfortunes();
         Upkeep.upkeepPowerSurge();
 
-        Singletons.getModel().getGameState().getStack().unfreezeStack();
+        Singletons.getModel().getGame().getStack().unfreezeStack();
     }
 
     // UPKEEP CARDS:
@@ -123,7 +123,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepBraidOfFire() {
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
 
         final List<Card> braids = player.getCardsIn(ZoneType.Battlefield, "Braid of Fire");
 
@@ -145,14 +145,14 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     } else if (GameActionUtil.showYesNoDialog(c, sb.toString())) {
                         abMana.produceMana();
                     } else {
-                        Singletons.getModel().getGameAction().sacrifice(c, null);
+                        Singletons.getModel().getGame().getAction().sacrifice(c, null);
                     }
 
                 }
             };
             upkeepAbility.setStackDescription(sb.toString());
 
-            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(upkeepAbility);
+            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(upkeepAbility);
 
         }
     } // upkeepBraidOfFire
@@ -163,7 +163,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepEcho() {
-        List<Card> list = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().getCardsIn(ZoneType.Battlefield);
+        List<Card> list = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().getCardsIn(ZoneType.Battlefield);
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -182,7 +182,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                     @Override
                     public void execute() {
-                        Singletons.getModel().getGameAction().sacrifice(c, null);
+                        Singletons.getModel().getGame().getAction().sacrifice(c, null);
                     }
                 };
 
@@ -202,7 +202,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                             if (ComputerUtil.canPayCost(blankAbility, controller)) {
                                 ComputerUtil.playNoStack(controller, blankAbility);
                             } else {
-                                Singletons.getModel().getGameAction().sacrifice(c, null);
+                                Singletons.getModel().getGame().getAction().sacrifice(c, null);
                             }
                         }
                     }
@@ -210,7 +210,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 sacAbility.setStackDescription(sb.toString());
                 sacAbility.setDescription(sb.toString());
 
-                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(sacAbility);
+                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(sacAbility);
 
                 c.removeAllExtrinsicKeyword("(Echo unpaid)");
             }
@@ -223,7 +223,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepSlowtrips() {
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
 
         List<Card> list = player.getSlowtripList();
 
@@ -242,7 +242,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             slowtrip.setStackDescription(card + " - Draw a card.");
             slowtrip.setDescription(card + " - Draw a card.");
 
-            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(slowtrip);
+            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(slowtrip);
 
         }
         player.clearSlowtripList();
@@ -267,7 +267,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             slowtrip.setStackDescription(card.getName() + " - Draw a card");
             slowtrip.setDescription(card + " - Draw a card.");
 
-            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(slowtrip);
+            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(slowtrip);
 
         }
         opponent.clearSlowtripList();
@@ -279,7 +279,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepUpkeepCost() {
-        final List<Card> list = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().getCardsIn(ZoneType.Battlefield);
+        final List<Card> list = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().getCardsIn(ZoneType.Battlefield);
 
         for (int i = 0; i < list.size(); i++) {
             final Card c = list.get(i);
@@ -301,7 +301,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                             if (c.getName().equals("Cosmic Horror")) {
                                 controller.addDamage(7, c);
                             }
-                            Singletons.getModel().getGameAction().destroy(c);
+                            Singletons.getModel().getGame().getAction().destroy(c);
                         }
                     };
 
@@ -324,7 +324,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                     if (c.getName().equals("Cosmic Horror")) {
                                         controller.addDamage(7, c);
                                     }
-                                    Singletons.getModel().getGameAction().destroy(c);
+                                    Singletons.getModel().getGame().getAction().destroy(c);
                                 }
                             }
                         }
@@ -332,7 +332,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     upkeepAbility.setStackDescription(sb.toString());
                     upkeepAbility.setDescription(sb.toString());
 
-                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(upkeepAbility);
+                    Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(upkeepAbility);
                 } // destroy
 
                 // sacrifice
@@ -361,7 +361,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                         @Override
                         public void execute() {
-                            Singletons.getModel().getGameAction().sacrifice(c, null);
+                            Singletons.getModel().getGame().getAction().sacrifice(c, null);
                         }
                     };
 
@@ -379,7 +379,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                 if (ComputerUtil.shouldPayCost(controller, c, upkeepCost) && ComputerUtil.canPayCost(blankAbility, controller)) {
                                     ComputerUtil.playNoStack(controller, blankAbility);
                                 } else {
-                                    Singletons.getModel().getGameAction().sacrifice(c, null);
+                                    Singletons.getModel().getGame().getAction().sacrifice(c, null);
                                 }
                             }
                         }
@@ -387,7 +387,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     upkeepAbility.setStackDescription(sb.toString());
                     upkeepAbility.setDescription(sb.toString());
 
-                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(upkeepAbility);
+                    Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(upkeepAbility);
                 } // sacrifice
 
                 // destroy
@@ -432,7 +432,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     upkeepAbility.setStackDescription(sb.toString());
                     upkeepAbility.setDescription(sb.toString());
 
-                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(upkeepAbility);
+                    Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(upkeepAbility);
                 } // destroy
             }
 
@@ -473,9 +473,9 @@ public class Upkeep extends Phase implements java.io.Serializable {
          * creature that player controls of his or her choice. It can't be
          * regenerated.
          */
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final List<Card> the = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("The Abyss"));
-        final List<Card> magus = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Magus of the Abyss"));
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
+        final List<Card> the = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("The Abyss"));
+        final List<Card> magus = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Magus of the Abyss"));
 
         final List<Card> cards = new ArrayList<Card>();
         cards.addAll(the);
@@ -508,7 +508,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                     // probably need to restrict by controller
                                     // also
                                     if (targets.contains(selected)) {
-                                        Singletons.getModel().getGameAction().destroyNoRegeneration(selected);
+                                        Singletons.getModel().getGame().getAction().destroyNoRegeneration(selected);
                                         this.stop();
                                     }
                                 } // selectCard()
@@ -518,13 +518,13 @@ public class Upkeep extends Phase implements java.io.Serializable {
 
                         final List<Card> indestruct = CardLists.getKeyword(targets, "Indestructible");
                         if (indestruct.size() > 0) {
-                            Singletons.getModel().getGameAction().destroyNoRegeneration(indestruct.get(0));
+                            Singletons.getModel().getGame().getAction().destroyNoRegeneration(indestruct.get(0));
                         } else if (targets.size() > 0) {
                             final Card target = CardFactoryUtil.getWorstCreatureAI(targets);
                             if (null == target) {
                                 // must be nothing valid to destroy
                             } else {
-                                Singletons.getModel().getGameAction().destroyNoRegeneration(target);
+                                Singletons.getModel().getGame().getAction().destroyNoRegeneration(target);
                             }
                         }
                     }
@@ -534,7 +534,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             final StringBuilder sb = new StringBuilder();
             sb.append(abyss.getName()).append(" - destroy a nonartifact creature of your choice.");
             sacrificeCreature.setStackDescription(sb.toString());
-            Singletons.getModel().getGameState().getStack().addAndUnfreeze(sacrificeCreature);
+            Singletons.getModel().getGame().getStack().addAndUnfreeze(sacrificeCreature);
         } // end for
     } // The Abyss
 
@@ -549,7 +549,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
          * power. It can't be regenerated. If two or more creatures are tied for
          * least power, you choose one of them.
          */
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
         final List<Card> drops = player.getCardsIn(ZoneType.Battlefield, "Drop of Honey");
         drops.addAll(player.getCardsIn(ZoneType.Battlefield, "Porphyry Nodes"));
         final List<Card> cards = drops;
@@ -560,7 +560,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             final Ability ability = new Ability(c, "") {
                 @Override
                 public void resolve() {
-                    final List<Card> creatures = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+                    final List<Card> creatures = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
                     if (creatures.size() > 0) {
                         CardLists.sortAttackLowFirst(creatures);
                         final int power = creatures.get(0).getNetAttack();
@@ -570,7 +570,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                             "Select creature with power: " + power + " to sacrifice."));
                         } else { // computer
                             final Card compyTarget = this.getCompyCardToDestroy(creatures);
-                            Singletons.getModel().getGameAction().destroyNoRegeneration(compyTarget);
+                            Singletons.getModel().getGame().getAction().destroyNoRegeneration(compyTarget);
                         }
                     }
                 } // resolve
@@ -608,7 +608,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(c.getName()).append(" - destroy 1 creature with lowest power.");
             ability.setStackDescription(sb.toString());
 
-            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
         } // end for
     } // upkeepDropOfHoney()
@@ -625,7 +625,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
          * Hordes and sacrifice a land of an opponent's choice.
          */
 
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
         final List<Card> cards = player.getCardsIn(ZoneType.Battlefield, "Demonic Hordes");
 
         for (int i = 0; i < cards.size(); i++) {
@@ -647,7 +647,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     } else {
                         final Card target = CardFactoryUtil.getBestLandAI(playerLand);
 
-                        Singletons.getModel().getGameAction().sacrifice(target, null);
+                        Singletons.getModel().getGame().getAction().sacrifice(target, null);
                     }
                 } // end resolve()
             }; // end noPay ability
@@ -659,7 +659,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     final Ability pay = new Ability(c, "0") {
                         @Override
                         public void resolve() {
-                            if (Singletons.getModel().getGameState().getZoneOf(c).is(ZoneType.Battlefield)) {
+                            if (Singletons.getModel().getGame().getZoneOf(c).is(ZoneType.Battlefield)) {
                                 final StringBuilder cost = new StringBuilder();
                                 cost.append("Pay cost for ").append(c).append("\r\n");
                                 GameActionUtil.payManaDuringAbilityResolve(cost.toString(), noPay.getManaCost(),
@@ -669,7 +669,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     }; // end pay ability
                     pay.setStackDescription("Demonic Hordes - Upkeep Cost");
 
-                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(pay);
+                    Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(pay);
 
                 } // end choice
                 else {
@@ -677,7 +677,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     sb.append(c.getName()).append(" - is tapped and you must sacrifice a land of opponent's choice");
                     noPay.setStackDescription(sb.toString());
 
-                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(noPay);
+                    Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(noPay);
 
                 }
             } // end human
@@ -691,10 +691,10 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     };
                     computerPay.setStackDescription("Computer pays Demonic Hordes upkeep cost");
 
-                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(computerPay);
+                    Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(computerPay);
 
                 } else {
-                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(noPay);
+                    Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(noPay);
 
                 }
             } // end computer
@@ -713,7 +713,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepInkDissolver() {
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
         final Player opponent = player.getOpponent();
         final List<Card> kinship = player.getCardsIn(ZoneType.Battlefield, "Ink Dissolver");
 
@@ -789,7 +789,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
 
-            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
         } // for
     } // upkeepInkDissolver()
@@ -800,7 +800,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepKithkinZephyrnaut() {
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
         final List<Card> kinship = player.getCardsIn(ZoneType.Battlefield, "Kithkin Zephyrnaut");
 
         final PlayerZone library = player.getZone(ZoneType.Library);
@@ -874,7 +874,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                 k.removeExtrinsicKeyword("Vigilance");
                             }
                         };
-                        Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
+                        Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);
                     }
                 } // resolve()
 
@@ -891,7 +891,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
 
-            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
         } // for
     } // upkeepKithkinZephyrnaut()
@@ -902,7 +902,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepLeafCrownedElder() {
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
         final List<Card> kinship = player.getCardsIn(ZoneType.Battlefield, "Leaf-Crowned Elder");
 
         final PlayerZone library = player.getZone(ZoneType.Library);
@@ -961,7 +961,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     if (wantToPlayCard) {
                         if (player.isHuman()) {
                             final Card c = library.get(0);
-                            Singletons.getModel().getGameAction().playCardWithoutManaCost(c);
+                            Singletons.getModel().getGame().getAction().playCardWithoutManaCost(c);
                         }
                         // player isComputer()
                         else {
@@ -991,7 +991,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
 
-            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
         } // for
     } // upkeepLeafCrownedElder()
@@ -1002,7 +1002,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepMudbuttonClanger() {
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
         final List<Card> kinship = player.getCardsIn(ZoneType.Battlefield, "Mudbutton Clanger");
 
         final PlayerZone library = player.getZone(ZoneType.Library);
@@ -1071,7 +1071,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                 k.addTempDefenseBoost(-1);
                             }
                         };
-                        Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
+                        Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);
                     }
                 } // resolve()
 
@@ -1088,7 +1088,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
 
-            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
         } // for
     } // upkeepMudbuttonClanger()
@@ -1099,7 +1099,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepNightshadeSchemers() {
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
         final List<Card> kinship = player.getCardsIn(ZoneType.Battlefield, "Nightshade Schemers");
         final Player opponent = player.getOpponent();
 
@@ -1173,7 +1173,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
 
-            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
         } // for
     } // upkeepNightshadeSchemers()
@@ -1184,7 +1184,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepPyroclastConsul() {
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
         final List<Card> kinship = player.getCardsIn(ZoneType.Battlefield, "Pyroclast Consul");
 
         final PlayerZone library = player.getZone(ZoneType.Library);
@@ -1254,7 +1254,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     }
 
                     if (wantDamageCreatures) {
-                        final List<Card> allCreatures = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+                        final List<Card> allCreatures = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
                         for (final Card crd : allCreatures) {
                             crd.addDamage(2, k);
                         }
@@ -1274,7 +1274,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
 
-            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
         } // for
     } // upkeepPyroclastConsul()
@@ -1285,7 +1285,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepSensationGorger() {
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
         final List<Card> kinship = player.getCardsIn(ZoneType.Battlefield, "Sensation Gorger");
         final Player opponent = player.getOpponent();
 
@@ -1366,7 +1366,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
 
-            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
         } // for
     } // upkeepSensationGorger()
@@ -1377,7 +1377,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepSqueakingPieGrubfellows() {
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
         final List<Card> kinship = player.getCardsIn(ZoneType.Battlefield, "Squeaking Pie Grubfellows");
         final Player opponent = player.getOpponent();
 
@@ -1452,7 +1452,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
 
-            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
         } // for
     } // upkeepSqueakingPieGrubfellows()
@@ -1463,7 +1463,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepWanderingGraybeard() {
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
         final List<Card> kinship = player.getCardsIn(ZoneType.Battlefield, "Wandering Graybeard");
 
         final PlayerZone library = player.getZone(ZoneType.Library);
@@ -1536,7 +1536,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
 
-            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
         } // for
     } // upkeepWanderingGraybeard()
@@ -1547,7 +1547,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepWaterspoutWeavers() {
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
         final List<Card> kinship = player.getCardsIn(ZoneType.Battlefield, "Waterspout Weavers");
 
         final PlayerZone library = player.getZone(ZoneType.Library);
@@ -1624,7 +1624,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                 }
                             }
                         };
-                        Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
+                        Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);
                     }
                 } // resolve()
 
@@ -1641,7 +1641,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
 
-            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
         } // for
     } // upkeepWaterspoutWeavers()
@@ -1652,7 +1652,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepWinnowerPatrol() {
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
         final List<Card> kinship = player.getCardsIn(ZoneType.Battlefield, "Winnower Patrol");
 
         final PlayerZone library = player.getZone(ZoneType.Library);
@@ -1725,7 +1725,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
 
-            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
         } // for
     } // upkeepWinnowerPatrol()
@@ -1736,7 +1736,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepWolfSkullShaman() {
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
         final List<Card> kinship = player.getCardsIn(ZoneType.Battlefield, "Wolf-Skull Shaman");
 
         final PlayerZone library = player.getZone(ZoneType.Library);
@@ -1812,7 +1812,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(" triggers Kinship");
             ability.setStackDescription(sb.toString());
 
-            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
         } // for
     } // upkeep_Wolf_Skull_Shaman()
@@ -1827,7 +1827,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepSuspend() {
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
 
         List<Card> list = player.getCardsIn(ZoneType.Exile);
 
@@ -1857,7 +1857,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      */
     private static void upkeepVanishing() {
 
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
         List<Card> list = player.getCardsIn(ZoneType.Battlefield);
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
@@ -1881,7 +1881,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 ability.setStackDescription(sb.toString());
                 ability.setDescription(sb.toString());
 
-                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
             }
         }
@@ -1894,7 +1894,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      */
     private static void upkeepFading() {
 
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
         List<Card> list = player.getCardsIn(ZoneType.Battlefield);
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
@@ -1910,7 +1910,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     public void resolve() {
                         final int fadeCounters = card.getCounters(Counters.FADE);
                         if (fadeCounters <= 0) {
-                            Singletons.getModel().getGameAction().sacrifice(card, null);
+                            Singletons.getModel().getGame().getAction().sacrifice(card, null);
                         } else {
                             card.subtractCounter(Counters.FADE, 1);
                         }
@@ -1923,7 +1923,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 ability.setStackDescription(sb.toString());
                 ability.setDescription(sb.toString());
 
-                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
             }
         }
@@ -1935,12 +1935,12 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepOathOfDruids() {
-        final List<Card> oathList = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Oath of Druids"));
+        final List<Card> oathList = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Oath of Druids"));
         if (oathList.isEmpty()) {
             return;
         }
 
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
 
         if (GameState.compareTypeAmountInPlay(player, "Creature") < 0) {
             for (int i = 0; i < oathList.size(); i++) {
@@ -1981,10 +1981,10 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                     final Card c = libraryList.get(i);
                                     cardsToReveal.add(c);
                                     if (c.isCreature()) {
-                                        Singletons.getModel().getGameAction().moveTo(battlefield, c);
+                                        Singletons.getModel().getGame().getAction().moveTo(battlefield, c);
                                         break;
                                     } else {
-                                        Singletons.getModel().getGameAction().moveToGraveyard(c);
+                                        Singletons.getModel().getGame().getAction().moveToGraveyard(c);
                                     }
                                 } // for loop
                                 if (cardsToReveal.size() > 0) {
@@ -2004,7 +2004,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 ability.setStackDescription(sb.toString());
                 ability.setDescription(sb.toString());
 
-                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
             }
         }
@@ -2016,12 +2016,12 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepOathOfGhouls() {
-        final List<Card> oathList = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Oath of Ghouls"));
+        final List<Card> oathList = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Oath of Ghouls"));
         if (oathList.isEmpty()) {
             return;
         }
 
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
 
         if (GameState.compareTypeAmountInGraveyard(player, "Creature") > 0) {
             for (int i = 0; i < oathList.size(); i++) {
@@ -2036,12 +2036,12 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                 if (o != null) {
                                     final Card card = o;
 
-                                    Singletons.getModel().getGameAction().moveToHand(card);
+                                    Singletons.getModel().getGame().getAction().moveToHand(card);
                                 }
                             } else if (player.isComputer()) {
                                 final Card card = graveyardCreatures.get(0);
 
-                                Singletons.getModel().getGameAction().moveToHand(card);
+                                Singletons.getModel().getGame().getAction().moveToHand(card);
                             }
                         }
                     }
@@ -2053,7 +2053,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 ability.setStackDescription(sb.toString());
                 ability.setDescription(sb.toString());
 
-                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
             }
         }
@@ -2065,8 +2065,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepKarma() {
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final List<Card> karmas = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Karma"));
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
+        final List<Card> karmas = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Karma"));
         final List<Card> swamps = CardLists.getType(player.getCardsIn(ZoneType.Battlefield), "Swamp");
 
         // determine how much damage to deal the current player
@@ -2092,7 +2092,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     ability.setStackDescription(sb.toString());
                     ability.setDescription(sb.toString());
 
-                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+                    Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
                 }
             }
@@ -2110,8 +2110,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
          * to that player, where X is the number of untapped lands he or she
          * controlled at the beginning of this turn.
          */
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final List<Card> list = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Power Surge"));
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
+        final List<Card> list = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Power Surge"));
         final int damage = player.getNumPowerSurgeLands();
 
         for (final Card surge : list) {
@@ -2129,7 +2129,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             ability.setDescription(sb.toString());
 
             if (damage > 0) {
-                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
             }
         } // for
     } // upkeepPowerSurge()
@@ -2140,8 +2140,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepTangleWire() {
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
-        final List<Card> wires = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Tangle Wire"));
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
+        final List<Card> wires = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Tangle Wire"));
 
         for (final Card source : wires) {
             final SpellAbility ability = new Ability(source, "0") {
@@ -2220,7 +2220,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             ability.setDescription(source.getName() + " - " + player
                     + " taps X artifacts, creatures or lands he or she controls.");
 
-            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
         } // foreach(wire)
     } // upkeepTangleWire()
@@ -2231,7 +2231,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepBlazeCounters() {
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
 
         List<Card> blaze = player.getCardsIn(ZoneType.Battlefield);
         blaze = CardLists.filter(blaze, new Predicate<Card>() {
@@ -2255,7 +2255,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
             sb.append(player).append(".");
             ability.setStackDescription(sb.toString());
 
-            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
         }
     }
@@ -2266,7 +2266,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
      * </p>
      */
     private static void upkeepCurseOfMisfortunes() {
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
 
         final List<Card> misfortunes = player.getCardsIn(ZoneType.Battlefield, "Curse of Misfortunes");
 
@@ -2302,8 +2302,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
                         enchantment = CardFactoryUtil.getBestEnchantmentAI(enchantmentsInLibrary, this, false);
                     }
                     if (enchantment != null) {
-                        Singletons.getModel().getGameAction().changeZone(
-                                Singletons.getModel().getGameState().getZoneOf(enchantment),
+                        Singletons.getModel().getGame().getAction().changeZone(
+                                Singletons.getModel().getGame().getZoneOf(enchantment),
                                 enchantment.getOwner().getZone(ZoneType.Battlefield), enchantment, null);
                         enchantment.enchantEntity(source.getEnchantingPlayer());
                     }
@@ -2317,7 +2317,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                             + " the same name as a Curse attached to enchanted player, "
                             + "put it onto the battlefield attached to that player, then shuffle you library.");
             ability.setStackDescription(sb.toString());
-            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
         }
     } // upkeepCurseOfMisfortunes
 

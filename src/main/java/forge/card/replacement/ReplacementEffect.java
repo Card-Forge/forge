@@ -321,7 +321,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
         }
 
         if (this.getMapParams().containsKey("CheckSVar")) {
-            final int sVar = AbilityFactory.calculateAmount(Singletons.getModel().getGameState().getCardState(this.getHostCard()), this
+            final int sVar = AbilityFactory.calculateAmount(Singletons.getModel().getGame().getCardState(this.getHostCard()), this
                     .getMapParams().get("CheckSVar"), null);
             String comparator = "GE1";
             if (this.getMapParams().containsKey("SVarCompare")) {
@@ -329,7 +329,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             }
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
-            final int operandValue = AbilityFactory.calculateAmount(Singletons.getModel().getGameState().getCardState(this.getHostCard()),
+            final int operandValue = AbilityFactory.calculateAmount(Singletons.getModel().getGame().getCardState(this.getHostCard()),
                     svarOperand, null);
             if (!Expressions.compare(sVar, svarOperator, operandValue)) {
                 return false;

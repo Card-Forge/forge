@@ -18,7 +18,6 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
-import forge.gui.match.nonsingleton.VHand;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.properties.ForgePreferences.FPref;
@@ -90,14 +89,6 @@ public class ControlWinLose {
 
     /** Action performed when "quit" button is pressed in default win/lose UI. */
     public void actionOnQuit() {
-        // Clear cards off of playing areas
-        final List<VHand> hands = VMatchUI.SINGLETON_INSTANCE.getHandViews();
-        for (VHand h : hands) {
-            if (h.getPlayer() == null) { continue; }
-            h.getPlayer().getZone(ZoneType.Battlefield).reset();
-            h.getPlayer().getZone(ZoneType.Hand).reset();
-        }
-
         // Reset other stuff
         saveOptions();
         Singletons.getControl().changeState(FControl.HOME_SCREEN);
@@ -125,12 +116,12 @@ public class ControlWinLose {
         GameOutcome lastGame = match.getLastGameOutcome();
         if ( games.isEmpty() ) return;
         
-        for (Player p: Singletons.getModel().getGameState().getPlayers()) {
+        for (Player p: Singletons.getModel().getGame().getPlayers()) {
             if (!p.getName().equals(lastGame.getWinner())) continue; // not a loser
             
             // remove all the lost cards from owners' decks
             List<CardPrinted> losses = new ArrayList<CardPrinted>();
-            for (Player loser : Singletons.getModel().getGameState().getPlayers()) {
+            for (Player loser : Singletons.getModel().getGame().getPlayers()) {
                 if (loser.equals(p)) {
                     continue; // not a loser
                 }

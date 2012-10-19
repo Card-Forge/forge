@@ -106,7 +106,7 @@ public enum VCombat implements IVDoc {
 
         final Border border = new MatteBorder(0, 0, 0, 0, FSkin.getColor(FSkin.Colors.CLR_BORDERS));
 
-        tab.setText("Combat : " + Singletons.getModel().getGameState().getCombat().getAttackers().size());
+        tab.setText("Combat : " + Singletons.getModel().getGame().getCombat().getAttackers().size());
 
         final JTextArea tar = new JTextArea(s0);
         tar.setOpaque(false);

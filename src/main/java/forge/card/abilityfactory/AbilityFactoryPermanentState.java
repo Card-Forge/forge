@@ -474,7 +474,7 @@ public class AbilityFactoryPermanentState {
         final Card source = sa.getSourceCard();
         final Target tgt = sa.getTarget();
 
-        List<Card> list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+        List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
 
         list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
         list = CardLists.getTargetableCards(list, sa);
@@ -863,7 +863,7 @@ public class AbilityFactoryPermanentState {
         final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
-        final PhaseHandler phase = Singletons.getModel().getGameState().getPhaseHandler();
+        final PhaseHandler phase = Singletons.getModel().getGame().getPhaseHandler();
         final Player turn = phase.getPlayerTurn();
 
         if (turn.isHuman() && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
@@ -1028,7 +1028,7 @@ public class AbilityFactoryPermanentState {
                 }
             }
 
-            PhaseHandler phase = Singletons.getModel().getGameState().getPhaseHandler();
+            PhaseHandler phase = Singletons.getModel().getGame().getPhaseHandler();
             if (phase.isPlayerTurn(ai)
                     && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
                 // Tap creatures possible blockers before combat during AI's turn.
@@ -1036,7 +1036,7 @@ public class AbilityFactoryPermanentState {
                 List<Card> attackers;
                 if (phase.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                     //Combat has already started
-                    attackers = Singletons.getModel().getGameState().getCombat().getAttackerList();
+                    attackers = Singletons.getModel().getGame().getCombat().getAttackerList();
                 } else {
                     attackers = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES_CAN_ATTACK);
                     attackers.remove(sa.getSourceCard());
@@ -1099,7 +1099,7 @@ public class AbilityFactoryPermanentState {
         final Card source = sa.getSourceCard();
         final Target tgt = sa.getTarget();
 
-        List<Card> list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+        List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
         list = CardLists.getTargetableCards(list, sa);
 
@@ -1419,7 +1419,7 @@ public class AbilityFactoryPermanentState {
         }
 
         if ((tgtPlayers == null) || tgtPlayers.isEmpty()) {
-            list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+            list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         } else {
             list = tgtPlayers.get(0).getCardsIn(ZoneType.Battlefield);
         }
@@ -1677,7 +1677,7 @@ public class AbilityFactoryPermanentState {
         }
 
         if ((tgtPlayers == null) || tgtPlayers.isEmpty()) {
-            cards = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+            cards = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         } else {
             cards = tgtPlayers.get(0).getCardsIn(ZoneType.Battlefield);
         }
@@ -1712,7 +1712,7 @@ public class AbilityFactoryPermanentState {
         final HashMap<String, String> params = af.getMapParams();
         Player opp = ai.getOpponent();
 
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN)) {
+        if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN)) {
             return false;
         }
 
@@ -1721,7 +1721,7 @@ public class AbilityFactoryPermanentState {
             valid = params.get("ValidCards");
         }
 
-        List<Card> validTappables = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+        List<Card> validTappables = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
 
         final Target tgt = sa.getTarget();
 
@@ -1772,7 +1772,7 @@ public class AbilityFactoryPermanentState {
      * @return a {@link forge.CardList} object.
      */
     private static List<Card> getTapAllTargets(final String valid, final Card source) {
-        List<Card> tmpList = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+        List<Card> tmpList = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         tmpList = CardLists.getValidCards(tmpList, valid, source.getController(), source);
         tmpList = CardLists.filter(tmpList, Presets.UNTAPPED);
         return tmpList;
@@ -2600,7 +2600,7 @@ public class AbilityFactoryPermanentState {
         final Card source = sa.getSourceCard();
         final Target tgt = sa.getTarget();
 
-        List<Card> list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+        List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         list = CardLists.getTargetableCards(CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source), sa);
 
         return false;

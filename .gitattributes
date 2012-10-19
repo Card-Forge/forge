@@ -12680,10 +12680,11 @@ src/main/java/forge/game/player/PlayerStatistics.java -text
 src/main/java/forge/game/player/PlayerType.java svneol=native#text/plain
 src/main/java/forge/game/player/PlayerUtil.java svneol=native#text/plain
 src/main/java/forge/game/player/package-info.java svneol=native#text/plain
-src/main/java/forge/game/zone/IPlayerZone.java svneol=native#text/plain
+src/main/java/forge/game/zone/IZone.java svneol=native#text/plain
 src/main/java/forge/game/zone/MagicStack.java svneol=native#text/plain
 src/main/java/forge/game/zone/PlayerZone.java svneol=native#text/plain
 src/main/java/forge/game/zone/PlayerZoneBattlefield.java svneol=native#text/plain
+src/main/java/forge/game/zone/Zone.java -text
 src/main/java/forge/game/zone/ZoneType.java -text
 src/main/java/forge/game/zone/package-info.java svneol=native#text/plain
 src/main/java/forge/gauntlet/GauntletData.java -text

@@ -291,7 +291,7 @@ public final class AbilityFactoryPlay {
         }
 
         // don't use this as a response
-        if (Singletons.getModel().getGameState().getStack().size() != 0) {
+        if (Singletons.getModel().getGame().getStack().size() != 0) {
             return false;
         }
 
@@ -302,7 +302,7 @@ public final class AbilityFactoryPlay {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             ZoneType zone = tgt.getZone().get(0);
-            cards = Singletons.getModel().getGameState().getCardsIn(zone);
+            cards = Singletons.getModel().getGame().getCardsIn(zone);
             cards = CardLists.getValidCards(cards, tgt.getValidTgts(), ai, source);
             if (cards.isEmpty()) {
                 return false;
@@ -374,7 +374,7 @@ public final class AbilityFactoryPlay {
             if (params.containsKey("ValidZone")) {
                 zone = ZoneType.smartValueOf(params.get("ValidZone"));
             }
-            tgtCards = Singletons.getModel().getGameState().getCardsIn(zone);
+            tgtCards = Singletons.getModel().getGame().getCardsIn(zone);
             tgtCards = AbilityFactory.filterListByType(tgtCards, params.get("Valid"), sa);
         } else if (params.containsKey("Defined")) {
             tgtCards = new ArrayList<Card>(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa));
@@ -511,7 +511,7 @@ public final class AbilityFactoryPlay {
                     newSA.setPayCosts(cost);
                     newSA.setManaCost("");
                     newSA.setDescription(newSA.getDescription() + " (without paying its mana cost)");
-                    Singletons.getModel().getGameAction().playSpellAbility(newSA);
+                    Singletons.getModel().getGame().getAction().playSpellAbility(newSA);
                     if (remember) {
                         source.addRemembered(tgtSA.getSourceCard());
                     }
@@ -528,7 +528,7 @@ public final class AbilityFactoryPlay {
                 }
             } else {
                 if (controller.isHuman()) {
-                    Singletons.getModel().getGameAction().playSpellAbility(tgtSA);
+                    Singletons.getModel().getGame().getAction().playSpellAbility(tgtSA);
                     if (remember) {
                         source.addRemembered(tgtSA.getSourceCard());
                     }

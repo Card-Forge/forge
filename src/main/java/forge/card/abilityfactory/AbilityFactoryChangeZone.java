@@ -55,7 +55,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.ComputerUtilBlock;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.util.MyRandom;
@@ -511,17 +511,17 @@ public final class AbilityFactoryChangeZone {
             
             //Ninjutsu
             if (params.containsKey("Ninjutsu")) {
-                if (source.isType("Legendary") && !Singletons.getModel().getGameState().isCardInPlay("Mirror Gallery")) {
+                if (source.isType("Legendary") && !Singletons.getModel().getGame().isCardInPlay("Mirror Gallery")) {
                     final List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
                     if (Iterables.any(list, CardPredicates.nameEquals(source.getName()))) {
                         return false;
                     }
                 }
-                if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE)) {
+                if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE)) {
                     return false;
                 }
                 List<Card> attackers = new ArrayList<Card>();
-                attackers.addAll(Singletons.getModel().getGameState().getCombat().getUnblockedAttackers());
+                attackers.addAll(Singletons.getModel().getGame().getCombat().getUnblockedAttackers());
                 boolean lowerCMC = false;
                 for (Card attacker : attackers) {
                     if (attacker.getCMC() < source.getCMC()) {
@@ -592,7 +592,7 @@ public final class AbilityFactoryChangeZone {
         }
 
         // don't use fetching to top of library/graveyard before main2
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
+        if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && !params.containsKey("ActivationPhases")) {
             if (!destination.equals("Battlefield") && !destination.equals("Hand")) {
                 return false;
@@ -974,7 +974,7 @@ public final class AbilityFactoryChangeZone {
             }
         } else if (!origin.contains(ZoneType.Library) && !origin.contains(ZoneType.Hand)
                 && !params.containsKey("DefinedPlayer")) {
-            fetchList = Singletons.getModel().getGameState().getCardsIn(origin);
+            fetchList = Singletons.getModel().getGame().getCardsIn(origin);
         } else {
             fetchList = player.getCardsIn(origin);
         }
@@ -1035,7 +1035,7 @@ public final class AbilityFactoryChangeZone {
                     if (origin.contains(ZoneType.Library) && (i < 1) && "False".equals(params.get("Shuffle"))) {
                         player.shuffle();
                     }
-                    movedCard = Singletons.getModel().getGameAction().moveToLibrary(c, libraryPos);
+                    movedCard = Singletons.getModel().getGame().getAction().moveToLibrary(c, libraryPos);
                 } else if (destination.equals(ZoneType.Battlefield)) {
                     if (params.containsKey("Tapped")) {
                         c.setTapped(true);
@@ -1064,20 +1064,20 @@ public final class AbilityFactoryChangeZone {
                     }
 
                     if (params.containsKey("Attacking")) {
-                        Singletons.getModel().getGameState().getCombat().addAttacker(c);
+                        Singletons.getModel().getGame().getCombat().addAttacker(c);
                     }
 
-                    movedCard = Singletons.getModel().getGameAction().moveTo(c.getController().getZone(destination), c);
+                    movedCard = Singletons.getModel().getGame().getAction().moveTo(c.getController().getZone(destination), c);
                     if (params.containsKey("Tapped")) {
                         movedCard.setTapped(true);
                     }
                 } else if (destination.equals(ZoneType.Exile)) {
-                    movedCard = Singletons.getModel().getGameAction().exile(c);
+                    movedCard = Singletons.getModel().getGame().getAction().exile(c);
                     if (params.containsKey("ExileFaceDown")) {
                         movedCard.setState(CardCharacteristicName.FaceDown);
                     }
                 } else {
-                    movedCard = Singletons.getModel().getGameAction().moveTo(destination, c);
+                    movedCard = Singletons.getModel().getGame().getAction().moveTo(destination, c);
                 }
                 movedCards.add(movedCard);
 
@@ -1160,7 +1160,7 @@ public final class AbilityFactoryChangeZone {
             }
         } else if (!origin.contains(ZoneType.Library) && !origin.contains(ZoneType.Hand)
                 && !params.containsKey("DefinedPlayer")) {
-            fetchList = Singletons.getModel().getGameState().getCardsIn(origin);
+            fetchList = Singletons.getModel().getGame().getCardsIn(origin);
             fetchList = AbilityFactory.filterListByType(fetchList, type, sa);
         } else {
             fetchList = player.getCardsIn(origin);
@@ -1297,7 +1297,7 @@ public final class AbilityFactoryChangeZone {
             if (ZoneType.Library.equals(destination)) {
                 final int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params
                         .get("LibraryPosition")) : 0;
-                movedCard = Singletons.getModel().getGameAction().moveToLibrary(c, libraryPos);
+                movedCard = Singletons.getModel().getGame().getAction().moveToLibrary(c, libraryPos);
             } else if (ZoneType.Battlefield.equals(destination)) {
                 if (params.containsKey("Tapped")) {
                     c.setTapped(true);
@@ -1324,7 +1324,7 @@ public final class AbilityFactoryChangeZone {
                 }
 
                 if (params.containsKey("Attacking")) {
-                    Singletons.getModel().getGameState().getCombat().addAttacker(c);
+                    Singletons.getModel().getGame().getCombat().addAttacker(c);
                 }
                 // Auras without Candidates stay in their current location
                 if (c.isAura()) {
@@ -1334,17 +1334,17 @@ public final class AbilityFactoryChangeZone {
                     }
                 }
 
-                movedCard = Singletons.getModel().getGameAction().moveTo(c.getController().getZone(destination), c);
+                movedCard = Singletons.getModel().getGame().getAction().moveTo(c.getController().getZone(destination), c);
                 if (params.containsKey("Tapped")) {
                     movedCard.setTapped(true);
                 }
             } else if (destination.equals(ZoneType.Exile)) {
-                movedCard = Singletons.getModel().getGameAction().exile(c);
+                movedCard = Singletons.getModel().getGame().getAction().exile(c);
                 if (params.containsKey("ExileFaceDown")) {
                     movedCard.setState(CardCharacteristicName.FaceDown);
                 }
             } else {
-                movedCard = Singletons.getModel().getGameAction().moveTo(destination, c);
+                movedCard = Singletons.getModel().getGame().getAction().moveTo(destination, c);
             }
 
             if (remember != null) {
@@ -1556,7 +1556,7 @@ public final class AbilityFactoryChangeZone {
             // in general this should only be used to protect from Imminent Harm
             // (dying or losing control of)
             if (origin.equals(ZoneType.Battlefield)) {
-                if (Singletons.getModel().getGameState().getStack().size() == 0) {
+                if (Singletons.getModel().getGame().getStack().size() == 0) {
                     return false;
                 }
 
@@ -1587,14 +1587,14 @@ public final class AbilityFactoryChangeZone {
         // don't return something to your hand if your hand is full of good stuff
         if (destination.equals(ZoneType.Hand) && origin.equals(ZoneType.Graveyard)) {
             int handSize = ai.getCardsIn(ZoneType.Hand).size();
-            if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN1)) {
+            if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN1)) {
                 return false;
             }
-            if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
+            if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                     && handSize > 1) {
                 return false;
             }
-            if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(ai)
+            if (Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai)
                     && handSize >= ai.getMaxHandSize()) {
                 return false;
             }
@@ -1664,7 +1664,7 @@ public final class AbilityFactoryChangeZone {
             tgt.resetTargets();
         }
 
-        List<Card> list = Singletons.getModel().getGameState().getCardsIn(origin);
+        List<Card> list = Singletons.getModel().getGame().getCardsIn(origin);
         list = CardLists.getValidCards(list, tgt.getValidTgts(), ai, source);
         if (params.containsKey("AITgts")) {
             list = CardLists.getValidCards(list, params.get("AITgts"), sa.getActivatingPlayer(), source);
@@ -1698,7 +1698,7 @@ public final class AbilityFactoryChangeZone {
 
                 // check stack for something on the stack that will kill
                 // anything i control
-                if (Singletons.getModel().getGameState().getStack().size() > 0) {
+                if (Singletons.getModel().getGame().getStack().size() > 0) {
                     final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(ai, af);
 
                     final List<Card> threatenedTargets = new ArrayList<Card>();
@@ -1716,7 +1716,7 @@ public final class AbilityFactoryChangeZone {
                     }
                 }
                 // Save combatants
-                else if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                else if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     final List<Card> combatants = CardLists.filter(aiPermanents, CardPredicates.Presets.CREATURES);
                     CardLists.sortByEvaluateCreature(combatants);
 
@@ -1762,7 +1762,7 @@ public final class AbilityFactoryChangeZone {
         if (origin.equals(ZoneType.Battlefield)
                 && destination.equals(ZoneType.Exile)
                 && (subAPI.equals("DelayedTrigger") || (subAPI.equals("ChangeZone") && subAffected.equals("Remembered")))
-                && !(Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || sa
+                && !(Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || sa
                         .isAbility())) {
             return false;
         }
@@ -1772,8 +1772,8 @@ public final class AbilityFactoryChangeZone {
 
             // don't rush bouncing stuff when not going to attack
             if (!sa.isTrigger() && sa.getPayCosts() != null
-                    && Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
-                    && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(ai)
+                    && Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
+                    && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai)
                     && ai.getCreaturesInPlay().isEmpty()) {
                 return false;
             }
@@ -1792,7 +1792,7 @@ public final class AbilityFactoryChangeZone {
         }
 
         // Only care about combatants during combat
-        if (Singletons.getModel().getGameState().getPhaseHandler().inCombat()) {
+        if (Singletons.getModel().getGame().getPhaseHandler().inCombat()) {
             CardLists.getValidCards(list, "Card.attacking,Card.blocking", null, null);
         }
 
@@ -1899,7 +1899,7 @@ public final class AbilityFactoryChangeZone {
         final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));
         final Target tgt = sa.getTarget();
 
-        List<Card> list = Singletons.getModel().getGameState().getCardsIn(origin);
+        List<Card> list = Singletons.getModel().getGame().getCardsIn(origin);
         list = CardLists.getValidCards(list, tgt.getValidTgts(), ai, source);
 
         // Narrow down the list:
@@ -2205,7 +2205,7 @@ public final class AbilityFactoryChangeZone {
                 continue;
             }
 
-            final SpellAbilityStackInstance si = Singletons.getModel().getGameState().getStack().getInstanceFromSpellAbility(tgtSA);
+            final SpellAbilityStackInstance si = Singletons.getModel().getGame().getStack().getInstanceFromSpellAbility(tgtSA);
             if (si == null) {
                 continue;
             }
@@ -2234,7 +2234,7 @@ public final class AbilityFactoryChangeZone {
                         && !GameActionUtil.showYesNoDialog(hostCard, sb.toString())) {
                     continue;
                 }
-                final PlayerZone originZone = Singletons.getModel().getGameState().getZoneOf(tgtC);
+                final Zone originZone = Singletons.getModel().getGame().getZoneOf(tgtC);
 
                 // if Target isn't in the expected Zone, continue
 
@@ -2249,7 +2249,7 @@ public final class AbilityFactoryChangeZone {
                     final int libraryPosition = params.containsKey("LibraryPosition") ? Integer.parseInt(params
                             .get("LibraryPosition")) : 0;
 
-                    movedCard = Singletons.getModel().getGameAction().moveToLibrary(tgtC, libraryPosition);
+                    movedCard = Singletons.getModel().getGame().getAction().moveToLibrary(tgtC, libraryPosition);
 
                     // for things like Gaea's Blessing
                     if (params.containsKey("Shuffle")) {
@@ -2290,25 +2290,25 @@ public final class AbilityFactoryChangeZone {
                             }
                         }
 
-                        movedCard = Singletons.getModel().getGameAction()
+                        movedCard = Singletons.getModel().getGame().getAction()
                                 .moveTo(tgtC.getController().getZone(destination), tgtC);
 
                         if (params.containsKey("Ninjutsu") || params.containsKey("Attacking")) {
-                            Singletons.getModel().getGameState().getCombat().addAttacker(tgtC);
-                            Singletons.getModel().getGameState().getCombat().addUnblockedAttacker(tgtC);
+                            Singletons.getModel().getGame().getCombat().addAttacker(tgtC);
+                            Singletons.getModel().getGame().getCombat().addUnblockedAttacker(tgtC);
                         }
                         if (params.containsKey("Tapped") || params.containsKey("Ninjutsu")) {
                             tgtC.setTapped(true);
                         }
                     } else {
-                        movedCard = Singletons.getModel().getGameAction().moveTo(destination, tgtC);
+                        movedCard = Singletons.getModel().getGame().getAction().moveTo(destination, tgtC);
                         // If a card is Exiled from the stack, remove its spells from the stack
                         if (params.containsKey("Fizzle")) {
                             ArrayList<SpellAbility> spells = tgtC.getSpellAbilities();
                             for (SpellAbility spell : spells) {
                                 if (tgtC.isInZone(ZoneType.Exile)) {
-                                    final SpellAbilityStackInstance si = Singletons.getModel().getGameState().getStack().getInstanceFromSpellAbility(spell);
-                                    Singletons.getModel().getGameState().getStack().remove(si);
+                                    final SpellAbilityStackInstance si = Singletons.getModel().getGame().getStack().getInstanceFromSpellAbility(spell);
+                                    Singletons.getModel().getGame().getStack().remove(si);
                                 }
                             }
                         }
@@ -2347,7 +2347,7 @@ public final class AbilityFactoryChangeZone {
         final ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(), defined, sa);
 
         for (final Card c : list) {
-            final Card actualCard = Singletons.getModel().getGameState().getCardState(c);
+            final Card actualCard = Singletons.getModel().getGame().getCardState(c);
             ret.add(actualCard);
         }
         return ret;
@@ -2367,7 +2367,7 @@ public final class AbilityFactoryChangeZone {
      *            object.
      */
     private static void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si) {
-        Singletons.getModel().getGameState().getStack().remove(si);
+        Singletons.getModel().getGame().getStack().remove(si);
 
         final AbilityFactory af = srcSA.getAbilityFactory();
         final HashMap<String, String> params = af.getMapParams();
@@ -2376,19 +2376,19 @@ public final class AbilityFactoryChangeZone {
             if (tgtSA.isAbility()) {
                 // Shouldn't be able to target Abilities but leaving this in for now
             } else if (tgtSA.isFlashBackAbility())  {
-                Singletons.getModel().getGameAction().exile(tgtSA.getSourceCard());
+                Singletons.getModel().getGame().getAction().exile(tgtSA.getSourceCard());
             } else if (params.get("Destination").equals("Graveyard")) {
-                Singletons.getModel().getGameAction().moveToGraveyard(tgtSA.getSourceCard());
+                Singletons.getModel().getGame().getAction().moveToGraveyard(tgtSA.getSourceCard());
             } else if (params.get("Destination").equals("Exile")) {
-                Singletons.getModel().getGameAction().exile(tgtSA.getSourceCard());
+                Singletons.getModel().getGame().getAction().exile(tgtSA.getSourceCard());
             } else if (params.get("Destination").equals("TopOfLibrary")) {
-                Singletons.getModel().getGameAction().moveToLibrary(tgtSA.getSourceCard());
+                Singletons.getModel().getGame().getAction().moveToLibrary(tgtSA.getSourceCard());
             } else if (params.get("Destination").equals("Hand")) {
-                Singletons.getModel().getGameAction().moveToHand(tgtSA.getSourceCard());
+                Singletons.getModel().getGame().getAction().moveToHand(tgtSA.getSourceCard());
             } else if (params.get("Destination").equals("BottomOfLibrary")) {
-                Singletons.getModel().getGameAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
+                Singletons.getModel().getGame().getAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
             } else if (params.get("Destination").equals("ShuffleIntoLibrary")) {
-                Singletons.getModel().getGameAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
+                Singletons.getModel().getGame().getAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
                 tgtSA.getSourceCard().getController().shuffle();
             } else {
                 throw new IllegalArgumentException("AbilityFactory_ChangeZone: Invalid Destination argument for card "
@@ -2647,7 +2647,7 @@ public final class AbilityFactoryChangeZone {
             }
 
             // Don't cast during main1?
-            if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.MAIN1, ai)) {
+            if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.MAIN1, ai)) {
                 return false;
             }
         } else if (origin.equals(ZoneType.Graveyard)) {
@@ -2925,7 +2925,7 @@ public final class AbilityFactoryChangeZone {
         }
 
         if ((tgtPlayers == null) || tgtPlayers.isEmpty()) {
-            cards = Singletons.getModel().getGameState().getCardsIn(origin);
+            cards = Singletons.getModel().getGame().getCardsIn(origin);
         } else {
             cards = tgtPlayers.get(0).getCardsIn(origin);
         }
@@ -2958,9 +2958,9 @@ public final class AbilityFactoryChangeZone {
 
             if (params.containsKey("GainControl")) {
                 c.addController(sa.getSourceCard());
-                Singletons.getModel().getGameAction().moveToPlay(c, sa.getActivatingPlayer());
+                Singletons.getModel().getGame().getAction().moveToPlay(c, sa.getActivatingPlayer());
             } else {
-                final Card movedCard = Singletons.getModel().getGameAction().moveTo(destination, c, libraryPos);
+                final Card movedCard = Singletons.getModel().getGame().getAction().moveTo(destination, c, libraryPos);
                 if (params.containsKey("ExileFaceDown")) {
                     movedCard.setState(CardCharacteristicName.FaceDown);
                 }
@@ -2970,14 +2970,14 @@ public final class AbilityFactoryChangeZone {
             }
 
             if (remember != null) {
-                Singletons.getModel().getGameState().getCardState(sa.getSourceCard()).addRemembered(c);
+                Singletons.getModel().getGame().getCardState(sa.getSourceCard()).addRemembered(c);
             }
         }
 
         // if Shuffle parameter exists, and any amount of cards were owned by
         // that player, then shuffle that library
         if (params.containsKey("Shuffle")) {
-            for( Player p : Singletons.getModel().getGameState().getPlayers()) {
+            for( Player p : Singletons.getModel().getGame().getPlayers()) {
                 if (Iterables.any(cards, CardPredicates.isOwner(p))) {
                     p.shuffle();
                 }

@@ -269,7 +269,7 @@ public final class AbilityFactoryClone {
         // TODO - add some kind of check for during human turn to answer
         // "Can I use this to block something?"
 
-        PhaseHandler phase = Singletons.getModel().getGameState().getPhaseHandler(); 
+        PhaseHandler phase = Singletons.getModel().getGame().getPhaseHandler(); 
         // don't use instant speed clone abilities outside computers
         // Combat_Begin step
         if (!phase.is(PhaseType.COMBAT_BEGIN)
@@ -280,7 +280,7 @@ public final class AbilityFactoryClone {
 
         // don't use instant speed clone abilities outside humans
         // Combat_Declare_Attackers_InstantAbility step
-        if ( (!phase.is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || Singletons.getModel().getGameState().getCombat().getAttackers().isEmpty())
+        if ( (!phase.is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || Singletons.getModel().getGame().getCombat().getAttackers().isEmpty())
            && !phase.isPlayerTurn(ai)) {
             return false;
         }

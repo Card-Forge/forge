@@ -375,7 +375,7 @@ public class AbilityFactoryDestroy {
         final Player opp = ai.getOpponent();
         if (tgt != null) {
             List<Card> list;
-            list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+            list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
             list = CardLists.getTargetableCards(list, sa);
             list = CardLists.getValidCards(list, tgt.getValidTgts(), source.getController(), source);
 
@@ -593,11 +593,11 @@ public class AbilityFactoryDestroy {
             if (tgtC.isInPlay() && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
                 boolean destroyed = false;
                 if (sac) {
-                    destroyed = Singletons.getModel().getGameAction().sacrifice(tgtC, sa);
+                    destroyed = Singletons.getModel().getGame().getAction().sacrifice(tgtC, sa);
                 } else if (noRegen) {
-                    destroyed = Singletons.getModel().getGameAction().destroyNoRegeneration(tgtC);
+                    destroyed = Singletons.getModel().getGame().getAction().destroyNoRegeneration(tgtC);
                 } else {
-                    destroyed = Singletons.getModel().getGameAction().destroy(tgtC);
+                    destroyed = Singletons.getModel().getGame().getAction().destroy(tgtC);
                 } if (destroyed  && remDestroyed) {
                     card.addRemembered(tgtC);
                 }
@@ -608,11 +608,11 @@ public class AbilityFactoryDestroy {
             if (unTgtC.isInPlay()) {
                 boolean destroyed = false;
                 if (sac) {
-                    destroyed = Singletons.getModel().getGameAction().sacrifice(unTgtC, sa);
+                    destroyed = Singletons.getModel().getGame().getAction().sacrifice(unTgtC, sa);
                 } else if (noRegen) {
-                    destroyed = Singletons.getModel().getGameAction().destroyNoRegeneration(unTgtC);
+                    destroyed = Singletons.getModel().getGame().getAction().destroyNoRegeneration(unTgtC);
                 } else {
-                    destroyed = Singletons.getModel().getGameAction().destroy(unTgtC);
+                    destroyed = Singletons.getModel().getGame().getAction().destroy(unTgtC);
                 } if (destroyed  && remDestroyed) {
                     card.addRemembered(unTgtC);
                 }
@@ -1036,7 +1036,7 @@ public class AbilityFactoryDestroy {
             valid = valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(card, "X", sa)));
         }
 
-        List<Card> list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+        List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
 
         if (targetPlayer != null) {
             list = CardLists.filterControlledBy(list, targetPlayer);
@@ -1051,13 +1051,13 @@ public class AbilityFactoryDestroy {
 
         if (noRegen) {
             for (int i = 0; i < list.size(); i++) {
-                if (Singletons.getModel().getGameAction().destroyNoRegeneration(list.get(i)) && remDestroyed) {
+                if (Singletons.getModel().getGame().getAction().destroyNoRegeneration(list.get(i)) && remDestroyed) {
                     card.addRemembered(list.get(i));
                 }
             }
         } else {
             for (int i = 0; i < list.size(); i++) {
-                if (Singletons.getModel().getGameAction().destroy(list.get(i)) && remDestroyed) {
+                if (Singletons.getModel().getGame().getAction().destroy(list.get(i)) && remDestroyed) {
                     card.addRemembered(list.get(i));
                 }
             }

@@ -49,6 +49,7 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCostAbility;
+import forge.game.GameState;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -80,6 +81,16 @@ public class MagicStack extends MyObservable {
     private final List<Card> thisTurnCast = new ArrayList<Card>();
     private List<Card> lastTurnCast = new ArrayList<Card>();
     private Card curResolvingCard = null;
+
+    private final GameState game;
+
+    /**
+     * TODO: Write javadoc for Constructor.
+     * @param gameState
+     */
+    public MagicStack(GameState gameState) {
+        game = gameState;
+    }
 
     /**
      * <p>
@@ -198,7 +209,7 @@ public class MagicStack extends MyObservable {
         if (ability.isSpell()) {
             final Card source = ability.getSourceCard();
             if (!source.isCopiedSpell() && !source.isInZone(ZoneType.Stack)) {
-                ability.setSourceCard(Singletons.getModel().getGameAction().moveToStack(source));
+                ability.setSourceCard(game.getAction().moveToStack(source));
             }
         }
 
@@ -222,7 +233,7 @@ public class MagicStack extends MyObservable {
             this.add(sa);
         }
         if (checkState) {
-            Singletons.getModel().getGameAction().checkStateEffects();
+            game.getAction().checkStateEffects();
         }
     }
 
@@ -327,7 +338,7 @@ public class MagicStack extends MyObservable {
         ManaCost manaCost = new ManaCost(sa.getManaCost());
         String mana = manaCost.toString();
 
-        int multiKickerPaid = Singletons.getModel().getGameAction().getCostCuttingGetMultiKickerManaCostPaid();
+        int multiKickerPaid = game.getAction().getCostCuttingGetMultiKickerManaCostPaid();
 
         String numberManaCost = " ";
 
@@ -346,12 +357,12 @@ public class MagicStack extends MyObservable {
 
                 if ((check - multiKickerPaid) < 0) {
                     multiKickerPaid = multiKickerPaid - check;
-                    Singletons.getModel().getGameAction().setCostCuttingGetMultiKickerManaCostPaid(multiKickerPaid);
+                    game.getAction().setCostCuttingGetMultiKickerManaCostPaid(multiKickerPaid);
                     mana = mana.replaceFirst(String.valueOf(check), "0");
                 } else {
                     mana = mana.replaceFirst(String.valueOf(check), String.valueOf(check - multiKickerPaid));
                     multiKickerPaid = 0;
-                    Singletons.getModel().getGameAction().setCostCuttingGetMultiKickerManaCostPaid(multiKickerPaid);
+                    game.getAction().setCostCuttingGetMultiKickerManaCostPaid(multiKickerPaid);
                 }
             }
             mana = mana.trim();
@@ -360,15 +371,15 @@ public class MagicStack extends MyObservable {
             }
             manaCost = new ManaCost(mana);
         }
-        final String colorCut = Singletons.getModel().getGameAction().getCostCuttingGetMultiKickerManaCostPaidColored();
+        final String colorCut = game.getAction().getCostCuttingGetMultiKickerManaCostPaidColored();
 
         for (int colorCutIx = 0; colorCutIx < colorCut.length(); colorCutIx++) {
             if ("WUGRB".contains(colorCut.substring(colorCutIx, colorCutIx + 1))
                     && !mana.equals(mana.replaceFirst((colorCut.substring(colorCutIx, colorCutIx + 1)), ""))) {
                 mana = mana.replaceFirst(colorCut.substring(colorCutIx, colorCutIx + 1), "");
 
-                Singletons.getModel().getGameAction().setCostCuttingGetMultiKickerManaCostPaidColored(
-                        Singletons.getModel().getGameAction().getCostCuttingGetMultiKickerManaCostPaidColored()
+                game.getAction().setCostCuttingGetMultiKickerManaCostPaidColored(
+                        game.getAction().getCostCuttingGetMultiKickerManaCostPaidColored()
                                 .replaceFirst(colorCut.substring(colorCutIx, colorCutIx + 1), ""));
 
                 mana = mana.trim();
@@ -412,7 +423,7 @@ public class MagicStack extends MyObservable {
         if (sp instanceof AbilityMana) { // Mana Abilities go straight through
             sp.resolve();
             sp.resetOnceResolved();
-            Singletons.getModel().getGameState().getGameLog().add("Mana", sp.getSourceCard() + " - " + sp.getDescription(), 4);
+            game.getGameLog().add("Mana", sp.getSourceCard() + " - " + sp.getDescription(), 4);
             return;
         }
 
@@ -455,7 +466,7 @@ public class MagicStack extends MyObservable {
         }
         sb.append(".");
 
-        Singletons.getModel().getGameState().getGameLog().add("AddToStack", sb.toString(), 2);
+        game.getGameLog().add("AddToStack", sb.toString(), 2);
         //============= GameLog ======================
 
         // if activating player slips through the cracks, assign activating
@@ -465,15 +476,15 @@ public class MagicStack extends MyObservable {
             System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
         }
 
-        if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.CLEANUP)) {
+        if (game.getPhaseHandler().is(PhaseType.CLEANUP)) {
             // If something triggers during Cleanup, need to repeat
-            Singletons.getModel().getGameState().getPhaseHandler().repeatPhase();
+            game.getPhaseHandler().repeatPhase();
         }
 
         if ((sp instanceof AbilityTriggered) || (sp instanceof AbilityStatic)) {
             // TODO: make working triggered ability
             sp.resolve();
-            Singletons.getModel().getGameAction().checkStateEffects();
+            game.getAction().checkStateEffects();
             //GuiDisplayUtil.updateGUI();
         } else {
             if (sp.getOptionalAdditionalCosts() != null) {
@@ -568,8 +579,8 @@ public class MagicStack extends MyObservable {
                         if (manaCost.isPaid()) {
                             this.execute();
                         } else {
-                            if ((Singletons.getModel().getGameAction().getCostCuttingGetMultiKickerManaCostPaid() == 0)
-                                    && Singletons.getModel().getGameAction().getCostCuttingGetMultiKickerManaCostPaidColored()
+                            if ((game.getAction().getCostCuttingGetMultiKickerManaCostPaid() == 0)
+                                    && game.getAction().getCostCuttingGetMultiKickerManaCostPaidColored()
                                             .equals("")) {
 
                                 Singletons.getModel().getMatch().getInput().setInput(
@@ -584,12 +595,12 @@ public class MagicStack extends MyObservable {
                                                                 + sa.getSourceCard()
                                                                 + "\r\n"
                                                                 + "Mana in Reserve: "
-                                                                + ((Singletons.getModel().getGameAction()
+                                                                + ((game.getAction()
                                                                         .getCostCuttingGetMultiKickerManaCostPaid() != 0)
-                                                                        ? Singletons.getModel().getGameAction()
+                                                                        ? game.getAction()
                                                                         .getCostCuttingGetMultiKickerManaCostPaid()
                                                                         : "")
-                                                                + Singletons.getModel().getGameAction()
+                                                                + game.getAction()
                                                                         .getCostCuttingGetMultiKickerManaCostPaidColored()
                                                                 + "\r\n" + "Times Kicked: "
                                                                 + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n",
@@ -606,8 +617,8 @@ public class MagicStack extends MyObservable {
                     if (manaCost.isPaid()) {
                         paidCommand.execute();
                     } else {
-                        if ((Singletons.getModel().getGameAction().getCostCuttingGetMultiKickerManaCostPaid() == 0)
-                                && Singletons.getModel().getGameAction().getCostCuttingGetMultiKickerManaCostPaidColored().equals("")) {
+                        if ((game.getAction().getCostCuttingGetMultiKickerManaCostPaid() == 0)
+                                && game.getAction().getCostCuttingGetMultiKickerManaCostPaidColored().equals("")) {
                             Singletons.getModel().getMatch().getInput().setInput(
                                     new InputPayManaCostAbility("Multikicker for " + sa.getSourceCard() + "\r\n"
                                             + "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n",
@@ -619,11 +630,11 @@ public class MagicStack extends MyObservable {
                                                     + sa.getSourceCard()
                                                     + "\r\n"
                                                     + "Mana in Reserve: "
-                                                    + ((Singletons.getModel().getGameAction()
+                                                    + ((game.getAction()
                                                             .getCostCuttingGetMultiKickerManaCostPaid() != 0)
-                                                            ? Singletons.getModel().getGameAction().getCostCuttingGetMultiKickerManaCostPaid()
+                                                            ? game.getAction().getCostCuttingGetMultiKickerManaCostPaid()
                                                             : "")
-                                                    + Singletons.getModel().getGameAction()
+                                                    + game.getAction()
                                                             .getCostCuttingGetMultiKickerManaCostPaidColored() + "\r\n"
                                                     + "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude()
                                                     + "\r\n", manaCost.toString(), paidCommand, unpaidCommand));
@@ -716,23 +727,23 @@ public class MagicStack extends MyObservable {
             runParams.put("Player", sp.getSourceCard().getController());
             runParams.put("Activator", sp.getActivatingPlayer());
             runParams.put("CastSA", sp);
-            Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams);
+            game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams);
 
             // Run SpellCast triggers
             if (sp.isSpell()) {
-                Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.SpellCast, runParams);
+                game.getTriggerHandler().runTrigger(TriggerType.SpellCast, runParams);
             }
 
             // Run AbilityCast triggers
             if (sp.isAbility() && !sp.isTrigger()) {
-                Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.AbilityCast, runParams);
+                game.getTriggerHandler().runTrigger(TriggerType.AbilityCast, runParams);
             }
 
             // Run Cycled triggers
             if (sp.isCycling()) {
                 runParams.clear();
                 runParams.put("Card", sp.getSourceCard());
-                Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.Cycled, runParams);
+                game.getTriggerHandler().runTrigger(TriggerType.Cycled, runParams);
             }
 
             // Run BecomesTarget triggers
@@ -744,7 +755,7 @@ public class MagicStack extends MyObservable {
                         for (final Object tgt : tc.getTargets()) {
                             runParams.put("Target", tgt);
 
-                            Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
+                            game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
                         }
                     }
                 }
@@ -755,17 +766,17 @@ public class MagicStack extends MyObservable {
             else if (sp.getTargetCard() != null) {
                 runParams.put("Target", sp.getTargetCard());
 
-                Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
+                game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
             } else if ((sp.getTargetList() != null) && (sp.getTargetList().size() > 0)) {
                 for (final Card ctgt : sp.getTargetList()) {
                     runParams.put("Target", ctgt);
 
-                    Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
+                    game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
                 }
             } else if (sp.getTargetPlayer() != null) {
                 runParams.put("Target", sp.getTargetPlayer());
 
-                Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
+                game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
             }
         }
 
@@ -774,11 +785,11 @@ public class MagicStack extends MyObservable {
          * name is in a graveyard or a nontoken permanent with the same name is
          * on the battlefield.
          */
-        if (sp.isSpell() && Singletons.getModel().getGameState().isCardInPlay("Bazaar of Wonders")) {
+        if (sp.isSpell() && game.isCardInPlay("Bazaar of Wonders")) {
             boolean found = false;
-            List<Card> all = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+            List<Card> all = game.getCardsIn(ZoneType.Battlefield);
             all = CardLists.filter(all, Presets.NON_TOKEN);
-            final List<Card> graves = Singletons.getModel().getGameState().getCardsIn(ZoneType.Graveyard);
+            final List<Card> graves = game.getCardsIn(ZoneType.Graveyard);
             all.addAll(graves);
 
             for (final Card c : all) {
@@ -788,7 +799,7 @@ public class MagicStack extends MyObservable {
             }
 
             if (found) {
-                final List<Card> bazaars = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Bazaar of Wonders")); // should
+                final List<Card> bazaars = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Bazaar of Wonders")); // should
                 // only
                 // be
                 // 1...
@@ -796,8 +807,8 @@ public class MagicStack extends MyObservable {
                     final SpellAbility counter = new Ability(bazaar, "0") {
                         @Override
                         public void resolve() {
-                            if (Singletons.getModel().getGameState().getStack().size() > 0) {
-                                Singletons.getModel().getGameState().getStack().pop();
+                            if (game.getStack().size() > 0) {
+                                game.getStack().pop();
                             }
                         } // resolve()
                     }; // SpellAbility
@@ -808,7 +819,7 @@ public class MagicStack extends MyObservable {
         }
 
         if (this.getSimultaneousStackEntryList().size() > 0) {
-            Singletons.getModel().getGameState().getPhaseHandler().passPriority();
+            game.getPhaseHandler().passPriority();
         }
     }
 
@@ -858,7 +869,7 @@ public class MagicStack extends MyObservable {
         // When it's down there. That makes absolutely no sense to me, so i'm putting it back for now
         if (!((sp instanceof AbilityTriggered) || (sp instanceof AbilityStatic))) {
             // when something is added we need to setPriority
-            Singletons.getModel().getGameState().getPhaseHandler().setPriority(sp.getActivatingPlayer());
+            game.getPhaseHandler().setPriority(sp.getActivatingPlayer());
         }
         
         SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
@@ -888,7 +899,7 @@ public class MagicStack extends MyObservable {
 
         final SpellAbility sa = this.pop();
 
-        Singletons.getModel().getGameState().getPhaseHandler().resetPriority(); // ActivePlayer gains priority first
+        game.getPhaseHandler().resetPriority(); // ActivePlayer gains priority first
                                             // after Resolve
         final Card source = sa.getSourceCard();
         curResolvingCard = source;
@@ -896,26 +907,26 @@ public class MagicStack extends MyObservable {
         if (this.hasFizzled(sa, source, false)) { // Fizzle
             // TODO: Spell fizzles, what's the best way to alert player?
             Log.debug(source.getName() + " ability fizzles.");
-            Singletons.getModel().getGameState().getGameLog().add("ResolveStack", source.getName() + " ability fizzles.", 2);
+            game.getGameLog().add("ResolveStack", source.getName() + " ability fizzles.", 2);
             this.finishResolving(sa, true);
         } else if (sa.getAbilityFactory() != null) {
-            Singletons.getModel().getGameState().getGameLog().add("ResolveStack", sa.getStackDescription(), 2);
+            game.getGameLog().add("ResolveStack", sa.getStackDescription(), 2);
             AbilityFactory.handleRemembering(sa, sa.getAbilityFactory());
             AbilityFactory.resolve(sa, true);
         } else {
-            Singletons.getModel().getGameState().getGameLog().add("ResolveStack", sa.getStackDescription(), 2);
+            game.getGameLog().add("ResolveStack", sa.getStackDescription(), 2);
             sa.resolve();
             this.finishResolving(sa, false);
         }
         sa.getSourceCard().setXManaCostPaid(0);
 
         if (source.hasStartOfKeyword("Haunt") && !source.isCreature()
-                && Singletons.getModel().getGameState().getZoneOf(source).is(ZoneType.Graveyard)) {
-            final List<Card> creats = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+                && game.getZoneOf(source).is(ZoneType.Graveyard)) {
+            final List<Card> creats = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
             final Ability haunterDiesWork = new Ability(source, "0") {
                 @Override
                 public void resolve() {
-                    Singletons.getModel().getGameAction().exile(source);
+                    game.getAction().exile(source);
                     this.getTargetCard().addHauntedBy(source);
                 }
             };
@@ -987,18 +998,18 @@ public class MagicStack extends MyObservable {
         }
         // Handle cards that need to be moved differently
         else if (sa.isBuyBackAbility() && !fizzle) {
-            Singletons.getModel().getGameAction().moveToHand(source);
+            game.getAction().moveToHand(source);
         } else if (sa.isFlashBackAbility()) {
-            Singletons.getModel().getGameAction().exile(source);
+            game.getAction().exile(source);
             sa.setFlashBackAbility(false);
         } else if (source.hasKeyword("Rebound")
                 && source.getCastFrom() == ZoneType.Hand
-                && Singletons.getModel().getGameState().getZoneOf(source).is(ZoneType.Stack)
+                && game.getZoneOf(source).is(ZoneType.Stack)
                 && source.getOwner().equals(source.getController())) //"If you cast this spell from your hand"
         {
             
             //Move rebounding card to exile
-            source = Singletons.getModel().getGameAction().exile(source);
+            source = game.getAction().exile(source);
 
             source.setSVar("ReboundAbilityTrigger", "DB$ Play | Defined$ Self " +
             		"| WithoutManaCost$ True | Optional$ True");
@@ -1009,14 +1020,14 @@ public class MagicStack extends MyObservable {
             		"| TriggerDescription$ At the beginning of your next upkeep, you may cast " + source.toString() 
             		+ " without paying it's manacost.", source, true);
 
-            Singletons.getModel().getGameState().getTriggerHandler().registerDelayedTrigger(reboundTrigger);
+            game.getTriggerHandler().registerDelayedTrigger(reboundTrigger);
         }
 
         // If Spell and still on the Stack then let it goto the graveyard or
         // replace its own movement
         else if (!source.isCopiedSpell() && (source.isInstant() || source.isSorcery() || fizzle)
                 && source.isInZone(ZoneType.Stack)) {
-            Singletons.getModel().getGameAction().moveToGraveyard(source);
+            game.getAction().moveToGraveyard(source);
         }
     }
 
@@ -1041,9 +1052,9 @@ public class MagicStack extends MyObservable {
         this.unfreezeStack();
         sa.resetOnceResolved();
 
-        Singletons.getModel().getGameAction().checkStateEffects();
+        game.getAction().checkStateEffects();
 
-        Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(false);
+        game.getPhaseHandler().setNeedToNextPhase(false);
 
         this.curResolvingCard = null;
 
@@ -1057,7 +1068,7 @@ public class MagicStack extends MyObservable {
         final Card tmp = sa.getSourceCard();
         tmp.setCanCounter(true); // reset mana pumped counter magic flag
         if (tmp.getClones().size() > 0) {
-            for (final Card c : Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield)) {
+            for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
                 if (c.equals(tmp)) {
                     c.setClones(tmp.getClones());
                 }
@@ -1105,7 +1116,7 @@ public class MagicStack extends MyObservable {
                     }
                     else if (o instanceof Card) {
                         final Card card = (Card) o;
-                        Card current = Singletons.getModel().getGameState().getCardState(card);
+                        Card current = game.getCardState(card);
                         
                         invalidTarget = current.getTimestamp() != card.getTimestamp();
                         
@@ -1304,7 +1315,7 @@ public class MagicStack extends MyObservable {
      * </p>
      */
     public final void chooseOrderOfSimultaneousStackEntryAll() {
-        final Player playerTurn = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player playerTurn = game.getPhaseHandler().getPlayerTurn();
 
         this.chooseOrderOfSimultaneousStackEntry(playerTurn);
 
@@ -1358,7 +1369,7 @@ public class MagicStack extends MyObservable {
             if (activePlayerSAs.size() == 1) {
                 SpellAbility next = activePlayerSAs.get(0);
                 if (next.isTrigger()) {
-                    Singletons.getModel().getGameAction().playSpellAbility(next);
+                    game.getAction().playSpellAbility(next);
                 } else {
                     this.add(next);
                 }
@@ -1370,7 +1381,7 @@ public class MagicStack extends MyObservable {
                 for(int i = size-1; i >= 0; i--){
                     SpellAbility next = (SpellAbility)orderedSAs.get(i);
                     if (next.isTrigger()) {
-                        Singletons.getModel().getGameAction().playSpellAbility(next);
+                        game.getAction().playSpellAbility(next);
                     } else {
                         this.add(next);
                     }

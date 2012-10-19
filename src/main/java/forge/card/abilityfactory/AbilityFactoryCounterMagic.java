@@ -248,7 +248,7 @@ public class AbilityFactoryCounterMagic {
         boolean toReturn = true;
         final Cost abCost = af.getAbCost();
         final Card source = sa.getSourceCard();
-        if (Singletons.getModel().getGameState().getStack().size() < 1) {
+        if (Singletons.getModel().getGame().getStack().size() < 1) {
             return false;
         }
 
@@ -265,7 +265,7 @@ public class AbilityFactoryCounterMagic {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
 
-            final SpellAbility topSA = Singletons.getModel().getGameState().getStack().peekAbility();
+            final SpellAbility topSA = Singletons.getModel().getGame().getStack().peekAbility();
             if (!CardFactoryUtil.isCounterableBy(topSA.getSourceCard(), sa) || topSA.getActivatingPlayer().isComputer()) {
                 return false;
             }
@@ -343,13 +343,13 @@ public class AbilityFactoryCounterMagic {
      */
     private boolean counterDoTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         boolean toReturn = true;
-        if (Singletons.getModel().getGameState().getStack().size() < 1) {
+        if (Singletons.getModel().getGame().getStack().size() < 1) {
             return false;
         }
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
-            final SpellAbility topSA = Singletons.getModel().getGameState().getStack().peekAbility();
+            final SpellAbility topSA = Singletons.getModel().getGame().getStack().peekAbility();
             if (!CardFactoryUtil.isCounterableBy(topSA.getSourceCard(), sa) || topSA.getActivatingPlayer().isComputer()) {
                 return false;
             }
@@ -426,8 +426,8 @@ public class AbilityFactoryCounterMagic {
         final Target tgt = sa.getTarget();
         if (params.containsKey("AllType")) {
             sas = new ArrayList<SpellAbility>();
-            for (int i=0; i < Singletons.getModel().getGameState().getStack().size(); i++) {
-                SpellAbility spell = Singletons.getModel().getGameState().getStack().peekAbility(i);
+            for (int i=0; i < Singletons.getModel().getGame().getStack().size(); i++) {
+                SpellAbility spell = Singletons.getModel().getGame().getStack().peekAbility(i);
                 if (params.get("AllType").equals("Spell") && !spell.isSpell()) {
                     continue;
                 }
@@ -457,7 +457,7 @@ public class AbilityFactoryCounterMagic {
                 continue;
             }
 
-            final SpellAbilityStackInstance si = Singletons.getModel().getGameState().getStack().getInstanceFromSpellAbility(tgtSA);
+            final SpellAbilityStackInstance si = Singletons.getModel().getGame().getStack().getInstanceFromSpellAbility(tgtSA);
             if (si == null) {
                 continue;
             }
@@ -466,7 +466,7 @@ public class AbilityFactoryCounterMagic {
 
             // Destroy Permanent may be able to be turned into a SubAbility
             if (tgtSA.isAbility() && this.params.containsKey("DestroyPermanent")) {
-                Singletons.getModel().getGameAction().destroy(tgtSACard);
+                Singletons.getModel().getGame().getAction().destroy(tgtSACard);
             }
 
             if (this.params.containsKey("RememberTargets")) {
@@ -503,8 +503,8 @@ public class AbilityFactoryCounterMagic {
         final Target tgt = sa.getTarget();
         if (params.containsKey("AllType")) {
             sas = new ArrayList<SpellAbility>();
-            for (int i=0; i < Singletons.getModel().getGameState().getStack().size(); i++) {
-                SpellAbility spell = Singletons.getModel().getGameState().getStack().peekAbility(i);
+            for (int i=0; i < Singletons.getModel().getGame().getStack().size(); i++) {
+                SpellAbility spell = Singletons.getModel().getGame().getStack().peekAbility(i);
                 if (params.get("AllType").equals("Spell") && !spell.isSpell()) {
                     continue;
                 }
@@ -561,35 +561,35 @@ public class AbilityFactoryCounterMagic {
      *            object.
      */
     private void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si) {
-        Singletons.getModel().getGameState().getStack().remove(si);
+        Singletons.getModel().getGame().getStack().remove(si);
 
         if (tgtSA.isAbility()) {
             // For Ability-targeted counterspells - do not move it anywhere,
             // even if Destination$ is specified.
         } else if (tgtSA.isFlashBackAbility())  {
-            Singletons.getModel().getGameAction().exile(tgtSA.getSourceCard());
+            Singletons.getModel().getGame().getAction().exile(tgtSA.getSourceCard());
         } else if (this.destination.equals("Graveyard")) {
-            Singletons.getModel().getGameAction().moveToGraveyard(tgtSA.getSourceCard());
+            Singletons.getModel().getGame().getAction().moveToGraveyard(tgtSA.getSourceCard());
         } else if (this.destination.equals("Exile")) {
-            Singletons.getModel().getGameAction().exile(tgtSA.getSourceCard());
+            Singletons.getModel().getGame().getAction().exile(tgtSA.getSourceCard());
         } else if (this.destination.equals("TopOfLibrary")) {
-            Singletons.getModel().getGameAction().moveToLibrary(tgtSA.getSourceCard());
+            Singletons.getModel().getGame().getAction().moveToLibrary(tgtSA.getSourceCard());
         } else if (this.destination.equals("Hand")) {
-            Singletons.getModel().getGameAction().moveToHand(tgtSA.getSourceCard());
+            Singletons.getModel().getGame().getAction().moveToHand(tgtSA.getSourceCard());
         } else if (this.destination.equals("Battlefield")) {
             if (tgtSA instanceof SpellPermanent) {
                 Card c = tgtSA.getSourceCard();
                 System.out.println(c + " is SpellPermanent");
                 c.addController(srcSA.getActivatingPlayer());
-                Singletons.getModel().getGameAction().moveToPlay(c, srcSA.getActivatingPlayer());
+                Singletons.getModel().getGame().getAction().moveToPlay(c, srcSA.getActivatingPlayer());
             } else {
-                Card c = Singletons.getModel().getGameAction().moveToPlay(tgtSA.getSourceCard(), srcSA.getActivatingPlayer());
+                Card c = Singletons.getModel().getGame().getAction().moveToPlay(tgtSA.getSourceCard(), srcSA.getActivatingPlayer());
                 c.addController(srcSA.getActivatingPlayer());
             }
         } else if (this.destination.equals("BottomOfLibrary")) {
-            Singletons.getModel().getGameAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
+            Singletons.getModel().getGame().getAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
         } else if (this.destination.equals("ShuffleIntoLibrary")) {
-            Singletons.getModel().getGameAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
+            Singletons.getModel().getGame().getAction().moveToBottomOfLibrary(tgtSA.getSourceCard());
             tgtSA.getSourceCard().getController().shuffle();
         } else {
             throw new IllegalArgumentException("AbilityFactory_CounterMagic: Invalid Destination argument for card "

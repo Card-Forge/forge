@@ -86,13 +86,13 @@ public class InputBlock extends Input {
     /** {@inheritDoc} */
     @Override
     public final void selectButtonOK() {
-        if (CombatUtil.finishedMandatoryBlocks(Singletons.getModel().getGameState().getCombat())) {
+        if (CombatUtil.finishedMandatoryBlocks(Singletons.getModel().getGame().getCombat())) {
             // Done blocking
             ButtonUtil.reset();
             
-            CombatUtil.orderMultipleCombatants(Singletons.getModel().getGameState().getCombat());
+            CombatUtil.orderMultipleCombatants(Singletons.getModel().getGame().getCombat());
 
-            Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
+            Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(true);
         }
     }
 
@@ -102,7 +102,7 @@ public class InputBlock extends Input {
         // is attacking?
         boolean reminder = true;
         
-        if (Singletons.getModel().getGameState().getCombat().getAttackers().contains(card)) {
+        if (Singletons.getModel().getGame().getCombat().getAttackers().contains(card)) {
             this.currentAttacker = card;
             reminder = false;
         } else {
@@ -116,9 +116,9 @@ public class InputBlock extends Input {
                 
                 List<Card> attackersBlocked = this.allBlocking.get(card);
                 if (!attackersBlocked.contains(this.currentAttacker) && 
-                        CombatUtil.canBlock(this.currentAttacker, card, Singletons.getModel().getGameState().getCombat())) {
+                        CombatUtil.canBlock(this.currentAttacker, card, Singletons.getModel().getGame().getCombat())) {
                     attackersBlocked.add(this.currentAttacker);
-                    Singletons.getModel().getGameState().getCombat().addBlocker(this.currentAttacker, card);
+                    Singletons.getModel().getGame().getCombat().addBlocker(this.currentAttacker, card);
                     reminder = false;
                 }
             } 

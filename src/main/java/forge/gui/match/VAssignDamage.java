@@ -499,7 +499,7 @@ public class VAssignDamage {
     // be modified.
     private void finish() {
         if (trample) {
-            Singletons.getModel().getGameState().getCombat().addDefendingDamage(this.damageToOpponent, this.attacker);
+            Singletons.getModel().getGame().getCombat().addDefendingDamage(this.damageToOpponent, this.attacker);
         }
 
         for (int i = 0; i < lstDefenders.size(); i++) {

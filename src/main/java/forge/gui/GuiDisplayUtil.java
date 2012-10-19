@@ -325,7 +325,7 @@ public final class GuiDisplayUtil {
      * </p>
      */
     public static void updateGUI() {
-        for( Player p : Singletons.getModel().getGameState().getPlayers())
+        for( Player p : Singletons.getModel().getGame().getPlayers())
         {
             p.getZone(ZoneType.Battlefield).updateObservers();
             p.getZone(ZoneType.Battlefield).updateObservers();
@@ -449,17 +449,17 @@ public final class GuiDisplayUtil {
         
         if (!tChangePlayer.trim().toLowerCase().equals("none")) {
             if (tChangePlayer.trim().toLowerCase().equals("human")) {
-                Singletons.getModel().getGameState().getPhaseHandler().setPlayerTurn(human);
+                Singletons.getModel().getGame().getPhaseHandler().setPlayerTurn(human);
             }
             if (tChangePlayer.trim().toLowerCase().equals("ai")) {
-                Singletons.getModel().getGameState().getPhaseHandler().setPlayerTurn(ai);
+                Singletons.getModel().getGame().getPhaseHandler().setPlayerTurn(ai);
             }
         }
 
 
         
         if (!tChangePhase.trim().toLowerCase().equals("none")) {
-            Singletons.getModel().getGameState().getPhaseHandler().setDevPhaseState(forge.game.phase.PhaseType.smartValueOf(tChangePhase));
+            Singletons.getModel().getGame().getPhaseHandler().setDevPhaseState(forge.game.phase.PhaseType.smartValueOf(tChangePhase));
         }
 
         if (!tHumanSetupCardsInPlay.trim().toLowerCase().equals("none")) {
@@ -502,17 +502,17 @@ public final class GuiDisplayUtil {
             computerDevExileSetup = GuiDisplayUtil.devProcessCardsForZone(computerSetupExile, ai);
         }
 
-        Singletons.getModel().getGameState().getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        Singletons.getModel().getGameState().getCombat().reset();
+        Singletons.getModel().getGame().getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+        Singletons.getModel().getGame().getCombat().reset();
         for (final Card c : humanDevSetup) {
             human.getZone(ZoneType.Hand).add(c);
-            Singletons.getModel().getGameAction().moveToPlay(c);
+            Singletons.getModel().getGame().getAction().moveToPlay(c);
             c.setSickness(false);
         }
 
         for (final Card c : computerDevSetup) {
             ai.getZone(ZoneType.Hand).add(c);
-            Singletons.getModel().getGameAction().moveToPlay(c);
+            Singletons.getModel().getGame().getAction().moveToPlay(c);
             c.setSickness(false);
         }
 
@@ -544,7 +544,7 @@ public final class GuiDisplayUtil {
             ai.getZone(ZoneType.Exile).setCards(computerDevExileSetup);
         }
 
-        Singletons.getModel().getGameState().getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        Singletons.getModel().getGame().getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
 
         if (setComputerLife > 0) {
             ai.setLife(setComputerLife, null);
@@ -553,8 +553,8 @@ public final class GuiDisplayUtil {
             human.setLife(setHumanLife, null);
         }
 
-        Singletons.getModel().getGameAction().checkStateEffects();
-        Singletons.getModel().getGameState().getPhaseHandler().updateObservers();
+        Singletons.getModel().getGame().getAction().checkStateEffects();
+        Singletons.getModel().getGame().getPhaseHandler().updateObservers();
         updateGUI();
     }
 
@@ -619,7 +619,7 @@ public final class GuiDisplayUtil {
             return;
         } else {
             final Card c = (Card) o;
-            Singletons.getModel().getGameAction().moveToHand(c);
+            Singletons.getModel().getGame().getAction().moveToHand(c);
         }
     }
 
@@ -643,7 +643,7 @@ public final class GuiDisplayUtil {
         if (c.show()) {
             CardPrinted cp = CardDb.instance().getCard(c.getSelectedValue());
             Card forgeCard = cp.toForgeCard(Singletons.getControl().getPlayer());
-            Singletons.getModel().getGameAction().moveToHand(forgeCard);
+            Singletons.getModel().getGame().getAction().moveToHand(forgeCard);
         }
     }
 
@@ -667,7 +667,7 @@ public final class GuiDisplayUtil {
         if (c.show()) {
             CardPrinted cp = CardDb.instance().getCard(c.getSelectedValue());
             Card forgeCard = cp.toForgeCard(Singletons.getControl().getPlayer().getOpponent());
-            Singletons.getModel().getGameAction().moveToHand(forgeCard);
+            Singletons.getModel().getGame().getAction().moveToHand(forgeCard);
         }
     }
 
@@ -679,7 +679,7 @@ public final class GuiDisplayUtil {
      * @since 1.0.15
      */
     public static void devModeAddCounter() {
-        final Card o = GuiChoose.oneOrNone("Add counters to which card?", Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield));
+        final Card o = GuiChoose.oneOrNone("Add counters to which card?", Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield));
         if (null == o) {
             return;
         } else {
@@ -710,7 +710,7 @@ public final class GuiDisplayUtil {
      * @since 1.0.15
      */
     public static void devModeTapPerm() {
-        final List<Card> play = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+        final List<Card> play = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         final Object o = GuiChoose.oneOrNone("Choose a permanent", play);
         if (null == o) {
             return;
@@ -728,7 +728,7 @@ public final class GuiDisplayUtil {
      * @since 1.0.15
      */
     public static void devModeUntapPerm() {
-        final List<Card> play = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+        final List<Card> play = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         final Object o = GuiChoose.oneOrNone("Choose a permanent", play);
         if (null == o) {
             return;
@@ -757,7 +757,7 @@ public final class GuiDisplayUtil {
      * @since 1.1.3
      */
     public static void devModeSetLife() {
-        final List<Player> players = Singletons.getModel().getGameState().getPlayers();
+        final List<Player> players = Singletons.getModel().getGame().getPlayers();
         final Player o = GuiChoose.oneOrNone("Set life for which player?", players);
         if (null == o) {
             return;
@@ -777,7 +777,7 @@ public final class GuiDisplayUtil {
     }
 
     public static void devModeBreakpoint() {
-        List<Player> Players = Singletons.getModel().getGameState().getPlayers();
+        List<Player> Players = Singletons.getModel().getGame().getPlayers();
 /*
         Combat CombatHandler = AllZone.getCombat();
         TriggerHandler Triggers = AllZone.getTriggerHandler();

@@ -471,7 +471,7 @@ public class AbilityFactorySetState {
             valid = valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(card, "X", sa)));
         }
 
-        List<Card> list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+        List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
 
         if (targetPlayer != null) {
             list = CardLists.filterControlledBy(list, targetPlayer);

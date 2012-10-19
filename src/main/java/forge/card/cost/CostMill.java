@@ -112,7 +112,7 @@ public class CostMill extends CostPartWithList {
     @Override
     public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         for (final Card c : this.getList()) {
-            Singletons.getModel().getGameAction().moveToGraveyard(c);
+            Singletons.getModel().getGame().getAction().moveToGraveyard(c);
         }
     }
 
@@ -156,7 +156,7 @@ public class CostMill extends CostPartWithList {
             while (itr.hasNext()) {
                 final Card card = itr.next();
                 this.addToList(card);
-                Singletons.getModel().getGameAction().moveToGraveyard(card);
+                Singletons.getModel().getGame().getAction().moveToGraveyard(card);
             }
             this.addListToHash(ability, "Milled");
             payment.paidCost(this);

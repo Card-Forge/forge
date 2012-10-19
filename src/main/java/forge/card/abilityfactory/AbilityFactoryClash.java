@@ -252,7 +252,7 @@ public final class AbilityFactoryClash {
             runParams.put("Won", "False");
         }
 
-        Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.Clashed, runParams);
+        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Clashed, runParams);
     }
 
     // *************************************************************************

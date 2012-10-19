@@ -27,7 +27,6 @@ import java.util.List;
 
 import forge.Constant;
 import forge.Constant.Preferences;
-import forge.GameAction;
 import forge.card.BoosterData;
 import forge.card.CardBlock;
 import forge.card.EditionCollection;
@@ -77,8 +76,7 @@ public enum FModel {
 
     private final QuestPreferences questPreferences;
     private final ForgePreferences preferences;
-    private GameState gameState;
-    private GameAction gameAction;
+
     // Someone should take care of 2 gauntlets here
     private GauntletData gauntletData;
     private GauntletMini gauntlet;
@@ -88,7 +86,8 @@ public enum FModel {
     private final CardCollections decks;
     
     private final MatchController match;
-
+    private GameState gameState;
+    
     private final EditionCollection editions;
     private final FormatCollection formats;
     private final IStorageView<BoosterData> boosters;
@@ -338,20 +337,11 @@ public enum FModel {
     }
 
     /**
-     * Gets the game action model.
-     * 
-     * @return {@link forge.GameAction}
-     */
-    public final GameAction getGameAction() {
-        return this.gameAction;
-    }
-
-    /**
      * Gets the game state model - that is, the data stored for a single game.
      * 
      * @return {@link forge.game.GameState}
      */
-    public final GameState getGameState() {
+    public final GameState getGame() {
         return this.gameState;
     }
 
@@ -431,7 +421,6 @@ public enum FModel {
      */
     public GameState newGame(Iterable<LobbyPlayer> players) {
         gameState = new GameState(players);
-        gameAction = new GameAction(gameState);
         return gameState;
     }
 

@@ -64,7 +64,7 @@ public class PhaseUtil {
             return true;
         }
 
-        if (Singletons.getModel().getGameState().isCardInPlay("Sands of Time") || Singletons.getModel().getGameState().isCardInPlay("Stasis")) {
+        if (Singletons.getModel().getGame().isCardInPlay("Sands of Time") || Singletons.getModel().getGame().isCardInPlay("Stasis")) {
             return true;
         }
 
@@ -82,15 +82,15 @@ public class PhaseUtil {
      * </p>
      */
     public static void handleUntap() {
-        final PhaseHandler ph = Singletons.getModel().getGameState().getPhaseHandler();
+        final PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler();
         final Player turn = ph.getPlayerTurn();
 
-        Singletons.getModel().getGameState().notifyNextTurn();
+        Singletons.getModel().getGame().notifyNextTurn();
         CMessage.SINGLETON_INSTANCE.updateGameInfo(Singletons.getModel().getMatch());
 
-        Singletons.getModel().getGameState().getCombat().reset();
-        Singletons.getModel().getGameState().getCombat().setAttackingPlayer(turn);
-        Singletons.getModel().getGameState().getCombat().setDefendingPlayer(turn.getOpponent());
+        Singletons.getModel().getGame().getCombat().reset();
+        Singletons.getModel().getGame().getCombat().setAttackingPlayer(turn);
+        Singletons.getModel().getGame().getCombat().setDefendingPlayer(turn.getOpponent());
 
         // Tokens starting game in play now actually suffer from Sum. Sickness again
         final List<Card> list = turn.getCardsIncludePhasingIn(ZoneType.Battlefield);
@@ -101,7 +101,7 @@ public class PhaseUtil {
         }
         turn.incrementTurn();
 
-        Singletons.getModel().getGameAction().resetActivationsPerTurn();
+        Singletons.getModel().getGame().getAction().resetActivationsPerTurn();
 
         final List<Card> lands = CardLists.filter(turn.getLandsInPlay(), Presets.UNTAPPED);
         turn.setNumPowerSurgeLands(lands.size());
@@ -110,17 +110,17 @@ public class PhaseUtil {
         // phase is skipped
 
         if (PhaseUtil.skipUntap(turn)) {
-            Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
+            Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(true);
             return;
         }
 
-        Singletons.getModel().getGameState().getUntap().executeUntil(turn);
-        Singletons.getModel().getGameState().getUntap().executeAt();
+        Singletons.getModel().getGame().getUntap().executeUntil(turn);
+        Singletons.getModel().getGame().getUntap().executeAt();
 
         // otherwise land seems to stay tapped when it is really untapped
         //AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
 
-        Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
+        Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(true);
     }
 
     // ******* UPKEEP PHASE *****
@@ -130,19 +130,19 @@ public class PhaseUtil {
      * </p>
      */
     public static void handleUpkeep() {
-        final Player turn = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player turn = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
 
         if (PhaseUtil.skipUpkeep()) {
             // Slowtrips all say "on the next turn's upkeep" if there is no
             // upkeep next turn, the trigger will never occur.
             turn.clearSlowtripList();
             turn.getOpponent().clearSlowtripList();
-            Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
+            Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(true);
             return;
         }
 
-        Singletons.getModel().getGameState().getUpkeep().executeUntil(turn);
-        Singletons.getModel().getGameState().getUpkeep().executeAt();
+        Singletons.getModel().getGame().getUpkeep().executeUntil(turn);
+        Singletons.getModel().getGame().getUpkeep().executeAt();
     }
 
     /**
@@ -153,11 +153,11 @@ public class PhaseUtil {
      * @return a boolean.
      */
     public static boolean skipUpkeep() {
-        if (Singletons.getModel().getGameState().isCardInPlay("Eon Hub")) {
+        if (Singletons.getModel().getGame().isCardInPlay("Eon Hub")) {
             return true;
         }
 
-        final Player turn = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player turn = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
 
         if ((turn.getCardsIn(ZoneType.Hand).size() == 0) && turn.isCardInPlay("Gibbering Descent")) {
             return true;
@@ -173,10 +173,10 @@ public class PhaseUtil {
      * </p>
      */
     public static void handleDraw() {
-        final Player playerTurn = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player playerTurn = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
 
         if (PhaseUtil.skipDraw(playerTurn)) {
-            Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
+            Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(true);
             return;
         }
 
@@ -194,7 +194,7 @@ public class PhaseUtil {
      */
     private static boolean skipDraw(final Player player) {
         // starting player skips his draw
-        if (Singletons.getModel().getGameState().getPhaseHandler().getTurn() == 1) {
+        if (Singletons.getModel().getGame().getPhaseHandler().getTurn() == 1) {
             return true;
         }
 
@@ -218,7 +218,7 @@ public class PhaseUtil {
      * </p>
      */
     public static void verifyCombat() {
-        Singletons.getModel().getGameState().getCombat().verifyCreaturesInPlay();
+        Singletons.getModel().getGame().getCombat().verifyCreaturesInPlay();
     }
 
     /**
@@ -227,10 +227,10 @@ public class PhaseUtil {
      * </p>
      */
     public static void handleCombatBegin() {
-        final Player playerTurn = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player playerTurn = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
 
         if (PhaseUtil.skipCombat(playerTurn)) {
-            Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
+            Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(true);
             return;
         }
     }
@@ -241,10 +241,10 @@ public class PhaseUtil {
      * </p>
      */
     public static void handleCombatDeclareAttackers() {
-        final Player playerTurn = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player playerTurn = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
 
         if (PhaseUtil.skipCombat(playerTurn)) {
-            Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
+            Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(true);
             playerTurn.removeKeyword("Skip your next combat phase.");
             return;
         }
@@ -288,16 +288,16 @@ public class PhaseUtil {
         PhaseUtil.verifyCombat();
 
         // Handles removing cards like Mogg Flunkies from combat if group attack didn't occur
-        final List<Card> filterList = Singletons.getModel().getGameState().getCombat().getAttackerList();
+        final List<Card> filterList = Singletons.getModel().getGame().getCombat().getAttackerList();
         for (Card c : filterList) {
             if (c.hasKeyword("CARDNAME can't attack or block alone.") && c.isAttacking()) {
-                if (Singletons.getModel().getGameState().getCombat().getAttackers().size() < 2) {
-                    Singletons.getModel().getGameState().getCombat().removeFromCombat(c);
+                if (Singletons.getModel().getGame().getCombat().getAttackers().size() < 2) {
+                    Singletons.getModel().getGame().getCombat().removeFromCombat(c);
                 }
             }
         }
 
-        final List<Card> list = Singletons.getModel().getGameState().getCombat().getAttackerList();
+        final List<Card> list = Singletons.getModel().getGame().getCombat().getAttackerList();
 
         // TODO move propaganda to happen as the Attacker is Declared
         // Remove illegal Propaganda attacks first only for attacking the Player
@@ -316,12 +316,12 @@ public class PhaseUtil {
      * </p>
      */
     public static void handleAttackingTriggers() {
-        final List<Card> list = Singletons.getModel().getGameState().getCombat().getAttackerList();
-        Singletons.getModel().getGameState().getStack().freezeStack();
+        final List<Card> list = Singletons.getModel().getGame().getCombat().getAttackerList();
+        Singletons.getModel().getGame().getStack().freezeStack();
         // Then run other Attacker bonuses
         // check for exalted:
         if (list.size() == 1) {
-            final Player attackingPlayer = Singletons.getModel().getGameState().getCombat().getAttackingPlayer();
+            final Player attackingPlayer = Singletons.getModel().getGame().getCombat().getAttackingPlayer();
             int exaltedMagnitude = 0;
             for (Card card : attackingPlayer.getCardsIn(ZoneType.Battlefield)) {
                 exaltedMagnitude += card.getKeywordAmount("Exalted");
@@ -334,17 +334,17 @@ public class PhaseUtil {
 
         }
 
-        Singletons.getModel().getGameState().getGameLog().add("Combat", CombatUtil.getCombatAttackForLog(), 1);
+        Singletons.getModel().getGame().getGameLog().add("Combat", CombatUtil.getCombatAttackForLog(), 1);
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Attackers", list);
-        runParams.put("AttackingPlayer", Singletons.getModel().getGameState().getCombat().getAttackingPlayer());
-        Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.AttackersDeclared, runParams);
+        runParams.put("AttackingPlayer", Singletons.getModel().getGame().getCombat().getAttackingPlayer());
+        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.AttackersDeclared, runParams);
 
         for (final Card c : list) {
             CombatUtil.checkDeclareAttackers(c);
         }
-        Singletons.getModel().getGameState().getStack().unfreezeStack();
+        Singletons.getModel().getGame().getStack().unfreezeStack();
     }
 
     /**
@@ -356,21 +356,21 @@ public class PhaseUtil {
         PhaseUtil.verifyCombat();
 
         // Handles removing cards like Mogg Flunkies from combat if group block didn't occur
-        final List<Card> filterList = Singletons.getModel().getGameState().getCombat().getAllBlockers();
+        final List<Card> filterList = Singletons.getModel().getGame().getCombat().getAllBlockers();
         for (Card c : filterList) {
             if (c.hasKeyword("CARDNAME can't attack or block alone.") && c.isBlocking()) {
-                if (Singletons.getModel().getGameState().getCombat().getAllBlockers().size() < 2) {
-                    Singletons.getModel().getGameState().getCombat().undoBlockingAssignment(c);
+                if (Singletons.getModel().getGame().getCombat().getAllBlockers().size() < 2) {
+                    Singletons.getModel().getGame().getCombat().undoBlockingAssignment(c);
                 }
             }
         }
 
-        Singletons.getModel().getGameState().getStack().freezeStack();
+        Singletons.getModel().getGame().getStack().freezeStack();
 
-        Singletons.getModel().getGameState().getCombat().setUnblocked();
+        Singletons.getModel().getGame().getCombat().setUnblocked();
 
         List<Card> list = new ArrayList<Card>();
-        list.addAll(Singletons.getModel().getGameState().getCombat().getAllBlockers());
+        list.addAll(Singletons.getModel().getGame().getCombat().getAllBlockers());
 
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
@@ -379,20 +379,20 @@ public class PhaseUtil {
             }
         });
 
-        final List<Card> attList = Singletons.getModel().getGameState().getCombat().getAttackerList();
+        final List<Card> attList = Singletons.getModel().getGame().getCombat().getAttackerList();
 
         CombatUtil.checkDeclareBlockers(list);
 
         for (final Card a : attList) {
-            final List<Card> blockList = Singletons.getModel().getGameState().getCombat().getBlockers(a);
+            final List<Card> blockList = Singletons.getModel().getGame().getCombat().getBlockers(a);
             for (final Card b : blockList) {
                 CombatUtil.checkBlockedAttackers(a, b);
             }
         }
 
-        Singletons.getModel().getGameState().getStack().unfreezeStack();
+        Singletons.getModel().getGame().getStack().unfreezeStack();
 
-        Singletons.getModel().getGameState().getGameLog().add("Combat", CombatUtil.getCombatBlockForLog(), 1);
+        Singletons.getModel().getGame().getGameLog().add("Combat", CombatUtil.getCombatBlockForLog(), 1);
     }
 
     // ***** Combat Utility **********
@@ -406,7 +406,7 @@ public class PhaseUtil {
      * @return a boolean.
      */
     public static boolean isBeforeAttackersAreDeclared() {
-        final PhaseType phase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
+        final PhaseType phase = Singletons.getModel().getGame().getPhaseHandler().getPhase();
         return phase == PhaseType.UNTAP || phase == PhaseType.UPKEEP || phase == PhaseType.DRAW
             || phase == PhaseType.MAIN1 || phase == PhaseType.COMBAT_BEGIN;
     }
@@ -420,7 +420,7 @@ public class PhaseUtil {
      */
     public static void visuallyActivatePhase(final PhaseType s) {
         PhaseLabel lbl = null;
-        final Player p = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+        final Player p = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
         final CMatchUI t = CMatchUI.SINGLETON_INSTANCE;
 
         // Index of field; computer is 1, human is 0

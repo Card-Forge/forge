@@ -164,7 +164,7 @@ public class ManaPool {
         for (final Mana m : manaList) {
             this.addManaToPool(this.floatingMana, m);
         }
-        Singletons.getModel().getGameAction().checkStateEffects();
+        Singletons.getModel().getGame().getAction().checkStateEffects();
         owner.updateObservers();
     }
 

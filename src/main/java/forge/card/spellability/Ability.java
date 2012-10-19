@@ -68,7 +68,7 @@ public abstract class Ability extends SpellAbility {
     /** {@inheritDoc} */
     @Override
     public boolean canPlay() {
-        if (Singletons.getModel().getGameState().getStack().isSplitSecondOnStack()) {
+        if (Singletons.getModel().getGame().getStack().isSplitSecondOnStack()) {
             return false;
         }
 

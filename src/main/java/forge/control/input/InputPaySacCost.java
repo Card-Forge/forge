@@ -167,7 +167,7 @@ public class InputPaySacCost extends Input {
         // actually sacrifice the cards
         for (Card selected : this.sacCost.getList()) {
             selected.setUsedToPay(false);
-            Singletons.getModel().getGameAction().sacrifice(selected, this.ability);
+            Singletons.getModel().getGame().getAction().sacrifice(selected, this.ability);
         }
         this.sacCost.addListToHash(ability, "Sacrificed");
         this.paid.execute();

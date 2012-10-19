@@ -240,20 +240,20 @@ public final class AbilityFactoryCombat {
      */
     public static boolean fogCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         // AI should only activate this during Human's Declare Blockers phase
-        if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
+        if (Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
             return false;
         }
-        if (!Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+        if (!Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
             return false;
         }
 
         // Only cast when Stack is empty, so Human uses spells/abilities first
-        if (Singletons.getModel().getGameState().getStack().size() != 0) {
+        if (Singletons.getModel().getGame().getStack().size() != 0) {
             return false;
         }
 
         // Don't cast it, if the effect is already in place
-        if (Singletons.getModel().getGameState().getPhaseHandler().isPreventCombatDamageThisTurn()) {
+        if (Singletons.getModel().getGame().getPhaseHandler().isPreventCombatDamageThisTurn()) {
             return false;
         }
 
@@ -265,7 +265,7 @@ public final class AbilityFactoryCombat {
         }
 
         // Cast it if life is in danger
-        return CombatUtil.lifeInDanger(ai, Singletons.getModel().getGameState().getCombat());
+        return CombatUtil.lifeInDanger(ai, Singletons.getModel().getGame().getCombat());
     }
 
     /**
@@ -282,10 +282,10 @@ public final class AbilityFactoryCombat {
     public static boolean fogPlayDrawbackAI(final AbilityFactory af, final SpellAbility sa) {
         // AI should only activate this during Human's turn
         boolean chance;
-        if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer().getOpponent())) {
-            chance = Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE);
+        if (Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer().getOpponent())) {
+            chance = Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE);
         } else {
-            chance = Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE);
+            chance = Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE);
         }
 
         final AbilitySub subAb = sa.getSubAbility();
@@ -316,10 +316,10 @@ public final class AbilityFactoryCombat {
         }
 
         boolean chance;
-        if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer().getOpponent())) {
-            chance = Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE);
+        if (Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer().getOpponent())) {
+            chance = Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE);
         } else {
-            chance = Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE);
+            chance = Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE);
         }
 
         // check SubAbilities DoTrigger?
@@ -344,7 +344,7 @@ public final class AbilityFactoryCombat {
     public static void fogResolve(final AbilityFactory af, final SpellAbility sa) {
 
         // Expand Fog keyword here depending on what we need out of it.
-        Singletons.getModel().getGameState().getPhaseHandler().setPreventCombatDamageThisTurn(true);
+        Singletons.getModel().getGame().getPhaseHandler().setPreventCombatDamageThisTurn(true);
     }
 
     // **************************************************************
@@ -819,7 +819,7 @@ public final class AbilityFactoryCombat {
 
         for (final Card c : tgtCards) {
             if ((tgt == null) || c.canBeTargetedBy(sa)) {
-                Singletons.getModel().getGameState().getCombat().removeFromCombat(c);
+                Singletons.getModel().getGame().getCombat().removeFromCombat(c);
             }
         }
 
@@ -1042,7 +1042,7 @@ public final class AbilityFactoryCombat {
         }
 
         // only use on creatures that can attack
-        if (!Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
+        if (!Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)) {
             return false;
         }
 

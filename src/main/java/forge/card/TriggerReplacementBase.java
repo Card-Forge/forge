@@ -6,7 +6,7 @@ import forge.Card;
 import forge.GameEntity;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
-import forge.game.zone.PlayerZone;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 
 /** 
@@ -59,7 +59,7 @@ public abstract class TriggerReplacementBase {
      * 
      * @return a boolean.
      */
-    public final boolean zonesCheck(PlayerZone hostCardZone) {
+    public final boolean zonesCheck(Zone hostCardZone) {
         return !this.hostCard.isPhasedOut()
                 && (validHostZones == null || validHostZones.isEmpty()
                 || (hostCardZone != null && validHostZones.contains(hostCardZone.getZoneType()))

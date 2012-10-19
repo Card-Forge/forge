@@ -197,7 +197,7 @@ public class CardFactoryCreatures {
             @Override
             public boolean canPlayAI() {
                 return Iterables.any(getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.ARTIFACTS)
-                     && Singletons.getModel().getGameState().getZoneOf(this.getSourceCard()).is(ZoneType.Hand);
+                     && Singletons.getModel().getGame().getZoneOf(this.getSourceCard()).is(ZoneType.Hand);
             }
         });
         card.addComesIntoPlayCommand(intoPlay);
@@ -242,7 +242,7 @@ public class CardFactoryCreatures {
                 card.setChosenColor(colors);
                 final String s = CardUtil.getShortColor(color[0]);
 
-                timeStamp[0] = Singletons.getModel().getGameState().getColorChanger().addColorChanges(s, card, true, true);
+                timeStamp[0] = Singletons.getModel().getGame().getColorChanger().addColorChanges(s, card, true, true);
             }
         }; // Command
 
@@ -252,7 +252,7 @@ public class CardFactoryCreatures {
             @Override
             public void execute() {
                 final String s = CardUtil.getShortColor(color[0]);
-                Singletons.getModel().getGameState().getColorChanger().removeColorChanges(s, card, true, timeStamp[0]);
+                Singletons.getModel().getGame().getColorChanger().removeColorChanges(s, card, true, timeStamp[0]);
             }
         };
 
@@ -275,7 +275,7 @@ public class CardFactoryCreatures {
                     @Override
                     public void execute() {
                         if (card.isInPlay()) {
-                            Singletons.getModel().getGameAction().sacrifice(card, null);
+                            Singletons.getModel().getGame().getAction().sacrifice(card, null);
                         }
                     }
                 });
@@ -292,7 +292,7 @@ public class CardFactoryCreatures {
 
             @Override
             public void execute() {
-                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
             }
         });
@@ -302,10 +302,10 @@ public class CardFactoryCreatures {
 
             @Override
             public void execute() {
-                final List<Card> list = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Stangg Twin"));
+                final List<Card> list = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Stangg Twin"));
 
                 if (list.size() == 1) {
-                    Singletons.getModel().getGameAction().exile(list.get(0));
+                    Singletons.getModel().getGame().getAction().exile(list.get(0));
                 }
             }
         });
@@ -468,7 +468,7 @@ public class CardFactoryCreatures {
                                     @Override
                                     public void execute() {
                                         getTargetCard().addDamage(1, target);
-                                        Singletons.getModel().getGameAction().checkStateEffects();
+                                        Singletons.getModel().getGame().getAction().checkStateEffects();
                                     }
                                 }));
                     }
@@ -562,7 +562,7 @@ public class CardFactoryCreatures {
             @Override
             public void resolve() {
                 int xCounters = card.getXManaCostPaid();
-                final Card c = Singletons.getModel().getGameAction().moveToPlay(this.getSourceCard());
+                final Card c = Singletons.getModel().getGame().getAction().moveToPlay(this.getSourceCard());
 
                 if (xCounters >= 5) {
                     xCounters = 2 * xCounters;
@@ -609,7 +609,7 @@ public class CardFactoryCreatures {
                 sb.append("Kinsbaile Borderguard enters the battlefield with a ");
                 sb.append("+1/+1 counter on it for each other Kithkin you control.");
                 ability.setStackDescription(sb.toString());
-                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
             }
         };
@@ -638,7 +638,7 @@ public class CardFactoryCreatures {
                 sb.append("from play, put a 1/1 white Kithkin Soldier creature ");
                 sb.append("token onto the battlefield for each counter on it.");
                 ability2.setStackDescription(sb.toString());
-                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability2);
+                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability2);
 
             }
         };
@@ -666,7 +666,7 @@ public class CardFactoryCreatures {
 
             @Override
             public void execute() {
-                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
             }
         };
@@ -773,7 +773,7 @@ public class CardFactoryCreatures {
                         for (int m = 0; m < selection.size(); m++) {
                             intermSumPower += selection.get(m).getBaseAttack();
                             intermSumToughness += selection.get(m).getBaseDefense();
-                            Singletons.getModel().getGameAction().exile(selection.get(m));
+                            Singletons.getModel().getGame().getAction().exile(selection.get(m));
                         }
                     }
 
@@ -785,7 +785,7 @@ public class CardFactoryCreatures {
                         if ((c.getNetAttack() <= 2) && (c.getNetDefense() <= 3)) {
                             intermSumPower += c.getBaseAttack();
                             intermSumToughness += c.getBaseDefense();
-                            Singletons.getModel().getGameAction().exile(c);
+                            Singletons.getModel().getGame().getAction().exile(c);
                             count++;
                         }
                         // is this needed?
@@ -867,7 +867,7 @@ public class CardFactoryCreatures {
 
             @Override
             public void execute() {
-                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
             }
         };
@@ -929,7 +929,7 @@ public class CardFactoryCreatures {
                 //adding ability to stack first cause infinite loop (with observers notification)
                 //so it has to be stop first and add ability later
                 this.stop();
-                Singletons.getModel().getGameState().getStack().add(ability);
+                Singletons.getModel().getGame().getStack().add(ability);
             }
 
             @Override
@@ -983,7 +983,7 @@ public class CardFactoryCreatures {
                     if ( !list.isEmpty() )
                     {
                         ability.setTargetCard(CardFactoryUtil.getBestCreatureAI(list));
-                        Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+                        Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
                     }
                 }
             } // execute()
@@ -1020,7 +1020,7 @@ public class CardFactoryCreatures {
                         @Override
                         public void selectButtonCancel() {
                             toSac.clear();
-                            Singletons.getModel().getGameAction().sacrifice(card, null);
+                            Singletons.getModel().getGame().getAction().sacrifice(card, null);
                             this.stop();
                         }
 
@@ -1035,10 +1035,10 @@ public class CardFactoryCreatures {
                         private void done() {
                             if (getTotalPower() >= 12) {
                                 for (final Card sac : toSac) {
-                                    Singletons.getModel().getGameAction().sacrifice(sac, null);
+                                    Singletons.getModel().getGame().getAction().sacrifice(sac, null);
                                 }
                             } else {
-                                Singletons.getModel().getGameAction().sacrifice(card, null);
+                                Singletons.getModel().getGame().getAction().sacrifice(card, null);
                             }
                             toSac.clear();
                             this.stop();

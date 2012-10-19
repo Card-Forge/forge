@@ -345,7 +345,7 @@ public class CField implements ICDoc {
 
                 @Override
                 protected void doAction(final Card c) {
-                    Singletons.getModel().getGameAction().playCard(c);
+                    Singletons.getModel().getGame().getAction().playCard(c);
                 }
             } .actionPerformed(null);
         }
@@ -362,7 +362,7 @@ public class CField implements ICDoc {
 
                 @Override
                 protected void doAction(final Card c) {
-                    Singletons.getModel().getGameAction().playCard(c);
+                    Singletons.getModel().getGame().getAction().playCard(c);
                 }
             } .actionPerformed(null);
         }
@@ -435,7 +435,7 @@ public class CField implements ICDoc {
                 }
             }
 
-            final List<Card> att = Singletons.getModel().getGameState().getCombat().getAttackerList();
+            final List<Card> att = Singletons.getModel().getGame().getCombat().getAttackerList();
             if ((c.isTapped() || c.hasSickness() || ((c.hasKeyword("Vigilance")) && att.contains(c)))
                     && (input instanceof InputAttack)) {
                 final forge.view.arcane.CardPanel cardPanel = CField.this.view.getTabletop().getCardPanel(
@@ -451,11 +451,11 @@ public class CField implements ICDoc {
                 if (att.contains(c) && (input instanceof InputAttack)
                         && !c.hasKeyword("CARDNAME attacks each turn if able.")) {
                     c.untap();
-                    Singletons.getModel().getGameState().getCombat().removeFromCombat(c);
+                    Singletons.getModel().getGame().getCombat().removeFromCombat(c);
                     CombatUtil.showCombat();
                 } else if (input instanceof InputBlock) {
                     if (c.getController().isHuman()) {
-                        Singletons.getModel().getGameState().getCombat().removeFromCombat(c);
+                        Singletons.getModel().getGame().getCombat().removeFromCombat(c);
                     }
                     ((InputBlock) input).removeFromAllBlocking(c);
                     CombatUtil.showCombat();

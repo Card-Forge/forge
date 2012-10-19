@@ -108,8 +108,8 @@ public enum TargetingOverlay {
         }
 
         // Combat cards
-        for (Card attackingCard : Singletons.getModel().getGameState().getCombat().getAttackers()) {
-            temp = Singletons.getModel().getGameState().getCombat().getBlockers(attackingCard);
+        for (Card attackingCard : Singletons.getModel().getGame().getCombat().getAttackers()) {
+            temp = Singletons.getModel().getGame().getCombat().getBlockers(attackingCard);
             for (Card blockingCard : temp) {
                 arcs.add(new Point[] {
                     endpoints.get(attackingCard.getUniqueNumber()),

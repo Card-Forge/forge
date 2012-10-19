@@ -105,7 +105,7 @@ public final class AbilityFactoryCleanup {
 
         if (params.containsKey("ClearRemembered")) {
             source.clearRemembered();
-            Singletons.getModel().getGameState().getCardState(source).clearRemembered();
+            Singletons.getModel().getGame().getCardState(source).clearRemembered();
         }
         if (params.containsKey("ClearImprinted")) {
             source.clearImprinted();
@@ -117,7 +117,7 @@ public final class AbilityFactoryCleanup {
             source.setSVar("ChosenY", "");
         }
         if (params.containsKey("ClearTriggered")) {
-            Singletons.getModel().getGameState().getTriggerHandler().clearDelayedTrigger(source);
+            Singletons.getModel().getGame().getTriggerHandler().clearDelayedTrigger(source);
         }
     }
 

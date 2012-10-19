@@ -241,7 +241,7 @@ public class ComputerUtilAttack {
         int fixedBlockers = 0;
         final List<Card> vigilantes = new ArrayList<Card>();
         //check for time walks
-        if (Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(PlayerType.COMPUTER)) {
+        if (Singletons.getModel().getGame().getPhaseHandler().isNextTurn(PlayerType.COMPUTER)) {
             return attackers;
         }
         for (final Card c : this.computerList) {
@@ -466,7 +466,7 @@ public class ComputerUtilAttack {
 
         final Object entity = ai.getMustAttackEntity();
         if (null != entity) {
-            final List<GameEntity> defenders = Singletons.getModel().getGameState().getCombat().getDefenders();
+            final List<GameEntity> defenders = Singletons.getModel().getGame().getCombat().getDefenders();
             n = defenders.indexOf(entity);
             if (-1 == n) {
                 System.out.println("getMustAttackEntity() returned something not in defenders.");
@@ -498,14 +498,14 @@ public class ComputerUtilAttack {
         // randomInt is used so that the computer doesn't always
         // do the same thing on turn 3 if he had the same creatures in play
         // I know this is a little confusing
-        this.random.setSeed(Singletons.getModel().getGameState().getPhaseHandler().getTurn() + this.randomInt);
+        this.random.setSeed(Singletons.getModel().getGame().getPhaseHandler().getTurn() + this.randomInt);
 
         final Combat combat = new Combat();
-        combat.setAttackingPlayer(Singletons.getModel().getGameState().getCombat().getAttackingPlayer());
-        combat.setDefendingPlayer(Singletons.getModel().getGameState().getCombat().getDefendingPlayer());
+        combat.setAttackingPlayer(Singletons.getModel().getGame().getCombat().getAttackingPlayer());
+        combat.setDefendingPlayer(Singletons.getModel().getGame().getCombat().getDefendingPlayer());
 
-        Singletons.getModel().getGameState().getCombat().initiatePossibleDefenders(Singletons.getModel().getGameState().getCombat().getDefendingPlayer());
-        combat.setDefenders(Singletons.getModel().getGameState().getCombat().getDefenders());
+        Singletons.getModel().getGame().getCombat().initiatePossibleDefenders(Singletons.getModel().getGame().getCombat().getDefendingPlayer());
+        combat.setDefenders(Singletons.getModel().getGame().getCombat().getDefenders());
 
         if (this.attackers.isEmpty()) {
             return combat;
@@ -561,7 +561,7 @@ public class ComputerUtilAttack {
                     break;
                 }
                 if (c.getName().equals("Finest Hour")
-                        && Singletons.getModel().getGameState().getPhaseHandler().isFirstCombat()) {
+                        && Singletons.getModel().getGame().getPhaseHandler().isFirstCombat()) {
                     exalted = true;
                     break;
                 }

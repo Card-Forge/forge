@@ -1495,12 +1495,12 @@ public class AbilityFactory {
             return false;
         }
 
-        if (sa.getRestrictions().getPlaneswalker() && Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.MAIN2)) {
+        if (sa.getRestrictions().getPlaneswalker() && Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.MAIN2)) {
             return true;
         }
 
-        return (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.END_OF_TURN) 
-             && Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(PlayerType.COMPUTER));
+        return (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) 
+             && Singletons.getModel().getGame().getPhaseHandler().isNextTurn(PlayerType.COMPUTER));
     }
 
     // returns true if it's better to wait until blockers are declared
@@ -1517,8 +1517,8 @@ public class AbilityFactory {
 
         return (sa.getSourceCard().isCreature() 
                 && sa.getPayCosts().getTap() 
-                && (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY) 
-                 || Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(PlayerType.HUMAN)));
+                && (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY) 
+                 || Singletons.getModel().getGame().getPhaseHandler().isNextTurn(PlayerType.HUMAN)));
     }
 
     /**
@@ -1630,10 +1630,10 @@ public class AbilityFactory {
                 // Add whole Remembered list to handlePaid
                 final List<Card> list = new ArrayList<Card>();
                 if (card.getRemembered().isEmpty()) {
-                    final Card newCard = Singletons.getModel().getGameState().getCardState(card);
+                    final Card newCard = Singletons.getModel().getGame().getCardState(card);
                     for (final Object o : newCard.getRemembered()) {
                         if (o instanceof Card) {
-                            list.add(Singletons.getModel().getGameState().getCardState((Card) o));
+                            list.add(Singletons.getModel().getGame().getCardState((Card) o));
                         }
                     }
                 }
@@ -1647,7 +1647,7 @@ public class AbilityFactory {
                 } else {
                     for (final Object o : card.getRemembered()) {
                         if (o instanceof Card) {
-                            list.add(Singletons.getModel().getGameState().getCardState((Card) o));
+                            list.add(Singletons.getModel().getGame().getCardState((Card) o));
                         }
                     }
                 }
@@ -1657,7 +1657,7 @@ public class AbilityFactory {
                 // Add whole Imprinted list to handlePaid
                 final List<Card> list = new ArrayList<Card>();
                 for (final Card c : card.getImprinted()) {
-                    list.add(Singletons.getModel().getGameState().getCardState(c));
+                    list.add(Singletons.getModel().getGame().getCardState(c));
                 }
 
                 return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
@@ -1667,7 +1667,7 @@ public class AbilityFactory {
                 if (card.isEnchanting()) {
                     Object o = card.getEnchanting();
                     if (o instanceof Card) {
-                        list.add(Singletons.getModel().getGameState().getCardState((Card) o));
+                        list.add(Singletons.getModel().getGame().getCardState((Card) o));
                     }
                 }
                 return CardFactoryUtil.handlePaid(list, calcX[1], card) * multiplier;
@@ -1927,7 +1927,7 @@ public class AbilityFactory {
             else {
                 final Object crd = root.getTriggeringObject(defined.substring(9));
                 if (crd instanceof Card) {
-                    c = Singletons.getModel().getGameState().getCardState((Card) crd);
+                    c = Singletons.getModel().getGame().getCardState((Card) crd);
                     c = (Card) crd;
                 } else if (crd instanceof List<?>) {
                     for (final Card cardItem : (List<Card>) crd) {
@@ -1939,7 +1939,7 @@ public class AbilityFactory {
             final SpellAbility root = sa.getRootSpellAbility();
             final Object crd = root.getReplacingObject(defined.substring(8));
             if (crd instanceof Card) {
-                c = Singletons.getModel().getGameState().getCardState((Card) crd);
+                c = Singletons.getModel().getGame().getCardState((Card) crd);
             } else if (crd instanceof List<?>) {
                 for (final Card cardItem : (List<Card>) crd) {
                     cards.add(cardItem);
@@ -1947,26 +1947,26 @@ public class AbilityFactory {
             }
         } else if (defined.equals("Remembered")) {
             if (hostCard.getRemembered().isEmpty()) {
-                final Card newCard = Singletons.getModel().getGameState().getCardState(hostCard);
+                final Card newCard = Singletons.getModel().getGame().getCardState(hostCard);
                 for (final Object o : newCard.getRemembered()) {
                     if (o instanceof Card) {
-                        cards.add(Singletons.getModel().getGameState().getCardState((Card) o));
+                        cards.add(Singletons.getModel().getGame().getCardState((Card) o));
                     }
                 }
             }
 
             for (final Object o : hostCard.getRemembered()) {
                 if (o instanceof Card) {
-                    cards.add(Singletons.getModel().getGameState().getCardState((Card) o));
+                    cards.add(Singletons.getModel().getGame().getCardState((Card) o));
                 }
             }
         } else if (defined.equals("Clones")) {
             for (final Card clone : hostCard.getClones()) {
-                cards.add(Singletons.getModel().getGameState().getCardState(clone));
+                cards.add(Singletons.getModel().getGame().getCardState(clone));
             }
         } else if (defined.equals("Imprinted")) {
             for (final Card imprint : hostCard.getImprinted()) {
-                cards.add(Singletons.getModel().getGameState().getCardState(imprint));
+                cards.add(Singletons.getModel().getGame().getCardState(imprint));
             }
         } else if (defined.startsWith("ThisTurnEntered")) {
             final String[] workingCopy = defined.split("_");
@@ -2187,12 +2187,12 @@ public class AbilityFactory {
                 }
             }
         } else if (defined.equals("AttackingPlayer")) {
-            final Player p = Singletons.getModel().getGameState().getCombat().getAttackingPlayer();
+            final Player p = Singletons.getModel().getGame().getCombat().getAttackingPlayer();
             if (!players.contains(p)) {
                 players.add(p);
             }
         } else if (defined.equals("DefendingPlayer")) {
-            final Player p = Singletons.getModel().getGameState().getCombat().getDefendingPlayer();
+            final Player p = Singletons.getModel().getGame().getCombat().getDefendingPlayer();
             if (!players.contains(p)) {
                 players.add(p);
             }
@@ -2210,7 +2210,7 @@ public class AbilityFactory {
                 players.add(sa.getActivatingPlayer().getOpponent());
             }
         } else {
-            for (Player p : Singletons.getModel().getGameState().getPlayers()) {
+            for (Player p : Singletons.getModel().getGame().getPlayers()) {
                 if (p.isValid(defined, sa.getActivatingPlayer(), sa.getSourceCard())) {
                     players.add(p);
                 }
@@ -2262,7 +2262,7 @@ public class AbilityFactory {
             for (final Object o : card.getRemembered()) {
                 if (o instanceof Card) {
                     final Card rem = (Card) o;
-                    sas.addAll(Singletons.getModel().getGameState().getCardState(rem).getSpellAbilities());
+                    sas.addAll(Singletons.getModel().getGame().getCardState(rem).getSpellAbilities());
                 }
             }
         } else if (defined.equals("Imprinted")) {
@@ -2283,7 +2283,7 @@ public class AbilityFactory {
             final SpellAbility root = sa.getRootSpellAbility();
             final Object crd = root.getTriggeringObject("Card");
             if (crd instanceof Card) {
-                triggeredCard = Singletons.getModel().getGameState().getCardState((Card) crd);
+                triggeredCard = Singletons.getModel().getGame().getCardState((Card) crd);
             } //find the imprinted card that does not share a name with the triggered card
             for (final SpellAbility spell : imprintedCards) {
                 if (!spell.getSourceCard().getName().equals(triggeredCard.getName())) {
@@ -2426,12 +2426,12 @@ public class AbilityFactory {
      */
     public static ArrayList<Object> predictThreatenedObjects(final Player aiPlayer, final AbilityFactory saviourAf) {
         final ArrayList<Object> objects = new ArrayList<Object>();
-        if (Singletons.getModel().getGameState().getStack().size() == 0) {
+        if (Singletons.getModel().getGame().getStack().size() == 0) {
             return objects;
         }
 
         // check stack for something that will kill this
-        final SpellAbility topStack = Singletons.getModel().getGameState().getStack().peekAbility();
+        final SpellAbility topStack = Singletons.getModel().getGame().getStack().peekAbility();
         objects.addAll(AbilityFactory.predictThreatenedObjects(aiPlayer, saviourAf, topStack));
 
         return objects;
@@ -2906,7 +2906,7 @@ public class AbilityFactory {
             // every resolving spellAbility will end here
             if (usedStack) {
                 SpellAbility root = sa.getRootSpellAbility();
-                Singletons.getModel().getGameState().getStack().finishResolving(root, false);
+                Singletons.getModel().getGame().getStack().finishResolving(root, false);
             }
             return;
         }

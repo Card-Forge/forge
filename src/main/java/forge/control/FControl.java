@@ -274,7 +274,7 @@ public enum FControl {
         if (Singletons.getModel() == null) 
             return null;
 
-        return Aggregates.firstFieldEquals(Singletons.getModel().getGameState().getPlayers(), Player.Accessors.FN_GET_TYPE, PlayerType.HUMAN);
+        return Aggregates.firstFieldEquals(Singletons.getModel().getGame().getPlayers(), Player.Accessors.FN_GET_TYPE, PlayerType.HUMAN);
     }
 
     /**

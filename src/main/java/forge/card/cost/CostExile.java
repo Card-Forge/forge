@@ -153,8 +153,8 @@ public class CostExile extends CostPartWithList {
             return true; // this will always work
         } 
         if (this.getFrom().equals(ZoneType.Stack)) {
-            for (int i = 0; i < Singletons.getModel().getGameState().getStack().size(); i++) {
-                typeList.add(Singletons.getModel().getGameState().getStack().peekAbility(i).getSourceCard());
+            for (int i = 0; i < Singletons.getModel().getGame().getStack().size(); i++) {
+                typeList.add(Singletons.getModel().getGame().getStack().peekAbility(i).getSourceCard());
             }
         } else {
             typeList = activator.getCardsIn(this.getFrom());
@@ -182,13 +182,13 @@ public class CostExile extends CostPartWithList {
     @Override
     public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         for (final Card c : this.getList()) {
-            Singletons.getModel().getGameAction().exile(c);
+            Singletons.getModel().getGame().getAction().exile(c);
             if (this.from.equals(ZoneType.Stack)) {
                 ArrayList<SpellAbility> spells = c.getSpellAbilities();
                 for (SpellAbility spell : spells) {
                     if (c.isInZone(ZoneType.Exile)) {
-                        final SpellAbilityStackInstance si = Singletons.getModel().getGameState().getStack().getInstanceFromSpellAbility(spell);
-                        Singletons.getModel().getGameState().getStack().remove(si);
+                        final SpellAbilityStackInstance si = Singletons.getModel().getGame().getStack().getInstanceFromSpellAbility(spell);
+                        Singletons.getModel().getGame().getStack().remove(si);
                     }
                 }
             }
@@ -211,7 +211,7 @@ public class CostExile extends CostPartWithList {
         if (this.getType().equals("All")) {
             this.setList(list);
             for (final Card card : list) {
-                Singletons.getModel().getGameAction().exile(card);
+                Singletons.getModel().getGame().getAction().exile(card);
             }
             payment.paidCost(this);
         } 
@@ -316,7 +316,7 @@ public class CostExile extends CostPartWithList {
             while (itr.hasNext()) {
                 final Card c = itr.next();
                 part.addToList(c);
-                Singletons.getModel().getGameAction().exile(c);
+                Singletons.getModel().getGame().getAction().exile(c);
             }
             part.addListToHash(sa, "Exiled");
             payment.paidCost(part);
@@ -365,7 +365,7 @@ public class CostExile extends CostPartWithList {
                     if (c != null) {
                         this.typeList.remove(c);
                         part.addToList(c);
-                        Singletons.getModel().getGameAction().exile(c);
+                        Singletons.getModel().getGame().getAction().exile(c);
                         if (i == (nNeeded - 1)) {
                             this.done();
                         }
@@ -426,9 +426,9 @@ public class CostExile extends CostPartWithList {
                 saList = new ArrayList<SpellAbility>();
                 descList = new ArrayList<String>();
 
-                for (int i = 0; i < Singletons.getModel().getGameState().getStack().size(); i++) {
-                    final Card stC = Singletons.getModel().getGameState().getStack().peekAbility(i).getSourceCard();
-                    final SpellAbility stSA = Singletons.getModel().getGameState().getStack().peekAbility(i).getRootSpellAbility();
+                for (int i = 0; i < Singletons.getModel().getGame().getStack().size(); i++) {
+                    final Card stC = Singletons.getModel().getGame().getStack().peekAbility(i).getSourceCard();
+                    final SpellAbility stSA = Singletons.getModel().getGame().getStack().peekAbility(i).getRootSpellAbility();
                     if (stC.isValid(type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard()) && stSA.isSpell()) {
                         this.saList.add(stSA);
                         if (stC.isCopiedSpell()) {
@@ -453,13 +453,13 @@ public class CostExile extends CostPartWithList {
                         this.saList.remove(toExile);
                         part.addToList(c);
                         if (!c.isCopiedSpell()) {
-                            Singletons.getModel().getGameAction().exile(c);
+                            Singletons.getModel().getGame().getAction().exile(c);
                         }
                         if (i == (nNeeded - 1)) {
                             this.done();
                         }
-                        final SpellAbilityStackInstance si = Singletons.getModel().getGameState().getStack().getInstanceFromSpellAbility(toExile);
-                        Singletons.getModel().getGameState().getStack().remove(si);
+                        final SpellAbilityStackInstance si = Singletons.getModel().getGame().getStack().getInstanceFromSpellAbility(toExile);
+                        Singletons.getModel().getGame().getStack().remove(si);
                     } else {
                         this.cancel();
                         break;
@@ -546,7 +546,7 @@ public class CostExile extends CostPartWithList {
                 if (this.typeList.contains(card)) {
                     this.nExiles++;
                     part.addToList(card);
-                    Singletons.getModel().getGameAction().exile(card);
+                    Singletons.getModel().getGame().getAction().exile(card);
                     this.typeList.remove(card);
                     // in case nothing else to exile
                     if (this.nExiles == nNeeded) {
@@ -606,7 +606,7 @@ public class CostExile extends CostPartWithList {
                             possibleValues[0]);
                     if (choice.equals(0)) {
                         payment.getAbility().addCostToHashList(card, "Exiled");
-                        Singletons.getModel().getGameAction().exile(card);
+                        Singletons.getModel().getGame().getAction().exile(card);
                         part.addToList(card);
                         this.stop();
                         part.addListToHash(sa, "Exiled");

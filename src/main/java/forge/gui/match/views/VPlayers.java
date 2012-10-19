@@ -67,7 +67,7 @@ public enum VPlayers implements IVDoc {
         final JPanel pnl = parentCell.getBody();
         pnl.setLayout(new MigLayout("insets 0, gap 0, wrap"));
 
-        final List<Player> players = Singletons.getModel().getGameState().getPlayers();
+        final List<Player> players = Singletons.getModel().getGame().getPlayers();
         this.infoLBLs = new HashMap<Player, JLabel[]>();
 
         final String constraints = "w 97%!, gapleft 2%, gapbottom 1%";
@@ -179,7 +179,7 @@ public enum VPlayers implements IVDoc {
         // No need to update if this panel isn't showing
         if (!parentCell.getSelected().equals(this)) { return; }
 
-        stormLabel.setText("Storm count: " + Singletons.getModel().getGameState().getStack().getCardsCastThisTurn().size());
+        stormLabel.setText("Storm count: " + Singletons.getModel().getGame().getStack().getCardsCastThisTurn().size());
     }
 
     //========= Custom class handling

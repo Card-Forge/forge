@@ -140,7 +140,7 @@ public class CostSacrifice extends CostPartWithList {
     public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         this.addListToHash(ability, "Sacrificed");
         for (final Card c : this.getList()) {
-            Singletons.getModel().getGameAction().sacrifice(c, ability);
+            Singletons.getModel().getGame().getAction().sacrifice(c, ability);
         }
     }
 
@@ -249,7 +249,7 @@ public class CostSacrifice extends CostPartWithList {
         // TODO Ask First
         for (final Card card : typeList) {
             payment.getAbility().addCostToHashList(card, "Sacrificed");
-            Singletons.getModel().getGameAction().sacrifice(card, sa);
+            Singletons.getModel().getGame().getAction().sacrifice(card, sa);
         }
 
         payment.setPaidManaPart(part);
@@ -306,7 +306,7 @@ public class CostSacrifice extends CostPartWithList {
                 if (typeList.contains(card)) {
                     this.nSacrifices++;
                     part.addToList(card);
-                    Singletons.getModel().getGameAction().sacrifice(card, sa);
+                    Singletons.getModel().getGame().getAction().sacrifice(card, sa);
                     typeList.remove(card);
                     // in case nothing else to sacrifice
                     if (this.nSacrifices == nNeeded) {
@@ -367,7 +367,7 @@ public class CostSacrifice extends CostPartWithList {
                     if (choice.equals(0)) {
                         part.addToList(card);
                         part.addListToHash(sa, "Sacrificed");
-                        Singletons.getModel().getGameAction().sacrifice(card, sa);
+                        Singletons.getModel().getGame().getAction().sacrifice(card, sa);
                         this.stop();
                         payment.paidCost(part);
                     } else {

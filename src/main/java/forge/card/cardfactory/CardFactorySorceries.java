@@ -95,7 +95,7 @@ public class CardFactorySorceries {
                 }
                 for (int i = 0; i < count; i++) {
                     exiled.add(lib.get(i));
-                    Singletons.getModel().getGameAction().exile(lib.get(i));
+                    Singletons.getModel().getGame().getAction().exile(lib.get(i));
                 }
                 final List<Card> pile1 = new ArrayList<Card>();
                 final List<Card> pile2 = new ArrayList<Card>();
@@ -233,7 +233,7 @@ public class CardFactorySorceries {
                                         JOptionPane.INFORMATION_MESSAGE);
                             }
                         } else {
-                            Singletons.getModel().getGameAction().playCardWithoutManaCost(playing);
+                            Singletons.getModel().getGame().getAction().playCardWithoutManaCost(playing);
                         }
                         chosen.remove(playing);
                     }
@@ -268,7 +268,7 @@ public class CardFactorySorceries {
 
             @Override
             public void resolve() {
-                List<Card> tokens = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+                List<Card> tokens = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
                 tokens = CardLists.filter(tokens, Presets.TOKEN);
 
                 CardFactoryUtil.copyTokens(tokens);
@@ -352,7 +352,7 @@ public class CardFactorySorceries {
                 // selected are sacrificed.
                 for (int i = 0; i < target.size(); i++) {
                     if (target.get(i).isInPlay() && !saveList.contains(target.get(i))) {
-                        Singletons.getModel().getGameAction().sacrifice(target.get(i), this);
+                        Singletons.getModel().getGame().getAction().sacrifice(target.get(i), this);
                     }
                 }
             } // resolve()
@@ -500,10 +500,10 @@ public class CardFactorySorceries {
 
                 for (final Card c : Iterables.filter(player.getCardsIn(ZoneType.Graveyard), nonBasicLands)) {
                     for (final Card rem : Iterables.filter(lib, CardPredicates.nameEquals(c.getName()))) {
-                        Singletons.getModel().getGameAction().exile(rem);
+                        Singletons.getModel().getGame().getAction().exile(rem);
                         lib.remove(rem);
                     }
-                    Singletons.getModel().getGameAction().exile(c);
+                    Singletons.getModel().getGame().getAction().exile(c);
                 }
             }
         }; 
@@ -572,7 +572,7 @@ public class CardFactorySorceries {
     private final static void balanceLands(Spell card)
     {
         List<List<Card>> lands = new ArrayList<List<Card>>();
-        for (Player p : Singletons.getModel().getGameState().getPlayers())
+        for (Player p : Singletons.getModel().getGame().getPlayers())
         {
             lands.add(p.getLandsInPlay());
         }
@@ -583,7 +583,7 @@ public class CardFactorySorceries {
             min = Math.min(min, s);
         }
         Iterator<List<Card>> ll = lands.iterator();
-        for (Player p : Singletons.getModel().getGameState().getPlayers())
+        for (Player p : Singletons.getModel().getGame().getPlayers())
         {
             List<Card> l = ll.next();
             int sac = l.size() - min;
@@ -591,7 +591,7 @@ public class CardFactorySorceries {
             if ( p.isComputer() ) {
                 CardLists.shuffle(l);
                 for (int i = 0; i < sac; i++) {
-                    Singletons.getModel().getGameAction().sacrifice(l.get(i), card);
+                    Singletons.getModel().getGame().getAction().sacrifice(l.get(i), card);
                 }                        
             } else {
                 Singletons.getModel().getMatch().getInput().setInput(PlayerUtil.inputSacrificePermanents(sac, "Land"));
@@ -601,7 +601,7 @@ public class CardFactorySorceries {
     
     private final static void balanceHands(Spell card) {
         List<List<Card>> hands = new ArrayList<List<Card>>();
-        for (Player p : Singletons.getModel().getGameState().getPlayers())
+        for (Player p : Singletons.getModel().getGame().getPlayers())
         {
             hands.add(p.getCardsIn(ZoneType.Hand));
         }
@@ -611,7 +611,7 @@ public class CardFactorySorceries {
             min = Math.min(min, s);
         }
         Iterator<List<Card>> hh = hands.iterator();
-        for (Player p : Singletons.getModel().getGameState().getPlayers())
+        for (Player p : Singletons.getModel().getGame().getPlayers())
         {
             List<Card> h = hh.next();
             int sac = h.size() - min;
@@ -622,7 +622,7 @@ public class CardFactorySorceries {
     
     private final static void balanceCreatures(Spell card) {
         List<List<Card>> creats = new ArrayList<List<Card>>();
-        for (Player p : Singletons.getModel().getGameState().getPlayers())
+        for (Player p : Singletons.getModel().getGame().getPlayers())
         {
             creats.add(p.getCreaturesInPlay());
         }
@@ -632,7 +632,7 @@ public class CardFactorySorceries {
             min = Math.min(min, s);
         }
         Iterator<List<Card>> cc = creats.iterator();
-        for (Player p : Singletons.getModel().getGameState().getPlayers())
+        for (Player p : Singletons.getModel().getGame().getPlayers())
         {
             List<Card> c = cc.next();
             int sac = c.size() - min;
@@ -642,7 +642,7 @@ public class CardFactorySorceries {
                 CardLists.sortCMC(c);
                 Collections.reverse(c);
                 for (int i = 0; i < sac; i++) {
-                    Singletons.getModel().getGameAction().sacrifice(c.get(i), card);
+                    Singletons.getModel().getGame().getAction().sacrifice(c.get(i), card);
                 }
             } else {
                 Singletons.getModel().getMatch().getInput().setInput(PlayerUtil.inputSacrificePermanents(sac, "Creature"));
@@ -712,7 +712,7 @@ public class CardFactorySorceries {
                         thePlayer.addMaxLandsToPlay(-3);
                     }
                 };
-                Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
+                Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);
             }
         };
 
@@ -746,7 +746,7 @@ public class CardFactorySorceries {
                         thePlayer.addMaxLandsToPlay(-1);
                     }
                 };
-                Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
+                Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);
 
                 thePlayer.drawCard();
             }
@@ -772,12 +772,12 @@ public class CardFactorySorceries {
             @Override
             public void resolve() {
                 int max = Integer.MIN_VALUE;
-                for (Player p : Singletons.getModel().getGameState().getPlayers())
+                for (Player p : Singletons.getModel().getGame().getPlayers())
                 {
                     int s = p.getZone(ZoneType.Hand).size();
                     max = Math.max(max, s);
                 }
-                for (Player p : Singletons.getModel().getGameState().getPlayers())
+                for (Player p : Singletons.getModel().getGame().getPlayers())
                 {
                     this.discardDraw(p, max);
                 }
@@ -798,7 +798,7 @@ public class CardFactorySorceries {
             @Override
             public void resolve() {
                 List<String> types = new ArrayList<String>();
-                for(Player p : Singletons.getModel().getGameState().getPlayers()) {
+                for(Player p : Singletons.getModel().getGame().getPlayers()) {
                     if ( p.isHuman() ) {
                          types.add(GuiChoose.one("Which creature type?", Constant.CardTypes.CREATURE_TYPES));
                     } else {
@@ -824,11 +824,11 @@ public class CardFactorySorceries {
                     }
                 }
 
-                List<Card> bidded = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
+                List<Card> bidded = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
                 for (final Card c : bidded) {
                     for(int i = 0; i < types.size(); i++) {
                         if (c.isType(types.get(i))) {
-                            Singletons.getModel().getGameAction().moveToPlay(c);
+                            Singletons.getModel().getGame().getAction().moveToPlay(c);
                             i = types.size(); // break inner loop
                         }
                     }
@@ -918,7 +918,7 @@ public class CardFactorySorceries {
 
                 // then, move revealed cards to bottom of library
                 for (final Card c : topCards) {
-                    Singletons.getModel().getGameAction().moveToBottomOfLibrary(c);
+                    Singletons.getModel().getGame().getAction().moveToBottomOfLibrary(c);
                 }
             } // resolve()
 
@@ -976,7 +976,7 @@ public class CardFactorySorceries {
                     final Card c = ab1card[0];
                     if (c != null) {
                         if (card.getController().getZone(ZoneType.Graveyard).contains(c) && c.canBeTargetedBy(this)) {
-                            Singletons.getModel().getGameAction().moveToPlay(c);
+                            Singletons.getModel().getGame().getAction().moveToPlay(c);
                         }
                     }
                 }
@@ -1002,7 +1002,7 @@ public class CardFactorySorceries {
                                         }
                                     }
                                 };
-                                Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
+                                Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);
                             }
                         }
                     }
@@ -1025,7 +1025,7 @@ public class CardFactorySorceries {
                                     }
                                 }
                             };
-                            Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
+                            Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);
                         }
                     }
                 } // end ab[3]
@@ -1300,11 +1300,11 @@ public class CardFactorySorceries {
                     final ArrayList<String> display = new ArrayList<String>();
 
                     // get all
-                    final List<Card> creatures = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+                    final List<Card> creatures = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
                     List<Card> grave = card.getController().getCardsIn(ZoneType.Graveyard);
                     grave = CardLists.filter(grave, Presets.CREATURES);
 
-                    for (Player p : Singletons.getModel().getGameState().getPlayers()) {
+                    for (Player p : Singletons.getModel().getGame().getPlayers()) {
                         if (p.canBeTargetedBy(spell)) {
                             display.add("Target player loses X life");
                             break;
@@ -1390,7 +1390,7 @@ public class CardFactorySorceries {
                 if (toSac != null) {
                     final Card c = (Card) toSac;
                     baseCMC = CardUtil.getConvertedManaCost(c);
-                    Singletons.getModel().getGameAction().sacrifice(c, this);
+                    Singletons.getModel().getGame().getAction().sacrifice(c, this);
                 } else {
                     return;
                 }
@@ -1410,7 +1410,7 @@ public class CardFactorySorceries {
 
                 // if <= baseCMC, put it onto the battlefield
                 if (newCMC <= baseCMC) {
-                    Singletons.getModel().getGameAction().moveToPlay(newArtifact[0]);
+                    Singletons.getModel().getGame().getAction().moveToPlay(newArtifact[0]);
                 } else {
                     final String diffCost = String.valueOf(newCMC - baseCMC);
                     Singletons.getModel().getMatch().getInput().setInput(new InputPayManaCostAbility(diffCost, new Command() {
@@ -1418,14 +1418,14 @@ public class CardFactorySorceries {
 
                         @Override
                         public void execute() {
-                            Singletons.getModel().getGameAction().moveToPlay(newArtifact[0]);
+                            Singletons.getModel().getGame().getAction().moveToPlay(newArtifact[0]);
                         }
                     }, new Command() {
                         private static final long serialVersionUID = -246036834856971935L;
 
                         @Override
                         public void execute() {
-                            Singletons.getModel().getGameAction().moveToGraveyard(newArtifact[0]);
+                            Singletons.getModel().getGame().getAction().moveToGraveyard(newArtifact[0]);
                         }
                     }));
                 }

@@ -83,7 +83,7 @@ public class ComputerAIGeneral implements Computer {
         final boolean nextPhase = ComputerUtil.playSpellAbilities(player, getSpellAbilities(list));
 
         if (nextPhase) {
-            Singletons.getModel().getGameState().getPhaseHandler().passPriority();
+            Singletons.getModel().getGame().getPhaseHandler().passPriority();
         }
     } // playCards()
 
@@ -283,11 +283,11 @@ public class ComputerAIGeneral implements Computer {
     public final void declareAttackers() {
         // 12/2/10(sol) the decision making here has moved to getAttackers()
 
-        Singletons.getModel().getGameState().setCombat(ComputerUtil.getAttackers(player));
+        Singletons.getModel().getGame().setCombat(ComputerUtil.getAttackers(player));
 
-        final List<Card> att = Singletons.getModel().getGameState().getCombat().getAttackers();
+        final List<Card> att = Singletons.getModel().getGame().getCombat().getAttackers();
         if (!att.isEmpty()) {
-            Singletons.getModel().getGameState().getPhaseHandler().setCombat(true);
+            Singletons.getModel().getGame().getPhaseHandler().setCombat(true);
         }
 
         for (final Card element : att) {
@@ -300,7 +300,7 @@ public class ComputerAIGeneral implements Computer {
 
         player.getZone(ZoneType.Battlefield).updateObservers();
 
-        Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
+        Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(true);
     }
 
     /**
@@ -312,11 +312,11 @@ public class ComputerAIGeneral implements Computer {
     public final void declareBlockers() {
         final List<Card> blockers = player.getCreaturesInPlay();
 
-        Singletons.getModel().getGameState().setCombat(ComputerUtilBlock.getBlockers(player, Singletons.getModel().getGameState().getCombat(), blockers));
+        Singletons.getModel().getGame().setCombat(ComputerUtilBlock.getBlockers(player, Singletons.getModel().getGame().getCombat(), blockers));
         
-        CombatUtil.orderMultipleCombatants(Singletons.getModel().getGameState().getCombat());
+        CombatUtil.orderMultipleCombatants(Singletons.getModel().getGame().getCombat());
 
-        Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
+        Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(true);
     }
 
     /**
@@ -328,7 +328,7 @@ public class ComputerAIGeneral implements Computer {
     public final void endOfTurn() {
         //This is only called in the computer turn
         //this.playSpellAbilitiesStackEmpty();
-        Singletons.getModel().getGameState().getPhaseHandler().passPriority();
+        Singletons.getModel().getGame().getPhaseHandler().passPriority();
     }
 
     /**
@@ -338,16 +338,16 @@ public class ComputerAIGeneral implements Computer {
      */
     @Override
     public final void playSpellAbilities() {
-        if (Singletons.getModel().getGameState().getStack().isEmpty()) {
+        if (Singletons.getModel().getGame().getStack().isEmpty()) {
             this.playSpellAbilitiesStackEmpty();
             return;
         }
 
         // if top of stack is owned by me
-        if (Singletons.getModel().getGameState().getStack().peekInstance().getActivatingPlayer().isComputer()) {
+        if (Singletons.getModel().getGame().getStack().peekInstance().getActivatingPlayer().isComputer()) {
             // probably should let my stuff resolve to force Human to respond to
             // it
-            Singletons.getModel().getGameState().getPhaseHandler().passPriority();
+            Singletons.getModel().getGame().getPhaseHandler().passPriority();
             return;
         }
         final List<Card> cards = getAvailableCards();
@@ -375,6 +375,6 @@ public class ComputerAIGeneral implements Computer {
             }
         }
         // if this hasn't been covered above, just PassPriority()
-        Singletons.getModel().getGameState().getPhaseHandler().passPriority();
+        Singletons.getModel().getGame().getPhaseHandler().passPriority();
     }
 }

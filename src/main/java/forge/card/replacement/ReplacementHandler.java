@@ -102,7 +102,7 @@ public class ReplacementHandler {
         }*/
 
         // Round up Static replacement effects
-        for (final Player p : Singletons.getModel().getGameState().getPlayers()) {
+        for (final Player p : Singletons.getModel().getGame().getPlayers()) {
             for (final Card crd : p.getAllCards()) {
                 for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
                     if (!replacementEffect.hasRun()
@@ -110,7 +110,7 @@ public class ReplacementHandler {
                             && replacementEffect.requirementsCheck()
                             && replacementEffect.canReplace(runParams) 
                             && !possibleReplacers.contains(replacementEffect)
-                            && replacementEffect.zonesCheck(Singletons.getModel().getGameState().getZoneOf(crd))) {
+                            && replacementEffect.zonesCheck(Singletons.getModel().getGame().getZoneOf(crd))) {
                         possibleReplacers.add(replacementEffect);
                     }
                 }
@@ -145,7 +145,7 @@ public class ReplacementHandler {
             ReplacementResult res = this.executeReplacement(runParams, chosenRE, decider);
             if (res != ReplacementResult.NotReplaced) {
                 chosenRE.setHasRun(false);
-                Singletons.getModel().getGameState().getGameLog().add("ReplacementEffect", chosenRE.toString(), 2);
+                Singletons.getModel().getGame().getGameLog().add("ReplacementEffect", chosenRE.toString(), 2);
                 return res;
             } else {
                 if (possibleReplacers.size() == 0) {
@@ -235,7 +235,7 @@ public class ReplacementHandler {
 
         Player player = replacementEffect.getHostCard().getController(); 
         if (player.isHuman()) {
-            Singletons.getModel().getGameAction().playSpellAbilityNoStack(effectSA, false);
+            Singletons.getModel().getGame().getAction().playSpellAbilityNoStack(effectSA, false);
         } else {
             ComputerUtil.playNoStack(player, effectSA);
         }

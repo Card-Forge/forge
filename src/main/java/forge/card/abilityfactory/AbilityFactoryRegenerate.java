@@ -292,7 +292,7 @@ public class AbilityFactoryRegenerate {
             // them
             final ArrayList<Card> list = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
 
-            if (Singletons.getModel().getGameState().getStack().size() > 0) {
+            if (Singletons.getModel().getGame().getStack().size() > 0) {
                 final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(),af);
 
                 for (final Card c : list) {
@@ -301,7 +301,7 @@ public class AbilityFactoryRegenerate {
                     }
                 }
             } else {
-                if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     boolean flag = false;
 
                     for (final Card c : list) {
@@ -327,7 +327,7 @@ public class AbilityFactoryRegenerate {
                 return false;
             }
 
-            if (Singletons.getModel().getGameState().getStack().size() > 0) {
+            if (Singletons.getModel().getGame().getStack().size() > 0) {
                 // check stack for something on the stack will kill anything i
                 // control
                 final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(), af);
@@ -346,7 +346,7 @@ public class AbilityFactoryRegenerate {
                     chance = true;
                 }
             } else {
-                if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     final List<Card> combatants = CardLists.filter(targetables, CardPredicates.Presets.CREATURES);
                     CardLists.sortByEvaluateCreature(combatants);
 
@@ -423,7 +423,7 @@ public class AbilityFactoryRegenerate {
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
         // filter AIs battlefield by what I can target
-        List<Card> targetables = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+        List<Card> targetables = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, hostCard);
         targetables = CardLists.getTargetableCards(targetables, sa);
         final List<Card> compTargetables = CardLists.filterControlledBy(targetables, ai);
@@ -439,7 +439,7 @@ public class AbilityFactoryRegenerate {
         if (compTargetables.size() > 0) {
             final List<Card> combatants = CardLists.filter(compTargetables, CardPredicates.Presets.CREATURES);
             CardLists.sortByEvaluateCreature(combatants);
-            if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+            if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 for (final Card c : combatants) {
                     if ((c.getShield() == 0) && CombatUtil.combatantWouldBeDestroyed(c)) {
                         tgt.addTarget(c);
@@ -512,7 +512,7 @@ public class AbilityFactoryRegenerate {
 
             if (tgtC.isInPlay() && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
                 tgtC.addShield();
-                Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
+                Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);
             }
         }
     } // regenerateResolve
@@ -738,7 +738,7 @@ public class AbilityFactoryRegenerate {
             valid = params.get("ValidCards");
         }
 
-        List<Card> list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+        List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         list = CardLists.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
         list = CardLists.filter(list, CardPredicates.isController(ai));
 
@@ -747,7 +747,7 @@ public class AbilityFactoryRegenerate {
         }
 
         int numSaved = 0;
-        if (Singletons.getModel().getGameState().getStack().size() > 0) {
+        if (Singletons.getModel().getGame().getStack().size() > 0) {
             final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(),af);
 
             for (final Card c : list) {
@@ -756,7 +756,7 @@ public class AbilityFactoryRegenerate {
                 }
             }
         } else {
-            if (Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+            if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 final List<Card> combatants = CardLists.filter(list, CardPredicates.Presets.CREATURES);
 
                 for (final Card c : combatants) {
@@ -827,7 +827,7 @@ public class AbilityFactoryRegenerate {
             valid = params.get("ValidCards");
         }
 
-        List<Card> list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+        List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         list = CardLists.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
 
         for (final Card c : list) {
@@ -842,7 +842,7 @@ public class AbilityFactoryRegenerate {
 
             if (c.isInPlay()) {
                 c.addShield();
-                Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
+                Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);
             }
         }
     } // regenerateAllResolve

@@ -259,32 +259,32 @@ public class AbilityFactoryEffect {
 
         if (params.containsKey("AILogic")) {
             logic = params.get("AILogic");
-            final PhaseHandler phase = Singletons.getModel().getGameState().getPhaseHandler();
+            final PhaseHandler phase = Singletons.getModel().getGame().getPhaseHandler();
             if (logic.equals("BeginningOfOppTurn")) {
                 if (phase.isPlayerTurn(ai.getOpponent()) || phase.getPhase().isAfter(PhaseType.DRAW)) {
                     return false;
                 }
                 randomReturn = true;
             } else if (logic.equals("Fog")) {
-                if (Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
+                if (Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
                     return false;
                 }
-                if (!Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                if (!Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     return false;
                 }
-                if (Singletons.getModel().getGameState().getStack().size() != 0) {
+                if (Singletons.getModel().getGame().getStack().size() != 0) {
                     return false;
                 }
-                if (Singletons.getModel().getGameState().getPhaseHandler().isPreventCombatDamageThisTurn()) {
+                if (Singletons.getModel().getGame().getPhaseHandler().isPreventCombatDamageThisTurn()) {
                     return false;
                 }
-                if (!CombatUtil.lifeInDanger(ai, Singletons.getModel().getGameState().getCombat())) {
+                if (!CombatUtil.lifeInDanger(ai, Singletons.getModel().getGame().getCombat())) {
                     return false;
                 }
                 final Target tgt = sa.getTarget();
                 if (tgt != null) {
                     tgt.resetTargets();
-                    List<Card> list = Singletons.getModel().getGameState().getCombat().getAttackerList();
+                    List<Card> list = Singletons.getModel().getGame().getCombat().getAttackerList();
                     list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
                     list = CardLists.getTargetableCards(list, sa);
                     Card target = CardFactoryUtil.getBestCreatureAI(list);
@@ -446,7 +446,7 @@ public class AbilityFactoryEffect {
         }
 
         // Unique Effects shouldn't be duplicated
-        if (params.containsKey("Unique") && Singletons.getModel().getGameState().isCardInPlay(name)) {
+        if (params.containsKey("Unique") && Singletons.getModel().getGame().isCardInPlay(name)) {
             return;
         }
 
@@ -552,7 +552,7 @@ public class AbilityFactoryEffect {
 
         // Remember created effect
         if (params.containsKey("RememberEffect")) {
-            Singletons.getModel().getGameState().getCardState(card).addRemembered(eff);
+            Singletons.getModel().getGame().getCardState(card).addRemembered(eff);
         }
 
         // Duration
@@ -563,29 +563,29 @@ public class AbilityFactoryEffect {
 
                 @Override
                 public void execute() {
-                    Singletons.getModel().getGameAction().exile(e);
+                    Singletons.getModel().getGame().getAction().exile(e);
                 }
             };
 
             if ((duration == null) || duration.equals("EndOfTurn")) {
-                Singletons.getModel().getGameState().getEndOfTurn().addUntil(endEffect);
+                Singletons.getModel().getGame().getEndOfTurn().addUntil(endEffect);
             }
             else if (duration.equals("UntilHostLeavesPlay")) {
                 card.addLeavesPlayCommand(endEffect);
             }
             else if (duration.equals("HostLeavesOrEOT")) {
-                Singletons.getModel().getGameState().getEndOfTurn().addUntil(endEffect);
+                Singletons.getModel().getGame().getEndOfTurn().addUntil(endEffect);
                 card.addLeavesPlayCommand(endEffect);
             }
             else if (duration.equals("UntilYourNextTurn")) {
-                Singletons.getModel().getGameState().getCleanup().addUntilYourNextTurn(controller, endEffect);
+                Singletons.getModel().getGame().getCleanup().addUntilYourNextTurn(controller, endEffect);
             }
         }
 
         // TODO: Add targeting to the effect so it knows who it's dealing with
-        Singletons.getModel().getGameState().getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        Singletons.getModel().getGameAction().moveToPlay(eff);
-        Singletons.getModel().getGameState().getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        Singletons.getModel().getGame().getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+        Singletons.getModel().getGame().getAction().moveToPlay(eff);
+        Singletons.getModel().getGame().getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }
 
 } // end class AbilityFactoryEffect

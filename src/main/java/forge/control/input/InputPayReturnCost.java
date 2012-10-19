@@ -166,7 +166,7 @@ public class InputPayReturnCost extends Input {
         // actually sacrifice the cards
         for (Card selected : this.returnCost.getList()) {
             selected.setUsedToPay(false);
-            Singletons.getModel().getGameAction().moveTo(ZoneType.Hand, selected);
+            Singletons.getModel().getGame().getAction().moveTo(ZoneType.Hand, selected);
         }
         this.returnCost.addListToHash(ability, "Returned");
         this.paid.execute();

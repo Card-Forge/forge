@@ -94,7 +94,7 @@ public class Combat {
         this.currentDefender = 0;
         this.nextDefender = 0;
 
-        this.initiatePossibleDefenders(Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().getOpponent());
+        this.initiatePossibleDefenders(Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().getOpponent());
     }
 
     /**
@@ -261,7 +261,7 @@ public class Combat {
         if (this.attackingPlayer != null) {
             return this.attackingPlayer;
         } else {
-            return Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn();
+            return Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
         }
     }
 
@@ -276,7 +276,7 @@ public class Combat {
         if (this.attackingPlayer != null) {
             return this.defendingPlayer;
         } else {
-            return Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().getOpponent();
+            return Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().getOpponent();
         }
     }
 
@@ -581,7 +581,7 @@ public class Combat {
         } else if (this.blockerMap.containsKey(c)) { // card is a blocker
             List<Card> attackers = this.blockerMap.get(c);
 
-            boolean stillDeclaring = Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS);
+            boolean stillDeclaring = Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS);
             this.blockerMap.remove(c);
             for (Card a : attackers) {
                 this.attackerMap.get(a).remove(c);
@@ -648,7 +648,7 @@ public class Combat {
                 // Run Unblocked Trigger
                 final HashMap<String, Object> runParams = new HashMap<String, Object>();
                 runParams.put("Attacker", attacker);
-                Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.AttackerUnblocked, runParams);
+                Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.AttackerUnblocked, runParams);
 
             }
         }
@@ -835,17 +835,17 @@ public class Combat {
      */
     public static void dealAssignedDamage() {
         // This function handles both Regular and First Strike combat assignment
-        final Player player = Singletons.getModel().getGameState().getCombat().getDefendingPlayer();
+        final Player player = Singletons.getModel().getGame().getCombat().getDefendingPlayer();
 
-        final boolean bFirstStrike = Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE);
+        final boolean bFirstStrike = Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE);
 
-        final HashMap<Card, Integer> defMap = Singletons.getModel().getGameState().getCombat().getDefendingDamageMap();
+        final HashMap<Card, Integer> defMap = Singletons.getModel().getGame().getCombat().getDefendingDamageMap();
 
         for (final Entry<Card, Integer> entry : defMap.entrySet()) {
             player.addCombatDamage(entry.getValue(), entry.getKey());
         }
 
-        final List<Card> unblocked = new ArrayList<Card>(bFirstStrike ? Singletons.getModel().getGameState().getCombat().getUnblockedAttackers() : Singletons.getModel().getGameState().getCombat().getUnblockedFirstStrikeAttackers());
+        final List<Card> unblocked = new ArrayList<Card>(bFirstStrike ? Singletons.getModel().getGame().getCombat().getUnblockedAttackers() : Singletons.getModel().getGame().getCombat().getUnblockedFirstStrikeAttackers());
 
         for (int j = 0; j < unblocked.size(); j++) {
             if (bFirstStrike) {
@@ -860,9 +860,9 @@ public class Combat {
         // this can be much better below here...
 
         final List<Card> combatants = new ArrayList<Card>();
-        combatants.addAll(Singletons.getModel().getGameState().getCombat().getAttackers());
-        combatants.addAll(Singletons.getModel().getGameState().getCombat().getAllBlockers());
-        combatants.addAll(Singletons.getModel().getGameState().getCombat().getDefendingPlaneswalkers());
+        combatants.addAll(Singletons.getModel().getGame().getCombat().getAttackers());
+        combatants.addAll(Singletons.getModel().getGame().getCombat().getAllBlockers());
+        combatants.addAll(Singletons.getModel().getGame().getCombat().getDefendingPlaneswalkers());
 
         Card c;
         for (int i = 0; i < combatants.size(); i++) {

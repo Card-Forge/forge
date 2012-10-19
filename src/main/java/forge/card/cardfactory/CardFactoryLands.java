@@ -144,7 +144,7 @@ class CardFactoryLands {
                 @Override
                 public boolean apply(final Card c) {
                     return c.isInPlay() && c.isCreature()
-                            && (c.getTurnInZone() == Singletons.getModel().getGameState().getPhaseHandler().getTurn());
+                            && (c.getTurnInZone() == Singletons.getModel().getGame().getPhaseHandler().getTurn());
                 }
             };
 
@@ -167,8 +167,8 @@ class CardFactoryLands {
 
                 @Override
                 public boolean canPlayAI() {
-                    if (Singletons.getModel().getGameState().getPhaseHandler().getPhase() != PhaseType.MAIN1
-                     && Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().isComputer()) {
+                    if (Singletons.getModel().getGame().getPhaseHandler().getPhase() != PhaseType.MAIN1
+                     && Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().isComputer()) {
                         return false;
                     }
                     this.inPlay.clear();
@@ -179,7 +179,7 @@ class CardFactoryLands {
                 @Override
                 public void resolve() {
                     this.inPlay.clear();
-                    this.inPlay.addAll(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield));
+                    this.inPlay.addAll(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield));
                     for (final Card targ : CardLists.filter(this.inPlay, targets)) {
                         targ.addCounter(Counters.P1P1, 1);
                     }
@@ -222,7 +222,7 @@ class CardFactoryLands {
 
                     if (land.size() > 0) {
                         for (final Card c : land) {
-                            Singletons.getModel().getGameAction().sacrifice(c, null);
+                            Singletons.getModel().getGame().getAction().sacrifice(c, null);
                         }
                     }
                 }

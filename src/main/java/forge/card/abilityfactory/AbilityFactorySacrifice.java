@@ -494,8 +494,8 @@ public class AbilityFactorySacrifice {
         final boolean remSacrificed = params.containsKey("RememberSacrificed");
 
         if (valid.equals("Self")) {
-            if (Singletons.getModel().getGameState().getZoneOf(card).is(ZoneType.Battlefield)) {
-                if (Singletons.getModel().getGameAction().sacrifice(card, sa) && remSacrificed) {
+            if (Singletons.getModel().getGame().getZoneOf(card).is(ZoneType.Battlefield)) {
+                if (Singletons.getModel().getGame().getAction().sacrifice(card, sa) && remSacrificed) {
                     card.addRemembered(card);
                 }
             }
@@ -583,11 +583,11 @@ public class AbilityFactorySacrifice {
                 final Card c = (Card) o;
 
                 if (destroy) {
-                    if (Singletons.getModel().getGameAction().destroy(c)) {
+                    if (Singletons.getModel().getGame().getAction().destroy(c)) {
                         sacList.add(c);
                     }
                 } else {
-                    if (Singletons.getModel().getGameAction().sacrifice(c, sa)) {
+                    if (Singletons.getModel().getGame().getAction().sacrifice(c, sa)) {
                         sacList.add(c);
                     }
                 }
@@ -624,11 +624,11 @@ public class AbilityFactorySacrifice {
             if (list.size() != 0) {
                 final Card sac = CardUtil.getRandom(list);
                 if (destroy) {
-                    if (Singletons.getModel().getGameAction().destroy(sac)) {
+                    if (Singletons.getModel().getGame().getAction().destroy(sac)) {
                         sacList.add(sac);
                     }
                 } else {
-                    if (Singletons.getModel().getGameAction().sacrifice(sac, sa)) {
+                    if (Singletons.getModel().getGame().getAction().sacrifice(sac, sa)) {
                         sacList.add(sac);
                     }
                 }
@@ -933,7 +933,7 @@ public class AbilityFactorySacrifice {
         if (params.containsKey("Defined")) {
             list = new ArrayList<Card>(AbilityFactory.getDefinedCards(af.getHostCard(), params.get("Defined"), sa));
         } else {
-            list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+            list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         }
 
         final boolean remSacrificed = params.containsKey("RememberSacrificed");
@@ -944,7 +944,7 @@ public class AbilityFactorySacrifice {
         list = AbilityFactory.filterListByType(list, valid, sa);
 
         for (int i = 0; i < list.size(); i++) {
-            if (Singletons.getModel().getGameAction().sacrifice(list.get(i), sa) && remSacrificed) {
+            if (Singletons.getModel().getGame().getAction().sacrifice(list.get(i), sa) && remSacrificed) {
                 card.addRemembered(list.get(i));
             }
         }

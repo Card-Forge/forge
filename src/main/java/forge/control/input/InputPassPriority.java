@@ -46,8 +46,8 @@ public class InputPassPriority extends Input implements java.io.Serializable {
         GuiDisplayUtil.updateGUI();
         ButtonUtil.enableOnlyOK();
 
-        final PhaseType phase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
-        final Player player = Singletons.getModel().getGameState().getPhaseHandler().getPriorityPlayer();
+        final PhaseType phase = Singletons.getModel().getGame().getPhaseHandler().getPhase();
+        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPriorityPlayer();
 
         if (player.isComputer()) {
             System.out.println(phase + ": Computer in passpriority");
@@ -55,11 +55,11 @@ public class InputPassPriority extends Input implements java.io.Serializable {
 
         final StringBuilder sb = new StringBuilder();
 
-        sb.append("Turn : ").append(Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn()).append("\n");
+        sb.append("Turn : ").append(Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn()).append("\n");
         sb.append("Phase: ").append(phase.Name).append("\n");
         sb.append("Stack: ");
-        if (Singletons.getModel().getGameState().getStack().size() != 0) {
-            sb.append(Singletons.getModel().getGameState().getStack().size()).append(" to Resolve.");
+        if (Singletons.getModel().getGame().getStack().size() != 0) {
+            sb.append(Singletons.getModel().getGame().getStack().size()).append(" to Resolve.");
         } else {
             sb.append("Empty");
         }
@@ -72,7 +72,7 @@ public class InputPassPriority extends Input implements java.io.Serializable {
     /** {@inheritDoc} */
     @Override
     public final void selectButtonOK() {
-        Singletons.getModel().getGameState().getPhaseHandler().passPriority();
+        Singletons.getModel().getGame().getPhaseHandler().passPriority();
         //GuiDisplayUtil.updateGUI();
         final Input in = Singletons.getModel().getMatch().getInput().getInput();
         if ((in == this) || (in == null)) {
@@ -84,8 +84,8 @@ public class InputPassPriority extends Input implements java.io.Serializable {
     /** {@inheritDoc} */
     @Override
     public final void selectCard(final Card card, final PlayerZone zone) {
-        if (Singletons.getModel().getGameAction().playCard(card)) {
-            Singletons.getModel().getGameState().getPhaseHandler().setPriority(Singletons.getControl().getPlayer());
+        if (Singletons.getModel().getGame().getAction().playCard(card)) {
+            Singletons.getModel().getGame().getPhaseHandler().setPriority(Singletons.getControl().getPlayer());
         }
         else {
             SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);

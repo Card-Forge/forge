@@ -353,7 +353,7 @@ public class AbilityFactoryGainControl {
         // Don't steal something if I can't Attack without, or prevent it from
         // blocking at least
         if ((this.lose != null) && this.lose.contains("EOT")
-                && Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
+                && Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             return false;
         }
 
@@ -423,7 +423,7 @@ public class AbilityFactoryGainControl {
 
         final Target tgt = sa.getTarget();
         if (this.params.containsKey("AllValid")) {
-            tgtCards = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+            tgtCards = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
             tgtCards = AbilityFactory.filterListByType(tgtCards, this.params.get("AllValid"), sa);
         } else if ((tgt != null) && !this.params.containsKey("Defined")) {
             tgtCards.addAll(tgt.getTargetCards());
@@ -499,7 +499,7 @@ public class AbilityFactoryGainControl {
                     sa.getSourceCard().addChangeControllerCommand(this.getLoseControlCommand(tgtC, originalController, newController));
                 }
                 if (this.lose.contains("EOT")) {
-                    Singletons.getModel().getGameState().getEndOfTurn().addAt(this.getLoseControlCommand(tgtC, originalController, newController));
+                    Singletons.getModel().getGame().getEndOfTurn().addAt(this.getLoseControlCommand(tgtC, originalController, newController));
                 }
             }
 
@@ -560,14 +560,14 @@ public class AbilityFactoryGainControl {
     private boolean gainControlDrawbackAI(final Player ai, final SpellAbility sa) {
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
             if (this.params.containsKey("AllValid")) {
-                List<Card> tgtCards = CardLists.filterControlledBy(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), ai.getOpponent());
+                List<Card> tgtCards = CardLists.filterControlledBy(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), ai.getOpponent());
                 tgtCards = AbilityFactory.filterListByType(tgtCards, this.params.get("AllValid"), sa);
                 if (tgtCards.isEmpty()) {
                     return false;
                 }
             }
             if ((this.lose != null) && this.lose.contains("EOT")
-                    && Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
+                    && Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
             }
         } else {
@@ -597,9 +597,9 @@ public class AbilityFactoryGainControl {
                     public void resolve() {
 
                         if (AbilityFactoryGainControl.this.bNoRegen) {
-                            Singletons.getModel().getGameAction().destroyNoRegeneration(c);
+                            Singletons.getModel().getGame().getAction().destroyNoRegeneration(c);
                         } else {
-                            Singletons.getModel().getGameAction().destroy(c);
+                            Singletons.getModel().getGame().getAction().destroy(c);
                         }
                     }
                 };
@@ -611,7 +611,7 @@ public class AbilityFactoryGainControl {
                 }
                 ability.setStackDescription(sb.toString());
 
-                Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(ability);
+                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
             }
 
         };

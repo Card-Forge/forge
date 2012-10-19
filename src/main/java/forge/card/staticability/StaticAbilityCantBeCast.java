@@ -64,7 +64,7 @@ public class StaticAbilityCantBeCast {
 
         if (params.containsKey("Origin")) {
             List<ZoneType> src = ZoneType.listValueOf(params.get("Origin"));
-            if (!src.contains(Singletons.getModel().getGameState().getZoneOf(card).getZoneType())) {
+            if (!src.contains(Singletons.getModel().getGame().getZoneOf(card).getZoneType())) {
                 return false;
             }
         }

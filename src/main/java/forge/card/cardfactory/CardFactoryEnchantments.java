@@ -72,7 +72,7 @@ class CardFactoryEnchantments {
                 @Override
                 public boolean canPlay() {
                     boolean haveGraveWithSomeCreatures = false;
-                    for( Player p : Singletons.getModel().getGameState().getPlayers()) {
+                    for( Player p : Singletons.getModel().getGame().getPlayers()) {
                         Iterable<Card> grave = CardLists.filter(p.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
                         if( Iterables.size(grave) > 1)
                         {
@@ -119,11 +119,11 @@ class CardFactoryEnchantments {
                             if (o2 != null) {
                                 final Card c2 = (Card) o2;
                                 newGrave.remove(c2);
-                                Singletons.getModel().getGameAction().exile(c);
-                                Singletons.getModel().getGameAction().exile(c2);
+                                Singletons.getModel().getGame().getAction().exile(c);
+                                Singletons.getModel().getGame().getAction().exile(c2);
                                 this.once = true;
 
-                                Singletons.getModel().getGameState().getStack().addAndUnfreeze(nightSoil);
+                                Singletons.getModel().getGame().getStack().addAndUnfreeze(nightSoil);
 
                             }
                         }
@@ -191,7 +191,7 @@ class CardFactoryEnchantments {
                     sb.append(" loses life equal to his or her life total.");
                     loseAllLife.setStackDescription(sb.toString());
 
-                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(loseAllLife);
+                    Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(loseAllLife);
 
                 }
             };
@@ -214,7 +214,7 @@ class CardFactoryEnchantments {
                     sb.append("loses the game.");
                     loseGame.setStackDescription(sb.toString());
 
-                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(loseGame);
+                    Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(loseGame);
 
                 }
             };
@@ -264,7 +264,7 @@ class CardFactoryEnchantments {
                                             player.payLife(4, card);
                                             // card stays in hand
                                         } else {
-                                            Singletons.getModel().getGameAction().moveToLibrary(card);
+                                            Singletons.getModel().getGame().getAction().moveToLibrary(card);
                                         }
                                         this.stop();
                                     }

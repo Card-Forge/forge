@@ -456,7 +456,7 @@ public class StaticAbility {
         if (this.mapParams.containsKey("EffectZone")) {
             if (!this.mapParams.get("EffectZone").equals("All")
                     && !ZoneType.listValueOf(this.mapParams.get("EffectZone"))
-                        .contains(Singletons.getModel().getGameState().getZoneOf(this.hostCard).getZoneType())) {
+                        .contains(Singletons.getModel().getGame().getZoneOf(this.hostCard).getZoneType())) {
                 return false;
             }
         } else {
@@ -481,11 +481,11 @@ public class StaticAbility {
             return false;
         }
 
-        if (this.mapParams.containsKey("PlayerTurn") && !Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(controller)) {
+        if (this.mapParams.containsKey("PlayerTurn") && !Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(controller)) {
             return false;
         }
 
-        if (this.mapParams.containsKey("OpponentTurn") && !Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(controller.getOpponent())) {
+        if (this.mapParams.containsKey("OpponentTurn") && !Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(controller.getOpponent())) {
             return false;
         }
 
@@ -496,7 +496,7 @@ public class StaticAbility {
 
         if (this.mapParams.containsKey("Phases")) {
             List<PhaseType> phases = PhaseType.parseRange(this.mapParams.get("Phases"));
-            if (!phases.contains(Singletons.getModel().getGameState().getPhaseHandler().getPhase())) {
+            if (!phases.contains(Singletons.getModel().getGame().getPhaseHandler().getPhase())) {
                 return false;
             }
         }

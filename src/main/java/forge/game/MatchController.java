@@ -30,6 +30,7 @@ import forge.gui.match.controllers.CStack;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VAntes;
 import forge.gui.toolbox.FLabel;
+import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
 
 /**
@@ -121,8 +122,8 @@ public class MatchController {
             currentGame.getStack().addObserver(CStack.SINGLETON_INSTANCE);
             // some observers are set in CMatchUI.initMatch
 
-            
-            GameNew.newGame(startConditions, gameType);
+            final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL) && gameType == GameType.Constructed;
+            GameNew.newGame(startConditions, currentGame, canRandomFoil);
 
             Player computerPlayer = Aggregates.firstFieldEquals(currentGame.getPlayers(), Player.Accessors.FN_GET_TYPE, PlayerType.COMPUTER);
             input.setComputer(new ComputerAIInput(new ComputerAIGeneral(computerPlayer)));
@@ -138,7 +139,7 @@ public class MatchController {
                 }
         
                 VAntes.SINGLETON_INSTANCE.clearAnteCards();
-                Singletons.getModel().getMatch().getInput().resetInput();
+                input.resetInput();
             }
             
             // per player observers were set in CMatchUI.SINGLETON_INSTANCE.initMatch

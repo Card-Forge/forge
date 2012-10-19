@@ -90,14 +90,14 @@ public class CardFactoryInstants {
                 @Override
                 public void resolve() {
                     Player player = getTargetPlayer();
-                    List<Card> artifacts = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+                    List<Card> artifacts = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
                     artifacts = CardLists.filter(artifacts, CardPredicates.Presets.ARTIFACTS);
 
                     for (int i = 0; i < artifacts.size(); i++) {
                         Card thisArtifact = artifacts.get(i);
                         if (thisArtifact.getOwner().equals(player)) {
                             //moveToHand handles tokens
-                            Singletons.getModel().getGameAction().moveToHand(thisArtifact);
+                            Singletons.getModel().getGame().getAction().moveToHand(thisArtifact);
                         }
                     }
                 } //resolve()
@@ -156,10 +156,10 @@ public class CardFactoryInstants {
                     final Card choice = selectedCards.get(MyRandom.getRandom().nextInt(2));
 
                     selectedCards.remove(choice);
-                    Singletons.getModel().getGameAction().moveToHand(choice);
+                    Singletons.getModel().getGame().getAction().moveToHand(choice);
 
                     for (final Card trash : selectedCards) {
-                        Singletons.getModel().getGameAction().moveToGraveyard(trash);
+                        Singletons.getModel().getGame().getAction().moveToGraveyard(trash);
                     }
                 }
 
@@ -194,10 +194,10 @@ public class CardFactoryInstants {
                     final Card choice = GuiChoose.one("Select card to give to computer", selectedCards);
 
                     selectedCards.remove(choice);
-                    Singletons.getModel().getGameAction().moveToHand(choice);
+                    Singletons.getModel().getGame().getAction().moveToHand(choice);
 
                     for (final Card trash : selectedCards) {
-                        Singletons.getModel().getGameAction().moveToGraveyard(trash);
+                        Singletons.getModel().getGame().getAction().moveToGraveyard(trash);
                     }
                 }
 
@@ -242,13 +242,13 @@ public class CardFactoryInstants {
                             final Card c1 = (Card) o;
                             graveList.remove(c1); // remove from the display
                                                   // list
-                            Singletons.getModel().getGameAction().exile(c1);
+                            Singletons.getModel().getGame().getAction().exile(c1);
                         }
                     } else { // Computer
                         // Random random = MyRandom.random;
                         for (int j = 0; j < x; j++) {
                             // int index = random.nextInt(X-j);
-                            Singletons.getModel().getGameAction().exile(graveList.get(j));
+                            Singletons.getModel().getGame().getAction().exile(graveList.get(j));
                         }
                     }
 
@@ -288,7 +288,7 @@ public class CardFactoryInstants {
                 @Override
                 public boolean canPlay() {
                     return PhaseUtil.isBeforeAttackersAreDeclared()
-                            && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(card.getController().getOpponent());
+                            && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(card.getController().getOpponent());
                 } // canPlay
 
                 @Override
@@ -329,7 +329,7 @@ public class CardFactoryInstants {
                                     if (creature.isInPlay()) {
                                         // System.out.println("Siren's Call - destroying "+creature.getName());
                                         // this should probably go on the stack
-                                        Singletons.getModel().getGameAction().destroy(creature);
+                                        Singletons.getModel().getGame().getAction().destroy(creature);
                                     }
                                 }
                                 creature.setSirenAttackOrDestroy(false);
@@ -349,10 +349,10 @@ public class CardFactoryInstants {
                             destroy.setDescription(sb.toString());
                             destroy.setStackDescription(sb.toString());
 
-                            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(destroy);
+                            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(destroy);
                         } // execute
                     }; // Command
-                    Singletons.getModel().getGameState().getEndOfTurn().addAt(atEOT);
+                    Singletons.getModel().getGame().getEndOfTurn().addAt(atEOT);
                 } // resolve
             }; // SpellAbility
 
@@ -387,11 +387,11 @@ public class CardFactoryInstants {
                         final Object o = GuiChoose.one(this.prompt[i], choices);
                         final Card c1 = (Card) o;
                         if (i == 0) {
-                            Singletons.getModel().getGameAction().moveToHand(c1);
+                            Singletons.getModel().getGame().getAction().moveToHand(c1);
                         } else if (i == 1) {
-                            Singletons.getModel().getGameAction().moveToLibrary(c1);
+                            Singletons.getModel().getGame().getAction().moveToLibrary(c1);
                         } else if (i == 2) {
-                            Singletons.getModel().getGameAction().moveToBottomOfLibrary(c1);
+                            Singletons.getModel().getGame().getAction().moveToBottomOfLibrary(c1);
                         }
 
                         choices.remove(c1);
@@ -415,7 +415,7 @@ public class CardFactoryInstants {
                 @Override
                 public void resolve() {
                     final Player you = card.getController();
-                    final List<Card> ens = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), Presets.ENCHANTMENTS);
+                    final List<Card> ens = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.ENCHANTMENTS);
                     final List<Card> toReturn = CardLists.filter(ens, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
@@ -432,12 +432,12 @@ public class CardFactoryInstants {
                         }
                     });
                     for (final Card c : toReturn) {
-                        Singletons.getModel().getGameAction().moveToHand(c);
+                        Singletons.getModel().getGame().getAction().moveToHand(c);
                     }
 
                     for (final Card c : ens) {
                         if (!toReturn.contains(c)) {
-                            Singletons.getModel().getGameAction().destroy(c);
+                            Singletons.getModel().getGame().getAction().destroy(c);
                         }
                     }
                 }

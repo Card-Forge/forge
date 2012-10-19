@@ -211,7 +211,7 @@ public final class CardUtil {
         int xPaid = 0;
 
         // 2012-07-22 - If a card is on the stack, count the xManaCost in with it's CMC
-        if (Singletons.getModel().getGameState().getCardsIn(ZoneType.Stack).contains(c) && c.getManaCost() != null) {
+        if (Singletons.getModel().getGame().getCardsIn(ZoneType.Stack).contains(c) && c.getManaCost() != null) {
             xPaid = c.getXManaCostPaid() * c.getManaCost().countX();
         }
         return c.getManaCost().getCMC() + xPaid;
@@ -627,10 +627,10 @@ public final class CardUtil {
             final Card src) {
         List<Card> res = new ArrayList<Card>();
         if (to != ZoneType.Stack) {
-            for (Player p : Singletons.getModel().getGameState().getPlayers())
+            for (Player p : Singletons.getModel().getGame().getPlayers())
                 res.addAll(p.getZone(to).getCardsAddedThisTurn(from));
         } else {
-            res.addAll(Singletons.getModel().getGameState().getStackZone().getCardsAddedThisTurn(from));
+            res.addAll(Singletons.getModel().getGame().getStackZone().getCardsAddedThisTurn(from));
         }
 
         res = CardLists.getValidCards(res, valid, src.getController(), src);
@@ -650,7 +650,7 @@ public final class CardUtil {
     public static List<Card> getThisTurnCast(final String valid, final Card src) {
         List<Card> res = new ArrayList<Card>();
 
-        res.addAll(Singletons.getModel().getGameState().getStack().getCardsCastThisTurn());
+        res.addAll(Singletons.getModel().getGame().getStack().getCardsCastThisTurn());
 
         res = CardLists.getValidCards(res, valid, src.getController(), src);
 
@@ -669,7 +669,7 @@ public final class CardUtil {
     public static List<Card> getLastTurnCast(final String valid, final Card src) {
         List<Card> res = new ArrayList<Card>();
 
-        res.addAll(Singletons.getModel().getGameState().getStack().getCardsCastLastTurn());
+        res.addAll(Singletons.getModel().getGame().getStack().getCardsCastLastTurn());
 
         res = CardLists.getValidCards(res, valid, src.getController(), src);
 
@@ -828,7 +828,7 @@ public final class CardUtil {
                 if (strCol.equalsIgnoreCase("Colorless")) {
                     continue;
                 }
-                for (final Card c : Singletons.getModel().getGameState().getColoredCardsInPlay(strCol)) {
+                for (final Card c : Singletons.getModel().getGame().getColoredCardsInPlay(strCol)) {
                     if (!res.contains(c) && c.isValid(valid, source.getController(), source) && !c.equals(origin)) {
                         res.add(c);
                     }

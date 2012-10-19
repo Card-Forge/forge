@@ -91,9 +91,9 @@ public class ComputerAIInput extends Input {
      */
     private void think() {
         // TODO instead of setNextPhase, pass priority
-        final PhaseType phase = Singletons.getModel().getGameState().getPhaseHandler().getPhase();
+        final PhaseType phase = Singletons.getModel().getGame().getPhaseHandler().getPhase();
 
-        if (Singletons.getModel().getGameState().getStack().size() > 0) {
+        if (Singletons.getModel().getGame().getStack().size() > 0) {
             this.computer.playSpellAbilities();
         } else {
             switch(phase) {

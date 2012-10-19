@@ -407,7 +407,7 @@ public class AbilityFactoryDealDamage {
         if (source.getName().equals("Stuffy Doll")) {
             // Now stuffy sits around for blocking
             // TODO(sol): this should also happen if Stuffy is going to die
-            return Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.END_OF_TURN, ai.getOpponent());
+            return Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.END_OF_TURN, ai.getOpponent());
         }
 
         if (this.abilityFactory.isAbility()) {
@@ -488,8 +488,8 @@ public class AbilityFactoryDealDamage {
 
         if (this.abilityFactory.isSpell()) {
             // If this is a spell, cast it instead of discarding
-            if ((Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.END_OF_TURN) || Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.MAIN2))
-                    && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(comp) && (hand.size() > comp.getMaxHandSize())) {
+            if ((Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) || Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.MAIN2))
+                    && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(comp) && (hand.size() > comp.getMaxHandSize())) {
                 return true;
             }
         }
@@ -522,7 +522,7 @@ public class AbilityFactoryDealDamage {
             final Player pl, final boolean mandatory) {
 
         // wait until stack is empty (prevents duplicate kills)
-        if (!saMe.isTrigger() && !Singletons.getModel().getGameState().getStack().isEmpty()) {
+        if (!saMe.isTrigger() && !Singletons.getModel().getGame().getStack().isEmpty()) {
             return null;
         }
         final Target tgt = saMe.getTarget();
@@ -616,7 +616,7 @@ public class AbilityFactoryDealDamage {
     private boolean damageChoosingTargets(final Player ai, final SpellAbility saMe, final Target tgt, final int dmg,
             final boolean isTrigger, final boolean mandatory) {
         final boolean noPrevention = this.abilityFactory.getMapParams().containsKey("NoPrevention");
-        final PhaseHandler phase = Singletons.getModel().getGameState().getPhaseHandler();
+        final PhaseHandler phase = Singletons.getModel().getGame().getPhaseHandler();
 
         // target loop
         tgt.resetTargets();
@@ -1206,7 +1206,7 @@ public class AbilityFactoryDealDamage {
         }
 
         // wait until stack is empty (prevents duplicate kills)
-        if (!Singletons.getModel().getGameState().getStack().isEmpty()) {
+        if (!Singletons.getModel().getGame().getStack().isEmpty()) {
             return false;
         }
 
@@ -1382,7 +1382,7 @@ public class AbilityFactoryDealDamage {
         }
 
         if (params.containsKey("ValidCards")) {
-            list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+            list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         }
 
         if (targetPlayer != null) {
@@ -1646,7 +1646,7 @@ public class AbilityFactoryDealDamage {
         final HashMap<String, String> params = af.getMapParams();
         final Card card = sa.getSourceCard();
 
-        List<Card> sources = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+        List<Card> sources = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         if (params.containsKey("ValidCards")) {
             sources = CardLists.getValidCards(sources, params.get("ValidCards"), card.getController(), card);
         }

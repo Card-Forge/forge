@@ -345,7 +345,7 @@ public class AbilityFactoryZoneAffecting {
         }
 
         // Don't use draw abilities before main 2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
+        if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && !params.containsKey("ActivationPhases")) {
             return false;
         }
@@ -362,8 +362,8 @@ public class AbilityFactoryZoneAffecting {
         if (AbilityFactory.isSorcerySpeed(sa)) {
             randomReturn = true;
         }
-        if ((Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.END_OF_TURN)
-                && Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(PlayerType.COMPUTER))) {
+        if ((Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)
+                && Singletons.getModel().getGame().getPhaseHandler().isNextTurn(PlayerType.COMPUTER))) {
             randomReturn = true;
         }
 
@@ -466,7 +466,7 @@ public class AbilityFactoryZoneAffecting {
             }
 
             if (((computerHandSize + numCards) > computerMaxHandSize)
-                    && Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().isComputer()) {
+                    && Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().isComputer()) {
                 if (xPaid) {
                     numCards = computerMaxHandSize - computerHandSize;
                     source.setSVar("PayX", Integer.toString(numCards));
@@ -506,7 +506,7 @@ public class AbilityFactoryZoneAffecting {
             }
 
             if (((computerHandSize + numCards) > computerMaxHandSize)
-                    && Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn().isComputer()
+                    && Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().isComputer()
                     && !sa.isTrigger()) {
                 // Don't draw too many cards and then risk discarding cards at
                 // EOT
@@ -901,7 +901,7 @@ public class AbilityFactoryZoneAffecting {
         final Random r = MyRandom.getRandom();
 
         // Don't use draw abilities before main 2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !params.containsKey("ActivationPhases")) {
+        if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !params.containsKey("ActivationPhases")) {
             return false;
         }
 
@@ -916,8 +916,8 @@ public class AbilityFactoryZoneAffecting {
             chance = .667; // 66.7% chance for sorcery speed
         }
 
-        if ((Singletons.getModel().getGameState().getPhaseHandler().is(PhaseType.END_OF_TURN) 
-                && Singletons.getModel().getGameState().getPhaseHandler().isNextTurn(PlayerType.COMPUTER))) {
+        if ((Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) 
+                && Singletons.getModel().getGame().getPhaseHandler().isNextTurn(PlayerType.COMPUTER))) {
             chance = .9; // 90% for end of opponents turn
         }
 
@@ -1682,7 +1682,7 @@ public class AbilityFactoryZoneAffecting {
         }
 
         // Don't use draw abilities before main 2 if possible
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
+        if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && !params.containsKey("ActivationPhases")) {
             return false;
         }

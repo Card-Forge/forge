@@ -317,12 +317,12 @@ public final class AbilityFactoryDebuff {
 
         final HashMap<String, String> params = af.getMapParams();
         final SpellAbilityRestriction restrict = sa.getRestrictions();
-        final PhaseHandler ph =  Singletons.getModel().getGameState().getPhaseHandler();
+        final PhaseHandler ph =  Singletons.getModel().getGame().getPhaseHandler();
 
         // Phase Restrictions
         if (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                 || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
-                || !Singletons.getModel().getGameState().getStack().isEmpty()) {
+                || !Singletons.getModel().getGame().getStack().isEmpty()) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
             if (!AbilityFactory.isSorcerySpeed(sa)) {
@@ -403,7 +403,7 @@ public final class AbilityFactoryDebuff {
     private static boolean debuffTgtAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final ArrayList<String> kws,
             final boolean mandatory) {
         // this would be for evasive things like Flying, Unblockable, etc
-        if (!mandatory && Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+        if (!mandatory && Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
             return false;
         }
 
@@ -495,7 +495,7 @@ public final class AbilityFactoryDebuff {
      * @return a boolean.
      */
     private static boolean debuffMandatoryTarget(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        List<Card> list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+        List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         final Target tgt = sa.getTarget();
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
@@ -626,7 +626,7 @@ public final class AbilityFactoryDebuff {
                 }
             }
             if (!params.containsKey("Permanent")) {
-                Singletons.getModel().getGameState().getEndOfTurn().addUntil(new Command() {
+                Singletons.getModel().getGame().getEndOfTurn().addUntil(new Command() {
                     private static final long serialVersionUID = 5387486776282932314L;
 
                     @Override
@@ -826,7 +826,7 @@ public final class AbilityFactoryDebuff {
         });
 
         // don't use DebuffAll after Combat_Begin until AI is improved
-        if (Singletons.getModel().getGameState().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN)) {
+        if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN)) {
             return false;
         }
 
@@ -857,7 +857,7 @@ public final class AbilityFactoryDebuff {
             valid = params.get("ValidCards");
         }
 
-        List<Card> list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
+        List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         list = CardLists.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
 
         for (final Card tgtC : list) {
@@ -872,7 +872,7 @@ public final class AbilityFactoryDebuff {
                 }
             }
             if (!params.containsKey("Permanent")) {
-                Singletons.getModel().getGameState().getEndOfTurn().addUntil(new Command() {
+                Singletons.getModel().getGame().getEndOfTurn().addUntil(new Command() {
                     private static final long serialVersionUID = 7486231071095628674L;
 
                     @Override

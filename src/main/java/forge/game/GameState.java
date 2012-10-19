@@ -26,6 +26,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.ColorChanger;
+import forge.GameAction;
 import forge.GameLog;
 import forge.StaticEffects;
 import forge.card.replacement.ReplacementHandler;
@@ -41,6 +42,7 @@ import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.MagicStack;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 
 /**
@@ -55,19 +57,21 @@ public class GameState {
     private final Untap untap = new Untap();
     private final Upkeep upkeep = new Upkeep();
     private PhaseHandler phaseHandler = new PhaseHandler();
-    private final MagicStack stack = new MagicStack();
+    private final MagicStack stack;
     private final StaticEffects staticEffects = new StaticEffects();
     private final TriggerHandler triggerHandler = new TriggerHandler();
     private final ReplacementHandler replacementHandler = new ReplacementHandler();
     private Combat combat = new Combat();
     private final GameLog gameLog = new GameLog();
     private final ColorChanger colorChanger = new ColorChanger();
+    
     private boolean gameOver = false;
 
-    private final PlayerZone stackZone = new PlayerZone(ZoneType.Stack, null);
+    private final Zone stackZone = new Zone(ZoneType.Stack);
 
     private long timestamp = 0;
     private int nTurn = 0;
+    private final GameAction action;
     
     /**
      * Constructor.
@@ -79,6 +83,8 @@ public class GameState {
             players.add(p.getIngamePlayer());
         }
         roPlayers = Collections.unmodifiableList(players);
+        action = new GameAction(this);
+        stack = new MagicStack(this);
     }
 
     /**
@@ -204,7 +210,7 @@ public class GameState {
      * 
      * @return the stackZone
      */
-    public final PlayerZone getStackZone() {
+    public final Zone getStackZone() {
         return this.stackZone;
     }
 
@@ -281,7 +287,7 @@ public class GameState {
     // THESE WERE MOVED HERE FROM AllZoneUtil 
     // They must once become non-static members of this class 
     
-    public PlayerZone getZoneOf(final Card c) {
+    public Zone getZoneOf(final Card c) {
         if (getStackZone().contains(c)) {
             return getStackZone();
         }
@@ -429,5 +435,9 @@ public class GameState {
      */
     public ColorChanger getColorChanger() {
         return colorChanger;
+    }
+
+    public GameAction getAction() {
+        return action;
     }
 }
