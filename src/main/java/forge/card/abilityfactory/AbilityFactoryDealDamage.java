@@ -387,7 +387,6 @@ public class AbilityFactoryDealDamage {
         } else {
             dmg = this.getNumDamage(saMe);
         }
-        boolean rr = this.abilityFactory.isSpell();
 
         if (dmg <= 0) {
             return false;
@@ -415,13 +414,12 @@ public class AbilityFactoryDealDamage {
         if (this.abilityFactory.isAbility()) {
             final Random r = MyRandom.getRandom(); // prevent run-away
                                                    // activations
-            if (r.nextFloat() <= Math.pow(.9, saMe.getActivationsThisTurn())) {
-                rr = true;
+            if (r.nextFloat() > Math.pow(.9, saMe.getActivationsThisTurn())) {
+                return false;
             }
         }
 
-        final boolean bFlag = this.damageTargetAI(ai, saMe, dmg);
-        if (!bFlag) {
+        if (!this.damageTargetAI(ai, saMe, dmg)) {
             return false;
         }
 
@@ -443,10 +441,10 @@ public class AbilityFactoryDealDamage {
         }
 
         final AbilitySub subAb = saMe.getSubAbility();
-        if (subAb != null) {
-            rr &= subAb.chkAIDrawback();
+        if (subAb != null && !subAb.chkAIDrawback()) {
+            return false;
         }
-        return rr;
+        return true;
     }
 
     /**
@@ -523,6 +521,11 @@ public class AbilityFactoryDealDamage {
      */
     private Card dealDamageChooseTgtC(final Player ai, final SpellAbility saMe, final int d, final boolean noPrevention,
             final Player pl, final boolean mandatory) {
+
+        // wait until stack is empty (prevents duplicate kills)
+        if (!saMe.isTrigger() && !Singletons.getModel().getGameState().getStack().isEmpty()) {
+            return null;
+        }
         final Target tgt = saMe.getTarget();
         final Card source = saMe.getSourceCard();
         final HashMap<String, String> params = this.abilityFactory.getMapParams();
@@ -1186,12 +1189,14 @@ public class AbilityFactoryDealDamage {
             }
         }
 
-        // TODO: if damage is dependant on mana paid, maybe have X be human's
-        // max life
+        // TODO: if damage is dependant on mana paid, maybe have X be human's max life
         // Don't kill yourself
-        if (validP.contains("Each")
-                && (ai.getLife() <= ai.predictDamage(dmg, source,
-                        false))) {
+        if (validP.contains("Each") && (ai.getLife() <= ai.predictDamage(dmg, source, false))) {
+            return false;
+        }
+
+        // prevent run-away activations - first time will always return true
+        if (r.nextFloat() > Math.pow(.9, sa.getActivationsThisTurn())) {
             return false;
         }
 
@@ -1201,26 +1206,28 @@ public class AbilityFactoryDealDamage {
             return true;
         }
 
-        // prevent run-away activations - first time will always return true
-        boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
+        // wait until stack is empty (prevents duplicate kills)
+        if (!Singletons.getModel().getGameState().getStack().isEmpty()) {
+            return false;
+        }
 
         int minGain = 200; // The minimum gain in destroyed creatures
         if (sa.getPayCosts().isReusuableResource()) {
             minGain = 100;
         }
-        // evaluate both lists and pass only if human creatures are more
-        // valuable
+
+        // evaluate both lists and pass only if human creatures are more valuable
         if ((CardFactoryUtil.evaluateCreatureList(computerList) + minGain) >= CardFactoryUtil
                 .evaluateCreatureList(humanList)) {
             return false;
         }
 
         final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.chkAIDrawback();
+        if (subAb != null && !subAb.chkAIDrawback()) {
+            return false;
         }
 
-        return ((r.nextFloat() < .6667) && chance);
+        return true;
     }
 
     /**
