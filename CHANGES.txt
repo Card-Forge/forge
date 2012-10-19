@@ -276,6 +276,17 @@ Fixes/Features:
 - last turn passed to GameOutcome
 - Added a dialog to allow defining custom quest formats.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Decreasing number of global calls to Singletons.getModel().getMatch()
+- massively moved static methods from AllZoneUtil to GameState - they must become non-static once (to support multiple games running at a time)
+- A huge amount of AllZone static methods was inlined (so that people see how many calls really are there behind AllZone.getXXX, and consider obtaining (for example) GameState value to a local variable)
+- GetGameLog inlined
+- The AI will now try to avoid letting the human discard cards like Loxodon Smiter.
+- The AI will attack a little more aggressively with creatures with a SacMe SVar.
+- Added the option of exiling all cards in a zone as a cost.
+- The enforced format, if any, now also determines whether your quest starting cardpool contains snow-lands or not.
+- You now get the option to unlock new sets after every 50 wins, not 100.
+- fixed crash at end of quest match
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -311,6 +322,8 @@ Aura Finesse
 Shifting Borders
 Tyrannize
 Measure of Wickedness
+Glittering Lynx
+Glittering Lion
 
 
 end
