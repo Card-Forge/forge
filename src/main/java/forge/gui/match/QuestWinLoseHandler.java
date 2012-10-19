@@ -189,7 +189,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         }
 
         // Unlock new sets?
-        if (this.wonMatch && qData.getAchievements().getWin() > 99 && (qData.getAchievements().getWin() % 100) == 0) {
+        if (this.wonMatch && qData.getAchievements().getWin() > 1 && (qData.getAchievements().getWin() % 50) == 0) {
             unlockSets();
         }
 
