@@ -88,8 +88,6 @@ public final class AllZone {
      */
     public static CardFactoryInterface getCardFactory() {
         if (AllZone.cardFactory == null) {
-            // setCardFactory(new
-            // LazyCardFactory(ForgeProps.getFile(CARDSFOLDER)));
             AllZone.setCardFactory(new CardFactory(ForgeProps.getFile(NewConstants.CARDSFOLDER)));
         }
         return AllZone.cardFactory;

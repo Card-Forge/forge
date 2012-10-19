@@ -48,6 +48,7 @@ import forge.quest.QuestEventChallenge;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.quest.bazaar.QuestItemType;
+import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.ReadPriceList;
 import forge.util.MyRandom;
@@ -347,13 +348,13 @@ public class QuestWinLoseHandler extends ControlWinLose {
             
 //            final PlayerStatistics aiRating = game.getStatistics(computer.getName());
             PlayerStatistics humanRating = null;
-            for(Entry<LobbyPlayer, PlayerStatistics> aiRating : game ) {
-                if( aiRating.getValue().equals(localHuman)) {
-                    humanRating = aiRating.getValue();
+            for(Entry<LobbyPlayer, PlayerStatistics> kvRating : game ) {
+                if( kvRating.getKey().equals(localHuman)) {
+                    humanRating = kvRating.getValue();
                     continue;
                 }
                 
-                final PlayerOutcome outcome = aiRating.getValue().getOutcome();
+                final PlayerOutcome outcome = kvRating.getValue().getOutcome();
                 final GameLossReason whyAiLost = outcome.lossState;
                 final int altReward = this.getCreditsRewardForAltWin(whyAiLost);
 
@@ -907,17 +908,18 @@ public class QuestWinLoseHandler extends ControlWinLose {
      * @return int
      */
     private int getCreditsRewardForAltWin(final GameLossReason whyAiLost) {
+        QuestPreferences qp = Singletons.getModel().getQuestPreferences(); 
         if ( null == whyAiLost) // Felidar, Helix Pinnacle, etc.
-            return Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_UNDEFEATED);
+            return qp.getPreferenceInt(QPref.REWARDS_UNDEFEATED);
         switch (whyAiLost) {
         case LifeReachedZero:
             return 0; // nothing special here, ordinary kill
         case Milled:
-            return Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_MILLED);
+            return qp.getPreferenceInt(QPref.REWARDS_MILLED);
         case Poisoned:
-            return Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_POISON);
+            return qp.getPreferenceInt(QPref.REWARDS_POISON);
         case SpellEffect: // Door to Nothingness, etc.
-            return Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.REWARDS_UNDEFEATED);
+            return qp.getPreferenceInt(QPref.REWARDS_UNDEFEATED);
         default:
             return 0;
         }
