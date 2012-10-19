@@ -21,9 +21,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import forge.Card;
+import forge.Singletons;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -64,7 +64,7 @@ public class StaticAbilityCantBeCast {
 
         if (params.containsKey("Origin")) {
             List<ZoneType> src = ZoneType.listValueOf(params.get("Origin"));
-            if (!src.contains(GameState.getZoneOf(card).getZoneType())) {
+            if (!src.contains(Singletons.getModel().getGameState().getZoneOf(card).getZoneType())) {
                 return false;
             }
         }

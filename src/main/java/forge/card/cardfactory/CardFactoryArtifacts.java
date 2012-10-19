@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.Command;
@@ -17,7 +16,6 @@ import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
-import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
@@ -212,7 +210,7 @@ class CardFactoryArtifacts {
                     }
 
                     if (this.getTargetCard() != null) {
-                        if (GameState.isCardInPlay(this.getTargetCard())
+                        if (this.getTargetCard().isInPlay()
                                 && this.getTargetCard().canBeTargetedBy(this)) {
                             this.getTargetCard().addDamage(damage, card);
                         }
@@ -370,7 +368,7 @@ class CardFactoryArtifacts {
                 public void resolve() {
                     // not implemented for compy
                     if (card.getController().isHuman()) {
-                        AllZone.getInputControl().setInput(new Input() {
+                        Singletons.getModel().getMatch().getInput().setInput(new Input() {
                             private static final long serialVersionUID = -2305549394512889450L;
                             private final List<Card> exiled = new ArrayList<Card>();
 

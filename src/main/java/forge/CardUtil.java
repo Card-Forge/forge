@@ -38,7 +38,6 @@ import forge.card.CardManaCost;
 import forge.card.EditionInfo;
 import forge.card.mana.ManaCost;
 import forge.control.input.InputPayManaCostUtil;
-import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiDisplayUtil;
@@ -212,7 +211,7 @@ public final class CardUtil {
         int xPaid = 0;
 
         // 2012-07-22 - If a card is on the stack, count the xManaCost in with it's CMC
-        if (GameState.getCardsIn(ZoneType.Stack).contains(c) && c.getManaCost() != null) {
+        if (Singletons.getModel().getGameState().getCardsIn(ZoneType.Stack).contains(c) && c.getManaCost() != null) {
             xPaid = c.getXManaCostPaid() * c.getManaCost().countX();
         }
         return c.getManaCost().getCMC() + xPaid;
@@ -829,7 +828,7 @@ public final class CardUtil {
                 if (strCol.equalsIgnoreCase("Colorless")) {
                     continue;
                 }
-                for (final Card c : GameState.getColorInPlay(strCol)) {
+                for (final Card c : Singletons.getModel().getGameState().getColoredCardsInPlay(strCol)) {
                     if (!res.contains(c) && c.isValid(valid, source.getController(), source) && !c.equals(origin)) {
                         res.add(c);
                     }

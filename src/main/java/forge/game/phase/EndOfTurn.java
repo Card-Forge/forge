@@ -29,7 +29,6 @@ import forge.Singletons;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameLossReason;
-import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -56,7 +55,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
 
         // TODO - should this freeze the Stack?
 
-        final List<Card> all = GameState.getCardsIn(ZoneType.Battlefield);
+        final List<Card> all = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
 
         //EndOfTurn.endOfTurnWallOfReverence();
         EndOfTurn.endOfTurnLighthouseChronologist();
@@ -72,7 +71,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                 final SpellAbility sac = new Ability(card, "0") {
                     @Override
                     public void resolve() {
-                        if (GameState.isCardInPlay(card)) {
+                        if (card.isInPlay()) {
                             Singletons.getModel().getGameAction().sacrifice(card, null);
                         }
                     }
@@ -90,7 +89,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                 final SpellAbility exile = new Ability(card, "0") {
                     @Override
                     public void resolve() {
-                        if (GameState.isCardInPlay(card)) {
+                        if (card.isInPlay()) {
                             Singletons.getModel().getGameAction().exile(card);
                         }
                     }
@@ -108,7 +107,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                 final SpellAbility destroy = new Ability(card, "0") {
                     @Override
                     public void resolve() {
-                        if (GameState.isCardInPlay(card)) {
+                        if (card.isInPlay()) {
                             Singletons.getModel().getGameAction().destroy(card);
                         }
                     }
@@ -128,7 +127,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                     final SpellAbility sac = new Ability(card, "0") {
                         @Override
                         public void resolve() {
-                            if (GameState.isCardInPlay(card)) {
+                            if (card.isInPlay()) {
                                 Singletons.getModel().getGameAction().destroy(card);
                             }
                         }
@@ -150,7 +149,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                 final SpellAbility change = new Ability(vale, "0") {
                     @Override
                     public void resolve() {
-                        if (GameState.isCardInPlay(vale)) {
+                        if (vale.isInPlay()) {
                             vale.addController(vale.getController().getOpponent());
                             // Singletons.getModel().getGameAction().changeController(
                             // new ArrayList<Card>(vale), vale.getController(),
@@ -175,7 +174,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                 final SpellAbility change = new Ability(raider, "0") {
                     @Override
                     public void resolve() {
-                        if (GameState.isCardInPlay(raider)) {
+                        if (raider.isInPlay()) {
                             raider.getController().addDamage(2, raider);
                         }
                     }
@@ -194,7 +193,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
                 final SpellAbility change = new Ability(source, "0") {
                     @Override
                     public void resolve() {
-                        if (GameState.isCardInPlay(source)) {
+                        if (source.isInPlay()) {
                             Singletons.getModel().getGameAction().moveToHand(source);
                         }
                     }

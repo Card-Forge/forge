@@ -52,7 +52,6 @@ import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.control.input.Input;
-import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -103,7 +102,7 @@ public class CardFactoryCreatures {
 
                 if (c.sumAllCounters() == 0) {
                     return;
-                } else if (GameState.isCardInPlay(c) && c.canBeTargetedBy(this)) {
+                } else if (c.isInPlay() && c.canBeTargetedBy(this)) {
                     // zerker clean up:
                     for (final Counters c1 : Counters.values()) {
                         if (c.getCounters(c1) > 0) {
@@ -199,7 +198,7 @@ public class CardFactoryCreatures {
             @Override
             public boolean canPlayAI() {
                 return Iterables.any(getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.ARTIFACTS)
-                     && GameState.getZoneOf(this.getSourceCard()).is(ZoneType.Hand);
+                     && Singletons.getModel().getGameState().getZoneOf(this.getSourceCard()).is(ZoneType.Hand);
             }
         });
         card.addComesIntoPlayCommand(intoPlay);
@@ -276,7 +275,7 @@ public class CardFactoryCreatures {
 
                     @Override
                     public void execute() {
-                        if (GameState.isCardInPlay(card)) {
+                        if (card.isInPlay()) {
                             Singletons.getModel().getGameAction().sacrifice(card, null);
                         }
                     }
@@ -304,7 +303,7 @@ public class CardFactoryCreatures {
 
             @Override
             public void execute() {
-                final List<Card> list = GameState.getCardsIn(ZoneType.Battlefield, "Stangg Twin");
+                final List<Card> list = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Stangg Twin"));
 
                 if (list.size() == 1) {
                     Singletons.getModel().getGameAction().exile(list.get(0));
@@ -330,7 +329,7 @@ public class CardFactoryCreatures {
 
             @Override
             public void resolve() {
-                List<Card> allTokens = GameState.getCreaturesInPlay(card.getController());
+                List<Card> allTokens = card.getController().getCreaturesInPlay();
                 allTokens = CardLists.filter(allTokens, Presets.TOKEN);
 
                 CardFactoryUtil.copyTokens(allTokens);
@@ -338,7 +337,7 @@ public class CardFactoryCreatures {
 
             @Override
             public boolean canPlayAI() {
-                List<Card> allTokens = GameState.getCreaturesInPlay(getActivatingPlayer());
+                List<Card> allTokens = getActivatingPlayer().getCreaturesInPlay();
                 allTokens = CardLists.filter(allTokens, Presets.TOKEN);
 
                 return allTokens.size() >= 2;
@@ -451,7 +450,7 @@ public class CardFactoryCreatures {
                     return;
                 }
 
-                if (!(target.canBeTargetedBy(this) && GameState.isCardInPlay(target))) {
+                if (!(target.canBeTargetedBy(this) && target.isInPlay())) {
                     return;
                 }
 
@@ -463,7 +462,7 @@ public class CardFactoryCreatures {
                 if (target.getController().isHuman()) { // Human choose
                                                         // spread damage
                     for (int x = 0; x < target.getNetAttack(); x++) {
-                        AllZone.getInputControl().setInput(
+                        Singletons.getModel().getMatch().getInput().setInput(
                                 CardFactoryUtil.masterOfTheWildHuntInputTargetCreature(this, wolves, new Command() {
                                     private static final long serialVersionUID = -328305150127775L;
 
@@ -890,7 +889,7 @@ public class CardFactoryCreatures {
                 if (p.canBeTargetedBy(this)) {
                     p.setSkipNextUntap(true);
                     for (final Card c : targetPerms) {
-                        if (GameState.isCardInPlay(c) && c.canBeTargetedBy(this)) {
+                        if (c.isInPlay() && c.canBeTargetedBy(this)) {
                             c.tap();
                         }
                     }
@@ -978,9 +977,9 @@ public class CardFactoryCreatures {
                 final Player player = card.getController();
                 
                 if (player.isHuman()) {
-                    AllZone.getInputControl().setInput(playerInput);
+                    Singletons.getModel().getMatch().getInput().setInput(playerInput);
                 } else  {
-                    List<Card> list = GameState.getCreaturesInPlay(player.getOpponent());
+                    List<Card> list = player.getOpponent().getCreaturesInPlay();
                     list = CardLists.getTargetableCards(list, ability);
                     if ( !list.isEmpty() )
                     {
@@ -1046,7 +1045,7 @@ public class CardFactoryCreatures {
                             this.stop();
                         }
                     }; // Input
-                    AllZone.getInputControl().setInput(target);
+                    Singletons.getModel().getMatch().getInput().setInput(target);
                 }
             } // end resolve
 

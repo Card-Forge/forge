@@ -26,7 +26,6 @@ import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.staticability.StaticAbility;
-import forge.game.GameState;
 import forge.game.zone.ZoneType;
 
 /**
@@ -94,7 +93,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
         }
 
         // CantBeActivated static abilities
-        final List<Card> allp = GameState.getCardsIn(ZoneType.Battlefield);
+        final List<Card> allp = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
         for (final Card ca : allp) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
@@ -108,7 +107,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
             return false;
         }
 
-        if (this.isCycling() && GameState.isCardInPlay("Stabilizer")) {
+        if (this.isCycling() && Singletons.getModel().getGameState().isCardInPlay("Stabilizer")) {
             return false;
         }
 

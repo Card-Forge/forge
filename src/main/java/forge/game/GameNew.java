@@ -97,7 +97,7 @@ public class GameNew {
      * their decks and other special starting conditions. 
      */
     public static void newGame(final Map<Player, PlayerStartConditions> playersConditions, GameType gameType) {
-        AllZone.getInputControl().clearInput();
+        Singletons.getModel().getMatch().getInput().clearInput();
         AllZone.getColorChanger().reset();
 
         Card.resetUniqueNumber();

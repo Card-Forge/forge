@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Stack;
 
 import com.esotericsoftware.minlog.Log;
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -31,7 +30,6 @@ import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
-import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.player.PlayerType;
 import forge.game.zone.ZoneType;
@@ -394,7 +392,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
             case CLEANUP:
                 // Reset Damage received map
-                final List<Card> list = GameState.getCardsIn(ZoneType.Battlefield);
+                final List<Card> list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
                 for (final Card c : list) {
                     c.resetPreventNextDamage();
                     c.resetReceivedDamageFromThisTurn();
@@ -474,7 +472,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             return;
         }
         this.bPhaseEffects = true;
-        if (!GameState.isCardInPlay("Upwelling")) {
+        if (!Singletons.getModel().getGameState().isCardInPlay("Upwelling")) {
             for (Player p : Singletons.getModel().getGameState().getPlayers()) {
                 int burn = p.getManaPool().clearPool();
                 if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN)) {
@@ -563,7 +561,12 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
         Singletons.getModel().getGameState().getStack().setCardsCastLastTurn();
         Singletons.getModel().getGameState().getStack().clearCardsCastThisTurn();
-        GameState.resetZoneMoveTracking();
+        
+        for (final Player p1 : Singletons.getModel().getGameState().getPlayers()) {
+            for (final ZoneType z : Player.ALL_ZONES) {
+                p1.getZone(z).resetCardsAddedThisTurn();
+            }
+        }
         for( Player p : Singletons.getModel().getGameState().getPlayers() )
         {
             p.resetProwl();
@@ -822,7 +825,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         if (firstAction.equals(actingPlayer)) {
             // pass the priority to other player
             this.setPriorityPlayer(actingPlayer.getOpponent());
-            AllZone.getInputControl().resetInput();
+            Singletons.getModel().getMatch().getInput().resetInput();
             Singletons.getModel().getGameState().getStack().chooseOrderOfSimultaneousStackEntryAll();
         } else {
             if (Singletons.getModel().getGameState().getStack().size() == 0) {
@@ -865,7 +868,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         if (this.getPriorityPlayer().isHuman()) {
             // TODO This doesn't work quite 100% but pretty close
             this.passPriority();
-            AllZone.getInputControl().resetInput();
+            Singletons.getModel().getMatch().getInput().resetInput();
         }
     }
 
@@ -938,7 +941,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         final Card source = sa.getRootSpellAbility().getSourceCard();
         boolean onlyThis = true;
         if (Singletons.getModel().getGameState().getStack().size() != 0) {
-            for (final Card card : GameState.getCardsIn(ZoneType.Stack)) {
+            for (final Card card : Singletons.getModel().getGameState().getCardsIn(ZoneType.Stack)) {
                 if (card != source) {
                     onlyThis = false;
                     //System.out.println("StackCard: " + card + " vs SourceCard: " + source);

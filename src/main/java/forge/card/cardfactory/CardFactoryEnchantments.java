@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.google.common.collect.Iterables;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -18,7 +17,6 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.control.input.Input;
 import forge.game.GameLossReason;
-import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -160,8 +158,8 @@ class CardFactoryEnchantments {
 
                 @Override
                 public boolean canPlayAI() {
-                    final List<Card> compCreats = GameState.getCreaturesInPlay(getActivatingPlayer());
-                    final List<Card> humCreats = GameState.getCreaturesInPlay(getActivatingPlayer().getOpponent());
+                    final List<Card> compCreats = getActivatingPlayer().getCreaturesInPlay();
+                    final List<Card> humCreats = getActivatingPlayer().getOpponent().getCreaturesInPlay();
 
                     // only play standstill if comp controls more creatures than
                     // human
@@ -247,7 +245,7 @@ class CardFactoryEnchantments {
                             sb.append(card).append(" - Select a card drawn this turn: ").append(numPutBack - i)
                                 .append(" of " + numPutBack);
                             final String prompt = sb.toString();
-                            AllZone.getInputControl().setInput(new Input() {
+                            Singletons.getModel().getMatch().getInput().setInput(new Input() {
                                 private static final long serialVersionUID = -3389565833121544797L;
 
                                 @Override

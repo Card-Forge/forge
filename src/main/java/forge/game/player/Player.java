@@ -37,9 +37,11 @@ import forge.Card;
 
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Constant;
 import forge.Constant.Preferences;
+import forge.Counters;
 import forge.GameActionUtil;
 import forge.GameEntity;
 import forge.Singletons;
@@ -50,7 +52,6 @@ import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.GameLossReason;
-import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
@@ -583,7 +584,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     @Override
     public final int staticDamagePrevention(final int damage, final Card source, final boolean isCombat) {
 
-        if (GameState.isCardInPlay("Leyline of Punishment")) {
+        if (Singletons.getModel().getGameState().isCardInPlay("Leyline of Punishment")) {
             return damage;
         }
 
@@ -615,7 +616,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Prevent Damage static abilities
-        final List<Card> allp = GameState.getCardsIn(ZoneType.Battlefield);
+        final List<Card> allp = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
         for (final Card ca : allp) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
@@ -624,12 +625,12 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
 
         // specific cards
-        if (GameState.isCardInPlay("Spirit of Resistance", this)) {
-            if ((GameState.getPlayerColorInPlay(this, Constant.Color.BLACK).size() > 0)
-                    && (GameState.getPlayerColorInPlay(this, Constant.Color.BLUE).size() > 0)
-                    && (GameState.getPlayerColorInPlay(this, Constant.Color.GREEN).size() > 0)
-                    && (GameState.getPlayerColorInPlay(this, Constant.Color.RED).size() > 0)
-                    && (GameState.getPlayerColorInPlay(this, Constant.Color.WHITE).size() > 0)) {
+        if (this.isCardInPlay("Spirit of Resistance")) {
+            if ((this.getColoredCardsInPlay(Constant.Color.BLACK).size() > 0)
+                    && (this.getColoredCardsInPlay(Constant.Color.BLUE).size() > 0)
+                    && (this.getColoredCardsInPlay(Constant.Color.GREEN).size() > 0)
+                    && (this.getColoredCardsInPlay(Constant.Color.RED).size() > 0)
+                    && (this.getColoredCardsInPlay(Constant.Color.WHITE).size() > 0)) {
                 return 0;
             }
         }
@@ -662,7 +663,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
 
         int restDamage = damage;
 
-        for (Card c : GameState.getCardsIn(ZoneType.Battlefield)) {
+        for (Card c : Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield)) {
             if (c.getName().equals("Sulfuric Vapors")) {
                 if (source.isSpell() && source.isRed()) {
                     restDamage += 1;
@@ -750,7 +751,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             return 0;
         }
 
-        if (GameState.isCardInPlay("Crumbling Sanctuary")) {
+        if (Singletons.getModel().getGameState().isCardInPlay("Crumbling Sanctuary")) {
             for (int i = 0; i < damage; i++) {
                 final List<Card> lib = this.getCardsIn(ZoneType.Library);
                 if (lib.size() > 0) {
@@ -781,7 +782,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     @Override
     public final int preventDamage(final int damage, final Card source, final boolean isCombat) {
 
-        if (GameState.isCardInPlay("Leyline of Punishment")
+        if (Singletons.getModel().getGameState().isCardInPlay("Leyline of Punishment")
                 || source.hasKeyword("Damage that would be dealt by CARDNAME can't be prevented.")) {
             return damage;
         }
@@ -1194,7 +1195,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
                 }
             }
 
-            if (!firstFromDraw && GameState.isCardInPlay("Chains of Mephistopheles")) {
+            if (!firstFromDraw && Singletons.getModel().getGameState().isCardInPlay("Chains of Mephistopheles")) {
                 if (!this.getZone(ZoneType.Hand).isEmpty()) {
                     if (this.isHuman()) {
                         this.discardChainsOfMephistopheles();
@@ -1827,7 +1828,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
 
         // CantBeCast static abilities
-        final List<Card> allp = GameState.getCardsIn(ZoneType.Battlefield);
+        final List<Card> allp = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
         for (final Card ca : allp) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
@@ -2724,4 +2725,59 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         if ( null == stats.getOutcome() ) // not lost?  
             setOutcome(PlayerOutcome.win()); // then won!
     }
+
+    /**
+     * use to get a list of creatures in play for a given player.
+     * 
+     * @param player
+     *            the player to get creatures for
+     * @return a List<Card> containing all creatures a given player has in play
+     */
+    public List<Card> getCreaturesInPlay() {
+        return CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+    }
+
+    /**
+     * use to get a list of all lands a given player has on the battlefield.
+     * 
+     * @param player
+     *            the player whose lands we want to get
+     * @return a List<Card> containing all lands the given player has in play
+     */
+    public List<Card> getLandsInPlay() {
+        return CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.LANDS);
+    }
+    public boolean isCardInPlay(final String cardName) {
+        return Iterables.any(getZone(ZoneType.Battlefield), CardPredicates.nameEquals(cardName));
+    }
+
+    
+    public List<Card> getColoredCardsInPlay(final String color) {
+        return CardLists.filter(getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                final List<String> colorList = CardUtil.getColors(c);
+                return colorList.contains(color);
+            }
+        });
+    }
+
+    public int getCounterDoublersMagnitude(final Counters type) {
+        int counterDoublers = getCardsIn(ZoneType.Battlefield, "Doubling Season").size();
+        if(type == Counters.P1P1) {
+            counterDoublers += getCardsIn(ZoneType.Battlefield, "Corpsejack Menace").size();
+        }
+        return (int) Math.pow(2, counterDoublers); // pow(a,0) = 1; pow(a,1) = a
+                                                   // ... no worries about size
+                                                   // = 0
+    }
+    
+    public int getTokenDoublersMagnitude() {
+        final int tokenDoublers = getCardsIn(ZoneType.Battlefield, "Parallel Lives").size()
+                + getCardsIn(ZoneType.Battlefield, "Doubling Season").size();
+        return (int) Math.pow(2, tokenDoublers); // pow(a,0) = 1; pow(a,1) = a
+                                                 // ... no worries about size =
+                                                 // 0
+    }
+    
 }

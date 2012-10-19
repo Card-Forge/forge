@@ -25,6 +25,7 @@ import java.util.Map;
 
 import forge.Card;
 import forge.CardCharacteristicName;
+import forge.Singletons;
 
 import forge.CardLists;
 import forge.card.spellability.AbilityActivated;
@@ -34,7 +35,6 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -471,7 +471,7 @@ public class AbilityFactorySetState {
             valid = valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(card, "X", sa)));
         }
 
-        List<Card> list = GameState.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
 
         if (targetPlayer != null) {
             list = CardLists.filterControlledBy(list, targetPlayer);

@@ -36,7 +36,6 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
@@ -424,7 +423,7 @@ public class AbilityFactoryRegenerate {
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
         // filter AIs battlefield by what I can target
-        List<Card> targetables = GameState.getCardsIn(ZoneType.Battlefield);
+        List<Card> targetables = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
         targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, hostCard);
         targetables = CardLists.getTargetableCards(targetables, sa);
         final List<Card> compTargetables = CardLists.filterControlledBy(targetables, ai);
@@ -511,7 +510,7 @@ public class AbilityFactoryRegenerate {
                 }
             };
 
-            if (GameState.isCardInPlay(tgtC) && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
+            if (tgtC.isInPlay() && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
                 tgtC.addShield();
                 Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
             }
@@ -739,7 +738,7 @@ public class AbilityFactoryRegenerate {
             valid = params.get("ValidCards");
         }
 
-        List<Card> list = GameState.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
         list = CardLists.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
         list = CardLists.filter(list, CardPredicates.isController(ai));
 
@@ -828,7 +827,7 @@ public class AbilityFactoryRegenerate {
             valid = params.get("ValidCards");
         }
 
-        List<Card> list = GameState.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
         list = CardLists.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
 
         for (final Card c : list) {
@@ -841,7 +840,7 @@ public class AbilityFactoryRegenerate {
                 }
             };
 
-            if (GameState.isCardInPlay(c)) {
+            if (c.isInPlay()) {
                 c.addShield();
                 Singletons.getModel().getGameState().getEndOfTurn().addUntil(untilEOT);
             }

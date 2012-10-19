@@ -21,17 +21,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 
 import forge.Card;
 import forge.CardLists;
-import forge.CardPredicates;
 import forge.CardPredicates.Presets;
-import forge.CardUtil;
-import forge.Counters;
 import forge.GameLog;
-import forge.Singletons;
 import forge.StaticEffects;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
@@ -53,13 +47,6 @@ import forge.game.zone.ZoneType;
  * "cleaned up" at each new game.
  */
 public class GameState {
-
-    /** The Constant HUMAN_PLAYER_NAME. */
-    public static final String HUMAN_PLAYER_NAME = "Human";
-
-    /** The Constant AI_PLAYER_NAME. */
-    public static final String AI_PLAYER_NAME = "Computer";
-
     private final List<Player> roPlayers;
     private final Cleanup cleanup = new Cleanup();
     private final EndOfTurn endOfTurn = new EndOfTurn();
@@ -292,26 +279,12 @@ public class GameState {
     // THESE WERE MOVED HERE FROM AllZoneUtil 
     // They must once become non-static members of this class 
     
-    /**
-     * <p>
-     * getZone.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a {@link forge.game.zone.PlayerZone} object.
-     */
-    public static PlayerZone getZoneOf(final Card c) {
-        final GameState gameState = Singletons.getModel().getGameState();
-        if (gameState == null) {
-            return null;
+    public PlayerZone getZoneOf(final Card c) {
+        if (getStackZone().contains(c)) {
+            return getStackZone();
         }
     
-        if (gameState.getStackZone().contains(c)) {
-            return gameState.getStackZone();
-        }
-    
-        for (final Player p : gameState.getPlayers()) {
+        for (final Player p : getPlayers()) {
             for (final ZoneType z : Player.ALL_ZONES) {
                 final PlayerZone pz = p.getZone(z);
                 if (pz.contains(c)) {
@@ -323,28 +296,13 @@ public class GameState {
         return null;
     }
 
-    /**
-     * 
-     * isCardInZone.
-     * 
-     * @param c
-     *            Card
-     * @param zone
-     *            Constant.Zone
-     * @return boolean
-     */
-    public static boolean isCardInZone(final Card c, final ZoneType zone) {
-        final GameState gameState = Singletons.getModel().getGameState();
-        if (gameState == null) {
-            return false;
-        }
-    
-        if (zone.equals(ZoneType.Stack)) {
-            if (gameState.getStackZone().contains(c)) {
+    public boolean isCardInZone(final Card c, final ZoneType zone) {
+         if (zone.equals(ZoneType.Stack)) {
+            if (getStackZone().contains(c)) {
                 return true;
             }
         } else {
-            for (final Player p : gameState.getPlayers()) {
+            for (final Player p : getPlayers()) {
                 if (p.getZone(zone).contains(c)) {
                     return true;
                 }
@@ -354,37 +312,12 @@ public class GameState {
         return false;
     }
 
-    /**
-     * <p>
-     * resetZoneMoveTracking.
-     * </p>
-     */
-    public static void resetZoneMoveTracking() {
-        final GameState gameState = Singletons.getModel().getGameState();
-        if (gameState == null) {
-            return;
-        }
-        for (final Player p : gameState.getPlayers()) {
-            for (final ZoneType z : Player.ALL_ZONES) {
-                p.getZone(z).resetCardsAddedThisTurn();
-            }
-        }
-    }
-
-    /**
-     * gets a list of all cards owned by both players that have are currently in
-     * the given zone.
-     * 
-     * @param zone
-     *            Constant.Zone
-     * @return a List<Card> with all cards currently in a graveyard
-     */
-    public static List<Card> getCardsIn(final ZoneType zone) {
+    public List<Card> getCardsIn(final ZoneType zone) {
         if (zone == ZoneType.Stack) {
-            return Singletons.getModel().getGameState().getStackZone().getCards();
+            return getStackZone().getCards();
         } else {
             List<Card> cards = null;
-            for (final Player p : Singletons.getModel().getGameState().getPlayers()) {
+            for (final Player p : getPlayers()) {
                 if ( cards == null ) 
                     cards = p.getZone(zone).getCards();
                 else
@@ -394,7 +327,7 @@ public class GameState {
         }
     }
 
-    public static List<Card> getCardsIn(final Iterable<ZoneType> zones) {
+    public List<Card> getCardsIn(final Iterable<ZoneType> zones) {
         final List<Card> cards = new ArrayList<Card>();
         for (final ZoneType z : zones) {
             cards.addAll(getCardsIn(z));
@@ -402,168 +335,33 @@ public class GameState {
         return cards;
     }
 
-    /**
-     * gets a list of all cards owned by both players that have are currently in
-     * the given zone.
-     * 
-     * @param zone
-     *            a Constant.Zone
-     * @param cardName
-     *            a String
-     * @return a List<Card> with all cards currently in a graveyard
-     */
-    public static List<Card> getCardsIn(final ZoneType zone, final String cardName) {
-        return CardLists.filter(GameState.getCardsIn(zone), CardPredicates.nameEquals(cardName));
+    public List<Card> getLandsInPlay() {
+        return CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.LANDS);
     }
 
-    /**
-     * use to get a List<Card> of all creatures on the battlefield for both.
-     * players
-     * 
-     * @return a List<Card> of all creatures on the battlefield on both sides
-     */
-    public static List<Card> getCreaturesInPlay() {
-        final List<Card> creats = GameState.getCardsIn(ZoneType.Battlefield);
-        return CardLists.filter(creats, Presets.CREATURES);
+    public boolean isCardExiled(final Card c) {
+        return getCardsIn(ZoneType.Exile).contains(c);
     }
 
-    /**
-     * use to get a list of creatures in play for a given player.
-     * 
-     * @param player
-     *            the player to get creatures for
-     * @return a List<Card> containing all creatures a given player has in play
-     */
-    public static List<Card> getCreaturesInPlay(final Player player) {
-        final List<Card> creats = player.getCardsIn(ZoneType.Battlefield);
-        return CardLists.filter(creats, Presets.CREATURES);
-    }
-
-    /**
-     * use to get a list of all lands a given player has on the battlefield.
-     * 
-     * @param player
-     *            the player whose lands we want to get
-     * @return a List<Card> containing all lands the given player has in play
-     */
-    public static List<Card> getPlayerLandsInPlay(final Player player) {
-        return CardLists.filter(player.getCardsIn(ZoneType.Battlefield), Presets.LANDS);
-    }
-
-    /**
-     * gets a list of all lands in play.
-     * 
-     * @return a List<Card> of all lands on the battlefield
-     */
-    public static List<Card> getLandsInPlay() {
-        return CardLists.filter(GameState.getCardsIn(ZoneType.Battlefield), Presets.LANDS);
-    }
-
-    /**
-     * answers the question "is the given card in any exile zone?".
-     * 
-     * @param c
-     *            the card to look for in Exile
-     * @return true is the card is in Human or Computer's Exile zone
-     */
-    public static boolean isCardExiled(final Card c) {
-        return GameState.getCardsIn(ZoneType.Exile).contains(c);
-    }
-
-    // /Check if a certain card is in play
-    /**
-     * <p>
-     * isCardInPlay.
-     * </p>
-     * 
-     * @param card
-     *            a {@link forge.Card} object.
-     * @return a boolean.
-     */
-    public static boolean isCardInPlay(final Card card) {
-        if (card.getController() == null) {
-            return false;
-        }
-        return card.getController().getCardsIn(ZoneType.Battlefield).contains(card);
-    }
-
-    /**
-     * Answers the question: "Is <card name> in play?".
-     * 
-     * @param cardName
-     *            the name of the card to look for
-     * @return true is the card is in play, false otherwise
-     */
-    public static boolean isCardInPlay(final String cardName) {
-        for (final Player p : Singletons.getModel().getGameState().getPlayers()) {
-            if (isCardInPlay(cardName, p))
+    
+    public boolean isCardInPlay(final String cardName) {
+        for (final Player p : getPlayers()) {
+            if (p.isCardInPlay(cardName))
                 return true;
         }
         return false;
     }
 
-    /**
-     * Answers the question: "Does <player> have <card name> in play?".
-     * 
-     * @param cardName
-     *            the name of the card to look for
-     * @param player
-     *            the player whose battlefield we want to check
-     * @return true if that player has that card in play, false otherwise
-     */
-    public static boolean isCardInPlay(final String cardName, final Player player) {
-        return Iterables.any(player.getZone(ZoneType.Battlefield), CardPredicates.nameEquals(cardName));
-    }
-
-    /**
-     * gets a list of all Cards of a given color on the battlefield.
-     * 
-     * @param color
-     *            the color of cards to get
-     * @return a List<Card> of all cards in play of a given color
-     */
-    public static List<Card> getColorInPlay(final String color) {
+    public List<Card> getColoredCardsInPlay(final String color) {
         final List<Card> cards = new ArrayList<Card>();
-        for(Player p : Singletons.getModel().getGameState().getPlayers()) {
-            cards.addAll(getPlayerColorInPlay(p, color));
+        for(Player p : getPlayers()) {
+            cards.addAll(p.getColoredCardsInPlay(color));
         }
         return cards;
     }
 
-    /**
-     * gets a list of all Cards of a given color a given player has on the
-     * battlefield.
-     * 
-     * @param player
-     *            the player's cards to get
-     * @param color
-     *            the color of cards to get
-     * @return a List<Card> of all cards in play of a given color
-     */
-    public static List<Card> getPlayerColorInPlay(final Player player, final String color) {
-        List<Card> cards = player.getCardsIn(ZoneType.Battlefield);
-        cards = CardLists.filter(cards, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                final List<String> colorList = CardUtil.getColors(c);
-                return colorList.contains(color);
-            }
-        });
-        return cards;
-    }
-
-    /**
-     * <p>
-     * getCardState.
-     * </p>
-     * 
-     * @param card
-     *            a {@link forge.Card} object.
-     * @return a {@link forge.Card} object.
-     */
-    public static Card getCardState(final Card card) {
-    
-        for (final Card c : GameState.getCardsInGame()) {
+    public Card getCardState(final Card card) {
+        for (final Card c : getCardsInGame()) {
             if (card.equals(c)) {
                 return c;
             }
@@ -610,45 +408,19 @@ public class GameState {
         return (playerList.size() - opponentList.size());
     }
 
-    /**
-     * a CardListFilter to get all cards that are a part of this game.
-     * 
-     * @return a {@link forge.CardList} with all cards in all Battlefields,
-     *         Hands, Graveyards, Libraries, and Exiles.
-     */
-    public static List<Card> getCardsInGame() {
+    public List<Card> getCardsInGame() {
         final List<Card> all = new ArrayList<Card>();
-        for (final Player player : Singletons.getModel().getGameState().getPlayers()) {
+        for (final Player player : getPlayers()) {
             all.addAll(player.getZone(ZoneType.Graveyard).getCards());
             all.addAll(player.getZone(ZoneType.Hand).getCards());
             all.addAll(player.getZone(ZoneType.Library).getCards());
             all.addAll(player.getZone(ZoneType.Battlefield).getCards(false));
             all.addAll(player.getZone(ZoneType.Exile).getCards());
         }
-        all.addAll(Singletons.getModel().getGameState().getStackZone().getCards());
+        all.addAll(getStackZone().getCards());
         return all;
     }
-
-    /**
-     * <p>
-     * getDoublingSeasonMagnitude.
-     * </p>
-     * 
-     * @param player
-     *            the {@link forge.game.player.Player} player to determine if is affected by
-     *            Doubling Season
-     * @return a int.
-     */
-    public static int getCounterDoublersMagnitude(final Player player, Counters type) {
-        int counterDoublers = player.getCardsIn(ZoneType.Battlefield, "Doubling Season").size();
-        if(type == Counters.P1P1) {
-            counterDoublers += player.getCardsIn(ZoneType.Battlefield, "Corpsejack Menace").size();
-        }
-        return (int) Math.pow(2, counterDoublers); // pow(a,0) = 1; pow(a,1) = a
-                                                   // ... no worries about size
-                                                   // = 0
-    }
-
+    
     /**
      * <p>
      * getTokenDoublersMagnitude.
@@ -659,11 +431,5 @@ public class GameState {
      *            Doubling Season
      * @return a int.
      */
-    public static int getTokenDoublersMagnitude(final Player player) {
-        final int tokenDoublers = player.getCardsIn(ZoneType.Battlefield, "Parallel Lives").size()
-                + player.getCardsIn(ZoneType.Battlefield, "Doubling Season").size();
-        return (int) Math.pow(2, tokenDoublers); // pow(a,0) = 1; pow(a,1) = a
-                                                 // ... no worries about size =
-                                                 // 0
-    }
+
 }

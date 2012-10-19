@@ -35,7 +35,6 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -495,7 +494,7 @@ public class AbilityFactorySacrifice {
         final boolean remSacrificed = params.containsKey("RememberSacrificed");
 
         if (valid.equals("Self")) {
-            if (GameState.getZoneOf(card).is(ZoneType.Battlefield)) {
+            if (Singletons.getModel().getGameState().getZoneOf(card).is(ZoneType.Battlefield)) {
                 if (Singletons.getModel().getGameAction().sacrifice(card, sa) && remSacrificed) {
                     card.addRemembered(card);
                 }
@@ -934,7 +933,7 @@ public class AbilityFactorySacrifice {
         if (params.containsKey("Defined")) {
             list = new ArrayList<Card>(AbilityFactory.getDefinedCards(af.getHostCard(), params.get("Defined"), sa));
         } else {
-            list = GameState.getCardsIn(ZoneType.Battlefield);
+            list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
         }
 
         final boolean remSacrificed = params.containsKey("RememberSacrificed");

@@ -23,7 +23,6 @@ import forge.Card;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.CostPayment;
-import forge.game.GameState;
 import forge.game.zone.PlayerZone;
 
 /**
@@ -111,7 +110,7 @@ public class SpellAbilityRequirements {
             if (!this.ability.getSourceCard().isCopiedSpell()) {
                 final Card c = this.ability.getSourceCard();
 
-                this.fromZone = GameState.getZoneOf(c);
+                this.fromZone = Singletons.getModel().getGameState().getZoneOf(c);
                 this.zonePosition = this.fromZone.getPosition(c);
                 this.ability.setSourceCard(Singletons.getModel().getGameAction().moveToStack(c));
             }

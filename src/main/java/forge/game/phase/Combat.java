@@ -34,7 +34,6 @@ import forge.GameActionUtil;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
-import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
@@ -625,7 +624,7 @@ public class Combat {
         all.addAll(this.getAllBlockers());
 
         for (int i = 0; i < all.size(); i++) {
-            if (!GameState.isCardInPlay(all.get(i))) {
+            if (!all.get(i).isInPlay()) {
                 this.removeFromCombat(all.get(i));
             }
         }

@@ -21,7 +21,6 @@ import java.util.List;
 
 import com.google.common.collect.Iterables;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardPredicates;
@@ -89,7 +88,7 @@ public class InputAttack extends Input {
         }
 
         Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(true);
-        AllZone.getInputControl().resetInput();
+        Singletons.getModel().getMatch().getInput().resetInput();
     }
 
     /** {@inheritDoc} */

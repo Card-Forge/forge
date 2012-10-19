@@ -25,7 +25,6 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
 
 // Cleanup is not the same as other AFs, it is only used as a Drawback, and only used to Cleanup particular card states
 // That need to be reset. I'm creating this to clear Remembered Cards at the
@@ -106,7 +105,7 @@ public final class AbilityFactoryCleanup {
 
         if (params.containsKey("ClearRemembered")) {
             source.clearRemembered();
-            GameState.getCardState(source).clearRemembered();
+            Singletons.getModel().getGameState().getCardState(source).clearRemembered();
         }
         if (params.containsKey("ClearImprinted")) {
             source.clearImprinted();

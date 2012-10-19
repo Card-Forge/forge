@@ -43,7 +43,6 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
-import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -304,7 +303,7 @@ public final class AbilityFactoryPlay {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             ZoneType zone = tgt.getZone().get(0);
-            cards = GameState.getCardsIn(zone);
+            cards = Singletons.getModel().getGameState().getCardsIn(zone);
             cards = CardLists.getValidCards(cards, tgt.getValidTgts(), ai, source);
             if (cards.isEmpty()) {
                 return false;
@@ -376,7 +375,7 @@ public final class AbilityFactoryPlay {
             if (params.containsKey("ValidZone")) {
                 zone = ZoneType.smartValueOf(params.get("ValidZone"));
             }
-            tgtCards = GameState.getCardsIn(zone);
+            tgtCards = Singletons.getModel().getGameState().getCardsIn(zone);
             tgtCards = AbilityFactory.filterListByType(tgtCards, params.get("Valid"), sa);
         } else if (params.containsKey("Defined")) {
             tgtCards = new ArrayList<Card>(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa));

@@ -29,7 +29,6 @@ import forge.card.mana.Mana;
 import forge.card.mana.ManaPool;
 import forge.card.trigger.TriggerType;
 import forge.control.input.InputPayManaCostUtil;
-import forge.game.GameState;
 import forge.game.player.Player;
 
 /**
@@ -539,7 +538,7 @@ public class AbilityMana extends AbilityActivated implements java.io.Serializabl
      * @return a boolean.
      */
     public final boolean isUndoable() {
-        return this.undoable && this.getPayCosts().isUndoable() && GameState.isCardInPlay(this.getSourceCard());
+        return this.undoable && this.getPayCosts().isUndoable() && this.getSourceCard().isInPlay();
     }
 
     /**

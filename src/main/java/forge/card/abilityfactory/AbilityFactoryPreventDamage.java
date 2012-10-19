@@ -35,7 +35,6 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -457,7 +456,7 @@ public class AbilityFactoryPreventDamage {
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
         // filter AIs battlefield by what I can target
-        List<Card> targetables = GameState.getCardsIn(ZoneType.Battlefield);
+        List<Card> targetables = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
         targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, hostCard);
         final List<Card> compTargetables = CardLists.filterControlledBy(targetables, ai);
 
@@ -535,7 +534,7 @@ public class AbilityFactoryPreventDamage {
         for (final Object o : tgts) {
             if (o instanceof Card) {
                 final Card c = (Card) o;
-                if (GameState.isCardInPlay(c) && (!targeted || c.canBeTargetedBy(sa))) {
+                if (c.isInPlay() && (!targeted || c.canBeTargetedBy(sa))) {
                     c.addPreventNextDamage(numDam);
                 }
 
@@ -548,7 +547,7 @@ public class AbilityFactoryPreventDamage {
         }
 
         for (final Card c : untargetedCards) {
-            if (GameState.isCardInPlay(c)) {
+            if (c.isInPlay()) {
                 c.addPreventNextDamage(numDam);
             }
         }
@@ -787,7 +786,7 @@ public class AbilityFactoryPreventDamage {
         }
 
         if (params.containsKey("ValidCards")) {
-            list = GameState.getCardsIn(ZoneType.Battlefield);
+            list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
         }
 
         list = AbilityFactory.filterListByType(list, params.get("ValidCards"), sa);

@@ -21,7 +21,6 @@ import com.esotericsoftware.minlog.Log;
 
 import forge.Card;
 import forge.Singletons;
-import forge.game.GameState;
 
 /**
  * <p>
@@ -73,6 +72,6 @@ public abstract class Ability extends SpellAbility {
             return false;
         }
 
-        return GameState.isCardInPlay(this.getSourceCard()) && !this.getSourceCard().isFaceDown();
+        return this.getSourceCard().isInPlay() && !this.getSourceCard().isFaceDown();
     }
 }

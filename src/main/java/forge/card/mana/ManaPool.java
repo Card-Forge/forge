@@ -26,7 +26,6 @@ import forge.Singletons;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayManaCostUtil;
-import forge.game.GameState;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
@@ -185,7 +184,7 @@ public class ManaPool {
             return numRemoved;
         }
 
-        if (GameState.isCardInPlay("Omnath, Locus of Mana", this.owner)) {
+        if (this.owner.isCardInPlay("Omnath, Locus of Mana")) {
             // Omnath in play, clear all non-green mana
             int i = 0;
             while (i < this.floatingMana.size()) {

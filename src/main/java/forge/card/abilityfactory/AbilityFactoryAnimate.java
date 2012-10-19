@@ -44,7 +44,6 @@ import forge.card.cost.Cost;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
-import forge.game.GameState;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -538,7 +537,7 @@ public final class AbilityFactoryAnimate {
 
         //if host is not on the battlefield don't apply
         if (params.containsKey("UntilHostLeavesPlay")
-                && !GameState.isCardInPlay(sa.getSourceCard())) {
+                && !sa.getSourceCard().isInPlay()) {
             return;
         }
 
@@ -1296,7 +1295,7 @@ public final class AbilityFactoryAnimate {
         }
 
         if ((tgtPlayers == null) || tgtPlayers.isEmpty()) {
-            list = GameState.getCardsIn(ZoneType.Battlefield);
+            list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
         } else {
             list = tgtPlayers.get(0).getCardsIn(ZoneType.Battlefield);
         }

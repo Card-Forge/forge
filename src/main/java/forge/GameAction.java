@@ -76,8 +76,14 @@ public class GameAction {
      * resetActivationsPerTurn.
      * </p>
      */
+    
+    private final GameState game;
+    public GameAction(GameState game0) {
+        game = game0;
+    }
+    
     public final void resetActivationsPerTurn() {
-        final List<Card> all = GameState.getCardsInGame();
+        final List<Card> all = game.getCardsInGame();
 
         // Reset Activations per Turn
         for (final Card card : all) {
@@ -101,7 +107,7 @@ public class GameAction {
      * @param position TODO
      * @return a {@link forge.Card} object.
      */
-    public static Card changeZone(final PlayerZone zoneFrom, final PlayerZone zoneTo, final Card c, Integer position) {
+    public Card changeZone(final PlayerZone zoneFrom, final PlayerZone zoneTo, final Card c, Integer position) {
         if (c.isCopiedSpell()) {
             if ((zoneFrom != null)) {
                 zoneFrom.remove(c);
@@ -177,9 +183,9 @@ public class GameAction {
             repParams.put("Origin", zoneFrom != null ? zoneFrom.getZoneType() : null);
             repParams.put("Destination", zoneTo.getZoneType());
 
-            ReplacementResult repres = Singletons.getModel().getGameState().getReplacementHandler().run(repParams);
+            ReplacementResult repres = game.getReplacementHandler().run(repParams);
             if (repres != ReplacementResult.NotReplaced) {
-                if (Singletons.getModel().getGameState().getStack().isResolving(c) && !zoneTo.is(ZoneType.Graveyard) && repres == ReplacementResult.Prevented) {
+                if (game.getStack().isResolving(c) && !zoneTo.is(ZoneType.Graveyard) && repres == ReplacementResult.Prevented) {
                     return Singletons.getModel().getGameAction().moveToGraveyard(c);
                 }
                 return c;
@@ -191,7 +197,7 @@ public class GameAction {
         }
 
         if (suppress) {
-            Singletons.getModel().getGameState().getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+            game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
         }
 
         // "enter the battlefield as a copy" - apply code here
@@ -210,7 +216,7 @@ public class GameAction {
 
         if (zoneFrom != null) {
             if (zoneFrom.is(ZoneType.Battlefield) && c.isCreature()) {
-                Singletons.getModel().getGameState().getCombat().removeFromCombat(c);
+                game.getCombat().removeFromCombat(c);
             }
             zoneFrom.remove(c);
         }
@@ -228,11 +234,11 @@ public class GameAction {
             runParams.put("Origin", null);
         }
         runParams.put("Destination", zoneTo.getZoneType().name());
-        Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams);
+        game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams);
         // AllZone.getStack().chooseOrderOfSimultaneousStackEntryAll();
 
         if (suppress) {
-            Singletons.getModel().getGameState().getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+            game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         }
 
         if (zoneFrom == null) {
@@ -256,7 +262,7 @@ public class GameAction {
             if (copied.isEquipped()) {
                 final List<Card> equipments = new ArrayList<Card>(copied.getEquippedBy());
                 for (final Card equipment : equipments) {
-                    if (GameState.isCardInPlay(equipment)) {
+                    if (equipment.isInPlay()) {
                         equipment.unEquipCard(copied);
                     }
                 }
@@ -265,7 +271,7 @@ public class GameAction {
             if (copied.isEquipped()) {
                 final List<Card> equipments = new ArrayList<Card>(copied.getEquippedBy());
                 for (final Card equipment : equipments) {
-                    if (GameState.isCardInPlay(equipment)) {
+                    if (equipment.isInPlay()) {
                         equipment.unEquipCard(copied);
                     }
                 }
@@ -273,7 +279,7 @@ public class GameAction {
             // equipment moving off battlefield
             if (copied.isEquipping()) {
                 final Card equippedCreature = copied.getEquipping().get(0);
-                if (GameState.isCardInPlay(equippedCreature)) {
+                if (equippedCreature.isInPlay()) {
                     copied.unEquipCard(equippedCreature);
                 }
             }
@@ -342,7 +348,7 @@ public class GameAction {
     public final Card moveTo(final PlayerZone zoneTo, Card c, Integer position) {
         // Ideally move to should never be called without a prevZone
         // Remove card from Current Zone, if it has one
-        final PlayerZone zoneFrom = GameState.getZoneOf(c);
+        final PlayerZone zoneFrom = game.getZoneOf(c);
         // String prevName = prev != null ? prev.getZoneName() : "";
 
         if (c.hasKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.")
@@ -355,7 +361,7 @@ public class GameAction {
 
         // Card lastKnownInfo = c;
 
-        c = GameAction.changeZone(zoneFrom, zoneTo, c, position);
+        c = changeZone(zoneFrom, zoneTo, c, position);
 
         if (zoneTo.is(ZoneType.Stack)) {
             c.setCastFrom(zoneFrom.getZoneType());
@@ -390,7 +396,7 @@ public class GameAction {
         final PlayerZone hand = c.getOwner().getZone(ZoneType.Hand);
         final PlayerZone play = c.getController().getZone(ZoneType.Battlefield);
 
-        c = GameAction.changeZone(hand, play, c, null);
+        c = Singletons.getModel().getGameAction().changeZone(hand, play, c, null);
 
         return c;
     }
@@ -403,7 +409,7 @@ public class GameAction {
      */
     public final void controllerChangeZoneCorrection(final Card c) {
         System.out.println("Correcting zone for " + c.toString());
-        final PlayerZone oldBattlefield = GameState.getZoneOf(c);
+        final PlayerZone oldBattlefield = game.getZoneOf(c);
         if (oldBattlefield == null || oldBattlefield.getZoneType() == ZoneType.Stack) {
             return;
         }
@@ -413,8 +419,8 @@ public class GameAction {
             return;
         }
 
-        Singletons.getModel().getGameState().getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        for (Player p: Singletons.getModel().getGameState().getPlayers()) {
+        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+        for (Player p: game.getPlayers()) {
             ((PlayerZoneBattlefield)p.getZone(ZoneType.Battlefield)).setTriggers(false);
         }
 
@@ -426,16 +432,16 @@ public class GameAction {
         if (c.hasStartOfKeyword("Echo")) {
             c.addExtrinsicKeyword("(Echo unpaid)");
         }
-        Singletons.getModel().getGameState().getCombat().removeFromCombat(c);
+        game.getCombat().removeFromCombat(c);
 
         c.setTurnInZone(tiz);
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", c);
-        Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams);
+        game.getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams);
 
-        Singletons.getModel().getGameState().getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-        for (Player p: Singletons.getModel().getGameState().getPlayers()) {
+        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        for (Player p: game.getPlayers()) {
             ((PlayerZoneBattlefield)p.getZone(ZoneType.Battlefield)).setTriggers(true);
         }
     }
@@ -450,7 +456,7 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public final Card moveToStack(final Card c) {
-        final PlayerZone stack = Singletons.getModel().getGameState().getStackZone();
+        final PlayerZone stack = game.getStackZone();
         return this.moveTo(stack, c);
     }
 
@@ -464,7 +470,7 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public final Card moveToGraveyard(Card c) {
-        final PlayerZone origZone = GameState.getZoneOf(c);
+        final PlayerZone origZone = game.getZoneOf(c);
         final Player owner = c.getOwner();
         final PlayerZone grave = owner.getZone(ZoneType.Graveyard);
         final PlayerZone exile = owner.getZone(ZoneType.Exile);
@@ -561,7 +567,7 @@ public class GameAction {
                     };
                     recoverAbility.setStackDescription(sb.toString());
 
-                    Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(recoverAbility);
+                    game.getStack().addSimultaneousStackEntry(recoverAbility);
                 }
             }
         }
@@ -651,7 +657,7 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public final Card moveToLibrary(Card c, int libPosition) {
-        final PlayerZone p = GameState.getZoneOf(c);
+        final PlayerZone p = game.getZoneOf(c);
         final PlayerZone library = c.getOwner().getZone(ZoneType.Library);
 
         if (c.hasKeyword("If CARDNAME would leave the battlefield, exile it instead of putting it anywhere else.")) {
@@ -695,7 +701,7 @@ public class GameAction {
             runParams.put("Origin", null);
         }
         runParams.put("Destination", ZoneType.Library.name());
-        Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams);
+        game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams);
 
         if (p != null) {
             Player owner = p.getPlayer();
@@ -723,7 +729,7 @@ public class GameAction {
      * @return a {@link forge.Card} object.
      */
     public final Card exile(final Card c) {
-        if (GameState.isCardExiled(c)) {
+        if (game.isCardExiled(c)) {
             return c;
         }
 
@@ -824,7 +830,7 @@ public class GameAction {
         activate.setActivatingPlayer(card.getOwner());
         activate.setTrigger(true);
 
-        Singletons.getModel().getGameState().getStack().add(activate);
+        game.getStack().add(activate);
     }
 
     /**
@@ -888,7 +894,7 @@ public class GameAction {
         activate.setStackDescription(sbAct.toString());
         activate.setActivatingPlayer(card.getOwner());
 
-        Singletons.getModel().getGameState().getStack().add(activate);
+        game.getStack().add(activate);
     }
 
     /**
@@ -940,10 +946,10 @@ public class GameAction {
     /** */
     public final void checkStaticAbilities() {
         // remove old effects
-        Singletons.getModel().getGameState().getStaticEffects().clearStaticEffects();
+        game.getStaticEffects().clearStaticEffects();
 
         // search for cards with static abilities
-        final List<Card> allCards = GameState.getCardsInGame();
+        final List<Card> allCards = game.getCardsInGame();
         final ArrayList<StaticAbility> staticAbilities = new ArrayList<StaticAbility>();
         for (final Card card : allCards) {
             for (StaticAbility sa : card.getStaticAbilities()) {
@@ -977,7 +983,7 @@ public class GameAction {
         }
 
         // card state effects like Glorious Anthem
-        for (final String effect : Singletons.getModel().getGameState().getStaticEffects().getStateBasedMap().keySet()) {
+        for (final String effect : game.getStaticEffects().getStateBasedMap().keySet()) {
             final Command com = GameActionUtil.getCommands().get(effect);
             com.execute();
         }
@@ -994,12 +1000,12 @@ public class GameAction {
 
         // sol(10/29) added for Phase updates, state effects shouldn't be
         // checked during Spell Resolution (except when persist-returning
-        if (Singletons.getModel().getGameState().getStack().getResolving()) {
+        if (game.getStack().isResolving()) {
             return;
         }
 
-        final boolean refreeze = Singletons.getModel().getGameState().getStack().isFrozen();
-        Singletons.getModel().getGameState().getStack().setFrozen(true);
+        final boolean refreeze = game.getStack().isFrozen();
+        game.getStack().setFrozen(true);
 
         final JFrame frame = Singletons.getView().getFrame();
         if (!frame.isDisplayable()) {
@@ -1012,7 +1018,7 @@ public class GameAction {
             new ViewWinLose(match);
             match.getCurrentGame().getStack().clearSimultaneousStack();
             if (!refreeze) {
-                Singletons.getModel().getGameState().getStack().unfreezeStack();
+                game.getStack().unfreezeStack();
             }
             return;
         }
@@ -1026,14 +1032,14 @@ public class GameAction {
             this.checkStaticAbilities();
 
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
-            Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.Always, runParams);
+            game.getTriggerHandler().runTrigger(TriggerType.Always, runParams);
 
-            for (Card c : GameState.getCardsIn(ZoneType.Battlefield)) {
+            for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
                 
                 if (c.isEquipped()) {
                     final List<Card> equipments = new ArrayList<Card>(c.getEquippedBy());
                     for (final Card equipment : equipments) {
-                        if (!GameState.isCardInPlay(equipment)) {
+                        if (!equipment.isInPlay()) {
                             equipment.unEquipCard(c);
                             checkAgain = true;
                         }
@@ -1042,7 +1048,7 @@ public class GameAction {
 
                 if (c.isEquipping()) {
                     final Card equippedCreature = c.getEquipping().get(0);
-                    if (!equippedCreature.isCreature() || !GameState.isCardInPlay(equippedCreature)) {
+                    if (!equippedCreature.isCreature() || !equippedCreature.isInPlay()) {
                         c.unEquipCard(equippedCreature);
                         checkAgain = true;
                     }
@@ -1066,7 +1072,7 @@ public class GameAction {
 
                     if (entity instanceof Card) {
                         final Card perm = (Card) entity;
-                        if (!GameState.isCardInPlay(perm) || !perm.canBeEnchantedBy(c)) {
+                        if (!perm.isInPlay() || !perm.canBeEnchantedBy(c)) {
                             c.unEnchantEntity(perm);
                             this.moveToGraveyard(c);
                             checkAgain = true;
@@ -1089,7 +1095,7 @@ public class GameAction {
                         }
                     }
 
-                    if (GameState.isCardInPlay(c) && !c.isEnchanting()) {
+                    if (c.isInPlay() && !c.isEnchanting()) {
                         this.moveToGraveyard(c);
                         checkAgain = true;
                     }
@@ -1105,13 +1111,13 @@ public class GameAction {
                         this.destroy(c);
                         // this is untested with instants and abilities but
                         // required for First Strike combat phase
-                        Singletons.getModel().getGameState().getCombat().removeFromCombat(c);
+                        game.getCombat().removeFromCombat(c);
                         checkAgain = true;
                     } else if (c.getNetDefense() <= 0) {
                         // TODO This shouldn't be a destroy, and should happen
                         // before the damage check probably
                         this.destroy(c);
-                        Singletons.getModel().getGameState().getCombat().removeFromCombat(c);
+                        game.getCombat().removeFromCombat(c);
                         checkAgain = true;
                     }
                     // Soulbond unpairing
@@ -1192,7 +1198,7 @@ public class GameAction {
         this.destroyPlaneswalkers();
 
         if (!refreeze) {
-            Singletons.getModel().getGameState().getStack().unfreezeStack();
+            game.getStack().unfreezeStack();
         }
     } // checkStateEffects()
 
@@ -1203,7 +1209,7 @@ public class GameAction {
      */
     private void destroyPlaneswalkers() {
         // get all Planeswalkers
-        final List<Card> list = CardLists.filter(GameState.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
+        final List<Card> list = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
 
         Card c;
         for (int i = 0; i < list.size(); i++) {
@@ -1236,13 +1242,13 @@ public class GameAction {
      * </p>
      */
     private void destroyLegendaryCreatures() {
-        final List<Card> a = CardLists.getType(GameState.getCardsIn(ZoneType.Battlefield), "Legendary");
-        if (a.isEmpty() || GameState.isCardInPlay("Mirror Gallery")) {
+        final List<Card> a = CardLists.getType(game.getCardsIn(ZoneType.Battlefield), "Legendary");
+        if (a.isEmpty() || game.isCardInPlay("Mirror Gallery")) {
             return;
         }
 
         while (!a.isEmpty()) {
-            List<Card> b = GameState.getCardsIn(ZoneType.Battlefield, a.get(0).getName());
+            List<Card> b = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals(a.get(0).getName()));
             b = CardLists.getType(b, "Legendary");
             b = CardLists.filter(b, new Predicate<Card>() {
                 @Override
@@ -1285,7 +1291,7 @@ public class GameAction {
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", c);
-        Singletons.getModel().getGameState().getTriggerHandler().runTrigger(TriggerType.Sacrificed, runParams);
+        game.getTriggerHandler().runTrigger(TriggerType.Sacrificed, runParams);
 
         return true;
     }
@@ -1300,7 +1306,7 @@ public class GameAction {
      * @return a boolean.
      */
     public final boolean destroyNoRegeneration(final Card c) {
-        if (!GameState.isCardInPlay(c) || c.hasKeyword("Indestructible")) {
+        if (!c.isInPlay() || c.hasKeyword("Indestructible")) {
             return false;
         }
 
@@ -1340,7 +1346,7 @@ public class GameAction {
                 sb.append(crd).append(" - Totem armor: destroy this aura.");
                 ability.setStackDescription(sb.toString());
 
-                Singletons.getModel().getGameState().getStack().add(ability);
+                game.getStack().add(ability);
                 return false;
             }
         } // totem armor
@@ -1365,7 +1371,7 @@ public class GameAction {
 
             @Override
             public void execute() {
-                if (GameState.isCardInPlay(c) && c.isCreature()) {
+                if (c.isInPlay() && c.isCreature()) {
                     c.addExtrinsicKeyword("Haste");
                 }
             } // execute()
@@ -1400,7 +1406,7 @@ public class GameAction {
      * @return a boolean.
      */
     public final boolean sacrificeDestroy(final Card c) {
-        if (!GameState.isCardInPlay(c)) {
+        if (!c.isInPlay()) {
             return false;
         }
 
@@ -1433,7 +1439,7 @@ public class GameAction {
 
                 @Override
                 public void resolve() {
-                    if (GameState.getZoneOf(persistCard).is(ZoneType.Graveyard)) {
+                    if (game.getZoneOf(persistCard).is(ZoneType.Graveyard)) {
                         final PlayerZone ownerPlay = persistCard.getOwner().getZone(ZoneType.Battlefield);
                         final Card card = GameAction.this.moveTo(ownerPlay, persistCard);
                         card.addCounter(Counters.M1M1, 1);
@@ -1444,7 +1450,7 @@ public class GameAction {
             persistAb.setDescription(newCard.getName() + " - Returning from Persist");
             persistAb.setActivatingPlayer(c.getController());
 
-            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(persistAb);
+            game.getStack().addSimultaneousStackEntry(persistAb);
         }
 
         if (undying) {
@@ -1453,7 +1459,7 @@ public class GameAction {
 
                 @Override
                 public void resolve() {
-                    if (GameState.getZoneOf(undyingCard).is(ZoneType.Graveyard)) {
+                    if (game.getZoneOf(undyingCard).is(ZoneType.Graveyard)) {
                         final PlayerZone ownerPlay = undyingCard.getOwner().getZone(ZoneType.Battlefield);
                         final Card card = GameAction.this.moveTo(ownerPlay, undyingCard);
                         card.addCounter(Counters.P1P1, 1);
@@ -1464,7 +1470,7 @@ public class GameAction {
             undyingAb.setDescription(newCard.getName() + " - Returning from Undying");
             undyingAb.setActivatingPlayer(c.getController());
             
-            Singletons.getModel().getGameState().getStack().addSimultaneousStackEntry(undyingAb);
+            game.getStack().addSimultaneousStackEntry(undyingAb);
         }
         return true;
     } // sacrificeDestroy()
@@ -1479,7 +1485,7 @@ public class GameAction {
      * @return a boolean.
      */
     public final boolean destroy(final Card c) {
-        if (!GameState.isCardInPlay(c)
+        if (!c.isInPlay()
                 || (c.hasKeyword("Indestructible") && (!c.isCreature() || (c.getNetDefense() > 0)))) {
             return false;
         }
@@ -1489,7 +1495,7 @@ public class GameAction {
             c.setDamage(0);
             c.tap();
             c.addRegeneratedThisTurn();
-            Singletons.getModel().getGameState().getCombat().removeFromCombat(c);
+            game.getCombat().removeFromCombat(c);
             return false;
         }
 
@@ -1541,7 +1547,7 @@ public class GameAction {
         final ArrayList<SpellAbility> abilities = c.getSpellAbilities();
         final ArrayList<String> choices = new ArrayList<String>();
         final Player human = Singletons.getControl().getPlayer();
-        final PlayerZone zone = GameState.getZoneOf(c);
+        final PlayerZone zone = game.getZoneOf(c);
 
         if (c.isLand() && human.canPlayLand()) {
             if (zone.is(ZoneType.Hand) || ((!zone.is(ZoneType.Battlefield)) && c.hasStartOfKeyword("May be played"))) {
@@ -1647,11 +1653,10 @@ public class GameAction {
             }
             boolean x = sa.getSourceCard().getManaCost().getShardCount(ManaCostShard.X) > 0;
 
-            Singletons.getModel().getGameState().getStack().add(sa, x);
+            game.getStack().add(sa, x);
         } else {
             sa.setManaCost("0"); // Beached As
-            sa.getBeforePayMana().setFree(true);
-            AllZone.getInputControl().setInput(sa.getBeforePayMana());
+            Singletons.getModel().getMatch().getInput().setInput(sa.getBeforePayMana());
         }
     }
 
@@ -1682,7 +1687,7 @@ public class GameAction {
             originalCard.setXManaCostPaid(0);
         }
 
-        if (Singletons.getModel().getGameState() != null || sa.isTrigger()) {
+        if (game != null || sa.isTrigger()) {
             return manaCost;
         }
 
@@ -1835,11 +1840,11 @@ public class GameAction {
                         // AND that you can't use mana tapabilities of convoked
                         // creatures
                         // to pay the convoked cost.
-                        Singletons.getModel().getGameState().getTriggerHandler().suppressMode(TriggerType.Taps);
+                        game.getTriggerHandler().suppressMode(TriggerType.Taps);
                         for (final Card c : sa.getTappedForConvoke()) {
                             c.tap();
                         }
-                        Singletons.getModel().getGameState().getTriggerHandler().clearSuppression(TriggerType.Taps);
+                        game.getTriggerHandler().clearSuppression(TriggerType.Taps);
 
                         manaCost = newCost;
                     }
@@ -1848,7 +1853,7 @@ public class GameAction {
             }
         } // isSpell
 
-        List<Card> cardsOnBattlefield = GameState.getCardsIn(ZoneType.Battlefield);
+        List<Card> cardsOnBattlefield = game.getCardsIn(ZoneType.Battlefield);
         cardsOnBattlefield.add(originalCard);
         final ArrayList<StaticAbility> raiseAbilities = new ArrayList<StaticAbility>();
         final ArrayList<StaticAbility> reduceAbilities = new ArrayList<StaticAbility>();
@@ -1973,7 +1978,7 @@ public class GameAction {
                         sa.setSourceCard(Singletons.getModel().getGameAction().moveToStack(source));
                     }
 
-                    Singletons.getModel().getGameState().getStack().add(sa);
+                    game.getStack().add(sa);
                     if (sa.isTapAbility() && !sa.wasCancelled()) {
                         sa.getSourceCard().tap();
                     }
@@ -1982,12 +1987,12 @@ public class GameAction {
                     }
                     return;
                 } else {
-                    AllZone.getInputControl().setInput(sa.getAfterPayMana());
+                    Singletons.getModel().getMatch().getInput().setInput(sa.getAfterPayMana());
                 }
             } else if (sa.getBeforePayMana() == null) {
-                AllZone.getInputControl().setInput(new InputPayManaCost(sa, manaCost));
+                Singletons.getModel().getMatch().getInput().setInput(new InputPayManaCost(sa, manaCost));
             } else {
-                AllZone.getInputControl().setInput(sa.getBeforePayMana());
+                Singletons.getModel().getMatch().getInput().setInput(sa.getBeforePayMana());
             }
         }
     }
@@ -2034,12 +2039,12 @@ public class GameAction {
                     }
                     return;
                 } else {
-                    AllZone.getInputControl().setInput(sa.getAfterPayMana());
+                    Singletons.getModel().getMatch().getInput().setInput(sa.getAfterPayMana());
                 }
             } else if (sa.getBeforePayMana() == null) {
-                AllZone.getInputControl().setInput(new InputPayManaCost(sa, true));
+                Singletons.getModel().getMatch().getInput().setInput(new InputPayManaCost(sa, true));
             } else {
-                AllZone.getInputControl().setInput(sa.getBeforePayMana());
+                Singletons.getModel().getMatch().getInput().setInput(sa.getBeforePayMana());
             }
         }
     }

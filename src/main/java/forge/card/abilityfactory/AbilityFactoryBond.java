@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import forge.Card;
+import forge.Singletons;
 
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
@@ -29,7 +30,6 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -325,7 +325,7 @@ public final class AbilityFactoryBond {
         }
 
         // find list of valid cards to pair with
-        List<Card> cards = GameState.getCardsIn(ZoneType.Battlefield);
+        List<Card> cards = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
         cards = AbilityFactory.filterListByType(cards, params.get("ValidCards"), sa);
         if (cards.isEmpty()) {
             return;

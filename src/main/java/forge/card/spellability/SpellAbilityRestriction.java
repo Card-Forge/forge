@@ -27,7 +27,6 @@ import forge.CardLists;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -187,7 +186,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         if (this.getZone() == null) {
             return true;
         }
-        PlayerZone cardZone = GameState.getZoneOf(c);
+        PlayerZone cardZone = Singletons.getModel().getGameState().getZoneOf(c);
         Player activator = sa.getActivatingPlayer();
         if (cardZone == null || !cardZone.is(this.getZone())) {
             // If Card is not in the default activating zone, do some additional checks
@@ -356,7 +355,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             }
         }
         if (this.getIsPresent() != null) {
-            List<Card> list = GameState.getCardsIn(this.getPresentZone());
+            List<Card> list = Singletons.getModel().getGameState().getCardsIn(this.getPresentZone());
 
             list = CardLists.getValidCards(list, this.getIsPresent().split(","), activator, c);
 

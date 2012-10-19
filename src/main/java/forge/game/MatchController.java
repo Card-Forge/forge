@@ -6,10 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import forge.AllZone;
 import forge.Singletons;
 import forge.Constant.Preferences;
 import forge.control.FControl;
+import forge.control.input.InputControl;
 import forge.control.input.InputMulligan;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
@@ -19,6 +19,7 @@ import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.player.PlayerType;
 import forge.game.zone.ZoneType;
+import forge.gui.GuiInput;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
@@ -49,6 +50,8 @@ public class MatchController {
     private final List<GameOutcome> gamesPlayed = new ArrayList<GameOutcome>();
     private final List<GameOutcome> gamesPlayedRo;
 
+    private InputControl input;
+    
     public MatchController() {
         gamesPlayedRo = Collections.unmodifiableList(gamesPlayed);
     }
@@ -95,6 +98,10 @@ public class MatchController {
         // Will this lose all the ordering?
         currentGame = Singletons.getModel().newGame(players.keySet());
 
+        // Instantiate AI
+        input = new InputControl(currentGame);
+
+        
         Map<Player, PlayerStartConditions> startConditions = new HashMap<Player, PlayerStartConditions>();
         for (Player p : currentGame.getPlayers())
             startConditions.put(p, players.get(p.getLobbyPlayer()));
@@ -106,15 +113,19 @@ public class MatchController {
             SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
 
             // set all observers
-            CMessage.SINGLETON_INSTANCE.subscribe(currentGame);
-            CLog.SINGLETON_INSTANCE.subscribe(currentGame);
-            CStack.SINGLETON_INSTANCE.subscribe(currentGame);
+            GuiInput inputControl = CMessage.SINGLETON_INSTANCE.getInputControl();
+            input.addObserver(inputControl);
+            currentGame.getStack().addObserver(inputControl);
+            currentGame.getPhaseHandler().addObserver(inputControl);
+            currentGame.getGameLog().addObserver(CLog.SINGLETON_INSTANCE);
+            currentGame.getStack().addObserver(CStack.SINGLETON_INSTANCE);
+            // some observers are set in CMatchUI.initMatch
 
             
             GameNew.newGame(startConditions, gameType);
 
             Player computerPlayer = Aggregates.firstFieldEquals(currentGame.getPlayers(), Player.Accessors.FN_GET_TYPE, PlayerType.COMPUTER);
-            AllZone.getInputControl().setComputer(new ComputerAIInput(new ComputerAIGeneral(computerPlayer)));
+            input.setComputer(new ComputerAIInput(new ComputerAIGeneral(computerPlayer)));
 
 
             if (this.getPlayedGames().isEmpty()) { 
@@ -127,16 +138,16 @@ public class MatchController {
                 }
         
                 VAntes.SINGLETON_INSTANCE.clearAnteCards();
-                AllZone.getInputControl().resetInput();
+                Singletons.getModel().getMatch().getInput().resetInput();
             }
             
             // per player observers were set in CMatchUI.SINGLETON_INSTANCE.initMatch
 
             CMessage.SINGLETON_INSTANCE.updateGameInfo(this);
             // Update observers
-            Singletons.getModel().getGameState().getStack().updateObservers();
-            AllZone.getInputControl().updateObservers();
-            Singletons.getModel().getGameState().getGameLog().updateObservers();
+            currentGame.getStack().updateObservers();
+            input.updateObservers();
+            currentGame.getGameLog().updateObservers();
 
             
             for( Player p : currentGame.getPlayers() ) {
@@ -145,7 +156,7 @@ public class MatchController {
             }
 
             CMatchUI.SINGLETON_INSTANCE.setCard(Singletons.getControl().getPlayer().getCardsIn(ZoneType.Hand).get(0));
-            AllZone.getInputControl().setInput(new InputMulligan());            
+            input.setInput(new InputMulligan());            
             
         } catch (Exception e) {
             ErrorViewer.showError(e);
@@ -256,5 +267,9 @@ public class MatchController {
     public Deck getPlayersDeck(LobbyPlayer lobbyPlayer) {
         PlayerStartConditions cond = players.get(lobbyPlayer);
         return cond == null ? null : cond.getDeck();
+    }
+
+    public final InputControl getInput() {
+        return input;
     }
 }

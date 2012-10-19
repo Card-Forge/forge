@@ -52,7 +52,6 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.control.input.InputPayManaCostUtil;
 import forge.error.ErrorViewer;
-import forge.game.GameState;
 import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
@@ -1279,7 +1278,7 @@ public class ComputerUtil {
             public boolean apply(final Card c) {
                 if (c.getSVar("NeedsToPlay").length() > 0) {
                     final String needsToPlay = c.getSVar("NeedsToPlay");
-                    List<Card> list = GameState.getCardsIn(ZoneType.Battlefield);
+                    List<Card> list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
 
                     list = CardLists.getValidCards(list, needsToPlay.split(","), c.getController(), c);
                     if (list.isEmpty()) {
@@ -1963,7 +1962,7 @@ public class ComputerUtil {
 
                     final Target tgt = sa.getTarget();
                     if (tgt != null) {
-                        if (CardLists.getValidCards(GameState.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getSourceCard()).contains(card)) {
+                        if (CardLists.getValidCards(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getSourceCard()).contains(card)) {
                             return true;
                         }
                     } else if (AbilityFactory.getDefinedCards(sa.getSourceCard(), mapParams.get("Defined"), sa)
@@ -2012,7 +2011,7 @@ public class ComputerUtil {
                             }
                             final Target tgt = sa.getTarget();
                             if (tgt != null) {
-                                if (CardLists.getValidCards(GameState.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, af.getHostCard()).contains(card)) {
+                                if (CardLists.getValidCards(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, af.getHostCard()).contains(card)) {
                                     prevented += AbilityFactory.calculateAmount(af.getHostCard(),
                                             mapParams.get("Amount"), sa);
                                 }
@@ -2112,13 +2111,13 @@ public class ComputerUtil {
             // Otherwise, if life is possibly in danger, then this is fine.
             Combat combat = new Combat();
             combat.initiatePossibleDefenders(ai);
-            List<Card> attackers = GameState.getCreaturesInPlay(ai.getOpponent());
+            List<Card> attackers = ai.getOpponent().getCreaturesInPlay();
             for (Card att : attackers) {
                 if (CombatUtil.canAttackNextTurn(att)) {
                     combat.addAttacker(att);
                 }
             }
-            combat = ComputerUtilBlock.getBlockers(ai, combat, GameState.getCreaturesInPlay(ai));
+            combat = ComputerUtilBlock.getBlockers(ai, combat, ai.getCreaturesInPlay());
             if (!CombatUtil.lifeInDanger(ai, combat)) {
                 // Otherwise, return false. Do not play now.
                 ret = false;

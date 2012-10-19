@@ -20,10 +20,9 @@ package forge.gui;
 import java.util.Observable;
 import java.util.Observer;
 
-import forge.AllZone;
 import forge.Card;
+import forge.Singletons;
 import forge.control.input.Input;
-import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.util.MyObservable;
@@ -45,7 +44,7 @@ public class GuiInput extends MyObservable implements Observer {
     /** {@inheritDoc} */
     @Override
     public final void update(final Observable observable, final Object obj) {
-        final Input tmp = AllZone.getInputControl().updateInput();
+        final Input tmp = Singletons.getModel().getMatch().getInput().updateInput();
         if (tmp != null) {
             this.setInput(tmp);
         }
@@ -62,15 +61,6 @@ public class GuiInput extends MyObservable implements Observer {
     private void setInput(final Input in) {
         this.input = in;
         this.input.showMessage();
-    }
-
-    /**
-     * <p>
-     * showMessage.
-     * </p>
-     */
-    public final void showMessage() {
-        this.getInput().showMessage();
     }
 
     /**
@@ -128,12 +118,5 @@ public class GuiInput extends MyObservable implements Observer {
         return this.input;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     */
-    public void subscribe(GameState game) {
-        AllZone.getInputControl().addObserver(this);
-        game.getStack().addObserver(this);
-        game.getPhaseHandler().addObserver(this);
-    }
+
 }

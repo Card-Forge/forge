@@ -42,7 +42,6 @@ import forge.Counters;
 import forge.Singletons;
 import forge.card.spellability.AbilityMana;
 import forge.card.trigger.TriggerType;
-import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -681,7 +680,7 @@ public final class GuiDisplayUtil {
      * @since 1.0.15
      */
     public static void devModeAddCounter() {
-        final Card o = GuiChoose.oneOrNone("Add counters to which card?", GameState.getCardsIn(ZoneType.Battlefield));
+        final Card o = GuiChoose.oneOrNone("Add counters to which card?", Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield));
         if (null == o) {
             return;
         } else {
@@ -712,7 +711,7 @@ public final class GuiDisplayUtil {
      * @since 1.0.15
      */
     public static void devModeTapPerm() {
-        final List<Card> play = GameState.getCardsIn(ZoneType.Battlefield);
+        final List<Card> play = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
         final Object o = GuiChoose.oneOrNone("Choose a permanent", play);
         if (null == o) {
             return;
@@ -730,7 +729,7 @@ public final class GuiDisplayUtil {
      * @since 1.0.15
      */
     public static void devModeUntapPerm() {
-        final List<Card> play = GameState.getCardsIn(ZoneType.Battlefield);
+        final List<Card> play = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
         final Object o = GuiChoose.oneOrNone("Choose a permanent", play);
         if (null == o) {
             return;

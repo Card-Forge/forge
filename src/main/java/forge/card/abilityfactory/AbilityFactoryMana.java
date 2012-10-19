@@ -41,7 +41,6 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.control.input.InputPayManaCostUtil;
-import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -772,7 +771,7 @@ public class AbilityFactoryMana {
                 cards.add(c);
             }
         } else {
-            cards = CardLists.getValidCards(GameState.getCardsIn(ZoneType.Battlefield), validCard, abMana.getActivatingPlayer(), card);
+            cards = CardLists.getValidCards(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), validCard, abMana.getActivatingPlayer(), card);
         }
 
         // remove anything cards that is already in parents

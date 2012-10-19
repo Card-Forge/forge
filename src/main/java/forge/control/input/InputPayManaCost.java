@@ -17,7 +17,6 @@
  */
 package forge.control.input;
 
-import forge.AllZone;
 import forge.Card;
 import forge.Singletons;
 import forge.card.mana.ManaCost;
@@ -163,7 +162,7 @@ public class InputPayManaCost extends InputMana {
         this.manaCost = InputPayManaCostUtil.activateManaAbility(this.spell, card, this.manaCost);
 
         // only show message if this is the active input
-        if (AllZone.getInputControl().getInput() == this) {
+        if (Singletons.getModel().getMatch().getInput().getInput() == this) {
             this.showMessage();
         }
 
@@ -200,7 +199,7 @@ public class InputPayManaCost extends InputMana {
             if (this.spell.getAfterPayMana() != null) {
                 this.stopSetNext(this.spell.getAfterPayMana());
             } else {
-                AllZone.getInputControl().resetInput();
+                Singletons.getModel().getMatch().getInput().resetInput();
             }
         } else {
             Singletons.getControl().getPlayer().getManaPool().clearManaPaid(this.spell, false);
@@ -228,7 +227,7 @@ public class InputPayManaCost extends InputMana {
                 } else {
                     Singletons.getModel().getGameState().getStack().add(this.spell);
                 }
-                AllZone.getInputControl().resetInput();
+                Singletons.getModel().getMatch().getInput().resetInput();
             }
 
             // If this is a spell with convoke, re-tap all creatures used for
@@ -304,7 +303,7 @@ public class InputPayManaCost extends InputMana {
         this.manaCost = InputPayManaCostUtil.activateManaAbility(color, this.spell, this.manaCost);
 
         // only show message if this is the active input
-        if (AllZone.getInputControl().getInput() == this) {
+        if (Singletons.getModel().getMatch().getInput().getInput() == this) {
             this.showMessage();
         }
 

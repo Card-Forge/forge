@@ -19,7 +19,6 @@ package forge;
 
 import forge.card.cardfactory.CardFactory;
 import forge.card.cardfactory.CardFactoryInterface;
-import forge.control.input.InputControl;
 import forge.game.limited.GauntletMini;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -53,9 +52,6 @@ public final class AllZone {
     // Phase is now a prerequisite for CardFactory
     /** Global <code>cardFactory</code>. */
     private static CardFactoryInterface cardFactory = null;
-
-    /** Constant <code>inputControl</code>. */
-    private static InputControl inputControl = null;
 
     // initialized at Runtime since it has to be the last object constructed
 
@@ -101,23 +97,6 @@ public final class AllZone {
      */
     private static void setCardFactory(final CardFactoryInterface factory) {
         AllZone.cardFactory = factory;
-    }
-
-    /**
-     * <p>
-     * getInputControl.
-     * </p>
-     * 
-     * @return a {@link forge.control.input.InputControl} object.
-     * @since 1.0.15
-     */
-    public static InputControl getInputControl() {
-        return AllZone.inputControl;
-    }
-
-    /** @param i0 &emsp; {@link forge.control.input.InputControl} */
-    public static void setInputControl(InputControl i0) {
-        AllZone.inputControl = i0;
     }
 
     /**

@@ -25,7 +25,6 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.List;
 
-import forge.AllZone;
 import forge.Constant;
 import forge.Constant.Preferences;
 import forge.GameAction;
@@ -34,7 +33,6 @@ import forge.card.CardBlock;
 import forge.card.EditionCollection;
 import forge.card.FatPackData;
 import forge.card.FormatCollection;
-import forge.control.input.InputControl;
 import forge.deck.CardCollections;
 import forge.error.ExceptionHandler;
 import forge.game.GameState;
@@ -73,10 +71,11 @@ public enum FModel {
     private BuildInfo buildInfo;
     private OutputStream logFileStream;
 
-    private final GameAction gameAction;
+
     private final QuestPreferences questPreferences;
     private final ForgePreferences preferences;
     private GameState gameState;
+    private GameAction gameAction;
     private GauntletData gauntletData;
     
     private QuestController quest = null;
@@ -128,7 +127,6 @@ public enum FModel {
             throw new RuntimeException(exn);
         }
 
-        this.gameAction = new GameAction();
         this.questPreferences = new QuestPreferences();
         this.gauntletData = new GauntletData();
 
@@ -144,9 +142,6 @@ public enum FModel {
         // TODO - there's got to be a better place for this...oblivion?
         Preferences.DEV_MODE = this.preferences.getPrefBoolean(FPref.DEV_MODE_ENABLED);
 
-        // Instantiate AI
-        AllZone.setInputControl(new InputControl(FModel.this));
-        /// Wrong direction here. It is computer that lives inside player, not a player in computer
 
         testNetworkConnection();
         
@@ -429,6 +424,7 @@ public enum FModel {
      */
     public GameState newGame(Iterable<LobbyPlayer> players) {
         gameState = new GameState(players);
+        gameAction = new GameAction(gameState);
         return gameState;
     }
 }

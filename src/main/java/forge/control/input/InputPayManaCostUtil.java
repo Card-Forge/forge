@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import forge.AllZone;
 import forge.Card;
 import forge.CardUtil;
 import forge.Constant;
@@ -408,7 +407,7 @@ public class InputPayManaCostUtil {
                     this.xPaid++;
                 }
     
-                if (AllZone.getInputControl().getInput() == this) {
+                if (Singletons.getModel().getMatch().getInput().getInput() == this) {
                     this.showMessage();
                 }
             }
@@ -440,7 +439,7 @@ public class InputPayManaCostUtil {
                     this.xPaid++;
                 }
     
-                if (AllZone.getInputControl().getInput() == this) {
+                if (Singletons.getModel().getMatch().getInput().getInput() == this) {
                     this.showMessage();
                 }
             }
@@ -503,7 +502,7 @@ public class InputPayManaCostUtil {
     
                 if (this.mana.isPaid()) {
                     this.done();
-                } else if (AllZone.getInputControl().getInput() == this) {
+                } else if (Singletons.getModel().getMatch().getInput().getInput() == this) {
                     this.showMessage();
                 }
             }
@@ -605,7 +604,7 @@ public class InputPayManaCostUtil {
     
                 if (this.mana.isPaid()) {
                     this.done();
-                } else if (AllZone.getInputControl().getInput() == this) {
+                } else if (Singletons.getModel().getMatch().getInput().getInput() == this) {
                     this.showMessage();
                 }
             }

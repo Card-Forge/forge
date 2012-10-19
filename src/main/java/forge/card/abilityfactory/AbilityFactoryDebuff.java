@@ -40,7 +40,6 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
-import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -297,7 +296,7 @@ public final class AbilityFactoryDebuff {
     private static boolean debuffCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         // if there is no target and host card isn't in play, don't activate
         final Card source = sa.getSourceCard();
-        if ((sa.getTarget() == null) && !GameState.isCardInPlay(source)) {
+        if ((sa.getTarget() == null) && !source.isInPlay()) {
             return false;
         }
 
@@ -466,7 +465,7 @@ public final class AbilityFactoryDebuff {
     private static List<Card> getCurseCreatures(final Player ai, final AbilityFactory af, final SpellAbility sa,
             final ArrayList<String> kws) {
         final Player opp = ai.getOpponent();
-        List<Card> list = GameState.getCreaturesInPlay(opp);
+        List<Card> list = opp.getCreaturesInPlay();
         list = CardLists.getTargetableCards(list, sa);
 
         if (!list.isEmpty()) {
@@ -496,7 +495,7 @@ public final class AbilityFactoryDebuff {
      * @return a boolean.
      */
     private static boolean debuffMandatoryTarget(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        List<Card> list = GameState.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
         final Target tgt = sa.getTarget();
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
@@ -617,7 +616,7 @@ public final class AbilityFactoryDebuff {
 
         for (final Card tgtC : tgtCards) {
             final ArrayList<String> hadIntrinsic = new ArrayList<String>();
-            if (GameState.isCardInPlay(tgtC) && tgtC.canBeTargetedBy(sa)) {
+            if (tgtC.isInPlay() && tgtC.canBeTargetedBy(sa)) {
                 for (final String kw : kws) {
                     if (tgtC.getIntrinsicKeyword().contains(kw)) {
                         hadIntrinsic.add(kw);
@@ -632,7 +631,7 @@ public final class AbilityFactoryDebuff {
 
                     @Override
                     public void execute() {
-                        if (GameState.isCardInPlay(tgtC)) {
+                        if (tgtC.isInPlay()) {
                             for (final String kw : hadIntrinsic) {
                                 tgtC.addIntrinsicKeyword(kw);
                             }
@@ -858,12 +857,12 @@ public final class AbilityFactoryDebuff {
             valid = params.get("ValidCards");
         }
 
-        List<Card> list = GameState.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
         list = CardLists.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
 
         for (final Card tgtC : list) {
             final ArrayList<String> hadIntrinsic = new ArrayList<String>();
-            if (GameState.isCardInPlay(tgtC) && tgtC.canBeTargetedBy(sa)) {
+            if (tgtC.isInPlay() && tgtC.canBeTargetedBy(sa)) {
                 for (final String kw : kws) {
                     if (tgtC.getIntrinsicKeyword().contains(kw)) {
                         hadIntrinsic.add(kw);
@@ -878,7 +877,7 @@ public final class AbilityFactoryDebuff {
 
                     @Override
                     public void execute() {
-                        if (GameState.isCardInPlay(tgtC)) {
+                        if (tgtC.isInPlay()) {
                             for (final String kw : hadIntrinsic) {
                                 tgtC.addIntrinsicKeyword(kw);
                             }

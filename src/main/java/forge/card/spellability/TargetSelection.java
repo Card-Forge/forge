@@ -23,14 +23,12 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 
-import forge.AllZone;
 import forge.Card;
 import forge.Singletons;
 
 import forge.CardLists;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.control.input.Input;
-import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -270,8 +268,7 @@ public class TargetSelection {
             return;
         }
 
-        List<Card> choices = CardLists.getTargetableCards(CardLists.getValidCards(GameState
-                .getCardsIn(zone), this.target.getValidTgts(), this.ability.getActivatingPlayer(), this.ability.getSourceCard()), this.ability);
+        List<Card> choices = CardLists.getTargetableCards(CardLists.getValidCards(Singletons.getModel().getGameState().getCardsIn(zone), this.target.getValidTgts(), this.ability.getActivatingPlayer(), this.ability.getSourceCard()), this.ability);
 
         ArrayList<Object> objects = new ArrayList<Object>();
         if (tgt.isUniqueTargets()) {
@@ -321,7 +318,7 @@ public class TargetSelection {
         }
 
         if (zone.contains(ZoneType.Battlefield) && zone.size() == 1) {
-            AllZone.getInputControl().setInput(this.inputTargetSpecific(choices, true, mandatory, objects));
+            Singletons.getModel().getMatch().getInput().setInput(this.inputTargetSpecific(choices, true, mandatory, objects));
         } else {
             this.chooseCardFromList(choices, true, mandatory);
         }
@@ -462,15 +459,15 @@ public class TargetSelection {
         final List<Card> crdsLibrary = new ArrayList<Card>();
         final List<Card> crdsStack = new ArrayList<Card>();
         for (final Card inZone : choicesZoneUnfiltered) {
-            if (GameState.getCardsIn(ZoneType.Battlefield).contains(inZone)) {
+            if (Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield).contains(inZone)) {
                 crdsBattle.add(inZone);
-            } else if (GameState.getCardsIn(ZoneType.Exile).contains(inZone)) {
+            } else if (Singletons.getModel().getGameState().getCardsIn(ZoneType.Exile).contains(inZone)) {
                 crdsExile.add(inZone);
-            } else if (GameState.getCardsIn(ZoneType.Graveyard).contains(inZone)) {
+            } else if (Singletons.getModel().getGameState().getCardsIn(ZoneType.Graveyard).contains(inZone)) {
                 crdsGrave.add(inZone);
-            } else if (GameState.getCardsIn(ZoneType.Library).contains(inZone)) {
+            } else if (Singletons.getModel().getGameState().getCardsIn(ZoneType.Library).contains(inZone)) {
                 crdsLibrary.add(inZone);
-            } else if (GameState.getCardsIn(ZoneType.Stack).contains(inZone)) {
+            } else if (Singletons.getModel().getGameState().getCardsIn(ZoneType.Stack).contains(inZone)) {
                 crdsStack.add(inZone);
             }
         }

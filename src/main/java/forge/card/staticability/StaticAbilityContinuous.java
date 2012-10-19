@@ -35,7 +35,6 @@ import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
-import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -232,7 +231,7 @@ public class StaticAbilityContinuous {
                 }
             }
 
-            List<Card> cardsIGainedAbilitiesFrom = GameState.getCardsIn(validZones);
+            List<Card> cardsIGainedAbilitiesFrom = Singletons.getModel().getGameState().getCardsIn(validZones);
             cardsIGainedAbilitiesFrom = CardLists.getValidCards(cardsIGainedAbilitiesFrom, valids, hostCard.getController(), hostCard);
 
             if (cardsIGainedAbilitiesFrom.size() > 0) {
@@ -430,9 +429,9 @@ public class StaticAbilityContinuous {
         List<Card> affectedCards = new ArrayList<Card>();
 
         if (params.containsKey("AffectedZone")) {
-            affectedCards.addAll(GameState.getCardsIn(ZoneType.listValueOf(params.get("AffectedZone"))));
+            affectedCards.addAll(Singletons.getModel().getGameState().getCardsIn(ZoneType.listValueOf(params.get("AffectedZone"))));
         } else {
-            affectedCards = GameState.getCardsIn(ZoneType.Battlefield);
+            affectedCards = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
         }
 
         if (params.containsKey("Affected") && !params.get("Affected").contains(",")) {

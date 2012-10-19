@@ -20,7 +20,6 @@ package forge.game.player;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.Singletons;
@@ -126,7 +125,7 @@ public class HumanPlayer extends Player {
     /** {@inheritDoc} */
     @Override
     public final List<Card> discard(final int num, final SpellAbility sa, final boolean duringResolution) {
-        AllZone.getInputControl().setInput(PlayerUtil.inputDiscard(num, sa), duringResolution);
+        Singletons.getModel().getMatch().getInput().setInput(PlayerUtil.inputDiscard(num, sa), duringResolution);
 
         // why is List<Card> returned?
         return new ArrayList<Card>();
@@ -136,7 +135,7 @@ public class HumanPlayer extends Player {
     @Override
     public final void discardUnless(final int num, final String uType, final SpellAbility sa) {
         if (this.getCardsIn(ZoneType.Hand).size() > 0) {
-            AllZone.getInputControl().setInput(PlayerUtil.inputDiscardNumUnless(num, uType, sa));
+            Singletons.getModel().getMatch().getInput().setInput(PlayerUtil.inputDiscardNumUnless(num, uType, sa));
         }
     }
 
@@ -150,7 +149,7 @@ public class HumanPlayer extends Player {
      */
     @Override
     protected final void discardChainsOfMephistopheles() {
-        AllZone.getInputControl().setInput(PlayerUtil.inputChainsDiscard(), true);
+        Singletons.getModel().getMatch().getInput().setInput(PlayerUtil.inputChainsDiscard(), true);
     }
 
     /** {@inheritDoc} */
@@ -182,7 +181,7 @@ public class HumanPlayer extends Player {
     @Override
     public final void sacrificePermanent(final String prompt, final List<Card> choices) {
         final Input in = PlayerUtil.inputSacrificePermanent(choices, prompt);
-        AllZone.getInputControl().setInput(in);
+        Singletons.getModel().getMatch().getInput().setInput(in);
     }
 
     /** {@inheritDoc} */

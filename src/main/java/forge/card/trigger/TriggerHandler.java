@@ -39,7 +39,6 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
-import forge.game.GameState;
 import forge.game.phase.PhaseType;
 //import forge.util.TextUtil;
 import forge.game.player.ComputerUtil;
@@ -64,7 +63,7 @@ public class TriggerHandler {
      * Clean up temporary triggers.
      */
     public final void cleanUpTemporaryTriggers() {
-        final List<Card> absolutelyAllCards = GameState.getCardsInGame();
+        final List<Card> absolutelyAllCards = Singletons.getModel().getGameState().getCardsInGame();
         for (final Card c : absolutelyAllCards) {
             for (int i = 0; i < c.getTriggers().size(); i++) {
                 if (c.getTriggers().get(i).isTemporary()) {
@@ -286,8 +285,8 @@ public class TriggerHandler {
         // This is done to allow the list of triggers to be modified while
         // triggers are running.
         final ArrayList<Trigger> delayedTriggersWorkingCopy = new ArrayList<Trigger>(this.delayedTriggers);
-        List<Card> allCards = GameState.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
-        allCards.addAll(GameState.getCardsIn(ZoneType.Stack));
+        List<Card> allCards = Singletons.getModel().getGameState().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
+        allCards.addAll(Singletons.getModel().getGameState().getCardsIn(ZoneType.Stack));
         boolean checkStatics = false;
 
         // Static triggers
@@ -313,12 +312,12 @@ public class TriggerHandler {
 
         // AP
         allCards = playerAP.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
-        allCards.addAll(CardLists.filterControlledBy(GameState.getCardsIn(ZoneType.Stack), playerAP));
+        allCards.addAll(CardLists.filterControlledBy(Singletons.getModel().getGameState().getCardsIn(ZoneType.Stack), playerAP));
         // add cards that move to hidden zones
         if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
             Card card = (Card) runParams.get("Card");
             if (playerAP.equals(card.getController()) && !allCards.contains(card) 
-                    && (GameState.getZoneOf(card) == null || GameState.getZoneOf(card).getZoneType().isHidden())) {
+                    && (Singletons.getModel().getGameState().getZoneOf(card) == null || Singletons.getModel().getGameState().getZoneOf(card).getZoneType().isHidden())) {
                 allCards.add(card);
             }
         }
@@ -339,12 +338,12 @@ public class TriggerHandler {
 
         // NAP
         allCards = playerAP.getOpponent().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
-        allCards.addAll(CardLists.filterControlledBy(GameState.getCardsIn(ZoneType.Stack), playerAP.getOpponent()));
+        allCards.addAll(CardLists.filterControlledBy(Singletons.getModel().getGameState().getCardsIn(ZoneType.Stack), playerAP.getOpponent()));
         // add cards that move to hidden zones
         if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
             Card card = (Card) runParams.get("Card");
             if (!playerAP.equals(card.getController()) && !allCards.contains(card)
-                    && (GameState.getZoneOf(card) == null || GameState.getZoneOf(card).getZoneType().isHidden())) {
+                    && (Singletons.getModel().getGameState().getZoneOf(card) == null || Singletons.getModel().getGameState().getZoneOf(card).getZoneType().isHidden())) {
                 allCards.add(card);
             }
         }
@@ -410,7 +409,7 @@ public class TriggerHandler {
         if (regtrig.isSuppressed()) {
             return false; // Trigger removed by effect
         }
-        if (!regtrig.zonesCheck(GameState.getZoneOf(regtrig.getHostCard()))) {
+        if (!regtrig.zonesCheck(Singletons.getModel().getGameState().getZoneOf(regtrig.getHostCard()))) {
             return false; // Host card isn't where it needs to be.
         }
 
@@ -420,7 +419,7 @@ public class TriggerHandler {
                 String dest = (String) runParams.get("Destination");
                 if (dest.equals("Battlefield") && runParams.get("Card") instanceof Card) {
                     Card card = (Card) runParams.get("Card");
-                    if (card.isCreature() && GameState.isCardInPlay("Torpor Orb")) {
+                    if (card.isCreature() && Singletons.getModel().getGameState().isCardInPlay("Torpor Orb")) {
                         return false;
                     }
                 }
@@ -447,7 +446,7 @@ public class TriggerHandler {
         final AbilityFactory abilityFactory = new AbilityFactory();
 
         final SpellAbility[] sa = new SpellAbility[1];
-        Card host = GameState.getCardState(regtrig.getHostCard());
+        Card host = Singletons.getModel().getGameState().getCardState(regtrig.getHostCard());
 
         if (host == null) {
             host = regtrig.getHostCard();

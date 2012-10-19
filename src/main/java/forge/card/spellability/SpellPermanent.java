@@ -21,15 +21,14 @@ import java.security.InvalidParameterException;
 import java.util.HashMap;
 import java.util.List;
 
+import com.google.common.base.Supplier;
 import com.google.common.collect.Iterables;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.Command;
-import forge.CommandReturn;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -40,7 +39,6 @@ import forge.card.replacement.ReplacementEffect;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
-import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerAIGeneral;
@@ -71,8 +69,7 @@ public class SpellPermanent extends Spell {
 
         @Override
         public void showMessage() {
-            @SuppressWarnings("unchecked")
-            final List<Card> choice = (List<Card>) SpellPermanent.this.championGetCreature.execute();
+            final List<Card> choice = SpellPermanent.this.championGetCreature.get();
 
             this.stopSetNext(CardFactoryUtil.inputTargetChampionSac(SpellPermanent.this.getSourceCard(),
                     SpellPermanent.this.championAbilityComes, choice, "Select another "
@@ -82,9 +79,9 @@ public class SpellPermanent extends Spell {
         }
     };
 
-    private final CommandReturn championGetCreature = new CommandReturn() {
+    private final Supplier<List<Card>> championGetCreature = new Supplier<List<Card>>() {
         @Override
-        public Object execute() {
+        public List<Card> get() {
             final List<Card> cards = SpellPermanent.this.getSourceCard().getController().getCardsIn(ZoneType.Battlefield);
             return CardLists.getValidCards(cards, SpellPermanent.this.championValid, SpellPermanent.this.getSourceCard()
                     .getController(), SpellPermanent.this.getSourceCard());
@@ -99,13 +96,12 @@ public class SpellPermanent extends Spell {
             final Card source = this.getSourceCard();
             final Player controller = source.getController();
 
-            @SuppressWarnings("unchecked")
-            final List<Card> creature = (List<Card>) SpellPermanent.this.championGetCreature.execute();
+            final List<Card> creature = SpellPermanent.this.championGetCreature.get();
             if (creature.size() == 0) {
                 Singletons.getModel().getGameAction().sacrifice(source, null);
                 return;
             } else if (controller.isHuman()) {
-                AllZone.getInputControl().setInput(SpellPermanent.this.championInputComes);
+                Singletons.getModel().getMatch().getInput().setInput(SpellPermanent.this.championInputComes);
             } else { // Computer
                 List<Card> computer = controller.getCardsIn(ZoneType.Battlefield);
                 computer = CardLists.getValidCards(computer, SpellPermanent.this.championValid, controller, source);
@@ -115,7 +111,7 @@ public class SpellPermanent extends Spell {
                 if (computer.size() != 0) {
                     final Card c = computer.get(0);
                     source.setChampionedCard(c);
-                    if (GameState.isCardInPlay(c)) {
+                    if (c.isInPlay()) {
                         Singletons.getModel().getGameAction().exile(c);
                     }
 
@@ -158,7 +154,7 @@ public class SpellPermanent extends Spell {
                 @Override
                 public void resolve() {
                     final Card c = this.getSourceCard().getChampionedCard();
-                    if ((c != null) && !c.isToken() && GameState.isCardExiled(c)) {
+                    if ((c != null) && !c.isToken() && Singletons.getModel().getGameState().isCardExiled(c)) {
                         Singletons.getModel().getGameAction().moveToPlay(c);
                     }
                 } // resolve()
@@ -353,7 +349,7 @@ public class SpellPermanent extends Spell {
         }
         
         // check on legendary
-        if (card.isType("Legendary") && !GameState.isCardInPlay("Mirror Gallery")) {
+        if (card.isType("Legendary") && !Singletons.getModel().getGameState().isCardInPlay("Mirror Gallery")) {
             final List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
             if (Iterables.any(list, CardPredicates.nameEquals(card.getName()))) {
                 return false;
@@ -388,13 +384,12 @@ public class SpellPermanent extends Spell {
         }
 
         if (this.willChampion) {
-            final Object o = this.championGetCreature.execute();
+            final Object o = this.championGetCreature.get();
             if (o == null) {
                 return false;
             }
 
-            @SuppressWarnings("unchecked")
-            final List<Card> cl = (List<Card>) this.championGetCreature.execute();
+            final List<Card> cl = (List<Card>) this.championGetCreature.get();
             if ((o == null) || !(cl.size() > 0) || !this.getSourceCard().isInZone(ZoneType.Hand)) {
                 return false;
             }
@@ -415,7 +410,7 @@ public class SpellPermanent extends Spell {
 
     private static boolean checkETBEffects(final Card card, final SpellAbility sa, final String api, final Player ai) {
 
-        if (card.isCreature() && GameState.isCardInPlay("Torpor Orb")) {
+        if (card.isCreature() && Singletons.getModel().getGameState().isCardInPlay("Torpor Orb")) {
             return true;
         }
 

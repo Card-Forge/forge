@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import forge.AllZone;
 import forge.Card;
+import forge.Singletons;
 
 import forge.CardLists;
 import forge.Counters;
@@ -463,7 +463,7 @@ public class CostUtil {
      */
     public static void setInput(final Input in) {
         // Just a shortcut..
-        AllZone.getInputControl().setInput(in, true);
+        Singletons.getModel().getMatch().getInput().setInput(in, true);
     }
 
     public static Cost combineCosts(Cost cost1, Cost cost2) {

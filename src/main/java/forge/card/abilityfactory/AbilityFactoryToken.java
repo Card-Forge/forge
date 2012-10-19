@@ -35,7 +35,6 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
-import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
@@ -640,10 +639,10 @@ public class AbilityFactoryToken extends AbilityFactory {
                     Singletons.getModel().getGameState().getCombat().addAttacker(c);
                 }
                 if (remember != null) {
-                    GameState.getCardState(sa.getSourceCard()).addRemembered(c);
+                    Singletons.getModel().getGameState().getCardState(sa.getSourceCard()).addRemembered(c);
                 }
                 if (this.abilityFactory.getMapParams().get("RememberSource") != null) {
-                    GameState.getCardState(c).addRemembered(host);
+                    Singletons.getModel().getGameState().getCardState(c).addRemembered(host);
                 }
             }
         }

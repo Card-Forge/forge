@@ -485,7 +485,7 @@ public class CField implements ICDoc {
             System.out.println("Stop trying to spend the AI's mana");
             // TODO: Mindslaver might need to add changes here
         } else {
-            final Input in = AllZone.getInputControl().getInput();
+            final Input in = Singletons.getModel().getMatch().getInput().getInput();
             if (in instanceof InputMana) {
                 // Do something
                 ((InputMana) in).selectManaPool(Constant.Color.BLACK);
@@ -499,7 +499,7 @@ public class CField implements ICDoc {
             System.out.println("Stop trying to spend the AI's mana");
             // TODO: Mindslaver might need to add changes here
         } else {
-            final Input in = AllZone.getInputControl().getInput();
+            final Input in = Singletons.getModel().getMatch().getInput().getInput();
             if (in instanceof InputMana) {
                 // Do something
                 ((InputMana) in).selectManaPool(Constant.Color.BLUE);
@@ -513,7 +513,7 @@ public class CField implements ICDoc {
             System.out.println("Stop trying to spend the AI's mana");
             // TODO: Mindslaver might need to add changes here
         } else {
-            final Input in = AllZone.getInputControl().getInput();
+            final Input in = Singletons.getModel().getMatch().getInput().getInput();
             if (in instanceof InputMana) {
                 // Do something
                 ((InputMana) in).selectManaPool(Constant.Color.GREEN);
@@ -527,7 +527,7 @@ public class CField implements ICDoc {
             System.out.println("Stop trying to spend the AI's mana");
             // TODO: Mindslaver might need to add changes here
         } else {
-            final Input in = AllZone.getInputControl().getInput();
+            final Input in = Singletons.getModel().getMatch().getInput().getInput();
             if (in instanceof InputMana) {
                 // Do something
                 ((InputMana) in).selectManaPool(Constant.Color.RED);
@@ -541,7 +541,7 @@ public class CField implements ICDoc {
             System.out.println("Stop trying to spend the AI's mana");
             // TODO: Mindslaver might need to add changes here
         } else {
-            final Input in = AllZone.getInputControl().getInput();
+            final Input in = Singletons.getModel().getMatch().getInput().getInput();
             if (in instanceof InputMana) {
                 // Do something
                 ((InputMana) in).selectManaPool(Constant.Color.WHITE);
@@ -555,7 +555,7 @@ public class CField implements ICDoc {
             System.out.println("Stop trying to spend the AI's mana");
             // TODO: Mindslaver might need to add changes here
         } else {
-            final Input in = AllZone.getInputControl().getInput();
+            final Input in = Singletons.getModel().getMatch().getInput().getInput();
             if (in instanceof InputMana) {
                 // Do something
                 ((InputMana) in).selectManaPool(Constant.Color.COLORLESS);

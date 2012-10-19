@@ -29,7 +29,6 @@ import forge.Card;
 
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
-import forge.game.GameState;
 import forge.game.player.Player;
 import forge.util.MyObservable;
 
@@ -83,7 +82,7 @@ public class PlayerZone extends MyObservable implements IPlayerZone, Observer, j
         // don't want to log those.
         if (!c.isImmutable()) {
             this.cardsAddedThisTurn.add(c);
-            final PlayerZone zone = GameState.getZoneOf(c);
+            final PlayerZone zone = Singletons.getModel().getGameState().getZoneOf(c);
             if (zone != null) {
                 this.cardsAddedThisTurnSource.add(zone.getZoneType());
             } else {
@@ -163,7 +162,7 @@ public class PlayerZone extends MyObservable implements IPlayerZone, Observer, j
         // don't want to log those.
         if (!c.isImmutable()) {
             this.cardsAddedThisTurn.add(c);
-            final PlayerZone zone = GameState.getZoneOf(c);
+            final PlayerZone zone = Singletons.getModel().getGameState().getZoneOf(c);
             if (zone != null) {
                 this.cardsAddedThisTurnSource.add(zone.getZoneType());
             } else {

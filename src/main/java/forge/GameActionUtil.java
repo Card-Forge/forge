@@ -50,7 +50,6 @@ import forge.control.input.InputPayManaCostAbility;
 import forge.control.input.InputPayReturnCost;
 import forge.control.input.InputPaySacCost;
 import forge.game.GameLossReason;
-import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -106,7 +105,7 @@ public final class GameActionUtil {
             public void execute() {
 
                 if (!c.isCopiedSpell()) {
-                    final List<Card> maelstromNexii = GameState.getCardsIn(ZoneType.Battlefield, "Maelstrom Nexus");
+                    final List<Card> maelstromNexii = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Maelstrom Nexus"));
 
                     for (final Card nexus : maelstromNexii) {
                         if (CardUtil.getThisTurnCast("Card.YouCtrl", nexus).size() == 1) {
@@ -346,9 +345,9 @@ public final class GameActionUtil {
             final Command unpaid) {
         // temporarily disable the Resolve flag, so the user can payMana for the
         // resolving Ability
-        final boolean bResolving = Singletons.getModel().getGameState().getStack().getResolving();
+        final boolean bResolving = Singletons.getModel().getGameState().getStack().isResolving();
         Singletons.getModel().getGameState().getStack().setResolving(false);
-        AllZone.getInputControl().setInput(new InputPayManaCostAbility(message, manaCost, paid, unpaid));
+        Singletons.getModel().getMatch().getInput().setInput(new InputPayManaCostAbility(message, manaCost, paid, unpaid));
         Singletons.getModel().getGameState().getStack().setResolving(bResolving);
     }
 
@@ -491,29 +490,29 @@ public final class GameActionUtil {
 
         //the following costs need inputs and can't be combined at the moment
         if (costPart instanceof CostSacrifice) {
-            final boolean bResolving = Singletons.getModel().getGameState().getStack().getResolving();
+            final boolean bResolving = Singletons.getModel().getGameState().getStack().isResolving();
             Singletons.getModel().getGameState().getStack().setResolving(false);
-            AllZone.getInputControl().setInput(new InputPaySacCost((CostSacrifice) costPart, ability, paid, unpaid));
+            Singletons.getModel().getMatch().getInput().setInput(new InputPaySacCost((CostSacrifice) costPart, ability, paid, unpaid));
             Singletons.getModel().getGameState().getStack().setResolving(bResolving);
         }
         else if (costPart instanceof CostReturn) {
-            final boolean bResolving = Singletons.getModel().getGameState().getStack().getResolving();
+            final boolean bResolving = Singletons.getModel().getGameState().getStack().isResolving();
             Singletons.getModel().getGameState().getStack().setResolving(false);
-            AllZone.getInputControl().setInput(new InputPayReturnCost((CostReturn) costPart, ability, paid, unpaid));
+            Singletons.getModel().getMatch().getInput().setInput(new InputPayReturnCost((CostReturn) costPart, ability, paid, unpaid));
             Singletons.getModel().getGameState().getStack().setResolving(bResolving);
         }
         else if (costPart instanceof CostDiscard) {
-            final boolean bResolving = Singletons.getModel().getGameState().getStack().getResolving();
+            final boolean bResolving = Singletons.getModel().getGameState().getStack().isResolving();
             Singletons.getModel().getGameState().getStack().setResolving(false);
-            AllZone.getInputControl().setInput(new InputPayDiscardCost((CostDiscard) costPart, ability, paid, unpaid));
+            Singletons.getModel().getMatch().getInput().setInput(new InputPayDiscardCost((CostDiscard) costPart, ability, paid, unpaid));
             Singletons.getModel().getGameState().getStack().setResolving(bResolving);
         }
         else if (costPart instanceof CostMana) {
             // temporarily disable the Resolve flag, so the user can payMana for the
             // resolving Ability
-            final boolean bResolving = Singletons.getModel().getGameState().getStack().getResolving();
+            final boolean bResolving = Singletons.getModel().getGameState().getStack().isResolving();
             Singletons.getModel().getGameState().getStack().setResolving(false);
-            AllZone.getInputControl().setInput(new InputPayManaCostAbility(source + "\r\n", ability.getManaCost(), paid, unpaid));
+            Singletons.getModel().getMatch().getInput().setInput(new InputPayManaCostAbility(source + "\r\n", ability.getManaCost(), paid, unpaid));
             Singletons.getModel().getGameState().getStack().setResolving(bResolving);
         }
     }
@@ -698,7 +697,7 @@ public final class GameActionUtil {
     public static void executeVampiricEffects(final Card c) {
         final ArrayList<String> a = c.getKeyword();
         for (int i = 0; i < a.size(); i++) {
-            if (GameState.isCardInPlay(c)
+            if (c.isInPlay()
                     && a.get(i)
                             .toString()
                             .startsWith(
@@ -713,7 +712,7 @@ public final class GameActionUtil {
                         if (kw.contains("+2/+2")) {
                             counter = Counters.P2P2;
                         }
-                        if (GameState.isCardInPlay(thisCard)) {
+                        if (thisCard.isInPlay()) {
                             thisCard.addCounter(counter, 1);
                         }
                     }
@@ -984,7 +983,7 @@ public final class GameActionUtil {
             produces.put("Plains", "W");
             produces.put("Swamp", "B");
 
-            List<Card> lands = GameState.getCardsInGame();
+            List<Card> lands = Singletons.getModel().getGameState().getCardsInGame();
             lands = CardLists.filter(lands, Presets.LANDS);
 
             // remove all abilities granted by this Command
@@ -1055,8 +1054,8 @@ public final class GameActionUtil {
             }
             // add +1/+1 to cards
             list.clear();
-            final int num = GameState.getCardsIn(ZoneType.Battlefield, "Coat of Arms").size();
-            final List<Card> creatures = CardLists.filter(GameState.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+            final int num = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Coat of Arms")).size();
+            final List<Card> creatures = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
 
             for (Card c : creatures) {
                 for (Card c2 : creatures) {
@@ -1080,9 +1079,9 @@ public final class GameActionUtil {
 
         @Override
         public void execute() {
-            final List<Card> alphaStatuses = GameState.getCardsIn(ZoneType.Battlefield, "Alpha Status");
+            final List<Card> alphaStatuses = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Alpha Status"));
 
-            final List<Card> allCreatures = GameState.getCreaturesInPlay();
+            final List<Card> allCreatures = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
 
             for (int i = 0; i < this.previouslyPumped.size(); i++) {
                 this.previouslyPumped.get(i).addSemiPermanentAttackBoost(0 - this.previouslyPumpedValue.get(i));
@@ -1117,7 +1116,7 @@ public final class GameActionUtil {
         @Override
         public void execute() {
             // get all creatures
-            final List<Card> cards = GameState.getCardsIn(ZoneType.Battlefield, "Umbra Stalker");
+            final List<Card> cards = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Umbra Stalker"));
             for (final Card c : cards) {
                 final Player player = c.getController();
                 final List<Card> grave = player.getCardsIn(ZoneType.Graveyard);
@@ -1134,7 +1133,7 @@ public final class GameActionUtil {
 
         @Override
         public void execute() {
-            List<Card> list = GameState.getCardsIn(ZoneType.Battlefield);
+            List<Card> list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
 
             list = CardLists.filter(list, new Predicate<Card>() {
                 @Override
@@ -1157,7 +1156,7 @@ public final class GameActionUtil {
 
         @Override
         public void execute() {
-            final List<Card> list = GameState.getCardsIn(ZoneType.Battlefield, "Old Man of the Sea");
+            final List<Card> list = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Old Man of the Sea"));
             for (final Card oldman : list) {
                 if (!oldman.getGainControlTargets().isEmpty()) {
                     if (oldman.getNetAttack() < oldman.getGainControlTargets().get(0).getNetAttack()) {
@@ -1178,7 +1177,7 @@ public final class GameActionUtil {
 
         @Override
         public void execute() {
-            final List<Card> list = GameState.getCardsIn(ZoneType.Battlefield, "Liu Bei, Lord of Shu");
+            final List<Card> list = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Liu Bei, Lord of Shu"));
 
             if (list.size() > 0) {
                 for (int i = 0; i < list.size(); i++) {
@@ -1217,7 +1216,7 @@ public final class GameActionUtil {
 
         @Override
         public void execute() {
-            List<Card> list = GameState.getCardsIn(ZoneType.Battlefield);
+            List<Card> list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
             list = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
@@ -1235,7 +1234,7 @@ public final class GameActionUtil {
         }
 
         private int countSoundTheCalls() {
-            List<Card> list = GameState.getCardsIn(ZoneType.Graveyard, "Sound the Call");
+            List<Card> list = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Graveyard), CardPredicates.nameEquals("Sound the Call"));
             return list.size();
         }
 
@@ -1248,7 +1247,7 @@ public final class GameActionUtil {
         @Override
         public void execute() {
             // get all creatures
-            final List<Card> list = GameState.getCardsIn(ZoneType.Battlefield, "Tarmogoyf");
+            final List<Card> list = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Tarmogoyf"));
 
             for (int i = 0; i < list.size(); i++) {
                 final Card c = list.get(i);
@@ -1259,7 +1258,7 @@ public final class GameActionUtil {
         } // execute()
 
         private int countDiffTypes() {
-            final List<Card> list = GameState.getCardsIn(ZoneType.Graveyard);
+            final List<Card> list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Graveyard);
 
             int count = 0;
             for (int q = 0; q < list.size(); q++) {
@@ -1347,7 +1346,7 @@ public final class GameActionUtil {
      */
     public static void doPowerSink(final Player p) {
         // get all lands with mana abilities
-        List<Card> lands = GameState.getPlayerLandsInPlay(p);
+        List<Card> lands = p.getLandsInPlay();
         lands = CardLists.filter(lands, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {

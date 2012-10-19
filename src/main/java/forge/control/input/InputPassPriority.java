@@ -17,7 +17,6 @@
  */
 package forge.control.input;
 
-import forge.AllZone;
 import forge.Card;
 import forge.Singletons;
 import forge.game.phase.PhaseType;
@@ -75,9 +74,9 @@ public class InputPassPriority extends Input implements java.io.Serializable {
     public final void selectButtonOK() {
         Singletons.getModel().getGameState().getPhaseHandler().passPriority();
         //GuiDisplayUtil.updateGUI();
-        final Input in = AllZone.getInputControl().getInput();
+        final Input in = Singletons.getModel().getMatch().getInput().getInput();
         if ((in == this) || (in == null)) {
-            AllZone.getInputControl().resetInput();
+            Singletons.getModel().getMatch().getInput().resetInput();
             // Clear out PassPriority after clicking button
         }
     }

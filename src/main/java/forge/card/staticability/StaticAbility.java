@@ -28,7 +28,6 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -457,7 +456,7 @@ public class StaticAbility {
         if (this.mapParams.containsKey("EffectZone")) {
             if (!this.mapParams.get("EffectZone").equals("All")
                     && !ZoneType.listValueOf(this.mapParams.get("EffectZone"))
-                        .contains(GameState.getZoneOf(this.hostCard).getZoneType())) {
+                        .contains(Singletons.getModel().getGameState().getZoneOf(this.hostCard).getZoneType())) {
                 return false;
             }
         } else {

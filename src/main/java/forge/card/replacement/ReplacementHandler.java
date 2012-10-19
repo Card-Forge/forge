@@ -27,7 +27,6 @@ import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
-import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -111,7 +110,7 @@ public class ReplacementHandler {
                             && replacementEffect.requirementsCheck()
                             && replacementEffect.canReplace(runParams) 
                             && !possibleReplacers.contains(replacementEffect)
-                            && replacementEffect.zonesCheck(GameState.getZoneOf(crd))) {
+                            && replacementEffect.zonesCheck(Singletons.getModel().getGameState().getZoneOf(crd))) {
                         possibleReplacers.add(replacementEffect);
                     }
                 }

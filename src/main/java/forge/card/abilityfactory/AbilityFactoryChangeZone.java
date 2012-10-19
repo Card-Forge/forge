@@ -49,7 +49,6 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
-import forge.game.GameState;
 import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
@@ -512,7 +511,7 @@ public final class AbilityFactoryChangeZone {
             
             //Ninjutsu
             if (params.containsKey("Ninjutsu")) {
-                if (source.isType("Legendary") && !GameState.isCardInPlay("Mirror Gallery")) {
+                if (source.isType("Legendary") && !Singletons.getModel().getGameState().isCardInPlay("Mirror Gallery")) {
                     final List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
                     if (Iterables.any(list, CardPredicates.nameEquals(source.getName()))) {
                         return false;
@@ -975,7 +974,7 @@ public final class AbilityFactoryChangeZone {
             }
         } else if (!origin.contains(ZoneType.Library) && !origin.contains(ZoneType.Hand)
                 && !params.containsKey("DefinedPlayer")) {
-            fetchList = GameState.getCardsIn(origin);
+            fetchList = Singletons.getModel().getGameState().getCardsIn(origin);
         } else {
             fetchList = player.getCardsIn(origin);
         }
@@ -1161,7 +1160,7 @@ public final class AbilityFactoryChangeZone {
             }
         } else if (!origin.contains(ZoneType.Library) && !origin.contains(ZoneType.Hand)
                 && !params.containsKey("DefinedPlayer")) {
-            fetchList = GameState.getCardsIn(origin);
+            fetchList = Singletons.getModel().getGameState().getCardsIn(origin);
             fetchList = AbilityFactory.filterListByType(fetchList, type, sa);
         } else {
             fetchList = player.getCardsIn(origin);
@@ -1461,11 +1460,11 @@ public final class AbilityFactoryChangeZone {
         Card card = null;
         Combat combat = new Combat();
         combat.initiatePossibleDefenders(ai);
-        List<Card> attackers = GameState.getCreaturesInPlay(ai.getOpponent());
+        List<Card> attackers = ai.getOpponent().getCreaturesInPlay();
         for (Card att : attackers) {
             combat.addAttacker(att);
         }
-        combat = ComputerUtilBlock.getBlockers(ai, combat, GameState.getCreaturesInPlay(ai));
+        combat = ComputerUtilBlock.getBlockers(ai, combat, ai.getCreaturesInPlay());
 
         if (CombatUtil.lifeInDanger(ai, combat)) {
             // need something AI can cast now
@@ -1665,7 +1664,7 @@ public final class AbilityFactoryChangeZone {
             tgt.resetTargets();
         }
 
-        List<Card> list = GameState.getCardsIn(origin);
+        List<Card> list = Singletons.getModel().getGameState().getCardsIn(origin);
         list = CardLists.getValidCards(list, tgt.getValidTgts(), ai, source);
         if (params.containsKey("AITgts")) {
             list = CardLists.getValidCards(list, params.get("AITgts"), sa.getActivatingPlayer(), source);
@@ -1775,7 +1774,7 @@ public final class AbilityFactoryChangeZone {
             if (!sa.isTrigger() && sa.getPayCosts() != null
                     && Singletons.getModel().getGameState().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                     && Singletons.getModel().getGameState().getPhaseHandler().isPlayerTurn(ai)
-                    && GameState.getCreaturesInPlay(ai).isEmpty()) {
+                    && ai.getCreaturesInPlay().isEmpty()) {
                 return false;
             }
             list = CardLists.filterControlledBy(list, ai.getOpponent());
@@ -1900,7 +1899,7 @@ public final class AbilityFactoryChangeZone {
         final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));
         final Target tgt = sa.getTarget();
 
-        List<Card> list = GameState.getCardsIn(origin);
+        List<Card> list = Singletons.getModel().getGameState().getCardsIn(origin);
         list = CardLists.getValidCards(list, tgt.getValidTgts(), ai, source);
 
         // Narrow down the list:
@@ -2235,7 +2234,7 @@ public final class AbilityFactoryChangeZone {
                         && !GameActionUtil.showYesNoDialog(hostCard, sb.toString())) {
                     continue;
                 }
-                final PlayerZone originZone = GameState.getZoneOf(tgtC);
+                final PlayerZone originZone = Singletons.getModel().getGameState().getZoneOf(tgtC);
 
                 // if Target isn't in the expected Zone, continue
 
@@ -2348,7 +2347,7 @@ public final class AbilityFactoryChangeZone {
         final ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(), defined, sa);
 
         for (final Card c : list) {
-            final Card actualCard = GameState.getCardState(c);
+            final Card actualCard = Singletons.getModel().getGameState().getCardState(c);
             ret.add(actualCard);
         }
         return ret;
@@ -2926,7 +2925,7 @@ public final class AbilityFactoryChangeZone {
         }
 
         if ((tgtPlayers == null) || tgtPlayers.isEmpty()) {
-            cards = GameState.getCardsIn(origin);
+            cards = Singletons.getModel().getGameState().getCardsIn(origin);
         } else {
             cards = tgtPlayers.get(0).getCardsIn(origin);
         }
@@ -2971,7 +2970,7 @@ public final class AbilityFactoryChangeZone {
             }
 
             if (remember != null) {
-                GameState.getCardState(sa.getSourceCard()).addRemembered(c);
+                Singletons.getModel().getGameState().getCardState(sa.getSourceCard()).addRemembered(c);
             }
         }
 

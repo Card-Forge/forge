@@ -4,7 +4,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import forge.Command;
-import forge.game.GameState;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SDisplayUtil;
@@ -35,10 +34,6 @@ public enum CStack implements ICDoc, Observer {
     public void initialize() {
     }
 
-    public void subscribe(GameState currentGame) {
-        currentGame.getStack().addObserver(this);
-    }
-    
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#update()
      */

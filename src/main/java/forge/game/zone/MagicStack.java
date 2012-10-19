@@ -28,6 +28,7 @@ import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
+import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.GameActionUtil;
@@ -49,7 +50,6 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCostAbility;
-import forge.game.GameState;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -276,7 +276,7 @@ public class MagicStack extends MyObservable {
      * 
      * @return a boolean.
      */
-    public final boolean getResolving() {
+    public final boolean isResolving() {
         return this.bResolving;
     }
 
@@ -514,7 +514,7 @@ public class MagicStack extends MyObservable {
                     public void execute() {
                         ability.resolve();
                         final Card crd = sa.getSourceCard();
-                        AllZone.getInputControl().setInput(
+                        Singletons.getModel().getMatch().getInput().setInput(
                                 new InputPayManaCostAbility("Pay X cost for " + crd.getName() + " (X="
                                         + crd.getXManaCostPaid() + ")\r\n", ability.getManaCost(), this, unpaidCommand,
                                         true));
@@ -524,7 +524,7 @@ public class MagicStack extends MyObservable {
                 final Card crd = sa.getSourceCard();
                 Player player = sp.getSourceCard().getController();
                 if (player.isHuman()) {
-                    AllZone.getInputControl().setInput(
+                    Singletons.getModel().getMatch().getInput().setInput(
                             new InputPayManaCostAbility("Pay X cost for " + sp.getSourceCard().getName() + " (X="
                                     + crd.getXManaCostPaid() + ")\r\n", ability.getManaCost(), paidCommand,
                                     unpaidCommand, true));
@@ -573,12 +573,12 @@ public class MagicStack extends MyObservable {
                                     && Singletons.getModel().getGameAction().getCostCuttingGetMultiKickerManaCostPaidColored()
                                             .equals("")) {
 
-                                AllZone.getInputControl().setInput(
+                                Singletons.getModel().getMatch().getInput().setInput(
                                         new InputPayManaCostAbility("Multikicker for " + sa.getSourceCard() + "\r\n"
                                                 + "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude()
                                                 + "\r\n", manaCost.toString(), this, unpaidCommand));
                             } else {
-                                AllZone.getInputControl()
+                                Singletons.getModel().getMatch().getInput()
                                         .setInput(
                                                 new InputPayManaCostAbility(
                                                         "Multikicker for "
@@ -609,12 +609,12 @@ public class MagicStack extends MyObservable {
                     } else {
                         if ((Singletons.getModel().getGameAction().getCostCuttingGetMultiKickerManaCostPaid() == 0)
                                 && Singletons.getModel().getGameAction().getCostCuttingGetMultiKickerManaCostPaidColored().equals("")) {
-                            AllZone.getInputControl().setInput(
+                            Singletons.getModel().getMatch().getInput().setInput(
                                     new InputPayManaCostAbility("Multikicker for " + sa.getSourceCard() + "\r\n"
                                             + "Times Kicked: " + sa.getSourceCard().getMultiKickerMagnitude() + "\r\n",
                                             manaCost.toString(), paidCommand, unpaidCommand));
                         } else {
-                            AllZone.getInputControl().setInput(
+                            Singletons.getModel().getMatch().getInput().setInput(
                                     new InputPayManaCostAbility(
                                             "Multikicker for "
                                                     + sa.getSourceCard()
@@ -675,7 +675,7 @@ public class MagicStack extends MyObservable {
                             this.execute();
                         } else {
 
-                            AllZone.getInputControl().setInput(
+                            Singletons.getModel().getMatch().getInput().setInput(
                                     new InputPayManaCostAbility("Replicate for " + sa.getSourceCard() + "\r\n"
                                             + "Times Replicated: " + sa.getSourceCard().getReplicateMagnitude()
                                             + "\r\n", manaCost.toString(), this, unpaidCommand));
@@ -690,7 +690,7 @@ public class MagicStack extends MyObservable {
                     if (manaCost.isPaid()) {
                         paidCommand.execute();
                     } else {
-                        AllZone.getInputControl().setInput(
+                        Singletons.getModel().getMatch().getInput().setInput(
                                 new InputPayManaCostAbility("Replicate for " + sa.getSourceCard() + "\r\n"
                                         + "Times Replicated: " + sa.getSourceCard().getReplicateMagnitude() + "\r\n",
                                         manaCost.toString(), paidCommand, unpaidCommand));
@@ -775,11 +775,11 @@ public class MagicStack extends MyObservable {
          * name is in a graveyard or a nontoken permanent with the same name is
          * on the battlefield.
          */
-        if (sp.isSpell() && GameState.isCardInPlay("Bazaar of Wonders")) {
+        if (sp.isSpell() && Singletons.getModel().getGameState().isCardInPlay("Bazaar of Wonders")) {
             boolean found = false;
-            List<Card> all = GameState.getCardsIn(ZoneType.Battlefield);
+            List<Card> all = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
             all = CardLists.filter(all, Presets.NON_TOKEN);
-            final List<Card> graves = GameState.getCardsIn(ZoneType.Graveyard);
+            final List<Card> graves = Singletons.getModel().getGameState().getCardsIn(ZoneType.Graveyard);
             all.addAll(graves);
 
             for (final Card c : all) {
@@ -789,7 +789,7 @@ public class MagicStack extends MyObservable {
             }
 
             if (found) {
-                final List<Card> bazaars = GameState.getCardsIn(ZoneType.Battlefield, "Bazaar of Wonders"); // should
+                final List<Card> bazaars = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Bazaar of Wonders")); // should
                 // only
                 // be
                 // 1...
@@ -911,8 +911,8 @@ public class MagicStack extends MyObservable {
         sa.getSourceCard().setXManaCostPaid(0);
 
         if (source.hasStartOfKeyword("Haunt") && !source.isCreature()
-                && GameState.getZoneOf(source).is(ZoneType.Graveyard)) {
-            final List<Card> creats = GameState.getCreaturesInPlay();
+                && Singletons.getModel().getGameState().getZoneOf(source).is(ZoneType.Graveyard)) {
+            final List<Card> creats = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
             final Ability haunterDiesWork = new Ability(source, "0") {
                 @Override
                 public void resolve() {
@@ -954,7 +954,7 @@ public class MagicStack extends MyObservable {
                 };
 
                 if (source.getController().isHuman()) {
-                    AllZone.getInputControl().setInput(target);
+                    Singletons.getModel().getMatch().getInput().setInput(target);
                 } else {
                     // AI choosing what to haunt
                     final List<Card> oppCreats = CardLists.filterControlledBy(creats, source.getController().getOpponent());
@@ -994,7 +994,7 @@ public class MagicStack extends MyObservable {
             sa.setFlashBackAbility(false);
         } else if (source.hasKeyword("Rebound")
                 && source.getCastFrom() == ZoneType.Hand
-                && GameState.getZoneOf(source).is(ZoneType.Stack)
+                && Singletons.getModel().getGameState().getZoneOf(source).is(ZoneType.Stack)
                 && source.getOwner().equals(source.getController())) //"If you cast this spell from your hand"
         {
             
@@ -1058,7 +1058,7 @@ public class MagicStack extends MyObservable {
         final Card tmp = sa.getSourceCard();
         tmp.setCanCounter(true); // reset mana pumped counter magic flag
         if (tmp.getClones().size() > 0) {
-            for (final Card c : GameState.getCardsIn(ZoneType.Battlefield)) {
+            for (final Card c : Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield)) {
                 if (c.equals(tmp)) {
                     c.setClones(tmp.getClones());
                 }
@@ -1106,7 +1106,7 @@ public class MagicStack extends MyObservable {
                     }
                     else if (o instanceof Card) {
                         final Card card = (Card) o;
-                        Card current = GameState.getCardState(card);
+                        Card current = Singletons.getModel().getGameState().getCardState(card);
                         
                         invalidTarget = current.getTimestamp() != card.getTimestamp();
                         
@@ -1471,7 +1471,7 @@ public class MagicStack extends MyObservable {
      * @return true, if is resolving
      */
     public final boolean isResolving(Card c) {
-        if (!this.getResolving() || this.curResolvingCard == null) {
+        if (!this.isResolving() || this.curResolvingCard == null) {
             return false;
         }
 

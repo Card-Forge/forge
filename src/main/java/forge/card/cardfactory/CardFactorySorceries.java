@@ -31,7 +31,6 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -49,7 +48,6 @@ import forge.card.spellability.Target;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCost;
 import forge.control.input.InputPayManaCostAbility;
-import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.player.PlayerUtil;
@@ -262,15 +260,15 @@ public class CardFactorySorceries {
             public boolean canPlayAI() {
                 final Player ai = getActivatingPlayer();
                 final Player opp = ai.getOpponent();
-                List<Card> humTokenCreats = CardLists.filter(GameState.getCreaturesInPlay(opp), Presets.TOKEN);
-                List<Card> compTokenCreats = CardLists.filter(GameState.getCreaturesInPlay(ai), Presets.TOKEN);
+                List<Card> humTokenCreats = CardLists.filter(opp.getCreaturesInPlay(), Presets.TOKEN);
+                List<Card> compTokenCreats = CardLists.filter(ai.getCreaturesInPlay(), Presets.TOKEN);
 
                 return compTokenCreats.size() > humTokenCreats.size();
             } // canPlayAI()
 
             @Override
             public void resolve() {
-                List<Card> tokens = GameState.getCreaturesInPlay();
+                List<Card> tokens = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
                 tokens = CardLists.filter(tokens, Presets.TOKEN);
 
                 CardFactoryUtil.copyTokens(tokens);
@@ -318,7 +316,7 @@ public class CardFactorySorceries {
                 // Vector<?> computerBasic = new Vector();
 
                 // figure out which basic land types the computer has
-                List<Card> land = GameState.getPlayerLandsInPlay(Singletons.getControl().getPlayer().getOpponent());
+                List<Card> land = Singletons.getControl().getPlayer().getOpponent().getLandsInPlay();
 
                 for (final String element : Constant.Color.BASIC_LANDS) {
                     final List<Card> cl = CardLists.getType(land, element);
@@ -353,7 +351,7 @@ public class CardFactorySorceries {
                 // when this spell resolves all basic lands which were not
                 // selected are sacrificed.
                 for (int i = 0; i < target.size(); i++) {
-                    if (GameState.isCardInPlay(target.get(i)) && !saveList.contains(target.get(i))) {
+                    if (target.get(i).isInPlay() && !saveList.contains(target.get(i))) {
                         Singletons.getModel().getGameAction().sacrifice(target.get(i), this);
                     }
                 }
@@ -402,7 +400,7 @@ public class CardFactorySorceries {
                 /* && !saveList.contains(c) */) {
                     // get all other basic[count] lands human player
                     // controls and add them to target
-                    List<Card> land = GameState.getPlayerLandsInPlay(c.getController());
+                    List<Card> land = c.getController().getLandsInPlay();
                     List<Card> cl = CardLists.getType(land, humanBasic.get(this.count));
                     cl = CardLists.filter(cl, new Predicate<Card>() {
                         @Override
@@ -576,7 +574,7 @@ public class CardFactorySorceries {
         List<List<Card>> lands = new ArrayList<List<Card>>();
         for (Player p : Singletons.getModel().getGameState().getPlayers())
         {
-            lands.add(GameState.getPlayerLandsInPlay(p));
+            lands.add(p.getLandsInPlay());
         }
         
         int min = Integer.MAX_VALUE;
@@ -596,7 +594,7 @@ public class CardFactorySorceries {
                     Singletons.getModel().getGameAction().sacrifice(l.get(i), card);
                 }                        
             } else {
-                AllZone.getInputControl().setInput(PlayerUtil.inputSacrificePermanents(sac, "Land"));
+                Singletons.getModel().getMatch().getInput().setInput(PlayerUtil.inputSacrificePermanents(sac, "Land"));
             }
         }        
     }
@@ -626,7 +624,7 @@ public class CardFactorySorceries {
         List<List<Card>> creats = new ArrayList<List<Card>>();
         for (Player p : Singletons.getModel().getGameState().getPlayers())
         {
-            creats.add(GameState.getCreaturesInPlay(p));
+            creats.add(p.getCreaturesInPlay());
         }
         int min = Integer.MAX_VALUE;
         for(List<Card> h : creats) {
@@ -647,7 +645,7 @@ public class CardFactorySorceries {
                     Singletons.getModel().getGameAction().sacrifice(c.get(i), card);
                 }
             } else {
-                AllZone.getInputControl().setInput(PlayerUtil.inputSacrificePermanents(sac, "Creature"));
+                Singletons.getModel().getMatch().getInput().setInput(PlayerUtil.inputSacrificePermanents(sac, "Creature"));
             }
         }
     }
@@ -668,12 +666,12 @@ public class CardFactorySorceries {
                 int diff = 0;
                 final Player ai = getActivatingPlayer();
                 final Player opp = ai.getOpponent();
-                final List<Card> humLand = GameState.getPlayerLandsInPlay(opp);
-                final List<Card> compLand = GameState.getPlayerLandsInPlay(ai);
+                final List<Card> humLand = opp.getLandsInPlay();
+                final List<Card> compLand = ai.getLandsInPlay();
                 diff += humLand.size() - compLand.size();
 
-                final List<Card> humCreats = GameState.getCreaturesInPlay(opp);
-                List<Card> compCreats = GameState.getCreaturesInPlay(ai);
+                final List<Card> humCreats = opp.getCreaturesInPlay();
+                List<Card> compCreats = ai.getCreaturesInPlay();
                 compCreats = CardLists.filter(compCreats, CardPredicates.Presets.CREATURES);
                 diff += 1.5 * (humCreats.size() - compCreats.size());
 
@@ -826,7 +824,7 @@ public class CardFactorySorceries {
                     }
                 }
 
-                List<Card> bidded = CardLists.filter(GameState.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
+                List<Card> bidded = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
                 for (final Card c : bidded) {
                     for(int i = 0; i < types.size(); i++) {
                         if (c.isType(types.get(i))) {
@@ -988,7 +986,7 @@ public class CardFactorySorceries {
                     if (card.getChoice(i).equals(cardChoice[2])) {
                         final Card c = ab2card[0];
                         if (c != null) {
-                            if (GameState.isCardInPlay(c) && c.canBeTargetedBy(this)) {
+                            if (c.isInPlay() && c.canBeTargetedBy(this)) {
                                 final int boost = x[0] * -1;
                                 c.addTempAttackBoost(boost);
                                 c.addTempDefenseBoost(boost);
@@ -997,7 +995,7 @@ public class CardFactorySorceries {
 
                                     @Override
                                     public void execute() {
-                                        if (GameState.isCardInPlay(c)) {
+                                        if (c.isInPlay()) {
                                             c.addTempAttackBoost(-1 * boost);
                                             c.addTempDefenseBoost(-1 * boost);
 
@@ -1015,14 +1013,14 @@ public class CardFactorySorceries {
                     final ArrayList<Card> cs = new ArrayList<Card>();
                     cs.addAll(ab3cards);
                     for (final Card c : cs) {
-                        if (GameState.isCardInPlay(c) && c.canBeTargetedBy(this)) {
+                        if (c.isInPlay() && c.canBeTargetedBy(this)) {
                             c.addExtrinsicKeyword("Fear");
                             final Command untilEOT = new Command() {
                                 private static final long serialVersionUID = 986259855862338866L;
 
                                 @Override
                                 public void execute() {
-                                    if (GameState.isCardInPlay(c)) {
+                                    if (c.isInPlay()) {
                                         c.removeExtrinsicKeyword("Fear");
                                     }
                                 }
@@ -1302,7 +1300,7 @@ public class CardFactorySorceries {
                     final ArrayList<String> display = new ArrayList<String>();
 
                     // get all
-                    final List<Card> creatures = GameState.getCreaturesInPlay();
+                    final List<Card> creatures = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
                     List<Card> grave = card.getController().getCardsIn(ZoneType.Graveyard);
                     grave = CardLists.filter(grave, Presets.CREATURES);
 
@@ -1415,7 +1413,7 @@ public class CardFactorySorceries {
                     Singletons.getModel().getGameAction().moveToPlay(newArtifact[0]);
                 } else {
                     final String diffCost = String.valueOf(newCMC - baseCMC);
-                    AllZone.getInputControl().setInput(new InputPayManaCostAbility(diffCost, new Command() {
+                    Singletons.getModel().getMatch().getInput().setInput(new InputPayManaCostAbility(diffCost, new Command() {
                         private static final long serialVersionUID = -8729850321341068049L;
 
                         @Override

@@ -22,10 +22,10 @@ import java.util.List;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
+import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Counters;
 import forge.GameActionUtil;
@@ -33,7 +33,6 @@ import forge.GameEntity;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.control.input.Input;
-import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -87,7 +86,7 @@ public class Untap extends Phase implements java.io.Serializable {
             return false;
         }
 
-        final List<Card> allp = GameState.getCardsIn(ZoneType.Battlefield);
+        final List<Card> allp = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
         for (final Card ca : allp) {
             if (ca.hasStartOfKeyword("Permanents don't untap during their controllers' untap steps")) {
                 final int keywordPosition = ca
@@ -131,12 +130,11 @@ public class Untap extends Phase implements java.io.Serializable {
                 if (Untap.canOnlyUntapOneLand() && c.isLand()) {
                     return false;
                 }
-                if ((GameState.isCardInPlay("Damping Field") || GameState.isCardInPlay("Imi Statue"))
+                if ((Singletons.getModel().getGameState().isCardInPlay("Damping Field") || Singletons.getModel().getGameState().isCardInPlay("Imi Statue"))
                         && c.isArtifact()) {
                     return false;
                 }
-                if ((GameState.isCardInPlay("Smoke") || GameState.isCardInPlay("Stoic Angel") || GameState
-                        .isCardInPlay("Intruder Alarm")) && c.isCreature()) {
+                if ((Singletons.getModel().getGameState().isCardInPlay("Smoke") || Singletons.getModel().getGameState().isCardInPlay("Stoic Angel") || Singletons.getModel().getGameState().isCardInPlay("Intruder Alarm")) && c.isCreature()) {
                     return false;
                 }
                 return true;
@@ -154,7 +152,7 @@ public class Untap extends Phase implements java.io.Serializable {
                             prompt += "\r\n" + c + " is controlling: ";
                             for (final Card target : targets) {
                                 prompt += target;
-                                if (GameState.isCardInPlay(target)) {
+                                if (target.isInPlay()) {
                                     defaultChoice = false;
                                 }
                             }
@@ -170,7 +168,7 @@ public class Untap extends Phase implements java.io.Serializable {
                             final ArrayList<Card> targets = c.getGainControlTargets();
                             boolean untap = true;
                             for (final Card target : targets) {
-                                if (GameState.isCardInPlay(target)) {
+                                if (target.isInPlay()) {
                                     untap |= true;
                                 }
                             }
@@ -180,7 +178,7 @@ public class Untap extends Phase implements java.io.Serializable {
                         }
                     }
                 }
-            } else if ((c.getCounters(Counters.WIND) > 0) && GameState.isCardInPlay("Freyalise's Winds")) {
+            } else if ((c.getCounters(Counters.WIND) > 0) && Singletons.getModel().getGameState().isCardInPlay("Freyalise's Winds")) {
                 // remove a WIND counter instead of untapping
                 c.subtractCounter(Counters.WIND, 1);
             } else {
@@ -200,7 +198,7 @@ public class Untap extends Phase implements java.io.Serializable {
         if (Untap.canOnlyUntapOneLand()) {
             if (player.isComputer()) {
                 // search for lands the computer has and only untap 1
-                List<Card> landList = GameState.getPlayerLandsInPlay(player);
+                List<Card> landList = player.getLandsInPlay();
  
                 landList = CardLists.filter(landList, tappedCanUntap);
                 if (landList.size() > 0) {
@@ -229,14 +227,14 @@ public class Untap extends Phase implements java.io.Serializable {
                         }
                     } // selectCard()
                 }; // Input
-                List<Card> landList = GameState.getPlayerLandsInPlay(player);
+                List<Card> landList = player.getLandsInPlay();
                 landList = CardLists.filter(landList, tappedCanUntap);
                 if (landList.size() > 0) {
-                    AllZone.getInputControl().setInput(target);
+                    Singletons.getModel().getMatch().getInput().setInput(target);
                 }
             }
         }
-        if (GameState.isCardInPlay("Damping Field") || GameState.isCardInPlay("Imi Statue")) {
+        if (Singletons.getModel().getGameState().isCardInPlay("Damping Field") || Singletons.getModel().getGameState().isCardInPlay("Imi Statue")) {
             final Player turnOwner = Singletons.getModel().getGameState().getPhaseHandler().getPlayerTurn(); 
             if (turnOwner.isComputer()) {
                 List<Card> artList = turnOwner.getCardsIn(ZoneType.Battlefield);
@@ -273,13 +271,13 @@ public class Untap extends Phase implements java.io.Serializable {
                 artList = CardLists.filter(artList, Presets.ARTIFACTS);
                 artList = CardLists.filter(artList, tappedCanUntap);
                 if (artList.size() > 0) {
-                    AllZone.getInputControl().setInput(target);
+                    Singletons.getModel().getMatch().getInput().setInput(target);
                 }
             }
         }
-        if ((GameState.isCardInPlay("Smoke") || GameState.isCardInPlay("Stoic Angel"))) {
+        if ((Singletons.getModel().getGameState().isCardInPlay("Smoke") || Singletons.getModel().getGameState().isCardInPlay("Stoic Angel"))) {
             if (player.isComputer()) {
-                List<Card> creatures = GameState.getCreaturesInPlay(player);
+                List<Card> creatures = player.getCreaturesInPlay();
                 creatures = CardLists.filter(creatures, tappedCanUntap);
                 if (creatures.size() > 0) {
                     creatures.get(0).untap();
@@ -308,10 +306,10 @@ public class Untap extends Phase implements java.io.Serializable {
                         }
                     } // selectCard()
                 }; // Input
-                List<Card> creatures = GameState.getCreaturesInPlay(player);
+                List<Card> creatures = player.getCreaturesInPlay();
                 creatures = CardLists.filter(creatures, tappedCanUntap);
                 if (creatures.size() > 0) {
-                    AllZone.getInputControl().setInput(target);
+                    Singletons.getModel().getMatch().getInput().setInput(target);
                 }
             }
         }
@@ -331,7 +329,7 @@ public class Untap extends Phase implements java.io.Serializable {
     private static boolean canOnlyUntapOneLand() {
         // Winter Orb was given errata so it no longer matters if it's tapped or
         // not
-        if (GameState.getCardsIn(ZoneType.Battlefield, "Winter Orb").size() > 0) {
+        if (CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Winter Orb")).size() > 0) {
             return true;
         }
 

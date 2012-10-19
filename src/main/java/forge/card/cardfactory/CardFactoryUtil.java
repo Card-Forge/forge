@@ -31,7 +31,6 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.AllZone;
 import forge.Card;
 import forge.CardCharacteristicName;
 
@@ -68,7 +67,6 @@ import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCost;
 import forge.control.input.InputPayManaCostUtil;
-import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
@@ -864,7 +862,7 @@ public class CardFactoryUtil {
             public boolean canPlay() {
                 //Lands do not have SpellPermanents.
                 if (sourceCard.isLand()) {
-                    return (GameState.getZoneOf(sourceCard).is(ZoneType.Hand) || sourceCard.hasKeyword("May be played"))
+                    return (Singletons.getModel().getGameState().getZoneOf(sourceCard).is(ZoneType.Hand) || sourceCard.hasKeyword("May be played"))
                             && PhaseHandler.canCastSorcery(sourceCard.getController());
                 }
                 else {
@@ -917,7 +915,7 @@ public class CardFactoryUtil {
             @Override
             public boolean canPlay() {
                 return sourceCard.getController().equals(this.getActivatingPlayer()) && sourceCard.isFaceDown()
-                        && GameState.isCardInPlay(sourceCard);
+                        && sourceCard.isInPlay();
             }
 
         }; // morph_up
@@ -1271,7 +1269,6 @@ public class CardFactoryUtil {
                 } else if (choices.contains(card)) {
                     spell.setTargetCard(card);
                     if (spell.getManaCost().equals("0") || free) {
-                        this.setFree(false);
                         Singletons.getModel().getGameState().getStack().add(spell);
                         this.stop();
                     } else {
@@ -1571,7 +1568,7 @@ public class CardFactoryUtil {
      */
     public static boolean isTargetStillValid(final SpellAbility ability, final Card target) {
 
-        if (GameState.getZoneOf(target) == null) {
+        if (Singletons.getModel().getGameState().getZoneOf(target) == null) {
             return false; // for tokens that disappeared
         }
 
@@ -1587,7 +1584,7 @@ public class CardFactoryUtil {
 
             // Check if the target is in the zone it needs to be in to be
             // targeted
-            if (!GameState.getZoneOf(target).is(tgt.getZone())) {
+            if (!Singletons.getModel().getGameState().getZoneOf(target).is(tgt.getZone())) {
                 return false;
             }
         } else {
@@ -1849,7 +1846,7 @@ public class CardFactoryUtil {
         if (l[0].contains("Valid")) {
             final String restrictions = l[0].replace("Valid ", "");
             final String[] rest = restrictions.split(",");
-            List<Card> cardsonbattlefield = GameState.getCardsIn(ZoneType.Battlefield);
+            List<Card> cardsonbattlefield = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
             cardsonbattlefield = CardLists.getValidCards(cardsonbattlefield, rest, players.get(0), source);
 
             n = cardsonbattlefield.size();
@@ -1899,7 +1896,7 @@ public class CardFactoryUtil {
 
         if (sq[0].contains("CreaturesInPlay")) {
             if (players.size() > 0) {
-                return CardFactoryUtil.doXMath(GameState.getCreaturesInPlay(players.get(0)).size(), m, source);
+                return CardFactoryUtil.doXMath(players.get(0).getCreaturesInPlay().size(), m, source);
             }
         }
 
@@ -2057,7 +2054,7 @@ public class CardFactoryUtil {
             String restrictions = l[0].replace("ValidGrave ", "");
             restrictions = restrictions.replace("Count$", "");
             final String[] rest = restrictions.split(",");
-            List<Card> cards = GameState.getCardsIn(ZoneType.Graveyard);
+            List<Card> cards = Singletons.getModel().getGameState().getCardsIn(ZoneType.Graveyard);
             cards = CardLists.getValidCards(cards, rest, cardController, c);
 
             n = cards.size();
@@ -2069,7 +2066,7 @@ public class CardFactoryUtil {
             String restrictions = l[0].replace("Valid ", "");
             restrictions = restrictions.replace("Count$", "");
             final String[] rest = restrictions.split(",");
-            List<Card> cardsonbattlefield = GameState.getCardsIn(ZoneType.Battlefield);
+            List<Card> cardsonbattlefield = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
             cardsonbattlefield = CardLists.getValidCards(cardsonbattlefield, rest, cardController, c);
 
             n = cardsonbattlefield.size();
@@ -2096,7 +2093,7 @@ public class CardFactoryUtil {
         }
 
         if (l[0].contains("GreatestPowerYouControl")) {
-            final List<Card> list = GameState.getCreaturesInPlay(c.getController());
+            final List<Card> list = c.getController().getCreaturesInPlay();
             int highest = 0;
             for (final Card crd : list) {
                 if (crd.getNetAttack() > highest) {
@@ -2107,7 +2104,7 @@ public class CardFactoryUtil {
         }
 
         if (l[0].contains("GreatestPowerYouDontControl")) {
-            final List<Card> list = GameState.getCreaturesInPlay(c.getController().getOpponent());
+            final List<Card> list = c.getController().getOpponent().getCreaturesInPlay();
             int highest = 0;
             for (final Card crd : list) {
                 if (crd.getNetAttack() > highest) {
@@ -2122,7 +2119,7 @@ public class CardFactoryUtil {
             int highest = 0;
             for (final Object o : c.getRemembered()) {
                 if (o instanceof Card) {
-                    list.add(GameState.getCardState((Card) o));
+                    list.add(Singletons.getModel().getGameState().getCardState((Card) o));
                 }
             }
             for (final Card crd : list) {
@@ -2137,7 +2134,7 @@ public class CardFactoryUtil {
             final List<Card> list = new ArrayList<Card>();
             for (final Object o : c.getRemembered()) {
                 if (o instanceof Card) {
-                    list.add(GameState.getCardState((Card) o));
+                    list.add(Singletons.getModel().getGameState().getCardState((Card) o));
                 }
             }
             return Aggregates.sum(Iterables.filter(list, CardPredicates.Presets.hasSecondStrike), CardPredicates.Accessors.fnGetAttack);
@@ -2450,7 +2447,7 @@ public class CardFactoryUtil {
         if (sq[0].contains("SumPower")) {
             final String[] restrictions = l[0].split("_");
             final String[] rest = restrictions[1].split(",");
-            List<Card> cardsonbattlefield = GameState.getCardsIn(ZoneType.Battlefield);
+            List<Card> cardsonbattlefield = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
             List<Card> filteredCards = CardLists.getValidCards(cardsonbattlefield, rest, cardController, c);
             int sumPower = 0;
             for (int i = 0; i < filteredCards.size(); i++) {
@@ -2470,7 +2467,7 @@ public class CardFactoryUtil {
         if (sq[0].contains("SumCMC")) {
             final String[] restrictions = l[0].split("_");
             final String[] rest = restrictions[1].split(",");
-            List<Card> cardsonbattlefield = GameState.getCardsIn(ZoneType.Battlefield);
+            List<Card> cardsonbattlefield = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
             List<Card> filteredCards = CardLists.getValidCards(cardsonbattlefield, rest, cardController, c);
             return CardLists.sumCMC(filteredCards);
         }
@@ -2491,7 +2488,7 @@ public class CardFactoryUtil {
             final String[] restrictions = l[0].split("_");
             final Counters cType = Counters.getType(restrictions[1]);
             final String[] validFilter = restrictions[2].split(",");
-            List<Card> validCards = GameState.getCardsIn(ZoneType.Battlefield);
+            List<Card> validCards = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
             validCards = CardLists.getValidCards(validCards, validFilter, cardController, c);
             int cCount = 0;
             for (final Card card : validCards) {
@@ -2520,9 +2517,9 @@ public class CardFactoryUtil {
 
         // Count$M12Empires.<numIf>.<numIfNot>
         if (sq[0].contains("AllM12Empires")) {
-            boolean has = GameState.isCardInPlay("Crown of Empires", c.getController());
-            has &= GameState.isCardInPlay("Scepter of Empires", c.getController());
-            has &= GameState.isCardInPlay("Throne of Empires", c.getController());
+            boolean has = c.getController().isCardInPlay("Crown of Empires");
+            has &= c.getController().isCardInPlay("Scepter of Empires");
+            has &= c.getController().isCardInPlay("Throne of Empires");
             if (has) {
                 return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c);
             } else {
@@ -2664,7 +2661,7 @@ public class CardFactoryUtil {
         }
 
         if (sq[0].contains("SpellsOnStack")) {
-            someCards.addAll(GameState.getCardsIn(ZoneType.Stack));
+            someCards.addAll(Singletons.getModel().getGameState().getCardsIn(ZoneType.Stack));
         }
 
         if (sq[0].contains("InAllHands")) {
@@ -3248,7 +3245,7 @@ public class CardFactoryUtil {
         c.setBaseAttack(baseAttack);
         c.setBaseDefense(baseDefense);
 
-        final int multiplier = GameState.getTokenDoublersMagnitude(controller);
+        final int multiplier = controller.getTokenDoublersMagnitude();
         for (int i = 0; i < multiplier; i++) {
             Card temp = CardFactoryUtil.copyStats(c);
 
@@ -3336,7 +3333,7 @@ public class CardFactoryUtil {
 
                             @Override
                             public void execute() {
-                                if (GameState.isCardInPlay(crd)) {
+                                if (crd.isInPlay()) {
                                     crd.addTempAttackBoost(-1 * magnitude);
                                     crd.addTempDefenseBoost(-1 * magnitude);
                                 }
@@ -3400,7 +3397,7 @@ public class CardFactoryUtil {
      * @return the worst land found based on the description above
      */
     public static Card getWorstLand(final Player player) {
-        final List<Card> lands = GameState.getPlayerLandsInPlay(player);
+        final List<Card> lands = player.getLandsInPlay();
         return CardFactoryUtil.getWorstLand(lands);
     } // end getWorstLand
 
@@ -4020,7 +4017,7 @@ public class CardFactoryUtil {
             final Ability haunterDiesSetup = new Ability(card, "0") {
                 @Override
                 public void resolve() {
-                    final List<Card> creats = GameState.getCreaturesInPlay();
+                    final List<Card> creats = CardLists.filter(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
                     for (int i = 0; i < creats.size(); i++) {
                         if (!creats.get(i).canBeTargetedBy(this)) {
                             creats.remove(i);
@@ -4034,7 +4031,7 @@ public class CardFactoryUtil {
                     // need to do it this way because I don't know quite how to
                     // make TriggerHandler respect BeforePayMana.
                     if (card.getController().isHuman()) {
-                        AllZone.getInputControl().setInput(target);
+                        Singletons.getModel().getMatch().getInput().setInput(target);
                     } else {
                         // AI choosing what to haunt
                         final List<Card> oppCreats = CardLists.filterControlledBy(creats, card.getController().getOpponent());
@@ -4475,7 +4472,7 @@ public class CardFactoryUtil {
 
                 @Override
                 public void execute() {
-                    final List<Card> lands = GameState.getPlayerLandsInPlay(card.getController());
+                    final List<Card> lands = card.getController().getLandsInPlay();
                     lands.remove(card);
                     if (!(lands.size() <= 2)) {
                         // it enters the battlefield this way, and should not
@@ -4560,7 +4557,7 @@ public class CardFactoryUtil {
 
                 @Override
                 public void execute() {
-                    final List<Card> cardsInPlay = CardLists.getType(GameState.getCardsIn(ZoneType.Battlefield), "World");
+                    final List<Card> cardsInPlay = CardLists.getType(Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield), "World");
                     cardsInPlay.remove(card);
                     for (int i = 0; i < cardsInPlay.size(); i++) {
                         Singletons.getModel().getGameAction().sacrificeDestroy(cardsInPlay.get(i));
@@ -4647,7 +4644,7 @@ public class CardFactoryUtil {
 
                     @Override
                     public void execute() {
-                        final List<Card> creats = GameState.getCreaturesInPlay(card.getController());
+                        final List<Card> creats = card.getController().getCreaturesInPlay();
                         creats.remove(card);
                         // System.out.println("Creats size: " + creats.size());
 
@@ -4732,7 +4729,7 @@ public class CardFactoryUtil {
                                 }
                             }
                         } else {
-                            AllZone.getInputControl().setInput(CardFactoryUtil.modularInput(ability, card));
+                            Singletons.getModel().getMatch().getInput().setInput(CardFactoryUtil.modularInput(ability, card));
                         }
                     }
                 });

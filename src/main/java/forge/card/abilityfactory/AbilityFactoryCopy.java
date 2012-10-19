@@ -40,7 +40,6 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.GameState;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -307,7 +306,7 @@ public final class AbilityFactoryCopy {
         final Target abTgt = sa.getTarget();
 
         if (abTgt != null) {
-            List<Card> list = GameState.getCardsIn(ZoneType.Battlefield);
+            List<Card> list = Singletons.getModel().getGameState().getCardsIn(ZoneType.Battlefield);
             list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
             list = CardLists.getTargetableCards(list, sa);
             abTgt.resetTargets();
@@ -402,7 +401,7 @@ public final class AbilityFactoryCopy {
                 }
 
                 // start copied Kiki code
-                int multiplier = GameState.getTokenDoublersMagnitude(hostCard.getController());
+                int multiplier = hostCard.getController().getTokenDoublersMagnitude();
                 multiplier *= numCopies;
                 final Card[] crds = new Card[multiplier];
 
@@ -487,7 +486,7 @@ public final class AbilityFactoryCopy {
                         public void resolve() {
                             // technically your opponent could steal the token
                             // and the token shouldn't be sacrificed
-                            if (GameState.isCardInPlay(target[index])) {
+                            if (target[index].isInPlay()) {
                                 if (params.get("AtEOT").equals("Sacrifice")) {
                                     // maybe do a setSacrificeAtEOT, but
                                     // probably not.

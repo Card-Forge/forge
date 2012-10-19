@@ -17,9 +17,9 @@
  */
 package forge.control.input;
 
-import forge.AllZone;
 import forge.Card;
 import forge.Singletons;
+import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.gui.match.CMatchUI;
@@ -35,8 +35,6 @@ import forge.gui.match.CMatchUI;
 public abstract class Input implements java.io.Serializable {
     /** Constant <code>serialVersionUID=-6539552513871194081L</code>. */
     private static final long serialVersionUID = -6539552513871194081L;
-
-    private boolean isFree = false;
 
     // showMessage() is always the first method called
     /**
@@ -99,12 +97,13 @@ public abstract class Input implements java.io.Serializable {
      */
     public final void stop() {
         // clears a "temp" Input like Input_PayManaCost if there is one
-        AllZone.getInputControl().resetInput();
+        Singletons.getModel().getMatch().getInput().resetInput();
 
-        if (Singletons.getModel().getGameState().getPhaseHandler().isNeedToNextPhase()) {
+        PhaseHandler ph = Singletons.getModel().getGameState().getPhaseHandler(); 
+        if (ph.isNeedToNextPhase()) {
             // mulligan needs this to move onto next phase
-            Singletons.getModel().getGameState().getPhaseHandler().setNeedToNextPhase(false);
-            Singletons.getModel().getGameState().getPhaseHandler().nextPhase();
+            ph.setNeedToNextPhase(false);
+            ph.nextPhase();
         }
     }
 
@@ -119,7 +118,7 @@ public abstract class Input implements java.io.Serializable {
      */
     public final void stopSetNext(final Input in) {
         this.stop();
-        AllZone.getInputControl().setInput(in);
+        Singletons.getModel().getMatch().getInput().setInput(in);
     }
 
     /** {@inheritDoc} */
@@ -128,26 +127,5 @@ public abstract class Input implements java.io.Serializable {
         return "blank";
     } // returns the Input name like "EmptyStack"
 
-    /**
-     * <p>
-     * setFree.
-     * </p>
-     * 
-     * @param isFree
-     *            a boolean.
-     */
-    public void setFree(final boolean isFree) {
-        this.isFree = isFree;
-    }
 
-    /**
-     * <p>
-     * isFree.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public boolean isFree() {
-        return this.isFree;
-    }
 }
