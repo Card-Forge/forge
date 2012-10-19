@@ -31,6 +31,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostDamage;
 import forge.card.cost.CostDiscard;
+import forge.card.cost.CostExile;
 import forge.card.cost.CostPart;
 import forge.card.cost.CostPayLife;
 import forge.card.cost.CostMana;
@@ -427,6 +428,17 @@ public final class GameActionUtil {
                         hasPaid = false;
                         Singletons.getModel().getGameState().getGameLog().add("ResolveStack", "Trying to pay upkeep for " + source + " but it can't have "
                         + counterType.getName() + " counters put on it.", 2);
+                    }
+                } else {
+                    hasPaid = false;
+                }
+                remainingParts.remove(part);
+            }
+            if (part instanceof CostExile && "All".equals(part.getType())) {
+                Player p = Singletons.getControl().getPlayer();
+                if (showYesNoDialog(source, "Do you want to exile all cards in your graveyard?")) {
+                    for (final Card card : p.getCardsIn(ZoneType.Graveyard)) {
+                        Singletons.getModel().getGameAction().exile(card);
                     }
                 } else {
                     hasPaid = false;

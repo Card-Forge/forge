@@ -4217,6 +4217,7 @@ res/cardsfolder/g/grinding_station.txt svneol=native#text/plain
 res/cardsfolder/g/grindstone.txt svneol=native#text/plain
 res/cardsfolder/g/grinning_demon.txt svneol=native#text/plain
 res/cardsfolder/g/grinning_ignus.txt svneol=native#text/plain
+res/cardsfolder/g/grip_of_amnesia.txt -text
 res/cardsfolder/g/griptide.txt -text
 res/cardsfolder/g/griselbrand.txt -text
 res/cardsfolder/g/grisly_salvage.txt -text
