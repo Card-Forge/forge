@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import forge.AllZone;
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardUtil;
@@ -156,7 +155,7 @@ public class CardFactory implements CardFactoryInterface {
             final boolean bCopyDetails) {
         Player originalController = original.getController();
         Player controller = sa.getActivatingPlayer();
-        final Card c = AllZone.getCardFactory().copyCard(original);
+        final Card c = Singletons.getModel().getCardFactory().copyCard(original);
 
         // change the color of the copy (eg: Fork)
         // Currently won't work for abilities, only for spells

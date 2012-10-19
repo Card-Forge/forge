@@ -33,10 +33,13 @@ import forge.card.CardBlock;
 import forge.card.EditionCollection;
 import forge.card.FatPackData;
 import forge.card.FormatCollection;
+import forge.card.cardfactory.CardFactory;
+import forge.card.cardfactory.CardFactoryInterface;
 import forge.deck.CardCollections;
 import forge.error.ExceptionHandler;
 import forge.game.GameState;
 import forge.game.MatchController;
+import forge.game.limited.GauntletMini;
 import forge.game.player.LobbyPlayer;
 import forge.gauntlet.GauntletData;
 import forge.properties.ForgePreferences;
@@ -76,9 +79,14 @@ public enum FModel {
     private final ForgePreferences preferences;
     private GameState gameState;
     private GameAction gameAction;
+    // Someone should take care of 2 gauntlets here
     private GauntletData gauntletData;
+    private GauntletMini gauntlet;
     
-    private QuestController quest = null;
+    private final CardFactory cardFactory;
+    private final QuestController quest;
+    private final CardCollections decks;
+    
     private final MatchController match;
 
     private final EditionCollection editions;
@@ -89,8 +97,8 @@ public enum FModel {
     private final IStorageView<CardBlock> blocks;
     private final IStorageView<CardBlock> fantasyBlocks;
 
-    // Lazy, since CardDb not ready.
-    private CardCollections decks;
+
+
 
     /**
      * Constructor.
@@ -147,12 +155,14 @@ public enum FModel {
         
         this.setBuildInfo(new BuildInfo());
         this.loadDynamicGamedata();
+        
+        // Loads all cards (using progress bar).
+        this.cardFactory = new CardFactory(ForgeProps.getFile(NewConstants.CARDSFOLDER));
+        this.decks = new CardCollections(ForgeProps.getFile(NewConstants.NEW_DECKS));
+        this.quest = new QuestController();
     }
 
     public final QuestController getQuest() {
-        if (quest == null) {
-            this.quest = new QuestController();
-        }
         return quest;
     }
 
@@ -324,9 +334,6 @@ public enum FModel {
      * @return {@link forge.decks.CardCollections}
      */
     public final CardCollections getDecks() {
-        if (this.decks == null) {
-            this.decks = new CardCollections(ForgeProps.getFile(NewConstants.NEW_DECKS));
-        }
         return this.decks;
     }
 
@@ -426,5 +433,21 @@ public enum FModel {
         gameState = new GameState(players);
         gameAction = new GameAction(gameState);
         return gameState;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public CardFactoryInterface getCardFactory() {
+        return cardFactory;
+    }
+    
+    public GauntletMini getGauntletMini() {
+
+        if (gauntlet == null) {
+            gauntlet = new GauntletMini();
+        }
+        return gauntlet;
     }
 }

@@ -32,7 +32,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
-import forge.AllZone;
 import forge.Card;
 import forge.CardCharacteristicName;
 
@@ -575,7 +574,7 @@ public final class GuiDisplayUtil {
         for (final String element : data) {
             final String[] cardinfo = element.trim().split("\\|");
 
-            final Card c = AllZone.getCardFactory().getCard(CardDb.instance().getCard(cardinfo[0]), player);
+            final Card c = Singletons.getModel().getCardFactory().getCard(CardDb.instance().getCard(cardinfo[0]), player);
 
             boolean hasSetCurSet = false;
             for (final String info : cardinfo) {

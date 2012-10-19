@@ -25,7 +25,6 @@ import java.util.Map;
 
 import com.google.common.collect.Iterables;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -557,7 +556,7 @@ public final class AbilityFactoryAnimate {
         }
 
         // Every Animate event needs a unique time stamp
-        timest = AllZone.getNextTimestamp();
+        timest = Singletons.getModel().getGameState().getNextTimestamp();
 
         final long timestamp = timest;
 
@@ -1207,7 +1206,7 @@ public final class AbilityFactoryAnimate {
         }
 
         // Every Animate event needs a unique time stamp
-        timest = AllZone.getNextTimestamp();
+        timest = Singletons.getModel().getGameState().getNextTimestamp();
 
         final long timestamp = timest;
 

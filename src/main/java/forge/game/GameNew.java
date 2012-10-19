@@ -14,7 +14,6 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-import forge.AllZone;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
@@ -98,7 +97,6 @@ public class GameNew {
      */
     public static void newGame(final Map<Player, PlayerStartConditions> playersConditions, GameType gameType) {
         Singletons.getModel().getMatch().getInput().clearInput();
-        AllZone.getColorChanger().reset();
 
         Card.resetUniqueNumber();
         // need this code here, otherwise observables fail

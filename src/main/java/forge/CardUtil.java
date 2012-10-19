@@ -691,7 +691,7 @@ public final class CardUtil {
         if (c.isInAlternateState()) {
             c.setState(CardCharacteristicName.Original);
         }
-        final Card res = AllZone.getCardFactory().copyCard(c);
+        final Card res = Singletons.getModel().getCardFactory().copyCard(c);
         c.setState(state);
         res.setState(state);
         res.setControllerObjects(c.getControllerObjects());

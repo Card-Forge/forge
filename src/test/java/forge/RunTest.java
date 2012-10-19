@@ -25,7 +25,7 @@ public class RunTest {
     @Test(timeOut = 1000, enabled = false)
     void test() {
         Card c;
-        final CardFactoryInterface cf = AllZone.getCardFactory();
+        final CardFactoryInterface cf = Singletons.getModel().getCardFactory();
         // ********* test Card
         /*
         c = cf.getCard("Elvish Warrior", AllZone.getComputerPlayer());

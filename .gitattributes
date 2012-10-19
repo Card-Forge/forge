@@ -12371,7 +12371,6 @@ src/main/config/forge.ico -text svneol=unset#image/ico
 src/main/config/forge.sh svneol=native#text/x-sh
 src/main/config/forge_checks.xml svneol=native#text/xml
 src/main/config/support/template.applescript -text
-src/main/java/forge/AllZone.java svneol=native#text/plain
 src/main/java/forge/Card.java svneol=native#text/plain
 src/main/java/forge/CardCharacteristicName.java -text
 src/main/java/forge/CardColor.java svneol=native#text/plain

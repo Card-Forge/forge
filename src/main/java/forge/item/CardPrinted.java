@@ -26,7 +26,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
-import forge.AllZone;
 import forge.Card;
 import forge.CardUtil;
 import forge.Singletons;
@@ -299,7 +298,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
      * @return the card
      */
     public Card toForgeCard(Player owner) {
-        final Card c = AllZone.getCardFactory().getCard(this, owner);
+        final Card c = Singletons.getModel().getCardFactory().getCard(this, owner);
         return c;
     }
 

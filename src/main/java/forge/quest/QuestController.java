@@ -70,8 +70,7 @@ public class QuestController {
     private QuestPetStorage pets = null;
 
     // This is used by shop. Had no idea where else to place this
-    private static transient IStorageView<PreconDeck> preconManager = new StorageView<PreconDeck>(new PreconReader(
-            ForgeProps.getFile(NewConstants.Quest.PRECONS)));
+    private static transient IStorageView<PreconDeck> preconManager = null;
 
     /** The Constant RANK_TITLES. */
     public static final String[] RANK_TITLES = new String[] { "Level 0 - Confused Wizard", "Level 1 - Mana Mage",
@@ -161,6 +160,9 @@ public class QuestController {
      * @return QuestPreconManager
      */
     public static IStorageView<PreconDeck> getPrecons() {
+        if ( null == preconManager )
+            preconManager = new StorageView<PreconDeck>(new PreconReader(ForgeProps.getFile(NewConstants.Quest.PRECONS)));
+        
         return QuestController.preconManager;
     }
 
@@ -224,7 +226,7 @@ public class QuestController {
         final Predicate<CardPrinted> filter;
         switch (startPool) {
         case Precon:
-            this.myCards.addPreconDeck(QuestController.preconManager.get(preconName));
+            this.myCards.addPreconDeck(QuestController.getPrecons().get(preconName));
             return;
 
         case Rotating:

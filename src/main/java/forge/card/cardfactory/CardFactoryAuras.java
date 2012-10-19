@@ -25,7 +25,6 @@ import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -212,7 +211,7 @@ class CardFactoryAuras {
                                     crd.removeSpellAbility(cardAbilitie);
                                 }
                             }
-                            final Card c = AllZone.getCardFactory().copyCard(crd);
+                            final Card c = Singletons.getModel().getCardFactory().copyCard(crd);
                             final ArrayList<String> types = c.getType();
                             final SpellAbility[] abilities = card.getSpellAbility();
                             for (int i = 0; i < types.size(); i++) {

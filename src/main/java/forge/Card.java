@@ -1733,7 +1733,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             return new CardColor(this);
         }
         CardColor colors = null;
-        final ArrayList<CardColor> globalChanges = AllZone.getColorChanger().getColorChanges();
+        final ArrayList<CardColor> globalChanges = Singletons.getModel().getGameState().getColorChanger().getColorChanges();
         colors = this.determineColor(globalChanges);
         colors.fixColorless();
         return colors;
@@ -3975,7 +3975,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void addEquipping(final Card c) {
         this.equipping.add(c);
-        this.setTimestamp(AllZone.getNextTimestamp());
+        this.setTimestamp(Singletons.getModel().getGameState().getNextTimestamp());
         this.updateObservers();
     }
 
@@ -4160,7 +4160,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final void addEnchanting(final GameEntity e) {
         this.enchanting = e;
-        this.setTimestamp(AllZone.getNextTimestamp());
+        this.setTimestamp(Singletons.getModel().getGameState().getNextTimestamp());
         this.updateObservers();
     }
 

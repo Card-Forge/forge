@@ -25,7 +25,6 @@ import java.util.Random;
 
 import com.google.common.base.Predicate;
 
-import forge.AllZone;
 import forge.Card;
 import forge.CardCharacteristicName;
 
@@ -445,7 +444,7 @@ public final class AbilityFactoryPlay {
                 source.clearRemembered();
             }
             if (params.containsKey("CopyCard")) {
-                tgtCard = AllZone.getCardFactory().getCard(CardDb.instance().getCard(tgtCard), sa.getActivatingPlayer());
+                tgtCard = Singletons.getModel().getCardFactory().getCard(CardDb.instance().getCard(tgtCard), sa.getActivatingPlayer());
                 // when copying something stolen:
                 tgtCard.addController(sa.getActivatingPlayer());
 

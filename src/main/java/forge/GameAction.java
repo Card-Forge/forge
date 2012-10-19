@@ -162,7 +162,7 @@ public class GameAction {
             if (zoneFrom.is(ZoneType.Battlefield)) {
                 c.setFlipStaus(false);
             }
-            copied = AllZone.getCardFactory().copyCard(c);
+            copied = Singletons.getModel().getCardFactory().copyCard(c);
             copied.setUnearthed(c.isUnearthed());
             copied.setTapped(false);
             for (final Trigger trigger : copied.getTriggers()) {
@@ -303,7 +303,7 @@ public class GameAction {
                 copied.turnFaceUp();
             }
         } else if (zoneTo.is(ZoneType.Battlefield)) {
-            copied.setTimestamp(AllZone.getNextTimestamp());
+            copied.setTimestamp(Singletons.getModel().getGameState().getNextTimestamp());
             for (String s : copied.getKeyword()) {
                 if (s.startsWith("May be played") || s.startsWith("You may look at this card.")
                         || s.startsWith("May be played by your opponent")
@@ -313,7 +313,7 @@ public class GameAction {
                 }
             }
         } else if (zoneTo.is(ZoneType.Graveyard)) {
-            copied.setTimestamp(AllZone.getNextTimestamp());
+            copied.setTimestamp(Singletons.getModel().getGameState().getNextTimestamp());
             for (String s : copied.getKeyword()) {
                 if (s.startsWith("May be played") || s.startsWith("You may look at this card.")
                         || s.startsWith("May be played by your opponent")
@@ -687,7 +687,7 @@ public class GameAction {
         if (p != null && p.is(ZoneType.Battlefield)) {
             lastKnownInfo = CardUtil.getLKICopy(c);
             c.clearCounters(); // remove all counters
-            library.add(AllZone.getCardFactory().copyCard(c), libPosition);
+            library.add(Singletons.getModel().getCardFactory().copyCard(c), libPosition);
         } else {
             c.clearCounters(); // remove all counters
             library.add(c, libPosition);

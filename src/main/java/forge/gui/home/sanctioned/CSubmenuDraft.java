@@ -9,7 +9,6 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
-import forge.AllZone;
 import forge.Command;
 import forge.Singletons;
 import forge.control.FControl;
@@ -109,11 +108,11 @@ public enum CSubmenuDraft implements ICDoc {
             return;
         }
 
-        AllZone.getGauntlet().resetGauntletDraft();
+        Singletons.getModel().getGauntletMini().resetGauntletDraft();
 
         if (gauntlet) {
             int rounds = Singletons.getModel().getDecks().getDraft().get(humanDeck.getName()).getAiDecks().size();
-            AllZone.getGauntlet().launch(rounds, humanDeck, GameType.Draft);
+            Singletons.getModel().getGauntletMini().launch(rounds, humanDeck, GameType.Draft);
             return;
         }
 

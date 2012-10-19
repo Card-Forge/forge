@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.Command;
@@ -296,7 +295,7 @@ public class CField implements ICDoc {
                             faceDown.setName("Face Down");
                             choices2.add(faceDown);
                         } else {
-                            final Card faceDown = AllZone.getCardFactory().copyCard(crd);
+                            final Card faceDown = Singletons.getModel().getCardFactory().copyCard(crd);
                             faceDown.turnFaceUp();
                             choices2.add(faceDown);
                         }

@@ -24,7 +24,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import forge.AllZone;
 import forge.Card;
 import forge.CardCharacteristicName;
 
@@ -411,7 +410,7 @@ public final class AbilityFactoryCopy {
                     if (!c.isToken() || c.isCopiedToken()) {
                         // copy creature and put it onto the battlefield
 
-                        copy = AllZone.getCardFactory().getCard(CardDb.instance().getCard(c), sa.getActivatingPlayer());
+                        copy = Singletons.getModel().getCardFactory().getCard(CardDb.instance().getCard(c), sa.getActivatingPlayer());
 
                         // when copying something stolen:
                         copy.addController(sa.getActivatingPlayer());
@@ -828,7 +827,7 @@ public final class AbilityFactoryCopy {
             for (final SpellAbility chosenSAcopy : chosenSAs) {
                 chosenSAcopy.setActivatingPlayer(controller);
                 for (int i = 0; i < amount; i++) {
-                    AllZone.getCardFactory().copySpellontoStack(card, chosenSAcopy.getSourceCard(), chosenSAcopy, true);
+                    Singletons.getModel().getCardFactory().copySpellontoStack(card, chosenSAcopy.getSourceCard(), chosenSAcopy, true);
                 }
             }
         }
@@ -844,7 +843,7 @@ public final class AbilityFactoryCopy {
 
             chosenSA.setActivatingPlayer(controller);
             for (int i = 0; i < amount; i++) {
-                AllZone.getCardFactory().copySpellontoStack(card, chosenSA.getSourceCard(), chosenSA, true);
+                Singletons.getModel().getCardFactory().copySpellontoStack(card, chosenSA.getSourceCard(), chosenSA, true);
             }
         }
     } // end resolve

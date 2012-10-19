@@ -25,6 +25,7 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
+import forge.ColorChanger;
 import forge.GameLog;
 import forge.StaticEffects;
 import forge.card.replacement.ReplacementHandler;
@@ -60,6 +61,7 @@ public class GameState {
     private final ReplacementHandler replacementHandler = new ReplacementHandler();
     private Combat combat = new Combat();
     private final GameLog gameLog = new GameLog();
+    private final ColorChanger colorChanger = new ColorChanger();
     private boolean gameOver = false;
 
     private final PlayerZone stackZone = new PlayerZone(ZoneType.Stack, null);
@@ -420,16 +422,12 @@ public class GameState {
         all.addAll(getStackZone().getCards());
         return all;
     }
-    
-    /**
-     * <p>
-     * getTokenDoublersMagnitude.
-     * </p>
-     * 
-     * @param player
-     *            the {@link forge.game.player.Player} player to determine if is affected by
-     *            Doubling Season
-     * @return a int.
-     */
 
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public ColorChanger getColorChanger() {
+        return colorChanger;
+    }
 }

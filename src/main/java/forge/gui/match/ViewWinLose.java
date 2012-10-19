@@ -10,7 +10,6 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
-import forge.AllZone;
 import forge.Singletons;
 import forge.game.MatchController;
 import forge.game.player.LobbyPlayer;
@@ -59,7 +58,7 @@ public class ViewWinLose {
                 control = new QuestWinLoseHandler(this, match);
                 break;
             case Draft:
-                if (!AllZone.getGauntlet().isGauntletDraft()) break;
+                if (!Singletons.getModel().getGauntletMini().isGauntletDraft()) break;
             case Sealed:
                 control = new GauntletWinLose(this, match);
                 break;

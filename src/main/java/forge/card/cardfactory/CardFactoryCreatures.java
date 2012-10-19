@@ -26,7 +26,6 @@ import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
-import forge.AllZone;
 import forge.Card;
 import forge.CardCharacteristicName;
 
@@ -243,7 +242,7 @@ public class CardFactoryCreatures {
                 card.setChosenColor(colors);
                 final String s = CardUtil.getShortColor(color[0]);
 
-                timeStamp[0] = AllZone.getColorChanger().addColorChanges(s, card, true, true);
+                timeStamp[0] = Singletons.getModel().getGameState().getColorChanger().addColorChanges(s, card, true, true);
             }
         }; // Command
 
@@ -253,7 +252,7 @@ public class CardFactoryCreatures {
             @Override
             public void execute() {
                 final String s = CardUtil.getShortColor(color[0]);
-                AllZone.getColorChanger().removeColorChanges(s, card, true, timeStamp[0]);
+                Singletons.getModel().getGameState().getColorChanger().removeColorChanges(s, card, true, timeStamp[0]);
             }
         };
 

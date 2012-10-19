@@ -24,7 +24,6 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import forge.AllZone;
 import forge.Singletons;
 import forge.game.MatchController;
 import forge.game.limited.GauntletMini;
@@ -57,7 +56,7 @@ public class GauntletWinLose extends ControlWinLose {
     public GauntletWinLose(final ViewWinLose view0, MatchController match) {
         super(view0, match);
         this.view = view0;
-        gauntlet = AllZone.getGauntlet();
+        gauntlet = Singletons.getModel().getGauntletMini();
         this.wonMatch = match.isWonBy(Singletons.getControl().getPlayer().getLobbyPlayer());
     }
 

@@ -12,7 +12,6 @@ import javax.swing.SwingUtilities;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.AllZone;
 import forge.Command;
 import forge.Constant;
 import forge.Singletons;
@@ -123,7 +122,7 @@ public enum CSubmenuSealed implements ICDoc {
 
         int matches = Singletons.getModel().getDecks().getSealed().get(human.getName()).getAiDecks().size();
 
-        AllZone.getGauntlet().launch(matches, human, GameType.Sealed);
+        Singletons.getModel().getGauntletMini().launch(matches, human, GameType.Sealed);
     }
 
     /** */

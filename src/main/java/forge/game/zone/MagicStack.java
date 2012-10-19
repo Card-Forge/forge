@@ -24,7 +24,6 @@ import java.util.Stack;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.AllZone;
 import forge.Card;
 
 import forge.CardLists;
@@ -659,7 +658,7 @@ public class MagicStack extends MyObservable {
                     @Override
                     public void execute() {
                         for (int i = 0; i < sp.getSourceCard().getReplicateMagnitude(); i++) {
-                            AllZone.getCardFactory().copySpellontoStack(sp.getSourceCard(), sp.getSourceCard(), sp, false);
+                            Singletons.getModel().getCardFactory().copySpellontoStack(sp.getSourceCard(), sp.getSourceCard(), sp, false);
                         }
                     }
                 };
