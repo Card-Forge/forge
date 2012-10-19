@@ -1645,7 +1645,7 @@ public final class AbilityFactoryChangeZone {
             final boolean mandatory) {
         final HashMap<String, String> params = af.getMapParams();
         final Card source = sa.getSourceCard();
-        final ZoneType origin = ZoneType.smartValueOf(params.get("Origin"));
+        final ZoneType origin = ZoneType.listValueOf(params.get("Origin")).get(0);
         final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));
         final Target tgt = sa.getTarget();
 

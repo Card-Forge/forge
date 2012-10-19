@@ -4,9 +4,9 @@ Types:Creature Angel
 Text:no text
 PT:5/6
 K:Flying
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, exile another target nonland permanent.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigExile | TriggerDescription$ When CARDNAME enters the battlefield, you may exile up to three other target creatures from the battlefield and/or creature cards from graveyards.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, return the exiled card to the battlefield under its owner's control.
-SVar:TrigExile:DB$ChangeZone | TargetMin$ 0 | TargetMax$ 3 | IsCurse$ True | ValidTgts$ Creature.Other | TgtPrompt$ Choose target other creature | RememberChanged$ True | Origin$ Battlefield,Graveyard | Destination$ Exile
+SVar:TrigExile:DB$ChangeZone | TargetMin$ 0 | TargetMax$ 3 | IsCurse$ True | ValidTgts$ Creature.Other | TgtPrompt$ Choose another target creature | RememberChanged$ True | Origin$ Battlefield,Graveyard | Destination$ Exile
 SVar:TrigReturn:DB$ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PlayMain1:TRUE
