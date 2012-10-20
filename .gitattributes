@@ -7926,6 +7926,7 @@ res/cardsfolder/r/rhys_the_exiled.txt svneol=native#text/plain
 res/cardsfolder/r/rhys_the_redeemed.txt svneol=native#text/plain
 res/cardsfolder/r/rhystic_deluge.txt svneol=native#text/plain
 res/cardsfolder/r/rhystic_study.txt svneol=native#text/plain
+res/cardsfolder/r/rhystic_tutor.txt -text
 res/cardsfolder/r/rib_cage_spider.txt svneol=native#text/plain
 res/cardsfolder/r/ribbon_snake.txt -text
 res/cardsfolder/r/ribbons_of_night.txt -text svneol=unset#text/plain

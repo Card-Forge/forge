@@ -7,4 +7,5 @@ A:AB$ LoseLife | Cost$ B | ValidTgts$ Player.wasDealtDamageBySourceThisTurn | Tg
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wicked_akuba.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/150.jpg
+Oracle:{B}: Target player dealt damage by Wicked Akuba this turn loses 1 life.
 End

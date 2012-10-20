@@ -2784,7 +2784,7 @@ public class AbilityFactory {
 
         // The player who has the chance to cancel the ability
         final String pays = params.containsKey("UnlessPayer") ? params.get("UnlessPayer") : "TargetedController";
-        final Player payer = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), pays, sa).get(0);
+        final ArrayList<Player> payers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), pays, sa);
 
         // The cost
         String unlessCost = params.get("UnlessCost").trim();
@@ -2809,7 +2809,6 @@ public class AbilityFactory {
                 // nothing to do here
             }
         };
-        ability.setActivatingPlayer(payer);
 
         final Command paidCommand = new Command() {
             private static final long serialVersionUID = 8094833091127334678L;
@@ -2820,7 +2819,7 @@ public class AbilityFactory {
             }
         };
 
-        final Command unpaidCommand = new Command() {
+        Command unpaidCommand = new Command() {
             private static final long serialVersionUID = 8094833091127334678L;
 
             @Override
@@ -2832,27 +2831,49 @@ public class AbilityFactory {
                 AbilityFactory.resolveSubAbilities(sa, usedStack);
             }
         };
-
-        if (payer.isHuman()) {
-            GameActionUtil.payCostDuringAbilityResolve(ability, cost, paidCommand, unpaidCommand, sa);
-        } else {
-            if (ComputerUtil.canPayCost(ability, payer) && CostUtil.checkLifeCost(payer, cost, source, 4, sa)
-                    && CostUtil.checkDamageCost(payer, cost, source, 4)
-                    && (!source.getName().equals("Tyrannize") || payer.getCardsIn(ZoneType.Hand).size() > 2)) {
-                // AI was crashing because the blank ability used to pay costs
-                // Didn't have any of the data on the original SA to pay dependant costs
-                ability.setTarget(sa.getTarget());
-                ComputerUtil.playNoStack(payer, ability); // Unless cost was payed - no
-                                                   // resolve
+        boolean paid = false;
+        for (Player payer : payers) {
+            if (payer.isComputer()) {
+                // AI will only pay when it's not already payed and only opponents abilities
+                if (paid || sa.getActivatingPlayer().equals(payer)) {
+                    continue;
+                }
+                ability.setActivatingPlayer(payer);
+                if (ComputerUtil.canPayCost(ability, payer) && CostUtil.checkLifeCost(payer, cost, source, 4, sa)
+                        && CostUtil.checkDamageCost(payer, cost, source, 4)
+                        && (!source.getName().equals("Tyrannize") || payer.getCardsIn(ZoneType.Hand).size() > 2)) {
+                    // AI was crashing because the blank ability used to pay costs
+                    // Didn't have any of the data on the original SA to pay dependant costs
+                    ability.setTarget(sa.getTarget());
+                    ComputerUtil.playNoStack(payer, ability); // Unless cost was payed - no resolve
+                    paid = true;
+                }
+            }
+        }
+        boolean waitForInput = false;
+        for (Player payer : payers) {
+            if (payer.isHuman()) {
+                // if it's paid by the AI already the human can pay, but it won't change anything
+                if (paid) {
+                    unpaidCommand = paidCommand;
+                }
+                GameActionUtil.payCostDuringAbilityResolve(ability, cost, paidCommand, unpaidCommand, sa);
+                waitForInput = true; // wait for the human input
+                break; // multiple human players are not supported
+            }
+        }
+        if (!waitForInput) {
+            if (paid) {
                 AbilityFactory.resolveSubAbilities(sa, usedStack);
             } else {
                 sa.resolve();
                 if (params.containsKey("PowerSink")) {
-                    GameActionUtil.doPowerSink(payer);
+                    GameActionUtil.doPowerSink(payers.get(0));
                 }
                 AbilityFactory.resolveSubAbilities(sa, usedStack);
             }
         }
+        
     }
 
     /**

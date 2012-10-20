@@ -1,0 +1,11 @@
+Name:Rhystic Tutor
+ManaCost:2 B
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZone | Cost$ 2 B | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | UnlessCost$ 2 | UnlessPayer$ Player | Mandatory$ True | SpellDescription$ Unless any player pays 2, search your library for a card, put that card into your hand, then shuffle your library.
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/rhystic_tutor.jpg
+SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/77.jpg
+Oracle:Unless any player pays {2}, search your library for a card, put that card into your hand, then shuffle your library.
+End
