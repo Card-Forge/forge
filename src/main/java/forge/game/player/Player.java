@@ -1824,7 +1824,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_UNLIMITED_LAND)
                 && this.isHuman()
                 && Preferences.DEV_MODE) {
-            return PhaseHandler.canCastSorcery(this);
+            return Player.canCastSorcery(this);
         }
 
         // CantBeCast static abilities
@@ -1838,7 +1838,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
-        return PhaseHandler.canCastSorcery(this)
+        return Player.canCastSorcery(this)
                 && ((this.numLandsPlayed < this.maxLandsToPlay) || (this.getCardsIn(ZoneType.Battlefield, "Fastbond")
                         .size() > 0));
     }
@@ -2778,6 +2778,50 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         return (int) Math.pow(2, tokenDoublers); // pow(a,0) = 1; pow(a,1) = a
                                                  // ... no worries about size =
                                                  // 0
+    }
+
+    /**
+     * <p>
+     * canCastSorcery.
+     * </p>
+     * 
+     * @param player
+     *            a {@link forge.game.player.Player} object.
+     * @return a boolean.
+     */
+    public static boolean canCastSorcery(final Player player) {
+        PhaseHandler now = Singletons.getModel().getGame().getPhaseHandler();
+        return now.isPlayerTurn(player) && now.getPhase().isMain() && Singletons.getModel().getGame().getStack().size() == 0;
+    }
+
+    /**
+     * <p>
+     * couldCastSorcery.
+     * for conditions the stack must only have the sa being checked
+     * </p>
+     * 
+     * @param player
+     *            a {@link forge.game.player.Player} object.
+     * @param sa
+     *            a {@link forge.game.player.SpellAbility} object.
+     * @return a boolean .
+     */
+    public static boolean couldCastSorcery(final Player player, final SpellAbility sa) {
+        PhaseHandler now = Singletons.getModel().getGame().getPhaseHandler();
+        final Card source = sa.getRootSpellAbility().getSourceCard();
+        boolean onlyThis = true;
+        if (Singletons.getModel().getGame().getStack().size() != 0) {
+            for (final Card card : Singletons.getModel().getGame().getCardsIn(ZoneType.Stack)) {
+                if (card != source) {
+                    onlyThis = false;
+                    //System.out.println("StackCard: " + card + " vs SourceCard: " + source);
+                }
+            }
+        }
+        //System.out.println("now.isPlayerTurn(player) - " + now.isPlayerTurn(player));
+        //System.out.println("now.getPhase().isMain() - " + now.getPhase().isMain());
+        //System.out.println("onlyThis - " + onlyThis);
+        return now.isPlayerTurn(player) && now.getPhase().isMain() && onlyThis;
     }
     
 }

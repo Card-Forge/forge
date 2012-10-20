@@ -24,7 +24,6 @@ import forge.Card;
 import forge.Singletons;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
-import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -58,7 +57,7 @@ public class StaticAbilityCantBeCast {
             return false;
         }
 
-        if (params.containsKey("OnlySorcerySpeed") && (activator != null) && PhaseHandler.canCastSorcery(activator)) {
+        if (params.containsKey("OnlySorcerySpeed") && (activator != null) && Player.canCastSorcery(activator)) {
             return false;
         }
 

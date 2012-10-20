@@ -56,7 +56,7 @@ public class GameState {
     private final EndOfCombat endOfCombat = new EndOfCombat();
     private final Untap untap = new Untap();
     private final Upkeep upkeep = new Upkeep();
-    private PhaseHandler phaseHandler = new PhaseHandler();
+    private final PhaseHandler phaseHandler;
     private final MagicStack stack;
     private final StaticEffects staticEffects = new StaticEffects();
     private final TriggerHandler triggerHandler = new TriggerHandler();
@@ -85,6 +85,7 @@ public class GameState {
         roPlayers = Collections.unmodifiableList(players);
         action = new GameAction(this);
         stack = new MagicStack(this);
+        phaseHandler = new PhaseHandler(this);
     }
 
     /**

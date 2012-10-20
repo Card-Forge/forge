@@ -29,7 +29,6 @@ import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.staticability.StaticAbility;
 import forge.error.ErrorViewer;
-import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -102,7 +101,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             activator = this.getSourceCard().getController();
         }
 
-        if (!(card.isInstant() || PhaseHandler.canCastSorcery(activator) || card.hasKeyword("Flash")
+        if (!(card.isInstant() || Player.canCastSorcery(activator) || card.hasKeyword("Flash")
                || this.getRestrictions().isInstantSpeed()
                || activator.hasKeyword("You may cast nonland cards as though they had flash.")
                || card.hasStartOfKeyword("You may cast CARDNAME as though it had flash."))) {
