@@ -182,6 +182,7 @@ public class MatchController {
      */
     public void replayRound() {
         gamesPlayed.remove(gamesPlayed.size() - 1);
+        startRound();
     }
 
     /**

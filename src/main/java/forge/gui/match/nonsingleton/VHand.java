@@ -40,8 +40,6 @@ public class VHand implements IVDoc<CHand> {
     private final EDocID docID;
     private final DragTab tab = new DragTab("Your Hand");
 
-    // Other fields
-    private Player player = null;
 
     // Top-level containers
     private final JScrollPane scroller = new JScrollPane();
@@ -72,7 +70,7 @@ public class VHand implements IVDoc<CHand> {
 
         hand.setOpaque(false);
 
-        control = new CHand(player, this);
+        control = new CHand(player0, this);
     }
 
     //========= Overridden methods
