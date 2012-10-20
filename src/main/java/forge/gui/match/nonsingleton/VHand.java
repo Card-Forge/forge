@@ -65,8 +65,6 @@ public class VHand implements IVDoc<CHand> {
             tab.setText(player0.getName() + " Hand");
         }
 
-        player = player0;
-
         scroller.setBorder(null);
         scroller.setViewportView(VHand.this.hand);
         scroller.setOpaque(false);
@@ -140,20 +138,4 @@ public class VHand implements IVDoc<CHand> {
         return VHand.this.hand;
     }
 
-    /**
-     * Gets the player currently associated with this hand.
-     * @return {@link forge.game.player.Player}
-     */
-    public Player getPlayer() {
-        return this.player;
-    }
-
-    /**
-     * Sets the player currently associated with this field.
-     * @param player0 &emsp; {@link forge.game.player.Player}
-     */
-    public void setPlayer(final Player player0) {
-        this.player = player0;
-        if (player0 != null) { tab.setText(player0.getName() + " Field"); }
-    }
 }

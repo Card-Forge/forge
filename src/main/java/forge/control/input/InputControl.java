@@ -48,8 +48,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
     private final LinkedList<Input> resolvingQueue = new LinkedList<Input>();
 
     private final GameState game;
-    private ComputerAIInput aiInput; // initialized at runtime to be the latest
-                                     // object created
+    private ComputerAIInput aiInput; // initialized at runtime to be the latest object created
 
     /**
      * TODO Write javadoc for Constructor.

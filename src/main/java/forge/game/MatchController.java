@@ -29,7 +29,6 @@ import forge.gui.match.controllers.CMessage;
 import forge.gui.match.controllers.CStack;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VAntes;
-import forge.gui.toolbox.FLabel;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
 
@@ -134,8 +133,8 @@ public class MatchController {
                 //VMatchUI.SINGLETON_INSTANCE.getViewDevMode().getDocument().setVisible(Preferences.DEV_MODE);
         
                 for (final VField field : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
-                    ((FLabel) field.getLblHand()).setHoverable(Preferences.DEV_MODE);
-                    ((FLabel) field.getLblLibrary()).setHoverable(Preferences.DEV_MODE);
+                    field.getLblHand().setHoverable(Preferences.DEV_MODE);
+                    field.getLblLibrary().setHoverable(Preferences.DEV_MODE);
                 }
         
                 VAntes.SINGLETON_INSTANCE.clearAnteCards();

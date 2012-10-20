@@ -27,7 +27,6 @@ import javax.swing.ImageIcon;
 import forge.Card;
 import forge.GameEntity;
 import forge.Singletons;
-import forge.game.GameType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.gui.CardContainer;

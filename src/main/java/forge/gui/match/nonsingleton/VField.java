@@ -416,12 +416,12 @@ public class VField implements IVDoc<CField> {
     }
 
     /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblHand() {
+    public FLabel getLblHand() {
         return this.lblHand;
     }
 
     /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblLibrary() {
+    public FLabel getLblLibrary() {
         return this.lblLibrary;
     }
 
