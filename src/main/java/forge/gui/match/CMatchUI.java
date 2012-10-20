@@ -155,7 +155,16 @@ public enum CMatchUI implements CardContainer {
         return controllers;
     }
 
+    public VField getFieldViewFor(Player p) {
+        for (final VField f : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
+            if ( f.getLayoutControl().getPlayer().equals(p))
+                return f;
+        }
+        return null;
+    }
+    
     /**
+     * 
      * Fires up trample dialog.  Very old code, due for refactoring with new UI.
      * Could possibly move to view.
      * 

@@ -29,6 +29,7 @@ import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.phase.PhaseUtil;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -88,9 +89,10 @@ public class InputMulligan extends Input {
     } // selectButtonOK()
 
     final void end() {
-        // Computer mulligan
+        GameState game = Singletons.getModel().getGame(); 
 
-        for (Player ai : Singletons.getModel().getGame().getPlayers()) {
+        // Computer mulligan
+        for (Player ai : game.getPlayers()) {
             if ( ai.isHuman() ) continue;
             
             boolean aiTakesMulligan = true;
@@ -169,13 +171,12 @@ public class InputMulligan extends Input {
         //ga.checkStateEffects();
 
         ga.checkStateEffects();
-
-        Singletons.getModel().getGame().getGameLog().add("Turn",
-                "Turn " + Singletons.getModel().getGame().getPhaseHandler().getTurn()
-                    + " (" + Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn() + ")",
-                0);
-        Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(false);
-        PhaseUtil.visuallyActivatePhase(Singletons.getModel().getGame().getPhaseHandler().getPhase());
+        
+        game.getGameLog().add("Turn",
+                "Turn " + game.getPhaseHandler().getTurn()
+                    + " (" + game.getPhaseHandler().getPlayerTurn() + ")", 0);
+        game.getPhaseHandler().setNeedToNextPhase(false);
+        PhaseUtil.visuallyActivatePhase(game.getPhaseHandler().getPlayerTurn(), game.getPhaseHandler().getPhase());
 
         this.stop();
     }

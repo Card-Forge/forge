@@ -26,6 +26,7 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.card.abilityfactory.AbilityFactory;
@@ -57,6 +58,7 @@ import forge.game.GameState;
 import forge.game.MatchController;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
+import forge.game.player.PlayerType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
@@ -924,6 +926,11 @@ public class GameAction {
         if ( reason == null && Iterables.size(Iterables.filter(game.getPlayers(), Player.Predicates.NOT_LOST)) == 1 )
         {
             reason = GameEndReason.AllOpponentsLost;
+        }
+        
+        // ai's cannot finish their game without human yet - so terminate a game if human has left.
+        if ( reason == null && !Iterables.any(game.getPlayers(), Predicates.and(Player.Predicates.NOT_LOST, Player.Predicates.isType(PlayerType.HUMAN))) ) {
+            reason = GameEndReason.AllHumansLost;
         }
         
         if (reason != null) {

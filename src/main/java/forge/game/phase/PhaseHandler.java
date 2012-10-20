@@ -555,7 +555,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             game.getGameLog().add("Turn", "Turn " + this.turn + " (" + this.getPlayerTurn() + ")", 0);
         }
 
-        PhaseUtil.visuallyActivatePhase(this.getPhase());
+        PhaseUtil.visuallyActivatePhase(this.getPlayerTurn(), this.getPhase());
 
         // When consecutively skipping phases (like in combat) this section
         // pushes through that block

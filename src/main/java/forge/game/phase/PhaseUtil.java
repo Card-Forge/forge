@@ -341,14 +341,10 @@ public class PhaseUtil {
      * @param phase
      *            &emsp; Phase state
      */
-    public static void visuallyActivatePhase(final PhaseType phase) {
-        final Player p = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
+    public static void visuallyActivatePhase(final Player player, final PhaseType phase) {
         final CMatchUI matchUi = CMatchUI.SINGLETON_INSTANCE;
 
-        // Index of field; computer is 1, human is 0
-        int i = p.isComputer() ? 1 : 0;
-
-        PhaseLabel lbl = matchUi.getFieldControls().get(i).getView().getLabelFor(phase);
+        PhaseLabel lbl = matchUi.getFieldViewFor(player).getLabelFor(phase);
 
         matchUi.resetAllPhaseButtons();
         if (lbl != null)
