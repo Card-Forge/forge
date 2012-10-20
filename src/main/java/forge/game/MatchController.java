@@ -169,7 +169,7 @@ public class MatchController {
     }
 
     /**
-     * TODO: Write javadoc for this method.
+     * This should become constructor once.
      */
     public void initMatch(GameType type, Map<LobbyPlayer, PlayerStartConditions> map) {
         gamesPlayed.clear();

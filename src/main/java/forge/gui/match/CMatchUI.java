@@ -17,11 +17,17 @@
  */
 package forge.gui.match;
 
+import java.awt.Image;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+
 import forge.Card;
 import forge.GameEntity;
+import forge.Singletons;
+import forge.game.GameType;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.gui.CardContainer;
@@ -32,6 +38,10 @@ import forge.gui.match.controllers.CPicture;
 import forge.gui.match.nonsingleton.CField;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.nonsingleton.VHand;
+import forge.gui.toolbox.FSkin;
+import forge.properties.ForgePreferences.FPref;
+import forge.properties.ForgeProps;
+import forge.properties.NewConstants;
 
 /**
  * Constructs instance of match UI controller, used as a single point of
@@ -45,6 +55,23 @@ public enum CMatchUI implements CardContainer {
     /** */
     SINGLETON_INSTANCE;
 
+    private Image getPlayerAvatar(final Player p, final int defaultIndex) {
+        String strAvatarIcon = p.getLobbyPlayer().getPicture();
+        if (strAvatarIcon != null) {
+            final File f = new File(ForgeProps.getFile(NewConstants.IMAGE_ICON), strAvatarIcon);
+            if (f.exists())
+                return new ImageIcon(f.getPath()).getImage();
+        }
+        return FSkin.getAvatars().get(defaultIndex);
+    }
+    
+    
+    private void setAvatar(final VField view, final Image img)
+    {
+        view.getLblAvatar().setIcon(new ImageIcon(img));
+        view.getLblAvatar().getResizeTimer().start();        
+    }
+    
     /**
      * Instantiates at a match with a specified number of players
      * and hands.
@@ -54,40 +81,16 @@ public enum CMatchUI implements CardContainer {
      */
     public void initMatch(final List<Player> players, Player localPlayer) {
         // TODO fix for use with multiplayer
-        // Update avatars
-        /*final String[] indices = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
-        int i = 0;
-        for (VField view : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
-            final Image img;
-            // Update AI quest icon
-            if (i == 1 && Singletons.getModel().getMatch().getGameType() == GameType.Quest) {
-                    String filename = ForgeProps.getFile(NewConstants.IMAGE_ICON) + File.separator;
-
-                    if (strAvatarIcon != null) {
-                        filename += strAvatarIcon;
-                        final File f = new File(filename);
-                        img = (f.exists()
-                                ? new ImageIcon(filename).getImage()
-                                : FSkin.getAvatars().get(Integer.parseInt(indices[i])));
-                    }
-                    else {
-                        img = FSkin.getAvatars().get(Integer.parseInt(indices[i]));
-                    }
-            }
-            else {
-                img = FSkin.getAvatars().get(Integer.parseInt(indices[i]));
-            }
-            i++;
-
-            view.getLblAvatar().setIcon(new ImageIcon(img));
-            view.getLblAvatar().getResizeTimer().start();
-        }*/
-
+        
+        final String[] indices = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
+        
         // Instantiate all required field slots (user at 0) <-- that's not guaranteed 
         final List<VField> fields = new ArrayList<VField>();
 
-        fields.add(0, new VField(EDocID.valueOf("FIELD_0"), localPlayer));
-        fields.get(0).getLayoutControl().initialize();
+        VField humanField = new VField(EDocID.valueOf("FIELD_0"), localPlayer);
+        fields.add(0, humanField);
+        setAvatar(humanField, FSkin.getAvatars().get(Integer.parseInt(indices[0])));
+        humanField.getLayoutControl().initialize();
 
         
         int i = 1;
@@ -96,6 +99,7 @@ public enum CMatchUI implements CardContainer {
             // A field must be initialized after it's instantiated, to update player info.
             // No player, no init.
             VField f = new VField(EDocID.valueOf("FIELD_" + i), p);
+            setAvatar(f, getPlayerAvatar(p, Integer.parseInt(indices[i%2])));
             f.getLayoutControl().initialize();
             fields.add(f);
             i++;
@@ -143,11 +147,10 @@ public enum CMatchUI implements CardContainer {
      * @return List<CField>
      */
     public List<CField> getFieldControls() {
-        final List<VField> fields = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
         final List<CField> controllers = new ArrayList<CField>();
 
-        for (final VField f : fields) {
-            controllers.add((CField) f.getLayoutControl());
+        for (final VField f : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
+            controllers.add(f.getLayoutControl());
         }
 
         return controllers;
