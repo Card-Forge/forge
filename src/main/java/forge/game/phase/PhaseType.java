@@ -1,57 +1,55 @@
 package forge.game.phase;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
 
 public enum PhaseType {
-    UNTAP("Untap", 0),
-    UPKEEP("Upkeep", 1),
-    DRAW("Draw", 2),
-    MAIN1("Main1", 3),
-    COMBAT_BEGIN("BeginCombat", 4),
-    COMBAT_DECLARE_ATTACKERS("Declare Attackers", 5),
-    COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY("Declare Attackers - Play Instants and Abilities", 6),
-    COMBAT_DECLARE_BLOCKERS("Declare Blockers", 7),
-    COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY("Declare Blockers - Play Instants and Abilities", 8),
-    COMBAT_FIRST_STRIKE_DAMAGE("First Strike Damage", 9),
-    COMBAT_DAMAGE("Combat Damage", 10),
-    COMBAT_END("EndCombat", 11),
-    MAIN2("Main2", 12),
-    END_OF_TURN("End of Turn", 13),
-    CLEANUP("Cleanup", 14);
+    UNTAP("Untap"),
+    UPKEEP("Upkeep"),
+    DRAW("Draw"),
+    MAIN1("Main1"),
+    COMBAT_BEGIN("BeginCombat"),
+    COMBAT_DECLARE_ATTACKERS("Declare Attackers"),
+    COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY("Declare Attackers - Play Instants and Abilities"),
+    COMBAT_DECLARE_BLOCKERS("Declare Blockers"),
+    COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY("Declare Blockers - Play Instants and Abilities"),
+    COMBAT_FIRST_STRIKE_DAMAGE("First Strike Damage"),
+    COMBAT_DAMAGE("Combat Damage"),
+    COMBAT_END("EndCombat"),
+    MAIN2("Main2"),
+    END_OF_TURN("End of Turn"),
+    CLEANUP("Cleanup");
+
+    public static final List<PhaseType> ALL_PHASES = Collections.unmodifiableList(
+            Arrays.asList(
+                    UNTAP, UPKEEP, DRAW, MAIN1, 
+                    COMBAT_BEGIN, COMBAT_DECLARE_ATTACKERS, COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY, 
+                    COMBAT_DECLARE_BLOCKERS, COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY, 
+                    COMBAT_FIRST_STRIKE_DAMAGE, COMBAT_DAMAGE, COMBAT_END,
+                    MAIN2, END_OF_TURN, CLEANUP
+                    )
+            );
 
     public final String Name;
-    public final int Index;
-    private PhaseType(String name, int index) {
+    private PhaseType(String name) {
         Name = name;
-        Index = index;
-    }
-
-    public static PhaseType getByIndex(int idx) {
-        for (PhaseType ph : PhaseType.values()) {
-
-            if (ph.Index == idx) {
-                return ph;
-            }
-        }
-        throw new InvalidParameterException("No PhaseType found with index " + idx);
     }
 
     public final boolean isAfter(final PhaseType phase) {
-        return this.Index > phase.Index;
+        return ALL_PHASES.indexOf(this) > ALL_PHASES.indexOf(phase);
     }
 
     public final boolean isMain() {
         return this == MAIN1 || this == MAIN2;
     }
 
-
     public final boolean isBefore(final PhaseType phase) {
-        return this.Index < phase.Index;
+        return ALL_PHASES.indexOf(this) < ALL_PHASES.indexOf(phase);
     }
 
     public static PhaseType smartValueOf(final String value) {
@@ -91,8 +89,10 @@ public enum PhaseType {
                 PhaseType from = PhaseType.smartValueOf(s.substring(0, idxArrow));
                 String sTo = s.substring(idxArrow + 2);
                 PhaseType to = StringUtils.isBlank(sTo) ? PhaseType.CLEANUP : PhaseType.smartValueOf(sTo);
-                for (int i = from.Index; i <= to.Index; i++) {
-                    result.add(PhaseType.getByIndex(i));
+                int iFrom = ALL_PHASES.indexOf(from);
+                int iTo = ALL_PHASES.indexOf(to);
+                for (int i = iFrom; i <= iTo; i++) {
+                    result.add(ALL_PHASES.get(i));
                 }
             }
             else {
@@ -100,5 +100,16 @@ public enum PhaseType {
             }
         }
         return result;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public PhaseType getNextPhase() {
+        int iNext = ALL_PHASES.indexOf(this) + 1;
+        while ( iNext >= ALL_PHASES.size() )
+            iNext = 0;
+        return ALL_PHASES.get(iNext);
     }
 }

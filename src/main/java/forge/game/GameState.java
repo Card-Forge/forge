@@ -70,7 +70,6 @@ public class GameState {
     private final Zone stackZone = new Zone(ZoneType.Stack);
 
     private long timestamp = 0;
-    private int nTurn = 0;
     private final GameAction action;
     
     /**
@@ -269,21 +268,6 @@ public class GameState {
         }
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
-    public int getTurnNumber() {
-        return nTurn;
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     */
-    public void notifyNextTurn() {
-        nTurn++;
-    }
-
     
     // THESE WERE MOVED HERE FROM AllZoneUtil 
     // They must once become non-static members of this class 
@@ -440,5 +424,20 @@ public class GameState {
 
     public GameAction getAction() {
         return action;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param playerTurn
+     * @return
+     */
+    public Player getNextPlayerAfter(Player playerTurn) {
+        int iPlayer = roPlayers.indexOf(playerTurn);
+        if( iPlayer == roPlayers.size() - 1)
+            iPlayer = -1;
+        iPlayer++;
+        // should also check that he has not lost yet.
+        return roPlayers.get(iPlayer);
+                
     }
 }

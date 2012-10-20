@@ -28,12 +28,12 @@ import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CMessage;
 import forge.gui.match.nonsingleton.VField.PhaseLabel;
-
 
 /**
  * <p>
@@ -64,7 +64,8 @@ public class PhaseUtil {
             return true;
         }
 
-        if (Singletons.getModel().getGame().isCardInPlay("Sands of Time") || Singletons.getModel().getGame().isCardInPlay("Stasis")) {
+        if (Singletons.getModel().getGame().isCardInPlay("Sands of Time")
+                || Singletons.getModel().getGame().isCardInPlay("Stasis")) {
             return true;
         }
 
@@ -81,18 +82,18 @@ public class PhaseUtil {
      * handleUntap.
      * </p>
      */
-    public static void handleUntap() {
-        final PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler();
+    public static void handleUntap(GameState game) {
+        final PhaseHandler ph = game.getPhaseHandler();
         final Player turn = ph.getPlayerTurn();
 
-        Singletons.getModel().getGame().notifyNextTurn();
         CMessage.SINGLETON_INSTANCE.updateGameInfo(Singletons.getModel().getMatch());
 
-        Singletons.getModel().getGame().getCombat().reset();
-        Singletons.getModel().getGame().getCombat().setAttackingPlayer(turn);
-        Singletons.getModel().getGame().getCombat().setDefendingPlayer(turn.getOpponent());
+        game.getCombat().reset();
+        game.getCombat().setAttackingPlayer(turn);
+        game.getCombat().setDefendingPlayer(turn.getOpponent());
 
-        // Tokens starting game in play now actually suffer from Sum. Sickness again
+        // Tokens starting game in play now actually suffer from Sum. Sickness
+        // again
         final List<Card> list = turn.getCardsIncludePhasingIn(ZoneType.Battlefield);
         for (final Card c : list) {
             if (turn.getTurn() > 0 || !c.isStartsGameInPlay()) {
@@ -101,7 +102,7 @@ public class PhaseUtil {
         }
         turn.incrementTurn();
 
-        Singletons.getModel().getGame().getAction().resetActivationsPerTurn();
+        game.getAction().resetActivationsPerTurn();
 
         final List<Card> lands = CardLists.filter(turn.getLandsInPlay(), Presets.UNTAPPED);
         turn.setNumPowerSurgeLands(lands.size());
@@ -110,39 +111,17 @@ public class PhaseUtil {
         // phase is skipped
 
         if (PhaseUtil.skipUntap(turn)) {
-            Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(true);
+            game.getPhaseHandler().setNeedToNextPhase(true);
             return;
         }
 
-        Singletons.getModel().getGame().getUntap().executeUntil(turn);
-        Singletons.getModel().getGame().getUntap().executeAt();
+        game.getUntap().executeUntil(turn);
+        game.getUntap().executeAt();
 
         // otherwise land seems to stay tapped when it is really untapped
-        //AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
+        // AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
 
-        Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(true);
-    }
-
-    // ******* UPKEEP PHASE *****
-    /**
-     * <p>
-     * handleUpkeep.
-     * </p>
-     */
-    public static void handleUpkeep() {
-        final Player turn = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
-
-        if (PhaseUtil.skipUpkeep()) {
-            // Slowtrips all say "on the next turn's upkeep" if there is no
-            // upkeep next turn, the trigger will never occur.
-            turn.clearSlowtripList();
-            turn.getOpponent().clearSlowtripList();
-            Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(true);
-            return;
-        }
-
-        Singletons.getModel().getGame().getUpkeep().executeUntil(turn);
-        Singletons.getModel().getGame().getUpkeep().executeAt();
+        game.getPhaseHandler().setNeedToNextPhase(true);
     }
 
     /**
@@ -166,23 +145,6 @@ public class PhaseUtil {
         return false;
     }
 
-    // ******* DRAW PHASE *****
-    /**
-     * <p>
-     * handleDraw.
-     * </p>
-     */
-    public static void handleDraw() {
-        final Player playerTurn = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
-
-        if (PhaseUtil.skipDraw(playerTurn)) {
-            Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(true);
-            return;
-        }
-
-        playerTurn.drawCards(1, true);
-    }
-
     /**
      * <p>
      * skipDraw.
@@ -192,11 +154,7 @@ public class PhaseUtil {
      *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
-    private static boolean skipDraw(final Player player) {
-        // starting player skips his draw
-        if (Singletons.getModel().getGame().getPhaseHandler().getTurn() == 1) {
-            return true;
-        }
+    public static boolean skipDraw(final Player player) {
 
         if (player.hasKeyword("Skip your next draw step.")) {
             player.removeKeyword("Skip your next draw step.");
@@ -211,15 +169,6 @@ public class PhaseUtil {
     }
 
     // ********* Declare Attackers ***********
-
-    /**
-     * <p>
-     * verifyCombat.
-     * </p>
-     */
-    public static void verifyCombat() {
-        Singletons.getModel().getGame().getCombat().verifyCreaturesInPlay();
-    }
 
     /**
      * <p>
@@ -259,7 +208,7 @@ public class PhaseUtil {
      *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
-    private static boolean skipCombat(final Player player) {
+    public static boolean skipCombat(final Player player) {
 
         if (player.hasKeyword("Skip your next combat phase.")) {
             return true;
@@ -285,9 +234,10 @@ public class PhaseUtil {
      * </p>
      */
     public static void handleDeclareAttackers() {
-        PhaseUtil.verifyCombat();
+        Singletons.getModel().getGame().getCombat().verifyCreaturesInPlay();
 
-        // Handles removing cards like Mogg Flunkies from combat if group attack didn't occur
+        // Handles removing cards like Mogg Flunkies from combat if group attack
+        // didn't occur
         final List<Card> filterList = Singletons.getModel().getGame().getCombat().getAttackerList();
         for (Card c : filterList) {
             if (c.hasKeyword("CARDNAME can't attack or block alone.") && c.isAttacking()) {
@@ -351,26 +301,29 @@ public class PhaseUtil {
      * <p>
      * handleDeclareBlockers.
      * </p>
+     * 
+     * @param game
      */
-    public static void handleDeclareBlockers() {
-        PhaseUtil.verifyCombat();
+    public static void handleDeclareBlockers(GameState game) {
+        game.getCombat().verifyCreaturesInPlay();
 
-        // Handles removing cards like Mogg Flunkies from combat if group block didn't occur
-        final List<Card> filterList = Singletons.getModel().getGame().getCombat().getAllBlockers();
+        // Handles removing cards like Mogg Flunkies from combat if group block
+        // didn't occur
+        final List<Card> filterList = game.getCombat().getAllBlockers();
         for (Card c : filterList) {
             if (c.hasKeyword("CARDNAME can't attack or block alone.") && c.isBlocking()) {
-                if (Singletons.getModel().getGame().getCombat().getAllBlockers().size() < 2) {
-                    Singletons.getModel().getGame().getCombat().undoBlockingAssignment(c);
+                if (game.getCombat().getAllBlockers().size() < 2) {
+                    game.getCombat().undoBlockingAssignment(c);
                 }
             }
         }
 
-        Singletons.getModel().getGame().getStack().freezeStack();
+        game.getStack().freezeStack();
 
-        Singletons.getModel().getGame().getCombat().setUnblocked();
+        game.getCombat().setUnblocked();
 
         List<Card> list = new ArrayList<Card>();
-        list.addAll(Singletons.getModel().getGame().getCombat().getAllBlockers());
+        list.addAll(game.getCombat().getAllBlockers());
 
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
@@ -379,20 +332,20 @@ public class PhaseUtil {
             }
         });
 
-        final List<Card> attList = Singletons.getModel().getGame().getCombat().getAttackerList();
+        final List<Card> attList = game.getCombat().getAttackerList();
 
         CombatUtil.checkDeclareBlockers(list);
 
         for (final Card a : attList) {
-            final List<Card> blockList = Singletons.getModel().getGame().getCombat().getBlockers(a);
+            final List<Card> blockList = game.getCombat().getBlockers(a);
             for (final Card b : blockList) {
                 CombatUtil.checkBlockedAttackers(a, b);
             }
         }
 
-        Singletons.getModel().getGame().getStack().unfreezeStack();
+        game.getStack().unfreezeStack();
 
-        Singletons.getModel().getGame().getGameLog().add("Combat", CombatUtil.getCombatBlockForLog(), 1);
+        game.getGameLog().add("Combat", CombatUtil.getCombatBlockForLog(), 1);
     }
 
     // ***** Combat Utility **********
@@ -408,66 +361,27 @@ public class PhaseUtil {
     public static boolean isBeforeAttackersAreDeclared() {
         final PhaseType phase = Singletons.getModel().getGame().getPhaseHandler().getPhase();
         return phase == PhaseType.UNTAP || phase == PhaseType.UPKEEP || phase == PhaseType.DRAW
-            || phase == PhaseType.MAIN1 || phase == PhaseType.COMBAT_BEGIN;
+                || phase == PhaseType.MAIN1 || phase == PhaseType.COMBAT_BEGIN;
     }
 
     /**
      * Retrieves and visually activates phase label for appropriate phase and
      * player.
      * 
-     * @param s
+     * @param phase
      *            &emsp; Phase state
      */
-    public static void visuallyActivatePhase(final PhaseType s) {
-        PhaseLabel lbl = null;
+    public static void visuallyActivatePhase(final PhaseType phase) {
         final Player p = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
-        final CMatchUI t = CMatchUI.SINGLETON_INSTANCE;
+        final CMatchUI matchUi = CMatchUI.SINGLETON_INSTANCE;
 
         // Index of field; computer is 1, human is 0
         int i = p.isComputer() ? 1 : 0;
 
-        switch(s) {
-            case UPKEEP:
-                lbl = t.getFieldControls().get(i).getView().getLblUpkeep();
-                break;
-           case DRAW:
-                lbl = t.getFieldControls().get(i).getView().getLblDraw();
-                break;
-           case MAIN1:
-                lbl = t.getFieldControls().get(i).getView().getLblMain1();
-                break;
-           case COMBAT_BEGIN:
-                lbl = t.getFieldControls().get(i).getView().getLblBeginCombat();
-                break;
-           case COMBAT_DECLARE_ATTACKERS:
-                lbl = t.getFieldControls().get(i).getView().getLblDeclareAttackers();
-                break;
-           case COMBAT_DECLARE_BLOCKERS:
-                lbl = t.getFieldControls().get(i).getView().getLblDeclareBlockers();
-                break;
-           case COMBAT_DAMAGE:
-                lbl = t.getFieldControls().get(i).getView().getLblCombatDamage();
-                break;
-           case COMBAT_FIRST_STRIKE_DAMAGE:
-                lbl = t.getFieldControls().get(i).getView().getLblFirstStrike();
-                break;
-           case COMBAT_END:
-                lbl = t.getFieldControls().get(i).getView().getLblEndCombat();
-                break;
-           case MAIN2:
-                lbl = t.getFieldControls().get(i).getView().getLblMain2();
-                break;
-           case END_OF_TURN:
-                lbl = t.getFieldControls().get(i).getView().getLblEndTurn();
-                break;
-           case CLEANUP:
-                lbl = t.getFieldControls().get(i).getView().getLblCleanup();
-                break;
-            default:
-                return;
-        }
+        PhaseLabel lbl = matchUi.getFieldControls().get(i).getView().getLabelFor(phase);
 
-        t.resetAllPhaseButtons();
-        lbl.setActive(true);
+        matchUi.resetAllPhaseButtons();
+        if (lbl != null)
+            lbl.setActive(true);
     }
 }

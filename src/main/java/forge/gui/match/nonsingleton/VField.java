@@ -35,6 +35,7 @@ import javax.swing.border.MatteBorder;
 import net.miginfocom.swing.MigLayout;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
+import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.DragCell;
@@ -537,6 +538,37 @@ public class VField implements IVDoc {
     }
 
     //========== Custom class handling
+
+    public PhaseLabel getLabelFor(final PhaseType s) {
+        switch (s) {
+        case UPKEEP:
+            return this.getLblUpkeep();
+        case DRAW:
+            return this.getLblDraw();
+        case MAIN1:
+            return this.getLblMain1();
+        case COMBAT_BEGIN:
+            return this.getLblBeginCombat();
+        case COMBAT_DECLARE_ATTACKERS:
+            return this.getLblDeclareAttackers();
+        case COMBAT_DECLARE_BLOCKERS:
+            return this.getLblDeclareBlockers();
+        case COMBAT_DAMAGE:
+            return this.getLblCombatDamage();
+        case COMBAT_FIRST_STRIKE_DAMAGE:
+            return this.getLblFirstStrike();
+        case COMBAT_END:
+            return this.getLblEndCombat();
+        case MAIN2:
+            return this.getLblMain2();
+        case END_OF_TURN:
+            return this.getLblEndTurn();
+        case CLEANUP:
+            return this.getLblCleanup();
+        default:
+            return null;
+        }
+    }
 
     /**
      * Shows phase labels, handles repainting and on/off states. A PhaseLabel

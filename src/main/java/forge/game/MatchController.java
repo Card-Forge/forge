@@ -87,7 +87,7 @@ public class MatchController {
             throw new RuntimeException("Game is not over yet.");
 
         GameOutcome result = new GameOutcome(reason, game.getPlayers());
-        result.setTurnsPlayed(game.getTurnNumber());
+        result.setTurnsPlayed(game.getPhaseHandler().getTurn());
         gamesPlayed.add(result);
     }
 

@@ -91,7 +91,7 @@ public enum CMessage implements ICDoc {
                 match.getGameType().toString() + ": Game #"
                 + (match.getPlayedGames().size() + 1)
                 + " of " + match.getGamesPerMatch()
-                + ", turn " + match.getCurrentGame().getTurnNumber());
+                + ", turn " + match.getCurrentGame().getPhaseHandler().getTurn());
     }
 
     /** Flashes animation on input panel if play is currently waiting on input. */
