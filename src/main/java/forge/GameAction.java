@@ -1685,7 +1685,7 @@ public class GameAction {
             originalCard.setXManaCostPaid(0);
         }
 
-        if (game != null || sa.isTrigger()) {
+        if (game == null || sa.isTrigger()) {
             return manaCost;
         }
 
