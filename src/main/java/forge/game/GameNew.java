@@ -291,26 +291,22 @@ public class GameNew {
     { 
         String message = goesFirst + " has won the coin toss.";
         if ( goesFirst.isHuman() ) {
-            if( !humanPlayOrDraw(message) );
-            
+            if( !humanPlayOrDraw(message) )
+                goesFirst = goesFirst.getOpponent();
         } else {
-            computerPlayOrDraw(message);
+            JOptionPane.showMessageDialog(null, message + "\nComputer Going First", 
+                    "Play or Draw?", JOptionPane.INFORMATION_MESSAGE);
         }
         Singletons.getModel().getGame().getPhaseHandler().setPlayerTurn(goesFirst);
     } // seeWhoPlaysFirstDice()
 
     private static boolean humanPlayOrDraw(String message) {
-        final Object[] possibleValues = { "Play", "Draw" };
+        final String[] possibleValues = { "Play", "Draw" };
         
         final Object playDraw = JOptionPane.showOptionDialog(null, message + "\n\nWould you like to play or draw?", 
                 "Play or Draw?", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, 
                 possibleValues, possibleValues[0]);
         
         return !playDraw.equals(1);
-    }
-    
-    private static void computerPlayOrDraw(String message) {
-        JOptionPane.showMessageDialog(null, message + "\nComputer Going First", 
-                "Play or Draw?", JOptionPane.INFORMATION_MESSAGE);
     }
 }
