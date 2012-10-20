@@ -7,7 +7,9 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | Cost$ 0 | Defined$ You | LifeAmount$ 8
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.YouOwn+Other | TriggerZones$ Battlefield | Execute$ TrigGainControl | TriggerDescription$ Whenever another card is put into your graveyard from anywhere, target opponent gains control of CARDNAME.
 SVar:TrigGainControl:AB$ GainControl | Cost$ 0 | Defined$ Self | ValidTgts$ Opponent | TgtPrompt$ Select target opponent
+S:Mode$ Continuous | Affected$ Permanent.YouCtrl | AddSVar$ Sac
 SVar:RemAIDeck:True
+SVar:Sac:SVar:SacMe:3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/measure_of_wickedness.jpg
 SetInfo:SOK|Uncommon|http://magiccards.info/scans/en/sok/82.jpg
