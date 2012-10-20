@@ -300,11 +300,12 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 break;
 
             case UPKEEP:
-                if (PhaseUtil.skipUpkeep()) {
+                if (this.getPlayerTurn().hasKeyword("Skip your upkeep step.")) {
                     // Slowtrips all say "on the next turn's upkeep" if there is no
                     // upkeep next turn, the trigger will never occur.
-                    for( Player p : game.getPlayers() )
+                    for( Player p : game.getPlayers() ) {
                         p.clearSlowtripList();
+                    }
                     game.getPhaseHandler().setNeedToNextPhase(true);
                 } else {
                     game.getUpkeep().executeUntil(this.getPlayerTurn());

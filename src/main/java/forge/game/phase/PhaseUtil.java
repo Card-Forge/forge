@@ -117,27 +117,6 @@ public class PhaseUtil {
 
     /**
      * <p>
-     * skipUpkeep.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public static boolean skipUpkeep() {
-        if (Singletons.getModel().getGame().isCardInPlay("Eon Hub")) {
-            return true;
-        }
-
-        final Player turn = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
-
-        if ((turn.getCardsIn(ZoneType.Hand).size() == 0) && turn.isCardInPlay("Gibbering Descent")) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * <p>
      * skipDraw.
      * </p>
      * 
