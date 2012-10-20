@@ -1,0 +1,10 @@
+Name:Book Burning
+ManaCost:1 R
+Types:Sorcery
+Text:no text
+A:SP$ Mill | Cost$ 1 R | NumCards$ 6 | ValidTgts$ Player | TgtPrompt$ Choose a player | UnlessCost$ DamageYou<6> | UnlessPayer$ Player | UnlessAI$ Never | SpellDescription$ Any player may have CARDNAME deal 6 damage to him or her. If no one does, target player puts the top six cards of his or her library into his or her graveyard.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/book_burning.jpg
+SetInfo:JUD|Common|http://magiccards.info/scans/en/ju/80.jpg
+Oracle:Any player may have Book Burning deal 6 damage to him or her. If no one does, target player puts the top six cards of his or her library into his or her graveyard.
+End

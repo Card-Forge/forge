@@ -1114,6 +1114,7 @@ res/cardsfolder/b/bonesplitter_sliver.txt svneol=native#text/plain
 res/cardsfolder/b/bonethorn_valesk.txt svneol=native#text/plain
 res/cardsfolder/b/boneyard_wurm.txt -text
 res/cardsfolder/b/bonfire_of_the_damned.txt -text
+res/cardsfolder/b/book_burning.txt -text
 res/cardsfolder/b/book_of_rass.txt svneol=native#text/plain
 res/cardsfolder/b/boomerang.txt svneol=native#text/plain
 res/cardsfolder/b/boon_reflection.txt svneol=native#text/plain
@@ -1188,6 +1189,7 @@ res/cardsfolder/b/breach.txt svneol=native#text/plain
 res/cardsfolder/b/break_asunder.txt svneol=native#text/plain
 res/cardsfolder/b/break_of_day.txt -text
 res/cardsfolder/b/break_open.txt -text
+res/cardsfolder/b/breaking_point.txt -text
 res/cardsfolder/b/breakthrough.txt -text svneol=unset#text/plain
 res/cardsfolder/b/breath_of_darigaaz.txt -text svneol=unset#text/plain
 res/cardsfolder/b/breath_of_dreams.txt svneol=native#text/plain
@@ -1244,6 +1246,7 @@ res/cardsfolder/b/broodmate_dragon.txt svneol=native#text/plain
 res/cardsfolder/b/broodstar.txt svneol=native#text/plain
 res/cardsfolder/b/broodwarden.txt svneol=native#text/plain
 res/cardsfolder/b/brothers_of_fire.txt svneol=native#text/plain
+res/cardsfolder/b/browbeat.txt -text
 res/cardsfolder/b/brown_ouphe.txt svneol=native#text/plain
 res/cardsfolder/b/browse.txt svneol=native#text/plain
 res/cardsfolder/b/brush_with_death.txt svneol=native#text/plain
