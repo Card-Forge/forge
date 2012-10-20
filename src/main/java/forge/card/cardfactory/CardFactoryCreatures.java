@@ -886,7 +886,7 @@ public class CardFactoryCreatures {
             public void resolve() {
                 final Player p = this.getTargetPlayer();
                 if (p.canBeTargetedBy(this)) {
-                    p.setSkipNextUntap(true);
+                    p.addKeyword("Skip your next untap step.");
                     for (final Card c : targetPerms) {
                         if (c.isInPlay() && c.canBeTargetedBy(this)) {
                             c.tap();

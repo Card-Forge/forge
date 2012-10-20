@@ -60,17 +60,8 @@ public class PhaseUtil {
             p.removeKeyword("Skip your next untap step.");
             return true;
         }
-        if (p.hasKeyword("Skip the untap step of this turn.")) {
-            return true;
-        }
-
-        if (Singletons.getModel().getGame().isCardInPlay("Sands of Time")
-                || Singletons.getModel().getGame().isCardInPlay("Stasis")) {
-            return true;
-        }
-
-        if (p.skipNextUntap()) {
-            p.setSkipNextUntap(false);
+        if (p.hasKeyword("Skip the untap step of this turn.") || 
+                p.hasKeyword("Skip your untap step.")) {
             return true;
         }
 

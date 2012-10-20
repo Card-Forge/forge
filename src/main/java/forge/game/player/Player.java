@@ -87,9 +87,6 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     /** The num power surge lands. */
     private int numPowerSurgeLands;
 
-    /** The skip next untap. */
-    private boolean skipNextUntap = false;
-
     /** The prowl. */
     private ArrayList<String> prowl = new ArrayList<String>();
 
@@ -1945,29 +1942,6 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         final Card old = this.lastDrawnCard;
         this.lastDrawnCard = null;
         return old;
-    }
-
-    /**
-     * <p>
-     * skipNextUntap.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean skipNextUntap() {
-        return this.skipNextUntap;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>skipNextUntap</code>.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setSkipNextUntap(final boolean b) {
-        this.skipNextUntap = b;
     }
 
     /**

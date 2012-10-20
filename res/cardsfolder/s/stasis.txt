@@ -1,7 +1,8 @@
 Name:Stasis
 ManaCost:1 U
 Types:Enchantment
-Text:Players skip their untap steps.
+Text:no text
+S:Mode$ Continuous | Affected$ Player | AddKeyword$ Skip your untap step. | Description$ Players skip their untap steps.
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay U
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
