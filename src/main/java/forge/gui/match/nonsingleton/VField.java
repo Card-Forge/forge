@@ -41,7 +41,6 @@ import forge.game.zone.ZoneType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.match.controllers.CPlayers;
 import forge.gui.toolbox.FLabel;
@@ -54,7 +53,7 @@ import forge.view.arcane.PlayArea;
  * 
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public class VField implements IVDoc {
+public class VField implements IVDoc<CField> {
     // Fields used with interface IVDoc
     private final CField control;
     private DragCell parentCell;
@@ -201,7 +200,7 @@ public class VField implements IVDoc {
      * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public ICDoc getLayoutControl() {
+    public CField getLayoutControl() {
         return control;
     }
 

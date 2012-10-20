@@ -36,6 +36,7 @@ import javax.swing.SwingConstants;
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.gui.framework.EDocID;
+import forge.gui.framework.ICDoc;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.framework.IVTopLevelUI;
 import forge.gui.home.gauntlet.VSubmenuGauntletBuild;
@@ -75,7 +76,7 @@ public enum VHomeUI implements IVTopLevelUI {
     private final Color clrTheme = FSkin.getColor(FSkin.Colors.CLR_THEME);
     private final Color l00 = FSkin.stepColor(clrTheme, 0);
 
-    private final List<IVSubmenu> allSubmenus = new ArrayList<IVSubmenu>();
+    private final List<IVSubmenu<? extends ICDoc>> allSubmenus = new ArrayList<IVSubmenu<? extends ICDoc>>();
     private final Map<EDocID, LblMenuItem> allSubmenuLabels = new HashMap<EDocID, LblMenuItem>();
     private final Map<EMenuGroup, LblGroup> allGroupLabels = new HashMap<EMenuGroup, LblGroup>();
 
@@ -128,7 +129,7 @@ public enum VHomeUI implements IVTopLevelUI {
         }
 
         // For each item: Add to its group, and add to the card layout in right panel.
-        for (final IVSubmenu item : allSubmenus) {
+        for (final IVSubmenu<? extends ICDoc> item : allSubmenus) {
             allSubmenuLabels.put(item.getItemEnum(), new LblMenuItem(item));
             allGroupPanels.get(item.getGroupEnum()).add(
                     allSubmenuLabels.get(item.getItemEnum()), "w 100%!, h 30px!, gap 0 0 1px 1px");

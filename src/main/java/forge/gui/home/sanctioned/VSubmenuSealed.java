@@ -20,7 +20,6 @@ import forge.gui.SOverlayUtils;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.gui.framework.ICDoc;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.LblHeader;
@@ -39,7 +38,7 @@ import forge.gui.toolbox.FSkin;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VSubmenuSealed implements IVSubmenu {
+public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
     /** */
     SINGLETON_INSTANCE;
 
@@ -219,7 +218,7 @@ public enum VSubmenuSealed implements IVSubmenu {
      * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public ICDoc getLayoutControl() {
+    public CSubmenuSealed getLayoutControl() {
         return CSubmenuSealed.SINGLETON_INSTANCE;
     }
 

@@ -18,7 +18,6 @@ import forge.Singletons;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.gui.framework.ICDoc;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.VHomeUI;
@@ -35,7 +34,7 @@ import forge.quest.data.QuestPreferences.QPref;
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  *
  */
-public enum VSubmenuQuestPrefs implements IVSubmenu {
+public enum VSubmenuQuestPrefs implements IVSubmenu<CSubmenuQuestPrefs> {
     /** */
     SINGLETON_INSTANCE;
 
@@ -475,7 +474,7 @@ public enum VSubmenuQuestPrefs implements IVSubmenu {
      * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public ICDoc getLayoutControl() {
+    public CSubmenuQuestPrefs getLayoutControl() {
         return CSubmenuQuestPrefs.SINGLETON_INSTANCE;
     }
 

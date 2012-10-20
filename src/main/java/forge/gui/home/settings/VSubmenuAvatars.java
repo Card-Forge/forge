@@ -15,7 +15,6 @@ import forge.gui.WrapLayout;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.gui.framework.ICDoc;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.VHomeUI;
@@ -29,7 +28,7 @@ import forge.properties.ForgePreferences.FPref;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VSubmenuAvatars implements IVSubmenu {
+public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
     /** */
     SINGLETON_INSTANCE;
 
@@ -207,7 +206,7 @@ public enum VSubmenuAvatars implements IVSubmenu {
      * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public ICDoc getLayoutControl() {
+    public CSubmenuAvatars getLayoutControl() {
         return CSubmenuAvatars.SINGLETON_INSTANCE;
     }
 

@@ -9,7 +9,6 @@ import forge.gui.deckeditor.controllers.CAllDecks;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.toolbox.DeckLister;
 import forge.gui.toolbox.FLabel;
@@ -19,7 +18,7 @@ import forge.gui.toolbox.FLabel;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VAllDecks implements IVDoc {
+public enum VAllDecks implements IVDoc<CAllDecks> {
     /** */
     SINGLETON_INSTANCE;
 
@@ -65,7 +64,7 @@ public enum VAllDecks implements IVDoc {
      * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public ICDoc getLayoutControl() {
+    public CAllDecks getLayoutControl() {
         return CAllDecks.SINGLETON_INSTANCE;
     }
 

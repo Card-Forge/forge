@@ -12,7 +12,6 @@ import forge.gui.deckeditor.controllers.CCardCatalog;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
@@ -23,7 +22,7 @@ import forge.gui.toolbox.FSkin;
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  * 
  */
-public enum VCardCatalog implements IVDoc, ITableContainer {
+public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
     /** */
     SINGLETON_INSTANCE;
 
@@ -149,7 +148,7 @@ public enum VCardCatalog implements IVDoc, ITableContainer {
      * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public ICDoc getLayoutControl() {
+    public CCardCatalog getLayoutControl() {
         return CCardCatalog.SINGLETON_INSTANCE;
     }
 

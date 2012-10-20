@@ -6,7 +6,7 @@ import forge.gui.match.nonsingleton.CEmptyDoc;
  * An intentionally empty IVDoc to fill field slots unused
  * by the current layout of a match UI.
  */
-public class VEmptyDoc implements IVDoc {
+public class VEmptyDoc implements IVDoc<CEmptyDoc> {
     // Fields used with interface IVDoc
     private final CEmptyDoc control;
     private final EDocID docID;
@@ -43,7 +43,7 @@ public class VEmptyDoc implements IVDoc {
      * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public ICDoc getLayoutControl() {
+    public CEmptyDoc getLayoutControl() {
         return control;
     }
 

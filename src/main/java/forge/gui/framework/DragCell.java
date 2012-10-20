@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import com.google.common.collect.Lists;
+
 import net.miginfocom.swing.MigLayout;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FSkin;
@@ -46,10 +48,10 @@ public final class DragCell extends JPanel implements ILocalRepaint {
     private final int margin = 2 * tabPaddingPx;
 
     // Tab handling layout stuff
-    private final List<IVDoc> allDocs = new ArrayList<IVDoc>();
+    private final List<IVDoc<? extends ICDoc>> allDocs = new ArrayList<IVDoc<? extends ICDoc>>();
     private final JLabel lblHandle = new DragHandle();
     private final JLabel lblOverflow = new JLabel();
-    private IVDoc docSelected = null;
+    private IVDoc<? extends ICDoc> docSelected = null;
 
     /**
      * 
@@ -119,10 +121,8 @@ public final class DragCell extends JPanel implements ILocalRepaint {
      * Returns a defensive copy list of all documents in this cell.
      * @return {@link java.util.List}<{@link forge.gui.framework.IVDoc}>
      */
-    public List<IVDoc> getDocs() {
-        final List<IVDoc> clone = new ArrayList<IVDoc>();
-        clone.addAll(allDocs);
-        return allDocs;
+    public List<IVDoc<? extends ICDoc>> getDocs() {
+        return Lists.newArrayList(allDocs);
     }
 
     @Override
@@ -270,7 +270,7 @@ public final class DragCell extends JPanel implements ILocalRepaint {
 
     /** Adds a document to the tabs.
      * @param doc0 &emsp; {@link forge.gui.framework.IVDoc} */
-    public void addDoc(final IVDoc doc0) {
+    public void addDoc(final IVDoc<? extends ICDoc> doc0) {
         if (doc0 instanceof VEmptyDoc) { return; }
         allDocs.add(doc0);
         doc0.setParentCell(this);
@@ -282,7 +282,7 @@ public final class DragCell extends JPanel implements ILocalRepaint {
 
     /** Removes a document from the layout and tabs.
      * @param doc0 &emsp; {@link forge.gui.framework.IVDoc} */
-    public void removeDoc(final IVDoc doc0) {
+    public void removeDoc(final IVDoc<? extends ICDoc> doc0) {
         allDocs.remove(doc0);
         pnlHead.remove(doc0.getTabLabel());
     }
@@ -299,12 +299,12 @@ public final class DragCell extends JPanel implements ILocalRepaint {
      *
      * @param doc0 &emsp; {@link forge.gui.framework.IVDoc} tab document.
      */
-    public void setSelected(final IVDoc doc0) {
+    public void setSelected(final IVDoc<? extends ICDoc> doc0) {
         docSelected = null;
         pnlBody.removeAll();
 
         // Priorities are used to "remember" tab selection history.
-        for (final IVDoc doc : allDocs) {
+        for (final IVDoc<? extends ICDoc> doc : allDocs) {
             if (doc.equals(doc0)) {
                 docSelected = doc0;
                 doc.getTabLabel().priorityOne();
@@ -327,7 +327,7 @@ public final class DragCell extends JPanel implements ILocalRepaint {
 
     /** Returns currently selected document in this cell.
      * @return {@link forge.gui.framework.IVDoc} */
-    public IVDoc getSelected() {
+    public IVDoc<? extends ICDoc> getSelected() {
         return docSelected;
     }
 
@@ -425,7 +425,7 @@ public final class DragCell extends JPanel implements ILocalRepaint {
         DragTab temp;
         int lowest = Integer.MAX_VALUE;
 
-        for (final IVDoc d : allDocs) {
+        for (final IVDoc<? extends ICDoc> d : allDocs) {
             temp = d.getTabLabel();
 
             // This line prevents two tabs from having the same priority.

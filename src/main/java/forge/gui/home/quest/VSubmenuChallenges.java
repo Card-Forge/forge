@@ -14,7 +14,6 @@ import net.miginfocom.swing.MigLayout;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
@@ -32,7 +31,7 @@ import forge.gui.toolbox.FSkin;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VSubmenuChallenges implements IVSubmenu, IVQuestStats, IVDoc {
+public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuestStats, IVDoc<CSubmenuChallenges> {
     /** */
     SINGLETON_INSTANCE;
 
@@ -261,7 +260,7 @@ public enum VSubmenuChallenges implements IVSubmenu, IVQuestStats, IVDoc {
      * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public ICDoc getLayoutControl() {
+    public CSubmenuChallenges getLayoutControl() {
         return CSubmenuChallenges.SINGLETON_INSTANCE;
     }
 

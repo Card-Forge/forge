@@ -39,7 +39,6 @@ import forge.gui.ForgeAction;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.VMatchUI;
@@ -52,7 +51,7 @@ import forge.properties.NewConstants;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VStack implements IVDoc {
+public enum VStack implements IVDoc<CStack> {
     /** */
     SINGLETON_INSTANCE;
 
@@ -110,7 +109,7 @@ public enum VStack implements IVDoc {
      * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public ICDoc getLayoutControl() {
+    public CStack getLayoutControl() {
         return CStack.SINGLETON_INSTANCE;
     }
 

@@ -29,7 +29,7 @@ public final class SOverflowUtil {
             int h = 0;
 
             pnlOverflow.removeAll();
-            for (final IVDoc t : pnlParent.getDocs()) {
+            for (final IVDoc<? extends ICDoc> t : pnlParent.getDocs()) {
                 if (t.getTabLabel().isVisible()) { continue; }
                 pnlOverflow.add(new OverflowLabel(t, pnlParent), constraints);
                 h += 24;
@@ -85,7 +85,7 @@ public final class SOverflowUtil {
 
     @SuppressWarnings("serial")
     private static class OverflowLabel extends JLabel implements ILocalRepaint {
-        public OverflowLabel(final IVDoc tab0, final DragCell parent0) {
+        public OverflowLabel(final IVDoc<? extends ICDoc> tab0, final DragCell parent0) {
             super(tab0.getTabLabel().getText());
             setOpaque(true);
             setBackground(Color.LIGHT_GRAY);

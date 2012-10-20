@@ -13,7 +13,6 @@ import forge.gui.deckeditor.controllers.CStatistics;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
@@ -23,7 +22,7 @@ import forge.gui.toolbox.FSkin;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VStatistics implements IVDoc {
+public enum VStatistics implements IVDoc<CStatistics> {
     /** */
     SINGLETON_INSTANCE;
 
@@ -168,7 +167,7 @@ public enum VStatistics implements IVDoc {
      * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public ICDoc getLayoutControl() {
+    public CStatistics getLayoutControl() {
         return CStatistics.SINGLETON_INSTANCE;
     }
 

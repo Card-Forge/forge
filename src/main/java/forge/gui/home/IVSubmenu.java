@@ -1,6 +1,7 @@
 package forge.gui.home;
 
 import forge.gui.framework.EDocID;
+import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 
 /**
@@ -9,7 +10,7 @@ import forge.gui.framework.IVDoc;
  * <br><br><i>(I at beginning of class name denotes an interface.)</i>
  * <br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public interface IVSubmenu extends IVDoc {
+public interface IVSubmenu<TCDoc extends ICDoc> extends IVDoc<TCDoc> {
     /** Returns parent menu grouping of this submenu, useful for
      * functions such as expanding and collapsing in the menu area.
      * 

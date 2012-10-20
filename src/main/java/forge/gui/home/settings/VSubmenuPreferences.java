@@ -31,7 +31,6 @@ import forge.control.KeyboardShortcuts.Shortcut;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.gui.framework.ICDoc;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.VHomeUI;
@@ -47,7 +46,7 @@ import forge.properties.NewConstants.Lang.OldGuiNewGame.NewGameText;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VSubmenuPreferences implements IVSubmenu {
+public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** */
     SINGLETON_INSTANCE;
 
@@ -423,7 +422,7 @@ public enum VSubmenuPreferences implements IVSubmenu {
      * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public ICDoc getLayoutControl() {
+    public CSubmenuPreferences getLayoutControl() {
         return CSubmenuPreferences.SINGLETON_INSTANCE;
     }
 

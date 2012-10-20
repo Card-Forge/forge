@@ -23,7 +23,7 @@ public class SDisplayUtil {
      * 
      * @param tab0 &emsp; {@link java.gui.framework.IVDoc}
      */
-    public static void remind(final IVDoc tab0) {
+    public static void remind(final IVDoc<? extends ICDoc> tab0) {
         showTab(tab0);
         final JPanel pnl = tab0.getParentCell().getBody();
 
@@ -81,7 +81,7 @@ public class SDisplayUtil {
     }
 
     /** @param tab0 &emsp; {@link java.gui.framework.IVDoc} */
-    public static void showTab(final IVDoc tab0) {
+    public static void showTab(final IVDoc<? extends ICDoc> tab0) {
         tab0.getParentCell().setSelected(tab0);
     }
 }

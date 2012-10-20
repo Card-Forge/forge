@@ -12,7 +12,7 @@ package forge.gui.framework;
  * <br><br><i>(I at beginning of class name denotes an interface.)</i>
  * <br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public interface IVDoc {
+public interface IVDoc<TCDoc extends ICDoc> {
     /**
      * Returns the ID used to identify this tab in save XML and card layouts.
      * 
@@ -30,7 +30,7 @@ public interface IVDoc {
     /** Retrieves control object associated with this document.
      * @return {@link forge.gui.home.ICSubmenu}
      */
-    ICDoc getLayoutControl();
+     TCDoc getLayoutControl();
 
     /** Sets the current parent cell of this view,
      * allowing access to its body and head sections.

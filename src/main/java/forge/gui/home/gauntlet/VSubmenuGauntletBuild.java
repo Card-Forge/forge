@@ -18,7 +18,6 @@ import forge.gauntlet.GauntletIO;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.gui.framework.ICDoc;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.VHomeUI;
@@ -35,7 +34,7 @@ import forge.gui.toolbox.FTextField;
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  *
  */
-public enum VSubmenuGauntletBuild implements IVSubmenu {
+public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
     /** */
     SINGLETON_INSTANCE;
 
@@ -331,7 +330,7 @@ public enum VSubmenuGauntletBuild implements IVSubmenu {
      * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public ICDoc getLayoutControl() {
+    public CSubmenuGauntletBuild getLayoutControl() {
         return CSubmenuGauntletBuild.SINGLETON_INSTANCE;
     }
 

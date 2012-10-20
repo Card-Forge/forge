@@ -26,7 +26,6 @@ import forge.Singletons;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.match.controllers.CCombat;
 import forge.gui.toolbox.FSkin;
@@ -36,7 +35,7 @@ import forge.gui.toolbox.FSkin;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VCombat implements IVDoc {
+public enum VCombat implements IVDoc<CCombat> {
     /** */
     SINGLETON_INSTANCE;
 
@@ -90,7 +89,7 @@ public enum VCombat implements IVDoc {
      * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public ICDoc getLayoutControl() {
+    public CCombat getLayoutControl() {
         return CCombat.SINGLETON_INSTANCE;
     }
 

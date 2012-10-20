@@ -101,20 +101,20 @@ public enum EDocID { /** */
     HAND_3 (null);
 
     // End enum declarations, start enum methods.
-    private IVDoc vDoc;
+    private IVDoc<? extends ICDoc> vDoc;
 
     /** @param doc0 &emsp; {@link forge.gui.framework.IVDoc} */
-    EDocID(final IVDoc doc0) {
+    EDocID(final IVDoc<? extends ICDoc> doc0) {
         this.vDoc = doc0;
     }
 
     /** @param doc0 &emsp; {@link forge.gui.framework.IVDoc} */
-    public void setDoc(final IVDoc doc0) {
+    public void setDoc(final IVDoc<? extends ICDoc> doc0) {
         this.vDoc = doc0;
     }
 
     /** @return {@link forge.gui.framework.IVDoc} */
-    public IVDoc getDoc() {
+    public IVDoc<? extends ICDoc> getDoc() {
         if (vDoc == null) { throw new NullPointerException("No document found for " + this.name() + "."); }
         return vDoc;
     }

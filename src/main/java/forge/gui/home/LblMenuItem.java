@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 
+import forge.gui.framework.ICDoc;
 import forge.gui.framework.ILocalRepaint;
 import forge.gui.toolbox.FSkin;
 
@@ -38,7 +39,7 @@ public class LblMenuItem extends JLabel implements ILocalRepaint {
      * 
      * @param doc0 {@link forge.gui.home.IVSubmenu}
      */
-    public LblMenuItem(final IVSubmenu doc0) {
+    public LblMenuItem(final IVSubmenu<? extends ICDoc> doc0) {
         super("      " + doc0.getMenuTitle());
         this.setFont(FSkin.getFont(14));
         this.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));

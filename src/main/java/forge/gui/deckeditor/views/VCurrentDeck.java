@@ -16,7 +16,6 @@ import forge.gui.deckeditor.controllers.CCurrentDeck;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
@@ -28,7 +27,7 @@ import forge.gui.toolbox.FTextField;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VCurrentDeck implements IVDoc, ITableContainer {
+public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
     /** */
     SINGLETON_INSTANCE;
 
@@ -222,7 +221,7 @@ public enum VCurrentDeck implements IVDoc, ITableContainer {
      * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public ICDoc getLayoutControl() {
+    public CCurrentDeck getLayoutControl() {
         return CCurrentDeck.SINGLETON_INSTANCE;
     }
 

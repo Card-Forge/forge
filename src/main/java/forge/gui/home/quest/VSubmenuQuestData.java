@@ -24,7 +24,6 @@ import forge.game.GameFormat;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.gui.framework.ICDoc;
 import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.VHomeUI;
@@ -42,7 +41,7 @@ import forge.util.IStorageView;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VSubmenuQuestData implements IVSubmenu {
+public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     /** */
     SINGLETON_INSTANCE;
 
@@ -362,7 +361,7 @@ public enum VSubmenuQuestData implements IVSubmenu {
      * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public ICDoc getLayoutControl() {
+    public CSubmenuQuestData getLayoutControl() {
         return CSubmenuQuestData.SINGLETON_INSTANCE;
     }
 

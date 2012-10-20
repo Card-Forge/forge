@@ -49,8 +49,8 @@ public final class SRearrangingUtil {
     private static DragCell cellSrc         = null;
     private static DragCell cellNew        = null;
     private static Dropzone dropzone         = Dropzone.NONE;
-    private static List<IVDoc> docsToMove     = new ArrayList<IVDoc>();
-    private static IVDoc srcSelectedDoc = null;
+    private static List<IVDoc<? extends ICDoc>> docsToMove     = new ArrayList<IVDoc<? extends ICDoc>>();
+    private static IVDoc<? extends ICDoc> srcSelectedDoc = null;
 
     private static final Toolkit TOOLS = Toolkit.getDefaultToolkit();
     private static final Cursor CUR_L = TOOLS.createCustomCursor(
@@ -99,7 +99,7 @@ public final class SRearrangingUtil {
 
         // If only a single tab, select it, and add it to docsToMove.
         if (e.getSource() instanceof DragTab) {
-            for (final IVDoc vDoc : cellSrc.getDocs()) {
+            for (final IVDoc<? extends ICDoc> vDoc : cellSrc.getDocs()) {
                 if (vDoc.getTabLabel() == (DragTab) (e.getSource())) {
                     cellSrc.setSelected(vDoc);
                     docsToMove.add(vDoc);
@@ -108,7 +108,7 @@ public final class SRearrangingUtil {
         }
         // Otherwise, add all of the documents.
         else {
-            for (final IVDoc vDoc : cellSrc.getDocs()) {
+            for (final IVDoc<? extends ICDoc> vDoc : cellSrc.getDocs()) {
                 docsToMove.add(vDoc);
             }
         }
@@ -284,7 +284,7 @@ public final class SRearrangingUtil {
             default:
         }
 
-        for (final IVDoc vDoc : docsToMove) {
+        for (final IVDoc<? extends ICDoc> vDoc : docsToMove) {
             cellSrc.removeDoc(vDoc);
             cellNew.addDoc(vDoc);
             cellNew.setSelected(vDoc);

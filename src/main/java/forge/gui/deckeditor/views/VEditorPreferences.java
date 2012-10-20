@@ -11,7 +11,6 @@ import forge.gui.deckeditor.controllers.CEditorPreferences;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FLabel;
@@ -22,7 +21,7 @@ import forge.gui.toolbox.FSkin;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VEditorPreferences implements IVDoc {
+public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
     /** */
     SINGLETON_INSTANCE;
 
@@ -144,7 +143,7 @@ public enum VEditorPreferences implements IVDoc {
      * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public ICDoc getLayoutControl() {
+    public CEditorPreferences getLayoutControl() {
         return CEditorPreferences.SINGLETON_INSTANCE;
     }
 

@@ -25,7 +25,6 @@ import forge.game.player.Player;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.view.arcane.HandArea;
 
@@ -34,7 +33,7 @@ import forge.view.arcane.HandArea;
  * 
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public class VHand implements IVDoc {
+public class VHand implements IVDoc<CHand> {
     // Fields used with interface IVDoc
     private final CHand control;
     private DragCell parentCell;
@@ -127,7 +126,7 @@ public class VHand implements IVDoc {
      * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public ICDoc getLayoutControl() {
+    public CHand getLayoutControl() {
         return control;
     }
 

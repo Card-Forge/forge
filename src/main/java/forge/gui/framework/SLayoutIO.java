@@ -116,7 +116,7 @@ public final class SLayoutIO {
             writer.add(EF.createAttribute(Property.h.toString(), String.valueOf(h0)));
             writer.add(NEWLINE);
 
-            for (final IVDoc vDoc : cell.getDocs()) {
+            for (final IVDoc<? extends ICDoc> vDoc : cell.getDocs()) {
                 createNode(writer, Property.doc, vDoc.getDocumentID().toString());
             }
 

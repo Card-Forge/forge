@@ -19,7 +19,6 @@ import forge.gui.deckeditor.controllers.CFilters;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FLabel;
@@ -31,7 +30,7 @@ import forge.gui.toolbox.FTextField;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VFilters implements IVDoc {
+public enum VFilters implements IVDoc<CFilters> {
     /** */
     SINGLETON_INSTANCE;
 
@@ -225,7 +224,7 @@ public enum VFilters implements IVDoc {
      * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public ICDoc getLayoutControl() {
+    public CFilters getLayoutControl() {
         return CFilters.SINGLETON_INSTANCE;
     }
 

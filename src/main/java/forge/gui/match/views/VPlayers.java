@@ -34,7 +34,6 @@ import forge.game.zone.ZoneType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
-import forge.gui.framework.ICDoc;
 import forge.gui.framework.IVDoc;
 import forge.gui.match.controllers.CPlayers;
 import forge.gui.toolbox.FSkin;
@@ -45,7 +44,7 @@ import forge.properties.ForgePreferences.FPref;
  *
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VPlayers implements IVDoc {
+public enum VPlayers implements IVDoc<CPlayers> {
     /** */
     SINGLETON_INSTANCE;
 
@@ -138,7 +137,7 @@ public enum VPlayers implements IVDoc {
      * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public ICDoc getLayoutControl() {
+    public CPlayers getLayoutControl() {
         return CPlayers.SINGLETON_INSTANCE;
     }
 
