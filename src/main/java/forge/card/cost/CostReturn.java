@@ -158,9 +158,11 @@ public class CostReturn extends CostPartWithList {
             }
         }
         if (this.getThis()) {
-            CostUtil.setInput(CostReturn.returnThis(ability, payment, this));
+            final Input inp = CostReturn.returnThis(ability, payment, this);
+            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
         } else {
-            CostUtil.setInput(CostReturn.returnType(ability, this.getType(), payment, this, c));
+            final Input inp = CostReturn.returnType(ability, this.getType(), payment, this, c);
+            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
         }
         return false;
     }

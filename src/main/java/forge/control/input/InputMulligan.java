@@ -175,7 +175,7 @@ public class InputMulligan extends Input {
         game.getGameLog().add("Turn",
                 "Turn " + game.getPhaseHandler().getTurn()
                     + " (" + game.getPhaseHandler().getPlayerTurn() + ")", 0);
-        game.getPhaseHandler().setNeedToNextPhase(false);
+        game.getPhaseHandler().setPlayerMayHavePriority(true);
         PhaseUtil.visuallyActivatePhase(game.getPhaseHandler().getPlayerTurn(), game.getPhaseHandler().getPhase());
 
         this.stop();

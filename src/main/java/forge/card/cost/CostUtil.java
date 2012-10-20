@@ -22,14 +22,11 @@ import java.util.List;
 import java.util.Random;
 
 import forge.Card;
-import forge.Singletons;
-
 import forge.CardLists;
 import forge.Counters;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
-import forge.control.input.Input;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -451,19 +448,6 @@ public class CostUtil {
         card.setSVar("ChosenY", "Number$" + Integer.toString(chosenY));
 
         return chosenY;
-    }
-
-    /**
-     * <p>
-     * setInput.
-     * </p>
-     * 
-     * @param in
-     *            a {@link forge.control.input.Input} object.
-     */
-    public static void setInput(final Input in) {
-        // Just a shortcut..
-        Singletons.getModel().getMatch().getInput().setInput(in, true);
     }
 
     public static Cost combineCosts(Cost cost1, Cost cost2) {

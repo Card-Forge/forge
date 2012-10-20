@@ -23,6 +23,7 @@ import forge.Card;
 
 import forge.CardLists;
 import forge.CardPredicates.Presets;
+import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
@@ -169,7 +170,8 @@ public class CostTapType extends CostPartWithList {
             }
         }
 
-        CostUtil.setInput(CostTapType.inputTapXCost(this, typeList, ability, payment, c));
+        final Input inp = CostTapType.inputTapXCost(this, typeList, ability, payment, c);
+        Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
         return false;
     }
 

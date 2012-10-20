@@ -53,7 +53,7 @@ public class InputCleanup extends Input {
         if (n <= max || max <= -1) {
             CombatUtil.removeAllDamage();
 
-            Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(true);
+            Singletons.getModel().getGame().getPhaseHandler().setPlayerMayHavePriority(false);
             Singletons.getModel().getGame().getPhaseHandler().nextPhase(); // TODO keep an eye on this code,
                                             // see if we can get rid of it.
             return;
@@ -89,10 +89,10 @@ public class InputCleanup extends Input {
 
         if (ai.getMaxHandSize() != -1) {
             final int numDiscards = size - ai.getMaxHandSize();
-            ai.discard(numDiscards, null, false);
+            ai.discard(numDiscards, null);
         }
         CombatUtil.removeAllDamage();
 
-        Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(true);
+        Singletons.getModel().getGame().getPhaseHandler().setPlayerMayHavePriority(false);
     }
 }
