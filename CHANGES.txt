@@ -287,6 +287,16 @@ Fixes/Features:
 - You now get the option to unlock new sets after every 50 wins, not 100.
 - fixed crash at end of quest match
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Angel of Serenity will no longer produce a crash when the AI wants to cast it.
+- Improvements and cleanup in AF DealDamage AI functions.
+- MatchController contains inputControl, subscribes listeners to event by itself
+- most of AllZone methods static moved into instances, consider retrieving frequently used values into class fields or local variables
+- AllZone is gone. Its members moved to Fmodel while colorchanger went to GameState
+- getGameState => getGame
+- Stack zone uses its own class Zone (which has no owner obv.)
+- passes GameState to phaseHandler, moved player related static calls to player/Player.java
+- If player decides to draw, turn is given to his opponent
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -324,6 +334,9 @@ Tyrannize
 Measure of Wickedness
 Glittering Lynx
 Glittering Lion
+Grip of Amnesia
+Rotting Giant
+Wicked Akuba
 
 
 end
