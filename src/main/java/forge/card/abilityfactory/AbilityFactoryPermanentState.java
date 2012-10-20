@@ -1425,8 +1425,12 @@ public class AbilityFactoryPermanentState {
         }
         list = CardLists.getValidCards(list, valid.split(","), card.getController(), card);
 
-        for (int i = 0; i < list.size(); i++) {
-            list.get(i).untap();
+        boolean remember = params.containsKey("RememberUntapped");
+        for(Card c : list) {
+            c.untap();
+            if (remember) {
+                card.addRemembered(c);
+            }
         }
     }
 
