@@ -87,7 +87,7 @@ public class InputAttack extends Input {
             Singletons.getModel().getGame().getPhaseHandler().repeatPhase();
         }
 
-        Singletons.getModel().getGame().getPhaseHandler().setPlayerMayHavePriority(false);
+        Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(true);
         Singletons.getModel().getMatch().getInput().resetInput();
     }
 

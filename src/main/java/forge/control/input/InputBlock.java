@@ -92,7 +92,7 @@ public class InputBlock extends Input {
             
             CombatUtil.orderMultipleCombatants(Singletons.getModel().getGame().getCombat());
 
-            Singletons.getModel().getGame().getPhaseHandler().setPlayerMayHavePriority(false);
+            Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(true);
         }
     }
 

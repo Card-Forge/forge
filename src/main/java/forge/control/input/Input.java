@@ -100,9 +100,9 @@ public abstract class Input implements java.io.Serializable {
         Singletons.getModel().getMatch().getInput().resetInput();
 
         PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler(); 
-        if (!ph.mayPlayerHavePriority()) {
+        if (ph.isNeedToNextPhase()) {
             // mulligan needs this to move onto next phase
-            ph.setPlayerMayHavePriority(true);
+            ph.setNeedToNextPhase(false);
             ph.nextPhase();
         }
     }

@@ -228,19 +228,15 @@ public class CostExile extends CostPartWithList {
             }
         }
         if (this.getThis()) {
-            final Input inp = CostExile.exileThis(ability, payment, this);
-            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
+            CostUtil.setInput(CostExile.exileThis(ability, payment, this));
         } else if (this.from.equals(ZoneType.Battlefield) || this.from.equals(ZoneType.Hand)) {
-            final Input inp = CostExile.exileType(ability, this, this.getType(), payment, c);
-            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
+            CostUtil.setInput(CostExile.exileType(ability, this, this.getType(), payment, c));
         } else if (this.from.equals(ZoneType.Stack)) {
-            final Input inp = CostExile.exileFromStack(ability, this, this.getType(), payment, c);
-            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
+            CostUtil.setInput(CostExile.exileFromStack(ability, this, this.getType(), payment, c));
         } else if (this.from.equals(ZoneType.Library)) {
             CostExile.exileFromTop(ability, this, payment, c);
         } else {
-            final Input inp = CostExile.exileFrom(ability, this, this.getType(), payment, c);
-            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
+            CostUtil.setInput(CostExile.exileFrom(ability, this, this.getType(), payment, c));
         }
         return false;
     }

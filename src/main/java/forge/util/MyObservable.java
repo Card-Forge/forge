@@ -42,10 +42,10 @@ public class MyObservable extends Observable {
 
         PhaseHandler phases = Singletons.getModel().getGame().getPhaseHandler();
 
-        if ((phases != null) && !phases.mayPlayerHavePriority()) {
+        if ((phases != null) && phases.isNeedToNextPhase()) {
             if (phases.isNeedToNextPhaseInit()) {
                 // this is used.
-                phases.setPlayerMayHavePriority(true);
+                phases.setNeedToNextPhase(false);
                 phases.nextPhase();
             }
         }

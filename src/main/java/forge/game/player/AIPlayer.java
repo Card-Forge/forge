@@ -136,13 +136,15 @@ public class AIPlayer extends Player {
 
     /** {@inheritDoc} */
     @Override
-    public final void discard(final int num, final SpellAbility sa) {
+    public final List<Card> discard(final int num, final SpellAbility sa, final boolean duringResolution) {
         int max = this.getCardsIn(ZoneType.Hand).size();
         max = Math.min(max, num);
         final List<Card> discarded = ComputerUtil.discardNumTypeAI(this, max, null, sa);
         for (int i = 0; i < discarded.size(); i++) {
             this.doDiscard(discarded.get(i), sa);
         }
+
+        return discarded;
     } // end discard
 
     /** {@inheritDoc} */
@@ -157,7 +159,7 @@ public class AIPlayer extends Player {
                                                               // to doDiscard basically
             return;
         }
-        this.discard(num, sa);
+        this.discard(num, sa, false);
     }
 
     // /////////////////////////

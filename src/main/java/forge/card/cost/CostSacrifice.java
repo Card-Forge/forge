@@ -163,8 +163,7 @@ public class CostSacrifice extends CostPartWithList {
         }
 
         if (this.getThis()) {
-            final Input inp = CostSacrifice.sacrificeThis(ability, payment, this);
-            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
+            CostUtil.setInput(CostSacrifice.sacrificeThis(ability, payment, this));
         } else if (amount.equals("All")) {
             this.setList(list);
             CostSacrifice.sacrificeAll(ability, payment, this, list);
@@ -185,8 +184,7 @@ public class CostSacrifice extends CostPartWithList {
                 payment.setPaidManaPart(this);
                 return true;
             }
-            final Input inp = CostSacrifice.sacrificeFromList(ability, payment, this, list, c);
-            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
+            CostUtil.setInput(CostSacrifice.sacrificeFromList(ability, payment, this, list, c));
         }
 
         return false;

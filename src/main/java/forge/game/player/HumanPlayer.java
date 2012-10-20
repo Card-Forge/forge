@@ -17,6 +17,7 @@
  */
 package forge.game.player;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import forge.Card;
@@ -123,8 +124,11 @@ public class HumanPlayer extends Player {
 
     /** {@inheritDoc} */
     @Override
-    public final void discard(final int num, final SpellAbility sa) {
-        Singletons.getModel().getMatch().getInput().setInput(PlayerUtil.inputDiscard(num, sa));
+    public final List<Card> discard(final int num, final SpellAbility sa, final boolean duringResolution) {
+        Singletons.getModel().getMatch().getInput().setInput(PlayerUtil.inputDiscard(num, sa), duringResolution);
+
+        // why is List<Card> returned?
+        return new ArrayList<Card>();
     }
 
     /** {@inheritDoc} */
@@ -145,7 +149,7 @@ public class HumanPlayer extends Player {
      */
     @Override
     protected final void discardChainsOfMephistopheles() {
-        Singletons.getModel().getMatch().getInput().setInputInterrupt(PlayerUtil.inputChainsDiscard());
+        Singletons.getModel().getMatch().getInput().setInput(PlayerUtil.inputChainsDiscard(), true);
     }
 
     /** {@inheritDoc} */

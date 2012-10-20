@@ -23,7 +23,6 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardPredicates;
-import forge.Singletons;
 
 import forge.CardLists;
 import forge.card.abilityfactory.AbilityFactory;
@@ -253,8 +252,7 @@ public class CostDiscard extends CostPartWithList {
                     }
                 }
 
-                final Input inp = CostDiscard.inputDiscardCost(discType, handList, ability, payment, this, c);
-                Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
+                CostUtil.setInput(CostDiscard.inputDiscardCost(discType, handList, ability, payment, this, c));
                 return false;
             }
         }

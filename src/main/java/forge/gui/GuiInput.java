@@ -44,7 +44,7 @@ public class GuiInput extends MyObservable implements Observer {
     /** {@inheritDoc} */
     @Override
     public final void update(final Observable observable, final Object obj) {
-        final Input tmp = Singletons.getModel().getMatch().getInput().getActualInput();
+        final Input tmp = Singletons.getModel().getMatch().getInput().updateInput();
         if (tmp != null) {
             this.setInput(tmp);
         }

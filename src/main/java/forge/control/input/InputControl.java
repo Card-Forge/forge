@@ -17,6 +17,7 @@
  */
 package forge.control.input;
 
+import java.util.LinkedList;
 import java.util.Stack;
 
 import forge.game.GameState;
@@ -43,7 +44,8 @@ public class InputControl extends MyObservable implements java.io.Serializable {
     private Input input;
 
     private final Stack<Input> inputStack = new Stack<Input>();
-    private final Stack<Input> urgentInputStack = new Stack<Input>();
+    private final Stack<Input> resolvingStack = new Stack<Input>();
+    private final LinkedList<Input> resolvingQueue = new LinkedList<Input>();
 
     private final GameState game;
     private ComputerAIInput aiInput; // initialized at runtime to be the latest object created
@@ -67,12 +69,13 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      *            a {@link forge.control.input.Input} object.
      */
     public final void setInput(final Input in) {
+        MagicStack stack = this.game.getStack();
         boolean isInputEmpty = this.input == null || this.input instanceof InputPassPriority;
         
-        if (!this.game.getStack().isResolving() && isInputEmpty) {
-            this.input = in;
+        if (stack.isResolving() || !isInputEmpty) {
+            this.inputStack.add(in);
         } else {
-            this.inputStack.add(in);                
+            this.input = in;
         }
         this.updateObservers();
     }
@@ -87,10 +90,15 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * @param bAddToResolving
      *            a boolean.
      */
-    public final void setInputInterrupt(final Input in) {
+    public final void setInput(final Input in, final boolean bAddToResolving) {
         // Make this
+        if (!bAddToResolving) {
+            this.setInput(in);
+            return;
+        }
+
         final Input old = this.input;
-        this.urgentInputStack.add(old);
+        this.resolvingStack.add(old);
         this.changeInput(in);
     }
 
@@ -125,6 +133,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      */
     public final void clearInput() {
         this.input = null;
+        this.resolvingQueue.clear();
         this.inputStack.clear();
     }
 
@@ -152,7 +161,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * 
      * @return a {@link forge.control.input.Input} object.
      */
-    public final Input getActualInput() {
+    public final Input updateInput() {
         final PhaseHandler handler = game.getPhaseHandler();
         final PhaseType phase = handler.getPhase();
         final Player playerTurn = handler.getPlayerTurn();
@@ -161,14 +170,14 @@ public class InputControl extends MyObservable implements java.io.Serializable {
 
         // TODO this resolving portion needs more work, but fixes Death Cloud
         // issues
-        if (this.urgentInputStack.size() > 0) {
+        if (this.resolvingStack.size() > 0) {
             if (this.input != null) {
                 return this.input;
             }
 
             // if an SA is resolving, only change input for something that is
             // part of the resolving SA
-            this.changeInput(this.urgentInputStack.pop());
+            this.changeInput(this.resolvingStack.pop());
             return this.input;
         }
 
@@ -185,15 +194,15 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             return this.input;
         }
 
-        if (handler.hasPhaseEffects()) {
+        if (handler.doPhaseEffects()) {
             // Handle begin phase stuff, then start back from the top
             handler.handleBeginPhase();
-            return this.getActualInput();
+            return this.updateInput();
         }
 
         // If the Phase we're in doesn't allow for Priority, return null to move
         // to next phase
-        if (!handler.mayPlayerHavePriority()) {
+        if (handler.isNeedToNextPhase()) {
             return null;
         }
 
@@ -213,7 +222,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             } else {
                 if (game.getCombat().getAttackers().isEmpty()) {
                     // no active attackers, skip the Blocking phase
-                    handler.setPlayerMayHavePriority(false);
+                    handler.setNeedToNextPhase(true);
                     return null;
                 } else {
                     handler.setAutoPass(false);

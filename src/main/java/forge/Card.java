@@ -9085,20 +9085,4 @@ public class Card extends GameEntity implements Comparable<Card> {
         return getController().getCardsIn(ZoneType.Battlefield).contains(this);
     }
 
-    public void onCleanupPhase(final Player turn) {
-        resetPreventNextDamage();
-        resetReceivedDamageFromThisTurn();
-        resetDealtDamageToThisTurn();
-        resetDealtDamageToPlayerThisTurn();
-        getDamageHistory().newTurn();
-        setRegeneratedThisTurn(0);
-        clearMustBlockCards();
-        getDamageHistory().setCreatureAttackedLastTurnOf(turn, getDamageHistory().getCreatureAttackedThisTurn());
-        getDamageHistory().setCreatureAttackedThisTurn(false);
-        getDamageHistory().setCreatureBlockedThisTurn(false);
-        getDamageHistory().setCreatureGotBlockedThisTurn(false);
-        clearBlockedByThisTurn();
-        clearBlockedThisTurn();
-    }
-
 } // end Card class

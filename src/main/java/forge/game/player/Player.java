@@ -1197,7 +1197,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
                     if (this.isHuman()) {
                         this.discardChainsOfMephistopheles();
                     } else { // Computer
-                        this.discard(1, null);
+                        this.discard(1, null, false);
                         // true causes this code not to be run again
                         drawn.addAll(this.drawCards(1, true));
                     }
@@ -1498,7 +1498,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      *            a boolean.
      * @return a {@link forge.CardList} object.
      */
-    public abstract void discard(final int num, final SpellAbility sa);
+    public abstract List<Card> discard(final int num, final SpellAbility sa, boolean duringResolution);
 
     /**
      * <p>
@@ -1509,8 +1509,8 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link forge.CardList} object.
      */
-    public final void discard(final SpellAbility sa) {
-        this.discard(1, sa);
+    public final List<Card> discard(final SpellAbility sa) {
+        return this.discard(1, sa, false);
     }
 
     /**
@@ -2756,18 +2756,6 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         return (int) Math.pow(2, tokenDoublers); // pow(a,0) = 1; pow(a,1) = a
                                                  // ... no worries about size =
                                                  // 0
-    }
-
-    public void onCleanupPhase() {
-        for (Card c : getCardsIn(ZoneType.Hand))
-            c.setDrawnThisTurn(false);
-        
-        resetPreventNextDamage();
-        resetNumDrawnThisTurn();
-        setAttackedWithCreatureThisTurn(false);
-        setNumLandsPlayed(0);
-        clearAssignedDamage();
-        resetAttackersDeclaredThisTurn();
     }
 
     /**
