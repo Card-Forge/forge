@@ -127,18 +127,15 @@ public class MatchController {
             Player computerPlayer = Aggregates.firstFieldEquals(currentGame.getPlayers(), Player.Accessors.FN_GET_TYPE, PlayerType.COMPUTER);
             input.setComputer(new ComputerAIInput(new ComputerAIGeneral(computerPlayer)));
 
+            // TODO restore this functionality!!!
+            //VMatchUI.SINGLETON_INSTANCE.getViewDevMode().getDocument().setVisible(Preferences.DEV_MODE);
+            for (final VField field : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
+                field.getLblHand().setHoverable(Preferences.DEV_MODE);
+                field.getLblLibrary().setHoverable(Preferences.DEV_MODE);
+            }
 
             if (this.getPlayedGames().isEmpty()) { 
-                // TODO restore this functionality!!!
-                //VMatchUI.SINGLETON_INSTANCE.getViewDevMode().getDocument().setVisible(Preferences.DEV_MODE);
-        
-                for (final VField field : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
-                    field.getLblHand().setHoverable(Preferences.DEV_MODE);
-                    field.getLblLibrary().setHoverable(Preferences.DEV_MODE);
-                }
-        
                 VAntes.SINGLETON_INSTANCE.clearAnteCards();
-                input.resetInput();
             }
             
             // per player observers were set in CMatchUI.SINGLETON_INSTANCE.initMatch

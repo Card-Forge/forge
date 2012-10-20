@@ -549,8 +549,10 @@ public class VField implements IVDoc<CField> {
         case COMBAT_BEGIN:
             return this.getLblBeginCombat();
         case COMBAT_DECLARE_ATTACKERS:
+        case COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY:
             return this.getLblDeclareAttackers();
         case COMBAT_DECLARE_BLOCKERS:
+        case COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY:
             return this.getLblDeclareBlockers();
         case COMBAT_DAMAGE:
             return this.getLblCombatDamage();
