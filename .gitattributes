@@ -8235,6 +8235,7 @@ res/cardsfolder/s/sandbar_crocodile.txt -text
 res/cardsfolder/s/sandbar_merfolk.txt svneol=native#text/plain
 res/cardsfolder/s/sandbar_serpent.txt svneol=native#text/plain
 res/cardsfolder/s/sands_of_delirium.txt -text
+res/cardsfolder/s/sands_of_time.txt -text
 res/cardsfolder/s/sandskin.txt svneol=native#text/plain
 res/cardsfolder/s/sandsower.txt svneol=native#text/plain
 res/cardsfolder/s/sandstone_deadfall.txt -text
