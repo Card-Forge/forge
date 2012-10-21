@@ -130,21 +130,22 @@ public abstract class CardPanelContainer extends JPanel {
             public void mouseMoved(final MouseEvent evt) {
                 final CardPanel hitPanel = CardPanelContainer.this.getCardPanel(evt.getX(), evt.getY());
 
-                if ( CardPanelContainer.this.hoveredPanel == hitPanel ) // no big change
+                if (CardPanelContainer.this.hoveredPanel == hitPanel) { // no big change
                     return;
-                
-                if (CardPanelContainer.this.hoveredPanel != null ) { 
+                }
+
+                if (CardPanelContainer.this.hoveredPanel != null) {
                     CardPanelContainer.this.mouseOutPanel(evt); // hovered <= null is inside
                 }
-                
+
                 if (hitPanel != null) {
                     CMatchUI.SINGLETON_INSTANCE.setCard(hitPanel.getCard());
-                    
+
                     CardPanelContainer.this.hoveredPanel = hitPanel;
                     CardPanelContainer.this.hoveredPanel.setSelected(true);
                     CardPanelContainer.this.mouseOver(hitPanel, evt);
                 }
-                
+
                 // System.err.format("%d %d over %s%n", evt.getX(), evt.getY(), hitPanel == null ? null : hitPanel.getCard().getName());
             }
         });
@@ -556,6 +557,11 @@ public abstract class CardPanelContainer extends JPanel {
         for (final CardPanelMouseListener listener : this.listeners) {
             listener.mouseOver(panel, evt);
         }
+    }
+
+    /** @return {@link forge.view.arcane.CardPanel} */
+    public final CardPanel getMouseOverPanel() {
+        return this.hoveredPanel;
     }
 
     /**

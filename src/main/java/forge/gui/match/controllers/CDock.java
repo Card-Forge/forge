@@ -42,9 +42,9 @@ import forge.game.zone.ZoneType;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.gui.framework.SLayoutIO;
-import forge.gui.match.TargetingOverlay;
 import forge.gui.match.views.VDock;
 import forge.gui.toolbox.FOverlay;
+import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.SaveOpenDialog;
 import forge.gui.toolbox.SaveOpenDialog.Filetypes;
 import forge.item.CardPrinted;
@@ -60,6 +60,8 @@ import forge.view.FView;
 public enum CDock implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
+
+    private int arcState;
 
     /** Concede game, bring up WinLose UI. */
     public void concede() {
@@ -139,6 +141,41 @@ public enum CDock implements ICDoc {
         showDeck(Singletons.getModel().getMatch().getPlayersDeck(Singletons.getControl().getPlayer().getLobbyPlayer()));
     }
 
+    /**
+     * @return int State of targeting arc preference:<br>
+     * 0 = don't draw<br>
+     * 1 = draw on card mouseover<br>
+     * 2 = always draw
+     */
+    public int getArcState() {
+        return arcState;
+    }
+
+    /** @param state0 int */
+    private void refreshArcStateDisplay() {
+        switch (arcState) {
+            case 0:
+                VDock.SINGLETON_INSTANCE.getBtnTargeting().setToolTipText("Targeting arcs: Off");
+                VDock.SINGLETON_INSTANCE.getBtnTargeting().setIcon(FSkin.getIcon(FSkin.DockIcons.ICO_ARCSOFF));
+                VDock.SINGLETON_INSTANCE.getBtnTargeting().repaintSelf();
+                break;
+            case 1:
+                VDock.SINGLETON_INSTANCE.getBtnTargeting().setToolTipText("Targeting arcs: Card mouseover");
+                VDock.SINGLETON_INSTANCE.getBtnTargeting().setIcon(FSkin.getIcon(FSkin.DockIcons.ICO_ARCSHOVER));
+                VDock.SINGLETON_INSTANCE.getBtnTargeting().repaintSelf();
+                break;
+            default:
+                VDock.SINGLETON_INSTANCE.getBtnTargeting().setIcon(FSkin.getIcon(FSkin.DockIcons.ICO_ARCSON));
+                VDock.SINGLETON_INSTANCE.getBtnTargeting().setToolTipText("Targeting arcs: Always on");
+                VDock.SINGLETON_INSTANCE.getBtnTargeting().repaintSelf();
+                break;
+        }
+
+        FModel.SINGLETON_INSTANCE.getPreferences()
+            .setPref(FPref.UI_TARGETING_OVERLAY, String.valueOf(arcState));
+        //FModel.SINGLETON_INSTANCE.getPreferences().save();
+    }
+
     /** Attack with everyone. */
     public void alphaStrike() {
         final PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler();
@@ -160,15 +197,11 @@ public enum CDock implements ICDoc {
 
     /** Toggle targeting overlay painting. */
     public void toggleTargeting() {
-        if (Boolean.valueOf(FModel.SINGLETON_INSTANCE.getPreferences().getPref(FPref.UI_TARGETING_OVERLAY))) {
-            FModel.SINGLETON_INSTANCE.getPreferences().setPref(FPref.UI_TARGETING_OVERLAY, "false");
-        }
-        else {
-            FModel.SINGLETON_INSTANCE.getPreferences().setPref(FPref.UI_TARGETING_OVERLAY, "true");
-        }
+        arcState++;
 
-        FModel.SINGLETON_INSTANCE.getPreferences().save();
-        TargetingOverlay.SINGLETON_INSTANCE.getPanel().repaint();
+        if (arcState == 3) { arcState = 0; }
+
+        refreshArcStateDisplay();
     }
 
     /**
@@ -237,6 +270,21 @@ public enum CDock implements ICDoc {
      */
     @Override
     public void initialize() {
+        final String temp = FModel.SINGLETON_INSTANCE.getPreferences()
+                .getPref(FPref.UI_TARGETING_OVERLAY);
+
+        // Old preference used boolean; new preference needs 0-1-2
+        // (none, mouseover, solid).  Can remove this conditional
+        // statement after a while...Doublestrike 17-10-12
+        if (temp.equals("0") || temp.equals("1")) {
+            arcState = Integer.valueOf(temp);
+        }
+        else {
+            arcState = 2;
+        }
+
+        refreshArcStateDisplay();
+
         VDock.SINGLETON_INSTANCE.getBtnConcede()
             .addMouseListener(new MouseAdapter() { @Override
                 public void mousePressed(final MouseEvent e) {

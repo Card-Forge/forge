@@ -34,6 +34,7 @@ import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.gui.match.controllers.CDock;
+import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 
 /**
@@ -66,8 +67,15 @@ public enum VDock implements IVDoc<CDock> {
             new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_SAVELAYOUT), "Save Layout");
     private final JLabel btnAlphaStrike =
             new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_ALPHASTRIKE), "Alpha Strike");
-    private final JLabel btnTargeting =
-            new DockButton(FSkin.getIcon(FSkin.DockIcons.ICO_TARGETING), "Show Targeting Arcs");
+    private final FLabel btnTargeting =
+            new FLabel.Builder().icon(FSkin.getIcon(FSkin.DockIcons.ICO_ARCSOFF))
+                .hoverable(true).iconInBackground(true).iconScaleFactor(1.0).build();
+
+    private VDock() {
+        btnTargeting.setPreferredSize(new Dimension(30, 30));
+        btnTargeting.setMinimumSize(new Dimension(30, 30));
+        btnTargeting.setMaximumSize(new Dimension(30, 30));
+    }
 
     //========= Overridden methods
 
@@ -174,8 +182,8 @@ public enum VDock implements IVDoc<CDock> {
         return btnAlphaStrike;
     }
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getBtnTargeting() {
+    /** @return {@link forge.gui.toolbox.FLabel} */
+    public FLabel getBtnTargeting() {
         return btnTargeting;
     }
 

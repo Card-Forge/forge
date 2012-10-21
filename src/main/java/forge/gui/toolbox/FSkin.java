@@ -228,7 +228,9 @@ public enum FSkin {
         ICO_SAVELAYOUT   (new int[] {80, 800, 80, 80}), /** */
         ICO_DECKLIST     (new int[] {400, 640, 80, 80}), /** */
         ICO_ALPHASTRIKE  (new int[] {160, 800, 80, 80}), /** */
-        ICO_TARGETING  (new int[] {240, 800, 80, 80});
+        ICO_ARCSOFF      (new int[] {240, 800, 80, 80}), /** */
+        ICO_ARCSON       (new int[] {320, 800, 80, 80}), /** */
+        ICO_ARCSHOVER    (new int[] {400, 800, 80, 80});
 
         private int[] coords;
         /** @param xy &emsp; int[] coordinates */

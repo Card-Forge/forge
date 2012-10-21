@@ -32,10 +32,10 @@ import javax.swing.JPanel;
 import forge.Card;
 import forge.Singletons;
 import forge.control.FControl;
+import forge.gui.match.controllers.CDock;
 import forge.gui.match.nonsingleton.CField;
+import forge.gui.match.nonsingleton.VField;
 import forge.gui.toolbox.FSkin;
-import forge.model.FModel;
-import forge.properties.ForgePreferences.FPref;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
 
@@ -73,8 +73,25 @@ public enum TargetingOverlay {
         arcs.clear();
         cardPanels.clear();
 
-        for (CField f : CMatchUI.SINGLETON_INSTANCE.getFieldControls()) {
-            cardPanels.addAll(f.getView().getTabletop().getCardPanels());
+        List<VField> fields = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
+
+        switch (CDock.SINGLETON_INSTANCE.getArcState()) {
+            case 0:
+                return;
+            case 1:
+                // Draw only hovered card
+                for (VField f : fields) {
+                    if (f.getTabletop().getCardFromMouseOverPanel() != null) {
+                        cardPanels.add(f.getTabletop().getMouseOverPanel());
+                        break;
+                    }
+                }
+                break;
+            default:
+                // Draw all
+                for (CField f : CMatchUI.SINGLETON_INSTANCE.getFieldControls()) {
+                    cardPanels.addAll(f.getView().getTabletop().getCardPanels());
+                }
         }
 
         final Point docOffsets = FView.SINGLETON_INSTANCE.getLpnDocument().getLocationOnScreen();
@@ -99,6 +116,7 @@ public enum TargetingOverlay {
             // Enchantments
             // Doesn't work for global enchantments?! Doublestrike 10-10-12
             temp = c.getCard().getEnchantedBy();
+
             for (Card enchantingCard : temp) {
                 arcs.add(new Point[] {
                     endpoints.get(c.getCard().getUniqueNumber()),
@@ -134,14 +152,14 @@ public enum TargetingOverlay {
         @Override
         public void paintComponent(final Graphics g) {
             // No need for this except in match view
-            if (FControl.SINGLETON_INSTANCE.getState() != 1) {
-                return;
-            }
-            else if (!Boolean.valueOf(FModel.SINGLETON_INSTANCE.getPreferences().getPref(FPref.UI_TARGETING_OVERLAY))) {
-                return;
-            }
+            if (FControl.SINGLETON_INSTANCE.getState() != 1) { return; }
 
             super.paintComponent(g);
+
+            // 0 is off
+            int overlaystate = CDock.SINGLETON_INSTANCE.getArcState();
+            if (overlaystate == 0) { return; }
+
             // Arc drawing
             Graphics2D g2d = (Graphics2D) g;
             g2d.setColor(FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
@@ -150,6 +168,8 @@ public enum TargetingOverlay {
                     RenderingHints.VALUE_ANTIALIAS_ON);
 
             assembleArcs();
+            if (arcs.size() < 1) { return; }
+
             int w, h, x, y;
 
             for (Point[] p : arcs) {

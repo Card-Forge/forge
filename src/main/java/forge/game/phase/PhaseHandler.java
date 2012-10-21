@@ -22,8 +22,8 @@ import java.util.List;
 import java.util.Stack;
 
 import com.esotericsoftware.minlog.Log;
-import forge.Card;
 
+import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.GameActionUtil;
