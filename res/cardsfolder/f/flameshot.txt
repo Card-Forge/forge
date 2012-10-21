@@ -3,9 +3,9 @@ ManaCost:3 R
 Types:Sorcery
 Text:no text
 A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature (1) | NumDmg$ 1 | SubAbility$ DBDamage2 | SpellDescription$ CARDNAME deals 3 damage divided as you choose among any number of target creatures.
-A:SP$ DealDamage | Cost$ Discard<1/Mountain> | ValidTgts$ Creature | TgtPrompt$ Select target creature(1) | NumDmg$ 1 | SubAbility$ DBDamage2 | Description$ You may discard a Mountain card rather than pay CARDNAME's mana cost.
 SVar:DBDamage2:DB$DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature (2) | NumDmg$ 1 | SubAbility$ DBDamage3
 SVar:DBDamage3:DB$DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature (3) | NumDmg$ 1
+SVar:AltCost:Cost$ Discard<1/Mountain>
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flameshot.jpg
