@@ -310,8 +310,11 @@ public class AbilityFactoryCounters {
         Card choice = null;
         final String type = params.get("CounterType");
         final String amountStr = params.get("CounterNum");
-
         final Player player = af.isCurse() ? ai.getOpponent() : ai;
+
+        if (ComputerUtil.preventRunAwayActivations(sa)) {
+            return false;
+        }
 
         list = player.getCardsIn(ZoneType.Battlefield);
         list = CardLists.filter(list, new Predicate<Card>() {
@@ -366,9 +369,6 @@ public class AbilityFactoryCounters {
         if (amount <= 0) {
             return false;
         }
-
-        // prevent run-away activations - first time will always return true
-        boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         // Targeting
         if (abTgt != null) {
@@ -430,16 +430,16 @@ public class AbilityFactoryCounters {
             return false;
         }
 
-        if (AbilityFactory.waitForBlocking(sa)) {
+        if (ComputerUtil.waitForBlocking(sa)) {
             return false;
         }
 
         final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.chkAIDrawback();
+        if (subAb != null && !subAb.chkAIDrawback()) {
+            return false;
         }
 
-        return chance;
+        return true;
     } // putCanPlayAI
 
     /**

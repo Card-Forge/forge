@@ -1532,7 +1532,7 @@ public final class AbilityFactoryChoose {
 
         if (params.containsKey("AILogic")) {
             // Don't tap creatures that may be able to block
-            if (AbilityFactory.waitForBlocking(sa)) {
+            if (ComputerUtil.waitForBlocking(sa)) {
                 return false;
             }
 

@@ -361,7 +361,7 @@ public class AbilityFactoryAlterLife {
         }
 
         // Don't tap creatures that may be able to block
-        if (AbilityFactory.waitForBlocking(sa)) {
+        if (ComputerUtil.waitForBlocking(sa)) {
             return false;
         }
 
@@ -777,6 +777,10 @@ public class AbilityFactoryAlterLife {
             return false;
         }
 
+        if (ComputerUtil.preventRunAwayActivations(sa)) {
+            return false;
+        }
+
         if (amount >= opp.getLife()) {
             priority = true; // killing the human should be done asap
         }
@@ -788,12 +792,9 @@ public class AbilityFactoryAlterLife {
         }
 
         // Don't tap creatures that may be able to block
-        if (AbilityFactory.waitForBlocking(sa) && !priority) {
+        if (ComputerUtil.waitForBlocking(sa) && !priority) {
             return false;
         }
-
-        // prevent run-away activations - first time will always return true
-        final boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
         final Target tgt = sa.getTarget();
 
@@ -811,7 +812,7 @@ public class AbilityFactoryAlterLife {
             randomReturn = true;
         }
 
-        return (randomReturn && chance);
+        return (randomReturn);
     }
 
     /**
@@ -1270,7 +1271,7 @@ public class AbilityFactoryAlterLife {
         }
 
         // Don't tap creatures that may be able to block
-        if (AbilityFactory.waitForBlocking(sa)) {
+        if (ComputerUtil.waitForBlocking(sa)) {
             return false;
         }
 

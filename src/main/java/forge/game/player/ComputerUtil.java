@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -54,10 +55,12 @@ import forge.control.input.InputPayManaCostUtil;
 import forge.error.ErrorViewer;
 import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.util.Aggregates;
+import forge.util.MyRandom;
 
 
 /**
@@ -2178,5 +2181,44 @@ public class ComputerUtil {
         }
         sa.setTargetPlayer(human);
         return true;
+    }
+
+    // returns true if it's better to wait until blockers are declared
+    /**
+     * <p>
+     * waitForBlocking.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @return a boolean (returns true if it's better to wait until blockers are declared).
+     */
+    public static boolean waitForBlocking(final SpellAbility sa) {
+        final PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler();
+
+        return (sa.getSourceCard().isCreature() 
+                && sa.getPayCosts().getTap() 
+                && (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY) 
+                 || !ph.getNextTurn().equals(sa.getActivatingPlayer())));
+    }
+    
+    // returns true if the AI should stop using the ability
+    /**
+     * <p>
+     * preventRunAwayActivations.
+     * </p>
+     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @return a boolean (returns true if the AI should stop using the ability).
+     */
+    public static boolean preventRunAwayActivations(final SpellAbility sa) {
+        final int activations = sa.getRestrictions().getNumberTurnActivations();
+        if (activations < 10) { //10 activations per turn should still be acceptable
+            return false;
+        }
+        final Random r = MyRandom.getRandom();
+        
+        return r.nextFloat() <= Math.pow(.95, activations);
     }
 }

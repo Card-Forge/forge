@@ -295,6 +295,10 @@ public class AbilityFactoryToken extends AbilityFactory {
         final AbilityFactory af = sa.getAbilityFactory();
         final HashMap<String, String> mapParams = af.getMapParams();
 
+        if (ComputerUtil.preventRunAwayActivations(sa)) {
+            return false;
+        }
+
         Player opp = ai.getOpponent();
         for (final String type : this.tokenTypes) {
             if (type.equals("Legendary")) {
@@ -340,7 +344,6 @@ public class AbilityFactoryToken extends AbilityFactory {
         // prevent run-away activations - first time will always return true
         final Random r = MyRandom.getRandom();
         final Card source = sa.getSourceCard();
-        final boolean chance = r.nextFloat() <= Math.pow(.9, sa.getActivationsThisTurn());
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
@@ -383,17 +386,17 @@ public class AbilityFactoryToken extends AbilityFactory {
         }
 
         if (AbilityFactory.playReusable(sa)) {
-            return chance;
+            return true;
         }
 
         if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)) {
-            return ((r.nextFloat() < .95) && chance);
+            return true;
         }
         if (sa.isAbility()) {
-            return ((r.nextFloat() < .9) && chance);
+            return (r.nextFloat() < .9);
         }
 
-        return ((r.nextFloat() < .8) && chance);
+        return (r.nextFloat() < .8);
     }
 
     /**

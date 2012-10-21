@@ -845,8 +845,9 @@ public class AbilityFactoryPump {
                     return false;
                 }
         }
-
-        final SpellAbilityRestriction restrict = sa.getRestrictions();
+        if (ComputerUtil.preventRunAwayActivations(sa)) {
+            return false;
+        }
 
         // Phase Restrictions
         if ((Singletons.getModel().getGame().getStack().size() == 0) && ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
@@ -861,6 +862,7 @@ public class AbilityFactoryPump {
             }
         }
 
+        final SpellAbilityRestriction restrict = sa.getRestrictions();
         final int activations = restrict.getNumberTurnActivations();
         final int sacActivations = restrict.getActivationNumberSacrifice();
         // don't risk sacrificing a creature just to pump it
@@ -915,7 +917,6 @@ public class AbilityFactoryPump {
             if (cards.size() == 0) {
                 return false;
             }
-            final Random r = MyRandom.getRandom();
 
             // when this happens we need to expand AI to consider if its ok for
             // everything?
@@ -929,10 +930,10 @@ public class AbilityFactoryPump {
                         continue;
                     }
 
-                    return r.nextFloat() <= Math.pow(.9, activations);
+                    return true;
                 }
                 if (shouldPumpCard(ai, sa, card)) {
-                    return r.nextFloat() <= Math.pow(.9, activations);
+                    return true;
                 }
             }
             return false;
@@ -1714,15 +1715,15 @@ public class AbilityFactoryPump {
      */
     private boolean pumpAllCanPlayAI(final Player ai, final SpellAbility sa) {
         String valid = "";
-        final Random r = MyRandom.getRandom();
         final Card source = sa.getSourceCard();
         this.params = this.abilityFactory.getMapParams();
         final int power = this.getNumAttack(sa);
         final int defense = this.getNumDefense(sa);
         final PhaseType phase = Singletons.getModel().getGame().getPhaseHandler().getPhase();
 
-        // prevent runaway activations
-        final boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn()); // to
+        if (ComputerUtil.preventRunAwayActivations(sa)) {
+            return false;
+        }
 
         if (this.params.containsKey("ValidCards")) {
             valid = this.params.get("ValidCards");
@@ -1794,7 +1795,7 @@ public class AbilityFactoryPump {
             if ((CardFactoryUtil.evaluateCreatureList(comp) + 200) >= CardFactoryUtil.evaluateCreatureList(human)) {
                 return false;
             }
-            return chance;
+            return true;
         } // end Curse
 
         // don't use non curse PumpAll after Combat_Begin until AI is improved
@@ -1823,7 +1824,7 @@ public class AbilityFactoryPump {
             return false;
         }
 
-        return chance;
+        return true;
     } // pumpAllCanPlayAI()
 
     /**

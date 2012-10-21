@@ -1503,24 +1503,6 @@ public class AbilityFactory {
              && Singletons.getModel().getGame().getPhaseHandler().isNextTurn(PlayerType.COMPUTER));
     }
 
-    // returns true if it's better to wait until blockers are declared
-    /**
-     * <p>
-     * waitForBlocking.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
-    public static boolean waitForBlocking(final SpellAbility sa) {
-
-        return (sa.getSourceCard().isCreature() 
-                && sa.getPayCosts().getTap() 
-                && (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY) 
-                 || Singletons.getModel().getGame().getPhaseHandler().isNextTurn(PlayerType.HUMAN)));
-    }
-
     /**
      * <p>
      * isSorcerySpeed.

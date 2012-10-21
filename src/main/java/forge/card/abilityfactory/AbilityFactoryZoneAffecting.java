@@ -351,7 +351,7 @@ public class AbilityFactoryZoneAffecting {
         }
 
         // Don't tap creatures that may be able to block
-        if (AbilityFactory.waitForBlocking(sa)) {
+        if (ComputerUtil.waitForBlocking(sa)) {
             return false;
         }
 
@@ -906,7 +906,7 @@ public class AbilityFactoryZoneAffecting {
         }
 
         // Don't tap creatures that may be able to block
-        if (AbilityFactory.waitForBlocking(sa)) {
+        if (ComputerUtil.waitForBlocking(sa)) {
             return false;
         }
 
@@ -1688,7 +1688,7 @@ public class AbilityFactoryZoneAffecting {
         }
 
         // Don't tap creatures that may be able to block
-        if (AbilityFactory.waitForBlocking(sa) && !params.containsKey("ActivationPhases")) {
+        if (ComputerUtil.waitForBlocking(sa) && !params.containsKey("ActivationPhases")) {
             return false;
         }
 

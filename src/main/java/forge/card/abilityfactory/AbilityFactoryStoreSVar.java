@@ -246,7 +246,7 @@ public class AbilityFactoryStoreSVar {
         //Tree of Redemption
         final Player ai = sa.getActivatingPlayer();
         final Card source = sa.getSourceCard();
-        if (AbilityFactory.waitForBlocking(sa) || ai.getLife() + 1 >= source.getNetDefense() 
+        if (ComputerUtil.waitForBlocking(sa) || ai.getLife() + 1 >= source.getNetDefense() 
                 || (ai.getLife() > 5 && !CombatUtil.lifeInSeriousDanger(ai, Singletons.getModel().getGame().getCombat()))) {
             return false;
         }
