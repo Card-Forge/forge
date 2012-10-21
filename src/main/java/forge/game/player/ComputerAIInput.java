@@ -103,6 +103,7 @@ public class ComputerAIInput extends Input {
                     break;
                 case COMBAT_DECLARE_ATTACKERS:
                     this.computer.declareAttackers();
+                    Singletons.getModel().getGame().getPhaseHandler().passPriority();
                     break;
                 case MAIN2:
                     Log.debug("Computer main2");

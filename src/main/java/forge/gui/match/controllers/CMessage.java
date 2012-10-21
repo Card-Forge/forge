@@ -21,7 +21,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import forge.Command;
-import forge.Singletons;
 import forge.game.MatchController;
 import forge.gui.GuiInput;
 import forge.gui.framework.ICDoc;
@@ -50,12 +49,6 @@ public enum CMessage implements ICDoc {
         @Override
         public void actionPerformed(final ActionEvent evt) {
             inputControl.selectButtonOK();
-
-            if (Singletons.getModel().getGame().getPhaseHandler().isNeedToNextPhase()) {
-                // moves to next turn
-                Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(false);
-                Singletons.getModel().getGame().getPhaseHandler().nextPhase();
-            }
             VMessage.SINGLETON_INSTANCE.getBtnOK().requestFocusInWindow();
         }
     };

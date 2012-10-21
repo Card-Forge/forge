@@ -63,7 +63,6 @@ public class ManaPool {
      */
     public ManaPool(final Player player) {
         owner = player;
-        clearPool();
         ManaPool.MAP.put(Constant.Color.WHITE, 0);
         ManaPool.MAP.put(Constant.Color.BLUE, 1);
         ManaPool.MAP.put(Constant.Color.BLACK, 2);
@@ -175,16 +174,19 @@ public class ManaPool {
      * @return - the amount of mana removed this way
      * </p>
      */
-    public final int clearPool() {
+    public final int clearPool(boolean isEndOfPhase) {
         int numRemoved = 0;
+        
+        if (isEndOfPhase &&  Singletons.getModel().getGame().isCardInPlay("Upwelling") )
+            return numRemoved;
 
-        if (this.floatingMana.size() == 0) {
+        if (this.floatingMana.isEmpty()) {
             this.calculateManaTotals();
             //this.owner.updateObservers();
             return numRemoved;
         }
 
-        if (this.owner.isCardInPlay("Omnath, Locus of Mana")) {
+        if (isEndOfPhase && this.owner.isCardInPlay("Omnath, Locus of Mana")) {
             // Omnath in play, clear all non-green mana
             int i = 0;
             while (i < this.floatingMana.size()) {

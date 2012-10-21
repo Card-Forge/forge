@@ -178,7 +178,8 @@ public class CostUntapType extends CostPartWithList {
             }
         }
 
-        CostUtil.setInput(CostUntapType.inputUntapYCost(this, typeList, ability, payment, c));
+        final Input inp = CostUntapType.inputUntapYCost(this, typeList, ability, payment, c);
+        Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
         return false;
     }
 

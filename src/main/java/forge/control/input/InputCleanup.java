@@ -19,7 +19,6 @@ package forge.control.input;
 
 import forge.Card;
 import forge.Singletons;
-import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -44,18 +43,15 @@ public class InputCleanup extends Input {
         final Player active = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn(); 
         if (active.isComputer()) {
             this.aiCleanupDiscard(active);
+            Singletons.getModel().getGame().getPhaseHandler().passPriority();
             return;
         }
 
         final int n = active.getCardsIn(ZoneType.Hand).size();
         final int max = active.getMaxHandSize();
         // goes to the next phase
-        if (n <= max || max <= -1) {
-            CombatUtil.removeAllDamage();
-
-            Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(true);
-            Singletons.getModel().getGame().getPhaseHandler().nextPhase(); // TODO keep an eye on this code,
-                                            // see if we can get rid of it.
+        if (n <= max && max >= 0) {
+            Singletons.getModel().getGame().getPhaseHandler().passPriority();
             return;
         }
         ButtonUtil.disableAll();
@@ -89,10 +85,7 @@ public class InputCleanup extends Input {
 
         if (ai.getMaxHandSize() != -1) {
             final int numDiscards = size - ai.getMaxHandSize();
-            ai.discard(numDiscards, null, false);
+            ai.discard(numDiscards, null);
         }
-        CombatUtil.removeAllDamage();
-
-        Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(true);
     }
 }

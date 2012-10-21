@@ -19,7 +19,6 @@ package forge.control.input;
 
 import forge.Card;
 import forge.Singletons;
-import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.gui.match.CMatchUI;
@@ -99,12 +98,6 @@ public abstract class Input implements java.io.Serializable {
         // clears a "temp" Input like Input_PayManaCost if there is one
         Singletons.getModel().getMatch().getInput().resetInput();
 
-        PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler(); 
-        if (ph.isNeedToNextPhase()) {
-            // mulligan needs this to move onto next phase
-            ph.setNeedToNextPhase(false);
-            ph.nextPhase();
-        }
     }
 
     // exits the "current" Input and sets the next Input

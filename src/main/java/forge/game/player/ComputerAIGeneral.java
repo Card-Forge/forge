@@ -300,7 +300,7 @@ public class ComputerAIGeneral implements Computer {
 
         player.getZone(ZoneType.Battlefield).updateObservers();
 
-        Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(true);
+        Singletons.getModel().getGame().getPhaseHandler().setPlayerMayHavePriority(false);
     }
 
     /**
@@ -316,7 +316,7 @@ public class ComputerAIGeneral implements Computer {
         
         CombatUtil.orderMultipleCombatants(Singletons.getModel().getGame().getCombat());
 
-        Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(true);
+        Singletons.getModel().getGame().getPhaseHandler().setPlayerMayHavePriority(false);
     }
 
     /**

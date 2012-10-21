@@ -20,8 +20,10 @@ package forge.card.cost;
 import com.google.common.base.Strings;
 
 import forge.Card;
+import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
+import forge.control.input.Input;
 import forge.control.input.InputPayManaCostUtil;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -219,9 +221,11 @@ public class CostMana extends CostPart {
             }
         }
         if (!this.getManaToPay().equals("0") || (manaToAdd > 0)) {
-            CostUtil.setInput(InputPayManaCostUtil.inputPayMana(ability, payment, this, manaToAdd));
+            final Input inp = InputPayManaCostUtil.inputPayMana(ability, payment, this, manaToAdd);
+            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
         } else if (this.getXMana() > 0) {
-            CostUtil.setInput(InputPayManaCostUtil.inputPayXMana(ability, payment, this, this.getXMana()));
+            final Input inp = InputPayManaCostUtil.inputPayXMana(ability, payment, this, this.getXMana());
+            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
         } else {
             payment.paidCost(this);
         }

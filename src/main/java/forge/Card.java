@@ -1346,7 +1346,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                     // set activating player for base spell ability
                     c.getSpellAbility()[0].setActivatingPlayer(c.getOwner());
                     // Any trigger should cause the phase not to skip
-                    Singletons.getModel().getGame().getPhaseHandler().setSkipPhase(false);
+                    for (Player p : Singletons.getModel().getGame().getPlayers())
+                        p.getController().autoPassCancel();
+
                     if (c.getOwner().isHuman()) {
                         Singletons.getModel().getGame().getAction().playCardWithoutManaCost(c);
                     } else {
@@ -9094,6 +9096,23 @@ public class Card extends GameEntity implements Comparable<Card> {
             return false;
         }
         return getController().getCardsIn(ZoneType.Battlefield).contains(this);
+    }
+
+    public void onCleanupPhase(final Player turn) {
+        setDamage(0);
+        resetPreventNextDamage();
+        resetReceivedDamageFromThisTurn();
+        resetDealtDamageToThisTurn();
+        resetDealtDamageToPlayerThisTurn();
+        getDamageHistory().newTurn();
+        setRegeneratedThisTurn(0);
+        clearMustBlockCards();
+        getDamageHistory().setCreatureAttackedLastTurnOf(turn, getDamageHistory().getCreatureAttackedThisTurn());
+        getDamageHistory().setCreatureAttackedThisTurn(false);
+        getDamageHistory().setCreatureBlockedThisTurn(false);
+        getDamageHistory().setCreatureGotBlockedThisTurn(false);
+        clearBlockedByThisTurn();
+        clearBlockedThisTurn();
     }
 
 } // end Card class

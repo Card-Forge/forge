@@ -23,6 +23,7 @@ import forge.Card;
 
 import forge.CardLists;
 import forge.Counters;
+import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -191,7 +192,8 @@ public class CostPutCounter extends CostPartWithList {
             this.addToList(source);
             return true;
         } else {
-            CostUtil.setInput(CostPutCounter.putCounterType(ability, this.getType(), payment, this, c));
+            final Input inp = CostPutCounter.putCounterType(ability, this.getType(), payment, this, c);
+            Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
             return false;
         }
     }

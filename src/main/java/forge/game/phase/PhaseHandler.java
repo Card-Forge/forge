@@ -62,21 +62,16 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
     private Player playerTurn = null;
 
-    private Player skipToTurn = null;
-    private PhaseType skipToPhase = PhaseType.CLEANUP;
-    private boolean autoPass = false;
-
     // priority player
     
     private Player pPlayerPriority = null;
     private Player pFirstPriority = null;
     private boolean bPhaseEffects = true;
-    private boolean bSkipPhase = true;
     private boolean bCombat = false;
     private boolean bRepeat = false;
 
     /** The need to next phase. */
-    private boolean needToNextPhase = false;
+    private boolean isPlayerPriorityAllowed = false;
 
     // This should only be true four times! that is for the initial nextPhases
     // in MyObservable
@@ -113,6 +108,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      */
     public final void setPlayerTurn(final Player s) {
         this.playerTurn = s;
+        this.setPriority(s);
     }
 
     /**
@@ -139,17 +135,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         return this.pPlayerPriority;
     }
 
-    /**
-     * <p>
-     * setPriorityPlayer.
-     * </p>
-     * 
-     * @param p
-     *            a {@link forge.game.player.Player} object.
-     */
-    public final void setPriorityPlayer(final Player p) {
-        this.pPlayerPriority = p;
-    }
 
     /**
      * <p>
@@ -160,18 +145,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      */
     public final Player getFirstPriority() {
         return this.pFirstPriority;
-    }
-
-    /**
-     * <p>
-     * setFirstPriority.
-     * </p>
-     * 
-     * @param p
-     *            a {@link forge.game.player.Player} object.
-     */
-    public final void setFirstPriority(final Player p) {
-        this.pFirstPriority = p;
     }
 
     /**
@@ -207,7 +180,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * 
      * @return a boolean.
      */
-    public final boolean doPhaseEffects() {
+    public final boolean hasPhaseEffects() {
         return this.bPhaseEffects;
     }
 
@@ -219,31 +192,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * @param b
      *            a boolean.
      */
-    public final void setPhaseEffects(final boolean b) {
+    private final void setPhaseEffects(final boolean b) {
         this.bPhaseEffects = b;
-    }
-
-    /**
-     * <p>
-     * doSkipPhase.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean doSkipPhase() {
-        return this.bSkipPhase;
-    }
-
-    /**
-     * <p>
-     * setSkipPhase.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setSkipPhase(final boolean b) {
-        this.bSkipPhase = b;
     }
 
     /**
@@ -284,14 +234,12 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * </p>
      */
     public final void handleBeginPhase() {
+        if ( null == playerTurn ) return;
+        
         this.setPhaseEffects(false);
         // Handle effects that happen at the beginning of phases
-        this.setSkipPhase(true);
         game.getAction().checkStateEffects();
 
-        if (this.isAutoPassedPhase(this.getPlayerTurn(), this.getPhase())) {
-            this.setAutoPass(false);
-        }
 
         switch(this.getPhase()) {
             case UNTAP:
@@ -306,7 +254,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     for( Player p : game.getPlayers() ) {
                         p.clearSlowtripList();
                     }
-                    game.getPhaseHandler().setNeedToNextPhase(true);
+                    game.getPhaseHandler().setPlayerMayHavePriority(false);
                 } else {
                     game.getUpkeep().executeUntil(this.getPlayerTurn());
                     game.getUpkeep().executeAt();
@@ -315,7 +263,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
             case DRAW:
                 if (getTurn() == 1 || PhaseUtil.skipDraw(this.getPlayerTurn()))
-                    game.getPhaseHandler().setNeedToNextPhase(true);
+                    game.getPhaseHandler().setPlayerMayHavePriority(false);
                 else
                     this.getPlayerTurn().drawCards(1, true);
                 break;
@@ -334,7 +282,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     PhaseUtil.handleDeclareAttackers();
                     CombatUtil.showCombat();
                 } else {
-                    this.setNeedToNextPhase(true);
+                    this.setPlayerMayHavePriority(false);
                 }
                 break;
             // we can skip AfterBlockers and AfterAttackers if necessary
@@ -343,7 +291,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     Singletons.getModel().getGame().getCombat().verifyCreaturesInPlay();
                     CombatUtil.showCombat();
                 } else {
-                    this.setNeedToNextPhase(true);
+                    this.setPlayerMayHavePriority(false);
                 }
                 break;
 
@@ -354,19 +302,19 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     PhaseUtil.handleDeclareBlockers(game);
                     CombatUtil.showCombat();
                 } else {
-                    this.setNeedToNextPhase(true);
+                    this.setPlayerMayHavePriority(false);
                 }
                 break;
 
             case COMBAT_FIRST_STRIKE_DAMAGE:
                 if (!this.inCombat()) {
-                    this.setNeedToNextPhase(true);
+                    this.setPlayerMayHavePriority(false);
                 } else {
                     game.getCombat().verifyCreaturesInPlay();
 
                     // no first strikers, skip this step
                     if (!game.getCombat().assignCombatDamage(true)) {
-                        this.setNeedToNextPhase(true);
+                        this.setPlayerMayHavePriority(false);
                     } else {
                         Combat.dealAssignedDamage();
                         game.getAction().checkStateEffects();
@@ -377,12 +325,12 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
             case COMBAT_DAMAGE:
                 if (!this.inCombat()) {
-                    this.setNeedToNextPhase(true);
+                    this.setPlayerMayHavePriority(false);
                 } else {
                     game.getCombat().verifyCreaturesInPlay();
 
                     if (!game.getCombat().assignCombatDamage(false)) {
-                        this.setNeedToNextPhase(true);
+                        this.setPlayerMayHavePriority(false);
                     } else {
                         Combat.dealAssignedDamage();
                         game.getAction().checkStateEffects();
@@ -410,35 +358,14 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
             case CLEANUP:
                 // Reset Damage received map
-                final List<Card> list = game.getCardsIn(ZoneType.Battlefield);
-                for (final Card c : list) {
-                    c.resetPreventNextDamage();
-                    c.resetReceivedDamageFromThisTurn();
-                    c.resetDealtDamageToThisTurn();
-                    c.resetDealtDamageToPlayerThisTurn();
-                    c.getDamageHistory().newTurn();
-                    c.setRegeneratedThisTurn(0);
-                    c.clearMustBlockCards();
-                    c.getDamageHistory().setCreatureAttackedLastTurnOf(playerTurn, c.getDamageHistory().getCreatureAttackedThisTurn());
-                    c.getDamageHistory().setCreatureAttackedThisTurn(false);
-                    c.getDamageHistory().setCreatureBlockedThisTurn(false);
-                    c.getDamageHistory().setCreatureGotBlockedThisTurn(false);
-                    c.clearBlockedByThisTurn();
-                    c.clearBlockedThisTurn();
+                for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
+                    c.onCleanupPhase(playerTurn);
                 }
 
                 game.getEndOfTurn().executeUntil();
 
                 for (Player player : game.getPlayers()) {
-                    for (Card c : player.getCardsIn(ZoneType.Hand))
-                        c.setDrawnThisTurn(false);
-
-                    player.resetPreventNextDamage();
-                    player.resetNumDrawnThisTurn();
-                    player.setAttackedWithCreatureThisTurn(false);
-                    player.setNumLandsPlayed(0);
-                    player.clearAssignedDamage();
-                    player.resetAttackersDeclaredThisTurn();
+                    player.onCleanupPhase();
                 }
                 this.getPlayerTurn().removeKeyword("Skip all combat phases of this turn.");
                 game.getCleanup().executeUntilTurn(this.getNextTurn());
@@ -448,7 +375,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 break;
           }
 
-        if (!this.isNeedToNextPhase()) {
+        if (this.mayPlayerHavePriority()) {
             // Run triggers if phase isn't being skipped
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Phase", this.getPhase().Name);
@@ -481,76 +408,79 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * nextPhase.
      * </p>
      */
-    public final void nextPhase() {
-        this.needToNextPhase = false;
+    private final void nextPhase() {
+        
+        this.setPlayerMayHavePriority(true);//  PlayerPriorityAllowed = false;
 
         // If the Stack isn't empty why is nextPhase being called?
         if (game.getStack().size() != 0) {
             Log.debug("Phase.nextPhase() is called, but Stack isn't empty.");
             return;
         }
-        this.bPhaseEffects = true;
-        if (!game.isCardInPlay("Upwelling")) {
-            for (Player p : game.getPlayers()) {
-                int burn = p.getManaPool().clearPool();
-                if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN)) {
-                    p.loseLife(burn, null);
+        setPhaseEffects(true);
+
+        for (Player p : game.getPlayers()) {
+            int burn = p.getManaPool().clearPool(true);
+            if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN)) {
+                p.loseLife(burn, null);
+            }
+        }
+
+        switch (this.phase) {
+            case UNTAP:
+                this.nCombatsThisTurn = 0;
+                break;
+
+            case COMBAT_DECLARE_ATTACKERS:
+                game.getStack().unfreezeStack();
+                this.nCombatsThisTurn++;
+                break;
+
+            case COMBAT_DECLARE_BLOCKERS:
+                game.getStack().unfreezeStack();
+                break;
+                
+            case COMBAT_END:
+                //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
+                game.getCombat().reset();
+                this.resetAttackedThisCombat(this.getPlayerTurn());
+                this.bCombat = false;
+                
+                // TODO: ExtraCombat needs to be changed for other spell/abilities
+                // that give extra combat can do it like ExtraTurn stack ExtraPhases
+                if (this.extraCombats > 0) {
+                    final Player player = this.getPlayerTurn();
+                    final Player opp = player.getOpponent();
+
+                    this.bCombat = true;
+                    this.extraCombats--;
+                    game.getCombat().reset();
+                    game.getCombat().setAttackingPlayer(player);
+                    game.getCombat().setDefendingPlayer(opp);
+                    this.phase = PhaseType.COMBAT_BEGIN;
                 }
-            }
+                break;
+                
+            case CLEANUP:
+                this.bPreventCombatDamageThisTurn = false;
+                if (!this.bRepeat) {
+                    this.setPlayerTurn(this.handleNextTurn());
+                }
+                break;
+            default: // no action
         }
 
-        if (this.getPhase() == PhaseType.COMBAT_DECLARE_ATTACKERS) {
-            game.getStack().unfreezeStack();
-            this.nCombatsThisTurn++;
-        } else if (this.getPhase() == PhaseType.UNTAP) {
-            this.nCombatsThisTurn = 0;
-        }
-
-        if (this.getPhase() == PhaseType.COMBAT_END) {
-            //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
-            game.getCombat().reset();
-            this.resetAttackedThisCombat(this.getPlayerTurn());
-            this.bCombat = false;
-        }
-
-        if (this.phase == PhaseType.CLEANUP) {
-            this.bPreventCombatDamageThisTurn = false;
-            if (!this.bRepeat) {
-                this.setPlayerTurn(this.handleNextTurn());
-            }
-        }
-
-        if (this.is(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
-            game.getStack().unfreezeStack();
-        }
-
-        if (this.is(PhaseType.COMBAT_END) && (this.extraCombats > 0)) {
-            // TODO: ExtraCombat needs to be changed for other spell/abilities
-            // that give extra combat
-            // can do it like ExtraTurn stack ExtraPhases
-
-            final Player player = this.getPlayerTurn();
-            final Player opp = player.getOpponent();
-
-            this.bCombat = true;
-            this.extraCombats--;
-            game.getCombat().reset();
-            game.getCombat().setAttackingPlayer(player);
-            game.getCombat().setDefendingPlayer(opp);
-            this.phase = PhaseType.COMBAT_DECLARE_ATTACKERS;
+        if (this.bRepeat) { // for when Cleanup needs to repeat itself
+            this.bRepeat = false;
         } else {
-            if (!this.bRepeat) { // for when Cleanup needs to repeat itself
-                this.phase = phase.getNextPhase();
-            } else {
-                this.bRepeat = false;
-            }
+            this.phase = phase.getNextPhase();
         }
 
         game.getGameLog().add("Phase", this.getPlayerTurn() + " " + this.getPhase().Name, 6);
 
         // **** Anything BELOW Here is actually in the next phase. Maybe move
         // this to handleBeginPhase
-        if (this.getPhase() == PhaseType.UNTAP) {
+        if (this.phase == PhaseType.UNTAP) {
             this.turn++;
             game.getGameLog().add("Turn", "Turn " + this.turn + " (" + this.getPlayerTurn() + ")", 0);
         }
@@ -560,11 +490,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         // When consecutively skipping phases (like in combat) this section
         // pushes through that block
         this.updateObservers();
-
-        if (this.isNeedToNextPhase()) {
-            this.setNeedToNextPhase(false);
-            this.nextPhase();
-        }
+        // it no longer does.
     }
 
     /**
@@ -816,54 +742,24 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         // the firstAction is the player who gained Priority First in this segment
         // of Priority
 
-        if (firstAction.equals(actingPlayer)) {
-            // pass the priority to other player
-            this.setPriorityPlayer(game.getNextPlayerAfter(actingPlayer));
-            Singletons.getModel().getMatch().getInput().resetInput();
-            game.getStack().chooseOrderOfSimultaneousStackEntryAll();
-        } else {
-            if (game.getStack().size() == 0) {
-                // end phase
-                this.needToNextPhase = true;
-                this.pPlayerPriority = this.getPlayerTurn(); // this needs to be
-                                                             // set early
-                // as we exit the phase
-            } else {
-                if (!game.getStack().hasSimultaneousStackEntries()) {
-                    game.getStack().resolveStack();
-                }
+        Player nextPlayer = game.getNextPlayerAfter(actingPlayer);
+        if (firstAction.equals(nextPlayer)) {
+            if (game.getStack().isEmpty()) {
+                this.setPriority(this.getPlayerTurn()); // this needs to be set early as we exit the phase
+                // end phase 
+                setPlayerMayHavePriority(true);
+                nextPhase();
+                return;
+            } else if (!game.getStack().hasSimultaneousStackEntries()) {
+                game.getStack().resolveStack();
             }
-            game.getStack().chooseOrderOfSimultaneousStackEntryAll();
-        }
-    }
-
-    public void setAutoPass(boolean bAutoPass) {
-        this.autoPass = bAutoPass;
-    }
-
-    public boolean getAutoPass() {
-        return this.autoPass;
-    }
-
-    public boolean isAutoPassedPhase(Player skipToTurn, PhaseType skipToPhase) {
-        return this.skipToTurn == skipToTurn && this.skipToPhase == skipToPhase;
-    }
-
-    public void autoPassToCleanup() {
-        this.autoPassTo(playerTurn, PhaseType.CLEANUP);
-    }
-
-    public void autoPassTo(Player skipToTurn, PhaseType skipToPhase) {
-        this.skipToTurn = skipToTurn;
-        this.skipToPhase = skipToPhase;
-        this.autoPass = true;
-        this.bSkipPhase = true;
-
-        if (this.getPriorityPlayer().isHuman()) {
-            // TODO This doesn't work quite 100% but pretty close
-            this.passPriority();
+        } else {
+            // pass the priority to other player
+            this.pPlayerPriority = nextPlayer;
             Singletons.getModel().getMatch().getInput().resetInput();
+
         }
+        game.getStack().chooseOrderOfSimultaneousStackEntryAll();        
     }
 
     /**
@@ -874,10 +770,10 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * @param needToNextPhase
      *            a boolean.
      */
-    public final void setNeedToNextPhase(final boolean needToNextPhase) {
-        this.needToNextPhase = needToNextPhase;
+    public final void setPlayerMayHavePriority(final boolean mayHavePriority) {
+        this.isPlayerPriorityAllowed = mayHavePriority;
     }
-
+    
     /**
      * <p>
      * isNeedToNextPhase.
@@ -885,8 +781,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * 
      * @return a boolean.
      */
-    public final boolean isNeedToNextPhase() {
-        return this.needToNextPhase;
+    public final boolean mayPlayerHavePriority() {
+        return this.isPlayerPriorityAllowed;
     }
 
     /**

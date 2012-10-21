@@ -19,9 +19,6 @@ package forge.util;
 
 import java.util.Observable;
 
-import forge.Singletons;
-import forge.game.phase.PhaseHandler;
-
 /**
  * <p>
  * MyObservable class.
@@ -39,15 +36,5 @@ public class MyObservable extends Observable {
     public final void updateObservers() {
         this.setChanged();
         this.notifyObservers();
-
-        PhaseHandler phases = Singletons.getModel().getGame().getPhaseHandler();
-
-        if ((phases != null) && phases.isNeedToNextPhase()) {
-            if (phases.isNeedToNextPhaseInit()) {
-                // this is used.
-                phases.setNeedToNextPhase(false);
-                phases.nextPhase();
-            }
-        }
     }
 }

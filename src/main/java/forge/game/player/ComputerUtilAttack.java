@@ -18,6 +18,7 @@
 package forge.game.player;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -33,6 +34,7 @@ import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
+import forge.game.GameState;
 import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.zone.ZoneType;
@@ -498,14 +500,16 @@ public class ComputerUtilAttack {
         // randomInt is used so that the computer doesn't always
         // do the same thing on turn 3 if he had the same creatures in play
         // I know this is a little confusing
-        this.random.setSeed(Singletons.getModel().getGame().getPhaseHandler().getTurn() + this.randomInt);
+        GameState game = Singletons.getModel().getGame();
+        
+        this.random.setSeed(game.getPhaseHandler().getTurn() + this.randomInt);
 
         final Combat combat = new Combat();
-        combat.setAttackingPlayer(Singletons.getModel().getGame().getCombat().getAttackingPlayer());
-        combat.setDefendingPlayer(Singletons.getModel().getGame().getCombat().getDefendingPlayer());
+        combat.setAttackingPlayer(game.getCombat().getAttackingPlayer());
+        combat.setDefendingPlayer(game.getCombat().getDefendingPlayer());
 
-        Singletons.getModel().getGame().getCombat().initiatePossibleDefenders(Singletons.getModel().getGame().getCombat().getDefendingPlayer());
-        combat.setDefenders(Singletons.getModel().getGame().getCombat().getDefenders());
+        game.getCombat().initiatePossibleDefenders(Arrays.asList(game.getCombat().getDefendingPlayer()));
+        combat.setDefenders(game.getCombat().getDefenders());
 
         if (this.attackers.isEmpty()) {
             return combat;
@@ -561,7 +565,7 @@ public class ComputerUtilAttack {
                     break;
                 }
                 if (c.getName().equals("Finest Hour")
-                        && Singletons.getModel().getGame().getPhaseHandler().isFirstCombat()) {
+                        && game.getPhaseHandler().isFirstCombat()) {
                     exalted = true;
                     break;
                 }

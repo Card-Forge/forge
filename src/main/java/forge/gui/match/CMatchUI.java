@@ -196,11 +196,7 @@ public enum CMatchUI implements CardContainer {
      * @return boolean
      */
     public final boolean stopAtPhase(final Player turn, final PhaseType phase) {
-        final List<CField> fieldControllers = CMatchUI.this.getFieldControls();
-
-        // Index of field; computer is 1, human is 0
-        int index = turn.isComputer() ? 1 : 0;
-        VField vf = fieldControllers.get(index).getView();
+        VField vf = getFieldViewFor(turn);
 
         switch (phase) {
             case UPKEEP: return vf.getLblUpkeep().getEnabled();

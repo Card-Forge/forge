@@ -30,7 +30,6 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.AbilityFactoryMana;
 import forge.card.cost.CostMana;
 import forge.card.cost.CostPayment;
-import forge.card.cost.CostUtil;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.AbilityMana;
@@ -532,7 +531,8 @@ public class InputPayManaCostUtil {
                     payment.paidCost(costMana);
                 } else {
                     source.setXManaCostPaid(0);
-                    CostUtil.setInput(InputPayManaCostUtil.inputPayXMana(sa, payment, costMana, costMana.getXMana()));
+                    final Input inp = InputPayManaCostUtil.inputPayXMana(sa, payment, costMana, costMana.getXMana());
+                    Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
                 }
     
                 // If this is a spell with convoke, re-tap all creatures used

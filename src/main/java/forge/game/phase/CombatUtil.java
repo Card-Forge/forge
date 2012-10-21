@@ -2471,18 +2471,6 @@ public class CombatUtil {
     } // canDestroyBlocker
 
     /**
-     * <p>
-     * removeAllDamage.
-     * </p>
-     */
-    public static void removeAllDamage() {
-        final List<Card> cl = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
-        for (final Card c : cl) {
-            c.setDamage(0);
-        }
-    }
-
-    /**
      * gets a string for the GameLog regarding attackers.
      * 
      * @return a String

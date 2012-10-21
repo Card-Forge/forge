@@ -17,7 +17,6 @@
  */
 package forge.control.input;
 
-import java.util.LinkedList;
 import java.util.Stack;
 
 import forge.game.GameState;
@@ -26,7 +25,6 @@ import forge.game.phase.PhaseType;
 import forge.game.player.ComputerAIInput;
 import forge.game.player.Player;
 import forge.game.zone.MagicStack;
-import forge.gui.match.CMatchUI;
 import forge.util.MyObservable;
 
 /**
@@ -44,8 +42,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
     private Input input;
 
     private final Stack<Input> inputStack = new Stack<Input>();
-    private final Stack<Input> resolvingStack = new Stack<Input>();
-    private final LinkedList<Input> resolvingQueue = new LinkedList<Input>();
+    private final Stack<Input> urgentInputStack = new Stack<Input>();
 
     private final GameState game;
     private ComputerAIInput aiInput; // initialized at runtime to be the latest object created
@@ -69,13 +66,12 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      *            a {@link forge.control.input.Input} object.
      */
     public final void setInput(final Input in) {
-        MagicStack stack = this.game.getStack();
         boolean isInputEmpty = this.input == null || this.input instanceof InputPassPriority;
-        
-        if (stack.isResolving() || !isInputEmpty) {
-            this.inputStack.add(in);
-        } else {
+        System.out.println(in.getClass().getName());
+        if (!this.game.getStack().isResolving() && isInputEmpty) {
             this.input = in;
+        } else {
+            this.inputStack.add(in);                
         }
         this.updateObservers();
     }
@@ -90,15 +86,10 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * @param bAddToResolving
      *            a boolean.
      */
-    public final void setInput(final Input in, final boolean bAddToResolving) {
+    public final void setInputInterrupt(final Input in) {
         // Make this
-        if (!bAddToResolving) {
-            this.setInput(in);
-            return;
-        }
-
         final Input old = this.input;
-        this.resolvingStack.add(old);
+        this.urgentInputStack.add(old);
         this.changeInput(in);
     }
 
@@ -133,7 +124,6 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      */
     public final void clearInput() {
         this.input = null;
-        this.resolvingQueue.clear();
         this.inputStack.clear();
     }
 
@@ -161,7 +151,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
      * 
      * @return a {@link forge.control.input.Input} object.
      */
-    public final Input updateInput() {
+    public final Input getActualInput() {
         final PhaseHandler handler = game.getPhaseHandler();
         final PhaseType phase = handler.getPhase();
         final Player playerTurn = handler.getPlayerTurn();
@@ -170,14 +160,14 @@ public class InputControl extends MyObservable implements java.io.Serializable {
 
         // TODO this resolving portion needs more work, but fixes Death Cloud
         // issues
-        if (this.resolvingStack.size() > 0) {
+        if (this.urgentInputStack.size() > 0) {
             if (this.input != null) {
                 return this.input;
             }
 
             // if an SA is resolving, only change input for something that is
             // part of the resolving SA
-            this.changeInput(this.resolvingStack.pop());
+            this.changeInput(this.urgentInputStack.pop());
             return this.input;
         }
 
@@ -194,15 +184,15 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             return this.input;
         }
 
-        if (handler.doPhaseEffects()) {
+        if (handler.hasPhaseEffects()) {
             // Handle begin phase stuff, then start back from the top
             handler.handleBeginPhase();
-            return this.updateInput();
+            return this.getActualInput();
         }
 
         // If the Phase we're in doesn't allow for Priority, return null to move
         // to next phase
-        if (handler.isNeedToNextPhase()) {
+        if (!handler.mayPlayerHavePriority()) {
             return null;
         }
 
@@ -210,8 +200,8 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         if (phase == PhaseType.COMBAT_DECLARE_ATTACKERS) {
             stack.freezeStack();
 
-            if (playerTurn.isHuman() && !handler.getAutoPass()) {
-                game.getCombat().initiatePossibleDefenders(playerTurn.getOpponent());
+            if (playerTurn.isHuman() && !playerTurn.getController().mayAutoPass(phase)) {
+                game.getCombat().initiatePossibleDefenders(playerTurn.getOpponents());
                 return new InputAttack();
             }
         } else if (phase == PhaseType.COMBAT_DECLARE_BLOCKERS) {
@@ -222,10 +212,11 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             } else {
                 if (game.getCombat().getAttackers().isEmpty()) {
                     // no active attackers, skip the Blocking phase
-                    handler.setNeedToNextPhase(true);
+                    handler.setPlayerMayHavePriority(false);
                     return null;
-                } else {
-                    handler.setAutoPass(false);
+                } else { 
+                    for (Player p : game.getPlayers())
+                        p.getController().autoPassCancel();
                     return new InputBlock();
                 }
             }
@@ -244,10 +235,13 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         if (priority == null) {
             return null;
         } else if (priority.isHuman()) {
-            if (autoSkipHumanPriority(playerTurn, phase)) {
+            boolean prioritySkip = priority.getController().mayAutoPass(phase) 
+                    || priority.getController().isUiSetToSkipPhase(playerTurn, phase); 
+            if (this.game.getStack().isEmpty() && prioritySkip ) {
                 handler.passPriority();
                 return null;
             } else {
+                priority.getController().autoPassCancel(); // probably cancel, since something has happened
                 return new InputPassPriority();
             }
         } else if (playerTurn.isComputer()) {
@@ -258,21 +252,6 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         }
     } // getInput()
 
-    private boolean autoSkipHumanPriority(Player turn, PhaseType phase) {
-        PhaseHandler handler = game.getPhaseHandler();
-        // Handler tells me if I should skip, and I reset the flag
-        final boolean skip = handler.doSkipPhase();
-        handler.setSkipPhase(false);
-
-        // If the stack isn't empty, and skip is disallowed, stop auto passing
-        if (!skip || !this.game.getStack().isEmpty()) {
-            handler.setAutoPass(false);
-            return false;
-        }
-
-        // Player is AutoPassing, or Player doesn't stop on this phase
-        return handler.getAutoPass() || !CMatchUI.SINGLETON_INSTANCE.stopAtPhase(turn, phase);
-    }
 
     /**
      * Sets the computer.

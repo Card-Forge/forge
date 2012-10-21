@@ -89,10 +89,9 @@ public class InputBlock extends Input {
         if (CombatUtil.finishedMandatoryBlocks(Singletons.getModel().getGame().getCombat())) {
             // Done blocking
             ButtonUtil.reset();
-            
             CombatUtil.orderMultipleCombatants(Singletons.getModel().getGame().getCombat());
 
-            Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(true);
+            Singletons.getModel().getGame().getPhaseHandler().passPriority();
         }
     }
 

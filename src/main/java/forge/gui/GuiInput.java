@@ -23,6 +23,7 @@ import java.util.Observer;
 import forge.Card;
 import forge.Singletons;
 import forge.control.input.Input;
+import forge.game.phase.PhaseHandler;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.util.MyObservable;
@@ -44,9 +45,15 @@ public class GuiInput extends MyObservable implements Observer {
     /** {@inheritDoc} */
     @Override
     public final void update(final Observable observable, final Object obj) {
-        final Input tmp = Singletons.getModel().getMatch().getInput().updateInput();
+        PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler();
+
+        final Input tmp = Singletons.getModel().getMatch().getInput().getActualInput();
+        //System.out.println(ph.getPlayerTurn() + "'s " + ph.getPhase() + ", priority of " + ph.getPriorityPlayer() + " @ actual input is " + ( tmp == null ? "null" : tmp.getClass().getName()));
         if (tmp != null) {
             this.setInput(tmp);
+        } else if ( !ph.mayPlayerHavePriority() ) {
+            //System.out.println("cannot have priority, forced to pass");
+            ph.passPriority();
         }
     }
 

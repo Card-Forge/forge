@@ -20,6 +20,7 @@ package forge.card.cost;
 import java.util.List;
 
 import forge.Card;
+import forge.Singletons;
 
 import forge.CardLists;
 import forge.card.abilityfactory.AbilityFactory;
@@ -171,7 +172,8 @@ public class CostReveal extends CostPartWithList {
                 }
             }
             if (num > 0) {
-                CostUtil.setInput(CostReveal.inputRevealCost(this.getType(), handList, payment, this, ability, num));
+                final Input inp = CostReveal.inputRevealCost(this.getType(), handList, payment, this, ability, num);
+                Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
                 return false;
             } else {
                 payment.setPaidManaPart(this);

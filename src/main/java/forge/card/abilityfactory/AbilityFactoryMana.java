@@ -1339,7 +1339,7 @@ public class AbilityFactoryMana {
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                p.getManaPool().clearPool();
+                p.getManaPool().clearPool(false);
             }
         }
     }

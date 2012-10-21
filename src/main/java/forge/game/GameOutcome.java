@@ -33,7 +33,7 @@ import forge.game.player.PlayerStatistics;
  * </p>
  * 
  * @author Forge
- * @version $Id: GameOutcome.java 17559 2012-10-18 07:59:42Z Max mtg $
+ * @version $Id: GameOutcome.java 17608 2012-10-20 22:27:27Z Max mtg $
  */
 
 // This class might be divided in two parts: the very summary (immutable with

@@ -94,7 +94,7 @@ public class Combat {
         this.currentDefender = 0;
         this.nextDefender = 0;
 
-        this.initiatePossibleDefenders(Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().getOpponent());
+        this.initiatePossibleDefenders(Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().getOpponents());
     }
 
     /**
@@ -105,16 +105,18 @@ public class Combat {
      * @param defender
      *            a {@link forge.game.player.Player} object.
      */
-    public final void initiatePossibleDefenders(final Player defender) {
+    public final void initiatePossibleDefenders(final Iterable<Player> defenders) {
         this.defenders.clear();
         this.defenderMap.clear();
-        this.defenders.add(defender);
-        this.defenderMap.put(defender, new ArrayList<Card>());
-        List<Card> planeswalkers = defender.getCardsIn(ZoneType.Battlefield);
-        planeswalkers = CardLists.filter(planeswalkers, CardPredicates.Presets.PLANEWALKERS);
-        for (final Card pw : planeswalkers) {
-            this.defenders.add(pw);
-            this.defenderMap.put(pw, new ArrayList<Card>());
+        for(Player defender : defenders) {
+            this.defenders.add(defender);
+            this.defenderMap.put(defender, new ArrayList<Card>());
+            List<Card> planeswalkers = defender.getCardsIn(ZoneType.Battlefield);
+            planeswalkers = CardLists.filter(planeswalkers, CardPredicates.Presets.PLANEWALKERS);
+            for (final Card pw : planeswalkers) {
+                this.defenders.add(pw);
+                this.defenderMap.put(pw, new ArrayList<Card>());
+            }
         }
     }
 

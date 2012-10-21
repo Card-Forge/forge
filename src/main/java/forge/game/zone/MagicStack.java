@@ -1054,7 +1054,7 @@ public class MagicStack extends MyObservable {
 
         game.getAction().checkStateEffects();
 
-        game.getPhaseHandler().setNeedToNextPhase(false);
+        game.getPhaseHandler().setPlayerMayHavePriority(true);
 
         this.curResolvingCard = null;
 

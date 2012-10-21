@@ -125,27 +125,22 @@ public class QuestWinLoseHandler extends ControlWinLose {
         QuestController qc = Singletons.getModel().getQuest(); 
         LobbyPlayer questPlayer = Singletons.getControl().getLobby().getQuestPlayer();
         if (isAnte) {
-            //do per-game actions
-            GameOutcome outcome = match.getLastGameOutcome();
-            
-            // Ante returns to owners in a draw
-            if (!outcome.isDraw()) {
-                boolean isHumanWinner = outcome.getWinner().equals(questPlayer);
-                final List<CardPrinted> anteCards = new ArrayList<CardPrinted>();
-                for( Player p : Singletons.getModel().getGame().getPlayers() ) {
-                    if (p.getLobbyPlayer().equals(questPlayer) == isHumanWinner) continue;
-                    for(Card c : p.getCardsIn(ZoneType.Ante))
-                        anteCards.add(CardDb.instance().getCard(c));
-                }
-                    
-                if (isHumanWinner) {
-                    qc.getCards().addAllCards(anteCards);
-                    this.anteWon(anteCards);
-                } else {
-                    for(CardPrinted c : anteCards)
-                        qc.getCards().loseCard(c);
-                    this.anteLost(anteCards);
-                }
+        //do per-game actions
+            boolean isHumanWinner = match.isWonBy(questPlayer); 
+            final List<CardPrinted> anteCards = new ArrayList<CardPrinted>();
+            for( Player p : Singletons.getModel().getGame().getPlayers() ) {
+                if (p.getLobbyPlayer().equals(questPlayer) == isHumanWinner) continue;
+                for(Card c : p.getCardsIn(ZoneType.Ante))
+                    anteCards.add(CardDb.instance().getCard(c));
+            }
+                
+            if (isHumanWinner) {
+                qc.getCards().addAllCards(anteCards);
+                this.anteWon(anteCards);
+            } else {
+                for(CardPrinted c : anteCards)
+                    qc.getCards().loseCard(c);
+                this.anteLost(anteCards);
             }
         }
 

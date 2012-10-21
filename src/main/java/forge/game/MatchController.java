@@ -24,6 +24,7 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.VMatchUI;
+import forge.gui.match.controllers.CDock;
 import forge.gui.match.controllers.CLog;
 import forge.gui.match.controllers.CMessage;
 import forge.gui.match.controllers.CStack;
@@ -107,7 +108,9 @@ public class MatchController {
             startConditions.put(p, players.get(p.getLobbyPlayer()));
 
         try {
-            CMatchUI.SINGLETON_INSTANCE.initMatch(currentGame.getPlayers(), Singletons.getControl().getPlayer());
+            Player localHuman = Singletons.getControl().getPlayer();
+            CMatchUI.SINGLETON_INSTANCE.initMatch(currentGame.getPlayers(), localHuman);
+            CDock.SINGLETON_INSTANCE.onGameStarts(currentGame, localHuman);
             Singletons.getModel().getPreferences().actuateMatchPreferences();
             Singletons.getControl().changeState(FControl.MATCH_SCREEN);
             SDisplayUtil.showTab(EDocID.REPORT_LOG.getDoc());
@@ -142,8 +145,6 @@ public class MatchController {
 
             CMessage.SINGLETON_INSTANCE.updateGameInfo(this);
             // Update observers
-            currentGame.getStack().updateObservers();
-            input.updateObservers();
             currentGame.getGameLog().updateObservers();
 
             

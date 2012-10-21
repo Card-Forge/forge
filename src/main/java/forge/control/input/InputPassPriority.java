@@ -74,11 +74,11 @@ public class InputPassPriority extends Input implements java.io.Serializable {
     public final void selectButtonOK() {
         Singletons.getModel().getGame().getPhaseHandler().passPriority();
         //GuiDisplayUtil.updateGUI();
-        final Input in = Singletons.getModel().getMatch().getInput().getInput();
-        if ((in == this) || (in == null)) {
-            Singletons.getModel().getMatch().getInput().resetInput();
-            // Clear out PassPriority after clicking button
-        }
+//        final Input in = Singletons.getModel().getMatch().getInput().getInput();
+//        if ((in == this) || (in == null)) {
+//            Singletons.getModel().getMatch().getInput().resetInput();
+//            // Clear out PassPriority after clicking button
+//        }
     }
 
     /** {@inheritDoc} */

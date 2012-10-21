@@ -34,6 +34,7 @@ import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
+import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -60,8 +61,17 @@ import forge.view.FView;
 public enum CDock implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
-
+    
     private int arcState;
+    private GameState game;
+    private Player player;
+
+    public void onGameStarts(GameState game0, Player player0)
+    {
+        game = game0;
+        player = player0;
+    }
+    
 
     /** Concede game, bring up WinLose UI. */
     public void concede() {
@@ -69,15 +79,15 @@ public enum CDock implements ICDoc {
             return;
         }
 
-        Singletons.getControl().getPlayer().concede();
-        Singletons.getModel().getGame().getAction().checkStateEffects();
+        player.concede();
+        game.getAction().checkStateEffects();
     }
 
     /**
      * End turn.
      */
     public void endTurn() {
-        Singletons.getModel().getGame().getPhaseHandler().autoPassToCleanup();
+        player.getController().autoPassTo(PhaseType.CLEANUP);
     }
 
     private void revertLayout() {
@@ -94,7 +104,7 @@ public enum CDock implements ICDoc {
         };
         w.execute();
     }
-
+    
     private void saveLayout() {
         final SwingWorker<Void, Void> w = new SwingWorker<Void, Void>() {
             @Override
@@ -138,7 +148,7 @@ public enum CDock implements ICDoc {
      * View deck list.
      */
     private void viewDeckList() {
-        showDeck(Singletons.getModel().getMatch().getPlayersDeck(Singletons.getControl().getPlayer().getLobbyPlayer()));
+        showDeck(Singletons.getModel().getMatch().getPlayersDeck(player.getLobbyPlayer()));
     }
 
     /**
@@ -178,14 +188,12 @@ public enum CDock implements ICDoc {
 
     /** Attack with everyone. */
     public void alphaStrike() {
-        final PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler();
+        final PhaseHandler ph = game.getPhaseHandler();
 
-        final Player human = Singletons.getControl().getPlayer();
-
-        if (ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, human)) {
-            for (Card c : CardLists.filter(human.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
-                if (!c.isAttacking() && CombatUtil.canAttack(c, Singletons.getModel().getGame().getCombat())) {
-                    Singletons.getModel().getGame().getCombat().addAttacker(c);
+        if (ph.is(PhaseType.COMBAT_DECLARE_ATTACKERS, player)) {
+            for (Card c : CardLists.filter(player.getCardsIn(ZoneType.Battlefield), Presets.CREATURES)) {
+                if (!c.isAttacking() && CombatUtil.canAttack(c, game.getCombat())) {
+                    game.getCombat().addAttacker(c);
                 }
             }
             //human.updateObservers();

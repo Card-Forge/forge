@@ -23,6 +23,7 @@ import forge.Card;
 
 import forge.CardLists;
 import forge.Counters;
+import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
@@ -222,10 +223,12 @@ public class CostRemoveCounter extends CostPartWithList {
 
         if (!this.getThis()) {
             if (this.getZone().equals(ZoneType.Battlefield)) {
-                CostUtil.setInput(CostRemoveCounter.removeCounterType(ability, this.getType(), payment, this, c));
+                final Input inp = CostRemoveCounter.removeCounterType(ability, this.getType(), payment, this, c);
+                Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
             }
             else {
-                CostUtil.setInput(CostRemoveCounter.removeCounterTypeFrom(ability, this.getType(), payment, this, c));
+                final Input inp = CostRemoveCounter.removeCounterTypeFrom(ability, this.getType(), payment, this, c);
+                Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
             }
             return false;
         }

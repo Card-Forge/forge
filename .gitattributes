@@ -12682,6 +12682,7 @@ src/main/java/forge/game/player/ComputerUtilBlock.java svneol=native#text/plain
 src/main/java/forge/game/player/HumanPlayer.java svneol=native#text/plain
 src/main/java/forge/game/player/LobbyPlayer.java -text
 src/main/java/forge/game/player/Player.java svneol=native#text/plain
+src/main/java/forge/game/player/PlayerController.java -text
 src/main/java/forge/game/player/PlayerOutcome.java -text
 src/main/java/forge/game/player/PlayerStatistics.java -text
 src/main/java/forge/game/player/PlayerType.java svneol=native#text/plain

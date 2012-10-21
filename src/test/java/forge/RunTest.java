@@ -2,7 +2,6 @@ package forge;
 
 import org.testng.annotations.Test;
 
-import forge.card.cardfactory.CardFactoryInterface;
 import forge.game.phase.CombatUtil;
 
 /**
@@ -25,7 +24,7 @@ public class RunTest {
     @Test(timeOut = 1000, enabled = false)
     void test() {
         Card c;
-        final CardFactoryInterface cf = Singletons.getModel().getCardFactory();
+        //final CardFactoryInterface cf = Singletons.getModel().getCardFactory();
         // ********* test Card
         /*
         c = cf.getCard("Elvish Warrior", AllZone.getComputerPlayer());

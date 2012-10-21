@@ -616,7 +616,7 @@ public class CardFactorySorceries {
             List<Card> h = hh.next();
             int sac = h.size() - min;
             if ( sac == 0 ) continue;
-            p.discard(sac, card, false);
+            p.discard(sac, card);
         }
     }
     

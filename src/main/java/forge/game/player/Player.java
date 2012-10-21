@@ -133,7 +133,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante));
 
     
-    
+    private final PlayerController controller;
     
     private LobbyPlayer lobbyPlayer; 
     
@@ -162,6 +162,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             this.zones.put(z, toPut);
         }
         this.setName(lobbyPlayer.getName());
+        controller = new PlayerController(this);
     }
 
     public final PlayerStatistics getStats() {
@@ -1197,7 +1198,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
                     if (this.isHuman()) {
                         this.discardChainsOfMephistopheles();
                     } else { // Computer
-                        this.discard(1, null, false);
+                        this.discard(1, null);
                         // true causes this code not to be run again
                         drawn.addAll(this.drawCards(1, true));
                     }
@@ -1498,7 +1499,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      *            a boolean.
      * @return a {@link forge.CardList} object.
      */
-    public abstract List<Card> discard(final int num, final SpellAbility sa, boolean duringResolution);
+    public abstract void discard(final int num, final SpellAbility sa);
 
     /**
      * <p>
@@ -1509,8 +1510,8 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link forge.CardList} object.
      */
-    public final List<Card> discard(final SpellAbility sa) {
-        return this.discard(1, sa, false);
+    public final void discard(final SpellAbility sa) {
+        this.discard(1, sa);
     }
 
     /**
@@ -2758,6 +2759,18 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
                                                  // 0
     }
 
+    public void onCleanupPhase() {
+        for (Card c : getCardsIn(ZoneType.Hand))
+            c.setDrawnThisTurn(false);
+        
+        resetPreventNextDamage();
+        resetNumDrawnThisTurn();
+        setAttackedWithCreatureThisTurn(false);
+        setNumLandsPlayed(0);
+        clearAssignedDamage();
+        resetAttackersDeclaredThisTurn();
+    }
+
     /**
      * <p>
      * canCastSorcery.
@@ -2800,6 +2813,14 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         //System.out.println("now.getPhase().isMain() - " + now.getPhase().isMain());
         //System.out.println("onlyThis - " + onlyThis);
         return now.isPlayerTurn(player) && now.getPhase().isMain() && onlyThis;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public PlayerController getController() {
+        return controller;
     }
     
 }

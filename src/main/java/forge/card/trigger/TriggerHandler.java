@@ -431,8 +431,9 @@ public class TriggerHandler {
         final Player[] controller = new Player[1];
 
         // Any trigger should cause the phase not to skip
-        Singletons.getModel().getGame().getPhaseHandler().setSkipPhase(false);
-
+        for (Player p : Singletons.getModel().getGame().getPlayers())
+            p.getController().autoPassCancel();
+        
         regtrig.setRunParams(runParams);
 
         // All tests passed, execute ability.

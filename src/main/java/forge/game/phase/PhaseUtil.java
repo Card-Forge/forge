@@ -102,7 +102,7 @@ public class PhaseUtil {
         // phase is skipped
 
         if (PhaseUtil.skipUntap(turn)) {
-            game.getPhaseHandler().setNeedToNextPhase(true);
+            game.getPhaseHandler().setPlayerMayHavePriority(false);
             return;
         }
 
@@ -112,7 +112,7 @@ public class PhaseUtil {
         // otherwise land seems to stay tapped when it is really untapped
         // AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
 
-        game.getPhaseHandler().setNeedToNextPhase(true);
+        game.getPhaseHandler().setPlayerMayHavePriority(false);
     }
 
     /**
@@ -149,7 +149,7 @@ public class PhaseUtil {
         final Player playerTurn = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
 
         if (PhaseUtil.skipCombat(playerTurn)) {
-            Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(true);
+            Singletons.getModel().getGame().getPhaseHandler().setPlayerMayHavePriority(false);
             return;
         }
     }
@@ -163,7 +163,7 @@ public class PhaseUtil {
         final Player playerTurn = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
 
         if (PhaseUtil.skipCombat(playerTurn)) {
-            Singletons.getModel().getGame().getPhaseHandler().setNeedToNextPhase(true);
+            Singletons.getModel().getGame().getPhaseHandler().setPlayerMayHavePriority(false);
             playerTurn.removeKeyword("Skip your next combat phase.");
             return;
         }

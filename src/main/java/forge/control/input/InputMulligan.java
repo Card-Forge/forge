@@ -20,6 +20,8 @@ package forge.control.input;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.collect.Iterables;
+
 import forge.Card;
 
 import forge.CardLists;
@@ -30,7 +32,6 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
-import forge.game.phase.PhaseUtil;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
@@ -115,8 +116,8 @@ public class InputMulligan extends Input {
         ButtonUtil.reset();
         final AbilityFactory af = new AbilityFactory();
 
-        final GameAction ga = Singletons.getModel().getGame().getAction();
-        for (Player p : Singletons.getModel().getGame().getPlayers()) {
+        final GameAction ga = game.getAction();
+        for (Player p : game.getPlayers()) {
             final List<Card> openingHand = p.getCardsIn(ZoneType.Hand);
     
             for (final Card c : openingHand) {
@@ -160,25 +161,23 @@ public class InputMulligan extends Input {
                             }
                         }
                     }
-                    if (c.getName().startsWith("Leyline")
-                            && !(c.getName().startsWith("Leyline of Singularity") && (CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Leyline of Singularity")).size() > 0))) {
+                    if (c.getName().startsWith("Leyline") && !(c.getName().startsWith("Leyline of Singularity") && 
+                       (Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Leyline of Singularity"))))) {
                         ga.moveToPlay(c);
                         //ga.checkStateEffects();
                     }
                 }
             }
         }
-        //ga.checkStateEffects();
 
+
+        // I expect bugs here - it is noone's turn yet.
         ga.checkStateEffects();
-        
-        game.getGameLog().add("Turn",
-                "Turn " + game.getPhaseHandler().getTurn()
-                    + " (" + game.getPhaseHandler().getPlayerTurn() + ")", 0);
-        game.getPhaseHandler().setNeedToNextPhase(false);
-        PhaseUtil.visuallyActivatePhase(game.getPhaseHandler().getPlayerTurn(), game.getPhaseHandler().getPhase());
-
+        Singletons.getModel().getMatch().getInput().clearInput();
+        // was added to stack... =(
         this.stop();
+        // move to upkeep of 1st player
+        //game.getPhaseHandler().nextPhase();
     }
 
     @Override

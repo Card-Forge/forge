@@ -1359,7 +1359,7 @@ public final class GameActionUtil {
         }
 
         // empty mana pool
-        p.getManaPool().clearPool();
+        p.getManaPool().clearPool(false);
     }
 
     /**
