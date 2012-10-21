@@ -73,8 +73,6 @@ public final class CEditorLimited extends ACEditorBase<CardPrinted, DeckGroup> {
     }
 
     /**
-     * TODO: Write javadoc for this method.
-     * 
      * @param model
      * @return
      */
@@ -116,9 +114,6 @@ public final class CEditorLimited extends ACEditorBase<CardPrinted, DeckGroup> {
         final CardPrinted card = (CardPrinted) item;
         this.getTableDeck().removeCard(card);
         this.getTableCatalog().addCard(card);
-
-        Deck model = getSelectedDeck(getDeckController().getModel());
-        model.getMain().remove(card); model.getSideboard().add(card);
 
         this.getDeckController().notifyModelChanged();
     }
