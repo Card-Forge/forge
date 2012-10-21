@@ -27,8 +27,8 @@ import forge.deck.DeckGroup;
 import forge.game.limited.BoosterDraft;
 import forge.game.limited.IBoosterDraft;
 import forge.gui.deckeditor.tables.DeckController;
-import forge.gui.deckeditor.tables.SColumnUtil;
 import forge.gui.deckeditor.tables.EditorTableView;
+import forge.gui.deckeditor.tables.SColumnUtil;
 import forge.gui.deckeditor.views.VAllDecks;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
@@ -54,7 +54,7 @@ import forge.view.FView;
 public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup> {
     private IBoosterDraft boosterDraft;
 
-    private String CCAddLabel = new String();
+    private String ccAddLabel = new String();
     private DragCell filtersParent = null;
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;
@@ -106,7 +106,7 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
         });
         */
 
-        CCAddLabel = VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().getText();
+        ccAddLabel = VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().getText();
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText("Choose Card");
 
     }
@@ -189,31 +189,48 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
      * </p>
      */
     private void saveDraft() {
-        String s = "";
-        while ((s == null) || (s.length() == 0)) {
-            s = JOptionPane.showInputDialog(null,
-                    "Save this draft as:",
-                    "Save draft",
-                    JOptionPane.QUESTION_MESSAGE);
+        String s = JOptionPane.showInputDialog(null,
+                "Save this draft as:",
+                "Save draft",
+                JOptionPane.QUESTION_MESSAGE);
+
+        // Cancel button will be null; OK will return string.
+        // Must check for null value first, then string length.
+        if (s != null) {
+            // Recurse, if empty string.
+            if (s.length() == 0) {
+                saveDraft();
+                return;
+            }
+
+            // Check for overwrite case
+            for (DeckGroup d : Singletons.getModel().getDecks().getDraft()) {
+                if (s.equalsIgnoreCase(d.getName())) {
+                    final int m = JOptionPane.showConfirmDialog(null,
+                            "There is already a deck named '" + s + "'. Overwrite?",
+                            "Overwrite Deck?",
+                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.QUESTION_MESSAGE);
+
+                    // If no overwrite, recurse.
+                    if (m == JOptionPane.NO_OPTION) {
+                        saveDraft();
+                        return;
+                    }
+                    break;
+                }
+            }
+
+            // Construct computer's decks and save draft
+            final Deck[] computer = this.boosterDraft.getDecks();
+
+            final DeckGroup finishedDraft = new DeckGroup(s);
+            finishedDraft.setHumanDeck((Deck) this.getPlayersDeck().copyTo(s));
+            finishedDraft.addAiDecks(computer);
+
+            Singletons.getModel().getDecks().getDraft().add(finishedDraft);
         }
-        // TODO: check if overwriting the same name, and let the user delete old
-        // drafts
 
-        // construct computer's decks
-        // save draft
-        final Deck[] computer = this.boosterDraft.getDecks();
-
-        final DeckGroup finishedDraft = new DeckGroup(s);
-        finishedDraft.setHumanDeck((Deck) this.getPlayersDeck().copyTo(s));
-        finishedDraft.addAiDecks(computer);
-
-        // DeckManager deckManager = new
-        // DeckManager(ForgeProps.getFile(NEW_DECKS));
-
-        // write the file
-        Singletons.getModel().getDecks().getDraft().add(finishedDraft);
-
-        CSubmenuDraft.SINGLETON_INSTANCE.update();
         FControl.SINGLETON_INSTANCE.changeState(FControl.HOME_SCREEN);
     }
 
@@ -319,7 +336,7 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
 
         //Re-rename buttons
-        VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText(CCAddLabel);
+        VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText(ccAddLabel);
 
         //Re-add tabs
         if (filtersParent != null) {
