@@ -297,6 +297,60 @@ Fixes/Features:
 - passes GameState to phaseHandler, moved player related static calls to player/Player.java
 - If player decides to draw, turn is given to his opponent
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added Multiplayer support for unless costs (but not multiple humans yet).
+- Added "Any Player" support to unless costs.
+- Improved AI dealing with Measure of Wickedness.
+- Turn counting removed from GameState (cause phaseHandler already did it)
+- Inlined some static methods called from phaseHandler
+- PhaseType: index is not a field, yet the order is set by a list initialized statically
+- GetLabelForPhase - moved to VField from PhaseUtil
+- Game has a method to determine the next player who takes turn/priority after the given one.
+- IVDoc parametrized so that getLayoutControl method returns a object or right type, won't have to cast from ICDoc
+- Converted Stasis to Keyword
+- Simplify Yosei a touch
+- Avatars on match UI are somewhat working (will take human's icon for every even-numbered player and ai's for odd ones)
+- Converted Eon Hub and Gibbering Descent into Keyword
+- remove unused var, type casting
+- fixing restart issue and hand crash
+- games against several AIs can be started now - yet extra AI players cannot be attacked and don't act (though they recieve turns)
+- Fixed getSpellCostChange.
+- Phase indicators are properly lit when attack/defend cast instants phase begins
+- computer should not recieve priority before mulligan
+- Sands of Time needs this update
+- Fix ante checking for a match win instead of last game win.
+- Moved card and player cleanup routines to repective classes
+- renamed isNeedToNextPhase => !mayPlayerHavePriority (would let understand the code better)
+- @inputControl: setInputInterrupt and setInput add to resolveStack and common Stack
+- @inputControl: updateInput => getActualInput
+- Fixed Tarzan Description. Advertised as WR, but really is GR.
+- Rollback of 17605 that broke everything
+- that borken 17605 + changes to skip mechanism
+- nextPhase transition according to priority passes
+- Targeting overlay mouseover state preferences and dock button enabled.
+- Its mechanics still need some work.
+- Targeting overlay isn't maturing as I'd hoped. It's now disabled until further notice. Code will remain in place if someone wants to tackle it.
+- Bugfix: Editor card panel looking for color from nonexistent game state.
+- Also checkstyle updates to Card.java.
+- Checkstyle.
+- Fixed description of Flameshot.
+- Re-enabled "Add 4", "Remove", "Remove 4" buttons in Limited mode card editors.
+- Removed "save" and "print proxies" button in Limited mode card editors.
+- Added the quest opponent Nelson Muntz 2 (thanks to edessa).
+- Bugfix: "Remove 4" button in Limited deck editor actually removed 8.
+- nextphase is private :)
+- Player's block interface passes priority when he is done
+- merged nightly doublestrike's changes (17610-17617)
+- 17605 fixed, 609 617-618
+- Draft "save" dialog improvements:
+1 Added functionality to "cancel" button
+2 Added yes/no confirm to overwrite cases
+- A bit o' checkstyle
+- Renamed various WinLose screens to better reflect their application.
+- Small grammar fix on sealed dialog.
+- You may plays against several AI opponents now
+- InputControl: human will get only one 'declare blockers' prompt in multiplayer games
+- GameAction: fix crash when ai player drew miracle card on 1st turn
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -337,6 +391,11 @@ Glittering Lion
 Grip of Amnesia
 Rotting Giant
 Wicked Akuba
+Rhystic Tutor
+Book Burning
+Breaking Point
+Browbeat
+Sands of Time
 
 
 end
