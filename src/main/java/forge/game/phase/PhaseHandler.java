@@ -316,7 +316,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     if (!game.getCombat().assignCombatDamage(true)) {
                         this.setPlayerMayHavePriority(false);
                     } else {
-                        Combat.dealAssignedDamage();
+                        game.getCombat().dealAssignedDamage();
                         game.getAction().checkStateEffects();
                         CombatUtil.showCombat();
                     }
@@ -332,7 +332,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     if (!game.getCombat().assignCombatDamage(false)) {
                         this.setPlayerMayHavePriority(false);
                     } else {
-                        Combat.dealAssignedDamage();
+                        game.getCombat().dealAssignedDamage();
                         game.getAction().checkStateEffects();
                         CombatUtil.showCombat();
                     }

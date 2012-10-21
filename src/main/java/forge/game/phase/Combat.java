@@ -845,19 +845,23 @@ public class Combat {
      * dealAssignedDamage.
      * </p>
      */
-    public static void dealAssignedDamage() {
+    public void dealAssignedDamage() {
         // This function handles both Regular and First Strike combat assignment
-        final Player player = Singletons.getModel().getGame().getCombat().getDefendingPlayer();
 
         final boolean bFirstStrike = Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE);
 
-        final HashMap<Card, Integer> defMap = Singletons.getModel().getGame().getCombat().getDefendingDamageMap();
+        final HashMap<Card, Integer> defMap = this.getDefendingDamageMap();
 
         for (final Entry<Card, Integer> entry : defMap.entrySet()) {
-            player.addCombatDamage(entry.getValue(), entry.getKey());
+            GameEntity defender = getDefendingEntity(entry.getKey());
+            if (defender instanceof Player) { // player
+                ((Player) defender).addCombatDamage(entry.getValue(), entry.getKey());
+            } else if (defender instanceof Card) { // planeswalker
+                ((Card) defender).getController().addCombatDamage(entry.getValue(), entry.getKey());
+            }
         }
 
-        final List<Card> unblocked = new ArrayList<Card>(bFirstStrike ? Singletons.getModel().getGame().getCombat().getUnblockedAttackers() : Singletons.getModel().getGame().getCombat().getUnblockedFirstStrikeAttackers());
+        final List<Card> unblocked = new ArrayList<Card>(bFirstStrike ? this.getUnblockedAttackers() : this.getUnblockedFirstStrikeAttackers());
 
         for (int j = 0; j < unblocked.size(); j++) {
             if (bFirstStrike) {
@@ -872,9 +876,9 @@ public class Combat {
         // this can be much better below here...
 
         final List<Card> combatants = new ArrayList<Card>();
-        combatants.addAll(Singletons.getModel().getGame().getCombat().getAttackers());
-        combatants.addAll(Singletons.getModel().getGame().getCombat().getAllBlockers());
-        combatants.addAll(Singletons.getModel().getGame().getCombat().getDefendingPlaneswalkers());
+        combatants.addAll(this.getAttackers());
+        combatants.addAll(this.getAllBlockers());
+        combatants.addAll(this.getDefendingPlaneswalkers());
 
         Card c;
         for (int i = 0; i < combatants.size(); i++) {
