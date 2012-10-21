@@ -29,8 +29,6 @@ import forge.gui.deckeditor.controllers.CEditorLimited;
 import forge.gui.framework.ICDoc;
 import forge.item.CardPrinted;
 import forge.item.ItemPool;
-import forge.properties.ForgeProps;
-import forge.properties.NewConstants;
 import forge.util.IStorage;
 import forge.util.TextUtil;
 
@@ -178,8 +176,8 @@ public enum CSubmenuSealed implements ICDoc {
         // System.out.println("You selected " + rounds + " rounds.");
 
         final String sDeckName = JOptionPane.showInputDialog(null,
-                ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.SAVE_SEALED_MSG),
-                ForgeProps.getLocalized(NewConstants.Lang.OldGuiNewGame.NewGameText.SAVE_SEALED_TTL),
+                "Save this card pool as:",
+                "Save Card Pool",
                 JOptionPane.QUESTION_MESSAGE);
 
         if (StringUtils.isBlank(sDeckName)) {
