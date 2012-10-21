@@ -203,20 +203,19 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             }
         } else if (phase == PhaseType.COMBAT_DECLARE_BLOCKERS) {
             stack.freezeStack();
-            if (playerTurn.isHuman()) {
-                priority.getController().getAiInput().getComputer().declareBlockers();
+            boolean isUnderAttack = game.getCombat().isPlayerAttacked(priority);
+            if (!isUnderAttack) { // noone attacks you
+                handler.setPlayerMayHavePriority(false);
                 return null;
-            } else {
-                if (game.getCombat().getAttackers().isEmpty()) {
-                    // no active attackers, skip the Blocking phase
-                    handler.setPlayerMayHavePriority(false);
-                    return null;
-                } else { 
-                    for (Player p : game.getPlayers())
-                        p.getController().autoPassCancel();
-                    return new InputBlock();
-                }
             }
+
+            if ( priority.isHuman() )
+                return new InputBlock();
+
+            // ai is under attack
+            priority.getController().getAiInput().getComputer().declareBlockers();
+            return null;
+            
         } else if (phase == PhaseType.CLEANUP) {
             // discard
             if (stack.isEmpty()) {
@@ -248,7 +247,5 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             return null;
         }
     } // getInput()
-
-
 
 } // InputControl

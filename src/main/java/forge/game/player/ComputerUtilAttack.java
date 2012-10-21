@@ -18,7 +18,6 @@
 package forge.game.player;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -508,7 +507,7 @@ public class ComputerUtilAttack {
         combat.setAttackingPlayer(game.getCombat().getAttackingPlayer());
         combat.setDefendingPlayer(game.getCombat().getDefendingPlayer());
 
-        game.getCombat().initiatePossibleDefenders(Arrays.asList(game.getCombat().getDefendingPlayer()));
+        game.getCombat().initiatePossibleDefenders(game.getCombat().getDefendingPlayer());
         combat.setDefenders(game.getCombat().getDefenders());
 
         if (this.attackers.isEmpty()) {

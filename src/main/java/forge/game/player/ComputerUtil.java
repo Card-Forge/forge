@@ -18,7 +18,6 @@
 package forge.game.player;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -2111,7 +2110,7 @@ public class ComputerUtil {
         } else {
             // Otherwise, if life is possibly in danger, then this is fine.
             Combat combat = new Combat();
-            combat.initiatePossibleDefenders(Arrays.asList(ai));
+            combat.initiatePossibleDefenders(ai);
             List<Card> attackers = ai.getOpponent().getCreaturesInPlay();
             for (Card att : attackers) {
                 if (CombatUtil.canAttackNextTurn(att)) {

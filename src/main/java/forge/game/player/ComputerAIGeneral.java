@@ -34,6 +34,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
+import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.zone.ZoneType;
 
@@ -282,12 +283,13 @@ public class ComputerAIGeneral implements Computer {
     @Override
     public final void declareAttackers() {
         // 12/2/10(sol) the decision making here has moved to getAttackers()
+        final GameState game = Singletons.getModel().getGame(); 
+        
+        game.setCombat(ComputerUtil.getAttackers(player));
 
-        Singletons.getModel().getGame().setCombat(ComputerUtil.getAttackers(player));
-
-        final List<Card> att = Singletons.getModel().getGame().getCombat().getAttackers();
+        final List<Card> att = game.getCombat().getAttackers();
         if (!att.isEmpty()) {
-            Singletons.getModel().getGame().getPhaseHandler().setCombat(true);
+            game.getPhaseHandler().setCombat(true);
         }
 
         for (final Card element : att) {
@@ -300,7 +302,11 @@ public class ComputerAIGeneral implements Computer {
 
         player.getZone(ZoneType.Battlefield).updateObservers();
 
-        Singletons.getModel().getGame().getPhaseHandler().setPlayerMayHavePriority(false);
+        game.getPhaseHandler().setPlayerMayHavePriority(false);
+        
+        // ai is about to attack, cancel all phase skipping
+        for (Player p : game.getPlayers())
+            p.getController().autoPassCancel();
     }
 
     /**

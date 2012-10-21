@@ -18,7 +18,6 @@
 package forge.card.abilityfactory;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -1460,7 +1459,7 @@ public final class AbilityFactoryChangeZone {
     private static Card chooseCreature(final Player ai, List<Card> list) {
         Card card = null;
         Combat combat = new Combat();
-        combat.initiatePossibleDefenders(Arrays.asList(ai));
+        combat.initiatePossibleDefenders(ai);
         List<Card> attackers = ai.getOpponent().getCreaturesInPlay();
         for (Card att : attackers) {
             combat.addAttacker(att);

@@ -109,17 +109,27 @@ public class Combat {
         this.defenders.clear();
         this.defenderMap.clear();
         for(Player defender : defenders) {
-            this.defenders.add(defender);
-            this.defenderMap.put(defender, new ArrayList<Card>());
-            List<Card> planeswalkers = defender.getCardsIn(ZoneType.Battlefield);
-            planeswalkers = CardLists.filter(planeswalkers, CardPredicates.Presets.PLANEWALKERS);
-            for (final Card pw : planeswalkers) {
-                this.defenders.add(pw);
-                this.defenderMap.put(pw, new ArrayList<Card>());
-            }
+            fillDefenderMaps(defender);
         }
     }
 
+    public final void initiatePossibleDefenders(final Player defender) {
+        this.defenders.clear();
+        this.defenderMap.clear();
+        fillDefenderMaps(defender);
+    }    
+    
+    private void fillDefenderMaps(final Player defender) {
+        this.defenders.add(defender);
+        this.defenderMap.put(defender, new ArrayList<Card>());
+        List<Card> planeswalkers = defender.getCardsIn(ZoneType.Battlefield);
+        planeswalkers = CardLists.filter(planeswalkers, CardPredicates.Presets.PLANEWALKERS);
+        for (final Card pw : planeswalkers) {
+            this.defenders.add(pw);
+            this.defenderMap.put(pw, new ArrayList<Card>());
+        }        
+    }
+    
     /**
      * <p>
      * nextDefender.
@@ -950,6 +960,24 @@ public class Combat {
      */
     public final void addUnblockedAttacker(final Card c) {
         this.unblockedMap.put(c, new ArrayList<Card>());
+    }
+
+    public boolean isPlayerAttacked(Player priority)
+    {
+        for(Card c : getAttackers())
+        {
+            GameEntity defender = getDefenderByAttacker(c);
+            if ( defender.equals(priority) ) {
+                return true;
+            }
+            // maybe attack on a controlled planeswalker? 
+            if (!(defender instanceof Card)) continue;
+            Card pw = (Card)defender;
+            if( pw.getController().equals(priority) ) {
+                return true;
+            }
+        }
+        return false;
     }
 
 } // Class Combat

@@ -810,6 +810,7 @@ public class GameAction {
                     }
                 } else {
                     Spell spell = (Spell) miracle;
+                    spell.setActivatingPlayer(card.getOwner());
                     if (spell.canPlayFromEffectAI(false, false)) {
                         ComputerUtil.playStack(miracle, card.getOwner());
                     }
