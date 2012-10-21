@@ -199,13 +199,16 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     public final Player getOpponent() {
         GameState game = Singletons.getModel().getGame();
         Player otherType = null;
-        Player notMe = null;
+        Player anyWhoHasNotLost = null;
+        Player justAnyone = null;
         for (Player p : game.getPlayers()) {
-            if ( p == this || false == Predicates.NOT_LOST.apply(p) ) continue;
-            if ( notMe == null ) notMe = p;
-            if ( otherType == null && p.getType() != this.getType() ) otherType = p;
+            if ( p == this ) continue;
+            justAnyone = p;
+            if( false == Predicates.NOT_LOST.apply(p) ) continue;
+            if( anyWhoHasNotLost == null ) anyWhoHasNotLost = p;
+            if( otherType == null && p.getType() != this.getType() ) otherType = p;
         }
-        return otherType != null ? otherType : notMe; 
+        return otherType != null ? otherType : ( anyWhoHasNotLost == null ? justAnyone : anyWhoHasNotLost ); 
     }
     
     /**
@@ -2164,7 +2167,12 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * @return a boolean.
      */
     public final boolean cantWin() {
-        return (this.hasKeyword("You can't win the game.") || this.getOpponent().hasKeyword("You can't lose the game."));
+        boolean isAnyOppLoseProof = false;
+        for( Player p : Singletons.getModel().getGame().getPlayers() ) {
+            if ( p == this || p.getOutcome() != null ) continue; // except self and already dead
+            isAnyOppLoseProof |= p.hasKeyword("You can't lose the game.");
+        }
+        return this.hasKeyword("You can't win the game.") || isAnyOppLoseProof;
     }
 
     /**
