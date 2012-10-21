@@ -254,7 +254,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     for( Player p : game.getPlayers() ) {
                         p.clearSlowtripList();
                     }
-                    game.getPhaseHandler().setPlayerMayHavePriority(false);
+                    this.setPlayerMayHavePriority(false);
                 } else {
                     game.getUpkeep().executeUntil(this.getPlayerTurn());
                     game.getUpkeep().executeAt();
@@ -263,7 +263,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
             case DRAW:
                 if (getTurn() == 1 || PhaseUtil.skipDraw(this.getPlayerTurn()))
-                    game.getPhaseHandler().setPlayerMayHavePriority(false);
+                    this.setPlayerMayHavePriority(false);
                 else
                     this.getPlayerTurn().drawCards(1, true);
                 break;
@@ -288,7 +288,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             // we can skip AfterBlockers and AfterAttackers if necessary
             case COMBAT_DECLARE_BLOCKERS:
                 if (this.inCombat()) {
-                    Singletons.getModel().getGame().getCombat().verifyCreaturesInPlay();
+                    game.getCombat().verifyCreaturesInPlay();
                     CombatUtil.showCombat();
                 } else {
                     this.setPlayerMayHavePriority(false);

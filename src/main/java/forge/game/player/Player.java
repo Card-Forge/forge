@@ -52,6 +52,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.GameLossReason;
+import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
@@ -135,7 +136,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     
     private final PlayerController controller;
     
-    private LobbyPlayer lobbyPlayer; 
+    private final LobbyPlayer lobbyPlayer; 
     
     public final PlayerOutcome getOutcome() {
         return stats.getOutcome();
@@ -190,14 +191,21 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
 
     /**
      * <p>
-     * getOpponent. WILL BE DEPRECATED
+     * getOpponent. Used by current-generation AI. 
      * </p>
      * 
      * @return a {@link forge.game.player.Player} object.
      */
     public final Player getOpponent() {
-        Predicate<Player> enemy = com.google.common.base.Predicates.not(Player.Predicates.isType(this.getType()));
-        return Iterables.find(Singletons.getModel().getGame().getPlayers(), enemy);
+        GameState game = Singletons.getModel().getGame();
+        Player otherType = null;
+        Player notMe = null;
+        for (Player p : game.getPlayers()) {
+            if ( p == this || false == Predicates.NOT_LOST.apply(p) ) continue;
+            if ( notMe == null ) notMe = p;
+            if ( otherType == null && p.getType() != this.getType() ) otherType = p;
+        }
+        return otherType != null ? otherType : notMe; 
     }
     
     /**
@@ -2735,8 +2743,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         return CardLists.filter(getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                final List<String> colorList = CardUtil.getColors(c);
-                return colorList.contains(color);
+                return CardUtil.getColors(c).contains(color);
             }
         });
     }
