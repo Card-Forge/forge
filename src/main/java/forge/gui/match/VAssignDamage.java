@@ -162,9 +162,8 @@ public class VAssignDamage {
                     assignedDamage = VAssignDamage.this.damageLeftToAssign;
                 }
                 else if (alreadyAssignDamage == 0) {
-                    assignedDamage = lethal;
+                    assignedDamage = Math.min(lethal, VAssignDamage.this.damageLeftToAssign);
                 }
-   
 
                 assignCombatantDamage(source, assignedDamage);
             }
