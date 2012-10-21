@@ -132,15 +132,15 @@ public enum CSubmenuDraft implements ICDoc {
                 if (aiDeck == null) {
                     throw new IllegalStateException("Draft: Computer deck is null!");
                 }
-                
+
                 MatchStartHelper starter = new MatchStartHelper();
                 starter.addPlayer(Singletons.getControl().getLobby().findLocalPlayer(PlayerType.HUMAN), humanDeck);
                 starter.addPlayer(opponents[aiIndex], aiDeck);
-                
-                MatchController mc = Singletons.getModel().getMatch(); 
+
+                MatchController mc = Singletons.getModel().getMatch();
                 mc.initMatch(GameType.Draft, starter.getPlayerMap());
                 mc.startRound();
-                
+
                 return null;
             }
 
