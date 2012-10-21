@@ -46,12 +46,14 @@ public class AIPlayer extends Player {
      * <p>
      * Constructor for AIPlayer.
      * </p>
+     * @param computerAIGeneral 
      * 
      * @param myName
      *            a {@link java.lang.String} object.
      */
     public AIPlayer(final LobbyPlayer player) {
         super(player);
+        getController().setAiInput(new ComputerAIInput(new ComputerAIGeneral(this)));
     }
 
     

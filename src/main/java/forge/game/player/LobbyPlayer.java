@@ -9,6 +9,10 @@ package forge.game.player;
 public class LobbyPlayer {
     
     final protected PlayerType type;
+    public final PlayerType getType() {
+        return type;
+    }
+
     final protected String name;
     protected String picture;
 
@@ -24,17 +28,6 @@ public class LobbyPlayer {
 
     public final void setPicture(String picture) {
         this.picture = picture;
-    }
-
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
-    public Player getIngamePlayer() {
-        if ( type == PlayerType.HUMAN )
-            return new HumanPlayer(this);
-        else 
-            return new AIPlayer(this);
     }
 
     /**

@@ -13,11 +13,8 @@ import forge.control.input.InputControl;
 import forge.control.input.InputMulligan;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
-import forge.game.player.ComputerAIGeneral;
-import forge.game.player.ComputerAIInput;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
-import forge.game.player.PlayerType;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiInput;
 import forge.gui.framework.EDocID;
@@ -31,7 +28,6 @@ import forge.gui.match.controllers.CStack;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VAntes;
 import forge.properties.ForgePreferences.FPref;
-import forge.util.Aggregates;
 
 /**
  * TODO: Write javadoc for this type.
@@ -126,9 +122,6 @@ public class MatchController {
 
             final boolean canRandomFoil = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_FOIL) && gameType == GameType.Constructed;
             GameNew.newGame(startConditions, currentGame, canRandomFoil);
-
-            Player computerPlayer = Aggregates.firstFieldEquals(currentGame.getPlayers(), Player.Accessors.FN_GET_TYPE, PlayerType.COMPUTER);
-            input.setComputer(new ComputerAIInput(new ComputerAIGeneral(computerPlayer)));
 
             // TODO restore this functionality!!!
             //VMatchUI.SINGLETON_INSTANCE.getViewDevMode().getDocument().setVisible(Preferences.DEV_MODE);

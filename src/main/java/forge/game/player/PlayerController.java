@@ -18,6 +18,12 @@ public class PlayerController {
     
     private PhaseType autoPassUntil = null;
 
+    private ComputerAIInput aiInput;
+
+    public final ComputerAIInput getAiInput() {
+        return aiInput;
+    }
+
     public PlayerController(Player player0) {
         player = player0;
     }
@@ -42,6 +48,14 @@ public class PlayerController {
     
     public boolean isUiSetToSkipPhase(final Player turn, final PhaseType phase) {
         return player.equals(Singletons.getControl().getPlayer()) && !CMatchUI.SINGLETON_INSTANCE.stopAtPhase(turn, phase);
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param computerAIInput
+     */
+    public void setAiInput(ComputerAIInput computerAIInput) {
+        aiInput = computerAIInput; 
     }
     
 

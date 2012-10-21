@@ -38,8 +38,11 @@ import forge.game.phase.EndOfTurn;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.Untap;
 import forge.game.phase.Upkeep;
+import forge.game.player.AIPlayer;
+import forge.game.player.HumanPlayer;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
+import forge.game.player.PlayerType;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.MagicStack;
 import forge.game.zone.Zone;
@@ -79,7 +82,7 @@ public class GameState {
     public GameState(Iterable<LobbyPlayer> players2) { /* no more zones to map here */
         List<Player> players = new ArrayList<Player>();
         for(LobbyPlayer p : players2) {
-            players.add(p.getIngamePlayer());
+            players.add(getIngamePlayer(p));
         }
         roPlayers = Collections.unmodifiableList(players);
         action = new GameAction(this);
@@ -439,5 +442,18 @@ public class GameState {
         // should also check that he has not lost yet.
         return roPlayers.get(iPlayer);
                 
+    }
+
+    /**
+     * Only game knows how to make siutable players out of just connected clients
+     * @return
+     */
+    public Player getIngamePlayer(LobbyPlayer player) {
+        if ( player.getType() == PlayerType.HUMAN )
+            return new HumanPlayer(player);
+        else {
+            return new AIPlayer(player);
+            
+        }
     }
 }

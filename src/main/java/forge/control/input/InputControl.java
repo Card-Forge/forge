@@ -22,7 +22,6 @@ import java.util.Stack;
 import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
-import forge.game.player.ComputerAIInput;
 import forge.game.player.Player;
 import forge.game.zone.MagicStack;
 import forge.util.MyObservable;
@@ -45,8 +44,6 @@ public class InputControl extends MyObservable implements java.io.Serializable {
     private final Stack<Input> urgentInputStack = new Stack<Input>();
 
     private final GameState game;
-    private ComputerAIInput aiInput; // initialized at runtime to be the latest object created
-
     /**
      * TODO Write javadoc for Constructor.
      * 
@@ -207,7 +204,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         } else if (phase == PhaseType.COMBAT_DECLARE_BLOCKERS) {
             stack.freezeStack();
             if (playerTurn.isHuman()) {
-                this.aiInput.getComputer().declareBlockers();
+                priority.getController().getAiInput().getComputer().declareBlockers();
                 return null;
             } else {
                 if (game.getCombat().getAttackers().isEmpty()) {
@@ -245,21 +242,13 @@ public class InputControl extends MyObservable implements java.io.Serializable {
                 return new InputPassPriority();
             }
         } else if (playerTurn.isComputer()) {
-            return this.aiInput;
+            return priority.getController().getAiInput();
         } else {
-            this.aiInput.getComputer().playSpellAbilities();
+            priority.getController().getAiInput().getComputer().playSpellAbilities();
             return null;
         }
     } // getInput()
 
 
-    /**
-     * Sets the computer.
-     * 
-     * @param computerAIInput
-     *            the new computer
-     */
-    public final void setComputer(final ComputerAIInput computerAIInput) {
-        this.aiInput = computerAIInput;
-    }
+
 } // InputControl
