@@ -64,12 +64,8 @@ public class QuestUtil {
     public static List<Card> getComputerStartingCards(final QuestEvent qe) {
         final List<Card> list = new ArrayList<Card>();
 
-        if (qe instanceof QuestEventChallenge) {
-            final List<String> extras = ((QuestEventChallenge) qe).getAIExtraCards();
-
-            for (final String s : extras) {
-                list.add(QuestUtil.readExtraCard(s));
-            }
+        for (final String s : qe.getAiExtraCards()) {
+            list.add(QuestUtil.readExtraCard(s));
         }
 
         return list;
@@ -122,15 +118,9 @@ public class QuestUtil {
      */
     public static List<Card> getHumanStartingCards(final QuestController qc, final QuestEvent qe) {
         final List<Card> list = QuestUtil.getHumanStartingCards(qc);
-
-        if (qe instanceof QuestEventChallenge) {
-            final List<String> extras = ((QuestEventChallenge) qe).getHumanExtraCards();
-
-            for (final String s : extras) {
-                list.add(QuestUtil.readExtraCard(s));
-            }
+        for (final String s : qe.getHumanExtraCards()) {
+            list.add(QuestUtil.readExtraCard(s));
         }
-
         return list;
     }
 

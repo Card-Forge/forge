@@ -116,24 +116,13 @@ public class QuestEventChallenge extends QuestEvent {
 
     /**
      * <p>
-     * getAIExtraCards.
-     * </p>
-     * Retrieves list of cards AI has in play at the beginning of this quest.
-     * 
-     * @return the aI extra cards
-     */
-    public final List<String> getAIExtraCards() {
-        return this.getAiExtraCards();
-    }
-
-    /**
-     * <p>
      * getHumanExtraCards.
      * </p>
      * Retrieves list of cards human has in play at the beginning of this quest.
      * 
      * @return the human extra cards
      */
+    @Override
     public final List<String> getHumanExtraCards() {
         return this.humanExtraCards;
     }
@@ -143,6 +132,7 @@ public class QuestEventChallenge extends QuestEvent {
      * 
      * @return the aiExtraCards
      */
+    @Override    
     public List<String> getAiExtraCards() {
         return this.aiExtraCards;
     }

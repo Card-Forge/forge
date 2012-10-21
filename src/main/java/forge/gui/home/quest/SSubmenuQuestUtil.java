@@ -8,6 +8,9 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
+import com.google.common.base.Supplier;
+
+import forge.Card;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
@@ -282,9 +285,12 @@ public class SSubmenuQuestUtil {
                     }
 
                     humanStart.setStartingLife(qData.getAssets().getLife(qData.getMode()) + extraLifeHuman);
-                    humanStart.setCardsOnTable(QuestUtil.getHumanStartingCards(qData, event));
                     aiStart.setStartingLife(lifeAI);
-                    aiStart.setCardsOnTable(QuestUtil.getComputerStartingCards(event));
+                    
+                    humanStart.setCardsOnTable(new Supplier<Iterable<Card>>() {
+                        @Override public Iterable<Card> get() { return QuestUtil.getHumanStartingCards(qData, event); } });
+                    aiStart.setCardsOnTable(new Supplier<Iterable<Card>>() {
+                        @Override public Iterable<Card> get() { return QuestUtil.getComputerStartingCards(event); } });
                 } // End isFantasy
 
                 MatchStartHelper msh = new MatchStartHelper();
