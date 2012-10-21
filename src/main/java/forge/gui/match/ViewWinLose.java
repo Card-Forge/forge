@@ -55,15 +55,15 @@ public class ViewWinLose {
         ControlWinLose control = null;
         switch (match.getGameType()) {
             case Quest:
-                control = new QuestWinLoseHandler(this, match);
+                control = new QuestWinLose(this, match);
                 break;
             case Draft:
                 if (!Singletons.getModel().getGauntletMini().isGauntletDraft()) break;
             case Sealed:
-                control = new GauntletWinLose(this, match);
+                control = new LimitedWinLose(this, match);
                 break;
             case Gauntlet:
-                control = new OtherGauntletWinLose(this, match);
+                control = new GauntletWinLose(this, match);
                 break;
             default: // will catch it after switch
                 break;

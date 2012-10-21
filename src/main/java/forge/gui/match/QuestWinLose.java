@@ -70,14 +70,14 @@ import javax.swing.SwingConstants;
 
 /**
  * <p>
- * QuestWinLoseHandler.
+ * QuestWinLose.
  * </p>
  * Processes win/lose presentation for Quest events. This presentation is
  * displayed by WinLoseFrame. Components to be added to pnlCustom in
  * WinLoseFrame should use MigLayout.
  * 
  */
-public class QuestWinLoseHandler extends ControlWinLose {
+public class QuestWinLose extends ControlWinLose {
     private final transient boolean wonMatch;
     private final transient ViewWinLose view;
     private transient ImageIcon icoTemp;
@@ -99,7 +99,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
      * @param view0 ViewWinLose object
      * @param match2 
      */
-    public QuestWinLoseHandler(final ViewWinLose view0, MatchController match2) {
+    public QuestWinLose(final ViewWinLose view0, MatchController match2) {
         super(view0, match2);
         this.view = view0;
         qData = Singletons.getModel().getQuest();
@@ -216,9 +216,9 @@ public class QuestWinLoseHandler extends ControlWinLose {
         // Generate Swing components and attach.
         this.lblTemp1 = new TitleLabel("Ante Lost: You lost the following cards in Ante:");
 
-        this.getView().getPnlCustom().add(this.lblTemp1, QuestWinLoseHandler.CONSTRAINTS_TITLE);
+        this.getView().getPnlCustom().add(this.lblTemp1, QuestWinLose.CONSTRAINTS_TITLE);
         this.getView().getPnlCustom().add(
-                new QuestWinLoseCardViewer(antesLost), QuestWinLoseHandler.CONSTRAINTS_CARDS);
+                new QuestWinLoseCardViewer(antesLost), QuestWinLose.CONSTRAINTS_CARDS);
     }
 
     /**
@@ -234,9 +234,9 @@ public class QuestWinLoseHandler extends ControlWinLose {
         // Generate Swing components and attach.
         this.lblTemp1 = new TitleLabel(str.toString());
 
-        this.getView().getPnlCustom().add(this.lblTemp1, QuestWinLoseHandler.CONSTRAINTS_TITLE);
+        this.getView().getPnlCustom().add(this.lblTemp1, QuestWinLose.CONSTRAINTS_TITLE);
         this.getView().getPnlCustom().add(
-                new QuestWinLoseCardViewer(antesWon), QuestWinLoseHandler.CONSTRAINTS_CARDS);
+                new QuestWinLoseCardViewer(antesWon), QuestWinLose.CONSTRAINTS_CARDS);
     }
 
     /**
@@ -399,7 +399,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
             final int turnCredits = this.getCreditsRewardForWinByTurn(winTurn);
 
             if (winTurn == 0) {
-                throw new UnsupportedOperationException("QuestWinLoseHandler > "
+                throw new UnsupportedOperationException("QuestWinLose > "
                         + "turn calculation error: Zero turn win");
             } else if (winTurn == 1) {
                 sb.append("Won in one turn!");
@@ -468,7 +468,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         qData.getAssets().addCredits(credTotal);
 
         // Generate Swing components and attach.
-        this.icoTemp = QuestWinLoseHandler.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_GOLD), 0.5);
+        this.icoTemp = QuestWinLose.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_GOLD), 0.5);
 
         this.lblTemp1 = new TitleLabel("Gameplay Results");
 
@@ -479,8 +479,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.lblTemp2.setIcon(this.icoTemp);
         this.lblTemp2.setIconTextGap(50);
 
-        this.getView().getPnlCustom().add(this.lblTemp1, QuestWinLoseHandler.CONSTRAINTS_TITLE);
-        this.getView().getPnlCustom().add(this.lblTemp2, QuestWinLoseHandler.CONSTRAINTS_TEXT);
+        this.getView().getPnlCustom().add(this.lblTemp1, QuestWinLose.CONSTRAINTS_TITLE);
+        this.getView().getPnlCustom().add(this.lblTemp2, QuestWinLose.CONSTRAINTS_TEXT);
     }
 
     /**
@@ -500,8 +500,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
                 this.lblTemp1 = new TitleLabel("A starter pack for the *UNLOCKED* " + unlockedSet.getName() + " set!");
                 final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
 
-                this.view.getPnlCustom().add(this.lblTemp1, QuestWinLoseHandler.CONSTRAINTS_TITLE);
-                this.view.getPnlCustom().add(cv, QuestWinLoseHandler.CONSTRAINTS_CARDS);
+                this.view.getPnlCustom().add(this.lblTemp1, QuestWinLose.CONSTRAINTS_TITLE);
+                this.view.getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS);
 
                 qData.getCards().addAllCards(cardsWon);
             }
@@ -513,8 +513,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
                     this.lblTemp1 = new TitleLabel("Booster pack " + (i + 1) + " for the *UNLOCKED* " + unlockedSet.getName() + " set!");
                     final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
 
-                    this.view.getPnlCustom().add(this.lblTemp1, QuestWinLoseHandler.CONSTRAINTS_TITLE);
-                    this.view.getPnlCustom().add(cv, QuestWinLoseHandler.CONSTRAINTS_CARDS);
+                    this.view.getPnlCustom().add(this.lblTemp1, QuestWinLose.CONSTRAINTS_TITLE);
+                    this.view.getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS);
 
                     qData.getCards().addAllCards(cardsWon);
                 }
@@ -539,8 +539,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
 
         final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
 
-        this.view.getPnlCustom().add(this.lblTemp1, QuestWinLoseHandler.CONSTRAINTS_TITLE);
-        this.view.getPnlCustom().add(cv, QuestWinLoseHandler.CONSTRAINTS_CARDS);
+        this.view.getPnlCustom().add(this.lblTemp1, QuestWinLose.CONSTRAINTS_TITLE);
+        this.view.getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS);
     }
 
     /**
@@ -557,8 +557,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.lblTemp1 = new TitleLabel("You just won 10 random rares!");
         final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
 
-        this.view.getPnlCustom().add(this.lblTemp1, QuestWinLoseHandler.CONSTRAINTS_TITLE);
-        this.view.getPnlCustom().add(cv, QuestWinLoseHandler.CONSTRAINTS_CARDS);
+        this.view.getPnlCustom().add(this.lblTemp1, QuestWinLose.CONSTRAINTS_TITLE);
+        this.view.getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS);
     }
 
     /**
@@ -663,8 +663,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
             // Generate Swing components and attach.
             final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
 
-            this.view.getPnlCustom().add(this.lblTemp1, QuestWinLoseHandler.CONSTRAINTS_TITLE);
-            this.view.getPnlCustom().add(cv, QuestWinLoseHandler.CONSTRAINTS_CARDS);
+            this.view.getPnlCustom().add(this.lblTemp1, QuestWinLose.CONSTRAINTS_TITLE);
+            this.view.getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS);
         }
 
     }
@@ -846,7 +846,7 @@ public class QuestWinLoseHandler extends ControlWinLose {
         qData.getAssets().addCredits(questRewardCredits);
 
         // Generate Swing components and attach.
-        this.icoTemp = QuestWinLoseHandler.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_BOX), 0.5);
+        this.icoTemp = QuestWinLose.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_BOX), 0.5);
         this.lblTemp1 = new TitleLabel("Challenge Rewards for \"" + ((QuestEventChallenge) qEvent).getTitle() + "\"");
 
         this.lblTemp2 = new JLabel(sb.toString());
@@ -856,19 +856,19 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.lblTemp2.setIconTextGap(50);
         this.lblTemp2.setIcon(this.icoTemp);
 
-        this.getView().getPnlCustom().add(this.lblTemp1, QuestWinLoseHandler.CONSTRAINTS_TITLE);
-        this.getView().getPnlCustom().add(this.lblTemp2, QuestWinLoseHandler.CONSTRAINTS_TEXT);
+        this.getView().getPnlCustom().add(this.lblTemp1, QuestWinLose.CONSTRAINTS_TITLE);
+        this.getView().getPnlCustom().add(this.lblTemp2, QuestWinLose.CONSTRAINTS_TEXT);
 
         if (cardsWon != null) {
             final QuestWinLoseCardViewer cv = new QuestWinLoseCardViewer(cardsWon);
-            this.getView().getPnlCustom().add(cv, QuestWinLoseHandler.CONSTRAINTS_CARDS);
+            this.getView().getPnlCustom().add(cv, QuestWinLose.CONSTRAINTS_CARDS);
             qData.getCards().addAllCards(cardsWon);
         }
     }
 
     private void penalizeLoss() {
         final int x = Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.PENALTY_LOSS);
-        this.icoTemp = QuestWinLoseHandler.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_HEART), 0.5);
+        this.icoTemp = QuestWinLose.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_HEART), 0.5);
 
         this.lblTemp1 = new TitleLabel("Gameplay Results");
 
@@ -879,8 +879,8 @@ public class QuestWinLoseHandler extends ControlWinLose {
         this.lblTemp2.setIconTextGap(50);
         this.lblTemp2.setIcon(this.icoTemp);
 
-        this.getView().getPnlCustom().add(this.lblTemp1, QuestWinLoseHandler.CONSTRAINTS_TITLE);
-        this.getView().getPnlCustom().add(this.lblTemp2, QuestWinLoseHandler.CONSTRAINTS_TEXT);
+        this.getView().getPnlCustom().add(this.lblTemp1, QuestWinLose.CONSTRAINTS_TITLE);
+        this.getView().getPnlCustom().add(this.lblTemp2, QuestWinLose.CONSTRAINTS_TEXT);
     }
 
     /**

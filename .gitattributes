@@ -12839,9 +12839,9 @@ src/main/java/forge/gui/home/settings/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/match/CMatchUI.java -text
 src/main/java/forge/gui/match/ControlWinLose.java -text
 src/main/java/forge/gui/match/GauntletWinLose.java -text
-src/main/java/forge/gui/match/OtherGauntletWinLose.java -text
+src/main/java/forge/gui/match/LimitedWinLose.java -text
+src/main/java/forge/gui/match/QuestWinLose.java -text
 src/main/java/forge/gui/match/QuestWinLoseCardViewer.java -text
-src/main/java/forge/gui/match/QuestWinLoseHandler.java -text
 src/main/java/forge/gui/match/TargetingOverlay.java -text
 src/main/java/forge/gui/match/VAssignDamage.java svneol=native#text/plain
 src/main/java/forge/gui/match/VMatchUI.java -text

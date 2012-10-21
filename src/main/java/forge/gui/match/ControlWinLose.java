@@ -72,7 +72,7 @@ public class ControlWinLose {
         
         boolean isAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
 
-        //This is called from QuestWinLoseHandler also.  If we're in a quest, this is already handled elsewhere
+        //This is called from QuestWinLose also.  If we're in a quest, this is already handled elsewhere
         if (isAnte && match.getGameType() != GameType.Quest) {
             executeAnte();
         }        

@@ -18,35 +18,28 @@ package forge.gui.match;
  */
 
 import java.awt.Color;
-import java.awt.Dimension;
+import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
+import forge.deck.Deck;
 import forge.game.MatchController;
-import forge.game.limited.GauntletMini;
+import forge.game.player.LobbyPlayer;
+import forge.gauntlet.GauntletData;
+import forge.gauntlet.GauntletIO;
+import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
+import forge.model.FModel;
 
 /**
  * The Win/Lose handler for 'gauntlet' type tournament
  * games.
  */
 public class GauntletWinLose extends ControlWinLose {
-
-    private final boolean wonMatch;
-    private ViewWinLose view;
-    private GauntletMini gauntlet;
-    private boolean nextRound = false;
-
-    /** String constraint parameters. */
-    private static final String CONSTRAINTS_TITLE = "w 95%!, gap 0 0 20px 10px";
-    private static final String CONSTRAINTS_TEXT = "w 95%!,, h 180px!, gap 0 0 0 20px";
-
-    private JLabel lblTemp1;
-    private JLabel lblTemp2;
-
     /**
      * Instantiates a new gauntlet win/lose handler.
      * 
@@ -55,11 +48,7 @@ public class GauntletWinLose extends ControlWinLose {
      */
     public GauntletWinLose(final ViewWinLose view0, MatchController match) {
         super(view0, match);
-        this.view = view0;
-        gauntlet = Singletons.getModel().getGauntletMini();
-        this.wonMatch = match.isWonBy(Singletons.getControl().getPlayer().getLobbyPlayer());
     }
-
 
     /**
      * <p>
@@ -69,150 +58,128 @@ public class GauntletWinLose extends ControlWinLose {
      */
     @Override
     public final boolean populateCustomPanel() {
+        final GauntletData gd = FModel.SINGLETON_INSTANCE.getGauntletData();
+        final List<String> lstEventNames = gd.getEventNames();
+        final List<Deck> lstDecks = gd.getDecks();
+        final List<String> lstEventRecords = gd.getEventRecords();
+        final int len = lstDecks.size();
+        final int num = gd.getCompleted();
+        JLabel lblGraphic = null;
+        JLabel lblMessage1 = null;
+        JLabel lblMessage2 = null;
 
-        // view.getBtnRestart().setVisible(false);
-        // Deliberate; allow replaying bad tournaments
+        // No restarts.
+        this.getView().getBtnRestart().setVisible(false);
 
-        //TODO: do per-game actions like ante here...
+        // Generic event record.
+        lstEventRecords.set(gd.getCompleted(), "Ongoing");
 
-        resetView();
-        nextRound = false;
+        // Match won't be saved until it is over. This opens up a cheat
+        // or failsafe mechanism (depending on your perspective) in which
+        // the player can restart Forge to replay a match.
+        // Pretty sure this can't be fixed until in-game states can be
+        // saved. Doublestrike 07-10-12
+        LobbyPlayer questPlayer = Singletons.getControl().getLobby().getQuestPlayer();
+        if (match.isMatchOver()) {
+            // In all cases, update stats.
+            lstEventRecords.set(gd.getCompleted(), match.getGamesWonBy(questPlayer) + " - " + ( match.getPlayedGames().size() - match.getGamesWonBy(questPlayer) ) );
+            gd.setCompleted(gd.getCompleted() + 1);
 
+            // Win match case
+            if (match.isWonBy(questPlayer)) {
+                // Gauntlet complete: Remove save file
+                if (gd.getCompleted() == lstDecks.size()) {
+                    lblGraphic = new FLabel.Builder()
+                        .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_COIN)).build();
+                    lblMessage1 = new FLabel.Builder().fontSize(24)
+                        .text("CONGRATULATIONS!").build();
+                    lblMessage2 = new FLabel.Builder().fontSize(18)
+                        .text("You made it through the gauntlet!").build();
 
+                    this.getView().getBtnContinue().setVisible(false);
+                    this.getView().getBtnContinue().repaintSelf();
+                    this.getView().getBtnQuit().setText("OK");
 
-        if (match.getLastGameOutcome().isWinner(Singletons.getControl().getPlayer().getLobbyPlayer())) {
-            gauntlet.addWin();
-        } else {
-            gauntlet.addLoss();
-        }
+                    // Remove save file if it's a quickie, or just reset it.
+                    if (gd.getActiveFile().getName().matches(GauntletIO.REGEX_QUICK)) {
+                        gd.getActiveFile().delete();
+                    }
+                    else {
+                        gd.reset();
+                    }
+                }
+                // Or, save and move to next game
+                else {
+                    gd.stamp();
+                    GauntletIO.saveGauntlet(gd);
 
-        view.getBtnRestart().setText("Restart Round");
+                    this.getView().getBtnContinue().setVisible(true);
+                    this.getView().getBtnContinue().setEnabled(true);
+                    this.getView().getBtnQuit().setText("Save and Quit");
+                }
+            }
+            // Lose match case; stop gauntlet.
+            else {
+                lblGraphic = new FLabel.Builder()
+                    .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_HEART)).build();
+                lblMessage1 = new FLabel.Builder().fontSize(24)
+                        .text("DEFEATED!").build();
+                lblMessage2 = new FLabel.Builder().fontSize(18)
+                        .text("You have failed to pass the gauntlet.").build();
 
-        if (!match.isMatchOver()) {
-            showTournamentInfo("Tournament Info");
-            return true;
-        } else {
-            if (this.wonMatch) {
-                if (gauntlet.getCurrentRound() < gauntlet.getRounds()) {
-                    view.getBtnContinue().setText("Next Round (" + (gauntlet.getCurrentRound() + 1)
-                            + "/" + gauntlet.getRounds() + ")");
-                    nextRound = true;
-                    view.getBtnContinue().setEnabled(true);
-                    showTournamentInfo("YOU HAVE WON ROUND " + gauntlet.getCurrentRound() + "/"
-                            + gauntlet.getRounds());
+                this.getView().getBtnContinue().setVisible(false);
+
+                // Remove save file if it's a quickie, or just reset it.
+                if (gd.getActiveFile().getName().matches(GauntletIO.REGEX_QUICK)) {
+                    gd.getActiveFile().delete();
                 }
                 else {
-                    showTournamentInfo("***CONGRATULATIONS! YOU HAVE WON THE TOURNAMENT!***");
+                    gd.reset();
                 }
-            } else {
-                showTournamentInfo("YOU HAVE LOST ON ROUND " + gauntlet.getCurrentRound() + "/"
-                        + gauntlet.getRounds());
-                view.getBtnContinue().setVisible(false);
             }
         }
 
+        gd.setEventRecords(lstEventRecords);
 
+        // Custom panel display
+        final JLabel lblTitle = new FLabel.Builder().text("Gauntlet Progress")
+                .fontAlign(SwingConstants.CENTER).fontSize(18).build();
+
+        final JPanel pnlResults = new JPanel();
+        pnlResults.setOpaque(false);
+        pnlResults.setLayout(new MigLayout("insets 0, gap 0, wrap "
+                + (int) Math.ceil(gd.getDecks().size() / 2d) + ", flowy"));
+
+        JLabel lblTemp;
+        for (int i = 0; i < len; i++) {
+            lblTemp = new FLabel.Builder().fontSize(14).build();
+
+            if (i <= num) {
+                lblTemp.setForeground(Color.green.darker());
+                lblTemp.setText((i + 1) + ". " + lstEventNames.get(i)
+                        + " (" + lstEventRecords.get(i) + ")");
+            }
+            else {
+                lblTemp.setForeground(Color.red);
+                lblTemp.setText((i + 1) + ". ??????");
+            }
+
+            pnlResults.add(lblTemp, "w 50%!, h 25px!, gap 0 0 5px 0");
+        }
+
+        final JPanel pnl = this.getView().getPnlCustom();
+        pnl.setLayout(new MigLayout("insets 0, gap 0, wrap, ax center"));
+        pnl.setOpaque(true);
+        pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
+        pnl.add(lblTitle, "gap 0 0 20px 10px, ax center");
+        pnl.add(pnlResults, "w 96%!, growy, pushy, gap 2% 0 0 0");
+
+        if (lblGraphic != null) {
+            pnl.add(lblGraphic, "w 120px!, h 120px!, ax center");
+            pnl.add(lblMessage1, "w 96%!, h 40px!, gap 2% 0 0 0");
+            pnl.add(lblMessage2, "w 96%!, h 40px!, gap 2% 0 0 50px");
+        }
 
         return true;
     }
-
-    /**
-     * <p>
-     * Shows some tournament info in the custom panel.
-     * </p>
-     * @param String - the title to be displayed
-     */
-    private void showTournamentInfo(final String newTitle) {
-
-        this.lblTemp1 = new TitleLabel(newTitle);
-        this.lblTemp2 = new JLabel("Round: " + gauntlet.getCurrentRound() + "/" + gauntlet.getRounds());
-                // + "      Total Wins: " + gauntlet.getWins()
-                // + "      Total Losses: " + gauntlet.getLosses());
-        this.lblTemp2.setHorizontalAlignment(SwingConstants.CENTER);
-        this.lblTemp2.setFont(FSkin.getFont(17));
-        this.lblTemp2.setForeground(Color.white);
-        this.lblTemp2.setIconTextGap(50);
-        this.getView().getPnlCustom().add(this.lblTemp1, GauntletWinLose.CONSTRAINTS_TITLE);
-        this.getView().getPnlCustom().add(this.lblTemp2, GauntletWinLose.CONSTRAINTS_TEXT);
-    }
-
-    /**
-     * <p>
-     * actionOnRestart.
-     * </p>
-     * When "restart" button is pressed, this method restarts the current round.
-     * 
-     */
-    @Override
-    public final void actionOnRestart() {
-        resetView();
-        // gauntlet.resetCurrentRound();
-        super.actionOnRestart();
-    }
-
-    /**
-     * <p>
-     * actionOnQuit.
-     * </p>
-     * When "quit" button is pressed, we exit the tournament.
-     * 
-     */
-    @Override
-    public final void actionOnQuit() {
-        resetView();
-        gauntlet.resetCurrentRound();
-        super.actionOnQuit();
-    }
-
-    /**
-     * <p>
-     * actionOnContinue.
-     * </p>
-     * When "continue / next round" button is pressed, we either continue
-     * to the next game in the current match or (next round) proceed to
-     * the next round in the mini tournament.
-     * 
-     */
-    @Override
-    public final void actionOnContinue() {
-        resetView();
-
-        if (nextRound) {
-            gauntlet.nextRound();
-            super.actionOnRestart();
-        }
-        else {
-            super.actionOnContinue();
-        }
-    }
-
-    /**
-     * <p>
-     * ResetView
-     * </p>
-     * Restore the default texts to the win/lose panel buttons.
-     * 
-     */
-    private void resetView() {
-        view.getBtnQuit().setText("Quit");
-        view.getBtnContinue().setText("Continue");
-        view.getBtnRestart().setText("Restart");
-    }
-
-    /**
-     * JLabel header, adapted from QuestWinLoseHandler.
-     * 
-     */
-    @SuppressWarnings("serial")
-    private class TitleLabel extends JLabel {
-        TitleLabel(final String msg) {
-            super(msg);
-            this.setFont(FSkin.getFont(18));
-            this.setPreferredSize(new Dimension(200, 40));
-            this.setHorizontalAlignment(SwingConstants.CENTER);
-            this.setForeground(Color.white);
-            this.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, Color.white));
-        }
-    }
-
 }
