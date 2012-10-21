@@ -113,8 +113,9 @@ public class GameNew {
             player.setStartingLife(p.getValue().getStartingLife());
             // what if I call it for AI player?
             PlayerZone bf = player.getZone(ZoneType.Battlefield);
-            if (p.getValue().getCardsOnTable() != null) {
-                for (final Card c : p.getValue().getCardsOnTable()) {
+            Iterable<Card> onTable = p.getValue().getCardsOnTable(); 
+            if (onTable != null) {
+                for (final Card c : onTable) {
                     c.addController(player);
                     c.setOwner(player);
                     bf.add(c, false);

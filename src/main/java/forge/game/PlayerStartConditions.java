@@ -22,7 +22,7 @@ public class PlayerStartConditions {
         return startingLife;
     }
     public final Iterable<Card> getCardsOnTable() {
-        return cardsOnTable.get();
+        return  cardsOnTable == null ? null : cardsOnTable.get();
     }
 
     public final void setStartingLife(int startingLife) {
