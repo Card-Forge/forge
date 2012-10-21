@@ -61,19 +61,11 @@ public enum CSubmenuMultiTest implements ICDoc {
     private void start() {
         // Retrieve selections
         JRadioButton radTemp = null;
-        final int numFields;
-        final int numHands;
 
         for (JRadioButton rad : view.getFieldRadios()) {
             if (rad.isSelected()) { radTemp = rad; break; } }
 
-        numFields = (radTemp == null ? 2 : Integer.valueOf(radTemp.getText()));
-
-        radTemp = null;
-        for (JRadioButton rad : view.getHandRadios()) {
-            if (rad.isSelected()) { radTemp = rad; break; } }
-
-        numHands = (radTemp == null ? 1 : Integer.valueOf(radTemp.getText()));
+        final int numFields = (radTemp == null ? 2 : Integer.valueOf(radTemp.getText()));
 
         // Boilerplate start game code
         SwingUtilities.invokeLater(new Runnable() {
@@ -93,7 +85,7 @@ public enum CSubmenuMultiTest implements ICDoc {
                 MatchStartHelper starter = new MatchStartHelper();
                 Lobby lobby = Singletons.getControl().getLobby();
                 starter.addPlayer(lobby.findLocalPlayer(PlayerType.HUMAN), humanDeck);
-                for( int i = 1; i < numFields; i++ )
+                for( int i = 0; i < numFields; i++ )
                     starter.addPlayer(lobby.findLocalPlayer(PlayerType.COMPUTER), aiDeck);
                 
                 MatchController mc = Singletons.getModel().getMatch(); 

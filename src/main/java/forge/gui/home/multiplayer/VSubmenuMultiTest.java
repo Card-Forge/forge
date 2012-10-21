@@ -33,49 +33,33 @@ public enum VSubmenuMultiTest implements IVSubmenu<CSubmenuMultiTest> {
     // Fields used with interface IVDoc
     private DragCell parentCell;
     private final DragTab tab = new DragTab("Multiplayer Test");
-    private final JPanel pnlFields, pnlHands;
+    private final JPanel pnlFields;
 
     /** */
     private final List<JRadioButton> fieldRadios = new ArrayList<JRadioButton>();
-    private final List<JRadioButton> handRadios = new ArrayList<JRadioButton>();
     private final StartButton btnStart = new StartButton();
     private final ButtonGroup grpFields = new ButtonGroup();
-    private final ButtonGroup grpHands = new ButtonGroup();
 
     private VSubmenuMultiTest() {
         FRadioButton temp;
 
-        for (int i = 1; i < 8; i++) {
+        for (int i = 2; i < 8; i++) {
             temp = new FRadioButton();
-            temp.setText(String.valueOf(i + 1));
+            temp.setText(String.valueOf(i));
             fieldRadios.add(temp);
             grpFields.add(temp);
         }
 
-        for (int i = 0; i < 4; i++) {
-            temp = new FRadioButton();
-            temp.setText(String.valueOf(i + 1));
-            handRadios.add(temp);
-            grpHands.add(temp);
-        }
+
 
         pnlFields = new FPanel();
         pnlFields.setLayout(new MigLayout("insets 0, gap 0, wrap"));
-        pnlFields.add(new FLabel.Builder().text("Player panels:").build(), "w 100px!, h 30px!");
+        pnlFields.add(new FLabel.Builder().text("How many AI opponents are you ready to handle?").build(), "h 30px!");
 
         for (JRadioButton rad : fieldRadios) {
             pnlFields.add(rad, "w 100px!, h 30px!, gap 30px 0 0 0");
         }
 
-        pnlHands = new FPanel();
-        pnlHands.setLayout(new MigLayout("insets 0, gap 0, wrap"));
-        pnlHands.add(new FLabel.Builder().text("Hand panels:").build(), "w 100px!, h 30px!");
-
-        for (JRadioButton rad : handRadios) {
-            pnlHands.add(rad, "w 100px!, h 30px!, gap 30px 0 0 0");
-        }
-
-        handRadios.get(0).setSelected(true);
         fieldRadios.get(0).setSelected(true);
     }
 
@@ -89,11 +73,6 @@ public enum VSubmenuMultiTest implements IVSubmenu<CSubmenuMultiTest> {
         return fieldRadios;
     }
 
-    /** @return {@link java.util.List} */
-    public List<JRadioButton> getHandRadios() {
-        return handRadios;
-    }
-
     /* (non-Javadoc)
      * @see forge.view.home.IViewSubmenu#populate()
      */
@@ -103,13 +82,9 @@ public enum VSubmenuMultiTest implements IVSubmenu<CSubmenuMultiTest> {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlFields, "w 41%!, gap 6% 6% 50px 0, growy, pushy");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlHands, "w 41%!, gap 0 0 50px 0, growy, pushy");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(new FLabel.Builder()
             .text("Starts a new game with preconstructed 2 color decks for each field.")
             .build(), "gap 0 0 50px 5px, ax center, span 2");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(new FLabel.Builder()
-            .text("Field 0 is Human, the rest are AI [AllZone.getComputerPlayer()].")
-            .build(), "gap 0 0 0 5px, ax center, span 2");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStart, "gap 0 0 50px 50px, ax center, span 2");
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
@@ -129,7 +104,7 @@ public enum VSubmenuMultiTest implements IVSubmenu<CSubmenuMultiTest> {
      */
     @Override
     public String getMenuTitle() {
-        return "Testing (Temporary)";
+        return "Archenemy";
     }
 
     /* (non-Javadoc)
