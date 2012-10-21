@@ -351,6 +351,7 @@ Fixes/Features:
 - InputControl: human will get only one 'declare blockers' prompt in multiplayer games
 - GameAction: fix crash when ai player drew miracle card on 1st turn
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
