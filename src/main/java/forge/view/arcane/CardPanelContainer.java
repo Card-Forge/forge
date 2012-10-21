@@ -559,11 +559,6 @@ public abstract class CardPanelContainer extends JPanel {
         }
     }
 
-    /** @return {@link forge.view.arcane.CardPanel} */
-    public final CardPanel getMouseOverPanel() {
-        return this.hoveredPanel;
-    }
-
     /**
      * <p>
      * getCardFromMouseOverPanel.

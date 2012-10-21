@@ -82,8 +82,7 @@ public enum TargetingOverlay {
                 // Draw only hovered card
                 for (VField f : fields) {
                     if (f.getTabletop().getCardFromMouseOverPanel() != null) {
-                        cardPanels.add(f.getTabletop().getMouseOverPanel());
-                        break;
+                        cardPanels.addAll(f.getTabletop().getCardPanels());
                     }
                 }
                 break;
