@@ -192,7 +192,7 @@ public class QuestWinLose extends ControlWinLose {
         // Unlock new sets?
         if (this.wonMatch && qData.getAchievements().getWin() > 1 && (qData.getAchievements().getWin() % 50) == 0) {
             unlockSets();
-        } else {unlockSets();}//DEBUG!!
+        }
 
         // Grant booster on a win, or on a loss in easy mode
         if (this.wonMatch || difficulty == 0) {
