@@ -6496,6 +6496,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!this.getController().equals(source.getChosenPlayer())) {
                 return false;
             }
+        } else if (property.startsWith("DefenderCtrl")) {
+            if (!this.getController().equals(Singletons.getModel().getGame().getCombat().getDefendingPlayer())) {
+                return false;
+            }
         } else if (property.startsWith("EnchantedPlayerCtrl")) {
             final Object o = source.getEnchanting();
             if (o instanceof Player) {

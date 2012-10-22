@@ -4,7 +4,7 @@ Types:Creature Nightstalker
 Text:no text
 PT:2/2
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDiscards | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, defending player discards a card.
-SVar:TrigDiscards:AB$Discard | Cost$ 0 | Defined$ Opponent | NumCards$ 1 | Mode$ TgtChoose
+SVar:TrigDiscards:AB$ Discard | Cost$ 0 | Defined$ DefendingPlayer | NumCards$ 1 | Mode$ TgtChoose
 SVar:Rarity:Uncommon
 SVar:Picture:http://serv4.tcgimages.eu/img/cards/Portal_Second_Age/abyssal_nightstalker.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/1.jpg

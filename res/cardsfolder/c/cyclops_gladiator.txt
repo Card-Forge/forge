@@ -4,7 +4,7 @@ Types:Creature Cyclops Warrior
 Text:no text
 PT:4/4
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigExchangeDamage | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME attacks, you may have it deal damage equal to its power to target creature defending player controls. If you do, that creature deals damage equal to its power to CARDNAME.
-SVar:TrigExchangeDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature defending player controls. | NumDmg$ MyX | SubAbility$ ReturnDmg | References$ MyX 
+SVar:TrigExchangeDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature defending player controls. | NumDmg$ MyX | SubAbility$ ReturnDmg | References$ MyX 
 SVar:ReturnDmg:DB$DealDamage | Cost$ 0 | DamageSource$ Targeted | NumDmg$ TheirX | References$ TheirX
 SVar:MyX:Count$CardPower
 SVar:TheirX:Targeted$CardPower

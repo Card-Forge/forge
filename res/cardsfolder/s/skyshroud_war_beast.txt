@@ -4,8 +4,10 @@ Types:Creature Beast
 Text:no text
 PT:*/*
 K:Trample
-S:Mode$ Continuous | EffectZone$ Battlefield | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of nonbasic lands your opponent controls.
-SVar:X:Count$Valid Land.nonBasic+YouDontCtrl
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseP | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose an opponent.
+SVar:ChooseP:AB$ ChoosePlayer | Cost$ 0 | Defined$ You | Choices$ Opponent | AILogic$ Curse
+S:Mode$ Continuous | EffectZone$ Battlefield | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of nonbasic lands the chosen player controls.
+SVar:X:Count$Valid Land.nonBasic+ChosenCtrl
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_war_beast.jpg

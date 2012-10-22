@@ -3,7 +3,7 @@ ManaCost:4 R R R
 Types:Creature Dragon
 PT:6/6
 K:Flying
-A:AB$ DealDamage | Cost$ R | ValidTgts$ Creature.YouDontCtrl | NumDmg$ 1 | IsPresent$ Card.Self+attacking | SpellDescription$ CARDNAME deals 1 damage to target creature defending player controls. Activate this ability only if CARDNAME is attacking.
+A:AB$ DealDamage | Cost$ R | ValidTgts$ Creature.DefenderCtrl | NumDmg$ 1 | IsPresent$ Card.Self+attacking | SpellDescription$ CARDNAME deals 1 damage to target creature defending player controls. Activate this ability only if CARDNAME is attacking.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ancient_hellkite.jpg
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/122.jpg
