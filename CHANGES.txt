@@ -17,6 +17,8 @@ This version includes quest mode sets unlocks, an 'enforced format quest, and cu
 
 A lot of things are planned for this new multiplayer mode and it will take time to finish. Please enjoy what we have at this time and be patient. :)
 
+Since Multiplayer is so new, not all cards will be 100% compatible right away as we expand scripting to handle multiple players.
+
 The older match layout files are incompatible with the new multiplayer mode. The original match_default.xml, match_preferred.xml and the match_preferred.xml saved to a different name files have to go and can no longer be used. You can keep your editor_preferred.xml file. But you will have to setup your match view panels using the new match_default.xml file.
 
 Some people reported that the new targeting arcs are not being redrawn when the target moves to another area. This is a work in progress and we hope to fix it at some point in the future. If this happens, you should try turning the targeting arcs to off and then back on again.
