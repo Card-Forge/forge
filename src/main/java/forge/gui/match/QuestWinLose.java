@@ -192,7 +192,7 @@ public class QuestWinLose extends ControlWinLose {
         // Unlock new sets?
         if (this.wonMatch && qData.getAchievements().getWin() > 1 && (qData.getAchievements().getWin() % 50) == 0) {
             unlockSets();
-        }
+        } else {unlockSets();}//DEBUG!!
 
         // Grant booster on a win, or on a loss in easy mode
         if (this.wonMatch || difficulty == 0) {
@@ -760,7 +760,7 @@ public class QuestWinLose extends ControlWinLose {
             return null;
         }
 
-        final int nrChoices = 5;
+        final int nrChoices = 7;
         List<CardEdition> options = new ArrayList<CardEdition>();
 
          // Sort current sets by index
@@ -797,7 +797,47 @@ public class QuestWinLose extends ControlWinLose {
              }
          }
 
-         // TODO: Check for currently incomplete blocks in the format, add the missing blocks to fillers
+         // Look for nearby core sets or block starting sets...
+         for (BoosterData bd : Singletons.getModel().getTournamentPacks()) {
+             if (qData.getFormat().getExcludedSetCodes().contains(bd.getEdition())
+                     && !(fillers.contains(Singletons.getModel().getEditions().get(bd.getEdition())))
+                     && !(options.contains(Singletons.getModel().getEditions().get(bd.getEdition())))) {
+                 // Set is not yet on any of the lists, see if it is 'close' to any of the sets we currently have
+                 CardEdition curEd = Singletons.getModel().getEditions().get(bd.getEdition());
+                 int edIdx = curEd.getIndex();
+                 for (String cmpCode : qData.getFormat().getAllowedSetCodes()) {
+                     int cmpIdx = Singletons.getModel().getEditions().get(cmpCode).getIndex();
+                     // Note that we need to check for fillers.contains() again inside this 'for' loop!
+                     if (!fillers.contains(curEd) && (cmpIdx == edIdx + 1 || edIdx == cmpIdx + 1)) {
+                         fillers.add(curEd);
+                         // System.out.println("Added nearby starter/core set " + curEd.getName());
+                     }
+                     else if (!fillers.contains(curEd) && (cmpIdx == edIdx + 2 || edIdx == cmpIdx + 2) && MyRandom.getRandom().nextFloat() < 0.7f) {
+                         fillers.add(curEd);
+                         //System.out.println("Added nearby2 starter/core set " + curEd.getName());
+                     }
+                     else if (!fillers.contains(curEd) && (cmpIdx == edIdx + 3 || edIdx == cmpIdx + 3) && MyRandom.getRandom().nextFloat() < 0.45f) {
+                         fillers.add(curEd);
+                         // System.out.println("Added nearby3 starter/core set " + curEd.getName());
+                     }
+                 }
+             }
+         }
+
+         // Fill in the in-between sets...
+         int j = 0;
+         // Find the first excluded set between current sets first and current sets last
+         while (j < excludedSets.size() && excludedSets.get(j).getIndex() < currentSets.get(0).getIndex()) {
+             j++;
+         }
+         // Consider all sets until current sets last
+         while (j < excludedSets.size() && excludedSets.get(j).getIndex() < currentSets.get(currentSets.size() - 1).getIndex()) {
+             if (!options.contains(excludedSets.get(j)) && !fillers.contains(excludedSets.get(j))) {
+                 // System.out.println("Added in-between set " + excludedSets.get(j).getCode());
+                 fillers.add(excludedSets.get(j));
+             }
+             j++;
+         }
 
          if (fillers.size() + options.size() < nrChoices && excludedSets.size() > fillers.size() + options.size()) {
              if (excludedSets.size() == 1 + fillers.size() + options.size()) {
