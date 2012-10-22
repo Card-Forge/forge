@@ -367,7 +367,7 @@ public class AbilityFactoryZoneAffecting {
             randomReturn = true;
         }
 
-        if (AbilityFactory.playReusable(sa)) {
+        if (AbilityFactory.playReusable(ai, sa)) {
             randomReturn = true;
         }
 
@@ -932,7 +932,7 @@ public class AbilityFactoryZoneAffecting {
             }
         }
 
-        if (AbilityFactory.playReusable(sa)) {
+        if (AbilityFactory.playReusable(ai, sa)) {
             randomReturn = true;
             // some other variables here, like deck size, and phase and other fun stuff
         }

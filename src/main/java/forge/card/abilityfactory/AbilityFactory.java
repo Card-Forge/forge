@@ -42,7 +42,6 @@ import forge.card.spellability.Target;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
-import forge.game.player.PlayerType;
 import forge.game.zone.ZoneType;
 
 /**
@@ -1484,7 +1483,7 @@ public class AbilityFactory {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean playReusable(final SpellAbility sa) {
+    public static boolean playReusable(final Player ai, final SpellAbility sa) {
         // TODO probably also consider if winter orb or similar are out
 
         if (sa.getPayCosts() == null) {
@@ -1499,8 +1498,8 @@ public class AbilityFactory {
             return true;
         }
 
-        return (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) 
-             && Singletons.getModel().getGame().getPhaseHandler().isNextTurn(PlayerType.COMPUTER));
+        return Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) 
+             && Singletons.getModel().getGame().getNextPlayerAfter(sa.getActivatingPlayer()).equals(ai);
     }
 
     /**

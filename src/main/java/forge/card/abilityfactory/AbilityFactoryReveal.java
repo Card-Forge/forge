@@ -311,7 +311,7 @@ public final class AbilityFactoryReveal {
             return false;
         }
 
-        if (AbilityFactory.playReusable(sa)) {
+        if (AbilityFactory.playReusable(ai, sa)) {
             randomReturn = true;
         }
 
@@ -1315,7 +1315,7 @@ public final class AbilityFactoryReveal {
         final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(.667, sa.getActivationsThisTurn() + 1);
 
-        if (AbilityFactory.playReusable(sa)) {
+        if (AbilityFactory.playReusable(ai, sa)) {
             randomReturn = true;
         }
 
@@ -1481,7 +1481,7 @@ public final class AbilityFactoryReveal {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryReveal.scryCanPlayAI(af, this);
+                return AbilityFactoryReveal.scryCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -1519,7 +1519,7 @@ public final class AbilityFactoryReveal {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryReveal.scryCanPlayAI(af, this);
+                return AbilityFactoryReveal.scryCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -1720,7 +1720,7 @@ public final class AbilityFactoryReveal {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean scryCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean scryCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         // Card source = sa.getSourceCard();
 
         double chance = .4; // 40 percent chance of milling with instant speed
@@ -1732,7 +1732,7 @@ public final class AbilityFactoryReveal {
         final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
 
-        if (AbilityFactory.playReusable(sa)) {
+        if (AbilityFactory.playReusable(ai, sa)) {
             randomReturn = true;
         }
 
@@ -2302,7 +2302,7 @@ public final class AbilityFactoryReveal {
         final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(.667, sa.getActivationsThisTurn() + 1);
 
-        if (AbilityFactory.playReusable(sa)) {
+        if (AbilityFactory.playReusable(ai, sa)) {
             randomReturn = true;
         }
 

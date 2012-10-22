@@ -383,7 +383,7 @@ public class AbilityFactoryAlterLife {
         }
 
         boolean randomReturn = r.nextFloat() <= .6667;
-        if (lifeCritical || AbilityFactory.playReusable(sa)) {
+        if (lifeCritical || AbilityFactory.playReusable(ai, sa)) {
             randomReturn = true;
         }
 
@@ -808,7 +808,7 @@ public class AbilityFactoryAlterLife {
         }
 
         boolean randomReturn = r.nextFloat() <= .6667;
-        if (AbilityFactory.playReusable(sa) || priority) {
+        if (AbilityFactory.playReusable(ai, sa) || priority) {
             randomReturn = true;
         }
 

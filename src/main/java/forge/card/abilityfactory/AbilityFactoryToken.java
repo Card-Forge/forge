@@ -385,7 +385,7 @@ public class AbilityFactoryToken extends AbilityFactory {
             }
         }
 
-        if (AbilityFactory.playReusable(sa)) {
+        if (AbilityFactory.playReusable(ai, sa)) {
             return true;
         }
 

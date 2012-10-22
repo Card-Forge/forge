@@ -253,7 +253,7 @@ public class AbilityFactoryDestroy {
                 list = CardLists.getValidCards(list, params.get("AITgts"), sa.getActivatingPlayer(), source);
             }
             list = CardLists.getNotKeyword(list, "Indestructible");
-            if (!AbilityFactory.playReusable(sa)) {
+            if (!AbilityFactory.playReusable(ai, sa)) {
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {

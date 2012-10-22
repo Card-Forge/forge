@@ -1949,7 +1949,7 @@ public class AbilityFactoryCounters {
             chance &= subAb.chkAIDrawback();
         }
 
-        if (sa.isTrigger() || sa instanceof AbilitySub || AbilityFactory.playReusable(sa)) {
+        if (sa.isTrigger() || sa instanceof AbilitySub || AbilityFactory.playReusable(ai, sa)) {
             return chance;
         }
 
@@ -2298,7 +2298,7 @@ public class AbilityFactoryCounters {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryCounters.moveCounterCanPlayAI(af, this);
+                return AbilityFactoryCounters.moveCounterCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -2336,7 +2336,7 @@ public class AbilityFactoryCounters {
 
             @Override
             public boolean canPlayAI() {
-                return AbilityFactoryCounters.moveCounterCanPlayAI(af, this);
+                return AbilityFactoryCounters.moveCounterCanPlayAI(getActivatingPlayer(), af, this);
             }
 
             @Override
@@ -2469,7 +2469,7 @@ public class AbilityFactoryCounters {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean moveCounterCanPlayAI(final AbilityFactory af, final SpellAbility sa) {
+    private static boolean moveCounterCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what
         // the expected targets could be
@@ -2493,7 +2493,7 @@ public class AbilityFactoryCounters {
             chance &= subAb.chkAIDrawback();
         }
 
-        if (AbilityFactory.playReusable(sa)) {
+        if (AbilityFactory.playReusable(ai, sa)) {
             return chance;
         }
 
