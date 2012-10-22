@@ -54,6 +54,7 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
+import forge.game.phase.Combat;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -6497,8 +6498,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("DefenderCtrl")) {
-            if (Singletons.getModel().getGame().getCombat().getAttackingPlayer() == null 
-                    || !this.getController().equals(Singletons.getModel().getGame().getCombat().getDefendingPlayer())) {
+            Combat combat = Singletons.getModel().getGame().getCombat();
+            if (!Singletons.getModel().getGame().getPhaseHandler().inCombat()) {
+                return false;
+            }
+            Player defender = combat.getDefendingPlayerRelatedTo(source);
+            if (!this.getController().equals(defender)) {
                 return false;
             }
         } else if (property.startsWith("EnchantedPlayerCtrl")) {

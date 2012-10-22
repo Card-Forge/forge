@@ -2174,7 +2174,7 @@ public class AbilityFactory {
                 players.add(p);
             }
         } else if (defined.equals("DefendingPlayer")) {
-            final Player p = Singletons.getModel().getGame().getCombat().getDefendingPlayer();
+            final Player p = Singletons.getModel().getGame().getCombat().getDefendingPlayerRelatedTo(card);
             if (!players.contains(p)) {
                 players.add(p);
             }

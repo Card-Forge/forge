@@ -548,6 +548,37 @@ public class Combat {
     private List<Card> getBlockingAttackerList(final Card attacker) {
         return this.attackerMap.get(attacker);
     }
+    
+
+    /**
+     * <p>
+     * getDefendingPlayer.
+     * </p>
+     * 
+     * @param attacker
+     *            a {@link forge.Card} object.
+     * @return a {@link forge.Player} object.
+     */
+    public Player getDefendingPlayerRelatedTo(final Card source) {
+
+        Player defender = this.getDefendingPlayer();
+        Card attacker = source;
+        if (source.isAura()) {
+            attacker = source.getEnchantingCard();
+        } else if (source.isEquipment()) {
+            attacker = source.getEquippingCard();
+        }
+        // if the card is attacking the defender is clear
+        if (attacker.isAttacking()) {
+            GameEntity def = this.getDefenderByAttacker(attacker);
+            if (def instanceof Player) {
+                defender = (Player) def;
+            } else {
+                defender = ((Card) def).getController();
+            }
+        }
+        return defender;
+    }
 
     /**
      * <p>
