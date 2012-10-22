@@ -83,6 +83,10 @@ public enum VSubmenuMultiTest implements IVSubmenu<CSubmenuMultiTest> {
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlFields, "w 41%!, gap 6% 6% 50px 0, growy, pushy");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(new FLabel.Builder()
+            .text("Doublestrike, please make a choice of decks for human here")
+            .build(), "gap 0 0 50px 5px, ax center, span 2");
+
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(new FLabel.Builder()
             .text("Starts a new game with preconstructed 2 color decks for each field.")
             .build(), "gap 0 0 50px 5px, ax center, span 2");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStart, "gap 0 0 50px 50px, ax center, span 2");
