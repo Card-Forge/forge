@@ -5,7 +5,7 @@ Text:no text
 PT:2/2
 K:Morph:3 B B
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigSac | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player sacrifices a creature.
-SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Opponent | SacValid$ Creature
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ TriggeredTarget | SacValid$ Creature
 SVar:MustBeBlocked:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_executioner.jpg

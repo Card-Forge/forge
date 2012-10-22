@@ -2,8 +2,8 @@ Name:Larceny
 ManaCost:3 B B
 Types:Enchantment
 Text:no text
-T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Opponent | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Whenever a creature you control deals combat damage to a player, that player discards a card.
-SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ Opponent | NumCards$ 1 | Mode$ TgtChoose
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Player | CombatDamage$ True | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Whenever a creature you control deals combat damage to a player, that player discards a card.
+SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/larceny.jpg

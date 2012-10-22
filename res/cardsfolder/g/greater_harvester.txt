@@ -4,9 +4,9 @@ Types:Creature Horror
 Text:no text
 PT:5/6
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSacYou | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, sacrifice a permanent.
-SVar:TrigSacYou:AB$Sacrifice | Cost$ 0 | SacValid$ Permanent | Defined$ You
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigSacOpp | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player sacrifices two permanents.
-SVar:TrigSacOpp:AB$ Sacrifice | Cost$ 0 | SacValid$ Permanent | Amount$ 2 | Defined$ Opponent
+SVar:TrigSacYou:AB$ Sacrifice | Cost$ 0 | SacValid$ Permanent | Defined$ You
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSacOpp | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player sacrifices two permanents.
+SVar:TrigSacOpp:AB$ Sacrifice | Cost$ 0 | SacValid$ Permanent | Amount$ 2 | Defined$ TriggeredTarget
 SVar:MustBeBlocked:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/greater_harvester.jpg

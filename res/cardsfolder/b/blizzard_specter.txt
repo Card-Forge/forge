@@ -6,7 +6,7 @@ PT:2/3
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player  | CombatDamage$ True | Execute$ TrigCharm | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, choose one - That player returns a permanent he or she controls to its owner's hand; or that player discards a card.
 SVar:TrigCharm:AB$ Charm | Cost$ 0 | Choices$ DBBounce,DBDiscard | SpellDescription$ Choose one - That player returns a permanent he or she controls to its owner's hand; or that player discards a card.
-SVar:DBBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | ChangeType$ Permanent.YouDontCtrl | ChangeNum$ 1 | Chooser$ TriggeredTarget | Mandatory$ True | SpellDescription$ That player returns a permanent he or she controls to its owner's hand
+SVar:DBBounce:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | Hidden$ True | ChangeType$ Permanent.DefenderCtrl | ChangeNum$ 1 | Chooser$ TriggeredTarget | Mandatory$ True | SpellDescription$ That player returns a permanent he or she controls to its owner's hand
 SVar:DBDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose | SpellDescription$ That player discards a card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blizzard_specter.jpg

@@ -4,7 +4,7 @@ Types:Creature Beast
 Text:no text
 PT:1/1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may sacrifice it. If you do, CARDNAME deals 3 damage to that player.
-SVar:TrigDamage:AB$DealDamage | Cost$ Sac<1/CARDNAME> | Defined$ TriggeredTarget | NumDmg$ 3
+SVar:TrigDamage:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | Defined$ TriggeredTarget | NumDmg$ 3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/furnace_scamp.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/84.jpg

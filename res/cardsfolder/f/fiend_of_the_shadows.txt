@@ -5,7 +5,7 @@ Text:no text
 PT:3/3
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigChangeZone | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player exiles a card from his or her hand. You may play that card for as long as it remains exiled.
-SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Exile | DefinedPlayer$ TriggeredTarget | Chooser$ Opponent | ChangeType$ Card | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBPump
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Exile | DefinedPlayer$ TriggeredTarget | Chooser$ TriggeredTarget | ChangeType$ Card | ChangeNum$ 1 | RememberChanged$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ May be played by your opponent | PumpZone$ Exile | Permanent$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 A:AB$ Regenerate | Cost$ Sac<1/Human> | SpellDescription$ Regenerate CARDNAME.

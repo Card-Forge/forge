@@ -4,9 +4,9 @@ Types:Creature Ogre Warrior
 Text:no text
 PT:3/4
 T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ TrigYouDiscard | TriggerDescription$ Whenever CARDNAME is dealt damage, discard that many cards.
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Hellbent$ True | CombatDamage$ True | Execute$ TrigOppDiscard | TriggerDescription$ Hellbent - Whenever CARDNAME deals combat damage to a player, if you have no cards in hand, that player discards cards equal to the damage.
-SVar:TrigYouDiscard:AB$Discard | Cost$ 0 | Defined$ You | NumCards$ X | Mode$ TgtChoose | References$ X
-SVar:TrigOppDiscard:AB$Discard | Cost$ 0 | Defined$ Opponent | NumCards$ X | Mode$ TgtChoose | References$ X
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Hellbent$ True | CombatDamage$ True | Execute$ TrigOppDiscard | TriggerDescription$ Hellbent - Whenever CARDNAME deals combat damage to a player, if you have no cards in hand, that player discards cards equal to the damage.
+SVar:TrigYouDiscard:AB$ Discard | Cost$ 0 | Defined$ You | NumCards$ X | Mode$ TgtChoose | References$ X
+SVar:TrigOppDiscard:AB$ Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ X | Mode$ TgtChoose | References$ X
 SVar:X:TriggerCount$DamageAmount
 SVar:NeedsToPlayVar:Y LE2
 SVar:Y:Count$CardsInYourHand
