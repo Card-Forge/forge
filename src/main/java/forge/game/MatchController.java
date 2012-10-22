@@ -15,6 +15,7 @@ import forge.deck.Deck;
 import forge.error.ErrorViewer;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
+import forge.game.player.PlayerType;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiInput;
 import forge.gui.framework.EDocID;
@@ -28,6 +29,7 @@ import forge.gui.match.controllers.CStack;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VAntes;
 import forge.properties.ForgePreferences.FPref;
+import forge.util.Aggregates;
 
 /**
  * TODO: Write javadoc for this type.
@@ -104,7 +106,8 @@ public class MatchController {
             startConditions.put(p, players.get(p.getLobbyPlayer()));
 
         try {
-            Player localHuman = Singletons.getControl().getPlayer();
+            Player localHuman = Aggregates.firstFieldEquals(currentGame.getPlayers(), Player.Accessors.FN_GET_TYPE, PlayerType.HUMAN);
+            FControl.SINGLETON_INSTANCE.setPlayer(localHuman);
             CMatchUI.SINGLETON_INSTANCE.initMatch(currentGame.getPlayers(), localHuman);
             CDock.SINGLETON_INSTANCE.onGameStarts(currentGame, localHuman);
             Singletons.getModel().getPreferences().actuateMatchPreferences();

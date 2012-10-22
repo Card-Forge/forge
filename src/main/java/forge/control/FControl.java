@@ -34,7 +34,6 @@ import javax.swing.WindowConstants;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
 import forge.game.player.Player;
-import forge.game.player.PlayerType;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.VDeckEditorUI;
 import forge.gui.framework.SOverflowUtil;
@@ -49,7 +48,6 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
-import forge.util.Aggregates;
 import forge.view.FView;
 
 /**
@@ -270,11 +268,9 @@ public enum FControl {
     }
 
     /** @return {@link forge.game.player.Player} */
+    private Player localPlayer;
     public Player getPlayer() {
-        if (Singletons.getModel() == null) 
-            return null;
-
-        return Aggregates.firstFieldEquals(Singletons.getModel().getGame().getPlayers(), Player.Accessors.FN_GET_TYPE, PlayerType.HUMAN);
+        return localPlayer;
     }
 
     /**
@@ -286,5 +282,13 @@ public enum FControl {
         if( lobby == null )
             lobby = new Lobby();
         return lobby;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param localHuman
+     */
+    public void setPlayer(Player localHuman) {
+        localPlayer = localHuman;
     }
 }

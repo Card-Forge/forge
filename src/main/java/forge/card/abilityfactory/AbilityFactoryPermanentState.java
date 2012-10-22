@@ -1714,7 +1714,7 @@ public class AbilityFactoryPermanentState {
 
         final Card source = sa.getSourceCard();
         final HashMap<String, String> params = af.getMapParams();
-        Player opp = ai.getOpponent();
+        final Player opp = ai.getOpponent();
 
         if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_BEGIN)) {
             return false;
@@ -1748,13 +1748,13 @@ public class AbilityFactoryPermanentState {
             final List<Card> human = CardLists.filter(validTappables, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return c.getController().isHuman();
+                    return c.getController().equals(opp);
                 }
             });
             final List<Card> compy = CardLists.filter(validTappables, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return c.getController().isComputer();
+                    return c.getController().equals(ai);
                 }
             });
             if (human.size() > compy.size()) {

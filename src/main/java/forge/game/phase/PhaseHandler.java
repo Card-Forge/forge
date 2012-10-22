@@ -661,6 +661,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
+    @Deprecated
     public final boolean isNextTurn(final PlayerType pt) {
         final Player next = this.getNextTurn();
         return next.getType() == pt;

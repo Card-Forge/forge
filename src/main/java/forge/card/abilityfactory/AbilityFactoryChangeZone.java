@@ -1782,7 +1782,7 @@ public final class AbilityFactoryChangeZone {
                 @Override
                 public boolean apply(final Card c) {
                     for (Card aura : c.getEnchantedBy()) {
-                        if (c.getOwner().isHuman() && aura.getController().isComputer()) {
+                        if (c.getOwner().isHuman() && aura.getController().equals(ai)) {
                             return false;
                         }
                     }
