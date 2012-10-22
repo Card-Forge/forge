@@ -968,9 +968,12 @@ public class Combat {
 
     public boolean isPlayerAttacked(Player priority)
     {
+        // System.out.println("\nWho attacks attacks " + priority.toString() + "?");
         for(Card c : getAttackers())
         {
             GameEntity defender = getDefenderByAttacker(c);
+            // System.out.println(c.toString() + " attacks " + defender.toString());
+            
             if ( defender.equals(priority) ) {
                 return true;
             }

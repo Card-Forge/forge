@@ -194,35 +194,40 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         }
 
         // Special Inputs needed for the following phases:
-        if (phase == PhaseType.COMBAT_DECLARE_ATTACKERS) {
-            stack.freezeStack();
-
-            if (playerTurn.isHuman() && !playerTurn.getController().mayAutoPass(phase)) {
-                game.getCombat().initiatePossibleDefenders(playerTurn.getOpponents());
-                return new InputAttack();
-            }
-        } else if (phase == PhaseType.COMBAT_DECLARE_BLOCKERS) {
-            stack.freezeStack();
-            boolean isUnderAttack = game.getCombat().isPlayerAttacked(priority);
-            if (!isUnderAttack) { // noone attacks you
-                handler.setPlayerMayHavePriority(false);
+        switch (phase) {
+            case COMBAT_DECLARE_ATTACKERS:
+                stack.freezeStack();
+                if (playerTurn.isHuman() && !playerTurn.getController().mayAutoPass(phase)) {
+                    game.getCombat().initiatePossibleDefenders(playerTurn.getOpponents());
+                    return new InputAttack();
+                }
+                break;
+                
+            case COMBAT_DECLARE_BLOCKERS:
+                stack.freezeStack();
+                boolean isUnderAttack = game.getCombat().isPlayerAttacked(priority);
+                if (!isUnderAttack) { // noone attacks you
+                    handler.passPriority();
+                    return null;
+                }
+    
+                if ( priority.isHuman() )
+                    return new InputBlock();
+    
+                // ai is under attack
+                priority.getController().getAiInput().getComputer().declareBlockers();
                 return null;
-            }
-
-            if ( priority.isHuman() )
-                return new InputBlock();
-
-            // ai is under attack
-            priority.getController().getAiInput().getComputer().declareBlockers();
-            return null;
-            
-        } else if (phase == PhaseType.CLEANUP) {
-            // discard
-            if (stack.isEmpty()) {
-                // resolve things
-                // like Madness
-                return new InputCleanup();
-            }
+                
+            case CLEANUP:
+                // discard
+                if (stack.isEmpty()) {
+                    // resolve things
+                    // like Madness
+                    return new InputCleanup();
+                }
+                break;
+            default:
+                break;
         }
 
         // *********************

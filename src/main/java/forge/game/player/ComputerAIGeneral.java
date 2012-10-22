@@ -25,7 +25,6 @@ import com.esotericsoftware.minlog.Log;
 
 import forge.Card;
 
-import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.replacement.ReplaceMoved;
@@ -49,13 +48,15 @@ import forge.game.zone.ZoneType;
 public class ComputerAIGeneral implements Computer {
 
     final private Player player;
+    private final GameState game; 
     /**
      * <p>
      * Constructor for ComputerAI_General.
      * </p>
      */
-    public ComputerAIGeneral(Player computerPlayer) {
+    public ComputerAIGeneral(final Player computerPlayer, final GameState game0) {
         player = computerPlayer;
+        game = game0;
     }
 
     /**
@@ -84,7 +85,7 @@ public class ComputerAIGeneral implements Computer {
         final boolean nextPhase = ComputerUtil.playSpellAbilities(player, getSpellAbilities(list));
 
         if (nextPhase) {
-            Singletons.getModel().getGame().getPhaseHandler().passPriority();
+            game.getPhaseHandler().passPriority();
         }
     } // playCards()
 
@@ -283,8 +284,6 @@ public class ComputerAIGeneral implements Computer {
     @Override
     public final void declareAttackers() {
         // 12/2/10(sol) the decision making here has moved to getAttackers()
-        final GameState game = Singletons.getModel().getGame(); 
-        
         game.setCombat(ComputerUtil.getAttackers(player));
 
         final List<Card> att = game.getCombat().getAttackers();
@@ -318,11 +317,11 @@ public class ComputerAIGeneral implements Computer {
     public final void declareBlockers() {
         final List<Card> blockers = player.getCreaturesInPlay();
 
-        Singletons.getModel().getGame().setCombat(ComputerUtilBlock.getBlockers(player, Singletons.getModel().getGame().getCombat(), blockers));
+        game.setCombat(ComputerUtilBlock.getBlockers(player, game.getCombat(), blockers));
         
-        CombatUtil.orderMultipleCombatants(Singletons.getModel().getGame().getCombat());
+        CombatUtil.orderMultipleCombatants(game.getCombat());
 
-        Singletons.getModel().getGame().getPhaseHandler().setPlayerMayHavePriority(false);
+        game.getPhaseHandler().setPlayerMayHavePriority(false);
     }
 
     /**
@@ -334,7 +333,7 @@ public class ComputerAIGeneral implements Computer {
     public final void endOfTurn() {
         //This is only called in the computer turn
         //this.playSpellAbilitiesStackEmpty();
-        Singletons.getModel().getGame().getPhaseHandler().passPriority();
+        game.getPhaseHandler().passPriority();
     }
 
     /**
@@ -344,16 +343,16 @@ public class ComputerAIGeneral implements Computer {
      */
     @Override
     public final void playSpellAbilities() {
-        if (Singletons.getModel().getGame().getStack().isEmpty()) {
+        if (game.getStack().isEmpty()) {
             this.playSpellAbilitiesStackEmpty();
             return;
         }
 
         // if top of stack is owned by me
-        if (Singletons.getModel().getGame().getStack().peekInstance().getActivatingPlayer().isComputer()) {
+        if (game.getStack().peekInstance().getActivatingPlayer().isComputer()) {
             // probably should let my stuff resolve to force Human to respond to
             // it
-            Singletons.getModel().getGame().getPhaseHandler().passPriority();
+            game.getPhaseHandler().passPriority();
             return;
         }
         final List<Card> cards = getAvailableCards();
@@ -381,6 +380,6 @@ public class ComputerAIGeneral implements Computer {
             }
         }
         // if this hasn't been covered above, just PassPriority()
-        Singletons.getModel().getGame().getPhaseHandler().passPriority();
+        game.getPhaseHandler().passPriority();
     }
 }

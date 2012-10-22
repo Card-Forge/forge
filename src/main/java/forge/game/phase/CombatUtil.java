@@ -2543,24 +2543,13 @@ public class CombatUtil {
         return sb.toString();
     }
 
-    /**
-     * <p>
-     * showCombat.
-     * </p>
-     */
-    public static void showCombat() {
-        // TODO(sol) ShowCombat seems to be resetting itself when switching away and switching back?
+    private static String getCombatDescription(Combat combat) {
         final StringBuilder display = new StringBuilder();
         
-        if (!Singletons.getModel().getGame().getPhaseHandler().inCombat()) {
-            VCombat.SINGLETON_INSTANCE.updateCombat(display.toString().trim());
-            return;
-        }
-
         // Loop through Defenders
         // Append Defending Player/Planeswalker
-        final List<GameEntity> defenders = Singletons.getModel().getGame().getCombat().getDefenders();
-        final List<List<Card>> attackers = Singletons.getModel().getGame().getCombat().sortAttackerByDefender();
+        final List<GameEntity> defenders = combat.getDefenders();
+        final List<List<Card>> attackers = combat.sortAttackerByDefender();
 
         // Not a big fan of the triple nested loop here
         for (int def = 0; def < defenders.size(); def++) {
@@ -2582,7 +2571,7 @@ public class CombatUtil {
                 display.append("-> ");
                 display.append(CombatUtil.combatantToString(c)).append("\n");
 
-                List<Card> blockers = Singletons.getModel().getGame().getCombat().getBlockers(c);
+                List<Card> blockers = combat.getBlockers(c);
 
                 // loop through blockers
                 for (final Card element : blockers) {
@@ -2591,9 +2580,23 @@ public class CombatUtil {
                 }
             } // loop through attackers
         }
-
-        SDisplayUtil.showTab(EDocID.REPORT_COMBAT.getDoc());
-        VCombat.SINGLETON_INSTANCE.updateCombat(display.toString().trim());
+        return display.toString().trim();
+    }
+    
+    
+    /**
+     * <p>
+     * showCombat.
+     * </p>
+     */
+    public static void showCombat() {
+        // TODO(sol) ShowCombat seems to be resetting itself when switching away and switching back?
+        String text = "";
+        if (Singletons.getModel().getGame().getPhaseHandler().inCombat()) {
+            text = getCombatDescription(Singletons.getModel().getGame().getCombat());
+            SDisplayUtil.showTab(EDocID.REPORT_COMBAT.getDoc());
+        }
+        VCombat.SINGLETON_INSTANCE.updateCombat(text);
     } // showBlockers()
 
     /**

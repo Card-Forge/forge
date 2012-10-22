@@ -452,7 +452,7 @@ public class GameState {
         if ( player.getType() == PlayerType.HUMAN )
             return new HumanPlayer(player);
         else {
-            return new AIPlayer(player);
+            return new AIPlayer(player, this);
             
         }
     }

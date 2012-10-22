@@ -20,8 +20,6 @@ package forge.card.abilityfactory;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
-
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -53,7 +51,6 @@ import forge.game.phase.Untap;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
-import forge.util.MyRandom;
 
 
 /**

@@ -48,7 +48,7 @@ public class GuiInput extends MyObservable implements Observer {
         PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler();
 
         final Input tmp = Singletons.getModel().getMatch().getInput().getActualInput();
-        //System.out.println(ph.getPlayerTurn() + "'s " + ph.getPhase() + ", priority of " + ph.getPriorityPlayer() + " @ actual input is " + ( tmp == null ? "null" : tmp.getClass().getName()));
+        System.out.println(ph.getPlayerTurn() + "'s " + ph.getPhase() + ", priority of " + ph.getPriorityPlayer()                + " @ actual input is " + ( tmp == null ? "null" : tmp.getClass().getName()) + "; MHP = " + ph.mayPlayerHavePriority() );
         if (tmp != null) {
             this.setInput(tmp);
         } else if ( !ph.mayPlayerHavePriority() ) {

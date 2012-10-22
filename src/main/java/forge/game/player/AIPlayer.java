@@ -28,6 +28,7 @@ import forge.CardPredicates;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
@@ -51,9 +52,9 @@ public class AIPlayer extends Player {
      * @param myName
      *            a {@link java.lang.String} object.
      */
-    public AIPlayer(final LobbyPlayer player) {
+    public AIPlayer(final LobbyPlayer player, final GameState game) {
         super(player);
-        getController().setAiInput(new ComputerAIInput(new ComputerAIGeneral(this)));
+        getController().setAiInput(new ComputerAIInput(new ComputerAIGeneral(this, game)));
     }
 
     
