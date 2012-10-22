@@ -4,12 +4,12 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
+import java.util.TreeMap;
 
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -232,7 +232,7 @@ public class DeckgenUtil {
         }
 
         // Dump into map and display.
-        final HashMap<String, Integer> deckMap = new HashMap<String, Integer>();
+        final Map<String, Integer> deckMap = new TreeMap<String, Integer>();
 
         for (final Entry<CardPrinted, Integer> s : deck.getMain()) {
             deckMap.put(s.getKey().getName(), s.getValue());
@@ -244,15 +244,9 @@ public class DeckgenUtil {
 
         deckList.append(dName == null ? "" : dName + nl + nl);
 
-        final ArrayList<String> dmKeys = new ArrayList<String>();
-        for (final String s : deckMap.keySet()) {
-            dmKeys.add(s);
-        }
 
-        Collections.sort(dmKeys);
-
-        for (final String s : dmKeys) {
-            deckList.append(deckMap.get(s) + " x " + s + nl);
+        for (final Entry<String, Integer> ev : deckMap.entrySet()) {
+            deckList.append(ev.getValue() + " x " + ev.getKey() + nl);
         }
 
         final StringBuilder msg = new StringBuilder();
