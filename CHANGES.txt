@@ -352,6 +352,25 @@ Fixes/Features:
 - GameAction: fix crash when ai player drew miracle card on 1st turn
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Quest mode: new cards are created for each match (won't see cards with state preserved from old game)
+- Moved common AI functions from AbilityFactories to ComputerUtil.
+- PlayerStartConditions is ok
+- GameNew won't fetch supplier twice
+- Lol: archenemy mode against N ai
+- correct damage assignment when attacking multiple players at once
+- If creature hasn't been assigned any damage in Assign Panel, use the minimum value of Lethal Damage and Remaining Damage.
+- Player.getOpponent improved to handle ai vs ai games
+- Replace Flameshot second spell with alt cost keyword
+- protection from NPEs in getOpponent
+- declare blockers works properly
+- comment out debug output
+- Computer players will also have random icons
+- Mini-gauntlet mode a true advancement through rounds has.
+- Slightly improved expansion selection algorithm for unlocking + 2 more choices.
+- Turned off a debugging function call.
+- archenemy: ai opponents will use different decks
+- Made the scripts of some cards with "As CARDNAME enters the battlefield, choose an opponent." to be multiplayer compatible.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
