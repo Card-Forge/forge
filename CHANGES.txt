@@ -11,9 +11,11 @@ Some large scale changes are being made to the code at this time and this portio
 
 The new damage dialog now uses the new UI.
 
-A new Gauntlet mode has been added.
+We have decided to increase the version number to 1.3 as there are some substantial changes and improvements made in recent weeks. In the recent past we had some improvements made to the draft, sealed deck and quest modes.
 
-Match UI is now ready for multiplayer (except for avatars). Added slots for up to 8 fields (more/less if you want, pretty easy) and up to 4 hands (also easy to adjust). A little ahead of schedule 
+This version includes quest mode sets unlocks, an 'enforced format quest, and custom formats. A new Gauntlet mode has been added. A new multiplayer mode has also been added. You should be able to play against multiple AI opponents at this time. You should note that the current Archenemy mode does not use Schemes at this time.
+
+A lot of things are planned for this new multiplayer mode and it will take time to finish. Please enjoy what we have at this time and be patient. :)
 
 The older match layout files are incompatible with the new multiplayer mode. The original match_default.xml, match_preferred.xml and the match_preferred.xml saved to a different name files have to go and can no longer be used. You can keep your editor_preferred.xml file. But you will have to setup your match view panels using the new match_default.xml file.
 
