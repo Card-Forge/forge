@@ -27,6 +27,7 @@ import javax.swing.SwingConstants;
 import forge.Singletons;
 import forge.game.MatchController;
 import forge.game.limited.GauntletMini;
+import forge.gui.SOverlayUtils;
 import forge.gui.toolbox.FSkin;
 
 /**
@@ -176,12 +177,12 @@ public class LimitedWinLose extends ControlWinLose {
     @Override
     public final void actionOnContinue() {
         resetView();
-
         if (nextRound) {
+            SOverlayUtils.hideOverlay();
+            saveOptions();
             gauntlet.nextRound();
-            super.actionOnRestart();
-        }
-        else {
+        } 
+        else { // noone will get here - if round is lost, the button is inivisible anyway
             super.actionOnContinue();
         }
     }

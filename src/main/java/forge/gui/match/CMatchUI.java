@@ -61,7 +61,8 @@ public enum CMatchUI implements CardContainer {
             if (f.exists())
                 return new ImageIcon(f.getPath()).getImage();
         }
-        return FSkin.getAvatars().get(defaultIndex);
+        int iAvatar = p.getLobbyPlayer().getAvatarIndex();
+        return FSkin.getAvatars().get(iAvatar >= 0 ? iAvatar : defaultIndex);
     }
     
     

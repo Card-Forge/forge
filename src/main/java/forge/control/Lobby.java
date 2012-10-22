@@ -4,6 +4,7 @@ import java.util.Random;
 
 import forge.game.player.LobbyPlayer;
 import forge.game.player.PlayerType;
+import forge.gui.toolbox.FSkin;
 import forge.util.MyRandom;
 
 /** 
@@ -74,8 +75,9 @@ public class Lobby {
         if ( type == PlayerType.HUMAN )
             return new LobbyPlayer(type, "Human"); // need to get name!
         
-        
-        return findLocalPlayer(type, getRandomName());
+        LobbyPlayer player = findLocalPlayer(type, getRandomName()); 
+        player.setAvatarIndex(MyRandom.getRandom().nextInt(FSkin.getAvatars().size()));
+        return player;
     }
 
     /**

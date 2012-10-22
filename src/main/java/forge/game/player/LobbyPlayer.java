@@ -12,10 +12,14 @@ public class LobbyPlayer {
     public final PlayerType getType() {
         return type;
     }
+    
+
 
     final protected String name;
+    // string with picture is more important than avatar index
     protected String picture;
-
+    private int avatarIndex = -1;
+    
     public LobbyPlayer(PlayerType type, String name)
     {
         this.type = type; 
@@ -64,5 +68,13 @@ public class LobbyPlayer {
         if (type != other.type)
             return false;
         return true;
+    }
+
+    public int getAvatarIndex() {
+        return avatarIndex;
+    }
+
+    public void setAvatarIndex(int avatarIndex) {
+        this.avatarIndex = avatarIndex; 
     }
 }

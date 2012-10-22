@@ -20,6 +20,7 @@ package forge.game.limited;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import forge.Singletons;
@@ -28,6 +29,7 @@ import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.MatchController;
 import forge.game.MatchStartHelper;
+import forge.game.PlayerStartConditions;
 import forge.game.player.PlayerType;
 import forge.gui.SOverlayUtils;
 
@@ -49,7 +51,7 @@ public class GauntletMini {
     private int losses;
     private boolean gauntletDraft; // Means: Draft game is in Gauntlet-mode, not a single match
     private GameType gauntletType;
-    private List<Deck> aiDecks;
+    private List<PlayerStartConditions> aiOpponents = new ArrayList<PlayerStartConditions>();
 
     // private final String humanName;
     /**
@@ -61,7 +63,6 @@ public class GauntletMini {
         wins = 0;
         losses = 0;
         gauntletType = GameType.Sealed; // Assignable in launch();
-        aiDecks = null;
     }
 
     /**
@@ -105,12 +106,12 @@ public class GauntletMini {
 
         // System.out.println("Moving from round " + currentRound + " to round " +  currentRound + 1 + " of " + rounds);
         if (currentRound >= rounds) {
-            currentRound = rounds;
+            currentRound = rounds-1;
             return;
         }
 
-        currentRound += 1;
-
+        currentRound++;
+        startRound();
     }
 
     /**
@@ -129,6 +130,7 @@ public class GauntletMini {
         setHumanDeck(hDeck);
         setRounds(gameRounds);
         gauntletType = gType;
+        List<Deck> aiDecks;
         if (gauntletType == GameType.Sealed) {
             aiDecks = Singletons.getModel().getDecks().getSealed().get(humanDeck.getName()).getAiDecks();
         }
@@ -139,14 +141,20 @@ public class GauntletMini {
         else {
             throw new IllegalStateException("Cannot launch Gauntlet, game mode not implemented.");
         }
+        aiOpponents.clear();
+        for(int i = 0; i < Math.min(gameRounds, aiDecks.size()); i++ )
+        {
+            aiOpponents.add(new PlayerStartConditions(aiDecks.get(i)));
+        }
+        
         resetCurrentRound();
-        start();
+        startRound();
     }
 
     /**
      * Starts the tournament.
      */
-    private void start() {
+    private void startRound() {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -163,7 +171,7 @@ public class GauntletMini {
                 MatchStartHelper starter = new MatchStartHelper();
                 Lobby lobby = Singletons.getControl().getLobby();
                 starter.addPlayer(lobby.findLocalPlayer(PlayerType.HUMAN), humanDeck);
-                starter.addPlayer(lobby.findLocalPlayer(PlayerType.COMPUTER), aiDecks.get(currentRound));
+                starter.addPlayer(lobby.findLocalPlayer(PlayerType.COMPUTER), aiOpponents.get(currentRound-1));
                 
                 MatchController mc = Singletons.getModel().getMatch(); 
                 mc.initMatch(gauntletType, starter.getPlayerMap());
