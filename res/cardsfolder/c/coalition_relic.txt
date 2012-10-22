@@ -6,10 +6,9 @@ A:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one man
 A:AB$ PutCounter | Cost$ T | CounterType$ CHARGE | CounterNum$ 1 | SpellDescription$ Put a charge counter on CARDNAME.
 T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemove | TriggerDescription$ At the beginning of your precombat main phase, remove all charge counters from CARDNAME. Add one mana of any color to your mana pool for each charge counter removed this way.
 SVar:TrigRemove:AB$ RemoveCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ All | RememberRemoved$ True | SubAbility$ TrigGetMana
-SVar:TrigGetMana:DB$ Mana | Produced$ Combo Any | Amount$ NumRemoved | References$ NumRemoved | SubAbility$ DBCleanup
+SVar:TrigGetMana:DB$ Mana | Produced$ Combo Any | Amount$ NumRemoved | References$ NumRemoved | AILogic$ MostProminentInComputerHand | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:NumRemoved:Count$RememberedSize
-SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coalition_relic.jpg
 Oracle:{T}: Add one mana of any color to your mana pool.\n{T}: Put a charge counter on Coalition Relic.\nAt the beginning of your precombat main phase, remove all charge counters from Coalition Relic. Add one mana of any color to your mana pool for each charge counter removed this way.

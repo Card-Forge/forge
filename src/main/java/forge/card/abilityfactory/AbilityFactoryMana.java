@@ -380,6 +380,9 @@ public class AbilityFactoryMana {
                                 chosen = CardFactoryUtil.getMostProminentColor(activator.getCardsIn(
                                         ZoneType.Hand));
                             }
+                            if (chosen.equals("")) {
+                                chosen = Constant.Color.BLACK;
+                            }
                             GuiChoose.one("Computer picked: ", new String[]{chosen});
                             abMana.setExpressChoice(InputPayManaCostUtil.getShortColorString(chosen));
                         }
