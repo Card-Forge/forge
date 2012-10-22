@@ -5,9 +5,9 @@ Text:no text
 PT:1/1
 K:Flying
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME becomes blocked, defending player discards all the cards in his or her hand, then draws that many cards.
-SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ Opponent | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBDraw
-SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ Opponent | SubAbility$ DBCleanup | References$ X
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ DefendingPlayer | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBDraw
+SVar:DBDraw:DB$ Draw | NumCards$ X | Defined$ DefendingPlayer | SubAbility$ DBCleanup | References$ X
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/robber_fly.jpg

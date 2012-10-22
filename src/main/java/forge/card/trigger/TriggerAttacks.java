@@ -63,8 +63,9 @@ public class TriggerAttacks extends Trigger {
         }
 
         if (this.getMapParams().containsKey("Attacked")) {
-            if (this.getMapParams().get("Attacked").equals("Player") 
-                    && ((GameEntity) runParams2.get("Attacked") instanceof Card)) {
+            GameEntity attacked = (GameEntity) runParams2.get("Attacked");
+            if (!attacked.isValid(this.getMapParams().get("Attacked").split(",")
+                    , this.getHostCard().getController(), this.getHostCard())) {
                 return false;
             }
         }

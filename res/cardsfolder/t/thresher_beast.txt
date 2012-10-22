@@ -4,7 +4,7 @@ Types:Creature Beast
 Text:no text
 PT:4/4
 T:Mode$ AttackerBlocked | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ Whenever CARDNAME becomes blocked, defending player sacrifices a land.
-SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Land | Defined$ Opponent | ChangeNum$ 1
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Land | Defined$ DefendingPlayer | ChangeNum$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thresher_beast.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/128.jpg

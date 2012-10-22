@@ -6497,7 +6497,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("DefenderCtrl")) {
-            if (!this.getController().equals(Singletons.getModel().getGame().getCombat().getDefendingPlayer())) {
+            if (Singletons.getModel().getGame().getCombat().getAttackingPlayer() == null 
+                    || !this.getController().equals(Singletons.getModel().getGame().getCombat().getDefendingPlayer())) {
                 return false;
             }
         } else if (property.startsWith("EnchantedPlayerCtrl")) {

@@ -8,7 +8,7 @@ SVar:A:Count$Valid Card.Self+notattacking
 SVar:X:Count$Valid Forest.YouCtrl
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | CheckSVar$ B | SVarCompare$ EQ1
 SVar:B:Count$Valid Card.Self+attacking
-SVar:Y:Count$Valid Forest.YouDontCtrl
+SVar:Y:Count$Valid Forest.DefenderCtrl
 A:AB$Animate | Cost$ T | ValidTgts$ Land | TgtPrompt$ Select target land | Types$ Forest | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True | UntilHostLeavesPlay$ True | SpellDescription$ Target land becomes a Forest until CARDNAME leaves the battlefield.
 SVar:BuffedBy:Forest
 SVar:RemAIDeck:True

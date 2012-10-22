@@ -5,8 +5,8 @@ Text:no text
 PT:0/1
 K:Flying
 T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigEffect | TriggerDescription$ When CARDNAME attacks, defending player can't cast spells this turn.
-SVar:TrigEffect:AB$Effect | Cost$ 0 | Name$ Xantid Swarm Effect | StaticAbilities$ CantBeCast
-SVar:CantBeCast:Mode$ CantBeCast | ValidCard$ Card | Caster$ Opponent | Description$ Defending player can't cast spells.
+SVar:TrigEffect:AB$ Effect | Cost$ 0 | Name$ Xantid Swarm Effect | StaticAbilities$ CantBeCast
+SVar:CantBeCast:Mode$ CantBeCast | ValidCard$ Card | Caster$ DefendingPlayer | Description$ Defending player can't cast spells.
 SVar:RemRandomDeck:True
 SVar:HasAttackEffect:TRUE
 SVar:Rarity:Rare

@@ -4,7 +4,7 @@ Types:Creature Thrull
 Text:no text
 PT:2/2
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, you may sacrifice it. If you do, defending player discards three cards.
-SVar:TrigDiscard:AB$Discard | Cost$ Sac<1/CARDNAME> | Defined$ Opponent | NumCards$ 3 | Mode$ TgtChoose
+SVar:TrigDiscard:AB$Discard | Cost$ Sac<1/CARDNAME> | Defined$ DefendingPlayer | NumCards$ 3 | Mode$ TgtChoose
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindstab_thrull.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/40.jpg

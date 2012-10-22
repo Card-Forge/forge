@@ -13,7 +13,7 @@ T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | TriggerZones$ B
 SVar:TrigBlockedPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 6 | NumDef$ 3
 T:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ TrigUnBlockedPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME attacks and isn't blocked, it assigns no combat damage to defending player this turn and that player loses 4 life.
 SVar:TrigUnBlockedPump:AB$ Pump | Cost$ 0 | KW$ HIDDEN CARDNAME assigns no combat damage | SubAbility$ DBLoseLife
-SVar:DBLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 4
+SVar:DBLoseLife:DB$ LoseLife | Defined$ DefendingPlayer | LifeAmount$ 4
 SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

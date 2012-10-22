@@ -3,10 +3,10 @@ ManaCost:7
 Types:Artifact Creature Myr Construct
 PT:4/7
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put four 1/1 colorless Myr artifact creature tokens onto the battlefield.
-SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 4 | TokenName$ Myr | TokenTypes$ Artifact,Creature,Myr | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 4 | TokenName$ Myr | TokenTypes$ Artifact,Creature,Myr | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1
 T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, you may tap X untapped Myr you control. If you do, CARDNAME gets +X/+0 until end of turn and deals X damage to defending player.
 SVar:TrigPump:AB$ Pump | Cost$ tapXType<X/Myr> | References$ X | NumAtt$ +ChosenX | NumDef$ +0 | SubAbility$ DBDealDamage
-SVar:DBDealDamage:DB$ DealDamage | Cost$ 0 | Defined$ Opponent | NumDmg$ ChosenX | SubAbility$ DBCleanup
+SVar:DBDealDamage:DB$ DealDamage | Cost$ 0 | Defined$ DefendingPlayer | NumDmg$ ChosenX | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearChosenX$ True
 SVar:X:XChoice
 SVar:Rarity:Rare

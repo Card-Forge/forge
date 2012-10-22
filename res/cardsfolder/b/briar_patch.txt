@@ -2,8 +2,8 @@ Name:Briar Patch
 ManaCost:1 G G
 Types:Enchantment
 Text:no text
-T:Mode$ Attacks | ValidCard$ Creature.YouDontCtrl | Attacked$ Player | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature attacks you, it gets -1/-0 until end of turn.
-SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ TriggeredAttacker | NumAtt$ -1
+T:Mode$ Attacks | ValidCard$ Creature | Attacked$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature attacks you, it gets -1/-0 until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ TriggeredAttacker | NumAtt$ -1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/briar_patch.jpg
 SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/232.jpg
