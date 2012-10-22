@@ -142,82 +142,24 @@ public class PhaseUtil {
 
     /**
      * <p>
-     * handleCombatBegin.
-     * </p>
-     */
-    public static void handleCombatBegin() {
-        final Player playerTurn = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
-
-        if (PhaseUtil.skipCombat(playerTurn)) {
-            Singletons.getModel().getGame().getPhaseHandler().setPlayerMayHavePriority(false);
-            return;
-        }
-    }
-
-    /**
-     * <p>
-     * handleCombatDeclareAttackers.
-     * </p>
-     */
-    public static void handleCombatDeclareAttackers() {
-        final Player playerTurn = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
-
-        if (PhaseUtil.skipCombat(playerTurn)) {
-            Singletons.getModel().getGame().getPhaseHandler().setPlayerMayHavePriority(false);
-            playerTurn.removeKeyword("Skip your next combat phase.");
-            return;
-        }
-    }
-
-    /**
-     * <p>
-     * skipCombat.
-     * </p>
-     * 
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     * @return a boolean.
-     */
-    public static boolean skipCombat(final Player player) {
-
-        if (player.hasKeyword("Skip your next combat phase.")) {
-            return true;
-        }
-        if (player.hasKeyword("Skip your combat phase.")) {
-            return true;
-        }
-        if (player.hasKeyword("Skip all combat phases of your next turn.")) {
-            player.removeKeyword("Skip all combat phases of your next turn.");
-            player.addKeyword("Skip all combat phases of this turn.");
-            return true;
-        }
-        if (player.hasKeyword("Skip all combat phases of this turn.")) {
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * <p>
      * handleDeclareAttackers.
      * </p>
      */
-    public static void handleDeclareAttackers() {
-        Singletons.getModel().getGame().getCombat().verifyCreaturesInPlay();
+    public static void handleDeclareAttackers(Combat combat) {
+        combat.verifyCreaturesInPlay();
 
         // Handles removing cards like Mogg Flunkies from combat if group attack
         // didn't occur
-        final List<Card> filterList = Singletons.getModel().getGame().getCombat().getAttackerList();
+        final List<Card> filterList = combat.getAttackerList();
         for (Card c : filterList) {
             if (c.hasKeyword("CARDNAME can't attack or block alone.") && c.isAttacking()) {
-                if (Singletons.getModel().getGame().getCombat().getAttackers().size() < 2) {
-                    Singletons.getModel().getGame().getCombat().removeFromCombat(c);
+                if (combat.getAttackers().size() < 2) {
+                    combat.removeFromCombat(c);
                 }
             }
         }
 
-        final List<Card> list = Singletons.getModel().getGame().getCombat().getAttackerList();
+        final List<Card> list = combat.getAttackerList();
 
         // TODO move propaganda to happen as the Attacker is Declared
         // Remove illegal Propaganda attacks first only for attacking the Player

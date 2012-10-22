@@ -2837,5 +2837,32 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     public PlayerController getController() {
         return controller;
     }
+
+    /**
+     * <p>
+     * skipCombat.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public boolean isSkippingCombat() {
+    
+        if (hasKeyword("Skip your next combat phase.")) {
+            return true;
+        }
+        if (hasKeyword("Skip your combat phase.")) {
+            return true;
+        }
+        if (hasKeyword("Skip all combat phases of your next turn.")) {
+            removeKeyword("Skip all combat phases of your next turn.");
+            addKeyword("Skip all combat phases of this turn.");
+            return true;
+        }
+        if (hasKeyword("Skip all combat phases of this turn.")) {
+            return true;
+        }
+    
+        return false;
+    }
     
 }

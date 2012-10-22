@@ -270,16 +270,21 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
             case COMBAT_BEGIN:
                 //PhaseUtil.verifyCombat();
-                PhaseUtil.handleCombatBegin();
+                if (playerTurn.isSkippingCombat()) {
+                    this.setPlayerMayHavePriority(false);
+                }
                 break;
 
             case COMBAT_DECLARE_ATTACKERS:
-                PhaseUtil.handleCombatDeclareAttackers();
+                if (playerTurn.isSkippingCombat()) {
+                    this.setPlayerMayHavePriority(false);
+                    playerTurn.removeKeyword("Skip your next combat phase.");
+                }
                 break;
 
             case COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY:
                 if (this.inCombat()) {
-                    PhaseUtil.handleDeclareAttackers();
+                    PhaseUtil.handleDeclareAttackers(game.getCombat());
                     CombatUtil.showCombat();
                 } else {
                     this.setPlayerMayHavePriority(false);
@@ -366,6 +371,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
                 for (Player player : game.getPlayers()) {
                     player.onCleanupPhase();
+                    player.getController().autoPassCancel(); // autopass won't wrap to next turn
                 }
                 this.getPlayerTurn().removeKeyword("Skip all combat phases of this turn.");
                 game.getCleanup().executeUntilTurn(this.getNextTurn());
