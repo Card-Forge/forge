@@ -4,9 +4,9 @@ Types:Artifact
 Text:no text
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseP | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose an opponent.
 SVar:ChooseP:AB$ ChoosePlayer | Cost$ 0 | Defined$ You | Choices$ Opponent | AILogic$ Curse
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.Chosen | IsPresent$ Card.YouDontCtrl | PresentZone$ Hand | PresentCompare$ GT4 | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the chosen player's upkeep, CARDNAME deals X damage to that player, where X is the number of cards in his or her hand minus 4.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.Chosen | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the chosen player's upkeep, CARDNAME deals X damage to that player, where X is the number of cards in his or her hand minus 4.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Defined$ ChosenPlayer | NumDmg$ X | References$ X
-SVar:X:Count$InOppHand/Minus.4
+SVar:X:Count$InChosenHand/Minus.4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/black_vise.jpg
 SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/233.jpg

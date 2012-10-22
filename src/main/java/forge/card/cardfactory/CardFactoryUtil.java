@@ -2642,6 +2642,24 @@ public class CardFactoryUtil {
             }
         }
 
+        if (sq[0].contains("InChosenHand")) {
+            if (!oh) {
+                if (c.getChosenPlayer() != null) {
+                    someCards.addAll(c.getChosenPlayer().getCardsIn(ZoneType.Hand));
+                }
+                oh = true;
+            }
+        }
+        
+        if (sq[0].contains("InChosenYard")) {
+            if (!oh) {
+                if (c.getChosenPlayer() != null) {
+                    someCards.addAll(c.getChosenPlayer().getCardsIn(ZoneType.Graveyard));
+                }
+                oh = true;
+            }
+        }
+
         if (sq[0].contains("OnBattlefield")) {
             if (!mf) {
                 someCards.addAll(cardController.getCardsIn(ZoneType.Battlefield));

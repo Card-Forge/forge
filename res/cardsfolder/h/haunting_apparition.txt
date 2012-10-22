@@ -2,10 +2,12 @@ Name:Haunting Apparition
 ManaCost:1 U B
 Types:Creature Spirit
 Text:no text
-PT:*/2
+PT:1/2
 K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseP | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose an opponent.
+SVar:ChooseP:AB$ ChoosePlayer | Cost$ 0 | Defined$ You | Choices$ Opponent | AILogic$ Curse
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to 1 plus the number of green creature cards in opponent's graveyard.
-SVar:X:Count$GreenTypeInOppYard.Creature/Plus.1
+SVar:X:Count$GreenTypeInChosenYard.Creature/Plus.1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/haunting_apparition.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/327.jpg
