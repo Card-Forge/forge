@@ -907,7 +907,7 @@ public class GameAction {
         GameEndReason reason = null;
         // award loses as SBE
         for (Player p : game.getPlayers() ) {
-            if ( p.checkLoseCondition() ) { // this will set appropriate outcomes
+            if ( Player.Predicates.NOT_LOST.apply(p) && p.checkLoseCondition() ) { // this will set appropriate outcomes
                 // you may fire a trigger here
             }
         }
