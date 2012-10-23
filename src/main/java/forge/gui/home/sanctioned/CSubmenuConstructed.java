@@ -6,10 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.swing.JList;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
@@ -55,8 +52,6 @@ public enum CSubmenuConstructed implements ICDoc {
         QUESTEVENTS
     }
 
-    private static final Map<String, String> COLOR_VALS = new HashMap<String, String>();
-
     private final MouseAdapter madDecklist = new MouseAdapter() {
         @Override
         public void mouseClicked(final MouseEvent e) {
@@ -78,18 +73,6 @@ public enum CSubmenuConstructed implements ICDoc {
 
     private final QuestController quest = Singletons.getModel().getQuest();
 
-    static {
-        COLOR_VALS.clear();
-        COLOR_VALS.put("Random 1", "AI");
-        COLOR_VALS.put("Random 2", "AI");
-        COLOR_VALS.put("Random 3", "AI");
-        COLOR_VALS.put("Random 4", "AI");
-        COLOR_VALS.put("Black", "black");
-        COLOR_VALS.put("Blue", "blue");
-        COLOR_VALS.put("Green", "green");
-        COLOR_VALS.put("Red", "red");
-        COLOR_VALS.put("White", "white");
-    }
 
     /* (non-Javadoc)
      * @see forge.gui.home.ICSubmenu#initialize()
