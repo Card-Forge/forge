@@ -810,8 +810,18 @@ public class CombatUtil {
         if (cntAttackers > 0 && Singletons.getModel().getGame().isCardInPlay("Dueling Grounds")) {
             return false;
         }
+        
+        Player defender = c.getController().getOpponent();
+        if (combat != null) {
+            final GameEntity def = combat.getDefender();
+            if (def instanceof Player) {
+                defender = (Player) def;
+            } else {
+                defender = ((Card) def).getController();
+            }
+        }
 
-        return CombatUtil.canAttack(c);
+        return CombatUtil.canAttack(c, defender);
     }
 
     // can a creature attack at the moment?
@@ -825,13 +835,41 @@ public class CombatUtil {
      * @return a boolean.
      */
     public static boolean canAttack(final Card c) {
+        return canAttack(c, c.getController().getOpponent());
+    }
+
+    // can a creature attack at the moment?
+    /**
+     * <p>
+     * canAttack.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @return a boolean.
+     */
+    public static boolean canAttack(final Card c, final Player defender) {
         if (c.isTapped() || c.isPhasedOut()
                 || (c.hasSickness() && !c.hasKeyword("CARDNAME can attack as though it had haste."))
                 || Singletons.getModel().getGame().getPhaseHandler().getPhase()
                     .isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
             return false;
         }
-        return CombatUtil.canAttackNextTurn(c);
+        return CombatUtil.canAttackNextTurn(c, defender);
+    }
+    
+    // can a creature attack if untapped and without summoning sickness?
+    /**
+     * <p>
+     * canAttackNextTurn.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @return a boolean.
+     */
+    public static boolean canAttackNextTurn(final Card c) {
+        return canAttackNextTurn(c, c.getController().getOpponent());
     }
 
     // can a creature attack if untapped and without summoning sickness?
@@ -844,7 +882,7 @@ public class CombatUtil {
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public static boolean canAttackNextTurn(final Card c) {
+    public static boolean canAttackNextTurn(final Card c, final Player defender) {
         if (!c.isCreature()) {
             return false;
         }
@@ -875,7 +913,7 @@ public class CombatUtil {
                 if (asSeparateWords[12].matches("[0-9][0-9]?")) {
                     powerLimit[0] = Integer.parseInt((asSeparateWords[12]).trim());
 
-                    List<Card> list = c.getController().getOpponent().getCreaturesInPlay();
+                    List<Card> list = defender.getCreaturesInPlay();
                     list = CardLists.filter(list, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card ct) {
@@ -892,7 +930,7 @@ public class CombatUtil {
         } // hasKeyword = CARDNAME can't attack if defending player controls an
           // untapped creature with power ...
 
-        final List<Card> list = c.getController().getOpponent().getCardsIn(ZoneType.Battlefield);
+        final List<Card> list = defender.getCardsIn(ZoneType.Battlefield);
         List<Card> temp;
         for (String keyword : c.getKeyword()) {
             if (keyword.equals("CARDNAME can't attack.") || keyword.equals("CARDNAME can't attack or block.")) {
