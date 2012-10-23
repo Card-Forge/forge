@@ -914,15 +914,18 @@ public class GameAction {
         
         // Has anyone won by spelleffect?
         for (Player p : game.getPlayers() ) {
-            if( p.hasWon() ) { // then the rest have lost!
-                reason = GameEndReason.WinsGameSpellEffect;
-                for (Player pl : game.getPlayers() ) {
-                    if( !pl.equals(p) )
-                        if ( !pl.loseConditionMet(GameLossReason.OpponentWon, p.getOutcome().altWinSourceName) )
-                            reason = null; // they cannot lose!
-                }
-                break;
+            if( !p.hasWon() ) continue;
+
+            // then the rest have lost!
+            reason = GameEndReason.WinsGameSpellEffect;
+            for (Player pl : game.getPlayers() ) {
+                if( pl.equals(p) ) continue;
+                
+                if ( !pl.loseConditionMet(GameLossReason.OpponentWon, p.getOutcome().altWinSourceName) )
+                    reason = null; // they cannot lose!
             }
+            break;
+
         }
         
         // still unclear why this has not caught me conceding
