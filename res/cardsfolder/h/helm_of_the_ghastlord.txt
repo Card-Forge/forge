@@ -8,8 +8,8 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Blue | AddPower$ 1 | AddToug
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Black | AddPower$ 1 | AddToughness$ 1 | AddTrigger$ BlackTrigger | AddSVar$ HelmTrigDiscard | Description$ As long as enchanted creature is black, it gets +1/+1 and has "Whenever this creature deals damage to an opponent, that player discards a card."
 SVar:BlueTrigger:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ HelmTrigDraw | TriggerDescription$ Whenever this creature deals damage to an opponent, draw a card
 SVar:BlackTrigger:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | TriggerZones$ Battlefield | Execute$ HelmTrigDiscard | TriggerDescription$ Whenever this creature deals damage to an opponent, that player discards a card.
-SVar:HelmTrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1
-SVar:HelmTrigDiscard:AB$Discard | Cost$ 0 | Defined$ Opponent | NumCards$ 1 | Mode$ TgtChoose
+SVar:HelmTrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1
+SVar:HelmTrigDiscard:AB$ Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/helm_of_the_ghastlord.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/166.jpg

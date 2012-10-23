@@ -2250,6 +2250,12 @@ public class CardFactoryUtil {
             return CardFactoryUtil.doXMath(oppController.getLife(), m, c);
         }
 
+        // Count$DefenderLifeTotal
+        if (sq[0].contains("DefenderLifeTotal")) {
+            Player defender = Singletons.getModel().getGame().getCombat().getDefendingPlayerRelatedTo(c);
+            return CardFactoryUtil.doXMath(defender.getLife(), m, c);
+        }
+
         //  Count$TargetedLifeTotal (targeted player's life total)
         if (sq[0].contains("TargetedLifeTotal")) {
             for (final SpellAbility sa : c.getCharacteristics().getSpellAbility()) {

@@ -4,7 +4,7 @@ Types:Legendary Creature Human Advisor
 Text:no text
 PT:2/2
 T:Mode$ DamageDone | ValidSource$ Card.YouDontCtrl | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever a source an opponent controls deals damage to you, that player sacrifices a permanent.
-SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Opponent | SacValid$ Permanent
+SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ TriggeredSourceController | SacValid$ Permanent
 Svar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/michiko_konda_truth_seeker.jpg
 SetInfo:SOK|Rare|http://magiccards.info/scans/en/sok/19.jpg
