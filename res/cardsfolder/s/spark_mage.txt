@@ -4,7 +4,7 @@ Types:Creature Dwarf Wizard
 Text:no text
 PT:1/1
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDamage | CombatDamage$ True | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may have CARDNAME deal 1 damage to target creature that player controls.
-SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature | NumDmg$ 1 | OptionalDecider$ You
+SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature | NumDmg$ 1 | OptionalDecider$ You
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spark_mage.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/222.jpg

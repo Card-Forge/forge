@@ -5,8 +5,8 @@ Text:no text
 PT:4/4
 K:Flying
 K:Morph:3 B B
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigDiscard | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player discards two cards.
-SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ Opponent | NumCards$ 2 | Mode$ TgtChoose
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ TrigDiscard | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player discards two cards.
+SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 2 | Mode$ TgtChoose
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silent_specter.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/169.jpg

@@ -4,7 +4,7 @@ Types:Creature Ogre
 Text:no text
 PT:5/4
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ TrigDestroy | CombatDamage$ True | OptionalDecider$ You | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may destroy target artifact that player controls.
-SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact.YouDontCtrl | TgtPrompt$ Select an artifact your opponent controls.
+SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact.DefenderCtrl | TgtPrompt$ Select an artifact your opponent controls.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rustmouth_ogre.jpg
 SetInfo:MRD|Uncommon|http://magiccards.info/scans/en/mi/103.jpg

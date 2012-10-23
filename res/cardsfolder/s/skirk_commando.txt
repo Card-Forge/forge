@@ -4,8 +4,8 @@ Types:Creature Goblin
 Text:no text
 PT:2/1
 K:Morph:2 R
-T:Mode$ DamageDone | ValidSource$ Card.Self+faceUp | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may have it deal 2 damage to target creature that player controls.
-SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature controlled by opponent | NumDmg$ 2
+T:Mode$ DamageDone | ValidSource$ Card.Self+faceUp | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDamage | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may have it deal 2 damage to target creature that player controls.
+SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature controlled by opponent | NumDmg$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skirk_commando.jpg
 SetInfo:ONS|Common|http://magiccards.info/scans/en/on/228.jpg

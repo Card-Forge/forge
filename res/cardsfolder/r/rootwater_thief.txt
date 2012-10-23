@@ -4,8 +4,8 @@ Types:Creature Merfolk Rogue
 Text:no text
 PT:1/2
 A:AB$ Pump | Cost$ U | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigChangeZone | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may pay 2. If you do, search that player's library for a card and exile it, then the player shuffles his or her library.
-SVar:TrigChangeZone:AB$ChangeZone | Cost$ 2 | Origin$ Library | Destination$ Exile | DefinedPlayer$ Opponent | ChangeType$ Card | ChangeNum$ 1 | Chooser$ You | Shuffle$ True
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigChangeZone | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may pay 2. If you do, search that player's library for a card and exile it, then the player shuffles his or her library.
+SVar:TrigChangeZone:AB$ChangeZone | Cost$ 2 | Origin$ Library | Destination$ Exile | DefinedPlayer$ TriggeredTarget | ChangeType$ Card | ChangeNum$ 1 | Chooser$ You | Shuffle$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rootwater_thief.jpg
 SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/40.jpg

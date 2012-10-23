@@ -6,7 +6,7 @@ PT:1/1
 K:Flying
 K:Wither
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDiscard | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player discards that many cards.
-SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ X | References$ X | Mode$ TgtChoose
+SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ X | References$ X | Mode$ TgtChoose
 SVar:X:TriggerCount$DamageAmount
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/needle_specter.jpg

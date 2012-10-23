@@ -6,7 +6,7 @@ PT:1/3
 K:Flying
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigTransform | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may transform it. If you do, attach it to target creature that player controls.
 SVar:TrigTransform:AB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform | SubAbility$ DBAttach
-SVar:DBAttach:DB$ Attach | Cost$ 0 | ValidTgts$ Creature.controllerWasDealtDamageByThisTurn | TgtPrompt$ Select target creature that damaged player controls | AILogic$ GainControl
+SVar:DBAttach:DB$ Attach | Cost$ 0 | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature that damaged player controls | AILogic$ GainControl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_seizer.jpg
 AlternateMode:DoubleFaced
 SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/50a.jpg

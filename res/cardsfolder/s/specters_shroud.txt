@@ -5,7 +5,7 @@ Text:no text
 K:Equip 1
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | Description$ Equipped creature gets +1/+0.
 T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, that player discards a card.
-SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
+SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/specters_shroud.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/142.jpg

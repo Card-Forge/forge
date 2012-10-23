@@ -7,8 +7,8 @@ K:Flying
 K:Trample
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigSac | TriggerDescription$ Whenever CARDNAME attacks, sacrifice half the non-Demon permanents you control, rounded up.
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigSac2 | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player sacrifices half the non-Demon permanents he or she controls, rounded up.
-SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ You | Amount$ X | References$ X | SacValid$ Permanent.nonDemon | SacMessage$ non-Demon Permanent
-SVar:TrigSac2:AB$Sacrifice | Cost$ 0 | Defined$ Opponent | Amount$ Y | References$ Y | SacValid$ Permanent.nonDemon | SacMessage$ non-Demon Permanent
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ You | Amount$ X | References$ X | SacValid$ Permanent.nonDemon | SacMessage$ non-Demon Permanent
+SVar:TrigSac2:AB$ Sacrifice | Cost$ 0 | Defined$ TriggeredTarget | Amount$ Y | References$ Y | SacValid$ Permanent.nonDemon | SacMessage$ non-Demon Permanent
 SVar:X:Count$Valid Permanent.nonDemon+YouCtrl/HalfUp
 SVar:Y:Count$Valid Permanent.nonDemon+YouDontCtrl/HalfUp
 SVar:RemRandomDeck:True

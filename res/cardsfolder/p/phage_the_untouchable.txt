@@ -4,11 +4,11 @@ Types:Legendary Creature Zombie Minion
 Text:no text
 PT:4/4
 T:Mode$ ChangesZone | ValidCard$ Card.wasNotCastFromHand+Self | Destination$ Battlefield | Execute$ TrigYouLose | TriggerDescription$ When CARDNAME enters the battlefield, if you didn't cast it from your hand, you lose the game.
-SVar:TrigYouLose:AB$LosesGame | Cost$ 0 | Defined$ You
+SVar:TrigYouLose:AB$ LosesGame | Cost$ 0 | Defined$ You
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Creature | CombatDamage$ True | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME deals combat damage to a creature, destroy that creature. It can't be regenerated.
-SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredTarget | NoRegen$ True
+SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | Defined$ TriggeredTarget | NoRegen$ True
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigTheyLose | TriggerDescription$ Whenever Phage deals combat damage to a player, that player loses the game.
-SVar:TrigTheyLose:AB$LosesGame | Cost$ 0 | Defined$ TriggeredTarget
+SVar:TrigTheyLose:AB$ LosesGame | Cost$ 0 | Defined$ TriggeredTarget
 SVar:MustBeBlocked:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phage_the_untouchable.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/78.jpg

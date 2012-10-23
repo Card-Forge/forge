@@ -5,9 +5,9 @@ Text:no text
 PT:1/1
 K:Flying
 K:Infect
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may sacrifice it. If you do, that player discards a card for each poison counter he or she has.
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may sacrifice it. If you do, that player discards a card for each poison counter he or she has.
 SVar:TrigSacrifice:AB$ SacrificeAll | Cost$ 0 | ValidCards$ Card.Self | RememberSacrificed$ True | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$ Discard | Defined$ Opponent | NumCards$ X | References$ X,Y | Mode$ TgtChoose | ConditionCheckSVar$ Y | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBDiscard:DB$ Discard | Defined$ TriggeredTarget | NumCards$ X | References$ X,Y | Mode$ TgtChoose | ConditionCheckSVar$ Y | ConditionSVarCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$OppPoisonCounters
 SVar:Y:Remembered$Amount

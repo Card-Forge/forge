@@ -4,10 +4,10 @@ Types:Creature Specter
 Text:no text
 PT:2/2
 K:Flying
-T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigReveal | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player reveals his or her hand. You choose a nonland card from it. Search that player's graveyard, hand, and library for all cards with the same name as that card and exile them. Then that player shuffles his or her library.
-SVar:TrigReveal:AB$ChangeZone | Cost$ 0 | DefinedPlayer$ Opponent | Origin$ Hand | Destination$ Exile | ChangeType$ Card.nonLand | ChangeNum$ 1 | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBChangeZoneAll | Chooser$ You
-SVar:DBChangeZoneAll:DB$ChangeZoneAll | ChangeType$ Remembered.sameName | Origin$ Graveyard,Hand,Library | Defined$ Opponent | Destination$ Exile | Shuffle$ True | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigReveal | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player reveals his or her hand. You choose a nonland card from it. Search that player's graveyard, hand, and library for all cards with the same name as that card and exile them. Then that player shuffles his or her library.
+SVar:TrigReveal:AB$ ChangeZone | Cost$ 0 | DefinedPlayer$ TriggeredTarget | Origin$ Hand | Destination$ Exile | ChangeType$ Card.nonLand | ChangeNum$ 1 | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ DBChangeZoneAll | Chooser$ You
+SVar:DBChangeZoneAll:DB$ ChangeZoneAll | ChangeType$ Remembered.sameName | Origin$ Graveyard,Hand,Library | Defined$ TriggeredTarget | Destination$ Exile | Shuffle$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shimian_specter.jpg
 SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/109.jpg
