@@ -196,7 +196,7 @@ public class QuestWinLose extends ControlWinLose {
         }
 
         // Unlock new sets?
-        if (this.wonMatch && (wins + 1) % 50 == 0) {
+        if (this.wonMatch && wins % 50 == 49) {
             unlockSets();
         }
 
