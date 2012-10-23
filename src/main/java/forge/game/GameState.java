@@ -23,9 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.testng.collections.Lists;
-
-
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
@@ -59,7 +56,7 @@ import forge.game.zone.ZoneType;
  */
 public class GameState {
     private final List<Player> roIngamePlayers;
-    private final List<Player> players = new ArrayList<Player>();
+    private final List<Player> allPlayers;
     private final List<Player> ingamePlayers = new ArrayList<Player>(); 
     
     private final Cleanup cleanup = new Cleanup();
@@ -88,12 +85,13 @@ public class GameState {
      * @param players2 
      */
     public GameState(Iterable<LobbyPlayer> players2) { /* no more zones to map here */
-        
+        List<Player> players = new ArrayList<Player>();
         for(LobbyPlayer p : players2) {
             Player pl = getIngamePlayer(p);
             players.add(pl);
             ingamePlayers.add(pl);
         }
+        allPlayers = Collections.unmodifiableList(players);
         roIngamePlayers = Collections.unmodifiableList(ingamePlayers);
         action = new GameAction(this);
         stack = new MagicStack(this);
@@ -115,7 +113,7 @@ public class GameState {
      * @return the players
      */
     public final List<Player> getRegisteredPlayers() {
-        return Lists.newArrayList(players);
+        return allPlayers;
     }    
 
     /**
@@ -461,8 +459,8 @@ public class GameState {
         {
             int iAlive;
             do{
-                iPlayer = ( players.indexOf(playerTurn) + 1 ) % players.size();
-                iAlive = roIngamePlayers.indexOf(players.get(iPlayer));
+                iPlayer = ( allPlayers.indexOf(playerTurn) + 1 ) % allPlayers.size();
+                iAlive = roIngamePlayers.indexOf(allPlayers.get(iPlayer));
             } while(iAlive < 0);
             iPlayer = iAlive;
         } else { // for the case noone has died
