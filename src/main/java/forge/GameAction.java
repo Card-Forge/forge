@@ -913,7 +913,7 @@ public class GameAction {
                 // Run triggers
                 final Map<String, Object> runParams = new TreeMap<String, Object>();
                 runParams.put("Player", p);
-                Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.LosesGame, runParams);
+                game.getTriggerHandler().runTrigger(TriggerType.LosesGame, runParams);
             }
         }
         
