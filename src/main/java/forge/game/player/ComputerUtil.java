@@ -1771,7 +1771,7 @@ public class ComputerUtil {
         final ComputerUtilAttack att = new ComputerUtilAttack(ai.getCardsIn(ZoneType.Battlefield),
                 opp.getCardsIn(ZoneType.Battlefield));
 
-        return att.getAttackers(ai);
+        return att.getAttackers(ai, opp);
     }
 
     /**

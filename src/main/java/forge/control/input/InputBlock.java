@@ -25,6 +25,7 @@ import forge.Card;
 
 import forge.Singletons;
 import forge.game.phase.CombatUtil;
+import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.SDisplayUtil;
@@ -46,6 +47,15 @@ public class InputBlock extends Input {
 
     private Card currentAttacker = null;
     private final HashMap<Card,List<Card>> allBlocking = new HashMap<Card, List<Card>>();
+    private final Player defender;
+    
+    /**
+     * TODO: Write javadoc for Constructor.
+     * @param priority
+     */
+    public InputBlock(Player priority) {
+        defender = priority;
+    }
 
     /**
      * <p>
@@ -86,7 +96,7 @@ public class InputBlock extends Input {
     /** {@inheritDoc} */
     @Override
     public final void selectButtonOK() {
-        if (CombatUtil.finishedMandatoryBlocks(Singletons.getModel().getGame().getCombat())) {
+        if (CombatUtil.finishedMandatoryBlocks(Singletons.getModel().getGame().getCombat(), defender)) {
             // Done blocking
             ButtonUtil.reset();
             CombatUtil.orderMultipleCombatants(Singletons.getModel().getGame().getCombat());
@@ -106,8 +116,8 @@ public class InputBlock extends Input {
             reminder = false;
         } else {
             // Make sure this card is valid to even be a blocker
-            if (this.currentAttacker != null && card.isCreature() && card.getController().isHuman() 
-                    && zone.is(ZoneType.Battlefield, Singletons.getControl().getPlayer())) {
+            if (this.currentAttacker != null && card.isCreature() && card.getController().equals(defender) 
+                    && zone.is(ZoneType.Battlefield, defender)) {
                 // Create a new blockedBy list if it doesn't exist
                 if (!this.allBlocking.containsKey(card)) {
                     this.allBlocking.put(card, new ArrayList<Card>());

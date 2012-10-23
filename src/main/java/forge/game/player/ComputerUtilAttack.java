@@ -493,7 +493,7 @@ public class ComputerUtilAttack {
      * 
      * @return a {@link forge.game.phase.Combat} object.
      */
-    public final Combat getAttackers(final Player ai) {
+    public final Combat getAttackers(final Player ai, final Player opponent) {
         // if this method is called multiple times during a turn,
         // it will always return the same value
         // randomInt is used so that the computer doesn't always
@@ -505,9 +505,9 @@ public class ComputerUtilAttack {
 
         final Combat combat = new Combat();
         combat.setAttackingPlayer(game.getCombat().getAttackingPlayer());
-        combat.setDefendingPlayer(game.getCombat().getDefendingPlayer());
 
-        game.getCombat().initiatePossibleDefenders(game.getCombat().getDefendingPlayer());
+
+        game.getCombat().initiatePossibleDefenders(opponent);
         combat.setDefenders(game.getCombat().getDefenders());
 
         if (this.attackers.isEmpty()) {

@@ -2865,5 +2865,32 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     
         return false;
     }
+
+    /**
+     * <p>
+     * skipTurnTimeVault.
+     * </p>
+     * 
+     * @return a {@link forge.game.player.Player} object.
+     */
+    public boolean skipTurnTimeVault() {
+        // time vault:
+        List<Card> vaults = getCardsIn(ZoneType.Battlefield, "Time Vault");
+        vaults = CardLists.filter(vaults, Presets.TAPPED);
+    
+        if (vaults.size() > 0) {
+            final Card crd = vaults.get(0);
+    
+            if (isHuman()) {
+                if (GameActionUtil.showYesNoDialog(crd, "Untap " + crd + "?")) {
+                    crd.untap();
+                    return true;
+                }
+            } else {
+                // TODO Should AI skip his turn for time vault?
+            }
+        }
+        return false;
+    }
     
 }

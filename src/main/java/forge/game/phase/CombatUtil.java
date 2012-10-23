@@ -377,7 +377,7 @@ public class CombatUtil {
      *            a {@link forge.game.phase.Combat} object.
      * @return a boolean.
      */
-    public static boolean finishedMandatoryBlocks(final Combat combat) {
+    public static boolean finishedMandatoryBlocks(final Combat combat, final Player defending) {
 
         final List<Card> blockers = Singletons.getControl().getPlayer().getCreaturesInPlay();
         final List<Card> attackers = combat.getAttackerList();
@@ -395,7 +395,7 @@ public class CombatUtil {
                     if (CombatUtil.canBlock(attacker, blocker, combat)) {
                         boolean must = true;
                         if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
-                            final List<Card> possibleBlockers = CardLists.filter(combat.getDefendingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+                            final List<Card> possibleBlockers = CardLists.filter(defending.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
                             possibleBlockers.remove(blocker);
                             if (!CombatUtil.canBeBlocked(attacker, possibleBlockers)) {
                                 must = false;
@@ -455,16 +455,14 @@ public class CombatUtil {
     
     private static void orderBlockingMultipleAttackers(final Combat combat) {
         // If there are multiple blockers, the Attacker declares the Assignment Order
-        final Player player = combat.getDefendingPlayer();
-        final List<Card> blockers = combat.getAllBlockers();
-        for (final Card blocker : blockers) {
+        for (final Card blocker : combat.getAllBlockers()) {
             List<Card> attackers = combat.getAttackersBlockedBy(blocker);
             if (attackers.size() <= 1) {
                 continue;
             }
          
             List<Card> orderedAttacker = null;
-            if (player.isHuman()) {
+            if (blocker.getController().isHuman()) {
                 List<Card> ordered = GuiChoose.getOrderChoices("Choose Blocking Order", "Damaged First", 0, attackers, null, blocker);
                 
                 orderedAttacker = new ArrayList<Card>();
@@ -518,7 +516,7 @@ public class CombatUtil {
             if (CombatUtil.canBeBlocked(attacker, combat) && CombatUtil.canBlock(attacker, blocker)) {
                 boolean canBe = true;
                 if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
-                    final List<Card> blockers = CardLists.filter(combat.getDefendingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+                    final List<Card> blockers = combat.getDefenderPlayerByAttacker(attacker).getCreaturesInPlay();
                     blockers.remove(blocker);
                     if (!CombatUtil.canBeBlocked(attacker, blockers)) {
                         canBe = false;
@@ -535,7 +533,7 @@ public class CombatUtil {
                 if (CombatUtil.canBeBlocked(attacker, combat) && CombatUtil.canBlock(attacker, blocker)) {
                     boolean canBe = true;
                     if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
-                        final List<Card> blockers = CardLists.filter(combat.getDefendingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+                        final List<Card> blockers = combat.getDefenderPlayerByAttacker(attacker).getCreaturesInPlay();
                         blockers.remove(blocker);
                         if (!CombatUtil.canBeBlocked(attacker, blockers)) {
                             canBe = false;
@@ -2523,10 +2521,11 @@ public class CombatUtil {
             final List<Card> list = attackers.get(def);
 
             for (final Card attacker : list) {
-                sb.append(combat.getDefendingPlayer()).append(" assigned ");
+                
 
                 defend = Singletons.getModel().getGame().getCombat().getBlockers(attacker);
-
+                sb.append(combat.getDefenderByAttacker(attacker)).append(" assigned ");
+                
                 if (!defend.isEmpty()) {
                     // loop through blockers
                     for (final Card blocker : defend) {

@@ -26,7 +26,6 @@ import com.esotericsoftware.minlog.Log;
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
 import forge.game.GameState;
@@ -455,13 +454,11 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 // that give extra combat can do it like ExtraTurn stack ExtraPhases
                 if (this.extraCombats > 0) {
                     final Player player = this.getPlayerTurn();
-                    final Player opp = player.getOpponent();
 
                     this.bCombat = true;
                     this.extraCombats--;
                     game.getCombat().reset();
                     game.getCombat().setAttackingPlayer(player);
-                    game.getCombat().setDefendingPlayer(opp);
                     this.phase = PhaseType.COMBAT_BEGIN;
                 }
                 break;
@@ -539,7 +536,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         if (!this.extraTurns.isEmpty()) {
             ExtraTurn extraTurn = this.extraTurns.pop();
             nextTurn = extraTurn.getPlayer();
-            if (skipTurnTimeVault(nextTurn)) {
+            if (nextTurn.skipTurnTimeVault()) {
                 return getNextActivePlayer();
             }
             if (extraTurn.isLoseAtEndStep()) {
@@ -550,40 +547,11 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             }
             return nextTurn;
         }
-        if (skipTurnTimeVault(nextTurn)) {
+        if (nextTurn.skipTurnTimeVault()) {
             this.setPlayerTurn(nextTurn);
             return getNextActivePlayer();
         }
         return nextTurn;
-    }
-
-    /**
-     * <p>
-     * skipTurnTimeVault.
-     * </p>
-     * 
-     * @param turn
-     *            a {@link forge.game.player.Player} object.
-     * @return a {@link forge.game.player.Player} object.
-     */
-    private boolean skipTurnTimeVault(Player turn) {
-        // time vault:
-        List<Card> vaults = turn.getCardsIn(ZoneType.Battlefield, "Time Vault");
-        vaults = CardLists.filter(vaults, CardPredicates.Presets.TAPPED);
-
-        if (vaults.size() > 0) {
-            final Card crd = vaults.get(0);
-
-            if (turn.isHuman()) {
-                if (GameActionUtil.showYesNoDialog(crd, "Untap " + crd + "?")) {
-                    crd.untap();
-                    return true;
-                }
-            } else {
-                // TODO Should AI skip his turn for time vault?
-            }
-        }
-        return false;
     }
 
     /**

@@ -212,7 +212,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
                 }
     
                 if ( priority.isHuman() )
-                    return new InputBlock();
+                    return new InputBlock(priority);
     
                 // ai is under attack
                 priority.getController().getAiInput().getComputer().declareBlockers();

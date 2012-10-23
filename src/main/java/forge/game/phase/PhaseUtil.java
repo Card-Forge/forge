@@ -81,7 +81,6 @@ public class PhaseUtil {
 
         game.getCombat().reset();
         game.getCombat().setAttackingPlayer(turn);
-        game.getCombat().setDefendingPlayer(turn.getOpponent());
 
         // Tokens starting game in play now actually suffer from Sum. Sickness
         // again

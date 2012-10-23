@@ -66,7 +66,6 @@ public class Combat {
     private final HashMap<Card, GameEntity> attackerToDefender = new HashMap<Card, GameEntity>();
 
     private Player attackingPlayer = null;
-    private Player defendingPlayer = null;
 
     /**
      * <p>
@@ -90,7 +89,6 @@ public class Combat {
         this.defendingDamageMap.clear();
 
         this.attackingPlayer = null;
-        this.defendingPlayer = null;
         this.currentDefender = 0;
         this.nextDefender = 0;
 
@@ -252,18 +250,6 @@ public class Combat {
 
     /**
      * <p>
-     * Setter for the field <code>defendingPlayer</code>.
-     * </p>
-     * 
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     */
-    public final void setDefendingPlayer(final Player player) {
-        this.defendingPlayer = player;
-    }
-
-    /**
-     * <p>
      * Getter for the field <code>attackingPlayer</code>.
      * </p>
      * 
@@ -277,20 +263,6 @@ public class Combat {
         }
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>defendingPlayer</code>.
-     * </p>
-     * 
-     * @return a {@link forge.game.player.Player} object.
-     */
-    public final Player getDefendingPlayer() {
-        if (this.attackingPlayer != null) {
-            return this.defendingPlayer;
-        } else {
-            return Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().getOpponent();
-        }
-    }
 
     /**
      * <p>
@@ -410,6 +382,19 @@ public class Combat {
         return this.attackerToDefender.get(c);
     }
 
+    public final Player getDefenderPlayerByAttacker(final Card c) {
+        GameEntity defender = getDefenderByAttacker(c);
+
+        // System.out.println(c.toString() + " attacks " + defender.toString());
+        if ( defender instanceof Player)
+            return (Player) defender;
+
+        // maybe attack on a controlled planeswalker? 
+        if ( defender instanceof Card ) 
+            return ((Card)defender).getController();
+        return null;
+    }    
+    
     public final GameEntity getDefendingEntity(final Card c) {
         GameEntity defender = this.attackerToDefender.get(c);
 
@@ -561,7 +546,7 @@ public class Combat {
      */
     public Player getDefendingPlayerRelatedTo(final Card source) {
 
-        Player defender = this.getDefendingPlayer();
+        Player defender = getDefenderPlayerByAttacker(source);
         Card attacker = source;
         if (source.isAura()) {
             attacker = source.getEnchantingCard();
@@ -1002,16 +987,7 @@ public class Combat {
         // System.out.println("\nWho attacks attacks " + priority.toString() + "?");
         for(Card c : getAttackers())
         {
-            GameEntity defender = getDefenderByAttacker(c);
-            // System.out.println(c.toString() + " attacks " + defender.toString());
-            
-            if ( defender.equals(priority) ) {
-                return true;
-            }
-            // maybe attack on a controlled planeswalker? 
-            if (!(defender instanceof Card)) continue;
-            Card pw = (Card)defender;
-            if( pw.getController().equals(priority) ) {
+            if ( priority.equals(getDefenderPlayerByAttacker(c)) ) {
                 return true;
             }
         }
