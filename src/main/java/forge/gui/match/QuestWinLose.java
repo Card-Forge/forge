@@ -195,7 +195,7 @@ public class QuestWinLose extends ControlWinLose {
         }
 
         // Unlock new sets?
-        if (this.wonMatch && qData.getAchievements().getWin() > 1 && (qData.getAchievements().getWin() % 50) == 0) {
+        if (this.wonMatch && qData.getAchievements().getWin() > 1 && ((qData.getAchievements().getWin() + 1) % 50) == 0) {
             unlockSets();
         }
 
@@ -692,7 +692,7 @@ public class QuestWinLose extends ControlWinLose {
         }
 
         final int unlockSets = JOptionPane.showConfirmDialog(null,
-                "You have now won " + qData.getAchievements().getWin() + " matches.\n"
+                "You have now won " + (qData.getAchievements().getWin() + 1) + " matches.\n"
                 + "With this achievement, you have the option of unlocking more sets. "
                 + "You have " + qData.getAssets().getCredits() + " credits.\n\n"
                 + "Do you want to unlock new sets?",
