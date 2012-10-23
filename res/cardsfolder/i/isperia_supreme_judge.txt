@@ -4,7 +4,7 @@ Types:Legendary Creature Sphinx
 Text:no text
 PT:6/4
 K:Flying
-T:Mode$ Attacks | ValidCard$ Creature.YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever a creature attacks you or a planeswalker you control, draw a card.
+T:Mode$ Attacks | ValidCard$ Creature | Attacked$ You,Planeswalker.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever a creature attacks you or a planeswalker you control, draw a card.
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/isperia_supreme_judge.jpg
