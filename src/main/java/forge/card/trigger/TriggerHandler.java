@@ -39,6 +39,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
+import forge.game.GameState;
 import forge.game.phase.PhaseType;
 //import forge.util.TextUtil;
 import forge.game.player.ComputerUtil;
@@ -270,8 +271,9 @@ public class TriggerHandler {
         if (this.suppressedModes.contains(mode)) {
             return;
         }
-
-        final Player playerAP = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
+        final GameState game = Singletons.getModel().getGame();
+        
+        final Player playerAP = game.getPhaseHandler().getPlayerTurn();
         if (playerAP == null) {
             // This should only happen outside of games, so it's safe to just
             // abort.
@@ -285,8 +287,8 @@ public class TriggerHandler {
         // This is done to allow the list of triggers to be modified while
         // triggers are running.
         final ArrayList<Trigger> delayedTriggersWorkingCopy = new ArrayList<Trigger>(this.delayedTriggers);
-        List<Card> allCards = Singletons.getModel().getGame().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
-        allCards.addAll(Singletons.getModel().getGame().getCardsIn(ZoneType.Stack));
+        List<Card> allCards = game.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
+        allCards.addAll(game.getCardsIn(ZoneType.Stack));
         boolean checkStatics = false;
 
         // Static triggers
@@ -301,23 +303,23 @@ public class TriggerHandler {
         }
 
         if (checkStatics) {
-            Singletons.getModel().getGame().getAction().checkStaticAbilities();
+            game.getAction().checkStaticAbilities();
         } else if (runParams.containsKey("Destination")){
             // Check static abilities when a card enters the battlefield
             String type = (String) runParams.get("Destination");
             if (type.equals("Battlefield")) {
-                Singletons.getModel().getGame().getAction().checkStaticAbilities();
+                game.getAction().checkStaticAbilities();
             }
         }
 
         // AP
         allCards = playerAP.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
-        allCards.addAll(CardLists.filterControlledBy(Singletons.getModel().getGame().getCardsIn(ZoneType.Stack), playerAP));
+        allCards.addAll(CardLists.filterControlledBy(game.getCardsIn(ZoneType.Stack), playerAP));
         // add cards that move to hidden zones
         if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
             Card card = (Card) runParams.get("Card");
             if (playerAP.equals(card.getController()) && !allCards.contains(card) 
-                    && (Singletons.getModel().getGame().getZoneOf(card) == null || Singletons.getModel().getGame().getZoneOf(card).getZoneType().isHidden())) {
+                    && (game.getZoneOf(card) == null || game.getZoneOf(card).getZoneType().isHidden())) {
                 allCards.add(card);
             }
         }
@@ -336,28 +338,34 @@ public class TriggerHandler {
             }
         }
 
-        // NAP
-        allCards = playerAP.getOpponent().getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
-        allCards.addAll(CardLists.filterControlledBy(Singletons.getModel().getGame().getCardsIn(ZoneType.Stack), playerAP.getOpponent()));
-        // add cards that move to hidden zones
-        if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
-            Card card = (Card) runParams.get("Card");
-            if (!playerAP.equals(card.getController()) && !allCards.contains(card)
-                    && (Singletons.getModel().getGame().getZoneOf(card) == null || Singletons.getModel().getGame().getZoneOf(card).getZoneType().isHidden())) {
-                allCards.add(card);
-            }
-        }
-        for (final Card c : allCards) {
-            for (final Trigger t : c.getTriggers()) {
-                if (!t.isStatic()) {
-                    this.runSingleTrigger(t, mode, runParams);
+        // NAPs
+
+        for(Player nap: game.getPlayers() )
+        {
+            if ( nap.equals(playerAP) ) continue;
+
+            allCards = nap.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
+            allCards.addAll(CardLists.filterControlledBy(game.getCardsIn(ZoneType.Stack), nap));
+            // add cards that move to hidden zones
+            if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
+                Card card = (Card) runParams.get("Card");
+                if (!playerAP.equals(card.getController()) && !allCards.contains(card)
+                        && (game.getZoneOf(card) == null || game.getZoneOf(card).getZoneType().isHidden())) {
+                    allCards.add(card);
                 }
             }
-        }
-        for (Trigger deltrig : delayedTriggersWorkingCopy) {
-            if (deltrig.getHostCard().getController().equals(playerAP.getOpponent())) {
-                if (this.runSingleTrigger(deltrig, mode, runParams)) {
-                    this.delayedTriggers.remove(deltrig);
+            for (final Card c : allCards) {
+                for (final Trigger t : c.getTriggers()) {
+                    if (!t.isStatic()) {
+                        this.runSingleTrigger(t, mode, runParams);
+                    }
+                }
+            }
+            for (Trigger deltrig : delayedTriggersWorkingCopy) {
+                if (deltrig.getHostCard().getController().equals(nap)) {
+                    if (this.runSingleTrigger(deltrig, mode, runParams)) {
+                        this.delayedTriggers.remove(deltrig);
+                    }
                 }
             }
         }
