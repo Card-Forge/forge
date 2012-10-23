@@ -5,7 +5,7 @@ Text:no text
 PT:4/5
 K:Flying
 T:Mode$ Attacks | TriggerZones$ Battlefield | ValidCard$ Card.Self | Execute$ Detain | TriggerDescription$ Whenever CARDNAME attacks, detain up to two target nonland permanents your opponents control. (Until your next turn, those permanents can't attack or block and their activated abilities can't be activated.)
-SVar:Detain:DB$Pump | TargetMin$ 0 | TargetMax$ 2 | KW$ HIDDEN CARDNAME can't attack or block. & HIDDEN CARDNAME's activated abilities can't be activated. | IsCurse$ True | ValidTgts$ Permanent.nonLand+YouDontCtrl | TgtPrompt$ Select target nonland permanent your opponent controls to detain. | UntilYourNextTurn$ True
+SVar:Detain:DB$Pump | TargetMin$ 0 | TargetMax$ 2 | KW$ HIDDEN CARDNAME can't attack or block. & HIDDEN CARDNAME's activated abilities can't be activated. | IsCurse$ True | ValidTgts$ Permanent.nonLand+OppCtrl | TgtPrompt$ Select target nonland permanent your opponent controls to detain. | UntilYourNextTurn$ True
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/archon_of_the_triumvirate.jpg

@@ -2,9 +2,9 @@ Name:Alpha Brawl
 ManaCost:6 R R
 Types:Sorcery
 Text:no text
-A:SP$ Pump | Cost$ 6 R R | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature an opponent controls | RememberTargets$ True | StackDescription$ None | SubAbility$ AlphaAttack | SpellDescription$ Target creature an opponent controls deals damage equal to its power to each other creature that player controls, then each of those creatures deals damage equal to its power to that creature.
-SVar:AlphaAttack:DB$DamageAll | ValidCards$ Creature.YouDontCtrl+IsNotRemembered | DamageSource$ Targeted | NumDmg$ Y | SubAbility$ SucksToBeAlpha | References$ Y | StackDescription$ Targeted creature deals damage equal to its power to each other creature that player controls, 
-SVar:SucksToBeAlpha:DB$ EachDamage | ValidCards$ Creature.YouDontCtrl+IsNotRemembered | ValidDescription$ of those creatures | NumDmg$ X | DamageDesc$ damage equal to its power | DefinedCards$ Remembered | SubAbility$ DBCleanup | References$ X | StackDescription$ then each of those creatures deals damage equal to its power to that creature
+A:SP$ Pump | Cost$ 6 R R | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | RememberTargets$ True | StackDescription$ None | SubAbility$ AlphaAttack | SpellDescription$ Target creature an opponent controls deals damage equal to its power to each other creature that player controls, then each of those creatures deals damage equal to its power to that creature.
+SVar:AlphaAttack:DB$ DamageAll | ValidCards$ Creature.OppCtrl+IsNotRemembered | DamageSource$ Targeted | NumDmg$ Y | SubAbility$ SucksToBeAlpha | References$ Y | StackDescription$ Targeted creature deals damage equal to its power to each other creature that player controls, 
+SVar:SucksToBeAlpha:DB$ EachDamage | ValidCards$ Creature.OppCtrl+IsNotRemembered | ValidDescription$ of those creatures | NumDmg$ X | DamageDesc$ damage equal to its power | DefinedCards$ Remembered | SubAbility$ DBCleanup | References$ X | StackDescription$ then each of those creatures deals damage equal to its power to that creature
 #NumDmg isn't really used here.  It is left for clarity.  The AF pulls Damage straight from "X" hardcoded.
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Count$CardPower

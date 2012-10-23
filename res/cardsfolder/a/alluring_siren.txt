@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Creature Siren
 Text:no text
 PT:1/1
-A:AB$ Pump | Cost$ T | ValidTgts$ Creature.YouDontCtrl | KW$ HIDDEN CARDNAME attacks each turn if able. | TgtPrompt$ Choose target creature opponent controls. | SpellDescription$ Target creature an opponent controls attacks you this turn if able.
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.OppCtrl | KW$ HIDDEN CARDNAME attacks each turn if able. | TgtPrompt$ Choose target creature opponent controls. | SpellDescription$ Target creature an opponent controls attacks you this turn if able.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alluring_siren.jpg
