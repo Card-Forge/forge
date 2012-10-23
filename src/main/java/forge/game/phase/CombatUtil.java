@@ -282,7 +282,7 @@ public class CombatUtil {
         }
 
         String valid = StringUtils.join(walkTypes, ",");
-        final Player defendingPlayer = attacker.getController().getOpponent();
+        final Player defendingPlayer = Singletons.getModel().getGame().getCombat().getDefendingPlayerRelatedTo(attacker);
         List<Card> defendingLands = defendingPlayer.getCardsIn(ZoneType.Battlefield);
         for (Card c : defendingLands) {
             if (c.isValid(valid.split(","), defendingPlayer, attacker)) {
