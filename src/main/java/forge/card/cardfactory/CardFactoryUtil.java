@@ -4128,7 +4128,7 @@ public class CardFactoryUtil {
                     + "OptionalDecider$ You | Execute$ ProvokeAbility | Secondary$ True | TriggerDescription$ "
                     + "When this attacks, you may have target creature defending player "
                     + "controls untap and block it if able.";
-            final String abString = "DB$ MustBlock | ValidTgts$ Creature.YouDontCtrl | "
+            final String abString = "DB$ MustBlock | ValidTgts$ Creature.DefenderCtrl | "
                     + "TgtPrompt$ Select target creature defending player controls | SubAbility$ DBUntap";
             final String dbString = "DB$ Untap | Defined$ Targeted";
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, true);
