@@ -44,7 +44,6 @@ import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
-import forge.game.player.PlayerType;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
@@ -646,7 +645,7 @@ public class AbilityFactoryDealDamage {
                 // on the stack
                 // or from taking combat damage
                 final boolean freePing = isTrigger || saMe.getPayCosts() == null || tgt.getNumTargeted() > 0
-                        || (phase.is(PhaseType.END_OF_TURN) && saMe.isAbility() && phase.isNextTurn(PlayerType.COMPUTER))
+                        || (phase.is(PhaseType.END_OF_TURN) && saMe.isAbility() && phase.getNextTurn().equals(ai))
                             || (phase.is(PhaseType.MAIN2) && saMe.getRestrictions().getPlaneswalker());
 
                 if (freePing && saMe.canTarget(ai.getOpponent()) && tgt.addTarget(enemy)) {
@@ -664,7 +663,7 @@ public class AbilityFactoryDealDamage {
             // because we can
             else if (saMe.canTarget(enemy)) {
 
-                if ((phase.is(PhaseType.END_OF_TURN) && phase.isNextTurn(PlayerType.COMPUTER))
+                if ((phase.is(PhaseType.END_OF_TURN) && phase.getNextTurn().equals(ai))
                         || (AbilityFactory.isSorcerySpeed(saMe) && phase.is(PhaseType.MAIN2))
                         || saMe.getPayCosts() == null || isTrigger) {
                     tgt.addTarget(enemy);

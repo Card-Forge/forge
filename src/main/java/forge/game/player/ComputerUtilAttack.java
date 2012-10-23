@@ -242,7 +242,7 @@ public class ComputerUtilAttack {
         int fixedBlockers = 0;
         final List<Card> vigilantes = new ArrayList<Card>();
         //check for time walks
-        if (Singletons.getModel().getGame().getPhaseHandler().isNextTurn(PlayerType.COMPUTER)) {
+        if (Singletons.getModel().getGame().getPhaseHandler().getNextTurn().equals(ai)) {
             return attackers;
         }
         for (final Card c : this.computerList) {

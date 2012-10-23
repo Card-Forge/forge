@@ -1499,7 +1499,7 @@ public class AbilityFactory {
         }
 
         return Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) 
-             && Singletons.getModel().getGame().getNextPlayerAfter(sa.getActivatingPlayer()).equals(ai);
+             && Singletons.getModel().getGame().getPhaseHandler().getNextTurn().equals(ai);
     }
 
     /**

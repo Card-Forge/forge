@@ -31,7 +31,6 @@ import forge.Singletons;
 import forge.card.trigger.TriggerType;
 import forge.game.GameState;
 import forge.game.player.Player;
-import forge.game.player.PlayerType;
 import forge.game.zone.ZoneType;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.MyObservable;
@@ -143,7 +142,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * 
      * @return a {@link forge.game.player.Player} object.
      */
-    public final Player getFirstPriority() {
+    private final Player getFirstPriority() {
         return this.pFirstPriority;
     }
 
@@ -652,20 +651,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         return this.extraTurns.peek().getPlayer();
     }
 
-    /**
-     * <p>
-     * isNextTurn.
-     * </p>
-     * 
-     * @param pl
-     *            a {@link forge.game.player.Player} object.
-     * @return a boolean.
-     */
-    @Deprecated
-    public final boolean isNextTurn(final PlayerType pt) {
-        final Player next = this.getNextTurn();
-        return next.getType() == pt;
-    }
 
     /**
      * <p>

@@ -46,7 +46,6 @@ import forge.card.spellability.Target;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
-import forge.game.player.PlayerType;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.util.MyRandom;
@@ -363,7 +362,7 @@ public class AbilityFactoryZoneAffecting {
             randomReturn = true;
         }
         if ((Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)
-                && Singletons.getModel().getGame().getPhaseHandler().isNextTurn(PlayerType.COMPUTER))) {
+                && Singletons.getModel().getGame().getPhaseHandler().getNextTurn().equals(ai))) {
             randomReturn = true;
         }
 
@@ -917,7 +916,7 @@ public class AbilityFactoryZoneAffecting {
         }
 
         if ((Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) 
-                && Singletons.getModel().getGame().getPhaseHandler().isNextTurn(PlayerType.COMPUTER))) {
+                && Singletons.getModel().getGame().getPhaseHandler().getNextTurn().equals(ai))) {
             chance = .9; // 90% for end of opponents turn
         }
 

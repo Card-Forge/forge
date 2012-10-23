@@ -85,6 +85,7 @@ public class InputPassPriority extends Input implements java.io.Serializable {
     @Override
     public final void selectCard(final Card card, final PlayerZone zone) {
         if (Singletons.getModel().getGame().getAction().playCard(card)) {
+            // really need it? does not playCard push it into stack and thus give priority?
             Singletons.getModel().getGame().getPhaseHandler().setPriority(Singletons.getControl().getPlayer());
         }
         else {
