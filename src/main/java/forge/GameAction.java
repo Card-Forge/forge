@@ -907,7 +907,9 @@ public class GameAction {
         GameEndReason reason = null;
         // award loses as SBE
         for (Player p : game.getPlayers() ) {
-            p.checkLoseCondition(); // this will set appropriate outcomes
+            if ( p.checkLoseCondition() ) { // this will set appropriate outcomes
+                // you may fire a trigger here
+            }
         }
         
         // Has anyone won by spelleffect?
