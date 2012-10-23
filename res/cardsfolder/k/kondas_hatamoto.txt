@@ -4,7 +4,7 @@ Types:Creature Human Samurai
 Text:no text
 PT:1/2
 K:Bushido 1
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 2 | AddKeyword$ Vigilance | CheckSVar$ X | SVarCompare$ EQ1 | Description$ As long as you control a legendary Samurai, CARDNAME gets +1/+2 and has vigilance. (Attacking doesn't cause this creature to tap.)
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 2 | AddKeyword$ Vigilance | CheckSVar$ X | SVarCompare$ GE1 | Description$ As long as you control a legendary Samurai, CARDNAME gets +1/+2 and has vigilance. (Attacking doesn't cause this creature to tap.)
 SVar:X:Count$Valid Samurai.Legendary+YouCtrl
 SVar:BuffedBy:Samurai.Legendary
 SVar:Rarity:Uncommon
