@@ -451,16 +451,17 @@ public class GameState {
      * @param playerTurn
      * @return
      */
-    public Player getNextPlayerAfter(Player playerTurn) {
+    public Player getNextPlayerAfter(final Player playerTurn) {
         int iPlayer = roIngamePlayers.indexOf(playerTurn);
 
-        // should do something if playerTurn has just lost!
-        if( -1 == iPlayer && !roIngamePlayers.isEmpty())
+        if( -1 == iPlayer && !roIngamePlayers.isEmpty()) // should do something if playerTurn has just lost!
         {
             int iAlive;
+            iPlayer = allPlayers.indexOf(playerTurn);
             do{
-                iPlayer = ( allPlayers.indexOf(playerTurn) + 1 ) % allPlayers.size();
+                iPlayer = ( iPlayer + 1 ) % allPlayers.size();
                 iAlive = roIngamePlayers.indexOf(allPlayers.get(iPlayer));
+                
             } while(iAlive < 0);
             iPlayer = iAlive;
         } else { // for the case noone has died
