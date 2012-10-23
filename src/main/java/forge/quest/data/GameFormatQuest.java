@@ -210,7 +210,7 @@ public final class GameFormatQuest {
      * 
      * @param setCode String, set code.
      */
-    public void addSet(final String setCode) {
+    public void unlockSet(final String setCode) {
         if (this.allowedSetCodes == null) {
             this.allowedSetCodes = new ArrayList<String>(); // this should never happen.
         } else if (this.allowedSetCodes.isEmpty()) {

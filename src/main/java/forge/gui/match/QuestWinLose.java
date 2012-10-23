@@ -496,7 +496,7 @@ public class QuestWinLose extends ControlWinLose {
 
         if (unlockedSet != null) {
 
-            qData.getFormat().addSet(unlockedSet.getCode());
+            qData.getFormat().unlockSet(unlockedSet.getCode());
 
             if (Singletons.getModel().getTournamentPacks().contains(unlockedSet.getCode())) {
                 final List<CardPrinted> cardsWon = (new UnOpenedProduct(Singletons.getModel().getTournamentPacks().get(unlockedSet.getCode()))).open();
