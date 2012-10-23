@@ -179,6 +179,11 @@ public class MatchController {
         startRound();
     }
 
+    public void replay() {
+        gamesPlayed.clear();
+        startRound();
+    }    
+    
     /**
      * TODO: Write javadoc for this method.
      * 

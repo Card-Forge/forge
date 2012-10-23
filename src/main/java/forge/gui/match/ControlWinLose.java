@@ -84,7 +84,7 @@ public class ControlWinLose {
     public void actionOnRestart() {
         SOverlayUtils.hideOverlay();
         saveOptions();
-        match.replayRound();
+        match.replay();
     }
 
     /** Action performed when "quit" button is pressed in default win/lose UI. */
