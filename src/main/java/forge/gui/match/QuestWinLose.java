@@ -164,6 +164,7 @@ public class QuestWinLose extends ControlWinLose {
         // TODO: We don't have a enum for difficulty?
         int difficulty = qData.getAchievements().getDifficulty();
 
+        final int wins = qData.getAchievements().getWin();
         // Win case
         if (this.wonMatch) {
             // Standard event reward credits
@@ -184,7 +185,7 @@ public class QuestWinLose extends ControlWinLose {
             }
 
             // Award jackpot every 80 games won (currently 10 rares)
-            final int wins = qData.getAchievements().getWin();
+            
             if ((wins > 0) && ((wins % 80) == 0)) {
                 this.awardJackpot();
             }
@@ -195,13 +196,13 @@ public class QuestWinLose extends ControlWinLose {
         }
 
         // Unlock new sets?
-        if (this.wonMatch && qData.getAchievements().getWin() > 1 && ((qData.getAchievements().getWin() + 1) % 50) == 0) {
+        if (this.wonMatch && (wins + 1) % 50 == 0) {
             unlockSets();
         }
 
         // Grant booster on a win, or on a loss in easy mode
         if (this.wonMatch || difficulty == 0) {
-            final int outcome = this.wonMatch ? qData.getAchievements().getWin() : qData.getAchievements().getLost();
+            final int outcome = this.wonMatch ? wins : qData.getAchievements().getLost();
             if ((outcome % Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.WINS_BOOSTER, qData.getAchievements().getDifficulty())) == 0) {
                 this.awardBooster();
             }
