@@ -22,7 +22,8 @@ PT:13/13
 K:Flying
 K:Trample
 K:Intimidate
-# Whenever a player loses the game, put thirteen +1/+1 counters on Withengar Unbound. (not implemented)
+T:Mode$ LosesGame | Execute$ TrigCounter | TriggerDescription$ Whenever a player loses the game, put thirteen +1/+1 counters on CARDNAME.
+SVar:TrigCounter:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ 13
 SVar:Picture:http://www.wizards.com/global/images/magic/general/withengar_unbound.jpg
 SetInfo:DKA|Mythic|http://magiccards.info/scans/en/dka/147b.jpg
 Oracle:Flying, intimidate, trample\nWhenever a player loses the game, put thirteen +1/+1 counters on Withengar Unbound.

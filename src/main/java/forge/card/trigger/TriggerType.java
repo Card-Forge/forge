@@ -46,7 +46,8 @@ public enum TriggerType {
     Drawn(TriggerDrawn.class),
     Discarded(TriggerDiscarded.class),
     Shuffled(TriggerShuffled.class),
-    LandPlayed(TriggerLandPlayed.class);
+    LandPlayed(TriggerLandPlayed.class),
+    LosesGame(TriggerLosesGame.class);
 
     private final Class<? extends Trigger> classTrigger;
     private TriggerType(Class<? extends Trigger> clasz) {

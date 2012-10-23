@@ -22,6 +22,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.swing.JFrame;
 
@@ -908,7 +910,10 @@ public class GameAction {
         // award loses as SBE
         for (Player p : game.getPlayers() ) {
             if ( Player.Predicates.NOT_LOST.apply(p) && p.checkLoseCondition() ) { // this will set appropriate outcomes
-                // you may fire a trigger here
+                // Run triggers
+                final Map<String, Object> runParams = new TreeMap<String, Object>();
+                runParams.put("Player", p);
+                Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.LosesGame, runParams);
             }
         }
         

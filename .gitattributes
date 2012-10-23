@@ -12569,6 +12569,7 @@ src/main/java/forge/card/trigger/TriggerHandler.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerLandPlayed.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerLifeGained.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerLifeLost.java svneol=native#text/plain
+src/main/java/forge/card/trigger/TriggerLosesGame.java -text
 src/main/java/forge/card/trigger/TriggerPhase.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerSacrificed.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerShuffled.java svneol=native#text/plain
