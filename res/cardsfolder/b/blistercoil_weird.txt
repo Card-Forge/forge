@@ -7,6 +7,7 @@ T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Tr
 SVar:TrigPump:AB$ Pump | Cost$ 0 | NumAtt$ +1 | NumDef$ +1 | Defined$ Self | SubAbility$ DBUntap
 SVar:DBUntap:DB$ Untap | Defined$ Self
 SVar:BuffedBy:Instant,Sorcery
+DeckHints:Type$Instant|Sorcery
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blistercoil_weird.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/211.jpg

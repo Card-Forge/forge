@@ -7,6 +7,7 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 A:AB$ CopyPermanent | Cost$ 2 B Discard<1/Card> | Defined$ Self | NumCopies$ 1 | SpellDescription$ Put a token onto the battlefield that's a copy of CARDNAME.
 SVar:X:Count$Valid Rat.YouCtrl
 SVar:BuffedBy:Rat
+DeckHints:Type$Rat
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pack_rat.jpg
 SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/73.jpg
