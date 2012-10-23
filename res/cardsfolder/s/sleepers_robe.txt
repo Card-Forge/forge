@@ -6,7 +6,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ U B | ValidTgts$ Creature | AITgts$ Card.powerGE1 | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Fear | Description$ Enchanted creature has fear. (It can't be blocked except by artifact creatures and/or black creatures.)
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Opponent | OptionalDecider$ You | Execute$ TrigDraw | CombatDamage$ True | TriggerDescription$ Whenever enchanted creature deals combat damage to an opponent, you may draw a card.
-SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sleepers_robe.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/273.jpg
