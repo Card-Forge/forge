@@ -375,6 +375,33 @@ Fixes/Features:
 - archenemy: ai opponents will use different decks
 - Made the scripts of some cards with "As CARDNAME enters the battlefield, choose an opponent." to be multiplayer compatible.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Made more scripts ready for multiplayer.
+- Autopass to EOT should not skip the following turn
+- add AILogic to any mana choice to avoid crashing
+- Added a fluff piece to the changes.txt file.
+- Added a fluff piece to the changes.txt file.
+- Made more scripts ready for multiplayer.
+- Defending Player will now be determined conform to rule 802.2a.
+- simplified deck list generation
+- restored unlimited hand size
+- Fixed AI Logic of AF Mana.
+- PhaseHandler isNextTurn(PlayerType) marked as deprecated. (There are many players of same type in a game)
+- local player is assigned at beginning of a match instead of being calculated each time.
+- removed some hardcoded checks for ai player
+- Made more scripts ready for multiplayer.
+- r17604 was not merged properly in r17621
+- adding some deckhints
+- remove unused code
+- Renamed a GameFormatQuest method to something more descriptive (to avoid confusion with a more general method).
+- PhaseHandler.isNextTurn changed by getNextTurn.equals(ai)
+- Combat: removed getDefendingPlayer (there may be multiple defenders per combat)
+- More intuitive calculation of "every 50th win" for unlocking new sets.
+- Even more intuitive calculation of "every 50th win" for unlocking new sets.
+- the most intuitive one
+- Made more scripts ready for multiplayer.
+- The Provoke keyword is now multiplayer compatible.
+- Made more scripts ready for multiplayer.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
