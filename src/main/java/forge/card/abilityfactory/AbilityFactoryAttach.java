@@ -348,9 +348,6 @@ public class AbilityFactoryAttach {
 
         List<Card> list = Singletons.getModel().getGame().getCardsIn(tgt.getZone());
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), attachSource);
-        if (params.containsKey("AITgts")) {
-            list = CardLists.getValidCards(list, params.get("AITgts"), sa.getActivatingPlayer(), attachSource);
-        }
 
         // TODO If Attaching without casting, don't need to actually target.
         // I believe this is the only case where mandatory will be true, so just
@@ -362,11 +359,15 @@ public class AbilityFactoryAttach {
             list = CardLists.filter(list, Predicates.not(CardPredicates.isProtectedFrom(attachSource)));
         }
 
-        if (list.size() == 0) {
+        if (list.isEmpty()) {
             return null;
         }
+        List<Card> prefList = list;
+        if (params.containsKey("AITgts")) {
+            prefList = CardLists.getValidCards(list, params.get("AITgts"), sa.getActivatingPlayer(), attachSource);
+        }
 
-        Card c = AbilityFactoryAttach.attachGeneralAI(aiPlayer, sa, list, mandatory, attachSource, params.get("AILogic"));
+        Card c = AbilityFactoryAttach.attachGeneralAI(aiPlayer, sa, prefList, mandatory, attachSource, params.get("AILogic"));
 
         if ((c == null) && mandatory) {
             CardLists.shuffle(list);

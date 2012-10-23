@@ -131,7 +131,7 @@ public final class CardPredicates {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return !c.hasProtectionFrom(source);
+                return c.hasProtectionFrom(source);
             }
         };
     }
