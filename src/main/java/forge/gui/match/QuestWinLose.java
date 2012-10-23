@@ -132,7 +132,7 @@ public class QuestWinLose extends ControlWinLose {
             if (!outcome.isDraw()) {
                 boolean isHumanWinner = outcome.getWinner().equals(questPlayer);
                 final List<CardPrinted> anteCards = new ArrayList<CardPrinted>();
-                for( Player p : Singletons.getModel().getGame().getPlayers() ) {
+                for( Player p : Singletons.getModel().getGame().getRegisteredPlayers() ) {
                     if (p.getLobbyPlayer().equals(questPlayer) == isHumanWinner) continue;
                     for(Card c : p.getCardsIn(ZoneType.Ante))
                         anteCards.add(CardDb.instance().getCard(c));

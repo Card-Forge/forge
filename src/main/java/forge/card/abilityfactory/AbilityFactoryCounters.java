@@ -1563,10 +1563,9 @@ public class AbilityFactoryCounters {
                 }
             }
 
-            List<Player> players = Singletons.getModel().getGame().getPlayers();
-
             @Override
             public void selectPlayer(final Player player) {
+                final List<Player> players = Singletons.getModel().getGame().getPlayers();
                 if (players.indexOf(player) >= 0)
                 {
                     players.remove(player); // no second selection

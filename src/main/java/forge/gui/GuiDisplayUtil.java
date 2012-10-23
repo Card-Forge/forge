@@ -325,9 +325,9 @@ public final class GuiDisplayUtil {
      * </p>
      */
     public static void updateGUI() {
-        for( Player p : Singletons.getModel().getGame().getPlayers())
+        for( Player p : Singletons.getModel().getGame().getRegisteredPlayers())
         {
-            p.getZone(ZoneType.Battlefield).updateObservers();
+            // why was it written twice?
             p.getZone(ZoneType.Battlefield).updateObservers();
         }
     }
@@ -796,7 +796,7 @@ public final class GuiDisplayUtil {
             Zones.add(p.getZone(ZoneType.Hand));
             Zones.add(p.getZone(ZoneType.Library));
             Zones.add(p.getZone(ZoneType.Sideboard));
-            Zones.add(p.getZone(ZoneType.Stack));
+            // player has no stack of his own
         }
 
         //Set a breakpoint on the following statement

@@ -116,7 +116,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     private ManaPool manaPool = new ManaPool(this);
 
     /** The must attack entity. */
-    private Object mustAttackEntity = null;
+    private GameEntity mustAttackEntity = null;
 
     /** The attackedWithCreatureThisTurn. */
     private boolean attackedWithCreatureThisTurn = false;
@@ -200,16 +200,13 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     public final Player getOpponent() {
         GameState game = Singletons.getModel().getGame();
         Player otherType = null;
-        Player anyWhoHasNotLost = null;
         Player justAnyone = null;
         for (Player p : game.getPlayers()) {
             if ( p == this ) continue;
             justAnyone = p;
-            if( false == Predicates.NOT_LOST.apply(p) ) continue;
-            if( anyWhoHasNotLost == null ) anyWhoHasNotLost = p;
             if( otherType == null && p.getType() != this.getType() ) otherType = p;
         }
-        return otherType != null ? otherType : ( anyWhoHasNotLost == null ? justAnyone : anyWhoHasNotLost ); 
+        return otherType != null ? otherType : justAnyone; 
     }
     
     /**
@@ -2586,7 +2583,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * 
      * @since 1.1.01
      */
-    public final void setMustAttackEntity(final Object o) {
+    public final void setMustAttackEntity(final GameEntity o) {
         this.mustAttackEntity = o;
     }
 
@@ -2597,7 +2594,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * @return the Player or Card (Planeswalker)
      * @since 1.1.01
      */
-    public final Object getMustAttackEntity() {
+    public final GameEntity getMustAttackEntity() {
         return this.mustAttackEntity;
     }
 

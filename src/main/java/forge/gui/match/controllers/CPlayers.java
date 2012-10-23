@@ -36,7 +36,7 @@ public enum CPlayers implements ICDoc {
      */
     @Override
     public void update() {
-        for(Player p : Singletons.getModel().getGame().getPlayers())
+        for(Player p : Singletons.getModel().getGame().getRegisteredPlayers())
             VPlayers.SINGLETON_INSTANCE.updatePlayerLabels(p);
         
         VPlayers.SINGLETON_INSTANCE.updateStormLabel();

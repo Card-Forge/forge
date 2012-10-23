@@ -20,6 +20,10 @@ package forge.game;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+import org.testng.collections.Lists;
 
 
 import forge.Card;
@@ -31,6 +35,7 @@ import forge.GameLog;
 import forge.StaticEffects;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
+import forge.card.trigger.TriggerType;
 import forge.game.phase.Cleanup;
 import forge.game.phase.Combat;
 import forge.game.phase.EndOfCombat;
@@ -53,7 +58,10 @@ import forge.game.zone.ZoneType;
  * "cleaned up" at each new game.
  */
 public class GameState {
-    private final List<Player> roPlayers;
+    private final List<Player> roIngamePlayers;
+    private final List<Player> players = new ArrayList<Player>();
+    private final List<Player> ingamePlayers = new ArrayList<Player>(); 
+    
     private final Cleanup cleanup = new Cleanup();
     private final EndOfTurn endOfTurn = new EndOfTurn();
     private final EndOfCombat endOfCombat = new EndOfCombat();
@@ -80,24 +88,35 @@ public class GameState {
      * @param players2 
      */
     public GameState(Iterable<LobbyPlayer> players2) { /* no more zones to map here */
-        List<Player> players = new ArrayList<Player>();
+        
         for(LobbyPlayer p : players2) {
-            players.add(getIngamePlayer(p));
+            Player pl = getIngamePlayer(p);
+            players.add(pl);
+            ingamePlayers.add(pl);
         }
-        roPlayers = Collections.unmodifiableList(players);
+        roIngamePlayers = Collections.unmodifiableList(ingamePlayers);
         action = new GameAction(this);
         stack = new MagicStack(this);
         phaseHandler = new PhaseHandler(this);
     }
 
     /**
-     * Gets the players.
+     * Gets the players who are still fighting to win.
      * 
      * @return the players
      */
     public final List<Player> getPlayers() {
-        return roPlayers;
+        return roIngamePlayers;
     }
+    /**
+     * Gets the players who participated in match (regardless of outcome).
+     * <i>Use this in UI and after match calculations</i>
+     * 
+     * @return the players
+     */
+    public final List<Player> getRegisteredPlayers() {
+        return Lists.newArrayList(players);
+    }    
 
     /**
      * Gets the cleanup step.
@@ -266,7 +285,7 @@ public class GameState {
      */
     public void setGameOver() {
         this.gameOver = true;
-        for(Player p : roPlayers) {
+        for(Player p : roIngamePlayers) {
             p.onGameOver();
         }
     }
@@ -435,12 +454,24 @@ public class GameState {
      * @return
      */
     public Player getNextPlayerAfter(Player playerTurn) {
-        int iPlayer = roPlayers.indexOf(playerTurn);
-        if( iPlayer == roPlayers.size() - 1)
-            iPlayer = -1;
-        iPlayer++;
-        // should also check that he has not lost yet.
-        return roPlayers.get(iPlayer);
+        int iPlayer = roIngamePlayers.indexOf(playerTurn);
+
+        // should do something if playerTurn has just lost!
+        if( -1 == iPlayer && !roIngamePlayers.isEmpty())
+        {
+            int iAlive;
+            do{
+                iPlayer = ( players.indexOf(playerTurn) + 1 ) % players.size();
+                iAlive = roIngamePlayers.indexOf(players.get(iPlayer));
+            } while(iAlive < 0);
+            iPlayer = iAlive;
+        } else { // for the case noone has died
+            if( iPlayer == roIngamePlayers.size() - 1)
+                iPlayer = -1;
+            iPlayer++;
+        }
+
+        return roIngamePlayers.get(iPlayer);
                 
     }
 
@@ -455,5 +486,18 @@ public class GameState {
             return new AIPlayer(player, this);
             
         }
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param p
+     */
+    public void onPlayerLost(Player p) {
+        ingamePlayers.remove(p);
+        
+        final Map<String, Object> runParams = new TreeMap<String, Object>();
+        runParams.put("Player", p);
+        this.getTriggerHandler().runTrigger(TriggerType.LosesGame, runParams);
+
     }
 }

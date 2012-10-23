@@ -445,7 +445,7 @@ public class ComputerUtilAttack {
         // Start with last planeswalker
         int n = defs.size() - 1;
 
-        final Object entity = ai.getMustAttackEntity();
+        final GameEntity entity = ai.getMustAttackEntity();
         if (null != entity) {
             final List<GameEntity> defenders = Singletons.getModel().getGame().getCombat().getDefenders();
             n = defenders.indexOf(entity);

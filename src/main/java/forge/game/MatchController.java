@@ -108,7 +108,7 @@ public class MatchController {
         try {
             Player localHuman = Aggregates.firstFieldEquals(currentGame.getPlayers(), Player.Accessors.FN_GET_TYPE, PlayerType.HUMAN);
             FControl.SINGLETON_INSTANCE.setPlayer(localHuman);
-            CMatchUI.SINGLETON_INSTANCE.initMatch(currentGame.getPlayers(), localHuman);
+            CMatchUI.SINGLETON_INSTANCE.initMatch(currentGame.getRegisteredPlayers(), localHuman);
             CDock.SINGLETON_INSTANCE.onGameStarts(currentGame, localHuman);
             Singletons.getModel().getPreferences().actuateMatchPreferences();
             Singletons.getControl().changeState(FControl.MATCH_SCREEN);
@@ -144,7 +144,7 @@ public class MatchController {
             currentGame.getGameLog().updateObservers();
 
             
-            for( Player p : currentGame.getPlayers() ) {
+            for( Player p : currentGame.getRegisteredPlayers() ) {
                 p.updateObservers();
                 p.getZone(ZoneType.Hand).updateObservers();
             }

@@ -116,12 +116,12 @@ public class ControlWinLose {
         GameOutcome lastGame = match.getLastGameOutcome();
         if ( games.isEmpty() ) return;
         
-        for (Player p: Singletons.getModel().getGame().getPlayers()) {
+        for (Player p: Singletons.getModel().getGame().getRegisteredPlayers()) {
             if (!p.getName().equals(lastGame.getWinner())) continue; // not a loser
             
             // remove all the lost cards from owners' decks
             List<CardPrinted> losses = new ArrayList<CardPrinted>();
-            for (Player loser : Singletons.getModel().getGame().getPlayers()) {
+            for (Player loser : Singletons.getModel().getGame().getRegisteredPlayers()) {
                 if (loser.equals(p)) {
                     continue; // not a loser
                 }

@@ -22,9 +22,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-
 import javax.swing.JFrame;
 
 import com.google.common.base.Predicate;
@@ -908,15 +905,16 @@ public class GameAction {
 
         GameEndReason reason = null;
         // award loses as SBE
+        List<Player> losers = null;;
         for (Player p : game.getPlayers() ) {
-            if ( Player.Predicates.NOT_LOST.apply(p) && p.checkLoseCondition() ) { // this will set appropriate outcomes
+            if ( p.checkLoseCondition() ) { // this will set appropriate outcomes
                 // Run triggers
-                final Map<String, Object> runParams = new TreeMap<String, Object>();
-                runParams.put("Player", p);
-                game.getTriggerHandler().runTrigger(TriggerType.LosesGame, runParams);
+                if ( losers == null) 
+                    losers = new ArrayList<Player>(3);
+                losers.add(p);
             }
         }
-        
+
         // Has anyone won by spelleffect?
         for (Player p : game.getPlayers() ) {
             if( !p.hasWon() ) continue;
@@ -928,10 +926,20 @@ public class GameAction {
                 
                 if ( !pl.loseConditionMet(GameLossReason.OpponentWon, p.getOutcome().altWinSourceName) )
                     reason = null; // they cannot lose!
+                else {
+                    if ( losers == null) 
+                        losers = new ArrayList<Player>(3);
+                    losers.add(p);
+                }
             }
             break;
-
         }
+        
+        // need a separate loop here, otherwise ConcurrentModificationException is raised
+        if( losers != null ) {
+            for (Player p : losers )
+                game.onPlayerLost(p);
+        }        
         
         // still unclear why this has not caught me conceding
         if ( reason == null && Iterables.size(Iterables.filter(game.getPlayers(), Player.Predicates.NOT_LOST)) == 1 )

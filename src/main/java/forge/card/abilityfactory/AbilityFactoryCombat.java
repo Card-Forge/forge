@@ -27,6 +27,7 @@ import forge.Card;
 
 import forge.CardLists;
 import forge.CardPredicates;
+import forge.GameEntity;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilityActivated;
@@ -580,7 +581,7 @@ public final class AbilityFactoryCombat {
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                Object entity;
+                GameEntity entity;
                 if (params.get("Defender").equals("Self")) {
                     entity = sa.getSourceCard();
                 } else {
