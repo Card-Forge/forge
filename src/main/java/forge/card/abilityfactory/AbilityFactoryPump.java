@@ -318,20 +318,20 @@ public class AbilityFactoryPump {
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
             return false;
         } else if (keyword.equals("Defender") || keyword.endsWith("CARDNAME can't attack.")) {
-            if (ph.isPlayerTurn(ai) || !CombatUtil.canAttack(card)
+            if (ph.isPlayerTurn(ai) || !CombatUtil.canAttack(card, human)
                     || (card.getNetCombatDamage() <= 0)
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
             }
         } else if (keyword.endsWith("CARDNAME can't attack or block.")) {
             if (sa.getAbilityFactory().getMapParams().containsKey("UntilYourNextTurn")) {
-                if (CombatUtil.canAttack(card) || CombatUtil.canBlock(card, true)) {
+                if (CombatUtil.canAttack(card, human) || CombatUtil.canBlock(card, true)) {
                     return true;
                 }
                 return false;
             }
             if (ph.isPlayerTurn(human)) {
-                if (!CombatUtil.canAttack(card)
+                if (!CombatUtil.canAttack(card, human)
                         || (card.getNetCombatDamage() <= 0)
                         || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                     return false;
@@ -342,7 +342,12 @@ public class AbilityFactoryPump {
                     return false;
                 }
 
-                List<Card> attackers = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.possibleAttackers);
+                List<Card> attackers = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        return (c.isCreature() && CombatUtil.canAttack(c, human));
+                    }
+                });
                 if (!CombatUtil.canBlockAtLeastOne(card, attackers)) {
                     return false;
                 }
@@ -353,7 +358,12 @@ public class AbilityFactoryPump {
                 return false;
             }
 
-            List<Card> attackers = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.possibleAttackers);
+            List<Card> attackers = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    return (c.isCreature() && CombatUtil.canAttack(c, human));
+                }
+            });
             if (!CombatUtil.canBlockAtLeastOne(card, attackers)) {
                 return false;
             }
@@ -376,7 +386,7 @@ public class AbilityFactoryPump {
                 return false;
             }
         } else if (keyword.endsWith("CARDNAME attacks each turn if able.")) {
-            if (ph.isPlayerTurn(ai) || !CombatUtil.canAttack(card) || !CombatUtil.canBeBlocked(card)
+            if (ph.isPlayerTurn(ai) || !CombatUtil.canAttack(card, human) || !CombatUtil.canBeBlocked(card)
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
             }
@@ -418,7 +428,7 @@ public class AbilityFactoryPump {
                 || keyword.contains("Bushido"));
         // give evasive keywords to creatures that can or do attack
         if (evasive) {
-            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0
                     || cardsCanBlock.isEmpty()) {
@@ -434,7 +444,7 @@ public class AbilityFactoryPump {
                 return true;
             }
             Predicate<Card> flyingOrReach = Predicates.or(CardPredicates.hasKeyword("Flying"), CardPredicates.hasKeyword("Reach"));
-            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0 || !Iterables.any(cardsCanBlock, Predicates.not(flyingOrReach))) {
                 return false;
@@ -447,7 +457,7 @@ public class AbilityFactoryPump {
                     && CombatUtil.lifeInDanger(ai, Singletons.getModel().getGame().getCombat())) {
                 return true;
             }
-            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0
                     || CardLists.getNotKeyword(cardsCanBlock, "Horsemanship").isEmpty()) {
@@ -474,7 +484,7 @@ public class AbilityFactoryPump {
                     }
                 }
             } else if (ph.isPlayerTurn(ai) && ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                    && CombatUtil.canAttack(card)) {
+                    && CombatUtil.canAttack(card, opp)) {
                 List<Card> blockers = opp.getCreaturesInPlay();
                 for (Card blocker : blockers) {
                     if (CombatUtil.canBlock(card, blocker, combat)
@@ -485,32 +495,32 @@ public class AbilityFactoryPump {
             }
             return false;
         } else if (combatRelevant) {
-            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                     || (opp.getCreaturesInPlay().size() < 1)
                     || cardsCanBlock.isEmpty()) {
                 return false;
             }
         } else if (keyword.equals("Double Strike")) {
-            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || card.isAttacking())
                     || card.getNetCombatDamage() <= 0
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 return false;
             }
         } else if (keyword.startsWith("Rampage")) {
-            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || cardsCanBlock.size() < 2) {
                 return false;
             }
         } else if (keyword.startsWith("Flanking")) {
-            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || CardLists.getNotKeyword(cardsCanBlock, "Flanking").isEmpty()) {
                 return false;
             }
         } else if (keyword.startsWith("Trample")) {
-            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || card.isAttacking())
                     || !CombatUtil.canBeBlocked(card)
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || cardsCanBlock.isEmpty()
@@ -525,7 +535,7 @@ public class AbilityFactoryPump {
                 return true;
             }
             if ((ph.isPlayerTurn(opp))
-                    || !(CombatUtil.canAttack(card) || card.isAttacking())
+                    || !(CombatUtil.canAttack(card, opp) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 return false;
             }
@@ -548,7 +558,7 @@ public class AbilityFactoryPump {
                 return false;
             }
         } else if (keyword.equals("Vigilance")) {
-            if (ph.isPlayerTurn(opp) || !CombatUtil.canAttack(card)
+            if (ph.isPlayerTurn(opp) || !CombatUtil.canAttack(card, opp)
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
                     || CardLists.getNotKeyword(opp.getCreaturesInPlay(), "Defender").size() < 1) {
                 return false;
@@ -584,7 +594,7 @@ public class AbilityFactoryPump {
                 return false;
             }
         } else if (keyword.equals("Islandwalk")) {
-            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0
                     || CardLists.getType(opp.getLandsInPlay(), "Island").isEmpty()
@@ -592,7 +602,7 @@ public class AbilityFactoryPump {
                 return false;
             }
         } else if (keyword.equals("Swampwalk")) {
-            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0
                     || CardLists.getType(opp.getLandsInPlay(), "Swamp").isEmpty()
@@ -600,7 +610,7 @@ public class AbilityFactoryPump {
                 return false;
             }
         } else if (keyword.equals("Mountainwalk")) {
-            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0
                     || CardLists.getType(opp.getLandsInPlay(), "Mountain").isEmpty()
@@ -608,7 +618,7 @@ public class AbilityFactoryPump {
                 return false;
             }
         } else if (keyword.equals("Forestwalk")) {
-            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card) || card.isAttacking())
+            if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
                     || card.getNetCombatDamage() <= 0
                     || CardLists.getType(opp.getLandsInPlay(), "Forest").isEmpty()
@@ -1810,7 +1820,7 @@ public class AbilityFactoryPump {
                 if (phase.equals(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) && c.isAttacking()) {
                     return true;
                 }
-                if (phase.isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && CombatUtil.canAttack(c)) {
+                if (phase.isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS) && CombatUtil.canAttack(c, opp)) {
                     return true;
                 }
                 return false;

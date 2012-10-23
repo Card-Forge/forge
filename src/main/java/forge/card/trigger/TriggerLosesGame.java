@@ -3,7 +3,6 @@ package forge.card.trigger;
 import java.util.HashMap;
 
 import forge.Card;
-import forge.card.TriggerReplacementBase;
 import forge.card.spellability.SpellAbility;
 
 /** 

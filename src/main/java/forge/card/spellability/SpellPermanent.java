@@ -291,7 +291,7 @@ public class SpellPermanent extends Spell {
         }
         // Wait for Main2 if possible
         if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.MAIN1)
-                && !ComputerUtil.castPermanentInMain1(this, ai)) {
+                && !ComputerUtil.castPermanentInMain1(ai, this)) {
             return false;
         }
         // save cards with flash for surprise blocking

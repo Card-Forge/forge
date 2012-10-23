@@ -41,6 +41,7 @@ import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
+import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -252,39 +253,41 @@ public class AbilityFactoryEffect {
      * @return a boolean.
      */
     public static boolean effectCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
+        final GameState game = Singletons.getModel().getGame();
         final Random r = MyRandom.getRandom();
         final HashMap<String, String> params = af.getMapParams();
         boolean randomReturn = r.nextFloat() <= .6667;
+        final Player opp = ai.getOpponent();
         String logic = "";
 
         if (params.containsKey("AILogic")) {
             logic = params.get("AILogic");
-            final PhaseHandler phase = Singletons.getModel().getGame().getPhaseHandler();
+            final PhaseHandler phase = game.getPhaseHandler();
             if (logic.equals("BeginningOfOppTurn")) {
                 if (phase.isPlayerTurn(ai.getOpponent()) || phase.getPhase().isAfter(PhaseType.DRAW)) {
                     return false;
                 }
                 randomReturn = true;
             } else if (logic.equals("Fog")) {
-                if (Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
+                if (game.getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer())) {
                     return false;
                 }
-                if (!Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
+                if (!game.getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     return false;
                 }
-                if (Singletons.getModel().getGame().getStack().size() != 0) {
+                if (game.getStack().size() != 0) {
                     return false;
                 }
-                if (Singletons.getModel().getGame().getPhaseHandler().isPreventCombatDamageThisTurn()) {
+                if (game.getPhaseHandler().isPreventCombatDamageThisTurn()) {
                     return false;
                 }
-                if (!CombatUtil.lifeInDanger(ai, Singletons.getModel().getGame().getCombat())) {
+                if (!CombatUtil.lifeInDanger(ai, game.getCombat())) {
                     return false;
                 }
                 final Target tgt = sa.getTarget();
                 if (tgt != null) {
                     tgt.resetTargets();
-                    List<Card> list = Singletons.getModel().getGame().getCombat().getAttackerList();
+                    List<Card> list = game.getCombat().getAttackerList();
                     list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
                     list = CardLists.getTargetableCards(list, sa);
                     Card target = CardFactoryUtil.getBestCreatureAI(list);
@@ -298,13 +301,13 @@ public class AbilityFactoryEffect {
                 randomReturn = true;
             } else if (logic.equals("Evasion")) {
                 List<Card> comp = ai.getCreaturesInPlay();
-                List<Card> human = ai.getOpponent().getCreaturesInPlay();
+                List<Card> human = opp.getCreaturesInPlay();
 
                 // only count creatures that can attack or block
                 comp = CardLists.filter(comp, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        return CombatUtil.canAttack(c);
+                        return CombatUtil.canAttack(c, opp);
                     }
                 });
                 human = CardLists.filter(human, new Predicate<Card>() {

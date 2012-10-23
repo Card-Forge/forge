@@ -800,7 +800,8 @@ public final class AbilityFactoryDebuff {
         // final Card source = sa.getSourceCard();
         final Card hostCard = af.getHostCard();
         final HashMap<String, String> params = af.getMapParams();
-
+        final Player opp = ai.getOpponent();
+        
         final boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn()); // to
         // prevent
         // runaway
@@ -812,16 +813,17 @@ public final class AbilityFactoryDebuff {
 
         List<Card> comp = ai.getCardsIn(ZoneType.Battlefield);
         comp = CardLists.getValidCards(comp, valid, hostCard.getController(), hostCard);
-        List<Card> human = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
+        List<Card> human = opp.getCardsIn(ZoneType.Battlefield);
         human = CardLists.getValidCards(human, valid, hostCard.getController(), hostCard);
 
         // TODO - add blocking situations here also
 
+        
         // only count creatures that can attack
         human = CardLists.filter(human, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return CombatUtil.canAttack(c);
+                return CombatUtil.canAttack(c, opp);
             }
         });
 

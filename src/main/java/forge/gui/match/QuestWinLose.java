@@ -164,6 +164,7 @@ public class QuestWinLose extends ControlWinLose {
         // TODO: We don't have a enum for difficulty?
         int difficulty = qData.getAchievements().getDifficulty();
 
+        
         final int wins = qData.getAchievements().getWin();
         // Win case
         if (this.wonMatch) {
@@ -189,15 +190,15 @@ public class QuestWinLose extends ControlWinLose {
             if ((wins > 0) && ((wins % 80) == 0)) {
                 this.awardJackpot();
             }
+
+            // Unlock new sets?
+            if (wins % 50 == 49) {
+                unlockSets();
+            }        
         }
         // Lose case
         else {
             this.penalizeLoss();
-        }
-
-        // Unlock new sets?
-        if (this.wonMatch && wins % 50 == 49) {
-            unlockSets();
         }
 
         // Grant booster on a win, or on a loss in easy mode

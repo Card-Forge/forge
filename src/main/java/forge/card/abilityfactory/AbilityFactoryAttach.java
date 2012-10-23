@@ -392,11 +392,11 @@ public class AbilityFactoryAttach {
      *            the logic
      * @return the card
      */
-    public static Card attachGeneralAI(final Player aiPlayer, final SpellAbility sa, final List<Card> list, final boolean mandatory,
+    public static Card attachGeneralAI(final Player ai, final SpellAbility sa, final List<Card> list, final boolean mandatory,
             final Card attachSource, final String logic) {
-        Player prefPlayer = aiPlayer.getOpponent();
+        Player prefPlayer = ai.getOpponent();
         if ("Pump".equals(logic) || "Animate".equals(logic) ) {
-            prefPlayer = aiPlayer;
+            prefPlayer = ai;
         }
         // Some ChangeType cards are beneficial, and PrefPlayer should be
         // changed to represent that
@@ -415,7 +415,7 @@ public class AbilityFactoryAttach {
         } else if ("Curse".equals(logic)) {
             c = AbilityFactoryAttach.attachAICursePreference(sa, prefList, mandatory, attachSource);
         } else if ("Pump".equals(logic)) {
-            c = AbilityFactoryAttach.attachAIPumpPreference(sa, prefList, mandatory, attachSource);
+            c = AbilityFactoryAttach.attachAIPumpPreference(ai, sa, prefList, mandatory, attachSource);
         } else if ("ChangeType".equals(logic)) {
             c = AbilityFactoryAttach.attachAIChangeTypePreference(sa, prefList, mandatory, attachSource);
         } else if ("KeepTapped".equals(logic)) {
@@ -688,7 +688,7 @@ public class AbilityFactoryAttach {
      *            the attach source
      * @return the card
      */
-    public static Card attachAIPumpPreference(final SpellAbility sa, final List<Card> list, final boolean mandatory,
+    public static Card attachAIPumpPreference(final Player ai, final SpellAbility sa, final List<Card> list, final boolean mandatory,
             final Card attachSource) {
         // AI For choosing a Card to Pump
         Card c = null;
@@ -724,7 +724,7 @@ public class AbilityFactoryAttach {
             magnetList = CardLists.filter(magnetList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return CombatUtil.canAttack(c);
+                    return CombatUtil.canAttack(c, ai.getOpponent());
                 }
             });
 

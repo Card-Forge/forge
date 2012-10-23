@@ -40,6 +40,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
@@ -998,7 +999,7 @@ public class AbilityFactoryPermanentState {
      */
     private static boolean tapPrefTargeting(final Player ai, final Card source, final Target tgt, final AbilityFactory af,
             final SpellAbility sa, final boolean mandatory) {
-        Player opp = ai.getOpponent();
+        final Player opp = ai.getOpponent();
         List<Card> tapList = opp.getCardsIn(ZoneType.Battlefield);
         tapList = CardLists.filter(tapList, Presets.UNTAPPED);
         tapList = CardLists.getValidCards(tapList, tgt.getValidTgts(), source.getController(), source);
@@ -1038,7 +1039,12 @@ public class AbilityFactoryPermanentState {
                     //Combat has already started
                     attackers = Singletons.getModel().getGame().getCombat().getAttackerList();
                 } else {
-                    attackers = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES_CAN_ATTACK);
+                    attackers = CardLists.filter(ai.getCreaturesInPlay(), new Predicate<Card>() {
+                        @Override
+                        public boolean apply(final Card c) {
+                            return CombatUtil.canAttack(c, opp);
+                        }
+                    });
                     attackers.remove(sa.getSourceCard());
                 }
                 Predicate<Card> findBlockers = CardPredicates.possibleBlockerForAtLeastOne(attackers);
@@ -1051,7 +1057,12 @@ public class AbilityFactoryPermanentState {
                     && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 // Tap creatures possible blockers before combat during AI's turn.
                 if (Iterables.any(tapList, CardPredicates.Presets.CREATURES)) {
-                    List<Card> creatureList = CardLists.filter(tapList, CardPredicates.Presets.CREATURES_CAN_ATTACK);
+                    List<Card> creatureList = CardLists.filter(tapList, new Predicate<Card>() {
+                        @Override
+                        public boolean apply(final Card c) {
+                            return c.isCreature() && CombatUtil.canAttack(c, opp);
+                        }
+                    });
                     choice = CardFactoryUtil.getBestCreatureAI(creatureList);
                 } else { // no creatures available
                     choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, sa, false);

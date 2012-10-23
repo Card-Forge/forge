@@ -26,7 +26,6 @@ import com.google.common.base.Predicate;
 import forge.Card;
 
 import forge.CardLists;
-import forge.CardPredicates;
 import forge.Counters;
 import forge.GameEntity;
 import forge.Singletons;
@@ -74,15 +73,16 @@ public class ComputerUtilAttack {
      * @param possibleBlockers
      *            a {@link forge.CardList} object.
      */
-    public ComputerUtilAttack(final List<Card> possibleAttackers, final List<Card> possibleBlockers) {
-        this.humanList = new ArrayList<Card>(possibleBlockers);
-        this.humanList = CardLists.filter(this.humanList, CardPredicates.Presets.CREATURES);
+    public ComputerUtilAttack(final Player ai, final Player human) {
+        this.humanList = human.getCreaturesInPlay();
+        this.computerList = ai.getCreaturesInPlay();
 
-        this.computerList = new ArrayList<Card>(possibleAttackers);
-        this.computerList = CardLists.filter(this.computerList, CardPredicates.Presets.CREATURES);
-
-        this.attackers = this.getPossibleAttackers(possibleAttackers);
-        this.blockers = this.getPossibleBlockers(possibleBlockers, this.attackers);
+        this.attackers = new ArrayList<Card>();
+        for(Card c : computerList) 
+            if (CombatUtil.canAttack(c, human))
+                attackers.add(c);
+        
+        this.blockers = this.getPossibleBlockers(humanList, this.attackers);
     } // constructor
 
     /**
@@ -156,26 +156,6 @@ public class ComputerUtilAttack {
 
         return false;
     }
-
-    /**
-     * <p>
-     * getPossibleAttackers.
-     * </p>
-     * 
-     * @param in
-     *            a {@link forge.CardList} object.
-     * @return a {@link forge.CardList} object.
-     */
-    public final List<Card> getPossibleAttackers(final List<Card> in) {
-        List<Card> list = new ArrayList<Card>(in);
-        list = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return CombatUtil.canAttack(c);
-            }
-        });
-        return list;
-    } // getPossibleAttackers()
 
     /**
      * <p>

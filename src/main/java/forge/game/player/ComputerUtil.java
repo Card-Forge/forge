@@ -1768,8 +1768,7 @@ public class ComputerUtil {
      */
     public static Combat getAttackers(final Player ai) {
         final Player opp = ai.getOpponent();
-        final ComputerUtilAttack att = new ComputerUtilAttack(ai.getCardsIn(ZoneType.Battlefield),
-                opp.getCardsIn(ZoneType.Battlefield));
+        final ComputerUtilAttack att = new ComputerUtilAttack(ai, opp);
 
         return att.getAttackers(ai, opp);
     }
@@ -2040,7 +2039,7 @@ public class ComputerUtil {
      *            a SpellAbility object.
      * @return a boolean.
      */
-    public static boolean castPermanentInMain1(final SpellAbility sa, final Player ai) {
+    public static boolean castPermanentInMain1(final Player ai, final SpellAbility sa) {
         final Card card = sa.getSourceCard();
         if (card.getSVar("PlayMain1").equals("TRUE")) {
             return true;
@@ -2061,7 +2060,7 @@ public class ComputerUtil {
                     return true;
                 }
             }
-            if (card.isEquipment() && buffedcard.isCreature() && CombatUtil.canAttack(buffedcard)) {
+            if (card.isEquipment() && buffedcard.isCreature() && CombatUtil.canAttack(buffedcard, ai.getOpponent())) {
                 return true;
             }
             if (card.isCreature() && buffedcard.hasKeyword("Soulbond") && !buffedcard.isPaired()) {

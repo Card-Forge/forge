@@ -546,7 +546,7 @@ public class Combat {
      */
     public Player getDefendingPlayerRelatedTo(final Card source) {
 
-        Player defender = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().getOpponent();
+        Player defender = getDefenderPlayerByAttacker(source);
         Card attacker = source;
         if (source.isAura()) {
             attacker = source.getEnchantingCard();

@@ -120,13 +120,6 @@ public final class CardPredicates {
         };
     }    
     
-    public static final Predicate<Card> possibleAttackers = new Predicate<Card>() {
-        @Override
-        public boolean apply(final Card c) {
-            return (c.isCreature() && CombatUtil.canAttack(c));
-        }
-    };
-
     public final static Predicate<Card> isProtectedFrom(final Card source) {
         return new Predicate<Card>() {
             @Override
@@ -183,13 +176,6 @@ public final class CardPredicates {
             }
         };
         
-
-        public static final Predicate<Card> CREATURES_CAN_ATTACK = new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.isCreature() && CombatUtil.canAttack(c);
-            }
-        };
 
         /**
          * a Predicate<Card> to get all enchantments.

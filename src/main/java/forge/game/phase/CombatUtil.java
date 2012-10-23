@@ -810,32 +810,9 @@ public class CombatUtil {
         if (cntAttackers > 0 && Singletons.getModel().getGame().isCardInPlay("Dueling Grounds")) {
             return false;
         }
-        
-        Player defender = c.getController().getOpponent();
-        if (combat != null) {
-            final GameEntity def = combat.getDefender();
-            if (def instanceof Player) {
-                defender = (Player) def;
-            } else {
-                defender = ((Card) def).getController();
-            }
-        }
 
-        return CombatUtil.canAttack(c, defender);
-    }
-
-    // can a creature attack at the moment?
-    /**
-     * <p>
-     * canAttack.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a boolean.
-     */
-    public static boolean canAttack(final Card c) {
-        return canAttack(c, c.getController().getOpponent());
+        final GameEntity def = combat.getDefender();
+        return CombatUtil.canAttack(c, def instanceof Player ? (Player) def : ((Card) def).getController());
     }
 
     // can a creature attack at the moment?
