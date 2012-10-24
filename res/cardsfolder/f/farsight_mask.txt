@@ -2,7 +2,7 @@ Name:Farsight Mask
 ManaCost:5
 Types:Artifact
 Text:no text
-T:Mode$ DamageDone | ValidSource$ Card.YouDontCtrl | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | IsPresent$ Card.Self+untapped | TriggerDescription$ Whenever a source an opponent controls deals damage to you, if CARDNAME is untapped, you may draw a card.
+T:Mode$ DamageDone | ValidSource$ Card.OppCtrl | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | IsPresent$ Card.Self+untapped | TriggerDescription$ Whenever a source an opponent controls deals damage to you, if CARDNAME is untapped, you may draw a card.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/farsight_mask.jpg

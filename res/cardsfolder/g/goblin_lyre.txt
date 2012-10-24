@@ -6,7 +6,7 @@ A:AB$ FlipACoin | Cost$ Sac<1/CARDNAME> | WinSubAbility$ DBDamageOpp | LoseSubAb
 SVar:DBDamageOpp:DB$ DealDamage | Cost$ 0 | Defined$ Targeted | NumDmg$ X | References$ X
 SVar:DBDamageYou:DB$ DealDamage | Cost$ 0 | Defined$ You | NumDmg$ Y | References$ Y
 SVar:X:Count$Valid Creature.YouCtrl
-SVar:Y:Count$Valid Creature.YouDontCtrl
+SVar:Y:Count$Valid Creature.OppCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_lyre.jpg

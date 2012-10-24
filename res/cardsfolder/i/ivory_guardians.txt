@@ -5,7 +5,7 @@ Text:no text
 PT:3/3
 K:Protection from red
 S:Mode$ Continuous | Affected$ Creature.namedIvory Guardians | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ Creatures named CARDNAME get +1/+1 as long as an opponent controls a nontoken red permanent.
-SVar:X:Count$Valid Permanent.Red+nonToken+YouDontCtrl
+SVar:X:Count$Valid Permanent.Red+nonToken+OppCtrl
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ivory_guardians.jpg

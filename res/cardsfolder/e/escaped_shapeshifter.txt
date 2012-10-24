@@ -11,14 +11,14 @@ S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection from blue | Ch
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection from black | CheckSVar$ BLACK | SVarCompare$ GE1
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection from red | CheckSVar$ RED | SVarCompare$ GE1
 S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Protection from green | CheckSVar$ GREEN | SVarCompare$ GE1
-SVar:FLYING:Count$Valid Creature.withFlying+notnamed Escaped Shapeshifter+YouDontCtrl
-SVar:FIRSTSTRIKE:Count$Valid Creature.withFirst Strike+notnamed Escaped Shapeshifter+YouDontCtrl
-SVar:TRAMPLE:Count$Valid Creature.withTrample+notnamed Escaped Shapeshifter+YouDontCtrl
-SVar:WHITE:Count$Valid Creature.withProtection from white+notnamed Escaped Shapeshifter+YouDontCtrl
-SVar:BLUE:Count$Valid Creature.withProtection from blue+notnamed Escaped Shapeshifter+YouDontCtrl
-SVar:BLACK:Count$Valid Creature.withProtection from black+notnamed Escaped Shapeshifter+YouDontCtrl
-SVar:RED:Count$Valid Creature.withProtection from red+notnamed Escaped Shapeshifter+YouDontCtrl
-SVar:GREEN:Count$Valid Creature.withProtection from green+notnamed Escaped Shapeshifter+YouDontCtrl
+SVar:FLYING:Count$Valid Creature.withFlying+notnamed Escaped Shapeshifter+OppCtrl
+SVar:FIRSTSTRIKE:Count$Valid Creature.withFirst Strike+notnamed Escaped Shapeshifter+OppCtrl
+SVar:TRAMPLE:Count$Valid Creature.withTrample+notnamed Escaped Shapeshifter+OppCtrl
+SVar:WHITE:Count$Valid Creature.withProtection from white+notnamed Escaped Shapeshifter+OppCtrl
+SVar:BLUE:Count$Valid Creature.withProtection from blue+notnamed Escaped Shapeshifter+OppCtrl
+SVar:BLACK:Count$Valid Creature.withProtection from black+notnamed Escaped Shapeshifter+OppCtrl
+SVar:RED:Count$Valid Creature.withProtection from red+notnamed Escaped Shapeshifter+OppCtrl
+SVar:GREEN:Count$Valid Creature.withProtection from green+notnamed Escaped Shapeshifter+OppCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/escaped_shapeshifter.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/62.jpg

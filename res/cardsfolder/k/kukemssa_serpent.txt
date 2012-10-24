@@ -4,7 +4,7 @@ Types:Creature Serpent
 Text:no text
 PT:4/3
 K:CARDNAME can't attack unless defending player controls an Island.
-A:AB$ Animate | Cost$ U Sac<1/Island> | ValidTgts$ Land.YouDontCtrl | TgtPrompt$ Select target land an opponent controls | Types$ Island | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True | SpellDescription$ Target land an opponent controls becomes an Island until end of turn.
+A:AB$ Animate | Cost$ U Sac<1/Island> | ValidTgts$ Land.OppCtrl | TgtPrompt$ Select target land an opponent controls | Types$ Island | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True | SpellDescription$ Target land an opponent controls becomes an Island until end of turn.
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Island.YouCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When you control no Islands, sacrifice CARDNAME.
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 SVar:NeedsToPlay:Island.YouCtrl

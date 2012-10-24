@@ -4,7 +4,7 @@ Types:Creature Djinn
 Text:no text
 PT:4/5
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ At the beginning of your upkeep, target non-Wall creature an opponent controls gains forestwalk until your next upkeep.
-SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Creature.nonWall+YouDontCtrl | TgtPrompt$ Select target non-Wall creature an opponent controls | KW$ Forestwalk | UntilYourNextUpkeep$ True
+SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Creature.nonWall+OppCtrl | TgtPrompt$ Select target non-Wall creature an opponent controls | KW$ Forestwalk | UntilYourNextUpkeep$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/erhnam_djinn.jpg
 Oracle:At the beginning of your upkeep, target non-Wall creature an opponent controls gains forestwalk until your next upkeep.

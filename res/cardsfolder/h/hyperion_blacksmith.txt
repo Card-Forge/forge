@@ -3,7 +3,7 @@ ManaCost:1 R R
 Types:Creature Human Artificer
 Text:no text
 PT:2/2
-A:AB$ TapOrUntap | Cost$ T | ValidTgts$ Artifact.YouDontCtrl | TgtPrompt$ Select target artifact an opponent controls | SpellDescription$ You may tap or untap target artifact an opponent controls.
+A:AB$ TapOrUntap | Cost$ T | ValidTgts$ Artifact.OppCtrl | TgtPrompt$ Select target artifact an opponent controls | SpellDescription$ You may tap or untap target artifact an opponent controls.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hyperion_blacksmith.jpg

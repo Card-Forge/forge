@@ -4,7 +4,7 @@ Types:Creature Giant
 Text:no text
 PT:6/6
 #T:Mode$ SpellAbilityCast | TargetsValid$ Card.Self | ValidControllingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigOverridden | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays 2.
-T:Mode$ BecomesTarget | ValidSource$ Card.YouDontCtrl | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays 2.
+T:Mode$ BecomesTarget | ValidSource$ Card.OppCtrl | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigCounter | TriggerDescription$ Whenever CARDNAME becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays 2.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTap | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, tap target permanent. It doesn't untap during its controller's next untap step.
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigTap | Secondary$ True | TriggerDescription$ Whenever CARDNAME enters the battlefield or attacks, tap target permanent. It doesn't untap during its controller's next untap step.
 SVar:TrigTap:AB$Tap | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Choose target permanent. | SubAbility$ DBPump

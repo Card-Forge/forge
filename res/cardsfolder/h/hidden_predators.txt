@@ -2,7 +2,7 @@ Name:Hidden Predators
 ManaCost:G
 Types:Enchantment
 Text:no text
-T:Mode$ Always | LifeTotal$ Opponent | IsPresent$ Creature.powerGE4+YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigLurkingJackalsAnimate | IsPresent2$ Card.Self+Enchantment | TriggerDescription$ When an opponent controls a creature with power 4 or greater, if CARDNAME is an enchantment, CARDNAME becomes a 4/4 Beast creature.
+T:Mode$ Always | IsPresent$ Creature.powerGE4+OppCtrl | TriggerZones$ Battlefield | Execute$ TrigLurkingJackalsAnimate | IsPresent2$ Card.Self+Enchantment | TriggerDescription$ When an opponent controls a creature with power 4 or greater, if CARDNAME is an enchantment, CARDNAME becomes a 4/4 Beast creature.
 SVar:TrigLurkingJackalsAnimate:AB$ Animate | Cost$ 0 | Types$ Creature,Beast | Power$ 4 | Toughness$ 4 | OverwriteTypes$ True | Permanent$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hidden_predators.jpg

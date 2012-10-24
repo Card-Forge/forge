@@ -4,7 +4,7 @@ Types:Creature Human Knight
 Text:no text
 PT:2/2
 K:First Strike
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | IsPresent$ Land.YouDontCtrl | PresentCompare$ GTX | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, if an opponent controls more lands than you, you may search your library for a Plains card, put it onto the battlefield, then shuffle your library.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigChange | IsPresent$ Land.OppCtrl | PresentCompare$ GTX | OptionalDecider$ You | TriggerDescription$ When CARDNAME enters the battlefield, if an opponent controls more lands than you, you may search your library for a Plains card, put it onto the battlefield, then shuffle your library.
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.Plains | ChangeNum$ 1
 SVar:X:Count$Valid Land.YouCtrl
 SVar:Rarity:Rare

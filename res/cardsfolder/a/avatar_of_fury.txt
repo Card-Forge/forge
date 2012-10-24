@@ -6,7 +6,7 @@ PT:6/6
 K:Flying
 A:AB$ Pump | Cost$ R | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
 S:Mode$ ReduceCost | ValidCard$ Card.Self | Type$ Spell | Amount$ 6 | EffectZone$ All | CheckSVar$ X | SVarCompare$ GE7 | Description$ If an opponent controls seven or more lands, CARDNAME costs 6 less to cast.
-SVar:X:Count$Valid Land.YouDontCtrl
+SVar:X:Count$Valid Land.OppCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avatar_of_fury.jpg
 SetInfo:PCY|Rare|http://magiccards.info/scans/en/pr/82.jpg
