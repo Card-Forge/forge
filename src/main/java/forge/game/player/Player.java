@@ -216,8 +216,13 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * @return
      */
     public final List<Player> getOpponents() {
-        Predicate<Player> enemy = com.google.common.base.Predicates.not(Player.Predicates.isType(this.getType()));
-        return Lists.newArrayList(Iterables.filter(Singletons.getModel().getGame().getPlayers(), enemy));
+        List<Player> result = new ArrayList<Player>();
+        for (Player p : Singletons.getModel().getGame().getPlayers()) {
+            if (p == this || p.getType() == this.getType())
+                continue;
+            result.add(p);
+        }
+        return result;
     }
     
     /**
@@ -226,8 +231,13 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * @return
      */
     public final List<Player> getAllies() {
-        Predicate<Player> enemy = Player.Predicates.isType(this.getType());
-        return Lists.newArrayList(Iterables.filter(Singletons.getModel().getGame().getPlayers(), enemy));
+        List<Player> result = new ArrayList<Player>();
+        for (Player p : Singletons.getModel().getGame().getPlayers()) {
+            if (p == this || p.getType() != this.getType())
+                continue;
+            result.add(p);
+        }
+        return result;
     }
     
     

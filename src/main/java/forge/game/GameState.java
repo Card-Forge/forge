@@ -461,7 +461,6 @@ public class GameState {
             do{
                 iPlayer = ( iPlayer + 1 ) % allPlayers.size();
                 iAlive = roIngamePlayers.indexOf(allPlayers.get(iPlayer));
-                
             } while(iAlive < 0);
             iPlayer = iAlive;
         } else { // for the case noone has died
