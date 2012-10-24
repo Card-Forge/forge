@@ -4116,6 +4116,7 @@ res/cardsfolder/g/grand_abolisher.txt -text
 res/cardsfolder/g/grand_arbiter_augustin_iv.txt svneol=native#text/plain
 res/cardsfolder/g/grand_architect.txt -text
 res/cardsfolder/g/grand_coliseum.txt svneol=native#text/plain
+res/cardsfolder/g/grand_melee.txt -text
 res/cardsfolder/g/grandmother_sengir.txt svneol=native#text/plain
 res/cardsfolder/g/granger_guildmage.txt svneol=native#text/plain
 res/cardsfolder/g/granite_gargoyle.txt svneol=native#text/plain
@@ -7196,6 +7197,7 @@ res/cardsfolder/p/phytohydra.txt svneol=native#text/plain
 res/cardsfolder/p/pianna_nomad_captain.txt svneol=native#text/plain
 res/cardsfolder/p/pierce_strider.txt svneol=native#text/plain
 res/cardsfolder/p/piety.txt svneol=native#text/plain
+res/cardsfolder/p/piety_charm.txt -text
 res/cardsfolder/p/pilgrims_eye.txt svneol=native#text/plain
 res/cardsfolder/p/pili_pala.txt svneol=native#text/plain
 res/cardsfolder/p/pillage.txt svneol=native#text/plain
