@@ -1,0 +1,15 @@
+Name:Jasmine Seer
+ManaCost:3 W
+Types:Creature Human Wizard
+Text:no text
+PT:1/1
+A:AB$ Reveal | Cost$ 2 W T | Defined$ You | RevealValid$ Card.White | AnyNumber$ True | RememberRevealed$ True | SubAbility$ DBJasmineLife | SpellDescription$ Reveal any number of white cards in your hand. You gain 2 life for each card revealed this way.
+SVar:DBJasmineLife:DB$ GainLife | LifeAmount$ JasmineX | SubAbility$ DBJasmineCleanup | References$ JasmineX
+SVar:JasmineX:Remembered$Amount.Twice
+SVar:DBJasmineCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jasmine_seer.jpg
+SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/9.jpg
+Oracle:{2}{W}, {T}: Reveal any number of white cards in your hand. You gain 2 life for each card revealed this way.
+End

@@ -1638,6 +1638,7 @@ res/cardsfolder/c/cinder_elemental.txt svneol=native#text/plain
 res/cardsfolder/c/cinder_giant.txt svneol=native#text/plain
 res/cardsfolder/c/cinder_marsh.txt svneol=native#text/plain
 res/cardsfolder/c/cinder_pyromancer.txt svneol=native#text/plain
+res/cardsfolder/c/cinder_seer.txt -text
 res/cardsfolder/c/cinder_shade.txt svneol=native#text/plain
 res/cardsfolder/c/cinder_storm.txt svneol=native#text/plain
 res/cardsfolder/c/cinder_wall.txt svneol=native#text/plain
@@ -4967,6 +4968,7 @@ res/cardsfolder/i/ivory_mask.txt -text
 res/cardsfolder/i/ivory_tower.txt svneol=native#text/plain
 res/cardsfolder/i/ivy_dancer.txt svneol=native#text/plain
 res/cardsfolder/i/ivy_elemental.txt svneol=native#text/plain
+res/cardsfolder/i/ivy_seer.txt -text
 res/cardsfolder/i/iwamori_of_the_open_fist.txt svneol=native#text/plain
 res/cardsfolder/i/ixidor_reality_sculptor.txt -text
 res/cardsfolder/i/ixidors_will.txt svneol=native#text/plain
@@ -5012,6 +5014,7 @@ res/cardsfolder/j/jarad_golgari_lich_lord.txt -text
 res/cardsfolder/j/jarads_orders.txt -text
 res/cardsfolder/j/jareth_leonine_titan.txt svneol=native#text/plain
 res/cardsfolder/j/jasmine_boreal.txt svneol=native#text/plain
+res/cardsfolder/j/jasmine_seer.txt -text
 res/cardsfolder/j/jawbone_skulkin.txt svneol=native#text/plain
 res/cardsfolder/j/jaya_ballard_task_mage.txt svneol=native#text/plain
 res/cardsfolder/j/jayemdae_tome.txt svneol=native#text/plain
@@ -6646,6 +6649,7 @@ res/cardsfolder/n/nightscape_familiar.txt svneol=native#text/plain
 res/cardsfolder/n/nightscape_master.txt svneol=native#text/plain
 res/cardsfolder/n/nightshade_peddler.txt -text
 res/cardsfolder/n/nightshade_schemers.txt svneol=native#text/plain
+res/cardsfolder/n/nightshade_seer.txt -text
 res/cardsfolder/n/nightshade_stinger.txt svneol=native#text/plain
 res/cardsfolder/n/nightsky_mimic.txt svneol=native#text/plain
 res/cardsfolder/n/nightsoil_kami.txt svneol=native#text/plain
@@ -8171,6 +8175,7 @@ res/cardsfolder/s/sabertooth_nishoba.txt svneol=native#text/plain
 res/cardsfolder/s/sabertooth_wyvern.txt svneol=native#text/plain
 res/cardsfolder/s/sabretooth_tiger.txt svneol=native#text/plain
 res/cardsfolder/s/sacellum_archers.txt svneol=native#text/plain
+res/cardsfolder/s/sacellum_godspeaker.txt -text
 res/cardsfolder/s/sachi_daughter_of_seshiro.txt svneol=native#text/plain
 res/cardsfolder/s/sacred_foundry.txt svneol=native#text/plain
 res/cardsfolder/s/sacred_guide.txt -text
