@@ -402,6 +402,36 @@ Fixes/Features:
 - The Provoke keyword is now multiplayer compatible.
 - Made more scripts ready for multiplayer.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- X marks the spot there a GL trigger should be fired
+- without this fix GL trigger would be fired multiple times
+- less complex
+- Made the scripts of some cards with "Whenever a creature attacks you..." to be multiplayer compatible.
+- Fixed Konda's Hatamoto.
+- Made cards with "CARDNAME can't attack unless defending player controls ..." to be multiplayer compatible.
+- Made Landwalk abilities multiplayer compatible.
+- Made more scripts ready for multiplayer.
+- Fixed logic of the predicate isProtectedFrom.
+- Restart button replays the whole match
+- Added LosesGame trigger.
+- Added trigger to Blood Tyrant and Withengar Unbound (Blood Tyrant still needs it's first trigger corrected)
+- Singleton usage.
+- removed CombatUtil.canAttack method without specifying attack target
+- Copy/Paste error in Blood Tyrant.
+- Added "OppCtrl" as a parameter to hasProperty.
+- Changed some instances of "YouDontCtrl" to "OppCtrl".
+- Changed more instances of "YouDontCtrl" to "OppCtrl".
+- setMustAttackEntity - method type set to GameEntity
+- Players: defeated players in archenemy won't get turns or priority, their permanents on table won't affect the game
+- fix to NPE from players leaving game.
+- Trigger handler should check all non-active players
+- registered players as r/o list
+- to potentially prevent endless loop
+- Combat that will return some defender in any case
+- DeckChooser from constructed home screen refactored as a component
+- You may choose your deck for Archenemy mode
+- Achenemy: you have additional 10 lives for each opponent beyond the first one
+- Also renamed C- and V- classes
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
