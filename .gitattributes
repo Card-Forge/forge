@@ -7322,6 +7322,7 @@ res/cardsfolder/p/power_matrix.txt svneol=native#text/plain
 res/cardsfolder/p/power_of_fire.txt svneol=native#text/plain
 res/cardsfolder/p/power_sink.txt svneol=native#text/plain
 res/cardsfolder/p/power_surge.txt svneol=native#text/plain
+res/cardsfolder/p/power_taint.txt -text
 res/cardsfolder/p/powerleech.txt -text
 res/cardsfolder/p/powerstone_minefield.txt svneol=native#text/plain
 res/cardsfolder/p/pox.txt -text
