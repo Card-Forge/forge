@@ -15,7 +15,7 @@ import forge.gui.home.gauntlet.VSubmenuGauntletBuild;
 import forge.gui.home.gauntlet.VSubmenuGauntletContests;
 import forge.gui.home.gauntlet.VSubmenuGauntletLoad;
 import forge.gui.home.gauntlet.VSubmenuGauntletQuick;
-import forge.gui.home.multiplayer.VSubmenuMultiTest;
+import forge.gui.home.multiplayer.VSubmenuArchenemy;
 import forge.gui.home.quest.VSubmenuChallenges;
 import forge.gui.home.quest.VSubmenuDuels;
 import forge.gui.home.quest.VSubmenuQuestData;
@@ -67,7 +67,7 @@ public enum EDocID { /** */
     HOME_GAUNTLETLOAD (VSubmenuGauntletLoad.SINGLETON_INSTANCE), /** */
     HOME_GAUNTLETQUICK (VSubmenuGauntletQuick.SINGLETON_INSTANCE), /** */
     HOME_GAUNTLETCONTESTS (VSubmenuGauntletContests.SINGLETON_INSTANCE), /** */
-    HOME_MULTITEST (VSubmenuMultiTest.SINGLETON_INSTANCE), /** */
+    HOME_MULTITEST (VSubmenuArchenemy.SINGLETON_INSTANCE), /** */
     HOME_PREFERENCES (VSubmenuPreferences.SINGLETON_INSTANCE), /** */
     HOME_AVATARS (VSubmenuAvatars.SINGLETON_INSTANCE), /** */
     HOME_UTILITIES (VSubmenuDownloaders.SINGLETON_INSTANCE), /** */

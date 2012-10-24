@@ -12803,8 +12803,8 @@ src/main/java/forge/gui/home/gauntlet/VSubmenuGauntletBuild.java -text
 src/main/java/forge/gui/home/gauntlet/VSubmenuGauntletContests.java -text
 src/main/java/forge/gui/home/gauntlet/VSubmenuGauntletLoad.java -text
 src/main/java/forge/gui/home/gauntlet/VSubmenuGauntletQuick.java -text
-src/main/java/forge/gui/home/multiplayer/CSubmenuMultiTest.java -text
-src/main/java/forge/gui/home/multiplayer/VSubmenuMultiTest.java -text
+src/main/java/forge/gui/home/multiplayer/CSubmenuArchenemy.java -text
+src/main/java/forge/gui/home/multiplayer/VSubmenuArchenemy.java -text
 src/main/java/forge/gui/home/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/home/quest/CSubmenuChallenges.java -text
 src/main/java/forge/gui/home/quest/CSubmenuDuels.java -text

@@ -14,6 +14,7 @@ import forge.deck.DeckgenUtil;
 import forge.game.GameType;
 import forge.game.MatchController;
 import forge.game.MatchStartHelper;
+import forge.game.PlayerStartConditions;
 import forge.game.player.PlayerType;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
@@ -24,11 +25,11 @@ import forge.gui.framework.ICDoc;
  * <br><br><i>(C at beginning of class name denotes a control class.)</i>
  *
  */
-public enum CSubmenuMultiTest implements ICDoc {
+public enum CSubmenuArchenemy implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
 
-    private final VSubmenuMultiTest view = VSubmenuMultiTest.SINGLETON_INSTANCE;
+    private final VSubmenuArchenemy view = VSubmenuArchenemy.SINGLETON_INSTANCE;
 
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
@@ -84,7 +85,11 @@ public enum CSubmenuMultiTest implements ICDoc {
 
                 MatchStartHelper starter = new MatchStartHelper();
                 Lobby lobby = Singletons.getControl().getLobby();
-                starter.addPlayer(lobby.findLocalPlayer(PlayerType.HUMAN), humanDeck);
+                
+                PlayerStartConditions humanStart = new PlayerStartConditions(humanDeck);
+                starter.addPlayer(lobby.findLocalPlayer(PlayerType.HUMAN), humanStart);
+                humanStart.setStartingLife(10 + 10 * numFields); // will have 40 life to play against 3 opponents
+                
                 for( int i = 0; i < numFields; i++ )
                     starter.addPlayer(lobby.findLocalPlayer(PlayerType.COMPUTER), DeckgenUtil.getRandomColorDeck(PlayerType.COMPUTER));
                 

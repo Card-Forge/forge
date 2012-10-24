@@ -28,7 +28,7 @@ import forge.gui.toolbox.FRadioButton;
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  *
  */
-public enum VSubmenuMultiTest implements IVSubmenu<CSubmenuMultiTest> {
+public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
     /** */
     SINGLETON_INSTANCE;
 
@@ -44,7 +44,7 @@ public enum VSubmenuMultiTest implements IVSubmenu<CSubmenuMultiTest> {
     
     private final FDeckChooser dcHuman = new FDeckChooser("Choose your deck", PlayerType.HUMAN);
 
-    private VSubmenuMultiTest() {
+    private VSubmenuArchenemy() {
         FRadioButton temp;
 
         for (int i = 2; i < 8; i++) {
@@ -144,8 +144,8 @@ public enum VSubmenuMultiTest implements IVSubmenu<CSubmenuMultiTest> {
      * @see forge.gui.framework.IVDoc#getLayoutControl()
      */
     @Override
-    public CSubmenuMultiTest getLayoutControl() {
-        return CSubmenuMultiTest.SINGLETON_INSTANCE;
+    public CSubmenuArchenemy getLayoutControl() {
+        return CSubmenuArchenemy.SINGLETON_INSTANCE;
     }
 
     /* (non-Javadoc)
