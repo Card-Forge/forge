@@ -695,9 +695,12 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * </p>
      */
     public final void passPriority() {
+        // stop game if it's outcome is clear
+        if ( game.isGameOver() ) return;
+        
         final Player actingPlayer = this.getPriorityPlayer();
         final Player firstAction = this.getFirstPriority();
-
+        
         // actingPlayer is the player who may act
         // the firstAction is the player who gained Priority First in this segment
         // of Priority
