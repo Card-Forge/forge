@@ -2,7 +2,7 @@ Name:Cancel
 ManaCost:1 U U
 Types:Instant
 Text:no text
-A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card  | SpellDescription$ Counter target spell.
+A:SP$ Counter | Cost$ 1 U U | TargetType$ Spell | TgtPrompt$ Select target spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cancel.jpg
 SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/15.jpg
