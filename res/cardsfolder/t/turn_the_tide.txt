@@ -2,7 +2,7 @@ Name:Turn the Tide
 ManaCost:1 U
 Types:Instant
 Text:no text
-A:SP$ PumpAll | Cost$ 1 U | ValidCards$ Creature.YouDontCtrl | IsCurse$ True | NumAtt$ -2 | SpellDescription$ Creatures your opponents control get -2/-0 until end of turn.
+A:SP$ PumpAll | Cost$ 1 U | ValidCards$ Creature.OppCtrl | IsCurse$ True | NumAtt$ -2 | SpellDescription$ Creatures your opponents control get -2/-0 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/turn_the_tide.jpg
 SetInfo:MBS|Common|http://magiccards.info/scans/en/mbs/35.jpg

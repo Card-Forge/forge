@@ -4,7 +4,7 @@ Types:Legendary Creature Praetor
 Text:
 PT:4/4
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures you control have haste.
-S:Mode$ ETBTapped | ValidCard$ Creature.YouDontCtrl | Description$ Creatures your opponents control enter the battlefield tapped.
+S:Mode$ ETBTapped | ValidCard$ Creature.OppCtrl | Description$ Creatures your opponents control enter the battlefield tapped.
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Creature
 SVar:Rarity:Mythic

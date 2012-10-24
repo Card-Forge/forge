@@ -2,7 +2,7 @@ Name:Cower in Fear
 ManaCost:1 B B
 Types:Instant
 Text:no text
-A:SP$ PumpAll | Cost$ 1 B B | ValidCards$ Creature.YouDontCtrl | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Creatures your opponents control get -1/-1 until end of turn.
+A:SP$ PumpAll | Cost$ 1 B B | ValidCards$ Creature.OppCtrl | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True | SpellDescription$ Creatures your opponents control get -1/-1 until end of turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cower_in_fear.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/84.jpg

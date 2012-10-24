@@ -4,7 +4,7 @@ Types:Creature Elf Shaman
 Text:no text
 PT:3/3
 A:AB$ Pump | Cost$ 3 G T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +X | NumDef$ +X | References$ X | SpellDescription$ Target creature gets +X/+X until end of turn, where X is the number of artifacts your opponents control.
-SVar:X:Count$TypeOppCtrl.Artifact
+SVar:X:Count$Valid Artifact.OppCtrl
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/viridian_lorebearers.jpg

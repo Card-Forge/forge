@@ -5,7 +5,7 @@ Text:no text
 PT:2/2
 K:Creatures you control can't have -1/-1 counters placed on them.
 S:Mode$ Continuous | Affected$ You | AddKeyword$ You can't get poison counters | Description$ You can't get poison counters.
-S:Mode$ Continuous | Affected$ Creature.YouDontCtrl | RemoveKeyword$ Infect | Description$ Creatures your opponents control lose infect.
+S:Mode$ Continuous | Affected$ Creature.OppCtrl | RemoveKeyword$ Infect | Description$ Creatures your opponents control lose infect.
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+withPersist | AddSVar$ Sac
 SVar:Sac:SVar:SacMe:3
 SVar:PlayMain1:TRUE

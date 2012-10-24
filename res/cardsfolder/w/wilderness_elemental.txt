@@ -5,7 +5,7 @@ Text:no text
 PT:*/3
 K:Trample
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | Description$ CARDNAME's power is equal to the number of nonbasic lands your opponents control.
-SVar:X:Count$Valid Land.nonBasic+YouDontCtrl
+SVar:X:Count$Valid Land.nonBasic+OppCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wilderness_elemental.jpg
 SetInfo:CSP|Uncommon|http://magiccards.info/scans/en/cs/134.jpg

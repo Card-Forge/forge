@@ -2,7 +2,7 @@ Name:Cumber Stone
 ManaCost:3 U
 Types:Artifact
 Text:no text
-S:Mode$ Continuous | Affected$ Creature.YouDontCtrl | AddPower$ -1 | Description$ Creatures your opponents control get -1/-0.
+S:Mode$ Continuous | Affected$ Creature.OppCtrl | AddPower$ -1 | Description$ Creatures your opponents control get -1/-0.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cumber_stone.jpg

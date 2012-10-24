@@ -2,7 +2,7 @@ Name:Frozen AEther
 ManaCost:3 U
 Types:Enchantment
 Text:no text
-S:Mode$ ETBTapped | ValidCard$ Artifact.YouDontCtrl,Creature.YouDontCtrl,Land.YouDontCtrl | Description$ Artifacts, creatures, and lands your opponents control enter the battlefield tapped.
+S:Mode$ ETBTapped | ValidCard$ Artifact.OppCtrl,Creature.OppCtrl,Land.OppCtrl | Description$ Artifacts, creatures, and lands your opponents control enter the battlefield tapped.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/frozen_aether.jpg
 SetInfo:PLC|Uncommon|http://magiccards.info/scans/en/pc/54.jpg

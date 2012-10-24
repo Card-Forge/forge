@@ -5,7 +5,7 @@ Text:no text
 PT:3/3
 K:Flying
 K:Wither
-S:Mode$ Continuous | Affected$ Creature.YouDontCtrl+HasCounters | AddHiddenKeyword$ HIDDEN CARDNAME can't attack or block. | Description$ Creatures your opponents control with counters on them can't attack or block.
+S:Mode$ Continuous | Affected$ Creature.OppCtrl+HasCounters | AddHiddenKeyword$ HIDDEN CARDNAME can't attack or block. | Description$ Creatures your opponents control with counters on them can't attack or block.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kulrath_knight.jpg
 SetInfo:SHM|Uncommon|http://magiccards.info/scans/en/shm/190.jpg

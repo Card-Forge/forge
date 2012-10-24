@@ -5,7 +5,7 @@ Text:no text
 PT:1/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card for each black creature your opponents control.
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ X | References$ X
-SVar:X:Count$BlackTypeOppCtrl.Creature
+SVar:X:Count$Valid Creature.Black+OppCtrl
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pygmy_kavu.jpg
