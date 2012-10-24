@@ -545,22 +545,18 @@ public class Combat {
      * @return a {@link forge.Player} object.
      */
     public Player getDefendingPlayerRelatedTo(final Card source) {
-
-        Player defender = getDefenderPlayerByAttacker(source);
         Card attacker = source;
         if (source.isAura()) {
             attacker = source.getEnchantingCard();
         } else if (source.isEquipment()) {
             attacker = source.getEquippingCard();
         }
-        // if the card is attacking the defender is clear
-        if (attacker.isAttacking()) {
-            GameEntity def = this.getDefenderByAttacker(attacker);
-            if (def instanceof Player) {
-                defender = (Player) def;
-            } else {
-                defender = ((Card) def).getController();
-            }
+        
+        Player defender = getDefenderPlayerByAttacker(attacker);
+        if ( null == defender ) { // too bad, have to choose now 
+            // don't have ui, cannot choose - have to getOpponent
+            // that's inaccurate. That opponent may be not even a defender
+            defender = source.getController().getOpponent();
         }
         return defender;
     }
