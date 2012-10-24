@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 import net.miginfocom.swing.MigLayout;
+import forge.game.player.PlayerType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -16,6 +17,7 @@ import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.StartButton;
 import forge.gui.home.VHomeUI;
+import forge.gui.toolbox.FDeckChooser;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FRadioButton;
@@ -39,6 +41,8 @@ public enum VSubmenuMultiTest implements IVSubmenu<CSubmenuMultiTest> {
     private final List<JRadioButton> fieldRadios = new ArrayList<JRadioButton>();
     private final StartButton btnStart = new StartButton();
     private final ButtonGroup grpFields = new ButtonGroup();
+    
+    private final FDeckChooser dcHuman = new FDeckChooser("Choose your deck", PlayerType.HUMAN);
 
     private VSubmenuMultiTest() {
         FRadioButton temp;
@@ -82,10 +86,9 @@ public enum VSubmenuMultiTest implements IVSubmenu<CSubmenuMultiTest> {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap 2"));
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlFields, "w 41%!, gap 6% 6% 50px 0, growy, pushy");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(new FLabel.Builder()
-            .text("Doublestrike, please make a choice of decks for human here")
-            .build(), "gap 0 0 50px 5px, ax center, span 2");
-
+        dcHuman.populate();
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(dcHuman, "w 41%!, gap 0 0 50px 0, growy, pushy");
+        
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(new FLabel.Builder()
             .text("Starts a new game with preconstructed 2 color decks for each field.")
             .build(), "gap 0 0 50px 5px, ax center, span 2");
@@ -159,5 +162,9 @@ public enum VSubmenuMultiTest implements IVSubmenu<CSubmenuMultiTest> {
     @Override
     public DragCell getParentCell() {
         return parentCell;
+    }
+
+    public final FDeckChooser getDcHuman() {
+        return dcHuman;
     }
 }

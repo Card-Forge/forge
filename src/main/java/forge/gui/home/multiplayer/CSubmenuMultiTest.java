@@ -35,6 +35,7 @@ public enum CSubmenuMultiTest implements ICDoc {
      */
     @Override
     public void initialize() {
+        view.getDcHuman().initialize();
         // Checkbox event handling
         view.getBtnStart().addActionListener(new ActionListener() {
             @Override
@@ -79,7 +80,7 @@ public enum CSubmenuMultiTest implements ICDoc {
         final SwingWorker<Object, Void> worker = new SwingWorker<Object, Void>() {
             @Override
             public Object doInBackground() {
-                Deck humanDeck = DeckgenUtil.getRandomColorDeck(PlayerType.HUMAN);
+                Deck humanDeck = view.getDcHuman().getDeck();
 
                 MatchStartHelper starter = new MatchStartHelper();
                 Lobby lobby = Singletons.getControl().getLobby();
