@@ -9,6 +9,6 @@ A:AB$ Attach | Cost$ 3 U | ValidTgts$ Creature | TgtPrompt$ Select target creatu
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stasis_cell.jpg
-SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/65.jpg
+SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/66.jpg
 Oracle:Enchant creature\nEnchanted creature doesn't untap during its controller's untap step.\n{3}{U}: Attach Stasis Cell to target creature.
 End

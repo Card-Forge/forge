@@ -9,6 +9,6 @@ A:AB$ Attach | Cost$ 2 U | ValidTgts$ Creature.NotEnchantedBy | TgtPrompt$ Selec
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kjeldoran_pride.jpg
-SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/135.jpg
+SetInfo:ALL|Common|http://magiccards.info/scans/en/ai/136.jpg|2
 Oracle:Enchant creature\nEnchanted creature gets +1/+2.\n{2}{U}: Attach Kjeldoran Pride to target creature other than enchanted creature.
 End

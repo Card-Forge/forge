@@ -9,6 +9,6 @@ SVar:PumpVigilance:DB$ PumpAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | KW$ Vi
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/piety_charm.jpg
-SetInfo:ONS|Common|http://magiccards.info/scans/en/on/48.jpg
+SetInfo:ONS|Common|http://magiccards.info/scans/en/on/49.jpg
 Oracle:Choose one - Destroy target Aura attached to a creature; or target Soldier creature gets +2/+2 until end of turn; or creatures you control gain vigilance until end of turn.
 End
