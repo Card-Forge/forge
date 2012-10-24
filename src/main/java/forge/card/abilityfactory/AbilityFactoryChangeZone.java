@@ -242,7 +242,7 @@ public final class AbilityFactoryChangeZone {
     public static boolean isHidden(final String origin, final boolean hiddenOverride) {
         List<ZoneType> zone = ZoneType.listValueOf(origin);
         
-        if (hiddenOverride || zone == null) {
+        if (hiddenOverride || zone.isEmpty()) {
             return true;
         }
         

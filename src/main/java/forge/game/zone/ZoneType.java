@@ -61,7 +61,10 @@ public enum ZoneType {
     public static List<ZoneType> listValueOf(final String values) {
         final List<ZoneType> result = new ArrayList<ZoneType>();
         for (final String s : values.split("[, ]+")) {
-            result.add(ZoneType.smartValueOf(s));
+            ZoneType zt = ZoneType.smartValueOf(s);
+            if (zt != null) {
+                result.add(zt);
+            }
         }
         return result;
     }
