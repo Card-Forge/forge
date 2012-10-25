@@ -1395,7 +1395,7 @@ public class AbilityFactoryAttach {
         if (aura == null) {
             return false;
         }
-
+        aura.setActivatingPlayer(source.getController());
         final AbilityFactory af = aura.getAbilityFactory();
         final Target tgt = aura.getTarget();
         final boolean gainControl = "GainControl".equals(af.getMapParams().get("AILogic"));
