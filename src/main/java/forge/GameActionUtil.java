@@ -1506,7 +1506,11 @@ public final class GameActionUtil {
                 newSA.setBasicSpell(false);
                 newSA.setPayCosts(cost);
                 newSA.setManaCost("");
-                newSA.setDescription(sa.getDescription() + " (by paying " + cost.toSimpleString() + " instead of its mana cost)");
+                String costString = cost.toSimpleString();
+                if (costString.equals("")) {
+                    costString = "0";
+                }
+                newSA.setDescription(sa.getDescription() + " (by paying " + costString + " instead of its mana cost)");
                 alternatives.add(newSA);
             }
         }
