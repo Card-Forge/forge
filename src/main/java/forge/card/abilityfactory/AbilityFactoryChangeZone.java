@@ -1721,7 +1721,7 @@ public final class AbilityFactoryChangeZone {
                     CardLists.sortByEvaluateCreature(combatants);
 
                     for (final Card c : combatants) {
-                        if ((c.getShield() == 0) && CombatUtil.combatantWouldBeDestroyed(c)) {
+                        if (c.getShield() == 0 && CombatUtil.combatantWouldBeDestroyed(c) && !c.getOwner().isHuman() && !c.isToken()) {
                             tgt.addTarget(c);
                             return true;
                         }
