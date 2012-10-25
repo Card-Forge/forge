@@ -1877,11 +1877,16 @@ public final class AbilityFactoryChoose {
                 choices = CardLists.filterControlledBy(choices, ai.getOpponent());
             }
             if (params.get("AILogic").equals("AtLeast1")) {
-                if (choices.size() < 1) {
+                if (choices.isEmpty()) {
                     return false;
                 }
             } else if (params.get("AILogic").equals("AtLeast2") || params.get("AILogic").equals("BestBlocker")) {
                 if (choices.size() < 2) {
+                    return false;
+                }
+            } else if (params.get("AILogic").equals("Clone")) {
+                choices = CardLists.getValidCards(choices, "Permanent.YouDontCtrl,Permanent.NonLegendary", host.getController(), host);
+                if (choices.isEmpty()) {
                     return false;
                 }
             }
@@ -1983,10 +1988,15 @@ public final class AbilityFactoryChoose {
                         }
                     } else { // Computer
                         if (params.containsKey("AILogic") && params.get("AILogic").equals("BestBlocker")) {
-                            if (CardLists.filter(choices, Presets.UNTAPPED).isEmpty()) {
+                            if (!CardLists.filter(choices, Presets.UNTAPPED).isEmpty()) {
                                 choices = CardLists.filter(choices, Presets.UNTAPPED);
                             }
                             chosen.add(CardFactoryUtil.getBestCreatureAI(choices));
+                        } else if (params.containsKey("AILogic") && params.get("AILogic").equals("Clone")) {
+                            if (!CardLists.getValidCards(choices, "Permanent.YouDontCtrl,Permanent.NonLegendary", host.getController(), host).isEmpty()) {
+                                choices = CardLists.getValidCards(choices, "Permanent.YouDontCtrl,Permanent.NonLegendary", host.getController(), host);
+                            }
+                            chosen.add(CardFactoryUtil.getBestAI(choices));
                         } else {
                             chosen.add(CardFactoryUtil.getBestAI(choices));
                         }
