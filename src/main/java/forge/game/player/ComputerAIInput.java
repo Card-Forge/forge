@@ -63,6 +63,10 @@ public class ComputerAIInput extends Input {
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
+        // should not think when the game is over
+        if( Singletons.getModel().getGame().isGameOver() )
+            return;
+
         /*
          * //put this back in ButtonUtil.disableAll();
          * AllZone.getDisplay().showMessage("Phase: " +
