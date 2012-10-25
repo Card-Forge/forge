@@ -3,8 +3,8 @@ ManaCost:4 G
 Types:Creature Ooze
 Text:no text
 PT:3/3
-A:AB$ PutCounter | Cost$ Sac<1/Creature.Other/creature other than CARDNAME> | CounterType$ P1P1 | CounterNum$1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
-SVar:Rarity:Mythic
+A:AB$ PutCounter | Cost$ G Sac<1/Creature.Other/creature other than CARDNAME> | CounterType$ P1P1 | CounterNum$1 | SpellDescription$ Put a +1/+1 counter on CARDNAME.
+SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gobbling_ooze.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/126.jpg
 Oracle:{G}, Sacrifice another creature: Put a +1/+1 counter on Gobbling Ooze.
