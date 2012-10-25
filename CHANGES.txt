@@ -432,6 +432,14 @@ Fixes/Features:
 - Achenemy: you have additional 10 lives for each opponent beyond the first one
 - Also renamed C- and V- classes
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Changed more instances of "YouDontCtrl" to "OppCtrl".
+- "YouDontCtrl" => "OppCtrl".
+- Fixed setinfo of swordshine's cards.
+- Fixed AF ChangeZone with the Origin All.
+- AI won't have any more fun when the game is over.
+- Changed more instances of "YouDontCtrl" to "OppCtrl".
+- Fixed OppCtrl.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -477,6 +485,14 @@ Book Burning
 Breaking Point
 Browbeat
 Sands of Time
+Grand Melee
+Piety Charm
+Cinder Seer
+Ivy Seer
+Jasmine Seer
+Nightshade Seer
+Sacellum Godspeaker
+Power Taint
 
 
 end
