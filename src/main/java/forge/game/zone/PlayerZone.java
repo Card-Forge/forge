@@ -20,7 +20,6 @@ package forge.game.zone;
 import forge.Card;
 
 import forge.Singletons;
-import forge.card.trigger.TriggerType;
 import forge.game.player.Player;
 
 /**
@@ -91,13 +90,10 @@ public class PlayerZone extends Zone {
         }
 
         c.addObserver(this);
-
         c.setTurnInZone(Singletons.getModel().getGame().getPhaseHandler().getTurn());
 
-        if (!this.is(ZoneType.Battlefield) && c.isTapped()) {
-            Singletons.getModel().getGame().getTriggerHandler().suppressMode(TriggerType.Untaps);
-            c.untap();
-            Singletons.getModel().getGame().getTriggerHandler().clearSuppression(TriggerType.Untaps);
+        if (!this.is(ZoneType.Battlefield)) {
+            c.setTapped(false);
         }
 
         this.cardList.add(c);

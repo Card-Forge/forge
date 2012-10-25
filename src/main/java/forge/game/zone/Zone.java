@@ -28,7 +28,6 @@ import java.util.Observer;
 import forge.Card;
 
 import forge.Singletons;
-import forge.card.trigger.TriggerType;
 import forge.util.MyObservable;
 
 /**
@@ -88,14 +87,8 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
         }
 
         c.addObserver(this);
-
         c.setTurnInZone(Singletons.getModel().getGame().getPhaseHandler().getTurn());
-
-        if (c.isTapped()) {
-            Singletons.getModel().getGame().getTriggerHandler().suppressMode(TriggerType.Untaps);
-            c.untap();
-            Singletons.getModel().getGame().getTriggerHandler().clearSuppression(TriggerType.Untaps);
-        }
+        c.setTapped(false);
 
         this.cardList.add(c);
         
@@ -151,10 +144,8 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
             }
         }
 
-        if (!this.is(ZoneType.Battlefield) && c.isTapped()) {
-            Singletons.getModel().getGame().getTriggerHandler().suppressMode(TriggerType.Untaps);
-            c.untap();
-            Singletons.getModel().getGame().getTriggerHandler().clearSuppression(TriggerType.Untaps);
+        if (!this.is(ZoneType.Battlefield)) {
+            c.setTapped(false);
         }
 
         this.cardList.add(index, c);

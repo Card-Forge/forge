@@ -1857,11 +1857,9 @@ public class GameAction {
                         // AND that you can't use mana tapabilities of convoked
                         // creatures
                         // to pay the convoked cost.
-                        game.getTriggerHandler().suppressMode(TriggerType.Taps);
                         for (final Card c : sa.getTappedForConvoke()) {
-                            c.tap();
+                            c.setTapped(true);
                         }
-                        game.getTriggerHandler().clearSuppression(TriggerType.Taps);
 
                         manaCost = newCost;
                     }

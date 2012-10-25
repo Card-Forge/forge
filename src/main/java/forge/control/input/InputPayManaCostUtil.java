@@ -34,7 +34,6 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
-import forge.card.trigger.TriggerType;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -545,12 +544,10 @@ public class InputPayManaCostUtil {
                 // being tapped for convoke)
     
                 if (sa.getTappedForConvoke() != null) {
-                    Singletons.getModel().getGame().getTriggerHandler().suppressMode(TriggerType.Untaps);
                     for (final Card c : sa.getTappedForConvoke()) {
-                        c.untap();
+                        c.setTapped(false);
                         c.tap();
                     }
-                    Singletons.getModel().getGame().getTriggerHandler().clearSuppression(TriggerType.Untaps);
                     sa.clearTappedForConvoke();
                 }
     
@@ -561,11 +558,9 @@ public class InputPayManaCostUtil {
                 // If we're paying for a spell with convoke, untap all creatures
                 // used for it.
                 if (sa.getTappedForConvoke() != null) {
-                    Singletons.getModel().getGame().getTriggerHandler().suppressMode(TriggerType.Untaps);
                     for (final Card c : sa.getTappedForConvoke()) {
-                        c.untap();
+                        c.setTapped(false);
                     }
-                    Singletons.getModel().getGame().getTriggerHandler().clearSuppression(TriggerType.Untaps);
                     sa.clearTappedForConvoke();
                 }
     
