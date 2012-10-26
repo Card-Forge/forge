@@ -8,8 +8,8 @@ SVar:DBDamage3:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select
 SVar:DBDamage4:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature (4) | NumDmg$ 1
 SVar:AltCost:Cost$ ExileFromHand<1/Card.Red> | Description$ You may exile a red card from your hand rather than pay CARDNAME 's mana cost.
 SVar:RemAIDeck:True
-SVar:Picture:http://www.wizards.com/global/images/magic/general/pyrokinesis.jpg
 SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pyrokinesis.jpg
 SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/115.jpg
 Oracle:You may exile a red card from your hand rather than pay Pyrokinesis's mana cost.\nPyrokinesis deals 4 damage divided as you choose among any number of target creatures.
 End

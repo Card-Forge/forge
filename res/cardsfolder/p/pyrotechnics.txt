@@ -6,6 +6,7 @@ A:SP$ DealDamage | Cost$ 4 R | ValidTgts$ Creature,Player | TgtPrompt$ Select ta
 SVar:DBDamage2:DB$DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player (2) | NumDmg$ 1 | SubAbility$ DBDamage3
 SVar:DBDamage3:DB$DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player (3) | NumDmg$ 1 | SubAbility$ DBDamage4
 SVar:DBDamage4:DB$DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player (4) | NumDmg$ 1
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pyrotechnics.jpg
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/211.jpg

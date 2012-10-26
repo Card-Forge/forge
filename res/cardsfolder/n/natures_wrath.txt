@@ -8,6 +8,7 @@ SVar:TrigSacrificeBlue:AB$Sacrifice | Cost$ 0 | Defined$ TriggeredCardController
 T:Mode$ ChangesZone | ValidCard$ Swamp,Card.Black | Origin$ Any | Destination$ Battlefield | TriggerZones$ Battlefield | Execute$ TrigSacrificeBlack | TriggerDescription$ Whenever a player puts an Swamp or black permanent onto the battlefield, he or she sacrifices an Swamp or black permanent.
 SVar:TrigSacrificeBlack:AB$Sacrifice | Cost$ 0 | Defined$ TriggeredCardController | SacValid$ Swamp,Card.Black | SacMessage$ Swamp or a black permanent
 SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/natures_wrath.jpg
 SetInfo:ALL|Rare|http://magiccards.info/scans/en/ai/82.jpg
