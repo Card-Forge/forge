@@ -740,7 +740,7 @@ public class ComputerUtilAttack {
                 && opp.canLoseLife()) {
             turnsUntilDeathByUnblockable = 1 + (opp.getLife() - unblockableDamage) / nextUnblockableDamage;
         }
-        if (unblockableDamage > opp.getLife() && opp.canLoseLife()) {
+        if (opp.canLoseLife()) {
             doUnblockableAttack = true;
         }
         // *****************
@@ -758,12 +758,13 @@ public class ComputerUtilAttack {
         } else if ((humanLifeToDamageRatio < 2 && ratioDiff >= 0) || ratioDiff > 3
                 || (ratioDiff > 0 && outNumber > 0)) {
             this.aiAggression = 3; // attack expecting to make good trades or damage player.
-        } else if (ratioDiff >= 0 || ratioDiff + outNumber >= -1 || aiLifeToPlayerDamageRatio > 1) {
+        } else if (ratioDiff >= 0 || ratioDiff + outNumber >= -1 || aiLifeToPlayerDamageRatio > 1
+                || ratioDiff * -1 < turnsUntilDeathByUnblockable) {
             // at 0 ratio expect to potentially gain an advantage by attacking first
             // if the ai has a slight advantage
             // or the ai has a significant advantage numerically but only a slight disadvantage damage/life
             this.aiAggression = 2; // attack expecting to destroy creatures/be unblockable
-        } else if (doUnblockableAttack || (ratioDiff * -1 < turnsUntilDeathByUnblockable)) {
+        } else if (doUnblockableAttack) {
             this.aiAggression = 1;
             // look for unblockable creatures that might be
             // able to attack for a bit of fatal damage even if the player is significantly better
