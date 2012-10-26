@@ -271,8 +271,13 @@ public class BoosterGenerator {
                     cardsByRarity.get(CardRarity.MythicRare), nRareSlots));
         }
         if ((nRares > 0) || (nMythics > 0)) {
-            temp.addAll(this.pickRandomCards(commonCardsMap.get(CardRarity.Rare), nRares));
-            temp.addAll(this.pickRandomCards(commonCardsMap.get(CardRarity.MythicRare), nMythics));
+            if (nMythics == 0) {
+                temp.addAll(this.pickRandomRaresOrMythics(commonCardsMap.get(CardRarity.Rare),
+                        cardsByRarity.get(CardRarity.MythicRare), nRares));
+            } else {
+                temp.addAll(this.pickRandomCards(commonCardsMap.get(CardRarity.Rare), nRares));
+                temp.addAll(this.pickRandomCards(commonCardsMap.get(CardRarity.MythicRare), nMythics));
+            }
         }
         if (nDoubls > 0) {
             final int dblFacedRarity = MyRandom.getRandom().nextInt(nCom + nUnc + nRareSlots);
