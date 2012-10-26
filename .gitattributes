@@ -12458,7 +12458,6 @@ src/main/java/forge/card/TriggerReplacementBase.java -text
 src/main/java/forge/card/UnOpenedMeta.java -text
 src/main/java/forge/card/UnOpenedProduct.java -text
 src/main/java/forge/card/abilityfactory/AbilityFactory.java svneol=native#text/plain
-src/main/java/forge/card/abilityfactory/AbilityFactoryAlterLife.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryAnimate.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryAttach.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryBond.java -text
@@ -12494,6 +12493,13 @@ src/main/java/forge/card/abilityfactory/AbilityFactoryStoreSVar.java -text
 src/main/java/forge/card/abilityfactory/AbilityFactoryToken.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryTurns.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryZoneAffecting.java svneol=native#text/plain
+src/main/java/forge/card/abilityfactory/SpellAiLogic.java -text
+src/main/java/forge/card/abilityfactory/SpellEffect.java -text
+src/main/java/forge/card/abilityfactory/UniversalAbility.java -text
+src/main/java/forge/card/abilityfactory/UniversalDrawback.java svneol=native#text/plain
+src/main/java/forge/card/abilityfactory/UniversalSpell.java -text
+src/main/java/forge/card/abilityfactory/ai/AlterLifeAi.java -text
+src/main/java/forge/card/abilityfactory/effects/AlterLifeEffects.java -text
 src/main/java/forge/card/abilityfactory/package-info.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactory.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactoryArtifacts.java -text
