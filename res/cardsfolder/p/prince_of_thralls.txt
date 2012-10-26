@@ -3,8 +3,8 @@ ManaCost:4 U B B R
 Types:Creature Demon
 Text:no text
 PT:7/7
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Permanent.YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ Whenever a permanent an opponent controls is put into a graveyard, put that card onto the battlefield under your control unless that opponent pays 3 life.
-SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ TriggeredCard | UnlessCost$ PayLife<3> | UnlessPayer$ Opponent
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Permanent.OppCtrl | TriggerZones$ Battlefield | Execute$ TrigReturn | TriggerDescription$ Whenever a permanent an opponent controls is put into a graveyard, put that card onto the battlefield under your control unless that opponent pays 3 life.
+SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ TriggeredCard | UnlessCost$ PayLife<3> | UnlessPayer$ Opponent
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prince_of_thralls.jpg
 SetInfo:ALA|Mythic|http://magiccards.info/scans/en/ala/182.jpg

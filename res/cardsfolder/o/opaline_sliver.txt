@@ -4,7 +4,7 @@ Types:Creature Sliver
 Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Sliver | AddTrigger$ TrigTargetSpell | AddSVar$ OpalineTrigDraw | Description$ All Slivers have "Whenever this permanent becomes the target of a spell an opponent controls, you may draw a card."
-SVar:TrigTargetSpell:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ Instant.YouDontCtrl,Sorcery.YouDontCtrl | Execute$ OpalineTrigDraw | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME becomes the target of a spell an opponent controls, you may draw a card.
+SVar:TrigTargetSpell:Mode$ BecomesTarget | ValidTarget$ Card.Self | ValidSource$ Instant.OppCtrl,Sorcery.OppCtrl | Execute$ OpalineTrigDraw | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME becomes the target of a spell an opponent controls, you may draw a card.
 SVar:OpalineTrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1 | Defined$ You
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon

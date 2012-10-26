@@ -3,8 +3,8 @@ ManaCost:U
 Types:Sorcery
 Text:no text
 A:SP$ DealDamage | Cost$ U | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
-T:Mode$ Discarded | ValidCard$ Card.Self | ValidCause$ Card.YouDontCtrl | Execute$ TrigLoseLife | TriggerDescription$ When a spell or ability an opponent controls causes you to discard CARDNAME, that player loses 5 life.
-SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ Opponent | LifeAmount$ 5 
+T:Mode$ Discarded | ValidCard$ Card.Self | ValidCause$ Card.OppCtrl | Execute$ TrigLoseLife | TriggerDescription$ When a spell or ability an opponent controls causes you to discard CARDNAME, that player loses 5 life.
+SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredCauseController | LifeAmount$ 5 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_purge.jpg
 SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/68.jpg
