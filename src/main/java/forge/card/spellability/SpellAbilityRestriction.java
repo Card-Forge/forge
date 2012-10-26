@@ -293,7 +293,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             System.out.println(c.getName() + " Did not have activator set in SpellAbilityRestriction.canPlay()");
         }
 
-        if (this.isSorcerySpeed() && !Player.canCastSorcery(activator)) {
+        if (this.isSorcerySpeed() && !activator.canCastSorcery()) {
             return false;
         }
 

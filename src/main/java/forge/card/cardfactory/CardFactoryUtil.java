@@ -863,7 +863,7 @@ public class CardFactoryUtil {
                 //Lands do not have SpellPermanents.
                 if (sourceCard.isLand()) {
                     return (Singletons.getModel().getGame().getZoneOf(sourceCard).is(ZoneType.Hand) || sourceCard.hasKeyword("May be played"))
-                            && Player.canCastSorcery(sourceCard.getController());
+                            && sourceCard.getController().canCastSorcery();
                 }
                 else {
                     return sourceCard.getSpellPermanent().canPlay();
@@ -1035,7 +1035,7 @@ public class CardFactoryUtil {
 
             @Override
             public boolean canPlay() {
-                return super.canPlay() && Player.canCastSorcery(sourceCard.getController());
+                return super.canPlay() && sourceCard.getController().canCastSorcery();
             }
 
             @Override
@@ -1110,7 +1110,7 @@ public class CardFactoryUtil {
                     return true;
                 }
 
-                return Player.canCastSorcery(sourceCard.getOwner());
+                return sourceCard.getOwner().canCastSorcery();
             }
 
             @Override

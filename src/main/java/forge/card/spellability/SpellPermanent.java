@@ -310,7 +310,7 @@ public class SpellPermanent extends Spell {
 
         // Prevent the computer from summoning Ball Lightning type creatures after attacking
         if (card.hasStartOfKeyword("You may cast CARDNAME as though it had flash. If")
-                && !Player.couldCastSorcery(card.getController(), this)) {
+                && !card.getController().couldCastSorcery(this)) {
             return false;
         }
 

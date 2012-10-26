@@ -50,13 +50,6 @@ public interface Computer {
 
     /**
      * <p>
-     * end_of_turn.
-     * </p>
-     */
-    void endOfTurn(); // end of Human's turn
-
-    /**
-     * <p>
      * stack_not_empty.
      * </p>
      */

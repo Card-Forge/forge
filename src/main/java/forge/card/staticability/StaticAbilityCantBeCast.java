@@ -57,7 +57,7 @@ public class StaticAbilityCantBeCast {
             return false;
         }
 
-        if (params.containsKey("OnlySorcerySpeed") && (activator != null) && Player.canCastSorcery(activator)) {
+        if (params.containsKey("OnlySorcerySpeed") && (activator != null) && activator.canCastSorcery()) {
             return false;
         }
 

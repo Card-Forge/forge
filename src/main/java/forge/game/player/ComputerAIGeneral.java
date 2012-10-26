@@ -324,17 +324,6 @@ public class ComputerAIGeneral implements Computer {
         game.getPhaseHandler().setPlayerMayHavePriority(false);
     }
 
-    /**
-     * <p>
-     * end_of_turn.
-     * </p>
-     */
-    @Override
-    public final void endOfTurn() {
-        //This is only called in the computer turn
-        //this.playSpellAbilitiesStackEmpty();
-        game.getPhaseHandler().passPriority();
-    }
 
     /**
      * <p>

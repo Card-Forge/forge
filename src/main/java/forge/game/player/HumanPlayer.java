@@ -24,6 +24,7 @@ import forge.Card;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.game.GameState;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
@@ -48,8 +49,8 @@ public class HumanPlayer extends Player {
      * @param myName
      *            a {@link java.lang.String} object.
      */
-    public HumanPlayer(final LobbyPlayer player) {
-        super(player);
+    public HumanPlayer(final LobbyPlayer player, GameState game) {
+        super(player, game);
     }
 
     // //////////////
@@ -107,11 +108,11 @@ public class HumanPlayer extends Player {
 
                 // might have to make this more sophisticated
                 // dredge library, put card in hand
-                Singletons.getModel().getGame().getAction().moveToHand(c);
+                game.getAction().moveToHand(c);
 
                 for (int i = 0; i < this.getDredgeNumber(c); i++) {
                     final Card c2 = getZone(ZoneType.Library).get(0);
-                    Singletons.getModel().getGame().getAction().moveToGraveyard(c2);
+                    game.getAction().moveToGraveyard(c2);
                 }
                 dredged = true;
             } else {
@@ -156,7 +157,7 @@ public class HumanPlayer extends Player {
             final Card c = GuiChoose.oneOrNone("Put on bottom of library.", topN);
             if (c != null) {
                 topN.remove(c);
-                Singletons.getModel().getGame().getAction().moveToBottomOfLibrary(c);
+                game.getAction().moveToBottomOfLibrary(c);
             } else {
                 // no card chosen for the bottom
                 break;
@@ -167,7 +168,7 @@ public class HumanPlayer extends Player {
             final Card c = GuiChoose.one("Put on top of library.", topN);
             if (c != null) {
                 topN.remove(c);
-                Singletons.getModel().getGame().getAction().moveToLibrary(c);
+                game.getAction().moveToLibrary(c);
             }
             // no else - a card must have been chosen
         }
@@ -189,9 +190,9 @@ public class HumanPlayer extends Player {
         choice = GuiChoose.one(c.getName() + " - Top or bottom of Library", choices);
 
         if (choice.equals("bottom")) {
-            Singletons.getModel().getGame().getAction().moveToBottomOfLibrary(c);
+            game.getAction().moveToBottomOfLibrary(c);
         } else {
-            Singletons.getModel().getGame().getAction().moveToLibrary(c);
+            game.getAction().moveToLibrary(c);
         }
     }
 

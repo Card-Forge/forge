@@ -193,7 +193,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
         }
 
-        if (this.isSorcerySpeed() && !Player.canCastSorcery(activator)) {
+        if (this.isSorcerySpeed() && !activator.canCastSorcery()) {
             return false;
         }
 
