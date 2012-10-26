@@ -2816,7 +2816,7 @@ public class AbilityFactory {
         for (Player payer : payers) {
             if (payer.isComputer()) {
                 // AI will only pay when it's not already payed and only opponents abilities
-                if (paid || sa.getActivatingPlayer().equals(payer)) {
+                if (paid || (payers.size() > 1 && sa.getActivatingPlayer().equals(payer))) {
                     continue;
                 }
                 ability.setActivatingPlayer(payer);
