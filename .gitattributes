@@ -6079,6 +6079,7 @@ res/cardsfolder/m/metallic_sliver.txt svneol=native#text/plain
 res/cardsfolder/m/metallurgeon.txt svneol=native#text/plain
 res/cardsfolder/m/metalworker.txt svneol=native#text/plain
 res/cardsfolder/m/metamorphic_wurm.txt svneol=native#text/plain
+res/cardsfolder/m/metamorphose.txt -text
 res/cardsfolder/m/metamorphosis.txt -text
 res/cardsfolder/m/metathran_aerostat.txt -text svneol=unset#text/plain
 res/cardsfolder/m/metathran_elite.txt svneol=native#text/plain
