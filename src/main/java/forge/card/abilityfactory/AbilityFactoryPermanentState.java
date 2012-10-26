@@ -1051,6 +1051,8 @@ public class AbilityFactoryPermanentState {
                 List<Card> creatureList = CardLists.filter(tapList, findBlockers);
                 if (!attackers.isEmpty() && !creatureList.isEmpty()) {
                     choice = CardFactoryUtil.getBestCreatureAI(creatureList);
+                } else if (sa.isTrigger()){
+                    choice = CardFactoryUtil.getMostExpensivePermanentAI(tapList, sa, false);
                 }
                 
             } else if (phase.isPlayerTurn(opp)
