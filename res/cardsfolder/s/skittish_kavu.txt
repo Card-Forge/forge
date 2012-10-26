@@ -4,8 +4,8 @@ Types:Creature Kavu
 Text:no text
 PT:1/1
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ EQ0 | Description$ CARDNAME gets +1/+1 as long as no opponent controls a white or blue creature.
-SVar:X:Count$Valid Creature.White+YouDontCtrl/Plus.Y
-SVar:Y:Count$Valid Creature.Blue+YouDontCtrl
+SVar:X:Count$Valid Creature.White+OppCtrl/Plus.Y
+SVar:Y:Count$Valid Creature.Blue+OppCtrl
 SVar:AntiBuffedBy:Creature.White,Creature.Blue
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon

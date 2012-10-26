@@ -4,7 +4,7 @@ Types:Instant
 Text:no text
 K:Flashback 1 W PayLife<3>
 A:SP$ Tap | Cost$ 3 W | TgtPrompt$ Select target untapped creature you control | ValidTgts$ Creature.untapped+YouCtrl | SubAbility$ SpiritDmg | RememberTapped$ True | SpellDescription$ Tap target untapped creature you control. If you do, it deals damage equal to its power to target attacking or blocking creature an opponent controls.
-SVar:SpiritDmg:DB$DealDamage | ValidTgts$ Creature.attacking+YouDontCtrl,Creature.blocking+YouDontCtrl | TgtPrompt$ Select target attacking or blocking creature an opponent controls | NumDmg$ SpiritStrength | ConditionCheckSVar$ WasTapped | ConditionSVarCompare$ GE1
+SVar:SpiritDmg:DB$ DealDamage | ValidTgts$ Creature.attacking+OppCtrl,Creature.blocking+OppCtrl | TgtPrompt$ Select target attacking or blocking creature an opponent controls | NumDmg$ SpiritStrength | ConditionCheckSVar$ WasTapped | ConditionSVarCompare$ GE1
 SVar:SpiritStrength:Targeted$CardPower
 SVar:WasTapped:Remembered$Amount
 SVar:RemAIDeck:True

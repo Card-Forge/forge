@@ -4,7 +4,7 @@ Types:Creature Wurm
 Text:no text
 PT:1/1
 S:Mode$ Continuous | Affected$ Card.Self | AddToughness$ 1 | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME gets +0/+1 as long as an opponent controls an Island.
-SVar:X:Count$Valid Island.YouDontCtrl
+SVar:X:Count$Valid Island.OppCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/water_wurm.jpg
 SetInfo:DRK|Common|http://magiccards.info/scans/en/dk/37.jpg

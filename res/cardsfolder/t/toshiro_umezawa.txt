@@ -4,7 +4,7 @@ Types:Legendary Creature Human Samurai
 Text:no text
 PT:2/2
 K:Bushido 1
-T:Mode$ ChangesZone | ValidCard$ Creature.YouDontCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature an opponent controls dies, you may cast target instant card from your graveyard. If that card would be put into a graveyard this turn, exile it instead.
+T:Mode$ ChangesZone | ValidCard$ Creature.OppCtrl | Origin$ Battlefield | Destination$ Graveyard | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever a creature an opponent controls dies, you may cast target instant card from your graveyard. If that card would be put into a graveyard this turn, exile it instead.
 SVar:TrigPump:AB$ Pump | Cost$ 0 | TgtZone$ Graveyard | ValidTgts$ Instant.YouCtrl | TgtPrompt$ Choose target instant from your graveyard | KW$ HIDDEN If CARDNAME would be put into a graveyard, exile it instead. | PumpZone$ Graveyard | SubAbility$ TrigPlay
 SVar:TrigPlay:DB$ Play | Defined$ Targeted
 SVar:Rarity:Rare
