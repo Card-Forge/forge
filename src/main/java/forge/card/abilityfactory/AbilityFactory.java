@@ -2383,14 +2383,17 @@ public class AbilityFactory {
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public static SpellAbility findParentsTargetedPlayer(final SpellAbility sa) {
+        if (sa.getTarget() != null && !sa.getTarget().getTargetPlayers().isEmpty()) {
+            return sa;
+        }
         SpellAbility parent = sa;
 
         do {
-            if (!(parent instanceof AbilitySub)) {
+            if (!(parent instanceof AbilitySub) || ((AbilitySub) parent).getParent() == null) {
                 return parent;
             }
             parent = ((AbilitySub) parent).getParent();
-        } while ((parent.getTarget() == null) || (parent.getTarget().getTargetPlayers().size() == 0));
+        } while (parent.getTarget() == null || parent.getTarget().getTargetPlayers().isEmpty());
 
         return parent;
     }
