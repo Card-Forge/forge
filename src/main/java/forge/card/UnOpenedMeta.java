@@ -37,7 +37,7 @@ public class UnOpenedMeta extends UnOpenedProduct {
     private final ArrayList<MetaSet> metaSets;
     private final boolean choice;
     private List<String> partiality;
-    private final int partialityPreference = 80;
+    private final int partialityPreference = 100; // Otherwise guild sealed will result in silly combinations
     private final Random generator = MyRandom.getRandom();
 
     /**
