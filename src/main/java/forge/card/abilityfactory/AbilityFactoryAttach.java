@@ -1635,7 +1635,7 @@ public class AbilityFactoryAttach {
             tgt.resetTargets();
         }
 
-        if (abCost.getTotalMana().contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+        if (abCost != null && abCost.getTotalMana().contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
 
             if (xPay == 0) {
