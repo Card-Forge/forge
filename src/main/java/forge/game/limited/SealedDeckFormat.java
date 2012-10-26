@@ -259,7 +259,9 @@ public class SealedDeckFormat {
                 if (element.endsWith(".sealed")) {
                     final List<String> dfData = FileUtil.readFile("res/sealed/" + element);
                     final CustomLimited cs = CustomLimited.parse(dfData, Singletons.getModel().getDecks().getCubes());
-                    customs.add(cs);
+                    if (cs.getNumCards() > 5) { // Do not allow too small cubes to be played as 'stand-alone'!
+                        customs.add(cs);
+                    }
                 }
             }
 
