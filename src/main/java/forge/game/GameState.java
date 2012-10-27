@@ -329,12 +329,9 @@ public class GameState {
         if (zone == ZoneType.Stack) {
             return getStackZone().getCards();
         } else {
-            List<Card> cards = null;
+            List<Card> cards = new ArrayList<Card>();
             for (final Player p : getPlayers()) {
-                if ( cards == null ) 
-                    cards = p.getZone(zone).getCards();
-                else
-                    cards.addAll(p.getZone(zone).getCards());
+                cards.addAll(p.getZone(zone).getCards());
             }
             return cards;
         }
