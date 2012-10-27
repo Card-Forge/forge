@@ -362,13 +362,13 @@ public class CardFactoryCreatures {
     }
 
     private static void getCard_SphinxJwar(final Card card, final String cardName) {
-        final SpellAbility ability1 = new Ability(card, "0") {
+        final SpellAbility ability1 = new AbilityStatic(card, "0") {
             @Override
             public void resolve() {
                 final Player player = card.getController();
                 final PlayerZone lib = player.getZone(ZoneType.Library);
 
-                if (lib.size() < 1) {
+                if (lib.size() < 1 || !this.getActivatingPlayer().equals(card.getController())) {
                     return;
                 }
 
