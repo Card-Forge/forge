@@ -3,8 +3,8 @@ ManaCost:3 U
 Types:Instant
 Text:no text
 A:SP$ ChangeZone | Cost$ 3 U | Origin$ Library | Destination$ Library | ChangeType$ Card | ChangeNum$ 4 | RememberChanged$ True | Reveal$ True | Shuffle$ False | DifferentNames$ True | StackDescription$ SpellDescription | SubAbility$ DBChangeZone1 | SpellDescription$ Search your library for four cards with different names and reveal them. Target opponent chooses two of those cards. Put the chosen cards into your graveyard and the rest into your hand. Then shuffle your library.
-SVar:DBChangeZone1:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.IsRemembered | Chooser$ Opponent | ChangeNum$ 2 | Mandatory$ True | NoLooking$ True | SelectPrompt$ Select a card for the hand | Shuffle$ False | SubAbility$ DBChangeZone2 | StackDescription$ None
-SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | ChangeType$ Card.IsRemembered | ChangeNum$ 2 | Mandatory$ True | NoLooking$ True | SelectPrompt$ Select a card for the graveyard | StackDescription$ None | SubAbility$ DBCleanup
+SVar:DBChangeZone1:DB$ ChangeZone | Origin$ Library | Destination$ Graveyard | ChangeType$ Card.IsRemembered | Chooser$ Opponent | ChangeNum$ 2 | Mandatory$ True | NoLooking$ True | SelectPrompt$ Select a card for the hand | Shuffle$ False | SubAbility$ DBChangeZone2 | StackDescription$ None
+SVar:DBChangeZone2:DB$ ChangeZone | Origin$ Library | Destination$ Hand | ChangeType$ Card.IsRemembered | ChangeNum$ 2 | Mandatory$ True | NoLooking$ True | SelectPrompt$ Select a card for the graveyard | StackDescription$ None | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gifts_ungiven.jpg
