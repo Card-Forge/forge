@@ -221,11 +221,8 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
         this.getTableCatalog().setup(VCardCatalog.SINGLETON_INSTANCE, columnsCatalog);
         this.getTableDeck().setup(VCurrentDeck.SINGLETON_INSTANCE, columnsDeck);
 
-        Deck deck = null;
+        Deck deck = new Deck();
 
-        if (deck == null) {
-            deck = new Deck();
-        }
 
         SEditorUtil.resetUI();
 

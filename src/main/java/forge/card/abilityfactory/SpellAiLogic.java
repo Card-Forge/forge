@@ -23,5 +23,5 @@ public abstract class SpellAiLogic {
     }
     
     // consider safe
-    public boolean chkAIDrawback() { return true; }
+    public boolean chkAIDrawback(Map<String, String> params, SpellAbility sa) { return true; }
 }

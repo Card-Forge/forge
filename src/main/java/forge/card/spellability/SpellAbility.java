@@ -1268,14 +1268,13 @@ public abstract class SpellAbility {
             this.targetCard = card;
         }
         String desc = "";
-        if (null != card) {
-            if (!card.isFaceDown()) {
-                desc = this.getSourceCard().getName() + " - targeting " + card;
-            } else {
-                desc = this.getSourceCard().getName() + " - targeting Morph(" + card.getUniqueNumber() + ")";
-            }
-            this.setStackDescription(desc);
+
+        if (!card.isFaceDown()) {
+            desc = this.getSourceCard().getName() + " - targeting " + card;
+        } else {
+            desc = this.getSourceCard().getName() + " - targeting Morph(" + card.getUniqueNumber() + ")";
         }
+        this.setStackDescription(desc);
     }
 
     /**

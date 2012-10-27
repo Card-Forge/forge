@@ -388,8 +388,8 @@ public class SpellPermanent extends Spell {
                 return false;
             }
 
-            final List<Card> cl = (List<Card>) this.championGetCreature.get();
-            if ((o == null) || !(cl.size() > 0) || !this.getSourceCard().isInZone(ZoneType.Hand)) {
+            final List<Card> cl = this.championGetCreature.get();
+            if ( !(cl.size() > 0) || !this.getSourceCard().isInZone(ZoneType.Hand)) {
                 return false;
             }
         }

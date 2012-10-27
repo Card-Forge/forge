@@ -28,8 +28,8 @@ import forge.CardUtil;
 import forge.Command;
 import forge.GameActionUtil;
 import forge.Singletons;
-import forge.card.abilityfactory.ai.AlterLifeAi;
-import forge.card.abilityfactory.effects.AlterLifeEffects;
+import forge.card.abilityfactory.ai.*;
+import forge.card.abilityfactory.effects.*;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -429,6 +429,9 @@ public class AbilityFactory {
         // ***********************************
         // Match API keywords. These are listed in alphabetical order.
 
+        SpellAiLogic ai = null;
+        SpellEffect se = null;
+        
         if (this.api.equals("AddTurn")) {
             if (this.isAb) {
                 spellAbility = AbilityFactoryTurns.createAbilityAddTurn(this);
@@ -440,23 +443,13 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Animate")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryAnimate.createAbilityAnimate(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryAnimate.createSpellAnimate(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryAnimate.createDrawbackAnimate(this);
-            }
+            ai = new AnimateAi();
+            se = new AnimateEffect();
         }
 
         else if (this.api.equals("AnimateAll")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryAnimate.createAbilityAnimateAll(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryAnimate.createSpellAnimateAll(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryAnimate.createDrawbackAnimateAll(this);
-            }
+            ai = new AnimateAllAi();
+            se = new AnimateAllEffect();
         }
 
         else if (this.api.equals("Attach")) {
@@ -779,16 +772,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("ExchangeLife")) {
-            SpellAiLogic ai = new AlterLifeAi.ExchangeLifeAi();
-            SpellEffect se = new AlterLifeEffects.ExchangeLifeEffect();
-
-            if (this.isAb) {
-                spellAbility = new UniversalAbility(this.getHostCard(), this.getAbCost(), this.getAbTgt(), this.getMapParams(), se, ai);
-            } else if (this.isSp) {
-                spellAbility = new UniversalSpell(this.getHostCard(), this.getAbCost(), this.getAbTgt(), this.getMapParams(), se, ai);
-            } else if (this.isDb) {
-                spellAbility = new UniversalDrawback(this.getHostCard(), this.getAbTgt(), this.getMapParams(), se, ai);
-            }
+            ai = new ExchangeLifeAi();
+            se = new ExchangeLifeEffect();
         }
 
         else if (this.api.equals("ExchangeControl")) {
@@ -846,16 +831,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("GainLife")) {
-            SpellAiLogic ai = new AlterLifeAi.GainLifeAi();
-            SpellEffect se = new AlterLifeEffects.GainLifeEffect();
-                    
-            if (this.isAb) {
-                spellAbility = new UniversalAbility(this.getHostCard(), this.getAbCost(), this.getAbTgt(), this.getMapParams(), se, ai);
-            } else if (this.isSp) {
-                spellAbility = new UniversalSpell(this.getHostCard(), this.getAbCost(), this.getAbTgt(), this.getMapParams(), se, ai);
-            } else if (this.isDb) {
-                spellAbility = new UniversalDrawback(this.getHostCard(), this.getAbTgt(), this.getMapParams(), se, ai);
-            }
+            ai = new GainLifeAi();
+            se = new GainLifeEffect();
         }
 
         else if (this.api.equals("GenericChoice")) {
@@ -869,16 +846,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("LoseLife")) {
-            SpellAiLogic ai = new AlterLifeAi.LoseLifeAi();
-            SpellEffect se = new AlterLifeEffects.LoseLifeEffect();
-            
-            if (this.isAb) {
-                spellAbility = new UniversalAbility(this.getHostCard(), this.getAbCost(), this.getAbTgt(), this.getMapParams(), se, ai);
-            } else if (this.isSp) {
-                spellAbility = new UniversalSpell(this.getHostCard(), this.getAbCost(), this.getAbTgt(), this.getMapParams(), se, ai);
-            } else if (this.isDb) {
-                spellAbility = new UniversalDrawback(this.getHostCard(), this.getAbTgt(), this.getMapParams(), se, ai);
-            }
+            ai = new LoseLifeAi();
+            se = new LoseLifeEffect();
         }
 
         else if (this.api.equals("LosesGame")) {
@@ -985,16 +954,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Poison")) {
-            SpellAiLogic ai = new AlterLifeAi.PoisonAi();
-            SpellEffect se = new AlterLifeEffects.PoisonEffect();
-            
-            if (this.isAb) {
-                spellAbility = new UniversalAbility(this.getHostCard(), this.getAbCost(), this.getAbTgt(), this.getMapParams(), se, ai);
-            } else if (this.isSp) {
-                spellAbility = new UniversalSpell(this.getHostCard(), this.getAbCost(), this.getAbTgt(), this.getMapParams(), se, ai);
-            } else if (this.isDb) {
-                spellAbility = new UniversalDrawback(this.getHostCard(), this.getAbTgt(), this.getMapParams(), se, ai);
-            }
+            ai = new PoisonAi();
+            se = new PoisonEffect();
         }
 
         else if (this.api.equals("PreventDamage")) {
@@ -1212,16 +1173,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("SetLife")) {
-            SpellAiLogic ai = new AlterLifeAi.SetLifeAi();
-            SpellEffect se = new AlterLifeEffects.SetLifeEffect();
-
-            if (this.isAb) {
-                spellAbility = new UniversalAbility(this.getHostCard(), this.getAbCost(), this.getAbTgt(), this.getMapParams(), se, ai);
-            } else if (this.isSp) {
-                spellAbility = new UniversalSpell(this.getHostCard(), this.getAbCost(), this.getAbTgt(), this.getMapParams(), se, ai);
-            } else if (this.isDb) {
-                spellAbility = new UniversalDrawback(this.getHostCard(), this.getAbTgt(), this.getMapParams(), se, ai);
-            }
+            ai = new SetLifeAi();
+            se = new SetLifeEffect();
         }
 
         else if (this.api.equals("SetState")) {
@@ -1355,7 +1308,19 @@ public class AbilityFactory {
                 spellAbility = AbilityFactoryEndGameCondition.createDrawbackWinsGame(this);
             }
         }
-
+        
+        // build code is here once for the refactored APIs
+        if ( se != null && ai != null && spellAbility == null)
+        {
+            if (this.isAb) {
+                spellAbility = new UniversalAbility(this.getHostCard(), this.getAbCost(), this.getAbTgt(), this.getMapParams(), se, ai);
+            } else if (this.isSp) {
+                spellAbility = new UniversalSpell(this.getHostCard(), this.getAbCost(), this.getAbTgt(), this.getMapParams(), se, ai);
+            } else if (this.isDb) {
+                spellAbility = new UniversalDrawback(this.getHostCard(), this.getAbTgt(), this.getMapParams(), se, ai);
+            }
+        }
+        
         // //////////////////////
         //
         // End API matching. The above APIs are listed in alphabetical order.

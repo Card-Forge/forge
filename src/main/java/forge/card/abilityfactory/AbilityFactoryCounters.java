@@ -580,17 +580,14 @@ public class AbilityFactoryCounters {
         } else {
             list = player.getCardsIn(ZoneType.Battlefield);
             list = CardLists.getTargetableCards(list, sa);
-            if (abTgt != null) {
-                list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
-            }
+            list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
+
             if (list.isEmpty() && mandatory) {
                 // If there isn't any prefered cards to target, gotta choose
                 // non-preferred ones
                 list = player.getOpponent().getCardsIn(ZoneType.Battlefield);
                 list = CardLists.getTargetableCards(list, sa);
-                if (abTgt != null) {
-                    list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
-                }
+                list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
                 preferred = false;
             }
             // Not mandatory, or the the list was regenerated and is still
