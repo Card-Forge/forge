@@ -44,6 +44,23 @@ Fixes/Features:
 - Rever accidental commit of wrong version of block #37.
 - Cleared out the changes.txt file, now ready for new material.
 - Added the recent commit logs to changes.txt.
+- Changed more instances of "YouDontCtrl" to "OppCtrl".
+- Changed more instances of "YouDontCtrl" to "OppCtrl".
+- Fixed name of Faerie Impostor in RTR Guild Packs
+- Updated some deck SVars.
+- Improved AI dealing with Flailing Manticore and Flailing Soldier.
+- Fixed AI not paying unless costs of its own triggered abilities.
+- Improved AI of Frost Titan.
+- Made findParentsTargetedPlayer more robust.
+- Tweaked attacking AI.
+- Player has a field of type GameState
+- Experimental AbilityFactory refactoring
+- comment out debug
+- Fixed Utvara Hellkite.
+- Added the property "OppOwn" and converted some cards.
+- Fixed Unleash not interacting correctly with Corpsejack Menace.
+- Fixed order in the script of Gifts Ungiven.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -53,7 +70,7 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 Added the following cards:
 
-
+Metamorphose
 
 
 end
