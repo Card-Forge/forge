@@ -11,6 +11,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
@@ -54,7 +55,7 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
         .text("Double click a non-random deck for its decklist.")
         .fontSize(12).build();
 
-    private final JSlider sliOpponents = new JSlider(JSlider.HORIZONTAL, 5, 50, 20);
+    private final JSlider sliOpponents = new JSlider(SwingConstants.HORIZONTAL, 5, 50, 20);
     //private JSlider sliGamesPerMatch = new JSlider(JSlider.HORIZONTAL, 1, 7, 3);
 
     private final JCheckBox boxUserDecks = new FCheckBox("Custom User Decks");
@@ -81,8 +82,8 @@ public enum VSubmenuGauntletQuick implements IVSubmenu<CSubmenuGauntletQuick> {
 
     private final JScrollPane scrDecks = new FScrollPane(lstDecks);
     private final JScrollPane scrLoad = new JScrollPane(gauntletList,
-            JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-            JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
     private final JLabel lblDesc1 = new FLabel.Builder()
             .text("Matches per gauntlet").fontStyle(Font.ITALIC).build();

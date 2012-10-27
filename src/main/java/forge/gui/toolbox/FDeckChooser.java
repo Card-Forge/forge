@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -55,7 +56,7 @@ public class FDeckChooser extends JPanel {
     private final JList lstDecks      = new FList();
     private final ExperimentalLabel btnRandom = new ExperimentalLabel("Random");
 
-    private final JScrollPane scrDecks  = new FScrollPane(lstDecks, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+    private final JScrollPane scrDecks  = new FScrollPane(lstDecks, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     
     private final FLabel lblDecklist = new FLabel.Builder()
     .text("Double click a non-random deck for its decklist.")

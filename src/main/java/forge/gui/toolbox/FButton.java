@@ -223,6 +223,7 @@ public class FButton extends JButton implements ILocalRepaint {
     }
 
     /** Prevent button from repainting the whole screen. */
+    @Override
     public void repaintSelf() {
         final Dimension d = FButton.this.getSize();
         repaint(0, 0, d.width, d.height);

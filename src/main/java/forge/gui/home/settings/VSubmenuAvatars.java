@@ -6,7 +6,7 @@ import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Command;
@@ -39,8 +39,8 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
     /** */
     private final JPanel pnlAvatars = new JPanel();
     private final FScrollPane scrContent = new FScrollPane(pnlAvatars,
-            JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-            JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+            ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     private final FLabel lblAvatarHuman = new FLabel.Builder().hoverable(true).selectable(true)
             .iconScaleFactor(0.99f).iconInBackground(true).build();
@@ -120,7 +120,7 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
         pnlAvatars.setLayout(new MigLayout("insets 0, gap 0"));
         pnlAvatars.add(pnlAvatarUsers, "w 90%!, h 150px!, wrap");
         pnlAvatars.add(new FScrollPane(pnlAvatarPics,
-                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER),
+                ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER),
                 "w 90%!, pushy, growy, gap 5% 0 0 0");
 
         final Command cmdHuman = new Command() { @Override

@@ -142,6 +142,7 @@ import forge.util.MyRandom;
      *            a boolean.
      * @return a boolean.
      */
+    @Override
     public boolean doTriggerAINoCost(final Player ai, final Map<String, String> params,
             final SpellAbility sa, final boolean mandatory) {
 

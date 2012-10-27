@@ -613,7 +613,7 @@ public class ComputerUtil {
         final ArrayList<ArrayList<AbilityMana>> partSources = new ArrayList<ArrayList<AbilityMana>>();
         final ArrayList<Integer> partPriority = new ArrayList<Integer>();
         final String[] costParts = cost.toString().replace("X ", "").split(" ");
-        Boolean foundAllSources = findManaSources(ai, manaAbilityMap, partSources, partPriority, costParts);
+        boolean foundAllSources = findManaSources(ai, manaAbilityMap, partSources, partPriority, costParts);
         if (!foundAllSources) {
             if (!test) {
                 // real payment should not arrive here
@@ -780,11 +780,11 @@ public class ComputerUtil {
      * @param foundAllSources
      * @return Were all mana sources found?
      */
-    private static Boolean findManaSources(final Player ai, final HashMap<String, ArrayList<AbilityMana>> manaAbilityMap,
+    private static boolean findManaSources(final Player ai, final HashMap<String, ArrayList<AbilityMana>> manaAbilityMap,
             final ArrayList<ArrayList<AbilityMana>> partSources, final ArrayList<Integer> partPriority,
             final String[] costParts) {
         final String[] shortColors = { "W", "U", "B", "R", "G" };
-        Boolean foundAllSources;
+        boolean foundAllSources;
         if (manaAbilityMap.isEmpty()) {
             foundAllSources = false;
         } else {
@@ -825,8 +825,8 @@ public class ComputerUtil {
                 } else if (costParts[nPart].length() > 1) { // Hybrid
                     final String firstColor = costParts[nPart].substring(0, 1);
                     final String secondColor = costParts[nPart].substring(2);
-                    final Boolean foundFirst = manaAbilityMap.containsKey(firstColor);
-                    final Boolean foundSecond = manaAbilityMap.containsKey(secondColor);
+                    final boolean foundFirst = manaAbilityMap.containsKey(firstColor);
+                    final boolean foundSecond = manaAbilityMap.containsKey(secondColor);
                     if (foundFirst || foundSecond) {
                         if (!foundFirst) {
                             srcFound.addAll(manaAbilityMap.get(secondColor));

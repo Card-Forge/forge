@@ -192,8 +192,8 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
                 card2 = ((CardPrinted) cp).toForgeCard();
                 CDeckEditorUI.SINGLETON_INSTANCE.setCard(card2);
             }
-            else if (cp instanceof InventoryItem) {
-                CDeckEditorUI.SINGLETON_INSTANCE.setCard((InventoryItem)cp);
+            else if (cp != null) {
+                CDeckEditorUI.SINGLETON_INSTANCE.setCard(cp);
             }
             else {
                 card2 = null;

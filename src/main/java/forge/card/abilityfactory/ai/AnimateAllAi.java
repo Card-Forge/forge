@@ -1,6 +1,5 @@
 package forge.card.abilityfactory.ai;
 
-import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;

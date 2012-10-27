@@ -18,18 +18,12 @@
 package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 
 import forge.Card;
 
-import forge.card.spellability.AbilityActivated;
-import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
-import forge.card.abilityfactory.AbilityFactory;
-import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.cost.Cost;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 

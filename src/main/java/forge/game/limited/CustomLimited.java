@@ -53,10 +53,10 @@ public class CustomLimited extends DeckBase {
     private static final long serialVersionUID = 7435640939026612173L;
 
     /** The Ignore rarity. */
-    private Boolean ignoreRarity;
+    private boolean ignoreRarity;
 
     /** The Singleton. */
-    private Boolean singleton = false;
+    private boolean singleton = false;
 
     /** The Num cards. */
     private int numCards = 15;
@@ -158,7 +158,7 @@ public class CustomLimited extends DeckBase {
      * 
      * @return the singleton
      */
-    public Boolean getSingleton() {
+    public boolean getSingleton() {
         return this.singleton;
     }
 
@@ -168,7 +168,7 @@ public class CustomLimited extends DeckBase {
      * @param singletonIn
      *            the singleton to set
      */
-    public void setSingleton(final Boolean singletonIn) {
+    public void setSingleton(final boolean singletonIn) {
         this.singleton = singletonIn;
     }
 
@@ -177,7 +177,7 @@ public class CustomLimited extends DeckBase {
      * 
      * @return the ignoreRarity
      */
-    public Boolean getIgnoreRarity() {
+    public boolean getIgnoreRarity() {
         return this.ignoreRarity;
     }
 
@@ -187,7 +187,7 @@ public class CustomLimited extends DeckBase {
      * @param ignoreRarityIn
      *            the ignoreRarity to set
      */
-    public void setIgnoreRarity(final Boolean ignoreRarityIn) {
+    public void setIgnoreRarity(final boolean ignoreRarityIn) {
         this.ignoreRarity = ignoreRarityIn;
     }
 

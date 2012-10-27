@@ -58,6 +58,7 @@ public class GauntletIO {
     /** @return File[] */
     public static File[] getGauntletFilesUnlocked() {
         final FilenameFilter filter = new FilenameFilter() {
+            @Override
             public boolean accept(File dir, String name) {
                 return (!name.matches(GauntletIO.REGEX_LOCKED)
                         && !name.matches(GauntletIO.SVN_IGNORE));
@@ -71,6 +72,7 @@ public class GauntletIO {
     /** @return File[] */
     public static File[] getGauntletFilesQuick() {
         final FilenameFilter filter = new FilenameFilter() {
+            @Override
             public boolean accept(File dir, String name) {
                 return (name.matches(GauntletIO.REGEX_QUICK)
                         && !name.matches(GauntletIO.SVN_IGNORE));
@@ -84,6 +86,7 @@ public class GauntletIO {
     /** @return File[] */
     public static File[] getGauntletFilesLocked() {
         final FilenameFilter filter = new FilenameFilter() {
+            @Override
             public boolean accept(File dir, String name) {
                 return (name.matches(GauntletIO.REGEX_LOCKED)
                         && !name.matches(GauntletIO.SVN_IGNORE));

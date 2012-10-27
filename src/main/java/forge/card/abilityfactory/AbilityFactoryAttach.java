@@ -304,13 +304,12 @@ public class AbilityFactoryAttach {
      *            the mandatory
      * @return true, if successful
      */
-    public static boolean attachPreference(final AbilityFactory af, final SpellAbility sa,
-            final Map<String, String> params, final Target tgt, final boolean mandatory) {
+    public static boolean attachPreference(final SpellAbility sa, final Map<String, String> params, final Target tgt, final boolean mandatory) {
         Object o;
         if (tgt.canTgtPlayer()) {
-            o = AbilityFactoryAttach.attachToPlayerAIPreferences(sa.getActivatingPlayer(),  af, sa, mandatory);
+            o = AbilityFactoryAttach.attachToPlayerAIPreferences(sa.getActivatingPlayer(), params, sa, mandatory);
         } else {
-            o = AbilityFactoryAttach.attachToCardAIPreferences(sa.getActivatingPlayer(), af, sa, params, mandatory);
+            o = AbilityFactoryAttach.attachToCardAIPreferences(sa.getActivatingPlayer(), sa, params, mandatory);
         }
 
         if (o == null) {
@@ -324,8 +323,6 @@ public class AbilityFactoryAttach {
     /**
      * Attach to card ai preferences.
      * 
-     * @param af
-     *            the af
      * @param sa
      *            the sa
      * @param params
@@ -334,7 +331,7 @@ public class AbilityFactoryAttach {
      *            the mandatory
      * @return the card
      */
-    public static Card attachToCardAIPreferences(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa,
+    public static Card attachToCardAIPreferences(final Player aiPlayer, final SpellAbility sa,
             final Map<String, String> params, final boolean mandatory) {
         final Target tgt = sa.getTarget();
         final Card attachSource = sa.getSourceCard();
@@ -1046,11 +1043,11 @@ public class AbilityFactoryAttach {
      *            the mandatory
      * @return the player
      */
-    public static Player attachToPlayerAIPreferences(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa,
+    public static Player attachToPlayerAIPreferences(final Player aiPlayer, final Map<String, String> params, final SpellAbility sa,
             final boolean mandatory) {
         Player p;
 
-        if ("Curse".equals(af.getMapParams().get("AILogic"))) {
+        if ("Curse".equals(params.get("AILogic"))) {
             p = aiPlayer.getOpponent();
         } else {
             p = aiPlayer;
@@ -1098,7 +1095,7 @@ public class AbilityFactoryAttach {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
-            if (!AbilityFactoryAttach.attachPreference(af, sa, params, tgt, false)) {
+            if (!AbilityFactoryAttach.attachPreference(sa, params, tgt, false)) {
                 return false;
             }
         }
@@ -1429,7 +1426,7 @@ public class AbilityFactoryAttach {
             }
         }
 
-        else if (AbilityFactoryAttach.attachPreference(af, aura, af.getMapParams(), tgt, true)) {
+        else if (AbilityFactoryAttach.attachPreference(aura, af.getMapParams(), tgt, true)) {
             final Object o = aura.getTarget().getTargets().get(0);
             if (o instanceof Card) {
                 //source.enchantEntity((Card) o);

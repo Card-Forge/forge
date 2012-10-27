@@ -3,6 +3,7 @@ package forge.gui.toolbox;
 import java.awt.Component;
 
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.border.LineBorder;
 
 /** 
@@ -18,7 +19,7 @@ public class FScrollPane extends JScrollPane {
      * @param c0 {@link java.awt.Component}
      */
     public FScrollPane(final Component c0) {
-        this(c0, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        this(c0, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     }
 
     /**

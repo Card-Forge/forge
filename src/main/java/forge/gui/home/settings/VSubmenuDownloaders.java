@@ -8,8 +8,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -263,8 +263,8 @@ public enum VSubmenuDownloaders implements IVSubmenu<CSubmenuDownloaders> {
         btnCloseBig.addActionListener(new ActionListener() { @Override
             public void actionPerformed(final ActionEvent arg0) { SOverlayUtils.hideOverlay(); } });
 
-        final FScrollPane scr = new FScrollPane(tpnDirections, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        final FScrollPane scr = new FScrollPane(tpnDirections, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scr.setBorder(new LineBorder(Color.black, 1));
         scr.setBounds(new Rectangle((w / 2 - 250), 80, 500, 400));
 

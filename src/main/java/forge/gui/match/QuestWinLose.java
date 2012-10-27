@@ -626,7 +626,7 @@ public class QuestWinLose extends ControlWinLose {
 
             if (sets.size() > maxChoices) {
                 if (maxChoices > 1) {
-                    Boolean[] choices = new Boolean[sets.size()];
+                    boolean[] choices = new boolean[sets.size()];
                     for (int i = 0; i < sets.size(); i++) {
                         choices[i] = false;
                     }

@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
@@ -69,7 +70,7 @@ public enum FView {
         frmDocument.setMinimumSize(new Dimension(800, 600));
         frmDocument.setLocationRelativeTo(null);
         frmDocument.setExtendedState(frmDocument.getExtendedState() | Frame.MAXIMIZED_BOTH);
-        frmDocument.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frmDocument.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frmDocument.setIconImage(FSkin.getIcon(FSkin.InterfaceIcons.ICO_FAVICON).getImage());
         frmDocument.setTitle("Forge: " + Singletons.getModel().getBuildInfo().getVersion());
 
