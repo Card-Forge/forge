@@ -787,8 +787,7 @@ public class MagicStack extends MyObservable {
          */
         if (sp.isSpell() && game.isCardInPlay("Bazaar of Wonders")) {
             boolean found = false;
-            List<Card> all = game.getCardsIn(ZoneType.Battlefield);
-            all = CardLists.filter(all, Presets.NON_TOKEN);
+            List<Card> all = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.NON_TOKEN);
             final List<Card> graves = game.getCardsIn(ZoneType.Graveyard);
             all.addAll(graves);
 

@@ -26,6 +26,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
 
 import forge.Card;
 
@@ -1521,7 +1522,7 @@ public class AbilityFactoryCounters {
     }
     
     private static void proliferateResolveHuman(final AbilityFactory af, final SpellAbility sa) {
-        final List<Card> unchosen = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        final List<Card> unchosen = Lists.newArrayList(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield));
         final List<Player> players = new ArrayList<Player>(Singletons.getModel().getGame().getPlayers());
         Singletons.getModel().getMatch().getInput().setInput(new Input() {
             private static final long serialVersionUID = -1779224307654698954L;

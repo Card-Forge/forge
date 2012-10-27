@@ -1664,8 +1664,7 @@ public final class AbilityFactoryChangeZone {
             tgt.resetTargets();
         }
 
-        List<Card> list = Singletons.getModel().getGame().getCardsIn(origin);
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), ai, source);
+        List<Card> list = CardLists.getValidCards(Singletons.getModel().getGame().getCardsIn(origin), tgt.getValidTgts(), ai, source);
         if (params.containsKey("AITgts")) {
             list = CardLists.getValidCards(list, params.get("AITgts"), sa.getActivatingPlayer(), source);
         }
@@ -1899,8 +1898,7 @@ public final class AbilityFactoryChangeZone {
         final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));
         final Target tgt = sa.getTarget();
 
-        List<Card> list = Singletons.getModel().getGame().getCardsIn(origin);
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), ai, source);
+        List<Card> list = CardLists.getValidCards(Singletons.getModel().getGame().getCardsIn(origin), tgt.getValidTgts(), ai, source);
 
         // Narrow down the list:
         if (origin.equals(ZoneType.Battlefield)) {

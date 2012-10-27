@@ -634,8 +634,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Prevent Damage static abilities
-        final List<Card> allp = game.getCardsIn(ZoneType.Battlefield);
-        for (final Card ca : allp) {
+        for (final Card ca : game.getCardsIn(ZoneType.Battlefield)) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage, isCombat);
@@ -1846,8 +1845,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
 
         // CantBeCast static abilities
-        final List<Card> allp = game.getCardsIn(ZoneType.Battlefield);
-        for (final Card ca : allp) {
+        for (final Card ca : game.getCardsIn(ZoneType.Battlefield)) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 if (stAb.applyAbility("CantPlayLand", null, this)) {
@@ -2245,7 +2243,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * @return a boolean.
      */
     public final boolean hasThreshold() {
-        return this.getZone(ZoneType.Graveyard).getCards().size() >= 7;
+        return this.getZone(ZoneType.Graveyard).size() >= 7;
     }
 
     /**
@@ -2256,7 +2254,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * @return a boolean.
      */
     public final boolean hasHellbent() {
-        return this.getZone(ZoneType.Hand).getCards().isEmpty();
+        return this.getZone(ZoneType.Hand).isEmpty();
     }
 
     /**
@@ -2267,7 +2265,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * @return a boolean.
      */
     public final boolean hasLandfall() {
-        final List<Card> list = ((PlayerZone) this.getZone(ZoneType.Battlefield)).getCardsAddedThisTurn(null);
+        final List<Card> list = this.getZone(ZoneType.Battlefield).getCardsAddedThisTurn(null);
         return Iterables.any(list, CardPredicates.Presets.LANDS);
     }
 

@@ -8132,8 +8132,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // Prevent Damage static abilities
-        final List<Card> allp = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
-        for (final Card ca : allp) {
+        for (final Card ca : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage, isCombat);
@@ -8921,8 +8920,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // CantTarget static abilities
-        final List<Card> allp = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
-        for (final Card ca : allp) {
+        for (final Card ca : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 if (stAb.applyAbility("CantTarget", this, sa)) {

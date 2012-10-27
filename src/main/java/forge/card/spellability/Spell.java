@@ -20,6 +20,8 @@ package forge.card.spellability;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.testng.collections.Lists;
+
 import forge.Card;
 import forge.Singletons;
 
@@ -123,7 +125,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         }
 
         // CantBeCast static abilities
-        final List<Card> allp = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        final List<Card> allp = Lists.newArrayList(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield));
         allp.add(card);
         for (final Card ca : allp) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();

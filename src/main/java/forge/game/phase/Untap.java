@@ -86,8 +86,7 @@ public class Untap extends Phase implements java.io.Serializable {
             return false;
         }
 
-        final List<Card> allp = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
-        for (final Card ca : allp) {
+        for (final Card ca : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
             if (ca.hasStartOfKeyword("Permanents don't untap during their controllers' untap steps")) {
                 final int keywordPosition = ca
                         .getKeywordPosition("Permanents don't untap during their controllers' untap steps");

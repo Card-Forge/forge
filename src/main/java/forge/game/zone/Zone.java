@@ -18,7 +18,6 @@
 package forge.game.zone;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -44,7 +43,7 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
 
     /** The cards. */
     protected final List<Card> cardList = new ArrayList<Card>();
-    protected final Collection<Card> roCardList;    
+    protected final List<Card> roCardList;    
     protected final ZoneType zoneName;
     protected boolean update = true;
 
@@ -65,7 +64,7 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
      */
     public Zone(final ZoneType zone) {
         this.zoneName = zone;
-        this.roCardList = Collections.unmodifiableCollection(cardList);
+        this.roCardList = Collections.unmodifiableList(cardList);
     }
 
     // ************ BEGIN - these methods fire updateObservers() *************
@@ -292,17 +291,7 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
     @Override
     public List<Card> getCards(final boolean filter) {
         // Non-Battlefield PlayerZones don't care about the filter
-        return new ArrayList<Card>(this.cardList);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.IPlayerZone#getCards(int)
-     */
-    @Override
-    public final List<Card> getCards(final int n) {
-        return this.cardList.subList(0, Math.min(this.cardList.size(), n));
+        return this.roCardList;
     }
 
     /*

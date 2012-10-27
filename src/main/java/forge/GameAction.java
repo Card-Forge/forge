@@ -27,6 +27,7 @@ import javax.swing.JFrame;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.AbilityFactoryAttach;
@@ -1754,8 +1755,7 @@ public class GameAction {
                     }
 
                     for (int i = 0; i < numToExile; i++) {
-                        final List<Card> grave = new ArrayList<Card>(pc.getZone(ZoneType.Graveyard)
-                                .getCards());
+                        final List<Card> grave = pc.getZone(ZoneType.Graveyard).getCards();
                         Card chosen = null;
                         for (final Card c : grave) { // Exile noncreatures first
                                                      // in
@@ -1868,7 +1868,7 @@ public class GameAction {
             }
         } // isSpell
 
-        List<Card> cardsOnBattlefield = game.getCardsIn(ZoneType.Battlefield);
+        List<Card> cardsOnBattlefield = Lists.newArrayList(game.getCardsIn(ZoneType.Battlefield));
         cardsOnBattlefield.add(originalCard);
         final ArrayList<StaticAbility> raiseAbilities = new ArrayList<StaticAbility>();
         final ArrayList<StaticAbility> reduceAbilities = new ArrayList<StaticAbility>();

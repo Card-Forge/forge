@@ -55,8 +55,6 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
 
         // TODO - should this freeze the Stack?
 
-        final List<Card> all = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
-
         //EndOfTurn.endOfTurnWallOfReverence();
         EndOfTurn.endOfTurnLighthouseChronologist();
 
@@ -65,7 +63,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
 
         Singletons.getModel().getGame().getStaticEffects().rePopulateStateBasedList();
 
-        for (final Card c : all) {
+        for (final Card c : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
             if (!c.isFaceDown() && c.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")) {
                 final Card card = c;
                 final SpellAbility sac = new Ability(card, "0") {

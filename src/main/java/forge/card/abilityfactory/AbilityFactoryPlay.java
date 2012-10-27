@@ -302,8 +302,7 @@ public final class AbilityFactoryPlay {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             ZoneType zone = tgt.getZone().get(0);
-            cards = Singletons.getModel().getGame().getCardsIn(zone);
-            cards = CardLists.getValidCards(cards, tgt.getValidTgts(), ai, source);
+            cards = CardLists.getValidCards(Singletons.getModel().getGame().getCardsIn(zone), tgt.getValidTgts(), ai, source);
             if (cards.isEmpty()) {
                 return false;
             }

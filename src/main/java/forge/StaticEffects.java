@@ -328,8 +328,7 @@ public class StaticEffects {
         final List<Card> cards = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
 
         Log.debug("== Start add state effects ==");
-        for (int i = 0; i < cards.size(); i++) {
-            final Card c = cards.get(i);
+        for (Card c : cards) {
             if (StaticEffects.cardToEffectsList.containsKey(c.getName())) {
                 final String[] effects = this.getCardToEffectsList().get(c.getName());
                 for (final String effect : effects) {

@@ -1261,54 +1261,54 @@ public final class GameActionUtil {
             final List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Graveyard);
 
             int count = 0;
-            for (int q = 0; q < list.size(); q++) {
-                if (list.get(q).isCreature()) {
+            for (Card c : list) {
+                if (c.isCreature()) {
                     count++;
                     break;
                 }
             }
-            for (int q = 0; q < list.size(); q++) {
-                if (list.get(q).isSorcery()) {
+            for (Card c : list) {
+                if (c.isSorcery()) {
                     count++;
                     break;
                 }
             }
-            for (int q = 0; q < list.size(); q++) {
-                if (list.get(q).isInstant()) {
+            for (Card c : list) {
+                if (c.isInstant()) {
                     count++;
                     break;
                 }
             }
-            for (int q = 0; q < list.size(); q++) {
-                if (list.get(q).isArtifact()) {
-                    count++;
-                    break;
-                }
-            }
-
-            for (int q = 0; q < list.size(); q++) {
-                if (list.get(q).isEnchantment()) {
+            for (Card c : list) {
+                if (c.isArtifact()) {
                     count++;
                     break;
                 }
             }
 
-            for (int q = 0; q < list.size(); q++) {
-                if (list.get(q).isLand()) {
+            for (Card c : list) {
+                if (c.isEnchantment()) {
                     count++;
                     break;
                 }
             }
 
-            for (int q = 0; q < list.size(); q++) {
-                if (list.get(q).isPlaneswalker()) {
+            for (Card c : list) {
+                if (c.isLand()) {
                     count++;
                     break;
                 }
             }
 
-            for (int q = 0; q < list.size(); q++) {
-                if (list.get(q).isTribal()) {
+            for (Card c : list) {
+                if (c.isPlaneswalker()) {
+                    count++;
+                    break;
+                }
+            }
+
+            for (Card c : list) {
+                if (c.isTribal()) {
                     count++;
                     break;
                 }

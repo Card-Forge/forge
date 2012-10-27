@@ -132,15 +132,6 @@ interface IZone {
     List<Card> getCards();
 
     /**
-     * Gets the cards.
-     * 
-     * @param n
-     *            the n
-     * @return the cards
-     */
-    List<Card> getCards(int n);
-
-    /**
      * Contains.
      * 
      * @param c
