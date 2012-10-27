@@ -2,7 +2,7 @@ Name:Two-Headed Dragon
 ManaCost:4 R R
 Types:Creature Dragon
 Text:no text
-PT:2/5
+PT:4/4
 K:Flying
 A:AB$ Pump | Cost$ 1 R | NumAtt$ +2 | NumDef$ +0 | SpellDescription$ CARDNAME gets +2/+0 until end of turn.
 K:CARDNAME can't be blocked except by two or more creatures.

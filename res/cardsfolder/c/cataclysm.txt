@@ -10,7 +10,7 @@ SVar:ChooseArtfOpp:DB$ ChooseCard | Defined$ Opponent | Amount$ 1 | Choices$ Art
 SVar:ChooseCrtrOpp:DB$ ChooseCard | Defined$ Opponent | Amount$ 1 | Choices$ Creature.YouDontCtrl | SubAbility$ ChooseEnchOpp | RememberChosen$ True
 SVar:ChooseEnchOpp:DB$ ChooseCard | Defined$ Opponent | Amount$ 1 | Choices$ Enchantment.YouDontCtrl | SubAbility$ ChooseLandOpp | RememberChosen$ True
 SVar:ChooseLandOpp:DB$ ChooseCard | Defined$ Opponent | Amount$ 1 | Choices$ Land.YouDontCtrl | SubAbility$ SacAllArtf | RememberChosen$ True
-SVar:SacAllArtf:DB$SacrificeAll | ValidCards$ Artifact.IsNotRemembered,Creature.IsNotRemembered,Enchantment.IsNotRemembered,Land.IsNotRemembered | SubAbility$ DBCleanup
+SVar:SacAllArtf:DB$SacrificeAll | ValidCards$ Permanent.IsNotRemembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
