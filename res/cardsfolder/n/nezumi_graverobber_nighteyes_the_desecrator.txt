@@ -3,7 +3,7 @@ ManaCost:1 B
 Types:Creature Rat Rogue
 Text:no text
 PT:2/1
-A:AB$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card.YouDontCtrl | SubAbility$ DBFlip | SpellDescription$ Exile target card from an opponent's graveyard. If no cards are in that graveyard, flip CARDNAME.
+A:AB$ ChangeZone | Cost$ 1 B | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Card.OppOwn | SubAbility$ DBFlip | SpellDescription$ Exile target card from an opponent's graveyard. If no cards are in that graveyard, flip CARDNAME.
 SVar:DBFlip:DB$SetState | Defined$ Self | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | References$ X | Mode$ Flip
 SVar:X:Count$InOppYard
 AlternateMode:Flip

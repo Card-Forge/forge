@@ -6,11 +6,11 @@ PT:3/2
 K:Flying
 K:Persist
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, put target creature card from an opponent's graveyard onto the battlefield under your control. It has haste. At the beginning of your next end step, exile it.
-SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature from an opponent's graveyard | RememberTargets$ True | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SubAbility$ DBPump
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature.OppOwn | TgtPrompt$ Select target creature from an opponent's graveyard | RememberTargets$ True | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ Haste | SubAbility$ DelTrig
-SVar:DelTrig:DB$DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigExile | TriggerDescription$ Exile creature at the beginning of your next end step.
-SVar:TrigExile:AB$ChangeZoneAll | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | ChangeType$ Creature.IsRemembered | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:DelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigExile | TriggerDescription$ Exile creature at the beginning of your next end step.
+SVar:TrigExile:AB$ ChangeZoneAll | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | ChangeType$ Creature.IsRemembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/puppeteer_clique.jpg

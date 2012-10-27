@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Creature Insect Druid
 Text:no text
 PT:2/3
-A:AB$ ChangeZone | Cost$ T | ValidTgts$ Card.YouDontCtrl | TargetMin$ 2 | TargetMax$ 2 | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBDestroy | SpellDescription$ Return two target cards from an opponent's graveyard to his or her hand. Destroy target artifact or enchantment.
+A:AB$ ChangeZone | Cost$ T | ValidTgts$ Card.OppOwn | TargetMin$ 2 | TargetMax$ 2 | Origin$ Graveyard | Destination$ Hand | SubAbility$ DBDestroy | SpellDescription$ Return two target cards from an opponent's graveyard to his or her hand. Destroy target artifact or enchantment.
 SVar:DBDestroy:DB$Destroy | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment
 SVar:RemAIDeck:True
 SVar:Rarity:Common

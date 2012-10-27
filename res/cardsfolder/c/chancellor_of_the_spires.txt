@@ -10,7 +10,7 @@ SVar:TrigDrain:Mode$ Phase | Phase$ Upkeep | Execute$ Mill | TriggerDescription$
 SVar:Mill:AB$ Mill | Cost$ 0 | NumCards$ 7 | Defined$ Opponent | SubAbility$ RemoveMe
 SVar:RemoveMe:DB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Exile
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, you may cast target instant or sorcery card from an opponent's graveyard without paying its mana cost.
-SVar:TrigChangeZone:DB$Play | TgtZone$ Graveyard | WithoutManaCost$ True | ValidTgts$ Instant.YouDontCtrl,Sorcery.YouDontCtrl | TgtPrompt$ Choose target instant or sorcery card from an opponent's graveyard | Optional$ True
+SVar:TrigChangeZone:DB$ Play | TgtZone$ Graveyard | WithoutManaCost$ True | ValidTgts$ Instant.OppOwn,Sorcery.OppOwn | TgtPrompt$ Choose target instant or sorcery card from an opponent's graveyard | Optional$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chancellor_of_the_spires.jpg
 SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/31.jpg

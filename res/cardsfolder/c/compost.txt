@@ -2,8 +2,8 @@ Name:Compost
 ManaCost:1 G
 Types:Enchantment
 Text:no text
-T:Mode$ ChangesZone | ValidCard$ Card.Black+YouDontCtrl | Origin$ Any | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a black card is put into an opponent's graveyard from anywhere, you may draw a card.
-SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+T:Mode$ ChangesZone | ValidCard$ Card.Black+nonToken+OppOwn | Origin$ Any | Destination$ Graveyard | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ Whenever a black card is put into an opponent's graveyard from anywhere, you may draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/compost.jpg

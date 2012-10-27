@@ -4,8 +4,8 @@ Types:Artifact Equipment
 Text:no text
 K:Equip 4
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Equipped creature gets +2/+2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.wasDealtDamageByEquipeeThisTurn | Execute$ ScytheReturn | TriggerDescription$ Whenever a creature dealt damage by equipped creature this turn dies, return that card to the battlefield under your control. Attach CARDNAME to that creature.
-SVar:ScytheReturn:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ TriggeredCard | RememberChanged$ True | SubAbility$ ScytheAttach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.wasDealtDamageByEquipeeThisTurn | TriggerZones$ Battlefield | Execute$ ScytheReturn | TriggerDescription$ Whenever a creature dealt damage by equipped creature this turn dies, return that card to the battlefield under your control. Attach CARDNAME to that creature.
+SVar:ScytheReturn:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ TriggeredCard | RememberChanged$ True | SubAbility$ ScytheAttach
 SVar:ScytheAttach:DB$ Attach | Defined$ Remembered | SubAbility$ WretchedCleanup
 SVar:WretchedCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Rarity:Rare

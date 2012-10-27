@@ -3,9 +3,9 @@ ManaCost:B B B
 Types:Enchantment
 Text:no text
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken+YouOwn | Execute$ TrigToken | TriggerZones$ Graveyard | TriggerDescription$ Whenever a nontoken creature is put into your graveyard from the battlefield, if CARDNAME is in your graveyard, put a 2/2 black Zombie creature token onto the battlefield.
-SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Graveyard | ValidCard$ Creature.YouDontOwn | Execute$ TrigChange | TriggerDescription$ When a creature is put into an opponent's graveyard from the battlefield, if CARDNAME is in your graveyard, exile Bridge from Below.
-SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Zombie | TokenTypes$ Creature,Zombie | TokenOwner$ You | TokenColors$ Black | TokenPower$ 2 | TokenToughness$ 2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Graveyard | ValidCard$ Creature.OppOwn | Execute$ TrigChange | TriggerDescription$ When a creature is put into an opponent's graveyard from the battlefield, if CARDNAME is in your graveyard, exile Bridge from Below.
+SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:DiscardMe:5

@@ -2,8 +2,8 @@ Name:Lurking Skirge
 ManaCost:1 B
 Types:Enchantment
 Text:no text
-T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ValidCard$ Creature.YouDontOwn | IsPresent$ Card.Self+Enchantment | Execute$ TrigAnimate | TriggerDescription$ When a creature is put into an opponent's graveyard from the battlefield, if CARDNAME is an enchantment, CARDNAME becomes a 3/2 Imp creature with flying.
-SVar:TrigAnimate:AB$Animate | Cost$ 0 | Defined$ Self | Power$ 3 | Toughness$ 2 | Types$ Creature,Imp | Keywords$ Flying | OverwriteTypes$ True | Permanent$ True
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | TriggerZones$ Battlefield | ValidCard$ Creature.OppOwn | IsPresent$ Card.Self+Enchantment | Execute$ TrigAnimate | TriggerDescription$ When a creature is put into an opponent's graveyard from the battlefield, if CARDNAME is an enchantment, CARDNAME becomes a 3/2 Imp creature with flying.
+SVar:TrigAnimate:AB$ Animate | Cost$ 0 | Defined$ Self | Power$ 3 | Toughness$ 2 | Types$ Creature,Imp | Keywords$ Flying | OverwriteTypes$ True | Permanent$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lurking_skirge.jpg
 SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/55.jpg
