@@ -1525,17 +1525,18 @@ public class AbilityFactoryCounters {
     
     private static void proliferateResolveHuman(final AbilityFactory af, final SpellAbility sa) {
         final List<Card> unchosen = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        final List<Player> players = new ArrayList<Player>(Singletons.getModel().getGame().getPlayers());
         Singletons.getModel().getMatch().getInput().setInput(new Input() {
             private static final long serialVersionUID = -1779224307654698954L;
 
             @Override
             public void showMessage() {
-                ButtonUtil.enableOnlyCancel();
+                ButtonUtil.enableOnlyOK();
                 CMatchUI.SINGLETON_INSTANCE.showMessage("Proliferate: Choose permanents and/or players");
             }
 
             @Override
-            public void selectButtonCancel() {
+            public void selectButtonOK() {
                 // Hacky intermittent solution to triggers that look for
                 // counters being put on. They used
                 // to wait for another priority passing after proliferate
@@ -1565,7 +1566,6 @@ public class AbilityFactoryCounters {
 
             @Override
             public void selectPlayer(final Player player) {
-                final List<Player> players = Singletons.getModel().getGame().getPlayers();
                 if (players.indexOf(player) >= 0)
                 {
                     players.remove(player); // no second selection
