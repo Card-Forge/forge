@@ -757,7 +757,7 @@ public class AbilityFactoryCounters {
                 final Zone zone = Singletons.getModel().getGame().getZoneOf(tgtCard);
                 if (zone == null) {
                     // Do nothing, token disappeared
-                } else if (zone.is(ZoneType.Battlefield)) {
+                } else if (zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack)) {
                     tgtCard.addCounter(Counters.valueOf(type), counterAmount);
                 } else {
                     // adding counters to something like re-suspend cards

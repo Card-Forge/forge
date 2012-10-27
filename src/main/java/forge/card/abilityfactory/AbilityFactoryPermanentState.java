@@ -1241,7 +1241,11 @@ public class AbilityFactoryPermanentState {
         }
 
         for (final Card tgtC : tgtCards) {
-            if ((tgtC.isInPlay() || params.containsKey("ETB")) && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
+            if (tgt != null && !tgtC.canBeTargetedBy(sa)) {
+                continue;
+            }
+            
+            if (params.containsKey("ETB") || tgtC.isInPlay()) {
                 if (tgtC.isUntapped() && (remTapped)) {
                     card.addRemembered(tgtC);
                 }
