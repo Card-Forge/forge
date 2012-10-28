@@ -61,6 +61,22 @@ Fixes/Features:
 - Fixed Unleash not interacting correctly with Corpsejack Menace.
 - Fixed order in the script of Gifts Ungiven.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed P/T of Two-Headed Dragon.
+- Fixed Cataclysm.
+- Fixed Realms Uncharted.
+- Fixed ability of Sphinx of Jwar Isle.
+- Fixed and improved Proliferate.
+- Fixed possible NPE in getCardsIn.
+- AnimateAF refactored
+- AlterLife cut into classes
+- some pointless null checks removed
+- fixed some boxing issues (mixing Boolean and boolean)
+- UI: access to static fields fixed - should refer to a declaring class, not inherited one
+- EditorTableModel: removed some excessive instanceof checks 
+- Placed missing @override clauses
+- Removed unused imports
+- Zone getCards returns a read-only list (used to make a new instance), dependants updated (mostly)
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
