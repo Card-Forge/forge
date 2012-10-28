@@ -20,8 +20,6 @@ package forge.card.spellability;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.testng.collections.Lists;
-
 import forge.Card;
 import forge.Singletons;
 

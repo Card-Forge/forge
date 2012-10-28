@@ -2,11 +2,12 @@ Name:Tenza, Godo's Maul
 ManaCost:3
 Types:Legendary Artifact Equipment
 Text:no text
-K:Equip 1
+A:AB$ Attach | Cost$ 1 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | AITgts$ Card.Red,Card.Legendary | SorcerySpeed$ True | Equip$ True | AILogic$ Pump | IsPresent$ Card.Self+nonCreature | PrecostDesc$ Equip | SpellDescription$ (Attach to target creature you control. Equip only as a sorcery.)
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 1 | Description$ Equipped creature gets +1/+1.
 S:Mode$ Continuous | Affected$ Card.EquippedBy+Legendary | AddPower$ 2 | AddToughness$ 2 | Description$ As long as it's legendary, it gets an additional +2/+2.
 S:Mode$ Continuous | Affected$ Card.EquippedBy+Red | AddKeyword$ Trample | Description$ As long as it's red, it has trample.
 SVar:RemRandomDeck:True
+DeckNeeds:Color$red
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tenza_godos_maul.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/271.jpg

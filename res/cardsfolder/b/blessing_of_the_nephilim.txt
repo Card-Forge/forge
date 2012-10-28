@@ -3,13 +3,12 @@ ManaCost:W
 Types:Enchantment Aura
 Text:no text
 K:Enchant creature
-A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
+A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AITgts$ Card.nonColorless | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+White | AddPower$ 1 | AddToughness$ 1 | Description$ Enchanted creature gets +1/+1 for each of its colors.
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Blue | AddPower$ 1 | AddToughness$ 1
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Black | AddPower$ 1 | AddToughness$ 1
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Red | AddPower$ 1 | AddToughness$ 1
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy+Green | AddPower$ 1 | AddToughness$ 1
-SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blessing_of_the_nephilim.jpg
 SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/4.jpg
