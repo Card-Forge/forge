@@ -36,7 +36,6 @@ import com.google.common.collect.Lists;
 import forge.Card;
 import forge.CardCharacteristicName;
 
-import forge.CardColor;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;

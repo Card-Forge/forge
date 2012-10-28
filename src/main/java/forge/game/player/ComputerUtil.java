@@ -1511,7 +1511,7 @@ public class ComputerUtil {
      * @return a List<Card> of discarded cards.
      */
     public static List<Card> discardNumTypeAI(final Player ai, final int numDiscard, final String[] uTypes, final SpellAbility sa) {
-        List<Card> hand = ai.getCardsIn(ZoneType.Hand);
+        List<Card> hand = new ArrayList<Card>(ai.getCardsIn(ZoneType.Hand));
         Card sourceCard = null;
 
         if ((uTypes != null) && (sa != null)) {
