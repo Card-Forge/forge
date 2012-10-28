@@ -225,7 +225,7 @@ public final class GameActionUtil {
             public void execute() {
 
                 final List<Card> thrummingStones = controller.getCardsIn(ZoneType.Battlefield, "Thrumming Stone");
-                for(Card c : thrummingStones) {
+                for(Card stones : thrummingStones) {
                     c.addExtrinsicKeyword("Ripple:4");
                 }
                 
@@ -318,6 +318,8 @@ public final class GameActionUtil {
                     final StringBuilder sb = new StringBuilder();
                     sb.append(c).append(" - Ripple.");
                     ability.setStackDescription(sb.toString());
+                    ability.setDescription(sb.toString());
+                    ability.setActivatingPlayer(controller);
 
                     Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
