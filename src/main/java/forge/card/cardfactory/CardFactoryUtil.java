@@ -18,6 +18,8 @@
 package forge.card.cardfactory;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -3173,29 +3175,25 @@ public class CardFactoryUtil {
     }
     
     public static List<String> getColorByProminence(final List<Card> list) {
-        HashMap<String, Integer> counts = new HashMap<String,Integer>();
-        for(String color : Constant.Color.ONLY_COLORS)
-        {
+        final HashMap<String, Integer> counts = new HashMap<String,Integer>();
+        for(String color : Constant.Color.ONLY_COLORS) {
             counts.put(color, 0);
         }
         for(Card c : list) {
-            for(CardColor col : c.getColor()) {
-                counts.put(col.toString(), counts.get(col.toString())+1);
-            }
-        }
-        ArrayList<String> res = new ArrayList<String>();
-        String maxkey = "";
-        int maxval = -1;
-        while(counts.keySet().size() > 0) {
-            for(String key : counts.keySet()) {
-                if(counts.get(key) > maxval) {
-                    maxkey = key;
-                    maxval = counts.get(key);
+            List<String> colors = c.determineColor().toStringList();
+            for(String col : colors) {
+                if (counts.containsKey(col)) {
+                    counts.put(col.toString(), counts.get(col.toString())+1);
                 }
             }
-            res.add(maxkey);
-            counts.remove(maxkey);
         }
+        ArrayList<String> res = new ArrayList<String>(counts.keySet());
+        Collections.sort(res, new Comparator<String>() {
+            @Override
+            public int compare(final String a, final String b) {
+                return counts.get(b) - counts.get(a);
+            }
+        });
         
         return res;
     }
