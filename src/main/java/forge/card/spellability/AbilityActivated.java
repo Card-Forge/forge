@@ -18,7 +18,6 @@
 package forge.card.spellability;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import forge.Card;
 import forge.Singletons;

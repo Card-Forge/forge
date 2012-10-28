@@ -25,7 +25,6 @@ import com.google.common.base.Predicates;
 import forge.Card;
 
 import forge.CardLists;
-import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Counters;
 import forge.GameActionUtil;
@@ -328,11 +327,8 @@ public class Untap extends Phase implements java.io.Serializable {
     private static boolean canOnlyUntapOneLand() {
         // Winter Orb was given errata so it no longer matters if it's tapped or
         // not
-        if (CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Winter Orb")).size() > 0) {
-            return true;
-        }
-
-        if (Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().getCardsIn(ZoneType.Battlefield, "Mungha Wurm").size() > 0) {
+        if (Singletons.getModel().getGame().isCardInPlay("Winter Orb")
+                || Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().isCardInPlay("Mungha Wurm")) {
             return true;
         }
 
