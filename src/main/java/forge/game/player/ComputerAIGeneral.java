@@ -133,7 +133,7 @@ public class ComputerAIGeneral implements Computer {
     private List<Card> getAvailableCards() {
 
         final Player opp = player.getOpponent();
-        List<Card> all = player.getCardsIn(ZoneType.Hand);
+        List<Card> all = new ArrayList<Card>(player.getCardsIn(ZoneType.Hand));
         all.addAll(player.getCardsIn(ZoneType.Battlefield));
         all.addAll(player.getCardsIn(ZoneType.Exile));
         all.addAll(player.getCardsIn(ZoneType.Graveyard));
@@ -211,7 +211,7 @@ public class ComputerAIGeneral implements Computer {
     private ArrayList<SpellAbility> getPossibleETBCounters() {
 
         final Player opp = player.getOpponent();
-        List<Card> all = player.getCardsIn(ZoneType.Hand);
+        List<Card> all = new ArrayList<Card>(player.getCardsIn(ZoneType.Hand));
         all.addAll(player.getCardsIn(ZoneType.Exile));
         all.addAll(player.getCardsIn(ZoneType.Graveyard));
         if (!player.getCardsIn(ZoneType.Library).isEmpty()) {

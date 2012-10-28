@@ -1728,7 +1728,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      */
     public final void shuffle() {
         final PlayerZone library = this.getZone(ZoneType.Library);
-        final List<Card> list = this.getCardsIn(ZoneType.Library);
+        final List<Card> list = new ArrayList<Card>(this.getCardsIn(ZoneType.Library));
 
         if (list.size() <= 1) {
             return;

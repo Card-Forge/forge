@@ -1241,7 +1241,7 @@ public class ComputerUtil {
         List<Card> landList = CardLists.filter(hand, Presets.LANDS);
         List<Card> nonLandList = CardLists.filter(hand, Predicates.not(CardPredicates.Presets.LANDS));
 
-        final List<Card> lands = ai.getCardsIn(ZoneType.Graveyard);
+        final List<Card> lands = new ArrayList<Card>(ai.getCardsIn(ZoneType.Graveyard));
         if (!ai.getCardsIn(ZoneType.Library).isEmpty()) {
             lands.add(ai.getCardsIn(ZoneType.Library).get(0));
         }
@@ -1256,7 +1256,7 @@ public class ComputerUtil {
         if (landList.size() == 1 && nonLandList.size() < 3) {
             List<Card> cardsInPlay = ai.getCardsIn(ZoneType.Battlefield);
             List<Card> landsInPlay = CardLists.filter(cardsInPlay, Presets.LANDS);
-            List<Card> allCards = ai.getCardsIn(ZoneType.Graveyard);
+            List<Card> allCards = new ArrayList<Card>(ai.getCardsIn(ZoneType.Graveyard));
             allCards.addAll(cardsInPlay);
             int maxCmcInHand = Aggregates.max(hand, CardPredicates.Accessors.fnGetCmc);
             int max = Math.max(maxCmcInHand, 6);
