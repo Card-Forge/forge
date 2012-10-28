@@ -1242,7 +1242,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * @return an int
      */
     public  int doMulligan() {
-        final List<Card> hand = getCardsIn(ZoneType.Hand);
+        final List<Card> hand = new ArrayList<Card>(getCardsIn(ZoneType.Hand));
         for (final Card c : hand) {
             game.getAction().moveToLibrary(c);
         }
