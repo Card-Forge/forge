@@ -1725,8 +1725,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * </p>
      */
     public final void shuffle() {
-        final PlayerZone library = this.getZone(ZoneType.Library);
-        final List<Card> list = new ArrayList<Card>(this.getCardsIn(ZoneType.Library));
+        final List<Card> list = Lists.newArrayList(this.getCardsIn(ZoneType.Library));
 
         if (list.size() <= 1) {
             return;
@@ -1741,10 +1740,9 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         Collections.shuffle(list, random);
         Collections.shuffle(list, random);
 
-        Card o;
-        for (int i = 0; i < list.size(); i++) {
-            o = list.remove(random.nextInt(list.size()));
-            list.add(random.nextInt(list.size()), o);
+        int s = list.size();
+        for (int i = 0; i < s; i++) {
+            list.add(random.nextInt(s-1), list.remove(random.nextInt(s)));
         }
 
         Collections.shuffle(list, random);
@@ -1754,7 +1752,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         Collections.shuffle(list, random);
         Collections.shuffle(list, random);
 
-        library.setCards(list);
+        this.getZone(ZoneType.Library).setCards(list);
 
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();

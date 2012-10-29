@@ -30,7 +30,6 @@ import com.google.common.collect.Lists;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
-import forge.util.Aggregates;
 import forge.util.MyRandom;
 
 
@@ -233,35 +232,6 @@ public class CardLists {
                 return CardUtil.getColors(c).size() >= 2;
             }
         });
-    }
-
-    // Get the total converted mana cost of a card list
-    /**
-     * <p>
-     * Gets the total converted mana cost of a card list.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.CardList} object.
-     * @return a int.
-     */
-    public static int sumCMC(final List<Card> c) {
-        return Aggregates.sum(c, CardPredicates.Accessors.fnGetCmc);
-    } // sumCMC
-
-    /**
-     * <p>
-     * Gets the average converted mana cost of a card list.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.CardList} object.
-     * @return a float.
-     */
-    public static float getAverageCMC(final List<Card> c) {
-
-        return sumCMC(c) / c.size();
-
     }
 
     /**

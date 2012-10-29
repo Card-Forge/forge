@@ -139,9 +139,8 @@ public class CardFactoryUtil {
             int curCMC = card.getCMC();
 
             // Add all cost of all auras with the same controller
-            final List<Card> auras = new ArrayList<Card>(card.getEnchantedBy());
-            CardLists.filterControlledBy(auras, card.getController());
-            curCMC += CardLists.sumCMC(auras) + auras.size();
+            final List<Card> auras = CardLists.filterControlledBy(card.getEnchantedBy(), card.getController());
+            curCMC += Aggregates.sum(auras, CardPredicates.Accessors.fnGetCmc) + auras.size();
 
             if (curCMC >= bigCMC) {
                 bigCMC = curCMC;
@@ -1915,7 +1914,7 @@ public class CardFactoryUtil {
 
         if (sq[0].contains("TopOfLibraryCMC")) {
             if (players.size() > 0) {
-                return CardFactoryUtil.doXMath(CardLists.sumCMC(players.get(0).getCardsIn(ZoneType.Library, 1)),
+                return CardFactoryUtil.doXMath(Aggregates.sum(players.get(0).getCardsIn(ZoneType.Library, 1), CardPredicates.Accessors.fnGetCmc),
                         m, source);
             }
         }
@@ -2336,7 +2335,7 @@ public class CardFactoryUtil {
         // Count$TopOfLibraryCMC
         if (sq[0].contains("TopOfLibraryCMC")) {
             final List<Card> topcard = cardController.getCardsIn(ZoneType.Library, 1);
-            return CardFactoryUtil.doXMath(CardLists.sumCMC(topcard), m, c);
+            return CardFactoryUtil.doXMath(Aggregates.sum(topcard, CardPredicates.Accessors.fnGetCmc), m, c);
         }
 
         // Count$EnchantedControllerCreatures
@@ -2476,7 +2475,7 @@ public class CardFactoryUtil {
             final String[] rest = restrictions[1].split(",");
             List<Card> cardsonbattlefield = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
             List<Card> filteredCards = CardLists.getValidCards(cardsonbattlefield, rest, cardController, c);
-            return CardLists.sumCMC(filteredCards);
+            return Aggregates.sum(filteredCards, CardPredicates.Accessors.fnGetCmc);
         }
         // Count$CardNumColors
         if (sq[0].contains("CardNumColors")) {
