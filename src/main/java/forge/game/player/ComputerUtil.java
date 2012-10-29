@@ -1556,18 +1556,18 @@ public class ComputerUtil {
 
         // choose rest
         for (int i = 0; i < discardsLeft; i++) {
-            if (hand.size() <= 0) {
+            if (hand.isEmpty()) {
                 continue;
             }
-            final List<Card> aiCards = ai.getCardsIn(ZoneType.Battlefield);
-            final int numLandsInPlay = Iterables.size(Iterables.filter(aiCards, CardPredicates.Presets.LANDS));
+            final int numLandsInPlay = Iterables.size(Iterables.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS));
             final List<Card> landsInHand = CardLists.filter(hand, CardPredicates.Presets.LANDS);
             final int numLandsInHand = landsInHand.size();
 
             // Discard a land
-            if (numLandsInHand > 3 || (numLandsInHand > 2 && numLandsInPlay > 0)
-                    || (numLandsInHand > 1 && numLandsInPlay > 2)
-                    || (numLandsInHand > 0 && numLandsInPlay > 5)) {
+            boolean canDiscardLands = numLandsInHand > 3  || (numLandsInHand > 2 && numLandsInPlay > 0)
+            || (numLandsInHand > 1 && numLandsInPlay > 2) || (numLandsInHand > 0 && numLandsInPlay > 5);
+
+            if (canDiscardLands) {
                 discardList.add(landsInHand.get(0));
                 hand.remove(landsInHand.get(0));
             } else { // Discard other stuff
