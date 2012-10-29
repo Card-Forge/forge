@@ -463,9 +463,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Bond")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryBond.createAbilityBond(this);
-            }
+            se = new BondEffect();
+            ai = new BondAi();
         }
 
         else if (this.api.equals("ChangeZone")) {

@@ -20,6 +20,7 @@ package forge.card.abilityfactory;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
@@ -99,7 +100,7 @@ public final class AbilityFactoryChangeZone {
                 AbilityActivated res = new AbilityChangeZone(getSourceCard(),
                         getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
-                AbilityFactoryChangeZone.setMiscellaneous(af, res);
+                AbilityFactoryChangeZone.setMiscellaneous(af.getMapParams(), res);
                 return res;
             }
 
@@ -127,7 +128,7 @@ public final class AbilityFactoryChangeZone {
         }
         final SpellAbility abChangeZone = new AbilityChangeZone(af.getHostCard(), af.getAbCost(), af.getAbTgt());
 
-        AbilityFactoryChangeZone.setMiscellaneous(af, abChangeZone);
+        AbilityFactoryChangeZone.setMiscellaneous(af.getMapParams(), abChangeZone);
         return abChangeZone;
     }
 
@@ -168,7 +169,7 @@ public final class AbilityFactoryChangeZone {
                 return AbilityFactoryChangeZone.changeZoneTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         };
-        AbilityFactoryChangeZone.setMiscellaneous(af, spChangeZone);
+        AbilityFactoryChangeZone.setMiscellaneous(af.getMapParams(), spChangeZone);
         return spChangeZone;
     }
 
@@ -192,7 +193,7 @@ public final class AbilityFactoryChangeZone {
                 AbilitySub res = new DrawbackChangeZone(getSourceCard(),
                         getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
-                AbilityFactoryChangeZone.setMiscellaneous(af, res);
+                AbilityFactoryChangeZone.setMiscellaneous(af.getMapParams(), res);
                 return res;
             }
             private static final long serialVersionUID = 3270484211099902059L;
@@ -224,7 +225,7 @@ public final class AbilityFactoryChangeZone {
         }
         final SpellAbility dbChangeZone = new DrawbackChangeZone(af.getHostCard(), af.getAbTgt());
 
-        AbilityFactoryChangeZone.setMiscellaneous(af, dbChangeZone);
+        AbilityFactoryChangeZone.setMiscellaneous(af.getMapParams(), dbChangeZone);
         return dbChangeZone;
     }
 
@@ -277,8 +278,7 @@ public final class AbilityFactoryChangeZone {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    private static void setMiscellaneous(final AbilityFactory af, final SpellAbility sa) {
-        final HashMap<String, String> params = af.getMapParams();
+    private static void setMiscellaneous(final Map<String, String> params, final SpellAbility sa) {
         List<ZoneType> origin = new ArrayList<ZoneType>();
         if (params.containsKey("Origin")) {
             origin = ZoneType.listValueOf(params.get("Origin"));
@@ -1540,7 +1540,7 @@ public final class AbilityFactoryChangeZone {
         } else {
             // non-targeted retrieval
             final List<Card> retrieval = AbilityFactoryChangeZone
-                    .knownDetermineDefined(sa, params.get("Defined"), origin);
+                    .knownDetermineDefined(sa, params.get("Defined"));
 
             if ((retrieval == null) || retrieval.isEmpty()) {
                 return false;
@@ -2060,7 +2060,7 @@ public final class AbilityFactoryChangeZone {
         } else {
             // otherwise add self to list and go from there
             tgts = new ArrayList<Card>();
-            for (final Card c : AbilityFactoryChangeZone.knownDetermineDefined(sa, params.get("Defined"), origin)) {
+            for (final Card c : AbilityFactoryChangeZone.knownDetermineDefined(sa, params.get("Defined"))) {
                 tgts.add(c);
             }
         }
@@ -2181,7 +2181,7 @@ public final class AbilityFactoryChangeZone {
         } else {
             tgtCards = new ArrayList<Card>();
             for(ZoneType o : origin) {
-                for (final Card c : AbilityFactoryChangeZone.knownDetermineDefined(sa, params.get("Defined"), o)) {
+                for (final Card c : AbilityFactoryChangeZone.knownDetermineDefined(sa, params.get("Defined"))) {
                     tgtCards.add(c);
                 }
             }
@@ -2332,11 +2332,9 @@ public final class AbilityFactoryChangeZone {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param defined
      *            a {@link java.lang.String} object.
-     * @param origin
-     *            a {@link java.lang.String} object.
      * @return a {@link forge.CardList} object.
      */
-    private static List<Card> knownDetermineDefined(final SpellAbility sa, final String defined, final ZoneType origin) {
+    private static List<Card> knownDetermineDefined(final SpellAbility sa, final String defined) {
         final List<Card> ret = new ArrayList<Card>();
         final ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(), defined, sa);
 
@@ -2423,7 +2421,7 @@ public final class AbilityFactoryChangeZone {
                 AbilityActivated res = new AbilityChangeZoneAll(getSourceCard(),
                         getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
-                AbilityFactoryChangeZone.setMiscellaneous(af, res);
+                AbilityFactoryChangeZone.setMiscellaneous(af.getMapParams(), res);
                 return res;
             }
 
@@ -2451,7 +2449,7 @@ public final class AbilityFactoryChangeZone {
         }
         final SpellAbility abChangeZone = new AbilityChangeZoneAll(af.getHostCard(), af.getAbCost(), af.getAbTgt());
 
-        AbilityFactoryChangeZone.setMiscellaneous(af, abChangeZone);
+        AbilityFactoryChangeZone.setMiscellaneous(af.getMapParams(), abChangeZone);
         return abChangeZone;
     }
 
@@ -2491,7 +2489,7 @@ public final class AbilityFactoryChangeZone {
                 return AbilityFactoryChangeZone.changeZoneAllDoTriggerAI(getActivatingPlayer(), af, this, mandatory);
             }
         };
-        AbilityFactoryChangeZone.setMiscellaneous(af, spChangeZone);
+        AbilityFactoryChangeZone.setMiscellaneous(af.getMapParams(), spChangeZone);
         return spChangeZone;
     }
 
@@ -2515,7 +2513,7 @@ public final class AbilityFactoryChangeZone {
                 AbilitySub res = new DrawbackChangeZoneAll(getSourceCard(),
                         getTarget() == null ? null : new Target(getTarget()));
                 CardFactoryUtil.copySpellAbility(this, res);
-                AbilityFactoryChangeZone.setMiscellaneous(af, res);
+                AbilityFactoryChangeZone.setMiscellaneous(af.getMapParams(), res);
                 return res;
             }
 
@@ -2548,7 +2546,7 @@ public final class AbilityFactoryChangeZone {
         }
         final SpellAbility dbChangeZone = new DrawbackChangeZoneAll(af.getHostCard(), af.getAbTgt());
 
-        AbilityFactoryChangeZone.setMiscellaneous(af, dbChangeZone);
+        AbilityFactoryChangeZone.setMiscellaneous(af.getMapParams(), dbChangeZone);
         return dbChangeZone;
     }
 
