@@ -1912,14 +1912,12 @@ public class AbilityFactoryPump {
 
                     @Override
                     public void execute() {
-                        if (tgtC.isInPlay()) {
-                            tgtC.addTempAttackBoost(-1 * a);
-                            tgtC.addTempDefenseBoost(-1 * d);
+                        tgtC.addTempAttackBoost(-1 * a);
+                        tgtC.addTempDefenseBoost(-1 * d);
 
-                            if (AbilityFactoryPump.this.keywords.size() > 0) {
-                                for (int i = 0; i < AbilityFactoryPump.this.keywords.size(); i++) {
-                                    tgtC.removeExtrinsicKeyword(AbilityFactoryPump.this.keywords.get(i));
-                                }
+                        if (AbilityFactoryPump.this.keywords.size() > 0) {
+                            for (int i = 0; i < AbilityFactoryPump.this.keywords.size(); i++) {
+                                tgtC.removeExtrinsicKeyword(AbilityFactoryPump.this.keywords.get(i));
                             }
                         }
                     }
