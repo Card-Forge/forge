@@ -1378,7 +1378,7 @@ public class MagicStack extends MyObservable {
                 List<SpellAbility> orderedSAs = GuiChoose.getOrderChoices("Select order for Simultaneous Spell Abilities", "Resolve first", 0, activePlayerSAs, null, null);
                 int size = orderedSAs.size();
                 for(int i = size-1; i >= 0; i--){
-                    SpellAbility next = (SpellAbility)orderedSAs.get(i);
+                    SpellAbility next = orderedSAs.get(i);
                     if (next.isTrigger()) {
                         game.getAction().playSpellAbility(next);
                     } else {

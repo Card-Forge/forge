@@ -12489,13 +12489,13 @@ src/main/java/forge/card/abilityfactory/AbilityFactorySacrifice.java svneol=nati
 src/main/java/forge/card/abilityfactory/AbilityFactorySetState.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryStoreSVar.java -text
 src/main/java/forge/card/abilityfactory/AbilityFactoryToken.java svneol=native#text/plain
-src/main/java/forge/card/abilityfactory/AbilityFactoryTurns.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryZoneAffecting.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/SpellAiLogic.java -text
 src/main/java/forge/card/abilityfactory/SpellEffect.java -text
 src/main/java/forge/card/abilityfactory/UniversalAbility.java -text
 src/main/java/forge/card/abilityfactory/UniversalDrawback.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/UniversalSpell.java -text
+src/main/java/forge/card/abilityfactory/ai/AddTurnAi.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/ai/AnimateAi.java -text
 src/main/java/forge/card/abilityfactory/ai/AnimateAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/BondAi.java -text
@@ -12504,9 +12504,12 @@ src/main/java/forge/card/abilityfactory/ai/GainLifeAi.java -text
 src/main/java/forge/card/abilityfactory/ai/LoseLifeAi.java -text
 src/main/java/forge/card/abilityfactory/ai/PoisonAi.java -text
 src/main/java/forge/card/abilityfactory/ai/SetLifeAi.java -text
+src/main/java/forge/card/abilityfactory/effects/AddTurnEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/AnimateAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/AnimateEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/BondEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/EndTurnAi.java -text
+src/main/java/forge/card/abilityfactory/effects/EndTurnEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ExchangeLifeEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/GainLifeEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/HelperAnimate.java svneol=native#text/plain

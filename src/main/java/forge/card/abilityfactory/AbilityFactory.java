@@ -433,13 +433,8 @@ public class AbilityFactory {
         SpellEffect se = null;
         
         if (this.api.equals("AddTurn")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryTurns.createAbilityAddTurn(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryTurns.createSpellAddTurn(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryTurns.createDrawbackAddTurn(this);
-            }
+            ai = new AddTurnAi();
+            se = new AddTurnEffect();
         }
 
         else if (this.api.equals("Animate")) {
@@ -761,13 +756,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("EndTurn")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryTurns.createAbilityEndTurn(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryTurns.createSpellEndTurn(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryTurns.createDrawbackEndTurn(this);
-            }
+            ai = new EndTurnAi();
+            se = new EndTurnEffect();
         }
 
         else if (this.api.equals("ExchangeLife")) {

@@ -231,9 +231,9 @@ public enum VDev implements IVDoc<CDev> {
     public class DevLabel extends JLabel {
         private static final long serialVersionUID = 7917311680519060700L;
 
-        private Color defaultBG = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);;
+        private Color defaultBG = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
         private final Color hoverBG = FSkin.getColor(FSkin.Colors.CLR_HOVER);
-        private final Color pressedBG = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);;
+        private final Color pressedBG = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
         private boolean enabled;
         private final String enabledText, disabledText;
         private int w, h; // Width, height, radius, insets (for paintComponent)

@@ -907,7 +907,7 @@ public class GameAction {
 
         GameEndReason reason = null;
         // award loses as SBE
-        List<Player> losers = null;;
+        List<Player> losers = null;
         for (Player p : game.getPlayers() ) {
             if ( p.checkLoseCondition() ) { // this will set appropriate outcomes
                 // Run triggers

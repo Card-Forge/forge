@@ -249,7 +249,7 @@ public enum VHomeUI implements IVTopLevelUI {
             final int h = getHeight();
 
             if (lblSelected.isShowing()) {
-                int yTop = (int) (lblSelected.getY() + lblSelected.getParent().getY());
+                int yTop = lblSelected.getY() + lblSelected.getParent().getY();
                 int yBottom = yTop + lblSelected.getHeight();
 
                 g2d.setColor(l00);

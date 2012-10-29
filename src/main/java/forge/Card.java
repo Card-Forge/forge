@@ -6513,7 +6513,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         } else if (property.startsWith("EnchantedPlayerCtrl")) {
             final Object o = source.getEnchanting();
             if (o instanceof Player) {
-                if (!this.getController().equals((Player) o)) {
+                if (!this.getController().equals(o)) {
                     return false;
                 }
             } else { // source not enchanting a player
@@ -6524,7 +6524,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 final Card newCard = Singletons.getModel().getGame().getCardState(source);
                 for (final Object o : newCard.getRemembered()) {
                     if (o instanceof Player) {
-                        if (!this.getController().equals((Player) o)) {
+                        if (!this.getController().equals(o)) {
                             return false;
                           }
                     }
@@ -6533,7 +6533,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
             for (final Object o : source.getRemembered()) {
                 if (o instanceof Player) {
-                    if (!this.getController().equals((Player) o)) {
+                    if (!this.getController().equals(o)) {
                         return false;
                       }
                 }
@@ -6545,7 +6545,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     if (parent.getTarget() != null) {
                         for (final Object o : parent.getTarget().getTargetPlayers()) {
                             if (o instanceof Player) {
-                                if (!this.getController().equals((Player) o)) {
+                                if (!this.getController().equals(o)) {
                                     return false;
                                 }
                             }

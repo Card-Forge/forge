@@ -53,7 +53,7 @@ public class CHand implements ICDoc {
     private final VHand view;
     private boolean initializedAlready = false;
 
-    private final List<Card> cardsInPanel = new ArrayList<Card>();;
+    private final List<Card> cardsInPanel = new ArrayList<Card>();
 
     private final MouseListener madCardClick = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
