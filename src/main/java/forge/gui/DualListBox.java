@@ -56,12 +56,9 @@ public class DualListBox<T> extends JPanel {
 
     private int remainingObjects = 0;
 
-    private Card refCard = null;
-
     public DualListBox(int remainingObjects, String label, List<T> sourceElements, List<T> destElements,
             Card referenceCard) {
         this.remainingObjects = remainingObjects;
-        this.refCard = referenceCard;
         initScreen();
         orderedLabel.setText(label);
         if (sourceElements != null) {

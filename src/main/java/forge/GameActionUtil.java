@@ -225,7 +225,7 @@ public final class GameActionUtil {
             public void execute() {
 
                 final List<Card> thrummingStones = controller.getCardsIn(ZoneType.Battlefield, "Thrumming Stone");
-                for(Card stones : thrummingStones) {
+                for(int i = 0; i < thrummingStones.size(); i++) {
                     c.addExtrinsicKeyword("Ripple:4");
                 }
                 
