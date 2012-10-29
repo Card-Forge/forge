@@ -262,7 +262,7 @@ class CardFactoryArtifacts {
                 @Override
                 public void resolve() {
                     final Player target = this.getTargetPlayer();
-                    final List<Card> library = this.getTargetPlayer().getCardsIn(ZoneType.Library);
+                    final List<Card> library = new ArrayList<Card>(this.getTargetPlayer().getCardsIn(ZoneType.Library));
 
                     boolean loop = true;
                     final List<Card> grinding = new ArrayList<Card>();

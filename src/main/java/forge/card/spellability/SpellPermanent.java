@@ -102,8 +102,8 @@ public class SpellPermanent extends Spell {
             } else if (controller.isHuman()) {
                 Singletons.getModel().getMatch().getInput().setInput(SpellPermanent.this.championInputComes);
             } else { // Computer
-                List<Card> computer = controller.getCardsIn(ZoneType.Battlefield);
-                computer = CardLists.getValidCards(computer, SpellPermanent.this.championValid, controller, source);
+                List<Card> computer = 
+                        CardLists.getValidCards(controller.getCardsIn(ZoneType.Battlefield), SpellPermanent.this.championValid, controller, source);
                 computer.remove(source);
 
                 CardLists.shuffle(computer);

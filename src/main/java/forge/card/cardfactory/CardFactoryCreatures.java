@@ -829,8 +829,7 @@ public class CardFactoryCreatures {
                 final Player player = card.getController();
                 final Player opp = player.getOpponent();
                 int max = 0;
-                List<Card> play = opp.getCardsIn(ZoneType.Battlefield);
-                play = CardLists.filter(play, Presets.NON_TOKEN);
+                List<Card> play = CardLists.filter(opp.getCardsIn(ZoneType.Battlefield), Presets.NON_TOKEN);
                 play = CardLists.filter(play, Presets.WHITE);
                 max += play.size();
 
@@ -1098,7 +1097,7 @@ public class CardFactoryCreatures {
                 // name a card
                 final String choice = JOptionPane.showInputDialog(null, "Name a card", cardName,
                         JOptionPane.QUESTION_MESSAGE);
-                final List<Card> hand = this.getTargetPlayer().getCardsIn(ZoneType.Hand);
+                final List<Card> hand = new ArrayList<Card>(this.getTargetPlayer().getCardsIn(ZoneType.Hand));
                 int numCards = card.getXManaCostPaid();
                 numCards = Math.min(hand.size(), numCards);
 

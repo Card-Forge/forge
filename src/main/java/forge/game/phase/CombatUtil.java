@@ -3080,8 +3080,8 @@ public class CombatUtil {
                 final Ability ability4 = new Ability(c, "0") {
                     @Override
                     public void resolve() {
-                        List<Card> enchantments = attacker.getController().getCardsIn(ZoneType.Library);
-                        enchantments = CardLists.filter(enchantments, new Predicate<Card>() {
+                        List<Card> enchantments = 
+                                CardLists.filter(attacker.getController().getCardsIn(ZoneType.Library), new Predicate<Card>() {
                             @Override
                             public boolean apply(final Card c) {
                                 if (attacker.hasKeyword("Protection from enchantments")

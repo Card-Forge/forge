@@ -121,15 +121,15 @@ public class PlayerZoneBattlefield extends PlayerZone {
             if (c.isLand()) {
 
                 // Tectonic Instability
-                final List<Card> tis = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Tectonic Instability"));
+                final List<Card> tis = 
+                        CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Tectonic Instability"));
                 final Card tisLand = c;
                 for (final Card ti : tis) {
                     final Card source = ti;
                     final SpellAbility ability = new Ability(source, "") {
                         @Override
                         public void resolve() {
-                            List<Card> lands = tisLand.getController().getCardsIn(ZoneType.Battlefield);
-                            lands = CardLists.filter(lands, Presets.LANDS);
+                            List<Card> lands = CardLists.filter(tisLand.getController().getCardsIn(ZoneType.Battlefield), Presets.LANDS);
                             for (final Card land : lands) {
                                 land.tap();
                             }

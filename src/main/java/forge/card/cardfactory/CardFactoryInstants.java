@@ -124,7 +124,7 @@ public class CardFactoryInstants {
                 }
 
                 public void humanResolve() {
-                    final List<Card> libraryList = card.getController().getCardsIn(ZoneType.Library);
+                    final List<Card> libraryList = new ArrayList<Card>(card.getController().getCardsIn(ZoneType.Library));
                     final List<Card> selectedCards = new ArrayList<Card>();
 
                     Object o = GuiChoose.oneOrNone("Select first card", libraryList);
@@ -230,7 +230,7 @@ public class CardFactoryInstants {
                     final Player player = card.getController();
                     final int max = card.getXManaCostPaid();
 
-                    final List<Card> graveList = tPlayer.getCardsIn(ZoneType.Graveyard);
+                    final List<Card> graveList = new ArrayList<Card>(tPlayer.getCardsIn(ZoneType.Graveyard));
                     final int x = Math.min(max, graveList.size());
 
                     if (player.isHuman()) {

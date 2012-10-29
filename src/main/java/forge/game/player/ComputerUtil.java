@@ -1855,8 +1855,9 @@ public class ComputerUtil {
      *            the source SpellAbility
      * @return the card list
      */
-    public static List<Card> sacrificePermanents(final Player ai, final int amount, final List<Card> list, final boolean destroy,
+    public static List<Card> sacrificePermanents(final Player ai, final int amount, final List<Card> cardlist, final boolean destroy,
             SpellAbility source) {
+        final List<Card> list = new ArrayList<Card>(cardlist);
         final List<Card> sacList = new ArrayList<Card>();
         // used in Annihilator and AF_Sacrifice
         int max = list.size();

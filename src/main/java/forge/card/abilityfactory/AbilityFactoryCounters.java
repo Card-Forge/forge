@@ -316,8 +316,7 @@ public class AbilityFactoryCounters {
             return false;
         }
 
-        list = player.getCardsIn(ZoneType.Battlefield);
-        list = CardLists.filter(list, new Predicate<Card>() {
+        list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 return c.canBeTargetedBy(sa) && !c.hasKeyword("CARDNAME can't have counters placed on it.")
@@ -458,7 +457,6 @@ public class AbilityFactoryCounters {
         boolean chance = true;
         final Target abTgt = sa.getTarget();
         final Card source = sa.getSourceCard();
-        List<Card> list;
         Card choice = null;
         final String type = params.get("CounterType");
         final String amountStr = params.get("CounterNum");
@@ -466,10 +464,9 @@ public class AbilityFactoryCounters {
 
         final Player player = af.isCurse() ? ai.getOpponent() : ai;
 
-        list = player.getCardsIn(ZoneType.Battlefield);
-
         if (abTgt != null) {
-            list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
+            List<Card> list = 
+                    CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), abTgt.getValidTgts(), source.getController(), source);
 
             if (list.size() == 0) {
                 return false;
@@ -579,8 +576,7 @@ public class AbilityFactoryCounters {
                 // things like Powder Keg, which are way too complex for the AI
             }
         } else {
-            list = player.getCardsIn(ZoneType.Battlefield);
-            list = CardLists.getTargetableCards(list, sa);
+            list = CardLists.getTargetableCards(player.getCardsIn(ZoneType.Battlefield), sa);
             list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
 
             if (list.isEmpty() && mandatory) {
@@ -1447,8 +1443,7 @@ public class AbilityFactoryCounters {
 
         
         
-        List<Card> cperms = ai.getCardsIn(ZoneType.Battlefield);
-        cperms = CardLists.filter(cperms, new Predicate<Card>() {
+        List<Card> cperms = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
             @Override
             public boolean apply(final Card crd) {
                 for (final Counters c1 : Counters.values()) {
@@ -1460,8 +1455,7 @@ public class AbilityFactoryCounters {
             }
         });
 
-        List<Card> hperms = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
-        hperms = CardLists.filter(hperms, new Predicate<Card>() {
+        List<Card> hperms = CardLists.filter(ai.getOpponent().getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
             @Override
             public boolean apply(final Card crd) {
                 for (final Counters c1 : Counters.values()) {
@@ -1853,11 +1847,8 @@ public class AbilityFactoryCounters {
         final boolean curse = af.isCurse();
         final Target tgt = sa.getTarget();
 
-        hList = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
-        cList = ai.getCardsIn(ZoneType.Battlefield);
-
-        hList = CardLists.getValidCards(hList, valid, source.getController(), source);
-        cList = CardLists.getValidCards(cList, valid, source.getController(), source);
+        hList = CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid, source.getController(), source);
+        cList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source);
 
         if (abCost != null) {
             // AI currently disabled for these costs
@@ -2563,14 +2554,12 @@ public class AbilityFactoryCounters {
             }
         } else { // targeted
             final Player player = af.isCurse() ? ai.getOpponent() : ai;
-            List<Card> list = player.getCardsIn(ZoneType.Battlefield);
-            list = CardLists.getTargetableCards(list, sa);
+            List<Card> list = CardLists.getTargetableCards(player.getCardsIn(ZoneType.Battlefield), sa);
             list = CardLists.getValidCards(list, abTgt.getValidTgts(), host.getController(), host);
             if (list.isEmpty() && mandatory) {
                 // If there isn't any prefered cards to target, gotta choose
                 // non-preferred ones
-                list = player.getOpponent().getCardsIn(ZoneType.Battlefield);
-                list = CardLists.getTargetableCards(list, sa);
+                list = CardLists.getTargetableCards(player.getOpponent().getCardsIn(ZoneType.Battlefield), sa);
                 list = CardLists.getValidCards(list, abTgt.getValidTgts(), host.getController(), host);
                 preferred = false;
             }

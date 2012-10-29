@@ -670,9 +670,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      */
     public final void resetAttackedThisCombat(final Player player) {
         // resets the status of attacked/blocked this phase
-        List<Card> list = player.getCardsIn(ZoneType.Battlefield);
-
-        list = CardLists.filter(list, CardPredicates.Presets.CREATURES);
+        List<Card> list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
 
         for (int i = 0; i < list.size(); i++) {
             final Card c = list.get(i);

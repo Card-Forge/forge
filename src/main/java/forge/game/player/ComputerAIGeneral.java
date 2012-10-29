@@ -97,7 +97,7 @@ public class ComputerAIGeneral implements Computer {
      * @return a boolean.
      */
     public static boolean hasACardGivingHaste(final Player ai) {
-        final List<Card> all = ai.getCardsIn(ZoneType.Battlefield);
+        final List<Card> all = new ArrayList<Card>(ai.getCardsIn(ZoneType.Battlefield));
         all.addAll(CardFactoryUtil.getExternalZoneActivationCards(ai));
         all.addAll(ai.getCardsIn(ZoneType.Hand));
 

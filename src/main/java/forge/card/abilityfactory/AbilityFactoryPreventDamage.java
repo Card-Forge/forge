@@ -349,8 +349,7 @@ public class AbilityFactoryPreventDamage {
 
             final List<Card> threatenedTargets = new ArrayList<Card>();
             // filter AIs battlefield by what I can target
-            List<Card> targetables = ai.getCardsIn(ZoneType.Battlefield);
-            targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, hostCard);
+            List<Card> targetables = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, hostCard);
 
             for (final Card c : targetables) {
                 if (objects.contains(c)) {

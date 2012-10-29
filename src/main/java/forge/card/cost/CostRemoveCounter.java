@@ -17,6 +17,7 @@
  */
 package forge.card.cost;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import forge.Card;
@@ -419,7 +420,7 @@ public class CostRemoveCounter extends CostPartWithList {
                     this.done();
                 }
 
-                this.typeList = sa.getActivatingPlayer().getCardsIn(costRemoveCounter.getZone());
+                this.typeList = new ArrayList<Card>(sa.getActivatingPlayer().getCardsIn(costRemoveCounter.getZone()));
                 this.typeList = CardLists.getValidCards(this.typeList, type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
 
                 for (int i = 0; i < nNeeded; i++) {

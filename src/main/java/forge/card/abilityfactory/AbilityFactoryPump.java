@@ -1737,10 +1737,8 @@ public class AbilityFactoryPump {
         }
 
         final Player opp = ai.getOpponent();
-        List<Card> comp = ai.getCardsIn(ZoneType.Battlefield);
-        comp = CardLists.getValidCards(comp, valid, source.getController(), source);
-        List<Card> human = opp.getCardsIn(ZoneType.Battlefield);
-        human = CardLists.getValidCards(human, valid, source.getController(), source);
+        List<Card> comp = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source);
+        List<Card> human = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source);
 
         final Target tgt = sa.getTarget();
         if (tgt != null && sa.canTarget(opp) && params.containsKey("IsCurse")) {

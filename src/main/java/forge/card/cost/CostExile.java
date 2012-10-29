@@ -356,7 +356,7 @@ public class CostExile extends CostPartWithList {
                     this.done();
                 }
 
-                this.typeList = sa.getActivatingPlayer().getCardsIn(part.getFrom());
+                this.typeList = new ArrayList<Card>(sa.getActivatingPlayer().getCardsIn(part.getFrom()));
                 this.typeList = CardLists.getValidCards(this.typeList, type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
 
                 for (int i = 0; i < nNeeded; i++) {
@@ -534,7 +534,7 @@ public class CostExile extends CostPartWithList {
                 } else if (part.getFrom().equals(ZoneType.Stack)) {
                     msg.append(" from the Stack");
                 }
-                this.typeList = sa.getActivatingPlayer().getCardsIn(part.getFrom());
+                this.typeList = new ArrayList<Card>(sa.getActivatingPlayer().getCardsIn(part.getFrom()));
                 this.typeList = CardLists.getValidCards(this.typeList, type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
                 CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();

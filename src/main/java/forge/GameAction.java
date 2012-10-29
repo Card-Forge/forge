@@ -472,7 +472,7 @@ public class GameAction {
         final Player owner = c.getOwner();
         final PlayerZone grave = owner.getZone(ZoneType.Graveyard);
         final PlayerZone exile = owner.getZone(ZoneType.Exile);
-        final List<Card> ownerBoard = owner.getCardsIn(ZoneType.Battlefield);
+        final List<Card> ownerBoard = new ArrayList<Card>(owner.getCardsIn(ZoneType.Battlefield));
 
         if (c.getName().equals("Nissa's Chosen") && origZone.is(ZoneType.Battlefield)) {
             return this.moveToLibrary(c, -1);
@@ -497,7 +497,8 @@ public class GameAction {
 
         // Recover keyword
         if (c.isCreature() && origZone.is(ZoneType.Battlefield)) {
-            for (final Card recoverable : c.getOwner().getCardsIn(ZoneType.Graveyard)) {
+            List<Card> cards = new ArrayList<Card>(c.getOwner().getCardsIn(ZoneType.Graveyard));
+            for (final Card recoverable : cards) {
                 if (recoverable.hasStartOfKeyword("Recover") && !recoverable.equals(c)) {
 
                     final String recoverCost = recoverable.getKeyword().get(recoverable.getKeywordPosition("Recover"))

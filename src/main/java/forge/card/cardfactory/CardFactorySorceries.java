@@ -496,7 +496,7 @@ public class CardFactorySorceries {
             @Override
             public void resolve() {
                 final Player player = this.getTargetPlayer();
-                final List<Card> lib = player.getCardsIn(ZoneType.Library);
+                final List<Card> lib = new ArrayList<Card>(player.getCardsIn(ZoneType.Library));
 
                 for (final Card c : Iterables.filter(player.getCardsIn(ZoneType.Graveyard), nonBasicLands)) {
                     for (final Card rem : Iterables.filter(lib, CardPredicates.nameEquals(c.getName()))) {
@@ -1152,8 +1152,7 @@ public class CardFactorySorceries {
 
             @Override
             public void showMessage() {
-                List<Card> grave = card.getController().getCardsIn(ZoneType.Graveyard);
-                grave = CardLists.filter(grave, Presets.CREATURES);
+                List<Card> grave = CardLists.filter(card.getController().getCardsIn(ZoneType.Graveyard), Presets.CREATURES);
                 grave = CardLists.filter(grave, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
@@ -1300,9 +1299,9 @@ public class CardFactorySorceries {
                     final ArrayList<String> display = new ArrayList<String>();
 
                     // get all
-                    final List<Card> creatures = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
-                    List<Card> grave = card.getController().getCardsIn(ZoneType.Graveyard);
-                    grave = CardLists.filter(grave, Presets.CREATURES);
+                    final List<Card> creatures = 
+                            CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+                    List<Card> grave = CardLists.filter(card.getController().getCardsIn(ZoneType.Graveyard), Presets.CREATURES);
 
                     for (Player p : Singletons.getModel().getGame().getPlayers()) {
                         if (p.canBeTargetedBy(spell)) {
@@ -1384,8 +1383,7 @@ public class CardFactorySorceries {
                 final Card[] newArtifact = new Card[1];
 
                 // Sacrifice an artifact
-                List<Card> arts = p.getCardsIn(ZoneType.Battlefield);
-                arts = CardLists.filter(arts, Presets.ARTIFACTS);
+                List<Card> arts = CardLists.filter(p.getCardsIn(ZoneType.Battlefield), Presets.ARTIFACTS);
                 final Object toSac = GuiChoose.oneOrNone("Sacrifice an artifact", arts);
                 if (toSac != null) {
                     final Card c = (Card) toSac;

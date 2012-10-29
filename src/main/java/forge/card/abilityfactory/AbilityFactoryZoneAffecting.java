@@ -924,7 +924,8 @@ public class AbilityFactoryZoneAffecting {
 
         if (params.get("NumCards").equals("X") && source.getSVar("X").startsWith("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa, ai), ai.getOpponent().getCardsIn(ZoneType.Library).size());
+            final int cardsToDiscard = 
+                    Math.min(ComputerUtil.determineLeftoverMana(sa, ai), ai.getOpponent().getCardsIn(ZoneType.Library).size());
             source.setSVar("PayX", Integer.toString(cardsToDiscard));
             if (cardsToDiscard <= 0) {
                 return false;

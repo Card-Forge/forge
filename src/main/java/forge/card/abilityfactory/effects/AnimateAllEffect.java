@@ -169,7 +169,7 @@ public class AnimateAllEffect extends SpellEffect
         if ((tgtPlayers == null) || tgtPlayers.isEmpty()) {
             list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         } else {
-            list = tgtPlayers.get(0).getCardsIn(ZoneType.Battlefield);
+            list = new ArrayList<Card>(tgtPlayers.get(0).getCardsIn(ZoneType.Battlefield));
         }
     
         list = CardLists.getValidCards(list, valid.split(","), host.getController(), host);

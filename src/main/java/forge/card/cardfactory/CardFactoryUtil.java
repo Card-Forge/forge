@@ -3207,8 +3207,7 @@ public class CardFactoryUtil {
      * @return a int.
      */
     public static int getUsableManaSources(final Player player) {
-        List<Card> list = player.getCardsIn(ZoneType.Battlefield);
-        list = CardLists.filter(list, new Predicate<Card>() {
+        List<Card> list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
                 for (final AbilityMana am : c.getAIPlayableMana()) {

@@ -91,10 +91,9 @@ class CardFactoryEnchantments {
                 @Override
                 public void showMessage() {
                     final Player human = Singletons.getControl().getPlayer();
-                    List<Card> grave = human.getCardsIn(ZoneType.Graveyard);
-                    List<Card> aiGrave = human.getOpponent().getCardsIn(ZoneType.Graveyard);
-                    grave = CardLists.filter(grave, CardPredicates.Presets.CREATURES);
-                    aiGrave = CardLists.filter(aiGrave, CardPredicates.Presets.CREATURES);
+                    List<Card> grave = CardLists.filter(human.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
+                    List<Card> aiGrave = 
+                            CardLists.filter(human.getOpponent().getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
 
                     if (this.once || ((grave.size() < 2) && (aiGrave.size() < 2))) {
                         this.once = false;
@@ -112,7 +111,8 @@ class CardFactoryEnchantments {
 
                         final Card c = GuiChoose.one("Choose first creature to exile", chooseGrave);
                         if (c != null) {
-                            List<Card> newGrave = CardLists.filter(c.getOwner().getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
+                            List<Card> newGrave = 
+                                    CardLists.filter(c.getOwner().getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
                             newGrave.remove(c);
 
                             final Object o2 = GuiChoose.one("Choose second creature to exile", newGrave);

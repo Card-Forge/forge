@@ -1700,7 +1700,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * @return the card list
      */
     public final List<Card> mill(final int n, final ZoneType zone, final boolean bottom) {
-        final List<Card> lib = this.getCardsIn(ZoneType.Library);
+        final List<Card> lib = new ArrayList<Card>(this.getCardsIn(ZoneType.Library));
         final List<Card> milled = new ArrayList<Card>();
 
         final int max = Math.min(n, lib.size());

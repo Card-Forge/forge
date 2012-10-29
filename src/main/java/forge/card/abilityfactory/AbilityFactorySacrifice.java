@@ -284,8 +284,8 @@ public class AbilityFactorySacrifice {
             num = (num == null) ? "1" : num;
             final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), num, sa);
 
-            List<Card> list = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
-            list = CardLists.getValidCards(list, valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+            List<Card> list = 
+                    CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
             if (list.size() == 0) {
                 return false;
@@ -425,13 +425,8 @@ public class AbilityFactorySacrifice {
                 amount = Math.min(ComputerUtil.determineLeftoverMana(sa, ai), amount);
             }
 
-            List<Card> humanList = opp.getCardsIn(ZoneType.Battlefield);
-            humanList = CardLists.getValidCards(humanList, valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
-            List<Card> computerList = ai.getCardsIn(ZoneType.Battlefield);
-            if (defined.equals("Opponent")) {
-                computerList = new ArrayList<Card>();
-            }
-            computerList = CardLists.getValidCards(computerList, valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+            List<Card> humanList = 
+                    CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
             // Since all of the cards have remAIDeck:True, I enabled 1 for 1
             // (or X for X) trades for special decks
@@ -439,8 +434,8 @@ public class AbilityFactorySacrifice {
                 return false;
             }
         } else if (defined.equals("You")) {
-            List<Card> computerList = ai.getCardsIn(ZoneType.Battlefield);
-            computerList = CardLists.getValidCards(computerList, valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
+            List<Card> computerList = 
+                    CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
             for (Card c : computerList) {
                 if (!c.getSVar("SacMe").equals("") || CardFactoryUtil.evaluateCreature(c) <= 135) {
                     return true;
@@ -565,8 +560,7 @@ public class AbilityFactorySacrifice {
      */
     public static List<Card> sacrificeHuman(final Player p, final int amount, final String valid, final SpellAbility sa,
             final boolean destroy, final boolean optional) {
-        List<Card> battlefield = p.getCardsIn(ZoneType.Battlefield);
-        List<Card> list = AbilityFactory.filterListByType(battlefield, valid, sa);
+        List<Card> list = AbilityFactory.filterListByType(p.getCardsIn(ZoneType.Battlefield), valid, sa);
         List<Card> sacList = new ArrayList<Card>();
 
         for (int i = 0; i < amount; i++) {
@@ -856,11 +850,10 @@ public class AbilityFactorySacrifice {
             valid = valid.replace("X", Integer.toString(xPay));
         }
 
-        List<Card> humanlist = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
-        List<Card> computerlist = ai.getCardsIn(ZoneType.Battlefield);
-
-        humanlist = CardLists.getValidCards(humanlist, valid.split(","), source.getController(), source);
-        computerlist = CardLists.getValidCards(computerlist, valid.split(","), source.getController(), source);
+        List<Card> humanlist = 
+                CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
+        List<Card> computerlist = 
+                CardLists.getValidCards(computerlist = ai.getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
 
         if (abCost != null) {
             // AI currently disabled for some costs

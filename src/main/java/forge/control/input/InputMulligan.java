@@ -185,7 +185,7 @@ public class InputMulligan extends Input {
 
         if (c0.getName().equals("Serum Powder") && z0.is(ZoneType.Hand)) {
             if (GameActionUtil.showYesNoDialog(c0, "Use " + c0.getName() + "'s ability?")) {
-                List<Card> hand = c0.getController().getCardsIn(ZoneType.Hand);
+                List<Card> hand = new ArrayList<Card>(c0.getController().getCardsIn(ZoneType.Hand));
                 for (Card c : hand) {
                     Singletons.getModel().getGame().getAction().exile(c);
                 }

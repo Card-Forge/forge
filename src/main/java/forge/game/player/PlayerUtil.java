@@ -244,6 +244,7 @@ public final class PlayerUtil {
      */
     public static Input inputSacrificePermanents(final int nCards) {
         final List<Card> list = Singletons.getControl().getPlayer().getCardsIn(ZoneType.Battlefield);
+
         return PlayerUtil.inputSacrificePermanentsFromList(nCards, list, "Select a permanent to sacrifice");
     } // input_sacrificePermanents()
 
@@ -260,9 +261,8 @@ public final class PlayerUtil {
      * @since 1.0.15
      */
     public static Input inputSacrificePermanents(final int nCards, final String type) {
-        List<Card> list = Singletons.getControl().getPlayer().getCardsIn(ZoneType.Battlefield);
+        final List<Card> list = CardLists.getType(Singletons.getControl().getPlayer().getCardsIn(ZoneType.Battlefield), type);
 
-        list = CardLists.getType(list, type);
         return PlayerUtil.inputSacrificePermanentsFromList(nCards, list, "Select a " + type + " to sacrifice");
     } // input_sacrificePermanents()
 

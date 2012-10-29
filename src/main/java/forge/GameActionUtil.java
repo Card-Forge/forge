@@ -443,7 +443,8 @@ public final class GameActionUtil {
                 Player p = Singletons.getControl().getPlayer();
                 if ("All".equals(part.getType())) {
                     if (showYesNoDialog(source, "Do you want to exile all cards in your graveyard?")) {
-                        for (final Card card : p.getCardsIn(ZoneType.Graveyard)) {
+                        List<Card> cards = new ArrayList<Card>(p.getCardsIn(ZoneType.Graveyard));
+                        for (final Card card : cards) {
                             Singletons.getModel().getGame().getAction().exile(card);
                         }
                     } else {
@@ -454,8 +455,7 @@ public final class GameActionUtil {
                 } else {
                     CostExile costExile = (CostExile) part;
                     ZoneType from = costExile.getFrom();
-                    List<Card> list = p.getCardsIn(from);
-                    list = CardLists.getValidCards(list, part.getType().split(";"), p, source);
+                    List<Card> list = CardLists.getValidCards(p.getCardsIn(from), part.getType().split(";"), p, source);
                     final int nNeeded = AbilityFactory.calculateAmount(source, part.getAmount(), ability);
                     if (list.size() >= nNeeded) {
                         for (int i = 0; i < nNeeded; i++) {
@@ -760,8 +760,7 @@ public final class GameActionUtil {
                 @Override
                 public void resolve() {
                     for (int i = 0; i < damage; i++) {
-                        List<Card> nonTokens = player.getCardsIn(ZoneType.Battlefield);
-                        nonTokens = CardLists.filter(nonTokens, Presets.NON_TOKEN);
+                        List<Card> nonTokens = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), Presets.NON_TOKEN);
                         if (nonTokens.size() == 0) {
                             player.loseConditionMet(GameLossReason.SpellEffect, lich.getName());
                         } else {
@@ -1198,16 +1197,13 @@ public final class GameActionUtil {
         } // execute()
 
         private boolean getsBonus(final Card c) {
-            List<Card> list = c.getController().getCardsIn(ZoneType.Battlefield);
-            list = CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.getName().equals("Guan Yu, Sainted Warrior")
-                            || c.getName().equals("Zhang Fei, Fierce Warrior");
+            for (Card card : c.getController().getCardsIn(ZoneType.Battlefield)) {
+                if (card.getName().equals("Guan Yu, Sainted Warrior")
+                        || card.getName().equals("Zhang Fei, Fierce Warrior")) {
+                    return true;
                 }
-            });
-
-            return list.size() > 0;
+            }
+            return false;
         }
 
     }; // Liu_Bei

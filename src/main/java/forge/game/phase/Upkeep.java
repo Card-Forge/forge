@@ -1961,8 +1961,10 @@ public class Upkeep extends Phase implements java.io.Serializable {
                                     oathFlag = false;
                                 }
                             } else { // if player == Computer
-                                final List<Card> creaturesInLibrary = CardLists.filter(player.getCardsIn(ZoneType.Library), CardPredicates.Presets.CREATURES);
-                                final List<Card> creaturesInBattlefield = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
+                                final List<Card> creaturesInLibrary = 
+                                        CardLists.filter(player.getCardsIn(ZoneType.Library), CardPredicates.Presets.CREATURES);
+                                final List<Card> creaturesInBattlefield = 
+                                        CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
 
                                 // if there are at least 3 creatures in library,
                                 // or none in play with one in library, oath
@@ -2005,7 +2007,6 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 ability.setDescription(sb.toString());
 
                 Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
-
             }
         }
     } // upkeepOathOfDruids()
@@ -2028,7 +2029,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 final Ability ability = new Ability(oathList.get(0), "0") {
                     @Override
                     public void resolve() {
-                        final List<Card> graveyardCreatures = CardLists.filter(player.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
+                        final List<Card> graveyardCreatures = 
+                                CardLists.filter(player.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
 
                         if (GameState.compareTypeAmountInGraveyard(player, "Creature") > 0) {
                             if (player.isHuman()) {
@@ -2066,7 +2068,8 @@ public class Upkeep extends Phase implements java.io.Serializable {
      */
     private static void upkeepKarma() {
         final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
-        final List<Card> karmas = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Karma"));
+        final List<Card> karmas = 
+                CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Karma"));
         final List<Card> swamps = CardLists.getType(player.getCardsIn(ZoneType.Battlefield), "Swamp");
 
         // determine how much damage to deal the current player
@@ -2276,9 +2279,9 @@ public class Upkeep extends Phase implements java.io.Serializable {
             final Ability ability = new Ability(source, "0") {
                 @Override
                 public void resolve() {
-                    List<Card> enchantmentsInLibrary = source.getController().getCardsIn(ZoneType.Library);
                     final List<Card> enchantmentsAttached = new ArrayList<Card>(source.getEnchantingPlayer().getEnchantedBy());
-                    enchantmentsInLibrary = CardLists.filter(enchantmentsInLibrary, new Predicate<Card>() {
+                    List<Card> enchantmentsInLibrary = 
+                            CardLists.filter(source.getController().getCardsIn(ZoneType.Library), new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
                             return c.isEnchantment() && c.hasKeyword("Enchant player")
