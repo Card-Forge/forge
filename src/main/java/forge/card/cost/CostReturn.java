@@ -17,6 +17,7 @@
  */
 package forge.card.cost;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -108,7 +109,7 @@ public class CostReturn extends CostPartWithList {
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
         if (!this.getThis()) {
-            List<Card> typeList = activator.getCardsIn(ZoneType.Battlefield);
+            List<Card> typeList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
             typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
 
             final Integer amount = this.convertAmount();
@@ -233,7 +234,7 @@ public class CostReturn extends CostPartWithList {
                     msg.append("s");
                 }
 
-                this.typeList = sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield);
+                this.typeList = new ArrayList<Card>(sa.getActivatingPlayer().getCardsIn(ZoneType.Battlefield));
                 this.typeList = CardLists.getValidCards(this.typeList, type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard());
                 CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
                 ButtonUtil.enableOnlyCancel();

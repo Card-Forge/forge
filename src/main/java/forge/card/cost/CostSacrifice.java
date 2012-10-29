@@ -17,6 +17,7 @@
  */
 package forge.card.cost;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
@@ -101,7 +102,7 @@ public class CostSacrifice extends CostPartWithList {
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
         // You can always sac all
         if (!this.getThis()) {
-            List<Card> typeList = activator.getCardsIn(ZoneType.Battlefield);
+            List<Card> typeList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
             typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
 
             final Integer amount = this.convertAmount();
@@ -156,7 +157,7 @@ public class CostSacrifice extends CostPartWithList {
         final String amount = this.getAmount();
         final String type = this.getType();
         final Player activator = ability.getActivatingPlayer();
-        List<Card> list = activator.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
         list = CardLists.getValidCards(list, type.split(";"), activator, source);
         if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
             list = CardLists.getNotType(list, "Creature");
@@ -206,7 +207,7 @@ public class CostSacrifice extends CostPartWithList {
         if (this.getThis()) {
             this.getList().add(source);
         } else if (this.getAmount().equals("All")) {
-            List<Card> typeList = activator.getCardsIn(ZoneType.Battlefield);
+            List<Card> typeList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
             typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
             if (activator.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
                 typeList = CardLists.getNotType(typeList, "Creature");

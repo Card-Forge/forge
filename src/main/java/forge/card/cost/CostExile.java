@@ -207,7 +207,7 @@ public class CostExile extends CostPartWithList {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         final Player activator = ability.getActivatingPlayer();
-        List<Card> list = activator.getCardsIn(this.getFrom());
+        List<Card> list = new ArrayList<Card>(activator.getCardsIn(this.getFrom()));
         if (this.getType().equals("All")) {
             this.setList(list);
             for (final Card card : list) {
@@ -258,7 +258,7 @@ public class CostExile extends CostPartWithList {
         if (this.getThis()) {
             this.getList().add(source);
         } else if (this.getType().equals("All")) {
-            this.setList(ability.getActivatingPlayer().getCardsIn(this.getFrom()));
+            this.setList(new ArrayList<Card>(ability.getActivatingPlayer().getCardsIn(this.getFrom())));
         } else {
             Integer c = this.convertAmount();
             if (c == null) {

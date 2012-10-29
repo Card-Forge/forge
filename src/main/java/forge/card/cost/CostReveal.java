@@ -17,6 +17,7 @@
  */
 package forge.card.cost;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import forge.Card;
@@ -98,7 +99,7 @@ public class CostReveal extends CostPartWithList {
     @Override
     public final boolean decideAIPayment(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         final String type = this.getType();
-        List<Card> hand = ai.getCardsIn(ZoneType.Hand);
+        List<Card> hand = new ArrayList<Card>(ai.getCardsIn(ZoneType.Hand));
         this.resetList();
 
         if (this.getThis()) {
@@ -155,7 +156,7 @@ public class CostReveal extends CostPartWithList {
             this.addToList(source);
             payment.setPaidManaPart(this);
         } else if (this.getType().equals("Hand")) {
-            this.setList(activator.getCardsIn(ZoneType.Hand));
+            this.setList(new ArrayList<Card>(activator.getCardsIn(ZoneType.Hand)));
             payment.setPaidManaPart(this);
         } else {
             Integer num = this.convertAmount();

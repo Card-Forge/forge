@@ -17,6 +17,7 @@
  */
 package forge.card.cost;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.base.Predicate;
@@ -114,7 +115,7 @@ public class CostDiscard extends CostPartWithList {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
-        List<Card> handList = activator.getCardsIn(ZoneType.Hand);
+        List<Card> handList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Hand));
         String type = this.getType();
         final Integer amount = this.convertAmount();
 
@@ -179,7 +180,7 @@ public class CostDiscard extends CostPartWithList {
     @Override
     public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
         final Player activator = ability.getActivatingPlayer();
-        List<Card> handList = activator.getCardsIn(ZoneType.Hand);
+        List<Card> handList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Hand));
         String discType = this.getType();
         final String amount = this.getAmount();
         this.resetList();

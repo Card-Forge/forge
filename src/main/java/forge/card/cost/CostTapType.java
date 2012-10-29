@@ -17,6 +17,7 @@
  */
 package forge.card.cost;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import forge.Card;
@@ -116,7 +117,7 @@ public class CostTapType extends CostPartWithList {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
-        List<Card> typeList = activator.getCardsIn(ZoneType.Battlefield);
+        List<Card> typeList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
 
         typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
 
@@ -155,7 +156,7 @@ public class CostTapType extends CostPartWithList {
      */
     @Override
     public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
-        List<Card> typeList = ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield);
+        List<Card> typeList = new ArrayList<Card>(ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield));
         typeList = CardLists.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
         final String amount = this.getAmount();

@@ -17,6 +17,7 @@
  */
 package forge.card.cost;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -94,7 +95,7 @@ public class CostMill extends CostPartWithList {
             c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
         }
 
-        this.setList(ai.getCardsIn(ZoneType.Library, c));
+        this.setList(new ArrayList<Card>(ai.getCardsIn(ZoneType.Library, c)));
 
         if ((this.getList() == null) || (this.getList().size() < c)) {
             return false;
