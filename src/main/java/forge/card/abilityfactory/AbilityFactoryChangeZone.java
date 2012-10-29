@@ -1660,10 +1660,7 @@ public final class AbilityFactoryChangeZone {
             }
         }
 
-        if (tgt != null) {
-            tgt.resetTargets();
-        }
-
+        tgt.resetTargets();
         List<Card> list = CardLists.getValidCards(Singletons.getModel().getGame().getCardsIn(origin), tgt.getValidTgts(), ai, source);
         if (params.containsKey("AITgts")) {
             list = CardLists.getValidCards(list, params.get("AITgts"), sa.getActivatingPlayer(), source);

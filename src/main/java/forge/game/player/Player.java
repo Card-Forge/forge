@@ -1297,11 +1297,9 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
                 }
             }
 
-            if (game != null) {
-                this.setLastDrawnCard(c);
-                c.setDrawnThisTurn(true);
-                this.numDrawnThisTurn++;
-            }
+            this.setLastDrawnCard(c);
+            c.setDrawnThisTurn(true);
+            this.numDrawnThisTurn++;
 
             // Miracle draws
             if (this.numDrawnThisTurn == 1) {
