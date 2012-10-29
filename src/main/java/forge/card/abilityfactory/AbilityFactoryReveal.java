@@ -2054,7 +2054,7 @@ public final class AbilityFactoryReveal {
 
         List<Card> orderedCards = GuiChoose.getOrderChoices("Select order to Rearrange", "Top of Library", 0, topCards, null, src);
         for (int i = maxCards - 1; i >= 0; i--) {
-            Card next = (Card) orderedCards.get(i);
+            Card next = orderedCards.get(i);
             Singletons.getModel().getGame().getAction().moveToLibrary(next, 0);
         }
         if (mayshuffle) {
