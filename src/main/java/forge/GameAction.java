@@ -702,7 +702,9 @@ public class GameAction {
         runParams.put("Destination", ZoneType.Library.name());
         game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams);
 
-        p.updateLabelObservers();
+        if (p != null) {
+            p.updateLabelObservers();
+        }
 
         // Soulbond unpairing
         if (c.isPaired()) {

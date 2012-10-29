@@ -108,7 +108,7 @@ public class VAssignDamage {
                 return false;
             }
             
-            if (active == selectedIndex) {
+            if (active.equals(selectedIndex)) {
                 return true;
             }
             
