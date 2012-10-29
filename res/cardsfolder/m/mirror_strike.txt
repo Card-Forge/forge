@@ -4,7 +4,7 @@ Types:Instant
 Text:no text
 A:SP$ Effect | Cost$ 3 W W | Name$ Mirror Strike Effect | ReplacementEffects$ DamageEvent | SVars$ MirrorStrikeDmg,MirroredX | RememberObjects$ TargetedController | ImprintCards$ Targeted | ValidTgts$ Creature.attacking+unblocked | TgtPrompt$ Select target unblocked creature | IsCurse$ True | SpellDescription$ All combat damage that would be dealt to you this turn by target unblocked creature is dealt to its controller instead.
 SVar:DamageEvent:Event$ DamageDone | ValidSource$ Creature.IsImprinted | ValidTarget$ You | ReplaceWith$ MirrorStrikeDmg | IsCombat$ True | Description$ All combat damage that would be dealt to you this turn by target unblocked creature is dealt to its controller instead.
-SVar:MirrorStrikeDmg:AB$DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Remembered | DamageSource$ ReplacedSource | NumDmg$ MirroredX | References$ MirroredX
+SVar:MirrorStrikeDmg:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Remembered | DamageSource$ ReplacedSource | NumDmg$ MirroredX | References$ MirroredX
 SVar:MirroredX:ReplaceCount$DamageAmount
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
