@@ -5,8 +5,8 @@ Text:no text
 PT:0/1
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigBounce | TriggerDescription$ When CARDNAME enters the battlefield, sacrifice it unless you return three basic lands you control to their owner's hand.
 A:AB$ Destroy | Cost$ Return<1/CARDNAME> T | ValidTgts$ Creature | TgtPrompt$ Select target creature | NoRegen$ True | SubAbility$ DBToken | SpellDescription$ Destroy target creature. It can't be regenerated.
-SVar:DBToken:DB$Token | TokenAmount$ 1 | TokenName$ Sheep | TokenTypes$ Creature,Sheep | TokenOwner$ TargetedController | TokenColors$ Green | TokenPower$ 0 | TokenToughness$ 1 | SpellDescription$ That creature's controller puts a 0/1 green Sheep creature token onto the battlefield.
-SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Land.Basic+YouCtrl | TargetMin$ 0 | TargetMax$ 3 | TgtPrompt$ Select 3 basic lands you control | Optional$ True | RememberChanged$ True | SubAbility$ DBSacSelf
+SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Sheep | TokenTypes$ Creature,Sheep | TokenOwner$ TargetedController | TokenColors$ Green | TokenPower$ 0 | TokenToughness$ 1 | SpellDescription$ That creature's controller puts a 0/1 green Sheep creature token onto the battlefield.
+SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Hidden$ True | ChangeType$ Land.Basic+YouCtrl | ChangeNum$ 3 | Optional$ True | RememberChanged$ True | SubAbility$ DBSacSelf
 SVar:DBSacSelf:DB$ Sacrifice | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT3 | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
