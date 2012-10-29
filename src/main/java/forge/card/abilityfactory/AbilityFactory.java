@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.tools.ant.types.resources.Tokens;
+
 import forge.Card;
 
 import forge.CardLists;
@@ -1237,15 +1239,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Token")) {
-            final AbilityFactoryToken aft = new AbilityFactoryToken(this);
-
-            if (this.isAb) {
-                spellAbility = aft.getAbility();
-            } else if (this.isSp) {
-                spellAbility = aft.getSpell();
-            } else if (this.isDb) {
-                spellAbility = aft.getDrawback();
-            }
+            ai = new TokenAi();
+            se = new TokenEffect();
         }
 
         else if (this.api.equals("TwoPiles")) {

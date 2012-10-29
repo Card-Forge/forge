@@ -12488,7 +12488,6 @@ src/main/java/forge/card/abilityfactory/AbilityFactoryReveal.java svneol=native#
 src/main/java/forge/card/abilityfactory/AbilityFactorySacrifice.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactorySetState.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryStoreSVar.java -text
-src/main/java/forge/card/abilityfactory/AbilityFactoryToken.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryZoneAffecting.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/SpellAiLogic.java -text
 src/main/java/forge/card/abilityfactory/SpellEffect.java -text
@@ -12504,6 +12503,7 @@ src/main/java/forge/card/abilityfactory/ai/GainLifeAi.java -text
 src/main/java/forge/card/abilityfactory/ai/LoseLifeAi.java -text
 src/main/java/forge/card/abilityfactory/ai/PoisonAi.java -text
 src/main/java/forge/card/abilityfactory/ai/SetLifeAi.java -text
+src/main/java/forge/card/abilityfactory/ai/TokenAi.java -text
 src/main/java/forge/card/abilityfactory/effects/AddTurnEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/AnimateAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/AnimateEffect.java -text
@@ -12516,6 +12516,7 @@ src/main/java/forge/card/abilityfactory/effects/HelperAnimate.java svneol=native
 src/main/java/forge/card/abilityfactory/effects/LoseLifeEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/PoisonEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/SetLifeEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/TokenEffect.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/package-info.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactory.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactoryArtifacts.java -text
