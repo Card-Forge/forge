@@ -77,6 +77,19 @@ Fixes/Features:
 - Removed unused imports
 - Zone getCards returns a read-only list (used to make a new instance), dependants updated (mostly)
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed a few getCards read-only list errors.
+- Improved AI of some auras/equipments.
+- Fixed Mulligan.
+- Fixed getColorByProminence.
+- Another getCards read-only list errors.
+- Fixed Thrumming Stone.
+- Cleanup.
+- More getCards read-only list errors.
+- Removed obsolete null checks.
+- More getCards read-only list errors.
+- Added a missing import.
+- More getCards read-only list errors.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
