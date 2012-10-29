@@ -229,7 +229,7 @@ public class EndOfTurn extends Phase implements java.io.Serializable {
     private static void endOfTurnLighthouseChronologist() {
         final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
         final Player opponent = player.getOpponent();
-        List<Card> list = opponent.getCardsIn(ZoneType.Battlefield);
+        List<Card> list = new ArrayList<Card>(opponent.getCardsIn(ZoneType.Battlefield));
 
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override

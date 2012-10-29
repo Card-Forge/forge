@@ -191,8 +191,8 @@ public class CostTapType extends CostPartWithList {
         if (c == null) {
             final String sVar = ability.getSVar(amount);
             if (sVar.equals("XChoice")) {
-                List<Card> typeList = ai.getCardsIn(ZoneType.Battlefield);
-                typeList = CardLists.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
+                List<Card> typeList = 
+                        CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
                 typeList = CardLists.filter(typeList, Presets.UNTAPPED);
                 c = typeList.size();
                 source.setSVar("ChosenX", "Number$" + Integer.toString(c));

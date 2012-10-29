@@ -289,7 +289,8 @@ public class CostRemoveCounter extends CostPartWithList {
 
         if (!this.getThis()) {
             this.getList().clear();
-            final List<Card> typeList = CardLists.getValidCards(ai.getCardsIn(this.getZone()), this.getType().split(";"), ai, source);
+            final List<Card> typeList = 
+                    CardLists.getValidCards(ai.getCardsIn(this.getZone()), this.getType().split(";"), ai, source);
             for (Card card : typeList) {
                 if (card.getCounters(this.getCounter()) >= c) {
                     this.addToList(card);

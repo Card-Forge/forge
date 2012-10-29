@@ -157,7 +157,7 @@ public class CostExile extends CostPartWithList {
                 typeList.add(Singletons.getModel().getGame().getStack().peekAbility(i).getSourceCard());
             }
         } else {
-            typeList = activator.getCardsIn(this.getFrom());
+            typeList = new ArrayList<Card>(activator.getCardsIn(this.getFrom()));
         }
         if (!this.getThis()) {
             typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);

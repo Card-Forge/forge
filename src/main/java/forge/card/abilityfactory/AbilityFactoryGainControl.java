@@ -334,8 +334,8 @@ public class AbilityFactoryGainControl {
             }
         }
 
-        List<Card> list = opp.getCardsIn(ZoneType.Battlefield);
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getSourceCard().getController(), sa.getSourceCard());
+        List<Card> list = 
+                CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
         // AI won't try to grab cards that are filtered out of AI decks on
         // purpose
         list = CardLists.filter(list, new Predicate<Card>() {
@@ -854,8 +854,8 @@ public class AbilityFactoryGainControl {
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
 
-        List<Card> list = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), ai, sa.getSourceCard());
+        List<Card> list = 
+                CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, sa.getSourceCard());
         // AI won't try to grab cards that are filtered out of AI decks on
         // purpose
         list = CardLists.filter(list, new Predicate<Card>() {

@@ -1599,7 +1599,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * @return the card list
      */
     public final List<Card> discardHand(final SpellAbility sa) {
-        final List<Card> list = this.getCardsIn(ZoneType.Hand);
+        final List<Card> list = new ArrayList<Card>(this.getCardsIn(ZoneType.Hand));
         this.discardRandom(list.size(), sa);
         return list;
     }
@@ -1648,8 +1648,8 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     public final List<Card> discardRandom(final int num, final SpellAbility sa, final String valid) {
         final List<Card> discarded = new ArrayList<Card>();
         for (int i = 0; i < num; i++) {
-            List<Card> list = this.getCardsIn(ZoneType.Hand);
-            list = CardLists.getValidCards(list, valid, sa.getSourceCard().getController(), sa.getSourceCard());
+            final List<Card> list = 
+                    CardLists.getValidCards(this.getCardsIn(ZoneType.Hand), valid, sa.getSourceCard().getController(), sa.getSourceCard());
             if (list.size() != 0) {
                 final Card disc = CardUtil.getRandom(list);
                 discarded.add(disc);

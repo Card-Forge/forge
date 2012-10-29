@@ -1460,8 +1460,8 @@ public class ComputerUtil {
      */
     public static List<Card> chooseSacrificeType(final Player ai, final String type, final Card activate, final Card target,
             final int amount) {
-        List<Card> typeList = ai.getCardsIn(ZoneType.Battlefield);
-        typeList = CardLists.getValidCards(typeList, type.split(";"), activate.getController(), activate);
+        List<Card> typeList = 
+                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate);
         if (ai.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
             typeList = CardLists.getNotType(typeList, "Creature");
         }
@@ -1559,7 +1559,7 @@ public class ComputerUtil {
             if (hand.size() <= 0) {
                 continue;
             }
-            List<Card> aiCards = ai.getCardsIn(ZoneType.Battlefield);
+            final List<Card> aiCards = ai.getCardsIn(ZoneType.Battlefield);
             final int numLandsInPlay = Iterables.size(Iterables.filter(aiCards, CardPredicates.Presets.LANDS));
             final List<Card> landsInHand = CardLists.filter(hand, CardPredicates.Presets.LANDS);
             final int numLandsInHand = landsInHand.size();
@@ -1619,8 +1619,7 @@ public class ComputerUtil {
                 typeList = CardLists.getValidCards(typeList, type.split(","), activate.getController(), activate);
             }
         } else {
-            typeList = ai.getCardsIn(zone);
-            typeList = CardLists.getValidCards(typeList, type.split(","), activate.getController(), activate);
+            typeList = CardLists.getValidCards(ai.getCardsIn(zone), type.split(","), activate.getController(), activate);
         }
         if ((target != null) && target.getController().isComputer() && typeList.contains(target)) {
             typeList.remove(target); // don't exile the card we're pumping
@@ -1655,8 +1654,8 @@ public class ComputerUtil {
      * @return a {@link forge.CardList} object.
      */
     public static List<Card> chooseTapType(final Player ai, final String type, final Card activate, final boolean tap, final int amount) {
-        List<Card> typeList = ai.getCardsIn(ZoneType.Battlefield);
-        typeList = CardLists.getValidCards(typeList, type.split(","), activate.getController(), activate);
+        List<Card> typeList = 
+                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), activate.getController(), activate);
 
         // is this needed?
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
@@ -1695,8 +1694,8 @@ public class ComputerUtil {
      * @return a {@link forge.CardList} object.
      */
     public static List<Card> chooseUntapType(final Player ai, final String type, final Card activate, final boolean untap, final int amount) {
-        List<Card> typeList = ai.getCardsIn(ZoneType.Battlefield);
-        typeList = CardLists.getValidCards(typeList, type.split(","), activate.getController(), activate);
+        List<Card> typeList = 
+                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), activate.getController(), activate);
 
         // is this needed?
         typeList = CardLists.filter(typeList, Presets.TAPPED);
@@ -1735,14 +1734,10 @@ public class ComputerUtil {
      * @return a {@link forge.CardList} object.
      */
     public static List<Card> chooseReturnType(final Player ai, final String type, final Card activate, final Card target, final int amount) {
-        List<Card> typeList = ai.getCardsIn(ZoneType.Battlefield);
-        typeList = CardLists.getValidCards(typeList, type.split(","), activate.getController(), activate);
+        final List<Card> typeList = 
+                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), activate.getController(), activate);
         if ((target != null) && target.getController().isComputer() && typeList.contains(target)) {
-            // bounce
-            // the
-            // card
-            // we're
-            // pumping
+            // don't bounce the card we're pumping
             typeList.remove(target);
         }
 

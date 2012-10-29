@@ -831,15 +831,12 @@ public class ComputerUtilAttack {
      * @return a int.
      */
     public final int countExaltedBonus(final Player player) {
-        List<Card> list = player.getCardsIn(ZoneType.Battlefield);
-        list = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.hasKeyword("Exalted");
-            }
-        });
+        int bonus = 0;
+        for (Card c : player.getCardsIn(ZoneType.Battlefield)) {
+            bonus += c.getKeywordAmount("Exalted");
+        }
 
-        return list.size();
+        return bonus;
     }
 
     /**

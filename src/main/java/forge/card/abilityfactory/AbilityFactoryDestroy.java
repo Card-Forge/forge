@@ -246,8 +246,7 @@ public class AbilityFactoryDestroy {
         // Targeting
         if (abTgt != null) {
             abTgt.resetTargets();
-            list = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
-            list = CardLists.getTargetableCards(list, sa);
+            list = CardLists.getTargetableCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), sa);
             list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
             if (params.containsKey("AITgts")) {
                 list = CardLists.getValidCards(list, params.get("AITgts"), sa.getActivatingPlayer(), source);
@@ -846,21 +845,22 @@ public class AbilityFactoryDestroy {
         final HashMap<String, String> params = af.getMapParams();
         final Target tgt = sa.getTarget();
         String valid = "";
+        if (mandatory) {
+            return true;
+        }
         if (params.containsKey("ValidCards")) {
             valid = params.get("ValidCards");
         }
-        List<Card> humanlist = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
-        List<Card> computerlist = ai.getCardsIn(ZoneType.Battlefield);
+        List<Card> humanlist = 
+                CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
+        List<Card> computerlist = 
+                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
         if (sa.getTarget() != null) {
             tgt.resetTargets();
             sa.getTarget().addTarget(ai.getOpponent());
             computerlist.clear();
         }
-        if (mandatory) {
-            return true;
-        }
-        humanlist = CardLists.getValidCards(humanlist, valid.split(","), source.getController(), source);
-        computerlist = CardLists.getValidCards(computerlist, valid.split(","), source.getController(), source);
+
         humanlist = CardLists.filter(humanlist, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -930,19 +930,17 @@ public class AbilityFactoryDestroy {
             valid = valid.replace("X", Integer.toString(xPay));
         }
 
-        List<Card> humanlist = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
-        List<Card> computerlist = ai.getCardsIn(ZoneType.Battlefield);
-
         final Target tgt = sa.getTarget();
 
+        List<Card> humanlist = 
+                CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
+        List<Card> computerlist = 
+                CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
         if (sa.getTarget() != null) {
             tgt.resetTargets();
             sa.getTarget().addTarget(ai.getOpponent());
             computerlist.clear();
         }
-
-        humanlist = CardLists.getValidCards(humanlist, valid.split(","), source.getController(), source);
-        computerlist = CardLists.getValidCards(computerlist, valid.split(","), source.getController(), source);
 
         humanlist = CardLists.filter(humanlist, new Predicate<Card>() {
             @Override

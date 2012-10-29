@@ -527,8 +527,7 @@ public class AbilityFactoryDealDamage {
         final Target tgt = saMe.getTarget();
         final Card source = saMe.getSourceCard();
         final HashMap<String, String> params = this.abilityFactory.getMapParams();
-        List<Card> hPlay = pl.getCardsIn(ZoneType.Battlefield);
-        hPlay = CardLists.getValidCards(hPlay, tgt.getValidTgts(), ai, source);
+        List<Card> hPlay = CardLists.getValidCards(pl.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, source);
 
         final ArrayList<Object> objects = tgt.getTargets();
         if (params.containsKey("TargetUnique")) {
@@ -1254,8 +1253,8 @@ public class AbilityFactoryDealDamage {
         }
 
         // TODO: X may be something different than X paid
-        List<Card> list = player.getCardsIn(ZoneType.Battlefield);
-        list = CardLists.getValidCards(list, validC.split(","), source.getController(), source);
+        List<Card> list = 
+                CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), validC.split(","), source.getController(), source);
 
         final Predicate<Card> filterKillable = new Predicate<Card>() {
             @Override

@@ -83,8 +83,8 @@ public class CostUtil {
                     continue;
                 }
 
-                List<Card> typeList = ai.getCardsIn(ZoneType.Battlefield);
-                typeList = CardLists.getValidCards(typeList, type.split(","), source.getController(), source);
+                final List<Card> typeList = 
+                        CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), source.getController(), source);
                 if (ComputerUtil.getCardPreference(ai, source, "SacCost", typeList) == null) {
                     return false;
                 }
@@ -118,8 +118,7 @@ public class CostUtil {
                     continue;
                 }
 
-                List<Card> typeList = ai.getCardsIn(ZoneType.Battlefield);
-                typeList = CardLists.getValidCards(typeList, type.split(","), source.getController(), source);
+                final List<Card> typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), source.getController(), source);
                 if (ComputerUtil.getCardPreference(ai, source, "SacCost", typeList) == null) {
                     return false;
                 }
@@ -212,11 +211,10 @@ public class CostUtil {
                 final CostDiscard disc = (CostDiscard) part;
 
                 final String type = disc.getType();
-                List<Card> typeList = ai.getCardsIn(ZoneType.Hand);
+                final List<Card> typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Hand), type.split(","), source.getController(), source);
                 if (typeList.size() > ai.getMaxHandSize()) {
                     continue;
                 }
-                typeList = CardLists.getValidCards(typeList, type.split(","), source.getController(), source);
                 if (ComputerUtil.getCardPreference(ai, source, "DiscardCost", typeList) == null) {
                     return false;
                 }

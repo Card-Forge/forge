@@ -4732,8 +4732,8 @@ public class CardFactoryUtil {
                     public void execute() {
                         // Target as Modular is Destroyed
                         if (card.getController().isComputer()) {
-                            List<Card> choices = card.getController().getCardsIn(ZoneType.Battlefield);
-                            choices = CardLists.filter(choices, new Predicate<Card>() {
+                            List<Card> choices = 
+                                    CardLists.filter(card.getController().getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
                                 @Override
                                 public boolean apply(final Card c) {
                                     return c.isCreature() && c.isArtifact();

@@ -1244,7 +1244,6 @@ public final class AbilityFactoryChangeZone {
 
                     // Does AI need a land?
                     List<Card> hand = ai.getCardsIn(ZoneType.Hand);
-                    System.out.println("Lands in hand = " + CardLists.filter(hand, Presets.LANDS).size() + ", on battlefield = " + CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size());
                     if (CardLists.filter(hand, Presets.LANDS).size() == 0 && CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size() < 4) {
                         boolean canCastSomething = false;
                         for (Card cardInHand : hand) {
@@ -1388,7 +1387,7 @@ public final class AbilityFactoryChangeZone {
     private static Card basicManaFixing(final Player ai, final List<Card> list) { // Search for a
                                                                // Basic Land
 
-        final List<Card> combined = ai.getCardsIn(ZoneType.Battlefield);
+        final List<Card> combined = new ArrayList<Card>(ai.getCardsIn(ZoneType.Battlefield));
         combined.addAll(ai.getCardsIn(ZoneType.Hand));
 
         final ArrayList<String> basics = new ArrayList<String>();
@@ -1586,7 +1585,7 @@ public final class AbilityFactoryChangeZone {
         }
         // don't return something to your hand if your hand is full of good stuff
         if (destination.equals(ZoneType.Hand) && origin.equals(ZoneType.Graveyard)) {
-            int handSize = ai.getCardsIn(ZoneType.Hand).size();
+            final int handSize = ai.getCardsIn(ZoneType.Hand).size();
             if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN1)) {
                 return false;
             }
@@ -2596,8 +2595,7 @@ public final class AbilityFactoryChangeZone {
         // ex. "Return all blocking/blocked by target creature"
 
         final Player opp = ai.getOpponent();
-        List<Card> humanType = opp.getCardsIn(origin);
-        humanType = AbilityFactory.filterListByType(humanType, params.get("ChangeType"), sa);
+        final List<Card> humanType = AbilityFactory.filterListByType(opp.getCardsIn(origin), params.get("ChangeType"), sa);
         List<Card> computerType = ai.getCardsIn(origin);
         computerType = AbilityFactory.filterListByType(computerType, params.get("ChangeType"), sa);
         final Target tgt = sa.getTarget();
@@ -2762,8 +2760,7 @@ public final class AbilityFactoryChangeZone {
         final ZoneType origin = ZoneType.smartValueOf(params.get("Origin"));
 
         final Player opp = ai.getOpponent();
-        List<Card> humanType = opp.getCardsIn(origin);
-        humanType = AbilityFactory.filterListByType(humanType, params.get("ChangeType"), sa);
+        final List<Card> humanType = AbilityFactory.filterListByType(opp.getCardsIn(origin), params.get("ChangeType"), sa);
         List<Card> computerType = ai.getCardsIn(origin);
         computerType = AbilityFactory.filterListByType(computerType, params.get("ChangeType"), sa);
 

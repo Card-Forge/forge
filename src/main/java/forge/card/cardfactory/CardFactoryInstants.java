@@ -164,7 +164,7 @@ public class CardFactoryInstants {
                 }
 
                 public void computerResolve() {
-                    final List<Card> list = card.getController().getCardsIn(ZoneType.Library);
+                    final List<Card> list = new ArrayList<Card>(card.getController().getCardsIn(ZoneType.Library));
                     final List<Card> selectedCards = new ArrayList<Card>();
 
                     // pick best creature

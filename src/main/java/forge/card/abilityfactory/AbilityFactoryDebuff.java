@@ -811,10 +811,8 @@ public final class AbilityFactoryDebuff {
             valid = params.get("ValidCards");
         }
 
-        List<Card> comp = ai.getCardsIn(ZoneType.Battlefield);
-        comp = CardLists.getValidCards(comp, valid, hostCard.getController(), hostCard);
-        List<Card> human = opp.getCardsIn(ZoneType.Battlefield);
-        human = CardLists.getValidCards(human, valid, hostCard.getController(), hostCard);
+        List<Card> comp = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, hostCard.getController(), hostCard);
+        List<Card> human = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid, hostCard.getController(), hostCard);
 
         // TODO - add blocking situations here also
 

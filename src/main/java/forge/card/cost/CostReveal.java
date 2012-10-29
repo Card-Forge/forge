@@ -64,7 +64,7 @@ public class CostReveal extends CostPartWithList {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
-        List<Card> handList = activator.getCardsIn(ZoneType.Hand);
+        List<Card> handList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Hand));
         final String type = this.getType();
         final Integer amount = this.convertAmount();
 
@@ -109,7 +109,7 @@ public class CostReveal extends CostPartWithList {
 
             this.getList().add(source);
         } else if (this.getType().equals("Hand")) {
-            this.setList(ai.getCardsIn(ZoneType.Hand));
+            this.setList(new ArrayList<Card>(ai.getCardsIn(ZoneType.Hand)));
             return true;
         } else {
             hand = CardLists.getValidCards(hand, type.split(";"), ai, source);

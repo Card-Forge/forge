@@ -126,7 +126,7 @@ public class ControlWinLose {
                     continue; // not a loser
                 }
 
-                List<Card> compAntes = loser.getCardsIn(ZoneType.Ante);
+                List<Card> compAntes = new ArrayList<Card>(loser.getCardsIn(ZoneType.Ante));
                 Deck cDeck = match.getPlayersDeck(loser.getLobbyPlayer());
 
                 for (Card c : compAntes) {

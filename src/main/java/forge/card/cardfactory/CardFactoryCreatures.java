@@ -118,7 +118,7 @@ public class CardFactoryCreatures {
 
             @Override
             public boolean canPlayAI() {
-                List<Card> perms = getActivatingPlayer().getCardsIn(ZoneType.Battlefield);
+                List<Card> perms = new ArrayList<Card>(getActivatingPlayer().getCardsIn(ZoneType.Battlefield));
                 perms = CardLists.filter(CardLists.getTargetableCards(perms, this), new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
@@ -155,7 +155,8 @@ public class CardFactoryCreatures {
             @Override
             public void execute() {
 
-                final List<Card> artifacts = CardLists.filter(card.getController().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.ARTIFACTS);
+                final List<Card> artifacts = 
+                        CardLists.filter(card.getController().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.ARTIFACTS);
                 if (card.getController().isHuman()) {
                     
 
@@ -419,7 +420,7 @@ public class CardFactoryCreatures {
                     return false;
                 }
 
-                List<Card> targetables = getActivatingPlayer().getOpponent().getCardsIn(ZoneType.Battlefield);
+                List<Card> targetables = new ArrayList<Card>(getActivatingPlayer().getOpponent().getCardsIn(ZoneType.Battlefield));
 
                 targetables = CardLists.filter(CardLists.getTargetableCards(targetables, this), new Predicate<Card>() {
                     @Override
@@ -587,15 +588,15 @@ public class CardFactoryCreatures {
             } // resolve()
 
             public int countKithkin() {
-                List<Card> kithkin = card.getController().getCardsIn(ZoneType.Battlefield);
-                kithkin = CardLists.filter(kithkin, new Predicate<Card>() {
+                final List<Card> kithkin = 
+                        CardLists.filter(card.getController().getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
 
-                    @Override
-                    public boolean apply(final Card c) {
-                        return (c.isType("Kithkin")) && !c.equals(card);
-                    }
-
-                });
+                        @Override
+                        public boolean apply(final Card c) {
+                            return (c.isType("Kithkin")) && !c.equals(card);
+                        }
+    
+                    });
                 return kithkin.size();
 
             }
@@ -713,7 +714,7 @@ public class CardFactoryCreatures {
                 }
 
                 // Get rid of Planeswalkers:
-                list = ai.getOpponent().getCardsIn(ZoneType.Battlefield);
+                list = new ArrayList<Card>(ai.getOpponent().getCardsIn(ZoneType.Battlefield));
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card crd) {
@@ -757,8 +758,8 @@ public class CardFactoryCreatures {
                 int intermSumPower = 0;
                 int intermSumToughness = 0;
                 // intermSumPower = intermSumToughness = 0;
-                List<Card> creats = card.getController().getCardsIn(ZoneType.Graveyard);
-                creats = CardLists.filter(creats, new Predicate<Card>() {
+                List<Card> creats = 
+                        CardLists.filter(card.getController().getCardsIn(ZoneType.Graveyard), new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
                         return c.isCreature() && !c.equals(card);

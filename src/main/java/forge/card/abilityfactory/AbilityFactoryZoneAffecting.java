@@ -1328,8 +1328,8 @@ public class AbilityFactoryZoneAffecting {
                 }
 
                 if (mode.equals("NotRemembered")) {
-                    List<Card> dPHand = p.getCardsIn(ZoneType.Hand);
-                    dPHand = CardLists.getValidCards(dPHand, "Card.IsNotRemembered", source.getController(), source);
+                    final List<Card> dPHand = 
+                            CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), "Card.IsNotRemembered", source.getController(), source);
                     for (final Card c : dPHand) {
                         p.discard(c, sa);
                         discarded.add(c);
@@ -1395,7 +1395,7 @@ public class AbilityFactoryZoneAffecting {
                 } else if (mode.equals("RevealYouChoose") || mode.equals("RevealOppChoose") || mode.equals("TgtChoose")) {
                     // Is Reveal you choose right? I think the wrong player is
                     // being used?
-                    List<Card> dPHand = p.getCardsIn(ZoneType.Hand);
+                    List<Card> dPHand = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
                     if (dPHand.size() != 0) {
                         if (params.containsKey("RevealNumber")) {
                             String amountString = params.get("RevealNumber");
@@ -1717,7 +1717,7 @@ public class AbilityFactoryZoneAffecting {
     private static boolean discardTargetAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
         final Target tgt = sa.getTarget();
         Player opp = ai.getOpponent();
-        if (opp.getCardsIn(ZoneType.Hand).size() < 1) {
+        if (opp.getCardsIn(ZoneType.Hand).isEmpty()) {
             return false;
         }
         if (tgt != null) {

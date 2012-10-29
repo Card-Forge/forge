@@ -217,7 +217,8 @@ public class CostPutCounter extends CostPartWithList {
                 c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
             }
 
-            final List<Card> typeList = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), ai, source);
+            final List<Card> typeList = 
+                    CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), this.getType().split(";"), ai, source);
 
             Card card = null;
             if (this.getType().equals("Creature.YouCtrl")) {

@@ -279,8 +279,7 @@ class CardFactoryLands {
                 }
 
                 public void computerExecute() {
-                    List<Card> hand = card.getController().getCardsIn(ZoneType.Hand);
-                    hand = CardLists.getType(hand, type);
+                    List<Card> hand = CardLists.getType(card.getController().getCardsIn(ZoneType.Hand), type);
                     if (hand.size() > 0) {
                         this.revealCard(hand.get(0));
                     } else {
