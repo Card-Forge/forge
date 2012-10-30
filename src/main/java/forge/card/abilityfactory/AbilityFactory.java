@@ -723,13 +723,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Effect")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryEffect.createAbilityEffect(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryEffect.createSpellEffect(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryEffect.createDrawbackEffect(this);
-            }
+            ai = new EffectAi();
+            se = new EffectEffect();
         }
 
         else if (this.api.equals("EndTurn")) {

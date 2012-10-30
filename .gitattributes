@@ -12474,7 +12474,6 @@ src/main/java/forge/card/abilityfactory/AbilityFactoryDealDamage.java svneol=nat
 src/main/java/forge/card/abilityfactory/AbilityFactoryDebuff.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryDelayedTrigger.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryDestroy.java svneol=native#text/plain
-src/main/java/forge/card/abilityfactory/AbilityFactoryEffect.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryEndGameCondition.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryGainControl.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryMana.java svneol=native#text/plain
@@ -12507,6 +12506,7 @@ src/main/java/forge/card/abilityfactory/ai/DamagePreventAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/DiscardAi.java -text
 src/main/java/forge/card/abilityfactory/ai/DrainManaAi.java -text
 src/main/java/forge/card/abilityfactory/ai/DrawAi.java svneol=native#text/plain
+src/main/java/forge/card/abilityfactory/ai/EffectAi.java -text
 src/main/java/forge/card/abilityfactory/ai/EndTurnAi.java -text
 src/main/java/forge/card/abilityfactory/ai/LifeExchangeAi.java -text
 src/main/java/forge/card/abilityfactory/ai/LifeGainAi.java -text
@@ -12534,6 +12534,7 @@ src/main/java/forge/card/abilityfactory/effects/DamagePreventEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/DiscardEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/DrainManaEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/DrawEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/EffectEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/EndTurnEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/HelperAnimate.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/effects/LifeExchangeEffect.java -text
