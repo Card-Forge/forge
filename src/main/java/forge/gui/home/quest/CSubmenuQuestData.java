@@ -97,8 +97,7 @@ public enum CSubmenuQuestData implements ICDoc {
 
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 userDeck = open.getSelectedFile();
-                if (userDeck.getPath().toLowerCase().contains("draft") || userDeck.getPath().toLowerCase().contains("sealed")) {
-                } else {
+                if (!(userDeck.getPath().toLowerCase().contains("draft") || userDeck.getPath().toLowerCase().contains("sealed"))) {
                     JOptionPane.showMessageDialog(null, "Only Sealed Deck and Draft decks are allowed as a starting deck",
                             "Illegal starting deck", JOptionPane.ERROR_MESSAGE);
                     userDeck = null;
