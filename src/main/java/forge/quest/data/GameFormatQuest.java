@@ -133,11 +133,10 @@ public final class GameFormatQuest {
      * Empty the whole list.
      */
     public void emptyAllowedSets() {
-        if (allowedSetCodes != null) {
-            while (!allowedSetCodes.isEmpty()) {
-                allowedSetCodes.remove(0);
-            }
+        if (allowedSetCodes.isEmpty()) {
+            return;
         }
+        allowedSetCodes.clear();
     }
 
     /** 
