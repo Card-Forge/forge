@@ -38,6 +38,9 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import forge.card.CardBlock;
+import forge.card.EditionCollection;
+import java.util.Random;
 
 /**
  * This is a helper class to execute operations on QuestData. It has been
@@ -81,6 +84,62 @@ public final class QuestUtilCards {
         pool.add(db.getCard("Snow-Covered Swamp", "ICE"), nSnow);
         pool.add(db.getCard("Snow-Covered Island", "ICE"), nSnow);
         pool.add(db.getCard("Snow-Covered Plains", "ICE"), nSnow);
+        return pool;
+    }
+
+    /**
+     * Adds the basic lands (from random sets as limited by the format).
+     *
+     * @param nBasic the n basic
+     * @param nSnow the n snow
+     * @param usedFormat currently enforced game format, if any
+     * @return the item pool view
+     */
+    public static ItemPoolView<CardPrinted> generateBasicLands(final int nBasic, final int nSnow, final GameFormatQuest usedFormat) {
+        final CardDb db = CardDb.instance();
+        final ItemPool<CardPrinted> pool = new ItemPool<CardPrinted>(CardPrinted.class);
+
+        Random r = new Random();
+        List<String> landCodes = new ArrayList<String>();
+        List<String> snowLandCodes = new ArrayList<String>();
+
+        if (usedFormat != null) {
+            List<String> availableEditions = usedFormat.getAllowedSetCodes();
+            for (String edition : availableEditions) {
+                if (db.isCardSupported("Plains", edition))
+                    landCodes.add(edition);
+            }
+            if (usedFormat.isSetLegal("ICE"))
+                snowLandCodes.add("ICE");
+            if (usedFormat.isSetLegal("CSP"))
+                snowLandCodes.add("CSP");
+        } else {
+            EditionCollection editions = Singletons.getModel().getEditions();
+            Iterable<CardEdition> allLandCodes = Iterables.filter(editions, CardEdition.Predicates.hasBasicLands); 
+            for (CardEdition edition : allLandCodes) {
+                    landCodes.add(edition.getCode());
+            }
+            snowLandCodes.add("ICE");
+            snowLandCodes.add("CSP");
+        }
+
+        if (landCodes.size() == 0)
+            landCodes.add("M10");
+
+        pool.add(db.getCard("Forest", landCodes.get(r.nextInt(landCodes.size()))), nBasic);
+        pool.add(db.getCard("Mountain", landCodes.get(r.nextInt(landCodes.size()))), nBasic);
+        pool.add(db.getCard("Swamp", landCodes.get(r.nextInt(landCodes.size()))), nBasic);
+        pool.add(db.getCard("Island", landCodes.get(r.nextInt(landCodes.size()))), nBasic);
+        pool.add(db.getCard("Plains", landCodes.get(r.nextInt(landCodes.size()))), nBasic);
+
+        if (snowLandCodes.size() > 0) {
+            pool.add(db.getCard("Snow-Covered Forest", snowLandCodes.get(r.nextInt(snowLandCodes.size()))), nSnow);
+            pool.add(db.getCard("Snow-Covered Mountain", snowLandCodes.get(r.nextInt(snowLandCodes.size()))), nSnow);
+            pool.add(db.getCard("Snow-Covered Swamp", snowLandCodes.get(r.nextInt(snowLandCodes.size()))), nSnow);
+            pool.add(db.getCard("Snow-Covered Island", snowLandCodes.get(r.nextInt(snowLandCodes.size()))), nSnow);
+            pool.add(db.getCard("Snow-Covered Plains", snowLandCodes.get(r.nextInt(snowLandCodes.size()))), nSnow);
+        }
+
         return pool;
     }
 
@@ -488,7 +547,7 @@ public final class QuestUtilCards {
         if (qc.getFormat() != null && !qc.getFormat().hasSnowLands()) {
             numberSnowLands = 0;
         }
-        this.qa.getShopList().addAll(QuestUtilCards.generateBasicLands(10, numberSnowLands));
+        this.qa.getShopList().addAll(QuestUtilCards.generateBasicLands(10, numberSnowLands, qc.getFormat()));
     }
 
     /**

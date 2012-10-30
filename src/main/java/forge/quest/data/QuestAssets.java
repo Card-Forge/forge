@@ -172,7 +172,7 @@ public class QuestAssets {
             snowLands = 0;
         }
         final ItemPoolView<CardPrinted> lands = QuestUtilCards.generateBasicLands(
-                prefs.getPreferenceInt(QPref.STARTING_BASIC_LANDS), snowLands);
+                prefs.getPreferenceInt(QPref.STARTING_BASIC_LANDS), snowLands, useFormat);
         this.getCardPool().addAll(lands);
     }
 
