@@ -246,6 +246,12 @@ public final class QuestUtilCards {
         this.addAllCards(precon.getDeck().getSideboard().toFlatList());
     }
 
+    /**
+     * Import an existing deck.
+     * 
+     * @param fromDeck
+     *            Deck, deck to import
+     */
     void addDeck(final Deck fromDeck) {
         if (fromDeck == null) {
             return;
