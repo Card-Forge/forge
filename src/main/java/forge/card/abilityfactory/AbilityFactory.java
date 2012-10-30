@@ -855,13 +855,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("MoveCounter")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryCounters.createAbilityMoveCounters(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryCounters.createSpellMoveCounters(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryCounters.createDrawbackMoveCounters(this);
-            }
+            ai = new CountersMoveAi();
+            se = new CountersMoveEffect();
         }
 
         else if (this.api.equals("MustAttack")) {

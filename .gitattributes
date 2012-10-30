@@ -12496,6 +12496,7 @@ src/main/java/forge/card/abilityfactory/ai/AddTurnAi.java svneol=native#text/pla
 src/main/java/forge/card/abilityfactory/ai/AnimateAi.java -text
 src/main/java/forge/card/abilityfactory/ai/AnimateAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/BondAi.java -text
+src/main/java/forge/card/abilityfactory/ai/CountersMoveAi.java -text
 src/main/java/forge/card/abilityfactory/ai/DamagePreventAi.java -text
 src/main/java/forge/card/abilityfactory/ai/DamagePreventAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/DiscardAi.java -text
@@ -12517,6 +12518,7 @@ src/main/java/forge/card/abilityfactory/effects/AddTurnEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/AnimateAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/AnimateEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/BondEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/CountersMoveEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/DamagePreventAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/DamagePreventEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/DiscardEffect.java -text
