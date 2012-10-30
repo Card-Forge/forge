@@ -38,8 +38,6 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-import forge.card.EditionCollection;
-import java.util.Random;
 
 /**
  * This is a helper class to execute operations on QuestData. It has been
@@ -63,30 +61,6 @@ public final class QuestUtilCards {
     }
 
     /**
-     * Adds the basic lands.
-     *
-     * @param nBasic the n basic
-     * @param nSnow the n snow
-     * @return the item pool view
-     */
-    public static ItemPoolView<CardPrinted> generateBasicLands(final int nBasic, final int nSnow) {
-        final CardDb db = CardDb.instance();
-        final ItemPool<CardPrinted> pool = new ItemPool<CardPrinted>(CardPrinted.class);
-        pool.add(db.getCard("Forest", "M10"), nBasic);
-        pool.add(db.getCard("Mountain", "M10"), nBasic);
-        pool.add(db.getCard("Swamp", "M10"), nBasic);
-        pool.add(db.getCard("Island", "M10"), nBasic);
-        pool.add(db.getCard("Plains", "M10"), nBasic);
-
-        pool.add(db.getCard("Snow-Covered Forest", "ICE"), nSnow);
-        pool.add(db.getCard("Snow-Covered Mountain", "ICE"), nSnow);
-        pool.add(db.getCard("Snow-Covered Swamp", "ICE"), nSnow);
-        pool.add(db.getCard("Snow-Covered Island", "ICE"), nSnow);
-        pool.add(db.getCard("Snow-Covered Plains", "ICE"), nSnow);
-        return pool;
-    }
-
-    /**
      * Adds the basic lands (from random sets as limited by the format).
      *
      * @param nBasic the n basic
@@ -98,7 +72,6 @@ public final class QuestUtilCards {
         final CardDb db = CardDb.instance();
         final ItemPool<CardPrinted> pool = new ItemPool<CardPrinted>(CardPrinted.class);
 
-        Random r = new Random();
         List<String> landCodes = new ArrayList<String>();
         List<String> snowLandCodes = new ArrayList<String>();
 
@@ -113,30 +86,31 @@ public final class QuestUtilCards {
             if (usedFormat.isSetLegal("CSP"))
                 snowLandCodes.add("CSP");
         } else {
-            EditionCollection editions = Singletons.getModel().getEditions();
-            Iterable<CardEdition> allLandCodes = Iterables.filter(editions, CardEdition.Predicates.hasBasicLands); 
-            for (CardEdition edition : allLandCodes) {
-                    landCodes.add(edition.getCode());
+            Iterable<CardEdition> allEditions = Singletons.getModel().getEditions();
+            for (CardEdition edition : Iterables.filter(allEditions, CardEdition.Predicates.hasBasicLands)) {
+                landCodes.add(edition.getCode());
             }
             snowLandCodes.add("ICE");
             snowLandCodes.add("CSP");
         }
 
-        if (landCodes.size() == 0)
-            landCodes.add("M10");
+        String landCode = Aggregates.random(landCodes);
+        if ( null == landCode )
+            landCode = "M10";
 
-        pool.add(db.getCard("Forest", landCodes.get(r.nextInt(landCodes.size()))), nBasic);
-        pool.add(db.getCard("Mountain", landCodes.get(r.nextInt(landCodes.size()))), nBasic);
-        pool.add(db.getCard("Swamp", landCodes.get(r.nextInt(landCodes.size()))), nBasic);
-        pool.add(db.getCard("Island", landCodes.get(r.nextInt(landCodes.size()))), nBasic);
-        pool.add(db.getCard("Plains", landCodes.get(r.nextInt(landCodes.size()))), nBasic);
+        pool.add(db.getCard("Forest", landCode), nBasic);
+        pool.add(db.getCard("Mountain", landCode), nBasic);
+        pool.add(db.getCard("Swamp", landCode), nBasic);
+        pool.add(db.getCard("Island", landCode), nBasic);
+        pool.add(db.getCard("Plains", landCode), nBasic);
 
-        if (snowLandCodes.size() > 0) {
-            pool.add(db.getCard("Snow-Covered Forest", snowLandCodes.get(r.nextInt(snowLandCodes.size()))), nSnow);
-            pool.add(db.getCard("Snow-Covered Mountain", snowLandCodes.get(r.nextInt(snowLandCodes.size()))), nSnow);
-            pool.add(db.getCard("Snow-Covered Swamp", snowLandCodes.get(r.nextInt(snowLandCodes.size()))), nSnow);
-            pool.add(db.getCard("Snow-Covered Island", snowLandCodes.get(r.nextInt(snowLandCodes.size()))), nSnow);
-            pool.add(db.getCard("Snow-Covered Plains", snowLandCodes.get(r.nextInt(snowLandCodes.size()))), nSnow);
+        if (!snowLandCodes.isEmpty()) {
+            String snowLandCode = Aggregates.random(snowLandCodes);
+            pool.add(db.getCard("Snow-Covered Forest", snowLandCode), nSnow);
+            pool.add(db.getCard("Snow-Covered Mountain", snowLandCode), nSnow);
+            pool.add(db.getCard("Snow-Covered Swamp", snowLandCode), nSnow);
+            pool.add(db.getCard("Snow-Covered Island", snowLandCode), nSnow);
+            pool.add(db.getCard("Snow-Covered Plains", snowLandCode), nSnow);
         }
 
         return pool;
