@@ -249,11 +249,12 @@ public class CardLists {
             return null;
         }
 
+        final List<Card> cs = Lists.newArrayList(c);
+        
         final List<Card> subList = new ArrayList<Card>();
         while (subList.size() < amount) {
-            CardLists.shuffle(c);
-            subList.add(c.get(0));
-            c.remove(0);
+            CardLists.shuffle(cs);
+            subList.add(cs.remove(0));
         }
         return subList;
     }
