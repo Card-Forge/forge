@@ -124,7 +124,7 @@ public class AnimateAi extends SpellAiLogic {
     
     
     @Override
-    public boolean chkAIDrawback(Map<String, String> params, SpellAbility sa) {
+    public boolean chkAIDrawback(Map<String, String> params, SpellAbility sa, Player aiPlayer) {
         boolean chance = true;
     
         if (sa.getTarget() != null) {

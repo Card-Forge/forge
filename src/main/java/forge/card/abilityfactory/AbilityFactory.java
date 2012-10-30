@@ -21,8 +21,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.tools.ant.types.resources.Tokens;
-
 import forge.Card;
 
 import forge.CardLists;
@@ -215,17 +213,6 @@ public class AbilityFactory {
         return this.abTgt;
     }
 
-    /**
-     * <p>
-     * Setter for the field <code>abTgt</code>.
-     * </p>
-     * 
-     * @param target
-     *            a target object.
-     */
-    public final void setAbTgt(final Target target) {
-        this.abTgt = target;
-    }
 
     /**
      * <p>
@@ -707,13 +694,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Discard")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryZoneAffecting.createAbilityDiscard(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryZoneAffecting.createSpellDiscard(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryZoneAffecting.createDrawbackDiscard(this);
-            }
+            ai = new DiscardAi();
+            se = new DiscardEffect();
         }
 
         else if (this.api.equals("DrainMana")) {
@@ -727,13 +709,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Draw")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryZoneAffecting.createAbilityDraw(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryZoneAffecting.createSpellDraw(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryZoneAffecting.createDrawbackDraw(this);
-            }
+            ai = new DrawAi();
+            se = new DrawEffect();
         }
 
         else if (this.api.equals("EachDamage")) {
@@ -875,13 +852,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Mill")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryZoneAffecting.createAbilityMill(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryZoneAffecting.createSpellMill(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryZoneAffecting.createDrawbackMill(this);
-            }
+            ai = new MillAi();
+            se = new MillEffect();
         }
 
         else if (this.api.equals("MoveCounter")) {
@@ -1189,13 +1161,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Shuffle")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryZoneAffecting.createAbilityShuffle(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryZoneAffecting.createSpellShuffle(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryZoneAffecting.createDrawbackShuffle(this);
-            }
+            ai = new ShuffleAi();
+            se = new ShuffleEffect();
         }
 
         else if (this.api.equals("StoreSVar")) {

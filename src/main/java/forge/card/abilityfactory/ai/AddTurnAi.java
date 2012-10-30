@@ -18,25 +18,12 @@
 package forge.card.abilityfactory.ai;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
-import forge.Card;
-import forge.Singletons;
-import forge.card.spellability.AbilityActivated;
-import forge.card.spellability.AbilitySub;
-import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
-import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.cost.Cost;
-import forge.game.GameState;
-import forge.game.phase.ExtraTurn;
-import forge.game.phase.PhaseType;
-import forge.game.player.AIPlayer;
-import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 
 /**
@@ -79,7 +66,7 @@ public class AddTurnAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa) {
+    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
         return true;
     }
 

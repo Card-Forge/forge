@@ -67,7 +67,7 @@ class UniversalDrawback extends AbilitySub {
     
         @Override
         public boolean chkAIDrawback() {
-            boolean chance = ai.chkAIDrawback(params, this);
+            boolean chance = ai.chkAIDrawback(params, this, getActivatingPlayer());
             final AbilitySub subAb = getSubAbility();
             if (subAb != null) {
                 chance &= subAb.chkAIDrawback();

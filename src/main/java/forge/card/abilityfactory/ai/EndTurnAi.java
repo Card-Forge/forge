@@ -1,4 +1,4 @@
-package forge.card.abilityfactory.effects;
+package forge.card.abilityfactory.ai;
 
 import java.util.Map;
 
@@ -18,7 +18,7 @@ public class EndTurnAi extends SpellAiLogic  {
     }
     
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa) { return false; }
+    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) { return false; }
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
