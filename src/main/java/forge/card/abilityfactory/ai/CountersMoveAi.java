@@ -8,7 +8,6 @@ import forge.Card;
 import forge.CardLists;
 import forge.Counters;
 import forge.card.abilityfactory.AbilityFactory;
-import forge.card.abilityfactory.AbilityFactoryCounters;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilitySub;
@@ -129,7 +128,7 @@ public class CountersMoveAi extends SpellAiLogic {
             // Choose targets here:
             if (isCurse) {
                 if (preferred) {
-                    choice = AbilityFactoryCounters.chooseCursedTarget(list, type, amount);
+                    choice = CountersAi.chooseCursedTarget(list, type, amount);
                 }
 
                 else {
@@ -141,7 +140,7 @@ public class CountersMoveAi extends SpellAiLogic {
                 }
             } else {
                 if (preferred) {
-                    choice = AbilityFactoryCounters.chooseBoonTarget(list, type);
+                    choice = CountersAi.chooseBoonTarget(list, type);
                 }
 
                 else {

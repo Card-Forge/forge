@@ -920,13 +920,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Proliferate")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryCounters.createAbilityProliferate(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryCounters.createSpellProliferate(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryCounters.createDrawbackProliferate(this);
-            }
+            ai = new CountersProliferateAi();
+            se = new CountersProliferateEffect();
         }
 
         else if (this.api.equals("Protection")) {
@@ -964,23 +959,13 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("PutCounter")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryCounters.createAbilityPutCounters(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryCounters.createSpellPutCounters(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryCounters.createDrawbackPutCounters(this);
-            }
+            ai = new CountersPutAi();
+            se = new CountersPutEffect();
         }
 
         else if (this.api.equals("PutCounterAll")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryCounters.createAbilityPutCounterAll(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryCounters.createSpellPutCounterAll(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryCounters.createDrawbackPutCounterAll(this);
-            }
+            ai = new CountersPutAllAi();
+            se = new CountersPutAllEffect();
         }
 
         else if (this.api.equals("RearrangeTopOfLibrary")) {
@@ -1014,23 +999,13 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("RemoveCounter")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryCounters.createAbilityRemoveCounters(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryCounters.createSpellRemoveCounters(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryCounters.createDrawbackRemoveCounters(this);
-            }
+            ai = new CountersRemoveAi();
+            se = new CountersRemoveEffect();
         }
 
         else if (this.api.equals("RemoveCounterAll")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryCounters.createAbilityRemoveCounterAll(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryCounters.createSpellRemoveCounterAll(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryCounters.createDrawbackRemoveCounterAll(this);
-            }
+            ai = new CannotPlayAi();
+            se = new CountersRemoveAllEffect();
         }
 
         else if (this.api.equals("RemoveFromCombat")) {

@@ -12470,7 +12470,6 @@ src/main/java/forge/card/abilityfactory/AbilityFactoryClone.java -text
 src/main/java/forge/card/abilityfactory/AbilityFactoryCombat.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryCopy.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryCounterMagic.java svneol=native#text/plain
-src/main/java/forge/card/abilityfactory/AbilityFactoryCounters.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryDealDamage.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryDebuff.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryDelayedTrigger.java svneol=native#text/plain
@@ -12496,7 +12495,13 @@ src/main/java/forge/card/abilityfactory/ai/AddTurnAi.java svneol=native#text/pla
 src/main/java/forge/card/abilityfactory/ai/AnimateAi.java -text
 src/main/java/forge/card/abilityfactory/ai/AnimateAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/BondAi.java -text
+src/main/java/forge/card/abilityfactory/ai/CannotPlayAi.java -text
+src/main/java/forge/card/abilityfactory/ai/CountersAi.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/ai/CountersMoveAi.java -text
+src/main/java/forge/card/abilityfactory/ai/CountersProliferateAi.java -text
+src/main/java/forge/card/abilityfactory/ai/CountersPutAi.java -text
+src/main/java/forge/card/abilityfactory/ai/CountersPutAllAi.java -text
+src/main/java/forge/card/abilityfactory/ai/CountersRemoveAi.java -text
 src/main/java/forge/card/abilityfactory/ai/DamagePreventAi.java -text
 src/main/java/forge/card/abilityfactory/ai/DamagePreventAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/DiscardAi.java -text
@@ -12519,6 +12524,11 @@ src/main/java/forge/card/abilityfactory/effects/AnimateAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/AnimateEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/BondEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/CountersMoveEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/CountersProliferateEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/CountersPutAllEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/CountersPutEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/CountersRemoveAllEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/CountersRemoveEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/DamagePreventAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/DamagePreventEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/DiscardEffect.java -text
