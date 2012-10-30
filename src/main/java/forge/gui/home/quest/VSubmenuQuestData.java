@@ -81,6 +81,10 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
 
     private final JRadioButton radPreconStart = new FRadioButton("Preconstructed Deck: ");
     private final JComboBox cbxPrecon = new JComboBox();
+    private final FCheckBox boxDeckUser = new FCheckBox("User Deck");
+    private final JButton btnDeckImport = new JButton("Import");
+    private final FCheckBox boxDeckFormat = new FCheckBox("Use Format");
+
 
     private final FLabel btnEmbark = new FLabel.Builder().opaque(true)
             .fontSize(16).hoverable(true).text("Embark!").build();
@@ -152,6 +156,9 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         radUnrestricted.setSelected(true);
         cbxPrecon.setEnabled(false);
         radMedium.setEnabled(true);
+        boxDeckUser.setEnabled(false);
+        btnDeckImport.setEnabled(false);
+        boxDeckFormat.setEnabled(false);
 
         // Fantasy box enabled by Default
         boxFantasy.setSelected(true);
@@ -176,7 +183,10 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         pnlOptions.add(boxFormatPersist, constraints);
 
         pnlOptions.add(boxFantasy, constraints + ", gap 1% 4% 0 5px");
-        pnlOptions.add(radPreconStart, constraints);
+        pnlOptions.add(radPreconStart, constraints + ", w 14%!, h 27px!, split 4");
+        pnlOptions.add(boxDeckUser, constraints + ", w 12%!, h 27px!");
+        pnlOptions.add(btnDeckImport, constraints + ", w 12%!, h 27px!");
+        pnlOptions.add(boxDeckFormat, constraints + ", w 12%!, h 27px!");
 
         pnlOptions.add(cbxPrecon, constraints + ", skip 1");
         pnlOptions.add(btnEmbark, "w 300px!, h 30px!, ax center, span 2, gap 0 0 15px 30px");
@@ -302,6 +312,27 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     /** @return {@link javax.swing.JRadioButton} */
     public JRadioButton getRadPreconStart() {
         return radPreconStart;
+    }
+
+    /**
+     * @return {@link javax.swing.JCheckBox}
+     */
+    public JCheckBox getBoxDeckUser() {
+        return boxDeckUser;
+    }
+
+    /**
+     * @return {@link javax.swing.JButton}
+     */
+    public JButton getBtnDeckImport() {
+        return btnDeckImport;
+    }
+
+    /**
+     * @return {@link javax.swing.JCheckBox}
+     */
+    public JCheckBox getBoxDeckFormat() {
+        return boxDeckFormat;
     }
 
     /** @return {@link javax.swing.JComboBox} */

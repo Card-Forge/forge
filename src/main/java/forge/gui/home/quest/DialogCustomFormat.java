@@ -150,6 +150,8 @@ public class DialogCustomFormat extends JDialog {
             return;
         }
 
+        // Fix a problem with not updating changes
+        customFormat.emptyAllowedSets();
 
         for (int i = 0; i < choices.length; i++) {
             if (choices[i] != null) {

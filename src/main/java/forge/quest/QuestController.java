@@ -17,6 +17,7 @@
  */
 package forge.quest;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -213,11 +214,15 @@ public class QuestController {
      * @param userFormat user-defined format, if any
      * @param persist
      *      enforce the format for the whole quest
+     * @param userDeck
+     *      user-specified starting deck
      */
     public void newGame(final String name, final int diff, final QuestMode mode, final QuestStartPool startPool,
-            final String startFormat, final String preconName, final GameFormatQuest userFormat, final boolean persist) {
+            final String startFormat, final String preconName, final GameFormatQuest userFormat, final boolean persist,
+            final File userDeck) {
 
-        if (persist && startPool == QuestStartPool.Rotating) {
+        if (persist
+                && (startPool == QuestStartPool.Rotating || startPool == QuestStartPool.Precon || startPool == QuestStartPool.UserDeck)) {
             this.load(new QuestData(name, diff, mode, startFormat, userFormat));
         } else {
             this.load(new QuestData(name, diff, mode, null, null));
@@ -225,6 +230,12 @@ public class QuestController {
 
         final Predicate<CardPrinted> filter;
         switch (startPool) {
+        case UserDeck:
+            if (userDeck == null) {
+                throw new RuntimeException("User deck is null!");
+            }
+            this.myCards.addDeck(Deck.fromFile(userDeck));
+            return;
         case Precon:
             this.myCards.addPreconDeck(QuestController.getPrecons().get(preconName));
             return;

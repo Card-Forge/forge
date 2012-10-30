@@ -129,6 +129,17 @@ public final class GameFormatQuest {
         this.filterPrinted = this.buildFilterPrinted();
     }
 
+    /**
+     * Empty the whole list.
+     */
+    public void emptyAllowedSets() {
+        if (allowedSetCodes != null) {
+            while (!allowedSetCodes.isEmpty()) {
+                allowedSetCodes.remove(0);
+            }
+        }
+    }
+
     /** 
      * @param setCode
      *      the set code to add

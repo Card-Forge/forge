@@ -3,6 +3,7 @@ package forge.gui.home.quest;
 import static forge.quest.QuestStartPool.Complete;
 import static forge.quest.QuestStartPool.Precon;
 import static forge.quest.QuestStartPool.Rotating;
+import static forge.quest.QuestStartPool.UserDeck;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,9 +13,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import forge.Command;
+import forge.deck.Deck;
+import forge.deck.io.DeckSerializer;
 import forge.Singletons;
 import forge.gui.framework.ICDoc;
 import forge.properties.ForgeProps;
@@ -47,17 +51,27 @@ public enum CSubmenuQuestData implements ICDoc {
     private final Command cmdQuestSelect = new Command() { @Override
         public void execute() { changeQuest(); } };
 
+    private File userDeck = null;
     private final Command cmdQuestDelete = new Command() { @Override
         public void execute() { update(); } };
 
     private final ActionListener preconListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            view.getCbxFormat().setEnabled(view.getRadRotatingStart().isSelected() && !view.getBoxCustom().isSelected());
-            view.getCbxPrecon().setEnabled(view.getRadPreconStart().isSelected());
-            view.getBoxPersist().setEnabled(view.getRadRotatingStart().isSelected());
-            view.getBoxCustom().setEnabled(view.getRadRotatingStart().isSelected());
-            view.getBtnCustom().setEnabled(view.getRadRotatingStart().isSelected() && view.getBoxCustom().isSelected());
+            view.getCbxFormat().setEnabled(view.getRadRotatingStart().isSelected()
+                    || (view.getRadPreconStart().isSelected() && view.getBoxDeckFormat().isSelected())
+                    && !view.getBoxCustom().isSelected());
+            view.getCbxPrecon().setEnabled(view.getRadPreconStart().isSelected() && !view.getBoxDeckUser().isSelected());
+            view.getBoxPersist().setEnabled(view.getRadRotatingStart().isSelected()
+                    || (view.getRadPreconStart().isSelected() && view.getBoxDeckFormat().isSelected()));
+            view.getBoxCustom().setEnabled(view.getRadRotatingStart().isSelected()
+                    || (view.getRadPreconStart().isSelected() && view.getBoxDeckFormat().isSelected() && view.getBoxPersist().isSelected()));
+            view.getBtnCustom().setEnabled((view.getRadRotatingStart().isSelected()
+                    || (view.getRadPreconStart().isSelected() && view.getBoxDeckFormat().isSelected()) && view.getBoxPersist().isSelected())
+                    && view.getBoxCustom().isSelected());
+            view.getBoxDeckUser().setEnabled(view.getRadPreconStart().isSelected());
+            view.getBtnDeckImport().setEnabled(view.getRadPreconStart().isSelected() && view.getBoxDeckUser().isSelected());
+            view.getBoxDeckFormat().setEnabled(view.getRadPreconStart().isSelected());
         }
     };
      private final ActionListener customFormatListener = new ActionListener() {
@@ -72,6 +86,28 @@ public enum CSubmenuQuestData implements ICDoc {
 
     };
 
+    private final ActionListener btnDeckImportListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            final JFileChooser open = new JFileChooser(ForgeProps.getFile(NewConstants.NEW_DECKS));
+            open.setDialogTitle("Import a Draft/Sealed Deck");
+            open.addChoosableFileFilter(DeckSerializer.DCK_FILTER);
+            open.setCurrentDirectory(ForgeProps.getFile(NewConstants.NEW_DECKS));
+            final int returnVal = open.showOpenDialog(null);
+
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                userDeck = open.getSelectedFile();
+                if (userDeck.getPath().toLowerCase().contains("draft") || userDeck.getPath().toLowerCase().contains("sealed")) {
+                } else {
+                    JOptionPane.showMessageDialog(null, "Only Sealed Deck and Draft decks are allowed as a starting deck",
+                            "Illegal starting deck", JOptionPane.ERROR_MESSAGE);
+                    userDeck = null;
+                }
+            }
+        }
+    };
+
+
     /* (non-Javadoc)
      * @see forge.control.home.IControlSubmenu#update()
      */
@@ -85,6 +121,9 @@ public enum CSubmenuQuestData implements ICDoc {
         view.getRadPreconStart().addActionListener(preconListener);
         view.getBoxCustom().addActionListener(preconListener);
         view.getBtnFormatCustom().addActionListener(customFormatListener);
+        view.getBoxDeckUser().addActionListener(preconListener);
+        view.getBoxDeckFormat().addActionListener(preconListener);
+        view.getBtnDeckImport().addActionListener(btnDeckImportListener);
     }
 
     /* (non-Javadoc)
@@ -154,6 +193,11 @@ public enum CSubmenuQuestData implements ICDoc {
         final VSubmenuQuestData view = VSubmenuQuestData.SINGLETON_INSTANCE;
         int difficulty = 0;
 
+        if (view.getRadPreconStart().isSelected() && view.getBoxDeckUser().isSelected() && userDeck == null) {
+            JOptionPane.showMessageDialog(null, "Please select a deck first!",
+                    "No deck selected", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         final QuestMode mode = view.getBoxFantasy().isSelected() ? QuestMode.Fantasy : QuestMode.Classic;
 
         if (view.getRadEasy().isSelected()) {
@@ -177,7 +221,11 @@ public enum CSubmenuQuestData implements ICDoc {
         } else if (view.getRadRotatingStart().isSelected()) {
             startPool = Rotating;
         } else {
-            startPool = Precon;
+            if (view.getBoxDeckUser().isSelected() && userDeck != null) {
+                startPool = UserDeck;
+            } else {
+                startPool = Precon;
+            }
         }
 
         final Object o = JOptionPane.showInputDialog(null, "Poets will remember your quest as:", "Quest Name", JOptionPane.OK_CANCEL_OPTION);
@@ -192,13 +240,18 @@ public enum CSubmenuQuestData implements ICDoc {
         }
 
         // Give the user a few cards to build a deck
-        final boolean useCustomFormat = (view.getRadRotatingStart().isSelected() && view.getBoxCustom().isSelected());
+        final boolean useCustomFormat = ((view.getRadRotatingStart().isSelected()
+                || (view.getRadPreconStart().isSelected() && view.getBoxDeckFormat().isSelected()))
+                && view.getBoxCustom().isSelected());
         if (useCustomFormat && userFormat != null) {
             userFormat.updateFilters();
         }
+
+        final boolean doPersist = view.getBoxPersist().isSelected()
+                && (view.getRadRotatingStart().isSelected() || (view.getRadPreconStart().isSelected() && view.getBoxDeckFormat().isSelected()));
+
         Singletons.getModel().getQuest().newGame(questName, difficulty, mode, startPool, rotatingFormat, startPrecon,
-                useCustomFormat ? userFormat : null,
-                 view.getBoxPersist().isSelected());
+                useCustomFormat ? userFormat : null, doPersist, userDeck);
         Singletons.getModel().getQuest().save();
 
         // Save in preferences.

@@ -246,6 +246,15 @@ public final class QuestUtilCards {
         this.addAllCards(precon.getDeck().getSideboard().toFlatList());
     }
 
+    void addDeck(final Deck fromDeck) {
+        if (fromDeck == null) {
+            return;
+        }
+        this.qc.getMyDecks().add(fromDeck);
+        this.addAllCards(fromDeck.getMain().toFlatList());
+        this.addAllCards(fromDeck.getSideboard().toFlatList());
+    }
+
     /**
      * Sell card.
      * 
