@@ -17,7 +17,6 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import forge.Command;
-import forge.deck.Deck;
 import forge.deck.io.DeckSerializer;
 import forge.Singletons;
 import forge.gui.framework.ICDoc;

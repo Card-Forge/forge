@@ -483,53 +483,28 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("ChooseCard")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryChoose.createAbilityChooseCard(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryChoose.createSpellChooseCard(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryChoose.createDrawbackChooseCard(this);
-            }
+            ai = new ChooseCardAi();
+            se = new ChooseCardEffect();
         }
 
         else if (this.api.equals("ChooseColor")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryChoose.createAbilityChooseColor(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryChoose.createSpellChooseColor(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryChoose.createDrawbackChooseColor(this);
-            }
+            ai = new ChooseColorAi();
+            se = new ChooseColorEffect();
         }
 
         else if (this.api.equals("ChooseNumber")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryChoose.createAbilityChooseNumber(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryChoose.createSpellChooseNumber(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryChoose.createDrawbackChooseNumber(this);
-            }
+            ai = new CannotPlayAi();
+            se = new ChooseNumberEffect();
         }
 
         else if (this.api.equals("ChoosePlayer")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryChoose.createAbilityChoosePlayer(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryChoose.createSpellChoosePlayer(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryChoose.createDrawbackChoosePlayer(this);
-            }
+            ai = new CannotPlayAi();
+            se = new ChoosePlayerEffect();
         }
 
         else if (this.api.equals("ChooseType")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryChoose.createAbilityChooseType(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryChoose.createSpellChooseType(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryChoose.createDrawbackChooseType(this);
-            }
+            ai = new ChooseTypeAi();
+            se = new ChooseTypeEffect();
         }
 
         else if (this.api.equals("Clash")) {
@@ -626,23 +601,13 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Debuff")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryDebuff.createAbilityDebuff(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryDebuff.createSpellDebuff(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryDebuff.createDrawbackDebuff(this);
-            }
+            ai = new DebuffAi();
+            se = new DebuffEffect();
         }
 
         else if (this.api.equals("DebuffAll")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryDebuff.createAbilityDebuffAll(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryDebuff.createSpellDebuffAll(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryDebuff.createDrawbackDebuffAll(this);
-            }
+            ai = new DebuffAllAi();
+            se = new DebuffAllEffect();
         }
 
         else if (this.api.equals("DelayedTrigger")) {
@@ -797,13 +762,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("GenericChoice")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryChoose.createAbilityChooseGeneric(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryChoose.createSpellChooseGeneric(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryChoose.createDrawbackChooseGeneric(this);
-            }
+            ai = new CannotPlayAi();
+            se = new ChooseGenericEffect();
         }
 
         else if (this.api.equals("LoseLife")) {
@@ -875,13 +835,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("NameCard")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryChoose.createAbilityNameCard(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryChoose.createSpellNameCard(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryChoose.createDrawbackNameCard(this);
-            }
+            ai = new ChooseCardNameAi();
+            se = new ChooseCardNameEffect();
         }
 
         else if (this.api.equals("Phases")) {

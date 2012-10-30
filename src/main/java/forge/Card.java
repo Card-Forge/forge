@@ -6217,7 +6217,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            an array of {@link java.lang.String} objects.
      * @return a boolean.
      */
-    public final boolean hasAnyKeyword(final String[] keywords) {
+    public final boolean hasAnyKeyword(final Iterable<String> keywords) {
         for (final String keyword : keywords) {
             if (this.hasKeyword(keyword)) {
                 return true;
