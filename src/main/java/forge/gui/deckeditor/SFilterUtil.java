@@ -25,7 +25,6 @@ import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
 import forge.game.GameFormat;
 import forge.gui.WrapLayout;
-import forge.gui.deckeditor.controllers.CFilters;
 import forge.gui.deckeditor.views.VFilters;
 import forge.item.CardPrinted;
 import forge.util.ComparableOp;
@@ -162,7 +161,7 @@ public class SFilterUtil {
      * @param select0 &emsp; boolean */
     public static void toggleTypeCheckboxes(final boolean select0) {
         for (FilterProperty p : MAP_TYPE_CHECKBOXES.keySet()) {
-           ((ChbPnl) MAP_TYPE_CHECKBOXES.get(p)).getCheckBox().setSelected(select0);
+           MAP_TYPE_CHECKBOXES.get(p).getCheckBox().setSelected(select0);
         }
     }
 
@@ -170,7 +169,7 @@ public class SFilterUtil {
      * @param select0 &emsp; boolean */
     public static void toggleColorCheckboxes(final boolean select0) {
         for (FilterProperty p : MAP_COLOR_CHECKBOXES.keySet()) {
-           ((ChbPnl) MAP_COLOR_CHECKBOXES.get(p)).getCheckBox().setSelected(select0);
+           MAP_COLOR_CHECKBOXES.get(p).getCheckBox().setSelected(select0);
         }
     }
 
@@ -401,7 +400,7 @@ public class SFilterUtil {
         @Override
         public void itemStateChanged(final ItemEvent arg0) {
             if (!preventFiltering) {
-                ((CFilters) VFilters.SINGLETON_INSTANCE.getLayoutControl()).buildFilter();
+                VFilters.SINGLETON_INSTANCE.getLayoutControl().buildFilter();
             }
         }
     }

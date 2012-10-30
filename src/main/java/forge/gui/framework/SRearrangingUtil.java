@@ -33,7 +33,7 @@ public final class SRearrangingUtil {
         TOP,
         BOTTOM,
         LEFT
-    };
+    }
 
     private static int evtX;
     private static int evtY;

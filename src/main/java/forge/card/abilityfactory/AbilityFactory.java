@@ -917,23 +917,13 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("PreventDamage")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryPreventDamage.createAbilityPreventDamage(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryPreventDamage.createSpellPreventDamage(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryPreventDamage.createDrawbackPreventDamage(this);
-            }
+            ai = new DamagePreventAi();
+            se = new DamagePreventEffect();
         }
 
         else if (this.api.equals("PreventDamageAll")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryPreventDamage.createAbilityPreventDamageAll(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryPreventDamage.createSpellPreventDamageAll(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryPreventDamage.createDrawbackPreventDamageAll(this);
-            }
+            ai = new DamagePreventAllAi();
+            se = new DamagePreventAllEffect();
         }
 
         else if (this.api.equals("Proliferate")) {

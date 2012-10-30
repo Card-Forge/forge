@@ -12481,7 +12481,6 @@ src/main/java/forge/card/abilityfactory/AbilityFactoryGainControl.java svneol=na
 src/main/java/forge/card/abilityfactory/AbilityFactoryMana.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryPermanentState.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryPlay.java -text
-src/main/java/forge/card/abilityfactory/AbilityFactoryPreventDamage.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryProtection.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryPump.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryRegenerate.java svneol=native#text/plain
@@ -12499,6 +12498,8 @@ src/main/java/forge/card/abilityfactory/ai/AddTurnAi.java svneol=native#text/pla
 src/main/java/forge/card/abilityfactory/ai/AnimateAi.java -text
 src/main/java/forge/card/abilityfactory/ai/AnimateAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/BondAi.java -text
+src/main/java/forge/card/abilityfactory/ai/DamagePreventAi.java -text
+src/main/java/forge/card/abilityfactory/ai/DamagePreventAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/DiscardAi.java -text
 src/main/java/forge/card/abilityfactory/ai/DrainManaAi.java -text
 src/main/java/forge/card/abilityfactory/ai/DrawAi.java svneol=native#text/plain
@@ -12515,6 +12516,8 @@ src/main/java/forge/card/abilityfactory/effects/AddTurnEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/AnimateAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/AnimateEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/BondEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/DamagePreventAllEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/DamagePreventEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/DiscardEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/DrainManaEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/DrawEffect.java -text

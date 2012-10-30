@@ -38,7 +38,7 @@ public final class SLayoutIO {
         w,
         h,
         doc
-    };
+    }
 
     private static String fileDefault = null;
     private static String filePreferred = null;
