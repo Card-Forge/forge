@@ -12468,7 +12468,6 @@ src/main/java/forge/card/abilityfactory/AbilityFactoryCleanup.java svneol=native
 src/main/java/forge/card/abilityfactory/AbilityFactoryClone.java -text
 src/main/java/forge/card/abilityfactory/AbilityFactoryCombat.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryCopy.java svneol=native#text/plain
-src/main/java/forge/card/abilityfactory/AbilityFactoryCounterMagic.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryDealDamage.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryDelayedTrigger.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryDestroy.java svneol=native#text/plain
@@ -12477,7 +12476,6 @@ src/main/java/forge/card/abilityfactory/AbilityFactoryGainControl.java svneol=na
 src/main/java/forge/card/abilityfactory/AbilityFactoryMana.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryPermanentState.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryPump.java svneol=native#text/plain
-src/main/java/forge/card/abilityfactory/AbilityFactoryRegenerate.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryRepeat.java -text
 src/main/java/forge/card/abilityfactory/AbilityFactoryReveal.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactorySacrifice.java svneol=native#text/plain
@@ -12497,6 +12495,7 @@ src/main/java/forge/card/abilityfactory/ai/ChooseCardAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ChooseCardNameAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ChooseColorAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ChooseTypeAi.java -text
+src/main/java/forge/card/abilityfactory/ai/CounterAi.java -text
 src/main/java/forge/card/abilityfactory/ai/CountersAi.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/ai/CountersMoveAi.java -text
 src/main/java/forge/card/abilityfactory/ai/CountersProliferateAi.java -text
@@ -12521,6 +12520,8 @@ src/main/java/forge/card/abilityfactory/ai/PlayAi.java -text
 src/main/java/forge/card/abilityfactory/ai/PoisonAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ProtectAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ProtectAllAi.java -text
+src/main/java/forge/card/abilityfactory/ai/RegenerateAi.java svneol=native#text/plain
+src/main/java/forge/card/abilityfactory/ai/RegenerateAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ShuffleAi.java -text
 src/main/java/forge/card/abilityfactory/ai/TokenAi.java -text
 src/main/java/forge/card/abilityfactory/effects/AddTurnEffect.java -text
@@ -12534,6 +12535,7 @@ src/main/java/forge/card/abilityfactory/effects/ChooseGenericEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ChooseNumberEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ChoosePlayerEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ChooseTypeEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/CounterEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/CountersMoveEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/CountersProliferateEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/CountersPutAllEffect.java -text
@@ -12559,6 +12561,8 @@ src/main/java/forge/card/abilityfactory/effects/PlayEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/PoisonEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ProtectAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ProtectEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/RegenerateAllEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/RegenerateEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ShuffleEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/TokenEffect.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/package-info.java svneol=native#text/plain

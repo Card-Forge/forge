@@ -65,15 +65,15 @@ public class CountersProliferateEffect extends SpellEffect {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(Map<String,String> params, SpellAbility sa) {
         Player controller = sa.getSourceCard().getController();
         if (controller.isHuman()) 
-            resolveHuman(params, sa);
+            resolveHuman(sa);
         else
-            resolveAI(controller, params, sa);
+            resolveAI(controller, sa);
     }
     
-    private static void resolveHuman(final Map<String,String> params, final SpellAbility sa) {
+    private static void resolveHuman(final SpellAbility sa) {
         final List<Card> unchosen = Lists.newArrayList(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield));
         final List<Player> players = new ArrayList<Player>(Singletons.getModel().getGame().getPlayers());
         Singletons.getModel().getMatch().getInput().setInput(new Input() {
@@ -129,7 +129,7 @@ public class CountersProliferateEffect extends SpellEffect {
     
     
     
-    private static void resolveAI(final Player ai, final Map<String,String> params, final SpellAbility sa) {
+    private static void resolveAI(final Player ai, final SpellAbility sa) {
         final List<Player> allies = ai.getAllies();
         allies.add(ai);
         final List<Player> enemies = ai.getOpponents();

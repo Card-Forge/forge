@@ -560,20 +560,14 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Counter")) {
-            final AbilityFactoryCounterMagic c = new AbilityFactoryCounterMagic(this);
+            
+            ai = new CounterAi();
+            se = new CounterEffect();
 
             // Since all "Counter" ABs Counter things on the Stack no need for
             // it to be everywhere
             if (this.isTargeted) {
                 this.abTgt.setZone(ZoneType.Stack);
-            }
-
-            if (this.isAb) {
-                spellAbility = c.getAbilityCounter(this);
-            } else if (this.isSp) {
-                spellAbility = c.getSpellCounter(this);
-            } else if (this.isDb) {
-                spellAbility = c.getDrawbackCounter(this);
             }
         }
 
@@ -929,23 +923,13 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Regenerate")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryRegenerate.getAbilityRegenerate(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryRegenerate.getSpellRegenerate(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryRegenerate.getDrawbackRegenerate(this);
-            }
+            ai = new RegenerateAi();
+            se = new RegenerateEffect();
         }
 
         else if (this.api.equals("RegenerateAll")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryRegenerate.getAbilityRegenerateAll(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryRegenerate.getSpellRegenerateAll(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryRegenerate.getDrawbackRegenerateAll(this);
-            }
+            ai = new RegenerateAllAi();
+            se = new RegenerateAllEffect();
         }
 
         else if (this.api.equals("RemoveCounter")) {
