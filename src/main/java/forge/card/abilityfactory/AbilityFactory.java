@@ -699,13 +699,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("DrainMana")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryMana.createAbilityDrainMana(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryMana.createSpellDrainMana(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryMana.createDrawbackDrainMana(this);
-            }
+            ai = new DrainManaAi();
+            se = new DrainManaEffect();
         }
 
         else if (this.api.equals("Draw")) {

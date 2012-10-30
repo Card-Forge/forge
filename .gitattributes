@@ -12500,6 +12500,7 @@ src/main/java/forge/card/abilityfactory/ai/AnimateAi.java -text
 src/main/java/forge/card/abilityfactory/ai/AnimateAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/BondAi.java -text
 src/main/java/forge/card/abilityfactory/ai/DiscardAi.java -text
+src/main/java/forge/card/abilityfactory/ai/DrainManaAi.java -text
 src/main/java/forge/card/abilityfactory/ai/DrawAi.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/ai/EndTurnAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ExchangeLifeAi.java -text
@@ -12515,6 +12516,7 @@ src/main/java/forge/card/abilityfactory/effects/AnimateAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/AnimateEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/BondEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/DiscardEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/DrainManaEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/DrawEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/EndTurnEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ExchangeLifeEffect.java -text

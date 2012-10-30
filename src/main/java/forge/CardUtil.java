@@ -36,7 +36,10 @@ import com.google.common.collect.Iterables;
 import forge.card.CardCharacteristics;
 import forge.card.CardManaCost;
 import forge.card.EditionInfo;
+import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.AbilityFactoryMana;
 import forge.card.mana.ManaCost;
+import forge.card.spellability.AbilityMana;
 import forge.control.input.InputPayManaCostUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -887,7 +890,145 @@ public final class CardUtil {
         ret.setImageName(NewConstants.MORPH_IMAGE_FILE_NAME);
 
         return ret;
+    }
+    
+    
+    private static List<String> getColorsOfCards(final int maxChoices, final List<Card> cards, final List<String> colors) {
+        for (final Card card : cards) {
+            // For each card, go through all the colors and if the card is that
+            // color, add
+            for (final String col : Constant.Color.ONLY_COLORS) {
+                if (card.isColor(col) && !colors.contains(col)) {
+                    colors.add(col);
+                    if (colors.size() == maxChoices) {
+                        break;
+                    }
+                }
+            }
+        }
+        return colors;
+    }    
 
+    // add Colors and
+    /**
+     * <p>
+     * reflectableMana.
+     * </p>
+     * 
+     * @param abMana
+     *            a {@link forge.card.spellability.AbilityMana} object.
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @param colors
+     *            a {@link java.util.ArrayList} object.
+     * @param parents
+     *            a {@link java.util.ArrayList} object.
+     * @return a {@link java.util.ArrayList} object.
+     */
+    public static List<String> getReflectableManaColors(final AbilityMana abMana, final AbilityFactory af,
+            List<String> colors, final ArrayList<Card> parents) {
+        // Here's the problem with reflectable Mana. If more than one is out,
+        // they need to Reflect each other,
+        // so we basically need to have a recursive list that send the parents
+        // so we don't infinite recurse.
+        final HashMap<String, String> params = af.getMapParams();
+        final Card card = af.getHostCard();
+    
+        if (!parents.contains(card)) {
+            parents.add(card);
+        }
+    
+        final String colorOrType = params.get("ColorOrType"); // currently Color
+                                                              // or
+        // Type, Type is colors
+        // + colorless
+        final String validCard = params.get("Valid");
+        final String reflectProperty = params.get("ReflectProperty"); // Produce
+        // (Reflecting
+        // Pool) or Is
+        // (Meteor
+        // Crater)
+    
+        int maxChoices = 5; // Color is the default colorOrType
+        if (colorOrType.equals("Type")) {
+            maxChoices++;
+        }
+    
+        List<Card> cards = null;
+    
+        // Reuse AF_Defined in a slightly different way
+        if (validCard.startsWith("Defined.")) {
+            cards = new ArrayList<Card>();
+            for (final Card c : AbilityFactory.getDefinedCards(card, validCard.replace("Defined.", ""), abMana)) {
+                cards.add(c);
+            }
+        } else {
+            cards = CardLists.getValidCards(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), validCard, abMana.getActivatingPlayer(), card);
+        }
+    
+        // remove anything cards that is already in parents
+        for (final Card p : parents) {
+            if (cards.contains(p)) {
+                cards.remove(p);
+            }
+        }
+    
+        if ((cards.size() == 0) && !reflectProperty.equals("Produced")) {
+            return colors;
+        }
+    
+        if (reflectProperty.equals("Is")) { // Meteor Crater
+            colors = getColorsOfCards(maxChoices, cards, colors);
+        } else if (reflectProperty.equals("Produced")) {
+            final String producedColors = (String) abMana.getTriggeringObject("Produced");
+            for (final String col : Constant.Color.ONLY_COLORS) {
+                final String s = InputPayManaCostUtil.getShortColorString(col);
+                if (producedColors.contains(s) && !colors.contains(col)) {
+                    colors.add(col);
+                }
+            }
+            if ((maxChoices == 6) && producedColors.contains("1") && !colors.contains(Constant.Color.COLORLESS)) {
+                colors.add(Constant.Color.COLORLESS);
+            }
+        } else if (reflectProperty.equals("Produce")) {
+            final ArrayList<AbilityMana> abilities = new ArrayList<AbilityMana>();
+            for (final Card c : cards) {
+                abilities.addAll(c.getManaAbility());
+            }
+            // currently reflected mana will ignore other reflected mana
+            // abilities
+    
+            final ArrayList<AbilityMana> reflectAbilities = new ArrayList<AbilityMana>();
+    
+            for (final AbilityMana ab : abilities) {
+                if (maxChoices == colors.size()) {
+                    break;
+                }
+    
+                if (ab.isReflectedMana()) {
+                    if (!parents.contains(ab.getSourceCard())) {
+                        // Recursion!
+                        reflectAbilities.add(ab);
+                        parents.add(ab.getSourceCard());
+                    }
+                    continue;
+                }
+                colors = AbilityFactoryMana.canProduce(maxChoices, ab, colors);
+                if (!parents.contains(ab.getSourceCard())) {
+                    parents.add(ab.getSourceCard());
+                }
+            }
+    
+            for (final AbilityMana ab : reflectAbilities) {
+                if (maxChoices == colors.size()) {
+                    break;
+                }
+    
+                colors = CardUtil.getReflectableManaColors(ab, ab.getAbilityFactory(), colors, parents);
+            }
+        }
+    
+        return colors;
     }
 
 } // end class CardUtil

@@ -20,6 +20,7 @@ package forge.control.input;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import forge.Card;
@@ -27,7 +28,6 @@ import forge.CardUtil;
 import forge.Constant;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
-import forge.card.abilityfactory.AbilityFactoryMana;
 import forge.card.cost.CostMana;
 import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCost;
@@ -153,7 +153,7 @@ public class InputPayManaCostUtil {
 
             for (final AbilityMana am : abilities) {
                 if (am.isReflectedMana()) {
-                    final ArrayList<String> reflectableColors = AbilityFactoryMana.reflectableMana(am,
+                    final List<String> reflectableColors = CardUtil.getReflectableManaColors(am,
                             am.getAbilityFactory(), new ArrayList<String>(), new ArrayList<Card>());
                     for (final String color : reflectableColors) {
                         if (manaCost.isColor(color)) {
@@ -268,7 +268,7 @@ public class InputPayManaCostUtil {
             return true;
         }
         if (am.isReflectedMana()) {
-            final ArrayList<String> reflectableColors = AbilityFactoryMana.reflectableMana(am, am.getAbilityFactory(),
+            final List<String> reflectableColors = CardUtil.getReflectableManaColors(am, am.getAbilityFactory(),
                     new ArrayList<String>(), new ArrayList<Card>());
             for (final String color : reflectableColors) {
                 if (mana.contains(InputPayManaCostUtil.getShortColorString(color))) {

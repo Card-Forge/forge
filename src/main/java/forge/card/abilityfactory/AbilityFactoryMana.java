@@ -19,16 +19,14 @@ package forge.card.abilityfactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 import com.google.common.collect.Iterables;
 
 import forge.Card;
 
-import forge.CardLists;
 import forge.CardPredicates;
+import forge.CardUtil;
 import forge.Constant;
 import forge.Counters;
 import forge.Singletons;
@@ -41,11 +39,9 @@ import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.control.input.InputPayManaCostUtil;
-import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.util.MyRandom;
 
 /**
  * <p>
@@ -248,7 +244,7 @@ public class AbilityFactoryMana {
      *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @return a boolean.
      */
-    public static boolean manaCanPlayAI(final AbilityFactory af) {
+    private static boolean manaCanPlayAI(final AbilityFactory af) {
         // AI cannot use this properly until he has a ManaPool
         return false;
     }
@@ -266,7 +262,7 @@ public class AbilityFactoryMana {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    public static String manaStackDescription(final AbilityMana abMana, final AbilityFactory af, final SpellAbility sa) {
+    private static String manaStackDescription(final AbilityMana abMana, final AbilityFactory af, final SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
         if (sa instanceof AbilitySub) {
@@ -292,7 +288,7 @@ public class AbilityFactoryMana {
      * @param sa a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    public static String manaGenerated(final AbilityMana abMana, final AbilityFactory af, final SpellAbility sa) {
+    private static String manaGenerated(final AbilityMana abMana, final AbilityFactory af, final SpellAbility sa) {
         return generatedMana(abMana, af, sa);
     }
 
@@ -308,7 +304,7 @@ public class AbilityFactoryMana {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static void manaResolve(final AbilityMana abMana, final AbilityFactory af, final SpellAbility sa) {
+    private static void manaResolve(final AbilityMana abMana, final AbilityFactory af, final SpellAbility sa) {
 
         final HashMap<String, String> params = af.getMapParams();
         final Card card = af.getHostCard();
@@ -561,6 +557,22 @@ public class AbilityFactoryMana {
         return sb.toString();
     }
 
+    /**
+     * <p>
+     * hasUrzaLands.
+     * </p>
+     * 
+     * @param p
+     *            a {@link forge.game.player.Player} object.
+     * @return a boolean.
+     */
+    private static boolean hasUrzaLands(final Player p) {
+        final List<Card> landsControlled = p.getCardsIn(ZoneType.Battlefield);
+        return Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Mine")) &&  
+                Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Tower")) && 
+                Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Power Plant"));
+    }
+
     // ****************************** MANAREFLECTED ************************
     /**
      * <p>
@@ -693,7 +705,7 @@ public class AbilityFactoryMana {
 
         final Card card = af.getHostCard();
 
-        final ArrayList<String> colors = AbilityFactoryMana.reflectableMana(abMana, af, new ArrayList<String>(),
+        final List<String> colors = CardUtil.getReflectableManaColors(abMana, af, new ArrayList<String>(),
                 new ArrayList<Card>());
 
         ArrayList<Player> tgtPlayers;
@@ -706,6 +718,7 @@ public class AbilityFactoryMana {
         }
 
         for (final Player player : tgtPlayers) {
+            
             final String generated = AbilityFactoryMana.generatedReflectedMana(abMana, af, colors, player);
 
             if (abMana.getCanceled()) {
@@ -720,157 +733,6 @@ public class AbilityFactoryMana {
         AbilityFactoryMana.doDrawback(af, abMana, card);
     }
 
-    // add Colors and
-    /**
-     * <p>
-     * reflectableMana.
-     * </p>
-     * 
-     * @param abMana
-     *            a {@link forge.card.spellability.AbilityMana} object.
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param colors
-     *            a {@link java.util.ArrayList} object.
-     * @param parents
-     *            a {@link java.util.ArrayList} object.
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public static ArrayList<String> reflectableMana(final AbilityMana abMana, final AbilityFactory af,
-            ArrayList<String> colors, final ArrayList<Card> parents) {
-        // Here's the problem with reflectable Mana. If more than one is out,
-        // they need to Reflect each other,
-        // so we basically need to have a recursive list that send the parents
-        // so we don't infinite recurse.
-        final HashMap<String, String> params = af.getMapParams();
-        final Card card = af.getHostCard();
-
-        if (!parents.contains(card)) {
-            parents.add(card);
-        }
-
-        final String colorOrType = params.get("ColorOrType"); // currently Color
-                                                              // or
-        // Type, Type is colors
-        // + colorless
-        final String validCard = params.get("Valid");
-        final String reflectProperty = params.get("ReflectProperty"); // Produce
-        // (Reflecting
-        // Pool) or Is
-        // (Meteor
-        // Crater)
-
-        int maxChoices = 5; // Color is the default colorOrType
-        if (colorOrType.equals("Type")) {
-            maxChoices++;
-        }
-
-        List<Card> cards = null;
-
-        // Reuse AF_Defined in a slightly different way
-        if (validCard.startsWith("Defined.")) {
-            cards = new ArrayList<Card>();
-            for (final Card c : AbilityFactory.getDefinedCards(card, validCard.replace("Defined.", ""), abMana)) {
-                cards.add(c);
-            }
-        } else {
-            cards = CardLists.getValidCards(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), validCard, abMana.getActivatingPlayer(), card);
-        }
-
-        // remove anything cards that is already in parents
-        for (final Card p : parents) {
-            if (cards.contains(p)) {
-                cards.remove(p);
-            }
-        }
-
-        if ((cards.size() == 0) && !reflectProperty.equals("Produced")) {
-            return colors;
-        }
-
-        if (reflectProperty.equals("Is")) { // Meteor Crater
-            colors = AbilityFactoryMana.hasProperty(maxChoices, cards, colors);
-        } else if (reflectProperty.equals("Produced")) {
-            final String producedColors = (String) abMana.getTriggeringObject("Produced");
-            for (final String col : Constant.Color.ONLY_COLORS) {
-                final String s = InputPayManaCostUtil.getShortColorString(col);
-                if (producedColors.contains(s) && !colors.contains(col)) {
-                    colors.add(col);
-                }
-            }
-            if ((maxChoices == 6) && producedColors.contains("1") && !colors.contains(Constant.Color.COLORLESS)) {
-                colors.add(Constant.Color.COLORLESS);
-            }
-        } else if (reflectProperty.equals("Produce")) {
-            final ArrayList<AbilityMana> abilities = new ArrayList<AbilityMana>();
-            for (final Card c : cards) {
-                abilities.addAll(c.getManaAbility());
-            }
-            // currently reflected mana will ignore other reflected mana
-            // abilities
-
-            final ArrayList<AbilityMana> reflectAbilities = new ArrayList<AbilityMana>();
-
-            for (final AbilityMana ab : abilities) {
-                if (maxChoices == colors.size()) {
-                    break;
-                }
-
-                if (ab.isReflectedMana()) {
-                    if (!parents.contains(ab.getSourceCard())) {
-                        // Recursion!
-                        reflectAbilities.add(ab);
-                        parents.add(ab.getSourceCard());
-                    }
-                    continue;
-                }
-                colors = AbilityFactoryMana.canProduce(maxChoices, ab, colors);
-                if (!parents.contains(ab.getSourceCard())) {
-                    parents.add(ab.getSourceCard());
-                }
-            }
-
-            for (final AbilityMana ab : reflectAbilities) {
-                if (maxChoices == colors.size()) {
-                    break;
-                }
-
-                colors = AbilityFactoryMana.reflectableMana(ab, ab.getAbilityFactory(), colors, parents);
-            }
-        }
-
-        return colors;
-    }
-
-    /**
-     * <p>
-     * hasProperty.
-     * </p>
-     * 
-     * @param maxChoices
-     *            a int.
-     * @param cards
-     *            a {@link forge.CardList} object.
-     * @param colors
-     *            a {@link java.util.ArrayList} object.
-     * @return a {@link java.util.ArrayList} object.
-     */
-    private static ArrayList<String> hasProperty(final int maxChoices, final List<Card> cards,
-            final ArrayList<String> colors) {
-        for (final Card c : cards) {
-            // For each card, go through all the colors and if the card is that
-            // color, add
-            for (final String col : Constant.Color.ONLY_COLORS) {
-                if (c.isColor(col) && !colors.contains(col)) {
-                    colors.add(col);
-                    if (colors.size() == maxChoices) {
-                        break;
-                    }
-                }
-            }
-        }
-        return colors;
-    }
 
     /**
      * <p>
@@ -885,8 +747,8 @@ public class AbilityFactoryMana {
      *            a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    private static ArrayList<String> canProduce(final int maxChoices, final AbilityMana ab,
-            final ArrayList<String> colors) {
+    public static List<String> canProduce(final int maxChoices, final AbilityMana ab,
+            final List<String> colors) {
         for (final String col : Constant.Color.ONLY_COLORS) {
             final String s = InputPayManaCostUtil.getShortColorString(col);
             if (ab.canProduce(s) && !colors.contains(col)) {
@@ -917,7 +779,7 @@ public class AbilityFactoryMana {
      * @return a {@link java.lang.String} object.
      */
     private static String generatedReflectedMana(final AbilityMana abMana, final AbilityFactory af,
-            final ArrayList<String> colors, final Player player) {
+            final List<String> colors, final Player player) {
         // Calculate generated mana here for stack description and resolving
         final HashMap<String, String> params = af.getMapParams();
         final int amount = params.containsKey("Amount") ? AbilityFactory.calculateAmount(af.getHostCard(),
@@ -990,361 +852,9 @@ public class AbilityFactoryMana {
         }
     }
 
-    /**
-     * <p>
-     * hasUrzaLands.
-     * </p>
-     * 
-     * @param p
-     *            a {@link forge.game.player.Player} object.
-     * @return a boolean.
-     */
-    private static boolean hasUrzaLands(final Player p) {
-        final List<Card> landsControlled = p.getCardsIn(ZoneType.Battlefield);
-        return Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Mine")) &&  
-                Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Tower")) && 
-                Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Power Plant"));
-    }
-
     // ****************************************
     // ************** DrainMana ***************
     // ****************************************
 
-    /**
-     * <p>
-     * createAbilityDrainMana.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @return a {@link forge.card.spellability.SpellAbility} object.
-     * @since 1.0.15
-     */
-    public static SpellAbility createAbilityDrainMana(final AbilityFactory af) {
-        class AbilityDrainMana extends AbilityActivated {
-            public AbilityDrainMana(final Card ca, final Cost co, final Target t) {
-                super(ca, co, t);
-            }
 
-            @Override
-            public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityDrainMana(getSourceCard(),
-                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this, res);
-                return res;
-            }
-
-            private static final long serialVersionUID = 5669367387381350104L;
-
-            @Override
-            public String getStackDescription() {
-                return AbilityFactoryMana.drainManaStackDescription(af, this);
-            }
-
-            @Override
-            public boolean canPlayAI() {
-                return AbilityFactoryMana.drainManaCanPlayAI(getActivatingPlayer(), af, this);
-            }
-
-            @Override
-            public void resolve() {
-                AbilityFactoryMana.drainManaResolve(af, this);
-            }
-
-            @Override
-            public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryMana.drainManaTrigger(getActivatingPlayer(), af, this, mandatory);
-            }
-        }
-
-        final SpellAbility abDrainMana = new AbilityDrainMana(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-
-        return abDrainMana;
-    }
-
-    /**
-     * <p>
-     * createSpellDrainMana.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @return a {@link forge.card.spellability.SpellAbility} object.
-     * @since 1.0.15
-     */
-    public static SpellAbility createSpellDrainMana(final AbilityFactory af) {
-        final SpellAbility spDrainMana = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
-            private static final long serialVersionUID = -4294474468024747680L;
-
-            @Override
-            public String getStackDescription() {
-                return AbilityFactoryMana.drainManaStackDescription(af, this);
-            }
-
-            @Override
-            public boolean canPlayAI() {
-                return AbilityFactoryMana.drainManaCanPlayAI(getActivatingPlayer(), af, this);
-            }
-
-            @Override
-            public void resolve() {
-                AbilityFactoryMana.drainManaResolve(af, this);
-            }
-
-        };
-        return spDrainMana;
-    }
-
-    /**
-     * <p>
-     * createDrawbackDrainMana.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @return a {@link forge.card.spellability.SpellAbility} object.
-     * @since 1.0.15
-     */
-    public static SpellAbility createDrawbackDrainMana(final AbilityFactory af) {
-        class DrawbackDrainMana extends AbilitySub {
-            public DrawbackDrainMana(final Card ca, final Target t) {
-                super(ca, t);
-            }
-
-            @Override
-            public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackDrainMana(getSourceCard(),
-                        getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this, res);
-                return res;
-            }
-
-            private static final long serialVersionUID = 1458568386420831420L;
-
-            @Override
-            public String getStackDescription() {
-                return AbilityFactoryMana.drainManaStackDescription(af, this);
-            }
-
-            @Override
-            public void resolve() {
-                AbilityFactoryMana.drainManaResolve(af, this);
-            }
-
-            @Override
-            public boolean chkAIDrawback() {
-                return AbilityFactoryMana.drainManaPlayDrawbackAI(getActivatingPlayer(), af, this);
-            }
-
-            @Override
-            public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryMana.drainManaTrigger(getActivatingPlayer(), af, this, mandatory);
-            }
-        }
-        final SpellAbility dbDrainMana = new DrawbackDrainMana(af.getHostCard(), af.getAbTgt());
-
-        return dbDrainMana;
-    }
-
-    /**
-     * <p>
-     * drainManaStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
-    private static String drainManaStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        final StringBuilder sb = new StringBuilder();
-
-        final HashMap<String, String> params = af.getMapParams();
-
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
-        } else {
-            sb.append(sa.getSourceCard()).append(" - ");
-        }
-
-        ArrayList<Player> tgtPlayers;
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
-
-        final Iterator<Player> it = tgtPlayers.iterator();
-        while (it.hasNext()) {
-            sb.append(it.next());
-            if (it.hasNext()) {
-                sb.append(", ");
-            }
-        }
-
-        sb.append(" empties his or her mana pool.");
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            sb.append(subAb.getStackDescription());
-        }
-
-        return sb.toString();
-    }
-
-    /**
-     * <p>
-     * drainManaCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
-    private static boolean drainManaCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
-        // AI cannot use this properly until he can use SAs during Humans turn
-
-        final HashMap<String, String> params = af.getMapParams();
-        final Target tgt = sa.getTarget();
-        final Card source = sa.getSourceCard();
-        final Player opp = ai.getOpponent();
-        final Random r = MyRandom.getRandom();
-        boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
-
-        if (tgt == null) {
-            // assume we are looking to tap human's stuff
-            // TODO - check for things with untap abilities, and don't tap
-            // those.
-            final ArrayList<Player> defined = AbilityFactory.getDefinedPlayers(source, params.get("Defined"), sa);
-
-            if (!defined.contains(opp)) {
-                return false;
-            }
-        } else {
-            tgt.resetTargets();
-            tgt.addTarget(opp);
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            randomReturn &= subAb.chkAIDrawback();
-        }
-
-        return randomReturn;
-    }
-
-    /**
-     * <p>
-     * drainManaTrigger.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
-    private static boolean drainManaTrigger(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa, ai)) {
-            return false;
-        }
-        final Player opp = ai.getOpponent();
-
-        final HashMap<String, String> params = af.getMapParams();
-        final Target tgt = sa.getTarget();
-        final Card source = sa.getSourceCard();
-
-        if (null == tgt) {
-            if (mandatory) {
-                return true;
-            } else {
-                final ArrayList<Player> defined = AbilityFactory.getDefinedPlayers(source, params.get("Defined"), sa);
-
-                if (!defined.contains(opp)) {
-                    return false;
-                }
-            }
-
-            return true;
-        } else {
-            tgt.resetTargets();
-            tgt.addTarget(opp);
-        }
-
-        return true;
-    }
-
-    /**
-     * <p>
-     * drainManaPlayDrawbackAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
-    private static boolean drainManaPlayDrawbackAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
-        // AI cannot use this properly until he can use SAs during Humans turn
-        final HashMap<String, String> params = af.getMapParams();
-        final Target tgt = sa.getTarget();
-        final Card source = sa.getSourceCard();
-
-        boolean randomReturn = true;
-
-        if (tgt == null) {
-            final ArrayList<Player> defined = AbilityFactory.getDefinedPlayers(source, params.get("Defined"), sa);
-
-            if (defined.contains(ai)) {
-                return false;
-            }
-        } else {
-            tgt.resetTargets();
-            tgt.addTarget(ai.getOpponent());
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            randomReturn &= subAb.chkAIDrawback();
-        }
-
-        return randomReturn;
-    }
-
-    /**
-     * <p>
-     * drainManaResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-    private static void drainManaResolve(final AbilityFactory af, final SpellAbility sa) {
-        final HashMap<String, String> params = af.getMapParams();
-        final Card card = sa.getSourceCard();
-
-        ArrayList<Player> tgtPlayers;
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(card, params.get("Defined"), sa);
-        }
-
-        for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                p.getManaPool().clearPool(false);
-            }
-        }
-    }
-
-} // end class AbilityFactory_Mana
+}
