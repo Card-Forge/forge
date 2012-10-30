@@ -23,7 +23,7 @@ import forge.util.MyRandom;
  * 
  */
 
-    public class GainLifeAi extends SpellAiLogic {
+    public class LifeGainAi extends SpellAiLogic {
     
     /* (non-Javadoc)
          * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)

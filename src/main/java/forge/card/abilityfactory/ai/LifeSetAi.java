@@ -16,7 +16,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 
-public class SetLifeAi extends SpellAiLogic {
+public class LifeSetAi extends SpellAiLogic {
 
     @Override
     public boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {

@@ -10,40 +10,19 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
 
-public class SetLifeEffect extends SpellEffect {
-
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
-     */
-    @Override
-    public void resolve(Map<String, String> params, SpellAbility sa) {
-        final int lifeAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("LifeAmount"), sa);
-        ArrayList<Player> tgtPlayers;
-    
-        final Target tgt = sa.getTarget();
-        if ((tgt != null) && !params.containsKey("Defined")) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
-    
-        for (final Player p : tgtPlayers) {
-            if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                p.setLife(lifeAmount, sa.getSourceCard());
-            }
-        }
-    }
+public class LifeLoseEffect extends SpellEffect {
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
     public String getStackDescription(Map<String, String> params, SpellAbility sa) {
+
         final StringBuilder sb = new StringBuilder();
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("LifeAmount"), sa);
     
         if (!(sa instanceof AbilitySub)) {
-            sb.append(sa.getSourceCard()).append(" -");
+            sb.append(sa.getSourceCard().getName()).append(" - ");
         } else {
             sb.append(" ");
         }
@@ -54,7 +33,6 @@ public class SetLifeEffect extends SpellEffect {
         }
     
         ArrayList<Player> tgtPlayers;
-    
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
@@ -66,7 +44,7 @@ public class SetLifeEffect extends SpellEffect {
             sb.append(player).append(" ");
         }
     
-        sb.append("life total becomes ").append(amount).append(".");
+        sb.append("loses ").append(amount).append(" life.");
     
         final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
@@ -76,4 +54,31 @@ public class SetLifeEffect extends SpellEffect {
         return sb.toString();
     }
 
+    /* (non-Javadoc)
+     * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
+     */
+    @Override
+    public void resolve(Map<String, String> params, SpellAbility sa) {
+
+        int lifeLost = 0;
+    
+        final int lifeAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("LifeAmount"), sa);
+    
+        ArrayList<Player> tgtPlayers;
+    
+        final Target tgt = sa.getTarget();
+        if (tgt != null) {
+            tgtPlayers = tgt.getTargetPlayers();
+        } else {
+            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        }
+    
+        for (final Player p : tgtPlayers) {
+            if ((tgt == null) || p.canBeTargetedBy(sa)) {
+                lifeLost += p.loseLife(lifeAmount, sa.getSourceCard());
+            }
+        }
+        sa.getSourceCard().setSVar("AFLifeLost", "Number$" + Integer.toString(lifeLost));
+    }
+    
 }

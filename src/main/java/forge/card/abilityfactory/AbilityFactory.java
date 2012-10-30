@@ -18,14 +18,17 @@
 package forge.card.abilityfactory;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import forge.Card;
 
 import forge.CardLists;
 import forge.CardUtil;
 import forge.Command;
+import forge.Constant;
 import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.ai.*;
@@ -735,8 +738,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("ExchangeLife")) {
-            ai = new ExchangeLifeAi();
-            se = new ExchangeLifeEffect();
+            ai = new LifeExchangeAi();
+            se = new LifeExchangeEffect();
         }
 
         else if (this.api.equals("ExchangeControl")) {
@@ -794,8 +797,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("GainLife")) {
-            ai = new GainLifeAi();
-            se = new GainLifeEffect();
+            ai = new LifeGainAi();
+            se = new LifeGainEffect();
         }
 
         else if (this.api.equals("GenericChoice")) {
@@ -809,8 +812,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("LoseLife")) {
-            ai = new LoseLifeAi();
-            se = new LoseLifeEffect();
+            ai = new LifeLoseAi();
+            se = new LifeLoseEffect();
         }
 
         else if (this.api.equals("LosesGame")) {
@@ -937,23 +940,13 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Protection")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryProtection.createAbilityProtection(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryProtection.createSpellProtection(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryProtection.createDrawbackProtection(this);
-            }
+            ai = new ProtectAi();
+            se = new ProtectEffect();
         }
 
         else if (this.api.equals("ProtectionAll")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryProtection.createAbilityProtectionAll(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryProtection.createSpellProtectionAll(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryProtection.createDrawbackProtectionAll(this);
-            }
+            ai = new ProtectAllAi();
+            se = new ProtectAllEffect();
         }
 
         else if (this.api.equals("Pump")) {
@@ -1121,8 +1114,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("SetLife")) {
-            ai = new SetLifeAi();
-            se = new SetLifeEffect();
+            ai = new LifeSetAi();
+            se = new LifeSetEffect();
         }
 
         else if (this.api.equals("SetState")) {
@@ -1390,6 +1383,28 @@ public class AbilityFactory {
         }
 
         return abSub;
+    }
+
+    public static ArrayList<String> getProtectionList(final Map<String, String> params) {
+        final ArrayList<String> gains = new ArrayList<String>();
+    
+        final String gainStr = params.get("Gains");
+        if (gainStr.equals("Choice")) {
+            String choices = params.get("Choices");
+    
+            // Replace AnyColor with the 5 colors
+            if (choices.contains("AnyColor")) {
+                gains.addAll(Arrays.asList(Constant.Color.ONLY_COLORS));
+                choices = choices.replaceAll("AnyColor,?", "");
+            }
+            // Add any remaining choices
+            if (choices.length() > 0) {
+                gains.addAll(Arrays.asList(choices.split(",")));
+            }
+        } else {
+            gains.addAll(Arrays.asList(gainStr.split(",")));
+        }
+        return gains;
     }
 
     /**

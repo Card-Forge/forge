@@ -9,7 +9,7 @@ import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 
-public class ExchangeLifeAi extends SpellAiLogic {
+public class LifeExchangeAi extends SpellAiLogic {
 
     /*
      * (non-Javadoc)

@@ -18,7 +18,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 
-public class LoseLifeAi extends SpellAiLogic {
+public class LifeLoseAi extends SpellAiLogic {
 
 /* (non-Javadoc)
      * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
