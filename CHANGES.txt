@@ -90,6 +90,33 @@ Fixes/Features:
 - Added a missing import.
 - More getCards read-only list errors.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed warnings.
+- Player - shuffle streamlined
+- CardLists.getCMC inlined (there were only 4 of them anyway)
+- minor - code formatting
+- Fixed Ovinomancer.
+- Fixed Past in Flames.
+- AF-Bond refactored
+- AF:Turns refactored
+- removed warnings (excessive casts, extra semicolons)
+- Removed unnecessary cast.
+- AF:Tokens - split into pieces
+- Fixed some FindBugs results.
+- refactor AF: ZoneAffecting
+- some cleanup in BondEffect.java
+- AF:ManaDrain (other mana Abs use some special classes =(
+- AF:DamagePrevent removed excessive casts and semicolons
+- refactor AF:Protect
+- renamed life-related ai and effects to put life as 1st word
+- refactored AF:Play
+- AF: Counters move
+- refactored AF: remaining counters
+- refactor AF:Effect (wish I knew what it is)
+- hasBasicLands predicate for edition
+- 1) You can use a Draft/Sealed deck as your quest starting card pool, 2) You can enforce formats when playing with specific starting pools, 3) Fixed a bug in the custom format dialog.
+- Added javadoc.
+- Code cleanup.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -100,6 +127,8 @@ Many people helped with this version. A special thank you goes out to them. (Att
 Added the following cards:
 
 Metamorphose
+Wild Might
+Shimian Night Stalker
 
 
 end
