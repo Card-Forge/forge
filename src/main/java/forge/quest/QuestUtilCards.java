@@ -38,7 +38,6 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
-import forge.card.CardBlock;
 import forge.card.EditionCollection;
 import java.util.Random;
 
