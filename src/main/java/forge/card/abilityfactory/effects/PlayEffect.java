@@ -1,42 +1,23 @@
-/*
- * Forge: Play Magic: the Gathering.
- * Copyright (C) 2011  Forge Team
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-package forge.card.abilityfactory;
+package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
 
 import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardCharacteristicName;
-
 import forge.CardLists;
 import forge.GameActionUtil;
 import forge.Singletons;
+import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostMana;
 import forge.card.cost.CostPart;
-import forge.card.cost.CostUtil;
-import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
@@ -47,159 +28,8 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.item.CardDb;
-import forge.util.MyRandom;
 
-/**
- * <p>
- * AbilityFactory_Copy class.
- * </p>
- * 
- * @author Forge
- * @version $Id: AbilityFactoryCopy.java 13784 2012-02-03 16:29:28Z Sloth $
- */
-public final class AbilityFactoryPlay {
-
-    // *************************************************************************
-    // ************************* Play *************************************
-    // *************************************************************************
-
-    /**
-     * <p>
-     * createAbilityPlay.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @return a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public static SpellAbility createAbilityPlay(final AbilityFactory af) {
-        class AbilityPlay extends AbilityActivated {
-            public AbilityPlay(final Card ca, final Cost co, final Target t) {
-                super(ca, co, t);
-            }
-
-            @Override
-            public AbilityActivated getCopy() {
-                AbilityActivated res = new AbilityPlay(getSourceCard(),
-                        getPayCosts(), getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this, res);
-                return res;
-            }
-
-            private static final long serialVersionUID = 5232548517225345052L;
-
-            @Override
-            public String getStackDescription() {
-                return AbilityFactoryPlay.playStackDescription(af, this);
-            }
-
-            @Override
-            public boolean canPlayAI() {
-                return AbilityFactoryPlay.playCanPlayAI(getActivatingPlayer(), af, this);
-            }
-
-            @Override
-            public void resolve() {
-                AbilityFactoryPlay.playResolve(af, this);
-            }
-
-            @Override
-            public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryPlay.playTriggerAI(getActivatingPlayer(), af, this, mandatory);
-            }
-        }
-        final SpellAbility abCopySpell = new AbilityPlay(af.getHostCard(), af.getAbCost(), af.getAbTgt());
-
-        return abCopySpell;
-    }
-
-    /**
-     * <p>
-     * createSpellPlay.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @return a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public static SpellAbility createSpellPlay(final AbilityFactory af) {
-        final SpellAbility spCopySpell = new Spell(af.getHostCard(), af.getAbCost(), af.getAbTgt()) {
-            private static final long serialVersionUID = 1878946074608916745L;
-
-            @Override
-            public String getStackDescription() {
-                return AbilityFactoryPlay.playStackDescription(af, this);
-            }
-
-            @Override
-            public boolean canPlayAI() {
-                return AbilityFactoryPlay.playCanPlayAI(getActivatingPlayer(), af, this);
-            }
-
-            @Override
-            public void resolve() {
-                AbilityFactoryPlay.playResolve(af, this);
-            }
-
-            @Override
-            public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
-                return AbilityFactoryPlay.playTriggerAI(getActivatingPlayer(), af, this, mandatory);
-            }
-
-        };
-        return spCopySpell;
-    }
-
-    /**
-     * <p>
-     * createDrawbackPlay.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @return a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public static SpellAbility createDrawbackPlay(final AbilityFactory af) {
-        class DrawbackPlay extends AbilitySub {
-            public DrawbackPlay(final Card ca, final Target t) {
-                super(ca, t);
-            }
-
-            @Override
-            public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackPlay(getSourceCard(),
-                        getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this, res);
-                return res;
-            }
-
-            private static final long serialVersionUID = 1927508119173644632L;
-
-            @Override
-            public String getStackDescription() {
-                return AbilityFactoryPlay.playStackDescription(af, this);
-            }
-
-            @Override
-            public void resolve() {
-                AbilityFactoryPlay.playResolve(af, this);
-            }
-
-            @Override
-            public boolean chkAIDrawback() {
-                return true;
-            }
-
-            @Override
-            public boolean doTrigger(final boolean mandatory) {
-                return AbilityFactoryPlay.playTriggerAI(getActivatingPlayer(), af, this, mandatory);
-            }
-        }
-        final SpellAbility dbCopySpell = new DrawbackPlay(af.getHostCard(), af.getAbTgt());
-
-        return dbCopySpell;
-    }
-
+public class PlayEffect extends SpellEffect { 
     /**
      * <p>
      * playStackDescription.
@@ -211,10 +41,10 @@ public final class AbilityFactoryPlay {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String playStackDescription(final AbilityFactory af, final SpellAbility sa) {
+    @Override
+    public String getStackDescription(Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        final HashMap<String, String> params = af.getMapParams();
-
+    
         if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard().getName()).append(" - ");
         } else {
@@ -222,14 +52,14 @@ public final class AbilityFactoryPlay {
         }
         sb.append("Play ");
         ArrayList<Card> tgtCards;
-
+    
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
             tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
         }
-
+    
         if (params.containsKey("Valid")) {
             sb.append("cards");
         } else {
@@ -245,97 +75,13 @@ public final class AbilityFactoryPlay {
             sb.append(" without paying the mana cost");
         }
         sb.append(".");
-
+    
         final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
-
+    
         return sb.toString();
-    }
-
-    /**
-     * <p>
-     * playCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
-    private static boolean playCanPlayAI(final Player ai, final AbilityFactory af, final SpellAbility sa) {
-        final Cost abCost = af.getAbCost();
-        final Card source = af.getHostCard();
-        final HashMap<String, String> params = af.getMapParams();
-        final Random r = MyRandom.getRandom();
-
-        if (abCost != null) {
-            // AI currently disabled for these costs
-            if (!CostUtil.checkSacrificeCost(ai, abCost, source)) {
-                return false;
-            }
-
-            if (!CostUtil.checkLifeCost(ai, abCost, source, 4, null)) {
-                return false;
-            }
-
-            if (!CostUtil.checkDiscardCost(ai, abCost, source)) {
-                return false;
-            }
-
-            if (!CostUtil.checkRemoveCounterCost(abCost, source)) {
-                return false;
-            }
-        }
-
-        // don't use this as a response
-        if (Singletons.getModel().getGame().getStack().size() != 0) {
-            return false;
-        }
-
-        // prevent run-away activations - first time will always return true
-        boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getRestrictions().getNumberTurnActivations());
-
-        List<Card> cards;
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            ZoneType zone = tgt.getZone().get(0);
-            cards = CardLists.getValidCards(Singletons.getModel().getGame().getCardsIn(zone), tgt.getValidTgts(), ai, source);
-            if (cards.isEmpty()) {
-                return false;
-            }
-            tgt.addTarget(CardFactoryUtil.getBestAI(cards));
-        } else if (!params.containsKey("Valid")) {
-            cards = new ArrayList<Card>(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa));
-            if (cards.isEmpty()) {
-                return false;
-            }
-        }
-        return chance;
-    }
-
-    /**
-     * <p>
-     * playTriggerAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
-    private static boolean playTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
-
-        if (mandatory) {
-            return true;
-        }
-
-        return playCanPlayAI(ai, af, sa);
     }
 
     /**
@@ -348,8 +94,8 @@ public final class AbilityFactoryPlay {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    private static void playResolve(final AbilityFactory af, final SpellAbility sa) {
-        final HashMap<String, String> params = af.getMapParams();
+    @Override
+    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         final Card source = sa.getSourceCard();
         Player activator = sa.getActivatingPlayer();
         boolean optional = params.containsKey("Optional");

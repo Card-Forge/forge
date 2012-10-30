@@ -12480,7 +12480,6 @@ src/main/java/forge/card/abilityfactory/AbilityFactoryEndGameCondition.java svne
 src/main/java/forge/card/abilityfactory/AbilityFactoryGainControl.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryMana.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryPermanentState.java svneol=native#text/plain
-src/main/java/forge/card/abilityfactory/AbilityFactoryPlay.java -text
 src/main/java/forge/card/abilityfactory/AbilityFactoryPump.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryRegenerate.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryRepeat.java -text
@@ -12508,6 +12507,7 @@ src/main/java/forge/card/abilityfactory/ai/LifeGainAi.java -text
 src/main/java/forge/card/abilityfactory/ai/LifeLoseAi.java -text
 src/main/java/forge/card/abilityfactory/ai/LifeSetAi.java -text
 src/main/java/forge/card/abilityfactory/ai/MillAi.java -text
+src/main/java/forge/card/abilityfactory/ai/PlayAi.java -text
 src/main/java/forge/card/abilityfactory/ai/PoisonAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ProtectAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ProtectAllAi.java -text
@@ -12529,6 +12529,7 @@ src/main/java/forge/card/abilityfactory/effects/LifeGainEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/LifeLoseEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/LifeSetEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/MillEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/PlayEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/PoisonEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ProtectAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ProtectEffect.java -text
