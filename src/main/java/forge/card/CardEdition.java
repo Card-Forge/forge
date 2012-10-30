@@ -22,6 +22,7 @@ import com.google.common.base.Predicate;
 
 import forge.Singletons;
 import forge.game.GameFormat;
+import forge.item.CardDb;
 import forge.util.FileSection;
 import forge.util.StorageReaderFile;
 
@@ -223,6 +224,13 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 return this.format.isSetLegal(subject.getCode());
             }
         }
+        
+        public static final Predicate<CardEdition> hasBasicLands = new Predicate<CardEdition>() {
+            @Override
+            public boolean apply(CardEdition ed) {
+                return CardDb.instance().isCardSupported("Plains", ed.getCode());
+            };
+        };
 
     }
 
