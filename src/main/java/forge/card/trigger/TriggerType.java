@@ -3,6 +3,7 @@ package forge.card.trigger;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
+import java.util.Map;
 
 import forge.Card;
 
@@ -77,12 +78,12 @@ public enum TriggerType {
      * @param intrinsic
      * @return
      */
-    public Trigger createTrigger(HashMap<String, String> mapParams, Card host, boolean intrinsic) {
+    public Trigger createTrigger(Map<String, String> mapParams, Card host, boolean intrinsic) {
         @SuppressWarnings("unchecked")
         Constructor<? extends Trigger>[] cc = (Constructor<? extends Trigger>[]) classTrigger.getDeclaredConstructors();
         for (Constructor<? extends Trigger> c : cc) {
             Class<?>[] pp = c.getParameterTypes();
-            if (pp[0] == HashMap.class) {
+            if (pp[0] == Map.class || pp[0] == HashMap.class) {
                 try {
                     Trigger res = c.newInstance(mapParams, host, intrinsic);
                     res.setMode(this);

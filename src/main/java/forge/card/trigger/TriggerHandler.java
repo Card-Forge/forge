@@ -197,7 +197,7 @@ public class TriggerHandler {
      *            a boolean.
      * @return a {@link forge.card.trigger.Trigger} object.
      */
-    public static Trigger parseTrigger(final HashMap<String, String> mapParams, final Card host, final boolean intrinsic) {
+    public static Trigger parseTrigger(final Map<String, String> mapParams, final Card host, final boolean intrinsic) {
         Trigger ret = null;
 
         final TriggerType type = TriggerType.smartValueOf(mapParams.get("Mode"));

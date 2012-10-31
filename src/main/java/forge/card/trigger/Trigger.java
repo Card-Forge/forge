@@ -197,7 +197,7 @@ public abstract class Trigger extends TriggerReplacementBase {
      * @param intrinsic
      *            the intrinsic
      */
-    public Trigger(final HashMap<String, String> params, final Card host, final boolean intrinsic) {
+    public Trigger(final Map<String, String> params, final Card host, final boolean intrinsic) {
         this.setRunParams(new HashMap<String, Object>());
         for (final Map.Entry<String, String> entry : params.entrySet()) {
             this.getMapParams().put(entry.getKey(), entry.getValue());

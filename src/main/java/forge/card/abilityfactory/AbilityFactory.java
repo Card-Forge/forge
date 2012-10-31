@@ -605,14 +605,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("DelayedTrigger")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryDelayedTrigger.getAbility(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryDelayedTrigger.getSpell(this);
-            }
-            if (this.isDb) {
-                spellAbility = AbilityFactoryDelayedTrigger.getDrawback(this);
-            }
+            ai = new DelayedTriggerAi();
+            se = new DelayedTriggerEffect();
         }
 
         else if (this.api.equals("Destroy")) {

@@ -12468,7 +12468,6 @@ src/main/java/forge/card/abilityfactory/AbilityFactoryCleanup.java svneol=native
 src/main/java/forge/card/abilityfactory/AbilityFactoryClone.java -text
 src/main/java/forge/card/abilityfactory/AbilityFactoryCopy.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryDealDamage.java svneol=native#text/plain
-src/main/java/forge/card/abilityfactory/AbilityFactoryDelayedTrigger.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryDestroy.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryEndGameCondition.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryGainControl.java svneol=native#text/plain
@@ -12505,6 +12504,7 @@ src/main/java/forge/card/abilityfactory/ai/DamagePreventAi.java -text
 src/main/java/forge/card/abilityfactory/ai/DamagePreventAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/DebuffAi.java -text
 src/main/java/forge/card/abilityfactory/ai/DebuffAllAi.java -text
+src/main/java/forge/card/abilityfactory/ai/DelayedTriggerAi.java -text
 src/main/java/forge/card/abilityfactory/ai/DiscardAi.java -text
 src/main/java/forge/card/abilityfactory/ai/DrainManaAi.java -text
 src/main/java/forge/card/abilityfactory/ai/DrawAi.java svneol=native#text/plain
@@ -12549,6 +12549,7 @@ src/main/java/forge/card/abilityfactory/effects/DamagePreventAllEffect.java -tex
 src/main/java/forge/card/abilityfactory/effects/DamagePreventEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/DebuffAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/DebuffEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/DelayedTriggerEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/DiscardEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/DrainManaEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/DrawEffect.java -text
