@@ -12472,7 +12472,6 @@ src/main/java/forge/card/abilityfactory/AbilityFactoryGainControl.java svneol=na
 src/main/java/forge/card/abilityfactory/AbilityFactoryMana.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryPump.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryRepeat.java -text
-src/main/java/forge/card/abilityfactory/AbilityFactoryReveal.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryStoreSVar.java -text
 src/main/java/forge/card/abilityfactory/CommonAbility.java -text
 src/main/java/forge/card/abilityfactory/CommonDrawback.java svneol=native#text/plain
@@ -12595,6 +12594,7 @@ src/main/java/forge/card/abilityfactory/effects/RegenerateAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/RegenerateEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/RemoveFromCombatEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/RevealEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/RevealEffectBase.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/effects/RevealHandEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/SacrificeAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/SacrificeEffect.java -text

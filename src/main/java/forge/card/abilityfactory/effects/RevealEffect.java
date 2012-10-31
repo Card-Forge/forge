@@ -7,8 +7,6 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardUtil;
 import forge.card.abilityfactory.AbilityFactory;
-import forge.card.abilityfactory.AbilityFactoryReveal;
-import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -16,7 +14,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
-public class RevealEffect extends SpellEffect {
+public class RevealEffect extends RevealEffectBase {
     /**
      * <p>
      * revealResolve.
@@ -58,7 +56,7 @@ public class RevealEffect extends SpellEffect {
                         if (params.containsKey("AnyNumber")) {
                             max = valid.size();
                         }
-                        revealed.addAll(AbilityFactoryReveal.getRevealedList(sa.getActivatingPlayer(), valid, max, anyNumber));
+                        revealed.addAll(getRevealedList(sa.getActivatingPlayer(), valid, max, anyNumber));
                         if (sa.getActivatingPlayer().isComputer()) {
                             GuiChoose.oneOrNone("Revealed card(s)", revealed);
                         }

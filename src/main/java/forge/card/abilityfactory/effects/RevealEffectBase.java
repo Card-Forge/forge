@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.card.abilityfactory;
+package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +23,7 @@ import java.util.List;
 
 import forge.Card;
 
+import forge.card.abilityfactory.SpellEffect;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
@@ -34,11 +35,8 @@ import forge.gui.GuiChoose;
  * @author Forge
  * @version $Id$
  */
-public final class AbilityFactoryReveal {
+public abstract class RevealEffectBase extends SpellEffect {
 
-    private AbilityFactoryReveal() {
-        throw new AssertionError();
-    }
 
     // *************************************************************************
     // ************************* Dig *******************************************

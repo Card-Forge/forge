@@ -11,8 +11,6 @@ import forge.CardLists;
 import forge.CardUtil;
 import forge.GameActionUtil;
 import forge.card.abilityfactory.AbilityFactory;
-import forge.card.abilityfactory.AbilityFactoryReveal;
-import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
@@ -22,7 +20,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
-public class DiscardEffect extends SpellEffect {
+public class DiscardEffect extends RevealEffectBase {
     /**
      * <p>
      * discardStackDescription.
@@ -237,7 +235,7 @@ public class DiscardEffect extends SpellEffect {
                             String amountString = params.get("RevealNumber");
                             int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
                                     : CardFactoryUtil.xCount(source, source.getSVar(amountString));
-                            dPHand = AbilityFactoryReveal.getRevealedList(p, dPHand, amount, false);
+                            dPHand = getRevealedList(p, dPHand, amount, false);
                         }
                         List<Card> dPChHand = new ArrayList<Card>(dPHand);
                         String[] dValid = null;
