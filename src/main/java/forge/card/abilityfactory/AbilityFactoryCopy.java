@@ -348,11 +348,10 @@ public final class AbilityFactoryCopy {
 
         // end Targeting
 
-        if (af.hasSubAbility()) {
-            final AbilitySub abSub = sa.getSubAbility();
-            if (abSub != null) {
-                return abSub.chkAIDrawback();
-            }
+
+        final AbilitySub abSub = sa.getSubAbility();
+        if (abSub != null) {
+            return abSub.chkAIDrawback();
         }
         return true;
     }

@@ -12465,7 +12465,6 @@ src/main/java/forge/card/abilityfactory/AbilityFactoryChangeZone.java svneol=nat
 src/main/java/forge/card/abilityfactory/AbilityFactoryCharm.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryClash.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryCleanup.java svneol=native#text/plain
-src/main/java/forge/card/abilityfactory/AbilityFactoryClone.java -text
 src/main/java/forge/card/abilityfactory/AbilityFactoryCopy.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryDealDamage.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryDestroy.java svneol=native#text/plain
@@ -12476,7 +12475,6 @@ src/main/java/forge/card/abilityfactory/AbilityFactoryPermanentState.java svneol
 src/main/java/forge/card/abilityfactory/AbilityFactoryPump.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryRepeat.java -text
 src/main/java/forge/card/abilityfactory/AbilityFactoryReveal.java svneol=native#text/plain
-src/main/java/forge/card/abilityfactory/AbilityFactorySetState.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryStoreSVar.java -text
 src/main/java/forge/card/abilityfactory/CommonAbility.java -text
 src/main/java/forge/card/abilityfactory/CommonDrawback.java svneol=native#text/plain
@@ -12492,6 +12490,7 @@ src/main/java/forge/card/abilityfactory/ai/ChooseCardAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ChooseCardNameAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ChooseColorAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ChooseTypeAi.java -text
+src/main/java/forge/card/abilityfactory/ai/CloneAi.java -text
 src/main/java/forge/card/abilityfactory/ai/CounterAi.java -text
 src/main/java/forge/card/abilityfactory/ai/CountersAi.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/ai/CountersMoveAi.java -text
@@ -12533,6 +12532,8 @@ src/main/java/forge/card/abilityfactory/ai/RevealHandAi.java -text
 src/main/java/forge/card/abilityfactory/ai/SacrificeAi.java -text
 src/main/java/forge/card/abilityfactory/ai/SacrificeAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ScryAi.java -text
+src/main/java/forge/card/abilityfactory/ai/SetStateAi.java -text
+src/main/java/forge/card/abilityfactory/ai/SetStateAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ShuffleAi.java -text
 src/main/java/forge/card/abilityfactory/ai/TokenAi.java -text
 src/main/java/forge/card/abilityfactory/effects/AddTurnEffect.java -text
@@ -12546,6 +12547,7 @@ src/main/java/forge/card/abilityfactory/effects/ChooseGenericEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ChooseNumberEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ChoosePlayerEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ChooseTypeEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/CloneEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/CounterEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/CountersMoveEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/CountersProliferateEffect.java -text
@@ -12587,6 +12589,8 @@ src/main/java/forge/card/abilityfactory/effects/RevealHandEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/SacrificeAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/SacrificeEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ScryEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/SetStateAllEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/SetStateEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ShuffleEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/TokenEffect.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/package-info.java svneol=native#text/plain

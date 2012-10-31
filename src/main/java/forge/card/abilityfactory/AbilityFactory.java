@@ -82,7 +82,6 @@ public class AbilityFactory {
         this.abTgt = af.getAbTgt();
         this.api = af.getAPI();
         this.hasSpDesc = af.hasSpDescription();
-        this.hasSubAb = af.hasSubAbility();
         this.hasValid = af.hasValid();
         this.hostC = af.getHostCard();
         this.isAb = af.isAbility();
@@ -226,19 +225,6 @@ public class AbilityFactory {
      */
     public final boolean isCurse() {
         return this.mapParams.containsKey("IsCurse");
-    }
-
-    private boolean hasSubAb = false;
-
-    /**
-     * <p>
-     * hasSubAbility.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean hasSubAbility() {
-        return this.hasSubAb;
     }
 
     private boolean hasSpDesc = false;
@@ -413,9 +399,6 @@ public class AbilityFactory {
                 this.abTgt.setDefinedController(this.mapParams.get("TargetsWithDefinedController"));
             }
         }
-
-        this.hasSubAb = this.mapParams.containsKey("SubAbility");
-
         this.hasSpDesc = this.mapParams.containsKey("SpellDescription");
 
         // ***********************************
@@ -524,11 +507,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Clone")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryClone.createAbilityClone(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryClone.createDrawbackClone(this);
-            }
+            ai = new CloneAi();
+            se = new CloneEffect();
         }
 
         else if (this.api.equals("CopyPermanent")) {
@@ -952,23 +932,13 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("SetState")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactorySetState.getSetStateAbility(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactorySetState.getSetStateSpell(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactorySetState.getSetStateDrawback(this);
-            }
+            ai = new SetStateAi();
+            se = new SetStateEffect(); 
         }
 
         else if (this.api.equals("SetStateAll")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactorySetState.getSetStateAllAbility(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactorySetState.getSetStateAllSpell(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactorySetState.getSetStateAllDrawback(this);
-            }
+            ai = new SetStateAllAi();
+            se = new SetStateAllEffect(); 
         }
 
         else if (this.api.equals("Shuffle")) {
@@ -1108,9 +1078,8 @@ public class AbilityFactory {
             }
         }
 
-        if (this.hasSubAbility()) {
+        if (getMapParams().containsKey("SubAbility"))
             spellAbility.setSubAbility(this.getSubAbility());
-        }
 
         if (spellAbility instanceof SpellPermanent) {
             spellAbility.setDescription(spellAbility.getSourceCard().getName());
@@ -1201,7 +1170,7 @@ public class AbilityFactory {
      * 
      * @return a {@link forge.card.spellability.AbilitySub} object.
      */
-    public final AbilitySub getSubAbility() {
+    private final AbilitySub getSubAbility() {
         AbilitySub abSub = null;
 
         String sSub = this.getMapParams().get("SubAbility");

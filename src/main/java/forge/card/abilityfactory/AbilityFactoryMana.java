@@ -845,9 +845,9 @@ public class AbilityFactoryMana {
     public static void doDrawback(final AbilityFactory af, final AbilityMana abMana, final Card card) {
 
         // if mana production has any type of SubAbility, undoable=false
-        if (af.hasSubAbility()) {
+        final AbilitySub abSub = abMana.getSubAbility();
+        if (abSub != null) {
             abMana.setUndoable(false);
-            final AbilitySub abSub = abMana.getSubAbility();
             AbilityFactory.resolve(abSub, false);
         }
     }
