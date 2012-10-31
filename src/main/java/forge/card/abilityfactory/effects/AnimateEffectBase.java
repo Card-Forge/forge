@@ -23,11 +23,12 @@ import java.util.Map;
 
 import forge.Card;
 
+import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 
-public final class HelperAnimate {
+public abstract class AnimateEffectBase extends SpellEffect {
 
     
 
@@ -56,7 +57,7 @@ public final class HelperAnimate {
      *            a {@link java.util.ArrayList} object.
      * @return a long.
      */
-    static long doAnimate(final Card c, final Map<String, String> params, final int power, final int toughness,
+    long doAnimate(final Card c, final Map<String, String> params, final int power, final int toughness,
             final ArrayList<String> types, final ArrayList<String> removeTypes, final String colors,
             final ArrayList<String> keywords, final ArrayList<String> removeKeywords,
             final ArrayList<String> hiddenKeywords, final long timestamp) {
@@ -140,7 +141,7 @@ public final class HelperAnimate {
      * @param timestamp
      *            a long.
      */
-    static void doUnanimate(final Card c, final Map<String, String> params, final String colorDesc,
+    void doUnanimate(final Card c, final Map<String, String> params, final String colorDesc,
             final ArrayList<String> addedKeywords, final ArrayList<SpellAbility> addedAbilities,
             final ArrayList<Trigger> addedTriggers, final long colorTimestamp, final boolean givesStAbs,
             final ArrayList<SpellAbility> removedAbilities, final long timestamp) {

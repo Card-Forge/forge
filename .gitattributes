@@ -12546,6 +12546,7 @@ src/main/java/forge/card/abilityfactory/ai/UntapAllAi.java -text
 src/main/java/forge/card/abilityfactory/effects/AddTurnEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/AnimateAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/AnimateEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/AnimateEffectBase.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/effects/BondEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ChooseCardEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ChooseCardNameEffect.java -text
@@ -12577,7 +12578,6 @@ src/main/java/forge/card/abilityfactory/effects/EndTurnEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/FogEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/GameLossEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/GameWinEffect.java -text
-src/main/java/forge/card/abilityfactory/effects/HelperAnimate.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/effects/LifeExchangeEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/LifeGainEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/LifeLoseEffect.java -text

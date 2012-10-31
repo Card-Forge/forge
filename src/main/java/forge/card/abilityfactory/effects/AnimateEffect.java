@@ -10,7 +10,6 @@ import forge.CardUtil;
 import forge.Command;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
-import forge.card.abilityfactory.SpellEffect;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
@@ -19,7 +18,7 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 
-public class AnimateEffect extends SpellEffect {
+public class AnimateEffect extends AnimateEffectBase {
 
     // **************************************************************
     // ************************** Animate ***************************
@@ -150,7 +149,7 @@ public class AnimateEffect extends SpellEffect {
     
         for (final Card c : tgts) {
     
-            final long colorTimestamp = HelperAnimate.doAnimate(c, params, power, toughness, types, removeTypes,
+            final long colorTimestamp = doAnimate(c, params, power, toughness, types, removeTypes,
                     finalDesc, keywords, removeKeywords, hiddenKeywords, timestamp);
     
             // give abilities
@@ -247,7 +246,7 @@ public class AnimateEffect extends SpellEffect {
     
                 @Override
                 public void execute() {
-                    HelperAnimate.doUnanimate(c, params, finalDesc, hiddenKeywords, addedAbilities, addedTriggers,
+                    doUnanimate(c, params, finalDesc, hiddenKeywords, addedAbilities, addedTriggers,
                             colorTimestamp, givesStAbs, removedAbilities, timestamp);
     
                     // give back suppressed triggers
