@@ -83,7 +83,7 @@ public enum TriggerType {
         Constructor<? extends Trigger>[] cc = (Constructor<? extends Trigger>[]) classTrigger.getDeclaredConstructors();
         for (Constructor<? extends Trigger> c : cc) {
             Class<?>[] pp = c.getParameterTypes();
-            if (pp[0] == Map.class || pp[0] == HashMap.class) {
+            if (pp[0].isAssignableFrom(Map.class)) {
                 try {
                     Trigger res = c.newInstance(mapParams, host, intrinsic);
                     res.setMode(this);
