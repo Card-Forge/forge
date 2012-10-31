@@ -729,13 +729,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Fog")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryCombat.createAbilityFog(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryCombat.createSpellFog(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryCombat.createDrawbackFog(this);
-            }
+            ai = new FogAi();
+            se = new FogEffect();
         }
 
         else if (this.api.equals("GainControl")) {
@@ -809,23 +804,13 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("MustAttack")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryCombat.createAbilityMustAttack(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryCombat.createSpellMustAttack(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryCombat.createDrawbackMustAttack(this);
-            }
+            ai = new MustAttackAi();
+            se = new MustAttackEffect();
         }
 
         else if (this.api.equals("MustBlock")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryCombat.createAbilityMustBlock(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryCombat.createSpellMustBlock(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryCombat.createDrawbackMustBlock(this);
-            }
+            ai = new MustBlockAi();
+            se = new MustBlockEffect();
         }
 
         else if (this.api.equals("NameCard")) {
@@ -943,13 +928,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("RemoveFromCombat")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryCombat.createAbilityRemoveFromCombat(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryCombat.createSpellRemoveFromCombat(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryCombat.createDrawbackRemoveFromCombat(this);
-            }
+            ai = new RemoveFromCombatAi();
+            se = new RemoveFromCombatEffect();
         }
 
         else if (this.api.equals("Repeat")) {

@@ -1042,7 +1042,7 @@ public class CombatUtil {
      *            a {@link forge.game.phase.Combat} object.
      * @return a int.
      */
-    public static int poisonIfUnblocked(final Card attacker, final Player attacked, final Combat combat) {
+    public static int poisonIfUnblocked(final Card attacker, final Player attacked) {
         int damage = attacker.getNetCombatDamage();
         int poison = 0;
         damage += CombatUtil.predictPowerBonusOfAttacker(attacker, null, null);
@@ -1093,7 +1093,7 @@ public class CombatUtil {
     public static int sumPoisonIfUnblocked(final List<Card> attackers, final Player attacked) {
         int sum = 0;
         for (final Card attacker : attackers) {
-            sum += CombatUtil.poisonIfUnblocked(attacker, attacked, null);
+            sum += CombatUtil.poisonIfUnblocked(attacker, attacked);
         }
         return sum;
     }

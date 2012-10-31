@@ -2887,5 +2887,17 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
         return false;
     }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param playerTurn
+     * @return
+     */
+    public boolean isHostileTo(Player other) {
+        if ( other.equals(getOpponent()) )
+            return true;
+        
+        return other.getType() != this.getType();
+    }
     
 }

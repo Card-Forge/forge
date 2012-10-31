@@ -18,10 +18,12 @@ public abstract class SpellAiLogic {
         return doTriggerAINoCost(aiPlayer, params, sa, mandatory);
     }
     
+    @SuppressWarnings("unused") // 'unused' parameters are used by overloads
     public boolean doTriggerAINoCost(final Player aiPlayer, final Map<String, String> params, final SpellAbility sa, final boolean mandatory) {
         return canPlayAI(aiPlayer, params, sa);
     }
     
     // consider safe
+    @SuppressWarnings("unused") // 'unused' parameters are used by overloads
     public boolean chkAIDrawback(final Map<String, String> params, final SpellAbility sa, final Player aiPlayer) { return true; }
 }

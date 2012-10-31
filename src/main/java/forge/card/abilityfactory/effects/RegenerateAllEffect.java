@@ -6,7 +6,6 @@ import forge.Card;
 import forge.CardLists;
 import forge.Command;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;

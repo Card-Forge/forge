@@ -138,7 +138,7 @@ public class ComputerUtilAttack {
         if (CombatUtil.damageIfUnblocked(attacker, opp, combat) > 0) {
             return true;
         }
-        if (CombatUtil.poisonIfUnblocked(attacker, opp, combat) > 0) {
+        if (CombatUtil.poisonIfUnblocked(attacker, opp) > 0) {
             return true;
         }
         if (this.attackers.size() == 1 && attacker.hasKeyword("Exalted")) {
@@ -341,7 +341,7 @@ public class ComputerUtilAttack {
                 continue;
             }
             totalAttack += CombatUtil.damageIfUnblocked(attacker, ai, null);
-            totalPoison += CombatUtil.poisonIfUnblocked(attacker, ai, null);
+            totalPoison += CombatUtil.poisonIfUnblocked(attacker, ai);
         }
 
         if (ai.getLife() <= totalAttack
