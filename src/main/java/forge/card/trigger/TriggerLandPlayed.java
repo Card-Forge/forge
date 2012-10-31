@@ -47,7 +47,7 @@ public class TriggerLandPlayed extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerLandPlayed(final String n, final HashMap<String, String> params, final Card host,
+    public TriggerLandPlayed(final String n, final java.util.Map<String, String> params, final Card host,
             final boolean intrinsic) {
         super(n, params, host, intrinsic);
     }

@@ -174,12 +174,10 @@ public abstract class Trigger extends TriggerReplacementBase {
      * @param intrinsic
      *            the intrinsic
      */
-    public Trigger(final String n, final HashMap<String, String> params, final Card host, final boolean intrinsic) {
+    public Trigger(final String n, final Map<String, String> params, final Card host, final boolean intrinsic) {
         this.name = n;
         this.setRunParams(new HashMap<String, Object>());
-        for (final Map.Entry<String, String> entry : params.entrySet()) {
-            this.getMapParams().put(entry.getKey(), entry.getValue());
-        }
+        this.getMapParams().putAll(params);
         this.setHostCard(host);
 
         this.setIntrinsic(intrinsic);
@@ -199,9 +197,7 @@ public abstract class Trigger extends TriggerReplacementBase {
      */
     public Trigger(final Map<String, String> params, final Card host, final boolean intrinsic) {
         this.setRunParams(new HashMap<String, Object>());
-        for (final Map.Entry<String, String> entry : params.entrySet()) {
-            this.getMapParams().put(entry.getKey(), entry.getValue());
-        }
+        this.getMapParams().putAll(params);
         this.setHostCard(host);
 
         this.setIntrinsic(intrinsic);

@@ -17,7 +17,6 @@
  */
 package forge.card.trigger;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import forge.Card;
@@ -45,7 +44,7 @@ public class TriggerAlways extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerAlways(final HashMap<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerAlways(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 

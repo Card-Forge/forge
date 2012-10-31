@@ -17,8 +17,6 @@
  */
 package forge.card.trigger;
 
-import java.util.HashMap;
-
 import forge.Card;
 import forge.Counters;
 import forge.card.spellability.SpellAbility;
@@ -45,7 +43,7 @@ public class TriggerCounterRemoved extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerCounterRemoved(final HashMap<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerCounterRemoved(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 

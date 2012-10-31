@@ -17,8 +17,6 @@
  */
 package forge.card.trigger;
 
-import java.util.HashMap;
-
 import forge.Singletons;
 
 import forge.Card;
@@ -49,7 +47,7 @@ public class TriggerSpellAbilityCast extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerSpellAbilityCast(final HashMap<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerSpellAbilityCast(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 

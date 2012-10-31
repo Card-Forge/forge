@@ -17,9 +17,6 @@
  */
 package forge.card.trigger;
 
-import java.util.HashMap;
-
-
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 
@@ -45,7 +42,7 @@ public class TriggerCycled extends Trigger {
      * @param intrinsic
      *            a boolean
      */
-    public TriggerCycled(final HashMap<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerCycled(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 

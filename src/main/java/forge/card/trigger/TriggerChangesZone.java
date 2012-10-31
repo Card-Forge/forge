@@ -17,7 +17,7 @@
  */
 package forge.card.trigger;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import forge.Card;
 import forge.card.spellability.SpellAbility;
@@ -44,7 +44,7 @@ public class TriggerChangesZone extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerChangesZone(final HashMap<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerChangesZone(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 

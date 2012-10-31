@@ -17,7 +17,6 @@
  */
 package forge.card.trigger;
 
-import java.util.HashMap;
 import java.util.Map;
 
 
@@ -46,7 +45,7 @@ public class TriggerAttackerBlocked extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerAttackerBlocked(final HashMap<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerAttackerBlocked(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 

@@ -17,7 +17,6 @@
  */
 package forge.card.trigger;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import forge.Card;
@@ -36,7 +35,7 @@ public class TriggerTransformed extends Trigger {
      * @param host the host
      * @param intrinsic the intrinsic
      */
-    public TriggerTransformed(final HashMap<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerTransformed(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 

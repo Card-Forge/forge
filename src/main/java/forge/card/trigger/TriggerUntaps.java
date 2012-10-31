@@ -17,7 +17,7 @@
  */
 package forge.card.trigger;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import forge.Card;
 import forge.card.spellability.SpellAbility;
@@ -44,7 +44,7 @@ public class TriggerUntaps extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerUntaps(final HashMap<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerUntaps(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
