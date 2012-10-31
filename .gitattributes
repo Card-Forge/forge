@@ -12468,7 +12468,6 @@ src/main/java/forge/card/abilityfactory/AbilityFactoryCleanup.java svneol=native
 src/main/java/forge/card/abilityfactory/AbilityFactoryCopy.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryDealDamage.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryDestroy.java svneol=native#text/plain
-src/main/java/forge/card/abilityfactory/AbilityFactoryEndGameCondition.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryGainControl.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryMana.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryPermanentState.java svneol=native#text/plain
@@ -12511,6 +12510,8 @@ src/main/java/forge/card/abilityfactory/ai/DrawAi.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/ai/EffectAi.java -text
 src/main/java/forge/card/abilityfactory/ai/EndTurnAi.java -text
 src/main/java/forge/card/abilityfactory/ai/FogAi.java -text
+src/main/java/forge/card/abilityfactory/ai/GameLossAi.java -text
+src/main/java/forge/card/abilityfactory/ai/GameWinAi.java -text
 src/main/java/forge/card/abilityfactory/ai/LifeExchangeAi.java -text
 src/main/java/forge/card/abilityfactory/ai/LifeGainAi.java -text
 src/main/java/forge/card/abilityfactory/ai/LifeLoseAi.java -text
@@ -12568,6 +12569,8 @@ src/main/java/forge/card/abilityfactory/effects/DrawEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/EffectEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/EndTurnEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/FogEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/GameLossEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/GameWinEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/HelperAnimate.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/effects/LifeExchangeEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/LifeGainEffect.java -text

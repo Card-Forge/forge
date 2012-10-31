@@ -662,63 +662,6 @@ public final class AbilityFactoryCopy {
 
     /**
      * <p>
-     * copySpellStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
-    private static String copySpellStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        final StringBuilder sb = new StringBuilder();
-        final HashMap<String, String> params = af.getMapParams();
-
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(sa.getSourceCard().getName()).append(" - ");
-        } else {
-            sb.append(" ");
-        }
-
-        ArrayList<SpellAbility> tgtSpells;
-
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtSpells = tgt.getTargetSAs();
-        } else {
-            tgtSpells = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), params.get("Defined"), sa);
-        }
-
-        sb.append("Copy ");
-        // TODO Someone fix this Description when Copying Charms
-        final Iterator<SpellAbility> it = tgtSpells.iterator();
-        while (it.hasNext()) {
-            sb.append(it.next().getSourceCard());
-            if (it.hasNext()) {
-                sb.append(", ");
-            }
-        }
-        int amount = 1;
-        if (params.containsKey("Amount")) {
-            amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("Amount"), sa);
-        }
-        if (amount > 1) {
-            sb.append(amount).append(" times");
-        }
-        sb.append(".");
-        // TODO probably add an optional "You may choose new targets..."
-
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
-        }
-
-        return sb.toString();
-    }
-
-    /**
-     * <p>
      * copySpellCanPlayAI.
      * </p>
      * 
@@ -846,5 +789,62 @@ public final class AbilityFactoryCopy {
             }
         }
     } // end resolve
+
+    /**
+     * <p>
+     * copySpellStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @return a {@link java.lang.String} object.
+     */
+    private static String copySpellStackDescription(final AbilityFactory af, final SpellAbility sa) {
+        final StringBuilder sb = new StringBuilder();
+        final HashMap<String, String> params = af.getMapParams();
+    
+        if (!(sa instanceof AbilitySub)) {
+            sb.append(sa.getSourceCard().getName()).append(" - ");
+        } else {
+            sb.append(" ");
+        }
+    
+        ArrayList<SpellAbility> tgtSpells;
+    
+        final Target tgt = sa.getTarget();
+        if (tgt != null) {
+            tgtSpells = tgt.getTargetSAs();
+        } else {
+            tgtSpells = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), params.get("Defined"), sa);
+        }
+    
+        sb.append("Copy ");
+        // TODO Someone fix this Description when Copying Charms
+        final Iterator<SpellAbility> it = tgtSpells.iterator();
+        while (it.hasNext()) {
+            sb.append(it.next().getSourceCard());
+            if (it.hasNext()) {
+                sb.append(", ");
+            }
+        }
+        int amount = 1;
+        if (params.containsKey("Amount")) {
+            amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("Amount"), sa);
+        }
+        if (amount > 1) {
+            sb.append(amount).append(" times");
+        }
+        sb.append(".");
+        // TODO probably add an optional "You may choose new targets..."
+    
+        final AbilitySub abSub = sa.getSubAbility();
+        if (abSub != null) {
+            sb.append(abSub.getStackDescription());
+        }
+    
+        return sb.toString();
+    }
 
 } // end class AbilityFactory_Copy

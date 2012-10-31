@@ -725,13 +725,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("LosesGame")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryEndGameCondition.createAbilityLosesGame(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryEndGameCondition.createSpellLosesGame(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryEndGameCondition.createDrawbackLosesGame(this);
-            }
+            ai = new GameLossAi();
+            se = new GameLossEffect();
         }
 
         else if (this.api.equals("Mana")) {
@@ -1032,13 +1027,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("WinsGame")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryEndGameCondition.createAbilityWinsGame(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryEndGameCondition.createSpellWinsGame(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryEndGameCondition.createDrawbackWinsGame(this);
-            }
+            ai = new GameWinAi();
+            se = new GameWinEffect();
         }
         
         // build code is here once for the refactored APIs
