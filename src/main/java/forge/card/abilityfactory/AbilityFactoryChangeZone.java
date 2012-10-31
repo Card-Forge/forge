@@ -1431,22 +1431,10 @@ public final class AbilityFactoryChangeZone {
      * @return a boolean.
      */
     private static boolean areAllBasics(final String types) {
-        final String[] split = types.split(",");
-        final String[] names = { "Plains", "Island", "Swamp", "Mountain", "Forest" };
-        final boolean[] bBasic = new boolean[split.length];
-
-        for (final String s : names) {
-            for (int i = 0; i < split.length; i++) {
-                bBasic[i] |= s.equals(split[i]);
-            }
-        }
-
-        for (int i = 0; i < split.length; i++) {
-            if (!bBasic[i]) {
+        for(String ct : types.split(",")) {
+            if (!Constant.Color.BASIC_LANDS.contains(ct))
                 return false;
-            }
         }
-
         return true;
     }
 

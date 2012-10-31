@@ -18,6 +18,8 @@
 package forge;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import forge.properties.ForgeProps;
@@ -96,7 +98,7 @@ public final class Constant {
                 Color.COLORLESS, Color.SNOW };
 
         /** The Basic lands. */
-        public static final String[] BASIC_LANDS = { "Plains", "Island", "Swamp", "Mountain", "Forest" };
+        public static final List<String> BASIC_LANDS = Collections.unmodifiableList(Arrays.asList("Plains", "Island", "Swamp", "Mountain", "Forest"));
     }
 
     /**

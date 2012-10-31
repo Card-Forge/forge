@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
+import java.util.TreeMap;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -142,32 +143,31 @@ public abstract class GenerateColoredDeckBase {
 
     protected void addBasicLand(int cnt) {
         // attempt to optimize basic land counts according to colors of picked cards
-        final CCnt[] clrCnts = countLands(tDeck);
+        final Map<String, Integer> clrCnts = countLands(tDeck);
         // total of all ClrCnts
-        int totalColor = 0;
-        for (int i = 0; i < 5; i++) {
-            totalColor += clrCnts[i].getCount();
-            tmpDeck.append(clrCnts[i].color).append(":").append(clrCnts[i].getCount()).append("\n");
+        float totalColor = 0;
+        for (Entry<String, Integer> c : clrCnts.entrySet()) {
+            totalColor += c.getValue();
+            tmpDeck.append(c.getKey()).append(":").append(c.getValue()).append("\n");
         }
 
         tmpDeck.append("totalColor:").append(totalColor).append("\n");
 
-        for (int i = 0; i < 5; i++) {
-            if (clrCnts[i].getCount() <= 0) {
-                continue;
-            }
+        for (Entry<String, Integer> c : clrCnts.entrySet()) {
+            String color = c.getKey();
+
 
             // calculate number of lands for each color
-            float p = (float) clrCnts[i].getCount() / (float) totalColor;
+            float p = (float) c.getValue() / totalColor;
             final int nLand = (int) (cnt * p);
-            tmpDeck.append("nLand-").append(clrCnts[i].color).append(":").append(nLand).append("\n");
+            tmpDeck.append("nLand-").append(color).append(":").append(nLand).append("\n");
 
             // just to prevent a null exception by the deck size fixing
             // code
-            this.cardCounts.put(clrCnts[i].color, nLand);
+            this.cardCounts.put(color, nLand);
 
             for (int j = 0; j <= nLand; j++) {
-                tDeck.add(CardDb.instance().getCard(clrCnts[i].color));
+                tDeck.add(CardDb.instance().getCard(color));
             }
         }
     }
@@ -223,15 +223,11 @@ public abstract class GenerateColoredDeckBase {
         return Iterables.filter(CardDb.instance().getAllCards(), Predicates.compose(Predicates.and(canPlay, hasColor), CardPrinted.FN_GET_RULES));
     }
 
-    protected static CCnt[] countLands(ItemPool<CardPrinted> outList) {
+    protected static Map<String, Integer> countLands(ItemPool<CardPrinted> outList) {
         // attempt to optimize basic land counts according
         // to color representation
 
-        String[] bl = Constant.Color.BASIC_LANDS;
-
-        final CCnt[] clrCnts = { new CCnt(bl[0], 0), new CCnt(bl[1], 0), new CCnt(bl[2], 0),
-                new CCnt(bl[3], 0), new CCnt(bl[4], 0) };
-
+        Map<String, Integer> res = new TreeMap<String, Integer>();
         // count each card color using mana costs
         // TODO: count hybrid mana differently?
         for (Entry<CardPrinted, Integer> cpe : outList) {
@@ -239,18 +235,24 @@ public abstract class GenerateColoredDeckBase {
             int profile = cpe.getKey().getCard().getManaCost().getColorProfile();
 
             if ((profile & CardColor.WHITE) != 0) {
-                clrCnts[0].increment(cpe.getValue());
+                increment(res, Constant.Color.BASIC_LANDS.get(0), cpe.getValue());
             } else if ((profile & CardColor.BLUE) != 0) {
-                clrCnts[1].increment(cpe.getValue());
+                increment(res, Constant.Color.BASIC_LANDS.get(1), cpe.getValue());
             } else if ((profile & CardColor.BLACK) != 0) {
-                clrCnts[2].increment(cpe.getValue());
+                increment(res, Constant.Color.BASIC_LANDS.get(2), cpe.getValue());
             } else if ((profile & CardColor.RED) != 0) {
-                clrCnts[3].increment(cpe.getValue());
+                increment(res, Constant.Color.BASIC_LANDS.get(3), cpe.getValue());
             } else if ((profile & CardColor.GREEN) != 0) {
-                clrCnts[4].increment(cpe.getValue());
+                increment(res, Constant.Color.BASIC_LANDS.get(4), cpe.getValue());
             }
 
         }
-        return clrCnts;
+        return res;
+    }
+    
+    protected static void increment(Map<String, Integer> map, String key, int delta)
+    {
+        final Integer boxed = map.get(key);
+        map.put(key, boxed == null ? delta : boxed.intValue() + delta);
     }
 }
