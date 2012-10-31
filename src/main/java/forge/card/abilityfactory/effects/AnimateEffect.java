@@ -289,7 +289,7 @@ public class AnimateEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public String getStackDescription(Map<String, String> params, SpellAbility sa) {
+    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
         final Card host = sa.getSourceCard();
         final Map<String, String> svars = host.getSVars();
     
@@ -405,11 +405,6 @@ public class AnimateEffect extends SpellEffect {
             } else {
                 sb.append(".");
             }
-        }
-    
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
         }
     
         return sb.toString();

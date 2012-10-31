@@ -16,7 +16,7 @@ public class LifeLoseEffect extends SpellEffect {
      * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public String getStackDescription(Map<String, String> params, SpellAbility sa) {
+    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
 
         final StringBuilder sb = new StringBuilder();
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("LifeAmount"), sa);
@@ -45,12 +45,7 @@ public class LifeLoseEffect extends SpellEffect {
         }
     
         sb.append("loses ").append(amount).append(" life.");
-    
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
-        }
-    
+   
         return sb.toString();
     }
 

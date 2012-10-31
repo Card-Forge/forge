@@ -42,7 +42,7 @@ public class AddTurnEffect extends SpellEffect {
     }
 
     @Override
-    public String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
 
         final StringBuilder sb = new StringBuilder();
         final int numTurns = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumTurns"), sa);
@@ -77,12 +77,6 @@ public class AddTurnEffect extends SpellEffect {
             sb.append("s");
         }
         sb.append(" after this one.");
-    
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
-        }
-    
         return sb.toString();
     }
 

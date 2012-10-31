@@ -86,7 +86,7 @@ public class CountersPutEffect extends SpellEffect {
      */
     
     @Override
-    public String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final Card card = sa.getSourceCard();
     
@@ -132,11 +132,7 @@ public class CountersPutEffect extends SpellEffect {
             }
             sb.append(".");
         }
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
-        }
-    
+
         return sb.toString();
     }
 

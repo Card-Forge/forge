@@ -13,7 +13,7 @@ import forge.card.spellability.Target;
 public class RemoveFromCombatEffect extends SpellEffect {
 
     @Override
-    public String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
         if (sa instanceof AbilitySub) {
@@ -40,12 +40,6 @@ public class RemoveFromCombatEffect extends SpellEffect {
         }
     
         sb.append(" from combat.");
-    
-        // begin standard post-
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
-        }
     
         return sb.toString();
     }

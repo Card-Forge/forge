@@ -630,23 +630,13 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Dig")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryReveal.createAbilityDig(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryReveal.createSpellDig(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryReveal.createDrawbackDig(this);
-            }
+            ai = new DigAi();
+            se = new DigEffect();
         }
 
         else if (this.api.equals("DigUntil")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryReveal.createAbilityDigUntil(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryReveal.createSpellDigUntil(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryReveal.createDrawbackDigUntil(this);
-            }
+            ai = new DigUntilAi();
+            se = new DigUntilEffect();
         }
 
         else if (this.api.equals("Discard")) {
@@ -892,13 +882,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("RearrangeTopOfLibrary")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryReveal.createAbilityRearrangeTopOfLibrary(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryReveal.createSpellRearrangeTopOfLibrary(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryReveal.createDrawbackRearrangeTopOfLibrary(this);
-            }
+            ai = new RearrangeTopOfLibraryAi();
+            se = new RearrangeTopOfLibraryEffect();
         }
 
         else if (this.api.equals("Regenerate")) {
@@ -937,53 +922,28 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Reveal")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryReveal.createAbilityReveal(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryReveal.createSpellReveal(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryReveal.createDrawbackReveal(this);
-            }
+            ai = new RevealAi();
+            se = new RevealEffect();
         }
 
         else if (this.api.equals("RevealHand")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryReveal.createAbilityRevealHand(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryReveal.createSpellRevealHand(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryReveal.createDrawbackRevealHand(this);
-            }
+            ai = new RevealHandAi();
+            se = new RevealHandEffect();
         }
 
         else if (this.api.equals("Sacrifice")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactorySacrifice.createAbilitySacrifice(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactorySacrifice.createSpellSacrifice(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactorySacrifice.createDrawbackSacrifice(this);
-            }
+            ai = new SacrificeAi();
+            se = new SacrificeEffect();
         }
 
         else if (this.api.equals("SacrificeAll")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactorySacrifice.createAbilitySacrificeAll(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactorySacrifice.createSpellSacrificeAll(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactorySacrifice.createDrawbackSacrificeAll(this);
-            }
+            ai = new SacrificeAllAi();
+            se = new SacrificeAllEffect();
         }
 
         else if (this.api.equals("Scry")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryReveal.createAbilityScry(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryReveal.createSpellScry(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryReveal.createDrawbackScry(this);
-            }
+            ai = new ScryAi();
+            se = new ScryEffect();
         }
 
         else if (this.api.equals("SetLife")) {
@@ -1115,11 +1075,11 @@ public class AbilityFactory {
         if ( se != null && ai != null && spellAbility == null)
         {
             if (this.isAb) {
-                spellAbility = new UniversalAbility(this.getHostCard(), this.getAbCost(), this.getAbTgt(), this.getMapParams(), se, ai);
+                spellAbility = new CommonAbility(this.getHostCard(), this.getAbCost(), this.getAbTgt(), this.getMapParams(), se, ai);
             } else if (this.isSp) {
-                spellAbility = new UniversalSpell(this.getHostCard(), this.getAbCost(), this.getAbTgt(), this.getMapParams(), se, ai);
+                spellAbility = new CommonSpell(this.getHostCard(), this.getAbCost(), this.getAbTgt(), this.getMapParams(), se, ai);
             } else if (this.isDb) {
-                spellAbility = new UniversalDrawback(this.getHostCard(), this.getAbTgt(), this.getMapParams(), se, ai);
+                spellAbility = new CommonDrawback(this.getHostCard(), this.getAbTgt(), this.getMapParams(), se, ai);
             }
         }
         

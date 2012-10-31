@@ -53,7 +53,7 @@ public class EndTurnEffect extends SpellEffect {
      */
     
     @Override
-    public String getStackDescription(Map<String, String> params, SpellAbility sa) {
+    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
         return "End the turn.";
     }
 

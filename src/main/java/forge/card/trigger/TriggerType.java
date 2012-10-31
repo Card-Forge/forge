@@ -2,7 +2,6 @@ package forge.card.trigger;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
 import java.util.Map;
 
 import forge.Card;

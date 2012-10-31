@@ -175,11 +175,6 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         return super.canPlayAI();
     }
 
-    /** {@inheritDoc} */
-    @Override
-    public String getStackDescription() {
-        return super.getStackDescription();
-    }
 
     /** {@inheritDoc} */
     @Override

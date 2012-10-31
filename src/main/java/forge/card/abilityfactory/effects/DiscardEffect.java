@@ -35,7 +35,7 @@ public class DiscardEffect extends SpellEffect {
      * @return a {@link java.lang.String} object.
      */
     @Override
-    public String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final String mode = params.get("Mode");
         final StringBuilder sb = new StringBuilder();
     
@@ -108,12 +108,6 @@ public class DiscardEffect extends SpellEffect {
                 sb.append(".");
             }
         }
-    
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
-        }
-    
         return sb.toString();
     } // discardStackDescription()
 

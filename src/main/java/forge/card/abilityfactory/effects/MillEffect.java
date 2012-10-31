@@ -78,7 +78,7 @@ public class MillEffect extends SpellEffect {
      * @return a {@link java.lang.String} object.
      */
     @Override
-    public String getStackDescription(Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
     
@@ -128,11 +128,6 @@ public class MillEffect extends SpellEffect {
             }
             final String millPosition = params.containsKey("FromBottom") ? "bottom" : "top";
             sb.append(" from the " + millPosition + " of his or her library.");
-        }
-    
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
         }
     
         return sb.toString();

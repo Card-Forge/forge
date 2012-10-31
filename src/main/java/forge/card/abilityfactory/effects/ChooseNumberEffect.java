@@ -23,7 +23,7 @@ public class ChooseNumberEffect extends SpellEffect
              * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
              */
             @Override
-            public String getStackDescription(Map<String, String> params, SpellAbility sa) {
+            protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
         if (sa instanceof AbilitySub) {
@@ -45,11 +45,6 @@ public class ChooseNumberEffect extends SpellEffect
             sb.append(p).append(" ");
         }
         sb.append("chooses a number.");
-    
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
-        }
     
         return sb.toString();
     }

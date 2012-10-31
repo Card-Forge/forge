@@ -18,7 +18,7 @@ public class MustAttackEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public String getStackDescription(Map<String, String> params, SpellAbility sa) {
+    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
         final Card host = sa.getSourceCard();
         final StringBuilder sb = new StringBuilder();
     
@@ -50,13 +50,7 @@ public class MustAttackEffect extends SpellEffect {
             sb.append("Creatures ").append(player).append(" controls attack ");
             sb.append(defender).append(" during his or her next turn.");
         }
-    
-        // begin standard post-
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
-        }
-    
+
         return sb.toString();
     }
 

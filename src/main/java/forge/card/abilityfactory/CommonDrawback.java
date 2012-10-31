@@ -24,13 +24,13 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Target;
 
-class UniversalDrawback extends AbilitySub {
+class CommonDrawback extends AbilitySub {
         private final SpellEffect effect;
         private final SpellAiLogic ai;
         private final Map<String, String> params;
         private static final long serialVersionUID = 6631124959690157874L;
         
-        public UniversalDrawback(final Card ca, final Target t, Map<String, String> params0, SpellEffect effect0, SpellAiLogic ai0) {
+        public CommonDrawback(final Card ca, final Target t, Map<String, String> params0, SpellEffect effect0, SpellAiLogic ai0) {
             super(ca, t);
             params = params0;
             ai = ai0;
@@ -39,7 +39,7 @@ class UniversalDrawback extends AbilitySub {
         @Override
         public AbilitySub getCopy() {
             Target t = getTarget() == null ? null : new Target(getTarget()); 
-            AbilitySub res = new UniversalDrawback(getSourceCard(),t, params, effect, ai);
+            AbilitySub res = new CommonDrawback(getSourceCard(),t, params, effect, ai);
             CardFactoryUtil.copySpellAbility(this, res);
             return res;
         }
@@ -49,7 +49,7 @@ class UniversalDrawback extends AbilitySub {
         @Override
         public String getStackDescription() {
             // when getStackDesc is called, just build exactly what is happening
-            return effect.getStackDescription(params, this);
+            return effect.getStackDescriptionWithSubs(params, this);
         }
     
         @Override

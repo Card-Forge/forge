@@ -35,7 +35,7 @@ public class DamagePreventEffect extends SpellEffect
      * @return a {@link java.lang.String} object.
      */
     @Override
-    public String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final Card host = sa.getAbilityFactory().getHostCard();
     
@@ -83,12 +83,6 @@ public class DamagePreventEffect extends SpellEffect
             }
         }
         sb.append(" this turn.");
-    
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
-        }
-    
         return sb.toString();
     }
 

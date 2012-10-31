@@ -13,7 +13,7 @@ public class DelayedTriggerEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public String getStackDescription(java.util.Map<String,String> mapParams, SpellAbility sa) {
+    protected String getStackDescription(java.util.Map<String,String> mapParams, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
         if (sa instanceof AbilitySub) {
@@ -26,11 +26,6 @@ public class DelayedTriggerEffect extends SpellEffect {
             sb.append(mapParams.get("SpellDescription"));
         } else if (mapParams.containsKey("TriggerDescription")) {
             sb.append(mapParams.get("TriggerDescription"));
-        }
-
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
         }
 
         return sb.toString();

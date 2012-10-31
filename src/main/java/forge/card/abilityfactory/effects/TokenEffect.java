@@ -108,7 +108,7 @@ public class TokenEffect extends SpellEffect {
     }
     
     @Override
-    public String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final Card host = sa.getSourceCard();
 
@@ -144,11 +144,6 @@ public class TokenEffect extends SpellEffect {
                 sb.append(".");
             }
         }
-
-        if (sa.getSubAbility() != null) {
-            sb.append(sa.getSubAbility().getStackDescription());
-        }
-
         return sb.toString();
     }
 

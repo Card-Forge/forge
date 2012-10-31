@@ -151,7 +151,7 @@ public class CountersRemoveEffect extends SpellEffect {
      * @return a {@link java.lang.String} object.
      */
     @Override
-    public String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final Card card = sa.getSourceCard();
         final StringBuilder sb = new StringBuilder();
     
@@ -198,11 +198,6 @@ public class CountersRemoveEffect extends SpellEffect {
         }
     
         sb.append(".");
-    
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
-        }
     
         return sb.toString();
     }

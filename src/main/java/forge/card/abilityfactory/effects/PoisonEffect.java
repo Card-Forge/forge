@@ -45,7 +45,7 @@ import forge.game.player.Player;
          * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
          */
         @Override
-        public String getStackDescription(Map<String, String> params, SpellAbility sa) {
+        protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
             final StringBuilder sb = new StringBuilder();
             final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("Num"), sa);
         
@@ -91,11 +91,6 @@ import forge.game.player.Player;
                 sb.append("s.");
             } else {
                 sb.append(".");
-            }
-        
-            final AbilitySub abSub = sa.getSubAbility();
-            if (abSub != null) {
-                sb.append(abSub.getStackDescription());
             }
         
             return sb.toString();

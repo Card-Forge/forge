@@ -39,7 +39,7 @@ public class ProtectEffect extends SpellEffect {
          * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
          */
     @Override
-    public String getStackDescription(Map<String, String> params, SpellAbility sa) {
+    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
         final Card host = sa.getAbilityFactory().getHostCard();
 
         final ArrayList<String> gains = AbilityFactory.getProtectionList(params);
@@ -115,11 +115,6 @@ public class ProtectEffect extends SpellEffect {
             }
 
             sb.append(".");
-        }
-
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
         }
 
         return sb.toString();

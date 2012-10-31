@@ -20,7 +20,7 @@ public class RegenerateEffect extends SpellEffect
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public String getStackDescription(Map<String, String> params, SpellAbility sa) {
+    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final Card host = sa.getAbilityFactory().getHostCard();
     
@@ -55,11 +55,6 @@ public class RegenerateEffect extends SpellEffect
             }
         }
         sb.append(".");
-    
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
-        }
     
         return sb.toString();
     }

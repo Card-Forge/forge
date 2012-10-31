@@ -50,7 +50,7 @@ public class ShuffleEffect extends SpellEffect {
     }
 
     @Override
-    public String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
         if (!(sa instanceof AbilitySub)) {
@@ -91,11 +91,6 @@ public class ShuffleEffect extends SpellEffect {
             sb.append("s his or her library");
         }
         sb.append(".");
-    
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
-        }
     
         return sb.toString();
     }

@@ -24,7 +24,7 @@ public class CountersMoveEffect extends SpellEffect {
      * @return a {@link java.lang.String} object.
      */
     @Override
-    public String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final Card host = sa.getSourceCard();
     
@@ -63,12 +63,6 @@ public class CountersMoveEffect extends SpellEffect {
         sb.append(source).append(" to ").append(tgtCards.get(0));
     
         sb.append(".");
-    
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
-        }
-    
         return sb.toString();
     }
 

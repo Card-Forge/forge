@@ -40,7 +40,7 @@ import forge.GameEntity;
 import forge.Singletons;
 import forge.card.TriggerReplacementBase;
 import forge.card.abilityfactory.AbilityFactory;
-import forge.card.abilityfactory.AbilityFactorySacrifice;
+import forge.card.abilityfactory.effects.SacrificeEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -2766,10 +2766,9 @@ public class CombatUtil {
                                 final List<Card> list = cp.getOpponent().getCardsIn(ZoneType.Battlefield);
                                 ComputerUtil.sacrificePermanents(cp.getOpponent(),  a, list, false, this);
                             } else {
-                                AbilityFactorySacrifice.sacrificeHuman(cp.getOpponent(), a, "Permanent", this,
+                                SacrificeEffect.sacrificeHuman(cp.getOpponent(), a, "Permanent", this,
                                         false, false);
                             }
-
                         }
                     };
                     final StringBuilder sb = new StringBuilder();

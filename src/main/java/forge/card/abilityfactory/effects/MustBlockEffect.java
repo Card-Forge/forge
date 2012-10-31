@@ -43,7 +43,7 @@ public class MustBlockEffect extends SpellEffect {
     } // mustBlockResolve()
 
     @Override
-    public String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final Card host = sa.getSourceCard();
         final StringBuilder sb = new StringBuilder();
     
@@ -75,12 +75,6 @@ public class MustBlockEffect extends SpellEffect {
     
         for (final Card c : tgtCards) {
             sb.append(c).append(" must block ").append(attacker).append(" if able.");
-        }
-    
-        // begin standard post-
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
         }
     
         return sb.toString();

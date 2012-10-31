@@ -19,7 +19,7 @@ import forge.gui.GuiChoose;
 public class ChooseGenericEffect extends SpellEffect {    
     
     @Override
-    public String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
         if (!(sa instanceof AbilitySub)) {
@@ -46,11 +46,7 @@ public class ChooseGenericEffect extends SpellEffect {
             }
             sb.append("chooses from a list.");
         }
-    
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
-        }
+
     
         return sb.toString();
     }

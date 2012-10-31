@@ -8,14 +8,14 @@ import forge.card.cost.Cost;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.Target;
 
-public class UniversalAbility extends AbilityActivated {
+public class CommonAbility extends AbilityActivated {
     private final SpellEffect effect;
     private final Map<String,String> params;
     private final SpellAiLogic ai;
     
     private static final long serialVersionUID = -4183793555528531978L;
 
-    public UniversalAbility(Card sourceCard, Cost abCost, Target tgt, Map<String,String> params0, SpellEffect effect0, SpellAiLogic ai0) {
+    public CommonAbility(Card sourceCard, Cost abCost, Target tgt, Map<String,String> params0, SpellEffect effect0, SpellAiLogic ai0) {
         super(sourceCard, abCost, tgt);
         params = params0;
         effect = effect0;
@@ -24,7 +24,7 @@ public class UniversalAbility extends AbilityActivated {
     
     @Override
     public String getStackDescription() {
-        return effect.getStackDescription(params, this);
+        return effect.getStackDescriptionWithSubs(params, this);
     }
     
     /* (non-Javadoc)
@@ -33,7 +33,7 @@ public class UniversalAbility extends AbilityActivated {
     @Override
     public AbilityActivated getCopy() {
         Target tgt = getTarget() == null ? null : new Target(getTarget());
-        AbilityActivated res = new UniversalAbility(getSourceCard(), getPayCosts(), tgt, params, effect, ai);
+        AbilityActivated res = new CommonAbility(getSourceCard(), getPayCosts(), tgt, params, effect, ai);
         CardFactoryUtil.copySpellAbility(this, res);
         return res;
     }

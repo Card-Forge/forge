@@ -7,13 +7,13 @@ import forge.card.cost.Cost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.Target;
 
-public class UniversalSpell extends Spell {
+public class CommonSpell extends Spell {
     private static final long serialVersionUID = -6741797239508483250L;
     private final SpellEffect effect;
     private final Map<String,String> params;
     private final SpellAiLogic ai;
 
-    public UniversalSpell(Card sourceCard, Cost abCost, Target tgt, Map<String,String> params0, SpellEffect effect0, SpellAiLogic ai0) {
+    public CommonSpell(Card sourceCard, Cost abCost, Target tgt, Map<String,String> params0, SpellEffect effect0, SpellAiLogic ai0) {
         super(sourceCard, abCost, tgt);
         params = params0;
         effect = effect0;
@@ -22,7 +22,7 @@ public class UniversalSpell extends Spell {
     
     @Override
     public String getStackDescription() {
-        return effect.getStackDescription(params, this);
+        return effect.getStackDescriptionWithSubs(params, this);
     }
     
     /* (non-Javadoc)

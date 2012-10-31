@@ -17,7 +17,7 @@ import forge.card.spellability.Target;
 public class DebuffEffect extends SpellEffect {
     
     @Override
-    public String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final Card host = sa.getAbilityFactory().getHostCard();
         final List<String> kws = params.containsKey("Keywords") ? Arrays.asList(params.get("Keywords").split(" & ")) : new ArrayList<String>();
         final StringBuilder sb = new StringBuilder();
@@ -62,12 +62,7 @@ public class DebuffEffect extends SpellEffect {
             }
             sb.append(".");
         }
-    
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
-        }
-    
+
         return sb.toString();
     }
 

@@ -42,7 +42,7 @@ public class PlayEffect extends SpellEffect {
      * @return a {@link java.lang.String} object.
      */
     @Override
-    public String getStackDescription(Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
         if (!(sa instanceof AbilitySub)) {
@@ -75,12 +75,6 @@ public class PlayEffect extends SpellEffect {
             sb.append(" without paying the mana cost");
         }
         sb.append(".");
-    
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
-        }
-    
         return sb.toString();
     }
 

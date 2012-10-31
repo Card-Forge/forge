@@ -97,7 +97,7 @@ public class CounterEffect extends SpellEffect {
      * @return a {@link java.lang.String} object.
      */
     @Override
-    public String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
 
         final StringBuilder sb = new StringBuilder();
 
@@ -147,12 +147,6 @@ public class CounterEffect extends SpellEffect {
         }
 
         sb.append(".");
-
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
-        }
-
         return sb.toString();
     } // end counterStackDescription
 

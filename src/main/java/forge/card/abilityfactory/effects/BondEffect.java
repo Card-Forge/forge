@@ -8,7 +8,6 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -61,7 +60,7 @@ public class BondEffect extends SpellEffect {
     }
 
     @Override
-    public String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         ArrayList<Card> tgts;
         tgts = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
 
@@ -71,12 +70,6 @@ public class BondEffect extends SpellEffect {
             sb.append(c).append(" ");
         }
         sb.append("pairs with another unpaired creature you control.");
-
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
-        }
-
         return sb.toString();
     } // end bondStackDescription()
 

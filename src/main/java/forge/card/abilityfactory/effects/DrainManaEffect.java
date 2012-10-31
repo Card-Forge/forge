@@ -53,7 +53,7 @@ public class DrainManaEffect extends SpellEffect {
      * @return a {@link java.lang.String} object.
      */
     @Override
-    public String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
         if (sa instanceof AbilitySub) {
@@ -79,11 +79,6 @@ public class DrainManaEffect extends SpellEffect {
         }
     
         sb.append(" empties his or her mana pool.");
-    
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            sb.append(subAb.getStackDescription());
-        }
     
         return sb.toString();
     }
