@@ -778,13 +778,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Phases")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryPermanentState.createAbilityPhases(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryPermanentState.createSpellPhases(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryPermanentState.createDrawbackPhases(this);
-            }
+            ai = new PhasesAi();
+            se = new PhasesEffect();
         }
 
         else if (this.api.equals("Play")) {
@@ -952,33 +947,18 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Tap")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryPermanentState.createAbilityTap(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryPermanentState.createSpellTap(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryPermanentState.createDrawbackTap(this);
-            }
+            ai = new TapAi();
+            se = new TapEffect();
         }
 
         else if (this.api.equals("TapAll")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryPermanentState.createAbilityTapAll(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryPermanentState.createSpellTapAll(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryPermanentState.createDrawbackTapAll(this);
-            }
+            ai = new TapAllAi();
+            se = new TapAllEffect();
         }
 
         else if (this.api.equals("TapOrUntap")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryPermanentState.createAbilityTapOrUntap(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryPermanentState.createSpellTapOrUntap(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryPermanentState.createDrawbackTapOrUntap(this);
-            }
+            ai = new TapOrUntapAi();
+            se = new TapOrUntapEffect();
         }
 
         else if (this.api.equals("Token")) {
@@ -1007,23 +987,13 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Untap")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryPermanentState.createAbilityUntap(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryPermanentState.createSpellUntap(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryPermanentState.createDrawbackUntap(this);
-            }
+            ai = new UntapAi();
+            se = new UntapEffect();
         }
 
         else if (this.api.equals("UntapAll")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryPermanentState.createAbilityUntapAll(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryPermanentState.createSpellUntapAll(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryPermanentState.createDrawbackUntapAll(this);
-            }
+            ai = new UntapAllAi();
+            se = new UntapAllEffect();
         }
 
         else if (this.api.equals("WinsGame")) {
