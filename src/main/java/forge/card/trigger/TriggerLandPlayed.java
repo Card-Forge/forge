@@ -18,6 +18,7 @@
 package forge.card.trigger;
 
 import java.util.HashMap;
+import java.util.Map;
 
 
 import forge.Card;
@@ -64,7 +65,7 @@ public class TriggerLandPlayed extends Trigger {
      * @param intrinsic
      *            the intrinsic
      */
-    public TriggerLandPlayed(final HashMap<String, String> params, final Card host, final boolean intrinsic) {
+    public TriggerLandPlayed(final Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
 
