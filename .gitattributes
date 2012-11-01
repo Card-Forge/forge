@@ -12487,7 +12487,7 @@ src/main/java/forge/card/abilityfactory/ai/ChooseColorAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ChooseTypeAi.java -text
 src/main/java/forge/card/abilityfactory/ai/CloneAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ControlExchangeAi.java -text
-src/main/java/forge/card/abilityfactory/ai/ControlGainA.java -text
+src/main/java/forge/card/abilityfactory/ai/ControlGainAi.java -text
 src/main/java/forge/card/abilityfactory/ai/CounterAi.java -text
 src/main/java/forge/card/abilityfactory/ai/CountersAi.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/ai/CountersMoveAi.java -text
