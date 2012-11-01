@@ -169,6 +169,7 @@ public class CloneAi extends SpellAiLogic {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
+    @SuppressWarnings("unused")
     private boolean cloneTgtAI(final Map<String, String> params, final SpellAbility sa) {
         // This is reasonable for now. Kamahl, Fist of Krosa and a sorcery or
         // two are the only things

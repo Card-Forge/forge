@@ -795,27 +795,13 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Pump")) {
-            final AbilityFactoryPump afPump = new AbilityFactoryPump(this);
-
-            if (this.isAb) {
-                spellAbility = afPump.getAbilityPump();
-            } else if (this.isSp) {
-                spellAbility = afPump.getSpellPump();
-            } else if (this.isDb) {
-                spellAbility = afPump.getDrawbackPump();
-            }
+            ai = new PumpAi();
+            se = new PumpEffect();
         }
 
         else if (this.api.equals("PumpAll")) {
-            final AbilityFactoryPump afPump = new AbilityFactoryPump(this);
-
-            if (this.isAb) {
-                spellAbility = afPump.getAbilityPumpAll();
-            } else if (this.isSp) {
-                spellAbility = afPump.getSpellPumpAll();
-            } else if (this.isDb) {
-                spellAbility = afPump.getDrawbackPumpAll();
-            }
+            ai = new PumpAllAi();
+            se = new PumpAllEffect();
         }
 
         else if (this.api.equals("PutCounter")) {
@@ -1227,7 +1213,7 @@ public class AbilityFactory {
     public static int calculateAmount(final Card card, String amount, final SpellAbility ability) {
         // amount can be anything, not just 'X' as long as sVar exists
 
-        if (amount == null) {
+        if (amount == null || amount.isEmpty()) {
             return 0;
         }
 

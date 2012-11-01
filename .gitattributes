@@ -12468,7 +12468,6 @@ src/main/java/forge/card/abilityfactory/AbilityFactoryCleanup.java svneol=native
 src/main/java/forge/card/abilityfactory/AbilityFactoryCopy.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryDealDamage.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryMana.java svneol=native#text/plain
-src/main/java/forge/card/abilityfactory/AbilityFactoryPump.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryRepeat.java -text
 src/main/java/forge/card/abilityfactory/AbilityFactoryStoreSVar.java -text
 src/main/java/forge/card/abilityfactory/CommonAbility.java -text
@@ -12524,6 +12523,9 @@ src/main/java/forge/card/abilityfactory/ai/PlayAi.java -text
 src/main/java/forge/card/abilityfactory/ai/PoisonAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ProtectAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ProtectAllAi.java -text
+src/main/java/forge/card/abilityfactory/ai/PumpAi.java -text
+src/main/java/forge/card/abilityfactory/ai/PumpAiBase.java -text
+src/main/java/forge/card/abilityfactory/ai/PumpAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/RearrangeTopOfLibraryAi.java -text
 src/main/java/forge/card/abilityfactory/ai/RegenerateAi.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/ai/RegenerateAllAi.java -text
@@ -12595,6 +12597,8 @@ src/main/java/forge/card/abilityfactory/effects/PlayEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/PoisonEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ProtectAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ProtectEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/PumpAllEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/PumpEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/RearrangeTopOfLibraryEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/RegenerateAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/RegenerateEffect.java -text

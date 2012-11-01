@@ -8,7 +8,6 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
-import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -36,7 +35,6 @@ public class DestroyAllAi extends SpellAiLogic {
     @Override
     public boolean doTriggerAINoCost(Player ai, Map<String, String> params, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getSourceCard();
-        final boolean noRegen = params.containsKey("NoRegen");
         final Target tgt = sa.getTarget();
         String valid = "";
         if (mandatory) {
@@ -106,7 +104,6 @@ public class DestroyAllAi extends SpellAiLogic {
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
-        final boolean noRegen = params.containsKey("NoRegen");
         String valid = "";
 
         if (params.containsKey("ValidCards")) {

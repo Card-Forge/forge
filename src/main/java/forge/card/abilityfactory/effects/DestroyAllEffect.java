@@ -90,6 +90,7 @@ public class DestroyAllEffect extends SpellEffect {
      *            a boolean.
      * @return a {@link java.lang.String} object.
      */
+    @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
     
         final StringBuilder sb = new StringBuilder();
