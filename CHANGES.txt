@@ -130,6 +130,19 @@ Fixes/Features:
 - Triggers: replace HashMap with java.util.Map in c-tors
 - a clear check for type of trigger ctor parameters
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- AF: Sacrifice, Reveal
+- removed repeating blocks from getStackDescription
+- AF: Clone, SetState
+- AF: GameWin/Loss
+- AF: Permanent state
+- AnimateEffects - change relations between classes
+- BasicLands is list,
+- removed ccnt, 
+- simplified areAllBasics(final String types) in AF:ChangeZone
+- tricked to avoid ref to static method
+- Set unlocking is no longer a special reward for winning matches, instead it is an option button like spell store. More expensive than before, not random, and initially fewer sets to choose from.
+- TriggerMapPlayed - 1st param => Map
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
