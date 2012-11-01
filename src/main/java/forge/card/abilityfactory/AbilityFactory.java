@@ -590,23 +590,13 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Destroy")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryDestroy.createAbilityDestroy(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryDestroy.createSpellDestroy(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryDestroy.createDrawbackDestroy(this);
-            }
+            ai = new DestroyAi();
+            se = new DestroyEffect();
         }
 
         else if (this.api.equals("DestroyAll")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryDestroy.createAbilityDestroyAll(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryDestroy.createSpellDestroyAll(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryDestroy.createDrawbackDestroyAll(this);
-            }
+            ai  = new DestroyAllAi();
+            se  = new DestroyAllEffect();
         }
 
         else if (this.api.equals("Dig")) {
@@ -661,14 +651,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("ExchangeControl")) {
-            final AbilityFactoryGainControl afControl = new AbilityFactoryGainControl(this);
-            if (this.isAb) {
-                spellAbility = afControl.getAbilityExchangeControl();
-            } else if (this.isSp) {
-                spellAbility = afControl.getSpellExchangeControl();
-            } else if (this.isDb) {
-                spellAbility = afControl.getDrawbackExchangeControl();
-            }
+            ai = new ControlExchangeAi();
+            se = new ControlExchangeEffect();
         }
 
         else if (this.api.equals("Fight")) {
@@ -698,15 +682,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("GainControl")) {
-            final AbilityFactoryGainControl afControl = new AbilityFactoryGainControl(this);
-
-            if (this.isAb) {
-                spellAbility = afControl.getAbilityGainControl();
-            } else if (this.isSp) {
-                spellAbility = afControl.getSpellGainControl();
-            } else if (this.isDb) {
-                spellAbility = afControl.getDrawbackGainControl();
-            }
+            ai = new ControlGainAi();
+            se = new ControlGainEffect();
         }
 
         else if (this.api.equals("GainLife")) {

@@ -17,7 +17,6 @@
  */
 package forge.card.trigger;
 
-import java.util.HashMap;
 import java.util.Map;
 
 
