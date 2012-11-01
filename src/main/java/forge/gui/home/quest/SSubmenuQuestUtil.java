@@ -12,6 +12,7 @@ import com.google.common.base.Supplier;
 
 import forge.Card;
 import forge.Singletons;
+import forge.card.CardEdition;
 import forge.control.FControl;
 import forge.deck.Deck;
 import forge.game.GameType;
@@ -157,6 +158,13 @@ public class SSubmenuQuestUtil {
         view0.getLblWins().setText("Wins: " + qA.getWin());
         view0.getLblLosses().setText("Losses: " + qA.getLost());
 
+        // Show or hide the set unlocking button
+        if (qCtrl.getFormatNumberUnlockable() > 0) {
+            view0.getBtnUnlock().setVisible(true);
+        } else {
+            view0.getBtnUnlock().setVisible(false);
+        }
+
         // Challenge in wins
         final int num = SSubmenuQuestUtil.nextChallengeInWins();
         final String str;
@@ -236,6 +244,15 @@ public class SSubmenuQuestUtil {
     }
 
     /** */
+    public static void showSetUnlock() {
+        final QuestController qData = Singletons.getModel().getQuest();
+        CardEdition toUnlock = QuestUtil.unlockSet(qData, false, null);
+        if (toUnlock != null) {
+            
+        }
+    }
+
+    /** */
     public static void startGame() {
         final QuestController qData = Singletons.getModel().getQuest();
 
@@ -286,7 +303,7 @@ public class SSubmenuQuestUtil {
 
                     humanStart.setStartingLife(qData.getAssets().getLife(qData.getMode()) + extraLifeHuman);
                     aiStart.setStartingLife(lifeAI);
-                    
+
                     humanStart.setCardsOnTable(new Supplier<Iterable<Card>>() {
                         @Override public Iterable<Card> get() { return QuestUtil.getHumanStartingCards(qData, event); } });
                     aiStart.setCardsOnTable(new Supplier<Iterable<Card>>() {
@@ -299,7 +316,7 @@ public class SSubmenuQuestUtil {
                 LobbyPlayer aiPlayer = Singletons.getControl().getLobby().findLocalPlayer(PlayerType.COMPUTER, event.getName());
                 aiPlayer.setPicture(event.getIconFilename());
                 msh.addPlayer( aiPlayer, aiStart );
-                
+
                 Singletons.getModel().getMatch().initMatch(GameType.Quest, msh.getPlayerMap());
                 Singletons.getModel().getMatch().startRound();
                 return null;

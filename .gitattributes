@@ -13074,6 +13074,7 @@ src/main/java/forge/quest/QuestMode.java -text
 src/main/java/forge/quest/QuestStartPool.java -text
 src/main/java/forge/quest/QuestUtil.java svneol=native#text/plain
 src/main/java/forge/quest/QuestUtilCards.java -text
+src/main/java/forge/quest/QuestUtilUnlockSets.java -text
 src/main/java/forge/quest/SellRules.java -text
 src/main/java/forge/quest/bazaar/IQuestBazaarItem.java svneol=native#text/plain
 src/main/java/forge/quest/bazaar/QuestBazaarManager.java svneol=native#text/plain

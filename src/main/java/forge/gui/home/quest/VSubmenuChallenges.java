@@ -83,6 +83,7 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
         .text("Next challenge in wins hasn't been set yet.")
         .fontSize(12).build();
 
+    private final ExperimentalLabel btnUnlock = new ExperimentalLabel("Unlock Sets");
     private final ExperimentalLabel btnBazaar = new ExperimentalLabel("Bazaar");
     private final ExperimentalLabel btnSpellShop = new ExperimentalLabel("Spell Shop");
 
@@ -96,6 +97,7 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
 
         final String constraints = "h 30px!, gap 0 0 0 5px";
         pnlStats.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 3"));
+        pnlStats.add(btnUnlock, "w 150px!, h 30px!, gap 0 0 0 10px");
         pnlStats.add(btnSpellShop, "w 150px!, h 30px!, gap 0 0 0 10px");
         pnlStats.add(btnBazaar, "w 150px!, h 30px!, gap 0 0 0 10px");
         pnlStats.add(lblWins, constraints);
@@ -211,6 +213,11 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
     @Override
     public ExperimentalLabel getBtnBazaar() {
         return btnBazaar;
+    }
+
+    @Override
+    public ExperimentalLabel getBtnUnlock() {
+        return btnUnlock;
     }
 
     @Override

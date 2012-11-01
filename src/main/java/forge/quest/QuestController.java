@@ -356,4 +356,28 @@ public class QuestController {
         return this.pets;
     }
 
+    /**
+     * Quest format has unlockable sets available at the moment.
+     * @return int number of unlockable sets.
+     */
+    public int getFormatNumberUnlockable() {
+        if (this.questFormat == null) {
+            return 0;
+        }
+
+        final int wins = this.model.getAchievements().getWin();
+        if (wins < 10) {
+            return 0;
+        }
+
+        int toUnlock = this.questFormat.getExcludedSetCodes().size();
+        if (toUnlock > (wins + 50) / 50) {
+            toUnlock = (wins + 50) / 50;
+        }
+        if (toUnlock > 8) {
+            toUnlock = 8;
+        }
+        return toUnlock;
+    }
+
 }

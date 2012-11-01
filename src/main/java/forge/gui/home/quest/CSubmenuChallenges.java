@@ -46,6 +46,10 @@ public enum CSubmenuChallenges implements ICDoc {
                 new Command() { @Override
                     public void execute() { SSubmenuQuestUtil.showBazaar(); } });
 
+        view.getBtnUnlock().setCommand(
+                new Command() { @Override
+                    public void execute() { SSubmenuQuestUtil.showSetUnlock(); } });
+
         view.getBtnStart().addActionListener(
                 new ActionListener() { @Override
             public void actionPerformed(final ActionEvent e) { SSubmenuQuestUtil.startGame(); } });
