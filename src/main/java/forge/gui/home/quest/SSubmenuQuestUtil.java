@@ -29,6 +29,7 @@ import forge.quest.QuestEvent;
 import forge.quest.QuestEventChallenge;
 import forge.quest.QuestMode;
 import forge.quest.QuestUtil;
+import forge.quest.QuestUtilUnlockSets;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.bazaar.QuestPetController;
 import forge.quest.data.QuestAchievements;
@@ -246,9 +247,9 @@ public class SSubmenuQuestUtil {
     /** */
     public static void showSetUnlock() {
         final QuestController qData = Singletons.getModel().getQuest();
-        CardEdition toUnlock = QuestUtil.unlockSet(qData, false, null);
+        CardEdition toUnlock = QuestUtilUnlockSets.unlockSet(qData, false, null);
         if (toUnlock != null) {
-            
+            QuestUtilUnlockSets.doUnlock(qData, toUnlock);
         }
     }
 
