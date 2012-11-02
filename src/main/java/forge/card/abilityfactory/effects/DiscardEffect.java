@@ -21,17 +21,6 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
 public class DiscardEffect extends RevealEffectBase {
-    /**
-     * <p>
-     * discardStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final String mode = params.get("Mode");
@@ -109,16 +98,6 @@ public class DiscardEffect extends RevealEffectBase {
         return sb.toString();
     } // discardStackDescription()
 
-    /**
-     * <p>
-     * discardResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         final Card source = sa.getSourceCard();

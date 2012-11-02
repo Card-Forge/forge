@@ -32,16 +32,6 @@ public class DelayedTriggerEffect extends SpellEffect {
 
     }
 
-    /**
-     * <p>
-     * doResolve.
-     * </p>
-     * 
-     * @param abilityFactory
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param spellAbility
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(java.util.Map<String,String> mapParams, SpellAbility sa) {
 

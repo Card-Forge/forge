@@ -34,16 +34,6 @@ public class TapAllEffect extends SpellEffect {
         return sb.toString();
     }
 
-    /**
-     * <p>
-     * tapAllResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         final Card card = sa.getSourceCard();
@@ -80,20 +70,4 @@ public class TapAllEffect extends SpellEffect {
         }
     }
 
-    // ****************************************
-    // ************** Tap or Untap ************
-    // ****************************************
-
-
-    /**
-     * <p>
-     * tapOrUntapCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
 }

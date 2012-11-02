@@ -61,16 +61,6 @@ public class UntapEffect extends SpellEffect {
         return sb.toString();
     }
 
-    /**
-     * <p>
-     * untapResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         final Card card = sa.getSourceCard();
@@ -134,9 +124,5 @@ public class UntapEffect extends SpellEffect {
             }
         }
     }
-
-    // ****************************************
-    // ************** Tap *********************
-    // ****************************************
 
 }

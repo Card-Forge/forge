@@ -66,16 +66,6 @@ public class DigEffect extends SpellEffect {
         return sb.toString();
     }
 
-    /**
-     * <p>
-     * digResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         final Card host = sa.getSourceCard();
@@ -392,20 +382,4 @@ public class DigEffect extends SpellEffect {
         return toReturn;
     }
 
-    // **********************************************************************
-    // ******************************* DigUntil ***************************
-    // **********************************************************************
-
-
-    /**
-     * <p>
-     * digUntilCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
 }

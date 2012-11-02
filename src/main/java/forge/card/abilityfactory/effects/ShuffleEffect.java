@@ -12,17 +12,6 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
 
-/**
-     * <p>
-     * shuffleResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-
 public class ShuffleEffect extends SpellEffect {
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
@@ -95,4 +84,4 @@ public class ShuffleEffect extends SpellEffect {
         return sb.toString();
     }
 
-} // end class AbilityFactory_ZoneAffecting
+} 

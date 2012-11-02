@@ -12,18 +12,6 @@ import forge.card.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 public class SacrificeAllEffect extends SpellEffect {
-    /**
-     * <p>
-     * sacrificeAllStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     * @since 1.0.15
-     */
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         // when getStackDesc is called, just build exactly what is happening
@@ -56,18 +44,6 @@ public class SacrificeAllEffect extends SpellEffect {
         return sb.toString();
     }
 
-    /**
-     * <p>
-     * sacrificeAllResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @since 1.0.15
-     */
-    
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
 
@@ -107,4 +83,4 @@ public class SacrificeAllEffect extends SpellEffect {
         }
     }
 
-} // end class AbilityFactory_Sacrifice
+} 

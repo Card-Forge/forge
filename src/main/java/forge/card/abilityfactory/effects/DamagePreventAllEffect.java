@@ -75,4 +75,4 @@ public class DamagePreventAllEffect extends SpellEffect {
         return sb.toString();
     }
 
-} // end class AbilityFactoryPreventDamage
+} 

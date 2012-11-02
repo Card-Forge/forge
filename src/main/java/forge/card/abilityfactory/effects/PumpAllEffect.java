@@ -16,17 +16,6 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class PumpAllEffect extends SpellEffect {
-    /**
-     * <p>
-     * pumpAllStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -53,14 +42,6 @@ public class PumpAllEffect extends SpellEffect {
         return sb.toString();
     } // pumpAllStackDescription()
 
-    /**
-     * <p>
-     * pumpAllResolve.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         List<Card> list;
@@ -154,4 +135,4 @@ public class PumpAllEffect extends SpellEffect {
         }
     } // pumpAllResolve()
 
-} // end class AbilityFactory_Pump
+} 

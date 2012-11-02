@@ -77,19 +77,6 @@ public class DestroyAllEffect extends SpellEffect {
         }
     }
 
-    /**
-     * <p>
-     * destroyAllStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param noRegen
-     *            a boolean.
-     * @return a {@link java.lang.String} object.
-     */
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
     
@@ -129,4 +116,4 @@ public class DestroyAllEffect extends SpellEffect {
         return sb.toString();
     }
 
-} // end class AbilityFactory_Destroy
+} 

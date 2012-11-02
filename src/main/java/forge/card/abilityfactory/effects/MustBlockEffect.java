@@ -80,4 +80,4 @@ public class MustBlockEffect extends SpellEffect {
         return sb.toString();
     }
 
-} // end class AbilityFactory_Combat
+} 

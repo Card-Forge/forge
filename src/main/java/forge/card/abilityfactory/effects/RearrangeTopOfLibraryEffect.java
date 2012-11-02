@@ -22,17 +22,6 @@ public class RearrangeTopOfLibraryEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
 
-    /**
-     * <p>
-     * rearrangeTopOfLibraryStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         int numCards = 0;
@@ -157,21 +146,4 @@ public class RearrangeTopOfLibraryEffect extends SpellEffect {
         }
     }
 
-    // **********************************************************************
-    // ******************************* Reveal *******************************
-    // **********************************************************************
-
-
-    /**
-     * <p>
-     * revealCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
-    
 }

@@ -49,16 +49,6 @@ public class TapOrUntapEffect extends SpellEffect {
         return sb.toString();
     }
 
-    /**
-     * <p>
-     * tapOrUntapResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         final Card card = sa.getSourceCard();
@@ -94,22 +84,4 @@ public class TapOrUntapEffect extends SpellEffect {
         }
     }
 
-    // ******************************************
-    // ************** Phases ********************
-    // ******************************************
-    // Phases generally Phase Out. Time and Tide is the only card that can force
-    // Phased Out cards in.
-
-
-    /**
-     * <p>
-     * phasesCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
 }

@@ -94,14 +94,6 @@ public class ControlGainEffect extends SpellEffect {
         host.clearGainControlReleaseCommands();
     }
 
-    /**
-     * <p>
-     * gainControlResolve.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         List<Card> tgtCards = new ArrayList<Card>();

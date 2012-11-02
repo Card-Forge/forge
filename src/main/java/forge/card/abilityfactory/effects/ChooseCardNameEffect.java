@@ -25,18 +25,6 @@ import forge.item.CardPrinted;
 
 public class ChooseCardNameEffect extends SpellEffect {
 
-    /**
-     * <p>
-     * nameCardStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
-    
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -64,16 +52,6 @@ public class ChooseCardNameEffect extends SpellEffect {
         return sb.toString();
     }
 
-    /**
-     * <p>
-     * nameCardResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         final Card host = sa.getSourceCard();
@@ -157,21 +135,4 @@ public class ChooseCardNameEffect extends SpellEffect {
         }
     }
 
-    // *************************************************************************
-    // *************************** ChooseCard **********************************
-    // *************************************************************************
-
-
-    /**
-     * <p>
-     * chooseCardCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
-    
 }

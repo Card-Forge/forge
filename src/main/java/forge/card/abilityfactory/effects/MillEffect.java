@@ -15,16 +15,6 @@ import forge.game.zone.ZoneType;
 
 public class MillEffect extends SpellEffect {
 
-    /**
-     * <p>
-     * millResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         final Card source = sa.getSourceCard();
@@ -66,17 +56,6 @@ public class MillEffect extends SpellEffect {
         }
     }
 
-    /**
-     * <p>
-     * millStackDescription.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @return a {@link java.lang.String} object.
-     */
     @Override
     protected String getStackDescription(Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();

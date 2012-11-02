@@ -87,4 +87,4 @@ public class ChooseGenericEffect extends SpellEffect {
         }
     }
 
-} // end class AbilityFactoryChoose
+}

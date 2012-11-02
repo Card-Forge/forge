@@ -17,18 +17,6 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
-/**
-     * <p>
-     * digUntilStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
-    
 public class DigUntilEffect extends SpellEffect {
     
 
@@ -101,16 +89,6 @@ public class DigUntilEffect extends SpellEffect {
         return sb.toString();
     }
 
-    /**
-     * <p>
-     * digUntilResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         final Card host = sa.getSourceCard();
@@ -207,20 +185,4 @@ public class DigUntilEffect extends SpellEffect {
         }
     } // end resolve
 
-    // **********************************************************************
-    // ******************************* RevealHand ***************************
-    // **********************************************************************
-
-
-    /**
-     * <p>
-     * revealHandCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
 }

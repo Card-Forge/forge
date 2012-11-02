@@ -17,16 +17,6 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
 public class CountersRemoveEffect extends SpellEffect { 
-    /**
-     * <p>
-     * removeResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
 
@@ -139,17 +129,6 @@ public class CountersRemoveEffect extends SpellEffect {
         }
     }
 
-    /**
-     * <p>
-     * removeStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final Card card = sa.getSourceCard();
@@ -202,19 +181,4 @@ public class CountersRemoveEffect extends SpellEffect {
         return sb.toString();
     }
 
-    // *******************************************
-    // ********** Proliferate ********************
-    // *******************************************
-
-
-    /**
-     * <p>
-     * proliferateShouldPlayAI.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
-    
 }

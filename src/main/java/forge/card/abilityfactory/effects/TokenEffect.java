@@ -147,14 +147,6 @@ public class TokenEffect extends SpellEffect {
         return sb.toString();
     }
 
-    /**
-     * <p>
-     * doResolve.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         final Card host = sa.getSourceCard();

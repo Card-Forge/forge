@@ -12,17 +12,6 @@ import forge.card.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 public class RegenerateAllEffect extends SpellEffect {
-    /**
-     * <p>
-     * regenerateAllStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -45,16 +34,6 @@ public class RegenerateAllEffect extends SpellEffect {
         return sb.toString();
     }
 
-    /**
-     * <p>
-     * regenerateAllResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         final Card hostCard = sa.getAbilityFactory().getHostCard();
@@ -84,4 +63,4 @@ public class RegenerateAllEffect extends SpellEffect {
         }
     } // regenerateAllResolve
 
-} // end class AbilityFactory_Regenerate
+} 

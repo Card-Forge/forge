@@ -15,16 +15,6 @@ import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 
 public class CounterEffect extends SpellEffect {
-    /**
-     * <p>
-     * counterResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         // TODO Before this resolves we should see if any of our targets are
@@ -85,17 +75,6 @@ public class CounterEffect extends SpellEffect {
         }
     } // end counterResolve
 
-    /**
-     * <p>
-     * counterStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
 
@@ -207,4 +186,4 @@ public class CounterEffect extends SpellEffect {
         }
     }
 
-} // end class AbilityFactory_CounterMagic
+} 

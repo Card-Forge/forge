@@ -15,17 +15,6 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class CountersRemoveAllEffect extends SpellEffect { 
-    /**
-     * <p>
-     * removeCounterAllStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -59,16 +48,6 @@ public class CountersRemoveAllEffect extends SpellEffect {
         return sb.toString();
     }
 
-    /**
-     * <p>
-     * removeCounterAllResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         final String type = params.get("CounterType");

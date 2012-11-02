@@ -80,17 +80,6 @@ public class SacrificeEffect extends SpellEffect {
         }
     }
 
-    /**
-     * <p>
-     * sacrificeDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -261,22 +250,4 @@ public class SacrificeEffect extends SpellEffect {
         return sacList;
     }
 
-    // **************************************************************
-    // *********************** SacrificeAll *************************
-    // **************************************************************
-
-
-    /**
-     * <p>
-     * sacrificeAllCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     * @since 1.0.15
-     */
-    
 }

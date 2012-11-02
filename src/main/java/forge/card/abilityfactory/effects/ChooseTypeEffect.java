@@ -20,44 +20,34 @@ import forge.gui.GuiChoose;
 
 public class ChooseTypeEffect extends SpellEffect {
     
-
+    
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-    
+        
         if (!(sa instanceof AbilitySub)) {
             sb.append(sa.getSourceCard()).append(" - ");
         } else {
             sb.append(" ");
         }
-    
+        
         ArrayList<Player> tgtPlayers;
-    
+        
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
-    
+        
         for (final Player p : tgtPlayers) {
             sb.append(p).append(" ");
         }
         sb.append("chooses a type.");
-    
+        
         return sb.toString();
     }
-
-    /**
-     * <p>
-     * chooseTypeResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
+    
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         final Card card = sa.getSourceCard();
@@ -66,19 +56,19 @@ public class ChooseTypeEffect extends SpellEffect {
         if (params.containsKey("InvalidTypes")) {
             invalidTypes.addAll(Arrays.asList(params.get("InvalidTypes").split(",")));
         }
-
+        
         ArrayList<Player> tgtPlayers;
-
+        
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
-
+        
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-
+                
                 if (type.equals("Card")) {
                     boolean valid = false;
                     while (!valid) {
@@ -194,7 +184,4 @@ public class ChooseTypeEffect extends SpellEffect {
         }
     }
 
-    // *************************************************************************
-    // ************************* ChooseColor ***********************************
-    // *************************************************************************
 }

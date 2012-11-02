@@ -13,16 +13,6 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
 public class BondEffect extends SpellEffect {
-    /**
-     * <p>
-     * bondResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         // find card that triggered pairing first

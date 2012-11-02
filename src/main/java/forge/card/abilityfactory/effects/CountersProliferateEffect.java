@@ -25,15 +25,6 @@ import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 public class CountersProliferateEffect extends SpellEffect {
-    /**
-     * <p>
-     * proliferateStackDescription.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -49,16 +40,6 @@ public class CountersProliferateEffect extends SpellEffect {
         return sb.toString();
     }
 
-    /**
-     * <p>
-     * proliferateResolve.
-     * </p>
-     * 
-     * @param AF
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(Map<String,String> params, SpellAbility sa) {
         Player controller = sa.getSourceCard().getController();
@@ -192,9 +173,5 @@ public class CountersProliferateEffect extends SpellEffect {
             p.addPoisonCounters(1, sa.getSourceCard());
         }
     }
-
-    // *******************************************
-    // ********** PutCounterAll ******************
-    // *******************************************
 
 }

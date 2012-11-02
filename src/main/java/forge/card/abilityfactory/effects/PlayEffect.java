@@ -30,17 +30,6 @@ import forge.gui.GuiChoose;
 import forge.item.CardDb;
 
 public class PlayEffect extends SpellEffect { 
-    /**
-     * <p>
-     * playStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
     @Override
     protected String getStackDescription(Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -78,16 +67,6 @@ public class PlayEffect extends SpellEffect {
         return sb.toString();
     }
 
-    /**
-     * <p>
-     * playResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         final Card source = sa.getSourceCard();
@@ -286,4 +265,4 @@ public class PlayEffect extends SpellEffect {
         }
     } // end resolve
 
-} // end class AbilityFactory_Copy
+} 

@@ -11,18 +11,6 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
 
-/**
-     * <p>
-     * exchangeControlStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
-    
 
 public class ControlExchangeEffect extends SpellEffect {
     
@@ -83,4 +71,4 @@ public class ControlExchangeEffect extends SpellEffect {
         object1.addController(player2);
     }
 
-} // end class AbilityFactory_GainControl
+} 

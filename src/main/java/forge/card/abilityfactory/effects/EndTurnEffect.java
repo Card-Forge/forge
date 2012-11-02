@@ -11,6 +11,11 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 
 public class EndTurnEffect extends SpellEffect {
+
+    // *************************************************************************
+    // ************************* END TURN **************************************
+    // *************************************************************************
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -57,4 +62,4 @@ public class EndTurnEffect extends SpellEffect {
         return "End the turn.";
     }
 
-} // end class AbilityFactory_Turns
+} 

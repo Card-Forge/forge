@@ -12,18 +12,6 @@ import forge.card.spellability.Target;
 import forge.game.GameLossReason;
 import forge.game.player.Player;
 
-/**
-     * <p>
-     * losesGameStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
-    
 public class GameLossEffect extends SpellEffect {
     
     /* (non-Javadoc)
@@ -56,16 +44,6 @@ public class GameLossEffect extends SpellEffect {
         return sb.toString();
     }
 
-    /**
-     * <p>
-     * losesGameResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         final Card card = sa.getAbilityFactory().getHostCard();
@@ -83,4 +61,4 @@ public class GameLossEffect extends SpellEffect {
         }
     }
 
-} // end class AbilityFactory_EndGameCondition
+} 

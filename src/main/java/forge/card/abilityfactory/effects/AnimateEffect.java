@@ -20,10 +20,6 @@ import forge.card.trigger.TriggerHandler;
 
 public class AnimateEffect extends AnimateEffectBase {
 
-    // **************************************************************
-    // ************************** Animate ***************************
-    // **************************************************************
-    
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */

@@ -17,55 +17,45 @@ import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
 public class ChooseNumberEffect extends SpellEffect
-    {
-        
-        /* (non-Javadoc)
-             * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
-             */
-            @Override
-            protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
-        final StringBuilder sb = new StringBuilder();
+{
     
+    /* (non-Javadoc)
+     * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
+     */
+    @Override
+    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
+        final StringBuilder sb = new StringBuilder();
+        
         if (sa instanceof AbilitySub) {
             sb.append(" ");
         } else {
             sb.append(sa.getSourceCard()).append(" - ");
         }
-    
+        
         ArrayList<Player> tgtPlayers;
-    
+        
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
-    
+        
         for (final Player p : tgtPlayers) {
             sb.append(p).append(" ");
         }
         sb.append("chooses a number.");
-    
+        
         return sb.toString();
     }
-
-    /**
-     * <p>
-     * chooseNumberResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-            @Override
-            public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    
+    @Override
+    public void resolve(java.util.Map<String, String> params, SpellAbility sa) {
         final Card card = sa.getSourceCard();
         //final int min = params.containsKey("Min") ? Integer.parseInt(params.get("Min")) : 0;
         //final int max = params.containsKey("Max") ? Integer.parseInt(params.get("Max")) : 99;
         final boolean random = params.containsKey("Random");
-
+        
         final int min;
         if (!params.containsKey("Min")) {
             min = Integer.parseInt("0");
@@ -74,7 +64,7 @@ public class ChooseNumberEffect extends SpellEffect
         } else {
             min = CardFactoryUtil.xCount(card, card.getSVar(params.get("Min")));
         } // Allow variables for Min
-
+        
         final int max;
         if (!params.containsKey("Max")) {
             max = Integer.parseInt("99");
@@ -83,7 +73,7 @@ public class ChooseNumberEffect extends SpellEffect
         } else {
             max = CardFactoryUtil.xCount(card, card.getSVar(params.get("Max")));
         } // Allow variables for Max
-
+        
         final String[] choices = new String[max + 1];
         if (!random) {
             // initialize the array
@@ -91,16 +81,16 @@ public class ChooseNumberEffect extends SpellEffect
                 choices[i] = Integer.toString(i);
             }
         }
-
+        
         ArrayList<Player> tgtPlayers;
-
+        
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
         }
-
+        
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (sa.getActivatingPlayer().isHuman()) {
@@ -124,7 +114,7 @@ public class ChooseNumberEffect extends SpellEffect
                         chosen = Integer.parseInt((String) o);
                     }
                     card.setChosenNumber(chosen);
-
+                    
                 } else {
                     // TODO - not implemented
                 }
@@ -132,7 +122,4 @@ public class ChooseNumberEffect extends SpellEffect
         }
     }
 
-    // *************************************************************************
-    // ************************* ChoosePlayer **********************************
-    // *************************************************************************
 }

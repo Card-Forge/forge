@@ -12,16 +12,6 @@ import forge.card.spellability.Target;
 import forge.game.player.Player;
 
 public class DrainManaEffect extends SpellEffect {
-    /**
-     * <p>
-     * drainManaResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         final Card card = sa.getSourceCard();
@@ -41,17 +31,6 @@ public class DrainManaEffect extends SpellEffect {
         }
     }
 
-    /**
-     * <p>
-     * drainManaStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -83,4 +62,4 @@ public class DrainManaEffect extends SpellEffect {
         return sb.toString();
     }
 
-} // end class AbilityFactory_Mana
+} 

@@ -93,4 +93,4 @@ public class DebuffAllEffect extends SpellEffect {
         }
     } // debuffAllResolve()
 
-} // end class AbilityFactory_Debuff
+} 

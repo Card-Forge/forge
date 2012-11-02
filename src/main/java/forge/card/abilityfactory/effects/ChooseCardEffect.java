@@ -19,17 +19,6 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
 public class ChooseCardEffect extends SpellEffect {
-    /**
-     * <p>
-     * chooseCardStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -57,16 +46,6 @@ public class ChooseCardEffect extends SpellEffect {
         return sb.toString();
     }
 
-    /**
-     * <p>
-     * chooseCardResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         final Card host = sa.getSourceCard();
@@ -152,9 +131,5 @@ public class ChooseCardEffect extends SpellEffect {
             }
         }
     }
-
-    // *************************************************************************
-    // ************************* ChooseGeneric *********************************
-    // *************************************************************************
 
 }
