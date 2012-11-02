@@ -5,7 +5,9 @@ Forge Beta: 1#-##-2012 ver 1.3.1
 11### cards in total.
 
 
-- Added Return to Ravnica Guild Sealed Deck mode. Start a new sealed deck game, choose "Block / Set" and then scroll down until you find "Return to Ravnica Guild Sealed (block)". Select that. From the "Choose Set Combination" menu, select the first option. You will be prompted twice to pick your guild (once for the promo cards, once for the actual booster - you should choose the same guild both times). After that you're ready to go.
+Added Return to Ravnica Guild Sealed Deck mode. Start a new sealed deck game, choose "Block / Set" and then scroll down until you find "Return to Ravnica Guild Sealed (block)". Select that. From the "Choose Set Combination" menu, select the first option. You will be prompted twice to pick your guild (once for the promo cards, once for the actual booster - you should choose the same guild both times). After that you're ready to go.
+
+A bug for the new set unlocking code is now fixed. Before the fix, you could unlock all you wanted, but the unlocking info and the cards you got would never be saved! Fortunately, your paid money wouldn't be saved either.
 
 --
 
