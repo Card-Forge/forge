@@ -42,8 +42,8 @@ public final class GameFormatQuest {
 
     private final String name;
     // contains allowed sets, when empty allows all sets
-    private List<String> allowedSetCodes;
-    private List<String> bannedCardNames;
+    private final List<String> allowedSetCodes;
+    private final List<String> bannedCardNames;
 
     private Predicate<CardPrinted> filterRules;
     private Predicate<CardPrinted> filterPrinted;
@@ -106,7 +106,7 @@ public final class GameFormatQuest {
 
     private Predicate<CardPrinted> buildFilterPrinted() {
         final Predicate<CardPrinted> banNames = CardPrinted.Predicates.namesExcept(this.bannedCardNames);
-        if (this.allowedSetCodes == null || this.allowedSetCodes.isEmpty()) {
+        if (this.allowedSetCodes.isEmpty()) {
             return banNames;
         }
         return com.google.common.base.Predicates.and(banNames, CardPrinted.Predicates.printedInSets(this.allowedSetCodes, true));
@@ -114,7 +114,7 @@ public final class GameFormatQuest {
 
     private Predicate<CardPrinted> buildFilterRules() {
         final Predicate<CardPrinted> banNames = CardPrinted.Predicates.namesExcept(this.bannedCardNames);
-        if (this.allowedSetCodes == null || this.allowedSetCodes.isEmpty()) {
+        if (this.allowedSetCodes.isEmpty()) {
             return banNames;
         }
         return com.google.common.base.Predicates.and(banNames, com.google.common.base.Predicates.compose(CardRulesPredicates.wasPrintedInSets(this.allowedSetCodes), CardPrinted.FN_GET_RULES));
@@ -201,7 +201,7 @@ public final class GameFormatQuest {
      * @return unmodifiable list of excluded sets.
      */
     public List<String> getExcludedSetCodes() {
-        if (this.allowedSetCodes == null || this.allowedSetCodes.isEmpty()) {
+        if (this.allowedSetCodes.isEmpty()) {
             return null;
         }
 
@@ -221,9 +221,7 @@ public final class GameFormatQuest {
      * @param setCode String, set code.
      */
     public void unlockSet(final String setCode) {
-        if (this.allowedSetCodes == null) {
-            this.allowedSetCodes = new ArrayList<String>(); // this should never happen.
-        } else if (this.allowedSetCodes.isEmpty()) {
+        if (this.allowedSetCodes.isEmpty()) {
             return; // We are already allowing all sets!
         } else if (this.allowedSetCodes.contains(setCode)) {
             return; // Already on the list
