@@ -59,19 +59,6 @@ public class RevealAi extends RevealAiBase {
         return randomReturn;
     }
 
-    /**
-     * <p>
-     * revealTrigger.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
     

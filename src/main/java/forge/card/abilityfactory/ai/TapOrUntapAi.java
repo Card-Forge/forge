@@ -54,19 +54,6 @@ public class TapOrUntapAi extends TapAiBase {
         return randomReturn;
     }
 
-    /**
-     * <p>
-     * tapOrUntapTrigger.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         final Target tgt = sa.getTarget();
@@ -92,18 +79,6 @@ public class TapOrUntapAi extends TapAiBase {
         return false;
     }
 
-    /**
-     * <p>
-     * tapOrUntapPlayDrawbackAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
-    
     @Override
     public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player ai) {
         final Target tgt = sa.getTarget();
@@ -129,15 +104,4 @@ public class TapOrUntapAi extends TapAiBase {
         return randomReturn;
     }
 
-    /**
-     * <p>
-     * tapOrUntapStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
 }

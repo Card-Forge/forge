@@ -14,17 +14,6 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-/**
-     * <p>
-     * digCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     
 public class DigAi extends SpellAiLogic {
     /* (non-Javadoc)
@@ -83,19 +72,6 @@ public class DigAi extends SpellAiLogic {
         return true;
     }
 
-    /**
-     * <p>
-     * digTriggerAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         final Target tgt = sa.getTarget();
@@ -108,15 +84,4 @@ public class DigAi extends SpellAiLogic {
         return true;
     }
 
-    /**
-     * <p>
-     * digStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
 }

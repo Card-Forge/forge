@@ -97,17 +97,6 @@ public class CloneAi extends SpellAiLogic {
         return useAbility;
     } // end cloneCanPlayAI()
 
-    /**
-     * <p>
-     * clonePlayDrawbackAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
         // AI should only activate this during Human's turn
@@ -121,19 +110,6 @@ public class CloneAi extends SpellAiLogic {
         return chance;
     }
 
-    /**
-     * <p>
-     * cloneTriggerAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
 
@@ -179,16 +155,4 @@ public class CloneAi extends SpellAiLogic {
         return false;
     }
 
-    /**
-     * <p>
-     * cloneStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
-    
 }

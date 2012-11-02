@@ -20,17 +20,17 @@ import forge.util.MyRandom;
 
 /**
  * TODO: Write javadoc for this type.
- * 
+ *
  */
 
-    public class LifeGainAi extends SpellAiLogic {
+public class LifeGainAi extends SpellAiLogic {
     
     /* (non-Javadoc)
-         * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
-         */
-        @Override
-        public boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
-
+     * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
+     */
+    @Override
+    public boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
+        
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
@@ -45,7 +45,7 @@ import forge.util.MyRandom;
         } else {
             lifeAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), amountStr, sa);
         }
-
+        
         // don't use it if no life to gain
         if (lifeAmount <= 0) {
             return false;
@@ -69,47 +69,47 @@ import forge.util.MyRandom;
         boolean lifeCritical = life <= 5;
         lifeCritical |= (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DAMAGE) && CombatUtil
                 .lifeInDanger(ai, Singletons.getModel().getGame().getCombat()));
-
+        
         if (abCost != null && !lifeCritical) {
             if (!CostUtil.checkSacrificeCost(ai, abCost, source, false)) {
                 return false;
             }
-
+            
             if (!CostUtil.checkLifeCost(ai, abCost, source, 4, null)) {
                 return false;
             }
-
+            
             if (!CostUtil.checkDiscardCost(ai, abCost, source)) {
                 return false;
             }
-
+            
             if (!CostUtil.checkRemoveCounterCost(abCost, source)) {
                 return false;
             }
         }
-
+        
         if (!ai.canGainLife()) {
             return false;
         }
-
+        
         // Don't use lifegain before main 2 if possible
         if (!lifeCritical && Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && !params.containsKey("ActivationPhases")) {
             return false;
         }
-
+        
         // Don't tap creatures that may be able to block
         if (ComputerUtil.waitForBlocking(sa)) {
             return false;
         }
-
+        
         // TODO handle proper calculation of X values based on Cost and what
         // would be paid
         // final int amount = calculateAmount(af.getHostCard(), amountStr, sa);
-
+        
         // prevent run-away activations - first time will always return true
         final boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
-
+        
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
@@ -119,21 +119,21 @@ import forge.util.MyRandom;
                 return false;
             }
         }
-
+        
         boolean randomReturn = r.nextFloat() <= .6667;
         if (lifeCritical || AbilityFactory.playReusable(ai, sa)) {
             randomReturn = true;
         }
-
+        
         return (randomReturn && chance);
     }
-
-
+    
+    
     /**
      * <p>
      * gainLifeDoTriggerAINoCost.
      * </p>
-     * 
+     *
      * @param af
      *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @param sa
@@ -144,8 +144,8 @@ import forge.util.MyRandom;
      */
     @Override
     public boolean doTriggerAINoCost(final Player ai, final Map<String, String> params,
-            final SpellAbility sa, final boolean mandatory) {
-
+    final SpellAbility sa, final boolean mandatory) {
+        
         // If the Target is gaining life, target self.
         // if the Target is modifying how much life is gained, this needs to be
         // handled better
@@ -160,7 +160,7 @@ import forge.util.MyRandom;
                 return false;
             }
         }
-
+        
         final Card source = sa.getSourceCard();
         final String amountStr = params.get("LifeAmount");
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
@@ -168,26 +168,13 @@ import forge.util.MyRandom;
             final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(xPay));
         }
-
+        
         // check SubAbilities DoTrigger?
         final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             return abSub.doTrigger(mandatory);
         }
-
+        
         return true;
     }
-
-    /**
-     * <p>
-     * loseLifeCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
-    
-    }
+}

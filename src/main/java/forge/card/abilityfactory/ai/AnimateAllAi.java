@@ -7,17 +7,6 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 
 public class AnimateAllAi extends SpellAiLogic {
-    /**
-     * <p>
-     * animateAllCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     
     @Override
     public boolean canPlayAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa) {
@@ -31,19 +20,6 @@ public class AnimateAllAi extends SpellAiLogic {
         return useAbility;
     } // end animateAllCanPlayAI()
 
-    /**
-     * <p>
-     * animateAllTriggerAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean doTriggerAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
 

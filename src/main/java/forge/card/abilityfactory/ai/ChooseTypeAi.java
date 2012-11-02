@@ -9,17 +9,6 @@ import forge.card.spellability.Target;
 import forge.game.player.Player;
 
 public class ChooseTypeAi extends SpellAiLogic {
-    /**
-     * <p>
-     * chooseTypeCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean canPlayAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa) {
         if (!params.containsKey("AILogic")) {
@@ -34,19 +23,6 @@ public class ChooseTypeAi extends SpellAiLogic {
         return true;
     }
 
-    /**
-     * <p>
-     * chooseTypeTriggerAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         final Target tgt = sa.getTarget();
@@ -65,15 +41,4 @@ public class ChooseTypeAi extends SpellAiLogic {
         return true;
     }
 
-    /**
-     * <p>
-     * chooseTypeStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
 }

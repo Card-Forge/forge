@@ -6,17 +6,6 @@ import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 
 public class ShuffleAi extends SpellAiLogic {
-    /**
-     * <p>
-     * shuffleCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean canPlayAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa) {
         // not really sure when the compy would use this; maybe only after a
@@ -38,21 +27,6 @@ public class ShuffleAi extends SpellAiLogic {
          */
     }
 
-    /**
-     * <p>
-     * shuffleTargetAI.
-     * </p>
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param primarySA
-     *            a boolean.
-     * @param mandatory
-     *            a boolean.
-     * 
-     * @return a boolean.
-     */
     @Override
     public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
         return shuffleTargetAI(sa, false, false);
@@ -68,19 +42,6 @@ public class ShuffleAi extends SpellAiLogic {
         
     } // shuffleTargetAI()
 
-    /**
-     * <p>
-     * shuffleTrigger.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         if (!shuffleTargetAI(sa, false, mandatory)) {

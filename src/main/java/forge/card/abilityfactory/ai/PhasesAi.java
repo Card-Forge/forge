@@ -57,20 +57,6 @@ public class PhasesAi extends SpellAiLogic
         return randomReturn;
     }
 
-    /**
-     * <p>
-     * phasesTrigger.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
-    
     @Override
     public boolean doTriggerAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         final Target tgt = sa.getTarget();
@@ -93,17 +79,6 @@ public class PhasesAi extends SpellAiLogic
         return false;
     }
 
-    /**
-     * <p>
-     * phasesPlayDrawbackAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
         final Target tgt = sa.getTarget();
@@ -181,15 +156,4 @@ public class PhasesAi extends SpellAiLogic
         return false;
     }
 
-    /**
-     * <p>
-     * phasesStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
 }

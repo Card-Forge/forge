@@ -27,17 +27,6 @@ public class DebuffAi extends SpellAiLogic {
     // ***************************** Debuff ************************************
     // *************************************************************************
 
-    /**
-     * <p>
-     * debuffCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean canPlayAI(Player ai, final java.util.Map<String,String> params, SpellAbility sa) {
         // if there is no target and host card isn't in play, don't activate
@@ -107,17 +96,6 @@ public class DebuffAi extends SpellAiLogic {
         return true;
     }
 
-    /**
-     * <p>
-     * debuffDrawbackAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player ai) {
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
@@ -300,19 +278,6 @@ public class DebuffAi extends SpellAiLogic {
         return true;
     } // pumpMandatoryTarget()
 
-    /**
-     * <p>
-     * debuffTriggerAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         final List<String> kws = params.containsKey("Keywords") ? Arrays.asList(params.get("Keywords").split(" & ")) : new ArrayList<String>();
@@ -328,15 +293,4 @@ public class DebuffAi extends SpellAiLogic {
         return true;
     }
 
-    /**
-     * <p>
-     * debuffStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
 }

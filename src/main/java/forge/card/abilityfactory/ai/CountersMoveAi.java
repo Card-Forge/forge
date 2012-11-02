@@ -19,17 +19,6 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 public class CountersMoveAi extends SpellAiLogic { 
-    /**
-     * <p>
-     * moveCounterCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
@@ -61,20 +50,6 @@ public class CountersMoveAi extends SpellAiLogic {
         return ((r.nextFloat() < .6667) && chance);
     } // moveCounterCanPlayAI
 
-
-    /**
-     * <p>
-     * moveCounterDoTriggerAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean doTriggerAI(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         final Card host = sa.getSourceCard();

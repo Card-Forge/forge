@@ -26,17 +26,6 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 public class CountersPutAi extends SpellAiLogic { 
-    /**
-     * <p>
-     * putCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean canPlayAI(Player ai, java.util.Map<String,String> params, final SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
@@ -183,17 +172,6 @@ public class CountersPutAi extends SpellAiLogic {
         return true;
     } // putCanPlayAI
 
-    /**
-     * <p>
-     * putPlayDrawbackAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean chkAIDrawback(Map<String,String> params, final SpellAbility sa, Player ai) {
         boolean chance = true;
@@ -263,21 +241,6 @@ public class CountersPutAi extends SpellAiLogic {
         return chance;
     } // putPlayDrawbackAI
 
-
-
-    /**
-     * <p>
-     * putDoTriggerAINoCost.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         final Target abTgt = sa.getTarget();

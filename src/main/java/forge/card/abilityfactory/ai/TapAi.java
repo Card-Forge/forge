@@ -15,17 +15,6 @@ import forge.game.player.Player;
 import forge.util.MyRandom;
 
 public class TapAi extends TapAiBase {
-    /**
-     * <p>
-     * tapCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         final Target tgt = sa.getTarget();
@@ -74,20 +63,6 @@ public class TapAi extends TapAiBase {
         return randomReturn;
     }
 
-    /**
-     * <p>
-     * tapTrigger.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
-    
     @Override
     public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
 
@@ -114,17 +89,6 @@ public class TapAi extends TapAiBase {
         return false;
     }
 
-    /**
-     * <p>
-     * tapPlayDrawbackAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player ai) {
         final Target tgt = sa.getTarget();
@@ -145,14 +109,4 @@ public class TapAi extends TapAiBase {
         return randomReturn;
     }
 
-    /**
-     * <p>
-     * tapResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
 }

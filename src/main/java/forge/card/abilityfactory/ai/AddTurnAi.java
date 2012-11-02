@@ -79,17 +79,3 @@ public class AddTurnAi extends SpellAiLogic {
     }
 
 }
-    /**
-     * <p>
-     * addTurnResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-
-
-
-

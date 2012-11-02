@@ -21,18 +21,6 @@ import forge.util.MyRandom;
 
 public class MillAi extends SpellAiLogic {
 
-
-    /**
-     * <p>
-     * millCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         final Card source = sa.getSourceCard();
@@ -105,19 +93,6 @@ public class MillAi extends SpellAiLogic {
         return randomReturn;
     }
 
-    /**
-     * <p>
-     * millTargetAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     private boolean targetAI(final Player ai, final Map<String, String> params, final SpellAbility sa, final boolean mandatory) {
         final Target tgt = sa.getTarget();
         Player opp = ai.getOpponent();
@@ -161,17 +136,6 @@ public class MillAi extends SpellAiLogic {
         return true;
     }
 
-    /**
-     * <p>
-     * millDrawback.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean chkAIDrawback(Map<String,String> params, SpellAbility sa, Player aiPlayer) {
         return targetAI(aiPlayer, params, sa, true);

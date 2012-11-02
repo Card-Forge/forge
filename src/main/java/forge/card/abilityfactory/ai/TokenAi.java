@@ -63,17 +63,6 @@ public class TokenAi extends SpellAiLogic {
 
     }
 
-
-
-    /**
-     * <p>
-     * tokenCanPlayAI.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         final Cost cost = sa.getPayCosts();
@@ -183,17 +172,6 @@ public class TokenAi extends SpellAiLogic {
         return (r.nextFloat() < .8);
     }
 
-    /**
-     * <p>
-     * tokenDoTriggerAINoCost.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         readParameters(params);
@@ -222,5 +200,4 @@ public class TokenAi extends SpellAiLogic {
         return true;
     }
 
-    
 }

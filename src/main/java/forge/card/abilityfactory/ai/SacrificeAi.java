@@ -20,17 +20,6 @@ public class SacrificeAi extends SpellAiLogic {
     // *************************** Sacrifice ***********************
     // **************************************************************
 
-    /**
-     * <p>
-     * sacrificeCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         boolean chance = sacrificeTgtAI(ai, params, sa);
@@ -76,17 +65,6 @@ public class SacrificeAi extends SpellAiLogic {
         return chance;
     }
 
-    /**
-     * <p>
-     * sacrificePlayDrawbackAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player ai) {
         // AI should only activate this during Human's turn
@@ -102,19 +80,6 @@ public class SacrificeAi extends SpellAiLogic {
         return chance;
     }
 
-    /**
-     * <p>
-     * sacrificeTriggerAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         // AI should only activate this during Human's turn
@@ -135,17 +100,6 @@ public class SacrificeAi extends SpellAiLogic {
         return chance || mandatory;
     }
 
-    /**
-     * <p>
-     * sacrificeTgtAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     private boolean sacrificeTgtAI(final Player ai, final Map<String, String> params, final SpellAbility sa) {
 
         final Card card = sa.getSourceCard();
@@ -204,14 +158,4 @@ public class SacrificeAi extends SpellAiLogic {
         return true;
     }
 
-    /**
-     * <p>
-     * sacrificeResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
 }

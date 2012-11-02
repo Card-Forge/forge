@@ -25,15 +25,6 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
-/**
-     * <p>
-     * pumpPlayAI.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
 public class PumpAi extends PumpAiBase {
     
     /* (non-Javadoc)
@@ -177,21 +168,6 @@ public class PumpAi extends PumpAiBase {
         return true;
     } // pumpPlayAI()
 
-    /**
-     * <p>
-     * pumpTgtAI.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param defense
-     *            a int.
-     * @param attack
-     *            a int.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     private boolean pumpTgtAI(final Player ai, final SpellAbility sa, final Map<String, String> params, final int defense, final int attack, final boolean mandatory) {
         final List<String> keywords = params.containsKey("KW") ? Arrays.asList(params.get("KW").split(" & ")) : new ArrayList<String>();
         
@@ -295,19 +271,6 @@ public class PumpAi extends PumpAiBase {
         return true;
     } // pumpTgtAI()
 
-    /**
-     * <p>
-     * pumpMandatoryTarget.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     private boolean pumpMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
         List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         final Target tgt = sa.getTarget();
@@ -379,19 +342,6 @@ public class PumpAi extends PumpAiBase {
         return true;
     } // pumpMandatoryTarget()
 
-    /**
-     * <p>
-     * pumpTriggerAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getSourceCard();
@@ -435,15 +385,6 @@ public class PumpAi extends PumpAiBase {
         return true;
     } // pumpTriggerAI
 
-    /**
-     * <p>
-     * pumpDrawbackAI.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player ai) {
         

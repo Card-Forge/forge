@@ -46,17 +46,6 @@ public class FogAi extends SpellAiLogic {
         return CombatUtil.lifeInDanger(ai, Singletons.getModel().getGame().getCombat());
     }
 
-    /**
-     * <p>
-     * fogPlayDrawbackAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player ai) {
         // AI should only activate this during Human's turn
@@ -77,19 +66,6 @@ public class FogAi extends SpellAiLogic {
         return chance;
     }
 
-    /**
-     * <p>
-     * fogDoTriggerAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         boolean chance;

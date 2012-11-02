@@ -84,19 +84,6 @@ public class DestroyAllAi extends SpellAiLogic {
         return true;
     }
 
-    /**
-     * <p>
-     * destroyAllCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param noRegen
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean canPlayAI(final Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
@@ -171,16 +158,4 @@ public class DestroyAllAi extends SpellAiLogic {
         return chance;
     }
 
-    /**
-     * <p>
-     * destroyAllResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param noRegen
-     *            a boolean.
-     */
 }

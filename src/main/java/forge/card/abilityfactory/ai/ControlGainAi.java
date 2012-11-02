@@ -61,15 +61,6 @@ import forge.game.zone.ZoneType;
  * @version $Id: AbilityFactoryGainControl.java 17764 2012-10-29 11:04:18Z Sloth $
  */
 public class ControlGainAi extends SpellAiLogic {
-    /**
-     * <p>
-     * gainControlTgtAI.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean canPlayAI(Player ai, java.util.Map<String,String> params, final SpellAbility sa) {
         boolean hasCreature = false;
@@ -171,17 +162,6 @@ public class ControlGainAi extends SpellAiLogic {
 
     }
 
-    /**
-     * <p>
-     * gainControlTriggerAI.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         if (sa.getTarget() == null) {
@@ -195,15 +175,6 @@ public class ControlGainAi extends SpellAiLogic {
         return true;
     }
 
-    /**
-     * <p>
-     * gainControlDrawbackAI.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, final Player ai) {
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {

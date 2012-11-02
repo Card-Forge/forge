@@ -57,17 +57,6 @@ public class CountersProliferateAi extends SpellAiLogic {
         return chance;
     }
 
-    /**
-     * <p>
-     * proliferateDoTriggerAI.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean doTriggerAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         boolean chance = true;

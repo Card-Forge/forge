@@ -14,18 +14,6 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 
-/**
-     * <p>
-     * drainManaCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
-
 public class DrainManaAi extends SpellAiLogic {
     
     @Override
@@ -60,19 +48,6 @@ public class DrainManaAi extends SpellAiLogic {
         return randomReturn;
     }
 
-    /**
-     * <p>
-     * drainManaTrigger.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean doTriggerAI(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         if (!ComputerUtil.canPayCost(sa, ai)) {
@@ -103,17 +78,6 @@ public class DrainManaAi extends SpellAiLogic {
         return true;
     }
 
-    /**
-     * <p>
-     * drainManaPlayDrawbackAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean chkAIDrawback(Map<String,String> params, SpellAbility sa, Player ai) {
         // AI cannot use this properly until he can use SAs during Humans turn

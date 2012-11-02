@@ -17,17 +17,6 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 public class DebuffAllAi extends SpellAiLogic {
-    /**
-     * <p>
-     * debuffAllCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         String valid = "";
@@ -70,19 +59,6 @@ public class DebuffAllAi extends SpellAiLogic {
         return (r.nextFloat() < .6667) && chance;
     } // debuffAllCanPlayAI()
 
-    /**
-     * <p>
-     * debuffAllTriggerAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         return true;
@@ -104,16 +80,4 @@ public class DebuffAllAi extends SpellAiLogic {
         return true;
     }
 
-    /**
-     * <p>
-     * debuffAllStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
-    
 }

@@ -21,17 +21,6 @@ import forge.util.MyRandom;
 
 public class DiscardAi extends SpellAiLogic {
 
-    /**
-     * <p>
-     * discardCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean canPlayAI(Player ai, Map<String,String> params, SpellAbility sa) {
         final Target tgt = sa.getTarget();
@@ -119,17 +108,6 @@ public class DiscardAi extends SpellAiLogic {
         return randomReturn;
     } // discardCanPlayAI()
 
-    /**
-     * <p>
-     * discardTargetAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     private boolean discardTargetAI(final Player ai, final SpellAbility sa) {
         final Target tgt = sa.getTarget();
         Player opp = ai.getOpponent();
@@ -147,19 +125,6 @@ public class DiscardAi extends SpellAiLogic {
 
 
 
-    /**
-     * <p>
-     * discardTriggerNoCost.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean doTriggerAINoCost(Player ai, Map<String,String> params, SpellAbility sa, boolean mandatory) {
         final Target tgt = sa.getTarget();
@@ -179,17 +144,6 @@ public class DiscardAi extends SpellAiLogic {
         return true;
     } // discardTrigger()
 
-    /**
-     * <p>
-     * discardCheckDrawbackAI.
-     * </p>
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param subAb
-     *            a {@link forge.card.spellability.AbilitySub} object.
-     * 
-     * @return a boolean.
-     */
     @Override
     public boolean chkAIDrawback(Map<String,String> params, SpellAbility sa, Player ai) {
         // Drawback AI improvements

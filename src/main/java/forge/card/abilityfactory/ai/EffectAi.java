@@ -22,17 +22,6 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 public class EffectAi extends SpellAiLogic {
-    /**
-     * <p>
-     * effectCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         final GameState game = Singletons.getModel().getGame();
@@ -136,19 +125,6 @@ public class EffectAi extends SpellAiLogic {
         return randomReturn;
     }
 
-    /**
-     * <p>
-     * effectDoTriggerAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         // TODO: Add targeting effects

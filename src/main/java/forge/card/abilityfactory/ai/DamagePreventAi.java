@@ -22,17 +22,6 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class DamagePreventAi extends SpellAiLogic {
-    /**
-     * <p>
-     * preventDamageCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-    */
     @Override
     public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
         return true;
@@ -167,19 +156,6 @@ public class DamagePreventAi extends SpellAiLogic {
         return chance;
     }
 
-    /**
-     * <p>
-     * preventDamageDoTriggerAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         boolean chance = false;
@@ -251,7 +227,5 @@ public class DamagePreventAi extends SpellAiLogic {
         tgt.addTarget(CardFactoryUtil.getCheapestPermanentAI(targetables, sa, true));
         return true;
     }
-
- 
 
 }

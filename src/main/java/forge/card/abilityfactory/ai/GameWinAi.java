@@ -32,19 +32,6 @@ public class GameWinAi extends SpellAiLogic {
         return true;
     }
 
-    /**
-     * <p>
-     * winsGameDoTriggerAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
 
@@ -58,15 +45,4 @@ public class GameWinAi extends SpellAiLogic {
         return true;
     }
 
-    /**
-     * <p>
-     * winsGameResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-    
 }

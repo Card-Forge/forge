@@ -42,17 +42,6 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-/**
-     * <p>
-     * drawCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
 public class DrawAi extends SpellAiLogic {    
   
     /* (non-Javadoc)
@@ -143,19 +132,6 @@ public class DrawAi extends SpellAiLogic {
         return randomReturn;
     }
 
-    /**
-     * <p>
-     * drawTargetAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     private boolean targetAI(final Player ai, final Map<String, String> params, final SpellAbility sa, final boolean mandatory) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
@@ -280,19 +256,6 @@ public class DrawAi extends SpellAiLogic {
     } // drawTargetAI()
 
 
-    /**
-     * <p>
-     * drawTriggerNoCost.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         if (!targetAI(ai, params, sa, mandatory)) {

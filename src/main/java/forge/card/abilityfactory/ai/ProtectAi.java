@@ -109,17 +109,6 @@ public class ProtectAi extends SpellAiLogic {
         return list;
     } // getProtectCreatures()
 
-    /**
-     * <p>
-     * protectCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         final Card hostCard = sa.getAbilityFactory().getHostCard();
@@ -181,19 +170,6 @@ public class ProtectAi extends SpellAiLogic {
         return false;
     } // protectPlayAI()
 
-    /**
-     * <p>
-     * protectTgtAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     private boolean protectTgtAI(final Player ai, final Map<String, String> params,  final SpellAbility sa, final boolean mandatory) {
         if (!mandatory && Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
             return false;
@@ -272,19 +248,6 @@ public class ProtectAi extends SpellAiLogic {
         return true;
     } // protectTgtAI()
 
-    /**
-     * <p>
-     * protectMandatoryTarget.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     private static boolean protectMandatoryTarget(final Player ai, final Map<String, String> params, final SpellAbility sa, final boolean mandatory) {
 
 
@@ -378,19 +341,6 @@ public class ProtectAi extends SpellAiLogic {
         return true;
     } // protectMandatoryTarget()
 
-    /**
-     * <p>
-     * protectTriggerAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         if (sa.getTarget() == null) {
@@ -404,17 +354,6 @@ public class ProtectAi extends SpellAiLogic {
         return true;
     } // protectTriggerAI
 
-    /**
-     * <p>
-     * protectDrawbackAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean chkAIDrawback(Map<String,String> params, SpellAbility sa, Player ai) {
         final Card host = sa.getAbilityFactory().getHostCard();

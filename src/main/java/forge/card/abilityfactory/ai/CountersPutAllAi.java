@@ -23,17 +23,6 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 public class CountersPutAllAi extends SpellAiLogic { 
-    /**
-     * <p>
-     * putAllCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override 
     public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
@@ -146,17 +135,6 @@ public class CountersPutAllAi extends SpellAiLogic {
         return ((r.nextFloat() < .6667) && chance);
     }
 
-    /**
-     * <p>
-     * putAllPlayDrawbackAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player ai) {
         return canPlayAI(ai, params, sa);
