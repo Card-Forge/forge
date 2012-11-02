@@ -36,7 +36,6 @@ public class QuestUtilUnlockSets {
         if (qData.getFormat() == null || qData.getFormat().getExcludedSetCodes().isEmpty()) {
             return null;
         }
-
         List<CardEdition> choices = unlockableSets(qData);
 
         if (choices == null || choices.size() < 1) {
@@ -102,7 +101,6 @@ public class QuestUtilUnlockSets {
         JOptionPane.showMessageDialog(null, "You have successfully unlocked " + chooseEd.getName() + "!",
                 chooseEd.getName() + " unlocked!",
                 JOptionPane.PLAIN_MESSAGE);
-
         return chooseEd;
     }
 
@@ -249,6 +247,8 @@ public class QuestUtilUnlockSets {
         final CardListViewer cardView = new CardListViewer(unlockedSet.getName(),
                 "You get the following bonus cards:", displayCards);
         cardView.show();
+
+        qData.save();
 
     }
 }
