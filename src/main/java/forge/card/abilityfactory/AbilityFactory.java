@@ -507,30 +507,18 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("CopyPermanent")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryCopy.createAbilityCopyPermanent(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryCopy.createSpellCopyPermanent(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryCopy.createDrawbackCopyPermanent(this);
-            }
+            ai = new CopyPermanentAi();
+            se = new CopyPermanentEffect();
         }
 
         else if (this.api.equals("CopySpell")) {
-            if (this.isTargeted) { // Since all "CopySpell" ABs copy things on
-                                   // the
-                // Stack no need for it to be everywhere
+            if (this.isTargeted) { 
+                // Since all "CopySpell" ABs copy things on the Stack no need for it to be everywhere
                 this.abTgt.setZone(ZoneType.Stack);
             }
 
-            if (this.isAb) {
-                spellAbility = AbilityFactoryCopy.createAbilityCopySpell(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryCopy.createSpellCopySpell(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryCopy.createDrawbackCopySpell(this);
-            }
-
+            ai = new CanPlayAsDrawbackAi();
+            se = new CopySpellEffect();
             hostCard.setCopiesSpells(true);
         }
 
@@ -810,13 +798,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Repeat")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryRepeat.createAbilityRepeat(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryRepeat.createSpellRepeat(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryRepeat.createDrawbackRepeat(this);
-            }
+            ai = new RepeatAi();
+            se = new RepeatEffect();
         }
 
         else if (this.api.equals("Reveal")) {
