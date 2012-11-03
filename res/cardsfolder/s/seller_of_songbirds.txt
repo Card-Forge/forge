@@ -4,7 +4,7 @@ Types:Creature Human
 Text:no text
 PT:1/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigToken | TriggerDescription$ When CARDNAME enters the battlefield, put a 1/1 white Bird creature token with flying onto the battlefield.
-SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ W 1 1 Bird Flying | TokenOwner$ You | TokenAmount$ 1 | TokenName$ Bird | TokenTypes$ Creature,Bird | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenImage$ W 1 1 Bird Flying | TokenOwner$ You | TokenAmount$ 1 | TokenName$ Bird | TokenTypes$ Creature,Bird | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | TokenImage$ w 1 1 bird rtr
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seller_of_songbirds.jpg
 SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/22.jpg

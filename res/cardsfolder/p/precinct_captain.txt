@@ -5,7 +5,7 @@ Text:no text
 PT:2/2
 K:First Strike
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigToken | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, put a 1/1 white Soldier creature token onto the battlefield.
-SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ W 1 1 Soldier | TokenName$ Soldier | TokenColors$ White | TokenTypes$ Creature,Soldier | TokenPower$ 1 | TokenToughness$ 1 | TokenOwner$ You | TokenAmount$ 1
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenImage$ W 1 1 Soldier | TokenName$ Soldier | TokenColors$ White | TokenTypes$ Creature,Soldier | TokenPower$ 1 | TokenToughness$ 1 | TokenOwner$ You | TokenAmount$ 1 | TokenImage$ w 1 1 soldier rtr
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/precinct_captain.jpg
 SetInfo:RTR|Rare|http://magiccards.info/scans/en/rtr/17.jpg

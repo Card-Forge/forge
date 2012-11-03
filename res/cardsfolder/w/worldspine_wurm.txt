@@ -7,7 +7,7 @@ K:Trample
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, put three 5/5 green Wurm creature tokens with trample onto the battlefield.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Creature.Self  | Execute$ TrigShuffle | TriggerDescription$ When CARDNAME is put into a graveyard from anywhere, shuffle it into its owner's library.
 SVar:TrigShuffle:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Library | Shuffle$ True | Defined$ Self
-SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 3 | TokenName$ Wurm | TokenTypes$ Creature,Wurm | TokenOwner$ TriggeredCardController | TokenColors$ Green | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Trample
+SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 3 | TokenName$ Wurm | TokenTypes$ Creature,Wurm | TokenOwner$ TriggeredCardController | TokenColors$ Green | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Trample | TokenImage$ g 5 5 wurm rtr
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/worldspine_wurm.jpg
 SetInfo:RTR|Mythic|http://magiccards.info/scans/en/rtr/140.jpg

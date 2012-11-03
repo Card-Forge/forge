@@ -2,7 +2,7 @@ Name:Coursers' Accord
 ManaCost:4 G W
 Types:Sorcery
 Text:no text
-A:SP$ Token | Cost$ 4 G W | TokenAmount$ 1 | TokenName$ Centaur | TokenTypes$ Creature,Centaur | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | SubAbility$ DBChoose | SpellDescription$ Put a 3/3 green Centaur creature token onto the battlefield, then populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
+A:SP$ Token | Cost$ 4 G W | TokenAmount$ 1 | TokenName$ Centaur | TokenTypes$ Creature,Centaur | TokenOwner$ You | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3 | TokenImage$ g 3 3 centaur rtr | SubAbility$ DBChoose | SpellDescription$ Put a 3/3 green Centaur creature token onto the battlefield, then populate. (Put a token onto the battlefield that's a copy of a creature token you control.)
 SVar:DBChoose:DB$ ChooseCard | Cost$ 0 | Defined$ You | Amount$ 1 | Choices$ Creature.token+YouCtrl | SubAbility$ DBCopy | RememberChosen$ True
 SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
