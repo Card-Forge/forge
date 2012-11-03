@@ -24,12 +24,6 @@ public class FlipCoinEffect extends SpellEffect {
 
         final StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(sa.getSourceCard()).append(" - ");
-        } else {
-            sb.append(" ");
-        }
-
         sb.append(player).append(" flips a coin.");
         return sb.toString();
     }

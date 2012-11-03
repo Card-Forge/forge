@@ -1,6 +1,5 @@
 package forge.card.abilityfactory.effects;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +9,6 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -21,17 +19,11 @@ public class TapAllEffect extends SpellEffect {
      */
     @Override
     protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
-        final StringBuilder sb = new StringBuilder();
-    
         if (sa instanceof AbilitySub) {
-            sb.append(" ");
-            sb.append("Tap all valid cards.");
+            return "Tap all valid cards.";
         } else {
-            sb.append(sa.getSourceCard()).append(" - ");
-            sb.append(params.get("SpellDescription"));
+            return params.get("SpellDescription");
         }
-    
-        return sb.toString();
     }
 
     @Override
@@ -44,15 +36,7 @@ public class TapAllEffect extends SpellEffect {
     
         List<Card> cards = null;
     
-        ArrayList<Player> tgtPlayers = null;
-    
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else if (params.containsKey("Defined")) {
-            // use it
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
+        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
     
         if ((tgtPlayers == null) || tgtPlayers.isEmpty()) {
             cards = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);

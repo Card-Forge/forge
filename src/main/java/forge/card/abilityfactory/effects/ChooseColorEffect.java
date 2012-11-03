@@ -8,10 +8,8 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.Constant;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -24,22 +22,7 @@ public class ChooseColorEffect extends SpellEffect {
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(sa.getSourceCard()).append(" - ");
-        } else {
-            sb.append(" ");
-        }
-    
-        ArrayList<Player> tgtPlayers;
-    
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
-    
-        for (final Player p : tgtPlayers) {
+        for (final Player p : getTargetPlayers(sa, params)) {
             sb.append(p).append(" ");
         }
         sb.append("chooses a color");
@@ -55,14 +38,9 @@ public class ChooseColorEffect extends SpellEffect {
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         final Card card = sa.getSourceCard();
 
-        ArrayList<Player> tgtPlayers;
+        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
 
         final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {

@@ -1,10 +1,9 @@
 package forge.card.abilityfactory.effects;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -15,20 +14,7 @@ public class ScryEffect extends SpellEffect {
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(sa.getSourceCard().getName()).append(" - ");
-        } else {
-            sb.append(" ");
-        }
-
-        ArrayList<Player> tgtPlayers;
-
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
+        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
 
         for (final Player p : tgtPlayers) {
             sb.append(p.toString()).append(" ");
@@ -51,14 +37,8 @@ public class ScryEffect extends SpellEffect {
             num = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("ScryNum"), sa);
         }
     
-        ArrayList<Player> tgtPlayers;
-    
         final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
+        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
     
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {

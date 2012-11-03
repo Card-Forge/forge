@@ -8,34 +8,21 @@ import java.util.List;
 import forge.Card;
 import forge.Command;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 
 public class DebuffEffect extends SpellEffect {
     
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
-        final Card host = sa.getAbilityFactory().getHostCard();
         final List<String> kws = params.containsKey("Keywords") ? Arrays.asList(params.get("Keywords").split(" & ")) : new ArrayList<String>();
         final StringBuilder sb = new StringBuilder();
     
-        ArrayList<Card> tgtCards;
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
-        }
+        final List<Card> tgtCards = getTargetCards(sa, params);
+
     
         if (tgtCards.size() > 0) {
-            if (sa instanceof AbilitySub) {
-                sb.append(" ");
-            } else {
-                sb.append(host).append(" - ");
-            }
+
     
             final Iterator<Card> it = tgtCards.iterator();
             while (it.hasNext()) {
@@ -68,19 +55,9 @@ public class DebuffEffect extends SpellEffect {
 
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
-        final Card host = sa.getAbilityFactory().getHostCard();
-
         final List<String> kws = params.containsKey("Keywords") ? Arrays.asList(params.get("Keywords").split(" & ")) : new ArrayList<String>();
 
-        ArrayList<Card> tgtCards;
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa);
-        }
-
-        for (final Card tgtC : tgtCards) {
+        for (final Card tgtC : getTargetCards(sa, params)) {
             final ArrayList<String> hadIntrinsic = new ArrayList<String>();
             if (tgtC.isInPlay() && tgtC.canBeTargetedBy(sa)) {
                 for (final String kw : kws) {

@@ -2,16 +2,15 @@ package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
 import forge.CardUtil;
 import forge.Constant;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -24,23 +23,8 @@ public class ChooseTypeEffect extends SpellEffect {
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(sa.getSourceCard()).append(" - ");
-        } else {
-            sb.append(" ");
-        }
-        
-        ArrayList<Player> tgtPlayers;
-        
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
-        
-        for (final Player p : tgtPlayers) {
+
+        for (final Player p : getTargetPlayers(sa, params)) {
             sb.append(p).append(" ");
         }
         sb.append("chooses a type.");
@@ -56,15 +40,9 @@ public class ChooseTypeEffect extends SpellEffect {
         if (params.containsKey("InvalidTypes")) {
             invalidTypes.addAll(Arrays.asList(params.get("InvalidTypes").split(",")));
         }
-        
-        ArrayList<Player> tgtPlayers;
-        
+
         final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
+        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
         
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {

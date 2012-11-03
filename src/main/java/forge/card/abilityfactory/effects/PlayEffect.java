@@ -1,9 +1,10 @@
 package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
 
@@ -18,11 +19,9 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostMana;
 import forge.card.cost.CostPart;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
-import forge.card.spellability.Target;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -33,32 +32,14 @@ public class PlayEffect extends SpellEffect {
     @Override
     protected String getStackDescription(Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-    
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(sa.getSourceCard().getName()).append(" - ");
-        } else {
-            sb.append(" ");
-        }
+
         sb.append("Play ");
-        ArrayList<Card> tgtCards;
-    
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
-        }
+        final List<Card> tgtCards = getTargetCards(sa, params); 
     
         if (params.containsKey("Valid")) {
             sb.append("cards");
         } else {
-            final Iterator<Card> it = tgtCards.iterator();
-            while (it.hasNext()) {
-                sb.append(it.next());
-                if (it.hasNext()) {
-                    sb.append(", ");
-                }
-            }
+            sb.append(StringUtils.join(tgtCards, ", "));
         }
         if (params.containsKey("WithoutManaCost")) {
             sb.append(" without paying the mana cost");
@@ -86,7 +67,6 @@ public class PlayEffect extends SpellEffect {
         final Player controller = activator;
         List<Card> tgtCards = new ArrayList<Card>();
 
-        final Target tgt = sa.getTarget();
         if (params.containsKey("Valid")) {
             ZoneType zone = ZoneType.Hand;
             if (params.containsKey("ValidZone")) {
@@ -94,11 +74,8 @@ public class PlayEffect extends SpellEffect {
             }
             tgtCards = Singletons.getModel().getGame().getCardsIn(zone);
             tgtCards = AbilityFactory.filterListByType(tgtCards, params.get("Valid"), sa);
-        } else if (params.containsKey("Defined")) {
-            tgtCards = new ArrayList<Card>(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa));
-        } else if (tgt != null) {
-            tgtCards = new ArrayList<Card>(tgt.getTargetCards());
-        }
+        } else 
+            tgtCards = getTargetCards(sa, params);
 
         if (tgtCards.isEmpty()) {
             return;

@@ -1,8 +1,8 @@
 package forge.card.abilityfactory.effects;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
@@ -22,32 +22,11 @@ public class ChooseGenericEffect extends SpellEffect {
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(sa.getSourceCard()).append(" - ");
-        } else {
-            sb.append(" ");
+        for (final Player p : getTargetPlayers(sa, params)) {
+            sb.append(p).append(" ");
         }
-    
-        if (params.containsKey("StackDescription")) {
-            sb.append(params.get("StackDescription"));
-        }
-        else {
-            ArrayList<Player> tgtPlayers;
-    
-            final Target tgt = sa.getTarget();
-            if (tgt != null) {
-                tgtPlayers = tgt.getTargetPlayers();
-            } else {
-                tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-            }
-    
-            for (final Player p : tgtPlayers) {
-                sb.append(p).append(" ");
-            }
-            sb.append("chooses from a list.");
-        }
+        sb.append("chooses from a list.");
 
-    
         return sb.toString();
     }
 
@@ -60,14 +39,9 @@ public class ChooseGenericEffect extends SpellEffect {
             choices.put(s, theseParams.get("ChoiceDescription"));
         }
 
-        ArrayList<Player> tgtPlayers;
+        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
 
         final Target tgt = sa.getTarget();
-        if (!params.containsKey("Defined")) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
 
         for (final Player p : tgtPlayers) {
             if (tgt != null && !p.canBeTargetedBy(sa)) {

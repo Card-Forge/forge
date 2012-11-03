@@ -1,12 +1,12 @@
 package forge.card.abilityfactory.effects;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 
@@ -16,29 +16,10 @@ public class RemoveFromCombatEffect extends SpellEffect {
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
-        } else {
-            sb.append(sa.getSourceCard()).append(" - ");
-        }
-    
-        // end standard pre-
-    
-        ArrayList<Card> tgtCards;
-    
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
-        }
+        final List<Card> tgtCards = getTargetCards(sa, params);
     
         sb.append("Remove ");
-    
-        for (final Card c : tgtCards) {
-            sb.append(c);
-        }
-    
+        sb.append(StringUtils.join(tgtCards, ", "));
         sb.append(" from combat.");
     
         return sb.toString();
@@ -47,16 +28,8 @@ public class RemoveFromCombatEffect extends SpellEffect {
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
 
-        ArrayList<Card> tgtCards;
-
         final Target tgt = sa.getTarget();
-        if ((tgt != null) && !params.containsKey("Defined")) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
-        }
-
-        for (final Card c : tgtCards) {
+        for (final Card c : getTargetCards(sa, params)) {
             if ((tgt == null) || c.canBeTargetedBy(sa)) {
                 Singletons.getModel().getGame().getCombat().removeFromCombat(c);
             }

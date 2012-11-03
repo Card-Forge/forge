@@ -8,7 +8,6 @@ import forge.CardLists;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -112,14 +111,7 @@ public class SetStateAllEffect extends SpellEffect {
 
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
-        final Card host = sa.getAbilityFactory().getHostCard();
         final StringBuilder sb = new StringBuilder();
-
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
-        } else {
-            sb.append(host).append(" - ");
-        }
 
         if (params.containsKey("Mode")) {
             sb.append(params.get("Mode"));

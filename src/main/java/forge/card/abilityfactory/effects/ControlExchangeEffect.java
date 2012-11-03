@@ -6,7 +6,6 @@ import java.util.Map;
 import forge.Card;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -19,7 +18,6 @@ public class ControlExchangeEffect extends SpellEffect {
      */
     @Override
     protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
-        final StringBuilder sb = new StringBuilder();
         Card object1 = null;
         Card object2 = null;
         final Target tgt = sa.getTarget();
@@ -32,15 +30,8 @@ public class ControlExchangeEffect extends SpellEffect {
         } else if (tgts.size() > 1) {
             object2 = tgts.get(1);
         }
-    
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
-        } else {
-            sb.append(sa.getSourceCard()).append(" - ");
-        }
-    
-        sb.append(object1 + " exchanges controller with " + object2);
-        return sb.toString();
+
+        return object1 + " exchanges controller with " + object2;
     }
 
     /* (non-Javadoc)

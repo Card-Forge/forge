@@ -8,7 +8,6 @@ import forge.CardLists;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -39,27 +38,20 @@ public class DamageAllEffect extends SpellEffect {
         final String damage = params.get("NumDmg");
         final int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa); 
     
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(sa.getSourceCard().getName()).append(" -");
-        }
-        sb.append(" ");
+
     
-        if (params.containsKey("StackDescription")) {
-            sb.append(params.get("StackDescription"));
+        final ArrayList<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("DamageSource"), sa);
+        final Card source = definedSources.get(0);
+
+        if (source != sa.getSourceCard()) {
+            sb.append(source.toString()).append(" deals");
         } else {
-            final ArrayList<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("DamageSource"), sa);
-            final Card source = definedSources.get(0);
-    
-            if (source != sa.getSourceCard()) {
-                sb.append(source.toString()).append(" deals");
-            } else {
-                sb.append("Deals");
-            }
-    
-            sb.append(" ").append(dmg).append(" damage to ").append(desc);
+            sb.append("Deals");
         }
 
-        return sb.toString();
+        sb.append(" ").append(dmg).append(" damage to ").append(desc);
+
+            return sb.toString();
     }
 
     /**

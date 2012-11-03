@@ -8,7 +8,6 @@ import forge.Counters;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -18,13 +17,7 @@ public class CountersRemoveAllEffect extends SpellEffect {
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-    
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(sa.getSourceCard()).append(" - ");
-        } else {
-            sb.append(" ");
-        }
-    
+
         final Counters cType = Counters.valueOf(params.get("CounterType"));
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
         final String zone = params.containsKey("ValidZone") ? params.get("ValidZone") : "Battlefield";

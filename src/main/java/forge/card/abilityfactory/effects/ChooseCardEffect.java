@@ -8,10 +8,8 @@ import forge.CardLists;
 import forge.CardUtil;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
-import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -22,23 +20,8 @@ public class ChooseCardEffect extends SpellEffect {
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-    
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
-        } else {
-            sb.append(sa.getSourceCard()).append(" - ");
-        }
-    
-        ArrayList<Player> tgtPlayers;
-    
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
-    
-        for (final Player p : tgtPlayers) {
+
+        for (final Player p : getTargetPlayers(sa, params)) {
             sb.append(p).append(" ");
         }
         sb.append("chooses a card.");
@@ -51,14 +34,9 @@ public class ChooseCardEffect extends SpellEffect {
         final Card host = sa.getSourceCard();
         final ArrayList<Card> chosen = new ArrayList<Card>();
 
-        ArrayList<Player> tgtPlayers;
-
         final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
+        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+
         ZoneType choiceZone = ZoneType.Battlefield;
         if (params.containsKey("ChoiceZone")) {
             choiceZone = ZoneType.smartValueOf(params.get("ChoiceZone"));

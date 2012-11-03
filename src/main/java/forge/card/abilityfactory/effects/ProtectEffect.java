@@ -15,7 +15,6 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -29,7 +28,6 @@ public class ProtectEffect extends SpellEffect {
          */
     @Override
     protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
-        final Card host = sa.getAbilityFactory().getHostCard();
 
         final ArrayList<String> gains = AbilityFactory.getProtectionList(params);
         final boolean choose = (params.containsKey("Choices")) ? true : false;
@@ -37,21 +35,10 @@ public class ProtectEffect extends SpellEffect {
 
         final StringBuilder sb = new StringBuilder();
 
-        ArrayList<Card> tgtCards;
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
-        }
+        List<Card> tgtCards = getTargetCards(sa, params);
+
 
         if (tgtCards.size() > 0) {
-
-            if (sa instanceof AbilitySub) {
-                sb.append(" ");
-            } else {
-                sb.append(host).append(" - ");
-            }
 
             final Iterator<Card> it = tgtCards.iterator();
             while (it.hasNext()) {
@@ -152,14 +139,9 @@ public class ProtectEffect extends SpellEffect {
             }
         }
 
-        ArrayList<Card> tgtCards;
+        final List<Card> tgtCards = getTargetCards(sa, params);
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
         final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa);
-        }
 
         if (params.containsKey("Radiance") && (tgt != null)) {
             for (final Card c : CardUtil.getRadiance(host, tgtCards.get(0),
@@ -168,10 +150,8 @@ public class ProtectEffect extends SpellEffect {
             }
         }
 
-        final int size = tgtCards.size();
-        for (int j = 0; j < size; j++) {
-            final Card tgtC = tgtCards.get(j);
 
+        for (final Card tgtC : tgtCards) {
             // only pump things in play
             if (!tgtC.isInPlay()) {
                 continue;

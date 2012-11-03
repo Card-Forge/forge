@@ -1,42 +1,25 @@
 package forge.card.abilityfactory.effects;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import forge.Card;
 import forge.CardCharacteristicName;
-import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 
 public class SetStateEffect extends SpellEffect {
     
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        final Card host = sa.getAbilityFactory().getHostCard();
 
         final String conditionDesc = params.get("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
 
-        ArrayList<Card> tgtCards;
-
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
-        }
-
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
-        } else {
-            sb.append(host).append(" - ");
-        }
+        final List<Card> tgtCards = getTargetCards(sa, params); 
 
         if (params.containsKey("Flip")) {
             sb.append("Flip");
@@ -63,14 +46,9 @@ public class SetStateEffect extends SpellEffect {
 
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
-        ArrayList<Card> tgtCards;
-        final Card host = sa.getAbilityFactory().getHostCard(); 
 
-        if (sa.getTarget() != null) {
-            tgtCards = sa.getTarget().getTargetCards();
-        } else {
-            tgtCards = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa);
-        }
+        final Card host = sa.getAbilityFactory().getHostCard(); 
+        final List<Card> tgtCards = getTargetCards(sa, params); 
 
         final boolean remChanged = params.containsKey("RememberChanged");
 

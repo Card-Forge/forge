@@ -33,25 +33,7 @@ public class RepeatEffect extends SpellEffect {
     
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
-        final StringBuilder sb = new StringBuilder();
-        final Card host = sa.getSourceCard();
-
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(host.getName()).append(" -");
-        }
-
-        sb.append(" ");
-
-        if (params.containsKey("StackDescription")) {
-            final String desc = params.get("StackDescription");
-            if (!desc.equals("None")) {
-                sb.append(params.get("StackDescription"));
-            }
-        } else {
-            sb.append("Repeat something. Somebody should really write a better StackDescription!");
-        }
-
-        return sb.toString();
+        return "Repeat something. Somebody should really write a better StackDescription!";
     } // end repeatStackDescription()
 
     /**

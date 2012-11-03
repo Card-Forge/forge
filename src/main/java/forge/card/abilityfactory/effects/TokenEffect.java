@@ -27,7 +27,6 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
@@ -113,37 +112,26 @@ public class TokenEffect extends SpellEffect {
         final Card host = sa.getSourceCard();
 
         readParameters(params);
-        
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
+
+        final int finalPower = AbilityFactory.calculateAmount(host, this.tokenPower, sa);
+        final int finalToughness = AbilityFactory.calculateAmount(host, this.tokenToughness, sa);
+        final int finalAmount = AbilityFactory.calculateAmount(host, this.tokenAmount, sa);
+
+        final String substitutedName = this.tokenName.equals("ChosenType") ? host.getChosenType() : this.tokenName;
+
+        sb.append("Put (").append(finalAmount).append(") ").append(finalPower).append("/").append(finalToughness);
+        sb.append(" ").append(substitutedName).append(" token");
+        if (finalAmount != 1) {
+            sb.append("s");
+        }
+        sb.append(" onto the battlefield");
+
+        if (this.tokenOwner.equals("Opponent")) {
+            sb.append(" under your opponent's control.");
         } else {
-            sb.append(host.getName()).append(" - ");
+            sb.append(".");
         }
 
-        if (params.containsKey("StackDescription")) {
-            sb.append(params.get("StackDescription"));
-        }
-        else {
-
-            final int finalPower = AbilityFactory.calculateAmount(host, this.tokenPower, sa);
-            final int finalToughness = AbilityFactory.calculateAmount(host, this.tokenToughness, sa);
-            final int finalAmount = AbilityFactory.calculateAmount(host, this.tokenAmount, sa);
-
-            final String substitutedName = this.tokenName.equals("ChosenType") ? host.getChosenType() : this.tokenName;
-
-            sb.append("Put (").append(finalAmount).append(") ").append(finalPower).append("/").append(finalToughness);
-            sb.append(" ").append(substitutedName).append(" token");
-            if (finalAmount != 1) {
-                sb.append("s");
-            }
-            sb.append(" onto the battlefield");
-
-            if (this.tokenOwner.equals("Opponent")) {
-                sb.append(" under your opponent's control.");
-            } else {
-                sb.append(".");
-            }
-        }
         return sb.toString();
     }
 

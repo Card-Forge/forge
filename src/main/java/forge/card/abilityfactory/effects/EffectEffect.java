@@ -9,7 +9,6 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementHandler;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
@@ -20,17 +19,7 @@ public class EffectEffect extends SpellEffect {
 
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
-        final StringBuilder sb = new StringBuilder();
-    
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
-        } else {
-            sb.append(sa.getSourceCard().getName()).append(" - ");
-        }
-    
-        sb.append(sa.getDescription());
-    
-        return sb.toString();
+        return sa.getDescription();
     }
 
     /**

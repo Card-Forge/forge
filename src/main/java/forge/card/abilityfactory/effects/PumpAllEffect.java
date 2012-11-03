@@ -11,7 +11,6 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -21,17 +20,11 @@ public class PumpAllEffect extends SpellEffect {
         final StringBuilder sb = new StringBuilder();
 
         String desc = "";
-        if (params.containsKey("SpellDescription")) {
-            desc = params.get("SpellDescription");
-        } else if (params.containsKey("PumpAllDescription")) {
+        if (params.containsKey("PumpAllDescription")) {
             desc = params.get("PumpAllDescription");
         }
 
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(sa.getSourceCard()).append(" - ");
-        } else {
-            sb.append(" ");
-        }
+
         sb.append(desc);
 
         final AbilitySub abSub = sa.getSubAbility();
@@ -45,16 +38,9 @@ public class PumpAllEffect extends SpellEffect {
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         List<Card> list;
-        ArrayList<Player> tgtPlayers = null;
+        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
         final ArrayList<ZoneType> affectedZones = new ArrayList<ZoneType>();
     
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else if (params.containsKey("Defined")) {
-            // use it
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
     
         if (params.containsKey("PumpZone")) {
             for (final String zone : params.get("PumpZone").split(",")) {
@@ -87,13 +73,12 @@ public class PumpAllEffect extends SpellEffect {
         final int a = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumAtt"), sa); 
         final int d = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumDef"), sa); 
     
-        for (final Card c : list) {
-            final Card tgtC = c;
+        for (final Card tgtC : list) {
     
             // only pump things in the affected zones.
             boolean found = false;
             for (final ZoneType z : affectedZones) {
-                if (c.isInZone(z)) {
+                if (tgtC.isInZone(z)) {
                     found = true;
                     break;
                 }

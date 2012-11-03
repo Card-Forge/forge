@@ -2,13 +2,13 @@ package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import forge.Card;
 import forge.CardUtil;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 
@@ -24,66 +24,53 @@ public class DamageDealEffect extends SpellEffect {
         final String damage = params.get("NumDmg");
         final int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa); 
 
-        ArrayList<Object> tgts;
-        if (sa.getTarget() == null) {
-            tgts = AbilityFactory.getDefinedObjects(sa.getSourceCard(), params.get("Defined"), sa);
-        } else {
-            tgts = sa.getTarget().getTargets();
-        }
-    
+
+        List<Object> tgts = getTargetObjects(sa, params);
         if (tgts.size() > 0) {
-            if (!(sa instanceof AbilitySub)) {
-                sb.append(sa.getSourceCard().getName()).append(" -");
+
+            final String conditionDesc = params.get("ConditionDescription");
+            if (conditionDesc != null) {
+                sb.append(conditionDesc).append(" ");
             }
-            sb.append(" ");
-    
-            if (params.containsKey("StackDescription")) {
-                sb.append(params.get("StackDescription"));
+
+            final ArrayList<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("DamageSource"), sa);
+            final Card source = definedSources.get(0);
+
+            if (source != sa.getSourceCard()) {
+                sb.append(source.toString()).append(" deals");
+            } else {
+                sb.append("Deals");
             }
-            else {
-                final String conditionDesc = params.get("ConditionDescription");
-                if (conditionDesc != null) {
-                    sb.append(conditionDesc).append(" ");
+
+            sb.append(" ").append(dmg).append(" damage ");
+            
+            if (params.containsKey("DivideEvenly")) {
+                sb.append("divided evenly (rounded down) ");
+            }
+            
+            sb.append("to");
+
+            for (int i = 0; i < tgts.size(); i++) {
+                sb.append(" ");
+
+                final Object o = tgts.get(i);
+                if ((o instanceof Card) || (o instanceof Player)) {
+                    sb.append(o.toString());
                 }
-    
-                final ArrayList<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("DamageSource"), sa);
-                final Card source = definedSources.get(0);
-    
-                if (source != sa.getSourceCard()) {
-                    sb.append(source.toString()).append(" deals");
+            }
+
+            if (params.containsKey("Radiance")) {
+                sb.append(" and each other ").append(params.get("ValidTgts"))
+                        .append(" that shares a color with ");
+                if (tgts.size() > 1) {
+                    sb.append("them");
                 } else {
-                    sb.append("Deals");
+                    sb.append("it");
                 }
-    
-                sb.append(" ").append(dmg).append(" damage ");
-                
-                if (params.containsKey("DivideEvenly")) {
-                    sb.append("divided evenly (rounded down) ");
-                }
-                
-                sb.append("to");
-    
-                for (int i = 0; i < tgts.size(); i++) {
-                    sb.append(" ");
-    
-                    final Object o = tgts.get(i);
-                    if ((o instanceof Card) || (o instanceof Player)) {
-                        sb.append(o.toString());
-                    }
-                }
-    
-                if (params.containsKey("Radiance")) {
-                    sb.append(" and each other ").append(params.get("ValidTgts"))
-                            .append(" that shares a color with ");
-                    if (tgts.size() > 1) {
-                        sb.append("them");
-                    } else {
-                        sb.append("it");
-                    }
-                }
-    
-                sb.append(". ");
             }
+
+            sb.append(". ");
+
         }
 
         return sb.toString();

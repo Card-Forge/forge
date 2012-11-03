@@ -8,13 +8,34 @@ import forge.Counters;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class CountersPutAllEffect extends SpellEffect  { 
+
+    @Override
+    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+        final StringBuilder sb = new StringBuilder();
+    
+        final Counters cType = Counters.valueOf(params.get("CounterType"));
+        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
+        final String zone = params.containsKey("ValidZone") ? params.get("ValidZone") : "Battlefield";
+    
+        sb.append("Put ").append(amount).append(" ").append(cType.getName()).append(" counter");
+        if (amount != 1) {
+            sb.append("s");
+        }
+        sb.append(" on each valid ");
+        if (zone.matches("Battlefield")) {
+            sb.append("permanent.");
+        } else {
+            sb.append("card in ").append(zone).append(".");
+        }
+    
+        return sb.toString();
+    }
 
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
@@ -40,34 +61,6 @@ public class CountersPutAllEffect extends SpellEffect  {
                 tgtCard.addCounterFromNonEffect(Counters.valueOf(type), counterAmount);
             }
         }
-    }
-
-    @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
-        final StringBuilder sb = new StringBuilder();
-    
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(sa.getSourceCard().getName()).append(" - ");
-        } else {
-            sb.append(" ");
-        }
-    
-        final Counters cType = Counters.valueOf(params.get("CounterType"));
-        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
-        final String zone = params.containsKey("ValidZone") ? params.get("ValidZone") : "Battlefield";
-    
-        sb.append("Put ").append(amount).append(" ").append(cType.getName()).append(" counter");
-        if (amount != 1) {
-            sb.append("s");
-        }
-        sb.append(" on each valid ");
-        if (zone.matches("Battlefield")) {
-            sb.append("permanent.");
-        } else {
-            sb.append("card in ").append(zone).append(".");
-        }
-
-        return sb.toString();
     }
 
 }

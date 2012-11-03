@@ -13,7 +13,6 @@ import forge.GameEntity;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -126,61 +125,46 @@ public class PumpEffect extends SpellEffect {
 
         if (tgts.size() > 0) {
 
-            if (sa instanceof AbilitySub) {
-                sb.append(" ");
-            } else {
-                sb.append(sa.getSourceCard()).append(" - ");
+            for (final GameEntity c : tgts) {
+                sb.append(c).append(" ");
             }
 
-            if (params.containsKey("StackDescription")) {
-                if (params.get("StackDescription").equals("None")) {
-                    sb.append("");
+            if (params.containsKey("Radiance")) {
+                sb.append(" and each other ").append(params.get("ValidTgts"))
+                        .append(" that shares a color with ");
+                if (tgts.size() > 1) {
+                    sb.append("them ");
                 } else {
-                sb.append(params.get("StackDescription"));
+                    sb.append("it ");
                 }
             }
 
-            else {
-                for (final GameEntity c : tgts) {
-                    sb.append(c).append(" ");
-                }
+            final List<String> keywords = params.containsKey("KW") ? Arrays.asList(params.get("KW").split(" & ")) : new ArrayList<String>();
+            final int atk = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumAtt"), sa); 
+            final int def = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumDef"), sa); 
 
-                if (params.containsKey("Radiance")) {
-                    sb.append(" and each other ").append(params.get("ValidTgts"))
-                            .append(" that shares a color with ");
-                    if (tgts.size() > 1) {
-                        sb.append("them ");
-                    } else {
-                        sb.append("it ");
-                    }
+            sb.append("gains ");
+            if ((atk != 0) || (def != 0)) {
+                if (atk >= 0) {
+                    sb.append("+");
                 }
-
-                final List<String> keywords = params.containsKey("KW") ? Arrays.asList(params.get("KW").split(" & ")) : new ArrayList<String>();
-                final int atk = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumAtt"), sa); 
-                final int def = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumDef"), sa); 
-
-                sb.append("gains ");
-                if ((atk != 0) || (def != 0)) {
-                    if (atk >= 0) {
-                        sb.append("+");
-                    }
-                    sb.append(atk);
-                    sb.append("/");
-                    if (def >= 0) {
-                       sb.append("+");
-                    }
-                    sb.append(def);
-                    sb.append(" ");
+                sb.append(atk);
+                sb.append("/");
+                if (def >= 0) {
+                   sb.append("+");
                 }
-
-                for (int i = 0; i < keywords.size(); i++) {
-                    sb.append(keywords.get(i)).append(" ");
-                }
-
-                if (!params.containsKey("Permanent")) {
-                    sb.append("until end of turn.");
-                }
+                sb.append(def);
+                sb.append(" ");
             }
+
+            for (int i = 0; i < keywords.size(); i++) {
+                sb.append(keywords.get(i)).append(" ");
+            }
+
+            if (!params.containsKey("Permanent")) {
+                sb.append("until end of turn.");
+            }
+
         }
 
         return sb.toString();

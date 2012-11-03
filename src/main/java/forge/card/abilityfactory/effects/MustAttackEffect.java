@@ -1,13 +1,11 @@
 package forge.card.abilityfactory.effects;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import forge.Card;
 import forge.GameEntity;
-import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -21,23 +19,12 @@ public class MustAttackEffect extends SpellEffect {
     protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
         final Card host = sa.getSourceCard();
         final StringBuilder sb = new StringBuilder();
-    
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
-        } else {
-            sb.append(sa.getSourceCard()).append(" - ");
-        }
+
     
         // end standard pre-
     
-        ArrayList<Player> tgtPlayers;
+        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
     
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
     
         String defender = null;
         if (params.get("Defender").equals("Self")) {
@@ -56,14 +43,8 @@ public class MustAttackEffect extends SpellEffect {
 
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
-        ArrayList<Player> tgtPlayers;
-
+        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
         final Target tgt = sa.getTarget();
-        if ((tgt != null) && !params.containsKey("Defined")) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {

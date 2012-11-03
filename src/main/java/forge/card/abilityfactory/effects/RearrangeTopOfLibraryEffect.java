@@ -8,7 +8,6 @@ import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -25,25 +24,14 @@ public class RearrangeTopOfLibraryEffect extends SpellEffect {
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         int numCards = 0;
-        ArrayList<Player> tgtPlayers;
+        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
         boolean shuffle = false;
         Card host = sa.getAbilityFactory().getHostCard();
-    
-        final Target tgt = sa.getTarget();
-        if ((tgt != null) && !params.containsKey("Defined")) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
     
         numCards = AbilityFactory.calculateAmount(host, params.get("NumCards"), sa);
         shuffle = params.containsKey("MayShuffle");
     
         final StringBuilder ret = new StringBuilder();
-        if (!(sa instanceof AbilitySub)) {
-            ret.append(host.getName());
-            ret.append(" - ");
-        }
         ret.append("Look at the top ");
         ret.append(numCards);
         ret.append(" cards of ");
@@ -84,22 +72,17 @@ public class RearrangeTopOfLibraryEffect extends SpellEffect {
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         int numCards = 0;
-        ArrayList<Player> tgtPlayers = new ArrayList<Player>();
         Card host = sa.getAbilityFactory().getHostCard();
         boolean shuffle = false;
 
         if (sa.getActivatingPlayer().isHuman()) {
             final Target tgt = sa.getTarget();
-            if ((tgt != null) && !params.containsKey("Defined")) {
-                tgtPlayers = tgt.getTargetPlayers();
-            } else {
-                tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-            }
+
 
             numCards = AbilityFactory.calculateAmount(host, params.get("NumCards"), sa);
             shuffle = params.containsKey("MayShuffle");
 
-            for (final Player p : tgtPlayers) {
+            for (final Player p : getTargetPlayers(sa, params)) {
                 if ((tgt == null) || p.canBeTargetedBy(sa)) {
                     rearrangeTopOfLibrary(host, p, numCards, shuffle);
                 }

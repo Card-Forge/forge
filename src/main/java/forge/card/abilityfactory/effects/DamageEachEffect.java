@@ -10,9 +10,7 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -27,21 +25,6 @@ public class DamageEachEffect extends SpellEffect {
         final String damage = params.get("NumDmg");
         final int iDmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa); 
         
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
-        } else {
-            sb.append(sa.getSourceCard()).append(" - ");
-        }
-    
-        ArrayList<Player> tgtPlayers;
-    
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("DefinedPlayers"), sa);
-        }
-    
         String desc = params.get("ValidCards");
         if (params.containsKey("ValidDescription")) {
             desc = params.get("ValidDescription");
@@ -58,7 +41,7 @@ public class DamageEachEffect extends SpellEffect {
             sb.append(params.get("StackDescription"));
         } else {
             sb.append("Each ").append(desc).append(" deals ").append(dmg).append(" to ");
-            for (final Player p : tgtPlayers) {
+            for (final Player p : getTargetPlayers(sa, params)) {
                 sb.append(p);
             }
             if (params.containsKey("DefinedCards")) {

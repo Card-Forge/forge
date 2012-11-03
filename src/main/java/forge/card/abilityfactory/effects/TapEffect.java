@@ -1,13 +1,12 @@
 package forge.card.abilityfactory.effects;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import forge.Card;
-import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 
@@ -24,13 +23,8 @@ public class TapEffect extends SpellEffect {
             card.clearRemembered();
         }
 
-        ArrayList<Card> tgtCards;
         final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
-        }
+        final List<Card> tgtCards = getTargetCards(sa, params);
 
         for (final Card tgtC : tgtCards) {
             if (tgt != null && !tgtC.canBeTargetedBy(sa)) {
@@ -49,33 +43,10 @@ public class TapEffect extends SpellEffect {
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-
-        final Card hostCard = sa.getSourceCard();
-    
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
-        } else {
-            sb.append(sa.getSourceCard()).append(" - ");
-        }
     
         sb.append("Tap ");
-    
-        ArrayList<Card> tgtCards;
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
-        }
-    
-        final Iterator<Card> it = tgtCards.iterator();
-        while (it.hasNext()) {
-            sb.append(it.next());
-            if (it.hasNext()) {
-                sb.append(", ");
-            }
-        }
-    
+        final List<Card> tgtCards = getTargetCards(sa, params);
+        sb.append(StringUtils.join(tgtCards, ", "));
         sb.append(".");
         return sb.toString();
     }

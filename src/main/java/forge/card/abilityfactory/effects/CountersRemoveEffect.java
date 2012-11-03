@@ -9,7 +9,6 @@ import forge.Counters;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.zone.Zone;
@@ -17,6 +16,43 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
 public class CountersRemoveEffect extends SpellEffect { 
+    @Override
+    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+        final StringBuilder sb = new StringBuilder();
+    
+        final String counterName = params.get("CounterType");
+    
+        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
+    
+        sb.append("Remove ");
+        if (params.containsKey("UpTo")) {
+            sb.append("up to ");
+        }
+        if ("Any".matches(counterName)) {
+            if (amount == 1) {
+                sb.append("a counter");
+            }
+            else {
+                sb.append(amount).append(" ").append(" counter");
+            }
+        }
+        else {
+            sb.append(amount).append(" ").append(Counters.valueOf(counterName).getName()).append(" counter");
+        }
+        if (amount != 1) {
+            sb.append("s");
+        }
+        sb.append(" from");
+    
+        for (final Card c : getTargetCards(sa, params)) {
+            sb.append(" ").append(c);
+        }
+    
+        sb.append(".");
+    
+        return sb.toString();
+    }
+
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
 
@@ -27,20 +63,13 @@ public class CountersRemoveEffect extends SpellEffect {
             counterAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
         }
 
-        ArrayList<Card> tgtCards;
-
         final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
-        }
-
+        
         boolean rememberRemoved = false;
         if (params.containsKey("RememberRemoved")) {
             rememberRemoved = true;
         }
-        for (final Card tgtCard : tgtCards) {
+        for (final Card tgtCard : getTargetCards(sa, params)) {
             if ((tgt == null) || tgtCard.canBeTargetedBy(sa)) {
                 final Zone zone = Singletons.getModel().getGame().getZoneOf(tgtCard);
                 if (params.get("CounterNum").equals("All")) {
@@ -127,58 +156,6 @@ public class CountersRemoveEffect extends SpellEffect {
                 }
             }
         }
-    }
-
-    @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
-        final Card card = sa.getSourceCard();
-        final StringBuilder sb = new StringBuilder();
-    
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(card).append(" - ");
-        } else {
-            sb.append(" ");
-        }
-    
-        final String counterName = params.get("CounterType");
-    
-        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
-    
-        sb.append("Remove ");
-        if (params.containsKey("UpTo")) {
-            sb.append("up to ");
-        }
-        if ("Any".matches(counterName)) {
-            if (amount == 1) {
-                sb.append("a counter");
-            }
-            else {
-                sb.append(amount).append(" ").append(" counter");
-            }
-        }
-        else {
-            sb.append(amount).append(" ").append(Counters.valueOf(counterName).getName()).append(" counter");
-        }
-        if (amount != 1) {
-            sb.append("s");
-        }
-        sb.append(" from");
-    
-        ArrayList<Card> tgtCards;
-    
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
-        }
-        for (final Card c : tgtCards) {
-            sb.append(" ").append(c);
-        }
-    
-        sb.append(".");
-    
-        return sb.toString();
     }
 
 }

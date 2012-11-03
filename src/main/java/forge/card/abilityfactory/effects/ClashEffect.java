@@ -57,19 +57,4 @@ public class ClashEffect extends SpellEffect {
         Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Clashed, runParams);
     }
 
-    // *************************************************************************
-    // ************************* FlipACoin *************************************
-    // *************************************************************************
-
-    /**
-     * <p>
-     * flipGetStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
 }

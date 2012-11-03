@@ -27,20 +27,7 @@ public class TwoPilesEffect extends SpellEffect {
     protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
-        } else {
-            sb.append(sa.getSourceCard()).append(" - ");
-        }
-    
-        ArrayList<Player> tgtPlayers;
-    
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
+        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
     
         String valid = "";
         if (params.containsKey("ValidCards")) {
@@ -74,14 +61,8 @@ public class TwoPilesEffect extends SpellEffect {
             valid = params.get("ValidCards");
         }
 
-        ArrayList<Player> tgtPlayers;
-
         final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
+        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
 
         Player separator = card.getController();
         if (params.containsKey("Separator")) {

@@ -2,20 +2,56 @@ package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import forge.Card;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
 public class CopySpellEffect extends SpellEffect {
     
+    /**
+     * <p>
+     * copySpellStackDescription.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @return a {@link java.lang.String} object.
+     */
+    @Override
+    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+        final StringBuilder sb = new StringBuilder();
+        final List<SpellAbility> tgtSpells = getTargetSpellAbilities(sa, params);
+        
+        sb.append("Copy ");
+        // TODO Someone fix this Description when Copying Charms
+        final Iterator<SpellAbility> it = tgtSpells.iterator();
+        while (it.hasNext()) {
+            sb.append(it.next().getSourceCard());
+            if (it.hasNext()) {
+                sb.append(", ");
+            }
+        }
+        int amount = 1;
+        if (params.containsKey("Amount")) {
+            amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("Amount"), sa);
+        }
+        if (amount > 1) {
+            sb.append(amount).append(" times");
+        }
+        sb.append(".");
+        // TODO probably add an optional "You may choose new targets..."
+        return sb.toString();
+    }
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -33,14 +69,8 @@ public class CopySpellEffect extends SpellEffect {
             controller = AbilityFactory.getDefinedPlayers(card, params.get("Controller"), sa).get(0);
         }
 
-        ArrayList<SpellAbility> tgtSpells;
+        final List<SpellAbility> tgtSpells = getTargetSpellAbilities(sa, params);
 
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtSpells = tgt.getTargetSAs();
-        } else {
-            tgtSpells = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), params.get("Defined"), sa);
-        }
 
         if (tgtSpells.size() == 0) {
             return;
@@ -97,56 +127,5 @@ public class CopySpellEffect extends SpellEffect {
             }
         }
     } // end resolve
-
-    /**
-     * <p>
-     * copySpellStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
-    @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
-        final StringBuilder sb = new StringBuilder();
-    
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(sa.getSourceCard().getName()).append(" - ");
-        } else {
-            sb.append(" ");
-        }
-    
-        ArrayList<SpellAbility> tgtSpells;
-    
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtSpells = tgt.getTargetSAs();
-        } else {
-            tgtSpells = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), params.get("Defined"), sa);
-        }
-    
-        sb.append("Copy ");
-        // TODO Someone fix this Description when Copying Charms
-        final Iterator<SpellAbility> it = tgtSpells.iterator();
-        while (it.hasNext()) {
-            sb.append(it.next().getSourceCard());
-            if (it.hasNext()) {
-                sb.append(", ");
-            }
-        }
-        int amount = 1;
-        if (params.containsKey("Amount")) {
-            amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("Amount"), sa);
-        }
-        if (amount > 1) {
-            sb.append(amount).append(" times");
-        }
-        sb.append(".");
-        // TODO probably add an optional "You may choose new targets..."
-        return sb.toString();
-    }
 
 } // end class AbilityFactory_Copy

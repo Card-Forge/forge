@@ -1,13 +1,11 @@
 package forge.card.abilityfactory.effects;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import forge.Card;
 import forge.GameActionUtil;
-import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -18,14 +16,9 @@ public class ShuffleEffect extends SpellEffect {
         final Card host = sa.getSourceCard();
         final boolean optional = params.containsKey("Optional");
 
-        ArrayList<Player> tgtPlayers;
+        final List<Player> tgtPlayers = getTargetPlayers(sa, params); 
 
         final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
@@ -42,25 +35,13 @@ public class ShuffleEffect extends SpellEffect {
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(sa.getSourceCard().getName()).append(" - ");
-        } else {
-            sb.append(" ");
-        }
-    
+
         final String conditionDesc = params.get("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
     
-        ArrayList<Player> tgtPlayers;
-    
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
+        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
     
         if (tgtPlayers.size() > 0) {
             final Iterator<Player> it = tgtPlayers.iterator();

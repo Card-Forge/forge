@@ -8,15 +8,11 @@ import forge.Card;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class DamagePreventAllEffect extends SpellEffect {
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
-     */
     
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
@@ -56,20 +52,11 @@ public class DamagePreventAllEffect extends SpellEffect {
     @Override
     protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        final Card host = sa.getAbilityFactory().getHostCard();
-    
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
-        } else {
-            sb.append(host).append(" - ");
-        }
-    
         String desc = sa.getDescription();
     
         if (desc.contains(":")) {
             desc = desc.split(":")[1];
         }
-    
         sb.append(desc);
     
         return sb.toString();

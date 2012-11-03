@@ -11,7 +11,6 @@ import forge.Command;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.replacement.ReplacementEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
@@ -321,86 +320,70 @@ public class AnimateEffect extends AnimateEffectBase {
     
         final StringBuilder sb = new StringBuilder();
     
-        if (sa instanceof AbilitySub) {
+        final Target tgt = sa.getTarget();
+        final List<Card> tgts = tgt != null ? tgt.getTargetCards() :  AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+
+        for (final Card c : tgts) {
+            sb.append(c).append(" ");
+        }
+        sb.append("become");
+        if (tgts.size() == 1) {
+            sb.append("s a");
+        }
+        // if power is -1, we'll assume it's not just setting toughness
+        if (power != -1) {
+            sb.append(" ").append(power).append("/").append(toughness);
+        }
+
+        if (colors.size() > 0) {
             sb.append(" ");
+        }
+        if (colors.contains("ChosenColor")) {
+            sb.append("color of that player's choice");
         } else {
-            sb.append(sa.getSourceCard().getName()).append(" - ");
-        }
-    
-        if (params.containsKey("StackDescription")) {
-            sb.append(params.get("StackDescription").replaceAll("CARDNAME", host.getName()));
-        }
-        else {
-    
-            final Target tgt = sa.getTarget();
-            ArrayList<Card> tgts;
-            if (tgt != null) {
-                tgts = tgt.getTargetCards();
-            } else {
-                tgts = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
-            }
-    
-            for (final Card c : tgts) {
-                sb.append(c).append(" ");
-            }
-            sb.append("become");
-            if (tgts.size() == 1) {
-                sb.append("s a");
-            }
-            // if power is -1, we'll assume it's not just setting toughness
-            if (power != -1) {
-                sb.append(" ").append(power).append("/").append(toughness);
-            }
-    
-            if (colors.size() > 0) {
-                sb.append(" ");
-            }
-            if (colors.contains("ChosenColor")) {
-                sb.append("color of that player's choice");
-            } else {
-                for (int i = 0; i < colors.size(); i++) {
-                    sb.append(colors.get(i));
-                    if (i < (colors.size() - 1)) {
-                        sb.append(" and ");
-                    }
-                }
-            }
-            sb.append(" ");
-            if (types.contains("ChosenType")) {
-                sb.append("type of player's choice ");
-            } else {
-                for (int i = types.size() - 1; i >= 0; i--) {
-                    sb.append(types.get(i));
-                    sb.append(" ");
-                }
-            }
-            if (keywords.size() > 0) {
-                sb.append("with ");
-            }
-            for (int i = 0; i < keywords.size(); i++) {
-                sb.append(keywords.get(i));
-                if (i < (keywords.size() - 1)) {
+            for (int i = 0; i < colors.size(); i++) {
+                sb.append(colors.get(i));
+                if (i < (colors.size() - 1)) {
                     sb.append(" and ");
                 }
             }
-            // sb.append(abilities)
-            // sb.append(triggers)
-            if (!permanent) {
-                if (params.containsKey("UntilEndOfCombat")) {
-                    sb.append(" until end of combat.");
-                } else if (params.containsKey("UntilHostLeavesPlay")) {
-                    sb.append(" until ").append(host).append(" leaves the battlefield.");
-                } else if (params.containsKey("UntilYourNextUpkeep")) {
-                    sb.append(" until your next upkeep.");
-                } else if (params.containsKey("UntilControllerNextUntap")) {
-                    sb.append(" until its controller's next untap step.");
-                } else {
-                    sb.append(" until end of turn.");
-                }
-            } else {
-                sb.append(".");
+        }
+        sb.append(" ");
+        if (types.contains("ChosenType")) {
+            sb.append("type of player's choice ");
+        } else {
+            for (int i = types.size() - 1; i >= 0; i--) {
+                sb.append(types.get(i));
+                sb.append(" ");
             }
         }
+        if (keywords.size() > 0) {
+            sb.append("with ");
+        }
+        for (int i = 0; i < keywords.size(); i++) {
+            sb.append(keywords.get(i));
+            if (i < (keywords.size() - 1)) {
+                sb.append(" and ");
+            }
+        }
+        // sb.append(abilities)
+        // sb.append(triggers)
+        if (!permanent) {
+            if (params.containsKey("UntilEndOfCombat")) {
+                sb.append(" until end of combat.");
+            } else if (params.containsKey("UntilHostLeavesPlay")) {
+                sb.append(" until ").append(host).append(" leaves the battlefield.");
+            } else if (params.containsKey("UntilYourNextUpkeep")) {
+                sb.append(" until your next upkeep.");
+            } else if (params.containsKey("UntilControllerNextUntap")) {
+                sb.append(" until its controller's next untap step.");
+            } else {
+                sb.append(" until end of turn.");
+            }
+        } else {
+            sb.append(".");
+        }
+     
     
         return sb.toString();
     }

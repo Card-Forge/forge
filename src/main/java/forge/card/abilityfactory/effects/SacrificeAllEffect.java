@@ -7,7 +7,6 @@ import forge.Card;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -17,14 +16,7 @@ public class SacrificeAllEffect extends SpellEffect {
         // when getStackDesc is called, just build exactly what is happening
     
         final StringBuilder sb = new StringBuilder();
-        final Card host = sa.getAbilityFactory().getHostCard();
 
-    
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
-        } else {
-            sb.append(host).append(" - ");
-        }
     
         final String conditionDesc = params.get("ConditionDescription");
         if (conditionDesc != null) {

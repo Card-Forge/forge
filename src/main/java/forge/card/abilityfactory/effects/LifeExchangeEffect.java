@@ -1,14 +1,11 @@
 package forge.card.abilityfactory.effects;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import forge.Card;
-import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.game.player.Player;
 
 public class LifeExchangeEffect extends SpellEffect {
@@ -30,21 +27,8 @@ public class LifeExchangeEffect extends SpellEffect {
     protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final Player activatingPlayer = sa.getActivatingPlayer();
-    
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
-        } else {
-            sb.append(sa.getSourceCard()).append(" -");
-        }
-    
-        ArrayList<Player> tgtPlayers;
-    
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
+        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+
     
         if (tgtPlayers.size() == 1) {
             sb.append(activatingPlayer).append(" exchanges life totals with ");
@@ -66,14 +50,7 @@ public class LifeExchangeEffect extends SpellEffect {
         Player p1;
         Player p2;
     
-        ArrayList<Player> tgtPlayers;
-    
-        final Target tgt = sa.getTarget();
-        if ((tgt != null) && !params.containsKey("Defined")) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
+        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
     
         if (tgtPlayers.size() == 1) {
             p1 = sa.getActivatingPlayer();

@@ -1,15 +1,13 @@
 package forge.card.abilityfactory.effects;
 
-import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import forge.Card;
 import forge.Command;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 
@@ -22,24 +20,11 @@ public class RegenerateEffect extends SpellEffect
     @Override
     protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        final Card host = sa.getAbilityFactory().getHostCard();
-    
-        ArrayList<Card> tgtCards;
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
-        }
+        final List<Card> tgtCards = getTargetCards(sa, params);
     
         if (tgtCards.size() > 0) {
-            if (sa instanceof AbilitySub) {
-                sb.append(" ");
-            } else {
-                sb.append(host).append(" - ");
-            }
-    
             sb.append("Regenerate ");
+            
             final Iterator<Card> it = tgtCards.iterator();
             while (it.hasNext()) {
                 final Card tgtC = it.next();
@@ -61,17 +46,9 @@ public class RegenerateEffect extends SpellEffect
 
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
-        final Card hostCard = sa.getAbilityFactory().getHostCard();
-
-        ArrayList<Card> tgtCards;
         final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
-        }
 
-        for (final Card tgtC : tgtCards) {
+        for (final Card tgtC : getTargetCards(sa, params)) {
             final Command untilEOT = new Command() {
                 private static final long serialVersionUID = 1922050611313909200L;
 

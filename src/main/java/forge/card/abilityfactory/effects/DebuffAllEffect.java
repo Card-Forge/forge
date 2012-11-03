@@ -10,7 +10,6 @@ import forge.CardLists;
 import forge.Command;
 import forge.Singletons;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
@@ -21,23 +20,11 @@ public class DebuffAllEffect extends SpellEffect {
      */
     @Override
     protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
-        final StringBuilder sb = new StringBuilder();
-
-        String desc = "";
-        if (params.containsKey("SpellDescription")) {
-            desc = params.get("SpellDescription");
-        } else if (params.containsKey("DebuffAllDescription")) {
-            desc = params.get("DebuffAllDescription");
+        if (params.containsKey("DebuffAllDescription")) {
+            return params.get("DebuffAllDescription");
         }
 
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
-        } else {
-            sb.append(sa.getSourceCard()).append(" - ");
-        }
-
-        sb.append(desc);
-        return sb.toString();
+        return "";
     } // debuffAllStackDescription()
 
     /**

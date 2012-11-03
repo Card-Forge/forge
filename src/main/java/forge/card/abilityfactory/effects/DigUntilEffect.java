@@ -9,7 +9,6 @@ import forge.Card;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -25,7 +24,6 @@ public class DigUntilEffect extends SpellEffect {
          */
     @Override
     protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
-        final Card host = sa.getSourceCard();
         final StringBuilder sb = new StringBuilder();
     
         String desc = "Card";
@@ -37,23 +35,8 @@ public class DigUntilEffect extends SpellEffect {
         if (params.containsKey("Amount")) {
             untilAmount = AbilityFactory.calculateAmount(sa.getAbilityFactory().getHostCard(), params.get("Amount"), sa);
         }
-    
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(host).append(" - ");
-        } else {
-            sb.append(" ");
-        }
-    
-        ArrayList<Player> tgtPlayers;
-    
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
-    
-        for (final Player pl : tgtPlayers) {
+
+        for (final Player pl : getTargetPlayers(sa, params)) {
             sb.append(pl).append(" ");
         }
     
@@ -110,21 +93,14 @@ public class DigUntilEffect extends SpellEffect {
 
         final boolean remember = params.containsKey("RememberFound");
 
-        ArrayList<Player> tgtPlayers;
-
         final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(host, params.get("Defined"), sa);
-        }
 
         final ZoneType foundDest = ZoneType.smartValueOf(params.get("FoundDestination"));
         final int foundLibPos = AbilityFactory.calculateAmount(host, params.get("FoundLibraryPosition"), sa);
         final ZoneType revealedDest = ZoneType.smartValueOf(params.get("RevealedDestination"));
         final int revealedLibPos = AbilityFactory.calculateAmount(host, params.get("RevealedLibraryPosition"), sa);
 
-        for (final Player p : tgtPlayers) {
+        for (final Player p : getTargetPlayers(sa, params)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 final List<Card> found = new ArrayList<Card>();
                 final List<Card> revealed = new ArrayList<Card>();

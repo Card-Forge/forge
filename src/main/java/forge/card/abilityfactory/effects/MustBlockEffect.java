@@ -1,11 +1,11 @@
 package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import forge.Card;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 
@@ -47,22 +47,9 @@ public class MustBlockEffect extends SpellEffect {
         final Card host = sa.getSourceCard();
         final StringBuilder sb = new StringBuilder();
     
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
-        } else {
-            sb.append(sa.getSourceCard()).append(" - ");
-        }
-    
         // end standard pre-
     
-        ArrayList<Card> tgtCards;
-    
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
-        }
+        final List<Card> tgtCards = getTargetCards(sa, params);
     
         String attacker = null;
         if (params.containsKey("DefinedAttacker")) {

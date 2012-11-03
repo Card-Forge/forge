@@ -1,12 +1,12 @@
 package forge.card.abilityfactory.effects;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -25,16 +25,8 @@ import forge.game.player.Player;
         public void resolve(Map<String, String> params, SpellAbility sa) {
             final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("Num"), sa);
         
-            ArrayList<Player> tgtPlayers;
-        
             final Target tgt = sa.getTarget();
-            if (tgt != null) {
-                tgtPlayers = tgt.getTargetPlayers();
-            } else {
-                tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-            }
-        
-            for (final Player p : tgtPlayers) {
+            for (final Player p : getTargetPlayers(sa, params)) {
                 if ((tgt == null) || p.canBeTargetedBy(sa)) {
                     p.addPoisonCounters(amount, sa.getSourceCard());
                 }
@@ -49,38 +41,16 @@ import forge.game.player.Player;
             final StringBuilder sb = new StringBuilder();
             final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("Num"), sa);
         
-            if (!(sa instanceof AbilitySub)) {
-                sb.append(sa.getSourceCard()).append(" - ");
-            } else {
-                sb.append(" ");
-            }
         
             final String conditionDesc = params.get("ConditionDescription");
             if (conditionDesc != null) {
                 sb.append(conditionDesc).append(" ");
             }
         
-            ArrayList<Player> tgtPlayers;
+            final List<Player> tgtPlayers = getTargetPlayers(sa, params);
         
-            final Target tgt = sa.getTarget();
-            if (tgt != null) {
-                tgtPlayers = tgt.getTargetPlayers();
-            } else {
-                tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-            }
-        
-            if (tgtPlayers.size() > 0) {
-                final Iterator<Player> it = tgtPlayers.iterator();
-                while (it.hasNext()) {
-                    final Player p = it.next();
-                    sb.append(p);
-                    if (it.hasNext()) {
-                        sb.append(", ");
-                    } else {
-                        sb.append(" ");
-                    }
-                }
-            }
+            sb.append(StringUtils.join(tgtPlayers, ", "));
+            sb.append(" ");
         
             sb.append("get");
             if (tgtPlayers.size() < 2) {

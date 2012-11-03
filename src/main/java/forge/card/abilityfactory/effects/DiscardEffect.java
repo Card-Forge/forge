@@ -12,7 +12,6 @@ import forge.CardUtil;
 import forge.GameActionUtil;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.ComputerUtil;
@@ -26,20 +25,8 @@ public class DiscardEffect extends RevealEffectBase {
         final String mode = params.get("Mode");
         final StringBuilder sb = new StringBuilder();
     
-        ArrayList<Player> tgtPlayers;
+        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
     
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
-    
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(sa.getSourceCard().getName()).append(" - ");
-        } else {
-            sb.append(" ");
-        }
     
         final String conditionDesc = params.get("ConditionDescription");
         if (conditionDesc != null) {
@@ -103,18 +90,11 @@ public class DiscardEffect extends RevealEffectBase {
         final Card source = sa.getSourceCard();
         final String mode = params.get("Mode");
     
-        ArrayList<Player> tgtPlayers;
-    
         final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
     
         final List<Card> discarded = new ArrayList<Card>();
     
-        for (final Player p : tgtPlayers) {
+        for (final Player p : getTargetPlayers(sa, params)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (mode.equals("Defined")) {
                     final ArrayList<Card> toDiscard = AbilityFactory.getDefinedCards(source, params.get("DefinedCards"),

@@ -2,13 +2,13 @@ package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import forge.Card;
 import forge.Counters;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.zone.Zone;
@@ -16,6 +16,44 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
 public class CountersPutEffect extends SpellEffect {
+    @Override
+    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+        final StringBuilder sb = new StringBuilder();
+        final Card card = sa.getSourceCard();
+    
+
+        final Counters cType = Counters.valueOf(params.get("CounterType"));
+        final int amount = AbilityFactory.calculateAmount(card, params.get("CounterNum"), sa);
+        sb.append("Put ");
+        if (params.containsKey("UpTo")) {
+            sb.append("up to ");
+        }
+        sb.append(amount).append(" ").append(cType.getName()).append(" counter");
+        if (amount != 1) {
+            sb.append("s");
+        }
+        sb.append(" on ");
+        final Target tgt = sa.getTarget();
+        final List<Card> tgtCards = tgt != null ? tgt.getTargetCards() :  AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+
+        final Iterator<Card> it = tgtCards.iterator();
+        while (it.hasNext()) {
+            final Card tgtC = it.next();
+            if (tgtC.isFaceDown()) {
+                sb.append("Morph");
+            } else {
+                sb.append(tgtC);
+            }
+
+            if (it.hasNext()) {
+                sb.append(", ");
+            }
+        }
+        sb.append(".");
+    
+        return sb.toString();
+    }
+
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         final Card card = sa.getSourceCard();
@@ -61,57 +99,6 @@ public class CountersPutEffect extends SpellEffect {
                 }
             }
         }
-    }
-
-    @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
-        final StringBuilder sb = new StringBuilder();
-        final Card card = sa.getSourceCard();
-    
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(card.getName()).append(" - ");
-        } else {
-            sb.append(" ");
-        }
-    
-        if (params.containsKey("StackDescription")) {
-            sb.append(params.get("StackDescription"));
-        } else {
-            final Counters cType = Counters.valueOf(params.get("CounterType"));
-            final int amount = AbilityFactory.calculateAmount(card, params.get("CounterNum"), sa);
-            sb.append("Put ");
-            if (params.containsKey("UpTo")) {
-                sb.append("up to ");
-            }
-            sb.append(amount).append(" ").append(cType.getName()).append(" counter");
-            if (amount != 1) {
-                sb.append("s");
-            }
-            sb.append(" on ");
-            ArrayList<Card> tgtCards;
-            final Target tgt = sa.getTarget();
-            if (tgt != null) {
-                tgtCards = tgt.getTargetCards();
-            } else {
-                tgtCards = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
-            }
-            final Iterator<Card> it = tgtCards.iterator();
-            while (it.hasNext()) {
-                final Card tgtC = it.next();
-                if (tgtC.isFaceDown()) {
-                    sb.append("Morph");
-                } else {
-                    sb.append(tgtC);
-                }
-    
-                if (it.hasNext()) {
-                    sb.append(", ");
-                }
-            }
-            sb.append(".");
-        }
-
-        return sb.toString();
     }
 
 }

@@ -12,7 +12,6 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.Ability;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -26,20 +25,8 @@ public class ControlGainEffect extends SpellEffect {
     protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(sa.getSourceCard()).append(" - ");
-        } else {
-            sb.append(" ");
-        }
-    
-        ArrayList<Card> tgtCards;
-    
+
         final Target tgt = sa.getTarget();
-        if ((tgt != null) && !params.containsKey("Defined")) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
-        }
     
         ArrayList<Player> newController = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
                 params.get("NewController"), sa);
@@ -52,7 +39,7 @@ public class ControlGainEffect extends SpellEffect {
     
         sb.append(newController).append(" gains control of ");
     
-        for (final Card c : tgtCards) {
+        for (final Card c : getTargetCards(sa, params)) {
             sb.append(" ");
             if (c.isFaceDown()) {
                 sb.append("Morph");
@@ -61,11 +48,6 @@ public class ControlGainEffect extends SpellEffect {
             }
         }
         sb.append(".");
-    
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
-        }
     
         return sb.toString();
     }
@@ -111,11 +93,8 @@ public class ControlGainEffect extends SpellEffect {
         if (params.containsKey("AllValid")) {
             tgtCards = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
             tgtCards = AbilityFactory.filterListByType(tgtCards, params.get("AllValid"), sa);
-        } else if ((tgt != null) && !params.containsKey("Defined")) {
-            tgtCards.addAll(tgt.getTargetCards());
-        } else {
-            tgtCards.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa));
-        }
+        } else 
+            tgtCards = getTargetCards(sa, params);
     
         ArrayList<Player> controllers = new ArrayList<Player>();
     

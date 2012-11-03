@@ -1,14 +1,13 @@
 package forge.card.abilityfactory.effects;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
 import forge.GameActionUtil;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -20,35 +19,18 @@ public class DrawEffect extends SpellEffect {
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(sa.getSourceCard().getName()).append(" - ");
-        } else {
-            sb.append(" ");
-        }
-    
         final String conditionDesc = params.get("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
     
-        ArrayList<Player> tgtPlayers;
+        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
     
-        final Target tgt = sa.getTarget();
-        if (!params.containsKey("Defined") && tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
     
-        if (tgtPlayers.size() > 0) {
-            final Iterator<Player> it = tgtPlayers.iterator();
-            while (it.hasNext()) {
-                sb.append(it.next().toString());
-                if (it.hasNext()) {
-                    sb.append(" and ");
-                }
-            }
-    
+        if (!tgtPlayers.isEmpty()) {
+            
+            sb.append(StringUtils.join(tgtPlayers, " and "));
+            
             int numCards = 1;
             if (params.containsKey("NumCards")) {
                 numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
@@ -81,19 +63,12 @@ public class DrawEffect extends SpellEffect {
             numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
         }
 
-        ArrayList<Player> tgtPlayers;
-
         final Target tgt = sa.getTarget();
-        if (!params.containsKey("Defined") && tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(source, params.get("Defined"), sa);
-        }
 
         final boolean optional = params.containsKey("OptionalDecider");
         final boolean slowDraw = params.containsKey("NextUpkeep");
 
-        for (final Player p : tgtPlayers) {
+        for (final Player p : getTargetPlayers(sa, params)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (optional) {
                     if (p.isComputer()) {

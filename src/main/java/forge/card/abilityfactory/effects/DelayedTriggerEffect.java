@@ -2,7 +2,6 @@ package forge.card.abilityfactory.effects;
 
 import forge.Singletons;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
@@ -14,21 +13,11 @@ public class DelayedTriggerEffect extends SpellEffect {
      */
     @Override
     protected String getStackDescription(java.util.Map<String,String> mapParams, SpellAbility sa) {
-        final StringBuilder sb = new StringBuilder();
-
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
-        } else {
-            sb.append(sa.getSourceCard()).append(" - ");
+        if (mapParams.containsKey("TriggerDescription")) {
+            return mapParams.get("TriggerDescription");
         }
 
-        if (mapParams.containsKey("SpellDescription")) {
-            sb.append(mapParams.get("SpellDescription"));
-        } else if (mapParams.containsKey("TriggerDescription")) {
-            sb.append(mapParams.get("TriggerDescription"));
-        }
-
-        return sb.toString();
+        return "";
 
     }
 

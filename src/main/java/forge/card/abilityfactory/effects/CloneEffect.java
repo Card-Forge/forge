@@ -2,6 +2,7 @@ package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import forge.Card;
@@ -12,7 +13,6 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.AbilityFactoryAttach;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
@@ -23,22 +23,10 @@ public class CloneEffect extends SpellEffect {
 
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
-         final StringBuilder sb = new StringBuilder();
-    
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
-        } else {
-            sb.append(sa.getSourceCard().getName()).append(" - ");
-        }
-    
-        final Target tgt = sa.getTarget();
-        ArrayList<Card> tgts;
-        if (tgt != null) {
-            tgts = tgt.getTargetCards();
-        } else {
-            tgts = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
-        }
-    
+        final StringBuilder sb = new StringBuilder();
+        
+        final List<Card> tgts = getTargetCards(sa, params);
+        
         sb.append(sa.getSourceCard());
         sb.append(" becomes a copy of ");
         if (!tgts.isEmpty()) {

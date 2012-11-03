@@ -6,8 +6,6 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.CardUtil;
-import forge.card.abilityfactory.AbilityFactory;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -20,16 +18,9 @@ public class RevealEffect extends RevealEffectBase {
         final Card host = sa.getAbilityFactory().getHostCard();
         final boolean anyNumber = params.containsKey("AnyNumber");
 
-        ArrayList<Player> tgtPlayers;
-
         final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
 
-        for (final Player p : tgtPlayers) {
+        for (final Player p : getTargetPlayers(sa, params)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 final List<Card> handChoices = p.getCardsIn(ZoneType.Hand);
                 if (handChoices.size() > 0) {
@@ -66,22 +57,9 @@ public class RevealEffect extends RevealEffectBase {
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-    
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
-        } else {
-            sb.append(sa.getSourceCard()).append(" - ");
-        }
-    
-        ArrayList<Player> tgtPlayers;
-    
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
-    
+
+        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+
         if (tgtPlayers.size() > 0) {
             sb.append(tgtPlayers.get(0)).append(" reveals ");
             if (params.containsKey("AnyNumber")) {

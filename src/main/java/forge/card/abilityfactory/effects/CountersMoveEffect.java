@@ -1,12 +1,12 @@
 package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import forge.Card;
 import forge.Counters;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 
@@ -16,12 +16,6 @@ public class CountersMoveEffect extends SpellEffect {
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final Card host = sa.getSourceCard();
-    
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
-        } else {
-            sb.append(sa.getSourceCard().getName()).append(" - ");
-        }
     
         Card source = null;
         ArrayList<Card> srcCards;
@@ -34,12 +28,7 @@ public class CountersMoveEffect extends SpellEffect {
         if (srcCards.size() > 0) {
             source = srcCards.get(0);
         }
-        ArrayList<Card> tgtCards;
-        if (!params.containsKey("Defined") && tgt != null) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa);
-        }
+        final List<Card> tgtCards = getTargetCards(sa, params);
     
         final Counters cType = Counters.valueOf(params.get("CounterType"));
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);

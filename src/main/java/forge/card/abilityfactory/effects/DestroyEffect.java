@@ -2,12 +2,12 @@ package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import forge.Card;
 import forge.CardUtil;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
@@ -21,27 +21,13 @@ public class DestroyEffect extends SpellEffect {
     protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
         final boolean noRegen = params.containsKey("NoRegen");
         final StringBuilder sb = new StringBuilder();
-        final Card host = sa.getAbilityFactory().getHostCard();
 
         final String conditionDesc = params.get("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
 
-        ArrayList<Card> tgtCards;
-
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
-        }
-
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
-        } else {
-            sb.append(host).append(" - ");
-        }
+        final List<Card> tgtCards = getTargetCards(sa, params);
 
         if (params.containsKey("Sacrifice")) {
             sb.append("Sacrifice ");
@@ -104,15 +90,10 @@ public class DestroyEffect extends SpellEffect {
         final boolean noRegen = params.containsKey("NoRegen");
         final boolean sac = params.containsKey("Sacrifice");
 
-        ArrayList<Card> tgtCards;
+        final List<Card> tgtCards = getTargetCards(sa, params);
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
 
         final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
-        }
 
         if (params.containsKey("Radiance")) {
             for (final Card c : CardUtil.getRadiance(card, tgtCards.get(0),

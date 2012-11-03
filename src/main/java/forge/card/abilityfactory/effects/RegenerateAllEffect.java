@@ -7,31 +7,13 @@ import forge.CardLists;
 import forge.Command;
 import forge.Singletons;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 public class RegenerateAllEffect extends SpellEffect {
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
-        final StringBuilder sb = new StringBuilder();
-        final Card host = sa.getAbilityFactory().getHostCard();
-    
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
-        } else {
-            sb.append(host).append(" - ");
-        }
-    
-        String desc = "";
-        if (params.containsKey("SpellDescription")) {
-            desc = params.get("SpellDescription");
-        } else {
-            desc = "Regenerate all valid cards.";
-        }
-    
-        sb.append(desc);
-        return sb.toString();
+        return "Regenerate all valid cards.";
     }
 
     @Override

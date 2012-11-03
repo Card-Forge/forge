@@ -13,7 +13,6 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -29,25 +28,9 @@ public class DigEffect extends SpellEffect {
         final StringBuilder sb = new StringBuilder();
         final int numToDig = AbilityFactory.calculateAmount(host, params.get("DigNum"), sa);
     
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(sa.getSourceCard()).append(" - ");
-        } else {
-            sb.append(" ");
-        }
     
-        if (params.containsKey("StackDescription")) {
-            sb.append(params.get("StackDescription"));
-            return sb.toString();
-        }
+        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
     
-        ArrayList<Player> tgtPlayers;
-    
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
     
         sb.append(host.getController()).append(" looks at the top ").append(numToDig);
         sb.append(" card");
@@ -104,14 +87,8 @@ public class DigEffect extends SpellEffect {
             }
         }
 
-        ArrayList<Player> tgtPlayers;
-
         final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
+        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
 
         if (params.containsKey("Choser")) {
             final ArrayList<Player> chosers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),

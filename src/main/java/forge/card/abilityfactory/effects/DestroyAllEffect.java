@@ -9,7 +9,6 @@ import forge.CardLists;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -17,6 +16,37 @@ import forge.game.zone.ZoneType;
 
 public class DestroyAllEffect extends SpellEffect {
     
+    @Override
+    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    
+        final StringBuilder sb = new StringBuilder();
+        final boolean noRegen = params.containsKey("NoRegen");
+    
+
+        final String conditionDesc = params.get("ConditionDescription");
+        if (conditionDesc != null) {
+            sb.append(conditionDesc).append(" ");
+        }
+
+        ArrayList<Card> tgtCards;
+
+        final Target tgt = sa.getTarget();
+        if (tgt != null) {
+            tgtCards = tgt.getTargetCards();
+        } else {
+            tgtCards = new ArrayList<Card>();
+            tgtCards.add(sa.getSourceCard());
+        }
+
+        sb.append(sa.getSourceCard().getName()).append(" - Destroy permanents.");
+
+        if (noRegen) {
+            sb.append(" They can't be regenerated");
+        }
+
+        return sb.toString();
+    }
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -75,45 +105,6 @@ public class DestroyAllEffect extends SpellEffect {
                 }
             }
         }
-    }
-
-    @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
-    
-        final StringBuilder sb = new StringBuilder();
-        final String name = sa.getAbilityFactory().getHostCard().getName();
-        if (!(sa instanceof AbilitySub)) {
-            sb.append(sa.getSourceCard().getName()).append(" - ");
-        } else {
-            sb.append(" ");
-        }
-        final boolean noRegen = params.containsKey("NoRegen");
-    
-        if (params.containsKey("SpellDescription")) {
-            sb.append(params.get("SpellDescription"));
-        } else {
-            final String conditionDesc = params.get("ConditionDescription");
-            if (conditionDesc != null) {
-                sb.append(conditionDesc).append(" ");
-            }
-    
-            ArrayList<Card> tgtCards;
-    
-            final Target tgt = sa.getTarget();
-            if (tgt != null) {
-                tgtCards = tgt.getTargetCards();
-            } else {
-                tgtCards = new ArrayList<Card>();
-                tgtCards.add(sa.getSourceCard());
-            }
-    
-            sb.append(name).append(" - Destroy permanents.");
-    
-            if (noRegen) {
-                sb.append(" They can't be regenerated");
-            }
-        }
-        return sb.toString();
     }
 
 } 

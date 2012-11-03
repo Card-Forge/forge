@@ -8,9 +8,7 @@ import forge.CardUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -25,14 +23,7 @@ public class SacrificeEffect extends SpellEffect {
         // Expand Sacrifice keyword here depending on what we need out of it.
         final String num = params.containsKey("Amount") ? params.get("Amount") : "1";
         final int amount = AbilityFactory.calculateAmount(card, num, sa);
-
-        final Target tgt = sa.getTarget();
-        ArrayList<Player> tgts;
-        if (tgt != null) {
-            tgts = tgt.getTargetPlayers();
-        } else {
-            tgts = AbilityFactory.getDefinedPlayers(card, params.get("Defined"), sa);
-        }
+        final List<Player> tgts = getTargetPlayers(sa, params);
 
         String valid = params.get("SacValid");
         if (valid == null) {
@@ -84,24 +75,12 @@ public class SacrificeEffect extends SpellEffect {
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
-        } else {
-            sb.append(sa.getSourceCard().getName()).append(" - ");
-        }
-    
         final String conditionDesc = params.get("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
     
-        final Target tgt = sa.getTarget();
-        ArrayList<Player> tgts;
-        if (tgt != null) {
-            tgts = tgt.getTargetPlayers();
-        } else {
-            tgts = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
+        final List<Player> tgts = getTargetPlayers(sa, params);
     
         String valid = params.get("SacValid");
         if (valid == null) {

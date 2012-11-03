@@ -1,12 +1,12 @@
 package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import forge.Card;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -17,23 +17,8 @@ public class ChoosePlayerEffect extends SpellEffect {
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
-        } else {
-            sb.append(sa.getSourceCard()).append(" - ");
-        }
-        
-        ArrayList<Player> tgtPlayers;
-        
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
-        
-        for (final Player p : tgtPlayers) {
+
+        for (final Player p : getTargetPlayers(sa, params)) {
             sb.append(p).append(" ");
         }
         sb.append("chooses a player.");
@@ -45,14 +30,9 @@ public class ChoosePlayerEffect extends SpellEffect {
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         final Card card = sa.getSourceCard();
         
-        ArrayList<Player> tgtPlayers;
+        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
         
         final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
-        }
         
         final ArrayList<Player> choices = params.containsKey("Choices") ? AbilityFactory.getDefinedPlayers(
                 sa.getSourceCard(), params.get("Choices"), sa) : new ArrayList<Player>(Singletons.getModel().getGame().getPlayers());

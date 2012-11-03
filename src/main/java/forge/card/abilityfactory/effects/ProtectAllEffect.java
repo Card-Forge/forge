@@ -12,9 +12,7 @@ import forge.Command;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -23,35 +21,16 @@ public class ProtectAllEffect extends SpellEffect {
     
     @Override
     protected String getStackDescription(Map<String,String> params, SpellAbility sa) {
-        final Card host = sa.getAbilityFactory().getHostCard();
-
         final StringBuilder sb = new StringBuilder();
 
-        ArrayList<Card> tgtCards;
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
-        }
+        final List<Card> tgtCards = getTargetCards(sa, params);
 
         if (tgtCards.size() > 0) {
-
-            if (sa instanceof AbilitySub) {
-                sb.append(" ");
-            } else {
-                sb.append(host).append(" - ");
+            sb.append("Valid card gain protection");
+            if (!params.containsKey("Permanent")) {
+                sb.append(" until end of turn");
             }
-
-            if (params.containsKey("SpellDescription")) {
-                sb.append(params.get("SpellDescription"));
-            } else {
-                sb.append("Valid card gain protection");
-                if (!params.containsKey("Permanent")) {
-                    sb.append(" until end of turn");
-                }
-                sb.append(".");
-            }
+            sb.append(".");
         }
 
         return sb.toString();

@@ -12,7 +12,6 @@ import forge.Command;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.replacement.ReplacementEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
@@ -25,23 +24,7 @@ public class AnimateAllEffect extends AnimateEffectBase
 {
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
-        final StringBuilder sb = new StringBuilder();
-
-        if (sa instanceof AbilitySub) {
-            sb.append(" ");
-        } else {
-            sb.append(sa.getSourceCard()).append(" - ");
-        }
-
-        String desc = "";
-        if (params.containsKey("SpellDescription")) {
-            desc = params.get("SpellDescription");
-        } else {
-            desc = "Animate all valid cards.";
-        }
-
-        sb.append(desc);
-        return sb.toString();
+        return "Animate all valid cards."; 
     }
 
     @Override
