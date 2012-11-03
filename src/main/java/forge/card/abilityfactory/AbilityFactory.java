@@ -491,13 +491,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Clash")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryClash.createAbilityClash(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryClash.createSpellClash(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryClash.createDrawbackClash(this);
-            }
+            ai = new ClashAi();
+            se = new ClashEffect();
         }
 
         else if (this.api.equals("Cleanup")) {
@@ -552,26 +547,13 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("DamageAll")) {
-            final AbilityFactoryDealDamage dd = new AbilityFactoryDealDamage(this);
-            if (this.isAb) {
-                spellAbility = dd.getAbilityDamageAll();
-            } else if (this.isSp) {
-                spellAbility = dd.getSpellDamageAll();
-            } else if (this.isDb) {
-                spellAbility = dd.getDrawbackDamageAll();
-            }
+            ai = new DamageAllAi();
+            se = new DamageAllEffect();
         }
 
         else if (this.api.equals("DealDamage")) {
-            final AbilityFactoryDealDamage dd = new AbilityFactoryDealDamage(this);
-
-            if (this.isAb) {
-                spellAbility = dd.getAbilityDealDamage();
-            } else if (this.isSp) {
-                spellAbility = dd.getSpellDealDamage();
-            } else if (this.isDb) {
-                spellAbility = dd.getDrawbackDealDamage();
-            }
+            ai = new DamageDealAi();
+            se = new DamageDealEffect();
         }
 
         else if (this.api.equals("Debuff")) {
@@ -625,14 +607,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("EachDamage")) {
-            final AbilityFactoryDealDamage dd = new AbilityFactoryDealDamage(this);
-            if (this.isAb) {
-                spellAbility = dd.getAbilityEachDamage();
-            } else if (this.isSp) {
-                spellAbility = dd.getSpellEachDamage();
-            } else if (this.isDb) {
-                spellAbility = dd.getDrawbackEachDamage();
-            }
+            ai = new DamageEachAi();
+            se = new DamageEachEffect();
         }
 
         else if (this.api.equals("Effect")) {
@@ -656,24 +632,13 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Fight")) {
-            final AbilityFactoryDealDamage dd = new AbilityFactoryDealDamage(this);
-            if (this.isAb) {
-                spellAbility = dd.getAbilityFight();
-            } else if (this.isSp) {
-                spellAbility = dd.getSpellFight();
-            } else if (this.isDb) {
-                spellAbility = dd.getDrawbackFight();
-            }
+            ai = new FightAi();
+            se = new FightEffect();
         }
 
         else if (this.api.equals("FlipACoin")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryClash.createAbilityFlip(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryClash.createSpellFlip(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryClash.createDrawbackFlip(this);
-            }
+            ai = new AlwaysPlayAi();
+            se = new FlipCoinEffect();
         }
 
         else if (this.api.equals("Fog")) {
@@ -930,13 +895,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("TwoPiles")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryClash.createAbilityTwoPiles(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryClash.createSpellTwoPiles(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryClash.createDrawbackTwoPiles(this);
-            }
+            ai = new TwoPilesAi();
+            se = new TwoPilesEffect();
         }
 
         else if (this.api.equals("UnattachAll")) {
