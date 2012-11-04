@@ -18,9 +18,8 @@
 package forge.card.abilityfactory;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.List;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
@@ -304,7 +303,7 @@ public final class AbilityFactoryChangeZone {
      * @return a boolean.
      */
     private static boolean changeZoneCanPlayAI(final Player aiPlayer,final AbilityFactory af, final SpellAbility sa) {
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
         String origin = "";
         if (params.containsKey("Origin")) {
             origin = params.get("Origin");
@@ -331,7 +330,7 @@ public final class AbilityFactoryChangeZone {
      * @return a boolean.
      */
     private static boolean changeZonePlayDrawbackAI(final Player aiPlayer, final AbilityFactory af, final SpellAbility sa) {
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
         String origin = "";
         if (params.containsKey("Origin")) {
             origin = params.get("Origin");
@@ -382,7 +381,7 @@ public final class AbilityFactoryChangeZone {
      */
     private static boolean changeZoneTriggerAINoCost(final Player aiPlayer,final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory) {
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
         String origin = "";
         if (params.containsKey("Origin")) {
             origin = params.get("Origin");
@@ -409,7 +408,7 @@ public final class AbilityFactoryChangeZone {
      * @return a {@link java.lang.String} object.
      */
     private static String changeZoneDescription(final AbilityFactory af, final SpellAbility sa) {
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
         String origin = "";
         if (params.containsKey("Origin")) {
             origin = params.get("Origin");
@@ -435,7 +434,7 @@ public final class AbilityFactoryChangeZone {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void changeZoneResolve(final AbilityFactory af, final SpellAbility sa) {
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
         String origin = "";
         if (params.containsKey("Origin")) {
             origin = params.get("Origin");
@@ -477,7 +476,7 @@ public final class AbilityFactoryChangeZone {
         // have access to more mana
         final Cost abCost = af.getAbCost();
         final Card source = sa.getSourceCard();
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
         ZoneType origin = null;
         final Player opponent = ai.getOpponent();
         
@@ -661,7 +660,7 @@ public final class AbilityFactoryChangeZone {
 
         final Card source = sa.getSourceCard();
 
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
 
         List<ZoneType> origin = new ArrayList<ZoneType>();
         if (params.containsKey("Origin")) {
@@ -746,7 +745,7 @@ public final class AbilityFactoryChangeZone {
     private static String changeHiddenOriginStackDescription(final AbilityFactory af, final SpellAbility sa) {
         // TODO build Stack Description will need expansion as more cards are
         // added
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
 
         final StringBuilder sb = new StringBuilder();
         final Card host = sa.getSourceCard();
@@ -862,7 +861,7 @@ public final class AbilityFactoryChangeZone {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void changeHiddenOriginResolve(final AbilityFactory af, final SpellAbility sa) {
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
 
         ArrayList<Player> fetchers;
 
@@ -913,7 +912,7 @@ public final class AbilityFactoryChangeZone {
      *            a {@link forge.game.player.Player} object.
      */
     private static void changeHiddenOriginResolveHuman(final AbilityFactory af, final SpellAbility sa, Player player) {
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
         final Card card = sa.getSourceCard();
         final List<Card> movedCards = new ArrayList<Card>();
         final boolean defined = params.containsKey("Defined");
@@ -1125,7 +1124,7 @@ public final class AbilityFactoryChangeZone {
      *            a {@link forge.game.player.Player} object.
      */
     private static void changeHiddenOriginResolveAI(final Player ai, final AbilityFactory af, final SpellAbility sa, Player player) {
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
         final Target tgt = sa.getTarget();
         final Card card = sa.getSourceCard();
         final boolean defined = params.containsKey("Defined");
@@ -1491,7 +1490,7 @@ public final class AbilityFactoryChangeZone {
         // Retrieve either this card, or target Cards in Graveyard
         final Cost abCost = af.getAbCost();
         final Card source = sa.getSourceCard();
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
 
         final ZoneType origin = ZoneType.smartValueOf(params.get("Origin"));
         final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));
@@ -1629,7 +1628,7 @@ public final class AbilityFactoryChangeZone {
      */
     private static boolean changeKnownPreferredTarget(final Player ai, final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory) {
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
         final Card source = sa.getSourceCard();
         final ZoneType origin = ZoneType.listValueOf(params.get("Origin")).get(0);
         final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));
@@ -1638,7 +1637,7 @@ public final class AbilityFactoryChangeZone {
         final AbilitySub abSub = sa.getSubAbility();
         String subAPI = "";
         String subAffected = "";
-        HashMap<String, String> subParams = null;
+        Map<String, String> subParams = null;
         if (abSub != null) {
             subAPI = abSub.getAbilityFactory().getAPI();
             subParams = abSub.getAbilityFactory().getMapParams();
@@ -1876,7 +1875,7 @@ public final class AbilityFactoryChangeZone {
             return false;
         }
 
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
         final Card source = sa.getSourceCard();
         final ZoneType origin = ZoneType.smartValueOf(params.get("Origin"));
         final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));
@@ -1982,7 +1981,7 @@ public final class AbilityFactoryChangeZone {
      */
     private static boolean changeKnownOriginTriggerAI(final Player ai, final AbilityFactory af, final SpellAbility sa,
             final boolean mandatory) {
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
         if (!ComputerUtil.canPayCost(sa, ai)) {
             return false;
         }
@@ -2026,7 +2025,7 @@ public final class AbilityFactoryChangeZone {
      * @return a {@link java.lang.String} object.
      */
     private static String changeKnownOriginStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
 
         final StringBuilder sb = new StringBuilder();
         final Card host = sa.getSourceCard();
@@ -2156,7 +2155,7 @@ public final class AbilityFactoryChangeZone {
         ArrayList<Card> tgtCards;
         ArrayList<SpellAbility> sas;
 
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
         final Target tgt = sa.getTarget();
         final Player player = sa.getActivatingPlayer();
         final Card hostCard = sa.getSourceCard();
@@ -2350,7 +2349,7 @@ public final class AbilityFactoryChangeZone {
         Singletons.getModel().getGame().getStack().remove(si);
 
         final AbilityFactory af = srcSA.getAbilityFactory();
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
 
         if (params.containsKey("Destination")) {
             if (tgtSA.isAbility()) {
@@ -2553,7 +2552,7 @@ public final class AbilityFactoryChangeZone {
         // Change Zone All, can be any type moving from one zone to another
         final Cost abCost = af.getAbCost();
         final Card source = sa.getSourceCard();
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
         final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));
         final ZoneType origin = ZoneType.smartValueOf(params.get("Origin"));
 
@@ -2741,7 +2740,7 @@ public final class AbilityFactoryChangeZone {
      */
     public static boolean changeZoneAllTriggerAINoCost(final Player ai, final AbilityFactory af, final SpellAbility sa, final boolean mandatory) {
         // Change Zone All, can be any type moving from one zone to another
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
         final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));
         final ZoneType origin = ZoneType.smartValueOf(params.get("Origin"));
 
@@ -2887,7 +2886,7 @@ public final class AbilityFactoryChangeZone {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void changeZoneAllResolve(final AbilityFactory af, final SpellAbility sa) {
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
         final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));
         final List<ZoneType> origin = ZoneType.listValueOf(params.get("Origin"));
 

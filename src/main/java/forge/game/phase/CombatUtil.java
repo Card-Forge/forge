@@ -20,6 +20,7 @@ package forge.game.phase;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -1632,7 +1633,7 @@ public class CombatUtil {
                 continue;
             }
             final String ability = source.getSVar(trigParams.get("Execute"));
-            final HashMap<String, String> abilityParams = AbilityFactory.getMapParams(ability, source);
+            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
             if (abilityParams.containsKey("AB") && !abilityParams.get("AB").equals("Pump")) {
                 continue;
             }
@@ -1680,7 +1681,7 @@ public class CombatUtil {
             if (!af.getAPI().equals("Pump")) {
                 continue;
             }
-            HashMap<String, String> params = af.getMapParams();
+            Map<String, String> params = af.getMapParams();
             if (!params.containsKey("NumAtt")) {
                 continue;
             }
@@ -1731,7 +1732,7 @@ public class CombatUtil {
                 continue;
             }
             final String ability = source.getSVar(trigParams.get("Execute"));
-            final HashMap<String, String> abilityParams = AbilityFactory.getMapParams(ability, source);
+            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
 
             // DealDamage triggers
             if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("DealDamage"))
@@ -1798,7 +1799,7 @@ public class CombatUtil {
             if (!af.getAPI().equals("Pump")) {
                 continue;
             }
-            HashMap<String, String> params = af.getMapParams();
+            Map<String, String> params = af.getMapParams();
             if (!params.containsKey("NumDef")) {
                 continue;
             }
@@ -1892,7 +1893,7 @@ public class CombatUtil {
                 continue;
             }
             final String ability = source.getSVar(trigParams.get("Execute"));
-            final HashMap<String, String> abilityParams = AbilityFactory.getMapParams(ability, source);
+            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
             if (abilityParams.containsKey("ValidTgts") || abilityParams.containsKey("Tgt")) {
                 continue; // targeted pumping not supported
             }
@@ -2017,7 +2018,7 @@ public class CombatUtil {
                 continue;
             }
             final String ability = source.getSVar(trigParams.get("Execute"));
-            final HashMap<String, String> abilityParams = AbilityFactory.getMapParams(ability, source);
+            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
             if (abilityParams.containsKey("ValidTgts") || abilityParams.containsKey("Tgt")) {
                 continue; // targeted pumping not supported
             }
@@ -2123,7 +2124,7 @@ public class CombatUtil {
                 continue;
             }
             String ability = source.getSVar(trigParams.get("Execute"));
-            final HashMap<String, String> abilityParams = AbilityFactory.getMapParams(ability, source);
+            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
             // Destroy triggers
             if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("Destroy"))
                     || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("Destroy"))) {
@@ -2178,7 +2179,7 @@ public class CombatUtil {
                 continue;
             }
             String ability = source.getSVar(trigParams.get("Execute"));
-            final HashMap<String, String> abilityParams = AbilityFactory.getMapParams(ability, source);
+            final Map<String, String> abilityParams = AbilityFactory.getMapParams(ability);
             // Destroy triggers
             if ((abilityParams.containsKey("AB") && abilityParams.get("AB").equals("Destroy"))
                     || (abilityParams.containsKey("DB") && abilityParams.get("DB").equals("Destroy"))) {

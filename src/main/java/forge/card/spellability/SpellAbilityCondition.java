@@ -18,8 +18,8 @@
 package forge.card.spellability;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import forge.Card;
 
@@ -66,7 +66,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
      * @param params
      *            a {@link java.util.HashMap} object.
      */
-    public final void setConditions(final HashMap<String, String> params) {
+    public final void setConditions(final Map<String, String> params) {
         if (params.containsKey("Condition")) {
             final String value = params.get("Condition");
             if (value.equals("Threshold")) {

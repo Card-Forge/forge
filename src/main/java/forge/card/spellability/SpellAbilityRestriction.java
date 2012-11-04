@@ -18,8 +18,8 @@
 package forge.card.spellability;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import forge.Card;
 
@@ -68,7 +68,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
      *            a {@link java.util.HashMap} object.
      * @since 1.0.15
      */
-    public final void setRestrictions(final HashMap<String, String> params) {
+    public final void setRestrictions(final Map<String, String> params) {
         if (params.containsKey("Activation")) {
             final String value = params.get("Activation");
             if (value.equals("Threshold")) {

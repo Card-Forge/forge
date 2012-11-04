@@ -1,8 +1,8 @@
 package forge.card.abilityfactory.effects;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
@@ -35,7 +35,7 @@ public class ChooseGenericEffect extends SpellEffect {
         final Card host = sa.getSourceCard();
         final BiMap<String, String> choices = HashBiMap.create();
         for (String s : Arrays.asList(params.get("Choices").split(","))) {
-            final HashMap<String, String> theseParams = AbilityFactory.getMapParams(host.getSVar(s), host);
+            final Map<String, String> theseParams = AbilityFactory.getMapParams(host.getSVar(s));
             choices.put(s, theseParams.get("ChoiceDescription"));
         }
 

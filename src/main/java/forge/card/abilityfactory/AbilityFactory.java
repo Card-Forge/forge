@@ -81,7 +81,6 @@ public class AbilityFactory {
         this.abCost = af.getAbCost();
         this.abTgt = af.getAbTgt();
         this.api = af.getAPI();
-        this.hasSpDesc = af.hasSpDescription();
         this.hasValid = af.hasValid();
         this.hostC = af.getHostCard();
         this.isAb = af.isAbility();
@@ -115,7 +114,7 @@ public class AbilityFactory {
         this.hostC = host;
     }
 
-    private HashMap<String, String> mapParams = new HashMap<String, String>();
+    private Map<String, String> mapParams = new HashMap<String, String>();
 
     /**
      * <p>
@@ -124,7 +123,7 @@ public class AbilityFactory {
      * 
      * @return a {@link java.util.HashMap} object.
      */
-    public final HashMap<String, String> getMapParams() {
+    public final Map<String, String> getMapParams() {
         return this.mapParams;
     }
 
@@ -227,18 +226,6 @@ public class AbilityFactory {
         return this.mapParams.containsKey("IsCurse");
     }
 
-    private boolean hasSpDesc = false;
-
-    /**
-     * <p>
-     * hasSpDescription.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean hasSpDescription() {
-        return this.hasSpDesc;
-    }
 
     private String api = "";
 
@@ -256,38 +243,21 @@ public class AbilityFactory {
     // *******************************************************
 
 
-    public static final HashMap<String, String> getMapParams(final String abString, final Card hostCard) {
-        final HashMap<String, String> mapParameters = new HashMap<String, String>();
+    public static final Map<String, String> getMapParams(final String abString) {
+        if ( null == abString || abString.isEmpty() )
+            return null; // Caller will have to deal with NPEs
 
-        if (!(abString.length() > 0)) {
-            throw new RuntimeException("AbilityFactory : getAbility -- abString too short in " + hostCard.getName()
-                    + ": [" + abString + "]");
-        }
-
-        final String[] a = abString.split("\\|");
-
-        for (int aCnt = 0; aCnt < a.length; aCnt++) {
-            a[aCnt] = a[aCnt].trim();
-        }
-
-        if (!(a.length > 0)) {
-            throw new RuntimeException("AbilityFactory : getAbility -- a[] too short in " + hostCard.getName());
-        }
-
-        for (final String element : a) {
-            final String[] aa = element.split("\\$");
-
+        final Map<String, String> mapParameters = new HashMap<String, String>();
+        for (final String element : abString.split("\\|")) {
+            final String[] aa = element.trim().split("\\$");
+            
             for (int aaCnt = 0; aaCnt < aa.length; aaCnt++) {
                 aa[aaCnt] = aa[aaCnt].trim();
             }
 
             if (aa.length != 2) {
-                final StringBuilder sb = new StringBuilder();
-                sb.append("AbilityFactory Parsing Error in getAbility() : Split length of ");
-                sb.append(element).append(" in ").append(hostCard.getName()).append(" is not 2.");
-                throw new RuntimeException(sb.toString());
+                throw new RuntimeException(String.format("Split length of %s is not 2.", element));
             }
-
             mapParameters.put(aa[0], aa[1]);
         }
 
@@ -311,7 +281,13 @@ public class AbilityFactory {
 
         this.hostC = hostCard;
 
-        this.mapParams = AbilityFactory.getMapParams(abString, hostCard);
+        try{ 
+            this.mapParams = AbilityFactory.getMapParams(abString);
+        }
+        catch( RuntimeException ex )
+        {
+            throw new RuntimeException(hostCard.getName() + ": " + ex.getMessage()); 
+        }
 
         // parse universal parameters
 
@@ -399,7 +375,6 @@ public class AbilityFactory {
                 this.abTgt.setDefinedController(this.mapParams.get("TargetsWithDefinedController"));
             }
         }
-        this.hasSpDesc = this.mapParams.containsKey("SpellDescription");
 
         // ***********************************
         // Match API keywords. These are listed in alphabetical order.
@@ -936,7 +911,7 @@ public class AbilityFactory {
 
         if (spellAbility instanceof SpellPermanent) {
             spellAbility.setDescription(spellAbility.getSourceCard().getName());
-        } else if (this.hasSpDesc) {
+        } else if (this.mapParams.containsKey("SpellDescription")) {
             final StringBuilder sb = new StringBuilder();
 
             if (!this.isDb) { // SubAbilities don't have Costs or Cost
@@ -2025,7 +2000,7 @@ public class AbilityFactory {
         ArrayList<Object> objects = new ArrayList<Object>();
         final ArrayList<Object> threatened = new ArrayList<Object>();
         String saviourApi = "";
-        HashMap<String, String> saviourParams = null;
+        Map<String, String> saviourParams = null;
         if (saviourAf != null) {
             saviourApi = saviourAf.getAPI();
             saviourParams = saviourAf.getMapParams();
@@ -2041,7 +2016,7 @@ public class AbilityFactory {
         // Can only Predict things from AFs
         if (topAf != null) {
             final Target tgt = topStack.getTarget();
-            final HashMap<String, String> threatParams = topAf.getMapParams();
+            final Map<String, String> threatParams = topAf.getMapParams();
 
             if (tgt == null) {
                 if (threatParams.containsKey("Defined")) {
@@ -2195,7 +2170,7 @@ public class AbilityFactory {
      *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      */
     public static void handleRemembering(final SpellAbility sa, final AbilityFactory af) {
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
         Card host;
 
         if (!params.containsKey("RememberTargets") && !params.containsKey("RememberToughness")
@@ -2345,7 +2320,7 @@ public class AbilityFactory {
             AbilityFactory.resolveSubAbilities(sa, usedStack);
             return;
         }
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
 
         // Nothing to do
         if (params.get("UnlessCost") == null) {

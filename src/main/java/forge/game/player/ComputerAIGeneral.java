@@ -20,6 +20,7 @@ package forge.game.player;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.esotericsoftware.minlog.Log;
 
@@ -107,7 +108,7 @@ public class ComputerAIGeneral implements Computer {
                     continue;
                 }
                 final AbilityFactory af = sa.getAbilityFactory();
-                final HashMap<String, String> abilityParams = af.getMapParams();
+                final Map<String, String> abilityParams = af.getMapParams();
                 if (abilityParams.containsKey("AB") && !abilityParams.get("AB").equals("Pump")) {
                     continue;
                 }

@@ -17,7 +17,7 @@
  */
 package forge.card.abilityfactory;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import forge.Card;
 import forge.Singletons;
@@ -206,7 +206,7 @@ public class AbilityFactoryStoreSVar {
      * @return a {@link java.lang.String} object.
      */
     public static String storeSVarStackDescription(final AbilityFactory af, final SpellAbility sa) {
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
 
         final StringBuilder sb = new StringBuilder();
 
@@ -299,7 +299,7 @@ public class AbilityFactoryStoreSVar {
      */
     public static void storeSVarResolve(final AbilityFactory af, final SpellAbility sa) {
         //SVar$ OldToughness | Type$ Count | Expression$ CardToughness
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
         Card source = sa.getSourceCard();
 
         String key = null;

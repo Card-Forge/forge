@@ -190,7 +190,7 @@ public class ComputerUtil {
         final Card source = sa.getSourceCard();
         final Target tgt = sa.getTarget();
         final AbilityFactory af = sa.getAbilityFactory();
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
 
         // Play higher costing spells first?
         final Cost cost = sa.getPayCosts();
@@ -1956,7 +1956,7 @@ public class ComputerUtil {
                         continue; // Can't play ability
                     }
 
-                    final HashMap<String, String> mapParams = af.getMapParams();
+                    final Map<String, String> mapParams = af.getMapParams();
 
                     final Target tgt = sa.getTarget();
                     if (tgt != null) {
@@ -1999,7 +1999,7 @@ public class ComputerUtil {
                 try {
                     if ((sa.getAbilityFactory() != null) && sa.isAbility()) {
                         final AbilityFactory af = sa.getAbilityFactory();
-                        final HashMap<String, String> mapParams = af.getMapParams();
+                        final Map<String, String> mapParams = af.getMapParams();
                         if (mapParams.get("AB").equals("PreventDamage") && sa.canPlay()
                                 && ComputerUtil.canPayCost(sa, controller)) {
                             if (AbilityFactory.getDefinedCards(sa.getSourceCard(), mapParams.get("Defined"), sa)

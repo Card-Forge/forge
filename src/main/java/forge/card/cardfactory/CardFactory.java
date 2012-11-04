@@ -20,8 +20,9 @@ package forge.card.cardfactory;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardUtil;
@@ -163,7 +164,7 @@ public class CardFactory implements CardFactoryInterface {
             final SpellAbility sourceSA = source.getFirstSpellAbility();
             if (sourceSA.getAbilityFactory().getMapParams().containsKey("CopyIsColor")) {
                 String tmp = "";
-                final HashMap<String, String> params = sourceSA.getAbilityFactory().getMapParams();
+                final Map<String, String> params = sourceSA.getAbilityFactory().getMapParams();
                 final String newColor = params.get("CopyIsColor");
                 if (newColor.equals("ChosenColor")) {
                     tmp = CardUtil.getShortColorsString(source.getChosenColor());

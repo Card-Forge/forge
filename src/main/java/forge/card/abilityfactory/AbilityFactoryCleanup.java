@@ -17,7 +17,7 @@
  */
 package forge.card.abilityfactory;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import forge.Card;
 import forge.Singletons;
@@ -100,7 +100,7 @@ public final class AbilityFactoryCleanup {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void doResolve(final AbilityFactory af, final SpellAbility sa) {
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
         Card source = sa.getSourceCard();
 
         if (params.containsKey("ClearRemembered")) {

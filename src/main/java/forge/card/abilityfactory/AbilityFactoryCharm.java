@@ -18,7 +18,7 @@
 package forge.card.abilityfactory;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import forge.Card;
@@ -154,7 +154,7 @@ public final class AbilityFactoryCharm {
 
     private static boolean charmCanPlayAI(final Player ai,final AbilityFactory af, final SpellAbility sa, boolean mandatory) {
         final Random r = MyRandom.getRandom();
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
         final Card source = sa.getSourceCard();
         //this resets all previous choices
         sa.setSubAbility(null);
@@ -227,7 +227,7 @@ public final class AbilityFactoryCharm {
         if (af == null || !af.getAPI().equals("Charm") || sa.isWrapper()) {
             return sa;
         }
-        final HashMap<String, String> params = af.getMapParams();
+        final Map<String, String> params = af.getMapParams();
         final Card source = sa.getSourceCard();
         //this resets all previous choices
         sa.setSubAbility(null);
