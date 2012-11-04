@@ -14,6 +14,8 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Exile | Execute$ DBCleanup | Static$ True | Secondary$ True | TriggerDescription$ Forget remembered card if it goes into Exile.
 T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Hand | Execute$ DBCleanup | Static$ True | Secondary$ True | TriggerDescription$ Forget remembered card if it goes into Hand.
 T:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Library | Execute$ DBCleanup | Static$ True | Secondary$ True | TriggerDescription$ Forget remembered card if it goes into Library.
+SVar:NeedsToPlayVar:Y GE1
+SVar:Y:Count$TypeInYourYard.Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diabolic_servitude.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/130.jpg

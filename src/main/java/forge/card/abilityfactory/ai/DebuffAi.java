@@ -28,7 +28,7 @@ public class DebuffAi extends SpellAiLogic {
     // *************************************************************************
 
     @Override
-    public boolean canPlayAI(Player ai, final java.util.Map<String,String> params, SpellAbility sa) {
+    public boolean canPlayAI(final Player ai, final java.util.Map<String,String> params, final SpellAbility sa) {
         // if there is no target and host card isn't in play, don't activate
         final Card source = sa.getSourceCard();
         if ((sa.getTarget() == null) && !source.isInPlay()) {
@@ -78,7 +78,7 @@ public class DebuffAi extends SpellAiLogic {
                 cards = CardLists.filter(cards, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        if (!c.isBlocking() && !c.isAttacking()) {
+                        if ((c.getController().equals(sa.getActivatingPlayer())) || (!c.isBlocking() && !c.isAttacking())) {
                             return false;
                         }
                         // don't add duplicate negative keywords
