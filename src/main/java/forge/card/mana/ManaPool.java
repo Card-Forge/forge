@@ -19,11 +19,13 @@ package forge.card.mana;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import forge.Constant;
 import forge.Singletons;
-import forge.card.spellability.AbilityMana;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayManaCostUtil;
 import forge.game.player.Player;
@@ -478,18 +480,18 @@ public class ManaPool {
      *            a {@link forge.card.spellability.AbilityMana} object.
      * @return a {@link forge.card.mana.ManaCost} object.
      */
-    public final ManaCost payManaFromAbility(final SpellAbility sa, ManaCost manaCost, final AbilityMana ma) {
+    public final ManaCost payManaFromAbility(final SpellAbility sa, ManaCost manaCost, final AbilityActivated ma) {
         if (manaCost.isPaid() || this.isEmpty()) {
             return manaCost;
         }
 
         // Mana restriction must be checked before this method is called
 
-        final ArrayList<AbilityMana> paidAbs = sa.getPayingManaAbilities();
-        final ArrayList<Mana> manaPaid = sa.getPayingMana();
+        final List<AbilityActivated> paidAbs = sa.getPayingManaAbilities();
+        final List<Mana> manaPaid = sa.getPayingMana();
 
         paidAbs.add(ma); // assumes some part on the mana produced by the ability will get used
-        for (final Mana mana : ma.getLastProduced()) {
+        for (final Mana mana : ma.getManaPart().getLastProduced()) {
             if (manaCost.isNeeded(mana)) {
                 manaCost.payMana(mana);
                 manaPaid.add(mana);
@@ -524,8 +526,8 @@ public class ManaPool {
      *            a boolean.
      */
     public final void clearManaPaid(final SpellAbility ability, final boolean refund) {
-        final ArrayList<AbilityMana> abilitiesUsedToPay = ability.getPayingManaAbilities();
-        final ArrayList<Mana> manaPaid = ability.getPayingMana();
+        final List<AbilityActivated> abilitiesUsedToPay = ability.getPayingManaAbilities();
+        final List<Mana> manaPaid = ability.getPayingMana();
 
         abilitiesUsedToPay.clear();
         // move non-undoable paying mana back to floating
@@ -554,7 +556,7 @@ public class ManaPool {
      *            a {@link forge.card.spellability.AbilityMana} object.
      * @return a boolean.
      */
-    private boolean accountFor(final SpellAbility sa, final AbilityMana ma) {
+    private boolean accountFor(final SpellAbility sa, final AbilityManaPart ma) {
         final ArrayList<Mana> manaPaid = sa.getPayingMana();
 
         if ((manaPaid.size() == 0) && (this.floatingMana.size() == 0)) {
@@ -607,13 +609,14 @@ public class ManaPool {
     public final void refundManaPaid(final SpellAbility sa, final boolean untap) {
         // TODO having some crash in here related to undo and not tracking
         // abilities properly
-        final ArrayList<AbilityMana> payAbs = sa.getPayingManaAbilities();
+        final List<AbilityActivated> payAbs = sa.getPayingManaAbilities();
 
         // go through paidAbilities if they are undoable
-        for (final AbilityMana am : payAbs) {
-            if (am.isUndoable()) {
-                if (this.accountFor(sa, am)) {
-                    am.undo();
+        for (final AbilityActivated am : payAbs) {
+            AbilityManaPart m = am.getManaPart();
+            if (m.isUndoable()) {
+                if (this.accountFor(sa, m)) {
+                    m.undo();
                 }
                 // else can't account let clearPay move paying back to floating
             }

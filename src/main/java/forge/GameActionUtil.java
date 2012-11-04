@@ -23,6 +23,8 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import org.testng.collections.Lists;
+
 import com.google.common.base.Predicate;
 
 import forge.CardPredicates.Presets;
@@ -40,7 +42,7 @@ import forge.card.cost.CostReturn;
 import forge.card.cost.CostSacrifice;
 import forge.card.cost.CostUtil;
 import forge.card.spellability.Ability;
-import forge.card.spellability.AbilityMana;
+import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
@@ -169,7 +171,7 @@ public final class GameActionUtil {
                                     revealed.remove(cascadedCard);
                                 }
                             } else {
-                                final ArrayList<SpellAbility> choices = cascadedCard.getBasicSpells();
+                                final List<SpellAbility> choices = cascadedCard.getBasicSpells();
 
                                 for (final SpellAbility sa : choices) {
                                     //Spells
@@ -288,7 +290,7 @@ public final class GameActionUtil {
                                             revealed.remove(rippledCards[i]);
                                         }
                                     } else {
-                                        final ArrayList<SpellAbility> choices = rippledCards[i].getBasicSpells();
+                                        final List<SpellAbility> choices = rippledCards[i].getBasicSpells();
 
                                         for (final SpellAbility sa : choices) {
                                           //Spells
@@ -958,87 +960,6 @@ public final class GameActionUtil {
         }
     }
 
-    /** Constant <code>stLandManaAbilities</code>. */
-    private static Command stLandManaAbilities = new Command() {
-        private static final long serialVersionUID = 8005448956536998277L;
-
-        @Override
-        public void execute() {
-
-            final HashMap<String, String> produces = new HashMap<String, String>();
-            /*
-             * for future use boolean naked =
-             * AllZoneUtil.isCardInPlay("Naked Singularity"); boolean twist =
-             * AllZoneUtil.isCardInPlay("Reality Twist"); //set up what they
-             * produce produces.put("Forest", naked || twist ? "B" : "G");
-             * produces.put("Island", naked == true ? "G" : "U"); if(naked)
-             * produces.put("Mountain", "U"); else if(twist)
-             * produces.put("Mountain", "W"); else produces.put("Mountain",
-             * "R"); produces.put("Plains", naked || twist ? "R" : "W");
-             * if(naked) produces.put("Swamp", "W"); else if(twist)
-             * produces.put("Swamp", "G"); else produces.put("Swamp", "B");
-             */
-            produces.put("Forest", "G");
-            produces.put("Island", "U");
-            produces.put("Mountain", "R");
-            produces.put("Plains", "W");
-            produces.put("Swamp", "B");
-
-            List<Card> lands = Singletons.getModel().getGame().getCardsInGame();
-            lands = CardLists.filter(lands, Presets.LANDS);
-
-            // remove all abilities granted by this Command
-            for (final Card land : lands) {
-                final ArrayList<AbilityMana> sas = land.getManaAbility();
-                for (final SpellAbility sa : sas) {
-                    if (sa.getType().equals("BasicLandTypeMana")) {
-                        land.removeSpellAbility(sa);
-                    }
-                }
-            }
-
-            // add all appropriate mana abilities based on current types
-            for (final Card land : lands) {
-                if (land.isType("Swamp")) {
-                    final AbilityFactory af = new AbilityFactory();
-                    final SpellAbility sa = af.getAbility("AB$ Mana | Cost$ T | Produced$ " + produces.get("Swamp")
-                            + " | SpellDescription$ Add " + produces.get("Swamp") + " to your mana pool.", land);
-                    sa.setType("BasicLandTypeMana");
-                    land.addSpellAbility(sa);
-                }
-                if (land.isType("Forest")) {
-                    final AbilityFactory af = new AbilityFactory();
-                    final SpellAbility sa = af.getAbility("AB$ Mana | Cost$ T | Produced$ " + produces.get("Forest")
-                            + " | SpellDescription$ Add " + produces.get("Forest") + " to your mana pool.", land);
-                    sa.setType("BasicLandTypeMana");
-                    land.addSpellAbility(sa);
-                }
-                if (land.isType("Island")) {
-                    final AbilityFactory af = new AbilityFactory();
-                    final SpellAbility sa = af.getAbility("AB$ Mana | Cost$ T | Produced$ " + produces.get("Island")
-                            + " | SpellDescription$ Add " + produces.get("Island") + " to your mana pool.", land);
-                    sa.setType("BasicLandTypeMana");
-                    land.addSpellAbility(sa);
-                }
-                if (land.isType("Mountain")) {
-                    final AbilityFactory af = new AbilityFactory();
-                    final SpellAbility sa = af.getAbility("AB$ Mana | Cost$ T | Produced$ " + produces.get("Mountain")
-                            + " | SpellDescription$ Add " + produces.get("Mountain") + " to your mana pool.", land);
-                    sa.setType("BasicLandTypeMana");
-                    land.addSpellAbility(sa);
-                }
-                if (land.isType("Plains")) {
-                    final AbilityFactory af = new AbilityFactory();
-                    final SpellAbility sa = af.getAbility("AB$ Mana | Cost$ T | Produced$ " + produces.get("Plains")
-                            + " | SpellDescription$ Add " + produces.get("Plains") + " to your mana pool.", land);
-                    sa.setType("BasicLandTypeMana");
-                    land.addSpellAbility(sa);
-                }
-            }
-        } // execute()
-
-    }; // stLandManaAbilities
-
     /** Constant <code>coatOfArms</code>. */
     private static Command coatOfArms = new Command() {
         private static final long serialVersionUID = 583505612126735693L;
@@ -1384,19 +1305,55 @@ public final class GameActionUtil {
      * 
      * @return the stLandManaAbilities
      */
-    public static Command getStLandManaAbilities() {
-        return GameActionUtil.stLandManaAbilities;
-    }
+    public static void grantBasicLandsManaAbilities() {
+        final HashMap<String, String> produces = new HashMap<String, String>();
+        /*
+         * for future use boolean naked =
+         * AllZoneUtil.isCardInPlay("Naked Singularity"); boolean twist =
+         * AllZoneUtil.isCardInPlay("Reality Twist"); //set up what they
+         * produce produces.put("Forest", naked || twist ? "B" : "G");
+         * produces.put("Island", naked == true ? "G" : "U"); if(naked)
+         * produces.put("Mountain", "U"); else if(twist)
+         * produces.put("Mountain", "W"); else produces.put("Mountain",
+         * "R"); produces.put("Plains", naked || twist ? "R" : "W");
+         * if(naked) produces.put("Swamp", "W"); else if(twist)
+         * produces.put("Swamp", "G"); else produces.put("Swamp", "B");
+         */
+        produces.put("Forest", "G");
+        produces.put("Island", "U");
+        produces.put("Mountain", "R");
+        produces.put("Plains", "W");
+        produces.put("Swamp", "B");
 
-    /**
-     * Sets the st land mana abilities.
-     * 
-     * @param stLandManaAbilitiesIn
-     *            the new st land mana abilities
-     */
-    public static void setStLandManaAbilities(final Command stLandManaAbilitiesIn) {
-        GameActionUtil.stLandManaAbilities = stLandManaAbilitiesIn;
-    }
+        List<Card> lands = Singletons.getModel().getGame().getCardsInGame();
+        lands = CardLists.filter(lands, Presets.LANDS);
+
+        // remove all abilities granted by this Command
+        for (final Card land : lands) {
+            List<AbilityActivated> manaAbs = Lists.newArrayList(land.getManaAbility());
+            // will get comodification exception without a different list
+            for (final SpellAbility sa : manaAbs) {
+                if (sa.getType().equals("BasicLandTypeMana")) {
+                    land.removeSpellAbility(sa);
+                }
+            }
+        }
+
+        // add all appropriate mana abilities based on current types
+        for (final Card land : lands) {
+            for( String landType : Constant.Color.BASIC_LANDS )
+            {
+                if (land.isType(landType)) {
+                    final AbilityFactory af = new AbilityFactory();
+                    final SpellAbility sa = af.getAbility("AB$ Mana | Cost$ T | Produced$ " + produces.get(landType)
+                            + " | SpellDescription$ Add " + produces.get(landType) + " to your mana pool.", land);
+                    sa.setType("BasicLandTypeMana");
+                    land.addSpellAbility(sa);
+                }
+            }
+        }
+
+    } // stLandManaAbilities
 
     /**
      * <p>

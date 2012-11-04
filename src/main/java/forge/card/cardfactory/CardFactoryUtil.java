@@ -54,7 +54,6 @@ import forge.card.replacement.ReplacementHandler;
 import forge.card.replacement.ReplacementLayer;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
-import forge.card.spellability.AbilityMana;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
@@ -3209,7 +3208,7 @@ public class CardFactoryUtil {
         List<Card> list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                for (final AbilityMana am : c.getAIPlayableMana()) {
+                for (final SpellAbility am : c.getAIPlayableMana()) {
                     if (am.canPlay()) {
                         return true;
                     }

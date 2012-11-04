@@ -25,7 +25,9 @@ import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
@@ -39,7 +41,7 @@ import forge.CardUtil;
 import forge.Constant;
 import forge.Counters;
 import forge.Singletons;
-import forge.card.spellability.AbilityMana;
+import forge.card.spellability.AbilityManaPart;
 import forge.card.trigger.TriggerType;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
@@ -135,10 +137,9 @@ public final class GuiDisplayUtil {
         final Player human = Singletons.getControl().getPlayer();
         dummy.setOwner(human);
         dummy.addController(human);
-        final AbilityMana abMana = new AbilityMana(dummy, "0", "W U B G R 1", 10) {
-            private static final long serialVersionUID = -2164401486331182356L;
-
-        };
+        Map<String, String> produced = new HashMap<String, String>();
+        produced.put("Produced", "W W W W W W W U U U U U U U B B B B B B B G G G G G G G R R R R R R R 7");
+        final AbilityManaPart abMana = new AbilityManaPart(dummy, "0", produced);
         abMana.produceMana();
     }
 

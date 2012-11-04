@@ -44,7 +44,8 @@ import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementResult;
-import forge.card.spellability.AbilityMana;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilityTriggered;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
@@ -1353,7 +1354,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     if (c.getOwner().isHuman()) {
                         Singletons.getModel().getGame().getAction().playCardWithoutManaCost(c);
                     } else {
-                        final ArrayList<SpellAbility> choices = this.getBasicSpells();
+                        final List<SpellAbility> choices = this.getBasicSpells();
 
                         for (final SpellAbility sa : choices) {
                             //Spells
@@ -2474,7 +2475,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
             final String sAbility = sa.toString();
 
-            if (sa instanceof AbilityMana) {
+            if (sa.getManaPart() != null) {
                 if (addedManaStrings.contains(sAbility)) {
                     continue;
                 }
@@ -2674,8 +2675,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<AbilityMana> getManaAbility() {
-        return new ArrayList<AbilityMana>(this.getCharacteristics().getManaAbility());
+    public final List<AbilityActivated> getManaAbility() {
+        return Collections.unmodifiableList(this.getCharacteristics().getManaAbility());
     }
 
     // Returns basic mana abilities plus "reflected mana" abilities
@@ -2686,18 +2687,19 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<AbilityMana> getAIPlayableMana() {
-        final ArrayList<AbilityMana> res = new ArrayList<AbilityMana>();
-        for (final AbilityMana am : this.getManaAbility()) {
+    public final ArrayList<AbilityActivated> getAIPlayableMana() {
+        final ArrayList<AbilityActivated> res = new ArrayList<AbilityActivated>();
+        for (final AbilityActivated a : this.getManaAbility()) {
 
             // if a mana ability has a mana cost the AI will miscalculate
-            final Cost cost = am.getPayCosts();
+            final Cost cost = a.getPayCosts();
             if (!cost.hasNoManaCost()) {
                 continue;
             }
 
+            AbilityManaPart am = a.getManaPart();
             if ((am.isBasic() || am.isReflectedMana()) && !res.contains(am)) {
-                res.add(am);
+                res.add(a);
             }
 
         }
@@ -2713,11 +2715,11 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<AbilityMana> getBasicMana() {
-        final ArrayList<AbilityMana> res = new ArrayList<AbilityMana>();
-        for (final AbilityMana am : this.getManaAbility()) {
-            if (am.isBasic() && !res.contains(am)) {
-                res.add(am);
+    public final List<AbilityActivated> getBasicMana() {
+        final List<AbilityActivated> res = new ArrayList<AbilityActivated>();
+        for (final AbilityActivated a : this.getManaAbility()) {
+            if (a.getManaPart().isBasic() && !res.contains(a)) {
+                res.add(a);
             }
         }
         return res;
@@ -2735,39 +2737,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return;
             }
         }
-    }
-
-    /**
-     * <p>
-     * clearAllButFirstSpellAbility.
-     * </p>
-     */
-    public final void clearAllButFirstSpellAbility() {
-        if (!this.getCharacteristics().getSpellAbility().isEmpty()) {
-            final SpellAbility first = this.getCharacteristics().getSpellAbility().get(0);
-            this.getCharacteristics().getSpellAbility().clear();
-            this.getCharacteristics().getSpellAbility().add(first);
-        }
-        this.getCharacteristics().getManaAbility().clear();
-    }
-
-    /**
-     * <p>
-     * getAllButFirstSpellAbility.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public final ArrayList<SpellAbility> getAllButFirstSpellAbility() {
-        final ArrayList<SpellAbility> sas = new ArrayList<SpellAbility>();
-        sas.addAll(this.getCharacteristics().getSpellAbility());
-        if (!sas.isEmpty()) {
-            final SpellAbility first = this.getCharacteristics().getSpellAbility().get(0);
-            sas.remove(first);
-        }
-        sas.addAll(this.getCharacteristics().getManaAbility());
-
-        return sas;
     }
 
     /**
@@ -2823,32 +2792,6 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     /**
      * <p>
-     * clearManaAbility.
-     * </p>
-     */
-    public final void clearManaAbility() {
-        this.getCharacteristics().getManaAbility().clear();
-    }
-
-    /**
-     * <p>
-     * addFirstSpellAbility.
-     * </p>
-     * 
-     * @param a
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public final void addFirstSpellAbility(final SpellAbility a) {
-        a.setSourceCard(this);
-        if (a instanceof AbilityMana) {
-            this.getCharacteristics().getManaAbility().add(0, (AbilityMana) a);
-        } else {
-            this.getCharacteristics().getSpellAbility().add(0, a);
-        }
-    }
-
-    /**
-     * <p>
      * addSpellAbility.
      * </p>
      * 
@@ -2856,37 +2799,15 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void addSpellAbility(final SpellAbility a) {
-        if (a.getAbilityFactory() != null) {
-            a.getAbilityFactory().setHostCard(this);
-        }
+        
         a.setSourceCard(this);
-        if (a instanceof AbilityMana) {
-            this.getCharacteristics().getManaAbility().add((AbilityMana) a);
+        if (a.getManaPart() != null) {
+            this.getCharacteristics().getManaAbility().add((AbilityActivated)a);
         } else {
             this.getCharacteristics().getSpellAbility().add(a);
         }
     }
 
-    /**
-     * <p>
-     * addSpellAbility.
-     * </p>
-     * 
-     * @param a
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     *
-     * @param state
-     *            a {@link forge.CardCharacteristicName} object.
-     */
-    public final void addSpellAbility(final SpellAbility a, final CardCharacteristicName state) {
-        a.setSourceCard(this);
-        CardCharacteristics stateCharacteristics = this.getState(state);
-        if (a instanceof AbilityMana) {
-            stateCharacteristics.getManaAbility().add((AbilityMana) a);
-        } else {
-            stateCharacteristics.getSpellAbility().add(a);
-        }
-    }
 
     /**
      * <p>
@@ -2897,71 +2818,13 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void removeSpellAbility(final SpellAbility a) {
-        if (a instanceof AbilityMana) {
+        if (a.getManaPart() != null) {
             // if (a.isExtrinsic()) //never remove intrinsic mana abilities, is
             // this the way to go??
             this.getCharacteristics().getManaAbility().remove(a);
         } else {
             this.getCharacteristics().getSpellAbility().remove(a);
         }
-    }
-
-    /**
-     * <p>
-     * removeSpellAbility.
-     * </p>
-     * 
-     * @param a
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     *
-     * @param state
-     *            a {@link forge.CardCharacteristicName} object.
-     */
-    public final void removeSpellAbility(final SpellAbility a, final CardCharacteristicName state) {
-        CardCharacteristics stateCharacteristics = this.getState(state);
-        if (a instanceof AbilityMana) {
-            // if (a.isExtrinsic()) //never remove intrinsic mana abilities, is
-            // this the way to go??
-            stateCharacteristics.getManaAbility().remove(a);
-        } else {
-            stateCharacteristics.getSpellAbility().remove(a);
-        }
-    }
-
-    /**
-     * <p>
-     * removeAllExtrinsicManaAbilities.
-     * </p>
-     */
-    public final void removeAllExtrinsicManaAbilities() {
-        // temp ArrayList, otherwise ConcurrentModificationExceptions occur:
-        final ArrayList<SpellAbility> saList = new ArrayList<SpellAbility>();
-
-        for (final SpellAbility var : this.getCharacteristics().getManaAbility()) {
-            if (var.isExtrinsic()) {
-                saList.add(var);
-            }
-        }
-        for (final SpellAbility sa : saList) {
-            this.removeSpellAbility(sa);
-        }
-    }
-
-    /**
-     * <p>
-     * getIntrinsicManaAbilitiesDescriptions.
-     * </p>
-     * 
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public final ArrayList<String> getIntrinsicManaAbilitiesDescriptions() {
-        final ArrayList<String> list = new ArrayList<String>();
-        for (final SpellAbility var : this.getCharacteristics().getManaAbility()) {
-            if (var.isIntrinsic()) {
-                list.add(var.toString());
-            }
-        }
-        return list;
     }
 
     /**
@@ -3027,14 +2890,11 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<SpellAbility> getSpells() {
-        final ArrayList<SpellAbility> s = new ArrayList<SpellAbility>(this.getCharacteristics().getSpellAbility());
-        final ArrayList<SpellAbility> res = new ArrayList<SpellAbility>();
-
-        for (final SpellAbility sa : s) {
-            if (sa.isSpell()) {
-                res.add(sa);
-            }
+    public final List<SpellAbility> getSpells() {
+        final List<SpellAbility> res = new ArrayList<SpellAbility>();
+        for (final SpellAbility sa : this.getCharacteristics().getSpellAbility()) {
+            if (!sa.isSpell()) continue;
+            res.add(sa);
         }
         return res;
     }
@@ -3046,11 +2906,10 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<SpellAbility> getBasicSpells() {
-        final ArrayList<SpellAbility> s = new ArrayList<SpellAbility>(this.getCharacteristics().getSpellAbility());
+    public final List<SpellAbility> getBasicSpells() {
         final ArrayList<SpellAbility> res = new ArrayList<SpellAbility>();
 
-        for (final SpellAbility sa : s) {
+        for (final SpellAbility sa : this.getCharacteristics().getSpellAbility()) {
             if (sa.isSpell() && sa.isBasicSpell()) {
                 res.add(sa);
             }
@@ -6124,8 +5983,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean isReflectedLand() {
-        for (final AbilityMana am : this.getCharacteristics().getManaAbility()) {
-            if (am.isReflectedMana()) {
+        for (final SpellAbility a : this.getCharacteristics().getManaAbility()) {
+            if (a.getManaPart().isReflectedMana()) {
                 return true;
             }
         }

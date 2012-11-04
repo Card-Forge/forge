@@ -19,11 +19,10 @@ package forge.card.spellability;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.abilityfactory.AbilityFactory;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.Mana;
 import forge.card.mana.ManaPool;
@@ -39,7 +38,7 @@ import forge.game.player.Player;
  * @author Forge
  * @version $Id$
  */
-public class AbilityMana extends AbilityActivated implements java.io.Serializable {
+public class AbilityManaPart implements java.io.Serializable {
     /** Constant <code>serialVersionUID=-6816356991224950520L</code>. */
     private static final long serialVersionUID = -6816356991224950520L;
 
@@ -58,29 +57,13 @@ public class AbilityMana extends AbilityActivated implements java.io.Serializabl
     /** The canceled. */
     private boolean canceled = false;
 
-    /**
-     * <p>
-     * Constructor for AbilityMana.
-     * </p>
-     * 
-     * @param sourceCard
-     *            a {@link forge.Card} object.
-     * @param parse
-     *            a {@link java.lang.String} object.
-     * @param produced
-     *            a {@link java.lang.String} object.
-     */
-    public AbilityMana(final Card sourceCard, final String parse, final String produced) {
-        this(sourceCard, parse, produced, 1);
-    }
+    private final Card sourceCard;
 
-    @Override
-    public AbilityActivated getCopy() {
-        AbilityActivated res = new AbilityMana(getSourceCard(), getPayCosts(), getManaProduced());
-        CardFactoryUtil.copySpellAbility(this, res);
-        return res;
-    }
+    private Cost cost;
 
+    // Spells paid with this mana spell can't be countered.
+    private boolean cannotCounterSpell;
+    
     /**
      * <p>
      * Constructor for AbilityMana.
@@ -95,81 +78,21 @@ public class AbilityMana extends AbilityActivated implements java.io.Serializabl
      * @param num
      *            a int.
      */
-    public AbilityMana(final Card sourceCard, final String parse, final String produced, final int num) {
-        this(sourceCard, new Cost(sourceCard, parse, true), produced, num, "");
+    public AbilityManaPart(final Card sourceCard, final String parse, final Map<String, String> params) {
+        this(sourceCard, new Cost(sourceCard, parse, true), params);
     }
 
-    /**
-     * <p>
-     * Constructor for AbilityMana.
-     * </p>
-     * 
-     * @param sourceCard
-     *            a {@link forge.Card} object.
-     * @param cost
-     *            a {@link forge.card.cost.Cost} object.
-     * @param produced
-     *            a {@link java.lang.String} object.
-     */
-    public AbilityMana(final Card sourceCard, final Cost cost, final String produced) {
-        this(sourceCard, cost, produced, 1, "");
-    }
-
-    /**
-     * <p>
-     * Constructor for AbilityMana.
-     * </p>
-     * 
-     * @param sourceCard
-     *            a {@link forge.Card} object.
-     * @param cost
-     *            a {@link forge.card.cost.Cost} object.
-     * @param produced
-     *            a {@link java.lang.String} object.
-     * @param restrictions
-     *            a {@link java.lang.String} object.
-     */
-    public AbilityMana(final Card sourceCard, final Cost cost, final String produced, final String restrictions) {
-        this(sourceCard, cost, produced, 1, restrictions);
-    }
-
-    /**
-     * <p>
-     * Constructor for AbilityMana.
-     * </p>
-     * 
-     * @param sourceCard
-     *            a {@link forge.Card} object.
-     * @param cost
-     *            a {@link forge.card.cost.Cost} object.
-     * @param produced
-     *            a {@link java.lang.String} object.
-     * @param restrictions
-     *            a {@link java.lang.String} object.
-     * @param num
-     *            a int.
-     */
-    public AbilityMana(final Card sourceCard, final Cost cost, final String produced, final int num, final String restrictions) {
-        super(sourceCard, cost, null);
-
-        origProduced = produced;
-        this.amount = num;
-        if (restrictions != null) {
-            this.manaRestrictions = restrictions;
+    public AbilityManaPart(final Card sourceCard, final Cost cost, final Map<String, String> params) {
+        this.sourceCard = sourceCard;
+        this.cost = cost;
+        
+        origProduced = params.containsKey("Produced") ? params.get("Produced") : "1";
+        if (params.containsKey("RestrictValid")) {
+            this.manaRestrictions = params.get("RestrictValid");
         }
+        
+        this.cannotCounterSpell = params.containsKey("AddsNoCounter");
 
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public boolean canPlayAI() {
-        return false;
-    }
-
-    /** {@inheritDoc} */
-    @Override
-    public void resolve() {
-        this.produceMana();
     }
 
     /**
@@ -279,15 +202,7 @@ public class AbilityMana extends AbilityActivated implements java.io.Serializabl
      * @return a {@link java.lang.String} object.
      */
     public boolean cannotCounterPaidWith() {
-        final AbilityFactory manaAF = this.getAbilityFactory();
-        if (manaAF == null) {
-            return false;
-        }
-        HashMap<String, String> mapParams = this.getAbilityFactory().getMapParams();
-        if (mapParams.containsKey("AddsNoCounter")) {
-            return true;
-        }
-        return false;
+        return cannotCounterSpell;
     }
 
     /**
@@ -337,7 +252,7 @@ public class AbilityMana extends AbilityActivated implements java.io.Serializabl
             }
 
             if (sa.getSourceCard() != null) {
-                if (sa.getSourceCard().isValid(restriction, this.getActivatingPlayer(), this.getSourceCard())) {
+                if (sa.getSourceCard().isValid(restriction, this.getSourceCard().getController(), this.getSourceCard())) {
                     return true;
                 }
             }
@@ -362,18 +277,6 @@ public class AbilityMana extends AbilityActivated implements java.io.Serializabl
             }
         }
         return this.getOrigProduced();
-    }
-
-    /**
-     * <p>
-     * setMana.
-     * </p>
-     * 
-     * @param s
-     *            a {@link java.lang.String} object.
-     */
-    public final void setMana(final String s) {
-        origProduced = s;
     }
 
     /**
@@ -450,7 +353,7 @@ public class AbilityMana extends AbilityActivated implements java.io.Serializabl
      * @return a boolean.
      */
     public final boolean isSacrifice() {
-        return this.getPayCosts().getSacCost();
+        return this.cost.getSacCost();
     }
 
     /**
@@ -538,7 +441,7 @@ public class AbilityMana extends AbilityActivated implements java.io.Serializabl
      * @return a boolean.
      */
     public final boolean isUndoable() {
-        return this.undoable && this.getPayCosts().isUndoable() && this.getSourceCard().isInPlay();
+        return this.undoable && this.cost.isUndoable() && this.getSourceCard().isInPlay();
     }
 
     /**
@@ -583,7 +486,7 @@ public class AbilityMana extends AbilityActivated implements java.io.Serializabl
      */
     public final void undo() {
         if (this.isUndoable()) {
-            this.getPayCosts().refundPaidCost(this.getSourceCard());
+            this.cost.refundPaidCost(this.getSourceCard());
         }
     }
 
@@ -591,23 +494,25 @@ public class AbilityMana extends AbilityActivated implements java.io.Serializabl
     @Override
     public final boolean equals(final Object o) {
         // Mana abilities with same Descriptions are "equal"
-        if ((o == null) || !(o instanceof AbilityMana)) {
+        if ((o == null) || !(o instanceof AbilityManaPart)) {
             return false;
         }
 
-        final AbilityMana abm = (AbilityMana) o;
+        final AbilityManaPart abm = (AbilityManaPart) o;
 
-        if (abm.getType() != this.getType()) {
-            return false;
-        }
+//        if (abm.getType() != this.getType()) {
+//            return false;
+//        }
+        
+        return cost.equals(abm.cost) && sourceCard.equals(abm.sourceCard); 
 
-        return abm.toUnsuppressedString().equals(this.toUnsuppressedString());
+//        return abm.toUnsuppressedString().equals(this.toUnsuppressedString());
     }
 
     /** {@inheritDoc} */
     @Override
     public int hashCode() {
-        return (41 * (41 + this.getType().hashCode()));
+        return (41 * (41 + this.getSourceCard().hashCode()));
     }
 
     /**
@@ -629,6 +534,10 @@ public class AbilityMana extends AbilityActivated implements java.io.Serializabl
             }
         }
         return retVal;
+    }
+
+    public Card getSourceCard() {
+        return sourceCard;
     }
 
 } // end class AbilityMana

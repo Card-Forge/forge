@@ -37,9 +37,10 @@ import forge.card.CardCharacteristics;
 import forge.card.CardManaCost;
 import forge.card.EditionInfo;
 import forge.card.abilityfactory.AbilityFactory;
-import forge.card.abilityfactory.AbilityFactoryMana;
 import forge.card.mana.ManaCost;
-import forge.card.spellability.AbilityMana;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilityManaPart;
+import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayManaCostUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -925,14 +926,13 @@ public final class CardUtil {
      *            a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static List<String> getReflectableManaColors(final AbilityMana abMana, final AbilityFactory af,
-            List<String> colors, final ArrayList<Card> parents) {
+    public static List<String> getReflectableManaColors(final SpellAbility abMana, final Map<String, String> params,
+            List<String> colors, final List<Card> parents) {
         // Here's the problem with reflectable Mana. If more than one is out,
         // they need to Reflect each other,
         // so we basically need to have a recursive list that send the parents
         // so we don't infinite recurse.
-        final HashMap<String, String> params = af.getMapParams();
-        final Card card = af.getHostCard();
+        final Card card = abMana.getSourceCard();
     
         if (!parents.contains(card)) {
             parents.add(card);
@@ -944,10 +944,7 @@ public final class CardUtil {
         // + colorless
         final String validCard = params.get("Valid");
         final String reflectProperty = params.get("ReflectProperty"); // Produce
-        // (Reflecting
-        // Pool) or Is
-        // (Meteor
-        // Crater)
+        // (Reflecting Pool) or Is (Meteor Crater)
     
         int maxChoices = 5; // Color is the default colorOrType
         if (colorOrType.equals("Type")) {
@@ -991,21 +988,21 @@ public final class CardUtil {
                 colors.add(Constant.Color.COLORLESS);
             }
         } else if (reflectProperty.equals("Produce")) {
-            final ArrayList<AbilityMana> abilities = new ArrayList<AbilityMana>();
+            final ArrayList<AbilityActivated> abilities = new ArrayList<AbilityActivated>();
             for (final Card c : cards) {
                 abilities.addAll(c.getManaAbility());
             }
             // currently reflected mana will ignore other reflected mana
             // abilities
     
-            final ArrayList<AbilityMana> reflectAbilities = new ArrayList<AbilityMana>();
+            final ArrayList<AbilityActivated> reflectAbilities = new ArrayList<AbilityActivated>();
     
-            for (final AbilityMana ab : abilities) {
+            for (final AbilityActivated ab : abilities) {
                 if (maxChoices == colors.size()) {
                     break;
                 }
     
-                if (ab.isReflectedMana()) {
+                if (ab.getManaPart().isReflectedMana()) {
                     if (!parents.contains(ab.getSourceCard())) {
                         // Recursion!
                         reflectAbilities.add(ab);
@@ -1013,22 +1010,38 @@ public final class CardUtil {
                     }
                     continue;
                 }
-                colors = AbilityFactoryMana.canProduce(maxChoices, ab, colors);
+                colors = canProduce(maxChoices, ab.getManaPart(), colors);
                 if (!parents.contains(ab.getSourceCard())) {
                     parents.add(ab.getSourceCard());
                 }
             }
     
-            for (final AbilityMana ab : reflectAbilities) {
+            for (final AbilityActivated ab : reflectAbilities) {
                 if (maxChoices == colors.size()) {
                     break;
                 }
     
-                colors = CardUtil.getReflectableManaColors(ab, ab.getAbilityFactory(), colors, parents);
+                colors = CardUtil.getReflectableManaColors(ab, params, colors, parents);
             }
+        }
+        return colors;
+    }
+    
+    public static List<String> canProduce(final int maxChoices, final AbilityManaPart ab,
+            final List<String> colors) {
+        for (final String col : Constant.Color.ONLY_COLORS) {
+            final String s = InputPayManaCostUtil.getShortColorString(col);
+            if (ab.canProduce(s) && !colors.contains(col)) {
+                colors.add(col);
+            }
+        }
+    
+        if ((maxChoices == 6) && ab.canProduce("1") && !colors.contains(Constant.Color.COLORLESS)) {
+            colors.add(Constant.Color.COLORLESS);
         }
     
         return colors;
     }
 
+    
 } // end class CardUtil

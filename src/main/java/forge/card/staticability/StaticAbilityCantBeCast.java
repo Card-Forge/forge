@@ -22,7 +22,6 @@ import java.util.List;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.spellability.AbilityMana;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -98,7 +97,7 @@ public class StaticAbilityCantBeCast {
             return false;
         }
 
-        if (params.containsKey("NonMana") && (spellAbility instanceof AbilityMana)) {
+        if (params.containsKey("NonMana") && (spellAbility.getManaPart() != null )) {
             return false;
         }
 

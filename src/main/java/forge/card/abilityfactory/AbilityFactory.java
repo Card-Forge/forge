@@ -660,26 +660,13 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Mana")) {
-            final String produced = this.mapParams.get("Produced");
-            if (this.isAb) {
-                spellAbility = AbilityFactoryMana.createAbilityMana(this, produced);
-            }
-            if (this.isSp) {
-                spellAbility = AbilityFactoryMana.createSpellMana(this, produced);
-            }
-            if (this.isDb) {
-                spellAbility = AbilityFactoryMana.createDrawbackMana(this, produced);
-            }
+            ai = new CannotPlayAi();
+            se = new ManaEffect();
         }
 
         else if (this.api.equals("ManaReflected")) {
-            // Reflected mana will have a filler for produced of "1"
-            if (this.isAb) {
-                spellAbility = AbilityFactoryMana.createAbilityManaReflected(this, "1");
-            }
-            if (this.isSp) { // shouldn't really happen i think?
-                spellAbility = AbilityFactoryMana.createSpellManaReflected(this, "1");
-            }
+            ai = new CannotPlayAi();
+            se = new ManaReflectedEffect();
         }
 
         else if (this.api.equals("Mill")) {

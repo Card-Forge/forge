@@ -50,6 +50,7 @@ public class GuiInput extends MyObservable implements Observer {
         final Input tmp = Singletons.getModel().getMatch().getInput().getActualInput();
         // System.out.println(ph.getPlayerTurn() + "'s " + ph.getPhase() + ", priority of " + ph.getPriorityPlayer()                + " @ actual input is " + ( tmp == null ? "null" : tmp.getClass().getName()) + "; MHP = " + ph.mayPlayerHavePriority() );
         if (tmp != null) {
+            // System.out.println(ph.getPlayerTurn() + "'s " + ph.getPhase() + ", priority of " + ph.getPriorityPlayer() + " @ input is " + tmp.getClass().getName() );
             this.setInput(tmp);
         } else if ( !ph.mayPlayerHavePriority() ) {
             //System.out.println("cannot have priority, forced to pass");

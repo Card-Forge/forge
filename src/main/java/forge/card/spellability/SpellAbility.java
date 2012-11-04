@@ -105,7 +105,7 @@ public abstract class SpellAbility {
     private AbilityFactory abilityFactory = null;
 
     private final ArrayList<Mana> payingMana = new ArrayList<Mana>();
-    private final ArrayList<AbilityMana> paidAbilities = new ArrayList<AbilityMana>();
+    private final List<AbilityActivated> paidAbilities = new ArrayList<AbilityActivated>();
     private ArrayList<String> optionalAdditionalCosts = new ArrayList<String>();
 
     private HashMap<String, List<Card>> paidLists = new HashMap<String, List<Card>>();
@@ -119,6 +119,16 @@ public abstract class SpellAbility {
     private List<Card> tappedForConvoke = new ArrayList<Card>();
 
     private HashMap<String, String> sVars = new HashMap<String, String>();
+    
+    private AbilityManaPart manaPart = null;
+
+    public final AbilityManaPart getManaPart() {
+        return manaPart;
+    }
+
+    public final void setManaPart(AbilityManaPart manaPart) {
+        this.manaPart = manaPart;
+    }
 
     public final String getSVar(final String name) {
         return sVars.get(name) != null ? sVars.get(name) : "";
@@ -777,7 +787,7 @@ public abstract class SpellAbility {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public ArrayList<AbilityMana> getPayingManaAbilities() {
+    public List<AbilityActivated> getPayingManaAbilities() {
         return this.paidAbilities;
     }
 

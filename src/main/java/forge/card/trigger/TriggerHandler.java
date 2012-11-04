@@ -33,7 +33,6 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.AbilityFactoryCharm;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
-import forge.card.spellability.AbilityMana;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
@@ -446,9 +445,9 @@ public class TriggerHandler {
 
         // All tests passed, execute ability.
         if (regtrig instanceof TriggerTapsForMana) {
-            final AbilityMana abMana = (AbilityMana) runParams.get("AbilityMana");
-            if (null != abMana) {
-                abMana.setUndoable(false);
+            final SpellAbility abMana = (SpellAbility) runParams.get("AbilityMana");
+            if (null != abMana && null != abMana.getManaPart()) {
+                abMana.getManaPart().setUndoable(false);
             }
         }
 

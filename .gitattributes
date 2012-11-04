@@ -12464,7 +12464,6 @@ src/main/java/forge/card/abilityfactory/AbilityFactoryAttach.java svneol=native#
 src/main/java/forge/card/abilityfactory/AbilityFactoryChangeZone.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryCharm.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryCleanup.java svneol=native#text/plain
-src/main/java/forge/card/abilityfactory/AbilityFactoryMana.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryStoreSVar.java -text
 src/main/java/forge/card/abilityfactory/CommonAbility.java -text
 src/main/java/forge/card/abilityfactory/CommonDrawback.java svneol=native#text/plain
@@ -12604,6 +12603,8 @@ src/main/java/forge/card/abilityfactory/effects/LifeExchangeEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/LifeGainEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/LifeLoseEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/LifeSetEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/ManaEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/ManaReflectedEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/MillEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/MustAttackEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/MustBlockEffect.java -text
@@ -12692,7 +12693,7 @@ src/main/java/forge/card/replacement/ReplacementResult.java -text
 src/main/java/forge/card/replacement/package-info.java svneol=native#text/plain
 src/main/java/forge/card/spellability/Ability.java svneol=native#text/plain
 src/main/java/forge/card/spellability/AbilityActivated.java svneol=native#text/plain
-src/main/java/forge/card/spellability/AbilityMana.java svneol=native#text/plain
+src/main/java/forge/card/spellability/AbilityManaPart.java svneol=native#text/plain
 src/main/java/forge/card/spellability/AbilityStatic.java svneol=native#text/plain
 src/main/java/forge/card/spellability/AbilitySub.java svneol=native#text/plain
 src/main/java/forge/card/spellability/AbilityTriggered.java svneol=native#text/plain
@@ -12770,6 +12771,7 @@ src/main/java/forge/control/input/InputMulligan.java svneol=native#text/plain
 src/main/java/forge/control/input/InputPassPriority.java svneol=native#text/plain
 src/main/java/forge/control/input/InputPayDiscardCost.java -text
 src/main/java/forge/control/input/InputPayManaCost.java svneol=native#text/plain
+src/main/java/forge/control/input/InputPayManaCost2.java -text
 src/main/java/forge/control/input/InputPayManaCostAbility.java svneol=native#text/plain
 src/main/java/forge/control/input/InputPayManaCostUtil.java svneol=native#text/plain
 src/main/java/forge/control/input/InputPayReturnCost.java -text

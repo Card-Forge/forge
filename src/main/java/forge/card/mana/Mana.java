@@ -19,7 +19,7 @@ package forge.card.mana;
 
 import forge.Card;
 import forge.Constant;
-import forge.card.spellability.AbilityMana;
+import forge.card.spellability.AbilityManaPart;
 import forge.control.input.InputPayManaCostUtil;
 
 /**
@@ -33,7 +33,7 @@ import forge.control.input.InputPayManaCostUtil;
 public class Mana {
     private String color;
     private Card sourceCard = null;
-    private AbilityMana sourceAbility = null;
+    private AbilityManaPart sourceAbility = null;
     private boolean hasRestrictions = false;
     private boolean pumpCounterMagic = false;
 
@@ -49,7 +49,7 @@ public class Mana {
      * @param manaAbility
      *            a {@link forge.card.spellability.AbilityMana} object
      */
-    public Mana(final String col, final Card source, final AbilityMana manaAbility) {
+    public Mana(final String col, final Card source, final AbilityManaPart manaAbility) {
         this.color = col;
         if (manaAbility != null) {
           this.sourceAbility = manaAbility;
@@ -194,7 +194,7 @@ public class Mana {
      * 
      * @return a {@link forge.card.spellability.AbilityMana} object.
      */
-    public final AbilityMana getSourceAbility() {
+    public final AbilityManaPart getSourceAbility() {
         return this.sourceAbility;
     }
 
@@ -207,7 +207,7 @@ public class Mana {
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public final boolean fromSourceAbility(final AbilityMana ma) {
+    public final boolean fromSourceAbility(final AbilityManaPart ma) {
         return this.sourceAbility.equals(ma);
     }
 

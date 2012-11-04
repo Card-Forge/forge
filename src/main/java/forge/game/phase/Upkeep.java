@@ -18,7 +18,9 @@
 package forge.game.phase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -35,7 +37,7 @@ import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
-import forge.card.spellability.AbilityMana;
+import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
@@ -136,10 +138,12 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 @Override
                 public void resolve() {
                     c.addCounter(Counters.AGE, 1);
-                    final int ageCounters = c.getCounters(Counters.AGE);
-                    final AbilityMana abMana = new AbilityMana(c, "0", "R", ageCounters) {
-                        private static final long serialVersionUID = -2182129023960978132L;
-                    };
+                    StringBuilder rs = new StringBuilder("R");
+                    for(int ageCounters = c.getCounters(Counters.AGE); ageCounters > 1; ageCounters-- )
+                        rs.append(" R");
+                    Map<String, String> produced = new HashMap<String, String>();
+                    produced.put("Produced", rs.toString());
+                    final AbilityManaPart abMana = new AbilityManaPart(c, "0", produced);
                     if (player.isComputer()) {
                         abMana.produceMana();
                     } else if (GameActionUtil.showYesNoDialog(c, sb.toString())) {
@@ -966,9 +970,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                         // player isComputer()
                         else {
                             final Card c = library.get(0);
-                            final ArrayList<SpellAbility> choices = c.getBasicSpells();
-
-                            for (final SpellAbility sa : choices) {
+                            for (final SpellAbility sa : c.getBasicSpells()) {
                                 if (sa.canPlayAI()) {
                                     ComputerUtil.playStackFree(player, sa);
                                     break;

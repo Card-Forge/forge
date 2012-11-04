@@ -3,9 +3,12 @@ package forge.card.abilityfactory;
 import java.util.Map;
 
 import forge.Card;
+import forge.card.abilityfactory.effects.ManaEffect;
+import forge.card.abilityfactory.effects.ManaReflectedEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.Target;
 
 public class CommonAbility extends AbilityActivated {
@@ -20,6 +23,12 @@ public class CommonAbility extends AbilityActivated {
         params = params0;
         effect = effect0;
         ai = ai0;
+        
+        if ( effect0 instanceof ManaEffect )
+            this.setManaPart(new AbilityManaPart(sourceCard, new Cost(sourceCard, "0", false), params));
+        if ( effect0 instanceof ManaReflectedEffect )
+            this.setManaPart(new AbilityManaPart(sourceCard, new Cost(sourceCard, "0", false), params));
+        
     }
     
     @Override

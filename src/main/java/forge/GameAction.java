@@ -1009,7 +1009,7 @@ public class GameAction {
             com.execute();
         }
 
-        GameActionUtil.getStLandManaAbilities().execute();
+        GameActionUtil.grantBasicLandsManaAbilities();
     }
 
     /**
@@ -1625,7 +1625,7 @@ public class GameAction {
      *            a {@link forge.Card} object.
      */
     public final void playCardWithoutManaCost(final Card c) {
-        final ArrayList<SpellAbility> choices = c.getBasicSpells();
+        final List<SpellAbility> choices = c.getBasicSpells();
         SpellAbility sa;
 
         // TODO add Buyback, Kicker, ... , spells here

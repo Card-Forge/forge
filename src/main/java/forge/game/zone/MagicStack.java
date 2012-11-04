@@ -36,7 +36,6 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.Ability;
-import forge.card.spellability.AbilityMana;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.AbilityTriggered;
 import forge.card.spellability.Spell;
@@ -306,7 +305,7 @@ public class MagicStack extends MyObservable {
         } else {
 
             // TODO: make working triggered abilities!
-            if ((sp instanceof AbilityMana) || (sp instanceof AbilityTriggered)) {
+            if (sp.getManaPart() != null || (sp instanceof AbilityTriggered)) {
                 sp.resolve();
             } else {
                 this.push(sp);
@@ -420,7 +419,7 @@ public class MagicStack extends MyObservable {
     public final void add(final SpellAbility sp) {
         final ArrayList<TargetChoices> chosenTargets = sp.getAllTargetChoices();
 
-        if (sp instanceof AbilityMana) { // Mana Abilities go straight through
+        if (sp.getManaPart() != null) { // Mana Abilities go straight through
             sp.resolve();
             sp.resetOnceResolved();
             game.getGameLog().add("Mana", sp.getSourceCard() + " - " + sp.getDescription(), 4);

@@ -22,11 +22,22 @@ import forge.game.player.Player;
         public abstract void resolve(final Map<String, String> params, final SpellAbility sa);
         @SuppressWarnings("unused")
         protected String getStackDescription(final Map<String, String> params, final SpellAbility sa) {
-         // If not overriden, let the spell description also be the stack description
+            // Unless overriden, let the spell description also be the stack description
             return sa.getDescription();
         }
 
 
+        protected void resolveDrawback(final SpellAbility sa) {
+            
+            // if mana production has any type of SubAbility, undoable=false
+            final AbilitySub abSub = sa.getSubAbility();
+            if (abSub != null) {
+                if ( sa.getManaPart() != null ) 
+                    sa.getManaPart().setUndoable(false);
+                AbilityFactory.resolve(abSub, false);
+            }
+        }
+        
         /**
          * Returns this effect description with needed prelude and epilogue
          * @param params

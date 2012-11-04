@@ -115,4 +115,8 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
 
         return CostPayment.canPayAdditionalCosts(this.getPayCosts(), this);
     }
+    
+    /* (non-Javadoc)
+     * @see forge.card.spellability.SpellAbility#resolve()
+     */
 }

@@ -19,7 +19,6 @@ package forge.control.input;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -32,9 +31,9 @@ import forge.card.cost.CostMana;
 import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
-import forge.card.spellability.AbilityMana;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
-import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -70,7 +69,7 @@ public class InputPayManaCostUtil {
             return manaCost;
         }
 
-        ArrayList<AbilityMana> abilities = InputPayManaCostUtil.getManaAbilities(card);
+        
         final StringBuilder cneeded = new StringBuilder();
         final StringBuilder colorRequired = new StringBuilder();
         boolean choice = true;
@@ -86,24 +85,27 @@ public class InputPayManaCostUtil {
             }
         }
 
+        List<AbilityActivated> abilities = new ArrayList<AbilityActivated>();
         // you can't remove unneeded abilities inside a for(am:abilities) loop :(
-        final Iterator<AbilityMana> it = abilities.iterator();
-        while (it.hasNext()) {
-            final AbilityMana ma = it.next();
+        
+        for(AbilityActivated ma : card.getManaAbility()) {
             ma.setActivatingPlayer(Singletons.getControl().getPlayer());
+            AbilityManaPart m = ma.getManaPart();
             if (!ma.canPlay()) {
-                it.remove();
-            } else if (!InputPayManaCostUtil.canMake(ma, cneeded.toString())) {
-                it.remove();
+                continue;
+            } else if (!InputPayManaCostUtil.canMake(ma, ma.getAbilityFactory().getMapParams(), cneeded.toString())) {
+                continue;
             } else if (AbilityFactory.isInstantSpeed(ma)) {
-                it.remove();
-            } else if (!ma.meetsManaRestrictions(sa)) {
-                it.remove();
+                continue;
+            } else if (!m.meetsManaRestrictions(sa)) {
+                continue;
             }
 
+            abilities.add(ma);
+            
             if (!skipExpress) {
                 // skip express mana if the ability is not undoable
-                if (!ma.isUndoable()) {
+                if (!m.isUndoable()) {
                     skipExpress = true;
                     continue;
                 }
@@ -149,27 +151,28 @@ public class InputPayManaCostUtil {
 
         if (!skipExpress) {
             // express Mana Choice
-            final ArrayList<AbilityMana> colorMatches = new ArrayList<AbilityMana>();
+            final ArrayList<AbilityActivated> colorMatches = new ArrayList<AbilityActivated>();
 
-            for (final AbilityMana am : abilities) {
-                if (am.isReflectedMana()) {
+            for (final AbilityActivated am : abilities) {
+                AbilityManaPart m = am.getManaPart();
+                if (m.isReflectedMana()) {
                     final List<String> reflectableColors = CardUtil.getReflectableManaColors(am,
-                            am.getAbilityFactory(), new ArrayList<String>(), new ArrayList<Card>());
+                            am.getAbilityFactory().getMapParams(), new ArrayList<String>(), new ArrayList<Card>());
                     for (final String color : reflectableColors) {
                         if (manaCost.isColor(color)) {
                             // checking if color
                             colorMatches.add(am);
                         }
                     }
-                } else if (am.isAnyMana()) {
+                } else if (m.isAnyMana()) {
                         colorMatches.add(am);
                 } else {
                     String[] colorsProduced;
-                    if (am.isComboMana()) {
-                        colorsProduced = am.getComboColors().split(" ");
+                    if (m.isComboMana()) {
+                        colorsProduced = m.getComboColors().split(" ");
                     }
                     else {
-                        colorsProduced = am.getManaProduced().split(" ");
+                        colorsProduced = m.getManaProduced().split(" ");
                     }
                     for (final String color : colorsProduced) {
                         if (manaCost.isColor(color)) {
@@ -189,17 +192,17 @@ public class InputPayManaCostUtil {
             }
         }
 
-        AbilityMana chosen = abilities.get(0);
+        AbilityActivated chosen = abilities.get(0);
         if ((1 < abilities.size()) && choice) {
-            final HashMap<String, AbilityMana> ability = new HashMap<String, AbilityMana>();
-            for (final AbilityMana am : abilities) {
+            final Map<String, AbilityActivated> ability = new HashMap<String, AbilityActivated>();
+            for (final AbilityActivated am : abilities) {
                 ability.put(am.toString(), am);
             }
             chosen = GuiChoose.one("Choose mana ability", abilities);
         }
 
         // save off color needed for use by any mana and reflected mana
-        chosen.setExpressChoice(colorsNeeded);
+        chosen.getManaPart().setExpressChoice(colorsNeeded);
 
         Singletons.getModel().getGame().getAction().playSpellAbility(chosen);
 
@@ -235,19 +238,6 @@ public class InputPayManaCostUtil {
 
     /**
      * <p>
-     * getManaAbilities.
-     * </p>
-     * 
-     * @param card
-     *            a {@link forge.Card} object.
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public static ArrayList<AbilityMana> getManaAbilities(final Card card) {
-        return card.getManaAbility();
-    }
-
-    /**
-     * <p>
      * canMake.  color is like "G", returns "Green".
      * </p>
      * 
@@ -257,19 +247,19 @@ public class InputPayManaCostUtil {
      *            a {@link java.lang.String} object.
      * @return a boolean.
      */
-    public static boolean canMake(final AbilityMana am, final String mana) {
+    public static boolean canMake(final AbilityActivated am, final Map<String, String> params, final String mana) {
         if (mana.contains("1")) {
             return true;
         }
-        if (mana.contains("S") && am.isSnow()) {
+        AbilityManaPart m = am.getManaPart();
+        if (mana.contains("S") && m.isSnow()) {
             return true;
         }
-        if (am.isAnyMana()) {
+        if (m.isAnyMana()) {
             return true;
         }
-        if (am.isReflectedMana()) {
-            final List<String> reflectableColors = CardUtil.getReflectableManaColors(am, am.getAbilityFactory(),
-                    new ArrayList<String>(), new ArrayList<Card>());
+        if (m.isReflectedMana()) {
+            final List<String> reflectableColors = CardUtil.getReflectableManaColors(am, params, new ArrayList<String>(), new ArrayList<Card>());
             for (final String color : reflectableColors) {
                 if (mana.contains(InputPayManaCostUtil.getShortColorString(color))) {
                     return true;
@@ -277,11 +267,11 @@ public class InputPayManaCostUtil {
             }
         } else {
             String[] colorsProduced;
-            if (am.isComboMana()) {
-                colorsProduced = am.getComboColors().split(" ");
+            if (m.isComboMana()) {
+                colorsProduced = m.getComboColors().split(" ");
             }
             else {
-                colorsProduced = am.getManaProduced().split(" ");
+                colorsProduced = m.getManaProduced().split(" ");
             }
             for (final String color : colorsProduced) {
                 if (mana.contains(color)) {
@@ -446,165 +436,5 @@ public class InputPayManaCostUtil {
     
         return payX;
     }
+};    
 
-    /**
-     * <p>
-     * input_payMana.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param payment
-     *            a {@link forge.card.cost.CostPayment} object.
-     * @param costMana
-     *            the cost mana
-     * @param manaToAdd
-     *            a int.
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public static Input inputPayMana(final SpellAbility sa, final CostPayment payment, final CostMana costMana,
-            final int manaToAdd) {
-        final ManaCost manaCost;
-    
-        if (Singletons.getModel().getGame() != null ) {
-            final String mana = costMana.getManaToPay();
-            manaCost = new ManaCost(mana);
-            manaCost.increaseColorlessMana(manaToAdd);
-        } else {
-            System.out.println("Is input_payMana ever called when the Game isn't in progress?");
-            manaCost = new ManaCost(sa.getManaCost());
-        }
-    
-        final Input payMana = new InputMana() {
-            private ManaCost mana = manaCost;
-            private static final long serialVersionUID = 3467312982164195091L;
-    
-            private final String originalManaCost = costMana.getMana();
-    
-            private int phyLifeToLose = 0;
-    
-            private void resetManaCost() {
-                this.mana = new ManaCost(this.originalManaCost);
-                this.phyLifeToLose = 0;
-            }
-    
-            @Override
-            public void selectCard(final Card card, final PlayerZone zone) {
-                // prevent cards from tapping themselves if ability is a
-                // tapability, although it should already be tapped
-                if (sa.getSourceCard().equals(card) && sa.isTapAbility()) {
-                    return;
-                }
-    
-                this.mana = activateManaAbility(sa, card, this.mana);
-    
-                if (this.mana.isPaid()) {
-                    this.done();
-                } else if (Singletons.getModel().getMatch().getInput().getInput() == this) {
-                    this.showMessage();
-                }
-            }
-    
-            @Override
-            public void selectPlayer(final Player player) {
-                if (player.isHuman()) {
-                    if (manaCost.payPhyrexian()) {
-                        this.phyLifeToLose += 2;
-                    }
-    
-                    this.showMessage();
-                }
-            }
-    
-            private void done() {
-                final Card source = sa.getSourceCard();
-                if (this.phyLifeToLose > 0) {
-                    Singletons.getControl().getPlayer().payLife(this.phyLifeToLose, source);
-                }
-                source.setColorsPaid(this.mana.getColorsPaid());
-                source.setSunburstValue(this.mana.getSunburst());
-                this.resetManaCost();
-                this.stop();
-    
-                if (costMana.hasNoXManaCost() || (manaToAdd > 0)) {
-                    payment.paidCost(costMana);
-                } else {
-                    source.setXManaCostPaid(0);
-                    final Input inp = InputPayManaCostUtil.inputPayXMana(sa, payment, costMana, costMana.getXMana());
-                    Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
-                }
-    
-                // If this is a spell with convoke, re-tap all creatures used
-                // for it.
-                // This is done to make sure Taps triggers go off at the right
-                // time
-                // (i.e. AFTER cost payment, they are tapped previously as well
-                // so that
-                // any mana tapabilities can't be used in payment as well as
-                // being tapped for convoke)
-    
-                if (sa.getTappedForConvoke() != null) {
-                    for (final Card c : sa.getTappedForConvoke()) {
-                        c.setTapped(false);
-                        c.tap();
-                    }
-                    sa.clearTappedForConvoke();
-                }
-    
-            }
-    
-            @Override
-            public void selectButtonCancel() {
-                // If we're paying for a spell with convoke, untap all creatures
-                // used for it.
-                if (sa.getTappedForConvoke() != null) {
-                    for (final Card c : sa.getTappedForConvoke()) {
-                        c.setTapped(false);
-                    }
-                    sa.clearTappedForConvoke();
-                }
-    
-                this.stop();
-                this.resetManaCost();
-                payment.cancelCost();
-                Singletons.getControl().getPlayer().getZone(ZoneType.Battlefield).updateObservers();
-            }
-    
-            @Override
-            public void showMessage() {
-                ButtonUtil.enableOnlyCancel();
-                final String displayMana = this.mana.toString().replace("X", "").trim();
-                CMatchUI.SINGLETON_INSTANCE.showMessage("Pay Mana Cost: " + displayMana);
-    
-                final StringBuilder msg = new StringBuilder("Pay Mana Cost: " + displayMana);
-                if (this.phyLifeToLose > 0) {
-                    msg.append(" (");
-                    msg.append(this.phyLifeToLose);
-                    msg.append(" life paid for phyrexian mana)");
-                }
-    
-                if (this.mana.containsPhyrexianMana()) {
-                    msg.append("\n(Click on your life total to pay life for phyrexian mana.)");
-                }
-    
-                CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
-                if (this.mana.isPaid()) {
-                    this.done();
-                }
-            }
-    
-            @Override
-            public void selectManaPool(String color) {
-                this.mana = activateManaAbility(color, sa, this.mana);
-    
-                if (this.mana.isPaid()) {
-                    this.done();
-                } else if (Singletons.getModel().getMatch().getInput().getInput() == this) {
-                    this.showMessage();
-                }
-            }
-        };
-        return payMana;
-    }
-
-}

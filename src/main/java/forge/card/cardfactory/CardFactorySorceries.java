@@ -143,7 +143,7 @@ public class CardFactorySorceries {
                         JOptionPane.showMessageDialog(null, "Computer chooses the Pile 1", "",
                                 JOptionPane.INFORMATION_MESSAGE);
                         for (int i = 0; i < pile1.size(); i++) {
-                            final ArrayList<SpellAbility> choices = pile1.get(i).getBasicSpells();
+                            final List<SpellAbility> choices = pile1.get(i).getBasicSpells();
 
                             for (final SpellAbility sa : choices) {
                                 if (sa.canPlayAI()) {
@@ -159,7 +159,7 @@ public class CardFactorySorceries {
                         JOptionPane.showMessageDialog(null, "Computer chooses the Pile 2", "",
                                 JOptionPane.INFORMATION_MESSAGE);
                         for (int i = 0; i < pile2.size(); i++) {
-                            final ArrayList<SpellAbility> choices = pile2.get(i).getBasicSpells();
+                            final List<SpellAbility> choices = pile2.get(i).getBasicSpells();
 
                             for (final SpellAbility sa : choices) {
                                 if (sa.canPlayAI()) {

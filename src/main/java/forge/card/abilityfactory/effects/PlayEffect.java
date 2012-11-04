@@ -98,9 +98,8 @@ public class PlayEffect extends SpellEffect {
                     tgtCards = CardLists.filter(tgtCards, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
-                            ArrayList<SpellAbility> spellAbilities = c.getBasicSpells();
-                            ArrayList<SpellAbility> sas = new ArrayList<SpellAbility>();
-                            for (SpellAbility s : spellAbilities) {
+                            List<SpellAbility> sas = new ArrayList<SpellAbility>();
+                            for (SpellAbility s : c.getBasicSpells()) {
                                 Spell spell = (Spell) s;
                                 s.setActivatingPlayer(controller);
                                 SpellAbilityRestriction res = s.getRestrictions();
@@ -157,9 +156,8 @@ public class PlayEffect extends SpellEffect {
             }
 
             // get basic spells (no flashback, etc.)
-            ArrayList<SpellAbility> spellAbilities = tgtCard.getBasicSpells();
             ArrayList<SpellAbility> sas = new ArrayList<SpellAbility>();
-            for (SpellAbility s : spellAbilities) {
+            for (SpellAbility s : tgtCard.getBasicSpells()) {
                 final SpellAbility newSA = s.copy();
                 newSA.setActivatingPlayer(controller);
                 SpellAbilityRestriction res = new SpellAbilityRestriction();

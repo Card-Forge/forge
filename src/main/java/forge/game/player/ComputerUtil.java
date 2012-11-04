@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
@@ -47,7 +48,8 @@ import forge.card.cost.CostPayment;
 import forge.card.cost.CostUtil;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
-import forge.card.spellability.AbilityMana;
+import forge.card.spellability.AbilityActivated;
+import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -608,10 +610,10 @@ public class ComputerUtil {
         }
 
         // get map of mana abilities
-        final HashMap<String, ArrayList<AbilityMana>> manaAbilityMap = ComputerUtil.mapManaSources(ai, checkPlayable);
+        final Map<String, List<AbilityActivated>> manaAbilityMap = ComputerUtil.mapManaSources(ai, checkPlayable);
         // initialize ArrayList list for mana needed
-        final ArrayList<ArrayList<AbilityMana>> partSources = new ArrayList<ArrayList<AbilityMana>>();
-        final ArrayList<Integer> partPriority = new ArrayList<Integer>();
+        final List<List<AbilityActivated>> partSources = new ArrayList<List<AbilityActivated>>();
+        final List<Integer> partPriority = new ArrayList<Integer>();
         final String[] costParts = cost.toString().replace("X ", "").split(" ");
         boolean foundAllSources = findManaSources(ai, manaAbilityMap, partSources, partPriority, costParts);
         if (!foundAllSources) {
@@ -632,11 +634,10 @@ public class ComputerUtil {
         int nPriority = 0;
         while (nPriority < partPriority.size()) {
             final int nPart = partPriority.get(nPriority);
-            final ArrayList<AbilityMana> manaAbilities = partSources.get(nPart);
             final ManaCost costPart = new ManaCost(costParts[nPart]);
             // Loop over mana abilities that can be used to current mana cost part
-            for (final AbilityMana m : manaAbilities) {
-                final Card sourceCard = m.getSourceCard();
+            for (final AbilityActivated ma : partSources.get(nPart)) {
+                final Card sourceCard = ma.getSourceCard();
 
                 // Check if source has already been used
                 if (usedSources.contains(sourceCard)) {
@@ -644,16 +645,17 @@ public class ComputerUtil {
                 }
 
                 // Check if AI can still play this mana ability
-                m.setActivatingPlayer(ai);
+                ma.setActivatingPlayer(ai);
                 // if the AI can't pay the additional costs skip the mana ability
-                if (m.getPayCosts() != null && checkPlayable) {
-                    if (!ComputerUtil.canPayAdditionalCosts(m, ai)) {
+                if (ma.getPayCosts() != null && checkPlayable) {
+                    if (!ComputerUtil.canPayAdditionalCosts(ma, ai)) {
                         continue;
                     }
                 } else if (sourceCard.isTapped() && checkPlayable) {
                     continue;
                 }
 
+                AbilityManaPart m = ma.getManaPart();
                 // Check for mana restrictions
                 if (!m.meetsManaRestrictions(sa)) {
                     continue;
@@ -667,7 +669,7 @@ public class ComputerUtil {
                     if (m.isComboMana()) {
                         String colorChoice = costParts[nPart];
                         m.setExpressChoice(colorChoice);
-                        colorChoice = getComboManaChoice(ai, m, sa, cost);
+                        colorChoice = getComboManaChoice(ai, ma.getAbilityFactory().getMapParams(), ma.getSourceCard(), m, sa, cost);
                         m.setExpressChoice(colorChoice);
                     }
                     // check if ability produces any color
@@ -715,8 +717,8 @@ public class ComputerUtil {
 
                 if (!test) {
                     // Pay additional costs
-                    if (m.getPayCosts() != null) {
-                        final CostPayment pay = new CostPayment(m.getPayCosts(), m);
+                    if (ma.getPayCosts() != null) {
+                        final CostPayment pay = new CostPayment(ma.getPayCosts(), ma);
                         if (!pay.payComputerCosts(ai)) {
                             continue;
                         }
@@ -724,9 +726,9 @@ public class ComputerUtil {
                         sourceCard.tap();
                     }
                     // resolve mana ability
-                    m.resolve();
+                    ma.resolve();
                     // subtract mana from mana pool
-                    cost = manapool.payManaFromAbility(sa, cost, m);
+                    cost = manapool.payManaFromAbility(sa, cost, ma);
                 } else {
                     cost.payMultipleMana(manaProduced);
                 }
@@ -780,8 +782,8 @@ public class ComputerUtil {
      * @param foundAllSources
      * @return Were all mana sources found?
      */
-    private static boolean findManaSources(final Player ai, final HashMap<String, ArrayList<AbilityMana>> manaAbilityMap,
-            final ArrayList<ArrayList<AbilityMana>> partSources, final ArrayList<Integer> partPriority,
+    private static boolean findManaSources(final Player ai, final Map<String, List<AbilityActivated>> manaAbilityMap,
+            final List<List<AbilityActivated>> partSources, final List<Integer> partPriority,
             final String[] costParts) {
         final String[] shortColors = { "W", "U", "B", "R", "G" };
         boolean foundAllSources;
@@ -791,7 +793,7 @@ public class ComputerUtil {
             foundAllSources = true;
             // loop over cost parts
             for (int nPart = 0; nPart < costParts.length; nPart++) {
-                final ArrayList<AbilityMana> srcFound = new ArrayList<AbilityMana>();
+                final List<AbilityActivated> srcFound = new ArrayList<AbilityActivated>();
                 // Test for:
                 // 1) Colorless
                 // 2) Split e.g. 2/G
@@ -946,7 +948,7 @@ public class ComputerUtil {
             @Override
             public boolean apply(final Card c) {
                 if (checkPlayable) {
-                    for (final AbilityMana am : c.getAIPlayableMana()) {
+                    for (final AbilityActivated am : c.getAIPlayableMana()) {
                         am.setActivatingPlayer(ai);
                         if (am.canPlay()) {
                             return true;
@@ -987,11 +989,11 @@ public class ComputerUtil {
             int usableManaAbilities = 0;
             boolean needsLimitedResources = false;
             boolean producesAnyColor = false;
-            final ArrayList<AbilityMana> manaAbilities = card.getAIPlayableMana();
+            final ArrayList<AbilityActivated> manaAbilities = card.getAIPlayableMana();
 
-            for (final AbilityMana m : manaAbilities) {
+            for (final AbilityActivated m : manaAbilities) {
 
-                if (m.isAnyMana()) {
+                if (m.getManaPart().isAnyMana()) {
                     producesAnyColor = true;
                 }
 
@@ -1025,7 +1027,7 @@ public class ComputerUtil {
             } else if (producesAnyColor) {
                 anyColorManaSources.add(card);
             } else if (usableManaAbilities == 1) {
-                if (manaAbilities.get(0).mana().equals("1")) {
+                if (manaAbilities.get(0).getManaPart().mana().equals("1")) {
                     colorlessManaSources.add(card);
                 } else {
                     oneManaSources.add(card);
@@ -1065,16 +1067,16 @@ public class ComputerUtil {
      * @param checkPlayable TODO
      * @return HashMap<String, List<Card>>
      */
-    public static HashMap<String, ArrayList<AbilityMana>> mapManaSources(final Player ai, boolean checkPlayable) {
-        final HashMap<String, ArrayList<AbilityMana>> manaMap = new HashMap<String, ArrayList<AbilityMana>>();
+    public static Map<String, List<AbilityActivated>> mapManaSources(final Player ai, boolean checkPlayable) {
+        final Map<String, List<AbilityActivated>> manaMap = new HashMap<String, List<AbilityActivated>>();
 
-        final ArrayList<AbilityMana> whiteSources = new ArrayList<AbilityMana>();
-        final ArrayList<AbilityMana> blueSources = new ArrayList<AbilityMana>();
-        final ArrayList<AbilityMana> blackSources = new ArrayList<AbilityMana>();
-        final ArrayList<AbilityMana> redSources = new ArrayList<AbilityMana>();
-        final ArrayList<AbilityMana> greenSources = new ArrayList<AbilityMana>();
-        final ArrayList<AbilityMana> colorlessSources = new ArrayList<AbilityMana>();
-        final ArrayList<AbilityMana> snowSources = new ArrayList<AbilityMana>();
+        final List<AbilityActivated> whiteSources = new ArrayList<AbilityActivated>();
+        final List<AbilityActivated> blueSources = new ArrayList<AbilityActivated>();
+        final List<AbilityActivated> blackSources = new ArrayList<AbilityActivated>();
+        final List<AbilityActivated> redSources = new ArrayList<AbilityActivated>();
+        final List<AbilityActivated> greenSources = new ArrayList<AbilityActivated>();
+        final List<AbilityActivated> colorlessSources = new ArrayList<AbilityActivated>();
+        final List<AbilityActivated> snowSources = new ArrayList<AbilityActivated>();
 
         // Get list of current available mana sources
         final List<Card> manaSources = ComputerUtil.getAvailableMana(ai, checkPlayable);
@@ -1082,10 +1084,10 @@ public class ComputerUtil {
         // Loop over all mana sources
         for (int i = 0; i < manaSources.size(); i++) {
             final Card sourceCard = manaSources.get(i);
-            final ArrayList<AbilityMana> manaAbilities = sourceCard.getAIPlayableMana();
+            final ArrayList<AbilityActivated> manaAbilities = sourceCard.getAIPlayableMana();
 
             // Loop over all mana abilities for a source
-            for (final AbilityMana m : manaAbilities) {
+            for (final AbilityActivated m : manaAbilities) {
                 m.setActivatingPlayer(ai);
                 if (!m.canPlay() && checkPlayable) {
                     continue;
@@ -1102,22 +1104,22 @@ public class ComputerUtil {
                 colorlessSources.add(m);
 
                 // find possible colors
-                if (m.canProduce("W")) {
+                if (m.getManaPart().canProduce("W")) {
                     whiteSources.add(m);
                 }
-                if (m.canProduce("U")) {
+                if (m.getManaPart().canProduce("U")) {
                     blueSources.add(m);
                 }
-                if (m.canProduce("B")) {
+                if (m.getManaPart().canProduce("B")) {
                     blackSources.add(m);
                 }
-                if (m.canProduce("R")) {
+                if (m.getManaPart().canProduce("R")) {
                     redSources.add(m);
                 }
-                if (m.canProduce("G")) {
+                if (m.getManaPart().canProduce("G")) {
                     greenSources.add(m);
                 }
-                if (m.isSnow()) {
+                if (m.getManaPart().isSnow()) {
                     snowSources.add(m);
                 }
             } // end of mana abilities loop
@@ -1162,15 +1164,13 @@ public class ComputerUtil {
      *            a {@link forge.card.mana.ManaCost} object.
      * @return String
      */
-    public static String getComboManaChoice(final Player ai, final AbilityMana abMana, final SpellAbility sa, final ManaCost cost) {
+    public static String getComboManaChoice(final Player ai, final Map<String, String> params, 
+            final Card source, final AbilityManaPart abMana, final SpellAbility sa, final ManaCost cost) {
 
-        final AbilityFactory af = abMana.getAbilityFactory();
-        final HashMap<String, String> params = af.getMapParams();
         final StringBuilder choiceString = new StringBuilder();
 
         if (abMana.isComboMana()) {
-            int amount = params.containsKey("Amount") ? AbilityFactory.calculateAmount(af.getHostCard(),
-                    params.get("Amount"), sa) : 1;
+            int amount = params.containsKey("Amount") ? AbilityFactory.calculateAmount(source, params.get("Amount"), sa) : 1;
             final ManaCost testCost = new ManaCost(cost.toString().replace("X ", ""));
             final String[] comboColors = abMana.getComboColors().split(" ");
             for (int nMana = 1; nMana <= amount; nMana++) {
