@@ -101,24 +101,10 @@ public class UnattachAllAi extends SpellAiLogic {
         return true;
     }
 
-    
-
-
-
     @Override
     public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player ai) {
         // AI should only activate this during Human's turn
         return canPlayAI(ai, params, sa);
     }
 
-    /**
-     * UnattachAll stack description.
-     * 
-     * @param af
-     *            the af
-     * @param sa
-     *            the sa
-     * @return the string
-     */
-    
 }

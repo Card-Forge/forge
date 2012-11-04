@@ -33,4 +33,4 @@ public class CleanUpEffect extends SpellEffect {
         }
     }
 
-} // end class AbilityFactory_Cleanup
+} 

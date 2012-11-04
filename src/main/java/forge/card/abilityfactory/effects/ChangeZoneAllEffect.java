@@ -20,17 +20,6 @@ import forge.game.zone.ZoneType;
 public class ChangeZoneAllEffect extends SpellEffect {
     
     
-    /**
-     * <p>
-     * changeZoneAllStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         // TODO build Stack Description will need expansion as more cards are added
@@ -44,16 +33,6 @@ public class ChangeZoneAllEffect extends SpellEffect {
         }
     }
 
-    /**
-     * <p>
-     * changeZoneAllResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));

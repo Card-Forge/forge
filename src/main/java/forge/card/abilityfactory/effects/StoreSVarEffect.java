@@ -8,16 +8,6 @@ import forge.card.spellability.SpellAbility;
 
 public class StoreSVarEffect extends SpellEffect { 
 
-    /**
-     * <p>
-     * storeSVarResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         //SVar$ OldToughness | Type$ Count | Expression$ CardToughness
@@ -70,4 +60,4 @@ public class StoreSVarEffect extends SpellEffect {
         }
     }
 
-} // end class AbilityFactorystoreSVar
+}

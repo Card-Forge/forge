@@ -182,19 +182,6 @@ public class ChangeZoneAllAi extends SpellAiLogic {
     }
 
 
-    /**
-     * <p>
-     * gainLifeDoTriggerAINoCost.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
     @Override
     public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         // Change Zone All, can be any type moving from one zone to another
