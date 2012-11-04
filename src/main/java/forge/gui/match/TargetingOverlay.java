@@ -190,6 +190,8 @@ public enum TargetingOverlay {
 
                 g2d.fillOval((int) p[0].getX() - 4, (int) p[0].getY() - 4, 8, 8);
                 g2d.fillOval((int) p[1].getX() - 4, (int) p[1].getY() - 4, 8, 8);
+
+                FView.SINGLETON_INSTANCE.getFrame().repaint(); // repaint the match UI
             }
         }
     }
