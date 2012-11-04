@@ -23,9 +23,8 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import org.testng.collections.Lists;
-
 import com.google.common.base.Predicate;
+import com.google.common.collect.Lists;
 
 import forge.CardPredicates.Presets;
 import forge.card.abilityfactory.AbilityFactory;
