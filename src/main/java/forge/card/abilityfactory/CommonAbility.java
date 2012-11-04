@@ -58,11 +58,10 @@ public class CommonAbility extends AbilityActivated {
     @Override
     public boolean canPlayAI() {
         return ai.canPlayAI(getActivatingPlayer(), params, this);
-    }        
+    }
 
     @Override
     public boolean doTrigger(final boolean mandatory) {
         return ai.doTriggerAI(this.getActivatingPlayer(), params, this, mandatory);
     }
-    
 }

@@ -471,9 +471,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Cleanup")) {
-            if (this.isDb) {
-                spellAbility = AbilityFactoryCleanup.getDrawback(this);
-            }
+            ai = new AlwaysPlayAi();
+            se = new CleanUpEffect();
         }
 
         else if (this.api.equals("Clone")) {
@@ -810,13 +809,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("StoreSVar")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryStoreSVar.createAbilityStoreSVar(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryStoreSVar.createSpellStoreSVar(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryStoreSVar.createDrawbackStoreSVar(this);
-            }
+            ai = new StoreSVarAi();
+            se = new StoreSVarEffect();
         }
 
         else if (this.api.equals("Tap")) {
@@ -845,13 +839,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("UnattachAll")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryAttach.createAbilityUnattachAll(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryAttach.createSpellUnattachAll(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryAttach.createDrawbackUnattachAll(this);
-            }
+            ai = new UnattachAllAi();
+            se = new UnattachAllEffect();
         }
 
         else if (this.api.equals("Untap")) {

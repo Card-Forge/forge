@@ -12463,8 +12463,7 @@ src/main/java/forge/card/abilityfactory/AbilityFactory.java svneol=native#text/p
 src/main/java/forge/card/abilityfactory/AbilityFactoryAttach.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryChangeZone.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryCharm.java svneol=native#text/plain
-src/main/java/forge/card/abilityfactory/AbilityFactoryCleanup.java svneol=native#text/plain
-src/main/java/forge/card/abilityfactory/AbilityFactoryStoreSVar.java -text
+src/main/java/forge/card/abilityfactory/CleanUpEffect.java -text
 src/main/java/forge/card/abilityfactory/CommonAbility.java -text
 src/main/java/forge/card/abilityfactory/CommonDrawback.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/CommonSpell.java -text
@@ -12477,6 +12476,7 @@ src/main/java/forge/card/abilityfactory/ai/AnimateAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/BondAi.java -text
 src/main/java/forge/card/abilityfactory/ai/CanPlayAsDrawbackAi.java -text
 src/main/java/forge/card/abilityfactory/ai/CannotPlayAi.java -text
+src/main/java/forge/card/abilityfactory/ai/ChangeZoneAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ChooseCardAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ChooseCardNameAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ChooseColorAi.java -text
@@ -12544,12 +12544,14 @@ src/main/java/forge/card/abilityfactory/ai/ScryAi.java -text
 src/main/java/forge/card/abilityfactory/ai/SetStateAi.java -text
 src/main/java/forge/card/abilityfactory/ai/SetStateAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ShuffleAi.java -text
+src/main/java/forge/card/abilityfactory/ai/StoreSVarAi.java -text
 src/main/java/forge/card/abilityfactory/ai/TapAi.java -text
 src/main/java/forge/card/abilityfactory/ai/TapAiBase.java -text
 src/main/java/forge/card/abilityfactory/ai/TapAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/TapOrUntapAi.java -text
 src/main/java/forge/card/abilityfactory/ai/TokenAi.java -text
 src/main/java/forge/card/abilityfactory/ai/TwoPilesAi.java -text
+src/main/java/forge/card/abilityfactory/ai/UnattachAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/UntapAi.java -text
 src/main/java/forge/card/abilityfactory/ai/UntapAllAi.java -text
 src/main/java/forge/card/abilityfactory/effects/AddTurnEffect.java -text
@@ -12557,6 +12559,7 @@ src/main/java/forge/card/abilityfactory/effects/AnimateAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/AnimateEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/AnimateEffectBase.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/effects/BondEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/ChangeZoneAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ChooseCardEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ChooseCardNameEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ChooseColorEffect.java -text
@@ -12629,11 +12632,13 @@ src/main/java/forge/card/abilityfactory/effects/ScryEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/SetStateAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/SetStateEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ShuffleEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/StoreSVarEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/TapAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/TapEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/TapOrUntapEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/TokenEffect.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/effects/TwoPilesEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/UnattachAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/UntapAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/UntapEffect.java -text
 src/main/java/forge/card/abilityfactory/package-info.java svneol=native#text/plain
