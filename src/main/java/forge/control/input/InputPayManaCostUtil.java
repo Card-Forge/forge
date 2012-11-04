@@ -436,5 +436,5 @@ public class InputPayManaCostUtil {
     
         return payX;
     }
-};    
+}
 

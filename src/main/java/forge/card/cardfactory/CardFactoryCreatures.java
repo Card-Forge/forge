@@ -69,7 +69,7 @@ import forge.view.ButtonUtil;
  */
 public class CardFactoryCreatures {
 
-    private static void getCard_ForceOfSavagery(final Card card, final String cardName) {
+    private static void getCard_ForceOfSavagery(final Card card) {
         final SpellAbility spell = new SpellPermanent(card) {
             private static final long serialVersionUID = 1603238129819160467L;
 
@@ -85,7 +85,7 @@ public class CardFactoryCreatures {
         card.addSpellAbility(spell);
     }
 
-    private static void getCard_GilderBairn(final Card card, final String cardName) {
+    private static void getCard_GilderBairn(final Card card) {
         final Cost abCost = new Cost(card, "2 GU Untap", true);
         final Target tgt = new Target(card, "Select target permanent.", new String[] { "Permanent" });
         class GilderBairnAbility extends AbilityActivated {
@@ -148,7 +148,7 @@ public class CardFactoryCreatures {
         card.addSpellAbility(a1);
     }
 
-    private static void getCard_PhylacteryLich(final Card card, final String cardName) {
+    private static void getCard_PhylacteryLich(final Card card) {
         final Command intoPlay = new Command() {
             private static final long serialVersionUID = -1601957445498569156L;
 
@@ -204,7 +204,7 @@ public class CardFactoryCreatures {
         card.addComesIntoPlayCommand(intoPlay);
     }
 
-    private static void getCard_PainterServant(final Card card, final String cardName) {
+    private static void getCard_PainterServant(final Card card) {
         final long[] timeStamp = new long[1];
         final String[] color = new String[1];
 
@@ -261,7 +261,7 @@ public class CardFactoryCreatures {
         card.addLeavesPlayCommand(leavesBattlefield);
     }
 
-    private static void getCard_Stangg(final Card card, final String cardName) {
+    private static void getCard_Stangg(final Card card) {
 
         final Ability ability = new Ability(card, "0") {
             @Override
@@ -312,7 +312,7 @@ public class CardFactoryCreatures {
         });
     }
 
-    private static void getCard_RhysTheRedeemed(final Card card, final String cardName) {
+    private static void getCard_RhysTheRedeemed(final Card card) {
         final Cost abCost = new Cost(card, "4 GW GW T", true);
         class RhysTheRedeemedAbility extends AbilityActivated {
             public RhysTheRedeemedAbility(final Card ca, final Cost co, final Target t) {
@@ -362,7 +362,7 @@ public class CardFactoryCreatures {
         copyTokens1.setStackDescription(sbStack.toString());
     }
 
-    private static void getCard_SphinxJwar(final Card card, final String cardName) {
+    private static void getCard_SphinxJwar(final Card card) {
         final SpellAbility ability1 = new AbilityStatic(card, "0") {
             @Override
             public void resolve() {
@@ -393,7 +393,7 @@ public class CardFactoryCreatures {
         card.addSpellAbility(ability1);
     }
 
-    private static void getCard_MasterOfTheWildHunt(final Card card, final String cardName) {
+    private static void getCard_MasterOfTheWildHunt(final Card card) {
         final Cost abCost = new Cost(card, "T", true);
         final Target abTgt = new Target(card, "Target a creature to Hunt", "Creature".split(","));
         class MasterOfTheWildHuntAbility extends AbilityActivated {
@@ -551,7 +551,7 @@ public class CardFactoryCreatures {
         card.addSpellAbility(ability);
     }
 
-    private static void getCard_ApocalypseHydra(final Card card, final String cardName) {
+    private static void getCard_ApocalypseHydra(final Card card) {
         final SpellAbility spell = new SpellPermanent(card) {
             private static final long serialVersionUID = -11489323313L;
 
@@ -578,7 +578,7 @@ public class CardFactoryCreatures {
         card.addSpellAbility(spell);
     }
 
-    private static void getCard_KinsbaileBorderguard(final Card card, final String cardName) {
+    private static void getCard_KinsbaileBorderguard(final Card card) {
         final SpellAbility ability = new Ability(card, "0") {
             @Override
             public void resolve() {
@@ -674,7 +674,7 @@ public class CardFactoryCreatures {
         card.addComesIntoPlayCommand(comesIntoPlay);
     }
 
-    private static void getCard_VampireHexmage(final Card card, final String cardName) {
+    private static void getCard_VampireHexmage(final Card card) {
         /*
          * Sacrifice Vampire Hexmage: Remove all counters from target
          * permanent.
@@ -745,7 +745,7 @@ public class CardFactoryCreatures {
         card.addSpellAbility(ability);
     }
 
-    private static void getCard_SurturedGhoul(final Card card, final String cardName) {
+    private static void getCard_SurturedGhoul(final Card card) {
         final int[] numCreatures = new int[1];
         final int[] sumPower = new int[1];
         final int[] sumToughness = new int[1];
@@ -879,7 +879,7 @@ public class CardFactoryCreatures {
         card.addComesIntoPlayCommand(intoPlay);
     }
 
-    private static void getCard_YoseiTheMorningStar(final Card card, final String cardName) {
+    private static void getCard_YoseiTheMorningStar(final Card card) {
         final List<Card> targetPerms = new ArrayList<Card>();
         final SpellAbility ability = new Ability(card, "0") {
             @Override
@@ -1204,7 +1204,7 @@ public class CardFactoryCreatures {
         card.addSpellAbility(finalAb);
     }
     
-    private static void getCard_EssenceOfTheWild(final Card card,final String cardName) {
+    private static void getCard_EssenceOfTheWild(final Card card) {
         class EOTWReplacement extends Ability {
 
             /**
@@ -1253,36 +1253,36 @@ public class CardFactoryCreatures {
     public static void buildCard(final Card card, final String cardName) {
 
         if (cardName.equals("Force of Savagery")) {
-            getCard_ForceOfSavagery(card, cardName);
+            getCard_ForceOfSavagery(card);
         } else if (cardName.equals("Gilder Bairn")) {
-            getCard_GilderBairn(card, cardName);
+            getCard_GilderBairn(card);
         } else if (cardName.equals("Phylactery Lich")) {
-            getCard_PhylacteryLich(card, cardName);
+            getCard_PhylacteryLich(card);
         } else if (cardName.equals("Painter's Servant")) {
-            getCard_PainterServant(card, cardName);
+            getCard_PainterServant(card);
         } else if (cardName.equals("Stangg")) {
-            getCard_Stangg(card, cardName);
+            getCard_Stangg(card);
         } else if (cardName.equals("Rhys the Redeemed")) {
-            getCard_RhysTheRedeemed(card, cardName);
+            getCard_RhysTheRedeemed(card);
         } else if (cardName.equals("Sphinx of Jwar Isle")) {
-            getCard_SphinxJwar(card, cardName);
+            getCard_SphinxJwar(card);
         } else if (cardName.equals("Master of the Wild Hunt")) {
-            getCard_MasterOfTheWildHunt(card, cardName);
+            getCard_MasterOfTheWildHunt(card);
         } else if (cardName.equals("Apocalypse Hydra")) {
-            getCard_ApocalypseHydra(card, cardName);
+            getCard_ApocalypseHydra(card);
         } else if (cardName.equals("Kinsbaile Borderguard")) {
-            getCard_KinsbaileBorderguard(card, cardName);
+            getCard_KinsbaileBorderguard(card);
         } else if (cardName.equals("Gnarlid Pack") || cardName.equals("Apex Hawks") || cardName.equals("Enclave Elite")
                 || cardName.equals("Quag Vampires") || cardName.equals("Skitter of Lizards") || cardName.equals("Joraga Warcaller")) {
             getCard_MultikickerP1P1(card, cardName);
         } else if (cardName.equals("Vampire Hexmage")) {
-            getCard_VampireHexmage(card, cardName);
+            getCard_VampireHexmage(card);
         } else if (cardName.equals("Sutured Ghoul")) {
-            getCard_SurturedGhoul(card, cardName);
+            getCard_SurturedGhoul(card);
         } else if (cardName.equals("Nameless Race")) {
             getCard_NamelessRace(card, cardName);
         } else if (cardName.equals("Yosei, the Morning Star")) {
-            getCard_YoseiTheMorningStar(card, cardName);
+            getCard_YoseiTheMorningStar(card);
         } else if (cardName.equals("Phyrexian Dreadnought")) {
             getCard_PhyrexianDreadnought(card, cardName);
         } else if (cardName.equals("Nebuchadnezzar")) {
@@ -1291,7 +1291,7 @@ public class CardFactoryCreatures {
                 || cardName.equals("Spin Engine") || cardName.equals("Screeching Griffin")) {
             getCard_DuctCrawler(card, cardName);
         } else if (cardName.equals("Essence of the Wild")) {
-            getCard_EssenceOfTheWild(card, cardName);
+            getCard_EssenceOfTheWild(card);
         }
         
 
