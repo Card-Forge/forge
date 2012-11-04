@@ -20,6 +20,10 @@ import forge.gui.GuiChoose;
 
 public class TwoPilesEffect extends SpellEffect {
 
+    // *************************************************************************
+    // ***************************** TwoPiles **********************************
+    // *************************************************************************
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -255,4 +259,4 @@ public class TwoPilesEffect extends SpellEffect {
         
         return pile1WasChosen;
     }
-} // end class AbilityFactory_Clash
+} 

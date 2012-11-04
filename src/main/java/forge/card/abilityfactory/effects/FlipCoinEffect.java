@@ -28,16 +28,6 @@ public class FlipCoinEffect extends SpellEffect {
         return sb.toString();
     }
 
-    /**
-     * <p>
-     * flipResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         final Card host = sa.getSourceCard();
@@ -86,9 +76,5 @@ public class FlipCoinEffect extends SpellEffect {
 
         // AllZone.getTriggerHandler().runTrigger("FlipsACoin",runParams);
     }
-
-    // *************************************************************************
-    // ***************************** TwoPiles **********************************
-    // *************************************************************************
 
 }

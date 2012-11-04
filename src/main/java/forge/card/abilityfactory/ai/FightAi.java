@@ -97,16 +97,4 @@ public class FightAi extends SpellAiLogic {
         return false;
     }
 
-    /**
-     * <p>
-     * fightStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
-    
 }

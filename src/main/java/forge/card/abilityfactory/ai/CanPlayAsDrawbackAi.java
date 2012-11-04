@@ -51,15 +51,4 @@ public class CanPlayAsDrawbackAi extends SpellAiLogic {
         return randomReturn;
     }
 
-    /**
-     * <p>
-     * copySpellResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-    
 }

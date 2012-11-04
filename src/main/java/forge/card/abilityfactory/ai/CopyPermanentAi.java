@@ -51,20 +51,6 @@ public class CopyPermanentAi extends SpellAiLogic {
         return true;
     }
 
-    /**
-     * <p>
-     * copyPermanentTriggerAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
-
     @Override
     public boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getSourceCard();
@@ -126,16 +112,4 @@ public class CopyPermanentAi extends SpellAiLogic {
         return true;
     }
 
-    /**
-     * <p>
-     * copyPermanentStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
-    
 }

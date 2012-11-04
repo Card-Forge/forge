@@ -38,17 +38,6 @@ public class CopyPermanentEffect extends SpellEffect {
         return sb.toString();
     }
 
-    /**
-     * <p>
-     * copyPermanentResolve.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-    
     @Override
     public void resolve(final java.util.Map<String,String> params, final SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
@@ -198,22 +187,5 @@ public class CopyPermanentEffect extends SpellEffect {
             } // end canBeTargetedBy
         } // end foreach Card
     } // end resolve
-
-    // *************************************************************************
-    // ************************* CopySpell *************************************
-    // *************************************************************************
-
-
-    /**
-     * <p>
-     * copySpellCanPlayAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
 
 }

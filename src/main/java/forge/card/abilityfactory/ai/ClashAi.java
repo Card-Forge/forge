@@ -42,15 +42,4 @@ public class ClashAi extends SpellAiLogic {
         return true;
     }
 
-    
-    /**
-     * <p>
-     * clashResolve.
-     * </p>
-     * 
-     * @param AF
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param SA
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
 }

@@ -18,35 +18,11 @@ import forge.util.Expressions;
 
 public class RepeatEffect extends SpellEffect {
     
-    
-    /**
-     * <p>
-     * repeatStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
-    
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         return "Repeat something. Somebody should really write a better StackDescription!";
     } // end repeatStackDescription()
 
-    /**
-     * <p>
-     * repeatResolve.
-     * </p>
-     * 
-     * @param AF
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param SA
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-    
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         final AbilityFactory afRepeat = new AbilityFactory();

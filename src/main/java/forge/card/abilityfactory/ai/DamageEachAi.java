@@ -45,15 +45,4 @@ public class DamageEachAi extends DamageAiBase {
         return canPlayAI(ai, params, sa);
     }
 
-    /**
-     * <p>
-     * eachDamageStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
 }

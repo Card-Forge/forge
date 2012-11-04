@@ -26,15 +26,6 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 public class DamageDealAi extends DamageAiBase {
-    /**
-     * <p>
-     * damageDrawback.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
     @Override
     public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player ai) {
         final String damage = params.get("NumDmg");
@@ -58,16 +49,6 @@ public class DamageDealAi extends DamageAiBase {
         return true;
     }
 
-    /**
-     * <p>
-     * dealDamageCanPlayAI.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
-    
     @Override
     public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
 
@@ -407,20 +388,6 @@ public class DamageDealAi extends DamageAiBase {
         return true;
     }
 
-    /**
-     * <p>
-     * damageDoTriggerAINoCost.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
-    
     @Override
     public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         
@@ -472,16 +439,4 @@ public class DamageDealAi extends DamageAiBase {
         return true;
     }
 
-    /**
-     * <p>
-     * dealDamageStackDescription.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
-    
 }

@@ -76,14 +76,6 @@ public class DamageDealEffect extends SpellEffect {
         return sb.toString();
     }
 
-    /**
-     * <p>
-     * dealDamageResolve.
-     * </p>
-     * 
-     * @param saMe
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         final String damage = params.get("NumDmg");

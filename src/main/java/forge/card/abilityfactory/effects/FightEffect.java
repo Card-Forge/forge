@@ -89,4 +89,4 @@ public class FightEffect extends SpellEffect {
         fighter1.addDamage(dmg2, fighter2);
     }
 
-} // end class AbilityFactoryDealDamage
+} 
