@@ -1564,9 +1564,8 @@ public class GameAction {
     public final boolean playCard(final Card c) {
         // this can only be called by the Human
         final HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
-        final ArrayList<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
-        final ArrayList<SpellAbility> abilities = c.getSpellAbilities();
-        final ArrayList<String> choices = new ArrayList<String>();
+
+        final List<String> choices = new ArrayList<String>();
         final Player human = Singletons.getControl().getPlayer();
         final Zone zone = game.getZoneOf(c);
 
@@ -1575,12 +1574,14 @@ public class GameAction {
                 choices.add("Play land");
             }
         }
-        for (SpellAbility sa : abilities) {
+        
+        final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
+        for (SpellAbility sa : c.getSpellAbilities()) {
             sa.setActivatingPlayer(human);
             //add alternative costs as additional spell abilities
-            newAbilities.addAll(GameActionUtil.getAlternativeCosts(sa));
+            abilities.add(sa);
+            abilities.addAll(GameActionUtil.getAlternativeCosts(sa));
         }
-        abilities.addAll(newAbilities);
 
         for (final SpellAbility sa : abilities) {
             sa.setActivatingPlayer(human);

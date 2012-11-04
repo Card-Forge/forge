@@ -714,11 +714,11 @@ public class Target {
             return true;
         } else {
             for (final Card c : Singletons.getModel().getGame().getCardsIn(this.tgtZone)) {
-                if (c.isValid(this.validTgts, this.srcCard.getController(), this.srcCard)
-                        && (!isTargeted || c.canBeTargetedBy(sa))
-                        && !this.getTargetCards().contains(c)) {
-                    return true;
-                }
+                boolean isValidTarget = c.isValid(this.validTgts, this.srcCard.getController(), this.srcCard);
+                boolean canTarget = (!isTargeted || c.canBeTargetedBy(sa));
+                boolean isAlreadyTargeted = this.getTargetCards().contains(c);  
+                //System.out.print(c);
+                if ( isValidTarget && canTarget && !isAlreadyTargeted ) return true;
             }
         }
 
