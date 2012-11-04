@@ -9,6 +9,8 @@ Added Return to Ravnica Guild Sealed Deck mode. Start a new sealed deck game, ch
 
 A bug for the new set unlocking code is now fixed. Before the fix, you could unlock all you wanted, but the unlocking info and the cards you got would never be saved! Fortunately, your paid money wouldn't be saved either.
 
+The Return to Ravnica set pictures are now available and you can download them using the Download LQ Set Picures button. The RtR token generating cards have been updated with set specific images.
+
 --
 
 On several occasions people have noticed that the forge deck editor and/or quest mode card shop would not open or display. We have also received reports that some of the tabs/panels in the deck editor are missing. Try deleting the file named "editor_preferred.xml" which is found in the "res/layouts" folder. This should force forge to then use the "editor_default.xml" file instead.
@@ -154,6 +156,15 @@ Fixes/Features:
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 - Save set unlocking information + won cards.
 - GameFormatQuest allowedSetCodes and bannedCardNames are now final and should never be null (set in the constructors).
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Updated token download list for RtR (at last)
+- Updated RtR token generating cards with set specific images
+- AB: Clash, Damage
+- AF: Copy, repeat
+- getStackDescription routines now use common routines for string collection
+- any spelleffect class can use common routines to get defined targets
+- Code cleanup (Phase 3): removed some orphaned javadocs, moved some comments, removed some javadocs that no longer correspond to method parameters after refactoring.
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
