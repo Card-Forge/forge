@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.effects;
 
 import forge.Card;
-import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;

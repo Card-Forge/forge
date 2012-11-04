@@ -71,11 +71,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     /** The need to next phase. */
     private boolean isPlayerPriorityAllowed = false;
 
-    // This should only be true four times! that is for the initial nextPhases
-    // in MyObservable
-    /** The need to next phase init. */
-    private int needToNextPhaseInit = 0;
-
     private final GameState game;
     
     public PhaseHandler(final GameState game0)
@@ -428,6 +423,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN)) {
                 p.loseLife(burn, null);
             }
+            p.updateObservers();
         }
 
         switch (this.phase) {
@@ -744,21 +740,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      */
     public final boolean mayPlayerHavePriority() {
         return this.isPlayerPriorityAllowed;
-    }
-
-    /**
-     * <p>
-     * isNeedToNextPhaseInit.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isNeedToNextPhaseInit() {
-        this.needToNextPhaseInit++;
-        if (this.needToNextPhaseInit <= 4) {
-            return true;
-        }
-        return false;
     }
 
     // this is a hack for the setup game state mode, do not use outside of
