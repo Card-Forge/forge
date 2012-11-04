@@ -12463,7 +12463,6 @@ src/main/java/forge/card/abilityfactory/AbilityFactory.java svneol=native#text/p
 src/main/java/forge/card/abilityfactory/AbilityFactoryAttach.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryChangeZone.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryCharm.java svneol=native#text/plain
-src/main/java/forge/card/abilityfactory/CleanUpEffect.java -text
 src/main/java/forge/card/abilityfactory/CommonAbility.java -text
 src/main/java/forge/card/abilityfactory/CommonDrawback.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/CommonSpell.java -text
@@ -12568,6 +12567,7 @@ src/main/java/forge/card/abilityfactory/effects/ChooseNumberEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ChoosePlayerEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ChooseTypeEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ClashEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/CleanUpEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/CloneEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ControlExchangeEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ControlGainEffect.java -text

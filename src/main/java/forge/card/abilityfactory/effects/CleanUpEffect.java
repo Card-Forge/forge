@@ -1,9 +1,10 @@
-package forge.card.abilityfactory;
+package forge.card.abilityfactory.effects;
 
 import java.util.Map;
 
 import forge.Card;
 import forge.Singletons;
+import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 
 public class CleanUpEffect extends SpellEffect { 
