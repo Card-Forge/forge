@@ -171,14 +171,7 @@ public enum TargetingOverlay {
             assembleArcs();
             if (arcs.size() < 1) { return; }
 
-            int w, h, x, y;
-
             for (Point[] p : arcs) {
-                w = Math.abs((int) p[1].getX() - (int) p[0].getX());
-                h = Math.abs((int) p[1].getY() - (int) p[0].getY());
-                x = (Math.min((int) p[1].getX(), (int) p[0].getX()) - w);
-                y = (Math.min((int) p[1].getY(), (int) p[0].getY()));
-
                 double SX = p[0].getX();
                 double SY = p[0].getY();
                 double CX = (p[0].getX() + p[1].getX()) / 2;
