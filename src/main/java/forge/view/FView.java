@@ -24,6 +24,7 @@ import forge.gui.framework.DragCell;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SLayoutConstants;
 import forge.gui.home.VHomeUI;
+import forge.gui.match.TargetingOverlay;
 import forge.gui.match.VMatchUI;
 import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FPanel;
@@ -83,7 +84,7 @@ public enum FView {
         // Note: when adding new panels here, keep in mind that the layered pane
         // has a null layout, so new components will be W0 x H0 pixels - gotcha!
         // FControl has a method called "sizeComponents" which will fix this.
-        // lpnDocument.add(TargetingOverlay.SINGLETON_INSTANCE.getPanel(), TARGETING_LAYER);
+        lpnDocument.add(TargetingOverlay.SINGLETON_INSTANCE.getPanel(), TARGETING_LAYER);
 
         pnlInsets.add(pnlContent, BorderLayout.CENTER);
         pnlInsets.setBackgroundTexture(FSkin.getIcon(FSkin.Backgrounds.BG_TEXTURE));

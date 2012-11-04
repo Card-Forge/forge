@@ -22,6 +22,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.geom.QuadCurve2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -82,7 +83,8 @@ public enum TargetingOverlay {
                 // Draw only hovered card
                 for (VField f : fields) {
                     if (f.getTabletop().getCardFromMouseOverPanel() != null) {
-                        cardPanels.addAll(f.getTabletop().getCardPanels());
+                        cardPanels.add(f.getTabletop().getMouseOverPanel());
+                        break;
                     }
                 }
                 break;
@@ -177,7 +179,15 @@ public enum TargetingOverlay {
                 x = (Math.min((int) p[1].getX(), (int) p[0].getX()) - w);
                 y = (Math.min((int) p[1].getY(), (int) p[0].getY()));
 
-                g2d.drawArc(x, y, 2 * w, 2 * h, 0, 90);
+                double SX = p[0].getX();
+                double SY = p[0].getY();
+                double CX = (p[0].getX() + p[1].getX()) / 2;
+                double CY = Math.max(p[0].getY(), p[1].getY());
+                double EX = p[1].getX();
+                double EY = p[1].getY();
+                QuadCurve2D curve = new QuadCurve2D.Double(SX, SY, CX, CY, EX, EY);
+                g2d.draw(curve);
+
                 g2d.fillOval((int) p[0].getX() - 4, (int) p[0].getY() - 4, 8, 8);
                 g2d.fillOval((int) p[1].getX() - 4, (int) p[1].getY() - 4, 8, 8);
             }

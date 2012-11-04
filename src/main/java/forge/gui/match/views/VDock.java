@@ -97,7 +97,7 @@ public enum VDock implements IVDoc<CDock> {
         pnl.add(btnOpenLayout);
         pnl.add(btnSaveLayout);
         pnl.add(btnAlphaStrike);
-        // pnl.add(btnTargeting);
+        pnl.add(btnTargeting);
     }
 
     /* (non-Javadoc)
