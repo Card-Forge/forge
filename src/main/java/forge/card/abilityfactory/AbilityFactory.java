@@ -378,10 +378,6 @@ public class AbilityFactory {
         // Match API keywords. These are listed in alphabetical order.
 
 
-        SpellAiLogic ai = api.getAi();
-        SpellEffect se = api.getSpellEffect();
-        
-
         if (this.api == ApiType.ChangeZone) {
             if (this.isAb) {
                 spellAbility = AbilityFactoryChangeZone.createAbilityChangeZone(this);
@@ -402,13 +398,6 @@ public class AbilityFactory {
             }
         }
 
-        else if (this.api == ApiType.Charm) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryCharm.createAbilityCharm(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryCharm.createSpellCharm(this);
-            }
-        }
 
         else if (this.api == ApiType.CopySpell) {
             if (this.isTargeted) { 
@@ -428,9 +417,12 @@ public class AbilityFactory {
         }
 
         
-        // build code is here once for the refactored APIs
-        if ( se != null && ai != null && spellAbility == null)
+        // build code is here for the refactored APIs
+        if (spellAbility == null)
         {
+            SpellAiLogic ai = api.getAi();
+            SpellEffect se = api.getSpellEffect();
+            
             if (this.isAb) {
                 spellAbility = new CommonAbility(this.getHostCard(), this.getAbCost(), this.getAbTgt(), this.getMapParams(), se, ai);
             } else if (this.isSp) {

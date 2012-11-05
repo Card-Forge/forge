@@ -30,7 +30,6 @@ import forge.Command;
 import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
-import forge.card.abilityfactory.AbilityFactoryCharm;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilitySub;
@@ -488,9 +487,6 @@ public class TriggerHandler {
         }
         sa[0].setStackDescription(sa[0].toString());
         // TODO - for Charms to supports AI, this needs to be removed
-        if (sa[0].getActivatingPlayer().isHuman()) {
-            AbilityFactoryCharm.setupCharmSAs(sa[0]);
-        }
         boolean mand = false;
         if (params.containsKey("OptionalDecider")) {
             sa[0].setOptionalTrigger(true);

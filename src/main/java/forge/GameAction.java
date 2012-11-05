@@ -30,7 +30,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.card.abilityfactory.AbilityFactory;
-import forge.card.abilityfactory.AbilityFactoryCharm;
 import forge.card.abilityfactory.effects.AttachEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -1955,7 +1954,6 @@ public class GameAction {
     public final void playSpellAbility(SpellAbility sa) {
         sa.setActivatingPlayer(Singletons.getControl().getPlayer());
 
-        sa = AbilityFactoryCharm.setupCharmSAs(sa);
         sa = GameAction.chooseOptionalAdditionalCosts(sa);
 
         if (sa == null) {

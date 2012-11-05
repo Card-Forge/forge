@@ -17,7 +17,7 @@ public enum ApiType {
     Bond ( BondEffect.class, BondAi.class ),
     ChangeZone(null, null), // not converted
     ChangeZoneAll(ChangeZoneAllEffect.class, ChangeZoneAllAi.class), // classes extracted but not converted
-    Charm(null, null), // not converted
+    Charm(CharmEffect.class, CharmAi.class),
     ChooseCard ( ChooseCardEffect.class, ChooseCardAi.class ),
     ChooseColor ( ChooseColorEffect.class, ChooseColorAi.class ),
     ChooseNumber ( ChooseNumberEffect.class, CannotPlayAi.class ),
