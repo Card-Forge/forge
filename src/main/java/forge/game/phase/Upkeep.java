@@ -1882,6 +1882,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 sb.append("When the last is removed, sacrifice it.)");
                 ability.setStackDescription(sb.toString());
                 ability.setDescription(sb.toString());
+                ability.setActivatingPlayer(card.getController());
 
                 Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
@@ -1924,6 +1925,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 sb.append("If you can't, sacrifice it.)");
                 ability.setStackDescription(sb.toString());
                 ability.setDescription(sb.toString());
+                ability.setActivatingPlayer(card.getController());
 
                 Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
@@ -2007,6 +2009,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 sb.append("battlefield and all other cards revealed this way into his or her graveyard.");
                 ability.setStackDescription(sb.toString());
                 ability.setDescription(sb.toString());
+                ability.setActivatingPlayer(oath.getController());
 
                 Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
             }
@@ -2056,6 +2059,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                 sb.append("from their graveyard to owner's hand if they have more than an opponent.");
                 ability.setStackDescription(sb.toString());
                 ability.setDescription(sb.toString());
+                ability.setActivatingPlayer(oathList.get(0).getController());
 
                 Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
@@ -2081,24 +2085,23 @@ public class Upkeep extends Phase implements java.io.Serializable {
         // battlefield have each of them deal damage.
         if (0 < karmas.size()) {
             for (final Card karma : karmas) {
-                final Card src = karma;
-                final Ability ability = new Ability(src, "0") {
+                final Ability ability = new Ability(karma, "0") {
                     @Override
                     public void resolve() {
                         if (damage > 0) {
-                            player.addDamage(damage, src);
+                            player.addDamage(damage, karma);
                         }
                     }
                 }; // Ability
                 if (damage > 0) {
 
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append("Karma deals ").append(damage).append(" damage to ").append(player);
-                    ability.setStackDescription(sb.toString());
-                    ability.setDescription(sb.toString());
+                final StringBuilder sb = new StringBuilder();
+                sb.append("Karma deals ").append(damage).append(" damage to ").append(player);
+                ability.setStackDescription(sb.toString());
+                ability.setDescription(sb.toString());
+                ability.setActivatingPlayer(karma.getController());
 
-                    Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
-
+                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
                 }
             }
         } // if
