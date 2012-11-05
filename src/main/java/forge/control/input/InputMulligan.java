@@ -170,14 +170,9 @@ public class InputMulligan extends Input {
             }
         }
 
-
-        // I expect bugs here - it is noone's turn yet.
         ga.checkStateEffects();
         Singletons.getModel().getMatch().getInput().clearInput();
-        // was added to stack... =(
-        this.stop();
-        // move to upkeep of 1st player
-        //game.getPhaseHandler().nextPhase();
+        game.getPhaseHandler().nextPhase();
     }
 
     @Override

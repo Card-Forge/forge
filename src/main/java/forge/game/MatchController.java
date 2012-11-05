@@ -150,8 +150,6 @@ public class MatchController {
             }
 
             CMatchUI.SINGLETON_INSTANCE.setCard(Singletons.getControl().getPlayer().getCardsIn(ZoneType.Hand).get(0));
-            input.setInput(new InputMulligan());            
-            
         } catch (Exception e) {
             ErrorViewer.showError(e);
         }
@@ -267,6 +265,10 @@ public class MatchController {
     public Deck getPlayersDeck(LobbyPlayer lobbyPlayer) {
         PlayerStartConditions cond = players.get(lobbyPlayer);
         return cond == null ? null : cond.getDeck();
+    }
+    
+    public Map<LobbyPlayer, PlayerStartConditions> getPlayers() {
+        return players;
     }
 
     public final InputControl getInput() {
