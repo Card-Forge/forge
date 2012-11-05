@@ -57,9 +57,9 @@ public class AbilityManaPart implements java.io.Serializable {
     /** The canceled. */
     private boolean canceled = false;
 
-    private final Card sourceCard;
+    transient private final Card sourceCard;
 
-    private Cost cost;
+    transient private Cost cost;
 
     // Spells paid with this mana spell can't be countered.
     private boolean cannotCounterSpell;

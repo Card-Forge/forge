@@ -152,11 +152,7 @@ public class UnattachAllEffect extends SpellEffect {
     @Override
     public void resolve(Map<String, String> params, SpellAbility sa) {
         Card source = sa.getSourceCard();
-
-        final Target tgt = sa.getTarget();
         final List<Object> targets = getTargetObjects(sa, params);
-    
-
     
         // If Cast Targets will be checked on the Stack
         for (final Object o : targets) {

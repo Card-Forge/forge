@@ -31,8 +31,6 @@ import forge.Command;
 import forge.Constant;
 import forge.GameActionUtil;
 import forge.Singletons;
-import forge.card.abilityfactory.ai.*;
-import forge.card.abilityfactory.effects.*;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;

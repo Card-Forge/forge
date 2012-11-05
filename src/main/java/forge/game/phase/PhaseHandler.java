@@ -52,7 +52,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     private int turn = 0;
     // Start turn at 0, so first untap step will turn it to 1
 
-    private final Stack<ExtraTurn> extraTurns = new Stack<ExtraTurn>();
+    transient private final Stack<ExtraTurn> extraTurns = new Stack<ExtraTurn>();
 
     private int extraCombats = 0;
 
@@ -72,7 +72,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     /** The need to next phase. */
     private boolean isPlayerPriorityAllowed = false;
 
-    private final GameState game;
+    transient private final GameState game;
     
     public PhaseHandler(final GameState game0)
     {
