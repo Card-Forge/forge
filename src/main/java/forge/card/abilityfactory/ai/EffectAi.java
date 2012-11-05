@@ -34,7 +34,7 @@ public class EffectAi extends SpellAiLogic {
             logic = params.get("AILogic");
             final PhaseHandler phase = game.getPhaseHandler();
             if (logic.equals("BeginningOfOppTurn")) {
-                if (phase.isPlayerTurn(ai.getOpponent()) || phase.getPhase().isAfter(PhaseType.DRAW)) {
+                if (phase.isPlayerTurn(ai) || phase.getPhase().isAfter(PhaseType.DRAW)) {
                     return false;
                 }
                 randomReturn = true;
