@@ -9,6 +9,7 @@ SVar:A:Sacrificed$Amount
 SVar:B:SVar$A/Times.2
 SVar:C:SVar$B/Plus.2
 SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/devouring_greed.jpg
 SetInfo:CHK|Common|http://magiccards.info/scans/en/chk/110.jpg

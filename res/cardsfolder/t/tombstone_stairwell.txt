@@ -12,6 +12,7 @@ T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | TriggerZones$ Battlef
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Battlefield | Destination$ Any | Execute$ DestroyRemembered | Secondary$ True | TriggerController$ TriggeredCardController | TriggerDescription$ At the beginning of each end step or when CARDNAME leaves the battlefield, destroy all tokens put onto the battlefield with CARDNAME. They can't be regenerated.
 SVar:DestroyRemembered:DB$DestroyAll | Cost$ 0 | ValidCards$ Card.IsRemembered | NoRegen$ True | SubAbility$ DBCleanUp
 SVar:DBCleanUp:DB$Cleanup | ClearRemembered$ True
+SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tombstone_stairwell.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/47.jpg
