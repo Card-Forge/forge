@@ -3349,6 +3349,7 @@ res/cardsfolder/f/fire_drake.txt svneol=native#text/plain
 res/cardsfolder/f/fire_elemental.txt svneol=native#text/plain
 res/cardsfolder/f/fire_field_ogre.txt svneol=native#text/plain
 res/cardsfolder/f/fire_imp.txt svneol=native#text/plain
+res/cardsfolder/f/fire_juggler.txt -text
 res/cardsfolder/f/fire_lit_thicket.txt svneol=native#text/plain
 res/cardsfolder/f/fire_servant.txt svneol=native#text/plain
 res/cardsfolder/f/fire_snake.txt svneol=native#text/plain
@@ -4296,6 +4297,7 @@ res/cardsfolder/g/guma.txt svneol=native#text/plain
 res/cardsfolder/g/gurzigost.txt -text svneol=unset#text/plain
 res/cardsfolder/g/gush.txt svneol=native#text/plain
 res/cardsfolder/g/gust_skimmer.txt svneol=native#text/plain
+res/cardsfolder/g/gustcloak_cavalier.txt -text
 res/cardsfolder/g/gustcloak_harrier.txt -text
 res/cardsfolder/g/gustcloak_runner.txt -text
 res/cardsfolder/g/gustcloak_savior.txt -text svneol=unset#text/plain
@@ -7957,6 +7959,7 @@ res/cardsfolder/r/rift_bolt.txt svneol=native#text/plain
 res/cardsfolder/r/rift_elemental.txt -text
 res/cardsfolder/r/riftmarked_knight.txt -text
 res/cardsfolder/r/riftstone_portal.txt svneol=native#text/plain
+res/cardsfolder/r/riftsweeper.txt -text
 res/cardsfolder/r/riftwing_cloudskate.txt svneol=native#text/plain
 res/cardsfolder/r/righteous_authority.txt -text
 res/cardsfolder/r/righteous_avengers.txt svneol=native#text/plain
@@ -8274,6 +8277,7 @@ res/cardsfolder/s/saprazzan_outrigger.txt -text
 res/cardsfolder/s/saprazzan_raider.txt svneol=native#text/plain
 res/cardsfolder/s/saprazzan_skerry.txt svneol=native#text/plain
 res/cardsfolder/s/saproling_burst.txt -text
+res/cardsfolder/s/saproling_cluster.txt -text
 res/cardsfolder/s/sapseep_forest.txt svneol=native#text/plain
 res/cardsfolder/s/sarcatog.txt svneol=native#text/plain
 res/cardsfolder/s/sarcomancy.txt svneol=native#text/plain
