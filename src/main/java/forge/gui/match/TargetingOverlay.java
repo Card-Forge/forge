@@ -174,11 +174,17 @@ public enum TargetingOverlay {
             for (Point[] p : arcs) {
                 double SX = p[0].getX();
                 double SY = p[0].getY();
-                double CX = (p[0].getX() + p[1].getX()) / 2;
-                double CY = Math.max(p[0].getY(), p[1].getY());
+                //double CX = (p[0].getX() + p[1].getX()) / 2;
+                double CX = p[0].getY() > p[1].getY() ?  
+                              Math.max(p[0].getX(), p[1].getX()) * 0.33 +
+                              Math.min(p[0].getX(), p[1].getX()) * 0.66 :
+                              Math.min(p[0].getX(), p[1].getX()) * 0.33 +
+                              Math.max(p[0].getX(), p[1].getX()) * 0.66;
+                double CY = Math.min(p[0].getY(), p[1].getY());
                 double EX = p[1].getX();
                 double EY = p[1].getY();
                 QuadCurve2D curve = new QuadCurve2D.Double(SX, SY, CX, CY, EX, EY);
+
                 g2d.draw(curve);
 
                 g2d.fillOval((int) p[0].getX() - 4, (int) p[0].getY() - 4, 8, 8);
