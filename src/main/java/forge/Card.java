@@ -2698,7 +2698,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
 
             AbilityManaPart am = a.getManaPart();
-            if ((am.isBasic() || am.isReflectedMana()) && !res.contains(am)) {
+            if ((am.isBasic() || am.isReflectedMana()) && !res.contains(a)) {
                 res.add(a);
             }
 
