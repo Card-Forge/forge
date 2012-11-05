@@ -763,6 +763,11 @@ public class AbilityFactory {
             se = new RepeatEffect();
         }
 
+        else if (this.api.equals("RestartGame")) {
+            ai = new RestartGameAi();
+            se = new RestartGameEffect();
+        }
+
         else if (this.api.equals("Reveal")) {
             ai = new RevealAi();
             se = new RevealEffect();

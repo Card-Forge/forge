@@ -5145,6 +5145,7 @@ res/cardsfolder/k/karakas.txt svneol=native#text/plain
 res/cardsfolder/k/kargan_dragonlord.txt svneol=native#text/plain
 res/cardsfolder/k/karma.txt svneol=native#text/plain
 res/cardsfolder/k/karmic_guide.txt svneol=native#text/plain
+res/cardsfolder/k/karn_liberated.txt -text
 res/cardsfolder/k/karn_silver_golem.txt svneol=native#text/plain
 res/cardsfolder/k/karns_touch.txt svneol=native#text/plain
 res/cardsfolder/k/karona_false_god.txt -text
@@ -12534,6 +12535,7 @@ src/main/java/forge/card/abilityfactory/ai/RegenerateAi.java svneol=native#text/
 src/main/java/forge/card/abilityfactory/ai/RegenerateAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/RemoveFromCombatAi.java -text
 src/main/java/forge/card/abilityfactory/ai/RepeatAi.java -text
+src/main/java/forge/card/abilityfactory/ai/RestartGameAi.java -text
 src/main/java/forge/card/abilityfactory/ai/RevealAi.java -text
 src/main/java/forge/card/abilityfactory/ai/RevealAiBase.java -text
 src/main/java/forge/card/abilityfactory/ai/RevealHandAi.java -text
@@ -12623,6 +12625,7 @@ src/main/java/forge/card/abilityfactory/effects/RegenerateAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/RegenerateEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/RemoveFromCombatEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/RepeatEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/RestartGameEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/RevealEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/RevealEffectBase.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/effects/RevealHandEffect.java -text
