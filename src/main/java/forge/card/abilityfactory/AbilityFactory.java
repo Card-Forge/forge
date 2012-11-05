@@ -398,13 +398,8 @@ public class AbilityFactory {
         }
 
         else if (this.api.equals("Attach")) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryAttach.createAbilityAttach(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryAttach.createSpellAttach(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryAttach.createDrawbackAttach(this);
-            }
+            ai = new AttachAi();
+            se = new AttachEffect();
         }
 
         else if (this.api.equals("Bond")) {

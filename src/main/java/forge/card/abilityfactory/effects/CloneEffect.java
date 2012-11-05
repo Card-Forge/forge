@@ -10,7 +10,6 @@ import forge.CardCharacteristicName;
 import forge.CardUtil;
 import forge.GameActionUtil;
 import forge.card.abilityfactory.AbilityFactory;
-import forge.card.abilityfactory.AbilityFactoryAttach;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -167,7 +166,7 @@ public class CloneEffect extends SpellEffect {
 
         // check if clone is now an Aura that needs to be attached
         if (tgtCard.isAura()) {
-            AbilityFactoryAttach.attachAuraOnIndirectEnterBattlefield(tgtCard);
+            AttachEffect.attachAuraOnIndirectEnterBattlefield(tgtCard);
         }
 
     } // cloneResolve

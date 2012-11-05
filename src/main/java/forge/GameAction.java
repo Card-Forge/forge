@@ -30,8 +30,8 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.card.abilityfactory.AbilityFactory;
-import forge.card.abilityfactory.AbilityFactoryAttach;
 import forge.card.abilityfactory.AbilityFactoryCharm;
+import forge.card.abilityfactory.effects.AttachEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
@@ -373,7 +373,7 @@ public class GameAction {
                 && !c.isEnchanting()) {
             // TODO Need a way to override this for Abilities that put Auras
             // into play attached to things
-            AbilityFactoryAttach.attachAuraOnIndirectEnterBattlefield(c);
+            AttachEffect.attachAuraOnIndirectEnterBattlefield(c);
         }
 
         return c;

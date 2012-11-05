@@ -10,7 +10,6 @@ import forge.CardCharacteristicName;
 import forge.CardPredicates;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
-import forge.card.abilityfactory.AbilityFactoryAttach;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -71,7 +70,7 @@ public class ChangeZoneAllEffect extends SpellEffect {
             if (destination.equals(ZoneType.Battlefield)) {
                 // Auras without Candidates stay in their current location
                 if (c.isAura()) {
-                    final SpellAbility saAura = AbilityFactoryAttach.getAttachSpellAbility(c);
+                    final SpellAbility saAura = AttachEffect.getAttachSpellAbility(c);
                     if (!saAura.getTarget().hasCandidates(saAura, false)) {
                         continue;
                     }

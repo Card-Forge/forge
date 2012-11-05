@@ -37,6 +37,7 @@ import forge.Constant;
 import forge.GameActionUtil;
 import forge.GameEntity;
 import forge.Singletons;
+import forge.card.abilityfactory.effects.AttachEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostDiscard;
@@ -1326,7 +1327,7 @@ public final class AbilityFactoryChangeZone {
                 }
                 // Auras without Candidates stay in their current location
                 if (c.isAura()) {
-                    final SpellAbility saAura = AbilityFactoryAttach.getAttachSpellAbility(c);
+                    final SpellAbility saAura = AttachEffect.getAttachSpellAbility(c);
                     if (!saAura.getTarget().hasCandidates(saAura, false)) {
                         continue;
                     }
@@ -2265,7 +2266,7 @@ public final class AbilityFactoryChangeZone {
                         // Auras without Candidates stay in their current
                         // location
                         if (tgtC.isAura()) {
-                            final SpellAbility saAura = AbilityFactoryAttach.getAttachSpellAbility(tgtC);
+                            final SpellAbility saAura = AttachEffect.getAttachSpellAbility(tgtC);
                             if (!saAura.getTarget().hasCandidates(saAura, false)) {
                                 continue;
                             }
@@ -2923,7 +2924,7 @@ public final class AbilityFactoryChangeZone {
             if (destination.equals(ZoneType.Battlefield)) {
                 // Auras without Candidates stay in their current location
                 if (c.isAura()) {
-                    final SpellAbility saAura = AbilityFactoryAttach.getAttachSpellAbility(c);
+                    final SpellAbility saAura = AttachEffect.getAttachSpellAbility(c);
                     if (!saAura.getTarget().hasCandidates(saAura, false)) {
                         continue;
                     }
