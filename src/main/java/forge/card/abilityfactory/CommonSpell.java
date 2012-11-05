@@ -41,9 +41,11 @@ public class CommonSpell extends Spell {
     
     @Override
     public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
+        boolean chance = false;
         if (withOutManaCost) {
-            return ai.doTriggerAINoCost(this.getActivatingPlayer(), params, this, mandatory);
+            chance = ai.doTriggerNoCostWithSubs(this.getActivatingPlayer(), params, this, mandatory);
         }
-        return ai.doTriggerAI(this.getActivatingPlayer(), params, this, mandatory);
+        chance = ai.doTriggerAI(this.getActivatingPlayer(), params, this, mandatory);
+        return chance;
     }
 }

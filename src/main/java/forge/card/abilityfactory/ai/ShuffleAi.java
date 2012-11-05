@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.ai;
 
 import forge.card.abilityfactory.SpellAiLogic;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 
@@ -43,15 +42,9 @@ public class ShuffleAi extends SpellAiLogic {
     } // shuffleTargetAI()
 
     @Override
-    public boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         if (!shuffleTargetAI(sa, false, mandatory)) {
             return false;
-        }
-
-        // check SubAbilities DoTrigger?
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            return abSub.doTrigger(mandatory);
         }
 
         return true;

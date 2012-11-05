@@ -3,7 +3,6 @@ package forge.card.abilityfactory.ai;
 import java.util.Map;
 
 import forge.card.abilityfactory.SpellAiLogic;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 
@@ -33,15 +32,7 @@ public class GameWinAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
-
-        // WinGame abilities usually don't have subAbilities but for
-        // consistency...
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            return abSub.doTrigger(mandatory);
-        }
-
+    protected boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         return true;
     }
 

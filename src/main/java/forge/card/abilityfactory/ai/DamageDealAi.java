@@ -389,7 +389,7 @@ public class DamageDealAi extends DamageAiBase {
     }
 
     @Override
-    public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         
         final Card source = sa.getSourceCard();
         final String damage = params.get("NumDmg");
@@ -430,10 +430,6 @@ public class DamageDealAi extends DamageAiBase {
 
                 source.setSVar("PayX", Integer.toString(actualPay));
             }
-        }
-
-        if (sa.getSubAbility() != null) {
-            return sa.getSubAbility().doTrigger(mandatory);
         }
 
         return true;

@@ -81,7 +81,7 @@ public class SacrificeAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         // AI should only activate this during Human's turn
         boolean chance = sacrificeTgtAI(ai, params, sa);
 

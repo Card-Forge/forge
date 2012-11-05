@@ -24,7 +24,7 @@ public class ChooseTypeAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         final Target tgt = sa.getTarget();
 
         if (sa.getTarget() != null) {

@@ -67,13 +67,8 @@ public class DamagePreventAllAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         boolean chance = true;
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.doTrigger(mandatory);
-        }
 
         return chance;
     }

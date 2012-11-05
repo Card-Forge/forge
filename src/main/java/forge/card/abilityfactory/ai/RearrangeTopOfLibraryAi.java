@@ -3,7 +3,6 @@ package forge.card.abilityfactory.ai;
 import java.util.Map;
 
 import forge.card.abilityfactory.SpellAiLogic;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -21,7 +20,7 @@ public class RearrangeTopOfLibraryAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
     @Override
-    public boolean doTriggerAINoCost(Player ai, Map<String, String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, Map<String, String> params, SpellAbility sa, boolean mandatory) {
     
         final Target tgt = sa.getTarget();
     
@@ -41,10 +40,6 @@ public class RearrangeTopOfLibraryAi extends SpellAiLogic {
             // if it's just defined, no big deal
         }
     
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            return abSub.doTrigger(mandatory);
-        }
         return false;
     }
 }

@@ -64,16 +64,10 @@ public class RevealHandAi extends RevealAiBase {
     }
 
     @Override
-    public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
 
         if (!revealHandTargetAI(ai, sa, false, mandatory)) {
             return false;
-        }
-
-        // check SubAbilities DoTrigger?
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            return abSub.doTrigger(mandatory);
         }
 
         return true;

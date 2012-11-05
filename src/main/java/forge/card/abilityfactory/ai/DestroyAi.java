@@ -155,7 +155,7 @@ public class DestroyAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
         final boolean noRegen = params.containsKey("NoRegen");
@@ -241,11 +241,6 @@ public class DestroyAi extends SpellAiLogic {
             if (!mandatory) {
                 return false;
             }
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            return subAb.doTrigger(mandatory);
         }
 
         return true;

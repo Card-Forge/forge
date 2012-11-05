@@ -10,7 +10,6 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.phase.PhaseType;
@@ -111,7 +110,7 @@ public class LifeLoseAi extends SpellAiLogic {
     }
     
     @Override
-    public boolean doTriggerAINoCost(final Player ai, final Map<String, String> params,
+    protected boolean doTriggerAINoCost(final Player ai, final Map<String, String> params,
     final SpellAbility sa, final boolean mandatory) {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
@@ -148,12 +147,6 @@ public class LifeLoseAi extends SpellAiLogic {
             if ((amount + 3) > ai.getLife()) {
                 return false;
             }
-        }
-        
-        // check SubAbilities DoTrigger?
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            return abSub.doTrigger(mandatory);
         }
         
         return true;

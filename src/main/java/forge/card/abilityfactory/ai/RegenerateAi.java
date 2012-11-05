@@ -159,7 +159,7 @@ public class RegenerateAi extends SpellAiLogic {
     } // regenerateCanPlayAI
 
     @Override
-    public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         boolean chance = false;
 
         final Target tgt = sa.getTarget();
@@ -168,11 +168,6 @@ public class RegenerateAi extends SpellAiLogic {
             chance = true;
         } else {
             chance = regenMandatoryTarget(ai, sa, mandatory);
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.doTrigger(mandatory);
         }
 
         return chance;

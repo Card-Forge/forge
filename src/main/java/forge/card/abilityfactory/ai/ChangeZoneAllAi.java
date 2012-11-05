@@ -183,7 +183,7 @@ public class ChangeZoneAllAi extends SpellAiLogic {
 
 
     @Override
-    public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         // Change Zone All, can be any type moving from one zone to another
 
         final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));

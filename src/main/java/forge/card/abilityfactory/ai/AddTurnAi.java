@@ -38,7 +38,7 @@ public class AddTurnAi extends SpellAiLogic {
 
 
     @Override
-    public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         final Player opp = ai.getOpponent();
         final Target tgt = sa.getTarget();
 

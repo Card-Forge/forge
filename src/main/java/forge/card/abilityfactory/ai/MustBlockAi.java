@@ -12,7 +12,6 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.phase.CombatUtil;
@@ -35,7 +34,7 @@ public class MustBlockAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getSourceCard();
         final Target abTgt = sa.getTarget();
 
@@ -96,12 +95,6 @@ public class MustBlockAi extends SpellAiLogic {
             chance = true;
         } else {
             return false;
-        }
-
-        // check SubAbilities DoTrigger?
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            return chance && abSub.doTrigger(mandatory);
         }
 
         return chance;

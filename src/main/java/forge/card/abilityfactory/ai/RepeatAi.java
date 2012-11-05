@@ -9,14 +9,6 @@ import forge.game.player.Player;
 
 public class RepeatAi extends SpellAiLogic {
     
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
-     */
-    @Override
-    public boolean doTriggerAI(Player aiPlayer, Map<String, String> params, SpellAbility sa, boolean mandatory) {
-        return canPlayAI(aiPlayer, params, sa) || mandatory;
-    }
-    
     @Override
     public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         final Target tgt = sa.getTarget();

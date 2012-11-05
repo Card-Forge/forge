@@ -58,22 +58,17 @@ public class PhasesAi extends SpellAiLogic
     }
 
     @Override
-    public boolean doTriggerAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         final Target tgt = sa.getTarget();
 
-        if (tgt == null) {
-            if (mandatory) {
-                return true;
-            }
-
-            return false;
-        } else {
-            if (phasesPrefTargeting(tgt, sa, mandatory)) {
-                return true;
-            } else if (mandatory) {
-                // not enough preferred targets, but mandatory so keep going:
-                return phasesUnpreferredTargeting(sa, mandatory);
-            }
+        if (tgt == null)
+            return mandatory;
+        
+        if (phasesPrefTargeting(tgt, sa, mandatory)) {
+            return true;
+        } else if (mandatory) {
+            // not enough preferred targets, but mandatory so keep going:
+            return phasesUnpreferredTargeting(sa, mandatory);
         }
 
         return false;

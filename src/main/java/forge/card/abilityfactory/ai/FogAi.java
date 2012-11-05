@@ -67,18 +67,12 @@ public class FogAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         boolean chance;
         if (Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(sa.getActivatingPlayer().getOpponent())) {
             chance = Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE);
         } else {
             chance = Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE);
-        }
-
-        // check SubAbilities DoTrigger?
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            return chance && abSub.doTrigger(mandatory);
         }
 
         return chance;

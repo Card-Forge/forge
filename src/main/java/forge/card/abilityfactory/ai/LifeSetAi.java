@@ -8,7 +8,6 @@ import forge.Counters;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.phase.PhaseType;
@@ -104,18 +103,13 @@ public class LifeSetAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean doTriggerAI(Player ai, Map<String, String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         final int myLife = ai.getLife();
         final Player opponent = ai.getOpponent();
         final int hlife = opponent.getLife();
         final Card source = sa.getSourceCard();
 
         final String amountStr = params.get("LifeAmount");
-
-        // If there is a cost payment it's usually not mandatory
-        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
-            return false;
-        }
 
         int amount;
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
@@ -152,12 +146,6 @@ public class LifeSetAi extends SpellAiLogic {
                     return false;
                 }
             }
-        }
-
-        // check SubAbilities DoTrigger?
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            return abSub.doTrigger(mandatory);
         }
 
         return true;

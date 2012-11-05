@@ -173,7 +173,7 @@ public class TokenAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         readParameters(params);
         final Card source = sa.getSourceCard();
         final Target tgt = sa.getTarget();

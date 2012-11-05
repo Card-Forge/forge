@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.ai;
 
 import forge.card.abilityfactory.SpellAiLogic;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -34,7 +33,7 @@ public class GameLossAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
 
         // Phage the Untouchable
         // (Final Fortune would need to attach it's delayed trigger to a
@@ -48,13 +47,6 @@ public class GameLossAi extends SpellAiLogic {
         if (tgt != null) {
             tgt.resetTargets();
             tgt.addTarget(ai.getOpponent());
-        }
-
-        // WinGame abilities usually don't have subAbilities but for
-        // consistency...
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            return abSub.doTrigger(mandatory);
         }
 
         return true;

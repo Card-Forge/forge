@@ -106,11 +106,11 @@ public class CounterAi extends SpellAiLogic {
 
     @Override
     public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
-        return doTriggerAI(aiPlayer, params, sa, true);
+        return doTriggerAINoCost(aiPlayer, params, sa, true);
     }
 
     @Override
-    public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         boolean toReturn = true;
 
         final Target tgt = sa.getTarget();

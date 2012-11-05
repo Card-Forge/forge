@@ -343,7 +343,7 @@ public class PumpAi extends PumpAiBase {
     } // pumpMandatoryTarget()
 
     @Override
-    public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getSourceCard();
         final String numDefense = params.containsKey("NumDef") ? params.get("NumDef") : "";
         final String numAttack = params.containsKey("NumAtt") ? params.get("NumAtt") : "";

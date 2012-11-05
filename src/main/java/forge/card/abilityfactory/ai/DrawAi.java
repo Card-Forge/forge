@@ -257,18 +257,8 @@ public class DrawAi extends SpellAiLogic {
 
 
     @Override
-    public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
-        if (!targetAI(ai, params, sa, mandatory)) {
-            return false;
-        }
-
-        // check SubAbilities DoTrigger?
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            return abSub.doTrigger(mandatory);
-        }
-
-        return true;
+    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+        return targetAI(ai, params, sa, mandatory);
     }
     
 }

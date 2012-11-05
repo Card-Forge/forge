@@ -30,7 +30,7 @@ public class ChooseColorAi extends SpellAiLogic {
     
     
     @Override
-    public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         return mandatory || canPlayAI(ai, params, sa);
     }
 

@@ -10,7 +10,6 @@ import forge.Singletons;
 import forge.Constant.Preferences;
 import forge.control.FControl;
 import forge.control.input.InputControl;
-import forge.control.input.InputMulligan;
 import forge.deck.Deck;
 import forge.error.ErrorViewer;
 import forge.game.player.LobbyPlayer;

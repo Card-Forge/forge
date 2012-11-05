@@ -52,7 +52,7 @@ public class ChooseCardNameAi extends SpellAiLogic {
     }
     
     @Override
-    public boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         // TODO - there is no AILogic implemented yet
         return false;
     }

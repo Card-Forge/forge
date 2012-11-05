@@ -143,7 +143,7 @@ public class LifeGainAi extends SpellAiLogic {
      * @return a boolean.
      */
     @Override
-    public boolean doTriggerAINoCost(final Player ai, final Map<String, String> params,
+    protected boolean doTriggerAINoCost(final Player ai, final Map<String, String> params,
     final SpellAbility sa, final boolean mandatory) {
         
         // If the Target is gaining life, target self.
@@ -167,12 +167,6 @@ public class LifeGainAi extends SpellAiLogic {
             // Set PayX here to maximum value.
             final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(xPay));
-        }
-        
-        // check SubAbilities DoTrigger?
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            return abSub.doTrigger(mandatory);
         }
         
         return true;

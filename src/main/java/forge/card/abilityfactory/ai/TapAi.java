@@ -64,7 +64,7 @@ public class TapAi extends TapAiBase {
     }
 
     @Override
-    public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
 
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();

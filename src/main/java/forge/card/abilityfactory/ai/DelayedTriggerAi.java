@@ -22,7 +22,7 @@ public class DelayedTriggerAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean doTriggerAI(forge.game.player.Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(forge.game.player.Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         final String svarName = params.get("Execute");
         final SpellAbility trigsa = tempCreator.getAbility(sa.getAbilityFactory().getHostCard()
                 .getSVar(svarName), sa.getAbilityFactory().getHostCard());

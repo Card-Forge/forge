@@ -242,7 +242,7 @@ public class CountersPutAi extends SpellAiLogic {
     } // putPlayDrawbackAI
 
     @Override
-    public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         final Target abTgt = sa.getTarget();
         final Card source = sa.getSourceCard();
         // boolean chance = true;

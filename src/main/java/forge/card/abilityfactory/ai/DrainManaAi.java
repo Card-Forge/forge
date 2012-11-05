@@ -10,7 +10,6 @@ import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 
@@ -49,10 +48,7 @@ public class DrainManaAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean doTriggerAI(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa, ai)) {
-            return false;
-        }
+    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         final Player opp = ai.getOpponent();
 
         final Target tgt = sa.getTarget();

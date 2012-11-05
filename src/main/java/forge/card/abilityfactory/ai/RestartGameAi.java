@@ -27,7 +27,7 @@ public class RestartGameAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean doTriggerAI(Player ai, Map<String, String> params, SpellAbility sa, boolean mandatory) {          
+    protected boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {          
         // This trigger AI is completely unused, but return true just in case
         return true;
     }

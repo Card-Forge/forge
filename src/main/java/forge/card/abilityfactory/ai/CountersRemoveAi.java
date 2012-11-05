@@ -89,7 +89,7 @@ public class CountersRemoveAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the
         // expected targets could be
@@ -101,10 +101,6 @@ public class CountersRemoveAi extends SpellAiLogic {
         // fewer are not mandatory
         // Since the targeting portion of this would be what
 
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.doTrigger(mandatory);
-        }
 
         return chance;
     }

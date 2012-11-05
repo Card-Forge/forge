@@ -9,7 +9,6 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.phase.PhaseType;
@@ -73,13 +72,7 @@ public class PoisonAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean doTriggerAI(Player ai, Map<String, String> params, SpellAbility sa, boolean mandatory) {
-
-        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
-            // payment it's usually
-            // not mandatory
-            return false;
-        }
+    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
@@ -92,12 +85,6 @@ public class PoisonAi extends SpellAiLogic {
                     return false;
                 }
             }
-        }
-
-        // check SubAbilities DoTrigger?
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            return abSub.doTrigger(mandatory);
         }
 
         return true;

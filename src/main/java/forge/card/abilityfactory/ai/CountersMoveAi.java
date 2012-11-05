@@ -13,7 +13,6 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -51,7 +50,7 @@ public class CountersMoveAi extends SpellAiLogic {
     } // moveCounterCanPlayAI
 
     @Override
-    public boolean doTriggerAI(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         final Card host = sa.getSourceCard();
         final Target abTgt = sa.getTarget();
         final String type = params.get("CounterType");
@@ -59,11 +58,6 @@ public class CountersMoveAi extends SpellAiLogic {
         final int amount = AbilityFactory.calculateAmount(sa.getAbilityFactory().getHostCard(), amountStr, sa);
         boolean chance = false;
         boolean preferred = true;
-
-        // if there is a cost, it's gotta be optional
-        if (!ComputerUtil.canPayCost(sa, ai) && !mandatory) {
-            return false;
-        }
 
         final Counters cType = Counters.valueOf(params.get("CounterType"));
         final ArrayList<Card> srcCards = AbilityFactory.getDefinedCards(host, params.get("Source"), sa);
@@ -130,11 +124,6 @@ public class CountersMoveAi extends SpellAiLogic {
             // TODO - I think choice can be null here. Is that ok for
             // addTarget()?
             abTgt.addTarget(choice);
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.doTrigger(mandatory);
         }
 
         return chance;

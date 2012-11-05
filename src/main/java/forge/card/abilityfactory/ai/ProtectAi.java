@@ -342,7 +342,7 @@ public class ProtectAi extends SpellAiLogic {
     } // protectMandatoryTarget()
 
     @Override
-    public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         if (sa.getTarget() == null) {
             if (mandatory) {
                 return true;

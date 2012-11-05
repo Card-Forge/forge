@@ -36,11 +36,7 @@ public class DamageEachAi extends DamageAiBase {
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
     @Override
-    public boolean doTriggerAINoCost(Player ai, Map<String, String> params, SpellAbility sa, boolean mandatory) {
-
-        if (sa.getSubAbility() != null) {
-            return sa.getSubAbility().doTrigger(mandatory);
-        }
+    protected boolean doTriggerAINoCost(Player ai, Map<String, String> params, SpellAbility sa, boolean mandatory) {
 
         return canPlayAI(ai, params, sa);
     }

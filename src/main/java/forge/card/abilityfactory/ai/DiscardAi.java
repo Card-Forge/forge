@@ -126,7 +126,7 @@ public class DiscardAi extends SpellAiLogic {
 
 
     @Override
-    public boolean doTriggerAINoCost(Player ai, Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, Map<String,String> params, SpellAbility sa, boolean mandatory) {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             Player opp = ai.getOpponent();

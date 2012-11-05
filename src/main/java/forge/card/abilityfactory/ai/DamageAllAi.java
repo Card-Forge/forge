@@ -154,7 +154,7 @@ public class  DamageAllAi extends SpellAiLogic
     }
 
     @Override
-    public boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getSourceCard();
         String validP = "";
 
@@ -207,10 +207,6 @@ public class  DamageAllAi extends SpellAiLogic
                 // DamageAll doesn't really target right now
             }
         } while (false);
-
-        if (sa.getSubAbility() != null) {
-            return sa.getSubAbility().doTrigger(mandatory);
-        }
 
         return true;
     }

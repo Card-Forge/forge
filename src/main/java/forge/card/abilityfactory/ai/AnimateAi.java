@@ -14,7 +14,6 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.phase.PhaseType;
-import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -148,11 +147,7 @@ public class AnimateAi extends SpellAiLogic {
      * @return a boolean.
      */
     @Override
-    public boolean doTriggerAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa, aiPlayer)) { // If there is a cost payment
-            return false;
-        }
-    
+    protected boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
         boolean chance = true;
     
         if (sa.getTarget() != null) {
