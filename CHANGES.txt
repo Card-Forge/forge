@@ -11,6 +11,8 @@ A bug for the new set unlocking code is now fixed. Before the fix, you could unl
 
 The Return to Ravnica set pictures are now available and you can download them using the Download LQ Set Picures button. The RtR token generating cards have been updated with set specific images.
 
+The Targeting Overlay has been fixed and re-enabled. It now correctly shows the targeting arcs in cases when it previously showed them in the wrong direction. The match UI is properly refreshed when the targeting arcs are switched on/off. The defunct "mouseover-only" mode is currently disabled (it crashes Forge, difficult to fix).
+
 --
 
 On several occasions people have noticed that the forge deck editor and/or quest mode card shop would not open or display. We have also received reports that some of the tabs/panels in the deck editor are missing. Try deleting the file named "editor_preferred.xml" which is found in the "res/layouts" folder. This should force forge to then use the "editor_default.xml" file instead.
