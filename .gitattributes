@@ -5844,6 +5844,7 @@ res/cardsfolder/m/magus_of_the_library.txt svneol=native#text/plain
 res/cardsfolder/m/magus_of_the_mirror.txt -text
 res/cardsfolder/m/magus_of_the_moat.txt svneol=native#text/plain
 res/cardsfolder/m/magus_of_the_moon.txt svneol=native#text/plain
+res/cardsfolder/m/magus_of_the_scroll.txt -text
 res/cardsfolder/m/magus_of_the_tabernacle.txt svneol=native#text/plain
 res/cardsfolder/m/magus_of_the_unseen.txt svneol=native#text/plain
 res/cardsfolder/m/magus_of_the_vineyard.txt svneol=native#text/plain
@@ -6651,6 +6652,7 @@ res/cardsfolder/n/nightscape_apprentice.txt svneol=native#text/plain
 res/cardsfolder/n/nightscape_battlemage.txt -text
 res/cardsfolder/n/nightscape_familiar.txt svneol=native#text/plain
 res/cardsfolder/n/nightscape_master.txt svneol=native#text/plain
+res/cardsfolder/n/nightshade_assassin.txt -text
 res/cardsfolder/n/nightshade_peddler.txt -text
 res/cardsfolder/n/nightshade_schemers.txt svneol=native#text/plain
 res/cardsfolder/n/nightshade_seer.txt -text
@@ -8162,6 +8164,7 @@ res/cardsfolder/r/rushwood_herbalist.txt svneol=native#text/plain
 res/cardsfolder/r/rushwood_legate.txt -text
 res/cardsfolder/r/russet_wolves.txt -text
 res/cardsfolder/r/rust.txt svneol=native#text/plain
+res/cardsfolder/r/rust_elemental.txt -text
 res/cardsfolder/r/rust_tick.txt svneol=native#text/plain
 res/cardsfolder/r/rusted_relic.txt -text
 res/cardsfolder/r/rusted_sentinel.txt svneol=native#text/plain

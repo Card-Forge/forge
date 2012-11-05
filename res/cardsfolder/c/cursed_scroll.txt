@@ -6,6 +6,7 @@ A:AB$ NameCard | Cost$ 3 T | Defined$ You | SubAbility$ DBReveal | SpellDescript
 SVar:DBReveal:DB$ Reveal | Random$ True | RememberRevealed$ True | Defined$ You | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | NumDmg$ 2 | Tgt$ TgtCP | ConditionDefined$ Remembered | ConditionPresent$ Card.NamedCard | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cursed_scroll.jpg
 SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/271.jpg

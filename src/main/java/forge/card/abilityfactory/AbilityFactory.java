@@ -2233,7 +2233,8 @@ public class AbilityFactory {
                 return new ArrayList<Card>();
             }
 
-            if (type.equals("Triggered") || (type.equals("TriggeredCard")) || (type.equals("TriggeredAttacker")) || (type.equals("TriggeredBlocker"))) {
+            if (type.equals("Triggered") || (type.equals("TriggeredCard")) || (type.equals("TriggeredAttacker"))
+                    || (type.equals("TriggeredBlocker"))) {
                 type = "Card.Self";
             }
 

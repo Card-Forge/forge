@@ -1,0 +1,15 @@
+Name:Magus of the Scroll
+ManaCost:R
+Types:Creature Human Wizard
+Text:no text
+PT:1/1
+A:AB$ NameCard | Cost$ 3 T | Defined$ You | SubAbility$ DBReveal | SpellDescription$ Name a card. Reveal a card at random from your hand. If it's the named card, CARDNAME deals 2 damage to target creature or player.
+SVar:DBReveal:DB$ Reveal | Random$ True | RememberRevealed$ True | Defined$ You | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | NumDmg$ 2 | Tgt$ TgtCP | ConditionDefined$ Remembered | ConditionPresent$ Card.NamedCard | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/magus_of_the_scroll.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/169.jpg
+Oracle:{3}, {T}: Name a card. Reveal a card at random from your hand. If it's the named card, Magus of the Scroll deals 2 damage to target creature or player.
+End
