@@ -169,6 +169,41 @@ Fixes/Features:
 - Code cleanup (Phase 3): removed some orphaned javadocs, moved some comments, removed some javadocs that no longer correspond to method parameters after refactoring.
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+* Fixed and re-enabled Targeting Overlay:
+* Now it correctly shows the targeting arcs in cases when it previously showed them in the wrong direction.
+* The match UI is properly refreshed when the targeting arcs are switched on/off.
+* The defunct "mouseover-only" mode is currently disabled (it crashes Forge, difficult to fix).
+* Probably some bugs still left, but overall seems to function fine.
+- Minor code style fix for the previous commit.
+- AF: Mana Had to refactor the whole class of AbilityMana
+- Repaint the UI after drawing targeting arcs.
+- AF: removing excessive methods, mapParams returns as Map<Str,Str>
+- More optimal UI repaint after drawing the targeting arcs.
+- AF: Cleanup, StoreSVar, Unattach
+- Code cleanup (removing orphaned javadocs and javadocs with parameters that do not correspond to the method definitions).
+- rem warning,
+- force update of player-related into at end of phase.
+- Wrong import ruined build
+- Removed some unused code from the targeting overlay.
+- had wrong cycling cost
+- Fixes OppOwn card property (Geth, Lord of the Vault will work as intended)
+- move effect to right package
+- Script fixes by Diogenes.
+- Little AI fixes.
+- Fixed Phyrexian Gremlins.
+- Fixed Oversold Cemetery
+- CF-Cr: remove unused parameters
+- Added a fluff piece to the changes.txt file.
+- Small changes to how Mulliganing works with Phases (for upcoming Karn Liberated)
+- Made the shape of the targeting arcs a little bit better, also changed the direction of the arc curve to make it look better.
+- Compilation fix for the mulligan (had to make nextPhase public, not sure if it's the correct decision, please review).
+- Some minor cleanup in targeting overlay code.
+- made doTriggerAI final (it calls anyway doTriggerAINoCost anyway, so AF ais will override only nocost version)
+- made a wrapper for doTriggerAINoCost to check subAbilities doTrigger (and removed that code from descendants of SpellAiLogic)
+- made doTriggerAINoCost protected to avoid calling it from outer classes
+- remove imports
+- Set some activating players.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -181,6 +216,14 @@ Added the following cards:
 Metamorphose
 Wild Might
 Shimian Night Stalker
+Karn Liberated
+Fire Juggler
+Gustcloak Cavalier
+Riftsweeper
+Saproling Cluster
+Magus of the Scroll
+Nightshade Assassin
+Rust Elemental
 
 
 end
