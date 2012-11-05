@@ -41,6 +41,7 @@ import forge.GameEntity;
 import forge.Singletons;
 import forge.card.TriggerReplacementBase;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.ApiType;
 import forge.card.abilityfactory.effects.SacrificeEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -1678,7 +1679,7 @@ public class CombatUtil {
             }
             AbilityFactory af = ability.getAbilityFactory();
 
-            if (!af.getAPI().equals("Pump")) {
+            if (af.getAPI() != ApiType.Pump) {
                 continue;
             }
             Map<String, String> params = af.getMapParams();
@@ -1796,7 +1797,7 @@ public class CombatUtil {
             }
             AbilityFactory af = ability.getAbilityFactory();
 
-            if (!af.getAPI().equals("Pump")) {
+            if (af.getAPI() != ApiType.Pump) {
                 continue;
             }
             Map<String, String> params = af.getMapParams();

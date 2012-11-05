@@ -27,6 +27,7 @@ import com.esotericsoftware.minlog.Log;
 import forge.Card;
 
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.replacement.ReplaceMoved;
 import forge.card.replacement.ReplacementEffect;
@@ -228,7 +229,7 @@ public class ComputerAIGeneral implements Computer {
                     // in checkETBEffects.  There is SpellPermanent.checkETBEffects where the player can be
                     // directly input but it is currently a private method.
                     sa.setActivatingPlayer(player);
-                    if (SpellPermanent.checkETBEffects(c, sa, "Counter")) {
+                    if (SpellPermanent.checkETBEffects(c, sa, ApiType.Counter)) {
                         spellAbilities.add(sa);
                     }
                 }
@@ -268,7 +269,7 @@ public class ComputerAIGeneral implements Computer {
         for (final Card c : l) {
             for (final SpellAbility sa : c.getNonManaSpellAbilities()) {
                 // Check if this AF is a Counterpsell
-                if ((sa.getAbilityFactory() != null) && sa.getAbilityFactory().getAPI().equals("Counter")) {
+                if ((sa.getAbilityFactory() != null) && sa.getAbilityFactory().getAPI() == ApiType.Counter) {
                     spellAbility.add(sa);
                 }
             }

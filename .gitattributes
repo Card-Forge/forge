@@ -12470,6 +12470,7 @@ src/main/java/forge/card/UnOpenedProduct.java -text
 src/main/java/forge/card/abilityfactory/AbilityFactory.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryChangeZone.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/AbilityFactoryCharm.java svneol=native#text/plain
+src/main/java/forge/card/abilityfactory/ApiType.java -text
 src/main/java/forge/card/abilityfactory/CommonAbility.java -text
 src/main/java/forge/card/abilityfactory/CommonDrawback.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/CommonSpell.java -text

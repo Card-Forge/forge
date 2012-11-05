@@ -31,6 +31,7 @@ import forge.CardPredicates;
 import forge.Command;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
@@ -399,15 +400,15 @@ public class SpellPermanent extends Spell {
         return super.canPlayAI();
     }
 
-    public static boolean checkETBEffects(final Card card, final SpellAbility sa, final String api) {
+    public static boolean checkETBEffects(final Card card, final SpellAbility sa, final ApiType api) {
         return checkETBEffects(card, sa, api, null);
     }
 
-    public static boolean checkETBEffects(final Card card, final Player ai, final String api) {
-        return checkETBEffects(card, null, api, ai);
+    public static boolean checkETBEffects(final Card card, final Player ai) {
+        return checkETBEffects(card, null, null, ai);
     }
 
-    private static boolean checkETBEffects(final Card card, final SpellAbility sa, final String api, final Player ai) {
+    private static boolean checkETBEffects(final Card card, final SpellAbility sa, final ApiType api, final Player ai) {
 
         if (card.isCreature() && Singletons.getModel().getGame().isCardInPlay("Torpor Orb")) {
             return true;
@@ -474,7 +475,7 @@ public class SpellPermanent extends Spell {
             }
             final SpellAbility exSA = af.getAbility(card.getSVar(execute), card);
 
-            if ((api != null) && !af.getAPI().equals(api)) {
+            if ((api != null) && af.getAPI() != api) {
                 continue;
             }
 

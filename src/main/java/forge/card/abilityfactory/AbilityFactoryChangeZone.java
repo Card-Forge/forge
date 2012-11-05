@@ -1548,13 +1548,13 @@ public final class AbilityFactoryChangeZone {
                 }
 
                 final AbilitySub abSub = sa.getSubAbility();
-                String subAPI = "";
+                ApiType subAPI = null;
                 if (abSub != null) {
                     subAPI = abSub.getAbilityFactory().getAPI();
                 }
 
                 // only use blink or bounce effects
-                if (!(destination.equals(ZoneType.Exile) && (subAPI.equals("DelayedTrigger") || subAPI.equals("ChangeZone")))
+                if (!(destination.equals(ZoneType.Exile) && (subAPI == ApiType.DelayedTrigger || subAPI == ApiType.ChangeZone))
                         && !destination.equals(ZoneType.Hand)) {
                     return false;
                 }
@@ -1636,7 +1636,7 @@ public final class AbilityFactoryChangeZone {
         final Target tgt = sa.getTarget();
 
         final AbilitySub abSub = sa.getSubAbility();
-        String subAPI = "";
+        ApiType subAPI = null;
         String subAffected = "";
         Map<String, String> subParams = null;
         if (abSub != null) {
@@ -1675,8 +1675,8 @@ public final class AbilityFactoryChangeZone {
             });
 
             // if it's blink or bounce, try to save my about to die stuff
-            if ((destination.equals(ZoneType.Hand) || (destination.equals(ZoneType.Exile) && (subAPI.equals("DelayedTrigger") || (subAPI
-                    .equals("ChangeZone") && subAffected.equals("Remembered")))))
+            if ((destination.equals(ZoneType.Hand) || (destination.equals(ZoneType.Exile) 
+                    && (subAPI == ApiType.DelayedTrigger || (subAPI == ApiType.ChangeZone && subAffected.equals("Remembered")))))
                     && (tgt.getMinTargets(sa.getSourceCard(), sa) <= 1)) {
 
                 // check stack for something on the stack that will kill
@@ -1721,7 +1721,7 @@ public final class AbilityFactoryChangeZone {
                             // counters TODO check good and
                             // bad counters
                             // checks only if there is a dangerous ETB effect
-                            return SpellPermanent.checkETBEffects(c, ai, null);
+                            return SpellPermanent.checkETBEffects(c, ai);
                         }
                     });
                     if (!aiPermanents.isEmpty()) {
@@ -1744,7 +1744,7 @@ public final class AbilityFactoryChangeZone {
         // blink human targets only during combat
         if (origin.equals(ZoneType.Battlefield)
                 && destination.equals(ZoneType.Exile)
-                && (subAPI.equals("DelayedTrigger") || (subAPI.equals("ChangeZone") && subAffected.equals("Remembered")))
+                && (subAPI == ApiType.DelayedTrigger || (subAPI == ApiType.ChangeZone  && subAffected.equals("Remembered")))
                 && !(Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || sa
                         .isAbility())) {
             return false;

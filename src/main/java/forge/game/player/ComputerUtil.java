@@ -38,6 +38,7 @@ import forge.Constant;
 import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostDiscard;
@@ -105,7 +106,7 @@ public class ComputerUtil {
         for (final SpellAbility sa : abilities) {
             // Don't add Counterspells to the "normal" playcard lookups
             final AbilityFactory af = sa.getAbilityFactory();
-            if ((af != null) && af.getAPI().equals("Counter")) {
+            if ((af != null) && af.getAPI() == ApiType.Counter) {
                 continue;
             }
             sa.setActivatingPlayer(ai);
@@ -1832,8 +1833,7 @@ public class ComputerUtil {
             return p;
         }
 
-        String mode = af.getAPI();
-        if ("DestroyAll".equals(mode)) {
+        if (ApiType.DestroyAll == af.getAPI()) {
             p += 4;
         }
 
@@ -1947,7 +1947,7 @@ public class ComputerUtil {
                 try {
                     final AbilityFactory af = sa.getAbilityFactory();
 
-                    if (!sa.isAbility() || (af == null) || !af.getAPI().equals("Regenerate")) {
+                    if (!sa.isAbility() || (af == null) || af.getAPI() != ApiType.Regenerate) {
                         continue; // Not a Regenerate ability
                     }
 

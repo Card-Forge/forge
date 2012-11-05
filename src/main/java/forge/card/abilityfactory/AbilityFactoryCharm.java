@@ -224,7 +224,7 @@ public final class AbilityFactoryCharm {
      */
     public static SpellAbility setupCharmSAs(final SpellAbility sa) {
         AbilityFactory af = sa.getAbilityFactory();
-        if (af == null || !af.getAPI().equals("Charm") || sa.isWrapper()) {
+        if (af == null || af.getAPI() != ApiType.Charm || sa.isWrapper()) {
             return sa;
         }
         final Map<String, String> params = af.getMapParams();

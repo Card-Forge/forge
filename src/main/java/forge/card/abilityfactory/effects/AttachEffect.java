@@ -11,6 +11,7 @@ import forge.GameActionUtil;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.ApiType;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.abilityfactory.ai.AttachAi;
 import forge.card.spellability.SpellAbility;
@@ -244,7 +245,7 @@ public class AttachEffect extends SpellEffect {
         AbilityFactory af = null;
         for (final SpellAbility sa : source.getSpells()) {
             af = sa.getAbilityFactory();
-            if ((af != null) && af.getAPI().equals("Attach")) {
+            if ((af != null) && af.getAPI() == ApiType.Attach) {
                 aura = sa;
                 break;
             }

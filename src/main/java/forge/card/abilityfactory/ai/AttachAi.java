@@ -17,6 +17,7 @@ import forge.CardUtil;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.ApiType;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -214,7 +215,7 @@ public class AttachAi extends SpellAiLogic {
                 while (itr.hasNext()) {
                     final Card aura = itr.next();
                     final AbilityFactory af = aura.getSpellPermanent().getAbilityFactory();
-                    if ((af != null) && af.getAPI().equals("Attach")) {
+                    if ((af != null) && af.getAPI() == ApiType.Attach) {
                         final Map<String, String> params = af.getMapParams();
                         if ("KeepTapped".equals(params.get("AILogic"))) {
                             // Don't attach multiple KeepTapped Auras to one

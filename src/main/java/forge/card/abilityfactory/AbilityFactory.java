@@ -227,7 +227,7 @@ public class AbilityFactory {
     }
 
 
-    private String api = "";
+    private ApiType api = null;
 
     /**
      * <p>
@@ -236,7 +236,7 @@ public class AbilityFactory {
      * 
      * @return a {@link java.lang.String} object.
      */
-    public final String getAPI() {
+    public final ApiType getAPI() {
         return this.api;
     }
 
@@ -293,13 +293,13 @@ public class AbilityFactory {
 
         if (this.mapParams.containsKey("AB")) {
             this.isAb = true;
-            this.api = this.mapParams.get("AB");
+            this.api = ApiType.smartValueOf(this.mapParams.get("AB"));
         } else if (this.mapParams.containsKey("SP")) {
             this.isSp = true;
-            this.api = this.mapParams.get("SP");
+            this.api = ApiType.smartValueOf(this.mapParams.get("SP"));
         } else if (this.mapParams.containsKey("DB")) {
             this.isDb = true;
-            this.api = this.mapParams.get("DB");
+            this.api = ApiType.smartValueOf(this.mapParams.get("DB"));
         } else {
             throw new RuntimeException("AbilityFactory : getAbility -- no API in " + hostCard.getName());
         }
@@ -379,35 +379,12 @@ public class AbilityFactory {
         // ***********************************
         // Match API keywords. These are listed in alphabetical order.
 
-        SpellAiLogic ai = null;
-        SpellEffect se = null;
+
+        SpellAiLogic ai = api.getAi();
+        SpellEffect se = api.getSpellEffect();
         
-        if (this.api.equals("AddTurn")) {
-            ai = new AddTurnAi();
-            se = new AddTurnEffect();
-        }
 
-        else if (this.api.equals("Animate")) {
-            ai = new AnimateAi();
-            se = new AnimateEffect();
-        }
-
-        else if (this.api.equals("AnimateAll")) {
-            ai = new AnimateAllAi();
-            se = new AnimateAllEffect();
-        }
-
-        else if (this.api.equals("Attach")) {
-            ai = new AttachAi();
-            se = new AttachEffect();
-        }
-
-        else if (this.api.equals("Bond")) {
-            se = new BondEffect();
-            ai = new BondAi();
-        }
-
-        else if (this.api.equals("ChangeZone")) {
+        if (this.api == ApiType.ChangeZone) {
             if (this.isAb) {
                 spellAbility = AbilityFactoryChangeZone.createAbilityChangeZone(this);
             } else if (this.isSp) {
@@ -417,7 +394,7 @@ public class AbilityFactory {
             }
         }
 
-        else if (this.api.equals("ChangeZoneAll")) {
+        else if (this.api == ApiType.ChangeZoneAll) {
             if (this.isAb) {
                 spellAbility = AbilityFactoryChangeZone.createAbilityChangeZoneAll(this);
             } else if (this.isSp) {
@@ -427,7 +404,7 @@ public class AbilityFactory {
             }
         }
 
-        else if (this.api.equals("Charm")) {
+        else if (this.api == ApiType.Charm) {
             if (this.isAb) {
                 spellAbility = AbilityFactoryCharm.createAbilityCharm(this);
             } else if (this.isSp) {
@@ -435,67 +412,16 @@ public class AbilityFactory {
             }
         }
 
-        else if (this.api.equals("ChooseCard")) {
-            ai = new ChooseCardAi();
-            se = new ChooseCardEffect();
-        }
-
-        else if (this.api.equals("ChooseColor")) {
-            ai = new ChooseColorAi();
-            se = new ChooseColorEffect();
-        }
-
-        else if (this.api.equals("ChooseNumber")) {
-            ai = new CannotPlayAi();
-            se = new ChooseNumberEffect();
-        }
-
-        else if (this.api.equals("ChoosePlayer")) {
-            ai = new CannotPlayAi();
-            se = new ChoosePlayerEffect();
-        }
-
-        else if (this.api.equals("ChooseType")) {
-            ai = new ChooseTypeAi();
-            se = new ChooseTypeEffect();
-        }
-
-        else if (this.api.equals("Clash")) {
-            ai = new ClashAi();
-            se = new ClashEffect();
-        }
-
-        else if (this.api.equals("Cleanup")) {
-            ai = new AlwaysPlayAi();
-            se = new CleanUpEffect();
-        }
-
-        else if (this.api.equals("Clone")) {
-            ai = new CloneAi();
-            se = new CloneEffect();
-        }
-
-        else if (this.api.equals("CopyPermanent")) {
-            ai = new CopyPermanentAi();
-            se = new CopyPermanentEffect();
-        }
-
-        else if (this.api.equals("CopySpell")) {
+        else if (this.api == ApiType.CopySpell) {
             if (this.isTargeted) { 
                 // Since all "CopySpell" ABs copy things on the Stack no need for it to be everywhere
                 this.abTgt.setZone(ZoneType.Stack);
             }
 
-            ai = new CanPlayAsDrawbackAi();
-            se = new CopySpellEffect();
             hostCard.setCopiesSpells(true);
         }
 
-        else if (this.api.equals("Counter")) {
-            
-            ai = new CounterAi();
-            se = new CounterEffect();
-
+        else if (this.api == ApiType.Counter) {
             // Since all "Counter" ABs Counter things on the Stack no need for
             // it to be everywhere
             if (this.isTargeted) {
@@ -503,360 +429,6 @@ public class AbilityFactory {
             }
         }
 
-        else if (this.api.equals("DamageAll")) {
-            ai = new DamageAllAi();
-            se = new DamageAllEffect();
-        }
-
-        else if (this.api.equals("DealDamage")) {
-            ai = new DamageDealAi();
-            se = new DamageDealEffect();
-        }
-
-        else if (this.api.equals("Debuff")) {
-            ai = new DebuffAi();
-            se = new DebuffEffect();
-        }
-
-        else if (this.api.equals("DebuffAll")) {
-            ai = new DebuffAllAi();
-            se = new DebuffAllEffect();
-        }
-
-        else if (this.api.equals("DelayedTrigger")) {
-            ai = new DelayedTriggerAi();
-            se = new DelayedTriggerEffect();
-        }
-
-        else if (this.api.equals("Destroy")) {
-            ai = new DestroyAi();
-            se = new DestroyEffect();
-        }
-
-        else if (this.api.equals("DestroyAll")) {
-            ai  = new DestroyAllAi();
-            se  = new DestroyAllEffect();
-        }
-
-        else if (this.api.equals("Dig")) {
-            ai = new DigAi();
-            se = new DigEffect();
-        }
-
-        else if (this.api.equals("DigUntil")) {
-            ai = new DigUntilAi();
-            se = new DigUntilEffect();
-        }
-
-        else if (this.api.equals("Discard")) {
-            ai = new DiscardAi();
-            se = new DiscardEffect();
-        }
-
-        else if (this.api.equals("DrainMana")) {
-            ai = new DrainManaAi();
-            se = new DrainManaEffect();
-        }
-
-        else if (this.api.equals("Draw")) {
-            ai = new DrawAi();
-            se = new DrawEffect();
-        }
-
-        else if (this.api.equals("EachDamage")) {
-            ai = new DamageEachAi();
-            se = new DamageEachEffect();
-        }
-
-        else if (this.api.equals("Effect")) {
-            ai = new EffectAi();
-            se = new EffectEffect();
-        }
-
-        else if (this.api.equals("EndTurn")) {
-            ai = new EndTurnAi();
-            se = new EndTurnEffect();
-        }
-
-        else if (this.api.equals("ExchangeLife")) {
-            ai = new LifeExchangeAi();
-            se = new LifeExchangeEffect();
-        }
-
-        else if (this.api.equals("ExchangeControl")) {
-            ai = new ControlExchangeAi();
-            se = new ControlExchangeEffect();
-        }
-
-        else if (this.api.equals("Fight")) {
-            ai = new FightAi();
-            se = new FightEffect();
-        }
-
-        else if (this.api.equals("FlipACoin")) {
-            ai = new AlwaysPlayAi();
-            se = new FlipCoinEffect();
-        }
-
-        else if (this.api.equals("Fog")) {
-            ai = new FogAi();
-            se = new FogEffect();
-        }
-
-        else if (this.api.equals("GainControl")) {
-            ai = new ControlGainAi();
-            se = new ControlGainEffect();
-        }
-
-        else if (this.api.equals("GainLife")) {
-            ai = new LifeGainAi();
-            se = new LifeGainEffect();
-        }
-
-        else if (this.api.equals("GenericChoice")) {
-            ai = new CannotPlayAi();
-            se = new ChooseGenericEffect();
-        }
-
-        else if (this.api.equals("LoseLife")) {
-            ai = new LifeLoseAi();
-            se = new LifeLoseEffect();
-        }
-
-        else if (this.api.equals("LosesGame")) {
-            ai = new GameLossAi();
-            se = new GameLossEffect();
-        }
-
-        else if (this.api.equals("Mana")) {
-            ai = new CannotPlayAi();
-            se = new ManaEffect();
-        }
-
-        else if (this.api.equals("ManaReflected")) {
-            ai = new CannotPlayAi();
-            se = new ManaReflectedEffect();
-        }
-
-        else if (this.api.equals("Mill")) {
-            ai = new MillAi();
-            se = new MillEffect();
-        }
-
-        else if (this.api.equals("MoveCounter")) {
-            ai = new CountersMoveAi();
-            se = new CountersMoveEffect();
-        }
-
-        else if (this.api.equals("MustAttack")) {
-            ai = new MustAttackAi();
-            se = new MustAttackEffect();
-        }
-
-        else if (this.api.equals("MustBlock")) {
-            ai = new MustBlockAi();
-            se = new MustBlockEffect();
-        }
-
-        else if (this.api.equals("NameCard")) {
-            ai = new ChooseCardNameAi();
-            se = new ChooseCardNameEffect();
-        }
-
-        else if (this.api.equals("Phases")) {
-            ai = new PhasesAi();
-            se = new PhasesEffect();
-        }
-
-        else if (this.api.equals("Play")) {
-            ai = new PlayAi();
-            se = new PlayEffect();
-        }
-
-        else if (this.api.equals("Poison")) {
-            ai = new PoisonAi();
-            se = new PoisonEffect();
-        }
-
-        else if (this.api.equals("PreventDamage")) {
-            ai = new DamagePreventAi();
-            se = new DamagePreventEffect();
-        }
-
-        else if (this.api.equals("PreventDamageAll")) {
-            ai = new DamagePreventAllAi();
-            se = new DamagePreventAllEffect();
-        }
-
-        else if (this.api.equals("Proliferate")) {
-            ai = new CountersProliferateAi();
-            se = new CountersProliferateEffect();
-        }
-
-        else if (this.api.equals("Protection")) {
-            ai = new ProtectAi();
-            se = new ProtectEffect();
-        }
-
-        else if (this.api.equals("ProtectionAll")) {
-            ai = new ProtectAllAi();
-            se = new ProtectAllEffect();
-        }
-
-        else if (this.api.equals("Pump")) {
-            ai = new PumpAi();
-            se = new PumpEffect();
-        }
-
-        else if (this.api.equals("PumpAll")) {
-            ai = new PumpAllAi();
-            se = new PumpAllEffect();
-        }
-
-        else if (this.api.equals("PutCounter")) {
-            ai = new CountersPutAi();
-            se = new CountersPutEffect();
-        }
-
-        else if (this.api.equals("PutCounterAll")) {
-            ai = new CountersPutAllAi();
-            se = new CountersPutAllEffect();
-        }
-
-        else if (this.api.equals("RearrangeTopOfLibrary")) {
-            ai = new RearrangeTopOfLibraryAi();
-            se = new RearrangeTopOfLibraryEffect();
-        }
-
-        else if (this.api.equals("Regenerate")) {
-            ai = new RegenerateAi();
-            se = new RegenerateEffect();
-        }
-
-        else if (this.api.equals("RegenerateAll")) {
-            ai = new RegenerateAllAi();
-            se = new RegenerateAllEffect();
-        }
-
-        else if (this.api.equals("RemoveCounter")) {
-            ai = new CountersRemoveAi();
-            se = new CountersRemoveEffect();
-        }
-
-        else if (this.api.equals("RemoveCounterAll")) {
-            ai = new CannotPlayAi();
-            se = new CountersRemoveAllEffect();
-        }
-
-        else if (this.api.equals("RemoveFromCombat")) {
-            ai = new RemoveFromCombatAi();
-            se = new RemoveFromCombatEffect();
-        }
-
-        else if (this.api.equals("Repeat")) {
-            ai = new RepeatAi();
-            se = new RepeatEffect();
-        }
-
-        else if (this.api.equals("RestartGame")) {
-            ai = new RestartGameAi();
-            se = new RestartGameEffect();
-        }
-
-        else if (this.api.equals("Reveal")) {
-            ai = new RevealAi();
-            se = new RevealEffect();
-        }
-
-        else if (this.api.equals("RevealHand")) {
-            ai = new RevealHandAi();
-            se = new RevealHandEffect();
-        }
-
-        else if (this.api.equals("Sacrifice")) {
-            ai = new SacrificeAi();
-            se = new SacrificeEffect();
-        }
-
-        else if (this.api.equals("SacrificeAll")) {
-            ai = new SacrificeAllAi();
-            se = new SacrificeAllEffect();
-        }
-
-        else if (this.api.equals("Scry")) {
-            ai = new ScryAi();
-            se = new ScryEffect();
-        }
-
-        else if (this.api.equals("SetLife")) {
-            ai = new LifeSetAi();
-            se = new LifeSetEffect();
-        }
-
-        else if (this.api.equals("SetState")) {
-            ai = new SetStateAi();
-            se = new SetStateEffect(); 
-        }
-
-        else if (this.api.equals("SetStateAll")) {
-            ai = new SetStateAllAi();
-            se = new SetStateAllEffect(); 
-        }
-
-        else if (this.api.equals("Shuffle")) {
-            ai = new ShuffleAi();
-            se = new ShuffleEffect();
-        }
-
-        else if (this.api.equals("StoreSVar")) {
-            ai = new StoreSVarAi();
-            se = new StoreSVarEffect();
-        }
-
-        else if (this.api.equals("Tap")) {
-            ai = new TapAi();
-            se = new TapEffect();
-        }
-
-        else if (this.api.equals("TapAll")) {
-            ai = new TapAllAi();
-            se = new TapAllEffect();
-        }
-
-        else if (this.api.equals("TapOrUntap")) {
-            ai = new TapOrUntapAi();
-            se = new TapOrUntapEffect();
-        }
-
-        else if (this.api.equals("Token")) {
-            ai = new TokenAi();
-            se = new TokenEffect();
-        }
-
-        else if (this.api.equals("TwoPiles")) {
-            ai = new TwoPilesAi();
-            se = new TwoPilesEffect();
-        }
-
-        else if (this.api.equals("UnattachAll")) {
-            ai = new UnattachAllAi();
-            se = new UnattachAllEffect();
-        }
-
-        else if (this.api.equals("Untap")) {
-            ai = new UntapAi();
-            se = new UntapEffect();
-        }
-
-        else if (this.api.equals("UntapAll")) {
-            ai = new UntapAllAi();
-            se = new UntapAllEffect();
-        }
-
-        else if (this.api.equals("WinsGame")) {
-            ai = new GameWinAi();
-            se = new GameWinEffect();
-        }
         
         // build code is here once for the refactored APIs
         if ( se != null && ai != null && spellAbility == null)
@@ -1988,7 +1560,7 @@ public class AbilityFactory {
     public static ArrayList<Object> predictThreatenedObjects(final Player aiPlayer, final AbilityFactory saviourAf, final SpellAbility topStack) {
         ArrayList<Object> objects = new ArrayList<Object>();
         final ArrayList<Object> threatened = new ArrayList<Object>();
-        String saviourApi = "";
+        ApiType saviourApi = null;
         Map<String, String> saviourParams = null;
         if (saviourAf != null) {
             saviourApi = saviourAf.getAPI();
@@ -2024,10 +1596,10 @@ public class AbilityFactory {
             // Determine if Defined Objects are "threatened" will be destroyed
             // due to this SA
 
-            final String threatApi = topAf.getAPI();
+            final ApiType threatApi = topAf.getAPI();
 
             // Lethal Damage => prevent damage/regeneration/bounce/shroud
-            if (threatApi.equals("DealDamage") || threatApi.equals("DamageAll")) {
+            if (threatApi == ApiType.DealDamage || threatApi == ApiType.DamageAll) {
                 // If PredictDamage is >= Lethal Damage
                 final int dmg = AbilityFactory.calculateAmount(topStack.getSourceCard(),
                         topAf.getMapParams().get("NumDmg"), topStack);
@@ -2046,12 +1618,12 @@ public class AbilityFactory {
                         }
 
                         // don't use it on creatures that can't be regenerated
-                        if (saviourApi.startsWith("Regenerate") && !c.canBeShielded()) {
+                        if ((saviourApi == ApiType.Regenerate || saviourApi == ApiType.RegenerateAll ) && !c.canBeShielded()) {
                             continue;
                         }
 
                         // give Shroud to targeted creatures
-                        if (saviourApi.equals("Pump") && tgt == null && saviourParams.containsKey("KW")
+                        if (saviourApi == ApiType.Pump && tgt == null && saviourParams.containsKey("KW")
                                 && (saviourParams.get("KW").endsWith("Shroud")
                                         || saviourParams.get("KW").endsWith("Hexproof"))) {
                             continue;
@@ -2059,7 +1631,7 @@ public class AbilityFactory {
 
                         // don't bounce or blink a permanent that the human
                         // player owns or is a token
-                        if (saviourApi.equals("ChangeZone") && (c.getOwner().isHuman() || c.isToken())) {
+                        if (saviourApi == ApiType.ChangeZone && (c.getOwner().isHuman() || c.isToken())) {
                             continue;
                         }
 
@@ -2080,9 +1652,9 @@ public class AbilityFactory {
                 }
             }
             // Destroy => regeneration/bounce/shroud
-            else if ((threatApi.equals("Destroy") || threatApi.equals("DestroyAll"))
-                    && ((saviourApi.startsWith("Regenerate") && !threatParams.containsKey("NoRegen")) || saviourApi
-                            .equals("ChangeZone") || saviourApi.equals("Pump"))) {
+            else if ((threatApi == ApiType.Destroy || threatApi == ApiType.DestroyAll)
+                    && (((saviourApi == ApiType.Regenerate || saviourApi == ApiType.RegenerateAll ) 
+                    && !threatParams.containsKey("NoRegen")) || saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump)) {
                 for (final Object o : objects) {
                     if (o instanceof Card) {
                         final Card c = (Card) o;
@@ -2097,7 +1669,7 @@ public class AbilityFactory {
                         }
 
                         // give Shroud to targeted creatures
-                        if (saviourApi.equals("Pump") && tgt == null && saviourParams.containsKey("KW")
+                        if (saviourApi == ApiType.Pump && tgt == null && saviourParams.containsKey("KW")
                                 && (saviourParams.get("KW").endsWith("Shroud")
                                         || saviourParams.get("KW").endsWith("Hexproof"))) {
                             continue;
@@ -2105,12 +1677,12 @@ public class AbilityFactory {
 
                         // don't bounce or blink a permanent that the human
                         // player owns or is a token
-                        if (saviourApi.equals("ChangeZone") && (c.getOwner().isHuman() || c.isToken())) {
+                        if (saviourApi == ApiType.ChangeZone && (c.getOwner().isHuman() || c.isToken())) {
                             continue;
                         }
 
                         // don't use it on creatures that can't be regenerated
-                        if (saviourApi.equals("Regenerate") && !c.canBeShielded()) {
+                        if (saviourApi == ApiType.Regenerate && !c.canBeShielded()) {
                             continue;
                         }
                         threatened.add(c);
@@ -2118,15 +1690,15 @@ public class AbilityFactory {
                 }
             }
             // Exiling => bounce/shroud
-            else if ((threatApi.equals("ChangeZone") || threatApi.equals("ChangeZoneAll"))
-                    && (saviourApi.equals("ChangeZone") || saviourApi.equals("Pump"))
+            else if ((threatApi == ApiType.ChangeZone || threatApi == ApiType.ChangeZoneAll)
+                    && (saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump)
                     && threatParams.containsKey("Destination")
                     && threatParams.get("Destination").equals("Exile")) {
                 for (final Object o : objects) {
                     if (o instanceof Card) {
                         final Card c = (Card) o;
                         // give Shroud to targeted creatures
-                        if (saviourApi.equals("Pump") && tgt == null && saviourParams.containsKey("KW")
+                        if (saviourApi == ApiType.Pump && tgt == null && saviourParams.containsKey("KW")
                                 && (saviourParams.get("KW").endsWith("Shroud")
                                         || saviourParams.get("KW").endsWith("Hexproof"))) {
                             continue;
@@ -2134,7 +1706,7 @@ public class AbilityFactory {
 
                         // don't bounce or blink a permanent that the human
                         // player owns or is a token
-                        if (saviourApi.equals("ChangeZone") && (c.getOwner().isHuman() || c.isToken())) {
+                        if (saviourApi == ApiType.ChangeZone && (c.getOwner().isHuman() || c.isToken())) {
                             continue;
                         }
 
