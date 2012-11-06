@@ -17,6 +17,7 @@ public enum ApiType {
     Bond ( BondEffect.class, BondAi.class ),
     ChangeZone(null, null), // not converted
     ChangeZoneAll(ChangeZoneAllEffect.class, ChangeZoneAllAi.class), // classes extracted but not converted
+    /** This is <b>Modal</b>, like 'choose one - ' or 'choose two - '. <br> Might be great to rename this api and update all scripts.*/
     Charm(CharmEffect.class, CharmAi.class),
     ChooseCard ( ChooseCardEffect.class, ChooseCardAi.class ),
     ChooseColor ( ChooseColorEffect.class, ChooseColorAi.class ),

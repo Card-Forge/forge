@@ -30,7 +30,9 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.ApiType;
 import forge.card.abilityfactory.effects.AttachEffect;
+import forge.card.abilityfactory.effects.CharmEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
@@ -1953,6 +1955,11 @@ public class GameAction {
      */
     public final void playSpellAbility(SpellAbility sa) {
         sa.setActivatingPlayer(Singletons.getControl().getPlayer());
+
+         AbilityFactory af = sa.getAbilityFactory();
+        if (af != null && af.getAPI() == ApiType.Charm && !sa.isWrapper()) {
+            CharmEffect.makeChoices(sa);
+        }
 
         sa = GameAction.chooseOptionalAdditionalCosts(sa);
 

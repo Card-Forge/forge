@@ -11,7 +11,6 @@ import forge.GameEntity;
 import forge.Singletons;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 

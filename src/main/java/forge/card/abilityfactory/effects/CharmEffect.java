@@ -30,7 +30,25 @@ public class CharmEffect extends SpellEffect {
 
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+        // all chosen modes have been chained as subabilities to this sa.
+        // so nothing to do in this resolve
+    }
 
+
+    @Override
+    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+        final StringBuilder sb = new StringBuilder();
+        // nothing stack specific for Charm
+        
+        return sb.toString();
+    }
+    
+    public static void makeChoices(SpellAbility sa) {
+        AbilityFactory af = sa.getAbilityFactory();
+        final Map<String, String> params = af.getMapParams();
+        //this resets all previous choices
+        sa.setSubAbility(null);
+        
         final int num = Integer.parseInt(params.containsKey("CharmNum") ? params.get("CharmNum") : "1");
         final int min = params.containsKey("MinCharmNum") ? Integer.parseInt(params.get("MinCharmNum")) : num;
         final List<AbilitySub> choices = makePossibleOptions(sa, params);
@@ -59,21 +77,24 @@ public class CharmEffect extends SpellEffect {
         else 
             chosen = CharmAi.chooseOptionsAi(activator, true, choices, num, min);
         
-        // if ( null == chosen) throw Exception! // only AI might return no list at all
-        for(AbilitySub as : chosen)
-        {
-            as.setActivatingPlayer(sa.getActivatingPlayer());
-            AbilityFactory.resolve(as, false);
+        chainAbilities(sa, chosen);
+    }
+
+    private static void chainAbilities(SpellAbility sa, List<AbilitySub> chosen) {
+        SpellAbility saDeepest = sa;
+        while( saDeepest.getSubAbility() != null)
+            saDeepest = saDeepest.getSubAbility();
+        
+        for(AbilitySub sub : chosen){
+            saDeepest.setSubAbility(sub);
+            sub.setActivatingPlayer(saDeepest.getActivatingPlayer());
+            sub.setParent(saDeepest);
+            
+            // to chain the next one
+            saDeepest = sub;
         }
     }
-
-
-    @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
-        final StringBuilder sb = new StringBuilder();
-        // nothing stack specific for Charm
-        
-        return sb.toString();
-    }
+    
+    
 
 } 
