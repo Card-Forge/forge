@@ -2510,6 +2510,7 @@ res/cardsfolder/d/distress.txt svneol=native#text/plain
 res/cardsfolder/d/disturbed_burial.txt svneol=native#text/plain
 res/cardsfolder/d/dive_bomber.txt svneol=native#text/plain
 res/cardsfolder/d/divebomber_griffin.txt svneol=native#text/plain
+res/cardsfolder/d/divergent_growth.txt -text
 res/cardsfolder/d/diversionary_tactics.txt svneol=native#text/plain
 res/cardsfolder/d/divination.txt svneol=native#text/plain
 res/cardsfolder/d/divine_congregation.txt svneol=native#text/plain
@@ -7010,6 +7011,7 @@ res/cardsfolder/p/paradise_plume.txt -text svneol=unset#text/plain
 res/cardsfolder/p/paragon_of_the_amesha.txt svneol=native#text/plain
 res/cardsfolder/p/parallax_dementia.txt svneol=native#text/plain
 res/cardsfolder/p/parallax_inhibitor.txt svneol=native#text/plain
+res/cardsfolder/p/parallax_nexus.txt -text
 res/cardsfolder/p/parallax_tide.txt svneol=native#text/plain
 res/cardsfolder/p/parallax_wave.txt svneol=native#text/plain
 res/cardsfolder/p/parallel_evolution.txt svneol=native#text/plain
@@ -8011,6 +8013,7 @@ res/cardsfolder/r/rishadan_cutpurse.txt svneol=native#text/plain
 res/cardsfolder/r/rishadan_footpad.txt svneol=native#text/plain
 res/cardsfolder/r/rishadan_pawnshop.txt svneol=native#text/plain
 res/cardsfolder/r/rishadan_port.txt svneol=native#text/plain
+res/cardsfolder/r/rising_waters.txt -text
 res/cardsfolder/r/rite_of_consumption.txt -text
 res/cardsfolder/r/rite_of_flame.txt svneol=native#text/plain
 res/cardsfolder/r/rite_of_passage.txt svneol=native#text/plain

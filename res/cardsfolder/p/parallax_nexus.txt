@@ -1,0 +1,14 @@
+Name:Parallax Nexus
+ManaCost:2 B
+Types:Enchantment
+Text:no text
+K:Fading:5
+A:AB$ ChangeZone | Cost$ SubCounter<1/FADE> | ValidTgts$ Opponent | SorcerySpeed$ True | TgtPrompt$ Select target opponent | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | RememberChanged$ True | Chooser$ Targeted | Hidden$ True | SpellDescription$ Target opponent exiles a card from his or her hand. Activate this ability only any time you could cast a sorcery.
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, each player returns to his or her hand all cards he or she owns exiled with CARDNAME.
+SVar:TrigReturn:DB$ ChangeZone | Defined$ Remembered | Origin$ Exile | Destination$ Hand | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/parallax_nexus.jpg
+SetInfo:NMS|Rare|http://magiccards.info/scans/en/ne/63.jpg
+Oracle:Fading 5 (This enchantment enters the battlefield with five fade counters on it. At the beginning of your upkeep, remove a fade counter from it. If you can't, sacrifice it.)\nRemove a fade counter from Parallax Nexus: Target opponent exiles a card from his or her hand. Activate this ability only any time you could cast a sorcery.\nWhen Parallax Nexus leaves the battlefield, each player returns to his or her hand all cards he or she owns exiled with Parallax Nexus.
+End
