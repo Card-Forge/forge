@@ -204,6 +204,20 @@ Fixes/Features:
 - remove imports
 - Set some activating players.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Angel's Grace.
+- AF: Attach (aura ETB ability is no longer spellpermanent)
+- Fixed the AILogic "BeginningOfOppTurn".
+- Fixed a bug in getAIPlayableMana.
+- AF: apis transformed into an ENUM
+- Cleanup.
+- Updated some SVars.
+- AF: Charms done
+- Minor cleanup of obsolete javadocs.
+- AF:Charm makes choices on being cast
+- remove unused imports
+- Added a new static ability "CantAttack".
+- Converted some cards (they now work correctly with Planeswalkers).
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
