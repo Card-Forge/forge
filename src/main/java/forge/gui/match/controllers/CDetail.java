@@ -47,7 +47,7 @@ public enum CDetail implements ICDoc {
     public void showCard(final Card c) {
         //this.item = null;
         this.currentCard = c;
-        VDetail.SINGLETON_INSTANCE.getLblFlipcard().setVisible(c != null && c.isDoubleFaced() ? true : false);
+        VDetail.SINGLETON_INSTANCE.getLblFlipcard().setVisible(c != null && c.isDoubleFaced());
         VDetail.SINGLETON_INSTANCE.getPnlDetail().setCard(c);
         VDetail.SINGLETON_INSTANCE.getParentCell().repaintSelf();
     }

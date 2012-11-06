@@ -14,6 +14,8 @@ import javax.swing.event.ListSelectionListener;
 
 import forge.Card;
 import forge.gui.match.CMatchUI;
+import forge.item.CardPrinted;
+import forge.item.InventoryItem;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -188,6 +190,10 @@ public class GuiChoose {
                 if (list.getSelectedValue() instanceof Card) {
                     CMatchUI.SINGLETON_INSTANCE.setCard((Card) list.getSelectedValue());
                 }
+                if (list.getSelectedValue() instanceof InventoryItem) {
+                    CMatchUI.SINGLETON_INSTANCE.setCard((InventoryItem) list.getSelectedValue());
+                }
+                
             }
         });
         c.show();

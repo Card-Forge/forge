@@ -38,6 +38,7 @@ import forge.gui.match.nonsingleton.CField;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.nonsingleton.VHand;
 import forge.gui.toolbox.FSkin;
+import forge.item.InventoryItem;
 import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
@@ -223,6 +224,11 @@ public enum CMatchUI implements CardContainer {
         CPicture.SINGLETON_INSTANCE.showCard(c);
     }
 
+    public void setCard(final InventoryItem c) {
+        CDetail.SINGLETON_INSTANCE.showCard(c);
+        CPicture.SINGLETON_INSTANCE.showCard(c);
+    }    
+    
     @Override
     public Card getCard() {
         return CDetail.SINGLETON_INSTANCE.getCurrentCard();
