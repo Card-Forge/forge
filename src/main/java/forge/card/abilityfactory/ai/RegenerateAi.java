@@ -30,7 +30,6 @@ import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.phase.CombatUtil;
@@ -148,11 +147,6 @@ public class RegenerateAi extends SpellAiLogic {
                     }
                 }
             }
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.chkAIDrawback();
         }
 
         return chance;

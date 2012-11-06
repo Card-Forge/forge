@@ -6,7 +6,6 @@ import java.util.Random;
 import forge.Card;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.phase.PhaseHandler;
@@ -53,11 +52,6 @@ public class TapAi extends TapAiBase {
             if (!tapPrefTargeting(ai, source, tgt, sa, false)) {
                 return false;
             }
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            randomReturn &= subAb.chkAIDrawback();
         }
 
         return randomReturn;

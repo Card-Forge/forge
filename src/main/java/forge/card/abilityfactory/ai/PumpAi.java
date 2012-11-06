@@ -15,7 +15,6 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
@@ -157,11 +156,6 @@ public class PumpAi extends PumpAiBase {
         }
         //Targeted
         if (!this.pumpTgtAI(ai, sa, params, defense, attack, false)) {
-            return false;
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null && !subAb.chkAIDrawback()) {
             return false;
         }
 
@@ -420,11 +414,6 @@ public class PumpAi extends PumpAiBase {
         } else {
             //Targeted
             if (!this.pumpTgtAI(ai, sa, params, defense, attack, false)) {
-                return false;
-            }
-
-            final AbilitySub subAb = sa.getSubAbility();
-            if (subAb != null && !subAb.chkAIDrawback()) {
                 return false;
             }
         }

@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.ai;
 
 import forge.card.abilityfactory.SpellAiLogic;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.util.MyRandom;
@@ -15,11 +14,6 @@ public class ChooseColorAi extends SpellAiLogic {
             return false;
         }
         boolean chance = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
-        
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.chkAIDrawback();
-        }
         return chance;
     }
     

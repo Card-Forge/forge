@@ -4,7 +4,6 @@ import java.util.Random;
 
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -41,12 +40,6 @@ public class DigUntilAi extends SpellAiLogic {
         // return false if nothing to dig into
         if (libraryOwner.getCardsIn(ZoneType.Library).isEmpty()) {
             return false;
-        }
-
-
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            return randomReturn && abSub.chkAIDrawback();
         }
 
         return randomReturn;

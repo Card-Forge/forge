@@ -6,7 +6,6 @@ import forge.Card;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.util.MyRandom;
@@ -50,11 +49,6 @@ public class RevealAi extends RevealAiBase {
 
         if (AbilityFactory.playReusable(ai, sa)) {
             randomReturn = true;
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            randomReturn &= subAb.chkAIDrawback();
         }
         return randomReturn;
     }

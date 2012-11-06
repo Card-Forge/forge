@@ -31,7 +31,7 @@ public class CommonSpell extends Spell {
     
     @Override
     public boolean canPlayAI() {
-        return ai.canPlayAI(getActivatingPlayer(), params, this);
+        return ai.canPlayAIWithSubs(getActivatingPlayer(), params, this);
     }    
     
     @Override

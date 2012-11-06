@@ -39,16 +39,7 @@ public class CanPlayAsDrawbackAi extends SpellAiLogic {
      */
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
-        final boolean randomReturn = false;
-
-        // comment out the af.hasSubAbility() until it's used. randomReturn is
-        // always false.
-        /*
-         * if (af.hasSubAbility()) { final AbilitySub abSub =
-         * sa.getSubAbility(); if (abSub != null) { return randomReturn &&
-         * abSub.chkAIDrawback(); } }
-         */
-        return randomReturn;
+        return false;
     }
 
 }

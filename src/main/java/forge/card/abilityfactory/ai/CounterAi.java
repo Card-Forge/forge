@@ -7,7 +7,6 @@ import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
@@ -96,10 +95,6 @@ public class CounterAi extends SpellAiLogic {
 
         // But really it should be more picky about how it counters things
 
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            toReturn &= subAb.chkAIDrawback();
-        }
 
         return toReturn;
     }
@@ -166,11 +161,6 @@ public class CounterAi extends SpellAiLogic {
         // force the Human into making decisions)
 
         // But really it should be more picky about how it counters things
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            toReturn &= subAb.chkAIDrawback();
-        }
 
         return toReturn;
     }

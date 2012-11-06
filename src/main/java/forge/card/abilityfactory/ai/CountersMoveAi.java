@@ -10,7 +10,6 @@ import forge.Counters;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -36,11 +35,6 @@ public class CountersMoveAi extends SpellAiLogic {
 
         // prevent run-away activations - first time will always return true
         boolean chance = false;
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.chkAIDrawback();
-        }
 
         if (AbilityFactory.playReusable(ai, sa)) {
             return chance;

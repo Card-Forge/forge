@@ -7,7 +7,6 @@ import forge.Card;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.phase.PhaseHandler;
@@ -89,11 +88,6 @@ public class CloneAi extends SpellAiLogic {
             useAbility &= cloneTgtAI(params, sa);
         }
 
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            useAbility &= subAb.chkAIDrawback();
-        }
-
         return useAbility;
     } // end cloneCanPlayAI()
 
@@ -125,11 +119,6 @@ public class CloneAi extends SpellAiLogic {
 
         // Eventually, we can call the trigger of ETB abilities with
         // not mandatory as part of the checks to cast something
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.chkAIDrawback();
-        }
 
         return chance || mandatory;
     }

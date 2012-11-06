@@ -14,7 +14,6 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
@@ -39,11 +38,6 @@ public class DamageDealAi extends DamageAiBase {
             source.setSVar("PayX", Integer.toString(dmg));
         } 
         if(!this.damageTargetAI(ai, params, sa, dmg)) {
-            return false;
-        }
-        
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null && !subAb.chkAIDrawback()) {
             return false;
         }
         return true;
@@ -114,11 +108,6 @@ public class DamageDealAi extends DamageAiBase {
                 }
                 source.setSVar("PayX", Integer.toString(actualPay));
             }
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null && !subAb.chkAIDrawback()) {
-            return false;
         }
         return true;
     }

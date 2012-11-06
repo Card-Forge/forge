@@ -700,7 +700,6 @@ public class CardFactoryUtil {
         if (list.size() == 0) {
             return null;
         }
-        System.out.println("getWorstPermanentAI: " + list);
 
         if (biasEnch && Iterables.any(list, CardPredicates.Presets.ENCHANTMENTS)) {
             return CardFactoryUtil.getCheapestPermanentAI(CardLists.filter(list, CardPredicates.Presets.ENCHANTMENTS), null, false);

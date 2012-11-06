@@ -21,6 +21,6 @@ public class AlwaysPlayAi extends SpellAiLogic {
      */
     @Override
     public boolean chkAIDrawback(Map<String, String> params, SpellAbility sa, Player aiPlayer) {
-        return canPlayAI(aiPlayer, params, sa);
+        return true;
     }
 }

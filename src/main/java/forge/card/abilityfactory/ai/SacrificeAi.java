@@ -8,7 +8,6 @@ import forge.CardLists;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.ComputerUtil;
@@ -57,27 +56,14 @@ public class SacrificeAi extends SpellAiLogic {
             }
         }
 
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.chkAIDrawback();
-        }
-
         return chance;
     }
 
     @Override
     public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player ai) {
         // AI should only activate this during Human's turn
-        boolean chance = sacrificeTgtAI(ai, params, sa);
 
-        // TODO: restrict the subAbility a bit
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.chkAIDrawback();
-        }
-
-        return chance;
+        return sacrificeTgtAI(ai, params, sa);
     }
 
     @Override
@@ -91,11 +77,6 @@ public class SacrificeAi extends SpellAiLogic {
 
         // Eventually, we can call the trigger of ETB abilities with not
         // mandatory as part of the checks to cast something
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.chkAIDrawback();
-        }
 
         return chance || mandatory;
     }

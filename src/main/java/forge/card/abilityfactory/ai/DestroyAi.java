@@ -16,7 +16,6 @@ import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.ComputerUtil;
@@ -144,11 +143,6 @@ public class DestroyAi extends SpellAiLogic {
                     return false;
                 }
             }
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.chkAIDrawback();
         }
 
         return chance;

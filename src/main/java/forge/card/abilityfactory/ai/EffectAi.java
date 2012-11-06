@@ -10,7 +10,6 @@ import forge.CardLists;
 import forge.Singletons;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.GameState;
@@ -115,11 +114,6 @@ public class EffectAi extends SpellAiLogic {
             } else {
                 tgt.addTarget(ai);
             }
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            randomReturn &= subAb.chkAIDrawback();
         }
 
         return randomReturn;

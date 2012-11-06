@@ -6,7 +6,6 @@ import java.util.Random;
 
 import forge.Card;
 import forge.card.abilityfactory.AbilityFactory;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -44,11 +43,6 @@ public class TapOrUntapAi extends TapAiBase {
             if (!tapPrefTargeting(ai, source, tgt, sa, false)) {
                 return false;
             }
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            randomReturn &= subAb.chkAIDrawback();
         }
 
         return randomReturn;
@@ -94,11 +88,6 @@ public class TapOrUntapAi extends TapAiBase {
             if (!tapPrefTargeting(ai, source, tgt, sa, false)) {
                 return false;
             }
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            randomReturn &= subAb.chkAIDrawback();
         }
 
         return randomReturn;

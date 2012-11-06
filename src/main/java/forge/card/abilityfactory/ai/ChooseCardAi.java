@@ -7,7 +7,6 @@ import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
 import forge.card.abilityfactory.SpellAiLogic;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -59,10 +58,6 @@ public class ChooseCardAi extends SpellAiLogic {
             }
         }
 
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null && !subAb.chkAIDrawback()) {
-            return false;
-        }
         return true;
     }
     

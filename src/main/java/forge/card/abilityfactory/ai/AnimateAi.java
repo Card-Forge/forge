@@ -10,7 +10,6 @@ import forge.CardPredicates;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.phase.PhaseType;
@@ -27,10 +26,6 @@ import forge.game.zone.ZoneType;
  */
 
 public class AnimateAi extends SpellAiLogic {
-
-    // **************************************************************
-    // ************************** Animate ***************************
-    // **************************************************************
     
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
@@ -39,8 +34,6 @@ public class AnimateAi extends SpellAiLogic {
     public boolean canPlayAI(Player aiPlayer, Map<String, String> params, SpellAbility sa) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
-    
-        boolean useAbility = true;
     
         // TODO - add some kind of check to answer
         // "Am I going to attack with this?"
@@ -108,15 +101,12 @@ public class AnimateAi extends SpellAiLogic {
             }
         } else {
             tgt.resetTargets();
-            useAbility &= animateTgtAI(params, sa);
+            if (!animateTgtAI(params, sa)) {
+                return false;
+            }
         }
     
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            useAbility &= subAb.chkAIDrawback();
-        }
-    
-        return useAbility;
+        return true;
     }
 
     // end animateCanPlayAI()
@@ -124,13 +114,14 @@ public class AnimateAi extends SpellAiLogic {
     
     @Override
     public boolean chkAIDrawback(Map<String, String> params, SpellAbility sa, Player aiPlayer) {
-        boolean chance = true;
-    
         if (sa.getTarget() != null) {
-            chance = animateTgtAI(params, sa);
+            sa.getTarget().resetTargets();
+            if (!animateTgtAI(params, sa)) {
+                return false;
+            }
         }
     
-        return chance;
+        return true;
     }
 
     /**
@@ -148,10 +139,9 @@ public class AnimateAi extends SpellAiLogic {
      */
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
-        boolean chance = true;
     
-        if (sa.getTarget() != null) {
-            chance = animateTgtAI(params, sa);
+        if (sa.getTarget() != null && !animateTgtAI(params, sa) && !mandatory) {
+            return false;
         }
     
         // Improve AI for triggers. If source is a creature with:
@@ -161,12 +151,7 @@ public class AnimateAi extends SpellAiLogic {
         // Eventually, we can call the trigger of ETB abilities with
         // not mandatory as part of the checks to cast something
     
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.chkAIDrawback();
-        }
-    
-        return chance || mandatory;
+        return true;
     }
 
     /**

@@ -7,7 +7,6 @@ import java.util.Random;
 import forge.Card;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -37,11 +36,6 @@ public class DrainManaAi extends SpellAiLogic {
         } else {
             tgt.resetTargets();
             tgt.addTarget(opp);
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            randomReturn &= subAb.chkAIDrawback();
         }
 
         return randomReturn;
@@ -91,11 +85,6 @@ public class DrainManaAi extends SpellAiLogic {
         } else {
             tgt.resetTargets();
             tgt.addTarget(ai.getOpponent());
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            randomReturn &= subAb.chkAIDrawback();
         }
 
         return randomReturn;

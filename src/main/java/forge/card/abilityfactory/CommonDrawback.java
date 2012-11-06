@@ -48,16 +48,12 @@ class CommonDrawback extends AbilitySub {
     
         @Override
         public String getStackDescription() {
-            // when getStackDesc is called, just build exactly what is happening
             return effect.getStackDescriptionWithSubs(params, this);
         }
     
         @Override
         public boolean canPlayAI() {
-            // if X depends on abCost, the AI needs to choose which card he would sacrifice first
-            // then call xCount with that card to properly calculate the amount
-            // Or choosing how many to sacrifice
-            return ai.canPlayAI(getActivatingPlayer(), params, this);
+            return ai.canPlayAIWithSubs(getActivatingPlayer(), params, this);
         }
     
         @Override
@@ -67,12 +63,14 @@ class CommonDrawback extends AbilitySub {
     
         @Override
         public boolean chkAIDrawback() {
-            boolean chance = ai.chkAIDrawback(params, this, getActivatingPlayer());
-            final AbilitySub subAb = getSubAbility();
-            if (subAb != null) {
-                chance &= subAb.chkAIDrawback();
+            if (!ai.chkAIDrawback(params, this, getActivatingPlayer())) {
+                return false;
             }
-            return chance;
+            final AbilitySub subAb = getSubAbility();
+            if (subAb != null && !subAb.chkAIDrawback()) {
+                return false;
+            }
+            return true;
         }
     
         @Override

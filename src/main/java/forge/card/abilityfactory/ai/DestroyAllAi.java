@@ -12,7 +12,6 @@ import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.ComputerUtil;
@@ -69,11 +68,6 @@ public class DestroyAllAi extends SpellAiLogic {
         } // otherwise evaluate both lists by CMC and pass only if human
           // permanents are more valuable
         else if (CardFactoryUtil.evaluatePermanentList(computerlist) >= CardFactoryUtil.evaluatePermanentList(humanlist)) {
-            return false;
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null && !subAb.chkAIDrawback()) {
             return false;
         }
         return true;
@@ -148,11 +142,6 @@ public class DestroyAllAi extends SpellAiLogic {
         else if ((CardFactoryUtil.evaluatePermanentList(computerlist) + 3) >= CardFactoryUtil
                 .evaluatePermanentList(humanlist)) {
             return false;
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.chkAIDrawback();
         }
 
         return chance;

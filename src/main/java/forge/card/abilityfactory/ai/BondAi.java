@@ -17,7 +17,6 @@
  */
 package forge.card.abilityfactory.ai;
 
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.game.player.Player;
@@ -31,15 +30,6 @@ import forge.game.player.Player;
  * @version $Id: AbilityFactoryBond.java 15090 2012-04-07 12:50:31Z Max mtg $
  */
 public final class BondAi extends SpellAiLogic {
-
-    
-
-    // **************************************************************
-    // ************************** Bond ***************************
-    // **************************************************************
-
-   
-
     /**
      * <p>
      * bondCanPlayAI.
@@ -53,13 +43,6 @@ public final class BondAi extends SpellAiLogic {
      */
     @Override
     public boolean canPlayAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa) {
-        boolean chance = true;
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.chkAIDrawback();
-        }
-
-        return chance;
+        return true;
     } // end bondCanPlayAI()
 }

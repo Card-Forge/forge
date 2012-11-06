@@ -10,7 +10,6 @@ import forge.CardLists;
 import forge.Counters;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -20,12 +19,6 @@ public class CountersProliferateAi extends SpellAiLogic {
     @Override
     public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         boolean chance = true;
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null && !subAb.chkAIDrawback()) {
-            return false;
-        }
-
-        
         
         List<Card> cperms = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
             @Override

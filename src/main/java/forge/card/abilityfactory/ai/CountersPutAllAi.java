@@ -123,11 +123,6 @@ public class CountersPutAllAi extends SpellAiLogic {
             }
         }
 
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.chkAIDrawback();
-        }
-
         if (sa.isTrigger() || sa instanceof AbilitySub || AbilityFactory.playReusable(ai, sa)) {
             return chance;
         }

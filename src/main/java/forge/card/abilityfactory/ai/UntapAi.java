@@ -14,7 +14,6 @@ import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -50,11 +49,6 @@ public class UntapAi extends SpellAiLogic {
             if (!untapPrefTargeting(ai, tgt, sa, false)) {
                 return false;
             }
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            randomReturn &= subAb.chkAIDrawback();
         }
 
         return randomReturn;
@@ -101,11 +95,6 @@ public class UntapAi extends SpellAiLogic {
             if (!untapPrefTargeting(ai, tgt, sa, false)) {
                 return false;
             }
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            randomReturn &= subAb.chkAIDrawback();
         }
 
         return randomReturn;

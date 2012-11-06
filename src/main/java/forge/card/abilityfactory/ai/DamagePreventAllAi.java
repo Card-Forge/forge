@@ -7,7 +7,6 @@ import forge.Singletons;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -56,11 +55,6 @@ public class DamagePreventAllAi extends SpellAiLogic {
         } // Protect combatants
         else if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
             // TODO
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.chkAIDrawback();
         }
 
         return chance;

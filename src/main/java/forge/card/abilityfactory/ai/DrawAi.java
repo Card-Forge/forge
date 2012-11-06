@@ -125,10 +125,6 @@ public class DrawAi extends SpellAiLogic {
             randomReturn = true;
         }
 
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            randomReturn &= subAb.chkAIDrawback();
-        }
         return randomReturn;
     }
 

@@ -16,7 +16,6 @@ import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.phase.PhaseType;
@@ -164,11 +163,6 @@ public class CountersPutAi extends SpellAiLogic {
             return false;
         }
 
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null && !subAb.chkAIDrawback()) {
-            return false;
-        }
-
         return true;
     } // putCanPlayAI
 
@@ -231,11 +225,6 @@ public class CountersPutAi extends SpellAiLogic {
                 list.remove(choice);
                 abTgt.addTarget(choice);
             }
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.chkAIDrawback();
         }
 
         return chance;
@@ -314,11 +303,6 @@ public class CountersPutAi extends SpellAiLogic {
             // TODO - I think choice can be null here. Is that ok for
             // addTarget()?
             abTgt.addTarget(choice);
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null && !subAb.chkAIDrawback()) {
-            return false;
         }
 
         return true;

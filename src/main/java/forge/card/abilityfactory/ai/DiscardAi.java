@@ -10,7 +10,6 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.phase.PhaseType;
@@ -101,10 +100,6 @@ public class DiscardAi extends SpellAiLogic {
 
         // some other variables here, like handsize vs. maxHandSize
 
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            randomReturn &= subAb.chkAIDrawback();
-        }
         return randomReturn;
     } // discardCanPlayAI()
 

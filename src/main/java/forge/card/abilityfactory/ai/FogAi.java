@@ -4,7 +4,6 @@ import java.util.Map;
 
 import forge.Singletons;
 import forge.card.abilityfactory.SpellAiLogic;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
@@ -35,13 +34,6 @@ public class FogAi extends SpellAiLogic {
             return false;
         }
 
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            if (!subAb.chkAIDrawback()) {
-                return false;
-            }
-        }
-
         // Cast it if life is in danger
         return CombatUtil.lifeInDanger(ai, Singletons.getModel().getGame().getCombat());
     }
@@ -56,11 +48,6 @@ public class FogAi extends SpellAiLogic {
             chance = Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE);
         } else {
             chance = Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DAMAGE);
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.chkAIDrawback();
         }
 
         return chance;

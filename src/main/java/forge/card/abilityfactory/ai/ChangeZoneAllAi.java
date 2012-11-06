@@ -12,7 +12,6 @@ import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.phase.PhaseType;
@@ -154,11 +153,6 @@ public class ChangeZoneAllAi extends SpellAiLogic {
             }
         }
 
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.chkAIDrawback();
-        }
-
         return (((r.nextFloat() < .8) || sa.isTrigger()) && chance);
     }
 
@@ -272,13 +266,7 @@ public class ChangeZoneAllAi extends SpellAiLogic {
             }
         }
 
-        boolean chance = true;
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.chkAIDrawback();
-        }
-
-        return chance;
+        return true;
     }
 
 }

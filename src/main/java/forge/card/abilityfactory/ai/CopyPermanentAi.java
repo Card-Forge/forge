@@ -11,7 +11,6 @@ import forge.CardPredicates.Presets;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.phase.PhaseType;
@@ -102,13 +101,6 @@ public class CopyPermanentAi extends SpellAiLogic {
             // if no targeting, it should always be ok
         }
 
-        // end Targeting
-
-
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            return abSub.chkAIDrawback();
-        }
         return true;
     }
 

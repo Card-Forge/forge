@@ -6,19 +6,6 @@ import forge.card.spellability.Target;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 
-/**
- * <p>
- * createDrawbackNameCard.
- * </p>
- *
- * @param af
- *            a {@link forge.card.abilityfactory.AbilityFactory} object.
- * @return a {@link forge.card.spellability.SpellAbility} object.
- * @since 1.1.6
- * 
- */
-
-
 public class ChooseCardNameAi extends SpellAiLogic {
     
     

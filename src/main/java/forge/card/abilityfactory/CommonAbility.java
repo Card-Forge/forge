@@ -57,7 +57,7 @@ public class CommonAbility extends AbilityActivated {
     
     @Override
     public boolean canPlayAI() {
-        return ai.canPlayAI(getActivatingPlayer(), params, this);
+        return ai.canPlayAIWithSubs(getActivatingPlayer(), params, this);
     }
 
     @Override

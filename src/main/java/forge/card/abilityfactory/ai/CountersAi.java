@@ -39,10 +39,6 @@ import forge.card.cardfactory.CardFactoryUtil;
 public abstract class CountersAi {
     // An AbilityFactory subclass for Putting or Removing Counters on Cards.
 
-    // *******************************************
-    // ********** PutCounters *****************
-    // *******************************************
-
     /**
      * <p>
      * chooseCursedTarget.

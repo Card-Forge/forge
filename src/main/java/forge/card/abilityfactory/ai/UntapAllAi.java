@@ -16,7 +16,7 @@ public class UntapAllAi extends SpellAiLogic {
     public boolean canPlayAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa) {
         // check SubAbilities DoTrigger?
         final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null && abSub.chkAIDrawback()) {
+        if (abSub != null) {
             return true;
         }
         return false;

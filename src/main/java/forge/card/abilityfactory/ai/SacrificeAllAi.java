@@ -9,7 +9,6 @@ import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -71,11 +70,6 @@ public class SacrificeAllAi extends SpellAiLogic
         else if ((CardFactoryUtil.evaluatePermanentList(computerlist) + 3) >= CardFactoryUtil
                 .evaluatePermanentList(humanlist)) {
             return false;
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            chance &= subAb.chkAIDrawback();
         }
 
         return ((r.nextFloat() < .9667) && chance);
