@@ -28,6 +28,32 @@ import forge.card.cost.Cost;
  * The Class StaticAbility_CantBeCast.
  */
 public class StaticAbilityCantAttackBlock{
+    
+    /**
+     * TODO Write javadoc for this method.
+     * 
+     * @param stAb
+     *            a StaticAbility
+     * @param card
+     *            the card
+     * @return a Cost
+     */
+    public static boolean applyCantAttackAbility(final StaticAbility stAb, final Card card, final GameEntity target) {
+        final HashMap<String, String> params = stAb.getMapParams();
+        final Card hostCard = stAb.getHostCard();
+
+        if (params.containsKey("ValidCard")
+                && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
+            return false;
+        }
+
+        if (params.containsKey("Target")
+                && !target.isValid(params.get("Target").split(","), hostCard.getController(), hostCard)) {
+            return false;
+        }
+
+        return true;
+    }
 
     /**
      * TODO Write javadoc for this method.

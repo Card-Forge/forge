@@ -814,7 +814,7 @@ public class CombatUtil {
         }
 
         final GameEntity def = combat.getDefender();
-        return CombatUtil.canAttack(c, def instanceof Player ? (Player) def : ((Card) def).getController());
+        return CombatUtil.canAttack(c, def);
     }
 
     // can a creature attack at the moment?
@@ -827,7 +827,7 @@ public class CombatUtil {
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public static boolean canAttack(final Card c, final Player defender) {
+    public static boolean canAttack(final Card c, final GameEntity defender) {
         if (c.isTapped() || c.isPhasedOut()
                 || (c.hasSickness() && !c.hasKeyword("CARDNAME can attack as though it had haste."))
                 || Singletons.getModel().getGame().getPhaseHandler().getPhase()
@@ -861,9 +861,16 @@ public class CombatUtil {
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public static boolean canAttackNextTurn(final Card c, final Player defender) {
+    public static boolean canAttackNextTurn(final Card c, final GameEntity defender) {
         if (!c.isCreature()) {
             return false;
+        }
+
+        Player defendingPlayer = null;
+        if (defender instanceof Card) {
+            defendingPlayer = ((Card) defender).getController();
+        } else {
+            defendingPlayer = (Player) defender;
         }
 
         // CARDNAME can't attack if defending player controls an untapped
@@ -892,7 +899,7 @@ public class CombatUtil {
                 if (asSeparateWords[12].matches("[0-9][0-9]?")) {
                     powerLimit[0] = Integer.parseInt((asSeparateWords[12]).trim());
 
-                    List<Card> list = defender.getCreaturesInPlay();
+                    List<Card> list = defendingPlayer.getCreaturesInPlay();
                     list = CardLists.filter(list, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card ct) {
@@ -909,7 +916,7 @@ public class CombatUtil {
         } // hasKeyword = CARDNAME can't attack if defending player controls an
           // untapped creature with power ...
 
-        final List<Card> list = defender.getCardsIn(ZoneType.Battlefield);
+        final List<Card> list = defendingPlayer.getCardsIn(ZoneType.Battlefield);
         List<Card> temp;
         for (String keyword : c.getKeyword()) {
             if (keyword.equals("CARDNAME can't attack.") || keyword.equals("CARDNAME can't attack or block.")) {
@@ -952,6 +959,16 @@ public class CombatUtil {
         // The creature won't untap next turn
         if (c.isTapped() && !Untap.canUntap(c)) {
             return false;
+        }
+
+        // CantBeActivated static abilities
+        for (final Card ca : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
+            final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
+            for (final StaticAbility stAb : staticAbilities) {
+                if (stAb.applyAbility("CantAttack", c, defender)) {
+                    return false;
+                }
+            }
         }
 
         return true;

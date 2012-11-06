@@ -419,6 +419,35 @@ public class StaticAbility {
      *            the target
      * @return true, if successful
      */
+    public final boolean applyAbility(final String mode, final Card card, final GameEntity target) {
+
+        // don't apply the ability if it hasn't got the right mode
+        if (!this.mapParams.get("Mode").equals(mode)) {
+            return false;
+        }
+
+        if (this.isSuppressed() || !this.checkConditions()) {
+            return false;
+        }
+
+        if (mode.equals("CantAttack")) {
+            return StaticAbilityCantAttackBlock.applyCantAttackAbility(this, card, target);
+        }
+
+        return false;
+    }
+
+    /**
+     * Apply ability.
+     * 
+     * @param mode
+     *            the mode
+     * @param card
+     *            the card
+     * @param target
+     *            the target
+     * @return true, if successful
+     */
     public final Cost getCostAbility(final String mode, final Card card, final GameEntity target) {
 
         // don't apply the ability if it hasn't got the right mode
