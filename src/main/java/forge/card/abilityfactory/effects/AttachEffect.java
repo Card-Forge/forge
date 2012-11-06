@@ -58,16 +58,6 @@ public class AttachEffect extends SpellEffect {
         }
     }
 
-    /**
-     * Attach stack description.
-     * 
-     * @param af
-     *            the af
-     * @param sa
-     *            the sa
-     * @return the string
-     */
-    
     @Override
     protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();

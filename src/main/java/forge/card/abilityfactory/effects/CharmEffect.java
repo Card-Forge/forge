@@ -76,4 +76,4 @@ public class CharmEffect extends SpellEffect {
         return sb.toString();
     }
 
-} // end class AbilityFactory_Charm
+} 
