@@ -38,7 +38,7 @@ public class PumpAllEffect extends SpellEffect {
     @Override
     public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
         List<Card> list;
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayersEmptyAsDefault(sa, params);
         final ArrayList<ZoneType> affectedZones = new ArrayList<ZoneType>();
     
     
@@ -51,14 +51,15 @@ public class PumpAllEffect extends SpellEffect {
         }
     
         list = new ArrayList<Card>();
-        if ((tgtPlayers == null) || tgtPlayers.isEmpty()) {
+        if (tgtPlayers.isEmpty()) {
             for (final ZoneType zone : affectedZones) {
                 list.addAll(Singletons.getModel().getGame().getCardsIn(zone));
             }
     
         } else {
             for (final ZoneType zone : affectedZones) {
-                list.addAll(tgtPlayers.get(0).getCardsIn(zone));
+                for( final Player p : tgtPlayers )
+                    list.addAll(p.getCardsIn(zone));
             }
         }
     

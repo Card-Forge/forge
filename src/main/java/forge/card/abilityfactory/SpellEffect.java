@@ -1,7 +1,11 @@
 package forge.card.abilityfactory;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
 import forge.card.spellability.AbilitySub;
@@ -79,8 +83,20 @@ import forge.game.player.Player;
         }
 
         protected List<Player> getTargetPlayers(SpellAbility sa, final Map<String, String> params) {
+            return getTargetPlayers(sa, params, false);
+        }
+
+        protected List<Player> getTargetPlayersEmptyAsDefault(SpellAbility sa, final Map<String, String> params) {
+            return getTargetPlayers(sa, params, true);
+        }
+        
+        private final static List<Player> emptyPlayerList = Collections.unmodifiableList(new ArrayList<Player>());
+        private List<Player> getTargetPlayers(SpellAbility sa, final Map<String, String> params, final boolean wantEmptyAsDefault) {
             final Target tgt = sa.getTarget();
-            return tgt != null ? tgt.getTargetPlayers() : AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+            final String defined = params.get("Defined");
+            if ( tgt != null ) return tgt.getTargetPlayers();
+            if ( StringUtils.isEmpty(defined) && wantEmptyAsDefault ) return emptyPlayerList;
+            return AbilityFactory.getDefinedPlayers(sa.getSourceCard(), defined, sa);
         }
         
         protected List<SpellAbility> getTargetSpellAbilities(SpellAbility sa, final Map<String, String> params) {

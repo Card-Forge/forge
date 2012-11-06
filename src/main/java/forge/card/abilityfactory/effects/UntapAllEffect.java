@@ -1,5 +1,6 @@
 package forge.card.abilityfactory.effects;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +34,7 @@ public class UntapAllEffect extends SpellEffect {
         String valid = "";
         List<Card> list = null;
     
-        List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        List<Player> tgtPlayers = getTargetPlayersEmptyAsDefault(sa, params);
     
         if (params.containsKey("ValidCards")) {
             valid = params.get("ValidCards");
@@ -42,7 +43,9 @@ public class UntapAllEffect extends SpellEffect {
         if (tgtPlayers.isEmpty()) {
             list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         } else {
-            list = tgtPlayers.get(0).getCardsIn(ZoneType.Battlefield);
+            list = new ArrayList<Card>();
+            for( final Player p : tgtPlayers )
+                list.addAll(p.getCardsIn(ZoneType.Battlefield));
         }
         list = CardLists.getValidCards(list, valid.split(","), card.getController(), card);
     

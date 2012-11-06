@@ -14,7 +14,6 @@ import javax.swing.event.ListSelectionListener;
 
 import forge.Card;
 import forge.gui.match.CMatchUI;
-import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 
 /** 
