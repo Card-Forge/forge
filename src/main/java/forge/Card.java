@@ -1348,8 +1348,9 @@ public class Card extends GameEntity implements Comparable<Card> {
                     // set activating player for base spell ability
                     c.getSpellAbility()[0].setActivatingPlayer(c.getOwner());
                     // Any trigger should cause the phase not to skip
-                    for (Player p : Singletons.getModel().getGame().getPlayers())
+                    for (Player p : Singletons.getModel().getGame().getPlayers()) {
                         p.getController().autoPassCancel();
+                    }
 
                     if (c.getOwner().isHuman()) {
                         Singletons.getModel().getGame().getAction().playCardWithoutManaCost(c);
@@ -2799,10 +2800,10 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void addSpellAbility(final SpellAbility a) {
-        
+
         a.setSourceCard(this);
         if (a.getManaPart() != null) {
-            this.getCharacteristics().getManaAbility().add((AbilityActivated)a);
+            this.getCharacteristics().getManaAbility().add((AbilityActivated) a);
         } else {
             this.getCharacteristics().getSpellAbility().add(a);
         }
@@ -2893,7 +2894,9 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final List<SpellAbility> getSpells() {
         final List<SpellAbility> res = new ArrayList<SpellAbility>();
         for (final SpellAbility sa : this.getCharacteristics().getSpellAbility()) {
-            if (!sa.isSpell()) continue;
+            if (!sa.isSpell()) {
+                continue;
+            }
             res.add(sa);
         }
         return res;
