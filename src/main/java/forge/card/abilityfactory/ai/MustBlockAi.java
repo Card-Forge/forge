@@ -22,7 +22,7 @@ import forge.game.zone.ZoneType;
 public class MustBlockAi extends SpellAiLogic {
     
     @Override
-    public boolean canPlayAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa) {
         // disabled for the AI until he/she can make decisions about who to make
         // block
         return false;

@@ -30,7 +30,7 @@ public class PlayAi extends SpellAiLogic {
     }
     
     @Override
-    public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         final Cost abCost = sa.getAbilityFactory().getAbCost();
         final Card source = sa.getAbilityFactory().getHostCard();
 

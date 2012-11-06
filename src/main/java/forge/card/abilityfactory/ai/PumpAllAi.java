@@ -26,7 +26,7 @@ public class PumpAllAi extends PumpAiBase {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public boolean canPlayAI(final Player ai, Map<String, String> params, final SpellAbility sa) {
+    protected boolean canPlayAI(final Player ai, Map<String, String> params, final SpellAbility sa) {
         String valid = "";
         final Card source = sa.getSourceCard();
         

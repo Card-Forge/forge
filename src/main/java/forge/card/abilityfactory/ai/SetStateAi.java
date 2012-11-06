@@ -8,7 +8,7 @@ import forge.game.player.Player;
 
 public class SetStateAi extends SpellAiLogic {
     @Override
-    public boolean canPlayAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa) {
         return false;
     }
 

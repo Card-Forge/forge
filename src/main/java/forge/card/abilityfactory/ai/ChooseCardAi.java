@@ -18,7 +18,7 @@ public class ChooseCardAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
         final Card host = sa.getSourceCard();
 
         final Target tgt = sa.getTarget();

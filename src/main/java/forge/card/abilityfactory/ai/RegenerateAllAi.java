@@ -20,7 +20,7 @@ import forge.game.zone.ZoneType;
 public class RegenerateAllAi extends SpellAiLogic {
     
     @Override
-    public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         final Card hostCard = sa.getAbilityFactory().getHostCard();
         boolean chance = false;
         final Cost abCost = sa.getAbilityFactory().getAbCost();

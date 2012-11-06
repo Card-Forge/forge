@@ -10,7 +10,7 @@ import forge.game.player.Player;
 
 public class ChooseTypeAi extends SpellAiLogic {
     @Override
-    public boolean canPlayAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa) {
         if (!params.containsKey("AILogic")) {
             return false;
         }

@@ -79,7 +79,7 @@ public class DestroyAllAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean canPlayAI(final Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(final Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the expected targets could be
         final Random r = MyRandom.getRandom();

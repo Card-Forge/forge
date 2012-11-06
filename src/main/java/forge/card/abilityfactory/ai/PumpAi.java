@@ -30,7 +30,7 @@ public class PumpAi extends PumpAiBase {
          * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
          */
     @Override
-    public boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
         final Cost cost = sa.getPayCosts();
         final PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler();
         final List<String> keywords = params.containsKey("KW") ? Arrays.asList(params.get("KW").split(" & ")) : new ArrayList<String>();

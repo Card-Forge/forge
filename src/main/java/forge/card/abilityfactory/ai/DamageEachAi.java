@@ -13,7 +13,7 @@ public class DamageEachAi extends DamageAiBase {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
         final Target tgt = sa.getTarget();
 
         if (tgt != null && sa.canTarget(ai.getOpponent())) {

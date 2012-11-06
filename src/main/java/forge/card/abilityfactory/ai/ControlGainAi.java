@@ -62,7 +62,7 @@ import forge.game.zone.ZoneType;
  */
 public class ControlGainAi extends SpellAiLogic {
     @Override
-    public boolean canPlayAI(Player ai, java.util.Map<String,String> params, final SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, final SpellAbility sa) {
         boolean hasCreature = false;
         boolean hasArtifact = false;
         boolean hasEnchantment = false;

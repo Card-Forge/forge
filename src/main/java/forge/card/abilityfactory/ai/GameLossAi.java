@@ -7,7 +7,7 @@ import forge.game.player.Player;
 
 public class GameLossAi extends SpellAiLogic {
     @Override
-    public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         final Player opp = ai.getOpponent();
         if (opp.cantLose()) {
             return false;

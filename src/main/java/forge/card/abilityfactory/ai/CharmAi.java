@@ -14,7 +14,7 @@ import forge.util.MyRandom;
 public class CharmAi extends SpellAiLogic {
     
     @Override
-    public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         final Random r = MyRandom.getRandom();
 
         final int num = Integer.parseInt(params.containsKey("CharmNum") ? params.get("CharmNum") : "1");

@@ -18,7 +18,7 @@ import forge.util.MyRandom;
 
 public class DebuffAllAi extends SpellAiLogic {
     @Override
-    public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         String valid = "";
         final Random r = MyRandom.getRandom();
         // final Card source = sa.getSourceCard();

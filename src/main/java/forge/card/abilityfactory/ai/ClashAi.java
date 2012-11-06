@@ -29,7 +29,7 @@ public class ClashAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
         final Target tgt = sa.getTarget();
         final Player opp = ai.getOpponent();
         if (tgt != null) {

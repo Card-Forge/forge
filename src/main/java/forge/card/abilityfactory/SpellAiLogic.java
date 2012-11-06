@@ -17,7 +17,7 @@ public abstract class SpellAiLogic {
         return canPlayAI(aiPlayer, params, sa);
     }
     
-    public abstract boolean canPlayAI(final Player aiPlayer, final Map<String, String> params, final SpellAbility sa);
+    protected abstract boolean canPlayAI(final Player aiPlayer, final Map<String, String> params, final SpellAbility sa);
     
     public final boolean doTriggerAI(final Player aiPlayer, final Map<String, String> params, final SpellAbility sa, final boolean mandatory){
         if (!ComputerUtil.canPayCost(sa, aiPlayer) && !mandatory) {

@@ -15,7 +15,7 @@ import forge.util.MyRandom;
 public class DrainManaAi extends SpellAiLogic {
     
     @Override
-    public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
 
         final Target tgt = sa.getTarget();

@@ -20,7 +20,7 @@ public class LifeExchangeAi extends SpellAiLogic {
      * forge.card.spellability.SpellAbility)
      */
     @Override
-    public boolean canPlayAI(Player aiPlayer, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, Map<String, String> params, SpellAbility sa) {
         final Random r = MyRandom.getRandom();
         final int myLife = aiPlayer.getLife();
         Player opponent = aiPlayer.getOpponent();

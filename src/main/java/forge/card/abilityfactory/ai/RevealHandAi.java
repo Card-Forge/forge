@@ -17,7 +17,7 @@ public class RevealHandAi extends RevealAiBase {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();

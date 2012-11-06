@@ -10,7 +10,7 @@ import forge.game.player.Player;
 public class RepeatAi extends SpellAiLogic {
     
     @Override
-    public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         final Target tgt = sa.getTarget();
         final Player opp = ai.getOpponent();
         if (tgt != null) {

@@ -26,7 +26,7 @@ import forge.util.MyRandom;
 
 public class CountersPutAi extends SpellAiLogic { 
     @Override
-    public boolean canPlayAI(Player ai, java.util.Map<String,String> params, final SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, final SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on
         // what the expected targets could be

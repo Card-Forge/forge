@@ -21,7 +21,7 @@ import forge.util.MyRandom;
 public class MillAi extends SpellAiLogic {
 
     @Override
-    public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         final Card source = sa.getSourceCard();
         final Cost abCost = sa.getPayCosts();
 

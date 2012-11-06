@@ -42,7 +42,7 @@ public final class BondAi extends SpellAiLogic {
      * @return a boolean.
      */
     @Override
-    public boolean canPlayAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa) {
         return true;
     } // end bondCanPlayAI()
 }

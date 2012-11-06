@@ -16,7 +16,7 @@ public class ChooseCardNameAi extends SpellAiLogic {
     
     
     @Override
-    public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         
         if (params.containsKey("AILogic")) {
             // Don't tap creatures that may be able to block

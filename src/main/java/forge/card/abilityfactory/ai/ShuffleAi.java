@@ -6,7 +6,7 @@ import forge.game.player.Player;
 
 public class ShuffleAi extends SpellAiLogic {
     @Override
-    public boolean canPlayAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa) {
         // not really sure when the compy would use this; maybe only after a
         // human
         // deliberately put a card on top of their library

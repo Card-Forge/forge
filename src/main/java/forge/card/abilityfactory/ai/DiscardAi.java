@@ -21,7 +21,7 @@ import forge.util.MyRandom;
 public class DiscardAi extends SpellAiLogic {
 
     @Override
-    public boolean canPlayAI(Player ai, Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, Map<String,String> params, SpellAbility sa) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
         final Cost abCost = sa.getPayCosts();

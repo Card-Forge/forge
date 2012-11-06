@@ -9,7 +9,7 @@ import forge.game.player.Player;
 public class RemoveFromCombatAi extends SpellAiLogic {
     
     @Override
-    public boolean canPlayAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa) {
         // disabled for the AI for now. Only for Gideon Jura at this time.
         return false;
     }

@@ -24,7 +24,7 @@ public class EndTurnAi extends SpellAiLogic  {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public boolean canPlayAI(Player aiPlayer, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, Map<String, String> params, SpellAbility sa) {
         return false;
     }
 }

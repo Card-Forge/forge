@@ -110,7 +110,7 @@ public class ProtectAi extends SpellAiLogic {
     } // getProtectCreatures()
 
     @Override
-    public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         final Card hostCard = sa.getAbilityFactory().getHostCard();
         // if there is no target and host card isn't in play, don't activate
         if ((sa.getTarget() == null) && !hostCard.isInPlay()) {

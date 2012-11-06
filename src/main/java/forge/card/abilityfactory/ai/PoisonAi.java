@@ -26,7 +26,7 @@ public class PoisonAi extends SpellAiLogic {
      * forge.card.spellability.SpellAbility)
      */
     @Override
-    public boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
         // int humanPoison = AllZone.getHumanPlayer().getPoisonCounters();

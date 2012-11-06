@@ -11,7 +11,7 @@ import forge.game.player.Player;
 public class StoreSVarAi extends SpellAiLogic {
     
     @Override
-    public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         //Tree of Redemption
 
         final Card source = sa.getSourceCard();

@@ -79,7 +79,7 @@ public class ComputerUtilAttack {
 
         this.attackers = new ArrayList<Card>();
         for(Card c : computerList) 
-            if (CombatUtil.canAttack(c, human))
+            if (CombatUtil.canAttack(c, (GameEntity)human))
                 attackers.add(c);
         
         this.blockers = this.getPossibleBlockers(humanList, this.attackers);

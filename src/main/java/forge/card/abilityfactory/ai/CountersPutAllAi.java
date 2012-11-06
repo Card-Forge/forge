@@ -23,8 +23,8 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 public class CountersPutAllAi extends SpellAiLogic { 
-    @Override 
-    public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    @Override
+    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what
         // the expected targets could be

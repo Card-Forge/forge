@@ -24,7 +24,7 @@ public class TapAllAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public boolean canPlayAI(final Player ai, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(final Player ai, Map<String, String> params, SpellAbility sa) {
         // If tapping all creatures do it either during declare attackers of AIs
         // turn
         // or during upkeep/begin combat?

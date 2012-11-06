@@ -22,7 +22,7 @@ import forge.util.MyRandom;
 
 public class EffectAi extends SpellAiLogic {
     @Override
-    public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         final GameState game = Singletons.getModel().getGame();
         final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= .6667;

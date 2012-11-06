@@ -20,7 +20,7 @@ public class SacrificeAi extends SpellAiLogic {
     // **************************************************************
 
     @Override
-    public boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
         boolean chance = sacrificeTgtAI(ai, params, sa);
 
         // Some additional checks based on what is being sacrificed, and who is

@@ -16,7 +16,7 @@ public class RestartGameAi extends SpellAiLogic {
      * forge.card.spellability.SpellAbility)
      */
     @Override
-    public boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
         // The only card that uses this is Karn Liberated
         
         // TODO Add Logic, check if AI is losing game state, or life

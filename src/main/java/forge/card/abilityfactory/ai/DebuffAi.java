@@ -28,7 +28,7 @@ public class DebuffAi extends SpellAiLogic {
     // *************************************************************************
 
     @Override
-    public boolean canPlayAI(final Player ai, final java.util.Map<String,String> params, final SpellAbility sa) {
+    protected boolean canPlayAI(final Player ai, final java.util.Map<String,String> params, final SpellAbility sa) {
         // if there is no target and host card isn't in play, don't activate
         final Card source = sa.getSourceCard();
         if ((sa.getTarget() == null) && !source.isInPlay()) {

@@ -22,7 +22,7 @@ public class ControlExchangeAi extends SpellAiLogic {
  * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
  */
     @Override
-    public boolean canPlayAI(Player ai, Map<String, String> params, final SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, Map<String, String> params, final SpellAbility sa) {
         Card object1 = null;
         Card object2 = null;
         final Target tgt = sa.getTarget();
