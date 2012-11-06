@@ -32,7 +32,7 @@ import forge.card.mana.ManaCost;
  * @author Forge
  * @version $Id$
  */
-public class CardColor implements Iterable<Color>{
+public class CardColor implements Iterable<Color> {
     /* (non-Javadoc)
      * @see java.lang.Iterable#iterator()
      */
@@ -137,7 +137,7 @@ public class CardColor implements Iterable<Color>{
      * @return a boolean.
      */
     public final void addToCardColor(final String[] ss) {
-        for( String s : ss ) { 
+        for (String s : ss) {
             final Color c = Color.convertFromString(s);
             if (!this.col.contains(c)) {
                 this.col.add(c);
@@ -146,13 +146,13 @@ public class CardColor implements Iterable<Color>{
     }
 
     public final void addToCardColor(final Iterable<Color> cc) {
-        for( Color c : cc ) { 
+        for (Color c : cc) {
             if (!this.col.contains(c)) {
                 this.col.add(c);
             }
         }
-    }    
-    
+    }
+
     /**
      * <p>
      * fixColorless.
@@ -207,12 +207,12 @@ public class CardColor implements Iterable<Color>{
         }
         return list;
     }
-    
+
     public final List<String> toStringList() {
         final List<String> list = new ArrayList<String>(this.col.size());
         for (final Color c : this.col) {
             list.add(c.toString());
         }
         return list;
-    }    
+    }
 }
