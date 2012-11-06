@@ -24,7 +24,7 @@ public class DrawEffect extends SpellEffect {
             sb.append(conditionDesc).append(" ");
         }
     
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getDefinedPlayersBeforeTargetOnes(sa, params);
     
     
         if (!tgtPlayers.isEmpty()) {
@@ -68,7 +68,7 @@ public class DrawEffect extends SpellEffect {
         final boolean optional = params.containsKey("OptionalDecider");
         final boolean slowDraw = params.containsKey("NextUpkeep");
 
-        for (final Player p : getTargetPlayers(sa, params)) {
+        for (final Player p : getDefinedPlayersBeforeTargetOnes(sa, params)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (optional) {
                     if (p.isComputer()) {

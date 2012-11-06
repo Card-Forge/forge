@@ -83,19 +83,29 @@ import forge.game.player.Player;
         }
 
         protected List<Player> getTargetPlayers(SpellAbility sa, final Map<String, String> params) {
-            return getTargetPlayers(sa, params, false);
+            return getTargetPlayers(sa, params, false, true);
         }
 
         protected List<Player> getTargetPlayersEmptyAsDefault(SpellAbility sa, final Map<String, String> params) {
-            return getTargetPlayers(sa, params, true);
+            return getTargetPlayers(sa, params, true, true);
+        }
+
+        protected List<Player> getDefinedPlayersBeforeTargetOnes(SpellAbility sa, final Map<String, String> params) {
+            return getTargetPlayers(sa, params, false, false);
         }
         
+        // Each AF used its own preference in choosing target players: 
+        // Some checked target first and params["Defined"] then - @see targetIsPreferred
+        // Some wanted empty list when params["Defined"] was not set - @see wantEmptyAsDefault
+        // Poor me had to gather it all in a single place
         private final static List<Player> emptyPlayerList = Collections.unmodifiableList(new ArrayList<Player>());
-        private List<Player> getTargetPlayers(SpellAbility sa, final Map<String, String> params, final boolean wantEmptyAsDefault) {
+        private List<Player> getTargetPlayers(SpellAbility sa, final Map<String, String> params, final boolean wantEmptyAsDefault, final boolean targetIsPreferred) {
             final Target tgt = sa.getTarget();
             final String defined = params.get("Defined");
-            if ( tgt != null ) return tgt.getTargetPlayers();
-            if ( StringUtils.isEmpty(defined) && wantEmptyAsDefault ) return emptyPlayerList;
+            if ( tgt != null && ( targetIsPreferred || ( StringUtils.isEmpty(defined) && !wantEmptyAsDefault ) ) ) 
+                return tgt.getTargetPlayers();
+            if ( StringUtils.isEmpty(defined) && wantEmptyAsDefault ) 
+                return emptyPlayerList;
             return AbilityFactory.getDefinedPlayers(sa.getSourceCard(), defined, sa);
         }
         
