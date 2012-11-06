@@ -749,11 +749,12 @@ public final class GuiDisplayUtil {
         Collections.sort(cards);
         
         // use standard forge's list selection dialog
-        final ListChooser<CardPrinted> c = new ListChooser<CardPrinted>("Name the card", 0, 1, cards);
-        if (c.show()) {
-            Card forgeCard = c.getSelectedValue().toForgeCard(p);
-            Singletons.getModel().getGame().getAction().moveToHand(forgeCard);
-        }
+        final CardPrinted c = GuiChoose.oneOrNone("Name the card", cards);
+        if (c == null) return;
+        
+        Card forgeCard = c.toForgeCard(p);
+        Singletons.getModel().getGame().getAction().moveToHand(forgeCard);
+
     }
 
     public static void devModeCardToBattlefield() {
@@ -765,22 +766,23 @@ public final class GuiDisplayUtil {
         Collections.sort(cards);
 
         // use standard forge's list selection dialog
-        final ListChooser<CardPrinted> c = new ListChooser<CardPrinted>("Name the card", 0, 1, cards);
-        if (c.show()) {
-            Card forgeCard = c.getSelectedValue().toForgeCard(p);
-            
-            final List<SpellAbility> choices = forgeCard.getBasicSpells();
-            if (choices.isEmpty()) return; // when would it happen?
+        final CardPrinted c = GuiChoose.oneOrNone("Name the card", cards);
+        if (c == null) return;
+        
+        Card forgeCard = c.toForgeCard(p);
+        
+        final List<SpellAbility> choices = forgeCard.getBasicSpells();
+        if (choices.isEmpty()) return; // when would it happen?
 
-            final SpellAbility sa = choices.size() == 1 ? choices.get(0) : GuiChoose.oneOrNone("Choose", choices); 
-            if (sa == null) return; // happends if cancelled
+        final SpellAbility sa = choices.size() == 1 ? choices.get(0) : GuiChoose.oneOrNone("Choose", choices); 
+        if (sa == null) return; // happens if cancelled
 
-            sa.setActivatingPlayer(p);
+        sa.setActivatingPlayer(p);
 
-            final GameState game = Singletons.getModel().getGame();
-            game.getAction().moveToHand(forgeCard); // this is really needed
-            game.getAction().playSpellAbilityForFree(sa);
-        }
+        final GameState game = Singletons.getModel().getGame();
+        game.getAction().moveToHand(forgeCard); // this is really needed
+        game.getAction().playSpellAbilityForFree(sa);
+
         
     }    
 

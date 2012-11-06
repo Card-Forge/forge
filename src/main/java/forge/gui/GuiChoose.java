@@ -171,7 +171,7 @@ public class GuiChoose {
      * @return a {@link java.util.List} object.
      */
     private static <T> List<T> getChoices(final String message, final int min, final int max, final T[] choices) {
-        final ListChooser<T> c = new ListChooser<T>(message, min, max, choices);
+        final ListChooser<T> c = new ListChooser<T>(message, null, min, max, choices);
         return getChoices(c);
     }
 

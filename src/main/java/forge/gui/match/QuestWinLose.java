@@ -544,7 +544,7 @@ public class QuestWinLose extends ControlWinLose {
                 i++;
             }
 
-            final ListChooser<GameFormat> ch = new ListChooser<GameFormat>("Choose bonus booster format", 1, formats);
+            final ListChooser<GameFormat> ch = new ListChooser<GameFormat>("Choose bonus booster format", 1, 1, formats);
             ch.show(index);
 
             final GameFormat selected = ch.getSelectedValue();

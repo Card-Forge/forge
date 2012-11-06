@@ -83,87 +83,6 @@ public class ListChooser<T> {
     private JOptionPane optionPane;
     private Action ok, cancel;
 
-    /**
-     * <p>
-     * Constructor for ListChooser.
-     * </p>
-     * 
-     * @param title
-     *            a {@link java.lang.String} object.
-     * @param list
-     *            a T object.
-     */
-    public ListChooser(final String title, final T[] list) {
-        this(title, 1, list);
-    }
-
-    /**
-     * <p>
-     * Constructor for ListChooser.
-     * </p>
-     * 
-     * @param title
-     *            a {@link java.lang.String} object.
-     * @param numChoices
-     *            a int.
-     * @param list
-     *            a T object.
-     */
-    public ListChooser(final String title, final int numChoices, final T[] list) {
-        this(title, numChoices, numChoices, list);
-    }
-
-    /**
-     * <p>
-     * Constructor for ListChooser.
-     * </p>
-     * 
-     * @param title
-     *            a {@link java.lang.String} object.
-     * @param minChoices
-     *            a int.
-     * @param maxChoices
-     *            a int.
-     * @param list
-     *            a T object.
-     */
-    public ListChooser(final String title, final int minChoices, final int maxChoices, final T[] list) {
-        this(title, null, minChoices, maxChoices, list);
-    }
-
-    /**
-     * <p>
-     * Constructor for ListChooser.
-     * </p>
-     * 
-     * @param title
-     *            a {@link java.lang.String} object.
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param list
-     *            a T object.
-     */
-    public ListChooser(final String title, final String message, final T[] list) {
-        this(title, message, 1, list);
-    }
-
-    /**
-     * <p>
-     * Constructor for ListChooser.
-     * </p>
-     * 
-     * @param title
-     *            a {@link java.lang.String} object.
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param numChoices
-     *            a int.
-     * @param list
-     *            a T object.
-     */
-    public ListChooser(final String title, final String message, final int numChoices, final T[] list) {
-        this(title, message, numChoices, numChoices, list);
-    }
 
     /**
      * <p>
@@ -193,36 +112,6 @@ public class ListChooser<T> {
      * 
      * @param title
      *            a {@link java.lang.String} object.
-     * @param list
-     *            a {@link java.util.List} object.
-     */
-    public ListChooser(final String title, final List<T> list) {
-        this(title, 1, list);
-    }
-
-    /**
-     * <p>
-     * Constructor for ListChooser.
-     * </p>
-     * 
-     * @param title
-     *            a {@link java.lang.String} object.
-     * @param numChoices
-     *            a int.
-     * @param list
-     *            a {@link java.util.List} object.
-     */
-    public ListChooser(final String title, final int numChoices, final Collection<T> list) {
-        this(title, numChoices, numChoices, list);
-    }
-
-    /**
-     * <p>
-     * Constructor for ListChooser.
-     * </p>
-     * 
-     * @param title
-     *            a {@link java.lang.String} object.
      * @param minChoices
      *            a int.
      * @param maxChoices
@@ -232,40 +121,6 @@ public class ListChooser<T> {
      */
     public ListChooser(final String title, final int minChoices, final int maxChoices, final Collection<T> list) {
         this(title, null, minChoices, maxChoices, list);
-    }
-
-    /**
-     * <p>
-     * Constructor for ListChooser.
-     * </p>
-     * 
-     * @param title
-     *            a {@link java.lang.String} object.
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param list
-     *            a {@link java.util.List} object.
-     */
-    public ListChooser(final String title, final String message, final Collection<T> list) {
-        this(title, message, 1, list);
-    }
-
-    /**
-     * <p>
-     * Constructor for ListChooser.
-     * </p>
-     * 
-     * @param title
-     *            a {@link java.lang.String} object.
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param numChoices
-     *            a int.
-     * @param list
-     *            a {@link java.util.List} object.
-     */
-    public ListChooser(final String title, final String message, final int numChoices, final Collection<T> list) {
-        this(title, message, numChoices, numChoices, list);
     }
 
     /**
