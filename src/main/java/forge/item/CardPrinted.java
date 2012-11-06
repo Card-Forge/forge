@@ -20,9 +20,6 @@ package forge.item;
 import java.util.Arrays;
 import java.util.List;
 
-
-import org.apache.commons.lang3.ArrayUtils;
-
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
@@ -445,7 +442,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
         }
 
         private static class PredicateNamesExcept extends PredicateString<CardPrinted> {
-            private final String[] operand;
+            private final List<String> operand;
 
             @Override
             public boolean apply(final CardPrinted card) {
@@ -460,7 +457,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
 
             public PredicateNamesExcept(final List<String> operand) {
                 super(StringOp.EQUALS);
-                this.operand = operand.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
+                this.operand = operand;
             }
         }
 

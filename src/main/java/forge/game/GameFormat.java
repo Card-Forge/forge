@@ -32,15 +32,15 @@ import forge.item.CardPrinted;
  * TODO: Write javadoc for this type.
  * 
  */
-public final class GameFormat {
+public class GameFormat {
 
     private final String name;
     // contains allowed sets, when empty allows all sets
-    private final List<String> allowedSetCodes;
-    private final List<String> bannedCardNames;
+    protected final List<String> allowedSetCodes;
+    protected final List<String> bannedCardNames;
 
-    private final Predicate<CardPrinted> filterRules;
-    private final Predicate<CardPrinted> filterPrinted;
+    protected final transient Predicate<CardPrinted> filterRules;
+    protected final transient Predicate<CardPrinted> filterPrinted;
 
     /**
      * Instantiates a new game format.

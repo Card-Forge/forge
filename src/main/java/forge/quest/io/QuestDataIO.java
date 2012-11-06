@@ -28,6 +28,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
@@ -407,25 +408,24 @@ public class QuestDataIO {
         @Override
         public Object unmarshal(final HierarchicalStreamReader reader, final UnmarshallingContext context) {
             reader.moveDown();
-            GameFormatQuest format = new GameFormatQuest(reader.getAttribute("name"));
+            String name = reader.getAttribute("name");
+            List<String> allowedSets = new ArrayList<String>();
+            List<String> bannedCards = new ArrayList<String>();
             reader.moveUp();
             while (reader.hasMoreChildren()) {
                 reader.moveDown();
                 final String nodename = reader.getNodeName();
                 if (nodename.equals("ban")) {
-                    String toBan = reader.getAttribute("s");
-                    format.addBannedCard(toBan);
+                    bannedCards.add(reader.getAttribute("s"));
                     // System.out.println("Added + " + toBan + " to banned cards");
                 }
                 else if (nodename.equals("set")) {
-                    String toSets = reader.getAttribute("s");
-                    format.addAllowedSet(toSets);
+                    allowedSets.add(reader.getAttribute("s"));
                     // System.out.println("Added + " + toSets + " to legal sets");
                 }
                 reader.moveUp();
             }
-            format.updateFilters();
-            return format;
+            return new GameFormatQuest(name, allowedSets, bannedCards);
         }
     }
 

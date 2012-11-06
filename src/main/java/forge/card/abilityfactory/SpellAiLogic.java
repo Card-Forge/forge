@@ -36,6 +36,5 @@ public abstract class SpellAiLogic {
     }
     
     // consider safe
-    @SuppressWarnings("unused") // 'unused' parameters are used by overloads
     public boolean chkAIDrawback(final Map<String, String> params, final SpellAbility sa, final Player aiPlayer) { return true; }
 }

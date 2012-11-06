@@ -21,7 +21,6 @@ import forge.game.player.Player;
     public abstract class SpellEffect {
         
         public abstract void resolve(final Map<String, String> params, final SpellAbility sa);
-        @SuppressWarnings("unused")
         protected String getStackDescription(final Map<String, String> params, final SpellAbility sa) {
             // Unless overriden, let the spell description also be the stack description
             return sa.getDescription();
