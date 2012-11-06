@@ -52,13 +52,9 @@ public enum CDev implements ICDoc {
         public void mousePressed(final MouseEvent e) {
             GuiDisplayUtil.devModeTutor(); } };
 
-    private final MouseListener madAddAnyCard = new MouseAdapter() { @Override
+    private final MouseListener madCardToHand = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            GuiDisplayUtil.devModeAddAnyCard(); } };
-
-    private final MouseListener madGiveAnyCard = new MouseAdapter() { @Override
-        public void mousePressed(final MouseEvent e) {
-            GuiDisplayUtil.devModeGiveAnyCard(); } };
+            GuiDisplayUtil.devModeCardToHand(); } };
 
     private final MouseListener madCounter = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
@@ -76,6 +72,11 @@ public enum CDev implements ICDoc {
         public void mousePressed(final MouseEvent e) {
             GuiDisplayUtil.devModeSetLife(); } };
 
+    private final MouseListener madCardToBattlefield = new MouseAdapter() { @Override
+        public void mousePressed(final MouseEvent e) {
+            GuiDisplayUtil.devModeCardToBattlefield(); } };
+            
+            
     private final MouseListener madBreakpoint = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
             GuiDisplayUtil.devModeBreakpoint(); } };
@@ -100,13 +101,13 @@ public enum CDev implements ICDoc {
         VDev.SINGLETON_INSTANCE.getLblGenerateMana().addMouseListener(madMana);
         VDev.SINGLETON_INSTANCE.getLblSetupGame().addMouseListener(madSetup);
         VDev.SINGLETON_INSTANCE.getLblTutor().addMouseListener(madTutor);
-        VDev.SINGLETON_INSTANCE.getAnyCard().addMouseListener(madAddAnyCard);
-        VDev.SINGLETON_INSTANCE.getLblGiveCard().addMouseListener(madGiveAnyCard);
+        VDev.SINGLETON_INSTANCE.getLblCardToHand().addMouseListener(madCardToHand);
         VDev.SINGLETON_INSTANCE.getLblCounterPermanent().addMouseListener(madCounter);
         VDev.SINGLETON_INSTANCE.getLblTapPermanent().addMouseListener(madTap);
         VDev.SINGLETON_INSTANCE.getLblUntapPermanent().addMouseListener(madUntap);
         VDev.SINGLETON_INSTANCE.getLblSetLife().addMouseListener(madLife);
         VDev.SINGLETON_INSTANCE.getLblBreakpoint().addMouseListener(madBreakpoint);
+        VDev.SINGLETON_INSTANCE.getLblCardToBattlefield().addMouseListener(madCardToBattlefield);
 
         ForgePreferences prefs = Singletons.getModel().getPreferences();
         

@@ -34,6 +34,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
+import com.google.common.collect.Lists;
+
 import forge.Card;
 import forge.CardCharacteristicName;
 
@@ -42,7 +44,9 @@ import forge.Constant;
 import forge.Counters;
 import forge.Singletons;
 import forge.card.spellability.AbilityManaPart;
+import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -626,54 +630,6 @@ public final class GuiDisplayUtil {
 
     /**
      * <p>
-     * devModeTutorAnyCard.
-     * </p>
-     * 
-     * @since 1.2.7
-     */
-    public static void devModeAddAnyCard() {
-        final Iterable<CardPrinted> uniqueCards = CardDb.instance().getAllUniqueCards();
-        final List<String> cards = new ArrayList<String>();
-        for (final CardPrinted c : uniqueCards) {
-            cards.add(c.getName());
-        }
-        Collections.sort(cards);
-
-        // use standard forge's list selection dialog
-        final ListChooser<String> c = new ListChooser<String>("Name the card", 0, 1, cards);
-        if (c.show()) {
-            CardPrinted cp = CardDb.instance().getCard(c.getSelectedValue());
-            Card forgeCard = cp.toForgeCard(Singletons.getControl().getPlayer());
-            Singletons.getModel().getGame().getAction().moveToHand(forgeCard);
-        }
-    }
-
-    /**
-     * <p>
-     * devModeGiveAnyCard. (any card to AI hand)
-     * </p>
-     * 
-     * @since 1.2.7
-     */
-    public static void devModeGiveAnyCard() {
-        final Iterable<CardPrinted> uniqueCards = CardDb.instance().getAllUniqueCards();
-        final List<String> cards = new ArrayList<String>();
-        for (final CardPrinted c : uniqueCards) {
-            cards.add(c.getName());
-        }
-        Collections.sort(cards);
-
-        // use standard forge's list selection dialog
-        final ListChooser<String> c = new ListChooser<String>("Name the card", 0, 1, cards);
-        if (c.show()) {
-            CardPrinted cp = CardDb.instance().getCard(c.getSelectedValue());
-            Card forgeCard = cp.toForgeCard(Singletons.getControl().getPlayer().getOpponent());
-            Singletons.getModel().getGame().getAction().moveToHand(forgeCard);
-        }
-    }
-
-    /**
-     * <p>
      * devModeAddCounter.
      * </p>
      * 
@@ -776,6 +732,57 @@ public final class GuiDisplayUtil {
             }
         }
     }
+    
+    /**
+     * <p>
+     * devModeTutorAnyCard.
+     * </p>
+     * 
+     * @since 1.2.7
+     */
+    public static void devModeCardToHand() {
+        final List<Player> players = Singletons.getModel().getGame().getPlayers();
+        final Player p = GuiChoose.oneOrNone("Put card in play for which player?", players);
+        if (null == p) return;
+
+        final List<CardPrinted> cards =  Lists.newArrayList(CardDb.instance().getAllUniqueCards());
+        Collections.sort(cards);
+        
+        // use standard forge's list selection dialog
+        final ListChooser<CardPrinted> c = new ListChooser<CardPrinted>("Name the card", 0, 1, cards);
+        if (c.show()) {
+            Card forgeCard = c.getSelectedValue().toForgeCard(p);
+            Singletons.getModel().getGame().getAction().moveToHand(forgeCard);
+        }
+    }
+
+    public static void devModeCardToBattlefield() {
+        final List<Player> players = Singletons.getModel().getGame().getPlayers();
+        final Player p = GuiChoose.oneOrNone("Put card in play for which player?", players);
+        if (null == p) return;
+
+        final List<CardPrinted> cards =  Lists.newArrayList(CardDb.instance().getAllUniqueCards());
+        Collections.sort(cards);
+
+        // use standard forge's list selection dialog
+        final ListChooser<CardPrinted> c = new ListChooser<CardPrinted>("Name the card", 0, 1, cards);
+        if (c.show()) {
+            Card forgeCard = c.getSelectedValue().toForgeCard(p);
+            
+            final List<SpellAbility> choices = forgeCard.getBasicSpells();
+            if (choices.isEmpty()) return; // when would it happen?
+
+            final SpellAbility sa = choices.size() == 1 ? choices.get(0) : GuiChoose.oneOrNone("Choose", choices); 
+            if (sa == null) return; // happends if cancelled
+
+            sa.setActivatingPlayer(p);
+
+            final GameState game = Singletons.getModel().getGame();
+            game.getAction().moveToHand(forgeCard); // this is really needed
+            game.getAction().playSpellAbilityForFree(sa);
+        }
+        
+    }    
 
     public static void devModeBreakpoint() {
         List<Player> Players = Singletons.getModel().getGame().getPlayers();

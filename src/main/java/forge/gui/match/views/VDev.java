@@ -72,8 +72,8 @@ public enum VDev implements IVDoc<CDev> {
     private final DevLabel lblTapPermanent = new DevLabel("Tap Permanent");
     private final DevLabel lblUntapPermanent = new DevLabel("Untap Permanent");
     private final DevLabel lblSetLife = new DevLabel("Set Player Life");
-    private final DevLabel lblAddCard = new DevLabel("Add any card");
-    private final DevLabel lblGiveCard = new DevLabel("Give any card to AI");
+    private final DevLabel lblCardToBattlefield = new DevLabel("Add card to play");
+    private final DevLabel lblCardToHand = new DevLabel("Add card to hand");
     private final DevLabel lblBreakpoint = new DevLabel("Trigger breakpoint");
 
     //========= Constructor
@@ -84,8 +84,8 @@ public enum VDev implements IVDoc<CDev> {
         devLBLs.add(lblGenerateMana);
         devLBLs.add(lblSetupGame);
         devLBLs.add(lblTutor);
-        devLBLs.add(lblAddCard);
-        devLBLs.add(lblGiveCard);
+        devLBLs.add(lblCardToHand);
+        devLBLs.add(lblCardToBattlefield);
         devLBLs.add(lblCounterPermanent);
         devLBLs.add(lblTapPermanent);
         devLBLs.add(lblUntapPermanent);
@@ -103,8 +103,8 @@ public enum VDev implements IVDoc<CDev> {
         viewport.add(this.lblGenerateMana, constraints);
         viewport.add(this.lblSetupGame, constraints);
         viewport.add(this.lblTutor, constraints);
-        viewport.add(this.lblAddCard, constraints);
-        viewport.add(this.lblGiveCard, constraints);
+        viewport.add(this.lblCardToHand, constraints);
+        viewport.add(this.lblCardToBattlefield, constraints);
         viewport.add(this.lblCounterPermanent, constraints);
         viewport.add(this.lblTapPermanent, constraints);
         viewport.add(this.lblUntapPermanent, constraints);
@@ -186,13 +186,13 @@ public enum VDev implements IVDoc<CDev> {
     }
 
     /** @return {@link forge.gui.match.views.VDev.DevLabel} */
-    public DevLabel getAnyCard() {
-        return this.lblAddCard;
+    public DevLabel getLblCardToHand() {
+        return this.lblCardToHand;
     }
-
+    
     /** @return {@link forge.gui.match.views.VDev.DevLabel} */
-    public DevLabel getLblGiveCard() {
-        return this.lblGiveCard;
+    public final DevLabel getLblCardToBattlefield() {
+        return lblCardToBattlefield;
     }
 
     /** @return {@link forge.gui.match.views.VDev.DevLabel} */
