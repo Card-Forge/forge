@@ -522,7 +522,7 @@ public class ChangeZoneEffect extends SpellEffect {
                 decider = player;
             }
             if (decider.isComputer()) {
-                ChangeZoneAi.changeHiddenOriginResolveAI(decider, params, sa, player);
+                ChangeZoneAi.hiddenOriginResolveAI(decider, params, sa, player);
             } else {
                 changeHiddenOriginResolveHuman(params, sa, player);
             }

@@ -62,9 +62,9 @@ public class ChangeZoneAi extends SpellAiLogic {
         }
 
         if (ZoneType.isHidden(origin, params.containsKey("Hidden"))) {
-            return changeHiddenOriginCanPlayAI(aiPlayer, params, sa);
+            return hiddenOriginCanPlayAI(aiPlayer, params, sa);
         } else if (ZoneType.isKnown(origin)) {
-            return changeKnownOriginCanPlayAI(aiPlayer, params, sa);
+            return knownOriginCanPlayAI(aiPlayer, params, sa);
         }
 
         return false;
@@ -89,9 +89,9 @@ public class ChangeZoneAi extends SpellAiLogic {
         }
 
         if (ZoneType.isHidden(origin, params.containsKey("Hidden"))) {
-            return changeHiddenOriginPlayDrawbackAI(aiPlayer, params, sa);
+            return hiddenOriginPlayDrawbackAI(aiPlayer, params, sa);
         } else if (ZoneType.isKnown(origin)) {
-            return changeKnownOriginPlayDrawbackAI(aiPlayer, params, sa);
+            return knownOriginPlayDrawbackAI(aiPlayer, params, sa);
         }
 
         return false;
@@ -120,9 +120,9 @@ public class ChangeZoneAi extends SpellAiLogic {
         }
 
         if (ZoneType.isHidden(origin, params.containsKey("Hidden"))) {
-            return changeHiddenTriggerAI(aiPlayer, params, sa, mandatory);
+            return hiddenTriggerAI(aiPlayer, params, sa, mandatory);
         } else if (ZoneType.isKnown(origin)) {
-            return changeKnownOriginTriggerAI(aiPlayer, params, sa, mandatory);
+            return knownOriginTriggerAI(aiPlayer, params, sa, mandatory);
         }
 
         return false;
@@ -154,7 +154,7 @@ public class ChangeZoneAi extends SpellAiLogic {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean changeHiddenOriginCanPlayAI(final Player ai, final Map<String, String> params, final SpellAbility sa) {
+    private static boolean hiddenOriginCanPlayAI(final Player ai, final Map<String, String> params, final SpellAbility sa) {
         // Fetching should occur fairly often as it helps cast more spells, and
         // have access to more mana
         final Cost abCost = sa.getAbilityFactory().getAbCost();
@@ -306,7 +306,7 @@ public class ChangeZoneAi extends SpellAiLogic {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean changeHiddenOriginPlayDrawbackAI(final Player aiPlayer, Map<String,String> params, final SpellAbility sa) {
+    private static boolean hiddenOriginPlayDrawbackAI(final Player aiPlayer, Map<String,String> params, final SpellAbility sa) {
         // if putting cards from hand to library and parent is drawing cards
         // make sure this will actually do something:
         final Target tgt = sa.getTarget();
@@ -338,7 +338,7 @@ public class ChangeZoneAi extends SpellAiLogic {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean changeHiddenTriggerAI(final Player ai, final Map<String,String> params, final SpellAbility sa, final boolean mandatory) {
+    private static boolean hiddenTriggerAI(final Player ai, final Map<String,String> params, final SpellAbility sa, final boolean mandatory) {
         // Fetching should occur fairly often as it helps cast more spells, and
         // have access to more mana
 
@@ -404,11 +404,6 @@ public class ChangeZoneAi extends SpellAiLogic {
             if (list.isEmpty()) {
                 return false;
             }
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            return subAb.doTrigger(mandatory);
         }
 
         return true;
@@ -528,7 +523,7 @@ public class ChangeZoneAi extends SpellAiLogic {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean changeKnownOriginCanPlayAI(final Player ai, final Map<String,String> params, final SpellAbility sa) {
+    private static boolean knownOriginCanPlayAI(final Player ai, final Map<String,String> params, final SpellAbility sa) {
         // Retrieve either this card, or target Cards in Graveyard
         final Cost abCost = sa.getAbilityFactory().getAbCost();
         final Card source = sa.getSourceCard();
@@ -562,7 +557,7 @@ public class ChangeZoneAi extends SpellAiLogic {
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
-            if (!changeKnownPreferredTarget(ai, params, sa, false)) {
+            if (!isPreferredTarget(ai, params, sa, false)) {
                 return false;
             }
         } else {
@@ -645,12 +640,12 @@ public class ChangeZoneAi extends SpellAiLogic {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean changeKnownOriginPlayDrawbackAI(final Player aiPlayer, final Map<String,String> params, final SpellAbility sa) {
+    private static boolean knownOriginPlayDrawbackAI(final Player aiPlayer, final Map<String,String> params, final SpellAbility sa) {
         if (sa.getTarget() == null) {
             return true;
         }
 
-        return changeKnownPreferredTarget(aiPlayer, params, sa, false);
+        return isPreferredTarget(aiPlayer, params, sa, false);
     }
 
     /**
@@ -666,7 +661,7 @@ public class ChangeZoneAi extends SpellAiLogic {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean changeKnownPreferredTarget(final Player ai, final Map<String,String> params, final SpellAbility sa,
+    private static boolean isPreferredTarget(final Player ai, final Map<String,String> params, final SpellAbility sa,
             final boolean mandatory) {
         final Card source = sa.getSourceCard();
         final ZoneType origin = ZoneType.listValueOf(params.get("Origin")).get(0);
@@ -908,7 +903,7 @@ public class ChangeZoneAi extends SpellAiLogic {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean changeKnownUnpreferredTarget(final Player ai, final Map<String,String> params, final SpellAbility sa,
+    private static boolean isUnpreferredTarget(final Player ai, final Map<String,String> params, final SpellAbility sa,
             final boolean mandatory) {
         if (!mandatory) {
             return false;
@@ -1006,6 +1001,44 @@ public class ChangeZoneAi extends SpellAiLogic {
 
     /**
      * <p>
+     * changeKnownOriginTriggerAI.
+     * </p>
+     * 
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mandatory
+     *            a boolean.
+     * @return a boolean.
+     */
+    private static boolean knownOriginTriggerAI(final Player ai, final Map<String,String> params, final SpellAbility sa,
+            final boolean mandatory) {
+
+        if (sa.getTarget() == null) {
+            // Just in case of Defined cases
+            if (!mandatory && params.containsKey("AttachedTo")) {
+                final ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(),
+                        params.get("AttachedTo"), sa);
+                if (!list.isEmpty()) {
+                    final Card attachedTo = list.get(0);
+                    // This code is for the Dragon auras
+                    if (attachedTo.getController().isHuman()) {
+                        return false;
+                    }
+                }
+            }
+        } else if (isPreferredTarget(ai, params, sa, mandatory)) {
+            // do nothing
+        } else if (!isUnpreferredTarget(ai, params, sa, mandatory)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * <p>
      * changeHiddenOriginResolveAI.
      * </p>
      * 
@@ -1016,7 +1049,7 @@ public class ChangeZoneAi extends SpellAiLogic {
      * @param player
      *            a {@link forge.game.player.Player} object.
      */
-    public static void changeHiddenOriginResolveAI(final Player ai, final Map<String,String> params, final SpellAbility sa, Player player) {
+    public static void hiddenOriginResolveAI(final Player ai, final Map<String,String> params, final SpellAbility sa, Player player) {
         final Target tgt = sa.getTarget();
         final Card card = sa.getSourceCard();
         final boolean defined = params.containsKey("Defined");
@@ -1263,51 +1296,5 @@ public class ChangeZoneAi extends SpellAiLogic {
             }
         }
     } // end changeHiddenOriginResolveAI
-
-    /**
-     * <p>
-     * changeKnownOriginTriggerAI.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mandatory
-     *            a boolean.
-     * @return a boolean.
-     */
-    private static boolean changeKnownOriginTriggerAI(final Player ai, final Map<String,String> params, final SpellAbility sa,
-            final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa, ai)) {
-            return false;
-        }
-
-        if (sa.getTarget() == null) {
-            // Just in case of Defined cases
-            if (!mandatory && params.containsKey("AttachedTo")) {
-                final ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(),
-                        params.get("AttachedTo"), sa);
-                if (!list.isEmpty()) {
-                    final Card attachedTo = list.get(0);
-                    // This code is for the Dragon auras
-                    if (attachedTo.getController().isHuman()) {
-                        return false;
-                    }
-                }
-            }
-        } else if (changeKnownPreferredTarget(ai, params, sa, mandatory)) {
-            // do nothing
-        } else if (!changeKnownUnpreferredTarget(ai, params, sa, mandatory)) {
-            return false;
-        }
-
-        final AbilitySub subAb = sa.getSubAbility();
-        if (subAb != null) {
-            return subAb.doTrigger(mandatory);
-        }
-
-        return true;
-    }
 
 }
