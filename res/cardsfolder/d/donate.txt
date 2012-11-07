@@ -2,6 +2,11 @@ Name:Donate
 ManaCost:2 U
 Types:Sorcery
 Text:no text
+A:SP$ Pump | Cost$ 2 U | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ D1 | SpellDescription$ Target player gains control of target permanent you control. | StackDescription$ None
+SVar:D1:DB$ Pump | RememberObjects$ Targeted | Static$ True | SubAbility$ D2 | StackDescription$ None
+SVar:D2:DB$ Pump | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control | SubAbility$ D3 | StackDescription$ None
+SVar:D3:DB$ GainControl | Defined$ Targeted | NewController$ Remembered | SubAbility$ D4
+SVar:D4:DB$ Cleanup | ClearRemembered$ True
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/donate.jpg

@@ -509,66 +509,6 @@ public class CardFactorySorceries {
         }; 
     }
 
-    private final static SpellAbility getDonate( final Card card ) {
-        final Target t2 = new Target(card, "Select target Player", "Player".split(","));
-        class DrawbackDonate extends AbilitySub {
-            public DrawbackDonate(final Card ca, final Target t) {
-                super(ca, t);
-            }
-
-            @Override
-            public AbilitySub getCopy() {
-                AbilitySub res = new DrawbackDonate(getSourceCard(),
-                        getTarget() == null ? null : new Target(getTarget()));
-                CardFactoryUtil.copySpellAbility(this, res);
-                return res;
-            }
-
-            private static final long serialVersionUID = 4618047889933691050L;
-
-            @Override
-            public boolean chkAIDrawback() {
-                return false;
-            }
-
-            @Override
-            public void resolve() {
-                final Card permanent = this.getParent().getTargetCard();
-                final Player player = this.getTargetPlayer();
-                permanent.addController(player);
-            }
-
-            @Override
-            public boolean doTrigger(final boolean b) {
-                return false;
-            }
-        }
-        final AbilitySub sub = new DrawbackDonate(card, t2);
-
-        final Cost abCost = new Cost(card, "2 U", false);
-        final Target t1 = new Target(card, "Select target permanent", "Permanent".split(","));
-        final SpellAbility spell = new Spell(card, abCost, t1) {
-            private static final long serialVersionUID = 8964235802256739219L;
-
-            @Override
-            public boolean canPlayAI() {
-                return false;
-            }
-
-            @Override
-            public void resolve() {
-                sub.resolve();
-            }
-        };
-
-        spell.setSubAbility(sub);
-
-        final StringBuilder sbDesc = new StringBuilder();
-        sbDesc.append("Target player gains control of target permanent you control.");
-        spell.setDescription(sbDesc.toString());
-        return spell;
-    }
-
     private final static void balanceLands(Spell card)
     {
         List<List<Card>> lands = new ArrayList<List<Card>>();
@@ -1441,7 +1381,6 @@ public class CardFactorySorceries {
         } else if (cardName.equals("Parallel Evolution")) { card.addSpellAbility(getParralelEvolution(card));
         } else if (cardName.equals("Global Ruin")) { card.addSpellAbility(getGlobalRuin(card));
         } else if (cardName.equals("Haunting Echoes")) { card.addSpellAbility(getHauntingEchoes(card));
-        } else if (cardName.equals("Donate")) { card.addSpellAbility(getDonate(card));
         } else if (cardName.equals("Balance")) { card.addSpellAbility(getBalance(card));
         } else if (cardName.equals("Summer Bloom")) { card.addSpellAbility(getSummerBloom(card));
         } else if (cardName.equals("Explore")) { card.addSpellAbility(getExplore(card));
