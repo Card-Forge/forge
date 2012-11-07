@@ -65,10 +65,16 @@ public class StaticAbilityCostChange {
         }
 
         if (params.containsKey("Type")) {
-            if (params.get("Type").equals("Spell") && !sa.isSpell()) {
-                return originalCost;
-            }
-            if (params.get("Type").equals("Ability") && !(sa instanceof AbilityActivated)) {
+            if (params.get("Type").equals("Spell")) {
+                if (!sa.isSpell()) {
+                    return originalCost;
+                }
+            } else if (params.get("Type").equals("Ability")) {
+                if (!(sa instanceof AbilityActivated)) {
+                    return originalCost;
+                }
+            } else if (params.get("Type").equals("NonManaAbility")
+                    && (!(sa instanceof AbilityActivated) || null != sa.getManaPart())) {
                 return originalCost;
             }
         }
