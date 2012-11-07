@@ -79,9 +79,10 @@ public class CardDamageHistory {
      *            a boolean.
      */
     public final void setCreatureAttackedLastTurnOf(final Player p, boolean value) {
-        if ( value && !creatureAttackedLastTurnOf.contains(p) )
+        if (value && !creatureAttackedLastTurnOf.contains(p)) {
             creatureAttackedLastTurnOf.add(p);
-        while ( !value && creatureAttackedLastTurnOf.remove(p)) {} // remove should return false once no player is found in collection
+        }
+        while (!value && creatureAttackedLastTurnOf.remove(p)) { } // remove should return false once no player is found in collection
     }
     /**
      * <p>
@@ -197,8 +198,9 @@ public class CardDamageHistory {
      * @param player
      */
     public void registerCombatDamage(Player player) {
-        if ( !damagedThisTurnInCombat.contains(player) )
+        if (!damagedThisTurnInCombat.contains(player)) {
             damagedThisTurnInCombat.add(player);
+        }
     }
     /**
      * TODO: Write javadoc for this method.
@@ -212,8 +214,9 @@ public class CardDamageHistory {
      * @param player
      */
     public void registerDamage(Player player) {
-        if ( !damagedThisTurn.contains(player) )
-            damagedThisTurn.add(player);        
+        if (!damagedThisTurn.contains(player)) {
+            damagedThisTurn.add(player);
+        }
     }
 
 }
