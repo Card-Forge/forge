@@ -336,7 +336,7 @@ public class ComputerUtilAttack {
             if (!CombatUtil.canAttackNextTurn(attacker)) {
                 continue;
             }
-            if (CombatUtil.canBeBlocked(attacker) && blockersLeft > 0) {
+            if (blockersLeft > 0 && CombatUtil.canBeBlocked(attacker)) {
                 blockersLeft--;
                 continue;
             }
@@ -872,13 +872,9 @@ public class ComputerUtilAttack {
      * @return a boolean.
      */
     public final boolean shouldAttack(final Player ai, final Card attacker, final List<Card> defenders, final Combat combat) {
-        boolean canBeKilledByOne = false; // indicates if the attacker can be
-                                          // killed by a single blocker
-        boolean canKillAll = true; // indicates if the attacker can kill all
-                                   // single blockers
-        boolean canKillAllDangerous = true; // indicates if the attacker can
-                                            // kill all single blockers with
-                                            // wither or infect
+        boolean canBeKilledByOne = false; // indicates if the attacker can be killed by a single blocker
+        boolean canKillAll = true; // indicates if the attacker can kill all single blockers
+        boolean canKillAllDangerous = true; // indicates if the attacker can kill all single blockers with wither or infect
         boolean isWorthLessThanAllKillers = true;
         boolean canBeBlocked = false;
         int numberOfPossibleBlockers = 0;
@@ -887,7 +883,8 @@ public class ComputerUtilAttack {
             return false;
         }
         boolean hasAttackEffect = attacker.getSVar("HasAttackEffect").equals("TRUE") || attacker.hasStartOfKeyword("Annihilator");
-        boolean hasCombatEffect = attacker.getSVar("HasCombatEffect").equals("TRUE"); // is there a gain in attacking even when the blocker is not killed (Lifelink, Wither,...)
+        // is there a gain in attacking even when the blocker is not killed (Lifelink, Wither,...)
+        boolean hasCombatEffect = attacker.getSVar("HasCombatEffect").equals("TRUE");
         if (!hasCombatEffect) {
             for (String keyword : attacker.getKeyword()) {
                 if (keyword.equals("Wither") || keyword.equals("Infect") || keyword.equals("Lifelink") ) {
@@ -902,9 +899,11 @@ public class ComputerUtilAttack {
         // context that will be relevant to the attackers decision according to
         // the selected strategy
         for (final Card defender : defenders) {
-            if (CombatUtil.canBlock(attacker, defender)) { 
+            // if both isWorthLessThanAllKillers and canKillAllDangerous are false there's nothing more to check
+            if ((isWorthLessThanAllKillers || canKillAllDangerous || numberOfPossibleBlockers < 2) 
+                    && CombatUtil.canBlock(attacker, defender)) { 
                 numberOfPossibleBlockers += 1;
-                if (CombatUtil.canDestroyAttacker(attacker, defender, combat, false)
+                if (isWorthLessThanAllKillers && CombatUtil.canDestroyAttacker(attacker, defender, combat, false)
                         && !(attacker.hasKeyword("Undying") && attacker.getCounters(Counters.P1P1) == 0)) {
                     canBeKilledByOne = true; // there is a single creature on
                                              // the battlefield that can kill
@@ -918,7 +917,7 @@ public class ComputerUtilAttack {
                 }
                 // see if this attacking creature can destroy this defender, if
                 // not record that it can't kill everything
-                if (!CombatUtil.canDestroyBlocker(defender, attacker, combat, false)) {
+                if (canKillAllDangerous && !CombatUtil.canDestroyBlocker(defender, attacker, combat, false)) {
                     canKillAll = false;
                     if (!canKillAllDangerous) {
                         continue;
