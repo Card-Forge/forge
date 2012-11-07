@@ -47,6 +47,10 @@ import forge.GameEntity;
 import forge.Singletons;
 import forge.card.CardCharacteristics;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.CommonAbility;
+import forge.card.abilityfactory.CommonDrawback;
+import forge.card.abilityfactory.SpellEffect;
+import forge.card.abilityfactory.ai.CanPlayAsDrawbackAi;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCostShard;
 import forge.card.replacement.ReplacementEffect;
@@ -4374,54 +4378,15 @@ public class CardFactoryUtil {
             tailend = tailend.getSubAbility();
         }
 
-        class ETBReplacementMove extends AbilitySub {
-            private static final long serialVersionUID = 704771599662730112L;
-
-            /**
-             * TODO: Write javadoc for Constructor.
-             * @param sourceCard
-             *         the source card
-             * @param tgt
-             *         the target
-             */
-            public ETBReplacementMove(Card sourceCard, Target tgt) {
-                super(sourceCard, tgt);
-            }
-
+        class ETBReplacementEffect extends SpellEffect {
             @Override
-            public void resolve() {
-                forge.Singletons.getModel().getGame().getAction().moveToPlay(((Card) this.getReplacingObject("Card")));
+            public void resolve(Map<String, String> params, SpellAbility sa) {
+                forge.Singletons.getModel().getGame().getAction().moveToPlay(((Card) sa.getReplacingObject("Card")));
             }
-
-            /* (non-Javadoc)
-             * @see forge.card.spellability.AbilitySub#chkAIDrawback()
-             */
-            @Override
-            public boolean chkAIDrawback() {
-                return true;
-            }
-
-            /* (non-Javadoc)
-             * @see forge.card.spellability.AbilitySub#getCopy()
-             */
-            @Override
-            public AbilitySub getCopy() {
-                // TODO Auto-generated method stub
-                return new ETBReplacementMove(getSourceCard(), null);
-            }
-
-            /* (non-Javadoc)
-             * @see forge.card.spellability.AbilitySub#doTrigger(boolean)
-             */
-            @Override
-            public boolean doTrigger(boolean mandatory) {
-                // TODO Auto-generated method stub
-                return false;
-            }
-
         }
 
-        tailend.setSubAbility(new ETBReplacementMove(sa.getSourceCard(), null));
+        tailend.setSubAbility(new CommonDrawback(sa.getSourceCard(), null, null, new ETBReplacementEffect(), new CanPlayAsDrawbackAi()));
+        // ETBReplacementMove(sa.getSourceCard(), null));
     }
 
     /**

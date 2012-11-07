@@ -26,7 +26,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Target;
 
-class CommonDrawback extends AbilitySub {
+public class CommonDrawback extends AbilitySub {
         private final SpellEffect effect;
         private final SpellAiLogic ai;
         private final Map<String, String> params;
