@@ -180,7 +180,7 @@ public class ManaEffect extends SpellEffect {
         }
     
         for (final Player player : tgtPlayers) {
-            abMana.produceMana(generatedMana(params, sa), player);
+            abMana.produceMana(generatedMana(params, sa), player, sa);
         }
     
         // Only clear express choice after mana has been produced

@@ -144,7 +144,7 @@ public final class GuiDisplayUtil {
         Map<String, String> produced = new HashMap<String, String>();
         produced.put("Produced", "W W W W W W W U U U U U U U B B B B B B B G G G G G G G R R R R R R R 7");
         final AbilityManaPart abMana = new AbilityManaPart(dummy, "0", produced);
-        abMana.produceMana();
+        abMana.produceMana(null);
     }
 
     /**

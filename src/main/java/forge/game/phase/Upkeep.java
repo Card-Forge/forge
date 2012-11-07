@@ -145,9 +145,9 @@ public class Upkeep extends Phase implements java.io.Serializable {
                     produced.put("Produced", rs.toString());
                     final AbilityManaPart abMana = new AbilityManaPart(c, "0", produced);
                     if (player.isComputer()) {
-                        abMana.produceMana();
+                        abMana.produceMana(this);
                     } else if (GameActionUtil.showYesNoDialog(c, sb.toString())) {
-                        abMana.produceMana();
+                        abMana.produceMana(this);
                     } else {
                         Singletons.getModel().getGame().getAction().sacrifice(c, null);
                     }

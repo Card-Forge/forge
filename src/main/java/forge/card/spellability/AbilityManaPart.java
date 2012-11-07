@@ -99,9 +99,10 @@ public class AbilityManaPart implements java.io.Serializable {
      * <p>
      * produceMana.
      * </p>
+     * @param ability 
      */
-    public final void produceMana() {
-        this.produceMana(this.getManaProduced(), this.getSourceCard().getController());
+    public final void produceMana(SpellAbility sa) {
+        this.produceMana(this.getManaProduced(), this.getSourceCard().getController(), sa);
     }
 
     /**
@@ -113,8 +114,9 @@ public class AbilityManaPart implements java.io.Serializable {
      *            a {@link java.lang.String} object.
      * @param player
      *            a {@link forge.game.player.Player} object.
+     * @param sa 
      */
-    public final void produceMana(final String produced, final Player player) {
+    public final void produceMana(final String produced, final Player player, SpellAbility sa) {
         final Card source = this.getSourceCard();
         final ManaPool manaPool = player.getManaPool();
         // change this, once ManaPool moves to the Player
@@ -159,7 +161,7 @@ public class AbilityManaPart implements java.io.Serializable {
 
         runParams.put("Card", source);
         runParams.put("Player", player);
-        runParams.put("AbilityMana", this);
+        runParams.put("AbilityMana", sa);
         runParams.put("Produced", produced);
         Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.TapsForMana, runParams);
 

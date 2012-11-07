@@ -39,7 +39,7 @@ public class ManaReflectedEffect extends SpellEffect {
                 return;
             }
     
-            ma.produceMana(generated, player);
+            ma.produceMana(generated, player, sa);
         }
     
         resolveDrawback(sa);
