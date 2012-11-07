@@ -6949,6 +6949,7 @@ res/cardsfolder/o/overgrown_battlement.txt svneol=native#text/plain
 res/cardsfolder/o/overgrown_estate.txt svneol=native#text/plain
 res/cardsfolder/o/overgrown_tomb.txt svneol=native#text/plain
 res/cardsfolder/o/overgrowth.txt svneol=native#text/plain
+res/cardsfolder/o/overlaid_terrain.txt -text
 res/cardsfolder/o/overload.txt -text svneol=unset#text/plain
 res/cardsfolder/o/overmaster.txt -text
 res/cardsfolder/o/override.txt svneol=native#text/plain
@@ -9656,6 +9657,7 @@ res/cardsfolder/s/summer_bloom.txt svneol=native#text/plain
 res/cardsfolder/s/summit_apes.txt -text
 res/cardsfolder/s/summon_the_school.txt svneol=native#text/plain
 res/cardsfolder/s/summoners_bane.txt svneol=native#text/plain
+res/cardsfolder/s/summoners_egg.txt -text
 res/cardsfolder/s/summoners_pact.txt svneol=native#text/plain
 res/cardsfolder/s/summoning_station.txt svneol=native#text/plain
 res/cardsfolder/s/sun_ce_young_conquerer.txt svneol=native#text/plain
