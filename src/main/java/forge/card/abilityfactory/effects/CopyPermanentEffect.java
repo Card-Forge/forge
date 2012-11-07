@@ -2,8 +2,9 @@ package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
 import forge.CardCharacteristicName;
@@ -27,13 +28,7 @@ public class CopyPermanentEffect extends SpellEffect {
         final List<Card> tgtCards = getTargetCards(sa, params);
 
         sb.append("Copy ");
-        final Iterator<Card> it = tgtCards.iterator();
-        while (it.hasNext()) {
-            sb.append(it.next());
-            if (it.hasNext()) {
-                sb.append(", ");
-            }
-        }
+        sb.append(StringUtils.join(tgtCards, ", "));
         sb.append(".");
         return sb.toString();
     }
@@ -48,14 +43,8 @@ public class CopyPermanentEffect extends SpellEffect {
         final int numCopies = params.containsKey("NumCopies") ? AbilityFactory.calculateAmount(hostCard,
                 params.get("NumCopies"), sa) : 1;
 
-        ArrayList<Card> tgtCards;
-
+        final List<Card> tgtCards = getTargetCards(sa, params);
         final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtCards = tgt.getTargetCards();
-        } else {
-            tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
-        }
 
         hostCard.clearClones();
 
@@ -71,8 +60,7 @@ public class CopyPermanentEffect extends SpellEffect {
                 }
 
                 // start copied Kiki code
-                int multiplier = hostCard.getController().getTokenDoublersMagnitude();
-                multiplier *= numCopies;
+                int multiplier = numCopies * hostCard.getController().getTokenDoublersMagnitude();
                 final Card[] crds = new Card[multiplier];
 
                 for (int i = 0; i < multiplier; i++) {

@@ -3296,28 +3296,29 @@ public class CardFactoryUtil {
     public static List<Card> copyTokens(final List<Card> tokenList) {
         final List<Card> list = new ArrayList<Card>();
 
-        for (int tokenAdd = 0; tokenAdd < tokenList.size(); tokenAdd++) {
-            final Card thisToken = tokenList.get(tokenAdd);
-
-            final ArrayList<String> tal = thisToken.getType();
-            final String[] tokenTypes = new String[tal.size()];
-            tal.toArray(tokenTypes);
-
-            final List<String> kal = thisToken.getIntrinsicKeyword();
-            final String[] tokenKeywords = new String[kal.size()];
-            kal.toArray(tokenKeywords);
-            final List<Card> tokens = CardFactoryUtil.makeToken(thisToken.getName(), thisToken.getImageName(),
-                    thisToken.getController(), thisToken.getManaCost().toString(), tokenTypes, thisToken.getBaseAttack(),
-                    thisToken.getBaseDefense(), tokenKeywords);
-
-            for (final Card token : tokens) {
-                token.setColor(thisToken.getColor());
-            }
-
-            list.addAll(tokens);
+        for (Card thisToken : tokenList) {
+            list.addAll(copySingleToken(thisToken));
         }
 
         return list;
+    }
+
+    public static List<Card> copySingleToken(Card thisToken) {
+        final ArrayList<String> tal = thisToken.getType();
+        final String[] tokenTypes = new String[tal.size()];
+        tal.toArray(tokenTypes);
+
+        final List<String> kal = thisToken.getIntrinsicKeyword();
+        final String[] tokenKeywords = new String[kal.size()];
+        kal.toArray(tokenKeywords);
+        final List<Card> tokens = CardFactoryUtil.makeToken(thisToken.getName(), thisToken.getImageName(),
+                thisToken.getController(), thisToken.getManaCost().toString(), tokenTypes, thisToken.getBaseAttack(),
+                thisToken.getBaseDefense(), tokenKeywords);
+
+        for (final Card token : tokens) {
+            token.setColor(thisToken.getColor());
+        }
+        return tokens;
     }
 
     /**
