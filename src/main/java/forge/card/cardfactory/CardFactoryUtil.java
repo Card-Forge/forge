@@ -47,7 +47,6 @@ import forge.GameEntity;
 import forge.Singletons;
 import forge.card.CardCharacteristics;
 import forge.card.abilityfactory.AbilityFactory;
-import forge.card.abilityfactory.CommonAbility;
 import forge.card.abilityfactory.CommonDrawback;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.abilityfactory.ai.CanPlayAsDrawbackAi;
@@ -59,7 +58,6 @@ import forge.card.replacement.ReplacementLayer;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityStatic;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
@@ -2261,13 +2259,11 @@ public class CardFactoryUtil {
         //  Count$TargetedLifeTotal (targeted player's life total)
         if (sq[0].contains("TargetedLifeTotal")) {
             for (final SpellAbility sa : c.getCharacteristics().getSpellAbility()) {
-                final SpellAbility parent = AbilityFactory.findParentsTargetedPlayer(sa);
-                if (parent != null) {
-                    if (parent.getTarget() != null) {
-                        for (final Object tgtP : parent.getTarget().getTargetPlayers()) {
-                            if (tgtP instanceof Player) {
-                                return CardFactoryUtil.doXMath(((Player) tgtP).getLife(), m, c);
-                            }
+                final SpellAbility parent = sa.getParentTargetingPlayer();
+                if (parent.getTarget() != null) {
+                    for (final Object tgtP : parent.getTarget().getTargetPlayers()) {
+                        if (tgtP instanceof Player) {
+                            return CardFactoryUtil.doXMath(((Player) tgtP).getLife(), m, c);
                         }
                     }
                 }
@@ -2702,7 +2698,7 @@ public class CardFactoryUtil {
         //  Count$InTargetedHand (targeted player's cards in hand)
         if (sq[0].contains("InTargetedHand")) {
             for (final SpellAbility sa : c.getCharacteristics().getSpellAbility()) {
-                final SpellAbility parent = AbilityFactory.findParentsTargetedPlayer(sa);
+                final SpellAbility parent = sa.getParentTargetingPlayer();
                 if (parent != null) {
                     if (parent.getTarget() != null) {
                         for (final Object tgtP : parent.getTarget().getTargetPlayers()) {

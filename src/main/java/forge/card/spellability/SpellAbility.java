@@ -1549,25 +1549,6 @@ public abstract class SpellAbility {
 
     /**
      * <p>
-     * getRootSpellAbility.
-     * </p>
-     * 
-     * @return a {@link forge.card.spellability.SpellAbility} object.
-     * @since 1.0.15
-     */
-    public final SpellAbility getRootSpellAbility() {
-        if (this instanceof AbilitySub) {
-            final SpellAbility parent = ((AbilitySub) this).getParent();
-            if (parent != null) {
-                return parent.getRootSpellAbility();
-            }
-        }
-
-        return this;
-    }
-
-    /**
-     * <p>
      * getAllTargetChoices.
      * </p>
      * 
@@ -1577,7 +1558,7 @@ public abstract class SpellAbility {
     public final ArrayList<TargetChoices> getAllTargetChoices() {
         final ArrayList<TargetChoices> res = new ArrayList<TargetChoices>();
 
-        SpellAbility sa = this.getRootSpellAbility();
+        SpellAbility sa = this.getRootAbility();
         if (sa.getTarget() != null) {
             res.add(sa.getTarget().getTargetChoices());
         }
@@ -1781,4 +1762,78 @@ public abstract class SpellAbility {
         return ret;
     }
 
+    /**
+     * <p>
+     * findRootAbility.
+     * </p>
+     * 
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public SpellAbility getRootAbility() {
+        SpellAbility parent = this;
+        while (null != parent.getParent()) {
+            parent = parent.getParent();
+        }
+    
+        return parent;
+    }
+
+    public SpellAbility getParent() {
+        return null;
+    }
+
+    /**
+     * <p>
+     * findParentsTargetedCard.
+     * </p>
+     * 
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public SpellAbility getParentTargetingCard() {
+        SpellAbility parent = this;
+    
+        while( parent.getParent() != null)
+        {
+            Target tgt = parent.getTarget();
+            if ( tgt != null && tgt.getTargetCards() != null && !tgt.getTargetCards().isEmpty() ) break;
+            parent = parent.getParent();
+        }
+        return parent;
+    }
+
+    /**
+     * <p>
+     * findParentsTargetedSpellAbility.
+     * </p>
+     * 
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public SpellAbility getParentTargetingSA() {
+        SpellAbility parent = this;
+        while( parent.getParent() != null)
+        {
+            Target tgt = parent.getTarget();
+            if ( tgt != null && tgt.getTargetSAs() != null && !tgt.getTargetSAs().isEmpty() ) break;
+            parent = parent.getParent();
+        }
+        return parent;
+    }
+
+    /**
+     * <p>
+     * findParentsTargetedPlayer.
+     * </p>
+     * 
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public SpellAbility getParentTargetingPlayer() {
+        SpellAbility parent = this;
+        while( parent.getParent() != null)
+        {
+            Target tgt = parent.getTarget();
+            if ( tgt != null && tgt.getTargetPlayers() != null && !tgt.getTargetPlayers().isEmpty() ) break;
+            parent = parent.getParent();
+        }
+        return parent;
+    }    
 }

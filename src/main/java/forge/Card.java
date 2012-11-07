@@ -6402,14 +6402,12 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.equals("TargetedPlayerCtrl")) {
             for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
-                final SpellAbility parent = AbilityFactory.findParentsTargetedPlayer(sa);
-                if (parent != null) {
-                    if (parent.getTarget() != null) {
-                        for (final Object o : parent.getTarget().getTargetPlayers()) {
-                            if (o instanceof Player) {
-                                if (!this.getController().equals(o)) {
-                                    return false;
-                                }
+                final SpellAbility parent = sa.getParentTargetingPlayer();
+                if (parent.getTarget() != null) {
+                    for (final Object o : parent.getTarget().getTargetPlayers()) {
+                        if (o instanceof Player) {
+                            if (!this.getController().equals(o)) {
+                                return false;
                             }
                         }
                     }
@@ -6651,7 +6649,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 } if (restriction.equals("Enchanted")) {
                     for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
-                        final SpellAbility root = AbilityFactory.findRootAbility(sa);
+                        final SpellAbility root = sa.getRootAbility();
                         Card c = source.getEnchantingCard();
                         if ((c == null) && (root != null)
                             && (root.getPaidList("Sacrificed") != null)

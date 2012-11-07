@@ -432,7 +432,7 @@ public class CostExile extends CostPartWithList {
 
                 for (int i = 0; i < Singletons.getModel().getGame().getStack().size(); i++) {
                     final Card stC = Singletons.getModel().getGame().getStack().peekAbility(i).getSourceCard();
-                    final SpellAbility stSA = Singletons.getModel().getGame().getStack().peekAbility(i).getRootSpellAbility();
+                    final SpellAbility stSA = Singletons.getModel().getGame().getStack().peekAbility(i).getRootAbility();
                     if (stC.isValid(type.split(";"), sa.getActivatingPlayer(), sa.getSourceCard()) && stSA.isSpell()) {
                         this.saList.add(stSA);
                         if (stC.isCopiedSpell()) {

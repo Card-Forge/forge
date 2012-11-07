@@ -52,7 +52,7 @@ public class StoreSVarEffect extends SpellEffect {
 
         source.setSVar(key, numBuilder.toString());
         
-        SpellAbility root = sa.getRootSpellAbility();
+        SpellAbility root = sa.getRootAbility();
         while(root != null) {
             root.setSVar(key, numBuilder.toString());
             root = root.getSubAbility();

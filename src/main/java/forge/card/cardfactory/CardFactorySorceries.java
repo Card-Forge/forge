@@ -41,7 +41,6 @@ import forge.Command;
 import forge.Constant;
 import forge.Singletons;
 import forge.card.cost.Cost;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;

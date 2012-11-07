@@ -2809,7 +2809,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      */
     public boolean couldCastSorcery(final SpellAbility sa) {
 
-        final Card source = sa.getRootSpellAbility().getSourceCard();
+        final Card source = sa.getRootAbility().getSourceCard();
         boolean onlyThis = true;
 
         for (final Card card : game.getCardsIn(ZoneType.Stack)) {

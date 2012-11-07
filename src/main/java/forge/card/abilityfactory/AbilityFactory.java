@@ -745,8 +745,7 @@ public class AbilityFactory {
                 // Player attribute counting
                 if (calcX[0].startsWith("TargetedPlayer")) {
                     final ArrayList<Player> players = new ArrayList<Player>();
-                    final SpellAbility saTargeting = (ability.getTarget() == null) ? AbilityFactory
-                            .findParentsTargetedPlayer(ability) : ability;
+                    final SpellAbility saTargeting = (ability.getTarget() == null) ? ability.getParentTargetingPlayer() : ability;
                     if (saTargeting.getTarget() != null) {
                         players.addAll(saTargeting.getTarget().getTargetPlayers());
                     } else {
@@ -757,8 +756,7 @@ public class AbilityFactory {
                 }
                 if (calcX[0].startsWith("TargetedObjects")) {
                     final ArrayList<Object> objects = new ArrayList<Object>();
-                    final SpellAbility saTargeting = (ability.getTarget() == null) ? AbilityFactory
-                            .findParentsTargetedPlayer(ability) : ability;
+                    final SpellAbility saTargeting = (ability.getTarget() == null) ? ability.getParentTargetingPlayer() : ability;
                     if (saTargeting.getTarget() != null) {
                         objects.addAll(saTargeting.getTarget().getTargets());
                     } else {
@@ -788,7 +786,7 @@ public class AbilityFactory {
                     return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
                 }
                 if (calcX[0].startsWith("TriggeredPlayer")) {
-                    final SpellAbility root = ability.getRootSpellAbility();
+                    final SpellAbility root = ability.getRootAbility();
                     Object o = root.getTriggeringObject("Player");
                     final ArrayList<Player> players = new ArrayList<Player>();
                     if (o instanceof Player) {
@@ -807,38 +805,39 @@ public class AbilityFactory {
 
                 List<Card> list = new ArrayList<Card>();
                 if (calcX[0].startsWith("Sacrificed")) {
-                    list = AbilityFactory.findRootAbility(ability).getPaidList("Sacrificed");
+                    list = ability.getRootAbility().getPaidList("Sacrificed");
                 } else if (calcX[0].startsWith("Discarded")) {
-                    final SpellAbility root = AbilityFactory.findRootAbility(ability);
+                    final SpellAbility root = ability.getRootAbility();
                     list = root.getPaidList("Discarded");
                     if ((null == list) && root.isTrigger()) {
                         list = root.getSourceCard().getSpellPermanent().getPaidList("Discarded");
                     }
                 } else if (calcX[0].startsWith("Exiled")) {
-                    list = AbilityFactory.findRootAbility(ability).getPaidList("Exiled");
+                    list = ability.getRootAbility().getPaidList("Exiled");
                 } else if (calcX[0].startsWith("Tapped")) {
-                    list = AbilityFactory.findRootAbility(ability).getPaidList("Tapped");
+                    list = ability.getRootAbility().getPaidList("Tapped");
                 } else if (calcX[0].startsWith("Revealed")) {
-                    list = AbilityFactory.findRootAbility(ability).getPaidList("Revealed");
+                    list = ability.getRootAbility().getPaidList("Revealed");
                 } else if (calcX[0].startsWith("Targeted")) {
                     final Target t = ability.getTarget();
                     if (null != t) {
                         final ArrayList<Object> all = t.getTargets();
+                        list = new ArrayList<Card>();
                         if (!all.isEmpty() && (all.get(0) instanceof SpellAbility)) {
-                            final SpellAbility saTargeting = AbilityFactory.findParentsTargetedSpellAbility(ability);
-                            list = new ArrayList<Card>();
+                            final SpellAbility saTargeting = ability.getParentTargetingSA();
+                            // possible NPE on next line
                             final ArrayList<SpellAbility> sas = saTargeting.getTarget().getTargetSAs();
                             for (final SpellAbility sa : sas) {
                                 list.add(sa.getSourceCard());
                             }
                         } else {
-                            final SpellAbility saTargeting = AbilityFactory.findParentsTargetedCard(ability);
-                            list = new ArrayList<Card>(saTargeting.getTarget().getTargetCards());
+                            final SpellAbility saTargeting = ability.getParentTargetingCard();
+                            if ( null != saTargeting.getTarget() )
+                                list.addAll(saTargeting.getTarget().getTargetCards());
                         }
                     } else {
-                        final SpellAbility parent = AbilityFactory.findParentsTargetedCard(ability);
-
-                        if (parent != null) {
+                        final SpellAbility parent = ability.getParentTargetingCard();
+                        if (parent.getTarget() != null) {
                             final ArrayList<Object> all = parent.getTarget().getTargets();
                             if (!all.isEmpty() && (all.get(0) instanceof SpellAbility)) {
                                 list = new ArrayList<Card>();
@@ -847,32 +846,31 @@ public class AbilityFactory {
                                     list.add(sa.getSourceCard());
                                 }
                             } else {
-                                final SpellAbility saTargeting = AbilityFactory.findParentsTargetedCard(ability);
-                                list = new ArrayList<Card>(saTargeting.getTarget().getTargetCards());
+                                list = new ArrayList<Card>(parent.getTarget().getTargetCards());
                             }
                         }
                     }
                 } else if (calcX[0].startsWith("Triggered")) {
-                    final SpellAbility root = ability.getRootSpellAbility();
+                    final SpellAbility root = ability.getRootAbility();
                     list = new ArrayList<Card>();
                     list.add((Card) root.getTriggeringObject(calcX[0].substring(9)));
                 } else if (calcX[0].startsWith("TriggerCount")) {
                     // TriggerCount is similar to a regular Count, but just
                     // pulls Integer Values from Trigger objects
-                    final SpellAbility root = ability.getRootSpellAbility();
+                    final SpellAbility root = ability.getRootAbility();
                     final String[] l = calcX[1].split("/");
                     final String[] m = CardFactoryUtil.parseMath(l);
                     final int count = (Integer) root.getTriggeringObject(l[0]);
 
                     return CardFactoryUtil.doXMath(count, m, card) * multiplier;
                 } else if (calcX[0].startsWith("Replaced")) {
-                    final SpellAbility root = ability.getRootSpellAbility();
+                    final SpellAbility root = ability.getRootAbility();
                     list = new ArrayList<Card>();
                     list.add((Card) root.getReplacingObject(calcX[0].substring(8)));
                 } else if (calcX[0].startsWith("ReplaceCount")) {
                     // ReplaceCount is similar to a regular Count, but just
                     // pulls Integer Values from Replacement objects
-                    final SpellAbility root = ability.getRootSpellAbility();
+                    final SpellAbility root = ability.getRootAbility();
                     final String[] l = calcX[1].split("/");
                     final String[] m = CardFactoryUtil.parseMath(l);
                     final int count = (Integer) root.getReplacingObject(l[0]);
@@ -962,10 +960,10 @@ public class AbilityFactory {
 
         else if (defined.equals("Enchanted")) {
             c = hostCard.getEnchantingCard();
-            if ((c == null) && (AbilityFactory.findRootAbility(sa) != null)
-                    && (AbilityFactory.findRootAbility(sa).getPaidList("Sacrificed") != null)
-                    && !AbilityFactory.findRootAbility(sa).getPaidList("Sacrificed").isEmpty()) {
-                c = AbilityFactory.findRootAbility(sa).getPaidList("Sacrificed").get(0).getEnchantingCard();
+            if ((c == null) && (sa.getRootAbility() != null)
+                    && (sa.getRootAbility().getPaidList("Sacrificed") != null)
+                    && !sa.getRootAbility().getPaidList("Sacrificed").isEmpty()) {
+                c = sa.getRootAbility().getPaidList("Sacrificed").get(0).getEnchantingCard();
             }
         }
 
@@ -980,14 +978,13 @@ public class AbilityFactory {
         }
 
         else if (defined.equals("Targeted")) {
-            final SpellAbility parent = AbilityFactory.findParentsTargetedCard(sa);
-            if (parent != null) {
-                if (parent.getTarget() != null && parent.getTarget().getTargetCards() != null) {
-                    cards.addAll(parent.getTarget().getTargetCards());
-                }
+            final SpellAbility parent = sa.getParentTargetingCard();
+            if (parent.getTarget() != null && parent.getTarget().getTargetCards() != null) {
+                cards.addAll(parent.getTarget().getTargetCards());
             }
+
         } else if (defined.startsWith("Triggered") && (sa != null)) {
-            final SpellAbility root = sa.getRootSpellAbility();
+            final SpellAbility root = sa.getRootAbility();
             if (defined.contains("LKICopy")) { //TriggeredCardLKICopy
                 final Object crd = root.getTriggeringObject(defined.substring(9, 13));
                 if (crd instanceof Card) {
@@ -1006,7 +1003,7 @@ public class AbilityFactory {
                 }
             }
         } else if (defined.startsWith("Replaced") && (sa != null)) {
-            final SpellAbility root = sa.getRootSpellAbility();
+            final SpellAbility root = sa.getRootAbility();
             final Object crd = root.getReplacingObject(defined.substring(8));
             if (crd instanceof Card) {
                 c = Singletons.getModel().getGame().getCardState((Card) crd);
@@ -1057,19 +1054,19 @@ public class AbilityFactory {
         } else {
             List<Card> list = null;
             if (defined.startsWith("Sacrificed")) {
-                list = AbilityFactory.findRootAbility(sa).getPaidList("Sacrificed");
+                list = sa.getRootAbility().getPaidList("Sacrificed");
             }
 
             else if (defined.startsWith("Discarded")) {
-                list = AbilityFactory.findRootAbility(sa).getPaidList("Discarded");
+                list = sa.getRootAbility().getPaidList("Discarded");
             }
 
             else if (defined.startsWith("Exiled")) {
-                list = AbilityFactory.findRootAbility(sa).getPaidList("Exiled");
+                list = sa.getRootAbility().getPaidList("Exiled");
             }
 
             else if (defined.startsWith("Tapped")) {
-                list = AbilityFactory.findRootAbility(sa).getPaidList("Tapped");
+                list = sa.getRootAbility().getPaidList("Tapped");
             }
 
             else {
@@ -1106,11 +1103,9 @@ public class AbilityFactory {
         final String defined = (def == null) ? "You" : def;
 
         if (defined.equals("Targeted")) {
-            final SpellAbility parent = AbilityFactory.findParentsTargetedPlayer(sa);
-            if (parent != null) {
-                if (parent.getTarget() != null) {
-                    players.addAll(parent.getTarget().getTargetPlayers());
-                }
+            final SpellAbility parent = sa.getParentTargetingPlayer();
+            if (parent.getTarget() != null) {
+                players.addAll(parent.getTarget().getTargetPlayers());
             }
         } else if (defined.equals("TargetedController")) {
             final ArrayList<Card> list = AbilityFactory.getDefinedCards(card, "Targeted", sa);
@@ -1150,7 +1145,7 @@ public class AbilityFactory {
                 }
             }
         } else if (defined.startsWith("Triggered")) {
-            final SpellAbility root = sa.getRootSpellAbility();
+            final SpellAbility root = sa.getRootAbility();
             Object o = null;
             if (defined.endsWith("Controller")) {
                 String triggeringType = defined.substring(9);
@@ -1192,7 +1187,7 @@ public class AbilityFactory {
                 }
             }
         } else if (defined.startsWith("Replaced")) {
-            final SpellAbility root = sa.getRootSpellAbility();
+            final SpellAbility root = sa.getRootAbility();
             Object o = null;
             if (defined.endsWith("Controller")) {
                 String replacingType = defined.substring(8);
@@ -1314,14 +1309,12 @@ public class AbilityFactory {
         if (defined.equals("Self")) {
             s = sa;
         } else if (defined.equals("Targeted")) {
-            final SpellAbility parent = AbilityFactory.findParentsTargetedSpellAbility(sa);
-            if (parent != null) {
-                if (parent.getTarget() != null) {
-                    sas.addAll(parent.getTarget().getTargetSAs());
-                }
+            final SpellAbility parent = sa.getParentTargetingSA();
+            if (parent.getTarget() != null) {
+                sas.addAll(parent.getTarget().getTargetSAs());
             }
         } else if (defined.startsWith("Triggered")) {
-            final SpellAbility root = sa.getRootSpellAbility();
+            final SpellAbility root = sa.getRootAbility();
 
             final String triggeringType = defined.substring(9);
             final Object o = root.getTriggeringObject(triggeringType);
@@ -1350,7 +1343,7 @@ public class AbilityFactory {
                 imprintedCards.addAll(imp.getSpellAbilities());
             } //get Triggered card
             Card triggeredCard = null;
-            final SpellAbility root = sa.getRootSpellAbility();
+            final SpellAbility root = sa.getRootAbility();
             final Object crd = root.getTriggeringObject("Card");
             if (crd instanceof Card) {
                 triggeredCard = Singletons.getModel().getGame().getCardState((Card) crd);
@@ -1393,98 +1386,6 @@ public class AbilityFactory {
         objects.addAll(AbilityFactory.getDefinedCards(card, defined, sa));
         objects.addAll(AbilityFactory.getDefinedSpellAbilities(card, defined, sa));
         return objects;
-    }
-
-    /**
-     * <p>
-     * findRootAbility.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public static SpellAbility findRootAbility(final SpellAbility sa) {
-        SpellAbility parent = sa;
-        while (parent instanceof AbilitySub) {
-            parent = ((AbilitySub) parent).getParent();
-        }
-
-        return parent;
-    }
-
-    /**
-     * <p>
-     * findParentsTargetedCard.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public static SpellAbility findParentsTargetedCard(final SpellAbility sa) {
-        SpellAbility parent = sa;
-
-        do {
-            if (!(parent instanceof AbilitySub) || ((AbilitySub) parent).getParent() == null) {
-                return parent;
-            }
-            parent = ((AbilitySub) parent).getParent();
-        } while (parent.getTarget() == null
-                || parent.getTarget().getTargetCards() == null
-                || parent.getTarget().getTargetCards().size() == 0);
-
-        return parent;
-    }
-
-    /**
-     * <p>
-     * findParentsTargetedSpellAbility.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link forge.card.spellability.SpellAbility} object.
-     */
-    private static SpellAbility findParentsTargetedSpellAbility(final SpellAbility sa) {
-        if (sa.getTarget() != null && !sa.getTarget().getTargetSAs().isEmpty()) {
-            return sa;
-        }
-        SpellAbility parent = sa;
-
-        do {
-            if (!(parent instanceof AbilitySub) || ((AbilitySub) parent).getParent() == null) {
-                return parent;
-            }
-            parent = ((AbilitySub) parent).getParent();
-        } while (parent.getTarget() == null || parent.getTarget().getTargetSAs().isEmpty());
-
-        return parent;
-    }
-
-    /**
-     * <p>
-     * findParentsTargetedPlayer.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public static SpellAbility findParentsTargetedPlayer(final SpellAbility sa) {
-        if (sa.getTarget() != null && !sa.getTarget().getTargetPlayers().isEmpty()) {
-            return sa;
-        }
-        SpellAbility parent = sa;
-
-        do {
-            if (!(parent instanceof AbilitySub) || ((AbilitySub) parent).getParent() == null) {
-                return parent;
-            }
-            parent = ((AbilitySub) parent).getParent();
-        } while (parent.getTarget() == null || parent.getTarget().getTargetPlayers().isEmpty());
-
-        return parent;
     }
 
     /**
@@ -1783,14 +1684,12 @@ public class AbilityFactory {
 
         } else if (type.startsWith("Targeted")) {
             source = null;
-            final SpellAbility parent = AbilityFactory.findParentsTargetedCard(sa);
-            if (parent != null) {
-                if (parent.getTarget() != null) {
-                    if (!parent.getTarget().getTargetCards().isEmpty()) {
-                        source = parent.getTarget().getTargetCards().get(0);
-                    } else if (!parent.getTarget().getTargetSAs().isEmpty()) {
-                        source = parent.getTarget().getTargetSAs().get(0).getSourceCard();
-                    }
+            final SpellAbility parent = sa.getParentTargetingCard();
+            if (parent.getTarget() != null) {
+                if (!parent.getTarget().getTargetCards().isEmpty()) {
+                    source = parent.getTarget().getTargetCards().get(0);
+                } else if (!parent.getTarget().getTargetSAs().isEmpty()) {
+                    source = parent.getTarget().getTargetSAs().get(0).getSourceCard();
                 }
             }
             if (source == null) {
@@ -2002,7 +1901,7 @@ public class AbilityFactory {
         if (abSub == null || sa.isWrapper()) {
             // every resolving spellAbility will end here
             if (usedStack) {
-                SpellAbility root = sa.getRootSpellAbility();
+                SpellAbility root = sa.getRootAbility();
                 Singletons.getModel().getGame().getStack().finishResolving(root, false);
             }
             return;

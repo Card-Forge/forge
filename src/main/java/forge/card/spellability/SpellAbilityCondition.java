@@ -187,7 +187,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             }
         }
         if (this.isKicked()) {
-            SpellAbility root = sa.getRootSpellAbility();
+            SpellAbility root = sa.getRootAbility();
             if (!root.isKicked()) {
                 return false;
             }

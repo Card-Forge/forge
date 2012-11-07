@@ -89,6 +89,7 @@ public abstract class AbilitySub extends SpellAbility implements java.io.Seriali
      * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
+    @Override
     public final SpellAbility getParent() {
         return this.parent;
     }
