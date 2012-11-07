@@ -3,6 +3,8 @@ package forge.card.abilityfactory;
 import java.util.Map;
 
 import forge.Card;
+import forge.card.abilityfactory.effects.ChangeZoneAllEffect;
+import forge.card.abilityfactory.effects.ChangeZoneEffect;
 import forge.card.abilityfactory.effects.ManaEffect;
 import forge.card.abilityfactory.effects.ManaReflectedEffect;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -29,6 +31,8 @@ public class CommonAbility extends AbilityActivated {
         if ( effect0 instanceof ManaReflectedEffect )
             this.setManaPart(new AbilityManaPart(sourceCard, new Cost(sourceCard, "0", false), params));
         
+        if ( effect0 instanceof ChangeZoneEffect || effect0 instanceof ChangeZoneAllEffect )
+            AbilityFactory.adjustChangeZoneTarget(params, this);
     }
     
     @Override

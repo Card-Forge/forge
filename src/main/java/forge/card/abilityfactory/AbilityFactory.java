@@ -378,28 +378,7 @@ public class AbilityFactory {
         // Match API keywords. These are listed in alphabetical order.
 
 
-        if (this.api == ApiType.ChangeZone) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryChangeZone.createAbilityChangeZone(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryChangeZone.createSpellChangeZone(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryChangeZone.createDrawbackChangeZone(this);
-            }
-        }
-
-        else if (this.api == ApiType.ChangeZoneAll) {
-            if (this.isAb) {
-                spellAbility = AbilityFactoryChangeZone.createAbilityChangeZoneAll(this);
-            } else if (this.isSp) {
-                spellAbility = AbilityFactoryChangeZone.createSpellChangeZoneAll(this);
-            } else if (this.isDb) {
-                spellAbility = AbilityFactoryChangeZone.createDrawbackChangeZoneAll(this);
-            }
-        }
-
-
-        else if (this.api == ApiType.CopySpell) {
+        if (this.api == ApiType.CopySpell) {
             if (this.isTargeted) { 
                 // Since all "CopySpell" ABs copy things on the Stack no need for it to be everywhere
                 this.abTgt.setZone(ZoneType.Stack);
@@ -416,21 +395,17 @@ public class AbilityFactory {
             }
         }
 
+        SpellAiLogic ai = api.getAi();
+        SpellEffect se = api.getSpellEffect();
         
-        // build code is here for the refactored APIs
-        if (spellAbility == null)
-        {
-            SpellAiLogic ai = api.getAi();
-            SpellEffect se = api.getSpellEffect();
-            
-            if (this.isAb) {
-                spellAbility = new CommonAbility(this.getHostCard(), this.getAbCost(), this.getAbTgt(), this.getMapParams(), se, ai);
-            } else if (this.isSp) {
-                spellAbility = new CommonSpell(this.getHostCard(), this.getAbCost(), this.getAbTgt(), this.getMapParams(), se, ai);
-            } else if (this.isDb) {
-                spellAbility = new CommonDrawback(this.getHostCard(), this.getAbTgt(), this.getMapParams(), se, ai);
-            }
+        if (this.isAb) {
+            spellAbility = new CommonAbility(this.getHostCard(), this.getAbCost(), this.getAbTgt(), this.getMapParams(), se, ai);
+        } else if (this.isSp) {
+            spellAbility = new CommonSpell(this.getHostCard(), this.getAbCost(), this.getAbTgt(), this.getMapParams(), se, ai);
+        } else if (this.isDb) {
+            spellAbility = new CommonDrawback(this.getHostCard(), this.getAbTgt(), this.getMapParams(), se, ai);
         }
+
         
         // //////////////////////
         //
@@ -2039,5 +2014,19 @@ public class AbilityFactory {
             AbilityFactory.resolveSubAbilities(abSub, usedStack);
         }
     }
+    
+    public static void adjustChangeZoneTarget(final Map<String, String> params, final SpellAbility sa) {
+        List<ZoneType> origin = new ArrayList<ZoneType>();
+        if (params.containsKey("Origin")) {
+            origin = ZoneType.listValueOf(params.get("Origin"));
+        }
+
+        final Target tgt = sa.getTarget();
+
+        // Don't set the zone if it targets a player
+        if ((tgt != null) && !tgt.canTgtPlayer()) {
+            sa.getTarget().setZone(origin);
+        }
+    }    
 
 } // end class AbilityFactory

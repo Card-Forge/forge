@@ -26,6 +26,7 @@ import forge.Card;
 
 import forge.Command;
 import forge.GameEntity;
+import forge.Singletons;
 import forge.card.CardManaCost;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
@@ -1758,6 +1759,26 @@ public abstract class SpellAbility {
             this.splicedCards = new ArrayList<Card>();
         }
         this.splicedCards.add(splicedCard);
+    }
+
+    /**
+     * <p>
+     * knownDetermineDefined.
+     * </p>
+     * 
+     * @param defined
+     *            a {@link java.lang.String} object.
+     * @return a {@link forge.CardList} object.
+     */
+    public List<Card> knownDetermineDefined(final String defined) {
+        final List<Card> ret = new ArrayList<Card>();
+        final ArrayList<Card> list = AbilityFactory.getDefinedCards(getSourceCard(), defined, this);
+    
+        for (final Card c : list) {
+            final Card actualCard = Singletons.getModel().getGame().getCardState(c);
+            ret.add(actualCard);
+        }
+        return ret;
     }
 
 }

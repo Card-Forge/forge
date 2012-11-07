@@ -15,8 +15,8 @@ public enum ApiType {
     AnimateAll ( AnimateAllEffect.class, AnimateAllAi.class ),
     Attach ( AttachEffect.class, AttachAi.class ),
     Bond ( BondEffect.class, BondAi.class ),
-    ChangeZone(null, null), // not converted
-    ChangeZoneAll(ChangeZoneAllEffect.class, ChangeZoneAllAi.class), // classes extracted but not converted
+    ChangeZone(ChangeZoneEffect.class, ChangeZoneAi.class),
+    ChangeZoneAll(ChangeZoneAllEffect.class, ChangeZoneAllAi.class),
     /** This is <b>Modal</b>, like 'choose one - ' or 'choose two - '. <br> Might be great to rename this api and update all scripts.*/
     Charm(CharmEffect.class, CharmAi.class),
     ChooseCard ( ChooseCardEffect.class, ChooseCardAi.class ),

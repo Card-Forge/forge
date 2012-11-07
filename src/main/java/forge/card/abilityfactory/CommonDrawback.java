@@ -20,6 +20,8 @@ package forge.card.abilityfactory;
 import java.util.Map;
 
 import forge.Card;
+import forge.card.abilityfactory.effects.ChangeZoneAllEffect;
+import forge.card.abilityfactory.effects.ChangeZoneEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Target;
@@ -35,6 +37,9 @@ class CommonDrawback extends AbilitySub {
             params = params0;
             ai = ai0;
             effect = effect0;
+            
+            if ( effect0 instanceof ChangeZoneEffect || effect0 instanceof ChangeZoneAllEffect )
+                AbilityFactory.adjustChangeZoneTarget(params, this);            
         }
         @Override
         public AbilitySub getCopy() {

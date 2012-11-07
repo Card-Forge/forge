@@ -3,6 +3,8 @@ package forge.card.abilityfactory;
 import java.util.Map;
 
 import forge.Card;
+import forge.card.abilityfactory.effects.ChangeZoneAllEffect;
+import forge.card.abilityfactory.effects.ChangeZoneEffect;
 import forge.card.cost.Cost;
 import forge.card.spellability.Spell;
 import forge.card.spellability.Target;
@@ -18,6 +20,9 @@ public class CommonSpell extends Spell {
         params = params0;
         effect = effect0;
         ai = ai0;
+        
+        if ( effect0 instanceof ChangeZoneEffect || effect0 instanceof ChangeZoneAllEffect )
+            AbilityFactory.adjustChangeZoneTarget(params, this);        
     }
     
     @Override

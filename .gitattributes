@@ -12471,7 +12471,6 @@ src/main/java/forge/card/TriggerReplacementBase.java -text
 src/main/java/forge/card/UnOpenedMeta.java -text
 src/main/java/forge/card/UnOpenedProduct.java -text
 src/main/java/forge/card/abilityfactory/AbilityFactory.java svneol=native#text/plain
-src/main/java/forge/card/abilityfactory/AbilityFactoryChangeZone.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/ApiType.java -text
 src/main/java/forge/card/abilityfactory/CommonAbility.java -text
 src/main/java/forge/card/abilityfactory/CommonDrawback.java svneol=native#text/plain
@@ -12486,6 +12485,7 @@ src/main/java/forge/card/abilityfactory/ai/AttachAi.java -text
 src/main/java/forge/card/abilityfactory/ai/BondAi.java -text
 src/main/java/forge/card/abilityfactory/ai/CanPlayAsDrawbackAi.java -text
 src/main/java/forge/card/abilityfactory/ai/CannotPlayAi.java -text
+src/main/java/forge/card/abilityfactory/ai/ChangeZoneAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ChangeZoneAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/CharmAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ChooseCardAi.java -text
@@ -12573,6 +12573,7 @@ src/main/java/forge/card/abilityfactory/effects/AnimateEffectBase.java svneol=na
 src/main/java/forge/card/abilityfactory/effects/AttachEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/BondEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ChangeZoneAllEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/ChangeZoneEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/CharmEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ChooseCardEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ChooseCardNameEffect.java -text
