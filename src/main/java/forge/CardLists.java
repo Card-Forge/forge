@@ -67,13 +67,13 @@ public class CardLists {
         public int compare(final Card a, final Card b) {
             return b.getNetDefense() - a.getNetDefense();
         }
-    };    
+    };
     public static final Comparator<Card> AttackComparator = new Comparator<Card>() {
         @Override
         public int compare(final Card a, final Card b) {
             return b.getNetCombatDamage() - a.getNetCombatDamage();
         }
-    };    
+    };
     public static final Comparator<Card> EvaluateCreatureComparator = new Comparator<Card>() {
         @Override
         public int compare(final Card a, final Card b) {
@@ -86,8 +86,8 @@ public class CardLists {
         public int compare(final Card a, final Card b) {
             return b.getCMC() - a.getCMC();
         }
-    };    
-    
+    };
+
     public static final Comparator<Card> TextLenReverseComparator = new Comparator<Card>() {
         @Override
         public int compare(final Card a, final Card b) {
@@ -107,7 +107,7 @@ public class CardLists {
             }
         };
     }
-    
+
     // the higher the attack the better
     /**
      * <p>
@@ -193,7 +193,7 @@ public class CardLists {
      *            a {@link forge.CardList} object.
      */
     public static void sortCMC(final List<Card> list) {
-        Collections.sort( list, CmcComparator );
+        Collections.sort(list, CmcComparator);
     } // sortCMC
 
     /**
@@ -250,7 +250,7 @@ public class CardLists {
         }
 
         final List<Card> cs = Lists.newArrayList(c);
-        
+
         final List<Card> subList = new ArrayList<Card>();
         while (subList.size() < amount) {
             CardLists.shuffle(cs);
