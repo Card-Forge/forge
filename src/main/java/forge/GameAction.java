@@ -1086,7 +1086,8 @@ public class GameAction {
                 if (c.isAura()) {
                     // Check if Card Aura is attached to is a legal target
                     final GameEntity entity = c.getEnchanting();
-                    final SpellAbility sa = c.getSpellPermanent();
+                    final SpellAbility sa = c.getSpells().get(0);;
+                    
                     Target tgt = null;
                     if (sa != null) {
                         tgt = sa.getTarget();
