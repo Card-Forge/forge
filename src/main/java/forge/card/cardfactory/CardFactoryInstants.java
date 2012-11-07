@@ -32,7 +32,6 @@ import forge.Command;
 import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -492,7 +491,7 @@ public class CardFactoryInstants {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Wing Puncture")) {
+        /*else if (cardName.equals("Wing Puncture")) {
 
             final Target t2 = new Target(card, "Select target creature with flying", "Creature.withFlying".split(","));
             class DrawbackWingPuncture extends AbilitySub {
@@ -561,7 +560,7 @@ public class CardFactoryInstants {
             spell.setStackDescription(sbStack.toString());
 
             card.addSpellAbility(spell);
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
     } // getCard
 
 } // end class CardFactory_Instants
