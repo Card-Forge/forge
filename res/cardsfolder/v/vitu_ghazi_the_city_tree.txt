@@ -7,5 +7,6 @@ A:AB$ Token | Cost$ 2 G W T | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vitu_ghazi_the_city_tree.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/285.jpg
+SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/130.jpg
 Oracle:{T}: Add {1} to your mana pool.\n{2}{G}{W}, {T}: Put a 1/1 green Saproling creature token onto the battlefield.
 End

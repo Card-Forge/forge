@@ -8,7 +8,7 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Plant | TokenTyp
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/khalni_garden.jpg
-SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/138.jpg
 SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/122.jpg
+SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/138.jpg
 Oracle:Khalni Garden enters the battlefield tapped.\nWhen Khalni Garden enters the battlefield, put a 0/1 green Plant creature token onto the battlefield.\n{T}: Add {G} to your mana pool.
 End

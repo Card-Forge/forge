@@ -8,6 +8,7 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Card.DefenderCtrl | TgtPrompt$ Select target card | TargetMin$ 0 | TargetMax$ 2 | Origin$ Graveyard | Destination$ Exile | IsCurse$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skullsnatcher.jpg
+SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/36.jpg
 SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/84.jpg
 Oracle:Ninjutsu {B} ({B}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhenever Skullsnatcher deals combat damage to a player, exile up to two target cards from that player's graveyard.
 End

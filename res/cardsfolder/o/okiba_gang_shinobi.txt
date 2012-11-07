@@ -8,6 +8,7 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ Tri
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 2 | Mode$ TgtChoose
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/okiba_gang_shinobi.jpg
+SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/35.jpg
 SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/76.jpg
 Oracle:Ninjutsu {3}{B} ({3}{B}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhenever Okiba-Gang Shinobi deals combat damage to a player, that player discards two cards.
 End

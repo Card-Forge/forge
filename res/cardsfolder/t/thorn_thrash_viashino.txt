@@ -7,6 +7,7 @@ A:AB$ Pump | Cost$ G | KW$ Trample | SpellDescription$ CARDNAME gains trample un
 K:Devour:2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thorn_thrash_viashino.jpg
+SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/52.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/116.jpg
 Oracle:Devour 2 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with twice that many +1/+1 counters on it.)\n{G}: Thorn-Thrash Viashino gains trample until end of turn.
 End

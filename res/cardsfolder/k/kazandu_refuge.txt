@@ -9,6 +9,7 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 1
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kazandu_refuge.jpg
+SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/121.jpg
 SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/217.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/280.jpg
 Oracle:Kazandu Refuge enters the battlefield tapped.\nWhen Kazandu Refuge enters the battlefield, you gain 1 life.\n{T}: Add {R} or {G} to your mana pool.

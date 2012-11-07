@@ -6,9 +6,10 @@ A:SP$ PumpAll | Cost$ 2 G G G | ValidCards$ Creature.YouCtrl | NumAtt$ +3 | NumD
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/10e/en/card130506.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/137.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/260.jpg
+SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/72.jpg
+SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/284.jpg
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/198.jpg
 SetInfo:M12|Uncommon|http://magiccards.info/scans/en/m12/186.jpg
-SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/260.jpg
-SetInfo:10E|Uncommon|http://magiccards.info/scans/en/10e/284.jpg
-Oracle:Creatures you control get +3/+3 and gain trample until end of turn. (If a creature you control would assign enough damage to its blockers to destroy them, you may have it assign the rest of its damage to defending player or planeswalker.)
+Oracle:Creatures you control get +3/+3 and gain trample until end of turn.
 End

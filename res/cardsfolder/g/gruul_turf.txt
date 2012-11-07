@@ -10,6 +10,7 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_turf.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/158.jpg
+SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/119.jpg
 SetInfo:COM|Common|http://magiccards.info/scans/en/cmd/276.jpg
 Oracle:Gruul Turf enters the battlefield tapped.\nWhen Gruul Turf enters the battlefield, return a land you control to its owner's hand.\n{T}: Add {R}{G} to your mana pool.
 End

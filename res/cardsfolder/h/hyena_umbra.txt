@@ -8,6 +8,7 @@ A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ First Strike | Description$ Enchanted creature gets +1/+1 and has first strike.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hyena_umbra.jpg
+SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/8.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/26.jpg
 Oracle:Enchant creature\nEnchanted creature gets +1/+1 and has first strike.\nTotem armor (If enchanted creature would be destroyed, instead remove all damage from it and destroy this Aura.)
 End

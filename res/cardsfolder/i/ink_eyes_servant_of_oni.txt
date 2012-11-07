@@ -9,6 +9,7 @@ SVar:TrigAnimate:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Bat
 A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ink_eyes_servant_of_oni.jpg
+SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/33.jpg
 SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/71.jpg
 Oracle:Ninjutsu {3}{B}{B} ({3}{B}{B}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhenever Ink-Eyes, Servant of Oni deals combat damage to a player, you may put target creature card from that player's graveyard onto the battlefield under your control.\n{1}{B}: Regenerate Ink-Eyes.
 End

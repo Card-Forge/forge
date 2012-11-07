@@ -8,6 +8,7 @@ T:Mode$ SpellCast | ValidCard$ Enchantment | ValidActivatingPlayer$ You | Trigge
 SVar:TrigCounters:AB$PutCounterAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | CounterType$ P1P1 | CounterNum$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/celestial_ancient.jpg
+SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/5.jpg
 SetInfo:DIS|Rare|http://magiccards.info/scans/en/di/7.jpg
 Oracle:Flying\nWhenever you cast an enchantment spell, put a +1/+1 counter on each creature you control.
 End

@@ -6,6 +6,7 @@ PT:1/1
 K:Devour:3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunder_thrash_elder.jpg
+SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/53.jpg
 SetInfo:ALA|Uncommon|http://magiccards.info/scans/en/ala/117.jpg
 Oracle:Devour 3 (As this enters the battlefield, you may sacrifice any number of creatures. This creature enters the battlefield with three times that many +1/+1 counters on it.)
 End

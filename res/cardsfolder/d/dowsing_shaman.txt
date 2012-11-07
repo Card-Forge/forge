@@ -7,5 +7,6 @@ A:AB$ ChangeZone | Cost$ 2 G T | TgtPrompt$ Choose target enchantment card in yo
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dowsing_shaman.jpg
 SetInfo:RAV|Uncommon|http://magiccards.info/scans/en/rav/159.jpg
+SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/63.jpg
 Oracle:{2}{G}, {T}: Return target enchantment card from your graveyard to your hand.
 End

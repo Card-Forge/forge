@@ -10,5 +10,6 @@ SVar:TrigTokenJunior:AB$Token | Cost$ 0 | TokenImage$ g 1 1 ooze | TokenName$ Oo
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mitotic_slime.jpg
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/185.jpg
+SetInfo:PC2|Rare|http://magiccards.info/scans/en/pc2/67.jpg
 Oracle:When Mitotic Slime dies, put two 2/2 green Ooze creature tokens onto the battlefield. They have "When this creature dies, put two 1/1 green Ooze creature tokens onto the battlefield."
 End

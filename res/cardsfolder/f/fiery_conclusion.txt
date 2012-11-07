@@ -6,5 +6,6 @@ A:SP$ DealDamage | Cost$ 1 R Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_conclusion.jpg
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/122.jpg
+SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/42.jpg
 Oracle:As an additional cost to cast Fiery Conclusion, sacrifice a creature.\nFiery Conclusion deals 5 damage to target creature.
 End

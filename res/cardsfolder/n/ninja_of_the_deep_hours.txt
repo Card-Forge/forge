@@ -8,6 +8,7 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | Execute$ T
 SVar:TrigDraw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ninja_of_the_deep_hours.jpg
+SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/21.jpg
 SetInfo:BOK|Common|http://magiccards.info/scans/en/bok/44.jpg
 Oracle:Ninjutsu {1}{U} ({1}{U}, Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)\nWhenever Ninja of the Deep Hours deals combat damage to a player, you may draw a card.
 End

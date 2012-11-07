@@ -9,6 +9,7 @@ SVar:X:Count$Valid Aura
 SVar:BuffedBy:Aura
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aura_gnarlid.jpg
+SetInfo:PC2|Common|http://magiccards.info/scans/en/pc2/55.jpg
 SetInfo:ROE|Common|http://magiccards.info/scans/en/roe/175.jpg
 Oracle:Creatures with power less than Aura Gnarlid's power can't block it.\nAura Gnarlid gets +1/+1 for each Aura on the battlefield.
 End

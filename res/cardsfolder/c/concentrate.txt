@@ -5,7 +5,8 @@ Text:no text
 A:SP$ Draw | Cost$ 2 U U | NumCards$ 3 | SpellDescription$ Draw three cards.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/8ed/en-us/card45262.jpg
-Oracle:Draw three cards.
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/68.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/78.jpg
+SetInfo:PC2|Uncommon|http://magiccards.info/scans/en/pc2/16.jpg
+Oracle:Draw three cards.
 End
