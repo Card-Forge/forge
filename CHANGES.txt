@@ -218,6 +218,25 @@ Fixes/Features:
 - Added a new static ability "CantAttack".
 - Converted some cards (they now work correctly with Planeswalkers).
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CheckStyle.
+- CheckStyle.
+- GameFormatQuest inherits from GameFormat... this removed lots of duplicated code
+- removed warnings from some AF.AIs
+- PredicateNamesExcept holds reference to source list (does not create own array)
+- GameFormatQuestToXml.unmarshal: read lists first, then create object to return
+- DevMode: joined card to hand for both players, added "card to battlefield" button
+- removed 140 lines of unused constructors of ListChooser
+- Choosing cards from a list (devmode-addXXXX shows their picture on the right panel)
+- fixes default player targeting for PumpAll, TapAll and UntapAll effects
+- rem warns
+- Streamlined the drawback checks in the AF AI functions.
+- AF: Draw used even a different target player picking priority.
+- Enabled "NeedsToPlay" SVars for all AF spells.
+- canPlayAI has to be abstract
+- once canPlayAI is wrapped is has to be hidden from outside callers
+- AF: ChangeZone converted
+- Orphaned javadoc cleanup.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -238,6 +257,9 @@ Saproling Cluster
 Magus of the Scroll
 Nightshade Assassin
 Rust Elemental
+Divergent Growth
+Parallax Nexus
+Rising Waters
 
 
 end
