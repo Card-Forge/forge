@@ -38,8 +38,8 @@ import forge.util.PredicateString;
  * @version $Id$
  */
 public final class CardPredicates {
-    
-    public final static Predicate<Card> isController(final Player p) { 
+
+    public final static Predicate<Card> isController(final Player p) {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -55,7 +55,7 @@ public final class CardPredicates {
             }
         };
     }
-    
+
     public final static Predicate<Card> isType(final String cardType) {
         return new Predicate<Card>() {
             @Override
@@ -64,7 +64,7 @@ public final class CardPredicates {
             }
         };
     }
-    
+
     public final static Predicate<Card> hasKeyword(final String keyword) {
         return new Predicate<Card>() {
             @Override
@@ -73,7 +73,7 @@ public final class CardPredicates {
             }
         };
     }
-    
+
     public final static Predicate<Card> containsKeyword(final String keyword) {
         return new Predicate<Card>() {
             @Override
@@ -82,7 +82,7 @@ public final class CardPredicates {
             }
         };
     }
-    
+
     public final static Predicate<Card> isTargetableBy(final SpellAbility source) {
         return new Predicate<Card>() {
             @Override
@@ -91,7 +91,7 @@ public final class CardPredicates {
             }
         };
     }
-    
+
     public final static Predicate<Card> nameEquals(final String name) {
         return new Predicate<Card>() {
             @Override
@@ -100,7 +100,6 @@ public final class CardPredicates {
             }
         };
     }
-    
 
     public final static Predicate<Card> possibleBlockers(final Card attacker) {
         return new Predicate<Card>() {
@@ -110,7 +109,7 @@ public final class CardPredicates {
             }
         };
     }
-    
+
     public final static Predicate<Card> possibleBlockerForAtLeastOne(final Iterable<Card> attackers) {
         return new Predicate<Card>() {
             @Override
@@ -118,8 +117,8 @@ public final class CardPredicates {
                 return c.isCreature() && CombatUtil.canBlockAtLeastOne(c, attackers);
             }
         };
-    }    
-    
+    }
+
     public final static Predicate<Card> isProtectedFrom(final Card source) {
         return new Predicate<Card>() {
             @Override
@@ -129,7 +128,6 @@ public final class CardPredicates {
         };
     }
 
-    
     public final static Predicate<Card> restriction(final String[] restrictions, final Player sourceController, final Card source) {
         return new Predicate<Card>() {
             @Override
@@ -137,7 +135,7 @@ public final class CardPredicates {
                 return (c != null) && c.isValid(restrictions, sourceController, source);
             }
         };
-    }    
+    }
 
     public static class Presets {
 
@@ -150,13 +148,13 @@ public final class CardPredicates {
                 return c.isTapped();
             }
         };
-        
+
         public static final Predicate<Card> CANUNTAP = new Predicate<Card>() {
             @Override
             public boolean apply(Card c) {
                 return Untap.canUntap(c);
             }
-        };        
+        };
         /**
          * a Predicate<Card> to get all cards that are untapped.
          */
@@ -175,7 +173,6 @@ public final class CardPredicates {
                 return c.isCreature();
             }
         };
-        
 
         /**
          * a Predicate<Card> to get all enchantments.
@@ -314,7 +311,7 @@ public final class CardPredicates {
                 return c.isWhite();
             }
         };
-        
+
 
         public static final Predicate<Card> hasFirstStrike = new Predicate<Card>() {
             @Override
@@ -341,7 +338,7 @@ public final class CardPredicates {
             }
         };
     }
-    
+
     public static class Accessors {
         public static final Function<Card, Integer> fnGetDefense = new Function<Card, Integer>() {
             @Override
@@ -355,27 +352,27 @@ public final class CardPredicates {
             public Integer apply(Card a) {
                 return a.getNetAttack();
             }
-        };        
-        
+        };
+
         public static final Function<Card, Integer> fnGetAttack = new Function<Card, Integer>() {
             @Override
             public Integer apply(Card a) {
                 return a.getNetCombatDamage();
             }
         };
-        
+
         public static final Function<Card, Integer> fnGetCmc = new Function<Card, Integer>() {
             @Override
             public Integer apply(Card a) {
                 return a.getCMC();
             }
-        };        
-        
+        };
+
         public static final Function<Card, Integer> fnEvaluateCreature = new Function<Card, Integer>() {
             @Override
             public Integer apply(Card a) {
                 return CardFactoryUtil.evaluateCreature(a);
             }
-        };        
+        };
     }
 }
