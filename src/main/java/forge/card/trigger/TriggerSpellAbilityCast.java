@@ -100,25 +100,11 @@ public class TriggerSpellAbilityCast extends Trigger {
             final SpellAbility sa = si.getSpellAbility();
             if (sa.getTarget() == null) {
                 if (sa.getTargetCard() == null) {
-                    if (sa.getTargetList() == null) {
-                        if (sa.getTargetPlayer() == null) {
-                            return false;
-                        } else {
-                            if (!matchesValid(sa.getTargetPlayer(),
-                                    this.getMapParams().get("TargetsValid").split(","), this.getHostCard())) {
-                                return false;
-                            }
-                        }
+                    if (sa.getTargetPlayer() == null) {
+                        return false;
                     } else {
-                        boolean validTgtFound = false;
-                        for (final Card tgt : sa.getTargetList()) {
-                            if (matchesValid(tgt, this.getMapParams().get("TargetsValid").split(","),
-                                    this.getHostCard())) {
-                                validTgtFound = true;
-                                break;
-                            }
-                        }
-                        if (!validTgtFound) {
+                        if (!matchesValid(sa.getTargetPlayer(),
+                                this.getMapParams().get("TargetsValid").split(","), this.getHostCard())) {
                             return false;
                         }
                     }

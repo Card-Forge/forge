@@ -698,10 +698,10 @@ public class TriggerHandler {
                 return sa[0].getTargetCard();
             }
 
-            @Override
-            public List<Card> getTargetList() {
-                return sa[0].getTargetList();
-            }
+//            @Override
+//            public List<Card> getTargetList() {
+//                return sa[0].getTargetList();
+//            }
 
             @Override
             public Player getTargetPlayer() {
@@ -889,10 +889,10 @@ public class TriggerHandler {
                 sa[0].setTargetCard(card);
             }
 
-            @Override
-            public void setTargetList(final List<Card> list) {
-                sa[0].setTargetList(list);
-            }
+//            @Override
+//            public void setTargetList(final List<Card> list) {
+//                sa[0].setTargetList(list);
+//            }
 
             @Override
             public void setTargetPlayer(final Player p) {

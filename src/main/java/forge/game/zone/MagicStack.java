@@ -766,12 +766,6 @@ public class MagicStack extends MyObservable {
                 runParams.put("Target", sp.getTargetCard());
 
                 game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
-            } else if ((sp.getTargetList() != null) && (sp.getTargetList().size() > 0)) {
-                for (final Card ctgt : sp.getTargetList()) {
-                    runParams.put("Target", ctgt);
-
-                    game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
-                }
             } else if (sp.getTargetPlayer() != null) {
                 runParams.put("Target", sp.getTargetPlayer());
 

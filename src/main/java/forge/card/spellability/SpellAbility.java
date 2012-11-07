@@ -69,7 +69,7 @@ public abstract class SpellAbility {
     private Card originalHost = null;
 
     private List<Card> splicedCards = null;
-    private List<Card> targetList;
+//    private List<Card> targetList;
     // targetList doesn't appear to be used anymore
 
     private boolean spell;
@@ -1288,49 +1288,49 @@ public abstract class SpellAbility {
         this.setStackDescription(desc);
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>targetList</code>.
-     * </p>
-     * 
-     * @return a {@link forge.CardList} object.
-     */
-    public List<Card> getTargetList() {
-        return this.targetList;
-    }
+//    /**
+//     * <p>
+//     * Getter for the field <code>targetList</code>.
+//     * </p>
+//     * 
+//     * @return a {@link forge.CardList} object.
+//     */
+//    public List<Card> getTargetList() {
+//        return this.targetList;
+//    }
 
-    /**
-     * <p>
-     * Setter for the field <code>targetList</code>.
-     * </p>
-     * 
-     * @param list
-     *            a {@link forge.CardList} object.
-     */
-    public void setTargetList(final List<Card> list) {
-        // The line below started to create a null error at
-        // forge.CardFactoryUtil.canBeTargetedBy(CardFactoryUtil.java:3329)
-        // after ForgeSVN r2699. I hope that commenting out the line below will
-        // not result in other bugs. :)
-        // targetPlayer = null;//reset setTargetPlayer()
-
-        this.targetList = list;
-        final StringBuilder sb = new StringBuilder();
-        sb.append(this.getSourceCard().getName()).append(" - targeting ");
-        for (int i = 0; i < this.targetList.size(); i++) {
-
-            if (!this.targetList.get(i).isFaceDown()) {
-                sb.append(this.targetList.get(i));
-            } else {
-                sb.append("Morph(").append(this.targetList.get(i).getUniqueNumber()).append(")");
-            }
-
-            if (i < (this.targetList.size() - 1)) {
-                sb.append(", ");
-            }
-        }
-        this.setStackDescription(sb.toString());
-    }
+//    /**
+//     * <p>
+//     * Setter for the field <code>targetList</code>.
+//     * </p>
+//     * 
+//     * @param list
+//     *            a {@link forge.CardList} object.
+//     */
+//    public void setTargetList(final List<Card> list) {
+//        // The line below started to create a null error at
+//        // forge.CardFactoryUtil.canBeTargetedBy(CardFactoryUtil.java:3329)
+//        // after ForgeSVN r2699. I hope that commenting out the line below will
+//        // not result in other bugs. :)
+//        // targetPlayer = null;//reset setTargetPlayer()
+//
+//        this.targetList = list;
+//        final StringBuilder sb = new StringBuilder();
+//        sb.append(this.getSourceCard().getName()).append(" - targeting ");
+//        for (int i = 0; i < this.targetList.size(); i++) {
+//
+//            if (!this.targetList.get(i).isFaceDown()) {
+//                sb.append(this.targetList.get(i));
+//            } else {
+//                sb.append("Morph(").append(this.targetList.get(i).getUniqueNumber()).append(")");
+//            }
+//
+//            if (i < (this.targetList.size() - 1)) {
+//                sb.append(", ");
+//            }
+//        }
+//        this.setStackDescription(sb.toString());
+//    }
 
     /**
      * <p>
