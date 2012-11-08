@@ -37,8 +37,7 @@ import forge.game.player.Player;
             // if mana production has any type of SubAbility, undoable=false
             final AbilitySub abSub = sa.getSubAbility();
             if (abSub != null) {
-                if ( sa.getManaPart() != null ) 
-                    sa.setUndoable(false);
+                sa.setUndoable(false);
                 AbilityFactory.resolve(abSub, false);
             }
         }

@@ -24,7 +24,6 @@ import java.util.TreeMap;
 
 import forge.CardColor;
 import forge.card.replacement.ReplacementEffect;
-import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
@@ -44,7 +43,7 @@ public class CardCharacteristics {
     private ArrayList<String> intrinsicKeyword = new ArrayList<String>();
     private ArrayList<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
     private ArrayList<String> intrinsicAbility = new ArrayList<String>();
-    private final List<AbilityActivated> manaAbility = new ArrayList<AbilityActivated>();
+    private final List<SpellAbility> manaAbility = new ArrayList<SpellAbility>();
     private ArrayList<Trigger> triggers = new ArrayList<Trigger>();
     private ArrayList<ReplacementEffect> replacementEffects = new ArrayList<ReplacementEffect>();
     private ArrayList<StaticAbility> staticAbilities = new ArrayList<StaticAbility>();
@@ -250,7 +249,7 @@ public class CardCharacteristics {
      * 
      * @return the manaAbility
      */
-    public final List<AbilityActivated> getManaAbility() {
+    public final List<SpellAbility> getManaAbility() {
         return this.manaAbility;
     }
 

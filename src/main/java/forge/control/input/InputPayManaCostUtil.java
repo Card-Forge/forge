@@ -31,7 +31,6 @@ import forge.card.cost.CostMana;
 import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
-import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.game.zone.PlayerZone;
@@ -85,10 +84,10 @@ public class InputPayManaCostUtil {
             }
         }
 
-        List<AbilityActivated> abilities = new ArrayList<AbilityActivated>();
+        List<SpellAbility> abilities = new ArrayList<SpellAbility>();
         // you can't remove unneeded abilities inside a for(am:abilities) loop :(
         
-        for(AbilityActivated ma : card.getManaAbility()) {
+        for(SpellAbility ma : card.getManaAbility()) {
             ma.setActivatingPlayer(Singletons.getControl().getPlayer());
             AbilityManaPart m = ma.getManaPart();
             if (!ma.canPlay()) {
@@ -151,9 +150,9 @@ public class InputPayManaCostUtil {
 
         if (!skipExpress) {
             // express Mana Choice
-            final ArrayList<AbilityActivated> colorMatches = new ArrayList<AbilityActivated>();
+            final ArrayList<SpellAbility> colorMatches = new ArrayList<SpellAbility>();
 
-            for (final AbilityActivated am : abilities) {
+            for (final SpellAbility am : abilities) {
                 AbilityManaPart m = am.getManaPart();
                 if (m.isReflectedMana()) {
                     final List<String> reflectableColors = CardUtil.getReflectableManaColors(am, am, new ArrayList<String>(), new ArrayList<Card>());
@@ -191,10 +190,10 @@ public class InputPayManaCostUtil {
             }
         }
 
-        AbilityActivated chosen = abilities.get(0);
+        SpellAbility chosen = abilities.get(0);
         if ((1 < abilities.size()) && choice) {
-            final Map<String, AbilityActivated> ability = new HashMap<String, AbilityActivated>();
-            for (final AbilityActivated am : abilities) {
+            final Map<String, SpellAbility> ability = new HashMap<String, SpellAbility>();
+            for (final SpellAbility am : abilities) {
                 ability.put(am.toString(), am);
             }
             chosen = GuiChoose.one("Choose mana ability", abilities);
@@ -246,7 +245,7 @@ public class InputPayManaCostUtil {
      *            a {@link java.lang.String} object.
      * @return a boolean.
      */
-    public static boolean canMake(final AbilityActivated am, final String mana) {
+    public static boolean canMake(final SpellAbility am, final String mana) {
         if (mana.contains("1")) {
             return true;
         }

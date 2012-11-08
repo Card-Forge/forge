@@ -97,7 +97,7 @@ public class StaticAbilityCantBeCast {
             return false;
         }
 
-        if (params.containsKey("NonMana") && (spellAbility.getManaPart() != null )) {
+        if (params.containsKey("NonMana") && (spellAbility.isManaAbility())) {
             return false;
         }
 

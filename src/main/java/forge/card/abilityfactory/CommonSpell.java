@@ -5,7 +5,10 @@ import java.util.Map;
 import forge.Card;
 import forge.card.abilityfactory.effects.ChangeZoneAllEffect;
 import forge.card.abilityfactory.effects.ChangeZoneEffect;
+import forge.card.abilityfactory.effects.ManaEffect;
+import forge.card.abilityfactory.effects.ManaReflectedEffect;
 import forge.card.cost.Cost;
+import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.Spell;
 import forge.card.spellability.Target;
 
@@ -21,6 +24,9 @@ public class CommonSpell extends Spell {
         effect = effect0;
         ai = ai0;
         
+        if ( effect0 instanceof ManaEffect || effect0 instanceof ManaReflectedEffect )
+            this.setManaPart(new AbilityManaPart(sourceCard, params));
+
         if ( effect0 instanceof ChangeZoneEffect || effect0 instanceof ChangeZoneAllEffect )
             AbilityFactory.adjustChangeZoneTarget(params, this);        
     }

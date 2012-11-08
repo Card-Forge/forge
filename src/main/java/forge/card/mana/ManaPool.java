@@ -24,7 +24,6 @@ import java.util.Map;
 
 import forge.Constant;
 import forge.Singletons;
-import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayManaCostUtil;
@@ -480,14 +479,14 @@ public class ManaPool {
      *            a {@link forge.card.spellability.AbilityMana} object.
      * @return a {@link forge.card.mana.ManaCost} object.
      */
-    public final ManaCost payManaFromAbility(final SpellAbility sa, ManaCost manaCost, final AbilityActivated ma) {
+    public final ManaCost payManaFromAbility(final SpellAbility sa, ManaCost manaCost, final SpellAbility ma) {
         if (manaCost.isPaid() || this.isEmpty()) {
             return manaCost;
         }
 
         // Mana restriction must be checked before this method is called
 
-        final List<AbilityActivated> paidAbs = sa.getPayingManaAbilities();
+        final List<SpellAbility> paidAbs = sa.getPayingManaAbilities();
         final List<Mana> manaPaid = sa.getPayingMana();
 
         paidAbs.add(ma); // assumes some part on the mana produced by the ability will get used
@@ -526,7 +525,7 @@ public class ManaPool {
      *            a boolean.
      */
     public final void clearManaPaid(final SpellAbility ability, final boolean refund) {
-        final List<AbilityActivated> abilitiesUsedToPay = ability.getPayingManaAbilities();
+        final List<SpellAbility> abilitiesUsedToPay = ability.getPayingManaAbilities();
         final List<Mana> manaPaid = ability.getPayingMana();
 
         abilitiesUsedToPay.clear();
@@ -609,10 +608,10 @@ public class ManaPool {
     public final void refundManaPaid(final SpellAbility sa, final boolean untap) {
         // TODO having some crash in here related to undo and not tracking
         // abilities properly
-        final List<AbilityActivated> payAbs = sa.getPayingManaAbilities();
+        final List<SpellAbility> payAbs = sa.getPayingManaAbilities();
 
         // go through paidAbilities if they are undoable
-        for (final AbilityActivated am : payAbs) {
+        for (final SpellAbility am : payAbs) {
             AbilityManaPart m = am.getManaPart();
             if (am.isUndoable()) {
                 if (this.accountFor(sa, m)) {

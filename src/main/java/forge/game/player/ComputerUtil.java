@@ -49,7 +49,6 @@ import forge.card.cost.CostPayment;
 import forge.card.cost.CostUtil;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
-import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
@@ -609,9 +608,9 @@ public class ComputerUtil {
         }
 
         // get map of mana abilities
-        final Map<String, List<AbilityActivated>> manaAbilityMap = ComputerUtil.mapManaSources(ai, checkPlayable);
+        final Map<String, List<SpellAbility>> manaAbilityMap = ComputerUtil.mapManaSources(ai, checkPlayable);
         // initialize ArrayList list for mana needed
-        final List<List<AbilityActivated>> partSources = new ArrayList<List<AbilityActivated>>();
+        final List<List<SpellAbility>> partSources = new ArrayList<List<SpellAbility>>();
         final List<Integer> partPriority = new ArrayList<Integer>();
         final String[] costParts = cost.toString().replace("X ", "").split(" ");
         boolean foundAllSources = findManaSources(ai, manaAbilityMap, partSources, partPriority, costParts);
@@ -635,7 +634,7 @@ public class ComputerUtil {
             final int nPart = partPriority.get(nPriority);
             final ManaCost costPart = new ManaCost(costParts[nPart]);
             // Loop over mana abilities that can be used to current mana cost part
-            for (final AbilityActivated ma : partSources.get(nPart)) {
+            for (final SpellAbility ma : partSources.get(nPart)) {
                 final Card sourceCard = ma.getSourceCard();
 
                 // Check if source has already been used
@@ -781,8 +780,8 @@ public class ComputerUtil {
      * @param foundAllSources
      * @return Were all mana sources found?
      */
-    private static boolean findManaSources(final Player ai, final Map<String, List<AbilityActivated>> manaAbilityMap,
-            final List<List<AbilityActivated>> partSources, final List<Integer> partPriority,
+    private static boolean findManaSources(final Player ai, final Map<String, List<SpellAbility>> manaAbilityMap,
+            final List<List<SpellAbility>> partSources, final List<Integer> partPriority,
             final String[] costParts) {
         final String[] shortColors = { "W", "U", "B", "R", "G" };
         boolean foundAllSources;
@@ -792,7 +791,7 @@ public class ComputerUtil {
             foundAllSources = true;
             // loop over cost parts
             for (int nPart = 0; nPart < costParts.length; nPart++) {
-                final List<AbilityActivated> srcFound = new ArrayList<AbilityActivated>();
+                final List<SpellAbility> srcFound = new ArrayList<SpellAbility>();
                 // Test for:
                 // 1) Colorless
                 // 2) Split e.g. 2/G
@@ -947,7 +946,7 @@ public class ComputerUtil {
             @Override
             public boolean apply(final Card c) {
                 if (checkPlayable) {
-                    for (final AbilityActivated am : c.getAIPlayableMana()) {
+                    for (final SpellAbility am : c.getAIPlayableMana()) {
                         am.setActivatingPlayer(ai);
                         if (am.canPlay()) {
                             return true;
@@ -988,9 +987,9 @@ public class ComputerUtil {
             int usableManaAbilities = 0;
             boolean needsLimitedResources = false;
             boolean producesAnyColor = false;
-            final ArrayList<AbilityActivated> manaAbilities = card.getAIPlayableMana();
+            final ArrayList<SpellAbility> manaAbilities = card.getAIPlayableMana();
 
-            for (final AbilityActivated m : manaAbilities) {
+            for (final SpellAbility m : manaAbilities) {
 
                 if (m.getManaPart().isAnyMana()) {
                     producesAnyColor = true;
@@ -1066,16 +1065,16 @@ public class ComputerUtil {
      * @param checkPlayable TODO
      * @return HashMap<String, List<Card>>
      */
-    public static Map<String, List<AbilityActivated>> mapManaSources(final Player ai, boolean checkPlayable) {
-        final Map<String, List<AbilityActivated>> manaMap = new HashMap<String, List<AbilityActivated>>();
+    public static Map<String, List<SpellAbility>> mapManaSources(final Player ai, boolean checkPlayable) {
+        final Map<String, List<SpellAbility>> manaMap = new HashMap<String, List<SpellAbility>>();
 
-        final List<AbilityActivated> whiteSources = new ArrayList<AbilityActivated>();
-        final List<AbilityActivated> blueSources = new ArrayList<AbilityActivated>();
-        final List<AbilityActivated> blackSources = new ArrayList<AbilityActivated>();
-        final List<AbilityActivated> redSources = new ArrayList<AbilityActivated>();
-        final List<AbilityActivated> greenSources = new ArrayList<AbilityActivated>();
-        final List<AbilityActivated> colorlessSources = new ArrayList<AbilityActivated>();
-        final List<AbilityActivated> snowSources = new ArrayList<AbilityActivated>();
+        final List<SpellAbility> whiteSources = new ArrayList<SpellAbility>();
+        final List<SpellAbility> blueSources = new ArrayList<SpellAbility>();
+        final List<SpellAbility> blackSources = new ArrayList<SpellAbility>();
+        final List<SpellAbility> redSources = new ArrayList<SpellAbility>();
+        final List<SpellAbility> greenSources = new ArrayList<SpellAbility>();
+        final List<SpellAbility> colorlessSources = new ArrayList<SpellAbility>();
+        final List<SpellAbility> snowSources = new ArrayList<SpellAbility>();
 
         // Get list of current available mana sources
         final List<Card> manaSources = ComputerUtil.getAvailableMana(ai, checkPlayable);
@@ -1083,10 +1082,10 @@ public class ComputerUtil {
         // Loop over all mana sources
         for (int i = 0; i < manaSources.size(); i++) {
             final Card sourceCard = manaSources.get(i);
-            final ArrayList<AbilityActivated> manaAbilities = sourceCard.getAIPlayableMana();
+            final ArrayList<SpellAbility> manaAbilities = sourceCard.getAIPlayableMana();
 
             // Loop over all mana abilities for a source
-            for (final AbilityActivated m : manaAbilities) {
+            for (final SpellAbility m : manaAbilities) {
                 m.setActivatingPlayer(ai);
                 if (!m.canPlay() && checkPlayable) {
                     continue;

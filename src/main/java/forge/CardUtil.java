@@ -38,7 +38,6 @@ import forge.card.CardManaCost;
 import forge.card.EditionInfo;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.mana.ManaCost;
-import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayManaCostUtil;
@@ -988,16 +987,16 @@ public final class CardUtil {
                 colors.add(Constant.Color.COLORLESS);
             }
         } else if (reflectProperty.equals("Produce")) {
-            final ArrayList<AbilityActivated> abilities = new ArrayList<AbilityActivated>();
+            final ArrayList<SpellAbility> abilities = new ArrayList<SpellAbility>();
             for (final Card c : cards) {
                 abilities.addAll(c.getManaAbility());
             }
             // currently reflected mana will ignore other reflected mana
             // abilities
 
-            final ArrayList<AbilityActivated> reflectAbilities = new ArrayList<AbilityActivated>();
+            final ArrayList<SpellAbility> reflectAbilities = new ArrayList<SpellAbility>();
 
-            for (final AbilityActivated ab : abilities) {
+            for (final SpellAbility ab : abilities) {
                 if (maxChoices == colors.size()) {
                     break;
                 }
@@ -1016,7 +1015,7 @@ public final class CardUtil {
                 }
             }
 
-            for (final AbilityActivated ab : reflectAbilities) {
+            for (final SpellAbility ab : reflectAbilities) {
                 if (maxChoices == colors.size()) {
                     break;
                 }

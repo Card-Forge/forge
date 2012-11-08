@@ -81,7 +81,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
     /** {@inheritDoc} */
     @Override
     public boolean canPlay() {
-        if (Singletons.getModel().getGame().getStack().isSplitSecondOnStack() && null == this.getManaPart()) {
+        if (Singletons.getModel().getGame().getStack().isSplitSecondOnStack() && !this.isManaAbility()) {
             return false;
         }
 

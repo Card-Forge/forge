@@ -102,7 +102,7 @@ public abstract class SpellAbility {
     protected ApiType api = null;
 
     private final ArrayList<Mana> payingMana = new ArrayList<Mana>();
-    private final List<AbilityActivated> paidAbilities = new ArrayList<AbilityActivated>();
+    private final List<SpellAbility> paidAbilities = new ArrayList<SpellAbility>();
     private ArrayList<String> optionalAdditionalCosts = new ArrayList<String>();
 
     private HashMap<String, List<Card>> paidLists = new HashMap<String, List<Card>>();
@@ -124,6 +124,10 @@ public abstract class SpellAbility {
     public final AbilityManaPart getManaPart() {
         return manaPart;
     }
+    public final boolean isManaAbility() {
+        return manaPart != null && isAbility();
+    }
+    
 
     public final void setManaPart(AbilityManaPart manaPart) {
         this.manaPart = manaPart;
@@ -759,7 +763,7 @@ public abstract class SpellAbility {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public List<AbilityActivated> getPayingManaAbilities() {
+    public List<SpellAbility> getPayingManaAbilities() {
         return this.paidAbilities;
     }
 

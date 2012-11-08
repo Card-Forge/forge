@@ -86,7 +86,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     /** {@inheritDoc} */
     @Override
     public boolean canPlay() {
-        if (Singletons.getModel().getGame().getStack().isSplitSecondOnStack() && null == this.getManaPart()) {
+        if (Singletons.getModel().getGame().getStack().isSplitSecondOnStack()) {
             return false;
         }
 

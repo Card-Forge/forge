@@ -41,7 +41,6 @@ import forge.card.cost.CostReturn;
 import forge.card.cost.CostSacrifice;
 import forge.card.cost.CostUtil;
 import forge.card.spellability.Ability;
-import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
@@ -1324,12 +1323,12 @@ public final class GameActionUtil {
         produces.put("Plains", "W");
         produces.put("Swamp", "B");
 
-        List<Card> lands = Singletons.getModel().getGame().getCardsInGame();
+        List<Card> lands = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         lands = CardLists.filter(lands, Presets.LANDS);
 
         // remove all abilities granted by this Command
         for (final Card land : lands) {
-            List<AbilityActivated> manaAbs = Lists.newArrayList(land.getManaAbility());
+            List<SpellAbility> manaAbs = Lists.newArrayList(land.getManaAbility());
             // will get comodification exception without a different list
             for (final SpellAbility sa : manaAbs) {
                 if (sa.getType().equals("BasicLandTypeMana")) {

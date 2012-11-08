@@ -44,7 +44,6 @@ import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementResult;
-import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilityTriggered;
 import forge.card.spellability.Spell;
@@ -2676,7 +2675,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final List<AbilityActivated> getManaAbility() {
+    public final List<SpellAbility> getManaAbility() {
         return Collections.unmodifiableList(this.getCharacteristics().getManaAbility());
     }
 
@@ -2688,9 +2687,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final ArrayList<AbilityActivated> getAIPlayableMana() {
-        final ArrayList<AbilityActivated> res = new ArrayList<AbilityActivated>();
-        for (final AbilityActivated a : this.getManaAbility()) {
+    public final ArrayList<SpellAbility> getAIPlayableMana() {
+        final ArrayList<SpellAbility> res = new ArrayList<SpellAbility>();
+        for (final SpellAbility a : this.getManaAbility()) {
 
             // if a mana ability has a mana cost the AI will miscalculate
             final Cost cost = a.getPayCosts();
@@ -2716,9 +2715,9 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.util.ArrayList} object.
      */
-    public final List<AbilityActivated> getBasicMana() {
-        final List<AbilityActivated> res = new ArrayList<AbilityActivated>();
-        for (final AbilityActivated a : this.getManaAbility()) {
+    public final List<SpellAbility> getBasicMana() {
+        final List<SpellAbility> res = new ArrayList<SpellAbility>();
+        for (final SpellAbility a : this.getManaAbility()) {
             if (a.getManaPart().isBasic() && !res.contains(a)) {
                 res.add(a);
             }
@@ -2802,8 +2801,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addSpellAbility(final SpellAbility a) {
 
         a.setSourceCard(this);
-        if (a.getManaPart() != null) {
-            this.getCharacteristics().getManaAbility().add((AbilityActivated) a);
+        if (a.isManaAbility()) {
+            this.getCharacteristics().getManaAbility().add(a);
         } else {
             this.getCharacteristics().getSpellAbility().add(a);
         }
@@ -2819,7 +2818,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public final void removeSpellAbility(final SpellAbility a) {
-        if (a.getManaPart() != null) {
+        if (a.isManaAbility()) {
             // if (a.isExtrinsic()) //never remove intrinsic mana abilities, is
             // this the way to go??
             this.getCharacteristics().getManaAbility().remove(a);

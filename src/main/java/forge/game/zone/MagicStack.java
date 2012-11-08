@@ -305,7 +305,7 @@ public class MagicStack extends MyObservable {
         } else {
 
             // TODO: make working triggered abilities!
-            if (sp.getManaPart() != null || (sp instanceof AbilityTriggered)) {
+            if (sp.isManaAbility() || (sp instanceof AbilityTriggered)) {
                 sp.resolve();
             } else {
                 this.push(sp);
@@ -419,7 +419,7 @@ public class MagicStack extends MyObservable {
     public final void add(final SpellAbility sp) {
         final ArrayList<TargetChoices> chosenTargets = sp.getAllTargetChoices();
 
-        if (sp.getManaPart() != null) { // Mana Abilities go straight through
+        if (sp.isManaAbility()) { // Mana Abilities go straight through
             sp.resolve();
             sp.resetOnceResolved();
             game.getGameLog().add("Mana", sp.getSourceCard() + " - " + sp.getDescription(), 4);
