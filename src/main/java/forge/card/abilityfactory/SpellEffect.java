@@ -38,7 +38,7 @@ import forge.game.player.Player;
             final AbilitySub abSub = sa.getSubAbility();
             if (abSub != null) {
                 if ( sa.getManaPart() != null ) 
-                    sa.getManaPart().setUndoable(false);
+                    sa.setUndoable(false);
                 AbilityFactory.resolve(abSub, false);
             }
         }

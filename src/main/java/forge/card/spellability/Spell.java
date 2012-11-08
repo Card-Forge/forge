@@ -57,7 +57,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
      *            a {@link forge.Card} object.
      */
     public Spell(final Card sourceCard) {
-        super(SpellAbility.getSpell(), sourceCard);
+        super(sourceCard);
 
         this.setManaCost(sourceCard.getManaCost());
         this.setStackDescription(sourceCard.getSpellText());
@@ -77,14 +77,10 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
      *            a {@link forge.card.spellability.Target} object.
      */
     public Spell(final Card sourceCard, final Cost abCost, final Target abTgt) {
-        super(SpellAbility.getSpell(), sourceCard);
-
-        this.setManaCost(sourceCard.getManaCost());
+        this(sourceCard);
 
         this.setPayCosts(abCost);
         this.setTarget(abTgt);
-        this.setStackDescription(sourceCard.getSpellText());
-        this.getRestrictions().setZone(ZoneType.Hand);
     }
 
     /** {@inheritDoc} */
@@ -187,6 +183,12 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         }
     }
 
+    @Override
+    public boolean isSpell() { return true; }
+    @Override
+    public boolean isAbility() { return false; }
+    
+    
     /**
      * <p>
      * canPlayFromEffectAI.

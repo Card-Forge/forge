@@ -23,7 +23,7 @@ public class ManaReflectedEffect extends SpellEffect {
 
         // Spells are not undoable
         AbilityManaPart ma = sa.getManaPart();
-        ma.setUndoable(sa.isAbility() && ma.isUndoable());
+        sa.setUndoable(sa.isAbility() && sa.isUndoable());
     
         final List<String> colors = CardUtil.getReflectableManaColors(sa, sa, new ArrayList<String>(),
                 new ArrayList<Card>());
@@ -32,7 +32,7 @@ public class ManaReflectedEffect extends SpellEffect {
         for (final Player player : tgtPlayers) {
             final String generated = generatedReflectedMana(sa, colors, player);
             if (ma.getCanceled()) {
-                ma.undo();
+                sa.undo();
                 ma.setCanceled(false);
                 return;
             }

@@ -49,12 +49,6 @@ import forge.game.player.Player;
 public abstract class SpellAbility {
 
     // choices for constructor isPermanent argument
-    /** Constant <code>Spell=0</code>. */
-    private static final int SPELL = 0;
-
-    /** Constant <code>Ability=1</code>. */
-    private static final int ABILITY = 1;
-
     private String description = "";
     private Player targetPlayer = null;
     private String stackDescription = "";
@@ -74,7 +68,6 @@ public abstract class SpellAbility {
 //    private List<Card> targetList;
     // targetList doesn't appear to be used anymore
 
-    private boolean spell;
     private boolean basicSpell = true;
     private boolean trigger = false;
     private boolean optionalTrigger = false;
@@ -126,6 +119,8 @@ public abstract class SpellAbility {
     
     private AbilityManaPart manaPart = null;
 
+    private boolean undoable;
+
     public final AbilityManaPart getManaPart() {
         return manaPart;
     }
@@ -150,30 +145,13 @@ public abstract class SpellAbility {
      * <p>
      * Constructor for SpellAbility.
      * </p>
-     */
-    public SpellAbility() {
-    }
-
-    /**
-     * <p>
-     * Constructor for SpellAbility.
-     * </p>
      * 
      * @param spellOrAbility
      *            a int.
      * @param iSourceCard
      *            a {@link forge.Card} object.
      */
-    public SpellAbility(final int spellOrAbility, final Card iSourceCard) {
-        if (spellOrAbility == SpellAbility.getSpell()) {
-            this.spell = true;
-        } else if (spellOrAbility == SpellAbility.getAbility()) {
-            this.spell = false;
-        } else {
-            throw new RuntimeException("SpellAbility : constructor error, invalid spellOrAbility argument = "
-                    + spellOrAbility);
-        }
-
+    public SpellAbility(final Card iSourceCard) {
         this.sourceCard = iSourceCard;
     }
 
@@ -350,20 +328,8 @@ public abstract class SpellAbility {
      * 
      * @return a boolean.
      */
-    public boolean isSpell() {
-        return this.spell;
-    }
-
-    /**
-     * <p>
-     * isAbility.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public boolean isAbility() {
-        return !this.isSpell();
-    }
+    public boolean isSpell() { return false; }
+    public boolean isAbility() { return true; }
 
     /**
      * <p>
@@ -1655,24 +1621,6 @@ public abstract class SpellAbility {
     }
 
     /**
-     * Gets the ability.
-     * 
-     * @return the ability
-     */
-    public static int getAbility() {
-        return SpellAbility.ABILITY;
-    }
-
-    /**
-     * Gets the spell.
-     * 
-     * @return the spell
-     */
-    public static int getSpell() {
-        return SpellAbility.SPELL;
-    }
-
-    /**
      * Gets the chosen target.
      * 
      * @return the chosenTarget
@@ -1840,6 +1788,30 @@ public abstract class SpellAbility {
             parent = parent.getParent();
         }
         return parent;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public boolean isUndoable() {
+        return this.undoable && this.payCosts.isUndoable() && this.getSourceCard().isInPlay();
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     */
+    public void undo() {
+        if ( isUndoable() )
+            this.payCosts.refundPaidCost(sourceCard);
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param b
+     */
+    public void setUndoable(boolean b) {
+        this.undoable = b;
     }
 
 

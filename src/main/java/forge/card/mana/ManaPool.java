@@ -614,9 +614,9 @@ public class ManaPool {
         // go through paidAbilities if they are undoable
         for (final AbilityActivated am : payAbs) {
             AbilityManaPart m = am.getManaPart();
-            if (m.isUndoable()) {
+            if (am.isUndoable()) {
                 if (this.accountFor(sa, m)) {
-                    m.undo();
+                    am.undo();
                 }
                 // else can't account let clearPay move paying back to floating
             }

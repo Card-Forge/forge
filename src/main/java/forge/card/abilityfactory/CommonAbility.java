@@ -26,10 +26,11 @@ public class CommonAbility extends AbilityActivated {
         effect = effect0;
         ai = ai0;
         
-        if ( effect0 instanceof ManaEffect )
-            this.setManaPart(new AbilityManaPart(sourceCard, new Cost(sourceCard, "0", false), params));
-        if ( effect0 instanceof ManaReflectedEffect )
-            this.setManaPart(new AbilityManaPart(sourceCard, new Cost(sourceCard, "0", false), params));
+        if ( effect0 instanceof ManaEffect || effect0 instanceof ManaReflectedEffect )
+        {
+            this.setManaPart(new AbilityManaPart(sourceCard, params));
+            this.setUndoable(true); // will try at least
+        }
         
         if ( effect0 instanceof ChangeZoneEffect || effect0 instanceof ChangeZoneAllEffect )
             AbilityFactory.adjustChangeZoneTarget(params, this);

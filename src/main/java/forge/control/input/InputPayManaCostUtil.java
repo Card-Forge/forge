@@ -105,7 +105,7 @@ public class InputPayManaCostUtil {
             
             if (!skipExpress) {
                 // skip express mana if the ability is not undoable
-                if (!m.isUndoable()) {
+                if (!ma.isUndoable()) {
                     skipExpress = true;
                     continue;
                 }

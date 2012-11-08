@@ -143,7 +143,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                         rs.append(" R");
                     Map<String, String> produced = new HashMap<String, String>();
                     produced.put("Produced", rs.toString());
-                    final AbilityManaPart abMana = new AbilityManaPart(c, "0", produced);
+                    final AbilityManaPart abMana = new AbilityManaPart(c, produced);
                     if (player.isComputer()) {
                         abMana.produceMana(this);
                     } else if (GameActionUtil.showYesNoDialog(c, sb.toString())) {

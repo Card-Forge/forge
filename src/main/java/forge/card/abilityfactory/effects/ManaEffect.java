@@ -51,7 +51,7 @@ public class ManaEffect extends SpellEffect {
         }
         
         // Spells are not undoable
-        abMana.setUndoable(sa.isAbility() && abMana.isUndoable());
+        sa.setUndoable(sa.isAbility() && sa.isUndoable());
     
     
         final List<Player> tgtPlayers = getTargetPlayers(sa);
@@ -186,7 +186,7 @@ public class ManaEffect extends SpellEffect {
     
         // convert these to SubAbilities when appropriate
         if (sa.hasParam("Stuck")) {
-            abMana.setUndoable(false);
+            sa.setUndoable(false);
             card.addExtrinsicKeyword("This card doesn't untap during your next untap step.");
         }
     
@@ -194,7 +194,7 @@ public class ManaEffect extends SpellEffect {
         if (deplete != null) {
             final int num = card.getCounters(Counters.getType(deplete));
             if (num == 0) {
-                abMana.setUndoable(false);
+                sa.setUndoable(false);
                 Singletons.getModel().getGame().getAction().sacrifice(card, null);
             }
         }
@@ -256,10 +256,10 @@ public class ManaEffect extends SpellEffect {
     
         try {
             if ((sa.getParam("Amount") != null) && (amount != Integer.parseInt(sa.getParam("Amount")))) {
-                abMana.setUndoable(false);
+                sa.setUndoable(false);
             }
         } catch (final NumberFormatException n) {
-            abMana.setUndoable(false);
+            sa.setUndoable(false);
         }
     
         final StringBuilder sb = new StringBuilder();

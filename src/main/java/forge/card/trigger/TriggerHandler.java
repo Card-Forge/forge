@@ -448,7 +448,7 @@ public class TriggerHandler {
         if (regtrig instanceof TriggerTapsForMana) {
             final SpellAbility abMana = (SpellAbility) runParams.get("AbilityMana");
             if (null != abMana && null != abMana.getManaPart()) {
-                abMana.getManaPart().setUndoable(false);
+                abMana.setUndoable(false);
             }
         }
 

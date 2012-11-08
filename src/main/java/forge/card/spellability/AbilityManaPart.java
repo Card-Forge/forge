@@ -51,9 +51,6 @@ public class AbilityManaPart implements java.io.Serializable {
     /** The reflected. */
     private boolean reflected = false;
 
-    /** The undoable. */
-    private boolean undoable = true;
-
     /** The canceled. */
     private boolean canceled = false;
 
@@ -78,13 +75,8 @@ public class AbilityManaPart implements java.io.Serializable {
      * @param num
      *            a int.
      */
-    public AbilityManaPart(final Card sourceCard, final String parse, final Map<String, String> params) {
-        this(sourceCard, new Cost(sourceCard, parse, true), params);
-    }
-
-    public AbilityManaPart(final Card sourceCard, final Cost cost, final Map<String, String> params) {
+    public AbilityManaPart(final Card sourceCard, final Map<String, String> params) {
         this.sourceCard = sourceCard;
-        this.cost = cost;
         
         origProduced = params.containsKey("Produced") ? params.get("Produced") : "1";
         if (params.containsKey("RestrictValid")) {
@@ -146,12 +138,10 @@ public class AbilityManaPart implements java.io.Serializable {
         // TODO all of the following would be better as trigger events
         // "tapped for mana"
         if (source.getName().equals("Rainbow Vale")) {
-            this.undoable = false;
             source.addExtrinsicKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.");
         }
 
         if (source.getName().equals("Undiscovered Paradise")) {
-            this.undoable = false;
             // Probably best to conver this to an Extrinsic Ability
             source.setBounceAtUntap(true);
         }
@@ -349,17 +339,6 @@ public class AbilityManaPart implements java.io.Serializable {
 
     /**
      * <p>
-     * isSacrifice.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isSacrifice() {
-        return this.cost.getSacCost();
-    }
-
-    /**
-     * <p>
      * isReflectedMana.
      * </p>
      * 
@@ -437,29 +416,6 @@ public class AbilityManaPart implements java.io.Serializable {
 
     /**
      * <p>
-     * isUndoable.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isUndoable() {
-        return this.undoable && this.cost.isUndoable() && this.getSourceCard().isInPlay();
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>undoable</code>.
-     * </p>
-     * 
-     * @param bUndo
-     *            a boolean.
-     */
-    public final void setUndoable(final boolean bUndo) {
-        this.undoable = bUndo;
-    }
-
-    /**
-     * <p>
      * Setter for the field <code>canceled</code>.
      * </p>
      * 
@@ -479,17 +435,6 @@ public class AbilityManaPart implements java.io.Serializable {
      */
     public final boolean getCanceled() {
         return this.canceled;
-    }
-
-    /**
-     * <p>
-     * undo.
-     * </p>
-     */
-    public final void undo() {
-        if (this.isUndoable()) {
-            this.cost.refundPaidCost(this.getSourceCard());
-        }
     }
 
     /** {@inheritDoc} */

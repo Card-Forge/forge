@@ -43,7 +43,7 @@ public abstract class Ability extends SpellAbility {
      *            a {@link java.lang.String} object.
      */
     public Ability(final Card sourceCard, final String manaCost) {
-        super(SpellAbility.getAbility(), sourceCard);
+        super(sourceCard);
         this.setManaCost(manaCost);
     }
 
