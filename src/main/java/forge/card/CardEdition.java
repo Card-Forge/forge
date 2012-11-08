@@ -224,7 +224,7 @@ public final class CardEdition implements Comparable<CardEdition> { // immutable
                 return this.format.isSetLegal(subject.getCode());
             }
         }
-        
+
         public static final Predicate<CardEdition> hasBasicLands = new Predicate<CardEdition>() {
             @Override
             public boolean apply(CardEdition ed) {
