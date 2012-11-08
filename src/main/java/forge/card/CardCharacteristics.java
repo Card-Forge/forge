@@ -478,9 +478,9 @@ public class CardCharacteristics {
         this.sVars = new TreeMap<String, String>(source.getSVars());
         // String curSetCode = "";
         this.curSetCode = source.getCurSetCode();
-        
+
         this.replacementEffects = new ArrayList<ReplacementEffect>();
-        for(ReplacementEffect RE : source.getReplacementEffects()) {
+        for (ReplacementEffect RE : source.getReplacementEffects()) {
             this.replacementEffects.add(RE.getCopy());
         }
     }
