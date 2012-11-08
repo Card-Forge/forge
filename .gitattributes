@@ -13150,6 +13150,7 @@ src/main/java/forge/quest/data/QuestAssets.java -text
 src/main/java/forge/quest/data/QuestData.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestItemCondition.java -text
 src/main/java/forge/quest/data/QuestPreferences.java svneol=native#text/plain
+src/main/java/forge/quest/data/QuestWorld.java -text
 src/main/java/forge/quest/data/package-info.java svneol=native#text/plain
 src/main/java/forge/quest/io/PreconReader.java -text
 src/main/java/forge/quest/io/QuestDataIO.java svneol=native#text/plain

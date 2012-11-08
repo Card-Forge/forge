@@ -202,6 +202,8 @@ public final class NewConstants {
         public static final String DUELS = "quest/duels-dir";
         /** */
         public static final String CHALLENGES = "quest/challenges-dir";
+        /** */
+        public static final String WORLD = "quest/world-dir";
 
         /** The XMLDATA. */
         public static final String XMLDATA = "quest/data-xml";
