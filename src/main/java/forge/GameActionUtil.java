@@ -226,10 +226,10 @@ public final class GameActionUtil {
             public void execute() {
 
                 final List<Card> thrummingStones = controller.getCardsIn(ZoneType.Battlefield, "Thrumming Stone");
-                for(int i = 0; i < thrummingStones.size(); i++) {
+                for (int i = 0; i < thrummingStones.size(); i++) {
                     c.addExtrinsicKeyword("Ripple:4");
                 }
-                
+
                 final ArrayList<String> a = c.getKeyword();
                 for (int x = 0; x < a.size(); x++) {
                     if (a.get(x).toString().startsWith("Ripple")) {
@@ -276,7 +276,7 @@ public final class GameActionUtil {
                             GuiChoose.oneOrNone("Revealed cards:", revealed);
                             for (int i = 0; i < rippleMax; i++) {
                                 if (rippledCards[i] != null) {
-                                    Player p = rippledCards[i].getController(); 
+                                    Player p = rippledCards[i].getController();
 
                                     if (p.isHuman()) {
                                         final Object[] possibleValues = { "Yes", "No" };
@@ -481,7 +481,7 @@ public final class GameActionUtil {
         if (!hasPaid) {
             unpaid.execute();
             return;
-        } 
+        }
         if (remainingParts.isEmpty()) {
             paid.execute();
             return;
@@ -779,7 +779,7 @@ public final class GameActionUtil {
             Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
         }
-        
+
         c.getDamageHistory().registerDamage(player);
     }
 
@@ -1340,8 +1340,8 @@ public final class GameActionUtil {
 
         // add all appropriate mana abilities based on current types
         for (final Card land : lands) {
-            for( String landType : Constant.Color.BASIC_LANDS )
-            {
+            for (String landType : Constant.Color.BASIC_LANDS) {
+
                 if (land.isType(landType)) {
                     final AbilityFactory af = new AbilityFactory();
                     final SpellAbility sa = af.getAbility("AB$ Mana | Cost$ T | Produced$ " + produces.get(landType)
