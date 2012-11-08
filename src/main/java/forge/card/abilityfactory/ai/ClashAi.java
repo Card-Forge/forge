@@ -1,6 +1,5 @@
 package forge.card.abilityfactory.ai;
 
-import java.util.Map;
 
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
@@ -13,7 +12,7 @@ public class ClashAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, Map<String, String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         return true;
     }
     
@@ -21,7 +20,7 @@ public class ClashAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public boolean chkAIDrawback(Map<String, String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return true;
     }
     
@@ -29,7 +28,7 @@ public class ClashAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Target tgt = sa.getTarget();
         final Player opp = ai.getOpponent();
         if (tgt != null) {

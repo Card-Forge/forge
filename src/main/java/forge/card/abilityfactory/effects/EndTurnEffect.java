@@ -1,6 +1,5 @@
 package forge.card.abilityfactory.effects;
 
-import java.util.Map;
 
 import forge.Card;
 import forge.Singletons;
@@ -20,7 +19,7 @@ public class EndTurnEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void resolve(Map<String, String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         
         GameState game = Singletons.getModel().getGame();
         // Steps taken from gatherer's rulings on Time Stop.
@@ -58,7 +57,7 @@ public class EndTurnEffect extends SpellEffect {
      */
     
     @Override
-    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         return "End the turn.";
     }
 

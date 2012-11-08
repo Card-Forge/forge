@@ -1,6 +1,5 @@
 package forge.card.abilityfactory.ai;
 
-import java.util.Map;
 import java.util.Random;
 
 import forge.Card;
@@ -43,30 +42,30 @@ public class TokenAi extends SpellAiLogic {
      * @param af
      *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      */
-    private void readParameters(final Map<String, String> mapParams ) {
+    private void readParameters(final SpellAbility mapParams ) {
         String[] keywords;
 
-        if (mapParams.containsKey("TokenKeywords")) {
+        if (mapParams.hasParam("TokenKeywords")) {
             // TODO: Change this Split to a semicolon or something else
-            keywords = mapParams.get("TokenKeywords").split("<>");
+            keywords = mapParams.getParam("TokenKeywords").split("<>");
         } else {
             keywords = new String[0];
         }
 
 
-        this.tokenAmount = mapParams.get("TokenAmount");
-        this.tokenPower = mapParams.get("TokenPower");
-        this.tokenToughness = mapParams.get("TokenToughness");
-        this.tokenName = mapParams.get("TokenName");
-        this.tokenTypes = mapParams.get("TokenTypes").split(",");
+        this.tokenAmount = mapParams.getParam("TokenAmount");
+        this.tokenPower = mapParams.getParam("TokenPower");
+        this.tokenToughness = mapParams.getParam("TokenToughness");
+        this.tokenName = mapParams.getParam("TokenName");
+        this.tokenTypes = mapParams.getParam("TokenTypes").split(",");
         this.tokenKeywords = keywords;
 
     }
 
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Cost cost = sa.getPayCosts();
-        readParameters(params);
+        readParameters(sa);
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;
@@ -98,13 +97,13 @@ public class TokenAi extends SpellAiLogic {
         // Don't generate tokens without haste before main 2 if possible
         if (ph.getPhase().isBefore(PhaseType.MAIN2)
                 && ph.isPlayerTurn(ai) && !haste
-                && !params.containsKey("ActivationPhases")) {
+                && !sa.hasParam("ActivationPhases")) {
             return false;
         }
         if ((ph.isPlayerTurn(ai)
                 || ph.getPhase().isBefore(
                         PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))
-                && !params.containsKey("ActivationPhases") && !params.containsKey("PlayerTurn")
+                && !sa.hasParam("ActivationPhases") && !sa.hasParam("PlayerTurn")
                 && !AbilityFactory.isSorcerySpeed(sa) && !haste) {
             return false;
         }
@@ -173,8 +172,8 @@ public class TokenAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
-        readParameters(params);
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        readParameters(sa);
         final Card source = sa.getSourceCard();
         final Target tgt = sa.getTarget();
         if (tgt != null) {

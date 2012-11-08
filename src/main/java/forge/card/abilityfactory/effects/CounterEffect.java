@@ -2,8 +2,6 @@ package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import forge.Card;
 import forge.Singletons;
 import forge.card.abilityfactory.SpellEffect;
@@ -14,27 +12,27 @@ import forge.card.spellability.SpellPermanent;
 
 public class CounterEffect extends SpellEffect {
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
     
         final StringBuilder sb = new StringBuilder();
         final List<SpellAbility> sas;
     
-        if (params.containsKey("AllType")) {
+        if (sa.hasParam("AllType")) {
             sas = new ArrayList<SpellAbility>();
             for (int i=0; i < Singletons.getModel().getGame().getStack().size(); i++) {
                 SpellAbility spell = Singletons.getModel().getGame().getStack().peekAbility(i);
-                if (params.get("AllType").equals("Spell") && !spell.isSpell()) {
+                if (sa.getParam("AllType").equals("Spell") && !spell.isSpell()) {
                     continue;
                 }
-                if (params.containsKey("AllValid")) {
-                    if (!spell.getSourceCard().isValid(params.get("AllValid"), sa.getActivatingPlayer(), sa.getSourceCard())) {
+                if (sa.hasParam("AllValid")) {
+                    if (!spell.getSourceCard().isValid(sa.getParam("AllValid"), sa.getActivatingPlayer(), sa.getSourceCard())) {
                         continue;
                     }
                 }
                 sas.add(spell);
             }
         } else 
-            sas = getTargetSpellAbilities(sa, params);
+            sas = getTargetSpellAbilities(sa);
     
         sb.append("countering");
     
@@ -48,7 +46,7 @@ public class CounterEffect extends SpellEffect {
             }
         }
     
-        if (isAbility && params.containsKey("DestroyPermanent")) {
+        if (isAbility && sa.hasParam("DestroyPermanent")) {
             sb.append(" and destroy it");
         }
     
@@ -57,30 +55,30 @@ public class CounterEffect extends SpellEffect {
     } // end counterStackDescription
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         // TODO Before this resolves we should see if any of our targets are
         // still on the stack
         final List<SpellAbility> sas;
     
-        if (params.containsKey("AllType")) {
+        if (sa.hasParam("AllType")) {
             sas = new ArrayList<SpellAbility>();
             for (int i=0; i < Singletons.getModel().getGame().getStack().size(); i++) {
                 SpellAbility spell = Singletons.getModel().getGame().getStack().peekAbility(i);
-                if (params.get("AllType").equals("Spell") && !spell.isSpell()) {
+                if (sa.getParam("AllType").equals("Spell") && !spell.isSpell()) {
                     continue;
                 }
-                if (params.containsKey("AllValid")) {
-                    if (!spell.getSourceCard().isValid(params.get("AllValid"), sa.getActivatingPlayer(), sa.getSourceCard())) {
+                if (sa.hasParam("AllValid")) {
+                    if (!spell.getSourceCard().isValid(sa.getParam("AllValid"), sa.getActivatingPlayer(), sa.getSourceCard())) {
                         continue;
                     }
                 }
                 sas.add(spell);
             }
         } else 
-            sas = getTargetSpellAbilities(sa, params);
+            sas = getTargetSpellAbilities(sa);
     
-        if (params.containsKey("ForgetOtherTargets")) {
-            if (params.get("ForgetOtherTargets").equals("True")) {
+        if (sa.hasParam("ForgetOtherTargets")) {
+            if (sa.getParam("ForgetOtherTargets").equals("True")) {
                 sa.getSourceCard().clearRemembered();
             }
         }
@@ -97,15 +95,15 @@ public class CounterEffect extends SpellEffect {
                 continue;
             }
     
-            this.removeFromStack(tgtSA, sa, si, params);
+            this.removeFromStack(tgtSA, sa, si);
     
             // Destroy Permanent may be able to be turned into a SubAbility
-            if (tgtSA.isAbility() && params.containsKey("DestroyPermanent")) {
+            if (tgtSA.isAbility() && sa.hasParam("DestroyPermanent")) {
                 Singletons.getModel().getGame().getAction().destroy(tgtSACard);
             }
     
-            if (params.containsKey("RememberTargets")) {
-                if (params.get("RememberTargets").equals("True")) {
+            if (sa.hasParam("RememberTargets")) {
+                if (sa.getParam("RememberTargets").equals("True")) {
                     sa.getSourceCard().addRemembered(tgtSACard);
                 }
             }
@@ -124,12 +122,12 @@ public class CounterEffect extends SpellEffect {
      * @param si
      *            a {@link forge.card.spellability.SpellAbilityStackInstance}
      *            object.
-     * @param params 
+     * @param sa 
      */
-    private void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si, final Map<String, String> params) {
+    private void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si) {
         Singletons.getModel().getGame().getStack().remove(si);
         
-        String destination =  params.containsKey("Destination") ? params.get("Destination") : "Graveyard";
+        String destination =  srcSA.hasParam("Destination") ? srcSA.getParam("Destination") : "Graveyard";
 
         if (tgtSA.isAbility()) {
             // For Ability-targeted counterspells - do not move it anywhere,

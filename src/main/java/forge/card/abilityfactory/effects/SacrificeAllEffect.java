@@ -12,13 +12,13 @@ import forge.game.zone.ZoneType;
 
 public class SacrificeAllEffect extends SpellEffect {
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         // when getStackDesc is called, just build exactly what is happening
     
         final StringBuilder sb = new StringBuilder();
 
     
-        final String conditionDesc = params.get("ConditionDescription");
+        final String conditionDesc = sa.getParam("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
@@ -29,7 +29,7 @@ public class SacrificeAllEffect extends SpellEffect {
          * Target tgt = af.getAbTgt(); if (tgt != null) tgtPlayers =
          * tgt.getTargetPlayers(); else tgtPlayers =
          * AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
-         * params.get("Defined"), sa);
+         * sa.get("Defined"), sa);
          */
     
         sb.append("Sacrifice permanents.");
@@ -37,14 +37,14 @@ public class SacrificeAllEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
 
         final Card card = sa.getSourceCard();
 
         String valid = "";
 
-        if (params.containsKey("ValidCards")) {
-            valid = params.get("ValidCards");
+        if (sa.hasParam("ValidCards")) {
+            valid = sa.getParam("ValidCards");
         }
 
         // Ugh. If calculateAmount needs to be called with DestroyAll it _needs_
@@ -55,13 +55,13 @@ public class SacrificeAllEffect extends SpellEffect {
         }
 
         List<Card> list;
-        if (params.containsKey("Defined")) {
-            list = new ArrayList<Card>(AbilityFactory.getDefinedCards(sa.getAbilityFactory().getHostCard(), params.get("Defined"), sa));
+        if (sa.hasParam("Defined")) {
+            list = new ArrayList<Card>(AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa));
         } else {
             list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         }
 
-        final boolean remSacrificed = params.containsKey("RememberSacrificed");
+        final boolean remSacrificed = sa.hasParam("RememberSacrificed");
         if (remSacrificed) {
             card.clearRemembered();
         }

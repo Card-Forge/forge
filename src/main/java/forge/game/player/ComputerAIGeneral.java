@@ -20,13 +20,10 @@ package forge.game.player;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import com.esotericsoftware.minlog.Log;
 
 import forge.Card;
 
-import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.replacement.ReplaceMoved;
@@ -105,18 +102,21 @@ public class ComputerAIGeneral implements Computer {
 
         for (final Card c : all) {
             for (final SpellAbility sa : c.getSpellAbility()) {
-                if (sa.getAbilityFactory() == null) {
+                
+                if (sa.getApi() == null) {
                     continue;
                 }
-                final AbilityFactory af = sa.getAbilityFactory();
-                final Map<String, String> abilityParams = af.getMapParams();
-                if (abilityParams.containsKey("AB") && !abilityParams.get("AB").equals("Pump")) {
+
+                /// ????
+                // if ( sa.isAbility() || sa.isSpell() && sa.getApi() != ApiType.Pump ) continue 
+                if (sa.hasParam("AB") && !sa.getParam("AB").equals("Pump")) {
                     continue;
                 }
-                if (abilityParams.containsKey("SP") && !abilityParams.get("SP").equals("Pump")) {
+                if (sa.hasParam("SP") && !sa.getParam("SP").equals("Pump")) {
                     continue;
                 }
-                if (abilityParams.containsKey("KW") && abilityParams.get("KW").contains("Haste")) {
+                
+                if (sa.hasParam("KW") && sa.getParam("KW").contains("Haste")) {
                     return true;
                 }
             }
@@ -269,7 +269,7 @@ public class ComputerAIGeneral implements Computer {
         for (final Card c : l) {
             for (final SpellAbility sa : c.getNonManaSpellAbilities()) {
                 // Check if this AF is a Counterpsell
-                if ((sa.getAbilityFactory() != null) && sa.getAbilityFactory().getAPI() == ApiType.Counter) {
+                if (sa.getApi() == ApiType.Counter) {
                     spellAbility.add(sa);
                 }
             }

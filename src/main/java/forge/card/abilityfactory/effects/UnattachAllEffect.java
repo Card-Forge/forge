@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.effects;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -137,10 +136,10 @@ public class UnattachAllEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         sb.append("Unattach all valid Equipment and Auras from ");
-        final List<Object> targets = getTargetObjects(sa, params);
+        final List<Object> targets = getTargetObjects(sa);
         sb.append(StringUtils.join(targets, " "));  
         return sb.toString();
     }
@@ -149,15 +148,15 @@ public class UnattachAllEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void resolve(Map<String, String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         Card source = sa.getSourceCard();
-        final List<Object> targets = getTargetObjects(sa, params);
+        final List<Object> targets = getTargetObjects(sa);
     
         // If Cast Targets will be checked on the Stack
         for (final Object o : targets) {
             if (!( o instanceof GameEntity )) continue; 
             
-            String valid = params.get("UnattachValid");
+            String valid = sa.getParam("UnattachValid");
             List<Card> unattachList = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
             unattachList = CardLists.getValidCards(unattachList, valid.split(","), source.getController(), source);
             for (final Card c : unattachList) {

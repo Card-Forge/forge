@@ -14,14 +14,14 @@ import forge.util.MyRandom;
 public class CharmAi extends SpellAiLogic {
     
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Random r = MyRandom.getRandom();
 
-        final int num = Integer.parseInt(params.containsKey("CharmNum") ? params.get("CharmNum") : "1");
-        final int min = params.containsKey("MinCharmNum") ? Integer.parseInt(params.get("MinCharmNum")) : num;
+        final int num = Integer.parseInt(sa.hasParam("CharmNum") ? sa.getParam("CharmNum") : "1");
+        final int min = sa.hasParam("MinCharmNum") ? Integer.parseInt(sa.getParam("MinCharmNum")) : num;
         boolean timingRight = sa.isTrigger(); //is there a reason to play the charm now?
 
-        List<AbilitySub> chooseFrom = CharmEffect.makePossibleOptions(sa, params);
+        List<AbilitySub> chooseFrom = CharmEffect.makePossibleOptions(sa);
         List<AbilitySub> chosenList = chooseOptionsAi(ai, timingRight, chooseFrom, num, min);
         
         if (chosenList == null || chosenList.isEmpty()) {

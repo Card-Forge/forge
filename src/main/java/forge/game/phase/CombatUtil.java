@@ -1690,22 +1690,19 @@ public class CombatUtil {
             return power;
         }
         for (SpellAbility ability : defender.getAllSpellAbilities()) {
-            if (!(ability instanceof AbilityActivated) || ability.getAbilityFactory() == null
-                    || ability.getPayCosts() == null) {
+            if (!(ability instanceof AbilityActivated) || ability.getPayCosts() == null) {
                 continue;
             }
-            AbilityFactory af = ability.getAbilityFactory();
+            if (ability.getApi() != ApiType.Pump) {
+                continue;
+            }
 
-            if (af.getAPI() != ApiType.Pump) {
-                continue;
-            }
-            Map<String, String> params = af.getMapParams();
-            if (!params.containsKey("NumAtt")) {
+            if (!ability.hasParam("NumAtt")) {
                 continue;
             }
 
             if (ComputerUtil.canPayCost(ability, defender.getController())) {
-                int pBonus = AbilityFactory.calculateAmount(ability.getSourceCard(), params.get("NumAtt"), ability);
+                int pBonus = AbilityFactory.calculateAmount(ability.getSourceCard(), ability.getParam("NumAtt"), ability);
                 if (pBonus > 0) {
                     power += pBonus;
                 }
@@ -1808,22 +1805,16 @@ public class CombatUtil {
             return toughness;
         }
         for (SpellAbility ability : defender.getAllSpellAbilities()) {
-            if (!(ability instanceof AbilityActivated) || ability.getAbilityFactory() == null
-                    || ability.getPayCosts() == null) {
+            if (!(ability instanceof AbilityActivated) || ability.getPayCosts() == null) {
                 continue;
             }
-            AbilityFactory af = ability.getAbilityFactory();
 
-            if (af.getAPI() != ApiType.Pump) {
-                continue;
-            }
-            Map<String, String> params = af.getMapParams();
-            if (!params.containsKey("NumDef")) {
+            if (ability.getApi() != ApiType.Pump || !ability.hasParam("NumDef")) {
                 continue;
             }
 
             if (ComputerUtil.canPayCost(ability, defender.getController())) {
-                int tBonus = AbilityFactory.calculateAmount(ability.getSourceCard(), params.get("NumDef"), ability);
+                int tBonus = AbilityFactory.calculateAmount(ability.getSourceCard(), ability.getParam("NumDef"), ability);
                 if (tBonus > 0) {
                     toughness += tBonus;
                 }

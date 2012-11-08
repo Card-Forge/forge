@@ -2,8 +2,6 @@ package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import javax.swing.JOptionPane;
 
 import forge.Card;
@@ -28,14 +26,14 @@ public class TwoPilesEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
     
         String valid = "";
-        if (params.containsKey("ValidCards")) {
-            valid = params.get("ValidCards");
+        if (sa.hasParam("ValidCards")) {
+            valid = sa.getParam("ValidCards");
         }
     
         sb.append("Separate all ").append(valid).append(" cards ");
@@ -51,31 +49,31 @@ public class TwoPilesEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void resolve(Map<String, String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Card card = sa.getSourceCard();
         ZoneType zone = null;
         boolean pile1WasChosen = true;
 
-        if (params.containsKey("Zone")) {
-            zone = ZoneType.smartValueOf(params.get("Zone"));
+        if (sa.hasParam("Zone")) {
+            zone = ZoneType.smartValueOf(sa.getParam("Zone"));
         }
 
         String valid = "";
-        if (params.containsKey("ValidCards")) {
-            valid = params.get("ValidCards");
+        if (sa.hasParam("ValidCards")) {
+            valid = sa.getParam("ValidCards");
         }
 
         final Target tgt = sa.getTarget();
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         Player separator = card.getController();
-        if (params.containsKey("Separator")) {
-            separator = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Separator"), sa).get(0);
+        if (sa.hasParam("Separator")) {
+            separator = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Separator"), sa).get(0);
         }
 
         Player chooser = tgtPlayers.get(0);
-        if (params.containsKey("Chooser")) {
-            chooser = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Chooser"), sa).get(0);
+        if (sa.hasParam("Chooser")) {
+            chooser = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Chooser"), sa).get(0);
         }
 
         for (final Player p : tgtPlayers) {
@@ -83,8 +81,8 @@ public class TwoPilesEffect extends SpellEffect {
                 final ArrayList<Card> pile1 = new ArrayList<Card>();
                 final ArrayList<Card> pile2 = new ArrayList<Card>();
                 List<Card> pool = new ArrayList<Card>();
-                if (params.containsKey("DefinedCards")) {
-                    pool = new ArrayList<Card>(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("DefinedCards"), sa));
+                if (sa.hasParam("DefinedCards")) {
+                    pool = new ArrayList<Card>(AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("DefinedCards"), sa));
                 } else {
                     pool = p.getCardsIn(zone);
                 }
@@ -134,12 +132,12 @@ public class TwoPilesEffect extends SpellEffect {
                 System.out.println("Pile 2:" + pile2);
                 card.clearRemembered();
 
-                pile1WasChosen = selectPiles(params, sa, pile1, pile2, chooser, card, pool);
+                pile1WasChosen = selectPiles(sa, pile1, pile2, chooser, card, pool);
                 
                 // take action on the chosen pile
-                if (params.containsKey("ChosenPile")) {
+                if (sa.hasParam("ChosenPile")) {
                     final AbilityFactory afPile = new AbilityFactory();
-                    final SpellAbility action = afPile.getAbility(card.getSVar(params.get("ChosenPile")), card);
+                    final SpellAbility action = afPile.getAbility(card.getSVar(sa.getParam("ChosenPile")), card);
                     action.setActivatingPlayer(sa.getActivatingPlayer());
                     ((AbilitySub) action).setParent(sa);
 
@@ -147,7 +145,7 @@ public class TwoPilesEffect extends SpellEffect {
                 }
 
                 // take action on the chosen pile
-                if (params.containsKey("UnchosenPile")) {
+                if (sa.hasParam("UnchosenPile")) {
                     //switch the remembered cards
                     card.clearRemembered();
                     if (pile1WasChosen) {
@@ -160,7 +158,7 @@ public class TwoPilesEffect extends SpellEffect {
                         }
                     }
                     final AbilityFactory afPile = new AbilityFactory();
-                    final SpellAbility action = afPile.getAbility(card.getSVar(params.get("UnchosenPile")), card);
+                    final SpellAbility action = afPile.getAbility(card.getSVar(sa.getParam("UnchosenPile")), card);
                     action.setActivatingPlayer(sa.getActivatingPlayer());
                     ((AbilitySub) action).setParent(sa);
 
@@ -170,12 +168,12 @@ public class TwoPilesEffect extends SpellEffect {
         }
     } // end twoPiles resolve
 
-    private boolean selectPiles(final Map<String, String> params, final SpellAbility sa, ArrayList<Card> pile1, ArrayList<Card> pile2, 
+    private boolean selectPiles(final SpellAbility sa, ArrayList<Card> pile1, ArrayList<Card> pile2, 
             Player chooser, Card card, List<Card> pool) {
         boolean pile1WasChosen = true;
         // then, the chooser picks a pile
         
-        if (params.containsKey("FaceDown")) {
+        if (sa.hasParam("FaceDown")) {
             // Used for Phyrexian Portal, FaceDown Pile choosing
             if (chooser.isHuman()) {
                 final String p1Str = String.format("Pile 1 (%s cards)", pile1.size());

@@ -1,6 +1,5 @@
 package forge.card.abilityfactory.effects;
 
-import java.util.Map;
 
 import forge.Card;
 import forge.card.abilityfactory.SpellEffect;
@@ -14,10 +13,10 @@ public class GameWinEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void resolve(Map<String, String> params, SpellAbility sa) {
-        final Card card = sa.getAbilityFactory().getHostCard();
+    public void resolve(SpellAbility sa) {
+        final Card card = sa.getSourceCard();
 
-        for (final Player p : getTargetPlayers(sa, params)) {
+        for (final Player p : getTargetPlayers(sa)) {
             p.altWinBySpellEffect(card.getName());
         }
     }

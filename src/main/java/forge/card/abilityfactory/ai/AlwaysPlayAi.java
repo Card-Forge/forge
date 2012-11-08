@@ -1,6 +1,5 @@
 package forge.card.abilityfactory.ai;
 
-import java.util.Map;
 
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
@@ -11,7 +10,7 @@ public class AlwaysPlayAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         return true;
     }
 
@@ -20,7 +19,7 @@ public class AlwaysPlayAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public boolean chkAIDrawback(Map<String, String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return true;
     }
 }

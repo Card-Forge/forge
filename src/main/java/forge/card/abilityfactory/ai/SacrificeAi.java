@@ -1,8 +1,6 @@
 package forge.card.abilityfactory.ai;
 
 import java.util.List;
-import java.util.Map;
-
 import forge.Card;
 import forge.CardLists;
 import forge.card.abilityfactory.AbilityFactory;
@@ -20,15 +18,15 @@ public class SacrificeAi extends SpellAiLogic {
     // **************************************************************
 
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
-        boolean chance = sacrificeTgtAI(ai, params, sa);
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+        boolean chance = sacrificeTgtAI(ai, sa);
 
         // Some additional checks based on what is being sacrificed, and who is
         // sacrificing
         final Target tgt = sa.getTarget();
         if (tgt != null) {
-            final String valid = params.get("SacValid");
-            String num = params.get("Amount");
+            final String valid = sa.getParam("SacValid");
+            String num = sa.getParam("Amount");
             num = (num == null) ? "1" : num;
             final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), num, sa);
 
@@ -60,16 +58,16 @@ public class SacrificeAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player ai) {
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         // AI should only activate this during Human's turn
 
-        return sacrificeTgtAI(ai, params, sa);
+        return sacrificeTgtAI(ai, sa);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         // AI should only activate this during Human's turn
-        boolean chance = sacrificeTgtAI(ai, params, sa);
+        boolean chance = sacrificeTgtAI(ai, sa);
 
         // Improve AI for triggers. If source is a creature with:
         // When ETB, sacrifice a creature. Check to see if the AI has something
@@ -81,7 +79,7 @@ public class SacrificeAi extends SpellAiLogic {
         return chance || mandatory;
     }
 
-    private boolean sacrificeTgtAI(final Player ai, final Map<String, String> params, final SpellAbility sa) {
+    private boolean sacrificeTgtAI(final Player ai, final SpellAbility sa) {
 
         final Card card = sa.getSourceCard();
         final Target tgt = sa.getTarget();
@@ -97,8 +95,8 @@ public class SacrificeAi extends SpellAiLogic {
             }
         }
 
-        final String defined = params.get("Defined");
-        final String valid = params.get("SacValid");
+        final String defined = sa.getParam("Defined");
+        final String valid = sa.getParam("SacValid");
         if (defined == null) {
             // Self Sacrifice.
         } else if (defined.equals("Each")
@@ -108,7 +106,7 @@ public class SacrificeAi extends SpellAiLogic {
             // Only cast it if AI doesn't have the full amount of Valid
             // TODO: Cast if the type is favorable: my "worst" valid is
             // worse than his "worst" valid
-            final String num = params.containsKey("Amount") ? params.get("Amount") : "1";
+            final String num = sa.hasParam("Amount") ? sa.getParam("Amount") : "1";
             int amount = AbilityFactory.calculateAmount(card, num, sa);
 
             final Card source = sa.getSourceCard();

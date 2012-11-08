@@ -39,7 +39,7 @@ import forge.game.zone.ZoneType;
 
 //AB:GainControl|ValidTgts$Creature|TgtPrompt$Select target legendary creature|LoseControl$Untap,LoseControl|SpellDescription$Gain control of target xxxxxxx
 
-//GainControl specific params:
+//GainControl specific sa:
 //  LoseControl - the lose control conditions (as a comma separated list)
 //  -Untap - source card becomes untapped
 //  -LoseControl - you lose control of source card
@@ -62,13 +62,13 @@ import forge.game.zone.ZoneType;
  */
 public class ControlGainAi extends SpellAiLogic {
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, final SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, final SpellAbility sa) {
         boolean hasCreature = false;
         boolean hasArtifact = false;
         boolean hasEnchantment = false;
         boolean hasLand = false;
 
-        final List<String> lose = params.containsKey("LoseControl") ? Arrays.asList(params.get("LoseControl").split(",")) : null;
+        final List<String> lose = sa.hasParam("LoseControl") ? Arrays.asList(sa.getParam("LoseControl").split(",")) : null;
 
         
         final Target tgt = sa.getTarget();
@@ -163,36 +163,36 @@ public class ControlGainAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (sa.getTarget() == null) {
             if (mandatory) {
                 return true;
             }
         } else {
-            return this.canPlayAI(ai, params, sa);
+            return this.canPlayAI(ai, sa);
         }
 
         return true;
     }
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, final Player ai) {
+    public boolean chkAIDrawback(SpellAbility sa, final Player ai) {
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
-            if (params.containsKey("AllValid")) {
+            if (sa.hasParam("AllValid")) {
                 List<Card> tgtCards = CardLists.filterControlledBy(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), ai.getOpponent());
-                tgtCards = AbilityFactory.filterListByType(tgtCards, params.get("AllValid"), sa);
+                tgtCards = AbilityFactory.filterListByType(tgtCards, sa.getParam("AllValid"), sa);
                 if (tgtCards.isEmpty()) {
                     return false;
                 }
             }
             
-            final List<String> lose = params.containsKey("LoseControl") ? Arrays.asList(params.get("LoseControl").split(",")) : null;
+            final List<String> lose = sa.hasParam("LoseControl") ? Arrays.asList(sa.getParam("LoseControl").split(",")) : null;
             if ((lose != null) && lose.contains("EOT")
                     && Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
                 return false;
             }
         } else {
-            return this.canPlayAI(ai, params, sa);
+            return this.canPlayAI(ai, sa);
         }
 
         return true;

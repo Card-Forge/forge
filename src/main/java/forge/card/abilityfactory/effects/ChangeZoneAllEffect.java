@@ -20,7 +20,7 @@ public class ChangeZoneAllEffect extends SpellEffect {
     
     
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         // TODO build Stack Description will need expansion as more cards are added
 
         final String[] desc = sa.getDescription().split(":");
@@ -33,9 +33,9 @@ public class ChangeZoneAllEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
-        final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));
-        final List<ZoneType> origin = ZoneType.listValueOf(params.get("Origin"));
+    public void resolve(SpellAbility sa) {
+        final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
+        final List<ZoneType> origin = ZoneType.listValueOf(sa.getParam("Origin"));
 
         List<Card> cards = null;
 
@@ -44,8 +44,8 @@ public class ChangeZoneAllEffect extends SpellEffect {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
-        } else if (params.containsKey("Defined")) {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+        } else if (sa.hasParam("Defined")) {
+            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
 
         if ((tgtPlayers == null) || tgtPlayers.isEmpty()) {
@@ -54,17 +54,17 @@ public class ChangeZoneAllEffect extends SpellEffect {
             cards = tgtPlayers.get(0).getCardsIn(origin);
         }
 
-        cards = AbilityFactory.filterListByType(cards, params.get("ChangeType"), sa);
+        cards = AbilityFactory.filterListByType(cards, sa.getParam("ChangeType"), sa);
 
-        if (params.containsKey("ForgetOtherRemembered")) {
+        if (sa.hasParam("ForgetOtherRemembered")) {
             sa.getSourceCard().clearRemembered();
         }
 
-        final String remember = params.get("RememberChanged");
+        final String remember = sa.getParam("RememberChanged");
 
         // I don't know if library position is necessary. It's here if it is,
         // just in case
-        final int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params.get("LibraryPosition"))
+        final int libraryPos = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition"))
                 : 0;
         for (final Card c : cards) {
             if (destination.equals(ZoneType.Battlefield)) {
@@ -75,20 +75,20 @@ public class ChangeZoneAllEffect extends SpellEffect {
                         continue;
                     }
                 }
-                if (params.containsKey("Tapped")) {
+                if (sa.hasParam("Tapped")) {
                     c.setTapped(true);
                 }
             }
 
-            if (params.containsKey("GainControl")) {
+            if (sa.hasParam("GainControl")) {
                 c.addController(sa.getSourceCard());
                 Singletons.getModel().getGame().getAction().moveToPlay(c, sa.getActivatingPlayer());
             } else {
                 final Card movedCard = Singletons.getModel().getGame().getAction().moveTo(destination, c, libraryPos);
-                if (params.containsKey("ExileFaceDown")) {
+                if (sa.hasParam("ExileFaceDown")) {
                     movedCard.setState(CardCharacteristicName.FaceDown);
                 }
-                if (params.containsKey("Tapped")) {
+                if (sa.hasParam("Tapped")) {
                     movedCard.setTapped(true);
                 }
             }
@@ -100,7 +100,7 @@ public class ChangeZoneAllEffect extends SpellEffect {
 
         // if Shuffle parameter exists, and any amount of cards were owned by
         // that player, then shuffle that library
-        if (params.containsKey("Shuffle")) {
+        if (sa.hasParam("Shuffle")) {
             for( Player p : Singletons.getModel().getGame().getPlayers()) {
                 if (Iterables.any(cards, CardPredicates.isOwner(p))) {
                     p.shuffle();

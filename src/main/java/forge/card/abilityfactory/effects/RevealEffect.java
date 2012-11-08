@@ -14,27 +14,27 @@ import forge.gui.GuiChoose;
 
 public class RevealEffect extends RevealEffectBase {
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
-        final Card host = sa.getAbilityFactory().getHostCard();
-        final boolean anyNumber = params.containsKey("AnyNumber");
+    public void resolve(SpellAbility sa) {
+        final Card host = sa.getSourceCard();
+        final boolean anyNumber = sa.hasParam("AnyNumber");
 
         final Target tgt = sa.getTarget();
 
-        for (final Player p : getTargetPlayers(sa, params)) {
+        for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 final List<Card> handChoices = p.getCardsIn(ZoneType.Hand);
                 if (handChoices.size() > 0) {
                     final List<Card> revealed = new ArrayList<Card>();
-                    if (params.containsKey("Random")) {
+                    if (sa.hasParam("Random")) {
                         revealed.add(CardUtil.getRandom(handChoices));
                         GuiChoose.oneOrNone("Revealed card(s)", revealed);
                     } else {
                         List<Card> valid = new ArrayList<Card>(handChoices);
                         int max = 1;
-                        if (params.containsKey("RevealValid")) {
-                            valid = CardLists.getValidCards(valid, params.get("RevealValid"), p, host);
+                        if (sa.hasParam("RevealValid")) {
+                            valid = CardLists.getValidCards(valid, sa.getParam("RevealValid"), p, host);
                         }
-                        if (params.containsKey("AnyNumber")) {
+                        if (sa.hasParam("AnyNumber")) {
                             max = valid.size();
                         }
                         revealed.addAll(getRevealedList(sa.getActivatingPlayer(), valid, max, anyNumber));
@@ -43,7 +43,7 @@ public class RevealEffect extends RevealEffectBase {
                         }
                     }
 
-                    if (params.containsKey("RememberRevealed")) {
+                    if (sa.hasParam("RememberRevealed")) {
                         for (final Card rem : revealed) {
                             host.addRemembered(rem);
                         }
@@ -55,19 +55,19 @@ public class RevealEffect extends RevealEffectBase {
     }
 
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         if (tgtPlayers.size() > 0) {
             sb.append(tgtPlayers.get(0)).append(" reveals ");
-            if (params.containsKey("AnyNumber")) {
+            if (sa.hasParam("AnyNumber")) {
                 sb.append("any number of cards ");
             } else {
                 sb.append("a card ");
             }
-            if (params.containsKey("Random")) {
+            if (sa.hasParam("Random")) {
                 sb.append("at random ");
             }
             sb.append("from his or her hand.");

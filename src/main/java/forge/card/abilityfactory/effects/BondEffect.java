@@ -14,10 +14,10 @@ import forge.gui.GuiChoose;
 
 public class BondEffect extends SpellEffect {
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         // find card that triggered pairing first
         ArrayList<Card> trigCards;
-        trigCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+        trigCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
 
         // Check that this card hasn't already become paired by an earlier trigger
         if (trigCards.get(0).isPaired() || !trigCards.get(0).isInZone(ZoneType.Battlefield)) {
@@ -26,7 +26,7 @@ public class BondEffect extends SpellEffect {
 
         // find list of valid cards to pair with
         List<Card> cards = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
-        cards = AbilityFactory.filterListByType(cards, params.get("ValidCards"), sa);
+        cards = AbilityFactory.filterListByType(cards, sa.getParam("ValidCards"), sa);
         if (cards.isEmpty()) {
             return;
         }
@@ -50,9 +50,9 @@ public class BondEffect extends SpellEffect {
     }
 
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         ArrayList<Card> tgts;
-        tgts = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+        tgts = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
 
         final StringBuilder sb = new StringBuilder();
 

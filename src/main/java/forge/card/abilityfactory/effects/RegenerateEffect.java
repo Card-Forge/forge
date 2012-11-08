@@ -2,7 +2,6 @@ package forge.card.abilityfactory.effects;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import forge.Card;
 import forge.Command;
@@ -18,9 +17,9 @@ public class RegenerateEffect extends SpellEffect
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        final List<Card> tgtCards = getTargetCards(sa, params);
+        final List<Card> tgtCards = getTargetCards(sa);
     
         if (tgtCards.size() > 0) {
             sb.append("Regenerate ");
@@ -45,10 +44,10 @@ public class RegenerateEffect extends SpellEffect
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Target tgt = sa.getTarget();
 
-        for (final Card tgtC : getTargetCards(sa, params)) {
+        for (final Card tgtC : getTargetCards(sa)) {
             final Command untilEOT = new Command() {
                 private static final long serialVersionUID = 1922050611313909200L;
 

@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import forge.Card;
 import forge.GameActionUtil;
@@ -17,9 +16,9 @@ public class FlipCoinEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final Card host = sa.getSourceCard();
-        final Player player = params.containsKey("OpponentCalls") ? host.getController().getOpponent() : host
+        final Player player = sa.hasParam("OpponentCalls") ? host.getController().getOpponent() : host
                 .getController();
 
         final StringBuilder sb = new StringBuilder();
@@ -29,11 +28,11 @@ public class FlipCoinEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
         final Player player = host.getController();
 
-        final ArrayList<Player> caller = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Caller"), sa);
+        final ArrayList<Player> caller = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Caller"), sa);
         if (caller.size() == 0) {
             caller.add(player);
         }
@@ -44,16 +43,16 @@ public class FlipCoinEffect extends SpellEffect {
         // Run triggers
         // HashMap<String,Object> runParams = new HashMap<String,Object>();
         // runParams.put("Player", player);
-        if (params.get("RememberAll") != null) {
+        if (sa.getParam("RememberAll") != null) {
             host.addRemembered(host);
         }
 
         if (victory) {
-            if (params.get("RememberWinner") != null) {
+            if (sa.getParam("RememberWinner") != null) {
                 host.addRemembered(host);
             }
-            if (params.containsKey("WinSubAbility")) {
-                final SpellAbility win = afOutcomes.getAbility(host.getSVar(params.get("WinSubAbility")), host);
+            if (sa.hasParam("WinSubAbility")) {
+                final SpellAbility win = afOutcomes.getAbility(host.getSVar(sa.getParam("WinSubAbility")), host);
                 win.setActivatingPlayer(player);
                 ((AbilitySub) win).setParent(sa);
 
@@ -61,11 +60,11 @@ public class FlipCoinEffect extends SpellEffect {
             }
             // runParams.put("Won","True");
         } else {
-            if (params.get("RememberLoser") != null) {
+            if (sa.getParam("RememberLoser") != null) {
                 host.addRemembered(host);
             }
-            if (params.containsKey("LoseSubAbility")) {
-                final SpellAbility lose = afOutcomes.getAbility(host.getSVar(params.get("LoseSubAbility")), host);
+            if (sa.hasParam("LoseSubAbility")) {
+                final SpellAbility lose = afOutcomes.getAbility(host.getSVar(sa.getParam("LoseSubAbility")), host);
                 lose.setActivatingPlayer(player);
                 ((AbilitySub) lose).setParent(sa);
 

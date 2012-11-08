@@ -34,15 +34,15 @@ public final class BondAi extends SpellAiLogic {
      * <p>
      * bondCanPlayAI.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * 
      * @return a boolean.
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         return true;
     } // end bondCanPlayAI()
 }

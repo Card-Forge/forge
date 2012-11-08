@@ -16,12 +16,12 @@ import forge.game.zone.ZoneType;
 public class CountersPutAllEffect extends SpellEffect  { 
 
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
-        final Counters cType = Counters.valueOf(params.get("CounterType"));
-        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
-        final String zone = params.containsKey("ValidZone") ? params.get("ValidZone") : "Battlefield";
+        final Counters cType = Counters.valueOf(sa.getParam("CounterType"));
+        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
+        final String zone = sa.hasParam("ValidZone") ? sa.getParam("ValidZone") : "Battlefield";
     
         sb.append("Put ").append(amount).append(" ").append(cType.getName()).append(" counter");
         if (amount != 1) {
@@ -38,11 +38,11 @@ public class CountersPutAllEffect extends SpellEffect  {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
-        final String type = params.get("CounterType");
-        final int counterAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
-        final String valid = params.get("ValidCards");
-        final ZoneType zone = params.containsKey("ValidZone") ? ZoneType.smartValueOf(params.get("ValidZone")) : ZoneType.Battlefield;
+    public void resolve(SpellAbility sa) {
+        final String type = sa.getParam("CounterType");
+        final int counterAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
+        final String valid = sa.getParam("ValidCards");
+        final ZoneType zone = sa.hasParam("ValidZone") ? ZoneType.smartValueOf(sa.getParam("ValidZone")) : ZoneType.Battlefield;
 
         List<Card> cards = Singletons.getModel().getGame().getCardsIn(zone);
         cards = CardLists.getValidCards(cards, valid, sa.getSourceCard().getController(), sa.getSourceCard());

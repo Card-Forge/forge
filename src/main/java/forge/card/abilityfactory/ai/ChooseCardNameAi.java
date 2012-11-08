@@ -10,15 +10,15 @@ public class ChooseCardNameAi extends SpellAiLogic {
     
     
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return true;
     }
     
     
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         
-        if (params.containsKey("AILogic")) {
+        if (sa.hasParam("AILogic")) {
             // Don't tap creatures that may be able to block
             if (ComputerUtil.waitForBlocking(sa)) {
                 return false;
@@ -39,7 +39,7 @@ public class ChooseCardNameAi extends SpellAiLogic {
     }
     
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         // TODO - there is no AILogic implemented yet
         return false;
     }

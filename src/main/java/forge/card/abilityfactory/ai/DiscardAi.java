@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.ai;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import forge.Card;
@@ -21,7 +20,7 @@ import forge.util.MyRandom;
 public class DiscardAi extends SpellAiLogic {
 
     @Override
-    protected boolean canPlayAI(Player ai, Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
         final Cost abCost = sa.getPayCosts();
@@ -55,7 +54,7 @@ public class DiscardAi extends SpellAiLogic {
         } else {
             // TODO: Add appropriate restrictions
             final List<Player> players = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
-                    params.get("Defined"), sa);
+                    sa.getParam("Defined"), sa);
 
             if (players.size() == 1) {
                 if (players.get(0).isComputer()) {
@@ -75,8 +74,8 @@ public class DiscardAi extends SpellAiLogic {
             }
         }
 
-        if (!params.get("Mode").equals("Hand") && !params.get("Mode").equals("RevealDiscardAll")) {
-            if (params.get("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")) {
+        if (!sa.getParam("Mode").equals("Hand") && !sa.getParam("Mode").equals("RevealDiscardAll")) {
+            if (sa.getParam("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
                 final int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa, ai), ai.getOpponent()
                         .getCardsIn(ZoneType.Hand).size());
@@ -86,12 +85,12 @@ public class DiscardAi extends SpellAiLogic {
 
         // Don't use draw abilities before main 2 if possible
         if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
-                && !params.containsKey("ActivationPhases")) {
+                && !sa.hasParam("ActivationPhases")) {
             return false;
         }
 
         // Don't tap creatures that may be able to block
-        if (ComputerUtil.waitForBlocking(sa) && !params.containsKey("ActivationPhases")) {
+        if (ComputerUtil.waitForBlocking(sa) && !sa.hasParam("ActivationPhases")) {
             return false;
         }
 
@@ -121,7 +120,7 @@ public class DiscardAi extends SpellAiLogic {
 
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             Player opp = ai.getOpponent();
@@ -140,7 +139,7 @@ public class DiscardAi extends SpellAiLogic {
     } // discardTrigger()
 
     @Override
-    public boolean chkAIDrawback(Map<String,String> params, SpellAbility sa, Player ai) {
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         // Drawback AI improvements
         // if parent draws cards, make sure cards in hand + cards drawn > 0
         final Target tgt = sa.getTarget();

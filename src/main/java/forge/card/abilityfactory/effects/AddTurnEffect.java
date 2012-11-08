@@ -14,12 +14,12 @@ import forge.game.player.Player;
 public class AddTurnEffect extends SpellEffect {
     
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
     
         final StringBuilder sb = new StringBuilder();
-        final int numTurns = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumTurns"), sa);
+        final int numTurns = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumTurns"), sa);
     
-        List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        List<Player> tgtPlayers = getTargetPlayers(sa);
     
         
         for (final Player player : tgtPlayers) {
@@ -38,8 +38,8 @@ public class AddTurnEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
-        final int numTurns = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumTurns"), sa);
+    public void resolve(SpellAbility sa) {
+        final int numTurns = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumTurns"), sa);
 
         ArrayList<Player> tgtPlayers;
 
@@ -47,17 +47,17 @@ public class AddTurnEffect extends SpellEffect {
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 for (int i = 0; i < numTurns; i++) {
                     ExtraTurn extra = Singletons.getModel().getGame().getPhaseHandler().addExtraTurn(p);
-                    if (params.containsKey("LoseAtEndStep")) {
+                    if (sa.hasParam("LoseAtEndStep")) {
                         extra.setLoseAtEndStep(true);
                     }
-                    if (params.containsKey("SkipUntap")) {
+                    if (sa.hasParam("SkipUntap")) {
                         extra.setSkipUntap(true);
                     }
                 }

@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import forge.Card;
 import forge.card.abilityfactory.AbilityFactory;
@@ -13,7 +12,7 @@ import forge.card.spellability.Target;
 public class FightEffect extends SpellEffect {
     
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
         Card fighter1 = null;
@@ -26,8 +25,8 @@ public class FightEffect extends SpellEffect {
                 fighter1 = tgts.get(0);
             }
         }
-        if (params.containsKey("Defined")) {
-            ArrayList<Card> defined = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+        if (sa.hasParam("Defined")) {
+            ArrayList<Card> defined = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
             // Allow both fighters to come from defined list if first fighter not already found
             if (defined.size() > 1 && fighter1 == null) {
                 fighter1 = defined.get(0);
@@ -54,7 +53,7 @@ public class FightEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void resolve(Map<String, String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         Card fighter1 = null;
         Card fighter2 = null;
         final Target tgt = sa.getTarget();
@@ -65,8 +64,8 @@ public class FightEffect extends SpellEffect {
                 fighter1 = tgts.get(0);
             }
         }
-        if (params.containsKey("Defined")) {
-            ArrayList<Card> defined = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+        if (sa.hasParam("Defined")) {
+            ArrayList<Card> defined = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
             // Allow both fighters to come from defined list if first fighter not already found
             if (defined.size() > 1 && fighter1 == null) {
                 fighter1 = defined.get(0);

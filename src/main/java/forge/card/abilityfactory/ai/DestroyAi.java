@@ -2,7 +2,6 @@ package forge.card.abilityfactory.ai;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
@@ -30,21 +29,21 @@ public class DestroyAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public boolean chkAIDrawback(Map<String, String> params, SpellAbility sa, Player ai) {
-        return canPlayAI(ai, params, sa);
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+        return canPlayAI(ai, sa);
     }
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the expected targets could be
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         final Target abTgt = sa.getTarget();
         final Card source = sa.getSourceCard();
-        final boolean noRegen = params.containsKey("NoRegen");
+        final boolean noRegen = sa.hasParam("NoRegen");
         List<Card> list;
 
         if (abCost != null) {
@@ -69,8 +68,8 @@ public class DestroyAi extends SpellAiLogic {
             abTgt.resetTargets();
             list = CardLists.getTargetableCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), sa);
             list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
-            if (params.containsKey("AITgts")) {
-                list = CardLists.getValidCards(list, params.get("AITgts"), sa.getActivatingPlayer(), source);
+            if (sa.hasParam("AITgts")) {
+                list = CardLists.getValidCards(list, sa.getParam("AITgts"), sa.getActivatingPlayer(), source);
             }
             list = CardLists.getNotKeyword(list, "Indestructible");
             if (!AbilityFactory.playReusable(ai, sa)) {
@@ -135,8 +134,8 @@ public class DestroyAi extends SpellAiLogic {
                 abTgt.addTarget(choice);
             }
         } else {
-            if (params.containsKey("Defined")) {
-                list = new ArrayList<Card>(AbilityFactory.getDefinedCards(source, params.get("Defined"), sa));
+            if (sa.hasParam("Defined")) {
+                list = new ArrayList<Card>(AbilityFactory.getDefinedCards(source, sa.getParam("Defined"), sa));
                 if (list.isEmpty()
                         || !CardLists.filterControlledBy(list, ai).isEmpty()
                         || CardLists.getNotKeyword(list, "Indestructible").isEmpty()) {
@@ -149,10 +148,10 @@ public class DestroyAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
-        final boolean noRegen = params.containsKey("NoRegen");
+        final boolean noRegen = sa.hasParam("NoRegen");
         final Player opp = ai.getOpponent();
         if (tgt != null) {
             List<Card> list;

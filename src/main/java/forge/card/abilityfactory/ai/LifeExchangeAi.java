@@ -1,6 +1,5 @@
 package forge.card.abilityfactory.ai;
 
-import java.util.Map;
 import java.util.Random;
 
 import forge.card.abilityfactory.SpellAiLogic;
@@ -20,7 +19,7 @@ public class LifeExchangeAi extends SpellAiLogic {
      * forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         final Random r = MyRandom.getRandom();
         final int myLife = aiPlayer.getLife();
         Player opponent = aiPlayer.getOpponent();

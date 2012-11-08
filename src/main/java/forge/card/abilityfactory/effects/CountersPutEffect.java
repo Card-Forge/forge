@@ -17,15 +17,15 @@ import forge.gui.GuiChoose;
 
 public class CountersPutEffect extends SpellEffect {
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final Card card = sa.getSourceCard();
     
 
-        final Counters cType = Counters.valueOf(params.get("CounterType"));
-        final int amount = AbilityFactory.calculateAmount(card, params.get("CounterNum"), sa);
+        final Counters cType = Counters.valueOf(sa.getParam("CounterType"));
+        final int amount = AbilityFactory.calculateAmount(card, sa.getParam("CounterNum"), sa);
         sb.append("Put ");
-        if (params.containsKey("UpTo")) {
+        if (sa.hasParam("UpTo")) {
             sb.append("up to ");
         }
         sb.append(amount).append(" ").append(cType.getName()).append(" counter");
@@ -34,7 +34,7 @@ public class CountersPutEffect extends SpellEffect {
         }
         sb.append(" on ");
         final Target tgt = sa.getTarget();
-        final List<Card> tgtCards = tgt != null ? tgt.getTargetCards() :  AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+        final List<Card> tgtCards = tgt != null ? tgt.getTargetCards() :  AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
 
         final Iterator<Card> it = tgtCards.iterator();
         while (it.hasNext()) {
@@ -55,13 +55,13 @@ public class CountersPutEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Card card = sa.getSourceCard();
-        final String type = params.get("CounterType");
-        int counterAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
-        final int max = params.containsKey("MaxFromEffect") ? Integer.parseInt(params.get("MaxFromEffect")) : -1;
+        final String type = sa.getParam("CounterType");
+        int counterAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
+        final int max = sa.hasParam("MaxFromEffect") ? Integer.parseInt(sa.getParam("MaxFromEffect")) : -1;
 
-        if (params.containsKey("UpTo")) {
+        if (sa.hasParam("UpTo")) {
             final Integer[] integers = new Integer[counterAmount + 1];
             for (int j = 0; j <= counterAmount; j++) {
                 integers[j] = Integer.valueOf(j);
@@ -80,7 +80,7 @@ public class CountersPutEffect extends SpellEffect {
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
-            tgtCards = AbilityFactory.getDefinedCards(card, params.get("Defined"), sa);
+            tgtCards = AbilityFactory.getDefinedCards(card, sa.getParam("Defined"), sa);
         }
 
         for (final Card tgtCard : tgtCards) {

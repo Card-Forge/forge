@@ -28,10 +28,10 @@ public abstract class PumpAiBase extends SpellAiLogic {
     
     public boolean containsUsefulKeyword(final Player ai, final List<String> keywords, final Card card, final SpellAbility sa, final int attack) {
         for (final String keyword : keywords) {
-            if (!sa.getAbilityFactory().isCurse() && isUsefulPumpKeyword(ai, keyword, card, sa, attack)) {
+            if (!sa.isCurse() && isUsefulPumpKeyword(ai, keyword, card, sa, attack)) {
                 return true;
             }
-            if (sa.getAbilityFactory().isCurse() && isUsefulCurseKeyword(ai, keyword, card, sa)) {
+            if (sa.isCurse() && isUsefulCurseKeyword(ai, keyword, card, sa)) {
                 return true;
             }
         }
@@ -63,7 +63,7 @@ public abstract class PumpAiBase extends SpellAiLogic {
                 return false;
             }
         } else if (keyword.endsWith("CARDNAME can't attack or block.")) {
-            if (sa.getAbilityFactory().getMapParams().containsKey("UntilYourNextTurn")) {
+            if (sa.hasParam("UntilYourNextTurn")) {
                 if (CombatUtil.canAttack(card, human) || CombatUtil.canBlock(card, true)) {
                     return true;
                 }
@@ -328,7 +328,7 @@ public abstract class PumpAiBase extends SpellAiLogic {
                 return false;
             }
         } else if (keyword.equals("Shroud") || keyword.equals("Hexproof")) {
-            if (!AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(), sa.getAbilityFactory()).contains(card)) {
+            if (!AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(), sa).contains(card)) {
                 return false;
             }
         } else if (keyword.equals("Islandwalk")) {

@@ -1,8 +1,6 @@
 package forge.card.abilityfactory.ai;
 
 import java.util.ArrayList;
-import java.util.Map;
-
 import forge.Card;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
@@ -16,7 +14,7 @@ import forge.game.player.Player;
 public class CloneAi extends SpellAiLogic {
     
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
 
@@ -39,7 +37,7 @@ public class CloneAi extends SpellAiLogic {
         // Combat_Begin step
         if (!phase.is(PhaseType.COMBAT_BEGIN)
                 && phase.isPlayerTurn(ai) && !AbilityFactory.isSorcerySpeed(sa)
-                && !params.containsKey("ActivationPhases") && !params.containsKey("Permanent")) {
+                && !sa.hasParam("ActivationPhases") && !sa.hasParam("Permanent")) {
             return false;
         }
 
@@ -51,26 +49,26 @@ public class CloneAi extends SpellAiLogic {
         }
 
         // don't activate during main2 unless this effect is permanent
-        if (phase.is(PhaseType.MAIN2) && !params.containsKey("Permanent")) {
+        if (phase.is(PhaseType.MAIN2) && !sa.hasParam("Permanent")) {
             return false;
         }
 
         if (null == tgt) {
-            final ArrayList<Card> defined = AbilityFactory.getDefinedCards(source, params.get("Defined"), sa);
+            final ArrayList<Card> defined = AbilityFactory.getDefinedCards(source, sa.getParam("Defined"), sa);
 
             boolean bFlag = false;
             for (final Card c : defined) {
                 bFlag |= (!c.isCreature() && !c.isTapped() && !(c.getTurnInZone() == phase.getTurn()));
 
                 // for creatures that could be improved (like Figure of Destiny)
-                if (c.isCreature() && (params.containsKey("Permanent") || (!c.isTapped() && !c.isSick()))) {
+                if (c.isCreature() && (sa.hasParam("Permanent") || (!c.isTapped() && !c.isSick()))) {
                     int power = -5;
-                    if (params.containsKey("Power")) {
-                        power = AbilityFactory.calculateAmount(source, params.get("Power"), sa);
+                    if (sa.hasParam("Power")) {
+                        power = AbilityFactory.calculateAmount(source, sa.getParam("Power"), sa);
                     }
                     int toughness = -5;
-                    if (params.containsKey("Toughness")) {
-                        toughness = AbilityFactory.calculateAmount(source, params.get("Toughness"), sa);
+                    if (sa.hasParam("Toughness")) {
+                        toughness = AbilityFactory.calculateAmount(source, sa.getParam("Toughness"), sa);
                     }
                     if ((power + toughness) > (c.getCurrentPower() + c.getCurrentToughness())) {
                         bFlag = true;
@@ -85,19 +83,19 @@ public class CloneAi extends SpellAiLogic {
             }
         } else {
             tgt.resetTargets();
-            useAbility &= cloneTgtAI(params, sa);
+            useAbility &= cloneTgtAI(sa);
         }
 
         return useAbility;
     } // end cloneCanPlayAI()
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         // AI should only activate this during Human's turn
         boolean chance = true;
 
         if (sa.getTarget() != null) {
-            chance = cloneTgtAI(params, sa);
+            chance = cloneTgtAI(sa);
         }
 
 
@@ -105,12 +103,12 @@ public class CloneAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
 
         boolean chance = true;
 
         if (sa.getTarget() != null) {
-            chance = cloneTgtAI(params, sa);
+            chance = cloneTgtAI(sa);
         }
 
         // Improve AI for triggers. If source is a creature with:
@@ -134,7 +132,7 @@ public class CloneAi extends SpellAiLogic {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private boolean cloneTgtAI(final Map<String, String> params, final SpellAbility sa) {
+    private boolean cloneTgtAI(final SpellAbility sa) {
         // This is reasonable for now. Kamahl, Fist of Krosa and a sorcery or
         // two are the only things
         // that clone a target. Those can just use SVar:RemAIDeck:True until

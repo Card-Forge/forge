@@ -2,7 +2,6 @@ package forge.card.abilityfactory.ai;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import forge.Card;
@@ -25,14 +24,14 @@ public class PlayAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public boolean chkAIDrawback(Map<String, String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return true;
     }
     
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
-        final Cost abCost = sa.getAbilityFactory().getAbCost();
-        final Card source = sa.getAbilityFactory().getHostCard();
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+        final Cost abCost = sa.getPayCosts();
+        final Card source = sa.getSourceCard();
 
         final Random r = MyRandom.getRandom();
 
@@ -72,8 +71,8 @@ public class PlayAi extends SpellAiLogic {
                 return false;
             }
             tgt.addTarget(CardFactoryUtil.getBestAI(cards));
-        } else if (!params.containsKey("Valid")) {
-            cards = new ArrayList<Card>(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa));
+        } else if (!sa.hasParam("Valid")) {
+            cards = new ArrayList<Card>(AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa));
             if (cards.isEmpty()) {
                 return false;
             }

@@ -1,6 +1,5 @@
 package forge.card.abilityfactory.ai;
 
-import java.util.Map;
 import java.util.Random;
 
 import forge.Card;
@@ -18,14 +17,14 @@ import forge.util.MyRandom;
 public class LifeSetAi extends SpellAiLogic {
 
     @Override
-    protected boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Random r = MyRandom.getRandom();
         // Ability_Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
         final int myLife = ai.getLife();
         final Player opponent = ai.getOpponent();
         final int hlife = opponent.getLife();
-        final String amountStr = params.get("LifeAmount");
+        final String amountStr = sa.getParam("LifeAmount");
 
         if (!ai.canGainLife()) {
             return false;
@@ -33,7 +32,7 @@ public class LifeSetAi extends SpellAiLogic {
 
         // Don't use setLife before main 2 if possible
         if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
-                && !params.containsKey("ActivationPhases")) {
+                && !sa.hasParam("ActivationPhases")) {
             return false;
         }
 
@@ -79,7 +78,7 @@ public class LifeSetAi extends SpellAiLogic {
                 }
             }
         } else {
-            if (params.containsKey("Each") && params.get("Defined").equals("Each")) {
+            if (sa.hasParam("Each") && sa.getParam("Defined").equals("Each")) {
                 if (amount == 0) {
                     return false;
                 } else if (myLife > amount) { // will decrease computer's
@@ -103,13 +102,13 @@ public class LifeSetAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final int myLife = ai.getLife();
         final Player opponent = ai.getOpponent();
         final int hlife = opponent.getLife();
         final Card source = sa.getSourceCard();
 
-        final String amountStr = params.get("LifeAmount");
+        final String amountStr = sa.getParam("LifeAmount");
 
         int amount;
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {

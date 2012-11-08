@@ -12,12 +12,12 @@ import forge.card.spellability.Target;
 public class CommonSpell extends Spell {
     private static final long serialVersionUID = -6741797239508483250L;
     private final SpellEffect effect;
-    private final Map<String,String> params;
     private final SpellAiLogic ai;
 
-    public CommonSpell(Card sourceCard, Cost abCost, Target tgt, Map<String,String> params0, SpellEffect effect0, SpellAiLogic ai0) {
+    public CommonSpell(ApiType api0, Card sourceCard, Cost abCost, Target tgt, Map<String,String> params0, SpellEffect effect0, SpellAiLogic ai0) {
         super(sourceCard, abCost, tgt);
         params = params0;
+        api = api0;
         effect = effect0;
         ai = ai0;
         
@@ -36,21 +36,21 @@ public class CommonSpell extends Spell {
     
     @Override
     public boolean canPlayAI() {
-        return ai.canPlayAIWithSubs(getActivatingPlayer(), params, this) && super.canPlayAI();
+        return ai.canPlayAIWithSubs(getActivatingPlayer(), this) && super.canPlayAI();
     }    
     
     @Override
     public void resolve() {
-        effect.resolve(params, this);
+        effect.resolve(this);
     }
     
     @Override
     public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
         boolean chance = false;
         if (withOutManaCost) {
-            chance = ai.doTriggerNoCostWithSubs(this.getActivatingPlayer(), params, this, mandatory);
+            chance = ai.doTriggerNoCostWithSubs(this.getActivatingPlayer(), this, mandatory);
         }
-        chance = ai.doTriggerAI(this.getActivatingPlayer(), params, this, mandatory);
+        chance = ai.doTriggerAI(this.getActivatingPlayer(), this, mandatory);
         return chance;
     }
 }

@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.ai;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
@@ -24,7 +23,7 @@ public class TapAllAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(final Player ai, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(final Player ai, SpellAbility sa) {
         // If tapping all creatures do it either during declare attackers of AIs
         // turn
         // or during upkeep/begin combat?
@@ -37,8 +36,8 @@ public class TapAllAi extends SpellAiLogic {
         }
 
         String valid = "";
-        if (params.containsKey("ValidCards")) {
-            valid = params.get("ValidCards");
+        if (sa.hasParam("ValidCards")) {
+            valid = sa.getParam("ValidCards");
         }
 
         List<Card> validTappables = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
@@ -99,12 +98,12 @@ public class TapAllAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getSourceCard();
 
         String valid = "";
-        if (params.containsKey("ValidCards")) {
-            valid = params.get("ValidCards");
+        if (sa.hasParam("ValidCards")) {
+            valid = sa.getParam("ValidCards");
         }
 
         List<Card> validTappables = getTapAllTargets(valid, source);
@@ -149,7 +148,7 @@ public class TapAllAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return true;
     }
 

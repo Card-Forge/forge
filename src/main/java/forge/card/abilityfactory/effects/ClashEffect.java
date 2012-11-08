@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.effects;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
@@ -16,7 +15,7 @@ public class ClashEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         return sa.getSourceCard().getName() + " - Clash with an opponent.";
     }
     
@@ -24,7 +23,7 @@ public class ClashEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void resolve(Map<String, String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final AbilityFactory afOutcomes = new AbilityFactory();
         final boolean victory = sa.getSourceCard().getController().clashWithOpponent(sa.getSourceCard());
 
@@ -33,9 +32,9 @@ public class ClashEffect extends SpellEffect {
         runParams.put("Player", sa.getSourceCard().getController());
 
         if (victory) {
-            if (params.containsKey("WinSubAbility")) {
+            if (sa.hasParam("WinSubAbility")) {
                 final SpellAbility win = afOutcomes.getAbility(
-                        sa.getSourceCard().getSVar(params.get("WinSubAbility")), sa.getSourceCard());
+                        sa.getSourceCard().getSVar(sa.getParam("WinSubAbility")), sa.getSourceCard());
                 win.setActivatingPlayer(sa.getSourceCard().getController());
                 ((AbilitySub) win).setParent(sa);
 
@@ -43,9 +42,9 @@ public class ClashEffect extends SpellEffect {
             }
             runParams.put("Won", "True");
         } else {
-            if (params.containsKey("OtherwiseSubAbility")) {
+            if (sa.hasParam("OtherwiseSubAbility")) {
                 final SpellAbility otherwise = afOutcomes.getAbility(
-                        sa.getSourceCard().getSVar(params.get("OtherwiseSubAbility")), sa.getSourceCard());
+                        sa.getSourceCard().getSVar(sa.getParam("OtherwiseSubAbility")), sa.getSourceCard());
                 otherwise.setActivatingPlayer(sa.getSourceCard().getController());
                 ((AbilitySub) otherwise).setParent(sa);
 

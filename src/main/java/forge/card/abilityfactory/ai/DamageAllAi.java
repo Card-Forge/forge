@@ -2,7 +2,6 @@ package forge.card.abilityfactory.ai;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
@@ -26,7 +25,7 @@ public class  DamageAllAi extends SpellAiLogic
 {
     
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the expected targets could be
         final Random r = MyRandom.getRandom();
@@ -35,7 +34,7 @@ public class  DamageAllAi extends SpellAiLogic
 
         String validP = "";
 
-        final String damage = params.get("NumDmg");
+        final String damage = sa.getParam("NumDmg");
         int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa); 
 
 
@@ -45,14 +44,14 @@ public class  DamageAllAi extends SpellAiLogic
             source.setSVar("PayX", Integer.toString(dmg));
         }
 
-        if (params.containsKey("ValidPlayers")) {
-            validP = params.get("ValidPlayers");
+        if (sa.hasParam("ValidPlayers")) {
+            validP = sa.getParam("ValidPlayers");
         }
 
         Player opp = ai.getOpponent();
         
-        final List<Card> humanList = this.getKillableCreatures(params, sa.getSourceCard(), opp, dmg);
-        List<Card> computerList = this.getKillableCreatures(params, sa.getSourceCard(), opp, dmg);
+        final List<Card> humanList = this.getKillableCreatures(sa, opp, dmg);
+        List<Card> computerList = this.getKillableCreatures(sa, ai, dmg);
 
         
         final Target tgt = sa.getTarget();
@@ -107,7 +106,7 @@ public class  DamageAllAi extends SpellAiLogic
     }
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         // check AI life before playing this drawback?
         return true;
     }
@@ -127,8 +126,9 @@ public class  DamageAllAi extends SpellAiLogic
      *            a int.
      * @return a {@link forge.CardList} object.
      */
-    private List<Card> getKillableCreatures(final Map<String, String> params, final Card source, final Player player, final int dmg) {
-        String validC = params.containsKey("ValidCards") ? params.get("ValidCards") : ""; 
+    private List<Card> getKillableCreatures(final SpellAbility sa, final Player player, final int dmg) {
+        final Card source = sa.getSourceCard();
+        String validC = sa.hasParam("ValidCards") ? sa.getParam("ValidCards") : ""; 
 
         // TODO: X may be something different than X paid
         List<Card> list = 
@@ -148,11 +148,11 @@ public class  DamageAllAi extends SpellAiLogic
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getSourceCard();
         String validP = "";
 
-        final String damage = params.get("NumDmg");
+        final String damage = sa.getParam("NumDmg");
         int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa); 
 
         
@@ -162,8 +162,8 @@ public class  DamageAllAi extends SpellAiLogic
             source.setSVar("PayX", Integer.toString(dmg));
         } 
         
-        if (params.containsKey("ValidPlayers")) {
-            validP = params.get("ValidPlayers");
+        if (sa.hasParam("ValidPlayers")) {
+            validP = sa.getParam("ValidPlayers");
         }
 
         Player enemy = ai.getOpponent();
@@ -190,8 +190,8 @@ public class  DamageAllAi extends SpellAiLogic
                     }
 
                     // Evaluate creatures getting killed
-                    final List<Card> humanList = this.getKillableCreatures(params, sa.getSourceCard(), enemy, dmg);
-                    final List<Card> computerList = this.getKillableCreatures(params, sa.getSourceCard(), ai, dmg);
+                    final List<Card> humanList = this.getKillableCreatures(sa, enemy, dmg);
+                    final List<Card> computerList = this.getKillableCreatures(sa, ai, dmg);
                     if ((CardFactoryUtil.evaluateCreatureList(computerList) + 50) >= CardFactoryUtil
                             .evaluateCreatureList(humanList)) {
                         return false;

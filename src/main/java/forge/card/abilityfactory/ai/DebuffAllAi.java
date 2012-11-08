@@ -18,11 +18,11 @@ import forge.util.MyRandom;
 
 public class DebuffAllAi extends SpellAiLogic {
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         String valid = "";
         final Random r = MyRandom.getRandom();
         // final Card source = sa.getSourceCard();
-        final Card hostCard = sa.getAbilityFactory().getHostCard();
+        final Card hostCard = sa.getSourceCard();
         final Player opp = ai.getOpponent();
         
         final boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn()); // to
@@ -30,8 +30,8 @@ public class DebuffAllAi extends SpellAiLogic {
         // runaway
         // activations
 
-        if (params.containsKey("ValidCards")) {
-            valid = params.get("ValidCards");
+        if (sa.hasParam("ValidCards")) {
+            valid = sa.getParam("ValidCards");
         }
 
         List<Card> comp = CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid, hostCard.getController(), hostCard);
@@ -60,7 +60,7 @@ public class DebuffAllAi extends SpellAiLogic {
     } // debuffAllCanPlayAI()
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         return true;
     }
 
@@ -68,15 +68,15 @@ public class DebuffAllAi extends SpellAiLogic {
      * <p>
      * debuffAllChkDrawbackAI.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * 
      * @return a boolean.
      */
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return true;
     }
 

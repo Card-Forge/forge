@@ -1,6 +1,5 @@
 package forge.card.abilityfactory.ai;
 
-import java.util.Map;
 
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
@@ -13,18 +12,18 @@ import forge.game.player.Player;
 public class EndTurnAi extends SpellAiLogic  {
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         return mandatory;
     }
     
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) { return false; }
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) { return false; }
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         return false;
     }
 }

@@ -16,15 +16,15 @@ import forge.gui.GuiChoose;
 
 public class DrawEffect extends SpellEffect {
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
-        final String conditionDesc = params.get("ConditionDescription");
+        final String conditionDesc = sa.getParam("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
     
-        final List<Player> tgtPlayers = getDefinedPlayersBeforeTargetOnes(sa, params);
+        final List<Player> tgtPlayers = getDefinedPlayersBeforeTargetOnes(sa);
     
     
         if (!tgtPlayers.isEmpty()) {
@@ -32,8 +32,8 @@ public class DrawEffect extends SpellEffect {
             sb.append(StringUtils.join(tgtPlayers, " and "));
             
             int numCards = 1;
-            if (params.containsKey("NumCards")) {
-                numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
+            if (sa.hasParam("NumCards")) {
+                numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
             }
     
             if (tgtPlayers.size() > 1) {
@@ -45,7 +45,7 @@ public class DrawEffect extends SpellEffect {
             }
             sb.append(" (").append(numCards).append(")");
     
-            if (params.containsKey("NextUpkeep")) {
+            if (sa.hasParam("NextUpkeep")) {
                 sb.append(" at the beginning of the next upkeep");
             }
     
@@ -56,19 +56,19 @@ public class DrawEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Card source = sa.getSourceCard();
         int numCards = 1;
-        if (params.containsKey("NumCards")) {
-            numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
+        if (sa.hasParam("NumCards")) {
+            numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
         }
 
         final Target tgt = sa.getTarget();
 
-        final boolean optional = params.containsKey("OptionalDecider");
-        final boolean slowDraw = params.containsKey("NextUpkeep");
+        final boolean optional = sa.hasParam("OptionalDecider");
+        final boolean slowDraw = sa.hasParam("NextUpkeep");
 
-        for (final Player p : getDefinedPlayersBeforeTargetOnes(sa, params)) {
+        for (final Player p : getDefinedPlayersBeforeTargetOnes(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (optional) {
                     if (p.isComputer()) {
@@ -98,10 +98,10 @@ public class DrawEffect extends SpellEffect {
                     }
                 } else {
                     final List<Card> drawn = p.drawCards(numCards);
-                    if (params.containsKey("Reveal")) {
+                    if (sa.hasParam("Reveal")) {
                         GuiChoose.one("Revealing drawn cards", drawn);
                     }
-                    if (params.containsKey("RememberDrawn")) {
+                    if (sa.hasParam("RememberDrawn")) {
                         for (final Card c : drawn) {
                             source.addRemembered(c);
                         }

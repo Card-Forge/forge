@@ -10,28 +10,28 @@ import forge.game.player.Player;
 
 public class ChooseTypeAi extends SpellAiLogic {
     @Override
-    protected boolean canPlayAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa) {
-        if (!params.containsKey("AILogic")) {
+    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+        if (!sa.hasParam("AILogic")) {
             return false;
         }
 
-        return doTriggerAINoCost(aiPlayer, params, sa, false);
+        return doTriggerAINoCost(aiPlayer, sa, false);
     }
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return true;
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Target tgt = sa.getTarget();
 
         if (sa.getTarget() != null) {
             tgt.resetTargets();
             sa.getTarget().addTarget(ai);
         } else {
-            final ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+            final ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
             for (final Player p : tgtPlayers) {
                 if (p.isHuman() && !mandatory) {
                     return false;

@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.effects;
 
 import java.util.List;
-import java.util.Map;
 
 import forge.Card;
 import forge.card.abilityfactory.SpellEffect;
@@ -15,10 +14,10 @@ public class GameLossEffect extends SpellEffect {
          * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
          */
     @Override
-    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
         for (final Player p : tgtPlayers) {
             sb.append(p.getName()).append(" ");
         }
@@ -28,10 +27,10 @@ public class GameLossEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
-        final Card card = sa.getAbilityFactory().getHostCard();
+    public void resolve(SpellAbility sa) {
+        final Card card = sa.getSourceCard();
 
-        for (final Player p : getTargetPlayers(sa, params)) {
+        for (final Player p : getTargetPlayers(sa)) {
             p.loseConditionMet(GameLossReason.SpellEffect, card.getName());
         }
     }

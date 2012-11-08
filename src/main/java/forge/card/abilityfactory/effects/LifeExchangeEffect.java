@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.effects;
 
 import java.util.List;
-import java.util.Map;
 
 import forge.Card;
 import forge.card.abilityfactory.SpellEffect;
@@ -24,10 +23,10 @@ public class LifeExchangeEffect extends SpellEffect {
      * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final Player activatingPlayer = sa.getActivatingPlayer();
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
 
     
         if (tgtPlayers.size() == 1) {
@@ -45,12 +44,12 @@ public class LifeExchangeEffect extends SpellEffect {
      * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void resolve(Map<String, String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Card source = sa.getSourceCard();
         Player p1;
         Player p2;
     
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
     
         if (tgtPlayers.size() == 1) {
             p1 = sa.getActivatingPlayer();

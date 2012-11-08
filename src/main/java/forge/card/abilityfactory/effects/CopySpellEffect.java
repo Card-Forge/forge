@@ -3,7 +3,6 @@ package forge.card.abilityfactory.effects;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import forge.Card;
 import forge.Singletons;
@@ -20,9 +19,9 @@ public class CopySpellEffect extends SpellEffect {
     // *************************************************************************
 
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        final List<SpellAbility> tgtSpells = getTargetSpellAbilities(sa, params);
+        final List<SpellAbility> tgtSpells = getTargetSpellAbilities(sa);
         
         sb.append("Copy ");
         // TODO Someone fix this Description when Copying Charms
@@ -34,8 +33,8 @@ public class CopySpellEffect extends SpellEffect {
             }
         }
         int amount = 1;
-        if (params.containsKey("Amount")) {
-            amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("Amount"), sa);
+        if (sa.hasParam("Amount")) {
+            amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa);
         }
         if (amount > 1) {
             sb.append(amount).append(" times");
@@ -49,28 +48,28 @@ public class CopySpellEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void resolve(Map<String, String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Card card = sa.getSourceCard();
         Player controller = sa.getActivatingPlayer();
 
         int amount = 1;
-        if (params.containsKey("Amount")) {
-            amount = AbilityFactory.calculateAmount(card, params.get("Amount"), sa);
+        if (sa.hasParam("Amount")) {
+            amount = AbilityFactory.calculateAmount(card, sa.getParam("Amount"), sa);
         }
 
-        if (params.containsKey("Controller")) {
-            controller = AbilityFactory.getDefinedPlayers(card, params.get("Controller"), sa).get(0);
+        if (sa.hasParam("Controller")) {
+            controller = AbilityFactory.getDefinedPlayers(card, sa.getParam("Controller"), sa).get(0);
         }
 
-        final List<SpellAbility> tgtSpells = getTargetSpellAbilities(sa, params);
+        final List<SpellAbility> tgtSpells = getTargetSpellAbilities(sa);
 
 
         if (tgtSpells.size() == 0) {
             return;
         }
 
-        if (params.containsKey("CopyMultipleSpells")) {
-            final int spellCount = Integer.parseInt(params.get("CopyMultipleSpells"));
+        if (sa.hasParam("CopyMultipleSpells")) {
+            final int spellCount = Integer.parseInt(sa.getParam("CopyMultipleSpells"));
             ArrayList<SpellAbility> chosenSAs = new ArrayList<SpellAbility>();
             SpellAbility chosenSAtmp = null;
             for (int multi = 0; multi < spellCount; multi++) {

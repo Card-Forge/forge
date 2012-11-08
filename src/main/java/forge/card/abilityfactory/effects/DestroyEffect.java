@@ -3,7 +3,6 @@ package forge.card.abilityfactory.effects;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import forge.Card;
 import forge.CardUtil;
@@ -18,18 +17,18 @@ public class DestroyEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
-        final boolean noRegen = params.containsKey("NoRegen");
+    protected String getStackDescription(SpellAbility sa) {
+        final boolean noRegen = sa.hasParam("NoRegen");
         final StringBuilder sb = new StringBuilder();
 
-        final String conditionDesc = params.get("ConditionDescription");
+        final String conditionDesc = sa.getParam("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
 
-        final List<Card> tgtCards = getTargetCards(sa, params);
+        final List<Card> tgtCards = getTargetCards(sa);
 
-        if (params.containsKey("Sacrifice")) {
+        if (sa.hasParam("Sacrifice")) {
             sb.append("Sacrifice ");
         } else {
             sb.append("Destroy ");
@@ -49,8 +48,8 @@ public class DestroyEffect extends SpellEffect {
             }
         }
 
-        if (params.containsKey("Radiance")) {
-            sb.append(" and each other ").append(params.get("ValidTgts"))
+        if (sa.hasParam("Radiance")) {
+            sb.append(" and each other ").append(sa.getParam("ValidTgts"))
                     .append(" that shares a color with ");
             if (tgtCards.size() > 1) {
                 sb.append("them");
@@ -79,25 +78,25 @@ public class DestroyEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Card card = sa.getSourceCard();
 
-        final boolean remDestroyed = params.containsKey("RememberDestroyed");
+        final boolean remDestroyed = sa.hasParam("RememberDestroyed");
         if (remDestroyed) {
             card.clearRemembered();
         }
 
-        final boolean noRegen = params.containsKey("NoRegen");
-        final boolean sac = params.containsKey("Sacrifice");
+        final boolean noRegen = sa.hasParam("NoRegen");
+        final boolean sac = sa.hasParam("Sacrifice");
 
-        final List<Card> tgtCards = getTargetCards(sa, params);
+        final List<Card> tgtCards = getTargetCards(sa);
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
 
         final Target tgt = sa.getTarget();
 
-        if (params.containsKey("Radiance")) {
+        if (sa.hasParam("Radiance")) {
             for (final Card c : CardUtil.getRadiance(card, tgtCards.get(0),
-                    params.get("ValidTgts").split(","))) {
+                    sa.getParam("ValidTgts").split(","))) {
                 untargetedCards.add(c);
             }
         }

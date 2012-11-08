@@ -20,6 +20,7 @@ package forge.card.spellability;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import forge.Card;
@@ -29,6 +30,7 @@ import forge.GameEntity;
 import forge.Singletons;
 import forge.card.CardManaCost;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.ApiType;
 import forge.card.cost.Cost;
 import forge.card.mana.Mana;
 import forge.control.input.Input;
@@ -103,7 +105,8 @@ public abstract class SpellAbility {
     private SpellAbilityCondition conditions = new SpellAbilityCondition();
     private AbilitySub subAbility = null;
 
-    private AbilityFactory abilityFactory = null;
+    protected Map<String, String> params = null;
+    protected ApiType api = null;
 
     private final ArrayList<Mana> payingMana = new ArrayList<Mana>();
     private final List<AbilityActivated> paidAbilities = new ArrayList<AbilityActivated>();
@@ -570,6 +573,31 @@ public abstract class SpellAbility {
         return this.originalHost;
     }
 
+    public String getParam(String key) {
+        return params == null ? null : params.get(key);
+    }
+    public boolean hasParam(String key) {
+        return params == null ? false: params.containsKey(key);
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param mapParams
+     */
+    public void copyParamsToMap(Map<String, String> mapParams) {
+        if ( null != params ) 
+            mapParams.putAll(params);
+    }        
+    
+    // If this is not null, then ability was made in a factory
+    public final ApiType getApi() {
+        return api;
+    }
+    
+    public final boolean isCurse() {
+        return this.hasParam("IsCurse");
+    }    
+
     /**
      * <p>
      * Getter for the field <code>beforePayManaAI</code>.
@@ -745,29 +773,6 @@ public abstract class SpellAbility {
      */
     public SpellAbilityCondition getConditions() {
         return this.conditions;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>abilityFactory</code>.
-     * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     */
-    public void setAbilityFactory(final AbilityFactory af) {
-        this.abilityFactory = af;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>abilityFactory</code>.
-     * </p>
-     * 
-     * @return a {@link forge.card.abilityfactory.AbilityFactory} object.
-     */
-    public AbilityFactory getAbilityFactory() {
-        return this.abilityFactory;
     }
 
     /**
@@ -1835,5 +1840,7 @@ public abstract class SpellAbility {
             parent = parent.getParent();
         }
         return parent;
-    }    
+    }
+
+
 }

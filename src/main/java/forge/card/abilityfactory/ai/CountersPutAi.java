@@ -2,7 +2,6 @@ package forge.card.abilityfactory.ai;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
@@ -26,7 +25,7 @@ import forge.util.MyRandom;
 
 public class CountersPutAi extends SpellAiLogic { 
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, final SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, final SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on
         // what the expected targets could be
@@ -36,11 +35,10 @@ public class CountersPutAi extends SpellAiLogic {
         final Card source = sa.getSourceCard();
         List<Card> list;
         Card choice = null;
-        final String type = params.get("CounterType");
-        final String amountStr = params.get("CounterNum");
+        final String type = sa.getParam("CounterType");
+        final String amountStr = sa.getParam("CounterNum");
         
-        boolean isCurse = sa.getAbilityFactory().isCurse();
-        final Player player = isCurse ? ai.getOpponent() : ai;
+        final Player player = sa.isCurse() ? ai.getOpponent() : ai;
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
             return false;
@@ -115,7 +113,7 @@ public class CountersPutAi extends SpellAiLogic {
                     }
                 }
 
-                if (isCurse) {
+                if (sa.isCurse()) {
                     choice = CountersAi.chooseCursedTarget(list, type, amount);
                 } else {
                     choice = CountersAi.chooseBoonTarget(list, type);
@@ -136,7 +134,7 @@ public class CountersPutAi extends SpellAiLogic {
             }
         } else {
             final ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(),
-                    params.get("Defined"), sa);
+                    sa.getParam("Defined"), sa);
             // Don't activate Curse abilities on my cards and non-curse abilites
             // on my opponents
             if (cards.isEmpty() || !cards.get(0).getController().equals(player)) {
@@ -154,7 +152,7 @@ public class CountersPutAi extends SpellAiLogic {
 
         // Don't use non P1P1/M1M1 counters before main 2 if possible
         if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
-                && !params.containsKey("ActivationPhases")
+                && !sa.hasParam("ActivationPhases")
                 && !(type.equals("P1P1") || type.equals("M1M1"))) {
             return false;
         }
@@ -167,17 +165,16 @@ public class CountersPutAi extends SpellAiLogic {
     } // putCanPlayAI
 
     @Override
-    public boolean chkAIDrawback(Map<String,String> params, final SpellAbility sa, Player ai) {
+    public boolean chkAIDrawback(final SpellAbility sa, Player ai) {
         boolean chance = true;
         final Target abTgt = sa.getTarget();
         final Card source = sa.getSourceCard();
         Card choice = null;
-        final String type = params.get("CounterType");
-        final String amountStr = params.get("CounterNum");
+        final String type = sa.getParam("CounterType");
+        final String amountStr = sa.getParam("CounterNum");
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), amountStr, sa);
 
-        boolean isCurse = sa.getAbilityFactory().isCurse();
-        final Player player = isCurse ? ai.getOpponent() : ai;
+        final Player player = sa.isCurse() ? ai.getOpponent() : ai;
 
         if (abTgt != null) {
             List<Card> list = 
@@ -206,7 +203,7 @@ public class CountersPutAi extends SpellAiLogic {
                     }
                 }
 
-                if (isCurse) {
+                if (sa.isCurse()) {
                     choice = CountersAi.chooseCursedTarget(list, type, amount);
                 } else {
                     choice = CountersAi.chooseBoonTarget(list, type);
@@ -231,21 +228,21 @@ public class CountersPutAi extends SpellAiLogic {
     } // putPlayDrawbackAI
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Target abTgt = sa.getTarget();
         final Card source = sa.getSourceCard();
         // boolean chance = true;
         boolean preferred = true;
         List<Card> list;
-        boolean isCurse = sa.getAbilityFactory().isCurse();
+        boolean isCurse = sa.isCurse();
         final Player player = isCurse ? ai.getOpponent() : ai;
-        final String type = params.get("CounterType");
-        final String amountStr = params.get("CounterNum");
+        final String type = sa.getParam("CounterType");
+        final String amountStr = sa.getParam("CounterNum");
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), amountStr, sa);
 
         if (abTgt == null) {
             // No target. So must be defined
-            list = new ArrayList<Card>(AbilityFactory.getDefinedCards(source, params.get("Defined"), sa));
+            list = new ArrayList<Card>(AbilityFactory.getDefinedCards(source, sa.getParam("Defined"), sa));
 
             if (!mandatory) {
                 // TODO - If Trigger isn't mandatory, when wouldn't we want to

@@ -21,10 +21,10 @@ public class CloneEffect extends SpellEffect {
     // TODO update this method
 
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         
-        final List<Card> tgts = getTargetCards(sa, params);
+        final List<Card> tgts = getTargetCards(sa);
         
         sb.append(sa.getSourceCard());
         sb.append(" becomes a copy of ");
@@ -38,7 +38,7 @@ public class CloneEffect extends SpellEffect {
     } // end cloneStackDescription()
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         Card tgtCard;
         final Card host = sa.getSourceCard();
         Map<String, String> origSVars = host.getSVars();
@@ -50,8 +50,8 @@ public class CloneEffect extends SpellEffect {
         if (tgt != null) {
             cardToCopy = tgt.getTargetCards().get(0);
         }
-        else if (params.containsKey("Defined")) {
-            ArrayList<Card> cloneSources = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa);
+        else if (sa.hasParam("Defined")) {
+            ArrayList<Card> cloneSources = AbilityFactory.getDefinedCards(host, sa.getParam("Defined"), sa);
             if (!cloneSources.isEmpty()) {
                 cardToCopy = cloneSources.get(0);
             }
@@ -62,14 +62,14 @@ public class CloneEffect extends SpellEffect {
 
         final StringBuilder sb = new StringBuilder();
         sb.append("Do you want to copy " + cardToCopy + "?");
-        boolean optional = params.containsKey("Optional");
+        boolean optional = sa.hasParam("Optional");
         if (host.getController().isHuman() && optional
                 && !GameActionUtil.showYesNoDialog(host, sb.toString())) {
             return;
         }
 
         // find target of cloning i.e. card becoming a clone
-        ArrayList<Card> cloneTargets = AbilityFactory.getDefinedCards(host, params.get("CloneTarget"), sa);
+        ArrayList<Card> cloneTargets = AbilityFactory.getDefinedCards(host, sa.getParam("CloneTarget"), sa);
         if (!cloneTargets.isEmpty()) {
             tgtCard = cloneTargets.get(0);
         }
@@ -79,7 +79,7 @@ public class CloneEffect extends SpellEffect {
 
         String imageFileName = host.getImageFilename();
 
-        boolean keepName = params.containsKey("KeepName");
+        boolean keepName = sa.hasParam("KeepName");
         String originalName = tgtCard.getName();
         boolean copyingSelf = (tgtCard == cardToCopy);
 
@@ -116,7 +116,7 @@ public class CloneEffect extends SpellEffect {
 
         CardFactoryUtil.copyState(cardToCopy, stateToCopy, tgtCard);
         // must call this before addAbilityFactoryAbilities so cloned added abilities are handled correctly
-        addExtraCharacteristics(tgtCard, params, origSVars);
+        addExtraCharacteristics(tgtCard, sa, origSVars);
         CardFactoryUtil.addAbilityFactoryAbilities(tgtCard);
         for (int i = 0; i < tgtCard.getStaticAbilityStrings().size(); i++) {
             tgtCard.addStaticAbility(tgtCard.getStaticAbilityStrings().get(i));
@@ -133,7 +133,7 @@ public class CloneEffect extends SpellEffect {
                 tgtCard.setState(CardCharacteristicName.Flipped);
             }
             CardFactoryUtil.copyState(cardToCopy, CardCharacteristicName.Flipped, tgtCard);
-            addExtraCharacteristics(tgtCard, params, origSVars);
+            addExtraCharacteristics(tgtCard, sa, origSVars);
             CardFactoryUtil.addAbilityFactoryAbilities(tgtCard);
             for (int i = 0; i < tgtCard.getStaticAbilityStrings().size(); i++) {
                 tgtCard.addStaticAbility(tgtCard.getStaticAbilityStrings().get(i));
@@ -171,18 +171,18 @@ public class CloneEffect extends SpellEffect {
 
     } // cloneResolve
 
-    private void addExtraCharacteristics(final Card tgtCard, final Map<String, String> params, final Map<String, String> origSVars) {
+    private void addExtraCharacteristics(final Card tgtCard, final SpellAbility sa, final Map<String, String> origSVars) {
         // additional types to clone
-        if (params.containsKey("AddTypes")) {
-           for (final String type : Arrays.asList(params.get("AddTypes").split(","))) {
+        if (sa.hasParam("AddTypes")) {
+           for (final String type : Arrays.asList(sa.getParam("AddTypes").split(","))) {
                tgtCard.addType(type);
            }
         }
 
         // triggers to add to clone
         final ArrayList<String> triggers = new ArrayList<String>();
-        if (params.containsKey("AddTriggers")) {
-            triggers.addAll(Arrays.asList(params.get("AddTriggers").split(",")));
+        if (sa.hasParam("AddTriggers")) {
+            triggers.addAll(Arrays.asList(sa.getParam("AddTriggers").split(",")));
             for (final String s : triggers) {
                 if (origSVars.containsKey(s)) {
                     final String actualTrigger = origSVars.get(s);
@@ -193,8 +193,8 @@ public class CloneEffect extends SpellEffect {
         }
 
         // SVars to add to clone
-        if (params.containsKey("AddSVars")) {
-            for (final String s : Arrays.asList(params.get("AddSVars").split(","))) {
+        if (sa.hasParam("AddSVars")) {
+            for (final String s : Arrays.asList(sa.getParam("AddSVars").split(","))) {
                 if (origSVars.containsKey(s)) {
                     final String actualsVar = origSVars.get(s);
                     tgtCard.setSVar(s, actualsVar);
@@ -203,8 +203,8 @@ public class CloneEffect extends SpellEffect {
         }
 
         // abilities to add to clone
-        if (params.containsKey("AddAbilities")) {
-            for (final String s : Arrays.asList(params.get("AddAbilities").split(","))) {
+        if (sa.hasParam("AddAbilities")) {
+            for (final String s : Arrays.asList(sa.getParam("AddAbilities").split(","))) {
                 if (origSVars.containsKey(s)) {
                     //final AbilityFactory newAF = new AbilityFactory();
                     final String actualAbility = origSVars.get(s);
@@ -217,8 +217,8 @@ public class CloneEffect extends SpellEffect {
 
         // keywords to add to clone
         final ArrayList<String> keywords = new ArrayList<String>();
-        if (params.containsKey("AddKeywords")) {
-            keywords.addAll(Arrays.asList(params.get("AddKeywords").split(" & ")));
+        if (sa.hasParam("AddKeywords")) {
+            keywords.addAll(Arrays.asList(sa.getParam("AddKeywords").split(" & ")));
             // allow SVar substitution for keywords
             for (int i = 0; i < keywords.size(); i++) {
                 final String k = keywords.get(i);
@@ -236,13 +236,13 @@ public class CloneEffect extends SpellEffect {
         }
 
         // set power of clone
-        if (params.containsKey("IntoPlayTapped")) {
+        if (sa.hasParam("IntoPlayTapped")) {
             tgtCard.setTapped(true);
         }
 
         // set power of clone
-        if (params.containsKey("SetPower")) {
-            String rhs = params.get("SetPower");
+        if (sa.hasParam("SetPower")) {
+            String rhs = sa.getParam("SetPower");
             int power = -1;
             try {
                 power = Integer.parseInt(rhs);
@@ -253,8 +253,8 @@ public class CloneEffect extends SpellEffect {
         }
 
         // set toughness of clone
-        if (params.containsKey("SetToughness")) {
-            String rhs = params.get("SetToughness");
+        if (sa.hasParam("SetToughness")) {
+            String rhs = sa.getParam("SetToughness");
             int toughness = -1;
             try {
                 toughness = Integer.parseInt(rhs);
@@ -266,15 +266,15 @@ public class CloneEffect extends SpellEffect {
 
         // colors to be added or changed to
         String shortColors = "";
-        if (params.containsKey("Colors")) {
-            final String colors = params.get("Colors");
+        if (sa.hasParam("Colors")) {
+            final String colors = sa.getParam("Colors");
             if (colors.equals("ChosenColor")) {
                 shortColors = CardUtil.getShortColorsString(tgtCard.getChosenColor());
             } else {
                 shortColors = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(colors.split(","))));
             }
         }
-        tgtCard.addColor(shortColors, tgtCard, !params.containsKey("OverwriteColors"), true);
+        tgtCard.addColor(shortColors, tgtCard, !sa.hasParam("OverwriteColors"), true);
 
     }
 

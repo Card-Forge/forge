@@ -1,6 +1,5 @@
 package forge.card.abilityfactory.effects;
 
-import java.util.Map;
 
 import forge.Card;
 import forge.Singletons;
@@ -13,23 +12,23 @@ public class CleanUpEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void resolve(Map<String, String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         Card source = sa.getSourceCard();
 
-        if (params.containsKey("ClearRemembered")) {
+        if (sa.hasParam("ClearRemembered")) {
             source.clearRemembered();
             Singletons.getModel().getGame().getCardState(source).clearRemembered();
         }
-        if (params.containsKey("ClearImprinted")) {
+        if (sa.hasParam("ClearImprinted")) {
             source.clearImprinted();
         }
-        if (params.containsKey("ClearChosenX")) {
+        if (sa.hasParam("ClearChosenX")) {
             source.setSVar("ChosenX", "");
         }
-        if (params.containsKey("ClearChosenY")) {
+        if (sa.hasParam("ClearChosenY")) {
             source.setSVar("ChosenY", "");
         }
-        if (params.containsKey("ClearTriggered")) {
+        if (sa.hasParam("ClearTriggered")) {
             Singletons.getModel().getGame().getTriggerHandler().clearDelayedTrigger(source);
         }
     }

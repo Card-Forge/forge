@@ -19,14 +19,14 @@ import forge.gui.GuiChoose;
 public class ChooseColorEffect extends SpellEffect {
     
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
-        for (final Player p : getTargetPlayers(sa, params)) {
+        for (final Player p : getTargetPlayers(sa)) {
             sb.append(p).append(" ");
         }
         sb.append("chooses a color");
-        if (params.containsKey("OrColors")) {
+        if (sa.hasParam("OrColors")) {
             sb.append(" or colors");
         }
         sb.append(".");
@@ -35,21 +35,21 @@ public class ChooseColorEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Card card = sa.getSourceCard();
 
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         final Target tgt = sa.getTarget();
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (sa.getActivatingPlayer().isHuman()) {
-                    if (params.containsKey("OrColors")) {
+                    if (sa.hasParam("OrColors")) {
                         final List<String> o = GuiChoose.oneOrMany("Choose a color or colors",
                                 Constant.Color.ONLY_COLORS);
                         card.setChosenColor(new ArrayList<String>(o));
-                    } else if (params.containsKey("TwoColors")) {
+                    } else if (sa.hasParam("TwoColors")) {
                         final List<String> o = GuiChoose.amount("Choose two colors", Constant.Color.ONLY_COLORS, 2);
                         card.setChosenColor(new ArrayList<String>(o));
                     } else {
@@ -66,8 +66,8 @@ public class ChooseColorEffect extends SpellEffect {
                     List<String> chosen = new ArrayList<String>();
                     Player ai = sa.getActivatingPlayer();
                     Player opp = ai.getOpponent();
-                    if (params.containsKey("AILogic")) {
-                        final String logic = params.get("AILogic");
+                    if (sa.hasParam("AILogic")) {
+                        final String logic = sa.getParam("AILogic");
                         if (logic.equals("MostProminentInHumanDeck")) {
                             chosen.add(CardFactoryUtil.getMostProminentColor(CardLists.filterControlledBy(Singletons.getModel().getGame().getCardsInGame(), opp)));
                         } else if (logic.equals("MostProminentInComputerDeck")) {

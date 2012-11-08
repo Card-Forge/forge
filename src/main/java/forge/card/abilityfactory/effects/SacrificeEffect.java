@@ -17,28 +17,28 @@ import forge.gui.GuiChoose;
 public class SacrificeEffect extends SpellEffect {
     
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Card card = sa.getSourceCard();
 
         // Expand Sacrifice keyword here depending on what we need out of it.
-        final String num = params.containsKey("Amount") ? params.get("Amount") : "1";
+        final String num = sa.hasParam("Amount") ? sa.getParam("Amount") : "1";
         final int amount = AbilityFactory.calculateAmount(card, num, sa);
-        final List<Player> tgts = getTargetPlayers(sa, params);
+        final List<Player> tgts = getTargetPlayers(sa);
 
-        String valid = params.get("SacValid");
+        String valid = sa.getParam("SacValid");
         if (valid == null) {
             valid = "Self";
         }
 
-        String msg = params.get("SacMessage");
+        String msg = sa.getParam("SacMessage");
         if (msg == null) {
             msg = valid;
         }
 
         msg = "Sacrifice a " + msg;
 
-        final boolean destroy = params.containsKey("Destroy");
-        final boolean remSacrificed = params.containsKey("RememberSacrificed");
+        final boolean destroy = sa.hasParam("Destroy");
+        final boolean remSacrificed = sa.hasParam("RememberSacrificed");
 
         if (valid.equals("Self")) {
             if (Singletons.getModel().getGame().getZoneOf(card).is(ZoneType.Battlefield)) {
@@ -50,16 +50,16 @@ public class SacrificeEffect extends SpellEffect {
         else {
             List<Card> sacList = null;
             for (final Player p : tgts) {
-                if (params.containsKey("Random")) {
+                if (sa.hasParam("Random")) {
                     sacList = sacrificeRandom(p, amount, valid, sa, destroy);
                 } else if (p.isComputer()) {
-                    if (params.containsKey("Optional") && sa.getActivatingPlayer().isHuman()) {
+                    if (sa.hasParam("Optional") && sa.getActivatingPlayer().isHuman()) {
                         continue;
                     }
                     sacList = sacrificeAI(p, amount, valid, sa, destroy);
                 } else {
                     sacList = sacrificeHuman(p, amount, valid, sa, destroy,
-                            params.containsKey("Optional"));
+                            sa.hasParam("Optional"));
                 }
                 if (remSacrificed) {
                     for (int i = 0; i < sacList.size(); i++) {
@@ -72,22 +72,22 @@ public class SacrificeEffect extends SpellEffect {
     }
 
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
-        final String conditionDesc = params.get("ConditionDescription");
+        final String conditionDesc = sa.getParam("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
     
-        final List<Player> tgts = getTargetPlayers(sa, params);
+        final List<Player> tgts = getTargetPlayers(sa);
     
-        String valid = params.get("SacValid");
+        String valid = sa.getParam("SacValid");
         if (valid == null) {
             valid = "Self";
         }
     
-        String num = params.get("Amount");
+        String num = sa.getParam("Amount");
         num = (num == null) ? "1" : num;
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), num, sa);
     
@@ -101,12 +101,12 @@ public class SacrificeEffect extends SpellEffect {
                 sb.append(p.getName()).append(" ");
             }
     
-            String msg = params.get("SacMessage");
+            String msg = sa.getParam("SacMessage");
             if (msg == null) {
                 msg = valid;
             }
     
-            if (params.containsKey("Destroy")) {
+            if (sa.hasParam("Destroy")) {
                 sb.append("Destroys ");
             } else {
                 sb.append("Sacrifices ");

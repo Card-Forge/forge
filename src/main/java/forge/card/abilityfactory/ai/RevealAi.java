@@ -12,7 +12,7 @@ import forge.util.MyRandom;
 
 public class RevealAi extends RevealAiBase {
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
@@ -54,7 +54,7 @@ public class RevealAi extends RevealAiBase {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
     
         if (!revealHandTargetAI(ai, sa, false, mandatory)) {
             return false;

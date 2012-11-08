@@ -15,11 +15,11 @@ import forge.gui.GuiChoose;
 public class RevealHandEffect extends SpellEffect {
     
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
     
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
     
 
         sb.append(sa.getActivatingPlayer()).append(" looks at ");
@@ -37,12 +37,12 @@ public class RevealHandEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
-        final Card host = sa.getAbilityFactory().getHostCard();
+    public void resolve(SpellAbility sa) {
+        final Card host = sa.getSourceCard();
     
         final Target tgt = sa.getTarget();
 
-        for (final Player p : getTargetPlayers(sa, params)) {
+        for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 final List<Card> hand = p.getCardsIn(ZoneType.Hand);
                 if (sa.getActivatingPlayer().isHuman()) {
@@ -58,7 +58,7 @@ public class RevealHandEffect extends SpellEffect {
                     // reveal to Computer (when computer can keep track of seen
                     // cards...)
                 }
-                if (params.containsKey("RememberRevealed")) {
+                if (sa.hasParam("RememberRevealed")) {
                     for (final Card c : hand) {
                         host.addRemembered(c);
                     }

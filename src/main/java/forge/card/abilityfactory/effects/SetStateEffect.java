@@ -11,17 +11,17 @@ import forge.card.spellability.SpellAbility;
 public class SetStateEffect extends SpellEffect {
     
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final String conditionDesc = params.get("ConditionDescription");
+        final String conditionDesc = sa.getParam("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
 
-        final List<Card> tgtCards = getTargetCards(sa, params); 
+        final List<Card> tgtCards = getTargetCards(sa); 
 
-        if (params.containsKey("Flip")) {
+        if (sa.hasParam("Flip")) {
             sb.append("Flip");
         } else {
             sb.append("Transform ");
@@ -45,12 +45,12 @@ public class SetStateEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
 
-        final Card host = sa.getAbilityFactory().getHostCard(); 
-        final List<Card> tgtCards = getTargetCards(sa, params); 
+        final Card host = sa.getSourceCard(); 
+        final List<Card> tgtCards = getTargetCards(sa); 
 
-        final boolean remChanged = params.containsKey("RememberChanged");
+        final boolean remChanged = sa.hasParam("RememberChanged");
 
         for (final Card tgt : tgtCards) {
             if (sa.getTarget() != null) {
@@ -59,7 +59,7 @@ public class SetStateEffect extends SpellEffect {
                 }
             }
 
-            final String mode = params.get("Mode");
+            final String mode = sa.getParam("Mode");
 
             if (mode != null) {
                 if (mode.equals("Transform")) {
@@ -113,7 +113,7 @@ public class SetStateEffect extends SpellEffect {
                     }
                 }
             } else {
-                tgt.changeToState(CardCharacteristicName.smartValueOf(params.get("NewState")));
+                tgt.changeToState(CardCharacteristicName.smartValueOf(sa.getParam("NewState")));
             }
 
         }

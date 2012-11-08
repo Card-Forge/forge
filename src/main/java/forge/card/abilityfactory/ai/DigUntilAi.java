@@ -14,7 +14,7 @@ public class DigUntilAi extends SpellAiLogic {
     
 
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         double chance = .4; // 40 percent chance with instant speed stuff
         if (AbilityFactory.isSorcerySpeed(sa)) {
             chance = .667; // 66.7% chance for sorcery speed (since it will
@@ -46,12 +46,12 @@ public class DigUntilAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return true;
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
 
         final Target tgt = sa.getTarget();
 

@@ -12,11 +12,11 @@ import forge.game.player.Player;
 
 public class ShuffleEffect extends SpellEffect {
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
-        final boolean optional = params.containsKey("Optional");
+        final boolean optional = sa.hasParam("Optional");
 
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params); 
+        final List<Player> tgtPlayers = getTargetPlayers(sa); 
 
         final Target tgt = sa.getTarget();
 
@@ -32,16 +32,16 @@ public class ShuffleEffect extends SpellEffect {
     }
 
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
 
-        final String conditionDesc = params.get("ConditionDescription");
+        final String conditionDesc = sa.getParam("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
     
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
     
         if (tgtPlayers.size() > 0) {
             final Iterator<Player> it = tgtPlayers.iterator();

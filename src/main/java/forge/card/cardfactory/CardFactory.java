@@ -21,8 +21,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardUtil;
@@ -160,21 +158,18 @@ public class CardFactory implements CardFactoryInterface {
 
         // change the color of the copy (eg: Fork)
         // Currently won't work for abilities, only for spells
-        if (null != source.getFirstSpellAbility() && null != source.getFirstSpellAbility().getAbilityFactory()) {
-            final SpellAbility sourceSA = source.getFirstSpellAbility();
-            if (sourceSA.getAbilityFactory().getMapParams().containsKey("CopyIsColor")) {
-                String tmp = "";
-                final Map<String, String> params = sourceSA.getAbilityFactory().getMapParams();
-                final String newColor = params.get("CopyIsColor");
-                if (newColor.equals("ChosenColor")) {
-                    tmp = CardUtil.getShortColorsString(source.getChosenColor());
-                } else {
-                    tmp = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(newColor.split(","))));
-                }
-                final String finalColors = tmp;
-
-                c.addColor(finalColors, c, !params.containsKey("OverwriteColors"), true);
+        final SpellAbility sourceSA = source.getFirstSpellAbility();
+        if (null != sourceSA && sourceSA.hasParam("CopyIsColor")) {
+            String tmp = "";
+            final String newColor = sourceSA.getParam("CopyIsColor");
+            if (newColor.equals("ChosenColor")) {
+                tmp = CardUtil.getShortColorsString(source.getChosenColor());
+            } else {
+                tmp = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(newColor.split(","))));
             }
+            final String finalColors = tmp;
+
+            c.addColor(finalColors, c, !sourceSA.hasParam("OverwriteColors"), true);
         }
 
         c.addController(controller);

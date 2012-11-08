@@ -9,8 +9,8 @@ public class ChooseColorAi extends SpellAiLogic {
     
     
     @Override
-    protected boolean canPlayAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa) {
-        if (!params.containsKey("AILogic")) {
+    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+        if (!sa.hasParam("AILogic")) {
             return false;
         }
         boolean chance = MyRandom.getRandom().nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
@@ -18,14 +18,14 @@ public class ChooseColorAi extends SpellAiLogic {
     }
     
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return true;
     }
     
     
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
-        return mandatory || canPlayAI(ai, params, sa);
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        return mandatory || canPlayAI(ai, sa);
     }
 
 }

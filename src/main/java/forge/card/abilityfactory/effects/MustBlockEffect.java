@@ -12,7 +12,7 @@ import forge.card.spellability.Target;
 public class MustBlockEffect extends SpellEffect {
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
 
         ArrayList<Card> tgtCards;
@@ -21,12 +21,12 @@ public class MustBlockEffect extends SpellEffect {
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
-            tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+            tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
 
         ArrayList<Card> cards;
-        if (params.containsKey("DefinedAttacker")) {
-            cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("DefinedAttacker"), sa);
+        if (sa.hasParam("DefinedAttacker")) {
+            cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("DefinedAttacker"), sa);
         } else {
             cards = new ArrayList<Card>();
             cards.add(host);
@@ -43,18 +43,18 @@ public class MustBlockEffect extends SpellEffect {
     } // mustBlockResolve()
 
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final Card host = sa.getSourceCard();
         final StringBuilder sb = new StringBuilder();
     
         // end standard pre-
     
-        final List<Card> tgtCards = getTargetCards(sa, params);
+        final List<Card> tgtCards = getTargetCards(sa);
     
         String attacker = null;
-        if (params.containsKey("DefinedAttacker")) {
+        if (sa.hasParam("DefinedAttacker")) {
             final ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(),
-                    params.get("DefinedAttacker"), sa);
+                    sa.getParam("DefinedAttacker"), sa);
             attacker = cards.get(0).toString();
         } else {
             attacker = host.toString();

@@ -23,7 +23,7 @@ public class RestartGameEffect extends SpellEffect {
      * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void resolve(Map<String, String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         GameState game = Singletons.getModel().getGame();
         List<Player> players = game.getPlayers();
         Map<Player, List<Card>> playerLibraries = new HashMap<Player, List<Card>>();
@@ -32,9 +32,9 @@ public class RestartGameEffect extends SpellEffect {
         List<ZoneType> restartZones = new ArrayList<ZoneType>(Arrays.asList(ZoneType.Battlefield,
                 ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command));
         
-        ZoneType leaveZone = ZoneType.smartValueOf(params.containsKey("RestrictFromZone") ? params.get("RestrictFromZone") : null);
+        ZoneType leaveZone = ZoneType.smartValueOf(sa.hasParam("RestrictFromZone") ? sa.getParam("RestrictFromZone") : null);
         restartZones.remove(leaveZone);
-        String leaveRestriction = params.containsKey("RestrictFromValid") ? params.get("RestrictFromValid") : "Card";
+        String leaveRestriction = sa.hasParam("RestrictFromValid") ? sa.getParam("RestrictFromValid") : "Card";
         
         for(Player p : players) {
             List<Card> newLibrary = new ArrayList<Card>(p.getCardsIn(restartZones));
@@ -55,8 +55,8 @@ public class RestartGameEffect extends SpellEffect {
      * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public String getStackDescription(Map<String, String> params, SpellAbility sa) {
-        String desc = params.get("SpellDescription");
+    public String getStackDescription(SpellAbility sa) {
+        String desc = sa.getParam("SpellDescription");
         
         if (desc == null) {
             desc = "Restart the game.";

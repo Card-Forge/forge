@@ -15,20 +15,20 @@ import forge.game.zone.ZoneType;
 
 public class DamageAllEffect extends SpellEffect {
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
         String desc = "";
-        if (params.containsKey("ValidDescription")) {
-            desc = params.get("ValidDescription");
+        if (sa.hasParam("ValidDescription")) {
+            desc = sa.getParam("ValidDescription");
         }
         
-        final String damage = params.get("NumDmg");
+        final String damage = sa.getParam("NumDmg");
         final int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa); 
     
 
     
-        final ArrayList<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("DamageSource"), sa);
+        final ArrayList<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("DamageSource"), sa);
         final Card source = definedSources.get(0);
 
         if (source != sa.getSourceCard()) {
@@ -43,13 +43,13 @@ public class DamageAllEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final ArrayList<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(),
-                params.get("DamageSource"), sa);
+                sa.getParam("DamageSource"), sa);
         final Card card = definedSources.get(0);
         final Card source = sa.getSourceCard();
 
-        final String damage = params.get("NumDmg");
+        final String damage = sa.getParam("NumDmg");
         final int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa); 
 
         final Target tgt = sa.getTarget();
@@ -61,11 +61,11 @@ public class DamageAllEffect extends SpellEffect {
         String players = "";
         List<Card> list = new ArrayList<Card>();
 
-        if (params.containsKey("ValidPlayers")) {
-            players = params.get("ValidPlayers");
+        if (sa.hasParam("ValidPlayers")) {
+            players = sa.getParam("ValidPlayers");
         }
 
-        if (params.containsKey("ValidCards")) {
+        if (sa.hasParam("ValidCards")) {
             list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         }
 
@@ -73,10 +73,10 @@ public class DamageAllEffect extends SpellEffect {
             list = CardLists.filterControlledBy(list, targetPlayer);
         }
 
-        list = AbilityFactory.filterListByType(list, params.get("ValidCards"), sa);
+        list = AbilityFactory.filterListByType(list, sa.getParam("ValidCards"), sa);
 
         for (final Card c : list) {
-            if (c.addDamage(dmg, card) && params.containsKey("RememberDamaged")) {
+            if (c.addDamage(dmg, card) && sa.hasParam("RememberDamaged")) {
                 source.addRemembered(c);
             }
         }
@@ -84,7 +84,7 @@ public class DamageAllEffect extends SpellEffect {
         if (!players.equals("")) {
             final ArrayList<Player> playerList = AbilityFactory.getDefinedPlayers(card, players, sa);
             for (final Player p : playerList) {
-                if (p.addDamage(dmg, card) && params.containsKey("RememberDamaged")) {
+                if (p.addDamage(dmg, card) && sa.hasParam("RememberDamaged")) {
                     source.addRemembered(p);
                 }
             }

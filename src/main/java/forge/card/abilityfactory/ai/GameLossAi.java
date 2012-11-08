@@ -7,7 +7,7 @@ import forge.game.player.Player;
 
 public class GameLossAi extends SpellAiLogic {
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Player opp = ai.getOpponent();
         if (opp.cantLose()) {
             return false;
@@ -28,12 +28,12 @@ public class GameLossAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return true;
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
 
         // Phage the Untouchable
         // (Final Fortune would need to attach it's delayed trigger to a

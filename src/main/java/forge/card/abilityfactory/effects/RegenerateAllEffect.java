@@ -12,17 +12,17 @@ import forge.game.zone.ZoneType;
 
 public class RegenerateAllEffect extends SpellEffect {
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         return "Regenerate all valid cards.";
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
-        final Card hostCard = sa.getAbilityFactory().getHostCard();
+    public void resolve(SpellAbility sa) {
+        final Card hostCard = sa.getSourceCard();
         String valid = "";
 
-        if (params.containsKey("ValidCards")) {
-            valid = params.get("ValidCards");
+        if (sa.hasParam("ValidCards")) {
+            valid = sa.getParam("ValidCards");
         }
 
         List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);

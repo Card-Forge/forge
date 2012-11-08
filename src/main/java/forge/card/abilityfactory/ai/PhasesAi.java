@@ -2,7 +2,6 @@ package forge.card.abilityfactory.ai;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import forge.Card;
@@ -22,7 +21,7 @@ public class PhasesAi extends SpellAiLogic
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         // This still needs to be fleshed out
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
@@ -32,7 +31,7 @@ public class PhasesAi extends SpellAiLogic
 
         ArrayList<Card> tgtCards;
         if (tgt == null) {
-            tgtCards = AbilityFactory.getDefinedCards(source, params.get("Defined"), sa);
+            tgtCards = AbilityFactory.getDefinedCards(source, sa.getParam("Defined"), sa);
             if (tgtCards.contains(source)) {
                 // Protect it from something
             } else {
@@ -52,7 +51,7 @@ public class PhasesAi extends SpellAiLogic
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         final Target tgt = sa.getTarget();
 
         if (tgt == null)
@@ -69,7 +68,7 @@ public class PhasesAi extends SpellAiLogic
     }
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         final Target tgt = sa.getTarget();
 
         boolean randomReturn = true;

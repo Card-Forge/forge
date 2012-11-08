@@ -3,7 +3,6 @@ package forge.card.abilityfactory.effects;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.JOptionPane;
 
@@ -27,15 +26,15 @@ public class ProtectEffect extends SpellEffect {
          * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
          */
     @Override
-    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
 
-        final ArrayList<String> gains = AbilityFactory.getProtectionList(params);
-        final boolean choose = (params.containsKey("Choices")) ? true : false;
+        final ArrayList<String> gains = AbilityFactory.getProtectionList(sa);
+        final boolean choose = (sa.hasParam("Choices")) ? true : false;
         final String joiner = choose ? "or" : "and";
 
         final StringBuilder sb = new StringBuilder();
 
-        List<Card> tgtCards = getTargetCards(sa, params);
+        List<Card> tgtCards = getTargetCards(sa);
 
 
         if (tgtCards.size() > 0) {
@@ -54,8 +53,8 @@ public class ProtectEffect extends SpellEffect {
                 }
             }
 
-            if (params.containsKey("Radiance") && (sa.getTarget() != null)) {
-                sb.append(" and each other ").append(params.get("ValidTgts"))
+            if (sa.hasParam("Radiance") && (sa.getTarget() != null)) {
+                sb.append(" and each other ").append(sa.getParam("ValidTgts"))
                         .append(" that shares a color with ");
                 if (tgtCards.size() > 1) {
                     sb.append("them");
@@ -86,7 +85,7 @@ public class ProtectEffect extends SpellEffect {
                 sb.append(gains.get(i));
             }
 
-            if (!params.containsKey("Permanent")) {
+            if (!sa.hasParam("Permanent")) {
                 sb.append(" until end of turn");
             }
 
@@ -97,11 +96,11 @@ public class ProtectEffect extends SpellEffect {
     } // protectStackDescription()
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
-        final Card host = sa.getAbilityFactory().getHostCard();
+    public void resolve(SpellAbility sa) {
+        final Card host = sa.getSourceCard();
 
-        final boolean isChoice = params.get("Gains").contains("Choice");
-        final ArrayList<String> choices = AbilityFactory.getProtectionList(params);
+        final boolean isChoice = sa.getParam("Gains").contains("Choice");
+        final ArrayList<String> choices = AbilityFactory.getProtectionList(sa);
         final ArrayList<String> gains = new ArrayList<String>();
         if (isChoice) {
             
@@ -114,8 +113,8 @@ public class ProtectEffect extends SpellEffect {
             } else {
                 Player ai = sa.getActivatingPlayer();
                 String choice = choices.get(0);
-                if (params.containsKey("AILogic")) {
-                    final String logic = params.get("AILogic");
+                if (sa.hasParam("AILogic")) {
+                    final String logic = sa.getParam("AILogic");
                     if (logic.equals("MostProminentHumanCreatures")) {
                         List<Card> list = ai.getOpponent().getCreaturesInPlay();
                         if (list.isEmpty()) {
@@ -130,7 +129,7 @@ public class ProtectEffect extends SpellEffect {
                 JOptionPane.showMessageDialog(null, "Computer chooses " + gains, "" + host, JOptionPane.PLAIN_MESSAGE);
             }
         } else {
-            if (params.get("Gains").equals("ChosenColor")) {
+            if (sa.getParam("Gains").equals("ChosenColor")) {
                 for (final String color : host.getChosenColor()) {
                     gains.add(color.toLowerCase());
                 }
@@ -139,13 +138,13 @@ public class ProtectEffect extends SpellEffect {
             }
         }
 
-        final List<Card> tgtCards = getTargetCards(sa, params);
+        final List<Card> tgtCards = getTargetCards(sa);
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
         final Target tgt = sa.getTarget();
 
-        if (params.containsKey("Radiance") && (tgt != null)) {
+        if (sa.hasParam("Radiance") && (tgt != null)) {
             for (final Card c : CardUtil.getRadiance(host, tgtCards.get(0),
-                    params.get("ValidTgts").split(","))) {
+                    sa.getParam("ValidTgts").split(","))) {
                 untargetedCards.add(c);
             }
         }
@@ -166,7 +165,7 @@ public class ProtectEffect extends SpellEffect {
                 tgtC.addExtrinsicKeyword("Protection from " + gain);
             }
 
-            if (!params.containsKey("Permanent")) {
+            if (!sa.hasParam("Permanent")) {
                 // If not Permanent, remove protection at EOT
                 final Command untilEOT = new Command() {
                     private static final long serialVersionUID = 7682700789217703789L;
@@ -180,7 +179,7 @@ public class ProtectEffect extends SpellEffect {
                         }
                     }
                 };
-                if (params.containsKey("UntilEndOfCombat")) {
+                if (sa.hasParam("UntilEndOfCombat")) {
                     Singletons.getModel().getGame().getEndOfCombat().addUntil(untilEOT);
                 } else {
                     Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);
@@ -198,7 +197,7 @@ public class ProtectEffect extends SpellEffect {
                 unTgtC.addExtrinsicKeyword("Protection from " + gain);
             }
 
-            if (!params.containsKey("Permanent")) {
+            if (!sa.hasParam("Permanent")) {
                 // If not Permanent, remove protection at EOT
                 final Command untilEOT = new Command() {
                     private static final long serialVersionUID = 7682700789217703789L;
@@ -212,7 +211,7 @@ public class ProtectEffect extends SpellEffect {
                         }
                     }
                 };
-                if (params.containsKey("UntilEndOfCombat")) {
+                if (sa.hasParam("UntilEndOfCombat")) {
                     Singletons.getModel().getGame().getEndOfCombat().addUntil(untilEOT);
                 } else {
                     Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);

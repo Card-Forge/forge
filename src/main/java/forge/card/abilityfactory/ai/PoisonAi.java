@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.ai;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import forge.Card;
 import forge.Singletons;
@@ -26,7 +25,7 @@ public class PoisonAi extends SpellAiLogic {
      * forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
         // int humanPoison = AllZone.getHumanPlayer().getPoisonCounters();
@@ -52,7 +51,7 @@ public class PoisonAi extends SpellAiLogic {
 
         // Don't use poison before main 2 if possible
         if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
-                && !params.containsKey("ActivationPhases")) {
+                && !sa.hasParam("ActivationPhases")) {
             return false;
         }
 
@@ -72,14 +71,14 @@ public class PoisonAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.addTarget(ai.getOpponent());
         } else {
             final ArrayList<Player> players = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
-                    params.get("Defined"), sa);
+                    sa.getParam("Defined"), sa);
             for (final Player p : players) {
                 if (!mandatory && p.isComputer() && (p.getPoisonCounters() > p.getOpponent().getPoisonCounters())) {
                     return false;

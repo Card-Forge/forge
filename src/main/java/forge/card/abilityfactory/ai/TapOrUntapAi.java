@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.ai;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Random;
 
 import forge.Card;
@@ -17,7 +16,7 @@ public class TapOrUntapAi extends TapAiBase {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
 
@@ -28,7 +27,7 @@ public class TapOrUntapAi extends TapAiBase {
             // assume we are looking to tap human's stuff
             // TODO - check for things with untap abilities, and don't tap
             // those.
-            final ArrayList<Card> defined = AbilityFactory.getDefinedCards(source, params.get("Defined"), sa);
+            final ArrayList<Card> defined = AbilityFactory.getDefinedCards(source, sa.getParam("Defined"), sa);
 
             boolean bFlag = false;
             for (final Card c : defined) {
@@ -49,7 +48,7 @@ public class TapOrUntapAi extends TapAiBase {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
 
@@ -74,7 +73,7 @@ public class TapOrUntapAi extends TapAiBase {
     }
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player ai) {
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
 

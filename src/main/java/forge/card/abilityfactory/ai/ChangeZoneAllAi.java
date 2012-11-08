@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.ai;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import forge.Card;
@@ -25,12 +24,12 @@ public class ChangeZoneAllAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // Change Zone All, can be any type moving from one zone to another
-        final Cost abCost = sa.getAbilityFactory().getAbCost();
+        final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
-        final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));
-        final ZoneType origin = ZoneType.smartValueOf(params.get("Origin"));
+        final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
+        final ZoneType origin = ZoneType.smartValueOf(sa.getParam("Origin"));
 
         if (abCost != null) {
             // AI currently disabled for these costs
@@ -56,9 +55,9 @@ public class ChangeZoneAllAi extends SpellAiLogic {
         // ex. "Return all blocking/blocked by target creature"
 
         final Player opp = ai.getOpponent();
-        final List<Card> humanType = AbilityFactory.filterListByType(opp.getCardsIn(origin), params.get("ChangeType"), sa);
+        final List<Card> humanType = AbilityFactory.filterListByType(opp.getCardsIn(origin), sa.getParam("ChangeType"), sa);
         List<Card> computerType = ai.getCardsIn(origin);
-        computerType = AbilityFactory.filterListByType(computerType, params.get("ChangeType"), sa);
+        computerType = AbilityFactory.filterListByType(computerType, sa.getParam("ChangeType"), sa);
         final Target tgt = sa.getTarget();
 
         // TODO improve restrictions on when the AI would want to use this
@@ -124,7 +123,7 @@ public class ChangeZoneAllAi extends SpellAiLogic {
         }
 
         if (destination.equals(ZoneType.Battlefield)) {
-            if (params.get("GainControl") != null) {
+            if (sa.getParam("GainControl") != null) {
                 // Check if the cards are valuable enough
                 if ((CardLists.getNotType(humanType, "Creature").size() == 0) && (CardLists.getNotType(computerType, "Creature").size() == 0)) {
                     if ((CardFactoryUtil.evaluateCreatureList(computerType) + CardFactoryUtil
@@ -160,15 +159,15 @@ public class ChangeZoneAllAi extends SpellAiLogic {
      * <p>
      * changeZoneAllPlayDrawbackAI.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * 
      * @return a boolean.
      */
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         // if putting cards from hand to library and parent is drawing cards
         // make sure this will actually do something:
 
@@ -177,16 +176,16 @@ public class ChangeZoneAllAi extends SpellAiLogic {
 
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         // Change Zone All, can be any type moving from one zone to another
 
-        final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));
-        final ZoneType origin = ZoneType.smartValueOf(params.get("Origin"));
+        final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
+        final ZoneType origin = ZoneType.smartValueOf(sa.getParam("Origin"));
 
         final Player opp = ai.getOpponent();
-        final List<Card> humanType = AbilityFactory.filterListByType(opp.getCardsIn(origin), params.get("ChangeType"), sa);
+        final List<Card> humanType = AbilityFactory.filterListByType(opp.getCardsIn(origin), sa.getParam("ChangeType"), sa);
         List<Card> computerType = ai.getCardsIn(origin);
-        computerType = AbilityFactory.filterListByType(computerType, params.get("ChangeType"), sa);
+        computerType = AbilityFactory.filterListByType(computerType, sa.getParam("ChangeType"), sa);
 
         // TODO improve restrictions on when the AI would want to use this
         // spBounceAll has some AI we can compare to.
@@ -237,7 +236,7 @@ public class ChangeZoneAllAi extends SpellAiLogic {
         }
 
         if (destination.equals(ZoneType.Battlefield)) {
-            if (params.get("GainControl") != null) {
+            if (sa.getParam("GainControl") != null) {
                 // Check if the cards are valuable enough
                 if ((CardLists.getNotType(humanType, "Creature").size() == 0) && (CardLists.getNotType(computerType, "Creature").size() == 0)) {
                     if ((CardFactoryUtil.evaluateCreatureList(computerType) + CardFactoryUtil

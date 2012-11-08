@@ -2,7 +2,6 @@ package forge.card.abilityfactory.ai;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
@@ -47,24 +46,24 @@ public class ChangeZoneAi extends SpellAiLogic {
      * <p>
      * changeZoneCanPlayAI.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * 
      * @return a boolean.
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         String origin = "";
-        if (params.containsKey("Origin")) {
-            origin = params.get("Origin");
+        if (sa.hasParam("Origin")) {
+            origin = sa.getParam("Origin");
         }
 
-        if (ZoneType.isHidden(origin, params.containsKey("Hidden"))) {
-            return hiddenOriginCanPlayAI(aiPlayer, params, sa);
+        if (ZoneType.isHidden(origin, sa.hasParam("Hidden"))) {
+            return hiddenOriginCanPlayAI(aiPlayer, sa);
         } else if (ZoneType.isKnown(origin)) {
-            return knownOriginCanPlayAI(aiPlayer, params, sa);
+            return knownOriginCanPlayAI(aiPlayer, sa);
         }
 
         return false;
@@ -74,24 +73,24 @@ public class ChangeZoneAi extends SpellAiLogic {
      * <p>
      * changeZonePlayDrawbackAI.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * 
      * @return a boolean.
      */
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         String origin = "";
-        if (params.containsKey("Origin")) {
-            origin = params.get("Origin");
+        if (sa.hasParam("Origin")) {
+            origin = sa.getParam("Origin");
         }
 
-        if (ZoneType.isHidden(origin, params.containsKey("Hidden"))) {
-            return hiddenOriginPlayDrawbackAI(aiPlayer, params, sa);
+        if (ZoneType.isHidden(origin, sa.hasParam("Hidden"))) {
+            return hiddenOriginPlayDrawbackAI(aiPlayer, sa);
         } else if (ZoneType.isKnown(origin)) {
-            return knownOriginPlayDrawbackAI(aiPlayer, params, sa);
+            return knownOriginPlayDrawbackAI(aiPlayer, sa);
         }
 
         return false;
@@ -103,26 +102,26 @@ public class ChangeZoneAi extends SpellAiLogic {
      * <p>
      * changeZoneTriggerAINoCost.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param mandatory
      *            a boolean.
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * 
      * @return a boolean.
      */
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         String origin = "";
-        if (params.containsKey("Origin")) {
-            origin = params.get("Origin");
+        if (sa.hasParam("Origin")) {
+            origin = sa.getParam("Origin");
         }
 
-        if (ZoneType.isHidden(origin, params.containsKey("Hidden"))) {
-            return hiddenTriggerAI(aiPlayer, params, sa, mandatory);
+        if (ZoneType.isHidden(origin, sa.hasParam("Hidden"))) {
+            return hiddenTriggerAI(aiPlayer, sa, mandatory);
         } else if (ZoneType.isKnown(origin)) {
-            return knownOriginTriggerAI(aiPlayer, params, sa, mandatory);
+            return knownOriginTriggerAI(aiPlayer, sa, mandatory);
         }
 
         return false;
@@ -154,18 +153,18 @@ public class ChangeZoneAi extends SpellAiLogic {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean hiddenOriginCanPlayAI(final Player ai, final Map<String, String> params, final SpellAbility sa) {
+    private static boolean hiddenOriginCanPlayAI(final Player ai, final SpellAbility sa) {
         // Fetching should occur fairly often as it helps cast more spells, and
         // have access to more mana
-        final Cost abCost = sa.getAbilityFactory().getAbCost();
+        final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
         ZoneType origin = null;
         final Player opponent = ai.getOpponent();
         
-        if (params.containsKey("Origin")) {
-            origin = ZoneType.smartValueOf(params.get("Origin"));
+        if (sa.hasParam("Origin")) {
+            origin = ZoneType.smartValueOf(sa.getParam("Origin"));
         }
-        final String destination = params.get("Destination");
+        final String destination = sa.getParam("Destination");
 
         if (abCost != null) {
             // AI currently disabled for these costs
@@ -191,7 +190,7 @@ public class ChangeZoneAi extends SpellAiLogic {
             }
             
             //Ninjutsu
-            if (params.containsKey("Ninjutsu")) {
+            if (sa.hasParam("Ninjutsu")) {
                 if (source.isType("Legendary") && !Singletons.getModel().getGame().isCardInPlay("Mirror Gallery")) {
                     final List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
                     if (Iterables.any(list, CardPredicates.nameEquals(source.getName()))) {
@@ -235,7 +234,7 @@ public class ChangeZoneAi extends SpellAiLogic {
         pDefined.add(source.getController());
         final Target tgt = sa.getTarget();
         if ((tgt != null) && tgt.canTgtPlayer()) {
-            boolean isCurse = sa.getAbilityFactory().isCurse();
+            boolean isCurse = sa.isCurse();
             if (isCurse && sa.canTarget(opponent)) {
                 tgt.addTarget(opponent);
             } else if (!isCurse && sa.canTarget(ai)) {
@@ -243,14 +242,14 @@ public class ChangeZoneAi extends SpellAiLogic {
             }
             pDefined = tgt.getTargetPlayers();
         } else {
-            if (params.containsKey("DefinedPlayer")) {
-                pDefined = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("DefinedPlayer"), sa);
+            if (sa.hasParam("DefinedPlayer")) {
+                pDefined = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("DefinedPlayer"), sa);
             } else {
-                pDefined = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+                pDefined = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
             }
         }
 
-        String type = params.get("ChangeType");
+        String type = sa.getParam("ChangeType");
         if (type != null) {
             if (type.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
@@ -275,7 +274,7 @@ public class ChangeZoneAi extends SpellAiLogic {
 
         // don't use fetching to top of library/graveyard before main2
         if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
-                && !params.containsKey("ActivationPhases")) {
+                && !sa.hasParam("ActivationPhases")) {
             if (!destination.equals("Battlefield") && !destination.equals("Hand")) {
                 return false;
             }
@@ -306,13 +305,13 @@ public class ChangeZoneAi extends SpellAiLogic {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean hiddenOriginPlayDrawbackAI(final Player aiPlayer, Map<String,String> params, final SpellAbility sa) {
+    private static boolean hiddenOriginPlayDrawbackAI(final Player aiPlayer, final SpellAbility sa) {
         // if putting cards from hand to library and parent is drawing cards
         // make sure this will actually do something:
         final Target tgt = sa.getTarget();
         final Player opp = aiPlayer.getOpponent();
         if ((tgt != null) && tgt.canTgtPlayer()) {
-            boolean isCurse = sa.getAbilityFactory().isCurse();
+            boolean isCurse = sa.isCurse();
             if (isCurse && sa.canTarget(opp)) {
                 tgt.addTarget(opp);
             } else if (!isCurse && sa.canTarget(aiPlayer)) {
@@ -338,7 +337,7 @@ public class ChangeZoneAi extends SpellAiLogic {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean hiddenTriggerAI(final Player ai, final Map<String,String> params, final SpellAbility sa, final boolean mandatory) {
+    private static boolean hiddenTriggerAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
         // Fetching should occur fairly often as it helps cast more spells, and
         // have access to more mana
 
@@ -346,12 +345,12 @@ public class ChangeZoneAi extends SpellAiLogic {
 
 
         List<ZoneType> origin = new ArrayList<ZoneType>();
-        if (params.containsKey("Origin")) {
-            origin = ZoneType.listValueOf(params.get("Origin"));
+        if (sa.hasParam("Origin")) {
+            origin = ZoneType.listValueOf(sa.getParam("Origin"));
         }
 
         // this works for hidden because the mana is paid first.
-        final String type = params.get("ChangeType");
+        final String type = sa.getParam("ChangeType");
         if ((type != null) && type.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
@@ -362,8 +361,7 @@ public class ChangeZoneAi extends SpellAiLogic {
         final Target tgt = sa.getTarget();
         if ((tgt != null) && tgt.canTgtPlayer()) {
             final Player opp = ai.getOpponent();
-            boolean isCurse = sa.getAbilityFactory().isCurse();
-            if (isCurse) {
+            if (sa.isCurse()) {
                 if (sa.canTarget(opp)) {
                     tgt.addTarget(opp);
                 } else if (mandatory && sa.canTarget(ai)) {
@@ -390,7 +388,7 @@ public class ChangeZoneAi extends SpellAiLogic {
             if (mandatory) {
                 return true;
             }
-            pDefined = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+            pDefined = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
 
         for (final Player p : pDefined) {
@@ -398,7 +396,7 @@ public class ChangeZoneAi extends SpellAiLogic {
 
             // Computer should "know" his deck
             if (p.isComputer()) {
-                list = AbilityFactory.filterListByType(list, params.get("ChangeType"), sa);
+                list = AbilityFactory.filterListByType(list, sa.getParam("ChangeType"), sa);
             }
 
             if (list.isEmpty()) {
@@ -523,13 +521,13 @@ public class ChangeZoneAi extends SpellAiLogic {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean knownOriginCanPlayAI(final Player ai, final Map<String,String> params, final SpellAbility sa) {
+    private static boolean knownOriginCanPlayAI(final Player ai, final SpellAbility sa) {
         // Retrieve either this card, or target Cards in Graveyard
-        final Cost abCost = sa.getAbilityFactory().getAbCost();
+        final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
 
-        final ZoneType origin = ZoneType.smartValueOf(params.get("Origin"));
-        final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));
+        final ZoneType origin = ZoneType.smartValueOf(sa.getParam("Origin"));
+        final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
 
         final Random r = MyRandom.getRandom();
 
@@ -557,12 +555,12 @@ public class ChangeZoneAi extends SpellAiLogic {
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
-            if (!isPreferredTarget(ai, params, sa, false)) {
+            if (!isPreferredTarget(ai, sa, false)) {
                 return false;
             }
         } else {
             // non-targeted retrieval
-            final List<Card> retrieval = sa.knownDetermineDefined(params.get("Defined"));
+            final List<Card> retrieval = sa.knownDetermineDefined(sa.getParam("Defined"));
 
             if ((retrieval == null) || retrieval.isEmpty()) {
                 return false;
@@ -584,7 +582,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                 final AbilitySub abSub = sa.getSubAbility();
                 ApiType subAPI = null;
                 if (abSub != null) {
-                    subAPI = abSub.getAbilityFactory().getAPI();
+                    subAPI = abSub.getApi();
                 }
 
                 // only use blink or bounce effects
@@ -593,7 +591,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                     return false;
                 }
 
-                final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(ai, sa.getAbilityFactory());
+                final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(ai, sa);
                 boolean contains = false;
                 for (final Card c : retrieval) {
                     if (objects.contains(c)) {
@@ -640,12 +638,12 @@ public class ChangeZoneAi extends SpellAiLogic {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    private static boolean knownOriginPlayDrawbackAI(final Player aiPlayer, final Map<String,String> params, final SpellAbility sa) {
+    private static boolean knownOriginPlayDrawbackAI(final Player aiPlayer, final SpellAbility sa) {
         if (sa.getTarget() == null) {
             return true;
         }
 
-        return isPreferredTarget(aiPlayer, params, sa, false);
+        return isPreferredTarget(aiPlayer, sa, false);
     }
 
     /**
@@ -661,29 +659,27 @@ public class ChangeZoneAi extends SpellAiLogic {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean isPreferredTarget(final Player ai, final Map<String,String> params, final SpellAbility sa,
+    private static boolean isPreferredTarget(final Player ai, final SpellAbility sa,
             final boolean mandatory) {
         final Card source = sa.getSourceCard();
-        final ZoneType origin = ZoneType.listValueOf(params.get("Origin")).get(0);
-        final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));
+        final ZoneType origin = ZoneType.listValueOf(sa.getParam("Origin")).get(0);
+        final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final Target tgt = sa.getTarget();
 
         final AbilitySub abSub = sa.getSubAbility();
         ApiType subAPI = null;
         String subAffected = "";
-        Map<String, String> subParams = null;
         if (abSub != null) {
-            subAPI = abSub.getAbilityFactory().getAPI();
-            subParams = abSub.getAbilityFactory().getMapParams();
-            if (subParams.containsKey("Defined")) {
-                subAffected = subParams.get("Defined");
+            subAPI = abSub.getApi();
+            if (abSub.hasParam("Defined")) {
+                subAffected = abSub.getParam("Defined");
             }
         }
 
         tgt.resetTargets();
         List<Card> list = CardLists.getValidCards(Singletons.getModel().getGame().getCardsIn(origin), tgt.getValidTgts(), ai, source);
-        if (params.containsKey("AITgts")) {
-            list = CardLists.getValidCards(list, params.get("AITgts"), sa.getActivatingPlayer(), source);
+        if (sa.hasParam("AITgts")) {
+            list = CardLists.getValidCards(list, sa.getParam("AITgts"), sa.getActivatingPlayer(), source);
         }
         if (source.isInZone(ZoneType.Hand)) {
             list = CardLists.filter(list, Predicates.not(CardPredicates.nameEquals(source.getName()))); // Don't get the same card back.
@@ -715,7 +711,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                 // check stack for something on the stack that will kill
                 // anything i control
                 if (Singletons.getModel().getGame().getStack().size() > 0) {
-                    final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(ai, sa.getAbilityFactory());
+                    final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(ai, sa);
 
                     final List<Card> threatenedTargets = new ArrayList<Card>();
 
@@ -903,15 +899,15 @@ public class ChangeZoneAi extends SpellAiLogic {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean isUnpreferredTarget(final Player ai, final Map<String,String> params, final SpellAbility sa,
+    private static boolean isUnpreferredTarget(final Player ai, final SpellAbility sa,
             final boolean mandatory) {
         if (!mandatory) {
             return false;
         }
 
         final Card source = sa.getSourceCard();
-        final ZoneType origin = ZoneType.smartValueOf(params.get("Origin"));
-        final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));
+        final ZoneType origin = ZoneType.smartValueOf(sa.getParam("Origin"));
+        final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final Target tgt = sa.getTarget();
 
         List<Card> list = CardLists.getValidCards(Singletons.getModel().getGame().getCardsIn(origin), tgt.getValidTgts(), ai, source);
@@ -1012,14 +1008,14 @@ public class ChangeZoneAi extends SpellAiLogic {
      *            a boolean.
      * @return a boolean.
      */
-    private static boolean knownOriginTriggerAI(final Player ai, final Map<String,String> params, final SpellAbility sa,
+    private static boolean knownOriginTriggerAI(final Player ai, final SpellAbility sa,
             final boolean mandatory) {
 
         if (sa.getTarget() == null) {
             // Just in case of Defined cases
-            if (!mandatory && params.containsKey("AttachedTo")) {
+            if (!mandatory && sa.hasParam("AttachedTo")) {
                 final ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(),
-                        params.get("AttachedTo"), sa);
+                        sa.getParam("AttachedTo"), sa);
                 if (!list.isEmpty()) {
                     final Card attachedTo = list.get(0);
                     // This code is for the Dragon auras
@@ -1028,9 +1024,9 @@ public class ChangeZoneAi extends SpellAiLogic {
                     }
                 }
             }
-        } else if (isPreferredTarget(ai, params, sa, mandatory)) {
+        } else if (isPreferredTarget(ai, sa, mandatory)) {
             // do nothing
-        } else if (!isUnpreferredTarget(ai, params, sa, mandatory)) {
+        } else if (!isUnpreferredTarget(ai, sa, mandatory)) {
             return false;
         }
 
@@ -1049,10 +1045,10 @@ public class ChangeZoneAi extends SpellAiLogic {
      * @param player
      *            a {@link forge.game.player.Player} object.
      */
-    public static void hiddenOriginResolveAI(final Player ai, final Map<String,String> params, final SpellAbility sa, Player player) {
+    public static void hiddenOriginResolveAI(final Player ai, final SpellAbility sa, Player player) {
         final Target tgt = sa.getTarget();
         final Card card = sa.getSourceCard();
-        final boolean defined = params.containsKey("Defined");
+        final boolean defined = sa.hasParam("Defined");
     
         if (tgt != null) {
             if (!tgt.getTargetPlayers().isEmpty()) {
@@ -1064,26 +1060,26 @@ public class ChangeZoneAi extends SpellAiLogic {
         }
     
         List<ZoneType> origin = new ArrayList<ZoneType>();
-        if (params.containsKey("Origin")) {
-            origin = ZoneType.listValueOf(params.get("Origin"));
+        if (sa.hasParam("Origin")) {
+            origin = ZoneType.listValueOf(sa.getParam("Origin"));
         }
     
-        String type = params.get("ChangeType");
+        String type = sa.getParam("ChangeType");
         if (type == null) {
             type = "Card";
         }
     
-        int changeNum = params.containsKey("ChangeNum") ? AbilityFactory.calculateAmount(card, params.get("ChangeNum"),
+        int changeNum = sa.hasParam("ChangeNum") ? AbilityFactory.calculateAmount(card, sa.getParam("ChangeNum"),
                 sa) : 1;
     
         List<Card> fetchList;
         if (defined) {
-            fetchList = new ArrayList<Card>(AbilityFactory.getDefinedCards(card, params.get("Defined"), sa));
-            if (!params.containsKey("ChangeNum")) {
+            fetchList = new ArrayList<Card>(AbilityFactory.getDefinedCards(card, sa.getParam("Defined"), sa));
+            if (!sa.hasParam("ChangeNum")) {
                 changeNum = fetchList.size();
             }
         } else if (!origin.contains(ZoneType.Library) && !origin.contains(ZoneType.Hand)
-                && !params.containsKey("DefinedPlayer")) {
+                && !sa.hasParam("DefinedPlayer")) {
             fetchList = Singletons.getModel().getGame().getCardsIn(origin);
             fetchList = AbilityFactory.filterListByType(fetchList, type, sa);
         } else {
@@ -1091,18 +1087,18 @@ public class ChangeZoneAi extends SpellAiLogic {
             fetchList = AbilityFactory.filterListByType(fetchList, type, sa);
         }
     
-        final ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));
+        final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final List<Card> fetched = new ArrayList<Card>();
-        final String remember = params.get("RememberChanged");
-        final String forget = params.get("ForgetChanged");
-        final String imprint = params.get("Imprint");
+        final String remember = sa.getParam("RememberChanged");
+        final String forget = sa.getParam("ForgetChanged");
+        final String imprint = sa.getParam("Imprint");
     
-        if (params.containsKey("Unimprint")) {
+        if (sa.hasParam("Unimprint")) {
             card.clearImprinted();
         }
     
         for (int i = 0; i < changeNum; i++) {
-            if (params.containsKey("DifferentNames")) {
+            if (sa.hasParam("DifferentNames")) {
                 for (Card c : fetched) {
                     fetchList = CardLists.filter(fetchList, Predicates.not(CardPredicates.nameEquals(c.getName())));
                 }
@@ -1113,7 +1109,7 @@ public class ChangeZoneAi extends SpellAiLogic {
     
             // Improve the AI for fetching.
             Card c = null;
-            if (params.containsKey("AtRandom")) {
+            if (sa.hasParam("AtRandom")) {
                 c = CardUtil.getRandom(fetchList);
             } else if (defined) {
                 c = fetchList.get(0);
@@ -1133,7 +1129,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                             return true;
                         }
                     });
-                    if (player.isHuman() && params.containsKey("GainControl")) {
+                    if (player.isHuman() && sa.hasParam("GainControl")) {
                         fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
                             @Override
                             public boolean apply(final Card c) {
@@ -1211,27 +1207,26 @@ public class ChangeZoneAi extends SpellAiLogic {
             fetchList.remove(c);
         }
     
-        if (origin.contains(ZoneType.Library) && !defined && !"False".equals(params.get("Shuffle"))) {
+        if (origin.contains(ZoneType.Library) && !defined && !"False".equals(sa.getParam("Shuffle"))) {
             player.shuffle();
         }
     
         for (final Card c : fetched) {
             Card movedCard = null;
             if (ZoneType.Library.equals(destination)) {
-                final int libraryPos = params.containsKey("LibraryPosition") ? Integer.parseInt(params
-                        .get("LibraryPosition")) : 0;
+                final int libraryPos = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : 0;
                 movedCard = Singletons.getModel().getGame().getAction().moveToLibrary(c, libraryPos);
             } else if (ZoneType.Battlefield.equals(destination)) {
-                if (params.containsKey("Tapped")) {
+                if (sa.hasParam("Tapped")) {
                     c.setTapped(true);
                 }
-                if (params.containsKey("GainControl")) {
+                if (sa.hasParam("GainControl")) {
                     c.addController(sa.getSourceCard());
                 }
     
-                if (params.containsKey("AttachedTo")) {
+                if (sa.hasParam("AttachedTo")) {
                     final ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(),
-                            params.get("AttachedTo"), sa);
+                            sa.getParam("AttachedTo"), sa);
                     if (!list.isEmpty()) {
                         final Card attachedTo = list.get(0);
                         if (c.isEnchanting()) {
@@ -1246,7 +1241,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                     }
                 }
     
-                if (params.containsKey("Attacking")) {
+                if (sa.hasParam("Attacking")) {
                     Singletons.getModel().getGame().getCombat().addAttacker(c);
                 }
                 // Auras without Candidates stay in their current location
@@ -1258,12 +1253,12 @@ public class ChangeZoneAi extends SpellAiLogic {
                 }
     
                 movedCard = Singletons.getModel().getGame().getAction().moveTo(c.getController().getZone(destination), c);
-                if (params.containsKey("Tapped")) {
+                if (sa.hasParam("Tapped")) {
                     movedCard.setTapped(true);
                 }
             } else if (destination.equals(ZoneType.Exile)) {
                 movedCard = Singletons.getModel().getGame().getAction().exile(c);
-                if (params.containsKey("ExileFaceDown")) {
+                if (sa.hasParam("ExileFaceDown")) {
                     movedCard.setState(CardCharacteristicName.FaceDown);
                 }
             } else {
@@ -1283,7 +1278,7 @@ public class ChangeZoneAi extends SpellAiLogic {
         }
         
         if ((origin.contains(ZoneType.Library) && !destination.equals(ZoneType.Library) && !defined)
-                || (params.containsKey("Shuffle") && "True".equals(params.get("Shuffle")))) {
+                || (sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle")))) {
             player.shuffle();
         }
     

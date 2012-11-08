@@ -22,14 +22,14 @@ public class RearrangeTopOfLibraryEffect extends SpellEffect {
      */
 
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         int numCards = 0;
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
         boolean shuffle = false;
-        Card host = sa.getAbilityFactory().getHostCard();
+        Card host = sa.getSourceCard();
     
-        numCards = AbilityFactory.calculateAmount(host, params.get("NumCards"), sa);
-        shuffle = params.containsKey("MayShuffle");
+        numCards = AbilityFactory.calculateAmount(host, sa.getParam("NumCards"), sa);
+        shuffle = sa.hasParam("MayShuffle");
     
         final StringBuilder ret = new StringBuilder();
         ret.append("Look at the top ");
@@ -62,27 +62,26 @@ public class RearrangeTopOfLibraryEffect extends SpellEffect {
      * <p>
      * rearrangeTopOfLibraryResolve.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      */
     
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         int numCards = 0;
-        Card host = sa.getAbilityFactory().getHostCard();
+        Card host = sa.getSourceCard();
         boolean shuffle = false;
 
         if (sa.getActivatingPlayer().isHuman()) {
             final Target tgt = sa.getTarget();
 
 
-            numCards = AbilityFactory.calculateAmount(host, params.get("NumCards"), sa);
-            shuffle = params.containsKey("MayShuffle");
+            numCards = AbilityFactory.calculateAmount(host, sa.getParam("NumCards"), sa);
+            shuffle = sa.hasParam("MayShuffle");
 
-            for (final Player p : getTargetPlayers(sa, params)) {
+            for (final Player p : getTargetPlayers(sa)) {
                 if ((tgt == null) || p.canBeTargetedBy(sa)) {
                     rearrangeTopOfLibrary(host, p, numCards, shuffle);
                 }

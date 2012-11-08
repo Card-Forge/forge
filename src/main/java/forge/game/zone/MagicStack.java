@@ -901,9 +901,9 @@ public class MagicStack extends MyObservable {
             Log.debug(source.getName() + " ability fizzles.");
             game.getGameLog().add("ResolveStack", source.getName() + " ability fizzles.", 2);
             this.finishResolving(sa, true);
-        } else if (sa.getAbilityFactory() != null) {
+        } else if (sa.getApi() != null) {
             game.getGameLog().add("ResolveStack", sa.getStackDescription(), 2);
-            AbilityFactory.handleRemembering(sa, sa.getAbilityFactory());
+            AbilityFactory.handleRemembering(sa);
             AbilityFactory.resolve(sa, true);
         } else {
             game.getGameLog().add("ResolveStack", sa.getStackDescription(), 2);

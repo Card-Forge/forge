@@ -9,10 +9,9 @@ public class DelayedTriggerAi extends SpellAiLogic {
     private static AbilityFactory tempCreator = new AbilityFactory();
     
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, forge.game.player.Player aiPlayer) {
-        final String svarName = params.get("Execute");
-        final SpellAbility trigsa = tempCreator.getAbility(sa.getAbilityFactory().getHostCard()
-                .getSVar(svarName), sa.getAbilityFactory().getHostCard());
+    public boolean chkAIDrawback(SpellAbility sa, forge.game.player.Player aiPlayer) {
+        final String svarName = sa.getParam("Execute");
+        final SpellAbility trigsa = tempCreator.getAbility(sa.getSourceCard().getSVar(svarName), sa.getSourceCard());
 
         if (trigsa instanceof AbilitySub) {
             return ((AbilitySub) trigsa).chkAIDrawback();
@@ -22,22 +21,21 @@ public class DelayedTriggerAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(forge.game.player.Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
-        final String svarName = params.get("Execute");
-        final SpellAbility trigsa = tempCreator.getAbility(sa.getAbilityFactory().getHostCard()
-                .getSVar(svarName), sa.getAbilityFactory().getHostCard());
+    protected boolean doTriggerAINoCost(forge.game.player.Player aiPlayer, SpellAbility sa, boolean mandatory) {
+        final String svarName = sa.getParam("Execute");
+        final SpellAbility trigsa = tempCreator.getAbility(sa.getSourceCard().getSVar(svarName), sa.getSourceCard());
 
-        if (!params.containsKey("OptionalDecider")) {
+        if (!sa.hasParam("OptionalDecider")) {
             return trigsa.doTrigger(true);
         } else {
-            return trigsa.doTrigger(!params.get("OptionalDecider").equals("You"));
+            return trigsa.doTrigger(!sa.getParam("OptionalDecider").equals("You"));
         }
     }
 
     @Override
-    protected boolean canPlayAI(forge.game.player.Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa) {
-        final String svarName = params.get("Execute");
-        final SpellAbility trigsa = tempCreator.getAbility(sa.getAbilityFactory().getHostCard().getSVar(svarName), sa.getAbilityFactory().getHostCard());
+    protected boolean canPlayAI(forge.game.player.Player aiPlayer, SpellAbility sa) {
+        final String svarName = sa.getParam("Execute");
+        final SpellAbility trigsa = tempCreator.getAbility(sa.getSourceCard().getSVar(svarName), sa.getSourceCard());
         return trigsa.canPlayAI();
     }
 

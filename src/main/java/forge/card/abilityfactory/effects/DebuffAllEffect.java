@@ -3,7 +3,6 @@ package forge.card.abilityfactory.effects;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import forge.Card;
 import forge.CardLists;
@@ -19,9 +18,9 @@ public class DebuffAllEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
-        if (params.containsKey("DebuffAllDescription")) {
-            return params.get("DebuffAllDescription");
+    protected String getStackDescription(SpellAbility sa) {
+        if (sa.hasParam("DebuffAllDescription")) {
+            return sa.getParam("DebuffAllDescription");
         }
 
         return "";
@@ -31,22 +30,21 @@ public class DebuffAllEffect extends SpellEffect {
      * <p>
      * debuffAllResolve.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      */
     
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {    
-        final Card hostCard = sa.getAbilityFactory().getHostCard();
-        final List<String> kws = params.containsKey("Keywords") ? Arrays.asList(params.get("Keywords").split(" & ")) : new ArrayList<String>();
+    public void resolve(SpellAbility sa) {    
+        final Card hostCard = sa.getSourceCard();
+        final List<String> kws = sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : new ArrayList<String>();
                 
         String valid = "";
     
-        if (params.containsKey("ValidCards")) {
-            valid = params.get("ValidCards");
+        if (sa.hasParam("ValidCards")) {
+            valid = sa.getParam("ValidCards");
         }
     
         List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
@@ -63,7 +61,7 @@ public class DebuffAllEffect extends SpellEffect {
                     tgtC.removeExtrinsicKeyword(kw);
                 }
             }
-            if (!params.containsKey("Permanent")) {
+            if (!sa.hasParam("Permanent")) {
                 Singletons.getModel().getGame().getEndOfTurn().addUntil(new Command() {
                     private static final long serialVersionUID = 7486231071095628674L;
     

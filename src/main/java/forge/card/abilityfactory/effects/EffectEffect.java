@@ -18,7 +18,7 @@ import forge.game.player.Player;
 public class EffectEffect extends SpellEffect {
 
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         return sa.getDescription();
     }
 
@@ -26,16 +26,15 @@ public class EffectEffect extends SpellEffect {
      * <p>
      * effectResolve.
      * </p>
-     * 
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      */
     
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
-        final Card hostCard = sa.getAbilityFactory().getHostCard();
+    public void resolve(SpellAbility sa) {
+        final Card hostCard = sa.getSourceCard();
 
         String[] effectAbilities = null;
         String[] effectTriggers = null;
@@ -47,56 +46,56 @@ public class EffectEffect extends SpellEffect {
         String effectImprinted = null;
         Player ownerEff = null;
 
-        if (params.containsKey("Abilities")) {
-            effectAbilities = params.get("Abilities").split(",");
+        if (sa.hasParam("Abilities")) {
+            effectAbilities = sa.getParam("Abilities").split(",");
         }
 
-        if (params.containsKey("Triggers")) {
-            effectTriggers = params.get("Triggers").split(",");
+        if (sa.hasParam("Triggers")) {
+            effectTriggers = sa.getParam("Triggers").split(",");
         }
 
-        if (params.containsKey("StaticAbilities")) {
-            effectStaticAbilities = params.get("StaticAbilities").split(",");
+        if (sa.hasParam("StaticAbilities")) {
+            effectStaticAbilities = sa.getParam("StaticAbilities").split(",");
         }
 
-        if (params.containsKey("ReplacementEffects")) {
-            effectReplacementEffects = params.get("ReplacementEffects").split(",");
+        if (sa.hasParam("ReplacementEffects")) {
+            effectReplacementEffects = sa.getParam("ReplacementEffects").split(",");
         }
 
-        if (params.containsKey("SVars")) {
-            effectSVars = params.get("SVars").split(",");
+        if (sa.hasParam("SVars")) {
+            effectSVars = sa.getParam("SVars").split(",");
         }
 
-        if (params.containsKey("Keywords")) {
-            effectKeywords = params.get("Keywords").split(",");
+        if (sa.hasParam("Keywords")) {
+            effectKeywords = sa.getParam("Keywords").split(",");
         }
 
-        if (params.containsKey("RememberObjects")) {
-            effectRemembered = params.get("RememberObjects");
+        if (sa.hasParam("RememberObjects")) {
+            effectRemembered = sa.getParam("RememberObjects");
         }
 
-        if (params.containsKey("ImprintCards")) {
-            effectImprinted = params.get("ImprintCards");
+        if (sa.hasParam("ImprintCards")) {
+            effectImprinted = sa.getParam("ImprintCards");
         }
 
         // Effect eff = new Effect();
-        String name = params.get("Name");
+        String name = sa.getParam("Name");
         if (name == null) {
             name = sa.getSourceCard().getName() + "'s Effect";
         }
 
         // Unique Effects shouldn't be duplicated
-        if (params.containsKey("Unique") && Singletons.getModel().getGame().isCardInPlay(name)) {
+        if (sa.hasParam("Unique") && Singletons.getModel().getGame().isCardInPlay(name)) {
             return;
         }
 
-        if (params.containsKey("EffectOwner")) {
+        if (sa.hasParam("EffectOwner")) {
             ArrayList<Player> effectOwner;
-            effectOwner = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("EffectOwner"), sa);
+            effectOwner = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("EffectOwner"), sa);
             ownerEff = effectOwner.get(0);
         }
 
-        final Player controller = params.containsKey("EffectOwner") ? ownerEff : sa.getActivatingPlayer();
+        final Player controller = sa.hasParam("EffectOwner") ? ownerEff : sa.getActivatingPlayer();
         final Card eff = new Card();
         eff.setName(name);
         eff.addType("Effect"); // Or Emblem
@@ -108,8 +107,8 @@ public class EffectEffect extends SpellEffect {
         eff.setColor(hostCard.getColor());
         eff.setImmutable(true);
         eff.setEffectSource(hostCard);
-        if (params.containsKey("Image")) {
-            eff.setImageName(params.get("Image"));
+        if (sa.hasParam("Image")) {
+            eff.setImageName(sa.getParam("Image"));
         }
 
         // Effects should be Orange or something probably
@@ -191,12 +190,12 @@ public class EffectEffect extends SpellEffect {
         }
 
         // Remember created effect
-        if (params.containsKey("RememberEffect")) {
+        if (sa.hasParam("RememberEffect")) {
             Singletons.getModel().getGame().getCardState(hostCard).addRemembered(eff);
         }
 
         // Duration
-        final String duration = params.get("Duration");
+        final String duration = sa.getParam("Duration");
         if ((duration == null) || !duration.equals("Permanent")) {
             final Command endEffect = new Command() {
                 private static final long serialVersionUID = -5861759814760561373L;

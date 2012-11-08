@@ -15,7 +15,7 @@ import forge.util.MyRandom;
 
 public class TapAi extends TapAiBase {
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
 
@@ -37,7 +37,7 @@ public class TapAi extends TapAiBase {
         }
 
         if (tgt == null) {
-            final ArrayList<Card> defined = AbilityFactory.getDefinedCards(source, params.get("Defined"), sa);
+            final ArrayList<Card> defined = AbilityFactory.getDefinedCards(source, sa.getParam("Defined"), sa);
 
             boolean bFlag = false;
             for (final Card c : defined) {
@@ -58,7 +58,7 @@ public class TapAi extends TapAiBase {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
 
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
@@ -84,7 +84,7 @@ public class TapAi extends TapAiBase {
     }
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player ai) {
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
 

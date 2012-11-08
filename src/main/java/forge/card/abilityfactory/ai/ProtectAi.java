@@ -3,8 +3,6 @@ package forge.card.abilityfactory.ai;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-
 import com.google.common.base.Predicate;
 
 import forge.Card;
@@ -66,8 +64,8 @@ public class ProtectAi extends SpellAiLogic {
      *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @return a {@link forge.CardList} object.
      */
-    private static List<Card> getProtectCreatures(final Player ai, final Map<String,String> params, final SpellAbility sa) {
-        final ArrayList<String> gains = AbilityFactory.getProtectionList(params);
+    private static List<Card> getProtectCreatures(final Player ai, final SpellAbility sa) {
+        final ArrayList<String> gains = AbilityFactory.getProtectionList(sa);
 
         List<Card> list = ai.getCreaturesInPlay();
         list = CardLists.filter(list, new Predicate<Card>() {
@@ -110,8 +108,8 @@ public class ProtectAi extends SpellAiLogic {
     } // getProtectCreatures()
 
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
-        final Card hostCard = sa.getAbilityFactory().getHostCard();
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+        final Card hostCard = sa.getSourceCard();
         // if there is no target and host card isn't in play, don't activate
         if ((sa.getTarget() == null) && !hostCard.isInPlay()) {
             return false;
@@ -150,7 +148,7 @@ public class ProtectAi extends SpellAiLogic {
         }
 
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
-            final ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+            final ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
 
             if (cards.size() == 0) {
                 return false;
@@ -164,13 +162,13 @@ public class ProtectAi extends SpellAiLogic {
              * }
              */
         } else {
-            return protectTgtAI(ai, params, sa, false);
+            return protectTgtAI(ai, sa, false);
         }
 
         return false;
     } // protectPlayAI()
 
-    private boolean protectTgtAI(final Player ai, final Map<String, String> params,  final SpellAbility sa, final boolean mandatory) {
+    private boolean protectTgtAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
         if (!mandatory && Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
             return false;
         }
@@ -179,7 +177,7 @@ public class ProtectAi extends SpellAiLogic {
 
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
-        List<Card> list = getProtectCreatures(ai, params, sa);
+        List<Card> list = getProtectCreatures(ai, sa);
 
         list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
 
@@ -210,7 +208,7 @@ public class ProtectAi extends SpellAiLogic {
         }
 
         if (list.isEmpty()) {
-            return mandatory && protectMandatoryTarget(ai, params, sa, mandatory);
+            return mandatory && protectMandatoryTarget(ai, sa, mandatory);
         }
 
         // Don't target cards that will die.
@@ -229,7 +227,7 @@ public class ProtectAi extends SpellAiLogic {
             if (list.isEmpty()) {
                 if ((tgt.getNumTargeted() < tgt.getMinTargets(source, sa)) || (tgt.getNumTargeted() == 0)) {
                     if (mandatory) {
-                        return protectMandatoryTarget(ai, params, sa, mandatory);
+                        return protectMandatoryTarget(ai, sa, mandatory);
                     }
 
                     tgt.resetTargets();
@@ -248,7 +246,7 @@ public class ProtectAi extends SpellAiLogic {
         return true;
     } // protectTgtAI()
 
-    private static boolean protectMandatoryTarget(final Player ai, final Map<String, String> params, final SpellAbility sa, final boolean mandatory) {
+    private static boolean protectMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
 
 
         List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
@@ -269,14 +267,14 @@ public class ProtectAi extends SpellAiLogic {
         pref = CardLists.filter(pref, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return !hasProtectionFromAll(c, AbilityFactory.getProtectionList(params));
+                return !hasProtectionFromAll(c, AbilityFactory.getProtectionList(sa));
             }
         });
         final List<Card> pref2 = CardLists.filterControlledBy(list, ai);
         pref = CardLists.filter(pref, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return !hasProtectionFromAny(c, AbilityFactory.getProtectionList(params));
+                return !hasProtectionFromAny(c, AbilityFactory.getProtectionList(sa));
             }
         });
         final List<Card> forced = CardLists.filterControlledBy(list, ai);
@@ -342,27 +340,27 @@ public class ProtectAi extends SpellAiLogic {
     } // protectMandatoryTarget()
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         if (sa.getTarget() == null) {
             if (mandatory) {
                 return true;
             }
         } else {
-            return protectTgtAI(ai, params, sa, mandatory);
+            return protectTgtAI(ai, sa, mandatory);
         }
 
         return true;
     } // protectTriggerAI
 
     @Override
-    public boolean chkAIDrawback(Map<String,String> params, SpellAbility sa, Player ai) {
-        final Card host = sa.getAbilityFactory().getHostCard();
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+        final Card host = sa.getSourceCard();
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
             if (host.isCreature()) {
                 // TODO
             }
         } else {
-            return protectTgtAI(ai, params, sa, false);
+            return protectTgtAI(ai, sa, false);
         }
 
         return true;

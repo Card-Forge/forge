@@ -22,7 +22,7 @@ public class ControlExchangeAi extends SpellAiLogic {
  * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
  */
     @Override
-    protected boolean canPlayAI(Player ai, Map<String, String> params, final SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, final SpellAbility sa) {
         Card object1 = null;
         Card object2 = null;
         final Target tgt = sa.getTarget();
@@ -40,8 +40,8 @@ public class ControlExchangeAi extends SpellAiLogic {
             }
         });
         object1 = CardFactoryUtil.getBestAI(list);
-        if (params.containsKey("Defined")) {
-            object2 = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa).get(0);
+        if (sa.hasParam("Defined")) {
+            object2 = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa).get(0);
         } else if (tgt.getMinTargets(sa.getSourceCard(), sa) > 1) {
             List<Card> list2 = ai.getCardsIn(ZoneType.Battlefield);
             list2 = CardLists.getValidCards(list2, tgt.getValidTgts(), ai, sa.getSourceCard());
@@ -59,7 +59,7 @@ public class ControlExchangeAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         // check AI life before playing this drawback?
         return true;
     }
@@ -68,7 +68,7 @@ public class ControlExchangeAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, Map<String, String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         return false;
     }
 }

@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.ai;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Random;
 
 import forge.Card;
@@ -23,14 +22,14 @@ public class LifeLoseAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
         boolean priority = false;
         
-        final String amountStr = params.get("LifeAmount");
+        final String amountStr = sa.getParam("LifeAmount");
         
         // TODO handle proper calculation of X values based on Cost and what
         // would be paid
@@ -81,7 +80,7 @@ public class LifeLoseAi extends SpellAiLogic {
         
         // Don't use loselife before main 2 if possible
         if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
-                && !params.containsKey("ActivationPhases") && !priority) {
+                && !sa.hasParam("ActivationPhases") && !priority) {
             return false;
         }
         
@@ -110,8 +109,8 @@ public class LifeLoseAi extends SpellAiLogic {
     }
     
     @Override
-    protected boolean doTriggerAINoCost(final Player ai, final Map<String, String> params,
-    final SpellAbility sa, final boolean mandatory) {
+    protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa,
+    final boolean mandatory) {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             if (sa.canTarget(ai.getOpponent())) {
@@ -124,7 +123,7 @@ public class LifeLoseAi extends SpellAiLogic {
         }
         
         final Card source = sa.getSourceCard();
-        final String amountStr = params.get("LifeAmount");
+        final String amountStr = sa.getParam("LifeAmount");
         int amount = 0;
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
@@ -139,7 +138,7 @@ public class LifeLoseAi extends SpellAiLogic {
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
         
         if (!mandatory && tgtPlayers.contains(ai)) {

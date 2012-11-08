@@ -2,7 +2,6 @@ package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import forge.Card;
 import forge.CardLists;
@@ -19,25 +18,25 @@ public class UntapAllEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         if (sa instanceof AbilitySub) {
             return "Untap all valid cards.";
         } else {
-            return params.get("SpellDescription");
+            return sa.getParam("SpellDescription");
         }
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Card card = sa.getSourceCard();
     
         String valid = "";
         List<Card> list = null;
     
-        List<Player> tgtPlayers = getTargetPlayersEmptyAsDefault(sa, params);
+        List<Player> tgtPlayers = getTargetPlayersEmptyAsDefault(sa);
     
-        if (params.containsKey("ValidCards")) {
-            valid = params.get("ValidCards");
+        if (sa.hasParam("ValidCards")) {
+            valid = sa.getParam("ValidCards");
         }
     
         if (tgtPlayers.isEmpty()) {
@@ -49,7 +48,7 @@ public class UntapAllEffect extends SpellEffect {
         }
         list = CardLists.getValidCards(list, valid.split(","), card.getController(), card);
     
-        boolean remember = params.containsKey("RememberUntapped");
+        boolean remember = sa.hasParam("RememberUntapped");
         for(Card c : list) {
             c.untap();
             if (remember) {

@@ -18,12 +18,12 @@ import forge.util.MyRandom;
 
 public class CountersMoveAi extends SpellAiLogic { 
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what
         // the expected targets could be
         final Random r = MyRandom.getRandom();
-        final String amountStr = params.get("CounterNum");
+        final String amountStr = sa.getParam("CounterNum");
 
         // TODO handle proper calculation of X values based on Cost
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), amountStr, sa);
@@ -44,18 +44,18 @@ public class CountersMoveAi extends SpellAiLogic {
     } // moveCounterCanPlayAI
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card host = sa.getSourceCard();
         final Target abTgt = sa.getTarget();
-        final String type = params.get("CounterType");
-        final String amountStr = params.get("CounterNum");
-        final int amount = AbilityFactory.calculateAmount(sa.getAbilityFactory().getHostCard(), amountStr, sa);
+        final String type = sa.getParam("CounterType");
+        final String amountStr = sa.getParam("CounterNum");
+        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), amountStr, sa);
         boolean chance = false;
         boolean preferred = true;
 
-        final Counters cType = Counters.valueOf(params.get("CounterType"));
-        final ArrayList<Card> srcCards = AbilityFactory.getDefinedCards(host, params.get("Source"), sa);
-        final ArrayList<Card> destCards = AbilityFactory.getDefinedCards(host, params.get("Defined"), sa);
+        final Counters cType = Counters.valueOf(sa.getParam("CounterType"));
+        final ArrayList<Card> srcCards = AbilityFactory.getDefinedCards(host, sa.getParam("Source"), sa);
+        final ArrayList<Card> destCards = AbilityFactory.getDefinedCards(host, sa.getParam("Defined"), sa);
         if (abTgt == null) {
             if ((srcCards.size() > 0)
                     && cType.equals(Counters.P1P1) // move +1/+1 counters away
@@ -68,8 +68,7 @@ public class CountersMoveAi extends SpellAiLogic {
                 chance = true;
             }
         } else { // targeted
-            boolean isCurse = sa.getAbilityFactory().isCurse(); 
-            final Player player = isCurse ? ai.getOpponent() : ai;
+            final Player player = sa.isCurse() ? ai.getOpponent() : ai;
             List<Card> list = CardLists.getTargetableCards(player.getCardsIn(ZoneType.Battlefield), sa);
             list = CardLists.getValidCards(list, abTgt.getValidTgts(), host.getController(), host);
             if (list.isEmpty() && mandatory) {
@@ -89,7 +88,7 @@ public class CountersMoveAi extends SpellAiLogic {
             Card choice = null;
 
             // Choose targets here:
-            if (isCurse) {
+            if (sa.isCurse()) {
                 if (preferred) {
                     choice = CountersAi.chooseCursedTarget(list, type, amount);
                 }

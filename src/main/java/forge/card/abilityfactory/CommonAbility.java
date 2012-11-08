@@ -15,14 +15,14 @@ import forge.card.spellability.Target;
 
 public class CommonAbility extends AbilityActivated {
     private final SpellEffect effect;
-    private final Map<String,String> params;
     private final SpellAiLogic ai;
     
     private static final long serialVersionUID = -4183793555528531978L;
 
-    public CommonAbility(Card sourceCard, Cost abCost, Target tgt, Map<String,String> params0, SpellEffect effect0, SpellAiLogic ai0) {
+    public CommonAbility(ApiType api0, Card sourceCard, Cost abCost, Target tgt, Map<String,String> params0, SpellEffect effect0, SpellAiLogic ai0) {
         super(sourceCard, abCost, tgt);
         params = params0;
+        api = api0;
         effect = effect0;
         ai = ai0;
         
@@ -46,7 +46,7 @@ public class CommonAbility extends AbilityActivated {
     @Override
     public AbilityActivated getCopy() {
         Target tgt = getTarget() == null ? null : new Target(getTarget());
-        AbilityActivated res = new CommonAbility(getSourceCard(), getPayCosts(), tgt, params, effect, ai);
+        AbilityActivated res = new CommonAbility(api, getSourceCard(), getPayCosts(), tgt, params, effect, ai);
         CardFactoryUtil.copySpellAbility(this, res);
         return res;
     }
@@ -56,16 +56,16 @@ public class CommonAbility extends AbilityActivated {
      */
     @Override
     public void resolve() {
-        effect.resolve(params, this);
+        effect.resolve(this);
     }
     
     @Override
     public boolean canPlayAI() {
-        return ai.canPlayAIWithSubs(getActivatingPlayer(), params, this);
+        return ai.canPlayAIWithSubs(getActivatingPlayer(), this);
     }
 
     @Override
     public boolean doTrigger(final boolean mandatory) {
-        return ai.doTriggerAI(this.getActivatingPlayer(), params, this, mandatory);
+        return ai.doTriggerAI(this.getActivatingPlayer(), this, mandatory);
     }
 }

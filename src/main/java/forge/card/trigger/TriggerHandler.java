@@ -388,7 +388,7 @@ public class TriggerHandler {
      * @return false if trigger is not happening.
      */
     private boolean runSingleTrigger(final Trigger regtrig, final TriggerType mode, final Map<String, Object> runParams) {
-        final Map<String, String> params = regtrig.getMapParams();
+        final Map<String, String> triggerParams = regtrig.getMapParams();
 
         if (regtrig.getMode() != mode) {
             return false; // Not the right mode.
@@ -463,14 +463,14 @@ public class TriggerHandler {
 
         sa[0] = regtrig.getOverridingAbility();
         if (sa[0] == null) {
-            if (!params.containsKey("Execute")) {
+            if (!triggerParams.containsKey("Execute")) {
                 sa[0] = new Ability(regtrig.getHostCard(), "0") {
                     @Override
                     public void resolve() {
                     }
                 };
             } else {
-                sa[0] = abilityFactory.getAbility(host.getSVar(params.get("Execute")), host);
+                sa[0] = abilityFactory.getAbility(host.getSVar(triggerParams.get("Execute")), host);
             }
         }
         sa[0].setTrigger(true);
@@ -482,24 +482,23 @@ public class TriggerHandler {
 
         controller[0] = host.getController();
         sa[0].setActivatingPlayer(host.getController());
-        if (params.containsKey("TriggerController")) {
-            Player p = AbilityFactory.getDefinedPlayers(regtrig.getHostCard(), params.get("TriggerController"), sa[0]).get(0);
+        if (triggerParams.containsKey("TriggerController")) {
+            Player p = AbilityFactory.getDefinedPlayers(regtrig.getHostCard(), triggerParams.get("TriggerController"), sa[0]).get(0);
             controller[0] = p;
             sa[0].setActivatingPlayer(p);
         }
         sa[0].setStackDescription(sa[0].toString());
         // ---TODO - for Charms to supports AI, this needs to be removed
         //if (sa[0].getActivatingPlayer().isHuman()) {
-        final AbilityFactory af = sa[0].getAbilityFactory();
-        if (af != null && af.getAPI() == ApiType.Charm && !sa[0].isWrapper()) {
+        if (sa[0].getApi() == ApiType.Charm && !sa[0].isWrapper()) {
             CharmEffect.makeChoices(sa[0]);
         }
         //}
         boolean mand = false;
-        if (params.containsKey("OptionalDecider")) {
+        if (triggerParams.containsKey("OptionalDecider")) {
             sa[0].setOptionalTrigger(true);
             mand = false;
-            decider[0] = AbilityFactory.getDefinedPlayers(host, params.get("OptionalDecider"), sa[0]).get(0);
+            decider[0] = AbilityFactory.getDefinedPlayers(host, triggerParams.get("OptionalDecider"), sa[0]).get(0);
         } else {
             mand = true;
 
@@ -606,11 +605,6 @@ public class TriggerHandler {
             @Override
             public boolean doTrigger(final boolean mandatory) {
                 return sa[0].doTrigger(mandatory);
-            }
-
-            @Override
-            public AbilityFactory getAbilityFactory() {
-                return sa[0].getAbilityFactory();
             }
 
             @Override
@@ -777,11 +771,6 @@ public class TriggerHandler {
             public void resetOnceResolved() {
                 // Fixing an issue with Targeting + Paying Mana
                 // sa[0].resetOnceResolved();
-            }
-
-            @Override
-            public void setAbilityFactory(final AbilityFactory af) {
-                sa[0].setAbilityFactory(af);
             }
 
             @Override
@@ -960,7 +949,7 @@ public class TriggerHandler {
                             buildQuestion.append(regtrig.getHostCard().getName()).append("(")
                                     .append(regtrig.getHostCard().getUniqueNumber()).append(")?");
                             buildQuestion.append("\r\n(");
-                            buildQuestion.append(params.get("TriggerDescription").replace("CARDNAME",
+                            buildQuestion.append(triggerParams.get("TriggerDescription").replace("CARDNAME",
                                     regtrig.getHostCard().getName()));
                             buildQuestion.append(")\r\n");
                             if (sa[0].getTriggeringObjects().containsKey("Attacker")) {
@@ -1000,8 +989,8 @@ public class TriggerHandler {
                 }
 
                 // Add eventual delayed trigger.
-                if (params.containsKey("DelayedTrigger")) {
-                    final String sVarName = params.get("DelayedTrigger");
+                if (triggerParams.containsKey("DelayedTrigger")) {
+                    final String sVarName = triggerParams.get("DelayedTrigger");
                     final Trigger deltrig = TriggerHandler.parseTrigger(regtrig.getHostCard().getSVar(sVarName),
                             regtrig.getHostCard(), true);
                     deltrig.setStoredTriggeredObjects(this.getTriggeringObjects());

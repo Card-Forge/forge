@@ -3,8 +3,6 @@ package forge.card.abilityfactory.effects;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-
 import forge.Card;
 import forge.CardUtil;
 import forge.Command;
@@ -20,9 +18,9 @@ import forge.game.zone.ZoneType;
 
 public class PumpEffect extends SpellEffect {
     
-    private void applyPump(final SpellAbility sa, final Card applyTo, final Map<String,String> params, final int a, final int d, final List<String> keywords) {
+    private void applyPump(final SpellAbility sa, final Card applyTo, final int a, final int d, final List<String> keywords) {
         //if host is not on the battlefield don't apply
-        if (params.containsKey("UntilLoseControlOfHost")
+        if (sa.hasParam("UntilLoseControlOfHost")
                 && !sa.getSourceCard().isInPlay()) {
             return;
         }
@@ -37,7 +35,7 @@ public class PumpEffect extends SpellEffect {
             }
         }
     
-        if (!params.containsKey("Permanent")) {
+        if (!sa.hasParam("Permanent")) {
             // If not Permanent, remove Pumped at EOT
             final Command untilEOT = new Command() {
                 private static final long serialVersionUID = -42244224L;
@@ -54,18 +52,18 @@ public class PumpEffect extends SpellEffect {
                     }
                 }
             };
-            if (params.containsKey("UntilEndOfCombat")) {
+            if (sa.hasParam("UntilEndOfCombat")) {
                 Singletons.getModel().getGame().getEndOfCombat().addUntil(untilEOT);
-            } else if (params.containsKey("UntilYourNextUpkeep")) {
+            } else if (sa.hasParam("UntilYourNextUpkeep")) {
                 Singletons.getModel().getGame().getUpkeep().addUntil(sa.getActivatingPlayer(), untilEOT);
-            } else if (params.containsKey("UntilHostLeavesPlay")) {
+            } else if (sa.hasParam("UntilHostLeavesPlay")) {
                 sa.getSourceCard().addLeavesPlayCommand(untilEOT);
-            } else if (params.containsKey("UntilLoseControlOfHost")) {
+            } else if (sa.hasParam("UntilLoseControlOfHost")) {
                 sa.getSourceCard().addLeavesPlayCommand(untilEOT);
                 sa.getSourceCard().addChangeControllerCommand(untilEOT);
-            } else if (params.containsKey("UntilYourNextTurn")) {
+            } else if (sa.hasParam("UntilYourNextTurn")) {
                 Singletons.getModel().getGame().getCleanup().addUntilYourNextTurn(sa.getActivatingPlayer(), untilEOT);
-            } else if (params.containsKey("UntilUntaps")) {
+            } else if (sa.hasParam("UntilUntaps")) {
                 sa.getSourceCard().addUntapCommand(untilEOT);
             } else {
                 Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);
@@ -73,13 +71,13 @@ public class PumpEffect extends SpellEffect {
         }
     }
 
-    private void applyPump(final SpellAbility sa, final Player p, final Map<String,String> params, final List<String> keywords) {
+    private void applyPump(final SpellAbility sa, final Player p, final List<String> keywords) {
     
         for (int i = 0; i < keywords.size(); i++) {
             p.addKeyword(keywords.get(i));
         }
     
-        if (!params.containsKey("Permanent")) {
+        if (!sa.hasParam("Permanent")) {
             // If not Permanent, remove Pumped at EOT
             final Command untilEOT = new Command() {
                 private static final long serialVersionUID = -32453460L;
@@ -94,9 +92,9 @@ public class PumpEffect extends SpellEffect {
                     }
                 }
             };
-            if (params.containsKey("UntilEndOfCombat")) {
+            if (sa.hasParam("UntilEndOfCombat")) {
                 Singletons.getModel().getGame().getEndOfCombat().addUntil(untilEOT);
-            } else if (params.containsKey("UntilYourNextUpkeep")) {
+            } else if (sa.hasParam("UntilYourNextUpkeep")) {
                 Singletons.getModel().getGame().getUpkeep().addUntil(sa.getActivatingPlayer(), untilEOT);
             } else {
                 Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);
@@ -105,7 +103,7 @@ public class PumpEffect extends SpellEffect {
     }
 
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
 
         final StringBuilder sb = new StringBuilder();
         ArrayList<GameEntity> tgts = new ArrayList<GameEntity>();
@@ -115,11 +113,11 @@ public class PumpEffect extends SpellEffect {
             tgts.addAll(tgt.getTargetCards());
             tgts.addAll(tgt.getTargetPlayers());
         } else {
-            if (params.containsKey("Defined")) {
-                tgts.addAll(AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa));
+            if (sa.hasParam("Defined")) {
+                tgts.addAll(AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa));
             }
             if (tgts.isEmpty()) {
-                tgts.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa));
+                tgts.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa));
             }
         }
 
@@ -129,8 +127,8 @@ public class PumpEffect extends SpellEffect {
                 sb.append(c).append(" ");
             }
 
-            if (params.containsKey("Radiance")) {
-                sb.append(" and each other ").append(params.get("ValidTgts"))
+            if (sa.hasParam("Radiance")) {
+                sb.append(" and each other ").append(sa.getParam("ValidTgts"))
                         .append(" that shares a color with ");
                 if (tgts.size() > 1) {
                     sb.append("them ");
@@ -139,9 +137,9 @@ public class PumpEffect extends SpellEffect {
                 }
             }
 
-            final List<String> keywords = params.containsKey("KW") ? Arrays.asList(params.get("KW").split(" & ")) : new ArrayList<String>();
-            final int atk = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumAtt"), sa); 
-            final int def = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumDef"), sa); 
+            final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
+            final int atk = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa); 
+            final int def = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa); 
 
             sb.append("gains ");
             if ((atk != 0) || (def != 0)) {
@@ -161,7 +159,7 @@ public class PumpEffect extends SpellEffect {
                 sb.append(keywords.get(i)).append(" ");
             }
 
-            if (!params.containsKey("Permanent")) {
+            if (!sa.hasParam("Permanent")) {
                 sb.append("until end of turn.");
             }
 
@@ -171,31 +169,31 @@ public class PumpEffect extends SpellEffect {
     } // pumpStackDescription()
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         ArrayList<Card> tgtCards = new ArrayList<Card>();
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
         final Target tgt = sa.getTarget();
         ArrayList<Player> tgtPlayers = new ArrayList<Player>();
         String pumpRemembered = null;
 
-        final List<String> keywords = params.containsKey("KW") ? Arrays.asList(params.get("KW").split(" & ")) : new ArrayList<String>();
-        final int a = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumAtt"), sa); 
-        final int d = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumDef"), sa); 
+        final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
+        final int a = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa); 
+        final int d = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa); 
             
         
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
             tgtPlayers = tgt.getTargetPlayers();
         } else {
-            if (params.containsKey("Defined")) {
-                tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+            if (sa.hasParam("Defined")) {
+                tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
             }
             if (tgtPlayers.isEmpty()) {
-                tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+                tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
             }
         }
 
-        if (params.containsKey("Optional")) {
+        if (sa.hasParam("Optional")) {
             if (sa.getActivatingPlayer().isHuman()) {
                 final StringBuilder targets = new StringBuilder();
                 for (final Card tc : tgtCards) {
@@ -203,8 +201,8 @@ public class PumpEffect extends SpellEffect {
                 }
                 final StringBuilder sb = new StringBuilder();
                 final String descBasic = "Apply pump to " + targets + "?";
-                final String pumpDesc = params.containsKey("OptionQuestion")
-                        ? params.get("OptionQuestion").replace("TARGETS", targets) : descBasic;
+                final String pumpDesc = sa.hasParam("OptionQuestion")
+                        ? sa.getParam("OptionQuestion").replace("TARGETS", targets) : descBasic;
                 sb.append(pumpDesc);
                 if (!GameActionUtil.showYesNoDialog(sa.getSourceCard(), sb.toString())) {
                    return;
@@ -216,8 +214,8 @@ public class PumpEffect extends SpellEffect {
             }
         }
 
-        if (params.containsKey("RememberObjects")) {
-            pumpRemembered = params.get("RememberObjects");
+        if (sa.hasParam("RememberObjects")) {
+            pumpRemembered = sa.getParam("RememberObjects");
         }
 
         if (pumpRemembered != null) {
@@ -228,14 +226,14 @@ public class PumpEffect extends SpellEffect {
             }
         }
 
-        if (params.containsKey("Radiance")) {
-            for (final Card c : CardUtil.getRadiance(sa.getSourceCard(), tgtCards.get(0), params.get("ValidTgts")
+        if (sa.hasParam("Radiance")) {
+            for (final Card c : CardUtil.getRadiance(sa.getSourceCard(), tgtCards.get(0), sa.getParam("ValidTgts")
                     .split(","))) {
                 untargetedCards.add(c);
             }
         }
 
-        final ZoneType pumpZone = params.containsKey("PumpZone") ? ZoneType.smartValueOf(params.get("PumpZone"))
+        final ZoneType pumpZone = sa.hasParam("PumpZone") ? ZoneType.smartValueOf(sa.getParam("PumpZone"))
                 : ZoneType.Battlefield;
 
         final int size = tgtCards.size();
@@ -252,7 +250,7 @@ public class PumpEffect extends SpellEffect {
                 continue;
             }
 
-            this.applyPump(sa, tgtC, params, a, d, keywords);
+            this.applyPump(sa, tgtC, a, d, keywords);
         }
 
         for (int i = 0; i < untargetedCards.size(); i++) {
@@ -262,7 +260,7 @@ public class PumpEffect extends SpellEffect {
                 continue;
             }
 
-            this.applyPump(sa, tgtC, params, a, d, keywords);
+            this.applyPump(sa, tgtC, a, d, keywords);
         }
 
         for (Player p : tgtPlayers) {
@@ -270,7 +268,7 @@ public class PumpEffect extends SpellEffect {
                 continue;
             }
 
-            this.applyPump(sa, p, params, keywords);
+            this.applyPump(sa, p, keywords);
         }
     } // pumpResolve()
 }

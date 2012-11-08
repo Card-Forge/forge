@@ -2,7 +2,6 @@ package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import forge.Card;
 import forge.CardUtil;
@@ -14,13 +13,13 @@ import forge.game.player.Player;
 public class DamagePreventEffect extends SpellEffect 
 {
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
-        final List<Object> tgts = getTargetObjects(sa, params);
+        final List<Object> tgts = getTargetObjects(sa);
 
         sb.append("Prevent the next ");
-        sb.append(params.get("Amount"));
+        sb.append(sa.getParam("Amount"));
         sb.append(" damage that would be dealt to ");
         for (int i = 0; i < tgts.size(); i++) {
             if (i != 0) {
@@ -40,8 +39,8 @@ public class DamagePreventEffect extends SpellEffect
             }
         }
     
-        if (params.containsKey("Radiance") && (sa.getTarget() != null)) {
-            sb.append(" and each other ").append(params.get("ValidTgts"))
+        if (sa.hasParam("Radiance") && (sa.getTarget() != null)) {
+            sb.append(" and each other ").append(sa.getParam("ValidTgts"))
                     .append(" that shares a color with ");
             if (tgts.size() > 1) {
                 sb.append("them");
@@ -57,19 +56,19 @@ public class DamagePreventEffect extends SpellEffect
          * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
          */
         @Override
-    public void resolve(Map<String, String> params, SpellAbility sa) {
-        Card host = sa.getAbilityFactory().getHostCard();
-        final int numDam = AbilityFactory.calculateAmount(host, params.get("Amount"), sa);
+    public void resolve(SpellAbility sa) {
+        Card host = sa.getSourceCard();
+        final int numDam = AbilityFactory.calculateAmount(host, sa.getParam("Amount"), sa);
 
         ArrayList<Object> tgts;
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
         if (sa.getTarget() == null) {
-            tgts = AbilityFactory.getDefinedObjects(sa.getSourceCard(), params.get("Defined"), sa);
+            tgts = AbilityFactory.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
         } else {
             tgts = sa.getTarget().getTargets();
         }
 
-        if (params.containsKey("Radiance") && (sa.getTarget() != null)) {
+        if (sa.hasParam("Radiance") && (sa.getTarget() != null)) {
             Card origin = null;
             for (int i = 0; i < tgts.size(); i++) {
                 if (tgts.get(i) instanceof Card) {
@@ -79,7 +78,7 @@ public class DamagePreventEffect extends SpellEffect
             }
             if (origin != null) {
                 // Can't radiate from a player
-                for (final Card c : CardUtil.getRadiance(host, origin, params.get("ValidTgts").split(","))) {
+                for (final Card c : CardUtil.getRadiance(host, origin, sa.getParam("ValidTgts").split(","))) {
                     untargetedCards.add(c);
                 }
             }

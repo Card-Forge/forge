@@ -1,8 +1,6 @@
 package forge.card.abilityfactory.effects;
 
 import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Iterables;
 
 import forge.Card;
@@ -42,7 +40,7 @@ public class ManaEffect extends SpellEffect {
 
 
     @Override
-    public void resolve(Map<String, String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
 
         final Card card = sa.getSourceCard();
 
@@ -53,15 +51,15 @@ public class ManaEffect extends SpellEffect {
         }
         
         // Spells are not undoable
-        abMana.setUndoable(sa.getAbilityFactory().isAbility() && abMana.isUndoable());
+        abMana.setUndoable(sa.isAbility() && abMana.isUndoable());
     
     
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
         final Target tgt = sa.getTarget();
     
         if (abMana.isComboMana()) {
             for (Player p : tgtPlayers) {
-                int amount = params.containsKey("Amount") ? AbilityFactory.calculateAmount(card, params.get("Amount"), sa) : 1;
+                int amount = sa.hasParam("Amount") ? AbilityFactory.calculateAmount(card, sa.getParam("Amount"), sa) : 1;
                 if (tgt == null || p.canBeTargetedBy(sa)) {
                     Player activator = sa.getActivatingPlayer(); 
                     // AI color choice is set in ComputerUtils so only human players need to make a choice
@@ -100,8 +98,8 @@ public class ManaEffect extends SpellEffect {
                     }
                     else {
                         // TODO: Add some logic for AI choice (ArsenalNut 2012/09/16)
-                        if (params.containsKey("AILogic")) {
-                            final String logic = params.get("AILogic");
+                        if (sa.hasParam("AILogic")) {
+                            final String logic = sa.getParam("AILogic");
                             String chosen = Constant.Color.BLACK;
                             if (logic.equals("MostProminentInComputerHand")) {
                                 chosen = CardFactoryUtil.getMostProminentColor(activator.getCardsIn(
@@ -159,8 +157,8 @@ public class ManaEffect extends SpellEffect {
                         abMana.setExpressChoice(choice);
                     }
                     else {
-                        if (params.containsKey("AILogic")) {
-                            final String logic = params.get("AILogic");
+                        if (sa.hasParam("AILogic")) {
+                            final String logic = sa.getParam("AILogic");
                             String chosen = Constant.Color.BLACK;
                             if (logic.equals("MostProminentInComputerHand")) {
                                 chosen = CardFactoryUtil.getMostProminentColor(act.getCardsIn(ZoneType.Hand));
@@ -180,19 +178,19 @@ public class ManaEffect extends SpellEffect {
         }
     
         for (final Player player : tgtPlayers) {
-            abMana.produceMana(generatedMana(params, sa), player, sa);
+            abMana.produceMana(generatedMana(sa), player, sa);
         }
     
         // Only clear express choice after mana has been produced
         abMana.clearExpressChoice();
     
         // convert these to SubAbilities when appropriate
-        if (params.containsKey("Stuck")) {
+        if (sa.hasParam("Stuck")) {
             abMana.setUndoable(false);
             card.addExtrinsicKeyword("This card doesn't untap during your next untap step.");
         }
     
-        final String deplete = params.get("Deplete");
+        final String deplete = sa.getParam("Deplete");
         if (deplete != null) {
             final int num = card.getCounters(Counters.getType(deplete));
             if (num == 0) {
@@ -219,10 +217,10 @@ public class ManaEffect extends SpellEffect {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.lang.String} object.
      */
-    private String generatedMana(final Map<String, String> params, final SpellAbility sa) {
+    private String generatedMana(final SpellAbility sa) {
         // Calculate generated mana here for stack description and resolving
 
-        int amount = params.containsKey("Amount") ? AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("Amount"), sa) : 1;
+        int amount = sa.hasParam("Amount") ? AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa) : 1;
     
         AbilityManaPart abMana = sa.getManaPart();
         String baseMana;
@@ -242,14 +240,14 @@ public class ManaEffect extends SpellEffect {
             baseMana = abMana.mana();
         }
     
-        if (params.containsKey("Bonus")) {
+        if (sa.hasParam("Bonus")) {
             // For mana abilities that get a bonus
             // Bonus currently MULTIPLIES the base amount. Base Amounts should
             // ALWAYS be Base
             int bonus = 0;
-            if (params.get("Bonus").equals("UrzaLands")) {
+            if (sa.getParam("Bonus").equals("UrzaLands")) {
                 if (hasUrzaLands(sa.getActivatingPlayer())) {
-                    bonus = Integer.parseInt(params.get("BonusProduced"));
+                    bonus = Integer.parseInt(sa.getParam("BonusProduced"));
                 }
             }
     
@@ -257,7 +255,7 @@ public class ManaEffect extends SpellEffect {
         }
     
         try {
-            if ((params.get("Amount") != null) && (amount != Integer.parseInt(params.get("Amount")))) {
+            if ((sa.getParam("Amount") != null) && (amount != Integer.parseInt(sa.getParam("Amount")))) {
                 abMana.setUndoable(false);
             }
         } catch (final NumberFormatException n) {
@@ -295,20 +293,20 @@ public class ManaEffect extends SpellEffect {
      * <p>
      * manaStackDescription.
      * </p>
-     * 
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
      * @param abMana
      *            a {@link forge.card.spellability.AbilityMana} object.
      * @param af
      *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
+     * 
      * @return a {@link java.lang.String} object.
      */
     
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Add ").append(generatedMana(params, sa)).append(" to your mana pool.");
+        sb.append("Add ").append(generatedMana(sa)).append(" to your mana pool.");
         return sb.toString();
     }
 }

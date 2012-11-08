@@ -3,7 +3,6 @@ package forge.card.abilityfactory.effects;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import forge.Card;
 import forge.Singletons;
@@ -23,20 +22,20 @@ public class DigUntilEffect extends SpellEffect {
          * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
          */
     @Override
-    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
         String desc = "Card";
-        if (params.containsKey("ValidDescription")) {
-            desc = params.get("ValidDescription");
+        if (sa.hasParam("ValidDescription")) {
+            desc = sa.getParam("ValidDescription");
         }
     
         int untilAmount = 1;
-        if (params.containsKey("Amount")) {
-            untilAmount = AbilityFactory.calculateAmount(sa.getAbilityFactory().getHostCard(), params.get("Amount"), sa);
+        if (sa.hasParam("Amount")) {
+            untilAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa);
         }
 
-        for (final Player pl : getTargetPlayers(sa, params)) {
+        for (final Player pl : getTargetPlayers(sa)) {
             sb.append(pl).append(" ");
         }
     
@@ -47,8 +46,8 @@ public class DigUntilEffect extends SpellEffect {
         }
         sb.append(". Put ");
     
-        final ZoneType found = ZoneType.smartValueOf(params.get("FoundDestination"));
-        final ZoneType revealed = ZoneType.smartValueOf(params.get("RevealedDestination"));
+        final ZoneType found = ZoneType.smartValueOf(sa.getParam("FoundDestination"));
+        final ZoneType revealed = ZoneType.smartValueOf(sa.getParam("RevealedDestination"));
         if (found != null) {
     
             sb.append(untilAmount > 1 ? "those cards" : "that card");
@@ -73,34 +72,34 @@ public class DigUntilEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
 
         String type = "Card";
-        if (params.containsKey("Valid")) {
-            type = params.get("Valid");
+        if (sa.hasParam("Valid")) {
+            type = sa.getParam("Valid");
         }
 
         int untilAmount = 1;
-        if (params.containsKey("Amount")) {
-            untilAmount = AbilityFactory.calculateAmount(host, params.get("Amount"), sa);
+        if (sa.hasParam("Amount")) {
+            untilAmount = AbilityFactory.calculateAmount(host, sa.getParam("Amount"), sa);
         }
 
         Integer maxRevealed = null;
-        if (params.containsKey("MaxRevealed")) {
-            maxRevealed = AbilityFactory.calculateAmount(host, params.get("MaxRevealed"), sa);
+        if (sa.hasParam("MaxRevealed")) {
+            maxRevealed = AbilityFactory.calculateAmount(host, sa.getParam("MaxRevealed"), sa);
         }
 
-        final boolean remember = params.containsKey("RememberFound");
+        final boolean remember = sa.hasParam("RememberFound");
 
         final Target tgt = sa.getTarget();
 
-        final ZoneType foundDest = ZoneType.smartValueOf(params.get("FoundDestination"));
-        final int foundLibPos = AbilityFactory.calculateAmount(host, params.get("FoundLibraryPosition"), sa);
-        final ZoneType revealedDest = ZoneType.smartValueOf(params.get("RevealedDestination"));
-        final int revealedLibPos = AbilityFactory.calculateAmount(host, params.get("RevealedLibraryPosition"), sa);
+        final ZoneType foundDest = ZoneType.smartValueOf(sa.getParam("FoundDestination"));
+        final int foundLibPos = AbilityFactory.calculateAmount(host, sa.getParam("FoundLibraryPosition"), sa);
+        final ZoneType revealedDest = ZoneType.smartValueOf(sa.getParam("RevealedDestination"));
+        final int revealedLibPos = AbilityFactory.calculateAmount(host, sa.getParam("RevealedLibraryPosition"), sa);
 
-        for (final Player p : getTargetPlayers(sa, params)) {
+        for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 final List<Card> found = new ArrayList<Card>();
                 final List<Card> revealed = new ArrayList<Card>();
@@ -132,8 +131,8 @@ public class DigUntilEffect extends SpellEffect {
                     final Iterator<Card> itr = found.iterator();
                     while (itr.hasNext()) {
                         final Card c = itr.next();
-                        if (params.containsKey("GainControl") && foundDest.equals(ZoneType.Battlefield)) {
-                            c.addController(sa.getAbilityFactory().getHostCard());
+                        if (sa.hasParam("GainControl") && foundDest.equals(ZoneType.Battlefield)) {
+                            c.addController(sa.getSourceCard());
                             Singletons.getModel().getGame().getAction().moveTo(c.getController().getZone(foundDest), c);
                         } else {
                             Singletons.getModel().getGame().getAction().moveTo(foundDest, c, foundLibPos);
@@ -142,7 +141,7 @@ public class DigUntilEffect extends SpellEffect {
                     }
                 }
 
-                if (params.containsKey("RememberRevealed")) {
+                if (sa.hasParam("RememberRevealed")) {
                     for (final Card c : revealed) {
                         host.addRemembered(c);
                     }
@@ -154,7 +153,7 @@ public class DigUntilEffect extends SpellEffect {
                     Singletons.getModel().getGame().getAction().moveTo(revealedDest, c, revealedLibPos);
                 }
 
-                if (params.containsKey("Shuffle")) {
+                if (sa.hasParam("Shuffle")) {
                     p.shuffle();
                 }
             } // end foreach player

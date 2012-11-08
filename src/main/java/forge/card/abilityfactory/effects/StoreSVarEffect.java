@@ -8,7 +8,7 @@ import forge.card.spellability.SpellAbility;
 public class StoreSVarEffect extends SpellEffect { 
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         //SVar$ OldToughness | Type$ Count | Expression$ CardToughness
         Card source = sa.getSourceCard();
 
@@ -16,16 +16,16 @@ public class StoreSVarEffect extends SpellEffect {
         String type = null;
         String expr = null;
 
-        if (params.containsKey("SVar")) {
-            key = params.get("SVar");
+        if (sa.hasParam("SVar")) {
+            key = sa.getParam("SVar");
         }
 
-        if (params.containsKey("Type")) {
-            type = params.get("Type");
+        if (sa.hasParam("Type")) {
+            type = sa.getParam("Type");
         }
 
-        if (params.containsKey("Expression")) {
-            expr = params.get("Expression");
+        if (sa.hasParam("Expression")) {
+            expr = sa.getParam("Expression");
         }
 
         if (key == null || type == null || expr == null) {

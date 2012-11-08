@@ -22,15 +22,15 @@ import forge.util.MyRandom;
 
 public class EffectAi extends SpellAiLogic {
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final GameState game = Singletons.getModel().getGame();
         final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= .6667;
         final Player opp = ai.getOpponent();
         String logic = "";
 
-        if (params.containsKey("AILogic")) {
-            logic = params.get("AILogic");
+        if (sa.hasParam("AILogic")) {
+            logic = sa.getParam("AILogic");
             final PhaseHandler phase = game.getPhaseHandler();
             if (logic.equals("BeginningOfOppTurn")) {
                 if (phase.isPlayerTurn(ai) || phase.getPhase().isAfter(PhaseType.DRAW)) {
@@ -93,10 +93,10 @@ public class EffectAi extends SpellAiLogic {
             return false;
         }
 
-        final String stackable = params.get("Stackable");
+        final String stackable = sa.getParam("Stackable");
 
         if ((stackable != null) && stackable.equals("False")) {
-            String name = params.get("Name");
+            String name = sa.getParam("Name");
             if (name == null) {
                 name = sa.getSourceCard().getName() + "'s Effect";
             }
@@ -120,7 +120,7 @@ public class EffectAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         // TODO: Add targeting effects
 
         return true;

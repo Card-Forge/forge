@@ -22,13 +22,13 @@ import forge.game.zone.ZoneType;
 
 public class DamagePreventAi extends SpellAiLogic {
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return true;
     }
     
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
-        final Card hostCard = sa.getAbilityFactory().getHostCard();
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+        final Card hostCard = sa.getSourceCard();
         boolean chance = false;
 
         final Cost cost = sa.getPayCosts();
@@ -55,11 +55,11 @@ public class DamagePreventAi extends SpellAiLogic {
             // As far as I can tell these Defined Cards will only have one of
             // them
             final ArrayList<Object> objects = AbilityFactory.getDefinedObjects(sa.getSourceCard(),
-                    params.get("Defined"), sa);
+                    sa.getParam("Defined"), sa);
 
             // react to threats on the stack
             if (Singletons.getModel().getGame().getStack().size() > 0) {
-                final ArrayList<Object> threatenedObjects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(), sa.getAbilityFactory());
+                final ArrayList<Object> threatenedObjects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
                 for (final Object o : objects) {
                     if (threatenedObjects.contains(o)) {
                         chance = true;
@@ -151,7 +151,7 @@ public class DamagePreventAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         boolean chance = false;
         final Target tgt = sa.getTarget();
         if (tgt == null) {
@@ -183,7 +183,7 @@ public class DamagePreventAi extends SpellAiLogic {
         tgt.resetTargets();
         // filter AIs battlefield by what I can target
         List<Card> targetables = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
-        targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, sa.getAbilityFactory().getHostCard());
+        targetables = CardLists.getValidCards(targetables, tgt.getValidTgts(), ai, sa.getSourceCard());
         final List<Card> compTargetables = CardLists.filterControlledBy(targetables, ai);
 
         if (targetables.size() == 0) {

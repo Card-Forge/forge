@@ -6,7 +6,7 @@ import forge.game.player.Player;
 
 public class ShuffleAi extends SpellAiLogic {
     @Override
-    protected boolean canPlayAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         // not really sure when the compy would use this; maybe only after a
         // human
         // deliberately put a card on top of their library
@@ -27,7 +27,7 @@ public class ShuffleAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return shuffleTargetAI(sa, false, false);
     }
 
@@ -42,7 +42,7 @@ public class ShuffleAi extends SpellAiLogic {
     } // shuffleTargetAI()
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         if (!shuffleTargetAI(sa, false, mandatory)) {
             return false;
         }

@@ -21,11 +21,11 @@ import forge.item.CardDb;
 public class CopyPermanentEffect extends SpellEffect {
     
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
 
-        final List<Card> tgtCards = getTargetCards(sa, params);
+        final List<Card> tgtCards = getTargetCards(sa);
 
         sb.append("Copy ");
         sb.append(StringUtils.join(tgtCards, ", "));
@@ -34,16 +34,16 @@ public class CopyPermanentEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(final java.util.Map<String,String> params, final SpellAbility sa) {
+    public void resolve(final SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
         final ArrayList<String> keywords = new ArrayList<String>();
-        if (params.containsKey("Keywords")) {
-            keywords.addAll(Arrays.asList(params.get("Keywords").split(" & ")));
+        if (sa.hasParam("Keywords")) {
+            keywords.addAll(Arrays.asList(sa.getParam("Keywords").split(" & ")));
         }
-        final int numCopies = params.containsKey("NumCopies") ? AbilityFactory.calculateAmount(hostCard,
-                params.get("NumCopies"), sa) : 1;
+        final int numCopies = sa.hasParam("NumCopies") ? AbilityFactory.calculateAmount(hostCard,
+                sa.getParam("NumCopies"), sa) : 1;
 
-        final List<Card> tgtCards = getTargetCards(sa, params);
+        final List<Card> tgtCards = getTargetCards(sa);
         final Target tgt = sa.getTarget();
 
         hostCard.clearClones();
@@ -95,7 +95,7 @@ public class CopyPermanentEffect extends SpellEffect {
                         copy.setBaseDefense(c.getBaseDefense());
                     }
 
-                    // add keywords from params
+                    // add keywords from sa
                     for (final String kw : keywords) {
                         copy.addIntrinsicKeyword(kw);
                     }
@@ -145,11 +145,11 @@ public class CopyPermanentEffect extends SpellEffect {
                             // technically your opponent could steal the token
                             // and the token shouldn't be sacrificed
                             if (target[index].isInPlay()) {
-                                if (params.get("AtEOT").equals("Sacrifice")) {
+                                if (sa.getParam("AtEOT").equals("Sacrifice")) {
                                     // maybe do a setSacrificeAtEOT, but
                                     // probably not.
                                     Singletons.getModel().getGame().getAction().sacrifice(target[index], sa);
-                                } else if (params.get("AtEOT").equals("Exile")) {
+                                } else if (sa.getParam("AtEOT").equals("Exile")) {
                                     Singletons.getModel().getGame().getAction().exile(target[index]);
                                 }
 
@@ -162,11 +162,11 @@ public class CopyPermanentEffect extends SpellEffect {
 
                         @Override
                         public void execute() {
-                            sac.setStackDescription(params.get("AtEOT") + " " + target[index] + ".");
+                            sac.setStackDescription(sa.getParam("AtEOT") + " " + target[index] + ".");
                             Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(sac);
                         }
                     }; // Command
-                    if (params.containsKey("AtEOT")) {
+                    if (sa.hasParam("AtEOT")) {
                         Singletons.getModel().getGame().getEndOfTurn().addAt(atEOT);
                     }
                     // end copied Kiki code

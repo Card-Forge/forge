@@ -1,6 +1,5 @@
 package forge.card.abilityfactory.ai;
 
-import java.util.Map;
 import java.util.Random;
 
 import forge.card.abilityfactory.AbilityFactory;
@@ -16,7 +15,7 @@ public class ScryAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
     @Override
-    protected boolean doTriggerAINoCost(Player ai, Map<String, String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Target tgt = sa.getTarget();
 
         if (tgt != null) { // It doesn't appear that Scry ever targets
@@ -30,13 +29,13 @@ public class ScryAi extends SpellAiLogic {
     } // scryTargetAI()
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player ai) {
-        return doTriggerAINoCost(ai, params, sa, false);
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+        return doTriggerAINoCost(ai, sa, false);
     }
     
     
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // Card source = sa.getSourceCard();
     
         double chance = .4; // 40 percent chance of milling with instant speed

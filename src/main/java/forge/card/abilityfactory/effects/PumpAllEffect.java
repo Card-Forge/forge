@@ -16,12 +16,12 @@ import forge.game.zone.ZoneType;
 
 public class PumpAllEffect extends SpellEffect {
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
         String desc = "";
-        if (params.containsKey("PumpAllDescription")) {
-            desc = params.get("PumpAllDescription");
+        if (sa.hasParam("PumpAllDescription")) {
+            desc = sa.getParam("PumpAllDescription");
         }
 
 
@@ -36,14 +36,14 @@ public class PumpAllEffect extends SpellEffect {
     } // pumpAllStackDescription()
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         List<Card> list;
-        final List<Player> tgtPlayers = getTargetPlayersEmptyAsDefault(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayersEmptyAsDefault(sa);
         final ArrayList<ZoneType> affectedZones = new ArrayList<ZoneType>();
     
     
-        if (params.containsKey("PumpZone")) {
-            for (final String zone : params.get("PumpZone").split(",")) {
+        if (sa.hasParam("PumpZone")) {
+            for (final String zone : sa.getParam("PumpZone").split(",")) {
                 affectedZones.add(ZoneType.valueOf(zone));
             }
         } else {
@@ -64,15 +64,15 @@ public class PumpAllEffect extends SpellEffect {
         }
     
         String valid = "";
-        if (params.containsKey("ValidCards")) {
-            valid = params.get("ValidCards");
+        if (sa.hasParam("ValidCards")) {
+            valid = sa.getParam("ValidCards");
         }
     
         list = AbilityFactory.filterListByType(list, valid, sa);
     
-        final List<String> keywords = params.containsKey("KW") ? Arrays.asList(params.get("KW").split(" & ")) : new ArrayList<String>();
-        final int a = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumAtt"), sa); 
-        final int d = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumDef"), sa); 
+        final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
+        final int a = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa); 
+        final int d = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa); 
     
         for (final Card tgtC : list) {
     
@@ -95,7 +95,7 @@ public class PumpAllEffect extends SpellEffect {
                 tgtC.addExtrinsicKeyword(keywords.get(i));
             }
     
-            if (!params.containsKey("Permanent")) {
+            if (!sa.hasParam("Permanent")) {
                 // If not Permanent, remove Pumped at EOT
                 final Command untilEOT = new Command() {
                     private static final long serialVersionUID = 5415795460189457660L;
@@ -112,7 +112,7 @@ public class PumpAllEffect extends SpellEffect {
                         }
                     }
                 };
-                if (params.containsKey("UntilUntaps")) {
+                if (sa.hasParam("UntilUntaps")) {
                     sa.getSourceCard().addUntapCommand(untilEOT);
                 } else {
                     Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);

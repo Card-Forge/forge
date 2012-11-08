@@ -21,10 +21,10 @@ public class ChooseTypeEffect extends SpellEffect {
     
     
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        for (final Player p : getTargetPlayers(sa, params)) {
+        for (final Player p : getTargetPlayers(sa)) {
             sb.append(p).append(" ");
         }
         sb.append("chooses a type.");
@@ -33,16 +33,16 @@ public class ChooseTypeEffect extends SpellEffect {
     }
     
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Card card = sa.getSourceCard();
-        final String type = params.get("Type");
+        final String type = sa.getParam("Type");
         final ArrayList<String> invalidTypes = new ArrayList<String>();
-        if (params.containsKey("InvalidTypes")) {
-            invalidTypes.addAll(Arrays.asList(params.get("InvalidTypes").split(",")));
+        if (sa.hasParam("InvalidTypes")) {
+            invalidTypes.addAll(Arrays.asList(sa.getParam("InvalidTypes").split(",")));
         }
 
         final Target tgt = sa.getTarget();
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
         
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
@@ -90,8 +90,8 @@ public class ChooseTypeEffect extends SpellEffect {
                             Player ai = sa.getActivatingPlayer();
                             Player opp = ai.getOpponent();
                             String chosen = "";
-                            if (params.containsKey("AILogic")) {
-                                final String logic = params.get("AILogic");
+                            if (sa.hasParam("AILogic")) {
+                                final String logic = sa.getParam("AILogic");
                                 if (logic.equals("MostProminentOnBattlefield")) {
                                     chosen = CardFactoryUtil.getMostProminentCreatureType(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield));
                                 }

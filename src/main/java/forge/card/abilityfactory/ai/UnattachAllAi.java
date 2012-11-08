@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.ai;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Random;
 
 import forge.Card;
@@ -24,7 +23,7 @@ public class UnattachAllAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
@@ -53,7 +52,7 @@ public class UnattachAllAi extends SpellAiLogic {
         }
 
         if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
-                && !"Curse".equals(params.get("AILogic"))) {
+                && !"Curse".equals(sa.getParam("AILogic"))) {
             return false;
         }
 
@@ -65,14 +64,14 @@ public class UnattachAllAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
     @Override
-    protected boolean doTriggerAINoCost(Player ai, Map<String, String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card card = sa.getSourceCard();
         final Player opp = ai.getOpponent();
         // Check if there are any valid targets
         ArrayList<Object> targets = new ArrayList<Object>();
         final Target tgt = sa.getTarget();
         if (tgt == null) {
-            targets = AbilityFactory.getDefinedObjects(sa.getSourceCard(), params.get("Defined"), sa);
+            targets = AbilityFactory.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
 
         if (!mandatory && card.isEquipment() && !targets.isEmpty()) {
@@ -95,9 +94,9 @@ public class UnattachAllAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player ai) {
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         // AI should only activate this during Human's turn
-        return canPlayAI(ai, params, sa);
+        return canPlayAI(ai, sa);
     }
 
 }

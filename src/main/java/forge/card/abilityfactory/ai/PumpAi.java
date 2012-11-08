@@ -3,8 +3,6 @@ package forge.card.abilityfactory.ai;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-
 import com.google.common.base.Predicate;
 
 import forge.Card;
@@ -30,12 +28,12 @@ public class PumpAi extends PumpAiBase {
          * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
          */
     @Override
-    protected boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Cost cost = sa.getPayCosts();
         final PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler();
-        final List<String> keywords = params.containsKey("KW") ? Arrays.asList(params.get("KW").split(" & ")) : new ArrayList<String>();
-        final String numDefense = params.containsKey("NumDef") ? params.get("NumDef") : "";
-        final String numAttack = params.containsKey("NumAtt") ? params.get("NumAtt") : "";
+        final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
+        final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
+        final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
         
         if (!CostUtil.checkLifeCost(ai, cost, sa.getSourceCard(), 4, null)) {
             return false;
@@ -69,7 +67,7 @@ public class PumpAi extends PumpAiBase {
         if ((Singletons.getModel().getGame().getStack().size() == 0) && ph.getPhase().isBefore(PhaseType.COMBAT_BEGIN)) {
             // Instant-speed pumps should not be cast outside of combat when the
             // stack is empty
-            if (!sa.getAbilityFactory().isCurse() && !AbilityFactory.isSorcerySpeed(sa)) {
+            if (!sa.isCurse() && !AbilityFactory.isSorcerySpeed(sa)) {
                 return false;
             }
         } else if (Singletons.getModel().getGame().getStack().size() > 0) {
@@ -126,9 +124,9 @@ public class PumpAi extends PumpAiBase {
         }
 
         //Untargeted
-        if ((sa.getAbilityFactory().getAbTgt() == null) || !sa.getAbilityFactory().getAbTgt().doesTarget()) {
+        if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
             final ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(),
-                    params.get("Defined"), sa);
+                    sa.getParam("Defined"), sa);
 
             if (cards.size() == 0) {
                 return false;
@@ -137,7 +135,7 @@ public class PumpAi extends PumpAiBase {
             // when this happens we need to expand AI to consider if its ok for
             // everything?
             for (final Card card : cards) {
-                if (sa.getAbilityFactory().isCurse()) {
+                if (sa.isCurse()) {
                     if (card.getController().isComputer()) {
                         return false;
                     }
@@ -155,22 +153,22 @@ public class PumpAi extends PumpAiBase {
             return false;
         }
         //Targeted
-        if (!this.pumpTgtAI(ai, sa, params, defense, attack, false)) {
+        if (!this.pumpTgtAI(ai, sa, defense, attack, false)) {
             return false;
         }
 
         return true;
     } // pumpPlayAI()
 
-    private boolean pumpTgtAI(final Player ai, final SpellAbility sa, final Map<String, String> params, final int defense, final int attack, final boolean mandatory) {
-        final List<String> keywords = params.containsKey("KW") ? Arrays.asList(params.get("KW").split(" & ")) : new ArrayList<String>();
+    private boolean pumpTgtAI(final Player ai, final SpellAbility sa, final int defense, final int attack, final boolean mandatory) {
+        final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
         
         if (!mandatory
                 && !sa.isTrigger()
                 && Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
-                && !(sa.getAbilityFactory().isCurse() && (defense < 0))
+                && !(sa.isCurse() && (defense < 0))
                 && !this.containsNonCombatKeyword(keywords)
-                && !sa.getAbilityFactory().getMapParams().containsKey("UntilYourNextTurn")) {
+                && !sa.hasParam("UntilYourNextTurn")) {
             return false;
         }
 
@@ -178,8 +176,8 @@ public class PumpAi extends PumpAiBase {
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
         List<Card> list = new ArrayList<Card>();
-        if (params.containsKey("AILogic")) {
-            if (params.get("AILogic").equals("HighestPower")) {
+        if (sa.hasParam("AILogic")) {
+            if (sa.getParam("AILogic").equals("HighestPower")) {
                 list = CardLists.getValidCards(CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
                 list = CardLists.getTargetableCards(list, sa);
                 CardLists.sortAttack(list);
@@ -190,7 +188,7 @@ public class PumpAi extends PumpAiBase {
                     return false;
                 }
             }
-        } else if (sa.getAbilityFactory().isCurse()) {
+        } else if (sa.isCurse()) {
             if (sa.canTarget(opp)) {
                 tgt.addTarget(opp);
                 return true;
@@ -229,7 +227,7 @@ public class PumpAi extends PumpAiBase {
             return mandatory && this.pumpMandatoryTarget(ai, sa, mandatory);
         }
 
-        if (!sa.getAbilityFactory().isCurse()) {
+        if (!sa.isCurse()) {
             // Don't target cards that will die.
             list = CardLists.filter(list, new Predicate<Card>() {
                 @Override
@@ -286,7 +284,7 @@ public class PumpAi extends PumpAiBase {
         List<Card> forced;
         final Card source = sa.getSourceCard();
 
-        if (sa.getAbilityFactory().isCurse()) {
+        if (sa.isCurse()) {
             pref = CardLists.filterControlledBy(list, opp);
             forced = CardLists.filterControlledBy(list, ai);
         } else {
@@ -337,10 +335,10 @@ public class PumpAi extends PumpAiBase {
     } // pumpMandatoryTarget()
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getSourceCard();
-        final String numDefense = params.containsKey("NumDef") ? params.get("NumDef") : "";
-        final String numAttack = params.containsKey("NumAtt") ? params.get("NumAtt") : "";
+        final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
+        final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
         
         int defense;
         if (numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
@@ -373,19 +371,19 @@ public class PumpAi extends PumpAiBase {
                 return true;
             }
         } else {
-            return this.pumpTgtAI(ai, sa, params, defense, attack, mandatory);
+            return this.pumpTgtAI(ai, sa, defense, attack, mandatory);
         }
 
         return true;
     } // pumpTriggerAI
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player ai) {
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         
         final Card source = sa.getSourceCard();
         
-        final String numDefense = params.containsKey("NumDef") ? params.get("NumDef") : "";
-        final String numAttack = params.containsKey("NumAtt") ? params.get("NumAtt") : "";
+        final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
+        final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
         
         int defense;
         if (numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
@@ -401,7 +399,7 @@ public class PumpAi extends PumpAiBase {
             attack = AbilityFactory.calculateAmount(sa.getSourceCard(), numAttack, sa);
         }
 
-        if ((sa.getAbilityFactory().getAbTgt() == null) || !sa.getAbilityFactory().getAbTgt().doesTarget()) {
+        if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
             if (source.isCreature()) {
                 if (!source.hasKeyword("Indestructible")
                         && ((source.getNetDefense() + defense) <= source.getDamage())) {
@@ -413,7 +411,7 @@ public class PumpAi extends PumpAiBase {
             }
         } else {
             //Targeted
-            if (!this.pumpTgtAI(ai, sa, params, defense, attack, false)) {
+            if (!this.pumpTgtAI(ai, sa, defense, attack, false)) {
                 return false;
             }
         }

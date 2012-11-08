@@ -1493,7 +1493,7 @@ public final class GameActionUtil {
         allSAs.add(sa);
         Card source = sa.getSourceCard();
 
-        if (!sa.isSpell() || !source.isType("Arcane") || sa.getAbilityFactory() == null) {
+        if (!sa.isSpell() || !source.isType("Arcane") || sa.getApi() == null) {
             return newSAs;
         }
 

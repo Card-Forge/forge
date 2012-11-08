@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.ai;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import forge.Card;
@@ -24,11 +23,11 @@ public class CopyPermanentAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         // Card source = sa.getSourceCard();
         // TODO - I'm sure someone can do this AI better
 
-        if (params.containsKey("AtEOT") && !Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.MAIN1)) {
+        if (sa.hasParam("AtEOT") && !Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.MAIN1)) {
             return false;
         } else {
             double chance = .4; // 40 percent chance with instant speed stuff
@@ -38,7 +37,7 @@ public class CopyPermanentAi extends SpellAiLogic {
             }
             final Random r = MyRandom.getRandom();
             if (r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1)) {
-                return this.doTriggerAINoCost(aiPlayer, params, sa, false);
+                return this.doTriggerAINoCost(aiPlayer, sa, false);
             } else {
                 return false;
             }
@@ -46,12 +45,12 @@ public class CopyPermanentAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return true;
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getSourceCard();
 
         // ////

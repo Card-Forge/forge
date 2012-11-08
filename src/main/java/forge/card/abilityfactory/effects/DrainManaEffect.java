@@ -11,10 +11,10 @@ import forge.game.player.Player;
 
 public class DrainManaEffect extends SpellEffect {
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         sb.append(StringUtils.join(tgtPlayers, ", "));
         sb.append(" empties his or her mana pool.");
@@ -23,10 +23,10 @@ public class DrainManaEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Target tgt = sa.getTarget();
     
-        for (final Player p : getTargetPlayers(sa, params)) {
+        for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 p.getManaPool().clearPool(false);
             }

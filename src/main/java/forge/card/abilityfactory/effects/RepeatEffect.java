@@ -2,8 +2,6 @@ package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import forge.Card;
 import forge.CardLists;
 import forge.GameActionUtil;
@@ -19,23 +17,23 @@ import forge.util.Expressions;
 public class RepeatEffect extends SpellEffect {
     
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         return "Repeat something. Somebody should really write a better StackDescription!";
     } // end repeatStackDescription()
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final AbilityFactory afRepeat = new AbilityFactory();
         Card source = sa.getSourceCard();
     
         // setup subability to repeat
-        final SpellAbility repeat = afRepeat.getAbility(sa.getSourceCard().getSVar(params.get("RepeatSubAbility")), source);
+        final SpellAbility repeat = afRepeat.getAbility(sa.getSourceCard().getSVar(sa.getParam("RepeatSubAbility")), source);
         repeat.setActivatingPlayer(sa.getActivatingPlayer());
         ((AbilitySub) repeat).setParent(sa);
     
         Integer maxRepeat = null;
-        if (params.containsKey("MaxRepeat")) {
-            maxRepeat = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("MaxRepeat"), sa);
+        if (sa.hasParam("MaxRepeat")) {
+            maxRepeat = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("MaxRepeat"), sa);
         }
         
         //execute repeat ability at least once
@@ -53,7 +51,7 @@ public class RepeatEffect extends SpellEffect {
                  System.out.println(infLoop.toString());
                  break;
              }
-       } while (checkRepeatConditions(params, sa));
+       } while (checkRepeatConditions(sa));
     
     }
 // end class AbilityFactory_Repeat
@@ -68,20 +66,20 @@ public class RepeatEffect extends SpellEffect {
      * @param SA
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    private boolean checkRepeatConditions(final Map<String, String> params, final SpellAbility sa) {
+    private boolean checkRepeatConditions(final SpellAbility sa) {
         //boolean doAgain = false;
     
-        if (params.containsKey("RepeatPresent")) {
-            final String repeatPresent = params.get("RepeatPresent");
+        if (sa.hasParam("RepeatPresent")) {
+            final String repeatPresent = sa.getParam("RepeatPresent");
             List<Card> list = new ArrayList<Card>();
     
             String repeatCompare = "GE1";
-            if (params.containsKey("RepeatCompare")) {
-                repeatCompare = params.get("RepeatCompare");
+            if (sa.hasParam("RepeatCompare")) {
+                repeatCompare = sa.getParam("RepeatCompare");
             }
     
-            if (params.containsKey("RepeatDefined")) {
-                list.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("RepeatDefined"), sa));
+            if (sa.hasParam("RepeatDefined")) {
+                list.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("RepeatDefined"), sa));
             } else {
                 list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
             }
@@ -105,14 +103,14 @@ public class RepeatEffect extends SpellEffect {
             }
         }
     
-        if (params.containsKey("RepeatCheckSVar")) {
+        if (sa.hasParam("RepeatCheckSVar")) {
             String sVarOperator = "GE";
             String sVarOperand = "1";
-            if (params.containsKey("RepeatSVarCompare")) {
-                sVarOperator = params.get("RepeatSVarCompare").substring(0, 2);
-                sVarOperand = params.get("RepeatSVarCompare").substring(2);
+            if (sa.hasParam("RepeatSVarCompare")) {
+                sVarOperator = sa.getParam("RepeatSVarCompare").substring(0, 2);
+                sVarOperand = sa.getParam("RepeatSVarCompare").substring(2);
             }
-            final int svarValue = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("RepeatCheckSVar"), sa);
+            final int svarValue = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("RepeatCheckSVar"), sa);
             final int operandValue = AbilityFactory.calculateAmount(sa.getSourceCard(), sVarOperand, sa);
     
             if (!Expressions.compare(svarValue, sVarOperator, operandValue)) {
@@ -120,7 +118,7 @@ public class RepeatEffect extends SpellEffect {
             }
         }
     
-        if (params.containsKey("RepeatOptional")) {
+        if (sa.hasParam("RepeatOptional")) {
             if (sa.getActivatingPlayer().isComputer()) {
                 //TODO add logic to have computer make better choice (ArsenalNut)
                 return false;

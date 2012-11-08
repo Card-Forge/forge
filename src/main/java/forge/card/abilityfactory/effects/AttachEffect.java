@@ -2,8 +2,6 @@ package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import forge.Card;
 import forge.CardLists;
 import forge.Command;
@@ -26,7 +24,7 @@ public class AttachEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void resolve(Map<String, String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         if( sa.getSourceCard().isAura() )
         {
             // The Spell_Permanent (Auras) version of this AF needs to
@@ -39,37 +37,37 @@ public class AttachEffect extends SpellEffect {
         Card source = sa.getSourceCard();
         Card card = sa.getSourceCard();
 
-        final List<Object> targets = getTargetObjects(sa, params);
+        final List<Object> targets = getTargetObjects(sa);
 
-        if (params.containsKey("Object")) {
-            card = AbilityFactory.getDefinedCards(source, params.get("Object"), sa).get(0);
+        if (sa.hasParam("Object")) {
+            card = AbilityFactory.getDefinedCards(source, sa.getParam("Object"), sa).get(0);
         }
 
         final StringBuilder sb = new StringBuilder();
         sb.append("Do you want to attach " + card + " to " + targets + "?");
-        if (sa.getActivatingPlayer().isHuman() && params.containsKey("Optional")
+        if (sa.getActivatingPlayer().isHuman() && sa.hasParam("Optional")
                 && !GameActionUtil.showYesNoDialog(source, sb.toString())) {
             return;
         }
 
         // If Cast Targets will be checked on the Stack
         for (final Object o : targets) {
-            handleAttachment(card, o, params);
+            handleAttachment(card, o, sa);
         }
     }
 
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final String conditionDesc = params.get("ConditionDescription");
+        final String conditionDesc = sa.getParam("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
 
         sb.append(" Attach to ");
 
-        final List<Object> targets = getTargetObjects(sa, params);
+        final List<Object> targets = getTargetObjects(sa);
         // Should never allow more than one Attachment per card
 
         for (final Object o : targets) {
@@ -89,7 +87,7 @@ public class AttachEffect extends SpellEffect {
      * @param af
      *            the af
      */
-    public static void handleAttachment(final Card card, final Object o, final Map<String, String> params) {
+    public static void handleAttachment(final Card card, final Object o, final SpellAbility sa) {
 
         if (o instanceof Card) {
             final Card c = (Card) o;
@@ -99,7 +97,7 @@ public class AttachEffect extends SpellEffect {
                 // Spellweaver Volute, Dance of the Dead, Animate Dead
                 // Although honestly, I'm not sure if the three of those could
                 // handle being scripted
-                final boolean gainControl = "GainControl".equals(params.get("AILogic"));
+                final boolean gainControl = "GainControl".equals(sa.getParam("AILogic"));
                 handleAura(card, c, gainControl);
             } else if (card.isEquipment()) {
                 card.equipCard(c);
@@ -232,10 +230,8 @@ public class AttachEffect extends SpellEffect {
      */
     public static SpellAbility getAttachSpellAbility(final Card source) {
         SpellAbility aura = null;
-        AbilityFactory af = null;
         for (final SpellAbility sa : source.getSpells()) {
-            af = sa.getAbilityFactory();
-            if ((af != null) && af.getAPI() == ApiType.Attach) {
+            if (sa.getApi() == ApiType.Attach) {
                 aura = sa;
                 break;
             }
@@ -259,9 +255,8 @@ public class AttachEffect extends SpellEffect {
             return false;
         }
         aura.setActivatingPlayer(source.getController());
-        final AbilityFactory af = aura.getAbilityFactory();
         final Target tgt = aura.getTarget();
-        final boolean gainControl = "GainControl".equals(af.getMapParams().get("AILogic"));
+        final boolean gainControl = "GainControl".equals(aura.getParam("AILogic"));
 
         if (source.getController().isHuman()) {
             if (tgt.canTgtPlayer()) {
@@ -292,7 +287,7 @@ public class AttachEffect extends SpellEffect {
             }
         }
 
-        else if (AttachAi.attachPreference(aura, af.getMapParams(), tgt, true)) {
+        else if (AttachAi.attachPreference(aura, tgt, true)) {
             final Object o = aura.getTarget().getTargets().get(0);
             if (o instanceof Card) {
                 //source.enchantEntity((Card) o);

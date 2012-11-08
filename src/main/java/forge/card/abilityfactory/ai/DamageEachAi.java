@@ -1,6 +1,5 @@
 package forge.card.abilityfactory.ai;
 
-import java.util.Map;
 
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
@@ -13,7 +12,7 @@ public class DamageEachAi extends DamageAiBase {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Target tgt = sa.getTarget();
 
         if (tgt != null && sa.canTarget(ai.getOpponent())) {
@@ -21,13 +20,13 @@ public class DamageEachAi extends DamageAiBase {
             sa.getTarget().addTarget(ai.getOpponent());
         }
 
-        final String damage = params.get("NumDmg");
+        final String damage = sa.getParam("NumDmg");
         final int iDmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa); 
         return this.shouldTgtP(ai, sa, iDmg, false);
     }
 
     @Override
-    public boolean chkAIDrawback(Map<String, String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         // check AI life before playing this drawback?
         return true;
     }
@@ -36,9 +35,9 @@ public class DamageEachAi extends DamageAiBase {
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
     @Override
-    protected boolean doTriggerAINoCost(Player ai, Map<String, String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
 
-        return canPlayAI(ai, params, sa);
+        return canPlayAI(ai, sa);
     }
 
 }

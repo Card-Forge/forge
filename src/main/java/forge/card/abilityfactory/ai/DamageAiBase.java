@@ -26,9 +26,9 @@ public abstract class DamageAiBase extends SpellAiLogic {
         }
     
         if (!noPrevention) {
-            restDamage = enemy.predictDamage(restDamage, sa.getAbilityFactory().getHostCard(), false);
+            restDamage = enemy.predictDamage(restDamage, sa.getSourceCard(), false);
         } else {
-            restDamage = enemy.staticReplaceDamage(restDamage, sa.getAbilityFactory().getHostCard(), false);
+            restDamage = enemy.staticReplaceDamage(restDamage, sa.getSourceCard(), false);
         }
     
         if (restDamage == 0) {
@@ -41,7 +41,7 @@ public abstract class DamageAiBase extends SpellAiLogic {
     
         final List<Card> hand = comp.getCardsIn(ZoneType.Hand);
     
-        if (sa.getAbilityFactory().isSpell()) {
+        if (sa.isSpell()) {
             // If this is a spell, cast it instead of discarding
             if ((Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) || Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.MAIN2))
                     && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(comp) && (hand.size() > comp.getMaxHandSize())) {

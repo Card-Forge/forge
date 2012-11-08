@@ -3600,9 +3600,7 @@ public class CardFactoryUtil {
     public static void copySpellAbility(SpellAbility from, SpellAbility to) {
         to.setDescription(from.getDescription());
         to.setStackDescription(from.getDescription());
-        if (from.getAbilityFactory() != null) {
-            to.setAbilityFactory(new AbilityFactory(from.getAbilityFactory()));
-        }
+
         if (from.getSubAbility() != null) {
             to.setSubAbility(from.getSubAbility().getCopy());
         }
@@ -3621,12 +3619,8 @@ public class CardFactoryUtil {
     public static void correctAbilityChainSourceCard(final SpellAbility sa, final Card card) {
 
         sa.setSourceCard(card);
-        if (sa.getAbilityFactory() != null) {
 
-            sa.getAbilityFactory().setHostCard(card);
-        }
         if (sa.getSubAbility() != null) {
-
             correctAbilityChainSourceCard(sa.getSubAbility(), card);
         }
     }
@@ -3646,7 +3640,7 @@ public class CardFactoryUtil {
                 final AbilityFactory af = new AbilityFactory();
                 // System.out.println(cardName);
                 final SpellAbility sa = af.getAbility(ia.get(i), card);
-                if (sa.getAbilityFactory().getMapParams().containsKey("SetAsKicked")) {
+                if (sa.hasParam("SetAsKicked")) {
                     sa.addOptionalAdditionalCosts("Kicker");
                 }
                 card.addSpellAbility(sa);
@@ -4376,12 +4370,12 @@ public class CardFactoryUtil {
 
         class ETBReplacementEffect extends SpellEffect {
             @Override
-            public void resolve(Map<String, String> params, SpellAbility sa) {
+            public void resolve(SpellAbility sa) {
                 forge.Singletons.getModel().getGame().getAction().moveToPlay(((Card) sa.getReplacingObject("Card")));
             }
         }
 
-        tailend.setSubAbility(new CommonDrawback(sa.getSourceCard(), null, null, new ETBReplacementEffect(), new CanPlayAsDrawbackAi()));
+        tailend.setSubAbility(new CommonDrawback(null, sa.getSourceCard(), null, null, new ETBReplacementEffect(), new CanPlayAsDrawbackAi()));
         // ETBReplacementMove(sa.getSourceCard(), null));
     }
 

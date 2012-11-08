@@ -926,7 +926,7 @@ public final class CardUtil {
      *            a {@link java.util.ArrayList} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static List<String> getReflectableManaColors(final SpellAbility abMana, final Map<String, String> params,
+    public static List<String> getReflectableManaColors(final SpellAbility abMana, final SpellAbility sa,
             List<String> colors, final List<Card> parents) {
         // Here's the problem with reflectable Mana. If more than one is out,
         // they need to Reflect each other,
@@ -938,12 +938,12 @@ public final class CardUtil {
             parents.add(card);
         }
     
-        final String colorOrType = params.get("ColorOrType"); // currently Color
+        final String colorOrType = sa.getParam("ColorOrType"); // currently Color
                                                               // or
         // Type, Type is colors
         // + colorless
-        final String validCard = params.get("Valid");
-        final String reflectProperty = params.get("ReflectProperty"); // Produce
+        final String validCard = sa.getParam("Valid");
+        final String reflectProperty = sa.getParam("ReflectProperty"); // Produce
         // (Reflecting Pool) or Is (Meteor Crater)
     
         int maxChoices = 5; // Color is the default colorOrType
@@ -1021,7 +1021,7 @@ public final class CardUtil {
                     break;
                 }
     
-                colors = CardUtil.getReflectableManaColors(ab, params, colors, parents);
+                colors = CardUtil.getReflectableManaColors(ab, sa, colors, parents);
             }
         }
         return colors;

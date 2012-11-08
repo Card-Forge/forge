@@ -2,8 +2,6 @@ package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import forge.Card;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
@@ -15,10 +13,10 @@ import forge.gui.GuiChoose;
 
 public class CharmEffect extends SpellEffect {
     
-    public static List<AbilitySub> makePossibleOptions(final SpellAbility sa, final Map<String, String> params) {
+    public static List<AbilitySub> makePossibleOptions(final SpellAbility sa) {
         final Card source = sa.getSourceCard();
     
-        final String[] saChoices = params.get("Choices").split(",");
+        final String[] saChoices = sa.getParam("Choices").split(",");
         List<AbilitySub> choices = new ArrayList<AbilitySub>();
         for (final String saChoice : saChoices) {
             final String ab = source.getSVar(saChoice);
@@ -29,14 +27,14 @@ public class CharmEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         // all chosen modes have been chained as subabilities to this sa.
         // so nothing to do in this resolve
     }
 
 
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         // nothing stack specific for Charm
         
@@ -44,14 +42,12 @@ public class CharmEffect extends SpellEffect {
     }
     
     public static void makeChoices(SpellAbility sa) {
-        AbilityFactory af = sa.getAbilityFactory();
-        final Map<String, String> params = af.getMapParams();
         //this resets all previous choices
         sa.setSubAbility(null);
         
-        final int num = Integer.parseInt(params.containsKey("CharmNum") ? params.get("CharmNum") : "1");
-        final int min = params.containsKey("MinCharmNum") ? Integer.parseInt(params.get("MinCharmNum")) : num;
-        final List<AbilitySub> choices = makePossibleOptions(sa, params);
+        final int num = Integer.parseInt(sa.hasParam("CharmNum") ? sa.getParam("CharmNum") : "1");
+        final int min = sa.hasParam("MinCharmNum") ? Integer.parseInt(sa.getParam("MinCharmNum")) : num;
+        final List<AbilitySub> choices = makePossibleOptions(sa);
         
         List<AbilitySub> chosen = null;
         

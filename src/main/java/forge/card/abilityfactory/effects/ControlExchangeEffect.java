@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import forge.Card;
 import forge.card.abilityfactory.AbilityFactory;
@@ -17,7 +16,7 @@ public class ControlExchangeEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         Card object1 = null;
         Card object2 = null;
         final Target tgt = sa.getTarget();
@@ -25,8 +24,8 @@ public class ControlExchangeEffect extends SpellEffect {
         if (tgts.size() > 0) {
             object1 = tgts.get(0);
         }
-        if (params.containsKey("Defined")) {
-            object2 = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa).get(0);
+        if (sa.hasParam("Defined")) {
+            object2 = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa).get(0);
         } else if (tgts.size() > 1) {
             object2 = tgts.get(1);
         }
@@ -38,7 +37,7 @@ public class ControlExchangeEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void resolve(Map<String, String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         Card object1 = null;
         Card object2 = null;
         final Target tgt = sa.getTarget();
@@ -46,8 +45,8 @@ public class ControlExchangeEffect extends SpellEffect {
         if (tgts.size() > 0) {
             object1 = tgts.get(0);
         }
-        if (params.containsKey("Defined")) {
-            object2 = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa).get(0);
+        if (sa.hasParam("Defined")) {
+            object2 = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa).get(0);
         } else if (tgts.size() > 1) {
             object2 = tgts.get(1);
         }

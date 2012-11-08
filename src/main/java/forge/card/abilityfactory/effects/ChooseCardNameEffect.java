@@ -24,10 +24,10 @@ import forge.item.CardPrinted;
 public class ChooseCardNameEffect extends SpellEffect {
 
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
-        for (final Player p : getTargetPlayers(sa, params)) {
+        for (final Player p : getTargetPlayers(sa)) {
             sb.append(p).append(" ");
         }
         sb.append("names a card.");
@@ -36,17 +36,17 @@ public class ChooseCardNameEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
 
         final Target tgt = sa.getTarget();
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         String valid = "Card";
         String validDesc = "card";
-        if (params.containsKey("ValidCards")) {
-            valid = params.get("ValidCards");
-            validDesc = params.get("ValidDesc");
+        if (sa.hasParam("ValidCards")) {
+            valid = sa.getParam("ValidCards");
+            validDesc = sa.getParam("ValidDesc");
         }
 
         for (final Player p : tgtPlayers) {
@@ -86,8 +86,8 @@ public class ChooseCardNameEffect extends SpellEffect {
                         }
                     } else {
                         String chosen = "";
-                        if (params.containsKey("AILogic")) {
-                            final String logic = params.get("AILogic");
+                        if (sa.hasParam("AILogic")) {
+                            final String logic = sa.getParam("AILogic");
                             if (logic.equals("MostProminentInComputerDeck")) {
                                 chosen = CardFactoryUtil.getMostProminentCardName(p.getCardsIn(ZoneType.Library));
                             } else if (logic.equals("MostProminentInHumanDeck")) {

@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.ai;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import forge.Card;
@@ -21,7 +20,7 @@ import forge.util.MyRandom;
 public class MillAi extends SpellAiLogic {
 
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Card source = sa.getSourceCard();
         final Cost abCost = sa.getPayCosts();
 
@@ -45,14 +44,14 @@ public class MillAi extends SpellAiLogic {
 
         }
 
-        if (!targetAI(ai, params, sa, false)) {
+        if (!targetAI(ai, sa, false)) {
             return false;
         }
 
         final Random r = MyRandom.getRandom();
 
         // Don't use draw abilities before main 2 if possible
-        if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !params.containsKey("ActivationPhases")) {
+        if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2) && !sa.hasParam("ActivationPhases")) {
             return false;
         }
 
@@ -74,7 +73,7 @@ public class MillAi extends SpellAiLogic {
 
         boolean randomReturn = r.nextFloat() <= Math.pow(chance, sa.getActivationsThisTurn() + 1);
 
-        if (params.get("NumCards").equals("X") && source.getSVar("X").startsWith("Count$xPaid")) {
+        if (sa.getParam("NumCards").equals("X") && source.getSVar("X").startsWith("Count$xPaid")) {
             // Set PayX here to maximum value.
             final int cardsToDiscard = 
                     Math.min(ComputerUtil.determineLeftoverMana(sa, ai), ai.getOpponent().getCardsIn(ZoneType.Library).size());
@@ -92,7 +91,7 @@ public class MillAi extends SpellAiLogic {
         return randomReturn;
     }
 
-    private boolean targetAI(final Player ai, final Map<String, String> params, final SpellAbility sa, final boolean mandatory) {
+    private boolean targetAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Target tgt = sa.getTarget();
         Player opp = ai.getOpponent();
 
@@ -106,7 +105,7 @@ public class MillAi extends SpellAiLogic {
                 return false;
             }
 
-            final int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
+            final int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
 
             final List<Card> pLibrary = opp.getCardsIn(ZoneType.Library);
 
@@ -136,19 +135,19 @@ public class MillAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(Map<String,String> params, SpellAbility sa, Player aiPlayer) {
-        return targetAI(aiPlayer, params, sa, true);
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+        return targetAI(aiPlayer, sa, true);
     }
 
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, Map<String,String> params, SpellAbility sa, boolean mandatory) {
-        if (!targetAI(aiPlayer, params, sa, mandatory)) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
+        if (!targetAI(aiPlayer, sa, mandatory)) {
             return false;
         }
 
         final Card source = sa.getSourceCard();
-        if (params.get("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")) {
+        if (sa.getParam("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             final int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa, aiPlayer), aiPlayer.getOpponent()
                     .getCardsIn(ZoneType.Library).size());

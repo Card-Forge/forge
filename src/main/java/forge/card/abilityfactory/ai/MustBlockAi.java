@@ -22,19 +22,19 @@ import forge.game.zone.ZoneType;
 public class MustBlockAi extends SpellAiLogic {
     
     @Override
-    protected boolean canPlayAI(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         // disabled for the AI until he/she can make decisions about who to make
         // block
         return false;
     }
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return false;
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getSourceCard();
         final Target abTgt = sa.getTarget();
 
@@ -44,9 +44,9 @@ public class MustBlockAi extends SpellAiLogic {
         }
 
         Card attacker = null;
-        if (params.containsKey("DefinedAttacker")) {
+        if (sa.hasParam("DefinedAttacker")) {
             final ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(),
-                    params.get("DefinedAttacker"), sa);
+                    sa.getParam("DefinedAttacker"), sa);
             if (cards.isEmpty()) {
                 return false;
             }

@@ -3,7 +3,6 @@ package forge.card.abilityfactory.ai;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import com.google.common.base.Predicate;
 
@@ -26,13 +25,13 @@ public class PumpAllAi extends PumpAiBase {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(final Player ai, Map<String, String> params, final SpellAbility sa) {
+    protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
         String valid = "";
         final Card source = sa.getSourceCard();
         
-        final int power = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumAtt"), sa); 
-        final int defense = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumDef"), sa); 
-        final List<String> keywords = params.containsKey("KW") ? Arrays.asList(params.get("KW").split(" & ")) : new ArrayList<String>();
+        final int power = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa); 
+        final int defense = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa); 
+        final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
         
         final PhaseType phase = Singletons.getModel().getGame().getPhaseHandler().getPhase();
 
@@ -40,8 +39,8 @@ public class PumpAllAi extends PumpAiBase {
             return false;
         }
 
-        if (params.containsKey("ValidCards")) {
-            valid = params.get("ValidCards");
+        if (sa.hasParam("ValidCards")) {
+            valid = sa.getParam("ValidCards");
         }
 
         final Player opp = ai.getOpponent();
@@ -49,13 +48,13 @@ public class PumpAllAi extends PumpAiBase {
         List<Card> human = CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid, source.getController(), source);
 
         final Target tgt = sa.getTarget();
-        if (tgt != null && sa.canTarget(opp) && params.containsKey("IsCurse")) {
+        if (tgt != null && sa.canTarget(opp) && sa.hasParam("IsCurse")) {
             tgt.resetTargets();
             sa.getTarget().addTarget(opp);
             comp = new ArrayList<Card>();
         }
 
-        if (params.containsKey("IsCurse")) {
+        if (sa.hasParam("IsCurse")) {
             if (defense < 0) { // try to destroy creatures
                 comp = CardLists.filter(comp, new Predicate<Card>() {
                     @Override
@@ -141,7 +140,7 @@ public class PumpAllAi extends PumpAiBase {
     } // pumpAllCanPlayAI()
 
     @Override
-    public boolean chkAIDrawback(Map<String, String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return true;
     }
     
@@ -149,7 +148,7 @@ public class PumpAllAi extends PumpAiBase {
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, Map<String, String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         return true;
     }
 

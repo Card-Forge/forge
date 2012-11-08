@@ -1,6 +1,5 @@
 package forge.card.abilityfactory.ai;
 
-import java.util.Map;
 import java.util.Random;
 
 import forge.Card;
@@ -29,13 +28,13 @@ public class LifeGainAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
         final int life = ai.getLife();
-        final String amountStr = params.get("LifeAmount");
+        final String amountStr = sa.getParam("LifeAmount");
         int lifeAmount = 0;
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
@@ -63,7 +62,7 @@ public class LifeGainAi extends SpellAiLogic {
             }
         }
         if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                && !params.containsKey("ActivationPhases")) {
+                && !sa.hasParam("ActivationPhases")) {
             return false;
         }
         boolean lifeCritical = life <= 5;
@@ -94,7 +93,7 @@ public class LifeGainAi extends SpellAiLogic {
         
         // Don't use lifegain before main 2 if possible
         if (!lifeCritical && Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
-                && !params.containsKey("ActivationPhases")) {
+                && !sa.hasParam("ActivationPhases")) {
             return false;
         }
         
@@ -133,18 +132,18 @@ public class LifeGainAi extends SpellAiLogic {
      * <p>
      * gainLifeDoTriggerAINoCost.
      * </p>
-     *
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param mandatory
      *            a boolean.
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     *
      * @return a boolean.
      */
     @Override
-    protected boolean doTriggerAINoCost(final Player ai, final Map<String, String> params,
-    final SpellAbility sa, final boolean mandatory) {
+    protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa,
+    final boolean mandatory) {
         
         // If the Target is gaining life, target self.
         // if the Target is modifying how much life is gained, this needs to be
@@ -162,7 +161,7 @@ public class LifeGainAi extends SpellAiLogic {
         }
         
         final Card source = sa.getSourceCard();
-        final String amountStr = params.get("LifeAmount");
+        final String amountStr = sa.getParam("LifeAmount");
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);

@@ -2,7 +2,6 @@ package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.base.Predicate;
@@ -25,7 +24,7 @@ import forge.view.ButtonUtil;
 
 public class CountersProliferateEffect extends SpellEffect {
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         sb.append("Proliferate.");
         sb.append(" (You choose any number of permanents and/or players with ");
@@ -35,7 +34,7 @@ public class CountersProliferateEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         Player controller = sa.getSourceCard().getController();
         if (controller.isHuman()) 
             resolveHuman(sa);

@@ -17,15 +17,15 @@ import forge.gui.GuiChoose;
 
 public class CountersRemoveEffect extends SpellEffect { 
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
-        final String counterName = params.get("CounterType");
+        final String counterName = sa.getParam("CounterType");
     
-        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
+        final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
     
         sb.append("Remove ");
-        if (params.containsKey("UpTo")) {
+        if (sa.hasParam("UpTo")) {
             sb.append("up to ");
         }
         if ("Any".matches(counterName)) {
@@ -44,7 +44,7 @@ public class CountersRemoveEffect extends SpellEffect {
         }
         sb.append(" from");
     
-        for (final Card c : getTargetCards(sa, params)) {
+        for (final Card c : getTargetCards(sa)) {
             sb.append(" ").append(c);
         }
     
@@ -54,25 +54,25 @@ public class CountersRemoveEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
 
         final Card card = sa.getSourceCard();
-        final String type = params.get("CounterType");
+        final String type = sa.getParam("CounterType");
         int counterAmount = 0;
-        if (!params.get("CounterNum").equals("All")) {
-            counterAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("CounterNum"), sa);
+        if (!sa.getParam("CounterNum").equals("All")) {
+            counterAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
         }
 
         final Target tgt = sa.getTarget();
         
         boolean rememberRemoved = false;
-        if (params.containsKey("RememberRemoved")) {
+        if (sa.hasParam("RememberRemoved")) {
             rememberRemoved = true;
         }
-        for (final Card tgtCard : getTargetCards(sa, params)) {
+        for (final Card tgtCard : getTargetCards(sa)) {
             if ((tgt == null) || tgtCard.canBeTargetedBy(sa)) {
                 final Zone zone = Singletons.getModel().getGame().getZoneOf(tgtCard);
-                if (params.get("CounterNum").equals("All")) {
+                if (sa.getParam("CounterNum").equals("All")) {
                     counterAmount = tgtCard.getCounters(Counters.valueOf(type));
                 }
 
@@ -137,7 +137,7 @@ public class CountersRemoveEffect extends SpellEffect {
                 }
                 else {
                     if (zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Exile)) {
-                        if (params.containsKey("UpTo") && sa.getActivatingPlayer().isHuman()) {
+                        if (sa.hasParam("UpTo") && sa.getActivatingPlayer().isHuman()) {
                             final ArrayList<String> choices = new ArrayList<String>();
                             for (int i = 0; i <= counterAmount; i++) {
                                 choices.add("" + i);

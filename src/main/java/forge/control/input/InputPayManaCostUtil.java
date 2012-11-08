@@ -93,7 +93,7 @@ public class InputPayManaCostUtil {
             AbilityManaPart m = ma.getManaPart();
             if (!ma.canPlay()) {
                 continue;
-            } else if (!InputPayManaCostUtil.canMake(ma, ma.getAbilityFactory().getMapParams(), cneeded.toString())) {
+            } else if (!InputPayManaCostUtil.canMake(ma, cneeded.toString())) {
                 continue;
             } else if (AbilityFactory.isInstantSpeed(ma)) {
                 continue;
@@ -156,8 +156,7 @@ public class InputPayManaCostUtil {
             for (final AbilityActivated am : abilities) {
                 AbilityManaPart m = am.getManaPart();
                 if (m.isReflectedMana()) {
-                    final List<String> reflectableColors = CardUtil.getReflectableManaColors(am,
-                            am.getAbilityFactory().getMapParams(), new ArrayList<String>(), new ArrayList<Card>());
+                    final List<String> reflectableColors = CardUtil.getReflectableManaColors(am, am, new ArrayList<String>(), new ArrayList<Card>());
                     for (final String color : reflectableColors) {
                         if (manaCost.isColor(color)) {
                             // checking if color
@@ -247,7 +246,7 @@ public class InputPayManaCostUtil {
      *            a {@link java.lang.String} object.
      * @return a boolean.
      */
-    public static boolean canMake(final AbilityActivated am, final Map<String, String> params, final String mana) {
+    public static boolean canMake(final AbilityActivated am, final String mana) {
         if (mana.contains("1")) {
             return true;
         }
@@ -259,7 +258,7 @@ public class InputPayManaCostUtil {
             return true;
         }
         if (m.isReflectedMana()) {
-            final List<String> reflectableColors = CardUtil.getReflectableManaColors(am, params, new ArrayList<String>(), new ArrayList<Card>());
+            final List<String> reflectableColors = CardUtil.getReflectableManaColors(am, am, new ArrayList<String>(), new ArrayList<Card>());
             for (final String color : reflectableColors) {
                 if (mana.contains(InputPayManaCostUtil.getShortColorString(color))) {
                     return true;

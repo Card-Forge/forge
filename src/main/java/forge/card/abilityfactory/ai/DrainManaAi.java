@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.ai;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Random;
 
 import forge.Card;
@@ -15,7 +14,7 @@ import forge.util.MyRandom;
 public class DrainManaAi extends SpellAiLogic {
     
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
 
         final Target tgt = sa.getTarget();
@@ -28,7 +27,7 @@ public class DrainManaAi extends SpellAiLogic {
             // assume we are looking to tap human's stuff
             // TODO - check for things with untap abilities, and don't tap
             // those.
-            final ArrayList<Player> defined = AbilityFactory.getDefinedPlayers(source, params.get("Defined"), sa);
+            final ArrayList<Player> defined = AbilityFactory.getDefinedPlayers(source, sa.getParam("Defined"), sa);
 
             if (!defined.contains(opp)) {
                 return false;
@@ -42,7 +41,7 @@ public class DrainManaAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Player opp = ai.getOpponent();
 
         final Target tgt = sa.getTarget();
@@ -52,7 +51,7 @@ public class DrainManaAi extends SpellAiLogic {
             if (mandatory) {
                 return true;
             } else {
-                final ArrayList<Player> defined = AbilityFactory.getDefinedPlayers(source, params.get("Defined"), sa);
+                final ArrayList<Player> defined = AbilityFactory.getDefinedPlayers(source, sa.getParam("Defined"), sa);
 
                 if (!defined.contains(opp)) {
                     return false;
@@ -69,7 +68,7 @@ public class DrainManaAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(Map<String,String> params, SpellAbility sa, Player ai) {
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         // AI cannot use this properly until he can use SAs during Humans turn
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
@@ -77,7 +76,7 @@ public class DrainManaAi extends SpellAiLogic {
         boolean randomReturn = true;
 
         if (tgt == null) {
-            final ArrayList<Player> defined = AbilityFactory.getDefinedPlayers(source, params.get("Defined"), sa);
+            final ArrayList<Player> defined = AbilityFactory.getDefinedPlayers(source, sa.getParam("Defined"), sa);
 
             if (defined.contains(ai)) {
                 return false;

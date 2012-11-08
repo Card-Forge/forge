@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.effects;
 
 import java.util.List;
-import java.util.Map;
 
 import forge.Card;
 import forge.GameEntity;
@@ -16,18 +15,18 @@ public class MustAttackEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final Card host = sa.getSourceCard();
         final StringBuilder sb = new StringBuilder();
 
     
         // end standard pre-
     
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
     
     
         String defender = null;
-        if (params.get("Defender").equals("Self")) {
+        if (sa.getParam("Defender").equals("Self")) {
             defender = host.toString();
         } else {
             // TODO - if more needs arise in the future
@@ -42,14 +41,14 @@ public class MustAttackEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+    public void resolve(SpellAbility sa) {
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
         final Target tgt = sa.getTarget();
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 GameEntity entity;
-                if (params.get("Defender").equals("Self")) {
+                if (sa.getParam("Defender").equals("Self")) {
                     entity = sa.getSourceCard();
                 } else {
                     entity = p.getOpponent();

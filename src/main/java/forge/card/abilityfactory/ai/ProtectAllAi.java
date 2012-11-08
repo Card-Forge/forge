@@ -1,6 +1,5 @@
 package forge.card.abilityfactory.ai;
 
-import java.util.Map;
 
 import forge.Card;
 import forge.card.abilityfactory.SpellAiLogic;
@@ -12,8 +11,8 @@ import forge.game.player.Player;
 public class ProtectAllAi extends SpellAiLogic {
     
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
-        final Card hostCard = sa.getAbilityFactory().getHostCard();
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+        final Card hostCard = sa.getSourceCard();
         // if there is no target and host card isn't in play, don't activate
         if ((sa.getTarget() == null) && !hostCard.isInPlay()) {
             return false;
@@ -43,7 +42,7 @@ public class ProtectAllAi extends SpellAiLogic {
 
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         return true;
     }
 
@@ -51,7 +50,7 @@ public class ProtectAllAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
     @Override
-    public boolean chkAIDrawback(Map<String, String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return true;
     } // protectAllDrawbackAI()
 }

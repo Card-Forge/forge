@@ -2,7 +2,6 @@ package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.JOptionPane;
 
@@ -20,14 +19,14 @@ import forge.gui.GuiChoose;
 public class ProtectAllEffect extends SpellEffect { 
     
     @Override
-    protected String getStackDescription(Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final List<Card> tgtCards = getTargetCards(sa, params);
+        final List<Card> tgtCards = getTargetCards(sa);
 
         if (tgtCards.size() > 0) {
             sb.append("Valid card gain protection");
-            if (!params.containsKey("Permanent")) {
+            if (!sa.hasParam("Permanent")) {
                 sb.append(" until end of turn");
             }
             sb.append(".");
@@ -37,11 +36,11 @@ public class ProtectAllEffect extends SpellEffect {
     } // protectStackDescription()
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
-        final Card host = sa.getAbilityFactory().getHostCard();
+    public void resolve(SpellAbility sa) {
+        final Card host = sa.getSourceCard();
 
-        final boolean isChoice = params.get("Gains").contains("Choice");
-        final ArrayList<String> choices = AbilityFactory.getProtectionList(params);
+        final boolean isChoice = sa.getParam("Gains").contains("Choice");
+        final ArrayList<String> choices = AbilityFactory.getProtectionList(sa);
         final ArrayList<String> gains = new ArrayList<String>();
         if (isChoice) {
             if (sa.getActivatingPlayer().isHuman()) {
@@ -57,7 +56,7 @@ public class ProtectAllEffect extends SpellEffect {
                 JOptionPane.showMessageDialog(null, "Computer chooses " + gains, "" + host, JOptionPane.PLAIN_MESSAGE);
             }
         } else {
-            if (params.get("Gains").equals("ChosenColor")) {
+            if (sa.getParam("Gains").equals("ChosenColor")) {
                 for (final String color : host.getChosenColor()) {
                     gains.add(color.toLowerCase());
                 }
@@ -68,8 +67,8 @@ public class ProtectAllEffect extends SpellEffect {
 
         // Deal with permanents
         String valid = "";
-        if (params.containsKey("ValidCards")) {
-            valid = params.get("ValidCards");
+        if (sa.hasParam("ValidCards")) {
+            valid = sa.getParam("ValidCards");
         }
         if (!valid.equals("")) {
             List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
@@ -81,7 +80,7 @@ public class ProtectAllEffect extends SpellEffect {
                         tgtC.addExtrinsicKeyword("Protection from " + gain);
                     }
 
-                    if (!params.containsKey("Permanent")) {
+                    if (!sa.hasParam("Permanent")) {
                         // If not Permanent, remove protection at EOT
                         final Command untilEOT = new Command() {
                             private static final long serialVersionUID = -6573962672873853565L;
@@ -95,7 +94,7 @@ public class ProtectAllEffect extends SpellEffect {
                                 }
                             }
                         };
-                        if (params.containsKey("UntilEndOfCombat")) {
+                        if (sa.hasParam("UntilEndOfCombat")) {
                             Singletons.getModel().getGame().getEndOfCombat().addUntil(untilEOT);
                         } else {
                             Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);
@@ -107,8 +106,8 @@ public class ProtectAllEffect extends SpellEffect {
 
         // Deal with Players
         String players = "";
-        if (params.containsKey("ValidPlayers")) {
-            players = params.get("ValidPlayers");
+        if (sa.hasParam("ValidPlayers")) {
+            players = sa.getParam("ValidPlayers");
         }
         if (!players.equals("")) {
             final ArrayList<Player> playerList = AbilityFactory.getDefinedPlayers(host, players, sa);
@@ -117,7 +116,7 @@ public class ProtectAllEffect extends SpellEffect {
                     player.addKeyword("Protection from " + gain);
                 }
 
-                if (!params.containsKey("Permanent")) {
+                if (!sa.hasParam("Permanent")) {
                     // If not Permanent, remove protection at EOT
                     final Command untilEOT = new Command() {
                         private static final long serialVersionUID = -6573962672873853565L;
@@ -129,7 +128,7 @@ public class ProtectAllEffect extends SpellEffect {
                             }
                         }
                     };
-                    if (params.containsKey("UntilEndOfCombat")) {
+                    if (sa.hasParam("UntilEndOfCombat")) {
                         Singletons.getModel().getGame().getEndOfCombat().addUntil(untilEOT);
                     } else {
                         Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);

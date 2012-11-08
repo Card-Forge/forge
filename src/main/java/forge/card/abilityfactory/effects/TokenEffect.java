@@ -19,8 +19,6 @@ package forge.card.abilityfactory.effects;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-
 import forge.Card;
 
 import forge.Singletons;
@@ -50,68 +48,68 @@ public class TokenEffect extends SpellEffect {
     private String tokenName;
     private String[] tokenKeywords;
 
-    private void readParameters(final Map<String, String> mapParams) {
+    private void readParameters(final SpellAbility mapParams) {
         String image;
         String[] keywords;
 
-        if (mapParams.containsKey("TokenKeywords")) {
+        if (mapParams.hasParam("TokenKeywords")) {
             // TODO: Change this Split to a semicolon or something else
-            keywords = mapParams.get("TokenKeywords").split("<>");
+            keywords = mapParams.getParam("TokenKeywords").split("<>");
         } else {
             keywords = new String[0];
         }
 
-        if (mapParams.containsKey("TokenImage")) {
-            image = mapParams.get("TokenImage");
+        if (mapParams.hasParam("TokenImage")) {
+            image = mapParams.getParam("TokenImage");
         } else {
             image = "";
         }
 
-        this.tokenTapped = mapParams.containsKey("TokenTapped") && mapParams.get("TokenTapped").equals("True");
-        this.tokenAttacking = mapParams.containsKey("TokenAttacking") && mapParams.get("TokenAttacking").equals("True");
+        this.tokenTapped = mapParams.hasParam("TokenTapped") && mapParams.getParam("TokenTapped").equals("True");
+        this.tokenAttacking = mapParams.hasParam("TokenAttacking") && mapParams.getParam("TokenAttacking").equals("True");
 
-        if (mapParams.containsKey("TokenAbilities")) {
-            this.tokenAbilities = mapParams.get("TokenAbilities").split(",");
+        if (mapParams.hasParam("TokenAbilities")) {
+            this.tokenAbilities = mapParams.getParam("TokenAbilities").split(",");
         } else {
             this.tokenAbilities = null;
         }
-        if (mapParams.containsKey("TokenTriggers")) {
-            this.tokenTriggers = mapParams.get("TokenTriggers").split(",");
+        if (mapParams.hasParam("TokenTriggers")) {
+            this.tokenTriggers = mapParams.getParam("TokenTriggers").split(",");
         } else {
             this.tokenTriggers = null;
         }
-        if (mapParams.containsKey("TokenSVars")) {
-            this.tokenSVars = mapParams.get("TokenSVars").split(",");
+        if (mapParams.hasParam("TokenSVars")) {
+            this.tokenSVars = mapParams.getParam("TokenSVars").split(",");
         } else {
             this.tokenSVars = null;
         }
-        if (mapParams.containsKey("TokenStaticAbilities")) {
-            this.tokenStaticAbilities = mapParams.get("TokenStaticAbilities").split(",");
+        if (mapParams.hasParam("TokenStaticAbilities")) {
+            this.tokenStaticAbilities = mapParams.getParam("TokenStaticAbilities").split(",");
         } else {
             this.tokenStaticAbilities = null;
         }
 
-        this.tokenAmount = mapParams.get("TokenAmount");
-        this.tokenPower = mapParams.get("TokenPower");
-        this.tokenToughness = mapParams.get("TokenToughness");
-        this.tokenName = mapParams.get("TokenName");
-        this.tokenTypes = mapParams.get("TokenTypes").split(",");
-        this.tokenColors = mapParams.get("TokenColors").split(",");
+        this.tokenAmount = mapParams.getParam("TokenAmount");
+        this.tokenPower = mapParams.getParam("TokenPower");
+        this.tokenToughness = mapParams.getParam("TokenToughness");
+        this.tokenName = mapParams.getParam("TokenName");
+        this.tokenTypes = mapParams.getParam("TokenTypes").split(",");
+        this.tokenColors = mapParams.getParam("TokenColors").split(",");
         this.tokenKeywords = keywords;
         this.tokenImage = image;
-        if (mapParams.containsKey("TokenOwner")) {
-            this.tokenOwner = mapParams.get("TokenOwner");
+        if (mapParams.hasParam("TokenOwner")) {
+            this.tokenOwner = mapParams.getParam("TokenOwner");
         } else {
             this.tokenOwner = "You";
         }
     }
     
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final Card host = sa.getSourceCard();
 
-        readParameters(params);
+        readParameters(sa);
 
         final int finalPower = AbilityFactory.calculateAmount(host, this.tokenPower, sa);
         final int finalToughness = AbilityFactory.calculateAmount(host, this.tokenToughness, sa);
@@ -136,9 +134,9 @@ public class TokenEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
-        readParameters(params);
+        readParameters(sa);
         
         String imageName = "";
         Player controller;
@@ -194,7 +192,7 @@ public class TokenEffect extends SpellEffect {
         }
         final String substitutedName = this.tokenName.equals("ChosenType") ? host.getChosenType() : this.tokenName;
 
-        final String remember = params.get("RememberTokens");
+        final String remember = sa.getParam("RememberTokens");
         for (int i = 0; i < finalAmount; i++) {
             final List<Card> tokens = CardFactoryUtil.makeToken(substitutedName, imageName, controller, cost,
                     substitutedTypes, finalPower, finalToughness, this.tokenKeywords);
@@ -263,7 +261,7 @@ public class TokenEffect extends SpellEffect {
                 if (remember != null) {
                     Singletons.getModel().getGame().getCardState(sa.getSourceCard()).addRemembered(c);
                 }
-                if (params.get("RememberSource") != null) {
+                if (sa.getParam("RememberSource") != null) {
                     Singletons.getModel().getGame().getCardState(c).addRemembered(host);
                 }
             }

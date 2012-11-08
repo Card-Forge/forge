@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.ai;
 
 import java.util.List;
-import java.util.Map;
 
 import forge.Card;
 import forge.CardLists;
@@ -18,7 +17,7 @@ public class ChooseCardAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Card host = sa.getSourceCard();
 
         final Target tgt = sa.getTarget();
@@ -30,27 +29,27 @@ public class ChooseCardAi extends SpellAiLogic {
                 return false;
             }
         }
-        if (params.containsKey("AILogic")) {
+        if (sa.hasParam("AILogic")) {
             ZoneType choiceZone = ZoneType.Battlefield;
-            if (params.containsKey("ChoiceZone")) {
-                choiceZone = ZoneType.smartValueOf(params.get("ChoiceZone"));
+            if (sa.hasParam("ChoiceZone")) {
+                choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
             }
             List<Card> choices = Singletons.getModel().getGame().getCardsIn(choiceZone);
-            if (params.containsKey("Choices")) {
-                choices = CardLists.getValidCards(choices, params.get("Choices"), host.getController(), host);
+            if (sa.hasParam("Choices")) {
+                choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host);
             }
-            if (params.containsKey("TargetControls")) {
+            if (sa.hasParam("TargetControls")) {
                 choices = CardLists.filterControlledBy(choices, ai.getOpponent());
             }
-            if (params.get("AILogic").equals("AtLeast1")) {
+            if (sa.getParam("AILogic").equals("AtLeast1")) {
                 if (choices.isEmpty()) {
                     return false;
                 }
-            } else if (params.get("AILogic").equals("AtLeast2") || params.get("AILogic").equals("BestBlocker")) {
+            } else if (sa.getParam("AILogic").equals("AtLeast2") || sa.getParam("AILogic").equals("BestBlocker")) {
                 if (choices.size() < 2) {
                     return false;
                 }
-            } else if (params.get("AILogic").equals("Clone")) {
+            } else if (sa.getParam("AILogic").equals("Clone")) {
                 choices = CardLists.getValidCards(choices, "Permanent.YouDontCtrl,Permanent.NonLegendary", host.getController(), host);
                 if (choices.isEmpty()) {
                     return false;
@@ -62,7 +61,7 @@ public class ChooseCardAi extends SpellAiLogic {
     }
     
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player ai) {
-        return canPlayAI(ai, params, sa);
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+        return canPlayAI(ai, sa);
     }
 }

@@ -3,7 +3,6 @@ package forge.card.abilityfactory.effects;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import forge.Card;
 import forge.Command;
@@ -22,14 +21,14 @@ public class ControlGainEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
 
         final Target tgt = sa.getTarget();
     
         ArrayList<Player> newController = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
-                params.get("NewController"), sa);
+                sa.getParam("NewController"), sa);
         if ((tgt != null) && tgt.getTargetPlayers() != null && !tgt.getTargetPlayers().isEmpty()) {
             newController = tgt.getTargetPlayers();
         }
@@ -39,7 +38,7 @@ public class ControlGainEffect extends SpellEffect {
     
         sb.append(newController).append(" gains control of ");
     
-        for (final Card c : getTargetCards(sa, params)) {
+        for (final Card c : getTargetCards(sa)) {
             sb.append(" ");
             if (c.isFaceDown()) {
                 sb.append("Morph");
@@ -77,29 +76,29 @@ public class ControlGainEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         List<Card> tgtCards = new ArrayList<Card>();
         Card source = sa.getSourceCard();
     
         
-        final boolean bUntap = params.containsKey("Untap");
-        final boolean bTapOnLose = params.containsKey("TapOnLose");
-        final boolean bNoRegen = params.containsKey("NoRegen");
-        final List<String> destroyOn = params.containsKey("DestroyTgt") ? Arrays.asList(params.get("DestroyTgt").split(",")) : null;
-        final List<String> kws = params.containsKey("AddKWs") ? Arrays.asList(params.get("AddKWs").split(" & ")) : null ;
-        final List<String> lose = params.containsKey("LoseControl") ? Arrays.asList(params.get("LoseControl").split(",")) : null;
+        final boolean bUntap = sa.hasParam("Untap");
+        final boolean bTapOnLose = sa.hasParam("TapOnLose");
+        final boolean bNoRegen = sa.hasParam("NoRegen");
+        final List<String> destroyOn = sa.hasParam("DestroyTgt") ? Arrays.asList(sa.getParam("DestroyTgt").split(",")) : null;
+        final List<String> kws = sa.hasParam("AddKWs") ? Arrays.asList(sa.getParam("AddKWs").split(" & ")) : null ;
+        final List<String> lose = sa.hasParam("LoseControl") ? Arrays.asList(sa.getParam("LoseControl").split(",")) : null;
 
         final Target tgt = sa.getTarget();
-        if (params.containsKey("AllValid")) {
+        if (sa.hasParam("AllValid")) {
             tgtCards = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
-            tgtCards = AbilityFactory.filterListByType(tgtCards, params.get("AllValid"), sa);
+            tgtCards = AbilityFactory.filterListByType(tgtCards, sa.getParam("AllValid"), sa);
         } else 
-            tgtCards = getTargetCards(sa, params);
+            tgtCards = getTargetCards(sa);
     
         ArrayList<Player> controllers = new ArrayList<Player>();
     
-        if (params.containsKey("NewController")) {
-            controllers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("NewController"), sa);
+        if (sa.hasParam("NewController")) {
+            controllers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("NewController"), sa);
         } else if ((tgt != null) && (tgt.getTargetPlayers() != null) && tgt.canTgtPlayer()) {
             controllers = tgt.getTargetPlayers();
         }
@@ -153,7 +152,7 @@ public class ControlGainEffect extends SpellEffect {
     
             // end copied
     
-            final Card hostCard = sa.getAbilityFactory().getHostCard(); 
+            final Card hostCard = sa.getSourceCard(); 
             if (lose != null) {
                 if (lose.contains("LeavesPlay")) {
                     sa.getSourceCard().addLeavesPlayCommand(this.getLoseControlCommand(tgtC, originalController, newController, bTapOnLose, hostCard, kws));

@@ -14,11 +14,11 @@ import forge.card.spellability.SpellAbility;
 public class DebuffEffect extends SpellEffect {
     
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
-        final List<String> kws = params.containsKey("Keywords") ? Arrays.asList(params.get("Keywords").split(" & ")) : new ArrayList<String>();
+    protected String getStackDescription(SpellAbility sa) {
+        final List<String> kws = sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : new ArrayList<String>();
         final StringBuilder sb = new StringBuilder();
     
-        final List<Card> tgtCards = getTargetCards(sa, params);
+        final List<Card> tgtCards = getTargetCards(sa);
 
     
         if (tgtCards.size() > 0) {
@@ -44,7 +44,7 @@ public class DebuffEffect extends SpellEffect {
              * sb.append(" "); }
              */
             sb.append(kws);
-            if (!params.containsKey("Permanent")) {
+            if (!sa.hasParam("Permanent")) {
                 sb.append(" until end of turn");
             }
             sb.append(".");
@@ -54,10 +54,10 @@ public class DebuffEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
-        final List<String> kws = params.containsKey("Keywords") ? Arrays.asList(params.get("Keywords").split(" & ")) : new ArrayList<String>();
+    public void resolve(SpellAbility sa) {
+        final List<String> kws = sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : new ArrayList<String>();
 
-        for (final Card tgtC : getTargetCards(sa, params)) {
+        for (final Card tgtC : getTargetCards(sa)) {
             final ArrayList<String> hadIntrinsic = new ArrayList<String>();
             if (tgtC.isInPlay() && tgtC.canBeTargetedBy(sa)) {
                 for (final String kw : kws) {
@@ -68,7 +68,7 @@ public class DebuffEffect extends SpellEffect {
                     tgtC.removeAllExtrinsicKeyword(kw);
                 }
             }
-            if (!params.containsKey("Permanent")) {
+            if (!sa.hasParam("Permanent")) {
                 Singletons.getModel().getGame().getEndOfTurn().addUntil(new Command() {
                     private static final long serialVersionUID = 5387486776282932314L;
 

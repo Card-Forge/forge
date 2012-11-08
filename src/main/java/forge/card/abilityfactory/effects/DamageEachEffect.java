@@ -2,7 +2,6 @@ package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import forge.Card;
 import forge.CardLists;
@@ -20,32 +19,32 @@ public class DamageEachEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        final String damage = params.get("NumDmg");
+        final String damage = sa.getParam("NumDmg");
         final int iDmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa); 
         
-        String desc = params.get("ValidCards");
-        if (params.containsKey("ValidDescription")) {
-            desc = params.get("ValidDescription");
+        String desc = sa.getParam("ValidCards");
+        if (sa.hasParam("ValidDescription")) {
+            desc = sa.getParam("ValidDescription");
         }
     
         String dmg = "";
-        if (params.containsKey("DamageDesc")) {
-            dmg = params.get("DamageDesc");
+        if (sa.hasParam("DamageDesc")) {
+            dmg = sa.getParam("DamageDesc");
         } else {
             dmg += iDmg + " damage";
         }
     
-        if (params.containsKey("StackDescription")) {
-            sb.append(params.get("StackDescription"));
+        if (sa.hasParam("StackDescription")) {
+            sb.append(sa.getParam("StackDescription"));
         } else {
             sb.append("Each ").append(desc).append(" deals ").append(dmg).append(" to ");
-            for (final Player p : getTargetPlayers(sa, params)) {
+            for (final Player p : getTargetPlayers(sa)) {
                 sb.append(p);
             }
-            if (params.containsKey("DefinedCards")) {
-                if (params.get("DefinedCards").equals("Self")) {
+            if (sa.hasParam("DefinedCards")) {
+                if (sa.getParam("DefinedCards").equals("Self")) {
                     sb.append(" itself");
                 }
             }
@@ -59,17 +58,17 @@ public class DamageEachEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void resolve(Map<String, String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Card card = sa.getSourceCard();
 
         List<Card> sources = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
-        if (params.containsKey("ValidCards")) {
-            sources = CardLists.getValidCards(sources, params.get("ValidCards"), card.getController(), card);
+        if (sa.hasParam("ValidCards")) {
+            sources = CardLists.getValidCards(sources, sa.getParam("ValidCards"), card.getController(), card);
         }
 
         ArrayList<Object> tgts = new ArrayList<Object>();
         if (sa.getTarget() == null) {
-            tgts = AbilityFactory.getDefinedObjects(sa.getSourceCard(), params.get("DefinedPlayers"), sa);
+            tgts = AbilityFactory.getDefinedObjects(sa.getSourceCard(), sa.getParam("DefinedPlayers"), sa);
         } else {
             tgts = sa.getTarget().getTargets();
         }
@@ -95,15 +94,15 @@ public class DamageEachEffect extends SpellEffect {
             }
         }
 
-        if (params.containsKey("DefinedCards")) {
-            if (params.get("DefinedCards").equals("Self")) {
+        if (sa.hasParam("DefinedCards")) {
+            if (sa.getParam("DefinedCards").equals("Self")) {
                 for (final Card source : sources) {
                     final int dmg = CardFactoryUtil.xCount(source, card.getSVar("X"));
                     // System.out.println(source+" deals "+dmg+" damage to "+source);
                     source.addDamage(dmg, source);
                 }
             }
-            if (params.get("DefinedCards").equals("Remembered")) {
+            if (sa.getParam("DefinedCards").equals("Remembered")) {
                 for (final Card source : sources) {
                     final int dmg = CardFactoryUtil.xCount(source, card.getSVar("X"));
                     Card rememberedcard;

@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.effects;
 
 import java.util.List;
-import java.util.Map;
 
 import forge.Card;
 import forge.card.abilityfactory.AbilityFactory;
@@ -14,31 +13,31 @@ import forge.game.zone.ZoneType;
 public class MillEffect extends SpellEffect {
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Card source = sa.getSourceCard();
-        final int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
-        final boolean bottom = params.containsKey("FromBottom");
+        final int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
+        final boolean bottom = sa.hasParam("FromBottom");
 
-        if (params.containsKey("ForgetOtherRemembered")) {
+        if (sa.hasParam("ForgetOtherRemembered")) {
             source.clearRemembered();
         }
 
         final Target tgt = sa.getTarget();
 
-        ZoneType destination = ZoneType.smartValueOf(params.get("Destination"));
+        ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         if (destination == null) {
             destination = ZoneType.Graveyard;
         }
 
-        for (final Player p : getTargetPlayers(sa, params)) {
+        for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 final List<Card> milled = p.mill(numCards, destination, bottom);
-                if (params.containsKey("RememberMilled")) {
+                if (sa.hasParam("RememberMilled")) {
                     for (final Card c : milled) {
                         source.addRemembered(c);
                     }
                 }
-                if (params.containsKey("Imprint")) {
+                if (sa.hasParam("Imprint")) {
                     for (final Card c : milled) {
                         source.addImprinted(c);
                     }
@@ -48,12 +47,12 @@ public class MillEffect extends SpellEffect {
     }
 
     @Override
-    protected String getStackDescription(Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        final int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
+        final int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
     
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
-        final String conditionDesc = params.get("ConditionDescription");
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
+        final String conditionDesc = sa.getParam("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
@@ -63,7 +62,7 @@ public class MillEffect extends SpellEffect {
             sb.append(p.toString()).append(" ");
         }
 
-        final ZoneType dest = ZoneType.smartValueOf(params.get("Destination"));
+        final ZoneType dest = ZoneType.smartValueOf(sa.getParam("Destination"));
         if ((dest == null) || dest.equals(ZoneType.Graveyard)) {
             sb.append("mills ");
         } else if (dest.equals(ZoneType.Exile)) {
@@ -76,7 +75,7 @@ public class MillEffect extends SpellEffect {
         if (numCards != 1) {
             sb.append("s");
         }
-        final String millPosition = params.containsKey("FromBottom") ? "bottom" : "top";
+        final String millPosition = sa.hasParam("FromBottom") ? "bottom" : "top";
         sb.append(" from the " + millPosition + " of his or her library.");
 
 

@@ -29,11 +29,11 @@ import forge.card.spellability.Target;
 public class CommonDrawback extends AbilitySub {
         private final SpellEffect effect;
         private final SpellAiLogic ai;
-        private final Map<String, String> params;
         private static final long serialVersionUID = 6631124959690157874L;
         
-        public CommonDrawback(final Card ca, final Target t, Map<String, String> params0, SpellEffect effect0, SpellAiLogic ai0) {
+        public CommonDrawback(ApiType api0, final Card ca, final Target t, Map<String, String> params0, SpellEffect effect0, SpellAiLogic ai0) {
             super(ca, t);
+            api = api0;
             params = params0;
             ai = ai0;
             effect = effect0;
@@ -44,7 +44,7 @@ public class CommonDrawback extends AbilitySub {
         @Override
         public AbilitySub getCopy() {
             Target t = getTarget() == null ? null : new Target(getTarget()); 
-            AbilitySub res = new CommonDrawback(getSourceCard(),t, params, effect, ai);
+            AbilitySub res = new CommonDrawback(api, getSourceCard(),t, params, effect, ai);
             CardFactoryUtil.copySpellAbility(this, res);
             return res;
         }
@@ -58,17 +58,17 @@ public class CommonDrawback extends AbilitySub {
     
         @Override
         public boolean canPlayAI() {
-            return ai.canPlayAIWithSubs(getActivatingPlayer(), params, this);
+            return ai.canPlayAIWithSubs(getActivatingPlayer(), this);
         }
     
         @Override
         public void resolve() {
-            effect.resolve(params, this);
+            effect.resolve(this);
         }
     
         @Override
         public boolean chkAIDrawback() {
-            if (!ai.chkAIDrawback(params, this, getActivatingPlayer())) {
+            if (!ai.chkAIDrawback(this, getActivatingPlayer())) {
                 return false;
             }
             final AbilitySub subAb = getSubAbility();
@@ -80,7 +80,7 @@ public class CommonDrawback extends AbilitySub {
     
         @Override
         public boolean doTrigger(final boolean mandatory) {
-            return ai.doTriggerAI(getActivatingPlayer(), params, this, mandatory);
+            return ai.doTriggerAI(getActivatingPlayer(), this, mandatory);
         }
     }
 

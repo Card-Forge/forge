@@ -17,9 +17,9 @@ import forge.util.MyRandom;
 public class CounterAi extends SpellAiLogic {
     
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         boolean toReturn = true;
-        final Cost abCost = sa.getAbilityFactory().getAbCost();
+        final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
         if (Singletons.getModel().getGame().getStack().size() < 1) {
             return false;
@@ -42,8 +42,8 @@ public class CounterAi extends SpellAiLogic {
             if (!CardFactoryUtil.isCounterableBy(topSA.getSourceCard(), sa) || topSA.getActivatingPlayer().isComputer()) {
                 return false;
             }
-            if (params.containsKey("AITgts") && (topSA.getSourceCard() == null
-                    || !topSA.getSourceCard().isValid(params.get("AITgts"), sa.getActivatingPlayer(), source))) {
+            if (sa.hasParam("AITgts") && (topSA.getSourceCard() == null
+                    || !topSA.getSourceCard().isValid(sa.getParam("AITgts"), sa.getActivatingPlayer(), source))) {
                 return false;
             }
 
@@ -57,7 +57,7 @@ public class CounterAi extends SpellAiLogic {
             return false;
         }
         
-        String unlessCost = params.containsKey("UnlessCost") ? params.get("UnlessCost").trim() : null;
+        String unlessCost = sa.hasParam("UnlessCost") ? sa.getParam("UnlessCost").trim() : null;
 
         if (unlessCost != null && !unlessCost.endsWith(">")) {
             // Is this Usable Mana Sources? Or Total Available Mana?
@@ -100,12 +100,12 @@ public class CounterAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
-        return doTriggerAINoCost(aiPlayer, params, sa, true);
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+        return doTriggerAINoCost(aiPlayer, sa, true);
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         boolean toReturn = true;
 
         final Target tgt = sa.getTarget();
@@ -122,7 +122,7 @@ public class CounterAi extends SpellAiLogic {
                 return false;
             }
 
-            String unlessCost = params.containsKey("UnlessCost") ? params.get("UnlessCost").trim() : null;
+            String unlessCost = sa.hasParam("UnlessCost") ? sa.getParam("UnlessCost").trim() : null;
             
             final Card source = sa.getSourceCard();
             if (unlessCost != null) {

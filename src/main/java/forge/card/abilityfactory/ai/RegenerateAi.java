@@ -56,10 +56,10 @@ public class RegenerateAi extends SpellAiLogic {
     // **************************************************************
 
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
-        final Card hostCard = sa.getAbilityFactory().getHostCard();
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+        final Card hostCard = sa.getSourceCard();
         boolean chance = false;
-        final Cost abCost = sa.getAbilityFactory().getAbCost();
+        final Cost abCost = sa.getPayCosts();
         if (abCost != null) {
             // AI currently disabled for these costs
             if (!CostUtil.checkLifeCost(ai, abCost, hostCard, 4, null)) {
@@ -79,10 +79,10 @@ public class RegenerateAi extends SpellAiLogic {
         if (tgt == null) {
             // As far as I can tell these Defined Cards will only have one of
             // them
-            final ArrayList<Card> list = AbilityFactory.getDefinedCards(hostCard, params.get("Defined"), sa);
+            final ArrayList<Card> list = AbilityFactory.getDefinedCards(hostCard, sa.getParam("Defined"), sa);
 
             if (Singletons.getModel().getGame().getStack().size() > 0) {
-                final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(),sa.getAbilityFactory());
+                final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(),sa);
 
                 for (final Card c : list) {
                     if (objects.contains(c)) {
@@ -118,7 +118,7 @@ public class RegenerateAi extends SpellAiLogic {
             if (Singletons.getModel().getGame().getStack().size() > 0) {
                 // check stack for something on the stack will kill anything i
                 // control
-                final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(), sa.getAbilityFactory());
+                final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
 
                 final List<Card> threatenedTargets = new ArrayList<Card>();
 
@@ -153,7 +153,7 @@ public class RegenerateAi extends SpellAiLogic {
     } // regenerateCanPlayAI
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         boolean chance = false;
 
         final Target tgt = sa.getTarget();
@@ -168,12 +168,12 @@ public class RegenerateAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return true;
     }
 
     private static boolean regenMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
-        final Card hostCard = sa.getAbilityFactory().getHostCard();
+        final Card hostCard = sa.getSourceCard();
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
         // filter AIs battlefield by what I can target

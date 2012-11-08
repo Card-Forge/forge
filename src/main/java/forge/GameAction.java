@@ -1957,8 +1957,7 @@ public class GameAction {
     public final void playSpellAbility(SpellAbility sa) {
         sa.setActivatingPlayer(Singletons.getControl().getPlayer());
 
-         AbilityFactory af = sa.getAbilityFactory();
-        if (af != null && af.getAPI() == ApiType.Charm && !sa.isWrapper()) {
+        if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
             CharmEffect.makeChoices(sa);
         }
 

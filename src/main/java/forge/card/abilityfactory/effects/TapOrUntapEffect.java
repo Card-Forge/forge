@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.effects;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -17,22 +16,22 @@ public class TapOrUntapEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         // when getStackDesc is called, just build exactly what is happening
         final StringBuilder sb = new StringBuilder();
 
     
         sb.append("Tap or untap ");
     
-        final List<Card> tgtCards = getTargetCards(sa, params);
+        final List<Card> tgtCards = getTargetCards(sa);
         sb.append(StringUtils.join(tgtCards, ", "));
         sb.append(".");
         return sb.toString();
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
-        final List<Card> tgtCards = getTargetCards(sa, params);
+    public void resolve(SpellAbility sa) {
+        final List<Card> tgtCards = getTargetCards(sa);
 
         final Target tgt = sa.getTarget();
 

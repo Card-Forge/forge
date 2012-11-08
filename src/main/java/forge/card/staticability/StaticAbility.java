@@ -40,7 +40,7 @@ public class StaticAbility {
 
     private Card hostCard = null;
 
-    private HashMap<String, String> mapParams = new HashMap<String, String>();
+    private HashMap<String, String> params = new HashMap<String, String>();
 
     private int layer = 0;
 
@@ -69,7 +69,7 @@ public class StaticAbility {
      * @return a {@link java.util.HashMap} object.
      */
     public final HashMap<String, String> getMapParams() {
-        return this.mapParams;
+        return this.params;
     }
 
     // *******************************************************
@@ -132,37 +132,37 @@ public class StaticAbility {
      */
     public final int generateLayer() {
 
-        if (!this.mapParams.get("Mode").equals("Continuous")) {
+        if (!this.params.get("Mode").equals("Continuous")) {
             return 0;
         }
 
-        if (this.mapParams.containsKey("AddType") || this.mapParams.containsKey("RemoveType")
-                || this.mapParams.containsKey("RemoveCardType") || this.mapParams.containsKey("RemoveSubType")
-                || this.mapParams.containsKey("RemoveSuperType")) {
+        if (this.params.containsKey("AddType") || this.params.containsKey("RemoveType")
+                || this.params.containsKey("RemoveCardType") || this.params.containsKey("RemoveSubType")
+                || this.params.containsKey("RemoveSuperType")) {
             return 4;
         }
 
-        if (this.mapParams.containsKey("AddColor") || this.mapParams.containsKey("RemoveColor")
-                || this.mapParams.containsKey("SetColor")) {
+        if (this.params.containsKey("AddColor") || this.params.containsKey("RemoveColor")
+                || this.params.containsKey("SetColor")) {
             return 5;
         }
 
-        if (this.mapParams.containsKey("RemoveAllAbilities") || this.mapParams.containsKey("GainsAbilitiesOf")) {
+        if (this.params.containsKey("RemoveAllAbilities") || this.params.containsKey("GainsAbilitiesOf")) {
             return 6; // Layer 6
         }
 
-        if (this.mapParams.containsKey("AddKeyword") || this.mapParams.containsKey("AddAbility")
-                || this.mapParams.containsKey("AddTrigger") || this.mapParams.containsKey("RemoveTriggers")
-                || this.mapParams.containsKey("RemoveKeyword")) {
+        if (this.params.containsKey("AddKeyword") || this.params.containsKey("AddAbility")
+                || this.params.containsKey("AddTrigger") || this.params.containsKey("RemoveTriggers")
+                || this.params.containsKey("RemoveKeyword")) {
             return 7; // Layer 6 (dependent)
         }
 
-        if (this.mapParams.containsKey("CharacteristicDefining")) {
+        if (this.params.containsKey("CharacteristicDefining")) {
             return 8; // Layer 7a
         }
 
-        if (this.mapParams.containsKey("AddPower") || this.mapParams.containsKey("AddToughness")
-                || this.mapParams.containsKey("SetPower") || this.mapParams.containsKey("SetToughness")) {
+        if (this.params.containsKey("AddPower") || this.params.containsKey("AddToughness")
+                || this.params.containsKey("SetPower") || this.params.containsKey("SetToughness")) {
             return 9; // This is the collection of 7b and 7c
         }
 
@@ -178,8 +178,8 @@ public class StaticAbility {
      */
     @Override
     public final String toString() {
-        if (this.mapParams.containsKey("Description") && !this.isSuppressed()) {
-            return this.mapParams.get("Description").replace("CARDNAME", this.hostCard.getName());
+        if (this.params.containsKey("Description") && !this.isSuppressed()) {
+            return this.params.get("Description").replace("CARDNAME", this.hostCard.getName());
         } else {
             return "";
         }
@@ -195,7 +195,7 @@ public class StaticAbility {
      *            the host
      */
     public StaticAbility(final String params, final Card host) {
-        this.mapParams = this.getMapParams(params, host);
+        this.params = this.getMapParams(params, host);
         this.hostCard = host;
         this.layer = this.generateLayer();
     }
@@ -209,9 +209,9 @@ public class StaticAbility {
      *            the host
      */
     public StaticAbility(final HashMap<String, String> params, final Card host) {
-        this.mapParams = new HashMap<String, String>();
+        this.params = new HashMap<String, String>();
         for (final Map.Entry<String, String> entry : params.entrySet()) {
-            this.mapParams.put(entry.getKey(), entry.getValue());
+            this.params.put(entry.getKey(), entry.getValue());
         }
         this.layer = this.generateLayer();
         this.hostCard = host;
@@ -227,7 +227,7 @@ public class StaticAbility {
     public final void applyAbility(final String mode) {
 
         // don't apply the ability if it hasn't got the right mode
-        if (!this.mapParams.get("Mode").equals(mode)) {
+        if (!this.params.get("Mode").equals(mode)) {
             return;
         }
 
@@ -260,7 +260,7 @@ public class StaticAbility {
             final boolean b) {
 
         // don't apply the ability if it hasn't got the right mode
-        if (!this.mapParams.get("Mode").equals(mode)) {
+        if (!this.params.get("Mode").equals(mode)) {
             return in;
         }
 
@@ -290,7 +290,7 @@ public class StaticAbility {
     public final boolean applyAbility(final String mode, final Card card, final Player activator) {
 
         // don't apply the ability if it hasn't got the right mode
-        if (!this.mapParams.get("Mode").equals(mode)) {
+        if (!this.params.get("Mode").equals(mode)) {
             return false;
         }
 
@@ -323,7 +323,7 @@ public class StaticAbility {
     public final boolean applyAbility(final String mode, final Card card, final SpellAbility spellAbility) {
 
         // don't apply the ability if it hasn't got the right mode
-        if (!this.mapParams.get("Mode").equals(mode)) {
+        if (!this.params.get("Mode").equals(mode)) {
             return false;
         }
 
@@ -356,7 +356,7 @@ public class StaticAbility {
     public final ManaCost applyAbility(final String mode, final SpellAbility sa, final ManaCost originalCost) {
 
         // don't apply the ability if it hasn't got the right mode
-        if (!this.mapParams.get("Mode").equals(mode)) {
+        if (!this.params.get("Mode").equals(mode)) {
             return originalCost;
         }
 
@@ -389,7 +389,7 @@ public class StaticAbility {
     public final boolean applyAbility(final String mode, final Card card) {
 
         // don't apply the ability if it hasn't got the right mode
-        if (!this.mapParams.get("Mode").equals(mode)) {
+        if (!this.params.get("Mode").equals(mode)) {
             return false;
         }
 
@@ -422,7 +422,7 @@ public class StaticAbility {
     public final boolean applyAbility(final String mode, final Card card, final GameEntity target) {
 
         // don't apply the ability if it hasn't got the right mode
-        if (!this.mapParams.get("Mode").equals(mode)) {
+        if (!this.params.get("Mode").equals(mode)) {
             return false;
         }
 
@@ -451,7 +451,7 @@ public class StaticAbility {
     public final Cost getCostAbility(final String mode, final Card card, final GameEntity target) {
 
         // don't apply the ability if it hasn't got the right mode
-        if (!this.mapParams.get("Mode").equals(mode)) {
+        if (!this.params.get("Mode").equals(mode)) {
             return null;
         }
 
@@ -482,9 +482,9 @@ public class StaticAbility {
             return false;
         }
 
-        if (this.mapParams.containsKey("EffectZone")) {
-            if (!this.mapParams.get("EffectZone").equals("All")
-                    && !ZoneType.listValueOf(this.mapParams.get("EffectZone"))
+        if (this.params.containsKey("EffectZone")) {
+            if (!this.params.get("EffectZone").equals("All")
+                    && !ZoneType.listValueOf(this.params.get("EffectZone"))
                         .contains(Singletons.getModel().getGame().getZoneOf(this.hostCard).getZoneType())) {
                 return false;
             }
@@ -494,48 +494,48 @@ public class StaticAbility {
             }
         }
 
-        if (this.mapParams.containsKey("FatefulHour") && controller.getLife() > 5) {
+        if (this.params.containsKey("FatefulHour") && controller.getLife() > 5) {
             return false;
         }
 
-        if (this.mapParams.containsKey("Threshold") && !controller.hasThreshold()) {
+        if (this.params.containsKey("Threshold") && !controller.hasThreshold()) {
             return false;
         }
 
-        if (this.mapParams.containsKey("Hellbent") && !controller.hasHellbent()) {
+        if (this.params.containsKey("Hellbent") && !controller.hasHellbent()) {
             return false;
         }
 
-        if (this.mapParams.containsKey("Metalcraft") && !controller.hasMetalcraft()) {
+        if (this.params.containsKey("Metalcraft") && !controller.hasMetalcraft()) {
             return false;
         }
 
-        if (this.mapParams.containsKey("PlayerTurn") && !Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(controller)) {
+        if (this.params.containsKey("PlayerTurn") && !Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(controller)) {
             return false;
         }
 
-        if (this.mapParams.containsKey("OpponentTurn") && !Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(controller.getOpponent())) {
+        if (this.params.containsKey("OpponentTurn") && !Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(controller.getOpponent())) {
             return false;
         }
 
-        if (this.mapParams.containsKey("OpponentAttackedWithCreatureThisTurn")
+        if (this.params.containsKey("OpponentAttackedWithCreatureThisTurn")
                 && !controller.getOpponent().getAttackedWithCreatureThisTurn()) {
             return false;
         }
 
-        if (this.mapParams.containsKey("Phases")) {
-            List<PhaseType> phases = PhaseType.parseRange(this.mapParams.get("Phases"));
+        if (this.params.containsKey("Phases")) {
+            List<PhaseType> phases = PhaseType.parseRange(this.params.get("Phases"));
             if (!phases.contains(Singletons.getModel().getGame().getPhaseHandler().getPhase())) {
                 return false;
             }
         }
 
-        if (this.mapParams.containsKey("TopCardOfLibraryIs")) {
+        if (this.params.containsKey("TopCardOfLibraryIs")) {
             if (controller.getCardsIn(ZoneType.Library).isEmpty()) {
                 return false;
             }
             final Card topCard = controller.getCardsIn(ZoneType.Library).get(0);
-            if (!topCard.isValid(this.mapParams.get("TopCardOfLibraryIs").split(","), controller, this.hostCard)) {
+            if (!topCard.isValid(this.params.get("TopCardOfLibraryIs").split(","), controller, this.hostCard)) {
                 return false;
             }
         }
@@ -551,11 +551,11 @@ public class StaticAbility {
          * }
          */
 
-        if (this.mapParams.containsKey("CheckSVar")) {
-            final int sVar = AbilityFactory.calculateAmount(this.hostCard, this.mapParams.get("CheckSVar"), null);
+        if (this.params.containsKey("CheckSVar")) {
+            final int sVar = AbilityFactory.calculateAmount(this.hostCard, this.params.get("CheckSVar"), null);
             String comparator = "GE1";
-            if (this.mapParams.containsKey("SVarCompare")) {
-                comparator = this.mapParams.get("SVarCompare");
+            if (this.params.containsKey("SVarCompare")) {
+                comparator = this.params.get("SVarCompare");
             }
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
@@ -565,11 +565,11 @@ public class StaticAbility {
             }
         }
 
-        if (this.mapParams.containsKey("CheckSecondSVar")) {
-            final int sVar = AbilityFactory.calculateAmount(this.hostCard, this.mapParams.get("CheckSecondSVar"), null);
+        if (this.params.containsKey("CheckSecondSVar")) {
+            final int sVar = AbilityFactory.calculateAmount(this.hostCard, this.params.get("CheckSecondSVar"), null);
             String comparator = "GE1";
-            if (this.mapParams.containsKey("SecondSVarCompare")) {
-                comparator = this.mapParams.get("SecondSVarCompare");
+            if (this.params.containsKey("SecondSVarCompare")) {
+                comparator = this.params.get("SecondSVarCompare");
             }
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
@@ -579,11 +579,11 @@ public class StaticAbility {
             }
         }
 
-        if (this.mapParams.containsKey("CheckThirdSVar")) {
-            final int sVar = AbilityFactory.calculateAmount(this.hostCard, this.mapParams.get("CheckThirdSVar"), null);
+        if (this.params.containsKey("CheckThirdSVar")) {
+            final int sVar = AbilityFactory.calculateAmount(this.hostCard, this.params.get("CheckThirdSVar"), null);
             String comparator = "GE1";
-            if (this.mapParams.containsKey("ThirdSVarCompare")) {
-                comparator = this.mapParams.get("ThirdSVarCompare");
+            if (this.params.containsKey("ThirdSVarCompare")) {
+                comparator = this.params.get("ThirdSVarCompare");
             }
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);
@@ -593,11 +593,11 @@ public class StaticAbility {
             }
         }
 
-        if (this.mapParams.containsKey("CheckFourthSVar")) {
-            final int sVar = AbilityFactory.calculateAmount(this.hostCard, this.mapParams.get("CheckFourthSVar"), null);
+        if (this.params.containsKey("CheckFourthSVar")) {
+            final int sVar = AbilityFactory.calculateAmount(this.hostCard, this.params.get("CheckFourthSVar"), null);
             String comparator = "GE1";
-            if (this.mapParams.containsKey("FourthSVarCompare")) {
-                comparator = this.mapParams.get("FourthSVarCompare");
+            if (this.params.containsKey("FourthSVarCompare")) {
+                comparator = this.params.get("FourthSVarCompare");
             }
             final String svarOperator = comparator.substring(0, 2);
             final String svarOperand = comparator.substring(2);

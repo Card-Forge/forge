@@ -2,7 +2,6 @@ package forge.card.abilityfactory.ai;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import forge.Card;
@@ -27,7 +26,7 @@ public class UntapAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
         final Cost cost = sa.getPayCosts();
@@ -40,7 +39,7 @@ public class UntapAi extends SpellAiLogic {
         boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn() + 1);
 
         if (tgt == null) {
-            final ArrayList<Card> pDefined = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"),
+            final ArrayList<Card> pDefined = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"),
                     sa);
             if ((pDefined != null) && pDefined.get(0).isUntapped() && pDefined.get(0).getController().isComputer()) {
                 return false;
@@ -55,7 +54,7 @@ public class UntapAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Target tgt = sa.getTarget();
 
         if (tgt == null) {
@@ -64,7 +63,7 @@ public class UntapAi extends SpellAiLogic {
             }
 
             // TODO: use Defined to determine, if this is an unfavorable result
-            final ArrayList<Card> pDefined = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"),
+            final ArrayList<Card> pDefined = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"),
                     sa);
             if ((pDefined != null) && pDefined.get(0).isUntapped() && pDefined.get(0).getController().isComputer()) {
                 return false;
@@ -84,7 +83,7 @@ public class UntapAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player ai) {
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         final Target tgt = sa.getTarget();
 
         boolean randomReturn = true;
@@ -120,7 +119,7 @@ public class UntapAi extends SpellAiLogic {
 
         Player targetController = ai;
 
-        if (sa.getAbilityFactory().isCurse()) {
+        if (sa.isCurse()) {
             targetController = ai.getOpponent();
         }
 

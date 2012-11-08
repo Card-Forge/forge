@@ -11,18 +11,18 @@ import forge.game.player.Player;
 public class ScryEffect extends SpellEffect {
     
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         for (final Player p : tgtPlayers) {
             sb.append(p.toString()).append(" ");
         }
 
         int num = 1;
-        if (params.containsKey("ScryNum")) {
-            num = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("ScryNum"), sa);
+        if (sa.hasParam("ScryNum")) {
+            num = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("ScryNum"), sa);
         }
 
         sb.append("scrys (").append(num).append(").");
@@ -30,15 +30,15 @@ public class ScryEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
     
         int num = 1;
-        if (params.containsKey("ScryNum")) {
-            num = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("ScryNum"), sa);
+        if (sa.hasParam("ScryNum")) {
+            num = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("ScryNum"), sa);
         }
     
         final Target tgt = sa.getTarget();
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
     
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {

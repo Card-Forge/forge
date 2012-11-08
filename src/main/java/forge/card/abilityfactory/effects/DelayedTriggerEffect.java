@@ -1,5 +1,8 @@
 package forge.card.abilityfactory.effects;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import forge.Singletons;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
@@ -12,9 +15,9 @@ public class DelayedTriggerEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected String getStackDescription(java.util.Map<String,String> mapParams, SpellAbility sa) {
-        if (mapParams.containsKey("TriggerDescription")) {
-            return mapParams.get("TriggerDescription");
+    protected String getStackDescription(SpellAbility sa) {
+        if (sa.hasParam("TriggerDescription")) {
+            return sa.getParam("TriggerDescription");
         }
 
         return "";
@@ -22,8 +25,10 @@ public class DelayedTriggerEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> mapParams, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
 
+        Map<String, String> mapParams = new HashMap<String, String>(); 
+        sa.copyParamsToMap(mapParams);
         if (mapParams.containsKey("Cost")) {
             mapParams.remove("Cost");
         }

@@ -18,9 +18,6 @@
 package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
-import java.util.Map;
-
-
 import forge.Card;
 
 import forge.card.abilityfactory.SpellEffect;
@@ -51,7 +48,7 @@ public abstract class AnimateEffectBase extends SpellEffect {
      *            a {@link java.util.ArrayList} object.
      * @return a long.
      */
-    long doAnimate(final Card c, final Map<String, String> params, final int power, final int toughness,
+    long doAnimate(final Card c, final SpellAbility sa, final int power, final int toughness,
             final ArrayList<String> types, final ArrayList<String> removeTypes, final String colors,
             final ArrayList<String> keywords, final ArrayList<String> removeKeywords,
             final ArrayList<String> hiddenKeywords, final long timestamp) {
@@ -61,34 +58,34 @@ public abstract class AnimateEffectBase extends SpellEffect {
         boolean removeSubTypes = false;
         boolean removeCreatureTypes = false;
 
-        if (params.containsKey("OverwriteTypes")) {
+        if (sa.hasParam("OverwriteTypes")) {
             removeSuperTypes = true;
             removeCardTypes = true;
             removeSubTypes = true;
             removeCreatureTypes = true;
         }
 
-        if (params.containsKey("KeepSupertypes")) {
+        if (sa.hasParam("KeepSupertypes")) {
             removeSuperTypes = false;
         }
 
-        if (params.containsKey("KeepCardTypes")) {
+        if (sa.hasParam("KeepCardTypes")) {
             removeCardTypes = false;
         }
 
-        if (params.containsKey("RemoveSuperTypes")) {
+        if (sa.hasParam("RemoveSuperTypes")) {
             removeSuperTypes = true;
         }
 
-        if (params.containsKey("RemoveCardTypes")) {
+        if (sa.hasParam("RemoveCardTypes")) {
             removeCardTypes = true;
         }
 
-        if (params.containsKey("RemoveSubTypes")) {
+        if (sa.hasParam("RemoveSubTypes")) {
             removeSubTypes = true;
         }
 
-        if (params.containsKey("RemoveCreatureTypes")) {
+        if (sa.hasParam("RemoveCreatureTypes")) {
             removeCreatureTypes = true;
         }
 
@@ -101,13 +98,13 @@ public abstract class AnimateEffectBase extends SpellEffect {
                     removeCreatureTypes, timestamp);
         }
 
-        c.addChangedCardKeywords(keywords, removeKeywords, params.containsKey("RemoveAllAbilities"), timestamp);
+        c.addChangedCardKeywords(keywords, removeKeywords, sa.hasParam("RemoveAllAbilities"), timestamp);
 
         for (final String k : hiddenKeywords) {
             c.addExtrinsicKeyword(k);
         }
 
-        final long colorTimestamp = c.addColor(colors, c, !params.containsKey("OverwriteColors"), true);
+        final long colorTimestamp = c.addColor(colors, c, !sa.hasParam("OverwriteColors"), true);
         return colorTimestamp;
     }
 
@@ -135,7 +132,7 @@ public abstract class AnimateEffectBase extends SpellEffect {
      * @param timestamp
      *            a long.
      */
-    void doUnanimate(final Card c, final Map<String, String> params, final String colorDesc,
+    void doUnanimate(final Card c, SpellAbility sa, final String colorDesc,
             final ArrayList<String> addedKeywords, final ArrayList<SpellAbility> addedAbilities,
             final ArrayList<Trigger> addedTriggers, final long colorTimestamp, final boolean givesStAbs,
             final ArrayList<SpellAbility> removedAbilities, final long timestamp) {
@@ -149,23 +146,23 @@ public abstract class AnimateEffectBase extends SpellEffect {
             c.setStaticAbilities(new ArrayList<StaticAbility>());
         }
 
-        if (params.containsKey("Types") || params.containsKey("RemoveTypes")
-                || params.containsKey("RemoveCreatureTypes")) {
+        if (sa.hasParam("Types") || sa.hasParam("RemoveTypes")
+                || sa.hasParam("RemoveCreatureTypes")) {
             c.removeChangedCardTypes(timestamp);
         }
 
-        c.removeColor(colorDesc, c, !params.containsKey("OverwriteColors"), colorTimestamp);
+        c.removeColor(colorDesc, c, !sa.hasParam("OverwriteColors"), colorTimestamp);
 
         for (final String k : addedKeywords) {
             c.removeExtrinsicKeyword(k);
         }
 
-        for (final SpellAbility sa : addedAbilities) {
-            c.removeSpellAbility(sa);
+        for (final SpellAbility saAdd : addedAbilities) {
+            c.removeSpellAbility(saAdd);
         }
 
-        for (final SpellAbility sa : removedAbilities) {
-            c.addSpellAbility(sa);
+        for (final SpellAbility saRem : removedAbilities) {
+            c.addSpellAbility(saRem);
         }
 
         for (final Trigger t : addedTriggers) {

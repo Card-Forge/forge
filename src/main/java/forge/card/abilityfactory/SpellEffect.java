@@ -24,8 +24,9 @@ import forge.game.player.Player;
 
     public abstract class SpellEffect {
         
-        public abstract void resolve(final Map<String, String> params, final SpellAbility sa);
-        protected String getStackDescription(final Map<String, String> params, final SpellAbility sa) {
+        public abstract void resolve(final SpellAbility sa);
+        
+        protected String getStackDescription(final SpellAbility sa) {
             // Unless overriden, let the spell description also be the stack description
             return sa.getDescription();
         }
@@ -66,7 +67,7 @@ import forge.game.player.Player;
             } else if ( spellDesc != null ) {
                 sb.append( spellDesc.replace("CARDNAME", sa.getSourceCard().getName()) );
             } else
-                sb.append(this.getStackDescription(params, sa));
+                sb.append(this.getStackDescription(sa));
             
             
             // This inlcudes all subAbilities
@@ -77,21 +78,21 @@ import forge.game.player.Player;
             return sb.toString();
         }
 
-        protected List<Card> getTargetCards(SpellAbility sa, final Map<String, String> params) {
+        protected List<Card> getTargetCards(SpellAbility sa) {
             final Target tgt = sa.getTarget();
-            return tgt != null ? tgt.getTargetCards() : AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+            return tgt != null ? tgt.getTargetCards() : AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
 
-        protected List<Player> getTargetPlayers(SpellAbility sa, final Map<String, String> params) {
-            return getTargetPlayers(sa, params, false, true);
+        protected List<Player> getTargetPlayers(SpellAbility sa) {
+            return getTargetPlayers(sa, false, true);
         }
 
-        protected List<Player> getTargetPlayersEmptyAsDefault(SpellAbility sa, final Map<String, String> params) {
-            return getTargetPlayers(sa, params, true, true);
+        protected List<Player> getTargetPlayersEmptyAsDefault(SpellAbility sa) {
+            return getTargetPlayers(sa, true, true);
         }
 
-        protected List<Player> getDefinedPlayersBeforeTargetOnes(SpellAbility sa, final Map<String, String> params) {
-            return getTargetPlayers(sa, params, false, false);
+        protected List<Player> getDefinedPlayersBeforeTargetOnes(SpellAbility sa) {
+            return getTargetPlayers(sa, false, false);
         }
         
         // Each AF used its own preference in choosing target players: 
@@ -99,9 +100,9 @@ import forge.game.player.Player;
         // Some wanted empty list when params["Defined"] was not set - @see wantEmptyAsDefault
         // Poor me had to gather it all in a single place
         private final static List<Player> emptyPlayerList = Collections.unmodifiableList(new ArrayList<Player>());
-        private List<Player> getTargetPlayers(SpellAbility sa, final Map<String, String> params, final boolean wantEmptyAsDefault, final boolean targetIsPreferred) {
+        private List<Player> getTargetPlayers(SpellAbility sa, final boolean wantEmptyAsDefault, final boolean targetIsPreferred) {
             final Target tgt = sa.getTarget();
-            final String defined = params.get("Defined");
+            final String defined = sa.getParam("Defined");
             if ( tgt != null && ( targetIsPreferred || ( StringUtils.isEmpty(defined) && !wantEmptyAsDefault ) ) ) 
                 return tgt.getTargetPlayers();
             if ( StringUtils.isEmpty(defined) && wantEmptyAsDefault ) 
@@ -109,14 +110,14 @@ import forge.game.player.Player;
             return AbilityFactory.getDefinedPlayers(sa.getSourceCard(), defined, sa);
         }
         
-        protected List<SpellAbility> getTargetSpellAbilities(SpellAbility sa, final Map<String, String> params) {
+        protected List<SpellAbility> getTargetSpellAbilities(SpellAbility sa) {
             final Target tgt = sa.getTarget();
-            return tgt != null ? tgt.getTargetSAs() : AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), params.get("Defined"), sa);
+            return tgt != null ? tgt.getTargetSAs() : AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
         
-        protected List<Object> getTargetObjects(SpellAbility sa, final Map<String, String> params) {
+        protected List<Object> getTargetObjects(SpellAbility sa) {
             final Target tgt = sa.getTarget();
-            return tgt != null ? tgt.getTargets() : AbilityFactory.getDefinedObjects(sa.getSourceCard(), params.get("Defined"), sa);
+            return tgt != null ? tgt.getTargets() : AbilityFactory.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
 
 

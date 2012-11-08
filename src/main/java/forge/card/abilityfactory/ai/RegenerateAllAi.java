@@ -20,10 +20,10 @@ import forge.game.zone.ZoneType;
 public class RegenerateAllAi extends SpellAiLogic {
     
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
-        final Card hostCard = sa.getAbilityFactory().getHostCard();
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
+        final Card hostCard = sa.getSourceCard();
         boolean chance = false;
-        final Cost abCost = sa.getAbilityFactory().getAbCost();
+        final Cost abCost = sa.getPayCosts();
         if (abCost != null) {
             // AI currently disabled for these costs
             if (!CostUtil.checkSacrificeCost(ai, abCost, hostCard)) {
@@ -42,8 +42,8 @@ public class RegenerateAllAi extends SpellAiLogic {
         // filter AIs battlefield by what I can target
         String valid = "";
 
-        if (params.containsKey("ValidCards")) {
-            valid = params.get("ValidCards");
+        if (sa.hasParam("ValidCards")) {
+            valid = sa.getParam("ValidCards");
         }
 
         List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
@@ -56,7 +56,7 @@ public class RegenerateAllAi extends SpellAiLogic {
 
         int numSaved = 0;
         if (Singletons.getModel().getGame().getStack().size() > 0) {
-            final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(),sa.getAbilityFactory());
+            final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(),sa);
 
             for (final Card c : list) {
                 if (objects.contains(c) && c.getShield() == 0) {
@@ -83,12 +83,12 @@ public class RegenerateAllAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return true;
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         boolean chance = true;
 
         return chance;

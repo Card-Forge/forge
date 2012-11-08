@@ -18,7 +18,6 @@
 package forge.card.abilityfactory.ai;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -38,7 +37,7 @@ public class AddTurnAi extends SpellAiLogic {
 
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final Player opp = ai.getOpponent();
         final Target tgt = sa.getTarget();
 
@@ -52,8 +51,7 @@ public class AddTurnAi extends SpellAiLogic {
                 return false;
             }
         } else {
-            final ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
-                    params.get("Defined"), sa);
+            final ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
             for (final Player p : tgtPlayers) {
                 if (p.isHuman() && !mandatory) {
                     return false;
@@ -66,7 +64,7 @@ public class AddTurnAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return true;
     }
 
@@ -74,8 +72,8 @@ public class AddTurnAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player aiPlayer, Map<String, String> params, SpellAbility sa) {
-        return doTriggerAINoCost(aiPlayer, params, sa, false);
+    protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
+        return doTriggerAINoCost(aiPlayer, sa, false);
     }
 
 }

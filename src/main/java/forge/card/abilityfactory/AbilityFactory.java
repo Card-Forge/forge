@@ -69,27 +69,6 @@ public class AbilityFactory {
 
     /**
      * <p>
-     * Constructor for AbilityFactory.
-     * </p>
-     * 
-     * @param af
-     *            a AbilityFactory object.
-     */
-    public AbilityFactory(final AbilityFactory af) {
-        this.abCost = af.getAbCost();
-        this.abTgt = af.getAbTgt();
-        this.api = af.getAPI();
-        this.hasValid = af.hasValid();
-        this.hostC = af.getHostCard();
-        this.isAb = af.isAbility();
-        this.isDb = af.isDrawback();
-        this.isSp = af.isSpell();
-        this.isTargeted = af.isTargeted();
-        this.mapParams = af.getMapParams();
-    }
-
-    /**
-     * <p>
      * getHostCard.
      * </p>
      * 
@@ -129,77 +108,9 @@ public class AbilityFactory {
     private boolean isSp = false;
     private boolean isDb = false;
 
-    /**
-     * <p>
-     * isAbility.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isAbility() {
-        return this.isAb;
-    }
-
-    /**
-     * <p>
-     * isSpell.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isSpell() {
-        return this.isSp;
-    }
-
-    /**
-     * <p>
-     * isDrawback.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isDrawback() {
-        return this.isDb;
-    }
-
-    private Cost abCost = null;
-
-    /**
-     * <p>
-     * Getter for the field <code>abCost</code>.
-     * </p>
-     * 
-     * @return a {@link forge.card.cost.Cost} object.
-     */
-    public final Cost getAbCost() {
-        return this.abCost;
-    }
-
     private boolean isTargeted = false;
     private boolean hasValid = false;
     private Target abTgt = null;
-
-    /**
-     * <p>
-     * isTargeted.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isTargeted() {
-        return this.isTargeted;
-    }
-
-    /**
-     * <p>
-     * hasValid.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean hasValid() {
-        return this.hasValid;
-    }
 
     /**
      * <p>
@@ -210,18 +121,6 @@ public class AbilityFactory {
      */
     public final Target getAbTgt() {
         return this.abTgt;
-    }
-
-
-    /**
-     * <p>
-     * isCurse.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean isCurse() {
-        return this.mapParams.containsKey("IsCurse");
     }
 
 
@@ -302,11 +201,12 @@ public class AbilityFactory {
             throw new RuntimeException("AbilityFactory : getAbility -- no API in " + hostCard.getName());
         }
 
+        Cost abCost = null;
         if (!this.isDb) {
             if (!this.mapParams.containsKey("Cost")) {
                 throw new RuntimeException("AbilityFactory : getAbility -- no Cost in " + hostCard.getName());
             }
-            this.abCost = new Cost(hostCard, this.mapParams.get("Cost"), this.isAb);
+            abCost = new Cost(hostCard, this.mapParams.get("Cost"), this.isAb);
 
         }
 
@@ -399,11 +299,11 @@ public class AbilityFactory {
         SpellEffect se = api.getSpellEffect();
         
         if (this.isAb) {
-            spellAbility = new CommonAbility(this.getHostCard(), this.getAbCost(), this.getAbTgt(), this.getMapParams(), se, ai);
+            spellAbility = new CommonAbility(api, this.getHostCard(), abCost, this.getAbTgt(), this.getMapParams(), se, ai);
         } else if (this.isSp) {
-            spellAbility = new CommonSpell(this.getHostCard(), this.getAbCost(), this.getAbTgt(), this.getMapParams(), se, ai);
+            spellAbility = new CommonSpell(api, this.getHostCard(), abCost, this.getAbTgt(), this.getMapParams(), se, ai);
         } else if (this.isDb) {
-            spellAbility = new CommonDrawback(this.getHostCard(), this.getAbTgt(), this.getMapParams(), se, ai);
+            spellAbility = new CommonDrawback(api, this.getHostCard(), this.getAbTgt(), this.getMapParams(), se, ai);
         }
 
         
@@ -424,7 +324,7 @@ public class AbilityFactory {
         // *********************************************
         // set universal properties of the SpellAbility
 
-        spellAbility.setAbilityFactory(this);
+
 
         if (this.mapParams.containsKey("References")) {
             for (String svar : this.mapParams.get("References").split(",")) {
@@ -448,7 +348,7 @@ public class AbilityFactory {
                 if (this.mapParams.containsKey("CostDesc")) {
                     sb.append(this.mapParams.get("CostDesc")).append(" ");
                 } else {
-                    sb.append(this.abCost.toString());
+                    sb.append(abCost.toString());
                 }
             }
 
@@ -541,12 +441,12 @@ public class AbilityFactory {
         return abSub;
     }
 
-    public static ArrayList<String> getProtectionList(final Map<String, String> params) {
+    public static ArrayList<String> getProtectionList(final SpellAbility sa) {
         final ArrayList<String> gains = new ArrayList<String>();
     
-        final String gainStr = params.get("Gains");
+        final String gainStr = sa.getParam("Gains");
         if (gainStr.equals("Choice")) {
-            String choices = params.get("Choices");
+            String choices = sa.getParam("Choices");
     
             // Replace AnyColor with the 5 colors
             if (choices.contains("AnyColor")) {
@@ -749,8 +649,7 @@ public class AbilityFactory {
                     if (saTargeting.getTarget() != null) {
                         players.addAll(saTargeting.getTarget().getTargetPlayers());
                     } else {
-                        players.addAll(AbilityFactory.getDefinedPlayers(card, saTargeting.getAbilityFactory()
-                                .getMapParams().get("Defined"), saTargeting));
+                        players.addAll(AbilityFactory.getDefinedPlayers(card, saTargeting.getParam("Defined"), saTargeting));
                     }
                     return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
                 }
@@ -760,8 +659,7 @@ public class AbilityFactory {
                     if (saTargeting.getTarget() != null) {
                         objects.addAll(saTargeting.getTarget().getTargets());
                     } else {
-                        objects.addAll(AbilityFactory.getDefinedObjects(card, saTargeting.getAbilityFactory()
-                                .getMapParams().get("Defined"), saTargeting));
+                        objects.addAll(AbilityFactory.getDefinedObjects(card, saTargeting.getParam("Defined"), saTargeting));
                     }
                     return CardFactoryUtil.objectXCount(objects, calcX[1], card) * multiplier;
                 }
@@ -1398,7 +1296,7 @@ public class AbilityFactory {
      * @return a {@link java.util.ArrayList} object.
      * @since 1.0.15
      */
-    public static ArrayList<Object> predictThreatenedObjects(final Player aiPlayer, final AbilityFactory saviourAf) {
+    public static ArrayList<Object> predictThreatenedObjects(final Player aiPlayer, final SpellAbility sa) {
         final ArrayList<Object> objects = new ArrayList<Object>();
         if (Singletons.getModel().getGame().getStack().size() == 0) {
             return objects;
@@ -1406,7 +1304,7 @@ public class AbilityFactory {
 
         // check stack for something that will kill this
         final SpellAbility topStack = Singletons.getModel().getGame().getStack().peekAbility();
-        objects.addAll(AbilityFactory.predictThreatenedObjects(aiPlayer, saviourAf, topStack));
+        objects.addAll(AbilityFactory.predictThreatenedObjects(aiPlayer, sa, topStack));
 
         return objects;
     }
@@ -1423,34 +1321,28 @@ public class AbilityFactory {
      * @return a {@link java.util.ArrayList} object.
      * @since 1.0.15
      */
-    public static ArrayList<Object> predictThreatenedObjects(final Player aiPlayer, final AbilityFactory saviourAf, final SpellAbility topStack) {
+    public static ArrayList<Object> predictThreatenedObjects(final Player aiPlayer, final SpellAbility saviour, final SpellAbility topStack) {
         ArrayList<Object> objects = new ArrayList<Object>();
         final ArrayList<Object> threatened = new ArrayList<Object>();
-        ApiType saviourApi = null;
-        Map<String, String> saviourParams = null;
-        if (saviourAf != null) {
-            saviourApi = saviourAf.getAPI();
-            saviourParams = saviourAf.getMapParams();
-        }
+        ApiType saviourApi = saviour.getApi();
 
         if (topStack == null) {
             return objects;
         }
 
         final Card source = topStack.getSourceCard();
-        final AbilityFactory topAf = topStack.getAbilityFactory();
+        final ApiType threatApi = topStack.getApi();
 
         // Can only Predict things from AFs
-        if (topAf != null) {
+        if (threatApi != null) {
             final Target tgt = topStack.getTarget();
-            final Map<String, String> threatParams = topAf.getMapParams();
 
             if (tgt == null) {
-                if (threatParams.containsKey("Defined")) {
-                    objects = AbilityFactory.getDefinedObjects(source, threatParams.get("Defined"), topStack);
-                } else if (threatParams.containsKey("ValidCards")) {
+                if (topStack.hasParam("Defined")) {
+                    objects = AbilityFactory.getDefinedObjects(source, topStack.getParam("Defined"), topStack);
+                } else if (topStack.hasParam("ValidCards")) {
                     List<Card> battleField = aiPlayer.getCardsIn(ZoneType.Battlefield);
-                    List<Card> cards = CardLists.getValidCards(battleField, threatParams.get("ValidCards").split(","), source.getController(), source);
+                    List<Card> cards = CardLists.getValidCards(battleField, topStack.getParam("ValidCards").split(","), source.getController(), source);
                     for (Card card : cards) {
                         objects.add(card);
                     }
@@ -1462,13 +1354,11 @@ public class AbilityFactory {
             // Determine if Defined Objects are "threatened" will be destroyed
             // due to this SA
 
-            final ApiType threatApi = topAf.getAPI();
-
             // Lethal Damage => prevent damage/regeneration/bounce/shroud
             if (threatApi == ApiType.DealDamage || threatApi == ApiType.DamageAll) {
                 // If PredictDamage is >= Lethal Damage
                 final int dmg = AbilityFactory.calculateAmount(topStack.getSourceCard(),
-                        topAf.getMapParams().get("NumDmg"), topStack);
+                        topStack.getParam("NumDmg"), topStack);
                 for (final Object o : objects) {
                     if (o instanceof Card) {
                         final Card c = (Card) o;
@@ -1489,9 +1379,9 @@ public class AbilityFactory {
                         }
 
                         // give Shroud to targeted creatures
-                        if (saviourApi == ApiType.Pump && tgt == null && saviourParams.containsKey("KW")
-                                && (saviourParams.get("KW").endsWith("Shroud")
-                                        || saviourParams.get("KW").endsWith("Hexproof"))) {
+                        if (saviourApi == ApiType.Pump && tgt == null && saviour.hasParam("KW")
+                                && (saviour.getParam("KW").endsWith("Shroud")
+                                        || saviour.getParam("KW").endsWith("Hexproof"))) {
                             continue;
                         }
 
@@ -1520,7 +1410,7 @@ public class AbilityFactory {
             // Destroy => regeneration/bounce/shroud
             else if ((threatApi == ApiType.Destroy || threatApi == ApiType.DestroyAll)
                     && (((saviourApi == ApiType.Regenerate || saviourApi == ApiType.RegenerateAll ) 
-                    && !threatParams.containsKey("NoRegen")) || saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump)) {
+                    && !topStack.hasParam("NoRegen")) || saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump)) {
                 for (final Object o : objects) {
                     if (o instanceof Card) {
                         final Card c = (Card) o;
@@ -1535,9 +1425,9 @@ public class AbilityFactory {
                         }
 
                         // give Shroud to targeted creatures
-                        if (saviourApi == ApiType.Pump && tgt == null && saviourParams.containsKey("KW")
-                                && (saviourParams.get("KW").endsWith("Shroud")
-                                        || saviourParams.get("KW").endsWith("Hexproof"))) {
+                        if (saviourApi == ApiType.Pump && tgt == null && saviour.hasParam("KW")
+                                && (saviour.getParam("KW").endsWith("Shroud")
+                                        || saviour.getParam("KW").endsWith("Hexproof"))) {
                             continue;
                         }
 
@@ -1558,15 +1448,14 @@ public class AbilityFactory {
             // Exiling => bounce/shroud
             else if ((threatApi == ApiType.ChangeZone || threatApi == ApiType.ChangeZoneAll)
                     && (saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump)
-                    && threatParams.containsKey("Destination")
-                    && threatParams.get("Destination").equals("Exile")) {
+                    && topStack.hasParam("Destination")
+                    && topStack.getParam("Destination").equals("Exile")) {
                 for (final Object o : objects) {
                     if (o instanceof Card) {
                         final Card c = (Card) o;
                         // give Shroud to targeted creatures
-                        if (saviourApi == ApiType.Pump && tgt == null && saviourParams.containsKey("KW")
-                                && (saviourParams.get("KW").endsWith("Shroud")
-                                        || saviourParams.get("KW").endsWith("Hexproof"))) {
+                        if (saviourApi == ApiType.Pump && tgt == null && saviour.hasParam("KW")
+                                && (saviour.getParam("KW").endsWith("Shroud") || saviour.getParam("KW").endsWith("Hexproof"))) {
                             continue;
                         }
 
@@ -1582,7 +1471,7 @@ public class AbilityFactory {
             }
         }
 
-        threatened.addAll(AbilityFactory.predictThreatenedObjects(aiPlayer, saviourAf, topStack.getSubAbility()));
+        threatened.addAll(AbilityFactory.predictThreatenedObjects(aiPlayer, saviour, topStack.getSubAbility()));
         return threatened;
     }
 
@@ -1596,32 +1485,32 @@ public class AbilityFactory {
      * @param af
      *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      */
-    public static void handleRemembering(final SpellAbility sa, final AbilityFactory af) {
-        final Map<String, String> params = af.getMapParams();
+    public static void handleRemembering(final SpellAbility sa) {
+
         Card host;
 
-        if (!params.containsKey("RememberTargets") && !params.containsKey("RememberToughness")
-                && !params.containsKey("RememberCostCards")) {
+        if (!sa.hasParam("RememberTargets") && !sa.hasParam("RememberToughness")
+                && !sa.hasParam("RememberCostCards")) {
             return;
         }
 
         host = sa.getSourceCard();
 
-        if (params.containsKey("ForgetOtherTargets")) {
+        if (sa.hasParam("ForgetOtherTargets")) {
             host.clearRemembered();
         }
 
         final Target tgt = sa.getTarget();
 
-        if (params.containsKey("RememberTargets")) {
+        if (sa.hasParam("RememberTargets")) {
             final ArrayList<Object> tgts = (tgt == null) ? new ArrayList<Object>() : tgt.getTargets();
             for (final Object o : tgts) {
                 host.addRemembered(o);
             }
         }
 
-        if (params.containsKey("RememberCostCards")) {
-            if (params.get("Cost").contains("Exile")) {
+        if (sa.hasParam("RememberCostCards")) {
+            if (sa.getParam("Cost").contains("Exile")) {
                 final List<Card> paidListExiled = sa.getPaidList("Exiled");
                 for (final Card exiledAsCost : paidListExiled) {
                     host.addRemembered(exiledAsCost);
@@ -1740,30 +1629,28 @@ public class AbilityFactory {
      */
     public static void passUnlessCost(final SpellAbility sa, final boolean usedStack) {
         final Card source = sa.getSourceCard();
-        final AbilityFactory af = sa.getAbilityFactory();
-        if (af == null) {
+        final ApiType api = sa.getApi();
+        if (api == null) {
             sa.resolve();
             AbilityFactory.resolveSubAbilities(sa, usedStack);
             return;
         }
-        final Map<String, String> params = af.getMapParams();
-
         // Nothing to do
-        if (params.get("UnlessCost") == null) {
+        if (sa.getParam("UnlessCost") == null) {
             sa.resolve();
             AbilityFactory.resolveSubAbilities(sa, usedStack);
             return;
         }
 
         // The player who has the chance to cancel the ability
-        final String pays = params.containsKey("UnlessPayer") ? params.get("UnlessPayer") : "TargetedController";
+        final String pays = sa.hasParam("UnlessPayer") ? sa.getParam("UnlessPayer") : "TargetedController";
         final ArrayList<Player> payers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), pays, sa);
 
         // The cost
-        String unlessCost = params.get("UnlessCost").trim();
+        String unlessCost = sa.getParam("UnlessCost").trim();
 
         try {
-            String unlessVar = Integer.toString(AbilityFactory.calculateAmount(source, params.get("UnlessCost").replace(" ", ""), sa));
+            String unlessVar = Integer.toString(AbilityFactory.calculateAmount(source, sa.getParam("UnlessCost").replace(" ", ""), sa));
             unlessCost = unlessVar;
         } catch (final NumberFormatException n) {
         } //This try/catch method enables UnlessCost to parse any svar name
@@ -1798,7 +1685,7 @@ public class AbilityFactory {
             @Override
             public void execute() {
                 sa.resolve();
-                if (params.containsKey("PowerSink")) {
+                if (sa.hasParam("PowerSink")) {
                     GameActionUtil.doPowerSink(sa.getActivatingPlayer());
                 }
                 AbilityFactory.resolveSubAbilities(sa, usedStack);
@@ -1815,7 +1702,7 @@ public class AbilityFactory {
                 if (ComputerUtil.canPayCost(ability, payer) && CostUtil.checkLifeCost(payer, cost, source, 4, sa)
                         && CostUtil.checkDamageCost(payer, cost, source, 4)
                         && (!source.getName().equals("Tyrannize") || payer.getCardsIn(ZoneType.Hand).size() > 2)
-                        && (!params.containsKey("UnlessAI") || !params.get("UnlessAI").equals("Never"))
+                        && (!sa.hasParam("UnlessAI") || !sa.getParam("UnlessAI").equals("Never"))
                         && (!source.getName().equals("Breaking Point") || payer.getCreaturesInPlay().size() > 1)) {
                     // AI was crashing because the blank ability used to pay costs
                     // Didn't have any of the data on the original SA to pay dependant costs
@@ -1842,7 +1729,7 @@ public class AbilityFactory {
                 AbilityFactory.resolveSubAbilities(sa, usedStack);
             } else {
                 sa.resolve();
-                if (params.containsKey("PowerSink")) {
+                if (sa.hasParam("PowerSink")) {
                     GameActionUtil.doPowerSink(payers.get(0));
                 }
                 AbilityFactory.resolveSubAbilities(sa, usedStack);
@@ -1865,8 +1752,8 @@ public class AbilityFactory {
         if (sa == null) {
             return;
         }
-        final AbilityFactory af = sa.getAbilityFactory();
-        if (af == null) {
+        final ApiType api = sa.getApi();
+        if (api == null) {
             sa.resolve();
             if (sa.getSubAbility() != null) {
                 resolve(sa.getSubAbility(), usedStack);

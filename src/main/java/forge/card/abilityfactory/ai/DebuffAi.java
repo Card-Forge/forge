@@ -28,7 +28,7 @@ public class DebuffAi extends SpellAiLogic {
     // *************************************************************************
 
     @Override
-    protected boolean canPlayAI(final Player ai, final java.util.Map<String,String> params, final SpellAbility sa) {
+    protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
         // if there is no target and host card isn't in play, don't activate
         final Card source = sa.getSourceCard();
         if ((sa.getTarget() == null) && !source.isInPlay()) {
@@ -72,7 +72,7 @@ public class DebuffAi extends SpellAiLogic {
         }
 
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
-            List<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("Defined"), sa);
+            List<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
 
             if (!cards.isEmpty()) {
                 cards = CardLists.filter(cards, new Predicate<Card>() {
@@ -82,7 +82,7 @@ public class DebuffAi extends SpellAiLogic {
                             return false;
                         }
                         // don't add duplicate negative keywords
-                        return params.containsKey("Keywords") && c.hasAnyKeyword(Arrays.asList(params.get("Keywords").split(" & "))); 
+                        return sa.hasParam("Keywords") && c.hasAnyKeyword(Arrays.asList(sa.getParam("Keywords").split(" & "))); 
                     }
                 });
             }
@@ -90,19 +90,19 @@ public class DebuffAi extends SpellAiLogic {
                 return false;
             }
         } else {
-            return debuffTgtAI(ai, sa, params.containsKey("Keywords") ? Arrays.asList(params.get("Keywords").split(" & ")) : new ArrayList<String>(), false);
+            return debuffTgtAI(ai, sa, sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : new ArrayList<String>(), false);
         }
 
         return true;
     }
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player ai) {
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
             // TODO - copied from AF_Pump.pumpDrawbackAI() - what should be
             // here?
         } else {
-            return debuffTgtAI(ai, sa, params.containsKey("Keywords") ? Arrays.asList(params.get("Keywords").split(" & ")) : new ArrayList<String>(), false);
+            return debuffTgtAI(ai, sa, sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : new ArrayList<String>(), false);
         }
 
         return true;
@@ -279,8 +279,8 @@ public class DebuffAi extends SpellAiLogic {
     } // pumpMandatoryTarget()
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
-        final List<String> kws = params.containsKey("Keywords") ? Arrays.asList(params.get("Keywords").split(" & ")) : new ArrayList<String>();
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        final List<String> kws = sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : new ArrayList<String>();
 
         if (sa.getTarget() == null) {
             if (mandatory) {

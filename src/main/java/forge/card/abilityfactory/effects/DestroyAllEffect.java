@@ -2,7 +2,6 @@ package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import forge.Card;
 import forge.CardLists;
@@ -17,13 +16,13 @@ import forge.game.zone.ZoneType;
 public class DestroyAllEffect extends SpellEffect {
     
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
     
         final StringBuilder sb = new StringBuilder();
-        final boolean noRegen = params.containsKey("NoRegen");
+        final boolean noRegen = sa.hasParam("NoRegen");
     
 
-        final String conditionDesc = params.get("ConditionDescription");
+        final String conditionDesc = sa.getParam("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
@@ -51,9 +50,9 @@ public class DestroyAllEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void resolve(Map<String, String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         
-        final boolean noRegen = params.containsKey("NoRegen");
+        final boolean noRegen = sa.hasParam("NoRegen");
         final Card card = sa.getSourceCard();
 
         final Target tgt = sa.getTarget();
@@ -68,8 +67,8 @@ public class DestroyAllEffect extends SpellEffect {
 
         String valid = "";
 
-        if (params.containsKey("ValidCards")) {
-            valid = params.get("ValidCards");
+        if (sa.hasParam("ValidCards")) {
+            valid = sa.getParam("ValidCards");
         }
 
         // Ugh. If calculateAmount needs to be called with DestroyAll it _needs_
@@ -87,7 +86,7 @@ public class DestroyAllEffect extends SpellEffect {
 
         list = AbilityFactory.filterListByType(list, valid, sa);
 
-        final boolean remDestroyed = params.containsKey("RememberDestroyed");
+        final boolean remDestroyed = sa.hasParam("RememberDestroyed");
         if (remDestroyed) {
             card.clearRemembered();
         }

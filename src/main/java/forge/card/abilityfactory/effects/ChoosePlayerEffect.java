@@ -15,10 +15,10 @@ import forge.gui.GuiChoose;
 public class ChoosePlayerEffect extends SpellEffect {
     
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        for (final Player p : getTargetPlayers(sa, params)) {
+        for (final Player p : getTargetPlayers(sa)) {
             sb.append(p).append(" ");
         }
         sb.append("chooses a player.");
@@ -27,17 +27,17 @@ public class ChoosePlayerEffect extends SpellEffect {
     }
     
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Card card = sa.getSourceCard();
         
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
         
         final Target tgt = sa.getTarget();
         
-        final ArrayList<Player> choices = params.containsKey("Choices") ? AbilityFactory.getDefinedPlayers(
-                sa.getSourceCard(), params.get("Choices"), sa) : new ArrayList<Player>(Singletons.getModel().getGame().getPlayers());
+        final ArrayList<Player> choices = sa.hasParam("Choices") ? AbilityFactory.getDefinedPlayers(
+                sa.getSourceCard(), sa.getParam("Choices"), sa) : new ArrayList<Player>(Singletons.getModel().getGame().getPlayers());
         
-        final String choiceDesc = params.containsKey("ChoiceTitle") ? params.get("ChoiceTitle") : "Choose a player";
+        final String choiceDesc = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a player";
         
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
@@ -53,8 +53,8 @@ public class ChoosePlayerEffect extends SpellEffect {
                     card.setChosenPlayer(chosen);
                     
                 } else {
-                    if (params.containsKey("AILogic")) {
-                        if (params.get("AILogic").equals("Curse")) {
+                    if (sa.hasParam("AILogic")) {
+                        if (sa.getParam("AILogic").equals("Curse")) {
                             card.setChosenPlayer(p.getOpponent());
                         } else {
                             card.setChosenPlayer(p);

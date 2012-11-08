@@ -23,13 +23,13 @@ import forge.gui.GuiChoose;
 public class DigEffect extends SpellEffect {
     
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
-        final Card host = sa.getAbilityFactory().getHostCard();
+    protected String getStackDescription(SpellAbility sa) {
+        final Card host = sa.getSourceCard();
         final StringBuilder sb = new StringBuilder();
-        final int numToDig = AbilityFactory.calculateAmount(host, params.get("DigNum"), sa);
+        final int numToDig = AbilityFactory.calculateAmount(host, sa.getParam("DigNum"), sa);
     
     
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
     
     
         sb.append(host.getController()).append(" looks at the top ").append(numToDig);
@@ -50,49 +50,46 @@ public class DigEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
         final Player player = sa.getActivatingPlayer();
         Player choser = player;
-        int numToDig = AbilityFactory.calculateAmount(host, params.get("DigNum"), sa);
-        final ZoneType destZone1 = params.containsKey("DestinationZone") ? ZoneType.smartValueOf(params.get("DestinationZone"))
+        int numToDig = AbilityFactory.calculateAmount(host, sa.getParam("DigNum"), sa);
+        final ZoneType destZone1 = sa.hasParam("DestinationZone") ? ZoneType.smartValueOf(sa.getParam("DestinationZone"))
                 : ZoneType.Hand;
-        final ZoneType destZone2 = params.containsKey("DestinationZone2") ? ZoneType.smartValueOf(params
-                .get("DestinationZone2")) : ZoneType.Library;
+        final ZoneType destZone2 = sa.hasParam("DestinationZone2") ? ZoneType.smartValueOf(sa.getParam("DestinationZone2")) : ZoneType.Library;
 
-        final int libraryPosition = params.containsKey("LibraryPosition") ? Integer.parseInt(params
-                .get("LibraryPosition")) : -1;
+        final int libraryPosition = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : -1;
         int destZone1ChangeNum = 1;
-        final boolean mitosis = params.containsKey("Mitosis");
-        String changeValid = params.containsKey("ChangeValid") ? params.get("ChangeValid") : "";
+        final boolean mitosis = sa.hasParam("Mitosis");
+        String changeValid = sa.hasParam("ChangeValid") ? sa.getParam("ChangeValid") : "";
         //andOrValid is for cards with "creature card and/or a land card"
-        String andOrValid = params.containsKey("AndOrValid") ? params.get("AndOrValid") : "";
-        final boolean anyNumber = params.containsKey("AnyNumber");
+        String andOrValid = sa.hasParam("AndOrValid") ? sa.getParam("AndOrValid") : "";
+        final boolean anyNumber = sa.hasParam("AnyNumber");
 
-        final int libraryPosition2 = params.containsKey("LibraryPosition2") ? Integer.parseInt(params
-                .get("LibraryPosition2")) : -1;
-        final boolean optional = params.containsKey("Optional");
-        final boolean noMove = params.containsKey("NoMove");
+        final int libraryPosition2 = sa.hasParam("LibraryPosition2") ? Integer.parseInt(sa.getParam("LibraryPosition2")) : -1;
+        final boolean optional = sa.hasParam("Optional");
+        final boolean noMove = sa.hasParam("NoMove");
         boolean changeAll = false;
         final ArrayList<String> keywords = new ArrayList<String>();
-        if (params.containsKey("Keywords")) {
-            keywords.addAll(Arrays.asList(params.get("Keywords").split(" & ")));
+        if (sa.hasParam("Keywords")) {
+            keywords.addAll(Arrays.asList(sa.getParam("Keywords").split(" & ")));
         }
 
-        if (params.containsKey("ChangeNum")) {
-            if (params.get("ChangeNum").equalsIgnoreCase("All")) {
+        if (sa.hasParam("ChangeNum")) {
+            if (sa.getParam("ChangeNum").equalsIgnoreCase("All")) {
                 changeAll = true;
             } else {
-                destZone1ChangeNum = Integer.parseInt(params.get("ChangeNum"));
+                destZone1ChangeNum = Integer.parseInt(sa.getParam("ChangeNum"));
             }
         }
 
         final Target tgt = sa.getTarget();
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
 
-        if (params.containsKey("Choser")) {
+        if (sa.hasParam("Choser")) {
             final ArrayList<Player> chosers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
-                    params.get("Choser"), sa);
+                    sa.getParam("Choser"), sa);
             if (!chosers.isEmpty()) {
                 choser = chosers.get(0);
             }
@@ -116,11 +113,11 @@ public class DigEffect extends SpellEffect {
                 final Card dummy = new Card();
                 dummy.setName("[No valid cards]");
 
-                if (params.containsKey("Reveal")) {
+                if (sa.hasParam("Reveal")) {
                     GuiChoose.one("Revealing cards from library", top);
                     // Singletons.getModel().getGameAction().revealToCopmuter(top.toArray());
                     // - for when it exists
-                } else if (params.containsKey("RevealOptional")) {
+                } else if (sa.hasParam("RevealOptional")) {
                     String question = "Reveal: ";
                     for (final Card c : top) {
                         question += c + " ";
@@ -131,12 +128,12 @@ public class DigEffect extends SpellEffect {
                     } else if (p.isComputer() && (top.get(0).isInstant() || top.get(0).isSorcery())) {
                         GuiChoose.one(host + "Revealing cards from library", top);
                     }
-                } else if (params.containsKey("RevealValid")) {
-                    final String revealValid = params.get("RevealValid");
+                } else if (sa.hasParam("RevealValid")) {
+                    final String revealValid = sa.getParam("RevealValid");
                     final List<Card> toReveal = CardLists.getValidCards(top, revealValid, host.getController(), host);
                     if (!toReveal.isEmpty()) {
                         GuiChoose.one("Revealing cards from library", toReveal);
-                        if (params.containsKey("RememberRevealed")) {
+                        if (sa.hasParam("RememberRevealed")) {
                             for (final Card one : toReveal) {
                                 host.addRemembered(one);
                             }
@@ -149,7 +146,7 @@ public class DigEffect extends SpellEffect {
                     GuiChoose.one("Looking at cards from library", top);
                 }
 
-                if ((params.containsKey("RememberRevealed")) && !params.containsKey("RevealValid")) {
+                if ((sa.hasParam("RememberRevealed")) && !sa.hasParam("RevealValid")) {
                     for (final Card one : top) {
                         host.addRemembered(one);
                     }
@@ -182,7 +179,7 @@ public class DigEffect extends SpellEffect {
 
                     if (changeAll) {
                         movedCards.addAll(valid);
-                    } else if (params.containsKey("RandomChange")) {
+                    } else if (sa.hasParam("RandomChange")) {
                         int numChanging = Math.min(destZone1ChangeNum, valid.size());
                         movedCards = CardLists.getRandomSubList(valid, numChanging);
                     } else {
@@ -253,7 +250,7 @@ public class DigEffect extends SpellEffect {
                             }
                         }
                     }
-                    if (params.containsKey("ForgetOtherRemembered")) {
+                    if (sa.hasParam("ForgetOtherRemembered")) {
                         host.clearRemembered();
                     }
                     Collections.reverse(movedCards);
@@ -270,21 +267,21 @@ public class DigEffect extends SpellEffect {
                                 for (final String kw : keywords) {
                                     c.addExtrinsicKeyword(kw);
                                 }
-                                if (params.containsKey("Tapped")) {
+                                if (sa.hasParam("Tapped")) {
                                     c.setTapped(true);
                                 }
                             }
-                            if (params.containsKey("ExileFaceDown")) {
+                            if (sa.hasParam("ExileFaceDown")) {
                                 c.setState(CardCharacteristicName.FaceDown);
                             }
-                            if (params.containsKey("Imprint")) {
+                            if (sa.hasParam("Imprint")) {
                                 host.addImprinted(c);
                             }
                         }
-                        if (params.containsKey("ForgetOtherRemembered")) {
+                        if (sa.hasParam("ForgetOtherRemembered")) {
                             host.clearRemembered();
                         }
-                        if (params.containsKey("RememberChanged")) {
+                        if (sa.hasParam("RememberChanged")) {
                             host.addRemembered(c);
                         }
                         rest.remove(c);

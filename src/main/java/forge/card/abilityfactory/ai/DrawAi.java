@@ -20,7 +20,6 @@ package forge.card.abilityfactory.ai;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 
@@ -48,7 +47,7 @@ public class DrawAi extends SpellAiLogic {
          * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
          */
         @Override
-        protected boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
+        protected boolean canPlayAI(Player ai, SpellAbility sa) {
 
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
@@ -85,7 +84,7 @@ public class DrawAi extends SpellAiLogic {
 
         }
 
-        final boolean bFlag = targetAI(ai, params, sa, false);
+        final boolean bFlag = targetAI(ai, sa, false);
 
         if (!bFlag) {
             return false;
@@ -100,7 +99,7 @@ public class DrawAi extends SpellAiLogic {
 
         // Don't use draw abilities before main 2 if possible
         if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
-                && !params.containsKey("ActivationPhases")) {
+                && !sa.hasParam("ActivationPhases")) {
             return false;
         }
 
@@ -128,7 +127,7 @@ public class DrawAi extends SpellAiLogic {
         return randomReturn;
     }
 
-    private boolean targetAI(final Player ai, final Map<String, String> params, final SpellAbility sa, final boolean mandatory) {
+    private boolean targetAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
 
@@ -145,12 +144,12 @@ public class DrawAi extends SpellAiLogic {
         }
 
         int numCards = 1;
-        if (params.containsKey("NumCards")) {
-            numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("NumCards"), sa);
+        if (sa.hasParam("NumCards")) {
+            numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
         }
 
         boolean xPaid = false;
-        final String num = params.get("NumCards");
+        final String num = sa.getParam("NumCards");
         if ((num != null) && num.equals("X") && source.getSVar(num).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             if (sa instanceof AbilitySub) {
@@ -206,7 +205,7 @@ public class DrawAi extends SpellAiLogic {
                 } else {
                     // Don't draw too many cards and then risk discarding cards
                     // at EOT
-                    if (!(params.containsKey("NextUpkeep") || (sa instanceof AbilitySub)) && !mandatory) {
+                    if (!(sa.hasParam("NextUpkeep") || (sa instanceof AbilitySub)) && !mandatory) {
                         return false;
                     }
                 }
@@ -243,7 +242,7 @@ public class DrawAi extends SpellAiLogic {
                     && !sa.isTrigger()) {
                 // Don't draw too many cards and then risk discarding cards at
                 // EOT
-                if (!(params.containsKey("NextUpkeep") || (sa instanceof AbilitySub)) && !mandatory) {
+                if (!(sa.hasParam("NextUpkeep") || (sa instanceof AbilitySub)) && !mandatory) {
                     return false;
                 }
             }
@@ -253,8 +252,8 @@ public class DrawAi extends SpellAiLogic {
 
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
-        return targetAI(ai, params, sa, mandatory);
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+        return targetAI(ai, sa, mandatory);
     }
     
 }

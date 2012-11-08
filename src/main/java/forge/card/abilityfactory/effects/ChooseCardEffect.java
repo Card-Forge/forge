@@ -18,10 +18,10 @@ import forge.gui.GuiChoose;
 
 public class ChooseCardEffect extends SpellEffect {
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        for (final Player p : getTargetPlayers(sa, params)) {
+        for (final Player p : getTargetPlayers(sa)) {
             sb.append(p).append(" ");
         }
         sb.append("chooses a card.");
@@ -30,30 +30,30 @@ public class ChooseCardEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
         final ArrayList<Card> chosen = new ArrayList<Card>();
 
         final Target tgt = sa.getTarget();
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         ZoneType choiceZone = ZoneType.Battlefield;
-        if (params.containsKey("ChoiceZone")) {
-            choiceZone = ZoneType.smartValueOf(params.get("ChoiceZone"));
+        if (sa.hasParam("ChoiceZone")) {
+            choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
         }
         List<Card> choices = Singletons.getModel().getGame().getCardsIn(choiceZone);
-        if (params.containsKey("Choices")) {
-            choices = CardLists.getValidCards(choices, params.get("Choices"), host.getController(), host);
+        if (sa.hasParam("Choices")) {
+            choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host);
         }
-        if (params.containsKey("TargetControls")) {
+        if (sa.hasParam("TargetControls")) {
             choices = CardLists.filterControlledBy(choices, tgtPlayers.get(0));
         }
 
-        final String numericAmount = params.containsKey("Amount") ? params.get("Amount") : "1";
+        final String numericAmount = sa.hasParam("Amount") ? sa.getParam("Amount") : "1";
         final int validAmount = !numericAmount.matches("[0-9][0-9]?")
-                ? CardFactoryUtil.xCount(host, host.getSVar(params.get("Amount"))) : Integer.parseInt(numericAmount);
+                ? CardFactoryUtil.xCount(host, host.getSVar(sa.getParam("Amount"))) : Integer.parseInt(numericAmount);
 
-        if (params.containsKey("SunderingTitan")) {
+        if (sa.hasParam("SunderingTitan")) {
             final List<Card> land = Singletons.getModel().getGame().getLandsInPlay();
             final ArrayList<String> basic = CardUtil.getBasicTypes();
 
@@ -76,7 +76,7 @@ public class ChooseCardEffect extends SpellEffect {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 for (int i = 0; i < validAmount; i++) {
                     if (p.isHuman()) {
-                        final String choiceTitle = params.containsKey("ChoiceTitle") ? params.get("ChoiceTitle") : "Choose a card ";
+                        final String choiceTitle = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a card ";
                         final Card o = GuiChoose.oneOrNone(choiceTitle, choices);
                         if (o != null) {
                             chosen.add(o);
@@ -85,12 +85,12 @@ public class ChooseCardEffect extends SpellEffect {
                             break;
                         }
                     } else { // Computer
-                        if (params.containsKey("AILogic") && params.get("AILogic").equals("BestBlocker")) {
+                        if (sa.hasParam("AILogic") && sa.getParam("AILogic").equals("BestBlocker")) {
                             if (!CardLists.filter(choices, Presets.UNTAPPED).isEmpty()) {
                                 choices = CardLists.filter(choices, Presets.UNTAPPED);
                             }
                             chosen.add(CardFactoryUtil.getBestCreatureAI(choices));
-                        } else if (params.containsKey("AILogic") && params.get("AILogic").equals("Clone")) {
+                        } else if (sa.hasParam("AILogic") && sa.getParam("AILogic").equals("Clone")) {
                             if (!CardLists.getValidCards(choices, "Permanent.YouDontCtrl,Permanent.NonLegendary", host.getController(), host).isEmpty()) {
                                 choices = CardLists.getValidCards(choices, "Permanent.YouDontCtrl,Permanent.NonLegendary", host.getController(), host);
                             }
@@ -101,7 +101,7 @@ public class ChooseCardEffect extends SpellEffect {
                     }
                 }
                 host.setChosenCard(chosen);
-                if (params.containsKey("RememberChosen")) {
+                if (sa.hasParam("RememberChosen")) {
                     for (final Card rem : chosen) {
                         host.addRemembered(rem);
                     }

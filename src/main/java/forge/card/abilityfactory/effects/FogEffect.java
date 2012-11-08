@@ -8,13 +8,13 @@ public class FogEffect extends SpellEffect {
     
 
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         return sa.getSourceCard().getController() + " prevents all combat damage this turn.";
     }
 
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         // Expand Fog keyword here depending on what we need out of it.
         Singletons.getModel().getGame().getPhaseHandler().setPreventCombatDamageThisTurn(true);
     }

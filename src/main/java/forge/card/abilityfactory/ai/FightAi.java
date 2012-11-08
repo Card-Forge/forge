@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.ai;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
@@ -20,7 +19,7 @@ public class FightAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         Target tgt = sa.getTarget();
         tgt.resetTargets();
 
@@ -41,7 +40,7 @@ public class FightAi extends SpellAiLogic {
             return false;
         }
 
-        if (params.containsKey("TargetsFromDifferentZone")) {
+        if (sa.hasParam("TargetsFromDifferentZone")) {
             if (humCreatures.size() > 0 && aiCreatures.size() > 0) {
                 for (Card humanCreature : humCreatures) {
                     for (Card aiCreature : aiCreatures) {
@@ -66,7 +65,7 @@ public class FightAi extends SpellAiLogic {
                 if (creature1.equals(creature2)) {
                     continue;
                 }
-                if (params.containsKey("TargetsWithoutSameCreatureType") 
+                if (sa.hasParam("TargetsWithoutSameCreatureType") 
                         && creature1.sharesCreatureTypeWith(creature2)) {
                     continue;
                 }
@@ -84,7 +83,7 @@ public class FightAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(Map<String, String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         // check AI life before playing this drawback?
         return true;
     }
@@ -93,7 +92,7 @@ public class FightAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, Map<String, String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         return false;
     }
 

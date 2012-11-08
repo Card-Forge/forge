@@ -19,10 +19,10 @@ import forge.gui.GuiChoose;
 public class ChooseGenericEffect extends SpellEffect {    
     
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
     
-        for (final Player p : getTargetPlayers(sa, params)) {
+        for (final Player p : getTargetPlayers(sa)) {
             sb.append(p).append(" ");
         }
         sb.append("chooses from a list.");
@@ -31,15 +31,15 @@ public class ChooseGenericEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
         final BiMap<String, String> choices = HashBiMap.create();
-        for (String s : Arrays.asList(params.get("Choices").split(","))) {
+        for (String s : Arrays.asList(sa.getParam("Choices").split(","))) {
             final Map<String, String> theseParams = AbilityFactory.getMapParams(host.getSVar(s));
             choices.put(s, theseParams.get("ChoiceDescription"));
         }
 
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         final Target tgt = sa.getTarget();
 
@@ -53,7 +53,7 @@ public class ChooseGenericEffect extends SpellEffect {
                 String choice = GuiChoose.one("Choose one", choices.values());
                 chosenSA = afChoice.getAbility(host.getSVar(choices.inverse().get(choice)), host);
             } else { //Computer AI
-                chosenSA = afChoice.getAbility(host.getSVar(params.get("Choices").split(",")[0]), host);
+                chosenSA = afChoice.getAbility(host.getSVar(sa.getParam("Choices").split(",")[0]), host);
             }
             chosenSA.setActivatingPlayer(sa.getSourceCard().getController());
             ((AbilitySub) chosenSA).setParent(sa);

@@ -2,7 +2,6 @@ package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -30,18 +29,18 @@ import forge.item.CardDb;
 
 public class PlayEffect extends SpellEffect { 
     @Override
-    protected String getStackDescription(Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
         sb.append("Play ");
-        final List<Card> tgtCards = getTargetCards(sa, params); 
+        final List<Card> tgtCards = getTargetCards(sa); 
     
-        if (params.containsKey("Valid")) {
+        if (sa.hasParam("Valid")) {
             sb.append("cards");
         } else {
             sb.append(StringUtils.join(tgtCards, ", "));
         }
-        if (params.containsKey("WithoutManaCost")) {
+        if (sa.hasParam("WithoutManaCost")) {
             sb.append(" without paying the mana cost");
         }
         sb.append(".");
@@ -49,39 +48,39 @@ public class PlayEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Card source = sa.getSourceCard();
         Player activator = sa.getActivatingPlayer();
-        boolean optional = params.containsKey("Optional");
-        boolean remember = params.containsKey("RememberPlayed");
+        boolean optional = sa.hasParam("Optional");
+        boolean remember = sa.hasParam("RememberPlayed");
         boolean wasFaceDown = false;
         int amount = 1;
-        if (params.containsKey("Amount") && !params.get("Amount").equals("All")) {
-            amount = AbilityFactory.calculateAmount(source, params.get("Amount"), sa);
+        if (sa.hasParam("Amount") && !sa.getParam("Amount").equals("All")) {
+            amount = AbilityFactory.calculateAmount(source, sa.getParam("Amount"), sa);
         }
 
-        if (params.containsKey("Controller")) {
-            activator = AbilityFactory.getDefinedPlayers(source, params.get("Controller"), sa).get(0);
+        if (sa.hasParam("Controller")) {
+            activator = AbilityFactory.getDefinedPlayers(source, sa.getParam("Controller"), sa).get(0);
         }
 
         final Player controller = activator;
         List<Card> tgtCards = new ArrayList<Card>();
 
-        if (params.containsKey("Valid")) {
+        if (sa.hasParam("Valid")) {
             ZoneType zone = ZoneType.Hand;
-            if (params.containsKey("ValidZone")) {
-                zone = ZoneType.smartValueOf(params.get("ValidZone"));
+            if (sa.hasParam("ValidZone")) {
+                zone = ZoneType.smartValueOf(sa.getParam("ValidZone"));
             }
             tgtCards = Singletons.getModel().getGame().getCardsIn(zone);
-            tgtCards = AbilityFactory.filterListByType(tgtCards, params.get("Valid"), sa);
+            tgtCards = AbilityFactory.filterListByType(tgtCards, sa.getParam("Valid"), sa);
         } else 
-            tgtCards = getTargetCards(sa, params);
+            tgtCards = getTargetCards(sa);
 
         if (tgtCards.isEmpty()) {
             return;
         }
 
-        if (params.containsKey("Amount") && params.get("Amount").equals("All")) {
+        if (sa.hasParam("Amount") && sa.getParam("Amount").equals("All")) {
             amount = tgtCards.size();
         }
 
@@ -134,10 +133,10 @@ public class PlayEffect extends SpellEffect {
                 }
                 continue;
             }
-            if (params.containsKey("ForgetRemembered")) {
+            if (sa.hasParam("ForgetRemembered")) {
                 source.clearRemembered();
             }
-            if (params.containsKey("CopyCard")) {
+            if (sa.hasParam("CopyCard")) {
                 tgtCard = Singletons.getModel().getCardFactory().getCard(CardDb.instance().getCard(tgtCard), sa.getActivatingPlayer());
                 // when copying something stolen:
                 tgtCard.addController(sa.getActivatingPlayer());
@@ -190,7 +189,7 @@ public class PlayEffect extends SpellEffect {
                 tgtSA.getTarget().setMandatory(true);
             }
 
-            if (params.containsKey("WithoutManaCost")) {
+            if (sa.hasParam("WithoutManaCost")) {
                 if (controller.isHuman()) {
                     final SpellAbility newSA = tgtSA.copy();
                     final Cost cost = new Cost(tgtCard, "", false);

@@ -2,7 +2,6 @@ package forge.card.abilityfactory.ai;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import forge.Card;
 import forge.CardLists;
@@ -19,17 +18,17 @@ public class TwoPilesAi extends SpellAiLogic  {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Card card = sa.getSourceCard();
         ZoneType zone = null;
 
-        if (params.containsKey("Zone")) {
-            zone = ZoneType.smartValueOf(params.get("Zone"));
+        if (sa.hasParam("Zone")) {
+            zone = ZoneType.smartValueOf(sa.getParam("Zone"));
         }
 
         String valid = "";
-        if (params.containsKey("ValidCards")) {
-            valid = params.get("ValidCards");
+        if (sa.hasParam("ValidCards")) {
+            valid = sa.getParam("ValidCards");
         }
 
         ArrayList<Player> tgtPlayers;
@@ -43,13 +42,13 @@ public class TwoPilesAi extends SpellAiLogic  {
             }
             tgtPlayers = tgt.getTargetPlayers();
         } else {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), params.get("Defined"), sa);
+            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
 
         final Player p = tgtPlayers.get(0);
         List<Card> pool = new ArrayList<Card>();
-        if (params.containsKey("DefinedCards")) {
-            pool = new ArrayList<Card>(AbilityFactory.getDefinedCards(sa.getSourceCard(), params.get("DefinedCards"), sa));
+        if (sa.hasParam("DefinedCards")) {
+            pool = new ArrayList<Card>(AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("DefinedCards"), sa));
         } else {
             pool = p.getCardsIn(zone);
         }
@@ -59,7 +58,7 @@ public class TwoPilesAi extends SpellAiLogic  {
     }
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return true;
     }
 
@@ -67,7 +66,7 @@ public class TwoPilesAi extends SpellAiLogic  {
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, Map<String, String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         return false;
     }
 }

@@ -16,7 +16,7 @@ import forge.game.zone.ZoneType;
 public class SetStateAllEffect extends SpellEffect { 
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
 
         final Card card = sa.getSourceCard();
 
@@ -28,8 +28,8 @@ public class SetStateAllEffect extends SpellEffect {
 
         String valid = "";
 
-        if (params.containsKey("ValidCards")) {
-            valid = params.get("ValidCards");
+        if (sa.hasParam("ValidCards")) {
+            valid = sa.getParam("ValidCards");
         }
 
         // Ugh. If calculateAmount needs to be called with DestroyAll it _needs_
@@ -47,13 +47,13 @@ public class SetStateAllEffect extends SpellEffect {
 
         list = AbilityFactory.filterListByType(list, valid, sa);
 
-        final boolean remChanged = params.containsKey("RememberChanged");
+        final boolean remChanged = sa.hasParam("RememberChanged");
         if (remChanged) {
             card.clearRemembered();
         }
 
         for (Card c : list) {
-            final String mode = params.get("Mode");
+            final String mode = sa.getParam("Mode");
             if (mode != null) {
                 if (mode.equals("Transform")) {
                     if (c.hasKeyword("CARDNAME can't transform")) {
@@ -103,20 +103,20 @@ public class SetStateAllEffect extends SpellEffect {
                     }
                 }
             } else {
-                c.changeToState(CardCharacteristicName.smartValueOf(params.get("NewState")));
+                c.changeToState(CardCharacteristicName.smartValueOf(sa.getParam("NewState")));
             }
 
         }
     }
 
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        if (params.containsKey("Mode")) {
-            sb.append(params.get("Mode"));
+        if (sa.hasParam("Mode")) {
+            sb.append(sa.getParam("Mode"));
         } else {
-            sb.append(params.get("NewState"));
+            sb.append(sa.getParam("NewState"));
         }
 
         sb.append(" permanents.");

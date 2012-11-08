@@ -38,7 +38,7 @@ public class AttachAi extends SpellAiLogic {
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    protected boolean canPlayAI(Player ai, Map<String, String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Random r = MyRandom.getRandom();
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
@@ -54,7 +54,7 @@ public class AttachAi extends SpellAiLogic {
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             tgt.resetTargets();
-            if (!attachPreference(sa, params, tgt, false)) {
+            if (!attachPreference(sa, tgt, false)) {
                 return false;
             }
         }
@@ -72,7 +72,7 @@ public class AttachAi extends SpellAiLogic {
         }
     
         if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
-                && !"Curse".equals(params.get("AILogic"))) {
+                && !"Curse".equals(sa.getParam("AILogic"))) {
             return false;
         }
     
@@ -158,9 +158,9 @@ public class AttachAi extends SpellAiLogic {
         String type = "";
     
         for (final StaticAbility stAb : attachSource.getStaticAbilities()) {
-            final HashMap<String, String> params = stAb.getMapParams();
-            if (params.get("Mode").equals("Continuous") && params.containsKey("AddType")) {
-                type = params.get("AddType");
+            final HashMap<String, String> stab = stAb.getMapParams();
+            if (stab.get("Mode").equals("Continuous") && stab.containsKey("AddType")) {
+                type = stab.get("AddType");
             }
         }
     
@@ -213,10 +213,9 @@ public class AttachAi extends SpellAiLogic {
                 final Iterator<Card> itr = auras.iterator();
                 while (itr.hasNext()) {
                     final Card aura = itr.next();
-                    final AbilityFactory af = aura.getSpellPermanent().getAbilityFactory();
-                    if ((af != null) && af.getAPI() == ApiType.Attach) {
-                        final Map<String, String> params = af.getMapParams();
-                        if ("KeepTapped".equals(params.get("AILogic"))) {
+                    SpellAbility auraSA = aura.getSpellPermanent(); 
+                    if (auraSA.getApi() == ApiType.Attach) {
+                        if ("KeepTapped".equals(auraSA.getParam("AILogic"))) {
                             // Don't attach multiple KeepTapped Auras to one
                             // card
                             return false;
@@ -248,11 +247,11 @@ public class AttachAi extends SpellAiLogic {
      *            the mandatory
      * @return the player
      */
-    private static Player attachToPlayerAIPreferences(final Player aiPlayer, final Map<String, String> params, final SpellAbility sa,
+    private static Player attachToPlayerAIPreferences(final Player aiPlayer, final SpellAbility sa,
             final boolean mandatory) {
         Player p;
     
-        if ("Curse".equals(params.get("AILogic"))) {
+        if (sa.isCurse()) {
             p = aiPlayer.getOpponent();
         } else {
             p = aiPlayer;
@@ -380,25 +379,25 @@ public class AttachAi extends SpellAiLogic {
         // boolean grantingAbilities = false;
     
         for (final StaticAbility stAbility : attachSource.getStaticAbilities()) {
-            final Map<String, String> params = stAbility.getMapParams();
+            final Map<String, String> stabMap = stAbility.getMapParams();
     
-            if (!params.get("Mode").equals("Continuous")) {
+            if (!stabMap.get("Mode").equals("Continuous")) {
                 continue;
             }
     
-            final String affected = params.get("Affected");
+            final String affected = stabMap.get("Affected");
     
             if (affected == null) {
                 continue;
             }
             if ((affected.contains(stCheck) || affected.contains("AttachedBy"))) {
-                totToughness += CardFactoryUtil.parseSVar(attachSource, params.get("AddToughness"));
+                totToughness += CardFactoryUtil.parseSVar(attachSource, stabMap.get("AddToughness"));
                 // totPower += CardFactoryUtil.parseSVar(attachSource,
-                // params.get("AddPower"));
+                // sa.get("AddPower"));
     
-                // grantingAbilities |= params.containsKey("AddAbility");
+                // grantingAbilities |= sa.containsKey("AddAbility");
     
-                final String kws = params.get("AddKeyword");
+                final String kws = stabMap.get("AddKeyword");
                 if (kws != null) {
                     for (final String kw : kws.split(" & ")) {
                         keywords.add(kw);
@@ -459,23 +458,23 @@ public class AttachAi extends SpellAiLogic {
     
     /**
      * Attach do trigger ai.
-     * 
-     * @param af
-     *            the af
      * @param sa
      *            the sa
      * @param mandatory
      *            the mandatory
+     * @param af
+     *            the af
+     * 
      * @return true, if successful
      */
     @Override
-    protected boolean doTriggerAINoCost(final Player ai, final Map<String, String> params, final SpellAbility sa, final boolean mandatory) {
+    protected boolean doTriggerAINoCost(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card card = sa.getSourceCard();
         // Check if there are any valid targets
         ArrayList<Object> targets = new ArrayList<Object>();
         final Target tgt = sa.getTarget();
         if (tgt == null) {
-            targets = AbilityFactory.getDefinedObjects(sa.getSourceCard(), params.get("Defined"), sa);
+            targets = AbilityFactory.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
     
         if (!mandatory && card.isEquipment() && !targets.isEmpty()) {
@@ -504,20 +503,20 @@ public class AttachAi extends SpellAiLogic {
      *            the af
      * @param sa
      *            the sa
-     * @param params
-     *            the params
+     * @param sa
+     *            the sa
      * @param tgt
      *            the tgt
      * @param mandatory
      *            the mandatory
      * @return true, if successful
      */
-    public static boolean attachPreference(final SpellAbility sa, final Map<String, String> params, final Target tgt, final boolean mandatory) {
+    public static boolean attachPreference(final SpellAbility sa, final Target tgt, final boolean mandatory) {
         Object o;
         if (tgt.canTgtPlayer()) {
-            o = attachToPlayerAIPreferences(sa.getActivatingPlayer(), params, sa, mandatory);
+            o = attachToPlayerAIPreferences(sa.getActivatingPlayer(), sa, mandatory);
         } else {
-            o = attachToCardAIPreferences(sa.getActivatingPlayer(), sa, params, mandatory);
+            o = attachToCardAIPreferences(sa.getActivatingPlayer(), sa, mandatory);
         }
     
         if (o == null) {
@@ -590,30 +589,30 @@ public class AttachAi extends SpellAiLogic {
         boolean grantingAbilities = false;
     
         for (final StaticAbility stAbility : attachSource.getStaticAbilities()) {
-            final Map<String, String> params = stAbility.getMapParams();
+            final Map<String, String> stabMap = stAbility.getMapParams();
     
-            if (!params.get("Mode").equals("Continuous")) {
+            if (!stabMap.get("Mode").equals("Continuous")) {
                 continue;
             }
     
-            final String affected = params.get("Affected");
+            final String affected = stabMap.get("Affected");
     
             if (affected == null) {
                 continue;
             }
             if ((affected.contains(stCheck) || affected.contains("AttachedBy"))) {
-                totToughness += CardFactoryUtil.parseSVar(attachSource, params.get("AddToughness"));
-                totPower += CardFactoryUtil.parseSVar(attachSource, params.get("AddPower"));
+                totToughness += CardFactoryUtil.parseSVar(attachSource, stabMap.get("AddToughness"));
+                totPower += CardFactoryUtil.parseSVar(attachSource, stabMap.get("AddPower"));
     
-                grantingAbilities |= params.containsKey("AddAbility");
+                grantingAbilities |= stabMap.containsKey("AddAbility");
     
-                String kws = params.get("AddKeyword");
+                String kws = stabMap.get("AddKeyword");
                 if (kws != null) {
                     for (final String kw : kws.split(" & ")) {
                         keywords.add(kw);
                     }
                 }
-                kws = params.get("AddHiddenKeyword");
+                kws = stabMap.get("AddHiddenKeyword");
                 if (kws != null) {
                     for (final String kw : kws.split(" & ")) {
                         keywords.add(kw);
@@ -686,14 +685,13 @@ public class AttachAi extends SpellAiLogic {
      * 
      * @param sa
      *            the sa
-     * @param params
-     *            the params
+     * @param sa
+     *            the sa
      * @param mandatory
      *            the mandatory
      * @return the card
      */
-    private static Card attachToCardAIPreferences(final Player aiPlayer, final SpellAbility sa,
-            final Map<String, String> params, final boolean mandatory) {
+    private static Card attachToCardAIPreferences(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
         final Target tgt = sa.getTarget();
         final Card attachSource = sa.getSourceCard();
         // TODO AttachSource is currently set for the Source of the Spell, but
@@ -721,11 +719,11 @@ public class AttachAi extends SpellAiLogic {
             return null;
         }
         List<Card> prefList = list;
-        if (params.containsKey("AITgts")) {
-            prefList = CardLists.getValidCards(list, params.get("AITgts"), sa.getActivatingPlayer(), attachSource);
+        if (sa.hasParam("AITgts")) {
+            prefList = CardLists.getValidCards(list, sa.getParam("AITgts"), sa.getActivatingPlayer(), attachSource);
         }
     
-        Card c = attachGeneralAI(aiPlayer, sa, prefList, mandatory, attachSource, params.get("AILogic"));
+        Card c = attachGeneralAI(aiPlayer, sa, prefList, mandatory, attachSource, sa.getParam("AILogic"));
     
         if ((c == null) && mandatory) {
             CardLists.shuffle(list);

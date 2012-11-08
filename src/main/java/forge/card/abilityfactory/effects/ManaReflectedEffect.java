@@ -2,8 +2,6 @@ package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import forge.Card;
 import forge.CardUtil;
 import forge.card.abilityfactory.AbilityFactory;
@@ -21,18 +19,18 @@ public class ManaReflectedEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void resolve(Map<String, String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
 
         // Spells are not undoable
         AbilityManaPart ma = sa.getManaPart();
-        ma.setUndoable(sa.getAbilityFactory().isAbility() && ma.isUndoable());
+        ma.setUndoable(sa.isAbility() && ma.isUndoable());
     
-        final List<String> colors = CardUtil.getReflectableManaColors(sa, params, new ArrayList<String>(),
+        final List<String> colors = CardUtil.getReflectableManaColors(sa, sa, new ArrayList<String>(),
                 new ArrayList<Card>());
     
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
         for (final Player player : tgtPlayers) {
-            final String generated = generatedReflectedMana(params, sa, colors, player);
+            final String generated = generatedReflectedMana(sa, colors, player);
             if (ma.getCanceled()) {
                 ma.undo();
                 ma.setCanceled(false);
@@ -63,9 +61,9 @@ public class ManaReflectedEffect extends SpellEffect {
      *            a {@link forge.game.player.Player} object.
      * @return a {@link java.lang.String} object.
      */
-    private static String generatedReflectedMana(final Map<String, String> params, final SpellAbility sa, final List<String> colors, final Player player) {
+    private static String generatedReflectedMana(final SpellAbility sa, final List<String> colors, final Player player) {
         // Calculate generated mana here for stack description and resolving
-        final int amount = params.containsKey("Amount") ? AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("Amount"), sa) : 1;
+        final int amount = sa.hasParam("Amount") ? AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa) : 1;
     
         String baseMana = "";
     

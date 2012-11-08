@@ -2,7 +2,6 @@ package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import forge.Card;
 import forge.Singletons;
@@ -18,22 +17,22 @@ public class DamagePreventAllEffect extends SpellEffect {
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
-    public void resolve(Map<String, String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Card source = sa.getSourceCard();
-        final int numDam = AbilityFactory.calculateAmount(sa.getAbilityFactory().getHostCard(), params.get("Amount"), sa);
+        final int numDam = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa);
 
         String players = "";
         List<Card> list = new ArrayList<Card>();
 
-        if (params.containsKey("ValidPlayers")) {
-            players = params.get("ValidPlayers");
+        if (sa.hasParam("ValidPlayers")) {
+            players = sa.getParam("ValidPlayers");
         }
 
-        if (params.containsKey("ValidCards")) {
+        if (sa.hasParam("ValidCards")) {
             list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         }
 
-        list = AbilityFactory.filterListByType(list, params.get("ValidCards"), sa);
+        list = AbilityFactory.filterListByType(list, sa.getParam("ValidCards"), sa);
 
         for (final Card c : list) {
             c.addPreventNextDamage(numDam);
@@ -50,7 +49,7 @@ public class DamagePreventAllEffect extends SpellEffect {
     } // preventDamageAllResolve
 
     @Override
-    protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         String desc = sa.getDescription();
     

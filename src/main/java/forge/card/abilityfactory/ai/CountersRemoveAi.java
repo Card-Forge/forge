@@ -17,7 +17,7 @@ import forge.util.MyRandom;
 public class CountersRemoveAi extends SpellAiLogic {
     
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what
         // the expected targets could be
@@ -28,8 +28,8 @@ public class CountersRemoveAi extends SpellAiLogic {
         // List<Card> list;
         // Card choice = null;
 
-        final String type = params.get("CounterType");
-        // String amountStr = params.get("CounterNum");
+        final String type = sa.getParam("CounterType");
+        // String amountStr = sa.get("CounterNum");
 
         // TODO - currently, not targeted, only for Self
 
@@ -67,7 +67,7 @@ public class CountersRemoveAi extends SpellAiLogic {
         }
 
         if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
-                && !params.containsKey("ActivationPhases")
+                && !sa.hasParam("ActivationPhases")
                 && !type.equals("M1M1")) {
             return false;
         }
@@ -83,7 +83,7 @@ public class CountersRemoveAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player aiPlayer, java.util.Map<String,String> params, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what the
         // expected targets could be

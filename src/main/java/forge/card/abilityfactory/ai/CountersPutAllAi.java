@@ -24,7 +24,7 @@ import forge.util.MyRandom;
 
 public class CountersPutAllAi extends SpellAiLogic { 
     @Override
-    protected boolean canPlayAI(Player ai, java.util.Map<String,String> params, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
         // based on what
         // the expected targets could be
@@ -33,10 +33,10 @@ public class CountersPutAllAi extends SpellAiLogic {
         final Card source = sa.getSourceCard();
         List<Card> hList;
         List<Card> cList;
-        final String type = params.get("CounterType");
-        final String amountStr = params.get("CounterNum");
-        final String valid = params.get("ValidCards");
-        final boolean curse = sa.getAbilityFactory().isCurse();
+        final String type = sa.getParam("CounterType");
+        final String amountStr = sa.getParam("CounterNum");
+        final String valid = sa.getParam("ValidCards");
+        final boolean curse = sa.isCurse();
         final Target tgt = sa.getTarget();
 
         hList = CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid, source.getController(), source);
@@ -131,7 +131,7 @@ public class CountersPutAllAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(java.util.Map<String,String> params, SpellAbility sa, Player ai) {
-        return canPlayAI(ai, params, sa);
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+        return canPlayAI(ai, sa);
     }
 }

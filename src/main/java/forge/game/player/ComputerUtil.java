@@ -105,8 +105,7 @@ public class ComputerUtil {
         abilities = newAbilities;
         for (final SpellAbility sa : abilities) {
             // Don't add Counterspells to the "normal" playcard lookups
-            final AbilityFactory af = sa.getAbilityFactory();
-            if ((af != null) && af.getAPI() == ApiType.Counter) {
+            if (sa.getApi() == ApiType.Counter) {
                 continue;
             }
             sa.setActivatingPlayer(ai);
@@ -190,8 +189,7 @@ public class ComputerUtil {
 
         final Card source = sa.getSourceCard();
         final Target tgt = sa.getTarget();
-        final AbilityFactory af = sa.getAbilityFactory();
-        final Map<String, String> params = af.getMapParams();
+
 
         // Play higher costing spells first?
         final Cost cost = sa.getPayCosts();
@@ -205,7 +203,7 @@ public class ComputerUtil {
         }
 
         // Abilities before Spells (card advantage)
-        if (af.isAbility()) {
+        if (sa.isAbility()) {
             restrict += 40;
         }
 
@@ -215,7 +213,7 @@ public class ComputerUtil {
         }
 
         // Unless Cost gets significant bonus + 10-Payment Amount
-        final String unless = params.get("UnlessCost");
+        final String unless = sa.getParam("UnlessCost");
         if (unless != null && !unless.endsWith(">")) {
             final int amount = AbilityFactory.calculateAmount(source, unless, sa);
 
@@ -670,7 +668,7 @@ public class ComputerUtil {
                     if (m.isComboMana()) {
                         String colorChoice = costParts[nPart];
                         m.setExpressChoice(colorChoice);
-                        colorChoice = getComboManaChoice(ai, ma.getAbilityFactory().getMapParams(), ma.getSourceCard(), m, sa, cost);
+                        colorChoice = getComboManaChoice(ai, ma, sa, cost);
                         m.setExpressChoice(colorChoice);
                     }
                     // check if ability produces any color
@@ -1159,19 +1157,22 @@ public class ComputerUtil {
      * 
      * @param abMana
      *            a {@link forge.card.spellability.AbilityMana} object.
-     * @param sa
+     * @param saRoot
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param cost
      *            a {@link forge.card.mana.ManaCost} object.
      * @return String
      */
-    public static String getComboManaChoice(final Player ai, final Map<String, String> params, 
-            final Card source, final AbilityManaPart abMana, final SpellAbility sa, final ManaCost cost) {
+    public static String getComboManaChoice(final Player ai, final SpellAbility manaAb, final SpellAbility saRoot, final ManaCost cost) {
 
         final StringBuilder choiceString = new StringBuilder();
 
+        
+        final Card source = manaAb.getSourceCard(); 
+        final AbilityManaPart abMana = manaAb.getManaPart();
+        
         if (abMana.isComboMana()) {
-            int amount = params.containsKey("Amount") ? AbilityFactory.calculateAmount(source, params.get("Amount"), sa) : 1;
+            int amount = manaAb.hasParam("Amount") ? AbilityFactory.calculateAmount(source, manaAb.getParam("Amount"), saRoot) : 1;
             final ManaCost testCost = new ManaCost(cost.toString().replace("X ", ""));
             final String[] comboColors = abMana.getComboColors().split(" ");
             for (int nMana = 1; nMana <= amount; nMana++) {
@@ -1824,16 +1825,12 @@ public class ComputerUtil {
         }
         // sort planeswalker abilities for ultimate
         if (sa.getRestrictions().getPlaneswalker()) {
-            if ((sa.getAbilityFactory() != null) && sa.getAbilityFactory().getMapParams().containsKey("Ultimate")) {
+            if (sa.hasParam("Ultimate")) {
                 p += 9;
             }
         }
-        AbilityFactory af = sa.getAbilityFactory();
-        if (af == null) {
-            return p;
-        }
 
-        if (ApiType.DestroyAll == af.getAPI()) {
+        if (ApiType.DestroyAll == sa.getApi()) {
             p += 4;
         }
 
@@ -1945,9 +1942,8 @@ public class ComputerUtil {
             for (final SpellAbility sa : c.getSpellAbility()) {
                 // This try/catch should fix the "computer is thinking" bug
                 try {
-                    final AbilityFactory af = sa.getAbilityFactory();
 
-                    if (!sa.isAbility() || (af == null) || af.getAPI() != ApiType.Regenerate) {
+                    if (!sa.isAbility() || sa.getApi() != ApiType.Regenerate) {
                         continue; // Not a Regenerate ability
                     }
 
@@ -1956,14 +1952,13 @@ public class ComputerUtil {
                         continue; // Can't play ability
                     }
 
-                    final Map<String, String> mapParams = af.getMapParams();
 
                     final Target tgt = sa.getTarget();
                     if (tgt != null) {
                         if (CardLists.getValidCards(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getSourceCard()).contains(card)) {
                             return true;
                         }
-                    } else if (AbilityFactory.getDefinedCards(sa.getSourceCard(), mapParams.get("Defined"), sa)
+                    } else if (AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa)
                             .contains(card)) {
                         return true;
                     }
@@ -1997,24 +1992,21 @@ public class ComputerUtil {
                 // if SA is from AF_Counter don't add to getPlayable
                 // This try/catch should fix the "computer is thinking" bug
                 try {
-                    if ((sa.getAbilityFactory() != null) && sa.isAbility()) {
-                        final AbilityFactory af = sa.getAbilityFactory();
-                        final Map<String, String> mapParams = af.getMapParams();
-                        if (mapParams.get("AB").equals("PreventDamage") && sa.canPlay()
-                                && ComputerUtil.canPayCost(sa, controller)) {
-                            if (AbilityFactory.getDefinedCards(sa.getSourceCard(), mapParams.get("Defined"), sa)
-                                    .contains(card)) {
-                                prevented += AbilityFactory.calculateAmount(af.getHostCard(), mapParams.get("Amount"),
-                                        sa);
+                    if (sa.getApi() == null || !sa.isAbility()) {
+                        continue;
+                    }
+                        
+                    if (sa.getApi() == ApiType.PreventDamage && sa.canPlay()
+                            && ComputerUtil.canPayCost(sa, controller)) {
+                        if (AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa).contains(card)) {
+                            prevented += AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa);
+                        }
+                        final Target tgt = sa.getTarget();
+                        if (tgt != null) {
+                            if (CardLists.getValidCards(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, sa.getSourceCard()).contains(card)) {
+                                prevented += AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa);
                             }
-                            final Target tgt = sa.getTarget();
-                            if (tgt != null) {
-                                if (CardLists.getValidCards(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), controller, af.getHostCard()).contains(card)) {
-                                    prevented += AbilityFactory.calculateAmount(af.getHostCard(),
-                                            mapParams.get("Amount"), sa);
-                                }
 
-                            }
                         }
                     }
                 } catch (final Exception ex) {

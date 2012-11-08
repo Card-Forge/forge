@@ -1,7 +1,6 @@
 package forge.card.abilityfactory.effects;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -22,11 +21,11 @@ import forge.game.player.Player;
          * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
          */
         @Override
-        public void resolve(Map<String, String> params, SpellAbility sa) {
-            final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("Num"), sa);
+        public void resolve(SpellAbility sa) {
+            final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Num"), sa);
         
             final Target tgt = sa.getTarget();
-            for (final Player p : getTargetPlayers(sa, params)) {
+            for (final Player p : getTargetPlayers(sa)) {
                 if ((tgt == null) || p.canBeTargetedBy(sa)) {
                     p.addPoisonCounters(amount, sa.getSourceCard());
                 }
@@ -37,17 +36,17 @@ import forge.game.player.Player;
          * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
          */
         @Override
-        protected String getStackDescription(Map<String, String> params, SpellAbility sa) {
+        protected String getStackDescription(SpellAbility sa) {
             final StringBuilder sb = new StringBuilder();
-            final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), params.get("Num"), sa);
+            final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Num"), sa);
         
         
-            final String conditionDesc = params.get("ConditionDescription");
+            final String conditionDesc = sa.getParam("ConditionDescription");
             if (conditionDesc != null) {
                 sb.append(conditionDesc).append(" ");
             }
         
-            final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+            final List<Player> tgtPlayers = getTargetPlayers(sa);
         
             sb.append(StringUtils.join(tgtPlayers, ", "));
             sb.append(" ");
