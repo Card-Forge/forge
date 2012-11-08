@@ -241,17 +241,18 @@ public final class CardManaCost implements Comparable<CardManaCost> {
         }
         return iX;
     }
-    
+
     /**
-     * Can this mana cost be paid with unlimited mana of given color set
+     * Can this mana cost be paid with unlimited mana of given color set.
      * @param color
      * @return
      */
-    
+
     public boolean canBePaidWithManaOfColor(CardColor color) {
-        for (ManaCostShard shard : shards) { 
-            if (!shard.canBePaidWithManaOfColor(color))
+        for (ManaCostShard shard : shards) {
+            if (!shard.canBePaidWithManaOfColor(color)) {
                 return false;
+            }
         }
         return true;
     }
