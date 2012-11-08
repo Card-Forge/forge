@@ -1,0 +1,16 @@
+Name:Arsenal Thresher
+ManaCost:2 WB U
+Types:Artifact Creature Construct
+Text:no text
+PT:2/2
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigReveal | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, you may reveal any number of other artifact cards from your hand. CARDNAME enters the battlefield with a +1/+1 counter on it for each card revealed this way.
+SVar:TrigReveal:AB$ Reveal | Cost$ 0 | RevealValid$ Card.Artifact+YouCtrl | AnyNumber$ True | RememberRevealed$ True | SubAbility$ DBPutCounters
+SVar:DBPutCounters:DB$ PutCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/arsenal_thresher.jpg
+SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/131.jpg
+Oracle:As Arsenal Thresher enters the battlefield, you may reveal any number of other artifact cards from your hand. Arsenal Thresher enters the battlefield with a +1/+1 counter on it for each card revealed this way.
+End
