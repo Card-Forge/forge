@@ -60,12 +60,9 @@ import forge.game.player.Player;
 
             // Own description
             String stackDesc = params.get("StackDescription");
-            String spellDesc = params.get("SpellDescription");
             if ( stackDesc != null ) {
                 if ( !"None".equalsIgnoreCase(stackDesc) ) // by typing "none" they want to suppress output
                     sb.append( stackDesc.replace("CARDNAME", sa.getSourceCard().getName()));
-            } else if ( spellDesc != null ) {
-                sb.append( spellDesc.replace("CARDNAME", sa.getSourceCard().getName()) );
             } else
                 sb.append(this.getStackDescription(sa));
             
