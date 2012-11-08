@@ -108,10 +108,11 @@ public class DeckHints {
         }
         return ret;
     }
-    
+
     private static <T, U> void addMatchingItems(Collection<? super T> dest, Iterable<? extends T> source, Predicate<U> predicate, Function<T, U> fn) {
-        for(T item : Iterables.filter(source, Predicates.compose(predicate, fn)))
+        for (T item : Iterables.filter(source, Predicates.compose(predicate, fn))) {
             dest.add(item);
+        }
     }
 
 }
