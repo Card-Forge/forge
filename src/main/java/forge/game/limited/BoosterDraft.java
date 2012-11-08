@@ -97,7 +97,11 @@ public final class BoosterDraft implements IBoosterDraft {
 
             if (draftType == CardPoolLimitation.Block) {
                 for (CardBlock b : Singletons.getModel().getBlocks()) {
-                    blocks.add(b);
+                    if (b.hasMetaSetType("choose1") || b.hasMetaSetType("random1")) {
+                        System.out.println("Ignoring block " + b.getName() + " because its MetaSet types are not supported in Draft.");
+                    } else {
+                        blocks.add(b);
+                    }
                 }
 
             }
