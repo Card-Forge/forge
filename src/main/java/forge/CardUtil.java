@@ -101,8 +101,8 @@ public final class CardUtil {
             case 1: return o.get(0);
             default: return o.get(CardUtil.RANDOM.nextInt(len));
         }
-    }    
-    
+    }
+
     /**
      * <p>
      * getRandomIndex.
@@ -631,8 +631,9 @@ public final class CardUtil {
             final Card src) {
         List<Card> res = new ArrayList<Card>();
         if (to != ZoneType.Stack) {
-            for (Player p : Singletons.getModel().getGame().getPlayers())
+            for (Player p : Singletons.getModel().getGame().getPlayers()) {
                 res.addAll(p.getZone(to).getCardsAddedThisTurn(from));
+            }
         } else {
             res.addAll(Singletons.getModel().getGame().getStackZone().getCardsAddedThisTurn(from));
         }
@@ -892,8 +893,7 @@ public final class CardUtil {
 
         return ret;
     }
-    
-    
+
     private static List<String> getColorsOfCards(final int maxChoices, final List<Card> cards, final List<String> colors) {
         for (final Card card : cards) {
             // For each card, go through all the colors and if the card is that
@@ -908,7 +908,7 @@ public final class CardUtil {
             }
         }
         return colors;
-    }    
+    }
 
     // add Colors and
     /**
@@ -933,11 +933,11 @@ public final class CardUtil {
         // so we basically need to have a recursive list that send the parents
         // so we don't infinite recurse.
         final Card card = abMana.getSourceCard();
-    
+
         if (!parents.contains(card)) {
             parents.add(card);
         }
-    
+
         final String colorOrType = sa.getParam("ColorOrType"); // currently Color
                                                               // or
         // Type, Type is colors
@@ -945,14 +945,14 @@ public final class CardUtil {
         final String validCard = sa.getParam("Valid");
         final String reflectProperty = sa.getParam("ReflectProperty"); // Produce
         // (Reflecting Pool) or Is (Meteor Crater)
-    
+
         int maxChoices = 5; // Color is the default colorOrType
         if (colorOrType.equals("Type")) {
             maxChoices++;
         }
-    
+
         List<Card> cards = null;
-    
+
         // Reuse AF_Defined in a slightly different way
         if (validCard.startsWith("Defined.")) {
             cards = new ArrayList<Card>();
@@ -962,18 +962,18 @@ public final class CardUtil {
         } else {
             cards = CardLists.getValidCards(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), validCard, abMana.getActivatingPlayer(), card);
         }
-    
+
         // remove anything cards that is already in parents
         for (final Card p : parents) {
             if (cards.contains(p)) {
                 cards.remove(p);
             }
         }
-    
+
         if ((cards.size() == 0) && !reflectProperty.equals("Produced")) {
             return colors;
         }
-    
+
         if (reflectProperty.equals("Is")) { // Meteor Crater
             colors = getColorsOfCards(maxChoices, cards, colors);
         } else if (reflectProperty.equals("Produced")) {
@@ -994,14 +994,14 @@ public final class CardUtil {
             }
             // currently reflected mana will ignore other reflected mana
             // abilities
-    
+
             final ArrayList<AbilityActivated> reflectAbilities = new ArrayList<AbilityActivated>();
-    
+
             for (final AbilityActivated ab : abilities) {
                 if (maxChoices == colors.size()) {
                     break;
                 }
-    
+
                 if (ab.getManaPart().isReflectedMana()) {
                     if (!parents.contains(ab.getSourceCard())) {
                         // Recursion!
@@ -1015,18 +1015,18 @@ public final class CardUtil {
                     parents.add(ab.getSourceCard());
                 }
             }
-    
+
             for (final AbilityActivated ab : reflectAbilities) {
                 if (maxChoices == colors.size()) {
                     break;
                 }
-    
+
                 colors = CardUtil.getReflectableManaColors(ab, sa, colors, parents);
             }
         }
         return colors;
     }
-    
+
     public static List<String> canProduce(final int maxChoices, final AbilityManaPart ab,
             final List<String> colors) {
         for (final String col : Constant.Color.ONLY_COLORS) {
@@ -1035,13 +1035,13 @@ public final class CardUtil {
                 colors.add(col);
             }
         }
-    
+
         if ((maxChoices == 6) && ab.canProduce("1") && !colors.contains(Constant.Color.COLORLESS)) {
             colors.add(Constant.Color.COLORLESS);
         }
-    
+
         return colors;
     }
 
-    
+
 } // end class CardUtil
