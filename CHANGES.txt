@@ -237,6 +237,28 @@ Fixes/Features:
 - AF: ChangeZone converted
 - Orphaned javadoc cleanup.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Running set info for PC2 cards that were never ran previously
+- CheckStyle.
+- CheckStyle.
+- CheckStyle.
+- Performance updates in ComputerUtilAttack.
+- Added Suppression Field.
+- Converted Donate to script
+- AbilityManaPart has to add SA to trigger it raises =(
+- AF:CopyPerm - used shortcuts to select target cards and collect a line
+- CardFactoryUtil: extract method
+- ETBReplacementMove converted to SpellEffect, wrapped it into CommonDrawback
+- Converted Wing Puncture to script.
+- ChangeZoneAi: made method names shorter, removed check for subAb drawbacks (since it's checked in wrapper class)
+- getParent method added to SpellAbility, moved static methods getParent{withProperty} and findRoot to SpellAbility class
+- removed excessive checks from caller methods
+- SpellAbility: targetList removed (noone has assigned to it anything meaningful)
+- Fixing Auras requesting SpellPermanent and causing a crash, since Auras no longer use the SpellPermanent class
+- Adding KeywordMultiplier parameter to StaticContinuous
+- moved params and api into SpellAbility, made param getters NPE-proof, cut reference to AbilityFactory
+- AbilityFactory: getAbility ready to be made static
+- License text + JavaDoc added to QuestUtilUnlockSets.java.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -260,6 +282,9 @@ Rust Elemental
 Divergent Growth
 Parallax Nexus
 Rising Waters
+Overlaid Terrain
+Summoner's Egg
+Kemba's Legion
 
 
 end
