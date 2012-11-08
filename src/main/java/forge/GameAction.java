@@ -80,12 +80,12 @@ public class GameAction {
      * resetActivationsPerTurn.
      * </p>
      */
-    
+
     private final GameState game;
     public GameAction(GameState game0) {
         game = game0;
     }
-    
+
     public final void resetActivationsPerTurn() {
         final List<Card> all = game.getCardsInGame();
 
@@ -125,7 +125,7 @@ public class GameAction {
             else {
                 zoneTo.add(c, position);
             }
-            
+
             zoneTo.updateLabelObservers();
             return c;
         }
@@ -419,8 +419,8 @@ public class GameAction {
         }
 
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        for (Player p: game.getPlayers()) {
-            ((PlayerZoneBattlefield)p.getZone(ZoneType.Battlefield)).setTriggers(false);
+        for (Player p : game.getPlayers()) {
+            ((PlayerZoneBattlefield) p.getZone(ZoneType.Battlefield)).setTriggers(false);
         }
 
         final int tiz = c.getTurnInZone();
@@ -440,8 +440,8 @@ public class GameAction {
         game.getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams);
 
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-        for (Player p: game.getPlayers()) {
-            ((PlayerZoneBattlefield)p.getZone(ZoneType.Battlefield)).setTriggers(true);
+        for (Player p : game.getPlayers()) {
+            ((PlayerZoneBattlefield) p.getZone(ZoneType.Battlefield)).setTriggers(true);
         }
     }
 
@@ -911,52 +911,59 @@ public class GameAction {
         GameEndReason reason = null;
         // award loses as SBE
         List<Player> losers = null;
-        for (Player p : game.getPlayers() ) {
-            if ( p.checkLoseCondition() ) { // this will set appropriate outcomes
+        for (Player p : game.getPlayers()) {
+            if (p.checkLoseCondition()) { // this will set appropriate outcomes
                 // Run triggers
-                if ( losers == null) 
+                if (losers == null) {
                     losers = new ArrayList<Player>(3);
+                }
                 losers.add(p);
             }
         }
 
         // Has anyone won by spelleffect?
-        for (Player p : game.getPlayers() ) {
-            if( !p.hasWon() ) continue;
+        for (Player p : game.getPlayers()) {
+            if (!p.hasWon()) {
+                continue;
+            }
 
             // then the rest have lost!
             reason = GameEndReason.WinsGameSpellEffect;
-            for (Player pl : game.getPlayers() ) {
-                if( pl.equals(p) ) continue;
-                
-                if ( !pl.loseConditionMet(GameLossReason.OpponentWon, p.getOutcome().altWinSourceName) )
+            for (Player pl : game.getPlayers()) {
+                if (pl.equals(p)) {
+                    continue;
+                }
+
+                if (!pl.loseConditionMet(GameLossReason.OpponentWon, p.getOutcome().altWinSourceName)) {
                     reason = null; // they cannot lose!
-                else {
-                    if ( losers == null) 
+                } else {
+                    if (losers == null) {
                         losers = new ArrayList<Player>(3);
+                    }
                     losers.add(p);
                 }
             }
             break;
         }
-        
+
         // need a separate loop here, otherwise ConcurrentModificationException is raised
-        if( losers != null ) {
-            for (Player p : losers )
+        if (losers != null) {
+            for (Player p : losers) {
                 game.onPlayerLost(p);
-        }        
-        
+            }
+        }
+
         // still unclear why this has not caught me conceding
-        if ( reason == null && Iterables.size(Iterables.filter(game.getPlayers(), Player.Predicates.NOT_LOST)) == 1 )
+        if (reason == null && Iterables.size(Iterables.filter(game.getPlayers(), Player.Predicates.NOT_LOST)) == 1)
         {
             reason = GameEndReason.AllOpponentsLost;
         }
-        
+
         // ai's cannot finish their game without human yet - so terminate a game if human has left.
-        if ( reason == null && !Iterables.any(game.getPlayers(), Predicates.and(Player.Predicates.NOT_LOST, Player.Predicates.isType(PlayerType.HUMAN))) ) {
+        if (reason == null && !Iterables.any(game.getPlayers(), Predicates.and(Player.Predicates.NOT_LOST, Player.Predicates.isType(PlayerType.HUMAN)))) {
             reason = GameEndReason.AllHumansLost;
         }
-        
+
         if (reason != null) {
             game.setGameOver();
             match.addGamePlayed(reason, game);
@@ -1057,7 +1064,7 @@ public class GameAction {
             game.getTriggerHandler().runTrigger(TriggerType.Always, runParams);
 
             for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
-                
+
                 if (c.isEquipped()) {
                     final List<Card> equipments = new ArrayList<Card>(c.getEquippedBy());
                     for (final Card equipment : equipments) {
@@ -1086,8 +1093,8 @@ public class GameAction {
                 if (c.isAura()) {
                     // Check if Card Aura is attached to is a legal target
                     final GameEntity entity = c.getEnchanting();
-                    final SpellAbility sa = c.getSpells().get(0);;
-                    
+                    final SpellAbility sa = c.getSpells().get(0);
+
                     Target tgt = null;
                     if (sa != null) {
                         tgt = sa.getTarget();
@@ -1492,7 +1499,7 @@ public class GameAction {
             undyingAb.setStackDescription(newCard.getName() + " - Returning from Undying");
             undyingAb.setDescription(newCard.getName() + " - Returning from Undying");
             undyingAb.setActivatingPlayer(c.getController());
-            
+
             game.getStack().addSimultaneousStackEntry(undyingAb);
         }
         return true;
@@ -1576,7 +1583,7 @@ public class GameAction {
                 choices.add("Play land");
             }
         }
-        
+
         final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
         for (SpellAbility sa : c.getSpellAbilities()) {
             sa.setActivatingPlayer(human);
@@ -1719,13 +1726,13 @@ public class GameAction {
             if (spell.getIsDelve()) {
                 final int cardsInGrave = originalCard.getController().getCardsIn(ZoneType.Graveyard).size();
 
-                final Player pc = originalCard.getController(); 
+                final Player pc = originalCard.getController();
                 if (pc.isHuman()) {
-                    final Integer[] cntChoice = new Integer[cardsInGrave+1];
+                    final Integer[] cntChoice = new Integer[cardsInGrave + 1];
                     for (int i = 0; i <= cardsInGrave; i++) {
                         cntChoice[i] = Integer.valueOf(i);
                     }
-                    
+
                     final Integer chosenAmount = GuiChoose.one("Exile how many cards?", cntChoice);
                     System.out.println("Delve for " + chosenAmount);
                     final List<Card> choices = pc.getCardsIn(ZoneType.Graveyard);
