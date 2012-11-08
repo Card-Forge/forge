@@ -47,9 +47,9 @@ public final class Constant {
         public static boolean DEV_MODE;
         /** The Constant UpldDrft. */
         public static boolean UPLOAD_DRAFT;
-        
+
     }
-    
+
     public static class Runtime {
         /** The Constant NetConn. */
         public static volatile boolean NET_CONN = false;
