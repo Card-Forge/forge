@@ -57,7 +57,7 @@ import forge.game.zone.ZoneType;
  */
 public class AbilityFactory {
 
-    private Card hostC = null;
+    
 
     /**
      * <p>
@@ -65,76 +65,6 @@ public class AbilityFactory {
      * </p>
      */
     public AbilityFactory() {
-    }
-
-    /**
-     * <p>
-     * getHostCard.
-     * </p>
-     * 
-     * @return a {@link forge.Card} object.
-     */
-    public final Card getHostCard() {
-        return this.hostC;
-    }
-
-    /**
-     * <p>
-     * setHostCard.
-     * </p>
-     * 
-     * @param host
-     *            a Card object.
-     * 
-     */
-    public final void setHostCard(final Card host) {
-        this.hostC = host;
-    }
-
-    private Map<String, String> mapParams = new HashMap<String, String>();
-
-    /**
-     * <p>
-     * Getter for the field <code>mapParams</code>.
-     * </p>
-     * 
-     * @return a {@link java.util.HashMap} object.
-     */
-    public final Map<String, String> getMapParams() {
-        return this.mapParams;
-    }
-
-    private boolean isAb = false;
-    private boolean isSp = false;
-    private boolean isDb = false;
-
-    private boolean isTargeted = false;
-    private boolean hasValid = false;
-    private Target abTgt = null;
-
-    /**
-     * <p>
-     * Getter for the field <code>abTgt</code>.
-     * </p>
-     * 
-     * @return a {@link forge.card.spellability.Target} object.
-     */
-    public final Target getAbTgt() {
-        return this.abTgt;
-    }
-
-
-    private ApiType api = null;
-
-    /**
-     * <p>
-     * getAPI.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public final ApiType getAPI() {
-        return this.api;
     }
 
     // *******************************************************
@@ -176,10 +106,21 @@ public class AbilityFactory {
 
         SpellAbility spellAbility = null;
 
-        this.hostC = hostCard;
+        boolean isAb = false;
+        boolean isSp = false;
+        boolean isDb = false;
+
+        boolean isTargeted = false;
+        boolean hasValid = false;
+        Target abTgt = null;
+        ApiType api = null;
+
+        Card hostC = hostCard;
+        Map<String, String> mapParams = new HashMap<String, String>();
+
 
         try{ 
-            this.mapParams = AbilityFactory.getMapParams(abString);
+            mapParams = AbilityFactory.getMapParams(abString);
         }
         catch( RuntimeException ex )
         {
@@ -188,89 +129,89 @@ public class AbilityFactory {
 
         // parse universal parameters
 
-        if (this.mapParams.containsKey("AB")) {
-            this.isAb = true;
-            this.api = ApiType.smartValueOf(this.mapParams.get("AB"));
-        } else if (this.mapParams.containsKey("SP")) {
-            this.isSp = true;
-            this.api = ApiType.smartValueOf(this.mapParams.get("SP"));
-        } else if (this.mapParams.containsKey("DB")) {
-            this.isDb = true;
-            this.api = ApiType.smartValueOf(this.mapParams.get("DB"));
+        if (mapParams.containsKey("AB")) {
+            isAb = true;
+            api = ApiType.smartValueOf(mapParams.get("AB"));
+        } else if (mapParams.containsKey("SP")) {
+            isSp = true;
+            api = ApiType.smartValueOf(mapParams.get("SP"));
+        } else if (mapParams.containsKey("DB")) {
+            isDb = true;
+            api = ApiType.smartValueOf(mapParams.get("DB"));
         } else {
             throw new RuntimeException("AbilityFactory : getAbility -- no API in " + hostCard.getName());
         }
 
         Cost abCost = null;
-        if (!this.isDb) {
-            if (!this.mapParams.containsKey("Cost")) {
+        if (!isDb) {
+            if (!mapParams.containsKey("Cost")) {
                 throw new RuntimeException("AbilityFactory : getAbility -- no Cost in " + hostCard.getName());
             }
-            abCost = new Cost(hostCard, this.mapParams.get("Cost"), this.isAb);
+            abCost = new Cost(hostCard, mapParams.get("Cost"), isAb);
 
         }
 
-        if (this.mapParams.containsKey("ValidTgts")) {
-            this.hasValid = true;
-            this.isTargeted = true;
+        if (mapParams.containsKey("ValidTgts")) {
+            hasValid = true;
+            isTargeted = true;
         }
 
-        if (this.mapParams.containsKey("Tgt")) {
-            this.isTargeted = true;
+        if (mapParams.containsKey("Tgt")) {
+            isTargeted = true;
         }
 
-        if (this.isTargeted) {
-            final String min = this.mapParams.containsKey("TargetMin") ? this.mapParams.get("TargetMin") : "1";
-            final String max = this.mapParams.containsKey("TargetMax") ? this.mapParams.get("TargetMax") : "1";
+        if (isTargeted) {
+            final String min = mapParams.containsKey("TargetMin") ? mapParams.get("TargetMin") : "1";
+            final String max = mapParams.containsKey("TargetMax") ? mapParams.get("TargetMax") : "1";
 
-            if (this.hasValid) {
+            if (hasValid) {
                 // TgtPrompt now optional
                 final StringBuilder sb = new StringBuilder();
-                if (this.hostC != null) {
-                    sb.append(this.hostC + " - ");
+                if (hostC != null) {
+                    sb.append(hostC + " - ");
                 }
-                final String prompt = this.mapParams.containsKey("TgtPrompt") ? this.mapParams.get("TgtPrompt")
-                        : "Select target " + this.mapParams.get("ValidTgts");
+                final String prompt = mapParams.containsKey("TgtPrompt") ? mapParams.get("TgtPrompt")
+                        : "Select target " + mapParams.get("ValidTgts");
                 sb.append(prompt);
-                this.abTgt = new Target(this.hostC, sb.toString(), this.mapParams.get("ValidTgts").split(","), min, max);
+                abTgt = new Target(hostC, sb.toString(), mapParams.get("ValidTgts").split(","), min, max);
             } else {
-                this.abTgt = new Target(this.hostC, this.mapParams.get("Tgt"), min, max);
+                abTgt = new Target(hostC, mapParams.get("Tgt"), min, max);
             }
 
-            if (this.mapParams.containsKey("TgtZone")) { // if Targeting
+            if (mapParams.containsKey("TgtZone")) { // if Targeting
                                                          // something
                 // not in play, this Key
                 // should be set
-                this.abTgt.setZone(ZoneType.listValueOf(this.mapParams.get("TgtZone")));
+                abTgt.setZone(ZoneType.listValueOf(mapParams.get("TgtZone")));
             }
 
             // Target Type mostly for Counter: Spell,Activated,Triggered,Ability
             // (or any combination of)
             // Ability = both activated and triggered abilities
-            if (this.mapParams.containsKey("TargetType")) {
-                this.abTgt.setTargetSpellAbilityType(this.mapParams.get("TargetType"));
+            if (mapParams.containsKey("TargetType")) {
+                abTgt.setTargetSpellAbilityType(mapParams.get("TargetType"));
             }
 
             // TargetValidTargeting most for Counter: e.g. target spell that
             // targets X.
-            if (this.mapParams.containsKey("TargetValidTargeting")) {
-                this.abTgt.setSAValidTargeting(this.mapParams.get("TargetValidTargeting"));
+            if (mapParams.containsKey("TargetValidTargeting")) {
+                abTgt.setSAValidTargeting(mapParams.get("TargetValidTargeting"));
             }
 
-            if (this.mapParams.containsKey("TargetUnique")) {
-                this.abTgt.setUniqueTargets(true);
+            if (mapParams.containsKey("TargetUnique")) {
+                abTgt.setUniqueTargets(true);
             }
-            if (this.mapParams.containsKey("TargetsFromSingleZone")) {
-                this.abTgt.setSingleZone(true);
+            if (mapParams.containsKey("TargetsFromSingleZone")) {
+                abTgt.setSingleZone(true);
             }
-            if (this.mapParams.containsKey("TargetsFromDifferentZone")) {
-                this.abTgt.setDifferentZone(true);
+            if (mapParams.containsKey("TargetsFromDifferentZone")) {
+                abTgt.setDifferentZone(true);
             }
-            if (this.mapParams.containsKey("TargetsWithoutSameCreatureType")) {
-                this.abTgt.setWithoutSameCreatureType(true);
+            if (mapParams.containsKey("TargetsWithoutSameCreatureType")) {
+                abTgt.setWithoutSameCreatureType(true);
             }
-            if (this.mapParams.containsKey("TargetsWithDefinedController")) {
-                this.abTgt.setDefinedController(this.mapParams.get("TargetsWithDefinedController"));
+            if (mapParams.containsKey("TargetsWithDefinedController")) {
+                abTgt.setDefinedController(mapParams.get("TargetsWithDefinedController"));
             }
         }
 
@@ -278,32 +219,32 @@ public class AbilityFactory {
         // Match API keywords. These are listed in alphabetical order.
 
 
-        if (this.api == ApiType.CopySpell) {
-            if (this.isTargeted) { 
+        if (api == ApiType.CopySpell) {
+            if (isTargeted) { 
                 // Since all "CopySpell" ABs copy things on the Stack no need for it to be everywhere
-                this.abTgt.setZone(ZoneType.Stack);
+                abTgt.setZone(ZoneType.Stack);
             }
 
             hostCard.setCopiesSpells(true);
         }
 
-        else if (this.api == ApiType.Counter) {
+        else if (api == ApiType.Counter) {
             // Since all "Counter" ABs Counter things on the Stack no need for
             // it to be everywhere
-            if (this.isTargeted) {
-                this.abTgt.setZone(ZoneType.Stack);
+            if (isTargeted) {
+                abTgt.setZone(ZoneType.Stack);
             }
         }
 
         SpellAiLogic ai = api.getAi();
         SpellEffect se = api.getSpellEffect();
         
-        if (this.isAb) {
-            spellAbility = new CommonAbility(api, this.getHostCard(), abCost, this.getAbTgt(), this.getMapParams(), se, ai);
-        } else if (this.isSp) {
-            spellAbility = new CommonSpell(api, this.getHostCard(), abCost, this.getAbTgt(), this.getMapParams(), se, ai);
-        } else if (this.isDb) {
-            spellAbility = new CommonDrawback(api, this.getHostCard(), this.getAbTgt(), this.getMapParams(), se, ai);
+        if (isAb) {
+            spellAbility = new CommonAbility(api, hostCard, abCost, abTgt, mapParams, se, ai);
+        } else if (isSp) {
+            spellAbility = new CommonSpell(api, hostCard, abCost, abTgt, mapParams, se, ai);
+        } else if (isDb) {
+            spellAbility = new CommonDrawback(api, hostCard, abTgt, mapParams, se, ai);
         }
 
         
@@ -317,7 +258,7 @@ public class AbilityFactory {
             final StringBuilder msg = new StringBuilder();
             msg.append("AbilityFactory : SpellAbility was not created for ");
             msg.append(hostCard.getName());
-            msg.append(". Looking for API: ").append(this.api);
+            msg.append(". Looking for API: ").append(api);
             throw new RuntimeException(msg.toString());
         }
 
@@ -326,45 +267,45 @@ public class AbilityFactory {
 
 
 
-        if (this.mapParams.containsKey("References")) {
-            for (String svar : this.mapParams.get("References").split(",")) {
-                spellAbility.setSVar(svar, this.hostC.getSVar(svar));
+        if (mapParams.containsKey("References")) {
+            for (String svar : mapParams.get("References").split(",")) {
+                spellAbility.setSVar(svar, hostC.getSVar(svar));
             }
         }
 
-        if (getMapParams().containsKey("SubAbility"))
-            spellAbility.setSubAbility(this.getSubAbility());
+        if (mapParams.containsKey("SubAbility"))
+            spellAbility.setSubAbility(getSubAbility(hostCard, hostCard.getSVar(mapParams.get("SubAbility"))));
 
         if (spellAbility instanceof SpellPermanent) {
             spellAbility.setDescription(spellAbility.getSourceCard().getName());
-        } else if (this.mapParams.containsKey("SpellDescription")) {
+        } else if (mapParams.containsKey("SpellDescription")) {
             final StringBuilder sb = new StringBuilder();
 
-            if (!this.isDb) { // SubAbilities don't have Costs or Cost
+            if (!isDb) { // SubAbilities don't have Costs or Cost
                               // descriptors
-                if (this.mapParams.containsKey("PrecostDesc")) {
-                    sb.append(this.mapParams.get("PrecostDesc")).append(" ");
+                if (mapParams.containsKey("PrecostDesc")) {
+                    sb.append(mapParams.get("PrecostDesc")).append(" ");
                 }
-                if (this.mapParams.containsKey("CostDesc")) {
-                    sb.append(this.mapParams.get("CostDesc")).append(" ");
+                if (mapParams.containsKey("CostDesc")) {
+                    sb.append(mapParams.get("CostDesc")).append(" ");
                 } else {
                     sb.append(abCost.toString());
                 }
             }
 
-            sb.append(this.mapParams.get("SpellDescription"));
+            sb.append(mapParams.get("SpellDescription"));
 
             spellAbility.setDescription(sb.toString());
         } else {
             spellAbility.setDescription("");
         }
 
-        if (this.mapParams.containsKey("NonBasicSpell")) {
+        if (mapParams.containsKey("NonBasicSpell")) {
             spellAbility.setBasicSpell(false);
         }
 
-        this.makeRestrictions(spellAbility);
-        this.makeConditions(spellAbility);
+        makeRestrictions(spellAbility, mapParams);
+        makeConditions(spellAbility, mapParams);
 
         return spellAbility;
     }
@@ -376,14 +317,15 @@ public class AbilityFactory {
      * 
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mapParams 
      */
-    private void makeRestrictions(final SpellAbility sa) {
+    private void makeRestrictions(final SpellAbility sa, Map<String, String> mapParams) {
         // SpellAbilityRestrictions should be added in here
         final SpellAbilityRestriction restrict = sa.getRestrictions();
-        if (this.mapParams.containsKey("Flashback")) {
+        if (mapParams.containsKey("Flashback")) {
             sa.setFlashBackAbility(true);
         }
-        restrict.setRestrictions(this.mapParams);
+        restrict.setRestrictions(mapParams);
     }
 
     /**
@@ -393,14 +335,15 @@ public class AbilityFactory {
      * 
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
+     * @param mapParams 
      */
-    private void makeConditions(final SpellAbility sa) {
+    private void makeConditions(final SpellAbility sa, Map<String, String> mapParams) {
         // SpellAbilityRestrictions should be added in here
         final SpellAbilityCondition condition = sa.getConditions();
-        if (this.mapParams.containsKey("Flashback")) {
+        if (mapParams.containsKey("Flashback")) {
             sa.setFlashBackAbility(true);
         }
-        condition.setConditions(this.mapParams);
+        condition.setConditions(mapParams);
     }
 
     /**
@@ -421,24 +364,20 @@ public class AbilityFactory {
      * <p>
      * getSubAbility.
      * </p>
+     * @param sSub 
      * 
      * @return a {@link forge.card.spellability.AbilitySub} object.
      */
-    private final AbilitySub getSubAbility() {
-        AbilitySub abSub = null;
-
-        String sSub = this.getMapParams().get("SubAbility");
-
-        sSub = this.getHostCard().getSVar(sSub);
+    private final AbilitySub getSubAbility(Card hostCard, String sSub) {
 
         if (!sSub.equals("")) {
             final AbilityFactory afDB = new AbilityFactory();
-            abSub = (AbilitySub) afDB.getAbility(sSub, this.getHostCard());
+            return (AbilitySub) afDB.getAbility(sSub, hostCard);
         } else {
-            System.out.println("SubAbility not found for: " + this.getHostCard());
+            System.out.println("SubAbility not found for: " + hostCard);
         }
 
-        return abSub;
+        return null;
     }
 
     public static ArrayList<String> getProtectionList(final SpellAbility sa) {
