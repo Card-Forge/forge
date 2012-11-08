@@ -24,6 +24,7 @@ import java.util.List;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
@@ -89,6 +90,7 @@ public class StaticEffects {
 
         int powerBonus = 0;
         int toughnessBonus = 0;
+        int keywordMultiplier = 1;
         boolean setPT = false;
         String[] addKeywords = null;
         String[] addHiddenKeywords = null;
@@ -118,6 +120,15 @@ public class StaticEffects {
             }
         }
 
+        if (params.containsKey("KeywordMultiplier")) {
+            String multiplier = params.get("KeywordMultiplier");
+            if (multiplier.equals("X")) {
+                keywordMultiplier = se.getXValue();
+            } else {
+                keywordMultiplier = Integer.valueOf(multiplier);
+            }
+        }
+
         if (params.containsKey("AddHiddenKeyword")) {
             addHiddenKeywords = params.get("AddHiddenKeyword").split(" & ");
         }
@@ -141,7 +152,9 @@ public class StaticEffects {
             // add keywords
             if (addKeywords != null) {
                 for (final String keyword : addKeywords) {
-                    p.removeKeyword(keyword);
+                    for (int i = 0; i < keywordMultiplier; i++) {
+                        p.removeKeyword(keyword);
+                    }
                 }
             }
         }
@@ -160,6 +173,8 @@ public class StaticEffects {
             affectedCard.addSemiPermanentDefenseBoost(toughnessBonus * -1);
 
             // remove keywords
+            // TODO regular keywords currently don't try to use keyword multiplier
+            // (Although nothing uses it at this time)
             if (params.containsKey("AddKeyword") || params.containsKey("RemoveKeyword")
                     || params.containsKey("RemoveAllAbilities")) {
                 affectedCard.removeChangedCardKeywords(se.getTimestamp());
@@ -177,7 +192,9 @@ public class StaticEffects {
 
             if (addHiddenKeywords != null) {
                 for (final String k : addHiddenKeywords) {
-                    affectedCard.removeExtrinsicKeyword(k);
+                    for (int j = 0; j < keywordMultiplier; j++) {
+                        affectedCard.removeExtrinsicKeyword(k);
+                    }
                 }
             }
 

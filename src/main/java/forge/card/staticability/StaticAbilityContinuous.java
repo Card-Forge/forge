@@ -72,6 +72,8 @@ public class StaticAbilityContinuous {
         int setPower = -1;
         String setT = "";
         int setToughness = -1;
+        int keywordMultiplier = 1;
+
         String[] addKeywords = null;
         String[] addHiddenKeywords = null;
         String[] removeKeywords = null;
@@ -121,6 +123,16 @@ public class StaticAbilityContinuous {
                 se.setYValue(toughnessBonus);
             } else {
                 toughnessBonus = Integer.valueOf(params.get("AddToughness"));
+            }
+        }
+
+        if (params.containsKey("KeywordMultiplier")) {
+            String multiplier = params.get("KeywordMultiplier");
+            if (multiplier.equals("X")) {
+                keywordMultiplier = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
+                se.setXValue(keywordMultiplier);
+            } else {
+                keywordMultiplier = Integer.valueOf(multiplier);
             }
         }
 
@@ -257,7 +269,9 @@ public class StaticAbilityContinuous {
             // add keywords
             if (addKeywords != null) {
                 for (final String keyword : addKeywords) {
-                    p.addKeyword(keyword);
+                    for (int i = 0; i < keywordMultiplier; i++) {
+                        p.addKeyword(keyword);
+                    }
                 }
             }
 
@@ -304,6 +318,8 @@ public class StaticAbilityContinuous {
             affectedCard.addSemiPermanentDefenseBoost(toughnessBonus);
 
             // add keywords
+            // TODO regular keywords currently don't try to use keyword multiplier
+            // (Although nothing uses it at this time)
             if ((addKeywords != null) || (removeKeywords != null) || removeAllAbilities) {
                 affectedCard.addChangedCardKeywords(addKeywords, removeKeywords, removeAllAbilities,
                         hostCard.getTimestamp());
@@ -312,7 +328,9 @@ public class StaticAbilityContinuous {
             // add HIDDEN keywords
             if (addHiddenKeywords != null) {
                 for (final String k : addHiddenKeywords) {
-                    affectedCard.addExtrinsicKeyword(k);
+                    for (int j = 0; j < keywordMultiplier; j++) {
+                        affectedCard.addExtrinsicKeyword(k);
+                    }
                 }
             }
 
@@ -407,11 +425,11 @@ public class StaticAbilityContinuous {
 
         final String[] strngs = params.get("Affected").split(",");
 
-        for(Player p : Singletons.getModel().getGame().getPlayers())
+        for (Player p : Singletons.getModel().getGame().getPlayers()) {
             if (p.isValid(strngs, controller, hostCard)) {
                 players.add(p);
             }
-    
+        }
 
         return players;
     }
