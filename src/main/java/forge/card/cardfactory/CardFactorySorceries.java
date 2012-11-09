@@ -251,43 +251,6 @@ public class CardFactorySorceries {
 
     }
 
-    private final static SpellAbility getParralelEvolution(final Card card) {
-        final Spell result = new Spell(card) {
-            private static final long serialVersionUID = 3456160935845779623L;
-
-            @Override
-            public boolean canPlayAI() {
-                final Player ai = getActivatingPlayer();
-                final Player opp = ai.getOpponent();
-                List<Card> humTokenCreats = CardLists.filter(opp.getCreaturesInPlay(), Presets.TOKEN);
-                List<Card> compTokenCreats = CardLists.filter(ai.getCreaturesInPlay(), Presets.TOKEN);
-
-                return compTokenCreats.size() > humTokenCreats.size();
-            } // canPlayAI()
-
-            @Override
-            public void resolve() {
-                List<Card> tokens = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
-                tokens = CardLists.filter(tokens, Presets.TOKEN);
-
-                CardFactoryUtil.copyTokens(tokens);
-
-            } // resolve()
-        }; // SpellAbility
-
-        final StringBuilder sbDesc = new StringBuilder();
-        sbDesc.append("For each creature token on the battlefield, ");
-        sbDesc.append("its controller puts a token that's a copy of that creature onto the battlefield.");
-        result.setDescription(sbDesc.toString());
-
-        final StringBuilder sbStack = new StringBuilder();
-        sbStack.append("Parallel Evolution - For each creature ");
-        sbStack.append("token on the battlefield, its controller puts a token that's a copy of ");
-        sbStack.append("that creature onto the battlefield.");
-        result.setStackDescription(sbStack.toString());
-        return result;
-    }
-
     private final static SpellAbility getGlobalRuin( final Card card ) {
         final List<Card> target = new ArrayList<Card>();
         final List<Card> saveList = new ArrayList<Card>();
@@ -1377,7 +1340,6 @@ public class CardFactorySorceries {
     public static void buildCard(final Card card, final String cardName) {
 
         if (cardName.equals("Brilliant Ultimatum")) { card.addSpellAbility(getBrilliantUltimatum(card));
-        } else if (cardName.equals("Parallel Evolution")) { card.addSpellAbility(getParralelEvolution(card));
         } else if (cardName.equals("Global Ruin")) { card.addSpellAbility(getGlobalRuin(card));
         } else if (cardName.equals("Haunting Echoes")) { card.addSpellAbility(getHauntingEchoes(card));
         } else if (cardName.equals("Balance")) { card.addSpellAbility(getBalance(card));

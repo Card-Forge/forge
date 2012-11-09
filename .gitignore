@@ -1,6 +1,7 @@
 /*.idea
 /*.iml
 /*.tmp
+/.metadata
 .settings/org.eclipse.core.resources.prefs
 /build
 /forge.log

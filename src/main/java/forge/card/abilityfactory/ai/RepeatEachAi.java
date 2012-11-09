@@ -22,11 +22,16 @@ public class RepeatEachAi extends SpellAiLogic {
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         String logic = sa.getParam("AILogic");
         
-        if ("CloneTokens".equals(logic)) {
-            List<Card> allTokens = aiPlayer.getCreaturesInPlay();
-            allTokens = CardLists.filter(allTokens, Presets.TOKEN);
+        if ("CloneMyTokens".equals(logic)) {
+            if (CardLists.filter(aiPlayer.getCreaturesInPlay(), Presets.TOKEN).size() < 2) {
+                return false;
+            }
+        } else if ("CloneAllTokens".equals(logic)) {
+            final Player opp = aiPlayer.getOpponent();
+            List<Card> humTokenCreats = CardLists.filter(opp.getCreaturesInPlay(), Presets.TOKEN);
+            List<Card> compTokenCreats = CardLists.filter(aiPlayer.getCreaturesInPlay(), Presets.TOKEN);
 
-            if (allTokens.size() < 2) {
+            if (compTokenCreats.size() <= humTokenCreats.size()) {
                 return false;
             }
         }

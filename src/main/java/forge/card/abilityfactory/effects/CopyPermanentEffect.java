@@ -16,6 +16,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.player.Player;
 import forge.item.CardDb;
 
 public class CopyPermanentEffect extends SpellEffect {
@@ -46,6 +47,17 @@ public class CopyPermanentEffect extends SpellEffect {
         final List<Card> tgtCards = getTargetCards(sa);
         final Target tgt = sa.getTarget();
 
+        Player controller = null;
+        if (sa.hasParam("Controller")) {
+            List<Player> defined = AbilityFactory.getDefinedPlayers(hostCard, sa.getParam("Controller"), sa);
+            if (!defined.isEmpty()) {
+                controller = defined.get(0);
+            }
+        }
+        if (controller == null) {
+            controller = sa.getActivatingPlayer();
+        }
+        
         hostCard.clearClones();
 
         for (final Card c : tgtCards) {
@@ -72,7 +84,7 @@ public class CopyPermanentEffect extends SpellEffect {
                         copy = Singletons.getModel().getCardFactory().getCard(CardDb.instance().getCard(c), sa.getActivatingPlayer());
 
                         // when copying something stolen:
-                        copy.addController(sa.getActivatingPlayer());
+                        copy.addController(controller);
 
                         copy.setToken(true);
                         copy.setCopiedToken(true);
@@ -82,8 +94,8 @@ public class CopyPermanentEffect extends SpellEffect {
                         copy.setName(c.getName());
                         copy.setImageName(c.getImageName());
 
-                        copy.setOwner(sa.getActivatingPlayer());
-                        copy.addController(sa.getActivatingPlayer());
+                        copy.setOwner(controller);
+                        copy.addController(controller);
 
                         copy.setManaCost(c.getManaCost());
                         copy.setColor(c.getColor());

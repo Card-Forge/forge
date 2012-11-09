@@ -981,6 +981,12 @@ public class AbilityFactory {
                     players.add(((Player) rem).getOpponent());
                 }
             }
+        } else if (defined.equals("RememberedController")) {
+            for (final Object rem : card.getRemembered()) {
+                if (rem instanceof Card) {
+                    players.add(((Card) rem).getController());
+                }
+            }
         } else if (defined.startsWith("Triggered")) {
             final SpellAbility root = sa.getRootAbility();
             Object o = null;
