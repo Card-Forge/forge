@@ -15,10 +15,10 @@ import forge.game.zone.ZoneType;
  * 
  */
 public abstract class TriggerReplacementBase {
-    
+
     /** The host card. */
     protected Card hostCard;
-    
+
     /**
      * <p>
      * Getter for the field <code>hostCard</code>.
@@ -40,18 +40,18 @@ public abstract class TriggerReplacementBase {
      */
     public final void setHostCard(final Card c) {
         this.hostCard = c;
-        
-        if(overridingAbility != null) {
+
+        if (overridingAbility != null) {
             CardFactoryUtil.correctAbilityChainSourceCard(overridingAbility, c);
         }
     }
-    
+
     protected EnumSet<ZoneType> validHostZones;
-    
+
     public void setActiveZone(EnumSet<ZoneType> zones) {
         validHostZones = zones;
     }
-    
+
     /**
      * <p>
      * zonesCheck.
@@ -65,10 +65,10 @@ public abstract class TriggerReplacementBase {
                 || (hostCardZone != null && validHostZones.contains(hostCardZone.getZoneType()))
               );
     }
-    
+
     /** The overriding ability. */
     private SpellAbility overridingAbility = null;
-    
+
     /**
      * Gets the overriding ability.
      * 
@@ -87,7 +87,7 @@ public abstract class TriggerReplacementBase {
     public void setOverridingAbility(final SpellAbility overridingAbility0) {
         this.overridingAbility = overridingAbility0;
     }
-    
+
     /**
      * <p>
      * matchesValid.
