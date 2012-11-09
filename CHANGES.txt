@@ -259,6 +259,20 @@ Fixes/Features:
 - AbilityFactory: getAbility ready to be made static
 - License text + JavaDoc added to QuestUtilUnlockSets.java.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Initial preparations for the 'quest worlds' code.
+- CheckStyle.
+- Do not display the RtR Guild Sealed block in Draft games.
+- Fixed stack descriptions.
+- undoable attribute moved to SA, 
+- cost removed from manaPart
+- SA: getAbility/getSpell methods were removed, overloaded methods isAbility/isSpell are used instead
+- Spells giving mana work correctly
+- Added RepeatEach AF
+- Converted Rhys the Redeemed to script
+- AI Logic for Rhys the Redeemed equivilant to the existing AI code in CF_Creatures
+- More preliminary work for the quest worlds.
+- Disable test printout in QuestWorld.java.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -285,6 +299,8 @@ Rising Waters
 Overlaid Terrain
 Summoner's Egg
 Kemba's Legion
+Arsenal Thresher
+Rofellos's Gift
 
 
 end
