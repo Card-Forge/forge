@@ -3,7 +3,7 @@ ManaCost:3 G G
 Types:Sorcery
 Text:no text
 K:Flashback 4 G G G
-A:SP$ RepeatEach | Cost$ 4 GW GW T | RepeatSubAbility$ DBClone | RepeatCards$ Creature.token | AILogic$ CloneAllTokens | SpellDescription$ For each creature token on the battlefield, its controller puts a token that's a copy of that creature onto the battlefield.
+A:SP$ RepeatEach | Cost$ 3 G G | RepeatSubAbility$ DBClone | RepeatCards$ Creature.token | AILogic$ CloneAllTokens | SpellDescription$ For each creature token on the battlefield, its controller puts a token that's a copy of that creature onto the battlefield.
 SVar:DBClone:DB$ CopyPermanent | Defined$ Remembered | Controller$ RememberedController
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
