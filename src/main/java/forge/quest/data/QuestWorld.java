@@ -17,6 +17,14 @@
  */
 package forge.quest.data;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import com.google.common.base.Function;
+
+import forge.util.StorageReaderFile;
+
 /** 
  * This function holds the "world info" for the current quest.
  *
@@ -79,5 +87,81 @@ public class QuestWorld {
      */
     public GameFormatQuest getFormat() {
         return format;
+    }
+
+    /**
+     * FN_GET_NAME for reader.
+     */
+    public static final Function<QuestWorld, String> FN_GET_NAME = new Function<QuestWorld, String>() {
+
+        public String apply(QuestWorld arg1) {
+            return arg1.getName();
+        }
+    };
+
+    /**
+     * Class for reading world definitions.
+     */
+    public static class Reader extends StorageReaderFile<QuestWorld> {
+
+        /**
+         * TODO: Write javadoc for Constructor.
+         * @param file0
+         * @param keySelector0
+         */
+        public Reader(String file0) {
+            super(file0, QuestWorld.FN_GET_NAME);
+        }
+
+        /* (non-Javadoc)
+         * @see forge.util.StorageReaderFile#read(java.lang.String)
+         */
+        @Override
+        protected QuestWorld read(String line) {
+            System.out.println("Reading quest worlds 3...");
+            String useName = null;
+            String useDir = null;
+            int useIdx = 0;
+            GameFormatQuest useFormat = null;
+
+            final List<String> sets = new ArrayList<String>();
+            final List<String> bannedCards = new ArrayList<String>(); // if both empty, no format
+
+            final String[] sParts = line.trim().split("\\|");
+
+            for (final String sPart : sParts) {
+                final String[] kv = sPart.split(":", 2);
+                final String key = kv[0].toLowerCase();
+                if ("index".equals(key)) {
+                    useIdx = new Integer(kv[1]);
+                } else if ("name".equals(key)) {
+                    useName = kv[1];
+                } else if ("dir".equals(key)) {
+                    useDir = kv[1];
+                } else if ("sets".equals(key)) {
+                    sets.addAll(Arrays.asList(kv[1].split(", ")));
+                } else if ("banned".equals(key)) {
+                    bannedCards.addAll(Arrays.asList(kv[1].split("; ")));
+                }
+            }
+            if (useIdx < 1) {
+                throw new RuntimeException("Illegal index " + useIdx + "! Check worlds.txt file");
+            }
+            else if (useName == null) {
+                throw new RuntimeException("World " + useIdx + " must have a name! Check worlds.txt file");
+            }
+            else if (useDir == null) {
+                throw new RuntimeException("World '" + useName + "' must have a directory! Check worlds.txt file");
+            }
+
+            if (!sets.isEmpty() || bannedCards.isEmpty()) {
+                useFormat = new GameFormatQuest(useName, sets, bannedCards);
+            }
+            // System.out.println("Creating quest world " + useName + " (index " + useIdx + ", dir: " + useDir);
+            // if (useFormat != null) { System.out.println("SETS: " + sets + "\nBANNED: " + bannedCards); }
+            return new QuestWorld(useIdx, useName, useDir, useFormat);
+
+        }
+
     }
 }

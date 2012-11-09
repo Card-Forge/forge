@@ -12363,6 +12363,7 @@ res/quest/themes/Vigilance[!!-~]Meekstone[!!-~]W.thm -text
 res/quest/themes/White.thm -text
 res/quest/themes/Wolves[!!-~]WG.thm -text
 res/quest/themes/Zombies[!!-~]B.thm -text
+res/quest/world/worlds.txt -text
 res/reprintSetInfo.py svneol=native#text/x-python
 res/sealed/ArabianExtended.sealed -text
 res/sealed/RtRGuildAzorius.sealed -text

@@ -47,6 +47,7 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
 import forge.quest.data.QuestPreferences;
+import forge.quest.data.QuestWorld;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
 import forge.util.IStorageView;
@@ -95,9 +96,7 @@ public enum FModel {
     private final IStorageView<FatPackData> fatPacks;
     private final IStorageView<CardBlock> blocks;
     private final IStorageView<CardBlock> fantasyBlocks;
-
-
-
+    private final IStorageView<QuestWorld> worlds;
 
     /**
      * Constructor.
@@ -144,6 +143,7 @@ public enum FModel {
         this.fatPacks = new StorageView<FatPackData>(new FatPackData.Reader("res/blockdata/fatpacks.txt"));
         this.blocks = new StorageView<CardBlock>(new CardBlock.Reader("res/blockdata/blocks.txt", editions));
         this.fantasyBlocks = new StorageView<CardBlock>(new CardBlock.Reader("res/blockdata/fantasyblocks.txt", editions));
+        this.worlds = new StorageView<QuestWorld>(new QuestWorld.Reader("res/quest/world/worlds.txt"));
 
         this.match = new MatchController();
         // TODO - there's got to be a better place for this...oblivion?
