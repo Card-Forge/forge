@@ -118,7 +118,6 @@ public class QuestWorld {
          */
         @Override
         protected QuestWorld read(String line) {
-            System.out.println("Reading quest worlds 3...");
             String useName = null;
             String useDir = null;
             int useIdx = 0;
