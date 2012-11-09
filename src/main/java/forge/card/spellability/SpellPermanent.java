@@ -394,7 +394,7 @@ public class SpellPermanent extends Spell {
                 return false;
             }
         }
-        if (!SpellPermanent.checkETBEffects(card, this, null)) {
+        if (!SpellPermanent.checkETBEffects(card, this, null, ai)) {
             return false;
         }
         return super.canPlayAI();
@@ -475,7 +475,7 @@ public class SpellPermanent extends Spell {
             }
             final SpellAbility exSA = af.getAbility(card.getSVar(execute), card);
 
-            if (exSA.getApi() != api) {
+            if (api != null && exSA.getApi() != api) {
                 continue;
             }
 

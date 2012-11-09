@@ -3706,7 +3706,7 @@ public class CardFactoryUtil {
 
                 @Override
                 public boolean canPlayAI() {
-                    if (!SpellPermanent.checkETBEffects(card, this, null)) {
+                    if (!SpellPermanent.checkETBEffects(card, this.getActivatingPlayer())) {
                         return false;
                     }
                     return super.canPlayAI();
