@@ -57,8 +57,6 @@ import forge.game.zone.ZoneType;
  */
 public class AbilityFactory {
 
-    
-
     /**
      * <p>
      * Constructor for AbilityFactory.
@@ -69,15 +67,15 @@ public class AbilityFactory {
 
     // *******************************************************
 
-
     public static final Map<String, String> getMapParams(final String abString) {
-        if ( null == abString || abString.isEmpty() )
+        if (null == abString || abString.isEmpty()) {
             return null; // Caller will have to deal with NPEs
+        }
 
         final Map<String, String> mapParameters = new HashMap<String, String>();
         for (final String element : abString.split("\\|")) {
             final String[] aa = element.trim().split("\\$");
-            
+
             for (int aaCnt = 0; aaCnt < aa.length; aaCnt++) {
                 aa[aaCnt] = aa[aaCnt].trim();
             }
@@ -119,12 +117,12 @@ public class AbilityFactory {
         Map<String, String> mapParams = new HashMap<String, String>();
 
 
-        try{ 
+        try {
             mapParams = AbilityFactory.getMapParams(abString);
         }
-        catch( RuntimeException ex )
-        {
-            throw new RuntimeException(hostCard.getName() + ": " + ex.getMessage()); 
+        catch (RuntimeException ex) {
+
+            throw new RuntimeException(hostCard.getName() + ": " + ex.getMessage());
         }
 
         // parse universal parameters
@@ -220,7 +218,7 @@ public class AbilityFactory {
 
 
         if (api == ApiType.CopySpell) {
-            if (isTargeted) { 
+            if (isTargeted) {
                 // Since all "CopySpell" ABs copy things on the Stack no need for it to be everywhere
                 abTgt.setZone(ZoneType.Stack);
             }
@@ -238,7 +236,7 @@ public class AbilityFactory {
 
         SpellAiLogic ai = api.getAi();
         SpellEffect se = api.getSpellEffect();
-        
+
         if (isAb) {
             spellAbility = new CommonAbility(api, hostCard, abCost, abTgt, mapParams, se, ai);
         } else if (isSp) {
@@ -247,7 +245,7 @@ public class AbilityFactory {
             spellAbility = new CommonDrawback(api, hostCard, abTgt, mapParams, se, ai);
         }
 
-        
+
         // //////////////////////
         //
         // End API matching. The above APIs are listed in alphabetical order.
@@ -273,8 +271,9 @@ public class AbilityFactory {
             }
         }
 
-        if (mapParams.containsKey("SubAbility"))
+        if (mapParams.containsKey("SubAbility")) {
             spellAbility.setSubAbility(getSubAbility(hostCard, hostCard.getSVar(mapParams.get("SubAbility"))));
+        }
 
         if (spellAbility instanceof SpellPermanent) {
             spellAbility.setDescription(spellAbility.getSourceCard().getName());
@@ -317,7 +316,7 @@ public class AbilityFactory {
      * 
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mapParams 
+     * @param mapParams
      */
     private void makeRestrictions(final SpellAbility sa, Map<String, String> mapParams) {
         // SpellAbilityRestrictions should be added in here
@@ -335,7 +334,7 @@ public class AbilityFactory {
      * 
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param mapParams 
+     * @param mapParams
      */
     private void makeConditions(final SpellAbility sa, Map<String, String> mapParams) {
         // SpellAbilityRestrictions should be added in here
@@ -364,7 +363,7 @@ public class AbilityFactory {
      * <p>
      * getSubAbility.
      * </p>
-     * @param sSub 
+     * @param sSub
      * 
      * @return a {@link forge.card.spellability.AbilitySub} object.
      */
@@ -382,11 +381,11 @@ public class AbilityFactory {
 
     public static ArrayList<String> getProtectionList(final SpellAbility sa) {
         final ArrayList<String> gains = new ArrayList<String>();
-    
+
         final String gainStr = sa.getParam("Gains");
         if (gainStr.equals("Choice")) {
             String choices = sa.getParam("Choices");
-    
+
             // Replace AnyColor with the 5 colors
             if (choices.contains("AnyColor")) {
                 gains.addAll(Arrays.asList(Constant.Color.ONLY_COLORS));
@@ -426,7 +425,7 @@ public class AbilityFactory {
             return true;
         }
 
-        return Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) 
+        return Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)
              && Singletons.getModel().getGame().getPhaseHandler().getNextTurn().equals(ai);
     }
 
@@ -669,8 +668,9 @@ public class AbilityFactory {
                             }
                         } else {
                             final SpellAbility saTargeting = ability.getParentTargetingCard();
-                            if ( null != saTargeting.getTarget() )
+                            if (null != saTargeting.getTarget()) {
                                 list.addAll(saTargeting.getTarget().getTargetCards());
+                            }
                         }
                     } else {
                         final SpellAbility parent = ability.getParentTargetingCard();
@@ -1313,7 +1313,7 @@ public class AbilityFactory {
                         }
 
                         // don't use it on creatures that can't be regenerated
-                        if ((saviourApi == ApiType.Regenerate || saviourApi == ApiType.RegenerateAll ) && !c.canBeShielded()) {
+                        if ((saviourApi == ApiType.Regenerate || saviourApi == ApiType.RegenerateAll) && !c.canBeShielded()) {
                             continue;
                         }
 
@@ -1348,7 +1348,7 @@ public class AbilityFactory {
             }
             // Destroy => regeneration/bounce/shroud
             else if ((threatApi == ApiType.Destroy || threatApi == ApiType.DestroyAll)
-                    && (((saviourApi == ApiType.Regenerate || saviourApi == ApiType.RegenerateAll ) 
+                    && (((saviourApi == ApiType.Regenerate || saviourApi == ApiType.RegenerateAll)
                     && !topStack.hasParam("NoRegen")) || saviourApi == ApiType.ChangeZone || saviourApi == ApiType.Pump)) {
                 for (final Object o : objects) {
                     if (o instanceof Card) {
@@ -1674,7 +1674,7 @@ public class AbilityFactory {
                 AbilityFactory.resolveSubAbilities(sa, usedStack);
             }
         }
-        
+
     }
 
     /**
@@ -1739,7 +1739,7 @@ public class AbilityFactory {
             AbilityFactory.resolveSubAbilities(abSub, usedStack);
         }
     }
-    
+
     public static void adjustChangeZoneTarget(final Map<String, String> params, final SpellAbility sa) {
         List<ZoneType> origin = new ArrayList<ZoneType>();
         if (params.containsKey("Origin")) {
@@ -1752,6 +1752,6 @@ public class AbilityFactory {
         if ((tgt != null) && !tgt.canTgtPlayer()) {
             sa.getTarget().setZone(origin);
         }
-    }    
+    }
 
 } // end class AbilityFactory
