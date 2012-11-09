@@ -312,56 +312,6 @@ public class CardFactoryCreatures {
         });
     }
 
-    private static void getCard_RhysTheRedeemed(final Card card) {
-        final Cost abCost = new Cost(card, "4 GW GW T", true);
-        class RhysTheRedeemedAbility extends AbilityActivated {
-            public RhysTheRedeemedAbility(final Card ca, final Cost co, final Target t) {
-                super(ca, co, t);
-            }
-
-            @Override
-            public AbilityActivated getCopy() {
-                return new RhysTheRedeemedAbility(getSourceCard(),
-                        getPayCosts(), new Target(getTarget()));
-            }
-
-            private static final long serialVersionUID = 6297992502069547478L;
-
-            @Override
-            public void resolve() {
-                List<Card> allTokens = card.getController().getCreaturesInPlay();
-                allTokens = CardLists.filter(allTokens, Presets.TOKEN);
-
-                CardFactoryUtil.copyTokens(allTokens);
-            }
-
-            @Override
-            public boolean canPlayAI() {
-                List<Card> allTokens = getActivatingPlayer().getCreaturesInPlay();
-                allTokens = CardLists.filter(allTokens, Presets.TOKEN);
-
-                return allTokens.size() >= 2;
-            }
-
-            @Override
-            public String getDescription() {
-                final StringBuilder sbDesc = new StringBuilder();
-                sbDesc.append(abCost).append("For each creature token you control, ");
-                sbDesc.append("put a token that's a copy of that creature onto the battlefield.");
-                return sbDesc.toString();
-            }
-        }
-        final AbilityActivated copyTokens1 = new RhysTheRedeemedAbility(card, abCost, null);
-
-        card.addSpellAbility(copyTokens1);
-
-        final StringBuilder sbStack = new StringBuilder();
-        sbStack.append(card.getName());
-        sbStack.append(" - For each creature token you control, put a token ");
-        sbStack.append("that's a copy of that creature onto the battlefield.");
-        copyTokens1.setStackDescription(sbStack.toString());
-    }
-
     private static void getCard_SphinxJwar(final Card card) {
         final SpellAbility ability1 = new AbilityStatic(card, "0") {
             @Override
@@ -1262,8 +1212,6 @@ public class CardFactoryCreatures {
             getCard_PainterServant(card);
         } else if (cardName.equals("Stangg")) {
             getCard_Stangg(card);
-        } else if (cardName.equals("Rhys the Redeemed")) {
-            getCard_RhysTheRedeemed(card);
         } else if (cardName.equals("Sphinx of Jwar Isle")) {
             getCard_SphinxJwar(card);
         } else if (cardName.equals("Master of the Wild Hunt")) {

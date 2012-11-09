@@ -81,6 +81,7 @@ public enum ApiType {
     RemoveCounterAll ( CountersRemoveAllEffect.class, CannotPlayAi.class ),
     RemoveFromCombat ( RemoveFromCombatEffect.class, RemoveFromCombatAi.class ),
     Repeat ( RepeatEffect.class, RepeatAi.class ),
+    RepeatEach ( RepeatEachEffect.class, RepeatEachAi.class ),
     RestartGame ( RestartGameEffect.class, RestartGameAi.class ),
     Reveal ( RevealEffect.class, RevealAi.class ),
     RevealHand ( RevealHandEffect.class, RevealHandAi.class ),

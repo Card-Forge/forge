@@ -12552,6 +12552,7 @@ src/main/java/forge/card/abilityfactory/ai/RegenerateAi.java svneol=native#text/
 src/main/java/forge/card/abilityfactory/ai/RegenerateAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/RemoveFromCombatAi.java -text
 src/main/java/forge/card/abilityfactory/ai/RepeatAi.java -text
+src/main/java/forge/card/abilityfactory/ai/RepeatEachAi.java -text
 src/main/java/forge/card/abilityfactory/ai/RestartGameAi.java -text
 src/main/java/forge/card/abilityfactory/ai/RevealAi.java -text
 src/main/java/forge/card/abilityfactory/ai/RevealAiBase.java -text
@@ -12644,6 +12645,7 @@ src/main/java/forge/card/abilityfactory/effects/RearrangeTopOfLibraryEffect.java
 src/main/java/forge/card/abilityfactory/effects/RegenerateAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/RegenerateEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/RemoveFromCombatEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/RepeatEachEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/RepeatEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/RestartGameEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/RevealEffect.java -text

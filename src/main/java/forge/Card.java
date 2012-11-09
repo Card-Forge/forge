@@ -595,6 +595,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addRemembered(final Object o) {
         this.rememberedObjects.add(o);
     }
+    
+    public final void removeRemembered(final Object o) {
+        this.rememberedObjects.remove(o);
+    }
 
     /**
      * <p>
