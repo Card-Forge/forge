@@ -12601,6 +12601,7 @@ src/main/java/forge/card/abilityfactory/ai/TapAi.java -text
 src/main/java/forge/card/abilityfactory/ai/TapAiBase.java -text
 src/main/java/forge/card/abilityfactory/ai/TapAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/TapOrUntapAi.java -text
+src/main/java/forge/card/abilityfactory/ai/TapOrUntapAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/TokenAi.java -text
 src/main/java/forge/card/abilityfactory/ai/TwoPilesAi.java -text
 src/main/java/forge/card/abilityfactory/ai/UnattachAllAi.java -text
@@ -12694,6 +12695,7 @@ src/main/java/forge/card/abilityfactory/effects/ShuffleEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/StoreSVarEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/TapAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/TapEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/TapOrUntapAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/TapOrUntapEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/TokenEffect.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/effects/TwoPilesEffect.java -text

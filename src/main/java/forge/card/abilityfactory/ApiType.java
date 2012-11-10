@@ -97,6 +97,7 @@ public enum ApiType {
     Tap (TapEffect.class, TapAi.class),
     TapAll (TapAllEffect.class, TapAllAi.class),
     TapOrUntap (TapOrUntapEffect.class, TapOrUntapAi.class),
+    TapOrUntapAll (TapOrUntapAllEffect.class, TapOrUntapAllAi.class),
     Token (TokenEffect.class, TokenAi.class),
     TwoPiles (TwoPilesEffect.class, TwoPilesAi.class),
     UnattachAll (UnattachAllEffect.class, UnattachAllAi.class),

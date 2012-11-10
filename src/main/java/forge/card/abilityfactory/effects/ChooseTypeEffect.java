@@ -40,6 +40,11 @@ public class ChooseTypeEffect extends SpellEffect {
         if (sa.hasParam("InvalidTypes")) {
             invalidTypes.addAll(Arrays.asList(sa.getParam("InvalidTypes").split(",")));
         }
+        
+        final ArrayList<String> validTypes = new ArrayList<String>();
+        if (sa.hasParam("ValidTypes")) {
+            validTypes.addAll(Arrays.asList(sa.getParam("ValidTypes").split(",")));
+        }
 
         final Target tgt = sa.getTarget();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
@@ -48,10 +53,13 @@ public class ChooseTypeEffect extends SpellEffect {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 
                 if (type.equals("Card")) {
+                    if (validTypes.isEmpty()) {
+                        validTypes.addAll(Constant.CardTypes.CARD_TYPES);
+                    }
                     boolean valid = false;
                     while (!valid) {
                         if (sa.getActivatingPlayer().isHuman()) {
-                            final Object o = GuiChoose.one("Choose a card type", Constant.CardTypes.CARD_TYPES);
+                            final Object o = GuiChoose.one("Choose a card type", validTypes);
                             if (null == o) {
                                 return;
                             }
