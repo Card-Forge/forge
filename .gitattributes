@@ -4199,6 +4199,7 @@ res/cardsfolder/g/greater_gargadon.txt -text
 res/cardsfolder/g/greater_good.txt svneol=native#text/plain
 res/cardsfolder/g/greater_harvester.txt svneol=native#text/plain
 res/cardsfolder/g/greater_mossdog.txt svneol=native#text/plain
+res/cardsfolder/g/greater_realm_of_preservation.txt -text
 res/cardsfolder/g/greater_stone_spirit.txt -text svneol=unset#text/plain
 res/cardsfolder/g/greater_werewolf.txt -text
 res/cardsfolder/g/greatsword.txt svneol=native#text/plain
