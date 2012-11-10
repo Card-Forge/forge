@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:no text
 K:You may choose not to untap CARDNAME during your untap step.
-A:AB$ Pump | Cost$ T | ValidTgts$ Creature.withoutFlying+attacking+YouDontCtrl | TgtPrompt$ Select target creature without flying that's attacking you | RememberTargets$ True |  SubAbility$ DBTap | SpellDescription$ Tap target creature without flying that's attacking you. It doesn't untap during its controller's untap step for as long as CARDNAME remains tapped.
+A:AB$ Pump | Cost$ T | ValidTgts$ Creature.withoutFlying+attackingYou | TgtPrompt$ Select target creature without flying that's attacking you | RememberTargets$ True |  SubAbility$ DBTap | SpellDescription$ Tap target creature without flying that's attacking you. It doesn't untap during its controller's untap step for as long as CARDNAME remains tapped.
 SVar:DBTap:DB$Tap | Defined$ Targeted
 S:Mode$ Continuous | Affected$ Creature.IsRemembered | AddHiddenKeyword$ HIDDEN This card doesn't untap during your next untap step.
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigClearRemember | Static$ True

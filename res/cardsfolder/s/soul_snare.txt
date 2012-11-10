@@ -2,7 +2,7 @@ Name:Soul Snare
 ManaCost:W
 Types:Enchantment
 Text:no text
-A:AB$ ChangeZone | Cost$ W Sac<1/CARDNAME> | ValidTgts$ Creature.attacking+YouDontCtrl | TgtPrompt$ Select target creature that's attacking you or a planeswalker you control. | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature that's attacking you or a planeswalker you control.
+A:AB$ ChangeZone | Cost$ W Sac<1/CARDNAME> | ValidTgts$ Creature.attacking+OppCtrl | TgtPrompt$ Select target creature that's attacking you or a planeswalker you control. | Origin$ Battlefield | Destination$ Exile | SpellDescription$ Exile target creature that's attacking you or a planeswalker you control.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_snare.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/32.jpg

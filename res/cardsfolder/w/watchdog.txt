@@ -4,7 +4,7 @@ Types:Artifact Creature Hound
 Text:no text
 PT:1/2
 K:CARDNAME blocks each turn if able.
-S:Mode$ Continuous | Affected$ Creature.YouDontCtrl+attacking | AddPower$ -1 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ As long as CARDNAME is untapped, all creatures attacking you get -1/-0.
+S:Mode$ Continuous | Affected$ Creature.attackingYou | AddPower$ -1 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ As long as CARDNAME is untapped, all creatures attacking you get -1/-0.
 SVar:X:Count$Valid Card.Self+untapped
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/watchdog.jpg

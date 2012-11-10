@@ -7008,8 +7008,14 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("attacking")) {
-            if (!this.isAttacking()) {
-                return false;
+            if (property.equals("attacking")) {
+                if (!this.isAttacking()) {
+                    return false;
+                }
+            } else if (property.equals("attackingYou")) {
+                if (!this.isAttacking(sourceController)) {
+                    return false;
+                }
             }
         } else if (property.startsWith("notattacking")) {
             if (this.isAttacking()) {
@@ -7418,6 +7424,21 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final boolean isAttacking() {
         return Singletons.getModel().getGame().getCombat().isAttacking(this);
+    }
+
+    /**
+     * <p>
+     * isAttacking.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean isAttacking(GameEntity ge) {
+        Combat combat = Singletons.getModel().getGame().getCombat();
+        if (!combat.isAttacking(this)) {
+            return false;
+        }
+        return combat.getDefenderByAttacker(this).equals(ge);
     }
 
     /**
