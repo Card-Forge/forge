@@ -1,6 +1,6 @@
 Name:Lava Hounds
 ManaCost:2 R R
-Types:Creature  Hound
+Types:Creature Hound
 Text:no text
 PT:4/4
 K:Haste

@@ -1,6 +1,6 @@
 Name:Sliptide Serpent
 ManaCost:4 U U
-Types:Creature  Serpent
+Types:Creature Serpent
 Text:no text
 PT:4/4
 A:AB$ ChangeZone | Cost$ 3 U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.

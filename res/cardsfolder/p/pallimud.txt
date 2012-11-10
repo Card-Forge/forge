@@ -1,6 +1,6 @@
 Name:Pallimud
 ManaCost:2 R
-Types:Creature  Beast
+Types:Creature Beast
 Text:no text
 PT:*/3
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseP | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose an opponent.
