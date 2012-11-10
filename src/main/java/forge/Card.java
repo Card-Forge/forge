@@ -7883,7 +7883,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         int restDamage = damage;
 
         restDamage = this.staticReplaceDamage(restDamage, source, isCombat);
-
         restDamage = this.staticDamagePrevention(restDamage, possiblePrevention, source, isCombat);
 
         return restDamage;
@@ -8005,6 +8004,21 @@ public class Card extends GameEntity implements Comparable<Card> {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage, isCombat);
+            }
+            for (final ReplacementEffect re : ca.getReplacementEffects()) {
+                HashMap<String,String> params = re.getMapParams();
+                if (!"DamageDone".equals(params.get("Event")) || !params.containsKey("PreventionEffect")) {
+                    continue;
+                }
+                if (params.containsKey("ValidSource")
+                        && !source.isValid(params.get("ValidSource"), ca.getController(), ca)) {
+                    continue;
+                }
+                if (params.containsKey("ValidTarget")
+                        && !this.isValid(params.get("ValidTarget"), ca.getController(), ca)) {
+                    continue;
+                }
+                return 0;
             }
         }
 

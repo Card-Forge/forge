@@ -47,6 +47,7 @@ import forge.GameEntity;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
+import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementResult;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
@@ -633,11 +634,28 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
 
         // Prevent Damage static abilities
         for (final Card ca : game.getCardsIn(ZoneType.Battlefield)) {
+            System.out.println(source + " preventDamage? - " + ca);
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage, isCombat);
             }
+            for (final ReplacementEffect re : ca.getReplacementEffects()) {
+                HashMap<String,String> params = re.getMapParams();
+                if (!"DamageDone".equals(params.get("Event")) || !params.containsKey("PreventionEffect")) {
+                    continue;
+                }
+                if (params.containsKey("ValidSource")
+                        && !source.isValid(params.get("ValidSource"), ca.getController(), ca)) {
+                    continue;
+                }
+                if (params.containsKey("ValidTarget")
+                        && !this.isValid(params.get("ValidTarget"), ca.getController(), ca)) {
+                    continue;
+                }
+                return 0;
+            }
         }
+
 
         // specific cards
         if (this.isCardInPlay("Spirit of Resistance")) {

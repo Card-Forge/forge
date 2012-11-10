@@ -12,10 +12,13 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.Target;
+import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import java.util.Stack;
+
+import com.google.common.base.Predicate;
 
 public class ChooseSourceEffect extends SpellEffect {
     @Override
@@ -132,16 +135,18 @@ public class ChooseSourceEffect extends SpellEffect {
                         sourcesToChooseFrom.remove(o);
 
                     } else { // TODO: AI Support! This is copied from AF ChooseCard! 
-                        if (sa.hasParam("AILogic") && sa.getParam("AILogic").equals("BestBlocker")) {
-                            if (!CardLists.filter(sourcesToChooseFrom, Presets.UNTAPPED).isEmpty()) {
-                                sourcesToChooseFrom = CardLists.filter(sourcesToChooseFrom, Presets.UNTAPPED);
-                            }
+                        if (sa.hasParam("AILogic") && sa.getParam("AILogic").equals("NeedsPrevention")) {
+                            final Player ai = sa.getActivatingPlayer();
+                            sourcesToChooseFrom = CardLists.filter(sourcesToChooseFrom, new Predicate<Card>() {
+                                @Override
+                                public boolean apply(final Card c) {
+                                    if (!c.isAttacking(ai) || !Singletons.getModel().getGame().getCombat().isUnblocked(c)) {
+                                        return false;
+                                    }
+                                    return CombatUtil.damageIfUnblocked(c, ai, Singletons.getModel().getGame().getCombat()) > 0;
+                                }
+                            });
                             chosen.add(CardFactoryUtil.getBestCreatureAI(sourcesToChooseFrom));
-                        } else if (sa.hasParam("AILogic") && sa.getParam("AILogic").equals("Clone")) {
-                            if (!CardLists.getValidCards(sourcesToChooseFrom, "Permanent.YouDontCtrl,Permanent.NonLegendary", host.getController(), host).isEmpty()) {
-                                sourcesToChooseFrom = CardLists.getValidCards(sourcesToChooseFrom, "Permanent.YouDontCtrl,Permanent.NonLegendary", host.getController(), host);
-                            }
-                            chosen.add(CardFactoryUtil.getBestAI(sourcesToChooseFrom));
                         } else {
                             chosen.add(CardFactoryUtil.getBestAI(sourcesToChooseFrom));
                         }
