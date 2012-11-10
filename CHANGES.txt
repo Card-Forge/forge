@@ -13,6 +13,8 @@ The Return to Ravnica set pictures are now available and you can download them u
 
 The Targeting Overlay has been fixed and re-enabled. It now correctly shows the targeting arcs in cases when it previously showed them in the wrong direction. The match UI is properly refreshed when the targeting arcs are switched on/off. The defunct "mouseover-only" mode is currently disabled (it crashes Forge, difficult to fix).
 
+We have added the Conspire and the Protection mechanics for this version.
+
 --
 
 On several occasions people have noticed that the forge deck editor and/or quest mode card shop would not open or display. We have also received reports that some of the tabs/panels in the deck editor are missing. Try deleting the file named "editor_preferred.xml" which is found in the "res/layouts" folder. This should force forge to then use the "editor_default.xml" file instead.
@@ -273,6 +275,32 @@ Fixes/Features:
 - More preliminary work for the quest worlds.
 - Disable test printout in QuestWorld.java.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CheckStyle.
+- Fixed checkETBEffects.
+- Remove a colon from picture file names so that the proper Gatherer names of cards with the colon may be used (for the upcoming CoP/RoP support).
+- Renamed the file of Craterhoof Behemoth.
+- Fixing Rhys the Redeemed cloning opponents tokens
+- Converted Parallel Evolution to script
+- Fixing CC of Parallel Evolution
+- Converted Siren's Call to Script
+- Additional reference needed to be removed
+- Convert Hurkyl's Recall to script
+- Convert Telling Time to script (the AI may be able to play this now)
+- Convert Intuition to script
+- wrapper will return api (temporary)
+- Cleanup in handleRemembering.
+- First implementation of Conspire mechanic (I plan to expand i to support multiple Conspire instances for interaction with Wort, the Raidmother)
+- Added the card property "attackingYou".
+- Initial implementation of AF ChooseSource for cards that refer to a source in their card text.
+- Compilation fix for the updated AF interface (updating AF ChooseSource).
+- Improved the prompt of unless costs.
+- Added a SpellDescription to Circle of Protection: Artifacts.
+- Circle of Protection: Artifacts will no longer create a useless effect when no source is chosen.
+- Circles of Protection and Runes of Protection will no longer create useless effects when no source is chosen.
+- Added a SpellDescription to all Circles of Protection and Runes of Protection.
+- Removed some unused commented out code in AF ChooseSource (wasn't useful).
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -301,6 +329,31 @@ Summoner's Egg
 Kemba's Legion
 Arsenal Thresher
 Rofellos's Gift
+AEthertow
+Barkshell Blessing
+Burn Trail
+Disturbing Plot
+Ghastly Discovery
+Giantbaiting
+Gleeful Sabotage
+Memory Sluice
+Mine Excavation
+Traitor's Roar
+Doubling Chant
+Circle of Protection: White
+Circle of Protection: Green
+Circle of Protection: Blue
+Circle of Protection: Red
+Circle of Protection: Black
+Circle of Protection: Artifacts
+Rune of Protection: White
+Rune of Protection: Green
+Rune of Protection: Blue
+Rune of Protection: Red
+Rune of Protection: Black
+Rune of Protection: Artifacts
+Rune of Protection: Lands
+Cleansing
 
 
 end
