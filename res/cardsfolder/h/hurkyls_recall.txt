@@ -1,7 +1,8 @@
 Name:Hurkyl's Recall
 ManaCost:1 U
 Types:Instant
-Text:Return all artifacts target player owns to his or her hand.
+Text:no text
+A:SP$ ChangeZoneAll | Cost$ 1 U | ValidTgts$ Player | ChangeType$ Artifact.TargetedPlayerOwn | UseAllOriginZones$ True | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return all artifacts target player owns to his or her hand.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hurkyls_recall.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/93.jpg

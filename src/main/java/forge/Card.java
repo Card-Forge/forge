@@ -6429,6 +6429,19 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!this.getOwner().getOpponents().contains(sourceController)) {
                 return false;
             }
+        } else if (property.equals("TargetedPlayerOwn")) {
+            for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
+                final SpellAbility parent = sa.getParentTargetingPlayer();
+                if (parent.getTarget() != null) {
+                    for (final Object o : parent.getTarget().getTargetPlayers()) {
+                        if (o instanceof Player) {
+                            if (!this.getOwner().equals(o)) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
         } else if (property.startsWith("OwnedBy")) {
             final String valid = property.substring(8);
             if (!this.getOwner().isValid(valid, sourceController, source)) {

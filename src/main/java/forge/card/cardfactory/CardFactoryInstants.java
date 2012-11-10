@@ -67,47 +67,8 @@ public class CardFactoryInstants {
      */
     public static void buildCard(final Card card, final String cardName) {
 
-        //*************** START *********** START **************************
-        if (cardName.equals("Hurkyl's Recall")) {
-            /*
-             * Return all artifacts target player owns to his or her hand.
-             */
-            Target t = new Target(card, "Select target player", "Player");
-            Cost cost = new Cost(card, "1 U", false);
-
-            SpellAbility spell = new Spell(card, cost, t) {
-                private static final long serialVersionUID = -4098702062413878046L;
-
-                @Override
-                public boolean canPlayAI() {
-                    Player human = this.getActivatingPlayer().getOpponent();
-                    List<Card> humanCards = human.getCardsIn(ZoneType.Battlefield);
-                    this.getTarget().resetTargets();
-                    return ComputerUtil.targetHumanAI(this) && Iterables.any(humanCards, CardPredicates.Presets.ARTIFACTS);
-                } //canPlayAI
-
-                @Override
-                public void resolve() {
-                    Player player = getTargetPlayer();
-                    List<Card> artifacts = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
-                    artifacts = CardLists.filter(artifacts, CardPredicates.Presets.ARTIFACTS);
-
-                    for (int i = 0; i < artifacts.size(); i++) {
-                        Card thisArtifact = artifacts.get(i);
-                        if (thisArtifact.getOwner().equals(player)) {
-                            //moveToHand handles tokens
-                            Singletons.getModel().getGame().getAction().moveToHand(thisArtifact);
-                        }
-                    }
-                } //resolve()
-            };
-
-            card.addSpellAbility(spell);
-        } //*************** END ************ END **************************
-
-
         // *************** START *********** START **************************
-        else if (cardName.equals("Intuition")) {
+        if (cardName.equals("Intuition")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = 8282597086298330698L;
 
