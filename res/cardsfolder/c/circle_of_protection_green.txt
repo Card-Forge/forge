@@ -1,0 +1,24 @@
+Name:Circle of Protection: Green
+ManaCost:1 W
+Types:Enchantment
+Text:no text
+A:AB$ ChooseSource | Cost$ 1 | Choices$ Card.Green | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SVars$ DBEffect,RPreventNextFromSource,ExileEffect
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | RememberObjects$ Remembered | SVars$ RPreventNextFromSource,ExileEffect | SubAbility$ DBCleanup
+SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ You | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the chosen source deals damage to you, prevent that damage.
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/12.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/222.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/197.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/8.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/295.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/266.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/238.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/10.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/195.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/196.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/195.jpg
+Oracle:{1}: The next time a green source of your choice would deal damage to you this turn, prevent that damage.
+End

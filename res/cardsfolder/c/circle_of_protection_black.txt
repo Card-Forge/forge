@@ -1,0 +1,24 @@
+Name:Circle of Protection: Black
+ManaCost:1 W
+Types:Enchantment
+Text:no text
+A:AB$ ChooseSource | Cost$ 1 | Choices$ Card.Black | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SVars$ DBEffect,RPreventNextFromSource,ExileEffect
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | RememberObjects$ Remembered | SVars$ RPreventNextFromSource,ExileEffect | SubAbility$ DBCleanup
+SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ You | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the chosen source deals damage to you, prevent that damage.
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/10.jpg
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/220.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/195.jpg
+SetInfo:7ED|Common|http://magiccards.info/scans/en/7e/6.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/293.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/264.jpg
+SetInfo:9ED|Uncommon|http://magiccards.info/scans/en/9e/10.jpg
+SetInfo:ICE|Common|http://magiccards.info/scans/en/ia/236.jpg
+SetInfo:6ED|Common|http://magiccards.info/scans/en/6e/8.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/193.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/194.jpg
+Oracle:{1}: The next time a black source of your choice would deal damage to you this turn, prevent that damage.
+End

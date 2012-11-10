@@ -23,6 +23,7 @@ public enum ApiType {
     ChooseColor (ChooseColorEffect.class, ChooseColorAi.class),
     ChooseNumber (ChooseNumberEffect.class, CannotPlayAi.class),
     ChoosePlayer (ChoosePlayerEffect.class, CannotPlayAi.class),
+    ChooseSource ( ChooseSourceEffect.class, ChooseSourceAi.class ),
     ChooseType (ChooseTypeEffect.class, ChooseTypeAi.class),
     Clash (ClashEffect.class, ClashAi.class),
     Cleanup (CleanUpEffect.class, AlwaysPlayAi.class),

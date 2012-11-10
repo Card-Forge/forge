@@ -1,0 +1,17 @@
+Name:Circle of Protection: Artifacts
+ManaCost:1 W
+Types:Enchantment
+Text:no text
+A:AB$ ChooseSource | Cost$ 2 | Choices$ Card.Artifact | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SVars$ DBEffect,RPreventNextFromSource,ExileEffect
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | RememberObjects$ Remembered | SVars$ RPreventNextFromSource,ExileEffect | SubAbility$ DBCleanup
+SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ You | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the chosen source deals damage to you, prevent that damage.
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/8.jpg
+SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/292.jpg
+SetInfo:4ED|Uncommon|http://magiccards.info/scans/en/4e/263.jpg
+SetInfo:ATQ|Uncommon|http://magiccards.info/scans/en/aq/97.jpg
+Oracle:{2}: The next time an artifact source of your choice would deal damage to you this turn, prevent that damage.
+End

@@ -1650,6 +1650,12 @@ res/cardsfolder/c/cinderbones.txt svneol=native#text/plain
 res/cardsfolder/c/cinderhaze_wretch.txt svneol=native#text/plain
 res/cardsfolder/c/circle_of_affliction.txt -text
 res/cardsfolder/c/circle_of_flame.txt svneol=native#text/plain
+res/cardsfolder/c/circle_of_protection_artifacts.txt -text
+res/cardsfolder/c/circle_of_protection_black.txt -text
+res/cardsfolder/c/circle_of_protection_blue.txt -text
+res/cardsfolder/c/circle_of_protection_green.txt -text
+res/cardsfolder/c/circle_of_protection_red.txt -text
+res/cardsfolder/c/circle_of_protection_white.txt -text
 res/cardsfolder/c/circu_dimir_lobotomist.txt -text
 res/cardsfolder/c/circular_logic.txt svneol=native#text/plain
 res/cardsfolder/c/citanul_centaurs.txt svneol=native#text/plain
@@ -8156,6 +8162,13 @@ res/cardsfolder/r/rummaging_goblin.txt -text
 res/cardsfolder/r/rummaging_wizard.txt svneol=native#text/plain
 res/cardsfolder/r/run_wild.txt svneol=native#text/plain
 res/cardsfolder/r/rune_cervin_rider.txt svneol=native#text/plain
+res/cardsfolder/r/rune_of_protection_artifacts.txt -text
+res/cardsfolder/r/rune_of_protection_black.txt -text
+res/cardsfolder/r/rune_of_protection_blue.txt -text
+res/cardsfolder/r/rune_of_protection_green.txt -text
+res/cardsfolder/r/rune_of_protection_lands.txt -text
+res/cardsfolder/r/rune_of_protection_red.txt -text
+res/cardsfolder/r/rune_of_protection_white.txt -text
 res/cardsfolder/r/rune_scarred_demon.txt svneol=native#text/plain
 res/cardsfolder/r/rune_snag.txt -text
 res/cardsfolder/r/rune_tail_kitsune_ascendant_rune_tails_essence.txt -text
@@ -12509,6 +12522,7 @@ src/main/java/forge/card/abilityfactory/ai/CharmAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ChooseCardAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ChooseCardNameAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ChooseColorAi.java -text
+src/main/java/forge/card/abilityfactory/ai/ChooseSourceAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ChooseTypeAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ClashAi.java -text
 src/main/java/forge/card/abilityfactory/ai/CloneAi.java -text
@@ -12600,6 +12614,7 @@ src/main/java/forge/card/abilityfactory/effects/ChooseColorEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ChooseGenericEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ChooseNumberEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ChoosePlayerEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/ChooseSourceEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ChooseTypeEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ClashEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/CleanUpEffect.java -text
