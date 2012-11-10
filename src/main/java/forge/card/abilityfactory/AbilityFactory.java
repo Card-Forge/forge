@@ -1447,9 +1447,8 @@ public class AbilityFactory {
 
         final Target tgt = sa.getTarget();
 
-        if (sa.hasParam("RememberTargets")) {
-            final ArrayList<Object> tgts = (tgt == null) ? new ArrayList<Object>() : tgt.getTargets();
-            for (final Object o : tgts) {
+        if (sa.hasParam("RememberTargets") && tgt != null) {  
+            for (final Object o : tgt.getTargets()) {
                 host.addRemembered(o);
             }
         }

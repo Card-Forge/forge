@@ -560,7 +560,7 @@ public abstract class SpellAbility {
     }        
     
     // If this is not null, then ability was made in a factory
-    public final ApiType getApi() {
+    public ApiType getApi() {
         return api;
     }
     

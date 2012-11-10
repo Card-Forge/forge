@@ -528,6 +528,9 @@ public class TriggerHandler {
             }
 
             @Override
+            public ApiType getApi() { return sa[0].getApi(); } 
+            
+            @Override
             public void setPaidHash(final HashMap<String, List<Card>> hash) {
                 sa[0].setPaidHash(hash);
             }
