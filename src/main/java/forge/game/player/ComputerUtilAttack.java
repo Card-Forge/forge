@@ -513,7 +513,7 @@ public class ComputerUtilAttack {
                     break;
                 }
             }
-            if (mustAttack || attacker.getSacrificeAtEOT() || attacker.getSirenAttackOrDestroy()
+            if (mustAttack || attacker.getSacrificeAtEOT()
                     || attacker.getController().getMustAttackEntity() != null
                     || attacker.getSVar("MustAttack").equals("True")) {
                 combat.addAttacker(attacker);
