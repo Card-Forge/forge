@@ -64,13 +64,6 @@ public class ChooseSourceEffect extends SpellEffect {
                         }
                     }
                 }
-                // TODO: This was removed in the new AF code, was this perhaps necessary for this
-                //       AF to function correctly?
-                //if (null != stackinst.getSpellAbility().getTargetList()) {
-                //    for (Card c : stackinst.getSpellAbility().getTargetList()) {
-                //        referencedSources.add(c);
-                //    }
-                //}
                 if (null != stackinst.getSpellAbility().getTargetCard()) {
                     referencedSources.add(stackinst.getSpellAbility().getTargetCard());
                 }
