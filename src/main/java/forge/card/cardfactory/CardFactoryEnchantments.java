@@ -176,7 +176,7 @@ class CardFactoryEnchantments {
                 @Override
                 public void resolve() {
                     final int life = card.getController().getLife();
-                    card.getController().loseLife(life, card);
+                    card.getController().loseLife(life);
                 }
             };
 

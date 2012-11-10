@@ -77,7 +77,7 @@ public class CHand implements ICDoc {
     @Override
     public void initialize() {
         if (initializedAlready) { return; }
-        else { initializedAlready = true; }
+        initializedAlready = true;
 
         player.getZone(ZoneType.Hand).addObserver(o1);
 

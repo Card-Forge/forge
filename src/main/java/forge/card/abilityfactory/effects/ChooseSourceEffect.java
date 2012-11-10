@@ -15,7 +15,6 @@ import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import java.util.Collection;
 import java.util.Stack;
 
 public class ChooseSourceEffect extends SpellEffect {
@@ -58,7 +57,7 @@ public class ChooseSourceEffect extends SpellEffect {
                 }
                 // Get the list of cards that are referenced by effects on the stack
                 if (null != stackinst.getSpellAbility().getTriggeringObjects()) {
-                    for (Object c : (Collection<Object>) stackinst.getSpellAbility().getTriggeringObjects().values()) {
+                    for (Object c : stackinst.getSpellAbility().getTriggeringObjects().values()) {
                         if (c instanceof Card) {
                             referencedSources.add((Card) c);
                         }
@@ -69,7 +68,7 @@ public class ChooseSourceEffect extends SpellEffect {
                 }
                 // TODO: is this necessary?
                 if (null != stackinst.getSpellAbility().getReplacingObjects()) {
-                    for (Object c : (Collection<Object>) stackinst.getSpellAbility().getReplacingObjects().values()) {
+                    for (Object c : stackinst.getSpellAbility().getReplacingObjects().values()) {
                         if (c instanceof Card) {
                             referencedSources.add((Card) c);
                         }
@@ -129,12 +128,9 @@ public class ChooseSourceEffect extends SpellEffect {
                         do {
                             o = GuiChoose.one(choiceTitle, sourcesToChooseFrom);
                         } while (o.equals(divPermanentCards) || o.equals(divStackCards) || o.equals(divReferencedCards));
-                        if (o != null) {
-                            chosen.add(o);
-                            sourcesToChooseFrom.remove(o);
-                        } else {
-                            break;
-                        }
+                        chosen.add(o);
+                        sourcesToChooseFrom.remove(o);
+
                     } else { // TODO: AI Support! This is copied from AF ChooseCard! 
                         if (sa.hasParam("AILogic") && sa.getParam("AILogic").equals("BestBlocker")) {
                             if (!CardLists.filter(sourcesToChooseFrom, Presets.UNTAPPED).isEmpty()) {

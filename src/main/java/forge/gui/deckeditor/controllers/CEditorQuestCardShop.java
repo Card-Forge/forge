@@ -211,10 +211,9 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         return 1337;
     }
 
-    @SuppressWarnings("rawtypes")
-    private final Function<Entry<InventoryItem, Integer>, Comparable> fnPriceCompare = new Function<Entry<InventoryItem, Integer>, Comparable>() {
+    private final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnPriceCompare = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
         @Override
-        public Comparable apply(final Entry<InventoryItem, Integer> from) {
+        public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
             return CEditorQuestCardShop.this.getCardValue(from.getKey());
         }
     };
@@ -231,10 +230,9 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         }
     };
 
-    @SuppressWarnings("rawtypes")
-    private final Function<Entry<InventoryItem, Integer>, Comparable> fnDeckCompare = new Function<Entry<InventoryItem, Integer>, Comparable>() {
+    private final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnDeckCompare = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
         @Override
-        public Comparable apply(final Entry<InventoryItem, Integer> from) {
+        public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
             final Integer iValue = CEditorQuestCardShop.this.decksUsingMyCards.get(from.getKey());
             return iValue == null ? Integer.valueOf(0) : iValue;
         }

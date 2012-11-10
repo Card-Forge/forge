@@ -61,10 +61,9 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
 
     private Map<CardPrinted, Integer> decksUsingMyCards;
 
-    @SuppressWarnings("rawtypes")
-    private final Function<Entry<InventoryItem, Integer>, Comparable> fnDeckCompare = new Function<Entry<InventoryItem, Integer>, Comparable>() {
+    private final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnDeckCompare = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
         @Override
-        public Comparable apply(final Entry<InventoryItem, Integer> from) {
+        public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
             final Integer iValue = CEditorQuest.this.decksUsingMyCards.get(from.getKey());
             return iValue == null ? Integer.valueOf(0) : iValue;
         }

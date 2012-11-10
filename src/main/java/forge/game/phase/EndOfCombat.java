@@ -25,7 +25,7 @@ package forge.game.phase;
  * @author Forge
  * @version $Id$
  */
-public class EndOfCombat extends Phase implements java.io.Serializable {
+public class EndOfCombat extends Phase {
 
     /** Constant <code>serialVersionUID=3035250030566186842L</code>. */
     private static final long serialVersionUID = 3035250030566186842L;

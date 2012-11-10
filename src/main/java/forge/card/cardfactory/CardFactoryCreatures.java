@@ -808,7 +808,7 @@ public class CardFactoryCreatures {
                 card.setBaseAttack(loseLife);
                 card.setBaseDefense(loseLife);
 
-                player.loseLife(loseLife, card);
+                player.loseLife(loseLife);
             } // resolve()
         }; // SpellAbility
 

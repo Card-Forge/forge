@@ -325,7 +325,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
                     JOptionPane.QUESTION_MESSAGE);
 
             if (m == JOptionPane.NO_OPTION) { return false; }
-            else { gd = GauntletIO.loadGauntlet(f); }
+            gd = GauntletIO.loadGauntlet(f);
         }
         // Confirm if a new gauntlet will be created
         else {
@@ -336,9 +336,7 @@ public enum CSubmenuGauntletBuild implements ICDoc {
                     JOptionPane.QUESTION_MESSAGE);
 
             if (m == JOptionPane.NO_OPTION) { return false; }
-            else {
-                gd = new GauntletData();
-            }
+            gd = new GauntletData();
         }
 
         final List<String> names = new ArrayList<String>();

@@ -565,8 +565,7 @@ public final class QuestUtilCards {
      * 
      * @return the fnNewCompare
      */
-    @SuppressWarnings("rawtypes")
-    public Function<Entry<InventoryItem, Integer>, Comparable> getFnNewCompare() {
+    public Function<Entry<InventoryItem, Integer>, Comparable<?>> getFnNewCompare() {
         return this.fnNewCompare;
     }
 
@@ -585,10 +584,9 @@ public final class QuestUtilCards {
     // deck editors
     // Maybe we should consider doing so later
     /** The fn new compare. */
-    @SuppressWarnings("rawtypes")
-    private final Function<Entry<InventoryItem, Integer>, Comparable> fnNewCompare = new Function<Entry<InventoryItem, Integer>, Comparable>() {
+    private final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
         @Override
-        public Comparable apply(final Entry<InventoryItem, Integer> from) {
+        public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
             return QuestUtilCards.this.qa.getNewCardList().contains(from.getKey()) ? Integer.valueOf(1) : Integer
                     .valueOf(0);
         }

@@ -42,7 +42,7 @@ import forge.game.zone.ZoneType;
  * @author Forge
  * @version $Id$
  */
-public class EndOfTurn extends Phase implements java.io.Serializable {
+public class EndOfTurn extends Phase {
     /** Constant <code>serialVersionUID=-3656715295379727275L</code>. */
     private static final long serialVersionUID = -3656715295379727275L;
 

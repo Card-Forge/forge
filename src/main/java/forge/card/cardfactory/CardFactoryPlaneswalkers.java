@@ -39,11 +39,9 @@ public class CardFactoryPlaneswalkers {
      * 
      * @param card
      *            a {@link forge.Card} object.
-     * @param cardName
-     *            a {@link java.lang.String} object.
      * @return a {@link forge.Card} object.
      */
-    public static void buildCard(final Card card, final String cardName) {
+    public static void buildCard(final Card card) {
         // All Planeswalkers set their loyality in the beginning
         if (card.getBaseLoyalty() > 0) {
             Command cmd = CardFactoryUtil.entersBattleFieldWithCounters(card, Counters.LOYALTY, card.getBaseLoyalty());

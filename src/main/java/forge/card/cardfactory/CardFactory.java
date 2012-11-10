@@ -310,7 +310,7 @@ public class CardFactory implements CardFactoryInterface {
         } else if (card.isEquipment()) {
             CardFactoryEquipment.buildCard(card, cardName);
         } else if (card.isPlaneswalker()) {
-            CardFactoryPlaneswalkers.buildCard(card, cardName);
+            CardFactoryPlaneswalkers.buildCard(card);
         } else if (card.isLand()) {
             CardFactoryLands.buildCard(card, cardName);
         } else if (card.isInstant()) {

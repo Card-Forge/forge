@@ -198,9 +198,8 @@ public final class BoosterDraft implements IBoosterDraft {
                 if (draft.getIgnoreRarity()) {
                     if (!draft.getSingleton()) {
                         return pack.getBoosterPack(0, 0, 0, 0, 0, 0, 0, draft.getNumCards(), 0);
-                    } else {
-                        return pack.getSingletonBoosterPack(draft.getNumCards());
                     }
+                    return pack.getSingletonBoosterPack(draft.getNumCards());
                 }
                 return pack.getBoosterPack(draft.getNumbersByRarity(), 0, 0, 0);
             }

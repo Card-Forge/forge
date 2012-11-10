@@ -41,7 +41,7 @@ public class RevealHandAi extends RevealAiBase {
 
         }
 
-        final boolean bFlag = revealHandTargetAI(ai, sa, true, false);
+        final boolean bFlag = revealHandTargetAI(ai, sa/*, true, false*/);
 
         if (!bFlag) {
             return false;
@@ -60,7 +60,7 @@ public class RevealHandAi extends RevealAiBase {
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
 
-        if (!revealHandTargetAI(ai, sa, false, mandatory)) {
+        if (!revealHandTargetAI(ai, sa/*, false, mandatory*/)) {
             return false;
         }
 

@@ -46,7 +46,7 @@ public class LifeLoseEffect extends SpellEffect {
         final Target tgt = sa.getTarget();
         for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                lifeLost += p.loseLife(lifeAmount, sa.getSourceCard());
+                lifeLost += p.loseLife(lifeAmount);
             }
         }
         sa.getSourceCard().setSVar("AFLifeLost", "Number$" + Integer.toString(lifeLost));

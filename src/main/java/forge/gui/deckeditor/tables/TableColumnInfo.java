@@ -33,14 +33,14 @@ import forge.gui.deckeditor.tables.SColumnUtil.SortState;
  * @param <T> a generic type
  */
 
-@SuppressWarnings({ "rawtypes", "serial" })
 public class TableColumnInfo<T> extends TableColumn {
+    private static final long serialVersionUID = 3749431834643427572L;
     private SortState sortstate = SortState.NONE;
     private int sortPriority = 0;
     private boolean show = true;
     private String enumval;
 
-    private Function<Entry<T, Integer>, Comparable> fnSort;
+    private Function<Entry<T, Integer>, Comparable<?>> fnSort;
     private Function<Entry<T, Integer>, Object> fnDisplay;
 
     /** */
@@ -109,7 +109,7 @@ public class TableColumnInfo<T> extends TableColumn {
      * 
      * @return the fnSort
      */
-    public Function<Entry<T, Integer>, Comparable> getFnSort() {
+    public Function<Entry<T, Integer>, Comparable<?>> getFnSort() {
         if (fnSort == null) {
            throw new NullPointerException("A sort function hasn't been set for "
                    + "Column " + TableColumnInfo.this.getIdentifier());
@@ -136,7 +136,7 @@ public class TableColumnInfo<T> extends TableColumn {
      * @param lambda0 the fnSort
      * @param lambda1 the fnDisplay
      */
-    public void setSortAndDisplayFunctions(final Function<Entry<T, Integer>, Comparable> lambda0, final Function<Entry<T, Integer>, Object> lambda1) {
+    public void setSortAndDisplayFunctions(final Function<Entry<T, Integer>, Comparable<?>> lambda0, final Function<Entry<T, Integer>, Object> lambda1) {
         this.fnSort = lambda0;
         this.fnDisplay = lambda1;
     }

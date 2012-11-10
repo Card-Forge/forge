@@ -32,7 +32,7 @@ import java.util.Map;
  * @author Forge
  * @version $Id: DeckManager.java 13590 2012-01-27 20:46:27Z Max mtg $
  */
-public class StorageView<T> implements Iterable<T>, IStorageView<T> {
+public class StorageView<T> implements IStorageView<T> {
     private final Map<String, T> map;
 
     /**

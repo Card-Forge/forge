@@ -1370,9 +1370,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final int getCounters(final Counters counterName) {
         if (this.counters.containsKey(counterName)) {
             return this.counters.get(counterName);
-        } else {
-            return 0;
         }
+        return 0;
     }
 
     // get all counters from a card
@@ -3594,9 +3593,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         final Object topController = this.controllerObjects.get(this.controllerObjects.size() - 1);
         if (topController instanceof Player) {
             return (Player) topController;
-        } else {
-            return ((Card) topController).getController();
         }
+        return ((Card) topController).getController();
     }
 
     /**
@@ -4536,9 +4534,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final int getNetAttack() {
         if ((this.getAmountOfKeyword("CARDNAME's power and toughness are switched") % 2) != 0) {
             return this.getUnswitchedDefense();
-        } else {
-            return this.getUnswitchedAttack();
         }
+        return this.getUnswitchedAttack();
     }
 
     /**
@@ -4588,9 +4585,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final int getNetDefense() {
         if ((this.getAmountOfKeyword("CARDNAME's power and toughness are switched") % 2) != 0) {
             return this.getUnswitchedAttack();
-        } else {
-            return this.getUnswitchedDefense();
         }
+        return this.getUnswitchedDefense();
     }
 
     // How much combat damage does the card deal
@@ -5388,15 +5384,13 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final StaticAbility addStaticAbility(final String s, final CardCharacteristicName state) {
 
-        if (s.trim().length() != 0) {
-            final StaticAbility stAb = new StaticAbility(s, this);
-            CardCharacteristics stateCharacteristics = this.getState(state);
-            stateCharacteristics.getStaticAbilities().add(stAb);
-            return stAb;
-        }
-        else {
+        if (s.trim().length() == 0) {
             return null;
         }
+        final StaticAbility stAb = new StaticAbility(s, this);
+        CardCharacteristics stateCharacteristics = this.getState(state);
+        stateCharacteristics.getStaticAbilities().add(stAb);
+        return stAb;
     }
 
     /**
@@ -8025,11 +8019,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } // Creature end
 
-        if (restDamage > 0) {
-            return restDamage;
-        } else {
-            return 0;
-        }
+
+        return restDamage > 0 ? restDamage : 0;
     }
 
     /**

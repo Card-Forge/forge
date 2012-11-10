@@ -24,7 +24,7 @@ package forge.game.phase;
  * 
  * @author Forge
  */
-public class Cleanup extends Phase implements java.io.Serializable {
+public class Cleanup extends Phase {
 
     /** Constant <code>serialVersionUID=-6993476643509826990L</code>. */
     private static final long serialVersionUID = -6993476643509826990L;

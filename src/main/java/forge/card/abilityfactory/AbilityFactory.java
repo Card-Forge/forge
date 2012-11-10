@@ -372,9 +372,8 @@ public class AbilityFactory {
         if (!sSub.equals("")) {
             final AbilityFactory afDB = new AbilityFactory();
             return (AbilitySub) afDB.getAbility(sSub, hostCard);
-        } else {
-            System.out.println("SubAbility not found for: " + hostCard);
         }
+        System.out.println("SubAbility not found for: " + hostCard);
 
         return null;
     }

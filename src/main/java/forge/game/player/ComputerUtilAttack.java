@@ -217,7 +217,7 @@ public class ComputerUtilAttack {
      *            a {@link forge.game.phase.Combat} object.
      * @return a {@link forge.CardList} object.
      */
-    public final List<Card> notNeededAsBlockers(final Player ai, final List<Card> attackers, final Combat combat) {
+    public final List<Card> notNeededAsBlockers(final Player ai, final List<Card> attackers) {
         final List<Card> notNeededAsBlockers = new ArrayList<Card>(attackers);
         int fixedBlockers = 0;
         final List<Card> vigilantes = new ArrayList<Card>();
@@ -779,7 +779,7 @@ public class ComputerUtilAttack {
 
         System.out.println("Normal attack");
 
-        attackersLeft = this.notNeededAsBlockers(ai, attackersLeft, combat);
+        attackersLeft = this.notNeededAsBlockers(ai, attackersLeft);
         System.out.println(attackersLeft.size());
 
         attackersLeft = this.sortAttackers(attackersLeft);

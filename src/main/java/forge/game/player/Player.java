@@ -264,7 +264,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         boolean change = false;
         // rule 118.5
         if (this.life > newLife) {
-            change = (this.loseLife(this.life - newLife, source) > 0);
+            change = (this.loseLife(this.life - newLife) > 0);
         } else if (newLife > this.life) {
             change = this.gainLife(newLife - this.life, source);
         } else {
@@ -388,11 +388,9 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * 
      * @param toLose
      *            a int.
-     * @param c
-     *            a {@link forge.Card} object.
      * @return an int.
      */
-    public final int loseLife(final int toLose, final Card c) {
+    public final int loseLife(final int toLose) {
         int lifeLost = 0;
         if (!this.canLoseLife()) {
             return 0;
@@ -484,7 +482,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
         // rule 118.8
         if (this.life >= lifePayment) {
-            return (this.loseLife(lifePayment, source) > 0);
+            return (this.loseLife(lifePayment) > 0);
         }
 
         return false;
@@ -530,11 +528,11 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             // Worship does not reduce the damage dealt but changes the effect
             // of the damage
             if (PlayerUtil.worshipFlag(this) && (this.life <= damageToDo)) {
-                this.loseLife(Math.min(damageToDo, this.life - 1), source);
+                this.loseLife(Math.min(damageToDo, this.life - 1));
             } else {
                 // rule 118.2. Damage dealt to a player normally causes that
                 // player to lose that much life.
-                this.loseLife(damageToDo, source);
+                this.loseLife(damageToDo);
             }
         }
 

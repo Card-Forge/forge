@@ -38,8 +38,7 @@ import forge.item.CardPrinted;
 // Comparable needs <type>
 public class TableSorter<T> implements Comparator<Entry<T, Integer>> {
     private final boolean ascending;
-    @SuppressWarnings("rawtypes")
-    private final Function<Entry<T, Integer>, Comparable> field;
+    private final Function<Entry<T, Integer>, Comparable<?>> field;
 
     /**
      * <p>
@@ -51,18 +50,16 @@ public class TableSorter<T> implements Comparator<Entry<T, Integer>> {
      * @param inAscending
      *            a boolean.
      */
-    @SuppressWarnings("rawtypes")
-    public TableSorter(final Function<Entry<T, Integer>, Comparable> field, final boolean inAscending) {
+    public TableSorter(final Function<Entry<T, Integer>, Comparable<?>> field, final boolean inAscending) {
         this.field = field;
         this.ascending = inAscending;
     }
 
     /** The Constant byNameThenSet. */
-    @SuppressWarnings("rawtypes")
     public static final TableSorter<CardPrinted> BY_NAME_THEN_SET = new TableSorter<CardPrinted>(
-            new Function<Entry<CardPrinted, Integer>, Comparable>() {
+            new Function<Entry<CardPrinted, Integer>, Comparable<?>>() {
                 @Override
-                public Comparable apply(final Entry<CardPrinted, Integer> from) {
+                public Comparable<?> apply(final Entry<CardPrinted, Integer> from) {
                     return from.getKey();
                 }
             }, true);

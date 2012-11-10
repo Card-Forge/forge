@@ -9,7 +9,7 @@ import forge.game.zone.ZoneType;
 
 public abstract class RevealAiBase extends SpellAiLogic {
     
-    protected  boolean revealHandTargetAI(final Player ai, final SpellAbility sa, final boolean primarySA, final boolean mandatory) {
+    protected  boolean revealHandTargetAI(final Player ai, final SpellAbility sa/*, final boolean primarySA, final boolean mandatory*/) {
         final Target tgt = sa.getTarget();
     
         Player opp = ai.getOpponent();
@@ -38,6 +38,6 @@ public abstract class RevealAiBase extends SpellAiLogic {
      */
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-        return revealHandTargetAI(ai, sa, false, false);
+        return revealHandTargetAI(ai, sa/*, false, false*/);
     }
 }

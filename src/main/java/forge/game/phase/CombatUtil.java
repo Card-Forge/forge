@@ -2846,7 +2846,7 @@ public class CombatUtil {
                 final Card top = lib.get(0);
                 if (top.isCreature()) {
                     player.gainLife(top.getBaseDefense(), c);
-                    player.loseLife(top.getBaseAttack(), c);
+                    player.loseLife(top.getBaseAttack());
 
                     Singletons.getModel().getGame().getAction().moveToHand(top);
                 }

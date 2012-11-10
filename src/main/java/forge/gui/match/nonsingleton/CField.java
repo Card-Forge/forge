@@ -163,7 +163,7 @@ public class CField implements ICDoc {
     @Override
     public void initialize() {
         if (initializedAlready) { return; }
-        else { initializedAlready = true; }
+        initializedAlready = true;
 
         // Observers
         CField.this.player.getZone(ZoneType.Hand).addObserver(observerZones);

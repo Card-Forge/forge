@@ -229,9 +229,7 @@ public class AbilityManaPart implements java.io.Serializable {
                 if (sa.isXCost()) {
                     return true;
                 }
-                else {
-                    continue;
-                }
+                continue;
             }
 
             if (sa.isAbility()) {

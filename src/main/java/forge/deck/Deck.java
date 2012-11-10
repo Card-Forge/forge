@@ -18,7 +18,6 @@
 package forge.deck;
 
 import java.io.File;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -55,7 +54,7 @@ import forge.util.FileUtil;
  * @author Forge
  * @version $Id$
  */
-public class Deck extends DeckBase implements Serializable {
+public class Deck extends DeckBase {
     /**
      *
      */

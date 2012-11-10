@@ -28,12 +28,12 @@ public class ShuffleAi extends SpellAiLogic {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        return shuffleTargetAI(sa, false, false);
+        return shuffleTargetAI(/*sa, false, false*/);
     }
 
     
     
-    private boolean shuffleTargetAI(final SpellAbility sa, final boolean primarySA, final boolean mandatory) {
+    private boolean shuffleTargetAI(/*final SpellAbility sa, final boolean primarySA, final boolean mandatory*/) {
         return false;
         
         
@@ -43,7 +43,7 @@ public class ShuffleAi extends SpellAiLogic {
 
     @Override
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
-        if (!shuffleTargetAI(sa, false, mandatory)) {
+        if (!shuffleTargetAI(/*sa, false, mandatory*/)) {
             return false;
         }
 

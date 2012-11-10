@@ -49,7 +49,7 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id: Untap 12482 2011-12-06 11:14:11Z Sloth $
  */
-public class Untap extends Phase implements java.io.Serializable {
+public class Untap extends Phase {
 
     private static final long serialVersionUID = 4515266331266259123L;
 

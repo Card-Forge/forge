@@ -2000,6 +2000,13 @@ public class CardFactoryUtil {
                     return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c); // not Kicked
                 }
             }
+            if (sq[0].startsWith("Kicked")) {
+                if (sa.isKicked()) {
+                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c); // Kicked
+                } else {
+                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c); // not Kicked
+                }
+            }            
         }
         return xCount(c, s);
     }

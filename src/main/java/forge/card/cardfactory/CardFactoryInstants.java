@@ -94,7 +94,7 @@ public class CardFactoryInstants {
                         }
                     }
 
-                    tPlayer.loseLife(x, card);
+                    tPlayer.loseLife(x);
                     player.gainLife(x, card);
                     card.setXManaCostPaid(0);
                 }

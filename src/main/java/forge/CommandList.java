@@ -28,7 +28,7 @@ import java.util.Iterator;
  * @author Forge
  * @version $Id$
  */
-public class CommandList implements java.io.Serializable, Command, Iterable<Command> {
+public class CommandList implements Command, Iterable<Command> {
     /** Constant <code>serialVersionUID=-1532687201812613302L</code>. */
     private static final long serialVersionUID = -1532687201812613302L;
 

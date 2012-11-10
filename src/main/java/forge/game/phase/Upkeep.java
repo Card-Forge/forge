@@ -63,7 +63,7 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id$
  */
-public class Upkeep extends Phase implements java.io.Serializable {
+public class Upkeep extends Phase {
     private static final long serialVersionUID = 6906459482978819354L;
 
     /**
@@ -1158,7 +1158,7 @@ public class Upkeep extends Phase implements java.io.Serializable {
                         this.revealTopCard(title);
                     }
                     if (wantOpponentLoseLife) {
-                        opponent.loseLife(2, k);
+                        opponent.loseLife(2);
                     }
                 } // resolve()
 
