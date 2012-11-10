@@ -17,39 +17,41 @@ public class CommonSpell extends Spell {
     private final SpellEffect effect;
     private final SpellAiLogic ai;
 
-    public CommonSpell(ApiType api0, Card sourceCard, Cost abCost, Target tgt, Map<String,String> params0, SpellEffect effect0, SpellAiLogic ai0) {
+    public CommonSpell(ApiType api0, Card sourceCard, Cost abCost, Target tgt, Map<String, String> params0, SpellEffect effect0, SpellAiLogic ai0) {
         super(sourceCard, abCost, tgt);
         params = params0;
         api = api0;
         effect = effect0;
         ai = ai0;
-        
-        if ( effect0 instanceof ManaEffect || effect0 instanceof ManaReflectedEffect )
-            this.setManaPart(new AbilityManaPart(sourceCard, params));
 
-        if ( effect0 instanceof ChangeZoneEffect || effect0 instanceof ChangeZoneAllEffect )
-            AbilityFactory.adjustChangeZoneTarget(params, this);        
+        if (effect0 instanceof ManaEffect || effect0 instanceof ManaReflectedEffect) {
+            this.setManaPart(new AbilityManaPart(sourceCard, params));
+        }
+
+        if (effect0 instanceof ChangeZoneEffect || effect0 instanceof ChangeZoneAllEffect) {
+            AbilityFactory.adjustChangeZoneTarget(params, this);
+        }
     }
-    
+
     @Override
     public String getStackDescription() {
         return effect.getStackDescriptionWithSubs(params, this);
     }
-    
+
     /* (non-Javadoc)
      * @see forge.card.spellability.SpellAbility#resolve()
      */
-    
+
     @Override
     public boolean canPlayAI() {
         return ai.canPlayAIWithSubs(getActivatingPlayer(), this) && super.canPlayAI();
-    }    
-    
+    }
+
     @Override
     public void resolve() {
         effect.resolve(this);
     }
-    
+
     @Override
     public boolean canPlayFromEffectAI(final boolean mandatory, final boolean withOutManaCost) {
         boolean chance = false;
