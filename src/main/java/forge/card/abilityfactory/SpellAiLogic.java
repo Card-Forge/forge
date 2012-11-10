@@ -15,17 +15,17 @@ public abstract class SpellAiLogic {
         }
         return canPlayAI(aiPlayer, sa);
     }
-    
+
     protected abstract boolean canPlayAI(final Player aiPlayer, final SpellAbility sa);
-    
-    public final boolean doTriggerAI(final Player aiPlayer, final SpellAbility sa, final boolean mandatory){
+
+    public final boolean doTriggerAI(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
         if (!ComputerUtil.canPayCost(sa, aiPlayer) && !mandatory) {
             return false;
         }
 
         return doTriggerNoCostWithSubs(aiPlayer, sa, mandatory);
     }
-    
+
     public final boolean doTriggerNoCostWithSubs(final Player aiPlayer, final SpellAbility sa, final boolean mandatory)
     {
         if (!doTriggerAINoCost(aiPlayer, sa, mandatory)) {
@@ -37,11 +37,11 @@ public abstract class SpellAiLogic {
         }
         return true;
     }
-    
+
     protected boolean doTriggerAINoCost(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
         return canPlayAI(aiPlayer, sa) || mandatory;
     }
-    
+
     public boolean chkAIDrawback(final SpellAbility sa, final Player aiPlayer) {
         return true;
     }
