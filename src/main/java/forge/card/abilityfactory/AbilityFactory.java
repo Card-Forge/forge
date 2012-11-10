@@ -1431,24 +1431,13 @@ public class AbilityFactory {
      *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      */
     public static void handleRemembering(final SpellAbility sa) {
+        Card host = sa.getSourceCard();
 
-        Card host;
-
-        if (!sa.hasParam("RememberTargets") && !sa.hasParam("RememberToughness")
-                && !sa.hasParam("RememberCostCards")) {
-            return;
-        }
-
-        host = sa.getSourceCard();
-
-        if (sa.hasParam("ForgetOtherTargets")) {
-            host.clearRemembered();
-        }
-
-        final Target tgt = sa.getTarget();
-
-        if (sa.hasParam("RememberTargets") && tgt != null) {  
-            for (final Object o : tgt.getTargets()) {
+        if (sa.hasParam("RememberTargets") && sa.getTarget() != null) { 
+            if (sa.hasParam("ForgetOtherTargets")) {
+                host.clearRemembered();
+            }
+            for (final Object o : sa.getTarget().getTargets()) {
                 host.addRemembered(o);
             }
         }
