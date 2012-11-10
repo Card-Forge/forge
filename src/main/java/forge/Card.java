@@ -2569,6 +2569,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     || keyword.startsWith("May be played")
                     || keyword.startsWith("Cascade")
                     || (keyword.startsWith("Epic") && !sb.toString().contains("Epic"))
+                    || (keyword.startsWith("Conspire") && !sb.toString().contains("Conspire"))
                     || (keyword.startsWith("Split second") && !sb.toString().contains("Split second"))
                     || (keyword.startsWith("Multikicker") && !sb.toString().contains("Multikicker"))) {
                 sb.append(kw.get(i)).append("\r\n");
@@ -7075,6 +7076,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.startsWith("evoked")) {
             if (!this.isEvoked()) {
+                return false;
+            }
+        } else if (property.equals("conspired")) {
+            if (!this.isOptionalAdditionalCostsPaid("Conspire")) {
                 return false;
             }
         } else if (property.equals("HasDevoured")) {

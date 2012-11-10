@@ -1623,6 +1623,25 @@ public final class GameActionUtil {
                 abilities.clear();
                 abilities.addAll(0, newAbilities);
                 newAbilities.clear();
+            } else if (keyword.startsWith("Conspire")) {
+                for (SpellAbility sa : abilities) {
+                    final SpellAbility newSA = sa.copy();
+                    newSA.setBasicSpell(false);
+                    final String conspireCost = "tapXType<2/Creature.SharesColorWith/untapped creature you control"
+                            + " that shares a color with " + source.getName() + ">";
+                    newSA.setPayCosts(GameActionUtil.combineCosts(newSA, conspireCost));
+                    newSA.setManaCost("");
+                    newSA.setDescription(sa.getDescription() + " (Conspire)");
+                    ArrayList<String> newoacs = new ArrayList<String>();
+                    newoacs.addAll(sa.getOptionalAdditionalCosts());
+                    newSA.setOptionalAdditionalCosts(newoacs);
+                    newSA.addOptionalAdditionalCosts(keyword);
+                    if (newSA.canPlay()) {
+                        newAbilities.add(newAbilities.size(), newSA);
+                    }
+                }
+                abilities.addAll(0, newAbilities);
+                newAbilities.clear();
             }
         }
 

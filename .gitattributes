@@ -123,6 +123,7 @@ res/cardsfolder/a/aether_web.txt svneol=native#text/plain
 res/cardsfolder/a/aetherflame_wall.txt svneol=native#text/plain
 res/cardsfolder/a/aethermages_touch.txt svneol=native#text/plain
 res/cardsfolder/a/aethersnipe.txt svneol=native#text/plain
+res/cardsfolder/a/aethertow.txt -text
 res/cardsfolder/a/affa_guard_hound.txt svneol=native#text/plain
 res/cardsfolder/a/afflict.txt svneol=native#text/plain
 res/cardsfolder/a/afflicted_deserter_werewolf_ransacker.txt -text
@@ -732,6 +733,7 @@ res/cardsfolder/b/bargain.txt svneol=native#text/plain
 res/cardsfolder/b/bargaining_table.txt svneol=native#text/plain
 res/cardsfolder/b/barishi.txt svneol=native#text/plain
 res/cardsfolder/b/barkhide_mauler.txt svneol=native#text/plain
+res/cardsfolder/b/barkshell_blessing.txt -text
 res/cardsfolder/b/barktooth_warbeard.txt svneol=native#text/plain
 res/cardsfolder/b/barls_cage.txt svneol=native#text/plain
 res/cardsfolder/b/baron_sengir.txt svneol=native#text/plain
@@ -1280,6 +1282,7 @@ res/cardsfolder/b/buried_alive.txt svneol=native#text/plain
 res/cardsfolder/b/buried_ruin.txt svneol=native#text/plain
 res/cardsfolder/b/burn_at_the_stake.txt -text
 res/cardsfolder/b/burn_the_impure.txt svneol=native#text/plain
+res/cardsfolder/b/burn_trail.txt -text
 res/cardsfolder/b/burning_cloak.txt svneol=native#text/plain
 res/cardsfolder/b/burning_fields.txt svneol=native#text/plain
 res/cardsfolder/b/burning_inquiry.txt svneol=native#text/plain
@@ -2509,6 +2512,7 @@ res/cardsfolder/d/distorting_wake.txt -text
 res/cardsfolder/d/distortion_strike.txt -text
 res/cardsfolder/d/distress.txt svneol=native#text/plain
 res/cardsfolder/d/disturbed_burial.txt svneol=native#text/plain
+res/cardsfolder/d/disturbing_plot.txt -text
 res/cardsfolder/d/dive_bomber.txt svneol=native#text/plain
 res/cardsfolder/d/divebomber_griffin.txt svneol=native#text/plain
 res/cardsfolder/d/divergent_growth.txt -text
@@ -3780,6 +3784,7 @@ res/cardsfolder/g/geyser_glider.txt svneol=native#text/plain
 res/cardsfolder/g/ghalmas_warden.txt svneol=native#text/plain
 res/cardsfolder/g/ghastlord_of_fugue.txt svneol=native#text/plain
 res/cardsfolder/g/ghastly_demise.txt svneol=native#text/plain
+res/cardsfolder/g/ghastly_discovery.txt -text
 res/cardsfolder/g/ghastly_remains.txt -text
 res/cardsfolder/g/ghave_guru_of_spores.txt -text
 res/cardsfolder/g/ghazban_ogre.txt -text
@@ -3840,6 +3845,7 @@ res/cardsfolder/g/giant_tortoise.txt svneol=native#text/plain
 res/cardsfolder/g/giant_trap_door_spider.txt svneol=native#text/plain
 res/cardsfolder/g/giant_turtle.txt -text
 res/cardsfolder/g/giant_warthog.txt svneol=native#text/plain
+res/cardsfolder/g/giantbaiting.txt -text
 res/cardsfolder/g/giants_ire.txt svneol=native#text/plain
 res/cardsfolder/g/gibbering_descent.txt svneol=native#text/plain
 res/cardsfolder/g/gibbering_hyenas.txt svneol=native#text/plain
@@ -3884,6 +3890,7 @@ res/cardsfolder/g/glasses_of_urza.txt svneol=native#text/plain
 res/cardsfolder/g/glaze_fiend.txt svneol=native#text/plain
 res/cardsfolder/g/gleam_of_resistance.txt svneol=native#text/plain
 res/cardsfolder/g/gleancrawler.txt -text
+res/cardsfolder/g/gleeful_sabotage.txt -text
 res/cardsfolder/g/glen_elendra_archmage.txt svneol=native#text/plain
 res/cardsfolder/g/glen_elendra_liege.txt svneol=native#text/plain
 res/cardsfolder/g/glen_elendra_pranksters.txt svneol=native#text/plain
@@ -6031,6 +6038,7 @@ res/cardsfolder/m/memory_erosion.txt svneol=native#text/plain
 res/cardsfolder/m/memory_jar.txt -text
 res/cardsfolder/m/memory_lapse.txt svneol=native#text/plain
 res/cardsfolder/m/memory_plunder.txt -text
+res/cardsfolder/m/memory_sluice.txt -text
 res/cardsfolder/m/memorys_journey.txt -text
 res/cardsfolder/m/mending_hands.txt svneol=native#text/plain
 res/cardsfolder/m/meng_huo_barbarian_king.txt svneol=native#text/plain
@@ -6169,6 +6177,7 @@ res/cardsfolder/m/mindwarper.txt svneol=native#text/plain
 res/cardsfolder/m/mindwhip_sliver.txt svneol=native#text/plain
 res/cardsfolder/m/mindwrack_liege.txt svneol=native#text/plain
 res/cardsfolder/m/mine_bearer.txt svneol=native#text/plain
+res/cardsfolder/m/mine_excavation.txt -text
 res/cardsfolder/m/mine_layer.txt -text
 res/cardsfolder/m/minion_of_tevesh_szat.txt svneol=native#text/plain
 res/cardsfolder/m/minion_reflector.txt -text
@@ -10327,6 +10336,7 @@ res/cardsfolder/t/training_grounds.txt svneol=native#text/plain
 res/cardsfolder/t/traitorous_blood.txt -text
 res/cardsfolder/t/traitorous_instinct.txt svneol=native#text/plain
 res/cardsfolder/t/traitors_clutch.txt svneol=native#text/plain
+res/cardsfolder/t/traitors_roar.txt -text
 res/cardsfolder/t/tranquil_domain.txt svneol=native#text/plain
 res/cardsfolder/t/tranquil_garden.txt svneol=native#text/plain
 res/cardsfolder/t/tranquil_grove.txt svneol=native#text/plain
