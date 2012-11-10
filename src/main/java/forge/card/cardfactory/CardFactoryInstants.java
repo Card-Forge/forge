@@ -21,28 +21,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 
 import forge.Card;
 
 import forge.CardLists;
-import forge.CardPredicates;
 import forge.CardPredicates.Presets;
-import forge.Command;
 import forge.Singletons;
 import forge.card.cost.Cost;
-import forge.card.spellability.Ability;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.phase.PhaseUtil;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.util.MyRandom;
-
 
 /**
  * <p>
@@ -68,117 +60,7 @@ public class CardFactoryInstants {
     public static void buildCard(final Card card, final String cardName) {
 
         // *************** START *********** START **************************
-        if (cardName.equals("Intuition")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 8282597086298330698L;
-
-                @Override
-                public void resolve() {
-                    final Player player = card.getController();
-                    if (player.isHuman()) {
-                        this.humanResolve();
-                    } else {
-                        this.computerResolve();
-                    }
-                    player.shuffle();
-                }
-
-                public void humanResolve() {
-                    final List<Card> libraryList = new ArrayList<Card>(card.getController().getCardsIn(ZoneType.Library));
-                    final List<Card> selectedCards = new ArrayList<Card>();
-
-                    Object o = GuiChoose.oneOrNone("Select first card", libraryList);
-                    if (o != null) {
-                        final Card c1 = (Card) o;
-                        libraryList.remove(c1);
-                        selectedCards.add(c1);
-                    } else {
-                        return;
-                    }
-                    o = GuiChoose.oneOrNone("Select second card", libraryList);
-                    if (o != null) {
-                        final Card c2 = (Card) o;
-                        libraryList.remove(c2);
-                        selectedCards.add(c2);
-                    } else {
-                        return;
-                    }
-                    o = GuiChoose.oneOrNone("Select third card", libraryList);
-                    if (o != null) {
-                        final Card c3 = (Card) o;
-                        libraryList.remove(c3);
-                        selectedCards.add(c3);
-                    } else {
-                        return;
-                    }
-
-                    // comp randomly selects one of the three cards
-                    final Card choice = selectedCards.get(MyRandom.getRandom().nextInt(2));
-
-                    selectedCards.remove(choice);
-                    Singletons.getModel().getGame().getAction().moveToHand(choice);
-
-                    for (final Card trash : selectedCards) {
-                        Singletons.getModel().getGame().getAction().moveToGraveyard(trash);
-                    }
-                }
-
-                public void computerResolve() {
-                    final List<Card> list = new ArrayList<Card>(card.getController().getCardsIn(ZoneType.Library));
-                    final List<Card> selectedCards = new ArrayList<Card>();
-
-                    // pick best creature
-                    Card c = CardFactoryUtil.getBestCreatureAI(list);
-                    if (c == null) {
-                        c = list.get(0);
-                    }
-                    list.remove(c);
-                    selectedCards.add(c);
-
-                    c = CardFactoryUtil.getBestCreatureAI(list);
-                    if (c == null) {
-                        c = list.get(0);
-                    }
-                    list.remove(c);
-                    selectedCards.add(c);
-
-                    c = CardFactoryUtil.getBestCreatureAI(list);
-                    if (c == null) {
-                        c = list.get(0);
-                    }
-                    list.remove(c);
-                    selectedCards.add(c);
-
-                    // NOTE: Using getChoiceOptional() results in a null error
-                    // when you click on Cancel.
-                    final Card choice = GuiChoose.one("Select card to give to computer", selectedCards);
-
-                    selectedCards.remove(choice);
-                    Singletons.getModel().getGame().getAction().moveToHand(choice);
-
-                    for (final Card trash : selectedCards) {
-                        Singletons.getModel().getGame().getAction().moveToGraveyard(trash);
-                    }
-                }
-
-                @Override
-                public boolean canPlay() {
-                    final List<Card> library = card.getController().getCardsIn(ZoneType.Library);
-                    return library.size() >= 3 && super.canPlay();
-                }
-
-                @Override
-                public boolean canPlayAI() {
-                    Iterable<Card> creature = Iterables.filter(getActivatingPlayer().getCardsIn(ZoneType.Library), CardPredicates.Presets.CREATURES); 
-                    return Iterables.size(creature) >= 3;
-                }
-            }; // SpellAbility
-
-            card.addSpellAbility(spell);
-        } // *************** END ************ END **************************
-
-        // *************** START *********** START **************************
-        else if (cardName.equals("Suffer the Past")) {
+        if (cardName.equals("Suffer the Past")) {
             final Cost cost = new Cost(card, "X B", false);
             final Target tgt = new Target(card, "Select a Player", "Player");
             final SpellAbility spell = new Spell(card, cost, tgt) {
