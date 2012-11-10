@@ -379,11 +379,6 @@ public class InputPayManaCostUtil {
             // selectCard
             @Override
             public void selectCard(final Card card, final PlayerZone zone) {
-                if (sa.getSourceCard().equals(card) && sa.isTapAbility()) {
-                    // this really shouldn't happen but just in case
-                    return;
-                }
-    
                 this.manaCost = activateManaAbility(sa, card, this.manaCost);
                 if (this.manaCost.isPaid()) {
                     if (!this.colorsPaid.contains(this.manaCost.getColorsPaid())) {

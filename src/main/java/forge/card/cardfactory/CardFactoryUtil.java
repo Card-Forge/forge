@@ -3963,7 +3963,7 @@ public class CardFactoryUtil {
         }
 
         if (card.hasKeyword("Delve")) {
-            card.getSpellAbilities().get(0).setIsDelve(true);
+            card.getSpellAbilities().get(0).setDelve(true);
         }
 
         if (card.hasStartOfKeyword("Haunt")) {

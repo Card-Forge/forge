@@ -1723,7 +1723,7 @@ public class GameAction {
         }
 
         if (spell.isSpell()) {
-            if (spell.getIsDelve()) {
+            if (spell.isDelve()) {
                 final int cardsInGrave = originalCard.getController().getCardsIn(ZoneType.Graveyard).size();
 
                 final Player pc = originalCard.getController();
@@ -2010,12 +2010,6 @@ public class GameAction {
                     }
 
                     game.getStack().add(sa);
-                    if (sa.isTapAbility() && !sa.wasCancelled()) {
-                        sa.getSourceCard().tap();
-                    }
-                    if (sa.isUntapAbility()) {
-                        sa.getSourceCard().untap();
-                    }
                     return;
                 } else {
                     Singletons.getModel().getMatch().getInput().setInput(sa.getAfterPayMana());
@@ -2062,12 +2056,6 @@ public class GameAction {
             if (manaCost.isPaid() && (sa.getBeforePayMana() == null)) {
                 if (sa.getAfterPayMana() == null) {
                     AbilityFactory.resolve(sa, false);
-                    if (sa.isTapAbility() && !sa.wasCancelled()) {
-                        sa.getSourceCard().tap();
-                    }
-                    if (sa.isUntapAbility()) {
-                        sa.getSourceCard().untap();
-                    }
                     return;
                 } else {
                     Singletons.getModel().getMatch().getInput().setInput(sa.getAfterPayMana());

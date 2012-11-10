@@ -49,10 +49,6 @@ public class InputPayManaCost2 extends InputMana {
     public void selectCard(final Card card, final PlayerZone zone) {
         // prevent cards from tapping themselves if ability is a
         // tapability, although it should already be tapped
-        if (sa.getSourceCard().equals(card) && sa.isTapAbility()) {
-            return;
-        }
-
         this.manaCost = InputPayManaCostUtil.activateManaAbility(sa, card, this.manaCost);
 
         if (this.manaCost.isPaid()) {

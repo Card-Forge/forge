@@ -72,17 +72,14 @@ public abstract class SpellAbility implements ISpellAbility {
     private boolean trigger = false;
     private boolean optionalTrigger = false;
     private int sourceTrigger = -1;
-    private boolean mandatory = false;
     private boolean temporarilySuppressed = false;
 
-    private boolean tapAbility;
-    private boolean untapAbility;
     private boolean flashBackAbility = false;
     private boolean multiKicker = false;
     private boolean replicate = false;
     private boolean xCost = false;
     private boolean cycling = false;
-    private boolean isDelve = false;
+    private boolean delve = false;
 
     private Input beforePayMana;
     private Input afterResolve;
@@ -334,38 +331,6 @@ public abstract class SpellAbility implements ISpellAbility {
      */
     public boolean isSpell() { return false; }
     public boolean isAbility() { return true; }
-
-    /**
-     * <p>
-     * isTapAbility.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public boolean isTapAbility() {
-        return this.tapAbility;
-    }
-
-    /**
-     * <p>
-     * isUntapAbility.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public boolean isUntapAbility() {
-        return this.untapAbility;
-    }
-
-    /**
-     * <p>
-     * makeUntapAbility.
-     * </p>
-     */
-    public void makeUntapAbility() {
-        this.untapAbility = true;
-        this.tapAbility = false;
-    }
 
     /**
      * <p>
@@ -1501,25 +1466,13 @@ public abstract class SpellAbility implements ISpellAbility {
 
     /**
      * <p>
-     * Setter for the field <code>mandatory</code>.
-     * </p>
-     * 
-     * @param mand
-     *            a boolean.
-     */
-    public final void setMandatory(final boolean mand) {
-        this.mandatory = mand;
-    }
-
-    /**
-     * <p>
      * isMandatory.
      * </p>
      * 
      * @return a boolean.
      */
-    public final boolean isMandatory() {
-        return this.mandatory;
+    public boolean isMandatory() {
+        return false;
     }
 
     /**
@@ -1610,8 +1563,8 @@ public abstract class SpellAbility implements ISpellAbility {
      * 
      * @return the isDelve
      */
-    public final boolean getIsDelve() {
-        return this.isDelve;
+    public final boolean isDelve() {
+        return this.delve;
     }
 
     /**
@@ -1620,8 +1573,8 @@ public abstract class SpellAbility implements ISpellAbility {
      * @param isDelve0
      *            the isDelve to set
      */
-    public final void setIsDelve(final boolean isDelve0) {
-        this.isDelve = isDelve0;
+    public final void setDelve(final boolean isDelve0) {
+        this.delve = isDelve0;
     }
 
     /**

@@ -152,12 +152,6 @@ public class InputPayManaCost extends InputMana {
         // Kher Keep, Pendelhaven, Blinkmoth Nexus, and Mikokoro, Center of the
         // Sea, ....
 
-        if (this.originalCard.equals(card) && this.spell.isTapAbility()) {
-            // I'm not sure if this actually prevents anything that wouldn't be
-            // handled by canPlay below
-            return;
-        }
-
         this.manaCost = InputPayManaCostUtil.activateManaAbility(this.spell, card, this.manaCost);
 
         // only show message if this is the active input
@@ -203,16 +197,6 @@ public class InputPayManaCost extends InputMana {
         } else {
             Singletons.getControl().getPlayer().getManaPool().clearManaPaid(this.spell, false);
             this.resetManaCost();
-
-            // if tap ability, tap card
-            if (this.spell.isTapAbility()) {
-                this.originalCard.tap();
-            }
-            if (this.spell.isUntapAbility()) {
-                this.originalCard.untap();
-            }
-
-            // if this is a spell, move it to the Stack ZOne
 
             if (this.spell.isSpell()) {
                 this.spell.setSourceCard(Singletons.getModel().getGame().getAction().moveToStack(this.originalCard));

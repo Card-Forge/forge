@@ -82,7 +82,6 @@ public class AbilityTriggered extends Ability implements Command {
      */
     public AbilityTriggered(final Card sourceCard, final Command sourceCommand, final ZCTrigger situation) {
         super(sourceCard, "0");
-        this.setTrigger(true);
         this.todo = sourceCommand;
         this.trigger = situation;
         if (this.todo instanceof AbilityTriggered) {
@@ -180,5 +179,10 @@ public class AbilityTriggered extends Ability implements Command {
     public final boolean isBasic() {
         return (this.restrictions.length == 1)
                 && this.restrictions[0].equals("named " + this.getSourceCard().getName());
+    }
+    
+    @Override
+    public final boolean isTrigger() {
+        return true;
     }
 }

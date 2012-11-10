@@ -2174,8 +2174,7 @@ public class Upkeep extends Phase {
                                         return false;
                                     }
                                     for (SpellAbility sa : c.getAllSpellAbilities()) {
-                                        if (sa.isTapAbility()
-                                                || sa.getPayCosts() != null && sa.getPayCosts().getTap()) {
+                                        if ( sa.getPayCosts() != null && sa.getPayCosts().getTap()) {
                                             return false;
                                         }
                                     }

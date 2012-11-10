@@ -32,6 +32,8 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     final private SpellAbility sa;
     final private Trigger regtrig;
     final private Player decider;
+
+    boolean mandatory = false;
     
     public WrappedAbility(final Trigger regTrig, final SpellAbility sa0, final Player decider0) {
         super(regTrig.getHostCard(), "0");
@@ -46,6 +48,19 @@ public class WrappedAbility extends Ability implements ISpellAbility {
         return true;
     }
 
+
+    public final void setMandatory(final boolean mand) {
+        this.mandatory = mand;
+    }
+
+    /**
+     * @return the mandatory
+     */
+    @Override
+    public boolean isMandatory() {
+        return mandatory;
+    }
+    
     
     @Override
     public String getParam(String key) { return sa.getParam(key); }
@@ -279,16 +294,6 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     @Override
     public boolean isSpell() {
         return sa.isSpell();
-    }
-
-    @Override
-    public boolean isTapAbility() {
-        return sa.isTapAbility();
-    }
-
-    @Override
-    public boolean isUntapAbility() {
-        return sa.isUntapAbility();
     }
 
     @Override
