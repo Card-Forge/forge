@@ -20,10 +20,10 @@ import java.util.Stack;
 
 public class ChooseSourceEffect extends SpellEffect {
     @Override
-    protected String getStackDescription(java.util.Map<String,String> params, SpellAbility sa) {
+    protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        for (final Player p : getTargetPlayers(sa, params)) {
+        for (final Player p : getTargetPlayers(sa)) {
             sb.append(p).append(" ");
         }
         sb.append("chooses a source.");
@@ -32,12 +32,12 @@ public class ChooseSourceEffect extends SpellEffect {
     }
 
     @Override
-    public void resolve(java.util.Map<String,String> params, SpellAbility sa) {
+    public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
         final ArrayList<Card> chosen = new ArrayList<Card>();
 
         final Target tgt = sa.getTarget();
-        final List<Player> tgtPlayers = getTargetPlayers(sa, params);
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         Stack<SpellAbilityStackInstance> stack = Singletons.getModel().getGame().getStack().getStack();
 
@@ -64,11 +64,13 @@ public class ChooseSourceEffect extends SpellEffect {
                         }
                     }
                 }
-                if (null != stackinst.getSpellAbility().getTargetList()) {
-                    for (Card c : stackinst.getSpellAbility().getTargetList()) {
-                        referencedSources.add(c);
-                    }
-                }
+                // TODO: This was removed in the new AF code, was this perhaps necessary for this
+                //       AF to function correctly?
+                //if (null != stackinst.getSpellAbility().getTargetList()) {
+                //    for (Card c : stackinst.getSpellAbility().getTargetList()) {
+                //        referencedSources.add(c);
+                //    }
+                //}
                 if (null != stackinst.getSpellAbility().getTargetCard()) {
                     referencedSources.add(stackinst.getSpellAbility().getTargetCard());
                 }
@@ -85,13 +87,13 @@ public class ChooseSourceEffect extends SpellEffect {
 
         ArrayList<String> src_choices = new ArrayList<String>();
 
-        if (params.containsKey("Choices")) {
-            permanentSources = CardLists.getValidCards(permanentSources, params.get("Choices"), host.getController(), host);
+        if (sa.hasParam("Choices")) {
+            permanentSources = CardLists.getValidCards(permanentSources, sa.getParam("Choices"), host.getController(), host);
 
-            stackSources = CardLists.getValidCards(stackSources, params.get("Choices"), host.getController(), host);
-            referencedSources = CardLists.getValidCards(referencedSources, params.get("Choices"), host.getController(), host);
+            stackSources = CardLists.getValidCards(stackSources, sa.getParam("Choices"), host.getController(), host);
+            referencedSources = CardLists.getValidCards(referencedSources, sa.getParam("Choices"), host.getController(), host);
         }
-        if (params.containsKey("TargetControls")) {
+        if (sa.hasParam("TargetControls")) {
             permanentSources = CardLists.filterControlledBy(permanentSources, tgtPlayers.get(0));
             stackSources = CardLists.filterControlledBy(stackSources, tgtPlayers.get(0));
             referencedSources = CardLists.filterControlledBy(referencedSources, tgtPlayers.get(0));
@@ -121,15 +123,15 @@ public class ChooseSourceEffect extends SpellEffect {
             return;
         }
 
-        final String numericAmount = params.containsKey("Amount") ? params.get("Amount") : "1";
+        final String numericAmount = sa.hasParam("Amount") ? sa.getParam("Amount") : "1";
         final int validAmount = !numericAmount.matches("[0-9][0-9]?")
-                ? CardFactoryUtil.xCount(host, host.getSVar(params.get("Amount"))) : Integer.parseInt(numericAmount);
+                ? CardFactoryUtil.xCount(host, host.getSVar(sa.getParam("Amount"))) : Integer.parseInt(numericAmount);
 
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 for (int i = 0; i < validAmount; i++) {
                     if (p.isHuman()) {
-                        final String choiceTitle = params.containsKey("ChoiceTitle") ? params.get("ChoiceTitle") : "Choose a source ";
+                        final String choiceTitle = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a source ";
                         Card o = null;
                         do {
                             o = GuiChoose.one(choiceTitle, sourcesToChooseFrom);
@@ -141,12 +143,12 @@ public class ChooseSourceEffect extends SpellEffect {
                             break;
                         }
                     } else { // TODO: AI Support! This is copied from AF ChooseCard! 
-                        if (params.containsKey("AILogic") && params.get("AILogic").equals("BestBlocker")) {
+                        if (sa.hasParam("AILogic") && sa.getParam("AILogic").equals("BestBlocker")) {
                             if (!CardLists.filter(sourcesToChooseFrom, Presets.UNTAPPED).isEmpty()) {
                                 sourcesToChooseFrom = CardLists.filter(sourcesToChooseFrom, Presets.UNTAPPED);
                             }
                             chosen.add(CardFactoryUtil.getBestCreatureAI(sourcesToChooseFrom));
-                        } else if (params.containsKey("AILogic") && params.get("AILogic").equals("Clone")) {
+                        } else if (sa.hasParam("AILogic") && sa.getParam("AILogic").equals("Clone")) {
                             if (!CardLists.getValidCards(sourcesToChooseFrom, "Permanent.YouDontCtrl,Permanent.NonLegendary", host.getController(), host).isEmpty()) {
                                 sourcesToChooseFrom = CardLists.getValidCards(sourcesToChooseFrom, "Permanent.YouDontCtrl,Permanent.NonLegendary", host.getController(), host);
                             }
@@ -157,7 +159,7 @@ public class ChooseSourceEffect extends SpellEffect {
                     }
                 }
                 host.setChosenCard(chosen);
-                if (params.containsKey("RememberChosen")) {
+                if (sa.hasParam("RememberChosen")) {
                     for (final Card rem : chosen) {
                         host.addRemembered(rem);
                     }
