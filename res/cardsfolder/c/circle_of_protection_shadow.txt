@@ -1,0 +1,14 @@
+Name:Circle of Protection: Shadow
+ManaCost:1 W
+Types:Enchantment
+Text:no text
+A:AB$ ChooseCard | Cost$ 1 | Choices$ Creature.withShadow | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SVars$ DBEffect,RPreventNextFromCreature,ExileEffect | SpellDescription$ The next time a creature of your choice with shadow would deal damage to you this turn, prevent that damage.
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromCreature | RememberObjects$ Remembered | SVars$ RPreventNextFromCreature,ExileEffect | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:RPreventNextFromCreature:Event$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ You | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time a creature of your choice with shadow would deal damage to you, prevent that damage.
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/224.jpg
+Oracle:{1}: The next time a creature of your choice with shadow would deal damage to you this turn, prevent that damage.
+End

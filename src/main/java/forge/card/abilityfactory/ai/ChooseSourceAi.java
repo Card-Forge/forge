@@ -20,6 +20,10 @@ public class ChooseSourceAi extends SpellAiLogic {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // TODO: AI Support! Currently this is copied from AF ChooseCard.
+        //       When implementing AI, I believe AI also needs to be made aware of the damage sources chosen
+        //       to be prevented (e.g. so the AI doesn't attack with a creature that will not deal any damage
+        //       to the player because a CoP was pre-activated on it - unless, of course, there's another
+        //       possible reason to attack with that creature).
         final Card host = sa.getSourceCard();
 
         final Target tgt = sa.getTarget();
