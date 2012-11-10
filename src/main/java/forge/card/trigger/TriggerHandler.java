@@ -26,19 +26,13 @@ import java.util.Map;
 import forge.Card;
 
 import forge.CardLists;
-import forge.Command;
-import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.ApiType;
 import forge.card.abilityfactory.effects.CharmEffect;
-import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
-import forge.control.input.Input;
 import forge.game.GameState;
 import forge.game.phase.PhaseType;
 //import forge.util.TextUtil;
@@ -435,9 +429,6 @@ public class TriggerHandler {
 
         } // Torpor Orb check
 
-        final Player[] decider = new Player[1];
-        final Player[] controller = new Player[1];
-
         // Any trigger should cause the phase not to skip
         for (Player p : Singletons.getModel().getGame().getPlayers())
             p.getController().autoPassCancel();
@@ -454,55 +445,57 @@ public class TriggerHandler {
 
         final AbilityFactory abilityFactory = new AbilityFactory();
 
-        final SpellAbility[] sa = new SpellAbility[1];
+        SpellAbility sa = null;
         Card host = Singletons.getModel().getGame().getCardState(regtrig.getHostCard());
 
         if (host == null) {
             host = regtrig.getHostCard();
         }
 
-        sa[0] = regtrig.getOverridingAbility();
-        if (sa[0] == null) {
+        sa = regtrig.getOverridingAbility();
+        if (sa == null) {
             if (!triggerParams.containsKey("Execute")) {
-                sa[0] = new Ability(regtrig.getHostCard(), "0") {
+                sa = new Ability(regtrig.getHostCard(), "0") {
                     @Override
                     public void resolve() {
                     }
                 };
             } else {
-                sa[0] = abilityFactory.getAbility(host.getSVar(triggerParams.get("Execute")), host);
+                sa = abilityFactory.getAbility(host.getSVar(triggerParams.get("Execute")), host);
             }
         }
-        sa[0].setTrigger(true);
-        sa[0].setSourceTrigger(regtrig.getId());
-        regtrig.setTriggeringObjects(sa[0]);
+        sa.setTrigger(true);
+        sa.setSourceTrigger(regtrig.getId());
+        regtrig.setTriggeringObjects(sa);
         if (regtrig.getStoredTriggeredObjects() != null) {
-            sa[0].setAllTriggeringObjects(regtrig.getStoredTriggeredObjects());
+            sa.setAllTriggeringObjects(regtrig.getStoredTriggeredObjects());
         }
 
-        controller[0] = host.getController();
-        sa[0].setActivatingPlayer(host.getController());
+        
+        sa.setActivatingPlayer(host.getController());
         if (triggerParams.containsKey("TriggerController")) {
-            Player p = AbilityFactory.getDefinedPlayers(regtrig.getHostCard(), triggerParams.get("TriggerController"), sa[0]).get(0);
-            controller[0] = p;
-            sa[0].setActivatingPlayer(p);
+            Player p = AbilityFactory.getDefinedPlayers(regtrig.getHostCard(), triggerParams.get("TriggerController"), sa).get(0);
+            sa.setActivatingPlayer(p);
         }
-        sa[0].setStackDescription(sa[0].toString());
+        
+        
+        sa.setStackDescription(sa.toString());
         // ---TODO - for Charms to supports AI, this needs to be removed
         //if (sa[0].getActivatingPlayer().isHuman()) {
-        if (sa[0].getApi() == ApiType.Charm && !sa[0].isWrapper()) {
-            CharmEffect.makeChoices(sa[0]);
+        if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
+            CharmEffect.makeChoices(sa);
         }
         //}
+        Player decider = null;
         boolean mand = false;
         if (triggerParams.containsKey("OptionalDecider")) {
-            sa[0].setOptionalTrigger(true);
+            sa.setOptionalTrigger(true);
             mand = false;
-            decider[0] = AbilityFactory.getDefinedPlayers(host, triggerParams.get("OptionalDecider"), sa[0]).get(0);
+            decider = AbilityFactory.getDefinedPlayers(host, triggerParams.get("OptionalDecider"), sa).get(0);
         } else {
             mand = true;
 
-            SpellAbility ability = sa[0];
+            SpellAbility ability = sa;
             while (ability != null) {
                 final Target tgt = ability.getTarget();
 
@@ -514,493 +507,7 @@ public class TriggerHandler {
         }
         final boolean isMandatory = mand;
 
-        // Wrapper ability that checks the requirements again just before
-        // resolving, for intervening if clauses.
-        // Yes, it must wrap ALL SpellAbility methods in order to handle
-        // possible corner cases.
-        // (The trigger can have a hardcoded OverridingAbility which can make
-        // use of any of the methods)
-        final Ability wrapperAbility = new Ability(regtrig.getHostCard(), "0") {
-
-            @Override
-            public boolean isWrapper() {
-                return true;
-            }
-
-            @Override
-            public ApiType getApi() { return sa[0].getApi(); } 
-            
-            @Override
-            public void setPaidHash(final HashMap<String, List<Card>> hash) {
-                sa[0].setPaidHash(hash);
-            }
-
-            @Override
-            public HashMap<String, List<Card>> getPaidHash() {
-                return sa[0].getPaidHash();
-            }
-
-            @Override
-            public void setPaidList(final List<Card> list, final String str) {
-                sa[0].setPaidList(list, str);
-            }
-
-            @Override
-            public List<Card> getPaidList(final String str) {
-                return sa[0].getPaidList(str);
-            }
-
-            @Override
-            public void addCostToHashList(final Card c, final String str) {
-                sa[0].addCostToHashList(c, str);
-            }
-
-            @Override
-            public void resetPaidHash() {
-                sa[0].resetPaidHash();
-            }
-
-            @Override
-            public HashMap<String, Object> getTriggeringObjects() {
-                return sa[0].getTriggeringObjects();
-            }
-
-            @Override
-            public void setAllTriggeringObjects(final HashMap<String, Object> triggeredObjects) {
-                sa[0].setAllTriggeringObjects(triggeredObjects);
-            }
-
-            @Override
-            public void setTriggeringObject(final String type, final Object o) {
-                sa[0].setTriggeringObject(type, o);
-            }
-
-            @Override
-            public Object getTriggeringObject(final String type) {
-                return sa[0].getTriggeringObject(type);
-            }
-
-            @Override
-            public boolean hasTriggeringObject(final String type) {
-                return sa[0].hasTriggeringObject(type);
-            }
-
-            @Override
-            public void resetTriggeringObjects() {
-                sa[0].resetTriggeringObjects();
-            }
-
-            @Override
-            public boolean canPlay() {
-                return sa[0].canPlay();
-            }
-
-            @Override
-            public boolean canPlayAI() {
-                return sa[0].canPlayAI();
-            }
-
-            @Override
-            public SpellAbility copy() {
-                return sa[0].copy();
-            }
-
-            @Override
-            public boolean doTrigger(final boolean mandatory) {
-                return sa[0].doTrigger(mandatory);
-            }
-
-            @Override
-            public Player getActivatingPlayer() {
-                return sa[0].getActivatingPlayer();
-            }
-
-            @Override
-            public Input getAfterPayMana() {
-                return sa[0].getAfterPayMana();
-            }
-
-            @Override
-            public Input getAfterResolve() {
-                return sa[0].getAfterResolve();
-            }
-
-            @Override
-            public Input getBeforePayMana() {
-                return sa[0].getBeforePayMana();
-            }
-
-            @Override
-            public Command getBeforePayManaAI() {
-                return sa[0].getBeforePayManaAI();
-            }
-
-            @Override
-            public String getDescription() {
-                return sa[0].getDescription();
-            }
-
-            @Override
-            public String getMultiKickerManaCost() {
-                return sa[0].getMultiKickerManaCost();
-            }
-
-            @Override
-            public String getReplicateManaCost() {
-                return sa[0].getReplicateManaCost();
-            }
-
-            @Override
-            public SpellAbilityRestriction getRestrictions() {
-                return sa[0].getRestrictions();
-            }
-
-            @Override
-            public Card getSourceCard() {
-                return sa[0].getSourceCard();
-            }
-
-            @Override
-            public String getStackDescription() {
-                final StringBuilder sb = new StringBuilder(regtrig.toString());
-                if (this.getTarget() != null) {
-                    sb.append(" (Targeting ");
-                    for (final Object o : this.getTarget().getTargets()) {
-                        sb.append(o.toString());
-                        sb.append(", ");
-                    }
-                    if (sb.toString().endsWith(", ")) {
-                        sb.setLength(sb.length() - 2);
-                    } else {
-                        sb.append("ERROR");
-                    }
-                    sb.append(")");
-                }
-
-                return sb.toString();
-            }
-
-            @Override
-            public AbilitySub getSubAbility() {
-                return sa[0].getSubAbility();
-            }
-
-            @Override
-            public Target getTarget() {
-                return sa[0].getTarget();
-            }
-
-            @Override
-            public Card getTargetCard() {
-                return sa[0].getTargetCard();
-            }
-
-//            @Override
-//            public List<Card> getTargetList() {
-//                return sa[0].getTargetList();
-//            }
-
-            @Override
-            public Player getTargetPlayer() {
-                return sa[0].getTargetPlayer();
-            }
-
-            @Override
-            public String getXManaCost() {
-                return sa[0].getXManaCost();
-            }
-
-            @Override
-            public boolean isAbility() {
-                return sa[0].isAbility();
-            }
-
-            @Override
-            public boolean isBuyBackAbility() {
-                return sa[0].isBuyBackAbility();
-            }
-
-            @Override
-            public boolean isCycling() {
-                return sa[0].isCycling();
-            }
-
-            @Override
-            public boolean isExtrinsic() {
-                return sa[0].isExtrinsic();
-            }
-
-            @Override
-            public boolean isFlashBackAbility() {
-                return sa[0].isFlashBackAbility();
-            }
-
-            @Override
-            public boolean isIntrinsic() {
-                return sa[0].isIntrinsic();
-            }
-
-            @Override
-            public boolean isMultiKicker() {
-                return sa[0].isMultiKicker();
-            }
-
-            @Override
-            public boolean isReplicate() {
-                return sa[0].isReplicate();
-            }
-
-            @Override
-            public boolean isSpell() {
-                return sa[0].isSpell();
-            }
-
-            @Override
-            public boolean isTapAbility() {
-                return sa[0].isTapAbility();
-            }
-
-            @Override
-            public boolean isUntapAbility() {
-                return sa[0].isUntapAbility();
-            }
-
-            @Override
-            public boolean isXCost() {
-                return sa[0].isXCost();
-            }
-
-            @Override
-            public void resetOnceResolved() {
-                // Fixing an issue with Targeting + Paying Mana
-                // sa[0].resetOnceResolved();
-            }
-
-            @Override
-            public void setActivatingPlayer(final Player player) {
-                sa[0].setActivatingPlayer(player);
-            }
-
-            @Override
-            public void setAfterPayMana(final Input in) {
-                sa[0].setAfterPayMana(in);
-            }
-
-            @Override
-            public void setAfterResolve(final Input in) {
-                sa[0].setAfterResolve(in);
-            }
-
-            @Override
-            public void setBeforePayMana(final Input in) {
-                sa[0].setBeforePayMana(in);
-            }
-
-            @Override
-            public void setBeforePayManaAI(final Command c) {
-                sa[0].setBeforePayManaAI(c);
-            }
-
-            @Override
-            public void setDescription(final String s) {
-                sa[0].setDescription(s);
-            }
-
-            @Override
-            public void setFlashBackAbility(final boolean flashBackAbility) {
-                sa[0].setFlashBackAbility(flashBackAbility);
-            }
-
-            @Override
-            public void setIsCycling(final boolean b) {
-                sa[0].setIsCycling(b);
-            }
-
-            @Override
-            public void setIsMultiKicker(final boolean b) {
-                sa[0].setIsMultiKicker(b);
-            }
-
-            @Override
-            public void setIsReplicate(final boolean b) {
-                sa[0].setIsReplicate(b);
-            }
-
-            @Override
-            public void setIsXCost(final boolean b) {
-                sa[0].setIsXCost(b);
-            }
-
-            @Override
-            public void setManaCost(final String cost) {
-                sa[0].setManaCost(cost);
-            }
-
-            @Override
-            public void setMultiKickerManaCost(final String cost) {
-                sa[0].setMultiKickerManaCost(cost);
-            }
-
-            @Override
-            public void setReplicateManaCost(final String cost) {
-                sa[0].setReplicateManaCost(cost);
-            }
-
-            @Override
-            public void setPayCosts(final Cost abCost) {
-                sa[0].setPayCosts(abCost);
-            }
-
-            @Override
-            public void setRestrictions(final SpellAbilityRestriction restrict) {
-                sa[0].setRestrictions(restrict);
-            }
-
-            @Override
-            public void setSourceCard(final Card c) {
-                sa[0].setSourceCard(c);
-            }
-
-            @Override
-            public void setStackDescription(final String s) {
-                sa[0].setStackDescription(s);
-            }
-
-            @Override
-            public void setSubAbility(final AbilitySub subAbility) {
-                sa[0].setSubAbility(subAbility);
-            }
-
-            @Override
-            public void setTarget(final Target tgt) {
-                sa[0].setTarget(tgt);
-            }
-
-            @Override
-            public void setTargetCard(final Card card) {
-                sa[0].setTargetCard(card);
-            }
-
-//            @Override
-//            public void setTargetList(final List<Card> list) {
-//                sa[0].setTargetList(list);
-//            }
-
-            @Override
-            public void setTargetPlayer(final Player p) {
-                sa[0].setTargetPlayer(p);
-            }
-
-            @Override
-            public void setType(final String s) {
-                sa[0].setType(s);
-            }
-
-            @Override
-            public void setXManaCost(final String cost) {
-                sa[0].setXManaCost(cost);
-            }
-
-            @Override
-            public boolean wasCancelled() {
-                return sa[0].wasCancelled();
-            }
-
-            @Override
-            public void setSourceTrigger(final int id) {
-                sa[0].setSourceTrigger(id);
-            }
-
-            @Override
-            public int getSourceTrigger() {
-                return sa[0].getSourceTrigger();
-            }
-
-            @Override
-            public void setOptionalTrigger(final boolean b) {
-                sa[0].setOptionalTrigger(b);
-            }
-
-            @Override
-            public boolean isOptionalTrigger() {
-                return sa[0].isOptionalTrigger();
-            }
-
-            // //////////////////////////////////////
-            // THIS ONE IS ALL THAT MATTERS
-            // //////////////////////////////////////
-            @Override
-            public void resolve() {
-                if (!(regtrig instanceof TriggerAlways)) {
-                    // State triggers
-                    // don't do the whole
-                    // "Intervening If"
-                    // thing.
-                    if (!regtrig.requirementsCheck()) {
-                        return;
-                    }
-                }
-
-                if (decider[0] != null) {
-                    if (decider[0].isHuman()) {
-                        if (TriggerHandler.this.triggersAlwaysAccept.contains(this.getSourceTrigger())) {
-                            // No need to do anything.
-                        } else if (TriggerHandler.this.triggersAlwaysDecline.contains(this.getSourceTrigger())) {
-                            return;
-                        } else {
-                            final StringBuilder buildQuestion = new StringBuilder("Use triggered ability of ");
-                            buildQuestion.append(regtrig.getHostCard().getName()).append("(")
-                                    .append(regtrig.getHostCard().getUniqueNumber()).append(")?");
-                            buildQuestion.append("\r\n(");
-                            buildQuestion.append(triggerParams.get("TriggerDescription").replace("CARDNAME",
-                                    regtrig.getHostCard().getName()));
-                            buildQuestion.append(")\r\n");
-                            if (sa[0].getTriggeringObjects().containsKey("Attacker")) {
-                                buildQuestion
-                                        .append("[Attacker: " + sa[0].getTriggeringObjects().get("Attacker") + "]");
-                            }
-                            if (!GameActionUtil.showYesNoDialog(regtrig.getHostCard(), buildQuestion.toString())) {
-                                return;
-                            }
-                        }
-                    } else {
-                        ArrayList<Object> tgts = null;
-                        // make sure the targets won't change
-                        if (sa[0].getTarget() != null && sa[0].getTarget().getTargetChoices() != null) {
-                            tgts = new ArrayList<Object>(sa[0].getTarget().getTargetChoices().getTargets());
-                        }
-                        // This isn't quite right, but better than canPlayAI
-                        if (!sa[0].doTrigger(isMandatory)) {
-                            return;
-                        }
-                        if (sa[0].getTarget() != null && sa[0].getTarget().getTargetChoices() != null) {
-                            for (Object tgt : tgts) {
-                                sa[0].getTarget().getTargetChoices().clear();
-                                sa[0].getTarget().getTargetChoices().addTarget(tgt);
-                            }
-                        }
-                    }
-                }
-
-                if (controller[0].isHuman()) {
-                    Singletons.getModel().getGame().getAction().playSpellAbilityNoStack(sa[0], true);
-                } else {
-                    // commented out because i don't think this should be called
-                    // again here
-                    // sa[0].doTrigger(isMandatory);
-                    ComputerUtil.playNoStack(controller[0], sa[0]);
-                }
-
-                // Add eventual delayed trigger.
-                if (triggerParams.containsKey("DelayedTrigger")) {
-                    final String sVarName = triggerParams.get("DelayedTrigger");
-                    final Trigger deltrig = TriggerHandler.parseTrigger(regtrig.getHostCard().getSVar(sVarName),
-                            regtrig.getHostCard(), true);
-                    deltrig.setStoredTriggeredObjects(this.getTriggeringObjects());
-                    TriggerHandler.this.registerDelayedTrigger(deltrig);
-                }
-            }
-        };
+        WrappedAbility wrapperAbility = new WrappedAbility(regtrig, sa, decider);
         wrapperAbility.setTrigger(true);
         wrapperAbility.setMandatory(isMandatory);
         wrapperAbility.setDescription(wrapperAbility.getStackDescription());
@@ -1015,11 +522,11 @@ public class TriggerHandler {
         // System.out.println("Trigger going on stack for "+mode+".  Card = "+src);
 
         if (regtrig.isStatic()) {
-            if (controller[0].isHuman()) {
+            if (wrapperAbility.getActivatingPlayer().isHuman()) {
                 Singletons.getModel().getGame().getAction().playSpellAbilityNoStack(wrapperAbility, false);
             } else {
                 wrapperAbility.doTrigger(isMandatory);
-                ComputerUtil.playNoStack(controller[0], wrapperAbility);
+                ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility);
             }
             //Singletons.getModel().getGameAction().playSpellAbilityNoStack(wrapperAbility, false);
         } else {

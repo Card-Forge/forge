@@ -46,7 +46,7 @@ import forge.game.player.Player;
  * @author Forge
  * @version $Id$
  */
-public abstract class SpellAbility {
+public abstract class SpellAbility implements ISpellAbility {
 
     // choices for constructor isPermanent argument
     private String description = "";

@@ -12760,6 +12760,7 @@ src/main/java/forge/card/spellability/AbilityManaPart.java svneol=native#text/pl
 src/main/java/forge/card/spellability/AbilityStatic.java svneol=native#text/plain
 src/main/java/forge/card/spellability/AbilitySub.java svneol=native#text/plain
 src/main/java/forge/card/spellability/AbilityTriggered.java svneol=native#text/plain
+src/main/java/forge/card/spellability/ISpellAbility.java -text
 src/main/java/forge/card/spellability/Spell.java svneol=native#text/plain
 src/main/java/forge/card/spellability/SpellAbility.java svneol=native#text/plain
 src/main/java/forge/card/spellability/SpellAbilityCondition.java svneol=native#text/plain
@@ -12815,6 +12816,7 @@ src/main/java/forge/card/trigger/TriggerTurnFaceUp.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerType.java -text
 src/main/java/forge/card/trigger/TriggerUnequip.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerUntaps.java svneol=native#text/plain
+src/main/java/forge/card/trigger/WrappedAbility.java -text
 src/main/java/forge/card/trigger/ZCTrigger.java svneol=native#text/plain
 src/main/java/forge/card/trigger/package-info.java svneol=native#text/plain
 src/main/java/forge/control/ControlBazaarUI.java -text
