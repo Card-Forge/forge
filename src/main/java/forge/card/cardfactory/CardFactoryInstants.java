@@ -232,45 +232,6 @@ public class CardFactoryInstants {
         } // *************** END ************ END **************************        
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Telling Time")) {
-            final SpellAbility spell = new Spell(card) {
-                private static final long serialVersionUID = 2626878556107707854L;
-                private final String[] prompt = new String[] { "Put a card into your hand",
-                        "Put a card on top of library", "Put a card on bottom of library" };
-
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-
-                @Override
-                public void resolve() {
-                    final PlayerZone lib = card.getController().getZone(ZoneType.Library);
-                    final List<Card> choices = new ArrayList<Card>();
-                    for (int i = 0; (i < 3) && (lib.size() > 0); i++) {
-                        choices.add(lib.get(i));
-                    }
-
-                    for (int i = 0; (i < 3) && !choices.isEmpty(); i++) {
-                        final Object o = GuiChoose.one(this.prompt[i], choices);
-                        final Card c1 = (Card) o;
-                        if (i == 0) {
-                            Singletons.getModel().getGame().getAction().moveToHand(c1);
-                        } else if (i == 1) {
-                            Singletons.getModel().getGame().getAction().moveToLibrary(c1);
-                        } else if (i == 2) {
-                            Singletons.getModel().getGame().getAction().moveToBottomOfLibrary(c1);
-                        }
-
-                        choices.remove(c1);
-                    }
-                }
-            };
-
-            card.addSpellAbility(spell);
-        } // *************** END ************ END **************************
-
-        // *************** START *********** START **************************
         else if (cardName.equals("Remove Enchantments")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = -7324132132222075031L;

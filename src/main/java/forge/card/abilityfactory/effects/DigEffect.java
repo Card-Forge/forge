@@ -27,8 +27,6 @@ public class DigEffect extends SpellEffect {
         final Card host = sa.getSourceCard();
         final StringBuilder sb = new StringBuilder();
         final int numToDig = AbilityFactory.calculateAmount(host, sa.getParam("DigNum"), sa);
-    
-    
         final List<Player> tgtPlayers = getTargetPlayers(sa);
     
     
@@ -70,6 +68,7 @@ public class DigEffect extends SpellEffect {
         final int libraryPosition2 = sa.hasParam("LibraryPosition2") ? Integer.parseInt(sa.getParam("LibraryPosition2")) : -1;
         final boolean optional = sa.hasParam("Optional");
         final boolean noMove = sa.hasParam("NoMove");
+        final boolean skipReorder = sa.hasParam("SkipReorder");
         boolean changeAll = false;
         final ArrayList<String> keywords = new ArrayList<String>();
         if (sa.hasParam("Keywords")) {
@@ -296,7 +295,7 @@ public class DigEffect extends SpellEffect {
                             // put them in any order
                             while (rest.size() > 0) {
                                 Card chosen;
-                                if (rest.size() > 1) {
+                                if (!skipReorder && rest.size() > 1) {
                                     String prompt = "Put the rest on top of the library in any order";
                                     if (libraryPosition2 == -1) {
                                         prompt = "Put the rest on the bottom of the library in any order";

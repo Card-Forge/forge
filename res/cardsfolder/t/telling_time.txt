@@ -1,7 +1,9 @@
 Name:Telling Time
 ManaCost:1 U
 Types:Instant
-Text:Look at the top three cards of your library. Put one of those cards into your hand, one on top of your library, and one on the bottom of your library.
+Text:no text
+A:SP$ Dig | Cost$ 1 U | DigNum$ 3 | ChangeNum$ 1 | LibraryPosition2$ 0 | SkipReorder$ True | SubAbility$ DBDig | SpellDescription$ Look at the top three cards of your library. Put one of those cards into your hand, one on top of your library, and one on the bottom of your library. | StackDescription$ Look at the top three cards of your library. Put one of those cards into your hand, one on top of your library, and one on the bottom of your library.
+SVar:DBDig:DB$ Dig | DigNum$ 2 | ChangeNum$ 1 | DestinationZone$ Library | LibraryPosition$ 0 | StackDescription$ None
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/telling_time.jpg
