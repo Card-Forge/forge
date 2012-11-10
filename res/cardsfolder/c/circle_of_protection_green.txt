@@ -8,6 +8,7 @@ SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered |
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SetInfo:8ED|Uncommon|http://magiccards.info/scans/en/8e/12.jpg
 SetInfo:TMP|Common|http://magiccards.info/scans/en/tp/222.jpg
