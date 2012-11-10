@@ -30,42 +30,41 @@ public class CommonDrawback extends AbilitySub {
         private final SpellEffect effect;
         private final SpellAiLogic ai;
         private static final long serialVersionUID = 6631124959690157874L;
-        
+
         public CommonDrawback(ApiType api0, final Card ca, final Target t, Map<String, String> params0, SpellEffect effect0, SpellAiLogic ai0) {
             super(ca, t);
             api = api0;
             params = params0;
             ai = ai0;
             effect = effect0;
-            
-            if ( effect0 instanceof ChangeZoneEffect || effect0 instanceof ChangeZoneAllEffect )
-                AbilityFactory.adjustChangeZoneTarget(params, this);            
+
+            if (effect0 instanceof ChangeZoneEffect || effect0 instanceof ChangeZoneAllEffect) {
+                AbilityFactory.adjustChangeZoneTarget(params, this);
+            }
         }
         @Override
         public AbilitySub getCopy() {
-            Target t = getTarget() == null ? null : new Target(getTarget()); 
-            AbilitySub res = new CommonDrawback(api, getSourceCard(),t, params, effect, ai);
+            Target t = getTarget() == null ? null : new Target(getTarget());
+            AbilitySub res = new CommonDrawback(api, getSourceCard(), t, params, effect, ai);
             CardFactoryUtil.copySpellAbility(this, res);
             return res;
         }
-    
-        
-    
+
         @Override
         public String getStackDescription() {
             return effect.getStackDescriptionWithSubs(params, this);
         }
-    
+
         @Override
         public boolean canPlayAI() {
             return ai.canPlayAIWithSubs(getActivatingPlayer(), this);
         }
-    
+
         @Override
         public void resolve() {
             effect.resolve(this);
         }
-    
+
         @Override
         public boolean chkAIDrawback() {
             if (!ai.chkAIDrawback(this, getActivatingPlayer())) {
@@ -77,14 +76,11 @@ public class CommonDrawback extends AbilitySub {
             }
             return true;
         }
-    
+
         @Override
         public boolean doTrigger(final boolean mandatory) {
             return ai.doTriggerAI(getActivatingPlayer(), this, mandatory);
         }
     }
-
-    
-
 
  // end class AbilityFactory_AlterLife
