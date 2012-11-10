@@ -135,7 +135,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean spellWithChoices = false;
     private boolean spellCopyingCard = false;
 
-    private boolean sirenAttackOrDestroy = false;
     private ArrayList<Card> mustBlockCards = null;
 
     private boolean canMorph = false;
@@ -1011,29 +1010,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
         return false;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>sirenAttackOrDestroy</code>.
-     * </p>
-     * 
-     * @param b
-     *            a boolean.
-     */
-    public final void setSirenAttackOrDestroy(final boolean b) {
-        this.sirenAttackOrDestroy = b;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>sirenAttackOrDestroy</code>.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean getSirenAttackOrDestroy() {
-        return this.sirenAttackOrDestroy;
     }
 
     /**
