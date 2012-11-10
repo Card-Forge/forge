@@ -1103,6 +1103,7 @@ res/cardsfolder/b/bonds_of_quicksilver.txt svneol=native#text/plain
 res/cardsfolder/b/bone_dancer.txt -text
 res/cardsfolder/b/bone_flute.txt svneol=native#text/plain
 res/cardsfolder/b/bone_harvest.txt svneol=native#text/plain
+res/cardsfolder/b/bone_mask.txt -text
 res/cardsfolder/b/bone_saw.txt svneol=native#text/plain
 res/cardsfolder/b/bone_shaman.txt -text
 res/cardsfolder/b/bone_shredder.txt svneol=native#text/plain

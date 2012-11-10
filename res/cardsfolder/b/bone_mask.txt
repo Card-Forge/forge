@@ -1,0 +1,16 @@
+Name:Bone Mask
+ManaCost:4
+Types:Artifact
+Text:no text
+A:AB$ ChooseSource | Cost$ 2 T | Choices$ Card | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SVars$ DBEffect,RPreventNextFromSource,ExileFromLibInstead,ExileEffect,X | SpellDescription$ The next time a source of your choice would deal damage to you this turn, prevent that damage. Exile cards from the top of your library equal to the damage prevented this way.
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | RememberObjects$ Remembered | SVars$ RPreventNextFromSource,ExileEffect,ExileFromLibInstead,X | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ You | ReplaceWith$ ExileFromLibInstead | PreventionEffect$ True | Description$ The next time the chosen source deals damage to you, prevent that damage.
+SVar:ExileFromLibInstead:DB$ Mill | Defined$ You | Destination$ Exile | NumCards$ X | References$ X
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+SVar:X:ReplaceCount$DamageAmount
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/260.jpg
+Oracle:{2}, {T}: The next time a source of your choice would deal damage to you this turn, prevent that damage. Exile cards from the top of your library equal to the damage prevented this way.
+End
