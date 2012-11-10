@@ -1681,6 +1681,7 @@ res/cardsfolder/c/claws_of_wirewood.txt svneol=native#text/plain
 res/cardsfolder/c/clay_statue.txt svneol=native#text/plain
 res/cardsfolder/c/cleanfall.txt svneol=native#text/plain
 res/cardsfolder/c/cleanse.txt svneol=native#text/plain
+res/cardsfolder/c/cleansing.txt -text
 res/cardsfolder/c/cleansing_beam.txt svneol=native#text/plain
 res/cardsfolder/c/clear.txt svneol=native#text/plain
 res/cardsfolder/c/clear_the_land.txt -text

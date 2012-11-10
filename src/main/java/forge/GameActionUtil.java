@@ -377,8 +377,12 @@ public final class GameActionUtil {
         if (!parts.isEmpty()) {
             costPart = parts.get(0);
         }
+        String orString = "";
+        if (sourceAbility != null) {
+            orString = " (or: " + sourceAbility.getStackDescription() + ")";
+        }
         if (parts.isEmpty() || costPart.getAmount().equals("0")) {
-            if (showYesNoDialog(source, "Do you want to pay 0?")) {
+            if (showYesNoDialog(source, "Do you want to pay 0?" + orString)) {
                 paid.execute();
             } else {
                 unpaid.execute();
@@ -394,7 +398,7 @@ public final class GameActionUtil {
                 final int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
                         : AbilityFactory.calculateAmount(source, amountString, sourceAbility);
                 Player p = Singletons.getControl().getPlayer();
-                if (p.canPayLife(amount) && showYesNoDialog(source, "Do you want to pay " + amount + " life?")) {
+                if (p.canPayLife(amount) && showYesNoDialog(source, "Do you want to pay " + amount + " life?" + orString)) {
                     p.payLife(amount, null);
                 } else {
                     hasPaid = false;
