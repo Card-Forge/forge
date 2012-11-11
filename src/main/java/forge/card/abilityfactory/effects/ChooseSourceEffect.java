@@ -62,7 +62,9 @@ public class ChooseSourceEffect extends SpellEffect {
                 if (null != stackinst.getSpellAbility().getTriggeringObjects()) {
                     for (Object c : stackinst.getSpellAbility().getTriggeringObjects().values()) {
                         if (c instanceof Card) {
-                            referencedSources.add((Card) c);
+                            if (!stackSources.contains((Card) c)) {
+                                referencedSources.add((Card) c);
+                            }
                         }
                     }
                 }
@@ -73,7 +75,9 @@ public class ChooseSourceEffect extends SpellEffect {
                 if (null != stackinst.getSpellAbility().getReplacingObjects()) {
                     for (Object c : stackinst.getSpellAbility().getReplacingObjects().values()) {
                         if (c instanceof Card) {
-                            referencedSources.add((Card) c);
+                            if (!stackSources.contains((Card) c)) {
+                                referencedSources.add((Card) c);
+                            }
                         }
                     }
                 }
