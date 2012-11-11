@@ -29,6 +29,7 @@ import javax.sound.sampled.*;
  */
 public class SoundSystem {
     private Clip clip;
+    private final int SOUND_SYSTEM_DELAY = 30;
 
     public SoundSystem(String filename) {
         try {
@@ -48,7 +49,7 @@ public class SoundSystem {
         }
     }
 
-    public void play() {
+    public final void play() {
         if (clip != null) {
             clip.setMicrosecondPosition(0);
             if (!isDone()) {
@@ -56,7 +57,7 @@ public class SoundSystem {
                 clip.stop();
             }
             try {
-                Thread.sleep(30);
+                Thread.sleep(SOUND_SYSTEM_DELAY);
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
@@ -64,7 +65,7 @@ public class SoundSystem {
         }
     }
 
-    public void loop() {
+    public final void loop() {
         if (clip != null) {
             clip.setMicrosecondPosition(0);
             if (!isDone()) {
@@ -72,7 +73,7 @@ public class SoundSystem {
                 clip.stop();
             }
             try {
-                Thread.sleep(30);
+                Thread.sleep(SOUND_SYSTEM_DELAY);
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
@@ -80,18 +81,17 @@ public class SoundSystem {
         }
     }
 
-    public void stop() {
+    public final void stop() {
         if (clip != null) {
             clip.stop();
         }
     }
 
-    public boolean isDone() {
+    public final boolean isDone() {
         if (clip != null) {
             return !clip.isRunning();
         } else {
             return false;
         }
     }
-
 }
