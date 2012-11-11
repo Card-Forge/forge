@@ -7909,7 +7909,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final int staticDamagePrevention(final int damage, final int possiblePrvenetion, final Card source,
             final boolean isCombat) {
 
-        if (Singletons.getModel().getGame().isCardInPlay("Leyline of Punishment")) {
+        if (Singletons.getModel().getGame().isCardInPlay("Leyline of Punishment")
+                || Singletons.getModel().getGame().isCardInPlay("Everlasting Torment")) {
             return damage;
         }
 
@@ -7938,7 +7939,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     @Override
     public final int staticDamagePrevention(final int damageIn, final Card source, final boolean isCombat) {
 
-        if (Singletons.getModel().getGame().isCardInPlay("Leyline of Punishment")) {
+        if (Singletons.getModel().getGame().isCardInPlay("Leyline of Punishment")
+                || Singletons.getModel().getGame().isCardInPlay("Everlasting Torment")) {
             return damageIn;
         }
 
@@ -8055,6 +8057,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final int preventDamage(final int damage, final Card source, final boolean isCombat) {
 
         if (Singletons.getModel().getGame().isCardInPlay("Leyline of Punishment")
+                || Singletons.getModel().getGame().isCardInPlay("Everlasting Torment")
                 || source.hasKeyword("Damage that would be dealt by CARDNAME can't be prevented.")) {
             return damage;
         }
@@ -8249,8 +8252,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean addDamageAfterPrevention(final int damageIn, final Card source, final boolean isCombat) {
         final int damageToAdd = damageIn;
         boolean wither = false;
-        
-        boolean everlastingTorment = FModel.SINGLETON_INSTANCE.getGame().isCardInPlay("Everlasting Torment");
 
         if (damageToAdd == 0) {
             return false; // Rule 119.8
@@ -8275,7 +8276,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             return true;
         }
 
-        if (source.hasKeyword("Wither") || source.hasKeyword("Infect") || everlastingTorment) {
+        if (source.hasKeyword("Wither") || source.hasKeyword("Infect") 
+                || FModel.SINGLETON_INSTANCE.getGame().isCardInPlay("Everlasting Torment")) {
             wither = true;
         }
 

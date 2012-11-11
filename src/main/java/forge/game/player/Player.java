@@ -815,7 +815,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     @Override
     public final int preventDamage(final int damage, final Card source, final boolean isCombat) {
 
-        if (game.isCardInPlay("Leyline of Punishment")
+        if (game.isCardInPlay("Leyline of Punishment") || game.isCardInPlay("Everlasting Torment")
                 || source.hasKeyword("Damage that would be dealt by CARDNAME can't be prevented.")) {
             return damage;
         }
