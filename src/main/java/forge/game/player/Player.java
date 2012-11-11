@@ -601,7 +601,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     @Override
     public final int staticDamagePrevention(final int damage, final Card source, final boolean isCombat) {
 
-        if (game.isCardInPlay("Leyline of Punishment")) {
+        if (game.isCardInPlay("Leyline of Punishment") || game.isCardInPlay("Everlasting Torment")) {
             return damage;
         }
 

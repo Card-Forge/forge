@@ -59,6 +59,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.item.CardDb;
+import forge.model.FModel;
 import forge.util.Expressions;
 import forge.util.MyRandom;
 
@@ -8248,6 +8249,8 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean addDamageAfterPrevention(final int damageIn, final Card source, final boolean isCombat) {
         final int damageToAdd = damageIn;
         boolean wither = false;
+        
+        boolean everlastingTorment = FModel.SINGLETON_INSTANCE.getGame().isCardInPlay("Everlasting Torment");
 
         if (damageToAdd == 0) {
             return false; // Rule 119.8
@@ -8272,7 +8275,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             return true;
         }
 
-        if ((source.hasKeyword("Wither") || source.hasKeyword("Infect"))) {
+        if (source.hasKeyword("Wither") || source.hasKeyword("Infect") || everlastingTorment) {
             wither = true;
         }
 
