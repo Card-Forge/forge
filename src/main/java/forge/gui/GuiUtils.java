@@ -174,7 +174,7 @@ public final class GuiUtils {
      * @param methodName &emsp; String, part of the custom exception message.
      * @param mustBeEDT &emsp; boolean: true = exception if not EDT, false = exception if EDT
      */
-    public static void checkEDT(String methodName, boolean mustBeEDT) {
+    public static void checkEDT(final String methodName, final boolean mustBeEDT) {
         boolean isEDT = SwingUtilities.isEventDispatchThread();
 
         if (!isEDT && mustBeEDT) {
@@ -205,7 +205,7 @@ public final class GuiUtils {
      * @param c
      *           a card to be highlighted 
      */
-    public static void setPanelSelection(Card c) {
+    public static void setPanelSelection(final Card c) {
         mainLoop:
         for (VField v : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
             List<CardPanel> panels = v.getTabletop().getCardPanels();
