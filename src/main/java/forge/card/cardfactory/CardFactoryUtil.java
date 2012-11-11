@@ -67,7 +67,6 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
-import forge.control.input.InputPayManaCost;
 import forge.control.input.InputPayManaCostUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -1202,85 +1201,6 @@ public class CardFactoryUtil {
     public static Command vanishing(final Card sourceCard, final int power) {
         return entersBattleFieldWithCounters(sourceCard, Counters.TIME, power);
     } // vanishing
-
-    // List<Card> choices are the only cards the user can successful select
-    /**
-     * <p>
-     * inputTargetSpecific.
-     * </p>
-     * 
-     * @param spell
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param choices
-     *            a {@link forge.CardList} object.
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param targeted
-     *            a boolean.
-     * @param free
-     *            a boolean.
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public static Input inputTargetSpecific(final SpellAbility spell, final List<Card> choices, final String message,
-            final boolean targeted, final boolean free) {
-        return CardFactoryUtil.inputTargetSpecific(spell, choices, message, Command.BLANK, targeted, free);
-    }
-
-    // List<Card> choices are the only cards the user can successful select
-    /**
-     * <p>
-     * inputTargetSpecific.
-     * </p>
-     * 
-     * @param spell
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param choices
-     *            a {@link forge.CardList} object.
-     * @param message
-     *            a {@link java.lang.String} object.
-     * @param paid
-     *            a {@link forge.Command} object.
-     * @param targeted
-     *            a boolean.
-     * @param free
-     *            a boolean.
-     * @return a {@link forge.control.input.Input} object.
-     */
-    public static Input inputTargetSpecific(final SpellAbility spell, final List<Card> choices, final String message,
-            final Command paid, final boolean targeted, final boolean free) {
-        final Input target = new Input() {
-            private static final long serialVersionUID = -1779224307654698954L;
-
-            @Override
-            public void showMessage() {
-                CMatchUI.SINGLETON_INSTANCE.showMessage(message);
-                ButtonUtil.enableOnlyCancel();
-            }
-
-            @Override
-            public void selectButtonCancel() {
-                this.stop();
-            }
-
-            @Override
-            public void selectCard(final Card card) {
-                if (targeted && !card.canBeTargetedBy(spell)) {
-                    CMatchUI.SINGLETON_INSTANCE.showMessage("Cannot target this card (Shroud? Protection?).");
-                } else if (choices.contains(card)) {
-                    spell.setTargetCard(card);
-                    if (spell.getManaCost().equals("0") || free) {
-                        Singletons.getModel().getGame().getStack().add(spell);
-                        this.stop();
-                    } else {
-                        this.stopSetNext(new InputPayManaCost(spell));
-                    }
-
-                    paid.execute();
-                }
-            } // selectCard()
-        };
-        return target;
-    } // inputTargetSpecific()
 
     // List<Card> choices are the only cards the user can successful select
     /**

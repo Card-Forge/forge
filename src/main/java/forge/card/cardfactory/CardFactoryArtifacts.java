@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+
 import forge.Card;
 
 import forge.Command;
@@ -16,6 +19,7 @@ import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
+import forge.control.input.InputSelectManyCards;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
@@ -23,8 +27,6 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
-
-import forge.view.ButtonUtil;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -369,36 +371,19 @@ class CardFactoryArtifacts {
                 public void resolve() {
                     // not implemented for compy
                     if (card.getController().isHuman()) {
-                        Singletons.getModel().getMatch().getInput().setInput(new Input() {
-                            private static final long serialVersionUID = -2305549394512889450L;
-                            private final List<Card> exiled = new ArrayList<Card>();
-
+                        
+                        Predicate<Card> validForPick = new Predicate<Card>() {
                             @Override
-                            public void showMessage() {
-                                final StringBuilder sb = new StringBuilder();
-                                sb.append(card.getName()).append(" - Exile cards from hand.  Currently, ");
-                                sb.append(this.exiled.size()).append(" selected.  (Press OK when done.)");
-                                CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
-                                ButtonUtil.enableOnlyOK();
-                            }
-
-                            @Override
-                            public void selectButtonOK() {
-                                this.done();
-                            }
-
-                            @Override
-                            public void selectCard(final Card c) {
+                            public boolean apply(Card c) {
                                 Zone zone = Singletons.getModel().getGame().getZoneOf(c);
-                                if (zone.is(ZoneType.Hand) && c.getController() == card.getController() && !this.exiled.contains(c)) {
-                                    this.exiled.add(c);
-                                    this.showMessage();
-                                }
+                                return zone.is(ZoneType.Hand) && c.getController() == card.getController(); 
                             }
-
-                            public void done() {
-                                // exile those cards
-                                for (final Card c : this.exiled) {
+                        };
+                        
+                        Function<List<Card>, Input> onSelected = new Function<List<Card>, Input>() { 
+                            @Override
+                            public Input apply(List<Card> exiled) {
+                                for (final Card c : exiled) {
                                     Singletons.getModel().getGame().getAction().exile(c);
                                 }
 
@@ -407,7 +392,7 @@ class CardFactoryArtifacts {
                                 // Ruling: This is not a draw...
                                 final PlayerZone lib = card.getController().getZone(ZoneType.Library);
                                 int numCards = 0;
-                                while ((lib.size() > 0) && (numCards < this.exiled.size())) {
+                                while ((lib.size() > 0) && (numCards < exiled.size())) {
                                     Singletons.getModel().getGame().getAction().moveToHand(lib.get(0));
                                     numCards++;
                                 }
@@ -418,15 +403,20 @@ class CardFactoryArtifacts {
 
                                 // Then look at the exiled cards and put them on
                                 // top of your library in any order.
-                                while (this.exiled.size() > 0) {
-                                    final Card c1 = GuiChoose.one("Put a card on top of your library.", this.exiled);
+                                while (exiled.size() > 0) {
+                                    final Card c1 = GuiChoose.one("Put a card on top of your library.", exiled);
                                     Singletons.getModel().getGame().getAction().moveToLibrary(c1);
-                                    this.exiled.remove(c1);
+                                    exiled.remove(c1);
                                 }
+                                return null;
+                            };
+                        };
+                        
+                        InputSelectManyCards inp = new InputSelectManyCards(validForPick, 0, Integer.MAX_VALUE, onSelected);
+                        inp.setMessage(card.getName() + " - Exile cards from hand.  Currently, %d selected.  (Press OK when done.)");
+                        
+                        Singletons.getModel().getMatch().getInput().setInput(inp);
 
-                                this.stop();
-                            }
-                        });
                     }
                 }
 

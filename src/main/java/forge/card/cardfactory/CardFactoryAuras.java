@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.esotericsoftware.minlog.Log;
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
@@ -31,6 +32,7 @@ import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Command;
+import forge.Constant;
 import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
@@ -39,11 +41,14 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
+import forge.control.input.InputPayManaCost;
+import forge.control.input.InputSelectManyCards;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.match.CMatchUI;
 
 
 /**
@@ -129,7 +134,7 @@ class CardFactoryAuras {
                 public void resolve() {
                     // Only query player, AI will have decided already.
                     if (card.getController().isHuman()) {
-                        newType[0] = GuiChoose.one("Select land type.", CardUtil.getLandTypes());
+                        newType[0] = GuiChoose.one("Select land type.", Constant.CardTypes.BASIC_TYPES);
                     }
                     Singletons.getModel().getGame().getAction().moveToPlay(card);
 
@@ -243,17 +248,36 @@ class CardFactoryAuras {
             card.addUnEnchantCommand(onUnEnchant);
             card.addLeavesPlayCommand(onLeavesPlay);
 
-            final Input runtime = new Input() {
-
-                private static final long serialVersionUID = -62372711146079880L;
-
+            Function<List<Card>, Input> onSelected = new Function<List<Card>, Input>() {
                 @Override
-                public void showMessage() {
-                    final List<Card> land = Singletons.getModel().getGame().getLandsInPlay();
-                    this.stopSetNext(CardFactoryUtil
-                            .inputTargetSpecific(spell, land, "Select target land", true, false));
+                public final Input apply(List<Card> selected) {
+                    spell.setTargetCard(selected.get(0));
+                    if (spell.getManaCost().equals("0")) {
+                        Singletons.getModel().getGame().getStack().add(spell);
+                        return null;
+                    } else {
+                        return new InputPayManaCost(spell);
+                    }
                 }
             };
+
+            Predicate<Card> canTarget = new Predicate<Card>() {
+                @Override
+                public boolean apply(Card c) {
+                    if (!c.isLand() || !c.isInZone(ZoneType.Battlefield))
+                        return false;
+                        
+                    if (!c.canBeTargetedBy(spell)) {
+                        CMatchUI.SINGLETON_INSTANCE.showMessage("Cannot target this card (Shroud? Protection?).");
+                        return false;
+                    }
+                    
+                    return true;
+                }
+            };
+
+            InputSelectManyCards runtime = new InputSelectManyCards(canTarget, 1, 1, onSelected);
+            runtime.setMessage("Select target land");
             spell.setBeforePayMana(runtime);
         } // *************** END ************ END **************************
 
