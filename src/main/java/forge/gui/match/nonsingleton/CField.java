@@ -102,27 +102,27 @@ public class CField implements ICDoc {
 
     private final MouseListener madBlack = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            blackAction(); } };
+            manaAction(Constant.Color.BLACK); } };
 
     private final MouseListener madBlue = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            blueAction(); } };
+            manaAction(Constant.Color.BLUE); } };
 
     private final MouseListener madGreen = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            greenAction(); } };
+            manaAction(Constant.Color.GREEN); } };
 
     private final MouseListener madRed = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            redAction(); } };
+            manaAction(Constant.Color.RED); } };
 
     private final MouseListener madWhite = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            whiteAction(); } };
+            manaAction(Constant.Color.WHITE); } };
 
     private final MouseListener madColorless = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
-            colorlessAction(); } };
+            manaAction(Constant.Color.COLORLESS); } };
 
     // Hand, Graveyard, Library, Flashback, Exile zones, attached to hand.
     private final Observer observerZones = new Observer() {
@@ -479,7 +479,7 @@ public class CField implements ICDoc {
     }
 
     /** */
-    private void blackAction() {
+    private void manaAction(String constantColor) {
         if (CField.this.player.isComputer()) {
             System.out.println("Stop trying to spend the AI's mana");
             // TODO: Mindslaver might need to add changes here
@@ -487,77 +487,7 @@ public class CField implements ICDoc {
             final Input in = Singletons.getModel().getMatch().getInput().getInput();
             if (in instanceof InputPayMana) {
                 // Do something
-                ((InputPayMana) in).selectManaPool(Constant.Color.BLACK);
-            }
-        }
-    }
-
-    /** */
-    private void blueAction() {
-        if (CField.this.player.isComputer()) {
-            System.out.println("Stop trying to spend the AI's mana");
-            // TODO: Mindslaver might need to add changes here
-        } else {
-            final Input in = Singletons.getModel().getMatch().getInput().getInput();
-            if (in instanceof InputPayMana) {
-                // Do something
-                ((InputPayMana) in).selectManaPool(Constant.Color.BLUE);
-            }
-        }
-    }
-
-    /** */
-    private void greenAction() {
-        if (CField.this.player.isComputer()) {
-            System.out.println("Stop trying to spend the AI's mana");
-            // TODO: Mindslaver might need to add changes here
-        } else {
-            final Input in = Singletons.getModel().getMatch().getInput().getInput();
-            if (in instanceof InputPayMana) {
-                // Do something
-                ((InputPayMana) in).selectManaPool(Constant.Color.GREEN);
-            }
-        }
-    }
-
-    /** */
-    private void redAction() {
-        if (CField.this.player.isComputer()) {
-            System.out.println("Stop trying to spend the AI's mana");
-            // TODO: Mindslaver might need to add changes here
-        } else {
-            final Input in = Singletons.getModel().getMatch().getInput().getInput();
-            if (in instanceof InputPayMana) {
-                // Do something
-                ((InputPayMana) in).selectManaPool(Constant.Color.RED);
-            }
-        }
-    }
-
-    /** */
-    private void whiteAction() {
-        if (CField.this.player.isComputer()) {
-            System.out.println("Stop trying to spend the AI's mana");
-            // TODO: Mindslaver might need to add changes here
-        } else {
-            final Input in = Singletons.getModel().getMatch().getInput().getInput();
-            if (in instanceof InputPayMana) {
-                // Do something
-                ((InputPayMana) in).selectManaPool(Constant.Color.WHITE);
-            }
-        }
-    }
-
-    /** */
-    private void colorlessAction() {
-        if (CField.this.player.isComputer()) {
-            System.out.println("Stop trying to spend the AI's mana");
-            // TODO: Mindslaver might need to add changes here
-        } else {
-            final Input in = Singletons.getModel().getMatch().getInput().getInput();
-            if (in instanceof InputPayMana) {
-                // Do something
-                ((InputPayMana) in).selectManaPool(Constant.Color.COLORLESS);
+                ((InputPayMana) in).selectManaPool(constantColor);
             }
         }
     }
