@@ -27,7 +27,7 @@ package forge;
  */
 public interface Command extends java.io.Serializable {
     /** Constant <code>Blank</code>. */
-    Command BLANK = new Command() {
+    public final Command BLANK = new Command() {
 
         private static final long serialVersionUID = 2689172297036001710L;
 

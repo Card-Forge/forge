@@ -73,12 +73,6 @@ public class InputPassPriority extends Input {
     @Override
     public final void selectButtonOK() {
         Singletons.getModel().getGame().getPhaseHandler().passPriority();
-        //GuiDisplayUtil.updateGUI();
-//        final Input in = Singletons.getModel().getMatch().getInput().getInput();
-//        if ((in == this) || (in == null)) {
-//            Singletons.getModel().getMatch().getInput().resetInput();
-//            // Clear out PassPriority after clicking button
-//        }
     }
 
     /** {@inheritDoc} */
@@ -92,4 +86,6 @@ public class InputPassPriority extends Input {
             SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
         }
     } // selectCard()
+    
+    @Override public void isClassUpdated() {}
 }

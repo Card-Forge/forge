@@ -483,9 +483,7 @@ public class Upkeep extends Phase {
 
                                 @Override
                                 public void showMessage() {
-                                    CMatchUI.SINGLETON_INSTANCE
-                                            .showMessage(
-                                                    abyss.getName() + " - Select one nonartifact creature to destroy");
+                                    CMatchUI.SINGLETON_INSTANCE.showMessage(abyss.getName() + " - Select one nonartifact creature to destroy");
                                     ButtonUtil.disableAll();
                                 }
 
@@ -2177,23 +2175,18 @@ public class Upkeep extends Phase {
 
                                 @Override
                                 public void showMessage() {
-                                    if (list.size() == 0) {
+                                    if (list.isEmpty()) {
                                         this.stop();
                                         return;
                                     }
-                                    CMatchUI.SINGLETON_INSTANCE
-                                            .showMessage(
-                                                    source.getName()
-                                                            + " - Select "
-                                                            + num
-                                                            + " untapped artifact(s), creature(s), or land(s) you control");
+                                    String message = String.format("%s - Select %d untapped artifact(s), creature(s), or land(s) you control", source.getName(), num);
+                                    CMatchUI.SINGLETON_INSTANCE.showMessage(message);
                                     ButtonUtil.disableAll();
                                 }
 
                                 @Override
                                 public void selectCard(final Card card, final PlayerZone zone) {
-                                    if (zone.is(ZoneType.Battlefield, player)
-                                            && list.contains(card)) {
+                                    if (zone.is(ZoneType.Battlefield, player) && list.contains(card)) {
                                         card.tap();
                                         list.remove(card);
                                         this.stop();

@@ -27,17 +27,11 @@ import forge.CardUtil;
 import forge.Constant;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
-import forge.card.cost.CostMana;
-import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
-import forge.game.zone.PlayerZone;
-import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.match.CMatchUI;
-import forge.view.ButtonUtil;
 
 /**
  * <p>
@@ -347,87 +341,6 @@ public class InputPayManaCostUtil {
      * 
      * @return a {@link forge.control.input.Input} object.
      */
-    public static Input inputPayXMana(final SpellAbility sa, final CostPayment payment, final CostMana costMana,
-            final int numX) {
-        final Input payX = new InputMana() {
-            private static final long serialVersionUID = -6900234444347364050L;
-            private int xPaid = 0;
-            private String colorsPaid = sa.getSourceCard().getColorsPaid();
-            private ManaCost manaCost = new ManaCost(Integer.toString(numX));
-    
-            @Override
-            public void showMessage() {
-                if ((xPaid == 0 && costMana.isxCantBe0()) || 
-                        !this.manaCost.toString().equals(Integer.toString(numX))) {
-                    ButtonUtil.enableOnlyCancel();
-                    // only cancel if partially paid an X value
-                    // or X is 0, and x can't be 0
-                } else {
-                    ButtonUtil.enableAll();
-                }
-                
-                StringBuilder msg = new StringBuilder("Pay X Mana Cost for ");
-                msg.append(sa.getSourceCard().getName()).append("\n").append(this.xPaid);
-                msg.append(" Paid so far.");
-                if (costMana.isxCantBe0()) {
-                    msg.append(" X Can't be 0.");
-                }
-                
-                CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
-            }
-    
-            // selectCard
-            @Override
-            public void selectCard(final Card card, final PlayerZone zone) {
-                this.manaCost = activateManaAbility(sa, card, this.manaCost);
-                if (this.manaCost.isPaid()) {
-                    if (!this.colorsPaid.contains(this.manaCost.getColorsPaid())) {
-                        this.colorsPaid += this.manaCost.getColorsPaid();
-                    }
-                    this.manaCost = new ManaCost(Integer.toString(numX));
-                    this.xPaid++;
-                }
-    
-                if (Singletons.getModel().getMatch().getInput().getInput() == this) {
-                    this.showMessage();
-                }
-            }
-    
-            @Override
-            public void selectButtonCancel() {
-                this.stop();
-                payment.cancelCost();
-                Singletons.getControl().getPlayer().getZone(ZoneType.Battlefield).updateObservers();
-            }
-    
-            @Override
-            public void selectButtonOK() {
-                this.stop();
-                payment.getCard().setXManaCostPaid(this.xPaid);
-                payment.paidCost(costMana);
-                payment.getCard().setColorsPaid(this.colorsPaid);
-                payment.getCard().setSunburstValue(this.colorsPaid.length());
-            }
-    
-            @Override
-            public void selectManaPool(String color) {
-                this.manaCost = activateManaAbility(color, sa, this.manaCost);
-                if (this.manaCost.isPaid()) {
-                    if (!this.colorsPaid.contains(this.manaCost.getColorsPaid())) {
-                        this.colorsPaid += this.manaCost.getColorsPaid();
-                    }
-                    this.manaCost = new ManaCost(Integer.toString(numX));
-                    this.xPaid++;
-                }
-    
-                if (Singletons.getModel().getMatch().getInput().getInput() == this) {
-                    this.showMessage();
-                }
-            }
-    
-        };
-    
-        return payX;
-    }
 }
+
 

@@ -139,4 +139,11 @@ public class InputBlock extends Input {
         
         this.showMessage();
     } // selectCard()
+
+    /* (non-Javadoc)
+     * @see forge.control.input.Input#isClassUpdated()
+     */
+    @Override
+    public void isClassUpdated() {
+    }
 }

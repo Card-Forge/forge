@@ -131,4 +131,11 @@ public class InputAttack extends Input {
     public void unselectCard(final Card card, final PlayerZone zone) {
 
     }
+
+    /* (non-Javadoc)
+     * @see forge.control.input.Input#isClassUpdated()
+     */
+    @Override
+    public void isClassUpdated() {
+    }
 }

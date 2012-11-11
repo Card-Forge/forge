@@ -25,7 +25,7 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCost2;
-import forge.control.input.InputPayManaCostUtil;
+import forge.control.input.InputPayManaX;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 
@@ -225,7 +225,7 @@ public class CostMana extends CostPart {
             final Input inp = new InputPayManaCost2(this, ability, payment, manaToAdd);
             Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
         } else if (this.getXMana() > 0) {
-            final Input inp = InputPayManaCostUtil.inputPayXMana(ability, payment, this, this.getXMana());
+            final Input inp = new InputPayManaX(ability, payment, this);
             Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
         } else {
             payment.paidCost(this);

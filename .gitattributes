@@ -12463,6 +12463,7 @@ src/main/config/forge.ico -text svneol=unset#image/ico
 src/main/config/forge.sh svneol=native#text/x-sh
 src/main/config/forge_checks.xml svneol=native#text/xml
 src/main/config/support/template.applescript -text
+src/main/java/forge/Action.java -text
 src/main/java/forge/Card.java svneol=native#text/plain
 src/main/java/forge/CardCharacteristicName.java -text
 src/main/java/forge/CardColor.java svneol=native#text/plain
@@ -12838,14 +12839,15 @@ src/main/java/forge/control/input/InputAttack.java svneol=native#text/plain
 src/main/java/forge/control/input/InputBlock.java svneol=native#text/plain
 src/main/java/forge/control/input/InputCleanup.java svneol=native#text/plain
 src/main/java/forge/control/input/InputControl.java svneol=native#text/plain
-src/main/java/forge/control/input/InputMana.java -text
 src/main/java/forge/control/input/InputMulligan.java svneol=native#text/plain
 src/main/java/forge/control/input/InputPassPriority.java svneol=native#text/plain
 src/main/java/forge/control/input/InputPayDiscardCost.java -text
+src/main/java/forge/control/input/InputPayMana.java -text
 src/main/java/forge/control/input/InputPayManaCost.java svneol=native#text/plain
 src/main/java/forge/control/input/InputPayManaCost2.java -text
 src/main/java/forge/control/input/InputPayManaCostAbility.java svneol=native#text/plain
 src/main/java/forge/control/input/InputPayManaCostUtil.java svneol=native#text/plain
+src/main/java/forge/control/input/InputPayManaX.java -text
 src/main/java/forge/control/input/InputPayReturnCost.java -text
 src/main/java/forge/control/input/InputPaySacCost.java -text
 src/main/java/forge/control/input/package-info.java svneol=native#text/plain

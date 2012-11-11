@@ -4,7 +4,7 @@ package forge.control.input;
  * TODO: Write javadoc for this type.
  *
  */
-public abstract class InputMana extends Input {
+public abstract class InputPayMana extends Input {
 
     private static final long serialVersionUID = -9133423708688480255L;
 

@@ -88,4 +88,11 @@ public class InputCleanup extends Input {
             ai.discard(numDiscards, null);
         }
     }
+
+    /* (non-Javadoc)
+     * @see forge.control.input.Input#isClassUpdated()
+     */
+    @Override
+    public void isClassUpdated() {
+    }
 }

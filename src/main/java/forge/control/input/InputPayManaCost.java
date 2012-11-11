@@ -38,7 +38,7 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id$
  */
-public class InputPayManaCost extends InputMana {
+public class InputPayManaCost extends InputPayMana {
     // anything that uses this should be converted to Ability_Cost
     /** Constant <code>serialVersionUID=3467312982164195091L</code>. */
     private static final long serialVersionUID = 3467312982164195091L;
@@ -291,4 +291,6 @@ public class InputPayManaCost extends InputMana {
             this.done();
         }
     }
+    
+    @Override public void isClassUpdated() {}
 }

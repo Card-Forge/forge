@@ -38,7 +38,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.control.input.Input;
 import forge.control.input.InputAttack;
 import forge.control.input.InputBlock;
-import forge.control.input.InputMana;
+import forge.control.input.InputPayMana;
 import forge.control.input.InputPayManaCost;
 import forge.control.input.InputPayManaCostAbility;
 import forge.control.input.InputPaySacCost;
@@ -485,9 +485,9 @@ public class CField implements ICDoc {
             // TODO: Mindslaver might need to add changes here
         } else {
             final Input in = Singletons.getModel().getMatch().getInput().getInput();
-            if (in instanceof InputMana) {
+            if (in instanceof InputPayMana) {
                 // Do something
-                ((InputMana) in).selectManaPool(Constant.Color.BLACK);
+                ((InputPayMana) in).selectManaPool(Constant.Color.BLACK);
             }
         }
     }
@@ -499,9 +499,9 @@ public class CField implements ICDoc {
             // TODO: Mindslaver might need to add changes here
         } else {
             final Input in = Singletons.getModel().getMatch().getInput().getInput();
-            if (in instanceof InputMana) {
+            if (in instanceof InputPayMana) {
                 // Do something
-                ((InputMana) in).selectManaPool(Constant.Color.BLUE);
+                ((InputPayMana) in).selectManaPool(Constant.Color.BLUE);
             }
         }
     }
@@ -513,9 +513,9 @@ public class CField implements ICDoc {
             // TODO: Mindslaver might need to add changes here
         } else {
             final Input in = Singletons.getModel().getMatch().getInput().getInput();
-            if (in instanceof InputMana) {
+            if (in instanceof InputPayMana) {
                 // Do something
-                ((InputMana) in).selectManaPool(Constant.Color.GREEN);
+                ((InputPayMana) in).selectManaPool(Constant.Color.GREEN);
             }
         }
     }
@@ -527,9 +527,9 @@ public class CField implements ICDoc {
             // TODO: Mindslaver might need to add changes here
         } else {
             final Input in = Singletons.getModel().getMatch().getInput().getInput();
-            if (in instanceof InputMana) {
+            if (in instanceof InputPayMana) {
                 // Do something
-                ((InputMana) in).selectManaPool(Constant.Color.RED);
+                ((InputPayMana) in).selectManaPool(Constant.Color.RED);
             }
         }
     }
@@ -541,9 +541,9 @@ public class CField implements ICDoc {
             // TODO: Mindslaver might need to add changes here
         } else {
             final Input in = Singletons.getModel().getMatch().getInput().getInput();
-            if (in instanceof InputMana) {
+            if (in instanceof InputPayMana) {
                 // Do something
-                ((InputMana) in).selectManaPool(Constant.Color.WHITE);
+                ((InputPayMana) in).selectManaPool(Constant.Color.WHITE);
             }
         }
     }
@@ -555,9 +555,9 @@ public class CField implements ICDoc {
             // TODO: Mindslaver might need to add changes here
         } else {
             final Input in = Singletons.getModel().getMatch().getInput().getInput();
-            if (in instanceof InputMana) {
+            if (in instanceof InputPayMana) {
                 // Do something
-                ((InputMana) in).selectManaPool(Constant.Color.COLORLESS);
+                ((InputPayMana) in).selectManaPool(Constant.Color.COLORLESS);
             }
         }
     }

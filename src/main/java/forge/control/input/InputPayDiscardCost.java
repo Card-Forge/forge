@@ -186,5 +186,5 @@ public class InputPayDiscardCost extends Input {
         this.unpaid.execute();
     }
 
-
+    @Override public void isClassUpdated() {}
 }

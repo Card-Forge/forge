@@ -12,7 +12,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
-public class InputPayManaCost2 extends InputMana {
+public class InputPayManaCost2 extends InputPayMana {
     
     private ManaCost manaCost;
     private final CostMana costMana;
@@ -83,7 +83,7 @@ public class InputPayManaCost2 extends InputMana {
             payment.paidCost(costMana);
         } else {
             source.setXManaCostPaid(0);
-            final Input inp = InputPayManaCostUtil.inputPayXMana(sa, payment, costMana, costMana.getXMana());
+            final Input inp = new InputPayManaX(sa, payment, costMana);
             Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
         }
 
@@ -156,4 +156,6 @@ public class InputPayManaCost2 extends InputMana {
             this.showMessage();
         }
     }
+    
+    @Override public void isClassUpdated() {}
 }

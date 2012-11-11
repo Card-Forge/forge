@@ -40,7 +40,7 @@ import forge.view.ButtonUtil;
  * @author Forge
  * @version $Id$
  */
-public class InputPayManaCostAbility extends InputMana {
+public class InputPayManaCostAbility extends InputPayMana {
     /**
      * Constant <code>serialVersionUID=3836655722696348713L</code>.
      */
@@ -248,5 +248,7 @@ public class InputPayManaCostAbility extends InputMana {
             this.showMessage();
         }
     }
+    
+    @Override public void isClassUpdated() {}
 
 }

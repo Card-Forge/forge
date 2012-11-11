@@ -185,6 +185,9 @@ public class InputPayReturnCost extends Input {
         }
         this.unpaid.execute();
     }
+    
+    
+    @Override public void isClassUpdated() {}
 
 
 }

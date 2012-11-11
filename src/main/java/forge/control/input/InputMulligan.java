@@ -190,4 +190,8 @@ public class InputMulligan extends Input {
             SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
         }
     }
+    
+    @Override
+    public void isClassUpdated() {
+    }
 }

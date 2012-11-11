@@ -1264,8 +1264,7 @@ public class CardFactoryUtil {
             @Override
             public void selectCard(final Card card, final PlayerZone zone) {
                 if (targeted && !card.canBeTargetedBy(spell)) {
-                    CMatchUI.SINGLETON_INSTANCE
-                            .showMessage("Cannot target this card (Shroud? Protection?).");
+                    CMatchUI.SINGLETON_INSTANCE.showMessage("Cannot target this card (Shroud? Protection?).");
                 } else if (choices.contains(card)) {
                     spell.setTargetCard(card);
                     if (spell.getManaCost().equals("0") || free) {
