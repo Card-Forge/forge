@@ -8009,7 +8009,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage, isCombat);
             }
             for (final ReplacementEffect re : ca.getReplacementEffects()) {
-                HashMap<String,String> params = re.getMapParams();
+                HashMap<String, String> params = re.getMapParams();
                 if (!"DamageDone".equals(params.get("Event")) || !params.containsKey("PreventionEffect")) {
                     continue;
                 }
@@ -8276,7 +8276,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             return true;
         }
 
-        if (source.hasKeyword("Wither") || source.hasKeyword("Infect") 
+        if (source.hasKeyword("Wither") || source.hasKeyword("Infect")
                 || FModel.SINGLETON_INSTANCE.getGame().isCardInPlay("Everlasting Torment")) {
             wither = true;
         }
