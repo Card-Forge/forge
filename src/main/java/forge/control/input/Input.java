@@ -122,6 +122,6 @@ public abstract class Input implements java.io.Serializable {
      * This method is used to mark old descendants of Input
      * TODO: Write javadoc for this method.
      */
-    public /* abstract */ void isClassUpdated() {}//;
+    public /*abstract */void isClassUpdated() {}//;
 
 }

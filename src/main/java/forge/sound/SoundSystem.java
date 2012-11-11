@@ -77,7 +77,7 @@ public class SoundSystem {
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
-            clip.loop(clip.LOOP_CONTINUOUSLY);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
         }
     }
 

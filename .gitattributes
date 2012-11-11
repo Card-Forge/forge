@@ -12852,7 +12852,9 @@ src/main/java/forge/control/input/InputPayManaCostUtil.java svneol=native#text/p
 src/main/java/forge/control/input/InputPayManaX.java -text
 src/main/java/forge/control/input/InputPayReturnCost.java -text
 src/main/java/forge/control/input/InputPaySacCost.java -text
+src/main/java/forge/control/input/InputSelectMany.java -text
 src/main/java/forge/control/input/InputSelectManyCards.java -text
+src/main/java/forge/control/input/InputSelectManyPlayers.java -text
 src/main/java/forge/control/input/package-info.java svneol=native#text/plain
 src/main/java/forge/control/package-info.java -text
 src/main/java/forge/deck/CardCollections.java -text

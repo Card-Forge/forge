@@ -22,6 +22,9 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -51,14 +54,15 @@ import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.control.input.Input;
+import forge.control.input.InputSelectMany;
+import forge.control.input.InputSelectManyCards;
+import forge.control.input.InputSelectManyPlayers;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.match.CMatchUI;
 import forge.util.Aggregates;
-import forge.view.ButtonUtil;
 
 /**
  * <p>
@@ -848,77 +852,49 @@ public class CardFactoryCreatures {
             } // resolve()
         };
 
-        final Input targetInput = new Input() {
-            private static final long serialVersionUID = -8727869672234802473L;
-
+        Function<List<Card>, Input> onSelected = new Function<List<Card>, Input>() {
             @Override
-            public void showMessage() {
-                if (targetPerms.size() == 5) {
-                    this.done();
-                }
-                final StringBuilder sb = new StringBuilder();
-                sb.append("Select up to 5 target permanents.  Selected (");
-                sb.append(targetPerms.size()).append(") so far.  Click OK when done.");
-                CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
-                ButtonUtil.enableOnlyOK();
-            }
-
-            @Override
-            public void selectButtonOK() {
-                this.done();
-            }
-
-            private void done() {
-                // here, we add the ability to the stack since it's
-                // triggered.
+            public final Input apply(List<Card> selected) {
                 final StringBuilder sb = new StringBuilder();
                 sb.append(card.getName());
-                sb.append(" - tap up to 5 permanents target player controls. ");
+                sb.append(" - tap " + StringUtils.join(selected, ", ")  +". ");
                 sb.append("Target player skips his or her next untap step.");
                 ability.setStackDescription(sb.toString());
 
-                //adding ability to stack first cause infinite loop (with observers notification)
-                //so it has to be stop first and add ability later
-                this.stop();
                 Singletons.getModel().getGame().getStack().add(ability);
-            }
-
-            @Override
-            public void selectCard(final Card c) {
-                Zone zone = Singletons.getModel().getGame().getZoneOf(c);
-                if (zone.is(ZoneType.Battlefield) && c.getController() == ability.getTargetPlayer() && !targetPerms.contains(c)) {
-                    if (c.canBeTargetedBy(ability)) {
-                        targetPerms.add(c);
-                    }
-                }
-                this.showMessage();
-            }
-        }; // Input
-
-        final Input playerInput = new Input() {
-            private static final long serialVersionUID = 4765535692144126496L;
-
-            @Override
-            public void showMessage() {
-                final StringBuilder sb = new StringBuilder();
-                sb.append(card.getName()).append(" - Select target player");
-                CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
-                ButtonUtil.enableOnlyCancel();
-            }
-
-            @Override
-            public void selectPlayer(final Player p) {
-                if (p.canBeTargetedBy(ability)) {
-                    ability.setTargetPlayer(p);
-                    this.stopSetNext(targetInput);
-                }
-            }
-
-            @Override
-            public void selectButtonCancel() {
-                this.stop();
+                return null;
             }
         };
+        
+        Predicate<Card> allowedRule = new Predicate<Card>() { 
+            @Override
+            public boolean apply(Card c) {
+                Zone zone = Singletons.getModel().getGame().getZoneOf(c);
+                return zone.is(ZoneType.Battlefield) && c.getController() == ability.getTargetPlayer() && c.canBeTargetedBy(ability);
+            }
+        };
+        
+        final InputSelectMany<Card> targetInput = new InputSelectManyCards(allowedRule, 0, 5, onSelected);
+        targetInput.setMessage("Select up to 5 target permanents.  Selected (%d) so far.  Click OK when done.");
+
+        Predicate<Player> canTarget = new Predicate<Player>() { 
+            @Override
+            public boolean apply(Player p) {
+                return p.canBeTargetedBy(ability);
+            }
+        };
+        
+        Function<List<Player>, Input> onPlayerTargeted = new Function<List<Player>, Input>() {
+            @Override
+            public final Input apply(List<Player> selected) {
+                Player p = selected.get(0);
+                ability.setTargetPlayer(p);
+                return targetInput;
+            }
+        };
+        
+        final InputSelectMany<Player> playerInput = new InputSelectManyPlayers(canTarget, 1, 1, onPlayerTargeted);
+        playerInput.setMessage(card.getName()+" - Select target player");
 
         final Command destroy = new Command() {
             private static final long serialVersionUID = -3868616119471172026L;
@@ -945,69 +921,71 @@ public class CardFactoryCreatures {
 
     private static void getCard_PhyrexianDreadnought(final Card card, final String cardName) {
         final Player player = card.getController();
-        final List<Card> toSac = new ArrayList<Card>();
 
-        final Ability sacOrSac = new Ability(card, "") {
+        final Input target = new InputSelectMany<Card>(0, Integer.MAX_VALUE) {
+            private static final long serialVersionUID = 2698036349873486664L;
+
             @Override
-            public void resolve() {
-                if (player.isHuman()) {
-                    final Input target = new Input() {
-                        private static final long serialVersionUID = 2698036349873486664L;
+            public String getMessage() {
+                String toDisplay = cardName + " - Select any number of creatures to sacrifice.  ";
+                toDisplay += "Currently, (" + selected.size() + ") selected with a total power of: "
+                        + getTotalPower();
+                toDisplay += "  Click OK when Done.";
+                return toDisplay;
+            }
+            
+            @Override
+            protected boolean canCancelWithSomethingSelected() {
+                return true;
+            }
 
-                        @Override
-                        public void showMessage() {
-                            String toDisplay = cardName + " - Select any number of creatures to sacrifice.  ";
-                            toDisplay += "Currently, (" + toSac.size() + ") selected with a total power of: "
-                                    + getTotalPower();
-                            toDisplay += "  Click OK when Done.";
-                            CMatchUI.SINGLETON_INSTANCE.showMessage(toDisplay);
-                            ButtonUtil.enableAll();
-                        }
+            @Override
+            protected Input onCancel() {
+                Singletons.getModel().getGame().getAction().sacrifice(card, null);
+                return null;
+            }
+            
+            @Override
+            protected boolean isValidChoice(Card c) {
+                Zone zone = Singletons.getModel().getGame().getZoneOf(c);
+                return c.isCreature() && zone.is(ZoneType.Battlefield, player);
+            } // selectCard()
 
-                        @Override
-                        public void selectButtonOK() {
-                            this.done();
-                        }
-
-                        @Override
-                        public void selectButtonCancel() {
-                            toSac.clear();
-                            Singletons.getModel().getGame().getAction().sacrifice(card, null);
-                            this.stop();
-                        }
-
-                        @Override
-                        public void selectCard(final Card c) {
-                            Zone zone = Singletons.getModel().getGame().getZoneOf(c);
-                            if (c.isCreature() && zone.is(ZoneType.Battlefield, player) && !toSac.contains(c)) {
-                                toSac.add(c);
-                            }
-                            this.showMessage();
-                        } // selectCard()
-
-                        private void done() {
-                            if (getTotalPower() >= 12) {
-                                for (final Card sac : toSac) {
-                                    Singletons.getModel().getGame().getAction().sacrifice(sac, null);
-                                }
-                            } else {
-                                Singletons.getModel().getGame().getAction().sacrifice(card, null);
-                            }
-                            toSac.clear();
-                            this.stop();
-                        }
-                    }; // Input
-                    Singletons.getModel().getMatch().getInput().setInput(target);
+            @Override
+            protected Input onDone() {
+                for (final Card sac : selected) {
+                    Singletons.getModel().getGame().getAction().sacrifice(sac, null);
                 }
-            } // end resolve
-
+                return null;
+            }
+            
+            @Override
+            protected boolean hasEnoughTargets() {
+                return getTotalPower() >= 12;
+            };
+            
             private int getTotalPower() {
                 int sum = 0;
-                for (final Card c : toSac) {
+                for (final Card c : selected) {
                     sum += c.getNetAttack();
                 }
                 return sum;
             }
+
+            @Override
+            public void selectCard(Card c) {
+                selectEntity(c);
+            }
+        }; // Input        
+        
+        
+        final Ability sacOrSac = new Ability(card, "") {
+            @Override
+            public void resolve() {
+                if (player.isHuman()) {
+                    Singletons.getModel().getMatch().getInput().setInput(target);
+                }
+            } // end resolve
         }; // end sacOrSac
         
         final StringBuilder sbTrig = new StringBuilder();
