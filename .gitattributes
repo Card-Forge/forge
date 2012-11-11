@@ -12709,7 +12709,6 @@ src/main/java/forge/card/cardfactory/CardFactoryAuras.java svneol=native#text/pl
 src/main/java/forge/card/cardfactory/CardFactoryCreatures.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactoryEnchantments.java -text
 src/main/java/forge/card/cardfactory/CardFactoryEquipment.java svneol=native#text/plain
-src/main/java/forge/card/cardfactory/CardFactoryInstants.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactoryInterface.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactoryLands.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactoryPlaneswalkers.java svneol=native#text/plain

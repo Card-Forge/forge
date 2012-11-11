@@ -313,8 +313,6 @@ public class CardFactory implements CardFactoryInterface {
             CardFactoryPlaneswalkers.buildCard(card);
         } else if (card.isLand()) {
             CardFactoryLands.buildCard(card, cardName);
-        } else if (card.isInstant()) {
-            CardFactoryInstants.buildCard(card, cardName);
         } else if (card.isSorcery()) {
             CardFactorySorceries.buildCard(card, cardName);
         } else if (card.isEnchantment()) {
