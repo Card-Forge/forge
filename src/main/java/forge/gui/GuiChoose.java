@@ -13,14 +13,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import forge.Card;
-import forge.control.FControl;
 import forge.gui.match.CMatchUI;
-import forge.gui.match.VMatchUI;
-import forge.gui.match.nonsingleton.VField;
 import forge.item.InventoryItem;
-import forge.model.FModel;
-import forge.view.FView;
-import forge.view.arcane.CardPanel;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -194,29 +188,17 @@ public class GuiChoose {
             public void valueChanged(final ListSelectionEvent ev) {
                 if (list.getSelectedValue() instanceof Card) {
                     CMatchUI.SINGLETON_INSTANCE.setCard((Card) list.getSelectedValue());
-                    List<VField> view = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
 
-                    clearPanelSelections();
-                    mainLoop: for (VField v : view) {
-                        List<CardPanel> panels = v.getTabletop().getCardPanels();
-                        for (CardPanel p : panels) {
-                            if (p.getCard().equals(list.getSelectedValue())) {
-                                p.setSelected(true);
-                                break mainLoop;
-                            }
-                        }
-                        
-                    }
+                    GuiUtils.clearPanelSelections();
+                    GuiUtils.setPanelSelection((Card)list.getSelectedValue());
                 }
                 if (list.getSelectedValue() instanceof InventoryItem) {
                     CMatchUI.SINGLETON_INSTANCE.setCard((InventoryItem) list.getSelectedValue());
                 }
-                
             }
-
         });
         c.show();
-        clearPanelSelections();
+        GuiUtils.clearPanelSelections();
         return c.getSelectedValues();
     } // getChoice()
 
@@ -241,29 +223,15 @@ public class GuiChoose {
         dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         if (referenceCard != null) {
             CMatchUI.SINGLETON_INSTANCE.setCard(referenceCard);
+            // MARKED FOR UPDATE
         }
         dialog.setVisible(true);
 
         List<T> objects = dual.getOrderedList();
         dialog.dispose();
+        GuiUtils.clearPanelSelections();
         return objects;
     }
 
-    /**
-     * <p>
-     * clearPanelSelections
-     * </p>
-     * 
-     * A helper function to clear a visually highlighted card panel on the
-     * battlefield.
-     */
-    private static void clearPanelSelections() {
-        List<VField> view = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
-        for (VField v : view) {
-            for (CardPanel p : v.getTabletop().getCardPanels()) {
-                p.setSelected(false);
-            }
-        }
-    }
 }
 

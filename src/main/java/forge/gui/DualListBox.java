@@ -149,8 +149,10 @@ public class DualListBox<T> extends JPanel {
                     card = ((SpellAbility) obj).getSourceCard();
                 }
 
+                GuiUtils.clearPanelSelections();
                 if (card != null) {
                     CMatchUI.SINGLETON_INSTANCE.setCard(card);
+                    GuiUtils.setPanelSelection(card);
                 }
             }
         });

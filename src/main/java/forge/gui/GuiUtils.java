@@ -17,6 +17,10 @@
  */
 package forge.gui;
 
+import forge.Card;
+import forge.gui.match.VMatchUI;
+import forge.gui.match.nonsingleton.VField;
+import forge.view.arcane.CardPanel;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -26,6 +30,7 @@ import java.awt.Window;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.List;
 
 import javax.swing.Box;
 import javax.swing.JPanel;
@@ -179,6 +184,37 @@ public final class GuiUtils {
         else if (isEDT && !mustBeEDT) {
             throw new IllegalStateException(
                     methodName + " may not be accessed from the event dispatch thread.");
+        }
+    }
+
+    /**
+     * Clear all visually highlighted card panels on the battlefield.
+     */
+    public static void clearPanelSelections() {
+        List<VField> view = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
+        for (VField v : view) {
+            for (CardPanel p : v.getTabletop().getCardPanels()) {
+                p.setSelected(false);
+            }
+        }
+    }
+
+    /**
+     * Highlight a card on the playfield.
+     * 
+     * @param c
+     *           a card to be highlighted 
+     */
+    public static void setPanelSelection(Card c) {
+        mainLoop:
+        for (VField v : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
+            List<CardPanel> panels = v.getTabletop().getCardPanels();
+            for (CardPanel p : panels) {
+                if (p.getCard().equals(c)) {
+                    p.setSelected(true);
+                    break mainLoop;
+                }
+            }
         }
     }
 }
