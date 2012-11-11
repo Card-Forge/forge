@@ -643,6 +643,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void addImprinted(final ArrayList<Card> list) {
         this.imprintedCards.addAll(list);
     }
+    
+    public final void removeImprinted(final Object o) {
+        this.imprintedCards.remove(o);
+    }
 
     /**
      * <p>
