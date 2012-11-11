@@ -7,7 +7,6 @@ import java.util.Stack;
 import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
-import forge.CardPredicates.Presets;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
