@@ -99,6 +99,24 @@ public class StaticAbilityCostChange {
                 return originalCost;
             }
         }
+        if (params.containsKey("ValidSpellTarget")) {
+            Target tgt = sa.getTarget();
+            if (tgt == null) {
+                return originalCost;
+            }
+            boolean targetValid = false;
+            for (Object target : tgt.getTargets()) {
+                if (target instanceof SpellAbility) {
+                    Card targetCard = ((SpellAbility) target).getSourceCard();
+                    if (targetCard.isValid(params.get("ValidSpellTarget").split(","), hostCard.getController(), hostCard)) {
+                        targetValid = true;
+                    }
+                }
+            }
+            if (!targetValid) {
+                return originalCost;
+            }
+        }
         int value = 0;
         if ("X".equals(amount)) {
             value = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
