@@ -2,6 +2,7 @@ package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import forge.Card;
 import forge.CardLists;
@@ -16,7 +17,6 @@ import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import java.util.Stack;
 
 import com.google.common.base.Predicate;
 
