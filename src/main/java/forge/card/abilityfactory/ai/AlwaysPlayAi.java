@@ -5,7 +5,7 @@ import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 
-public class AlwaysPlayAi extends SpellAiLogic { 
+public class AlwaysPlayAi extends SpellAiLogic {
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -14,7 +14,6 @@ public class AlwaysPlayAi extends SpellAiLogic {
         return true;
     }
 
-    
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
