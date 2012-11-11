@@ -15,6 +15,8 @@ The Targeting Overlay has been fixed and re-enabled. It now correctly shows the 
 
 We have added the Conspire and the Protection mechanics for this version.
 
+When choosing cards, sources, etc. using a list box, the currently selected card will now be visually highlighted on the playfield (to better distinguish between e.g. three different cards with the same name on the playfield). Now the visual highlighting of a card will also work when declaring the order of blockers.
+
 --
 
 On several occasions people have noticed that the forge deck editor and/or quest mode card shop would not open or display. We have also received reports that some of the tabs/panels in the deck editor are missing. Try deleting the file named "editor_preferred.xml" which is found in the "res/layouts" folder. This should force forge to then use the "editor_default.xml" file instead.
@@ -301,6 +303,29 @@ Fixes/Features:
 - Removed some unused commented out code in AF ChooseSource (wasn't useful).
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added a more detailed comment to the TODO of the AI part of the AF ChooseSource for future reference.
+- CheckStyle.
+- restored triggers (like oblivion ring)
+- Added TapOrUntapAll AF
+- Converted Turnabout to script
+- Fixed the types for Lava Hounds; Pallimud; Scourge of Kher Ridges; Sliptide Serpent
+- remove warning
+- Remove warnings: unspecified generic type, redundant else clause, unused imports, unreachable code, excessive superinterface declaration
+- SA: field delve renamed, isTap/untapAbility removed (cost takes care of that), isTrigger declared by overload in AbilityTriggered
+- The AI will now predict damage prevention replacement effects.
+- Added first steps towards AF ChooseSource AI for CoP's (the AI will choose unblocked attackers).
+- Converted Suffer the Past to script
+- Converted Remove Enchantments to Script, All Instants have no been converted
+- AF ChooseSource: sources already listed as effects "on stack" will no longer also be listed as sources which are "objects referenced on stack by another object".
+- Organizing imports in AF ChooseSource.
+- Organizing imports in AF ChooseSource.
+- Improved AI using War Falcon.
+- When choosing cards, sources, etc. using a list box, the currently selected card will now be visually highlighted on the playfield (to better distinguish between e.g. three different cards with the same name on the playfield).
+- Now the visual highlighting of a card will also work when declaring the order of blockers.
+- Fixed "Players can't gain life." on Everlasting Torment.
+- Fixed "Damage can't be prevented." on Everlasting Torment.
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -354,6 +379,13 @@ Rune of Protection: Black
 Rune of Protection: Artifacts
 Rune of Protection: Lands
 Cleansing
+Greater Realm of Preservation
+Circle of Protection: Shadow
+Pentagram of the Ages
+Righteous Aura
+Story Circle
+Bone Mask
+Everlasting Torment
 
 
 end
