@@ -79,7 +79,7 @@ public class ComputerUtilAttack {
 
         this.attackers = new ArrayList<Card>();
         for(Card c : computerList) 
-            if (CombatUtil.canAttack(c, (GameEntity)human))
+            if (CombatUtil.canAttack(c, human))
                 attackers.add(c);
         
         this.blockers = this.getPossibleBlockers(humanList, this.attackers);
@@ -486,7 +486,6 @@ public class ComputerUtilAttack {
         final Combat combat = new Combat();
         combat.setAttackingPlayer(game.getCombat().getAttackingPlayer());
 
-
         game.getCombat().initiatePossibleDefenders(opponent);
         combat.setDefenders(game.getCombat().getDefenders());
 
@@ -580,16 +579,14 @@ public class ComputerUtilAttack {
         // examine the potential forces
         final List<Card> nextTurnAttackers = new ArrayList<Card>();
         int candidateCounterAttackDamage = 0;
-        // int candidateTotalBlockDamage = 0;
-        for (final Card pCard : this.humanList) {
 
+        for (final Card pCard : this.humanList) {
             // if the creature can attack next turn add it to counter attackers
             // list
             if (CombatUtil.canAttackNextTurn(pCard)) {
                 nextTurnAttackers.add(pCard);
                 if (pCard.getNetCombatDamage() > 0) {
                     candidateCounterAttackDamage += pCard.getNetCombatDamage();
-                    // candidateTotalBlockDamage += pCard.getNetCombatDamage();
                     humanForces += 1; // player forces they might use to attack
                 }
             }
@@ -628,13 +625,6 @@ public class ComputerUtilAttack {
         if (candidateUnblockedDamage > 0) {
             humanLifeToDamageRatio = (double) opp.getLife() / candidateUnblockedDamage;
         }
-
-        /*
-         * System.out.println(String.valueOf(aiLifeToPlayerDamageRatio) +
-         * " = ai life to player damage ratio");
-         * System.out.println(String.valueOf(playerLifeToDamageRatio) +
-         * " = player life ai player damage ratio");
-         */
 
         // determine if the ai outnumbers the player
         final int outNumber = computerForces - humanForces;

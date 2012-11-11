@@ -83,8 +83,6 @@ public class ChooseSourceEffect extends SpellEffect {
             }
         }
 
-        ArrayList<String> src_choices = new ArrayList<String>();
-
         if (sa.hasParam("Choices")) {
             permanentSources = CardLists.getValidCards(permanentSources, sa.getParam("Choices"), host.getController(), host);
 
