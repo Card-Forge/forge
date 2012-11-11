@@ -227,13 +227,20 @@ public class Upkeep extends Phase {
      * </p>
      */
     private static void upkeepSlowtrips() {
-        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
+        Player turnOwner = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
+        
+        // does order matter here?
+        drawForSlowtrips(turnOwner);
+        for(Player p : Singletons.getModel().getGame().getPlayers()) {
+            if ( p == turnOwner ) continue;
+            drawForSlowtrips(p);
+        }
+    }
 
+    public static void drawForSlowtrips(final Player player) {
         List<Card> list = player.getSlowtripList();
 
-        for (int i = 0; i < list.size(); i++) {
-            final Card card = list.get(i);
-
+        for (Card card : list) {
             // otherwise another slowtrip gets added
             card.removeIntrinsicKeyword("Draw a card at the beginning of the next turn's upkeep.");
 
@@ -250,31 +257,6 @@ public class Upkeep extends Phase {
 
         }
         player.clearSlowtripList();
-
-        // Do the same for the opponent
-        final Player opponent = player.getOpponent();
-
-        list = opponent.getSlowtripList();
-
-        for (int i = 0; i < list.size(); i++) {
-            final Card card = list.get(i);
-
-            // otherwise another slowtrip gets added
-            card.removeIntrinsicKeyword("Draw a card at the beginning of the next turn's upkeep.");
-
-            final Ability slowtrip = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    opponent.drawCard();
-                }
-            };
-            slowtrip.setStackDescription(card.getName() + " - Draw a card");
-            slowtrip.setDescription(card + " - Draw a card.");
-
-            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(slowtrip);
-
-        }
-        opponent.clearSlowtripList();
     }
 
     /**
