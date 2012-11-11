@@ -2,7 +2,7 @@ Name:Rune of Protection: Green
 ManaCost:1 W
 Types:Enchantment
 Text:no text
-A:AB$ ChooseSource | Cost$ W | Choices$ Card.Green | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SVars$ DBEffect,RPreventNextFromSource,ExileEffect | SpellDescription$ The next time a green source of your choice would deal damage to you this turn, prevent that damage.
+A:AB$ ChooseSource | Cost$ W | Choices$ Card.Green | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a green source of your choice would deal damage to you this turn, prevent that damage.
 K:Cycling:2
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | RememberObjects$ Remembered | SVars$ RPreventNextFromSource,ExileEffect | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
 SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ You | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the chosen source deals damage to you, prevent that damage.
