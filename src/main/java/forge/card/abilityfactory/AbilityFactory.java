@@ -594,7 +594,11 @@ public class AbilityFactory {
                     final ArrayList<Object> objects = new ArrayList<Object>();
                     final SpellAbility saTargeting = (ability.getTarget() == null) ? ability.getParentTargetingPlayer() : ability;
                     if (saTargeting.getTarget() != null) {
-                        objects.addAll(saTargeting.getTarget().getTargets());
+                        SpellAbility loopSA = saTargeting;
+                        while(loopSA != null) {
+                            objects.addAll(saTargeting.getTarget().getTargets());
+                            loopSA = loopSA.getSubAbility();
+                        }
                     } else {
                         objects.addAll(AbilityFactory.getDefinedObjects(card, saTargeting.getParam("Defined"), saTargeting));
                     }

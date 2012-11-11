@@ -60,61 +60,7 @@ public class CardFactoryInstants {
     public static void buildCard(final Card card, final String cardName) {
 
         // *************** START *********** START **************************
-        if (cardName.equals("Suffer the Past")) {
-            final Cost cost = new Cost(card, "X B", false);
-            final Target tgt = new Target(card, "Select a Player", "Player");
-            final SpellAbility spell = new Spell(card, cost, tgt) {
-                private static final long serialVersionUID = 1168802375190293222L;
-
-                @Override
-                public void resolve() {
-                    final Player tPlayer = this.getTargetPlayer();
-                    final Player player = card.getController();
-                    final int max = card.getXManaCostPaid();
-
-                    final List<Card> graveList = new ArrayList<Card>(tPlayer.getCardsIn(ZoneType.Graveyard));
-                    final int x = Math.min(max, graveList.size());
-
-                    if (player.isHuman()) {
-                        for (int i = 0; i < x; i++) {
-                            final Object o = GuiChoose.one("Remove from game", graveList);
-                            if (o == null) {
-                                break;
-                            }
-                            final Card c1 = (Card) o;
-                            graveList.remove(c1); // remove from the display
-                                                  // list
-                            Singletons.getModel().getGame().getAction().exile(c1);
-                        }
-                    } else { // Computer
-                        // Random random = MyRandom.random;
-                        for (int j = 0; j < x; j++) {
-                            // int index = random.nextInt(X-j);
-                            Singletons.getModel().getGame().getAction().exile(graveList.get(j));
-                        }
-                    }
-
-                    tPlayer.loseLife(x);
-                    player.gainLife(x, card);
-                    card.setXManaCostPaid(0);
-                }
-
-                @Override
-                public boolean canPlayAI() {
-                    final Player ai = getActivatingPlayer();
-                    final Player opp = ai.getOpponent();
-
-                    final int maxX = ComputerUtil.getAvailableMana(ai, true).size() - 1;
-                    this.getTarget().resetTargets();
-                    return ComputerUtil.targetHumanAI(this) && (maxX >= 3) && !opp.getZone(ZoneType.Graveyard).isEmpty();
-                }
-            };
-
-            card.addSpellAbility(spell);
-        } // *************** END ************ END **************************        
-
-        // *************** START *********** START **************************
-        else if (cardName.equals("Remove Enchantments")) {
+        if (cardName.equals("Remove Enchantments")) {
             final SpellAbility spell = new Spell(card) {
                 private static final long serialVersionUID = -7324132132222075031L;
 
