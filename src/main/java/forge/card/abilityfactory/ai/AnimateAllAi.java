@@ -5,7 +5,7 @@ import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 
 public class AnimateAllAi extends SpellAiLogic {
-    
+
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         return false;
