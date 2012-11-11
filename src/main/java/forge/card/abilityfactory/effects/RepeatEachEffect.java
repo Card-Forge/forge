@@ -30,6 +30,8 @@ public class RepeatEachEffect extends SpellEffect {
     
         GameState game = Singletons.getModel().getGame();
         
+        boolean useImprinted = sa.hasParam("UseImprinted");
+        
         if (sa.hasParam("RepeatCards")) {
             ZoneType zone = sa.hasParam("Zone") ? ZoneType.smartValueOf(sa.getParam("Zone")) : ZoneType.Battlefield;
             
@@ -37,9 +39,18 @@ public class RepeatEachEffect extends SpellEffect {
                     sa.getParam("RepeatCards"), source.getController(), source);
 
             for(Card card : repeatCards) {
-                source.addRemembered(card);
+                if (useImprinted) {
+                    source.addImprinted(card);
+                } else {
+                    source.addRemembered(card);
+                }
+                
                 AbilityFactory.resolve(repeat, false);
-                source.removeRemembered(card);
+                if (useImprinted) {
+                    source.removeImprinted(card);
+                } else {
+                    source.removeRemembered(card);
+                }
             }
         }
         
