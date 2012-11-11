@@ -565,6 +565,7 @@ res/cardsfolder/a/auriok_bladewarden.txt svneol=native#text/plain
 res/cardsfolder/a/auriok_champion.txt svneol=native#text/plain
 res/cardsfolder/a/auriok_edgewright.txt svneol=native#text/plain
 res/cardsfolder/a/auriok_glaivemaster.txt svneol=native#text/plain
+res/cardsfolder/a/auriok_replica.txt -text
 res/cardsfolder/a/auriok_salvagers.txt svneol=native#text/plain
 res/cardsfolder/a/auriok_sunchaser.txt svneol=native#text/plain
 res/cardsfolder/a/auriok_survivors.txt -text
@@ -1297,6 +1298,7 @@ res/cardsfolder/b/burnout.txt -text
 res/cardsfolder/b/burnt_offering.txt -text
 res/cardsfolder/b/burr_grafter.txt svneol=native#text/plain
 res/cardsfolder/b/burrenton_bombardier.txt svneol=native#text/plain
+res/cardsfolder/b/burrenton_forge_tender.txt -text
 res/cardsfolder/b/burrenton_shield_bearers.txt svneol=native#text/plain
 res/cardsfolder/b/burrowing.txt svneol=native#text/plain
 res/cardsfolder/b/burst_lightning.txt svneol=native#text/plain
