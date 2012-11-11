@@ -50,18 +50,24 @@ public class SoundSystem {
 
     public void play() {
         if (clip != null) {
+            clip.setMicrosecondPosition(0);
+            if (!isDone()) {
+                clip.flush();
+                clip.stop();
+            }
             clip.flush();
             clip.stop();
-            clip.setMicrosecondPosition(0);
             clip.start();
         }
     }
 
     public void loop() {
         if (clip != null) {
-            clip.flush();
-            clip.stop();
-            clip.setFramePosition(0);
+            clip.setMicrosecondPosition(0);
+            if (!isDone()) {
+                clip.flush();
+                clip.stop();
+            }
             clip.loop(clip.LOOP_CONTINUOUSLY);
         }
     }
