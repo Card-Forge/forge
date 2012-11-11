@@ -7,6 +7,8 @@ import java.util.Stack;
 import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
+import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.ApiType;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -135,19 +137,48 @@ public class ChooseSourceEffect extends SpellEffect {
                         chosen.add(o);
                         sourcesToChooseFrom.remove(o);
 
-                    } else { // TODO: AI Support! This is copied from AF ChooseCard! 
+                    } else {
                         if (sa.hasParam("AILogic") && sa.getParam("AILogic").equals("NeedsPrevention")) {
                             final Player ai = sa.getActivatingPlayer();
-                            sourcesToChooseFrom = CardLists.filter(sourcesToChooseFrom, new Predicate<Card>() {
-                                @Override
-                                public boolean apply(final Card c) {
-                                    if (!c.isAttacking(ai) || !Singletons.getModel().getGame().getCombat().isUnblocked(c)) {
-                                        return false;
-                                    }
-                                    return CombatUtil.damageIfUnblocked(c, ai, Singletons.getModel().getGame().getCombat()) > 0;
+                            if (!Singletons.getModel().getGame().getStack().isEmpty()) {
+                                final SpellAbility topStack = Singletons.getModel().getGame().getStack().peekAbility();
+                                if (!topStack.getActivatingPlayer().isHostileTo(ai)) {
+                                    break;
                                 }
-                            });
-                            chosen.add(CardFactoryUtil.getBestCreatureAI(sourcesToChooseFrom));
+                                final ApiType threatApi = topStack.getApi();
+                                if (threatApi != ApiType.DealDamage && threatApi != ApiType.DamageAll) {
+                                    break;
+                                }
+                                
+                                final Card source = topStack.getSourceCard();
+                                ArrayList<Object> objects = new ArrayList<Object>();
+                                final Target threatTgt = topStack.getTarget();
+
+                                if (threatTgt == null) {
+                                    if (topStack.hasParam("Defined")) {
+                                        objects = AbilityFactory.getDefinedObjects(source, topStack.getParam("Defined"), topStack);
+                                    } else if (topStack.hasParam("ValidPlayers")) {
+                                        objects.addAll(AbilityFactory.getDefinedPlayers(source, topStack.getParam("ValidPlayers"), topStack));
+                                    }
+                                } else {
+                                    objects.addAll(threatTgt.getTargetPlayers());
+                                }
+                                if (objects.contains(ai)) {
+                                    chosen.add(topStack.getSourceCard());
+                                }
+                                break;
+                            } else {
+                                sourcesToChooseFrom = CardLists.filter(sourcesToChooseFrom, new Predicate<Card>() {
+                                    @Override
+                                    public boolean apply(final Card c) {
+                                        if (!c.isAttacking(ai) || !Singletons.getModel().getGame().getCombat().isUnblocked(c)) {
+                                            return false;
+                                        }
+                                        return CombatUtil.damageIfUnblocked(c, ai, Singletons.getModel().getGame().getCombat()) > 0;
+                                    }
+                                });
+                                chosen.add(CardFactoryUtil.getBestCreatureAI(sourcesToChooseFrom));
+                            }
                         } else {
                             chosen.add(CardFactoryUtil.getBestAI(sourcesToChooseFrom));
                         }

@@ -1,5 +1,6 @@
 package forge.card.abilityfactory.ai;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.base.Predicate;
@@ -7,6 +8,8 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.Singletons;
+import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.ApiType;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -51,6 +54,34 @@ public class ChooseSourceAi extends SpellAiLogic {
                 choices = CardLists.filterControlledBy(choices, ai.getOpponent());
             }
             if (sa.getParam("AILogic").equals("NeedsPrevention")) {
+                if (!Singletons.getModel().getGame().getStack().isEmpty()) {
+                    final SpellAbility topStack = Singletons.getModel().getGame().getStack().peekAbility();
+                    if (!topStack.getActivatingPlayer().isHostileTo(ai)) {
+                        return false;
+                    }
+                    final ApiType threatApi = topStack.getApi();
+                    if (threatApi != ApiType.DealDamage && threatApi != ApiType.DamageAll) {
+                        return false;
+                    }
+                    
+                    final Card source = topStack.getSourceCard();
+                    ArrayList<Object> objects = new ArrayList<Object>();
+                    final Target threatTgt = topStack.getTarget();
+
+                    if (threatTgt == null) {
+                        if (topStack.hasParam("Defined")) {
+                            objects = AbilityFactory.getDefinedObjects(source, topStack.getParam("Defined"), topStack);
+                        } else if (topStack.hasParam("ValidPlayers")) {
+                            objects.addAll(AbilityFactory.getDefinedPlayers(source, topStack.getParam("ValidPlayers"), topStack));
+                        }
+                    } else {
+                        objects.addAll(threatTgt.getTargetPlayers());
+                    }
+                    if (objects.contains(ai)) {
+                        return true;
+                    }
+                    return false;
+                }
                 if (!Singletons.getModel().getGame().getPhaseHandler().getPhase()
                         .equals(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     return false;

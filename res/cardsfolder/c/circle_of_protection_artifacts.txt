@@ -7,7 +7,6 @@ SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | Remember
 SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ You | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the chosen source deals damage to you, prevent that damage.
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SetInfo:5DN|Uncommon|http://magiccards.info/scans/en/5dn/8.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/292.jpg
