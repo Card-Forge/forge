@@ -172,6 +172,10 @@ public enum TargetingOverlay {
             if (arcs.size() < 1) { return; }
 
             for (Point[] p : arcs) {
+                if (p[0] == null || p[1] == null) {
+                    continue;
+                }
+                
                 double SX = p[0].getX();
                 double SY = p[0].getY();
                 double CX = p[0].getY() > p[1].getY() ?  
