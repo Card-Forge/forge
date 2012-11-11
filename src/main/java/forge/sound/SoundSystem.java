@@ -19,6 +19,8 @@
 package forge.sound;
 
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sound.sampled.*;
 
 /**
@@ -55,8 +57,11 @@ public class SoundSystem {
                 clip.flush();
                 clip.stop();
             }
-            clip.flush();
-            clip.stop();
+            try {
+                Thread.sleep(30);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
             clip.start();
         }
     }
@@ -68,7 +73,12 @@ public class SoundSystem {
                 clip.flush();
                 clip.stop();
             }
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            try {
+                Thread.sleep(30);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+            clip.loop(clip.LOOP_CONTINUOUSLY);
         }
     }
 
