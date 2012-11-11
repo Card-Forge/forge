@@ -3,16 +3,11 @@ ManaCost:3
 Types:Artifact
 Text:no text
 S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ Vigilance | Description$ All creatures have vigilance.
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TrigTapAllYou | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's end step, tap all untapped creatures that player controls that didn't attack this turn. CARDNAME deals damage to the player equal to the number of creatures tapped this way.
-SVar:TrigTapAllYou:AB$ TapAll | Cost$ 0 | ValidCards$ Creature.untapped+notAttackedThisTurn+YouCtrl | RememberTapped$ True | SubAbility$ DBDamageYou
-SVar:DBDamageYou:DB$ DealDamage | Defined$ You | NumDmg$ AngelYouX | SubAbility$ DBCleanupYou | References$ AngelYouX 
-SVar:DBCleanupYou:DB$ Cleanup | ClearRemembered$ True
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Opponent | Execute$ TrigTapAllOpp | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ At the beginning of each player's end step, tap all untapped creatures that player controls that didn't attack this turn. CARDNAME deals damage to the player equal to the number of creatures tapped this way.
-SVar:TrigTapAllOpp:AB$ TapAll | Cost$ 0 | ValidCards$ Creature.untapped+notAttackedThisTurn+YouDontCtrl | RememberTapped$ True | SubAbility$ DBDamageOpp
-SVar:DBDamageOpp:DB$ DealDamage | Defined$ Opponent | NumDmg$ AngelOppX | SubAbility$ DBCleanupOpp | References$ AngelOppX
-SVar:DBCleanupOpp:DB$ Cleanup | ClearRemembered$ True
-SVar:AngelYouX:Remembered$Amount
-SVar:AngelOppX:Remembered$Amount
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Execute$ TrigTapAll | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's end step, tap all untapped creatures that player controls that didn't attack this turn. CARDNAME deals damage to the player equal to the number of creatures tapped this way.
+SVar:TrigTapAll:AB$ TapAll | Cost$ 0 | ValidCards$ Creature.untapped+notAttackedThisTurn+ActivePlayerCtrl | RememberTapped$ True | SubAbility$ DBDamage
+SVar:DBDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ AngelDamage | SubAbility$ DBCleanup | References$ AngelDamage 
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:AngelDamage:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
