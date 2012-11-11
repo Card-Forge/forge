@@ -163,10 +163,14 @@ public class ChooseSourceEffect extends SpellEffect {
                                 } else {
                                     objects.addAll(threatTgt.getTargetPlayers());
                                 }
-                                if (objects.contains(ai)) {
-                                    chosen.add(topStack.getSourceCard());
+                                if (!objects.contains(ai) || topStack.hasParam("NoPrevention")) {
+                                    break;
                                 }
-                                break;
+                                int dmg = AbilityFactory.calculateAmount(source, topStack.getParam("NumDmg"), topStack);
+                                if (ai.predictDamage(dmg, source, false) <= 0) {
+                                    break;
+                                }
+                                chosen.add(topStack.getSourceCard());
                             } else {
                                 sourcesToChooseFrom = CardLists.filter(sourcesToChooseFrom, new Predicate<Card>() {
                                     @Override

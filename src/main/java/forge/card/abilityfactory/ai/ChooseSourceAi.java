@@ -77,10 +77,14 @@ public class ChooseSourceAi extends SpellAiLogic {
                     } else {
                         objects.addAll(threatTgt.getTargetPlayers());
                     }
-                    if (objects.contains(ai)) {
-                        return true;
+                    if (!objects.contains(ai) || topStack.hasParam("NoPrevention")) {
+                        return false;
                     }
-                    return false;
+                    int dmg = AbilityFactory.calculateAmount(source, topStack.getParam("NumDmg"), topStack);
+                    if (ai.predictDamage(dmg, source, false) <= 0) {
+                        return false;
+                    }
+                    return true;
                 }
                 if (!Singletons.getModel().getGame().getPhaseHandler().getPhase()
                         .equals(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
