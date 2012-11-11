@@ -595,7 +595,7 @@ public class AbilityFactory {
                     final SpellAbility saTargeting = (ability.getTarget() == null) ? ability.getParentTargetingPlayer() : ability;
                     if (saTargeting.getTarget() != null) {
                         SpellAbility loopSA = saTargeting;
-                        while(loopSA != null) {
+                        while (loopSA != null) {
                             objects.addAll(saTargeting.getTarget().getTargets());
                             loopSA = loopSA.getSubAbility();
                         }
@@ -1436,7 +1436,7 @@ public class AbilityFactory {
     public static void handleRemembering(final SpellAbility sa) {
         Card host = sa.getSourceCard();
 
-        if (sa.hasParam("RememberTargets") && sa.getTarget() != null) { 
+        if (sa.hasParam("RememberTargets") && sa.getTarget() != null) {
             if (sa.hasParam("ForgetOtherTargets")) {
                 host.clearRemembered();
             }
