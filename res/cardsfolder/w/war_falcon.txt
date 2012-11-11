@@ -8,6 +8,7 @@ S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ HIDDEN CARDNAME can
 SVar:X:Count$Valid Knight.YouCtrl,Soldier.YouCtrl
 SVar:RemRandomDeck:True
 DeckHints:Type$Knight|Soldier
+SVar:BuffedBy:Knight,Soldier
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/war_falcon.jpg
 SetInfo:M13|Common|http://magiccards.info/scans/en/m13/38.jpg
