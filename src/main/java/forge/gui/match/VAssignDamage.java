@@ -74,8 +74,6 @@ public class VAssignDamage {
     private final FLabel lblOK = new FLabel.Builder().text("OK").hoverable(true).opaque(true).fontSize(16).build();
     private final FLabel lblReset = new FLabel.Builder().text("Reset").hoverable(true).opaque(true).fontSize(16).build();
     private final FLabel lblAuto = new FLabel.Builder().text("Auto").hoverable(true).opaque(true).fontSize(16).build();
-    
-    // TODO Add Auto and Reset Buttons and hook them up to created functions
 
     // Indexes of defenders correspond to their indexes in the damage list and labels.
     private final List<Card> lstDefenders = new ArrayList<Card>();
@@ -344,10 +342,14 @@ public class VAssignDamage {
         pnlMain.add(pnlAttacker, "w 125px!, h 160px!, gap 50px 0 0 15px");
         pnlMain.add(pnlInfo, "gap 20px 0 0 15px");
         pnlMain.add(scrDefenders, "w 96%!, gap 2% 0 0 0, pushy, growy, ax center, span 2");
-        
-        pnlMain.add(lblOK, "w 100px!, h 30px!, gap 0 0 5px 10px, ax center, span 2");
-        // TODO Align lblAuto and lblRest on same row as OK button. Auto, Ok, Reset
 
+        JPanel pnlButtons = new JPanel(new MigLayout("insets 0, gap 0, ax center"));
+        pnlButtons.setOpaque(false);
+        pnlButtons.add(lblAuto, "w 110px!, h 30px!, gap 0 10px 0 0");
+        pnlButtons.add(lblOK, "w 110px!, h 30px!, gap 0 10px 0 0");
+        pnlButtons.add(lblReset, "w 110px!, h 30px!");
+
+        pnlMain.add(pnlButtons, "ax center, w 350px!, gap 10px 10px 10px 10px, span 2");
         overlay.add(pnlMain);
 
         initialAssignDamage();
@@ -384,8 +386,9 @@ public class VAssignDamage {
      * then overflows extra onto opponent or last defender card. */
     private void autoAssignDamage() {
         // Assign lethal damage to each combatant
+        // The first defender should aleady have lethal damage assigned
         int size = lstDefenders.size();
-        for (int i = 0; i < size; i++) {
+        for (int i = 1; i < size; i++) {
             int lethalDamage = this.deathtouch ? 1 : lstDefenders.get(i).getLethalDamage();
             int damage = Math.min(lethalDamage, this.damageLeftToAssign);
             if (damage == 0) {
@@ -405,8 +408,8 @@ public class VAssignDamage {
             this.damageLeftToAssign = 0;
         }
         // Should we just finish, or update and then let them say ok?
-        update(null);
-        //finish();
+        //update(null);
+        finish();
     }
 
     private void assignCombatantDamage(final Card card, int damage) {
