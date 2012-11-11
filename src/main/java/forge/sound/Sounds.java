@@ -47,6 +47,13 @@ public enum Sounds {
     }
 
     /**
+     * Play the sound in a looping manner until 'stop' is called.
+     */
+    public void loop() {
+        snd.loop();
+    }
+
+    /**
      * Stop the sound associated with the Sounds enumeration element.
      */
     public void stop() {
