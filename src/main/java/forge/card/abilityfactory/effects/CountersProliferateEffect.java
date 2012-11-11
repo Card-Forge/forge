@@ -16,7 +16,6 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
@@ -65,7 +64,7 @@ public class CountersProliferateEffect extends SpellEffect {
             }
 
             @Override
-            public void selectCard(final Card card, final PlayerZone zone) {
+            public void selectCard(final Card card) {
                 if (!unchosen.contains(card)) {
                     return;
                 }

@@ -27,6 +27,7 @@ import java.util.Observer;
 import forge.Card;
 
 import forge.Singletons;
+import forge.game.player.Player;
 import forge.util.MyObservable;
 
 /**
@@ -225,6 +226,11 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
         return zone == this.zoneName;
     }
 
+    // PlayerZone should override it with a correct implementation 
+    public boolean is(final ZoneType zone, final Player player) {
+        return false;
+    }    
+    
     /*
      * (non-Javadoc)
      * 

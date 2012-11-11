@@ -22,7 +22,6 @@ import forge.Singletons;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
@@ -146,7 +145,7 @@ public class InputPayManaCost extends InputPayMana {
 
     /** {@inheritDoc} */
     @Override
-    public final void selectCard(final Card card, final PlayerZone zone) {
+    public final void selectCard(final Card card) {
         // this is a hack, to prevent lands being able to use mana to pay their
         // own abilities from cards like
         // Kher Keep, Pendelhaven, Blinkmoth Nexus, and Mikokoro, Center of the

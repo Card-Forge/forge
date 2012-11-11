@@ -34,7 +34,7 @@ import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
@@ -176,8 +176,8 @@ public class InputMulligan extends Input {
     }
 
     @Override
-    public void selectCard(Card c0, PlayerZone z0) {
-
+    public void selectCard(Card c0) {
+        Zone z0 = Singletons.getModel().getGame().getZoneOf(c0);
         if (c0.getName().equals("Serum Powder") && z0.is(ZoneType.Hand)) {
             if (GameActionUtil.showYesNoDialog(c0, "Use " + c0.getName() + "'s ability?")) {
                 List<Card> hand = new ArrayList<Card>(c0.getController().getCardsIn(ZoneType.Hand));

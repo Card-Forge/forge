@@ -53,6 +53,7 @@ import forge.card.trigger.TriggerHandler;
 import forge.control.input.Input;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
@@ -883,8 +884,9 @@ public class CardFactoryCreatures {
             }
 
             @Override
-            public void selectCard(final Card c, final PlayerZone zone) {
-                if (zone.is(ZoneType.Battlefield, ability.getTargetPlayer()) && !targetPerms.contains(c)) {
+            public void selectCard(final Card c) {
+                Zone zone = Singletons.getModel().getGame().getZoneOf(c);
+                if (zone.is(ZoneType.Battlefield) && c.getController() == ability.getTargetPlayer() && !targetPerms.contains(c)) {
                     if (c.canBeTargetedBy(ability)) {
                         targetPerms.add(c);
                     }
@@ -975,7 +977,8 @@ public class CardFactoryCreatures {
                         }
 
                         @Override
-                        public void selectCard(final Card c, final PlayerZone zone) {
+                        public void selectCard(final Card c) {
+                            Zone zone = Singletons.getModel().getGame().getZoneOf(c);
                             if (c.isCreature() && zone.is(ZoneType.Battlefield, player) && !toSac.contains(c)) {
                                 toSac.add(c);
                             }

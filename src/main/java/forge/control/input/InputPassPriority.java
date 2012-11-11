@@ -21,7 +21,6 @@ import forge.Card;
 import forge.Singletons;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
 import forge.gui.GuiDisplayUtil;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
@@ -77,7 +76,7 @@ public class InputPassPriority extends Input {
 
     /** {@inheritDoc} */
     @Override
-    public final void selectCard(final Card card, final PlayerZone zone) {
+    public final void selectCard(final Card card) {
         if (Singletons.getModel().getGame().getAction().playCard(card)) {
             // really need it? does not playCard push it into stack and thus give priority?
             Singletons.getModel().getGame().getPhaseHandler().setPriority(Singletons.getControl().getPlayer());

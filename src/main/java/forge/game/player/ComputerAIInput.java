@@ -120,4 +120,9 @@ public class ComputerAIInput extends Input {
         }
 
     } // think
+
+    /* (non-Javadoc)
+     * @see forge.control.input.Input#isClassUpdated()
+     */
+    @Override public void isClassUpdated() {}
 }

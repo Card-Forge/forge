@@ -7,7 +7,6 @@ import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
@@ -46,7 +45,7 @@ public class InputPayManaCost2 extends InputPayMana {
     }
 
     @Override
-    public void selectCard(final Card card, final PlayerZone zone) {
+    public void selectCard(final Card card) {
         // prevent cards from tapping themselves if ability is a
         // tapability, although it should already be tapped
         this.manaCost = InputPayManaCostUtil.activateManaAbility(sa, card, this.manaCost);

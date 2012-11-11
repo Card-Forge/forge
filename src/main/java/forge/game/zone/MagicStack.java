@@ -941,7 +941,8 @@ public class MagicStack extends MyObservable {
                     }
 
                     @Override
-                    public void selectCard(final Card c, final PlayerZone zone) {
+                    public void selectCard(final Card c) {
+                        Zone zone = Singletons.getModel().getGame().getZoneOf(c);
                         if (!zone.is(ZoneType.Battlefield) || !c.isCreature()) {
                             return;
                         }

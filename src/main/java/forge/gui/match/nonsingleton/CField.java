@@ -468,12 +468,10 @@ public class CField implements ICDoc {
                 //earlier it was enforced that cards must be in player zone
                 //this can potentially break some other functionality
                 //(tapping lands works ok but some custom cards may not...)
-                if (c.getController() != null) {
-                    input.selectCard(c, c.getController().getZone(ZoneType.Battlefield));
-                } else {
-                    //in weird case card has no controller revert to default behaviour
-                    input.selectCard(c, Singletons.getControl().getPlayer().getZone(ZoneType.Battlefield));
-                }
+                
+
+                //in weird case card has no controller revert to default behaviour
+                input.selectCard(c);
             }
         }
     }

@@ -6,7 +6,6 @@ import forge.card.cost.CostMana;
 import forge.card.cost.CostPayment;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
@@ -55,7 +54,7 @@ public class InputPayManaX extends InputPayMana {
 
     // selectCard
     @Override
-    public void selectCard(final Card card, final PlayerZone zone) {
+    public void selectCard(final Card card) {
         this.manaCost = InputPayManaCostUtil.activateManaAbility(sa, card, this.manaCost);
         if (this.manaCost.isPaid()) {
             if (!this.colorsPaid.contains(this.manaCost.getColorsPaid())) {

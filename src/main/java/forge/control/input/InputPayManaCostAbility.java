@@ -23,7 +23,6 @@ import forge.Singletons;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
@@ -171,7 +170,7 @@ public class InputPayManaCostAbility extends InputPayMana {
 
     /** {@inheritDoc} */
     @Override
-    public final void selectCard(final Card card, final PlayerZone zone) {
+    public final void selectCard(final Card card) {
         // only tap card if the mana is needed
         this.manaCost = InputPayManaCostUtil.activateManaAbility(this.fakeAbility, card, this.manaCost);
 

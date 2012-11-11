@@ -125,7 +125,7 @@ public class InputPayReturnCost extends Input {
 
     /** {@inheritDoc} */
     @Override
-    public void selectCard(final Card card, final PlayerZone zone) {
+    public void selectCard(final Card card) {
         if (this.choiceList.contains(card) && this.numChosen < numRequired) {
             this.numChosen++;
             this.returnCost.addToList(card);

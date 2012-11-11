@@ -46,6 +46,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.player.PlayerUtil;
 import forge.game.zone.PlayerZone;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
@@ -488,7 +489,7 @@ public class Upkeep extends Phase {
                                 }
 
                                 @Override
-                                public void selectCard(final Card selected, final PlayerZone zone) {
+                                public void selectCard(final Card selected) {
                                     // probably need to restrict by controller
                                     // also
                                     if (targets.contains(selected)) {
@@ -2185,7 +2186,8 @@ public class Upkeep extends Phase {
                                 }
 
                                 @Override
-                                public void selectCard(final Card card, final PlayerZone zone) {
+                                public void selectCard(final Card card) {
+                                    Zone zone = Singletons.getModel().getGame().getZoneOf(card);
                                     if (zone.is(ZoneType.Battlefield, player) && list.contains(card)) {
                                         card.tap();
                                         list.remove(card);

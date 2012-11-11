@@ -28,6 +28,7 @@ import forge.Singletons;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
@@ -93,12 +94,13 @@ public class InputAttack extends Input {
 
     /** {@inheritDoc} */
     @Override
-    public final void selectCard(final Card card, final PlayerZone zone) {
+    public final void selectCard(final Card card) {
         if (card.isAttacking() || card.getController().isComputer()) {
             return;
         }
 
         final Player human = Singletons.getControl().getPlayer();
+        Zone zone = Singletons.getModel().getGame().getZoneOf(card);
         if (zone.is(ZoneType.Battlefield, human)
                 && CombatUtil.canAttack(card, Singletons.getModel().getGame().getCombat())) {
 

@@ -20,7 +20,7 @@ package forge.control.input;
 import forge.Card;
 import forge.Singletons;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
@@ -66,7 +66,8 @@ public class InputCleanup extends Input {
 
     /** {@inheritDoc} */
     @Override
-    public final void selectCard(final Card card, final PlayerZone zone) {
+    public final void selectCard(final Card card) {
+        Zone zone = Singletons.getModel().getGame().getZoneOf(card);
         if (zone.is(ZoneType.Hand, Singletons.getControl().getPlayer())) {
             card.getController().discard(card, null);
             if (Singletons.getModel().getGame().getStack().size() == 0) {

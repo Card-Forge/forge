@@ -37,7 +37,7 @@ import forge.card.spellability.Target;
 import forge.control.input.Input;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
 
@@ -300,7 +300,8 @@ class CardFactoryLands {
                         }
 
                         @Override
-                        public void selectCard(final Card c, final PlayerZone zone) {
+                        public void selectCard(final Card c) {
+                            Zone zone = Singletons.getModel().getGame().getZoneOf(c);
                             if (zone.is(ZoneType.Hand) && c.isType(type)) {
                                 final StringBuilder sb = new StringBuilder();
                                 sb.append("Revealed card: ").append(c.getName());

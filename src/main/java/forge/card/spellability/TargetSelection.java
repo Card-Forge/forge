@@ -30,7 +30,6 @@ import forge.CardLists;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.control.input.Input;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
@@ -389,7 +388,7 @@ public class TargetSelection {
             }
 
             @Override
-            public void selectCard(final Card card, final PlayerZone zone) {
+            public void selectCard(final Card card) {
                 // leave this in temporarily, there some seriously wrong things
                 // going on here
                 if (targeted && !card.canBeTargetedBy(sa)) {

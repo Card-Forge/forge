@@ -34,7 +34,6 @@ import forge.card.spellability.SpellAbilityStackInstance;
 import forge.control.input.Input;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
@@ -546,7 +545,7 @@ public class CostExile extends CostPartWithList {
             }
 
             @Override
-            public void selectCard(final Card card, final PlayerZone zone) {
+            public void selectCard(final Card card) {
                 if (this.typeList.contains(card)) {
                     this.nExiles++;
                     part.addToList(card);

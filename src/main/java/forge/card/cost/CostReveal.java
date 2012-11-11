@@ -29,7 +29,7 @@ import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
@@ -287,7 +287,8 @@ public class CostReveal extends CostPartWithList {
             }
 
             @Override
-            public void selectCard(final Card card, final PlayerZone zone) {
+            public void selectCard(final Card card) {
+                Zone zone = Singletons.getModel().getGame().getZoneOf(card);
                 if (zone.is(ZoneType.Hand) && handList.contains(card)) {
                     // send in List<Card> for Typing
                     handList.remove(card);

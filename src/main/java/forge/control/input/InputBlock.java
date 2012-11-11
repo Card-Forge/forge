@@ -26,7 +26,7 @@ import forge.Card;
 import forge.Singletons;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
@@ -107,7 +107,7 @@ public class InputBlock extends Input {
 
     /** {@inheritDoc} */
     @Override
-    public final void selectCard(final Card card, final PlayerZone zone) {
+    public final void selectCard(final Card card) {
         // is attacking?
         boolean reminder = true;
         
@@ -115,6 +115,7 @@ public class InputBlock extends Input {
             this.currentAttacker = card;
             reminder = false;
         } else {
+            Zone zone = Singletons.getModel().getGame().getZoneOf(card);
             // Make sure this card is valid to even be a blocker
             if (this.currentAttacker != null && card.isCreature() && card.getController().equals(defender) 
                     && zone.is(ZoneType.Battlefield, defender)) {

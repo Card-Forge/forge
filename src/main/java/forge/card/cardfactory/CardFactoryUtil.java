@@ -74,6 +74,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
@@ -765,7 +766,7 @@ public class CardFactoryUtil {
             }
 
             @Override
-            public void selectCard(final Card card, final PlayerZone zone) {
+            public void selectCard(final Card card) {
                 if (choices.contains(card)) {
                     Singletons.getModel().getGame().getAction().destroyNoRegeneration(card);
                     this.stop();
@@ -1262,7 +1263,7 @@ public class CardFactoryUtil {
             }
 
             @Override
-            public void selectCard(final Card card, final PlayerZone zone) {
+            public void selectCard(final Card card) {
                 if (targeted && !card.canBeTargetedBy(spell)) {
                     CMatchUI.SINGLETON_INSTANCE.showMessage("Cannot target this card (Shroud? Protection?).");
                 } else if (choices.contains(card)) {
@@ -1319,7 +1320,7 @@ public class CardFactoryUtil {
             }
 
             @Override
-            public void selectCard(final Card card, final PlayerZone zone) {
+            public void selectCard(final Card card) {
                 if (choices.contains(card)) {
                     if (card == spell.getSourceCard()) {
                         Singletons.getModel().getGame().getAction().sacrifice(spell.getSourceCard(), null);
@@ -1374,7 +1375,7 @@ public class CardFactoryUtil {
             }
 
             @Override
-            public void selectCard(final Card card, final PlayerZone zone) {
+            public void selectCard(final Card card) {
                 if (choices.size() == 0) {
                     this.stop();
                 }
@@ -1416,7 +1417,8 @@ public class CardFactoryUtil {
             }
 
             @Override
-            public void selectCard(final Card card2, final PlayerZone zone) {
+            public void selectCard(final Card card2) {
+                Zone zone = Singletons.getModel().getGame().getZoneOf(card2);
                 if (card2.isCreature() && card2.isArtifact() && zone.is(ZoneType.Battlefield)
                         && card.canBeTargetedBy(ability)) {
                     ability.setTargetCard(card2);
@@ -2995,7 +2997,8 @@ public class CardFactoryUtil {
             }
 
             @Override
-            public void selectCard(final Card card, final PlayerZone zone) {
+            public void selectCard(final Card card) {
+                Zone zone = Singletons.getModel().getGame().getZoneOf(card);
                 if (card.isType(type) && zone.is(ZoneType.Battlefield)) {
                     card.untap();
                     this.count++;
@@ -4017,7 +4020,8 @@ public class CardFactoryUtil {
                 }
 
                 @Override
-                public void selectCard(final Card c, final PlayerZone zone) {
+                public void selectCard(final Card c) {
+                    Zone zone = Singletons.getModel().getGame().getZoneOf(c);
                     if (!zone.is(ZoneType.Battlefield) || !c.isCreature()) {
                         return;
                     }

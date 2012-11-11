@@ -31,7 +31,6 @@ import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
@@ -246,7 +245,7 @@ public class CostReturn extends CostPartWithList {
             }
 
             @Override
-            public void selectCard(final Card card, final PlayerZone zone) {
+            public void selectCard(final Card card) {
                 if (this.typeList.contains(card)) {
                     this.nReturns++;
                     part.addToList(card);

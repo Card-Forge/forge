@@ -18,7 +18,7 @@ import forge.card.trigger.TriggerHandler;
 import forge.control.input.Input;
 import forge.game.GameLossReason;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
@@ -258,7 +258,8 @@ class CardFactoryEnchantments {
                                 }
 
                                 @Override
-                                public void selectCard(final Card card, final PlayerZone zone) {
+                                public void selectCard(final Card card) {
+                                    Zone zone = Singletons.getModel().getGame().getZoneOf(card);
                                     if (zone.is(ZoneType.Hand) && card.getDrawnThisTurn()) {
                                         if (player.canPayLife(4) && GameActionUtil.showYesNoDialog(card, cardQuestion)) {
                                             player.payLife(4, card);

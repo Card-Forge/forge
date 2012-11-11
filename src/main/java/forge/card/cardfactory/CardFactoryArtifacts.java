@@ -19,6 +19,7 @@ import forge.control.input.Input;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
@@ -387,8 +388,9 @@ class CardFactoryArtifacts {
                             }
 
                             @Override
-                            public void selectCard(final Card c, final PlayerZone zone) {
-                                if (zone.is(ZoneType.Hand, card.getController()) && !this.exiled.contains(c)) {
+                            public void selectCard(final Card c) {
+                                Zone zone = Singletons.getModel().getGame().getZoneOf(c);
+                                if (zone.is(ZoneType.Hand) && c.getController() == card.getController() && !this.exiled.contains(c)) {
                                     this.exiled.add(c);
                                     this.showMessage();
                                 }

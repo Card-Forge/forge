@@ -51,6 +51,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.player.PlayerUtil;
 import forge.game.zone.PlayerZone;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
@@ -355,7 +356,8 @@ public class CardFactorySorceries {
             }
 
             @Override
-            public void selectCard(final Card c, final PlayerZone zone) {
+            public void selectCard(final Card c) {
+                Zone zone = Singletons.getModel().getGame().getZoneOf(c);
                 if (c.isLand() && zone.is(ZoneType.Battlefield) && c.getController().isHuman()
                 /* && c.getName().equals(humanBasic.get(count)) */
                 && c.isType(humanBasic.get(this.count))
@@ -993,7 +995,8 @@ public class CardFactorySorceries {
             }
 
             @Override
-            public void selectCard(final Card c, final PlayerZone zone) {
+            public void selectCard(final Card c) {
+                Zone zone = Singletons.getModel().getGame().getZoneOf(c);
                 if (c.isCreature() && zone.is(ZoneType.Battlefield) && c.canBeTargetedBy(spell)
                         && !ab3cards.contains(c)) {
                     ab3cards.add(c);
@@ -1030,7 +1033,8 @@ public class CardFactorySorceries {
             }
 
             @Override
-            public void selectCard(final Card c, final PlayerZone zone) {
+            public void selectCard(final Card c) {
+                Zone zone = Singletons.getModel().getGame().getZoneOf(c);
                 if (c.isCreature() && zone.is(ZoneType.Battlefield) && c.canBeTargetedBy(spell)) {
                     ab2card[0] = c;
                     setStackDescription.execute();

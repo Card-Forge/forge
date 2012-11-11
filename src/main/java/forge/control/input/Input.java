@@ -20,7 +20,6 @@ package forge.control.input;
 import forge.Card;
 import forge.Singletons;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
 import forge.gui.match.CMatchUI;
 
 /**
@@ -52,10 +51,8 @@ public abstract class Input implements java.io.Serializable {
      * 
      * @param c
      *            a {@link forge.Card} object.
-     * @param zone
-     *            a {@link forge.game.zone.PlayerZone} object.
      */
-    public void selectCard(final Card c, final PlayerZone zone) {
+    public void selectCard(final Card c) {
     }
 
     /**
@@ -125,7 +122,6 @@ public abstract class Input implements java.io.Serializable {
      * This method is used to mark old descendants of Input
      * TODO: Write javadoc for this method.
      */
-    public /* abstract */ void isClassUpdated() {}  
-
+    public /* abstract */void isClassUpdated(){} //;
 
 }

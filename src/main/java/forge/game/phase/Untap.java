@@ -33,7 +33,7 @@ import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.control.input.Input;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
 
@@ -218,7 +218,8 @@ public class Untap extends Phase {
                     }
 
                     @Override
-                    public void selectCard(final Card c, final PlayerZone zone) {
+                    public void selectCard(final Card c) {
+                        Zone zone = Singletons.getModel().getGame().getZoneOf(c);
                         if (c.isLand() && zone.is(ZoneType.Battlefield) && c.isTapped() && Untap.canUntap(c)) {
                             c.untap();
                             this.stop();
@@ -257,7 +258,8 @@ public class Untap extends Phase {
                     }
 
                     @Override
-                    public void selectCard(final Card c, final PlayerZone zone) {
+                    public void selectCard(final Card c) {
+                        Zone zone = Singletons.getModel().getGame().getZoneOf(c);
                         if (c.isArtifact() && zone.is(ZoneType.Battlefield) && c.getController().isHuman()
                                 && Untap.canUntap(c)) {
                             c.untap();
@@ -296,7 +298,8 @@ public class Untap extends Phase {
                     }
 
                     @Override
-                    public void selectCard(final Card c, final PlayerZone zone) {
+                    public void selectCard(final Card c) {
+                        Zone zone = Singletons.getModel().getGame().getZoneOf(c);
                         if (c.isCreature() && zone.is(ZoneType.Battlefield) && c.getController().isHuman()
                                 && Untap.canUntap(c)) {
                             c.untap();

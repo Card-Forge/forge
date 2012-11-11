@@ -116,7 +116,7 @@ public class PlayerZone extends Zone {
     public final boolean is(final ZoneType zone, final Player player) {
         return (zone == this.zoneName && this.player.equals(player));
     }
-
+    
     /**
      * <p>
      * Getter for the field <code>player</code>.

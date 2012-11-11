@@ -27,7 +27,7 @@ import forge.CardLists;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
-import forge.game.zone.PlayerZone;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
 
@@ -107,7 +107,8 @@ public final class PlayerUtil {
             }
 
             @Override
-            public void selectCard(final Card card, final PlayerZone zone) {
+            public void selectCard(final Card card) {
+                Zone zone = Singletons.getModel().getGame().getZoneOf(card);
                 if (zone.is(ZoneType.Hand)) {
                     card.getController().discard(card, sp);
                     this.n++;
@@ -161,7 +162,8 @@ public final class PlayerUtil {
             }
 
             @Override
-            public void selectCard(final Card card, final PlayerZone zone) {
+            public void selectCard(final Card card) {
+                Zone zone = Singletons.getModel().getGame().getZoneOf(card);
                 if (zone.is(ZoneType.Hand)) {
                     card.getController().discard(card, sp);
                     this.n++;
@@ -200,7 +202,8 @@ public final class PlayerUtil {
             }
 
             @Override
-            public void selectCard(final Card card, final PlayerZone zone) {
+            public void selectCard(final Card card) {
+                Zone zone = Singletons.getModel().getGame().getZoneOf(card);
                 if (zone.is(ZoneType.Hand)) {
                     card.getController().discard(card, null);
                     this.done();
@@ -298,7 +301,8 @@ public final class PlayerUtil {
             }
 
             @Override
-            public void selectCard(final Card card, final PlayerZone zone) {
+            public void selectCard(final Card card) {
+                Zone zone = Singletons.getModel().getGame().getZoneOf(card);
                 if (zone.equals(Singletons.getControl().getPlayer().getZone(ZoneType.Battlefield)) && list.contains(card)) {
                     Singletons.getModel().getGame().getAction().sacrifice(card, null);
                     this.n++;

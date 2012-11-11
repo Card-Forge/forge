@@ -112,7 +112,7 @@ public class GuiInput extends MyObservable implements Observer {
      *            a {@link forge.game.zone.PlayerZone} object.
      */
     public final void selectCard(final Card card, final PlayerZone zone) {
-        this.getInput().selectCard(card, zone);
+        this.getInput().selectCard(card);
     }
 
     /** {@inheritDoc} */
