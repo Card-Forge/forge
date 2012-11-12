@@ -70,7 +70,7 @@ public class ControlGainAi extends SpellAiLogic {
 
         final List<String> lose = sa.hasParam("LoseControl") ? Arrays.asList(sa.getParam("LoseControl").split(",")) : null;
 
-        
+
         final Target tgt = sa.getTarget();
         Player opp = ai.getOpponent();
 
@@ -87,7 +87,7 @@ public class ControlGainAi extends SpellAiLogic {
             }
         }
 
-        List<Card> list = 
+        List<Card> list =
                 CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
         // AI won't try to grab cards that are filtered out of AI decks on
         // purpose
@@ -185,7 +185,7 @@ public class ControlGainAi extends SpellAiLogic {
                     return false;
                 }
             }
-            
+
             final List<String> lose = sa.hasParam("LoseControl") ? Arrays.asList(sa.getParam("LoseControl").split(",")) : null;
             if ((lose != null) && lose.contains("EOT")
                     && Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)) {
