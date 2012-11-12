@@ -25,7 +25,7 @@ public class DamagePreventAi extends SpellAiLogic {
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return true;
     }
-    
+
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
