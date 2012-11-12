@@ -71,6 +71,7 @@ public class ForgePreferences {
         UI_SKIN ("default"), /** */
         UI_PREFERRED_AVATARS_ONLY ("false"), /** */
         UI_TARGETING_OVERLAY ("false"), /** */
+        UI_ENABLE_SOUNDS ("false"), /** */
 
         SUBMENU_CURRENTMENU (EMenuItem.CONSTRUCTED.toString()), /** */
         SUBMENU_SANCTIONED ("false"), /** */

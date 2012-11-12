@@ -83,7 +83,8 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbTextMana = new OptionsCheckBox("Text / Mana Overlay");
     private final JCheckBox cbScaleLarger = new OptionsCheckBox("Scale Image Larger");
     private final JCheckBox cbRandomFoil = new OptionsCheckBox("Random Foil");
-
+    private final JCheckBox cbEnableSounds = new OptionsCheckBox("Enable Sounds");
+    
     /**
      * Constructor.
      */
@@ -141,6 +142,12 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
         pnlPrefs.add(cbTextMana, regularConstraints);
         pnlPrefs.add(new NoteLabel("Overlays each card with basic card-specific information."), regularConstraints);
 
+        // Sound options
+        pnlPrefs.add(new SectionLabel("Sound Options"), sectionConstraints);
+
+        pnlPrefs.add(cbEnableSounds, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Enable sound effects during the game."), regularConstraints);
+        
         // Keyboard shortcuts
         final JLabel lblShortcuts = new SectionLabel("Keyboard Shortcuts");
         pnlPrefs.add(lblShortcuts, sectionConstraints);
@@ -394,6 +401,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbDevMode() {
         return cbDevMode;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbEnableSounds() {
+        return cbEnableSounds;
     }
 
     /** @return {@link forge.gui.toolbox.FLabel} */

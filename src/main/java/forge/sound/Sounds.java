@@ -31,7 +31,9 @@ package forge.sound;
  * @author Agetian
  */
 public enum Sounds {
-    Tap("res/sound/tap.wav");
+    LoseDuel("res/sound/lose_duel.wav"),
+    Tap("res/sound/tap.wav"),
+    WinDuel("res/sound/win_duel.wav");
 
     SoundSystem snd = null;
     
