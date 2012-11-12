@@ -2322,22 +2322,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 sbLong.append(keywords.get(i).toString()).append("\r\n");
             } else if (keyword.toString().contains("tap: add ")) {
                 sbMana.append(keywords.get(i).toString()).append("\r\n");
-            } else if (keyword.contains("Bloodthirst")) {
-                final String k = keywords.get(i);
-                final String[] kk = k.split(" ");
-                sbLong.append(keywords.get(i)).append(
-                        " (If an opponent was dealt damage this turn, this creature enters the battlefield with ");
-                sbLong.append(kk[1]).append(" +1/+1 counter");
-                if (kk[1].equals("X")) {
-                    sbLong.append("s on it, where X is the damage dealt to your opponents this turn.)");
-                    sbLong.append("\r\n");
-                } else {
-                    if (Integer.parseInt(kk[1]) > 1) {
-                        sbLong.append("s");
-                    }
-                    sbLong.append(" on it.)").append("\r\n");
-                }
-            } else if (keyword.startsWith("Modular") || keyword.startsWith("Soulshift")
+            } else if (keyword.startsWith("Modular") || keyword.startsWith("Soulshift") || keyword.startsWith("Bloodthirst")
                     || keyword.startsWith("ETBReplacement") || keyword.startsWith("MayEffectFromOpeningHand")) {
                 continue;
             } else if (keyword.startsWith("Provoke")) {

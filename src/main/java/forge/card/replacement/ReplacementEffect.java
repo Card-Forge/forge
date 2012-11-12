@@ -198,6 +198,12 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             }
         }
 
+        if (this.getMapParams().containsKey("Bloodthirst")) {
+            if (this.getMapParams().get("Bloodthirst").equals("True") && !this.getHostCard().getController().hasBloodthirst()) {
+                return false;
+            }
+        }
+
         if (this.getMapParams().containsKey("PlayersPoisoned")) {
             if (this.getMapParams().get("PlayersPoisoned").equals("You")
                     && (this.getHostCard().getController().getPoisonCounters() == 0)) {

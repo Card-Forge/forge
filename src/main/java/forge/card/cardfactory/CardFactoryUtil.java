@@ -2108,6 +2108,10 @@ public class CardFactoryUtil {
             return CardFactoryUtil.doXMath(c.getDamageDoneThisTurn(), m, c);
         }
 
+        if (sq[0].equals("BloodthirstAmount")) {
+            return CardFactoryUtil.doXMath(c.getController().getBloodthirstAmount(), m, c);
+        }
+
         if (sq[0].contains("RegeneratedThisTurn")) {
             return CardFactoryUtil.doXMath(c.getRegeneratedThisTurn(), m, c);
         }
@@ -2203,7 +2207,11 @@ public class CardFactoryUtil {
         }
 
         if (sq[0].contains("LifeOppLostThisTurn")) {
-            return CardFactoryUtil.doXMath(cardController.getOpponent().getLifeLostThisTurn(), m, c);
+            int lost = 0;
+            for (Player opp : cardController.getOpponents()) {
+                lost += opp.getLifeLostThisTurn();
+            }
+            return CardFactoryUtil.doXMath(lost, m, c);
         }
 
         if (sq[0].equals("TotalDamageDoneByThisTurn")) {
@@ -4668,24 +4676,17 @@ public class CardFactoryUtil {
         final int bloodthirst = CardFactoryUtil.hasKeyword(card, "Bloodthirst");
         if (bloodthirst != -1) {
             final String numCounters = card.getKeyword().get(bloodthirst).split(" ")[1];
-
-            card.addComesIntoPlayCommand(new Command() {
-                private static final long serialVersionUID = -1849308549161972508L;
-
-                @Override
-                public void execute() {
-                    if (card.getController().hasBloodthirst()) {
-                        int toAdd = -1;
-                        if (numCounters.equals("X")) {
-                            toAdd = card.getController().getBloodthirstAmount();
-                        } else {
-                            toAdd = Integer.parseInt(numCounters);
-                        }
-                        card.addCounter(Counters.P1P1, toAdd);
-                    }
-                }
-
-            });
+            String desc = "Bloodthirst "
+                    + numCounters + " (If an opponent was dealt damage this turn, this creature enters the battlefield with "
+                    + numCounters + " +1/+1 counters on it.)";
+            if (numCounters.equals("X")) {
+                desc = "Bloodthirst X (This creature enters the battlefield with X +1/+1 counters on it, " +
+                		"where X is the damage dealt to your opponents this turn.)";
+                card.setSVar("X", "Count$BloodthirstAmount");
+            }
+            card.setSVar("X", "Count$BloodthirstAmount");
+            
+            card.addIntrinsicKeyword("etbCounter:P1P1:" + numCounters + ":Bloodthirst$ True:" + desc);
         } // bloodthirst
 
         final int storm = card.getKeywordAmount("Storm");
