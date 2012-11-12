@@ -50,7 +50,7 @@ public class InputCleanup extends Input {
         final int n = active.getCardsIn(ZoneType.Hand).size();
         final int max = active.getMaxHandSize();
         // goes to the next phase
-        if (n <= max || max < 0) {
+        if (n <= max || max == -1) {
             Singletons.getModel().getGame().getPhaseHandler().passPriority();
             return;
         }
