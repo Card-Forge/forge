@@ -99,7 +99,6 @@ public enum TargetingOverlay {
         // Locations of arc endpoint, per card, with ID as primary key.
         final Map<Integer, Point> endpoints = new HashMap<Integer, Point>();
 
-        // Assemble card locations for easy reference
         for (CardPanel c : cardPanels) {
             if (!c.isShowing()) { continue; }
             endpoints.put(c.getCard().getUniqueNumber(), new Point(
@@ -115,13 +114,11 @@ public enum TargetingOverlay {
             if (!c.isShowing()) { continue; }
 
             // Enchantments
-            // Doesn't work for global enchantments?! Doublestrike 10-10-12
-            temp = c.getCard().getEnchantedBy();
-
-            for (Card enchantingCard : temp) {
+            Card enchanting = c.getCard().getEnchantingCard();
+            if (enchanting != null) {
                 arcs.add(new Point[] {
-                    endpoints.get(c.getCard().getUniqueNumber()),
-                    endpoints.get(enchantingCard.getUniqueNumber())
+                    endpoints.get(enchanting.getUniqueNumber()),
+                    endpoints.get(c.getCard().getUniqueNumber())
                 });
             }
         }
