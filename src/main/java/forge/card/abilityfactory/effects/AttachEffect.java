@@ -277,6 +277,9 @@ public class AttachEffect extends SpellEffect {
             } else {
                 List<Card> list = Singletons.getModel().getGame().getCardsIn(tgt.getZone());
                 list = CardLists.getValidCards(list, tgt.getValidTgts(), aura.getActivatingPlayer(), source);
+                if (list.isEmpty()) {
+                    return false;
+                }
 
                 final Object o = GuiChoose.one(source + " - Select a card to attach to.", list);
                 if (o instanceof Card) {
