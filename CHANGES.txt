@@ -326,6 +326,45 @@ Fixes/Features:
 - Fixed "Damage can't be prevented." on Everlasting Torment.
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- slowtrip - remove duplication
+- Removed some unnecessary parameters from the chooseSource scripts.
+- Initial implementation of the sound system for Forge. Supports non-blocking, "preload once, play anytime" sound playback with no memory penalty for playing sounds multiple times. Supports WAV and AU file formats, uses only standard JDK libraries and, as such, fully cross-platform.
+- CheckStyle.
+- Some CheckStyle corrections related to the use of "final".
+- Added a method to loop the sound to the Sounds enumeration.
+- Cleanup.
+- Attempt to remedy the "sound skipping" issue with the sound system.
+- Input: Added an abstract marker method to trace all annonymous descendants, 
+- PayManaCostX moved to separate file
+- added Action class - it's like Command but has parameters.
+- Some more changes to the sound system.
+- removed duplicate code in CField
+- Fixed Kaervek's Torch Rarity SVar
+- Angel's Trumpet is now more generic, and should be compatible with Multiplayer
+- Removed zone parameter from selectCard in all Inputs
+- More work on the sound system.
+- More work on the sound system (cleaning imports).
+- More work on the sound system (magic numbers, CheckStyle).
+- Adding "UseImprinted" Param to RepeatEach for use with SAs that do something else with Remembered Cards.
+- InputSelectManyCards - a common class for all those inlined target-choosing inputs
+- a fix for Phantasmal Terrain and Convincing Mirage
+- Added missing removeImprinted function.
+- Fix an NPE with arcs if the battlefield isn't displayed when trying to draw
+- Added Auto and Reset buttons to VAssignDamage
+- The AI will now use CoP's to protect itself from damage dealing spells.
+- Removed "SVar:RemAIDeck:True" from some of the ChooseSource cards.
+- Improved ChooseSource AI handling spells.
+- Input: using InputSelectMany as core for custom targeting inputs
+- Sound: rem warning
+- Converted Blade of the Bloodchief to Script
+- CheckStyle.
+- Sound system: added an option to toggle the sound effects on/off in the game (currently not linked to any code).
+- Fixed possibility of getting stuck in attachAuraOnIndirectEnterBattlefield.
+- Fixed DelayedTriggerAi not setting an activating player.
+- Quick fix for negative handsizes other than -1, which is used for no maximum (needs a non-hacky solution).
+- Small tweaks to General's Regalia
+- Reverted GameFormatQuest to fix numerous problems caused by r17875 which totally broke GameFormatQuest. The whole reason for having a separate class for GameFormatQuest and why it was not inheriting GameFormat in the first place was that, unlike with the regular GameFormat class, its lists MUST NOT be immutable or it WILL NOT WORK.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -386,6 +425,18 @@ Righteous Aura
 Story Circle
 Bone Mask
 Everlasting Torment
+Kaervek's Torch
+Auriok Replica
+Burrenton Forge-Tender
+Shaman en-Kor
+Haazda Shield Mate
+Reverse Damage
+Seasoned Tactician
+General's Regalia
+Jade Monolith
+Oracle's Attendants
+Booby Trap
+Dracoplasm
 
 
 end
