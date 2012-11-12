@@ -1,0 +1,18 @@
+Name:Dracoplasm
+ManaCost:U R
+Types:Creature Shapeshifter
+Text:no text
+PT:0/0
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSac | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, sacrifice any number of creatures. CARDNAME's power becomes the total power of those creatures and its toughness becomes their total toughness.
+SVar:TrigSac:DB$ Sacrifice | Amount$ SacX | References$ SacX | SacValid$ Creature | Defined$ You | RememberSacrificed$ True | Optional$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Power$ DracoPwr | Toughness$ DracoTgn | References$ DracoPwr,DracoTgn | Permanent$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:SacX:Count$Valid Creature.YouCtrl
+SVar:DracoPwr:RememberedLKI$CardPower
+SVar:DracoTgn:RememberedLKI$CardToughness
+A:AB$ Pump | Cost$ R | NumAtt$ 1 | SpellDescription$ CARDNAME gets +1/+0 until end of turn.
+SVar:Rarity:Rare
+SetInfo:TMP|Rare|http://magiccards.info/scans/en/tp/341.jpg
+Oracle:Flying\nAs Dracoplasm enters the battlefield, sacrifice any number of creatures. Dracoplasm's power becomes the total power of those creatures and its toughness becomes their total toughness.\n{R}: Dracoplasm gets +1/+0 until end of turn.
+End
