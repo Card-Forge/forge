@@ -27,7 +27,7 @@ public class DamageDealAi extends DamageAiBase {
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa); 
+        int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
 
         final Card source = sa.getSourceCard();
 
@@ -35,8 +35,8 @@ public class DamageDealAi extends DamageAiBase {
             // Set PayX here to maximum value.
             dmg = ComputerUtil.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(dmg));
-        } 
-        if(!this.damageTargetAI(ai, sa, dmg)) {
+        }
+        if (!this.damageTargetAI(ai, sa, dmg)) {
             return false;
         }
         return true;
@@ -47,15 +47,15 @@ public class DamageDealAi extends DamageAiBase {
 
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
-        
+
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa); 
+        int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             dmg = ComputerUtil.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(dmg));
-        } 
+        }
 
         if (dmg <= 0) {
             return false;
@@ -226,8 +226,8 @@ public class DamageDealAi extends DamageAiBase {
 
         // target loop
         tgt.resetTargets();
-        Player enemy = ai.getOpponent(); 
-        
+        Player enemy = ai.getOpponent();
+
         while (tgt.getNumTargeted() < tgt.getMaxTargets(saMe.getSourceCard(), saMe)) {
 
             if (tgt.canTgtCreatureAndPlayer()) {
@@ -378,16 +378,16 @@ public class DamageDealAi extends DamageAiBase {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        
+
         final Card source = sa.getSourceCard();
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa); 
+        int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             dmg = ComputerUtil.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(dmg));
-        } 
+        }
 
         final Target tgt = sa.getTarget();
         if (tgt == null) {
