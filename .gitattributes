@@ -1614,6 +1614,7 @@ res/cardsfolder/c/chimeric_sphere.txt -text
 res/cardsfolder/c/chimeric_staff.txt svneol=native#text/plain
 res/cardsfolder/c/chimney_imp.txt svneol=native#text/plain
 res/cardsfolder/c/chittering_rats.txt svneol=native#text/plain
+res/cardsfolder/c/cho_arrim_alchemist.txt -text
 res/cardsfolder/c/cho_arrim_bruiser.txt svneol=native#text/plain
 res/cardsfolder/c/cho_arrim_legate.txt -text
 res/cardsfolder/c/cho_manno_revolutionary.txt svneol=native#text/plain
@@ -4947,6 +4948,7 @@ res/cardsfolder/i/inviolability.txt svneol=native#text/plain
 res/cardsfolder/i/invisibility.txt svneol=native#text/plain
 res/cardsfolder/i/invisible_stalker.txt -text
 res/cardsfolder/i/invoke_the_firemind.txt svneol=native#text/plain
+res/cardsfolder/i/invulnerability.txt -text
 res/cardsfolder/i/iona_shield_of_emeria.txt svneol=native#text/plain
 res/cardsfolder/i/ionas_judgment.txt svneol=native#text/plain
 res/cardsfolder/i/ior_ruin_expedition.txt svneol=native#text/plain
