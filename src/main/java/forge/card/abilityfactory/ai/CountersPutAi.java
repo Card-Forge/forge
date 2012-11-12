@@ -23,7 +23,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-public class CountersPutAi extends SpellAiLogic { 
+public class CountersPutAi extends SpellAiLogic {
     @Override
     protected boolean canPlayAI(Player ai, final SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
@@ -37,7 +37,7 @@ public class CountersPutAi extends SpellAiLogic {
         Card choice = null;
         final String type = sa.getParam("CounterType");
         final String amountStr = sa.getParam("CounterNum");
-        
+
         final Player player = sa.isCurse() ? ai.getOpponent() : ai;
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
@@ -177,7 +177,7 @@ public class CountersPutAi extends SpellAiLogic {
         final Player player = sa.isCurse() ? ai.getOpponent() : ai;
 
         if (abTgt != null) {
-            List<Card> list = 
+            List<Card> list =
                     CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), abTgt.getValidTgts(), source.getController(), source);
 
             if (list.size() == 0) {
