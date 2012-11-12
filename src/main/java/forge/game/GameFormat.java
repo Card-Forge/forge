@@ -20,10 +20,10 @@ package forge.game;
 import java.util.Collections;
 import java.util.List;
 
-import com.beust.jcommander.internal.Lists;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Lists;
 
 import forge.card.CardRulesPredicates;
 import forge.item.CardPrinted;
