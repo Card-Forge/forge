@@ -40,7 +40,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.util.MyRandom;
 
-public class ChangeZoneAi extends SpellAiLogic { 
+public class ChangeZoneAi extends SpellAiLogic {
 
     /**
      * <p>
@@ -127,9 +127,7 @@ public class ChangeZoneAi extends SpellAiLogic {
         return false;
     }
 
-    
 
-    
 
     // *************************************************************************************
     // ************ Hidden Origin (Library/Hand/Sideboard/Non-targetd other)
@@ -160,7 +158,7 @@ public class ChangeZoneAi extends SpellAiLogic {
         final Card source = sa.getSourceCard();
         ZoneType origin = null;
         final Player opponent = ai.getOpponent();
-        
+
         if (sa.hasParam("Origin")) {
             origin = ZoneType.smartValueOf(sa.getParam("Origin"));
         }
@@ -188,7 +186,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                     }
                 }
             }
-            
+
             //Ninjutsu
             if (sa.hasParam("Ninjutsu")) {
                 if (source.isType("Legendary") && !Singletons.getModel().getGame().isCardInPlay("Mirror Gallery")) {
@@ -412,7 +410,7 @@ public class ChangeZoneAi extends SpellAiLogic {
      * <p>
      * basicManaFixing.
      * </p>
-     * @param ai 
+     * @param ai
      * 
      * @param list
      *            a {@link forge.CardList} object.
@@ -465,9 +463,10 @@ public class ChangeZoneAi extends SpellAiLogic {
      * @return a boolean.
      */
     private static boolean areAllBasics(final String types) {
-        for(String ct : types.split(",")) {
-            if (!Constant.Color.BASIC_LANDS.contains(ct))
+        for (String ct : types.split(",")) {
+            if (!Constant.Color.BASIC_LANDS.contains(ct)) {
                 return false;
+            }
         }
         return true;
     }
@@ -704,7 +703,7 @@ public class ChangeZoneAi extends SpellAiLogic {
             });
 
             // if it's blink or bounce, try to save my about to die stuff
-            if ((destination.equals(ZoneType.Hand) || (destination.equals(ZoneType.Exile) 
+            if ((destination.equals(ZoneType.Hand) || (destination.equals(ZoneType.Exile)
                     && (subAPI == ApiType.DelayedTrigger || (subAPI == ApiType.ChangeZone && subAffected.equals("Remembered")))))
                     && (tgt.getMinTargets(sa.getSourceCard(), sa) <= 1)) {
 
@@ -1049,7 +1048,7 @@ public class ChangeZoneAi extends SpellAiLogic {
         final Target tgt = sa.getTarget();
         final Card card = sa.getSourceCard();
         final boolean defined = sa.hasParam("Defined");
-    
+
         if (tgt != null) {
             if (!tgt.getTargetPlayers().isEmpty()) {
                 player = tgt.getTargetPlayers().get(0);
@@ -1058,20 +1057,20 @@ public class ChangeZoneAi extends SpellAiLogic {
                 }
             }
         }
-    
+
         List<ZoneType> origin = new ArrayList<ZoneType>();
         if (sa.hasParam("Origin")) {
             origin = ZoneType.listValueOf(sa.getParam("Origin"));
         }
-    
+
         String type = sa.getParam("ChangeType");
         if (type == null) {
             type = "Card";
         }
-    
+
         int changeNum = sa.hasParam("ChangeNum") ? AbilityFactory.calculateAmount(card, sa.getParam("ChangeNum"),
                 sa) : 1;
-    
+
         List<Card> fetchList;
         if (defined) {
             fetchList = new ArrayList<Card>(AbilityFactory.getDefinedCards(card, sa.getParam("Defined"), sa));
@@ -1086,17 +1085,17 @@ public class ChangeZoneAi extends SpellAiLogic {
             fetchList = player.getCardsIn(origin);
             fetchList = AbilityFactory.filterListByType(fetchList, type, sa);
         }
-    
+
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final List<Card> fetched = new ArrayList<Card>();
         final String remember = sa.getParam("RememberChanged");
         final String forget = sa.getParam("ForgetChanged");
         final String imprint = sa.getParam("Imprint");
-    
+
         if (sa.hasParam("Unimprint")) {
             card.clearImprinted();
         }
-    
+
         for (int i = 0; i < changeNum; i++) {
             if (sa.hasParam("DifferentNames")) {
                 for (Card c : fetched) {
@@ -1106,7 +1105,7 @@ public class ChangeZoneAi extends SpellAiLogic {
             if ((fetchList.size() == 0) || (destination == null)) {
                 break;
             }
-    
+
             // Improve the AI for fetching.
             Card c = null;
             if (sa.hasParam("AtRandom")) {
@@ -1161,7 +1160,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                     if (origin.contains(ZoneType.Library) && !sameNamed.isEmpty()) {
                         fetchList = sameNamed;
                     }
-    
+
                     // Does AI need a land?
                     List<Card> hand = ai.getCardsIn(ZoneType.Hand);
                     if (CardLists.filter(hand, Presets.LANDS).size() == 0 && CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size() < 4) {
@@ -1202,15 +1201,15 @@ public class ChangeZoneAi extends SpellAiLogic {
                     c = first;
                 }
             }
-    
+
             fetched.add(c);
             fetchList.remove(c);
         }
-    
+
         if (origin.contains(ZoneType.Library) && !defined && !"False".equals(sa.getParam("Shuffle"))) {
             player.shuffle();
         }
-    
+
         for (final Card c : fetched) {
             Card movedCard = null;
             if (ZoneType.Library.equals(destination)) {
@@ -1223,7 +1222,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                 if (sa.hasParam("GainControl")) {
                     c.addController(sa.getSourceCard());
                 }
-    
+
                 if (sa.hasParam("AttachedTo")) {
                     final ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(),
                             sa.getParam("AttachedTo"), sa);
@@ -1240,7 +1239,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                         c.enchantEntity(attachedTo);
                     }
                 }
-    
+
                 if (sa.hasParam("Attacking")) {
                     Singletons.getModel().getGame().getCombat().addAttacker(c);
                 }
@@ -1251,7 +1250,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                         continue;
                     }
                 }
-    
+
                 movedCard = Singletons.getModel().getGame().getAction().moveTo(c.getController().getZone(destination), c);
                 if (sa.hasParam("Tapped")) {
                     movedCard.setTapped(true);
@@ -1264,7 +1263,7 @@ public class ChangeZoneAi extends SpellAiLogic {
             } else {
                 movedCard = Singletons.getModel().getGame().getAction().moveTo(destination, c);
             }
-    
+
             if (remember != null) {
                 card.addRemembered(movedCard);
             }
@@ -1276,12 +1275,12 @@ public class ChangeZoneAi extends SpellAiLogic {
                 card.addImprinted(movedCard);
             }
         }
-        
+
         if ((origin.contains(ZoneType.Library) && !destination.equals(ZoneType.Library) && !defined)
                 || (sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle")))) {
             player.shuffle();
         }
-    
+
         if (!ZoneType.Battlefield.equals(destination) && !"Card".equals(type) && !defined) {
             final String picked = sa.getSourceCard().getName() + " - Computer picked:";
             if (fetched.size() > 0) {
