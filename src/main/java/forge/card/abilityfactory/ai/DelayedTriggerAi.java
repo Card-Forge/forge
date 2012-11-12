@@ -4,14 +4,16 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
+import forge.game.player.Player;
 
 public class DelayedTriggerAi extends SpellAiLogic {
     private static AbilityFactory tempCreator = new AbilityFactory();
     
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, forge.game.player.Player aiPlayer) {
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         final String svarName = sa.getParam("Execute");
         final SpellAbility trigsa = tempCreator.getAbility(sa.getSourceCard().getSVar(svarName), sa.getSourceCard());
+        trigsa.setActivatingPlayer(ai);
 
         if (trigsa instanceof AbilitySub) {
             return ((AbilitySub) trigsa).chkAIDrawback();
@@ -21,9 +23,10 @@ public class DelayedTriggerAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(forge.game.player.Player aiPlayer, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         final String svarName = sa.getParam("Execute");
         final SpellAbility trigsa = tempCreator.getAbility(sa.getSourceCard().getSVar(svarName), sa.getSourceCard());
+        trigsa.setActivatingPlayer(ai);
 
         if (!sa.hasParam("OptionalDecider")) {
             return trigsa.doTrigger(true);
@@ -33,9 +36,10 @@ public class DelayedTriggerAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean canPlayAI(forge.game.player.Player aiPlayer, SpellAbility sa) {
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final String svarName = sa.getParam("Execute");
         final SpellAbility trigsa = tempCreator.getAbility(sa.getSourceCard().getSVar(svarName), sa.getSourceCard());
+        trigsa.setActivatingPlayer(ai);
         return trigsa.canPlayAI();
     }
 
