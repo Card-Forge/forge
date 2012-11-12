@@ -14,11 +14,11 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class CountersProliferateAi extends SpellAiLogic {
-    
+
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         boolean chance = true;
-        
+
         List<Card> cperms = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
             @Override
             public boolean apply(final Card crd) {
@@ -57,8 +57,7 @@ public class CountersProliferateAi extends SpellAiLogic {
         // we want to proliferate
         return chance;
     }
-    
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
