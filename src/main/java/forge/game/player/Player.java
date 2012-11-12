@@ -2286,6 +2286,37 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         final List<Card> list = this.getZone(ZoneType.Battlefield).getCardsAddedThisTurn(null);
         return Iterables.any(list, CardPredicates.Presets.LANDS);
     }
+    
+    /**
+     * <p>
+     * hasBloodthirst.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean hasBloodthirst() {
+        for (Player opp : this.getOpponents()) {
+            if (opp.getAssignedDamage() > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * <p>
+     * getBloodthirstAmount.
+     * </p>
+     * 
+     * @return a int.
+     */
+    public final int getBloodthirstAmount() {
+        int blood = 0;
+        for (Player opp : this.getOpponents()) {
+            blood += opp.getAssignedDamage();
+        }
+        return blood;
+    }
 
     /**
      * <p>

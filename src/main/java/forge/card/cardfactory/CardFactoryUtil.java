@@ -4674,10 +4674,10 @@ public class CardFactoryUtil {
 
                 @Override
                 public void execute() {
-                    if (card.getController().getOpponent().getAssignedDamage() > 0) {
+                    if (card.getController().hasBloodthirst()) {
                         int toAdd = -1;
                         if (numCounters.equals("X")) {
-                            toAdd = card.getController().getOpponent().getAssignedDamage();
+                            toAdd = card.getController().getBloodthirstAmount();
                         } else {
                             toAdd = Integer.parseInt(numCounters);
                         }
