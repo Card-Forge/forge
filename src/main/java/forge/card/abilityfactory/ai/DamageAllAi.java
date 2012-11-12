@@ -21,9 +21,8 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-public class  DamageAllAi extends SpellAiLogic
-{
-    
+public class  DamageAllAi extends SpellAiLogic {
+
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
@@ -35,7 +34,7 @@ public class  DamageAllAi extends SpellAiLogic
         String validP = "";
 
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa); 
+        int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
 
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
@@ -49,11 +48,11 @@ public class  DamageAllAi extends SpellAiLogic
         }
 
         Player opp = ai.getOpponent();
-        
+
         final List<Card> humanList = this.getKillableCreatures(sa, opp, dmg);
         List<Card> computerList = this.getKillableCreatures(sa, ai, dmg);
 
-        
+
         final Target tgt = sa.getTarget();
         if (tgt != null && sa.canTarget(opp)) {
             tgt.resetTargets();
@@ -128,10 +127,10 @@ public class  DamageAllAi extends SpellAiLogic
      */
     private List<Card> getKillableCreatures(final SpellAbility sa, final Player player, final int dmg) {
         final Card source = sa.getSourceCard();
-        String validC = sa.hasParam("ValidCards") ? sa.getParam("ValidCards") : ""; 
+        String validC = sa.hasParam("ValidCards") ? sa.getParam("ValidCards") : "";
 
         // TODO: X may be something different than X paid
-        List<Card> list = 
+        List<Card> list =
                 CardLists.getValidCards(player.getCardsIn(ZoneType.Battlefield), validC.split(","), source.getController(), source);
 
         final Predicate<Card> filterKillable = new Predicate<Card>() {
@@ -153,15 +152,15 @@ public class  DamageAllAi extends SpellAiLogic
         String validP = "";
 
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa); 
+        int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
 
-        
+
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
             dmg = ComputerUtil.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(dmg));
-        } 
-        
+        }
+
         if (sa.hasParam("ValidPlayers")) {
             validP = sa.getParam("ValidPlayers");
         }
