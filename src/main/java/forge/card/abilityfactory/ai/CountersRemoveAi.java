@@ -15,7 +15,7 @@ import forge.game.player.Player;
 import forge.util.MyRandom;
 
 public class CountersRemoveAi extends SpellAiLogic {
-    
+
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
