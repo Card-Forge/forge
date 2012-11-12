@@ -21,11 +21,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 
+
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 
 import forge.Singletons;
 import forge.card.CardEdition;
+import forge.card.CardRulesPredicates;
 import forge.game.GameFormat;
+import forge.item.CardPrinted;
 
 
 /**
@@ -33,8 +37,54 @@ import forge.game.GameFormat;
  * is not immutable. This class is necessary because we may wish to update
  * its contents in certain circumstances, and it was safer to create a new
  * class than to make the preset game formats modifiable.
+ *
+ * N.B! This class MUST NOT INHERIT GameFormat.java as long as that class
+ * has its data in immutable lists, otherwise this class WILL NOT WORK!
+ * The whole purpose of this class is to allow modification of the lists,
+ * otherwise the plain GameFormat.java would have sufficed!
  */
-public final class GameFormatQuest extends GameFormat {
+public final class GameFormatQuest {
+
+    private final String name;
+    // contains allowed sets, when empty allows all sets
+    private final List<String> allowedSetCodes;
+    private final List<String> bannedCardNames;
+
+    private Predicate<CardPrinted> filterRules;
+    private Predicate<CardPrinted> filterPrinted;
+
+    /**
+     * Instantiates a new game format based on an existing format.
+     * 
+     * @param toCopy
+     *      an existing format
+     */
+    public GameFormatQuest(final GameFormat toCopy) {
+        this.name = new String(toCopy.getName());
+
+        this.allowedSetCodes = new ArrayList<String>();
+        allowedSetCodes.addAll(toCopy.getAllowedSetCodes());
+
+        this.bannedCardNames = new ArrayList<String>();
+        bannedCardNames.addAll(toCopy.getBannedCardNames());
+
+        this.filterRules = this.buildFilterRules();
+        this.filterPrinted = this.buildFilterPrinted();
+    }
+
+    /**
+     * Instantiates an empty new game format.
+     * 
+     * @param newName
+     *      String, the name
+     */
+    public GameFormatQuest(final String newName) {
+        this.name = new String(newName);
+
+        this.allowedSetCodes = new ArrayList<String>();
+        this.bannedCardNames = new ArrayList<String>();
+    }
+
 
     /**
      * Instantiates a new game format based on two lists.
@@ -47,29 +97,41 @@ public final class GameFormatQuest extends GameFormat {
      *      List<String>, these will be the banned cards
      */
     public GameFormatQuest(final String newName, final List<String> setsToAllow, final List<String> cardsToBan) {
-        super(newName, setsToAllow, cardsToBan);
+        this.name = new String(newName);
+
+        this.allowedSetCodes = new ArrayList<String>();
+        allowedSetCodes.addAll(setsToAllow);
+
+        this.bannedCardNames = new ArrayList<String>();
+        bannedCardNames.addAll(cardsToBan);
+
+        this.filterRules = this.buildFilterRules();
+        this.filterPrinted = this.buildFilterPrinted();
     }
 
-    /**
-     * Instantiates a new game format based on an existing format.
-     * 
-     * @param toCopy
-     *      an existing format
-     */
-    public GameFormatQuest(final GameFormat toCopy) {
-        this(toCopy.getName(), toCopy.getAllowedSetCodes(), toCopy.getBannedCardNames());
+    private Predicate<CardPrinted> buildFilterPrinted() {
+        final Predicate<CardPrinted> banNames = CardPrinted.Predicates.namesExcept(this.bannedCardNames);
+        if (this.allowedSetCodes.isEmpty()) {
+            return banNames;
+        }
+        return com.google.common.base.Predicates.and(banNames, CardPrinted.Predicates.printedInSets(this.allowedSetCodes, true));
     }
 
+    private Predicate<CardPrinted> buildFilterRules() {
+        final Predicate<CardPrinted> banNames = CardPrinted.Predicates.namesExcept(this.bannedCardNames);
+        if (this.allowedSetCodes.isEmpty()) {
+            return banNames;
+        }
+        return com.google.common.base.Predicates.and(banNames, com.google.common.base.Predicates.compose(CardRulesPredicates.wasPrintedInSets(this.allowedSetCodes), CardPrinted.FN_GET_RULES));
+    }
 
     /**
      * 
      * Updates the filters based on the current list data.
      */
     public void updateFilters() {
-        // nothing to do here. 
-        // predicates hold references to lists and thus get auto updated.
-        
-        // remove this method after reading.
+        this.filterRules = this.buildFilterRules();
+        this.filterPrinted = this.buildFilterPrinted();
     }
 
     /**
@@ -92,6 +154,51 @@ public final class GameFormatQuest extends GameFormat {
         }
     }
 
+    /** 
+     * @param banCard
+     *      the card to ban
+     */
+    public void addBannedCard(final String banCard) {
+        if (!bannedCardNames.contains(banCard)) {
+            bannedCardNames.add(banCard);
+        }
+    }
+
+    /**
+     * Gets the name.
+     * 
+     * @return the name
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    /**
+     * Gets the filter rules.
+     * 
+     * @return the filter rules
+     */
+    public Predicate<CardPrinted> getFilterRules() {
+        return this.filterRules;
+    }
+
+    /**
+     * Gets the filter printed.
+     * 
+     * @return the filter printed
+     */
+    public Predicate<CardPrinted> getFilterPrinted() {
+        return this.filterPrinted;
+    }
+
+    /**
+     * Gets the set list.
+     * 
+     * @return unmodifiable list of allowed set codes
+     */
+    public List<String> getAllowedSetCodes() {
+        return Collections.unmodifiableList(this.allowedSetCodes);
+    }
 
     /**
      * Get the list of excluded sets.
@@ -129,6 +236,26 @@ public final class GameFormatQuest extends GameFormat {
     }
 
     /**
+     * Gets the banned cards.
+     * 
+     * @return unmodifiable list of banned card names
+     */
+    public List<String> getBannedCardNames() {
+        return Collections.unmodifiableList(this.bannedCardNames);
+    }
+
+    /**
+     * Checks if is sets the legal.
+     * 
+     * @param setCode
+     *            the set code
+     * @return true, if is sets the legal
+     */
+    public boolean isSetLegal(final String setCode) {
+        return this.allowedSetCodes.isEmpty() || this.allowedSetCodes.contains(setCode);
+    }
+
+    /**
      * Checks if the current format contains sets with snow-land (horrible hack...).
      * @return boolean, contains snow-land sets.
      * 
@@ -136,6 +263,17 @@ public final class GameFormatQuest extends GameFormat {
     public boolean hasSnowLands() {
         return (this.isSetLegal("ICE") || this.isSetLegal("CSP"));
     }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        return this.name + " (format)";
+    }
+
 
     /**
      * The Class Predicates.
@@ -165,5 +303,11 @@ public final class GameFormatQuest extends GameFormat {
       }
     }
 
+    public static final Function<GameFormat, String> FN_GET_NAME = new Function<GameFormat, String>() {
+        @Override
+        public String apply(GameFormat arg1) {
+            return arg1.getName();
+        }
+    };
 
 }
