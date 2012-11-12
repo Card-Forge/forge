@@ -18,6 +18,9 @@
 
 package forge.sound;
 
+import forge.Singletons;
+import forge.properties.ForgePreferences.FPref;
+
 /**
  * Sounds (enumeration) - all sounds in the game must be declared here.
  * Once declared, the sound can be played from anywhere in the code
@@ -31,12 +34,18 @@ package forge.sound;
  * @author Agetian
  */
 public enum Sounds {
+    // Sounds must be listed in alphabetic order.
     LoseDuel("res/sound/lose_duel.wav"),
+    Shuffle("res/sound/shuffle.wav"),
     Tap("res/sound/tap.wav"),
     WinDuel("res/sound/win_duel.wav");
 
     SoundSystem snd = null;
     
+    /**
+     * @param filename 
+     *              name of the sound file associated with the entry.
+     */
     Sounds(String filename) {
         snd = new SoundSystem(filename);
     }
@@ -45,20 +54,26 @@ public enum Sounds {
      * Play the sound associated with the Sounds enumeration element.
      */
     public void play() {
-        snd.play();
+        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ENABLE_SOUNDS)) {
+            snd.play();
+        }
     }
 
     /**
      * Play the sound in a looping manner until 'stop' is called.
      */
     public void loop() {
-        snd.loop();
+        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ENABLE_SOUNDS)) {
+            snd.loop();
+        }
     }
 
     /**
      * Stop the sound associated with the Sounds enumeration element.
      */
     public void stop() {
-        snd.stop();
+        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ENABLE_SOUNDS)) {
+            snd.stop();
+        }
     }
 }
