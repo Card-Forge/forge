@@ -5026,6 +5026,7 @@ res/cardsfolder/j/jaddi_lifestrider.txt -text svneol=unset#text/plain
 res/cardsfolder/j/jade_idol.txt svneol=native#text/plain
 res/cardsfolder/j/jade_leech.txt svneol=native#text/plain
 res/cardsfolder/j/jade_mage.txt svneol=native#text/plain
+res/cardsfolder/j/jade_monolith.txt -text
 res/cardsfolder/j/jade_statue.txt svneol=native#text/plain
 res/cardsfolder/j/jagged_lightning.txt svneol=native#text/plain
 res/cardsfolder/j/jagged_poppet.txt svneol=native#text/plain

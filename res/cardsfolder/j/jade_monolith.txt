@@ -1,0 +1,26 @@
+Name:Jade Monolith
+ManaCost:4
+Types:Artifact
+Text:no text
+A:AB$ ChooseSource | Cost$ 1 | Choices$ Card | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to target creature this turn, that source deals that damage to you instead.
+SVar:DBEffect:DB$ Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature to redirect damage from | ReplacementEffects$ SelflessCombat,SelflessNonCombat | Triggers$ OutOfSight | SVars$ CombatDmg,NonCombatDmg,ExileEffect,X | References$ SelflessCombat,SelflessNonCombat,OutOfSight,CombatDmg,NonCombatDmg,ExileEffect,X | RememberObjects$ Remembered | ImprintCards$ Targeted | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:SelflessCombat:Event$ DamageDone | ValidTarget$ Card.IsImprinted | ValidSource$ Card.IsRemembered | IsCombat$ True | ReplaceWith$ CombatDmg | Description$ The next time a source of your choice would deal damage to target creature this turn, that source deals that damage to you instead.
+SVar:SelflessNonCombat:Event$ DamageDone | ValidTarget$ Card.IsImprinted | ValidSource$ Card.IsRemembered | IsCombat$ False | ReplaceWith$ NonCombatDmg | Secondary$ True | Description$ The next time a source of your choice would deal damage to target creature this turn, that source deals that damage to you instead.
+SVar:CombatDmg:AB$ DealDamage | Cost$ 0 | Defined$ You | DamageSource$ ReplacedSource | CombatDamage$ True | NumDmg$ X | SubAbility$ ExileEffect
+SVar:NonCombatDmg:AB$ DealDamage | Cost$ 0 | Defined$ You | DamageSource$ ReplacedSource | NumDmg$ X | SubAbility$ ExileEffect
+SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Defined$ Imprinted | Execute$ ExileEffect | Static$ True
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:ReplaceCount$DamageAmount
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/jade_monolith.jpg
+SetInfo:LEA|Rare|http://magiccards.info/scans/en/al/252.jpg
+SetInfo:LEB|Rare|http://magiccards.info/scans/en/be/254.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/381.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/347.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/293.jpg
+SetInfo:3ED|Rare|http://magiccards.info/scans/en/rv/255.jpg
+SetInfo:2ED|Rare|http://magiccards.info/scans/en/un/253.jpg
+Oracle:{1}: The next time a source of your choice would deal damage to target creature this turn, that source deals that damage to you instead.
+End
