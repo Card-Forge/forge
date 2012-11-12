@@ -60,6 +60,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.item.CardDb;
 import forge.model.FModel;
+import forge.sound.Sounds;
 import forge.util.Expressions;
 import forge.util.MyRandom;
 
@@ -4896,6 +4897,9 @@ public class Card extends GameEntity implements Comparable<Card> {
             Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Taps, runParams);
         }
         this.setTapped(true);
+
+        // Play the Tap sound
+        Sounds.Tap.play();
     }
 
     /**
@@ -4910,6 +4914,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             runParams.put("Card", this);
             Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Untaps, runParams);
 
+            // Play the Untap sound
+            Sounds.Untap.play();
         }
 
         for (final Command var : this.untapCommandList) {

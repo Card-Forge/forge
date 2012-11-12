@@ -34,6 +34,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.match.views.VAntes;
 import forge.item.CardPrinted;
 import forge.properties.ForgePreferences.FPref;
+import forge.sound.Sounds;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 
@@ -355,6 +356,9 @@ public class GameNew {
             playerDie = MyRandom.getRandom().nextInt(20);
             computerDie = MyRandom.getRandom().nextInt(20);
         }
+        
+        // Play the Flip Coin sound
+        Sounds.FlipCoin.play();
         
         List<Player> allPlayers = Singletons.getModel().getGame().getPlayers();
         setPlayersFirstTurn(allPlayers.get(MyRandom.getRandom().nextInt(allPlayers.size())), true);

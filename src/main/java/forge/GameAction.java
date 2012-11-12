@@ -66,6 +66,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.ViewWinLose;
+import forge.sound.Sounds;
 
 
 /**
@@ -1048,6 +1049,12 @@ public class GameAction {
             match.getCurrentGame().getStack().clearSimultaneousStack();
             if (!refreeze) {
                 game.getStack().unfreezeStack();
+            }
+            // Play the win/lose sound
+            if (match.getLastGameOutcome().isWinner(Singletons.getControl().getPlayer().getLobbyPlayer())) {
+                Sounds.WinDuel.play();
+            } else {
+                Sounds.LoseDuel.play();
             }
             return;
         }

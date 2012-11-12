@@ -32,6 +32,7 @@ import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.properties.ForgePreferences.FPref;
+import forge.sound.Sounds;
 import forge.util.MyObservable;
 
 
@@ -465,6 +466,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 if (!this.bRepeat) {
                     this.setPlayerTurn(this.handleNextTurn());
                 }
+                // Play the End Turn sound
+                Sounds.EndOfTurn.play();
                 break;
             default: // no action
         }

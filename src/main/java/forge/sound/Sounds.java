@@ -35,9 +35,13 @@ import forge.properties.ForgePreferences.FPref;
  */
 public enum Sounds {
     // Sounds must be listed in alphabetic order.
+    Draw("res/sound/draw.wav"),
+    EndOfTurn("res/sound/end_of_turn.wav"), 
+    FlipCoin("res/sound/flip_coin.wav"),
     LoseDuel("res/sound/lose_duel.wav"),
     Shuffle("res/sound/shuffle.wav"),
     Tap("res/sound/tap.wav"),
+    Untap("res/sound/untap.wav"),
     WinDuel("res/sound/win_duel.wav");
 
     SoundSystem snd = null;

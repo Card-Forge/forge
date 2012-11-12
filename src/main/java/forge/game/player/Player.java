@@ -60,6 +60,7 @@ import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.properties.ForgePreferences.FPref;
+import forge.sound.Sounds;
 import forge.util.MyRandom;
 
 /**
@@ -1243,6 +1244,10 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
                 drawn.addAll(this.doDraw());
             }
         }
+
+        // Play the Draw sound
+        Sounds.Draw.play();
+
         return drawn;
     }
     
@@ -1774,6 +1779,8 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         runParams.put("Player", this);
         game.getTriggerHandler().runTrigger(TriggerType.Shuffled, runParams);
 
+        // Play the shuffle sound
+        Sounds.Shuffle.play();
     } // shuffle
       // //////////////////////////////
 
