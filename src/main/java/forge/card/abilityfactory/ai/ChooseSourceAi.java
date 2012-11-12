@@ -11,6 +11,8 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.ApiType;
 import forge.card.abilityfactory.SpellAiLogic;
+import forge.card.cost.Cost;
+import forge.card.cost.CostUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.phase.CombatUtil;
@@ -31,6 +33,27 @@ public class ChooseSourceAi extends SpellAiLogic {
         //       to the player because a CoP was pre-activated on it - unless, of course, there's another
         //       possible reason to attack with that creature).
         final Card host = sa.getSourceCard();
+        final Cost abCost = sa.getPayCosts();
+        final Card source = sa.getSourceCard();
+        
+        if (abCost != null) {
+            // AI currently disabled for these costs
+            if (!CostUtil.checkLifeCost(ai, abCost, source, 4, null)) {
+                return false;
+            }
+
+            if (!CostUtil.checkDiscardCost(ai, abCost, source)) {
+                return false;
+            }
+
+            if (!CostUtil.checkSacrificeCost(ai, abCost, source)) {
+                return false;
+            }
+
+            if (!CostUtil.checkRemoveCounterCost(abCost, source)) {
+                return false;
+            }
+        }
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
@@ -64,15 +87,15 @@ public class ChooseSourceAi extends SpellAiLogic {
                         return false;
                     }
 
-                    final Card source = topStack.getSourceCard();
+                    final Card threatSource = topStack.getSourceCard();
                     ArrayList<Object> objects = new ArrayList<Object>();
                     final Target threatTgt = topStack.getTarget();
 
                     if (threatTgt == null) {
                         if (topStack.hasParam("Defined")) {
-                            objects = AbilityFactory.getDefinedObjects(source, topStack.getParam("Defined"), topStack);
+                            objects = AbilityFactory.getDefinedObjects(threatSource, topStack.getParam("Defined"), topStack);
                         } else if (topStack.hasParam("ValidPlayers")) {
-                            objects.addAll(AbilityFactory.getDefinedPlayers(source, topStack.getParam("ValidPlayers"), topStack));
+                            objects.addAll(AbilityFactory.getDefinedPlayers(threatSource, topStack.getParam("ValidPlayers"), topStack));
                         }
                     } else {
                         objects.addAll(threatTgt.getTargetPlayers());
@@ -80,8 +103,8 @@ public class ChooseSourceAi extends SpellAiLogic {
                     if (!objects.contains(ai) || topStack.hasParam("NoPrevention")) {
                         return false;
                     }
-                    int dmg = AbilityFactory.calculateAmount(source, topStack.getParam("NumDmg"), topStack);
-                    if (ai.predictDamage(dmg, source, false) <= 0) {
+                    int dmg = AbilityFactory.calculateAmount(threatSource, topStack.getParam("NumDmg"), topStack);
+                    if (ai.predictDamage(dmg, threatSource, false) <= 0) {
                         return false;
                     }
                     return true;
@@ -110,6 +133,6 @@ public class ChooseSourceAi extends SpellAiLogic {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-        return canPlayAI(ai, sa);
+        return true;
     }
 }
