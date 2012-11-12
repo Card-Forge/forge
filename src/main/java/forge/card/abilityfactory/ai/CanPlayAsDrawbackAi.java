@@ -6,7 +6,7 @@ import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 
 public class CanPlayAsDrawbackAi extends SpellAiLogic {
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
