@@ -12,7 +12,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class ChooseCardAi extends SpellAiLogic {
- 
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -59,7 +59,7 @@ public class ChooseCardAi extends SpellAiLogic {
 
         return true;
     }
-    
+
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         return canPlayAI(ai, sa);
