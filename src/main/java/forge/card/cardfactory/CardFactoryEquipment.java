@@ -45,35 +45,7 @@ class CardFactoryEquipment {
      * @return a {@link forge.Card} object.
      */
     public static void buildCard(final Card card, final String cardName) {
-
-        // *************** START *********** START **************************
-        if (cardName.equals("Blade of the Bloodchief")) {
-            final Ability triggeredAbility = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    if (card.getEquipping().size() != 0) {
-                        final Card equipping = card.getEquipping().get(0);
-                        if (equipping.isType("Vampire")) {
-                            equipping.addCounter(Counters.P1P1, 2);
-                        } else {
-                            equipping.addCounter(Counters.P1P1, 1);
-                        }
-                    }
-                }
-            };
-
-            final StringBuilder sbTrig = new StringBuilder();
-            sbTrig.append("Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ");
-            sbTrig.append("ValidCard$ Creature | TriggerZones$ Battlefield | Execute$ TrigOverride | ");
-            sbTrig.append("TriggerDescription$ Whenever a creature is put into a graveyard ");
-            sbTrig.append("from the battlefield, put a +1/+1 counter on equipped creature. ");
-            sbTrig.append("If equipped creature is a Vampire, put two +1/+1 counters on it instead.");
-            final Trigger myTrigger = TriggerHandler.parseTrigger(sbTrig.toString(), card, true);
-            myTrigger.setOverridingAbility(triggeredAbility);
-
-            card.addTrigger(myTrigger);
-        } // *************** END ************ END **************************
-
+        // TODO: Move Living Weapon to main Keyword generator, and delete this file
         if (card.hasKeyword("Living Weapon")) {
             card.removeIntrinsicKeyword("Living Weapon");
 
