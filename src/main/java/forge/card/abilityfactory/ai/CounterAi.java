@@ -15,7 +15,7 @@ import forge.game.player.Player;
 import forge.util.MyRandom;
 
 public class CounterAi extends SpellAiLogic {
-    
+
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         boolean toReturn = true;
@@ -56,7 +56,7 @@ public class CounterAi extends SpellAiLogic {
         } else {
             return false;
         }
-        
+
         String unlessCost = sa.hasParam("UnlessCost") ? sa.getParam("UnlessCost").trim() : null;
 
         if (unlessCost != null && !unlessCost.endsWith(">")) {
@@ -123,7 +123,7 @@ public class CounterAi extends SpellAiLogic {
             }
 
             String unlessCost = sa.hasParam("UnlessCost") ? sa.getParam("UnlessCost").trim() : null;
-            
+
             final Card source = sa.getSourceCard();
             if (unlessCost != null) {
                 // Is this Usable Mana Sources? Or Total Available Mana?
