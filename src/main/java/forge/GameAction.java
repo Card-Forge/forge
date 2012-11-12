@@ -1890,7 +1890,9 @@ public class GameAction {
 
         List<Card> cardsOnBattlefield = Lists.newArrayList(game.getCardsIn(ZoneType.Battlefield));
         cardsOnBattlefield.addAll(game.getCardsIn(ZoneType.Stack));
-        cardsOnBattlefield.add(originalCard);
+        if (!cardsOnBattlefield.contains(originalCard)) {
+            cardsOnBattlefield.add(originalCard);
+        }
         final ArrayList<StaticAbility> raiseAbilities = new ArrayList<StaticAbility>();
         final ArrayList<StaticAbility> reduceAbilities = new ArrayList<StaticAbility>();
         final ArrayList<StaticAbility> setAbilities = new ArrayList<StaticAbility>();
