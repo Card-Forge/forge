@@ -19,7 +19,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class ChooseSourceAi extends SpellAiLogic {
- 
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -63,7 +63,7 @@ public class ChooseSourceAi extends SpellAiLogic {
                     if (threatApi != ApiType.DealDamage && threatApi != ApiType.DamageAll) {
                         return false;
                     }
-                    
+
                     final Card source = topStack.getSourceCard();
                     ArrayList<Object> objects = new ArrayList<Object>();
                     final Target threatTgt = topStack.getTarget();
@@ -107,7 +107,7 @@ public class ChooseSourceAi extends SpellAiLogic {
 
         return true;
     }
-    
+
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         return canPlayAI(ai, sa);
