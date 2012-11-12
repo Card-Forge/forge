@@ -21,7 +21,7 @@ public class DamageEachAi extends DamageAiBase {
         }
 
         final String damage = sa.getParam("NumDmg");
-        final int iDmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa); 
+        final int iDmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
         return this.shouldTgtP(ai, sa, iDmg, false);
     }
 
