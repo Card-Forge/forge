@@ -12,7 +12,7 @@ import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 
 public class CloneAi extends SpellAiLogic {
-    
+
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Target tgt = sa.getTarget();
@@ -32,7 +32,7 @@ public class CloneAi extends SpellAiLogic {
         // TODO - add some kind of check for during human turn to answer
         // "Can I use this to block something?"
 
-        PhaseHandler phase = Singletons.getModel().getGame().getPhaseHandler(); 
+        PhaseHandler phase = Singletons.getModel().getGame().getPhaseHandler();
         // don't use instant speed clone abilities outside computers
         // Combat_Begin step
         if (!phase.is(PhaseType.COMBAT_BEGIN)
@@ -43,8 +43,9 @@ public class CloneAi extends SpellAiLogic {
 
         // don't use instant speed clone abilities outside humans
         // Combat_Declare_Attackers_InstantAbility step
-        if ( (!phase.is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) || Singletons.getModel().getGame().getCombat().getAttackers().isEmpty())
-           && !phase.isPlayerTurn(ai)) {
+        if ((!phase.is(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
+                || Singletons.getModel().getGame().getCombat().getAttackers().isEmpty())
+                && !phase.isPlayerTurn(ai)) {
             return false;
         }
 
