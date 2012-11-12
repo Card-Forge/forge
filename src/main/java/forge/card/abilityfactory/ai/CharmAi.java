@@ -12,7 +12,7 @@ import forge.game.player.Player;
 import forge.util.MyRandom;
 
 public class CharmAi extends SpellAiLogic {
-    
+
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Random r = MyRandom.getRandom();
@@ -23,10 +23,10 @@ public class CharmAi extends SpellAiLogic {
 
         List<AbilitySub> chooseFrom = CharmEffect.makePossibleOptions(sa);
         List<AbilitySub> chosenList = chooseOptionsAi(ai, timingRight, chooseFrom, num, min);
-        
+
         if (chosenList == null || chosenList.isEmpty()) {
             return false;
-        }        
+        }
 
         // prevent run-away activations - first time will always return true
         return r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
@@ -51,8 +51,9 @@ public class CharmAi extends SpellAiLogic {
                     break;
                 }
             }
-            if (thisPick != null)
+            if (thisPick != null) {
                 chosenList.add(thisPick);
+            }
         }
         return chosenList.size() >= min ? chosenList : null;
     }
