@@ -40,8 +40,8 @@ public class GameFormat {
     protected final List<String> allowedSetCodes;
     protected final List<String> bannedCardNames;
 
-    protected final List<String> allowedSetCodes_ro;
-    protected final List<String> bannedCardNames_ro;
+    protected final transient List<String> allowedSetCodes_ro;
+    protected final transient List<String> bannedCardNames_ro;
     
     protected final transient Predicate<CardPrinted> filterRules;
     protected final transient Predicate<CardPrinted> filterPrinted;
