@@ -20,6 +20,7 @@ package forge.game;
 import java.util.Collections;
 import java.util.List;
 
+import com.beust.jcommander.internal.Lists;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -39,6 +40,9 @@ public class GameFormat {
     protected final List<String> allowedSetCodes;
     protected final List<String> bannedCardNames;
 
+    protected final List<String> allowedSetCodes_ro;
+    protected final List<String> bannedCardNames_ro;
+    
     protected final transient Predicate<CardPrinted> filterRules;
     protected final transient Predicate<CardPrinted> filterPrinted;
 
@@ -54,8 +58,12 @@ public class GameFormat {
      */
     public GameFormat(final String fName, final List<String> sets, final List<String> bannedCards) {
         this.name = fName;
-        this.allowedSetCodes = Collections.unmodifiableList(sets);
-        this.bannedCardNames = Collections.unmodifiableList(bannedCards);
+        this.allowedSetCodes = Lists.newArrayList(sets);
+        this.bannedCardNames = Lists.newArrayList(bannedCards);
+        
+        this.allowedSetCodes_ro = Collections.unmodifiableList(allowedSetCodes);
+        this.bannedCardNames_ro = Collections.unmodifiableList(bannedCardNames);
+        
         this.filterRules = this.buildFilterRules();
         this.filterPrinted = this.buildFilterPritned();
     }
@@ -89,7 +97,7 @@ public class GameFormat {
      * @return list of allowed set codes
      */
     public List<String> getAllowedSetCodes() {
-        return this.allowedSetCodes;
+        return this.allowedSetCodes_ro;
     }
 
     /**
@@ -98,7 +106,7 @@ public class GameFormat {
      * @return list of banned card names
      */
     public List<String> getBannedCardNames() {
-        return this.bannedCardNames;
+        return this.bannedCardNames_ro;
     }
 
     /**
