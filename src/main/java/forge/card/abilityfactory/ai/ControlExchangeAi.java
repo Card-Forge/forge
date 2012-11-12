@@ -17,7 +17,7 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 public class ControlExchangeAi extends SpellAiLogic {
-    
+
 /* (non-Javadoc)
  * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
  */
@@ -28,7 +28,7 @@ public class ControlExchangeAi extends SpellAiLogic {
         final Target tgt = sa.getTarget();
         tgt.resetTargets();
 
-        List<Card> list = 
+        List<Card> list =
                 CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), tgt.getValidTgts(), ai, sa.getSourceCard());
         // AI won't try to grab cards that are filtered out of AI decks on
         // purpose
