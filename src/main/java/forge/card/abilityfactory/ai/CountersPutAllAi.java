@@ -22,7 +22,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-public class CountersPutAllAi extends SpellAiLogic { 
+public class CountersPutAllAi extends SpellAiLogic {
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
@@ -58,7 +58,7 @@ public class CountersPutAllAi extends SpellAiLogic {
         }
 
         if (tgt != null) {
-            Player pl = curse ? ai.getOpponent(): ai; 
+            Player pl = curse ? ai.getOpponent() : ai;
             tgt.addTarget(pl);
 
             hList = CardLists.filterControlledBy(hList, pl);
