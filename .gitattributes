@@ -4923,6 +4923,7 @@ res/cardsfolder/i/insurrection.txt svneol=native#text/plain
 res/cardsfolder/i/intangible_virtue.txt -text
 res/cardsfolder/i/interdict.txt -text
 res/cardsfolder/i/intervene.txt svneol=native#text/plain
+res/cardsfolder/i/intervention_pact.txt -text
 res/cardsfolder/i/intet_the_dreamer.txt -text
 res/cardsfolder/i/intimidation.txt svneol=native#text/plain
 res/cardsfolder/i/intimidation_bolt.txt -text svneol=unset#text/plain
