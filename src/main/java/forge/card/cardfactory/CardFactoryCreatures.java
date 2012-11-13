@@ -160,10 +160,9 @@ public class CardFactoryCreatures {
             @Override
             public void execute() {
 
-                final List<Card> artifacts = 
+                final List<Card> artifacts =
                         CardLists.filter(card.getController().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.ARTIFACTS);
                 if (card.getController().isHuman()) {
-                    
 
                     if (artifacts.size() != 0) {
                         final Card c = GuiChoose.one("Select an artifact put a phylactery counter on", artifacts);
@@ -369,7 +368,7 @@ public class CardFactoryCreatures {
             public boolean canPlayAI() {
                 List<Card> wolves = CardLists.getType(getActivatingPlayer().getCardsIn(ZoneType.Battlefield), "Wolf");
                 Iterable<Card> untappedWolves = Iterables.filter(wolves, untappedCreature);
-                
+
                 final int totalPower = Aggregates.sum(untappedWolves, CardPredicates.Accessors.fnGetNetAttack);
                 if (totalPower == 0) {
                     return false;
@@ -543,14 +542,14 @@ public class CardFactoryCreatures {
             } // resolve()
 
             public int countKithkin() {
-                final List<Card> kithkin = 
+                final List<Card> kithkin =
                         CardLists.filter(card.getController().getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
 
                         @Override
                         public boolean apply(final Card c) {
                             return (c.isType("Kithkin")) && !c.equals(card);
                         }
-    
+
                     });
                 return kithkin.size();
 
@@ -713,7 +712,7 @@ public class CardFactoryCreatures {
                 int intermSumPower = 0;
                 int intermSumToughness = 0;
                 // intermSumPower = intermSumToughness = 0;
-                List<Card> creats = 
+                List<Card> creats =
                         CardLists.filter(card.getController().getCardsIn(ZoneType.Graveyard), new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
@@ -769,71 +768,6 @@ public class CardFactoryCreatures {
         });
     }
 
-    private static void getCard_NamelessRace(final Card card, final String cardName) {
-        /*
-         * As Nameless Race enters the battlefield, pay any amount of life.
-         * The amount you pay can't be more than the total number of white
-         * nontoken permanents your opponents control plus the total number
-         * of white cards in their graveyards. Nameless Race's power and
-         * toughness are each equal to the life paid as it entered the
-         * battlefield.
-         */
-        final SpellAbility ability = new Ability(card, "0") {
-            @Override
-            public void resolve() {
-                final Player player = card.getController();
-                final Player opp = player.getOpponent();
-                int max = 0;
-                List<Card> play = CardLists.filter(opp.getCardsIn(ZoneType.Battlefield), Presets.NON_TOKEN);
-                play = CardLists.filter(play, Presets.WHITE);
-                max += play.size();
-
-                List<Card> grave = opp.getCardsIn(ZoneType.Graveyard);
-                grave = CardLists.filter(grave, Presets.WHITE);
-                max += grave.size();
-
-                final String[] life = new String[max + 1];
-                for (int i = 0; i <= max; i++) {
-                    life[i] = String.valueOf(i);
-                }
-
-                final Object o = GuiChoose.one("Nameless Race - pay X life", life);
-                final String answer = (String) o;
-                int loseLife = 0;
-                try {
-                    loseLife = Integer.parseInt(answer.trim());
-                } catch (final NumberFormatException nfe) {
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append(card.getName());
-                    sb.append(" - NumberFormatException: ");
-                    sb.append(nfe.getMessage());
-                    System.out.println(sb.toString());
-                }
-
-                card.setBaseAttack(loseLife);
-                card.setBaseDefense(loseLife);
-
-                player.loseLife(loseLife);
-            } // resolve()
-        }; // SpellAbility
-
-        final Command intoPlay = new Command() {
-            private static final long serialVersionUID = 931101364538995898L;
-
-            @Override
-            public void execute() {
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
-
-            }
-        };
-
-        final StringBuilder sb = new StringBuilder();
-        sb.append(cardName).append(" - pay any amount of life.");
-        ability.setStackDescription(sb.toString());
-
-        card.addComesIntoPlayCommand(intoPlay);
-    }
-
     private static void getCard_YoseiTheMorningStar(final Card card) {
         final List<Card> targetPerms = new ArrayList<Card>();
         final SpellAbility ability = new Ability(card, "0") {
@@ -857,7 +791,7 @@ public class CardFactoryCreatures {
             public final Input apply(List<Card> selected) {
                 final StringBuilder sb = new StringBuilder();
                 sb.append(card.getName());
-                sb.append(" - tap " + StringUtils.join(selected, ", ")  +". ");
+                sb.append(" - tap " + StringUtils.join(selected, ", ") + ". ");
                 sb.append("Target player skips his or her next untap step.");
                 ability.setStackDescription(sb.toString());
 
@@ -865,25 +799,25 @@ public class CardFactoryCreatures {
                 return null;
             }
         };
-        
-        Predicate<Card> allowedRule = new Predicate<Card>() { 
+
+        Predicate<Card> allowedRule = new Predicate<Card>() {
             @Override
             public boolean apply(Card c) {
                 Zone zone = Singletons.getModel().getGame().getZoneOf(c);
                 return zone.is(ZoneType.Battlefield) && c.getController() == ability.getTargetPlayer() && c.canBeTargetedBy(ability);
             }
         };
-        
+
         final InputSelectMany<Card> targetInput = new InputSelectManyCards(allowedRule, 0, 5, onSelected);
         targetInput.setMessage("Select up to 5 target permanents.  Selected (%d) so far.  Click OK when done.");
 
-        Predicate<Player> canTarget = new Predicate<Player>() { 
+        Predicate<Player> canTarget = new Predicate<Player>() {
             @Override
             public boolean apply(Player p) {
                 return p.canBeTargetedBy(ability);
             }
         };
-        
+
         Function<List<Player>, Input> onPlayerTargeted = new Function<List<Player>, Input>() {
             @Override
             public final Input apply(List<Player> selected) {
@@ -892,9 +826,9 @@ public class CardFactoryCreatures {
                 return targetInput;
             }
         };
-        
+
         final InputSelectMany<Player> playerInput = new InputSelectManyPlayers(canTarget, 1, 1, onPlayerTargeted);
-        playerInput.setMessage(card.getName()+" - Select target player");
+        playerInput.setMessage(card.getName() + " - Select target player");
 
         final Command destroy = new Command() {
             private static final long serialVersionUID = -3868616119471172026L;
@@ -902,14 +836,13 @@ public class CardFactoryCreatures {
             @Override
             public void execute() {
                 final Player player = card.getController();
-                
+
                 if (player.isHuman()) {
                     Singletons.getModel().getMatch().getInput().setInput(playerInput);
                 } else  {
                     List<Card> list = player.getOpponent().getCreaturesInPlay();
                     list = CardLists.getTargetableCards(list, ability);
-                    if ( !list.isEmpty() )
-                    {
+                    if (!list.isEmpty()) {
                         ability.setTargetCard(CardFactoryUtil.getBestCreatureAI(list));
                         Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
                     }
@@ -933,7 +866,7 @@ public class CardFactoryCreatures {
                 toDisplay += "  Click OK when Done.";
                 return toDisplay;
             }
-            
+
             @Override
             protected boolean canCancelWithSomethingSelected() {
                 return true;
@@ -944,7 +877,7 @@ public class CardFactoryCreatures {
                 Singletons.getModel().getGame().getAction().sacrifice(card, null);
                 return null;
             }
-            
+
             @Override
             protected boolean isValidChoice(Card c) {
                 Zone zone = Singletons.getModel().getGame().getZoneOf(c);
@@ -958,12 +891,12 @@ public class CardFactoryCreatures {
                 }
                 return null;
             }
-            
+
             @Override
             protected boolean hasEnoughTargets() {
                 return getTotalPower() >= 12;
             };
-            
+
             private int getTotalPower() {
                 int sum = 0;
                 for (final Card c : selected) {
@@ -972,8 +905,7 @@ public class CardFactoryCreatures {
                 return sum;
             }
         }; // Input
-        
-        
+
         final Ability sacOrSac = new Ability(card, "") {
             @Override
             public void resolve() {
@@ -982,7 +914,7 @@ public class CardFactoryCreatures {
                 }
             } // end resolve
         }; // end sacOrSac
-        
+
         final StringBuilder sbTrig = new StringBuilder();
         sbTrig.append("Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | ");
         sbTrig.append("Execute$ TrigOverride | TriggerDescription$  ");
@@ -1129,7 +1061,7 @@ public class CardFactoryCreatures {
 
         card.addSpellAbility(finalAb);
     }
-    
+
     private static void getCard_EssenceOfTheWild(final Card card) {
         class EOTWReplacement extends Ability {
 
@@ -1158,16 +1090,16 @@ public class CardFactoryCreatures {
                 movedCard.setState(CardCharacteristicName.Original);
                 movedCard.getCharacteristics().copy(this.getSourceCard().getCharacteristics());
             }
-            
+
         }
-        
-        SpellAbility repAb = new EOTWReplacement(card,"0");
-        CardFactoryUtil.setupETBReplacementAbility(repAb);            
-        
+
+        SpellAbility repAb = new EOTWReplacement(card, "0");
+        CardFactoryUtil.setupETBReplacementAbility(repAb);
+
         ReplacementEffect re = ReplacementHandler.parseReplacement("Event$ Moved | ValidCard$ Creature.Other+YouCtrl | Destination$ Battlefield | ActiveZones$ Battlefield | Description$ Creatures you control enter the battlefield as copies of CARDNAME.", card);
         re.setLayer(ReplacementLayer.Copy);
-        re.setOverridingAbility(repAb);            
-        
+        re.setOverridingAbility(repAb);
+
         card.addReplacementEffect(re);
     }
 
@@ -1203,8 +1135,6 @@ public class CardFactoryCreatures {
             getCard_VampireHexmage(card);
         } else if (cardName.equals("Sutured Ghoul")) {
             getCard_SurturedGhoul(card);
-        } else if (cardName.equals("Nameless Race")) {
-            getCard_NamelessRace(card, cardName);
         } else if (cardName.equals("Yosei, the Morning Star")) {
             getCard_YoseiTheMorningStar(card);
         } else if (cardName.equals("Phyrexian Dreadnought")) {
@@ -1217,7 +1147,6 @@ public class CardFactoryCreatures {
         } else if (cardName.equals("Essence of the Wild")) {
             getCard_EssenceOfTheWild(card);
         }
-        
 
         // ***************************************************
         // end of card specific code

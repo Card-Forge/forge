@@ -1,9 +1,18 @@
 Name:Nameless Race
 ManaCost:3 B
 Types:Creature
-Text:As Nameless Race enters the battlefield, pay any amount of life. The amount you pay can't be more than the total number of white nontoken permanents your opponents control plus the total number of white cards in their graveyards.\r\nNameless Race's power and toughness are each equal to the life paid as it entered the battlefield.
-PT:1/1
+Text:no text
+PT:*/*
 K:Trample
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ PayLife | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, pay any amount of life. The amount you pay can't be more than the total number of white nontoken permanents your opponents control plus the total number of white cards in their graveyards.
+SVar:PayLife:AB$ StoreSVar | Cost$ PayLife<X> | References$ X,Limit,Active,Buried | SVar$ LifePaidOnETB | Type$ CountSVar | Expression$ ChosenX
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ LifePaidOnETB | SetToughness$ LifePaidOnETB | References$ LifePaidOnETB | Description$ CARDNAME's power and toughness are each equal to the life paid as it entered the battlefield.
+SVar:X:XChoice/LimitMax.Limit
+SVar:Limit:SVar$Active/Plus.Buried
+SVar:Active:Count$Valid Permanent.White+nonToken+OppCtrl
+SVar:Buried:Count$ValidGrave Card.White
+SVar:LifePaidOnETB:Number$0
+SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nameless_race.jpg

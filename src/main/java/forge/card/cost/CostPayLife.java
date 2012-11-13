@@ -130,8 +130,13 @@ public class CostPayLife extends CostPart {
         if (c == null) {
             final String sVar = ability.getSVar(amount);
             // Generalize this
-            if (sVar.equals("XChoice")) {
-                c = CostUtil.chooseXValue(source, ability, life);
+            if (sVar.startsWith("XChoice")) {
+                int limit = life;
+                if (sVar.contains("LimitMax")) {
+                    limit = AbilityFactory.calculateAmount(source, sVar.split("LimitMax.")[1], ability);
+                }
+                int maxLifePayment = limit < life ? limit : life;
+                c = CostUtil.chooseXValue(source, ability, maxLifePayment);
             } else {
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }

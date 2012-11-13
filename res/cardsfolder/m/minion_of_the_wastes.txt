@@ -5,10 +5,10 @@ Text:no text
 PT:*/*
 K:Trample
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ PayLife | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, pay any amount of life.
-SVar:PayLife:AB$ StoreSVar | Cost$ PayLife<X> | References$ X | SVar$ Y | Type$ CountSVar | Expression$ ChosenX
-S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ Y | SetToughness$ Y | References$ Y | Description$ CARDNAME's power and toughness are each equal to the life paid as it entered the battlefield.
+SVar:PayLife:AB$ StoreSVar | Cost$ PayLife<X> | References$ X | SVar$ LifePaidOnETB | Type$ CountSVar | Expression$ ChosenX
+S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ LifePaidOnETB | SetToughness$ LifePaidOnETB | References$ LifePaidOnETB | Description$ CARDNAME's power and toughness are each equal to the life paid as it entered the battlefield.
 SVar:X:XChoice
-SVar:Y:Number$0
+SVar:LifePaidOnETB:Number$0
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/minion_of_the_wastes.jpg
