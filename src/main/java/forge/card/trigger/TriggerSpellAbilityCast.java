@@ -148,6 +148,12 @@ public class TriggerSpellAbilityCast extends Trigger {
             }
         }
 
+        if (this.getMapParams().containsKey("Conspire")) {
+            if (!spellAbility.isOptionalAdditionalCostPaid("Conspire")) {
+                return false;
+            }
+        }
+
         if (this.getMapParams().containsKey("SpellSpeed")) {
             if (this.getMapParams().get("SpellSpeed").equals("NotSorcerySpeed")) {
                 boolean notSorcerySpeed = true;

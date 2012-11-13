@@ -4,7 +4,7 @@ Types:Sorcery
 Text:no text
 A:SP$ Mill | Cost$ UB | NumCards$ 4 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top four cards of his or her library into his or her graveyard.
 K:Conspire
-T:Mode$ SpellCast | ValidCard$ Card.Self+conspired | Execute$ Conspire | Secondary$ True | TriggerDescription$ Copy CARDNAME if its conspire cost was paid
+T:Mode$ SpellCast | ValidCard$ Card.Self | Conspire$ True | Execute$ Conspire | Secondary$ True | TriggerDescription$ Copy CARDNAME if its conspire cost was paid
 SVar:Conspire:AB$ CopySpell | Cost$ 0 | Defined$ TriggeredSpellAbility | Amount$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/memory_sluice.jpg
