@@ -26,7 +26,7 @@ public class DestroyAllAi extends SpellAiLogic {
             return !(c.hasKeyword("Indestructible") || c.getSVar("SacMe").length() > 0);
         }
     };
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
@@ -41,9 +41,9 @@ public class DestroyAllAi extends SpellAiLogic {
         if (sa.hasParam("ValidCards")) {
             valid = sa.getParam("ValidCards");
         }
-        List<Card> humanlist = 
+        List<Card> humanlist =
                 CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
-        List<Card> computerlist = 
+        List<Card> computerlist =
                 CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
         if (sa.getTarget() != null) {
             tgt.resetTargets();
@@ -99,9 +99,9 @@ public class DestroyAllAi extends SpellAiLogic {
 
         final Target tgt = sa.getTarget();
 
-        List<Card> humanlist = 
+        List<Card> humanlist =
                 CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
-        List<Card> computerlist = 
+        List<Card> computerlist =
                 CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
         if (sa.getTarget() != null) {
             tgt.resetTargets();
