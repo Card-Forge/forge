@@ -1,0 +1,14 @@
+Name:Proteus Machine
+ManaCost:3
+Types:Artifact Creature Shapeshifter
+Text:no text
+PT:2/2
+K:Morph:0
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME is turned face up, it becomes the creature type of your choice. (This effect lasts indefinitely.)
+SVar:TrigChoose:DB$ ChooseType | Cost$ 1 | Defined$ You | Type$ Creature | SubAbility$ DBAnimate | AILogic$ MostProminentInComputerDeck
+SVar:DBAnimate:DB$ Animate | Defined$ Self | Types$ ChosenType | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/proteus_machine.jpg
+SetInfo:SCG|Uncommon|http://magiccards.info/scans/en/sc/141.jpg
+Oracle:Morph {0} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Proteus Machine is turned face up, it becomes the creature type of your choice. (This effect lasts indefinitely.)
+End
