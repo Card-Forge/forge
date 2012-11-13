@@ -15,7 +15,7 @@ public class EndTurnAi extends SpellAiLogic  {
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         return mandatory;
     }
-    
+
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) { return false; }
 
