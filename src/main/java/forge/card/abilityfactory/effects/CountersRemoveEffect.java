@@ -15,15 +15,15 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
-public class CountersRemoveEffect extends SpellEffect { 
+public class CountersRemoveEffect extends SpellEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-    
+
         final String counterName = sa.getParam("CounterType");
-    
+
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
-    
+
         sb.append("Remove ");
         if (sa.hasParam("UpTo")) {
             sb.append("up to ");
@@ -43,13 +43,13 @@ public class CountersRemoveEffect extends SpellEffect {
             sb.append("s");
         }
         sb.append(" from");
-    
+
         for (final Card c : getTargetCards(sa)) {
             sb.append(" ").append(c);
         }
-    
+
         sb.append(".");
-    
+
         return sb.toString();
     }
 
@@ -64,7 +64,7 @@ public class CountersRemoveEffect extends SpellEffect {
         }
 
         final Target tgt = sa.getTarget();
-        
+
         boolean rememberRemoved = false;
         if (sa.hasParam("RememberRemoved")) {
             rememberRemoved = true;
@@ -101,7 +101,7 @@ public class CountersRemoveEffect extends SpellEffect {
                                 chosenAmount = counterAmount;
                             }
                             // make list of amount choices
-                            
+
                             if (chosenAmount > 1) {
                                 final List<Integer> choices = new ArrayList<Integer>();
                                 for (int i = 1; i <= chosenAmount; i++) {
@@ -149,6 +149,9 @@ public class CountersRemoveEffect extends SpellEffect {
                     }
                     tgtCard.subtractCounter(Counters.valueOf(type), counterAmount);
                     if (rememberRemoved) {
+                        if (counterAmount > tgtCard.getCounters(Counters.valueOf(type))) {
+                            counterAmount = tgtCard.getCounters(Counters.valueOf(type));
+                        }
                         for (int i = 0; i < counterAmount; i++) {
                             card.addRemembered(Counters.valueOf(type));
                         }
