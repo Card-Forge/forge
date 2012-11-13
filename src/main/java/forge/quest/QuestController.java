@@ -221,7 +221,7 @@ public class QuestController {
             final GameFormat formatPrizes, final boolean allowSetUnlocks,
             final Deck startingCards, final GameFormat formatStartingPool) {
 
-        this.load(new QuestData(name, difficulty, mode, formatPrizes)); // pass awards and unlocks here
+        this.load(new QuestData(name, difficulty, mode, formatPrizes, allowSetUnlocks)); // pass awards and unlocks here
         
         if ( null != startingCards )
             this.myCards.addDeck(startingCards);
@@ -349,8 +349,8 @@ public class QuestController {
         }
 
         int toUnlock = this.questFormat.getExcludedSetCodes().size();
-        if (toUnlock > (wins + 50) / 50) {
-            toUnlock = (wins + 50) / 50;
+        if (toUnlock > 1 + wins / 50) {
+            toUnlock = 1 + wins / 50;
         }
         if (toUnlock > 8) {
             toUnlock = 8;

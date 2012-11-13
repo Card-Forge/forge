@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -96,11 +95,18 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final JComboBox cbxCustomDeck = new JComboBox();
     
     private final FLabel btnDefineCustomFormat = new FLabel.Builder().opaque(true).hoverable(true).text("Define custom format").build();
-
+    private final FLabel btnPrizeDefineCustomFormat = new FLabel.Builder().opaque(true).hoverable(true).text("Define custom format").build();
+    
     private final JLabel lblPrizedCards = new FLabel.Builder().text("Prized cards:").build();
     private final JComboBox cbxPrizedCards = new JComboBox();
     
-    private final JCheckBox cboAllowUnlocks = new FCheckBox("Allow sets unlock");
+    private final JLabel lblPrizeFormat = new FLabel.Builder().text("Sanctioned format:").build();
+    private final JComboBox cbxPrizeFormat = new JComboBox();
+   
+    private final JLabel lblPrizeUnrestricted = new FLabel.Builder().text("All cards will be avaliable to win.").build();
+    private final JLabel lblPrizeSameAsStarting = new FLabel.Builder().text("Only sets found in starting pool will be avaliable.").build();
+    
+    private final JCheckBox cboAllowUnlocks = new FCheckBox("Allow unlock of not included editions");
     
     private final FLabel btnEmbark = new FLabel.Builder().opaque(true)
             .fontSize(16).hoverable(true).text("Embark!").build();
@@ -136,6 +142,21 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         }
     }; 
     
+    /* Listeners */ 
+    private final ActionListener alPrizesPool = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            StartingPoolType newVal = getPrizedPoolType();
+            lblPrizeUnrestricted.setVisible(newVal == StartingPoolType.Complete);
+            cboAllowUnlocks.setVisible(newVal != StartingPoolType.Complete);
+            
+            lblPrizeFormat.setVisible(newVal == StartingPoolType.Rotating);
+            cbxPrizeFormat.setVisible(newVal == StartingPoolType.Rotating);
+            btnPrizeDefineCustomFormat.setVisible(newVal == StartingPoolType.CustomFormat);
+            lblPrizeSameAsStarting.setVisible(newVal == null);
+        }
+    };     
+    
     /**
      * Constructor.
      */
@@ -163,13 +184,20 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         
         // initial adjustment
         alStartingPool.actionPerformed(null);
+        alPrizesPool.actionPerformed(null);
         
-        cbxPrizedCards.addItem("Same format as staring pool");
-        cbxPrizedCards.addItem("More options to come (WIP)");
+        cbxPrizedCards.addItem("Same as starting pool");
+        cbxPrizedCards.addItem(StartingPoolType.Complete);
+        cbxPrizedCards.addItem(StartingPoolType.Rotating);
+        cbxPrizedCards.addItem(StartingPoolType.CustomFormat);
+        cbxPrizedCards.addActionListener(alPrizesPool);
         
         for (GameFormat gf : Singletons.getModel().getFormats()) {
             cbxFormat.addItem(gf);
+            cbxPrizeFormat.addItem(gf);
         }
+        
+        cboAllowUnlocks.setSelected(true);
 
         final Map<String, String> preconDescriptions = new HashMap<String, String>();
         IStorageView<PreconDeck> preconDecks = QuestController.getPrecons();
@@ -228,7 +256,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         final String cboWidth = "pushx, ";
         final String cboWidthStart = cboWidth + hidemode;
 
-        pnlRestrictions.setLayout(new MigLayout("insets 0, gap 0, wrap 2", "[120, al right][240, fill]", "[|]12[|]"));
+        pnlRestrictions.setLayout(new MigLayout("insets 0, gap 0, wrap 2", "[120, al right][240, fill]", "[|]12[|]6[]"));
         pnlRestrictions.add(lblStartingPool, constraints + lblWidthStart);
         pnlRestrictions.add(cbxStartingPool, constraints + cboWidthStart);
         
@@ -250,8 +278,15 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         pnlRestrictions.add(lblPrizedCards, constraints + lblWidth);
         pnlRestrictions.add(cbxPrizedCards, constraints + cboWidth);
         
-        pnlRestrictions.add(cboAllowUnlocks, constraints + "spanx 2, ax center");
-        cboAllowUnlocks.setOpaque(false);
+        
+        pnlRestrictions.add(lblPrizeFormat, constraints + lblWidthStart);
+        pnlRestrictions.add(cbxPrizeFormat, constraints + cboWidthStart); // , skip 1
+        pnlRestrictions.add(btnPrizeDefineCustomFormat, constraints + hidemode + "spanx 2, w 240px");
+        pnlRestrictions.add(lblPrizeSameAsStarting,  constraints + hidemode + "spanx 2" );
+        pnlRestrictions.add(lblPrizeUnrestricted, constraints + hidemode + "spanx 2" );
+        
+        pnlRestrictions.add(cboAllowUnlocks, constraints + "spanx 2, ax right");
+//        cboAllowUnlocks.setOpaque(false);
         pnlRestrictions.setOpaque(false);
         pnlOptions.add(pnlRestrictions, "pushx, ay top");
         
@@ -388,6 +423,12 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     public StartingPoolType getStartingPoolType() {
         return (StartingPoolType) cbxStartingPool.getSelectedItem();
     }
+    
+
+    public StartingPoolType getPrizedPoolType() {
+         Object v = cbxPrizedCards.getSelectedItem();
+         return v instanceof StartingPoolType ? (StartingPoolType) v : null;
+    }    
 
     public boolean isFantasy() {
         return boxFantasy.isSelected();
@@ -397,12 +438,15 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         return (GameFormat) cbxFormat.getSelectedItem();
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
+    public GameFormat getPrizedRotatingFormat() {
+        return (GameFormat) cbxPrizeFormat.getSelectedItem();
+    }    
+    
     public FLabel getBtnCustomFormat() {
-        // TODO Auto-generated method stub
         return btnDefineCustomFormat;
     }
+    public FLabel getBtnPrizeCustomFormat() {
+        return btnPrizeDefineCustomFormat;
+    }
+    
 }

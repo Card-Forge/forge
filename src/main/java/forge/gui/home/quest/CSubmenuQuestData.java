@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 import forge.Command;
@@ -13,6 +14,7 @@ import forge.deck.Deck;
 import forge.Singletons;
 import forge.game.GameFormat;
 import forge.gui.framework.ICDoc;
+import forge.item.CardPrinted;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
@@ -39,6 +41,7 @@ public enum CSubmenuQuestData implements ICDoc {
 
     private final VSubmenuQuestData view = VSubmenuQuestData.SINGLETON_INSTANCE;
     private final List<String> customFormatCodes = new ArrayList<String>();
+    private final List<String> customPrizeFormatCodes = new ArrayList<String>();
     
     private final Command cmdQuestSelect = new Command() { @Override
         public void execute() { changeQuest(); } };
@@ -57,6 +60,10 @@ public enum CSubmenuQuestData implements ICDoc {
         view.getBtnCustomFormat().setCommand( new Command() { @Override public void execute() { 
             new DialogCustomFormat(customFormatCodes);
         }});
+        
+        view.getBtnPrizeCustomFormat().setCommand( new Command() { @Override public void execute() { 
+            new DialogCustomFormat(customPrizeFormatCodes);
+        }});        
     }
 
     /* (non-Javadoc)
@@ -173,7 +180,42 @@ public enum CSubmenuQuestData implements ICDoc {
                 break;
         }
 
-        GameFormat fmtPrizes = fmtStartPool;
+        GameFormat fmtPrizes = null;
+        switch(view.getPrizedPoolType()) {
+        case Complete:
+            fmtPrizes = null;
+            break;
+        case CustomFormat:
+            if ( customPrizeFormatCodes.isEmpty() )
+            {
+                int answer = JOptionPane.showConfirmDialog(null, "You have defined custom format as containing no sets.\nThis will choose all editions without restriction as prized.\n\nContinue?");
+                if ( JOptionPane.YES_OPTION != answer )
+                    return;
+            }
+            fmtPrizes = customPrizeFormatCodes.isEmpty() ? null : new GameFormat("Custom Prizes", customPrizeFormatCodes, null); // chosen sets and no banend cards
+            break;
+        case Rotating:
+            fmtPrizes = view.getPrizedRotatingFormat();
+            break;
+        default: // same as starting
+            fmtPrizes = fmtStartPool;
+            if ( null == fmtPrizes && dckStartPool != null) { // build it form deck
+                List<String> sets = new ArrayList<String>();
+                for(Entry<CardPrinted, Integer> c : dckStartPool.getMain()) {
+                    String edition = c.getKey().getEdition();
+                    if ( !sets.contains(edition) )
+                        sets.add(edition);
+                }
+                for(Entry<CardPrinted, Integer> c : dckStartPool.getSideboard()) {
+                    String edition = c.getKey().getEdition();
+                    if ( !sets.contains(edition) )
+                        sets.add(edition);
+                }
+                fmtPrizes = new GameFormat("From deck", sets, null);
+            }
+            break;
+        
+        }
         
 
         final Object o = JOptionPane.showInputDialog(null, "Poets will remember your quest as:", "Quest Name", JOptionPane.OK_CANCEL_OPTION);

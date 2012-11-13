@@ -36,6 +36,8 @@ import forge.game.GameFormat;
  */
 public final class GameFormatQuest extends GameFormat {
 
+    private boolean allowUnlocks = true;
+
     /**
      * Instantiates a new game format based on two lists.
      * 
@@ -50,14 +52,20 @@ public final class GameFormatQuest extends GameFormat {
         super(newName, setsToAllow, cardsToBan);
     }
 
+    public GameFormatQuest(final String newName, final List<String> setsToAllow, final List<String> cardsToBan, boolean allowSetUnlocks) {
+        super(newName, setsToAllow, cardsToBan);
+        allowUnlocks = allowSetUnlocks;
+    }    
     /**
      * Instantiates a new game format based on an existing format.
      * 
      * @param toCopy
      *      an existing format
+     * @param allowSetUnlocks 
      */
-    public GameFormatQuest(final GameFormat toCopy) {
+    public GameFormatQuest(final GameFormat toCopy, boolean allowSetUnlocks) {
         this(toCopy.getName(), toCopy.getAllowedSetCodes(), toCopy.getBannedCardNames());
+        allowUnlocks = allowSetUnlocks;
     }
 
 
@@ -81,17 +89,6 @@ public final class GameFormatQuest extends GameFormat {
         }
         allowedSetCodes.clear();
     }
-
-    /** 
-     * @param setCode
-     *      the set code to add
-     */
-    public void addAllowedSet(final String setCode) {
-        if (!allowedSetCodes.contains(setCode)) {
-            allowedSetCodes.add(setCode);
-        }
-    }
-
 
     /**
      * Get the list of excluded sets.
@@ -135,6 +132,10 @@ public final class GameFormatQuest extends GameFormat {
      */
     public boolean hasSnowLands() {
         return (this.isSetLegal("ICE") || this.isSetLegal("CSP"));
+    }
+
+    public boolean canUnlockSets() {
+        return allowUnlocks;
     }
 
     /**
