@@ -6,12 +6,12 @@
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -26,10 +26,17 @@ import java.util.List;
 /**
  * SoundUtils - static methods for sound playback involving more than a simple
  * call to Sounds.soundName.play.
- * 
+ *
  * @author Agetian
  */
-public class SoundUtils {
+public final class SoundUtils {
+
+    /**
+     * This is a utility class, it does not have a public ctor.
+     *
+     */
+    private SoundUtils() {
+    }
 
     /**
      * Plays the sound corresponding to the card type/color when the card
@@ -42,13 +49,13 @@ public class SoundUtils {
         if (sa == null || source == null) {
             return;
         }
-        
+
         // if there's a specific effect for this particular card, play it and
         // we're done.
         if (playSpecificCardEffect(source)) {
             return;
         }
-        
+
         if (sa.isSpell()) {
             if (source.isCreature() && source.isArtifact()) {
                 Sounds.ArtifactCreature.play();
@@ -70,12 +77,13 @@ public class SoundUtils {
 
     /**
      * Plays the sound corresponding to the land type when the land is played.
-     * 
+     *
      * @param land the land card that was played
      */
     public static void playLandSoundEffect(final Card land) {
-        if (land == null)
+        if (land == null) {
             return;
+        }
 
         // if there's a specific effect for this particular card, play it and
         // we're done.
@@ -85,7 +93,7 @@ public class SoundUtils {
 
         final List<SpellAbility> manaProduced = land.getManaAbility();
         boolean effectPlayed = false;
-        
+
         for (SpellAbility sa : manaProduced) {
             String manaColors = sa.getManaPart().getManaProduced();
 
@@ -119,13 +127,13 @@ public class SoundUtils {
 
     /**
      * Play a specific sound effect based on card's name.
-     * 
+     *
      * @param c the card to play the sound effect for.
      * @return true if the special effect was found and played, otherwise
      *         false (in which case the type-based FX will be played, if
      *         applicable).
      */
-    private static boolean playSpecificCardEffect(Card c) {
+    private static boolean playSpecificCardEffect(final Card c) {
         // Implement sound effects for specific cards here, if necessary.
         return false;
     }
