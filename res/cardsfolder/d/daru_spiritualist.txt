@@ -1,0 +1,12 @@
+Name:Daru Spiritualist
+ManaCost:1 W
+Types:Creature Human Cleric
+Text:no text
+PT:1/1
+T:Mode$ BecomesTarget | ValidTarget$ Cleric.Creature+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a Cleric creature you control becomes the target of a spell or ability, it gets +0/+2 until end of turn.
+SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ TriggeredTarget | NumDef$ 2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/daru_spiritualist.jpg
+SetInfo:SCG|Common|http://magiccards.info/scans/en/sc/5.jpg
+Oracle:Whenever a Cleric creature you control becomes the target of a spell or ability, it gets +0/+2 until end of turn.
+End
