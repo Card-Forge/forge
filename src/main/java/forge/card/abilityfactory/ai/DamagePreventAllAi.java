@@ -10,8 +10,8 @@ import forge.card.spellability.SpellAbility;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 
-public class DamagePreventAllAi extends SpellAiLogic { 
-    
+public class DamagePreventAllAi extends SpellAiLogic {
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
@@ -19,7 +19,7 @@ public class DamagePreventAllAi extends SpellAiLogic {
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return true;
     }
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
