@@ -17,6 +17,10 @@ We have added the Conspire and the Protection mechanics for this version.
 
 When choosing cards, sources, etc. using a list box, the currently selected card will now be visually highlighted on the playfield (to better distinguish between e.g. three different cards with the same name on the playfield). Now the visual highlighting of a card will also work when declaring the order of blockers.
 
+Forge now has a sound effect system in place. Several basic sounds are linked to the code now and will be enabled when "Enable Sounds" option is checked in the preferences. It supports WAV and AU file formats. No sound files are included with this commit and must be submitted separately.
+
+Currently supported sound effects are: Draw (draw a card), EndOfTurn (end of turn), FlipCoin (when the match starts), LoseDuel (the duel is lost), Shuffle (cards are shuffled), Tap (card is tapped), Untap (card is untapped), WinDuel (the duel is won).
+
 --
 
 On several occasions people have noticed that the forge deck editor and/or quest mode card shop would not open or display. We have also received reports that some of the tabs/panels in the deck editor are missing. Try deleting the file named "editor_preferred.xml" which is found in the "res/layouts" folder. This should force forge to then use the "editor_default.xml" file instead.
