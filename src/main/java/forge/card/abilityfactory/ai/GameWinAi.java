@@ -23,7 +23,7 @@ public class GameWinAi extends SpellAiLogic {
         // But this card wins the game, I can make an exception for that
         return true;
     }
-    
+
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
