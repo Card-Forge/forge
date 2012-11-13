@@ -8,7 +8,7 @@ import forge.game.player.Player;
 
 public class DelayedTriggerAi extends SpellAiLogic {
     private static AbilityFactory tempCreator = new AbilityFactory();
-    
+
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         final String svarName = sa.getParam("Execute");
