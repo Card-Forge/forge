@@ -1,9 +1,12 @@
 Name:Phyrexian Processor
 ManaCost:4
 Types:Artifact
-Text:As CARDNAME enters the battlefield, pay any amount of life.
-A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenName$ Minion | TokenTypes$ Creature,Minion | TokenOwner$ You | TokenColors$ Black | TokenPower$ X | TokenToughness$ X | References$ X | TokenImage$ B X X Minion | SpellDescription$ Put an X/X black Minion creature token onto the battlefield, where X is the life paid as Phyrexian Processor entered the battlefield.
-SVar:X:Count$xLifePaid
+Text:no text
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ PayLife | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, pay any amount of life.
+SVar:PayLife:AB$ StoreSVar | Cost$ PayLife<X> | References$ X | SVar$ LifePaidOnETB | Type$ CountSVar | Expression$ ChosenX
+A:AB$ Token | Cost$ 4 T | TokenAmount$ 1 | TokenName$ Minion | TokenTypes$ Creature,Minion | TokenOwner$ You | TokenColors$ Black | TokenPower$ LifePaidOnETB | TokenToughness$ LifePaidOnETB | TokenImage$ B X X Minion | SpellDescription$ Put an X/X black Minion creature token onto the battlefield, where X is the life paid as Phyrexian Processor entered the battlefield.
+SVar:X:XChoice
+SVar:LifePaidOnETB:Number$0
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/phyrexian_processor.jpg

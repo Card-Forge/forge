@@ -320,7 +320,7 @@ class CardFactoryArtifacts {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Phyrexian Processor")) {
+        /*else if (cardName.equals("Phyrexian Processor")) {
             final Command intoPlay = new Command() {
                 private static final long serialVersionUID = 5634360316643996274L;
 
@@ -348,7 +348,7 @@ class CardFactoryArtifacts {
                 }
             };
             card.addComesIntoPlayCommand(intoPlay);
-        } // *************** END ************ END **************************
+        }*/ // *************** END ************ END **************************
 
         // *************** START *********** START **************************
         else if (cardName.equals("Scroll Rack")) {
