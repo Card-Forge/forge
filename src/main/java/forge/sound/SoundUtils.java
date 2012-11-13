@@ -38,6 +38,10 @@ public class SoundUtils {
      * @param sa the spell ability that was resolving.
      */
     public static void playCardSoundEffect(final Card source, final SpellAbility sa) {
+        if (sa == null || source == null) {
+            return;
+        }
+        
         if (sa.isSpell()) {
             if (source.isCreature() && source.isArtifact()) {
                 Sounds.ArtifactCreature.play();
@@ -60,6 +64,9 @@ public class SoundUtils {
      * @param land the land card that was played
      */
     public static void playLandSoundEffect(final Card land) {
+        if (land == null)
+            return;
+
         final List<SpellAbility> manaProduced = land.getManaAbility();
         boolean effectPlayed = false;
         
