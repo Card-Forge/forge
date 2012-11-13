@@ -60,6 +60,7 @@ import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.properties.ForgePreferences.FPref;
+import forge.sound.SoundUtils;
 import forge.sound.Sounds;
 import forge.util.MyRandom;
 
@@ -1838,6 +1839,9 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
 
             // add to log
             game.getGameLog().add("Land", this + " played " + land, 2);
+
+            // play a sound
+            SoundUtils.playLandSoundEffect(land);
 
             // Run triggers
             final HashMap<String, Object> runParams = new HashMap<String, Object>();

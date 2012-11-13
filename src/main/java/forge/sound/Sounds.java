@@ -22,26 +22,44 @@ import forge.Singletons;
 import forge.properties.ForgePreferences.FPref;
 
 /**
- * Sounds (enumeration) - all sounds in the game must be declared here.
- * Once declared, the sound can be played from anywhere in the code
- * using Sounds.soundName.play(). The sounds are only preloaded once,
- * so there is no memory overhead for playing the sound multiple times.
- * 
- * Currently, if the file does not exist, it is not a fatal error. 
- * No sound is played in that case, a simple message is generated on
- * the debug console during preloading.
- * 
+ * Sounds (enumeration) - all sounds in the game must be declared here. Once
+ * declared, the sound can be played from anywhere in the code using
+ * Sounds.soundName.play(). The sounds are only preloaded once, so there is no
+ * memory overhead for playing the sound multiple times.
+ *
+ * Currently, if the file does not exist, it is not a fatal error. No sound is
+ * played in that case, a simple message is generated on the debug console
+ * during preloading.
+ *
  * @author Agetian
  */
 public enum Sounds {
     // Sounds must be listed in alphabetic order.
+
+    Artifact("res/sound/artifact.wav"),
+    ArtifactCreature("res/sound/artifact_creature.wav"),
+    BlackLand("res/sound/black_land.wav"),
+    BlueLand("res/sound/blue_land.wav"),
+    Counter("res/sound/counter.wav"), /* NOT IMPLEMENTED YET */
+    Creature("res/sound/creature.wav"),
+    Damage("res/sound/damage.wav"), /* NOT IMPLEMENTED YET */
+    Discard("res/sound/discard.wav"), /* NOT IMPLEMENTED YET */
     Draw("res/sound/draw.wav"),
-    EndOfTurn("res/sound/end_of_turn.wav"), 
+    Enchant("res/sound/enchant.wav"), /* NOT IMPLEMENTED YET */
+    EndOfTurn("res/sound/end_of_turn.wav"),
     FlipCoin("res/sound/flip_coin.wav"),
+    GreenLand("res/sound/green_land.wav"),
     LoseDuel("res/sound/lose_duel.wav"),
+    OtherLand("res/sound/other_land.wav"),
+    Planeswalker("res/sound/planeswalker.wav"),
+    Poison("res/sound/poison.wav"), /* NOT IMPLEMENTED YET */
+    RedLand("res/sound/red_land.wav"),
+    Regen("res/sound/regeneration.wav"), /* NOT IMPLEMENTED YET */
+    Sacrifice("res/sound/sacrifice.wav"), /* NOT IMPLEMENTED YET */
     Shuffle("res/sound/shuffle.wav"),
     Tap("res/sound/tap.wav"),
     Untap("res/sound/untap.wav"),
+    WhiteLand("res/sound/white_land.wav"),
     WinDuel("res/sound/win_duel.wav");
 
     SoundSystem snd = null;
