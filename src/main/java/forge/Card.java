@@ -1257,9 +1257,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.CounterAdded, runParams);
         }
 
-        // play the Add Counter sound
-        Sounds.AddCounter.play();
-
         this.updateObservers();
     }
 
@@ -1293,9 +1290,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.CounterAdded, runParams);
         }
 
-        // play the Add Counter sound
-        Sounds.AddCounter.play();
-        
         this.updateObservers();
     }
 
@@ -1366,10 +1360,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 }
             }
-
-            // play the Subtract Counter sound
-            Sounds.RemoveCounter.play();
-
             this.updateObservers();
         }
     }
@@ -3865,9 +3855,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.addEquipping(c);
         c.addEquippedBy(this);
         this.equip();
-
-        // Play the Equip sound
-        Sounds.Equip.play();
     }
 
     /**
@@ -5826,6 +5813,17 @@ public class Card extends GameEntity implements Comparable<Card> {
             optionalAdditionalCostsPaid = new ArrayList<String>();
         }
         this.optionalAdditionalCostsPaid.add(cost);
+    }
+    
+    /**
+     * <p>
+     * optionalAdditionalCostsPaid.
+     * </p>
+     */
+    public final void clearAdditionalCostsPaid() {
+        if (optionalAdditionalCostsPaid != null) {
+            optionalAdditionalCostsPaid.clear();
+        }
     }
 
     /**
