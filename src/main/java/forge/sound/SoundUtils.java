@@ -50,8 +50,12 @@ public class SoundUtils {
                 Sounds.Creature.play();
             } else if (source.isArtifact()) {
                 Sounds.Artifact.play();
+            } else if (source.isInstant()) {
+                Sounds.Instant.play();
             } else if (source.isPlaneswalker()) {
                 Sounds.Planeswalker.play();
+            } else if (source.isSorcery()) {
+                Sounds.Sorcery.play();
             } else if (source.isEnchantment()) {
                 Sounds.Enchantment.play();
             }

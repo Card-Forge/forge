@@ -45,17 +45,20 @@ public enum Sounds {
     Damage("res/sound/damage.wav"), /* NOT IMPLEMENTED YET */
     Discard("res/sound/discard.wav"), /* NOT IMPLEMENTED YET */
     Draw("res/sound/draw.wav"),
-    Enchant("res/sound/enchant.wav"), /* NOT IMPLEMENTED YET */
+    Enchantment("res/sound/enchant.wav"), /* NOT IMPLEMENTED YET */
     EndOfTurn("res/sound/end_of_turn.wav"),
     FlipCoin("res/sound/flip_coin.wav"),
     GreenLand("res/sound/green_land.wav"),
+    Hit("res/sound/hit.wav"),
+    Instant("res/sound/instant.wav"),
     LoseDuel("res/sound/lose_duel.wav"),
     OtherLand("res/sound/other_land.wav"),
     Planeswalker("res/sound/planeswalker.wav"),
-    Poison("res/sound/poison.wav"), /* NOT IMPLEMENTED YET */
+    Poison("res/sound/poison.wav"),
     RedLand("res/sound/red_land.wav"),
     Regen("res/sound/regeneration.wav"), /* NOT IMPLEMENTED YET */
     Sacrifice("res/sound/sacrifice.wav"), /* NOT IMPLEMENTED YET */
+    Sorcery("res/sound/sorcery.wav"),
     Shuffle("res/sound/shuffle.wav"),
     Tap("res/sound/tap.wav"),
     Untap("res/sound/untap.wav"),
