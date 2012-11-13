@@ -12,7 +12,7 @@ import forge.game.player.Player;
 import forge.util.MyRandom;
 
 public class DrainManaAi extends SpellAiLogic {
-    
+
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // AI cannot use this properly until he can use SAs during Humans turn
