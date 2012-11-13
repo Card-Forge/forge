@@ -41,8 +41,8 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-public class DrawAi extends SpellAiLogic {    
-  
+public class DrawAi extends SpellAiLogic {
+
     /* (non-Javadoc)
          * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
          */
@@ -132,7 +132,7 @@ public class DrawAi extends SpellAiLogic {
         final Card source = sa.getSourceCard();
 
         Player opp = ai.getOpponent();
-        
+
         int computerHandSize = ai.getCardsIn(ZoneType.Hand).size();
         final int humanLibrarySize = opp.getCardsIn(ZoneType.Library).size();
         final int computerLibrarySize = ai.getCardsIn(ZoneType.Library).size();
@@ -255,5 +255,5 @@ public class DrawAi extends SpellAiLogic {
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
         return targetAI(ai, sa, mandatory);
     }
-    
+
 }
