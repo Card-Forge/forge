@@ -46,15 +46,14 @@ public class SoundUtils {
         if (sa.isSpell()) {
             if (source.isCreature() && source.isArtifact()) {
                 Sounds.ArtifactCreature.play();
-            }
-            else if (source.isCreature()) {
+            } else if (source.isCreature()) {
                 Sounds.Creature.play();
-            }
-            else if (source.isArtifact()) {
+            } else if (source.isArtifact()) {
                 Sounds.Artifact.play();
-            }
-            else if (source.isPlaneswalker()) {
+            } else if (source.isPlaneswalker()) {
                 Sounds.Planeswalker.play();
+            } else if (source.isEnchantment()) {
+                Sounds.Enchantment.play();
             }
         }
     }
