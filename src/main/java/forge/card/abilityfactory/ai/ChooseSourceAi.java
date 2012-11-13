@@ -35,7 +35,7 @@ public class ChooseSourceAi extends SpellAiLogic {
         final Card host = sa.getSourceCard();
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
-        
+
         if (abCost != null) {
             // AI currently disabled for these costs
             if (!CostUtil.checkLifeCost(ai, abCost, source, 4, null)) {
