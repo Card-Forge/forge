@@ -13,8 +13,8 @@ import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 
-public class FightAi extends SpellAiLogic { 
-    
+public class FightAi extends SpellAiLogic {
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -65,7 +65,7 @@ public class FightAi extends SpellAiLogic {
                 if (creature1.equals(creature2)) {
                     continue;
                 }
-                if (sa.hasParam("TargetsWithoutSameCreatureType") 
+                if (sa.hasParam("TargetsWithoutSameCreatureType")
                         && creature1.sharesCreatureTypeWith(creature2)) {
                     continue;
                 }
