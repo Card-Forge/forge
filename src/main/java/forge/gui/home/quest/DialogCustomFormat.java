@@ -77,7 +77,7 @@ public class DialogCustomFormat extends JDialog {
                     CardEdition edition = getIdx < numEditions ? editions.get(getIdx) : null;
                     box = new JCheckBox(edition.getName());
                     box.setName(edition.getCode());
-                    box.setSelected(customFormat.contains(edition));
+                    box.setSelected(customFormat.contains(edition.getCode()));
                     choices.add(box);
                 } else {
                     box = new JCheckBox();
@@ -141,7 +141,7 @@ public class DialogCustomFormat extends JDialog {
         customFormat.clear();
         for (JCheckBox box : choices) {
             if (box.isSelected()) {
-                customFormat.add(box.getText());
+                customFormat.add(box.getName());
             }
         }
     }

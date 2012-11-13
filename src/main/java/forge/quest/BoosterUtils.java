@@ -21,10 +21,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 
 
@@ -85,16 +87,17 @@ public final class BoosterUtils {
             colorFilters.add(CardRulesPredicates.Presets.IS_GREEN);
         }
 
-        final Iterable<CardPrinted> cardpool = CardDb.instance().getAllUniqueCards();
+        // This will save CPU time when sets are limited
+        final List<CardPrinted> cardpool = Lists.newArrayList(Iterables.filter(CardDb.instance().getAllCards(), filter));
 
-        final Predicate<CardPrinted> pCommon = Predicates.and(filter, CardPrinted.Predicates.Presets.IS_COMMON);
+        final Predicate<CardPrinted> pCommon = CardPrinted.Predicates.Presets.IS_COMMON;
         cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, pCommon, numCommon, colorFilters));
 
-        final Predicate<CardPrinted> pUncommon = Predicates.and(filter, CardPrinted.Predicates.Presets.IS_UNCOMMON);
+        final Predicate<CardPrinted> pUncommon = CardPrinted.Predicates.Presets.IS_UNCOMMON;
         cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, pUncommon, numUncommon, colorFilters));
 
         int nRares = numRare, nMythics = 0;
-        final Predicate<CardPrinted> filterMythics = Predicates.and(filter, CardPrinted.Predicates.Presets.IS_MYTHIC_RARE);
+        final Predicate<CardPrinted> filterMythics = CardPrinted.Predicates.Presets.IS_MYTHIC_RARE;
         final boolean haveMythics = Iterables.any(cardpool, filterMythics);
         for (int iSlot = 0; haveMythics && (iSlot < numRare); iSlot++) {
             if (MyRandom.getRandom().nextInt(10) < 1) {
@@ -104,7 +107,7 @@ public final class BoosterUtils {
             }
         }
 
-        final Predicate<CardPrinted> pRare = Predicates.and(filter, CardPrinted.Predicates.Presets.IS_RARE);
+        final Predicate<CardPrinted> pRare = CardPrinted.Predicates.Presets.IS_RARE;
         cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, pRare, nRares, colorFilters));
         if (nMythics > 0) {
             cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, filterMythics, nMythics, colorFilters));
