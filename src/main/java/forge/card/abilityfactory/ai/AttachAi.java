@@ -213,7 +213,7 @@ public class AttachAi extends SpellAiLogic {
                 final Iterator<Card> itr = auras.iterator();
                 while (itr.hasNext()) {
                     final Card aura = itr.next();
-                    SpellAbility auraSA = aura.getSpellPermanent();
+                    SpellAbility auraSA = aura.getSpells().get(0);
                     if (auraSA.getApi() == ApiType.Attach) {
                         if ("KeepTapped".equals(auraSA.getParam("AILogic"))) {
                             // Don't attach multiple KeepTapped Auras to one
