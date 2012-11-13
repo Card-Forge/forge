@@ -31,7 +31,7 @@ public class SoundSystem {
     private Clip clip;
     private final int SOUND_SYSTEM_DELAY = 30;
 
-    public SoundSystem(String filename) {
+    public SoundSystem(final String filename) {
         try {
             AudioInputStream stream = AudioSystem.getAudioInputStream(new File(filename));
             AudioFormat format = stream.getFormat();

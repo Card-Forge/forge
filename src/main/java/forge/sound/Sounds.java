@@ -65,13 +65,13 @@ public enum Sounds {
     WhiteLand("res/sound/white_land.wav"),
     WinDuel("res/sound/win_duel.wav");
 
-    SoundSystem snd = null;
+    private SoundSystem snd = null;
     
     /**
      * @param filename 
      *              name of the sound file associated with the entry.
      */
-    Sounds(String filename) {
+    Sounds(final String filename) {
         snd = new SoundSystem(filename);
     }
 
