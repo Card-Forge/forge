@@ -18,8 +18,6 @@
 package forge.card.cardfactory;
 
 import forge.Card;
-import forge.Counters;
-import forge.card.spellability.Ability;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 

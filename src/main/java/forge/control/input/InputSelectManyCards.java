@@ -16,12 +16,12 @@ public class InputSelectManyCards extends InputSelectMany<Card> {
     protected final Function<List<Card>, Input> onComplete; 
 
 
-//    public InputSelectManyCards(final List<Card> allowedList, int min, int max, final Function<List<T>, Input> onDone)
-//    {
-//        super(min, max, onDone);
-//        allowedCards = allowedList;
-//    }
-//    
+    protected InputSelectManyCards(int min, int max)
+    {
+        super(min, max);
+        onComplete = null;
+    }
+    
     public InputSelectManyCards(final Predicate<Card> allowedRule, int min, int max, final Function<List<Card>, Input> onDone)
     {
         super(min, max);
@@ -30,7 +30,7 @@ public class InputSelectManyCards extends InputSelectMany<Card> {
     }        
     
     @Override
-    public void selectCard(final Card c) {
+    public final void selectCard(final Card c) {
         selectEntity(c);
     }
     

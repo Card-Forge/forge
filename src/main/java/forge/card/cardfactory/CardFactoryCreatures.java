@@ -922,7 +922,7 @@ public class CardFactoryCreatures {
     private static void getCard_PhyrexianDreadnought(final Card card, final String cardName) {
         final Player player = card.getController();
 
-        final Input target = new InputSelectMany<Card>(0, Integer.MAX_VALUE) {
+        final Input target = new InputSelectManyCards(0, Integer.MAX_VALUE) {
             private static final long serialVersionUID = 2698036349873486664L;
 
             @Override
@@ -971,12 +971,7 @@ public class CardFactoryCreatures {
                 }
                 return sum;
             }
-
-            @Override
-            public void selectCard(Card c) {
-                selectEntity(c);
-            }
-        }; // Input        
+        }; // Input
         
         
         final Ability sacOrSac = new Ability(card, "") {

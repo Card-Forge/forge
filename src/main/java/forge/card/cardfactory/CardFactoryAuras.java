@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.esotericsoftware.minlog.Log;
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
@@ -248,22 +247,11 @@ class CardFactoryAuras {
             card.addUnEnchantCommand(onUnEnchant);
             card.addLeavesPlayCommand(onLeavesPlay);
 
-            Function<List<Card>, Input> onSelected = new Function<List<Card>, Input>() {
-                @Override
-                public final Input apply(List<Card> selected) {
-                    spell.setTargetCard(selected.get(0));
-                    if (spell.getManaCost().equals("0")) {
-                        Singletons.getModel().getGame().getStack().add(spell);
-                        return null;
-                    } else {
-                        return new InputPayManaCost(spell);
-                    }
-                }
-            };
+            InputSelectManyCards runtime = new InputSelectManyCards(1, 1) {
+                private static final long serialVersionUID = 3306017877120093415L;
 
-            Predicate<Card> canTarget = new Predicate<Card>() {
                 @Override
-                public boolean apply(Card c) {
+                protected boolean isValidChoice(Card c) {
                     if (!c.isLand() || !c.isInZone(ZoneType.Battlefield))
                         return false;
                         
@@ -273,10 +261,19 @@ class CardFactoryAuras {
                     }
                     
                     return true;
-                }
+                };
+                
+                @Override
+                protected Input onDone() {
+                    spell.setTargetCard(selected.get(0));
+                    if (spell.getManaCost().equals("0")) {
+                        Singletons.getModel().getGame().getStack().add(spell);
+                        return null;
+                    } else {
+                        return new InputPayManaCost(spell);
+                    }
+                };
             };
-
-            InputSelectManyCards runtime = new InputSelectManyCards(canTarget, 1, 1, onSelected);
             runtime.setMessage("Select target land");
             spell.setBeforePayMana(runtime);
         } // *************** END ************ END **************************

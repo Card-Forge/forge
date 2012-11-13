@@ -41,6 +41,7 @@ import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.control.input.InputSelectManyCards;
 import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -477,28 +478,27 @@ public class Upkeep extends Phase {
                 @Override
                 public void resolve() {
                     final List<Card> targets = CardLists.getTargetableCards(abyssGetTargets, this);
-                    if (player.isHuman()) {
-                        if (targets.size() > 0) {
-                            Singletons.getModel().getMatch().getInput().setInput(new Input() {
-                                private static final long serialVersionUID = 4820011040853968644L;
+                    final Input chooseArt = new InputSelectManyCards(1, 1) {
+                        private static final long serialVersionUID = 4820011040853968644L;
 
-                                @Override
-                                public void showMessage() {
-                                    CMatchUI.SINGLETON_INSTANCE.showMessage(abyss.getName() + " - Select one nonartifact creature to destroy");
-                                    ButtonUtil.disableAll();
-                                }
-
-                                @Override
-                                public void selectCard(final Card selected) {
-                                    // probably need to restrict by controller
-                                    // also
-                                    if (targets.contains(selected)) {
-                                        Singletons.getModel().getGame().getAction().destroyNoRegeneration(selected);
-                                        this.stop();
-                                    }
-                                } // selectCard()
-                            }); // Input
+                        @Override
+                        public String getMessage() {
+                            return abyss.getName() + " - Select one nonartifact creature to destroy";
                         }
+
+                        @Override
+                        protected boolean isValidChoice(Card choice) {
+                            return choice.isCreature() && !choice.isArtifact() && canTarget(choice) && choice.getController() == player;
+                        };
+                        
+                        @Override 
+                        protected Input onDone() {
+                            Singletons.getModel().getGame().getAction().destroyNoRegeneration(selected.get(0));
+                            return null;
+                        }
+                    };
+                    if (player.isHuman() && targets.size() > 0) {
+                        Singletons.getModel().getMatch().getInput().setInput(chooseArt); // Input
                     } else { // computer
 
                         final List<Card> indestruct = CardLists.getKeyword(targets, "Indestructible");
