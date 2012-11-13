@@ -8,8 +8,8 @@ import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 
-public class FogAi extends SpellAiLogic {     
-    
+public class FogAi extends SpellAiLogic {
+
     /* (non-Javadoc)
          * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
          */
@@ -41,7 +41,7 @@ public class FogAi extends SpellAiLogic {
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
         // AI should only activate this during Human's turn
         boolean chance;
-        
+
         // should really check if other player is attacking this player
         if (ai.isHostileTo(Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn())) {
             chance = Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_FIRST_STRIKE_DAMAGE);
