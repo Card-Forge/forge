@@ -1254,6 +1254,9 @@ public class GameAction {
 
             if (c.getCounters(Counters.LOYALTY) <= 0) {
                 Singletons.getModel().getGame().getAction().moveToGraveyard(c);
+
+                // Play the Destroy sound
+                Sounds.Destroy.play();
             }
 
             final ArrayList<String> types = c.getType();
@@ -1298,6 +1301,9 @@ public class GameAction {
                 for (int i = 0; i < b.size(); i++) {
                     Singletons.getModel().getGame().getAction().sacrificeDestroy(b.get(i));
                 }
+
+                // Play the Destroy sound
+                Sounds.Destroy.play();
             }
         }
     } // destroyLegendaryCreatures()
@@ -1324,6 +1330,9 @@ public class GameAction {
             return false;
         }
         this.sacrificeDestroy(c);
+
+        // Play the Sacrifice sound
+        Sounds.Sacrifice.play();
 
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
@@ -1376,6 +1385,8 @@ public class GameAction {
                         GameAction.this.destroy(crd);
                         card.setDamage(0);
 
+                        // Play the Destroy sound
+                        Sounds.Destroy.play();
                     }
                 };
 
@@ -1387,6 +1398,9 @@ public class GameAction {
                 return false;
             }
         } // totem armor
+
+        // Play the Destroy sound
+        Sounds.Destroy.play();
 
         return this.sacrificeDestroy(c);
     }
@@ -1533,6 +1547,10 @@ public class GameAction {
             c.tap();
             c.addRegeneratedThisTurn();
             game.getCombat().removeFromCombat(c);
+
+            // Play the Regeneration sound
+            Sounds.Regen.play();
+
             return false;
         }
 
@@ -1560,11 +1578,18 @@ public class GameAction {
 
                 c.setDamage(0);
                 this.destroy(crd);
+
+                // Play the Destroy sound
+                Sounds.Destroy.play();
+
                 System.out.println("Totem armor destroyed instead of original card");
                 return false;
             }
         } // totem armor
 
+        // Play the Destroy sound
+        Sounds.Destroy.play();
+        
         return this.sacrificeDestroy(c);
     }
 

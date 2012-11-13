@@ -36,28 +36,32 @@ import forge.properties.ForgePreferences.FPref;
 public enum Sounds {
     // Sounds must be listed in alphabetic order.
 
+    AddCounter("res/sound/add_counter.wav"),
     Artifact("res/sound/artifact.wav"),
     ArtifactCreature("res/sound/artifact_creature.wav"),
     BlackLand("res/sound/black_land.wav"),
     BlueLand("res/sound/blue_land.wav"),
-    Counter("res/sound/counter.wav"), /* NOT IMPLEMENTED YET */
     Creature("res/sound/creature.wav"),
-    Damage("res/sound/damage.wav"), /* NOT IMPLEMENTED YET */
-    Discard("res/sound/discard.wav"), /* NOT IMPLEMENTED YET */
+    Damage("res/sound/damage.wav"), 
+    Destroy("res/sound/destroy.wav"),
+    Discard("res/sound/discard.wav"),
     Draw("res/sound/draw.wav"),
-    Enchantment("res/sound/enchant.wav"), /* NOT IMPLEMENTED YET */
+    Enchantment("res/sound/enchant.wav"), 
     EndOfTurn("res/sound/end_of_turn.wav"),
+    Equip("res/sound/equip.wav"),
     FlipCoin("res/sound/flip_coin.wav"),
     GreenLand("res/sound/green_land.wav"),
     Instant("res/sound/instant.wav"),
     LifeLoss("res/sound/life_loss.wav"),
     LoseDuel("res/sound/lose_duel.wav"),
+    ManaBurn("res/sound/mana_burn.wav"),
     OtherLand("res/sound/other_land.wav"),
     Planeswalker("res/sound/planeswalker.wav"),
     Poison("res/sound/poison.wav"),
     RedLand("res/sound/red_land.wav"),
-    Regen("res/sound/regeneration.wav"), /* NOT IMPLEMENTED YET */
-    Sacrifice("res/sound/sacrifice.wav"), /* NOT IMPLEMENTED YET */
+    Regen("res/sound/regeneration.wav"),
+    RemoveCounter("res/sound/remove_counter.wav"),
+    Sacrifice("res/sound/sacrifice.wav"),
     Sorcery("res/sound/sorcery.wav"),
     Shuffle("res/sound/shuffle.wav"),
     Tap("res/sound/tap.wav"),

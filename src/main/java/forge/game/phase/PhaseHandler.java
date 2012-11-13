@@ -424,6 +424,9 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             int burn = p.getManaPool().clearPool(true);
             if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_MANABURN)) {
                 p.loseLife(burn);
+
+                // Play the Mana Burn sound
+                Sounds.ManaBurn.play();
             }
             p.updateObservers();
         }

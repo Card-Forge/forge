@@ -50,13 +50,13 @@ public final class SoundUtils {
             return;
         }
 
-        // if there's a specific effect for this particular card, play it and
-        // we're done.
-        if (playSpecificCardEffect(source)) {
-            return;
-        }
-
         if (sa.isSpell()) {
+            // if there's a specific effect for this particular card, play it and
+            // we're done.
+            if (playSpecificCardEffect(source)) {
+                return;
+            }
+
             if (source.isCreature() && source.isArtifact()) {
                 Sounds.ArtifactCreature.play();
             } else if (source.isCreature()) {

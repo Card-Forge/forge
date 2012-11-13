@@ -1597,8 +1597,14 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
                         + "counters on it instead of putting it into your graveyard."))
                 && (null != sa) && !c.getController().equals(sa.getSourceCard().getController())) {
             game.getAction().discardPutIntoPlayInstead(c);
+
+            // Play the corresponding Put into Play sound
+            SoundUtils.playCardSoundEffect(c, sa);
         } else {
             game.getAction().moveToGraveyard(c);
+
+            // Play the Discard sound
+            Sounds.Discard.play();
         }
 
         // Run triggers

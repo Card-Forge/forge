@@ -55,6 +55,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
+import forge.sound.Sounds;
 import forge.util.MyRandom;
 
 
@@ -609,6 +610,9 @@ public final class GameActionUtil {
         final boolean winFlip = flip == choice.equals("heads");
         final String winMsg = winFlip ? " wins flip." : " loses flip.";
 
+        // Play the Flip A Coin sound
+        Sounds.FlipCoin.play();
+
         JOptionPane.showMessageDialog(null, source.getName() + " - " + caller + winMsg, source.getName(),
                 JOptionPane.PLAIN_MESSAGE);
         return winFlip;
@@ -689,6 +693,9 @@ public final class GameActionUtil {
                 Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
             }
         }
+
+        // Play the Damage sound
+        Sounds.Damage.play();
     }
 
     // this is for cards like Sengir Vampire
@@ -852,6 +859,9 @@ public final class GameActionUtil {
         }
 
         c.getDamageHistory().registerCombatDamage(player);
+
+        // Play the Life Loss sound
+        Sounds.LifeLoss.play();
     } // executeCombatDamageToPlayerEffects
 
     /**
