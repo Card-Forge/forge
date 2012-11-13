@@ -24,7 +24,7 @@ public class DebuffAllAi extends SpellAiLogic {
         // final Card source = sa.getSourceCard();
         final Card hostCard = sa.getSourceCard();
         final Player opp = ai.getOpponent();
-        
+
         final boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn()); // to
         // prevent
         // runaway
