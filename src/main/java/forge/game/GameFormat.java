@@ -17,6 +17,7 @@
  */
 package forge.game;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class GameFormat {
     public GameFormat(final String fName, final List<String> sets, final List<String> bannedCards) {
         this.name = fName;
         this.allowedSetCodes = Lists.newArrayList(sets);
-        this.bannedCardNames = Lists.newArrayList(bannedCards);
+        this.bannedCardNames = bannedCards == null ? new ArrayList<String>() : Lists.newArrayList(bannedCards);
         
         this.allowedSetCodes_ro = Collections.unmodifiableList(allowedSetCodes);
         this.bannedCardNames_ro = Collections.unmodifiableList(bannedCardNames);

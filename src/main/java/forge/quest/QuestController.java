@@ -17,7 +17,6 @@
  */
 package forge.quest;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +26,7 @@ import com.google.common.base.Predicates;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.quest.data.GameFormatQuest;
+import forge.game.GameFormat;
 import forge.item.CardPrinted;
 import forge.item.PreconDeck;
 import forge.properties.ForgeProps;
@@ -217,45 +217,23 @@ public class QuestController {
      * @param userDeck
      *      user-specified starting deck
      */
-    public void newGame(final String name, final int diff, final QuestMode mode, final QuestStartPool startPool,
-            final String startFormat, final String preconName, final GameFormatQuest userFormat, final boolean persist,
-            final File userDeck) {
+    public void newGame(final String name, final int difficulty, final QuestMode mode, 
+            final GameFormat formatPrizes, final boolean allowSetUnlocks,
+            final Deck startingCards, final GameFormat formatStartingPool) {
 
-        if (persist
-                && (startPool == QuestStartPool.Rotating || startPool == QuestStartPool.Precon || startPool == QuestStartPool.UserDeck)) {
-            this.load(new QuestData(name, diff, mode, startFormat, userFormat));
-        } else {
-            this.load(new QuestData(name, diff, mode, null, null));
+        this.load(new QuestData(name, difficulty, mode, formatPrizes)); // pass awards and unlocks here
+        
+        if ( null != startingCards )
+            this.myCards.addDeck(startingCards);
+        else {
+            Predicate<CardPrinted> filter = Predicates.alwaysTrue();
+            if ( formatStartingPool != null ) 
+                filter = formatStartingPool.getFilterPrinted();
+            this.myCards.setupNewGameCardPool(filter, difficulty);
         }
 
-        final Predicate<CardPrinted> filter;
-        switch (startPool) {
-        case UserDeck:
-            if (userDeck == null) {
-                throw new RuntimeException("User deck is null!");
-            }
-            this.myCards.addDeck(Deck.fromFile(userDeck));
-            return;
-        case Precon:
-            this.myCards.addPreconDeck(QuestController.getPrecons().get(preconName));
-            return;
-
-        case Rotating:
-            if (userFormat != null) {
-                filter = userFormat.getFilterPrinted();
-            } else {
-                filter = Singletons.getModel().getFormats().getFormat(startFormat).getFilterPrinted();
-            }
-            break;
-
-        default: // Unrestricted
-            filter = Predicates.alwaysTrue();
-            break;
-        }
-
-        this.getAssets().setCredits(
-                Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.STARTING_CREDITS, diff));
-        this.myCards.setupNewGameCardPool(filter, diff);
+        this.getAssets().setCredits(Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.STARTING_CREDITS, difficulty));
+        
     }
 
     /**

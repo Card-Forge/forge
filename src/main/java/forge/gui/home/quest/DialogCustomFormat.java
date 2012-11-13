@@ -5,11 +5,8 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.TreeMap;
-
-
-
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
@@ -18,7 +15,6 @@ import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
 
 import forge.card.CardEdition;
-import forge.quest.data.GameFormatQuest;
 import forge.Singletons;
 
 /** 
@@ -32,9 +28,8 @@ public class DialogCustomFormat extends JDialog {
     private final JButton btnOK = new JButton("OK");
     private final JButton btnCancel = new JButton("Cancel");
     private final JPanel buttonPanel = new JPanel();
-    private GameFormatQuest customFormat;
-    private JCheckBox [] choices;
-    private String [] codes;
+    private final List<String> customFormat;
+    private final List<JCheckBox> choices = new ArrayList<JCheckBox>();
 
 
     /**
@@ -44,7 +39,7 @@ public class DialogCustomFormat extends JDialog {
      *  GameFormatQuest, the user-defined format to update
      * 
      */
-    public DialogCustomFormat(GameFormatQuest userFormat) {
+    public DialogCustomFormat(List<String> userFormat) {
 
         customFormat = userFormat;
         if (customFormat == null) {
@@ -52,47 +47,44 @@ public class DialogCustomFormat extends JDialog {
         }
 
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        TreeMap<Integer, CardEdition> sortedMap = new TreeMap<Integer, CardEdition>();
+        List<CardEdition> editions = new ArrayList<CardEdition>();
 
         for (CardEdition ce : Singletons.getModel().getEditions()) {
-          if (isSelectable(ce.getCode())) {
-              sortedMap.put(new Integer(ce.getIndex()), ce);
+          if (canChoose(ce.getCode())) {
+              editions.add(ce);
           }
         }
+        
+        Collections.sort(editions);
+        Collections.reverse(editions);
 
-        final int numEditions = sortedMap.size();
-        final int rows = 30;
-        final int columns = numEditions <= rows ? 1 : 1 + ((numEditions - 1) / rows);
-
-        List<CardEdition> sortedEditions = new ArrayList<CardEdition>(sortedMap.values());
-        choices = new JCheckBox[rows * columns];
-        codes = new String[rows * columns];
+        final int numEditions = editions.size();
+        final int columns = 3;
+        final int rows = numEditions / columns + (numEditions % columns == 0 ? 0 : 1);
+        
 
         int getIdx = 0;
-        int putIdx = 0;
 
         JPanel p = new JPanel();
         p.setSize(600, 400);
         p.setLayout(new GridLayout(rows, columns, 10, 0));
 
-        for (int row = 1; row < rows; row++) {
-            for (int col = 1; col < columns + 1; col++) {
-                getIdx = (row - 1) + ((col - 1) * (rows - 1));
-                CardEdition edition = getIdx < numEditions ? sortedEditions.get(getIdx) : null;
-                choices[putIdx] = (edition != null ? new JCheckBox(edition.getName()) : new JCheckBox());
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < columns; col++) {
+                getIdx = row + (col * rows);
+                JCheckBox box;
+                if ( getIdx < numEditions ) {
+                    CardEdition edition = getIdx < numEditions ? editions.get(getIdx) : null;
+                    box = new JCheckBox(edition.getName());
+                    box.setName(edition.getCode());
+                    box.setSelected(customFormat.contains(edition));
+                    choices.add(box);
+                } else {
+                    box = new JCheckBox();
+                    box.setEnabled(false);
+                }
 
-                if (edition == null) {
-                    choices[putIdx].setEnabled(false);
-                    codes[putIdx] = new String("");
-                }
-                else {
-                    if (customFormat.isSetLegal(edition.getCode()) && !(customFormat.getAllowedSetCodes().isEmpty())) {
-                        choices[putIdx].setSelected(true);
-                    }
-                    codes[putIdx] = new String(edition.getCode());
-                }
-                p.add(choices[putIdx]);
-                putIdx++;
+                p.add(box);
             }
         }
       scrollPane = new JScrollPane(p);
@@ -135,30 +127,22 @@ public class DialogCustomFormat extends JDialog {
      * @return boolean, this set can be selected.
      * 
      */
-    private boolean isSelectable(final String setCode) {
-        if (setCode == null) {
+    private boolean canChoose(final String setCode) {
+        if (setCode == null ) {
             return true;
         }
-        return !(setCode.equals("LEA") || setCode.equals("LEB"));
+        return !setCode.equals("LEA") && !setCode.equals("LEB") && !"MBP".equals(setCode);
     }
 
     /**
      * Update the custom format in accordance with the selections.
      */
     void updateCustomFormat() {
-        if (customFormat == null) {
-            return;
-        }
-
-        // Fix a problem with not updating changes
-        customFormat.emptyAllowedSets();
-
-        for (int i = 0; i < choices.length; i++) {
-            if (choices[i] != null) {
-                if (choices[i].isSelected()) {
-                    customFormat.addAllowedSet(codes[i]);
-                }
-             }
+        customFormat.clear();
+        for (JCheckBox box : choices) {
+            if (box.isSelected()) {
+                customFormat.add(box.getText());
+            }
         }
     }
 }

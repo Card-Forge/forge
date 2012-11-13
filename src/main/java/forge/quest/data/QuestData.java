@@ -17,7 +17,7 @@
  */
 package forge.quest.data;
 
-import forge.Singletons;
+import forge.game.GameFormat;
 import forge.quest.QuestMode;
 import forge.quest.io.QuestDataIO;
 
@@ -70,16 +70,11 @@ public final class QuestData {
      * @param userFormat
      *      user-defined format, if any (null if none).
      */
-    public QuestData(String name2, int diff, QuestMode mode2, final String formatString, GameFormatQuest userFormat) {
+    public QuestData(String name2, int diff, QuestMode mode2, GameFormat userFormat) {
         this.name = name2;
 
-        if (userFormat != null) {
-            format = userFormat;
-        } else if (formatString == null) {
-            format = null;
-        } else {
-            format = new GameFormatQuest(Singletons.getModel().getFormats().getFormat(formatString));
-        }
+        if ( userFormat != null)
+            this.format = new GameFormatQuest(userFormat);
         this.mode = mode2;
         this.achievements = new QuestAchievements(diff);
         this.assets = new QuestAssets(format);
