@@ -43,6 +43,12 @@ public class SoundUtils {
             return;
         }
         
+        // if there's a specific effect for this particular card, play it and
+        // we're done.
+        if (playSpecificCardEffect(source)) {
+            return;
+        }
+        
         if (sa.isSpell()) {
             if (source.isCreature() && source.isArtifact()) {
                 Sounds.ArtifactCreature.play();
@@ -70,6 +76,12 @@ public class SoundUtils {
     public static void playLandSoundEffect(final Card land) {
         if (land == null)
             return;
+
+        // if there's a specific effect for this particular card, play it and
+        // we're done.
+        if (playSpecificCardEffect(land)) {
+            return;
+        }
 
         final List<SpellAbility> manaProduced = land.getManaAbility();
         boolean effectPlayed = false;
@@ -103,5 +115,18 @@ public class SoundUtils {
         if (!effectPlayed) {
             Sounds.OtherLand.play();
         }
+    }
+
+    /**
+     * Play a specific sound effect based on card's name.
+     * 
+     * @param c the card to play the sound effect for.
+     * @return true if the special effect was found and played, otherwise
+     *         false (in which case the type-based FX will be played, if
+     *         applicable).
+     */
+    private static boolean playSpecificCardEffect(Card c) {
+        // Implement sound effects for specific cards here, if necessary.
+        return false;
     }
 }
