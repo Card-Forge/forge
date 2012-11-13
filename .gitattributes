@@ -7784,6 +7784,7 @@ res/cardsfolder/r/reality_strobe.txt svneol=native#text/plain
 res/cardsfolder/r/realm_razer.txt -text svneol=unset#text/plain
 res/cardsfolder/r/realms_uncharted.txt -text
 res/cardsfolder/r/reanimate.txt svneol=native#text/plain
+res/cardsfolder/r/reap.txt -text
 res/cardsfolder/r/reap_and_sow.txt svneol=native#text/plain
 res/cardsfolder/r/reap_the_seagraf.txt -text
 res/cardsfolder/r/reaper_from_the_abyss.txt -text
