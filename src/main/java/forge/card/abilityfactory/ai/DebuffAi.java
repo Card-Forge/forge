@@ -82,7 +82,7 @@ public class DebuffAi extends SpellAiLogic {
                             return false;
                         }
                         // don't add duplicate negative keywords
-                        return sa.hasParam("Keywords") && c.hasAnyKeyword(Arrays.asList(sa.getParam("Keywords").split(" & "))); 
+                        return sa.hasParam("Keywords") && c.hasAnyKeyword(Arrays.asList(sa.getParam("Keywords").split(" & ")));
                     }
                 });
             }
