@@ -369,6 +369,36 @@ Fixes/Features:
 - Small tweaks to General's Regalia
 - Reverted GameFormatQuest to fix numerous problems caused by r17875 which totally broke GameFormatQuest. The whole reason for having a separate class for GameFormatQuest and why it was not inheriting GameFormat in the first place was that, unlike with the regular GameFormat class, its lists MUST NOT be immutable or it WILL NOT WORK.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- reverting 18047, making changes from 17875 not ruin quest logics
+- the ro fields are just views, marking them as transient
+- ran setinfo and oracle scripts for earlier commits
+- fixing import
+- CheckStyle.
+- Sound system: made the Sounds methods obey the "enable sounds" setting in preferences.
+- Launch of the Sound System: several basic sounds are linked to the code now and will be enabled when "Enable Sounds" option is checked in the preferences. No sound files are included with this commit and must be submitted separately. Details in the forum.
+- Tageting Overlay: fixed a bug that caused the targeting arcs to disappear for some enchantments targeting cards on the other side of the playfield.
+- Added some cost checks to ChooseSourceAi.
+- Fixed a bug in getSpellCostChange.
+- Bloodthirst is now multiplayer compatible.
+- Rewrote the Bloodthirst keyword as a macro for a proper replacement effect.
+- Added a fluff piece to the changes.txt file.
+- Fix more NPEs with Attach no longer using SpellPermanent
+- Sound System: Implemented more sounds and linked them to the code.
+- Sound System: Some crash prevention measures.
+- Sound System: Minor style fix.
+- Sound System: Added the Enchantment sound, some style fixes.
+- Added Magmasaur
+- Fixed RememberRemoved remembering more counters than were originally on a card
+- Sound System: Added the Poison sound.
+- Sound System: Added the Instant and Sorcery sounds.
+- Using SelectManyCards instead of plain input, rem some warnings
+- Quest start options remake - part 1/2. (I just tried to understand all those checkboxes and failed)
+- new quest w/custom format - bugfix
+- Sound System: Added the ability to optionally define sound effects for specific cards by name instead of by type (might prove useful later).
+- Sound System: CheckStyle.
+- Sound System: CheckStyle.
+- Sound System: Renamed some sounds for the sake of clarity.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -441,6 +471,13 @@ Jade Monolith
 Oracle's Attendants
 Booby Trap
 Dracoplasm
+Invulnerability
+Cho-Arrim Alchemist
+Prismatic Circle
+Intervention Pact
+Maddening Imp
+Reap
+Minion of the Wastes
 
 
 end
