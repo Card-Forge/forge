@@ -8896,7 +8896,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean
      */
     public final boolean canBeEnchantedBy(final Card aura) {
-        final SpellAbility sa = aura.getSpellPermanent();
+        final SpellAbility sa = aura.getFirstSpellAbility();
         Target tgt = null;
         if (sa != null) {
             tgt = sa.getTarget();

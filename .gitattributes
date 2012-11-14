@@ -12597,6 +12597,7 @@ src/main/java/forge/card/abilityfactory/ai/LifeSetAi.java -text
 src/main/java/forge/card/abilityfactory/ai/MillAi.java -text
 src/main/java/forge/card/abilityfactory/ai/MustAttackAi.java -text
 src/main/java/forge/card/abilityfactory/ai/MustBlockAi.java -text
+src/main/java/forge/card/abilityfactory/ai/PermanentCreatureAi.java -text
 src/main/java/forge/card/abilityfactory/ai/PhasesAi.java -text
 src/main/java/forge/card/abilityfactory/ai/PlayAi.java -text
 src/main/java/forge/card/abilityfactory/ai/PoisonAi.java -text
@@ -12694,6 +12695,7 @@ src/main/java/forge/card/abilityfactory/effects/ManaReflectedEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/MillEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/MustAttackEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/MustBlockEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/PermanentCreatureEfect.java -text
 src/main/java/forge/card/abilityfactory/effects/PhasesEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/PlayEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/PoisonEffect.java -text

@@ -233,6 +233,14 @@ public class AbilityFactory {
                 abTgt.setZone(ZoneType.Stack);
             }
         }
+        
+        else if (api == ApiType.PermanentCreature) {
+            // If API is a permanent type, and creating AF Spell
+            // Clear out the auto created SpellPemanent spell
+            if (isSp) {
+                hostCard.clearFirstSpell();
+            }
+        }
 
         SpellAiLogic ai = api.getAi();
         SpellEffect se = api.getSpellEffect();
@@ -275,7 +283,7 @@ public class AbilityFactory {
             spellAbility.setSubAbility(getSubAbility(hostCard, hostCard.getSVar(mapParams.get("SubAbility"))));
         }
 
-        if (spellAbility instanceof SpellPermanent) {
+        if (spellAbility instanceof CommonSpell && hostCard.isPermanent()) {
             spellAbility.setDescription(spellAbility.getSourceCard().getName());
         } else if (mapParams.containsKey("SpellDescription")) {
             final StringBuilder sb = new StringBuilder();

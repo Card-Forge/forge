@@ -74,22 +74,6 @@ import forge.util.Aggregates;
  */
 public class CardFactoryCreatures {
 
-    private static void getCard_ForceOfSavagery(final Card card) {
-        final SpellAbility spell = new SpellPermanent(card) {
-            private static final long serialVersionUID = 1603238129819160467L;
-
-            @Override
-            public boolean canPlayAI() {
-                final List<Card> list = getActivatingPlayer().getCardsIn(ZoneType.Battlefield);
-                return Iterables.any(list, Predicates.or(CardPredicates.nameEquals("Glorious Anthem"), CardPredicates.nameEquals("Gaea's Anthem")));
-            }
-        };
-        // Do not remove SpellAbilities created by AbilityFactory or
-        // Keywords.
-        card.clearFirstSpell();
-        card.addSpellAbility(spell);
-    }
-
     private static void getCard_GilderBairn(final Card card) {
         final Cost abCost = new Cost(card, "2 GU Untap", true);
         final Target tgt = new Target(card, "Select target permanent.", new String[] { "Permanent" });
@@ -1110,9 +1094,7 @@ public class CardFactoryCreatures {
 
     public static void buildCard(final Card card, final String cardName) {
 
-        if (cardName.equals("Force of Savagery")) {
-            getCard_ForceOfSavagery(card);
-        } else if (cardName.equals("Gilder Bairn")) {
+        if (cardName.equals("Gilder Bairn")) {
             getCard_GilderBairn(card);
         } else if (cardName.equals("Phylactery Lich")) {
             getCard_PhylacteryLich(card);

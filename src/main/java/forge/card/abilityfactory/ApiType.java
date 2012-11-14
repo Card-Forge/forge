@@ -63,6 +63,7 @@ public enum ApiType {
     MustAttack (MustAttackEffect.class, MustAttackAi.class),
     MustBlock (MustBlockEffect.class, MustBlockAi.class),
     NameCard (ChooseCardNameEffect.class, ChooseCardNameAi.class),
+    PermanentCreature (PermanentCreatureEfect.class, PermanentCreatureAi.class),
     Phases (PhasesEffect.class, PhasesAi.class),
     Play (PlayEffect.class, PlayAi.class),
     Poison (PoisonEffect.class, PoisonAi.class),

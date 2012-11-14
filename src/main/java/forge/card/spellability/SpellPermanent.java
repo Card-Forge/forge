@@ -231,7 +231,6 @@ public class SpellPermanent extends Spell {
         }
 
         if (sourceCard.isCreature()) {
-
             final StringBuilder sb = new StringBuilder();
             sb.append(sourceCard.getName()).append(" - Creature ").append(sourceCard.getNetAttack());
             sb.append(" / ").append(sourceCard.getNetDefense());
