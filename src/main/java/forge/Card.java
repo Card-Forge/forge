@@ -1256,7 +1256,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.CounterAdded, runParams);
         }
 
-    
+
         // play the Add Counter sound
         if (n > 0) {
             Sounds.AddCounter.play();
@@ -5833,7 +5833,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         this.optionalAdditionalCostsPaid.add(cost);
     }
-    
+
     /**
      * <p>
      * optionalAdditionalCostsPaid.
