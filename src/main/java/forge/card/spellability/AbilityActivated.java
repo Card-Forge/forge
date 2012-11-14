@@ -105,7 +105,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
             return false;
         }
 
-        if (this.isCycling() && Singletons.getModel().getGame().isCardInPlay("Stabilizer")) {
+        if (this.isCycling() && Singletons.getModel().getGame().getStaticEffects().isNoCycling()) {
             return false;
         }
 

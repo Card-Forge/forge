@@ -102,6 +102,8 @@ public class StaticAbilityContinuous {
                 effects.setNoLegendRule(true);
             } else if (params.get("GlobalRule").equals("Mana pools don't empty as steps and phases end.")) {
                 effects.setManapoolsDontEmpty(true);
+            } else if (params.get("GlobalRule").equals("Players can't cycle cards.")) {
+                effects.setNoCycling(true);
             }
         }
 

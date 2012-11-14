@@ -51,6 +51,7 @@ public class StaticEffects {
     private boolean alwaysWither = false;
     private boolean noLegendRule = false;
     private boolean manapoolsDontEmpty = false;
+    private boolean noCycling = false;
 
     /**
      * clearStaticEffect. TODO Write javadoc for this method.
@@ -60,6 +61,7 @@ public class StaticEffects {
         alwaysWither = false;
         noLegendRule = false;
         manapoolsDontEmpty = false;
+        noCycling = false;
 
         // remove all static effects
         for (int i = 0; i < this.staticEffects.size(); i++) {
@@ -126,6 +128,21 @@ public class StaticEffects {
      */
     public void setManapoolsDontEmpty(boolean poolsDontEmpty) {
         this.manapoolsDontEmpty = poolsDontEmpty;
+    }
+    
+
+    /**
+     * @return the noCycling
+     */
+    public boolean isNoCycling() {
+        return noCycling;
+    }
+
+    /**
+     * @param noCycling0 the noCycling to set
+     */
+    public void setNoCycling(boolean noCyc) {
+        this.noCycling = noCyc;
     }
     
 
