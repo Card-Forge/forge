@@ -27,6 +27,7 @@ import forge.Singletons;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayManaCostUtil;
+import forge.game.GlobalRuleChange;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
@@ -178,8 +179,10 @@ public class ManaPool {
     public final int clearPool(boolean isEndOfPhase) {
         int numRemoved = 0;
         
-        if (isEndOfPhase && Singletons.getModel().getGame().getStaticEffects().isManapoolsDontEmpty())
+        if (isEndOfPhase && 
+                Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.manapoolsDontEmpty)) {
             return numRemoved;
+        }
 
         if (this.floatingMana.isEmpty()) {
             this.calculateManaTotals();

@@ -12911,6 +12911,7 @@ src/main/java/forge/game/GameNew.java -text
 src/main/java/forge/game/GameOutcome.java -text
 src/main/java/forge/game/GameState.java -text
 src/main/java/forge/game/GameType.java -text
+src/main/java/forge/game/GlobalRuleChange.java -text
 src/main/java/forge/game/MatchController.java -text
 src/main/java/forge/game/MatchStartHelper.java -text
 src/main/java/forge/game/PlayerStartConditions.java -text

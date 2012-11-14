@@ -40,6 +40,7 @@ import forge.card.replacement.ReplacementEffect;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
+import forge.game.GlobalRuleChange;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerAIGeneral;
 import forge.game.player.ComputerUtil;
@@ -348,7 +349,8 @@ public class SpellPermanent extends Spell {
         }
         
         // check on legendary
-        if (card.isType("Legendary") && !Singletons.getModel().getGame().getStaticEffects().isNoLegendRule()) {
+        if (card.isType("Legendary") && 
+                !Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
             final List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
             if (Iterables.any(list, CardPredicates.nameEquals(card.getName()))) {
                 return false;

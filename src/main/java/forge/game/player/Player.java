@@ -54,6 +54,7 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
 import forge.game.GameLossReason;
 import forge.game.GameState;
+import forge.game.GlobalRuleChange;
 import forge.game.phase.PhaseHandler;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
@@ -603,7 +604,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     @Override
     public final int staticDamagePrevention(final int damage, final Card source, final boolean isCombat) {
 
-        if (Singletons.getModel().getGame().getStaticEffects().isNoPrevention()) {
+        if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
             return damage;
         }
 
@@ -816,7 +817,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     @Override
     public final int preventDamage(final int damage, final Card source, final boolean isCombat) {
 
-        if (Singletons.getModel().getGame().getStaticEffects().isNoPrevention()
+        if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)
                 || source.hasKeyword("Damage that would be dealt by CARDNAME can't be prevented.")) {
             return damage;
         }

@@ -19,6 +19,7 @@ package forge;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,6 +30,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.game.GlobalRuleChange;
 
 /**
  * <p>
@@ -47,23 +49,13 @@ public class StaticEffects {
     private ArrayList<StaticEffect> staticEffects;
     
     //Global rule changes
-    private boolean noPrevention = false;
-    private boolean alwaysWither = false;
-    private boolean noLegendRule = false;
-    private boolean manapoolsDontEmpty = false;
-    private boolean noCycling = false;
-    private boolean noCreatureETBTriggers = false;
+    private final EnumSet<GlobalRuleChange> ruleChanges;
 
     /**
      * clearStaticEffect. TODO Write javadoc for this method.
      */
     public final void clearStaticEffects() {
-        noPrevention = false;
-        alwaysWither = false;
-        noLegendRule = false;
-        manapoolsDontEmpty = false;
-        noCycling = false;
-        noCreatureETBTriggers = false;
+        ruleChanges.clear();
 
         // remove all static effects
         for (int i = 0; i < this.staticEffects.size(); i++) {
@@ -74,94 +66,13 @@ public class StaticEffects {
         Singletons.getModel().getGame().getTriggerHandler().cleanUpTemporaryTriggers();
     }
 
-    /**
-     * @param noPrevent the noPrevention to set
-     */
-    public void setNoPrevention(boolean noPrevent) {
-        this.noPrevention = noPrevent;
+    public void setGlobalRuleChange(GlobalRuleChange change) {
+        this.ruleChanges.add(change);
     }
 
-    /**
-     * @return the noPrevention
-     */
-    public boolean isNoPrevention() {
-        return noPrevention;
+    public boolean getGlobalRuleChange(GlobalRuleChange change) {
+        return this.ruleChanges.contains(change);
     }
-
-    /**
-     * @return the alwayWither
-     */
-    public boolean isAlwaysWither() {
-        return alwaysWither;
-    }
-
-    /**
-     * @param alwayWither0 the alwayWither to set
-     */
-    public void setAlwayWither(boolean wither) {
-        this.alwaysWither = wither;
-    }
-    
-
-    /**
-     * @return the noLegendRule
-     */
-    public boolean isNoLegendRule() {
-        return noLegendRule;
-    }
-
-    /**
-     * @param noLegendRule0 the noLegendRule to set
-     */
-    public void setNoLegendRule(boolean noLegends) {
-        this.noLegendRule = noLegends;
-    }
-    
-
-    /**
-     * @return the manapoolsDontEmpty
-     */
-    public boolean isManapoolsDontEmpty() {
-        return manapoolsDontEmpty;
-    }
-
-    /**
-     * @param manapoolsDontEmpty0 the manapoolsDontEmpty to set
-     */
-    public void setManapoolsDontEmpty(boolean poolsDontEmpty) {
-        this.manapoolsDontEmpty = poolsDontEmpty;
-    }
-    
-
-    /**
-     * @return the noCycling
-     */
-    public boolean isNoCycling() {
-        return noCycling;
-    }
-
-    /**
-     * @param noCycling0 the noCycling to set
-     */
-    public void setNoCycling(boolean noCyc) {
-        this.noCycling = noCyc;
-    }
-    
-
-    /**
-     * @return the noCreatureETBTriggers
-     */
-    public boolean isNoCreatureETBTriggers() {
-        return noCreatureETBTriggers;
-    }
-
-    /**
-     * @param noCreatureETBTriggers0 the noCreatureETBTriggers to set
-     */
-    public void setNoCreatureETBTriggers(boolean noETBTriggers) {
-        this.noCreatureETBTriggers = noETBTriggers;
-    }
-    
 
     /**
      * addStaticEffect. TODO Write javadoc for this method.
@@ -350,6 +261,7 @@ public class StaticEffects {
     public StaticEffects() {
         this.initStateBasedEffectsList();
         this.staticEffects = new ArrayList<StaticEffect>();
+        this.ruleChanges = EnumSet.noneOf(GlobalRuleChange.class);
     }
 
     /**

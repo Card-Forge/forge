@@ -56,6 +56,7 @@ import forge.control.input.InputPayManaCostUtil;
 import forge.game.GameEndReason;
 import forge.game.GameLossReason;
 import forge.game.GameState;
+import forge.game.GlobalRuleChange;
 import forge.game.MatchController;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -1283,7 +1284,7 @@ public class GameAction {
      */
     private void destroyLegendaryCreatures() {
         final List<Card> a = CardLists.getType(game.getCardsIn(ZoneType.Battlefield), "Legendary");
-        if (a.isEmpty() || game.getStaticEffects().isNoLegendRule()) {
+        if (a.isEmpty() || game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
             return;
         }
 

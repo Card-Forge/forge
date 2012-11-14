@@ -34,6 +34,7 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.GameState;
+import forge.game.GlobalRuleChange;
 import forge.game.phase.PhaseType;
 //import forge.util.TextUtil;
 import forge.game.player.ComputerUtil;
@@ -422,7 +423,8 @@ public class TriggerHandler {
                 String dest = (String) runParams.get("Destination");
                 if (dest.equals("Battlefield") && runParams.get("Card") instanceof Card) {
                     Card card = (Card) runParams.get("Card");
-                    if (card.isCreature() && game.getStaticEffects().isNoCreatureETBTriggers()) {
+                    if (card.isCreature() 
+                            && game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCreatureETBTriggers)) {
                         return false;
                     }
                 }

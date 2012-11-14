@@ -36,6 +36,7 @@ import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.SpellAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
+import forge.game.GlobalRuleChange;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -95,17 +96,17 @@ public class StaticAbilityContinuous {
         if (params.containsKey("GlobalRule")) {
             final StaticEffects effects = Singletons.getModel().getGame().getStaticEffects();
             if (params.get("GlobalRule").equals("Damage can't be prevented.")) {
-                effects.setNoPrevention(true);
+                effects.setGlobalRuleChange(GlobalRuleChange.noPrevention);
             } else if (params.get("GlobalRule").equals("All damage is dealt as though it's source had wither.")) {
-                effects.setAlwayWither(true);
+                effects.setGlobalRuleChange(GlobalRuleChange.alwaysWither);
             } else if (params.get("GlobalRule").equals("The legend rule doesn't apply.")) {
-                effects.setNoLegendRule(true);
+                effects.setGlobalRuleChange(GlobalRuleChange.noLegendRule);
             } else if (params.get("GlobalRule").equals("Mana pools don't empty as steps and phases end.")) {
-                effects.setManapoolsDontEmpty(true);
+                effects.setGlobalRuleChange(GlobalRuleChange.manapoolsDontEmpty);
             } else if (params.get("GlobalRule").equals("Players can't cycle cards.")) {
-                effects.setNoCycling(true);
+                effects.setGlobalRuleChange(GlobalRuleChange.noCycling);
             } else if (params.get("GlobalRule").equals("Creatures entering the battlefield don't cause abilities to trigger.")) {
-                effects.setNoCreatureETBTriggers(true);
+                effects.setGlobalRuleChange(GlobalRuleChange.noCreatureETBTriggers);
             }
         }
 

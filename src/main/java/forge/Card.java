@@ -54,6 +54,7 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
+import forge.game.GlobalRuleChange;
 import forge.game.phase.Combat;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -7930,7 +7931,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final int staticDamagePrevention(final int damage, final int possiblePrvenetion, final Card source,
             final boolean isCombat) {
 
-        if (Singletons.getModel().getGame().getStaticEffects().isNoPrevention()) {
+        if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
             return damage;
         }
 
@@ -7959,7 +7960,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     @Override
     public final int staticDamagePrevention(final int damageIn, final Card source, final boolean isCombat) {
 
-        if (Singletons.getModel().getGame().getStaticEffects().isNoPrevention()) {
+        if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
             return damageIn;
         }
 
@@ -8075,7 +8076,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     @Override
     public final int preventDamage(final int damage, final Card source, final boolean isCombat) {
 
-        if (Singletons.getModel().getGame().getStaticEffects().isNoPrevention()
+        if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)
                 || source.hasKeyword("Damage that would be dealt by CARDNAME can't be prevented.")) {
             return damage;
         }
@@ -8294,7 +8295,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             return true;
         }
 
-        if (Singletons.getModel().getGame().getStaticEffects().isAlwaysWither()
+        if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.alwaysWither)
                 || source.hasKeyword("Wither") || source.hasKeyword("Infect")) {
             wither = true;
         }

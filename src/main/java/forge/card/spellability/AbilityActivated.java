@@ -25,6 +25,7 @@ import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.staticability.StaticAbility;
+import forge.game.GlobalRuleChange;
 import forge.game.zone.ZoneType;
 
 /**
@@ -105,7 +106,8 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
             return false;
         }
 
-        if (this.isCycling() && Singletons.getModel().getGame().getStaticEffects().isNoCycling()) {
+        if (this.isCycling() 
+                && Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCycling)) {
             return false;
         }
 
