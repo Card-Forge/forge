@@ -3,12 +3,9 @@ ManaCost:2 W
 Types:Enchantment
 Text:no text
 K:Cumulative upkeep:2
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDamageYou | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, CARDNAME deals damage to that player equal to the number of snow lands he or she controls.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Execute$ TrigDamageOpp | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ At the beginning of each player's upkeep, CARDNAME deals damage to that player equal to the number of snow lands he or she controls.
-SVar:TrigDamageYou:AB$DealDamage | Cost$ 0 | Defined$ You | NumDmg$ X | References$ X
-SVar:TrigDamageOpp:AB$DealDamage | Cost$ 0 | Defined$ Opponent | NumDmg$ Y | References$ Y
-SVar:X:Count$Valid Land.Snow+YouCtrl
-SVar:Y:Count$Valid Land.Snow+YouDontCtrl
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, CARDNAME deals damage to that player equal to the number of snow lands he or she controls.
+SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredPlayer | NumDmg$ X | References$ X
+SVar:X:Count$Valid Land.Snow+ActivePlayerCtrl
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cold_snap.jpg

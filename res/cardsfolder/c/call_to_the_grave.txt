@@ -3,9 +3,9 @@ ManaCost:4 B
 Types:Enchantment
 Text:no text
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of each player's upkeep, that player sacrifices a non-Zombie creature.
-SVar:TrigSac:AB$Sacrifice | Cost$ 0 | SacValid$ Creature.nonZombie | Defined$ TriggeredPlayer
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | SacValid$ Creature.nonZombie | Defined$ TriggeredPlayer
 T:Mode$ Phase | Phase$ End of Turn | TriggerZones$ Battlefield | IsPresent$ Creature | PresentCompare$ EQ0 | Execute$ TrigSacSelf | TriggerDescription$ At the beginning of the end step, if no creatures are on the battlefield, sacrifice CARDNAME.
-SVar:TrigSacSelf:AB$Sacrifice | Cost$ 0 | Defined$ Self
+SVar:TrigSacSelf:AB$ Sacrifice | Cost$ 0 | Defined$ Self
 SVar:RemRandomDeck:True
 DeckHints:Type$Zombie
 SVar:Rarity:Rare

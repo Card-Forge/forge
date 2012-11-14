@@ -1927,7 +1927,7 @@ public class CardFactoryUtil {
                 } else {
                     return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c); // not Kicked
                 }
-            }            
+            }
         }
         return xCount(c, s);
     }
@@ -1948,6 +1948,7 @@ public class CardFactoryUtil {
 
         final Player cardController = c.getController();
         final Player oppController = cardController.getOpponent();
+        final Player activePlayer = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
 
         final String[] l = s.split("/");
         final String[] m = CardFactoryUtil.parseMath(l);
@@ -2126,7 +2127,7 @@ public class CardFactoryUtil {
         }
 
         // Count$Domain
-        if (sq[0].contains("Domain")) {
+        if (sq[0].equals("Domain")) {
             someCards.addAll(cardController.getCardsIn(ZoneType.Battlefield));
             for (String basic : Constant.Color.BASIC_LANDS) {
                 if (!CardLists.getType(someCards, basic).isEmpty()) {
@@ -2136,9 +2137,9 @@ public class CardFactoryUtil {
             return CardFactoryUtil.doXMath(n, m, c);
         }
 
-        // Count$OpponentDom
-        if (sq[0].contains("OpponentDom")) {
-            someCards.addAll(cardController.getOpponent().getCardsIn(ZoneType.Battlefield));
+        // Count$ActivePlayerDomain
+        if (sq[0].contains("ActivePlayerDomain")) {
+            someCards.addAll(activePlayer.getCardsIn(ZoneType.Battlefield));
             for (String basic : Constant.Color.BASIC_LANDS) {
                 if (!CardLists.getType(someCards, basic).isEmpty()) {
                     n++;
