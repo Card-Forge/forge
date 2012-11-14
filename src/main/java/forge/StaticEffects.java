@@ -45,11 +45,16 @@ public class StaticEffects {
      * staticEffects.
      */
     private ArrayList<StaticEffect> staticEffects;
+    
+    //Global rule changes
+    private boolean noPrevention = false;
 
     /**
      * clearStaticEffect. TODO Write javadoc for this method.
      */
     public final void clearStaticEffects() {
+        noPrevention = false;
+
         // remove all static effects
         for (int i = 0; i < this.staticEffects.size(); i++) {
             this.removeStaticEffect(this.staticEffects.get(i));
@@ -57,6 +62,20 @@ public class StaticEffects {
         this.staticEffects = new ArrayList<StaticEffect>();
 
         Singletons.getModel().getGame().getTriggerHandler().cleanUpTemporaryTriggers();
+    }
+
+    /**
+     * @param noPrevent the noPrevention to set
+     */
+    public void setNoPrevention(boolean noPrevent) {
+        this.noPrevention = noPrevent;
+    }
+
+    /**
+     * @return the noPrevention
+     */
+    public boolean isNoPrevention() {
+        return noPrevention;
     }
 
     /**

@@ -1,8 +1,9 @@
 Name:Leyline of Punishment
 ManaCost:2 R R
 Types:Enchantment
-Text:If Leyline of Punishment is in your opening hand, you may begin the game with it on the battlefield. Damage can't be prevented.
+Text:If Leyline of Punishment is in your opening hand, you may begin the game with it on the battlefield.
 S:Mode$ Continuous | Affected$ Player | AddKeyword$ You can't gain life. | Description$ Players can't gain life.
+S:Mode$ Continuous | GlobalRule$ Damage can't be prevented. | Description$ Damage can't be prevented.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leyline_of_punishment.jpg

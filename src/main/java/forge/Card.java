@@ -7931,8 +7931,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final int staticDamagePrevention(final int damage, final int possiblePrvenetion, final Card source,
             final boolean isCombat) {
 
-        if (Singletons.getModel().getGame().isCardInPlay("Leyline of Punishment")
-                || Singletons.getModel().getGame().isCardInPlay("Everlasting Torment")) {
+        if (Singletons.getModel().getGame().getStaticEffects().isNoPrevention()) {
             return damage;
         }
 
@@ -7961,8 +7960,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     @Override
     public final int staticDamagePrevention(final int damageIn, final Card source, final boolean isCombat) {
 
-        if (Singletons.getModel().getGame().isCardInPlay("Leyline of Punishment")
-                || Singletons.getModel().getGame().isCardInPlay("Everlasting Torment")) {
+        if (Singletons.getModel().getGame().getStaticEffects().isNoPrevention()) {
             return damageIn;
         }
 
@@ -8078,8 +8076,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     @Override
     public final int preventDamage(final int damage, final Card source, final boolean isCombat) {
 
-        if (Singletons.getModel().getGame().isCardInPlay("Leyline of Punishment")
-                || Singletons.getModel().getGame().isCardInPlay("Everlasting Torment")
+        if (Singletons.getModel().getGame().getStaticEffects().isNoPrevention()
                 || source.hasKeyword("Damage that would be dealt by CARDNAME can't be prevented.")) {
             return damage;
         }

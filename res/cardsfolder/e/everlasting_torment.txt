@@ -1,8 +1,9 @@
 Name:Everlasting Torment
 ManaCost:2 BR
 Types:Enchantment
-Text:Damage can't be prevented. All damage is dealt as though it's source had wither. (A source with wither deals damage to creatures in the form of -1/-1 counters.)
+Text:All damage is dealt as though it's source had wither. (A source with wither deals damage to creatures in the form of -1/-1 counters.)
 S:Mode$ Continuous | Affected$ Player | AddKeyword$ You can't gain life. | Description$ Players can't gain life.
+S:Mode$ Continuous | GlobalRule$ Damage can't be prevented. | Description$ Damage can't be prevented.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/everlasting_torment.jpg

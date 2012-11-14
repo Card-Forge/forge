@@ -603,7 +603,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     @Override
     public final int staticDamagePrevention(final int damage, final Card source, final boolean isCombat) {
 
-        if (game.isCardInPlay("Leyline of Punishment") || game.isCardInPlay("Everlasting Torment")) {
+        if (Singletons.getModel().getGame().getStaticEffects().isNoPrevention()) {
             return damage;
         }
 
@@ -816,7 +816,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     @Override
     public final int preventDamage(final int damage, final Card source, final boolean isCombat) {
 
-        if (game.isCardInPlay("Leyline of Punishment") || game.isCardInPlay("Everlasting Torment")
+        if (Singletons.getModel().getGame().getStaticEffects().isNoPrevention()
                 || source.hasKeyword("Damage that would be dealt by CARDNAME can't be prevented.")) {
             return damage;
         }

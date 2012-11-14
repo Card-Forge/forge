@@ -28,6 +28,7 @@ import forge.Singletons;
 import forge.CardLists;
 import forge.CardUtil;
 import forge.StaticEffect;
+import forge.StaticEffects;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.replacement.ReplacementEffect;
@@ -89,6 +90,14 @@ public class StaticAbilityContinuous {
         boolean removeCardTypes = false;
         boolean removeSubTypes = false;
         boolean removeCreatureTypes = false;
+        
+        //Global rules changes
+        if (params.containsKey("GlobalRule")) {
+            final StaticEffects effects = Singletons.getModel().getGame().getStaticEffects();
+            if (params.get("GlobalRule").equals("Damage can't be prevented.")) {
+                effects.setNoPrevention(true);
+            }
+        }
 
         if (params.containsKey("SetPower")) {
             setP = params.get("SetPower");
