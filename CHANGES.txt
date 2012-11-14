@@ -399,6 +399,32 @@ Fixes/Features:
 - Sound System: CheckStyle.
 - Sound System: Renamed some sounds for the sake of clarity.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CheckStyle.
+- Converted Nameless Race to script
+- small addition to CostPayLife to enable limiting the maximum available choice when using XChoice
+- improved svar name for Minion of the Wastes
+- Sound System: Added to enumeration and implemented support for the AddCounter, Damage, Destroy, Discard, Equip, LifeLoss, ManaBurn, Regen, RemoveCounter, and Sacrifice sound effects. Also, some minor fixes.
+- Converted Phyrexian Processor to script (by moomarc).
+- AdditionalCostsPaid will now be cleared when a card hits the graveyard.
+- Quest start UI done
+- Conspire is now check on the SA instead of the card.
+- Initial checkin of PermanentCreature AF, a way to organize Creature Spell AIs, with longterm potential of removing SpellPermanent
+- Converted Force of Savagery to Script
+- Sound System: A little fix to the counter sounds. Also, adding back some of the changes that seemingly did not go through the last time.
+- Sound System: Increased the responsiveness of the sound system, should help remedy the skipping or missing sounds.
+- Small fix to Nameless Race
+- Made some scripts multiplayer compatible and other minor tweaks
+- Added the first global rule change: "Damage can't be prevented.".
+- Converted Leyline of Punishment and Everlasting Torment.
+- Added the global rule change: "All damage is dealt as though it's source had wither.".
+- Everlasting Torment is now fully scripted.
+- Converted C "...each player's <phase>" cards to more multiplayer-friendly scripts.
+- ReplacedOppDomain counting method with ActivePlayerDomain (Only card that used OppDomain was converted)
+- Added the global rule change: "The legend rule doesn't apply.".
+- Converted Mirror Gallery to script.
+- Added the global rule change: "Mana pools don't empty as steps and phases end.".
+- Converted Upwelling to script.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -478,6 +504,11 @@ Intervention Pact
 Maddening Imp
 Reap
 Minion of the Wastes
+Daru Spiritualist
+Krosan Drover
+Proteus Machine
+Flaring Pain
+Unstable Footing
 
 
 end
