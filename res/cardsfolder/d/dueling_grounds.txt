@@ -1,7 +1,9 @@
 Name:Dueling Grounds
 ManaCost:1 G W
 Types:Enchantment
-Text:No more than one creature can attack each turn.\r\nNo more than one creature can block each turn.
+Text:no text
+S:Mode$ Continuous | GlobalRule$ No more than one creature can attack each turn. | Description$ No more than one creature can attack each turn.
+S:Mode$ Continuous | GlobalRule$ No more than one creature can block each combat. | Description$ No more than one creature can block each turn.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dueling_grounds.jpg

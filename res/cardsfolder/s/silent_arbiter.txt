@@ -3,8 +3,8 @@ ManaCost:4
 Types:Artifact Creature Construct
 Text:no text
 PT:1/5
-K:No more than one creature can attack each combat.
-K:No more than one creature can block each combat.
+S:Mode$ Continuous | GlobalRule$ No more than one creature can attack each combat. | Description$ No more than one creature can attack each combat.
+S:Mode$ Continuous | GlobalRule$ No more than one creature can block each combat. | Description$ No more than one creature can block each combat.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/silent_arbiter.jpg
 SetInfo:5DN|Rare|http://magiccards.info/scans/en/5dn/150.jpg

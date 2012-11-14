@@ -54,6 +54,7 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
+import forge.game.GlobalRuleChange;
 import forge.game.player.ComputerUtil;
 import forge.game.player.ComputerUtilBlock;
 import forge.game.player.Player;
@@ -102,10 +103,6 @@ public class CombatUtil {
 
         for (final Card c : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
             for (final String keyword : c.getKeyword()) {
-                if (keyword.equals("No more than one creature can block each combat.")
-                        && (combat.getAllBlockers().size() > 0)) {
-                    return false;
-                }
                 if (keyword.equals("No more than two creatures can block each combat.")
                         && (combat.getAllBlockers().size() > 1)) {
                     return false;
@@ -113,7 +110,8 @@ public class CombatUtil {
             }
         }
 
-        if (combat.getAllBlockers().size() > 0 && Singletons.getModel().getGame().isCardInPlay("Dueling Grounds")) {
+        if (combat.getAllBlockers().size() > 0
+                && Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyOneBlocker)) {
             return false;
         }
 
@@ -782,11 +780,9 @@ public class CombatUtil {
     public static boolean canAttack(final Card c, final Combat combat) {
 
         int cntAttackers = combat.getAttackers().size();
+        final GameEntity def = combat.getDefender();
         for (final Card card : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
             for (final String keyword : card.getKeyword()) {
-                if (keyword.equals("No more than one creature can attack each combat.") && cntAttackers > 0) {
-                    return false;
-                }
                 if (keyword.equals("No more than two creatures can attack each combat.") && cntAttackers > 1) {
                     return false;
                 }
@@ -809,11 +805,11 @@ public class CombatUtil {
             return false;
         }
 
-        if (cntAttackers > 0 && Singletons.getModel().getGame().isCardInPlay("Dueling Grounds")) {
+        if ((cntAttackers > 0 || c.getController().getAttackedWithCreatureThisTurn())
+                && Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyOneAttackerATurn)) {
             return false;
         }
 
-        final GameEntity def = combat.getDefender();
         return CombatUtil.canAttack(c, def);
     }
 

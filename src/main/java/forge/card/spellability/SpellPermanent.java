@@ -411,7 +411,8 @@ public class SpellPermanent extends Spell {
 
     private static boolean checkETBEffects(final Card card, final SpellAbility sa, final ApiType api, final Player ai) {
 
-        if (card.isCreature() && Singletons.getModel().getGame().isCardInPlay("Torpor Orb")) {
+        if (card.isCreature() 
+                && Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCreatureETBTriggers)) {
             return true;
         }
 

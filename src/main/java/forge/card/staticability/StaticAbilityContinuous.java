@@ -107,6 +107,12 @@ public class StaticAbilityContinuous {
                 effects.setGlobalRuleChange(GlobalRuleChange.noCycling);
             } else if (params.get("GlobalRule").equals("Creatures entering the battlefield don't cause abilities to trigger.")) {
                 effects.setGlobalRuleChange(GlobalRuleChange.noCreatureETBTriggers);
+            } else if (params.get("GlobalRule").equals("No more than one creature can block each combat.")) {
+                effects.setGlobalRuleChange(GlobalRuleChange.onlyOneBlocker);
+            } else if (params.get("GlobalRule").equals("No more than one creature can attack each turn.")) {
+                effects.setGlobalRuleChange(GlobalRuleChange.onlyOneAttackerATurn);
+            } else if (params.get("GlobalRule").equals("No more than one creature can attack each combat.")) {
+                effects.setGlobalRuleChange(GlobalRuleChange.onlyOneAttackerACombat);
             }
         }
 

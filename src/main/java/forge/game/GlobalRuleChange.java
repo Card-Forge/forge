@@ -22,10 +22,13 @@ package forge.game;
  */
 public enum GlobalRuleChange {
 
-    noPrevention,
     alwaysWither,
-    noLegendRule,
     manapoolsDontEmpty,
     noCycling,
-    noCreatureETBTriggers
+    noCreatureETBTriggers,
+    noLegendRule,
+    noPrevention,
+    onlyOneAttackerATurn,
+    onlyOneAttackerACombat,
+    onlyOneBlocker
 }
