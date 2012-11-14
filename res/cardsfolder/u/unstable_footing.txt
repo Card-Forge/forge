@@ -1,0 +1,14 @@
+Name:Unstable Footing
+ManaCost:R
+Types:Instant
+Text:no text
+K:Kicker 3 R
+A:SP$ Effect | Cost$ R | Name$ Unstable Footing | StaticAbilities$ STCantPrevent | SubAbility$ DBDamage | SpellDescription$ Damage can't be prevented this turn. If CARDNAME was kicked, it deals 5 damage to target player.
+SVar:STCantPrevent:Mode$ Continuous | GlobalRule$ Damage can't be prevented. | Description$ Damage can't be prevented.
+SVar:DBDamage:DB$ DealDamage | ValidTgts$ Player | TgtPrompt$ Select another target player | NumDmg$ 5 | NoPrevention$ True | Condition$ Kicked | ConditionDescription$ If it was kicked,
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/unstable_footing.jpg
+SetInfo:ZEN|Uncommon|http://magiccards.info/scans/en/zen/153.jpg
+Oracle:Kicker {3}{R} (You may pay an additional {3}{R} as you cast this spell.)\nDamage can't be prevented this turn. If Unstable Footing was kicked, it deals 5 damage to target player.
+End

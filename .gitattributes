@@ -10616,6 +10616,7 @@ res/cardsfolder/u/unruly_mob.txt -text
 res/cardsfolder/u/unscythe_killer_of_kings.txt -text svneol=unset#text/plain
 res/cardsfolder/u/unseen_walker.txt svneol=native#text/plain
 res/cardsfolder/u/unspeakable_symbol.txt svneol=native#text/plain
+res/cardsfolder/u/unstable_footing.txt -text
 res/cardsfolder/u/unstable_frontier.txt -text
 res/cardsfolder/u/unstable_hulk.txt svneol=native#text/plain
 res/cardsfolder/u/unstable_mutation.txt svneol=native#text/plain
