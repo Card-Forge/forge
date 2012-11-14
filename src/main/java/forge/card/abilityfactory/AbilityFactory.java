@@ -233,7 +233,7 @@ public class AbilityFactory {
                 abTgt.setZone(ZoneType.Stack);
             }
         }
-        
+
         else if (api == ApiType.PermanentCreature) {
             // If API is a permanent type, and creating AF Spell
             // Clear out the auto created SpellPemanent spell
