@@ -52,10 +52,6 @@ public class SoundSystem {
     public final void play() {
         if (clip != null) {
             clip.setMicrosecondPosition(0);
-            if (!isDone()) {
-                clip.flush();
-                clip.stop();
-            }
             try {
                 Thread.sleep(SOUND_SYSTEM_DELAY);
             } catch (InterruptedException ex) {
@@ -68,10 +64,6 @@ public class SoundSystem {
     public final void loop() {
         if (clip != null) {
             clip.setMicrosecondPosition(0);
-            if (!isDone()) {
-                clip.flush();
-                clip.stop();
-            }
             try {
                 Thread.sleep(SOUND_SYSTEM_DELAY);
             } catch (InterruptedException ex) {
