@@ -98,6 +98,8 @@ public class StaticAbilityContinuous {
                 effects.setNoPrevention(true);
             } else if (params.get("GlobalRule").equals("All damage is dealt as though it's source had wither.")) {
                 effects.setAlwayWither(true);
+            } else if (params.get("GlobalRule").equals("The legend rule doesn't apply.")) {
+                effects.setNoLegendRule(true);
             }
         }
 

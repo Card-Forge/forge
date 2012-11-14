@@ -1283,7 +1283,7 @@ public class GameAction {
      */
     private void destroyLegendaryCreatures() {
         final List<Card> a = CardLists.getType(game.getCardsIn(ZoneType.Battlefield), "Legendary");
-        if (a.isEmpty() || game.isCardInPlay("Mirror Gallery")) {
+        if (a.isEmpty() || game.getStaticEffects().isNoLegendRule()) {
             return;
         }
 

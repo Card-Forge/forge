@@ -189,7 +189,7 @@ public class ChangeZoneAi extends SpellAiLogic {
 
             //Ninjutsu
             if (sa.hasParam("Ninjutsu")) {
-                if (source.isType("Legendary") && !Singletons.getModel().getGame().isCardInPlay("Mirror Gallery")) {
+                if (source.isType("Legendary") && !Singletons.getModel().getGame().getStaticEffects().isNoLegendRule()) {
                     final List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
                     if (Iterables.any(list, CardPredicates.nameEquals(source.getName()))) {
                         return false;

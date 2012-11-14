@@ -348,7 +348,7 @@ public class SpellPermanent extends Spell {
         }
         
         // check on legendary
-        if (card.isType("Legendary") && !Singletons.getModel().getGame().isCardInPlay("Mirror Gallery")) {
+        if (card.isType("Legendary") && !Singletons.getModel().getGame().getStaticEffects().isNoLegendRule()) {
             final List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
             if (Iterables.any(list, CardPredicates.nameEquals(card.getName()))) {
                 return false;

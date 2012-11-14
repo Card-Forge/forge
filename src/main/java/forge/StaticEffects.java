@@ -49,6 +49,7 @@ public class StaticEffects {
     //Global rule changes
     private boolean noPrevention = false;
     private boolean alwaysWither = false;
+    private boolean noLegendRule = false;
 
     /**
      * clearStaticEffect. TODO Write javadoc for this method.
@@ -56,6 +57,7 @@ public class StaticEffects {
     public final void clearStaticEffects() {
         noPrevention = false;
         alwaysWither = false;
+        noLegendRule = false;
 
         // remove all static effects
         for (int i = 0; i < this.staticEffects.size(); i++) {
@@ -92,6 +94,21 @@ public class StaticEffects {
      */
     public void setAlwayWither(boolean wither) {
         this.alwaysWither = wither;
+    }
+    
+
+    /**
+     * @return the noLegendRule
+     */
+    public boolean isNoLegendRule() {
+        return noLegendRule;
+    }
+
+    /**
+     * @param noLegendRule0 the noLegendRule to set
+     */
+    public void setNoLegendRule(boolean noLegends) {
+        this.noLegendRule = noLegends;
     }
     
 
