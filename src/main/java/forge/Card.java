@@ -1257,6 +1257,12 @@ public class Card extends GameEntity implements Comparable<Card> {
             Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.CounterAdded, runParams);
         }
 
+    
+        // play the Add Counter sound
+        if (n > 0) {
+            Sounds.AddCounter.play();
+        }
+
         this.updateObservers();
     }
 
@@ -1288,6 +1294,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         runParams.put("CounterType", counterName);
         for (int i = 0; i < (multiplier * n); i++) {
             Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.CounterAdded, runParams);
+        }
+
+        // play the Add Counter sound
+        if (n > 0) {
+            Sounds.AddCounter.play();
         }
 
         this.updateObservers();
@@ -1360,6 +1371,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 }
             }
+
+            // Play the Subtract Counter sound
+            if (n > 0) {
+                Sounds.RemoveCounter.play();
+            }
+
             this.updateObservers();
         }
     }
@@ -3855,6 +3872,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.addEquipping(c);
         c.addEquippedBy(this);
         this.equip();
+
+        // Play the Equip sound
+        Sounds.Equip.play();
     }
 
     /**
