@@ -7388,6 +7388,7 @@ res/cardsfolder/p/predator_ooze.txt -text
 res/cardsfolder/p/predators_gambit.txt -text
 res/cardsfolder/p/predators_strike.txt svneol=native#text/plain
 res/cardsfolder/p/predatory_advantage.txt svneol=native#text/plain
+res/cardsfolder/p/predatory_focus.txt -text
 res/cardsfolder/p/predatory_hunger.txt svneol=native#text/plain
 res/cardsfolder/p/predatory_nightstalker.txt svneol=native#text/plain
 res/cardsfolder/p/predatory_rampage.txt -text
