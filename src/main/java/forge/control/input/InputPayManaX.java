@@ -13,6 +13,7 @@ import forge.view.ButtonUtil;
 public class InputPayManaX extends InputPayMana { 
     private static final long serialVersionUID = -6900234444347364050L;
     private int xPaid = 0;
+    private final String colorX;
     private final String strX;
     private String colorsPaid;
     private ManaCost manaCost;
@@ -26,10 +27,15 @@ public class InputPayManaX extends InputPayMana {
         sa = sa0;
         payment = payment0;
         xPaid = 0;
+        colorX = sa.getSourceCard().getSVar("XColor");
         colorsPaid = sa.getSourceCard().getColorsPaid();
         costMana = costMana0;
         strX = Integer.toString(costMana.getXMana());
-        manaCost = new ManaCost(strX);
+        if (colorX != "") {
+            manaCost = new ManaCost(colorX);
+        } else {
+            manaCost = new ManaCost(strX);
+        }
     }
     
     @Override
