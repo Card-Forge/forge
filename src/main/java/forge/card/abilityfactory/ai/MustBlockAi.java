@@ -20,7 +20,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class MustBlockAi extends SpellAiLogic {
-    
+
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         // disabled for the AI until he/she can make decisions about who to make
