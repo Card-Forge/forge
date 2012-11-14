@@ -3,7 +3,8 @@ ManaCost:3 G G
 Types:Sorcery
 Text:no text
 A:SP$ PumpAll | Cost$ 3 G G | ValidCards$ Creature.YouCtrl | NumAtt$ +3 | NumDef$ +3 | SubAbility$ OppBlock | SpellDescription$ Creatures you control get +3/+3 until end of turn. Each creature your opponents control blocks this turn if able.
-SVar:OppBlock:DB$ PumpAll | ValidCards$ Creature.OppCtrl | KW$ HIDDEN CARDNAME blocks each turn if able.
+SVar:OppBlock:DB$ Effect | Name$ Predatory Rampage Effect | StaticAbilities$ KWPump
+SVar:KWPump:Mode$ Continuous | Affected$ Creature.OppCtrl | AddHiddenKeyword$ HIDDEN CARDNAME blocks each turn if able. | Description$ Each creature your opponents control blocks this turn if able.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/predatory_rampage.jpg
 SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/180.jpg
