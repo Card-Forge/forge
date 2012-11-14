@@ -4,7 +4,7 @@ Types:Artifact
 Text:no text
 S:Mode$ Continuous | Affected$ Player | SetMaxHandSize$ -1 | Description$ Players have no maximum hand size.
 T:Mode$ Phase | Phase$ Draw | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigDraw | TriggerDescription$ At the beginning of each player's draw step, that player draws an additional card, then discards a card.
-SVar:TrigDraw:AB$Draw | Cost$ 0 | NumCards$ 1 | Defined$ TriggeredPlayer | SubAbility$ DBDiscard
+SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1 | Defined$ TriggeredPlayer | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ TriggeredPlayer | NumCards$ 1 | Mode$ TgtChoose
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

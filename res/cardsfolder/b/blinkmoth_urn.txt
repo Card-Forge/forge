@@ -2,12 +2,9 @@ Name:Blinkmoth Urn
 ManaCost:5
 Types:Artifact
 Text:no text
-T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ You | TriggerZones$ Battlefield | IsPresent$ Card.Self+untapped | Execute$ TrigGetYouMana | TriggerDescription$ At the beginning of each player's precombat main phase, if CARDNAME is untapped, that player adds 1 to his or her mana pool for each artifact he or she controls.
-SVar:TrigGetYouMana:AB$ Mana | Cost$ 0 | Produced$ 1 | Amount$ X | References$ X
-T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ Opponent | TriggerZones$ Battlefield | IsPresent$ Card.Self+untapped | Execute$ TrigGetOppMana | Secondary$ True | TriggerDescription$ At the beginning of each player's precombat main phase, if CARDNAME is untapped, that player adds 1 to his or her mana pool for each artifact he or she controls.
-SVar:TrigGetOppMana:AB$ Mana | Cost$ 0 | Produced$ 1 | Amount$ Y | References$ Y
-SVar:X:Count$TypeYouCtrl.Artifact
-SVar:Y:Count$TypeOppCtrl.Artifact
+T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ Player | TriggerZones$ Battlefield | IsPresent$ Card.Self+untapped | Execute$ TrigGetMana | TriggerDescription$ At the beginning of each player's precombat main phase, if CARDNAME is untapped, that player adds 1 to his or her mana pool for each artifact he or she controls.
+SVar:TrigGetMana:AB$ Mana | Cost$ 0 | Produced$ 1 | Amount$ X | References$ X | Defined$ TriggeredPlayer
+SVar:X:Count$Valid Artifact.ActivePlayerCtrl
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blinkmoth_urn.jpg
