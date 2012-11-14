@@ -10,7 +10,7 @@ S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ 
 SVar:X:XChoice/LimitMax.Limit
 SVar:Limit:SVar$Active/Plus.Buried
 SVar:Active:Count$Valid Permanent.White+nonToken+OppCtrl
-SVar:Buried:Count$ValidGrave Card.White
+SVar:Buried:Count$ValidGrave Card.White+OppCtrl
 SVar:LifePaidOnETB:Number$0
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
