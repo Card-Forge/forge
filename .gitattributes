@@ -1831,6 +1831,7 @@ res/cardsfolder/c/conspiracy.txt svneol=native#text/plain
 res/cardsfolder/c/constant_mists.txt svneol=native#text/plain
 res/cardsfolder/c/constricting_tendrils.txt svneol=native#text/plain
 res/cardsfolder/c/consult_the_necrosages.txt svneol=native#text/plain
+res/cardsfolder/c/consume_spirit.txt -text
 res/cardsfolder/c/consume_strength.txt -text
 res/cardsfolder/c/consume_the_meek.txt svneol=native#text/plain
 res/cardsfolder/c/consuming_bonfire.txt svneol=native#text/plain
