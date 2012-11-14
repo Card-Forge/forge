@@ -95,25 +95,7 @@ public class StaticAbilityContinuous {
         //Global rules changes
         if (params.containsKey("GlobalRule")) {
             final StaticEffects effects = Singletons.getModel().getGame().getStaticEffects();
-            if (params.get("GlobalRule").equals("Damage can't be prevented.")) {
-                effects.setGlobalRuleChange(GlobalRuleChange.noPrevention);
-            } else if (params.get("GlobalRule").equals("All damage is dealt as though it's source had wither.")) {
-                effects.setGlobalRuleChange(GlobalRuleChange.alwaysWither);
-            } else if (params.get("GlobalRule").equals("The legend rule doesn't apply.")) {
-                effects.setGlobalRuleChange(GlobalRuleChange.noLegendRule);
-            } else if (params.get("GlobalRule").equals("Mana pools don't empty as steps and phases end.")) {
-                effects.setGlobalRuleChange(GlobalRuleChange.manapoolsDontEmpty);
-            } else if (params.get("GlobalRule").equals("Players can't cycle cards.")) {
-                effects.setGlobalRuleChange(GlobalRuleChange.noCycling);
-            } else if (params.get("GlobalRule").equals("Creatures entering the battlefield don't cause abilities to trigger.")) {
-                effects.setGlobalRuleChange(GlobalRuleChange.noCreatureETBTriggers);
-            } else if (params.get("GlobalRule").equals("No more than one creature can block each combat.")) {
-                effects.setGlobalRuleChange(GlobalRuleChange.onlyOneBlocker);
-            } else if (params.get("GlobalRule").equals("No more than one creature can attack each turn.")) {
-                effects.setGlobalRuleChange(GlobalRuleChange.onlyOneAttackerATurn);
-            } else if (params.get("GlobalRule").equals("No more than one creature can attack each combat.")) {
-                effects.setGlobalRuleChange(GlobalRuleChange.onlyOneAttackerACombat);
-            }
+            effects.setGlobalRuleChange(GlobalRuleChange.fromString(params.get("GlobalRule")));
         }
 
         if (params.containsKey("SetPower")) {

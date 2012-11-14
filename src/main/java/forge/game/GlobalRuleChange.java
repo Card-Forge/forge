@@ -22,13 +22,29 @@ package forge.game;
  */
 public enum GlobalRuleChange {
 
-    alwaysWither,
-    manapoolsDontEmpty,
-    noCycling,
-    noCreatureETBTriggers,
-    noLegendRule,
-    noPrevention,
-    onlyOneAttackerATurn,
-    onlyOneAttackerACombat,
-    onlyOneBlocker
+    alwaysWither ("All damage is dealt as though it's source had wither."),
+    manapoolsDontEmpty ("Mana pools don't empty as steps and phases end."),
+    noCycling ("Players can't cycle cards."),
+    noCreatureETBTriggers ("Creatures entering the battlefield don't cause abilities to trigger."),
+    noLegendRule ("The legend rule doesn't apply."),
+    noPrevention ("Damage can't be prevented."),
+    onlyOneAttackerATurn ("No more than one creature can attack each turn."),
+    onlyOneAttackerACombat ("No more than one creature can attack each combat."),
+    onlyOneBlocker ("No more than one creature can block each combat.");
+    
+    private final String ruleText;
+    
+    private GlobalRuleChange(String text) {
+        ruleText = text;
+    }
+
+    public static GlobalRuleChange fromString(String text) {
+        for (final GlobalRuleChange v : GlobalRuleChange.values()) {
+            if (v.ruleText.compareToIgnoreCase(text) == 0) {
+                return v;
+            }
+        }
+
+        throw new RuntimeException("Element " + text + " not found in GlobalRuleChange enum");
+    }
 }
