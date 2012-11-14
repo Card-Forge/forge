@@ -66,7 +66,7 @@ public class MillAi extends SpellAiLogic {
             chance = .667; // 66.7% chance for sorcery speed
         }
 
-        if ((Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.END_OF_TURN) 
+        if ((Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.END_OF_TURN)
                 && Singletons.getModel().getGame().getPhaseHandler().getNextTurn().equals(ai))) {
             chance = .9; // 90% for end of opponents turn
         }
@@ -75,7 +75,7 @@ public class MillAi extends SpellAiLogic {
 
         if (sa.getParam("NumCards").equals("X") && source.getSVar("X").startsWith("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int cardsToDiscard = 
+            final int cardsToDiscard =
                     Math.min(ComputerUtil.determineLeftoverMana(sa, ai), ai.getOpponent().getCardsIn(ZoneType.Library).size());
             source.setSVar("PayX", Integer.toString(cardsToDiscard));
             if (cardsToDiscard <= 0) {
