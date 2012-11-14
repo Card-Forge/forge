@@ -3447,6 +3447,7 @@ res/cardsfolder/f/flaming_sword.txt svneol=native#text/plain
 res/cardsfolder/f/flanking_troops.txt svneol=native#text/plain
 res/cardsfolder/f/flare.txt svneol=native#text/plain
 res/cardsfolder/f/flaring_flame_kin.txt svneol=native#text/plain
+res/cardsfolder/f/flaring_pain.txt -text
 res/cardsfolder/f/flash_conscription.txt -text svneol=unset#text/plain
 res/cardsfolder/f/flash_counter.txt svneol=native#text/plain
 res/cardsfolder/f/flash_flood.txt svneol=native#text/plain
