@@ -383,6 +383,7 @@ public class TriggerHandler {
      */
     private boolean runSingleTrigger(final Trigger regtrig, final TriggerType mode, final Map<String, Object> runParams) {
         final Map<String, String> triggerParams = regtrig.getMapParams();
+        final GameState game = Singletons.getModel().getGame();
 
         if (regtrig.getMode() != mode) {
             return false; // Not the right mode.
@@ -391,7 +392,7 @@ public class TriggerHandler {
         if (!regtrig.phasesCheck()) {
             return false; // It's not the right phase to go off.
         }
-        //System.out.println( "  " + regtrig.getMode().toString() + "@" + regtrig.getHostCard() + "> " + forge.util.TextUtil.mapToString(params));        
+      
         if (!regtrig.requirementsCheck()) {
             return false; // Conditions aren't right.
         }
@@ -399,7 +400,7 @@ public class TriggerHandler {
             return false; // Morphed cards only have pumped triggers go off.
         }
         if (regtrig instanceof TriggerAlways) {
-            if (Singletons.getModel().getGame().getStack().hasStateTrigger(regtrig.getId())) {
+            if (game.getStack().hasStateTrigger(regtrig.getId())) {
                 return false; // State triggers that are already on the stack
                               // don't trigger again.
             }
@@ -411,7 +412,7 @@ public class TriggerHandler {
         if (regtrig.isSuppressed()) {
             return false; // Trigger removed by effect
         }
-        if (!regtrig.zonesCheck(Singletons.getModel().getGame().getZoneOf(regtrig.getHostCard()))) {
+        if (!regtrig.zonesCheck(game.getZoneOf(regtrig.getHostCard()))) {
             return false; // Host card isn't where it needs to be.
         }
 
@@ -421,7 +422,7 @@ public class TriggerHandler {
                 String dest = (String) runParams.get("Destination");
                 if (dest.equals("Battlefield") && runParams.get("Card") instanceof Card) {
                     Card card = (Card) runParams.get("Card");
-                    if (card.isCreature() && Singletons.getModel().getGame().isCardInPlay("Torpor Orb")) {
+                    if (card.isCreature() && game.getStaticEffects().isNoCreatureETBTriggers()) {
                         return false;
                     }
                 }
@@ -446,7 +447,7 @@ public class TriggerHandler {
         final AbilityFactory abilityFactory = new AbilityFactory();
 
         SpellAbility sa = null;
-        Card host = Singletons.getModel().getGame().getCardState(regtrig.getHostCard());
+        Card host = game.getCardState(regtrig.getHostCard());
 
         if (host == null) {
             host = regtrig.getHostCard();
@@ -523,14 +524,14 @@ public class TriggerHandler {
 
         if (regtrig.isStatic()) {
             if (wrapperAbility.getActivatingPlayer().isHuman()) {
-                Singletons.getModel().getGame().getAction().playSpellAbilityNoStack(wrapperAbility, false);
+                game.getAction().playSpellAbilityNoStack(wrapperAbility, false);
             } else {
                 wrapperAbility.doTrigger(isMandatory);
                 ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility);
             }
             //Singletons.getModel().getGameAction().playSpellAbilityNoStack(wrapperAbility, false);
         } else {
-            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(wrapperAbility);
+            game.getStack().addSimultaneousStackEntry(wrapperAbility);
         }
         regtrig.setTriggeredSA(wrapperAbility);
         return true;

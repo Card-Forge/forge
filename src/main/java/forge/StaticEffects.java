@@ -52,6 +52,7 @@ public class StaticEffects {
     private boolean noLegendRule = false;
     private boolean manapoolsDontEmpty = false;
     private boolean noCycling = false;
+    private boolean noCreatureETBTriggers = false;
 
     /**
      * clearStaticEffect. TODO Write javadoc for this method.
@@ -62,6 +63,7 @@ public class StaticEffects {
         noLegendRule = false;
         manapoolsDontEmpty = false;
         noCycling = false;
+        noCreatureETBTriggers = false;
 
         // remove all static effects
         for (int i = 0; i < this.staticEffects.size(); i++) {
@@ -143,6 +145,21 @@ public class StaticEffects {
      */
     public void setNoCycling(boolean noCyc) {
         this.noCycling = noCyc;
+    }
+    
+
+    /**
+     * @return the noCreatureETBTriggers
+     */
+    public boolean isNoCreatureETBTriggers() {
+        return noCreatureETBTriggers;
+    }
+
+    /**
+     * @param noCreatureETBTriggers0 the noCreatureETBTriggers to set
+     */
+    public void setNoCreatureETBTriggers(boolean noETBTriggers) {
+        this.noCreatureETBTriggers = noETBTriggers;
     }
     
 

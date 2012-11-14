@@ -104,6 +104,8 @@ public class StaticAbilityContinuous {
                 effects.setManapoolsDontEmpty(true);
             } else if (params.get("GlobalRule").equals("Players can't cycle cards.")) {
                 effects.setNoCycling(true);
+            } else if (params.get("GlobalRule").equals("Creatures entering the battlefield don't cause abilities to trigger.")) {
+                effects.setNoCreatureETBTriggers(true);
             }
         }
 
