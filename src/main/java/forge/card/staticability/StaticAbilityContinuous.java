@@ -96,6 +96,8 @@ public class StaticAbilityContinuous {
             final StaticEffects effects = Singletons.getModel().getGame().getStaticEffects();
             if (params.get("GlobalRule").equals("Damage can't be prevented.")) {
                 effects.setNoPrevention(true);
+            } else if (params.get("GlobalRule").equals("All damage is dealt as though it's source had wither.")) {
+                effects.setAlwayWither(true);
             }
         }
 

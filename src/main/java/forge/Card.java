@@ -59,7 +59,6 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.item.CardDb;
-import forge.model.FModel;
 import forge.sound.Sounds;
 import forge.util.Expressions;
 import forge.util.MyRandom;
@@ -8295,8 +8294,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             return true;
         }
 
-        if (source.hasKeyword("Wither") || source.hasKeyword("Infect")
-                || FModel.SINGLETON_INSTANCE.getGame().isCardInPlay("Everlasting Torment")) {
+        if (Singletons.getModel().getGame().getStaticEffects().isAlwaysWither()
+                || source.hasKeyword("Wither") || source.hasKeyword("Infect")) {
             wither = true;
         }
 

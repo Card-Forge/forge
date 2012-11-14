@@ -48,12 +48,14 @@ public class StaticEffects {
     
     //Global rule changes
     private boolean noPrevention = false;
+    private boolean alwaysWither = false;
 
     /**
      * clearStaticEffect. TODO Write javadoc for this method.
      */
     public final void clearStaticEffects() {
         noPrevention = false;
+        alwaysWither = false;
 
         // remove all static effects
         for (int i = 0; i < this.staticEffects.size(); i++) {
@@ -77,6 +79,21 @@ public class StaticEffects {
     public boolean isNoPrevention() {
         return noPrevention;
     }
+
+    /**
+     * @return the alwayWither
+     */
+    public boolean isAlwaysWither() {
+        return alwaysWither;
+    }
+
+    /**
+     * @param alwayWither0 the alwayWither to set
+     */
+    public void setAlwayWither(boolean wither) {
+        this.alwaysWither = wither;
+    }
+    
 
     /**
      * addStaticEffect. TODO Write javadoc for this method.
