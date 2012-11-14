@@ -100,6 +100,8 @@ public class StaticAbilityContinuous {
                 effects.setAlwayWither(true);
             } else if (params.get("GlobalRule").equals("The legend rule doesn't apply.")) {
                 effects.setNoLegendRule(true);
+            } else if (params.get("GlobalRule").equals("Mana pools don't empty as steps and phases end.")) {
+                effects.setManapoolsDontEmpty(true);
             }
         }
 

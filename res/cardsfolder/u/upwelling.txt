@@ -1,8 +1,9 @@
 Name:Upwelling
 ManaCost:3 G
 Types:Enchantment
-Text:Mana pools don't empty as steps and phases end.
-SVar:RemAIDeck:True
+Text:no text
+S:Mode$ Continuous | GlobalRule$ Mana pools don't empty as steps and phases end. | Description$ Mana pools don't empty as steps and phases end.
+SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/upwelling.jpg
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/131.jpg

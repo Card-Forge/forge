@@ -178,7 +178,7 @@ public class ManaPool {
     public final int clearPool(boolean isEndOfPhase) {
         int numRemoved = 0;
         
-        if (isEndOfPhase &&  Singletons.getModel().getGame().isCardInPlay("Upwelling") )
+        if (isEndOfPhase && Singletons.getModel().getGame().getStaticEffects().isManapoolsDontEmpty())
             return numRemoved;
 
         if (this.floatingMana.isEmpty()) {
