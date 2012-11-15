@@ -15,8 +15,8 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-public class PhasesAi extends SpellAiLogic
-{
+public class PhasesAi extends SpellAiLogic {
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -54,9 +54,10 @@ public class PhasesAi extends SpellAiLogic
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         final Target tgt = sa.getTarget();
 
-        if (tgt == null)
+        if (tgt == null) {
             return mandatory;
-        
+        }
+
         if (phasesPrefTargeting(tgt, sa, mandatory)) {
             return true;
         } else if (mandatory) {
