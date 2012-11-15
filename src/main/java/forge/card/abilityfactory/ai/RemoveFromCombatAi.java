@@ -6,7 +6,7 @@ import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 
 public class RemoveFromCombatAi extends SpellAiLogic {
-    
+
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         // disabled for the AI for now. Only for Gideon Jura at this time.
