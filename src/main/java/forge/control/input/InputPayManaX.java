@@ -58,11 +58,8 @@ public class InputPayManaX extends InputPayMana {
     // selectCard
     @Override
     public void selectCard(final Card card) {
-        if (!this.colorX.equals("")) {
-            this.manaCost = InputPayManaCostUtil.activateManaAbility(sa, card, new ManaCost(this.colorX));
-        } else {
-            this.manaCost = InputPayManaCostUtil.activateManaAbility(sa, card, this.manaCost);
-        }
+        this.manaCost = InputPayManaCostUtil.activateManaAbility(sa, card, 
+                this.colorX.isEmpty() ? this.manaCost : new ManaCost(this.colorX));
         if (this.manaCost.isPaid()) {
             if (!this.colorsPaid.contains(this.manaCost.getColorsPaid())) {
                 this.colorsPaid += this.manaCost.getColorsPaid();
