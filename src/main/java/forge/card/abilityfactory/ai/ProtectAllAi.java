@@ -9,7 +9,7 @@ import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 
 public class ProtectAllAi extends SpellAiLogic {
-    
+
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
