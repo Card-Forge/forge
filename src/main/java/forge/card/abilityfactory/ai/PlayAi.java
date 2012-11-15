@@ -19,7 +19,7 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 public class PlayAi extends SpellAiLogic {
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
@@ -27,7 +27,7 @@ public class PlayAi extends SpellAiLogic {
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return true;
     }
-    
+
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Cost abCost = sa.getPayCosts();
