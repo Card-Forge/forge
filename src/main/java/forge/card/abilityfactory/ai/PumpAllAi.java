@@ -20,7 +20,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class PumpAllAi extends PumpAiBase {
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -28,11 +28,11 @@ public class PumpAllAi extends PumpAiBase {
     protected boolean canPlayAI(final Player ai, final SpellAbility sa) {
         String valid = "";
         final Card source = sa.getSourceCard();
-        
-        final int power = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa); 
-        final int defense = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa); 
+
+        final int power = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa);
+        final int defense = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa);
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
-        
+
         final PhaseType phase = Singletons.getModel().getGame().getPhaseHandler().getPhase();
 
         if (ComputerUtil.preventRunAwayActivations(sa)) {
@@ -88,7 +88,7 @@ public class PumpAllAi extends PumpAiBase {
                         continue;
                     }
                     totalPower += Math.min(c.getNetAttack(), power * -1);
-                    if (phase == PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY 
+                    if (phase == PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY
                             && Singletons.getModel().getGame().getCombat().getUnblockedAttackers().contains(c)) {
                         if (CombatUtil.lifeInDanger(sa.getActivatingPlayer(), Singletons.getModel().getGame().getCombat())) {
                             return true;
@@ -143,7 +143,7 @@ public class PumpAllAi extends PumpAiBase {
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return true;
     }
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
