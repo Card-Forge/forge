@@ -938,7 +938,8 @@ public class AttachAi extends SpellAiLogic {
             return false;
         }
 
-        if (keyword.endsWith("CARDNAME can't attack.") || keyword.equals("Defender")) {
+        if (keyword.endsWith("CARDNAME can't attack.") || keyword.equals("Defender")
+                || keyword.endsWith("CARDNAME can't attack or block.")) {
             if (!CombatUtil.canAttackNextTurn(card)) {
                 return false;
             }
@@ -946,6 +947,13 @@ public class AttachAi extends SpellAiLogic {
             if (!CombatUtil.canAttackNextTurn(card) || !CombatUtil.canBlock(card, true)) {
                 return false;
             }
+        } else if (keyword.endsWith("CARDNAME's activated abilities can't be activated.")) {
+            for (SpellAbility ability : card.getSpellAbilities()) {
+                if (ability.isAbility()) {
+                    return true;
+                }
+            }
+            return false;
         }
         return true;
     }
