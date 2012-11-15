@@ -425,6 +425,23 @@ Fixes/Features:
 - Added the global rule change: "Mana pools don't empty as steps and phases end.".
 - Converted Upwelling to script.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added the global rule change: "Players can't cycle cards.".
+- Converted Stabilizer to script.
+- Fixed Predatory Rampage.
+- Added the global rule change: "Creatures entering the battlefield don't cause abilities to trigger.".
+- Converted Torpor Orb to script.
+- CheckStyle.
+- Initial implementation of "spend only <color> mana when paying X", for the future implementations of Drain Life/Consume Spirit/etc. Currently controlled with SVar:XColor - specify the color of mana to spend on the X cost, e.g. SVar:XColor:B limits the X mana cost to black. Hope it didn't break anything, please test.
+- GlobalRuleChanges is now stored as EnumSet.
+- Fixed a bug in the "Spend only <color> mana on X" routine that allowed any mana to be spent after the first tapped land.
+- Fixed a bug in the "Spend only <color> mana on X" routine that disabled the confirmation button if the wrong type of land was clicked, even if some mana of correct color was already paid before.
+- Added the global rule change: "No more than one creature can attack each turn.", "No more than one creature can attack each combat." and "No more than one creature can block each combat.".
+- GlobalRuleChange enum now has an associated text.
+- Unlocking sets is less expensive now (but still fairly expensive).
+- Code simplification (related to "spend only <color> mana on X").
+- Typo fixes to the QuestData submenu.
+- Sound System: added a previously missed link for the non-combat damage life loss sound.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -509,6 +526,8 @@ Krosan Drover
 Proteus Machine
 Flaring Pain
 Unstable Footing
+Predatory Focus
+Consume Spirit
 
 
 end
