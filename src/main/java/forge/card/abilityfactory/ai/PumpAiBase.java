@@ -25,7 +25,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public abstract class PumpAiBase extends SpellAiLogic {
-    
+
     public boolean containsUsefulKeyword(final Player ai, final List<String> keywords, final Card card, final SpellAbility sa, final int attack) {
         for (final String keyword : keywords) {
             if (!sa.isCurse() && isUsefulPumpKeyword(ai, keyword, card, sa, attack)) {
