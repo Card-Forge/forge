@@ -133,6 +133,13 @@ public class DiscardAi extends SpellAiLogic {
                     return false;
                 }
             }
+        } else {
+            if ("X".equals(sa.getParam("RevealNumber")) && sa.getSourceCard().getSVar("X").equals("Count$xPaid")) {
+                // Set PayX here to maximum value.
+                final int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa, ai), ai.getOpponent()
+                        .getCardsIn(ZoneType.Hand).size());
+                sa.getSourceCard().setSVar("PayX", Integer.toString(cardsToDiscard));
+            }
         }
 
         return true;
