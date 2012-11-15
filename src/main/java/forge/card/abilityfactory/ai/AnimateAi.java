@@ -74,7 +74,9 @@ public class AnimateAi extends SpellAiLogic {
 
             boolean bFlag = false;
             for (final Card c : defined) {
-                bFlag |= (!c.isCreature() && !c.isTapped() && !(c.getTurnInZone() == Singletons.getModel().getGame().getPhaseHandler().getTurn()));
+                bFlag |= (!c.isCreature() && !c.isTapped() 
+                        && !(c.getTurnInZone() == Singletons.getModel().getGame().getPhaseHandler().getTurn())
+                        && !c.isEquipping());
 
                 // for creatures that could be improved (like Figure of Destiny)
                 if (c.isCreature() && (sa.hasParam("Permanent") || (!c.isTapped() && !c.isSick()))) {
