@@ -6,9 +6,9 @@ Loyalty:3
 T:Mode$ Always | IsPresent$ Card.Self+counters_LE2_LOYALTY | Execute$ TrigTransform | TriggerDescription$ When CARDNAME has two or fewer loyalty counters on him, transform him.
 A:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SubAbility$ DamageThis | Planeswalker$ True | SpellDescription$ CARDNAME deals 3 damage to target creature. That creature deals damage equal to its power to him.
 A:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Wolf | TokenColors$ Green | TokenTypes$ Creature,Wolf | TokenOwner$ You | TokenPower$ 2 | TokenToughness$ 2 | Planeswalker$ True | References$ Y | SpellDescription$ Put a 2/2 green Wolf creature token onto the battlefield.
-SVar:DamageThis:DB$DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ Y
+SVar:DamageThis:DB$ DealDamage | Defined$ Self | DamageSource$ Targeted | NumDmg$ Y
 SVar:Y:Targeted$CardPower
-SVar:TrigTransform:AB$SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
+SVar:TrigTransform:AB$ SetState | Cost$ 0 | Defined$ Self | Mode$ Transform
 AlternateMode:DoubleFaced
 SVar:Picture:http://www.wizards.com/global/images/magic/general/garruk_relentless.jpg
 SetInfo:ISD|Mythic|http://magiccards.info/scans/en/isd/181a.jpg

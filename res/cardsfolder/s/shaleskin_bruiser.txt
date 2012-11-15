@@ -5,7 +5,7 @@ Text:no text
 PT:4/4
 K:Trample
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME attacks, it gets +3/+0 until end of turn for each other attacking Beast.
-SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ X | References$ X
+SVar:TrigPump:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ X | References$ X
 SVar:X:Count$Valid Creature.Beast+Other+attacking/Times.3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shaleskin_bruiser.jpg

@@ -394,7 +394,14 @@ public class PumpAi extends PumpAiBase {
 
         int attack;
         if (numAttack.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
-            attack = Integer.parseInt(source.getSVar("PayX"));
+            if (source.getSVar("PayX").equals("")) {
+                // X is not set yet
+                final int xPay = ComputerUtil.determineLeftoverMana(sa.getRootAbility(), ai);
+                source.setSVar("PayX", Integer.toString(xPay));
+                attack = xPay;
+            } else {
+                attack = Integer.parseInt(source.getSVar("PayX"));
+            }
         } else {
             attack = AbilityFactory.calculateAmount(sa.getSourceCard(), numAttack, sa);
         }

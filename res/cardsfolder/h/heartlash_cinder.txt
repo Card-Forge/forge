@@ -5,7 +5,7 @@ Text:no text
 PT:1/1
 K:Haste
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ Chroma - When CARDNAME enters the battlefield, it gets +X/+0 until end of turn, where X is the number of red mana symbols in the mana costs of permanents you control.
-SVar:TrigPump:AB$Pump | Cost$ 0 | NumAtt$ X | Defined$ Self | References$ X
+SVar:TrigPump:AB$ Pump | Cost$ 0 | NumAtt$ X | Defined$ Self | References$ X
 SVar:X:Count$Chroma.R
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heartlash_cinder.jpg
