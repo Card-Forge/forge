@@ -1,0 +1,24 @@
+Name:Drain Life
+ManaCost:X 1 B
+Types:Sorcery
+Text:no text
+SVar:XColor:B
+A:SP$ StoreSVar | Cost$ X 1 B | Tgt$ TgtCP | SVar$ Limit | Type$ Targeted | Expression$ CardToughness | SubAbility$ StoreTgtP | ConditionDefined$ Targeted | ConditionPresent$ Card.Creature | ConditionCompare$ GE1 | SpellDescription$ CARDNAME deals X damage to target creature or player. You gain life equal to the damage dealt, but not more life than the player's life total before CARDNAME dealt damage or the creature's toughness.
+SVar:StoreTgtP:DB$ StoreSVar | SVar$ Limit | Type$ Count | Expression$ TargetedLifeTotal | SubAbility$ DBDamage | ConditionDefined$ Targeted | ConditionPresent$ Card.Creature | ConditionCompare$ EQ0
+SVar:DBDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | SubAbility$ DBGainLife | References$ X
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ DrainedLifeCard | References$ DrainedLifeCard
+SVar:X:Count$xPaid
+SVar:DrainedLifeCard:SVar$X/LimitMax.Limit
+SVar:Limit:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/drain_life.jpg
+SetInfo:LEA|Common|http://magiccards.info/scans/en/al/14.jpg
+SetInfo:LEB|Common|http://magiccards.info/scans/en/be/14.jpg
+SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/18.jpg
+SetInfo:4ED|Common|http://magiccards.info/scans/en/4e/16.jpg
+SetInfo:3ED|Common|http://magiccards.info/scans/en/rv/14.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/16.jpg
+SetInfo:2ED|Common|http://magiccards.info/scans/en/un/14.jpg
+Oracle:Spend only black mana on X.\nDrain Life deals X damage to target creature or player. You gain life equal to the damage dealt, but not more life than the player's life total before Drain Life dealt damage or the creature's toughness.
+End

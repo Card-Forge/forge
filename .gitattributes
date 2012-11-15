@@ -2624,6 +2624,7 @@ res/cardsfolder/d/dragonsoul_knight.txt svneol=native#text/plain
 res/cardsfolder/d/dragonspeaker_shaman.txt svneol=native#text/plain
 res/cardsfolder/d/dragonstalker.txt svneol=native#text/plain
 res/cardsfolder/d/dragonstorm.txt svneol=native#text/plain
+res/cardsfolder/d/drain_life.txt -text
 res/cardsfolder/d/drain_the_well.txt svneol=native#text/plain
 res/cardsfolder/d/drainpipe_vermin.txt -text
 res/cardsfolder/d/drake_familiar.txt -text
