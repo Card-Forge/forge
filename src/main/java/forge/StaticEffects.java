@@ -47,7 +47,7 @@ public class StaticEffects {
      * staticEffects.
      */
     private ArrayList<StaticEffect> staticEffects;
-    
+
     //Global rule changes
     private final EnumSet<GlobalRuleChange> ruleChanges;
 
