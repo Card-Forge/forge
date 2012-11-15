@@ -23,7 +23,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class PumpAi extends PumpAiBase {
-    
+
     /* (non-Javadoc)
          * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
          */
@@ -34,7 +34,7 @@ public class PumpAi extends PumpAiBase {
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
         final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
         final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
-        
+
         if (!CostUtil.checkLifeCost(ai, cost, sa.getSourceCard(), 4, null)) {
             return false;
         }
@@ -162,7 +162,7 @@ public class PumpAi extends PumpAiBase {
 
     private boolean pumpTgtAI(final Player ai, final SpellAbility sa, final int defense, final int attack, final boolean mandatory) {
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
-        
+
         if (!mandatory
                 && !sa.isTrigger()
                 && Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
@@ -339,7 +339,7 @@ public class PumpAi extends PumpAiBase {
         final Card source = sa.getSourceCard();
         final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
         final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
-        
+
         int defense;
         if (numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
@@ -379,12 +379,12 @@ public class PumpAi extends PumpAiBase {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-        
+
         final Card source = sa.getSourceCard();
-        
+
         final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
         final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
-        
+
         int defense;
         if (numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             defense = Integer.parseInt(source.getSVar("PayX"));
