@@ -391,6 +391,8 @@ public class QuestDataIO {
             writer.startNode("format");
             GameFormatQuest format = (GameFormatQuest) source;
             writer.addAttribute("name", format.getName());
+            writer.addAttribute("unlocksUsed", Integer.toString(format.getUnlocksUsed()));
+            writer.addAttribute("canUnlock", format.canUnlockSets() ? "1" : "0");
             writer.endNode();
 
             for (String set : format.getAllowedSetCodes()) {
@@ -409,6 +411,8 @@ public class QuestDataIO {
         public Object unmarshal(final HierarchicalStreamReader reader, final UnmarshallingContext context) {
             reader.moveDown();
             String name = reader.getAttribute("name");
+            String unlocksUsed = reader.getAttribute("unlocksUsed");
+            boolean canUnlock = !("0".equals(reader.getAttribute("canUnlock")));
             List<String> allowedSets = new ArrayList<String>();
             List<String> bannedCards = new ArrayList<String>();
             reader.moveUp();
@@ -425,7 +429,21 @@ public class QuestDataIO {
                 }
                 reader.moveUp();
             }
-            return new GameFormatQuest(name, allowedSets, bannedCards);
+            GameFormatQuest res = new GameFormatQuest(name, allowedSets, bannedCards);
+            try {
+                if ( StringUtils.isNotEmpty(unlocksUsed)) {
+                    setFinalField(GameFormatQuest.class, "unlocksUsed", res, Integer.parseInt(unlocksUsed));
+                }
+                setFinalField(GameFormatQuest.class, "allowUnlocks", res, canUnlock);                
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+            
+            return res;
         }
     }
 
@@ -444,12 +462,7 @@ public class QuestDataIO {
         @Override
         public Object unmarshal(final HierarchicalStreamReader reader, final UnmarshallingContext context) {
             final String value = reader.getValue();
-            return GameType.smartValueOf(value, GameType.Quest); // does not
-                                                                 // matter -
-                                                                 // this field
-                                                                 // is
-                                                                 // deprecated
-                                                                 // anyway
+            return GameType.smartValueOf(value, GameType.Quest); 
         }
     }
 

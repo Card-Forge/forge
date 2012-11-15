@@ -8,6 +8,8 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
+
 import com.google.common.base.Supplier;
 
 import forge.Card;
@@ -160,11 +162,8 @@ public class SSubmenuQuestUtil {
         view0.getLblLosses().setText("Losses: " + qA.getLost());
 
         // Show or hide the set unlocking button
-        if (qCtrl.getFormatNumberUnlockable() > 0) {
-            view0.getBtnUnlock().setVisible(true);
-        } else {
-            view0.getBtnUnlock().setVisible(false);
-        }
+
+        view0.getBtnUnlock().setVisible(qCtrl.getUnlocksTokens() > 0);
 
         // Challenge in wins
         final int num = SSubmenuQuestUtil.nextChallengeInWins();
@@ -245,12 +244,20 @@ public class SSubmenuQuestUtil {
     }
 
     /** */
-    public static void showSetUnlock() {
+    public static void chooseAndUnlockEdition() {
         final QuestController qData = Singletons.getModel().getQuest();
-        CardEdition toUnlock = QuestUtilUnlockSets.unlockSet(qData, false, null);
-        if (toUnlock != null) {
-            QuestUtilUnlockSets.doUnlock(qData, toUnlock);
+        ImmutablePair<CardEdition, Integer> toUnlock = QuestUtilUnlockSets.chooseSetToUnlock(qData, false, null);
+        if (toUnlock == null) {
+            return;
         }
+        
+        CardEdition unlocked = toUnlock.left;
+        qData.getAssets().subtractCredits(toUnlock.right);
+        JOptionPane.showMessageDialog(null, "You have successfully unlocked " + unlocked.getName() + "!",
+                unlocked.getName() + " unlocked!",
+                JOptionPane.PLAIN_MESSAGE);
+
+        QuestUtilUnlockSets.doUnlock(qData, unlocked);
     }
 
     /** */

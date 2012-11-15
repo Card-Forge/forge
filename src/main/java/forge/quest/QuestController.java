@@ -338,24 +338,18 @@ public class QuestController {
      * Quest format has unlockable sets available at the moment.
      * @return int number of unlockable sets.
      */
-    public int getFormatNumberUnlockable() {
-        if (this.questFormat == null) {
+    public int getUnlocksTokens() {
+        if (this.questFormat == null || !this.questFormat.canUnlockSets()) {
             return 0;
         }
 
         final int wins = this.model.getAchievements().getWin();
-        if (wins < 10) {
-            return 0;
-        }
 
-        int toUnlock = this.questFormat.getExcludedSetCodes().size();
-        if (toUnlock > 1 + wins / 50) {
-            toUnlock = 1 + wins / 50;
-        }
-        if (toUnlock > 8) {
-            toUnlock = 8;
-        }
-        return toUnlock;
+        int cntLocked = this.questFormat.getLockedSets().size();
+        int unlocksAvaliable = wins / 20;
+        int unlocksSpent = this.questFormat.getUnlocksUsed(); 
+        
+        return unlocksAvaliable > unlocksSpent ? Math.min(unlocksAvaliable - unlocksSpent, cntLocked) : 0; 
     }
 
 }

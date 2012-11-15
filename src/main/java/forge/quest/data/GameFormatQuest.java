@@ -17,7 +17,6 @@
  */
 package forge.quest.data;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -36,7 +35,8 @@ import forge.game.GameFormat;
  */
 public final class GameFormatQuest extends GameFormat {
 
-    private boolean allowUnlocks = true;
+    private final boolean allowUnlocks;
+    private int unlocksUsed = 0;
 
     /**
      * Instantiates a new game format based on two lists.
@@ -50,6 +50,7 @@ public final class GameFormatQuest extends GameFormat {
      */
     public GameFormatQuest(final String newName, final List<String> setsToAllow, final List<String> cardsToBan) {
         super(newName, setsToAllow, cardsToBan);
+        allowUnlocks = false;
     }
 
     public GameFormatQuest(final String newName, final List<String> setsToAllow, final List<String> cardsToBan, boolean allowSetUnlocks) {
@@ -64,50 +65,29 @@ public final class GameFormatQuest extends GameFormat {
      * @param allowSetUnlocks 
      */
     public GameFormatQuest(final GameFormat toCopy, boolean allowSetUnlocks) {
-        this(toCopy.getName(), toCopy.getAllowedSetCodes(), toCopy.getBannedCardNames());
+        super(toCopy.getName(), toCopy.getAllowedSetCodes(), toCopy.getBannedCardNames());
         allowUnlocks = allowSetUnlocks;
     }
 
-
-    /**
-     * 
-     * Updates the filters based on the current list data.
-     */
-    public void updateFilters() {
-        // nothing to do here. 
-        // predicates hold references to lists and thus get auto updated.
-        
-        // remove this method after reading.
-    }
-
-    /**
-     * Empty the whole list.
-     */
-    public void emptyAllowedSets() {
-        if (allowedSetCodes.isEmpty()) {
-            return;
-        }
-        allowedSetCodes.clear();
-    }
 
     /**
      * Get the list of excluded sets.
      * 
      * @return unmodifiable list of excluded sets.
      */
-    public List<String> getExcludedSetCodes() {
-        if (this.allowedSetCodes.isEmpty()) {
-            return null;
-        }
+    public List<String> getLockedSets() {
 
         List<String> exSets = new ArrayList<String>();
+        if (this.allowedSetCodes.isEmpty()) {
+            return exSets;
+        }
 
         for (CardEdition ce : Singletons.getModel().getEditions()) {
             if (!isSetLegal(ce.getCode())) {
                 exSets.add(ce.getCode());
             }
         }
-        return Collections.unmodifiableList(exSets);
+        return exSets;
     }
 
     /**
@@ -116,13 +96,11 @@ public final class GameFormatQuest extends GameFormat {
      * @param setCode String, set code.
      */
     public void unlockSet(final String setCode) {
-        if (this.allowedSetCodes.isEmpty()) {
-            return; // We are already allowing all sets!
-        } else if (this.allowedSetCodes.contains(setCode)) {
-            return; // Already on the list
+        if (!canUnlockSets() || this.allowedSetCodes.isEmpty() || this.allowedSetCodes.contains(setCode)) {
+            return;
         }
         this.allowedSetCodes.add(setCode);
-        updateFilters();
+        unlocksUsed++;
     }
 
     /**
@@ -137,6 +115,11 @@ public final class GameFormatQuest extends GameFormat {
     public boolean canUnlockSets() {
         return allowUnlocks;
     }
+
+    public int getUnlocksUsed() {
+        return unlocksUsed;
+    }
+
 
     /**
      * The Class Predicates.

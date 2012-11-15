@@ -43,7 +43,7 @@ public enum CSubmenuDuels implements ICDoc {
 
         view.getBtnUnlock().setCommand(
                 new Command() { @Override
-                    public void execute() { SSubmenuQuestUtil.showSetUnlock(); } });
+                    public void execute() { SSubmenuQuestUtil.chooseAndUnlockEdition(); CSubmenuDuels.this.update();} });
 
         view.getBtnStart().addActionListener(
                 new ActionListener() { @Override

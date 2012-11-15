@@ -9,6 +9,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
+
+import com.sun.mail.iap.Argument;
+
 import forge.Command;
 import forge.deck.Deck;
 import forge.Singletons;
@@ -19,6 +22,7 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
 import forge.quest.QuestMode;
+import forge.quest.StartingPoolType;
 import forge.quest.data.GameFormatQuest;
 import forge.quest.data.QuestData;
 import forge.quest.data.QuestPreferences.QPref;
@@ -181,23 +185,8 @@ public enum CSubmenuQuestData implements ICDoc {
         }
 
         GameFormat fmtPrizes = null;
-        switch(view.getPrizedPoolType()) {
-        case Complete:
-            fmtPrizes = null;
-            break;
-        case CustomFormat:
-            if ( customPrizeFormatCodes.isEmpty() )
-            {
-                int answer = JOptionPane.showConfirmDialog(null, "You have defined custom format as containing no sets.\nThis will choose all editions without restriction as prized.\n\nContinue?");
-                if ( JOptionPane.YES_OPTION != answer )
-                    return;
-            }
-            fmtPrizes = customPrizeFormatCodes.isEmpty() ? null : new GameFormat("Custom Prizes", customPrizeFormatCodes, null); // chosen sets and no banend cards
-            break;
-        case Rotating:
-            fmtPrizes = view.getPrizedRotatingFormat();
-            break;
-        default: // same as starting
+        StartingPoolType prizedPoolType = view.getPrizedPoolType();
+        if ( null == prizedPoolType ) {
             fmtPrizes = fmtStartPool;
             if ( null == fmtPrizes && dckStartPool != null) { // build it form deck
                 List<String> sets = new ArrayList<String>();
@@ -213,10 +202,27 @@ public enum CSubmenuQuestData implements ICDoc {
                 }
                 fmtPrizes = new GameFormat("From deck", sets, null);
             }
-            break;
-        
-        }
-        
+        } else
+            switch(prizedPoolType) {
+                case Complete:
+                    fmtPrizes = null;
+                    break;
+                case CustomFormat:
+                    if ( customPrizeFormatCodes.isEmpty() )
+                    {
+                        int answer = JOptionPane.showConfirmDialog(null, "You have defined custom format as containing no sets.\nThis will choose all editions without restriction as prized.\n\nContinue?");
+                        if ( JOptionPane.YES_OPTION != answer )
+                            return;
+                    }
+                    fmtPrizes = customPrizeFormatCodes.isEmpty() ? null : new GameFormat("Custom Prizes", customPrizeFormatCodes, null); // chosen sets and no banend cards
+                    break;
+                case Rotating:
+                    fmtPrizes = view.getPrizedRotatingFormat();
+                    break;
+                default: 
+                    throw new RuntimeException("Should not get this result");
+            }
+            
 
         final Object o = JOptionPane.showInputDialog(null, "Poets will remember your quest as:", "Quest Name", JOptionPane.OK_CANCEL_OPTION);
         if (o == null) { return; }

@@ -19,11 +19,14 @@ package forge.quest;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
-
 import javax.swing.JOptionPane;
+
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 import forge.Singletons;
 import forge.card.BoosterData;
@@ -33,6 +36,7 @@ import forge.gui.CardListViewer;
 import forge.gui.GuiChoose;
 import forge.item.CardPrinted;
 import forge.quest.io.ReadPriceList;
+import forge.util.IStorageView;
 
 /** 
  * This is a helper class for unlocking new sets during a format-limited
@@ -48,78 +52,61 @@ public class QuestUtilUnlockSets {
      * @param presetChoices List<CardEdition> a pregenerated list of options, NOT IMPLEMENTED YET
      * @return CardEdition, the unlocked edition if any.
      */
-    public static CardEdition unlockSet(final QuestController qData, final boolean freeUnlock,
+    public static ImmutablePair<CardEdition, Integer> chooseSetToUnlock(final QuestController qData, final boolean freeUnlock,
             List<CardEdition> presetChoices) {
 
-        if (qData.getFormat() == null || qData.getFormat().getExcludedSetCodes().isEmpty()) {
-            return null;
-        }
-        List<CardEdition> choices = unlockableSets(qData);
-
-        if (choices == null || choices.size() < 1) {
+        if (qData.getFormat() == null || !qData.getFormat().canUnlockSets()) {
             return null;
         }
 
         final ReadPriceList prices = new ReadPriceList();
         final Map<String, Integer> mapPrices = prices.getPriceList();
+        final List<ImmutablePair<CardEdition, Integer>> setPrices = new ArrayList<ImmutablePair<CardEdition,Integer>>();
 
-        List<Long> unlockPrices = new ArrayList<Long>();
-        for (int i = 0; i < choices.size(); i++) {
-            if (mapPrices.containsKey(choices.get(i).getName() + " Booster Pack")) {
-                long newPrice = new Double(60 * Math.pow(Math.sqrt(mapPrices.get(choices.get(i).getName() + " Booster Pack")), 1.65)).longValue();
-                if (newPrice < 7500) { newPrice = 7500; }
-                unlockPrices.add(newPrice);
+        for (CardEdition ed : getUnlockableEditions(qData)) {
+            int price = 7500;
+            if (mapPrices.containsKey(ed.getName() + " Booster Pack")) {
+                price = Math.max( 50 * mapPrices.get(ed.getName() + " Booster Pack"), 7500 );
             }
-            else {
-                unlockPrices.add((long) 7500);
-            }
+            setPrices.add(ImmutablePair.of(ed, price));
         }
 
         final String setPrompt = "You have " + qData.getAssets().getCredits() + " credits. Unlock:";
         List<String> options = new ArrayList<String>();
-        for (int i = 0; i < choices.size(); i++) {
-            options.add(choices.get(i).getName() + " [PRICE: " + unlockPrices.get(i) + " credits]");
+        for (ImmutablePair<CardEdition, Integer> ee : setPrices) {
+            options.add(String.format("%s [PRICE: %d credits]",  ee.left.getName(), ee.right));
         }
-        final String choice = GuiChoose.oneOrNone(setPrompt, options);
-        CardEdition chooseEd = null;
-        long price = 0;
 
-        if (choice == null) {
+        int index = options.indexOf(GuiChoose.oneOrNone(setPrompt, options));
+        if (index < 0 || index >= options.size()) {
             return null;
         }
 
-        /* Examine choice */
-        for (int i = 0; i < options.size(); i++) {
-            if (choice.equals(options.get(i))) {
-                chooseEd = choices.get(i);
-                price = unlockPrices.get(i);
-                break;
-            }
-        }
+        
+        ImmutablePair<CardEdition, Integer> toBuy = setPrices.get(index);
+
+        int price = toBuy.right;
+        CardEdition choosenEdition = toBuy.left;
+                
 
         if (qData.getAssets().getCredits() < price) {
             JOptionPane.showMessageDialog(null, "Unfortunately, you cannot afford that set yet.\n"
-                    + "To unlock " + chooseEd.getName() + ", you need " + price + " credits.\n"
+                    + "To unlock " + choosenEdition.getName() + ", you need " + price + " credits.\n"
                     + "You have only " + qData.getAssets().getCredits() + " credits.",
-                    "Failed to unlock " + chooseEd.getName(),
+                    "Failed to unlock " + choosenEdition.getName(),
                     JOptionPane.PLAIN_MESSAGE);
             return null;
         }
 
         final int unlockConfirm = JOptionPane.showConfirmDialog(null,
-                "Unlocking " + chooseEd.getName() + " will cost you " + price + " credits.\n"
+                "Unlocking " + choosenEdition.getName() + " will cost you " + price + " credits.\n"
                 + "You have " + qData.getAssets().getCredits() + " credits.\n\n"
-                + "Are you sure you want to unlock " + chooseEd.getName() + "?",
-                "Confirm Unlocking " + chooseEd.getName(), JOptionPane.YES_NO_OPTION);
+                + "Are you sure you want to unlock " + choosenEdition.getName() + "?",
+                "Confirm Unlocking " + choosenEdition.getName(), JOptionPane.YES_NO_OPTION);
         if (unlockConfirm == JOptionPane.NO_OPTION) {
             return null;
         }
-
-        qData.getAssets().subtractCredits(price);
-        JOptionPane.showMessageDialog(null, "You have successfully unlocked " + chooseEd.getName() + "!",
-                chooseEd.getName() + " unlocked!",
-                JOptionPane.PLAIN_MESSAGE);
-        return chooseEd;
+        return toBuy;
     }
 
     /**
@@ -127,110 +114,53 @@ public class QuestUtilUnlockSets {
      * 
      * @return unmodifiable list, assorted sets that are not currently in the format.
      */
-    private static List<CardEdition> unlockableSets(final QuestController qData) {
-         if (qData.getFormat() == null || qData.getFormat().getExcludedSetCodes().isEmpty()) {
-            return null;
+    private static final List<CardEdition> emptyEditions = Collections.unmodifiableList(new ArrayList<CardEdition>());
+    private static List<CardEdition> getUnlockableEditions(final QuestController qData) {
+         if (qData.getFormat() == null || !qData.getFormat().canUnlockSets()) {
+            return emptyEditions;
         }
 
-        final int nrChoices = qData.getFormatNumberUnlockable();
+        final int nrChoices = qData.getUnlocksTokens();
         if (nrChoices < 1) { // Should never happen if we made it this far but better safe than sorry...
             throw new RuntimeException("BUG? Could not find unlockable sets even though we should.");
         }
         List<CardEdition> options = new ArrayList<CardEdition>();
 
          // Sort current sets by index
-         TreeMap<Integer, CardEdition> sortedFormat = new TreeMap<Integer, CardEdition>();
-         for (String edCode : qData.getFormat().getAllowedSetCodes()) {
-             sortedFormat.put(new Integer(Singletons.getModel().getEditions().get(edCode).getIndex()), Singletons.getModel().getEditions().get(edCode));
-         }
-         List<CardEdition> currentSets = new ArrayList<CardEdition>(sortedFormat.values());
-
+         List<CardEdition> allowedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getAllowedSetCodes(), Singletons.getModel().getEditions().FN_EDITION_BY_CODE));
+         Collections.sort(allowedSets);
+         
          // Sort unlockable sets by index
-         TreeMap<Integer, CardEdition> sortedExcluded = new TreeMap<Integer, CardEdition>();
-         for (String edCode : qData.getFormat().getExcludedSetCodes()) {
-             sortedExcluded.put(new Integer(Singletons.getModel().getEditions().get(edCode).getIndex()), Singletons.getModel().getEditions().get(edCode));
-         }
-         List<CardEdition> excludedSets = new ArrayList<CardEdition>(sortedExcluded.values());
-
-         // Collect 'previous' and 'next' editions
-         CardEdition first = currentSets.get(0);
-         CardEdition last = currentSets.get(currentSets.size() - 1);
-         List<CardEdition> fillers = new ArrayList<CardEdition>();
-
-         // Add nearby sets first
-         for (CardEdition ce : excludedSets) {
-             if (first.getIndex() == ce.getIndex() + 1 || last.getIndex() + 1 == ce.getIndex())
-             {
-                 options.add(ce);
-                 // System.out.println("Added adjacent set: " + ce.getName());
+         List<CardEdition> excludedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getLockedSets(), Singletons.getModel().getEditions().FN_EDITION_BY_CODE));
+         Collections.sort(excludedSets);
+         
+         // get a number of sets between an excluded and any included set
+         List<ImmutablePair<CardEdition, Integer>> excludedWithDistances = new ArrayList<ImmutablePair<CardEdition,Integer>>();
+         for(CardEdition ex : excludedSets) {
+             int distance = Integer.MAX_VALUE;
+             for(CardEdition in : allowedSets) {
+                 int d = Math.abs(ex.getIndex() - in.getIndex());
+                 if ( d < distance )
+                     distance = d;
              }
+             excludedWithDistances.add(ImmutablePair.of(ex, distance));
          }
 
-         // Fill in the in-between sets
-         int j = 0;
-         // Find the first excluded set between current sets first and current sets last
-         while (j < excludedSets.size() && excludedSets.get(j).getIndex() < currentSets.get(0).getIndex()) {
-             j++;
-         }
-         // Consider all sets until current sets last
-         while (j < excludedSets.size() && excludedSets.get(j).getIndex() < currentSets.get(currentSets.size() - 1).getIndex()) {
-             if (!options.contains(excludedSets.get(j)) && !fillers.contains(excludedSets.get(j))) {
-                 // System.out.println("Added in-between set " + excludedSets.get(j).getCode());
-                 fillers.add(excludedSets.get(j));
-             }
-             j++;
-         }
-         // Add more nearby sets
-         for (CardEdition ce : excludedSets) {
-             if (first.getIndex() == ce.getIndex() + 2 || last.getIndex() + 2 == ce.getIndex())
-             {
-                 if (!fillers.contains(ce) && !options.contains(ce)) {
-                 fillers.add(ce);
-                 // System.out.println("Added adjacent filler set: " + ce.getName());
-                 }
-             }
-         }
+         // sort by distance, then by code desc
+         Collections.sort(excludedWithDistances, new Comparator<ImmutablePair<CardEdition, Integer>>() {
+            @Override
+            public int compare(ImmutablePair<CardEdition, Integer> o1, ImmutablePair<CardEdition, Integer> o2) {
+                int d1 = o2.right - o1.right;
+                return d1 != 0 ? d1 : o1.left.getIndex() - o2.left.getIndex();
+            }
+         });
 
-         // Look for nearby core sets or block starting sets...
-         for (BoosterData bd : Singletons.getModel().getTournamentPacks()) {
-             if (qData.getFormat().getExcludedSetCodes().contains(bd.getEdition())
-                     && !(fillers.contains(Singletons.getModel().getEditions().get(bd.getEdition())))
-                     && !(options.contains(Singletons.getModel().getEditions().get(bd.getEdition())))) {
-                 // Set is not yet on any of the lists, see if it is 'close' to any of the sets we currently have
-                 CardEdition curEd = Singletons.getModel().getEditions().get(bd.getEdition());
-                 int edIdx = curEd.getIndex();
-                 for (String cmpCode : qData.getFormat().getAllowedSetCodes()) {
-                     int cmpIdx = Singletons.getModel().getEditions().get(cmpCode).getIndex();
-                     // Note that we need to check for fillers.contains() again inside this 'for' loop!
-                     if (!fillers.contains(curEd) && (cmpIdx == edIdx + 1 || edIdx == cmpIdx + 1)) {
-                         fillers.add(curEd);
-                         // System.out.println("Added nearby starter/core set " + curEd.getName());
-                     }
-                     else if (!fillers.contains(curEd) && (cmpIdx == edIdx + 2 || edIdx == cmpIdx + 2)) {
-                         fillers.add(curEd);
-                         //System.out.println("Added nearby2 starter/core set " + curEd.getName());
-                     }
-                 }
-             }
-         }
 
-         // Add padding if necessary
-         if (fillers.size() + options.size() < nrChoices && excludedSets.size() > fillers.size() + options.size()) {
-                 // Pad in order.
-                 for (CardEdition ce : excludedSets) {
-                     if (!fillers.contains(ce) && !options.contains(ce)) {
-                         fillers.add(ce);
-                         if (fillers.size() + options.size() >= nrChoices) {
-                             break;
-                         }
-                     }
-                 }
-         }
-
-         for (int i = 0; (options.size() < nrChoices) && i < fillers.size(); i++) {
-             options.add(fillers.get(i));
+         for (ImmutablePair<CardEdition, Integer> set : excludedWithDistances) {
+             options.add(set.left);
              // System.out.println("Padded with: " + fillers.get(i).getName());
          }
+         Collections.reverse(options);
 
          return Collections.unmodifiableList(options);
     }
@@ -243,30 +173,26 @@ public class QuestUtilUnlockSets {
      */
     public static void doUnlock(QuestController qData, final CardEdition unlockedSet) {
 
+        IStorageView<BoosterData> starters = Singletons.getModel().getTournamentPacks();
+        IStorageView<BoosterData> boosters = Singletons.getModel().getBoosters();
         qData.getFormat().unlockSet(unlockedSet.getCode());
 
-        List<CardPrinted> displayCards = new ArrayList<CardPrinted>();
+        List<CardPrinted> cardsWon = new ArrayList<CardPrinted>();
 
-        if (Singletons.getModel().getTournamentPacks().contains(unlockedSet.getCode())) {
-            final List<CardPrinted> cardsWon = (new UnOpenedProduct(Singletons.getModel().getTournamentPacks().get(unlockedSet.getCode()))).open();
-
-            qData.getCards().addAllCards(cardsWon);
-            displayCards.addAll(cardsWon);
+        if (starters.contains(unlockedSet.getCode())) {
+            UnOpenedProduct starter = new UnOpenedProduct(starters.get(unlockedSet.getCode()));
+            cardsWon.addAll(starter.open());
         }
-        else if (Singletons.getModel().getBoosters().contains(unlockedSet.getCode())) {
-            for (int i = 0; i < 3; i++) {
-                final List<CardPrinted> cardsWon = (new UnOpenedProduct(Singletons.getModel().getBoosters().get(unlockedSet.getCode()))).open();
-
-                qData.getCards().addAllCards(cardsWon);
-                displayCards.addAll(cardsWon);
-            }
+        else if (boosters.contains(unlockedSet.getCode())) {
+            UnOpenedProduct booster = new UnOpenedProduct(boosters.get(unlockedSet.getCode()));
+            cardsWon.addAll(booster.open());
+            cardsWon.addAll(booster.open());
+            cardsWon.addAll(booster.open());
         }
 
-        final CardListViewer cardView = new CardListViewer(unlockedSet.getName(),
-                "You get the following bonus cards:", displayCards);
+        qData.getCards().addAllCards(cardsWon);
+        final CardListViewer cardView = new CardListViewer(unlockedSet.getName(), "You get the following bonus cards:", cardsWon);
         cardView.show();
-
         qData.save();
-
     }
 }

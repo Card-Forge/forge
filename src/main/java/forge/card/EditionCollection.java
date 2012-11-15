@@ -20,6 +20,8 @@ package forge.card;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.google.common.base.Function;
+
 import forge.util.StorageView;
 
 public final class EditionCollection extends StorageView<CardEdition> {
@@ -78,5 +80,12 @@ public final class EditionCollection extends StorageView<CardEdition> {
         final CardEdition set = this.get(code);
         return set == null ? "" : set.getCode2();
     }
+    
+    public final Function<String, CardEdition> FN_EDITION_BY_CODE = new Function<String, CardEdition>() {
+        @Override
+        public CardEdition apply(String code) {
+            return EditionCollection.this.get(code);
+        };
+    };
 }
 
