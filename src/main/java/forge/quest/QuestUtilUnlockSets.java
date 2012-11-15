@@ -66,12 +66,12 @@ public class QuestUtilUnlockSets {
         List<Long> unlockPrices = new ArrayList<Long>();
         for (int i = 0; i < choices.size(); i++) {
             if (mapPrices.containsKey(choices.get(i).getName() + " Booster Pack")) {
-                long newPrice = (long) 50 * mapPrices.get(choices.get(i).getName() + " Booster Pack");
-                if (newPrice < 10000) { newPrice = 10000; }
+                long newPrice = new Double(60 * Math.pow(Math.sqrt(mapPrices.get(choices.get(i).getName() + " Booster Pack")), 1.65)).longValue();
+                if (newPrice < 7500) { newPrice = 7500; }
                 unlockPrices.add(newPrice);
             }
             else {
-                unlockPrices.add((long) 10000);
+                unlockPrices.add((long) 7500);
             }
         }
 
