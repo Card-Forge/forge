@@ -397,7 +397,13 @@ public class AttachAi extends SpellAiLogic {
 
                 // grantingAbilities |= sa.containsKey("AddAbility");
 
-                final String kws = stabMap.get("AddKeyword");
+                String kws = stabMap.get("AddKeyword");
+                if (kws != null) {
+                    for (final String kw : kws.split(" & ")) {
+                        keywords.add(kw);
+                    }
+                }
+                kws = stabMap.get("AddHiddenKeyword");
                 if (kws != null) {
                     for (final String kw : kws.split(" & ")) {
                         keywords.add(kw);
@@ -421,8 +427,9 @@ public class AttachAi extends SpellAiLogic {
                 }
             });
         }
+        
         Card c = null;
-        if ((prefList == null) || (prefList.size() == 0)) {
+        if ((prefList == null) || prefList.isEmpty()) {
             prefList = new ArrayList<Card>(list);
         } else {
             c = CardFactoryUtil.getBestAI(prefList);
@@ -432,17 +439,12 @@ public class AttachAi extends SpellAiLogic {
         }
 
         if (!keywords.isEmpty()) {
-            // Don't give Can't Attack or Defender to cards that can't do these
-            // things to begin with
-            if (keywords.contains("CARDNAME can't attack.") || keywords.contains("Defender")
-                    || keywords.contains("CARDNAME attacks each turn if able.")) {
-                prefList = CardLists.filter(prefList, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        return !(c.hasKeyword("CARDNAME can't attack.") || c.hasKeyword("Defender"));
-                    }
-                });
-            }
+            prefList = CardLists.filter(prefList, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    return containsUsefulCurseKeyword(keywords, c, sa);
+                }
+            });
         }
 
         c = CardFactoryUtil.getBestAI(prefList);
@@ -806,6 +808,25 @@ public class AttachAi extends SpellAiLogic {
     }
 
     /**
+     * Contains useful curse keyword.
+     * 
+     * @param keywords
+     *            the keywords
+     * @param card
+     *            the card
+     * @param sa SpellAbility
+     * @return true, if successful
+     */
+    private static boolean containsUsefulCurseKeyword(final ArrayList<String> keywords, final Card card, final SpellAbility sa) {
+        for (final String keyword : keywords) {
+            if (isUsefulCurseKeyword(keyword, card, sa)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Checks if is useful keyword.
      * 
      * @param keyword
@@ -895,6 +916,34 @@ public class AttachAi extends SpellAiLogic {
             }
         } else if (keyword.equals("Shroud") || keyword.equals("Hexproof")) {
             if (card.hasKeyword("Shroud") || card.hasKeyword("Hexproof")) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    /**
+     * Checks if is useful curse keyword.
+     * 
+     * @param keyword
+     *            the keyword
+     * @param card
+     *            the card
+     * @param sa SpellAbility
+     * @return true, if is useful keyword
+     */
+    private static boolean isUsefulCurseKeyword(final String keyword, final Card card, final SpellAbility sa) {
+        //final Player human = sa.getActivatingPlayer().getOpponent();
+        if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
+            return false;
+        }
+
+        if (keyword.endsWith("CARDNAME can't attack.") || keyword.equals("Defender")) {
+            if (!CombatUtil.canAttackNextTurn(card)) {
+                return false;
+            }
+        } else if (keyword.endsWith("CARDNAME attacks each turn if able.")) {
+            if (!CombatUtil.canAttackNextTurn(card) || !CombatUtil.canBlock(card, true)) {
                 return false;
             }
         }
