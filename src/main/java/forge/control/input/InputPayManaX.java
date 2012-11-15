@@ -91,7 +91,8 @@ public class InputPayManaX extends InputPayMana {
 
     @Override
     public void selectManaPool(String color) {
-        this.manaCost = InputPayManaCostUtil.activateManaAbility(color, sa, this.manaCost);
+        this.manaCost = InputPayManaCostUtil.activateManaAbility(color, sa, 
+                this.colorX.isEmpty() ? this.manaCost : new ManaCost(this.colorX));
         if (this.manaCost.isPaid()) {
             if (!this.colorsPaid.contains(this.manaCost.getColorsPaid())) {
                 this.colorsPaid += this.manaCost.getColorsPaid();
