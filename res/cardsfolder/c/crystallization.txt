@@ -6,7 +6,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ GU W | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ HIDDEN CARDNAME can't attack or block. | Description$ Enchanted creature can't attack or block.
 T:Mode$ BecomesTarget | ValidTarget$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigExile | TriggerDescription$ When enchanted creature becomes the target of a spell or ability, exile that creature.
-SVar:TrigExile:AB$ChangeZone | Cost$ 0 | Defined$ TriggeredTarget | Origin$ Battlefield | Destination$ Exile
+SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ TriggeredTarget | Origin$ Battlefield | Destination$ Exile
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crystallization.jpg
 SetInfo:ARB|Common|http://magiccards.info/scans/en/arb/144.jpg

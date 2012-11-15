@@ -374,9 +374,8 @@ public class AttachAi extends SpellAiLogic {
         }
 
         int totToughness = 0;
-        // int totPower = 0;
+        int totPower = 0;
         final ArrayList<String> keywords = new ArrayList<String>();
-        // boolean grantingAbilities = false;
 
         for (final StaticAbility stAbility : attachSource.getStaticAbilities()) {
             final Map<String, String> stabMap = stAbility.getMapParams();
@@ -392,10 +391,7 @@ public class AttachAi extends SpellAiLogic {
             }
             if ((affected.contains(stCheck) || affected.contains("AttachedBy"))) {
                 totToughness += CardFactoryUtil.parseSVar(attachSource, stabMap.get("AddToughness"));
-                // totPower += CardFactoryUtil.parseSVar(attachSource,
-                // sa.get("AddPower"));
-
-                // grantingAbilities |= sa.containsKey("AddAbility");
+                totPower += CardFactoryUtil.parseSVar(attachSource, stabMap.get("AddPower"));
 
                 String kws = stabMap.get("AddKeyword");
                 if (kws != null) {
@@ -443,6 +439,13 @@ public class AttachAi extends SpellAiLogic {
                 @Override
                 public boolean apply(final Card c) {
                     return containsUsefulCurseKeyword(keywords, c, sa);
+                }
+            });
+        } else if (totPower < 0){
+            prefList = CardLists.filter(prefList, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    return CombatUtil.canAttackNextTurn(c) && c.getNetAttack() > 0;
                 }
             });
         }
@@ -954,6 +957,10 @@ public class AttachAi extends SpellAiLogic {
                 }
             }
             return false;
+        } else if (keyword.endsWith("Prevent all combat damage that would be dealt by CARDNAME.")) {
+            if (!CombatUtil.canAttackNextTurn(card) || card.getNetCombatDamage() < 1) {
+                return false;
+            }
         }
         return true;
     }

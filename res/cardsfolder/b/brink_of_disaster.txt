@@ -5,7 +5,7 @@ Text:no text
 K:Enchant creature or land
 A:SP$ Attach | Cost$ 2 B B | ValidTgts$ Creature,Land | AILogic$ Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | Execute$ TrigDestroy | TriggerDescription$ When enchanted permanent becomes tapped, destroy it.
-SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredCard
+SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | Defined$ TriggeredCard
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brink_of_disaster.jpg
 SetInfo:M12|Common|http://magiccards.info/scans/en/m12/84.jpg

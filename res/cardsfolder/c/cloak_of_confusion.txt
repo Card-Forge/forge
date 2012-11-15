@@ -7,7 +7,7 @@ A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select targe
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ TrigPump | AddSVar$ Pump & DBDiscard | Description$ Whenever enchanted creature attacks and isn't blocked, you may have it assign no combat damage this turn. If you do, defending player discards a card at random.
 SVar:TrigPump:Mode$ AttackerUnblocked | ValidCard$ Card.Self | Execute$ Pump | OptionalDecider$ You | TriggerDescription$ Whenever enchanted creature attacks and isn't blocked, you may have it assign no combat damage this turn. If you do, defending player discards a card at random.
 SVar:Pump:AB$Pump | Cost$ 0 | Defined$ Self | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME. | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$Discard | Defined$ DefendingPlayer | Mode$ Random | NumCards$ 1
+SVar:DBDiscard:DB$ Discard | Defined$ DefendingPlayer | Mode$ Random | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloak_of_confusion.jpg
