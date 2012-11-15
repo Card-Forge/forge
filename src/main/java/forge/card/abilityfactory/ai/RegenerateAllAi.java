@@ -18,7 +18,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class RegenerateAllAi extends SpellAiLogic {
-    
+
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
@@ -56,7 +56,7 @@ public class RegenerateAllAi extends SpellAiLogic {
 
         int numSaved = 0;
         if (Singletons.getModel().getGame().getStack().size() > 0) {
-            final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(),sa);
+            final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
 
             for (final Card c : list) {
                 if (objects.contains(c) && c.getShield() == 0) {
