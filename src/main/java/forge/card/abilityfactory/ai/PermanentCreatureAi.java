@@ -29,13 +29,13 @@ public class PermanentCreatureAi extends SpellAiLogic {
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         String logic = sa.getParam("AILogic");
         GameState game = Singletons.getModel().getGame();
-        
+
         if ("ZeroToughness".equals(logic)) {
-            // If Creature has Zero Toughness, make sure some static ability is in play 
+            // If Creature has Zero Toughness, make sure some static ability is in play
             // That will grant a toughness bonus
-            
+
             final List<Card> list = aiPlayer.getCardsIn(ZoneType.Battlefield);
-            if (!Iterables.any(list, Predicates.or(CardPredicates.nameEquals("Glorious Anthem"), 
+            if (!Iterables.any(list, Predicates.or(CardPredicates.nameEquals("Glorious Anthem"),
                     CardPredicates.nameEquals("Gaea's Anthem")))) {
                 return false;
             }
@@ -43,7 +43,7 @@ public class PermanentCreatureAi extends SpellAiLogic {
             // TODO See if card ETB will survive after Static Effects
             /*
             List<Card> cards = game.getCardsIn(ZoneType.Battlefield);
-            
+
             for(Card c : cards) {
                 ArrayList<StaticAbility> statics = c.getStaticAbilities();
                 for(StaticAbility s : statics) {
@@ -52,7 +52,7 @@ public class PermanentCreatureAi extends SpellAiLogic {
                     if (!stabMap.get("Mode").equals("Continuous")) {
                         continue;
                     }
-                    
+
                     final String affected = stabMap.get("Affected");
 
                     if (affected == null) {
@@ -68,7 +68,7 @@ public class PermanentCreatureAi extends SpellAiLogic {
                 && !ComputerUtil.castPermanentInMain1(aiPlayer, sa)) {
             return false;
         }
-        
+
         // AI shouldn't be retricted all that much for Creatures for now
         return true;
     }
