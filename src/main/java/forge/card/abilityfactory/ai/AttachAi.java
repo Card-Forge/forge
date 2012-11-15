@@ -251,7 +251,7 @@ public class AttachAi extends SpellAiLogic {
             final boolean mandatory) {
         Player p;
 
-        if (sa.isCurse()) {
+        if ("Curse".equals(sa.getParam("AILogic"))) {
             p = aiPlayer.getOpponent();
         } else {
             p = aiPlayer;
