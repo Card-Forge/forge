@@ -82,7 +82,7 @@ public class RegenerateAi extends SpellAiLogic {
             final ArrayList<Card> list = AbilityFactory.getDefinedCards(hostCard, sa.getParam("Defined"), sa);
 
             if (Singletons.getModel().getGame().getStack().size() > 0) {
-                final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(),sa);
+                final ArrayList<Object> objects = AbilityFactory.predictThreatenedObjects(sa.getActivatingPlayer(), sa);
 
                 for (final Card c : list) {
                     if (objects.contains(c)) {
