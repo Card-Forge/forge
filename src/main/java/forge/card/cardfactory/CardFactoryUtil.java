@@ -260,9 +260,8 @@ public class CardFactoryUtil {
         }
 
         final List<Card> bLand = CardLists.getType(land, sminBL);
-        
-        for( Card ut : Iterables.filter(bLand, CardPredicates.Presets.UNTAPPED) )
-        {
+
+        for (Card ut : Iterables.filter(bLand, CardPredicates.Presets.UNTAPPED)) {
             return ut;
         }
 
@@ -295,7 +294,7 @@ public class CardFactoryUtil {
                 }
             });
         }
-        
+
         // get biggest Enchantment
         return Aggregates.itemWithMax(all, CardPredicates.Accessors.fnGetCmc);
     }
@@ -819,7 +818,7 @@ public class CardFactoryUtil {
 
             @Override
             public boolean canPlayAI() {
-                PhaseHandler phase = Singletons.getModel().getGame().getPhaseHandler(); 
+                PhaseHandler phase = Singletons.getModel().getGame().getPhaseHandler();
                 if (phase.getPhase().isAfter(PhaseType.MAIN1) || !phase.isPlayerTurn(getActivatingPlayer())) {
                     return false;
                 }
@@ -1709,7 +1708,7 @@ public class CardFactoryUtil {
 
         return m;
     }
-    
+
     /**
      * <p>
      * Parse player targeted X variables.
@@ -1732,11 +1731,11 @@ public class CardFactoryUtil {
         final String[] m = CardFactoryUtil.parseMath(l);
 
         int n = 0;
-        
+
         if (s.startsWith("Amount")) {
             n = objects.size();
         }
-        
+
         return CardFactoryUtil.doXMath(n, m, source);
     }
 
@@ -2591,7 +2590,7 @@ public class CardFactoryUtil {
                 oh = true;
             }
         }
-        
+
         if (sq[0].contains("InChosenYard")) {
             if (!oh) {
                 if (c.getChosenPlayer() != null) {
@@ -3066,7 +3065,7 @@ public class CardFactoryUtil {
 
         return true;
     }
-    
+
     /**
      * <p>
      * getMostProminentColor.
@@ -3107,17 +3106,17 @@ public class CardFactoryUtil {
 
         return maxColor;
     }
-    
+
     public static List<String> getColorByProminence(final List<Card> list) {
-        final HashMap<String, Integer> counts = new HashMap<String,Integer>();
-        for(String color : Constant.Color.ONLY_COLORS) {
+        final HashMap<String, Integer> counts = new HashMap<String, Integer>();
+        for (String color : Constant.Color.ONLY_COLORS) {
             counts.put(color, 0);
         }
-        for(Card c : list) {
+        for (Card c : list) {
             List<String> colors = c.determineColor().toStringList();
-            for(String col : colors) {
+            for (String col : colors) {
                 if (counts.containsKey(col)) {
-                    counts.put(col.toString(), counts.get(col.toString())+1);
+                    counts.put(col.toString(), counts.get(col.toString()) + 1);
                 }
             }
         }
@@ -3128,7 +3127,7 @@ public class CardFactoryUtil {
                 return counts.get(b) - counts.get(a);
             }
         });
-        
+
         return res;
     }
 
@@ -3373,7 +3372,7 @@ public class CardFactoryUtil {
         for (Card tmp : lands) {
             int score = tmp.isTapped() ? 2 : 0;
             score += tmp.isBasicLand() ? 1 : 0;
-            if( score >= maxScore ) {
+            if (score >= maxScore) {
                 worstLand = tmp;
                 maxScore = score;
             }
@@ -3718,14 +3717,14 @@ public class CardFactoryUtil {
             final String parse = card.getKeyword().get(n).toString();
             final String[] k = parse.split(" ");
             final int manacost = Integer.parseInt(k[1]);
-            
-            final String actualTrigger = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard" +
-            		"| OptionalDecider$ You | ValidCard$ Card.Self | Execute$ SoulshiftAbility" +
-            		"| TriggerController$ TriggeredCardController | TriggerDescription$ " + parse + 
-            		" (When this creature dies, you may return target Spirit card with converted mana cost "
-            		+ manacost + " or less from your graveyard to your hand.)";
-            final String abString = "DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand" +
-            		"| ValidTgts$ Spirit.YouOwn+cmcLE" + manacost;
+
+            final String actualTrigger = "Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard"
+                    + "| OptionalDecider$ You | ValidCard$ Card.Self | Execute$ SoulshiftAbility"
+                    + "| TriggerController$ TriggeredCardController | TriggerDescription$ " + parse
+                    + " (When this creature dies, you may return target Spirit card with converted mana cost "
+                    + manacost + " or less from your graveyard to your hand.)";
+            final String abString = "DB$ ChangeZone | Origin$ Graveyard | Destination$ Hand"
+                    + "| ValidTgts$ Spirit.YouOwn+cmcLE" + manacost;
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, card, true);
             card.addTrigger(parsedTrigger);
             card.setSVar("SoulshiftAbility", abString);
@@ -4279,10 +4278,10 @@ public class CardFactoryUtil {
                 re.setLayer(ReplacementLayer.Other);
 
                 card.addReplacementEffect(re);
-            } else if(kw.equals("CARDNAME enters the battlefield tapped.")) {
+            } else if (kw.equals("CARDNAME enters the battlefield tapped.")) {
                 String parse = kw;
                 card.removeIntrinsicKeyword(parse);
-                
+
                 String abStr = "AB$ Tap | Cost$ 0 | Defined$ Self | ETB$ True | SubAbility$ MoveETB";
                 String dbStr = "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield" +
                         "| Defined$ ReplacedCard";
@@ -4485,7 +4484,7 @@ public class CardFactoryUtil {
 
                 final String parse = card.getKeyword().get(n).toString();
                 card.setCanMorph(true);
-                Map<String,String> sVars = card.getSVars();
+                Map<String, String> sVars = card.getSVars();
 
                 final String[] k = parse.split(":");
                 final Cost cost = new Cost(card, k[1], true);
@@ -4623,7 +4622,7 @@ public class CardFactoryUtil {
                     public void execute() {
                         // Target as Modular is Destroyed
                         if (card.getController().isComputer()) {
-                            List<Card> choices = 
+                            List<Card> choices =
                                     CardLists.filter(card.getController().getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
                                 @Override
                                 public boolean apply(final Card c) {
@@ -4686,7 +4685,7 @@ public class CardFactoryUtil {
                 card.setSVar("X", "Count$BloodthirstAmount");
             }
             card.setSVar("X", "Count$BloodthirstAmount");
-            
+
             card.addIntrinsicKeyword("etbCounter:P1P1:" + numCounters + ":Bloodthirst$ True:" + desc);
         } // bloodthirst
 
