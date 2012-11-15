@@ -83,7 +83,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final JLabel lblStartingPool = new FLabel.Builder().text("Starting pool:").build();
     private final JComboBox cbxStartingPool = new JComboBox();
 
-    private final JLabel lblUnrestricted = new FLabel.Builder().text("All cards will be avaliable to play.").build();
+    private final JLabel lblUnrestricted = new FLabel.Builder().text("All cards will be available to play.").build();
     
     private final JLabel lblPreconDeck = new FLabel.Builder().text("Starter/Event deck:").build();
     private final JComboBox cbxPreconDeck = new JComboBox();
@@ -103,8 +103,8 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final JLabel lblPrizeFormat = new FLabel.Builder().text("Sanctioned format:").build();
     private final JComboBox cbxPrizeFormat = new JComboBox();
    
-    private final JLabel lblPrizeUnrestricted = new FLabel.Builder().text("All cards will be avaliable to win.").build();
-    private final JLabel lblPrizeSameAsStarting = new FLabel.Builder().text("Only sets found in starting pool will be avaliable.").build();
+    private final JLabel lblPrizeUnrestricted = new FLabel.Builder().text("All cards will be available to win.").build();
+    private final JLabel lblPrizeSameAsStarting = new FLabel.Builder().text("Only sets found in starting pool will be available.").build();
     
     private final JCheckBox cboAllowUnlocks = new FCheckBox("Allow unlock of not included editions");
     
