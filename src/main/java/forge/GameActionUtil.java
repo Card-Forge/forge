@@ -791,6 +791,9 @@ public final class GameActionUtil {
         }
 
         c.getDamageHistory().registerDamage(player);
+
+        // Play the Life Loss sound
+        Sounds.LifeLoss.play();
     }
 
     // restricted to combat damage, restricted to players
