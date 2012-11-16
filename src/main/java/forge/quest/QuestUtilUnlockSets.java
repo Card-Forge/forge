@@ -119,8 +119,7 @@ public class QuestUtilUnlockSets {
             return emptyEditions;
         }
 
-        final int nrChoices = qData.getUnlocksTokens();
-        if (nrChoices < 1) { // Should never happen if we made it this far but better safe than sorry...
+        if (qData.getUnlocksTokens() < 1) { // Should never happen if we made it this far but better safe than sorry...
             throw new RuntimeException("BUG? Could not find unlockable sets even though we should.");
         }
         List<CardEdition> options = new ArrayList<CardEdition>();
@@ -162,7 +161,13 @@ public class QuestUtilUnlockSets {
          }
          Collections.reverse(options);
 
-         return Collections.unmodifiableList(options);
+         final int nrChoices = Math.min(8, 2 + ((qData.getAchievements().getWin()) / 50));
+         List<CardEdition> choices = new ArrayList<CardEdition>();
+
+         for (int i = 0; i < nrChoices; i++) {
+             choices.add(options.get(i));
+         }
+         return Collections.unmodifiableList(choices);
     }
 
     /**
