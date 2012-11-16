@@ -9,7 +9,7 @@ SVar:ChooseP:AB$ ChoosePlayer | Cost$ 0 | Defined$ You | Choices$ Opponent | AIL
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of cards in the chosen player's hand.
 SVar:X:Count$InChosenHand
 T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player  | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals damage to a player, that player discards a card.
-SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
+SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Mode$ TgtChoose
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/entropic_specter.jpg
 SetInfo:EXO|Rare|http://magiccards.info/scans/en/ex/61.jpg

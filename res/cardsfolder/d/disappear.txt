@@ -5,7 +5,7 @@ Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 U U | ValidTgts$ Creature | AILogic$ Curse
 A:AB$ ChangeZone | Cost$ U | Defined$ Enchanted | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBBounce | SpellDescription$ Return enchanted creature and CARDNAME to their owners' hands.
-SVar:DBBounce:DB$ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
+SVar:DBBounce:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Hand
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/disappear.jpg
 SetInfo:UDS|Uncommon|http://magiccards.info/scans/en/ud/30.jpg

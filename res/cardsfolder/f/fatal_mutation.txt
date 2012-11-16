@@ -5,7 +5,7 @@ Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ B | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ TurnFaceUp | ValidCard$ Card.AttachedBy | Execute$ TrigDestroy | TriggerDescription$ When enchanted creature is turned face up, destroy it. It can't be regenerated.
-SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredCard | NoRegen$ True
+SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | Defined$ TriggeredCard | NoRegen$ True
 SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
