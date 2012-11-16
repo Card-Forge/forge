@@ -61,12 +61,13 @@ public class QuestUtilUnlockSets {
 
         final ReadPriceList prices = new ReadPriceList();
         final Map<String, Integer> mapPrices = prices.getPriceList();
-        final List<ImmutablePair<CardEdition, Integer>> setPrices = new ArrayList<ImmutablePair<CardEdition,Integer>>();
+        final List<ImmutablePair<CardEdition, Integer>> setPrices = new ArrayList<ImmutablePair<CardEdition, Integer>>();
 
         for (CardEdition ed : getUnlockableEditions(qData)) {
             int price = 7500;
             if (mapPrices.containsKey(ed.getName() + " Booster Pack")) {
-                price = Math.max( 50 * mapPrices.get(ed.getName() + " Booster Pack"), 7500 );
+                price = Math.max(new Double(60 * Math.pow(Math.sqrt(mapPrices.get(ed.getName()
+                        + " Booster Pack")), 1.65)).intValue(), 7500);
             }
             setPrices.add(ImmutablePair.of(ed, price));
         }
@@ -82,12 +83,10 @@ public class QuestUtilUnlockSets {
             return null;
         }
 
-        
         ImmutablePair<CardEdition, Integer> toBuy = setPrices.get(index);
 
         int price = toBuy.right;
         CardEdition choosenEdition = toBuy.left;
-                
 
         if (qData.getAssets().getCredits() < price) {
             JOptionPane.showMessageDialog(null, "Unfortunately, you cannot afford that set yet.\n"
@@ -129,19 +128,20 @@ public class QuestUtilUnlockSets {
          // Sort current sets by index
          List<CardEdition> allowedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getAllowedSetCodes(), Singletons.getModel().getEditions().FN_EDITION_BY_CODE));
          Collections.sort(allowedSets);
-         
+
          // Sort unlockable sets by index
          List<CardEdition> excludedSets = Lists.newArrayList(Iterables.transform(qData.getFormat().getLockedSets(), Singletons.getModel().getEditions().FN_EDITION_BY_CODE));
          Collections.sort(excludedSets);
-         
+
          // get a number of sets between an excluded and any included set
-         List<ImmutablePair<CardEdition, Integer>> excludedWithDistances = new ArrayList<ImmutablePair<CardEdition,Integer>>();
-         for(CardEdition ex : excludedSets) {
+         List<ImmutablePair<CardEdition, Integer>> excludedWithDistances = new ArrayList<ImmutablePair<CardEdition, Integer>>();
+         for (CardEdition ex : excludedSets) {
              int distance = Integer.MAX_VALUE;
-             for(CardEdition in : allowedSets) {
+             for (CardEdition in : allowedSets) {
                  int d = Math.abs(ex.getIndex() - in.getIndex());
-                 if ( d < distance )
+                 if (d < distance) {
                      distance = d;
+                 }
              }
              excludedWithDistances.add(ImmutablePair.of(ex, distance));
          }
