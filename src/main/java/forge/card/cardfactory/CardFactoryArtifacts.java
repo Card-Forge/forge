@@ -170,7 +170,7 @@ class CardFactoryArtifacts {
                 }
 
                 private static final long serialVersionUID = -840041589720758423L;
-                
+
                 @Override
                 public boolean canPlayAI() {
                     this.getTarget().resetTargets();
@@ -371,16 +371,16 @@ class CardFactoryArtifacts {
                 public void resolve() {
                     // not implemented for compy
                     if (card.getController().isHuman()) {
-                        
+
                         Predicate<Card> validForPick = new Predicate<Card>() {
                             @Override
                             public boolean apply(Card c) {
                                 Zone zone = Singletons.getModel().getGame().getZoneOf(c);
-                                return zone.is(ZoneType.Hand) && c.getController() == card.getController(); 
+                                return zone.is(ZoneType.Hand) && c.getController() == card.getController();
                             }
                         };
-                        
-                        Function<List<Card>, Input> onSelected = new Function<List<Card>, Input>() { 
+
+                        Function<List<Card>, Input> onSelected = new Function<List<Card>, Input>() {
                             @Override
                             public Input apply(List<Card> exiled) {
                                 for (final Card c : exiled) {
@@ -411,10 +411,10 @@ class CardFactoryArtifacts {
                                 return null;
                             };
                         };
-                        
+
                         InputSelectManyCards inp = new InputSelectManyCards(validForPick, 0, Integer.MAX_VALUE, onSelected);
                         inp.setMessage(card.getName() + " - Exile cards from hand.  Currently, %d selected.  (Press OK when done.)");
-                        
+
                         Singletons.getModel().getMatch().getInput().setInput(inp);
 
                     }

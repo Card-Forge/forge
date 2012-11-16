@@ -1063,7 +1063,7 @@ public class CardFactoryCreatures {
              */
             @Override
             public void resolve() {
-                Card movedCard = (Card)this.getReplacingObject("Card");
+                Card movedCard = (Card) this.getReplacingObject("Card");
                 if (movedCard.isCloned()) { // cloning again
                     movedCard.switchStates(CardCharacteristicName.Cloner, CardCharacteristicName.Original);
                     movedCard.setState(CardCharacteristicName.Original);

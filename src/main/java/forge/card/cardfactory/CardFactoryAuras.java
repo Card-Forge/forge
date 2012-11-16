@@ -252,17 +252,18 @@ class CardFactoryAuras {
 
                 @Override
                 protected boolean isValidChoice(Card c) {
-                    if (!c.isLand() || !c.isInZone(ZoneType.Battlefield))
+                    if (!c.isLand() || !c.isInZone(ZoneType.Battlefield)) {
                         return false;
-                        
+                    }
+
                     if (!c.canBeTargetedBy(spell)) {
                         CMatchUI.SINGLETON_INSTANCE.showMessage("Cannot target this card (Shroud? Protection?).");
                         return false;
                     }
-                    
+
                     return true;
                 };
-                
+
                 @Override
                 protected Input onDone() {
                     spell.setTargetCard(selected.get(0));

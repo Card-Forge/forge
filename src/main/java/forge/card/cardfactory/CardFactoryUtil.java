@@ -4259,8 +4259,8 @@ public class CardFactoryUtil {
                 if (splitkw.length > 4) {
                     desc = splitkw[4];
                 }
-                String abStr = "AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$ Battlefield" +
-                		"| Defined$ ReplacedCard | SubAbility$ ETBCounterDBSVar";
+                String abStr = "AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$ Battlefield"
+                        + "| Defined$ ReplacedCard | SubAbility$ ETBCounterDBSVar";
                 String dbStr = "DB$ PutCounter | Defined$ Self | CounterType$ " + splitkw[1] + " | CounterNum$ " + amount;
                 try {
                     Integer.parseInt(amount);
@@ -4271,8 +4271,8 @@ public class CardFactoryUtil {
                 card.setSVar("ETBCounterSVar", abStr);
                 card.setSVar("ETBCounterDBSVar", dbStr);
 
-                String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield " +
-                		"| ReplaceWith$ ETBCounterSVar | Description$ " + desc + (!extraparams.equals("") ? " | " + extraparams : "");
+                String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield "
+                        + "| ReplaceWith$ ETBCounterSVar | Description$ " + desc + (!extraparams.equals("") ? " | " + extraparams : "");
 
                 ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card);
                 re.setLayer(ReplacementLayer.Other);
@@ -4283,14 +4283,14 @@ public class CardFactoryUtil {
                 card.removeIntrinsicKeyword(parse);
 
                 String abStr = "AB$ Tap | Cost$ 0 | Defined$ Self | ETB$ True | SubAbility$ MoveETB";
-                String dbStr = "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield" +
-                        "| Defined$ ReplacedCard";
+                String dbStr = "DB$ ChangeZone | Hidden$ True | Origin$ All | Destination$ Battlefield"
+                        + "| Defined$ ReplacedCard";
 
                 card.setSVar("ETBTappedSVar", abStr);
                 card.setSVar("MoveETB", dbStr);
 
-                String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield " +
-                        "| ReplaceWith$ ETBTappedSVar | Description$ CARDNAME enters the battlefield tapped.";
+                String repeffstr = "Event$ Moved | ValidCard$ Card.Self | Destination$ Battlefield "
+                        + "| ReplaceWith$ ETBTappedSVar | Description$ CARDNAME enters the battlefield tapped.";
 
                 ReplacementEffect re = ReplacementHandler.parseReplacement(repeffstr, card);
                 re.setLayer(ReplacementLayer.Other);
@@ -4680,8 +4680,8 @@ public class CardFactoryUtil {
                     + numCounters + " (If an opponent was dealt damage this turn, this creature enters the battlefield with "
                     + numCounters + " +1/+1 counters on it.)";
             if (numCounters.equals("X")) {
-                desc = "Bloodthirst X (This creature enters the battlefield with X +1/+1 counters on it, " +
-                		"where X is the damage dealt to your opponents this turn.)";
+                desc = "Bloodthirst X (This creature enters the battlefield with X +1/+1 counters on it, "
+                        + "where X is the damage dealt to your opponents this turn.)";
                 card.setSVar("X", "Count$BloodthirstAmount");
             }
             card.setSVar("X", "Count$BloodthirstAmount");
