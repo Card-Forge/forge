@@ -162,8 +162,12 @@ public class QuestUtilUnlockSets {
          Collections.reverse(options);
 
          final int nrChoices = Math.min(8, 2 + ((qData.getAchievements().getWin()) / 50));
-         List<CardEdition> choices = new ArrayList<CardEdition>();
 
+         if (options.size() <= nrChoices) {
+             return Collections.unmodifiableList(options);
+         }
+
+         List<CardEdition> choices = new ArrayList<CardEdition>();
          for (int i = 0; i < nrChoices; i++) {
              choices.add(options.get(i));
          }
