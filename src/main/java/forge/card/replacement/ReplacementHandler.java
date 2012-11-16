@@ -149,6 +149,7 @@ public class ReplacementHandler {
                 return res;
             } else {
                 if (possibleReplacers.size() == 0) {
+                    chosenRE.setHasRun(false);
                     return res;
                 }
                 else {

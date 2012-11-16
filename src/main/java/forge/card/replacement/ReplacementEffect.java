@@ -30,6 +30,7 @@ import forge.card.TriggerReplacementBase;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
+import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
@@ -202,6 +203,26 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             if (this.getMapParams().get("Bloodthirst").equals("True") && !this.getHostCard().getController().hasBloodthirst()) {
                 return false;
             }
+        }
+        
+        if (this.getMapParams().containsKey("PlayerTurn")) {
+            if (this.getMapParams().get("PlayerTurn").equals("True") && !Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(this.getHostCard().getController())) {
+                return false;
+            }
+        }
+
+        if (this.getMapParams().containsKey("ActivePhases")) {
+            boolean isPhase = false;
+            List<PhaseType> aPhases = PhaseType.parseRange(this.getMapParams().get("ActivePhases"));
+            final PhaseType currPhase = Singletons.getModel().getGame().getPhaseHandler().getPhase();
+            for (final PhaseType s : aPhases) {
+                if (s == currPhase) {
+                    isPhase = true;
+                    break;
+                }
+            }
+
+            return isPhase;
         }
 
         if (this.getMapParams().containsKey("PlayersPoisoned")) {
