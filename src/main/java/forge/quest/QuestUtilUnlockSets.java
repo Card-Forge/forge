@@ -161,13 +161,7 @@ public class QuestUtilUnlockSets {
          }
          Collections.reverse(options);
 
-         final int nrChoices = Math.min(8, 2 + ((qData.getAchievements().getWin()) / 50));
-
-         if (options.size() <= nrChoices) {
-             return Collections.unmodifiableList(options);
-         }
-
-         return options.subList(0, nrChoices);
+         return options.subList(0, Math.min(options.size(), Math.min(8, 2 + ((qData.getAchievements().getWin()) / 50))));
     }
 
     /**
