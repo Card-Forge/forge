@@ -74,7 +74,7 @@ public class AnimateAi extends SpellAiLogic {
 
             boolean bFlag = false;
             for (final Card c : defined) {
-                bFlag |= (!c.isCreature() && !c.isTapped() 
+                bFlag |= (!c.isCreature() && !c.isTapped()
                         && !(c.getTurnInZone() == Singletons.getModel().getGame().getPhaseHandler().getTurn())
                         && !c.isEquipping());
 
