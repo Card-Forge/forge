@@ -442,6 +442,24 @@ Fixes/Features:
 - Typo fixes to the QuestData submenu.
 - Sound System: added a previously missed link for the non-combat damage life loss sound.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CheckStyle.
+- Fixed a bug that made it possible to select any color of mana from the mana pool when the X mana cost was supposed to be restricted to specific color(s).
+- Checkstyle
+- Fixed AI using Unwilling Recruit.
+- Fixed Curses in attachToPlayerAIPreferences.
+- The AI will now use the ability of Hollow Specter.
+- The AI will no longer animate an equipped Ensouled Scimitar.
+- Quest set unlocks logics written from scratch
+- Improved AI for Auras with "AILogic$ Curse".
+- More Improvements of AI for Auras with "AILogic$ Curse".
+- More Improvements of AI for Auras with "AILogic$ Curse".
+- rem unused import
+- New formula for unlock prices, minor checkstyle.
+- Display up to 2 + (wins/50) (max 8) options when unlocking sets.
+- Bounds checking for unlocking.
+- Better way, use sublist.
+- Simplify nrChoices in unlocking.
+- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -528,6 +546,7 @@ Flaring Pain
 Unstable Footing
 Predatory Focus
 Consume Spirit
+Drain Life
 
 
 end
