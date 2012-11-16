@@ -167,11 +167,7 @@ public class QuestUtilUnlockSets {
              return Collections.unmodifiableList(options);
          }
 
-         List<CardEdition> choices = new ArrayList<CardEdition>();
-         for (int i = 0; i < nrChoices; i++) {
-             choices.add(options.get(i));
-         }
-         return Collections.unmodifiableList(choices);
+         return options.subList(0, nrChoices);
     }
 
     /**
