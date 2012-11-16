@@ -21,7 +21,7 @@ public class RepeatEachAi extends SpellAiLogic {
     @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         String logic = sa.getParam("AILogic");
-        
+
         if ("CloneMyTokens".equals(logic)) {
             if (CardLists.filter(aiPlayer.getCreaturesInPlay(), Presets.TOKEN).size() < 2) {
                 return false;
@@ -35,9 +35,9 @@ public class RepeatEachAi extends SpellAiLogic {
                 return false;
             }
         }
-        
+
         // TODO Add some normal AI variability here
-        
+
         return true;
     }
 
