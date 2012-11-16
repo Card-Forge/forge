@@ -742,45 +742,9 @@ public final class CardUtil {
         newCopy.setDoubleFaced(in.isDoubleFaced());
         newCopy.getCharacteristics().copy(in.getState(in.getCurState()));
         newCopy.setTriggers(in.getTriggers());
-
-        // Copy all states
-        // Commented out by Sloth 2012/07/25
-        /*for (final CardCharactersticName state : in.getStates()) {
-            newCopy.addAlternateState(state);
-            newCopy.setState(state);
-            CardFactoryUtil.copyState(in, state, newCopy);
-            //Copies of full abilities not need in LKI copy
-            /*
-            for (SpellAbility sa : in.getState(state).getManaAbility()) {
-                if (sa instanceof AbilityActivated) {
-                    SpellAbility newSA = ((AbilityActivated) sa).getCopy();
-                    if (newSA == null) {
-                        System.out.println("Uh-oh...");
-                    }
-                    newSA.setType("LKI");
-                    CardFactoryUtil.correctAbilityChainSourceCard(newSA, newCopy);
-                    newCopy.addSpellAbility(newSA);
-                }
-            }
-            for (SpellAbility sa : in.getState(state).getSpellAbility()) {
-                if (sa instanceof AbilityActivated) {
-                    SpellAbility newSA = ((AbilityActivated) sa).getCopy();
-                    if (newSA == null) {
-                        System.out.println("Uh-oh...");
-                    }
-                    newSA.setType("LKI");
-                    CardFactoryUtil.correctAbilityChainSourceCard(newSA, newCopy);
-                    newCopy.addSpellAbility(newSA);
-                }
-            }
-
-            for (int i = 0; i < newCopy.getStaticAbilityStrings().size(); i++) {
-                newCopy.addStaticAbility(newCopy.getStaticAbilityStrings().get(i));
-            }
+        for (SpellAbility sa : in.getManaAbility()) {
+            newCopy.addSpellAbility(sa);
         }
-        newCopy.changeToState(in.getCurState());*/
-
-        // I'm not sure if we really should be copying enchant/equip stuff over.
 
         newCopy.setControllerObjects(in.getControllerObjects());
         newCopy.addTempAttackBoost(in.getTempAttackBoost());
@@ -954,10 +918,7 @@ public final class CardUtil {
 
         // Reuse AF_Defined in a slightly different way
         if (validCard.startsWith("Defined.")) {
-            cards = new ArrayList<Card>();
-            for (final Card c : AbilityFactory.getDefinedCards(card, validCard.replace("Defined.", ""), abMana)) {
-                cards.add(c);
-            }
+            cards = AbilityFactory.getDefinedCards(card, validCard.replace("Defined.", ""), abMana);
         } else {
             cards = CardLists.getValidCards(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), validCard, abMana.getActivatingPlayer(), card);
         }
