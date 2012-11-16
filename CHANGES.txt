@@ -1,8 +1,8 @@
-Forge Beta: 1#-##-2012 ver 1.3.1
+Forge Beta: 11-16-2012 ver 1.3.1
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 
-11### cards in total.
+11572 cards in total.
 
 
 Added Return to Ravnica Guild Sealed Deck mode. Start a new sealed deck game, choose "Block / Set" and then scroll down until you find "Return to Ravnica Guild Sealed (block)". Select that. From the "Choose Set Combination" menu, select the first option. You will be prompted twice to pick your guild (once for the promo cards, once for the actual booster - you should choose the same guild both times). After that you're ready to go.
@@ -19,7 +19,40 @@ When choosing cards, sources, etc. using a list box, the currently selected card
 
 Forge now has a sound effect system in place. Several basic sounds are linked to the code now and will be enabled when "Enable Sounds" option is checked in the preferences. It supports WAV and AU file formats. No sound files are included with this commit and must be submitted separately. For the time being you will need to add your own sound files.
 
-Currently supported sound effects are: Draw (draw a card), EndOfTurn (end of turn), FlipCoin (when the match starts), LoseDuel (the duel is lost), Shuffle (cards are shuffled), Tap (card is tapped), Untap (card is untapped), WinDuel (the duel is won).
+Currently supported sound effects are:
+
+AddCounter - add_counter.wav - triggered when a counter is added to a permanent.
+Artifact - artifact.wav - triggered when an artifact is played.
+ArtifactCreature - artifact_creature.wav - triggered when an artifact creature is played.
+BlackLand - black_land.wav - triggered when a land with the "B" mana ability is played.
+BlueLand[*] - blue_land.wav - triggered when a land with the "U" mana ability is played.
+Creature - creature.wav - triggered when a creature is played.
+Damage - damage.wav - triggered when a creature is damaged.
+Destroy - destroy.wav - triggered when a permanent is destroyed.
+Discard - discard.wav - triggered when a player discards a card.
+Draw - draw.wav - triggered when a player draws a card.
+Enchantment - enchant.wav - triggered when an enchantment is played.
+EndOfTurn - end_of_turn.wav - triggered at the end of turn.
+Equip - equip.wav - triggered when an equipment is equipped.
+FlipCoin - flip_coin.wav - triggered when a coin is flipped.
+GreenLand - green_land.wav - triggered when a land with the "G" mana ability is played.
+Instant - instant.wav - triggered when an instant is played.
+LifeLoss - life_loss.wav - triggered when a player loses life.
+LoseDuel[*] - lose_duel.wav - triggered when a player loses a duel.
+ManaBurn - mana_burn.wav - triggered during a mana burn if the appropriate rule is enabled.
+OtherLand - other_land.wav - triggered when a land with non-color mana abilities or any other land is played.
+Planeswalker - planeswalker.wav - triggered when a planeswalker is played.
+Poison - poison.wav - triggered when a player receives a poison counter.
+RedLand - red_land.wav - triggered when a land with the "R" mana ability is played.
+Regen - regeneration.wav - triggered when a creature is regenerated.
+RemoveCounter - remove_counter.wav - triggered when a counter is removed from a permanent.
+Sacrifice - sacrifice.wav - triggered when a permanent is sacrificed.
+Sorcery - sorcery.wav - triggered when a sorcery is played.
+Shuffle[*] - shuffle.wav - triggered when a player shuffles his deck.
+Tap[*] - tap.wav - triggered when a permanent is tapped.
+Untap - untap.wav - triggered when a permanent is untapped.
+WhiteLand - white_land.wav - triggered when a land with the "W" mana ability is played.
+WinDuel - win_duel.wav - triggered when a player wins the duel.
 
 --
 
@@ -460,93 +493,102 @@ Fixes/Features:
 - Better way, use sublist.
 - Simplify nrChoices in unlocking.
 - Added the recent commit logs to changes.txt. Preparing for the beta build and release.
+- Preparing the changes.txt file for the next beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-
+Agetian
+Hellfish
+Marc
+Max
+RumbleBBU
+Sloth
+Sol
+Swordshine
+Chris H
 
 
 Added the following cards:
 
-Metamorphose
-Wild Might
-Shimian Night Stalker
-Karn Liberated
-Fire Juggler
-Gustcloak Cavalier
-Riftsweeper
-Saproling Cluster
-Magus of the Scroll
-Nightshade Assassin
-Rust Elemental
-Divergent Growth
-Parallax Nexus
-Rising Waters
-Overlaid Terrain
-Summoner's Egg
-Kemba's Legion
-Arsenal Thresher
-Rofellos's Gift
 AEthertow
+Arsenal Thresher
+Auriok Replica
 Barkshell Blessing
+Bone Mask
+Booby Trap
 Burn Trail
+Burrenton Forge-Tender
+Cho-Arrim Alchemist
+Circle of Protection: Artifacts
+Circle of Protection: Black
+Circle of Protection: Blue
+Circle of Protection: Green
+Circle of Protection: Red
+Circle of Protection: Shadow
+Circle of Protection: White
+Cleansing
+Consume Spirit
+Daru Spiritualist
 Disturbing Plot
+Divergent Growth
+Doubling Chant
+Dracoplasm
+Drain Life
+Everlasting Torment
+Fire Juggler
+Flaring Pain
+General's Regalia
 Ghastly Discovery
 Giantbaiting
 Gleeful Sabotage
-Memory Sluice
-Mine Excavation
-Traitor's Roar
-Doubling Chant
-Circle of Protection: White
-Circle of Protection: Green
-Circle of Protection: Blue
-Circle of Protection: Red
-Circle of Protection: Black
-Circle of Protection: Artifacts
-Rune of Protection: White
-Rune of Protection: Green
-Rune of Protection: Blue
-Rune of Protection: Red
-Rune of Protection: Black
-Rune of Protection: Artifacts
-Rune of Protection: Lands
-Cleansing
 Greater Realm of Preservation
-Circle of Protection: Shadow
-Pentagram of the Ages
-Righteous Aura
-Story Circle
-Bone Mask
-Everlasting Torment
-Kaervek's Torch
-Auriok Replica
-Burrenton Forge-Tender
-Shaman en-Kor
+Gustcloak Cavalier
 Haazda Shield Mate
-Reverse Damage
-Seasoned Tactician
-General's Regalia
-Jade Monolith
-Oracle's Attendants
-Booby Trap
-Dracoplasm
-Invulnerability
-Cho-Arrim Alchemist
-Prismatic Circle
 Intervention Pact
-Maddening Imp
-Reap
-Minion of the Wastes
-Daru Spiritualist
+Invulnerability
+Jade Monolith
+Kaervek's Torch
+Karn Liberated
+Kemba's Legion
 Krosan Drover
-Proteus Machine
-Flaring Pain
-Unstable Footing
+Maddening Imp
+Magus of the Scroll
+Memory Sluice
+Metamorphose
+Mine Excavation
+Minion of the Wastes
+Nightshade Assassin
+Oracle's Attendants
+Overlaid Terrain
+Parallax Nexus
+Pentagram of the Ages
 Predatory Focus
-Consume Spirit
-Drain Life
+Prismatic Circle
+Proteus Machine
+Reap
+Reverse Damage
+Riftsweeper
+Righteous Aura
+Rising Waters
+Rofellos's Gift
+Rune of Protection: Artifacts
+Rune of Protection: Black
+Rune of Protection: Blue
+Rune of Protection: Green
+Rune of Protection: Lands
+Rune of Protection: Red
+Rune of Protection: White
+Rust Elemental
+Saproling Cluster
+Seasoned Tactician
+Shaman en-Kor
+Shimian Night Stalker
+Story Circle
+Summoner's Egg
+Traitor's Roar
+Unstable Footing
+Wild Might
 
 
 end
