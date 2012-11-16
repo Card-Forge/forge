@@ -423,7 +423,7 @@ public class AttachAi extends SpellAiLogic {
                 }
             });
         }
-        
+
         Card c = null;
         if ((prefList == null) || prefList.isEmpty()) {
             prefList = new ArrayList<Card>(list);
@@ -441,7 +441,7 @@ public class AttachAi extends SpellAiLogic {
                     return containsUsefulCurseKeyword(keywords, c, sa);
                 }
             });
-        } else if (totPower < 0){
+        } else if (totPower < 0) {
             prefList = CardLists.filter(prefList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
@@ -924,7 +924,7 @@ public class AttachAi extends SpellAiLogic {
         }
         return true;
     }
-    
+
     /**
      * Checks if is useful curse keyword.
      * 
