@@ -22,7 +22,10 @@ import java.util.Map;
 import forge.Card;
 import forge.card.abilityfactory.effects.ChangeZoneAllEffect;
 import forge.card.abilityfactory.effects.ChangeZoneEffect;
+import forge.card.abilityfactory.effects.ManaEffect;
+import forge.card.abilityfactory.effects.ManaReflectedEffect;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Target;
 
@@ -37,6 +40,10 @@ public class CommonDrawback extends AbilitySub {
             params = params0;
             ai = ai0;
             effect = effect0;
+
+            if (effect0 instanceof ManaEffect || effect0 instanceof ManaReflectedEffect) {
+                this.setManaPart(new AbilityManaPart(ca, params));
+            }
 
             if (effect0 instanceof ChangeZoneEffect || effect0 instanceof ChangeZoneAllEffect) {
                 AbilityFactory.adjustChangeZoneTarget(params, this);
