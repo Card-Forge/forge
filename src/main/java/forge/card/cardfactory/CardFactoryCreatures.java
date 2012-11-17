@@ -770,9 +770,17 @@ public class CardFactoryCreatures {
             } // resolve()
         };
 
-        Function<List<Card>, Input> onSelected = new Function<List<Card>, Input>() {
+        final InputSelectMany<Card> targetInput = new InputSelectManyCards(0, 5) {
+            private static final long serialVersionUID = 905537202538752647L;
+
             @Override
-            public final Input apply(List<Card> selected) {
+            protected boolean isValidChoice(Card c) {
+                Zone zone = Singletons.getModel().getGame().getZoneOf(c);
+                return zone.is(ZoneType.Battlefield) && c.getController() == ability.getTargetPlayer() && c.canBeTargetedBy(ability);
+            }
+            
+            @Override
+            protected Input onDone() {
                 final StringBuilder sb = new StringBuilder();
                 sb.append(card.getName());
                 sb.append(" - tap " + StringUtils.join(selected, ", ") + ". ");
@@ -783,16 +791,7 @@ public class CardFactoryCreatures {
                 return null;
             }
         };
-
-        Predicate<Card> allowedRule = new Predicate<Card>() {
-            @Override
-            public boolean apply(Card c) {
-                Zone zone = Singletons.getModel().getGame().getZoneOf(c);
-                return zone.is(ZoneType.Battlefield) && c.getController() == ability.getTargetPlayer() && c.canBeTargetedBy(ability);
-            }
-        };
-
-        final InputSelectMany<Card> targetInput = new InputSelectManyCards(allowedRule, 0, 5, onSelected);
+                
         targetInput.setMessage("Select up to 5 target permanents.  Selected (%d) so far.  Click OK when done.");
 
         Predicate<Player> canTarget = new Predicate<Player>() {

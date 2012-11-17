@@ -35,13 +35,11 @@ import forge.card.cost.Cost;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
+import forge.control.input.InputSelectManyCards;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
-import forge.gui.match.CMatchUI;
-
-import forge.view.ButtonUtil;
 
 /**
  * <p>
@@ -288,33 +286,31 @@ class CardFactoryLands {
                 }
 
                 public void humanExecute() {
-                    Singletons.getModel().getMatch().getInput().setInput(new Input() {
+                    Singletons.getModel().getMatch().getInput().setInput(new InputSelectManyCards(0,1) {
                         private static final long serialVersionUID = -2774066137824255680L;
 
                         @Override
-                        public void showMessage() {
-                            final StringBuilder sb = new StringBuilder();
-                            sb.append(card.getName()).append(" - Reveal a card.");
-                            CMatchUI.SINGLETON_INSTANCE.showMessage(sb.toString());
-                            ButtonUtil.enableOnlyCancel();
+                        public String getMessage() {
+                            return card.getName() + " - Reveal a card.";
                         }
 
                         @Override
-                        public void selectCard(final Card c) {
+                        protected boolean isValidChoice(Card c) {
                             Zone zone = Singletons.getModel().getGame().getZoneOf(c);
-                            if (zone.is(ZoneType.Hand) && c.isType(type)) {
-                                final StringBuilder sb = new StringBuilder();
-                                sb.append("Revealed card: ").append(c.getName());
-                                JOptionPane.showMessageDialog(null, sb.toString(), card.getName(),
-                                        JOptionPane.PLAIN_MESSAGE);
-                                this.stop();
-                            }
+                            return zone.is(ZoneType.Hand) && c.isType(type) && c.getController() == card.getController();
+                        }
+                        
+                        @Override
+                        protected Input onDone() {
+                            String cardName = selected.get(0).getName();
+                            JOptionPane.showMessageDialog(null, "Revealed card: " + cardName, cardName, JOptionPane.PLAIN_MESSAGE);
+                            return null;
                         }
 
                         @Override
-                        public void selectButtonCancel() {
+                        public Input onCancel() {
                             card.setTapped(true);
-                            this.stop();
+                            return null;
                         }
                     });
                 } // execute()

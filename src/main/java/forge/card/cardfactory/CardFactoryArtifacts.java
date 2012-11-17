@@ -372,18 +372,21 @@ class CardFactoryArtifacts {
                     // not implemented for compy
                     if (card.getController().isHuman()) {
 
-                        Predicate<Card> validForPick = new Predicate<Card>() {
+                        InputSelectManyCards inp = new InputSelectManyCards(0, Integer.MAX_VALUE) {
+                            private static final long serialVersionUID = 806464726820739922L;
+
                             @Override
-                            public boolean apply(Card c) {
+                            protected boolean isValidChoice(Card c) {
                                 Zone zone = Singletons.getModel().getGame().getZoneOf(c);
                                 return zone.is(ZoneType.Hand) && c.getController() == card.getController();
                             }
-                        };
-
-                        Function<List<Card>, Input> onSelected = new Function<List<Card>, Input>() {
+                            
+                            /* (non-Javadoc)
+                             * @see forge.control.input.InputSelectManyCards#onDone()
+                             */
                             @Override
-                            public Input apply(List<Card> exiled) {
-                                for (final Card c : exiled) {
+                            protected Input onDone() {
+                                for (final Card c : selected) {
                                     Singletons.getModel().getGame().getAction().exile(c);
                                 }
 
@@ -392,7 +395,7 @@ class CardFactoryArtifacts {
                                 // Ruling: This is not a draw...
                                 final PlayerZone lib = card.getController().getZone(ZoneType.Library);
                                 int numCards = 0;
-                                while ((lib.size() > 0) && (numCards < exiled.size())) {
+                                while ((lib.size() > 0) && (numCards < selected.size())) {
                                     Singletons.getModel().getGame().getAction().moveToHand(lib.get(0));
                                     numCards++;
                                 }
@@ -403,16 +406,13 @@ class CardFactoryArtifacts {
 
                                 // Then look at the exiled cards and put them on
                                 // top of your library in any order.
-                                while (exiled.size() > 0) {
-                                    final Card c1 = GuiChoose.one("Put a card on top of your library.", exiled);
+                                while (selected.size() > 0) {
+                                    final Card c1 = GuiChoose.one("Put a card on top of your library.", selected);
                                     Singletons.getModel().getGame().getAction().moveToLibrary(c1);
-                                    exiled.remove(c1);
+                                    selected.remove(c1);
                                 }
-                                return null;
-                            };
+                                return null;                            }
                         };
-
-                        InputSelectManyCards inp = new InputSelectManyCards(validForPick, 0, Integer.MAX_VALUE, onSelected);
                         inp.setMessage(card.getName() + " - Exile cards from hand.  Currently, %d selected.  (Press OK when done.)");
 
                         Singletons.getModel().getMatch().getInput().setInput(inp);
