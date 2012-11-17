@@ -37,7 +37,19 @@ Some people use the Windows application 7zip. This utility can be found at http:
 
 Fixes/Features:
 
-
+- Cleared out the changes.txt file, now ready for new material.
+- CheckStyle.
+- Tweaked doTriggerAINoCost of AF DamageAll.
+- Tweaked shouldPumpCard.
+- CheckStyle.
+- Fixed Squandered Resources.
+- Fixed optional Replacement effects not firing again after "No" is chosen once (experimental).
+- Little script updates.
+- When a game is restarted, set lands played back to 0.
+- remove unused imports
+- InputSelectManyCards uses only overloads syntax. made abstract
+- Fixed AF Mana used on subabilities.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -47,7 +59,9 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 Added the following cards:
 
-
+Island Sanctuary
+Chronomantic Escape
+Kamahl's Sledge
 
 
 end
