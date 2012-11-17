@@ -40,7 +40,6 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityCondition;
 import forge.card.spellability.SpellAbilityRestriction;
-import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;

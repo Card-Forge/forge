@@ -57,7 +57,6 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
 import forge.sound.SoundUtils;
-import forge.sound.Sounds;
 import forge.util.MyObservable;
 import forge.view.ButtonUtil;
 

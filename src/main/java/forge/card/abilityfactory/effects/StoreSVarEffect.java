@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.Card;
-import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
