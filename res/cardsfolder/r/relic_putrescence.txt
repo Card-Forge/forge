@@ -5,7 +5,7 @@ Text:no text
 K:Enchant artifact
 A:SP$ Attach | Cost$ 2 B | ValidTgts$ Artifact | AILogic$ Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigPoison | TriggerDescription$ Whenever enchanted artifact becomes tapped, its controller gets a poison counter.
-SVar:TrigPoison:AB$Poison | Cost$ 0 | Defined$ TriggeredCardController | Num$ 1
+SVar:TrigPoison:AB$ Poison | Cost$ 0 | Defined$ TriggeredCardController | Num$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/relic_putrescence.jpg
 SetInfo:SOM|Common|http://magiccards.info/scans/en/som/77.jpg

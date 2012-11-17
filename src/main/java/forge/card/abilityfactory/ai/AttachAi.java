@@ -936,7 +936,8 @@ public class AttachAi extends SpellAiLogic {
      * @return true, if is useful keyword
      */
     private static boolean isUsefulCurseKeyword(final String keyword, final Card card, final SpellAbility sa) {
-        //final Player human = sa.getActivatingPlayer().getOpponent();
+        final Player ai = sa.getActivatingPlayer();
+        //final Player human = ai.getOpponent();
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
             return false;
         }
@@ -947,7 +948,11 @@ public class AttachAi extends SpellAiLogic {
                 return false;
             }
         } else if (keyword.endsWith("CARDNAME attacks each turn if able.")) {
-            if (!CombatUtil.canAttackNextTurn(card) || !CombatUtil.canBlock(card, true)) {
+            if (!CombatUtil.canAttackNextTurn(card) || !CombatUtil.canBlock(card, true) || ai.getCreaturesInPlay().isEmpty()) {
+                return false;
+            }
+        } else if (keyword.endsWith("CARDNAME can't block.") || keyword.contains("CantBlock")) {
+            if (!CombatUtil.canBlock(card, true)) {
                 return false;
             }
         } else if (keyword.endsWith("CARDNAME's activated abilities can't be activated.")) {
@@ -959,6 +964,15 @@ public class AttachAi extends SpellAiLogic {
             return false;
         } else if (keyword.endsWith("Prevent all combat damage that would be dealt by CARDNAME.")) {
             if (!CombatUtil.canAttackNextTurn(card) || card.getNetCombatDamage() < 1) {
+                return false;
+            }
+        } else if (keyword.endsWith("Prevent all combat damage that would be dealt to and dealt by CARDNAME.")
+                || keyword.endsWith("Prevent all damage that would be dealt to and dealt by CARDNAME.")) {
+            if (!CombatUtil.canAttackNextTurn(card) || card.getNetCombatDamage() < 2) {
+                return false;
+            }
+        } else if (keyword.endsWith("CARDNAME doesn't untap during your untap step.")) {
+            if (card.isUntapped()) {
                 return false;
             }
         }

@@ -2,10 +2,10 @@ Name:Psychic Possession
 ManaCost:2 U U
 Types:Enchantment Aura
 Text:no text
-S:Mode$ Continuous | Affected$ You | AddKeyword$ Skip your draw step. | Description$ Skip your draw step.
 A:SP$ Attach | Cost$ 2 U U | ValidTgts$ Opponent | AILogic$ Curse
-T:Mode$ Drawn | ValidCard$ Card.YouDontOwn | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever an opponent draws a card, you may draw a card.
-SVar:TrigDraw:DB$Draw | NumCards$ 1
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Skip your draw step. | Description$ Skip your draw step.
+T:Mode$ Drawn | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | Execute$ TrigDraw | OptionalDecider$ You | TriggerDescription$ Whenever enchanted opponent draws a card, you may draw a card.
+SVar:TrigDraw:DB$ Draw | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psychic_possession.jpg

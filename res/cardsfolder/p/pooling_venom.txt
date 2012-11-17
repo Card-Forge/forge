@@ -5,7 +5,7 @@ Text:no text
 K:Enchant land
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Land | AILogic$ Curse
 T:Mode$ Taps | ValidCard$ Card.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigLose | TriggerDescription$ Whenever enchanted land becomes tapped, its controller loses 2 life.
-SVar:TrigLose:AB$LoseLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ 2
+SVar:TrigLose:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ 2
 A:AB$ Destroy | Cost$ 3 B | Defined$ Enchanted | SpellDescription$ Destroy enchanted land.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pooling_venom.jpg

@@ -5,7 +5,7 @@ Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 U U | ValidTgts$ Creature | AILogic$ Curse
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, put a token that's a copy of enchanted creature onto the battlefield.
-SVar:TrigCopy:AB$CopyPermanent | Cost$ 0 | Defined$ Enchanted | SpellDescription$ At the beginning of your upkeep, put a token that's a copy of enchanted creature onto the battlefield.
+SVar:TrigCopy:AB$ CopyPermanent | Cost$ 0 | Defined$ Enchanted | SpellDescription$ At the beginning of your upkeep, put a token that's a copy of enchanted creature onto the battlefield.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/followed_footsteps.jpg
 SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/51.jpg

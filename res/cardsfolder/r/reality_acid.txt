@@ -6,7 +6,7 @@ K:Enchant permanent
 K:Vanishing:3
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | AILogic$ Curse
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigSac | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, enchanted permanent's controller sacrifices it.
-SVar:TrigSac:AB$SacrificeAll | Cost$ 0 | ValidCards$ Triggered.EnchantedBy
+SVar:TrigSac:AB$ SacrificeAll | Cost$ 0 | ValidCards$ Triggered.EnchantedBy
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reality_acid.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/45.jpg

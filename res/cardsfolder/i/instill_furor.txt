@@ -6,7 +6,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 1 R | ValidTgts$ Creature | AILogic$ Curse
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddTrigger$ EOTTrigger | AddSVar$ InstillTrigSac & MustAttack | Description$ Enchanted creature has "At the beginning of your end step, sacrifice this creature unless it attacked this turn."
 SVar:EOTTrigger:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ InstillTrigSac | TriggerDescription$ At the beginning of your end step, sacrifice this creature unless it attacked this turn.
-SVar:InstillTrigSac:DB$Sacrifice | Defined$ Self | ConditionPresent$ Card.Self+notAttackedThisTurn | ConditionCompare$ GE1
+SVar:InstillTrigSac:DB$ Sacrifice | Defined$ Self | ConditionPresent$ Card.Self+notAttackedThisTurn | ConditionCompare$ GE1
 SVar:MustAttack:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/instill_furor.jpg
