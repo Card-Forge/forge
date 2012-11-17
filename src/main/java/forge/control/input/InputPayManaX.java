@@ -27,7 +27,7 @@ public class InputPayManaX extends InputPayMana {
         sa = sa0;
         payment = payment0;
         xPaid = 0;
-        colorX = sa.getSourceCard().getSVar("XColor");
+        colorX = sa.getParam("XColor");
         colorsPaid = sa.getSourceCard().getColorsPaid();
         costMana = costMana0;
         strX = Integer.toString(costMana.getXMana());

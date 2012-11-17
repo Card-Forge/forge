@@ -2,8 +2,7 @@ Name:Consume Spirit
 ManaCost:X 1 B
 Types:Sorcery
 Text:no text
-A:SP$DealDamage | Cost$ X 1 B | Tgt$ TgtCP | NumDmg$ X | SubAbility$ DBGainLife | References$ X | SpellDescription$ Spend only black mana on X. Consume Spirit deals X damage to target creature or player and you gain X life.
-SVar:XColor:B
+A:SP$DealDamage | Cost$ X 1 B | XColor$ B | Tgt$ TgtCP | NumDmg$ X | SubAbility$ DBGainLife | References$ X | SpellDescription$ Spend only black mana on X. Consume Spirit deals X damage to target creature or player and you gain X life.
 SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
