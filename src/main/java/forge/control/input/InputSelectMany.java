@@ -107,6 +107,7 @@ public abstract class InputSelectMany<T extends GameEntity> extends Input {
     protected Input onCancel() { return null; }
     protected boolean canCancelWithSomethingSelected() { return false; }
     protected boolean hasEnoughTargets() { return selected.size() >= min; }
+    protected boolean hasAllTargets() { return selected.size() >= max; }
     
     
     protected void selectEntity(T c)
@@ -116,7 +117,7 @@ public abstract class InputSelectMany<T extends GameEntity> extends Input {
         this.selected.add(c);
         this.showMessage();
         
-        if ( hasEnoughTargets() )
+        if ( hasAllTargets() )
             selectButtonOK();
     }
     

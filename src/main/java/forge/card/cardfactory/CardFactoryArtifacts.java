@@ -5,9 +5,6 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-
 import forge.Card;
 
 import forge.Command;
