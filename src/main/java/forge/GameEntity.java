@@ -143,7 +143,7 @@ public abstract class GameEntity extends MyObservable {
         int restDamage = damage;
 
         restDamage = this.staticReplaceDamage(restDamage, source, isCombat);
-        restDamage = this.staticDamagePrevention(restDamage, source, isCombat);
+        restDamage = this.staticDamagePrevention(restDamage, source, isCombat, true);
 
         return restDamage;
     }
@@ -163,7 +163,7 @@ public abstract class GameEntity extends MyObservable {
      *            a boolean.
      * @return a int.
      */
-    public int staticDamagePrevention(final int damage, final Card source, final boolean isCombat) {
+    public int staticDamagePrevention(final int damage, final Card source, final boolean isCombat, boolean predict) {
         return 0;
     }
 

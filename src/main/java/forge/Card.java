@@ -7937,7 +7937,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         int restDamage = damage - possiblePrvenetion;
 
-        restDamage = this.staticDamagePrevention(restDamage, source, isCombat);
+        restDamage = this.staticDamagePrevention(restDamage, source, isCombat, true);
 
         return restDamage;
     }
@@ -7958,7 +7958,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a int.
      */
     @Override
-    public final int staticDamagePrevention(final int damageIn, final Card source, final boolean isCombat) {
+    public final int staticDamagePrevention(final int damageIn, final Card source, final boolean isCombat, boolean predict) {
 
         if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
             return damageIn;
@@ -8028,6 +8028,9 @@ public class Card extends GameEntity implements Comparable<Card> {
             for (final StaticAbility stAb : staticAbilities) {
                 restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage, isCombat);
             }
+            if (!predict) {
+                continue;
+            }
             for (final ReplacementEffect re : ca.getReplacementEffects()) {
                 HashMap<String, String> params = re.getMapParams();
                 if (!"DamageDone".equals(params.get("Event")) || !params.containsKey("PreventionEffect")) {
@@ -8040,6 +8043,18 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (params.containsKey("ValidTarget")
                         && !this.isValid(params.get("ValidTarget"), ca.getController(), ca)) {
                     continue;
+                }
+                if (params.containsKey("IsCombat")) {
+                    if (params.get("IsCombat").equals("True")) {
+                        if (!isCombat) {
+                            continue;
+                        }
+                    } else {
+                        if (isCombat) {
+                            continue;
+                        }
+                    }
+                    
                 }
                 return 0;
             }
@@ -8100,7 +8115,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             return 0;
         }
 
-        restDamage = this.staticDamagePrevention(restDamage, source, isCombat);
+        restDamage = this.staticDamagePrevention(restDamage, source, isCombat, false);
 
         if (restDamage == 0) {
             return 0;

@@ -81,8 +81,7 @@ public class ReplaceDamage extends ReplacementEffect {
                 if (!((Boolean) runParams.get("IsCombat"))) {
                     return false;
                 }
-            }
-            else {
+            } else {
                 if ((Boolean) runParams.get("IsCombat")) {
                     return false;
                 }
