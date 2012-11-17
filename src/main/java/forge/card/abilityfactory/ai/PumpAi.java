@@ -146,7 +146,7 @@ public class PumpAi extends PumpAiBase {
 
                     return true;
                 }
-                if (shouldPumpCard(ai, sa, card, attack, defense, keywords)) {
+                if (shouldPumpCard(ai, sa, card, defense, attack, keywords)) {
                     return true;
                 }
             }

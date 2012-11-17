@@ -367,7 +367,8 @@ public abstract class PumpAiBase extends SpellAiLogic {
         return true;
     }
 
-    protected boolean shouldPumpCard(final Player ai, final SpellAbility sa, final Card c, final int defense, final int attack, final List<String> keywords) {
+    protected boolean shouldPumpCard(final Player ai, final SpellAbility sa, final Card c, final int defense, final int attack, 
+            final List<String> keywords) {
         PhaseHandler phase = Singletons.getModel().getGame().getPhaseHandler();
 
         if (!c.canBeTargetedBy(sa)) {
@@ -407,14 +408,14 @@ public abstract class PumpAiBase extends SpellAiLogic {
 
         // is the creature unblocked and the spell will pump its power?
         if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
-                && Singletons.getModel().getGame().getCombat().isAttacking(c)
-                && Singletons.getModel().getGame().getCombat().isUnblocked(c) && (attack > 0)) {
+                && Singletons.getModel().getGame().getCombat().isAttacking(c) 
+                && Singletons.getModel().getGame().getCombat().isUnblocked(c) && attack > 0) {
             return true;
         }
 
         // is the creature blocked and the blocker would survive
-        if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY) && (attack > 0)
-                && Singletons.getModel().getGame().getCombat().isAttacking(c)
+        if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY) && attack > 0
+                && Singletons.getModel().getGame().getCombat().isAttacking(c) 
                 && Singletons.getModel().getGame().getCombat().isBlocked(c)
                 && Singletons.getModel().getGame().getCombat().getBlockers(c) != null
                 && !Singletons.getModel().getGame().getCombat().getBlockers(c).isEmpty()
