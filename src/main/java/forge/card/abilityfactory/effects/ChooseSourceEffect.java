@@ -142,7 +142,7 @@ public class ChooseSourceEffect extends SpellEffect {
                             final Player ai = sa.getActivatingPlayer();
                             if (!Singletons.getModel().getGame().getStack().isEmpty()) {
                                 final SpellAbility topStack = Singletons.getModel().getGame().getStack().peekAbility();
-                                if (!topStack.getActivatingPlayer().isHostileTo(ai)) {
+                                if (sa.hasParam("Choices") && !topStack.getSourceCard().isValid(sa.getParam("Choices"), ai, host)) {
                                     break;
                                 }
                                 final ApiType threatApi = topStack.getApi();

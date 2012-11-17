@@ -65,21 +65,10 @@ public class ChooseSourceAi extends SpellAiLogic {
             }
         }
         if (sa.hasParam("AILogic")) {
-            ZoneType choiceZone = ZoneType.Battlefield;
-            if (sa.hasParam("ChoiceZone")) {
-                choiceZone = ZoneType.smartValueOf(sa.getParam("ChoiceZone"));
-            }
-            List<Card> choices = Singletons.getModel().getGame().getCardsIn(choiceZone);
-            if (sa.hasParam("Choices")) {
-                choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host);
-            }
-            if (sa.hasParam("TargetControls")) {
-                choices = CardLists.filterControlledBy(choices, ai.getOpponent());
-            }
             if (sa.getParam("AILogic").equals("NeedsPrevention")) {
                 if (!Singletons.getModel().getGame().getStack().isEmpty()) {
                     final SpellAbility topStack = Singletons.getModel().getGame().getStack().peekAbility();
-                    if (!topStack.getActivatingPlayer().isHostileTo(ai)) {
+                    if (sa.hasParam("Choices") && !topStack.getSourceCard().isValid(sa.getParam("Choices"), ai, source)) {
                         return false;
                     }
                     final ApiType threatApi = topStack.getApi();
@@ -112,6 +101,10 @@ public class ChooseSourceAi extends SpellAiLogic {
                 if (!Singletons.getModel().getGame().getPhaseHandler().getPhase()
                         .equals(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                     return false;
+                }
+                List<Card> choices = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+                if (sa.hasParam("Choices")) {
+                    choices = CardLists.getValidCards(choices, sa.getParam("Choices"), host.getController(), host);
                 }
                 choices = CardLists.filter(choices, new Predicate<Card>() {
                     @Override
