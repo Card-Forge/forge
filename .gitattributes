@@ -1975,6 +1975,7 @@ res/cardsfolder/c/crested_craghorn.txt -text
 res/cardsfolder/c/crevasse.txt svneol=native#text/plain
 res/cardsfolder/c/crib_swap.txt svneol=native#text/plain
 res/cardsfolder/c/crimson_acolyte.txt svneol=native#text/plain
+res/cardsfolder/c/crimson_hellkite.txt -text
 res/cardsfolder/c/crimson_kobolds.txt svneol=native#text/plain
 res/cardsfolder/c/crimson_mage.txt svneol=native#text/plain
 res/cardsfolder/c/crimson_manticore.txt svneol=native#text/plain
@@ -2040,6 +2041,7 @@ res/cardsfolder/c/crypt_champion.txt -text
 res/cardsfolder/c/crypt_cobra.txt svneol=native#text/plain
 res/cardsfolder/c/crypt_creeper.txt svneol=native#text/plain
 res/cardsfolder/c/crypt_of_agadeem.txt svneol=native#text/plain
+res/cardsfolder/c/crypt_rats.txt -text
 res/cardsfolder/c/crypt_ripper.txt svneol=native#text/plain
 res/cardsfolder/c/crypt_sliver.txt svneol=native#text/plain
 res/cardsfolder/c/cryptborn_horror.txt -text
