@@ -1637,6 +1637,7 @@ res/cardsfolder/c/chromium.txt svneol=native#text/plain
 res/cardsfolder/c/chronatog.txt svneol=native#text/plain
 res/cardsfolder/c/chronatog_totem.txt svneol=native#text/plain
 res/cardsfolder/c/chronic_flooding.txt -text
+res/cardsfolder/c/chronomantic_escape.txt -text
 res/cardsfolder/c/chronomaton.txt -text
 res/cardsfolder/c/chronosavant.txt svneol=native#text/plain
 res/cardsfolder/c/chronozoa.txt -text
@@ -5164,6 +5165,7 @@ res/cardsfolder/k/kalonian_behemoth.txt svneol=native#text/plain
 res/cardsfolder/k/kamahl_fist_of_krosa.txt svneol=native#text/plain
 res/cardsfolder/k/kamahl_pit_fighter.txt svneol=native#text/plain
 res/cardsfolder/k/kamahls_desire.txt svneol=native#text/plain
+res/cardsfolder/k/kamahls_sledge.txt -text
 res/cardsfolder/k/kami_of_ancient_law.txt svneol=native#text/plain
 res/cardsfolder/k/kami_of_empty_graves.txt svneol=native#text/plain
 res/cardsfolder/k/kami_of_false_hope.txt svneol=native#text/plain

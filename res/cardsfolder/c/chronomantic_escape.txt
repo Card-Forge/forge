@@ -1,0 +1,14 @@
+Name:Chronomantic Escape
+ManaCost:4 W W
+Types:Sorcery
+Text:no text
+K:Suspend:3:2 W
+A:SP$ Effect | Cost$ 4 W W | Name$ Chronomantic Escape Effect | StaticAbilities$ STCantAttack | Duration$ UntilYourNextTurn | SubAbility$ DBChange | SpellDescription$ Until your next turn, creatures can't attack you. Exile CARDNAME with three time counters on it.
+SVar:STCantAttack:Mode$ CantAttack | ValidCard$ Creature | Target$ You | Description$ Creatures can't attack you.
+SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile | RememberChanged$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ TIME | CounterNum$ 3 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chronomantic_escape.jpg
+Oracle:Until your next turn, creatures can't attack you. Exile Chronomantic Escape with three time counters on it.\nSuspend 3-{2}{W} (Rather than cast this card from your hand, you may pay {2}{W} and exile it with three time counters on it. At the beginning of your upkeep, remove a time counter. When the last is removed, cast it without paying its mana cost.)
+End
