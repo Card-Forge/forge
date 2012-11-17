@@ -289,7 +289,7 @@ public class CostRemoveCounter extends CostPartWithList {
 
         if (!this.getThis()) {
             this.getList().clear();
-            final List<Card> typeList = 
+            final List<Card> typeList =
                     CardLists.getValidCards(ai.getCardsIn(this.getZone()), this.getType().split(";"), ai, source);
             for (Card card : typeList) {
                 if (card.getCounters(this.getCounter()) >= c) {
@@ -388,7 +388,7 @@ public class CostRemoveCounter extends CostPartWithList {
 
         return target;
     }
-    
+
     /**
      * <p>
      * returnType.
@@ -432,16 +432,16 @@ public class CostRemoveCounter extends CostPartWithList {
 
                     if (o != null) {
                         final Card card = o;
-                    
+
                         if (card.getCounters(costRemoveCounter.getCounter()) > 0) {
                             this.nRemove++;
                             costRemoveCounter.addToList(card);
                             card.subtractCounter(costRemoveCounter.getCounter(), 1);
-    
+
                             if (card.getCounters(costRemoveCounter.getCounter()) == 0) {
                                 this.typeList.remove(card);
                             }
-                            
+
                             if (nNeeded == this.nRemove) {
                                 this.done();
                             } else {

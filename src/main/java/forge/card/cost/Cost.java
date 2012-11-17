@@ -364,7 +364,7 @@ public class Cost {
         if (xCantBe0) {
             parse = parse.replaceAll(XCANTBE0_STR, "");
         }
-        
+
         final String stripXCost = parse.replaceAll("X", "");
 
         final int amountX = parse.length() - stripXCost.length();
@@ -451,7 +451,7 @@ public class Cost {
         }
     }
 
-    public final CostMana getCostMana () {
+    public final CostMana getCostMana() {
         // TODO: Change where ChangeCost happens
         for (final CostPart part : this.costParts) {
             if (part instanceof CostMana) {

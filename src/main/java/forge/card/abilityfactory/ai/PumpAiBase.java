@@ -407,14 +407,14 @@ public abstract class PumpAiBase extends SpellAiLogic {
 
         // is the creature unblocked and the spell will pump its power?
         if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
-                && Singletons.getModel().getGame().getCombat().isAttacking(c) 
+                && Singletons.getModel().getGame().getCombat().isAttacking(c)
                 && Singletons.getModel().getGame().getCombat().isUnblocked(c) && (attack > 0)) {
             return true;
         }
 
         // is the creature blocked and the blocker would survive
         if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY) && (attack > 0)
-                && Singletons.getModel().getGame().getCombat().isAttacking(c) 
+                && Singletons.getModel().getGame().getCombat().isAttacking(c)
                 && Singletons.getModel().getGame().getCombat().isBlocked(c)
                 && Singletons.getModel().getGame().getCombat().getBlockers(c) != null
                 && !Singletons.getModel().getGame().getCombat().getBlockers(c).isEmpty()

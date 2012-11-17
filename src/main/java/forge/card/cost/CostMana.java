@@ -164,7 +164,7 @@ public class CostMana extends CostPart {
         if (!this.mana.equals("0")) {
             sb.append(this.mana);
         }
-        
+
         return sb.toString().trim();
     }
 

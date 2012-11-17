@@ -380,7 +380,7 @@ class CardFactoryArtifacts {
                                 Zone zone = Singletons.getModel().getGame().getZoneOf(c);
                                 return zone.is(ZoneType.Hand) && c.getController() == card.getController();
                             }
-                            
+
                             /* (non-Javadoc)
                              * @see forge.control.input.InputSelectManyCards#onDone()
                              */

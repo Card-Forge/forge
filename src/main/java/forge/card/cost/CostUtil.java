@@ -83,7 +83,7 @@ public class CostUtil {
                     continue;
                 }
 
-                final List<Card> typeList = 
+                final List<Card> typeList =
                         CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), source.getController(), source);
                 if (ComputerUtil.getCardPreference(ai, source, "SacCost", typeList) == null) {
                     return false;

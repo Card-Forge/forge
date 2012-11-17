@@ -286,7 +286,7 @@ class CardFactoryLands {
                 }
 
                 public void humanExecute() {
-                    Singletons.getModel().getMatch().getInput().setInput(new InputSelectManyCards(0,1) {
+                    Singletons.getModel().getMatch().getInput().setInput(new InputSelectManyCards(0, 1) {
                         private static final long serialVersionUID = -2774066137824255680L;
 
                         @Override
@@ -299,7 +299,7 @@ class CardFactoryLands {
                             Zone zone = Singletons.getModel().getGame().getZoneOf(c);
                             return zone.is(ZoneType.Hand) && c.isType(type) && c.getController() == card.getController();
                         }
-                        
+
                         @Override
                         protected Input onDone() {
                             String cardName = selected.get(0).getName();
