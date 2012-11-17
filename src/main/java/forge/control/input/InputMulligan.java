@@ -118,7 +118,7 @@ public class InputMulligan extends Input {
 
         final GameAction ga = game.getAction();
         for (Player p : game.getPlayers()) {
-            final List<Card> openingHand = p.getCardsIn(ZoneType.Hand);
+            final List<Card> openingHand = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
     
             for (final Card c : openingHand) {
                 if ( p.isHuman() ) {
