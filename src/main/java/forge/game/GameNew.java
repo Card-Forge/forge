@@ -25,15 +25,12 @@ import forge.card.trigger.TriggerType;
 import forge.control.input.InputControl;
 import forge.control.input.InputMulligan;
 import forge.deck.Deck;
-import forge.deck.DeckSection;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
-import forge.gui.GuiChoose;
-import forge.gui.GuiUtils;
 import forge.gui.match.views.VAntes;
 import forge.item.CardPrinted;
 import forge.properties.ForgePreferences.FPref;
@@ -46,7 +43,10 @@ import forge.util.MyRandom;
  * All of these methods can and should be static.
  */
 public class GameNew {
-    private static void prepareFirstGameLibrary(Player player, Deck deck, Map<Player, List<String>> removedAnteCards, List<String> rAICards, boolean canRandomFoil, Random generator, boolean useAnte) {     
+    private static void prepareSingleLibrary(final Player player, final Deck deck, final Map<Player, List<String>> removedAnteCards, final List<String> rAICards, boolean canRandomFoil) {
+        final Random generator = MyRandom.getRandom();
+        boolean useAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
+
         PlayerZone library = player.getZone(ZoneType.Library);
         for (final Entry<CardPrinted, Integer> stackOfCards : deck.getMain()) {
             final CardPrinted cardPrinted = stackOfCards.getKey();
@@ -84,50 +84,7 @@ public class GameNew {
                     // ImageCache.getImage(card);
                 }
             }
-        }        
-    }
-    
-    private static boolean sideboardAndPrepareLibrary(final Player player, final Deck deck, boolean canRandomFoil, Random generator, boolean useAnte) {
-        final GameType gameType = Singletons.getModel().getMatch().getGameType();
-        boolean hasSideboard = gameType.equals(GameType.Draft) || gameType.equals(GameType.Sealed); 
-       
-        PlayerZone library = player.getZone(ZoneType.Library);
-        DeckSection sideboard = deck.getSideboard();
-        int sideboardSize = sideboard.countAll();
-        
-        if (hasSideboard || sideboardSize == 0) {
-            return false;
         }
-        
-        if (player.isComputer()) {
-            // Here is where the AI could sideboard, but needs to gather hints during the first game about what to SB
-            return false;
-        } else {
-            // Human Sideboarding
-            List<Card> newDeck = GuiChoose.getOrderChoices("Sideboarding", "Deck to Play", sideboardSize, 
-                    sideboard.toForgeCardList(), deck.getMain().toForgeCardList(), null);
-            
-            for (Card c : newDeck) {
-                library.add(c);
-            }
-
-        }
-        return true;
-    }
-    
-    private static void prepareSingleLibrary(final Player player, final Deck deck, final Map<Player, List<String>> removedAnteCards, final List<String> rAICards, boolean canRandomFoil) {
-        final Random generator = MyRandom.getRandom();
-        boolean useAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
-
-        if (Singletons.getModel().getMatch().getPlayedGames().size() == 0) {
-            prepareFirstGameLibrary(player, deck,  removedAnteCards, rAICards, canRandomFoil, generator, useAnte);
-        } else {
-            if (!sideboardAndPrepareLibrary(player, deck, canRandomFoil, generator, useAnte)) {
-                prepareFirstGameLibrary(player, deck,  removedAnteCards, rAICards, canRandomFoil, generator, useAnte);
-            }
-            //
-        }
-        
         
         // Shuffling
         // Ai may cheat 
