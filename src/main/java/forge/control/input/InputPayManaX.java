@@ -10,30 +10,30 @@ import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
-public class InputPayManaX extends InputPayMana { 
+public class InputPayManaX extends InputPayMana {
     private static final long serialVersionUID = -6900234444347364050L;
     private int xPaid = 0;
     private final String colorX;
     private final String strX;
     private String colorsPaid;
     private ManaCost manaCost;
-    private final CostMana costMana; 
+    private final CostMana costMana;
     private final CostPayment payment;
     private final SpellAbility sa;
 
-    
+
     public InputPayManaX(final SpellAbility sa0, final CostPayment payment0, final CostMana costMana0) 
     {
         sa = sa0;
         payment = payment0;
         xPaid = 0;
-        colorX = sa.getParam("XColor");
+        colorX =  sa.hasParam("XColor") ? sa.getParam("XColor") : "";
         colorsPaid = sa.getSourceCard().getColorsPaid();
         costMana = costMana0;
         strX = Integer.toString(costMana.getXMana());
         manaCost = new ManaCost(strX);
     }
-    
+
     @Override
     public void showMessage() {
         if ((xPaid == 0 && costMana.isxCantBe0()) || (this.colorX.equals("")
@@ -51,14 +51,14 @@ public class InputPayManaX extends InputPayMana {
         if (costMana.isxCantBe0()) {
             msg.append(" X Can't be 0.");
         }
-        
+
         CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
     }
 
     // selectCard
     @Override
     public void selectCard(final Card card) {
-        this.manaCost = InputPayManaCostUtil.activateManaAbility(sa, card, 
+        this.manaCost = InputPayManaCostUtil.activateManaAbility(sa, card,
                 this.colorX.isEmpty() ? this.manaCost : new ManaCost(this.colorX));
         if (this.manaCost.isPaid()) {
             if (!this.colorsPaid.contains(this.manaCost.getColorsPaid())) {
@@ -91,7 +91,7 @@ public class InputPayManaX extends InputPayMana {
 
     @Override
     public void selectManaPool(String color) {
-        this.manaCost = InputPayManaCostUtil.activateManaAbility(color, sa, 
+        this.manaCost = InputPayManaCostUtil.activateManaAbility(color, sa,
                 this.colorX.isEmpty() ? this.manaCost : new ManaCost(this.colorX));
         if (this.manaCost.isPaid()) {
             if (!this.colorsPaid.contains(this.manaCost.getColorsPaid())) {
@@ -105,7 +105,7 @@ public class InputPayManaX extends InputPayMana {
             this.showMessage();
         }
     }
-    
+
     /* (non-Javadoc)
      * @see forge.control.input.Input#isClassUpdated()
      */
