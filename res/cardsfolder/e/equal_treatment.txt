@@ -1,0 +1,16 @@
+Name:Equal Treatment
+ManaCost:1 W
+Types:Instant
+Text:no text
+A:SP$ Effect | Cost$ 1 W | Name$ Equal Treatment Effect | ReplacementEffects$ EqualEvent,EqualEvent2 | SVars$ DmgTwo,DmgTwo2 | SubAbility$ DBDraw
+SVar:EqualEvent:Event$ DamageDone | ActiveZones$ Battlefield | IsCombat$ False | ValidSource$ Card | ValidTarget$ Creature,Player | ReplaceWith$ DmgTwo | Description$ If any source would deal 1 or more damage to a creature or player this turn, it deals 2 damage to that creature or player instead.
+SVar:DmgTwo:AB$ DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ 2
+SVar:EqualEvent2:Event$ DamageDone | ActiveZones$ Battlefield | IsCombat$ True | Secondary$ True | ValidSource$ Card | ValidTarget$ Creature,Player | ReplaceWith$ DmgTwo2 | Description$ If any source would deal 1 or more damage to a creature or player this turn, it deals 2 damage to that creature or player instead.
+SVar:DmgTwo2:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ 2
+SVar:DBDraw:DB$ Draw | NumCards$ 1
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/equal_treatment.jpgs
+SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/4.jpg
+Oracle:If any source would deal 1 or more damage to a creature or player this turn, it deals 2 damage to that creature or player instead.\nDraw a card.
+End
