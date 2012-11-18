@@ -22,29 +22,40 @@ public class RepeatEachEffect extends SpellEffect {
     public void resolve(SpellAbility sa) {
         final AbilityFactory afRepeat = new AbilityFactory();
         Card source = sa.getSourceCard();
-    
+
         // setup subability to repeat
         final SpellAbility repeat = afRepeat.getAbility(sa.getSourceCard().getSVar(sa.getParam("RepeatSubAbility")), source);
         repeat.setActivatingPlayer(sa.getActivatingPlayer());
         ((AbilitySub) repeat).setParent(sa);
-    
+
         GameState game = Singletons.getModel().getGame();
-        
+
         boolean useImprinted = sa.hasParam("UseImprinted");
-        
+        boolean loopOverCards = false;
+        List<Card> repeatCards = null;
+
         if (sa.hasParam("RepeatCards")) {
             ZoneType zone = sa.hasParam("Zone") ? ZoneType.smartValueOf(sa.getParam("Zone")) : ZoneType.Battlefield;
-            
-            final List<Card> repeatCards = CardLists.getValidCards(game.getCardsIn(zone), 
-                    sa.getParam("RepeatCards"), source.getController(), source);
 
-            for(Card card : repeatCards) {
+            repeatCards = CardLists.getValidCards(game.getCardsIn(zone),
+                    sa.getParam("RepeatCards"), source.getController(), source);
+            loopOverCards = true;
+        }
+        else if (sa.hasParam("DefinedCards")) {
+            repeatCards = AbilityFactory.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
+            if (!repeatCards.isEmpty()) {
+                loopOverCards = true;
+            }
+        }
+
+        if (loopOverCards) {
+            for (Card card : repeatCards) {
                 if (useImprinted) {
                     source.addImprinted(card);
                 } else {
                     source.addRemembered(card);
                 }
-                
+
                 AbilityFactory.resolve(repeat, false);
                 if (useImprinted) {
                     source.removeImprinted(card);
@@ -53,11 +64,11 @@ public class RepeatEachEffect extends SpellEffect {
                 }
             }
         }
-        
+
         if (sa.hasParam("RepeatPlayers")) {
             final List<Player> repeatPlayers = AbilityFactory.getDefinedPlayers(source, sa.getParam("RepeatPlayers"), sa);
-            
-            for(Player player : repeatPlayers) {
+
+            for (Player player : repeatPlayers) {
                 source.addRemembered(player);
                 AbilityFactory.resolve(repeat, false);
                 source.removeRemembered(player);

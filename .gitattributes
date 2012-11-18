@@ -10038,6 +10038,7 @@ res/cardsfolder/t/tephraderm.txt svneol=native#text/plain
 res/cardsfolder/t/terashis_cry.txt svneol=native#text/plain
 res/cardsfolder/t/terashis_grasp.txt svneol=native#text/plain
 res/cardsfolder/t/terashis_verdict.txt svneol=native#text/plain
+res/cardsfolder/t/terastodon.txt -text
 res/cardsfolder/t/terminal_moraine.txt svneol=native#text/plain
 res/cardsfolder/t/terminate.txt svneol=native#text/plain
 res/cardsfolder/t/terminus.txt -text

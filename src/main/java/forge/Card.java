@@ -7188,6 +7188,11 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!list.contains(this)) {
                 return false;
             }
+        } else if (property.startsWith("InGraveyard")) {
+            final List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Graveyard);
+            if (!list.contains(this)) {
+                return false;
+            }            
         }
         else {
             if (property.equals("ChosenType")) {

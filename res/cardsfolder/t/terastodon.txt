@@ -1,0 +1,15 @@
+Name:Terastodon
+ManaCost:6 G G
+Types:Creature Elephant
+Text:no text
+PT:9/9
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME enters the battlefield, you may destroy up to three target noncreature permanents. For each permanent put into a graveyard this way, its controller puts a 3/3 green Elephant creature token onto the battlefield.
+SVar:TrigDestroy:DB$ Destroy | TargetMin$ 0 | TargetMax$ 3 | ValidTgts$ Permanent.nonCreature | TgtPrompt$ Choose up to three noncreature permanents. | SubAbility$ MakeTokens
+SVar:MakeTokens:DB$ RepeatEach | RepeatSubAbility$ DBToken | DefinedCards$ Targeted
+SVar:DBToken:DB$ Token | ConditionCheckSVar$ InGrave | ConditionSVarCompare$ EQ1 | TokenAmount$ 1 | TokenName$ Elephant | TokenTypes$ Creature,Elephant | TokenOwner$ RememberedController | TokenColors$ Green | TokenPower$ 3 | TokenToughness$ 3
+SVar:InGrave:Remembered$Valid Card.InGraveyard
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/terastodon.jpg
+Oracle:When Terastodon enters the battlefield, you may destroy up to three target noncreature permanents. For each permanent put into a graveyard this way, its controller puts a 3/3 green Elephant creature token onto the battlefield.
+SetInfo:WWK|Rare|http://magiccards.info/scans/en/wwk/115.jpg
+End
