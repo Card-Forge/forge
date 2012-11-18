@@ -89,6 +89,19 @@ public enum Sounds {
     }
 
     /**
+     * Play the sound associated with the Sounds enumeration element
+     * (synchronized with other sounds of the same kind, so only one can play
+     * at the same time).
+     */
+    public void playSync() {
+        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ENABLE_SOUNDS)) {
+            if (snd.isDone()) {
+                snd.play();
+            }
+        }
+    }
+
+    /**
      * Play the sound in a looping manner until 'stop' is called.
      */
     public void loop() {

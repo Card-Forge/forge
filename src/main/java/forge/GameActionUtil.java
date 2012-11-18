@@ -695,7 +695,7 @@ public final class GameActionUtil {
         }
 
         // Play the Damage sound
-        Sounds.Damage.play();
+        Sounds.Damage.playSync();
     }
 
     // this is for cards like Sengir Vampire
@@ -793,7 +793,7 @@ public final class GameActionUtil {
         c.getDamageHistory().registerDamage(player);
 
         // Play the Life Loss sound
-        Sounds.LifeLoss.play();
+        Sounds.LifeLoss.playSync();
     }
 
     // restricted to combat damage, restricted to players
@@ -864,7 +864,7 @@ public final class GameActionUtil {
         c.getDamageHistory().registerCombatDamage(player);
 
         // Play the Life Loss sound
-        Sounds.LifeLoss.play();
+        Sounds.LifeLoss.playSync();
     } // executeCombatDamageToPlayerEffects
 
     /**

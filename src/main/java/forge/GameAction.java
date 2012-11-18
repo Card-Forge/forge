@@ -1258,7 +1258,7 @@ public class GameAction {
             }
 
             // Play the Destroy sound
-            Sounds.Destroy.play();
+            Sounds.Destroy.playSync();
 
             final ArrayList<String> types = c.getType();
             for (final String type : types) {
@@ -1304,7 +1304,7 @@ public class GameAction {
                 }
 
                 // Play the Destroy sound
-                Sounds.Destroy.play();
+                Sounds.Destroy.playSync();
             }
         }
     } // destroyLegendaryCreatures()
@@ -1387,7 +1387,7 @@ public class GameAction {
                         card.setDamage(0);
 
                         // Play the Destroy sound
-                        Sounds.Destroy.play();
+                        Sounds.Destroy.playSync();
                     }
                 };
 
@@ -1401,7 +1401,7 @@ public class GameAction {
         } // totem armor
 
         // Play the Destroy sound
-        Sounds.Destroy.play();
+        Sounds.Destroy.playSync();
 
         return this.sacrificeDestroy(c);
     }
@@ -1582,14 +1582,14 @@ public class GameAction {
                 System.out.println("Totem armor destroyed instead of original card");
 
                 // Play the Destroy sound
-                Sounds.Destroy.play();
+                Sounds.Destroy.playSync();
 
                 return false;
             }
         } // totem armor
 
         // Play the Destroy sound
-        Sounds.Destroy.play();
+        Sounds.Destroy.playSync();
 
         return this.sacrificeDestroy(c);
     }
