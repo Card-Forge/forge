@@ -6841,11 +6841,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("controllerWasDealtCombatDamageByThisTurn")) {
-            if (!this.getDamageHistory().getThisTurnCombatDamaged().contains(sourceController)) {
+            if (!source.getDamageHistory().getThisTurnCombatDamaged().contains(this.getController())) {
                 return false;
             }
         } else if (property.startsWith("controllerWasDealtDamageByThisTurn")) {
-            if (!this.getDamageHistory().getThisTurnDamaged().contains(sourceController)) {
+            if (!source.getDamageHistory().getThisTurnDamaged().contains(this.getController())) {
                 return false;
             }
         } else if (property.startsWith("wasDealtDamageThisTurn")) {
