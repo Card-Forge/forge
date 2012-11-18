@@ -39,6 +39,7 @@ import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.ApiType;
+import forge.card.abilityfactory.effects.CharmEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostDiscard;
@@ -145,6 +146,10 @@ public class ComputerUtil {
 
         if (sa.isSpell() && !source.isCopiedSpell()) {
             sa.setSourceCard(Singletons.getModel().getGame().getAction().moveToStack(source));
+        }
+
+        if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
+            CharmEffect.makeChoices(sa);
         }
 
         final Cost cost = sa.getPayCosts();
