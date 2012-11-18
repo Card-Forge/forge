@@ -50,6 +50,19 @@ Fixes/Features:
 - InputSelectManyCards uses only overloads syntax. made abstract
 - Fixed AF Mana used on subabilities.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CheckStyle.
+- More Improvements of AI for Auras with "AILogic$ Curse".
+- Fixing accidental submission of potential Sideboard code
+- Changed the "spend only <color> mana on X" mechanism from using a SVar to using an ability parameter (first step towards implementing e.g. Soul Burn).
+- Fixed AI code meddling with damage replacements.
+- Fixed ConcurrentModificationException in InputMulligan.
+- Fixed InputSelectMany.
+- Improved ChooseSource AI.
+- Fixed a shouldPumpCard call switching P/T.
+- fixed NPE bug in initialize of colorX in InputPayManaX class
+- added code to allow AI to make Charm choice
+- modified inputUntapUpToNType so same card cannot be chosen more than once
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -62,6 +75,9 @@ Added the following cards:
 Island Sanctuary
 Chronomantic Escape
 Kamahl's Sledge
+Crypt Rats
+Crimson Hellkite
+Equal Treatment
 
 
 end
