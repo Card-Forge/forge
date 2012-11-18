@@ -2910,6 +2910,7 @@ public class CardFactoryUtil {
 
             private final int stop = n;
             private int count = 0;
+            private List<Card> choices = new ArrayList<Card>();;
 
             @Override
             public void showMessage() {
@@ -2927,8 +2928,9 @@ public class CardFactoryUtil {
             @Override
             public void selectCard(final Card card) {
                 Zone zone = Singletons.getModel().getGame().getZoneOf(card);
-                if (card.isType(type) && zone.is(ZoneType.Battlefield)) {
+                if (card.isType(type) && zone.is(ZoneType.Battlefield) && !choices.contains(card)) {
                     card.untap();
+                    choices.add(card);
                     this.count++;
                     if (this.count == this.stop) {
                         this.stop();
