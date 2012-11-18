@@ -7,6 +7,7 @@ A:AB$ DealDamage | Cost$ T X | XColor$ R | Tgt$ TgtC | NumDmg$ X | References$ X
 K:Flying
 SVar:X:Count$xPaid
 SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crimson_hellkite.jpg
 SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/172.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/167.jpg
 SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/178.jpg
