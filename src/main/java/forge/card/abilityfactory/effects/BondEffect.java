@@ -33,8 +33,8 @@ public class BondEffect extends SpellEffect {
 
         Card partner = cards.get(0);
         // skip choice if only one card on list
-        if (cards.size() > 1)
-            if ( sa.getActivatingPlayer().isHuman() ) {
+        if (cards.size() > 1) {
+            if (sa.getActivatingPlayer().isHuman()) {
                 Card o = GuiChoose.one("Select a card to pair with", cards);
                 if (o != null) {
                     partner = o;
@@ -43,6 +43,7 @@ public class BondEffect extends SpellEffect {
                 // TODO - Pick best creature instead of just the first on the list
                 partner = CardFactoryUtil.getBestCreatureAI(cards);
             }
+        }
 
         // pair choices together
         trigCards.get(0).setPairedWith(partner);

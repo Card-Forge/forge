@@ -29,18 +29,18 @@ public class AnimateEffect extends AnimateEffectBase {
         final Map<String, String> svars = host.getSVars();
         long timest = -1;
         String animateRemembered = null;
-    
+
         //if host is not on the battlefield don't apply
         if (sa.hasParam("UntilHostLeavesPlay")
                 && !sa.getSourceCard().isInPlay()) {
             return;
         }
-    
+
         // Remember Objects
         if (sa.hasParam("RememberObjects")) {
             animateRemembered = sa.getParam("RememberObjects");
         }
-    
+
         // AF specific sa
         int power = -1;
         if (sa.hasParam("Power")) {
@@ -50,40 +50,40 @@ public class AnimateEffect extends AnimateEffectBase {
         if (sa.hasParam("Toughness")) {
             toughness = AbilityFactory.calculateAmount(host, sa.getParam("Toughness"), sa);
         }
-    
+
         // Every Animate event needs a unique time stamp
         timest = Singletons.getModel().getGame().getNextTimestamp();
-    
+
         final long timestamp = timest;
-    
+
         final boolean permanent = sa.hasParam("Permanent");
-    
+
         final ArrayList<String> types = new ArrayList<String>();
         if (sa.hasParam("Types")) {
             types.addAll(Arrays.asList(sa.getParam("Types").split(",")));
         }
-    
+
         final ArrayList<String> removeTypes = new ArrayList<String>();
         if (sa.hasParam("RemoveTypes")) {
             removeTypes.addAll(Arrays.asList(sa.getParam("RemoveTypes").split(",")));
         }
-    
+
         // allow ChosenType - overrides anything else specified
         if (types.contains("ChosenType")) {
             types.clear();
             types.add(host.getChosenType());
         }
-    
+
         final ArrayList<String> keywords = new ArrayList<String>();
         if (sa.hasParam("Keywords")) {
             keywords.addAll(Arrays.asList(sa.getParam("Keywords").split(" & ")));
         }
-    
+
         final ArrayList<String> removeKeywords = new ArrayList<String>();
         if (sa.hasParam("RemoveKeywords")) {
             removeKeywords.addAll(Arrays.asList(sa.getParam("RemoveKeywords").split(" & ")));
         }
-    
+
         final ArrayList<String> hiddenKeywords = new ArrayList<String>();
         if (sa.hasParam("HiddenKeywords")) {
             hiddenKeywords.addAll(Arrays.asList(sa.getParam("HiddenKeywords").split(" & ")));
@@ -96,44 +96,44 @@ public class AnimateEffect extends AnimateEffectBase {
                 keywords.remove(k);
             }
         }
-    
+
         // colors to be added or changed to
         String tmpDesc = "";
         if (sa.hasParam("Colors")) {
             final String colors = sa.getParam("Colors");
             if (colors.equals("ChosenColor")) {
-    
+
                 tmpDesc = CardUtil.getShortColorsString(host.getChosenColor());
             } else {
                 tmpDesc = CardUtil.getShortColorsString(new ArrayList<String>(Arrays.asList(colors.split(","))));
             }
         }
         final String finalDesc = tmpDesc;
-    
+
         // abilities to add to the animated being
         final ArrayList<String> abilities = new ArrayList<String>();
         if (sa.hasParam("Abilities")) {
             abilities.addAll(Arrays.asList(sa.getParam("Abilities").split(",")));
         }
-    
+
         // triggers to add to the animated being
         final ArrayList<String> triggers = new ArrayList<String>();
         if (sa.hasParam("Triggers")) {
             triggers.addAll(Arrays.asList(sa.getParam("Triggers").split(",")));
         }
-    
+
         // static abilities to add to the animated being
         final ArrayList<String> stAbs = new ArrayList<String>();
         if (sa.hasParam("staticAbilities")) {
             stAbs.addAll(Arrays.asList(sa.getParam("staticAbilities").split(",")));
         }
-    
+
         // sVars to add to the animated being
         final ArrayList<String> sVars = new ArrayList<String>();
         if (sa.hasParam("sVars")) {
             sVars.addAll(Arrays.asList(sa.getParam("sVars").split(",")));
         }
-    
+
         final Target tgt = sa.getTarget();
         ArrayList<Card> tgts;
         if (tgt != null) {
@@ -141,12 +141,12 @@ public class AnimateEffect extends AnimateEffectBase {
         } else {
             tgts = AbilityFactory.getDefinedCards(source, sa.getParam("Defined"), sa);
         }
-    
+
         for (final Card c : tgts) {
-    
+
             final long colorTimestamp = doAnimate(c, sa, power, toughness, types, removeTypes,
                     finalDesc, keywords, removeKeywords, hiddenKeywords, timestamp);
-    
+
             // give abilities
             final ArrayList<SpellAbility> addedAbilities = new ArrayList<SpellAbility>();
             if (abilities.size() > 0) {
@@ -158,7 +158,7 @@ public class AnimateEffect extends AnimateEffectBase {
                     c.addSpellAbility(grantedAbility);
                 }
             }
-    
+
             // remove abilities
             final ArrayList<SpellAbility> removedAbilities = new ArrayList<SpellAbility>();
             if (sa.hasParam("OverwriteAbilities") || sa.hasParam("RemoveAllAbilities")) {
@@ -169,7 +169,7 @@ public class AnimateEffect extends AnimateEffectBase {
                     }
                 }
             }
-    
+
             // Grant triggers
             final ArrayList<Trigger> addedTriggers = new ArrayList<Trigger>();
             if (triggers.size() > 0) {
@@ -179,7 +179,7 @@ public class AnimateEffect extends AnimateEffectBase {
                     addedTriggers.add(c.addTrigger(parsedTrigger));
                 }
             }
-    
+
             // suppress triggers from the animated card
             final ArrayList<Trigger> removedTriggers = new ArrayList<Trigger>();
             if (sa.hasParam("OverwriteTriggers") || sa.hasParam("RemoveAllAbilities")) {
@@ -189,7 +189,7 @@ public class AnimateEffect extends AnimateEffectBase {
                     removedTriggers.add(trigger);
                 }
             }
-    
+
             // give static abilities (should only be used by cards to give
             // itself a static ability)
             if (stAbs.size() > 0) {
@@ -198,7 +198,7 @@ public class AnimateEffect extends AnimateEffectBase {
                     c.addStaticAbility(actualAbility);
                 }
             }
-    
+
             // give sVars
             if (sVars.size() > 0) {
                 for (final String s : sVars) {
@@ -206,7 +206,7 @@ public class AnimateEffect extends AnimateEffectBase {
                     c.setSVar(s, actualsVar);
                 }
             }
-    
+
             // suppress static abilities from the animated card
             final ArrayList<StaticAbility> removedStatics = new ArrayList<StaticAbility>();
             if (sa.hasParam("OverwriteStatics") || sa.hasParam("RemoveAllAbilities")) {
@@ -216,7 +216,7 @@ public class AnimateEffect extends AnimateEffectBase {
                     removedStatics.add(stAb);
                 }
             }
-    
+
             // suppress static abilities from the animated card
             final ArrayList<ReplacementEffect> removedReplacements = new ArrayList<ReplacementEffect>();
             if (sa.hasParam("OverwriteReplacements") || sa.hasParam("RemoveAllAbilities")) {
@@ -226,41 +226,41 @@ public class AnimateEffect extends AnimateEffectBase {
                     removedReplacements.add(re);
                 }
             }
-    
+
             // give Remembered
             if (animateRemembered != null) {
                 for (final Object o : AbilityFactory.getDefinedObjects(host, animateRemembered, sa)) {
                     c.addRemembered(o);
                 }
             }
-    
+
             final boolean givesStAbs = (stAbs.size() > 0);
-    
+
             final Command unanimate = new Command() {
                 private static final long serialVersionUID = -5861759814760561373L;
-    
+
                 @Override
                 public void execute() {
                     doUnanimate(c, sa, finalDesc, hiddenKeywords, addedAbilities, addedTriggers,
                             colorTimestamp, givesStAbs, removedAbilities, timestamp);
-    
+
                     // give back suppressed triggers
                     for (final Trigger t : removedTriggers) {
                         t.setSuppressed(false);
                     }
-    
+
                     // give back suppressed static abilities
                     for (final StaticAbility s : removedStatics) {
                         s.setTemporarilySuppressed(false);
                     }
-    
+
                     // give back suppressed replacement effects
                     for (final ReplacementEffect re : removedReplacements) {
                         re.setTemporarilySuppressed(false);
                     }
                 }
             };
-    
+
             if (!permanent) {
                 if (sa.hasParam("UntilEndOfCombat")) {
                     Singletons.getModel().getGame().getEndOfCombat().addUntil(unanimate);
@@ -286,7 +286,7 @@ public class AnimateEffect extends AnimateEffectBase {
     protected String getStackDescription(SpellAbility sa) {
         final Card host = sa.getSourceCard();
         final Map<String, String> svars = host.getSVars();
-    
+
         int power = -1;
         if (sa.hasParam("Power")) {
             power = AbilityFactory.calculateAmount(host, sa.getParam("Power"), sa);
@@ -295,7 +295,7 @@ public class AnimateEffect extends AnimateEffectBase {
         if (sa.hasParam("Toughness")) {
             toughness = AbilityFactory.calculateAmount(host, sa.getParam("Toughness"), sa);
         }
-    
+
         final boolean permanent = sa.hasParam("Permanent");
         final ArrayList<String> types = new ArrayList<String>();
         if (sa.hasParam("Types")) {
@@ -317,9 +317,9 @@ public class AnimateEffect extends AnimateEffectBase {
         if (sa.hasParam("Colors")) {
             colors.addAll(Arrays.asList(sa.getParam("Colors").split(",")));
         }
-    
+
         final StringBuilder sb = new StringBuilder();
-    
+
         final Target tgt = sa.getTarget();
         final List<Card> tgts = tgt != null ? tgt.getTargetCards() :  AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
 
@@ -383,8 +383,8 @@ public class AnimateEffect extends AnimateEffectBase {
         } else {
             sb.append(".");
         }
-     
-    
+
+
         return sb.toString();
     }
 

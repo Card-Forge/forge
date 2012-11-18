@@ -19,14 +19,14 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
 public class AttachEffect extends SpellEffect {
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
     public void resolve(SpellAbility sa) {
-        if( sa.getSourceCard().isAura() )
-        {
+        if (sa.getSourceCard().isAura()) {
+
             // The Spell_Permanent (Auras) version of this AF needs to
             // move the card into play before Attaching
             sa.getSourceCard().addController(sa.getActivatingPlayer());
@@ -73,7 +73,7 @@ public class AttachEffect extends SpellEffect {
         for (final Object o : targets) {
             sb.append(o).append(" ");
         }
-    
+
         return sb.toString();
     }
 

@@ -12,24 +12,24 @@ import forge.game.phase.ExtraTurn;
 import forge.game.player.Player;
 
 public class AddTurnEffect extends SpellEffect {
-    
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
-    
+
         final StringBuilder sb = new StringBuilder();
         final int numTurns = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumTurns"), sa);
-    
+
         List<Player> tgtPlayers = getTargetPlayers(sa);
-    
-        
+
+
         for (final Player player : tgtPlayers) {
             sb.append(player).append(" ");
         }
-    
+
         sb.append("takes ");
         sb.append(numTurns > 1 ? numTurns : "an");
         sb.append(" extra turn");
-        
+
         if (numTurns > 1) {
             sb.append("s");
         }

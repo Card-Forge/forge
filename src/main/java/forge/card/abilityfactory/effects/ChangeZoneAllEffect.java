@@ -17,8 +17,8 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class ChangeZoneAllEffect extends SpellEffect {
-    
-    
+
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         // TODO build Stack Description will need expansion as more cards are added
@@ -101,7 +101,7 @@ public class ChangeZoneAllEffect extends SpellEffect {
         // if Shuffle parameter exists, and any amount of cards were owned by
         // that player, then shuffle that library
         if (sa.hasParam("Shuffle")) {
-            for( Player p : Singletons.getModel().getGame().getPlayers()) {
+            for (Player p : Singletons.getModel().getGame().getPlayers()) {
                 if (Iterables.any(cards, CardPredicates.isOwner(p))) {
                     p.shuffle();
                 }
