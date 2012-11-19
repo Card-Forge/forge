@@ -7939,10 +7939,40 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
             return damage;
         }
+        
+        for (final Card ca : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
+            for (final ReplacementEffect re : ca.getReplacementEffects()) {
+                HashMap<String, String> params = re.getMapParams();
+                if (!"DamageDone".equals(params.get("Event")) || !params.containsKey("PreventionEffect")) {
+                    continue;
+                }
+                if (params.containsKey("ValidSource")
+                        && !source.isValid(params.get("ValidSource"), ca.getController(), ca)) {
+                    continue;
+                }
+                if (params.containsKey("ValidTarget")
+                        && !this.isValid(params.get("ValidTarget"), ca.getController(), ca)) {
+                    continue;
+                }
+                if (params.containsKey("IsCombat")) {
+                    if (params.get("IsCombat").equals("True")) {
+                        if (!isCombat) {
+                            continue;
+                        }
+                    } else {
+                        if (isCombat) {
+                            continue;
+                        }
+                    }
+
+                }
+                return 0;
+            }
+        }
 
         int restDamage = damage - possiblePrvenetion;
 
-        restDamage = this.staticDamagePrevention(restDamage, source, isCombat, true);
+        restDamage = this.staticDamagePrevention(restDamage, source, isCombat);
 
         return restDamage;
     }
@@ -7963,7 +7993,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a int.
      */
     @Override
-    public final int staticDamagePrevention(final int damageIn, final Card source, final boolean isCombat, boolean predict) {
+    public final int staticDamagePrevention(final int damageIn, final Card source, final boolean isCombat) {
 
         if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
             return damageIn;
@@ -8033,36 +8063,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             for (final StaticAbility stAb : staticAbilities) {
                 restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage, isCombat);
             }
-            if (!predict) {
-                continue;
-            }
-            for (final ReplacementEffect re : ca.getReplacementEffects()) {
-                HashMap<String, String> params = re.getMapParams();
-                if (!"DamageDone".equals(params.get("Event")) || !params.containsKey("PreventionEffect")) {
-                    continue;
-                }
-                if (params.containsKey("ValidSource")
-                        && !source.isValid(params.get("ValidSource"), ca.getController(), ca)) {
-                    continue;
-                }
-                if (params.containsKey("ValidTarget")
-                        && !this.isValid(params.get("ValidTarget"), ca.getController(), ca)) {
-                    continue;
-                }
-                if (params.containsKey("IsCombat")) {
-                    if (params.get("IsCombat").equals("True")) {
-                        if (!isCombat) {
-                            continue;
-                        }
-                    } else {
-                        if (isCombat) {
-                            continue;
-                        }
-                    }
-
-                }
-                return 0;
-            }
         }
 
         // specific Cards
@@ -8120,7 +8120,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             return 0;
         }
 
-        restDamage = this.staticDamagePrevention(restDamage, source, isCombat, false);
+        restDamage = this.staticDamagePrevention(restDamage, source, isCombat);
 
         if (restDamage == 0) {
             return 0;
