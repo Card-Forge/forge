@@ -749,7 +749,7 @@ public class ComputerUtil {
         } // end of cost parts loop
 
         //check for phyrexian mana
-        if (!cost.isPaid() && cost.containsPhyrexianMana() && ai.getLife() > 5) {
+        if (!cost.isPaid() && cost.containsPhyrexianMana() && ai.getLife() > 5 && ai.canPayLife(2)) {
             cost.payPhyrexian();
             if (!test) {
                 ai.payLife(2, sa.getSourceCard());

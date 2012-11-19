@@ -169,7 +169,7 @@ public class InputPayManaCost extends InputPayMana {
     public final void selectPlayer(final Player player) {
 
         if (player.isHuman()) {
-            if (this.manaCost.payPhyrexian()) {
+            if (player.canPayLife(this.phyLifeToLose + 2) && manaCost.payPhyrexian()) {
                 this.phyLifeToLose += 2;
             }
 
