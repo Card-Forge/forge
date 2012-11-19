@@ -3,8 +3,8 @@ ManaCost:3 W
 Types:Enchantment
 Text:no text
 R:Event$ Draw | ActiveZones$ Battlefield | ValidPlayer$ You | Optional$ True | ReplaceWith$ Counter | Description$ If you would draw a card, you may put a study counter on CARDNAME instead.
-A:AB$Draw | Cost$ SubCounter<3/STUDY> Sac<1/CARDNAME> | NumCards$ 7 | SpellDescription$ Draw seven cards.
-SVar:Counter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterNum$ 1 | CounterType$ STUDY
+A:AB$ Draw | Cost$ SubCounter<3/STUDY> Sac<1/CARDNAME> | NumCards$ 7 | SpellDescription$ Draw seven cards.
+SVar:Counter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterNum$ 1 | CounterType$ STUDY
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pursuit_of_knowledge.jpg
