@@ -756,12 +756,6 @@ public class CombatUtil {
             return false;
         }
 
-        if (Singletons.getModel().getGame().isCardInPlay("Shifting Sliver")) {
-            if (attacker.isType("Sliver") && !blocker.isType("Sliver")) {
-                return false;
-            }
-        }
-
         return true;
     } // canBlock()
 
