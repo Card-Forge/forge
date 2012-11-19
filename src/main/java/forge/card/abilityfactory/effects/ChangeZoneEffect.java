@@ -653,7 +653,7 @@ public class ChangeZoneEffect extends SpellEffect {
                 if (destination.equals(ZoneType.Library)) {
                     // do not shuffle the library once we have placed a fetched
                     // card on top.
-                    if (origin.contains(ZoneType.Library) && (i < 1) && "False".equals(sa.getParam("Shuffle"))) {
+                    if (origin.contains(ZoneType.Library) && (i < 1) && !"False".equals(sa.getParam("Shuffle"))) {
                         player.shuffle();
                     }
                     movedCard = Singletons.getModel().getGame().getAction().moveToLibrary(c, libraryPos);
