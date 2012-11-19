@@ -1027,6 +1027,9 @@ public class CombatUtil {
     public static int damageIfUnblocked(final Card attacker, final Player attacked, final Combat combat) {
         int damage = attacker.getNetCombatDamage();
         int sum = 0;
+        if (!attacked.canLoseLife()) {
+            return 0;
+        }
         damage += CombatUtil.predictPowerBonusOfAttacker(attacker, null, combat);
         if (!attacker.hasKeyword("Infect")) {
             sum = attacked.predictDamage(damage, attacker, true);
