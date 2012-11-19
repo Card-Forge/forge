@@ -51,37 +51,36 @@ public class ReplacementHandler {
         } else {
             decider = ((Card) affected).getController();
         }
-        
-        
-        if(runParams.get("Event").equals("Moved")) {
-            ReplacementResult res = run(runParams,ReplacementLayer.Control,decider);
-            if(res != ReplacementResult.NotReplaced) {
+
+        if (runParams.get("Event").equals("Moved")) {
+            ReplacementResult res = run(runParams, ReplacementLayer.Control, decider);
+            if (res != ReplacementResult.NotReplaced) {
                 return res;
             }
-            res = run(runParams,ReplacementLayer.Copy,decider);
-            if(res != ReplacementResult.NotReplaced) {
+            res = run(runParams, ReplacementLayer.Copy, decider);
+            if (res != ReplacementResult.NotReplaced) {
                 return res;
             }
-            res = run(runParams,ReplacementLayer.Other,decider);
-            if(res != ReplacementResult.NotReplaced) {
+            res = run(runParams, ReplacementLayer.Other, decider);
+            if (res != ReplacementResult.NotReplaced) {
                 return res;
             }
-            res = run(runParams,ReplacementLayer.None,decider);
-            if(res != ReplacementResult.NotReplaced) {
+            res = run(runParams, ReplacementLayer.None, decider);
+            if (res != ReplacementResult.NotReplaced) {
                 return res;
             }
         }
         else {
-            ReplacementResult res = run(runParams,ReplacementLayer.None,decider);
-            if(res != ReplacementResult.NotReplaced) {
+            ReplacementResult res = run(runParams, ReplacementLayer.None, decider);
+            if (res != ReplacementResult.NotReplaced) {
                 return res;
             }
         }
-        
+
         return ReplacementResult.NotReplaced;
-        
+
     }
-    
+
     /**
      * 
      * Runs any applicable replacement effects.
@@ -91,7 +90,7 @@ public class ReplacementHandler {
      * @return true if the event was replaced.
      */
     public ReplacementResult run(final HashMap<String, Object> runParams, final ReplacementLayer layer,final Player decider) {
-        
+
         final List<ReplacementEffect> possibleReplacers = new ArrayList<ReplacementEffect>();
         // Round up Non-static replacement effects ("Until EOT," or
         // "The next time you would..." etc)
@@ -108,7 +107,7 @@ public class ReplacementHandler {
                     if (!replacementEffect.hasRun()
                             && replacementEffect.getLayer() == layer
                             && replacementEffect.requirementsCheck()
-                            && replacementEffect.canReplace(runParams) 
+                            && replacementEffect.canReplace(runParams)
                             && !possibleReplacers.contains(replacementEffect)
                             && replacementEffect.zonesCheck(Singletons.getModel().getGame().getZoneOf(crd))) {
                         possibleReplacers.add(replacementEffect);
@@ -186,8 +185,7 @@ public class ReplacementHandler {
             effectSA = abilityFactory.getAbility(effectAbString, replacementEffect.getHostCard());
 
             SpellAbility tailend = effectSA;
-            do
-            {
+            do {
                 replacementEffect.setReplacingObjects(runParams, tailend);
                 tailend = tailend.getSubAbility();
             } while(tailend != null);
@@ -195,8 +193,7 @@ public class ReplacementHandler {
         else if (replacementEffect.getOverridingAbility() != null) {
             effectSA = replacementEffect.getOverridingAbility();
             SpellAbility tailend = effectSA;
-            do
-            {
+            do {
                 replacementEffect.setReplacingObjects(runParams, tailend);
                 tailend = tailend.getSubAbility();
             } while(tailend != null);
@@ -234,7 +231,7 @@ public class ReplacementHandler {
             }
         }
 
-        Player player = replacementEffect.getHostCard().getController(); 
+        Player player = replacementEffect.getHostCard().getController();
         if (player.isHuman()) {
             Singletons.getModel().getGame().getAction().playSpellAbilityNoStack(effectSA, false);
         } else {
