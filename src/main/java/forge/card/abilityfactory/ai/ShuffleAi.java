@@ -31,14 +31,12 @@ public class ShuffleAi extends SpellAiLogic {
         return shuffleTargetAI(/*sa, false, false*/);
     }
 
-    
-    
+
     private boolean shuffleTargetAI(/*final SpellAbility sa, final boolean primarySA, final boolean mandatory*/) {
         return false;
-        
-        
-        
-        
+
+
+
     } // shuffleTargetAI()
 
     @Override

@@ -6,7 +6,7 @@ import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 
 public class UntapAllAi extends SpellAiLogic {
-    
+
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
         return true;

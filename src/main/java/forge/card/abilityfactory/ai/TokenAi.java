@@ -42,7 +42,7 @@ public class TokenAi extends SpellAiLogic {
      * @param af
      *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      */
-    private void readParameters(final SpellAbility mapParams ) {
+    private void readParameters(final SpellAbility mapParams) {
         String[] keywords;
 
         if (mapParams.hasParam("TokenKeywords")) {
@@ -93,7 +93,7 @@ public class TokenAi extends SpellAiLogic {
             }
         }
 
-        PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler(); 
+        PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler();
         // Don't generate tokens without haste before main 2 if possible
         if (ph.getPhase().isBefore(PhaseType.MAIN2)
                 && ph.isPlayerTurn(ai) && !haste

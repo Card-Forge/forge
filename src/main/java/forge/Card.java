@@ -7192,7 +7192,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             final List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Graveyard);
             if (!list.contains(this)) {
                 return false;
-            }            
+            }
         }
         else {
             if (property.equals("ChosenType")) {
@@ -8059,7 +8059,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                             continue;
                         }
                     }
-                    
+
                 }
                 return 0;
             }

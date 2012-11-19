@@ -8,19 +8,19 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public abstract class RevealAiBase extends SpellAiLogic {
-    
+
     protected  boolean revealHandTargetAI(final Player ai, final SpellAbility sa/*, final boolean primarySA, final boolean mandatory*/) {
         final Target tgt = sa.getTarget();
-    
+
         Player opp = ai.getOpponent();
         final int humanHandSize = opp.getCardsIn(ZoneType.Hand).size();
-    
+
         if (tgt != null) {
             // ability is targeted
             tgt.resetTargets();
-    
+
             final boolean canTgtHuman = opp.canBeTargetedBy(sa);
-    
+
             if (!canTgtHuman || (humanHandSize == 0)) {
                 return false;
             } else {
@@ -29,7 +29,7 @@ public abstract class RevealAiBase extends SpellAiLogic {
         } else {
             // if it's just defined, no big deal
         }
-    
+
         return true;
     } // revealHandTargetAI()
 

@@ -18,7 +18,7 @@ import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
 public class TapAllAi extends SpellAiLogic {
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */

@@ -15,8 +15,8 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
-public class SacrificeAllAi extends SpellAiLogic
-{
+public class SacrificeAllAi extends SpellAiLogic {
+
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
         // AI needs to be expanded, since this function can be pretty complex
@@ -37,9 +37,9 @@ public class SacrificeAllAi extends SpellAiLogic
             valid = valid.replace("X", Integer.toString(xPay));
         }
 
-        List<Card> humanlist = 
+        List<Card> humanlist =
                 CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
-        List<Card> computerlist = 
+        List<Card> computerlist =
                 CardLists.getValidCards(computerlist = ai.getCardsIn(ZoneType.Battlefield), valid.split(","), source.getController(), source);
 
         if (abCost != null) {

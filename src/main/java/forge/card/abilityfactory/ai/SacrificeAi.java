@@ -30,7 +30,7 @@ public class SacrificeAi extends SpellAiLogic {
             num = (num == null) ? "1" : num;
             final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), num, sa);
 
-            List<Card> list = 
+            List<Card> list =
                     CardLists.getValidCards(ai.getOpponent().getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
             if (list.size() == 0) {
@@ -115,7 +115,7 @@ public class SacrificeAi extends SpellAiLogic {
                 amount = Math.min(ComputerUtil.determineLeftoverMana(sa, ai), amount);
             }
 
-            List<Card> humanList = 
+            List<Card> humanList =
                     CardLists.getValidCards(opp.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
 
             // Since all of the cards have remAIDeck:True, I enabled 1 for 1
@@ -124,7 +124,7 @@ public class SacrificeAi extends SpellAiLogic {
                 return false;
             }
         } else if (defined.equals("You")) {
-            List<Card> computerList = 
+            List<Card> computerList =
                     CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), valid.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
             for (Card c : computerList) {
                 if (!c.getSVar("SacMe").equals("") || CardFactoryUtil.evaluateCreature(c) <= 135) {

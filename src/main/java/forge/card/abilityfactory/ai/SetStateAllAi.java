@@ -13,7 +13,7 @@ public class SetStateAllAi extends SpellAiLogic {
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         return true;
     }
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
      */
@@ -27,7 +27,7 @@ public class SetStateAllAi extends SpellAiLogic {
 
         return true;
     }
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
@@ -35,5 +35,5 @@ public class SetStateAllAi extends SpellAiLogic {
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         return true;
     }
-    
+
 }

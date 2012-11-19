@@ -11,7 +11,7 @@ import forge.game.player.Player;
 import forge.util.MyRandom;
 
 public class RevealHandAi extends RevealAiBase {
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */

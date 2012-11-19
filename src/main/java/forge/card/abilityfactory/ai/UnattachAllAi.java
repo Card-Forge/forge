@@ -18,7 +18,6 @@ import forge.util.MyRandom;
 
 public class UnattachAllAi extends SpellAiLogic {
 
-    
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -59,7 +58,7 @@ public class UnattachAllAi extends SpellAiLogic {
         return chance;
     }
 
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */
