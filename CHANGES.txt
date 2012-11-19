@@ -63,6 +63,15 @@ Fixes/Features:
 - added code to allow AI to make Charm choice
 - modified inputUntapUpToNType so same card cannot be chosen more than once
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Sound System: improved the performance of the sound system by synchronizing certain sounds that tend to occur multiple times in rapid succession (damage, life loss, bury a creature) so that only one can play at a time.
+- CheckStyle.
+- Added some LQ pic URLs.
+- added ability to loop over defined cards to RepeatEachEffect. added InGraveyard to Card.hasProperty.
+- Added a LQ pic URL.
+- Fixed Steel Hellkite.
+- ChangeZoneAll with destination Library will now let you choose the order.
+- Fixed spell description for Hypnotic Cloud
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -78,6 +87,9 @@ Kamahl's Sledge
 Crypt Rats
 Crimson Hellkite
 Equal Treatment
+Terastodon
+Demonfire
+Mirror of Fate
 
 
 end
