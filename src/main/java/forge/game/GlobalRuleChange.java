@@ -30,7 +30,8 @@ public enum GlobalRuleChange {
     noPrevention ("Damage can't be prevented."),
     onlyOneAttackerATurn ("No more than one creature can attack each turn."),
     onlyOneAttackerACombat ("No more than one creature can attack each combat."),
-    onlyOneBlocker ("No more than one creature can block each combat.");
+    onlyOneBlocker ("No more than one creature can block each combat."),
+    toughnessAssignsDamage ("Each creature assigns combat damage equal to its toughness rather than its power.");
     
     private final String ruleText;
     

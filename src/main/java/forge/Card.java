@@ -4613,7 +4613,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             return 0;
         }
 
-        if (Singletons.getModel().getGame().isCardInPlay("Doran, the Siege Tower")) {
+        if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.toughnessAssignsDamage)) {
             return this.getNetDefense();
         }
         return this.getNetAttack();

@@ -1347,7 +1347,7 @@ public class CombatUtil {
         }
 
         int defenderDamage = defender.getNetAttack() + CombatUtil.predictPowerBonusOfBlocker(attacker, defender, true);
-        if (Singletons.getModel().getGame().isCardInPlay("Doran, the Siege Tower")) {
+        if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.toughnessAssignsDamage)) {
             defenderDamage = defender.getNetDefense() + CombatUtil.predictToughnessBonusOfBlocker(attacker, defender, true);
         }
 
@@ -2258,7 +2258,7 @@ public class CombatUtil {
                 + CombatUtil.predictPowerBonusOfBlocker(attacker, defender, withoutAbilities);
         int attackerDamage = attacker.getNetAttack()
                 + CombatUtil.predictPowerBonusOfAttacker(attacker, defender, combat);
-        if (Singletons.getModel().getGame().isCardInPlay("Doran, the Siege Tower")) {
+        if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.toughnessAssignsDamage)) {
             defenderDamage = defender.getNetDefense()
                     + CombatUtil.predictToughnessBonusOfBlocker(attacker, defender, withoutAbilities);
             attackerDamage = attacker.getNetDefense()
@@ -2406,7 +2406,7 @@ public class CombatUtil {
                 + CombatUtil.predictPowerBonusOfBlocker(attacker, defender, withoutAbilities);
         int attackerDamage = attacker.getNetAttack()
                 + CombatUtil.predictPowerBonusOfAttacker(attacker, defender, combat);
-        if (Singletons.getModel().getGame().isCardInPlay("Doran, the Siege Tower")) {
+        if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.toughnessAssignsDamage)) {
             defenderDamage = defender.getNetDefense()
                     + CombatUtil.predictToughnessBonusOfBlocker(attacker, defender, withoutAbilities);
             attackerDamage = attacker.getNetDefense()
