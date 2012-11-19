@@ -15,6 +15,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.gui.GuiChoose;
 
 public class ChangeZoneAllEffect extends SpellEffect {
 
@@ -62,10 +63,12 @@ public class ChangeZoneAllEffect extends SpellEffect {
 
         final String remember = sa.getParam("RememberChanged");
 
-        // I don't know if library position is necessary. It's here if it is,
-        // just in case
-        final int libraryPos = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition"))
-                : 0;
+        final int libraryPos = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : 0;
+        
+        if (sa.getActivatingPlayer().isHuman() && destination.equals(ZoneType.Library)) {
+            cards = GuiChoose.getOrderChoices("Choose order of cards to put into the library", "Put first", 0, cards, null, null);
+        }
+        
         for (final Card c : cards) {
             if (destination.equals(ZoneType.Battlefield)) {
                 // Auras without Candidates stay in their current location
