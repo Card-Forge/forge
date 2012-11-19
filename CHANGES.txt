@@ -24,7 +24,7 @@ A recent contribution to the code base should fix some of the bugs that people n
 
 We are now using a different system for our snapshot and beta releases. Unfortunately, this new system builds a jar file which does not accurately display the SVN revision number.
 
-Forge may not be fully java 7 compatible at this time. We recommend that people downgrade to java 6.
+Forge is likely to be compatible with Java 7 at this time. Some people have used forge with Java 7 and have not reported any problems that are related to Java 7. If you would like to upgrade to Java 7 and have held off because of Forge then you may upgrade as we do not think that it will cause an incompatibility type of problem at this time. We will continue to try to maintain compatibility with Java 6 for the foreseeable future.
 
 --
 
