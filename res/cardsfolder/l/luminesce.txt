@@ -3,7 +3,7 @@ ManaCost:W
 Types:Instant
 Text:no text
 A:SP$ Effect | Cost$ W | Name$ Luminesce Effect | StaticAbilities$ STPrevent | SpellDescription$ Prevent all damage that black sources and red sources would deal this turn.
-SVar:STPrevent:Mode$ PreventDamage | Source$ Card.Black,Card.Red | Description$ Prevent all damage that black sources and red sources would deal this turn.
+SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Source$ Card.Black,Card.Red | Description$ Prevent all damage that black sources and red sources would deal this turn.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon

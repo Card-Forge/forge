@@ -11,7 +11,7 @@ public enum EMenuGroup { /** */
     SANCTIONED ("Sanctioned Formats"), /** */
     QUEST ("Quest Mode"), /** */
     GAUNTLET ("Gauntlets"), /** */
-    MULTIPLAYER ("Multiplayer"), /** */
+    VARIANT ("Variant"), /** */
     SETTINGS ("Game Settings");
 
     private final String strTitle;

@@ -46,6 +46,10 @@ public final class CardRules {
     private String toughness = null;
 
     private String loyalty = null;
+    
+    //Vanguard avatar modifiers
+    private Integer life = null;
+    private Integer hand = null;
 
     Map<String, CardInSet> setsPrinted = null;
 
@@ -256,6 +260,15 @@ public final class CardRules {
             this.iToughness = StringUtils.isNumeric(this.toughness) ? Integer.parseInt(this.toughness) : 0;
         } else if (this.getType().isPlaneswalker()) {
             this.loyalty = this.characteristics.getPtLine();
+        } else if (this.getType().isVanguard()) {
+            String pt = this.characteristics.getPtLine();
+            final int slashPos = this.characteristics.getPtLine() == null ? -1 : this.characteristics.getPtLine()
+                    .indexOf('/');
+            if (slashPos == -1) {
+                throw new RuntimeException(String.format("Vanguard '%s' has bad hand/life stats", this.getName()));
+            }
+            this.hand = Integer.parseInt(pt.substring(0,pt.indexOf('/')));
+            this.life = Integer.parseInt(pt.substring(pt.indexOf('/')+1));
         }
 
         if (this.characteristics.getSetsData().isEmpty()) {
@@ -386,6 +399,22 @@ public final class CardRules {
     public List<String> getKeywords() {
         return characteristics.getKeywords();
     }
+
+    /**
+     * @return the hand
+     */
+    public Integer getHand() {
+        return hand;
+    }
+
+    /**
+     * @return the life
+     */
+    public Integer getLife() {
+        return life;
+    }
+
+
 }
 
 

@@ -11,10 +11,10 @@ SVar:WarChoice:DB$ Effect | Name$ Archangel War Effect | ChoiceDescription$ War 
 SVar:PeaceChoice:DB$ Effect | Name$ Archangel Peace Effect | ChoiceDescription$ Peace | Duration$ UntilHostLeavesPlay | RememberEffect$ True
 SVar:Attacking:DB$ Effect | Name$ Archangel War Effect | ChoiceDescription$ War | EffectOwner$ Opponent | Duration$ UntilHostLeavesPlay | RememberEffect$ True
 SVar:Defensive:DB$ Effect | Name$ Archangel Peace Effect | ChoiceDescription$ Peace | EffectOwner$ Opponent | Duration$ UntilHostLeavesPlay | RememberEffect$ True
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 3 | CheckSVar$ WarYou | SVarCompare$ GE1 | References$ WarYou
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddToughness$ 3 | CheckSVar$ PeaceYou | SVarCompare$ GE1 | References$ PeaceYou
-S:Mode$ Continuous | Affected$ Creature.YouDontCtrl | AddPower$ 3 | CheckSVar$ WarOpp | SVarCompare$ GE1 | References$ WarOpp
-S:Mode$ Continuous | Affected$ Creature.YouDontCtrl | AddToughness$ 3 | CheckSVar$ PeaceOpp | SVarCompare$ GE1 | References$ PeaceOpp
+S:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddPower$ 3 | CheckSVar$ WarYou | SVarCompare$ GE1 | References$ WarYou
+S:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddToughness$ 3 | CheckSVar$ PeaceYou | SVarCompare$ GE1 | References$ PeaceYou
+S:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouDontCtrl | AddPower$ 3 | CheckSVar$ WarOpp | SVarCompare$ GE1 | References$ WarOpp
+S:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouDontCtrl | AddToughness$ 3 | CheckSVar$ PeaceOpp | SVarCompare$ GE1 | References$ PeaceOpp
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Defined$ Self | Execute$ DBCleanup | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:WarYou:Remembered$Valid Card.namedArchangel War Effect+YouCtrl

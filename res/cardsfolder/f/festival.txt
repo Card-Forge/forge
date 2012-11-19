@@ -3,7 +3,7 @@ ManaCost:W
 Types:Instant
 Text:Cast Festival only during an opponent's upkeep.
 A:SP$ Effect | Cost$ W | Name$ Festival Effect | StaticAbilities$ KWPump | OpponentTurn$ True | ActivationPhases$ Upkeep | SpellDescription$ Creatures can't attack this turn.
-SVar:KWPump:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ HIDDEN CARDNAME can't attack. | Description$ Creatures can't attack this turn.
+SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature | AddHiddenKeyword$ HIDDEN CARDNAME can't attack. | Description$ Creatures can't attack this turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/festival.jpg

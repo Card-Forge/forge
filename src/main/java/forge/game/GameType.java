@@ -32,6 +32,12 @@ public enum GameType {
     Commander(false, 100, 100, true),
     /** The Quest. */
     Quest(true, 40),
+    /** The Vanguard. */
+    Vanguard(false, 60),
+    /** The Planechase. */
+    Planechase(false, 60),
+    /** The Archenemy. */
+    Archenemy(false, 60),    
     /** */
     Gauntlet(true, 40);
 

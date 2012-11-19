@@ -3,7 +3,7 @@ ManaCost:3 G
 Types:Instant
 Text:no text
 A:SP$ Effect | Cost$ 3 G | Name$ Chameleon Blur Effect | StaticAbilities$ STPrevent | AILogic$ Fog | SpellDescription$ Prevent all damage that creatures would deal to players this turn.
-SVar:STPrevent:Mode$ PreventDamage | Source$ Creature | Target$ Player | Description$ Prevent all damage that creatures would deal to players this turn.
+SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Source$ Creature | Target$ Player | Description$ Prevent all damage that creatures would deal to players this turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chameleon_blur.jpg

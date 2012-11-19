@@ -4,7 +4,7 @@ Types:Instant
 Text:no text
 K:Flashback R
 A:SP$ Effect | Cost$ 1 R | Name$ Flaring Pain Effect | StaticAbilities$ STCantPrevent | SpellDescription$ Damage can't be prevented this turn.
-SVar:STCantPrevent:Mode$ Continuous | GlobalRule$ Damage can't be prevented. | Description$ Damage can't be prevented.
+SVar:STCantPrevent:Mode$ Continuous | EffectZone$ Command | GlobalRule$ Damage can't be prevented. | Description$ Damage can't be prevented.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Rarity:Common

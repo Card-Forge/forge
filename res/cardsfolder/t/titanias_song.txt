@@ -5,7 +5,7 @@ Text:no text
 S:Mode$ Continuous | Affected$ Artifact.nonCreature | SetPower$ AffectedX | SetToughness$ AffectedX | AddType$ Creature | RemoveAllAbilities$ True | Description$ Each noncreature artifact is an artifact creature with power and toughness each equal to its converted mana cost.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigEffect | Static$ True | TriggerDescription$ If CARDNAME leaves the battlefield, this effect continues until end of turn.
 SVar:TrigEffect:AB$ Effect | Cost$ 0 | Name$ Titania's Song Effect | StaticAbilities$ KWAnimateAll | SVars$ AffectedX | References$ AffectedX
-SVar:KWAnimateAll:Mode$ Continuous | Affected$ Artifact.nonCreature | SetPower$ AffectedX | SetToughness$ AffectedX | AddType$ Creature | RemoveAllAbilities$ True | Description$ Each noncreature artifact is an artifact creature with power and toughness each equal to its converted mana cost.
+SVar:KWAnimateAll:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Artifact.nonCreature | SetPower$ AffectedX | SetToughness$ AffectedX | AddType$ Creature | RemoveAllAbilities$ True | Description$ Each noncreature artifact is an artifact creature with power and toughness each equal to its converted mana cost.
 SVar:AffectedX:Count$CardManaCost
 SVar:PlayMain1:TRUE
 SVar:RemRandomDeck:True

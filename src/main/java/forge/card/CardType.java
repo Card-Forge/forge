@@ -203,6 +203,15 @@ public final class CardType implements Comparable<CardType> {
     public boolean isSorcery() {
         return this.coreType.contains(CardCoreType.Sorcery);
     }
+    
+    /**
+     * Checks if is vanguard.
+     * 
+     * @return true if vanguard
+     */
+    public boolean isVanguard() {
+        return this.coreType.contains(CardCoreType.Vanguard);
+    }
 
     /**
      * Checks if is enchantment.

@@ -1,4 +1,4 @@
-package forge.gui.home.multiplayer;
+package forge.gui.home.variant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,7 +103,7 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
      */
     @Override
     public EMenuGroup getGroupEnum() {
-        return EMenuGroup.MULTIPLAYER;
+        return EMenuGroup.VARIANT;
     }
 
     /* (non-Javadoc)

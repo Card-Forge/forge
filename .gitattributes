@@ -405,6 +405,7 @@ res/cardsfolder/a/arcbound_crusher.txt svneol=native#text/plain
 res/cardsfolder/a/arcbound_hybrid.txt svneol=native#text/plain
 res/cardsfolder/a/arcbound_lancer.txt svneol=native#text/plain
 res/cardsfolder/a/arcbound_overseer.txt svneol=native#text/plain
+res/cardsfolder/a/arcbound_overseer_avatar.txt -text
 res/cardsfolder/a/arcbound_ravager.txt svneol=native#text/plain
 res/cardsfolder/a/arcbound_reclaimer.txt svneol=native#text/plain
 res/cardsfolder/a/arcbound_slith.txt svneol=native#text/plain
@@ -512,8 +513,10 @@ res/cardsfolder/a/ashenmoor_liege.txt svneol=native#text/plain
 res/cardsfolder/a/ashes_of_the_fallen.txt svneol=native#text/plain
 res/cardsfolder/a/ashes_to_ashes.txt svneol=native#text/plain
 res/cardsfolder/a/ashling_the_extinguisher.txt -text
+res/cardsfolder/a/ashling_the_pilgrim_avatar.txt -text
 res/cardsfolder/a/ashlings_prerogative.txt -text
 res/cardsfolder/a/ashmouth_hound.txt -text
+res/cardsfolder/a/ashnod.txt -text
 res/cardsfolder/a/ashnods_altar.txt svneol=native#text/plain
 res/cardsfolder/a/ashnods_battle_gear.txt svneol=native#text/plain
 res/cardsfolder/a/ashnods_cylix.txt -text
@@ -746,6 +749,7 @@ res/cardsfolder/b/barren_glory.txt svneol=native#text/plain
 res/cardsfolder/b/barren_moor.txt svneol=native#text/plain
 res/cardsfolder/b/barrenton_cragtreads.txt svneol=native#text/plain
 res/cardsfolder/b/barrenton_medic.txt svneol=native#text/plain
+res/cardsfolder/b/barrin.txt -text
 res/cardsfolder/b/barrin_master_wizard.txt svneol=native#text/plain
 res/cardsfolder/b/barrins_codex.txt svneol=native#text/plain
 res/cardsfolder/b/barrins_unmaking.txt -text
@@ -878,6 +882,7 @@ res/cardsfolder/b/biorhythm.txt svneol=native#text/plain
 res/cardsfolder/b/birchlore_rangers.txt svneol=native#text/plain
 res/cardsfolder/b/bird_maiden.txt svneol=native#text/plain
 res/cardsfolder/b/birds_of_paradise.txt svneol=native#text/plain
+res/cardsfolder/b/birds_of_paradise_avatar.txt -text
 res/cardsfolder/b/birthing_pod.txt -text
 res/cardsfolder/b/biting_tether.txt svneol=native#text/plain
 res/cardsfolder/b/bitter_ordeal.txt svneol=native#text/plain
@@ -1635,6 +1640,7 @@ res/cardsfolder/c/chrome_steed.txt svneol=native#text/plain
 res/cardsfolder/c/chromescale_drake.txt svneol=native#text/plain
 res/cardsfolder/c/chromium.txt svneol=native#text/plain
 res/cardsfolder/c/chronatog.txt svneol=native#text/plain
+res/cardsfolder/c/chronatog_avatar.txt -text
 res/cardsfolder/c/chronatog_totem.txt svneol=native#text/plain
 res/cardsfolder/c/chronic_flooding.txt -text
 res/cardsfolder/c/chronomantic_escape.txt -text
@@ -1999,6 +2005,7 @@ res/cardsfolder/c/crossbow_infantry.txt svneol=native#text/plain
 res/cardsfolder/c/crosstown_courier.txt -text
 res/cardsfolder/c/crossway_vampire.txt -text
 res/cardsfolder/c/crosswinds.txt svneol=native#text/plain
+res/cardsfolder/c/crovax.txt -text
 res/cardsfolder/c/crovax_ascendant_hero.txt svneol=native#text/plain
 res/cardsfolder/c/crovax_the_cursed.txt -text svneol=unset#text/plain
 res/cardsfolder/c/crowd_favorites.txt svneol=native#text/plain
@@ -2203,6 +2210,7 @@ res/cardsfolder/d/daru_warchief.txt svneol=native#text/plain
 res/cardsfolder/d/daunting_defender.txt svneol=native#text/plain
 res/cardsfolder/d/dauntless_dourbark.txt svneol=native#text/plain
 res/cardsfolder/d/dauntless_escort.txt svneol=native#text/plain
+res/cardsfolder/d/dauntless_escort_avatar.txt -text
 res/cardsfolder/d/dauthi_cutthroat.txt svneol=native#text/plain
 res/cardsfolder/d/dauthi_embrace.txt svneol=native#text/plain
 res/cardsfolder/d/dauthi_ghoul.txt svneol=native#text/plain
@@ -2456,6 +2464,7 @@ res/cardsfolder/d/diabolic_servitude.txt -text svneol=unset#text/plain
 res/cardsfolder/d/diabolic_tutor.txt svneol=native#text/plain
 res/cardsfolder/d/diabolic_vision.txt svneol=native#text/plain
 res/cardsfolder/d/diamond_faerie.txt svneol=native#text/plain
+res/cardsfolder/d/diamond_faerie_avatar.txt -text
 res/cardsfolder/d/diamond_kaleidoscope.txt svneol=native#text/plain
 res/cardsfolder/d/diamond_valley.txt svneol=native#text/plain
 res/cardsfolder/d/didgeridoo.txt svneol=native#text/plain
@@ -2852,7 +2861,9 @@ res/cardsfolder/e/eiganjo_free_riders.txt svneol=native#text/plain
 res/cardsfolder/e/eightfold_maze.txt svneol=native#text/plain
 res/cardsfolder/e/ekundu_griffin.txt svneol=native#text/plain
 res/cardsfolder/e/el_hajjaj.txt svneol=native#text/plain
+res/cardsfolder/e/eladamri.txt -text
 res/cardsfolder/e/eladamri_lord_of_leaves.txt svneol=native#text/plain
+res/cardsfolder/e/eladamri_lord_of_leaves_avatar.txt -text
 res/cardsfolder/e/eladamris_call.txt svneol=native#text/plain
 res/cardsfolder/e/eladamris_vineyard.txt svneol=native#text/plain
 res/cardsfolder/e/eland_umbra.txt svneol=native#text/plain
@@ -13089,8 +13100,6 @@ src/main/java/forge/gui/home/gauntlet/VSubmenuGauntletBuild.java -text
 src/main/java/forge/gui/home/gauntlet/VSubmenuGauntletContests.java -text
 src/main/java/forge/gui/home/gauntlet/VSubmenuGauntletLoad.java -text
 src/main/java/forge/gui/home/gauntlet/VSubmenuGauntletQuick.java -text
-src/main/java/forge/gui/home/multiplayer/CSubmenuArchenemy.java -text
-src/main/java/forge/gui/home/multiplayer/VSubmenuArchenemy.java -text
 src/main/java/forge/gui/home/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/home/quest/CSubmenuChallenges.java -text
 src/main/java/forge/gui/home/quest/CSubmenuDuels.java -text
@@ -13123,6 +13132,10 @@ src/main/java/forge/gui/home/settings/VSubmenuAvatars.java -text
 src/main/java/forge/gui/home/settings/VSubmenuDownloaders.java -text
 src/main/java/forge/gui/home/settings/VSubmenuPreferences.java -text
 src/main/java/forge/gui/home/settings/package-info.java svneol=native#text/plain
+src/main/java/forge/gui/home/variant/CSubmenuArchenemy.java -text
+src/main/java/forge/gui/home/variant/CSubmenuVanguard.java -text
+src/main/java/forge/gui/home/variant/VSubmenuArchenemy.java -text
+src/main/java/forge/gui/home/variant/VSubmenuVanguard.java -text
 src/main/java/forge/gui/match/CMatchUI.java -text
 src/main/java/forge/gui/match/ControlWinLose.java -text
 src/main/java/forge/gui/match/GauntletWinLose.java -text

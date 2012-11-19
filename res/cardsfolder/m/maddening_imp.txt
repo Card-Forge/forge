@@ -5,7 +5,7 @@ Text:no text
 PT:1/1
 K:Flying
 A:AB$ Effect | Cost$ T | Name$ Maddening Imp Effect | StaticAbilities$ KWPump | ActivationPhases$ Upkeep->Main1 | OpponentTurn$ True | SpellDescription$ Non-Wall creatures the active player controls attack this turn if able. At the beginning of the next end step, destroy each of those creatures that didn't attack this turn. Activate this ability only during an opponent's turn and only before combat. | SubAbility$ DestroyPacifist
-SVar:KWPump:Mode$ Continuous | Affected$ Creature.ActivePlayerCtrl+nonWall | AddHiddenKeyword$ CARDNAME attacks each turn if able. | Description$ Non-Wall creatures the active player controls attack this turn if able.
+SVar:KWPump:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.ActivePlayerCtrl+nonWall | AffectedZone$ Battlefield | AddHiddenKeyword$ CARDNAME attacks each turn if able. | Description$ Non-Wall creatures the active player controls attack this turn if able.
 SVar:DestroyPacifist:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigDestroy | TriggerDescription$ At the beginning of the next end step, destroy each of those creatures that didn't attack this turn.
 SVar:TrigDestroy:DB$ DestroyAll | ValidCards$ Creature.ActivePlayerCtrl+notAttackedThisTurn+nonWall
 SVar:RemAIDeck:True

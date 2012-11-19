@@ -1,4 +1,4 @@
-package forge.gui.home.multiplayer;
+package forge.gui.home.variant;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

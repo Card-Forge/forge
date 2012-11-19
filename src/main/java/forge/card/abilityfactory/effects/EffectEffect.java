@@ -14,6 +14,7 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
 import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 
 public class EffectEffect extends SpellEffect {
 
@@ -223,7 +224,7 @@ public class EffectEffect extends SpellEffect {
 
         // TODO: Add targeting to the effect so it knows who it's dealing with
         Singletons.getModel().getGame().getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-        Singletons.getModel().getGame().getAction().moveToPlay(eff);
+        Singletons.getModel().getGame().getAction().moveTo(ZoneType.Command, eff);
         Singletons.getModel().getGame().getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }
 

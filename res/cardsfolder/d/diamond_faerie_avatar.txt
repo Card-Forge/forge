@@ -1,0 +1,9 @@
+Name:Diamond Faerie Avatar
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:+0/+5
+A:AB$ Pump | ActivationZone$ Command | Cost$ S | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ 1 | NumDef$ 1 | SpellDescription$ Target creature you control gets +1/+1 until end of turn.
+SVar:Rarity:Special
+SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=182274&type=card
+End

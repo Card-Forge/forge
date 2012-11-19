@@ -363,6 +363,15 @@ public final class CardDb {
     public Iterable<CardPrinted> getAllCards() {
         return this.allCardsFlat;
     }
+    
+    /**
+     * Gets all "traditional" (non-scheme/vanguard/plane) cards
+     * 
+     * @return the cards
+     */
+    public Iterable<CardPrinted> getTraditionalCards() {
+        return Iterables.filter(getAllCards(), CardPrinted.Predicates.Presets.TRADITIONAL);
+    }
 
     /**
      * Gets the card.

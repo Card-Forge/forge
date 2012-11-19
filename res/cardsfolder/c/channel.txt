@@ -3,7 +3,7 @@ ManaCost:G G
 Types:Sorcery
 Text:no text
 A:SP$ Effect | Cost$ G G | Name$ Channel Effect | Abilities$ ABMana | SpellDescription$ Until end of turn, any time you could activate a mana ability, you may pay 1 life. If you do, add 1 to your mana pool.
-SVar:ABMana:AB$Mana | Cost$ PayLife<1> | Produced$ 1 | Amount$ 1 | SpellDescription$ Add 1 to your mana pool.
+SVar:ABMana:AB$Mana | Cost$ PayLife<1> | ActivationZone$ Command | Produced$ 1 | Amount$ 1 | SpellDescription$ Add 1 to your mana pool.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/channel.jpg

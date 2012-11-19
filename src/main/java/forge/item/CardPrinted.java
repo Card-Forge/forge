@@ -318,6 +318,16 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
      * Number of filters based on CardPrinted values.
      */
     public abstract static class Predicates {
+        
+        /**
+         * Type.
+         * @param t
+         *      the type to search for
+         * @return
+         */
+        public static Predicate<CardPrinted> type(final String t) {
+            return new PredicateType(t);
+        }
 
         /**
          * Rarity.
@@ -426,6 +436,21 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
                 this.mustContain = shouldContain;
             }
         }
+        
+        private static class PredicateType implements Predicate<CardPrinted> {
+            private final String operand;
+            
+            @Override
+            public boolean apply(final CardPrinted card) {
+                return card.getType().contains(operand);
+            }
+            
+            
+            public PredicateType(final String op) {
+                operand = op;
+            }
+            
+        }
 
         private static class PredicateName extends PredicateString<CardPrinted> {
             private final String operand;
@@ -489,6 +514,10 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
 
             /** The Constant exceptLands. */
             public static final Predicate<CardPrinted> EXCEPT_LANDS = Predicates.rarity(false, CardRarity.BasicLand);
+            
+            public static final Predicate<CardPrinted> NONTRADITIONAL = com.google.common.base.Predicates.or(Predicates.type("Vanguard"),Predicates.type("Scheme"),Predicates.type("Plane"));
+            
+            public static final Predicate<CardPrinted> TRADITIONAL = com.google.common.base.Predicates.not(Presets.NONTRADITIONAL);
         }
     }
 }

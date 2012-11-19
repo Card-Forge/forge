@@ -34,7 +34,7 @@ public enum ZoneType {
     /** Ante. */
     Ante(false);
 
-    public static final List<ZoneType> STATIC_ABILITIES_SOURCE_ZONES = Arrays.asList(new ZoneType[]{Battlefield, Graveyard, Exile/*, Hand*/});
+    public static final List<ZoneType> STATIC_ABILITIES_SOURCE_ZONES = Arrays.asList(new ZoneType[]{Battlefield, Graveyard, Exile, Command/*, Hand*/});
 
     private final boolean holdsHiddenInfo;
     private ZoneType(boolean holdsHidden) {

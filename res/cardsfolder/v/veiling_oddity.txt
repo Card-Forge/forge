@@ -6,7 +6,7 @@ PT:2/3
 K:Suspend:4:1 U
 T:Mode$ CounterRemoved | ValidCard$ Card.Self  | TriggerZones$ Exile | CounterType$ TIME | Execute$ TrigEffect | IsPresent$ Card.Self+counters_GE1_TIME | PresentZone$ Exile | PresentCompare$ EQ0 | TriggerDescription$ When the last time counter is removed from CARDNAME while it's exiled, creatures are unblockable this turn.
 SVar:TrigEffect:AB$ Effect | Cost$ 0  | Name$ Veiling Oddity Effect | StaticAbilities$ KWPump
-SVar:KWPump:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ HIDDEN Unblockable | Description$ creatures are unblockable this turn.
+SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature | AddHiddenKeyword$ HIDDEN Unblockable | Description$ creatures are unblockable this turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/veiling_oddity.jpg
 SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/51.jpg

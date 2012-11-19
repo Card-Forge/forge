@@ -21,5 +21,6 @@
 	    <doc>HOME_CONSTRUCTED</doc>
 	    <doc>HOME_DRAFT</doc>
 	    <doc>HOME_SEALED</doc>
+	    <doc>HOME_VANGUARD</doc>
 	</cell>
 </layout>

@@ -7,7 +7,7 @@ A:AB$ Untap | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | ValidTgts$ Moun
 SVar:DBAnimate:DB$ Animate | Defined$ Targeted | Power$ 4 | Toughness$ 4 | Types$ Creature,Elemental | Colors$ Red
 A:AB$ Mana | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Produced$ R | Amount$ X | References$ X | SpellDescription$ Add R to your mana pool for each Mountain you control.
 A:AB$ Effect | Cost$ SubCounter<5/LOYALTY> | Planeswalker$ True | Ultimate$ True | Name$ Koth of the Hammer emblem | Image$ koth_of_the_hammer_emblem | StaticAbilities$ STDamage | SVars$ ABDealDamage | Stackable$ False | Keywords$ Damage | Duration$ Permanent | SpellDescription$ You get an emblem with "Mountains you control have '{T}: This land deals 1 damage to target creature or player."
-SVar:STDamage:Mode$ Continuous | Affected$ Mountain.YouCtrl | AddAbility$ ABDealDamage | AffectedZone$ Battlefield
+SVar:STDamage:Mode$ Continuous | EffectZone$ Command | Affected$ Mountain.YouCtrl | AddAbility$ ABDealDamage | AffectedZone$ Battlefield
 SVar:ABDealDamage:AB$ DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ Deal 1 damage to target creature or player
 SVar:Damage:Mountains you control have '{T}: This land deals 1 damage to target creature or player.
 SVar:X:Count$Valid Mountain.YouCtrl

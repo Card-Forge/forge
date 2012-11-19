@@ -10,7 +10,7 @@ SVar:X:Count$Valid Swamp.YouCtrl
 SVar:ABChoice:DB$ GenericChoice | Defined$ You | Cost$ 0 | Choices$ ABPump1,ABPump2
 SVar:ABPump1:DB$ Pump | Cost$ 0 | Defined$ Targeted | NumAtt$ +X | NumDef$ +X | References$ X | ChoiceDescription$ +X/+X
 SVar:ABPump2:DB$ Pump | Cost$ 0 | Defined$ Targeted | NumAtt$ -X | NumDef$ -X | References$ X | ChoiceDescription$ -X/-X
-SVar:SwampBoost:Mode$ Continuous | Affected$ Swamp.YouCtrl | AddAbility$ BlackTap | Description$ Swamps you control have 'T:Add BBBB to your mana pool.'
+SVar:SwampBoost:Mode$ Continuous | EffectZone$ Command | Affected$ Swamp.YouCtrl | AffectedZone$ Battlefield | AddAbility$ BlackTap | Description$ Swamps you control have 'T:Add BBBB to your mana pool.'
 SVar:BlackTap:AB$ Mana | Cost$ T | Produced$ B | Amount$ 4 | SpellDescription$ Add B B B B to your mana pool.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/liliana_of_the_dark_realms.jpg

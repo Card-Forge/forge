@@ -312,9 +312,9 @@ public class SSubmenuQuestUtil {
                     humanStart.setStartingLife(qData.getAssets().getLife(qData.getMode()) + extraLifeHuman);
                     aiStart.setStartingLife(lifeAI);
 
-                    humanStart.setCardsOnTable(new Supplier<Iterable<Card>>() {
+                    humanStart.setCardsOnBattlefield(new Supplier<Iterable<Card>>() {
                         @Override public Iterable<Card> get() { return QuestUtil.getHumanStartingCards(qData, event); } });
-                    aiStart.setCardsOnTable(new Supplier<Iterable<Card>>() {
+                    aiStart.setCardsOnBattlefield(new Supplier<Iterable<Card>>() {
                         @Override public Iterable<Card> get() { return QuestUtil.getComputerStartingCards(event); } });
                 } // End isFantasy
 

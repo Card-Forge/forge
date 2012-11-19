@@ -212,7 +212,8 @@ public class GameAction {
         }
 
         // Tokens outside the battlefield disappear immediately.
-        if (copied.isToken() && !zoneTo.is(ZoneType.Battlefield)) {
+        if ((copied.isToken() && !zoneTo.is(ZoneType.Battlefield)
+            && !((copied.isType("Emblem") || copied.isType("Effect")) && zoneTo.is(ZoneType.Command)))) {
             zoneTo.remove(copied);
         }
 
@@ -778,6 +779,9 @@ public class GameAction {
         } else if (name.equals(ZoneType.Ante)) {
             final PlayerZone ante = c.getOwner().getZone(ZoneType.Ante);
             return this.moveTo(ante, c);
+        } else if (name.equals(ZoneType.Command)) {
+            final PlayerZone command = c.getOwner().getZone(ZoneType.Command);
+            return this.moveTo(command, c);
         } else {
             return this.moveToStack(c);
         }
@@ -1916,6 +1920,7 @@ public class GameAction {
 
         List<Card> cardsOnBattlefield = Lists.newArrayList(game.getCardsIn(ZoneType.Battlefield));
         cardsOnBattlefield.addAll(game.getCardsIn(ZoneType.Stack));
+        cardsOnBattlefield.addAll(game.getCardsIn(ZoneType.Command));
         if (!cardsOnBattlefield.contains(originalCard)) {
             cardsOnBattlefield.add(originalCard);
         }

@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Instant
 Text:no text
 A:SP$ Effect | Cost$ 1 G | Name$ Heavy Fog Effect | StaticAbilities$ STPrevent | AILogic$ Fog | OpponentTurn$ True | ActivationPhases$ Declare Attackers - Play Instants and Abilities | SpellDescription$ Cast CARDNAME only during the declare attackers step and only if you've been attacked this step. Prevent all damage that would be dealt to you this turn by attacking creatures.
-SVar:STPrevent:Mode$ PreventDamage | Source$ Creature.attacking | Target$ You | Description$ Prevent all damage that would be dealt to you this turn by attacking creatures.
+SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Source$ Creature.attacking | Target$ You | Description$ Prevent all damage that would be dealt to you this turn by attacking creatures.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/heavy_fog.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/136.jpg

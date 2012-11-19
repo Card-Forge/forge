@@ -6,7 +6,7 @@ PT:3/1
 K:Flying
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigPutCounter | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may put a feather counter on target creature. If you do, that creature is 3/1 and has flying for as long as it has a feather counter on it.
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ FEATHER | CounterNum$ 1 | SubAbility$ DBAnimate
-SVar:DBAnimate:DB$ Animate | Defined$ Targeted | staticAbilities$ MimeomancerStatic | Permanent$ True
+SVar:DBAnimate:DB$ Animate | Defined$ Targeted | StaticAbilities$ MimeomancerStatic | Permanent$ True
 SVar:MimeomancerStatic:Mode$ Continuous | Affected$ Card.Self+counters_GE1_FEATHER | SetPower$ 3 | SetToughness$ 1 | AddKeyword$ Flying | Description$ CARDNAME is 3/1 and has flying for as long as it has a feather counter on it.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

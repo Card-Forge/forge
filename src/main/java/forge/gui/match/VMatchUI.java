@@ -13,6 +13,7 @@ import forge.gui.framework.IVTopLevelUI;
 import forge.gui.framework.SLayoutIO;
 import forge.gui.framework.SRearrangingUtil;
 import forge.gui.framework.VEmptyDoc;
+import forge.gui.match.nonsingleton.VCommand;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.nonsingleton.VHand;
 import forge.gui.match.views.VDev;
@@ -31,6 +32,7 @@ public enum VMatchUI implements IVTopLevelUI {
     /** */
     SINGLETON_INSTANCE;
 
+    private List<VCommand> lstCommands = new ArrayList<VCommand>();
     private List<VField> lstFields = new ArrayList<VField>();
     private List<VHand> lstHands = new ArrayList<VHand>();
 
@@ -42,6 +44,12 @@ public enum VMatchUI implements IVTopLevelUI {
         for (int i = 0; i < 8; i++) {
             EDocID.valueOf("FIELD_" + i).setDoc(
                     new VEmptyDoc(EDocID.valueOf("FIELD_" + i)));
+        }
+        
+     // Create empty docs for all field slots
+        for (int i = 0; i < 8; i++) {
+            EDocID.valueOf("COMMAND_" + i).setDoc(
+                    new VEmptyDoc(EDocID.valueOf("COMMAND_" + i)));
         }
 
         // Create empty docs for all hand slots
@@ -93,6 +101,21 @@ public enum VMatchUI implements IVTopLevelUI {
             }
             else {
                 lstFields.get(1).getParentCell().addDoc(lstFields.get(i));
+            }
+        }
+        
+     // Add extra players alternatively to existing user/AI field panels.
+        for (int i = 2; i < lstCommands.size(); i++) {
+            // If already in layout, no need to add again.
+            if (lstCommands.get(i).getParentCell() != null) {
+                continue;
+            }
+
+            if (i % 2 == 0) {
+                lstCommands.get(0).getParentCell().addDoc(lstCommands.get(i));
+            }
+            else {
+                lstCommands.get(1).getParentCell().addDoc(lstCommands.get(i));
             }
         }
 
@@ -155,5 +178,19 @@ public enum VMatchUI implements IVTopLevelUI {
     /** @return {@link javax.swing.JButton} */
     public JButton getBtnOK() {
         return VMessage.SINGLETON_INSTANCE.getBtnOK();
+    }
+
+    /**
+     * @return the lstCommands
+     */
+    public List<VCommand> getCommandViews() {
+        return lstCommands;
+    }
+
+    /**
+     * @param lstCommands0 the lstCommands to set
+     */
+    public void setCommandViews(List<VCommand> lstCommands0) {
+        this.lstCommands = lstCommands0;
     }
 }

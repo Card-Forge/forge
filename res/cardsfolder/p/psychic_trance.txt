@@ -3,7 +3,7 @@ ManaCost:2 U U
 Types:Instant
 Text:no text
 A:SP$ Effect | Cost$ 2 U U | Name$ Psychic Trance Effect | StaticAbilities$ Static | SVars$ Counter | SpellDescription$ Until end of turn, Wizards you control gain "Tap: Counter target spell."
-SVar:Static:Mode$ Continuous | Affected$ Card.Wizard+YouCtrl | AddAbility$ Counter | Description$ All Wizards you control have Tap: Counter target spell.
+SVar:Static:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Card.Wizard+YouCtrl | AddAbility$ Counter | Description$ All Wizards you control have Tap: Counter target spell.
 SVar:Counter:AB$ Counter | Cost$ T | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell
 SVar:RemRandomDeck:True
 SVar:RemAIDeck:True

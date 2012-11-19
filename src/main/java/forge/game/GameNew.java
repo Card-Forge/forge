@@ -20,6 +20,7 @@ import forge.CardPredicates;
 import forge.CardUtil;
 import forge.GameAction;
 import forge.Singletons;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
 import forge.control.input.InputControl;
@@ -32,6 +33,7 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.match.views.VAntes;
+import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.properties.ForgePreferences.FPref;
 import forge.sound.Sounds;
@@ -121,12 +123,12 @@ public class GameNew {
         for( Entry<Player, PlayerStartConditions> p : playersConditions.entrySet() ) {
             final Player player = p.getKey();
             player.setStartingLife(p.getValue().getStartingLife());
+            player.setMaxHandSize(p.getValue().getStartingHand());
             // what if I call it for AI player?
             PlayerZone bf = player.getZone(ZoneType.Battlefield);
-            Iterable<Card> onTable = p.getValue().getCardsOnTable(); 
+            Iterable<Card> onTable = p.getValue().getCardsOnBattlefield(); 
             if (onTable != null) {
                 for (final Card c : onTable) {
-                    c.addController(player);
                     c.setOwner(player);
                     bf.add(c, false);
                     c.setSickness(true);
@@ -135,10 +137,22 @@ public class GameNew {
                 }
             }
             
+            PlayerZone com = player.getZone(ZoneType.Command);
+            Iterable<Card> inCommand = p.getValue().getCardsInCommand();
+            if (inCommand != null) {
+                for (final Card c : inCommand) {
+                    c.setOwner(player);
+                    com.add(c, false);
+                    c.refreshUniqueNumber();
+                }
+            }
+            
             prepareSingleLibrary(player, p.getValue().getDeck(), removedAnteCards, rAICards, canRandomFoil);
             player.updateObservers();
             bf.updateObservers();
             player.getZone(ZoneType.Hand).updateObservers();
+            player.getZone(ZoneType.Command).updateObservers();
+            player.getZone(ZoneType.Battlefield).updateObservers();
         }
     
     
@@ -190,7 +204,7 @@ public class GameNew {
             player.setNumLandsPlayed(0);
             // what if I call it for AI player?
             PlayerZone bf = player.getZone(ZoneType.Battlefield);
-            Iterable<Card> onTable = p.getValue().getCardsOnTable(); 
+            Iterable<Card> onTable = p.getValue().getCardsOnBattlefield(); 
             if (onTable != null) {
                 for (final Card c : onTable) {
                     c.addController(player);
@@ -237,6 +251,7 @@ public class GameNew {
                 final String nl = System.getProperty("line.separator");
                 final StringBuilder msg = new StringBuilder();
                 for (final Player p : game.getPlayers()) {
+                    
                     final List<Card> lib = p.getCardsIn(ZoneType.Library);
                     Predicate<Card> goodForAnte = Predicates.not(CardPredicates.Presets.BASIC_LANDS);
                     Card ante = Aggregates.random(Iterables.filter(lib, goodForAnte));
@@ -262,10 +277,9 @@ public class GameNew {
             }
         }
 
-        // Draw 7 cards 
+        // Draw <handsize> cards 
         for (final Player p : game.getPlayers()) {
-            // Should this be p.getMaxHandSize() for Vanguard compatibility?
-            p.drawCards(7);
+            p.drawCards(p.getMaxHandSize());
         }
         
         game.getPhaseHandler().setPhaseState(PhaseType.MULLIGAN);

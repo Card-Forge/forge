@@ -1,0 +1,10 @@
+Name:Ashnod
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:+1/-8
+T:Mode$ DamageDone | ValidSource$ Creature | ValidTarget$ You | Execute$ TrigDestroy | TriggerZones$ Command | TriggerDescription$ Whenever a creature deals damage to you, destroy it.
+SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | Defined$ TriggeredSource
+SVar:Rarity:Special
+SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=12329&type=card
+End

@@ -668,7 +668,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Prevent Damage static abilities
-        for (final Card ca : game.getCardsIn(ZoneType.Battlefield)) {
+        for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage, isCombat);
@@ -1895,7 +1895,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
 
         // CantBeCast static abilities
-        for (final Card ca : game.getCardsIn(ZoneType.Battlefield)) {
+        for (final Card ca : game.getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 if (stAb.applyAbility("CantPlayLand", null, this)) {

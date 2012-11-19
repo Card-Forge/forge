@@ -43,7 +43,6 @@ import forge.gui.home.gauntlet.VSubmenuGauntletBuild;
 import forge.gui.home.gauntlet.VSubmenuGauntletContests;
 import forge.gui.home.gauntlet.VSubmenuGauntletLoad;
 import forge.gui.home.gauntlet.VSubmenuGauntletQuick;
-import forge.gui.home.multiplayer.VSubmenuArchenemy;
 import forge.gui.home.quest.VSubmenuChallenges;
 import forge.gui.home.quest.VSubmenuDuels;
 import forge.gui.home.quest.VSubmenuQuestData;
@@ -55,6 +54,8 @@ import forge.gui.home.sanctioned.VSubmenuSealed;
 import forge.gui.home.settings.VSubmenuAvatars;
 import forge.gui.home.settings.VSubmenuDownloaders;
 import forge.gui.home.settings.VSubmenuPreferences;
+import forge.gui.home.variant.VSubmenuArchenemy;
+import forge.gui.home.variant.VSubmenuVanguard;
 import forge.gui.toolbox.ExperimentalLabel;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
@@ -118,6 +119,8 @@ public enum VHomeUI implements IVTopLevelUI {
         //allSubmenus.add(VSubmenuExit.SINGLETON_INSTANCE);
 
         allSubmenus.add(VSubmenuArchenemy.SINGLETON_INSTANCE);
+        
+        allSubmenus.add(VSubmenuVanguard.SINGLETON_INSTANCE);
 
         // For each group: init its panel
         final SortedMap<EMenuGroup, JPanel> allGroupPanels = new TreeMap<EMenuGroup, JPanel>();
