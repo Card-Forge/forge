@@ -8918,6 +8918,7 @@ res/cardsfolder/s/sisays_ring.txt svneol=native#text/plain
 res/cardsfolder/s/sisters_of_stone_death.txt -text svneol=unset#text/plain
 res/cardsfolder/s/sisters_of_the_flame.txt svneol=native#text/plain
 res/cardsfolder/s/sivitri_scarzam.txt svneol=native#text/plain
+res/cardsfolder/s/sivvi's_valor.txt -text
 res/cardsfolder/s/sivvis_ruse.txt -text
 res/cardsfolder/s/sizzle.txt svneol=native#text/plain
 res/cardsfolder/s/skaab_goliath.txt -text

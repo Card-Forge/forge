@@ -2,7 +2,7 @@ Name:Vassal's Duty
 ManaCost:3 W
 Types:Enchantment
 Text:no text
-A:AB$ Effect | Name$ Vassal's Effect | Cost$ 1 | ValidTgts$ Creature.Legendary | TgtPrompt$ Select target creature to redirect damage from | ReplacementEffects$ SelflessCombat,SelflessNonCombat | Triggers$ OutOfSight | SVars$ CombatDmg,NonCombatDmg,RestDmgCombat,RestDmg,ExileEffect,X,Y | References$ SelflessCombat,SelflessNonCombat,OutOfSight,CombatDmg,NonCombatDmg,RestDmgCombat,RestDmg,ExileEffect,X,Y | RememberObjects$ Targeted | SpellDescription$ The next 1 damage that would be dealt to target legendary creature you control is dealt to you instead.
+A:AB$ Effect | Name$ Vassal's Effect | Cost$ 1 | ValidTgts$ Creature.Legendary | TgtPrompt$ Select target legendary creature to redirect damage from | ReplacementEffects$ SelflessCombat,SelflessNonCombat | Triggers$ OutOfSight | SVars$ CombatDmg,NonCombatDmg,RestDmgCombat,RestDmg,ExileEffect,X,Y | References$ SelflessCombat,SelflessNonCombat,OutOfSight,CombatDmg,NonCombatDmg,RestDmgCombat,RestDmg,ExileEffect,X,Y | RememberObjects$ Targeted | SpellDescription$ The next 1 damage that would be dealt to target legendary creature you control is dealt to you instead.
 SVar:SelflessCombat:Event$ DamageDone | ValidTarget$ Card.IsRemembered | IsCombat$ True | ReplaceWith$ CombatDmg | Description$ The next 1 damage that would be dealt to target legendary creature you control is dealt to you instead.
 SVar:SelflessNonCombat:Event$ DamageDone | ValidTarget$ Card.IsRemembered | IsCombat$ False | ReplaceWith$ NonCombatDmg | Secondary$ True | Description$ The next 1 damage that would be dealt to target legendary creature you control is dealt to you instead.
 SVar:CombatDmg:AB$ DealDamage | Cost$ 0 | Defined$ You | DamageSource$ ReplacedSource | CombatDamage$ True | NumDmg$ 1 | SubAbility$ RestDmgCombat | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1
@@ -13,6 +13,7 @@ SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Val
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | Static$ True
 SVar:X:ReplaceCount$DamageAmount/Minus.1
 SVar:Y:ReplaceCount$DamageAmount
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vassals_duty.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/48.jpg
