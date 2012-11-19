@@ -3,7 +3,7 @@ ManaCost:3 G
 Types:Enchantment
 Text:no text
 T:Mode$ TapsForMana | ValidCard$ Forest | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever a Forest is tapped for mana, its controller adds G to his or her mana pool (in addition to the mana the land produces).
-SVar:TrigMana:AB$Mana | Cost$ 0 | Produced$ G | Amount$ 1 | Defined$ TriggeredPlayer
+SVar:TrigMana:AB$ Mana | Cost$ 0 | Produced$ G | Amount$ 1 | Defined$ TriggeredPlayer
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vernal_bloom.jpg

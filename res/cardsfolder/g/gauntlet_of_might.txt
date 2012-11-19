@@ -4,7 +4,7 @@ Types:Artifact
 Text:no text
 S:Mode$ Continuous | Affected$ Creature.Red | AddPower$ 1 | AddToughness$ 1 | Description$ Red creatures get +1/+1.
 T:Mode$ TapsForMana | ValidCard$ Mountain | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever a Mountain is tapped for mana, its controller adds R to his or her mana pool (in addition to the mana the land produces).
-SVar:TrigMana:AB$Mana | Cost$ 0 | Produced$ R | Amount$ 1 | Defined$ TriggeredPlayer
+SVar:TrigMana:AB$ Mana | Cost$ 0 | Produced$ R | Amount$ 1 | Defined$ TriggeredPlayer
 SVar:RemRandomDeck:True
 DeckNeeds:Color$Red
 SVar:Rarity:Rare
