@@ -13157,9 +13157,11 @@ src/main/java/forge/gui/match/controllers/CPicture.java -text
 src/main/java/forge/gui/match/controllers/CPlayers.java -text
 src/main/java/forge/gui/match/controllers/CStack.java -text
 src/main/java/forge/gui/match/controllers/package-info.java svneol=native#text/plain
+src/main/java/forge/gui/match/nonsingleton/CCommand.java -text
 src/main/java/forge/gui/match/nonsingleton/CEmptyDoc.java -text
 src/main/java/forge/gui/match/nonsingleton/CField.java -text
 src/main/java/forge/gui/match/nonsingleton/CHand.java -text
+src/main/java/forge/gui/match/nonsingleton/VCommand.java -text
 src/main/java/forge/gui/match/nonsingleton/VField.java -text
 src/main/java/forge/gui/match/nonsingleton/VHand.java -text
 src/main/java/forge/gui/match/nonsingleton/package-info.java svneol=native#text/plain
