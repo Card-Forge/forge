@@ -267,8 +267,8 @@ public final class CardRules {
             if (slashPos == -1) {
                 throw new RuntimeException(String.format("Vanguard '%s' has bad hand/life stats", this.getName()));
             }
-            this.hand = Integer.parseInt(pt.substring(0,pt.indexOf('/')));
-            this.life = Integer.parseInt(pt.substring(pt.indexOf('/')+1));
+            this.hand = Integer.parseInt(pt.substring(0,pt.indexOf('/')).replace("+", ""));
+            this.life = Integer.parseInt(pt.substring(pt.indexOf('/')+1).replace("+", ""));
         }
 
         if (this.characteristics.getSetsData().isEmpty()) {
