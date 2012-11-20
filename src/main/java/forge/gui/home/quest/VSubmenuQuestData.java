@@ -71,20 +71,20 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final FScrollPane scrQuests = new FScrollPane(lstQuests);
     private final JPanel pnlOptions = new JPanel();
 
-    /* Fist column */ 
+    /* Fist column */
     private final JRadioButton radEasy = new FRadioButton("Easy");
     private final JRadioButton radMedium = new FRadioButton("Medium");
     private final JRadioButton radHard = new FRadioButton("Hard");
     private final JRadioButton radExpert = new FRadioButton("Expert");
     private final JCheckBox boxFantasy = new FCheckBox("Fantasy Mode");
-    
+
     /* Second column */
-    
+
     private final JLabel lblStartingPool = new FLabel.Builder().text("Starting pool:").build();
     private final JComboBox cbxStartingPool = new JComboBox();
 
     private final JLabel lblUnrestricted = new FLabel.Builder().text("All cards will be available to play.").build();
-    
+
     private final JLabel lblPreconDeck = new FLabel.Builder().text("Starter/Event deck:").build();
     private final JComboBox cbxPreconDeck = new JComboBox();
 
@@ -93,70 +93,70 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
 
     private final JLabel lblCustomDeck = new FLabel.Builder().text("Custom deck:").build();
     private final JComboBox cbxCustomDeck = new JComboBox();
-    
+
     private final FLabel btnDefineCustomFormat = new FLabel.Builder().opaque(true).hoverable(true).text("Define custom format").build();
     private final FLabel btnPrizeDefineCustomFormat = new FLabel.Builder().opaque(true).hoverable(true).text("Define custom format").build();
-    
+
     private final JLabel lblPrizedCards = new FLabel.Builder().text("Prized cards:").build();
     private final JComboBox cbxPrizedCards = new JComboBox();
-    
+
     private final JLabel lblPrizeFormat = new FLabel.Builder().text("Sanctioned format:").build();
     private final JComboBox cbxPrizeFormat = new JComboBox();
-   
+
     private final JLabel lblPrizeUnrestricted = new FLabel.Builder().text("All cards will be available to win.").build();
     private final JLabel lblPrizeSameAsStarting = new FLabel.Builder().text("Only sets found in starting pool will be available.").build();
-    
-    private final JCheckBox cboAllowUnlocks = new FCheckBox("Allow unlock of not included editions");
-    
+
+    private final JCheckBox cboAllowUnlocks = new FCheckBox("Allow unlock of additional editions");
+
     private final FLabel btnEmbark = new FLabel.Builder().opaque(true)
             .fontSize(16).hoverable(true).text("Embark!").build();
 
-    /* Listeners */ 
+    /* Listeners */
     private final ActionListener alStartingPool = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             StartingPoolType newVal = getStartingPoolType();
             lblUnrestricted.setVisible(newVal == StartingPoolType.Complete);
-            
+
             lblPreconDeck.setVisible(newVal == StartingPoolType.Precon);
             cbxPreconDeck.setVisible(newVal == StartingPoolType.Precon);
 
             lblFormat.setVisible(newVal == StartingPoolType.Rotating);
             cbxFormat.setVisible(newVal == StartingPoolType.Rotating);
-            
+
             btnDefineCustomFormat.setVisible(newVal == StartingPoolType.CustomFormat);
-            
+
             lblCustomDeck.setVisible(newVal == StartingPoolType.SealedDeck || newVal == StartingPoolType.DraftDeck);
             cbxCustomDeck.setVisible(newVal == StartingPoolType.SealedDeck || newVal == StartingPoolType.DraftDeck);
-            
+
             if (newVal == StartingPoolType.SealedDeck || newVal == StartingPoolType.DraftDeck) {
                 cbxCustomDeck.removeAllItems();
                 CardCollections decks = Singletons.getModel().getDecks();
-                IStorage<DeckGroup> storage = newVal == StartingPoolType.SealedDeck ? decks.getSealed() : decks.getDraft();  
-                if( newVal == StartingPoolType.SealedDeck ) { 
-                    for(DeckGroup d : storage ) {
+                IStorage<DeckGroup> storage = newVal == StartingPoolType.SealedDeck ? decks.getSealed() : decks.getDraft();
+                if (newVal == StartingPoolType.SealedDeck) {
+                    for (DeckGroup d : storage) {
                         cbxCustomDeck.addItem(d.getHumanDeck());
                     }
                 }
             }
         }
-    }; 
-    
-    /* Listeners */ 
+    };
+
+    /* Listeners */
     private final ActionListener alPrizesPool = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             StartingPoolType newVal = getPrizedPoolType();
             lblPrizeUnrestricted.setVisible(newVal == StartingPoolType.Complete);
             cboAllowUnlocks.setVisible(newVal != StartingPoolType.Complete);
-            
+
             lblPrizeFormat.setVisible(newVal == StartingPoolType.Rotating);
             cbxPrizeFormat.setVisible(newVal == StartingPoolType.Rotating);
             btnPrizeDefineCustomFormat.setVisible(newVal == StartingPoolType.CustomFormat);
             lblPrizeSameAsStarting.setVisible(newVal == null);
         }
-    };     
-    
+    };
+
     /**
      * Constructor.
      */
@@ -173,7 +173,6 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         group1.add(radExpert);
         radEasy.setSelected(true);
 
-        
         cbxStartingPool.addItem(StartingPoolType.Complete);
         cbxStartingPool.addItem(StartingPoolType.Rotating);
         cbxStartingPool.addItem(StartingPoolType.CustomFormat);
@@ -181,22 +180,22 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         cbxStartingPool.addItem(StartingPoolType.DraftDeck);
         cbxStartingPool.addItem(StartingPoolType.SealedDeck);
         cbxStartingPool.addActionListener(alStartingPool);
-        
+
         // initial adjustment
         alStartingPool.actionPerformed(null);
         alPrizesPool.actionPerformed(null);
-        
+
         cbxPrizedCards.addItem("Same as starting pool");
         cbxPrizedCards.addItem(StartingPoolType.Complete);
         cbxPrizedCards.addItem(StartingPoolType.Rotating);
         cbxPrizedCards.addItem(StartingPoolType.CustomFormat);
         cbxPrizedCards.addActionListener(alPrizesPool);
-        
+
         for (GameFormat gf : Singletons.getModel().getFormats()) {
             cbxFormat.addItem(gf);
             cbxPrizeFormat.addItem(gf);
         }
-        
+
         cboAllowUnlocks.setSelected(true);
 
         final Map<String, String> preconDescriptions = new HashMap<String, String>();
@@ -235,7 +234,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
 
         pnlOptions.setOpaque(false);
         pnlOptions.setLayout(new MigLayout("insets 0, gap 10px, fillx, wrap 2"));
-        
+
         JPanel pnlDifficultyMode = new JPanel();
         pnlDifficultyMode.setLayout(new MigLayout("insets 0, gap 1%, flowy"));
         final String n_constraints = "h 27px!";
@@ -246,7 +245,6 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         pnlDifficultyMode.add(boxFantasy, n_constraints + ", gap 0 4% 0 5px");
         pnlDifficultyMode.setOpaque(false);
         pnlOptions.add(pnlDifficultyMode, "w 40%");
-        
 
         JPanel pnlRestrictions = new JPanel();
         final String constraints = "h 27px!, ";
@@ -259,10 +257,10 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         pnlRestrictions.setLayout(new MigLayout("insets 0, gap 0, wrap 2", "[120, al right][240, fill]", "[|]12[|]6[]"));
         pnlRestrictions.add(lblStartingPool, constraints + lblWidthStart);
         pnlRestrictions.add(cbxStartingPool, constraints + cboWidthStart);
-        
+
         /* out of these 3 groups only one will be visible */
-        pnlRestrictions.add(lblUnrestricted, constraints + hidemode + "spanx 2" );
-        
+        pnlRestrictions.add(lblUnrestricted, constraints + hidemode + "spanx 2");
+
         pnlRestrictions.add(lblPreconDeck, constraints + lblWidthStart);
         pnlRestrictions.add(cbxPreconDeck, constraints + cboWidthStart);
 
@@ -273,23 +271,22 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         pnlRestrictions.add(cbxFormat, constraints + cboWidthStart); // , skip 1
 
         pnlRestrictions.add(btnDefineCustomFormat, constraints + hidemode + "spanx 2, w 240px");
-        
+
         // Prized cards options
         pnlRestrictions.add(lblPrizedCards, constraints + lblWidth);
         pnlRestrictions.add(cbxPrizedCards, constraints + cboWidth);
-        
-        
+
         pnlRestrictions.add(lblPrizeFormat, constraints + lblWidthStart);
         pnlRestrictions.add(cbxPrizeFormat, constraints + cboWidthStart); // , skip 1
         pnlRestrictions.add(btnPrizeDefineCustomFormat, constraints + hidemode + "spanx 2, w 240px");
-        pnlRestrictions.add(lblPrizeSameAsStarting,  constraints + hidemode + "spanx 2" );
-        pnlRestrictions.add(lblPrizeUnrestricted, constraints + hidemode + "spanx 2" );
-        
+        pnlRestrictions.add(lblPrizeSameAsStarting,  constraints + hidemode + "spanx 2");
+        pnlRestrictions.add(lblPrizeUnrestricted, constraints + hidemode + "spanx 2");
+
         pnlRestrictions.add(cboAllowUnlocks, constraints + "spanx 2, ax right");
 //        cboAllowUnlocks.setOpaque(false);
         pnlRestrictions.setOpaque(false);
         pnlOptions.add(pnlRestrictions, "pushx, ay top");
-        
+
         pnlOptions.add(btnEmbark, "w 300px!, h 30px!, ax center, span 2, gap 0 0 15px 30px");
     }
 
@@ -349,8 +346,6 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         return btnEmbark;
     }
 
-
-    
     //========== Overridden from IVDoc
 
     /* (non-Javadoc)
@@ -403,7 +398,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
             return 2;
         } else if (radExpert.isSelected()) {
             return 3;
-        } 
+        }
         return 0;
     }
 
@@ -413,7 +408,7 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
 
     public Deck getSelectedDeck() {
         Object sel = cbxCustomDeck.getSelectedItem();
-        return sel instanceof Deck ? (Deck) sel : null; 
+        return sel instanceof Deck ? (Deck) sel : null;
     }
 
     public boolean isUnlockSetsAllowed() {
@@ -423,12 +418,12 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     public StartingPoolType getStartingPoolType() {
         return (StartingPoolType) cbxStartingPool.getSelectedItem();
     }
-    
+
 
     public StartingPoolType getPrizedPoolType() {
          Object v = cbxPrizedCards.getSelectedItem();
          return v instanceof StartingPoolType ? (StartingPoolType) v : null;
-    }    
+    }
 
     public boolean isFantasy() {
         return boxFantasy.isSelected();
@@ -440,13 +435,13 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
 
     public GameFormat getPrizedRotatingFormat() {
         return (GameFormat) cbxPrizeFormat.getSelectedItem();
-    }    
-    
+    }
+
     public FLabel getBtnCustomFormat() {
         return btnDefineCustomFormat;
     }
     public FLabel getBtnPrizeCustomFormat() {
         return btnPrizeDefineCustomFormat;
     }
-    
+
 }
