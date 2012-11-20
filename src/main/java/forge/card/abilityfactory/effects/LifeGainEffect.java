@@ -1,6 +1,8 @@
 package forge.card.abilityfactory.effects;
 
 
+import java.util.ArrayList;
+
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
@@ -16,7 +18,7 @@ public class LifeGainEffect extends SpellEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("LifeAmount"), sa);
-    
+
         final String conditionDesc = sa.getParam("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
@@ -27,7 +29,7 @@ public class LifeGainEffect extends SpellEffect {
         }
 
         sb.append("gains ").append(amount).append(" life.");
-    
+
         return sb.toString();
     }
 
@@ -37,14 +39,21 @@ public class LifeGainEffect extends SpellEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final int lifeAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("LifeAmount"), sa);
-    
+
         final Target tgt = sa.getTarget();
-    
-        for (final Player p : getTargetPlayers(sa)) {
+        ArrayList<Player> tgtPlayers = new ArrayList<Player>();
+
+        if (tgt != null) {
+            tgtPlayers = tgt.getTargetPlayers();
+        }
+        if (sa.hasParam("Defined")) {
+            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
+        }
+        for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 p.gainLife(lifeAmount, sa.getSourceCard());
             }
         }
     }
-    
+
 }
