@@ -1,0 +1,13 @@
+Name:Pay No Heed
+ManaCost:W
+Types:Instant
+Text:no text
+A:SP$ ChooseSource | Cost$ W | Choices$ Card | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ Prevent all damage a source of your choice would deal this turn.
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | RememberObjects$ Remembered | SVars$ RPreventNextFromSource | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered | Prevent$ True | PreventionEffect$ True | Description$ Prevent all damage the source would deal this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pay_no_heed.jpg
+SetInfo:TOR|Common|http://magiccards.info/scans/en/tr/12.jpg
+Oracle:Prevent all damage a source of your choice would deal this turn.
+End
