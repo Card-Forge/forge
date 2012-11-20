@@ -1,0 +1,13 @@
+Name:Honorable Scout
+ManaCost:W
+Types:Creature Human Soldier Scout
+Text:no text
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ HonorGained | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life for each black and/or red creature target opponent controls.
+SVar:HonorGained:AB$ GainLife | Cost$ 0 | LifeAmount$ ScoutsHonor | Defined$ You | TgtPrompt$ Select target opponent | ValidTgts$ Opponent
+SVar:ScoutsHonor:Count$Valid Creature.Black+TargetedPlayerCtrl,Creature.Red+TargetedPlayerCtrl/Times.2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/honorable_scout.jpg
+SetInfo:PLS|Common|http://magiccards.info/scans/en/ps/8.jpg
+Oracle:When Honorable Scout enters the battlefield, you gain 2 life for each black and/or red creature target opponent controls.
+End
