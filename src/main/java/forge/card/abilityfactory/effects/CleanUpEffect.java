@@ -21,7 +21,6 @@ public class CleanUpEffect extends SpellEffect {
             Singletons.getModel().getGame().getCardState(source).clearRemembered();
         }
         if (sa.hasParam("ForgetDefined")) {
-            System.out.println(AbilityFactory.getDefinedCards(source, sa.getParam("ForgetDefined"), sa));
             for (final Card card : AbilityFactory.getDefinedCards(source, sa.getParam("ForgetDefined"), sa)) {
                 source.getRemembered().remove(card);
             }
