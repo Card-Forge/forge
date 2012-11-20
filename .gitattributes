@@ -1633,6 +1633,7 @@ res/cardsfolder/c/chromatic_star.txt svneol=native#text/plain
 res/cardsfolder/c/chrome_mox.txt svneol=native#text/plain
 res/cardsfolder/c/chrome_steed.txt svneol=native#text/plain
 res/cardsfolder/c/chromescale_drake.txt svneol=native#text/plain
+res/cardsfolder/c/chromeshell_crab.txt -text
 res/cardsfolder/c/chromium.txt svneol=native#text/plain
 res/cardsfolder/c/chronatog.txt svneol=native#text/plain
 res/cardsfolder/c/chronatog_totem.txt svneol=native#text/plain
@@ -4776,6 +4777,7 @@ res/cardsfolder/i/ichor_wellspring.txt svneol=native#text/plain
 res/cardsfolder/i/ichorclaw_myr.txt svneol=native#text/plain
 res/cardsfolder/i/ichorid.txt svneol=native#text/plain
 res/cardsfolder/i/icy_manipulator.txt svneol=native#text/plain
+res/cardsfolder/i/icy_prison.txt -text
 res/cardsfolder/i/ideas_unbound.txt -text
 res/cardsfolder/i/identity_crisis.txt svneol=native#text/plain
 res/cardsfolder/i/idle_thoughts.txt svneol=native#text/plain
@@ -5287,6 +5289,7 @@ res/cardsfolder/k/kher_keep.txt svneol=native#text/plain
 res/cardsfolder/k/kiki_jiki_mirror_breaker.txt svneol=native#text/plain
 res/cardsfolder/k/kiku_nights_flower.txt svneol=native#text/plain
 res/cardsfolder/k/kikus_shadow.txt svneol=native#text/plain
+res/cardsfolder/k/kill_switch.txt -text
 res/cardsfolder/k/killer_bees.txt svneol=native#text/plain
 res/cardsfolder/k/killer_instinct.txt -text
 res/cardsfolder/k/killer_whale.txt svneol=native#text/plain
