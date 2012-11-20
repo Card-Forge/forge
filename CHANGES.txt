@@ -72,6 +72,39 @@ Fixes/Features:
 - ChangeZoneAll with destination Library will now let you choose the order.
 - Fixed spell description for Hypnotic Cloud
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CheckStyle
+- CheckStyle
+- small script tweaks
+- Fixed Enlightened Tutor not shuffling the library.
+- Added the global rule change: "Each creature assigns combat damage equal to its toughness rather than its power.".
+- Converted Doran, the Siege Tower.
+- Converted Shifting Sliver to script.
+- Cleanup.
+- Created Variants branch.
+- Variants: Created command zone view.
+- Variants: Moved effects and emblems to command zone.
+- Variants: Added a bunch of Vanguard cards (Thanks, Marc!)
+- Variants: Added a Vanguard home screen.
+- Variants: Created command zone view.
+- Variants:2 files weren't added correctly.
+- You no longer have to choose the order of cards for Elixir of Immortality.
+- Fixed payment of phyrexian mana.
+- Fixed Shocklands not using canPayLife(2).
+- The AI will now better react to Platinum Emperion.
+- Added a Java 7 compatibility fluff piece to the changes.txt file.
+- If lethal damage has already been assigned just treat is as 0 in VAssignDamage
+- Minor text change
+- CheckStyle.
+- Vanguard: added AffectedZone parameter to Birds of Paradise Avatar
+- Added Shell of the Last Kappa
+- ChangeZone can now remember cards moved from the stack
+- CheckStyle
+- The AI can now use Icy Prison.
+- Cleanup AF can now be used to clear individual defined cards from remembered lists
+- Removed a println I left in my previous commit
+- Variants - Fixed Archangel of Strife
+- Variants - Changed ValidGrave count method to Valid<coma delimited zones> eg:Count$ValidBattlefield,Graveyard Card.YouCtrl
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -90,6 +123,13 @@ Equal Treatment
 Terastodon
 Demonfire
 Mirror of Fate
+Vassal's Duty
+Sivvi's Valor
+Chromeshell Crab
+Icy Prison
+Kill Switch
+Kaho, Minamo Historian
+Nomad Mythmaker
 
 
 end
