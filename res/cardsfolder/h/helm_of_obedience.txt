@@ -15,8 +15,8 @@ SVar:DBResetCounter:DB$ StoreSVar | SVar$ AccumlatedMilled | Type$ Number | Expr
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:TargetedLibrary:TargetedPlayer$CardsInLibrary
 SVar:MaxRepeats:TargetedPlayer$CardsInLibrary/Plus.2
-SVar:MilledCreature:Count$ValidGrave Creature.IsRemembered
-SVar:MilledCard:Count$ValidGrave Card.IsRemembered
+SVar:MilledCreature:Count$ValidGraveyard Creature.IsRemembered
+SVar:MilledCard:Count$ValidGraveyard Card.IsRemembered
 SVar:AccumlatedMilled:Number$0
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True

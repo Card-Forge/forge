@@ -1977,20 +1977,8 @@ public class CardFactoryUtil {
             }
         }
 
-        // count valid cards in the garveyard
-        if (l[0].contains("ValidGrave")) {
-            String restrictions = l[0].replace("ValidGrave ", "");
-            restrictions = restrictions.replace("Count$", "");
-            final String[] rest = restrictions.split(",");
-            List<Card> cards = Singletons.getModel().getGame().getCardsIn(ZoneType.Graveyard);
-            cards = CardLists.getValidCards(cards, rest, cardController, c);
-
-            n = cards.size();
-
-            return CardFactoryUtil.doXMath(n, m, c);
-        }
         // count valid cards on the battlefield
-        if (l[0].contains("Valid")) {
+        if (l[0].contains("Valid ")) {
             String restrictions = l[0].replace("Valid ", "");
             restrictions = restrictions.replace("Count$", "");
             final String[] rest = restrictions.split(",");
@@ -1998,6 +1986,19 @@ public class CardFactoryUtil {
             cardsonbattlefield = CardLists.getValidCards(cardsonbattlefield, rest, cardController, c);
 
             n = cardsonbattlefield.size();
+
+            return CardFactoryUtil.doXMath(n, m, c);
+        }
+        // count valid cards in any specified zone/s
+        if (l[0].contains("Valid") && !l[0].contains("Valid ")) {
+            String[] lparts = l[0].split(" ", 2);
+            final List<ZoneType> vZone = ZoneType.listValueOf(lparts[0].split("Valid")[1]);
+            String restrictions = l[0].replace(lparts[0] + " ", "");
+            final String[] rest = restrictions.split(",");
+            List<Card> cards = Singletons.getModel().getGame().getCardsIn(vZone);
+            cards = CardLists.getValidCards(cards, rest, cardController, c);
+
+            n = cards.size();
 
             return CardFactoryUtil.doXMath(n, m, c);
         }
