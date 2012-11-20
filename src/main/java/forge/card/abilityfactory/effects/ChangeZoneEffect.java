@@ -32,13 +32,13 @@ public class ChangeZoneEffect extends SpellEffect {
         if (sa.hasParam("Origin")) {
             origin = sa.getParam("Origin");
         }
-    
+
         if (ZoneType.isHidden(origin, sa.hasParam("Hidden"))) {
             return changeHiddenOriginStackDescription(sa);
         } else if (ZoneType.isKnown(origin)) {
             return changeKnownOriginStackDescription(sa);
         }
-    
+
         return "";
     }
 
@@ -56,16 +56,16 @@ public class ChangeZoneEffect extends SpellEffect {
     private static String changeHiddenOriginStackDescription(final SpellAbility sa) {
         // TODO build Stack Description will need expansion as more cards are
         // added
-    
+
         final StringBuilder sb = new StringBuilder();
         final Card host = sa.getSourceCard();
-    
+
         if (!(sa instanceof AbilitySub)) {
             sb.append(host.getName()).append(" -");
         }
-    
+
         sb.append(" ");
-    
+
         if (sa.hasParam("StackDescription")) {
             String stackDesc = sa.getParam("StackDescription");
             if (stackDesc.equals("None")) {
@@ -81,11 +81,11 @@ public class ChangeZoneEffect extends SpellEffect {
                 origin = sa.getParam("Origin");
             }
             final String destination = sa.getParam("Destination");
-    
+
             final String type = sa.hasParam("ChangeType") ? sa.getParam("ChangeType") : "Card";
             final int num = sa.hasParam("ChangeNum") ? AbilityFactory.calculateAmount(host,
                     sa.getParam("ChangeNum"), sa) : 1;
-    
+
             if (origin.equals("Library") && sa.hasParam("Defined")) {
                 // for now, just handle the Exile from top of library case, but
                 // this can be expanded...
@@ -100,21 +100,21 @@ public class ChangeZoneEffect extends SpellEffect {
                 sb.append(".");
             } else if (origin.equals("Library")) {
                 sb.append("Search your library for ").append(num).append(" ").append(type).append(" and ");
-    
+
                 if (num == 1) {
                     sb.append("put that card ");
                 } else {
                     sb.append("put those cards ");
                 }
-    
+
                 if (destination.equals("Battlefield")) {
                     sb.append("onto the battlefield");
                     if (sa.hasParam("Tapped")) {
                         sb.append(" tapped");
                     }
-    
+
                     sb.append(".");
-    
+
                 }
                 if (destination.equals("Hand")) {
                     sb.append("into your hand.");
@@ -122,24 +122,24 @@ public class ChangeZoneEffect extends SpellEffect {
                 if (destination.equals("Graveyard")) {
                     sb.append("into your graveyard.");
                 }
-    
+
                 sb.append(" Then shuffle your library.");
             } else if (origin.equals("Hand")) {
                 sb.append("Put ").append(num).append(" ").append(type).append(" card(s) from your hand ");
-    
+
                 if (destination.equals("Battlefield")) {
                     sb.append("onto the battlefield.");
                 }
                 if (destination.equals("Library")) {
                     final int libraryPos = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : 0;
-    
+
                     if (libraryPos == 0) {
                         sb.append("on top");
                     }
                     if (libraryPos == -1) {
                         sb.append("on bottom");
                     }
-    
+
                     sb.append(" of your library.");
                 }
             } else if (origin.equals("Battlefield")) {
@@ -150,12 +150,12 @@ public class ChangeZoneEffect extends SpellEffect {
                 sb.append(" to your ").append(destination);
             }
         }
-    
+
         final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
-    
+
         return sb.toString();
     }
 
@@ -171,21 +171,21 @@ public class ChangeZoneEffect extends SpellEffect {
      * @return a {@link java.lang.String} object.
      */
     private static String changeKnownOriginStackDescription(final SpellAbility sa) {
-    
+
         final StringBuilder sb = new StringBuilder();
         final Card host = sa.getSourceCard();
-    
+
         if (!(sa instanceof AbilitySub)) {
             sb.append(host.getName()).append(" -");
         }
-    
+
         sb.append(" ");
-    
+
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final ZoneType origin = ZoneType.smartValueOf(sa.getParam("Origin"));
-    
+
         final StringBuilder sbTargets = new StringBuilder();
-    
+
         ArrayList<Card> tgts;
         if (sa.getTarget() != null) {
             tgts = sa.getTarget().getTargetCards();
@@ -196,23 +196,23 @@ public class ChangeZoneEffect extends SpellEffect {
                 tgts.add(c);
             }
         }
-    
+
         for (final Card c : tgts) {
             sbTargets.append(" ").append(c);
         }
-    
+
         final String targetname = sbTargets.toString();
-    
+
         final String pronoun = tgts.size() > 1 ? " their " : " its ";
-    
+
         final String fromGraveyard = " from the graveyard";
-    
+
         if (destination.equals(ZoneType.Battlefield)) {
             sb.append("Put").append(targetname);
             if (origin.equals(ZoneType.Graveyard)) {
                 sb.append(fromGraveyard);
             }
-    
+
             sb.append(" onto the battlefield");
             if (sa.hasParam("Tapped")) {
                 sb.append(" tapped");
@@ -222,7 +222,7 @@ public class ChangeZoneEffect extends SpellEffect {
             }
             sb.append(".");
         }
-    
+
         if (destination.equals(ZoneType.Hand)) {
             sb.append("Return").append(targetname);
             if (origin.equals(ZoneType.Graveyard)) {
@@ -230,23 +230,23 @@ public class ChangeZoneEffect extends SpellEffect {
             }
             sb.append(" to").append(pronoun).append("owners hand.");
         }
-    
+
         if (destination.equals(ZoneType.Library)) {
             if (sa.hasParam("Shuffle")) { // for things like Gaea's
-                                                 // Blessing
+                                          // Blessing
                 sb.append("Shuffle").append(targetname);
-    
+
                 sb.append(" into").append(pronoun).append("owner's library.");
             } else {
                 sb.append("Put").append(targetname);
                 if (origin.equals(ZoneType.Graveyard)) {
                     sb.append(fromGraveyard);
                 }
-    
+
                 // this needs to be zero indexed. Top = 0, Third = 2, -1 =
                 // Bottom
                 final int libraryPosition = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : 0;
-    
+
                 if (libraryPosition == -1) {
                     sb.append(" on the bottom of").append(pronoun).append("owner's library.");
                 } else if (libraryPosition == 0) {
@@ -257,7 +257,7 @@ public class ChangeZoneEffect extends SpellEffect {
                 }
             }
         }
-    
+
         if (destination.equals(ZoneType.Exile)) {
             sb.append("Exile").append(targetname);
             if (origin.equals(ZoneType.Graveyard)) {
@@ -265,23 +265,23 @@ public class ChangeZoneEffect extends SpellEffect {
             }
             sb.append(".");
         }
-    
+
         if (destination.equals(ZoneType.Ante)) {
             sb.append("Ante").append(targetname);
             sb.append(".");
         }
-    
+
         if (destination.equals(ZoneType.Graveyard)) {
             sb.append("Put").append(targetname);
             sb.append(" from ").append(origin);
             sb.append(" into").append(pronoun).append("owner's graveyard.");
         }
-    
+
         final AbilitySub abSub = sa.getSubAbility();
         if (abSub != null) {
             sb.append(abSub.getStackDescription());
         }
-    
+
         return sb.toString();
     }
 
@@ -294,14 +294,14 @@ public class ChangeZoneEffect extends SpellEffect {
      * @param af
      *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      */
-    
+
     @Override
     public void resolve(SpellAbility sa) {
         String origin = "";
         if (sa.hasParam("Origin")) {
             origin = sa.getParam("Origin");
         }
-    
+
         if (ZoneType.isHidden(origin, sa.hasParam("Hidden")) && !sa.hasParam("Ninjutsu")) {
             changeHiddenOriginResolve(sa);
         } else {
@@ -324,14 +324,14 @@ public class ChangeZoneEffect extends SpellEffect {
     private static void changeKnownOriginResolve(final SpellAbility sa) {
         ArrayList<Card> tgtCards;
         ArrayList<SpellAbility> sas;
-    
+
         final Target tgt = sa.getTarget();
         final Player player = sa.getActivatingPlayer();
         final Card hostCard = sa.getSourceCard();
-    
+
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final List<ZoneType> origin = ZoneType.listValueOf(sa.getParam("Origin"));
-    
+
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {
@@ -342,40 +342,40 @@ public class ChangeZoneEffect extends SpellEffect {
                 }
             }
         }
-    
+
         // changing zones for spells on the stack
         if (tgt != null) {
             sas = tgt.getTargetSAs();
         } else {
             sas = AbilityFactory.getDefinedSpellAbilities(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
-    
+
         for (final SpellAbility tgtSA : sas) {
             if (!tgtSA.isSpell()) { // Catch any abilities or triggers that slip through somehow
                 continue;
             }
-    
+
             final SpellAbilityStackInstance si = Singletons.getModel().getGame().getStack().getInstanceFromSpellAbility(tgtSA);
             if (si == null) {
                 continue;
             }
-    
+
             removeFromStack(tgtSA, sa, si);
         } // End of change from stack
-    
+
         final String remember = sa.getParam("RememberChanged");
         final String imprint = sa.getParam("Imprint");
-    
+
         if (sa.hasParam("Unimprint")) {
             hostCard.clearImprinted();
         }
-    
+
         if (sa.hasParam("ForgetOtherRemembered")) {
             hostCard.clearRemembered();
         }
-    
+
         boolean optional = sa.hasParam("Optional");
-    
+
         if (tgtCards.size() != 0) {
             for (final Card tgtC : tgtCards) {
                 final StringBuilder sb = new StringBuilder();
@@ -385,21 +385,21 @@ public class ChangeZoneEffect extends SpellEffect {
                     continue;
                 }
                 final Zone originZone = Singletons.getModel().getGame().getZoneOf(tgtC);
-    
+
                 // if Target isn't in the expected Zone, continue
-    
+
                 if (originZone == null || !origin.contains(originZone.getZoneType())) {
                     continue;
                 }
-                
+
                 Card movedCard = null;
-    
+
                 if (destination.equals(ZoneType.Library)) {
                     // library position is zero indexed
                     final int libraryPosition = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : 0;
-    
+
                     movedCard = Singletons.getModel().getGame().getAction().moveToLibrary(tgtC, libraryPosition);
-    
+
                     // for things like Gaea's Blessing
                     if (sa.hasParam("Shuffle")) {
                         tgtC.getOwner().shuffle();
@@ -438,10 +438,10 @@ public class ChangeZoneEffect extends SpellEffect {
                                 continue;
                             }
                         }
-    
+
                         movedCard = Singletons.getModel().getGame().getAction()
                                 .moveTo(tgtC.getController().getZone(destination), tgtC);
-    
+
                         if (sa.hasParam("Ninjutsu") || sa.hasParam("Attacking")) {
                             Singletons.getModel().getGame().getCombat().addAttacker(tgtC);
                             Singletons.getModel().getGame().getCombat().addUnblockedAttacker(tgtC);
@@ -488,18 +488,18 @@ public class ChangeZoneEffect extends SpellEffect {
      */
     private static void changeHiddenOriginResolve(final SpellAbility sa) {
         ArrayList<Player> fetchers;
-    
+
         if (sa.hasParam("DefinedPlayer")) {
             fetchers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("DefinedPlayer"), sa);
         } else {
             fetchers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
-    
+
         // handle case when Defined is for a Card
         if (fetchers.isEmpty()) {
             fetchers.add(sa.getSourceCard().getController());
         }
-    
+
         Player chooser = null;
         if (sa.hasParam("Chooser")) {
             final String choose = sa.getParam("Chooser");
@@ -509,7 +509,7 @@ public class ChangeZoneEffect extends SpellEffect {
                 chooser = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), choose, sa).get(0);
             }
         }
-    
+
         for (final Player player : fetchers) {
             Player decider = chooser;
             if (decider == null) {
@@ -539,7 +539,7 @@ public class ChangeZoneEffect extends SpellEffect {
         final Card card = sa.getSourceCard();
         final List<Card> movedCards = new ArrayList<Card>();
         final boolean defined = sa.hasParam("Defined");
-    
+
         final Target tgt = sa.getTarget();
         if (tgt != null) {
             final ArrayList<Player> players = tgt.getTargetPlayers();
@@ -548,7 +548,7 @@ public class ChangeZoneEffect extends SpellEffect {
                 return;
             }
         }
-    
+
         List<ZoneType> origin = new ArrayList<ZoneType>();
         if (sa.hasParam("Origin")) {
             origin = ZoneType.listValueOf(sa.getParam("Origin"));
@@ -556,37 +556,37 @@ public class ChangeZoneEffect extends SpellEffect {
         ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         // this needs to be zero indexed. Top = 0, Third = 2
         int libraryPos = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : 0;
-    
+
         if (sa.hasParam("OriginChoice")) {
             // Currently only used for Mishra, but may be used by other things
             // Improve how this message reacts for other cards
             final List<ZoneType> alt = ZoneType.listValueOf(sa.getParam("OriginAlternative"));
             List<Card> altFetchList = player.getCardsIn(alt);
             altFetchList = AbilityFactory.filterListByType(altFetchList, sa.getParam("ChangeType"), sa);
-    
+
             final StringBuilder sb = new StringBuilder();
             sb.append(sa.getParam("AlternativeMessage")).append(" ");
             sb.append(altFetchList.size()).append(" cards match your searching type in Alternate Zones.");
-    
+
             if (!GameActionUtil.showYesNoDialog(card, sb.toString())) {
                 origin = alt;
             }
         }
-    
+
         if (sa.hasParam("DestinationAlternative")) {
-    
+
             final StringBuilder sb = new StringBuilder();
             sb.append(sa.getParam("AlternativeDestinationMessage"));
-    
+
             if (!GameActionUtil.showYesNoDialog(card, sb.toString())) {
                 destination = ZoneType.smartValueOf(sa.getParam("DestinationAlternative"));
                 libraryPos = sa.hasParam("LibraryPositionAlternative") ? Integer.parseInt(sa.getParam("LibraryPositionAlternative")) : 0;
             }
         }
-    
+
         int changeNum = sa.hasParam("ChangeNum") ? AbilityFactory.calculateAmount(card, sa.getParam("ChangeNum"),
                 sa) : 1;
-    
+
         List<Card> fetchList;
         if (defined) {
             fetchList = new ArrayList<Card>(AbilityFactory.getDefinedCards(card, sa.getParam("Defined"), sa));
@@ -599,14 +599,14 @@ public class ChangeZoneEffect extends SpellEffect {
         } else {
             fetchList = player.getCardsIn(origin);
         }
-    
+
         if (!defined) {
             if (origin.contains(ZoneType.Library) && !defined && !sa.hasParam("NoLooking")) { 
                 // Look at whole library before moving onto choosing a card
                 GuiChoose.oneOrNone(sa.getSourceCard().getName() + " - Looking at Library",
                         player.getCardsIn(ZoneType.Library));
             }
-    
+
             // Look at opponents hand before moving onto choosing a card
             if (origin.contains(ZoneType.Hand) && player.isComputer()) {
                 GuiChoose.oneOrNone(sa.getSourceCard().getName() + " - Looking at Opponent's Hand", player
@@ -614,16 +614,16 @@ public class ChangeZoneEffect extends SpellEffect {
             }
             fetchList = AbilityFactory.filterListByType(fetchList, sa.getParam("ChangeType"), sa);
         }
-    
+
         final String remember = sa.getParam("RememberChanged");
         final String forget = sa.getParam("ForgetChanged");
         final String imprint = sa.getParam("Imprint");
         final String selectPrompt = sa.hasParam("SelectPrompt") ? sa.getParam("SelectPrompt") : "Select a card";
-    
+
         if (sa.hasParam("Unimprint")) {
             card.clearImprinted();
         }
-    
+
         for (int i = 0; i < changeNum; i++) {
             if (sa.hasParam("DifferentNames")) {
                 for (Card c : movedCards) {
@@ -633,7 +633,7 @@ public class ChangeZoneEffect extends SpellEffect {
             if ((fetchList.size() == 0) || (destination == null)) {
                 break;
             }
-    
+
             Object o;
             if (sa.hasParam("AtRandom")) {
                 o = CardUtil.getRandom(fetchList);
@@ -644,12 +644,12 @@ public class ChangeZoneEffect extends SpellEffect {
             } else {
                 o = GuiChoose.oneOrNone(selectPrompt, fetchList);
             }
-    
+
             if (o != null) {
                 final Card c = (Card) o;
                 fetchList.remove(c);
                 Card movedCard = null;
-    
+
                 if (destination.equals(ZoneType.Library)) {
                     // do not shuffle the library once we have placed a fetched
                     // card on top.
@@ -664,7 +664,7 @@ public class ChangeZoneEffect extends SpellEffect {
                     if (sa.hasParam("GainControl")) {
                         c.addController(sa.getSourceCard());
                     }
-    
+
                     if (sa.hasParam("AttachedTo")) {
                         final ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(),
                                 sa.getParam("AttachedTo"), sa);
@@ -683,11 +683,11 @@ public class ChangeZoneEffect extends SpellEffect {
                             c.enchantEntity(attachedTo);
                         }
                     }
-    
+
                     if (sa.hasParam("Attacking")) {
                         Singletons.getModel().getGame().getCombat().addAttacker(c);
                     }
-    
+
                     movedCard = Singletons.getModel().getGame().getAction().moveTo(c.getController().getZone(destination), c);
                     if (sa.hasParam("Tapped")) {
                         movedCard.setTapped(true);
@@ -701,7 +701,7 @@ public class ChangeZoneEffect extends SpellEffect {
                     movedCard = Singletons.getModel().getGame().getAction().moveTo(destination, c);
                 }
                 movedCards.add(movedCard);
-    
+
                 if (remember != null) {
                     card.addRemembered(movedCard);
                 }
@@ -712,12 +712,12 @@ public class ChangeZoneEffect extends SpellEffect {
                 if (imprint != null) {
                     card.addImprinted(movedCard);
                 }
-    
+
             } else {
                 final StringBuilder sb = new StringBuilder();
                 final int num = Math.min(fetchList.size(), changeNum - i);
                 sb.append("Cancel Search? Up to ").append(num).append(" more cards can change zones.");
-    
+
                 if (((i + 1) == changeNum) || GameActionUtil.showYesNoDialog(card, sb.toString())) {
                     break;
                 }
@@ -726,7 +726,7 @@ public class ChangeZoneEffect extends SpellEffect {
         if (sa.hasParam("Reveal") && !movedCards.isEmpty()) {
             GuiChoose.one(card + " - Revealed card: ", movedCards.toArray());
         }
-    
+
         if ((origin.contains(ZoneType.Library) && !destination.equals(ZoneType.Library) && !defined)
                 || (sa.hasParam("Shuffle") && "True".equals(sa.getParam("Shuffle")))) {
             player.shuffle();
@@ -748,8 +748,9 @@ public class ChangeZoneEffect extends SpellEffect {
      */
     private static void removeFromStack(final SpellAbility tgtSA, final SpellAbility srcSA, final SpellAbilityStackInstance si) {
         Singletons.getModel().getGame().getStack().remove(si);
-    
+
         if (srcSA.hasParam("Destination")) {
+            final boolean remember = srcSA.hasParam("RememberChanged");
             if (tgtSA.isAbility()) {
                 // Shouldn't be able to target Abilities but leaving this in for now
             } else if (tgtSA.isFlashBackAbility())  {
@@ -771,7 +772,11 @@ public class ChangeZoneEffect extends SpellEffect {
                 throw new IllegalArgumentException("AbilityFactory_ChangeZone: Invalid Destination argument for card "
                         + srcSA.getSourceCard().getName());
             }
-    
+
+            if (remember) {
+                srcSA.getSourceCard().addRemembered(tgtSA.getSourceCard());
+            }
+
             if (!tgtSA.isAbility()) {
                 System.out.println("Moving spell to " + srcSA.getParam("Destination"));
             }
