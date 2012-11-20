@@ -2,10 +2,10 @@ Name:Starlit Sanctum
 ManaCost:no cost
 Types:Land
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
-A:AB$ GainLife | Cost$ W T Sac<1/Creature.cleric> | LifeAmount$ X | CostDesc$ W, T, Sacrifice a Cleric creature: | SpellDescription$ You gain life equal to the sacrificed creature's toughness.
+A:AB$ GainLife | Cost$ W T Sac<1/Creature.Cleric/Cleric creature> | LifeAmount$ X | References$ X | SpellDescription$ You gain life equal to the sacrificed creature's toughness.
 SVar:X:Sacrificed$CardToughness
-A:AB$ LoseLife | Cost$ B T Sac<1/Creature.cleric> | ValidTgts$ Player | LifeAmount$ X | TgtPrompt$ Select a player | CostDesc$ B, T, Sacrifice a Cleric creature: | SpellDescription$ Target player loses life equal to the sacrificed creature's power.
-SVar:X:Sacrificed$CardPower
+A:AB$ LoseLife | Cost$ B T Sac<1/Creature.Cleric/Cleric creature> | ValidTgts$ Player | LifeAmount$ Y | References$ Y | TgtPrompt$ Select a player | SpellDescription$ Target player loses life equal to the sacrificed creature's power.
+SVar:Y:Sacrificed$CardPower
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/starlit_sanctum.jpg

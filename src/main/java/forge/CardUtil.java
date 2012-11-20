@@ -681,48 +681,6 @@ public final class CardUtil {
     }
 
     /**
-     * getLKICopyOld.
-     * 
-     * @param c
-     *            a Card.
-     * @return a copy of C with LastKnownInfo stuff retained.
-     */
-    public static Card getLKICopyOld(final Card c) {
-        if (c.isToken()) {
-            return c;
-        }
-        final CardCharacteristicName state = c.getCurState();
-        if (c.isInAlternateState()) {
-            c.setState(CardCharacteristicName.Original);
-        }
-        final Card res = Singletons.getModel().getCardFactory().copyCard(c);
-        c.setState(state);
-        res.setState(state);
-        res.setControllerObjects(c.getControllerObjects());
-        res.addTempAttackBoost(c.getTempAttackBoost());
-        res.addSemiPermanentAttackBoost(c.getSemiPermanentAttackBoost());
-        res.addTempDefenseBoost(c.getTempDefenseBoost());
-        res.addSemiPermanentDefenseBoost(c.getSemiPermanentDefenseBoost());
-        res.setCounters(c.getCounters());
-        res.setExtrinsicKeyword(c.getExtrinsicKeyword());
-        res.setColor(c.getColor());
-        res.setChangedCardTypes(c.getChangedCardTypes());
-        res.setNewPT(new ArrayList<CardPowerToughness>(c.getNewPT()));
-        res.setReceivedDamageFromThisTurn(c.getReceivedDamageFromThisTurn());
-        res.getDamageHistory().setCreatureGotBlockedThisTurn(c.getDamageHistory().getCreatureGotBlockedThisTurn());
-        res.setEnchanting(c.getEnchanting());
-        res.setEnchantedBy(c.getEnchantedBy());
-        res.setEquipping(c.getEquipping());
-        res.setEquippedBy(c.getEquippedBy());
-        res.setHaunting(c.getHaunting());
-        for (final Card haunter : c.getHauntedBy()) {
-            res.addHauntedBy(haunter);
-        }
-
-        return res;
-    }
-
-    /**
      * getLKICopy.
      * 
      * @param in
@@ -741,21 +699,18 @@ public final class CardUtil {
         newCopy.setFlipCard(in.isFlipCard());
         newCopy.setDoubleFaced(in.isDoubleFaced());
         newCopy.getCharacteristics().copy(in.getState(in.getCurState()));
+        newCopy.setBaseAttack(in.getNetAttack());
+        newCopy.setBaseDefense(in.getNetDefense());
+        newCopy.setType(new ArrayList<String>(in.getType()));
         newCopy.setTriggers(in.getTriggers());
         for (SpellAbility sa : in.getManaAbility()) {
             newCopy.addSpellAbility(sa);
         }
 
         newCopy.setControllerObjects(in.getControllerObjects());
-        newCopy.addTempAttackBoost(in.getTempAttackBoost());
-        newCopy.addSemiPermanentAttackBoost(in.getSemiPermanentAttackBoost());
-        newCopy.addTempDefenseBoost(in.getTempDefenseBoost());
-        newCopy.addSemiPermanentDefenseBoost(in.getSemiPermanentDefenseBoost());
         newCopy.setCounters(in.getCounters());
         newCopy.setExtrinsicKeyword(in.getExtrinsicKeyword());
         newCopy.setColor(in.getColor());
-        newCopy.setChangedCardTypes(in.getChangedCardTypes());
-        newCopy.setNewPT(new ArrayList<CardPowerToughness>(in.getNewPT()));
         newCopy.setReceivedDamageFromThisTurn(in.getReceivedDamageFromThisTurn());
         newCopy.getDamageHistory().setCreatureGotBlockedThisTurn(in.getDamageHistory().getCreatureGotBlockedThisTurn());
         newCopy.setEnchanting(in.getEnchanting());

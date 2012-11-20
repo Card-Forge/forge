@@ -43,12 +43,14 @@ public class LifeGainEffect extends SpellEffect {
         final Target tgt = sa.getTarget();
         ArrayList<Player> tgtPlayers = new ArrayList<Player>();
 
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        }
         if (sa.hasParam("Defined")) {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
+        } else if (tgt != null) {
+            tgtPlayers = tgt.getTargetPlayers();
+        } else {
+            tgtPlayers.add(sa.getActivatingPlayer());
         }
+
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 p.gainLife(lifeAmount, sa.getSourceCard());
