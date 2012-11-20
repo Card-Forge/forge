@@ -4,7 +4,7 @@ Types:Creature Human Nomad Cleric
 Text:no text
 PT:2/2
 A:AB$ ChooseCard | Cost$ W T | Defined$ You | Amount$ 1 | Choices$ Creature.YouCtrl  | RememberChosen$ True | SubAbility$ MakeMyth | AILogic$ AtLeast1 | SpellDescription$ Put target Aura card from a graveyard onto the battlefield under your control attached to a creature you control.
-SVar:MakeMyth:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Aura.YouOwn | AttachedTo$ Remembered | GainControl$ True | SubAbility$ DBCleanup
+SVar:MakeMyth:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Aura | AttachedTo$ Remembered | GainControl$ True | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nomad_mythmaker.jpg
