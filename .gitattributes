@@ -1800,6 +1800,7 @@ res/cardsfolder/c/commando_raid.txt -text svneol=unset#text/plain
 res/cardsfolder/c/common_bond.txt -text
 res/cardsfolder/c/commune_with_nature.txt svneol=native#text/plain
 res/cardsfolder/c/complex_automaton.txt svneol=native#text/plain
+res/cardsfolder/c/complicate.txt -text
 res/cardsfolder/c/composite_golem.txt svneol=native#text/plain
 res/cardsfolder/c/compost.txt svneol=native#text/plain
 res/cardsfolder/c/compulsion.txt svneol=native#text/plain
