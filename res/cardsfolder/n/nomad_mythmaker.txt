@@ -1,0 +1,15 @@
+Name:Nomad Mythmaker
+ManaCost:2 W
+Types:Creature Human Nomad Cleric
+Text:no text
+PT:2/2
+A:AB$ Pump | Cost$ W T | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control to enchant | RememberTargets$ True | SubAbility$ MakeMyth | SpellDescription$ Put target Aura card from a graveyard onto the battlefield under your control attached to a creature you control.
+SVar:MakeMyth:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Aura | AttachedTo$ Remembered | GainControl$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nomad_mythmaker.jpg
+SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/15.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/30.jpg
+Oracle:{W}, {T}: Put target Aura card from a graveyard onto the battlefield under your control attached to a creature you control.
+End
