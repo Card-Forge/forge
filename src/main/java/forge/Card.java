@@ -7939,7 +7939,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
             return damage;
         }
-        
+
         for (final Card ca : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
             for (final ReplacementEffect re : ca.getReplacementEffects()) {
                 HashMap<String, String> params = re.getMapParams();

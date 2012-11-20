@@ -13,31 +13,30 @@ import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
-public class ChooseNumberEffect extends SpellEffect
-{
-    
+public class ChooseNumberEffect extends SpellEffect {
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        
+
         for (final Player p : getTargetPlayers(sa)) {
             sb.append(p).append(" ");
         }
         sb.append("chooses a number.");
-        
+
         return sb.toString();
     }
-    
+
     @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getSourceCard();
         //final int min = sa.containsKey("Min") ? Integer.parseInt(sa.get("Min")) : 0;
         //final int max = sa.containsKey("Max") ? Integer.parseInt(sa.get("Max")) : 99;
         final boolean random = sa.hasParam("Random");
-        
+
         final int min;
         if (!sa.hasParam("Min")) {
             min = Integer.parseInt("0");
@@ -46,7 +45,7 @@ public class ChooseNumberEffect extends SpellEffect
         } else {
             min = CardFactoryUtil.xCount(card, card.getSVar(sa.getParam("Min")));
         } // Allow variables for Min
-        
+
         final int max;
         if (!sa.hasParam("Max")) {
             max = Integer.parseInt("99");
@@ -55,7 +54,7 @@ public class ChooseNumberEffect extends SpellEffect
         } else {
             max = CardFactoryUtil.xCount(card, card.getSVar(sa.getParam("Max")));
         } // Allow variables for Max
-        
+
         final String[] choices = new String[max + 1];
         if (!random) {
             // initialize the array
@@ -63,10 +62,10 @@ public class ChooseNumberEffect extends SpellEffect
                 choices[i] = Integer.toString(i);
             }
         }
-        
+
         final List<Player> tgtPlayers = getTargetPlayers(sa);
         final Target tgt = sa.getTarget();
-        
+
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (sa.getActivatingPlayer().isHuman()) {
@@ -90,7 +89,7 @@ public class ChooseNumberEffect extends SpellEffect
                         chosen = Integer.parseInt((String) o);
                     }
                     card.setChosenNumber(chosen);
-                    
+
                 } else {
                     // TODO - not implemented
                 }

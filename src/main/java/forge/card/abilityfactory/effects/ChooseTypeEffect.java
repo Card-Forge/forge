@@ -18,8 +18,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
 public class ChooseTypeEffect extends SpellEffect {
-    
-    
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -28,10 +27,10 @@ public class ChooseTypeEffect extends SpellEffect {
             sb.append(p).append(" ");
         }
         sb.append("chooses a type.");
-        
+
         return sb.toString();
     }
-    
+
     @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getSourceCard();
@@ -40,7 +39,7 @@ public class ChooseTypeEffect extends SpellEffect {
         if (sa.hasParam("InvalidTypes")) {
             invalidTypes.addAll(Arrays.asList(sa.getParam("InvalidTypes").split(",")));
         }
-        
+
         final ArrayList<String> validTypes = new ArrayList<String>();
         if (sa.hasParam("ValidTypes")) {
             validTypes.addAll(Arrays.asList(sa.getParam("ValidTypes").split(",")));
@@ -48,10 +47,10 @@ public class ChooseTypeEffect extends SpellEffect {
 
         final Target tgt = sa.getTarget();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
-        
+
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
-                
+
                 if (type.equals("Card")) {
                     if (validTypes.isEmpty()) {
                         validTypes.addAll(Constant.CardTypes.CARD_TYPES);

@@ -35,12 +35,13 @@ public class CountersProliferateEffect extends SpellEffect {
     @Override
     public void resolve(SpellAbility sa) {
         Player controller = sa.getSourceCard().getController();
-        if (controller.isHuman()) 
+        if (controller.isHuman()) {
             resolveHuman(sa);
-        else
+        } else {
             resolveAI(controller, sa);
+        }
     }
-    
+
     private static void resolveHuman(final SpellAbility sa) {
         final List<Card> unchosen = Lists.newArrayList(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield));
         final List<Player> players = new ArrayList<Player>(Singletons.getModel().getGame().getPlayers());
@@ -84,8 +85,8 @@ public class CountersProliferateEffect extends SpellEffect {
 
             @Override
             public void selectPlayer(final Player player) {
-                if (players.indexOf(player) >= 0)
-                {
+                if (players.indexOf(player) >= 0) {
+
                     players.remove(player); // no second selection
                     if (player.getPoisonCounters() > 0) {
                         player.addPoisonCounters(1, sa.getSourceCard());
@@ -94,9 +95,8 @@ public class CountersProliferateEffect extends SpellEffect {
             }
         });
     }
-    
-    
-    
+
+
     private static void resolveAI(final Player ai, final SpellAbility sa) {
         final List<Player> allies = ai.getAllies();
         allies.add(ai);
@@ -105,10 +105,12 @@ public class CountersProliferateEffect extends SpellEffect {
             @Override
             public boolean apply(Card crd) {
                 for (final Entry<Counters, Integer> c1 : crd.getCounters().entrySet()) {
-                    if ( CardFactoryUtil.isNegativeCounter(c1.getKey()) && enemies.contains(crd.getController()))
+                    if (CardFactoryUtil.isNegativeCounter(c1.getKey()) && enemies.contains(crd.getController())) {
                         return true;
-                    if ( !CardFactoryUtil.isNegativeCounter(c1.getKey()) && allies.contains(crd.getController()))
+                    }
+                    if (!CardFactoryUtil.isNegativeCounter(c1.getKey()) && allies.contains(crd.getController())) {
                         return true;
+                    }
                 }
                 return false;
             }
@@ -116,9 +118,10 @@ public class CountersProliferateEffect extends SpellEffect {
 
         List<Card> cardsToProliferate = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), predProliferate);
         List<Player> playersToPoison = new ArrayList<Player>();
-        for( Player e : enemies ) {
-            if ( e.getPoisonCounters() > 0 ) 
+        for (Player e : enemies) {
+            if (e.getPoisonCounters() > 0) {
                 playersToPoison.add(e);
+            }
         }
 
         final StringBuilder sb = new StringBuilder();
@@ -126,17 +129,17 @@ public class CountersProliferateEffect extends SpellEffect {
         if (cardsToProliferate.isEmpty() && playersToPoison.isEmpty()) {
             sb.append("<b>nothing</b>.");
         } else {
-            for( Card c : cardsToProliferate ) {
+            for (Card c : cardsToProliferate) {
                 sb.append(c.getController().getName());
                 sb.append("'s <b>");
                 sb.append(c.getName());
                 sb.append("</b><br>");
             }
-            
-            if( !playersToPoison.isEmpty() ) {
+
+            if (!playersToPoison.isEmpty()) {
                 sb.append("<br>The following players: <br>");
             }
-            for( Player p : playersToPoison ) {
+            for (Player p : playersToPoison) {
                 sb.append("<b>");
                 sb.append(p.getName());
                 sb.append("</b><br>");
@@ -148,20 +151,20 @@ public class CountersProliferateEffect extends SpellEffect {
         // computer
         for (final Card c : cardsToProliferate) {
             for (final Entry<Counters, Integer> c1 : c.getCounters().entrySet()) {
-                if ( CardFactoryUtil.isNegativeCounter(c1.getKey()) && enemies.contains(c.getController()))
+                if (CardFactoryUtil.isNegativeCounter(c1.getKey()) && enemies.contains(c.getController()))
                 {
                     c.addCounter(c1.getKey(), 1);
                     break;
                 }
-                if ( !CardFactoryUtil.isNegativeCounter(c1.getKey()) && allies.contains(c.getController()))
+                if (!CardFactoryUtil.isNegativeCounter(c1.getKey()) && allies.contains(c.getController()))
                 {
                     c.addCounter(c1.getKey(), 1);
                     break;
                 }
             }
         }
-        
-        for(final Player p : playersToPoison ) {
+
+        for (final Player p : playersToPoison) {
             p.addPoisonCounters(1, sa.getSourceCard());
         }
     }

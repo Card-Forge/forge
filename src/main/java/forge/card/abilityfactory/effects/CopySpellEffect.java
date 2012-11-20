@@ -13,7 +13,7 @@ import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
 public class CopySpellEffect extends SpellEffect {
-    
+
     // *************************************************************************
     // ************************* CopySpell *************************************
     // *************************************************************************
@@ -22,7 +22,7 @@ public class CopySpellEffect extends SpellEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final List<SpellAbility> tgtSpells = getTargetSpellAbilities(sa);
-        
+
         sb.append("Copy ");
         // TODO Someone fix this Description when Copying Charms
         final Iterator<SpellAbility> it = tgtSpells.iterator();
@@ -120,4 +120,4 @@ public class CopySpellEffect extends SpellEffect {
         }
     } // end resolve
 
-} 
+}

@@ -25,7 +25,7 @@ public class ChooseCardEffect extends SpellEffect {
             sb.append(p).append(" ");
         }
         sb.append("chooses a card.");
-    
+
         return sb.toString();
     }
 

@@ -23,9 +23,9 @@ public class CloneEffect extends SpellEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        
+
         final List<Card> tgts = getTargetCards(sa);
-        
+
         sb.append(sa.getSourceCard());
         sb.append(" becomes a copy of ");
         if (!tgts.isEmpty()) {
@@ -278,4 +278,4 @@ public class CloneEffect extends SpellEffect {
 
     }
 
- } 
+}

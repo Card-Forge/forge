@@ -16,12 +16,12 @@ import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
-public class ChooseGenericEffect extends SpellEffect {    
-    
+public class ChooseGenericEffect extends SpellEffect {
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-    
+
         for (final Player p : getTargetPlayers(sa)) {
             sb.append(p).append(" ");
         }

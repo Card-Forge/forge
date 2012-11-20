@@ -336,7 +336,7 @@ public class ChangeZoneEffect extends SpellEffect {
             tgtCards = tgt.getTargetCards();
         } else {
             tgtCards = new ArrayList<Card>();
-            for(ZoneType o : origin) {
+            for (ZoneType o : origin) {
                 for (final Card c : sa.knownDetermineDefined(sa.getParam("Defined"))) {
                     tgtCards.add(c);
                 }
@@ -601,7 +601,7 @@ public class ChangeZoneEffect extends SpellEffect {
         }
 
         if (!defined) {
-            if (origin.contains(ZoneType.Library) && !defined && !sa.hasParam("NoLooking")) { 
+            if (origin.contains(ZoneType.Library) && !defined && !sa.hasParam("NoLooking")) {
                 // Look at whole library before moving onto choosing a card
                 GuiChoose.oneOrNone(sa.getSourceCard().getName() + " - Looking at Library",
                         player.getCardsIn(ZoneType.Library));
