@@ -1962,6 +1962,10 @@ public class CardFactoryUtil {
             }
         }
 
+        if (l[0].startsWith("Count$")) {
+            l[0] = l[0].replace("Count$", "");
+        }
+
         if (l[0].startsWith("SVar$")) {
             final String sVar = l[0].replace("SVar$", "");
             return CardFactoryUtil.doXMath(CardFactoryUtil.xCount(c, c.getSVar(sVar)), m, c);
