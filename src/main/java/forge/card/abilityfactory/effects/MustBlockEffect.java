@@ -46,11 +46,11 @@ public class MustBlockEffect extends SpellEffect {
     protected String getStackDescription(SpellAbility sa) {
         final Card host = sa.getSourceCard();
         final StringBuilder sb = new StringBuilder();
-    
+
         // end standard pre-
-    
+
         final List<Card> tgtCards = getTargetCards(sa);
-    
+
         String attacker = null;
         if (sa.hasParam("DefinedAttacker")) {
             final ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(),
@@ -59,12 +59,12 @@ public class MustBlockEffect extends SpellEffect {
         } else {
             attacker = host.toString();
         }
-    
+
         for (final Card c : tgtCards) {
             sb.append(c).append(" must block ").append(attacker).append(" if able.");
         }
-    
+
         return sb.toString();
     }
 
-} 
+}

@@ -7,7 +7,6 @@ import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 
 public class GameWinEffect extends SpellEffect {
-    
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)

@@ -10,7 +10,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 
 public class FightEffect extends SpellEffect {
-    
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -88,4 +88,4 @@ public class FightEffect extends SpellEffect {
         fighter1.addDamage(dmg2, fighter2);
     }
 
-} 
+}

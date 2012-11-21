@@ -20,7 +20,7 @@ public class EndTurnEffect extends SpellEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        
+
         GameState game = Singletons.getModel().getGame();
         // Steps taken from gatherer's rulings on Time Stop.
         // 1) All spells and abilities on the stack are exiled. This includes
@@ -51,14 +51,13 @@ public class EndTurnEffect extends SpellEffect {
     }
 
 
-    
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
-    
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         return "End the turn.";
     }
 
-} 
+}

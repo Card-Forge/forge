@@ -21,7 +21,7 @@ public class PermanentCreatureEfect extends SpellEffect {
         final Card c = Singletons.getModel().getGame().getAction().moveTo(sa.getActivatingPlayer().getZone(ZoneType.Battlefield), sa.getSourceCard());
         sa.setSourceCard(c);
     }
-    
+
     @Override
     public String getStackDescription(final SpellAbility sa) {
         final Card sourceCard = sa.getSourceCard();

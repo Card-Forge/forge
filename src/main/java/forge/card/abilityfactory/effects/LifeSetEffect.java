@@ -17,7 +17,7 @@ public class LifeSetEffect extends SpellEffect {
     public void resolve(SpellAbility sa) {
         final int lifeAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("LifeAmount"), sa);
         final Target tgt = sa.getTarget();
-    
+
         for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 p.setLife(lifeAmount, sa.getSourceCard());
@@ -32,22 +32,20 @@ public class LifeSetEffect extends SpellEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("LifeAmount"), sa);
-    
 
-    
         final String conditionDesc = sa.getParam("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
-    
+
         List<Player> tgtPlayers = getTargetPlayers(sa);
-    
+
         for (final Player player : tgtPlayers) {
             sb.append(player).append(" ");
         }
-    
+
         sb.append("life total becomes ").append(amount).append(".");
-    
+
         return sb.toString();
     }
 

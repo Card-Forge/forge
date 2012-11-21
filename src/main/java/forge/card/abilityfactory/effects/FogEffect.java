@@ -5,7 +5,6 @@ import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 
 public class FogEffect extends SpellEffect {
-    
 
     @Override
     protected String getStackDescription(SpellAbility sa) {

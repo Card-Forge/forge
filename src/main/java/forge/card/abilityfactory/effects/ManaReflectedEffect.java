@@ -13,7 +13,6 @@ import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
 public class ManaReflectedEffect extends SpellEffect {
-    
 
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
@@ -24,10 +23,10 @@ public class ManaReflectedEffect extends SpellEffect {
         // Spells are not undoable
         AbilityManaPart ma = sa.getManaPart();
         sa.setUndoable(sa.isAbility() && sa.isUndoable());
-    
+
         final List<String> colors = CardUtil.getReflectableManaColors(sa, sa, new ArrayList<String>(),
                 new ArrayList<Card>());
-    
+
         final List<Player> tgtPlayers = getTargetPlayers(sa);
         for (final Player player : tgtPlayers) {
             final String generated = generatedReflectedMana(sa, colors, player);
@@ -36,16 +35,16 @@ public class ManaReflectedEffect extends SpellEffect {
                 ma.setCanceled(false);
                 return;
             }
-    
+
             ma.produceMana(generated, player, sa);
         }
-    
+
         resolveDrawback(sa);
     }
 
 
     // *************** Utility Functions **********************
-    
+
     /**
      * <p>
      * generatedReflectedMana.
@@ -64,9 +63,9 @@ public class ManaReflectedEffect extends SpellEffect {
     private static String generatedReflectedMana(final SpellAbility sa, final List<String> colors, final Player player) {
         // Calculate generated mana here for stack description and resolving
         final int amount = sa.hasParam("Amount") ? AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa) : 1;
-    
+
         String baseMana = "";
-    
+
         if (colors.size() == 0) {
             return "0";
         } else if (colors.size() == 1) {
@@ -86,7 +85,7 @@ public class ManaReflectedEffect extends SpellEffect {
                 baseMana = InputPayManaCostUtil.getShortColorString(colors.get(0));
             }
         }
-    
+
         final StringBuilder sb = new StringBuilder();
         if (amount == 0) {
             sb.append("0");

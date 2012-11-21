@@ -12,13 +12,13 @@ public class LifeExchangeEffect extends SpellEffect {
     // *************************************************************************
     // ************************ EXCHANGE LIFE **********************************
     // *************************************************************************
-    
-        
-    
+
+
+
     // *************************************************************************
     // ************************* LOSE LIFE *************************************
     // *************************************************************************
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -28,7 +28,7 @@ public class LifeExchangeEffect extends SpellEffect {
         final Player activatingPlayer = sa.getActivatingPlayer();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
-    
+
         if (tgtPlayers.size() == 1) {
             sb.append(activatingPlayer).append(" exchanges life totals with ");
             sb.append(tgtPlayers.get(0));
@@ -48,9 +48,9 @@ public class LifeExchangeEffect extends SpellEffect {
         final Card source = sa.getSourceCard();
         Player p1;
         Player p2;
-    
+
         final List<Player> tgtPlayers = getTargetPlayers(sa);
-    
+
         if (tgtPlayers.size() == 1) {
             p1 = sa.getActivatingPlayer();
             p2 = tgtPlayers.get(0);
@@ -58,10 +58,10 @@ public class LifeExchangeEffect extends SpellEffect {
             p1 = tgtPlayers.get(0);
             p2 = tgtPlayers.get(1);
         }
-    
+
         final int life1 = p1.getLife();
         final int life2 = p2.getLife();
-    
+
         if ((life1 > life2) && p1.canLoseLife()) {
             final int diff = life1 - life2;
             p1.loseLife(diff);
@@ -73,7 +73,7 @@ public class LifeExchangeEffect extends SpellEffect {
         } else {
             // they are equal, so nothing to do
         }
-    
+
     }
-    
+
 }

@@ -31,7 +31,7 @@ public class EffectEffect extends SpellEffect {
      * @param af
      *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      */
-    
+
     @Override
     public void resolve(SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
@@ -227,4 +227,4 @@ public class EffectEffect extends SpellEffect {
         Singletons.getModel().getGame().getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
     }
 
-} 
+}

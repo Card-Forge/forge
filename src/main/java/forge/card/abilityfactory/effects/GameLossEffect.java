@@ -9,7 +9,7 @@ import forge.game.GameLossReason;
 import forge.game.player.Player;
 
 public class GameLossEffect extends SpellEffect {
-    
+
     /* (non-Javadoc)
          * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
          */
@@ -21,7 +21,7 @@ public class GameLossEffect extends SpellEffect {
         for (final Player p : tgtPlayers) {
             sb.append(p.getName()).append(" ");
         }
-    
+
         sb.append("loses the game.");
         return sb.toString();
     }
@@ -35,4 +35,4 @@ public class GameLossEffect extends SpellEffect {
         }
     }
 
-} 
+}

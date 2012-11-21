@@ -9,8 +9,8 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
 
-public class MustAttackEffect extends SpellEffect { 
-    
+public class MustAttackEffect extends SpellEffect {
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -19,19 +19,18 @@ public class MustAttackEffect extends SpellEffect {
         final Card host = sa.getSourceCard();
         final StringBuilder sb = new StringBuilder();
 
-    
+
         // end standard pre-
-    
+
         final List<Player> tgtPlayers = getTargetPlayers(sa);
-    
-    
+
         String defender = null;
         if (sa.getParam("Defender").equals("Self")) {
             defender = host.toString();
         } else {
             // TODO - if more needs arise in the future
         }
-    
+
         for (final Player player : tgtPlayers) {
             sb.append("Creatures ").append(player).append(" controls attack ");
             sb.append(defender).append(" during his or her next turn.");
