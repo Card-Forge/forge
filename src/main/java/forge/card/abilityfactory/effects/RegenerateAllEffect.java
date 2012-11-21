@@ -11,6 +11,7 @@ import forge.card.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 public class RegenerateAllEffect extends SpellEffect {
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         return "Regenerate all valid cards.";
@@ -45,4 +46,4 @@ public class RegenerateAllEffect extends SpellEffect {
         }
     } // regenerateAllResolve
 
-} 
+}

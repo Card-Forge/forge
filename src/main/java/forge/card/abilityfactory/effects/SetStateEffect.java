@@ -9,7 +9,7 @@ import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 
 public class SetStateEffect extends SpellEffect {
-    
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -19,7 +19,7 @@ public class SetStateEffect extends SpellEffect {
             sb.append(conditionDesc).append(" ");
         }
 
-        final List<Card> tgtCards = getTargetCards(sa); 
+        final List<Card> tgtCards = getTargetCards(sa);
 
         if (sa.hasParam("Flip")) {
             sb.append("Flip");
@@ -47,8 +47,8 @@ public class SetStateEffect extends SpellEffect {
     @Override
     public void resolve(SpellAbility sa) {
 
-        final Card host = sa.getSourceCard(); 
-        final List<Card> tgtCards = getTargetCards(sa); 
+        final Card host = sa.getSourceCard();
+        final List<Card> tgtCards = getTargetCards(sa);
 
         final boolean remChanged = sa.hasParam("RememberChanged");
 

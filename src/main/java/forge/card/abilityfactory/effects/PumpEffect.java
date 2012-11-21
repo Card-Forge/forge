@@ -17,34 +17,34 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class PumpEffect extends SpellEffect {
-    
+
     private void applyPump(final SpellAbility sa, final Card applyTo, final int a, final int d, final List<String> keywords) {
         //if host is not on the battlefield don't apply
         if (sa.hasParam("UntilLoseControlOfHost")
                 && !sa.getSourceCard().isInPlay()) {
             return;
         }
-    
+
         applyTo.addTempAttackBoost(a);
         applyTo.addTempDefenseBoost(d);
-    
+
         for (int i = 0; i < keywords.size(); i++) {
             applyTo.addExtrinsicKeyword(keywords.get(i));
             if (keywords.get(i).equals("Suspend")) {
                 applyTo.setSuspend(true);
             }
         }
-    
+
         if (!sa.hasParam("Permanent")) {
             // If not Permanent, remove Pumped at EOT
             final Command untilEOT = new Command() {
                 private static final long serialVersionUID = -42244224L;
-    
+
                 @Override
                 public void execute() {
                     applyTo.addTempAttackBoost(-1 * a);
                     applyTo.addTempDefenseBoost(-1 * d);
-    
+
                     if (keywords.size() > 0) {
                         for (int i = 0; i < keywords.size(); i++) {
                             applyTo.removeExtrinsicKeyword(keywords.get(i));
@@ -72,19 +72,19 @@ public class PumpEffect extends SpellEffect {
     }
 
     private void applyPump(final SpellAbility sa, final Player p, final List<String> keywords) {
-    
+
         for (int i = 0; i < keywords.size(); i++) {
             p.addKeyword(keywords.get(i));
         }
-    
+
         if (!sa.hasParam("Permanent")) {
             // If not Permanent, remove Pumped at EOT
             final Command untilEOT = new Command() {
                 private static final long serialVersionUID = -32453460L;
-    
+
                 @Override
                 public void execute() {
-    
+
                     if (keywords.size() > 0) {
                         for (int i = 0; i < keywords.size(); i++) {
                             p.removeKeyword(keywords.get(i));
@@ -138,8 +138,8 @@ public class PumpEffect extends SpellEffect {
             }
 
             final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
-            final int atk = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa); 
-            final int def = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa); 
+            final int atk = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa);
+            final int def = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa);
 
             sb.append("gains ");
             if ((atk != 0) || (def != 0)) {
@@ -177,10 +177,9 @@ public class PumpEffect extends SpellEffect {
         String pumpRemembered = null;
 
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
-        final int a = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa); 
-        final int d = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa); 
-            
-        
+        final int a = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa);
+        final int d = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa);
+
         if (tgt != null) {
             tgtCards = tgt.getTargetCards();
             tgtPlayers = tgt.getTargetPlayers();

@@ -13,7 +13,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class TapAllEffect extends SpellEffect {
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -33,21 +33,22 @@ public class TapAllEffect extends SpellEffect {
         if (remTapped) {
             card.clearRemembered();
         }
-    
+
         List<Card> cards = null;
-    
+
         final List<Player> tgtPlayers = getTargetPlayersEmptyAsDefault(sa);
-    
+
         if ((tgtPlayers == null) || tgtPlayers.isEmpty()) {
             cards = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         } else {
             cards = new ArrayList<Card>();
-            for( final Player p : tgtPlayers )
+            for (final Player p : tgtPlayers) {
                 cards.addAll(p.getCardsIn(ZoneType.Battlefield));
+            }
         }
-    
+
         cards = AbilityFactory.filterListByType(cards, sa.getParam("ValidCards"), sa);
-    
+
         for (final Card c : cards) {
             if (remTapped) {
             card.addRemembered(c);

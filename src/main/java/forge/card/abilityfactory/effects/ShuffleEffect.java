@@ -11,12 +11,13 @@ import forge.card.spellability.Target;
 import forge.game.player.Player;
 
 public class ShuffleEffect extends SpellEffect {
+
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
         final boolean optional = sa.hasParam("Optional");
 
-        final List<Player> tgtPlayers = getTargetPlayers(sa); 
+        final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         final Target tgt = sa.getTarget();
 
@@ -34,15 +35,15 @@ public class ShuffleEffect extends SpellEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-    
+
 
         final String conditionDesc = sa.getParam("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
-    
+
         final List<Player> tgtPlayers = getTargetPlayers(sa);
-    
+
         if (tgtPlayers.size() > 0) {
             final Iterator<Player> it = tgtPlayers.iterator();
             while (it.hasNext()) {
@@ -61,8 +62,8 @@ public class ShuffleEffect extends SpellEffect {
             sb.append("s his or her library");
         }
         sb.append(".");
-    
+
         return sb.toString();
     }
 
-} 
+}

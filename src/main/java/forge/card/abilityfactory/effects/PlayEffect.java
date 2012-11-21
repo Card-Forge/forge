@@ -27,14 +27,14 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.item.CardDb;
 
-public class PlayEffect extends SpellEffect { 
+public class PlayEffect extends SpellEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
         sb.append("Play ");
-        final List<Card> tgtCards = getTargetCards(sa); 
-    
+        final List<Card> tgtCards = getTargetCards(sa);
+
         if (sa.hasParam("Valid")) {
             sb.append("cards");
         } else {
@@ -73,8 +73,9 @@ public class PlayEffect extends SpellEffect {
             }
             tgtCards = Singletons.getModel().getGame().getCardsIn(zone);
             tgtCards = AbilityFactory.filterListByType(tgtCards, sa.getParam("Valid"), sa);
-        } else 
+        } else {
             tgtCards = getTargetCards(sa);
+        }
 
         if (tgtCards.isEmpty()) {
             return;
@@ -239,4 +240,4 @@ public class PlayEffect extends SpellEffect {
         }
     } // end resolve
 
-} 
+}

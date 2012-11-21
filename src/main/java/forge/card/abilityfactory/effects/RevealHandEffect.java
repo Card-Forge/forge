@@ -13,17 +13,15 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
 public class RevealHandEffect extends SpellEffect {
-    
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-    
         final List<Player> tgtPlayers = getTargetPlayers(sa);
-    
 
         sb.append(sa.getActivatingPlayer()).append(" looks at ");
-    
+
         if (tgtPlayers.size() > 0) {
             for (final Player p : tgtPlayers) {
                 sb.append(p.toString()).append("'s ");
@@ -32,14 +30,14 @@ public class RevealHandEffect extends SpellEffect {
             sb.append("Error - no target players for RevealHand. ");
         }
         sb.append("hand.");
-    
+
         return sb.toString();
     }
 
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
-    
+
         final Target tgt = sa.getTarget();
 
         for (final Player p : getTargetPlayers(sa)) {

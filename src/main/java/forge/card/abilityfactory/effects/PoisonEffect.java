@@ -23,7 +23,7 @@ import forge.game.player.Player;
         @Override
         public void resolve(SpellAbility sa) {
             final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Num"), sa);
-        
+
             final Target tgt = sa.getTarget();
             for (final Player p : getTargetPlayers(sa)) {
                 if ((tgt == null) || p.canBeTargetedBy(sa)) {
@@ -39,18 +39,17 @@ import forge.game.player.Player;
         protected String getStackDescription(SpellAbility sa) {
             final StringBuilder sb = new StringBuilder();
             final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Num"), sa);
-        
-        
+
             final String conditionDesc = sa.getParam("ConditionDescription");
             if (conditionDesc != null) {
                 sb.append(conditionDesc).append(" ");
             }
-        
+
             final List<Player> tgtPlayers = getTargetPlayers(sa);
-        
+
             sb.append(StringUtils.join(tgtPlayers, ", "));
             sb.append(" ");
-        
+
             sb.append("get");
             if (tgtPlayers.size() < 2) {
                 sb.append("s");
@@ -61,9 +60,9 @@ import forge.game.player.Player;
             } else {
                 sb.append(".");
             }
-        
+
             return sb.toString();
-        } 
-    
+        }
+
     }
 

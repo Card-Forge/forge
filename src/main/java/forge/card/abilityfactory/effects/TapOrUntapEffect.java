@@ -11,7 +11,7 @@ import forge.card.spellability.Target;
 import forge.gui.GuiChoose;
 
 public class TapOrUntapEffect extends SpellEffect {
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -20,9 +20,9 @@ public class TapOrUntapEffect extends SpellEffect {
         // when getStackDesc is called, just build exactly what is happening
         final StringBuilder sb = new StringBuilder();
 
-    
+
         sb.append("Tap or untap ");
-    
+
         final List<Card> tgtCards = getTargetCards(sa);
         sb.append(StringUtils.join(tgtCards, ", "));
         sb.append(".");

@@ -27,27 +27,27 @@ public class RestartGameEffect extends SpellEffect {
         GameState game = Singletons.getModel().getGame();
         List<Player> players = game.getPlayers();
         Map<Player, List<Card>> playerLibraries = new HashMap<Player, List<Card>>();
-        
+
         // Don't grab Ante Zones
         List<ZoneType> restartZones = new ArrayList<ZoneType>(Arrays.asList(ZoneType.Battlefield,
                 ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command));
-        
+
         ZoneType leaveZone = ZoneType.smartValueOf(sa.hasParam("RestrictFromZone") ? sa.getParam("RestrictFromZone") : null);
         restartZones.remove(leaveZone);
         String leaveRestriction = sa.hasParam("RestrictFromValid") ? sa.getParam("RestrictFromValid") : "Card";
-        
-        for(Player p : players) {
+
+        for (Player p : players) {
             List<Card> newLibrary = new ArrayList<Card>(p.getCardsIn(restartZones));
             List<Card> filteredCards = null;
             if (leaveZone != null) {
-                filteredCards = CardLists.filter(p.getCardsIn(leaveZone), 
+                filteredCards = CardLists.filter(p.getCardsIn(leaveZone),
                         CardPredicates.restriction(leaveRestriction.split(","), p, sa.getSourceCard()));
             }
-            
+
             newLibrary.addAll(filteredCards);
             playerLibraries.put(p, newLibrary);
         }
-        
+
         GameNew.restartGame(game, sa.getActivatingPlayer(), playerLibraries);
     }
 
@@ -57,11 +57,12 @@ public class RestartGameEffect extends SpellEffect {
     @Override
     public String getStackDescription(SpellAbility sa) {
         String desc = sa.getParam("SpellDescription");
-        
+
         if (desc == null) {
             desc = "Restart the game.";
         }
-        
+
         return desc.replace("CARDNAME", sa.getSourceCard().getName());
-    } 
+    }
 }
+

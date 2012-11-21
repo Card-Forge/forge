@@ -54,7 +54,7 @@ public abstract class RevealEffectBase extends SpellEffect {
     public static List<Card> getRevealedList(final Player player, final List<Card> valid, final int max, boolean anyNumber) {
         final List<Card> chosen = new ArrayList<Card>();
         final int validamount = Math.min(valid.size(), max);
-    
+
         if (anyNumber && player.isHuman() && validamount > 0) {
             final List<Card> selection = GuiChoose.getOrderChoices("Choose Which Cards to Reveal", "Revealed", -1, valid, null, null);
             for (final Object o : selection) {

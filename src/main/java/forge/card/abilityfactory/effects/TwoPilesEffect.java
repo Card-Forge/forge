@@ -28,16 +28,16 @@ public class TwoPilesEffect extends SpellEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-    
+
         final List<Player> tgtPlayers = getTargetPlayers(sa);
-    
+
         String valid = "";
         if (sa.hasParam("ValidCards")) {
             valid = sa.getParam("ValidCards");
         }
-    
+
         sb.append("Separate all ").append(valid).append(" cards ");
-    
+
         for (final Player p : tgtPlayers) {
             sb.append(p).append(" ");
         }
@@ -93,9 +93,9 @@ public class TwoPilesEffect extends SpellEffect {
                 if (separator.isHuman()) {
                     final List<Card> firstPile = GuiChoose.getOrderChoices("Place into two piles", "Pile 1", -1, pool, null, card);
                     for (final Object o : firstPile) {
-                        pile1.add((Card)o);
+                        pile1.add((Card) o);
                     }
-                    
+
                     for (final Card c : pool) {
                         if (!pile1.contains(c)) {
                             pile2.add(c);
@@ -133,7 +133,7 @@ public class TwoPilesEffect extends SpellEffect {
                 card.clearRemembered();
 
                 pile1WasChosen = selectPiles(sa, pile1, pile2, chooser, card, pool);
-                
+
                 // take action on the chosen pile
                 if (sa.hasParam("ChosenPile")) {
                     final AbilityFactory afPile = new AbilityFactory();
@@ -168,25 +168,25 @@ public class TwoPilesEffect extends SpellEffect {
         }
     } // end twoPiles resolve
 
-    private boolean selectPiles(final SpellAbility sa, ArrayList<Card> pile1, ArrayList<Card> pile2, 
+    private boolean selectPiles(final SpellAbility sa, ArrayList<Card> pile1, ArrayList<Card> pile2,
             Player chooser, Card card, List<Card> pool) {
         boolean pile1WasChosen = true;
         // then, the chooser picks a pile
-        
+
         if (sa.hasParam("FaceDown")) {
             // Used for Phyrexian Portal, FaceDown Pile choosing
             if (chooser.isHuman()) {
                 final String p1Str = String.format("Pile 1 (%s cards)", pile1.size());
                 final String p2Str = String.format("Pile 2 (%s cards)", pile2.size());
-                
+
                 final String message = String.format("Choose a pile\n%s or %s", p1Str, p2Str);
-                
+
                 final Object[] possibleValues = { p1Str , p2Str };
-                
-                final Object playDraw = JOptionPane.showOptionDialog(null, message, "Choose a Pile", 
-                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, 
+
+                final Object playDraw = JOptionPane.showOptionDialog(null, message, "Choose a Pile",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
                         possibleValues, possibleValues[0]);
-                
+
                 pile1WasChosen = playDraw.equals(0);
             }
             else {
@@ -194,8 +194,7 @@ public class TwoPilesEffect extends SpellEffect {
                 // TODO Improve this to be slightly more random to not be so predictable
                 pile1WasChosen = pile1.size() >= pile2.size();
             }
-        }
-        else {     
+        } else {
             if (chooser.isHuman()) {
                 final Card[] disp = new Card[pile1.size() + pile2.size() + 2];
                 disp[0] = new Card();
@@ -214,13 +213,13 @@ public class TwoPilesEffect extends SpellEffect {
                     final Object o = GuiChoose.one("Choose a pile", disp);
                     final Card c = (Card) o;
                     String name = c.getName();
-                    
+
                     if (!(name.equals("Pile 1") || name.equals("Pile 2"))) {
                         continue;
                     }
-                    
+
                     pile1WasChosen = name.equals("Pile 1");
-                    break;   
+                    break;
                 }
             } else {
                 int cmc1 = CardFactoryUtil.evaluatePermanentList(new ArrayList<Card>(pile1));
@@ -244,7 +243,7 @@ public class TwoPilesEffect extends SpellEffect {
                 }
             }
         }
-        
+
         if (pile1WasChosen) {
             for (final Card z : pile1) {
                 card.addRemembered(z);
@@ -254,7 +253,7 @@ public class TwoPilesEffect extends SpellEffect {
                 card.addRemembered(z);
             }
         }
-        
+
         return pile1WasChosen;
     }
-} 
+}

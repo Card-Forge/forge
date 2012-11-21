@@ -13,7 +13,7 @@ import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
-public class SetStateAllEffect extends SpellEffect { 
+public class SetStateAllEffect extends SpellEffect {
 
     @Override
     public void resolve(SpellAbility sa) {

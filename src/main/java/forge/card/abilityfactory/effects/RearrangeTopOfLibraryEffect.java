@@ -16,7 +16,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
 public class RearrangeTopOfLibraryEffect extends SpellEffect {
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -27,10 +27,10 @@ public class RearrangeTopOfLibraryEffect extends SpellEffect {
         final List<Player> tgtPlayers = getTargetPlayers(sa);
         boolean shuffle = false;
         Card host = sa.getSourceCard();
-    
+
         numCards = AbilityFactory.calculateAmount(host, sa.getParam("NumCards"), sa);
         shuffle = sa.hasParam("MayShuffle");
-    
+
         final StringBuilder ret = new StringBuilder();
         ret.append("Look at the top ");
         ret.append(numCards);
@@ -41,9 +41,9 @@ public class RearrangeTopOfLibraryEffect extends SpellEffect {
             ret.append(" & ");
         }
         ret.delete(ret.length() - 3, ret.length());
-    
+
         ret.append(" library. Then put them back in any order.");
-    
+
         if (shuffle) {
             ret.append("You may have ");
             if (tgtPlayers.size() > 1) {
@@ -51,10 +51,10 @@ public class RearrangeTopOfLibraryEffect extends SpellEffect {
             } else {
                 ret.append("that");
             }
-    
+
             ret.append(" player shuffle his or her library.");
         }
-    
+
         return ret.toString();
     }
 
@@ -67,7 +67,7 @@ public class RearrangeTopOfLibraryEffect extends SpellEffect {
      * @param af
      *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      */
-    
+
     @Override
     public void resolve(SpellAbility sa) {
         int numCards = 0;
