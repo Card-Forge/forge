@@ -105,6 +105,21 @@ Fixes/Features:
 - Variants - Fixed Archangel of Strife
 - Variants - Changed ValidGrave count method to Valid<coma delimited zones> eg:Count$ValidBattlefield,Graveyard Card.YouCtrl
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Variants: Fixed CardRules parser choking on "+" characters.
+- Fixed the wrong player gaining life when GainLife has a targetPlayer and a defined player. Defined player takes preference again as it used to. This fixes Divine Congregation, Gerrard Capashen and Spoils of Evil
+- setinfo and oracle data for Chaotic Backlash
+- Fixed Nomad Mythmaker targeting.
+- CheckStyle.
+- Another fix for Nomad Mythmaker.
+- Fixed Exotic Curse.
+- Reverted Nomad Mythmaker.
+- Cleanup of getLKICopy functions.
+- Fixed Starlit Sanctum.
+- Hopefully the final fix for Nomad Mythmaker
+- More fixing for Nomad Mythmaker.
+- The AI will no longer choose non-Pump Auras with Nomad Mythmaker.
+- The AI will no longer choose non-Pump Auras with Nomad Mythmaker.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -130,6 +145,15 @@ Icy Prison
 Kill Switch
 Kaho, Minamo Historian
 Nomad Mythmaker
+Honorable Scout
+Chaotic Backlash
+Complicate
+Circle of Solace
+Pay No Heed
+Prahv, Spires of Order
+Rith's Charm
+Cragganwick Cremator
+Mischievous Quanar
 
 
 end
