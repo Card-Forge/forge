@@ -1226,13 +1226,17 @@ public class ChangeZoneAi extends SpellAiLogic {
                 }
 
                 if (sa.hasParam("AttachedTo")) {
-                    final ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(),
+                    List<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(),
                             sa.getParam("AttachedTo"), sa);
+                    if (list.isEmpty()) {
+                        list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+                        list = CardLists.getValidCards(list, sa.getParam("AttachedTo"), c.getController(), c);
+                    }
                     if (!list.isEmpty()) {
-                        final Card attachedTo = list.get(0);
+                        final Card attachedTo = CardFactoryUtil.getBestAI(list);
                         if (c.isEnchanting()) {
-                            // If this Card is already Enchanting something
-                            // Need to unenchant it, then clear out the commands
+                            // If this Card is already Enchanting something, need
+                            // to unenchant it, then clear out the commands
                             final GameEntity oldEnchanted = c.getEnchanting();
                             c.removeEnchanting(oldEnchanted);
                             c.clearEnchantCommand();

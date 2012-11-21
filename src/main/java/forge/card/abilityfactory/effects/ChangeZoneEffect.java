@@ -15,6 +15,7 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.abilityfactory.ai.ChangeZoneAi;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
@@ -413,15 +414,26 @@ public class ChangeZoneEffect extends SpellEffect {
                             tgtC.addController(sa.getSourceCard());
                         }
                         if (sa.hasParam("AttachedTo")) {
-                            final ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(),
+                            List<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(),
                                     sa.getParam("AttachedTo"), sa);
+                            if (list.isEmpty()) {
+                                list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+                                list = CardLists.getValidCards(list, sa.getParam("AttachedTo"), tgtC.getController(), tgtC);
+                            }
                             if (!list.isEmpty()) {
-                                final Card attachedTo = list.get(0);
+                                Card attachedTo = null;
+                                if (player.isHuman()) {
+                                    if (list.size() > 1) {
+                                        attachedTo = GuiChoose.one(tgtC + " - Select a card to attach to.", list);
+                                    } else {
+                                        attachedTo = list.get(0);
+                                    }
+                                } else { // AI player
+                                    attachedTo = CardFactoryUtil.getBestAI(list);
+                                }
                                 if (tgtC.isEnchanting()) {
-                                    // If this Card is already Enchanting
-                                    // something
-                                    // Need to unenchant it, then clear out the
-                                    // commands
+                                    // If this Card is already Enchanting something, need
+                                    // to unenchant it, then clear out the commands
                                     final GameEntity oldEnchanted = tgtC.getEnchanting();
                                     tgtC.removeEnchanting(oldEnchanted);
                                     tgtC.clearEnchantCommand();
@@ -666,16 +678,23 @@ public class ChangeZoneEffect extends SpellEffect {
                     }
 
                     if (sa.hasParam("AttachedTo")) {
-                        final ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(),
+                        List<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(),
                                 sa.getParam("AttachedTo"), sa);
+                        if (list.isEmpty()) {
+                            list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+                            list = CardLists.getValidCards(list, sa.getParam("AttachedTo"), c.getController(), c);
+                        }
                         if (!list.isEmpty()) {
-                            final Card attachedTo = list.get(0);
+                            Card attachedTo = null;
+                            if (list.size() > 1) {
+                                attachedTo = GuiChoose.one(c + " - Select a card to attach to.", list);
+                            } else {
+                                attachedTo = list.get(0);
+                            }
                             if (c.isEnchanting()) {
-                                // If this Card is already Enchanting something
-                                // Need to unenchant it, then clear out the
-                                // commands
+                                // If this Card is already Enchanting something, need
+                                // to unenchant it, then clear out the commands
                                 final GameEntity oldEnchanted = c.getEnchanting();
-                                oldEnchanted.removeEnchantedBy(c);
                                 c.removeEnchanting(oldEnchanted);
                                 c.clearEnchantCommand();
                                 c.clearUnEnchantCommand();
