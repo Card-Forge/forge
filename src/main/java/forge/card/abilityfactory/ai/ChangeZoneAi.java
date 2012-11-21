@@ -766,9 +766,19 @@ public class ChangeZoneAi extends SpellAiLogic {
             if (destination.equals(ZoneType.Hand)) {
                 // only retrieve cards from computer graveyard
                 list = CardLists.filterControlledBy(list, ai);
-                System.out.println("changeZone:" + list);
+            } else if (sa.hasParam("AttachedTo")) {
+                list = CardLists.filter(list, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        for (SpellAbility attach : c.getSpellAbilities()) {
+                            if ("Pump".equals(attach.getParam("AILogic"))) {
+                                return true; //only use good auras
+                            }
+                        }
+                        return false;
+                    }
+                });
             }
-
         }
 
         // blink human targets only during combat
@@ -1243,6 +1253,8 @@ public class ChangeZoneAi extends SpellAiLogic {
                             c.clearUnEnchantCommand();
                         }
                         c.enchantEntity(attachedTo);
+                    } else { // When it should enter the battlefield attached to an illegal permanent it fails
+                        continue;
                     }
                 }
 
