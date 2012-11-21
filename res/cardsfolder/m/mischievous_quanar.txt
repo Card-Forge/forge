@@ -1,0 +1,15 @@
+Name:Mischievous Quanar
+ManaCost:4 U
+Types:Creature Beast
+Text:no text
+PT:3/3
+K:Morph:1 U U
+A:AB$ SetState | Cost$ 3 U U | Defined$ Self | Mode$ TurnFace | SpellDescription$ Turn CARDNAME face down.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, copy target instant or sorcery spell. You may choose new targets for that copy.
+SVar:TrigCopy:AB$ CopySpell | Cost$ 0 |  ValidTgts$ Instant,Sorcery
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mischievous_quanar.jpg
+SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/42.jpg
+Oracle:{3}{U}{U}: Turn Mischievous Quanar face down.\nMorph {1}{U}{U} (You may cast this face down as a 2/2 creature for {3}. Turn it face up any time for its morph cost.)\nWhen Mischievous Quanar is turned face up, copy target instant or sorcery spell. You may choose new targets for that copy.
+End

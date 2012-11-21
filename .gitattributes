@@ -1944,6 +1944,7 @@ res/cardsfolder/c/cradle_of_vitality.txt svneol=native#text/plain
 res/cardsfolder/c/cradle_to_grave.txt svneol=native#text/plain
 res/cardsfolder/c/crafty_pathmage.txt svneol=native#text/plain
 res/cardsfolder/c/crag_puca.txt svneol=native#text/plain
+res/cardsfolder/c/cragganwick_cremator.txt -text
 res/cardsfolder/c/cranial_extraction.txt svneol=native#text/plain
 res/cardsfolder/c/cranial_plating.txt -text
 res/cardsfolder/c/crash.txt svneol=native#text/plain
@@ -6264,6 +6265,7 @@ res/cardsfolder/m/mirror_wall.txt svneol=native#text/plain
 res/cardsfolder/m/mirrorworks.txt svneol=native#text/plain
 res/cardsfolder/m/miscalculation.txt svneol=native#text/plain
 res/cardsfolder/m/mischievous_poltergeist.txt svneol=native#text/plain
+res/cardsfolder/m/mischievous_quanar.txt -text
 res/cardsfolder/m/misers_cage.txt svneol=native#text/plain
 res/cardsfolder/m/misery_charm.txt svneol=native#text/plain
 res/cardsfolder/m/misfortunes_gain.txt svneol=native#text/plain
