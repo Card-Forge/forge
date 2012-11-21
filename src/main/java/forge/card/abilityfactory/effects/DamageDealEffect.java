@@ -21,7 +21,7 @@ public class DamageDealEffect extends SpellEffect {
         // when damageStackDescription is called, just build exactly what is happening
         final StringBuilder sb = new StringBuilder();
         final String damage = sa.getParam("NumDmg");
-        final int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa); 
+        final int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
 
 
         List<Object> tgts = getTargetObjects(sa);
@@ -42,11 +42,11 @@ public class DamageDealEffect extends SpellEffect {
             }
 
             sb.append(" ").append(dmg).append(" damage ");
-            
+
             if (sa.hasParam("DivideEvenly")) {
                 sb.append("divided evenly (rounded down) ");
             }
-            
+
             sb.append("to");
 
             for (int i = 0; i < tgts.size(); i++) {
@@ -78,7 +78,7 @@ public class DamageDealEffect extends SpellEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final String damage = sa.getParam("NumDmg");
-        int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa); 
+        int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
 
         final boolean noPrevention = sa.hasParam("NoPrevention");
         final boolean combatDmg = sa.hasParam("CombatDamage");

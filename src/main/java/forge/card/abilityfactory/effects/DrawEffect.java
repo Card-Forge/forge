@@ -18,24 +18,23 @@ public class DrawEffect extends SpellEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-    
+
         final String conditionDesc = sa.getParam("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
-    
+
         final List<Player> tgtPlayers = getDefinedPlayersBeforeTargetOnes(sa);
-    
-    
+
         if (!tgtPlayers.isEmpty()) {
-            
+
             sb.append(StringUtils.join(tgtPlayers, " and "));
-            
+
             int numCards = 1;
             if (sa.hasParam("NumCards")) {
                 numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
             }
-    
+
             if (tgtPlayers.size() > 1) {
                 sb.append(" each");
             }
@@ -44,14 +43,14 @@ public class DrawEffect extends SpellEffect {
                 sb.append("s");
             }
             sb.append(" (").append(numCards).append(")");
-    
+
             if (sa.hasParam("NextUpkeep")) {
                 sb.append(" at the beginning of the next upkeep");
             }
-    
+
             sb.append(".");
         }
-    
+
         return sb.toString();
     }
 

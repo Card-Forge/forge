@@ -12,18 +12,18 @@ import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 
 public class DebuffEffect extends SpellEffect {
-    
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final List<String> kws = sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : new ArrayList<String>();
         final StringBuilder sb = new StringBuilder();
-    
+
         final List<Card> tgtCards = getTargetCards(sa);
 
-    
+
         if (tgtCards.size() > 0) {
 
-    
+
             final Iterator<Card> it = tgtCards.iterator();
             while (it.hasNext()) {
                 final Card tgtC = it.next();
@@ -32,7 +32,7 @@ public class DebuffEffect extends SpellEffect {
                 } else {
                     sb.append(tgtC);
                 }
-    
+
                 if (it.hasNext()) {
                     sb.append(" ");
                 }

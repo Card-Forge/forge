@@ -10,7 +10,7 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 
 public class DelayedTriggerEffect extends SpellEffect {
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -27,7 +27,7 @@ public class DelayedTriggerEffect extends SpellEffect {
     @Override
     public void resolve(SpellAbility sa) {
 
-        Map<String, String> mapParams = new HashMap<String, String>(); 
+        Map<String, String> mapParams = new HashMap<String, String>();
         sa.copyParamsToMap(mapParams);
         if (mapParams.containsKey("Cost")) {
             mapParams.remove("Cost");

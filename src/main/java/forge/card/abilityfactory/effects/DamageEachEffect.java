@@ -14,7 +14,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class DamageEachEffect extends SpellEffect {
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -22,20 +22,20 @@ public class DamageEachEffect extends SpellEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final String damage = sa.getParam("NumDmg");
-        final int iDmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa); 
-        
+        final int iDmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
+
         String desc = sa.getParam("ValidCards");
         if (sa.hasParam("ValidDescription")) {
             desc = sa.getParam("ValidDescription");
         }
-    
+
         String dmg = "";
         if (sa.hasParam("DamageDesc")) {
             dmg = sa.getParam("DamageDesc");
         } else {
             dmg += iDmg + " damage";
         }
-    
+
         if (sa.hasParam("StackDescription")) {
             sb.append(sa.getParam("StackDescription"));
         } else {
@@ -53,7 +53,7 @@ public class DamageEachEffect extends SpellEffect {
         return sb.toString();
     }
 
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */

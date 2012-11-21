@@ -13,7 +13,7 @@ import forge.card.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 public class DebuffAllEffect extends SpellEffect {
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -35,21 +35,21 @@ public class DebuffAllEffect extends SpellEffect {
      * @param af
      *            a {@link forge.card.abilityfactory.AbilityFactory} object.
      */
-    
+
     @Override
-    public void resolve(SpellAbility sa) {    
+    public void resolve(SpellAbility sa) {
         final Card hostCard = sa.getSourceCard();
         final List<String> kws = sa.hasParam("Keywords") ? Arrays.asList(sa.getParam("Keywords").split(" & ")) : new ArrayList<String>();
-                
+
         String valid = "";
-    
+
         if (sa.hasParam("ValidCards")) {
             valid = sa.getParam("ValidCards");
         }
-    
+
         List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         list = CardLists.getValidCards(list, valid.split(","), hostCard.getController(), hostCard);
-    
+
         for (final Card tgtC : list) {
             final ArrayList<String> hadIntrinsic = new ArrayList<String>();
             if (tgtC.isInPlay() && tgtC.canBeTargetedBy(sa)) {
@@ -64,7 +64,7 @@ public class DebuffAllEffect extends SpellEffect {
             if (!sa.hasParam("Permanent")) {
                 Singletons.getModel().getGame().getEndOfTurn().addUntil(new Command() {
                     private static final long serialVersionUID = 7486231071095628674L;
-    
+
                     @Override
                     public void execute() {
                         if (tgtC.isInPlay()) {
@@ -78,4 +78,4 @@ public class DebuffAllEffect extends SpellEffect {
         }
     } // debuffAllResolve()
 
-} 
+}

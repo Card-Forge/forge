@@ -16,7 +16,6 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
 public class DigUntilEffect extends SpellEffect {
-    
 
     /* (non-Javadoc)
          * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
@@ -24,12 +23,12 @@ public class DigUntilEffect extends SpellEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-    
+
         String desc = "Card";
         if (sa.hasParam("ValidDescription")) {
             desc = sa.getParam("ValidDescription");
         }
-    
+
         int untilAmount = 1;
         if (sa.hasParam("Amount")) {
             untilAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa);
@@ -38,25 +37,25 @@ public class DigUntilEffect extends SpellEffect {
         for (final Player pl : getTargetPlayers(sa)) {
             sb.append(pl).append(" ");
         }
-    
+
         sb.append("reveals cards from his or her library until revealing ");
         sb.append(untilAmount).append(" ").append(desc).append(" card");
         if (untilAmount != 1) {
             sb.append("s");
         }
         sb.append(". Put ");
-    
+
         final ZoneType found = ZoneType.smartValueOf(sa.getParam("FoundDestination"));
         final ZoneType revealed = ZoneType.smartValueOf(sa.getParam("RevealedDestination"));
         if (found != null) {
-    
+
             sb.append(untilAmount > 1 ? "those cards" : "that card");
             sb.append(" ");
-    
+
             if (found.equals(ZoneType.Hand)) {
                 sb.append("into his or her hand ");
             }
-    
+
             if (revealed.equals(ZoneType.Graveyard)) {
                 sb.append("and all other cards into his or her graveyard.");
             }

@@ -24,21 +24,20 @@ public class DiscardEffect extends RevealEffectBase {
     protected String getStackDescription(SpellAbility sa) {
         final String mode = sa.getParam("Mode");
         final StringBuilder sb = new StringBuilder();
-    
+
         final List<Player> tgtPlayers = getTargetPlayers(sa);
-    
-    
+
         final String conditionDesc = sa.getParam("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
-    
+
         if (tgtPlayers.size() > 0) {
-    
+
             for (final Player p : tgtPlayers) {
                 sb.append(p.toString()).append(" ");
             }
-    
+
             if (mode.equals("RevealYouChoose")) {
                 sb.append("reveals his or her hand.").append("  You choose (");
             } else if (mode.equals("RevealDiscardAll")) {
@@ -46,12 +45,12 @@ public class DiscardEffect extends RevealEffectBase {
             } else {
                 sb.append("discards (");
             }
-    
+
             int numCards = 1;
             if (sa.hasParam("NumCards")) {
                 numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
             }
-    
+
             if (mode.equals("Hand")) {
                 sb.append("his or her hand");
             } else if (mode.equals("RevealDiscardAll")) {
@@ -59,9 +58,9 @@ public class DiscardEffect extends RevealEffectBase {
             } else {
                 sb.append(numCards);
             }
-    
+
             sb.append(")");
-    
+
             if (mode.equals("RevealYouChoose")) {
                 sb.append(" to discard");
             } else if (mode.equals("RevealDiscardAll")) {
@@ -71,11 +70,11 @@ public class DiscardEffect extends RevealEffectBase {
                 }
                 sb.append(" of type: ").append(valid);
             }
-    
+
             if (mode.equals("Defined")) {
                 sb.append(" defined cards");
             }
-    
+
             if (mode.equals("Random")) {
                 sb.append(" at random.");
             } else {
@@ -89,11 +88,11 @@ public class DiscardEffect extends RevealEffectBase {
     public void resolve(SpellAbility sa) {
         final Card source = sa.getSourceCard();
         final String mode = sa.getParam("Mode");
-    
+
         final Target tgt = sa.getTarget();
-    
+
         final List<Card> discarded = new ArrayList<Card>();
-    
+
         for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (mode.equals("Defined")) {
@@ -109,7 +108,7 @@ public class DiscardEffect extends RevealEffectBase {
                     }
                     continue;
                 }
-    
+
                 if (mode.equals("Hand")) {
                     final List<Card> list = p.discardHand(sa);
                     if (sa.hasParam("RememberDiscarded")) {
@@ -119,16 +118,16 @@ public class DiscardEffect extends RevealEffectBase {
                     }
                     continue;
                 }
-    
+
                 if (mode.equals("NotRemembered")) {
-                    final List<Card> dPHand = 
+                    final List<Card> dPHand =
                             CardLists.getValidCards(p.getCardsIn(ZoneType.Hand), "Card.IsNotRemembered", source.getController(), source);
                     for (final Card c : dPHand) {
                         p.discard(c, sa);
                         discarded.add(c);
                     }
                 }
-    
+
                 int numCards = 1;
                 if (sa.hasParam("NumCards")) {
                     numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
@@ -138,7 +137,7 @@ public class DiscardEffect extends RevealEffectBase {
                         numCards = p.getCardsIn(ZoneType.Hand).size();
                     }
                 }
-    
+
                 if (mode.equals("Random")) {
                     boolean runDiscard = true;
                     if (sa.hasParam("Optional")) {
@@ -153,7 +152,7 @@ public class DiscardEffect extends RevealEffectBase {
                            // Balduvian Horde and similar cards
                        }
                     }
-                    
+
                     if (runDiscard) {
                         final String valid = sa.hasParam("DiscardValid") ? sa.getParam("DiscardValid") : "Card";
                         discarded.addAll(p.discardRandom(numCards, sa, valid));
@@ -163,22 +162,22 @@ public class DiscardEffect extends RevealEffectBase {
                 } else if (mode.equals("RevealDiscardAll")) {
                     // Reveal
                     final List<Card> dPHand = p.getCardsIn(ZoneType.Hand);
-    
+
                     if (p.isHuman()) {
                         // "reveal to computer" for information gathering
                     } else {
                         GuiChoose.oneOrNone("Revealed computer hand", dPHand);
                     }
-    
+
                     String valid = sa.getParam("DiscardValid");
                     if (valid == null) {
                         valid = "Card";
                     }
-    
+
                     if (valid.contains("X")) {
                         valid = valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(source, "X", sa)));
                     }
-    
+
                     final List<Card> dPChHand = CardLists.getValidCards(dPHand, valid.split(","), source.getController(), source);
                     // Reveal cards that will be discarded?
                     for (final Card c : dPChHand) {
@@ -208,7 +207,7 @@ public class DiscardEffect extends RevealEffectBase {
                         } else if (mode.equals("RevealOppChoose")) {
                             chooser = source.getController().getOpponent();
                         }
-    
+
                         if (chooser.isComputer()) {
                             // AI
                             if (p.isComputer()) { // discard AI cards
@@ -230,8 +229,8 @@ public class DiscardEffect extends RevealEffectBase {
                                     List<Card> goodChoices = CardLists.filter(dPChHand, new Predicate<Card>() {
                                         @Override
                                         public boolean apply(final Card c) {
-                                            if (c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME," +
-                                                    " put it onto the battlefield instead of putting it into your graveyard.")
+                                            if (c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME,"
+                                                    + " put it onto the battlefield instead of putting it into your graveyard.")
                                                     || !c.getSVar("DiscardMe").equals("")) {
                                                 return false;
                                             }
@@ -251,15 +250,15 @@ public class DiscardEffect extends RevealEffectBase {
                                             }
                                         }
                                     }
-    
+
                                     Collections.sort(goodChoices, CardLists.TextLenReverseComparator);
-    
+
                                     CardLists.sortCMC(goodChoices);
                                     dChoices.add(goodChoices.get(0));
-    
+
                                     final Card dC = goodChoices.get(CardUtil.getRandomIndex(goodChoices));
                                     dPChHand.remove(dC);
-    
+
                                     if (mode.startsWith("Reveal")) {
                                         final List<Card> dCs = new ArrayList<Card>();
                                         dCs.add(dC);
@@ -274,7 +273,7 @@ public class DiscardEffect extends RevealEffectBase {
                             if (mode.startsWith("Reveal")) {
                                 GuiChoose.oneOrNone("Revealed " + p + "  hand", dPHand);
                             }
-    
+
                             for (int i = 0; i < numCards; i++) {
                                 if (dPChHand.size() > 0) {
                                     Card dC = null;
@@ -294,13 +293,13 @@ public class DiscardEffect extends RevealEffectBase {
                 }
             }
         }
-    
+
         if (sa.hasParam("RememberDiscarded")) {
             for (final Card c : discarded) {
                 source.addRemembered(c);
             }
         }
-    
+
     } // discardResolve()
 
 }

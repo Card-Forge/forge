@@ -20,7 +20,7 @@ public class CountersPutEffect extends SpellEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final Card card = sa.getSourceCard();
-    
+
 
         final Counters cType = Counters.valueOf(sa.getParam("CounterType"));
         final int amount = AbilityFactory.calculateAmount(card, sa.getParam("CounterNum"), sa);
@@ -50,7 +50,7 @@ public class CountersPutEffect extends SpellEffect {
             }
         }
         sb.append(".");
-    
+
         return sb.toString();
     }
 

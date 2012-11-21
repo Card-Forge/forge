@@ -440,7 +440,7 @@ public class ChangeZoneEffect extends SpellEffect {
                                     tgtC.clearUnEnchantCommand();
                                 }
                                 tgtC.enchantEntity(attachedTo);
-                            } else {// When it should enter the battlefield attached to an illegal permanent it fails
+                            } else { // When it should enter the battlefield attached to an illegal permanent it fails
                                 continue;
                             }
                         }
