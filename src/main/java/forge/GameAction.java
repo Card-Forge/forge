@@ -67,7 +67,7 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.ViewWinLose;
-import forge.sound.Sounds;
+import forge.sound.SoundEffectType;
 
 
 /**
@@ -1053,9 +1053,9 @@ public class GameAction {
             }
             // Play the win/lose sound
             if (match.getLastGameOutcome().isWinner(Singletons.getControl().getPlayer().getLobbyPlayer())) {
-                Sounds.WinDuel.play();
+                Singletons.getControl().getSoundSystem().play(SoundEffectType.WinDuel);
             } else {
-                Sounds.LoseDuel.play();
+                Singletons.getControl().getSoundSystem().play(SoundEffectType.LoseDuel);
             }
             return;
         }
@@ -1258,7 +1258,7 @@ public class GameAction {
             }
 
             // Play the Destroy sound
-            Sounds.Destroy.playSync();
+            Singletons.getControl().getSoundSystem().playSync(SoundEffectType.Destroy);
 
             final ArrayList<String> types = c.getType();
             for (final String type : types) {
@@ -1304,7 +1304,7 @@ public class GameAction {
                 }
 
                 // Play the Destroy sound
-                Sounds.Destroy.playSync();
+                Singletons.getControl().getSoundSystem().playSync(SoundEffectType.Destroy);
             }
         }
     } // destroyLegendaryCreatures()
@@ -1333,7 +1333,7 @@ public class GameAction {
         this.sacrificeDestroy(c);
 
         // Play the Sacrifice sound
-        Sounds.Sacrifice.play();
+        Singletons.getControl().getSoundSystem().play(SoundEffectType.Sacrifice);
 
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
@@ -1387,7 +1387,7 @@ public class GameAction {
                         card.setDamage(0);
 
                         // Play the Destroy sound
-                        Sounds.Destroy.playSync();
+                        Singletons.getControl().getSoundSystem().playSync(SoundEffectType.Destroy);
                     }
                 };
 
@@ -1401,7 +1401,7 @@ public class GameAction {
         } // totem armor
 
         // Play the Destroy sound
-        Sounds.Destroy.playSync();
+        Singletons.getControl().getSoundSystem().playSync(SoundEffectType.Destroy);
 
         return this.sacrificeDestroy(c);
     }
@@ -1550,7 +1550,7 @@ public class GameAction {
             game.getCombat().removeFromCombat(c);
 
             // Play the Regen sound
-            Sounds.Regen.play();
+            Singletons.getControl().getSoundSystem().play(SoundEffectType.Regen);
 
             return false;
         }
@@ -1582,14 +1582,14 @@ public class GameAction {
                 System.out.println("Totem armor destroyed instead of original card");
 
                 // Play the Destroy sound
-                Sounds.Destroy.playSync();
+                Singletons.getControl().getSoundSystem().playSync(SoundEffectType.Destroy);
 
                 return false;
             }
         } // totem armor
 
         // Play the Destroy sound
-        Sounds.Destroy.playSync();
+        Singletons.getControl().getSoundSystem().playSync(SoundEffectType.Destroy);
 
         return this.sacrificeDestroy(c);
     }

@@ -1,89 +1,82 @@
-/*
- * Forge: Play Magic: the Gathering.
- * Copyright (C) 2012  Forge Team
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-
 package forge.sound;
 
-import java.io.*;
-import javax.sound.sampled.*;
+import java.util.EnumMap;
+import java.util.Map;
 
-/**
- * SoundSystem - a simple sound playback system for Forge.
- * Do not use directly. Instead, use the {@link forge.sound.Sounds} enumeration.
- * 
- * @author Agetian
+import com.google.common.eventbus.Subscribe;
+
+import forge.Singletons;
+import forge.game.event.Event;
+import forge.properties.ForgePreferences.FPref;
+
+/** 
+ * Manages playback of all sounds for the client.
+ *
  */
 public class SoundSystem {
-    private Clip clip;
-    private final int SOUND_SYSTEM_DELAY = 30;
 
-    public SoundSystem(final String filename) {
-        try {
-            AudioInputStream stream = AudioSystem.getAudioInputStream(new File(filename));
-            AudioFormat format = stream.getFormat();
-            DataLine.Info info = new DataLine.Info(Clip.class, stream.getFormat(), ((int) stream.getFrameLength() * format.getFrameSize()));
-            clip = (Clip) AudioSystem.getLine(info);
+    private final static IAudioClip emptySound = new NoSoundClip();
+    private final static Map<SoundEffectType, IAudioClip> loadedClips = new EnumMap<SoundEffectType, IAudioClip>(SoundEffectType.class);
+    
+    private final EventVisualilzer visualizer = new EventVisualilzer();
+    
+    protected IAudioClip fetchResource(SoundEffectType type) {
 
-            clip.open(stream);
+        if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ENABLE_SOUNDS))
+            return emptySound;
 
-        } catch (IOException ex) {
-            System.err.println("Unable to load sound file: " + filename);
-        } catch (LineUnavailableException ex) {
-            System.err.println("Error initializing sound system: " + ex);
-        } catch (UnsupportedAudioFileException ex) {
-            System.err.println("Unsupported file type of the sound file: " + ex);
+        IAudioClip clip = loadedClips.get(type);
+        if ( null == clip ) { // cache miss
+            String resource = type.getResourceFileName();
+            clip = AudioClip.fileExists(resource) ? new AudioClip(resource) : emptySound;
+            loadedClips.put(type, clip);
+        }
+        return null;
+    }
+    
+    
+    /**
+     * Play the sound associated with the Sounds enumeration element.
+     */
+    public void play(SoundEffectType type) {
+        fetchResource(type).play();
+    }
+
+    /**
+     * Play the sound associated with the Sounds enumeration element
+     * (synchronized with other sounds of the same kind, so only one can play
+     * at the same time).
+     */
+    public void playSync(SoundEffectType type) {
+        IAudioClip snd = fetchResource(type);
+        if (snd.isDone()) {
+            snd.play();
         }
     }
 
-    public final void play() {
-        if (clip != null) {
-            clip.setMicrosecondPosition(0);
-            try {
-                Thread.sleep(SOUND_SYSTEM_DELAY);
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
-            clip.start();
-        }
+    /**
+     * Play the sound in a looping manner until 'stop' is called.
+     */
+    public void loop(SoundEffectType type) {
+        fetchResource(type).loop();
     }
 
-    public final void loop() {
-        if (clip != null) {
-            clip.setMicrosecondPosition(0);
-            try {
-                Thread.sleep(SOUND_SYSTEM_DELAY);
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
-        }
+    /**
+     * Stop the sound associated with the Sounds enumeration element.
+     */
+    public void stop(SoundEffectType type) {
+        fetchResource(type).stop();
+    }
+    
+    @Subscribe
+    public void recieveEvent(Event evt) {
+        SoundEffectType effect = visualizer.getSoundForEvent(evt);
+        if ( null == effect ) return;
+        boolean isSync = visualizer.isSyncSound(evt);
+        if ( isSync ) 
+            playSync(effect);
+        else 
+            play(effect);
     }
 
-    public final void stop() {
-        if (clip != null) {
-            clip.stop();
-        }
-    }
-
-    public final boolean isDone() {
-        if (clip != null) {
-            return !clip.isRunning();
-        } else {
-            return false;
-        }
-    }
 }

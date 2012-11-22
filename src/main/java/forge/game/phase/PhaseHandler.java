@@ -32,7 +32,7 @@ import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.properties.ForgePreferences.FPref;
-import forge.sound.Sounds;
+import forge.sound.SoundEffectType;
 import forge.util.MyObservable;
 
 
@@ -426,7 +426,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 p.loseLife(burn);
 
                 // Play the Mana Burn sound
-                Sounds.ManaBurn.play();
+                Singletons.getControl().getSoundSystem().play(SoundEffectType.ManaBurn);
             }
             p.updateObservers();
         }
@@ -470,7 +470,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     this.setPlayerTurn(this.handleNextTurn());
                 }
                 // Play the End Turn sound
-                Sounds.EndOfTurn.play();
+                Singletons.getControl().getSoundSystem().play(SoundEffectType.EndOfTurn);
                 break;
             default: // no action
         }

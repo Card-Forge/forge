@@ -48,6 +48,7 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.data.QuestPreferences.QPref;
 import forge.quest.io.QuestDataIO;
+import forge.sound.SoundSystem;
 import forge.view.FView;
 
 /**
@@ -85,6 +86,8 @@ public enum FControl {
     /** */
     public static final int DRAFTING_PROCESS = 7;
 
+    private final SoundSystem soundSystem = new SoundSystem();
+    
     /**
      * <p>
      * FControl.
@@ -290,5 +293,14 @@ public enum FControl {
      */
     public void setPlayer(Player localHuman) {
         localPlayer = localHuman;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public SoundSystem getSoundSystem() {
+        // TODO Auto-generated method stub
+        return soundSystem;
     }
 }

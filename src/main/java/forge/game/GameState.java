@@ -23,12 +23,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.google.common.eventbus.EventBus;
+
 import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.ColorChanger;
 import forge.GameAction;
 import forge.GameLog;
+import forge.Singletons;
 import forge.StaticEffects;
 import forge.card.replacement.ReplacementHandler;
 import forge.card.trigger.TriggerHandler;
@@ -70,6 +73,7 @@ public class GameState {
     private final TriggerHandler triggerHandler = new TriggerHandler();
     private final ReplacementHandler replacementHandler = new ReplacementHandler();
     private Combat combat = new Combat();
+    private final EventBus events = new EventBus();
     private final GameLog gameLog = new GameLog();
     private final ColorChanger colorChanger = new ColorChanger();
     
@@ -96,6 +100,9 @@ public class GameState {
         action = new GameAction(this);
         stack = new MagicStack(this);
         phaseHandler = new PhaseHandler(this);
+        
+        events.register(Singletons.getControl().getSoundSystem());
+        events.register(gameLog);
     }
 
     /**
@@ -494,5 +501,12 @@ public class GameState {
         runParams.put("Player", p);
         this.getTriggerHandler().runTrigger(TriggerType.LosesGame, runParams);
 
+    }
+
+    /**
+     * @return the events
+     */
+    public EventBus getEvents() {
+        return events;
     }
 }

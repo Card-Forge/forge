@@ -60,7 +60,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.item.CardDb;
-import forge.sound.Sounds;
+import forge.sound.SoundEffectType;
 import forge.util.Expressions;
 import forge.util.MyRandom;
 
@@ -1260,7 +1260,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         // play the Add Counter sound
         if (n > 0) {
-            Sounds.AddCounter.play();
+            Singletons.getControl().getSoundSystem().play(SoundEffectType.AddCounter);
         }
 
         this.updateObservers();
@@ -1298,7 +1298,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         // play the Add Counter sound
         if (n > 0) {
-            Sounds.AddCounter.play();
+            Singletons.getControl().getSoundSystem().play(SoundEffectType.AddCounter);
         }
 
         this.updateObservers();
@@ -1374,7 +1374,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
             // Play the Subtract Counter sound
             if (n > 0) {
-                Sounds.RemoveCounter.play();
+                Singletons.getControl().getSoundSystem().play(SoundEffectType.RemoveCounter);
             }
 
             this.updateObservers();
@@ -3874,7 +3874,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.equip();
 
         // Play the Equip sound
-        Sounds.Equip.play();
+        Singletons.getControl().getSoundSystem().play(SoundEffectType.Equip);
     }
 
     /**
@@ -4904,7 +4904,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.setTapped(true);
 
         // Play the Tap sound
-        Sounds.Tap.play();
+        Singletons.getControl().getSoundSystem().play(SoundEffectType.Tap);
     }
 
     /**
@@ -4920,7 +4920,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Untaps, runParams);
 
             // Play the Untap sound
-            Sounds.Untap.play();
+            Singletons.getControl().getSoundSystem().play(SoundEffectType.Untap);
         }
 
         for (final Command var : this.untapCommandList) {

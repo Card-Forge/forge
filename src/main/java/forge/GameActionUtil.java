@@ -55,7 +55,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
-import forge.sound.Sounds;
+import forge.sound.SoundEffectType;
 import forge.util.MyRandom;
 
 
@@ -611,7 +611,7 @@ public final class GameActionUtil {
         final String winMsg = winFlip ? " wins flip." : " loses flip.";
 
         // Play the Flip A Coin sound
-        Sounds.FlipCoin.play();
+        Singletons.getControl().getSoundSystem().play(SoundEffectType.FlipCoin);
 
         JOptionPane.showMessageDialog(null, source.getName() + " - " + caller + winMsg, source.getName(),
                 JOptionPane.PLAIN_MESSAGE);
@@ -695,7 +695,7 @@ public final class GameActionUtil {
         }
 
         // Play the Damage sound
-        Sounds.Damage.playSync();
+        Singletons.getControl().getSoundSystem().playSync(SoundEffectType.Damage);
     }
 
     // this is for cards like Sengir Vampire
@@ -793,7 +793,7 @@ public final class GameActionUtil {
         c.getDamageHistory().registerDamage(player);
 
         // Play the Life Loss sound
-        Sounds.LifeLoss.playSync();
+        Singletons.getControl().getSoundSystem().playSync(SoundEffectType.LifeLoss);
     }
 
     // restricted to combat damage, restricted to players
@@ -864,7 +864,7 @@ public final class GameActionUtil {
         c.getDamageHistory().registerCombatDamage(player);
 
         // Play the Life Loss sound
-        Sounds.LifeLoss.playSync();
+        Singletons.getControl().getSoundSystem().playSync(SoundEffectType.LifeLoss);
     } // executeCombatDamageToPlayerEffects
 
     /**
