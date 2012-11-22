@@ -139,6 +139,7 @@ public class ComputerAIGeneral implements Computer {
         all.addAll(player.getCardsIn(ZoneType.Battlefield));
         all.addAll(player.getCardsIn(ZoneType.Exile));
         all.addAll(player.getCardsIn(ZoneType.Graveyard));
+        all.addAll(player.getCardsIn(ZoneType.Command));
         if (!player.getCardsIn(ZoneType.Library).isEmpty()) {
             all.add(player.getCardsIn(ZoneType.Library).get(0));
         }

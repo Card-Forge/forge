@@ -119,19 +119,17 @@ public enum CSubmenuVanguard implements ICDoc {
                 Lobby lobby = Singletons.getControl().getLobby();
                 LobbyPlayer humanPlayer = lobby.findLocalPlayer(PlayerType.HUMAN);
                 LobbyPlayer aiPlayer = lobby.findLocalPlayer(PlayerType.COMPUTER);
-                
-                PlayerStartConditions aiCond = new PlayerStartConditions(aiDeck);
-                PlayerStartConditions humanCond = new PlayerStartConditions(humanDeck);
-                
+
                 MatchStartHelper helper = new MatchStartHelper();
 
                 final CardPrinted aiVanguard,humanVanguard;
                 Iterable<CardPrinted> all = VSubmenuVanguard.SINGLETON_INSTANCE.getAllAvatars();
+                Iterable<CardPrinted> aiAll = VSubmenuVanguard.SINGLETON_INSTANCE.getAllAiAvatars();
                 if(selAiAv instanceof String)
                 {
                     //Random is the only string in the list so grab a random avatar.
                     Random r = new Random();
-                    aiVanguard = Iterables.get(all,r.nextInt(Iterables.size(all)));
+                    aiVanguard = Iterables.get(aiAll,r.nextInt(Iterables.size(all)));
                 }
                 else
                 {

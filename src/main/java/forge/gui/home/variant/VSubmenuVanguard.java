@@ -1,6 +1,8 @@
 package forge.gui.home.variant;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -69,6 +71,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
     
     private final Predicate<CardPrinted> avatarTypePred = CardPrinted.Predicates.type("Vanguard");
     private final Iterable<CardPrinted> allAvatars = Iterables.filter(CardDb.instance().getAllCards(), avatarTypePred);
+    private final List<CardPrinted> allAiAvatars = new ArrayList<CardPrinted>();
 
     private final FLabel lblAvatarHuman = new FLabel.Builder()
     .text("Human avatar:")
@@ -83,17 +86,22 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
 
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
-        Predicate<CardPrinted> typePred = CardPrinted.Predicates.type("Vanguard");
-        
-        Vector<Object> listData = new Vector<Object>();
-        listData.add("Random");
-        for(CardPrinted cp : Iterables.filter(CardDb.instance().getAllCards(), typePred))
+        Vector<Object> humanListData = new Vector<Object>();
+        Vector<Object> aiListData = new Vector<Object>();
+        humanListData.add("Random");
+        aiListData.add("Random");
+        for(CardPrinted cp : allAvatars)
         {
-            listData.add(cp);
+            humanListData.add(cp);
+            if(!cp.getCard().getRemAIDecks())
+            {
+                aiListData.add(cp);
+                allAiAvatars.add(cp);
+            }
         }
         
-        avHuman.setListData(listData);
-        avAi.setListData(listData);
+        avHuman.setListData(humanListData);
+        avAi.setListData(aiListData);
         avHuman.setSelectedIndex(0);
         avAi.setSelectedIndex(0);
         
@@ -246,5 +254,12 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
      */
     public Iterable<CardPrinted> getAllAvatars() {
         return allAvatars;
+    }
+
+    /**
+     * @return the allAiAvatars
+     */
+    public List<CardPrinted> getAllAiAvatars() {
+        return allAiAvatars;
     }
 }
