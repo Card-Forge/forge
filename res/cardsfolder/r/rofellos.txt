@@ -1,0 +1,10 @@
+Name:Rofellos
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:-2/+4
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | Execute$ TrigDraw | TriggerController$ TriggeredCardController | TriggerDescription$ Whenever a creature you control dies, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1 | Defined$ You
+SVar:Rarity:Special
+SVar:Picture:http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=12145
+End

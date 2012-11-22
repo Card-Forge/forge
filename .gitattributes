@@ -6936,6 +6936,7 @@ res/cardsfolder/o/opposition.txt svneol=native#text/plain
 res/cardsfolder/o/oppression.txt svneol=native#text/plain
 res/cardsfolder/o/oppressive_will.txt svneol=native#text/plain
 res/cardsfolder/o/opt.txt svneol=native#text/plain
+res/cardsfolder/o/oracle.txt -text
 res/cardsfolder/o/oracle_of_mul_daya.txt svneol=native#text/plain
 res/cardsfolder/o/oracle_of_nectars.txt svneol=native#text/plain
 res/cardsfolder/o/oracles_attendants.txt -text
@@ -6979,6 +6980,7 @@ res/cardsfolder/o/ore_gorger.txt svneol=native#text/plain
 res/cardsfolder/o/organ_grinder.txt svneol=native#text/plain
 res/cardsfolder/o/orgg.txt svneol=native#text/plain
 res/cardsfolder/o/origin_spellbomb.txt svneol=native#text/plain
+res/cardsfolder/o/orim.txt -text
 res/cardsfolder/o/orim_samite_healer.txt svneol=native#text/plain
 res/cardsfolder/o/orims_chant.txt -text svneol=unset#text/plain
 res/cardsfolder/o/orims_cure.txt -text
@@ -8141,6 +8143,7 @@ res/cardsfolder/r/rockslide_ambush.txt svneol=native#text/plain
 res/cardsfolder/r/rockslide_elemental.txt svneol=native#text/plain
 res/cardsfolder/r/rocky_tar_pit.txt svneol=native#text/plain
 res/cardsfolder/r/rod_of_ruin.txt svneol=native#text/plain
+res/cardsfolder/r/rofellos.txt -text
 res/cardsfolder/r/rofellos_llanowar_emissary.txt svneol=native#text/plain
 res/cardsfolder/r/rofelloss_gift.txt -text
 res/cardsfolder/r/rogue_elephant.txt -text
@@ -8609,6 +8612,7 @@ res/cardsfolder/s/sejiri_steppe.txt svneol=native#text/plain
 res/cardsfolder/s/sekki_seasons_guide.txt -text svneol=unset#text/plain
 res/cardsfolder/s/sekkuar_deathkeeper.txt svneol=native#text/plain
 res/cardsfolder/s/selective_memory.txt -text
+res/cardsfolder/s/selenia.txt -text
 res/cardsfolder/s/selenia_dark_angel.txt svneol=native#text/plain
 res/cardsfolder/s/selesnya_charm.txt -text
 res/cardsfolder/s/selesnya_evangel.txt svneol=native#text/plain
@@ -8656,6 +8660,7 @@ res/cardsfolder/s/serpent_warrior.txt svneol=native#text/plain
 res/cardsfolder/s/serpentine_basilisk.txt svneol=native#text/plain
 res/cardsfolder/s/serpentine_kavu.txt svneol=native#text/plain
 res/cardsfolder/s/serpents_gift.txt -text
+res/cardsfolder/s/serra.txt -text
 res/cardsfolder/s/serra_advocate.txt svneol=native#text/plain
 res/cardsfolder/s/serra_angel.txt svneol=native#text/plain
 res/cardsfolder/s/serra_ascendant.txt svneol=native#text/plain
