@@ -60,6 +60,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.item.CardDb;
+import forge.item.CardPrinted;
 import forge.sound.Sounds;
 import forge.util.Expressions;
 import forge.util.MyRandom;
@@ -2105,6 +2106,16 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public String getText() {
         final StringBuilder sb = new StringBuilder();
+
+        // Vanguard Modifiers
+        if (this.isType("Vanguard")) {
+            final CardPrinted avatar = CardDb.instance().getCard(this);
+            sb.append("Hand Modifier: ");
+            sb.append(avatar.getCard().getHand());
+            sb.append("\r\nLife Modifier: ");
+            sb.append(avatar.getCard().getLife());
+            sb.append("\r\n\r\n");
+        }
         sb.append(this.getAbilityText());
 
         String nonAbilityText = this.getNonAbilityText();
