@@ -11026,6 +11026,7 @@ res/cardsfolder/v/volcanic_submersion.txt svneol=native#text/plain
 res/cardsfolder/v/volcano_imp.txt svneol=native#text/plain
 res/cardsfolder/v/volition_reins.txt svneol=native#text/plain
 res/cardsfolder/v/volley_of_boulders.txt -text
+res/cardsfolder/v/volrath.txt -text
 res/cardsfolder/v/volrath_the_fallen.txt svneol=native#text/plain
 res/cardsfolder/v/volraths_dungeon.txt svneol=native#text/plain
 res/cardsfolder/v/volraths_gardens.txt svneol=native#text/plain
@@ -11515,6 +11516,7 @@ res/cardsfolder/w/wurmskin_forger.txt svneol=native#text/plain
 res/cardsfolder/w/wurmweaver_coil.txt svneol=native#text/plain
 res/cardsfolder/w/wydwen_the_biting_gale.txt svneol=native#text/plain
 res/cardsfolder/w/wyluli_wolf.txt svneol=native#text/plain
+res/cardsfolder/x/xantcha.txt -text
 res/cardsfolder/x/xanthic_statue.txt svneol=native#text/plain
 res/cardsfolder/x/xantid_swarm.txt -text
 res/cardsfolder/x/xathrid_demon.txt -text
