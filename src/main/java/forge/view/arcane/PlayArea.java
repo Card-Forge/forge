@@ -27,7 +27,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.JScrollPane;
-import javax.swing.SwingUtilities;
 
 import forge.Card;
 import forge.view.arcane.util.CardPanelMouseListener;
@@ -181,6 +180,14 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         return allTokens;
     }
     
+    @Override
+    public final CardPanel addCard(final Card card) {
+        final CardPanel placeholder = new CardPanel(card);
+        placeholder.setDisplayEnabled(false);
+        this.getCardPanels().add(placeholder);
+        this.add(placeholder);
+        return placeholder;
+    }
 
     @Override
     public final void doLayout() {
@@ -245,12 +252,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
         this.setPreferredSize(new Dimension(maxRowWidth - this.cardSpacingX, y - this.cardSpacingY));
         this.revalidate();
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                positionAllCards();
-            }
-        });
+        positionAllCards();
     }
      
     private void positionAllCards() 

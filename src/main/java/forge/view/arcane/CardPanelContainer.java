@@ -256,7 +256,7 @@ public abstract class CardPanelContainer extends JPanel {
      *            a {@link forge.Card} object.
      * @return a {@link forge.view.arcane.CardPanel} object.
      */
-    public final CardPanel addCard(final Card card) {
+    public CardPanel addCard(final Card card) {
         final CardPanel placeholder = new CardPanel(card);
         placeholder.setDisplayEnabled(false);
         this.getCardPanels().add(placeholder);
