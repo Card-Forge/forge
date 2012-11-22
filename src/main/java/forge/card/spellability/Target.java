@@ -716,9 +716,11 @@ public class Target {
             for (final Card c : Singletons.getModel().getGame().getCardsIn(this.tgtZone)) {
                 boolean isValidTarget = c.isValid(this.validTgts, this.srcCard.getController(), this.srcCard);
                 boolean canTarget = (!isTargeted || c.canBeTargetedBy(sa));
-                boolean isAlreadyTargeted = this.getTargetCards().contains(c);  
+                boolean isAlreadyTargeted = this.getTargetCards().contains(c);
                 //System.out.print(c);
-                if ( isValidTarget && canTarget && !isAlreadyTargeted ) return true;
+                if (isValidTarget && canTarget && !isAlreadyTargeted) {
+                    return true;
+                }
             }
         }
 

@@ -45,7 +45,7 @@ public class AbilityManaPart implements java.io.Serializable {
     private String origProduced;
     private String lastExpressChoice = "";
     private String manaRestrictions = "";
-    transient private ArrayList<Mana> lastProduced = new ArrayList<Mana>();
+    private transient ArrayList<Mana> lastProduced = new ArrayList<Mana>();
     private int amount = 1;
 
     /** The reflected. */
@@ -54,13 +54,13 @@ public class AbilityManaPart implements java.io.Serializable {
     /** The canceled. */
     private boolean canceled = false;
 
-    transient private final Card sourceCard;
+    private final transient Card sourceCard;
 
-    transient private Cost cost;
+    private transient Cost cost;
 
     // Spells paid with this mana spell can't be countered.
     private boolean cannotCounterSpell;
-    
+
     /**
      * <p>
      * Constructor for AbilityMana.
@@ -77,12 +77,12 @@ public class AbilityManaPart implements java.io.Serializable {
      */
     public AbilityManaPart(final Card sourceCard, final Map<String, String> params) {
         this.sourceCard = sourceCard;
-        
+
         origProduced = params.containsKey("Produced") ? params.get("Produced") : "1";
         if (params.containsKey("RestrictValid")) {
             this.manaRestrictions = params.get("RestrictValid");
         }
-        
+
         this.cannotCounterSpell = params.containsKey("AddsNoCounter");
 
     }
@@ -91,7 +91,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * <p>
      * produceMana.
      * </p>
-     * @param ability 
+     * @param ability
      */
     public final void produceMana(SpellAbility sa) {
         this.produceMana(this.getManaProduced(), this.getSourceCard().getController(), sa);
@@ -106,7 +106,7 @@ public class AbilityManaPart implements java.io.Serializable {
      *            a {@link java.lang.String} object.
      * @param player
      *            a {@link forge.game.player.Player} object.
-     * @param sa 
+     * @param sa
      */
     public final void produceMana(final String produced, final Player player, SpellAbility sa) {
         final Card source = this.getSourceCard();
@@ -448,8 +448,8 @@ public class AbilityManaPart implements java.io.Serializable {
 //        if (abm.getType() != this.getType()) {
 //            return false;
 //        }
-        
-        return cost.equals(abm.cost) && sourceCard.equals(abm.sourceCard); 
+
+        return cost.equals(abm.cost) && sourceCard.equals(abm.sourceCard);
 
 //        return abm.toUnsuppressedString().equals(this.toUnsuppressedString());
     }

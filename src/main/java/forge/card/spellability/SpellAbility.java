@@ -113,7 +113,7 @@ public abstract class SpellAbility implements ISpellAbility {
     private List<Card> tappedForConvoke = new ArrayList<Card>();
 
     private HashMap<String, String> sVars = new HashMap<String, String>();
-    
+
     private AbilityManaPart manaPart = null;
 
     private boolean undoable;
@@ -124,7 +124,7 @@ public abstract class SpellAbility implements ISpellAbility {
     public final boolean isManaAbility() {
         return manaPart != null && isAbility();
     }
-    
+
 
     public final void setManaPart(AbilityManaPart manaPart) {
         this.manaPart = manaPart;
@@ -141,7 +141,7 @@ public abstract class SpellAbility implements ISpellAbility {
     public Set<String> getSVars() {
         return sVars.keySet();
     }
-    
+
     /**
      * <p>
      * Constructor for SpellAbility.
@@ -342,7 +342,7 @@ public abstract class SpellAbility implements ISpellAbility {
     public boolean isBuyBackAbility() {
         return this.optionalAdditionalCosts.contains("Buyback");
     }
-    
+
     /**
      * <p>
      * isKicked.
@@ -353,7 +353,7 @@ public abstract class SpellAbility implements ISpellAbility {
     public boolean isKicked() {
         return isOptionalAdditionalCostPaid("Kicker");
     }
-    
+
     /**
      * <p>
      * isOptionalAdditionalCostPaid.
@@ -512,7 +512,7 @@ public abstract class SpellAbility implements ISpellAbility {
         return params == null ? null : params.get(key);
     }
     public boolean hasParam(String key) {
-        return params == null ? false: params.containsKey(key);
+        return params == null ? false : params.containsKey(key);
     }
 
     /**
@@ -520,18 +520,19 @@ public abstract class SpellAbility implements ISpellAbility {
      * @param mapParams
      */
     public void copyParamsToMap(Map<String, String> mapParams) {
-        if ( null != params ) 
+        if (null != params) {
             mapParams.putAll(params);
-    }        
-    
+        }
+    }
+
     // If this is not null, then ability was made in a factory
     public ApiType getApi() {
         return api;
     }
-    
+
     public final boolean isCurse() {
         return this.hasParam("IsCurse");
-    }    
+    }
 
     /**
      * <p>
@@ -1664,7 +1665,7 @@ public abstract class SpellAbility implements ISpellAbility {
     public List<Card> knownDetermineDefined(final String defined) {
         final List<Card> ret = new ArrayList<Card>();
         final ArrayList<Card> list = AbilityFactory.getDefinedCards(getSourceCard(), defined, this);
-    
+
         for (final Card c : list) {
             final Card actualCard = Singletons.getModel().getGame().getCardState(c);
             ret.add(actualCard);
@@ -1684,7 +1685,7 @@ public abstract class SpellAbility implements ISpellAbility {
         while (null != parent.getParent()) {
             parent = parent.getParent();
         }
-    
+
         return parent;
     }
 
@@ -1701,11 +1702,13 @@ public abstract class SpellAbility implements ISpellAbility {
      */
     public SpellAbility getParentTargetingCard() {
         SpellAbility parent = this;
-    
-        while( parent.getParent() != null)
-        {
+
+        while (parent.getParent() != null) {
+
             Target tgt = parent.getTarget();
-            if ( tgt != null && tgt.getTargetCards() != null && !tgt.getTargetCards().isEmpty() ) break;
+            if (tgt != null && tgt.getTargetCards() != null && !tgt.getTargetCards().isEmpty()) {
+                break;
+            }
             parent = parent.getParent();
         }
         return parent;
@@ -1720,10 +1723,12 @@ public abstract class SpellAbility implements ISpellAbility {
      */
     public SpellAbility getParentTargetingSA() {
         SpellAbility parent = this;
-        while( parent.getParent() != null)
-        {
+        while (parent.getParent() != null) {
+
             Target tgt = parent.getTarget();
-            if ( tgt != null && tgt.getTargetSAs() != null && !tgt.getTargetSAs().isEmpty() ) break;
+            if (tgt != null && tgt.getTargetSAs() != null && !tgt.getTargetSAs().isEmpty()) {
+                break;
+            }
             parent = parent.getParent();
         }
         return parent;
@@ -1738,10 +1743,12 @@ public abstract class SpellAbility implements ISpellAbility {
      */
     public SpellAbility getParentTargetingPlayer() {
         SpellAbility parent = this;
-        while( parent.getParent() != null)
-        {
+        while (parent.getParent() != null) {
+
             Target tgt = parent.getTarget();
-            if ( tgt != null && tgt.getTargetPlayers() != null && !tgt.getTargetPlayers().isEmpty() ) break;
+            if (tgt != null && tgt.getTargetPlayers() != null && !tgt.getTargetPlayers().isEmpty()) {
+                break;
+            }
             parent = parent.getParent();
         }
         return parent;
@@ -1759,8 +1766,9 @@ public abstract class SpellAbility implements ISpellAbility {
      * TODO: Write javadoc for this method.
      */
     public void undo() {
-        if ( isUndoable() )
+        if (isUndoable()) {
             this.payCosts.refundPaidCost(sourceCard);
+        }
     }
 
     /**

@@ -89,7 +89,7 @@ public class ReplacementHandler {
      *            the run params,same as for triggers.
      * @return true if the event was replaced.
      */
-    public ReplacementResult run(final HashMap<String, Object> runParams, final ReplacementLayer layer,final Player decider) {
+    public ReplacementResult run(final HashMap<String, Object> runParams, final ReplacementLayer layer, final Player decider) {
 
         final List<ReplacementEffect> possibleReplacers = new ArrayList<ReplacementEffect>();
         // Round up Non-static replacement effects ("Until EOT," or
@@ -283,7 +283,7 @@ public class ReplacementHandler {
         } else if (eventToReplace.equals("Moved")) {
             ret = new ReplaceMoved(mapParams, host);
         }
-        
+
         String activeZones = mapParams.get("ActiveZones");
         if (null != activeZones) {
             ret.setActiveZone(EnumSet.copyOf(ZoneType.listValueOf(activeZones)));

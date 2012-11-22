@@ -513,7 +513,7 @@ public class SpellAbilityVariables {
     public void setKicked(boolean kicked) {
         this.kicked = kicked;
     }
-    
+
 
     /**
      * <p>

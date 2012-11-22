@@ -41,7 +41,7 @@ import forge.util.Expressions;
 public abstract class ReplacementEffect extends TriggerReplacementBase {
 
     private ReplacementLayer layer = ReplacementLayer.None;
-    
+
     /** The has run. */
     private boolean hasRun = false;
 
@@ -102,7 +102,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
             if (Expressions.compare(left, comparator, compareTo)) {
                 return true;
             }
-        } else if (sa != null && sa.doTrigger(false)){
+        } else if (sa != null && sa.doTrigger(false)) {
             return true;
         }
 
@@ -204,7 +204,7 @@ public abstract class ReplacementEffect extends TriggerReplacementBase {
                 return false;
             }
         }
-        
+
         if (this.getMapParams().containsKey("PlayerTurn")) {
             if (this.getMapParams().get("PlayerTurn").equals("True") && !Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(this.getHostCard().getController())) {
                 return false;

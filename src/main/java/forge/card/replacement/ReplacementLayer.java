@@ -10,7 +10,7 @@ public enum ReplacementLayer {
     Copy,
     Other,
     None;
-    
+
     /**
      * TODO: Write javadoc for this method.
      * @param substring

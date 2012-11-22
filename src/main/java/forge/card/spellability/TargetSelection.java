@@ -698,7 +698,7 @@ public class TargetSelection {
 
         return false;
     }
-    
+
     /**
      * <p>
      * matchesValidSA.

@@ -130,7 +130,7 @@ public class CostDiscard extends CostPartWithList {
             return handList.contains(c);
         } else {
             if (ability.isSpell()) {
-                handList.remove(source);// can't pay for itself
+                handList.remove(source); // can't pay for itself
             }
             boolean sameName = false;
             if (type.contains("+WithSameName")) {
@@ -385,14 +385,14 @@ public class CostDiscard extends CostPartWithList {
             public void selectCard(final Card card) {
                 Zone zone = Singletons.getModel().getGame().getZoneOf(card);
                 if (zone.is(ZoneType.Hand) && handList.contains(card)) {
-                    if (!sameName || part.getList().isEmpty() 
+                    if (!sameName || part.getList().isEmpty()
                             || part.getList().get(0).getName().equals(card.getName())) {
                         // send in List<Card> for Typing
                         card.getController().discard(card, sp);
                         part.addToList(card);
                         handList.remove(card);
                         this.nDiscard++;
-    
+
                         // in case no more cards in hand
                         if (this.nDiscard == nNeeded) {
                             this.done();

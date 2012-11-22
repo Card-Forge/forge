@@ -180,7 +180,7 @@ public class AbilityTriggered extends Ability implements Command {
         return (this.restrictions.length == 1)
                 && this.restrictions[0].equals("named " + this.getSourceCard().getName());
     }
-    
+
     @Override
     public final boolean isTrigger() {
         return true;
