@@ -1,0 +1,10 @@
+Name:Multani
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:-3/-2
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddPower$ X | References$ X | Description$ Creatures you control get +X/+0, where X is the number of cards in your hand.
+SVar:X:Count$CardsInYourHand
+SVar:Rarity:Special
+SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=12146&type=card
+End

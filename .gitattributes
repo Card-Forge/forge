@@ -5842,6 +5842,7 @@ res/cardsfolder/l/lust_for_war.txt svneol=native#text/plain
 res/cardsfolder/l/lux_cannon.txt svneol=native#text/plain
 res/cardsfolder/l/lyev_skyknight.txt -text
 res/cardsfolder/l/lymph_sliver.txt svneol=native#text/plain
+res/cardsfolder/l/lyna.txt -text
 res/cardsfolder/l/lynx.txt svneol=native#text/plain
 res/cardsfolder/l/lys_alana_bowmaster.txt svneol=native#text/plain
 res/cardsfolder/l/lys_alana_huntmaster.txt svneol=native#text/plain
@@ -5973,6 +5974,7 @@ res/cardsfolder/m/mantis_engine.txt svneol=native#text/plain
 res/cardsfolder/m/mantle_of_leadership.txt svneol=native#text/plain
 res/cardsfolder/m/maralen_of_the_mornsong.txt -text
 res/cardsfolder/m/marauding_knight.txt svneol=native#text/plain
+res/cardsfolder/m/maraxus.txt -text
 res/cardsfolder/m/maraxus_of_keld.txt svneol=native#text/plain
 res/cardsfolder/m/marble_chalice.txt svneol=native#text/plain
 res/cardsfolder/m/marble_diamond.txt svneol=native#text/plain
@@ -6278,6 +6280,7 @@ res/cardsfolder/m/misers_cage.txt svneol=native#text/plain
 res/cardsfolder/m/misery_charm.txt svneol=native#text/plain
 res/cardsfolder/m/misfortunes_gain.txt svneol=native#text/plain
 res/cardsfolder/m/misguided_rage.txt svneol=native#text/plain
+res/cardsfolder/m/mishra.txt -text
 res/cardsfolder/m/mishra_artificer_prodigy.txt svneol=native#text/plain
 res/cardsfolder/m/mishras_bauble.txt -text
 res/cardsfolder/m/mishras_factory.txt svneol=native#text/plain
@@ -6478,6 +6481,7 @@ res/cardsfolder/m/mudhole.txt -text
 res/cardsfolder/m/mul_daya_channelers.txt svneol=native#text/plain
 res/cardsfolder/m/mulch.txt svneol=native#text/plain
 res/cardsfolder/m/mulldrifter.txt svneol=native#text/plain
+res/cardsfolder/m/multani.txt -text
 res/cardsfolder/m/multani_maro_sorcerer.txt svneol=native#text/plain
 res/cardsfolder/m/multanis_acolyte.txt svneol=native#text/plain
 res/cardsfolder/m/multanis_decree.txt svneol=native#text/plain
