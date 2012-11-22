@@ -15,7 +15,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
 public class SacrificeEffect extends SpellEffect {
-    
+
     @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getSourceCard();
@@ -74,23 +74,23 @@ public class SacrificeEffect extends SpellEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-    
+
         final String conditionDesc = sa.getParam("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
-    
+
         final List<Player> tgts = getTargetPlayers(sa);
-    
+
         String valid = sa.getParam("SacValid");
         if (valid == null) {
             valid = "Self";
         }
-    
+
         String num = sa.getParam("Amount");
         num = (num == null) ? "1" : num;
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), num, sa);
-    
+
         if (valid.equals("Self")) {
             sb.append("Sacrifice ").append(sa.getSourceCard().toString());
         } else if (valid.equals("Card.AttachedBy")) {
@@ -100,12 +100,12 @@ public class SacrificeEffect extends SpellEffect {
             for (final Player p : tgts) {
                 sb.append(p.getName()).append(" ");
             }
-    
+
             String msg = sa.getParam("SacMessage");
             if (msg == null) {
                 msg = valid;
             }
-    
+
             if (sa.hasParam("Destroy")) {
                 sb.append("Destroys ");
             } else {
@@ -113,7 +113,7 @@ public class SacrificeEffect extends SpellEffect {
             }
             sb.append(amount).append(" ").append(msg).append(".");
         }
-    
+
         return sb.toString();
     }
 

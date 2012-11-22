@@ -15,7 +15,7 @@ import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
 public class RepeatEffect extends SpellEffect {
-    
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         return "Repeat something. Somebody should really write a better StackDescription!";
@@ -25,17 +25,17 @@ public class RepeatEffect extends SpellEffect {
     public void resolve(SpellAbility sa) {
         final AbilityFactory afRepeat = new AbilityFactory();
         Card source = sa.getSourceCard();
-    
+
         // setup subability to repeat
         final SpellAbility repeat = afRepeat.getAbility(sa.getSourceCard().getSVar(sa.getParam("RepeatSubAbility")), source);
         repeat.setActivatingPlayer(sa.getActivatingPlayer());
         ((AbilitySub) repeat).setParent(sa);
-    
+
         Integer maxRepeat = null;
         if (sa.hasParam("MaxRepeat")) {
             maxRepeat = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("MaxRepeat"), sa);
         }
-        
+
         //execute repeat ability at least once
         int count = 0;
         do {
@@ -52,10 +52,10 @@ public class RepeatEffect extends SpellEffect {
                  break;
              }
        } while (checkRepeatConditions(sa));
-    
+
     }
 // end class AbilityFactory_Repeat
-    
+
     /**
      * <p>
      * checkRepeatConditions.
@@ -68,24 +68,24 @@ public class RepeatEffect extends SpellEffect {
      */
     private boolean checkRepeatConditions(final SpellAbility sa) {
         //boolean doAgain = false;
-    
+
         if (sa.hasParam("RepeatPresent")) {
             final String repeatPresent = sa.getParam("RepeatPresent");
             List<Card> list = new ArrayList<Card>();
-    
+
             String repeatCompare = "GE1";
             if (sa.hasParam("RepeatCompare")) {
                 repeatCompare = sa.getParam("RepeatCompare");
             }
-    
+
             if (sa.hasParam("RepeatDefined")) {
                 list.addAll(AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("RepeatDefined"), sa));
             } else {
                 list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
             }
-    
+
             list = CardLists.getValidCards(list, repeatPresent.split(","), sa.getActivatingPlayer(), sa.getSourceCard());
-    
+
             int right;
             final String rightString = repeatCompare.substring(2);
             try { // If this is an Integer, just parse it
@@ -95,14 +95,14 @@ public class RepeatEffect extends SpellEffect {
                 // SVar
                 right = CardFactoryUtil.xCount(sa.getSourceCard(), sa.getSourceCard().getSVar(rightString));
             }
-    
+
             final int left = list.size();
-    
+
             if (!Expressions.compare(left, repeatCompare, right)) {
                 return false;
             }
         }
-    
+
         if (sa.hasParam("RepeatCheckSVar")) {
             String sVarOperator = "GE";
             String sVarOperand = "1";
@@ -112,12 +112,12 @@ public class RepeatEffect extends SpellEffect {
             }
             final int svarValue = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("RepeatCheckSVar"), sa);
             final int operandValue = AbilityFactory.calculateAmount(sa.getSourceCard(), sVarOperand, sa);
-    
+
             if (!Expressions.compare(svarValue, sVarOperator, operandValue)) {
                 return false;
             }
         }
-    
+
         if (sa.hasParam("RepeatOptional")) {
             if (sa.getActivatingPlayer().isComputer()) {
                 //TODO add logic to have computer make better choice (ArsenalNut)
@@ -130,7 +130,7 @@ public class RepeatEffect extends SpellEffect {
                 }
             }
         }
-    
+
         return true;
     }
 }

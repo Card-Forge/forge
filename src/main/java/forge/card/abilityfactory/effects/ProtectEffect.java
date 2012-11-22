@@ -21,7 +21,7 @@ import forge.gui.GuiChoose;
 
 
 public class ProtectEffect extends SpellEffect {
-    
+
     /* (non-Javadoc)
          * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
          */
@@ -103,7 +103,7 @@ public class ProtectEffect extends SpellEffect {
         final ArrayList<String> choices = AbilityFactory.getProtectionList(sa);
         final ArrayList<String> gains = new ArrayList<String>();
         if (isChoice) {
-            
+
             if (sa.getActivatingPlayer().isHuman()) {
                 final String choice = GuiChoose.one("Choose a protection", choices);
                 if (null == choice) {

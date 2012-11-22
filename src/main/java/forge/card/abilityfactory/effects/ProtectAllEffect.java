@@ -16,8 +16,8 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
-public class ProtectAllEffect extends SpellEffect { 
-    
+public class ProtectAllEffect extends SpellEffect {
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -139,4 +139,4 @@ public class ProtectAllEffect extends SpellEffect {
 
     } // protectAllResolve()
 
-} 
+}

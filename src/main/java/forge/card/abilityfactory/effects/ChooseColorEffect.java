@@ -17,11 +17,11 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
 public class ChooseColorEffect extends SpellEffect {
-    
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-    
+
         for (final Player p : getTargetPlayers(sa)) {
             sb.append(p).append(" ");
         }

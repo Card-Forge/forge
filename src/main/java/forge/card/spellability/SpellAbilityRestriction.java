@@ -190,7 +190,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         if (cardZone == null || !cardZone.is(this.getZone())) {
             // If Card is not in the default activating zone, do some additional checks
             // Not a Spell, or on Battlefield, return false
-            if (!sa.isSpell() || (cardZone != null && ZoneType.Battlefield.equals(cardZone.getZoneType())) 
+            if (!sa.isSpell() || (cardZone != null && ZoneType.Battlefield.equals(cardZone.getZoneType()))
                     || !this.getZone().equals(ZoneType.Hand)) {
                 return false;
             }

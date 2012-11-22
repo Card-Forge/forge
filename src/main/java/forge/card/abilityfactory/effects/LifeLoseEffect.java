@@ -18,18 +18,17 @@ public class LifeLoseEffect extends SpellEffect {
         final StringBuilder sb = new StringBuilder();
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("LifeAmount"), sa);
 
-    
         final String conditionDesc = sa.getParam("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
-    
+
         for (final Player player : getTargetPlayers(sa)) {
             sb.append(player).append(" ");
         }
-    
+
         sb.append("loses ").append(amount).append(" life.");
-   
+
         return sb.toString();
     }
 
@@ -40,7 +39,7 @@ public class LifeLoseEffect extends SpellEffect {
     public void resolve(SpellAbility sa) {
 
         int lifeLost = 0;
-    
+
         final int lifeAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("LifeAmount"), sa);
 
         final Target tgt = sa.getTarget();
@@ -51,5 +50,5 @@ public class LifeLoseEffect extends SpellEffect {
         }
         sa.getSourceCard().setSVar("AFLifeLost", "Number$" + Integer.toString(lifeLost));
     }
-    
+
 }

@@ -17,7 +17,7 @@ import forge.gui.GuiChoose;
  *
  */
 public class TapOrUntapAllEffect extends SpellEffect {
-    
+
     private enum TapOrUntap {
         TAP, UNTAP
     }
@@ -54,11 +54,11 @@ public class TapOrUntapAllEffect extends SpellEffect {
             StringBuilder sb = new StringBuilder("Tap or Untap ");
             if (sa.hasParam("ValidMessage")) {
                 sb.append(sa.getParam("ValidMessage"));
-            } else{
+            } else {
                 sb.append("Permanents");
             }
             sb.append("?");
-            
+
             final String[] tapOrUntap = new String[] { "Tap", "Untap" };
             final Object z = GuiChoose.one(sb.toString(), tapOrUntap);
             toTap = (z.equals("Tap")) ? TapOrUntap.TAP : TapOrUntap.UNTAP;

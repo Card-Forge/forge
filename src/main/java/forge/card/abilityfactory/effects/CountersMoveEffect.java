@@ -10,13 +10,13 @@ import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 
-public class CountersMoveEffect extends SpellEffect { 
+public class CountersMoveEffect extends SpellEffect {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final Card host = sa.getSourceCard();
-    
+
         Card source = null;
         ArrayList<Card> srcCards;
         final Target tgt = sa.getTarget();
@@ -29,17 +29,17 @@ public class CountersMoveEffect extends SpellEffect {
             source = srcCards.get(0);
         }
         final List<Card> tgtCards = getTargetCards(sa);
-    
+
         final Counters cType = Counters.valueOf(sa.getParam("CounterType"));
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
-    
+
         sb.append("Move ").append(amount).append(" ").append(cType.getName()).append(" counter");
         if (amount != 1) {
             sb.append("s");
         }
         sb.append(" from ");
         sb.append(source).append(" to ").append(tgtCards.get(0));
-    
+
         sb.append(".");
         return sb.toString();
     }
@@ -83,4 +83,4 @@ public class CountersMoveEffect extends SpellEffect {
         }
     } // moveCounterResolve
 
-} 
+}

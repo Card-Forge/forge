@@ -10,12 +10,12 @@ import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 
-public class DamagePreventEffect extends SpellEffect 
-{
+public class DamagePreventEffect extends SpellEffect {
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-    
+
         final List<Object> tgts = getTargetObjects(sa);
 
         sb.append("Prevent the next ");
@@ -25,7 +25,7 @@ public class DamagePreventEffect extends SpellEffect
             if (i != 0) {
                 sb.append(" ");
             }
-    
+
             final Object o = tgts.get(i);
             if (o instanceof Card) {
                 final Card tgtC = (Card) o;
@@ -38,7 +38,7 @@ public class DamagePreventEffect extends SpellEffect
                 sb.append(o.toString());
             }
         }
-    
+
         if (sa.hasParam("Radiance") && (sa.getTarget() != null)) {
             sb.append(" and each other ").append(sa.getParam("ValidTgts"))
                     .append(" that shares a color with ");

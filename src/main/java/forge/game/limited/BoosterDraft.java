@@ -401,9 +401,19 @@ public final class BoosterDraft implements IBoosterDraft {
         ArrayList<String> setCombos = new ArrayList<String>();
         if (sets.length >= 2) {
             setCombos.add(String.format("%s/%s/%s", sets[0], sets[0], sets[0]));
+            setCombos.add(String.format("%s/%s/%s", sets[0], sets[0], sets[1]));
+            setCombos.add(String.format("%s/%s/%s", sets[0], sets[1], sets[1]));
+            if (sets.length >= 3) {
+                setCombos.add(String.format("%s/%s/%s", sets[0], sets[1], sets[2]));
+                setCombos.add(String.format("%s/%s/%s", sets[0], sets[2], sets[2]));
+            }
             setCombos.add(String.format("%s/%s/%s", sets[1], sets[0], sets[0]));
             setCombos.add(String.format("%s/%s/%s", sets[1], sets[1], sets[0]));
             setCombos.add(String.format("%s/%s/%s", sets[1], sets[1], sets[1]));
+            if (sets.length >= 3) {
+                setCombos.add(String.format("%s/%s/%s", sets[1], sets[1], sets[2]));
+                setCombos.add(String.format("%s/%s/%s", sets[1], sets[2], sets[2]));
+            }
         }
         if (sets.length >= 3) {
             setCombos.add(String.format("%s/%s/%s", sets[2], sets[1], sets[0]));

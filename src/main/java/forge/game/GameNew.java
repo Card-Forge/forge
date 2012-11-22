@@ -36,7 +36,7 @@ import forge.gui.match.views.VAntes;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.properties.ForgePreferences.FPref;
-import forge.sound.Sounds;
+import forge.sound.SoundEffectType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 
@@ -86,8 +86,8 @@ public class GameNew {
                     // ImageCache.getImage(card);
                 }
             }
-        }
-        
+        }        
+    
         // Shuffling
         // Ai may cheat 
         if ( player.isComputer() && Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_SMOOTH_LAND) ) {
@@ -373,7 +373,7 @@ public class GameNew {
         }
         
         // Play the Flip Coin sound
-        Sounds.FlipCoin.play();
+        Singletons.getControl().getSoundSystem().play(SoundEffectType.FlipCoin);
         
         List<Player> allPlayers = Singletons.getModel().getGame().getPlayers();
         setPlayersFirstTurn(allPlayers.get(MyRandom.getRandom().nextInt(allPlayers.size())), true);

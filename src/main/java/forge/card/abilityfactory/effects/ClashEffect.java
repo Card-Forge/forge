@@ -10,7 +10,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerType;
 
 public class ClashEffect extends SpellEffect {
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -18,7 +18,7 @@ public class ClashEffect extends SpellEffect {
     protected String getStackDescription(SpellAbility sa) {
         return sa.getSourceCard().getName() + " - Clash with an opponent.";
     }
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */

@@ -153,7 +153,7 @@ public class TargetChoices {
         }
         return false;
     }
-    
+
     /**
      * <p>
      * removeTarget.
@@ -172,7 +172,7 @@ public class TargetChoices {
         }
         return false;
     }
-    
+
     /**
      * <p>
      * removeTarget.
@@ -191,7 +191,7 @@ public class TargetChoices {
         }
         return false;
     }
-    
+
     /**
      * <p>
      * Getter for the field <code>targetCards</code>.

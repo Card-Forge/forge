@@ -50,13 +50,12 @@ public class MillEffect extends SpellEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final int numCards = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa);
-    
+
         final List<Player> tgtPlayers = getTargetPlayers(sa);
         final String conditionDesc = sa.getParam("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
-    
 
         for (final Player p : tgtPlayers) {
             sb.append(p.toString()).append(" ");

@@ -103,7 +103,7 @@ public class TokenEffect extends SpellEffect {
             this.tokenOwner = "You";
         }
     }
-    
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -137,7 +137,7 @@ public class TokenEffect extends SpellEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
         readParameters(sa);
-        
+
         String imageName = "";
         Player controller;
         String cost = "";

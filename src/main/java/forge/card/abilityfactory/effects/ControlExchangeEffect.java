@@ -11,7 +11,7 @@ import forge.game.player.Player;
 
 
 public class ControlExchangeEffect extends SpellEffect {
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -61,4 +61,4 @@ public class ControlExchangeEffect extends SpellEffect {
         object1.addController(player2);
     }
 
-} 
+}

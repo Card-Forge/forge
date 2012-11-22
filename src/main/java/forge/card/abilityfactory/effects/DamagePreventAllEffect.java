@@ -12,7 +12,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class DamagePreventAllEffect extends SpellEffect {
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -52,13 +52,13 @@ public class DamagePreventAllEffect extends SpellEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         String desc = sa.getDescription();
-    
+
         if (desc.contains(":")) {
             desc = desc.split(":")[1];
         }
         sb.append(desc);
-    
+
         return sb.toString();
     }
 
-} 
+}

@@ -11,18 +11,18 @@ import forge.card.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 
 public class SacrificeAllEffect extends SpellEffect {
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         // when getStackDesc is called, just build exactly what is happening
-    
+
         final StringBuilder sb = new StringBuilder();
 
-    
         final String conditionDesc = sa.getParam("ConditionDescription");
         if (conditionDesc != null) {
             sb.append(conditionDesc).append(" ");
         }
-    
+
         /*
          * This is not currently targeted ArrayList<Player> tgtPlayers;
          * 
@@ -31,7 +31,7 @@ public class SacrificeAllEffect extends SpellEffect {
          * AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
          * sa.get("Defined"), sa);
          */
-    
+
         sb.append("Sacrifice permanents.");
         return sb.toString();
     }
@@ -75,4 +75,4 @@ public class SacrificeAllEffect extends SpellEffect {
         }
     }
 
-} 
+}

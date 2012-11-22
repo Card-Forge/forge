@@ -55,14 +55,16 @@ import forge.card.trigger.TriggerType;
 import forge.game.GameLossReason;
 import forge.game.GameState;
 import forge.game.GlobalRuleChange;
+import forge.game.event.LandPlayedEvent;
+import forge.game.event.PoisonCounterEvent;
+import forge.game.event.SpellResolvedEvent;
 import forge.game.phase.PhaseHandler;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.properties.ForgePreferences.FPref;
-import forge.sound.SoundUtils;
-import forge.sound.Sounds;
+import forge.sound.SoundEffectType;
 import forge.util.MyRandom;
 
 /**
@@ -974,11 +976,10 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     public final void addPoisonCounters(final int num, final Card source) {
         if (!this.hasKeyword("You can't get poison counters")) {
             this.poisonCounters += num;
+            
+            game.getEvents().post(new PoisonCounterEvent(this, source, 3));
             game.getGameLog().add("Poison", this + " receives a poison counter from " + source, 3);
 
-            // play the Poison sound
-            Sounds.Poison.play();
-            
             this.updateObservers();
         }
     }
@@ -1269,7 +1270,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Play the Draw sound
-        Sounds.Draw.play();
+        Singletons.getControl().getSoundSystem().play(SoundEffectType.Draw);
 
         return drawn;
     }
@@ -1608,21 +1609,21 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
 
         game.getAction().discardMadness(c);
 
-        if ((c.hasKeyword("If a spell or ability an opponent controls causes "
-                + "you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.") || c
-                .hasKeyword("If a spell or ability an opponent controls causes "
-                        + "you to discard CARDNAME, put it onto the battlefield with two +1/+1 "
-                        + "counters on it instead of putting it into your graveyard."))
+        if ((c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, "
+                + "put it onto the battlefield instead of putting it into your graveyard.") 
+          || c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, "
+                + "put it onto the battlefield with two +1/+1 counters on it "
+                + "instead of putting it into your graveyard."))
                 && (null != sa) && !c.getController().equals(sa.getSourceCard().getController())) {
             game.getAction().discardPutIntoPlayInstead(c);
 
             // Play the corresponding Put into Play sound
-            SoundUtils.playCardSoundEffect(c, sa);
+            game.getEvents().post(new SpellResolvedEvent(c, sa));
         } else {
             game.getAction().moveToGraveyard(c);
 
             // Play the Discard sound
-            Sounds.Discard.play();
+            Singletons.getControl().getSoundSystem().play(SoundEffectType.Discard);
         }
 
         // Run triggers
@@ -1809,7 +1810,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().runTrigger(TriggerType.Shuffled, runParams);
 
         // Play the shuffle sound
-        Sounds.Shuffle.play();
+        Singletons.getControl().getSoundSystem().play(SoundEffectType.Shuffle);
     } // shuffle
       // //////////////////////////////
 
@@ -1869,7 +1870,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             game.getGameLog().add("Land", this + " played " + land, 2);
 
             // play a sound
-            SoundUtils.playLandSoundEffect(land);
+            game.getEvents().post(new LandPlayedEvent(this, land));
 
             // Run triggers
             final HashMap<String, Object> runParams = new HashMap<String, Object>();

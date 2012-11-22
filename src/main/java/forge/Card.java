@@ -61,7 +61,7 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
-import forge.sound.Sounds;
+import forge.sound.SoundEffectType;
 import forge.util.Expressions;
 import forge.util.MyRandom;
 

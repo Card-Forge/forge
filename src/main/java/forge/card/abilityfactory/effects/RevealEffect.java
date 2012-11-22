@@ -13,6 +13,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
 public class RevealEffect extends RevealEffectBase {
+
     @Override
     public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
@@ -74,8 +75,8 @@ public class RevealEffect extends RevealEffectBase {
         } else {
             sb.append("Error - no target players for RevealHand. ");
         }
-    
+
         return sb.toString();
     }
 
-} 
+}

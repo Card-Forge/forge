@@ -178,9 +178,9 @@ public class ManaPool {
      */
     public final int clearPool(boolean isEndOfPhase) {
         int numRemoved = 0;
-        
-        if (isEndOfPhase && 
-                Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.manapoolsDontEmpty)) {
+
+        if (isEndOfPhase
+                && Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.manapoolsDontEmpty)) {
             return numRemoved;
         }
 

@@ -49,6 +49,7 @@ import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCostAbility;
 import forge.game.GameState;
+import forge.game.event.SpellResolvedEvent;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -56,7 +57,6 @@ import forge.gui.GuiChoose;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
-import forge.sound.SoundUtils;
 import forge.util.MyObservable;
 import forge.view.ButtonUtil;
 
@@ -910,8 +910,11 @@ public class MagicStack extends MyObservable {
             game.getGameLog().add("ResolveStack", sa.getStackDescription(), 2);
             sa.resolve();
             this.finishResolving(sa, false);
+            // do creatures ETB from here?
         }
         sa.getSourceCard().setXManaCostPaid(0);
+
+        game.getEvents().post(new SpellResolvedEvent(source, sa));
 
         if (source.hasStartOfKeyword("Haunt") && !source.isCreature()
                 && game.getZoneOf(source).is(ZoneType.Graveyard)) {
@@ -971,9 +974,6 @@ public class MagicStack extends MyObservable {
                 }
             }
         }
-
-        // Play the sound depending on what ability resolved.
-        SoundUtils.playCardSoundEffect(source, sa);
     }
 
     /**

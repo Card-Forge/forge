@@ -362,10 +362,14 @@ public class ManaCostShard {
      */
     public boolean canBePaidWithManaOfColor(CardColor color) {
         // can pay with life?
-        if ( (this.shard & Atom.OR_2_LIFE) != 0 ) return true;
+        if ((this.shard & Atom.OR_2_LIFE) != 0) {
+            return true;
+        }
         // can pay with any color?
-        if ( (this.shard & Atom.OR_2_COLORLESS) != 0 || 0 != ( this.shard & Atom.COLORLESS ) ) return true;
+        if ((this.shard & Atom.OR_2_COLORLESS) != 0 || 0 != (this.shard & Atom.COLORLESS)) {
+            return true;
+        }
         // either colored part is empty, or there are same colors in shard and mana source
-        return ( 0xFF & this.shard ) == 0 || ( color.getColor() & this.shard ) > 0;
+        return (0xFF & this.shard) == 0 || (color.getColor() & this.shard) > 0;
     }
 }

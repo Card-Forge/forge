@@ -106,7 +106,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
             return false;
         }
 
-        if (this.isCycling() 
+        if (this.isCycling()
                 && Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCycling)) {
             return false;
         }
@@ -117,7 +117,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
 
         return CostPayment.canPayAdditionalCosts(this.getPayCosts(), this);
     }
-    
+
     /* (non-Javadoc)
      * @see forge.card.spellability.SpellAbility#resolve()
      */

@@ -766,9 +766,19 @@ public class ChangeZoneAi extends SpellAiLogic {
             if (destination.equals(ZoneType.Hand)) {
                 // only retrieve cards from computer graveyard
                 list = CardLists.filterControlledBy(list, ai);
-                System.out.println("changeZone:" + list);
+            } else if (sa.hasParam("AttachedTo")) {
+                list = CardLists.filter(list, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        for (SpellAbility attach : c.getSpellAbilities()) {
+                            if ("Pump".equals(attach.getParam("AILogic"))) {
+                                return true; //only use good auras
+                            }
+                        }
+                        return false;
+                    }
+                });
             }
-
         }
 
         // blink human targets only during combat
@@ -1226,19 +1236,25 @@ public class ChangeZoneAi extends SpellAiLogic {
                 }
 
                 if (sa.hasParam("AttachedTo")) {
-                    final ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(),
+                    List<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(),
                             sa.getParam("AttachedTo"), sa);
+                    if (list.isEmpty()) {
+                        list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+                        list = CardLists.getValidCards(list, sa.getParam("AttachedTo"), c.getController(), c);
+                    }
                     if (!list.isEmpty()) {
-                        final Card attachedTo = list.get(0);
+                        final Card attachedTo = CardFactoryUtil.getBestAI(list);
                         if (c.isEnchanting()) {
-                            // If this Card is already Enchanting something
-                            // Need to unenchant it, then clear out the commands
+                            // If this Card is already Enchanting something, need
+                            // to unenchant it, then clear out the commands
                             final GameEntity oldEnchanted = c.getEnchanting();
                             c.removeEnchanting(oldEnchanted);
                             c.clearEnchantCommand();
                             c.clearUnEnchantCommand();
                         }
                         c.enchantEntity(attachedTo);
+                    } else { // When it should enter the battlefield attached to an illegal permanent it fails
+                        continue;
                     }
                 }
 

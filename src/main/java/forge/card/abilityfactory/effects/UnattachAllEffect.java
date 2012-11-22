@@ -14,9 +14,9 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class UnattachAllEffect extends SpellEffect {
-    
+
     private void handleUnattachment(final GameEntity o, final Card cardToUnattach) {
-    
+
         if (o instanceof Card) {
             final Card c = (Card) o;
             if (cardToUnattach.isAura()) {
@@ -130,8 +130,8 @@ public class UnattachAllEffect extends SpellEffect {
         card.addLeavesPlayCommand(onLeavesPlay);
         card.enchantEntity(tgt);
     }
-    */    
-    
+    */
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -140,7 +140,7 @@ public class UnattachAllEffect extends SpellEffect {
         final StringBuilder sb = new StringBuilder();
         sb.append("Unattach all valid Equipment and Auras from ");
         final List<Object> targets = getTargetObjects(sa);
-        sb.append(StringUtils.join(targets, " "));  
+        sb.append(StringUtils.join(targets, " "));
         return sb.toString();
     }
 
@@ -151,16 +151,18 @@ public class UnattachAllEffect extends SpellEffect {
     public void resolve(SpellAbility sa) {
         Card source = sa.getSourceCard();
         final List<Object> targets = getTargetObjects(sa);
-    
+
         // If Cast Targets will be checked on the Stack
         for (final Object o : targets) {
-            if (!( o instanceof GameEntity )) continue; 
-            
+            if (!(o instanceof GameEntity)) {
+                continue;
+            }
+
             String valid = sa.getParam("UnattachValid");
             List<Card> unattachList = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
             unattachList = CardLists.getValidCards(unattachList, valid.split(","), source.getController(), source);
             for (final Card c : unattachList) {
-                handleUnattachment((GameEntity)o, c);
+                handleUnattachment((GameEntity) o, c);
             }
         }
     }

@@ -151,7 +151,8 @@ public class VAssignDamage {
 
             boolean meta = evt.isControlDown();
             int alreadyAssignDamage = lstDamage.get(index);
-            int lethal = VAssignDamage.this.deathtouch ? 1 : source.getLethalDamage();
+            // If lethal damage has already been assigned just act like it's 0.
+            int lethal = VAssignDamage.this.deathtouch ? 1 : Math.max(0, source.getLethalDamage());
             int assignedDamage = 1;
             
             // Add damage for left clicks, as much as we can for ctrl clicking
@@ -365,7 +366,7 @@ public class VAssignDamage {
 
     private void initialAssignDamage() {
         // Assign "1" damage to first combatant (it will really assign lethal damage)
-        int lethalDamage = this.deathtouch ? 1 : lstDefenders.get(0).getLethalDamage();
+        int lethalDamage = this.deathtouch ? 1 : Math.max(0, lstDefenders.get(0).getLethalDamage());
         int damage = Math.min(lethalDamage, this.damageLeftToAssign);
         assignCombatantDamage(0, damage);
     }
@@ -389,7 +390,7 @@ public class VAssignDamage {
         // The first defender should aleady have lethal damage assigned
         int size = lstDefenders.size();
         for (int i = 1; i < size; i++) {
-            int lethalDamage = this.deathtouch ? 1 : lstDefenders.get(i).getLethalDamage();
+            int lethalDamage = this.deathtouch ? 1 : Math.max(0, lstDefenders.get(i).getLethalDamage());
             int damage = Math.min(lethalDamage, this.damageLeftToAssign);
             if (damage == 0) {
                 break;

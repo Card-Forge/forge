@@ -11,7 +11,7 @@ import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 
 public class FlipCoinEffect extends SpellEffect {
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */

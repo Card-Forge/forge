@@ -92,7 +92,7 @@ class CardFactoryLands {
                 public void computerExecute() {
                     boolean needsTheMana = false;
                     final Player ai = card.getController();
-                    if (ai.getLife() > 3) {
+                    if (ai.getLife() > 3 && ai.canPayLife(2)) {
                         final int landsize = ai.getLandsInPlay().size();
                         for (Card c : ai.getCardsIn(ZoneType.Hand)) {
                             if (landsize == c.getCMC()) {
@@ -109,8 +109,7 @@ class CardFactoryLands {
 
                 public void humanExecute() {
                     final Player human = card.getController();
-                    final int life = human.getLife();
-                    if (2 < life) {
+                    if (human.canPayLife(2)) {
 
                         final String question = String.format("Pay 2 life? If you don't, %s enters the battlefield tapped.", card.getName());
 

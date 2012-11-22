@@ -98,7 +98,7 @@ public class CostExile extends CostPartWithList {
         } else if (this.getType().equals("All")) {
             sb.append(" all cards from your ").append(this.from);
             return sb.toString();
-        } 
+        }
 
         if (this.from.equals(ZoneType.Battlefield)) {
             final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
@@ -150,7 +150,7 @@ public class CostExile extends CostPartWithList {
         List<Card> typeList = new ArrayList<Card>();
         if (this.getType().equals("All")) {
             return true; // this will always work
-        } 
+        }
         if (this.getFrom().equals(ZoneType.Stack)) {
             for (int i = 0; i < Singletons.getModel().getGame().getStack().size(); i++) {
                 typeList.add(Singletons.getModel().getGame().getStack().peekAbility(i).getSourceCard());
@@ -213,7 +213,7 @@ public class CostExile extends CostPartWithList {
                 Singletons.getModel().getGame().getAction().exile(card);
             }
             payment.paidCost(this);
-        } 
+        }
         list = CardLists.getValidCards(list, this.getType().split(";"), activator, source);
         if (c == null) {
             final String sVar = ability.getSVar(amount);

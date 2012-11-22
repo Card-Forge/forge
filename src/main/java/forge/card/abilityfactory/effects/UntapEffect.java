@@ -25,9 +25,9 @@ public class UntapEffect extends SpellEffect {
     protected String getStackDescription(SpellAbility sa) {
         // when getStackDesc is called, just build exactly what is happening
         final StringBuilder sb = new StringBuilder();
-    
+
         sb.append("Untap ");
-    
+
         if (sa.hasParam("UntapUpTo")) {
             sb.append("up to ").append(sa.getParam("Amount")).append(" ");
             sb.append(sa.getParam("UntapType")).append("s");
@@ -42,13 +42,13 @@ public class UntapEffect extends SpellEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Target tgt = sa.getTarget();
-    
+
         if (sa.hasParam("UntapUpTo")) {
             untapChooseUpTo(sa);
         } else {
-            
+
             final List<Card> tgtCards = getTargetCards(sa);
-    
+
             for (final Card tgtC : tgtCards) {
                 if (tgtC.isInPlay() && ((tgt == null) || tgtC.canBeTargetedBy(sa))) {
                     tgtC.untap();
@@ -72,10 +72,10 @@ public class UntapEffect extends SpellEffect {
     private void untapChooseUpTo(final SpellAbility sa) {
         final int num = Integer.parseInt(sa.getParam("Amount"));
         final String valid = sa.getParam("UntapType");
-    
+
         final ArrayList<Player> definedPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
                 sa.getParam("Defined"), sa);
-    
+
         for (final Player p : definedPlayers) {
             if (p.isHuman()) {
                 Singletons.getModel().getMatch().getInput().setInput(CardFactoryUtil.inputUntapUpToNType(num, valid));
@@ -83,11 +83,11 @@ public class UntapEffect extends SpellEffect {
                 List<Card> list = p.getCardsIn(ZoneType.Battlefield);
                 list = CardLists.getType(list, valid);
                 list = CardLists.filter(list, Presets.TAPPED);
-    
+
                 int count = 0;
                 while ((list.size() != 0) && (count < num)) {
                     for (int i = 0; (i < list.size()) && (count < num); i++) {
-    
+
                         final Card c = CardFactoryUtil.getBestLandAI(list);
                         c.untap();
                         list.remove(c);

@@ -10,9 +10,8 @@ import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 
-public class RegenerateEffect extends SpellEffect
-{
-    
+public class RegenerateEffect extends SpellEffect {
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#getStackDescription(java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -20,10 +19,10 @@ public class RegenerateEffect extends SpellEffect
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         final List<Card> tgtCards = getTargetCards(sa);
-    
+
         if (tgtCards.size() > 0) {
             sb.append("Regenerate ");
-            
+
             final Iterator<Card> it = tgtCards.iterator();
             while (it.hasNext()) {
                 final Card tgtC = it.next();
@@ -32,14 +31,14 @@ public class RegenerateEffect extends SpellEffect
                 } else {
                     sb.append(tgtC);
                 }
-    
+
                 if (it.hasNext()) {
                     sb.append(", ");
                 }
             }
         }
         sb.append(".");
-    
+
         return sb.toString();
     }
 

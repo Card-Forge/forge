@@ -104,7 +104,7 @@ public class SpellPermanent extends Spell {
             } else if (controller.isHuman()) {
                 Singletons.getModel().getMatch().getInput().setInput(SpellPermanent.this.championInputComes);
             } else { // Computer
-                List<Card> computer = 
+                List<Card> computer =
                         CardLists.getValidCards(controller.getCardsIn(ZoneType.Battlefield), SpellPermanent.this.championValid, controller, source);
                 computer.remove(source);
 
@@ -248,10 +248,10 @@ public class SpellPermanent extends Spell {
             sourceCard.addComesIntoPlayCommand(this.championCommandComes);
             sourceCard.addLeavesPlayCommand(this.championCommandLeavesPlay);
         }
-        
-        if(this.getManaCost().contains("X"))
-        {
-            if(!this.getSourceCard().getSVar("X").equals("")) {
+
+        if (this.getManaCost().contains("X")) {
+
+            if (!this.getSourceCard().getSVar("X").equals("")) {
                 this.setSVar("X", this.getSourceCard().getSVar("X"));
             }
         }
@@ -324,11 +324,11 @@ public class SpellPermanent extends Spell {
         if (mandatory) {
             return true;
         }
-        final Player ai = getActivatingPlayer(); 
+        final Player ai = getActivatingPlayer();
         final Card card = this.getSourceCard();
         String mana = this.getPayCosts().getTotalMana();
         final Cost cost = this.getPayCosts();
-        
+
         if (cost != null) {
             // AI currently disabled for these costs
             if (!CostUtil.checkLifeCost(ai, cost, card, 4, null)) {
@@ -347,10 +347,10 @@ public class SpellPermanent extends Spell {
                 return false;
             }
         }
-        
+
         // check on legendary
-        if (card.isType("Legendary") && 
-                !Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
+        if (card.isType("Legendary")
+                && !Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
             final List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
             if (Iterables.any(list, CardPredicates.nameEquals(card.getName()))) {
                 return false;
@@ -391,7 +391,7 @@ public class SpellPermanent extends Spell {
             }
 
             final List<Card> cl = this.championGetCreature.get();
-            if ( !(cl.size() > 0) || !this.getSourceCard().isInZone(ZoneType.Hand)) {
+            if (!(cl.size() > 0) || !this.getSourceCard().isInZone(ZoneType.Hand)) {
                 return false;
             }
         }
@@ -411,7 +411,7 @@ public class SpellPermanent extends Spell {
 
     private static boolean checkETBEffects(final Card card, final SpellAbility sa, final ApiType api, final Player ai) {
 
-        if (card.isCreature() 
+        if (card.isCreature()
                 && Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCreatureETBTriggers)) {
             return true;
         }
@@ -564,12 +564,12 @@ public class SpellPermanent extends Spell {
                 else {
                     throw new InvalidParameterException("Either ai or sa must be not null!");
                 }
-                
+
                 if (exSA.getActivatingPlayer() == null) {
                     throw new InvalidParameterException("Executing SpellAbility for Replacement Effect has no activating player");
                 }
             }
-            
+
             // ETBReplacement uses overriding abilities.
             // These checks only work if the Executing SpellAbility is an
             // Ability_Sub.

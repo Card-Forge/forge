@@ -494,7 +494,7 @@ public class ManaCost {
         }
 
         String manaColor = mana.getColor();
-        
+
         if (choice.isOr2Colorless() && !this.isColor(InputPayManaCostUtil.getShortColorString(manaColor))) {
             this.increaseColorlessMana(1);
         }

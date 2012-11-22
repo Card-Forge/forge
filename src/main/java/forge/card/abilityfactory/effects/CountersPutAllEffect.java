@@ -13,16 +13,16 @@ import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
-public class CountersPutAllEffect extends SpellEffect  { 
+public class CountersPutAllEffect extends SpellEffect  {
 
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-    
+
         final Counters cType = Counters.valueOf(sa.getParam("CounterType"));
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
         final String zone = sa.hasParam("ValidZone") ? sa.getParam("ValidZone") : "Battlefield";
-    
+
         sb.append("Put ").append(amount).append(" ").append(cType.getName()).append(" counter");
         if (amount != 1) {
             sb.append("s");
@@ -33,7 +33,7 @@ public class CountersPutAllEffect extends SpellEffect  {
         } else {
             sb.append("card in ").append(zone).append(".");
         }
-    
+
         return sb.toString();
     }
 

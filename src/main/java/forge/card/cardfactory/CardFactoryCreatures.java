@@ -778,7 +778,7 @@ public class CardFactoryCreatures {
                 Zone zone = Singletons.getModel().getGame().getZoneOf(c);
                 return zone.is(ZoneType.Battlefield) && c.getController() == ability.getTargetPlayer() && c.canBeTargetedBy(ability);
             }
-            
+
             @Override
             protected Input onDone() {
                 final StringBuilder sb = new StringBuilder();
@@ -791,7 +791,7 @@ public class CardFactoryCreatures {
                 return null;
             }
         };
-                
+
         targetInput.setMessage("Select up to 5 target permanents.  Selected (%d) so far.  Click OK when done.");
 
         Predicate<Player> canTarget = new Predicate<Player>() {

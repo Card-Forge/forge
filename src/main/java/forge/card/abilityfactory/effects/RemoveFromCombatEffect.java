@@ -15,13 +15,13 @@ public class RemoveFromCombatEffect extends SpellEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-    
+
         final List<Card> tgtCards = getTargetCards(sa);
-    
+
         sb.append("Remove ");
         sb.append(StringUtils.join(tgtCards, ", "));
         sb.append(" from combat.");
-    
+
         return sb.toString();
     }
 
@@ -35,5 +35,5 @@ public class RemoveFromCombatEffect extends SpellEffect {
             }
         }
 
-    } 
+    }
 }

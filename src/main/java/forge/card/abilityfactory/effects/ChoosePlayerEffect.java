@@ -13,7 +13,7 @@ import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
 public class ChoosePlayerEffect extends SpellEffect {
-    
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -22,23 +22,23 @@ public class ChoosePlayerEffect extends SpellEffect {
             sb.append(p).append(" ");
         }
         sb.append("chooses a player.");
-        
+
         return sb.toString();
     }
-    
+
     @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getSourceCard();
-        
+
         final List<Player> tgtPlayers = getTargetPlayers(sa);
-        
+
         final Target tgt = sa.getTarget();
-        
+
         final ArrayList<Player> choices = sa.hasParam("Choices") ? AbilityFactory.getDefinedPlayers(
                 sa.getSourceCard(), sa.getParam("Choices"), sa) : new ArrayList<Player>(Singletons.getModel().getGame().getPlayers());
-        
+
         final String choiceDesc = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a player";
-        
+
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (p.isHuman()) {
@@ -51,7 +51,7 @@ public class ChoosePlayerEffect extends SpellEffect {
                     }
                     final Player chosen = (Player) o;
                     card.setChosenPlayer(chosen);
-                    
+
                 } else {
                     if (sa.hasParam("AILogic")) {
                         if (sa.getParam("AILogic").equals("Curse")) {

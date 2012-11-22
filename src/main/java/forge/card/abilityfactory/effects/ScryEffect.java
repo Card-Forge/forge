@@ -9,7 +9,7 @@ import forge.card.spellability.Target;
 import forge.game.player.Player;
 
 public class ScryEffect extends SpellEffect {
-    
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -31,15 +31,15 @@ public class ScryEffect extends SpellEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-    
+
         int num = 1;
         if (sa.hasParam("ScryNum")) {
             num = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("ScryNum"), sa);
         }
-    
+
         final Target tgt = sa.getTarget();
         final List<Player> tgtPlayers = getTargetPlayers(sa);
-    
+
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 p.scry(num);

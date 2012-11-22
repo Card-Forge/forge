@@ -20,7 +20,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
 public class ManaEffect extends SpellEffect {
-    
+
     /**
      * <p>
      * hasUrzaLands.
@@ -32,9 +32,9 @@ public class ManaEffect extends SpellEffect {
      */
     private static boolean hasUrzaLands(final Player p) {
         final List<Card> landsControlled = p.getCardsIn(ZoneType.Battlefield);
-        return Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Mine")) &&  
-                Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Tower")) && 
-                Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Power Plant"));
+        return Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Mine"))
+                && Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Tower"))
+                && Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Power Plant"));
     }
 
 
@@ -49,19 +49,18 @@ public class ManaEffect extends SpellEffect {
             resolveDrawback(sa);
             return;
         }
-        
+
         // Spells are not undoable
         sa.setUndoable(sa.isAbility() && sa.isUndoable());
-    
-    
+
         final List<Player> tgtPlayers = getTargetPlayers(sa);
         final Target tgt = sa.getTarget();
-    
+
         if (abMana.isComboMana()) {
             for (Player p : tgtPlayers) {
                 int amount = sa.hasParam("Amount") ? AbilityFactory.calculateAmount(card, sa.getParam("Amount"), sa) : 1;
                 if (tgt == null || p.canBeTargetedBy(sa)) {
-                    Player activator = sa.getActivatingPlayer(); 
+                    Player activator = sa.getActivatingPlayer();
                     // AI color choice is set in ComputerUtils so only human players need to make a choice
                     if (activator.isHuman()) {
                         //String colorsNeeded = abMana.getExpressChoice();
@@ -124,7 +123,7 @@ public class ManaEffect extends SpellEffect {
         else if (abMana.isAnyMana()) {
             for (Player p : tgtPlayers) {
                 if (tgt == null || p.canBeTargetedBy(sa)) {
-                    Player act = sa.getActivatingPlayer(); 
+                    Player act = sa.getActivatingPlayer();
                     // AI color choice is set in ComputerUtils so only human players need to make a choice
                     if (act.isHuman()) {
                         String colorsNeeded = abMana.getExpressChoice();
@@ -176,20 +175,20 @@ public class ManaEffect extends SpellEffect {
                 }
             }
         }
-    
+
         for (final Player player : tgtPlayers) {
             abMana.produceMana(generatedMana(sa), player, sa);
         }
-    
+
         // Only clear express choice after mana has been produced
         abMana.clearExpressChoice();
-    
+
         // convert these to SubAbilities when appropriate
         if (sa.hasParam("Stuck")) {
             sa.setUndoable(false);
             card.addExtrinsicKeyword("This card doesn't untap during your next untap step.");
         }
-    
+
         final String deplete = sa.getParam("Deplete");
         if (deplete != null) {
             final int num = card.getCounters(Counters.getType(deplete));
@@ -198,7 +197,7 @@ public class ManaEffect extends SpellEffect {
                 Singletons.getModel().getGame().getAction().sacrifice(card, null);
             }
         }
-    
+
         resolveDrawback(sa);
     }
 
@@ -221,7 +220,7 @@ public class ManaEffect extends SpellEffect {
         // Calculate generated mana here for stack description and resolving
 
         int amount = sa.hasParam("Amount") ? AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa) : 1;
-    
+
         AbilityManaPart abMana = sa.getManaPart();
         String baseMana;
         if (abMana.isComboMana()) {
@@ -239,7 +238,7 @@ public class ManaEffect extends SpellEffect {
         else {
             baseMana = abMana.mana();
         }
-    
+
         if (sa.hasParam("Bonus")) {
             // For mana abilities that get a bonus
             // Bonus currently MULTIPLIES the base amount. Base Amounts should
@@ -250,10 +249,10 @@ public class ManaEffect extends SpellEffect {
                     bonus = Integer.parseInt(sa.getParam("BonusProduced"));
                 }
             }
-    
+
             amount += bonus;
         }
-    
+
         try {
             if ((sa.getParam("Amount") != null) && (amount != Integer.parseInt(sa.getParam("Amount")))) {
                 sa.setUndoable(false);
@@ -261,7 +260,7 @@ public class ManaEffect extends SpellEffect {
         } catch (final NumberFormatException n) {
             sa.setUndoable(false);
         }
-    
+
         final StringBuilder sb = new StringBuilder();
         if (amount == 0) {
             sb.append("0");
@@ -302,7 +301,7 @@ public class ManaEffect extends SpellEffect {
      * 
      * @return a {@link java.lang.String} object.
      */
-    
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();

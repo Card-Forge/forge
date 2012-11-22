@@ -12,16 +12,16 @@ import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
 public class CharmEffect extends SpellEffect {
-    
+
     public static List<AbilitySub> makePossibleOptions(final SpellAbility sa) {
         final Card source = sa.getSourceCard();
-    
+
         final String[] saChoices = sa.getParam("Choices").split(",");
         List<AbilitySub> choices = new ArrayList<AbilitySub>();
         for (final String saChoice : saChoices) {
             final String ab = source.getSVar(saChoice);
             final AbilityFactory charmAF = new AbilityFactory();
-            choices.add((AbilitySub)charmAF.getAbility(ab, source));
+            choices.add((AbilitySub) charmAF.getAbility(ab, source));
         }
         return choices;
     }
@@ -37,23 +37,23 @@ public class CharmEffect extends SpellEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
         // nothing stack specific for Charm
-        
+
         return sb.toString();
     }
-    
+
     public static void makeChoices(SpellAbility sa) {
         //this resets all previous choices
         sa.setSubAbility(null);
-        
+
         final int num = Integer.parseInt(sa.hasParam("CharmNum") ? sa.getParam("CharmNum") : "1");
         final int min = sa.hasParam("MinCharmNum") ? Integer.parseInt(sa.getParam("MinCharmNum")) : num;
         final List<AbilitySub> choices = makePossibleOptions(sa);
-        
+
         List<AbilitySub> chosen = null;
-        
+
         Player activator = sa.getActivatingPlayer();
-        if ( activator.isHuman() )
-        {
+        if (activator.isHuman()) {
+
             chosen = new ArrayList<AbilitySub>();
             for (int i = 0; i < num; i++) {
                 AbilitySub a;
@@ -69,28 +69,28 @@ public class CharmEffect extends SpellEffect {
                 choices.remove(a);
                 chosen.add(a);
             }
-        }
-        else 
+        } else {
             chosen = CharmAi.chooseOptionsAi(activator, true, choices, num, min);
-        
+        }
+
         chainAbilities(sa, chosen);
     }
 
     private static void chainAbilities(SpellAbility sa, List<AbilitySub> chosen) {
         SpellAbility saDeepest = sa;
-        while( saDeepest.getSubAbility() != null)
+        while (saDeepest.getSubAbility() != null) {
             saDeepest = saDeepest.getSubAbility();
-        
-        for(AbilitySub sub : chosen){
+        }
+
+        for (AbilitySub sub : chosen) {
             saDeepest.setSubAbility(sub);
             sub.setActivatingPlayer(saDeepest.getActivatingPlayer());
             sub.setParent(saDeepest);
-            
+
             // to chain the next one
             saDeepest = sub;
         }
     }
-    
-    
 
-} 
+
+}

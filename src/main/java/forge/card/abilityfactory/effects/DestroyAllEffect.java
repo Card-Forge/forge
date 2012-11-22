@@ -14,13 +14,13 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class DestroyAllEffect extends SpellEffect {
-    
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
-    
+
         final StringBuilder sb = new StringBuilder();
         final boolean noRegen = sa.hasParam("NoRegen");
-    
+
 
         final String conditionDesc = sa.getParam("ConditionDescription");
         if (conditionDesc != null) {
@@ -51,7 +51,7 @@ public class DestroyAllEffect extends SpellEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        
+
         final boolean noRegen = sa.hasParam("NoRegen");
         final Card card = sa.getSourceCard();
 
@@ -106,4 +106,4 @@ public class DestroyAllEffect extends SpellEffect {
         }
     }
 
-} 
+}

@@ -344,9 +344,8 @@ public class ComputerUtilAttack {
             totalPoison += CombatUtil.poisonIfUnblocked(attacker, ai);
         }
 
-        if (ai.getLife() <= totalAttack
-                && !ai.cantLoseForZeroOrLessLife()
-                && ai.canLoseLife()) {
+        if (totalAttack > 0 && ai.getLife() <= totalAttack
+                && !ai.cantLoseForZeroOrLessLife()) {
             return true;
         }
         return ai.getPoisonCounters() + totalPoison > 9;
@@ -417,7 +416,6 @@ public class ComputerUtilAttack {
         unblockedAttackers.addAll(remainingAttackers);
 
         if ((CombatUtil.sumDamageIfUnblocked(remainingAttackers, opp) >= opp.getLife())
-                && opp.canLoseLife()
                 && !((opp.cantLoseForZeroOrLessLife() || ai.cantWin()) && (opp.getLife() < 1))) {
             return true;
         }

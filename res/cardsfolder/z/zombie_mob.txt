@@ -7,6 +7,7 @@ K:etbCounter:P1P1:X:no Condition:CARDNAME enters the battlefield with a +1/+1 co
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExileAll | TriggerDescription$ When CARDNAME enters the battlefield, exile all creature cards from your graveyard.
 SVar:TrigExileAll:AB$ChangeZoneAll | Cost$ 0 | ChangeType$ Creature.YouCtrl | Origin$ Graveyard | Destination$ Exile
 SVar:X:Count$TypeInYourYard.Creature
+SVar:NeedsToPlayVar:X GE2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zombie_mob.jpg
 SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/51.jpg

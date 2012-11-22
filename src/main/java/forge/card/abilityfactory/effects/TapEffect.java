@@ -10,7 +10,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 
 public class TapEffect extends SpellEffect {
-    
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellEffect#resolve(java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -29,7 +29,7 @@ public class TapEffect extends SpellEffect {
             if (tgt != null && !tgtC.canBeTargetedBy(sa)) {
                 continue;
             }
-            
+
             if (sa.hasParam("ETB") || tgtC.isInPlay()) {
                 if (tgtC.isUntapped() && (remTapped)) {
                     card.addRemembered(tgtC);
@@ -42,7 +42,7 @@ public class TapEffect extends SpellEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-    
+
         sb.append("Tap ");
         final List<Card> tgtCards = getTargetCards(sa);
         sb.append(StringUtils.join(tgtCards, ", "));

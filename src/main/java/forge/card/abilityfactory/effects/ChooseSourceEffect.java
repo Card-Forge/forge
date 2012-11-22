@@ -30,7 +30,7 @@ public class ChooseSourceEffect extends SpellEffect {
             sb.append(p).append(" ");
         }
         sb.append("chooses a source.");
-    
+
         return sb.toString();
     }
 
@@ -149,7 +149,7 @@ public class ChooseSourceEffect extends SpellEffect {
                                 if (threatApi != ApiType.DealDamage && threatApi != ApiType.DamageAll) {
                                     break;
                                 }
-                                
+
                                 final Card source = topStack.getSourceCard();
                                 ArrayList<Object> objects = new ArrayList<Object>();
                                 final Target threatTgt = topStack.getTarget();

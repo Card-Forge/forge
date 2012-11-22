@@ -22,12 +22,11 @@ public class DamageAllEffect extends SpellEffect {
         if (sa.hasParam("ValidDescription")) {
             desc = sa.getParam("ValidDescription");
         }
-        
-        final String damage = sa.getParam("NumDmg");
-        final int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa); 
-    
 
-    
+        final String damage = sa.getParam("NumDmg");
+        final int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
+
+
         final ArrayList<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("DamageSource"), sa);
         final Card source = definedSources.get(0);
 
@@ -50,7 +49,7 @@ public class DamageAllEffect extends SpellEffect {
         final Card source = sa.getSourceCard();
 
         final String damage = sa.getParam("NumDmg");
-        final int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa); 
+        final int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
 
         final Target tgt = sa.getTarget();
         Player targetPlayer = null;

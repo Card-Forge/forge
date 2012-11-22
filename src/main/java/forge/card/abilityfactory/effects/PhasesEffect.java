@@ -9,7 +9,7 @@ import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 
 public class PhasesEffect extends SpellEffect {
-        
+
     // ******************************************
     // ************** Phases ********************
     // ******************************************
@@ -48,4 +48,4 @@ public class PhasesEffect extends SpellEffect {
             }
         }
     }
-} 
+}

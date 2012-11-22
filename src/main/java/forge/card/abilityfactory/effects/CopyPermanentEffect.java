@@ -20,7 +20,7 @@ import forge.game.player.Player;
 import forge.item.CardDb;
 
 public class CopyPermanentEffect extends SpellEffect {
-    
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -57,7 +57,7 @@ public class CopyPermanentEffect extends SpellEffect {
         if (controller == null) {
             controller = sa.getActivatingPlayer();
         }
-        
+
         hostCard.clearClones();
 
         for (final Card c : tgtCards) {

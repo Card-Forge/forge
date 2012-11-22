@@ -21,15 +21,14 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
 public class DigEffect extends SpellEffect {
-    
+
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final Card host = sa.getSourceCard();
         final StringBuilder sb = new StringBuilder();
         final int numToDig = AbilityFactory.calculateAmount(host, sa.getParam("DigNum"), sa);
         final List<Player> tgtPlayers = getTargetPlayers(sa);
-    
-    
+
         sb.append(host.getController()).append(" looks at the top ").append(numToDig);
         sb.append(" card");
         if (numToDig != 1) {

@@ -13,7 +13,7 @@ import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
-public class CountersRemoveAllEffect extends SpellEffect { 
+public class CountersRemoveAllEffect extends SpellEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
@@ -22,11 +22,11 @@ public class CountersRemoveAllEffect extends SpellEffect {
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
         final String zone = sa.hasParam("ValidZone") ? sa.getParam("ValidZone") : "Battlefield";
         String amountString = Integer.toString(amount);
-    
+
         if (sa.hasParam("AllCounters")) {
             amountString = "all";
         }
-    
+
         sb.append("Remove ").append(amount).append(" ").append(cType.getName()).append(" counter");
         if (!amountString.equals("1")) {
             sb.append("s");

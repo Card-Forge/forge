@@ -1638,18 +1638,28 @@ public class AbilityFactory {
         boolean paid = false;
         for (Player payer : payers) {
             if (payer.isComputer()) {
+                if (sa.hasParam("UnlessAI")) {
+                    if ("Never".equals(sa.getParam("UnlessAI"))) {
+                        continue;
+                    } else if ("OnlyOwn".equals(sa.getParam("UnlessAI"))) {
+                        if (!sa.getActivatingPlayer().equals(payer)) {
+                            continue;
+                        }
+                    }
+                }
+                
                 // AI will only pay when it's not already payed and only opponents abilities
-                if (paid || (payers.size() > 1 && sa.getActivatingPlayer().equals(payer))) {
+                if (paid || (payers.size() > 1 
+                        && (sa.getActivatingPlayer().equals(payer) && !"OnlyOwn".equals(sa.getParam("UnlessAI"))))) {
                     continue;
                 }
-                ability.setActivatingPlayer(payer);
                 if (ComputerUtil.canPayCost(ability, payer) && CostUtil.checkLifeCost(payer, cost, source, 4, sa)
                         && CostUtil.checkDamageCost(payer, cost, source, 4)
                         && (!source.getName().equals("Tyrannize") || payer.getCardsIn(ZoneType.Hand).size() > 2)
-                        && (!sa.hasParam("UnlessAI") || !sa.getParam("UnlessAI").equals("Never"))
                         && (!source.getName().equals("Breaking Point") || payer.getCreaturesInPlay().size() > 1)) {
                     // AI was crashing because the blank ability used to pay costs
                     // Didn't have any of the data on the original SA to pay dependant costs
+                    ability.setActivatingPlayer(payer);
                     ability.setTarget(sa.getTarget());
                     ComputerUtil.playNoStack(payer, ability); // Unless cost was payed - no resolve
                     paid = true;
