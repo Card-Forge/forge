@@ -120,6 +120,12 @@ Fixes/Features:
 - The AI will no longer choose non-Pump Auras with Nomad Mythmaker.
 - The AI will no longer choose non-Pump Auras with Nomad Mythmaker.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CheckStyle.
+- Added an AI SVar to Zombie Mob.
+- Booster Draft: added four more choices to block booster draft set order selection (e.g. so that MRD/DST/5DN is possible in addition to only 5DN/DST/MRD, etc.)
+- corrected static ability name in effect script for Ember Gale
+- Variants - Added Ertai (vanguard avatar)
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -154,6 +160,10 @@ Prahv, Spires of Order
 Rith's Charm
 Cragganwick Cremator
 Mischievous Quanar
+Pilgrim of Justice
+Pilgrim of Virtue
+Ember Gale
+Tower Above
 
 
 end
