@@ -3809,6 +3809,7 @@ res/cardsfolder/g/geosurge.txt -text
 res/cardsfolder/g/geothermal_crevice.txt svneol=native#text/plain
 res/cardsfolder/g/geralfs_messenger.txt -text
 res/cardsfolder/g/geralfs_mindcrusher.txt -text
+res/cardsfolder/g/gerrard.txt -text
 res/cardsfolder/g/gerrard_capashen.txt -text
 res/cardsfolder/g/gerrards_battle_cry.txt svneol=native#text/plain
 res/cardsfolder/g/gerrards_command.txt svneol=native#text/plain
@@ -3911,6 +3912,7 @@ res/cardsfolder/g/gilt_leaf_seer.txt svneol=native#text/plain
 res/cardsfolder/g/giltspire_avenger.txt svneol=native#text/plain
 res/cardsfolder/g/gisela_blade_of_goldnight.txt -text
 res/cardsfolder/g/gitaxian_probe.txt svneol=native#text/plain
+res/cardsfolder/g/gix.txt -text
 res/cardsfolder/g/glacial_chasm.txt -text
 res/cardsfolder/g/glacial_crevasses.txt svneol=native#text/plain
 res/cardsfolder/g/glacial_fortress.txt svneol=native#text/plain
@@ -4245,6 +4247,7 @@ res/cardsfolder/g/greenhilt_trainee.txt svneol=native#text/plain
 res/cardsfolder/g/greenseeker.txt svneol=native#text/plain
 res/cardsfolder/g/greenweaver_druid.txt svneol=native#text/plain
 res/cardsfolder/g/gremlin_mine.txt svneol=native#text/plain
+res/cardsfolder/g/greven_il_vec.txt -text
 res/cardsfolder/g/grid_monitor.txt -text
 res/cardsfolder/g/grief_tyrant.txt -text svneol=unset#text/plain
 res/cardsfolder/g/griffin_canyon.txt svneol=native#text/plain

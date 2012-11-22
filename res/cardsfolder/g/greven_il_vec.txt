@@ -1,0 +1,10 @@
+Name:Greven il-Vec
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:-1/+2
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Creature | TriggerZones$ Command | Execute$ TrigDestroy | TriggerDescription$ Whenever a creature you control deals damage to a creature, destroy the other creature. It can't be regenerated.
+SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | Defined$ TriggeredTarget | NoRegen$ True
+SVar:Rarity:Special
+SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=4961&type=card
+End
