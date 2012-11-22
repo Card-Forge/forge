@@ -2,9 +2,11 @@ Name:Ember Gale
 ManaCost:3 R
 Types:Sorcery
 Text:no text
-A:SP$ Effect | Cost$ 3 R | Name$ Ember Gale Effect | ValidTgts$ Player | TgtPrompt$ Select target player | AILogic$ Evasion | StaticAbilities$ QuickSpell | RememberObjects$ Targeted | SubAbility$ DBDamage | SpellDescription$ Creatures target player controls can't block this turn. CARDNAME deals 1 damage to each white and/or blue creature that player controls.
+A:SP$ Effect | Cost$ 3 R | Name$ Ember Gale Effect | ValidTgts$ Player | TgtPrompt$ Select target player | AILogic$ Evasion | StaticAbilities$ CantBlock | RememberObjects$ Targeted | SubAbility$ DBDamage | SpellDescription$ Creatures target player controls can't block this turn. CARDNAME deals 1 damage to each white and/or blue creature that player controls.
 SVar:DBDamage:DB$ DamageAll | NumDmg$ 1 | ValidCards$ Creature.White+TargetedPlayerCtrl,Creature.Blue+TargetedPlayerCtrl | ValidDescription$ each creature that's white or blue that player controls.
 SVar:CantBlock:Mode$ Continuous | Affected$ Creature.RememberedPlayerCtrl | AddKeyword$ HIDDEN CARDNAME can't block. | SubAbility$ DBDamage | SpellDescription$ Creatures targeted player controls can't block this turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ember_gale.jpg
+SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/91.jpg
+Oracle:Creatures target player controls can't block this turn. Ember Gale deals 1 damage to each white and/or blue creature that player controls.
 End
