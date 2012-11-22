@@ -4273,6 +4273,7 @@ res/cardsfolder/g/grindclock.txt svneol=native#text/plain
 res/cardsfolder/g/grinding_station.txt svneol=native#text/plain
 res/cardsfolder/g/grindstone.txt svneol=native#text/plain
 res/cardsfolder/g/grinning_demon.txt svneol=native#text/plain
+res/cardsfolder/g/grinning_demon_avatar.txt -text
 res/cardsfolder/g/grinning_ignus.txt svneol=native#text/plain
 res/cardsfolder/g/grip_of_amnesia.txt -text
 res/cardsfolder/g/griptide.txt -text
@@ -4406,6 +4407,7 @@ res/cardsfolder/h/hand_of_honor.txt svneol=native#text/plain
 res/cardsfolder/h/hand_of_justice.txt svneol=native#text/plain
 res/cardsfolder/h/hand_of_the_praetors.txt svneol=native#text/plain
 res/cardsfolder/h/hand_to_hand.txt -text
+res/cardsfolder/h/hanna.txt -text
 res/cardsfolder/h/hanna_ships_navigator.txt svneol=native#text/plain
 res/cardsfolder/h/hannas_custody.txt svneol=native#text/plain
 res/cardsfolder/h/hanweir_lancer.txt -text
@@ -5205,6 +5207,7 @@ res/cardsfolder/k/karakas.txt svneol=native#text/plain
 res/cardsfolder/k/kargan_dragonlord.txt svneol=native#text/plain
 res/cardsfolder/k/karma.txt svneol=native#text/plain
 res/cardsfolder/k/karmic_guide.txt svneol=native#text/plain
+res/cardsfolder/k/karn.txt -text
 res/cardsfolder/k/karn_liberated.txt -text
 res/cardsfolder/k/karn_silver_golem.txt svneol=native#text/plain
 res/cardsfolder/k/karns_touch.txt svneol=native#text/plain
