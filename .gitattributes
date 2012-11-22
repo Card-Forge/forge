@@ -2949,6 +2949,7 @@ res/cardsfolder/e/embalmed_brawler.txt -text
 res/cardsfolder/e/embargo.txt svneol=native#text/plain
 res/cardsfolder/e/ember_beast.txt -text
 res/cardsfolder/e/ember_fist_zubera.txt svneol=native#text/plain
+res/cardsfolder/e/ember_gale.txt -text
 res/cardsfolder/e/ember_hauler.txt svneol=native#text/plain
 res/cardsfolder/e/ember_shot.txt svneol=native#text/plain
 res/cardsfolder/e/ember_weaver.txt svneol=native#text/plain
