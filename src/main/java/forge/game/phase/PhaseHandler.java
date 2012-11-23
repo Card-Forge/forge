@@ -29,6 +29,7 @@ import forge.CardPredicates;
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
 import forge.game.GameState;
+import forge.game.event.EndOfTurnEvent;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.properties.ForgePreferences.FPref;
@@ -470,7 +471,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     this.setPlayerTurn(this.handleNextTurn());
                 }
                 // Play the End Turn sound
-                Singletons.getControl().getSoundSystem().play(SoundEffectType.EndOfTurn);
+                Singletons.getModel().getGame().getEvents().post(new EndOfTurnEvent());
                 break;
             default: // no action
         }

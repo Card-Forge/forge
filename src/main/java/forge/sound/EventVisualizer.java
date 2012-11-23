@@ -8,9 +8,13 @@ import java.util.Map;
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 import forge.game.event.AddCounterEvent;
+import forge.game.event.CardDamagedEvent;
+import forge.game.event.CardDestroyedEvent;
+import forge.game.event.EndOfTurnEvent;
 import forge.game.event.Event;
 import forge.game.event.FlipCoinEvent;
 import forge.game.event.LandPlayedEvent;
+import forge.game.event.LifeLossEvent;
 import forge.game.event.PoisonCounterEvent;
 import forge.game.event.RemoveCounterEvent;
 import forge.game.event.SetTappedEvent;
@@ -31,6 +35,10 @@ public class EventVisualizer {
         matchTable.put(RemoveCounterEvent.class, SoundEffectType.RemoveCounter);
         matchTable.put(ShuffleEvent.class, SoundEffectType.Shuffle);
         matchTable.put(FlipCoinEvent.class, SoundEffectType.FlipCoin);
+        matchTable.put(EndOfTurnEvent.class, SoundEffectType.EndOfTurn);
+        matchTable.put(CardDestroyedEvent.class, SoundEffectType.Destroy);
+        matchTable.put(CardDamagedEvent.class, SoundEffectType.Damage);
+        matchTable.put(LifeLossEvent.class, SoundEffectType.LifeLoss);
     }
     
     

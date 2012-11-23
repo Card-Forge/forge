@@ -58,6 +58,7 @@ import forge.game.GameLossReason;
 import forge.game.GameState;
 import forge.game.GlobalRuleChange;
 import forge.game.MatchController;
+import forge.game.event.CardDestroyedEvent;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.player.PlayerType;
@@ -1258,7 +1259,7 @@ public class GameAction {
             }
 
             // Play the Destroy sound
-            Singletons.getControl().getSoundSystem().playSync(SoundEffectType.Destroy);
+            Singletons.getModel().getGame().getEvents().post(new CardDestroyedEvent());
 
             final ArrayList<String> types = c.getType();
             for (final String type : types) {
@@ -1304,7 +1305,7 @@ public class GameAction {
                 }
 
                 // Play the Destroy sound
-                Singletons.getControl().getSoundSystem().playSync(SoundEffectType.Destroy);
+                Singletons.getModel().getGame().getEvents().post(new CardDestroyedEvent());
             }
         }
     } // destroyLegendaryCreatures()
@@ -1387,7 +1388,7 @@ public class GameAction {
                         card.setDamage(0);
 
                         // Play the Destroy sound
-                        Singletons.getControl().getSoundSystem().playSync(SoundEffectType.Destroy);
+                        Singletons.getModel().getGame().getEvents().post(new CardDestroyedEvent());
                     }
                 };
 
@@ -1401,7 +1402,7 @@ public class GameAction {
         } // totem armor
 
         // Play the Destroy sound
-        Singletons.getControl().getSoundSystem().playSync(SoundEffectType.Destroy);
+        Singletons.getModel().getGame().getEvents().post(new CardDestroyedEvent());
 
         return this.sacrificeDestroy(c);
     }
@@ -1582,14 +1583,14 @@ public class GameAction {
                 System.out.println("Totem armor destroyed instead of original card");
 
                 // Play the Destroy sound
-                Singletons.getControl().getSoundSystem().playSync(SoundEffectType.Destroy);
+                Singletons.getModel().getGame().getEvents().post(new CardDestroyedEvent());
 
                 return false;
             }
         } // totem armor
 
         // Play the Destroy sound
-        Singletons.getControl().getSoundSystem().playSync(SoundEffectType.Destroy);
+        Singletons.getModel().getGame().getEvents().post(new CardDestroyedEvent());
 
         return this.sacrificeDestroy(c);
     }

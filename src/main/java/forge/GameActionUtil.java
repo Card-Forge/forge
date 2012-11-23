@@ -50,7 +50,9 @@ import forge.control.input.InputPayManaCostAbility;
 import forge.control.input.InputPayReturnCost;
 import forge.control.input.InputPaySacCost;
 import forge.game.GameLossReason;
+import forge.game.event.CardDamagedEvent;
 import forge.game.event.FlipCoinEvent;
+import forge.game.event.LifeLossEvent;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -696,7 +698,7 @@ public final class GameActionUtil {
         }
 
         // Play the Damage sound
-        Singletons.getControl().getSoundSystem().playSync(SoundEffectType.Damage);
+        Singletons.getModel().getGame().getEvents().post(new CardDamagedEvent());
     }
 
     // this is for cards like Sengir Vampire
@@ -794,7 +796,7 @@ public final class GameActionUtil {
         c.getDamageHistory().registerDamage(player);
 
         // Play the Life Loss sound
-        Singletons.getControl().getSoundSystem().playSync(SoundEffectType.LifeLoss);
+        Singletons.getModel().getGame().getEvents().post(new LifeLossEvent());
     }
 
     // restricted to combat damage, restricted to players
