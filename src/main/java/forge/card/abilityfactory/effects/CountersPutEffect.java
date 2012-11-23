@@ -92,10 +92,10 @@ public class CountersPutEffect extends SpellEffect {
                 if (zone == null) {
                     // Do nothing, token disappeared
                 } else if (zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack)) {
-                    tgtCard.addCounter(CounterType.valueOf(type), counterAmount);
+                    tgtCard.addCounter(CounterType.valueOf(type), counterAmount, true);
                 } else {
                     // adding counters to something like re-suspend cards
-                    tgtCard.addCounterFromNonEffect(CounterType.valueOf(type), counterAmount);
+                    tgtCard.addCounter(CounterType.valueOf(type), counterAmount, false);
                 }
             }
         }

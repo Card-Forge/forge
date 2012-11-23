@@ -745,7 +745,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                     aiPermanents = CardLists.filter(aiPermanents, new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
-                            if (c.getNumberOfCounters() > 0) {
+                            if (c.hasCounters()) {
                                 return false; // don't blink something with
                             }
                             // counters TODO check good and

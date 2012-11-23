@@ -178,7 +178,7 @@ class CardFactoryLands {
                     this.inPlay.clear();
                     this.inPlay.addAll(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield));
                     for (final Card targ : CardLists.filter(this.inPlay, targets)) {
-                        targ.addCounter(CounterType.P1P1, 1);
+                        targ.addCounter(CounterType.P1P1, 1, true);
                     }
                 }
             }

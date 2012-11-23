@@ -162,11 +162,11 @@ public class CostPutCounter extends CostPartWithList {
         }
 
         if (this.getThis()) {
-            source.addCounterFromNonEffect(this.getCounter(), c);
+            source.addCounter(this.getCounter(), c, false);
         } else {
             // Put counter on chosen card
             for (final Card card : this.getList()) {
-                card.addCounterFromNonEffect(this.getCounter(), 1);
+                card.addCounter(this.getCounter(), 1, false);
             }
         }
     }
@@ -186,7 +186,7 @@ public class CostPutCounter extends CostPartWithList {
         }
 
         if (this.getThis()) {
-            source.addCounterFromNonEffect(this.getCounter(), c);
+            source.addCounter(this.getCounter(), c, false);
             payment.setPaidManaPart(this);
             this.addToList(source);
             return true;
@@ -285,7 +285,7 @@ public class CostPutCounter extends CostPartWithList {
                 if (this.typeList.contains(card)) {
                     this.nPut++;
                     costPutCounter.addToList(card);
-                    card.addCounterFromNonEffect(costPutCounter.getCounter(), 1);
+                    card.addCounter(costPutCounter.getCounter(), 1, false);
 
                     if (nNeeded == this.nPut) {
                         this.done();

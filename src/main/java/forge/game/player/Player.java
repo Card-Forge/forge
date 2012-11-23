@@ -1610,15 +1610,19 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }*/
 
         game.getAction().discardMadness(c);
-
-        if ((c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, "
-                + "put it onto the battlefield instead of putting it into your graveyard.") 
-          || c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, "
-                + "put it onto the battlefield with two +1/+1 counters on it "
-                + "instead of putting it into your graveyard."))
-                && (null != sa) && !c.getController().equals(sa.getSourceCard().getController())) {
-            game.getAction().discardPutIntoPlayInstead(c);
-
+        
+        boolean hasPutIntoPlayInsteadOfDiscard = c.hasKeyword("If a spell or ability an opponent controls causes you " +
+                "to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.");
+        boolean hasPutIntoPlayWith2xP1P1InsteadOfDiscard = c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, "
+                + "put it onto the battlefield with two +1/+1 counters on it instead of putting it into your graveyard.");
+                
+        if ( ( hasPutIntoPlayInsteadOfDiscard || hasPutIntoPlayWith2xP1P1InsteadOfDiscard ) 
+                && null != sa && sa.getSourceCard().getController().isHostileTo(c.getController())) {
+            game.getAction().moveToPlay(c);
+            
+            if (hasPutIntoPlayWith2xP1P1InsteadOfDiscard) {
+                c.addCounter(CounterType.P1P1, 2, false);
+            }
             // Play the corresponding Put into Play sound
             game.getEvents().post(new SpellResolvedEvent(c, sa));
         } else {

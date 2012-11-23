@@ -1230,58 +1230,11 @@ public class Card extends GameEntity implements Comparable<Card> {
         return true;
     }
 
-    // for costs (like Planeswalker abilities) Doubling Season gets ignored.
-    /**
-     * <p>
-     * addCounterFromNonEffect.
-     * </p>
-     * 
-     * @param counterName
-     *            a {@link forge.CounterType} object.
-     * @param n
-     *            a int.
-     */
-    public final void addCounterFromNonEffect(final CounterType counterName, final int n) {
-        if (!this.canHaveCountersPlacedOnIt(counterName)) {
-            return;
-        }
-        if (this.counters.containsKey(counterName)) {
-            final Integer aux = this.counters.get(counterName) + n;
-            this.counters.put(counterName, aux);
-        } else {
-            this.counters.put(counterName, Integer.valueOf(n));
-        }
-
-        // Run triggers
-        final Map<String, Object> runParams = new TreeMap<String, Object>();
-        runParams.put("Card", this);
-        runParams.put("CounterType", counterName);
-        for (int i = 0; i < n; i++) {
-            Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.CounterAdded, runParams);
-        }
-
-
-        // play the Add Counter sound
-        Singletons.getModel().getGame().getEvents().post(new AddCounterEvent(n));
-
-        this.updateObservers();
-    }
-
-    /**
-     * <p>
-     * addCounter.
-     * </p>
-     * 
-     * @param counterType
-     *            a {@link forge.CounterType} object.
-     * @param n
-     *            a int.
-     */
-    public final void addCounter(final CounterType counterType, final int n) {
+    public final void addCounter(final CounterType counterType, final int n, final boolean applyMultiplier) {
         if (!this.canHaveCountersPlacedOnIt(counterType)) {
             return;
         }
-        final int multiplier = this.getController().getCounterDoublersMagnitude(counterType);
+        final int multiplier = applyMultiplier ? this.getController().getCounterDoublersMagnitude(counterType) : 1;
         final int addAmount = (multiplier * n);
         
         Integer oldValue = this.counters.get(counterType);
@@ -1313,69 +1266,74 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a int.
      */
     public final void subtractCounter(final CounterType counterName, final int n) {
-        if (this.counters.containsKey(counterName)) {
-            Integer aux = this.counters.get(counterName) - n;
-            if (aux < 0) {
-                aux = 0;
+        Integer oldValue = this.counters.get(counterName);
+        int newValue = oldValue == null ? 0 : Math.max(oldValue.intValue() - n, 0);
+
+        final int delta = ( oldValue == null ? 0 : oldValue.intValue() ) - newValue;
+        if ( delta == 0 ) return;
+
+        if ( newValue > 0 )
+            this.counters.put(counterName, Integer.valueOf(newValue));
+        else
+            this.counters.remove(counterName);
+
+        // Run triggers
+        final Map<String, Object> runParams = new TreeMap<String, Object>();
+        runParams.put("Card", this);
+        runParams.put("CounterType", counterName);
+        for (int i = 0; i < delta; i++) {
+            Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemoved, runParams);
+        }
+
+        if (counterName.equals(CounterType.TIME) && (newValue == 0)) {
+            final boolean hasVanish = CardFactoryUtil.hasKeyword(this, "Vanishing") != -1;
+
+            if (hasVanish && this.isInPlay()) {
+                Singletons.getModel().getGame().getAction().sacrifice(this, null);
             }
-            this.counters.put(counterName, aux);
 
-            // Run triggers
-            final Map<String, Object> runParams = new TreeMap<String, Object>();
-            runParams.put("Card", this);
-            runParams.put("CounterType", counterName);
-            for (int i = 0; i < n; i++) {
-                Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemoved, runParams);
+            if (this.hasSuspend() && Singletons.getModel().getGame().isCardExiled(this)) {
+                playFromSuspend();
             }
+        }
 
-            if (counterName.equals(CounterType.TIME) && (aux == 0)) {
-                final boolean hasVanish = CardFactoryUtil.hasKeyword(this, "Vanishing") != -1;
+        // Play the Subtract Counter sound
+        Singletons.getModel().getGame().getEvents().post(new RemoveCounterEvent(delta));
 
-                if (hasVanish && this.isInPlay()) {
-                    Singletons.getModel().getGame().getAction().sacrifice(this, null);
-                }
+        this.updateObservers();
+    }
+    
+    private void playFromSuspend() {
+        final Card c = this;
 
-                if (this.hasSuspend() && Singletons.getModel().getGame().isCardExiled(this)) {
-                    final Card c = this;
+        c.setSuspendCast(true);
+        // set activating player for base spell ability
+        c.getSpellAbility()[0].setActivatingPlayer(c.getOwner());
+        // Any trigger should cause the phase not to skip
+        for (Player p : Singletons.getModel().getGame().getPlayers()) {
+            p.getController().autoPassCancel();
+        }
 
-                    c.setSuspendCast(true);
-                    // set activating player for base spell ability
-                    c.getSpellAbility()[0].setActivatingPlayer(c.getOwner());
-                    // Any trigger should cause the phase not to skip
-                    for (Player p : Singletons.getModel().getGame().getPlayers()) {
-                        p.getController().autoPassCancel();
+        if (c.getOwner().isHuman()) {
+            Singletons.getModel().getGame().getAction().playCardWithoutManaCost(c);
+        } else {
+            final List<SpellAbility> choices = this.getBasicSpells();
+
+            for (final SpellAbility sa : choices) {
+                //Spells
+                if (sa instanceof Spell) {
+                    Spell spell = (Spell) sa;
+                    if (!spell.canPlayFromEffectAI(true, true)) {
+                        continue;
                     }
-
-                    if (c.getOwner().isHuman()) {
-                        Singletons.getModel().getGame().getAction().playCardWithoutManaCost(c);
-                    } else {
-                        final List<SpellAbility> choices = this.getBasicSpells();
-
-                        for (final SpellAbility sa : choices) {
-                            //Spells
-                            if (sa instanceof Spell) {
-                                Spell spell = (Spell) sa;
-                                if (!spell.canPlayFromEffectAI(true, true)) {
-                                    continue;
-                                }
-                            } else {
-                                if (!sa.canPlayAI()) {
-                                    continue;
-                                }
-                            }
-                            ComputerUtil.playSpellAbilityWithoutPayingManaCost(c.getOwner(), sa);
-                            break;
-                        }
+                } else {
+                    if (!sa.canPlayAI()) {
+                        continue;
                     }
                 }
+                ComputerUtil.playSpellAbilityWithoutPayingManaCost(c.getOwner(), sa);
+                break;
             }
-
-            // Play the Subtract Counter sound
-            if (n > 0) {
-                Singletons.getModel().getGame().getEvents().post(new RemoveCounterEvent(n));
-            }
-
-            this.updateObservers();
         }
     }
 
@@ -1389,10 +1347,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a int.
      */
     public final int getCounters(final CounterType counterName) {
-        if (this.counters.containsKey(counterName)) {
-            return this.counters.get(counterName);
-        }
-        return 0;
+        Integer value = this.counters.get(counterName);
+        return value == null ? 0 : value.intValue();
     }
 
     // get all counters from a card
@@ -1416,7 +1372,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean hasCounters() {
-        return this.counters.size() > 0;
+        return !this.counters.isEmpty();
     }
 
     /**
@@ -1433,37 +1389,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         return number;
     }
 
-    /**
-     * <p>
-     * setCounter.
-     * </p>
-     * 
-     * @param counterName
-     *            a {@link forge.CounterType} object.
-     * @param n
-     *            a int.
-     * @param bSetValue
-     *            a boolean.
-     */
-    public final void setCounter(final CounterType counterName, final int n, final boolean bSetValue) {
-        if (!this.canHaveCountersPlacedOnIt(counterName)) {
-            return;
-        }
-        // sometimes you just need to set the value without being affected by
-        // DoublingSeason
-        if (bSetValue) {
-            this.counters.put(counterName, Integer.valueOf(n));
-        } else {
-            final int num = this.getCounters(counterName);
-            // if counters on card is less than the setting value, addCounters
-            if (num < n) {
-                this.addCounter(counterName, n - num);
-            } else {
-                this.subtractCounter(counterName, num - n);
-            }
-        }
-        this.updateObservers();
-    }
 
     // get all counters from a card
     /**
@@ -8325,7 +8250,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         GameActionUtil.executeDamageToCreatureEffects(source, this, damageToAdd);
 
         if (this.isInPlay() && wither) {
-            this.addCounter(CounterType.M1M1, damageToAdd);
+            this.addCounter(CounterType.M1M1, damageToAdd, true);
         }
         if (source.hasKeyword("Deathtouch") && this.isCreature()) {
             Singletons.getModel().getGame().getAction().destroy(this);

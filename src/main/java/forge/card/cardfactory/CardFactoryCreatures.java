@@ -18,7 +18,10 @@
 package forge.card.cardfactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 
@@ -94,7 +97,7 @@ public class CardFactoryCreatures {
                     // zerker clean up:
                     for (final CounterType c1 : CounterType.values()) {
                         if (c.getCounters(c1) > 0) {
-                            c.addCounter(c1, c.getCounters(c1));
+                            c.addCounter(c1, c.getCounters(c1), true);
                         }
                     }
                 }
@@ -151,7 +154,7 @@ public class CardFactoryCreatures {
                     if (artifacts.size() != 0) {
                         final Card c = GuiChoose.one("Select an artifact put a phylactery counter on", artifacts);
                         if (c != null) {
-                            c.addCounter(CounterType.PHYLACTERY, 1);
+                            c.addCounter(CounterType.PHYLACTERY, 1, true);
                         }
                     }
 
@@ -171,7 +174,7 @@ public class CardFactoryCreatures {
                         chosen = artifacts.get(0);
                     }
                     if (chosen != null) {
-                        chosen.addCounter(CounterType.PHYLACTERY, 1);
+                        chosen.addCounter(CounterType.PHYLACTERY, 1, true);
                     }
                 } // else
             } // execute()
@@ -506,7 +509,7 @@ public class CardFactoryCreatures {
                 if (xCounters >= 5) {
                     xCounters = 2 * xCounters;
                 }
-                c.addCounter(CounterType.P1P1, xCounters);
+                c.addCounter(CounterType.P1P1, xCounters, true);
             }
         };
         spell.setIsXCost(true);
@@ -520,7 +523,7 @@ public class CardFactoryCreatures {
         final SpellAbility ability = new Ability(card, "0") {
             @Override
             public void resolve() {
-                card.addCounter(CounterType.P1P1, this.countKithkin());
+                card.addCounter(CounterType.P1P1, this.countKithkin(), true);
                 // System.out.println("all counters: "
                 // +card.sumAllCounters());
             } // resolve()
@@ -590,7 +593,7 @@ public class CardFactoryCreatures {
         final AbilityStatic ability = new AbilityStatic(card, "0") {
             @Override
             public void resolve() {
-                card.addCounter(CounterType.P1P1, card.getMultiKickerMagnitude());
+                card.addCounter(CounterType.P1P1, card.getMultiKickerMagnitude(), true);
                 card.setMultiKickerMagnitude(0);
             }
         };
@@ -671,10 +674,10 @@ public class CardFactoryCreatures {
             @Override
             public void resolve() {
                 final Card c = this.getTargetCard();
-                for (final CounterType counter : CounterType.values()) {
-                    if (c.getCounters(counter) > 0) {
-                        c.setCounter(counter, 0, false);
-                    }
+                // need a copy to avoid exception caused by modification of Iterable being enumerated
+                Map<CounterType, Integer> copy = new HashMap<CounterType, Integer>(c.getCounters());
+                for (final Entry<CounterType, Integer> counter : copy.entrySet()) {
+                    c.subtractCounter(counter.getKey(), counter.getValue());
                 }
             }
         }
@@ -1166,7 +1169,7 @@ public class CardFactoryCreatures {
 
                     @Override
                     public void resolve() {
-                        card.addCounter(CounterType.LEVEL, 1);
+                        card.addCounter(CounterType.LEVEL, 1, true);
                     }
 
                     @Override

@@ -434,7 +434,7 @@ public final class GameActionUtil {
                 if (showYesNoDialog(source, "Do you want to put " + amount + " " + counterType.getName()
                         + " counter" + plural + " on " + source + "?")) {
                     if (source.canHaveCountersPlacedOnIt(counterType)) {
-                        source.addCounterFromNonEffect(counterType, amount);
+                        source.addCounter(counterType, amount, false);
                     } else {
                         hasPaid = false;
                         Singletons.getModel().getGame().getGameLog().add("ResolveStack", "Trying to pay upkeep for " + source + " but it can't have "
@@ -729,7 +729,7 @@ public final class GameActionUtil {
                             counter = CounterType.P2P2;
                         }
                         if (thisCard.isInPlay()) {
-                            thisCard.addCounter(counter, 1);
+                            thisCard.addCounter(counter, 1, true);
                         }
                     }
                 }; // ability2

@@ -75,7 +75,7 @@ public class CountersMoveEffect extends SpellEffect {
                     if (!dest.hasKeyword("CARDNAME can't have counters placed on it.")
                             && !(dest.hasKeyword("CARDNAME can't have -1/-1 counters placed on it.") && cType
                                     .equals(CounterType.M1M1))) {
-                        dest.addCounter(cType, amount);
+                        dest.addCounter(cType, amount, true);
                         source.subtractCounter(cType, amount);
                     }
                 }

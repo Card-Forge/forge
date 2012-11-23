@@ -838,22 +838,6 @@ public class GameAction {
 
     /**
      * <p>
-     * discardPutIntoPlayInstead.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    public final void discardPutIntoPlayInstead(final Card c) {
-        this.moveToPlay(c);
-
-        if (c.getName().equals("Dodecapod")) {
-            c.setCounter(CounterType.P1P1, 2, false);
-        }
-    }
-
-    /**
-     * <p>
      * discardMadness.
      * </p>
      * 
@@ -1494,7 +1478,7 @@ public class GameAction {
                     if (game.getZoneOf(persistCard).is(ZoneType.Graveyard)) {
                         final PlayerZone ownerPlay = persistCard.getOwner().getZone(ZoneType.Battlefield);
                         final Card card = GameAction.this.moveTo(ownerPlay, persistCard);
-                        card.addCounter(CounterType.M1M1, 1);
+                        card.addCounter(CounterType.M1M1, 1, true);
                     }
                 }
             };
@@ -1514,7 +1498,7 @@ public class GameAction {
                     if (game.getZoneOf(undyingCard).is(ZoneType.Graveyard)) {
                         final PlayerZone ownerPlay = undyingCard.getOwner().getZone(ZoneType.Battlefield);
                         final Card card = GameAction.this.moveTo(ownerPlay, undyingCard);
-                        card.addCounter(CounterType.P1P1, 1);
+                        card.addCounter(CounterType.P1P1, 1, true);
                     }
                 }
             };

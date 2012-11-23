@@ -309,7 +309,7 @@ class CardFactoryArtifacts {
 
                 @Override
                 public void execute() {
-                    card.addCounter(CounterType.CHARGE, card.getMultiKickerMagnitude());
+                    card.addCounter(CounterType.CHARGE, card.getMultiKickerMagnitude(), true);
                     card.setMultiKickerMagnitude(0);
                 }
             };

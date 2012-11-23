@@ -1124,7 +1124,7 @@ public class CardFactoryUtil {
                 final Card c = Singletons.getModel().getGame().getAction().exile(sourceCard);
 
                 int counters = AbilityFactory.calculateAmount(c, timeCounters, this);
-                c.addCounter(CounterType.TIME, counters);
+                c.addCounter(CounterType.TIME, counters, true);
 
                 StringBuilder sb = new StringBuilder();
                 sb.append(this.getActivatingPlayer()).append(" has suspended ");
@@ -1165,7 +1165,7 @@ public class CardFactoryUtil {
 
             @Override
             public void execute() {
-                c.addCounter(type, n);
+                c.addCounter(type, n, true);
             }
         };
         return addCounters;
@@ -4446,9 +4446,9 @@ public class CardFactoryUtil {
                 @Override
                 public void execute() {
                     if (card.isCreature()) {
-                        card.addCounter(CounterType.P1P1, card.getSunburstValue());
+                        card.addCounter(CounterType.P1P1, card.getSunburstValue(), true);
                     } else {
-                        card.addCounter(CounterType.CHARGE, card.getSunburstValue());
+                        card.addCounter(CounterType.CHARGE, card.getSunburstValue(), true);
                     }
 
                 }
@@ -4594,7 +4594,7 @@ public class CardFactoryUtil {
                                 : Integer.parseInt(magnitude);
                         final int totalCounters = numCreatures[0] * multiplier;
 
-                        card.addCounter(CounterType.P1P1, totalCounters);
+                        card.addCounter(CounterType.P1P1, totalCounters, true);
 
                     }
                 };
@@ -4617,7 +4617,7 @@ public class CardFactoryUtil {
                     @Override
                     public void resolve() {
                         final Card card2 = this.getTargetCard();
-                        card2.addCounter(CounterType.P1P1, this.getSourceCard().getCounters(CounterType.P1P1));
+                        card2.addCounter(CounterType.P1P1, this.getSourceCard().getCounters(CounterType.P1P1), true);
                     } // resolve()
                 };
 

@@ -77,7 +77,7 @@ public class CountersRemoveEffect extends SpellEffect {
                 }
 
                 if (type.matches("Any")) {
-                    while (counterAmount > 0 && tgtCard.getNumberOfCounters() > 0) {
+                    while (counterAmount > 0 && tgtCard.hasCounters()) {
                         final Map<CounterType, Integer> tgtCounters = tgtCard.getCounters();
                         CounterType chosenType = null;
                         int chosenAmount;

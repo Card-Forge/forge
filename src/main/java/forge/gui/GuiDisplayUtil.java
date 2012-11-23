@@ -599,7 +599,7 @@ public final class GuiDisplayUtil {
                 } else if (info.startsWith("Counters:")) {
                     final String[] counterStrings = info.substring(info.indexOf(':') + 1).split(",");
                     for (final String counter : counterStrings) {
-                        c.addCounter(CounterType.valueOf(counter), 1);
+                        c.addCounter(CounterType.valueOf(counter), 1, true);
                     }
                 } else if (info.equalsIgnoreCase("SummonSick:True")) {
                     c.setSickness(true);
@@ -661,7 +661,7 @@ public final class GuiDisplayUtil {
                 if (null == i) {
                     return;
                 } else {
-                    c.addCounterFromNonEffect(counter, i);
+                    c.addCounter(counter, i, false);
                 }
             }
         }

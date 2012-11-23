@@ -144,7 +144,7 @@ public class CostRemoveCounter extends CostPartWithList {
     @Override
     public final void refund(final Card source) {
         for (final Card c : this.getList()) {
-            c.addCounterFromNonEffect(this.counter, this.lastPaidAmount);
+            c.addCounter(this.counter, this.lastPaidAmount, false);
         }
     }
 

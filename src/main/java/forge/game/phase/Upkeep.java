@@ -139,7 +139,7 @@ public class Upkeep extends Phase {
             final Ability upkeepAbility = new Ability(c, "0") {
                 @Override
                 public void resolve() {
-                    c.addCounter(CounterType.AGE, 1);
+                    c.addCounter(CounterType.AGE, 1, true);
                     StringBuilder rs = new StringBuilder("R");
                     for(int ageCounters = c.getCounters(CounterType.AGE); ageCounters > 1; ageCounters-- )
                         rs.append(" R");
@@ -337,7 +337,7 @@ public class Upkeep extends Phase {
 
                     if (ability.startsWith("Cumulative upkeep")) {
                         final String[] k = ability.split(":");
-                        c.addCounter(CounterType.AGE, 1);
+                        c.addCounter(CounterType.AGE, 1, true);
                         cost = CardFactoryUtil.multiplyCost(k[1], c.getCounters(CounterType.AGE));
                         sb.append("Cumulative upkeep for ").append(c).append("\n");
                     }
@@ -1691,7 +1691,7 @@ public class Upkeep extends Phase {
                         this.revealTopCard(title);
                     }
                     if (wantCounter) {
-                        k.addCounter(CounterType.P1P1, 1);
+                        k.addCounter(CounterType.P1P1, 1, true);
                     }
                 } // resolve()
 

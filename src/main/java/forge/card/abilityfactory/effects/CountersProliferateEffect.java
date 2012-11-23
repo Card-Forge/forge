@@ -77,9 +77,8 @@ public class CountersProliferateEffect extends SpellEffect {
                     }
                 }
                 if (choices.size() > 0) {
-                    card.addCounter(
-                            CounterType.getType((choices.size() == 1 ? choices.get(0) : GuiChoose.one(
-                                    "Select counter type", choices).toString())), 1);
+                    card.addCounter(CounterType.getType((choices.size() == 1 ? choices.get(0) : GuiChoose.one(
+                    "Select counter type", choices).toString())), 1, true);
                 }
             }
 
@@ -153,12 +152,12 @@ public class CountersProliferateEffect extends SpellEffect {
             for (final Entry<CounterType, Integer> c1 : c.getCounters().entrySet()) {
                 if (CardFactoryUtil.isNegativeCounter(c1.getKey()) && enemies.contains(c.getController()))
                 {
-                    c.addCounter(c1.getKey(), 1);
+                    c.addCounter(c1.getKey(), 1, true);
                     break;
                 }
                 if (!CardFactoryUtil.isNegativeCounter(c1.getKey()) && allies.contains(c.getController()))
                 {
-                    c.addCounter(c1.getKey(), 1);
+                    c.addCounter(c1.getKey(), 1, true);
                     break;
                 }
             }
