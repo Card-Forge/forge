@@ -29,19 +29,19 @@ import forge.game.player.Player;
 // use of any of the methods)
 public class WrappedAbility extends Ability implements ISpellAbility {
 
-    final private SpellAbility sa;
-    final private Trigger regtrig;
-    final private Player decider;
+    private final SpellAbility sa;
+    private final Trigger regtrig;
+    private final Player decider;
 
     boolean mandatory = false;
-    
+
     public WrappedAbility(final Trigger regTrig, final SpellAbility sa0, final Player decider0) {
         super(regTrig.getHostCard(), "0");
         regtrig = regTrig;
         sa = sa0;
         decider = decider0;
     }
-    
+
 
     @Override
     public boolean isWrapper() {
@@ -60,17 +60,18 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     public boolean isMandatory() {
         return mandatory;
     }
-    
-    
+
     @Override
     public String getParam(String key) { return sa.getParam(key); }
-    
+
     @Override
     public boolean hasParam(String key) { return sa.hasParam(key); }
-    
+
     @Override
-    public ApiType getApi() { return sa.getApi(); } 
-    
+    public ApiType getApi() {
+        return sa.getApi();
+    }
+
     @Override
     public void setPaidHash(final HashMap<String, List<Card>> hash) {
         sa.setPaidHash(hash);
@@ -467,7 +468,7 @@ public class WrappedAbility extends Ability implements ISpellAbility {
             }
         }
         TriggerHandler th = Singletons.getModel().getGame().getTriggerHandler();
-        Map<String,String> triggerParams = regtrig.getMapParams();
+        Map<String, String> triggerParams = regtrig.getMapParams();
 
         if (decider != null) {
             if (decider.isHuman()) {

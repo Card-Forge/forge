@@ -267,7 +267,7 @@ public class TriggerHandler {
             return;
         }
         final GameState game = Singletons.getModel().getGame();
-        
+
         final Player playerAP = game.getPhaseHandler().getPlayerTurn();
         if (playerAP == null) {
             // This should only happen outside of games, so it's safe to just
@@ -299,7 +299,7 @@ public class TriggerHandler {
 
         if (checkStatics) {
             game.getAction().checkStaticAbilities();
-        } else if (runParams.containsKey("Destination")){
+        } else if (runParams.containsKey("Destination")) {
             // Check static abilities when a card enters the battlefield
             String type = (String) runParams.get("Destination");
             if (type.equals("Battlefield")) {
@@ -313,7 +313,7 @@ public class TriggerHandler {
         // add cards that move to hidden zones
         if (runParams.containsKey("Destination") && runParams.containsKey("Card")) {
             Card card = (Card) runParams.get("Card");
-            if (playerAP.equals(card.getController()) && !allCards.contains(card) 
+            if (playerAP.equals(card.getController()) && !allCards.contains(card)
                     && (game.getZoneOf(card) == null || game.getZoneOf(card).getZoneType().isHidden())) {
                 allCards.add(card);
             }
@@ -335,9 +335,11 @@ public class TriggerHandler {
 
         // NAPs
 
-        for(Player nap: game.getPlayers() )
-        {
-            if ( nap.equals(playerAP) ) continue;
+        for (Player nap : game.getPlayers()) {
+
+            if (nap.equals(playerAP)) {
+                continue;
+            }
 
             allCards = nap.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
             allCards.addAll(CardLists.filterControlledBy(game.getCardsIn(ZoneType.Stack), nap));
@@ -393,7 +395,7 @@ public class TriggerHandler {
         if (!regtrig.phasesCheck()) {
             return false; // It's not the right phase to go off.
         }
-      
+
         if (!regtrig.requirementsCheck()) {
             return false; // Conditions aren't right.
         }
@@ -423,7 +425,7 @@ public class TriggerHandler {
                 String dest = (String) runParams.get("Destination");
                 if (dest.equals("Battlefield") && runParams.get("Card") instanceof Card) {
                     Card card = (Card) runParams.get("Card");
-                    if (card.isCreature() 
+                    if (card.isCreature()
                             && game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCreatureETBTriggers)) {
                         return false;
                     }
@@ -433,9 +435,10 @@ public class TriggerHandler {
         } // Torpor Orb check
 
         // Any trigger should cause the phase not to skip
-        for (Player p : Singletons.getModel().getGame().getPlayers())
+        for (Player p : Singletons.getModel().getGame().getPlayers()) {
             p.getController().autoPassCancel();
-        
+        }
+
         regtrig.setRunParams(runParams);
 
         // All tests passed, execute ability.
@@ -474,14 +477,12 @@ public class TriggerHandler {
             sa.setAllTriggeringObjects(regtrig.getStoredTriggeredObjects());
         }
 
-        
         sa.setActivatingPlayer(host.getController());
         if (triggerParams.containsKey("TriggerController")) {
             Player p = AbilityFactory.getDefinedPlayers(regtrig.getHostCard(), triggerParams.get("TriggerController"), sa).get(0);
             sa.setActivatingPlayer(p);
         }
-        
-        
+
         sa.setStackDescription(sa.toString());
         // ---TODO - for Charms to supports AI, this needs to be removed
         //if (sa[0].getActivatingPlayer().isHuman()) {

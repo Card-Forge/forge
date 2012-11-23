@@ -23,7 +23,7 @@ public class TriggerLosesGame extends Trigger {
     public TriggerLosesGame(final java.util.Map<String, String> params, final Card host, final boolean intrinsic) {
         super(params, host, intrinsic);
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
