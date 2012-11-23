@@ -91,4 +91,15 @@ public enum SoundEffectType {
         resourceFileName = filename;
         isSynced = isSoundSynced;
     }
+
+    /**
+     * determine if the sound effect needs to be synchronized with the other
+     * events of the same kind or not.
+     * 
+     * @return true if the sound effect can only be played if no other sound
+     * of the same kind is already playing.
+     */
+    public boolean getIsSynced() {
+        return isSynced;
+    }
 }

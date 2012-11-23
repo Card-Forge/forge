@@ -164,9 +164,9 @@ public class EventVisualizer {
     /**
      * TODO: Choose is the special type of event produces a single or lot of overlapping sounds (?)
      */
-    public boolean isSyncSound(Event evt) {
+    public boolean isSyncSound(SoundEffectType effect) {
 
-        return true;
+        return effect.getIsSynced();
     }    
 
 }

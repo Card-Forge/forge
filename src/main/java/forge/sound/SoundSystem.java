@@ -72,7 +72,7 @@ public class SoundSystem {
     public void receiveEvent(Event evt) {
         SoundEffectType effect = visualizer.getSoundForEvent(evt);
         if ( null == effect ) return;
-        boolean isSync = visualizer.isSyncSound(evt);
+        boolean isSync = visualizer.isSyncSound(effect);
         if ( isSync ) 
             playSync(effect);
         else 
