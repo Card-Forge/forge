@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.quest.data;
+package forge.quest;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,6 +23,7 @@ import java.util.List;
 
 import com.google.common.base.Function;
 
+import forge.quest.data.GameFormatQuest;
 import forge.util.StorageReaderFile;
 
 /** 

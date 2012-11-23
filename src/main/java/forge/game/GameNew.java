@@ -35,7 +35,6 @@ import forge.game.zone.ZoneType;
 import forge.gui.match.views.VAntes;
 import forge.item.CardPrinted;
 import forge.properties.ForgePreferences.FPref;
-import forge.sound.SoundEffectType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 

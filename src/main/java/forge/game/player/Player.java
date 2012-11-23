@@ -67,7 +67,6 @@ import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.properties.ForgePreferences.FPref;
-import forge.sound.SoundEffectType;
 import forge.util.MyRandom;
 
 /**

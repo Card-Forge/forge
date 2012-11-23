@@ -13260,6 +13260,7 @@ src/main/java/forge/quest/QuestMode.java -text
 src/main/java/forge/quest/QuestUtil.java svneol=native#text/plain
 src/main/java/forge/quest/QuestUtilCards.java -text
 src/main/java/forge/quest/QuestUtilUnlockSets.java -text
+src/main/java/forge/quest/QuestWorld.java -text
 src/main/java/forge/quest/SellRules.java -text
 src/main/java/forge/quest/StartingPoolType.java -text
 src/main/java/forge/quest/bazaar/IQuestBazaarItem.java svneol=native#text/plain
@@ -13281,7 +13282,6 @@ src/main/java/forge/quest/data/QuestAssets.java -text
 src/main/java/forge/quest/data/QuestData.java svneol=native#text/plain
 src/main/java/forge/quest/data/QuestItemCondition.java -text
 src/main/java/forge/quest/data/QuestPreferences.java svneol=native#text/plain
-src/main/java/forge/quest/data/QuestWorld.java -text
 src/main/java/forge/quest/data/package-info.java svneol=native#text/plain
 src/main/java/forge/quest/io/PreconReader.java -text
 src/main/java/forge/quest/io/QuestDataIO.java svneol=native#text/plain

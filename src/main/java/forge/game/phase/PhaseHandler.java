@@ -34,7 +34,6 @@ import forge.game.event.ManaBurnEvent;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.properties.ForgePreferences.FPref;
-import forge.sound.SoundEffectType;
 import forge.util.MyObservable;
 
 

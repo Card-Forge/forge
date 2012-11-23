@@ -17,7 +17,6 @@
  */
 package forge.quest.data;
 
-import forge.Singletons;
 import forge.game.GameFormat;
 import forge.quest.QuestMode;
 import forge.quest.io.QuestDataIO;
@@ -105,18 +104,6 @@ public final class QuestData {
         return this.format;
     }
 
-    /**
-     * Gets the QuestWorld, if any.
-     * 
-     * @return QuestWorld or null, if using regular duels and challenges.
-     */
-    public QuestWorld getWorld() {
-        if (this.worldId == null) {
-            return null;
-        }
-        return Singletons.getModel().getWorlds().get(worldId);
-    }
-
     // SERIALIZATION - related things
     // This must be called by XML-serializer via reflection
     /**
@@ -163,21 +150,17 @@ public final class QuestData {
         return this.name;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
     public QuestAssets getAssets() {
         return assets;
     }
 
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
     public QuestAchievements getAchievements() {
         return achievements;
+    }
+
+    public String getWorldId() {
+        return worldId;
     }
 
 }
