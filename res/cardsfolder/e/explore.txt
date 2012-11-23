@@ -2,6 +2,13 @@ Name:Explore
 ManaCost:1 G
 Types:Sorcery
 Text:You may play an additional land this turn. Draw a card.
+Text:no text
+A:SP$ Effect | Cost$ 1 G | Name$ Explore Effect | StaticAbilities$ Exploration | AILogic$ Always | SubAbility$ DBDraw | SpellDescription$ You may play an additional land this turn. Draw a card.
+SVar:Exploration:Mode$ Continuous | Affected$ You | AddKeyword$ AdjustLandPlays:1 | Description$ You may play an additional land this turn.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
+SVar:NeedsToPlayVar:LandInHand GE1
+SVar:HandInLand:Count$InYourHand.Land
+SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/explore.jpg
 SetInfo:WWK|Common|http://magiccards.info/scans/en/wwk/99.jpg

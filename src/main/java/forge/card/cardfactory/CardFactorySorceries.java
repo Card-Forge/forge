@@ -594,7 +594,7 @@ public class CardFactorySorceries {
             }
         };
     }
-    private final static SpellAbility getSummerBloom(final Card card) {
+    /*private final static SpellAbility getSummerBloom(final Card card) {
         card.setSVar("PlayMain1", "TRUE");
         return new Spell(card) {
             private static final long serialVersionUID = 5559004016728325736L;
@@ -662,7 +662,7 @@ public class CardFactorySorceries {
                 thePlayer.drawCard();
             }
         };
-    }
+    }*/
 
     private final static SpellAbility getWindfall(final Card card) {
         return new Spell(card) {
@@ -1354,8 +1354,8 @@ public class CardFactorySorceries {
         } else if (cardName.equals("Global Ruin")) { card.addSpellAbility(getGlobalRuin(card));
         } else if (cardName.equals("Haunting Echoes")) { card.addSpellAbility(getHauntingEchoes(card));
         } else if (cardName.equals("Balance")) { card.addSpellAbility(getBalance(card));
-        } else if (cardName.equals("Summer Bloom")) { card.addSpellAbility(getSummerBloom(card));
-        } else if (cardName.equals("Explore")) { card.addSpellAbility(getExplore(card));
+        //} else if (cardName.equals("Summer Bloom")) { card.addSpellAbility(getSummerBloom(card));
+        //} else if (cardName.equals("Explore")) { card.addSpellAbility(getExplore(card));
         } else if (cardName.equals("Windfall")) { card.addSpellAbility(getWindfall(card));
         } else if (cardName.equals("Patriarch's Bidding")) { card.addSpellAbility(getPatriarchsBidding(card));
         } else if (cardName.equals("Leeches")) { card.addSpellAbility(getLeeches(card));
