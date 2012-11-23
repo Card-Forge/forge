@@ -66,90 +66,78 @@ public class ChangeZoneEffect extends SpellEffect {
         }
 
         sb.append(" ");
+        String origin = "";
+        if (sa.hasParam("Origin")) {
+            origin = sa.getParam("Origin");
+        }
+        final String destination = sa.getParam("Destination");
 
-        if (sa.hasParam("StackDescription")) {
-            String stackDesc = sa.getParam("StackDescription");
-            if (stackDesc.equals("None")) {
-                // Intentionally blank to avoid double spaces, otherwise: sb.append("");
-            } else if (stackDesc.equals("SpellDescription")) {
-                sb.append(sa.getParam("SpellDescription"));
+        final String type = sa.hasParam("ChangeType") ? sa.getParam("ChangeType") : "Card";
+        final int num = sa.hasParam("ChangeNum") ? AbilityFactory.calculateAmount(host,
+                sa.getParam("ChangeNum"), sa) : 1;
+
+        if (origin.equals("Library") && sa.hasParam("Defined")) {
+            // for now, just handle the Exile from top of library case, but
+            // this can be expanded...
+            if (destination.equals("Exile")) {
+                sb.append("Exile the top card of your library");
+                if (sa.hasParam("ExileFaceDown")) {
+                    sb.append(" face down");
+                }
+            } else if (destination.equals("Ante")) {
+                sb.append("Add the top card of your library to the ante");
+            }
+            sb.append(".");
+        } else if (origin.equals("Library")) {
+            sb.append("Search your library for ").append(num).append(" ").append(type).append(" and ");
+
+            if (num == 1) {
+                sb.append("put that card ");
             } else {
-                sb.append(stackDesc);
+                sb.append("put those cards ");
             }
-        } else {
-            String origin = "";
-            if (sa.hasParam("Origin")) {
-                origin = sa.getParam("Origin");
-            }
-            final String destination = sa.getParam("Destination");
 
-            final String type = sa.hasParam("ChangeType") ? sa.getParam("ChangeType") : "Card";
-            final int num = sa.hasParam("ChangeNum") ? AbilityFactory.calculateAmount(host,
-                    sa.getParam("ChangeNum"), sa) : 1;
-
-            if (origin.equals("Library") && sa.hasParam("Defined")) {
-                // for now, just handle the Exile from top of library case, but
-                // this can be expanded...
-                if (destination.equals("Exile")) {
-                    sb.append("Exile the top card of your library");
-                    if (sa.hasParam("ExileFaceDown")) {
-                        sb.append(" face down");
-                    }
-                } else if (destination.equals("Ante")) {
-                    sb.append("Add the top card of your library to the ante");
+            if (destination.equals("Battlefield")) {
+                sb.append("onto the battlefield");
+                if (sa.hasParam("Tapped")) {
+                    sb.append(" tapped");
                 }
+
                 sb.append(".");
-            } else if (origin.equals("Library")) {
-                sb.append("Search your library for ").append(num).append(" ").append(type).append(" and ");
 
-                if (num == 1) {
-                    sb.append("put that card ");
-                } else {
-                    sb.append("put those cards ");
-                }
-
-                if (destination.equals("Battlefield")) {
-                    sb.append("onto the battlefield");
-                    if (sa.hasParam("Tapped")) {
-                        sb.append(" tapped");
-                    }
-
-                    sb.append(".");
-
-                }
-                if (destination.equals("Hand")) {
-                    sb.append("into your hand.");
-                }
-                if (destination.equals("Graveyard")) {
-                    sb.append("into your graveyard.");
-                }
-
-                sb.append(" Then shuffle your library.");
-            } else if (origin.equals("Hand")) {
-                sb.append("Put ").append(num).append(" ").append(type).append(" card(s) from your hand ");
-
-                if (destination.equals("Battlefield")) {
-                    sb.append("onto the battlefield.");
-                }
-                if (destination.equals("Library")) {
-                    final int libraryPos = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : 0;
-
-                    if (libraryPos == 0) {
-                        sb.append("on top");
-                    }
-                    if (libraryPos == -1) {
-                        sb.append("on bottom");
-                    }
-
-                    sb.append(" of your library.");
-                }
-            } else if (origin.equals("Battlefield")) {
-                // TODO Expand on this Description as more cards use it
-                // for the non-targeted SAs when you choose what is returned on
-                // resolution
-                sb.append("Return ").append(num).append(" ").append(type).append(" card(s) ");
-                sb.append(" to your ").append(destination);
             }
+            if (destination.equals("Hand")) {
+                sb.append("into your hand.");
+            }
+            if (destination.equals("Graveyard")) {
+                sb.append("into your graveyard.");
+            }
+
+            sb.append(" Then shuffle your library.");
+        } else if (origin.equals("Hand")) {
+            sb.append("Put ").append(num).append(" ").append(type).append(" card(s) from your hand ");
+
+            if (destination.equals("Battlefield")) {
+                sb.append("onto the battlefield.");
+            }
+            if (destination.equals("Library")) {
+                final int libraryPos = sa.hasParam("LibraryPosition") ? Integer.parseInt(sa.getParam("LibraryPosition")) : 0;
+
+                if (libraryPos == 0) {
+                    sb.append("on top");
+                }
+                if (libraryPos == -1) {
+                    sb.append("on bottom");
+                }
+
+                sb.append(" of your library.");
+            }
+        } else if (origin.equals("Battlefield")) {
+            // TODO Expand on this Description as more cards use it
+            // for the non-targeted SAs when you choose what is returned on
+            // resolution
+            sb.append("Return ").append(num).append(" ").append(type).append(" card(s) ");
+            sb.append(" to your ").append(destination);
         }
 
         final AbilitySub abSub = sa.getSubAbility();
