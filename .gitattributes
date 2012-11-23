@@ -402,6 +402,7 @@ res/cardsfolder/a/arcane_teachings.txt svneol=native#text/plain
 res/cardsfolder/a/arcanis_the_omnipotent.txt svneol=native#text/plain
 res/cardsfolder/a/arcbound_bruiser.txt svneol=native#text/plain
 res/cardsfolder/a/arcbound_crusher.txt svneol=native#text/plain
+res/cardsfolder/a/arcbound_fiend.txt -text
 res/cardsfolder/a/arcbound_hybrid.txt svneol=native#text/plain
 res/cardsfolder/a/arcbound_lancer.txt svneol=native#text/plain
 res/cardsfolder/a/arcbound_overseer.txt svneol=native#text/plain
@@ -6048,6 +6049,7 @@ res/cardsfolder/m/masticore.txt svneol=native#text/plain
 res/cardsfolder/m/masumaro_first_to_live.txt svneol=native#text/plain
 res/cardsfolder/m/matca_rioters.txt svneol=native#text/plain
 res/cardsfolder/m/matsu_tribe_birdstalker.txt svneol=native#text/plain
+res/cardsfolder/m/matsu_tribe_decoy.txt -text
 res/cardsfolder/m/matsu_tribe_sniper.txt svneol=native#text/plain
 res/cardsfolder/m/maul_splicer.txt svneol=native#text/plain
 res/cardsfolder/m/mausoleum_guard.txt -text

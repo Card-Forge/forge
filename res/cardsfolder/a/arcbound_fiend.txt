@@ -1,0 +1,16 @@
+Name:Arcbound Fiend
+ManaCost:6
+Types:Artifact Creature Horror
+Text:no text
+PT:0/0
+K:Modular 3
+K:Fear
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigMoveCounter | TriggerDescription$ At the beginning of your upkeep, you may move a +1/+1 counter from  from target creature onto CARDNAME.
+SVar:TrigMoveCounter:AB$ Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ DBMove | StackDescription$ None | SpellDescription$ Move a +1/+1 counter from target creature onto CARDNAME.
+SVar:DBMove:DB$ MoveCounter | Cost$ 0 | Source$ Targeted | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1
+SVar:RemAIdeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/arcbound_fiend.jpg
+SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/96.jpg
+Oracle:Fear (This creature can't be blocked except by artifact creatures and/or black creatures.)\nAt the beginning of your upkeep, you may move a +1/+1 counter from target creature onto Arcbound Fiend.\nModular 3 (This enters the battlefield with three +1/+1 counters on it. When it dies, you may put its +1/+1 counters on target artifact creature.)
+End
