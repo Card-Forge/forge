@@ -867,7 +867,7 @@ public final class GameActionUtil {
         c.getDamageHistory().registerCombatDamage(player);
 
         // Play the Life Loss sound
-        Singletons.getControl().getSoundSystem().playSync(SoundEffectType.LifeLoss);
+        Singletons.getModel().getGame().getEvents().post(SoundEffectType.LifeLoss);
     } // executeCombatDamageToPlayerEffects
 
     /**
