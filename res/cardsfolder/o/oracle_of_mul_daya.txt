@@ -2,7 +2,7 @@ Name:Oracle of Mul Daya
 ManaCost:3 G
 Types:Creature Elf Shaman
 Text:no text
-K:AdjustLandPlays:You:1:You may play an additional land on each of your turns.
+S:Mode$ Continuous | Affected$ You | AddKeyword$ AdjustLandPlays:1 | Description$ You may play an additional land on each of your turns.
 PT:2/2
 K:Play with the top card of your library revealed.
 S:Mode$ Continuous | Affected$ Land.TopLibrary+YouCtrl | AffectedZone$ Library | AddHiddenKeyword$ HIDDEN May be played | Description$ You may play the top card of your library if it's a land card.

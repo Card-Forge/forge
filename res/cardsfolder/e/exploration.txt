@@ -2,7 +2,7 @@ Name:Exploration
 ManaCost:G
 Types:Enchantment
 Text:no text
-K:AdjustLandPlays:You:1:You may play an additional land on each of your turns.
+S:Mode$ Continuous | Affected$ You | AddKeyword$ AdjustLandPlays:1 | Description$ You may play an additional land on each of your turns.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exploration.jpg
 SetInfo:USG|Rare|http://magiccards.info/scans/en/us/250.jpg

@@ -2216,11 +2216,11 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (k.length > 8) {
                     sbLong.append(k[8]).append("\r\n");
                 }
-            } else if (keyword.startsWith("AdjustLandPlays")) {
+            /*} else if (keyword.startsWith("AdjustLandPlays")) {
                 final String[] k = keyword.split(":");
                 if (k.length > 3) {
                     sbLong.append(k[3]).append("\r\n");
-                }
+                }*/
             } else if (keyword.startsWith("etbCounter")) {
                 final String[] p = keyword.split(":");
                 final StringBuilder s = new StringBuilder();
@@ -2558,12 +2558,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.append(k[8]).append("\r\n");
                 }
             }
-            if (keyword.startsWith("AdjustLandPlays")) {
+            /*if (keyword.startsWith("AdjustLandPlays")) {
                 final String[] k = keyword.split(":");
                 if (k.length > 3) {
                     sb.append(k[3]).append("\r\n");
                 }
-            }
+            }*/
             if ((keyword.startsWith("Ripple") && !sb.toString().contains("Ripple"))
                     || (keyword.startsWith("Dredge") && !sb.toString().contains("Dredge"))
                     || (keyword.startsWith("Madness") && !sb.toString().contains("Madness"))

@@ -1905,8 +1905,19 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
+        // check for adjusted max lands play per turn
+        int adjMax = 0;
+        for (String keyword : this.getKeywords()) {
+            if (keyword.startsWith("AdjustLandPlays")) {
+                final String[] k = keyword.split(":");
+                adjMax += Integer.valueOf(k[1]);
+            }
+        }
+        final int adjCheck = this.maxLandsToPlay + adjMax;
+        // System.out.println("Max lands for player " + this.getName() + ": " + adjCheck);
+
         return this.canCastSorcery()
-                && ((this.numLandsPlayed < this.maxLandsToPlay) || (this.getCardsIn(ZoneType.Battlefield, "Fastbond")
+                && ((this.numLandsPlayed < adjCheck) || (this.getCardsIn(ZoneType.Battlefield, "Fastbond")
                         .size() > 0));
     }
 
