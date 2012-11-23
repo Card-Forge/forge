@@ -8856,6 +8856,7 @@ res/cardsfolder/s/sickening_shoal.txt svneol=native#text/plain
 res/cardsfolder/s/sickle_ripper.txt svneol=native#text/plain
 res/cardsfolder/s/sickleslicer.txt svneol=native#text/plain
 res/cardsfolder/s/sidar_jabari.txt svneol=native#text/plain
+res/cardsfolder/s/sidar_kondo.txt -text
 res/cardsfolder/s/sidewinder_sliver.txt svneol=native#text/plain
 res/cardsfolder/s/siege_gang_commander.txt svneol=native#text/plain
 res/cardsfolder/s/siege_mastodon.txt svneol=native#text/plain
@@ -8940,6 +8941,7 @@ res/cardsfolder/s/sinstrikers_will.txt -text
 res/cardsfolder/s/sir_shandlar_of_eberyn.txt svneol=native#text/plain
 res/cardsfolder/s/sire_of_the_storm.txt svneol=native#text/plain
 res/cardsfolder/s/sirens_call.txt svneol=native#text/plain
+res/cardsfolder/s/sisay.txt -text
 res/cardsfolder/s/sisays_ingenuity.txt -text svneol=unset#text/plain
 res/cardsfolder/s/sisays_ring.txt svneol=native#text/plain
 res/cardsfolder/s/sisters_of_stone_death.txt -text svneol=unset#text/plain
@@ -9105,6 +9107,7 @@ res/cardsfolder/s/slithery_stalker.txt svneol=native#text/plain
 res/cardsfolder/s/sliver_legion.txt svneol=native#text/plain
 res/cardsfolder/s/sliver_overlord.txt svneol=native#text/plain
 res/cardsfolder/s/sliver_queen.txt svneol=native#text/plain
+res/cardsfolder/s/sliver_queen_brood_mother.txt -text
 res/cardsfolder/s/sliversmith.txt svneol=native#text/plain
 res/cardsfolder/s/slobad_goblin_tinkerer.txt svneol=native#text/plain
 res/cardsfolder/s/slow_motion.txt svneol=native#text/plain
@@ -9495,6 +9498,7 @@ res/cardsfolder/s/squandered_resources.txt svneol=native#text/plain
 res/cardsfolder/s/squeaking_pie_grubfellows.txt svneol=native#text/plain
 res/cardsfolder/s/squeaking_pie_sneak.txt -text
 res/cardsfolder/s/squealing_devil.txt -text
+res/cardsfolder/s/squee.txt -text
 res/cardsfolder/s/squee_goblin_nabob.txt svneol=native#text/plain
 res/cardsfolder/s/squees_embrace.txt svneol=native#text/plain
 res/cardsfolder/s/squees_toy.txt svneol=native#text/plain
@@ -10700,6 +10704,7 @@ res/cardsfolder/u/urgent_exorcism.txt -text
 res/cardsfolder/u/uril_the_miststalker.txt svneol=native#text/plain
 res/cardsfolder/u/ursapine.txt svneol=native#text/plain
 res/cardsfolder/u/ursine_fylgja.txt svneol=native#text/plain
+res/cardsfolder/u/urza.txt -text
 res/cardsfolder/u/urzas_armor.txt svneol=native#text/plain
 res/cardsfolder/u/urzas_bauble.txt -text
 res/cardsfolder/u/urzas_blueprints.txt svneol=native#text/plain
