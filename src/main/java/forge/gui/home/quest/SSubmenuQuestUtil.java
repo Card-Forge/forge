@@ -294,39 +294,6 @@ public class SSubmenuQuestUtil {
                 qData.setCurrentEvent(event);
                 qData.save();
 
-                PlayerStartConditions humanStart = new PlayerStartConditions(SSubmenuQuestUtil.getCurrentDeck());
-                PlayerStartConditions aiStart = new PlayerStartConditions(event.getEventDeck()); 
-
-                if (qData.getMode() == QuestMode.Fantasy) {
-                    int lifeAI = 20;
-                    int extraLifeHuman = 0;
-
-                    if (event instanceof QuestEventChallenge) {
-                        lifeAI = ((QuestEventChallenge) event).getAILife();
-
-                        if (qData.getAssets().hasItem(QuestItemType.ZEPPELIN)) {
-                            extraLifeHuman = 3;
-                        }
-                    }
-
-                    humanStart.setStartingLife(qData.getAssets().getLife(qData.getMode()) + extraLifeHuman);
-                    aiStart.setStartingLife(lifeAI);
-
-                    humanStart.setCardsOnTable(new Supplier<Iterable<Card>>() {
-                        @Override public Iterable<Card> get() { return QuestUtil.getHumanStartingCards(qData, event); } });
-                    aiStart.setCardsOnTable(new Supplier<Iterable<Card>>() {
-                        @Override public Iterable<Card> get() { return QuestUtil.getComputerStartingCards(event); } });
-                } // End isFantasy
-
-                MatchStartHelper msh = new MatchStartHelper();
-                msh.addPlayer( Singletons.getControl().getLobby().getQuestPlayer(), humanStart );
-
-                LobbyPlayer aiPlayer = Singletons.getControl().getLobby().findLocalPlayer(PlayerType.COMPUTER, event.getName());
-                aiPlayer.setPicture(event.getIconFilename());
-                msh.addPlayer( aiPlayer, aiStart );
-
-                Singletons.getModel().getMatch().initMatch(GameType.Quest, msh.getPlayerMap());
-                Singletons.getModel().getMatch().startRound();
                 return null;
             }
 
@@ -336,6 +303,39 @@ public class SSubmenuQuestUtil {
             }
         };
         worker.execute();
+        PlayerStartConditions humanStart = new PlayerStartConditions(SSubmenuQuestUtil.getCurrentDeck());
+        PlayerStartConditions aiStart = new PlayerStartConditions(event.getEventDeck()); 
+
+        if (qData.getMode() == QuestMode.Fantasy) {
+            int lifeAI = 20;
+            int extraLifeHuman = 0;
+
+            if (event instanceof QuestEventChallenge) {
+                lifeAI = ((QuestEventChallenge) event).getAILife();
+
+                if (qData.getAssets().hasItem(QuestItemType.ZEPPELIN)) {
+                    extraLifeHuman = 3;
+                }
+            }
+
+            humanStart.setStartingLife(qData.getAssets().getLife(qData.getMode()) + extraLifeHuman);
+            aiStart.setStartingLife(lifeAI);
+
+            humanStart.setCardsOnTable(new Supplier<Iterable<Card>>() {
+                @Override public Iterable<Card> get() { return QuestUtil.getHumanStartingCards(qData, event); } });
+            aiStart.setCardsOnTable(new Supplier<Iterable<Card>>() {
+                @Override public Iterable<Card> get() { return QuestUtil.getComputerStartingCards(event); } });
+        } // End isFantasy
+
+        MatchStartHelper msh = new MatchStartHelper();
+        msh.addPlayer( Singletons.getControl().getLobby().getQuestPlayer(), humanStart );
+
+        LobbyPlayer aiPlayer = Singletons.getControl().getLobby().findLocalPlayer(PlayerType.COMPUTER, event.getName());
+        aiPlayer.setPicture(event.getIconFilename());
+        msh.addPlayer( aiPlayer, aiStart );
+
+        Singletons.getModel().getMatch().initMatch(GameType.Quest, msh.getPlayerMap());
+        Singletons.getModel().getMatch().startRound();
     }
 
     /** Duplicate in DeckEditorQuestMenu and
