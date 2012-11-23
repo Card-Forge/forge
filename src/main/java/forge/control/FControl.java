@@ -87,7 +87,7 @@ public enum FControl {
     public static final int DRAFTING_PROCESS = 7;
 
     private final SoundSystem soundSystem = new SoundSystem();
-    
+
     /**
      * <p>
      * FControl.
@@ -282,8 +282,9 @@ public enum FControl {
      */
     private Lobby lobby = null;
     public Lobby getLobby() {
-        if( lobby == null )
+        if (lobby == null) {
             lobby = new Lobby();
+        }
         return lobby;
     }
 

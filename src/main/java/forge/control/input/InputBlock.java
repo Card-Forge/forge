@@ -46,9 +46,9 @@ public class InputBlock extends Input {
     private static final long serialVersionUID = 6120743598368928128L;
 
     private Card currentAttacker = null;
-    private final HashMap<Card,List<Card>> allBlocking = new HashMap<Card, List<Card>>();
+    private final HashMap<Card, List<Card>> allBlocking = new HashMap<Card, List<Card>>();
     private final Player defender;
-    
+
     /**
      * TODO: Write javadoc for Constructor.
      * @param priority
@@ -110,34 +110,34 @@ public class InputBlock extends Input {
     public final void selectCard(final Card card) {
         // is attacking?
         boolean reminder = true;
-        
+
         if (Singletons.getModel().getGame().getCombat().getAttackers().contains(card)) {
             this.currentAttacker = card;
             reminder = false;
         } else {
             Zone zone = Singletons.getModel().getGame().getZoneOf(card);
             // Make sure this card is valid to even be a blocker
-            if (this.currentAttacker != null && card.isCreature() && card.getController().equals(defender) 
+            if (this.currentAttacker != null && card.isCreature() && card.getController().equals(defender)
                     && zone.is(ZoneType.Battlefield, defender)) {
                 // Create a new blockedBy list if it doesn't exist
                 if (!this.allBlocking.containsKey(card)) {
                     this.allBlocking.put(card, new ArrayList<Card>());
                 }
-                
+
                 List<Card> attackersBlocked = this.allBlocking.get(card);
-                if (!attackersBlocked.contains(this.currentAttacker) && 
-                        CombatUtil.canBlock(this.currentAttacker, card, Singletons.getModel().getGame().getCombat())) {
+                if (!attackersBlocked.contains(this.currentAttacker)
+                        && CombatUtil.canBlock(this.currentAttacker, card, Singletons.getModel().getGame().getCombat())) {
                     attackersBlocked.add(this.currentAttacker);
                     Singletons.getModel().getGame().getCombat().addBlocker(this.currentAttacker, card);
                     reminder = false;
                 }
-            } 
+            }
         }
-        
+
         if (reminder) {
             SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
         }
-        
+
         this.showMessage();
     } // selectCard()
 

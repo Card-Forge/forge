@@ -62,7 +62,6 @@ public class InputPayManaCostUtil {
             return manaCost;
         }
 
-        
         final StringBuilder cneeded = new StringBuilder();
         final StringBuilder colorRequired = new StringBuilder();
         boolean choice = true;
@@ -80,8 +79,8 @@ public class InputPayManaCostUtil {
 
         List<SpellAbility> abilities = new ArrayList<SpellAbility>();
         // you can't remove unneeded abilities inside a for(am:abilities) loop :(
-        
-        for(SpellAbility ma : card.getManaAbility()) {
+
+        for (SpellAbility ma : card.getManaAbility()) {
             ma.setActivatingPlayer(Singletons.getControl().getPlayer());
             AbilityManaPart m = ma.getManaPart();
             if (!ma.canPlay()) {
@@ -95,7 +94,7 @@ public class InputPayManaCostUtil {
             }
 
             abilities.add(ma);
-            
+
             if (!skipExpress) {
                 // skip express mana if the ability is not undoable
                 if (!ma.isUndoable()) {

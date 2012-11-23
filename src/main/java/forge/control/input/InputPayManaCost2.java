@@ -12,15 +12,15 @@ import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
 public class InputPayManaCost2 extends InputPayMana {
-    
+
     private ManaCost manaCost;
     private final CostMana costMana;
     // I would kill the one who made 2 classes like above
     private final String originalManaCost;
-    private final SpellAbility sa; 
+    private final SpellAbility sa;
     private final int manaToAdd;
     private final CostPayment payment;
-    
+
     public InputPayManaCost2(CostMana costMana, SpellAbility spellAbility, final CostPayment payment, int toAdd) {
         manaCost = new ManaCost(costMana.getManaToPay());
         manaCost.increaseColorlessMana(toAdd);
@@ -30,12 +30,12 @@ public class InputPayManaCost2 extends InputPayMana {
         sa = spellAbility;
         manaToAdd = toAdd;
         this.payment = payment;
-               
+
     }
 
     private static final long serialVersionUID = 3467312982164195091L;
 
-    
+
 
     private int phyLifeToLose = 0;
 
@@ -155,6 +155,7 @@ public class InputPayManaCost2 extends InputPayMana {
             this.showMessage();
         }
     }
-    
-    @Override public void isClassUpdated() {}
+
+    @Override public void isClassUpdated() {
+    }
 }

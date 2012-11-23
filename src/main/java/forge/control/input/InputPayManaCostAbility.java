@@ -184,7 +184,7 @@ public class InputPayManaCostAbility extends InputPayMana {
             this.showMessage();
         }
     }
-    
+
     private void done() {
         if (this.phyLifeToLose > 0) {
             Singletons.getControl().getPlayer().payLife(this.phyLifeToLose, null);
@@ -247,7 +247,8 @@ public class InputPayManaCostAbility extends InputPayMana {
             this.showMessage();
         }
     }
-    
-    @Override public void isClassUpdated() {}
+
+    @Override public void isClassUpdated() {
+    }
 
 }

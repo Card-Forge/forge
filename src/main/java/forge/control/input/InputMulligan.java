@@ -80,7 +80,7 @@ public class InputMulligan extends Input {
     @Override
     public final void selectButtonCancel() {
         final Player humanPlayer = Singletons.getControl().getPlayer();
-        
+
 
         final int newHand = humanPlayer.doMulligan();
 
@@ -90,22 +90,24 @@ public class InputMulligan extends Input {
     } // selectButtonOK()
 
     final void end() {
-        GameState game = Singletons.getModel().getGame(); 
+        GameState game = Singletons.getModel().getGame();
 
         // Computer mulligan
         for (Player ai : game.getPlayers()) {
-            if ( ai.isHuman() ) continue;
-            
+            if (ai.isHuman()) {
+                continue;
+            }
+
             boolean aiTakesMulligan = true;
-    
+
             // Computer mulligans if there are no cards with converted mana cost of
             // 0 in its hand
             while (aiTakesMulligan) {
-    
+
                 final List<Card> handList = ai.getCardsIn(ZoneType.Hand);
                 final boolean hasLittleCmc0Cards = CardLists.getValidCards(handList, "Card.cmcEQ0", ai, null).size() < 2;
                 aiTakesMulligan = (handList.size() > InputMulligan.AI_MULLIGAN_THRESHOLD) && hasLittleCmc0Cards;
-    
+
                 if (aiTakesMulligan) {
                     ai.doMulligan();
                 }
@@ -119,16 +121,16 @@ public class InputMulligan extends Input {
         final GameAction ga = game.getAction();
         for (Player p : game.getPlayers()) {
             final List<Card> openingHand = new ArrayList<Card>(p.getCardsIn(ZoneType.Hand));
-    
+
             for (final Card c : openingHand) {
-                if ( p.isHuman() ) {
+                if (p.isHuman()) {
                     final ArrayList<String> kws = c.getKeyword();
                     for (int i = 0; i < kws.size(); i++) {
                         final String kw = kws.get(i);
-        
+
                         if (kw.startsWith("MayEffectFromOpeningHand")) {
                             final String effName = kw.split(":")[1];
-        
+
                             final SpellAbility effect = af.getAbility(c.getSVar(effName), c);
                             if (GameActionUtil.showYesNoDialog(c, "Use this card's ability?")) {
                                 // If we ever let the AI memorize cards in the players
@@ -147,12 +149,12 @@ public class InputMulligan extends Input {
                         final ArrayList<String> kws = c.getKeyword();
                         for (int i = 0; i < kws.size(); i++) {
                             final String kw = kws.get(i);
-        
+
                             if (kw.startsWith("MayEffectFromOpeningHand")) {
                                 final String effName = kw.split(":")[1];
-        
+
                                 final SpellAbility effect = af.getAbility(c.getSVar(effName), c);
-        
+
                                 // Is there a better way for the AI to decide this?
                                 if (effect.doTrigger(false)) {
                                     GameActionUtil.showInfoDialg("Computer reveals " + c.getName() + "(" + c.getUniqueNumber() + ").");
@@ -161,8 +163,9 @@ public class InputMulligan extends Input {
                             }
                         }
                     }
-                    if (c.getName().startsWith("Leyline") && !(c.getName().startsWith("Leyline of Singularity") && 
-                       (Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Leyline of Singularity"))))) {
+                    if (c.getName().startsWith("Leyline")
+                            && !(c.getName().startsWith("Leyline of Singularity")
+                            && (Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Leyline of Singularity"))))) {
                         ga.moveToPlay(c);
                         //ga.checkStateEffects();
                     }
@@ -190,7 +193,7 @@ public class InputMulligan extends Input {
             SDisplayUtil.remind(VMessage.SINGLETON_INSTANCE);
         }
     }
-    
+
     @Override
     public void isClassUpdated() {
     }
