@@ -530,7 +530,8 @@ public class CombatUtil {
 
         if (blocker.getMustBlockCards() != null) {
             for (final Card attacker : blocker.getMustBlockCards()) {
-                if (CombatUtil.canBeBlocked(attacker, combat) && CombatUtil.canBlock(attacker, blocker)) {
+                if (CombatUtil.canBeBlocked(attacker, combat) && CombatUtil.canBlock(attacker, blocker) 
+                        && combat.isAttacking(attacker)) {
                     boolean canBe = true;
                     if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
                         final List<Card> blockers = combat.getDefenderPlayerByAttacker(attacker).getCreaturesInPlay();
