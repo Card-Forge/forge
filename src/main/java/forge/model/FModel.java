@@ -365,6 +365,15 @@ public enum FModel {
     }
 
     /**
+     * Gets the game worlds.
+     *
+     * @return the worlds
+     */
+    public final IStorageView<QuestWorld> getWorlds() {
+        return this.worlds;
+    }
+
+    /**
      * Finalizer, generally should be avoided, but here closes the log file
      * stream and resets the system output streams.
      */

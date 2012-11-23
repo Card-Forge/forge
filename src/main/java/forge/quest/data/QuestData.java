@@ -17,6 +17,7 @@
  */
 package forge.quest.data;
 
+import forge.Singletons;
 import forge.game.GameFormat;
 import forge.quest.QuestMode;
 import forge.quest.io.QuestDataIO;
@@ -51,7 +52,8 @@ public final class QuestData {
     /** The mode. */
     private QuestMode mode;
 
-
+    // Quest world ID, if any
+    private String worldId;
     // gadgets
 
     private final QuestAssets assets;
@@ -81,6 +83,7 @@ public final class QuestData {
         this.mode = mode2;
         this.achievements = new QuestAchievements(diff);
         this.assets = new QuestAssets(format);
+        this.worldId = null; // Default to "no world", i.e. regular opponents and challenges
 
     }
 
@@ -102,6 +105,17 @@ public final class QuestData {
         return this.format;
     }
 
+    /**
+     * Gets the QuestWorld, if any.
+     * 
+     * @return QuestWorld or null, if using regular duels and challenges.
+     */
+    public QuestWorld getWorld() {
+        if (this.worldId == null) {
+            return null;
+        }
+        return Singletons.getModel().getWorlds().get(worldId);
+    }
 
     // SERIALIZATION - related things
     // This must be called by XML-serializer via reflection
