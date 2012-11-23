@@ -1,0 +1,10 @@
+Name:Takara
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:+3/-8
+A:AB$ DealDamage | ActivationZone$ Command | Cost$ Sac<1/Creature> | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
+SVar:RemAIDeck:True
+SVar:Rarity:Special
+SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=12144&type=card
+End

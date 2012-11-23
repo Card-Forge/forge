@@ -9540,6 +9540,7 @@ res/cardsfolder/s/standing_troops.txt svneol=native#text/plain
 res/cardsfolder/s/standstill.txt svneol=native#text/plain
 res/cardsfolder/s/stangg.txt svneol=native#text/plain
 res/cardsfolder/s/star_compass.txt svneol=native#text/plain
+res/cardsfolder/s/starke.txt -text
 res/cardsfolder/s/starke_of_rath.txt -text
 res/cardsfolder/s/starlight.txt svneol=native#text/plain
 res/cardsfolder/s/starlight_invoker.txt svneol=native#text/plain
@@ -9912,6 +9913,7 @@ res/cardsfolder/s/syphon_soul.txt svneol=native#text/plain
 res/cardsfolder/s/szadek_lord_of_secrets.txt svneol=native#text/plain
 res/cardsfolder/t/tablet_of_epityr.txt svneol=native#text/plain
 res/cardsfolder/t/tablet_of_the_guilds.txt -text
+res/cardsfolder/t/tahngarth.txt -text
 res/cardsfolder/t/tahngarth_talruum_hero.txt svneol=native#text/plain
 res/cardsfolder/t/tahngarths_rage.txt svneol=native#text/plain
 res/cardsfolder/t/taiga.txt svneol=native#text/plain
@@ -9926,6 +9928,7 @@ res/cardsfolder/t/tainted_wood.txt svneol=native#text/plain
 res/cardsfolder/t/taj_nar_swordsmith.txt svneol=native#text/plain
 res/cardsfolder/t/tajuru_archer.txt svneol=native#text/plain
 res/cardsfolder/t/tajuru_preserver.txt -text
+res/cardsfolder/t/takara.txt -text
 res/cardsfolder/t/take_possession.txt svneol=native#text/plain
 res/cardsfolder/t/takenos_cavalry.txt svneol=native#text/plain
 res/cardsfolder/t/takenuma_bleeder.txt svneol=native#text/plain
@@ -9994,6 +9997,7 @@ res/cardsfolder/t/taunting_challenge.txt svneol=native#text/plain
 res/cardsfolder/t/taunting_elf.txt svneol=native#text/plain
 res/cardsfolder/t/taurean_mauler.txt svneol=native#text/plain
 res/cardsfolder/t/tavern_swindler.txt -text
+res/cardsfolder/t/tawnos.txt -text
 res/cardsfolder/t/tawnoss_wand.txt svneol=native#text/plain
 res/cardsfolder/t/tawnoss_weaponry.txt svneol=native#text/plain
 res/cardsfolder/t/teardrop_kami.txt svneol=native#text/plain

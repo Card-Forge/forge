@@ -1,0 +1,11 @@
+Name:Starke
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:+0/-2
+T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | TriggerZones$ Command | Execute$ SituationalEthics | OptionalDecider$ You | TriggerDescription$ At the beginning of your draw step, you may draw an additional card. If you do, put a card from your hand on the bottom of your library.
+SVar:SituationalEthics:AB$ Draw | Cost$ 0 | NumCards$ 1 | Defined$ You | SubAbility$ Switch
+SVar:Switch:DB$ ChangeZone | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | ChangeNum$ 1 | Mandatory$ True
+SVar:Rarity:Special
+SVar:Picture:http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=4970
+End
