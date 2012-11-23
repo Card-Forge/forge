@@ -41,7 +41,7 @@ import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Constant;
 import forge.Constant.Preferences;
-import forge.Counters;
+import forge.CounterType;
 import forge.GameActionUtil;
 import forge.GameEntity;
 import forge.Singletons;
@@ -2858,22 +2858,18 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         });
     }
 
-    public int getCounterDoublersMagnitude(final Counters type) {
+    public int getCounterDoublersMagnitude(final CounterType type) {
         int counterDoublers = getCardsIn(ZoneType.Battlefield, "Doubling Season").size();
-        if(type == Counters.P1P1) {
+        if(type == CounterType.P1P1) {
             counterDoublers += getCardsIn(ZoneType.Battlefield, "Corpsejack Menace").size();
         }
-        return (int) Math.pow(2, counterDoublers); // pow(a,0) = 1; pow(a,1) = a
-                                                   // ... no worries about size
-                                                   // = 0
+        return 1 << counterDoublers;
     }
     
     public int getTokenDoublersMagnitude() {
         final int tokenDoublers = getCardsIn(ZoneType.Battlefield, "Parallel Lives").size()
                 + getCardsIn(ZoneType.Battlefield, "Doubling Season").size();
-        return (int) Math.pow(2, tokenDoublers); // pow(a,0) = 1; pow(a,1) = a
-                                                 // ... no worries about size =
-                                                 // 0
+        return 1 << tokenDoublers; // pow(a,0) = 1; pow(a,1) = a
     }
 
     public void onCleanupPhase() {

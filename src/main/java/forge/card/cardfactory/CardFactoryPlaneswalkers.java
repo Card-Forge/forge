@@ -19,7 +19,7 @@ package forge.card.cardfactory;
 
 import forge.Card;
 import forge.Command;
-import forge.Counters;
+import forge.CounterType;
 import forge.card.replacement.ReplacementHandler;
 
 /**
@@ -44,7 +44,7 @@ public class CardFactoryPlaneswalkers {
     public static void buildCard(final Card card) {
         // All Planeswalkers set their loyality in the beginning
         if (card.getBaseLoyalty() > 0) {
-            Command cmd = CardFactoryUtil.entersBattleFieldWithCounters(card, Counters.LOYALTY, card.getBaseLoyalty());
+            Command cmd = CardFactoryUtil.entersBattleFieldWithCounters(card, CounterType.LOYALTY, card.getBaseLoyalty());
             card.addComesIntoPlayCommand(cmd);
         }
 

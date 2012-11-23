@@ -4,7 +4,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Counters;
+import forge.CounterType;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
@@ -19,7 +19,7 @@ public class CountersPutAllEffect extends SpellEffect  {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final Counters cType = Counters.valueOf(sa.getParam("CounterType"));
+        final CounterType cType = CounterType.valueOf(sa.getParam("CounterType"));
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
         final String zone = sa.hasParam("ValidZone") ? sa.getParam("ValidZone") : "Battlefield";
 
@@ -55,10 +55,10 @@ public class CountersPutAllEffect extends SpellEffect  {
 
         for (final Card tgtCard : cards) {
             if (Singletons.getModel().getGame().getZoneOf(tgtCard).is(ZoneType.Battlefield)) {
-                tgtCard.addCounter(Counters.valueOf(type), counterAmount);
+                tgtCard.addCounter(CounterType.valueOf(type), counterAmount);
             } else {
                 // adding counters to something like re-suspend cards
-                tgtCard.addCounterFromNonEffect(Counters.valueOf(type), counterAmount);
+                tgtCard.addCounterFromNonEffect(CounterType.valueOf(type), counterAmount);
             }
         }
     }

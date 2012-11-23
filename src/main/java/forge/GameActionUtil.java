@@ -427,7 +427,7 @@ public final class GameActionUtil {
 
             else if (part instanceof CostPutCounter) {
                 String amountString = part.getAmount();
-                Counters counterType = ((CostPutCounter) part).getCounter();
+                CounterType counterType = ((CostPutCounter) part).getCounter();
                 int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
                         : CardFactoryUtil.xCount(source, source.getSVar(amountString));
                 String plural = amount > 1 ? "s" : "";
@@ -724,9 +724,9 @@ public final class GameActionUtil {
                 final Ability ability2 = new Ability(c, "0") {
                     @Override
                     public void resolve() {
-                        Counters counter = Counters.P1P1;
+                        CounterType counter = CounterType.P1P1;
                         if (kw.contains("+2/+2")) {
-                            counter = Counters.P2P2;
+                            counter = CounterType.P2P2;
                         }
                         if (thisCard.isInPlay()) {
                             thisCard.addCounter(counter, 1);

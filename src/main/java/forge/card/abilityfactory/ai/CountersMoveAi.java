@@ -6,7 +6,7 @@ import java.util.Random;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Counters;
+import forge.CounterType;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -53,12 +53,12 @@ public class CountersMoveAi extends SpellAiLogic {
         boolean chance = false;
         boolean preferred = true;
 
-        final Counters cType = Counters.valueOf(sa.getParam("CounterType"));
+        final CounterType cType = CounterType.valueOf(sa.getParam("CounterType"));
         final ArrayList<Card> srcCards = AbilityFactory.getDefinedCards(host, sa.getParam("Source"), sa);
         final ArrayList<Card> destCards = AbilityFactory.getDefinedCards(host, sa.getParam("Defined"), sa);
         if (abTgt == null) {
             if ((srcCards.size() > 0)
-                    && cType.equals(Counters.P1P1) // move +1/+1 counters away
+                    && cType.equals(CounterType.P1P1) // move +1/+1 counters away
                                                    // from
                                                    // permanents that cannot use
                                                    // them

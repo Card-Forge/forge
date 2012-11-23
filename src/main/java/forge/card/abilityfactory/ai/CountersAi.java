@@ -24,7 +24,7 @@ import com.google.common.base.Predicate;
 import forge.Card;
 
 import forge.CardLists;
-import forge.Counters;
+import forge.CounterType;
 import forge.card.cardfactory.CardFactoryUtil;
 
 
@@ -93,7 +93,7 @@ public abstract class CountersAi {
             final List<Card> boon = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return c.getCounters(Counters.DIVINITY) == 0;
+                    return c.getCounters(CounterType.DIVINITY) == 0;
                 }
             });
             choice = CardFactoryUtil.getMostExpensivePermanentAI(boon, null, false);

@@ -42,7 +42,7 @@ import forge.CardCharacteristicName;
 
 import forge.CardUtil;
 import forge.Constant;
-import forge.Counters;
+import forge.CounterType;
 import forge.Singletons;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
@@ -599,7 +599,7 @@ public final class GuiDisplayUtil {
                 } else if (info.startsWith("Counters:")) {
                     final String[] counterStrings = info.substring(info.indexOf(':') + 1).split(",");
                     for (final String counter : counterStrings) {
-                        c.addCounter(Counters.valueOf(counter), 1);
+                        c.addCounter(CounterType.valueOf(counter), 1);
                     }
                 } else if (info.equalsIgnoreCase("SummonSick:True")) {
                     c.setSickness(true);
@@ -649,7 +649,7 @@ public final class GuiDisplayUtil {
             return;
         } else {
             final Card c = o;
-            final Counters counter = GuiChoose.oneOrNone("Which type of counter?", Counters.values());
+            final CounterType counter = GuiChoose.oneOrNone("Which type of counter?", CounterType.values());
             if (null == counter) {
                 return;
             } else {

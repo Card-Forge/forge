@@ -6,7 +6,7 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Counters;
+import forge.CounterType;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -22,7 +22,7 @@ public class CountersProliferateAi extends SpellAiLogic {
         List<Card> cperms = CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
             @Override
             public boolean apply(final Card crd) {
-                for (final Counters c1 : Counters.values()) {
+                for (final CounterType c1 : CounterType.values()) {
                     if (crd.getCounters(c1) != 0 && !CardFactoryUtil.isNegativeCounter(c1)) {
                         return true;
                     }
@@ -34,7 +34,7 @@ public class CountersProliferateAi extends SpellAiLogic {
         List<Card> hperms = CardLists.filter(ai.getOpponent().getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
             @Override
             public boolean apply(final Card crd) {
-                for (final Counters c1 : Counters.values()) {
+                for (final CounterType c1 : CounterType.values()) {
                     if (crd.getCounters(c1) != 0 && CardFactoryUtil.isNegativeCounter(c1)) {
                         return true;
                     }

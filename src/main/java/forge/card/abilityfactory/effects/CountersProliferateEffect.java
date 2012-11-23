@@ -9,7 +9,7 @@ import com.google.common.collect.Lists;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Counters;
+import forge.CounterType;
 import forge.Singletons;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -71,14 +71,14 @@ public class CountersProliferateEffect extends SpellEffect {
                 }
                 unchosen.remove(card);
                 final ArrayList<String> choices = new ArrayList<String>();
-                for (final Counters c1 : Counters.values()) {
+                for (final CounterType c1 : CounterType.values()) {
                     if (card.getCounters(c1) != 0) {
                         choices.add(c1.getName());
                     }
                 }
                 if (choices.size() > 0) {
                     card.addCounter(
-                            Counters.getType((choices.size() == 1 ? choices.get(0) : GuiChoose.one(
+                            CounterType.getType((choices.size() == 1 ? choices.get(0) : GuiChoose.one(
                                     "Select counter type", choices).toString())), 1);
                 }
             }
@@ -104,7 +104,7 @@ public class CountersProliferateEffect extends SpellEffect {
         final Predicate<Card> predProliferate = new Predicate<Card>() {
             @Override
             public boolean apply(Card crd) {
-                for (final Entry<Counters, Integer> c1 : crd.getCounters().entrySet()) {
+                for (final Entry<CounterType, Integer> c1 : crd.getCounters().entrySet()) {
                     if (CardFactoryUtil.isNegativeCounter(c1.getKey()) && enemies.contains(crd.getController())) {
                         return true;
                     }
@@ -150,7 +150,7 @@ public class CountersProliferateEffect extends SpellEffect {
         // add a counter of one counter type, if it would benefit the
         // computer
         for (final Card c : cardsToProliferate) {
-            for (final Entry<Counters, Integer> c1 : c.getCounters().entrySet()) {
+            for (final Entry<CounterType, Integer> c1 : c.getCounters().entrySet()) {
                 if (CardFactoryUtil.isNegativeCounter(c1.getKey()) && enemies.contains(c.getController()))
                 {
                     c.addCounter(c1.getKey(), 1);

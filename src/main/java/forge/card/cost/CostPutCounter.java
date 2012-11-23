@@ -22,7 +22,7 @@ import java.util.List;
 import forge.Card;
 
 import forge.CardLists;
-import forge.Counters;
+import forge.CounterType;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -38,7 +38,7 @@ import forge.view.ButtonUtil;
  */
 public class CostPutCounter extends CostPartWithList {
     // Put Counter doesn't really have a "Valid" portion of the cost
-    private final Counters counter;
+    private final CounterType counter;
     private int lastPaidAmount = 0;
 
     /**
@@ -46,7 +46,7 @@ public class CostPutCounter extends CostPartWithList {
      * 
      * @return the counter
      */
-    public final Counters getCounter() {
+    public final CounterType getCounter() {
         return this.counter;
     }
 
@@ -72,7 +72,7 @@ public class CostPutCounter extends CostPartWithList {
      * @param description
      *            the description
      */
-    public CostPutCounter(final String amount, final Counters cntr, final String type, final String description) {
+    public CostPutCounter(final String amount, final CounterType cntr, final String type, final String description) {
         this.setReusable(true);
         this.setAmount(amount);
         this.counter = cntr;
@@ -133,7 +133,7 @@ public class CostPutCounter extends CostPartWithList {
                 return false;
             }
             if (source.hasKeyword("CARDNAME can't have -1/-1 counters placed on it.")
-                    && this.counter.equals(Counters.M1M1)) {
+                    && this.counter.equals(CounterType.M1M1)) {
                 return false;
             }
         } else {

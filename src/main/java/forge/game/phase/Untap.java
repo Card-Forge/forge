@@ -26,7 +26,7 @@ import forge.Card;
 
 import forge.CardLists;
 import forge.CardPredicates.Presets;
-import forge.Counters;
+import forge.CounterType;
 import forge.GameActionUtil;
 import forge.GameEntity;
 import forge.Singletons;
@@ -176,9 +176,9 @@ public class Untap extends Phase {
                         }
                     }
                 }
-            } else if ((c.getCounters(Counters.WIND) > 0) && Singletons.getModel().getGame().isCardInPlay("Freyalise's Winds")) {
+            } else if ((c.getCounters(CounterType.WIND) > 0) && Singletons.getModel().getGame().isCardInPlay("Freyalise's Winds")) {
                 // remove a WIND counter instead of untapping
-                c.subtractCounter(Counters.WIND, 1);
+                c.subtractCounter(CounterType.WIND, 1);
             } else {
                 c.untap();
             }

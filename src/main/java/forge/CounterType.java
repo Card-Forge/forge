@@ -24,7 +24,7 @@ package forge;
  * @author Clemens Koza
  * @version V0.0 17.02.2010
  */
-public enum Counters {
+public enum CounterType {
 
     /** The AGE. */
     AGE(),
@@ -348,7 +348,7 @@ public enum Counters {
      * Constructor for Counters.
      * </p>
      */
-    private Counters() {
+    private CounterType() {
         this.name = this.name().substring(0, 1).toUpperCase() + this.name().substring(1).toLowerCase();
     }
 
@@ -360,7 +360,7 @@ public enum Counters {
      * @param name
      *            a {@link java.lang.String} object.
      */
-    private Counters(final String nameIn) {
+    private CounterType(final String nameIn) {
         this.name = nameIn;
     }
 
@@ -382,10 +382,10 @@ public enum Counters {
      * 
      * @param name
      *            a {@link java.lang.String} object.
-     * @return a {@link forge.Counters} object.
+     * @return a {@link forge.CounterType} object.
      */
-    public static Counters getType(final String name) {
+    public static CounterType getType(final String name) {
         final String replacedName = name.replace("/", "").replaceAll("\\+", "p").replaceAll("\\-", "m").toUpperCase();
-        return Enum.valueOf(Counters.class, replacedName);
+        return Enum.valueOf(CounterType.class, replacedName);
     }
 }

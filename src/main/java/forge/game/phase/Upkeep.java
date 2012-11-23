@@ -31,7 +31,7 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.Command;
-import forge.Counters;
+import forge.CounterType;
 import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -139,9 +139,9 @@ public class Upkeep extends Phase {
             final Ability upkeepAbility = new Ability(c, "0") {
                 @Override
                 public void resolve() {
-                    c.addCounter(Counters.AGE, 1);
+                    c.addCounter(CounterType.AGE, 1);
                     StringBuilder rs = new StringBuilder("R");
-                    for(int ageCounters = c.getCounters(Counters.AGE); ageCounters > 1; ageCounters-- )
+                    for(int ageCounters = c.getCounters(CounterType.AGE); ageCounters > 1; ageCounters-- )
                         rs.append(" R");
                     Map<String, String> produced = new HashMap<String, String>();
                     produced.put("Produced", rs.toString());
@@ -337,8 +337,8 @@ public class Upkeep extends Phase {
 
                     if (ability.startsWith("Cumulative upkeep")) {
                         final String[] k = ability.split(":");
-                        c.addCounter(Counters.AGE, 1);
-                        cost = CardFactoryUtil.multiplyCost(k[1], c.getCounters(Counters.AGE));
+                        c.addCounter(CounterType.AGE, 1);
+                        cost = CardFactoryUtil.multiplyCost(k[1], c.getCounters(CounterType.AGE));
                         sb.append("Cumulative upkeep for ").append(c).append("\n");
                     }
 
@@ -1691,7 +1691,7 @@ public class Upkeep extends Phase {
                         this.revealTopCard(title);
                     }
                     if (wantCounter) {
-                        k.addCounter(Counters.P1P1, 1);
+                        k.addCounter(CounterType.P1P1, 1);
                     }
                 } // resolve()
 
@@ -1826,9 +1826,9 @@ public class Upkeep extends Phase {
         }
 
         for (final Card c : list) {
-            final int counters = c.getCounters(Counters.TIME);
+            final int counters = c.getCounters(CounterType.TIME);
             if (counters > 0) {
-                c.subtractCounter(Counters.TIME, 1);
+                c.subtractCounter(CounterType.TIME, 1);
             }
         }
     } // suspend
@@ -1854,7 +1854,7 @@ public class Upkeep extends Phase {
                 final Ability ability = new Ability(card, "0") {
                     @Override
                     public void resolve() {
-                        card.subtractCounter(Counters.TIME, 1);
+                        card.subtractCounter(CounterType.TIME, 1);
                     }
                 }; // ability
 
@@ -1892,11 +1892,11 @@ public class Upkeep extends Phase {
                 final Ability ability = new Ability(card, "0") {
                     @Override
                     public void resolve() {
-                        final int fadeCounters = card.getCounters(Counters.FADE);
+                        final int fadeCounters = card.getCounters(CounterType.FADE);
                         if (fadeCounters <= 0) {
                             Singletons.getModel().getGame().getAction().sacrifice(card, null);
                         } else {
-                            card.subtractCounter(Counters.FADE, 1);
+                            card.subtractCounter(CounterType.FADE, 1);
                         }
                     }
                 }; // ability
@@ -2136,7 +2136,7 @@ public class Upkeep extends Phase {
             final SpellAbility ability = new Ability(source, "0") {
                 @Override
                 public void resolve() {
-                    final int num = source.getCounters(Counters.FADE);
+                    final int num = source.getCounters(CounterType.FADE);
                     final List<Card> list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {
@@ -2221,7 +2221,7 @@ public class Upkeep extends Phase {
         blaze = CardLists.filter(blaze, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return c.isLand() && (c.getCounters(Counters.BLAZE) > 0);
+                return c.isLand() && (c.getCounters(CounterType.BLAZE) > 0);
             }
         });
 

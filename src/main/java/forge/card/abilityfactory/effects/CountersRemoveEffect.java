@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Card;
-import forge.Counters;
+import forge.CounterType;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
@@ -37,7 +37,7 @@ public class CountersRemoveEffect extends SpellEffect {
             }
         }
         else {
-            sb.append(amount).append(" ").append(Counters.valueOf(counterName).getName()).append(" counter");
+            sb.append(amount).append(" ").append(CounterType.valueOf(counterName).getName()).append(" counter");
         }
         if (amount != 1) {
             sb.append("s");
@@ -73,18 +73,18 @@ public class CountersRemoveEffect extends SpellEffect {
             if ((tgt == null) || tgtCard.canBeTargetedBy(sa)) {
                 final Zone zone = Singletons.getModel().getGame().getZoneOf(tgtCard);
                 if (sa.getParam("CounterNum").equals("All")) {
-                    counterAmount = tgtCard.getCounters(Counters.valueOf(type));
+                    counterAmount = tgtCard.getCounters(CounterType.valueOf(type));
                 }
 
                 if (type.matches("Any")) {
                     while (counterAmount > 0 && tgtCard.getNumberOfCounters() > 0) {
-                        final Map<Counters, Integer> tgtCounters = tgtCard.getCounters();
-                        Counters chosenType = null;
+                        final Map<CounterType, Integer> tgtCounters = tgtCard.getCounters();
+                        CounterType chosenType = null;
                         int chosenAmount;
                         if (sa.getActivatingPlayer().isHuman()) {
-                            final ArrayList<Counters> typeChoices = new ArrayList<Counters>();
+                            final ArrayList<CounterType> typeChoices = new ArrayList<CounterType>();
                             // get types of counters
-                            for (Counters key : tgtCounters.keySet()) {
+                            for (CounterType key : tgtCounters.keySet()) {
                                 if (tgtCounters.get(key) > 0) {
                                     typeChoices.add(key);
                                 }
@@ -116,7 +116,7 @@ public class CountersRemoveEffect extends SpellEffect {
                             // find first nonzero counter on target
                             for (Object key : tgtCounters.keySet()) {
                                 if (tgtCounters.get(key) > 0) {
-                                    chosenType = (Counters) key;
+                                    chosenType = (CounterType) key;
                                     break;
                                 }
                             }
@@ -147,13 +147,13 @@ public class CountersRemoveEffect extends SpellEffect {
                             counterAmount = Integer.parseInt(o);
                         }
                     }
-                    tgtCard.subtractCounter(Counters.valueOf(type), counterAmount);
+                    tgtCard.subtractCounter(CounterType.valueOf(type), counterAmount);
                     if (rememberRemoved) {
-                        if (counterAmount > tgtCard.getCounters(Counters.valueOf(type))) {
-                            counterAmount = tgtCard.getCounters(Counters.valueOf(type));
+                        if (counterAmount > tgtCard.getCounters(CounterType.valueOf(type))) {
+                            counterAmount = tgtCard.getCounters(CounterType.valueOf(type));
                         }
                         for (int i = 0; i < counterAmount; i++) {
-                            card.addRemembered(Counters.valueOf(type));
+                            card.addRemembered(CounterType.valueOf(type));
                         }
                     }
                 }

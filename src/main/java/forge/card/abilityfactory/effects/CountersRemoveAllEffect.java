@@ -4,7 +4,7 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Counters;
+import forge.CounterType;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
@@ -18,7 +18,7 @@ public class CountersRemoveAllEffect extends SpellEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final Counters cType = Counters.valueOf(sa.getParam("CounterType"));
+        final CounterType cType = CounterType.valueOf(sa.getParam("CounterType"));
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
         final String zone = sa.hasParam("ValidZone") ? sa.getParam("ValidZone") : "Battlefield";
         String amountString = Integer.toString(amount);
@@ -59,10 +59,10 @@ public class CountersRemoveAllEffect extends SpellEffect {
 
         for (final Card tgtCard : cards) {
             if (sa.hasParam("AllCounters")) {
-                counterAmount = tgtCard.getCounters(Counters.valueOf(type));
+                counterAmount = tgtCard.getCounters(CounterType.valueOf(type));
             }
 
-            tgtCard.subtractCounter(Counters.valueOf(type), counterAmount);
+            tgtCard.subtractCounter(CounterType.valueOf(type), counterAmount);
         }
     }
 }

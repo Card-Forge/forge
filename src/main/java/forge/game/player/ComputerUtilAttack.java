@@ -26,7 +26,7 @@ import com.google.common.base.Predicate;
 import forge.Card;
 
 import forge.CardLists;
-import forge.Counters;
+import forge.CounterType;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -365,7 +365,7 @@ public class ComputerUtilAttack {
             final List<Card> beastions = ai.getCardsIn(ZoneType.Battlefield, "Beastmaster Ascension");
             int minCreatures = 7;
             for (final Card beastion : beastions) {
-                final int counters = beastion.getCounters(Counters.QUEST);
+                final int counters = beastion.getCounters(CounterType.QUEST);
                 minCreatures = Math.min(minCreatures, 7 - counters);
             }
             if (this.attackers.size() >= minCreatures) {
@@ -799,7 +799,7 @@ public class ComputerUtilAttack {
                         }
                     }
                     // if enough damage: switch to next planeswalker or player
-                    if (damage >= pw.getCounters(Counters.LOYALTY)) {
+                    if (damage >= pw.getCounters(CounterType.LOYALTY)) {
                         combat.setCurrentDefenderNumber(combat.getCurrentDefenderNumber() - 1);
                     }
                 }
@@ -892,7 +892,7 @@ public class ComputerUtilAttack {
                     && CombatUtil.canBlock(attacker, defender)) { 
                 numberOfPossibleBlockers += 1;
                 if (isWorthLessThanAllKillers && CombatUtil.canDestroyAttacker(attacker, defender, combat, false)
-                        && !(attacker.hasKeyword("Undying") && attacker.getCounters(Counters.P1P1) == 0)) {
+                        && !(attacker.hasKeyword("Undying") && attacker.getCounters(CounterType.P1P1) == 0)) {
                     canBeKilledByOne = true; // there is a single creature on
                                              // the battlefield that can kill
                                              // the creature

@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 import forge.Card;
 
 import forge.Command;
-import forge.Counters;
+import forge.CounterType;
 import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
@@ -309,7 +309,7 @@ class CardFactoryArtifacts {
 
                 @Override
                 public void execute() {
-                    card.addCounter(Counters.CHARGE, card.getMultiKickerMagnitude());
+                    card.addCounter(CounterType.CHARGE, card.getMultiKickerMagnitude());
                     card.setMultiKickerMagnitude(0);
                 }
             };

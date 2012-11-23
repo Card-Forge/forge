@@ -25,7 +25,7 @@ import com.google.common.base.Predicate;
 import forge.Card;
 
 import forge.CardLists;
-import forge.Counters;
+import forge.CounterType;
 import forge.Singletons;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
@@ -217,7 +217,7 @@ public class EndOfTurn extends Phase {
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return c.getName().equals("Lighthouse Chronologist") && (c.getCounters(Counters.LEVEL) >= 7);
+                return c.getName().equals("Lighthouse Chronologist") && (c.getCounters(CounterType.LEVEL) >= 7);
             }
         });
 

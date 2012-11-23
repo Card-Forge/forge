@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.Card;
-import forge.Counters;
+import forge.CounterType;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
@@ -30,7 +30,7 @@ public class CountersMoveEffect extends SpellEffect {
         }
         final List<Card> tgtCards = getTargetCards(sa);
 
-        final Counters cType = Counters.valueOf(sa.getParam("CounterType"));
+        final CounterType cType = CounterType.valueOf(sa.getParam("CounterType"));
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
 
         sb.append("Move ").append(amount).append(" ").append(cType.getName()).append(" counter");
@@ -48,7 +48,7 @@ public class CountersMoveEffect extends SpellEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
 
-        final Counters cType = Counters.valueOf(sa.getParam("CounterType"));
+        final CounterType cType = CounterType.valueOf(sa.getParam("CounterType"));
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
 
         Card source = null;
@@ -74,7 +74,7 @@ public class CountersMoveEffect extends SpellEffect {
                 if (source.getCounters(cType) >= amount) {
                     if (!dest.hasKeyword("CARDNAME can't have counters placed on it.")
                             && !(dest.hasKeyword("CARDNAME can't have -1/-1 counters placed on it.") && cType
-                                    .equals(Counters.M1M1))) {
+                                    .equals(CounterType.M1M1))) {
                         dest.addCounter(cType, amount);
                         source.subtractCounter(cType, amount);
                     }

@@ -35,7 +35,7 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.Command;
 import forge.Constant;
-import forge.Counters;
+import forge.CounterType;
 import forge.GameActionUtil;
 import forge.GameEntity;
 import forge.Singletons;
@@ -2247,10 +2247,10 @@ public class CombatUtil {
 
         if (((attacker.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(attacker) && !withoutAbilities)) && !(defender
                 .hasKeyword("Wither") || defender.hasKeyword("Infect")))
-                || (attacker.hasKeyword("Persist") && !attacker.canHaveCountersPlacedOnIt(Counters.M1M1) && (attacker
-                        .getCounters(Counters.M1M1) == 0))
-                || (attacker.hasKeyword("Undying") && !attacker.canHaveCountersPlacedOnIt(Counters.P1P1) && (attacker
-                        .getCounters(Counters.P1P1) == 0))) {
+                || (attacker.hasKeyword("Persist") && !attacker.canHaveCountersPlacedOnIt(CounterType.M1M1) && (attacker
+                        .getCounters(CounterType.M1M1) == 0))
+                || (attacker.hasKeyword("Undying") && !attacker.canHaveCountersPlacedOnIt(CounterType.P1P1) && (attacker
+                        .getCounters(CounterType.P1P1) == 0))) {
             return false;
         }
         if (checkDestroyAttackerTrigger(attacker, defender) && !attacker.hasKeyword("Indestructible")) {
@@ -2394,10 +2394,10 @@ public class CombatUtil {
 
         if (((defender.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(defender) && !withoutAbilities)) && !(attacker
                 .hasKeyword("Wither") || attacker.hasKeyword("Infect")))
-                || (defender.hasKeyword("Persist") && !defender.canHaveCountersPlacedOnIt(Counters.M1M1) && (defender
-                        .getCounters(Counters.M1M1) == 0))
-                || (defender.hasKeyword("Undying") && !defender.canHaveCountersPlacedOnIt(Counters.P1P1) && (defender
-                        .getCounters(Counters.P1P1) == 0))) {
+                || (defender.hasKeyword("Persist") && !defender.canHaveCountersPlacedOnIt(CounterType.M1M1) && (defender
+                        .getCounters(CounterType.M1M1) == 0))
+                || (defender.hasKeyword("Undying") && !defender.canHaveCountersPlacedOnIt(CounterType.P1P1) && (defender
+                        .getCounters(CounterType.P1P1) == 0))) {
             return false;
         }
 

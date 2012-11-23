@@ -42,7 +42,7 @@ import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
-import forge.Counters;
+import forge.CounterType;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.CardCharacteristics;
@@ -1124,7 +1124,7 @@ public class CardFactoryUtil {
                 final Card c = Singletons.getModel().getGame().getAction().exile(sourceCard);
 
                 int counters = AbilityFactory.calculateAmount(c, timeCounters, this);
-                c.addCounter(Counters.TIME, counters);
+                c.addCounter(CounterType.TIME, counters);
 
                 StringBuilder sb = new StringBuilder();
                 sb.append(this.getActivatingPlayer()).append(" has suspended ");
@@ -1154,12 +1154,12 @@ public class CardFactoryUtil {
      * @param c
      *            a {@link forge.Card} object.
      * @param type
-     *            a {@link forge.Counters} object.
+     *            a {@link forge.CounterType} object.
      * @param n
      *            a int.
      * @return a {@link forge.Command} object.
      */
-    public static Command entersBattleFieldWithCounters(final Card c, final Counters type, final int n) {
+    public static Command entersBattleFieldWithCounters(final Card c, final CounterType type, final int n) {
         final Command addCounters = new Command() {
             private static final long serialVersionUID = 4825430555490333062L;
 
@@ -1183,7 +1183,7 @@ public class CardFactoryUtil {
      * @return a {@link forge.Command} object.
      */
     public static Command fading(final Card sourceCard, final int power) {
-        return entersBattleFieldWithCounters(sourceCard, Counters.FADE, power);
+        return entersBattleFieldWithCounters(sourceCard, CounterType.FADE, power);
     } // fading
 
     /**
@@ -1198,7 +1198,7 @@ public class CardFactoryUtil {
      * @return a {@link forge.Command} object.
      */
     public static Command vanishing(final Card sourceCard, final int power) {
-        return entersBattleFieldWithCounters(sourceCard, Counters.TIME, power);
+        return entersBattleFieldWithCounters(sourceCard, CounterType.TIME, power);
     } // vanishing
 
     // List<Card> choices are the only cards the user can successful select
@@ -1342,7 +1342,7 @@ public class CardFactoryUtil {
                         && card.canBeTargetedBy(ability)) {
                     ability.setTargetCard(card2);
                     final StringBuilder sb = new StringBuilder();
-                    sb.append("Put ").append(card.getCounters(Counters.P1P1));
+                    sb.append("Put ").append(card.getCounters(CounterType.P1P1));
                     sb.append(" +1/+1 counter/s from ").append(card);
                     sb.append(" on ").append(card2);
                     ability.setStackDescription(sb.toString());
@@ -2425,12 +2425,12 @@ public class CardFactoryUtil {
         }
         // Count$CardCounters.<counterType>
         if (sq[0].contains("CardCounters")) {
-            return CardFactoryUtil.doXMath(c.getCounters(Counters.getType(sq[1])), m, c);
+            return CardFactoryUtil.doXMath(c.getCounters(CounterType.getType(sq[1])), m, c);
         }
         // Count$TotalCounters.<counterType>_<valid>
         if (sq[0].contains("TotalCounters")) {
             final String[] restrictions = l[0].split("_");
-            final Counters cType = Counters.getType(restrictions[1]);
+            final CounterType cType = CounterType.getType(restrictions[1]);
             final String[] validFilter = restrictions[2].split(",");
             List<Card> validCards = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
             validCards = CardLists.getValidCards(validCards, validFilter, cardController, c);
@@ -2445,7 +2445,7 @@ public class CardFactoryUtil {
             return CardFactoryUtil.doXMath(c.getMultiKickerMagnitude(), m, c);
         }
         if (sq[0].contains("NumCounters")) {
-            final int num = c.getCounters(Counters.getType(sq[1]));
+            final int num = c.getCounters(CounterType.getType(sq[1]));
             return CardFactoryUtil.doXMath(num, m, c);
         }
 
@@ -3442,13 +3442,13 @@ public class CardFactoryUtil {
      * </p>
      * 
      * @param c
-     *            a {@link forge.Counters} object.
+     *            a {@link forge.CounterType} object.
      * @return a boolean.
      */
-    public static boolean isNegativeCounter(final Counters c) {
-        return (c == Counters.AGE) || (c == Counters.BLAZE) || (c == Counters.BRIBERY) || (c == Counters.DOOM)
-                || (c == Counters.ICE) || (c == Counters.M1M1) || (c == Counters.M0M2) || (c == Counters.M0M1)
-                || (c == Counters.TIME);
+    public static boolean isNegativeCounter(final CounterType c) {
+        return (c == CounterType.AGE) || (c == CounterType.BLAZE) || (c == CounterType.BRIBERY) || (c == CounterType.DOOM)
+                || (c == CounterType.ICE) || (c == CounterType.M1M1) || (c == CounterType.M0M2) || (c == CounterType.M0M1)
+                || (c == CounterType.TIME);
     }
 
     /**
@@ -4254,7 +4254,7 @@ public class CardFactoryUtil {
                 String[] splitkw = parse.split(":");
 
                 String desc = "CARDNAME enters the battlefield with " + splitkw[2] + " "
-                        + Counters.valueOf(splitkw[1]).getName() + " counters on it.";
+                        + CounterType.valueOf(splitkw[1]).getName() + " counters on it.";
                 String extraparams = "";
                 String amount = splitkw[2];
                 if (splitkw.length > 3) {
@@ -4446,9 +4446,9 @@ public class CardFactoryUtil {
                 @Override
                 public void execute() {
                     if (card.isCreature()) {
-                        card.addCounter(Counters.P1P1, card.getSunburstValue());
+                        card.addCounter(CounterType.P1P1, card.getSunburstValue());
                     } else {
-                        card.addCounter(Counters.CHARGE, card.getSunburstValue());
+                        card.addCounter(CounterType.CHARGE, card.getSunburstValue());
                     }
 
                 }
@@ -4594,7 +4594,7 @@ public class CardFactoryUtil {
                                 : Integer.parseInt(magnitude);
                         final int totalCounters = numCreatures[0] * multiplier;
 
-                        card.addCounter(Counters.P1P1, totalCounters);
+                        card.addCounter(CounterType.P1P1, totalCounters);
 
                     }
                 };
@@ -4617,7 +4617,7 @@ public class CardFactoryUtil {
                     @Override
                     public void resolve() {
                         final Card card2 = this.getTargetCard();
-                        card2.addCounter(Counters.P1P1, this.getSourceCard().getCounters(Counters.P1P1));
+                        card2.addCounter(CounterType.P1P1, this.getSourceCard().getCounters(CounterType.P1P1));
                     } // resolve()
                 };
 
@@ -4639,7 +4639,7 @@ public class CardFactoryUtil {
                                 ability.setTargetCard(CardFactoryUtil.getBestCreatureAI(choices));
 
                                 if (ability.getTargetCard() != null) {
-                                    ability.setStackDescription("Put " + card.getCounters(Counters.P1P1)
+                                    ability.setStackDescription("Put " + card.getCounters(CounterType.P1P1)
                                             + " +1/+1 counter/s from " + card + " on " + ability.getTargetCard());
                                     Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 

@@ -3,7 +3,7 @@ package forge.card.abilityfactory.ai;
 import java.util.Random;
 
 import forge.Card;
-import forge.Counters;
+import forge.CounterType;
 import forge.Singletons;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cost.Cost;
@@ -73,7 +73,7 @@ public class CountersRemoveAi extends SpellAiLogic {
         }
 
         if (!type.matches("Any")) {
-            final int currCounters = sa.getSourceCard().getCounters(Counters.valueOf(type));
+            final int currCounters = sa.getSourceCard().getCounters(CounterType.valueOf(type));
             if (currCounters < 1) {
                 return false;
             }

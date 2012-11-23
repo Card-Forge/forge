@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import forge.Card;
-import forge.Counters;
+import forge.CounterType;
 import forge.Singletons;
 import forge.card.CardManaCost;
 import forge.card.mana.ManaCost;
@@ -216,7 +216,7 @@ public class Cost {
             final String description = splitStr.length > 3 ? splitStr[3] : null;
             final ZoneType zone = splitStr.length > 4 ? ZoneType.smartValueOf(splitStr[4]) : ZoneType.Battlefield;
 
-            this.costParts.add(new CostRemoveCounter(splitStr[0], Counters.valueOf(splitStr[1]), type, description, zone));
+            this.costParts.add(new CostRemoveCounter(splitStr[0], CounterType.valueOf(splitStr[1]), type, description, zone));
         }
 
         while (parse.contains(Cost.ADD_STR)) {
@@ -227,7 +227,7 @@ public class Cost {
             final String type = splitStr.length > 2 ? splitStr[2] : "CARDNAME";
             final String description = splitStr.length > 3 ? splitStr[3] : null;
 
-            this.costParts.add(new CostPutCounter(splitStr[0], Counters.valueOf(splitStr[1]), type, description));
+            this.costParts.add(new CostPutCounter(splitStr[0], CounterType.valueOf(splitStr[1]), type, description));
         }
 
         // While no card has "PayLife<2> PayLife<3> there might be a card that

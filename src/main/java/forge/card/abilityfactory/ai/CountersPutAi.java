@@ -8,7 +8,7 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Counters;
+import forge.CounterType;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
@@ -141,7 +141,7 @@ public class CountersPutAi extends SpellAiLogic {
                 return false;
             }
 
-            final int currCounters = cards.get(0).getCounters(Counters.valueOf(type));
+            final int currCounters = cards.get(0).getCounters(CounterType.valueOf(type));
             // each non +1/+1 counter on the card is a 10% chance of not
             // activating this ability.
 
