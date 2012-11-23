@@ -12949,10 +12949,12 @@ src/main/java/forge/game/MatchStartHelper.java -text
 src/main/java/forge/game/PlayerStartConditions.java -text
 src/main/java/forge/game/event/AddCounterEvent.java -text
 src/main/java/forge/game/event/Event.java -text
+src/main/java/forge/game/event/FlipCoinEvent.java -text
 src/main/java/forge/game/event/LandPlayedEvent.java -text
 src/main/java/forge/game/event/PoisonCounterEvent.java -text
 src/main/java/forge/game/event/RemoveCounterEvent.java -text
 src/main/java/forge/game/event/SetTappedEvent.java -text
+src/main/java/forge/game/event/ShuffleEvent.java -text
 src/main/java/forge/game/event/SpellResolvedEvent.java -text
 src/main/java/forge/game/event/package-info.java -text
 src/main/java/forge/game/limited/BoosterDeck.java -text

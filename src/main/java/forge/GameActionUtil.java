@@ -50,6 +50,7 @@ import forge.control.input.InputPayManaCostAbility;
 import forge.control.input.InputPayReturnCost;
 import forge.control.input.InputPaySacCost;
 import forge.game.GameLossReason;
+import forge.game.event.FlipCoinEvent;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -611,7 +612,7 @@ public final class GameActionUtil {
         final String winMsg = winFlip ? " wins flip." : " loses flip.";
 
         // Play the Flip A Coin sound
-        Singletons.getControl().getSoundSystem().play(SoundEffectType.FlipCoin);
+        Singletons.getModel().getGame().getEvents().post(new FlipCoinEvent());
 
         JOptionPane.showMessageDialog(null, source.getName() + " - " + caller + winMsg, source.getName(),
                 JOptionPane.PLAIN_MESSAGE);

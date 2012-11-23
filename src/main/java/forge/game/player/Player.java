@@ -57,6 +57,7 @@ import forge.game.GameState;
 import forge.game.GlobalRuleChange;
 import forge.game.event.LandPlayedEvent;
 import forge.game.event.PoisonCounterEvent;
+import forge.game.event.ShuffleEvent;
 import forge.game.event.SpellResolvedEvent;
 import forge.game.phase.PhaseHandler;
 import forge.game.zone.PlayerZone;
@@ -1810,7 +1811,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().runTrigger(TriggerType.Shuffled, runParams);
 
         // Play the shuffle sound
-        Singletons.getControl().getSoundSystem().play(SoundEffectType.Shuffle);
+        Singletons.getModel().getGame().getEvents().post(new ShuffleEvent());
     } // shuffle
       // //////////////////////////////
 
