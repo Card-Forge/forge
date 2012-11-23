@@ -977,7 +977,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         if (!this.hasKeyword("You can't get poison counters")) {
             this.poisonCounters += num;
             
-            game.getEvents().post(new PoisonCounterEvent(this, source));
+            game.getEvents().post(new PoisonCounterEvent(this, source, num));
             game.getGameLog().add("Poison", this + " receives a poison counter from " + source, 3);
 
             this.updateObservers();
