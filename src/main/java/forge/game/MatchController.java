@@ -142,19 +142,10 @@ public class MatchController {
             // Update observers
             currentGame.getGameLog().updateObservers();
 
-            
-            for( Player p : currentGame.getRegisteredPlayers() ) {
-                p.updateObservers();
-                p.getZone(ZoneType.Hand).updateObservers();
-            }
-
             CMatchUI.SINGLETON_INSTANCE.setCard(Singletons.getControl().getPlayer().getCardsIn(ZoneType.Hand).get(0));
         } catch (Exception e) {
             ErrorViewer.showError(e);
         }
-        // bf.updateObservers();
-        // player.updateObservers();
-        // player.getZone(ZoneType.Hand).updateObservers();
 
     }
 

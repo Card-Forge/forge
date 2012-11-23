@@ -279,7 +279,9 @@ public final class GuiDisplayUtil {
         for (final Card card : diff) {
             panelList.add(p.addCard(card));
         }
-        p.doLayout();
+        if (!diff.isEmpty()) {
+            p.doLayout();
+        }
         for (final forge.view.arcane.CardPanel toPanel : panelList) {
             p.scrollRectToVisible(new Rectangle(toPanel.getCardX(), toPanel.getCardY(), toPanel
                     .getCardWidth(), toPanel.getCardHeight()));
