@@ -56,6 +56,7 @@ import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
 import forge.game.GlobalRuleChange;
 import forge.game.event.AddCounterEvent;
+import forge.game.event.SetTappedEvent;
 import forge.game.phase.Combat;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -4901,7 +4902,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.setTapped(true);
 
         // Play the Tap sound
-        Singletons.getControl().getSoundSystem().play(SoundEffectType.Tap);
+        Singletons.getModel().getGame().getEvents().post(new SetTappedEvent(true));
     }
 
     /**
@@ -4917,7 +4918,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Untaps, runParams);
 
             // Play the Untap sound
-            Singletons.getControl().getSoundSystem().play(SoundEffectType.Untap);
+            Singletons.getModel().getGame().getEvents().post(new SetTappedEvent(false));
         }
 
         for (final Command var : this.untapCommandList) {

@@ -12,6 +12,7 @@ import forge.game.event.Event;
 import forge.game.event.LandPlayedEvent;
 import forge.game.event.PoisonCounterEvent;
 import forge.game.event.RemoveCounterEvent;
+import forge.game.event.SetTappedEvent;
 import forge.game.event.SpellResolvedEvent;
 
 /** 
@@ -48,6 +49,9 @@ public class EventVisualizer {
             if (((RemoveCounterEvent) evt).Amount == 0) {
                 return null;
             }
+        }
+        if (evt instanceof SetTappedEvent) {
+            return getSoundEffectForTapState(((SetTappedEvent) evt).Tapped);
         }
 
         return fromMap;
@@ -91,9 +95,22 @@ public class EventVisualizer {
     }
 
     /**
+     * Plays the sound corresponding to the change of the card's tapped state
+     * (when a card is tapped or untapped).
+     * 
+     * @param tapped_state if true, the "tap" sound is played; otherwise, the
+     * "untap" sound is played
+     * @return the sound effect type
+     */
+    public static SoundEffectType getSoundEffectForTapState(boolean tapped_state) {
+        return tapped_state ? SoundEffectType.Tap : SoundEffectType.Untap;
+    }
+    
+    /**
      * Plays the sound corresponding to the land type when the land is played.
      *
      * @param land the land card that was played
+     * @return the sound effect type
      */
     public static SoundEffectType getSoundEffectForLand(final Card land) {
         if (land == null) {
@@ -136,9 +153,7 @@ public class EventVisualizer {
      * Play a specific sound effect based on card's name.
      *
      * @param c the card to play the sound effect for.
-     * @return true if the special effect was found and played, otherwise
-     *         false (in which case the type-based FX will be played, if
-     *         applicable).
+     * @return the sound effect type
      */
     private static SoundEffectType getSpecificCardEffect(final Card c) {
         // Implement sound effects for specific cards here, if necessary.
