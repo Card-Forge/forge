@@ -56,6 +56,8 @@ import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
 import forge.game.GlobalRuleChange;
 import forge.game.event.AddCounterEvent;
+import forge.game.event.CardEquippedEvent;
+import forge.game.event.RemoveCounterEvent;
 import forge.game.event.SetTappedEvent;
 import forge.game.phase.Combat;
 import forge.game.player.ComputerUtil;
@@ -1372,7 +1374,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
             // Play the Subtract Counter sound
             if (n > 0) {
-                Singletons.getControl().getSoundSystem().play(SoundEffectType.RemoveCounter);
+                Singletons.getModel().getGame().getEvents().post(new RemoveCounterEvent(n));
             }
 
             this.updateObservers();
@@ -3872,7 +3874,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.equip();
 
         // Play the Equip sound
-        Singletons.getControl().getSoundSystem().play(SoundEffectType.Equip);
+        Singletons.getModel().getGame().getEvents().post(new CardEquippedEvent());
     }
 
     /**

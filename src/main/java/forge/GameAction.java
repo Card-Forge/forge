@@ -59,6 +59,9 @@ import forge.game.GameState;
 import forge.game.GlobalRuleChange;
 import forge.game.MatchController;
 import forge.game.event.CardDestroyedEvent;
+import forge.game.event.CardRegeneratedEvent;
+import forge.game.event.CardSacrificedEvent;
+import forge.game.event.DuelOutcomeEvent;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.player.PlayerType;
@@ -1053,11 +1056,8 @@ public class GameAction {
                 game.getStack().unfreezeStack();
             }
             // Play the win/lose sound
-            if (match.getLastGameOutcome().isWinner(Singletons.getControl().getPlayer().getLobbyPlayer())) {
-                Singletons.getControl().getSoundSystem().play(SoundEffectType.WinDuel);
-            } else {
-                Singletons.getControl().getSoundSystem().play(SoundEffectType.LoseDuel);
-            }
+            boolean humanWon = match.getLastGameOutcome().isWinner(Singletons.getControl().getPlayer().getLobbyPlayer());
+            Singletons.getModel().getGame().getEvents().post(new DuelOutcomeEvent(humanWon));
             return;
         }
 
@@ -1334,7 +1334,7 @@ public class GameAction {
         this.sacrificeDestroy(c);
 
         // Play the Sacrifice sound
-        Singletons.getControl().getSoundSystem().play(SoundEffectType.Sacrifice);
+        Singletons.getModel().getGame().getEvents().post(new CardSacrificedEvent());
 
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
@@ -1551,7 +1551,7 @@ public class GameAction {
             game.getCombat().removeFromCombat(c);
 
             // Play the Regen sound
-            Singletons.getControl().getSoundSystem().play(SoundEffectType.Regen);
+            Singletons.getModel().getGame().getEvents().post(new CardRegeneratedEvent());
 
             return false;
         }

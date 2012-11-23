@@ -10,6 +10,12 @@ import forge.card.spellability.SpellAbility;
 import forge.game.event.AddCounterEvent;
 import forge.game.event.CardDamagedEvent;
 import forge.game.event.CardDestroyedEvent;
+import forge.game.event.CardDiscardedEvent;
+import forge.game.event.CardEquippedEvent;
+import forge.game.event.CardRegeneratedEvent;
+import forge.game.event.CardSacrificedEvent;
+import forge.game.event.DrawCardEvent;
+import forge.game.event.DuelOutcomeEvent;
 import forge.game.event.EndOfTurnEvent;
 import forge.game.event.Event;
 import forge.game.event.FlipCoinEvent;
@@ -32,13 +38,18 @@ public class EventVisualizer {
     public EventVisualizer() { 
         matchTable.put(PoisonCounterEvent.class, SoundEffectType.Poison);
         matchTable.put(AddCounterEvent.class, SoundEffectType.AddCounter);
-        matchTable.put(RemoveCounterEvent.class, SoundEffectType.RemoveCounter);
-        matchTable.put(ShuffleEvent.class, SoundEffectType.Shuffle);
-        matchTable.put(FlipCoinEvent.class, SoundEffectType.FlipCoin);
-        matchTable.put(EndOfTurnEvent.class, SoundEffectType.EndOfTurn);
-        matchTable.put(CardDestroyedEvent.class, SoundEffectType.Destroy);
         matchTable.put(CardDamagedEvent.class, SoundEffectType.Damage);
+        matchTable.put(CardDestroyedEvent.class, SoundEffectType.Destroy);
+        matchTable.put(CardDiscardedEvent.class, SoundEffectType.Discard);
+        matchTable.put(DrawCardEvent.class, SoundEffectType.Draw);
+        matchTable.put(EndOfTurnEvent.class, SoundEffectType.EndOfTurn);
+        matchTable.put(CardEquippedEvent.class, SoundEffectType.Equip);
+        matchTable.put(FlipCoinEvent.class, SoundEffectType.FlipCoin);
         matchTable.put(LifeLossEvent.class, SoundEffectType.LifeLoss);
+        matchTable.put(CardRegeneratedEvent.class, SoundEffectType.Regen);
+        matchTable.put(RemoveCounterEvent.class, SoundEffectType.RemoveCounter);
+        matchTable.put(CardSacrificedEvent.class, SoundEffectType.Sacrifice);
+        matchTable.put(ShuffleEvent.class, SoundEffectType.Shuffle);
     }
     
     
@@ -65,10 +76,23 @@ public class EventVisualizer {
         if (evt instanceof SetTappedEvent) {
             return getSoundEffectForTapState(((SetTappedEvent) evt).Tapped);
         }
+        if (evt instanceof DuelOutcomeEvent) {
+            return getSoundEffectForDuelOutcome(((DuelOutcomeEvent) evt).humanWonTheDuel);
+        }
 
         return fromMap;
     }
     
+    /**
+     * Plays the sound corresponding to the outcome of the duel.
+     * 
+     * @param humanWonTheDuel true if the human won the duel, false otherwise.
+     * @return the sound effect played
+     */
+    public SoundEffectType getSoundEffectForDuelOutcome(boolean humanWonTheDuel) {
+        return humanWonTheDuel ? SoundEffectType.WinDuel : SoundEffectType.LoseDuel;
+    }
+
     /**
      * Plays the sound corresponding to the card type/color when the card
      * ability resolves on the stack.

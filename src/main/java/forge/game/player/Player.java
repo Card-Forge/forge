@@ -55,6 +55,8 @@ import forge.card.trigger.TriggerType;
 import forge.game.GameLossReason;
 import forge.game.GameState;
 import forge.game.GlobalRuleChange;
+import forge.game.event.CardDiscardedEvent;
+import forge.game.event.DrawCardEvent;
 import forge.game.event.LandPlayedEvent;
 import forge.game.event.PoisonCounterEvent;
 import forge.game.event.ShuffleEvent;
@@ -1271,7 +1273,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Play the Draw sound
-        Singletons.getControl().getSoundSystem().play(SoundEffectType.Draw);
+        Singletons.getModel().getGame().getEvents().post(new DrawCardEvent());
 
         return drawn;
     }
@@ -1624,7 +1626,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             game.getAction().moveToGraveyard(c);
 
             // Play the Discard sound
-            Singletons.getControl().getSoundSystem().play(SoundEffectType.Discard);
+            Singletons.getModel().getGame().getEvents().post(new CardDiscardedEvent());
         }
 
         // Run triggers

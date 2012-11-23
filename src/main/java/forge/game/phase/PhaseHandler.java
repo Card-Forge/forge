@@ -30,6 +30,7 @@ import forge.Singletons;
 import forge.card.trigger.TriggerType;
 import forge.game.GameState;
 import forge.game.event.EndOfTurnEvent;
+import forge.game.event.ManaBurnEvent;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.properties.ForgePreferences.FPref;
@@ -427,7 +428,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 p.loseLife(burn);
 
                 // Play the Mana Burn sound
-                Singletons.getControl().getSoundSystem().play(SoundEffectType.ManaBurn);
+                Singletons.getModel().getGame().getEvents().post(new ManaBurnEvent());
             }
             p.updateObservers();
         }
