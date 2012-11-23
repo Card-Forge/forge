@@ -18,7 +18,7 @@ public class SoundSystem {
     private final static IAudioClip emptySound = new NoSoundClip();
     private final static Map<SoundEffectType, IAudioClip> loadedClips = new EnumMap<SoundEffectType, IAudioClip>(SoundEffectType.class);
     
-    private final EventVisualilzer visualizer = new EventVisualilzer();
+    private final EventVisualizer visualizer = new EventVisualizer();
     
     protected IAudioClip fetchResource(SoundEffectType type) {
 
@@ -31,7 +31,7 @@ public class SoundSystem {
             clip = AudioClip.fileExists(resource) ? new AudioClip(resource) : emptySound;
             loadedClips.put(type, clip);
         }
-        return null;
+        return clip;
     }
     
     
@@ -69,7 +69,7 @@ public class SoundSystem {
     }
     
     @Subscribe
-    public void recieveEvent(Event evt) {
+    public void receiveEvent(Event evt) {
         SoundEffectType effect = visualizer.getSoundForEvent(evt);
         if ( null == effect ) return;
         boolean isSync = visualizer.isSyncSound(evt);

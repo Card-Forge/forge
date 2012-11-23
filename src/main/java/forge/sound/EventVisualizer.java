@@ -7,21 +7,25 @@ import java.util.Map;
 
 import forge.Card;
 import forge.card.spellability.SpellAbility;
+import forge.game.event.AddCounterEvent;
 import forge.game.event.Event;
 import forge.game.event.LandPlayedEvent;
 import forge.game.event.PoisonCounterEvent;
+import forge.game.event.RemoveCounterEvent;
 import forge.game.event.SpellResolvedEvent;
 
 /** 
  * This class is in charge of converting any forge.game.event.Event to a SoundEffectType
  *
  */
-public class EventVisualilzer {
+public class EventVisualizer {
 
     final static Map<Class<?>, SoundEffectType> matchTable = new HashMap<Class<?>, SoundEffectType>();
     
-    public EventVisualilzer() { 
+    public EventVisualizer() { 
         matchTable.put(PoisonCounterEvent.class, SoundEffectType.Poison);
+        matchTable.put(AddCounterEvent.class, SoundEffectType.AddCounter);
+        matchTable.put(RemoveCounterEvent.class, SoundEffectType.RemoveCounter);
     }
     
     
@@ -29,11 +33,22 @@ public class EventVisualilzer {
         SoundEffectType fromMap = matchTable.get(evt.getClass());
 
         // call methods copied from Utils here
-        if( evt instanceof SpellResolvedEvent ) {
+        if (evt instanceof SpellResolvedEvent) {
             return getSoundEffectForResolve(((SpellResolvedEvent) evt).Source, ((SpellResolvedEvent) evt).Spell);
         }
-        if ( evt instanceof LandPlayedEvent )
+        if (evt instanceof LandPlayedEvent) {
             return getSoundEffectForLand(((LandPlayedEvent) evt).Land);
+        }
+        if (evt instanceof AddCounterEvent) {
+            if (((AddCounterEvent) evt).Amount == 0) {
+                return null;
+            }
+        }
+        if (evt instanceof RemoveCounterEvent) {
+            if (((RemoveCounterEvent) evt).Amount == 0) {
+                return null;
+            }
+        }
 
         return fromMap;
     }

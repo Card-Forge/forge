@@ -55,6 +55,7 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
 import forge.game.GlobalRuleChange;
+import forge.game.event.AddCounterEvent;
 import forge.game.phase.Combat;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -1259,9 +1260,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
 
         // play the Add Counter sound
-        if (n > 0) {
-            Singletons.getControl().getSoundSystem().play(SoundEffectType.AddCounter);
-        }
+        Singletons.getModel().getGame().getEvents().post(new AddCounterEvent(n));
 
         this.updateObservers();
     }
@@ -1297,9 +1296,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // play the Add Counter sound
-        if (n > 0) {
-            Singletons.getControl().getSoundSystem().play(SoundEffectType.AddCounter);
-        }
+        Singletons.getModel().getGame().getEvents().post(new AddCounterEvent(n));
 
         this.updateObservers();
     }

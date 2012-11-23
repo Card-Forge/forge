@@ -12947,9 +12947,11 @@ src/main/java/forge/game/GlobalRuleChange.java -text
 src/main/java/forge/game/MatchController.java -text
 src/main/java/forge/game/MatchStartHelper.java -text
 src/main/java/forge/game/PlayerStartConditions.java -text
+src/main/java/forge/game/event/AddCounterEvent.java -text
 src/main/java/forge/game/event/Event.java -text
 src/main/java/forge/game/event/LandPlayedEvent.java -text
 src/main/java/forge/game/event/PoisonCounterEvent.java -text
+src/main/java/forge/game/event/RemoveCounterEvent.java -text
 src/main/java/forge/game/event/SpellResolvedEvent.java -text
 src/main/java/forge/game/event/package-info.java -text
 src/main/java/forge/game/limited/BoosterDeck.java -text
@@ -13271,7 +13273,7 @@ src/main/java/forge/quest/io/ReadPriceList.java svneol=native#text/plain
 src/main/java/forge/quest/io/package-info.java svneol=native#text/plain
 src/main/java/forge/quest/package-info.java svneol=native#text/plain
 src/main/java/forge/sound/AudioClip.java -text
-src/main/java/forge/sound/EventVisualilzer.java -text
+src/main/java/forge/sound/EventVisualizer.java -text
 src/main/java/forge/sound/IAudioClip.java -text
 src/main/java/forge/sound/NoSoundClip.java -text
 src/main/java/forge/sound/SoundEffectType.java -text
