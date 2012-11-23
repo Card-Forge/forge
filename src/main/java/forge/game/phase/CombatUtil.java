@@ -798,6 +798,11 @@ public class CombatUtil {
         if (cntAttackers > 0 && c.hasKeyword("CARDNAME can only attack alone.")) {
             return false;
         }
+        
+        if (cntAttackers > 0 
+                && Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyOneAttackerACombat)) {
+            return false;
+        }
 
         if ((cntAttackers > 0 || c.getController().getAttackedWithCreatureThisTurn())
                 && Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyOneAttackerATurn)) {
