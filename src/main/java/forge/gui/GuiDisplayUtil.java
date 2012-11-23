@@ -18,6 +18,7 @@
 package forge.gui;
 
 import java.awt.Color;
+import java.awt.Rectangle;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -274,14 +275,19 @@ public final class GuiDisplayUtil {
         diff = new ArrayList<Card>(c);
         diff.removeAll(tmp);
 
-        forge.view.arcane.CardPanel toPanel = null;
+        List<forge.view.arcane.CardPanel> panelList = new ArrayList<forge.view.arcane.CardPanel>();
         for (final Card card : diff) {
-            toPanel = p.addCard(card);
+            panelList.add(p.addCard(card));
+        }
+        p.doLayout();
+        for (final forge.view.arcane.CardPanel toPanel : panelList) {
+            p.scrollRectToVisible(new Rectangle(toPanel.getCardX(), toPanel.getCardY(), toPanel
+                    .getCardWidth(), toPanel.getCardHeight()));
             Animation.moveCard(toPanel);
         }
 
         for (final Card card : c) {
-            toPanel = p.getCardPanel(card.getUniqueNumber());
+            final forge.view.arcane.CardPanel toPanel = p.getCardPanel(card.getUniqueNumber());
             if (card.isTapped()) {
                 toPanel.setTapped(true);
                 toPanel.setTappedAngle(forge.view.arcane.CardPanel.TAPPED_ANGLE);

@@ -167,25 +167,7 @@ public class EndOfTurn extends Phase {
                 Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(change);
 
             }
-            if (c.getName().equals("Erg Raiders") && !c.getDamageHistory().getCreatureAttackedThisTurn() && !c.hasSickness()
-                    && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(c.getController())) {
-                final Card raider = c;
-                final SpellAbility change = new Ability(raider, "0") {
-                    @Override
-                    public void resolve() {
-                        if (raider.isInPlay()) {
-                            raider.getController().addDamage(2, raider);
-                        }
-                    }
-                };
-                final StringBuilder sb = new StringBuilder();
-                sb.append(raider).append(" deals 2 damage to controller.");
-                change.setStackDescription(sb.toString());
-                change.setDescription(sb.toString());
 
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(change);
-
-            }
             if (c.hasKeyword("At the beginning of your end step, return CARDNAME to its owner's hand.")
                     && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(c.getController())) {
                 final Card source = c;

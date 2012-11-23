@@ -26,7 +26,7 @@ public class EventVisualilzer {
     
     
     public final SoundEffectType getSoundForEvent(Event evt) {
-        SoundEffectType fromMap = matchTable.get(evt);
+        SoundEffectType fromMap = matchTable.get(evt.getClass());
 
         // call methods copied from Utils here
         if( evt instanceof SpellResolvedEvent ) {
