@@ -63,7 +63,7 @@ public abstract class GenerateColoredDeckBase {
     protected float getLandsPercentage() { return 0.44f; }
     protected float getCreatPercentage() { return 0.34f; }
     protected float getSpellPercentage() { return 0.22f; }
-    
+
     StringBuilder tmpDeck = new StringBuilder();
 
 //    protected final float landsPercentage = 0.42f;
@@ -87,7 +87,7 @@ public abstract class GenerateColoredDeckBase {
     protected void addCreaturesAndSpells(int size, List<FilterCMC> cmcLevels, int[] cmcAmounts, PlayerType pt) {
         final Iterable<CardPrinted> cards = selectCardsOfMatchingColorForPlayer(pt);
         // build subsets based on type
-        
+
         final Iterable<CardPrinted> creatures = Iterables.filter(cards, Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, CardPrinted.FN_GET_RULES));
         final int creatCnt = (int) (getCreatPercentage() * size);
         tmpDeck.append("Creature Count:").append(creatCnt).append("\n");
@@ -200,7 +200,7 @@ public abstract class GenerateColoredDeckBase {
 
         for (int i = 0; i < cmcAmounts.length; i++) {
             Iterable<CardPrinted> matchingCards = Iterables.filter(source, Predicates.compose(cmcLevels.get(i), CardPrinted.FN_GET_RULES));
-            curved.addAll( Aggregates.random(matchingCards, cmcAmounts[i]));
+            curved.addAll(Aggregates.random(matchingCards, cmcAmounts[i]));
         }
 
         for (CardPrinted c : curved) {
@@ -249,7 +249,7 @@ public abstract class GenerateColoredDeckBase {
         }
         return res;
     }
-    
+
     protected static void increment(Map<String, Integer> map, String key, int delta)
     {
         final Integer boxed = map.get(key);

@@ -68,8 +68,8 @@ public final class GameOutcome implements Iterable<Entry<LobbyPlayer, PlayerStat
         for (final Player n : list) {
             this.playerRating.put(n.getLobbyPlayer(), n.getStats());
         }
-    }    
-    
+    }
+
 
     /**
      * Checks if is draw.
@@ -77,10 +77,11 @@ public final class GameOutcome implements Iterable<Entry<LobbyPlayer, PlayerStat
      * @return true, if is draw
      */
     public boolean isDraw() {
-        for( PlayerStatistics pv : playerRating.values())
-        {
-            if ( pv.getOutcome().hasWon() )
-            return false;
+        for (PlayerStatistics pv : playerRating.values()) {
+
+            if (pv.getOutcome().hasWon()) {
+                return false;
+            }
         }
         return true;
     }
@@ -103,10 +104,11 @@ public final class GameOutcome implements Iterable<Entry<LobbyPlayer, PlayerStat
      * @return the winner
      */
     public LobbyPlayer getWinner() {
-        for( Entry<LobbyPlayer, PlayerStatistics> ps : playerRating.entrySet())
-        {
-            if ( ps.getValue().getOutcome().hasWon() )
-            return ps.getKey();
+        for (Entry<LobbyPlayer, PlayerStatistics> ps : playerRating.entrySet()) {
+
+            if (ps.getValue().getOutcome().hasWon()) {
+                return ps.getKey();
+            }
         }
         return null;
     }
@@ -155,10 +157,11 @@ public final class GameOutcome implements Iterable<Entry<LobbyPlayer, PlayerStat
      * @return the win spell effect
      */
     public String getWinSpellEffect() {
-        for( PlayerStatistics pv : playerRating.values())
-        {
-            if ( pv.getOutcome().hasWon() )
-            return pv.getOutcome().altWinSourceName;
+        for (PlayerStatistics pv : playerRating.values()) {
+
+            if (pv.getOutcome().hasWon()) {
+                return pv.getOutcome().altWinSourceName;
+            }
         }
         return null;
     }

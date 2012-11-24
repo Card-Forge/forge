@@ -32,8 +32,8 @@ public enum GameLossReason {
 
     // 104.3e and others
     /** The Spell effect. */
-    SpellEffect, 
-    
+    SpellEffect,
+
     OpponentWon
 
     /*
