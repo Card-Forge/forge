@@ -1,0 +1,13 @@
+Name:Tsabo's Web
+ManaCost:2
+Types:Artifact
+Text:no text
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Destination$ Battlefield | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw a card.
+SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1
+S:Mode$ Continuous | Affected$ Land.hasNonManaActivatedAbility | AddHiddenKeyword$ HIDDEN CARDNAME doesn't untap during your untap step. | Description$ Each land with an activated ability that isn't a mana ability doesn't untap during its controller's untap step.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tsabos_web.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/317.jpg
+Oracle:When Tsabo's Web enters the battlefield, draw a card.\nEach land with an activated ability that isn't a mana ability doesn't untap during its controller's untap step.
+End

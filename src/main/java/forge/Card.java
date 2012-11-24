@@ -7074,6 +7074,13 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
             return false;
+        } else if (property.equals("hasNonManaActivatedAbility")) {
+            for (final SpellAbility sa : this.getSpellAbilities()) {
+                if (sa.isAbility() && !sa.isManaAbility()) {
+                    return true;
+                }
+            }
+            return false;
         } else if (property.equals("NoAbilities")) {
             if (!((this.getAbilityText().trim().equals("") || this.isFaceDown()) && (this.getUnhiddenKeyword().size() == 0))) {
                 return false;
