@@ -6,7 +6,6 @@ PT:3/3
 K:First Strike
 S:Mode$ Continuous | Affected$ Creature.Soldier+Other+YouCtrl | AddKeyword$ First Strike | Description$ Other Soldier creatures you control have first strike.
 SVar:PlayMain1:TRUE
-SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rhox_pikemaster.jpg
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/26.jpg

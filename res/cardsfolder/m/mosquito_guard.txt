@@ -2,10 +2,9 @@ Name:Mosquito Guard
 ManaCost:W
 Types:Creature Kithkin Soldier
 Text:no text
+PT:1/1
 K:First Strike
 A:AB$ PutCounter | Cost$ 1 W Discard<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | ActivationZone$ Hand | CounterNum$ 1 | PrecostDesc$ Reinforce 1 - | SpellDescription$ Put a +1/+1 counter on target creature.
-PT:1/1
-SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mosquito_guard.jpg
 SetInfo:MOR|Common|http://magiccards.info/scans/en/mt/18.jpg

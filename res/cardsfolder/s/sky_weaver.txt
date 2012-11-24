@@ -5,6 +5,7 @@ Text:no text
 PT:2/1
 A:AB$ Pump | Cost$ 2 | ValidTgts$ Creature.White,Creature.Black | KW$ Flying | SpellDescription$ Target white or black creature gains flying until end of turn. | TgtPrompt$ Select target white or black creature.
 SVar:RemRandomDeck:True
+DeckNeeds:Color$White|Black
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sky_weaver.jpg
 SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/74.jpg

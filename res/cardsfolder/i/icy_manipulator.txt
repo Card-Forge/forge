@@ -3,7 +3,6 @@ ManaCost:4
 Types:Artifact
 Text:no text
 A:AB$ Tap | Cost$ 1 T | ValidTgts$ Artifact,Creature,Land | TgtPrompt$ Select target artifact, creature, or land. | SpellDescription$ Tap target artifact, creature, or land.
-SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/icy_manipulator.jpg
 SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/248.jpg
