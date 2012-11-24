@@ -2,7 +2,6 @@ package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 import forge.Card;
@@ -23,38 +22,47 @@ public class CloneEffect extends SpellEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
+        final Card host = sa.getSourceCard();
+        Card tgtCard = host;
 
-        final List<Card> tgts = getTargetCards(sa);
+        Card cardToCopy = host;
+        final Target tgt = sa.getTarget();
+        if (sa.hasParam("Defined")) {
+            ArrayList<Card> cloneSources = AbilityFactory.getDefinedCards(host, sa.getParam("Defined"), sa);
+            if (!cloneSources.isEmpty()) {
+                cardToCopy = cloneSources.get(0);
+            }
+        } else if (tgt != null) {
+            cardToCopy = tgt.getTargetCards().get(0);
+        }
 
-        sb.append(sa.getSourceCard());
-        sb.append(" becomes a copy of ");
-        if (!tgts.isEmpty()) {
-          sb.append(tgts.get(0)).append(".");
+        ArrayList<Card> cloneTargets = AbilityFactory.getDefinedCards(host, sa.getParam("CloneTarget"), sa);
+        if (!cloneTargets.isEmpty()) {
+            tgtCard = cloneTargets.get(0);
         }
-        else {
-          sb.append("target creature.");
-        }
+
+        sb.append(tgtCard);
+        sb.append(" becomes a copy of " + cardToCopy + ".");
+
         return sb.toString();
     } // end cloneStackDescription()
 
     @Override
     public void resolve(SpellAbility sa) {
-        Card tgtCard;
         final Card host = sa.getSourceCard();
+        Card tgtCard = host;
         Map<String, String> origSVars = host.getSVars();
-
 
         // find cloning source i.e. thing to be copied
         Card cardToCopy = null;
         final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            cardToCopy = tgt.getTargetCards().get(0);
-        }
-        else if (sa.hasParam("Defined")) {
+        if (sa.hasParam("Defined")) {
             ArrayList<Card> cloneSources = AbilityFactory.getDefinedCards(host, sa.getParam("Defined"), sa);
             if (!cloneSources.isEmpty()) {
                 cardToCopy = cloneSources.get(0);
             }
+        } else if (tgt != null) {
+            cardToCopy = tgt.getTargetCards().get(0);
         }
         if (cardToCopy == null) {
             return;
@@ -72,9 +80,6 @@ public class CloneEffect extends SpellEffect {
         ArrayList<Card> cloneTargets = AbilityFactory.getDefinedCards(host, sa.getParam("CloneTarget"), sa);
         if (!cloneTargets.isEmpty()) {
             tgtCard = cloneTargets.get(0);
-        }
-        else {
-            tgtCard = host;
         }
 
         String imageFileName = host.getImageFilename();
@@ -275,7 +280,6 @@ public class CloneEffect extends SpellEffect {
             }
         }
         tgtCard.addColor(shortColors, tgtCard, !sa.hasParam("OverwriteColors"), true);
-
     }
 
 }
