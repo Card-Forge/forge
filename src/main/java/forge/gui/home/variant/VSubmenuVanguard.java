@@ -1,16 +1,25 @@
 package forge.gui.home.variant;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -32,6 +41,9 @@ import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FDeckChooser;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FList;
+import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FRadioButton;
+import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
@@ -82,8 +94,21 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
     .fontAlign(SwingConstants.CENTER)
     .build();
     
+    //////////////////////////////
+        
+    private final JTabbedPane tabPane = new JTabbedPane();
+    private final List<FPanel> playerPanels = new ArrayList<FPanel>();
+    private final List<FDeckChooser> deckChoosers = new ArrayList<FDeckChooser>();
+    private final List<FList> avatarLists = new ArrayList<FList>();
+    
+    private final List<JRadioButton> fieldRadios = new ArrayList<JRadioButton>();
+    private final ButtonGroup grpFields = new ButtonGroup();
+    private int currentNumTabsShown = 7;
+    
+    //////////////////////////////
+    
     private VSubmenuVanguard() {
-
+        
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         Vector<Object> humanListData = new Vector<Object>();
@@ -105,12 +130,126 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
         avHuman.setSelectedIndex(0);
         avAi.setSelectedIndex(0);
         
+        //This listener will look for any of the radio buttons being selected
+        //and call the method that shows/hides tabs appropriately.
+        ChangeListener changeListener = new ChangeListener() {
+            public void stateChanged(ChangeEvent changEvent) {
+              FRadioButton aButton = (FRadioButton)changEvent.getSource();
+              
+              System.out.println("radio change fired: " + aButton.getText());
+
+              if(aButton.isSelected())
+              {
+                  changeTabs(Integer.parseInt(aButton.getText()));
+              }
+            }
+          };
+          
+        class SelectedListener implements PropertyChangeListener
+        {
+
+            /* (non-Javadoc)
+             * @see java.beans.PropertyChangeListener#propertyChange(java.beans.PropertyChangeEvent)
+             */
+            @Override
+            public void propertyChange(PropertyChangeEvent arg0) {
+                FRadioButton aButton = (FRadioButton)arg0.getSource();
+                
+                System.out.println("radio change fired(bean): " + aButton.getText());
+
+                if(aButton.isSelected())
+                {
+                    changeTabs(Integer.parseInt(aButton.getText()));
+                }
+            }
+            
+        }
+        
+        //Create all 8 player settings panel
+        FRadioButton tempRadio;
+        FPanel tempPanel;
+        FDeckChooser tempChooser;
+        FList tempList;
+
+        for (int i = 1; i < 7; i++) {
+            tempRadio = new FRadioButton();
+            tempRadio.setText(String.valueOf(i));
+            tempRadio.setSelected(true);
+            fieldRadios.add(tempRadio);
+            grpFields.add(tempRadio);
+            tempRadio.addChangeListener(changeListener);
+            tempRadio.addPropertyChangeListener(new SelectedListener());
+        }
+        
+        //Settings panel
+        FPanel settingsPanel = new FPanel();
+        FPanel radioPane = new FPanel();
+        radioPane.setLayout(new MigLayout("wrap 1"));
+        radioPane.setOpaque(false);
+        for (int i = 1; i < 8; i++) {
+            tempRadio = new FRadioButton();
+            tempRadio.setText(String.valueOf(i));
+            fieldRadios.add(tempRadio);
+            grpFields.add(tempRadio);
+            radioPane.add(tempRadio,"wrap");
+        }
+        settingsPanel.add(radioPane);
+        settingsPanel.add(new FLabel.Builder().text("Set number of opponents").build());
+        tabPane.add("Settings",settingsPanel);
+        
+        //Player panels (Human + 7 AIs)
+        for (int i = 0; i < 8;i++) {
+            tempPanel = new FPanel();
+            tempPanel.setLayout(new MigLayout("insets 0, gap 0 , wrap 2"));
+            
+            tempChooser = new FDeckChooser("Select deck:", i == 0 ? PlayerType.HUMAN : PlayerType.COMPUTER);
+            tempChooser.initialize();
+            
+            tempList = new FList();
+            
+            tempList.setListData(i == 0 ? humanListData : aiListData);
+            tempList.setSelectedIndex(0);
+            
+            deckChoosers.add(tempChooser);
+            avatarLists.add(tempList);
+            
+            tempPanel.add(tempChooser,"span 1 2, w 44%!, gap 0 0 20px 20px, growy, pushy");
+            
+            tempPanel.add(new FLabel.Builder().text("Select Avatar:").build());
+            
+            JScrollPane scrAvatar = new FScrollPane(tempList, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+            tempPanel.add(scrAvatar,"h 90%!");
+            
+            playerPanels.add(tempPanel);
+            tabPane.add("Player " + (i+1), tempPanel);
+        }
+        
         final String strCheckboxConstraints = "w 200px!, h 30px!, gap 0 20px 0 0";
         pnlStart.setOpaque(false);
         pnlStart.add(cbSingletons, strCheckboxConstraints);
         pnlStart.add(btnStart, "span 1 3, growx, pushx, align center");
         pnlStart.add(cbArtifacts, strCheckboxConstraints);
         pnlStart.add(cbRemoveSmall, strCheckboxConstraints);
+    }
+    
+    private void changeTabs(int toShow)
+    {
+        if(toShow < currentNumTabsShown)
+        {
+            for(int i=currentNumTabsShown;i>toShow;i--)
+            {
+                tabPane.remove(i+1);
+            }
+            currentNumTabsShown = toShow;
+        }
+        else
+        {
+            for(int i=toShow+1;i<=8;i++)
+            {
+                tabPane.add(playerPanels.get(i));
+            }
+            currentNumTabsShown = toShow;
+        }
     }
 
     /* (non-Javadoc)
@@ -152,10 +291,19 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
     @Override
     public void populate() {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().removeAll();
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap 2, ax right"));
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap 1, ax right"));
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 80%!, h 40px!, gap 0 0 15px 15px, span 2, ax right");
         
+        for(FDeckChooser fdc : deckChoosers)
+        {
+            fdc.populate();
+        }
+        
+        
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(tabPane, "gap 0 0 50px 50px, growx, growy");
+        
+        /*
         dcAi.populate();
         dcHuman.populate();
         
@@ -165,10 +313,12 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblAvatarHuman, "w 44%!, gap 4% 4% 0px 0px");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(scrAi, "w 44%!, gap 0 0 20px 20px, growy, pushy");
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(scrHuman, "w 44%!, gap 4% 4% 20px 20px, growy, pushy");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "span 2, gap 0 0 50px 50px, ax center");
+        */
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "span 1, ax center");
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
+        
     }
 
 
