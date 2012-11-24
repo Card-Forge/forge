@@ -5,7 +5,7 @@ Text:no text
 PT:5/5
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME enters the battlefield, another target permanent is indestructible for as long as you control CARDNAME. (Effects that say "destroy" don't destroy that permanent. An indestructible creature can't be destroyed by damage.)
-SVar:TrigPump:DB$ Pump | ValidTgts$ Permanent.Other | TgtPrompt$ Select another target permanent  | KW$ HIDDEN Indestructible | UntilLoseControlOfHost$ True
+SVar:TrigPump:AB$ Pump |  Cost$ 0 | ValidTgts$ Permanent.Other | TgtPrompt$ Select another target permanent  | KW$ HIDDEN Indestructible | UntilLoseControlOfHost$ True
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aegis_angel.jpg

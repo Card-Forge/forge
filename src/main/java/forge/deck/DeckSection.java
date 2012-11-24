@@ -106,7 +106,7 @@ public class DeckSection extends ItemPool<CardPrinted> {
     }
 
     /**
-     * Add all from a List of CardPrinted
+     * Add all from a List of CardPrinted.
      * 
      * @param list
      *            CardPrinteds to add

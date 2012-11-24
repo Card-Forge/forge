@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Card;
+import forge.Constant;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
@@ -493,21 +494,33 @@ public class StaticAbility {
                 return false;
             }
         }
-
-        if (this.params.containsKey("FatefulHour") && controller.getLife() > 5) {
-            return false;
-        }
-
-        if (this.params.containsKey("Threshold") && !controller.hasThreshold()) {
-            return false;
-        }
-
-        if (this.params.containsKey("Hellbent") && !controller.hasHellbent()) {
-            return false;
-        }
-
-        if (this.params.containsKey("Metalcraft") && !controller.hasMetalcraft()) {
-            return false;
+        
+        if (params.containsKey("Condition")) {
+            if (params.get("Condition").equals("Threshold")) {
+                if (!controller.hasThreshold()) {
+                    return false;
+                }
+            } else if (params.get("Condition").equals("Hellbent")) {
+                if (!controller.hasHellbent()) {
+                    return false;
+                }
+            } else if (params.get("Condition").equals("Metalcraft")) {
+                if (!controller.hasMetalcraft()) {
+                    return false;
+                }
+            } else if (params.get("Condition").equals("PermanentOfEachColor")) {
+                if ((controller.getColoredCardsInPlay(Constant.Color.BLACK).isEmpty()
+                        || controller.getColoredCardsInPlay(Constant.Color.BLUE).isEmpty()
+                        || controller.getColoredCardsInPlay(Constant.Color.GREEN).isEmpty()
+                        || controller.getColoredCardsInPlay(Constant.Color.RED).isEmpty()
+                        || controller.getColoredCardsInPlay(Constant.Color.WHITE).isEmpty())) {
+                    return false;
+                }
+            } else if (params.get("Condition").equals("FatefulHour")) {
+                if (controller.getLife() > 5) {
+                    return false;
+                }
+            }
         }
 
         if (this.params.containsKey("PlayerTurn") && !Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(controller)) {

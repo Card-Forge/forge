@@ -6,9 +6,11 @@ PT:1/3
 K:Level up:U
 K:maxLevel:7
 S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 2 | SetToughness$ 4 | CheckSVar$ X | SVarCompare$ EQ1 | Description$ LEVEL 4-6 2/4
-S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 3 | SetToughness$ 5 | AddKeyword$ At the beginning of each end step, if it's not your turn, take an extra turn after this one. | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 7+ 3/5 At the beginning of each end step, if it's not your turn, take an extra turn after this one.
+S:Mode$ Continuous | Affected$ Card.Self | SetPower$ 3 | SetToughness$ 5 | AddTrigger$ TriggerExtraTurn | CheckSVar$ Y | SVarCompare$ EQ1 | Description$ LEVEL 7+ 3/5 At the beginning of each end step, if it's not your turn, take an extra turn after this one.
 SVar:X:Count$Valid Card.Self+counters_GE4_LEVEL+counters_LE6_LEVEL
 SVar:Y:Count$Valid Card.Self+counters_GE7_LEVEL
+SVar:TriggerExtraTurn:Mode$ Phase | Phase$ End of Turn | OpponentTurn$ True | Execute$ TrigExtraTurn | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each end step, if it's not your turn, take an extra turn after this one.
+SVar:TrigExtraTurn:DB$ AddTurn | NumTurns$ 1
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lighthouse_chronologist.jpg
 SetInfo:ROE|Mythic|http://magiccards.info/scans/en/roe/75.jpg

@@ -15,7 +15,7 @@ public class PlayerStartConditions {
     private Supplier<Iterable<Card>> cardsOnBattlefield = null;
     private Supplier<Iterable<Card>> cardsInCommand = null;
 
-    public PlayerStartConditions( Deck deck0 ) {
+    public PlayerStartConditions(Deck deck0) {
         deck = deck0;
     }
 
@@ -32,7 +32,7 @@ public class PlayerStartConditions {
     public final void setStartingLife(int startingLife) {
         this.startingLife = startingLife;
     }
-    
+
     public final void setCardsOnBattlefield(Supplier<Iterable<Card>> cardsOnTable) {
         this.cardsOnBattlefield = cardsOnTable;
     }

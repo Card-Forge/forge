@@ -5,7 +5,7 @@ Text:no text
 PT:3/3
 K:Flying
 K:Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME.
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ CARDNAME is white. | AddAbility$ Destroy | Threshold$ True | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME is white and has "tap: Destroy target black creature."
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ CARDNAME is white. | AddAbility$ Destroy | Condition$ Threshold | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME is white and has "tap: Destroy target black creature."
 SVar:Destroy:AB$Destroy | Cost$ T | ValidTgts$ Creature.Black | TgtPrompt$ Select target black creature | SpellDescription$ Destroy target black creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

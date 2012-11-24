@@ -4,7 +4,7 @@ Types:Creature Human Cleric
 Text:no text
 PT:2/2
 A:AB$ Token | Cost$ T | TokenImage$ W 1 1 Human dka | TokenAmount$ 1 | TokenName$ Human | TokenColors$ White | TokenTypes$ Creature,Human | TokenOwner$ You | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 white Human creature token onto the battlefield.
-S:Mode$ Continuous | Affected$ Creature.YouCtrl+Other | AddPower$ 2 | AddToughness$ 2 | FatefulHour$ True | Description$ Fateful hour - As long as you have 5 or less life, other creatures you control get +2/+2.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+Other | AddPower$ 2 | AddToughness$ 2 | Condition$ FatefulHour | Description$ Fateful hour - As long as you have 5 or less life, other creatures you control get +2/+2.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thraben_doomsayer.jpg

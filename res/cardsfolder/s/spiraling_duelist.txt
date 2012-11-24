@@ -3,7 +3,7 @@ ManaCost:2 R R
 Types:Creature Human Berserker
 Text:no text
 PT:3/1
-S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Double Strike | Metalcraft$ True | Description$ Metalcraft - CARDNAME has double strike as long as you control three or more artifacts.
+S:Mode$ Continuous | Affected$ Card.Self | AddKeyword$ Double Strike | Condition$ Metalcraft | Description$ Metalcraft - CARDNAME has double strike as long as you control three or more artifacts.
 SVar:BuffedBy:Artifact
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiraling_duelist.jpg

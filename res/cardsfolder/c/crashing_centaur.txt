@@ -4,7 +4,7 @@ Types:Creature Centaur
 Text:no text
 PT:3/4
 A:AB$ Pump | Cost$ G Discard<1/Card> | KW$ Trample | SpellDescription$ CARDNAME gains trample until end of turn.
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Shroud | Threshold$ True | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME gets +2/+2 and has shroud. (It can't be the target of spells or abilities.)
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Shroud | Condition$ Threshold | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME gets +2/+2 and has shroud. (It can't be the target of spells or abilities.)
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/crashing_centaur.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/235.jpg

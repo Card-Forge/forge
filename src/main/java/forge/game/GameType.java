@@ -54,15 +54,15 @@ public enum GameType {
     public final boolean isLimited() {
         return this.bLimited;
     }
-    
+
     public final int getDeckMinimum() {
         return this.deckMinimum;
     }
-    
+
     public final Integer getDeckMaximum() {
         return this.deckMaximum;
     }
-    
+
     public final boolean isSingleton() {
         return this.singleton;
     }
@@ -70,8 +70,8 @@ public enum GameType {
     GameType(final boolean isLimited, int min) {
         this(isLimited, min, null, false);
     }
-    
-    
+
+
     /**
      * Instantiates a new game type.
      * 

@@ -1019,9 +1019,10 @@ public final class GameActionUtil {
 
         @Override
         public void execute() {
-            final List<Card> alphaStatuses = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Alpha Status"));
-
-            final List<Card> allCreatures = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+            final List<Card> alphaStatuses = CardLists.filter(Singletons.getModel().getGame()
+                    .getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Alpha Status"));
+            final List<Card> allCreatures = CardLists.filter(Singletons.getModel().getGame()
+                    .getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
 
             for (int i = 0; i < this.previouslyPumped.size(); i++) {
                 this.previouslyPumped.get(i).addSemiPermanentAttackBoost(0 - this.previouslyPumpedValue.get(i));
@@ -1032,10 +1033,13 @@ public final class GameActionUtil {
 
             for (final Card alpha : alphaStatuses) {
                 final Card enchanted = alpha.getEnchantingCard();
+                if (enchanted == null) {
+                    continue;
+                }
                 int totalbuff = 0;
 
                 for (final Card othercreat : allCreatures) {
-                    if (enchanted != othercreat && othercreat.sharesCreatureTypeWith(enchanted)) {
+                    if (!enchanted.equals(othercreat) && othercreat.sharesCreatureTypeWith(enchanted)) {
                         totalbuff += 2;
                     }
                 }

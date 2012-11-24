@@ -5,7 +5,7 @@ Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | Description$ Enchanted creature gets +2/+0.
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | Hellbent$ True | Description$ Hellbent - Enchanted creature gets an additional +2/+0 as long as you have no cards in hand.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | Condition$ Hellbent | Description$ Hellbent - Enchanted creature gets an additional +2/+0 as long as you have no cards in hand.
 SVar:BuffedBy:Card
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/taste_for_mayhem.jpg

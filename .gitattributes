@@ -402,6 +402,7 @@ res/cardsfolder/a/arcane_teachings.txt svneol=native#text/plain
 res/cardsfolder/a/arcanis_the_omnipotent.txt svneol=native#text/plain
 res/cardsfolder/a/arcbound_bruiser.txt svneol=native#text/plain
 res/cardsfolder/a/arcbound_crusher.txt svneol=native#text/plain
+res/cardsfolder/a/arcbound_fiend.txt -text
 res/cardsfolder/a/arcbound_hybrid.txt svneol=native#text/plain
 res/cardsfolder/a/arcbound_lancer.txt svneol=native#text/plain
 res/cardsfolder/a/arcbound_overseer.txt svneol=native#text/plain
@@ -5131,6 +5132,7 @@ res/cardsfolder/j/joraga_bard.txt svneol=native#text/plain
 res/cardsfolder/j/joraga_treespeaker.txt svneol=native#text/plain
 res/cardsfolder/j/joraga_warcaller.txt svneol=native#text/plain
 res/cardsfolder/j/jotun_owl_keeper.txt -text
+res/cardsfolder/j/journey_of_discovery.txt -text
 res/cardsfolder/j/journey_to_nowhere.txt svneol=native#text/plain
 res/cardsfolder/j/journeyers_kite.txt svneol=native#text/plain
 res/cardsfolder/j/joven.txt svneol=native#text/plain
@@ -6068,6 +6070,7 @@ res/cardsfolder/m/masticore.txt svneol=native#text/plain
 res/cardsfolder/m/masumaro_first_to_live.txt svneol=native#text/plain
 res/cardsfolder/m/matca_rioters.txt svneol=native#text/plain
 res/cardsfolder/m/matsu_tribe_birdstalker.txt svneol=native#text/plain
+res/cardsfolder/m/matsu_tribe_decoy.txt -text
 res/cardsfolder/m/matsu_tribe_sniper.txt svneol=native#text/plain
 res/cardsfolder/m/maul_splicer.txt svneol=native#text/plain
 res/cardsfolder/m/mausoleum_guard.txt -text
@@ -11181,6 +11184,7 @@ res/cardsfolder/w/waning_wurm.txt svneol=native#text/plain
 res/cardsfolder/w/war_barge.txt -text svneol=unset#text/plain
 res/cardsfolder/w/war_chariot.txt svneol=native#text/plain
 res/cardsfolder/w/war_dance.txt svneol=native#text/plain
+res/cardsfolder/w/war_elemental.txt -text
 res/cardsfolder/w/war_falcon.txt -text
 res/cardsfolder/w/war_mammoth.txt svneol=native#text/plain
 res/cardsfolder/w/war_priest_of_thune.txt svneol=native#text/plain

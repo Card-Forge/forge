@@ -4,7 +4,7 @@ Types:Land
 Text:no text
 A:AB$ Mana | Cost$ T | Produced$ R | SubAbility$ DBPain | SpellDescription$ Add R to your mana pool. CARDNAME deals 1 damage to you.
 A:AB$ DealDamage | Cost$ R T Sac<1/CARDNAME> | Tgt$ TgtCP | NumDmg$ 2 | Activation$ Threshold | PrecostDesc$ Threshold - | SpellDescription$ CARDNAME deals 2 damage to target creature or player. Activate this ability only if seven or more cards are in your graveyard.
-SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You
+SVar:DBPain:DB$ DealDamage | NumDmg$ 1 | Defined$ You
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barbarian_ring.jpg
 SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/313.jpg

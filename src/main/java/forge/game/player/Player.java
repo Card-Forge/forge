@@ -39,7 +39,6 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
-import forge.Constant;
 import forge.Constant.Preferences;
 import forge.CounterType;
 import forge.GameActionUtil;
@@ -679,17 +678,6 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
-
-        // specific cards
-        if (this.isCardInPlay("Spirit of Resistance")) {
-            if ((this.getColoredCardsInPlay(Constant.Color.BLACK).size() > 0)
-                    && (this.getColoredCardsInPlay(Constant.Color.BLUE).size() > 0)
-                    && (this.getColoredCardsInPlay(Constant.Color.GREEN).size() > 0)
-                    && (this.getColoredCardsInPlay(Constant.Color.RED).size() > 0)
-                    && (this.getColoredCardsInPlay(Constant.Color.WHITE).size() > 0)) {
-                return 0;
-            }
-        }
         if (restDamage > 0) {
             return restDamage;
         } else {

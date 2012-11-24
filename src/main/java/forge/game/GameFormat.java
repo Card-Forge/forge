@@ -43,7 +43,7 @@ public class GameFormat {
 
     protected final transient List<String> allowedSetCodes_ro;
     protected final transient List<String> bannedCardNames_ro;
-    
+
     protected final transient Predicate<CardPrinted> filterRules;
     protected final transient Predicate<CardPrinted> filterPrinted;
 
@@ -61,25 +61,27 @@ public class GameFormat {
         this.name = fName;
         this.allowedSetCodes = Lists.newArrayList(sets);
         this.bannedCardNames = bannedCards == null ? new ArrayList<String>() : Lists.newArrayList(bannedCards);
-        
+
         this.allowedSetCodes_ro = Collections.unmodifiableList(allowedSetCodes);
         this.bannedCardNames_ro = Collections.unmodifiableList(bannedCardNames);
-        
+
         this.filterRules = this.buildFilterRules();
         this.filterPrinted = this.buildFilterPritned();
     }
 
     private Predicate<CardPrinted> buildFilterPritned() {
         final Predicate<CardPrinted> banNames = CardPrinted.Predicates.namesExcept(this.bannedCardNames);
-        if (this.allowedSetCodes == null || this.allowedSetCodes.isEmpty() )
+        if (this.allowedSetCodes == null || this.allowedSetCodes.isEmpty()) {
             return banNames;
+        }
         return Predicates.and(banNames, CardPrinted.Predicates.printedInSets(this.allowedSetCodes, true));
     }
 
     private Predicate<CardPrinted> buildFilterRules() {
         final Predicate<CardPrinted> banNames = CardPrinted.Predicates.namesExcept(this.bannedCardNames);
-        if ( this.allowedSetCodes == null || this.allowedSetCodes.isEmpty() )
+        if (this.allowedSetCodes == null || this.allowedSetCodes.isEmpty()) {
             return banNames;
+        }
         return Predicates.and(banNames, Predicates.compose(CardRulesPredicates.wasPrintedInSets(this.allowedSetCodes), CardPrinted.FN_GET_RULES));
     }
 

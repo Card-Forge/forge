@@ -5,7 +5,7 @@ Text:no text
 PT:0/1
 K:Defender
 A:AB$ Pump | Cost$ B | NumAtt$ +1 | NumDef$ +1 | SpellDescription$ CARDNAME gets +1/+1 until end of turn.
-S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ HIDDEN CARDNAME can attack as though it didn't have defender. | Hellbent$ True | Description$ Hellbent - CARDNAME can attack as though it didn't have defender as long as you have no cards in hand.
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ HIDDEN CARDNAME can attack as though it didn't have defender. | Condition$ Hellbent | Description$ Hellbent - CARDNAME can attack as though it didn't have defender as long as you have no cards in hand.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slithering_shade.jpg

@@ -5,7 +5,7 @@ Text:no text
 PT:4/4
 K:Flying
 K:Vigilance
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | SetColor$ Black | AddTrigger$ TrigSacrificeCreature | AddHiddenKeyword$ Trample | Threshold$ True | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME gets +3/+3, is black, has trample, and has "At the beginning of your upkeep, sacrifice a creature."
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 3 | AddToughness$ 3 | SetColor$ Black | AddTrigger$ TrigSacrificeCreature | AddKeyword$ Trample | Condition$ Threshold | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME gets +3/+3, is black, has trample, and has "At the beginning of your upkeep, sacrifice a creature."
 SVar:TrigSacrificeCreature:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ At the beginning of your upkeep, sacrifice a creature.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature | SacMessage$ Creature
 SVar:Rarity:Rare

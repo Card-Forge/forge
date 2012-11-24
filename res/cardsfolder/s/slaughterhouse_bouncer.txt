@@ -4,7 +4,7 @@ Types:Creature Ogre Warrior
 Text:no text
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigPump | Hellbent$ True | TriggerDescription$ Hellbent - When CARDNAME is put into a graveyard from play, if you have no cards in hand, target creature gets -3/-3 until end of turn.
-SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True
+SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/dis/en-us/card97073.jpg
 SetInfo:DIS|Common|http://magiccards.info/scans/en/di/54.jpg

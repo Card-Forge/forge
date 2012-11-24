@@ -310,7 +310,7 @@ public class Deck extends DeckBase {
 
         double best = 1.0;
 
-        for( Entry<CardPrinted, Integer> kv : this.getMain()) {
+        for (Entry<CardPrinted, Integer> kv : this.getMain()) {
             CardPrinted evalCard = kv.getKey();
             int count = kv.getValue();
             if (ranker.getRanking(evalCard.getName(), evalCard.getEdition()) != null) {
@@ -337,12 +337,12 @@ public class Deck extends DeckBase {
         int deckSize = main.countAll();
         int deckDistinct = main.countDistinct();
         Integer max = type.getDeckMaximum();
-        
-        if (deckSize < type.getDeckMinimum() || (max != null && deckSize > max) ||
-                (type.isSingleton() && deckDistinct != deckSize)) {
+
+        if (deckSize < type.getDeckMinimum() || (max != null && deckSize > max)
+                || (type.isSingleton() && deckDistinct != deckSize)) {
             return false;
         }
-        
+
         if(type == GameType.Commander)
         {//Must contain exactly 1 legendary Commander and no sideboard.
             //TODO:Enforce color identity

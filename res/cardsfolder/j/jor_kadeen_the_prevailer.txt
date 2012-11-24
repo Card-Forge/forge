@@ -4,7 +4,7 @@ Types:Legendary Creature Human Warrior
 Text:no text
 PT:5/4
 K:First Strike
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 3 | Metalcraft$ True | Description$ Metalcraft - Creatures you control get +3/+0 as long as you control three or more artifacts.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 3 | Condition$ Metalcraft | Description$ Metalcraft - Creatures you control get +3/+0 as long as you control three or more artifacts.
 SVar:BuffedBy:Artifact
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare

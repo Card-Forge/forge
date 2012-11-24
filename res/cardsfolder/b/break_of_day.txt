@@ -3,7 +3,7 @@ ManaCost:1 W
 Types:Instant
 Text:no text
 A:SP$ PumpAll | Cost$ 1 W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | NumDef$ +1 | SubAbility$ FatefulHourPump | SpellDescription$ Creatures you control get +1/+1 until end of turn.
-SVar:FatefulHourPump:DB$PumpAll | ValidCards$ Creature.YouCtrl | KW$ HIDDEN Indestructible | ConditionCheckSVar$ FatefulHour | ConditionSVarCompare$ LE5 | SpellDescription$ Fateful hour - If you have 5 or less life, those creatures are also indestructible this turn.
+SVar:FatefulHourPump:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ HIDDEN Indestructible | ConditionCheckSVar$ FatefulHour | ConditionSVarCompare$ LE5 | SpellDescription$ Fateful hour - If you have 5 or less life, those creatures are also indestructible this turn.
 SVar:FatefulHour:Count$YourLifeTotal
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/break_of_day.jpg

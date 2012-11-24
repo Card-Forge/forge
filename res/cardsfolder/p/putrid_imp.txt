@@ -4,7 +4,7 @@ Types:Creature Zombie Imp
 Text:no text
 PT:1/1
 A:AB$ Pump | Cost$ Discard<1/Card> | KW$ Flying | SpellDescription$ CARDNAME gains flying until end of turn.
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddHiddenKeyword$ HIDDEN CARDNAME can't block. | Threshold$ True | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME gets +1/+1 and can't block.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddHiddenKeyword$ HIDDEN CARDNAME can't block. | Condition$ Threshold | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME gets +1/+1 and can't block.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/putrid_imp.jpg
