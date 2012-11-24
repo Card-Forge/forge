@@ -2705,6 +2705,7 @@ res/cardsfolder/d/driver_of_the_dead.txt -text
 res/cardsfolder/d/drogskol_captain.txt -text
 res/cardsfolder/d/drogskol_reaver.txt -text
 res/cardsfolder/d/dromad_purebred.txt svneol=native#text/plain
+res/cardsfolder/d/dromar_the_banisher.txt -text
 res/cardsfolder/d/dromars_attendant.txt svneol=native#text/plain
 res/cardsfolder/d/dromars_cavern.txt svneol=native#text/plain
 res/cardsfolder/d/dromars_charm.txt -text svneol=unset#text/plain
