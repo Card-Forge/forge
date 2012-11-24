@@ -7997,7 +7997,8 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return 0;
             }
 
-            if ((source.isCreature() && Singletons.getModel().getGame().isCardInPlay("Well-Laid Plans") && source.sharesColorWith(this))) {
+            if (source.isCreature() && Singletons.getModel().getGame().isCardInPlay("Well-Laid Plans") 
+                    && source.sharesColorWith(this)) {
                 return 0;
             }
         } // Creature end

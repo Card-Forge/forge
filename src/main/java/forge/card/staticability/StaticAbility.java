@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Card;
+import forge.Constant;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
@@ -491,6 +492,18 @@ public class StaticAbility {
         } else {
             if (!this.hostCard.isInZone(ZoneType.Battlefield)) { // default
                 return false;
+            }
+        }
+        
+        if (params.containsKey("Condition")) {
+            if (params.get("Condition").equals("PermanentOfEachColor")) {
+                if ((controller.getColoredCardsInPlay(Constant.Color.BLACK).isEmpty()
+                        || controller.getColoredCardsInPlay(Constant.Color.BLUE).isEmpty()
+                        || controller.getColoredCardsInPlay(Constant.Color.GREEN).isEmpty()
+                        || controller.getColoredCardsInPlay(Constant.Color.RED).isEmpty()
+                        || controller.getColoredCardsInPlay(Constant.Color.WHITE).isEmpty())) {
+                    return false;
+                }
             }
         }
 
