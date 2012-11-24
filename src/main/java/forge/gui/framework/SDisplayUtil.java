@@ -59,7 +59,9 @@ public class SDisplayUtil {
                 if (counter != (steps - 1)) {
                     SwingUtilities.invokeLater(new Runnable() { @Override
                         public void run() {
-                            pnl.setBackground(new Color(newR[counter], oldG, oldB, newA[counter]));
+                            int r = newR == null ? oldR : newR[counter];
+                            int a = newA == null ? oldA : newR[counter];
+                            pnl.setBackground(new Color(r, oldG, oldB, a));
                         }
                     });
                 }
