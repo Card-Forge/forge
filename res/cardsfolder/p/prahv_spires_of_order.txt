@@ -1,0 +1,14 @@
+Name:Prahv, Spires of Order
+ManaCost:no cost
+Types:Land
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ ChooseSource | Cost$ 4 W U T | Choices$ Card | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ Prevent all damage a source of your choice would deal this turn.
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | RememberObjects$ Remembered | SVars$ RPreventNextFromSource | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered | Prevent$ True | PreventionEffect$ True | Description$ Prevent all damage the chosen source would deal this turn.
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/prahv_spires_of_order.jpg
+SetInfo:DIS|Uncommon|http://magiccards.info/scans/en/di/177.jpg
+Oracle:{T}: Add {1} to your mana pool.\n{4}{W}{U}, {T}: Prevent all damage a source of your choice would deal this turn.
+End

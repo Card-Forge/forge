@@ -1575,6 +1575,7 @@ res/cardsfolder/c/chaos_imps.txt -text
 res/cardsfolder/c/chaos_lord.txt -text
 res/cardsfolder/c/chaos_warp.txt svneol=native#text/plain
 res/cardsfolder/c/chaosphere.txt svneol=native#text/plain
+res/cardsfolder/c/chaotic_backlash.txt -text
 res/cardsfolder/c/chaotic_goo.txt svneol=native#text/plain
 res/cardsfolder/c/chaotic_strike.txt -text
 res/cardsfolder/c/chapel_geist.txt -text
@@ -1638,6 +1639,7 @@ res/cardsfolder/c/chromatic_star.txt svneol=native#text/plain
 res/cardsfolder/c/chrome_mox.txt svneol=native#text/plain
 res/cardsfolder/c/chrome_steed.txt svneol=native#text/plain
 res/cardsfolder/c/chromescale_drake.txt svneol=native#text/plain
+res/cardsfolder/c/chromeshell_crab.txt -text
 res/cardsfolder/c/chromium.txt svneol=native#text/plain
 res/cardsfolder/c/chronatog.txt svneol=native#text/plain
 res/cardsfolder/c/chronatog_avatar.txt -text
@@ -1669,6 +1671,7 @@ res/cardsfolder/c/circle_of_protection_green.txt -text
 res/cardsfolder/c/circle_of_protection_red.txt -text
 res/cardsfolder/c/circle_of_protection_shadow.txt -text
 res/cardsfolder/c/circle_of_protection_white.txt -text
+res/cardsfolder/c/circle_of_solace.txt -text
 res/cardsfolder/c/circu_dimir_lobotomist.txt -text
 res/cardsfolder/c/circular_logic.txt svneol=native#text/plain
 res/cardsfolder/c/citanul_centaurs.txt svneol=native#text/plain
@@ -1804,6 +1807,7 @@ res/cardsfolder/c/commando_raid.txt -text svneol=unset#text/plain
 res/cardsfolder/c/common_bond.txt -text
 res/cardsfolder/c/commune_with_nature.txt svneol=native#text/plain
 res/cardsfolder/c/complex_automaton.txt svneol=native#text/plain
+res/cardsfolder/c/complicate.txt -text
 res/cardsfolder/c/composite_golem.txt svneol=native#text/plain
 res/cardsfolder/c/compost.txt svneol=native#text/plain
 res/cardsfolder/c/compulsion.txt svneol=native#text/plain
@@ -1946,6 +1950,7 @@ res/cardsfolder/c/cradle_of_vitality.txt svneol=native#text/plain
 res/cardsfolder/c/cradle_to_grave.txt svneol=native#text/plain
 res/cardsfolder/c/crafty_pathmage.txt svneol=native#text/plain
 res/cardsfolder/c/crag_puca.txt svneol=native#text/plain
+res/cardsfolder/c/cragganwick_cremator.txt -text
 res/cardsfolder/c/cranial_extraction.txt svneol=native#text/plain
 res/cardsfolder/c/cranial_plating.txt -text
 res/cardsfolder/c/crash.txt svneol=native#text/plain
@@ -2955,6 +2960,7 @@ res/cardsfolder/e/embalmed_brawler.txt -text
 res/cardsfolder/e/embargo.txt svneol=native#text/plain
 res/cardsfolder/e/ember_beast.txt -text
 res/cardsfolder/e/ember_fist_zubera.txt svneol=native#text/plain
+res/cardsfolder/e/ember_gale.txt -text
 res/cardsfolder/e/ember_hauler.txt svneol=native#text/plain
 res/cardsfolder/e/ember_shot.txt svneol=native#text/plain
 res/cardsfolder/e/ember_weaver.txt svneol=native#text/plain
@@ -4653,6 +4659,7 @@ res/cardsfolder/h/honor_guard.txt svneol=native#text/plain
 res/cardsfolder/h/honor_of_the_pure.txt svneol=native#text/plain
 res/cardsfolder/h/honor_the_fallen.txt -text
 res/cardsfolder/h/honor_worn_shaku.txt svneol=native#text/plain
+res/cardsfolder/h/honorable_scout.txt -text
 res/cardsfolder/h/hooded_kavu.txt svneol=native#text/plain
 res/cardsfolder/h/hoodwink.txt svneol=native#text/plain
 res/cardsfolder/h/hoof_skulkin.txt svneol=native#text/plain
@@ -4793,6 +4800,7 @@ res/cardsfolder/i/ichor_wellspring.txt svneol=native#text/plain
 res/cardsfolder/i/ichorclaw_myr.txt svneol=native#text/plain
 res/cardsfolder/i/ichorid.txt svneol=native#text/plain
 res/cardsfolder/i/icy_manipulator.txt svneol=native#text/plain
+res/cardsfolder/i/icy_prison.txt -text
 res/cardsfolder/i/ideas_unbound.txt -text
 res/cardsfolder/i/identity_crisis.txt svneol=native#text/plain
 res/cardsfolder/i/idle_thoughts.txt svneol=native#text/plain
@@ -5178,6 +5186,7 @@ res/cardsfolder/k/kaerveks_spite.txt svneol=native#text/plain
 res/cardsfolder/k/kaerveks_torch.txt -text
 res/cardsfolder/k/kagemaro_first_to_suffer.txt svneol=native#text/plain
 res/cardsfolder/k/kagemaros_clutch.txt -text
+res/cardsfolder/k/kaho_minamo_historian.txt -text
 res/cardsfolder/k/kaijin_of_the_vanishing_touch.txt svneol=native#text/plain
 res/cardsfolder/k/kalastria_highborn.txt svneol=native#text/plain
 res/cardsfolder/k/kaleidostone.txt svneol=native#text/plain
@@ -5305,6 +5314,7 @@ res/cardsfolder/k/kher_keep.txt svneol=native#text/plain
 res/cardsfolder/k/kiki_jiki_mirror_breaker.txt svneol=native#text/plain
 res/cardsfolder/k/kiku_nights_flower.txt svneol=native#text/plain
 res/cardsfolder/k/kikus_shadow.txt svneol=native#text/plain
+res/cardsfolder/k/kill_switch.txt -text
 res/cardsfolder/k/killer_bees.txt svneol=native#text/plain
 res/cardsfolder/k/killer_instinct.txt -text
 res/cardsfolder/k/killer_whale.txt svneol=native#text/plain
@@ -6276,6 +6286,7 @@ res/cardsfolder/m/mirror_wall.txt svneol=native#text/plain
 res/cardsfolder/m/mirrorworks.txt svneol=native#text/plain
 res/cardsfolder/m/miscalculation.txt svneol=native#text/plain
 res/cardsfolder/m/mischievous_poltergeist.txt svneol=native#text/plain
+res/cardsfolder/m/mischievous_quanar.txt -text
 res/cardsfolder/m/misers_cage.txt svneol=native#text/plain
 res/cardsfolder/m/misery_charm.txt svneol=native#text/plain
 res/cardsfolder/m/misfortunes_gain.txt svneol=native#text/plain
@@ -6784,6 +6795,7 @@ res/cardsfolder/n/noggle_bridgebreaker.txt svneol=native#text/plain
 res/cardsfolder/n/noggle_hedge_mage.txt svneol=native#text/plain
 res/cardsfolder/n/noggle_ransacker.txt svneol=native#text/plain
 res/cardsfolder/n/nomad_decoy.txt -text svneol=unset#text/plain
+res/cardsfolder/n/nomad_mythmaker.txt -text
 res/cardsfolder/n/nomad_stadium.txt svneol=native#text/plain
 res/cardsfolder/n/nomadic_elf.txt svneol=native#text/plain
 res/cardsfolder/n/nomads_assembly.txt -text
@@ -7130,6 +7142,7 @@ res/cardsfolder/p/pattern_of_rebirth.txt svneol=native#text/plain
 res/cardsfolder/p/paupers_cage.txt svneol=native#text/plain
 res/cardsfolder/p/pavel_maliki.txt svneol=native#text/plain
 res/cardsfolder/p/pawn_of_ulamog.txt svneol=native#text/plain
+res/cardsfolder/p/pay_no_heed.txt -text
 res/cardsfolder/p/peace_and_quiet.txt svneol=native#text/plain
 res/cardsfolder/p/peace_of_mind.txt svneol=native#text/plain
 res/cardsfolder/p/peace_strider.txt svneol=native#text/plain
@@ -7287,6 +7300,8 @@ res/cardsfolder/p/pianna_nomad_captain.txt svneol=native#text/plain
 res/cardsfolder/p/pierce_strider.txt svneol=native#text/plain
 res/cardsfolder/p/piety.txt svneol=native#text/plain
 res/cardsfolder/p/piety_charm.txt -text
+res/cardsfolder/p/pilgrim_of_justice.txt -text
+res/cardsfolder/p/pilgrim_of_virtue.txt -text
 res/cardsfolder/p/pilgrims_eye.txt svneol=native#text/plain
 res/cardsfolder/p/pili_pala.txt svneol=native#text/plain
 res/cardsfolder/p/pillage.txt svneol=native#text/plain
@@ -7414,6 +7429,7 @@ res/cardsfolder/p/pox.txt -text
 res/cardsfolder/p/pradesh_gypsies.txt svneol=native#text/plain
 res/cardsfolder/p/praetors_counsel.txt svneol=native#text/plain
 res/cardsfolder/p/praetors_grasp.txt -text
+res/cardsfolder/p/prahv_spires_of_order.txt -text
 res/cardsfolder/p/precinct_captain.txt -text
 res/cardsfolder/p/precognition.txt svneol=native#text/plain
 res/cardsfolder/p/predator_dragon.txt svneol=native#text/plain
@@ -8105,6 +8121,7 @@ res/cardsfolder/r/rites_of_flourishing.txt svneol=native#text/plain
 res/cardsfolder/r/rites_of_reaping.txt -text
 res/cardsfolder/r/rith_the_awakener.txt svneol=native#text/plain
 res/cardsfolder/r/riths_attendant.txt svneol=native#text/plain
+res/cardsfolder/r/riths_charm.txt -text
 res/cardsfolder/r/riths_grove.txt svneol=native#text/plain
 res/cardsfolder/r/ritual_of_restoration.txt svneol=native#text/plain
 res/cardsfolder/r/ritual_of_steel.txt svneol=native#text/plain
@@ -8744,6 +8761,7 @@ res/cardsfolder/s/shatterskull_giant.txt svneol=native#text/plain
 res/cardsfolder/s/shatterstorm.txt svneol=native#text/plain
 res/cardsfolder/s/shauku_endbringer.txt svneol=native#text/plain
 res/cardsfolder/s/shaukus_minion.txt svneol=native#text/plain
+res/cardsfolder/s/shell_of_the_last_kappa.txt -text
 res/cardsfolder/s/shell_skulkin.txt svneol=native#text/plain
 res/cardsfolder/s/shelldock_isle.txt -text
 res/cardsfolder/s/shelter.txt -text
@@ -10390,6 +10408,7 @@ res/cardsfolder/t/touch_of_the_eternal.txt -text
 res/cardsfolder/t/touch_of_vitae.txt -text svneol=unset#text/plain
 res/cardsfolder/t/touchstone.txt svneol=native#text/plain
 res/cardsfolder/t/tourachs_gate.txt -text
+res/cardsfolder/t/tower_above.txt -text
 res/cardsfolder/t/tower_drake.txt svneol=native#text/plain
 res/cardsfolder/t/tower_gargoyle.txt svneol=native#text/plain
 res/cardsfolder/t/tower_geist.txt -text

@@ -2,6 +2,8 @@ package forge.gui.home.variant;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.SwingUtilities;
@@ -21,6 +23,8 @@ import forge.game.player.LobbyPlayer;
 import forge.game.player.PlayerType;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
+import forge.gui.toolbox.FDeckChooser;
+import forge.gui.toolbox.FList;
 import forge.item.CardPrinted;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -51,8 +55,10 @@ public enum CSubmenuVanguard implements ICDoc {
     @Override
     public void initialize() {
         final ForgePreferences prefs = Singletons.getModel().getPreferences();
-        view.getDcAi().initialize();
-        view.getDcHuman().initialize();
+        for(FDeckChooser fdc : view.getDeckChoosers())
+        {
+            fdc.initialize();
+        }
 
         // Checkbox event handling
         view.getBtnStart().addActionListener(new ActionListener() {
@@ -111,47 +117,47 @@ public enum CSubmenuVanguard implements ICDoc {
         final SwingWorker<Object, Void> worker = new SwingWorker<Object, Void>() {
             @Override
             public Object doInBackground() {
-                Deck humanDeck = VSubmenuVanguard.SINGLETON_INSTANCE.getDcHuman().getDeck();
-                Deck aiDeck = VSubmenuVanguard.SINGLETON_INSTANCE.getDcAi().getDeck();
-                Object selAiAv = VSubmenuVanguard.SINGLETON_INSTANCE.getAvAi().getSelectedValue();
-                Object selHumanAv = VSubmenuVanguard.SINGLETON_INSTANCE.getAvHuman().getSelectedValue();
-
-                Lobby lobby = Singletons.getControl().getLobby();
-                LobbyPlayer humanPlayer = lobby.findLocalPlayer(PlayerType.HUMAN);
-                LobbyPlayer aiPlayer = lobby.findLocalPlayer(PlayerType.COMPUTER);
-
-                MatchStartHelper helper = new MatchStartHelper();
-
-                final CardPrinted aiVanguard,humanVanguard;
-                Iterable<CardPrinted> all = VSubmenuVanguard.SINGLETON_INSTANCE.getAllAvatars();
-                Iterable<CardPrinted> aiAll = VSubmenuVanguard.SINGLETON_INSTANCE.getAllAiAvatars();
-                if(selAiAv instanceof String)
+                List<Deck> playerDecks = new ArrayList<Deck>();
+                for(FDeckChooser fdc : view.getDeckChoosers())
                 {
-                    //Random is the only string in the list so grab a random avatar.
-                    Random r = new Random();
-                    aiVanguard = Iterables.get(aiAll,r.nextInt(Iterables.size(all)));
+                    playerDecks.add(fdc.getDeck());
                 }
-                else
-                {
-                    aiVanguard = (CardPrinted)selAiAv;
-                }
-                if(selHumanAv instanceof String)
-                {
-                    //Random is the only string in the list so grab a random avatar.
-                    Random r = new Random();
-                    humanVanguard = Iterables.get(all,r.nextInt(Iterables.size(all)));
-                }
-                else
-                {
-                    humanVanguard = (CardPrinted)selHumanAv;
-                }
-                helper.addVanguardPlayer(humanPlayer, humanDeck, humanVanguard);
-                helper.addVanguardPlayer(aiPlayer, aiDeck, aiVanguard);
                 
+                List<Object> playerAvatars = new ArrayList<Object>();
+                for(FList fl : view.getAvatarLists())
+                {
+                    playerAvatars.add(fl.getSelectedValue());
+                }
+                
+                Lobby lobby = Singletons.getControl().getLobby();
+                MatchStartHelper helper = new MatchStartHelper();
+                Random rnd = new Random();
+                for(int i=0;i<view.getNumPlayers();i++)
+                {
+                    LobbyPlayer player = lobby.findLocalPlayer(i == 0 ? PlayerType.HUMAN : PlayerType.COMPUTER);
+                    
+                    CardPrinted avatar = null;
+                    if(playerAvatars.get(i) instanceof String)
+                    {
+                        //Random is the only string in the list so grab a random avatar.
+                        if(i == 0)
+                        {
+                            //HUMAN
+                            avatar = Iterables.get(view.getAllAvatars(),rnd.nextInt(Iterables.size(view.getAllAvatars())));
+                        }
+                        else
+                        {
+                            //AI
+                            avatar = Iterables.get(view.getAllAiAvatars(),rnd.nextInt(Iterables.size(view.getAllAiAvatars())));
+                        }
+                    }
+                    
+                    helper.addVanguardPlayer(player, playerDecks.get(i), avatar);
+                }
                 MatchController mc = Singletons.getModel().getMatch(); 
                 mc.initMatch(GameType.Vanguard, helper.getPlayerMap());
                 mc.startRound();
-                
+
                 return null;
             }
 

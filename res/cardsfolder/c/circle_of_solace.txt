@@ -1,0 +1,17 @@
+Name:Circle of Solace
+ManaCost:3 W
+Types:Enchantment
+Text:no text
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseCT | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a creature type.
+SVar:ChooseCT:AB$ ChooseType | Cost$ 0 | Defined$ You | Type$ Creature | AILogic$ MostProminentHumanControls
+A:AB$ ChooseCard | Cost$ 1 W | Choices$ Creature.ChosenType | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SVars$ DBEffect,RPreventNextFromCreature,ExileEffect | SpellDescription$ The next time a creature of the chosen type would deal damage to you this turn, prevent that damage.
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromCreature | RememberObjects$ Remembered | SVars$ RPreventNextFromCreature,ExileEffect | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:RPreventNextFromCreature:Event$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ You | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time a creature of the chosen type would deal damage to you this turn, prevent that damage.
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/circle_of_solace.jpg
+SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/13.jpg
+Oracle:As Circle of Solace enters the battlefield, choose a creature type.\n{1}{W}: The next time a creature of the chosen type would deal damage to you this turn, prevent that damage.
+End
