@@ -185,6 +185,8 @@ Fixes/Features:
 - Converted Spirit of Resistance to script.
 - Variants - Added the following avatars: Titania
 - Reorganized Conditions of static abilities (WIP).
+- Variants:Fixed the UI side of the new Vanguard home screen. (Now to make the match actually start!)
+- Variants:Added some apparently unadded scripts from trunk.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
