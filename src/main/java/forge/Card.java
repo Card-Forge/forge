@@ -1216,11 +1216,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             return false;
         }
         if (this.isCreature() && counterName.equals(CounterType.M1M1)) {
-            for (final Card c : this.getController().getCreaturesInPlay()) { // look
-                                                                                        // for
-                                                                                        // Melira,
-                                                                                        // Sylvok
-                                                                                        // Outcast
+            for (final Card c : this.getController().getCreaturesInPlay()) { // look for Melira, Sylvok Outcast
                 if (c.hasKeyword("Creatures you control can't have -1/-1 counters placed on them.")) {
                     return false;
                 }
@@ -1236,7 +1232,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
         final int multiplier = applyMultiplier ? this.getController().getCounterDoublersMagnitude(counterType) : 1;
         final int addAmount = (multiplier * n);
-        
+
         Integer oldValue = this.counters.get(counterType);
         int newValue = addAmount + (oldValue == null ? 0 : oldValue.intValue());
         this.counters.put(counterType, Integer.valueOf(newValue));
@@ -1269,13 +1265,16 @@ public class Card extends GameEntity implements Comparable<Card> {
         Integer oldValue = this.counters.get(counterName);
         int newValue = oldValue == null ? 0 : Math.max(oldValue.intValue() - n, 0);
 
-        final int delta = ( oldValue == null ? 0 : oldValue.intValue() ) - newValue;
-        if ( delta == 0 ) return;
+        final int delta = (oldValue == null ? 0 : oldValue.intValue()) - newValue;
+        if (delta == 0) {
+            return;
+        }
 
-        if ( newValue > 0 )
+        if (newValue > 0) {
             this.counters.put(counterName, Integer.valueOf(newValue));
-        else
+        } else {
             this.counters.remove(counterName);
+        }
 
         // Run triggers
         final Map<String, Object> runParams = new TreeMap<String, Object>();
@@ -1302,7 +1301,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
         this.updateObservers();
     }
-    
+
     private void playFromSuspend() {
         final Card c = this;
 
@@ -7379,7 +7378,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * <p>
      * isAttacking.
      * </p>
-     * 
+     * @param ge    the GameEntity to check
      * @return a boolean.
      */
     public final boolean isAttacking(GameEntity ge) {
