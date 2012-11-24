@@ -88,7 +88,7 @@ public final class BoosterUtils {
         }
 
         // This will save CPU time when sets are limited
-        final List<CardPrinted> cardpool = Lists.newArrayList(Iterables.filter(CardDb.instance().getAllCards(), filter));
+        final List<CardPrinted> cardpool = Lists.newArrayList(Iterables.filter(CardDb.instance().getTraditionalCards(), filter));
 
         final Predicate<CardPrinted> pCommon = CardPrinted.Predicates.Presets.IS_COMMON;
         cards.addAll(BoosterUtils.generateDefinetlyColouredCards(cardpool, pCommon, numCommon, colorFilters));
@@ -180,7 +180,7 @@ public final class BoosterUtils {
      * @return the list
      */
     public static List<CardPrinted> generateDistinctCards(final Predicate<CardPrinted> filter, final int cntNeeded) {
-        return BoosterUtils.generateDistinctCards(CardDb.instance().getAllCards(), filter, cntNeeded);
+        return BoosterUtils.generateDistinctCards(CardDb.instance().getTraditionalCards(), filter, cntNeeded);
     }
 
     /**

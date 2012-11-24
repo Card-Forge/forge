@@ -7,4 +7,5 @@ A:AB$ DealDamage | ActivationZone$ Command | Cost$ Sac<1/Creature> | Tgt$ TgtCP 
 SVar:RemAIDeck:True
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=12144&type=card
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/takara.jpg
 End

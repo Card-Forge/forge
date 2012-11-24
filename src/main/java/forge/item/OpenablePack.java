@@ -175,7 +175,7 @@ public abstract class OpenablePack implements InventoryItemFromSet {
         Predicate<CardPrinted> cardsRule = Predicates.and(
                 CardPrinted.Predicates.printedInSets(setCode),
                 Predicates.compose(CardRulesPredicates.Presets.IS_BASIC_LAND, CardPrinted.FN_GET_RULES));
-        return Aggregates.random(Iterables.filter(CardDb.instance().getAllCards(), cardsRule), count);
+        return Aggregates.random(Iterables.filter(CardDb.instance().getTraditionalCards(), cardsRule), count);
     }
 
 }

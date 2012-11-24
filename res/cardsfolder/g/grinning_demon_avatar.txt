@@ -7,4 +7,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:GrinningDiscard:AB$ Discard | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select an opponent to discard | NumCards$ 1 | Mode$ TgtChoose
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=182304&type=card
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/grinning-demon.jpg
 End

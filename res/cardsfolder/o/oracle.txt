@@ -8,4 +8,5 @@ SVar:Reconsider:DB$ RemoveFromCombat | Defined$ Targeted
 SVar:RemAIDeck:True
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=12141&type=card
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/oracle.jpg
 End

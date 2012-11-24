@@ -7,4 +7,5 @@ T:Mode$ Phase | Phase$ Main1 | ValidPlayer$ Player | TriggerZones$ Command | Exe
 SVar:TrigAddMana:AB$ Mana | Cost$ 0 | Produced$ G | Amount$ 2 | Defined$ TriggeredPlayer
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=195137&type=card
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo-2/eladamri-lord-of-leaves.jpg
 End

@@ -10,4 +10,5 @@ SVar:DmgTimes2Combat:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ Re
 SVar:X:ReplaceCount$DamageAmount/Twice
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=12327
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/mishra.jpg
 End

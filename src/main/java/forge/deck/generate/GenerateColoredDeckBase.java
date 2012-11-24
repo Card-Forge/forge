@@ -220,7 +220,7 @@ public abstract class GenerateColoredDeckBase {
         if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS)) {
             hasColor = Predicates.or(hasColor, GenerateDeckUtil.COLORLESS_CARDS);
         }
-        return Iterables.filter(CardDb.instance().getAllCards(), Predicates.compose(Predicates.and(canPlay, hasColor), CardPrinted.FN_GET_RULES));
+        return Iterables.filter(CardDb.instance().getTraditionalCards(), Predicates.compose(Predicates.and(canPlay, hasColor), CardPrinted.FN_GET_RULES));
     }
 
     protected static Map<String, Integer> countLands(ItemPool<CardPrinted> outList) {

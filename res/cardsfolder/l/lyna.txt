@@ -6,4 +6,5 @@ HandLifeModifier:+2/-4
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddKeyword$ Shadow | Description$ Creatures you control have shadow. (They can block and be blocked only by creatures with shadow.)
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=12142&type=card
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/lyna.jpg
 End

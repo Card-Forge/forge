@@ -8,4 +8,5 @@ SVar:SituationalEthics:AB$ Draw | Cost$ 0 | NumCards$ 1 | Defined$ You | SubAbil
 SVar:Switch:DB$ ChangeZone | Origin$ Hand | Destination$ Library | LibraryPosition$ -1 | ChangeNum$ 1 | Mandatory$ True
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=4970
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/starke.jpg
 End

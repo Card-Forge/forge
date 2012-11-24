@@ -6,4 +6,5 @@ HandLifeModifier:+1/+1
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddKeyword$ Exalted | Description$ Creatures you control have exalted. (Whenever a creature you control attacks alone, it gets +1/+1 until end of turn for each instance of exalted among permanents you control.)
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=201898&type=card
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo-2/dauntless-escort.jpg
 End

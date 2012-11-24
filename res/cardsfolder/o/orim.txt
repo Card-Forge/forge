@@ -6,4 +6,5 @@ HandLifeModifier:+0/+12
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddKeyword$ Reach | Description$ Creatures you control have reach.
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=4966&type=card
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/orim.jpg
 End

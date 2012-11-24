@@ -7,4 +7,5 @@ T:Mode$ TapsForMana | TriggerZones$ Command | ValidCard$ Land.YouCtrl | Execute$
 SVar:TrigMana:AB$ ManaReflected | Cost$ 0 | ColorOrType$ Type | Valid$ Defined.Triggered | ReflectProperty$ Produced | Defined$ TriggeredPlayer
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=4968&type=card
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/sisay.jpg
 End

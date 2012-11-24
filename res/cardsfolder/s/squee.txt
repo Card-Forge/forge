@@ -7,4 +7,5 @@ S:Mode$ Continuous | EffectZone$ Command | Affected$ Opponent | AddKeyword$ Play
 SVar:RemAIDeck:True
 SVar:Rarity:Special
 SVar:Picture:http://www.wizards.com/global/images/magic/general/squee.jpg
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/squee.jpg
 End

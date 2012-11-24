@@ -90,3 +90,5 @@ Index:80|Code2:AVR|Code3:AVR|Name:Avacyn Restored
 Index:81|Code2:PC2|Code3:PC2|Name:Planechase 2012 Edition
 Index:82|Code2:M13|Code3:M13|Name:Magic 2013
 Index:83|Code2:RTR|Code3:RTR|Name:Return to Ravnica
+
+Index:86|Code2:VAN|Code3:VAN|Name:Vanguard

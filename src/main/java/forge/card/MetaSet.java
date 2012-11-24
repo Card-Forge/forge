@@ -226,7 +226,7 @@ public class MetaSet {
             // NOTE: The following code is far from ideal in a number of ways. If someone can
             // think of a way to improve it, please do so. --BBU
             // ItemPool<CardPrinted> cardPool = new ItemPool<CardPrinted>(CardPrinted.class);
-            for (CardPrinted aCard : CardDb.instance().getAllCards()) {
+            for (CardPrinted aCard : CardDb.instance().getTraditionalCards()) {
                 if (data.indexOf(aCard.getEdition()) > -1) {
                     cardPool.add(aCard);
                     // System.out.println("Added card" + aCard.getName());
@@ -293,7 +293,7 @@ public class MetaSet {
             if (mSet.type.equalsIgnoreCase("meta") || mSet.type.equalsIgnoreCase("booster")
                     || mSet.type.equalsIgnoreCase("pack")) {
                 final String mData = new String(mSet.data);
-                for (CardPrinted aCard : CardDb.instance().getAllCards()) {
+                for (CardPrinted aCard : CardDb.instance().getTraditionalCards()) {
                     if (mData.indexOf(aCard.getEdition()) > -1) {
                         if (!cardPool.contains(aCard)) {
                             cardPool.add(aCard);

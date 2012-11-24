@@ -7,4 +7,5 @@ T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Creature | Tri
 SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | Defined$ TriggeredTarget | NoRegen$ True
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=4961&type=card
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/greven-il-vec.jpg
 End

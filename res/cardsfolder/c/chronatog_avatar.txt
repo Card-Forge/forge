@@ -9,4 +9,5 @@ SVar:DBSkipTurn:DB$ AddTurn | NumTurns$ 1 | Defined$ Opponent
 SVar:RemAIDeck:True
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=201898&type=card
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/chronatog.jpg
 End

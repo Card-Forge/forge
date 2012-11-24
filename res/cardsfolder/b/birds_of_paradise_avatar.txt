@@ -7,4 +7,5 @@ S:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$
 SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ Add one mana of any color to your mana pool.
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=182291&type=card
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/birds-of-paradise.jpg
 End

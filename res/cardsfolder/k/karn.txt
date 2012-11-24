@@ -7,4 +7,5 @@ S:Mode$ Continuous | EffectZone$ Command | Affected$ Artifact.nonCreature+YouCtr
 SVar:AffectedX:Count$CardManaCost
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=4963&type=card
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/karn.jpg
 End
