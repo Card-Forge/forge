@@ -68,6 +68,8 @@ import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCostUtil;
+import forge.game.event.TokenCreatedEvent;
+import forge.game.limited.CreatureComparator;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
@@ -3224,6 +3226,9 @@ public class CardFactoryUtil {
             Singletons.getModel().getGame().getAction().moveToPlay(temp);
             list.add(temp);
         }
+        
+        Singletons.getModel().getGame().getEvents().post(new TokenCreatedEvent());
+
         return list;
     }
 

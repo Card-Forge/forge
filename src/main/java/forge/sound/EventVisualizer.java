@@ -8,6 +8,7 @@ import java.util.Map;
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 import forge.game.event.AddCounterEvent;
+import forge.game.event.BlockerAssignedEvent;
 import forge.game.event.CardDamagedEvent;
 import forge.game.event.CardDestroyedEvent;
 import forge.game.event.CardDiscardedEvent;
@@ -26,6 +27,7 @@ import forge.game.event.RemoveCounterEvent;
 import forge.game.event.SetTappedEvent;
 import forge.game.event.ShuffleEvent;
 import forge.game.event.SpellResolvedEvent;
+import forge.game.event.TokenCreatedEvent;
 
 /** 
  * This class is in charge of converting any forge.game.event.Event to a SoundEffectType
@@ -36,8 +38,8 @@ public class EventVisualizer {
     final static Map<Class<?>, SoundEffectType> matchTable = new HashMap<Class<?>, SoundEffectType>();
     
     public EventVisualizer() { 
-        matchTable.put(PoisonCounterEvent.class, SoundEffectType.Poison);
         matchTable.put(AddCounterEvent.class, SoundEffectType.AddCounter);
+        matchTable.put(BlockerAssignedEvent.class, SoundEffectType.Block);
         matchTable.put(CardDamagedEvent.class, SoundEffectType.Damage);
         matchTable.put(CardDestroyedEvent.class, SoundEffectType.Destroy);
         matchTable.put(CardDiscardedEvent.class, SoundEffectType.Discard);
@@ -46,10 +48,12 @@ public class EventVisualizer {
         matchTable.put(CardEquippedEvent.class, SoundEffectType.Equip);
         matchTable.put(FlipCoinEvent.class, SoundEffectType.FlipCoin);
         matchTable.put(LifeLossEvent.class, SoundEffectType.LifeLoss);
+        matchTable.put(PoisonCounterEvent.class, SoundEffectType.Poison);
         matchTable.put(CardRegeneratedEvent.class, SoundEffectType.Regen);
         matchTable.put(RemoveCounterEvent.class, SoundEffectType.RemoveCounter);
         matchTable.put(CardSacrificedEvent.class, SoundEffectType.Sacrifice);
         matchTable.put(ShuffleEvent.class, SoundEffectType.Shuffle);
+        matchTable.put(TokenCreatedEvent.class, SoundEffectType.Token);
     }
     
     

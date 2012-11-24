@@ -1239,10 +1239,9 @@ public class GameAction {
 
             if (c.getCounters(CounterType.LOYALTY) <= 0) {
                 Singletons.getModel().getGame().getAction().moveToGraveyard(c);
+                // Play the Destroy sound
+                Singletons.getModel().getGame().getEvents().post(new CardDestroyedEvent());
             }
-
-            // Play the Destroy sound
-            Singletons.getModel().getGame().getEvents().post(new CardDestroyedEvent());
 
             final ArrayList<String> types = c.getType();
             for (final String type : types) {

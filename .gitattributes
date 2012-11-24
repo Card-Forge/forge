@@ -12952,6 +12952,7 @@ src/main/java/forge/game/MatchController.java -text
 src/main/java/forge/game/MatchStartHelper.java -text
 src/main/java/forge/game/PlayerStartConditions.java -text
 src/main/java/forge/game/event/AddCounterEvent.java -text
+src/main/java/forge/game/event/BlockerAssignedEvent.java -text
 src/main/java/forge/game/event/CardDamagedEvent.java -text
 src/main/java/forge/game/event/CardDestroyedEvent.java -text
 src/main/java/forge/game/event/CardDiscardedEvent.java -text
@@ -12971,6 +12972,7 @@ src/main/java/forge/game/event/RemoveCounterEvent.java -text
 src/main/java/forge/game/event/SetTappedEvent.java -text
 src/main/java/forge/game/event/ShuffleEvent.java -text
 src/main/java/forge/game/event/SpellResolvedEvent.java -text
+src/main/java/forge/game/event/TokenCreatedEvent.java -text
 src/main/java/forge/game/event/package-info.java -text
 src/main/java/forge/game/limited/BoosterDeck.java -text
 src/main/java/forge/game/limited/BoosterDraft.java svneol=native#text/plain
