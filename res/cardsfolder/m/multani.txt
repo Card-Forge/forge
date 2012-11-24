@@ -7,6 +7,4 @@ S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddPower
 SVar:X:Count$CardsInYourHand
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=12146&type=card
-SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/multani.jpg
-Oracle:Hand -3, life -2\nCreatures you control get +X/+0, where X is the number of cards in your hand.
 End

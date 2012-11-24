@@ -6,6 +6,4 @@ HandLifeModifier:+0/+8
 A:AB$ Token | ActivationZone$ Command | Cost$ 3 | TokenAmount$ 1 | TokenName$ Sliver | TokenTypes$ Creature,Sliver | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 colorless Sliver creature token onto the battlefield.
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=12143&type=card
-SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/sliver-queen-brood-mother.jpg
-Oracle:Hand +0, life +8\n{3}: Put a 1/1 colorless Sliver creature token onto the battlefield.
 End

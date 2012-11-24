@@ -7,6 +7,4 @@ A:AB$ Regenerate | ActivationZone$ Command | Cost$ Sac<1/Permanent> | ValidTgts$
 SVar:RemAIDeck:True
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=12331&type=card
-SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/xantcha.jpg
-Oracle:Hand +1, life +3\nSacrifice a permanent: Regenerate target creature.
 End

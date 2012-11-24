@@ -6,6 +6,4 @@ HandLifeModifier:+1/+1
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddToughness$ 2 | Description$ Creatures you control get +0/+2.
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=12332&type=card
-SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/serra.jpg
-Oracle:Hand +1, life +1\nCreatures you control get +0/+2.
 End
