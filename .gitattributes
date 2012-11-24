@@ -5115,6 +5115,7 @@ res/cardsfolder/j/joraga_bard.txt svneol=native#text/plain
 res/cardsfolder/j/joraga_treespeaker.txt svneol=native#text/plain
 res/cardsfolder/j/joraga_warcaller.txt svneol=native#text/plain
 res/cardsfolder/j/jotun_owl_keeper.txt -text
+res/cardsfolder/j/journey_of_discovery.txt -text
 res/cardsfolder/j/journey_to_nowhere.txt svneol=native#text/plain
 res/cardsfolder/j/journeyers_kite.txt svneol=native#text/plain
 res/cardsfolder/j/joven.txt svneol=native#text/plain
@@ -11145,6 +11146,7 @@ res/cardsfolder/w/waning_wurm.txt svneol=native#text/plain
 res/cardsfolder/w/war_barge.txt -text svneol=unset#text/plain
 res/cardsfolder/w/war_chariot.txt svneol=native#text/plain
 res/cardsfolder/w/war_dance.txt svneol=native#text/plain
+res/cardsfolder/w/war_elemental.txt -text
 res/cardsfolder/w/war_falcon.txt -text
 res/cardsfolder/w/war_mammoth.txt svneol=native#text/plain
 res/cardsfolder/w/war_priest_of_thune.txt svneol=native#text/plain
