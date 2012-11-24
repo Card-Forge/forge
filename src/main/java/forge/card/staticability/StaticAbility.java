@@ -504,15 +504,15 @@ public class StaticAbility {
                         || controller.getColoredCardsInPlay(Constant.Color.WHITE).isEmpty())) {
                     return false;
                 }
+            } else if (params.get("Condition").equals("FatefulHour")) {
+                if (controller.getLife() > 5) {
+                    return false;
+                }
+            } else if (params.get("Condition").equals("Threshold")) {
+                if (!controller.hasThreshold()) {
+                    return false;
+                }
             }
-        }
-
-        if (this.params.containsKey("FatefulHour") && controller.getLife() > 5) {
-            return false;
-        }
-
-        if (this.params.containsKey("Threshold") && !controller.hasThreshold()) {
-            return false;
         }
 
         if (this.params.containsKey("Hellbent") && !controller.hasHellbent()) {

@@ -3,7 +3,7 @@ ManaCost:1 W W
 Types:Creature Human Nomad
 Text:no text
 PT:2/2
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddAbility$ Pump | Threshold$ True | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME gets +1/+1 and has "Tap: Target attacking or blocking creature gets +3/+3 until end of turn."
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddAbility$ Pump | Condition$ Threshold | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME gets +1/+1 and has "Tap: Target attacking or blocking creature gets +3/+3 until end of turn."
 SVar:Pump:AB$Pump | Cost$ T | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumAtt$ +3 | NumDef$ +3 | SpellDescription$ Target attacking or blocking creature gets +3/+3 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vigilant_sentry.jpg

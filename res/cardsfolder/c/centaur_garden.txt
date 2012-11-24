@@ -4,7 +4,7 @@ Types:Land
 Text:no text
 A:AB$ Mana | Cost$ T | Produced$ G | SubAbility$ DBPain | SpellDescription$ Add G to your mana pool. CARDNAME deals 1 damage to you.
 A:AB$ Pump | Cost$ G T Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 3 | NumDef$ 3 | Activation$ Threshold | PrecostDesc$ Threshold - | SpellDescription$ Target creature gets +3/+3 until end of turn. Activate this ability only if seven or more cards are in your graveyard.
-SVar:DBPain:DB$DealDamage | NumDmg$ 1 | Defined$ You
+SVar:DBPain:DB$ DealDamage | NumDmg$ 1 | Defined$ You
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/centaur_garden.jpg

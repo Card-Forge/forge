@@ -5,7 +5,7 @@ Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Flying | Description$ Enchanted creature has flying.
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Shroud | Threshold$ True | Description$ Threshold - Enchanted creature has shroud as long as seven or more cards are in your graveyard. (It can't be the target of spells or abilities.)
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Shroud | Condition$ Threshold | Description$ Threshold - Enchanted creature has shroud as long as seven or more cards are in your graveyard. (It can't be the target of spells or abilities.)
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aboshans_desire.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/59.jpg

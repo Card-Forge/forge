@@ -4,8 +4,8 @@ Types:Creature Centaur Horror
 Text:no text
 PT:3/3
 K:Trample
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ CARDNAME is black. | AddAbility$ Destroy | Threshold$ True | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME gets +1/+1, is black, and has "2 B, tap: Destroy target green creature."
-SVar:Destroy:AB$Destroy | Cost$ 2 B T | ValidTgts$ Creature.Green | TgtPrompt$ Select target green creature | SpellDescription$ Destroy target green creature.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ CARDNAME is black. | AddAbility$ Destroy | Condition$ Threshold | Description$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME gets +1/+1, is black, and has "2 B, tap: Destroy target green creature."
+SVar:Destroy:AB$ Destroy | Cost$ 2 B T | ValidTgts$ Creature.Green | TgtPrompt$ Select target green creature | SpellDescription$ Destroy target green creature.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/possessed_centaur.jpg
 SetInfo:TOR|Rare|http://magiccards.info/scans/en/tr/137.jpg
