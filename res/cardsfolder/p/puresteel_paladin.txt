@@ -5,7 +5,7 @@ Text:no text
 PT:2/2
 T:Mode$ ChangesZone | ValidCard$ Equipment.YouCtrl | Origin$ Any | Destination$ Battlefield | Execute$ TrigDraw | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever an Equipment enters the battlefield under your control, you may draw a card.
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1
-S:Mode$ Continuous | Affected$ Equipment.YouCtrl | AddAbility$ ABAttach | Metalcraft$ True | Description$ Metalcraft - Equipment you control have equip 0 as long as you control three or more artifacts.
+S:Mode$ Continuous | Affected$ Equipment.YouCtrl | AddAbility$ ABAttach | Condition$ Metalcraft | Description$ Metalcraft - Equipment you control have equip 0 as long as you control three or more artifacts.
 SVar:ABAttach:AB$ Attach | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SorcerySpeed$ True | PrecostDesc$ Equip - | SpellDescription$ Attach CARDNAME to target creature you control.
 SVar:Rarity:Rare
 SVar:Picture:http://serv4.tcgimages.eu/img/cards/New_Phyrexia/puresteel_paladin.jpg

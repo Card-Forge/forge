@@ -3,7 +3,7 @@ ManaCost:4 B B
 Types:Enchantment
 Text:no text
 K:Madness:2 B B
-S:Mode$ Continuous | Affected$ You | Hellbent$ True | AddKeyword$ Skip your upkeep step. | Description$ Hellbent - Skip your upkeep step if you have no cards in hand.
+S:Mode$ Continuous | Affected$ You | Condition$ Hellbent | AddKeyword$ Skip your upkeep step. | Description$ Hellbent - Skip your upkeep step if you have no cards in hand.
 T:Mode$ Phase | Phase$ Upkeep | Execute$ TrigLoseLifeDiscard | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, that player loses 1 life and discards a card.
 SVar:TrigLoseLifeDiscard:AB$LoseLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount$ 1 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ TriggeredPlayer | NumCards$ 1 | Mode$ TgtChoose

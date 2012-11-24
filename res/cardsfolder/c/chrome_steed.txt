@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact Creature Horse
 Text:no text
 PT:2/2
-S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | Metalcraft$ True | Description$ Metalcraft - CARDNAME gets +2/+2 as long as you control three or more artifacts.
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ 2 | AddToughness$ 2 | Condition$ Metalcraft | Description$ Metalcraft - CARDNAME gets +2/+2 as long as you control three or more artifacts.
 SVar:BuffedBy:Artifact
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chrome_steed.jpg
