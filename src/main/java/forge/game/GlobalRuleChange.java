@@ -32,9 +32,9 @@ public enum GlobalRuleChange {
     onlyOneAttackerACombat ("No more than one creature can attack each combat."),
     onlyOneBlocker ("No more than one creature can block each combat."),
     toughnessAssignsDamage ("Each creature assigns combat damage equal to its toughness rather than its power.");
-    
+
     private final String ruleText;
-    
+
     private GlobalRuleChange(String text) {
         ruleText = text;
     }

@@ -11,7 +11,7 @@ public class PlayerStartConditions {
     private int startingLife = 20;
     private Supplier<Iterable<Card>> cardsOnTable = null;
 
-    public PlayerStartConditions( Deck deck0 ) {
+    public PlayerStartConditions(Deck deck0) {
         deck = deck0;
     }
 
@@ -28,7 +28,7 @@ public class PlayerStartConditions {
     public final void setStartingLife(int startingLife) {
         this.startingLife = startingLife;
     }
-    
+
     public final void setCardsOnTable(Supplier<Iterable<Card>> cardsOnTable) {
         this.cardsOnTable = cardsOnTable;
     }

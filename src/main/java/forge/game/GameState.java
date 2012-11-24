@@ -60,8 +60,8 @@ import forge.game.zone.ZoneType;
 public class GameState {
     private final List<Player> roIngamePlayers;
     private final List<Player> allPlayers;
-    private final List<Player> ingamePlayers = new ArrayList<Player>(); 
-    
+    private final List<Player> ingamePlayers = new ArrayList<Player>();
+
     private final Cleanup cleanup = new Cleanup();
     private final EndOfTurn endOfTurn = new EndOfTurn();
     private final EndOfCombat endOfCombat = new EndOfCombat();
@@ -76,21 +76,21 @@ public class GameState {
     private final EventBus events = new EventBus();
     private final GameLog gameLog = new GameLog();
     private final ColorChanger colorChanger = new ColorChanger();
-    
+
     private boolean gameOver = false;
 
     private final Zone stackZone = new Zone(ZoneType.Stack);
 
     private long timestamp = 0;
     private final GameAction action;
-    
+
     /**
      * Constructor.
-     * @param players2 
+     * @param players2
      */
     public GameState(Iterable<LobbyPlayer> players2) { /* no more zones to map here */
         List<Player> players = new ArrayList<Player>();
-        for(LobbyPlayer p : players2) {
+        for (LobbyPlayer p : players2) {
             Player pl = getIngamePlayer(p);
             players.add(pl);
             ingamePlayers.add(pl);
@@ -100,7 +100,7 @@ public class GameState {
         action = new GameAction(this);
         stack = new MagicStack(this);
         phaseHandler = new PhaseHandler(this);
-        
+
         events.register(Singletons.getControl().getSoundSystem());
         events.register(gameLog);
     }
@@ -121,7 +121,7 @@ public class GameState {
      */
     public final List<Player> getRegisteredPlayers() {
         return allPlayers;
-    }    
+    }
 
     /**
      * Gets the cleanup step.
@@ -290,20 +290,20 @@ public class GameState {
      */
     public void setGameOver() {
         this.gameOver = true;
-        for(Player p : roIngamePlayers) {
+        for (Player p : roIngamePlayers) {
             p.onGameOver();
         }
     }
 
-    
-    // THESE WERE MOVED HERE FROM AllZoneUtil 
-    // They must once become non-static members of this class 
-    
+
+    // THESE WERE MOVED HERE FROM AllZoneUtil
+    // They must once become non-static members of this class
+
     public Zone getZoneOf(final Card c) {
         if (getStackZone().contains(c)) {
             return getStackZone();
         }
-    
+
         for (final Player p : getPlayers()) {
             for (final ZoneType z : Player.ALL_ZONES) {
                 final PlayerZone pz = p.getZone(z);
@@ -312,7 +312,7 @@ public class GameState {
                 }
             }
         }
-    
+
         return null;
     }
 
@@ -328,7 +328,7 @@ public class GameState {
                 }
             }
         }
-    
+
         return false;
     }
 
@@ -360,18 +360,19 @@ public class GameState {
         return getCardsIn(ZoneType.Exile).contains(c);
     }
 
-    
+
     public boolean isCardInPlay(final String cardName) {
         for (final Player p : getPlayers()) {
-            if (p.isCardInPlay(cardName))
+            if (p.isCardInPlay(cardName)) {
                 return true;
+            }
         }
         return false;
     }
 
     public List<Card> getColoredCardsInPlay(final String color) {
         final List<Card> cards = new ArrayList<Card>();
-        for(Player p : getPlayers()) {
+        for (Player p : getPlayers()) {
             cards.addAll(p.getColoredCardsInPlay(color));
         }
         return cards;
@@ -383,7 +384,7 @@ public class GameState {
                 return c;
             }
         }
-    
+
         return card;
     }
 
@@ -458,35 +459,36 @@ public class GameState {
     public Player getNextPlayerAfter(final Player playerTurn) {
         int iPlayer = roIngamePlayers.indexOf(playerTurn);
 
-        if( -1 == iPlayer && !roIngamePlayers.isEmpty()) // should do something if playerTurn has just lost!
-        {
+        if (-1 == iPlayer && !roIngamePlayers.isEmpty()) { // should do something if playerTurn has just lost!
+
             int iAlive;
             iPlayer = allPlayers.indexOf(playerTurn);
-            do{
-                iPlayer = ( iPlayer + 1 ) % allPlayers.size();
+            do {
+                iPlayer = (iPlayer + 1) % allPlayers.size();
                 iAlive = roIngamePlayers.indexOf(allPlayers.get(iPlayer));
             } while(iAlive < 0);
             iPlayer = iAlive;
         } else { // for the case noone has died
-            if( iPlayer == roIngamePlayers.size() - 1)
+            if (iPlayer == roIngamePlayers.size() - 1) {
                 iPlayer = -1;
+            }
             iPlayer++;
         }
 
         return roIngamePlayers.get(iPlayer);
-                
+
     }
 
     /**
-     * Only game knows how to make siutable players out of just connected clients
+     * Only game knows how to make siutable players out of just connected clients.
      * @return
      */
     public Player getIngamePlayer(LobbyPlayer player) {
-        if ( player.getType() == PlayerType.HUMAN )
+        if (player.getType() == PlayerType.HUMAN) {
             return new HumanPlayer(player, this);
-        else {
+        } else {
             return new AIPlayer(player, this);
-            
+
         }
     }
 
@@ -496,7 +498,7 @@ public class GameState {
      */
     public void onPlayerLost(Player p) {
         ingamePlayers.remove(p);
-        
+
         final Map<String, Object> runParams = new TreeMap<String, Object>();
         runParams.put("Player", p);
         this.getTriggerHandler().runTrigger(TriggerType.LosesGame, runParams);

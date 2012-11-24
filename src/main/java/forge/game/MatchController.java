@@ -49,7 +49,7 @@ public class MatchController {
     private final List<GameOutcome> gamesPlayedRo;
 
     private InputControl input;
-    
+
     public MatchController() {
         gamesPlayedRo = Collections.unmodifiableList(gamesPlayed);
     }
@@ -75,13 +75,14 @@ public class MatchController {
 
     /**
      * TODO: Write javadoc for this method.
-     * @param reason 
+     * @param reason
      * 
      * @param game
      */
     public void addGamePlayed(GameEndReason reason, GameState game) {
-        if ( !game.isGameOver() )
+        if (!game.isGameOver()) {
             throw new RuntimeException("Game is not over yet.");
+        }
 
         GameOutcome result = new GameOutcome(reason, game.getRegisteredPlayers());
         result.setTurnsPlayed(game.getPhaseHandler().getTurn());
@@ -99,10 +100,11 @@ public class MatchController {
         // Instantiate AI
         input = new InputControl(currentGame);
 
-        
+
         Map<Player, PlayerStartConditions> startConditions = new HashMap<Player, PlayerStartConditions>();
-        for (Player p : currentGame.getPlayers())
+        for (Player p : currentGame.getPlayers()) {
             startConditions.put(p, players.get(p.getLobbyPlayer()));
+        }
 
         try {
             Player localHuman = Aggregates.firstFieldEquals(currentGame.getPlayers(), Player.Accessors.FN_GET_TYPE, PlayerType.HUMAN);
@@ -132,10 +134,10 @@ public class MatchController {
                 field.getLblLibrary().setHoverable(Preferences.DEV_MODE);
             }
 
-            if (this.getPlayedGames().isEmpty()) { 
+            if (this.getPlayedGames().isEmpty()) {
                 VAntes.SINGLETON_INSTANCE.clearAnteCards();
             }
-            
+
             // per player observers were set in CMatchUI.SINGLETON_INSTANCE.initMatch
 
             CMessage.SINGLETON_INSTANCE.updateGameInfo(this);
@@ -170,8 +172,8 @@ public class MatchController {
     public void replay() {
         gamesPlayed.clear();
         startRound();
-    }    
-    
+    }
+
     /**
      * TODO: Write javadoc for this method.
      * 
@@ -214,8 +216,9 @@ public class MatchController {
         }
 
         for (int score : victories) {
-            if (score >= gamesToWinMatch)
+            if (score >= gamesToWinMatch) {
                 return true;
+            }
         }
         return gamesPlayed.size() >= gamesPerMatch;
     }
@@ -256,7 +259,7 @@ public class MatchController {
         PlayerStartConditions cond = players.get(lobbyPlayer);
         return cond == null ? null : cond.getDeck();
     }
-    
+
     public Map<LobbyPlayer, PlayerStartConditions> getPlayers() {
         return players;
     }
