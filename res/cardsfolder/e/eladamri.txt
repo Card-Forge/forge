@@ -15,6 +15,7 @@ SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destinat
 SVar:X:ReplaceCount$DamageAmount/Minus.1
 SVar:Y:ReplaceCount$DamageAmount
 SVar:Rarity:Special
-SVar:Picture:http://www.wizards.com/global/images/magic/general/eladamri.jpg
+SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=12140&type=card
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/eladamri.jpg
 Oracle:Hand -1, life +15\n{0}: The next 1 damage that would be dealt to target creature you control is dealt to you instead.
 End

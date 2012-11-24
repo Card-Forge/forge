@@ -6,4 +6,6 @@ HandLifeModifier:+0/+5
 A:AB$ Pump | ActivationZone$ Command | Cost$ S | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | NumAtt$ 1 | NumDef$ 1 | SpellDescription$ Target creature you control gets +1/+1 until end of turn.
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=182274&type=card
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/diamond-faerie.jpg
+Oracle:Hand +0, life +5\n{S}: Target creature you control gets +1/+1 until end of turn.
 End

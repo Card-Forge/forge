@@ -5,5 +5,7 @@ Text:no text
 HandLifeModifier:-1/+4
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddKeyword$ Hexproof | Description$ Creatures you control have hexproof. (They can't be the targets of spells or abilities your opponents control.)
 SVar:Rarity:Special
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/ertai.jpg
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=4959&type=card
+Oracle:Hand -1, life +4\nCreatures you control have hexproof. (They can't be the targets of spells or abilities your opponents control.)
 End

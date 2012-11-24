@@ -7,4 +7,6 @@ T:Mode$ ChangesZone | TriggerZones$ Command | Origin$ Battlefield | Destination$
 SVar:TrigDraw:AB$ Draw | Cost$ 0 | NumCards$ 1 | Defined$ You
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=12145
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/rofellos.jpg
+Oracle:Hand -2, life +4\nWhenever a creature you control dies, draw a card.
 End

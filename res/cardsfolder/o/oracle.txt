@@ -8,4 +8,6 @@ SVar:Reconsider:DB$ RemoveFromCombat | Defined$ Targeted
 SVar:RemAIDeck:True
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=12141&type=card
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/oracle.jpg
+Oracle:Hand +1, life +9\n{0}: Untap target attacking creature you control and remove it from combat.
 End
