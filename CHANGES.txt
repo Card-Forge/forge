@@ -156,6 +156,36 @@ Fixes/Features:
 - Converted Explore and Summer Bloom to script
 - More preparations for quest worlds.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Sound System: converted counter sounds to the event bus system, NPE fix when making an audio clip, various minor fixes and typo corrections in sound system and event classes.
+- CheckStyle.
+- Removed some unnecessary updateObservers calls in startRound.
+- Sound System: converted tap/untap sound playback to an event, preliminary support for synced sounds using the event model.
+- Sound System: both synced and non-synced sounds are supported now using the event model (the type of the sound is declared in SoundEffectType constructors).
+- Sound System: converted shuffle and flipcoin sounds to events, some minor stylistic changes.
+- Sound System: converted more sounds to events.
+- Sound System: done converting sounds to events.
+- Sound System: last of the direct sound calls converted to an event.
+- Moved most of the stuff happening in startGame outside of the swingWorker (to fix the ConcurrentModificationException error).
+- Added Arcbound Fiend and Matsu-Tribe Decoy by swordshine.
+- Fixed AI of Aegis Angel.
+- Reimplemented "StackDescription$ SpellDescription".
+- Fixed the global rule change "No more than one creature can attack each combat".
+- Fixed Sleeper Agent.
+- move questWorld out of QuestData package (because only things being serialized should be kept there)
+- remove unused imports (soundeffecttype mostly)
+- Fixed MustBlockCards not being checked for still attacking.
+- Counter class renamed to CounterType
+- CheckStyle.
+- Convert Lighthouse Chronologist to script
+- counters: united calls using multipliers and ignoring them, 
+- removed useless setCounter wrapper
+- Variants: WIP new Vanguard Home screen for multiplayer shenanigans (Does not work yet)
+- CheckStyle.
+- Merged changes from trunk to Variants: r18323-r18354
+- Converted Spirit of Resistance to script.
+- Variants - Added the following avatars: Titania
+- Reorganized Conditions of static abilities (WIP).
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -194,6 +224,8 @@ Pilgrim of Justice
 Pilgrim of Virtue
 Ember Gale
 Tower Above
+Journey of Discovery
+War Elemental
 
 
 end
