@@ -18,7 +18,7 @@
 package forge.card.trigger;
 
 import forge.Card;
-import forge.Counters;
+import forge.CounterType;
 import forge.card.spellability.SpellAbility;
 
 /**
@@ -51,7 +51,7 @@ public class TriggerCounterRemoved extends Trigger {
     @Override
     public final boolean performTest(final java.util.Map<String, Object> runParams2) {
         final Card addedTo = (Card) runParams2.get("Card");
-        final Counters addedType = (Counters) runParams2.get("CounterType");
+        final CounterType addedType = (CounterType) runParams2.get("CounterType");
 
         if (this.getMapParams().containsKey("ValidCard")) {
             if (!addedTo.isValid(this.getMapParams().get("ValidCard").split(","), this.getHostCard().getController(),

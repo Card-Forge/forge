@@ -207,7 +207,7 @@ public class PumpAi extends PumpAiBase {
             }
         }
 
-        list = CardLists.getValidCards(list, tgt.getValidTgts(), sa.getActivatingPlayer(), sa.getSourceCard());
+        list = CardLists.getValidCards(list, tgt.getValidTgts(), ai, sa.getSourceCard());
         if (Singletons.getModel().getGame().getStack().size() == 0) {
             // If the cost is tapping, don't activate before declare
             // attack/block

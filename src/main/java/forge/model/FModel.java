@@ -46,8 +46,8 @@ import forge.properties.ForgePreferences.FPref;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
+import forge.quest.QuestWorld;
 import forge.quest.data.QuestPreferences;
-import forge.quest.data.QuestWorld;
 import forge.util.FileUtil;
 import forge.util.HttpUtil;
 import forge.util.IStorageView;
@@ -362,6 +362,15 @@ public enum FModel {
      */
     public final FormatCollection getFormats() {
         return this.formats;
+    }
+
+    /**
+     * Gets the game worlds.
+     *
+     * @return the worlds
+     */
+    public final IStorageView<QuestWorld> getWorlds() {
+        return this.worlds;
     }
 
     /**

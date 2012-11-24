@@ -37,7 +37,7 @@ import javax.swing.JRootPane;
 import javax.swing.SwingUtilities;
 
 import forge.Card;
-import forge.Counters;
+import forge.CounterType;
 import forge.ImageCache;
 import forge.Singletons;
 import forge.gui.CardContainer;
@@ -612,11 +612,11 @@ public class CardPanel extends JPanel implements CardContainer {
 
         if (card.isCreature() && card.isPlaneswalker()) {
             this.ptText.setText(card.getNetAttack() + "/" + card.getNetDefense() + " ("
-                    + String.valueOf(card.getCounters(Counters.LOYALTY)) + ")");
+                    + String.valueOf(card.getCounters(CounterType.LOYALTY)) + ")");
         } else if (card.isCreature()) {
             this.ptText.setText(card.getNetAttack() + "/" + card.getNetDefense());
         } else if (card.isPlaneswalker()) {
-            int loyalty = card.getCounters(Counters.LOYALTY);
+            int loyalty = card.getCounters(CounterType.LOYALTY);
             if (loyalty == 0) {
                 loyalty = card.getBaseLoyalty();
             }

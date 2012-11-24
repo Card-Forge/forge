@@ -259,6 +259,16 @@ public class QuestController {
     }
 
     /**
+     * Gets the QuestWorld, if any.
+     * 
+     * @return QuestWorld or null, if using regular duels and challenges.
+     */
+    public QuestWorld getWorld() {
+        return this.model == null ? null : Singletons.getModel().getWorlds().get(this.model.getWorldId());
+    }
+    
+    
+    /**
      * TODO: Write javadoc for this method.
      *
      * @return the name
@@ -309,6 +319,8 @@ public class QuestController {
         return this.duelManager;
     }
 
+   
+    
     /**
      * 
      * TODO: Write javadoc for this method.

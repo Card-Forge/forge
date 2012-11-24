@@ -29,10 +29,11 @@ import forge.CardPredicates;
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
 import forge.game.GameState;
+import forge.game.event.EndOfTurnEvent;
+import forge.game.event.ManaBurnEvent;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.properties.ForgePreferences.FPref;
-import forge.sound.SoundEffectType;
 import forge.util.MyObservable;
 
 
@@ -426,7 +427,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 p.loseLife(burn);
 
                 // Play the Mana Burn sound
-                Singletons.getControl().getSoundSystem().play(SoundEffectType.ManaBurn);
+                Singletons.getModel().getGame().getEvents().post(new ManaBurnEvent());
             }
             p.updateObservers();
         }
@@ -470,7 +471,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     this.setPlayerTurn(this.handleNextTurn());
                 }
                 // Play the End Turn sound
-                Singletons.getControl().getSoundSystem().play(SoundEffectType.EndOfTurn);
+                Singletons.getModel().getGame().getEvents().post(new EndOfTurnEvent());
                 break;
             default: // no action
         }

@@ -20,10 +20,13 @@ package forge.sound;
 
 /**
  * Sounds (enumeration) - all sounds in the game must be declared here. Once
- * declared, the sound can be played from anywhere in the code using
- * Sounds.soundName.play(). The sounds are only preloaded once, so there is no
- * memory overhead for playing the sound multiple times.
+ * loaded, the sound can be played from the code by posting the appropriate
+ * event to the event bus via Singletons.getModel().getGame().getEvents().post.
  *
+ * The second parameter specifies whether a sound needs to be synced with other
+ * similar sounds (when there's a chance of multiple instances of the same sound
+ * generated in quick succession, so that the slowdown can be avoided) or not.
+ * 
  * Currently, if the file does not exist, it is not a fatal error. No sound is
  * played in that case, a simple message is generated on the debug console
  * during preloading.
@@ -33,41 +36,43 @@ package forge.sound;
 public enum SoundEffectType {
     // Sounds must be listed in alphabetic order.
 
-    AddCounter("add_counter.wav"),
-    Artifact("artifact.wav"),
-    ArtifactCreature("artifact_creature.wav"),
-    BlackLand("black_land.wav"),
-    BlueLand("blue_land.wav"),
-    Creature("creature.wav"),
-    Damage("damage.wav"), 
-    Destroy("destroy.wav"),
-    Discard("discard.wav"),
-    Draw("draw.wav"),
-    Enchantment("enchant.wav"), 
-    EndOfTurn("end_of_turn.wav"),
-    Equip("equip.wav"),
-    FlipCoin("flip_coin.wav"),
-    GreenLand("green_land.wav"),
-    Instant("instant.wav"),
-    LifeLoss("life_loss.wav"),
-    LoseDuel("lose_duel.wav"),
-    ManaBurn("mana_burn.wav"),
-    OtherLand("other_land.wav"),
-    Planeswalker("planeswalker.wav"),
-    Poison("poison.wav"),
-    RedLand("red_land.wav"),
-    Regen("regeneration.wav"),
-    RemoveCounter("remove_counter.wav"),
-    Sacrifice("sacrifice.wav"),
-    Sorcery("sorcery.wav"),
-    Shuffle("shuffle.wav"),
-    Tap("tap.wav"),
-    Untap("untap.wav"),
-    WhiteLand("white_land.wav"),
-    WinDuel("win_duel.wav");
+    AddCounter("add_counter.wav", false),
+    Artifact("artifact.wav", false),
+    ArtifactCreature("artifact_creature.wav", false),
+    BlackLand("black_land.wav", false),
+    BlueLand("blue_land.wav", false),
+    Creature("creature.wav", false),
+    Damage("damage.wav", true), 
+    Destroy("destroy.wav", true),
+    Discard("discard.wav", false),
+    Draw("draw.wav", false),
+    Enchantment("enchant.wav", false), 
+    EndOfTurn("end_of_turn.wav", false),
+    Equip("equip.wav", false),
+    FlipCoin("flip_coin.wav", false),
+    GreenLand("green_land.wav", false),
+    Instant("instant.wav", false),
+    LifeLoss("life_loss.wav", true),
+    LoseDuel("lose_duel.wav", false),
+    ManaBurn("mana_burn.wav", false),
+    OtherLand("other_land.wav", false),
+    Planeswalker("planeswalker.wav", false),
+    Poison("poison.wav", false),
+    RedLand("red_land.wav", false),
+    Regen("regeneration.wav", false),
+    RemoveCounter("remove_counter.wav", false),
+    Sacrifice("sacrifice.wav", false),
+    Sorcery("sorcery.wav", false),
+    Shuffle("shuffle.wav", false),
+    Tap("tap.wav", false),
+    Untap("untap.wav", false),
+    WhiteLand("white_land.wav", false),
+    WinDuel("win_duel.wav", false);
 
     
     private final String resourceFileName;
+    private final boolean isSynced;
+
     /**
      * @return the resourceFileName
      */
@@ -77,8 +82,24 @@ public enum SoundEffectType {
     /**
      * @param filename 
      *              name of the sound file associated with the entry.
+     * @param isSoundSynced
+     *              determines if only one instance of the sound can be played
+     *              at a time (the sound is synced with the other sounds of the
+     *              same kind).
      */
-    SoundEffectType(final String filename) {
+    SoundEffectType(final String filename, final boolean isSoundSynced) {
         resourceFileName = filename;
+        isSynced = isSoundSynced;
+    }
+
+    /**
+     * determine if the sound effect needs to be synchronized with the other
+     * events of the same kind or not.
+     * 
+     * @return true if the sound effect can only be played if no other sound
+     * of the same kind is already playing.
+     */
+    public boolean getIsSynced() {
+        return isSynced;
     }
 }

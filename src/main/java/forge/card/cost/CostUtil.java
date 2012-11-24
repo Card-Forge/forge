@@ -23,7 +23,7 @@ import java.util.Random;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Counters;
+import forge.CounterType;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.mana.ManaCost;
 import forge.card.spellability.SpellAbility;
@@ -248,7 +248,7 @@ public class CostUtil {
                 // A card has a 25% chance per counter to be able to pass
                 // through here
                 // 4+ counters will always pass. 0 counters will never
-                final Counters type = remCounter.getCounter();
+                final CounterType type = remCounter.getCounter();
                 final double percent = type.name().equals("P1P1") ? p1p1Percent : otherPercent;
                 final int currentNum = source.getCounters(type);
                 if (!part.getThis()) {
@@ -287,9 +287,9 @@ public class CostUtil {
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostPutCounter) {
                 final CostPutCounter addCounter = (CostPutCounter) part;
-                final Counters type = addCounter.getCounter();
+                final CounterType type = addCounter.getCounter();
 
-                if (type.equals(Counters.M1M1)) {
+                if (type.equals(CounterType.M1M1)) {
                     return false;
                 }
             }

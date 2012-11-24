@@ -7,21 +7,49 @@ import java.util.Map;
 
 import forge.Card;
 import forge.card.spellability.SpellAbility;
+import forge.game.event.AddCounterEvent;
+import forge.game.event.CardDamagedEvent;
+import forge.game.event.CardDestroyedEvent;
+import forge.game.event.CardDiscardedEvent;
+import forge.game.event.CardEquippedEvent;
+import forge.game.event.CardRegeneratedEvent;
+import forge.game.event.CardSacrificedEvent;
+import forge.game.event.DrawCardEvent;
+import forge.game.event.DuelOutcomeEvent;
+import forge.game.event.EndOfTurnEvent;
 import forge.game.event.Event;
+import forge.game.event.FlipCoinEvent;
 import forge.game.event.LandPlayedEvent;
+import forge.game.event.LifeLossEvent;
 import forge.game.event.PoisonCounterEvent;
+import forge.game.event.RemoveCounterEvent;
+import forge.game.event.SetTappedEvent;
+import forge.game.event.ShuffleEvent;
 import forge.game.event.SpellResolvedEvent;
 
 /** 
  * This class is in charge of converting any forge.game.event.Event to a SoundEffectType
  *
  */
-public class EventVisualilzer {
+public class EventVisualizer {
 
     final static Map<Class<?>, SoundEffectType> matchTable = new HashMap<Class<?>, SoundEffectType>();
     
-    public EventVisualilzer() { 
+    public EventVisualizer() { 
         matchTable.put(PoisonCounterEvent.class, SoundEffectType.Poison);
+        matchTable.put(AddCounterEvent.class, SoundEffectType.AddCounter);
+        matchTable.put(CardDamagedEvent.class, SoundEffectType.Damage);
+        matchTable.put(CardDestroyedEvent.class, SoundEffectType.Destroy);
+        matchTable.put(CardDiscardedEvent.class, SoundEffectType.Discard);
+        matchTable.put(DrawCardEvent.class, SoundEffectType.Draw);
+        matchTable.put(EndOfTurnEvent.class, SoundEffectType.EndOfTurn);
+        matchTable.put(CardEquippedEvent.class, SoundEffectType.Equip);
+        matchTable.put(FlipCoinEvent.class, SoundEffectType.FlipCoin);
+        matchTable.put(LifeLossEvent.class, SoundEffectType.LifeLoss);
+        matchTable.put(CardRegeneratedEvent.class, SoundEffectType.Regen);
+        matchTable.put(RemoveCounterEvent.class, SoundEffectType.RemoveCounter);
+        matchTable.put(CardSacrificedEvent.class, SoundEffectType.Sacrifice);
+        matchTable.put(ShuffleEvent.class, SoundEffectType.Shuffle);
     }
     
     
@@ -29,15 +57,42 @@ public class EventVisualilzer {
         SoundEffectType fromMap = matchTable.get(evt.getClass());
 
         // call methods copied from Utils here
-        if( evt instanceof SpellResolvedEvent ) {
+        if (evt instanceof SpellResolvedEvent) {
             return getSoundEffectForResolve(((SpellResolvedEvent) evt).Source, ((SpellResolvedEvent) evt).Spell);
         }
-        if ( evt instanceof LandPlayedEvent )
+        if (evt instanceof LandPlayedEvent) {
             return getSoundEffectForLand(((LandPlayedEvent) evt).Land);
+        }
+        if (evt instanceof AddCounterEvent) {
+            if (((AddCounterEvent) evt).Amount == 0) {
+                return null;
+            }
+        }
+        if (evt instanceof RemoveCounterEvent) {
+            if (((RemoveCounterEvent) evt).Amount == 0) {
+                return null;
+            }
+        }
+        if (evt instanceof SetTappedEvent) {
+            return getSoundEffectForTapState(((SetTappedEvent) evt).Tapped);
+        }
+        if (evt instanceof DuelOutcomeEvent) {
+            return getSoundEffectForDuelOutcome(((DuelOutcomeEvent) evt).humanWonTheDuel);
+        }
 
         return fromMap;
     }
     
+    /**
+     * Plays the sound corresponding to the outcome of the duel.
+     * 
+     * @param humanWonTheDuel true if the human won the duel, false otherwise.
+     * @return the sound effect played
+     */
+    public SoundEffectType getSoundEffectForDuelOutcome(boolean humanWonTheDuel) {
+        return humanWonTheDuel ? SoundEffectType.WinDuel : SoundEffectType.LoseDuel;
+    }
+
     /**
      * Plays the sound corresponding to the card type/color when the card
      * ability resolves on the stack.
@@ -76,9 +131,22 @@ public class EventVisualilzer {
     }
 
     /**
+     * Plays the sound corresponding to the change of the card's tapped state
+     * (when a card is tapped or untapped).
+     * 
+     * @param tapped_state if true, the "tap" sound is played; otherwise, the
+     * "untap" sound is played
+     * @return the sound effect type
+     */
+    public static SoundEffectType getSoundEffectForTapState(boolean tapped_state) {
+        return tapped_state ? SoundEffectType.Tap : SoundEffectType.Untap;
+    }
+    
+    /**
      * Plays the sound corresponding to the land type when the land is played.
      *
      * @param land the land card that was played
+     * @return the sound effect type
      */
     public static SoundEffectType getSoundEffectForLand(final Card land) {
         if (land == null) {
@@ -121,9 +189,7 @@ public class EventVisualilzer {
      * Play a specific sound effect based on card's name.
      *
      * @param c the card to play the sound effect for.
-     * @return true if the special effect was found and played, otherwise
-     *         false (in which case the type-based FX will be played, if
-     *         applicable).
+     * @return the sound effect type
      */
     private static SoundEffectType getSpecificCardEffect(final Card c) {
         // Implement sound effects for specific cards here, if necessary.
@@ -134,9 +200,9 @@ public class EventVisualilzer {
     /**
      * TODO: Choose is the special type of event produces a single or lot of overlapping sounds (?)
      */
-    public boolean isSyncSound(Event evt) {
+    public boolean isSyncSound(SoundEffectType effect) {
 
-        return true;
+        return effect.getIsSynced();
     }    
 
 }

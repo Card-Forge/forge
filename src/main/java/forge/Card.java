@@ -55,13 +55,16 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
 import forge.game.GlobalRuleChange;
+import forge.game.event.AddCounterEvent;
+import forge.game.event.CardEquippedEvent;
+import forge.game.event.RemoveCounterEvent;
+import forge.game.event.SetTappedEvent;
 import forge.game.phase.Combat;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
-import forge.sound.SoundEffectType;
 import forge.util.Expressions;
 import forge.util.MyRandom;
 
@@ -93,7 +96,7 @@ public class Card extends GameEntity implements Comparable<Card> {
     private ZoneType castFrom = null;
 
     private final CardDamageHistory damageHistory = new CardDamageHistory();
-    private Map<Counters, Integer> counters = new TreeMap<Counters, Integer>();
+    private Map<CounterType, Integer> counters = new TreeMap<CounterType, Integer>();
     private final Map<String, Object> triggeringObjects = new TreeMap<String, Object>();
     private ArrayList<String> extrinsicKeyword = new ArrayList<String>();
     // Hidden keywords won't be displayed on the card
@@ -1209,16 +1212,12 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            the counter name
      * @return true, if successful
      */
-    public final boolean canHaveCountersPlacedOnIt(final Counters counterName) {
+    public final boolean canHaveCountersPlacedOnIt(final CounterType counterName) {
         if (this.hasKeyword("CARDNAME can't have counters placed on it.")) {
             return false;
         }
-        if (this.isCreature() && counterName.equals(Counters.M1M1)) {
-            for (final Card c : this.getController().getCreaturesInPlay()) { // look
-                                                                                        // for
-                                                                                        // Melira,
-                                                                                        // Sylvok
-                                                                                        // Outcast
+        if (this.isCreature() && counterName.equals(CounterType.M1M1)) {
+            for (final Card c : this.getController().getCreaturesInPlay()) { // look for Melira, Sylvok Outcast
                 if (c.hasKeyword("Creatures you control can't have -1/-1 counters placed on them.")) {
                     return false;
                 }
@@ -1228,79 +1227,27 @@ public class Card extends GameEntity implements Comparable<Card> {
         return true;
     }
 
-    // for costs (like Planeswalker abilities) Doubling Season gets ignored.
-    /**
-     * <p>
-     * addCounterFromNonEffect.
-     * </p>
-     * 
-     * @param counterName
-     *            a {@link forge.Counters} object.
-     * @param n
-     *            a int.
-     */
-    public final void addCounterFromNonEffect(final Counters counterName, final int n) {
-        if (!this.canHaveCountersPlacedOnIt(counterName)) {
+    public final void addCounter(final CounterType counterType, final int n, final boolean applyMultiplier) {
+        if (!this.canHaveCountersPlacedOnIt(counterType)) {
             return;
         }
-        if (this.counters.containsKey(counterName)) {
-            final Integer aux = this.counters.get(counterName) + n;
-            this.counters.put(counterName, aux);
-        } else {
-            this.counters.put(counterName, Integer.valueOf(n));
-        }
+        final int multiplier = applyMultiplier ? this.getController().getCounterDoublersMagnitude(counterType) : 1;
+        final int addAmount = (multiplier * n);
+
+        Integer oldValue = this.counters.get(counterType);
+        int newValue = addAmount + (oldValue == null ? 0 : oldValue.intValue());
+        this.counters.put(counterType, Integer.valueOf(newValue));
 
         // Run triggers
         final Map<String, Object> runParams = new TreeMap<String, Object>();
         runParams.put("Card", this);
-        runParams.put("CounterType", counterName);
-        for (int i = 0; i < n; i++) {
-            Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.CounterAdded, runParams);
-        }
-
-
-        // play the Add Counter sound
-        if (n > 0) {
-            Sounds.AddCounter.play();
-        }
-
-        this.updateObservers();
-    }
-
-    /**
-     * <p>
-     * addCounter.
-     * </p>
-     * 
-     * @param counterName
-     *            a {@link forge.Counters} object.
-     * @param n
-     *            a int.
-     */
-    public final void addCounter(final Counters counterName, final int n) {
-        if (!this.canHaveCountersPlacedOnIt(counterName)) {
-            return;
-        }
-        final int multiplier = this.getController().getCounterDoublersMagnitude(counterName);
-        if (this.counters.containsKey(counterName)) {
-            final Integer aux = this.counters.get(counterName) + (multiplier * n);
-            this.counters.put(counterName, aux);
-        } else {
-            this.counters.put(counterName, Integer.valueOf(multiplier * n));
-        }
-
-        // Run triggers
-        final Map<String, Object> runParams = new TreeMap<String, Object>();
-        runParams.put("Card", this);
-        runParams.put("CounterType", counterName);
-        for (int i = 0; i < (multiplier * n); i++) {
+        runParams.put("CounterType", counterType);
+        for (int i = 0; i < addAmount; i++) {
             Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.CounterAdded, runParams);
         }
 
         // play the Add Counter sound
-        if (n > 0) {
-            Sounds.AddCounter.play();
-        }
+        Singletons.getModel().getGame().getEvents().post(new AddCounterEvent(addAmount));
 
         this.updateObservers();
     }
@@ -1311,74 +1258,82 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param counterName
-     *            a {@link forge.Counters} object.
+     *            a {@link forge.CounterType} object.
      * @param n
      *            a int.
      */
-    public final void subtractCounter(final Counters counterName, final int n) {
-        if (this.counters.containsKey(counterName)) {
-            Integer aux = this.counters.get(counterName) - n;
-            if (aux < 0) {
-                aux = 0;
+    public final void subtractCounter(final CounterType counterName, final int n) {
+        Integer oldValue = this.counters.get(counterName);
+        int newValue = oldValue == null ? 0 : Math.max(oldValue.intValue() - n, 0);
+
+        final int delta = (oldValue == null ? 0 : oldValue.intValue()) - newValue;
+        if (delta == 0) {
+            return;
+        }
+
+        if (newValue > 0) {
+            this.counters.put(counterName, Integer.valueOf(newValue));
+        } else {
+            this.counters.remove(counterName);
+        }
+
+        // Run triggers
+        final Map<String, Object> runParams = new TreeMap<String, Object>();
+        runParams.put("Card", this);
+        runParams.put("CounterType", counterName);
+        for (int i = 0; i < delta; i++) {
+            Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemoved, runParams);
+        }
+
+        if (counterName.equals(CounterType.TIME) && (newValue == 0)) {
+            final boolean hasVanish = CardFactoryUtil.hasKeyword(this, "Vanishing") != -1;
+
+            if (hasVanish && this.isInPlay()) {
+                Singletons.getModel().getGame().getAction().sacrifice(this, null);
             }
-            this.counters.put(counterName, aux);
 
-            // Run triggers
-            final Map<String, Object> runParams = new TreeMap<String, Object>();
-            runParams.put("Card", this);
-            runParams.put("CounterType", counterName);
-            for (int i = 0; i < n; i++) {
-                Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemoved, runParams);
+            if (this.hasSuspend() && Singletons.getModel().getGame().isCardExiled(this)) {
+                playFromSuspend();
             }
+        }
 
-            if (counterName.equals(Counters.TIME) && (aux == 0)) {
-                final boolean hasVanish = CardFactoryUtil.hasKeyword(this, "Vanishing") != -1;
+        // Play the Subtract Counter sound
+        Singletons.getModel().getGame().getEvents().post(new RemoveCounterEvent(delta));
 
-                if (hasVanish && this.isInPlay()) {
-                    Singletons.getModel().getGame().getAction().sacrifice(this, null);
-                }
+        this.updateObservers();
+    }
 
-                if (this.hasSuspend() && Singletons.getModel().getGame().isCardExiled(this)) {
-                    final Card c = this;
+    private void playFromSuspend() {
+        final Card c = this;
 
-                    c.setSuspendCast(true);
-                    // set activating player for base spell ability
-                    c.getSpellAbility()[0].setActivatingPlayer(c.getOwner());
-                    // Any trigger should cause the phase not to skip
-                    for (Player p : Singletons.getModel().getGame().getPlayers()) {
-                        p.getController().autoPassCancel();
+        c.setSuspendCast(true);
+        // set activating player for base spell ability
+        c.getSpellAbility()[0].setActivatingPlayer(c.getOwner());
+        // Any trigger should cause the phase not to skip
+        for (Player p : Singletons.getModel().getGame().getPlayers()) {
+            p.getController().autoPassCancel();
+        }
+
+        if (c.getOwner().isHuman()) {
+            Singletons.getModel().getGame().getAction().playCardWithoutManaCost(c);
+        } else {
+            final List<SpellAbility> choices = this.getBasicSpells();
+
+            for (final SpellAbility sa : choices) {
+                //Spells
+                if (sa instanceof Spell) {
+                    Spell spell = (Spell) sa;
+                    if (!spell.canPlayFromEffectAI(true, true)) {
+                        continue;
                     }
-
-                    if (c.getOwner().isHuman()) {
-                        Singletons.getModel().getGame().getAction().playCardWithoutManaCost(c);
-                    } else {
-                        final List<SpellAbility> choices = this.getBasicSpells();
-
-                        for (final SpellAbility sa : choices) {
-                            //Spells
-                            if (sa instanceof Spell) {
-                                Spell spell = (Spell) sa;
-                                if (!spell.canPlayFromEffectAI(true, true)) {
-                                    continue;
-                                }
-                            } else {
-                                if (!sa.canPlayAI()) {
-                                    continue;
-                                }
-                            }
-                            ComputerUtil.playSpellAbilityWithoutPayingManaCost(c.getOwner(), sa);
-                            break;
-                        }
+                } else {
+                    if (!sa.canPlayAI()) {
+                        continue;
                     }
                 }
+                ComputerUtil.playSpellAbilityWithoutPayingManaCost(c.getOwner(), sa);
+                break;
             }
-
-            // Play the Subtract Counter sound
-            if (n > 0) {
-                Sounds.RemoveCounter.play();
-            }
-
-            this.updateObservers();
         }
     }
 
@@ -1388,14 +1343,12 @@ public class Card extends GameEntity implements Comparable<Card> {
      * </p>
      * 
      * @param counterName
-     *            a {@link forge.Counters} object.
+     *            a {@link forge.CounterType} object.
      * @return a int.
      */
-    public final int getCounters(final Counters counterName) {
-        if (this.counters.containsKey(counterName)) {
-            return this.counters.get(counterName);
-        }
-        return 0;
+    public final int getCounters(final CounterType counterName) {
+        Integer value = this.counters.get(counterName);
+        return value == null ? 0 : value.intValue();
     }
 
     // get all counters from a card
@@ -1407,7 +1360,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a Map object.
      * @since 1.0.15
      */
-    public final Map<Counters, Integer> getCounters() {
+    public final Map<CounterType, Integer> getCounters() {
         return this.counters;
     }
 
@@ -1419,7 +1372,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a boolean.
      */
     public final boolean hasCounters() {
-        return this.counters.size() > 0;
+        return !this.counters.isEmpty();
     }
 
     /**
@@ -1436,37 +1389,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         return number;
     }
 
-    /**
-     * <p>
-     * setCounter.
-     * </p>
-     * 
-     * @param counterName
-     *            a {@link forge.Counters} object.
-     * @param n
-     *            a int.
-     * @param bSetValue
-     *            a boolean.
-     */
-    public final void setCounter(final Counters counterName, final int n, final boolean bSetValue) {
-        if (!this.canHaveCountersPlacedOnIt(counterName)) {
-            return;
-        }
-        // sometimes you just need to set the value without being affected by
-        // DoublingSeason
-        if (bSetValue) {
-            this.counters.put(counterName, Integer.valueOf(n));
-        } else {
-            final int num = this.getCounters(counterName);
-            // if counters on card is less than the setting value, addCounters
-            if (num < n) {
-                this.addCounter(counterName, n - num);
-            } else {
-                this.subtractCounter(counterName, num - n);
-            }
-        }
-        this.updateObservers();
-    }
 
     // get all counters from a card
     /**
@@ -1478,7 +1400,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      *            a Map object.
      * @since 1.0.15
      */
-    public final void setCounters(final Map<Counters, Integer> allCounters) {
+    public final void setCounters(final Map<CounterType, Integer> allCounters) {
         this.counters = allCounters;
     }
 
@@ -1491,7 +1413,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @since 1.0.15
      */
     public final void clearCounters() {
-        this.counters = new TreeMap<Counters, Integer>();
+        this.counters.clear();
     }
 
     /**
@@ -1591,7 +1513,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return a int.
      */
     public final int getNetPTCounters() {
-        return this.getCounters(Counters.P1P1) - this.getCounters(Counters.M1M1);
+        return this.getCounters(CounterType.P1P1) - this.getCounters(CounterType.M1M1);
     }
 
     /**
@@ -2227,18 +2149,18 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (k.length > 8) {
                     sbLong.append(k[8]).append("\r\n");
                 }
-            } else if (keyword.startsWith("AdjustLandPlays")) {
+            /*} else if (keyword.startsWith("AdjustLandPlays")) {
                 final String[] k = keyword.split(":");
                 if (k.length > 3) {
                     sbLong.append(k[3]).append("\r\n");
-                }
+                }*/
             } else if (keyword.startsWith("etbCounter")) {
                 final String[] p = keyword.split(":");
                 final StringBuilder s = new StringBuilder();
                 if (p.length > 4) {
                     s.append(p[4]);
                 } else {
-                    final Counters counter = Counters.valueOf(p[1]);
+                    final CounterType counter = CounterType.valueOf(p[1]);
                     final String numCounters = p[2];
                     s.append(this.getName());
                     s.append(" enters the battlefield with ");
@@ -2569,12 +2491,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                     sb.append(k[8]).append("\r\n");
                 }
             }
-            if (keyword.startsWith("AdjustLandPlays")) {
+            /*if (keyword.startsWith("AdjustLandPlays")) {
                 final String[] k = keyword.split(":");
                 if (k.length > 3) {
                     sb.append(k[3]).append("\r\n");
                 }
-            }
+            }*/
             if ((keyword.startsWith("Ripple") && !sb.toString().contains("Ripple"))
                     || (keyword.startsWith("Dredge") && !sb.toString().contains("Dredge"))
                     || (keyword.startsWith("Madness") && !sb.toString().contains("Madness"))
@@ -3885,7 +3807,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.equip();
 
         // Play the Equip sound
-        Sounds.Equip.play();
+        Singletons.getModel().getGame().getEvents().post(new CardEquippedEvent());
     }
 
     /**
@@ -4539,10 +4461,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final int getUnswitchedAttack() {
         int total = this.getCurrentPower();
 
-        total += ((this.getTempAttackBoost() + this.getSemiPermanentAttackBoost() + this.getCounters(Counters.P1P1)
-                + this.getCounters(Counters.P1P2) + this.getCounters(Counters.P1P0)) - this.getCounters(Counters.M1M1))
-                + ((2 * this.getCounters(Counters.P2P2)) - (2 * this.getCounters(Counters.M2M1))
-                        - (2 * this.getCounters(Counters.M2M2)) - this.getCounters(Counters.M1M0));
+        total += ((this.getTempAttackBoost() + this.getSemiPermanentAttackBoost() + this.getCounters(CounterType.P1P1)
+                + this.getCounters(CounterType.P1P2) + this.getCounters(CounterType.P1P0)) - this.getCounters(CounterType.M1M1))
+                + ((2 * this.getCounters(CounterType.P2P2)) - (2 * this.getCounters(CounterType.M2M1))
+                        - (2 * this.getCounters(CounterType.M2M2)) - this.getCounters(CounterType.M1M0));
         return total;
     }
 
@@ -4588,12 +4510,12 @@ public class Card extends GameEntity implements Comparable<Card> {
         int total = this.getCurrentToughness();
 
         total += (((((this.getTempDefenseBoost() + this.getSemiPermanentDefenseBoost()
-                + this.getCounters(Counters.P1P1) + (2 * this.getCounters(Counters.P1P2))) - this
-                .getCounters(Counters.M1M1)) + this.getCounters(Counters.P0P1)) - (2 * this.getCounters(Counters.M0M2))) + (2 * this
-                .getCounters(Counters.P2P2)))
-                - this.getCounters(Counters.M0M1)
-                - this.getCounters(Counters.M2M1)
-                - (2 * this.getCounters(Counters.M2M2));
+                + this.getCounters(CounterType.P1P1) + (2 * this.getCounters(CounterType.P1P2))) - this
+                .getCounters(CounterType.M1M1)) + this.getCounters(CounterType.P0P1)) - (2 * this.getCounters(CounterType.M0M2))) + (2 * this
+                .getCounters(CounterType.P2P2)))
+                - this.getCounters(CounterType.M0M1)
+                - this.getCounters(CounterType.M2M1)
+                - (2 * this.getCounters(CounterType.M2M2));
         return total;
     }
 
@@ -4915,7 +4837,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.setTapped(true);
 
         // Play the Tap sound
-        Sounds.Tap.play();
+        Singletons.getModel().getGame().getEvents().post(new SetTappedEvent(true));
     }
 
     /**
@@ -4931,7 +4853,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Untaps, runParams);
 
             // Play the Untap sound
-            Sounds.Untap.play();
+            Singletons.getModel().getGame().getEvents().post(new SetTappedEvent(false));
         }
 
         for (final Command var : this.untapCommandList) {
@@ -6552,6 +6474,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!source.canBeEnchantedBy(this)) {
                 return false;
             }
+        } else if (property.startsWith("CanBeEnchantedBySource")) {
+            if (!this.canBeEnchantedBy(source)) {
+                return false;
+            }
         } else if (property.startsWith("EquippedBy")) {
             if (!this.equippedBy.contains(source)) {
                 return false;
@@ -6969,7 +6895,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.startsWith("suspended")) {
             if (!this.hasSuspend() || !Singletons.getModel().getGame().isCardExiled(this)
-                    || !(this.getCounters(Counters.getType("TIME")) >= 1)) {
+                    || !(this.getCounters(CounterType.getType("TIME")) >= 1)) {
                 return false;
             }
 
@@ -7034,7 +6960,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
             counterType = splitProperty[2];
 
-            final int actualnumber = this.getCounters(Counters.getType(counterType));
+            final int actualnumber = this.getCounters(CounterType.getType(counterType));
 
             if (!Expressions.compare(actualnumber, comparator, number)) {
                 return false;
@@ -7463,7 +7389,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * <p>
      * isAttacking.
      * </p>
-     * 
+     * @param ge    the GameEntity to check
      * @return a boolean.
      */
     public final boolean isAttacking(GameEntity ge) {
@@ -7950,7 +7876,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noPrevention)) {
             return damage;
         }
-        
+
         for (final Card ca : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
             for (final ReplacementEffect re : ca.getReplacementEffects()) {
                 HashMap<String, String> params = re.getMapParams();
@@ -8140,7 +8066,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (this.hasKeyword("If damage would be dealt to CARDNAME, "
                 + "prevent that damage. Remove a +1/+1 counter from CARDNAME.")) {
             restDamage = 0;
-            this.subtractCounter(Counters.P1P1, 1);
+            this.subtractCounter(CounterType.P1P1, 1);
         }
 
         if (restDamage >= this.getPreventNextDamage()) {
@@ -8322,7 +8248,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams);
 
         if (this.isPlaneswalker()) {
-            this.subtractCounter(Counters.LOYALTY, damageToAdd);
+            this.subtractCounter(CounterType.LOYALTY, damageToAdd);
             return true;
         }
 
@@ -8334,7 +8260,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         GameActionUtil.executeDamageToCreatureEffects(source, this, damageToAdd);
 
         if (this.isInPlay() && wither) {
-            this.addCounter(Counters.M1M1, damageToAdd);
+            this.addCounter(CounterType.M1M1, damageToAdd, true);
         }
         if (source.hasKeyword("Deathtouch") && this.isCreature()) {
             Singletons.getModel().getGame().getAction().destroy(this);

@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import forge.Card;
-import forge.Counters;
+import forge.CounterType;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
@@ -22,7 +22,7 @@ public class CountersPutEffect extends SpellEffect {
         final Card card = sa.getSourceCard();
 
 
-        final Counters cType = Counters.valueOf(sa.getParam("CounterType"));
+        final CounterType cType = CounterType.valueOf(sa.getParam("CounterType"));
         final int amount = AbilityFactory.calculateAmount(card, sa.getParam("CounterNum"), sa);
         sb.append("Put ");
         if (sa.hasParam("UpTo")) {
@@ -86,16 +86,16 @@ public class CountersPutEffect extends SpellEffect {
         for (final Card tgtCard : tgtCards) {
             if ((tgt == null) || tgtCard.canBeTargetedBy(sa)) {
                 if (max != -1) {
-                    counterAmount = max - tgtCard.getCounters(Counters.valueOf(type));
+                    counterAmount = max - tgtCard.getCounters(CounterType.valueOf(type));
                 }
                 final Zone zone = Singletons.getModel().getGame().getZoneOf(tgtCard);
                 if (zone == null) {
                     // Do nothing, token disappeared
                 } else if (zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack)) {
-                    tgtCard.addCounter(Counters.valueOf(type), counterAmount);
+                    tgtCard.addCounter(CounterType.valueOf(type), counterAmount, true);
                 } else {
                     // adding counters to something like re-suspend cards
-                    tgtCard.addCounterFromNonEffect(Counters.valueOf(type), counterAmount);
+                    tgtCard.addCounter(CounterType.valueOf(type), counterAmount, false);
                 }
             }
         }

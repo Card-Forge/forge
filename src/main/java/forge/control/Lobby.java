@@ -53,16 +53,15 @@ public class Lobby {
             "Roger", "Roland", "Ronald", "Roy", "Sam", "Sebastian", "Simon", "Stanley", "Stephen",
             "Stuart", "Terence", "Thomas", "Tim", "Tom", "Tony", "Victor", "Vincent", "Wallace",
             "Walter", "Wilfred", "William", "Winston"
-    };    
-    
+    };
+
     /**
      * TODO: Write javadoc for this method.
      * @param human
      * @return
      */
     public LobbyPlayer findLocalPlayer(PlayerType type, String name) {
-        
-        
+
         return new LobbyPlayer(type, name);
     }
 
@@ -72,10 +71,11 @@ public class Lobby {
      * @return
      */
     public LobbyPlayer findLocalPlayer(PlayerType type) {
-        if ( type == PlayerType.HUMAN )
+        if (type == PlayerType.HUMAN) {
             return new LobbyPlayer(type, "Human"); // need to get name!
-        
-        LobbyPlayer player = findLocalPlayer(type, getRandomName()); 
+        }
+
+        LobbyPlayer player = findLocalPlayer(type, getRandomName());
         player.setAvatarIndex(MyRandom.getRandom().nextInt(FSkin.getAvatars().size()));
         return player;
     }
@@ -88,7 +88,7 @@ public class Lobby {
     private String getRandomName() {
         Random my = MyRandom.getRandom();
         return opponentNames[my.nextInt(opponentNames.length)];
-        
+
     }
 
     /**
@@ -99,6 +99,5 @@ public class Lobby {
         return new LobbyPlayer(PlayerType.HUMAN, "Human"); // need to get name!
     }
 
-    
-    
+
 }

@@ -27,7 +27,7 @@ import forge.Card;
 
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.Counters;
+import forge.CounterType;
 import forge.GameEntity;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.game.phase.Combat;
@@ -369,7 +369,7 @@ public class ComputerUtilBlock {
                 // 3.Blockers that can destroy the attacker and have an upside when dying
                 killingBlockers = ComputerUtilBlock.getKillingBlockers(attacker, blockers, combat);
                 for (Card b : killingBlockers) {
-                    if ((b.hasKeyword("Undying") && b.getCounters(Counters.P1P1) == 0)
+                    if ((b.hasKeyword("Undying") && b.getCounters(CounterType.P1P1) == 0)
                             || !b.getSVar("SacMe").equals("")) {
                         blocker = b;
                         break;

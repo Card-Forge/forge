@@ -35,7 +35,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
 import forge.Card;
-import forge.Counters;
+import forge.CounterType;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.game.zone.ZoneType;
@@ -257,8 +257,8 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         }
 
         // counter text
-        final Counters[] counters = Counters.values();
-        for (final Counters counter : counters) {
+        final CounterType[] counters = CounterType.values();
+        for (final CounterType counter : counters) {
             if (card.getCounters(counter) != 0) {
                 if (area.length() != 0) {
                     area.append("\n");

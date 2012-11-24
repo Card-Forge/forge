@@ -40,7 +40,7 @@ public class InputCleanup extends Input {
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
-        final Player active = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn(); 
+        final Player active = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
         if (active.isComputer()) {
             this.aiCleanupDiscard(active);
             Singletons.getModel().getGame().getPhaseHandler().passPriority();

@@ -3,7 +3,7 @@ package forge.card.abilityfactory.ai;
 import java.util.Random;
 
 import forge.Card;
-import forge.Counters;
+import forge.CounterType;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
@@ -121,7 +121,7 @@ public class LifeSetAi extends SpellAiLogic {
         }
 
         if (source.getName().equals("Eternity Vessel")
-                && (opponent.isCardInPlay("Vampire Hexmage") || (source.getCounters(Counters.CHARGE) == 0))) {
+                && (opponent.isCardInPlay("Vampire Hexmage") || (source.getCounters(CounterType.CHARGE) == 0))) {
             return false;
         }
 

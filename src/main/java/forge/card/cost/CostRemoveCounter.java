@@ -23,7 +23,7 @@ import java.util.List;
 import forge.Card;
 
 import forge.CardLists;
-import forge.Counters;
+import forge.CounterType;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
@@ -45,7 +45,7 @@ public class CostRemoveCounter extends CostPartWithList {
     // Counter is tough),
     // Quillspike, Rift Elemental, Sage of Fables, Spike Rogue
 
-    private final Counters counter;
+    private final CounterType counter;
     private int lastPaidAmount = 0;
     private ZoneType zone;
 
@@ -54,7 +54,7 @@ public class CostRemoveCounter extends CostPartWithList {
      * 
      * @return the counter
      */
-    public final Counters getCounter() {
+    public final CounterType getCounter() {
         return this.counter;
     }
 
@@ -95,7 +95,7 @@ public class CostRemoveCounter extends CostPartWithList {
      *            the description
      * @param zone the zone.
      */
-    public CostRemoveCounter(final String amount, final Counters counter, final String type, final String description, ZoneType zone) {
+    public CostRemoveCounter(final String amount, final CounterType counter, final String type, final String description, ZoneType zone) {
         super(amount, type, description);
         this.setReusable(true);
 
@@ -144,7 +144,7 @@ public class CostRemoveCounter extends CostPartWithList {
     @Override
     public final void refund(final Card source) {
         for (final Card c : this.getList()) {
-            c.addCounterFromNonEffect(this.counter, this.lastPaidAmount);
+            c.addCounter(this.counter, this.lastPaidAmount, false);
         }
     }
 
@@ -157,7 +157,7 @@ public class CostRemoveCounter extends CostPartWithList {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
-        final Counters cntrs = this.getCounter();
+        final CounterType cntrs = this.getCounter();
 
         final Integer amount = this.convertAmount();
         if (this.getThis()) {

@@ -58,6 +58,10 @@ import forge.game.GameLossReason;
 import forge.game.GameState;
 import forge.game.GlobalRuleChange;
 import forge.game.MatchController;
+import forge.game.event.CardDestroyedEvent;
+import forge.game.event.CardRegeneratedEvent;
+import forge.game.event.CardSacrificedEvent;
+import forge.game.event.DuelOutcomeEvent;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.player.PlayerType;
@@ -67,7 +71,6 @@ import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.ViewWinLose;
-import forge.sound.SoundEffectType;
 
 
 /**
@@ -839,22 +842,6 @@ public class GameAction {
 
     /**
      * <p>
-     * discardPutIntoPlayInstead.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     */
-    public final void discardPutIntoPlayInstead(final Card c) {
-        this.moveToPlay(c);
-
-        if (c.getName().equals("Dodecapod")) {
-            c.setCounter(Counters.P1P1, 2, false);
-        }
-    }
-
-    /**
-     * <p>
      * discardMadness.
      * </p>
      * 
@@ -1056,11 +1043,8 @@ public class GameAction {
                 game.getStack().unfreezeStack();
             }
             // Play the win/lose sound
-            if (match.getLastGameOutcome().isWinner(Singletons.getControl().getPlayer().getLobbyPlayer())) {
-                Singletons.getControl().getSoundSystem().play(SoundEffectType.WinDuel);
-            } else {
-                Singletons.getControl().getSoundSystem().play(SoundEffectType.LoseDuel);
-            }
+            boolean humanWon = match.getLastGameOutcome().isWinner(Singletons.getControl().getPlayer().getLobbyPlayer());
+            Singletons.getModel().getGame().getEvents().post(new DuelOutcomeEvent(humanWon));
             return;
         }
 
@@ -1173,12 +1157,12 @@ public class GameAction {
                 }
 
                 // +1/+1 counters should erase -1/-1 counters
-                if (c.getCounters(Counters.P1P1) > 0 && c.getCounters(Counters.M1M1) > 0) {
+                if (c.getCounters(CounterType.P1P1) > 0 && c.getCounters(CounterType.M1M1) > 0) {
 
-                    final Counters p1Counter = Counters.P1P1;
-                    final Counters m1Counter = Counters.M1M1;
-                    int plusOneCounters = c.getCounters(Counters.P1P1);
-                    int minusOneCounters = c.getCounters(Counters.M1M1);
+                    final CounterType p1Counter = CounterType.P1P1;
+                    final CounterType m1Counter = CounterType.M1M1;
+                    int plusOneCounters = c.getCounters(CounterType.P1P1);
+                    int minusOneCounters = c.getCounters(CounterType.M1M1);
 
                     if (plusOneCounters == minusOneCounters) {
                         c.getCounters().remove(m1Counter);
@@ -1257,12 +1241,12 @@ public class GameAction {
         for (int i = 0; i < list.size(); i++) {
             c = list.get(i);
 
-            if (c.getCounters(Counters.LOYALTY) <= 0) {
+            if (c.getCounters(CounterType.LOYALTY) <= 0) {
                 Singletons.getModel().getGame().getAction().moveToGraveyard(c);
             }
 
             // Play the Destroy sound
-            Singletons.getControl().getSoundSystem().playSync(SoundEffectType.Destroy);
+            Singletons.getModel().getGame().getEvents().post(new CardDestroyedEvent());
 
             final ArrayList<String> types = c.getType();
             for (final String type : types) {
@@ -1308,7 +1292,7 @@ public class GameAction {
                 }
 
                 // Play the Destroy sound
-                Singletons.getControl().getSoundSystem().playSync(SoundEffectType.Destroy);
+                Singletons.getModel().getGame().getEvents().post(new CardDestroyedEvent());
             }
         }
     } // destroyLegendaryCreatures()
@@ -1337,7 +1321,7 @@ public class GameAction {
         this.sacrificeDestroy(c);
 
         // Play the Sacrifice sound
-        Singletons.getControl().getSoundSystem().play(SoundEffectType.Sacrifice);
+        Singletons.getModel().getGame().getEvents().post(new CardSacrificedEvent());
 
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
@@ -1391,7 +1375,7 @@ public class GameAction {
                         card.setDamage(0);
 
                         // Play the Destroy sound
-                        Singletons.getControl().getSoundSystem().playSync(SoundEffectType.Destroy);
+                        Singletons.getModel().getGame().getEvents().post(new CardDestroyedEvent());
                     }
                 };
 
@@ -1405,7 +1389,7 @@ public class GameAction {
         } // totem armor
 
         // Play the Destroy sound
-        Singletons.getControl().getSoundSystem().playSync(SoundEffectType.Destroy);
+        Singletons.getModel().getGame().getEvents().post(new CardDestroyedEvent());
 
         return this.sacrificeDestroy(c);
     }
@@ -1471,9 +1455,9 @@ public class GameAction {
             throw new RuntimeException("GameAction : destroy() invalid card.getOwner() - " + c + " " + owner);
         }
 
-        final boolean persist = (c.hasKeyword("Persist") && (c.getCounters(Counters.M1M1) == 0)) && !c.isToken();
+        final boolean persist = (c.hasKeyword("Persist") && (c.getCounters(CounterType.M1M1) == 0)) && !c.isToken();
 
-        final boolean undying = (c.hasKeyword("Undying") && (c.getCounters(Counters.P1P1) == 0)) && !c.isToken();
+        final boolean undying = (c.hasKeyword("Undying") && (c.getCounters(CounterType.P1P1) == 0)) && !c.isToken();
 
         final Card newCard = this.moveToGraveyard(c);
 
@@ -1498,7 +1482,7 @@ public class GameAction {
                     if (game.getZoneOf(persistCard).is(ZoneType.Graveyard)) {
                         final PlayerZone ownerPlay = persistCard.getOwner().getZone(ZoneType.Battlefield);
                         final Card card = GameAction.this.moveTo(ownerPlay, persistCard);
-                        card.addCounter(Counters.M1M1, 1);
+                        card.addCounter(CounterType.M1M1, 1, true);
                     }
                 }
             };
@@ -1518,7 +1502,7 @@ public class GameAction {
                     if (game.getZoneOf(undyingCard).is(ZoneType.Graveyard)) {
                         final PlayerZone ownerPlay = undyingCard.getOwner().getZone(ZoneType.Battlefield);
                         final Card card = GameAction.this.moveTo(ownerPlay, undyingCard);
-                        card.addCounter(Counters.P1P1, 1);
+                        card.addCounter(CounterType.P1P1, 1, true);
                     }
                 }
             };
@@ -1554,7 +1538,7 @@ public class GameAction {
             game.getCombat().removeFromCombat(c);
 
             // Play the Regen sound
-            Singletons.getControl().getSoundSystem().play(SoundEffectType.Regen);
+            Singletons.getModel().getGame().getEvents().post(new CardRegeneratedEvent());
 
             return false;
         }
@@ -1586,14 +1570,14 @@ public class GameAction {
                 System.out.println("Totem armor destroyed instead of original card");
 
                 // Play the Destroy sound
-                Singletons.getControl().getSoundSystem().playSync(SoundEffectType.Destroy);
+                Singletons.getModel().getGame().getEvents().post(new CardDestroyedEvent());
 
                 return false;
             }
         } // totem armor
 
         // Play the Destroy sound
-        Singletons.getControl().getSoundSystem().playSync(SoundEffectType.Destroy);
+        Singletons.getModel().getGame().getEvents().post(new CardDestroyedEvent());
 
         return this.sacrificeDestroy(c);
     }

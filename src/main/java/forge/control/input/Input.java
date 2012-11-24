@@ -116,12 +116,13 @@ public abstract class Input implements java.io.Serializable {
     public String toString() {
         return "blank";
     } // returns the Input name like "EmptyStack"
-    
-    
+
+
     /**
      * This method is used to mark old descendants of Input
      * TODO: Write javadoc for this method.
      */
-    public /*abstract */void isClassUpdated() {}//;
+    public /*abstract */void isClassUpdated() {
+    } //;
 
 }

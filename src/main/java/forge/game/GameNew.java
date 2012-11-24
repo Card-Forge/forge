@@ -26,6 +26,7 @@ import forge.card.trigger.TriggerType;
 import forge.control.input.InputControl;
 import forge.control.input.InputMulligan;
 import forge.deck.Deck;
+import forge.game.event.FlipCoinEvent;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.LobbyPlayer;
@@ -36,7 +37,6 @@ import forge.gui.match.views.VAntes;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.properties.ForgePreferences.FPref;
-import forge.sound.SoundEffectType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
 
@@ -373,7 +373,7 @@ public class GameNew {
         }
         
         // Play the Flip Coin sound
-        Singletons.getControl().getSoundSystem().play(SoundEffectType.FlipCoin);
+        Singletons.getModel().getGame().getEvents().post(new FlipCoinEvent());
         
         List<Player> allPlayers = Singletons.getModel().getGame().getPlayers();
         setPlayersFirstTurn(allPlayers.get(MyRandom.getRandom().nextInt(allPlayers.size())), true);

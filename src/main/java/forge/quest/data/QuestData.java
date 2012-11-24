@@ -51,7 +51,8 @@ public final class QuestData {
     /** The mode. */
     private QuestMode mode;
 
-
+    // Quest world ID, if any
+    private String worldId;
     // gadgets
 
     private final QuestAssets assets;
@@ -81,6 +82,7 @@ public final class QuestData {
         this.mode = mode2;
         this.achievements = new QuestAchievements(diff);
         this.assets = new QuestAssets(format);
+        this.worldId = null; // Default to "no world", i.e. regular opponents and challenges
 
     }
 
@@ -101,7 +103,6 @@ public final class QuestData {
     public GameFormatQuest getFormat() {
         return this.format;
     }
-
 
     // SERIALIZATION - related things
     // This must be called by XML-serializer via reflection
@@ -149,21 +150,17 @@ public final class QuestData {
         return this.name;
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
     public QuestAssets getAssets() {
         return assets;
     }
 
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
     public QuestAchievements getAchievements() {
         return achievements;
+    }
+
+    public String getWorldId() {
+        return worldId;
     }
 
 }

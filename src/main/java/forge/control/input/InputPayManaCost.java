@@ -117,7 +117,7 @@ public class InputPayManaCost extends InputPayMana {
 
         this.spell = sa;
 
-        if (Singletons.getModel().getGame() != null ) {
+        if (Singletons.getModel().getGame() != null) {
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
                 if (this.spell.getAfterPayMana() != null) {
                     this.stopSetNext(this.spell.getAfterPayMana());
@@ -290,6 +290,7 @@ public class InputPayManaCost extends InputPayMana {
             this.done();
         }
     }
-    
-    @Override public void isClassUpdated() {}
+
+    @Override public void isClassUpdated() {
+    }
 }

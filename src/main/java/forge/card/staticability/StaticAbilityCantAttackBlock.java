@@ -27,8 +27,8 @@ import forge.card.cost.Cost;
 /**
  * The Class StaticAbility_CantBeCast.
  */
-public class StaticAbilityCantAttackBlock{
-    
+public class StaticAbilityCantAttackBlock {
+
     /**
      * TODO Write javadoc for this method.
      * 

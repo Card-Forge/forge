@@ -6,7 +6,7 @@ import com.google.common.collect.Iterables;
 import forge.Card;
 import forge.CardPredicates;
 import forge.Constant;
-import forge.Counters;
+import forge.CounterType;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
@@ -191,7 +191,7 @@ public class ManaEffect extends SpellEffect {
 
         final String deplete = sa.getParam("Deplete");
         if (deplete != null) {
-            final int num = card.getCounters(Counters.getType(deplete));
+            final int num = card.getCounters(CounterType.getType(deplete));
             if (num == 0) {
                 sa.setUndoable(false);
                 Singletons.getModel().getGame().getAction().sacrifice(card, null);

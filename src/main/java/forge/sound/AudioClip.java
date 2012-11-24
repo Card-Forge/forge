@@ -52,7 +52,7 @@ public class AudioClip implements IAudioClip{
     
     public AudioClip(final String filename) {
         File fSound = new File(PathToSound, filename);
-        if ( fSound.exists() )
+        if ( !fSound.exists() )
             throw new IllegalArgumentException("Sound file " + fSound.toString() + " does not exist, cannot make a clip of it");
         
         try {
@@ -74,6 +74,8 @@ public class AudioClip implements IAudioClip{
     }
 
     public final void play() {
+        if (null == clip)
+            return;
         clip.setMicrosecondPosition(0);
         try {
             Thread.sleep(SOUND_SYSTEM_DELAY);
@@ -84,6 +86,8 @@ public class AudioClip implements IAudioClip{
     }
 
     public final void loop() {
+        if (null == clip)
+            return;
         clip.setMicrosecondPosition(0);
         try {
             Thread.sleep(SOUND_SYSTEM_DELAY);
@@ -94,10 +98,14 @@ public class AudioClip implements IAudioClip{
     }
 
     public final void stop() {
+        if (null == clip)
+            return;
         clip.stop();
     }
 
     public final boolean isDone() {
+        if (null == clip)
+            return false;
         return !clip.isRunning();
     }
 }

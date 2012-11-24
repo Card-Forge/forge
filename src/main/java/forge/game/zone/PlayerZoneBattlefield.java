@@ -98,7 +98,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
 
         // cannot use addComesIntoPlayCommand - trigger might be set to false;
         // Keep track of max lands can play per turn
-        int addMax = 0;
+        /*int addMax = 0;
 
         for (String keyword : c.getKeyword()) {
             if (keyword.startsWith("AdjustLandPlays")) {
@@ -112,7 +112,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
                     c.getController().addMaxLandsToPlay(addMax);
                 }
             }
-        }
+        }*/
 
         if (this.trigger) {
             c.setSickness(true); // summoning sickness
@@ -187,7 +187,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
         final Card c = (Card) o;
 
         // Keep track of max lands can play per turn
-        int addMax = 0;
+        // int addMax = 0;
 
         /*boolean adjustLandPlays = false;
         boolean eachPlayer = false;
@@ -213,7 +213,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
             }
         }*/
 
-        for (String keyword : c.getKeyword()) {
+        /*for (String keyword : c.getKeyword()) {
             if (keyword.startsWith("AdjustLandPlays")) {
                 final String[] k = keyword.split(":");
                 addMax = -Integer.valueOf(k[2]);
@@ -224,7 +224,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
                     c.getController().addMaxLandsToPlay(addMax);
                 }
             }
-        }
+        }*/
 
         if (this.leavesTrigger) {
             c.leavesPlay();

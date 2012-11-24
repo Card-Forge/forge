@@ -91,6 +91,8 @@ public class ControlGainEffect extends SpellEffect {
         if (sa.hasParam("AllValid")) {
             tgtCards = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
             tgtCards = AbilityFactory.filterListByType(tgtCards, sa.getParam("AllValid"), sa);
+        } else if (sa.hasParam("Defined")) {
+            tgtCards = AbilityFactory.getDefinedCards(source, sa.getParam("Defined"), sa);
         } else {
             tgtCards = getTargetCards(sa);
         }
@@ -99,7 +101,7 @@ public class ControlGainEffect extends SpellEffect {
 
         if (sa.hasParam("NewController")) {
             controllers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("NewController"), sa);
-        } else if ((tgt != null) && (tgt.getTargetPlayers() != null) && tgt.canTgtPlayer()) {
+        } else if (tgt != null && tgt.getTargetPlayers() != null && tgt.canTgtPlayer()) {
             controllers = tgt.getTargetPlayers();
         }
 

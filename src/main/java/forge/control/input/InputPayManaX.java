@@ -22,7 +22,7 @@ public class InputPayManaX extends InputPayMana {
     private final SpellAbility sa;
 
 
-    public InputPayManaX(final SpellAbility sa0, final CostPayment payment0, final CostMana costMana0) 
+    public InputPayManaX(final SpellAbility sa0, final CostPayment payment0, final CostMana costMana0)
     {
         sa = sa0;
         payment = payment0;
@@ -110,5 +110,6 @@ public class InputPayManaX extends InputPayMana {
      * @see forge.control.input.Input#isClassUpdated()
      */
     @Override
-    public void isClassUpdated() {}
+    public void isClassUpdated() {
+    }
 }

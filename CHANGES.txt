@@ -126,6 +126,36 @@ Fixes/Features:
 - corrected static ability name in effect script for Ember Gale
 - Variants - Added Ertai (vanguard avatar)
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Made the SVar granted by Tower Above unique.
+- Variants - Added the following avatars: Gerrard, Gix and Greven il-Vec
+- Variants - Hand and life modifiers will now be displayed in the card info panel
+- Variants - Added the following avatars: Grinning Demon Avatar, Hanna and Karn
+- Variants - Added the missing EffectZone param to Hanna and Karn
+- Variants - Added the following avatars: Lyna, Maraxus, Mishra, and Multani
+- CheckStyle.
+- Variants - Added the following avatars: Oracle, Orim, Rofellos, Selenia, and Serra
+- Variants - Fixed TriggerZones for Rofellos
+- Temporary fix for quest challenges.
+- Variants - Added the following avatars: Volrath and Xantcha
+- SoundEffectType holds only filename, unable to reproduce sounds by itself,
+- EventBus added to GameState to properly route the ingame events to Sound system, game log and remote players (when time comes)
+- AudioClips are cached at first request, this may lead to slowdowns (will precache if this is an issue)
+- Most calls to sound system are still preformed directly, with a few only converted to events
+- Variants: Removed avatars with RemAiDeck:True from AI's avatar list.
+- Variants: Made AI aware of the avatar.
+- Merged changes from trunk to Variants: r18254-r18318
+- fix typo for sound
+- setupPlayZone will now call doLayout directly and only once (hopefully fixes the ConcurrentModificationException).
+- Convert Erg Raiders to script
+- Variants - Added the following avatars: Sidar Kondo, Sisay, Squee, Urza, and Sliver Queen, Brood Mother
+- Merged changes from trunk to Variants: r18319-r18323
+- removed '3' from addpoison event
+- the correct parameter is num
+- Variants - Added the following avatars: Starke, Tahngarth, Takara, and Tawnos
+- Changed AdjustLandPlays to a player keyword
+- Converted Explore and Summer Bloom to script
+- More preparations for quest worlds.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):

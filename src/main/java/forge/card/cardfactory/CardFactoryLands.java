@@ -28,7 +28,7 @@ import forge.Card;
 
 import forge.CardLists;
 import forge.Command;
-import forge.Counters;
+import forge.CounterType;
 import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.cost.Cost;
@@ -178,7 +178,7 @@ class CardFactoryLands {
                     this.inPlay.clear();
                     this.inPlay.addAll(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield));
                     for (final Card targ : CardLists.filter(this.inPlay, targets)) {
-                        targ.addCounter(Counters.P1P1, 1);
+                        targ.addCounter(CounterType.P1P1, 1, true);
                     }
                 }
             }

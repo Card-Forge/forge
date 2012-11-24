@@ -68,7 +68,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         if (!this.game.getStack().isResolving() && isInputEmpty) {
             this.input = in;
         } else {
-            this.inputStack.add(in);                
+            this.inputStack.add(in);
         }
         this.updateObservers();
     }
@@ -202,7 +202,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
                     return new InputAttack();
                 }
                 break;
-                
+
             case COMBAT_DECLARE_BLOCKERS:
                 stack.freezeStack();
                 boolean isUnderAttack = game.getCombat().isPlayerAttacked(priority);
@@ -210,14 +210,15 @@ public class InputControl extends MyObservable implements java.io.Serializable {
                     handler.passPriority();
                     return null;
                 }
-    
-                if ( priority.isHuman() )
+
+                if (priority.isHuman()) {
                     return new InputBlock(priority);
-    
+                }
+
                 // ai is under attack
                 priority.getController().getAiInput().getComputer().declareBlockers();
                 return null;
-                
+
             case CLEANUP:
                 // discard
                 if (stack.isEmpty()) {
@@ -236,9 +237,9 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         if (priority == null) {
             return null;
         } else if (priority.isHuman()) {
-            boolean prioritySkip = priority.getController().mayAutoPass(phase) 
-                    || priority.getController().isUiSetToSkipPhase(playerTurn, phase); 
-            if (this.game.getStack().isEmpty() && prioritySkip ) {
+            boolean prioritySkip = priority.getController().mayAutoPass(phase)
+                    || priority.getController().isUiSetToSkipPhase(playerTurn, phase);
+            if (this.game.getStack().isEmpty() && prioritySkip) {
                 handler.passPriority();
                 return null;
             } else {

@@ -41,7 +41,7 @@ import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Constant;
 import forge.Constant.Preferences;
-import forge.Counters;
+import forge.CounterType;
 import forge.GameActionUtil;
 import forge.GameEntity;
 import forge.Singletons;
@@ -55,8 +55,11 @@ import forge.card.trigger.TriggerType;
 import forge.game.GameLossReason;
 import forge.game.GameState;
 import forge.game.GlobalRuleChange;
+import forge.game.event.CardDiscardedEvent;
+import forge.game.event.DrawCardEvent;
 import forge.game.event.LandPlayedEvent;
 import forge.game.event.PoisonCounterEvent;
+import forge.game.event.ShuffleEvent;
 import forge.game.event.SpellResolvedEvent;
 import forge.game.phase.PhaseHandler;
 import forge.game.zone.PlayerZone;
@@ -64,7 +67,6 @@ import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.properties.ForgePreferences.FPref;
-import forge.sound.SoundEffectType;
 import forge.util.MyRandom;
 
 /**
@@ -977,7 +979,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         if (!this.hasKeyword("You can't get poison counters")) {
             this.poisonCounters += num;
             
-            game.getEvents().post(new PoisonCounterEvent(this, source, 3));
+            game.getEvents().post(new PoisonCounterEvent(this, source, num));
             game.getGameLog().add("Poison", this + " receives a poison counter from " + source, 3);
 
             this.updateObservers();
@@ -1270,7 +1272,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
 
         // Play the Draw sound
-        Singletons.getControl().getSoundSystem().play(SoundEffectType.Draw);
+        Singletons.getModel().getGame().getEvents().post(new DrawCardEvent());
 
         return drawn;
     }
@@ -1608,22 +1610,26 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }*/
 
         game.getAction().discardMadness(c);
-
-        if ((c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, "
-                + "put it onto the battlefield instead of putting it into your graveyard.") 
-          || c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, "
-                + "put it onto the battlefield with two +1/+1 counters on it "
-                + "instead of putting it into your graveyard."))
-                && (null != sa) && !c.getController().equals(sa.getSourceCard().getController())) {
-            game.getAction().discardPutIntoPlayInstead(c);
-
+        
+        boolean hasPutIntoPlayInsteadOfDiscard = c.hasKeyword("If a spell or ability an opponent controls causes you " +
+                "to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.");
+        boolean hasPutIntoPlayWith2xP1P1InsteadOfDiscard = c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, "
+                + "put it onto the battlefield with two +1/+1 counters on it instead of putting it into your graveyard.");
+                
+        if ( ( hasPutIntoPlayInsteadOfDiscard || hasPutIntoPlayWith2xP1P1InsteadOfDiscard ) 
+                && null != sa && sa.getSourceCard().getController().isHostileTo(c.getController())) {
+            game.getAction().moveToPlay(c);
+            
+            if (hasPutIntoPlayWith2xP1P1InsteadOfDiscard) {
+                c.addCounter(CounterType.P1P1, 2, false);
+            }
             // Play the corresponding Put into Play sound
             game.getEvents().post(new SpellResolvedEvent(c, sa));
         } else {
             game.getAction().moveToGraveyard(c);
 
             // Play the Discard sound
-            Singletons.getControl().getSoundSystem().play(SoundEffectType.Discard);
+            Singletons.getModel().getGame().getEvents().post(new CardDiscardedEvent());
         }
 
         // Run triggers
@@ -1810,7 +1816,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         game.getTriggerHandler().runTrigger(TriggerType.Shuffled, runParams);
 
         // Play the shuffle sound
-        Singletons.getControl().getSoundSystem().play(SoundEffectType.Shuffle);
+        Singletons.getModel().getGame().getEvents().post(new ShuffleEvent());
     } // shuffle
       // //////////////////////////////
 
@@ -1905,8 +1911,19 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             }
         }
 
+        // check for adjusted max lands play per turn
+        int adjMax = 0;
+        for (String keyword : this.getKeywords()) {
+            if (keyword.startsWith("AdjustLandPlays")) {
+                final String[] k = keyword.split(":");
+                adjMax += Integer.valueOf(k[1]);
+            }
+        }
+        final int adjCheck = this.maxLandsToPlay + adjMax;
+        // System.out.println("Max lands for player " + this.getName() + ": " + adjCheck);
+
         return this.canCastSorcery()
-                && ((this.numLandsPlayed < this.maxLandsToPlay) || (this.getCardsIn(ZoneType.Battlefield, "Fastbond")
+                && ((this.numLandsPlayed < adjCheck) || (this.getCardsIn(ZoneType.Battlefield, "Fastbond")
                         .size() > 0));
     }
 
@@ -2845,22 +2862,18 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         });
     }
 
-    public int getCounterDoublersMagnitude(final Counters type) {
+    public int getCounterDoublersMagnitude(final CounterType type) {
         int counterDoublers = getCardsIn(ZoneType.Battlefield, "Doubling Season").size();
-        if(type == Counters.P1P1) {
+        if(type == CounterType.P1P1) {
             counterDoublers += getCardsIn(ZoneType.Battlefield, "Corpsejack Menace").size();
         }
-        return (int) Math.pow(2, counterDoublers); // pow(a,0) = 1; pow(a,1) = a
-                                                   // ... no worries about size
-                                                   // = 0
+        return 1 << counterDoublers;
     }
     
     public int getTokenDoublersMagnitude() {
         final int tokenDoublers = getCardsIn(ZoneType.Battlefield, "Parallel Lives").size()
                 + getCardsIn(ZoneType.Battlefield, "Doubling Season").size();
-        return (int) Math.pow(2, tokenDoublers); // pow(a,0) = 1; pow(a,1) = a
-                                                 // ... no worries about size =
-                                                 // 0
+        return 1 << tokenDoublers; // pow(a,0) = 1; pow(a,1) = a
     }
 
     public void onCleanupPhase() {

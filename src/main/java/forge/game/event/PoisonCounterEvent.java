@@ -7,13 +7,13 @@ import forge.game.player.Player;
  * 
  *
  */
-public class PoisonCounterEvent {
-    public final Player Reciever;
+public class PoisonCounterEvent extends Event {
+    public final Player Receiver;
     public final Card Source;
     public final int Amount;
     
     public PoisonCounterEvent(Player recv, Card src, int n) {
-        Reciever = recv;
+        Receiver = recv;
         Source = src;
         Amount = n;
     }

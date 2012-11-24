@@ -91,7 +91,7 @@ public class StaticAbilityContinuous {
         boolean removeCardTypes = false;
         boolean removeSubTypes = false;
         boolean removeCreatureTypes = false;
-        
+
         //Global rules changes
         if (params.containsKey("GlobalRule")) {
             final StaticEffects effects = Singletons.getModel().getGame().getStaticEffects();

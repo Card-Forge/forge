@@ -50,6 +50,9 @@ import forge.control.input.InputPayManaCostAbility;
 import forge.control.input.InputPayReturnCost;
 import forge.control.input.InputPaySacCost;
 import forge.game.GameLossReason;
+import forge.game.event.CardDamagedEvent;
+import forge.game.event.FlipCoinEvent;
+import forge.game.event.LifeLossEvent;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -424,14 +427,14 @@ public final class GameActionUtil {
 
             else if (part instanceof CostPutCounter) {
                 String amountString = part.getAmount();
-                Counters counterType = ((CostPutCounter) part).getCounter();
+                CounterType counterType = ((CostPutCounter) part).getCounter();
                 int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
                         : CardFactoryUtil.xCount(source, source.getSVar(amountString));
                 String plural = amount > 1 ? "s" : "";
                 if (showYesNoDialog(source, "Do you want to put " + amount + " " + counterType.getName()
                         + " counter" + plural + " on " + source + "?")) {
                     if (source.canHaveCountersPlacedOnIt(counterType)) {
-                        source.addCounterFromNonEffect(counterType, amount);
+                        source.addCounter(counterType, amount, false);
                     } else {
                         hasPaid = false;
                         Singletons.getModel().getGame().getGameLog().add("ResolveStack", "Trying to pay upkeep for " + source + " but it can't have "
@@ -611,7 +614,7 @@ public final class GameActionUtil {
         final String winMsg = winFlip ? " wins flip." : " loses flip.";
 
         // Play the Flip A Coin sound
-        Singletons.getControl().getSoundSystem().play(SoundEffectType.FlipCoin);
+        Singletons.getModel().getGame().getEvents().post(new FlipCoinEvent());
 
         JOptionPane.showMessageDialog(null, source.getName() + " - " + caller + winMsg, source.getName(),
                 JOptionPane.PLAIN_MESSAGE);
@@ -695,7 +698,7 @@ public final class GameActionUtil {
         }
 
         // Play the Damage sound
-        Singletons.getControl().getSoundSystem().playSync(SoundEffectType.Damage);
+        Singletons.getModel().getGame().getEvents().post(new CardDamagedEvent());
     }
 
     // this is for cards like Sengir Vampire
@@ -721,12 +724,12 @@ public final class GameActionUtil {
                 final Ability ability2 = new Ability(c, "0") {
                     @Override
                     public void resolve() {
-                        Counters counter = Counters.P1P1;
+                        CounterType counter = CounterType.P1P1;
                         if (kw.contains("+2/+2")) {
-                            counter = Counters.P2P2;
+                            counter = CounterType.P2P2;
                         }
                         if (thisCard.isInPlay()) {
-                            thisCard.addCounter(counter, 1);
+                            thisCard.addCounter(counter, 1, true);
                         }
                     }
                 }; // ability2
@@ -793,7 +796,7 @@ public final class GameActionUtil {
         c.getDamageHistory().registerDamage(player);
 
         // Play the Life Loss sound
-        Singletons.getControl().getSoundSystem().playSync(SoundEffectType.LifeLoss);
+        Singletons.getModel().getGame().getEvents().post(new LifeLossEvent());
     }
 
     // restricted to combat damage, restricted to players
@@ -864,7 +867,7 @@ public final class GameActionUtil {
         c.getDamageHistory().registerCombatDamage(player);
 
         // Play the Life Loss sound
-        Singletons.getControl().getSoundSystem().playSync(SoundEffectType.LifeLoss);
+        Singletons.getModel().getGame().getEvents().post(SoundEffectType.LifeLoss);
     } // executeCombatDamageToPlayerEffects
 
     /**

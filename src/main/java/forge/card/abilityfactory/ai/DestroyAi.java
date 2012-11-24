@@ -8,7 +8,7 @@ import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
-import forge.Counters;
+import forge.CounterType;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
@@ -75,7 +75,7 @@ public class DestroyAi extends SpellAiLogic {
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
-                        return (!c.hasKeyword("Undying") || c.getCounters(Counters.P1P1) > 0);
+                        return (!c.hasKeyword("Undying") || c.getCounters(CounterType.P1P1) > 0);
                     }
                 });
             }

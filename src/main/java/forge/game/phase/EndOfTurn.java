@@ -17,15 +17,8 @@
  */
 package forge.game.phase;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.google.common.base.Predicate;
-
 import forge.Card;
 
-import forge.CardLists;
-import forge.Counters;
 import forge.Singletons;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
@@ -53,12 +46,6 @@ public class EndOfTurn extends Phase {
      */
     @Override
     public final void executeAt() {
-
-        // TODO - should this freeze the Stack?
-
-        //EndOfTurn.endOfTurnWallOfReverence();
-        EndOfTurn.endOfTurnLighthouseChronologist();
-
         // reset mustAttackEntity for me
         Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().setMustAttackEntity(null);
 
@@ -208,37 +195,5 @@ public class EndOfTurn extends Phase {
         this.execute(this.getAt());
 
     } // executeAt()
-
-    private static void endOfTurnLighthouseChronologist() {
-        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
-        final Player opponent = player.getOpponent();
-        List<Card> list = new ArrayList<Card>(opponent.getCardsIn(ZoneType.Battlefield));
-
-        list = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return c.getName().equals("Lighthouse Chronologist") && (c.getCounters(Counters.LEVEL) >= 7);
-            }
-        });
-
-        Ability ability;
-        for (int i = 0; i < list.size(); i++) {
-            final Card card = list.get(i);
-            ability = new Ability(list.get(i), "0") {
-                @Override
-                public void resolve() {
-                    Singletons.getModel().getGame().getPhaseHandler().addExtraTurn(card.getController());
-                }
-            };
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(card).append(" - ").append(card.getController()).append(" takes an extra turn.");
-            ability.setStackDescription(sb.toString());
-            ability.setDescription(sb.toString());
-
-            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
-
-        }
-    }
 
 } // end class EndOfTurn
