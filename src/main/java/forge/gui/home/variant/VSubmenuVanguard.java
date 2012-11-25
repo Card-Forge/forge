@@ -161,6 +161,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
             
             tempList.setListData(i == 0 ? humanListData : aiListData);
             tempList.setSelectedIndex(0);
+            tempList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
             
             deckChoosers.add(tempChooser);
             avatarLists.add(tempList);

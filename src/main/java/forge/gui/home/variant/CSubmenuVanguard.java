@@ -12,6 +12,7 @@ import javax.swing.SwingWorker;
 import com.google.common.collect.Iterables;
 
 import forge.Command;
+import forge.GameActionUtil;
 import forge.Singletons;
 import forge.control.Lobby;
 import forge.deck.Deck;
@@ -117,27 +118,28 @@ public enum CSubmenuVanguard implements ICDoc {
         final SwingWorker<Object, Void> worker = new SwingWorker<Object, Void>() {
             @Override
             public Object doInBackground() {
-                List<Deck> playerDecks = new ArrayList<Deck>();
-                for(FDeckChooser fdc : view.getDeckChoosers())
-                {
-                    playerDecks.add(fdc.getDeck());
-                }
-                
-                List<Object> playerAvatars = new ArrayList<Object>();
-                for(FList fl : view.getAvatarLists())
-                {
-                    playerAvatars.add(fl.getSelectedValue());
-                }
-                
-                Lobby lobby = Singletons.getControl().getLobby();
-                MatchStartHelper helper = new MatchStartHelper();
                 Random rnd = new Random();
+                
+                List<Deck> playerDecks = new ArrayList<Deck>();
                 for(int i=0;i<view.getNumPlayers();i++)
                 {
-                    LobbyPlayer player = lobby.findLocalPlayer(i == 0 ? PlayerType.HUMAN : PlayerType.COMPUTER);
+                    Deck d = view.getDeckChoosers().get(i).getDeck();
                     
+                    if(d == null)
+                    {
+                        //ERROR!
+                        GameActionUtil.showInfoDialg("No deck selected for player " + (i+1));
+                        return null;
+                    }
+                    playerDecks.add(d);
+                }
+                
+                List<CardPrinted> playerAvatars = new ArrayList<CardPrinted>();
+                for(int i=0;i<view.getNumPlayers();i++)
+                {
                     CardPrinted avatar = null;
-                    if(playerAvatars.get(i) instanceof String)
+                    Object obj = view.getAvatarLists().get(i).getSelectedValue();
+                    if(obj instanceof String)
                     {
                         //Random is the only string in the list so grab a random avatar.
                         if(i == 0)
@@ -155,8 +157,22 @@ public enum CSubmenuVanguard implements ICDoc {
                     {
                         avatar = (CardPrinted)playerAvatars.get(i);
                     }
+                    if(avatar == null)
+                    {
+                        //ERROR!
+                        GameActionUtil.showInfoDialg("No avatar selected for player " + (i+1));
+                        return null;
+                    }
+                    playerAvatars.add(avatar);
+                }
+                
+                Lobby lobby = Singletons.getControl().getLobby();
+                MatchStartHelper helper = new MatchStartHelper();
+                for(int i=0;i<view.getNumPlayers();i++)
+                {
+                    LobbyPlayer player = lobby.findLocalPlayer(i == 0 ? PlayerType.HUMAN : PlayerType.COMPUTER);
                     
-                    helper.addVanguardPlayer(player, playerDecks.get(i), avatar);
+                    helper.addVanguardPlayer(player, playerDecks.get(i), playerAvatars.get(i));
                 }
                 MatchController mc = Singletons.getModel().getMatch(); 
                 mc.initMatch(GameType.Vanguard, helper.getPlayerMap());
