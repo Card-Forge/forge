@@ -106,7 +106,7 @@ public class GauntletMini {
 
         // System.out.println("Moving from round " + currentRound + " to round " +  currentRound + 1 + " of " + rounds);
         if (currentRound >= rounds) {
-            currentRound = rounds-1;
+            currentRound = rounds - 1;
             return;
         }
 
@@ -142,11 +142,11 @@ public class GauntletMini {
             throw new IllegalStateException("Cannot launch Gauntlet, game mode not implemented.");
         }
         aiOpponents.clear();
-        for(int i = 0; i < Math.min(gameRounds, aiDecks.size()); i++ )
-        {
+        for (int i = 0; i < Math.min(gameRounds, aiDecks.size()); i++) {
+
             aiOpponents.add(new PlayerStartConditions(aiDecks.get(i)));
         }
-        
+
         resetCurrentRound();
         startRound();
     }
@@ -167,15 +167,15 @@ public class GauntletMini {
             @Override
 
             public Object doInBackground() {
-                
+
                 MatchStartHelper starter = new MatchStartHelper();
                 Lobby lobby = Singletons.getControl().getLobby();
                 starter.addPlayer(lobby.findLocalPlayer(PlayerType.HUMAN), humanDeck);
-                starter.addPlayer(lobby.findLocalPlayer(PlayerType.COMPUTER), aiOpponents.get(currentRound-1));
-                
-                MatchController mc = Singletons.getModel().getMatch(); 
+                starter.addPlayer(lobby.findLocalPlayer(PlayerType.COMPUTER), aiOpponents.get(currentRound - 1));
+
+                MatchController mc = Singletons.getModel().getMatch();
                 mc.initMatch(gauntletType, starter.getPlayerMap());
-                mc.startRound();   
+                mc.startRound();
                 return null;
             }
 

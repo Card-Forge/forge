@@ -141,8 +141,9 @@ public class Upkeep extends Phase {
                 public void resolve() {
                     c.addCounter(CounterType.AGE, 1, true);
                     StringBuilder rs = new StringBuilder("R");
-                    for(int ageCounters = c.getCounters(CounterType.AGE); ageCounters > 1; ageCounters-- )
+                    for (int ageCounters = c.getCounters(CounterType.AGE); ageCounters > 1; ageCounters--) {
                         rs.append(" R");
+                    }
                     Map<String, String> produced = new HashMap<String, String>();
                     produced.put("Produced", rs.toString());
                     final AbilityManaPart abMana = new AbilityManaPart(c, produced);
@@ -230,11 +231,13 @@ public class Upkeep extends Phase {
      */
     private static void upkeepSlowtrips() {
         Player turnOwner = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
-        
+
         // does order matter here?
         drawForSlowtrips(turnOwner);
-        for(Player p : Singletons.getModel().getGame().getPlayers()) {
-            if ( p == turnOwner ) continue;
+        for (Player p : Singletons.getModel().getGame().getPlayers()) {
+            if (p == turnOwner) {
+                continue;
+            }
             drawForSlowtrips(p);
         }
     }
@@ -490,8 +493,8 @@ public class Upkeep extends Phase {
                         protected boolean isValidChoice(Card choice) {
                             return choice.isCreature() && !choice.isArtifact() && canTarget(choice) && choice.getController() == player;
                         };
-                        
-                        @Override 
+
+                        @Override
                         protected Input onDone() {
                             Singletons.getModel().getGame().getAction().destroyNoRegeneration(selected.get(0));
                             return null;
@@ -637,7 +640,7 @@ public class Upkeep extends Phase {
                 } // end resolve()
             }; // end noPay ability
 
-            final Player cp = c.getController(); 
+            final Player cp = c.getController();
             if (cp.isHuman()) {
                 final String question = "Pay Demonic Hordes upkeep cost?";
                 if (GameActionUtil.showYesNoDialog(c, question)) {
@@ -1223,8 +1226,8 @@ public class Upkeep extends Phase {
                             List<Card> computerCreatures = player.getCreaturesInPlay();
                             computerCreatures = CardLists.getValidCards(computerCreatures, smallCreatures, k.getController(), k);
                             computerCreatures = CardLists.getNotKeyword(computerCreatures, "Indestructible");
-                            
-                            
+
+
                             if (humanCreatures.size() > computerCreatures.size()) {
                                 final String title = "Computer reveals";
                                 this.revealTopCard(title);
@@ -1946,9 +1949,9 @@ public class Upkeep extends Phase {
                                     oathFlag = false;
                                 }
                             } else { // if player == Computer
-                                final List<Card> creaturesInLibrary = 
+                                final List<Card> creaturesInLibrary =
                                         CardLists.filter(player.getCardsIn(ZoneType.Library), CardPredicates.Presets.CREATURES);
-                                final List<Card> creaturesInBattlefield = 
+                                final List<Card> creaturesInBattlefield =
                                         CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
 
                                 // if there are at least 3 creatures in library,
@@ -2015,7 +2018,7 @@ public class Upkeep extends Phase {
                 final Ability ability = new Ability(oathList.get(0), "0") {
                     @Override
                     public void resolve() {
-                        final List<Card> graveyardCreatures = 
+                        final List<Card> graveyardCreatures =
                                 CardLists.filter(player.getCardsIn(ZoneType.Graveyard), CardPredicates.Presets.CREATURES);
 
                         if (GameState.compareTypeAmountInGraveyard(player, "Creature") > 0) {
@@ -2055,7 +2058,7 @@ public class Upkeep extends Phase {
      */
     private static void upkeepKarma() {
         final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
-        final List<Card> karmas = 
+        final List<Card> karmas =
                 CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Karma"));
         final List<Card> swamps = CardLists.getType(player.getCardsIn(ZoneType.Battlefield), "Swamp");
 
@@ -2147,7 +2150,7 @@ public class Upkeep extends Phase {
                     for (int i = 0; i < num; i++) {
                         if (player.isComputer()) {
                             Card toTap = CardFactoryUtil.getWorstPermanentAI(list, false, false, false, false);
-                            // try to find non creature cards without tap abilities 
+                            // try to find non creature cards without tap abilities
                             List<Card> betterList = CardLists.filter(list, new Predicate<Card>() {
                                 @Override
                                 public boolean apply(final Card c) {
@@ -2155,7 +2158,7 @@ public class Upkeep extends Phase {
                                         return false;
                                     }
                                     for (SpellAbility sa : c.getAllSpellAbilities()) {
-                                        if ( sa.getPayCosts() != null && sa.getPayCosts().getTap()) {
+                                        if (sa.getPayCosts() != null && sa.getPayCosts().getTap()) {
                                             return false;
                                         }
                                     }
@@ -2261,7 +2264,7 @@ public class Upkeep extends Phase {
                 @Override
                 public void resolve() {
                     final List<Card> enchantmentsAttached = new ArrayList<Card>(source.getEnchantingPlayer().getEnchantedBy());
-                    List<Card> enchantmentsInLibrary = 
+                    List<Card> enchantmentsInLibrary =
                             CardLists.filter(source.getController().getCardsIn(ZoneType.Library), new Predicate<Card>() {
                         @Override
                         public boolean apply(final Card c) {

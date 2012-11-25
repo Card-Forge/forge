@@ -60,8 +60,8 @@ public class PhaseUtil {
             p.removeKeyword("Skip your next untap step.");
             return true;
         }
-        if (p.hasKeyword("Skip the untap step of this turn.") || 
-                p.hasKeyword("Skip your untap step.")) {
+        if (p.hasKeyword("Skip the untap step of this turn.")
+                || p.hasKeyword("Skip your untap step.")) {
             return true;
         }
 
@@ -288,7 +288,8 @@ public class PhaseUtil {
         PhaseLabel lbl = matchUi.getFieldViewFor(player).getLabelFor(phase);
 
         matchUi.resetAllPhaseButtons();
-        if (lbl != null)
+        if (lbl != null) {
             lbl.setActive(true);
+        }
     }
 }

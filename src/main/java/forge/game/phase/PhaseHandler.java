@@ -54,7 +54,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     private int turn = 0;
     // Start turn at 0, so first untap step will turn it to 1
 
-    transient private final Stack<ExtraTurn> extraTurns = new Stack<ExtraTurn>();
+    private final transient Stack<ExtraTurn> extraTurns = new Stack<ExtraTurn>();
 
     private int extraCombats = 0;
 
@@ -64,7 +64,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     private Player playerTurn = null;
 
     // priority player
-    
+
     private Player pPlayerPriority = null;
     private Player pFirstPriority = null;
     private boolean bPhaseEffects = true;
@@ -74,13 +74,13 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     /** The need to next phase. */
     private boolean isPlayerPriorityAllowed = false;
 
-    transient private final GameState game;
-    
-    public PhaseHandler(final GameState game0)
-    {
+    private final transient GameState game;
+
+    public PhaseHandler(final GameState game0) {
+
         game = game0;
     }
-    
+
     /**
      * <p>
      * isPlayerTurn.
@@ -230,8 +230,10 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * </p>
      */
     public final void handleBeginPhase() {
-        if ( null == playerTurn ) return;
-        
+        if (null == playerTurn) {
+            return;
+        }
+
         this.setPhaseEffects(false);
         // Handle effects that happen at the beginning of phases
         game.getAction().checkStateEffects();
@@ -247,7 +249,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 if (this.getPlayerTurn().hasKeyword("Skip your upkeep step.")) {
                     // Slowtrips all say "on the next turn's upkeep" if there is no
                     // upkeep next turn, the trigger will never occur.
-                    for( Player p : game.getPlayers() ) {
+                    for (Player p : game.getPlayers()) {
                         p.clearSlowtripList();
                     }
                     this.setPlayerMayHavePriority(false);
@@ -258,10 +260,11 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 break;
 
             case DRAW:
-                if (getTurn() == 1 || PhaseUtil.skipDraw(this.getPlayerTurn()))
+                if (getTurn() == 1 || PhaseUtil.skipDraw(this.getPlayerTurn())) {
                     this.setPlayerMayHavePriority(false);
-                else
+                } else {
                     this.getPlayerTurn().drawCards(1, true);
+                }
                 break;
 
             case COMBAT_BEGIN:
@@ -411,8 +414,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * </p>
      */
     public final void nextPhase() {
-        
-        this.setPlayerMayHavePriority(true);//  PlayerPriorityAllowed = false;
+
+        this.setPlayerMayHavePriority(true); //  PlayerPriorityAllowed = false;
 
         // If the Stack isn't empty why is nextPhase being called?
         if (game.getStack().size() != 0) {
@@ -445,13 +448,13 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             case COMBAT_DECLARE_BLOCKERS:
                 game.getStack().unfreezeStack();
                 break;
-                
+
             case COMBAT_END:
                 //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
                 game.getCombat().reset();
                 this.resetAttackedThisCombat(this.getPlayerTurn());
                 this.bCombat = false;
-                
+
                 // TODO: ExtraCombat needs to be changed for other spell/abilities
                 // that give extra combat can do it like ExtraTurn stack ExtraPhases
                 if (this.extraCombats > 0) {
@@ -464,7 +467,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     this.phase = PhaseType.COMBAT_BEGIN;
                 }
                 break;
-                
+
             case CLEANUP:
                 this.bPreventCombatDamageThisTurn = false;
                 if (!this.bRepeat) {
@@ -510,14 +513,14 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
         game.getStack().setCardsCastLastTurn();
         game.getStack().clearCardsCastThisTurn();
-        
+
         for (final Player p1 : game.getPlayers()) {
             for (final ZoneType z : Player.ALL_ZONES) {
                 p1.getZone(z).resetCardsAddedThisTurn();
             }
         }
-        for( Player p : game.getPlayers() )
-        {
+        for (Player p : game.getPlayers()) {
+
             p.resetProwl();
             p.setLifeLostThisTurn(0);
 
@@ -698,11 +701,13 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      */
     public final void passPriority() {
         // stop game if it's outcome is clear
-        if ( game.isGameOver() ) return;
-        
+        if (game.isGameOver()) {
+            return;
+        }
+
         final Player actingPlayer = this.getPriorityPlayer();
         final Player firstAction = this.getFirstPriority();
-        
+
         // actingPlayer is the player who may act
         // the firstAction is the player who gained Priority First in this segment
         // of Priority
@@ -711,7 +716,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         if (firstAction.equals(nextPlayer)) {
             if (game.getStack().isEmpty()) {
                 this.setPriority(this.getPlayerTurn()); // this needs to be set early as we exit the phase
-                // end phase 
+                // end phase
                 setPlayerMayHavePriority(true);
                 nextPhase();
                 return;
@@ -724,7 +729,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             Singletons.getModel().getMatch().getInput().resetInput();
 
         }
-        game.getStack().chooseOrderOfSimultaneousStackEntryAll();        
+        game.getStack().chooseOrderOfSimultaneousStackEntryAll();
     }
 
     /**
@@ -738,7 +743,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     public final void setPlayerMayHavePriority(final boolean mayHavePriority) {
         this.isPlayerPriorityAllowed = mayHavePriority;
     }
-    
+
     /**
      * <p>
      * isNeedToNextPhase.

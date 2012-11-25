@@ -110,7 +110,7 @@ public class Untap extends Phase {
     private static void doUntap() {
         final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
         final Predicate<Card> tappedCanUntap = Predicates.and(Presets.TAPPED, Presets.CANUNTAP);
-                
+
         List<Card> list = new ArrayList<Card>(player.getCardsIn(ZoneType.Battlefield));
 
         for (final Card c : list) {
@@ -192,12 +192,12 @@ public class Untap extends Phase {
                 // end opponent untapping during your untap phase
             }
         }
-        
+
         if (Untap.canOnlyUntapOneLand()) {
             if (player.isComputer()) {
                 // search for lands the computer has and only untap 1
                 List<Card> landList = player.getLandsInPlay();
- 
+
                 landList = CardLists.filter(landList, tappedCanUntap);
                 if (landList.size() > 0) {
                     landList.get(0).untap();
@@ -234,7 +234,7 @@ public class Untap extends Phase {
             }
         }
         if (Singletons.getModel().getGame().isCardInPlay("Damping Field") || Singletons.getModel().getGame().isCardInPlay("Imi Statue")) {
-            final Player turnOwner = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn(); 
+            final Player turnOwner = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
             if (turnOwner.isComputer()) {
                 List<Card> artList = new ArrayList<Card>(turnOwner.getCardsIn(ZoneType.Battlefield));
                 artList = CardLists.filter(artList, Presets.ARTIFACTS);

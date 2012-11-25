@@ -82,9 +82,8 @@ public class BoosterDraftAI {
         CardPrinted pickedCard = null;
 
         Predicate<CardPrinted> pred = Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, CardPrinted.FN_GET_RULES);
-        Iterable<CardPrinted> aiPlayablesView = Iterables.filter(chooseFrom, pred );
-        List<CardPrinted> aiPlayables = Lists.newArrayList(aiPlayablesView); 
-        
+        Iterable<CardPrinted> aiPlayablesView = Iterables.filter(chooseFrom, pred);
+        List<CardPrinted> aiPlayables = Lists.newArrayList(aiPlayablesView);
 
         TreeMap<Double, CardPrinted> rankedCards = rankCards(chooseFrom);
 
@@ -195,7 +194,7 @@ public class BoosterDraftAI {
             CardColor colors = CardColor.fromNames(dckColors.getColor1(), dckColors.getColor2());
             Predicate<CardRules> hasColor = Predicates.or(new GenerateDeckUtil.ContainsAllColorsFrom(colors),
                     GenerateDeckUtil.COLORLESS_CARDS);
-            
+
             Iterable<CardPrinted> colorList = Iterables.filter(aiPlayables, Predicates.compose(hasColor, CardPrinted.FN_GET_RULES));
 
             // Sort playable, on-color cards by rank

@@ -101,8 +101,8 @@ class CCnt implements Comparable<CCnt> {
      */
     @Override
     public int compareTo(CCnt o) {
-        int compareCount = o.getCount(); 
+        int compareCount = o.getCount();
         return this.count - compareCount;
     }
-    
+
 }

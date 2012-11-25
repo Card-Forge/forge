@@ -107,7 +107,7 @@ public class Combat {
     public final void initiatePossibleDefenders(final Iterable<Player> defenders) {
         this.defenders.clear();
         this.defenderMap.clear();
-        for(Player defender : defenders) {
+        for (Player defender : defenders) {
             fillDefenderMaps(defender);
         }
     }
@@ -116,19 +116,19 @@ public class Combat {
         this.defenders.clear();
         this.defenderMap.clear();
         fillDefenderMaps(defender);
-    }    
-    
+    }
+
     private void fillDefenderMaps(final Player defender) {
         this.defenders.add(defender);
         this.defenderMap.put(defender, new ArrayList<Card>());
-        List<Card> planeswalkers = 
+        List<Card> planeswalkers =
                 CardLists.filter(defender.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
         for (final Card pw : planeswalkers) {
             this.defenders.add(pw);
             this.defenderMap.put(pw, new ArrayList<Card>());
-        }        
+        }
     }
-    
+
     /**
      * <p>
      * nextDefender.
@@ -387,15 +387,17 @@ public class Combat {
         GameEntity defender = getDefenderByAttacker(c);
 
         // System.out.println(c.toString() + " attacks " + defender.toString());
-        if ( defender instanceof Player)
+        if (defender instanceof Player) {
             return (Player) defender;
+        }
 
-        // maybe attack on a controlled planeswalker? 
-        if ( defender instanceof Card ) 
-            return ((Card)defender).getController();
+        // maybe attack on a controlled planeswalker?
+        if (defender instanceof Card) {
+            return ((Card) defender).getController();
+        }
         return null;
-    }    
-    
+    }
+
     public final GameEntity getDefendingEntity(final Card c) {
         GameEntity defender = this.attackerToDefender.get(c);
 
@@ -535,7 +537,7 @@ public class Combat {
     private List<Card> getBlockingAttackerList(final Card attacker) {
         return this.attackerMap.get(attacker);
     }
-    
+
 
     /**
      * <p>
@@ -553,9 +555,9 @@ public class Combat {
         } else if (source.isEquipment()) {
             attacker = source.getEquippingCard();
         }
-        
+
         Player defender = getDefenderPlayerByAttacker(attacker);
-        if ( null == defender ) { // too bad, have to choose now 
+        if (null == defender) { // too bad, have to choose now
             // don't have ui, cannot choose - have to getOpponent
             // that's inaccurate. That opponent may be not even a defender
             defender = source.getController().getOpponent();
@@ -980,12 +982,12 @@ public class Combat {
         this.unblockedMap.put(c, new ArrayList<Card>());
     }
 
-    public boolean isPlayerAttacked(Player priority)
-    {
+    public boolean isPlayerAttacked(Player priority) {
+
         // System.out.println("\nWho attacks attacks " + priority.toString() + "?");
-        for(Card c : getAttackers())
-        {
-            if ( priority.equals(getDefenderPlayerByAttacker(c)) ) {
+        for (Card c : getAttackers()) {
+
+            if (priority.equals(getDefenderPlayerByAttacker(c))) {
                 return true;
             }
         }
