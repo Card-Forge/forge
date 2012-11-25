@@ -1,6 +1,8 @@
 Forge Beta: 1#-##-2012 ver 1.3.2
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
+(Thanks to the MAGE team for permission to use their targeting arrows.)
+(Thanks to http://www.freesound.org/browse/ for providing some sound files.)
 
 11### cards in total.
 
@@ -16,6 +18,10 @@ http://www.freesound.org/browse/
 You should note that sound files can be large sized and we would like to avoid this if possible. A good size to shoot for would be 50 K or less. There is a freeware sound editor that may have versions for all operating systems. This app is named Audacity.
 
 Some initial work is being done in an effort to implement a Vanguard mode. This is a work in progress, it is not yet finished and this work is not yet included in the beta or the snapshot releases.
+
+The visuals for targeting arrows has been improved and looks better, with an adaptation of the arrow drawing code from MAGE. Thanks to the MAGE team for permission for the adaptation.
+
+There were reports that special challenge decks would cause a co-modification error in quest mode. This bug is likely fixed at this time.
 
 --
 
@@ -198,6 +204,33 @@ Fixes/Features:
 - Variants:Fixed the UI side of the new Vanguard home screen. (Now to make the match actually start!)
 - Variants:Added some apparently unadded scripts from trunk.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Reorganized Conditions of static abilities (WIP).
+- Fixed Alpha Status.
+- CheckStyle.
+- Unblocked missed script folder revisions.
+- Sound System: added two new sounds (Block and Token), fixed a bug that caused the destroy sound to be continuously played at every phase when a planeswalker was on the field.
+- Check for null arrays before assigning in SDisplayUtil
+- Re-Merged 18323-18354 and merged 18357-18366 into Variants. *crosses fingers*
+- Variants - Added setinfo to avatars and uploaded images to cardforge (they should download like any other card now)
+- Variants - Reverted setinfo to avatars (caused crash on set image downloads)
+- Variants:Added VAN set.
+- Variants:Added SetInfo to avatars, courtesy of Marc.
+- Variants:Replaced CardDb.getAllCards() with CardDb.getTraditionalCards() where appropriate.
+- Variants:Reverted preferences.
+- Updated some SVars.
+- Added a fluff piece to the changes.txt file.
+- Cleanup of CloneEffect.
+- Bundled inZone property of cards.
+- Targeting Overlay: much prettier targeting arrows (thanks to the MAGE team for permission for adaptation), some initial work for the "mouseover-only" mode fix (not enabled yet).
+- Variants: Keep separate lists of traditional/nontraditional CardPrinted's in CardDb.
+- Variants: Fixed crash when only playing against 1 opponent on vanguard.
+- Variants: Fixed vanguard match not starting when selecting non-random avatar.
+- Targeting Overlay: Card mouseover mode fixed and enabled, should work fine and should show only the targeting arrows (both combat and non-combat) for the card the mouse is hovering over.
+- Converted the property "SameNameAsImprinted" to the "SharesNameWith" group.
+- Variants - Added the following avatars: Erhnam Djinn Avatar, Etched Oracle Avatar, and Fallen Angel Avatar
+- Targeting Overlay: Fixed a bug with the combat targeting arrows shown both ways in card mouseover mode.
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -238,6 +271,14 @@ Ember Gale
 Tower Above
 Journey of Discovery
 War Elemental
+Dromar, the Banisher
+Tsabo's Web
+Assembly Hall
+Credit Voucher
+Lumengrid Augur
+Proteus Staff
+Shrouded Serpent
+Spoils of the Vault
 
 
 end
