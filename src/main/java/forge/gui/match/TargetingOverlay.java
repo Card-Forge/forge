@@ -61,7 +61,7 @@ public enum TargetingOverlay {
     private final List<CardPanel> cardPanels = new ArrayList<CardPanel>();
     private final List<Point[]> arcs = new ArrayList<Point[]>();
 
-    private Rectangle rectMouseOver = null;
+    private CardPanel activePanel = null;
     
     /**
      * Semi-transparent overlay panel. Should be used with layered panes.
@@ -84,19 +84,19 @@ public enum TargetingOverlay {
         cardPanels.clear();
 
         List<VField> fields = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
-        rectMouseOver = null;
 
         switch (CDock.SINGLETON_INSTANCE.getArcState()) {
             case 0:
                 return;
             case 1:
                 // Draw only hovered card
+                activePanel = null;
                 for (CField f : CMatchUI.SINGLETON_INSTANCE.getFieldControls()) {
                     cardPanels.addAll(f.getView().getTabletop().getCardPanels());
                 }
                 for (VField f : fields) {
                     if (f.getTabletop().getCardFromMouseOverPanel() != null) {
-                        rectMouseOver = f.getTabletop().getMouseOverPanel().getVisibleRect();
+                        activePanel = f.getTabletop().getMouseOverPanel();
                         break;
                     }
                 }
@@ -122,31 +122,95 @@ public enum TargetingOverlay {
 
         List<Card> temp = new ArrayList<Card>();
 
-        // Global cards
-        for (CardPanel c : cardPanels) {
-            if (!c.isShowing()) { continue; }
+        if (CDock.SINGLETON_INSTANCE.getArcState() == 1) {
+            // Only work with the active panel
+            if (activePanel == null) { return; }
+            Card c = activePanel.getCard();
+            
+            Card enchanting = c.getEnchantingCard();
+            List<Card> enchantedBy = c.getEnchantedBy();
+            List<Card> blocking = c.getBlockedThisTurn();
+            List<Card> blockedBy = c.getBlockedByThisTurn();
 
-            // Enchantments
-            Card enchanting = c.getCard().getEnchantingCard();
-            if (enchanting != null) {
-                if (enchanting.getController().equals(c.getCard().getController())) {
+            if (null != enchanting) {
+                if (!enchanting.getController().equals(c.getController())) {
+                    arcs.add(new Point[] {
+                        endpoints.get(enchanting.getUniqueNumber()),
+                        endpoints.get(c.getUniqueNumber())
+                    });
+                }
+            }
+
+            if (null != enchantedBy) {
+                for (Card enc : enchantedBy) {
+                    if (!enc.getController().equals(c.getController())) {
+                    arcs.add(new Point[] {
+                        endpoints.get(c.getUniqueNumber()),
+                        endpoints.get(enc.getUniqueNumber())
+                    });
+                    }
+                }
+            }
+
+            for (Card attackingCard : Singletons.getModel().getGame().getCombat().getAttackers()) {
+                temp = Singletons.getModel().getGame().getCombat().getBlockers(attackingCard);
+                for (Card blockingCard : temp) {
+                    if (!attackingCard.equals(c) && !blockingCard.equals(c)) { continue; }
+                    arcs.add(new Point[] {
+                        endpoints.get(attackingCard.getUniqueNumber()),
+                        endpoints.get(blockingCard.getUniqueNumber())
+                    });
+                }
+            }
+
+            if (null != blocking) {
+                for (Card b : blocking) {
+                    arcs.add(new Point[]{
+                        endpoints.get(c.getUniqueNumber()),
+                        endpoints.get(b.getUniqueNumber())
+                    });
+                }
+            }
+
+            if (null != blockedBy) {
+                for (Card b : blockedBy) {
+                    arcs.add(new Point[]{
+                        endpoints.get(c.getUniqueNumber()),
+                        endpoints.get(b.getUniqueNumber())
+                    });
+                }
+            }
+        } else {
+            // Work with all card panels currently visible
+
+            // Global cards
+            for (CardPanel c : cardPanels) {
+                if (!c.isShowing()) {
                     continue;
                 }
-                arcs.add(new Point[] {
-                    endpoints.get(enchanting.getUniqueNumber()),
-                    endpoints.get(c.getCard().getUniqueNumber())
-                });
-            }
-        }
 
-        // Combat cards
-        for (Card attackingCard : Singletons.getModel().getGame().getCombat().getAttackers()) {
-            temp = Singletons.getModel().getGame().getCombat().getBlockers(attackingCard);
-            for (Card blockingCard : temp) {
-                arcs.add(new Point[] {
-                    endpoints.get(attackingCard.getUniqueNumber()),
-                    endpoints.get(blockingCard.getUniqueNumber())
-                });
+                // Enchantments
+                Card enchanting = c.getCard().getEnchantingCard();
+                if (enchanting != null) {
+                    if (enchanting.getController().equals(c.getCard().getController())) {
+                        continue;
+                    }
+                    arcs.add(new Point[]{
+                                endpoints.get(enchanting.getUniqueNumber()),
+                                endpoints.get(c.getCard().getUniqueNumber())
+                            });
+                }
+            }
+
+            // Combat cards
+            for (Card attackingCard : Singletons.getModel().getGame().getCombat().getAttackers()) {
+                temp = Singletons.getModel().getGame().getCombat().getBlockers(attackingCard);
+                for (Card blockingCard : temp) {
+                    arcs.add(new Point[]{
+                                endpoints.get(attackingCard.getUniqueNumber()),
+                                endpoints.get(blockingCard.getUniqueNumber())
+                            });
+                }
             }
         }
 
@@ -253,12 +317,6 @@ public enum TargetingOverlay {
                     continue;
                 }
                 
-                if (rectMouseOver != null) {
-                    if ( !rectMouseOver.contains(p[0]) ) {
-                        continue;
-                    }
-                }
-
                 int endX = (int)p[0].getX();
                 int endY = (int)p[0].getY();
                 int startX = (int)p[1].getX();
