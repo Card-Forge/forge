@@ -58,10 +58,14 @@ public class TournamentPack extends OpenablePack {
         return ImageCache.SEALED_PRODUCT + "tournamentpacks/" + this.contents.getEdition();
     }
 
+    public final boolean isStarterDeck() {
+        return contents.getCommon() < 30;
+    }
+    
 
     @Override
     public final String getType() {
-        return contents.getCommon() >= 30 ? "Tournament Pack" : "Starter Deck";
+        return !isStarterDeck() ? "Tournament Pack" : "Starter Deck";
     }
 
     @Override

@@ -220,6 +220,8 @@ public final class CardDb {
      * @return true, if is card supported
      */
     public boolean isCardSupported(final String cardName0) {
+        if ( null == cardName0 ) return false;  // obviously
+        
         final boolean isFoil = this.isFoil(cardName0);
         final String cardName = isFoil ? this.removeFoilSuffix(cardName0) : cardName0;
         final ImmutablePair<String, String> nameWithSet = CardDb.splitCardName(cardName);

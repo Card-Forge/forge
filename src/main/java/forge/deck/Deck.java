@@ -35,6 +35,7 @@ import com.google.common.base.Function;
 import forge.deck.io.DeckFileHeader;
 import forge.deck.io.DeckSerializer;
 import forge.gui.deckeditor.tables.TableSorter;
+import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
 import forge.game.GameType;
@@ -62,7 +63,7 @@ public class Deck extends DeckBase {
 
     private final DeckSection main;
     private final DeckSection sideboard;
-    private final DeckSection commander;
+    private CardPrinted commander;
     private final DeckSection planes;
     private final DeckSection schemes;
 
@@ -85,7 +86,7 @@ public class Deck extends DeckBase {
         super(name0);
         this.main = new DeckSection();
         this.sideboard = new DeckSection();
-        this.commander = new DeckSection();
+        this.commander = null;
         this.planes = new DeckSection();
         this.schemes = new DeckSection();
     }
@@ -203,7 +204,9 @@ public class Deck extends DeckBase {
 
         d.getMain().set(Deck.readCardList(sections.get("main")));
         d.getSideboard().set(Deck.readCardList(sections.get("sideboard")));
-        d.getCommander().set(Deck.readCardList(sections.get("commander")));
+        List<String> cmd = Deck.readCardList(sections.get("commander"));
+        String cmdName = cmd.isEmpty() ? null : cmd.get(0); 
+        d.commander = CardDb.instance().isCardSupported(cmdName) ? CardDb.instance().getCard(cmdName) : null;
         d.getPlanes().set(Deck.readCardList(sections.get("planes")));
         d.getSchemes().set(Deck.readCardList(sections.get("schemes")));
         return d;
@@ -244,15 +247,19 @@ public class Deck extends DeckBase {
         Collections.sort(main2sort, TableSorter.BY_NAME_THEN_SET);
         final List<String> out = new ArrayList<String>();
         for (final Entry<CardPrinted, Integer> e : main2sort) {
-            final CardPrinted card = e.getKey();
-            final boolean hasBadSetInfo = "???".equals(card.getEdition()) || StringUtils.isBlank(card.getEdition());
-            if (hasBadSetInfo) {
-                out.add(String.format("%d %s", e.getValue(), card.getName()));
-            } else {
-                out.add(String.format("%d %s|%s", e.getValue(), card.getName(), card.getEdition()));
-            }
+            out.add(serializeSingleCard(e.getKey(), e.getValue()));
         }
         return out;
+    }
+    
+    private static String serializeSingleCard(CardPrinted card, Integer n) {
+
+        final boolean hasBadSetInfo = "???".equals(card.getEdition()) || StringUtils.isBlank(card.getEdition());
+        if (hasBadSetInfo) {
+            return String.format("%d %s", n, card.getName());
+        } else {
+            return String.format("%d %s|%s", n, card.getName(), card.getEdition());
+        }        
     }
 
     /**
@@ -279,8 +286,10 @@ public class Deck extends DeckBase {
         out.add(String.format("%s", "[sideboard]"));
         out.addAll(Deck.writeCardPool(this.getSideboard()));
         
-        out.add(String.format("%s", "[commander]"));
-        out.addAll(Deck.writeCardPool(this.getCommander()));
+        if ( getCommander() != null ) {
+            out.add(String.format("%s", "[commander]"));
+            out.add(Deck.serializeSingleCard(getCommander(), 1));
+        }
         
         out.add(String.format("%s", "[planes]"));
         out.addAll(Deck.writeCardPool(this.getPlanes()));
@@ -346,14 +355,14 @@ public class Deck extends DeckBase {
         if(type == GameType.Commander)
         {//Must contain exactly 1 legendary Commander and no sideboard.
             //TODO:Enforce color identity
-            if(getCommander().countAll() != 1)
+            if ( null == getCommander())
                 return false;
             
-            if(!getCommander().toFlatList().get(0).getType().contains("Legendary"))
+            if(!getCommander().getCard().getType().isLegendary())
                 return false;
             
             //No sideboarding in Commander
-            if(getSideboard().countAll() > 0)
+            if(!getSideboard().isEmpty())
                 return false;
         }
         else if(type == GameType.Planechase) 
@@ -389,7 +398,7 @@ public class Deck extends DeckBase {
     /**
      * @return the commander
      */
-    public DeckSection getCommander() {
+    public CardPrinted getCommander() {
         return commander;
     }
 
