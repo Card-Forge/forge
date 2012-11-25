@@ -17,10 +17,15 @@
  */
 package forge.gui.match;
 
+import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Area;
+import java.awt.geom.GeneralPath;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,11 +42,6 @@ import forge.gui.match.nonsingleton.VField;
 import forge.gui.toolbox.FSkin;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Area;
-import java.awt.geom.GeneralPath;
 
 /**
  * Semi-transparent overlay panel. Should be used with layered panes.
