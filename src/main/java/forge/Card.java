@@ -6498,8 +6498,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (list.indexOf(source) >= list.indexOf(this)) {
                 return false;
             }
-        } else if (property.startsWith("DirectlyAbove")) { // "Are Directly Above"
-                                                           // Source
+        } else if (property.startsWith("DirectlyAbove")) { // "Are Directly Above" Source
             final List<Card> list = this.getOwner().getCardsIn(ZoneType.Graveyard);
             if (list.indexOf(this) - list.indexOf(source) != 1) {
                 return false;
@@ -6564,15 +6563,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                     return false;
                 } else {
-                    boolean shares = false;
                     for (final Card card : sourceController.getCardsIn(ZoneType.Battlefield)) {
                         if (card.isValid(restriction, sourceController, source) && this.sharesColorWith(card)) {
-                            shares = true;
+                            return true;
                         }
                     }
-                    if (!shares) {
-                        return false;
-                    }
+                    return false;
                 }
             }
         } else if (property.startsWith("sharesCreatureTypeWith")) {
@@ -6672,7 +6668,6 @@ public class Card extends GameEntity implements Comparable<Card> {
                     return false;
                 }
             }
-
         } else if (property.startsWith("SecondSpellCastThisTurn")) {
             final List<Card> list = CardUtil.getThisTurnCast("Card", source);
             if (list.size() < 2)  {
@@ -6681,7 +6676,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             else if (list.get(1) != this) {
                 return false;
             }
-
         } else if (property.startsWith("sharesTypeWith")) {
             if (!this.sharesTypeWith(source)) {
                 return false;

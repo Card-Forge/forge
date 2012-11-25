@@ -3,7 +3,7 @@ ManaCost:W
 Types:Instant
 Text:no text
 A:SP$ Tap | Cost$ W | TgtPrompt$ Choose target creature | ValidTgts$ Creature | SubAbility$ DBExile | SpellDescription$ Tap target creature. Metalcraft - If you control three or more artifacts, exile that creature.
-SVar:DBExile:DB$ChangeZone | Condition$ Metalcraft | Defined$ Targeted | Origin$ Battlefield | Destination$ Exile | ConditionDescription$ If you control three or more artifacts,
+SVar:DBExile:DB$ ChangeZone | Condition$ Metalcraft | Defined$ Targeted | Origin$ Battlefield | Destination$ Exile | ConditionDescription$ If you control three or more artifacts,
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dispatch.jpg
