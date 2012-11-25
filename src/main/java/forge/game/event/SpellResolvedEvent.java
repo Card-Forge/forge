@@ -7,10 +7,10 @@ import forge.card.spellability.SpellAbility;
  * TODO: Write javadoc for this type.
  *
  */
-public class SpellResolvedEvent extends Event{
+public class SpellResolvedEvent extends Event {
 
-    final public Card Source;
-    final public SpellAbility Spell;
+    public final Card Source;
+    public final SpellAbility Spell;
 
     /**
      * TODO: Write javadoc for Constructor.
@@ -23,6 +23,5 @@ public class SpellResolvedEvent extends Event{
         Spell = sa;
     }
 
-    
-    
+
 }
