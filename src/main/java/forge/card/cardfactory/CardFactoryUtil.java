@@ -69,7 +69,6 @@ import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCostUtil;
 import forge.game.event.TokenCreatedEvent;
-import forge.game.limited.CreatureComparator;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
@@ -2083,20 +2082,6 @@ public class CardFactoryUtil {
 
         if (sq[0].contains("xPaid")) {
             return CardFactoryUtil.doXMath(c.getXManaCostPaid(), m, c);
-        }
-
-        if (sq[0].contains("xLifePaid")) {
-            if (c.getController().isHuman()) {
-                return c.getXLifePaid();
-            } else {
-                // copied for xPaid
-                // not implemented for Compy
-                // int dam = ComputerUtil.getAvailableMana().size()-
-                // CardUtil.getConvertedManaCost(c);
-                // if (dam < 0) dam = 0;
-                // return dam;
-                return 0;
-            }
         }
 
         if (sq[0].equals("YouDrewThisTurn")) {

@@ -55,9 +55,9 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
 import forge.game.GlobalRuleChange;
-import forge.game.event.AddCounterEvent;
+import forge.game.event.CounterAddedEvent;
 import forge.game.event.CardEquippedEvent;
-import forge.game.event.RemoveCounterEvent;
+import forge.game.event.CounterRemovedEvent;
 import forge.game.event.SetTappedEvent;
 import forge.game.phase.Combat;
 import forge.game.player.ComputerUtil;
@@ -188,7 +188,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private int randomPicture = 0;
 
     private int xManaCostPaid = 0;
-    private int xLifePaid = 0;
 
     private int multiKickerMagnitude = 0;
     private int replicateMagnitude = 0;
@@ -931,29 +930,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
-     * <p>
-     * Setter for the field <code>xLifePaid</code>.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     */
-    public final void setXLifePaid(final int n) {
-        this.xLifePaid = n;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>xLifePaid</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getXLifePaid() {
-        return this.xLifePaid;
-    }
-
-    /**
      * @return the blockedThisTurn
      */
     public List<Card> getBlockedThisTurn() {
@@ -1246,7 +1222,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // play the Add Counter sound
-        Singletons.getModel().getGame().getEvents().post(new AddCounterEvent(addAmount));
+        Singletons.getModel().getGame().getEvents().post(new CounterAddedEvent(addAmount));
 
         this.updateObservers();
     }
@@ -1297,7 +1273,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // Play the Subtract Counter sound
-        Singletons.getModel().getGame().getEvents().post(new RemoveCounterEvent(delta));
+        Singletons.getModel().getGame().getEvents().post(new CounterRemovedEvent(delta));
 
         this.updateObservers();
     }

@@ -33,7 +33,6 @@ import forge.card.EditionCollection;
 import forge.card.FatPackData;
 import forge.card.FormatCollection;
 import forge.card.cardfactory.CardFactory;
-import forge.card.cardfactory.CardFactoryInterface;
 import forge.deck.CardCollections;
 import forge.error.ExceptionHandler;
 import forge.game.GameState;
@@ -180,7 +179,7 @@ public enum FModel {
             }
         };
         Thread testNetConnection = new Thread(runNetworkTest, "CheckRemoteDraftAI");
-        testNetConnection.start();        
+        testNetConnection.start();
     }
 
     /**
@@ -437,7 +436,7 @@ public enum FModel {
      * TODO: Write javadoc for this method.
      * @return
      */
-    public CardFactoryInterface getCardFactory() {
+    public CardFactory getCardFactory() {
         return cardFactory;
     }
     
