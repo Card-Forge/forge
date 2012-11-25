@@ -9,7 +9,7 @@ T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Island.YouCtrl | Present
 SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Self
 A:AB$ Untap | Cost$ U U Sac<1/Creature> | ActivationPhases$ Upkeep | PlayerTurn$ True | SpellDescription$ Untap CARDNAME. Activate this ability only during your upkeep.
 A:AB$ DealDamage | Cost$ U U | NumDmg$ 1 | ValidTgts$ Creature.attacking+withoutFlying | TgtPrompt$ Select target attacking creature without flying | SubAbility$ DBPump | SpellDescription$ CARDNAME gets -1/-0 until end of turn and deals 1 damage to target attacking creature without flying.
-SVar:DBPump:DB$Pump | NumAtt$ -1| Defined$ Self
+SVar:DBPump:DB$ Pump | NumAtt$ -1| Defined$ Self
 SVar:NeedsToPlay:Island.YouCtrl
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

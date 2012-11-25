@@ -3,8 +3,8 @@ ManaCost:1 G G
 Types:Legendary Creature Human Monk
 Text:no text
 PT:2/2
-S:Mode$ CantBeCast | ValidCard$ Card | PlayerTurn$ True | Caster$ Opponent | Description$ Players can cast spells only during their own turns.
-S:Mode$ CantBeCast | ValidCard$ Card | OpponentTurn$ True | Caster$ You
+S:Mode$ CantBeCast | ValidCard$ Card | Condition$ PlayerTurn | Caster$ Opponent | Description$ Players can cast spells only during their own turns.
+S:Mode$ CantBeCast | ValidCard$ Card | Condition$ NotPlayerTurn | Caster$ You
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dosan_the_falling_leaf.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/205.jpg

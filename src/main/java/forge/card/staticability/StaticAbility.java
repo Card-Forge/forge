@@ -508,6 +508,14 @@ public class StaticAbility {
                 if (!controller.hasMetalcraft()) {
                     return false;
                 }
+            } else if (params.get("Condition").equals("PlayerTurn")) {
+                if (!Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(controller)) {
+                    return false;
+                }
+            } else if (params.get("Condition").equals("NotPlayerTurn")) {
+                if (Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(controller)) {
+                    return false;
+                }
             } else if (params.get("Condition").equals("PermanentOfEachColor")) {
                 if ((controller.getColoredCardsInPlay(Constant.Color.BLACK).isEmpty()
                         || controller.getColoredCardsInPlay(Constant.Color.BLUE).isEmpty()
@@ -521,14 +529,6 @@ public class StaticAbility {
                     return false;
                 }
             }
-        }
-
-        if (this.params.containsKey("PlayerTurn") && !Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(controller)) {
-            return false;
-        }
-
-        if (this.params.containsKey("OpponentTurn") && !Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(controller.getOpponent())) {
-            return false;
         }
 
         if (this.params.containsKey("OpponentAttackedWithCreatureThisTurn")
@@ -553,17 +553,6 @@ public class StaticAbility {
             }
         }
 
-        /*
-         * if(mapParams.containsKey("isPresent")) { String isPresent =
-         * mapParams.get("isPresent"); List<Card> list =
-         * AllZoneUtil.getCardsInPlay();
-         * 
-         * list = list.getValidCards(isPresent.split(","), controller,
-         * hostCard);
-         * 
-         * }
-         */
-
         if (this.params.containsKey("CheckSVar")) {
             final int sVar = AbilityFactory.calculateAmount(this.hostCard, this.params.get("CheckSVar"), null);
             String comparator = "GE1";
@@ -576,6 +565,8 @@ public class StaticAbility {
             if (!Expressions.compare(sVar, svarOperator, operandValue)) {
                 return false;
             }
+        } else { //no need to check the others
+            return true;
         }
 
         if (this.params.containsKey("CheckSecondSVar")) {
@@ -590,6 +581,8 @@ public class StaticAbility {
             if (!Expressions.compare(sVar, svarOperator, operandValue)) {
                 return false;
             }
+        } else { //no need to check the others
+            return true;
         }
 
         if (this.params.containsKey("CheckThirdSVar")) {
@@ -604,6 +597,8 @@ public class StaticAbility {
             if (!Expressions.compare(sVar, svarOperator, operandValue)) {
                 return false;
             }
+        } else { //no need to check the others
+            return true;
         }
 
         if (this.params.containsKey("CheckFourthSVar")) {

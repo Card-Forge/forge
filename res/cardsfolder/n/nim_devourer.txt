@@ -6,7 +6,7 @@ PT:4/1
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | References$ X | Description$ CARDNAME gets +1/+0 for each artifact you control.
 SVar:X:Count$Valid Artifact.YouCtrl
 A:AB$ ChangeZone | Cost$ B B | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | PlayerTurn$ True | ActivationPhases$ Upkeep | SubAbility$ DBSac  | SpellDescription$ Return CARDNAME from your graveyard to the battlefield, then sacrifice a creature. Activate this ability only during your upkeep.
-SVar:DBSac:DB$Sacrifice | Defined$ You | SacValid$ Creature
+SVar:DBSac:DB$ Sacrifice | Defined$ You | SacValid$ Creature
 SVar:BuffedBy:Artifact
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
