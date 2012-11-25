@@ -7116,18 +7116,13 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!this.getCurSetCode().equals(setCode)) {
                 return false;
             }
-        } else if (property.startsWith("OnBattlefield")) {
-            final List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
-            if (!list.contains(this)) {
+        } else if (property.startsWith("inZone")) {
+            final String strZone = property.substring(6);
+            final ZoneType realZone = ZoneType.smartValueOf(strZone);
+            if (!this.isInZone(realZone)) {
                 return false;
             }
-        } else if (property.startsWith("InGraveyard")) {
-            final List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Graveyard);
-            if (!list.contains(this)) {
-                return false;
-            }
-        }
-        else {
+        } else {
             if (property.equals("ChosenType")) {
                 if (!this.isType(source.getChosenType())) {
                     return false;
