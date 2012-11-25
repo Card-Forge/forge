@@ -122,7 +122,7 @@ public class BoosterGenerator {
     public BoosterGenerator(Predicate<CardPrinted> filter) {
         this();
 
-        for (final CardPrinted c : Iterables.filter(CardDb.instance().getTraditionalCards(), filter)) {
+        for (final CardPrinted c : Iterables.filter(CardDb.instance().getAllTraditionalCards(), filter)) {
             this.addToRarity(c);
             // System.out.println(c);
         }

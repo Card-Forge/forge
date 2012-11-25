@@ -22,6 +22,8 @@ import java.util.ArrayList;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.google.common.collect.Iterables;
+
 import forge.CardUtil;
 import forge.Singletons;
 import forge.card.CardEdition;
@@ -90,7 +92,9 @@ public class GuiDownloadSetPicturesLQ extends GuiDownloader {
         // read token names and urls
         final ArrayList<DownloadObject> cList = new ArrayList<DownloadObject>();
 
-        for (final CardPrinted c : CardDb.instance().getAllCards()) {
+        Iterable<CardPrinted> allPrinted = Iterables.concat(CardDb.instance().getAllTraditionalCards(),CardDb.instance().getAllNonTraditionalCards());
+        
+        for (final CardPrinted c : allPrinted) {
             final String setCode3 = c.getEdition();
             if (StringUtils.isBlank(setCode3) || "???".equals(setCode3)) {
                 continue; // we don't want cards from unknown sets

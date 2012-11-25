@@ -75,8 +75,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
     private final JCheckBox cbArtifacts = new FCheckBox("Remove Artifacts");
     private final JCheckBox cbRemoveSmall = new FCheckBox("Remove Small Creatures");
 
-    private final Predicate<CardPrinted> avatarTypePred = CardPrinted.Predicates.type("Vanguard");
-    private final Iterable<CardPrinted> allAvatars = Iterables.filter(CardDb.instance().getAllCards(), avatarTypePred);
+    private final Iterable<CardPrinted> allAvatars = Iterables.filter(CardDb.instance().getAllNonTraditionalCards(), CardPrinted.Predicates.type("Vanguard"));
     private final List<CardPrinted> allAiAvatars = new ArrayList<CardPrinted>();
     
     //////////////////////////////
@@ -333,7 +332,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
     
     public int getNumPlayers()
     {
-        return currentNumTabsShown-1;
+        return currentNumTabsShown;
     }
 
     /**

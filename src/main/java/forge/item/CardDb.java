@@ -93,7 +93,9 @@ public final class CardDb {
     // need this to obtain cardReference by name+set+artindex
     private final Map<String, Map<String, CardPrinted[]>> allCardsBySet = new Hashtable<String, Map<String, CardPrinted[]>>();
     // this is the same list in flat storage
-    private final List<CardPrinted> allCardsFlat = new ArrayList<CardPrinted>();
+    private final List<CardPrinted> allTraditionalCardsFlat = new ArrayList<CardPrinted>();
+    
+    private final List<CardPrinted> allNonTraditionalCardsFlat = new ArrayList<CardPrinted>();
 
     // Lambda to get rules for selects from list of printed cards
     /** The Constant fnGetCardPrintedByForgeCard. */
@@ -167,7 +169,11 @@ public final class CardDb {
         setMap.put(cardName, cardCopies);
         for (int i = 0; i < count; i++) {
             lastAdded = CardPrinted.build(card, set, s.getValue().getRarity(), i);
-            this.allCardsFlat.add(lastAdded);
+            if(lastAdded.isTraditional()) {
+                this.allTraditionalCardsFlat.add(lastAdded);
+            } else {
+                this.allNonTraditionalCardsFlat.add(lastAdded);
+            }
             cardCopies[i] = lastAdded;
         }
 
@@ -360,17 +366,12 @@ public final class CardDb {
      * 
      * @return the all cards
      */
-    public Iterable<CardPrinted> getAllCards() {
-        return this.allCardsFlat;
+    public Iterable<CardPrinted> getAllTraditionalCards() {
+        return this.allTraditionalCardsFlat;
     }
     
-    /**
-     * Gets all "traditional" (non-scheme/vanguard/plane) cards
-     * 
-     * @return the cards
-     */
-    public Iterable<CardPrinted> getTraditionalCards() {
-        return Iterables.filter(getAllCards(), CardPrinted.Predicates.Presets.TRADITIONAL);
+    public Iterable<CardPrinted> getAllNonTraditionalCards() {
+        return this.allNonTraditionalCardsFlat;
     }
 
     /**
@@ -400,7 +401,7 @@ public final class CardDb {
             } else {
                 // OK, plain name here
                 final Predicate<CardPrinted> predicate = CardPrinted.Predicates.name(nameWithSet.left);
-                final Iterable<CardPrinted> namedCards = Iterables.filter(this.allCardsFlat, predicate);
+                final Iterable<CardPrinted> namedCards = Iterables.filter(this.allTraditionalCardsFlat, predicate);
                 // Find card with maximal set index
                 result = Aggregates.itemWithMax(namedCards, CardPrinted.FN_GET_EDITION_INDEX);
                 if (null == result) {

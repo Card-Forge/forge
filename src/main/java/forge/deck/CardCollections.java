@@ -34,6 +34,7 @@ public class CardCollections {
     private final IStorage<DeckGroup> draft;
     private final IStorage<DeckGroup> sealed;
     private final IStorage<Deck> cube;
+    private final IStorage<Deck> scheme;
 
     /**
      * TODO: Write javadoc for Constructor.
@@ -45,8 +46,9 @@ public class CardCollections {
         this.draft = new StorageImmediatelySerialized<DeckGroup>(new DeckGroupSerializer(new File(file, "draft")));
         this.sealed = new StorageImmediatelySerialized<DeckGroup>(new DeckGroupSerializer(new File(file, "sealed")));
         this.cube = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(file, "cube")));
+        this.scheme = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(file, "scheme")));
 
-        System.out.printf("Read decks: %d constructed, %d sealed, %d draft, %d cubes.%n", constructed.getCount(), sealed.getCount(), draft.getCount(), cube.getCount());
+        System.out.printf("Read decks: %d constructed, %d sealed, %d draft, %d cubes, %d scheme.%n", constructed.getCount(), sealed.getCount(), draft.getCount(), cube.getCount(), scheme.getCount());
 
         // remove this after most people have been switched to new layout
         final OldDeckParser oldParser = new OldDeckParser(file, this.constructed, this.draft, this.sealed, this.cube);
@@ -87,6 +89,14 @@ public class CardCollections {
      */
     public IStorage<DeckGroup> getSealed() {
         return this.sealed;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @return
+     */
+    public IStorage<Deck> getScheme() {
+        return this.scheme;
     }
 
 }

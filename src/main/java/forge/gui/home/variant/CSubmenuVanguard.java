@@ -151,6 +151,10 @@ public enum CSubmenuVanguard implements ICDoc {
                             avatar = Iterables.get(view.getAllAiAvatars(),rnd.nextInt(Iterables.size(view.getAllAiAvatars())));
                         }
                     }
+                    else
+                    {
+                        avatar = (CardPrinted)playerAvatars.get(i);
+                    }
                     
                     helper.addVanguardPlayer(player, playerDecks.get(i), avatar);
                 }

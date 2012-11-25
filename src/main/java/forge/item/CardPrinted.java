@@ -110,6 +110,10 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
     public boolean isFoil() {
         return this.foiled;
     }
+    
+    public boolean isTraditional() {
+        return !(getType().contains("Vanguard") || getType().contains("Scheme") || getType().contains("Plane"));
+    }
 
     /**
      * Gets the card.
