@@ -112,7 +112,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
     }
     
     public boolean isTraditional() {
-        return !(getType().contains("Vanguard") || getType().contains("Scheme") || getType().contains("Plane"));
+        return !getCard().getType().isVanguard();
     }
 
     /**
