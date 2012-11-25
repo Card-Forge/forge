@@ -4,7 +4,7 @@ Types:Artifact
 Text:no text
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ Imprint - When CARDNAME enters the battlefield, you may exile target land you control. Whenever a land with the same name as the exiled card is tapped for mana, its controller adds one mana to his or her mana pool of any type that land produced.
 SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Imprint$ True | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select a target land you control
-T:Mode$ TapsForMana | ValidCard$ Land.SameNameAsImprinted | Execute$ TrigMana | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever a land with the same name as the exiled card is tapped for mana, its controller adds one mana to his or her mana pool of any type that land produced.
+T:Mode$ TapsForMana | ValidCard$ Land.sharesNameWith Imprinted | Execute$ TrigMana | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever a land with the same name as the exiled card is tapped for mana, its controller adds one mana to his or her mana pool of any type that land produced.
 SVar:TrigMana:AB$ ManaReflected | Cost$ 0 | Valid$ Defined.Triggered | ColorOrType$ Type | ReflectProperty$ Produced | Defined$ TriggeredPlayer
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

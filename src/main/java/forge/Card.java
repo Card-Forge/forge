@@ -6633,58 +6633,43 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else {
                 final String restriction = property.split("sharesNameWith ")[1];
                 if (restriction.equals("YourGraveyard")) {
-                    final List<Card> list = sourceController.getCardsIn(ZoneType.Graveyard);
-                    boolean shares = false;
-                    for (final Card card : list) {
+                    for (final Card card : sourceController.getCardsIn(ZoneType.Graveyard)) {
                         if (this.getName().equals(card.getName())) {
-                            shares = true;
+                            return true;
                         }
                     }
-                    if (!shares) {
-                        return false;
-                    }
+                    return false;
                 } else if (restriction.equals(ZoneType.Battlefield.toString())) {
-                    final List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
-                    if (list.isEmpty()) {
-                        return false;
-                    }
-                    boolean shares = false;
                     for (final Card card : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
                         if (this.getName().equals(card.getName())) {
-                            shares = true;
+                            return true;
                         }
                     }
-                    if (!shares) {
-                        return false;
-                    }
+                    return false;
                 } else if (restriction.equals("ThisTurnCast")) {
-                    final List<Card> list = CardUtil.getThisTurnCast("Card", source);
-                    if (list.isEmpty())  {
-                        return false;
-                    }
-                    boolean shares = false;
-                    for (final Card card : list) {
+                    for (final Card card : CardUtil.getThisTurnCast("Card", source)) {
                         if (this.getName().equals(card.getName())) {
-                            shares = true;
+                            return true;
                         }
                     }
-                    if (!shares) {
-                        return false;
-                    }
-
+                    return false;
                 } else if (restriction.equals("Remembered")) {
-                    boolean shares = false;
                     for (final Object rem : source.getRemembered()) {
                         if (rem instanceof Card) {
                             final Card card = (Card) rem;
                             if (this.getName().equals(card.getName())) {
-                                shares = true;
+                                return true;
                             }
                         }
                     }
-                    if (!shares) {
-                        return false;
+                    return false;
+                } else if (property.equals("Imprinted")) {
+                    for (final Card card : source.getImprinted()) {
+                        if (this.getName().equals(card.getName())) {
+                            return true;
+                        }
                     }
+                    return false;
                 }
             }
 
@@ -7087,16 +7072,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.equals("HasCounters")) {
             if (!this.hasCounters()) {
-                return false;
-            }
-        } else if (property.equals("SameNameAsImprinted")) {
-            boolean b = false;
-            for (final Card card : source.getImprinted()) {
-                if (this.getName().equals(card.getName())) {
-                    b = true;
-                }
-            }
-            if (!b) {
                 return false;
             }
         } else if (property.startsWith("wasCastFrom")) {
