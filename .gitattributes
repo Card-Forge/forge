@@ -3067,6 +3067,7 @@ res/cardsfolder/e/erayo_soratami_ascendant_erayos_essence.txt -text
 res/cardsfolder/e/erdwal_ripper.txt -text
 res/cardsfolder/e/erg_raiders.txt svneol=native#text/plain
 res/cardsfolder/e/erhnam_djinn.txt svneol=native#text/plain
+res/cardsfolder/e/erhnam_djinn_avatar.txt -text
 res/cardsfolder/e/eron_the_relentless.txt svneol=native#text/plain
 res/cardsfolder/e/errant_doomsayers.txt svneol=native#text/plain
 res/cardsfolder/e/errant_ephemeron.txt svneol=native#text/plain
@@ -3104,6 +3105,7 @@ res/cardsfolder/e/essence_warden.txt svneol=native#text/plain
 res/cardsfolder/e/etched_champion.txt svneol=native#text/plain
 res/cardsfolder/e/etched_monstrosity.txt svneol=native#text/plain
 res/cardsfolder/e/etched_oracle.txt svneol=native#text/plain
+res/cardsfolder/e/etched_oracle_avatar.txt -text
 res/cardsfolder/e/eternal_dominion.txt -text
 res/cardsfolder/e/eternal_dragon.txt svneol=native#text/plain
 res/cardsfolder/e/eternal_flame.txt svneol=native#text/plain
@@ -3236,6 +3238,7 @@ res/cardsfolder/f/falkenrath_noble.txt -text
 res/cardsfolder/f/falkenrath_torturer.txt -text
 res/cardsfolder/f/fall_of_the_gavel.txt -text
 res/cardsfolder/f/fallen_angel.txt svneol=native#text/plain
+res/cardsfolder/f/fallen_angel_avatar.txt -text
 res/cardsfolder/f/fallen_askari.txt svneol=native#text/plain
 res/cardsfolder/f/fallen_cleric.txt svneol=native#text/plain
 res/cardsfolder/f/fallen_ferromancer.txt svneol=native#text/plain
