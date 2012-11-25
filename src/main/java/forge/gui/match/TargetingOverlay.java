@@ -162,24 +162,6 @@ public enum TargetingOverlay {
                     });
                 }
             }
-
-            if (null != blocking) {
-                for (Card b : blocking) {
-                    arcs.add(new Point[]{
-                        endpoints.get(c.getUniqueNumber()),
-                        endpoints.get(b.getUniqueNumber())
-                    });
-                }
-            }
-
-            if (null != blockedBy) {
-                for (Card b : blockedBy) {
-                    arcs.add(new Point[]{
-                        endpoints.get(c.getUniqueNumber()),
-                        endpoints.get(b.getUniqueNumber())
-                    });
-                }
-            }
         } else {
             // Work with all card panels currently visible
 
