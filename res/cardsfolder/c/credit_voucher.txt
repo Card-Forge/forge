@@ -1,0 +1,16 @@
+Name:Credit Voucher
+ManaCost:2
+Types:Artifact
+Text:no text
+A:AB$ ChangeZone | Cost$ 2 T Sac<1/CARDNAME> | Origin$ Hand | Destination$ Library | Shuffle$ True | ChangeType$ Card | ChangeNum$ X | RememberChanged$ True | SubAbility$ DBDraw | References$ X | SpellDescription$ Shuffle any number of cards from your hand into your library, then draw that many cards.
+SVar:DBDraw:DB$ Draw | NumCards$ Y | References$ Y | SubAbility$ DBCleanup
+SVar:X:Count$InYourHand
+SVar:Y:Remembered$Amount
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemRandomDeck:True
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/credit_voucher.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/289.jpg
+Oracle:{2}, {T}, Sacrifice Credit Voucher: Shuffle any number of cards from your hand into your library, then draw that many cards.
+End

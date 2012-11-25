@@ -528,6 +528,7 @@ res/cardsfolder/a/assassins_strike.txt -text
 res/cardsfolder/a/assault_griffin.txt svneol=native#text/plain
 res/cardsfolder/a/assault_strobe.txt svneol=native#text/plain
 res/cardsfolder/a/assault_zeppelid.txt svneol=native#text/plain
+res/cardsfolder/a/assembly_hall.txt -text
 res/cardsfolder/a/assembly_worker.txt svneol=native#text/plain
 res/cardsfolder/a/assert_authority.txt svneol=native#text/plain
 res/cardsfolder/a/astral_slide.txt svneol=native#text/plain
@@ -1969,6 +1970,7 @@ res/cardsfolder/c/creakwood_ghoul.txt svneol=native#text/plain
 res/cardsfolder/c/creakwood_liege.txt svneol=native#text/plain
 res/cardsfolder/c/cream_of_the_crop.txt svneol=native#text/plain
 res/cardsfolder/c/creature_bond.txt -text
+res/cardsfolder/c/credit_voucher.txt -text
 res/cardsfolder/c/creeping_corrosion.txt svneol=native#text/plain
 res/cardsfolder/c/creeping_mold.txt svneol=native#text/plain
 res/cardsfolder/c/creeping_renaissance.txt -text
@@ -5807,6 +5809,7 @@ res/cardsfolder/l/ludevics_test_subject_ludevics_abomination.txt -text
 res/cardsfolder/l/lull.txt svneol=native#text/plain
 res/cardsfolder/l/lumbering_satyr.txt svneol=native#text/plain
 res/cardsfolder/l/lumberknot.txt -text
+res/cardsfolder/l/lumengrid_augur.txt -text
 res/cardsfolder/l/lumengrid_drake.txt svneol=native#text/plain
 res/cardsfolder/l/lumengrid_gargoyle.txt svneol=native#text/plain
 res/cardsfolder/l/lumengrid_sentinel.txt svneol=native#text/plain
@@ -7505,6 +7508,7 @@ res/cardsfolder/p/prophetic_prism.txt svneol=native#text/plain
 res/cardsfolder/p/prosperity.txt svneol=native#text/plain
 res/cardsfolder/p/protective_bubble.txt svneol=native#text/plain
 res/cardsfolder/p/proteus_machine.txt -text
+res/cardsfolder/p/proteus_staff.txt -text
 res/cardsfolder/p/protomatter_powder.txt svneol=native#text/plain
 res/cardsfolder/p/prototype_portal.txt svneol=native#text/plain
 res/cardsfolder/p/provoke.txt svneol=native#text/plain
@@ -8832,6 +8836,7 @@ res/cardsfolder/s/shrine_of_piercing_vision.txt svneol=native#text/plain
 res/cardsfolder/s/shrink.txt svneol=native#text/plain
 res/cardsfolder/s/shrivel.txt svneol=native#text/plain
 res/cardsfolder/s/shriveling_rot.txt svneol=native#text/plain
+res/cardsfolder/s/shrouded_serpent.txt -text
 res/cardsfolder/s/shu_cavalry.txt svneol=native#text/plain
 res/cardsfolder/s/shu_defender.txt -text
 res/cardsfolder/s/shu_elite_companions.txt svneol=native#text/plain
@@ -9449,6 +9454,7 @@ res/cardsfolder/s/splintering_wind.txt -text
 res/cardsfolder/s/split_tail_miko.txt svneol=native#text/plain
 res/cardsfolder/s/splitting_headache.txt svneol=native#text/plain
 res/cardsfolder/s/spoils_of_evil.txt -text
+res/cardsfolder/s/spoils_of_the_vault.txt -text
 res/cardsfolder/s/spoils_of_victory.txt svneol=native#text/plain
 res/cardsfolder/s/spontaneous_combustion.txt svneol=native#text/plain
 res/cardsfolder/s/spontaneous_generation.txt svneol=native#text/plain
