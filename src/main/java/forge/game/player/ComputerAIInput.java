@@ -64,8 +64,9 @@ public class ComputerAIInput extends Input {
     @Override
     public final void showMessage() {
         // should not think when the game is over
-        if( Singletons.getModel().getGame().isGameOver() )
+        if (Singletons.getModel().getGame().isGameOver()) {
             return;
+        }
 
         /*
          * //put this back in ButtonUtil.disableAll();
@@ -124,5 +125,5 @@ public class ComputerAIInput extends Input {
     /* (non-Javadoc)
      * @see forge.control.input.Input#isClassUpdated()
      */
-    @Override public void isClassUpdated() {}
+    @Override public void isClassUpdated() { }
 }

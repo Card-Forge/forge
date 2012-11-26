@@ -46,8 +46,8 @@ import forge.game.zone.ZoneType;
  */
 public class ComputerAIGeneral implements Computer {
 
-    final private Player player;
-    private final GameState game; 
+    private final Player player;
+    private final GameState game;
     /**
      * <p>
      * Constructor for ComputerAI_General.
@@ -102,20 +102,20 @@ public class ComputerAIGeneral implements Computer {
 
         for (final Card c : all) {
             for (final SpellAbility sa : c.getSpellAbility()) {
-                
+
                 if (sa.getApi() == null) {
                     continue;
                 }
 
                 /// ????
-                // if ( sa.isAbility() || sa.isSpell() && sa.getApi() != ApiType.Pump ) continue 
+                // if ( sa.isAbility() || sa.isSpell() && sa.getApi() != ApiType.Pump ) continue
                 if (sa.hasParam("AB") && !sa.getParam("AB").equals("Pump")) {
                     continue;
                 }
                 if (sa.hasParam("SP") && !sa.getParam("SP").equals("Pump")) {
                     continue;
                 }
-                
+
                 if (sa.hasParam("KW") && sa.getParam("KW").contains("Haste")) {
                     return true;
                 }
@@ -174,7 +174,7 @@ public class ComputerAIGeneral implements Computer {
         }
         return false;
     }
-    
+
     /**
      * <p>
      * hasETBTrigger.
@@ -304,10 +304,11 @@ public class ComputerAIGeneral implements Computer {
         player.getZone(ZoneType.Battlefield).updateObservers();
 
         game.getPhaseHandler().setPlayerMayHavePriority(false);
-        
+
         // ai is about to attack, cancel all phase skipping
-        for (Player p : game.getPlayers())
+        for (Player p : game.getPlayers()) {
             p.getController().autoPassCancel();
+        }
     }
 
     /**
@@ -320,7 +321,7 @@ public class ComputerAIGeneral implements Computer {
         final List<Card> blockers = player.getCreaturesInPlay();
 
         game.setCombat(ComputerUtilBlock.getBlockers(player, game.getCombat(), blockers));
-        
+
         CombatUtil.orderMultipleCombatants(game.getCombat());
 
         game.getPhaseHandler().setPlayerMayHavePriority(false);

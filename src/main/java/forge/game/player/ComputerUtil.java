@@ -1171,10 +1171,10 @@ public class ComputerUtil {
 
         final StringBuilder choiceString = new StringBuilder();
 
-        
-        final Card source = manaAb.getSourceCard(); 
+
+        final Card source = manaAb.getSourceCard();
         final AbilityManaPart abMana = manaAb.getManaPart();
-        
+
         if (abMana.isComboMana()) {
             int amount = manaAb.hasParam("Amount") ? AbilityFactory.calculateAmount(source, manaAb.getParam("Amount"), saRoot) : 1;
             final ManaCost testCost = new ManaCost(cost.toString().replace("X ", ""));
@@ -1466,7 +1466,7 @@ public class ComputerUtil {
      */
     public static List<Card> chooseSacrificeType(final Player ai, final String type, final Card activate, final Card target,
             final int amount) {
-        List<Card> typeList = 
+        List<Card> typeList =
                 CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(";"), activate.getController(), activate);
         if (ai.hasKeyword("You can't sacrifice creatures to cast spells or activate abilities.")) {
             typeList = CardLists.getNotType(typeList, "Creature");
@@ -1539,8 +1539,8 @@ public class ComputerUtil {
             Card prefCard = null;
             if (sa != null && sa.getActivatingPlayer() != null && sa.getActivatingPlayer().isHuman()) {
                 for (Card c : hand) {
-                    if (c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME," +
-                        " put it onto the battlefield instead of putting it into your graveyard.")) {
+                    if (c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME,"
+                            + " put it onto the battlefield instead of putting it into your graveyard.")) {
                         prefCard = c;
                         break;
                     }
@@ -1660,7 +1660,7 @@ public class ComputerUtil {
      * @return a {@link forge.CardList} object.
      */
     public static List<Card> chooseTapType(final Player ai, final String type, final Card activate, final boolean tap, final int amount) {
-        List<Card> typeList = 
+        List<Card> typeList =
                 CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), activate.getController(), activate);
 
         // is this needed?
@@ -1700,7 +1700,7 @@ public class ComputerUtil {
      * @return a {@link forge.CardList} object.
      */
     public static List<Card> chooseUntapType(final Player ai, final String type, final Card activate, final boolean untap, final int amount) {
-        List<Card> typeList = 
+        List<Card> typeList =
                 CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), activate.getController(), activate);
 
         // is this needed?
@@ -1740,7 +1740,7 @@ public class ComputerUtil {
      * @return a {@link forge.CardList} object.
      */
     public static List<Card> chooseReturnType(final Player ai, final String type, final Card activate, final Card target, final int amount) {
-        final List<Card> typeList = 
+        final List<Card> typeList =
                 CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), activate.getController(), activate);
         if ((target != null) && target.getController().isComputer() && typeList.contains(target)) {
             // don't bounce the card we're pumping
@@ -1804,7 +1804,7 @@ public class ComputerUtil {
             public int compare(final SpellAbility a, final SpellAbility b) {
                 int a1 = CardUtil.getConvertedManaCost(a.getManaCost());
                 int b1 = CardUtil.getConvertedManaCost(b.getManaCost());
-                
+
                 // cast 0 mana cost spells first (might be a Mox)
                 if (a1 == 0) {
                     b1 = -2;
@@ -1999,7 +1999,7 @@ public class ComputerUtil {
                     if (sa.getApi() == null || !sa.isAbility()) {
                         continue;
                     }
-                        
+
                     if (sa.getApi() == ApiType.PreventDamage && sa.canPlay()
                             && ComputerUtil.canPayCost(sa, controller)) {
                         if (AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa).contains(card)) {
@@ -2160,8 +2160,8 @@ public class ComputerUtil {
         }
         return false;
     }
-    
-    
+
+
     public static boolean targetHumanAI(final SpellAbility sa) {
         if (sa == null || sa.getActivatingPlayer() == null) {
             return false;
@@ -2187,12 +2187,12 @@ public class ComputerUtil {
     public static boolean waitForBlocking(final SpellAbility sa) {
         final PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler();
 
-        return (sa.getSourceCard().isCreature() 
-                && sa.getPayCosts().getTap() 
-                && (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY) 
+        return (sa.getSourceCard().isCreature()
+                && sa.getPayCosts().getTap()
+                && (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                  || !ph.getNextTurn().equals(sa.getActivatingPlayer())));
     }
-    
+
     // returns true if the AI should stop using the ability
     /**
      * <p>
@@ -2209,7 +2209,7 @@ public class ComputerUtil {
             return false;
         }
         final Random r = MyRandom.getRandom();
-        
+
         return r.nextFloat() <= Math.pow(.95, activations);
     }
 }

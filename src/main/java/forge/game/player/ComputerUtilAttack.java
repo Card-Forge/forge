@@ -78,10 +78,11 @@ public class ComputerUtilAttack {
         this.computerList = ai.getCreaturesInPlay();
 
         this.attackers = new ArrayList<Card>();
-        for(Card c : computerList) 
-            if (CombatUtil.canAttack(c, human))
+        for (Card c : computerList) {
+            if (CombatUtil.canAttack(c, human)) {
                 attackers.add(c);
-        
+            }
+        }
         this.blockers = this.getPossibleBlockers(humanList, this.attackers);
     } // constructor
 
@@ -271,7 +272,7 @@ public class ComputerUtilAttack {
         }
 
         final Player opp = ai.getOpponent();
-        
+
         // Increase the total number of blockers needed by 1 if Finest Hour in
         // play
         // (human will get an extra first attack with a creature that untaps)
@@ -478,7 +479,7 @@ public class ComputerUtilAttack {
         // do the same thing on turn 3 if he had the same creatures in play
         // I know this is a little confusing
         GameState game = Singletons.getModel().getGame();
-        
+
         this.random.setSeed(game.getPhaseHandler().getTurn() + this.randomInt);
 
         final Combat combat = new Combat();
@@ -739,7 +740,7 @@ public class ComputerUtilAttack {
         // totals and other considerations
         // some bad "magic numbers" here, TODO replace with nice descriptive
         // variable names
-        if (ratioDiff > 0 && doAttritionalAttack) { 
+        if (ratioDiff > 0 && doAttritionalAttack) {
             this.aiAggression = 5; // attack at all costs
         } else if (ratioDiff >= 1 && (humanLifeToDamageRatio < 2 || outNumber > 0)) {
             this.aiAggression = 4; // attack expecting to trade or damage player.
@@ -783,7 +784,7 @@ public class ComputerUtilAttack {
             if (this.shouldAttack(ai, attacker, this.blockers, combat)
                     && CombatUtil.canAttack(attacker, combat)) {
                 combat.addAttacker(attacker);
-                // check if attackers are enough to finish the attacked planeswalker 
+                // check if attackers are enough to finish the attacked planeswalker
                 if (combat.getCurrentDefenderNumber() > 0) {
                     Card pw = (Card) combat.getDefender();
                     final int blockNum = this.blockers.size();
@@ -875,7 +876,7 @@ public class ComputerUtilAttack {
         boolean hasCombatEffect = attacker.getSVar("HasCombatEffect").equals("TRUE");
         if (!hasCombatEffect) {
             for (String keyword : attacker.getKeyword()) {
-                if (keyword.equals("Wither") || keyword.equals("Infect") || keyword.equals("Lifelink") ) {
+                if (keyword.equals("Wither") || keyword.equals("Infect") || keyword.equals("Lifelink")) {
                     hasCombatEffect = true;
                     break;
                 }
@@ -888,8 +889,8 @@ public class ComputerUtilAttack {
         // the selected strategy
         for (final Card defender : defenders) {
             // if both isWorthLessThanAllKillers and canKillAllDangerous are false there's nothing more to check
-            if ((isWorthLessThanAllKillers || canKillAllDangerous || numberOfPossibleBlockers < 2) 
-                    && CombatUtil.canBlock(attacker, defender)) { 
+            if ((isWorthLessThanAllKillers || canKillAllDangerous || numberOfPossibleBlockers < 2)
+                    && CombatUtil.canBlock(attacker, defender)) {
                 numberOfPossibleBlockers += 1;
                 if (isWorthLessThanAllKillers && CombatUtil.canDestroyAttacker(attacker, defender, combat, false)
                         && !(attacker.hasKeyword("Undying") && attacker.getCounters(CounterType.P1P1) == 0)) {
@@ -898,7 +899,7 @@ public class ComputerUtilAttack {
                                              // the creature
                     // see if the defending creature is of higher or lower
                     // value. We don't want to attack only to lose value
-                    if (isWorthLessThanAllKillers && attacker.getSVar("SacMe").equals("") 
+                    if (isWorthLessThanAllKillers && attacker.getSVar("SacMe").equals("")
                             && CardFactoryUtil.evaluateCreature(defender) <= CardFactoryUtil.evaluateCreature(attacker)) {
                         isWorthLessThanAllKillers = false;
                     }
@@ -914,10 +915,10 @@ public class ComputerUtilAttack {
                         canKillAllDangerous = false;
                     } else {
                         for (String keyword : defender.getKeyword()) {
-                            if (keyword.equals("Wither") || keyword.equals("Infect") || keyword.equals("Lifelink") ) {
+                            if (keyword.equals("Wither") || keyword.equals("Infect") || keyword.equals("Lifelink")) {
                                 canKillAllDangerous = false;
                                 break;
-                                // there is a creature that can survive an attack from this creature 
+                                // there is a creature that can survive an attack from this creature
                                 // and combat will have negative effects
                             }
                         }
@@ -935,7 +936,7 @@ public class ComputerUtilAttack {
         }
 
         if (numberOfPossibleBlockers > 1
-                || (numberOfPossibleBlockers == 1 
+                || (numberOfPossibleBlockers == 1
                     && !attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures."))) {
             canBeBlocked = true;
         }
@@ -961,7 +962,7 @@ public class ComputerUtilAttack {
             break;
         case 3: // expecting to at least kill a creature of equal value, not be
                 // blocked
-            if ((canKillAll && isWorthLessThanAllKillers) 
+            if ((canKillAll && isWorthLessThanAllKillers)
                     || ((canKillAllDangerous || hasAttackEffect || hasCombatEffect) && !canBeKilledByOne)
                     || !canBeBlocked) {
                 System.out.println(attacker.getName()
