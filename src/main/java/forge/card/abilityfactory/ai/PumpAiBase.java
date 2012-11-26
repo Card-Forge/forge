@@ -547,7 +547,7 @@ public abstract class PumpAiBase extends SpellAiLogic {
         for (final String keyword : keywords) {
             // since most keywords are combat relevant check for those that are
             // not
-            if (keyword.equals("HIDDEN This card doesn't untap during your next untap step.")
+            if (keyword.endsWith("This card doesn't untap during your next untap step.")
                     || keyword.endsWith("Shroud") || keyword.endsWith("Hexproof")) {
                 return true;
             }

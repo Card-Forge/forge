@@ -2,7 +2,7 @@ Name:Fist of Suns
 ManaCost:3
 Types:Artifact
 Text:no text
-S:Mode$ Continuous | Affected$ Card.YouCtrl | AddHiddenKeyword$ HIDDEN Alternative Cost W U B R G | AffectedZone$ Hand,Graveyard,Exile,Library | Description$ You may pay W U B R G rather than pay the mana cost for spells that you cast.
+S:Mode$ Continuous | Affected$ Card.YouCtrl | AddHiddenKeyword$ Alternative Cost W U B R G | AffectedZone$ Hand,Graveyard,Exile,Library | Description$ You may pay W U B R G rather than pay the mana cost for spells that you cast.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fist_of_suns.jpg

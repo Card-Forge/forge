@@ -5,7 +5,7 @@ Text:no text
 A:SP$ DealDamage | Cost$ X R | Tgt$ TgtCP | NumDmg$ X | ConditionCheckSVar$ Y | ConditionSVarCompare$ GE1 | SubAbility$ DBDemonfire | References$ X,Y | SpellDescription$ CARDNAME deals X damage to target creature or player. If a creature dealt damage this way would die this turn, exile it instead. Hellbent - If you have no cards in hand, CARDNAME can't be countered by spells or abilities and the damage can't be prevented.
 SVar:DBDemonfire:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | NoPrevention$ True | ConditionCheckSVar$ Y | References$ X,Y | ConditionSVarCompare$ EQ0 | SubAbility$ Annihilate
 SVar:Annihilate:DB$ Pump | KW$ HIDDEN If CARDNAME would be put into a graveyard, exile it instead. | Defined$ Targeted
-S:Mode$ Continuous | Affected$ Self | AffectedZone$ Stack | EffectZone$ All | CharacteristicDefining$ True | AddHiddenKeyword$ HIDDEN CARDNAME can't be countered. | CheckSVar$ Y | SVarCompare$ EQ0 | Description$ Hellbent - If you have no cards in hand, CARDNAME can't be countered by spells or abilities and the damage can't be prevented.
+S:Mode$ Continuous | Affected$ Self | AffectedZone$ Stack | EffectZone$ All | CharacteristicDefining$ True | AddHiddenKeyword$ CARDNAME can't be countered. | CheckSVar$ Y | SVarCompare$ EQ0 | Description$ Hellbent - If you have no cards in hand, CARDNAME can't be countered by spells or abilities and the damage can't be prevented.
 SVar:X:Count$xPaid
 SVar:Y:Count$InYourHand
 SVar:Rarity:Rare

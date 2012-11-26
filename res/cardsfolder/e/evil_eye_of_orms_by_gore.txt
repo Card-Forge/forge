@@ -4,7 +4,7 @@ Types:Creature Eye
 Text:CARDNAME can't be blocked except by Walls.
 PT:3/6
 K:CantBeBlockedBy Creature.nonWall
-S:Mode$ Continuous | Affected$ Creature.nonEye+YouCtrl | AddHiddenKeyword$ HIDDEN CARDNAME can't attack. | Description$ Non-Eye creatures you control can't attack.
+S:Mode$ Continuous | Affected$ Creature.nonEye+YouCtrl | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Non-Eye creatures you control can't attack.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/evil_eye_of_orms_by_gore.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/21.jpg

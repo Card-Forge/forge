@@ -3,7 +3,7 @@ ManaCost:1 W U
 Types:Legendary Creature Human Rogue
 Text:no text
 PT:2/2
-S:Mode$ Continuous | Affected$ Creature.counters_GE1_BRIBERY | AddHiddenKeyword$ HIDDEN CARDNAME can't attack or block. | Description$ Creatures with bribery counters on them can't attack or block.
+S:Mode$ Continuous | Affected$ Creature.counters_GE1_BRIBERY | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Creatures with bribery counters on them can't attack or block.
 A:AB$ PutCounter | Cost$ W U T | ValidTgts$ Creature.YouDontCtrl | TgtPrompt$ Select target creature you don't control. | CounterType$ BRIBERY | CounterNum$ 1 | SubAbility$ DBDraw | SpellDescription$ Put a bribery counter on target creature you don't control. Its controller draws a card.
 SVar:DBDraw:DB$Draw | Defined$ TargetedController | NumCards$ 1
 SVar:Rarity:Rare

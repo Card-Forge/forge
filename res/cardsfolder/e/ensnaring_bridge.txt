@@ -2,7 +2,7 @@ Name:Ensnaring Bridge
 ManaCost:3
 Types:Artifact
 Text:no text
-S:Mode$ Continuous | Affected$ Creature.powerGTX | AddHiddenKeyword$ HIDDEN CARDNAME can't attack. | Description$ Creatures with power greater than the number of cards in your hand can't attack.
+S:Mode$ Continuous | Affected$ Creature.powerGTX | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Creatures with power greater than the number of cards in your hand can't attack.
 SVar:X:Count$InYourHand
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

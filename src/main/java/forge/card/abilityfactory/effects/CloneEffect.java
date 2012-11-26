@@ -232,7 +232,7 @@ public class CloneEffect extends SpellEffect {
                     keywords.remove(k);
                 }
                 if (keywords.get(i).startsWith("HIDDEN")) {
-                    tgtCard.addExtrinsicKeyword(keywords.get(i));
+                    tgtCard.addHiddenExtrinsicKeyword(keywords.get(i));
                 }
                 else {
                     tgtCard.addIntrinsicKeyword(keywords.get(i));

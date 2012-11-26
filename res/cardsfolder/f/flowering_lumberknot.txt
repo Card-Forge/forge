@@ -3,7 +3,7 @@ ManaCost:3 G
 Types:Creature Treefolk
 Text:no text
 PT:5/5
-S:Mode$ Continuous | Affected$ Creature.Self+NotPaired | AddHiddenKeyword$ HIDDEN CARDNAME can't attack or block. | Description$ CARDNAME can't attack or block unless it's paired with a creature with soulbond.
+S:Mode$ Continuous | Affected$ Creature.Self+NotPaired | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ CARDNAME can't attack or block unless it's paired with a creature with soulbond.
 SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flowering_lumberknot.jpg

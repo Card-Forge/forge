@@ -7,7 +7,7 @@ SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ You | SacValid$ Creature | SubAbi
 SVar:DBSacSelf:DB$ Sacrifice | Cost$ 0 | Defined$ Self | SubAbility$ DBCleanup | ConditionCheckSVar$ X | ConditionSVarCompare$ LT1 | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Flying | AddHiddenKeyword$ HIDDEN Indestructible | Description$ Creatures you control get +1/+1, have flying, and are indestructible.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Flying | AddHiddenKeyword$ Indestructible | Description$ Creatures you control get +1/+1, have flying, and are indestructible.
 SVar:PlayMain1:TRUE
 SVar:NeedsToPlayVar:Y GE3
 SVar:Y:Count$Valid Creature.YouCtrl
