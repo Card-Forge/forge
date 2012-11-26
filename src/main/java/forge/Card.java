@@ -4391,8 +4391,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return CardPowerToughness
      */
     public final CardPowerToughness getLatestPT() {
-        CardPowerToughness latestPT = new CardPowerToughness(-1, -1, 0);
-        long max = 0;
+        CardPowerToughness latestPT = new CardPowerToughness(-1, -1, -2);
+        long max = -2;
 
         for (final CardPowerToughness pt : this.newPT) {
             if (pt.getTimestamp() >= max) {
