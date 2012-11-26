@@ -231,6 +231,21 @@ Fixes/Features:
 - Targeting Overlay: Fixed a bug with the combat targeting arrows shown both ways in card mouseover mode.
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Variants: Added error handling for managing not to select deck/avatar in vanguard mode.
+- Variants: Prevented user from selecting multiple avatars.
+- Removed unused imports.
+- Organized imports a little bit better.
+- Cleanup.
+- CheckStyle.
+- renamed CounterAdd/Remove events
+- removed impropper use of CardPrinted getType method
+- commander stored as a single card in deck/Deck.java
+- removed inpropper use of getType of InventoryItem objects
+- check 4 traditionality of card
+- Small renaming in GameAction
+- Reorganized Conditions of static abilities (WIP).
+- Slightly increased the size of the stats panel to better display long winning streaks.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -279,6 +294,11 @@ Lumengrid Augur
 Proteus Staff
 Shrouded Serpent
 Spoils of the Vault
+Atalya, Samite Master
+Elfhame Sanctuary
+Righteous Indignation
+Saprazzan Breaker
+Shoving Match
 
 
 end
