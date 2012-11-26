@@ -461,9 +461,11 @@ public class CardFactorySorceries {
             public void resolve() {
                 final Player player = this.getTargetPlayer();
                 final List<Card> lib = new ArrayList<Card>(player.getCardsIn(ZoneType.Library));
+                final List<Card> grave = CardLists.filter(player.getCardsIn(ZoneType.Graveyard), nonBasicLands);
 
-                for (final Card c : Iterables.filter(player.getCardsIn(ZoneType.Graveyard), nonBasicLands)) {
-                    for (final Card rem : Iterables.filter(lib, CardPredicates.nameEquals(c.getName()))) {
+                for (final Card c : grave) {
+                    final List<Card> sameName = CardLists.filter(lib, CardPredicates.nameEquals(c.getName()));
+                    for (final Card rem : sameName) {
                         Singletons.getModel().getGame().getAction().exile(rem);
                         lib.remove(rem);
                     }
