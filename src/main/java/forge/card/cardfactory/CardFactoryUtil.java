@@ -1921,13 +1921,6 @@ public class CardFactoryUtil {
                     return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c); // not Kicked
                 }
             }
-            if (sq[0].startsWith("Kicked")) {
-                if (sa.isKicked()) {
-                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[1]), m, c); // Kicked
-                } else {
-                    return CardFactoryUtil.doXMath(Integer.parseInt(sq[2]), m, c); // not Kicked
-                }
-            }
         }
         return xCount(c, s);
     }
@@ -2091,7 +2084,7 @@ public class CardFactoryUtil {
             return CardFactoryUtil.doXMath(c.getController().getBloodthirstAmount(), m, c);
         }
 
-        if (sq[0].contains("RegeneratedThisTurn")) {
+        if (sq[0].equals("RegeneratedThisTurn")) {
             return CardFactoryUtil.doXMath(c.getRegeneratedThisTurn(), m, c);
         }
 
