@@ -155,7 +155,7 @@ public enum CSubmenuVanguard implements ICDoc {
                     }
                     else
                     {
-                        avatar = (CardPrinted)playerAvatars.get(i);
+                        avatar = (CardPrinted) obj;
                     }
                     if(avatar == null)
                     {
