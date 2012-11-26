@@ -207,7 +207,7 @@ public class StaticEffects {
             if (addHiddenKeywords != null) {
                 for (final String k : addHiddenKeywords) {
                     for (int j = 0; j < keywordMultiplier; j++) {
-                        affectedCard.removeExtrinsicKeyword(k);
+                        affectedCard.removeHiddenExtrinsicKeyword(k);
                     }
                 }
             }

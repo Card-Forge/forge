@@ -7,8 +7,8 @@ SVar:ChooseMode:AB$ ChooseNumber | Cost$ 0 | Defined$ You | Min$ 0 | Max$ 1 | Li
 S:Mode$ Continuous | Affected$ Creature.cmcM2X | AddKeyword$ Haste | Description$ Each creature with converted mana cost of the chosen value has haste.
 S:Mode$ ETBTapped | ValidCard$ Creature.cmcM2Y | Description$ Each creature without converted mana cost of the chosen value enters the battlefield tapped.
 # The next 2 static abilities add text to the card panel for convenience indicating choice.
-S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ HIDDEN Chosen:EVEN | CheckSVar$ X | SVarCompare$ EQ0
-S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ HIDDEN Chosen:ODD | CheckSVar$ X | SVarCompare$ EQ1
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ Chosen:EVEN | CheckSVar$ X | SVarCompare$ EQ0
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ Chosen:ODD | CheckSVar$ X | SVarCompare$ EQ1
 SVar:X:Count$ChosenNumber
 SVar:Y:Number$ChosenNumber/Plus.1
 SVar:RemAIDeck:True

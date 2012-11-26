@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Creature Beeble
 Text:no text
 PT:2/2
-S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ HIDDEN Unblockable | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME is unblockable as long as defending player controls an artifact.
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ Unblockable | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME is unblockable as long as defending player controls an artifact.
 SVar:X:Count$Valid Artifact.YouDontCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bouncing_beebles.jpg

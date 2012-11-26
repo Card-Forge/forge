@@ -3179,7 +3179,7 @@ public class CardFactoryUtil {
 
             for (final String kw : intrinsicKeywords) {
                 if (kw.startsWith("HIDDEN")) {
-                    temp.addExtrinsicKeyword(kw);
+                    temp.addHiddenExtrinsicKeyword(kw);
                     // extrinsic keywords won't survive the copyStats treatment
                 } else {
                     temp.addIntrinsicKeyword(kw);

@@ -4,7 +4,7 @@ Types:Enchantment Aura
 Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddHiddenKeyword$ HIDDEN CARDNAME doesn't untap during your untap step. | AddTrigger$ TrigUpkeep | AddSVar$ TrigUntap | Description$ Enchanted creature doesn't untap during its controller's untap step. At the beginning of the upkeep of enchanted creature's controller, that player may discard a card at random. If he or she does, untap that creature.
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | AddTrigger$ TrigUpkeep | AddSVar$ TrigUntap | Description$ Enchanted creature doesn't untap during its controller's untap step. At the beginning of the upkeep of enchanted creature's controller, that player may discard a card at random. If he or she does, untap that creature.
 SVar:TrigUpkeep:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigUntap | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ At the beginning of the upkeep of enchanted creature's controller, that player may discard a card at random. If he or she does, untap that creature.
 SVar:TrigUntap:AB$ Untap | Cost$ Discard<1/Random> | Defined$ Self | SpellDescription$ Untap enchanted creature
 SVar:Rarity:Common

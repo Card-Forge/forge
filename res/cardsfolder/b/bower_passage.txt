@@ -2,7 +2,7 @@ Name:Bower Passage
 ManaCost:1 G
 Types:Enchantment
 Text:no text
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ HIDDEN CantBeBlockedBy Creature.withFlying | Description$ Creatures you control can't be blocked by creatures with flying.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CantBeBlockedBy Creature.withFlying | Description$ Creatures you control can't be blocked by creatures with flying.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bower_passage.jpg
 SetInfo:AVR|Uncommon|http://magiccards.info/scans/en/avr/170.jpg

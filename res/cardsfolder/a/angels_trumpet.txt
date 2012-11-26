@@ -2,7 +2,7 @@ Name:Angel's Trumpet
 ManaCost:3
 Types:Artifact
 Text:no text
-S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ Vigilance | Description$ All creatures have vigilance.
+S:Mode$ Continuous | Affected$ Creature | AddKeyword$ Vigilance | Description$ All creatures have vigilance.
 T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Execute$ TrigTapAll | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's end step, tap all untapped creatures that player controls that didn't attack this turn. CARDNAME deals damage to the player equal to the number of creatures tapped this way.
 SVar:TrigTapAll:AB$ TapAll | Cost$ 0 | ValidCards$ Creature.untapped+notAttackedThisTurn+ActivePlayerCtrl | RememberTapped$ True | SubAbility$ DBDamage
 SVar:DBDamage:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ AngelDamage | SubAbility$ DBCleanup | References$ AngelDamage 
