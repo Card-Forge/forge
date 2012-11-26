@@ -1764,8 +1764,8 @@ public class CardFactoryUtil {
         int n = 0;
 
         // count valid cards on the battlefield
-        if (l[0].contains("Valid")) {
-            final String restrictions = l[0].replace("Valid ", "");
+        if (l[0].startsWith("Valid")) {
+            final String restrictions = l[0].substring(6);
             final String[] rest = restrictions.split(",");
             List<Card> cardsonbattlefield = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
             cardsonbattlefield = CardLists.getValidCards(cardsonbattlefield, rest, players.get(0), source);
@@ -1954,8 +1954,8 @@ public class CardFactoryUtil {
         final String[] m = CardFactoryUtil.parseMath(l);
 
         // accept straight numbers
-        if (l[0].contains("Number$")) {
-            final String number = l[0].replace("Number$", "");
+        if (l[0].startsWith("Number$")) {
+            final String number = l[0].substring(7);
             if (number.equals("ChosenNumber")) {
                 return CardFactoryUtil.doXMath(c.getChosenNumber(), m, c);
             } else {
@@ -1964,16 +1964,16 @@ public class CardFactoryUtil {
         }
 
         if (l[0].startsWith("Count$")) {
-            l[0] = l[0].replace("Count$", "");
+            l[0] = l[0].substring(6);
         }
 
         if (l[0].startsWith("SVar$")) {
-            final String sVar = l[0].replace("SVar$", "");
+            final String sVar = l[0].substring(5);
             return CardFactoryUtil.doXMath(CardFactoryUtil.xCount(c, c.getSVar(sVar)), m, c);
         }
 
         // Manapool
-        if (l[0].contains("ManaPool")) {
+        if (l[0].startsWith("ManaPool")) {
             final String color = l[0].split(":")[1];
             if (color.equals("All")) {
                 return c.getController().getManaPool().totalMana();
@@ -1983,9 +1983,8 @@ public class CardFactoryUtil {
         }
 
         // count valid cards in the garveyard
-        if (l[0].contains("ValidGrave")) {
+        if (l[0].startsWith("ValidGrave")) {
             String restrictions = l[0].replace("ValidGrave ", "");
-            restrictions = restrictions.replace("Count$", "");
             final String[] rest = restrictions.split(",");
             List<Card> cards = Singletons.getModel().getGame().getCardsIn(ZoneType.Graveyard);
             cards = CardLists.getValidCards(cards, rest, cardController, c);
@@ -1995,9 +1994,8 @@ public class CardFactoryUtil {
             return CardFactoryUtil.doXMath(n, m, c);
         }
         // count valid cards on the battlefield
-        if (l[0].contains("Valid")) {
-            String restrictions = l[0].replace("Valid ", "");
-            restrictions = restrictions.replace("Count$", "");
+        if (l[0].startsWith("Valid")) {
+            String restrictions = l[0].substring(6);
             final String[] rest = restrictions.split(",");
             List<Card> cardsonbattlefield = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
             cardsonbattlefield = CardLists.getValidCards(cardsonbattlefield, rest, cardController, c);
@@ -2007,25 +2005,25 @@ public class CardFactoryUtil {
             return CardFactoryUtil.doXMath(n, m, c);
         }
 
-        if (l[0].contains("ImprintedCardPower")) {
+        if (l[0].startsWith("ImprintedCardPower")) {
             if (c.getImprinted().size() > 0) {
                 return c.getImprinted().get(0).getNetAttack();
             }
         }
 
-        if (l[0].contains("ImprintedCardToughness")) {
+        if (l[0].startsWith("ImprintedCardToughness")) {
             if (c.getImprinted().size() > 0) {
                 return c.getImprinted().get(0).getNetDefense();
             }
         }
 
-        if (l[0].contains("ImprintedCardManaCost")) {
+        if (l[0].startsWith("ImprintedCardManaCost")) {
             if (c.getImprinted().get(0).getCMC() > 0) {
                 return c.getImprinted().get(0).getCMC();
             }
         }
 
-        if (l[0].contains("GreatestPowerYouControl")) {
+        if (l[0].startsWith("GreatestPowerYouControl")) {
             final List<Card> list = c.getController().getCreaturesInPlay();
             int highest = 0;
             for (final Card crd : list) {
@@ -2036,7 +2034,7 @@ public class CardFactoryUtil {
             return highest;
         }
 
-        if (l[0].contains("GreatestPowerYouDontControl")) {
+        if (l[0].startsWith("GreatestPowerYouDontControl")) {
             final List<Card> list = c.getController().getOpponent().getCreaturesInPlay();
             int highest = 0;
             for (final Card crd : list) {
@@ -2047,7 +2045,7 @@ public class CardFactoryUtil {
             return highest;
         }
 
-        if (l[0].contains("HighestCMCRemembered")) {
+        if (l[0].startsWith("HighestCMCRemembered")) {
             final List<Card> list = new ArrayList<Card>();
             int highest = 0;
             for (final Object o : c.getRemembered()) {
@@ -2063,17 +2061,7 @@ public class CardFactoryUtil {
             return highest;
         }
 
-        if (l[0].contains("RememberedSumPower")) {
-            final List<Card> list = new ArrayList<Card>();
-            for (final Object o : c.getRemembered()) {
-                if (o instanceof Card) {
-                    list.add(Singletons.getModel().getGame().getCardState((Card) o));
-                }
-            }
-            return Aggregates.sum(Iterables.filter(list, CardPredicates.Presets.hasSecondStrike), CardPredicates.Accessors.fnGetAttack);
-        }
-
-        if (l[0].contains("RememberedSize")) {
+        if (l[0].startsWith("RememberedSize")) {
             return c.getRemembered().size();
         }
 
@@ -2862,10 +2850,10 @@ public class CardFactoryUtil {
             }
 
         }
-        if (string.contains("Valid")) {
+        if (string.startsWith("Valid")) {
             final String[] m = { "none" };
 
-            String valid = string.replace("Valid ", "");
+            String valid = string.substring(6);
             final String[] l;
             l = valid.split("/"); // separate the specification from any math
             valid = l[0];
