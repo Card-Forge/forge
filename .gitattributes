@@ -534,6 +534,7 @@ res/cardsfolder/a/assert_authority.txt svneol=native#text/plain
 res/cardsfolder/a/astral_slide.txt svneol=native#text/plain
 res/cardsfolder/a/astral_steel.txt svneol=native#text/plain
 res/cardsfolder/a/astrolabe.txt svneol=native#text/plain
+res/cardsfolder/a/atalya_samite_master.txt -text
 res/cardsfolder/a/atog.txt svneol=native#text/plain
 res/cardsfolder/a/atogatog.txt svneol=native#text/plain
 res/cardsfolder/a/attended_knight.txt -text
@@ -2895,6 +2896,7 @@ res/cardsfolder/e/elephant_resurgence.txt svneol=native#text/plain
 res/cardsfolder/e/elesh_norn_grand_cenobite.txt svneol=native#text/plain
 res/cardsfolder/e/elf_replica.txt svneol=native#text/plain
 res/cardsfolder/e/elfhame_palace.txt svneol=native#text/plain
+res/cardsfolder/e/elfhame_sanctuary.txt -text
 res/cardsfolder/e/elgaud_inquisitor.txt -text
 res/cardsfolder/e/elgaud_shieldmate.txt -text
 res/cardsfolder/e/elite_archers.txt svneol=native#text/plain
@@ -8054,6 +8056,7 @@ res/cardsfolder/r/righteous_blow.txt -text
 res/cardsfolder/r/righteous_cause.txt svneol=native#text/plain
 res/cardsfolder/r/righteous_charge.txt svneol=native#text/plain
 res/cardsfolder/r/righteous_fury.txt svneol=native#text/plain
+res/cardsfolder/r/righteous_indignation.txt -text
 res/cardsfolder/r/righteous_war.txt svneol=native#text/plain
 res/cardsfolder/r/righteousness.txt svneol=native#text/plain
 res/cardsfolder/r/riku_of_two_reflections.txt -text
@@ -8368,6 +8371,7 @@ res/cardsfolder/s/sapphire_charm.txt -text
 res/cardsfolder/s/sapphire_leech.txt svneol=native#text/plain
 res/cardsfolder/s/sapphire_medallion.txt svneol=native#text/plain
 res/cardsfolder/s/saprazzan_bailiff.txt svneol=native#text/plain
+res/cardsfolder/s/saprazzan_breaker.txt -text
 res/cardsfolder/s/saprazzan_cove.txt -text
 res/cardsfolder/s/saprazzan_heir.txt svneol=native#text/plain
 res/cardsfolder/s/saprazzan_legate.txt -text
@@ -8811,6 +8815,7 @@ res/cardsfolder/s/shorecrasher_mimic.txt svneol=native#text/plain
 res/cardsfolder/s/shoreline_raider.txt svneol=native#text/plain
 res/cardsfolder/s/shoreline_ranger.txt svneol=native#text/plain
 res/cardsfolder/s/shoreline_salvager.txt svneol=native#text/plain
+res/cardsfolder/s/shoving_match.txt -text
 res/cardsfolder/s/show_and_tell.txt svneol=native#text/plain
 res/cardsfolder/s/show_of_valor.txt -text
 res/cardsfolder/s/shower_of_coals.txt -text svneol=unset#text/plain

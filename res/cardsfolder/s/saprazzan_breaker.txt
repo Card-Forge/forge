@@ -1,0 +1,14 @@
+Name:Saprazzan Breaker
+ManaCost:4 U
+Types:Creature Beast
+Text:no text
+PT:3/3
+A:AB$ Dig | Cost$ U | DigNum$ 1 | Reveal$ True | ChangeNum$ All | RememberRevealed$ True | DestinationZone$ Graveyard | SubAbility$ DBPump | SpellDescription$ Put the top card of your library into your graveyard. If that card is a land card, CARDNAME is unblockable this turn.
+SVar:DBPump:DB$ Pump | Cost$ 0 | Defined$ Self | KW$ HIDDEN Unblockable | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/saprazzan_breaker.jpg
+SetInfo:MMQ|Uncommon|http://magiccards.info/scans/en/mm/98.jpg
+Oracle:{U}: Put the top card of your library into your graveyard. If that card is a land card, Saprazzan Breaker is unblockable this turn.
+End
