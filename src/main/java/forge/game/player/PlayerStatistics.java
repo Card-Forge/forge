@@ -32,7 +32,7 @@ public class PlayerStatistics {
 
     private int turnsPlayed = 0;
 
-    
+
     private PlayerOutcome outcome;
 
     /**
@@ -75,7 +75,7 @@ public class PlayerStatistics {
     }
 
     public void nextTurn() {
-        this.turnsPlayed++; 
+        this.turnsPlayed++;
     }
 
     public PlayerOutcome getOutcome() {
@@ -83,7 +83,7 @@ public class PlayerStatistics {
     }
 
     public void setOutcome(PlayerOutcome gameOutcome) {
-        this.outcome = gameOutcome; 
+        this.outcome = gameOutcome;
     }
 
 }

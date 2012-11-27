@@ -140,12 +140,12 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     public static final List<ZoneType> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(ZoneType.Battlefield,
             ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante));
 
-    
+
     private final PlayerController controller;
-    
+
     protected final LobbyPlayer lobbyPlayer;
-    protected final GameState game; 
-    
+    protected final GameState game;
+
     public final PlayerOutcome getOutcome() {
         return stats.getOutcome();
     }
@@ -166,7 +166,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         lobbyPlayer = lobbyPlayer0;
         game = game0;
         for (final ZoneType z : Player.ALL_ZONES) {
-            final PlayerZone toPut = z == ZoneType.Battlefield 
+            final PlayerZone toPut = z == ZoneType.Battlefield
                     ? new PlayerZoneBattlefield(z, this)
                     : new PlayerZone(z, this);
             this.zones.put(z, toPut);
@@ -201,7 +201,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
 
     /**
      * <p>
-     * getOpponent. Used by current-generation AI. 
+     * getOpponent. Used by current-generation AI.
      * </p>
      * 
      * @return a {@link forge.game.player.Player} object.
@@ -210,45 +210,51 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         Player otherType = null;
         Player justAnyone = null;
         for (Player p : game.getPlayers()) {
-            if ( p == this ) continue;
+            if (p == this) {
+                continue;
+            }
             justAnyone = p;
-            if( otherType == null && p.getType() != this.getType() ) otherType = p;
+            if (otherType == null && p.getType() != this.getType()) {
+                otherType = p;
+            }
         }
-        return otherType != null ? otherType : justAnyone; 
+        return otherType != null ? otherType : justAnyone;
     }
-    
+
     /**
      * 
-     * returns all opponents
-     * Should keep player relations somewhere in the match structure 
+     * returns all opponents.
+     * Should keep player relations somewhere in the match structure
      * @return
      */
     public final List<Player> getOpponents() {
         List<Player> result = new ArrayList<Player>();
         for (Player p : game.getPlayers()) {
-            if (p == this || p.getType() == this.getType())
+            if (p == this || p.getType() == this.getType()) {
                 continue;
+            }
             result.add(p);
         }
         return result;
     }
-    
+
     /**
-     * returns allied players
+     * returns allied players.
      * Should keep player relations somewhere in the match structure
      * @return
      */
     public final List<Player> getAllies() {
         List<Player> result = new ArrayList<Player>();
         for (Player p : game.getPlayers()) {
-            if (p == this || p.getType() != this.getType())
+            if (p == this || p.getType() != this.getType()) {
                 continue;
+            }
             result.add(p);
         }
         return result;
     }
-    
-    
+
+
 
     // ////////////////////////
     //
@@ -588,7 +594,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         // Predict replacement effects
         for (final Card ca : game.getCardsIn(ZoneType.Battlefield)) {
             for (final ReplacementEffect re : ca.getReplacementEffects()) {
-                HashMap<String,String> params = re.getMapParams();
+                HashMap<String, String> params = re.getMapParams();
                 if (!"DamageDone".equals(params.get("Event")) || !params.containsKey("PreventionEffect")) {
                     continue;
                 }
@@ -610,7 +616,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
                             continue;
                         }
                     }
-                    
+
                 }
                 return 0;
             }
@@ -966,7 +972,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     public final void addPoisonCounters(final int num, final Card source) {
         if (!this.hasKeyword("You can't get poison counters")) {
             this.poisonCounters += num;
-            
+
             game.getEvents().post(new PoisonCounterEvent(this, source, num));
             game.getGameLog().add("Poison", this + " receives a poison counter from " + source, 3);
 
@@ -1264,7 +1270,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
 
         return drawn;
     }
-    
+
     /**
      * 
      * TODO Write javadoc for this method.
@@ -1289,7 +1295,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         stats.notifyHasMulliganed();
         stats.notifyOpeningHandSize(newHand);
         return newHand;
-    }    
+    }
 
     /**
      * <p>
@@ -1367,7 +1373,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     public final PlayerZone getZone(final ZoneType zone) {
         return this.zones.get(zone);
     }
-    
+
     public final List<Card> getCardsIn(final ZoneType zoneType) {
         return getCardsIn(zoneType, true);
     }
@@ -1442,7 +1448,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
         return result;
     }
-    
+
     /**
      * gets a list of all cards with requested cardName in a given player's
      * requested zone. This function makes a List<Card> from Card[].
@@ -1480,7 +1486,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         int cntLibrary = this.getCardsIn(ZoneType.Library).size();
         for (final Card c : this.getCardsIn(ZoneType.Graveyard)) {
             int nDr = getDredgeNumber(c);
-            if ( nDr > 0 && cntLibrary >= nDr) {
+            if (nDr > 0 && cntLibrary >= nDr) {
                 dredge.add(c);
             }
         }
@@ -1598,16 +1604,16 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }*/
 
         game.getAction().discardMadness(c);
-        
-        boolean hasPutIntoPlayInsteadOfDiscard = c.hasKeyword("If a spell or ability an opponent controls causes you " +
-                "to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.");
+
+        boolean hasPutIntoPlayInsteadOfDiscard = c.hasKeyword("If a spell or ability an opponent controls causes you "
+                + "to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.");
         boolean hasPutIntoPlayWith2xP1P1InsteadOfDiscard = c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, "
                 + "put it onto the battlefield with two +1/+1 counters on it instead of putting it into your graveyard.");
-                
-        if ( ( hasPutIntoPlayInsteadOfDiscard || hasPutIntoPlayWith2xP1P1InsteadOfDiscard ) 
+
+        if ((hasPutIntoPlayInsteadOfDiscard || hasPutIntoPlayWith2xP1P1InsteadOfDiscard)
                 && null != sa && sa.getSourceCard().getController().isHostileTo(c.getController())) {
             game.getAction().moveToPlay(c);
-            
+
             if (hasPutIntoPlayWith2xP1P1InsteadOfDiscard) {
                 c.addCounter(CounterType.P1P1, 2, false);
             }
@@ -1692,7 +1698,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     public final List<Card> discardRandom(final int num, final SpellAbility sa, final String valid) {
         final List<Card> discarded = new ArrayList<Card>();
         for (int i = 0; i < num; i++) {
-            final List<Card> list = 
+            final List<Card> list =
                     CardLists.getValidCards(this.getCardsIn(ZoneType.Hand), valid, sa.getSourceCard().getController(), sa.getSourceCard());
             if (list.size() != 0) {
                 final Card disc = CardUtil.getRandom(list);
@@ -1786,7 +1792,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
 
         int s = list.size();
         for (int i = 0; i < s; i++) {
-            list.add(random.nextInt(s-1), list.remove(random.nextInt(s)));
+            list.add(random.nextInt(s - 1), list.remove(random.nextInt(s)));
         }
 
         Collections.shuffle(list, random);
@@ -2169,17 +2175,17 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * @return a boolean.
      */
     public final boolean loseConditionMet(final GameLossReason state, final String spellName) {
-        if ( state != GameLossReason.OpponentWon ) {
+        if (state != GameLossReason.OpponentWon) {
             if (this.cantLose()) {
                 System.out.println("Tried to lose, but currently can't.");
                 return false;
             }
-    
+
             // Replacement effects
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Affected", this);
             runParams.put("Event", "GameLoss");
-    
+
             if (game.getReplacementHandler().run(runParams) != ReplacementResult.NotReplaced) {
                 return false;
             }
@@ -2231,8 +2237,11 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      */
     public final boolean cantWin() {
         boolean isAnyOppLoseProof = false;
-        for( Player p : game.getPlayers() ) {
-            if ( p == this || p.getOutcome() != null ) continue; // except self and already dead
+        for (Player p : game.getPlayers()) {
+            if (p == this || p.getOutcome() != null) {
+
+                continue; // except self and already dead
+            }
             isAnyOppLoseProof |= p.hasKeyword("You can't lose the game.");
         }
         return this.hasKeyword("You can't win the game.") || isAnyOppLoseProof;
@@ -2246,9 +2255,10 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * @return a boolean.
      */
     public final boolean checkLoseCondition() {
-        
-        if ( this.getOutcome() != null )
+
+        if (this.getOutcome() != null) {
             return this.getOutcome().lossState != null;
+        }
 
         if (this.poisonCounters >= 10) {
             return this.loseConditionMet(GameLossReason.Poisoned, null);
@@ -2324,7 +2334,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         final List<Card> list = this.getZone(ZoneType.Battlefield).getCardsAddedThisTurn(null);
         return Iterables.any(list, CardPredicates.Presets.LANDS);
     }
-    
+
     /**
      * <p>
      * hasBloodthirst.
@@ -2340,7 +2350,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
         return false;
     }
-    
+
     /**
      * <p>
      * getBloodthirstAmount.
@@ -2727,17 +2737,17 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         if (subtractedHash == 0) {
             return 0;
         }
-        
-        return Math.abs(subtractedHash)/subtractedHash;
+
+        return Math.abs(subtractedHash) / subtractedHash;
     }
-    
+
     /** {@inheritDoc} */
     @Override
     public int hashCode() {
         return (41 * (41 + this.getName().hashCode()));
     }
 
-    public static class Predicates { 
+    public static class Predicates {
 
         public static final Predicate<Player> NOT_LOST = new Predicate<Player>() {
             @Override
@@ -2749,44 +2759,44 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         public static Predicate<Player> isType(final PlayerType type) {
             return new Predicate<Player>() {
                 @Override
-                public boolean apply(Player input){
+                public boolean apply(Player input) {
                     return input.getType() == type;
                 }
             };
         }
     }
-    
+
     public static class Accessors {
-        public static Function<Player, LobbyPlayer> FN_GET_LOBBY_PLAYER = new Function<Player, LobbyPlayer>(){
+        public static Function<Player, LobbyPlayer> FN_GET_LOBBY_PLAYER = new Function<Player, LobbyPlayer>() {
             @Override
             public LobbyPlayer apply(Player input) {
                 return input.getLobbyPlayer();
             }
         };
-        
-        public static Function<Player, Integer> FN_GET_LIFE = new Function<Player, Integer>(){
+
+        public static Function<Player, Integer> FN_GET_LIFE = new Function<Player, Integer>() {
             @Override
             public Integer apply(Player input) {
                 return input.getLife();
             }
         };
 
-        public static Function<Player, PlayerType> FN_GET_TYPE = new Function<Player, PlayerType>(){
+        public static Function<Player, PlayerType> FN_GET_TYPE = new Function<Player, PlayerType>() {
             @Override
             public PlayerType apply(Player input) {
                 return input.getType();
             }
         };
 
-        public static Function<Player, String> FN_GET_NAME = new Function<Player, String>(){
+        public static Function<Player, String> FN_GET_NAME = new Function<Player, String>() {
             @Override
             public String apply(Player input) {
                 return input.getName();
             }
         };
-        
-        public static Function<Player, Integer> countCardsInZone(final ZoneType zone){
-            return new Function<Player, Integer>(){
+
+        public static Function<Player, Integer> countCardsInZone(final ZoneType zone) {
+            return new Function<Player, Integer>() {
                 @Override
                 public Integer apply(Player input) {
                     return input.getZone(zone).size();
@@ -2804,15 +2814,17 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     }
 
     private void setOutcome(PlayerOutcome outcome) {
-        stats.setOutcome(outcome); 
+        stats.setOutcome(outcome);
     }
 
     /**
      * TODO: Write javadoc for this method.
      */
     public void onGameOver() {
-        if ( null == stats.getOutcome() ) // not lost?  
+        if (null == stats.getOutcome()) {
+
             setOutcome(PlayerOutcome.win()); // then won!
+        }
     }
 
     /**
@@ -2840,7 +2852,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         return Iterables.any(getZone(ZoneType.Battlefield), CardPredicates.nameEquals(cardName));
     }
 
-    
+
     public List<Card> getColoredCardsInPlay(final String color) {
         return CardLists.filter(getCardsIn(ZoneType.Battlefield), new Predicate<Card>() {
             @Override
@@ -2852,12 +2864,12 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
 
     public int getCounterDoublersMagnitude(final CounterType type) {
         int counterDoublers = getCardsIn(ZoneType.Battlefield, "Doubling Season").size();
-        if(type == CounterType.P1P1) {
+        if (type == CounterType.P1P1) {
             counterDoublers += getCardsIn(ZoneType.Battlefield, "Corpsejack Menace").size();
         }
         return 1 << counterDoublers;
     }
-    
+
     public int getTokenDoublersMagnitude() {
         final int tokenDoublers = getCardsIn(ZoneType.Battlefield, "Parallel Lives").size()
                 + getCardsIn(ZoneType.Battlefield, "Doubling Season").size();
@@ -2865,9 +2877,9 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     }
 
     public void onCleanupPhase() {
-        for (Card c : getCardsIn(ZoneType.Hand))
+        for (Card c : getCardsIn(ZoneType.Hand)) {
             c.setDrawnThisTurn(false);
-        
+        }
         resetPreventNextDamage();
         resetNumDrawnThisTurn();
         setAttackedWithCreatureThisTurn(false);
@@ -2880,8 +2892,8 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         PhaseHandler now = game.getPhaseHandler();
         return now.isPlayerTurn(this) && now.getPhase().isMain() && game.getStack().size() == 0;
     }
-    
-    
+
+
     /**
      * <p>
      * couldCastSorcery.
@@ -2905,7 +2917,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
                 //System.out.println("StackCard: " + card + " vs SourceCard: " + source);
             }
         }
-        
+
         PhaseHandler now = game.getPhaseHandler();
         //System.out.println("now.isPlayerTurn(player) - " + now.isPlayerTurn(player));
         //System.out.println("now.getPhase().isMain() - " + now.getPhase().isMain());
@@ -2929,7 +2941,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * @return a boolean.
      */
     public boolean isSkippingCombat() {
-    
+
         if (hasKeyword("Skip your next combat phase.")) {
             return true;
         }
@@ -2944,7 +2956,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         if (hasKeyword("Skip all combat phases of this turn.")) {
             return true;
         }
-    
+
         return false;
     }
 
@@ -2959,10 +2971,10 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         // time vault:
         List<Card> vaults = getCardsIn(ZoneType.Battlefield, "Time Vault");
         vaults = CardLists.filter(vaults, Presets.TAPPED);
-    
+
         if (vaults.size() > 0) {
             final Card crd = vaults.get(0);
-    
+
             if (isHuman()) {
                 if (GameActionUtil.showYesNoDialog(crd, "Untap " + crd + "?")) {
                     crd.untap();
@@ -2981,10 +2993,11 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * @return
      */
     public boolean isHostileTo(Player other) {
-        if ( other.equals(getOpponent()) )
+        if (other.equals(getOpponent())) {
             return true;
-        
+        }
+
         return other.getType() != this.getType();
     }
-    
+
 }

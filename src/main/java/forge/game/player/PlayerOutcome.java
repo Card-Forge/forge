@@ -12,9 +12,9 @@ public class PlayerOutcome {
     public final GameLossReason lossState;
     /** The lose condition spell. */
     public final String loseConditionSpell;
-    
+
     private PlayerOutcome(String altWinSourceName, GameLossReason lossState, String loseConditionSpell) {
-        this.altWinSourceName= altWinSourceName;
+        this.altWinSourceName = altWinSourceName;
         this.loseConditionSpell = loseConditionSpell;
         this.lossState = lossState;
     }
@@ -26,8 +26,8 @@ public class PlayerOutcome {
      */
     public static PlayerOutcome win() {
         return new PlayerOutcome(null, null, null);
-    }    
-    
+    }
+
     public static PlayerOutcome altWin(String sourceName) {
         return new PlayerOutcome(sourceName, null, null);
     }
@@ -49,8 +49,8 @@ public class PlayerOutcome {
     public static PlayerOutcome concede() {
         return new PlayerOutcome(null, GameLossReason.Conceded, null);
     }
-    
-    public boolean hasWon() { 
+
+    public boolean hasWon() {
         return lossState == null;
     }
 
