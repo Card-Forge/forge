@@ -8,21 +8,15 @@ import forge.Card;
 
 import forge.CardLists;
 import forge.Command;
-import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
-import forge.card.trigger.Trigger;
-import forge.card.trigger.TriggerHandler;
 import forge.control.input.Input;
 import forge.game.GameLossReason;
 import forge.game.player.Player;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.match.CMatchUI;
-import forge.view.ButtonUtil;
 import forge.CardPredicates;
 
 /** 
