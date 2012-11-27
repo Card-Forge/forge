@@ -163,7 +163,7 @@ public class InputPayManaCostUtil {
                         colorsProduced = m.getComboColors().split(" ");
                     }
                     else {
-                        colorsProduced = m.getManaProduced().split(" ");
+                        colorsProduced = m.getOrigProduced().split(" ");
                     }
                     for (final String color : colorsProduced) {
                         if (manaCost.isColor(color)) {
@@ -262,7 +262,7 @@ public class InputPayManaCostUtil {
                 colorsProduced = m.getComboColors().split(" ");
             }
             else {
-                colorsProduced = m.getManaProduced().split(" ");
+                colorsProduced = m.getOrigProduced().split(" ");
             }
             for (final String color : colorsProduced) {
                 if (mana.contains(color)) {

@@ -46,7 +46,6 @@ public class AbilityManaPart implements java.io.Serializable {
     private String lastExpressChoice = "";
     private String manaRestrictions = "";
     private transient ArrayList<Mana> lastProduced = new ArrayList<Mana>();
-    private int amount = 1;
 
     /** The reflected. */
     private boolean reflected = false;
@@ -94,7 +93,7 @@ public class AbilityManaPart implements java.io.Serializable {
      * @param ability
      */
     public final void produceMana(SpellAbility sa) {
-        this.produceMana(this.getManaProduced(), this.getSourceCard().getController(), sa);
+        this.produceMana(this.getOrigProduced(), this.getSourceCard().getController(), sa);
     }
 
     /**
@@ -153,35 +152,6 @@ public class AbilityManaPart implements java.io.Serializable {
         Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.TapsForMana, runParams);
 
     } // end produceMana(String)
-
-    /**
-     * <p>
-     * getProducedMana.
-     * </p>
-     * 
-     * @return a {@link java.lang.String} object.
-     */
-    public String getManaProduced() {
-        StringBuilder sb = new StringBuilder();
-        if (this.amount == 0) {
-            sb.append("0");
-        }
-        else {
-            try {
-                // if baseMana is an integer(colorless), just multiply amount and baseMana
-                int base = Integer.parseInt(this.getOrigProduced());
-                sb.append(base * this.amount);
-            } catch (NumberFormatException e) {
-                for (int i = 0; i < this.amount; i++) {
-                    if (i != 0) {
-                        sb.append(" ");
-                    }
-                    sb.append(mana());
-                }
-            }
-        }
-        return sb.toString();
-    }
 
     /**
      * <p>

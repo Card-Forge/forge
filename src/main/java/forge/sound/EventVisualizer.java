@@ -166,7 +166,7 @@ public class EventVisualizer {
         final List<SpellAbility> manaProduced = land.getManaAbility();
 
         for (SpellAbility sa : manaProduced) {
-            String manaColors = sa.getManaPart().getManaProduced();
+            String manaColors = sa.getManaPart().getOrigProduced();
 
             if (manaColors.contains("B")) {
                 return SoundEffectType.BlackLand;
