@@ -61,6 +61,7 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.GuiUtils;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.views.VCombat;
@@ -437,6 +438,7 @@ public class CombatUtil {
 
             List<Card> orderedBlockers = null;
             if (player.isHuman()) {
+                GuiUtils.setPanelSelection(attacker);
                 List<Card> ordered = GuiChoose.getOrderChoices("Choose Blocking Order", "Damaged First", 0, blockers, null, attacker);
 
                 orderedBlockers = new ArrayList<Card>();
