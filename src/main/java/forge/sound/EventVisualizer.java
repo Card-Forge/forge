@@ -202,7 +202,9 @@ public class EventVisualizer {
 
 
     /**
-     * TODO: Choose is the special type of event produces a single or lot of overlapping sounds (?)
+     * Determine if the event will potentially produce a lot of overlapping
+     * sounds, in which case only one of the must actually be played and the
+     * others must wait on it and only play when the first sound effect is done.
      */
     public boolean isSyncSound(SoundEffectType effect) {
 
