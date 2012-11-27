@@ -246,6 +246,25 @@ Fixes/Features:
 - Reorganized Conditions of static abilities (WIP).
 - Slightly increased the size of the stats panel to better display long winning streaks.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CheckStyle.
+- Fixed Haunting Echoes.
+- Variant: Fixed non-Random Vanguard selected.
+- Fixed Karn Avatar.
+- Cleanup of xCount.
+- More cleanup of xCount.
+- Removing unnecessary "HIDDEN" strings (WIP).
+- Removing unnecessary "HIDDEN" strings (WIP).
+- Convert Sylvan Library to Script
+- Fixed sharesNameWith Imprinted
+- Converted Haunting Echoes to Script
+- Small cleanup in files
+- Added PermanentNoncreature AF
+- Converted Standstill and Bridge from Below to script
+- Targeting Overlay: in the "card mouseover" mode, during the order of blockers declaration, the targeting overlay will first show all the blockers for the card for which the order of blockers is declared, and will also show individual arrows for each blocker when the blocker is selected in the blocker order list.
+- Fixed Erg Raiders
+- Removing unnecessary "HIDDEN" strings (WIP).
+- Removing unnecessary "HIDDEN" strings (WIP).
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -299,6 +318,7 @@ Elfhame Sanctuary
 Righteous Indignation
 Saprazzan Breaker
 Shoving Match
+Aladdin's Lamp
 
 
 end
