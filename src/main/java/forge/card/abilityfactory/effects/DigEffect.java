@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import forge.Card;
 import forge.CardCharacteristicName;
@@ -19,6 +20,7 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.util.MyRandom;
 
 public class DigEffect extends SpellEffect {
 
@@ -69,6 +71,7 @@ public class DigEffect extends SpellEffect {
         final boolean noMove = sa.hasParam("NoMove");
         final boolean skipReorder = sa.hasParam("SkipReorder");
         boolean changeAll = false;
+        boolean allButOne = false;
         final ArrayList<String> keywords = new ArrayList<String>();
         if (sa.hasParam("Keywords")) {
             keywords.addAll(Arrays.asList(sa.getParam("Keywords").split(" & ")));
@@ -77,8 +80,10 @@ public class DigEffect extends SpellEffect {
         if (sa.hasParam("ChangeNum")) {
             if (sa.getParam("ChangeNum").equalsIgnoreCase("All")) {
                 changeAll = true;
+            } else if (sa.getParam("ChangeNum").equalsIgnoreCase("AllButOne")) {
+                allButOne = true;
             } else {
-                destZone1ChangeNum = Integer.parseInt(sa.getParam("ChangeNum"));
+                destZone1ChangeNum = AbilityFactory.calculateAmount(host, sa.getParam("ChangeNum"), sa);
             }
         }
 
@@ -180,6 +185,27 @@ public class DigEffect extends SpellEffect {
                     } else if (sa.hasParam("RandomChange")) {
                         int numChanging = Math.min(destZone1ChangeNum, valid.size());
                         movedCards = CardLists.getRandomSubList(valid, numChanging);
+                    } else if (allButOne) {
+                        movedCards.addAll(valid);
+                        if (choser.isHuman()) {
+                            Card chosen = null;
+                            String prompt = "Choose a card to leave in ";
+                            if (destZone2.equals(ZoneType.Library) && (libraryPosition2 == 0)) {
+                                prompt = "Leave which card on top of the ";
+                            }
+                            chosen = GuiChoose.one(prompt + destZone2, valid);
+                            movedCards.remove(chosen);
+                        } else { // Computer
+                            Card chosen = CardFactoryUtil.getBestAI(valid);
+                            if (sa.getActivatingPlayer().isHuman() && p.isHuman()) {
+                                chosen = CardFactoryUtil.getWorstAI(valid);
+                            }
+                            movedCards.remove(chosen);
+                        }
+                        if (sa.hasParam("RandomOrder")) {
+                            final Random random = MyRandom.getRandom();
+                            Collections.shuffle(movedCards, random);
+                        }
                     } else {
                         int j = 0;
                         if (choser.isHuman()) {
