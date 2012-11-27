@@ -4,7 +4,7 @@ Types:Creature Cat Soldier
 Text:no text
 PT:4/6
 K:Vigilance
-S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ HIDDEN CARDNAME can block an additional creature. | KeywordMultiplier$ X | Description$ Kemba's Legion can block an additional creature for each Equipment attached to Kemba's Legion.
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can block an additional creature. | KeywordMultiplier$ X | Description$ Kemba's Legion can block an additional creature for each Equipment attached to Kemba's Legion.
 SVar:X:Count$Valid Equipment.Attached
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kembas_legion.jpg

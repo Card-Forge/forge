@@ -5,7 +5,7 @@ Text:no text
 PT:2/2
 K:Intimidate
 S:Mode$ Continuous | Affected$ Creature.Wolf+Other+YouCtrl,Creature.Werewolf+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other Wolf and Werewolf creatures you control get +1/+1.
-S:Mode$ Continuous | Affected$ Creature.Werewolf+nonHuman+YouCtrl | AddHiddenKeyword$ HIDDEN CARDNAME can't transform | Description$ Non-Human Werewolf creatures you control can't transform.
+S:Mode$ Continuous | Affected$ Creature.Werewolf+nonHuman+YouCtrl | AddHiddenKeyword$ CARDNAME can't transform | Description$ Non-Human Werewolf creatures you control can't transform.
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/immerwolf.jpg
 SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/141.jpg

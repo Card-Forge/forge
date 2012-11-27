@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Enchantment
 Text:no text
 K:Phasing
-S:Mode$ Continuous | Affected$ Creature.withFlying | AddHiddenKeyword$ HIDDEN CARDNAME can't attack or block. | Description$ Creatures with flying can't attack or block, and their activated abilities with T in their costs can't be activated.
+S:Mode$ Continuous | Affected$ Creature.withFlying | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Creatures with flying can't attack or block, and their activated abilities with T in their costs can't be activated.
 S:Mode$ CantBeActivated | ValidCard$ Creature.withFlying | TapAbility$ True
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

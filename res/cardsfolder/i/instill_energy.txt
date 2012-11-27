@@ -5,7 +5,7 @@ Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ G | ValidTgts$ Creature | AILogic$ Pump
 A:AB$ Untap | Cost$ 0 | PlayerTurn$ True | ActivationLimit$ 1 | Defined$ Enchanted | SpellDescription$ Untap enchanted creature. Activate this ability only during your turn and only once each turn.
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ HIDDEN CARDNAME can attack as though it had haste. | Description$ Enchanted creature can attack as though it had haste.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can attack as though it had haste. | Description$ Enchanted creature can attack as though it had haste.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/instill_energy.jpg
 SetInfo:LEA|Uncommon|http://magiccards.info/scans/en/al/111.jpg
