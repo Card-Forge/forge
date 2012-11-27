@@ -24,6 +24,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.CardPredicates.Presets;
@@ -41,6 +42,7 @@ import forge.card.cost.CostReturn;
 import forge.card.cost.CostSacrifice;
 import forge.card.cost.CostUtil;
 import forge.card.spellability.Ability;
+import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
@@ -1677,5 +1679,105 @@ public final class GameActionUtil {
         newAbilities.clear();
 
         return abilities;
+    }
+
+    /**
+     * <p>
+     * hasUrzaLands.
+     * </p>
+     * 
+     * @param p
+     *            a {@link forge.game.player.Player} object.
+     * @return a boolean.
+     */
+    private static boolean hasUrzaLands(final Player p) {
+        final List<Card> landsControlled = p.getCardsIn(ZoneType.Battlefield);
+        return Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Mine"))
+                && Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Tower"))
+                && Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Power Plant"));
+    }
+
+    /**
+     * <p>
+     * generatedMana.
+     * </p>
+     * 
+     * @param abMana
+     *            a {@link forge.card.spellability.AbilityMana} object.
+     * @param af
+     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @return a {@link java.lang.String} object.
+     */
+    public static String generatedMana(final SpellAbility sa) {
+        // Calculate generated mana here for stack description and resolving
+
+        int amount = sa.hasParam("Amount") ? AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa) : 1;
+
+        AbilityManaPart abMana = sa.getManaPart();
+        String baseMana;
+        if (abMana.isComboMana()) {
+            baseMana = abMana.getExpressChoice();
+            if (baseMana.isEmpty()) {
+                baseMana = abMana.getOrigProduced();
+            }
+        }
+        else if (abMana.isAnyMana()) {
+            baseMana = abMana.getExpressChoice();
+            if (baseMana.isEmpty()) {
+                baseMana = "Any";
+            }
+        }
+        else {
+            baseMana = abMana.mana();
+        }
+
+        if (sa.hasParam("Bonus")) {
+            // For mana abilities that get a bonus
+            // Bonus currently MULTIPLIES the base amount. Base Amounts should
+            // ALWAYS be Base
+            int bonus = 0;
+            if (sa.getParam("Bonus").equals("UrzaLands")) {
+                if (hasUrzaLands(sa.getActivatingPlayer())) {
+                    bonus = Integer.parseInt(sa.getParam("BonusProduced"));
+                }
+            }
+
+            amount += bonus;
+        }
+
+        try {
+            if ((sa.getParam("Amount") != null) && (amount != Integer.parseInt(sa.getParam("Amount")))) {
+                sa.setUndoable(false);
+            }
+        } catch (final NumberFormatException n) {
+            sa.setUndoable(false);
+        }
+
+        final StringBuilder sb = new StringBuilder();
+        if (amount == 0) {
+            sb.append("0");
+        }
+        else if (abMana.isComboMana()) {
+            // amount is already taken care of in resolve method for combination mana, just append baseMana
+            sb.append(baseMana);
+        }
+        else {
+            try {
+                // if baseMana is an integer(colorless), just multiply amount
+                // and baseMana
+                final int base = Integer.parseInt(baseMana);
+                sb.append(base * amount);
+            } catch (final NumberFormatException e) {
+                for (int i = 0; i < amount; i++) {
+                    if (i != 0) {
+                        sb.append(" ");
+                    }
+                    sb.append(baseMana);
+                }
+            }
+        }
+        return sb.toString();
     }
 } // end class GameActionUtil

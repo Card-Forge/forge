@@ -707,7 +707,7 @@ public class ComputerUtil {
                         m.setExpressChoice(colorChoice);
                     }
                     // get produced mana
-                    manaProduced = m.getManaProduced();
+                    manaProduced = GameActionUtil.generatedMana(ma);
                     if (manaProduced.matches("0")) {
                         continue;
                     }
