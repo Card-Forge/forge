@@ -6,7 +6,7 @@ A:SP$ ChooseCard | Cost$ 2 W | Defined$ You | Amount$ 1 | Choices$ Creature.toke
 SVar:DBCopy:DB$ CopyPermanent | Defined$ Remembered | NumCopies$ 1 | SubAbility$ DBPumpAll
 SVar:DBPumpAll:DB$ Effect | Name$ Rootborn Defenses Effect | StaticAbilities$ KWPump | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:KWPump:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ HIDDEN Indestructible | Description$ Creatures you control are indestructible this turn.
+SVar:KWPump:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ Indestructible | Description$ Creatures you control are indestructible this turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rootborn_defenses.jpg
 SetInfo:RTR|Common|http://magiccards.info/scans/en/rtr/19.jpg

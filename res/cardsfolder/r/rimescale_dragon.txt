@@ -4,7 +4,7 @@ Types:Snow Creature Dragon
 Text:no text
 PT:5/5
 K:Flying
-S:Mode$ Continuous | Affected$ Creature.counters_GE1_ICE | AddHiddenKeyword$ HIDDEN CARDNAME doesn't untap during your untap step. | Description$ Creatures with ice counters on them don't untap during their controllers' untap steps.
+S:Mode$ Continuous | Affected$ Creature.counters_GE1_ICE | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Creatures with ice counters on them don't untap during their controllers' untap steps.
 A:AB$ PutCounter | Cost$ 2 S | ValidTgts$ Creature | IsCurse$ True | TgtPrompt$ Select target creature | CounterType$ ICE | CounterNum$ 1 | SubAbility$ DBTap | SpellDescription$ Put an ice counter on target creature. Tap that creature.
 SVar:DBTap:DB$ Tap | Defined$ Targeted
 SVar:RemRandomDeck:True

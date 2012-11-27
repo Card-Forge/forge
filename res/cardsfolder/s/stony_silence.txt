@@ -2,7 +2,7 @@ Name:Stony Silence
 ManaCost:1 W
 Types:Enchantment
 Text:no text
-S:Mode$ Continuous | Affected$ Artifact | AddHiddenKeyword$ HIDDEN CARDNAME's activated abilities can't be activated. | Description$ Activated abilities of artifacts can't be activated.
+S:Mode$ Continuous | Affected$ Artifact | AddHiddenKeyword$ CARDNAME's activated abilities can't be activated. | Description$ Activated abilities of artifacts can't be activated.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stony_silence.jpg

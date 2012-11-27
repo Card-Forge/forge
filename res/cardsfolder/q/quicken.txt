@@ -4,7 +4,7 @@ Types:Instant
 Text:no text
 A:SP$Effect | Cost$ U | Name$ Quicken effect | StaticAbilities$ QuickenStA | Triggers$ SpellCastTrig | SVars$ Quickened | SubAbility$ DBDraw | SpellDescription$ The next sorcery card you cast this turn can be cast as though it had flash.
 SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
-SVar:QuickenStA:Mode$ Continuous | Affected$ Sorcery.YouCtrl | AffectedZone$ Hand,Graveyard,Exile | AddHiddenKeyword$ HIDDEN Flash
+SVar:QuickenStA:Mode$ Continuous | Affected$ Sorcery.YouCtrl | AffectedZone$ Hand,Graveyard,Exile | AddHiddenKeyword$ Flash
 SVar:SpellCastTrig:Mode$ SpellCast | ValidCard$ Sorcery | ValidActivatingPlayer$ You | Execute$ Quickened | Static$ True | TriggerDescription$ The next sorcery card you cast this turn can be cast as though it had flash.
 SVar:Quickened:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Graveyard
 SVar:RemAIDeck:True

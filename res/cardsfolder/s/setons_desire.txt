@@ -5,7 +5,7 @@ Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 G | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | Description$ Enchanted creature gets +2/+2.
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ HIDDEN All creatures able to block CARDNAME do so. | Condition$ Threshold | Description$ Threshold - As long as seven or more cards are in your graveyard, all creatures able to block enchanted creature do so.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ All creatures able to block CARDNAME do so. | Condition$ Threshold | Description$ Threshold - As long as seven or more cards are in your graveyard, all creatures able to block enchanted creature do so.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/setons_desire.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/268.jpg

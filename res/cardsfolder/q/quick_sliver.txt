@@ -4,7 +4,7 @@ Types:Creature Sliver
 Text:no text
 PT:1/1
 K:Flash
-S:Mode$ Continuous | Affected$ Sliver | AddHiddenKeyword$ HIDDEN Flash | AffectedZone$ Exile,Graveyard,Hand,Library | Description$ Any player may play Sliver cards as though they had flash.
+S:Mode$ Continuous | Affected$ Sliver | AddHiddenKeyword$ Flash | AffectedZone$ Exile,Graveyard,Hand,Library | Description$ Any player may play Sliver cards as though they had flash.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/quick_sliver.jpg

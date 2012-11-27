@@ -4,7 +4,7 @@ Types:Creature Sliver
 Text:no text
 PT:2/2
 K:CARDNAME can't be countered.
-S:Mode$ Continuous | Affected$ Sliver | AddHiddenKeyword$ HIDDEN CARDNAME can't be countered. | AffectedZone$ Stack | Description$ Sliver spells can't be countered by spells or abilities.
+S:Mode$ Continuous | Affected$ Sliver | AddHiddenKeyword$ CARDNAME can't be countered. | AffectedZone$ Stack | Description$ Sliver spells can't be countered by spells or abilities.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/root_sliver.jpg
 SetInfo:LGN|Uncommon|http://magiccards.info/scans/en/le/137.jpg

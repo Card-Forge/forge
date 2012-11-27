@@ -4,7 +4,7 @@ Types:Creature Ogre Rogue
 Text:no text
 PT:4/4
 K:Defender
-S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ HIDDEN CARDNAME can attack as though it didn't have defender. | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME can attack as though it didn't have defender as long as you control a Gate.
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ CARDNAME can attack as though it didn't have defender. | CheckSVar$ X | SVarCompare$ GE1 | Description$ CARDNAME can attack as though it didn't have defender as long as you control a Gate.
 SVar:X:Count$Valid Gate.YouCtrl
 DeckHints:Type$Gate
 SVar:Rarity:Common

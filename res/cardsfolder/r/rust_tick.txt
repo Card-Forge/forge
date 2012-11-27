@@ -6,7 +6,7 @@ PT:1/3
 K:You may choose not to untap CARDNAME during your untap step.
 A:AB$ Pump | Cost$ 1 T | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | RememberTargets$ True |  SubAbility$ DBTap | SpellDescription$ Tap target artifact. It doesn't untap during its controller's untap step for as long as CARDNAME remains tapped.
 SVar:DBTap:DB$Tap | Defined$ Targeted
-S:Mode$ Continuous | Affected$ Artifact.IsRemembered | AddHiddenKeyword$ HIDDEN CARDNAME doesn't untap during your untap step.
+S:Mode$ Continuous | Affected$ Artifact.IsRemembered | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step.
 T:Mode$ Untaps | ValidCard$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigClearRemember | Static$ True
 SVar:TrigClearRemember:DB$Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
