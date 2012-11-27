@@ -11,7 +11,6 @@ import forge.Command;
 import forge.Singletons;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.SpellPermanent;
 import forge.control.input.Input;
 import forge.game.GameLossReason;
 import forge.game.player.Player;
@@ -33,24 +32,8 @@ class CardFactoryEnchantments {
      */
     public static void buildCard(final Card card, final String cardName) {
 
-        if (cardName.equals("Bridge from Below")) {
-            final SpellAbility spell = new SpellPermanent(card) {
-                private static final long serialVersionUID = 7254358703158629514L;
-
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-            };
-
-            // Do not remove SpellAbilities created by AbilityFactory or
-            // Keywords.
-            card.clearFirstSpell();
-            card.addSpellAbility(spell);
-        }
-
      // *************** START *********** START **************************
-        else if (cardName.equals("Night Soil")) {
+        if (cardName.equals("Night Soil")) {
             final SpellAbility nightSoil = new Ability(card, "1") {
                 @Override
                 public void resolve() {
@@ -138,30 +121,6 @@ class CardFactoryEnchantments {
 
             nightSoil.setAfterPayMana(soilTarget);
             card.addSpellAbility(nightSoil);
-        } // *************** END ************ END **************************
-
-        // *************** START *********** START **************************
-        else if (cardName.equals("Standstill")) {
-
-            // Do not remove SpellAbilities created by AbilityFactory or
-            // Keywords.
-            card.clearFirstSpell();
-
-            card.addSpellAbility(new SpellPermanent(card) {
-                private static final long serialVersionUID = 6912683989507840172L;
-
-                @Override
-                public boolean canPlayAI() {
-                    final List<Card> compCreats = getActivatingPlayer().getCreaturesInPlay();
-                    final List<Card> humCreats = getActivatingPlayer().getOpponent().getCreaturesInPlay();
-
-                    // only play standstill if comp controls more creatures than
-                    // human
-                    // this needs some additional rules, maybe add all power +
-                    // toughness and compare
-                    return (compCreats.size() > humCreats.size());
-                }
-            });
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
