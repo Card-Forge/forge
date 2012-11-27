@@ -7,7 +7,7 @@ A:SP$ ChooseSource | Cost$ 0 | Choices$ Card | RememberChosen$ True | AILogic$ N
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | RememberObjects$ Remembered | SVars$ RPreventNextFromSource,ExileEffect,GainLifeInstead,X | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
 SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ You | ReplaceWith$ GainLifeInstead | PreventionEffect$ True | Description$ The next time the chosen source deals damage to you, prevent that damage. You gain life equal to the damage prevented this way.
 SVar:GainLifeInstead:DB$ GainLife | Defined$ You | LifeAmount$ X | SubAbility$ ExileEffect | References$ X
-SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:X:ReplaceCount$DamageAmount
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ DBDelTrig
 SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigLoseGame | TriggerDescription$ At the beginning of your next upkeep, pay 1 W W. If you don't, you lose the game.

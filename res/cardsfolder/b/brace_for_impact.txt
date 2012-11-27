@@ -4,10 +4,10 @@ Types:Instant
 Text:no text
 A:SP$ Effect | Cost$ 4 W | ValidTgts$ Creature.MultiColor | TgtPrompt$ Select target multicolored creature | Name$ Brace Effect | Triggers$ EndTrackingEffect | ReplacementEffects$ BraceReplace | SVars$ ImpactCounters,X,ExileEffect | RememberObjects$ Targeted | SpellDescription$ Prevent all damage that would be dealt to target multicolored creature this turn. For each 1 damage prevented this way, put a +1/+1 counter on that creature.
 SVar:BraceReplace:Event$ DamageDone | ValidTarget$ Card.IsRemembered | ReplaceWith$ ImpactCounters | PreventionEffect$ True | Description$ Prevent all damage that would be dealt to targeted multicolored creature this turn. For each 1 damage prevented this way, put a +1/+1 counter on that creature.
-SVar:ImpactCounters:AB$PutCounter | Cost$ 0 | Defined$ ReplacedTarget | CounterType$ P1P1 | CounterNum$ X
+SVar:ImpactCounters:AB$ PutCounter | Cost$ 0 | Defined$ ReplacedTarget | CounterType$ P1P1 | CounterNum$ X
 SVar:X:ReplaceCount$DamageAmount
 SVar:EndTrackingEffect:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Any | Execute$ ExileEffect | Static$ True
-SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brace_for_impact.jpg

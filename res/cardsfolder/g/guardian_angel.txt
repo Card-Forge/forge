@@ -6,7 +6,7 @@ A:SP$ PreventDamage | Cost$ X W | ValidTgts$ Creature,Player | TgtPrompt$ Select
 SVar:GuardianEffect:DB$ Effect | Name$ Guardian Angel Effect | Abilities$ ABProtect | RememberObjects$ Targeted | Triggers$ OutOfSight | SVars$ ExileEffect
 SVar:ABProtect:AB$ PreventDamage | ActivationZone$ Command | Cost$ 1 | InstantSpeed$ True | Defined$ Remembered | Amount$ 1 | SpellDescription$ You may pay 1 any time you could cast an instant. If you do, prevent the next 1 damage that would be dealt to that creature or player this turn.
 SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Defined$ Remembered | Execute$ ExileEffect | Static$ True
-SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | Static$ True
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
 SVar:RemAIDeck:True
 SVar:X:Count$xPaid
 SVar:Rarity:Common
