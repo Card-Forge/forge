@@ -4,7 +4,7 @@ Types:Land
 Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Effect | Cost$ 2 T | Name$ Winding Canyons Effect | StaticAbilities$ GiveFlash | SpellDescription$ Until end of turn, you may play creature cards as though they had flash.
-SVar:GiveFlash:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ HIDDEN Flash | AffectedZone$ Exile,Graveyard,Hand,Library | Description$ Until end of turn, you may play creature cards as though they had flash.
+SVar:GiveFlash:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddHiddenKeyword$ HIDDEN Flash | AffectedZone$ Exile,Graveyard,Hand,Library | Description$ Until end of turn, you may play creature cards as though they had flash.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/winding_canyons.jpg

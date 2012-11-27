@@ -1,0 +1,10 @@
+Name:Selenia
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:+1/+7
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl | AddKeyword$ Vigilance | Description$ Creatures you control have vigilance.
+SVar:Rarity:Special
+SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=4967&type=card
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/selenia.jpg
+End

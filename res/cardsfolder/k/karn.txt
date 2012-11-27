@@ -1,0 +1,11 @@
+Name:Karn
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:+1/+6
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Artifact.nonCreature+YouCtrl | SetPower$ AffectedX | SetToughness$ AffectedX | AddType$ Creature | Description$ Each noncreature artifact you control is an artifact creature with power and toughness each equal to its converted mana cost.
+SVar:AffectedX:Count$CardManaCost
+SVar:Rarity:Special
+SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=4963&type=card
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/karn.jpg
+End

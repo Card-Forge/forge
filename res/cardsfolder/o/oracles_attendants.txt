@@ -3,7 +3,6 @@ ManaCost:3 W
 Types:Creature Human Soldier
 Text:no text
 PT:1/5
-{T}: All damage that would be dealt to target creature this turn by a source of your choice is dealt to CARDNAME instead.
 A:AB$ ChooseSource | Cost$ T | Choices$ Card | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ All damage that would be dealt to target creature this turn by a source of your choice is dealt to CARDNAME instead.
 SVar:DBEffect:DB$ Effect | ValidTgts$ Creature | TgtPrompt$ Select target creature to redirect the damage from | ReplacementEffects$ SelflessCombat,SelflessNonCombat | Triggers$ OutOfSight | SVars$ CombatDmg,NonCombatDmg,ExileEffect,X | References$ SelflessCombat,SelflessNonCombat,OutOfSight,CombatDmg,NonCombatDmg,ExileEffect,X | Duration$ HostLeavesOrEOT | RememberObjects$ Remembered | ImprintCards$ Targeted | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
 SVar:SelflessCombat:Event$ DamageDone | ValidTarget$ Creature.IsImprinted | ValidSource$ Card.IsRemembered | IsCombat$ True | ReplaceWith$ CombatDmg | Description$ All damage that would be dealt to target creature this turn by a source of your choice is dealt to Oracle's Attendants instead.
@@ -11,7 +10,7 @@ SVar:SelflessNonCombat:Event$ DamageDone | ValidTarget$ Creature.IsImprinted | V
 SVar:ShamanCombatDmg:AB$ DealDamage | Cost$ 0 | Defined$ EffectSource | DamageSource$ ReplacedSource | CombatDamage$ True | NumDmg$ X
 SVar:ShamanNonCombatDmg:AB$ DealDamage | Cost$ 0 | Defined$ EffectSource | DamageSource$ ReplacedSource | NumDmg$ X
 SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Defined$ Imprinted | Execute$ ExileEffect | Static$ True
-SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | Static$ True
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:ReplaceCount$DamageAmount
 SVar:RemAIDeck:True

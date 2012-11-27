@@ -119,7 +119,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         }
 
         // CantBeCast static abilities
-        final List<Card> allp = new ArrayList<Card>(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield));
+        final List<Card> allp = new ArrayList<Card>(Singletons.getModel().getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command")));
         allp.add(card);
         for (final Card ca : allp) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();

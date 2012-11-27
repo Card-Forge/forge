@@ -93,7 +93,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
         }
 
         // CantBeActivated static abilities
-        for (final Card ca : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
+        for (final Card ca : Singletons.getModel().getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 if (stAb.applyAbility("CantBeActivated", c, this)) {

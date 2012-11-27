@@ -3,7 +3,7 @@ ManaCost:W
 Types:Instant
 Text:no text
 A:SP$ Effect | Cost$ W | Name$ Divine Light Effect | StaticAbilities$ STPrevent | SpellDescription$ Prevent all damage that would be dealt this turn to creatures you control.
-SVar:STPrevent:Mode$ PreventDamage | Target$ Creature.YouCtrl | Description$ Prevent all damage that would be dealt this turn to creatures you control.
+SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Target$ Creature.YouCtrl | Description$ Prevent all damage that would be dealt this turn to creatures you control.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/divine_light.jpg

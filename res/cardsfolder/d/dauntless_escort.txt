@@ -4,7 +4,7 @@ Types:Creature Rhino Soldier
 Text:no text
 PT:3/3
 A:AB$ Effect | Cost$ Sac<1/CARDNAME> | Name$ Dauntless Escort Effect | StaticAbilities$ KWPump | SpellDescription$ Creatures you control are indestructible this turn.
-SVar:KWPump:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ Indestructible | Description$ Creatures you control are indestructible this turn.
+SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddHiddenKeyword$ Indestructible | Description$ Creatures you control are indestructible this turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dauntless_escort.jpg

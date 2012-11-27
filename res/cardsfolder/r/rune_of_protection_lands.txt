@@ -6,7 +6,7 @@ A:AB$ ChooseSource | Cost$ W | Choices$ Land | RememberChosen$ True | AILogic$ N
 K:Cycling:2
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromSource | RememberObjects$ Remembered | SVars$ RPreventNextFromSource,ExileEffect | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
 SVar:RPreventNextFromSource:Event$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ You | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time the chosen source deals damage to you, prevent that damage.
-SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Rarity:Rare
 SVar:RemAIDeck:True

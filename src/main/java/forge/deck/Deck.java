@@ -35,6 +35,7 @@ import com.google.common.base.Function;
 import forge.deck.io.DeckFileHeader;
 import forge.deck.io.DeckSerializer;
 import forge.gui.deckeditor.tables.TableSorter;
+import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
 import forge.game.GameType;
@@ -62,6 +63,9 @@ public class Deck extends DeckBase {
 
     private final DeckSection main;
     private final DeckSection sideboard;
+    private CardPrinted commander;
+    private final DeckSection planes;
+    private final DeckSection schemes;
 
     // gameType is from Constant.GameType, like GameType.Regular
     /**
@@ -82,6 +86,9 @@ public class Deck extends DeckBase {
         super(name0);
         this.main = new DeckSection();
         this.sideboard = new DeckSection();
+        this.commander = null;
+        this.planes = new DeckSection();
+        this.schemes = new DeckSection();
     }
 
     /**
@@ -197,7 +204,11 @@ public class Deck extends DeckBase {
 
         d.getMain().set(Deck.readCardList(sections.get("main")));
         d.getSideboard().set(Deck.readCardList(sections.get("sideboard")));
-
+        List<String> cmd = Deck.readCardList(sections.get("commander"));
+        String cmdName = cmd.isEmpty() ? null : cmd.get(0); 
+        d.commander = CardDb.instance().isCardSupported(cmdName) ? CardDb.instance().getCard(cmdName) : null;
+        d.getPlanes().set(Deck.readCardList(sections.get("planes")));
+        d.getSchemes().set(Deck.readCardList(sections.get("schemes")));
         return d;
     }
 
@@ -236,15 +247,19 @@ public class Deck extends DeckBase {
         Collections.sort(main2sort, TableSorter.BY_NAME_THEN_SET);
         final List<String> out = new ArrayList<String>();
         for (final Entry<CardPrinted, Integer> e : main2sort) {
-            final CardPrinted card = e.getKey();
-            final boolean hasBadSetInfo = "???".equals(card.getEdition()) || StringUtils.isBlank(card.getEdition());
-            if (hasBadSetInfo) {
-                out.add(String.format("%d %s", e.getValue(), card.getName()));
-            } else {
-                out.add(String.format("%d %s|%s", e.getValue(), card.getName(), card.getEdition()));
-            }
+            out.add(serializeSingleCard(e.getKey(), e.getValue()));
         }
         return out;
+    }
+    
+    private static String serializeSingleCard(CardPrinted card, Integer n) {
+
+        final boolean hasBadSetInfo = "???".equals(card.getEdition()) || StringUtils.isBlank(card.getEdition());
+        if (hasBadSetInfo) {
+            return String.format("%d %s", n, card.getName());
+        } else {
+            return String.format("%d %s|%s", n, card.getName(), card.getEdition());
+        }        
     }
 
     /**
@@ -270,6 +285,17 @@ public class Deck extends DeckBase {
 
         out.add(String.format("%s", "[sideboard]"));
         out.addAll(Deck.writeCardPool(this.getSideboard()));
+        
+        if ( getCommander() != null ) {
+            out.add(String.format("%s", "[commander]"));
+            out.add(Deck.serializeSingleCard(getCommander(), 1));
+        }
+        
+        out.add(String.format("%s", "[planes]"));
+        out.addAll(Deck.writeCardPool(this.getPlanes()));
+        
+        out.add(String.format("%s", "[schemes]"));
+        out.addAll(Deck.writeCardPool(this.getSchemes()));
         return out;
     }
 
@@ -326,7 +352,68 @@ public class Deck extends DeckBase {
             return false;
         }
 
+        if(type == GameType.Commander)
+        {//Must contain exactly 1 legendary Commander and no sideboard.
+            //TODO:Enforce color identity
+            if ( null == getCommander())
+                return false;
+            
+            if(!getCommander().getCard().getType().isLegendary())
+                return false;
+            
+            //No sideboarding in Commander
+            if(!getSideboard().isEmpty())
+                return false;
+        }
+        else if(type == GameType.Planechase) 
+        {//Must contain at least 10 planes/phenomenons, but max 2 phenomenons. Singleton.
+            if(getPlanes().countAll() < 10)
+                return false;
+            int phenoms = 0;
+            for(CardPrinted cp : getPlanes().toFlatList())
+            {
+                if(cp.getType().contains("Phenomenon"))
+                    phenoms++;
+                if(getPlanes().count(cp) > 1)
+                    return false;
+            }
+            if(phenoms > 2)
+                return false;
+        }
+        else if(type == GameType.Archenemy) 
+        {//Must contain at least 20 schemes, max 2 of each.
+            if(getSchemes().countAll() < 20)
+                return false;
+            
+            for(CardPrinted cp : getSchemes().toFlatList())
+            {
+                if(getSchemes().count(cp) > 2)
+                    return false;
+            }
+        }
+        
         return true;
+    }
+
+    /**
+     * @return the commander
+     */
+    public CardPrinted getCommander() {
+        return commander;
+    }
+
+    /**
+     * @return the planes
+     */
+    public DeckSection getPlanes() {
+        return planes;
+    }
+
+    /**
+     * @return the schemes
+     */
+    public DeckSection getSchemes() {
+        return schemes;
     }
 
     public static final Function<Deck, String> FN_NAME_SELECTOR = new Function<Deck, String>() {

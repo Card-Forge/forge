@@ -3,7 +3,7 @@ ManaCost:3 W W
 Types:Instant
 Text:no text
 A:SP$ Effect | Cost$ 3 W W | Name$ Endure Effect | StaticAbilities$ STPrevent | AILogic$ Fog | SpellDescription$ Prevent all damage that would be dealt to you and permanents you control this turn.
-SVar:STPrevent:Mode$ PreventDamage | Target$ You,Permanent.YouCtrl | Description$ Prevent all damage that would be dealt to you and permanents you control this turn.
+SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Target$ You,Permanent.YouCtrl | Description$ Prevent all damage that would be dealt to you and permanents you control this turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/endure.jpg

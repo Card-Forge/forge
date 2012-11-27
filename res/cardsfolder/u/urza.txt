@@ -1,0 +1,10 @@
+Name:Urza
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:-1/+10
+A:AB$ DealDamage | ActivationZone$ Command | Cost$ 3 | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
+SVar:Rarity:Special
+SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=12326&type=card
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/urza.jpg
+End

@@ -6,7 +6,7 @@ A:AB$ Pump | Cost$ 2 T | KW$ Islandwalk | ValidTgts$ Creature | TgtPrompt$ Selec
 SVar:AbdallahsSandalsEffect:DB$ Effect | Name$ Sandals of Abdallah Effect | Triggers$ SandalWearerDied | SVars$ ExileEffect,SandalsDestroyed | References$ SandalWearerDied,ExileEffect,SandalsDestroyed  | RememberObjects$ Targeted | ImprintCards$ Self
 SVar:SandalWearerDied:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Graveyard | Execute$ SandalsDestroyed | TriggerDescription$ When the targeted creature dies this turn, destroy Sandals of Abdallah.
 SVar:SandalsDestroyed:DB$ Destroy | Defined$ Imprinted | SubAbility$ ExileEffect
-SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemRandomDeck:True
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

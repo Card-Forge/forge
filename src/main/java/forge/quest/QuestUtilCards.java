@@ -189,7 +189,7 @@ public final class QuestUtilCards {
 
         final Predicate<CardPrinted> myFilter = applyFormatFilter(QuestUtilCards.RARE_PREDICATE);
 
-        final CardPrinted card = Aggregates.random(Iterables.filter(CardDb.instance().getAllCards(), myFilter));
+        final CardPrinted card = Aggregates.random(Iterables.filter(CardDb.instance().getAllTraditionalCards(), myFilter));
         this.addSingleCard(card);
         return card;
     }
@@ -204,7 +204,7 @@ public final class QuestUtilCards {
     public List<CardPrinted> addRandomRare(final int n) {
         final Predicate<CardPrinted> myFilter = applyFormatFilter(QuestUtilCards.RARE_PREDICATE);
 
-        final List<CardPrinted> newCards = Aggregates.random(Iterables.filter(CardDb.instance().getAllCards(), myFilter), n);
+        final List<CardPrinted> newCards = Aggregates.random(Iterables.filter(CardDb.instance().getAllTraditionalCards(), myFilter), n);
         this.addAllCards(newCards);
         return newCards;
     }
@@ -486,9 +486,9 @@ public final class QuestUtilCards {
 
         Iterable<CardPrinted> cardList = null;
         if (qc.getFormat() == null) {
-              cardList = CardDb.instance().getAllCards(); }
+              cardList = CardDb.instance().getAllTraditionalCards(); }
         else {
-            cardList = Iterables.filter(CardDb.instance().getAllCards(), qc.getFormat().getFilterPrinted());
+            cardList = Iterables.filter(CardDb.instance().getAllTraditionalCards(), qc.getFormat().getFilterPrinted());
         }
 
         final BoosterGenerator pack = new BoosterGenerator(cardList);

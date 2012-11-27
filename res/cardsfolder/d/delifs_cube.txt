@@ -7,7 +7,7 @@ SVar:TrigAttackerUnblocked:Mode$ AttackerUnblocked | ValidCard$ Card.IsRemembere
 SVar:DBPump:DB$Pump | Defined$ Remembered | KW$ HIDDEN CARDNAME assigns no combat damage | SubAbility$ PutCounter
 SVar:PutCounter:DB$PutCounter | Defined$ Imprinted | CounterType$ CUBE | CounterNum$ 1 | SubAbility$ ExileEffect
 SVar:TrigLeave:Mode$ ChangesZone | ValidCard$ Creature.IsRemembered | Origin$ Battlefield | Destination$ Any | Execute$ ExileEffect | Static$ True
-SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | Static$ True
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
 A:AB$ Regenerate | Cost$ 2 SubCounter<1/CUBE> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Regenerate target creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

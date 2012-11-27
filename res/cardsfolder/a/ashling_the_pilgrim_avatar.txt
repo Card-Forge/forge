@@ -1,0 +1,10 @@
+Name:Ashling the Pilgrim Avatar
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:-1/+6
+A:AB$ DamageAll | ActivationZone$ Command | Cost$ 2 | NumDmg$ 1 | ValidCards$ Creature | ValidPlayers$ Each | ValidDescription$ each creature and each player. | SpellDescription$ CARDNAME deals 1 damage to each creature and each player.
+SVar:Rarity:Special
+SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=182283&type=card
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo-2/ashling-the-extinguisher.jpg
+End

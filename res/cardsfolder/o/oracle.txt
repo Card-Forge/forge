@@ -1,0 +1,12 @@
+Name:Oracle
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:+1/+9
+A:AB$ Untap | ActivationZone$ Command | Cost$ 0 | ValidTgts$ Creature.attacking+youCtrl | TgtPrompt$ Select target attacking creature you control | SubAbility$ Reconsider | SpellDescription$ Untap target attacking creature you control and remove it from combat.
+SVar:Reconsider:DB$ RemoveFromCombat | Defined$ Targeted
+SVar:RemAIDeck:True
+SVar:Rarity:Special
+SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=12141&type=card
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/oracle.jpg
+End

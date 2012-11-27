@@ -1,0 +1,10 @@
+Name:Titania
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:+2/-5
+S:Mode$ Continuous | EffectZone$ Command | Affected$ You | AddKeyword$ AdjustLandPlays:1 | Description$ You may play an additional land on each of your turns.
+SVar:Rarity:Special
+SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=12333&type=card
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/titania.jpg
+End

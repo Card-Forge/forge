@@ -245,6 +245,18 @@ public class DeckRecognizer {
         if (line.toLowerCase().contains("main")) {
             return true;
         }
+        if (line.toLowerCase().contains("commander")) {
+            return true;
+        }
+        if (line.toLowerCase().contains("planes")) {
+            return true;
+        }
+        if (line.toLowerCase().contains("schemes")) {
+            return true;
+        }
+        if (line.toLowerCase().contains("vanguard")) {
+            return true;
+        }
         return false;
     }
 

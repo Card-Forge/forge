@@ -9,7 +9,7 @@ T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage
 SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | ValidTgts$ Land.YouCtrl | OptionalDecider$ You | TargetMax$ X | TgtPrompt$ Select lands you control | CounterType$ AWAKENING | CounterNum$ 1 | SubAbility$ DBEffect | References$ X
 SVar:X:Count$Valid Land.YouCtrl
 SVar:DBEffect:DB$ Effect | Cost$ 0 | Name$ Awakening Effect | StaticAbilities$ KWAnimateAll | Unique$ True | Duration$ Permanent
-SVar:KWAnimateAll:Mode$ Continuous | Affected$ Card.counters_GE1_AWAKENING | SetPower$ 8 | SetToughness$ 8 | AddType$ Creature & Elemental | SetColor$ Green | Description$ Each of those lands is an 8/8 green Elemental creature for as long as it has an awakening counter on it. They're still lands.
+SVar:KWAnimateAll:Mode$ Continuous | EffectZone$ Command | Affected$ Card.counters_GE1_AWAKENING | SetPower$ 8 | SetToughness$ 8 | AddType$ Creature & Elemental | SetColor$ Green | Description$ Each of those lands is an 8/8 green Elemental creature for as long as it has an awakening counter on it. They're still lands.
 SVar:MustBeBlocked:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/liege_of_the_tangle.jpg

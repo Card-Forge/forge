@@ -491,7 +491,7 @@ public final class GuiMigrateLocalMWSSetPicturesHQ extends DefaultBoundedRangeMo
         final String urlBase = "C:\\MTGForge\\HQPICS\\";
         String imgFN = "";
 
-        for (final CardPrinted cp : CardDb.instance().getAllCards()) 
+        for (final CardPrinted cp : CardDb.instance().getAllTraditionalCards()) 
         {
             // String url = c.getSVar("Picture");
             // String[] URLs = url.split("\\\\");

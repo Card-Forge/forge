@@ -4,8 +4,8 @@ Types:Instant
 Text:no text
 A:SP$ Effect | Cost$ 2 R | Name$ Demoralize Effect | StaticAbilities$ KWPump | SubAbility$ DBEffect2 | SpellDescription$ Each creature can't be blocked this turn except by two or more creatures.
 SVar:DBEffect2:DB$ Effect | Name$ Demoralize Effect 2 | StaticAbilities$ KWPump2 | SpellDescription$ Threshold - If seven or more cards are in your graveyard, creatures can't block this turn.
-SVar:KWPump:Mode$ Continuous | Affected$ Creature | AddKeyword$ CARDNAME can't be blocked except by two or more creatures. | Description$ Each creature can't be blocked this turn except by two or more creatures.
-SVar:KWPump2:Mode$ Continuous | Affected$ Creature | AddKeyword$ CARDNAME can't block. | Condition$ Threshold | Description$ Threshold - If seven or more cards are in your graveyard, creatures can't block this turn.
+SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature | AddKeyword$ CARDNAME can't be blocked except by two or more creatures. | Description$ Each creature can't be blocked this turn except by two or more creatures.
+SVar:KWPump2:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature | AddKeyword$ CARDNAME can't block. | Threshold$ True | Description$ Threshold - If seven or more cards are in your graveyard, creatures can't block this turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/demoralize.jpg

@@ -10,7 +10,7 @@ SVar:NonCombatDmg:AB$ DealDamage | Cost$ 0 | Defined$ You | DamageSource$ Replac
 SVar:RestDmgCombat:DB$ DealDamage | Defined$ Remembered | DamageSource$ ReplacedSource | CombatDamage$ True | NumDmg$ X | SubAbility$ ExileEffect
 SVar:RestDmg:DB$ DealDamage | Defined$ Remembered | DamageSource$ ReplacedSource | NumDmg$ X | SubAbility$ ExileEffect
 SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.IsRemembered | Execute$ ExileEffect | Static$ True
-SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile | Static$ True
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
 SVar:X:ReplaceCount$DamageAmount/Minus.1
 SVar:Y:ReplaceCount$DamageAmount
 SVar:RemAIDeck:True

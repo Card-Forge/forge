@@ -4,8 +4,8 @@ Types:Instant
 Text:no text
 A:SP$ Effect | Cost$ 2 RW | ValidTgts$ Player | IsCurse$ True | Name$ Moonhold Land Effect | StaticAbilities$ STCantPlayLand | EffectOwner$ Targeted | AILogic$ BeginningOfOppTurn | ConditionManaSpent$ R | SubAbility$ WPaid | SpellDescription$ Target player can't play land cards this turn if R was spent to cast CARDNAME and can't play creature cards this turn if W was spent to cast it. (Do both if R W was spent.)
 SVar:WPaid:DB$ Effect | Name$ Moonhold Creature Effect | IsCurse$ True | StaticAbilities$ STCantPlayCreats | EffectOwner$ Targeted | AILogic$ BeginningOfOppTurn | ConditionManaSpent$ W
-SVar:STCantPlayLand:Mode$ CantPlayLand | Player$ You | Description$ You can't play land cards this turn.
-SVar:STCantPlayCreats:Mode$ CantBeCast | ValidCard$ Creature | Caster$ You | Description$ You can't play creature cards this turn.
+SVar:STCantPlayLand:Mode$ CantPlayLand | EffectZone$ Command | Player$ You | Description$ You can't play land cards this turn.
+SVar:STCantPlayCreats:Mode$ CantBeCast | ValidCard$ Creature | EffectZone$ Command | Caster$ You | Description$ You can't play creature cards this turn.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonhold.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/143.jpg

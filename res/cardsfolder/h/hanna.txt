@@ -1,0 +1,10 @@
+Name:Hanna
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:+1/-5
+S:Mode$ ReduceCost | EffectZone$ Command | ValidCard$ Card | Type$ Spell | Activator$ You | Amount$ 1 | Description$ Spells you cast cost 1 less to cast.
+SVar:Rarity:Special
+SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=4962&type=card
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/hanna.jpg
+End

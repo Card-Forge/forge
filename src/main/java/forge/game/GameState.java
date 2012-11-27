@@ -434,6 +434,7 @@ public class GameState {
             all.addAll(player.getZone(ZoneType.Library).getCards());
             all.addAll(player.getZone(ZoneType.Battlefield).getCards(false));
             all.addAll(player.getZone(ZoneType.Exile).getCards());
+            all.addAll(player.getZone(ZoneType.Command).getCards());
         }
         all.addAll(getStackZone().getCards());
         return all;

@@ -1,0 +1,14 @@
+Name:Mishra
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:+0/-3
+R:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Creature.YouCtrl | ReplaceWith$ DmgTimes2 | IsCombat$ False | Description$ If a creature you control would deal damage, it deals double that damage instead.
+R:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Creature.YouCtrl | ReplaceWith$ DmgTimes2Combat | IsCombat$ True | Secondary$ True | Description$ If a creature you control would deal damage, it deals double that damage instead.
+SVar:DmgTimes2:AB$ DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
+SVar:DmgTimes2Combat:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
+SVar:X:ReplaceCount$DamageAmount/Twice
+SVar:Rarity:Special
+SVar:Picture:http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=12327
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/mishra.jpg
+End

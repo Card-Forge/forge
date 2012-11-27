@@ -1,0 +1,11 @@
+Name:Sisay
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:-2/-3
+T:Mode$ TapsForMana | TriggerZones$ Command | ValidCard$ Land.YouCtrl | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.
+SVar:TrigMana:AB$ ManaReflected | Cost$ 0 | ColorOrType$ Type | Valid$ Defined.Triggered | ReflectProperty$ Produced | Defined$ TriggeredPlayer
+SVar:Rarity:Special
+SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=4968&type=card
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/sisay.jpg
+End

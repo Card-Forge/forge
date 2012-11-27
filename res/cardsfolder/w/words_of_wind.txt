@@ -6,7 +6,7 @@ A:AB$ Effect | Cost$ 1 | Name$ Words of Wind Effect | ReplacementEffects$ DrawRe
 SVar:DrawReplace:Event$ Draw | ValidPlayer$ You | ReplaceWith$ BounceYou | Description$ The next time you would draw a card this turn, each player returns a permanent he or she controls to its owner's hand instead.
 SVar:BounceYou:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | ChangeType$ Permanent.YouCtrl | ChangeNum$ 1 | Hidden$ True | IsCurse$ True | SubAbility$ BounceOpp
 SVar:BounceOpp:DB$ ChangeZone | Origin$ Battlefield | Destination$ Hand | DefinedPlayer$ Opponent | ChangeType$ Permanent.YouDontCtrl | ChangeNum$ 1 | Hidden$ True | IsCurse$ True | SubAbility$ ExileEffect
-SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/words_of_wind.jpg

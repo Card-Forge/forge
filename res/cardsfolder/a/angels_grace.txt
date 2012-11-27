@@ -4,8 +4,8 @@ Types:Instant
 Text:no text
 K:Split second
 A:SP$ Effect | Cost$ W | Name$ Angel's Grace Effect | Keywords$ AliFromCairo | StaticAbilities$ STCantLose,STOppsCantWin | AILogic$ Fog | SpellDescription$ You can't lose the game this turn and your opponents can't win the game this turn. Until end of turn, damage that would reduce your life total to less than 1 reduces it to 1 instead.
-SVar:STCantLose:Mode$ Continuous | Affected$ You | AddKeyword$ You can't lose the game. | Description$ You can't lose the game.
-SVar:STOppsCantWin:Mode$ Continuous | Affected$ You | AddKeyword$ Your opponents can't win the game. | Description$ Your opponents can't win the game.
+SVar:STCantLose:Mode$ Continuous | EffectZone$ Command | Affected$ You | AddKeyword$ You can't lose the game. | Description$ You can't lose the game.
+SVar:STOppsCantWin:Mode$ Continuous | EffectZone$ Command | Affected$ You | AddKeyword$ Your opponents can't win the game. | Description$ Your opponents can't win the game.
 SVar:AliFromCairo:Damage that would reduce your life total to less than 1 reduces it to 1 instead.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angels_grace.jpg

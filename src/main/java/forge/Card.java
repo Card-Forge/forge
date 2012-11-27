@@ -64,6 +64,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.item.CardDb;
+import forge.item.CardPrinted;
 import forge.util.Expressions;
 import forge.util.MyRandom;
 
@@ -2003,6 +2004,16 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public String getText() {
         final StringBuilder sb = new StringBuilder();
+
+        // Vanguard Modifiers
+        if (this.isType("Vanguard")) {
+            final CardPrinted avatar = CardDb.instance().getCard(this);
+            sb.append("Hand Modifier: ");
+            sb.append(avatar.getCard().getHand());
+            sb.append("\r\nLife Modifier: ");
+            sb.append(avatar.getCard().getLife());
+            sb.append("\r\n\r\n");
+        }
         sb.append(this.getAbilityText());
 
         String nonAbilityText = this.getNonAbilityText();
@@ -4356,8 +4367,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @return CardPowerToughness
      */
     public final CardPowerToughness getLatestPT() {
-        CardPowerToughness latestPT = new CardPowerToughness(-1, -1, 0);
-        long max = 0;
+        CardPowerToughness latestPT = new CardPowerToughness(-1, -1, -2);
+        long max = -2;
 
         for (final CardPowerToughness pt : this.newPT) {
             if (pt.getTimestamp() >= max) {
@@ -7938,7 +7949,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // Prevent Damage static abilities
-        for (final Card ca : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
+        for (final Card ca : Singletons.getModel().getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 restDamage = stAb.applyAbility("PreventDamage", source, this, restDamage, isCombat);
@@ -8725,7 +8736,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // CantTarget static abilities
-        for (final Card ca : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
+        for (final Card ca : Singletons.getModel().getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command"))) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
                 if (stAb.applyAbility("CantTarget", this, sa)) {

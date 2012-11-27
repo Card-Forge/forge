@@ -35,6 +35,7 @@ import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CMessage;
 import forge.gui.match.controllers.CPicture;
 import forge.gui.match.nonsingleton.CField;
+import forge.gui.match.nonsingleton.VCommand;
 import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.nonsingleton.VHand;
 import forge.gui.toolbox.FSkin;
@@ -87,12 +88,15 @@ public enum CMatchUI implements CardContainer {
         
         // Instantiate all required field slots (user at 0) <-- that's not guaranteed 
         final List<VField> fields = new ArrayList<VField>();
+        final List<VCommand> commands = new ArrayList<VCommand>();
 
         VField humanField = new VField(EDocID.valueOf("FIELD_0"), localPlayer);
+        VCommand humanCommand = new VCommand(EDocID.COMMAND_0, localPlayer);
         fields.add(0, humanField);
+        commands.add(0, humanCommand);
         setAvatar(humanField, FSkin.getAvatars().get(Integer.parseInt(indices[0])));
         humanField.getLayoutControl().initialize();
-
+        humanCommand.getLayoutControl().initialize();
         
         int i = 1;
         for (Player p : players) {
@@ -103,6 +107,9 @@ public enum CMatchUI implements CardContainer {
             setAvatar(f, getPlayerAvatar(p, Integer.parseInt(indices[i%2])));
             f.getLayoutControl().initialize();
             fields.add(f);
+            VCommand c = new VCommand(EDocID.valueOf("COMMAND_" + i), p);
+            c.getLayoutControl().initialize();
+            commands.add(c);
             i++;
         }
     
@@ -121,6 +128,7 @@ public enum CMatchUI implements CardContainer {
 //        }
 
         // Replace old instances
+        VMatchUI.SINGLETON_INSTANCE.setCommandViews(commands);
         VMatchUI.SINGLETON_INSTANCE.setFieldViews(fields);
         VMatchUI.SINGLETON_INSTANCE.setHandViews(hands);
     }

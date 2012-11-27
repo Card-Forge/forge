@@ -1,0 +1,10 @@
+Name:Tawnos
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:+3/-4
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Artifact.YouCtrl,Creature.YouCtrl,Enchantment.YouCtrl | AddHiddenKeyword$ HIDDEN Flash | AffectedZone$ Exile,Graveyard,Hand,Library | Description$ You may cast artifact, creature, and enchantment spells as though they had flash.
+SVar:Rarity:Special
+SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=12328&type=card
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/tawnos.jpg
+End

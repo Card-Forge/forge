@@ -15,7 +15,6 @@ import forge.gui.home.gauntlet.VSubmenuGauntletBuild;
 import forge.gui.home.gauntlet.VSubmenuGauntletContests;
 import forge.gui.home.gauntlet.VSubmenuGauntletLoad;
 import forge.gui.home.gauntlet.VSubmenuGauntletQuick;
-import forge.gui.home.multiplayer.VSubmenuArchenemy;
 import forge.gui.home.quest.VSubmenuChallenges;
 import forge.gui.home.quest.VSubmenuDuels;
 import forge.gui.home.quest.VSubmenuQuestData;
@@ -27,6 +26,8 @@ import forge.gui.home.sanctioned.VSubmenuSealed;
 import forge.gui.home.settings.VSubmenuAvatars;
 import forge.gui.home.settings.VSubmenuDownloaders;
 import forge.gui.home.settings.VSubmenuPreferences;
+import forge.gui.home.variant.VSubmenuArchenemy;
+import forge.gui.home.variant.VSubmenuVanguard;
 import forge.gui.match.views.VAntes;
 import forge.gui.match.views.VCombat;
 import forge.gui.match.views.VDetail;
@@ -74,6 +75,7 @@ public enum EDocID { /** */
     HOME_CONSTRUCTED (VSubmenuConstructed.SINGLETON_INSTANCE), /** */
     HOME_DRAFT (VSubmenuDraft.SINGLETON_INSTANCE), /** */
     HOME_SEALED (VSubmenuSealed.SINGLETON_INSTANCE), /** */
+    HOME_VANGUARD (VSubmenuVanguard.SINGLETON_INSTANCE), /** */
 
     REPORT_MESSAGE (VMessage.SINGLETON_INSTANCE), /** */
     REPORT_STACK (VStack.SINGLETON_INSTANCE), /** */
@@ -98,7 +100,16 @@ public enum EDocID { /** */
     HAND_0 (null), /** */
     HAND_1 (null), /** */
     HAND_2 (null), /** */
-    HAND_3 (null);
+    HAND_3 (null), /** */
+    
+    COMMAND_0 (null), /** */
+    COMMAND_1 (null), /** */
+    COMMAND_2 (null), /** */
+    COMMAND_3 (null), /** */
+    COMMAND_4 (null), /** */
+    COMMAND_5 (null), /** */
+    COMMAND_6 (null), /** */
+    COMMAND_7 (null); /** */
 
     // End enum declarations, start enum methods.
     private IVDoc<? extends ICDoc> vDoc;

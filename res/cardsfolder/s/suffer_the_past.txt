@@ -9,7 +9,7 @@ SVar:DBSyphonLife:DB$ LoseLife | Defined$ Targeted | LifeAmount$ Y | SubAbility$
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ Y | References$ Y | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TargetedObjects$Amount/Minus.1
-SVar:MaxTgts:Targeted$ValidGrave Card.TargetedPlayerOwn
+SVar:MaxTgts:Targeted$ValidGraveyard Card.TargetedPlayerOwn
 SVar:Y:Remembered$Amount
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

@@ -3,9 +3,9 @@ ManaCost:W
 Types:Instant
 Text:no text
 A:SP$ Effect | Cost$ W | Name$ Orim's Chant Effect | IsCurse$ True | StaticAbilities$ CantBeCast | ValidTgts$ Player | RememberObjects$ Targeted | AILogic$ BeginningOfOppTurn | SpellDescription$ Target player can't cast spells this turn. If CARDNAME was kicked, creatures can't attack this turn.
-SVar:CantBeCast:Mode$ CantBeCast | ValidCard$ Card | Caster$ Player.IsRemembered | Description$ Target player can't cast spells this turn.
+SVar:CantBeCast:Mode$ CantBeCast | EffectZone$ Command | ValidCard$ Card | Caster$ Player.IsRemembered | Description$ Target player can't cast spells this turn.
 A:SP$ Effect | Cost$ W W | SetAsKicked$ True | Name$ Orim's Chant Effect | IsCurse$ True | StaticAbilities$ CantBeCast,CantAttack | ValidTgts$ Player | RememberObjects$ Targeted | AILogic$ BeginningOfOppTurn | SpellDescription$ Kicker W W (You may pay an additional W W as you cast this spell.)
-SVar:CantAttack:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Creatures can't attack this turn.
+SVar:CantAttack:Mode$ Continuous | EffectZone$ Command | Affected$ Creature | AffectedZone$ Battlefield | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Creatures can't attack this turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orims_chant.jpg
 SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/11.jpg

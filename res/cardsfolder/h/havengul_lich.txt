@@ -9,7 +9,7 @@ SVar:PumpTheir:DB$Pump | Defined$ Remembered | ConditionCheckSVar$ SelectKW | Co
 SVar:FXCast:DB$Effect | Name$ Havengul Lich Delayed Trigger | Triggers$ DTCast | SVars$ StealAbs,STSteal,CleanupDT | RememberObjects$ Targeted
 SVar:DTCast:Mode$ SpellCast | ValidCard$ Card.IsRemembered | Execute$ StealAbs | TriggerDescription$ When you cast that card this turn, Havengul Lich gains all activated abilities of that card until end of turn.
 SVar:StealAbs:DB$Effect | Name$ Havengul Lich effect | RememberObjects$ TriggeredCard | StaticAbilities$ STSteal | SubAbility$ CleanupDT
-SVar:STSteal:Mode$ Continuous | Affected$ EffectSource | EffectZone$ Battlefield | GainsAbilitiesOf$ Creature.IsRemembered | GainsAbilitiesOfZones$ Library,Hand,Stack,Battlefield,Graveyard,Exile,Command
+SVar:STSteal:Mode$ Continuous | Affected$ EffectSource | EffectZone$ Command | GainsAbilitiesOf$ Creature.IsRemembered | GainsAbilitiesOfZones$ Library,Hand,Stack,Battlefield,Graveyard,Exile,Command
 T:Mode$ Phase | Phase$ Cleanup | Static$ True | Execute$ Cleanup | Secondary$ True | TriggerDescription$ A little behind the scenes.
 SVar:Cleanup:DB$Cleanup | ClearRemembered$ True
 SVar:CleanupDT:DB$ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
