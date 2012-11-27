@@ -4,7 +4,7 @@ Types:Artifact
 Text:no text
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigSpellweaverExile | OptionalDecider$ You | TriggerDescription$ Imprint - When CARDNAME enters the battlefield, you may exile two target sorcery cards from a single graveyard.
 SVar:TrigSpellweaverExile:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Exile | TargetsFromSingleZone$ True | ValidTgts$ Card.Sorcery | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select two target sorcery cards from a single graveyard | Imprint$ True | SpellDescription$ Exile two sorcery cards from a single graveyard.
-T:Mode$ SpellCast | ValidCard$ Card.SameNameAsImprinted | Execute$ TrigSpellweaverCopy | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a card, if it has the same name as one of the cards exiled with CARDNAME, you may copy the other. If you do, you may cast the copy without paying its mana cost.
+T:Mode$ SpellCast | ValidCard$ Card.sharesNameWith Imprinted | Execute$ TrigSpellweaverCopy | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts a card, if it has the same name as one of the cards exiled with CARDNAME, you may copy the other. If you do, you may cast the copy without paying its mana cost.
 SVar:TrigSpellweaverCopy:AB$ Play | Cost$ 0 | Defined$ Imprinted.doesNotShareNameWith+TriggeredCard+Exiled | WithoutManaCost$ True | Optional$ True | CopyCard$ True
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True

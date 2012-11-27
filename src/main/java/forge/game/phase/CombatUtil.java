@@ -61,6 +61,7 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.GuiUtils;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.views.VCombat;
@@ -96,7 +97,7 @@ public class CombatUtil {
         if (combat == null) {
             return CombatUtil.canBlock(blocker);
         }
-        
+
         if (!CombatUtil.canBlockMoreCreatures(blocker, combat.getAttackersBlockedBy(blocker))) {
             return false;
         }
@@ -164,13 +165,13 @@ public class CombatUtil {
 
         return true;
     }
-    
+
     public static boolean canBlockMoreCreatures(final Card blocker, final List<Card> blockedBy) {
         // TODO(sol) expand this for the additional blocking keyword
         if (blockedBy.isEmpty() || blocker.hasKeyword("CARDNAME can block any number of creatures.")) {
             return true;
         }
-        
+
         return blocker.getKeywordAmount("CARDNAME can block an additional creature.") >= blockedBy.size();
     }
 
@@ -310,7 +311,7 @@ public class CombatUtil {
         }
         return false;
     }
-    
+
     /**
      * Can be blocked.
      * 
@@ -419,12 +420,12 @@ public class CombatUtil {
 
         return true;
     }
-    
+
     public static void orderMultipleCombatants(final Combat combat) {
         CombatUtil.orderMultipleBlockers(combat);
         CombatUtil.orderBlockingMultipleAttackers(combat);
     }
-    
+
     private static void orderMultipleBlockers(final Combat combat) {
         // If there are multiple blockers, the Attacker declares the Assignment Order
         final Player player = combat.getAttackingPlayer();
@@ -434,14 +435,15 @@ public class CombatUtil {
             if (blockers.size() <= 1) {
                 continue;
             }
-         
+
             List<Card> orderedBlockers = null;
             if (player.isHuman()) {
+                GuiUtils.setPanelSelection(attacker);
                 List<Card> ordered = GuiChoose.getOrderChoices("Choose Blocking Order", "Damaged First", 0, blockers, null, attacker);
-                
+
                 orderedBlockers = new ArrayList<Card>();
-                for(Object o : ordered) {
-                    orderedBlockers.add((Card)o);
+                for (Object o : ordered) {
+                    orderedBlockers.add((Card) o);
                 }
             }
             else {
@@ -452,7 +454,7 @@ public class CombatUtil {
         CombatUtil.showCombat();
         // Refresh Combat Panel
     }
-    
+
     private static void orderBlockingMultipleAttackers(final Combat combat) {
         // If there are multiple blockers, the Attacker declares the Assignment Order
         for (final Card blocker : combat.getAllBlockers()) {
@@ -460,14 +462,14 @@ public class CombatUtil {
             if (attackers.size() <= 1) {
                 continue;
             }
-         
+
             List<Card> orderedAttacker = null;
             if (blocker.getController().isHuman()) {
                 List<Card> ordered = GuiChoose.getOrderChoices("Choose Blocking Order", "Damaged First", 0, attackers, null, blocker);
-                
+
                 orderedAttacker = new ArrayList<Card>();
-                for(Object o : ordered) {
-                    orderedAttacker.add((Card)o);
+                for (Object o : ordered) {
+                    orderedAttacker.add((Card) o);
                 }
             }
             else {
@@ -478,7 +480,7 @@ public class CombatUtil {
         CombatUtil.showCombat();
         // Refresh Combat Panel
     }
-    
+
 
     // can the blocker block an attacker with a lure effect?
     /**
@@ -530,7 +532,7 @@ public class CombatUtil {
 
         if (blocker.getMustBlockCards() != null) {
             for (final Card attacker : blocker.getMustBlockCards()) {
-                if (CombatUtil.canBeBlocked(attacker, combat) && CombatUtil.canBlock(attacker, blocker) 
+                if (CombatUtil.canBeBlocked(attacker, combat) && CombatUtil.canBlock(attacker, blocker)
                         && combat.isAttacking(attacker)) {
                     boolean canBe = true;
                     if (attacker.hasKeyword("CARDNAME can't be blocked except by two or more creatures.")) {
@@ -588,7 +590,7 @@ public class CombatUtil {
 
         return CombatUtil.canBlock(attacker, blocker);
     }
-    
+
  // can the blocker block the attacker?
     /**
      * <p>
@@ -799,8 +801,8 @@ public class CombatUtil {
         if (cntAttackers > 0 && c.hasKeyword("CARDNAME can only attack alone.")) {
             return false;
         }
-        
-        if (cntAttackers > 0 
+
+        if (cntAttackers > 0
                 && Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.onlyOneAttackerACombat)) {
             return false;
         }
@@ -832,7 +834,7 @@ public class CombatUtil {
         }
         return CombatUtil.canAttackNextTurn(c, defender);
     }
-    
+
     // can a creature attack if untapped and without summoning sickness?
     /**
      * <p>
@@ -2351,7 +2353,7 @@ public class CombatUtil {
         // This needs to expand to tally up damage
         final List<Card> attackers = Singletons.getModel().getGame().getCombat().getAttackersBlockedBy(blocker);
 
-        for(Card attacker : attackers) {
+        for (Card attacker : attackers) {
             if (CombatUtil.canDestroyBlocker(blocker, attacker, Singletons.getModel().getGame().getCombat(), true)
                     && !(attacker.hasKeyword("Wither") || attacker.hasKeyword("Infect"))) {
                 return true;
@@ -2441,7 +2443,7 @@ public class CombatUtil {
                 + CombatUtil.predictToughnessBonusOfAttacker(attacker, defender, combat);
 
         if (attacker.hasKeyword("Double Strike")) {
-            if (attackerDamage > 0 && (attacker.hasKeyword("Deathtouch") 
+            if (attackerDamage > 0 && (attacker.hasKeyword("Deathtouch")
                     || defender.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it."))) {
                 return true;
             }
@@ -2456,7 +2458,7 @@ public class CombatUtil {
                 if (defenderDamage >= attackerLife) {
                     return false;
                 }
-                if (defenderDamage > 0 && (defender.hasKeyword("Deathtouch") 
+                if (defenderDamage > 0 && (defender.hasKeyword("Deathtouch")
                         || attacker.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it."))) {
                     return false;
                 }
@@ -2475,13 +2477,13 @@ public class CombatUtil {
                 if (defenderDamage >= attackerLife) {
                     return false;
                 }
-                if (defenderDamage > 0 && (defender.hasKeyword("Deathtouch") 
+                if (defenderDamage > 0 && (defender.hasKeyword("Deathtouch")
                         || attacker.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it."))) {
                     return false;
                 }
             }
 
-            if (attackerDamage > 0 && (attacker.hasKeyword("Deathtouch") 
+            if (attackerDamage > 0 && (attacker.hasKeyword("Deathtouch")
                     || defender.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it."))) {
                 return true;
             }
@@ -2545,11 +2547,11 @@ public class CombatUtil {
             final List<Card> list = attackers.get(def);
 
             for (final Card attacker : list) {
-                
+
 
                 defend = Singletons.getModel().getGame().getCombat().getBlockers(attacker);
                 sb.append(combat.getDefenderByAttacker(attacker)).append(" assigned ");
-                
+
                 if (!defend.isEmpty()) {
                     // loop through blockers
                     for (final Card blocker : defend) {
@@ -2568,7 +2570,7 @@ public class CombatUtil {
 
     private static String getCombatDescription(Combat combat) {
         final StringBuilder display = new StringBuilder();
-        
+
         // Loop through Defenders
         // Append Defending Player/Planeswalker
         final List<GameEntity> defenders = combat.getDefenders();
@@ -2605,8 +2607,8 @@ public class CombatUtil {
         }
         return display.toString().trim();
     }
-    
-    
+
+
     /**
      * <p>
      * showCombat.
@@ -2770,7 +2772,7 @@ public class CombatUtil {
                     final Ability ability = new Ability(c, "0") {
                         @Override
                         public void resolve() {
-                            final Player cp = crd.getController(); 
+                            final Player cp = crd.getController();
                             if (cp.isHuman()) {
                                 final List<Card> list = cp.getOpponent().getCardsIn(ZoneType.Battlefield);
                                 ComputerUtil.sacrificePermanents(cp.getOpponent(),  a, list, false, this);
@@ -3088,7 +3090,7 @@ public class CombatUtil {
                 final Ability ability4 = new Ability(c, "0") {
                     @Override
                     public void resolve() {
-                        List<Card> enchantments = 
+                        List<Card> enchantments =
                                 CardLists.filter(attacker.getController().getCardsIn(ZoneType.Library), new Predicate<Card>() {
                             @Override
                             public boolean apply(final Card c) {

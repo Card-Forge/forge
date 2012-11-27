@@ -4,7 +4,7 @@ Types:Creature Angel
 Text:no text
 PT:5/6
 K:Flying
-S:Mode$ Continuous | Affected$ Creature.YouDontCtrl | AddHiddenKeyword$ HIDDEN CARDNAME can't attack. | CheckSVar$ X | SVarCompare$ GE1 | Description$ Each opponent who cast a spell this turn can't attack with creatures.
+S:Mode$ Continuous | Affected$ Creature.YouDontCtrl | AddHiddenKeyword$ CARDNAME can't attack. | CheckSVar$ X | SVarCompare$ GE1 | Description$ Each opponent who cast a spell this turn can't attack with creatures.
 S:Mode$ CantBeCast | ValidCard$ Card | Caster$ Opponent | OpponentAttackedWithCreatureThisTurn$ True | Description$ Each opponent who attacked with a creature this turn can't cast spells.
 SVar:X:Count$ThisTurnCast_Card.YouDontCtrl
 SVar:Rarity:Rare

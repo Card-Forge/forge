@@ -5,7 +5,7 @@ Text:no text
 PT:8/8
 K:Islandwalk
 S:Mode$ Continuous | Affected$ Land | AddType$ Island | Description$ All lands are Islands in addition to their other types.
-S:Mode$ Continuous | Affected$ Creature.withoutFlying+withoutIslandwalk | AddHiddenKeyword$ HIDDEN CARDNAME can't attack. | Description$ Creatures without flying or islandwalk can't attack.
+S:Mode$ Continuous | Affected$ Creature.withoutFlying+withoutIslandwalk | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Creatures without flying or islandwalk can't attack.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/stormtide_leviathan.jpg
 SetInfo:M11|Rare|http://magiccards.info/scans/en/m11/74.jpg

@@ -1,0 +1,15 @@
+Name:Dromar, the Banisher
+ManaCost:3 W U B
+Types:Legendary Creature Dragon
+Text:no text
+PT:6/6
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | CombatDamage$ True | OptionalDecider$ You | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, you may pay 2 U. If you do, choose a color, then return all creatures of that color to their owners' hands.
+SVar:TrigChoose:AB$ ChooseColor | Cost$ 2 U | Defined$ You | AILogic$ MostProminentHumanCreatures | SubAbility$ DBRevealDiscard
+SVar:DBRevealDiscard:DB$ ChangeZoneAll | ChangeType$ Creature.ChosenColor | Origin$ Battlefield | Destination$ Hand
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dromar_the_banisher.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/244.jpg
+Oracle:Flying\nWhenever Dromar, the Banisher deals combat damage to a player, you may pay {2}{U}. If you do, choose a color, then return all creatures of that color to their owners' hands.
+End

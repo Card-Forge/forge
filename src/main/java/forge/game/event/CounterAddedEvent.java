@@ -4,10 +4,10 @@ package forge.game.event;
  * 
  *
  */
-public class AddCounterEvent extends Event {
+public class CounterAddedEvent extends Event {
     public final int Amount;
-    
-    public AddCounterEvent(int n) {
+
+    public CounterAddedEvent(int n) {
         Amount = n;
     }
 }

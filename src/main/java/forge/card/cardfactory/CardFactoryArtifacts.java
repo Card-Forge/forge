@@ -317,37 +317,6 @@ class CardFactoryArtifacts {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        /*else if (cardName.equals("Phyrexian Processor")) {
-            final Command intoPlay = new Command() {
-                private static final long serialVersionUID = 5634360316643996274L;
-
-                @Override
-                public void execute() {
-
-                    final Player player = card.getController();
-                    int lifeToPay = 0;
-                    if (player.isHuman()) {
-                        final int num = card.getController().getLife();
-                        final String[] choices = new String[num + 1];
-                        for (int j = 0; j <= num; j++) {
-                            choices[j] = "" + j;
-                        }
-                        final String answer = (GuiChoose.oneOrNone("Life to pay:", choices));
-                        lifeToPay = Integer.parseInt(answer);
-                    } else {
-                        // not implemented for Compy
-                    }
-
-                    if (player.payLife(lifeToPay, card)) {
-                        card.setXLifePaid(lifeToPay);
-                    }
-
-                }
-            };
-            card.addComesIntoPlayCommand(intoPlay);
-        }*/ // *************** END ************ END **************************
-
-        // *************** START *********** START **************************
         else if (cardName.equals("Scroll Rack")) {
             class AbilityScrollRack extends AbilityActivated {
                 public AbilityScrollRack(final Card ca, final Cost co, final Target t) {

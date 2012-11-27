@@ -46,7 +46,7 @@ public class AIPlayer extends Player {
      * <p>
      * Constructor for AIPlayer.
      * </p>
-     * @param computerAIGeneral 
+     * @param computerAIGeneral
      * 
      * @param myName
      *            a {@link java.lang.String} object.
@@ -56,7 +56,7 @@ public class AIPlayer extends Player {
         getController().setAiInput(new ComputerAIInput(new ComputerAIGeneral(this, game)));
     }
 
-    
+
     // //////////////
     // /
     // / Methods to ease transition to Abstract Player class
@@ -74,7 +74,7 @@ public class AIPlayer extends Player {
         return false;
     }
 
-    
+
     /**
      * <p>
      * isComputer.

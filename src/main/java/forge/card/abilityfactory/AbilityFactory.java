@@ -233,7 +233,7 @@ public class AbilityFactory {
             }
         }
 
-        else if (api == ApiType.PermanentCreature) {
+        else if (api == ApiType.PermanentCreature || api == ApiType.PermanentNoncreature) {
             // If API is a permanent type, and creating AF Spell
             // Clear out the auto created SpellPemanent spell
             if (isSp) {

@@ -13,6 +13,7 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked R | Origin$ Any | Destination$
 SVar:VolverPumped:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ VolverSpeed
 SVar:VolverSpeed:DB$ Pump | Defined$ Self | KW$ First Strike | Permanent$ True
 SVar:RemRandomDeck:True
+DeckNeeds:Color$Black|Red
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/degavolver.jpg
 SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/6.jpg

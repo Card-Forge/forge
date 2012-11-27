@@ -2,6 +2,7 @@ Name:Standstill
 ManaCost:1 U
 Types:Enchantment
 Text:no text
+A:SP$ PermanentNoncreature | Cost$ 1 U | AILogic$ MoreCreatures
 T:Mode$ SpellCast | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigSacYou | TriggerDescription$ When a player casts a spell, sacrifice CARDNAME. If you do, each of that player's opponents draws three cards.
 T:Mode$ SpellCast | ValidActivatingPlayer$ Opponent | TriggerZones$ Battlefield | Execute$ TrigSacOpp | Secondary$ True | TriggerDescription$ When a player casts a spell, sacrifice CARDNAME. If you do, each of that player's opponents draws three cards.
 #Must use SacrificeAll since regular sacrifice can't remember the sac'd cards atm.

@@ -2,7 +2,7 @@ Name:High Ground
 ManaCost:2 W
 Types:Enchantment
 Text:no text
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ HIDDEN CARDNAME can block an additional creature. | Description$ Each creature you control can block an additional creature.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME can block an additional creature. | Description$ Each creature you control can block an additional creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/high_ground.jpg
 SetInfo:EXO|Uncommon|http://magiccards.info/scans/en/ex/7.jpg

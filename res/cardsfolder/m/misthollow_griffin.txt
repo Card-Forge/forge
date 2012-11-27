@@ -4,7 +4,7 @@ Types:Creature Griffin
 Text:no text
 PT:3/3
 K:Flying
-S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ HIDDEN May be played | AffectedZone$ Exile | EffectZone$ Exile | Description$ You may cast CARDNAME from exile.
+S:Mode$ Continuous | Affected$ Card.Self | AddHiddenKeyword$ May be played | AffectedZone$ Exile | EffectZone$ Exile | Description$ You may cast CARDNAME from exile.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/misthollow_griffin.jpg
 SetInfo:AVR|Mythic|http://magiccards.info/scans/en/avr/68.jpg

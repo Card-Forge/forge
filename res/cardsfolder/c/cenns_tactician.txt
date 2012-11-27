@@ -4,7 +4,7 @@ Types:Creature Kithkin Soldier
 Text:no text
 PT:1/1
 A:AB$ PutCounter | Cost$ W T | ValidTgts$ Creature.Soldier | TgtPrompt$ Select target soldier creature | CounterType$ P1P1 | CounterNum$ 1 | SpellDescription$ Put a +1/+1 counter on target Soldier creature.
-S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddHiddenKeyword$ HIDDEN CARDNAME can block an additional creature. | Description$ Each creature you control with a +1/+1 counter on it can block an additional creature.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddHiddenKeyword$ CARDNAME can block an additional creature. | Description$ Each creature you control with a +1/+1 counter on it can block an additional creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cenns_tactician.jpg
 SetInfo:MOR|Uncommon|http://magiccards.info/scans/en/mt/5.jpg

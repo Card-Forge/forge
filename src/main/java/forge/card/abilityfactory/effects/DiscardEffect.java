@@ -256,7 +256,7 @@ public class DiscardEffect extends RevealEffectBase {
                                     CardLists.sortCMC(goodChoices);
                                     dChoices.add(goodChoices.get(0));
 
-                                    final Card dC = goodChoices.get(CardUtil.getRandomIndex(goodChoices));
+                                    final Card dC = CardUtil.getRandom(goodChoices);
                                     dPChHand.remove(dC);
 
                                     if (mode.startsWith("Reveal")) {

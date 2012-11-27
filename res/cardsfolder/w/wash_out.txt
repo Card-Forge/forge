@@ -2,7 +2,7 @@ Name:Wash Out
 ManaCost:3 U
 Types:Sorcery
 Text:no text
-A:SP$ ChooseColor | Cost$ 3 U | Defined$ You | AILogic$ MostProminentInHumanDeck | SubAbility$ DBWash | SpellDescription$ Return all permanents of the color of your choice to their owners' hands.
+A:SP$ ChooseColor | Cost$ 3 U | Defined$ You | AILogic$ MostProminentHumanCreatures | SubAbility$ DBWash | SpellDescription$ Return all permanents of the color of your choice to their owners' hands.
 SVar:DBWash:DB$ ChangeZoneAll | ChangeType$ Permanent.ChosenColor | Origin$ Battlefield | Destination$ Hand
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

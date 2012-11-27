@@ -63,7 +63,7 @@ public class ComputerUtilBlock {
                                                            // blockers
     /** Constant <code>diff=0</code>. */
     private static int diff = 0;
-    
+
     private static boolean lifeInDanger = false;
 
     /**
@@ -279,10 +279,10 @@ public class ComputerUtilBlock {
         final List<List<Card>> attackerLists = combat.sortAttackerByDefender();
         final List<Card> sortedAttackers = new ArrayList<Card>();
         final List<Card> firstAttacker = attackerLists.get(0);
-        
+
         final List<GameEntity> defenders = combat.getDefenders();
 
-        
+
         // Begin with the attackers that pose the biggest threat
         CardLists.sortByEvaluateCreature(firstAttacker);
         CardLists.sortAttack(firstAttacker);
@@ -404,7 +404,7 @@ public class ComputerUtilBlock {
      *            a {@link forge.game.phase.Combat} object.
      * @return a {@link forge.game.phase.Combat} object.
      */
-    final static Predicate<Card> rampagesOrNeedsManyToBlock = Predicates.or( CardPredicates.containsKeyword("Rampage"), CardPredicates.containsKeyword("CARDNAME can't be blocked by more than one creature."));
+    static final Predicate<Card> rampagesOrNeedsManyToBlock = Predicates.or(CardPredicates.containsKeyword("Rampage"), CardPredicates.containsKeyword("CARDNAME can't be blocked by more than one creature."));
 
     private static Combat makeGangBlocks(final Player ai, final Combat combat) {
         List<Card> currentAttackers = CardLists.filter(ComputerUtilBlock.getAttackersLeft(), Predicates.not(rampagesOrNeedsManyToBlock));
@@ -606,7 +606,7 @@ public class ComputerUtilBlock {
 
         List<Card> tramplingAttackers = CardLists.getKeyword(ComputerUtilBlock.getAttackers(), "Trample");
         tramplingAttackers = CardLists.filter(tramplingAttackers, Predicates.not(rampagesOrNeedsManyToBlock));
-        
+
         // TODO - should check here for a "rampage-like" trigger that replaced
         // the keyword:
         // "Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it."
@@ -651,9 +651,9 @@ public class ComputerUtilBlock {
 
         List<Card> safeBlockers;
         List<Card> blockers;
-        
+
         List<Card> targetAttackers = CardLists.filter(ComputerUtilBlock.getBlockedButUnkilled(), Predicates.not(rampagesOrNeedsManyToBlock));
-        
+
         // TODO - should check here for a "rampage-like" trigger that replaced
         // the keyword:
         // "Whenever CARDNAME becomes blocked, it gets +1/+1 until end of turn for each creature blocking it."
@@ -769,9 +769,9 @@ public class ComputerUtilBlock {
         }
 
         // keeps track of all currently unblocked attackers
-        ComputerUtilBlock.setAttackersLeft(new ArrayList<Card>(ComputerUtilBlock.getAttackers())); 
+        ComputerUtilBlock.setAttackersLeft(new ArrayList<Card>(ComputerUtilBlock.getAttackers()));
         // keeps track of all unassigned blockers
-        ComputerUtilBlock.setBlockersLeft(new ArrayList<Card>(possibleBlockers)); 
+        ComputerUtilBlock.setBlockersLeft(new ArrayList<Card>(possibleBlockers));
         // keeps track of all blocked attackers that currently wouldn't be destroyed
         ComputerUtilBlock.setBlockedButUnkilled(new ArrayList<Card>());
         List<Card> blockers;
@@ -875,7 +875,7 @@ public class ComputerUtilBlock {
                                                                     // necessary
                                                                     // trade
             }
-            
+
             if (!CombatUtil.lifeInDanger(ai, combat)) {
                 combat = ComputerUtilBlock.makeGoodBlocks(combat);
             }
@@ -915,29 +915,29 @@ public class ComputerUtilBlock {
 
         return combat;
     }
-    
+
     public static List<Card> orderBlockers(Card attacker, List<Card> blockers) {
         // very very simple ordering of blockers, sort by evaluate, then sort by attack
         //final int damage = attacker.getNetCombatDamage();
         CardLists.sortByEvaluateCreature(blockers);
         CardLists.sortAttack(blockers);
-        
+
         // TODO: Take total damage, and attempt to maximize killing the greatest evaluation of creatures
         // It's probably generally better to kill the largest creature, but sometimes its better to kill a few smaller ones
-        
+
         return blockers;
     }
-    
+
     public static List<Card> orderAttackers(Card attacker, List<Card> blockers) {
         // This shouldn't really take trample into account, but otherwise should be pretty similar to orderBlockers
         // very very simple ordering of attackers, sort by evaluate, then sort by attack
         //final int damage = attacker.getNetCombatDamage();
         CardLists.sortByEvaluateCreature(blockers);
         CardLists.sortAttack(blockers);
-        
+
         // TODO: Take total damage, and attempt to maximize killing the greatest evaluation of creatures
         // It's probably generally better to kill the largest creature, but sometimes its better to kill a few smaller ones
-        
+
         return blockers;
     }
 }

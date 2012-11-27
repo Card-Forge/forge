@@ -191,6 +191,7 @@ res/cardsfolder/a/alaborn_trooper.txt svneol=native#text/plain
 res/cardsfolder/a/alaborn_veteran.txt svneol=native#text/plain
 res/cardsfolder/a/alaborn_zealot.txt svneol=native#text/plain
 res/cardsfolder/a/aladdin.txt svneol=native#text/plain
+res/cardsfolder/a/aladdins_lamp.txt -text
 res/cardsfolder/a/aladdins_ring.txt svneol=native#text/plain
 res/cardsfolder/a/alarum.txt svneol=native#text/plain
 res/cardsfolder/a/albino_troll.txt svneol=native#text/plain
@@ -531,11 +532,13 @@ res/cardsfolder/a/assassins_strike.txt -text
 res/cardsfolder/a/assault_griffin.txt svneol=native#text/plain
 res/cardsfolder/a/assault_strobe.txt svneol=native#text/plain
 res/cardsfolder/a/assault_zeppelid.txt svneol=native#text/plain
+res/cardsfolder/a/assembly_hall.txt -text
 res/cardsfolder/a/assembly_worker.txt svneol=native#text/plain
 res/cardsfolder/a/assert_authority.txt svneol=native#text/plain
 res/cardsfolder/a/astral_slide.txt svneol=native#text/plain
 res/cardsfolder/a/astral_steel.txt svneol=native#text/plain
 res/cardsfolder/a/astrolabe.txt svneol=native#text/plain
+res/cardsfolder/a/atalya_samite_master.txt -text
 res/cardsfolder/a/atog.txt svneol=native#text/plain
 res/cardsfolder/a/atogatog.txt svneol=native#text/plain
 res/cardsfolder/a/attended_knight.txt -text
@@ -1975,6 +1978,7 @@ res/cardsfolder/c/creakwood_ghoul.txt svneol=native#text/plain
 res/cardsfolder/c/creakwood_liege.txt svneol=native#text/plain
 res/cardsfolder/c/cream_of_the_crop.txt svneol=native#text/plain
 res/cardsfolder/c/creature_bond.txt -text
+res/cardsfolder/c/credit_voucher.txt -text
 res/cardsfolder/c/creeping_corrosion.txt svneol=native#text/plain
 res/cardsfolder/c/creeping_mold.txt svneol=native#text/plain
 res/cardsfolder/c/creeping_renaissance.txt -text
@@ -2714,6 +2718,7 @@ res/cardsfolder/d/driver_of_the_dead.txt -text
 res/cardsfolder/d/drogskol_captain.txt -text
 res/cardsfolder/d/drogskol_reaver.txt -text
 res/cardsfolder/d/dromad_purebred.txt svneol=native#text/plain
+res/cardsfolder/d/dromar_the_banisher.txt -text
 res/cardsfolder/d/dromars_attendant.txt svneol=native#text/plain
 res/cardsfolder/d/dromars_cavern.txt svneol=native#text/plain
 res/cardsfolder/d/dromars_charm.txt -text svneol=unset#text/plain
@@ -2903,6 +2908,7 @@ res/cardsfolder/e/elephant_resurgence.txt svneol=native#text/plain
 res/cardsfolder/e/elesh_norn_grand_cenobite.txt svneol=native#text/plain
 res/cardsfolder/e/elf_replica.txt svneol=native#text/plain
 res/cardsfolder/e/elfhame_palace.txt svneol=native#text/plain
+res/cardsfolder/e/elfhame_sanctuary.txt -text
 res/cardsfolder/e/elgaud_inquisitor.txt -text
 res/cardsfolder/e/elgaud_shieldmate.txt -text
 res/cardsfolder/e/elite_archers.txt svneol=native#text/plain
@@ -5827,6 +5833,7 @@ res/cardsfolder/l/ludevics_test_subject_ludevics_abomination.txt -text
 res/cardsfolder/l/lull.txt svneol=native#text/plain
 res/cardsfolder/l/lumbering_satyr.txt svneol=native#text/plain
 res/cardsfolder/l/lumberknot.txt -text
+res/cardsfolder/l/lumengrid_augur.txt -text
 res/cardsfolder/l/lumengrid_drake.txt svneol=native#text/plain
 res/cardsfolder/l/lumengrid_gargoyle.txt svneol=native#text/plain
 res/cardsfolder/l/lumengrid_sentinel.txt svneol=native#text/plain
@@ -7531,6 +7538,7 @@ res/cardsfolder/p/prophetic_prism.txt svneol=native#text/plain
 res/cardsfolder/p/prosperity.txt svneol=native#text/plain
 res/cardsfolder/p/protective_bubble.txt svneol=native#text/plain
 res/cardsfolder/p/proteus_machine.txt -text
+res/cardsfolder/p/proteus_staff.txt -text
 res/cardsfolder/p/protomatter_powder.txt svneol=native#text/plain
 res/cardsfolder/p/prototype_portal.txt svneol=native#text/plain
 res/cardsfolder/p/provoke.txt svneol=native#text/plain
@@ -8076,6 +8084,7 @@ res/cardsfolder/r/righteous_blow.txt -text
 res/cardsfolder/r/righteous_cause.txt svneol=native#text/plain
 res/cardsfolder/r/righteous_charge.txt svneol=native#text/plain
 res/cardsfolder/r/righteous_fury.txt svneol=native#text/plain
+res/cardsfolder/r/righteous_indignation.txt -text
 res/cardsfolder/r/righteous_war.txt svneol=native#text/plain
 res/cardsfolder/r/righteousness.txt svneol=native#text/plain
 res/cardsfolder/r/riku_of_two_reflections.txt -text
@@ -8391,6 +8400,7 @@ res/cardsfolder/s/sapphire_charm.txt -text
 res/cardsfolder/s/sapphire_leech.txt svneol=native#text/plain
 res/cardsfolder/s/sapphire_medallion.txt svneol=native#text/plain
 res/cardsfolder/s/saprazzan_bailiff.txt svneol=native#text/plain
+res/cardsfolder/s/saprazzan_breaker.txt -text
 res/cardsfolder/s/saprazzan_cove.txt -text
 res/cardsfolder/s/saprazzan_heir.txt svneol=native#text/plain
 res/cardsfolder/s/saprazzan_legate.txt -text
@@ -8836,6 +8846,7 @@ res/cardsfolder/s/shorecrasher_mimic.txt svneol=native#text/plain
 res/cardsfolder/s/shoreline_raider.txt svneol=native#text/plain
 res/cardsfolder/s/shoreline_ranger.txt svneol=native#text/plain
 res/cardsfolder/s/shoreline_salvager.txt svneol=native#text/plain
+res/cardsfolder/s/shoving_match.txt -text
 res/cardsfolder/s/show_and_tell.txt svneol=native#text/plain
 res/cardsfolder/s/show_of_valor.txt -text
 res/cardsfolder/s/shower_of_coals.txt -text svneol=unset#text/plain
@@ -8861,6 +8872,7 @@ res/cardsfolder/s/shrine_of_piercing_vision.txt svneol=native#text/plain
 res/cardsfolder/s/shrink.txt svneol=native#text/plain
 res/cardsfolder/s/shrivel.txt svneol=native#text/plain
 res/cardsfolder/s/shriveling_rot.txt svneol=native#text/plain
+res/cardsfolder/s/shrouded_serpent.txt -text
 res/cardsfolder/s/shu_cavalry.txt svneol=native#text/plain
 res/cardsfolder/s/shu_defender.txt -text
 res/cardsfolder/s/shu_elite_companions.txt svneol=native#text/plain
@@ -9481,6 +9493,7 @@ res/cardsfolder/s/splintering_wind.txt -text
 res/cardsfolder/s/split_tail_miko.txt svneol=native#text/plain
 res/cardsfolder/s/splitting_headache.txt svneol=native#text/plain
 res/cardsfolder/s/spoils_of_evil.txt -text
+res/cardsfolder/s/spoils_of_the_vault.txt -text
 res/cardsfolder/s/spoils_of_victory.txt svneol=native#text/plain
 res/cardsfolder/s/spontaneous_combustion.txt svneol=native#text/plain
 res/cardsfolder/s/spontaneous_generation.txt svneol=native#text/plain
@@ -10569,6 +10582,7 @@ res/cardsfolder/t/trygon_predator.txt svneol=native#text/plain
 res/cardsfolder/t/tsabo_tavoc.txt svneol=native#text/plain
 res/cardsfolder/t/tsabos_assassin.txt -text
 res/cardsfolder/t/tsabos_decree.txt -text
+res/cardsfolder/t/tsabos_web.txt -text
 res/cardsfolder/t/tsunami.txt svneol=native#text/plain
 res/cardsfolder/t/tukatongue_thallid.txt svneol=native#text/plain
 res/cardsfolder/t/tuknir_deathlock.txt svneol=native#text/plain
@@ -12679,6 +12693,7 @@ src/main/java/forge/card/abilityfactory/ai/MillAi.java -text
 src/main/java/forge/card/abilityfactory/ai/MustAttackAi.java -text
 src/main/java/forge/card/abilityfactory/ai/MustBlockAi.java -text
 src/main/java/forge/card/abilityfactory/ai/PermanentCreatureAi.java -text
+src/main/java/forge/card/abilityfactory/ai/PermanentNoncreatureAi.java -text
 src/main/java/forge/card/abilityfactory/ai/PhasesAi.java -text
 src/main/java/forge/card/abilityfactory/ai/PlayAi.java -text
 src/main/java/forge/card/abilityfactory/ai/PoisonAi.java -text
@@ -12777,6 +12792,7 @@ src/main/java/forge/card/abilityfactory/effects/MillEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/MustAttackEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/MustBlockEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/PermanentCreatureEfect.java -text
+src/main/java/forge/card/abilityfactory/effects/PermanentNoncreatureEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/PhasesEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/PlayEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/PoisonEffect.java -text
@@ -12817,7 +12833,6 @@ src/main/java/forge/card/cardfactory/CardFactoryAuras.java svneol=native#text/pl
 src/main/java/forge/card/cardfactory/CardFactoryCreatures.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactoryEnchantments.java -text
 src/main/java/forge/card/cardfactory/CardFactoryEquipment.java svneol=native#text/plain
-src/main/java/forge/card/cardfactory/CardFactoryInterface.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactoryLands.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactoryPlaneswalkers.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactorySorceries.java svneol=native#text/plain
@@ -12993,13 +13008,15 @@ src/main/java/forge/game/GlobalRuleChange.java -text
 src/main/java/forge/game/MatchController.java -text
 src/main/java/forge/game/MatchStartHelper.java -text
 src/main/java/forge/game/PlayerStartConditions.java -text
-src/main/java/forge/game/event/AddCounterEvent.java -text
+src/main/java/forge/game/event/BlockerAssignedEvent.java -text
 src/main/java/forge/game/event/CardDamagedEvent.java -text
 src/main/java/forge/game/event/CardDestroyedEvent.java -text
 src/main/java/forge/game/event/CardDiscardedEvent.java -text
 src/main/java/forge/game/event/CardEquippedEvent.java -text
 src/main/java/forge/game/event/CardRegeneratedEvent.java -text
 src/main/java/forge/game/event/CardSacrificedEvent.java -text
+src/main/java/forge/game/event/CounterAddedEvent.java -text
+src/main/java/forge/game/event/CounterRemovedEvent.java -text
 src/main/java/forge/game/event/DrawCardEvent.java -text
 src/main/java/forge/game/event/DuelOutcomeEvent.java -text
 src/main/java/forge/game/event/EndOfTurnEvent.java -text
@@ -13009,10 +13026,10 @@ src/main/java/forge/game/event/LandPlayedEvent.java -text
 src/main/java/forge/game/event/LifeLossEvent.java -text
 src/main/java/forge/game/event/ManaBurnEvent.java -text
 src/main/java/forge/game/event/PoisonCounterEvent.java -text
-src/main/java/forge/game/event/RemoveCounterEvent.java -text
 src/main/java/forge/game/event/SetTappedEvent.java -text
 src/main/java/forge/game/event/ShuffleEvent.java -text
 src/main/java/forge/game/event/SpellResolvedEvent.java -text
+src/main/java/forge/game/event/TokenCreatedEvent.java -text
 src/main/java/forge/game/event/package-info.java -text
 src/main/java/forge/game/limited/BoosterDeck.java -text
 src/main/java/forge/game/limited/BoosterDraft.java svneol=native#text/plain

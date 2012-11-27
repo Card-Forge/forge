@@ -111,9 +111,6 @@ public class AbilityManaPart implements java.io.Serializable {
     public final void produceMana(final String produced, final Player player, SpellAbility sa) {
         final Card source = this.getSourceCard();
         final ManaPool manaPool = player.getManaPool();
-        // change this, once ManaPool moves to the Player
-        // this.getActivatingPlayer().ManaPool.addManaToFloating(origProduced,
-        // getSourceCard());
 
         //clear lastProduced
         this.lastProduced.clear();
@@ -402,10 +399,6 @@ public class AbilityManaPart implements java.io.Serializable {
     public final boolean isBasic() {
         if (this.getOrigProduced().length() != 1 && !this.getOrigProduced().contains("Any")
                 && !this.getOrigProduced().contains("Chosen")) {
-            return false;
-        }
-
-        if (this.amount > 1) {
             return false;
         }
 

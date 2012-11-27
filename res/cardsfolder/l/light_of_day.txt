@@ -2,7 +2,7 @@ Name:Light of Day
 ManaCost:3 W
 Types:Enchantment
 Text:no text
-S:Mode$ Continuous | Affected$ Creature.Black | AddHiddenKeyword$ HIDDEN CARDNAME can't attack or block. | Description$ Black creatures can't attack or block.
+S:Mode$ Continuous | Affected$ Creature.Black | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Black creatures can't attack or block.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/light_of_day.jpg

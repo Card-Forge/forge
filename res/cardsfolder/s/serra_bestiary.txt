@@ -5,7 +5,7 @@ Text:no text
 K:Enchant creature
 K:At the beginning of your upkeep, sacrifice CARDNAME unless you pay W W
 A:SP$ Attach | Cost$ W W | ValidTgts$ Creature | AILogic$ Curse
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ HIDDEN CARDNAME can't attack or block. | Description$ Enchanted creature can't attack or block, and its activated abilities with T in their costs can't be activated.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Enchanted creature can't attack or block, and its activated abilities with T in their costs can't be activated.
 S:Mode$ CantBeActivated | ValidCard$ Card.EnchantedBy | TapAbility$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/serra_bestiary.jpg

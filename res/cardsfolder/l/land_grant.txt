@@ -2,7 +2,7 @@ Name:Land Grant
 ManaCost:1 G
 Types:Sorcery
 Text:no text
-S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | AddHiddenKeyword$ HIDDEN Alternative Cost Reveal<1/Hand> | CheckSVar$ X | SVarCompare$ EQ0 | Description$ If you have no land cards in hand, you may reveal your hand rather than pay Land Grant's mana cost.
+S:Mode$ Continuous | Affected$ Card.Self | EffectZone$ All | AddHiddenKeyword$ Alternative Cost Reveal<1/Hand> | CheckSVar$ X | SVarCompare$ EQ0 | Description$ If you have no land cards in hand, you may reveal your hand rather than pay Land Grant's mana cost.
 SVar:X:Count$TypeInYourHand.Land
 A:SP$ ChangeZone | Cost$ 1 G | Origin$ Library | Destination$ Hand | ChangeType$ Forest | ChangeNum$ 1 | SpellDescription$ Search your library for a Forest card, reveal that card, and put it into your hand. Then shuffle your library.
 SVar:Rarity:Common

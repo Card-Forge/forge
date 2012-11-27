@@ -78,18 +78,6 @@ public final class CardUtil {
      *            an array of {@link forge.Card} objects.
      * @return a {@link forge.Card} object.
      */
-    public static <T> T getRandom(final T[] o) {
-        if (o == null) {
-            throw new IllegalArgumentException("CardUtil : getRandom(T) recieved null instead of array.");
-        }
-        int len = o.length;
-        switch(len) {
-            case 0: throw new IllegalArgumentException("CardUtil : getRandom(T) recieved an empty array.");
-            case 1: return o[0];
-            default: return o[CardUtil.RANDOM.nextInt(len)];
-        }
-    }
-
     public static <T> T getRandom(final List<T> o) {
         if (o == null) {
             throw new IllegalArgumentException("CardUtil : getRandom(T) recieved null instead of array.");
@@ -100,19 +88,6 @@ public final class CardUtil {
             case 1: return o.get(0);
             default: return o.get(CardUtil.RANDOM.nextInt(len));
         }
-    }
-
-    /**
-     * <p>
-     * getRandomIndex.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.CardList} object.
-     * @return a int.
-     */
-    public static int getRandomIndex(final List<Card> c) {
-        return CardUtil.RANDOM.nextInt(c.size());
     }
 
     // returns "G", longColor is Constant.Color.Green and the like

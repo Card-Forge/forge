@@ -5,7 +5,7 @@ Text:no text
 PT:4/3
 K:Flying
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigUntapAll | TriggerDescription$ When CARDNAME enters the battlefield, untap all creatures you control.
-SVar:TrigUntapAll:AB$UntapAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | SpellDescription$ untap all creatures you control.
+SVar:TrigUntapAll:AB$ UntapAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | SpellDescription$ untap all creatures you control.
 A:AB$ Draw | Cost$ tapXType<2/Creature.White;Creature.Blue> | NumCards$ 1 | ActivationZone$ Hand | ActivationLimit$ 1 | PlayerTurn$ True | ActivationPhases$ Upkeep | PrecostDesc$ Forecast - | CostDesc$ Tap two untapped white and/or blue creatures you control, Reveal CARDNAME from your hand: | SpellDescription$ Draw a card. (Activate this ability only during your upkeep and only once each turn.)
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sky_hussar.jpg

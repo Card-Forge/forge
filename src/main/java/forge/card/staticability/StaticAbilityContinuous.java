@@ -337,7 +337,7 @@ public class StaticAbilityContinuous {
             if (addHiddenKeywords != null) {
                 for (final String k : addHiddenKeywords) {
                     for (int j = 0; j < keywordMultiplier; j++) {
-                        affectedCard.addExtrinsicKeyword(k);
+                        affectedCard.addHiddenExtrinsicKeyword(k);
                     }
                 }
             }

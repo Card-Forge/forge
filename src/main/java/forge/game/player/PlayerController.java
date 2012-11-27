@@ -12,10 +12,10 @@ import forge.gui.match.CMatchUI;
  */
 public class PlayerController {
 
-    // Should keep some 'Model' of player here. 
+    // Should keep some 'Model' of player here.
     // Yet I have little idea of what is model now.
     private final Player player;
-    
+
     private PhaseType autoPassUntil = null;
 
     private ComputerAIInput aiInput;
@@ -38,14 +38,14 @@ public class PlayerController {
     public void autoPassCancel() {
         autoPassUntil = null;
     }
-    
-    
-    public boolean mayAutoPass(PhaseType phase) 
-    {
-        return phase.isBefore(autoPassUntil); 
+
+
+    public boolean mayAutoPass(PhaseType phase) {
+
+        return phase.isBefore(autoPassUntil);
     }
 
-    
+
     public boolean isUiSetToSkipPhase(final Player turn, final PhaseType phase) {
         return player.equals(Singletons.getControl().getPlayer()) && !CMatchUI.SINGLETON_INSTANCE.stopAtPhase(turn, phase);
     }
@@ -55,10 +55,7 @@ public class PlayerController {
      * @param computerAIInput
      */
     public void setAiInput(ComputerAIInput computerAIInput) {
-        aiInput = computerAIInput; 
+        aiInput = computerAIInput;
     }
-    
 
-    
-    
 }

@@ -6,9 +6,9 @@ PT:5/5
 K:First Strike
 K:Trample
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a -2/-2 counter on CARDNAME.
-SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ M2M2 | CounterNum$ 1 | SpellDescription$ Put a -2/-2 counter on CARDNAME.
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ M2M2 | CounterNum$ 1 | SpellDescription$ Put a -2/-2 counter on CARDNAME.
 A:AB$ RemoveCounter | Cost$ Sac<1/Creature> | CounterType$ M2M2 | CounterNum$ 1 | ActivationPhases$ Upkeep | PlayerTurn$ True | ActivationLimit$ 1 | SubAbility$ DBPutCounter | SpellDescription$ Remove a -2/-2 counter from CARDNAME. If the sacrificed creature was a Thrull, put a +1/+0 counter on CARDNAME. Activate this ability only during your upkeep and only once each turn.
-SVar:DBPutCounter:DB$PutCounter | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | CounterNum$ 1 | CounterType$ P1P0 | References$ X
+SVar:DBPutCounter:DB$ PutCounter | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | CounterNum$ 1 | CounterType$ P1P0 | References$ X
 SVar:X:Sacrificed$Valid Thrull
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

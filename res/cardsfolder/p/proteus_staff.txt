@@ -1,0 +1,14 @@
+Name:Proteus Staff
+ManaCost:3
+Types:Artifact
+Text:no text
+A:AB$ ChangeZone | Cost$ 2 U T | SorcerySpeed$ True | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Library | LibraryPosition$ -1 | SubAbility$ DBDigUntil | SpellDescription$ Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the top of his or her library until he or she reveals a creature card. The player puts that card onto the battlefield and the rest on the bottom of his or her library in any order. Activate this ability only any time you could cast a sorcery.
+SVar:DBDigUntil:DB$ DigUntil | Defined$ TargetedController | Valid$ Creature | ValidDescription$ creature | FoundDestination$ Battlefield | RevealedDestination$ Library | RevealedLibraryPosition$ -1
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+DeckNeeds:Color$Blue
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/proteus_staff.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/230.jpg
+Oracle:{2}{U}, {T}: Put target creature on the bottom of its owner's library. That creature's controller reveals cards from the top of his or her library until he or she reveals a creature card. The player puts that card onto the battlefield and the rest on the bottom of his or her library in any order. Activate this ability only any time you could cast a sorcery.
+End

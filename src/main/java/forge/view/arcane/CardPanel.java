@@ -281,6 +281,17 @@ public class CardPanel extends JPanel implements CardContainer {
 
     /**
      * <p>
+     * isSelected.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public final boolean isSelected() {
+        return this.isSelected;
+    }
+
+    /**
+     * <p>
      * Setter for the field <code>showCastingCost</code>.
      * </p>
      * 

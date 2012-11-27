@@ -55,9 +55,9 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
 import forge.game.GlobalRuleChange;
-import forge.game.event.AddCounterEvent;
+import forge.game.event.CounterAddedEvent;
 import forge.game.event.CardEquippedEvent;
-import forge.game.event.RemoveCounterEvent;
+import forge.game.event.CounterRemovedEvent;
 import forge.game.event.SetTappedEvent;
 import forge.game.phase.Combat;
 import forge.game.player.ComputerUtil;
@@ -189,7 +189,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private int randomPicture = 0;
 
     private int xManaCostPaid = 0;
-    private int xLifePaid = 0;
 
     private int multiKickerMagnitude = 0;
     private int replicateMagnitude = 0;
@@ -932,29 +931,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     }
 
     /**
-     * <p>
-     * Setter for the field <code>xLifePaid</code>.
-     * </p>
-     * 
-     * @param n
-     *            a int.
-     */
-    public final void setXLifePaid(final int n) {
-        this.xLifePaid = n;
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>xLifePaid</code>.
-     * </p>
-     * 
-     * @return a int.
-     */
-    public final int getXLifePaid() {
-        return this.xLifePaid;
-    }
-
-    /**
      * @return the blockedThisTurn
      */
     public List<Card> getBlockedThisTurn() {
@@ -1247,7 +1223,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // play the Add Counter sound
-        Singletons.getModel().getGame().getEvents().post(new AddCounterEvent(addAmount));
+        Singletons.getModel().getGame().getEvents().post(new CounterAddedEvent(addAmount));
 
         this.updateObservers();
     }
@@ -1298,7 +1274,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         // Play the Subtract Counter sound
-        Singletons.getModel().getGame().getEvents().post(new RemoveCounterEvent(delta));
+        Singletons.getModel().getGame().getEvents().post(new CounterRemovedEvent(delta));
 
         this.updateObservers();
     }
@@ -5221,8 +5197,11 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final ArrayList<String> getHiddenExtrinsicKeyword() {
         final ArrayList<String> keywords = new ArrayList<String>();
         for (int i = 0; i < this.hiddenExtrinsicKeyword.size(); i++) {
-            final String keyword = this.hiddenExtrinsicKeyword.get(i);
-            keywords.add(keyword.substring(7));
+            String keyword = this.hiddenExtrinsicKeyword.get(i);
+            if (keyword.startsWith("HIDDEN")) {
+                keyword = keyword.substring(7);
+            }
+            keywords.add(keyword);
         }
         return keywords;
     }
@@ -6509,8 +6488,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (list.indexOf(source) >= list.indexOf(this)) {
                 return false;
             }
-        } else if (property.startsWith("DirectlyAbove")) { // "Are Directly Above"
-                                                           // Source
+        } else if (property.startsWith("DirectlyAbove")) { // "Are Directly Above" Source
             final List<Card> list = this.getOwner().getCardsIn(ZoneType.Graveyard);
             if (list.indexOf(this) - list.indexOf(source) != 1) {
                 return false;
@@ -6575,15 +6553,12 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                     return false;
                 } else {
-                    boolean shares = false;
                     for (final Card card : sourceController.getCardsIn(ZoneType.Battlefield)) {
                         if (card.isValid(restriction, sourceController, source) && this.sharesColorWith(card)) {
-                            shares = true;
+                            return true;
                         }
                     }
-                    if (!shares) {
-                        return false;
-                    }
+                    return false;
                 }
             }
         } else if (property.startsWith("sharesCreatureTypeWith")) {
@@ -6644,61 +6619,45 @@ public class Card extends GameEntity implements Comparable<Card> {
             } else {
                 final String restriction = property.split("sharesNameWith ")[1];
                 if (restriction.equals("YourGraveyard")) {
-                    final List<Card> list = sourceController.getCardsIn(ZoneType.Graveyard);
-                    boolean shares = false;
-                    for (final Card card : list) {
+                    for (final Card card : sourceController.getCardsIn(ZoneType.Graveyard)) {
                         if (this.getName().equals(card.getName())) {
-                            shares = true;
+                            return true;
                         }
                     }
-                    if (!shares) {
-                        return false;
-                    }
+                    return false;
                 } else if (restriction.equals(ZoneType.Battlefield.toString())) {
-                    final List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
-                    if (list.isEmpty()) {
-                        return false;
-                    }
-                    boolean shares = false;
                     for (final Card card : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
                         if (this.getName().equals(card.getName())) {
-                            shares = true;
+                            return true;
                         }
                     }
-                    if (!shares) {
-                        return false;
-                    }
+                    return false;
                 } else if (restriction.equals("ThisTurnCast")) {
-                    final List<Card> list = CardUtil.getThisTurnCast("Card", source);
-                    if (list.isEmpty())  {
-                        return false;
-                    }
-                    boolean shares = false;
-                    for (final Card card : list) {
+                    for (final Card card : CardUtil.getThisTurnCast("Card", source)) {
                         if (this.getName().equals(card.getName())) {
-                            shares = true;
+                            return true;
                         }
                     }
-                    if (!shares) {
-                        return false;
-                    }
-
+                    return false;
                 } else if (restriction.equals("Remembered")) {
-                    boolean shares = false;
                     for (final Object rem : source.getRemembered()) {
                         if (rem instanceof Card) {
                             final Card card = (Card) rem;
                             if (this.getName().equals(card.getName())) {
-                                shares = true;
+                                return true;
                             }
                         }
                     }
-                    if (!shares) {
-                        return false;
+                    return false;
+                } else if (restriction.equals("Imprinted")) {
+                    for (final Card card : source.getImprinted()) {
+                        if (this.getName().equals(card.getName())) {
+                            return true;
+                        }
                     }
+                    return false;
                 }
             }
-
         } else if (property.startsWith("SecondSpellCastThisTurn")) {
             final List<Card> list = CardUtil.getThisTurnCast("Card", source);
             if (list.size() < 2)  {
@@ -6707,7 +6666,6 @@ public class Card extends GameEntity implements Comparable<Card> {
             else if (list.get(1) != this) {
                 return false;
             }
-
         } else if (property.startsWith("sharesTypeWith")) {
             if (!this.sharesTypeWith(source)) {
                 return false;
@@ -6753,6 +6711,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!this.hasLevelUp()) {
                 return false;
             }
+        } else if (property.startsWith("DrawnThisTurn")) {
+          if (!this.getDrawnThisTurn()) {
+              return false;
+          }
         } else if (property.startsWith("enteredBattlefieldThisTurn")) {
             if (!(this.getTurnInZone() == Singletons.getModel().getGame().getPhaseHandler().getTurn())) {
                 return false;
@@ -7085,22 +7047,19 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
             }
             return false;
+        } else if (property.equals("hasNonManaActivatedAbility")) {
+            for (final SpellAbility sa : this.getSpellAbilities()) {
+                if (sa.isAbility() && !sa.isManaAbility()) {
+                    return true;
+                }
+            }
+            return false;
         } else if (property.equals("NoAbilities")) {
             if (!((this.getAbilityText().trim().equals("") || this.isFaceDown()) && (this.getUnhiddenKeyword().size() == 0))) {
                 return false;
             }
         } else if (property.equals("HasCounters")) {
             if (!this.hasCounters()) {
-                return false;
-            }
-        } else if (property.equals("SameNameAsImprinted")) {
-            boolean b = false;
-            for (final Card card : source.getImprinted()) {
-                if (this.getName().equals(card.getName())) {
-                    b = true;
-                }
-            }
-            if (!b) {
                 return false;
             }
         } else if (property.startsWith("wasCastFrom")) {
@@ -7120,18 +7079,13 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!this.getCurSetCode().equals(setCode)) {
                 return false;
             }
-        } else if (property.startsWith("OnBattlefield")) {
-            final List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
-            if (!list.contains(this)) {
+        } else if (property.startsWith("inZone")) {
+            final String strZone = property.substring(6);
+            final ZoneType realZone = ZoneType.smartValueOf(strZone);
+            if (!this.isInZone(realZone)) {
                 return false;
             }
-        } else if (property.startsWith("InGraveyard")) {
-            final List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Graveyard);
-            if (!list.contains(this)) {
-                return false;
-            }
-        }
-        else {
+        } else {
             if (property.equals("ChosenType")) {
                 if (!this.isType(source.getChosenType())) {
                     return false;

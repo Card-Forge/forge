@@ -58,7 +58,7 @@ import forge.properties.NewConstants;
  * @author Forge
  * @version $Id$
  */
-public class CardFactory implements CardFactoryInterface {
+public class CardFactory {
 
     /**
      * <p>
@@ -95,7 +95,6 @@ public class CardFactory implements CardFactoryInterface {
      *            a {@link forge.Card} object.
      * @return a {@link forge.Card} object.
      */
-    @Override
     public final Card copyCard(final Card in) {
         final CardCharacteristicName curState = in.getCurState();
         if (in.isInAlternateState()) {
@@ -149,7 +148,6 @@ public class CardFactory implements CardFactoryInterface {
      * @param bCopyDetails
      *            a boolean.
      */
-    @Override
     public final void copySpellontoStack(final Card source, final Card original, final SpellAbility sa,
             final boolean bCopyDetails) {
         Player originalController = original.getController();
@@ -226,7 +224,6 @@ public class CardFactory implements CardFactoryInterface {
      * @return a {@link forge.Card} instance, owned by owner; or the special
      *         blankCard
      */
-    @Override
     public final Card getCard(final CardPrinted cp, final Player owner) {
 
         //System.out.println(cardName);

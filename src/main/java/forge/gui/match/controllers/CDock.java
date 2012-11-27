@@ -205,19 +205,9 @@ public enum CDock implements ICDoc {
 
     /** Toggle targeting overlay painting. */
     public void toggleTargeting() {
-        //arcState++;
+        arcState++;
 
-        //if (arcState == 3) { arcState = 0; }
-
-        // TODO: This code currently skips the "mouse-over only" mode at
-        //       (arcState == 1). If that mode is ever implemented correctly,
-        //       the "if" block below may be removed and the code above (the
-        //       original code which wraps at (arcState == 3) may be enabled.
-        if (arcState == 0) {
-            arcState = 2;
-        } else {
-            arcState = 0;
-        }
+        if (arcState == 3) { arcState = 0; }
 
         refreshArcStateDisplay();
         FView.SINGLETON_INSTANCE.getFrame().repaint(); // repaint the match UI

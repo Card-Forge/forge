@@ -12,6 +12,7 @@ T:Mode$ ChangesZone | ValidCard$ Card.Self+kicked G | Origin$ Any | Destination$
 SVar:VolverPumped:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ VolverStomp
 SVar:VolverStomp:DB$ Pump | Defined$ Self | KW$ Trample | Permanent$ True
 SVar:RemRandomDeck:True
+DeckNeeds:Color$Red|Green
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cetavolver.jpg
 SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/21.jpg

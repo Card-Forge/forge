@@ -4,7 +4,6 @@ Types:Creature Human Soldier
 Text:no text
 PT:2/1
 A:AB$ DealDamage | Cost$ tapXType<2/Soldier> | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target attacking or blocking creature.
-SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/catapult_squad.jpg
 SetInfo:ONS|Uncommon|http://magiccards.info/scans/en/on/11.jpg

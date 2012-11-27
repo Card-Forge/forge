@@ -64,6 +64,7 @@ public enum ApiType {
     MustBlock (MustBlockEffect.class, MustBlockAi.class),
     NameCard (ChooseCardNameEffect.class, ChooseCardNameAi.class),
     PermanentCreature (PermanentCreatureEfect.class, PermanentCreatureAi.class),
+    PermanentNoncreature (PermanentNoncreatureEffect.class, PermanentNoncreatureAi.class),
     Phases (PhasesEffect.class, PhasesAi.class),
     Play (PlayEffect.class, PlayAi.class),
     Poison (PoisonEffect.class, PoisonAi.class),

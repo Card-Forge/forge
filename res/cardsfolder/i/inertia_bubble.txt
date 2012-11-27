@@ -4,7 +4,7 @@ Types:Enchantment Aura
 Text:no text
 K:Enchant artifact
 A:SP$ Attach | Cost$ 1 U | ValidTgts$ Artifact | AILogic$ KeepTapped
-S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddHiddenKeyword$ HIDDEN CARDNAME doesn't untap during your untap step. | Description$ Enchanted artifact doesn't untap during its controller's untap step.
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted artifact doesn't untap during its controller's untap step.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inertia_bubble.jpg

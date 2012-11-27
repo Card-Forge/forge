@@ -85,18 +85,29 @@ public class ChooseCardEffect extends SpellEffect {
                             break;
                         }
                     } else { // Computer
-                        if (sa.hasParam("AILogic") && sa.getParam("AILogic").equals("BestBlocker")) {
+                        String logic = sa.getParam("AILogic");
+                        Card choice = null;
+                        if (logic == null) {
+                            // Base Logic is choose "best"
+                            choice = CardFactoryUtil.getBestAI(choices);
+                        } else if ("WorstCard".equals(logic)) {
+                            choice = CardFactoryUtil.getWorstAI(choices);
+                        } else if (logic.equals("BestBlocker")) {
                             if (!CardLists.filter(choices, Presets.UNTAPPED).isEmpty()) {
                                 choices = CardLists.filter(choices, Presets.UNTAPPED);
                             }
-                            chosen.add(CardFactoryUtil.getBestCreatureAI(choices));
-                        } else if (sa.hasParam("AILogic") && sa.getParam("AILogic").equals("Clone")) {
+                            choice = CardFactoryUtil.getBestCreatureAI(choices);
+                        } else if (logic.equals("Clone")) {
                             if (!CardLists.getValidCards(choices, "Permanent.YouDontCtrl,Permanent.NonLegendary", host.getController(), host).isEmpty()) {
                                 choices = CardLists.getValidCards(choices, "Permanent.YouDontCtrl,Permanent.NonLegendary", host.getController(), host);
                             }
-                            chosen.add(CardFactoryUtil.getBestAI(choices));
+                            choice = CardFactoryUtil.getBestAI(choices);
+                        }
+                        if (choice != null) {
+                            chosen.add(choice);
+                            choices.remove(choice);
                         } else {
-                            chosen.add(CardFactoryUtil.getBestAI(choices));
+                            break;
                         }
                     }
                 }

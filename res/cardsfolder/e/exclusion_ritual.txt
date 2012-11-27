@@ -4,7 +4,7 @@ Types:Enchantment
 Text:no text
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigExile | TriggerDescription$ Imprint - When CARDNAME enters the battlefield, exile target nonland permanent.
 SVar:TrigExile:DB$ ChangeZone | Cost$ 0 | Imprint$ True | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | Origin$ Battlefield | Destination$ Exile
-S:Mode$ CantBeCast | ValidCard$ Card.SameNameAsImprinted | Description$ Players can't cast spells with the same name as the exiled card.
+S:Mode$ CantBeCast | ValidCard$ Card.sharesNameWith Imprinted | Description$ Players can't cast spells with the same name as the exiled card.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/exclusion_ritual.jpg
 SetInfo:NPH|Uncommon|http://magiccards.info/scans/en/nph/10.jpg

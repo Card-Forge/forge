@@ -29,9 +29,9 @@ public enum PhaseType {
 
     public static final List<PhaseType> ALL_PHASES = Collections.unmodifiableList(
             Arrays.asList(
-                    UNTAP, UPKEEP, DRAW, MAIN1, 
-                    COMBAT_BEGIN, COMBAT_DECLARE_ATTACKERS, COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY, 
-                    COMBAT_DECLARE_BLOCKERS, COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY, 
+                    UNTAP, UPKEEP, DRAW, MAIN1,
+                    COMBAT_BEGIN, COMBAT_DECLARE_ATTACKERS, COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY,
+                    COMBAT_DECLARE_BLOCKERS, COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY,
                     COMBAT_FIRST_STRIKE_DAMAGE, COMBAT_DAMAGE, COMBAT_END,
                     MAIN2, END_OF_TURN, CLEANUP
                     )
@@ -110,8 +110,9 @@ public enum PhaseType {
      */
     public PhaseType getNextPhase() {
         int iNext = ALL_PHASES.indexOf(this) + 1;
-        while ( iNext >= ALL_PHASES.size() )
+        while (iNext >= ALL_PHASES.size()) {
             iNext = 0;
+        }
         return ALL_PHASES.get(iNext);
     }
 }

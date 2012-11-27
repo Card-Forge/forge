@@ -3,7 +3,7 @@ ManaCost:4 B
 Types:Creature Eye
 Text:no text
 PT:6/3
-S:Mode$ Continuous | Affected$ Creature.nonEye+YouCtrl | AddHiddenKeyword$ HIDDEN CARDNAME can't attack. | Description$ Non-Eye creatures you control can't attack.
+S:Mode$ Continuous | Affected$ Creature.nonEye+YouCtrl | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Non-Eye creatures you control can't attack.
 T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | Execute$ TrigDestroyBlocker | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME becomes blocked by a creature, destroy that creature.
 SVar:TrigDestroyBlocker:AB$Destroy | Cost$ 0 | Defined$ TriggeredBlocker
 SVar:Rarity:Uncommon

@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact Equipment
 Text:no text
 K:Equip 3
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddHiddenKeyword$ HIDDEN All creatures able to block CARDNAME do so. | Description$ All creatures able to block equipped creature do so.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddHiddenKeyword$ All creatures able to block CARDNAME do so. | Description$ All creatures able to block equipped creature do so.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nemesis_mask.jpg
 SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/134.jpg

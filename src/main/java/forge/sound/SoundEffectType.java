@@ -40,6 +40,7 @@ public enum SoundEffectType {
     Artifact("artifact.wav", false),
     ArtifactCreature("artifact_creature.wav", false),
     BlackLand("black_land.wav", false),
+    Block("block.wav", false),
     BlueLand("blue_land.wav", false),
     Creature("creature.wav", false),
     Damage("damage.wav", true), 
@@ -65,6 +66,7 @@ public enum SoundEffectType {
     Sorcery("sorcery.wav", false),
     Shuffle("shuffle.wav", false),
     Tap("tap.wav", false),
+    Token("token.wav", false),
     Untap("untap.wav", false),
     WhiteLand("white_land.wav", false),
     WinDuel("win_duel.wav", false);

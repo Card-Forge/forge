@@ -8,21 +8,14 @@ import forge.Card;
 
 import forge.CardLists;
 import forge.Command;
-import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.SpellPermanent;
-import forge.card.trigger.Trigger;
-import forge.card.trigger.TriggerHandler;
 import forge.control.input.Input;
 import forge.game.GameLossReason;
 import forge.game.player.Player;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
-import forge.gui.match.CMatchUI;
-import forge.view.ButtonUtil;
 import forge.CardPredicates;
 
 /** 
@@ -39,24 +32,8 @@ class CardFactoryEnchantments {
      */
     public static void buildCard(final Card card, final String cardName) {
 
-        if (cardName.equals("Bridge from Below")) {
-            final SpellAbility spell = new SpellPermanent(card) {
-                private static final long serialVersionUID = 7254358703158629514L;
-
-                @Override
-                public boolean canPlayAI() {
-                    return false;
-                }
-            };
-
-            // Do not remove SpellAbilities created by AbilityFactory or
-            // Keywords.
-            card.clearFirstSpell();
-            card.addSpellAbility(spell);
-        }
-
      // *************** START *********** START **************************
-        else if (cardName.equals("Night Soil")) {
+        if (cardName.equals("Night Soil")) {
             final SpellAbility nightSoil = new Ability(card, "1") {
                 @Override
                 public void resolve() {
@@ -147,30 +124,6 @@ class CardFactoryEnchantments {
         } // *************** END ************ END **************************
 
         // *************** START *********** START **************************
-        else if (cardName.equals("Standstill")) {
-
-            // Do not remove SpellAbilities created by AbilityFactory or
-            // Keywords.
-            card.clearFirstSpell();
-
-            card.addSpellAbility(new SpellPermanent(card) {
-                private static final long serialVersionUID = 6912683989507840172L;
-
-                @Override
-                public boolean canPlayAI() {
-                    final List<Card> compCreats = getActivatingPlayer().getCreaturesInPlay();
-                    final List<Card> humCreats = getActivatingPlayer().getOpponent().getCreaturesInPlay();
-
-                    // only play standstill if comp controls more creatures than
-                    // human
-                    // this needs some additional rules, maybe add all power +
-                    // toughness and compare
-                    return (compCreats.size() > humCreats.size());
-                }
-            });
-        } // *************** END ************ END **************************
-
-        // *************** START *********** START **************************
         else if (cardName.equals("Lich")) {
             final SpellAbility loseAllLife = new Ability(card, "0") {
                 @Override
@@ -222,79 +175,5 @@ class CardFactoryEnchantments {
             card.addComesIntoPlayCommand(intoPlay);
             card.addDestroyCommand(toGrave);
         } // *************** END ************ END **************************
-
-         // *************** START *********** START **************************
-        else if (cardName.equals("Sylvan Library")) {
-
-            final Ability ability = new Ability(card, "") {
-                @Override
-                public void resolve() {
-                    final Player player = card.getController();
-                    if (player.isHuman()) {
-                        final String cardQuestion = "Pay 4 life and keep in hand?";
-                        player.drawCards(2);
-                        int numPutBack = 0;
-                        for (Card c : player.getCardsIn(ZoneType.Hand)) {
-                            if (c.getDrawnThisTurn()) {
-                                numPutBack++;
-                            }
-                        }
-                        numPutBack = Math.min(2, numPutBack);
-                        for (int i = 0; i < numPutBack; i++) {
-                            final StringBuilder sb = new StringBuilder();
-                            sb.append(card).append(" - Select a card drawn this turn: ").append(numPutBack - i)
-                                .append(" of " + numPutBack);
-                            final String prompt = sb.toString();
-                            Singletons.getModel().getMatch().getInput().setInput(new Input() {
-                                private static final long serialVersionUID = -3389565833121544797L;
-
-                                @Override
-                                public void showMessage() {
-                                    if (player.getZone(ZoneType.Hand).size() == 0) {
-                                        this.stop();
-                                    }
-                                    CMatchUI.SINGLETON_INSTANCE.showMessage(prompt);
-                                    ButtonUtil.disableAll();
-                                }
-
-                                @Override
-                                public void selectCard(final Card card) {
-                                    Zone zone = Singletons.getModel().getGame().getZoneOf(card);
-                                    if (zone.is(ZoneType.Hand) && card.getDrawnThisTurn()) {
-                                        if (player.canPayLife(4) && GameActionUtil.showYesNoDialog(card, cardQuestion)) {
-                                            player.payLife(4, card);
-                                            // card stays in hand
-                                        } else {
-                                            Singletons.getModel().getGame().getAction().moveToLibrary(card);
-                                        }
-                                        this.stop();
-                                    }
-                                }
-                            }); // end Input
-                        }
-                    } else {
-                        // Computer, but he's too stupid to play this
-                    }
-                } // resolve
-            }; // Ability
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append("At the beginning of your draw step, you may draw two additional cards. ");
-            sb.append("If you do, choose two cards in your hand drawn this turn. For each of those cards, ");
-            sb.append("pay 4 life or put the card on top of your library.");
-            ability.setStackDescription(sb.toString());
-
-            final StringBuilder sbTrg = new StringBuilder();
-            sbTrg.append("Mode$ Phase | Phase$ Draw | ValidPlayer$ You | OptionalDecider$ You | ");
-            sbTrg.append("TriggerZones$ Battlefield | TriggerDescription$ At the beginning of ");
-            sbTrg.append("your draw step, you may draw two additional cards. If you do, choose two ");
-            sbTrg.append("cards in your hand drawn this turn. For each of those cards, ");
-            sbTrg.append("pay 4 life or put the card on top of your library.");
-            final Trigger drawStepTrigger = TriggerHandler.parseTrigger(sbTrg.toString(), card, true);
-
-            drawStepTrigger.setOverridingAbility(ability);
-            card.addTrigger(drawStepTrigger);
-        } // *************** END ************ END **************************
     }
-
 }

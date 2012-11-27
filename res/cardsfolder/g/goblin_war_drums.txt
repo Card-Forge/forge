@@ -2,7 +2,7 @@ Name:Goblin War Drums
 ManaCost:2 R
 Types:Enchantment
 Text:no text
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ HIDDEN CARDNAME can't be blocked except by two or more creatures. | Description$ Each creature you control can't be blocked except by two or more creatures.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME can't be blocked except by two or more creatures. | Description$ Each creature you control can't be blocked except by two or more creatures.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_war_drums.jpg

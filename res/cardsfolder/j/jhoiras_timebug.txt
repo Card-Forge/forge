@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact Creature Insect
 Text:no text
 PT:1/2
-A:AB$ GenericChoice | Cost$ T | ValidTgts$ Permanent.OnBattlefield+YouCtrl,Card.suspended+YouOwn | TgtPrompt$ Choose target permanent you control or suspended card you own | Defined$ You | Choices$ LoseTime,AddTime | TgtZone$ Battlefield,Exile | ConditionDefined$ Targeted | ConditionPresent$ Card.counters_GE1_TIME | ConditionCompare$ GE1 | SpellDescription$ Choose target permanent you control or suspended card you own. If that permanent or card has a time counter on it, you may remove a time counter from it or put another time counter on it.
+A:AB$ GenericChoice | Cost$ T | ValidTgts$ Permanent.inZoneBattlefield+YouCtrl,Card.suspended+YouOwn | TgtPrompt$ Choose target permanent you control or suspended card you own | Defined$ You | Choices$ LoseTime,AddTime | TgtZone$ Battlefield,Exile | ConditionDefined$ Targeted | ConditionPresent$ Card.counters_GE1_TIME | ConditionCompare$ GE1 | SpellDescription$ Choose target permanent you control or suspended card you own. If that permanent or card has a time counter on it, you may remove a time counter from it or put another time counter on it.
 SVar:LoseTime:DB$ RemoveCounter | Defined$ Targeted | TgtPrompt$ Select target permanent or suspended card. | CounterType$ TIME | CounterNum$ 1 | ChoiceDescription$ Remove a time counter.
 SVar:AddTime:DB$ PutCounter | Defined$ Targeted | TgtPrompt$ Select target permanent with a time counter on it or suspended card. | CounterType$ TIME | CounterNum$ 1 | TgtZone$ Battlefield,Exile | ChoiceDescription$ Add a time counter.
 SVar:RemAIDeck:True

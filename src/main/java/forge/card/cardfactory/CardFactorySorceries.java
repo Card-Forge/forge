@@ -28,7 +28,6 @@ import java.util.Collections;
 import javax.swing.JOptionPane;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.Card;
@@ -436,43 +435,6 @@ public class CardFactorySorceries {
         return spell;
     }
 
-    private final static SpellAbility getHauntingEchoes(final Card card) {
-        final Predicate<Card> nonBasicLands = Predicates.not(CardPredicates.Presets.BASIC_LANDS);
-        final Cost cost = new Cost(card, "3 B B", false);
-        final Target tgt = new Target(card, "Select a Player", "Player");
-        return new Spell(card, cost, tgt) {
-            private static final long serialVersionUID = 42470566751344693L;
-
-            @Override
-            public boolean canPlayAI() {
-                // Haunting Echoes shouldn't be cast if only basic land in
-                // graveyard or library is empty
-                final Player ai = getActivatingPlayer();
-                final Player opp = ai.getOpponent();
-                final List<Card> graveyard = opp.getCardsIn(ZoneType.Graveyard);
-                final List<Card> library = opp.getCardsIn(ZoneType.Library);
-
-                this.setTargetPlayer(opp);
-
-                return Iterables.any(graveyard, nonBasicLands) && !library.isEmpty();
-            }
-
-            @Override
-            public void resolve() {
-                final Player player = this.getTargetPlayer();
-                final List<Card> lib = new ArrayList<Card>(player.getCardsIn(ZoneType.Library));
-
-                for (final Card c : Iterables.filter(player.getCardsIn(ZoneType.Graveyard), nonBasicLands)) {
-                    for (final Card rem : Iterables.filter(lib, CardPredicates.nameEquals(c.getName()))) {
-                        Singletons.getModel().getGame().getAction().exile(rem);
-                        lib.remove(rem);
-                    }
-                    Singletons.getModel().getGame().getAction().exile(c);
-                }
-            }
-        };
-    }
-
     private final static void balanceLands(Spell card) {
 
         List<List<Card>> lands = new ArrayList<List<Card>>();
@@ -594,75 +556,6 @@ public class CardFactorySorceries {
             }
         };
     }
-    /*private final static SpellAbility getSummerBloom(final Card card) {
-        card.setSVar("PlayMain1", "TRUE");
-        return new Spell(card) {
-            private static final long serialVersionUID = 5559004016728325736L;
-
-            @Override
-            public boolean canPlayAI() {
-                // The computer should only play this card if it has at
-                // least
-                // one land in its hand. Because of the way the computer
-                // turn
-                // is structured, it will already have played land to it's
-                // limit
-                return Iterables.any(getActivatingPlayer().getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS);
-            }
-
-            @Override
-            public void resolve() {
-                final Player thePlayer = card.getController();
-                thePlayer.addMaxLandsToPlay(3);
-
-                final Command untilEOT = new Command() {
-                    private static final long serialVersionUID = 1665720009691293263L;
-
-                    @Override
-                    public void execute() {
-                        thePlayer.addMaxLandsToPlay(-3);
-                    }
-                };
-                Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);
-            }
-        };
-
-    }
-    private final static SpellAbility getExplore(final Card card) {
-        card.setSVar("PlayMain1", "TRUE");
-        return new Spell(card) {
-            private static final long serialVersionUID = 8377957584738695517L;
-
-            @Override
-            public boolean canPlayAI() {
-                // The computer should only play this card if it has at
-                // least
-                // one land in its hand. Because of the way the computer
-                // turn
-                // is structured, it will already have played its first
-                // land.
-                return Iterables.any(getActivatingPlayer().getCardsIn(ZoneType.Hand), CardPredicates.Presets.LANDS);
-            }
-
-            @Override
-            public void resolve() {
-                final Player thePlayer = card.getController();
-                thePlayer.addMaxLandsToPlay(1);
-
-                final Command untilEOT = new Command() {
-                    private static final long serialVersionUID = -2618916698575607634L;
-
-                    @Override
-                    public void execute() {
-                        thePlayer.addMaxLandsToPlay(-1);
-                    }
-                };
-                Singletons.getModel().getGame().getEndOfTurn().addUntil(untilEOT);
-
-                thePlayer.drawCard();
-            }
-        };
-    }*/
 
     private final static SpellAbility getWindfall(final Card card) {
         return new Spell(card) {
@@ -1352,10 +1245,7 @@ public class CardFactorySorceries {
 
         if (cardName.equals("Brilliant Ultimatum")) { card.addSpellAbility(getBrilliantUltimatum(card));
         } else if (cardName.equals("Global Ruin")) { card.addSpellAbility(getGlobalRuin(card));
-        } else if (cardName.equals("Haunting Echoes")) { card.addSpellAbility(getHauntingEchoes(card));
         } else if (cardName.equals("Balance")) { card.addSpellAbility(getBalance(card));
-        //} else if (cardName.equals("Summer Bloom")) { card.addSpellAbility(getSummerBloom(card));
-        //} else if (cardName.equals("Explore")) { card.addSpellAbility(getExplore(card));
         } else if (cardName.equals("Windfall")) { card.addSpellAbility(getWindfall(card));
         } else if (cardName.equals("Patriarch's Bidding")) { card.addSpellAbility(getPatriarchsBidding(card));
         } else if (cardName.equals("Leeches")) { card.addSpellAbility(getLeeches(card));

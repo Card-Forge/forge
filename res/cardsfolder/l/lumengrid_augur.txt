@@ -1,0 +1,15 @@
+Name:Lumengrid Augur
+ManaCost:3 U
+Types:Creature Vedalken Wizard
+Text:no text
+PT:2/2
+A:AB$ Draw | Cost$ 1 T | NumCards$ 1 | ValidTgts$ Player | TgtPrompt$ Select target player | SubAbility$ DBDiscard | SpellDescription$ Target player draws a card, then discards a card. If that player discards an artifact card this way, untap CARDNAME.
+SVar:DBDiscard:DB$ Discard | Defined$ Targeted | NumCards$ 1 | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBUntap
+SVar:DBUntap:DB$ Untap | Cost$ 0 | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Card.Artifact | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/lumengrid_augur.jpg
+SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/39.jpg
+Oracle:{1}, {T}: Target player draws a card, then discards a card. If that player discards an artifact card this way, untap Lumengrid Augur.
+End

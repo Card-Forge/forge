@@ -1,12 +1,11 @@
 package forge.card.abilityfactory.effects;
 
 import java.util.List;
-import com.google.common.collect.Iterables;
 
 import forge.Card;
-import forge.CardPredicates;
 import forge.Constant;
 import forge.CounterType;
+import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
@@ -20,24 +19,6 @@ import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
 public class ManaEffect extends SpellEffect {
-
-    /**
-     * <p>
-     * hasUrzaLands.
-     * </p>
-     * 
-     * @param p
-     *            a {@link forge.game.player.Player} object.
-     * @return a boolean.
-     */
-    private static boolean hasUrzaLands(final Player p) {
-        final List<Card> landsControlled = p.getCardsIn(ZoneType.Battlefield);
-        return Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Mine"))
-                && Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Tower"))
-                && Iterables.any(landsControlled, CardPredicates.nameEquals("Urza's Power Plant"));
-    }
-
-
 
     @Override
     public void resolve(SpellAbility sa) {
@@ -177,7 +158,7 @@ public class ManaEffect extends SpellEffect {
         }
 
         for (final Player player : tgtPlayers) {
-            abMana.produceMana(generatedMana(sa), player, sa);
+            abMana.produceMana(GameActionUtil.generatedMana(sa), player, sa);
         }
 
         // Only clear express choice after mana has been produced
@@ -201,93 +182,6 @@ public class ManaEffect extends SpellEffect {
         resolveDrawback(sa);
     }
 
-
-
-    /**
-     * <p>
-     * generatedMana.
-     * </p>
-     * 
-     * @param abMana
-     *            a {@link forge.card.spellability.AbilityMana} object.
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link java.lang.String} object.
-     */
-    private String generatedMana(final SpellAbility sa) {
-        // Calculate generated mana here for stack description and resolving
-
-        int amount = sa.hasParam("Amount") ? AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa) : 1;
-
-        AbilityManaPart abMana = sa.getManaPart();
-        String baseMana;
-        if (abMana.isComboMana()) {
-            baseMana = abMana.getExpressChoice();
-            if (baseMana.isEmpty()) {
-                baseMana = abMana.getOrigProduced();
-            }
-        }
-        else if (abMana.isAnyMana()) {
-            baseMana = abMana.getExpressChoice();
-            if (baseMana.isEmpty()) {
-                baseMana = "Any";
-            }
-        }
-        else {
-            baseMana = abMana.mana();
-        }
-
-        if (sa.hasParam("Bonus")) {
-            // For mana abilities that get a bonus
-            // Bonus currently MULTIPLIES the base amount. Base Amounts should
-            // ALWAYS be Base
-            int bonus = 0;
-            if (sa.getParam("Bonus").equals("UrzaLands")) {
-                if (hasUrzaLands(sa.getActivatingPlayer())) {
-                    bonus = Integer.parseInt(sa.getParam("BonusProduced"));
-                }
-            }
-
-            amount += bonus;
-        }
-
-        try {
-            if ((sa.getParam("Amount") != null) && (amount != Integer.parseInt(sa.getParam("Amount")))) {
-                sa.setUndoable(false);
-            }
-        } catch (final NumberFormatException n) {
-            sa.setUndoable(false);
-        }
-
-        final StringBuilder sb = new StringBuilder();
-        if (amount == 0) {
-            sb.append("0");
-        }
-        else if (abMana.isComboMana()) {
-            // amount is already taken care of in resolve method for combination mana, just append baseMana
-            sb.append(baseMana);
-        }
-        else {
-            try {
-                // if baseMana is an integer(colorless), just multiply amount
-                // and baseMana
-                final int base = Integer.parseInt(baseMana);
-                sb.append(base * amount);
-            } catch (final NumberFormatException e) {
-                for (int i = 0; i < amount; i++) {
-                    if (i != 0) {
-                        sb.append(" ");
-                    }
-                    sb.append(baseMana);
-                }
-            }
-        }
-        return sb.toString();
-    }
-
-
     /**
      * <p>
      * manaStackDescription.
@@ -305,7 +199,7 @@ public class ManaEffect extends SpellEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Add ").append(generatedMana(sa)).append(" to your mana pool.");
+        sb.append("Add ").append(GameActionUtil.generatedMana(sa)).append(" to your mana pool.");
         return sb.toString();
     }
 }

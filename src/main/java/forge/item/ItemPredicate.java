@@ -78,8 +78,7 @@ public abstract class ItemPredicate {
             return card instanceof PreconDeck;
         }
     };
-    
-    
+
     /**
      * The Class Presets.
      */

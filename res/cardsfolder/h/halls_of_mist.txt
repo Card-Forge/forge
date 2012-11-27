@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Land
 Text:no text
 K:Cumulative upkeep:1
-S:Mode$ Continuous | Affected$ Creature.attackedLastTurn | AddHiddenKeyword$ HIDDEN CARDNAME can't attack. | Description$ Creatures that attacked during their controller's last turn can't attack.
+S:Mode$ Continuous | Affected$ Creature.attackedLastTurn | AddHiddenKeyword$ CARDNAME can't attack. | Description$ Creatures that attacked during their controller's last turn can't attack.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/halls_of_mist.jpg

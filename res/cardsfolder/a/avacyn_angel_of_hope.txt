@@ -6,7 +6,7 @@ PT:8/8
 K:Flying
 K:Vigilance
 K:Indestructible
-S:Mode$ Continuous | Affected$ Permanent.Other+YouCtrl | AddHiddenKeyword$ HIDDEN Indestructible | Description$ CARDNAME and other permanents you control are indestructible.
+S:Mode$ Continuous | Affected$ Permanent.Other+YouCtrl | AddHiddenKeyword$ Indestructible | Description$ CARDNAME and other permanents you control are indestructible.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/avacyn_angel_of_hope.jpg
 SetInfo:AVR|Mythic|http://magiccards.info/scans/en/avr/6.jpg

@@ -144,7 +144,7 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblNextChallengeInWins, "span 2, gap 0 0 0 20px");
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(scrDuels, "w 88% - 175px!, pushy, growy");
-        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStats, "w 175px!, pushy, growy, gap 4% 4% 0 0, span 1 2");
+        VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStats, "w 185px!, pushy, growy, gap 4% 4% 0 0, span 1 2");
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(btnStart, "gap 0 0 50px 50px, ax center");
 

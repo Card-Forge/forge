@@ -2,7 +2,7 @@ Name:Grand Melee
 ManaCost:3 R
 Types:Enchantment
 Text:no text
-S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ HIDDEN CARDNAME blocks each turn if able. & HIDDEN CARDNAME attacks each turn if able. | Description$ All creatures attack each turn if able. All creatures block each turn if able.
+S:Mode$ Continuous | Affected$ Creature | AddHiddenKeyword$ CARDNAME blocks each turn if able. & CARDNAME attacks each turn if able. | Description$ All creatures attack each turn if able. All creatures block each turn if able.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grand_melee.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/211.jpg

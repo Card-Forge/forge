@@ -3,11 +3,11 @@ ManaCost:2 W W
 Types:Enchantment
 Text:no text
 T:Mode$ Phase | Phase$ Upkeep | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigExile | TriggerDescription$ At the beginning of each upkeep, you may exile target creature card from your graveyard. If you do, put a token onto the batttlefield that's a copy of that card except it's a Spirit in addition to its other types. Exile it at the beginning of the next end step.
-SVar:TrigExile:AB$ChangeZone | Cost$ 0 | RememberChanged$ True | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature.YouCtrl | ChangeNum$ 1 | SubAbility$ DBCopy
-SVar:DBCopy:DB$CopyPermanent | Cost$ 0 | Defined$ Remembered | SubAbility$ DBAnimate | SpellDescription$ Put a token onto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
+SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | RememberChanged$ True | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Creature.YouCtrl | ChangeNum$ 1 | SubAbility$ DBCopy
+SVar:DBCopy:DB$ CopyPermanent | Cost$ 0 | Defined$ Remembered | SubAbility$ DBAnimate | SpellDescription$ Put a token onto the battlefield that's a copy of the exiled card. It gains haste. Exile it at the beginning of the next end step.
 SVar:DBAnimate:DB$ Animate | Cost$ 0 | Defined$ Clones | Types$ Spirit | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Cost$ 0 | Defined$ Clones |  KW$ HIDDEN At the beginning of the end step, exile CARDNAME. | Permanent$ True | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/seance.jpg
 SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/20.jpg
 Oracle:At the beginning of each upkeep, you may exile target creature card from your graveyard. If you do, put a token onto the battlefield that's a copy of that card except it's a Spirit in addition to its other types. Exile it at the beginning of the next end step.

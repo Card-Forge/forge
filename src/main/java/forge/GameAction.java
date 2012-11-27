@@ -1220,8 +1220,8 @@ public class GameAction {
         }
         */
 
-        this.destroyLegendaryCreatures();
-        this.destroyPlaneswalkers();
+        this.handleLegendRule();
+        this.handlePlaneswalkerRule();
 
         if (!refreeze) {
             game.getStack().unfreezeStack();
@@ -1233,7 +1233,7 @@ public class GameAction {
      * destroyPlaneswalkers.
      * </p>
      */
-    private void destroyPlaneswalkers() {
+    private void handlePlaneswalkerRule() {
         // get all Planeswalkers
         final List<Card> list = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.PLANEWALKERS);
 
@@ -1243,10 +1243,9 @@ public class GameAction {
 
             if (c.getCounters(CounterType.LOYALTY) <= 0) {
                 Singletons.getModel().getGame().getAction().moveToGraveyard(c);
+                // Play the Destroy sound
+                Singletons.getModel().getGame().getEvents().post(new CardDestroyedEvent());
             }
-
-            // Play the Destroy sound
-            Singletons.getModel().getGame().getEvents().post(new CardDestroyedEvent());
 
             final ArrayList<String> types = c.getType();
             for (final String type : types) {
@@ -1270,7 +1269,7 @@ public class GameAction {
      * destroyLegendaryCreatures.
      * </p>
      */
-    private void destroyLegendaryCreatures() {
+    private void handleLegendRule() {
         final List<Card> a = CardLists.getType(game.getCardsIn(ZoneType.Battlefield), "Legendary");
         if (a.isEmpty() || game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noLegendRule)) {
             return;

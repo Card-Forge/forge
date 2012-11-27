@@ -101,7 +101,7 @@ public abstract class AnimateEffectBase extends SpellEffect {
         c.addChangedCardKeywords(keywords, removeKeywords, sa.hasParam("RemoveAllAbilities"), timestamp);
 
         for (final String k : hiddenKeywords) {
-            c.addExtrinsicKeyword(k);
+            c.addHiddenExtrinsicKeyword(k);
         }
 
         final long colorTimestamp = c.addColor(colors, c, !sa.hasParam("OverwriteColors"), true);
@@ -133,7 +133,7 @@ public abstract class AnimateEffectBase extends SpellEffect {
      *            a long.
      */
     void doUnanimate(final Card c, SpellAbility sa, final String colorDesc,
-            final ArrayList<String> addedKeywords, final ArrayList<SpellAbility> addedAbilities,
+            final ArrayList<String> hiddenKeywords, final ArrayList<SpellAbility> addedAbilities,
             final ArrayList<Trigger> addedTriggers, final long colorTimestamp, final boolean givesStAbs,
             final ArrayList<SpellAbility> removedAbilities, final long timestamp) {
 
@@ -153,8 +153,8 @@ public abstract class AnimateEffectBase extends SpellEffect {
 
         c.removeColor(colorDesc, c, !sa.hasParam("OverwriteColors"), colorTimestamp);
 
-        for (final String k : addedKeywords) {
-            c.removeExtrinsicKeyword(k);
+        for (final String k : hiddenKeywords) {
+            c.removeHiddenExtrinsicKeyword(k);
         }
 
         for (final SpellAbility saAdd : addedAbilities) {

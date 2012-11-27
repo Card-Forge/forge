@@ -164,7 +164,7 @@ public class TriggerSpellAbilityCast extends Trigger {
                         + " of the next cleanup step.") && !this.getHostCard().getController().couldCastSorcery(spellAbility)) {
                     boolean instantmentCast = true;
                     // for these cards the trigger must only fire if using their own ability to cast at instant speed
-                    if (this.getHostCard().hasKeyword("Flash") || this.getHostCard().hasKeyword("HIDDEN Flash")
+                    if (this.getHostCard().hasKeyword("Flash")
                             || this.getHostCard().getController().hasKeyword("You may cast nonland cards as though they had flash.")) {
                         instantmentCast = false;
                     }

@@ -7,22 +7,22 @@ package forge.game.player;
  *
  */
 public class LobbyPlayer {
-    
-    final protected PlayerType type;
+
+    protected final PlayerType type;
     public final PlayerType getType() {
         return type;
     }
-    
 
 
-    final protected String name;
+
+    protected final String name;
     // string with picture is more important than avatar index
     protected String picture;
     private int avatarIndex = -1;
-    
-    public LobbyPlayer(PlayerType type, String name)
-    {
-        this.type = type; 
+
+    public LobbyPlayer(PlayerType type, String name) {
+
+        this.type = type;
         this.name = name;
     }
 
@@ -53,20 +53,26 @@ public class LobbyPlayer {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         LobbyPlayer other = (LobbyPlayer) obj;
         if (name == null) {
-            if (other.name != null)
+            if (other.name != null) {
                 return false;
-        } else if (!name.equals(other.name))
+            }
+        } else if (!name.equals(other.name)) {
             return false;
-        if (type != other.type)
+        }
+        if (type != other.type) {
             return false;
+        }
         return true;
     }
 
@@ -75,6 +81,6 @@ public class LobbyPlayer {
     }
 
     public void setAvatarIndex(int avatarIndex) {
-        this.avatarIndex = avatarIndex; 
+        this.avatarIndex = avatarIndex;
     }
 }

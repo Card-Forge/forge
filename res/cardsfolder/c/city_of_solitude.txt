@@ -2,10 +2,10 @@ Name:City of Solitude
 ManaCost:2 G
 Types:Enchantment
 Text:no text
-S:Mode$ CantBeCast | ValidCard$ Card | PlayerTurn$ True | Caster$ Opponent | Description$ Players can cast spells and activate abilities only during their own turns.
-S:Mode$ CantBeCast | ValidCard$ Card | OpponentTurn$ True | Caster$ You
-S:Mode$ CantBeActivated | ValidCard$ Card | PlayerTurn$ True | Activator$ Opponent
-S:Mode$ CantBeActivated | ValidCard$ Card | OpponentTurn$ True | Activator$ You
+S:Mode$ CantBeCast | ValidCard$ Card | Condition$ PlayerTurn | Caster$ Opponent | Description$ Players can cast spells and activate abilities only during their own turns.
+S:Mode$ CantBeCast | ValidCard$ Card | Condition$ NotPlayerTurn | Caster$ You
+S:Mode$ CantBeActivated | ValidCard$ Card | Condition$ PlayerTurn | Activator$ Opponent
+S:Mode$ CantBeActivated | ValidCard$ Card | Condition$ NotPlayerTurn | Activator$ You
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://wizards.com/global/images/magic/general/city_of_solitude.jpg

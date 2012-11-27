@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Creature Elf
 Text:no text
 PT:1/2
-S:Mode$ Continuous | Affected$ Creature.tapped+YouCtrl | AddKeyword$ Hexproof | OpponentTurn$ True | Description$ As long as it's not your turn, tapped creatures you control have hexproof.
+S:Mode$ Continuous | Affected$ Creature.tapped+YouCtrl | AddKeyword$ Hexproof | Condition$ NotPlayerTurn | Description$ As long as it's not your turn, tapped creatures you control have hexproof.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/oak_street_innkeeper.jpg
 SetInfo:RTR|Uncommon|http://magiccards.info/scans/en/rtr/131.jpg

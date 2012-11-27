@@ -4,7 +4,7 @@ Types:Artifact
 Text:no text
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
 A:AB$ Animate | Cost$ 4 R | Defined$ Self | Power$ 4 | Toughness$ 4 | Types$ Artifact,Creature,Giant | Colors$ Red | Keywords$ Trample | SpellDescription$ CARDNAME becomes a 4/4 red Giant artifact creature with trample until end of turn.
-S:Mode$ Continuous | Affected$ Creature.Self | AddHiddenKeyword$ HIDDEN CARDNAME can block an additional creature. | Description$ As long as CARDNAME is a creature, it can block an additional creature.
+S:Mode$ Continuous | Affected$ Creature.Self | AddHiddenKeyword$ CARDNAME can block an additional creature. | Description$ As long as CARDNAME is a creature, it can block an additional creature.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foriysian_totem.jpg

@@ -44,9 +44,9 @@ public class ReadDraftRankings {
     private Map<String, Map<String, Integer>> readFile(final File file) {
 
         final Map<String, Map<String, Integer>> map = new HashMap<String, Map<String, Integer>>();
-        for( String line : FileUtil.readFile(file)) {
+        for (String line : FileUtil.readFile(file)) {
             // stop reading if end of file or blank line is read
-            if(line == null || line.length() == 0) {
+            if (line == null || line.length() == 0) {
                 break;
             }
 
@@ -58,7 +58,7 @@ public class ReadDraftRankings {
             final String name = s[1].trim().replaceAll("-", " ").replaceAll("[^A-Za-z ]", "");
             // final String rarity = s[2].trim();
             final String edition = s[3].trim();
-    
+
             try {
                 final int rank = Integer.parseInt(rankStr);
                 if (!map.containsKey(edition)) {
@@ -73,8 +73,8 @@ public class ReadDraftRankings {
             } catch (NumberFormatException nfe) {
                 Log.warn("NumberFormatException: " + nfe.getMessage());
             }
-        } 
-        
+        }
+
         return map;
     } // readFile()
 
