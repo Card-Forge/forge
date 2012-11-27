@@ -1923,7 +1923,8 @@ public class Upkeep extends Phase {
      * </p>
      */
     private static void upkeepOathOfDruids() {
-        final List<Card> oathList = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Oath of Druids"));
+        final List<Card> oathList = CardLists.filter(Singletons.getModel().getGame()
+                .getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Oath of Druids"));
         if (oathList.isEmpty()) {
             return;
         }
@@ -1936,7 +1937,7 @@ public class Upkeep extends Phase {
                 final Ability ability = new Ability(oath, "0") {
                     @Override
                     public void resolve() {
-                        final List<Card> libraryList = player.getCardsIn(ZoneType.Library);
+                        final List<Card> libraryList = new ArrayList<Card>(player.getCardsIn(ZoneType.Library));
                         final PlayerZone battlefield = player.getZone(ZoneType.Battlefield);
                         boolean oathFlag = true;
 
@@ -1966,9 +1967,7 @@ public class Upkeep extends Phase {
 
                             if (oathFlag) {
                                 final List<Card> cardsToReveal = new ArrayList<Card>();
-                                final int max = libraryList.size();
-                                for (int i = 0; i < max; i++) {
-                                    final Card c = libraryList.get(i);
+                                for (final Card c : libraryList) {
                                     cardsToReveal.add(c);
                                     if (c.isCreature()) {
                                         Singletons.getModel().getGame().getAction().moveTo(battlefield, c);
