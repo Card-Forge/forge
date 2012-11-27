@@ -57,6 +57,7 @@ import forge.game.GlobalRuleChange;
 import forge.game.event.CardDiscardedEvent;
 import forge.game.event.DrawCardEvent;
 import forge.game.event.LandPlayedEvent;
+import forge.game.event.LifeLossEvent;
 import forge.game.event.PoisonCounterEvent;
 import forge.game.event.ShuffleEvent;
 import forge.game.event.SpellResolvedEvent;
@@ -411,6 +412,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         if (toLose > 0) {
             this.subtractLife(toLose);
             lifeLost = toLose;
+            Singletons.getModel().getGame().getEvents().post(new LifeLossEvent());
             this.updateObservers();
         } else if (toLose == 0) {
             // Rule 118.4
