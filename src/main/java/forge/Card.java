@@ -6700,6 +6700,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!this.hasLevelUp()) {
                 return false;
             }
+        } else if (property.startsWith("DrawnThisTurn")) {
+          if (!this.getDrawnThisTurn()) {
+              return false;
+          }
         } else if (property.startsWith("enteredBattlefieldThisTurn")) {
             if (!(this.getTurnInZone() == Singletons.getModel().getGame().getPhaseHandler().getTurn())) {
                 return false;
