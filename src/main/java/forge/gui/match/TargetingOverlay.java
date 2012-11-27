@@ -89,8 +89,8 @@ public enum TargetingOverlay {
                 activePanel = null;
                 for (CField f : CMatchUI.SINGLETON_INSTANCE.getFieldControls()) {
                     cardPanels.addAll(f.getView().getTabletop().getCardPanels());
-                    List<CardPanel> cPanel = f.getView().getTabletop().getCardPanels();
-                    for (CardPanel c : cPanel) {
+                    List<CardPanel> cPanels = f.getView().getTabletop().getCardPanels();
+                    for (CardPanel c : cPanels) {
                         if (c.isSelected()) {
                             activePanel = c;
                         }
