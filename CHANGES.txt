@@ -112,7 +112,6 @@ Fixes/Features:
 - Minor text change
 - CheckStyle.
 - Vanguard: added AffectedZone parameter to Birds of Paradise Avatar
-- Added Shell of the Last Kappa
 - ChangeZone can now remember cards moved from the stack
 - CheckStyle
 - The AI can now use Icy Prison.
@@ -272,6 +271,51 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 
 
+Added the following Vanguard Avatars:
+
+Arcbound Overseer Avatar
+Ashling the Pilgrim Avatar
+Ashnod
+Barrin
+Birds of Paradise Avatar
+Chronatog Avatar
+Crovax
+Dauntless Escort Avatar
+Diamond Faerie Avatar
+Eladamri
+Eladamri, Lord of Leaves Avatar
+Erhnam Djinn Avatar
+Ertai
+Etched Oracle Avatar
+Fallen Angel Avatar
+Gerrard
+Gix
+Greven il-Vec
+Grinning Demon Avatar
+Hanna
+Karn
+Lyna
+Maraxus
+Mishra
+Multani
+Oracle
+Orim
+Rofellos
+Selenia
+Serra
+Sidar Kondo
+Sisay
+Sliver Queen, Brood Mother
+Squee
+Starke
+Tahngarth
+Takara
+Tawnos
+Titania
+Urza
+Volrath
+Xantcha
+
 Added the following cards:
 
 Island Sanctuary
@@ -319,6 +363,7 @@ Righteous Indignation
 Saprazzan Breaker
 Shoving Match
 Aladdin's Lamp
+Shell of the Last Kappa
 
 
 end
