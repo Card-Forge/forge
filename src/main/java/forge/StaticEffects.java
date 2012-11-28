@@ -160,7 +160,7 @@ public class StaticEffects {
         // modify players
         for (final Player p : affectedPlayers) {
             p.setUnlimitedHandSize(false);
-            p.setMaxHandSize(7);
+            p.setMaxHandSize(p.getStartingHandSize());
 
             if (params.containsKey("AddKeyword")) {
                 addKeywords = params.get("AddKeyword").split(" & ");

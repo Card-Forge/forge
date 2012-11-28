@@ -107,6 +107,9 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
 
     /** The max hand size. */
     private int maxHandSize = 7;
+    
+    /** Starting hand size */
+    private int startingHandSize = 7;
 
     /** The unlimited hand size. */
     private boolean unlimitedHandSize = false;
@@ -3018,6 +3021,17 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
 
         return other.getType() != this.getType();
+    }
+    
+    
+    public int getStartingHandSize()
+    {
+        return this.startingHandSize;
+    }
+    
+    public void setStartingHandSize(int shs)
+    {
+        this.startingHandSize = shs;
     }
 
 }

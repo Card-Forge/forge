@@ -121,7 +121,9 @@ public class GameNew {
         for( Entry<Player, PlayerStartConditions> p : playersConditions.entrySet() ) {
             final Player player = p.getKey();
             player.setStartingLife(p.getValue().getStartingLife());
-            player.setMaxHandSize(p.getValue().getStartingHand());
+            int hand = p.getValue().getStartingHand();
+            player.setMaxHandSize(hand);
+            player.setStartingHandSize(hand);
             // what if I call it for AI player?
             PlayerZone bf = player.getZone(ZoneType.Battlefield);
             Iterable<Card> onTable = p.getValue().getCardsOnBattlefield(); 
