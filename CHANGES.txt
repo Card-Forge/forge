@@ -17,7 +17,7 @@ http://www.freesound.org/browse/
 
 You should note that sound files can be large sized and we would like to avoid this if possible. A good size to shoot for would be 50 K or less. There is a freeware sound editor that may have versions for all operating systems. This app is named Audacity.
 
-Some initial work is being done in an effort to implement a Vanguard mode. This is a work in progress, it is not yet finished and this work is not yet included in the beta or the snapshot releases.
+Some initial work is being done in an effort to implement a Vanguard mode. This is a work in progress, it is not yet finished. This version includes the new Vanguard mode. The older match layout files are incompatible with the new Vanguard mode. The original match_default.xml, match_preferred.xml and the match_preferred.xml saved to a different name files need to be deleted and can no longer be used. You can keep your editor_preferred.xml file. But you will have to setup your match view panels using the new match_default.xml file.
 
 The visuals for targeting arrows has been improved and looks better, with an adaptation of the arrow drawing code from MAGE. Thanks to the MAGE team for permission for the adaptation.
 
@@ -264,6 +264,36 @@ Fixes/Features:
 - Removing unnecessary "HIDDEN" strings (WIP).
 - Removing unnecessary "HIDDEN" strings (WIP).
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Variants:Fixed exile origins for some effects
+- CheckStyle.
+- Fixed MaxhandSize < 0 case in InputCleanup.
+- Fixed Oath of Druids.
+- Sound System: Added a previously missed link for the "Life Loss" sound event (now the sound will play during certain damage dealing effect resolutions which were previously missed).
+- Sound System: TODO point removed.
+- Targeting Overlay: minor stylistic fix in the code.
+- Moved generatedMana from ManaEffect to GameActionUtil to use it for the AI to predict what a mana ability will produce (it seems to be the only function that is actually up to date).
+- Removed getProducedMana from AbilityManaPart (it wasn't really functional anyway).
+- Merged r18371-r18427 from trunk into Variants
+- Merged Variants into trunk. You may need to delete match_preferred.xml
+- Convert Lich to Script
+- Convert Phylactery Lich to script
+- Converted Noviken Heart of Progress to script
+- Rechanged ValidGrave to Valid<AnyZone> count method that was lost in the merge.
+- Fixed description for Titania's Song
+- Updated cardTemplateScript.py for variants
+- Updated CHANGES.txt
+- Fixed Jace, Architect of Thought's first ability
+- Added some AI code for casting Bonfire of the Damned via Miracle.
+- Changed Gather Specimens to a replacement instead of triggered effect
+- Fixed some triggers for use from command zone (WIP)
+- Fixed some triggers for use from command zone (Done)
+- Minor script changes
+- Made player tabs in Vanguard setup more descriptive
+- Updated tooltip text for hand icon so that it indicates the player's maximum hand size.
+- Fixed Vanguard player tab names when re-adding players in setup
+- Fixed doTriggerAINoCost in CounterAI when the stack is empty.
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -315,6 +345,7 @@ Titania
 Urza
 Volrath
 Xantcha
+
 
 Added the following cards:
 
