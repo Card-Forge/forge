@@ -4,7 +4,7 @@ Types:Instant
 Text:no text
 A:SP$ Regenerate | Cost$ 3 BG | ValidTgts$ Creature | TgtPrompt$ Select target creature | SubAbility$ TrigGorgonEffect | SpellDescription$ Regenerate target creature. At end of combat, destroy all creatures that blocked or were blocked by that creature this turn.
 SVar:TrigGorgonEffect:DB$ Effect | Name$ Gaze of the Gorgon Effect | Triggers$ DelGorgonTrig | SVars$ TrigGorgonDestroy | RememberObjects$ Targeted
-SVar:DelGorgonTrig:Mode$ Phase | Phase$ EndCombat | TriggerZones$ Battlefield | ValidPlayer$ Player | Execute$ TrigGorgonDestroy | TriggerDescription$ At end of combat, destroy all creatures that blocked or were blocked by that creature this turn.
+SVar:DelGorgonTrig:Mode$ Phase | Phase$ EndCombat | TriggerZones$ Command | ValidPlayer$ Player | Execute$ TrigGorgonDestroy | TriggerDescription$ At end of combat, destroy all creatures that blocked or were blocked by that creature this turn.
 SVar:TrigGorgonDestroy:AB$ DestroyAll | Cost$ 0 | ValidCards$ Creature.blockedRemembered,Creature.blockedByRemembered
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gaze_of_the_gorgon.jpg

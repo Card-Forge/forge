@@ -6,9 +6,9 @@ A:SP$ Effect | Cost$ 2 B B | Name$ Shriveling Rot Effect | Triggers$ Trig1 | SVa
 A:SP$ Effect | Cost$ 2 B B | Name$ Shriveling Rot Effect | Triggers$ Trig2 | SVars$ SVar2,X | CostDesc$ or until end of turn, | SpellDescription$  whenever a creature is put into a graveyard from the battlefield, that creature's controller loses life equal to its toughness.
 A:SP$ Effect | Cost$ 4 B B B | Name$ Shriveling Rot Effect | Triggers$ Trig1,Trig2 | SVars$ SVar1,SVar2,X | CostDesc$ Entwine 2B | NonBasicSpell$ True | SpellDescription$ (Choose both if you pay the entwine cost.)
 SVar:Trig1:Mode$ DamageDone | ValidTarget$ Creature | Execute$ SVar1 | TriggerDescription$ Whenever a creature is dealt damage, destroy it.
-SVar:SVar1:AB$Destroy | Cost$ 0 | Defined$ TriggeredTarget
+SVar:SVar1:AB$ Destroy | Cost$ 0 | Defined$ TriggeredTarget
 SVar:Trig2:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature | Execute$ SVar2 | TriggerDescription$ Whenever a creature is put into a graveyard from the battlefield, that creature's controller loses life equal to its toughness.
-SVar:SVar2:AB$LoseLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ X | References$ X
+SVar:SVar2:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredCardController | LifeAmount$ X | References$ X
 SVar:X:TriggeredCard$CardToughness
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
