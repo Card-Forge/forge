@@ -21,7 +21,7 @@ public class CounterAi extends SpellAiLogic {
         boolean toReturn = true;
         final Cost abCost = sa.getPayCosts();
         final Card source = sa.getSourceCard();
-        if (Singletons.getModel().getGame().getStack().size() < 1) {
+        if (Singletons.getModel().getGame().getStack().isEmpty()) {
             return false;
         }
 
@@ -110,6 +110,9 @@ public class CounterAi extends SpellAiLogic {
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
+            if (Singletons.getModel().getGame().getStack().isEmpty()) {
+                return false;
+            }
             final SpellAbility topSA = Singletons.getModel().getGame().getStack().peekAbility();
             if (!CardFactoryUtil.isCounterableBy(topSA.getSourceCard(), sa) || topSA.getActivatingPlayer().isComputer()) {
                 return false;
