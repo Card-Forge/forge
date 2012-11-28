@@ -1,1 +1,1 @@
-Index:1|Name:Shandalar|Dir:shandalar|Sets:2ED, ARN, ATQ, 3ED, LEG, DRK, FEM, 4ED, ICE, CHR, HML, ALL|Banned:Chaos Orb; Falling Star
+Index:1|Name:Shandalar|Dir:shandalar|Sets:2ED, ARN, ATQ, 3ED, LEG, DRK, 4ED|Banned:Chaos Orb; Falling Star
