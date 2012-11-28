@@ -77,54 +77,51 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
 
     private final Iterable<CardPrinted> allAvatars = Iterables.filter(CardDb.instance().getAllNonTraditionalCards(), CardPrinted.Predicates.type("Vanguard"));
     private final List<CardPrinted> allAiAvatars = new ArrayList<CardPrinted>();
-    
+
     //////////////////////////////
-        
+
     private final JTabbedPane tabPane = new JTabbedPane();
     private final List<FPanel> playerPanels = new ArrayList<FPanel>();
     private final List<FDeckChooser> deckChoosers = new ArrayList<FDeckChooser>();
     private final List<FList> avatarLists = new ArrayList<FList>();
-    
+
     private final List<JRadioButton> fieldRadios = new ArrayList<JRadioButton>();
     private final ButtonGroup grpFields = new ButtonGroup();
     private int currentNumTabsShown = 8;
-    
+
     //////////////////////////////
-    
+
     private VSubmenuVanguard() {
-        
+
         lblTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         Vector<Object> humanListData = new Vector<Object>();
         Vector<Object> aiListData = new Vector<Object>();
         humanListData.add("Random");
         aiListData.add("Random");
-        for(CardPrinted cp : allAvatars)
-        {
+        for (CardPrinted cp : allAvatars) {
             humanListData.add(cp);
-            if(!cp.getCard().getRemAIDecks())
-            {
+            if (!cp.getCard().getRemAIDecks()) {
                 aiListData.add(cp);
                 allAiAvatars.add(cp);
             }
         }
-        
+
         //This listener will look for any of the radio buttons being selected
         //and call the method that shows/hides tabs appropriately.
         ItemListener iListener = new ItemListener() {
 
             @Override
             public void itemStateChanged(ItemEvent arg0) {
-                FRadioButton aButton = (FRadioButton)arg0.getSource();
-                
-                if(arg0.getStateChange() == ItemEvent.SELECTED)
-                {
+                FRadioButton aButton = (FRadioButton) arg0.getSource();
+
+                if (arg0.getStateChange() == ItemEvent.SELECTED) {
                     changeTabs(Integer.parseInt(aButton.getText()));
                 }
             }
-            
+
         };
-        
+
         //Create all 8 player settings panel
         FRadioButton tempRadio = null;
         FPanel tempPanel;
@@ -143,40 +140,44 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
             grpFields.add(tempRadio);
             tempRadio.setSelected(true);
             tempRadio.addItemListener(iListener);
-            radioPane.add(tempRadio,"wrap");
+            radioPane.add(tempRadio, "wrap");
         }
         settingsPanel.add(radioPane);
         settingsPanel.add(new FLabel.Builder().text("Set number of opponents").build());
-        tabPane.add("Settings",settingsPanel);
-        
+        tabPane.add("Settings", settingsPanel);
+
         //Player panels (Human + 7 AIs)
-        for (int i = 0; i < 8;i++) {
+        for (int i = 0; i < 8; i++) {
             tempPanel = new FPanel();
             tempPanel.setLayout(new MigLayout("insets 0, gap 0 , wrap 2"));
-            
+
             tempChooser = new FDeckChooser("Select deck:", i == 0 ? PlayerType.HUMAN : PlayerType.COMPUTER);
             tempChooser.initialize();
-            
+
             tempList = new FList();
-            
+
             tempList.setListData(i == 0 ? humanListData : aiListData);
             tempList.setSelectedIndex(0);
             tempList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-            
+
             deckChoosers.add(tempChooser);
             avatarLists.add(tempList);
-            
-            tempPanel.add(tempChooser,"span 1 2, w 44%!, gap 0 0 20px 20px, growy, pushy");
-            
+
+            tempPanel.add(tempChooser, "span 1 2, w 44%!, gap 0 0 20px 20px, growy, pushy");
+
             tempPanel.add(new FLabel.Builder().text("Select Avatar:").build());
-            
+
             JScrollPane scrAvatar = new FScrollPane(tempList, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-            tempPanel.add(scrAvatar,"h 90%!");
-            
+            tempPanel.add(scrAvatar, "h 90%!");
+
             playerPanels.add(tempPanel);
-            tabPane.add("Player " + (i+1), tempPanel);
+            if (i == 0) {
+                tabPane.add("Human", tempPanel);
+            } else {
+                tabPane.add("Opponent " + i, tempPanel);
+            }
         }
-        
+
         final String strCheckboxConstraints = "w 200px!, h 30px!, gap 0 20px 0 0";
         pnlStart.setOpaque(false);
         pnlStart.add(cbSingletons, strCheckboxConstraints);
@@ -184,24 +185,19 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
         pnlStart.add(cbArtifacts, strCheckboxConstraints);
         pnlStart.add(cbRemoveSmall, strCheckboxConstraints);
     }
-    
-    private void changeTabs(int toShow)
-    {
-        if(toShow < currentNumTabsShown)
-        {
-            for(int i=currentNumTabsShown;i>toShow+1;i--)
-            {
+
+    private void changeTabs(int toShow) {
+        if (toShow < currentNumTabsShown) {
+            for (int i = currentNumTabsShown; i > toShow + 1; i--) {
                 tabPane.remove(i);
             }
-            currentNumTabsShown = tabPane.getComponentCount()-1;
+            currentNumTabsShown = tabPane.getComponentCount() - 1;
         }
-        else
-        {
-            for(int i=currentNumTabsShown;i<=toShow;i++)
-            {
-                tabPane.add("Player " + (i+1),playerPanels.get(i));
+        else {
+            for (int i = currentNumTabsShown; i <= toShow; i++) {
+                tabPane.add("Player " + (i + 1), playerPanels.get(i));
             }
-            currentNumTabsShown = tabPane.getComponentCount()-1;
+            currentNumTabsShown = tabPane.getComponentCount() - 1;
         }
     }
 
@@ -211,8 +207,8 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
     @Override
     public EMenuGroup getGroupEnum() {
         return EMenuGroup.VARIANT;
-    }    
-    
+    }
+
     /* (non-Javadoc)
      * @see forge.gui.home.IVSubmenu#getMenuTitle()
      */
@@ -238,19 +234,18 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap 1, ax right"));
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 80%!, h 40px!, gap 0 0 15px 15px, span 2, ax right");
-        
-        for(FDeckChooser fdc : deckChoosers)
-        {
+
+        for (FDeckChooser fdc : deckChoosers) {
             fdc.populate();
-        }        
-        
+        }
+
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(tabPane, "gap 0 0 50px 50px, growx, growy");
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlStart, "span 1, ax center");
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().revalidate();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().repaintSelf();
-        
+
     }
 
 
@@ -258,7 +253,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
     public JButton getBtnStart() {
         return this.btnStart;
     }
-    
+
 
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbSingletons() {
@@ -316,23 +311,20 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
     public DragCell getParentCell() {
         return parentCell;
     }
-    
+
     /**
      * 
      * @return a deckchooser for every player
      */
-    public List<FDeckChooser> getDeckChoosers()
-    {
+    public List<FDeckChooser> getDeckChoosers() {
         return deckChoosers;
     }
-    
-    public List<FList> getAvatarLists()
-    {
+
+    public List<FList> getAvatarLists() {
         return avatarLists;
     }
-    
-    public int getNumPlayers()
-    {
+
+    public int getNumPlayers() {
         return currentNumTabsShown;
     }
 
