@@ -2,9 +2,9 @@ Name:Gather Specimens
 ManaCost:3 U U U
 Types:Instant
 Text:no text
-A:SP$ Effect | Cost$ 3 U U U | Name$ Gather Specimens Effect | Triggers$ TrigChangeController | SVars$ TrigGainControl | SpellDescription$ If a creature would enter the battlefield under an opponent's control this turn, it enters the battlefield under your control instead.
-SVar:TrigChangeController:Mode$ ChangesZone | ValidCard$ Creature.YouDontCtrl | Execute$ TrigGainControl | Static$ True | TriggerZones$ Battlefield | TriggerDescription$ If a creature would enter the battlefield under an opponent's control this turn, it enters the battlefield under your control instead.
-SVar:TrigGainControl:AB$ GainControl | Cost$ 0 | Defined$ TriggeredCard | Origin$ Any | Destination$ Battlefield | NewController$ You
+A:SP$ Effect | Cost$ 3 U U U | Name$ Gather Specimens Effect | ReplacementEffects$ OppCreatEnters | SVars$ ETBYourCtrl | SpellDescription$ If a creature would enter the battlefield under an opponent's control this turn, it enters the battlefield under your control instead.
+SVar:OppCreatEnters:Event$ Moved | Destination$ Battlefield | ValidCard$ Creature.YouDontCtrl | ReplaceWith$ ETBYourCtrl | Description$ If a creature would enter the battlefield under an opponent's control this turn, it enters the battlefield under your control instead.
+SVar:ETBYourCtrl:AB$ ChangeZone | Cost$ 0 | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard | GainControl$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gather_specimens.jpg
