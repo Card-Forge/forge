@@ -1,11 +1,21 @@
 Name:Lich
 ManaCost:B B B B
 Types:Enchantment
-Text:As CARDNAME enters the battlefield, you lose life equal to your life total.\r\nWhenever you're dealt damage, sacrifice that many nontoken permanents. If you can't, you lose the game.\r\nWhen CARDNAME is put into a graveyard from the battlefield, you lose the game.
+Text:no text
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Static$ True | Execute$ TrigLoseLife | TriggerDescription$ As CARDNAME enters the battlefield, you lose life equal to your life total.
+SVar:TrigLoseLife:DB$LoseLife | Cost$ 0 | LifeAmount$ LifeTotal
+SVar:LifeTotal:Count$YourLifeTotal
 S:Mode$ Continuous | Affected$ You | AddKeyword$ You don't lose the game for having 0 or less life. | Description$ You don't lose the game for having 0 or less life.
 R:Event$ GainLife | ActiveZones$ Battlefield | ValidPlayer$ You | ReplaceWith$ Draw | Description$ If you would gain life, draw that many cards instead.
 SVar:Draw:AB$Draw | Cost$ 0 | Defined$ You | NumCards$ X | References$ X
 SVar:X:ReplaceCount$LifeGained
+T:Mode$ DamageDone | ValidTarget$ You | TriggerZones$ Battlefield | Execute$ TrigLoseOrSac | TriggerDescription$ Whenever you're dealt damage, sacrifice that many nontoken permanents. If you can't, you lose the game.
+SVar:TrigLoseOrSac:DB$ LosesGame | Defined$ You | ConditionCheckSVar$ PermanentsToSac | ConditionSVarCompare$ GTY | SubAbility$ DBSacrificePerm
+SVar:DBSacrificePerm:DB$Sacrifice | Amount$ PermanentsToSac | SacValid$ Permanent.nontoken | References$ PermanentsToSac | ConditionCheckSVar$ PermanentsToSac | ConditionSVarCompare$ LEY
+SVar:PermanentsToSac:TriggerCount$DamageAmount
+SVar:Y:Count$Valid Permanent.nontoken+YouCtrl
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigLose | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, you lose the game.
+SVar:TrigLose:DB$ LosesGame | Defined$ You
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lich.jpg

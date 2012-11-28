@@ -7,12 +7,10 @@ import com.google.common.collect.Iterables;
 import forge.Card;
 
 import forge.CardLists;
-import forge.Command;
 import forge.Singletons;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
-import forge.game.GameLossReason;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -121,59 +119,6 @@ class CardFactoryEnchantments {
 
             nightSoil.setAfterPayMana(soilTarget);
             card.addSpellAbility(nightSoil);
-        } // *************** END ************ END **************************
-
-        // *************** START *********** START **************************
-        else if (cardName.equals("Lich")) {
-            final SpellAbility loseAllLife = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    final int life = card.getController().getLife();
-                    card.getController().loseLife(life);
-                }
-            };
-
-            final Command intoPlay = new Command() {
-                private static final long serialVersionUID = 1337794055075168785L;
-
-                @Override
-                public void execute() {
-
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append(cardName).append(" - ").append(card.getController());
-                    sb.append(" loses life equal to his or her life total.");
-                    loseAllLife.setStackDescription(sb.toString());
-
-                    Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(loseAllLife);
-
-                }
-            };
-
-            final SpellAbility loseGame = new Ability(card, "0") {
-                @Override
-                public void resolve() {
-                    card.getController().loseConditionMet(GameLossReason.SpellEffect, card.getName());
-                }
-            };
-
-            final Command toGrave = new Command() {
-                private static final long serialVersionUID = 5863295714122376047L;
-
-                @Override
-                public void execute() {
-
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append(cardName).append(" - ").append(card.getController());
-                    sb.append("loses the game.");
-                    loseGame.setStackDescription(sb.toString());
-
-                    Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(loseGame);
-
-                }
-            };
-
-            card.addComesIntoPlayCommand(intoPlay);
-            card.addDestroyCommand(toGrave);
         } // *************** END ************ END **************************
     }
 }

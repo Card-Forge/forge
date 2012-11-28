@@ -769,32 +769,6 @@ public final class GameActionUtil {
             return;
         }
 
-        final List<Card> playerLiches = player.getCardsIn(ZoneType.Battlefield, "Lich");
-
-        for (final Card lich : playerLiches) {
-            final SpellAbility ability = new Ability(lich, "0") {
-                @Override
-                public void resolve() {
-                    for (int i = 0; i < damage; i++) {
-                        List<Card> nonTokens = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), Presets.NON_TOKEN);
-                        if (nonTokens.size() == 0) {
-                            player.loseConditionMet(GameLossReason.SpellEffect, lich.getName());
-                        } else {
-                            player.sacrificePermanent("Select a permanent to sacrifice", nonTokens);
-                        }
-                    }
-                }
-            };
-
-            final StringBuilder sb = new StringBuilder();
-            sb.append(lich.getName()).append(" - ").append(lich.getController());
-            sb.append(" sacrifices ").append(damage).append(" nontoken permanents.");
-            ability.setStackDescription(sb.toString());
-
-            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
-
-        }
-
         c.getDamageHistory().registerDamage(player);
 
         // Play the Life Loss sound
