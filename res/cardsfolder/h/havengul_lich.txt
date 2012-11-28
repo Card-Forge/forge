@@ -4,14 +4,14 @@ Types:Creature Zombie Wizard
 Text:no text
 PT:4/4
 A:AB$ Pump | Cost$ 1 | ValidTgts$ Creature | TgtZone$ Graveyard | TgtPrompt$ Select target creature card | PumpZone$ Graveyard | SubAbility$ PumpYour | RememberObjects$ Targeted | SpellDescription$ You may cast target creature card in a graveyard this turn. When you cast that card this turn, CARDNAME gains all activated abilities of that card until end of turn.
-SVar:PumpYour:DB$Pump | Defined$ Remembered | ConditionCheckSVar$ SelectKW | ConditionSVarCompare$ EQ1 | KW$ HIDDEN May be played | PumpZone$ Graveyard | SubAbility$ PumpTheir | References$ SelectKW
-SVar:PumpTheir:DB$Pump | Defined$ Remembered | ConditionCheckSVar$ SelectKW | ConditionSVarCompare$ EQ0 | KW$ HIDDEN May be played by your opponent | PumpZone$ Graveyard | SubAbility$ FXCast | References$ SelectKW
-SVar:FXCast:DB$Effect | Name$ Havengul Lich Delayed Trigger | Triggers$ DTCast | SVars$ StealAbs,STSteal,CleanupDT | RememberObjects$ Targeted
+SVar:PumpYour:DB$ Pump | Defined$ Remembered | ConditionCheckSVar$ SelectKW | ConditionSVarCompare$ EQ1 | KW$ HIDDEN May be played | PumpZone$ Graveyard | SubAbility$ PumpTheir | References$ SelectKW
+SVar:PumpTheir:DB$ Pump | Defined$ Remembered | ConditionCheckSVar$ SelectKW | ConditionSVarCompare$ EQ0 | KW$ HIDDEN May be played by your opponent | PumpZone$ Graveyard | SubAbility$ FXCast | References$ SelectKW
+SVar:FXCast:DB$ Effect | Name$ Havengul Lich Delayed Trigger | Triggers$ DTCast | SVars$ StealAbs,STSteal,CleanupDT | RememberObjects$ Targeted
 SVar:DTCast:Mode$ SpellCast | ValidCard$ Card.IsRemembered | Execute$ StealAbs | TriggerDescription$ When you cast that card this turn, Havengul Lich gains all activated abilities of that card until end of turn.
-SVar:StealAbs:DB$Effect | Name$ Havengul Lich effect | RememberObjects$ TriggeredCard | StaticAbilities$ STSteal | SubAbility$ CleanupDT
+SVar:StealAbs:DB$ Effect | Name$ Havengul Lich effect | RememberObjects$ TriggeredCard | StaticAbilities$ STSteal | SubAbility$ CleanupDT
 SVar:STSteal:Mode$ Continuous | Affected$ EffectSource | EffectZone$ Command | GainsAbilitiesOf$ Creature.IsRemembered | GainsAbilitiesOfZones$ Library,Hand,Stack,Battlefield,Graveyard,Exile,Command
 T:Mode$ Phase | Phase$ Cleanup | Static$ True | Execute$ Cleanup | Secondary$ True | TriggerDescription$ A little behind the scenes.
-SVar:Cleanup:DB$Cleanup | ClearRemembered$ True
+SVar:Cleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:CleanupDT:DB$ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Exile
 SVar:SelectKW:Remembered$Valid Card.YouOwn
 SVar:RemAIDeck:True
