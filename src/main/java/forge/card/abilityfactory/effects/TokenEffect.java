@@ -47,6 +47,7 @@ public class TokenEffect extends SpellEffect {
     private String[] tokenTypes;
     private String tokenName;
     private String[] tokenKeywords;
+    private String[] tokenHiddenKeywords;
 
     private void readParameters(final SpellAbility mapParams) {
         String image;
@@ -57,6 +58,10 @@ public class TokenEffect extends SpellEffect {
             keywords = mapParams.getParam("TokenKeywords").split("<>");
         } else {
             keywords = new String[0];
+        }
+
+        if (mapParams.hasParam("TokenHiddenKeywords")) {
+            this.tokenHiddenKeywords = mapParams.getParam("TokenHiddenKeywords").split("&");
         }
 
         if (mapParams.hasParam("TokenImage")) {
@@ -196,6 +201,15 @@ public class TokenEffect extends SpellEffect {
         for (int i = 0; i < finalAmount; i++) {
             final List<Card> tokens = CardFactoryUtil.makeToken(substitutedName, imageName, controller, cost,
                     substitutedTypes, finalPower, finalToughness, this.tokenKeywords);
+
+            // Grant rule changes
+            if (this.tokenHiddenKeywords != null) {
+                for (final String s : this.tokenHiddenKeywords) {
+                    for (final Card c : tokens) {
+                        c.addHiddenExtrinsicKeyword(s);
+                    }
+                }
+            }
 
             // Grant abilities
             if (this.tokenAbilities != null) {

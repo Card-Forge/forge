@@ -4,7 +4,7 @@ Types:Creature Boar Beast
 Text:no text
 PT:7/7
 K:etbCounter:ICE:3
-S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_ICE | AddHiddenKeyword$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME. & Defender | Description$ As long as CARDNAME has an ice counter on it, prevent all combat damage it would deal and it has defender.
+S:Mode$ Continuous | Affected$ Card.Self+counters_GE1_ICE | AddHiddenKeyword$ Prevent all combat damage that would be dealt by CARDNAME. & Defender | Description$ As long as CARDNAME has an ice counter on it, prevent all combat damage it would deal and it has defender.
 T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigRemoveCounter | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME blocks, remove an ice counter from it.
 SVar:TrigRemoveCounter:AB$ RemoveCounter | Cost$ 0 | CounterType$ ICE | CounterNum$ 1 | Defined$ TriggeredBlocker
 SVar:Rarity:Rare

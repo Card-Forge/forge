@@ -4,7 +4,7 @@ Types:Legendary Creature Elf Shaman
 Text:no text
 PT:4/4
 K:Flash
-S:Mode$ Continuous | Affected$ Creature.Green+YouCtrl | AddHiddenKeyword$ HIDDEN Flash | AffectedZone$ Exile,Graveyard,Hand,Library | Description$ You may cast green creature cards as though they had flash.
+S:Mode$ Continuous | Affected$ Creature.Green+YouCtrl | AddHiddenKeyword$ Flash | AffectedZone$ Exile,Graveyard,Hand,Library | Description$ You may cast green creature cards as though they had flash.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yeva_natures_herald.jpg
 SetInfo:M13|Rare|http://magiccards.info/scans/en/m13/197.jpg

@@ -3,7 +3,7 @@ ManaCost:2 B
 Types:Sorcery
 Text:no text
 A:SP$ Effect | Cost$ 2 B | Name$ Yawgmoth's Will Effect | StaticAbilities$ STPlay | Keywords$ Exile | SpellDescription$ Until end of turn, you may play cards from your graveyard. If a card would be put into your graveyard from anywhere this turn, exile that card instead.
-SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouCtrl | AffectedZone$ Graveyard | AddHiddenKeyword$ HIDDEN May be played | Description$ You may play cards from your graveyard.
+SVar:STPlay:Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouCtrl | AffectedZone$ Graveyard | AddHiddenKeyword$ May be played | Description$ You may play cards from your graveyard.
 SVar:Exile:If a card would be put into your graveyard from anywhere, exile it instead.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

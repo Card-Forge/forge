@@ -5,7 +5,7 @@ Text:no text
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool. CARDNAME doesn't untap during your next untap step. | SubAbility$ DBPump
 A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool. CARDNAME doesn't untap during your next untap step. | SubAbility$ DBPump
-SVar:DBPump:DB$Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Permanent$ True
+SVar:DBPump:DB$ Pump | KW$ HIDDEN This card doesn't untap during your next untap step. | Defined$ Self | Permanent$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://magiccards.info/scans/en/br/45.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/318.jpg

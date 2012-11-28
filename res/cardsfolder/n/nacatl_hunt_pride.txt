@@ -4,8 +4,8 @@ Types:Creature Cat Warrior
 Text:no text
 PT:5/4
 K:Vigilance
-A:AB$Pump | Cost$ R T | Tgt$ TgtC | KW$ HIDDEN CARDNAME can't block. | SpellDescription$ Target creature can't block this turn.
-A:AB$Pump | Cost$ G T | Tgt$ TgtC | KW$ HIDDEN CARDNAME blocks each turn if able. | SpellDescription$ Target creature blocks this turn if able.
+A:AB$ Pump | Cost$ R T | Tgt$ TgtC | KW$ HIDDEN CARDNAME can't block. | SpellDescription$ Target creature can't block this turn.
+A:AB$ Pump | Cost$ G T | Tgt$ TgtC | KW$ HIDDEN CARDNAME blocks each turn if able. | SpellDescription$ Target creature blocks this turn if able.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nacatl_hunt_pride.jpg

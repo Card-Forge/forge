@@ -2,7 +2,7 @@ Name:Feral Lightning
 ManaCost:3 R R R
 Types:Sorcery
 Text:no text
-A:SP$ Token | Cost$ 3 R R R | TokenAmount$ 3 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Red | TokenPower$ 3 | TokenToughness$ 1 | TokenKeywords$ Haste<>HIDDEN At the beginning of the end step, exile CARDNAME. | SpellDescription$ Put three 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.
+A:SP$ Token | Cost$ 3 R R R | TokenAmount$ 3 | TokenName$ Elemental | TokenTypes$ Creature,Elemental | TokenOwner$ You | TokenColors$ Red | TokenPower$ 3 | TokenToughness$ 1 | TokenKeywords$ Haste | TokenHiddenKeywords$ At the beginning of the end step, exile CARDNAME. | SpellDescription$ Put three 3/1 red Elemental creature tokens with haste onto the battlefield. Exile them at the beginning of the next end step.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/sok/en-us/card84373.jpg

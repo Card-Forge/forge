@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Instant
 Text:no text
 A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature | KW$ HIDDEN CARDNAME attacks each turn if able. | TgtPrompt$ Select target creature | SpellDescription$ Target creature attacks this turn if able. | SubAbility$ DBDraw
-SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:DBDraw:DB$ Draw | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boiling_blood.jpg

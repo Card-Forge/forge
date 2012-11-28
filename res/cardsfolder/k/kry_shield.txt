@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact
 Text:no text
 A:AB$ Pump | Cost$ 2 T | KW$ HIDDEN Prevent all damage that would be dealt by CARDNAME. | TgtPrompt$ Select target creature you control | ValidTgts$ Creature.YouCtrl | SubAbility$ DBPump | SpellDescription$ Prevent all damage that would be dealt this turn by target creature you control. That creature gets +0/+X until end of turn, where X is its converted mana cost.
-SVar:DBPump:DB$Pump | Defined$ Targeted | NumDef$ X | References$ X
+SVar:DBPump:DB$ Pump | Defined$ Targeted | NumDef$ X | References$ X
 SVar:X:Targeted$CardManaCost
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

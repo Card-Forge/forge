@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact Equipment
 Text:no text
 K:Equip 2
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddHiddenKeyword$ HIDDEN Unblockable | AddKeyword$ Shroud | Description$ Equipped creature is unblockable and has shroud.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddHiddenKeyword$ Unblockable | AddKeyword$ Shroud | Description$ Equipped creature is unblockable and has shroud.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/whispersilk_cloak.jpg
 SetInfo:M11|Uncommon|http://magiccards.info/scans/en/m11/221.jpg

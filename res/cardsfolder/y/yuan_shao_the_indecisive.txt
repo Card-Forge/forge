@@ -4,7 +4,7 @@ Types:Legendary Creature Human Soldier
 Text:no text
 PT:2/3
 K:Horsemanship
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ HIDDEN CARDNAME can't be blocked by more than one creature. | Description$ Each creature you control can't be blocked by more than one creature.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME can't be blocked by more than one creature. | Description$ Each creature you control can't be blocked by more than one creature.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/yuan_shao_the_indecisive.jpg
 SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/128.jpg

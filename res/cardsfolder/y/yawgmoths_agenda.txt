@@ -4,7 +4,7 @@ Types:Enchantment
 Text:no text
 S:Mode$ CantBeCast | ValidCard$ Card | Caster$ You | CheckSVar$ X | Description$ You can't cast more than one spell each turn.
 SVar:X:Count$ThisTurnCast_Card.YouOwn
-S:Mode$ Continuous | Affected$ Card.YouCtrl | AffectedZone$ Graveyard | AddHiddenKeyword$ HIDDEN May be played | Description$ You may play cards from your graveyard.
+S:Mode$ Continuous | Affected$ Card.YouCtrl | AffectedZone$ Graveyard | AddHiddenKeyword$ May be played | Description$ You may play cards from your graveyard.
 R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Graveyard | ValidCard$ Card.YouOwn | ReplaceWith$ Exile | Description$ If a card would be put into your graveyard from anywhere, exile it instead.
 SVar:Exile:AB$ ChangeZone | Cost$ 0 | Hidden$ True | Origin$ All | Destination$ Exile | Defined$ ReplacedCard
 SVar:RemRandomDeck:True
