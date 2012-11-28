@@ -195,7 +195,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
         }
         else {
             for (int i = currentNumTabsShown; i <= toShow; i++) {
-                tabPane.add("Player " + (i + 1), playerPanels.get(i));
+                tabPane.add("Opponent " + i, playerPanels.get(i));
             }
             currentNumTabsShown = tabPane.getComponentCount() - 1;
         }

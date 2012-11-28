@@ -325,6 +325,9 @@ public class VField implements IVDoc<CField> {
      */
     public void updateZones(final Player p0) {
         this.getLblHand().setText("" + p0.getZone(ZoneType.Hand).size());
+        final String handMaxToolTip = p0.getMaxHandSize() < 0
+                ? "no maximum hand size" : String.valueOf(p0.getMaxHandSize());
+        this.getLblHand().setToolTipText("Cards in hand (max: " + handMaxToolTip + ")");
         this.getLblGraveyard().setText("" + p0.getZone(ZoneType.Graveyard).size());
         this.getLblLibrary().setText("" + p0.getZone(ZoneType.Library).size());
         this.getLblFlashback().setText("" + CardFactoryUtil.getExternalZoneActivationCards(p0).size());
