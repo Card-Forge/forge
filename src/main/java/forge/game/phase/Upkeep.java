@@ -1420,7 +1420,7 @@ public class Upkeep extends Phase {
                         this.revealTopCard(title);
                     }
 
-                    if (wantOpponentDiscard) {
+                    if (wantOpponentDiscard && !opponent.getZone(ZoneType.Hand).isEmpty()) {
                         opponent.discard(this);
                     }
                 } // resolve()
