@@ -2,7 +2,7 @@ Name:Spellbook
 ManaCost:0
 Types:Artifact
 Text:no text
-S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ -1 | Description$ You have no maximum hand size.
+S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spellbook.jpg

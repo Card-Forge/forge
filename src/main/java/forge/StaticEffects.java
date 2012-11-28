@@ -159,6 +159,9 @@ public class StaticEffects {
 
         // modify players
         for (final Player p : affectedPlayers) {
+            p.setUnlimitedHandSize(false);
+            p.setMaxHandSize(7);
+
             if (params.containsKey("AddKeyword")) {
                 addKeywords = params.get("AddKeyword").split(" & ");
             }

@@ -3,7 +3,7 @@ ManaCost:no cost
 Types:Vanguard
 Text:no text
 HandLifeModifier:-1/+1
-S:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxHandSize$ -1 | Description$ You have no maximum hand size.
+S:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 A:AB$ Draw | ActivationZone$ Command | Cost$ 0 | NumCards$ 3 | Defined$ You | ActivationLimit$ 1 | SubAbility$ DBSkipTurn | SpellDescription$ Draw three cards. You skip your next turn. Activate this ability only once each turn.
 SVar:DBSkipTurn:DB$ AddTurn | NumTurns$ 1 | Defined$ Opponent
 SVar:RemAIDeck:True

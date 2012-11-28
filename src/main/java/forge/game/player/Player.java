@@ -108,6 +108,9 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     /** The max hand size. */
     private int maxHandSize = 7;
 
+    /** The unlimited hand size. */
+    private boolean unlimitedHandSize = false;
+
     /** The last drawn card. */
     private Card lastDrawnCard = null;
 
@@ -2519,6 +2522,21 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     public final void setMaxHandSize(int size) {
         maxHandSize = size;
     }
+
+    /**
+     * @return the unlimitedHandSize
+     */
+    public boolean isUnlimitedHandSize() {
+        return unlimitedHandSize;
+    }
+
+    /**
+     * @param unlimitedHandSize0 the unlimitedHandSize to set
+     */
+    public void setUnlimitedHandSize(boolean unlimited) {
+        this.unlimitedHandSize = unlimited;
+    }
+    
 
     /**
      * <p>

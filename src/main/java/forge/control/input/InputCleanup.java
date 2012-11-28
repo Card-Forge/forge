@@ -50,7 +50,7 @@ public class InputCleanup extends Input {
         final int n = active.getCardsIn(ZoneType.Hand).size();
         final int max = active.getMaxHandSize();
         // goes to the next phase
-        if (n <= max || n <= 0) {
+        if (active.isUnlimitedHandSize() || n <= max || n <= 0) {
             Singletons.getModel().getGame().getPhaseHandler().passPriority();
             return;
         }
@@ -84,7 +84,7 @@ public class InputCleanup extends Input {
     public void aiCleanupDiscard(final Player ai) {
         final int size = ai.getCardsIn(ZoneType.Hand).size();
 
-        if (ai.getMaxHandSize() != -1) {
+        if (!ai.isUnlimitedHandSize()) {
             final int numDiscards = size - ai.getMaxHandSize();
             ai.discard(numDiscards, null);
         }

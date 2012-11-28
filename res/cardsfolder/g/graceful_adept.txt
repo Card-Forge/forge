@@ -3,7 +3,7 @@ ManaCost:2 U
 Types:Creature Human Wizard
 Text:no text
 PT:1/3
-S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ -1 | Description$ You have no maximum hand size.
+S:Mode$ Continuous | Affected$ You | SetMaxHandSize$ Unlimited | Description$ You have no maximum hand size.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/graceful_adept.jpg
 SetInfo:CHK|Uncommon|http://magiccards.info/scans/en/chk/63.jpg
