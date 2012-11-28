@@ -7,4 +7,5 @@ S:Mode$ Continuous | EffectZone$ Command | Affected$ Card.YouCtrl | AddHiddenKey
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=182298&type=card
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/etched-oracle.jpg
+Oracle:Hand +1, life -4\nYou may pay {W}{U}{B}{R}{G} rather than pay the mana cost for spells that you cast.
 End

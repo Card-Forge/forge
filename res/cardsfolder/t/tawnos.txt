@@ -7,4 +7,5 @@ S:Mode$ Continuous | EffectZone$ Command | Affected$ Artifact.YouCtrl,Creature.Y
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=12328&type=card
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/tawnos.jpg
+Oracle:Hand +3, life -4\nYou may cast artifact, creature, and enchantment spells as though they had flash.
 End

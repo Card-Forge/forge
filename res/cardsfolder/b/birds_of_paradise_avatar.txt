@@ -8,4 +8,5 @@ SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 1 | SpellDescription$ 
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=182291&type=card
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/birds-of-paradise.jpg
+Oracle:Hand +0, life -3\nLands you control have "{T}: Add one mana of any color to your mana pool."
 End

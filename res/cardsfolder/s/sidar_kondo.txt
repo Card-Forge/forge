@@ -7,4 +7,5 @@ A:AB$ Pump | ActivationZone$ Command | Cost$ 3 | Tgt$ TgtC | NumAtt$ 3 | NumDef$
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=12147&type=card
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/sidar-kondo.jpg
+Oracle:Hand -1, life +12\n{3}: Target creature gets +3/+3 until end of turn.
 End

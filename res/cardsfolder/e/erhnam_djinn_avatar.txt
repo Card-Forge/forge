@@ -8,4 +8,5 @@ SVar:DjinnisGift:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Saproling | T
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=182259&type=card
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/erhnam-djinn.jpg
+Oracle:Hand +0, life +3\nWhenever you cast a creature spell, put a 1/1 green Saproling creature token onto the battlefield.
 End

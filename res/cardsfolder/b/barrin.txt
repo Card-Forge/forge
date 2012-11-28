@@ -7,4 +7,5 @@ A:AB$ ChangeZone | ActivationZone$ Command | Cost$ Sac<1/Permanent> | ValidTgts$
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=4957&type=card
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/barrin.jpg
+Oracle:Hand +0, life +6\nSacrifice a permanent: Return target creature to its owner's hand.
 End

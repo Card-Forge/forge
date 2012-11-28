@@ -10,4 +10,5 @@ SVar:ChargeCounter:AB$ PutCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ 
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=182296&type=card
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/arcbound-overseer.jpg
+Oracle:Hand +0, life +3\nAt the beginning of your upkeep, you may put a +1/+1 counter on target creature you control.\nAt the beginning of your upkeep, you may put a charge counter on target permanent you control.
 End

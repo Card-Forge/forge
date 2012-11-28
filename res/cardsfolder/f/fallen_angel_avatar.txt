@@ -9,4 +9,5 @@ SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=182303&type=card
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/fallen-angel.jpg
+Oracle:Hand +0, life -5\nWhenever a creature you control dies, target opponent loses 1 life and you gain 1 life.
 End

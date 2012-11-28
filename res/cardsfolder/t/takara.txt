@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Special
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=12144&type=card
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/takara.jpg
+Oracle:Hand +3, life -8\nSacrifice a creature: Takara deals 1 damage to target creature or player.
 End
