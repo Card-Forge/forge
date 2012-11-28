@@ -1975,11 +1975,13 @@ public class CardFactoryUtil {
             }
         }
 
-        // count valid cards in the garveyard
-        if (l[0].startsWith("ValidGrave")) {
-            String restrictions = l[0].replace("ValidGrave ", "");
+        // count valid cards in any specified zone/s
+        if (l[0].startsWith("Valid") && !l[0].contains("Valid ")) {
+            String[] lparts = l[0].split(" ", 2);
+            final List<ZoneType> vZone = ZoneType.listValueOf(lparts[0].split("Valid")[1]);
+            String restrictions = l[0].replace(lparts[0] + " ", "");
             final String[] rest = restrictions.split(",");
-            List<Card> cards = Singletons.getModel().getGame().getCardsIn(ZoneType.Graveyard);
+            List<Card> cards = Singletons.getModel().getGame().getCardsIn(vZone);
             cards = CardLists.getValidCards(cards, rest, cardController, c);
 
             n = cards.size();
