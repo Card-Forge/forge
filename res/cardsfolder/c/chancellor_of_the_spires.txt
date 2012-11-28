@@ -8,7 +8,7 @@ K:Flying
 SVar:DrainOnUpkeep:AB$ Effect | Cost$ 0 | Triggers$ TrigDrain | SVars$ Mill,RemoveMe | Name$ Chancellor of the Spires effect
 SVar:TrigDrain:Mode$ Phase | Phase$ Upkeep | Execute$ Mill | TriggerDescription$ At the beginning of the first upkeep, each opponent puts the top seven cards of his or her library into his or her graveyard.
 SVar:Mill:AB$ Mill | Cost$ 0 | NumCards$ 7 | Defined$ Opponent | SubAbility$ RemoveMe
-SVar:RemoveMe:DB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+SVar:RemoveMe:DB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Command | Destination$ Exile
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerDescription$ When CARDNAME enters the battlefield, you may cast target instant or sorcery card from an opponent's graveyard without paying its mana cost.
 SVar:TrigChangeZone:DB$ Play | TgtZone$ Graveyard | WithoutManaCost$ True | ValidTgts$ Instant.OppOwn,Sorcery.OppOwn | TgtPrompt$ Choose target instant or sorcery card from an opponent's graveyard | Optional$ True
 SVar:Rarity:Rare

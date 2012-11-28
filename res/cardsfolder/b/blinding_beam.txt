@@ -7,7 +7,7 @@ A:SP$ Effect | Cost$ 2 W | ValidTgts$ Player | TgtPrompt$ Select target player |
 A:SP$ Effect | Cost$ 3 W | ValidTgts$ Player | TgtPrompt$ Select target player | IsCurse$ True | StaticAbilities$ DontUntap | Triggers$ RestoreSight | SVars$ ExileEffect | RememberObjects$ Targeted | AILogic$ BeginningOfOppTurn | Duration$ Permanent | SubAbility$ BlindTheFoe | PrecostDesc$ Entwine | CostDesc$ 1 | NonBasicSpell$ True | SpellDescription$ (Choose both if you pay the entwine cost.)
 SVar:BlindTheFoe:DB$ Tap |  ValidTgts$ Creature | TargetMin$ 2 | TargetMax$ 2 | TgtPrompt$ Select two target creatures
 SVar:DontUntap:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.RememberedPlayerCtrl | AddHiddenKeyword$ This card doesn't untap during your next untap step.
-SVar:RestoreSight:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.IsRemembered | TriggerZones$ Battlefield | Execute$ ExileEffect | Static$ True
+SVar:RestoreSight:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.IsRemembered | TriggerZones$ Command | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:RemAIDeck:True
 SVar:Rarity:Common

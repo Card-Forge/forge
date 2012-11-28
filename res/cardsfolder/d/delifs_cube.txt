@@ -4,8 +4,8 @@ Types:Artifact
 Text:no text
 A:AB$ Effect | Cost$ 2 T | Name$ Delif's Cube Effect | ValidTgts$ Creature.YouCtrl | Triggers$ TrigAttackerUnblocked,TrigLeave | SVars$ DBPump,PutCounter,ExileEffect | RememberObjects$ Targeted | ImprintCards$ Self | SpellDescription$ This turn, when target creature you control attacks and isn't blocked, it assigns no combat damage this turn and you put a cube counter on CARDNAME.
 SVar:TrigAttackerUnblocked:Mode$ AttackerUnblocked | ValidCard$ Card.IsRemembered | Execute$ DBPump | TriggerDescription$ This turn, when targeted creature attacks and isn't blocked, it assigns no combat damage this turn and you put a cube counter on Delif's Cube.
-SVar:DBPump:DB$Pump | Defined$ Remembered | KW$ HIDDEN CARDNAME assigns no combat damage | SubAbility$ PutCounter
-SVar:PutCounter:DB$PutCounter | Defined$ Imprinted | CounterType$ CUBE | CounterNum$ 1 | SubAbility$ ExileEffect
+SVar:DBPump:DB$ Pump | Defined$ Remembered | KW$ HIDDEN CARDNAME assigns no combat damage | SubAbility$ PutCounter
+SVar:PutCounter:DB$ PutCounter | Defined$ Imprinted | CounterType$ CUBE | CounterNum$ 1 | SubAbility$ ExileEffect
 SVar:TrigLeave:Mode$ ChangesZone | ValidCard$ Creature.IsRemembered | Origin$ Battlefield | Destination$ Any | Execute$ ExileEffect | Static$ True
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
 A:AB$ Regenerate | Cost$ 2 SubCounter<1/CUBE> | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Regenerate target creature.

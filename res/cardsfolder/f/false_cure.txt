@@ -3,8 +3,8 @@ ManaCost:B B
 Types:Instant
 Text:no text
 A:SP$ Effect | Cost$ B B | Name$ False Cure Effect | Triggers$ GainLife | SVars$ TrigLoseLife,X | SpellDescription$ Until end of turn, whenever a player gains life, that player loses 2 life for each 1 life he or she gained.
-SVar:GainLife:Mode$ LifeGained | ValidPlayer$ Player | TriggerZones$ Battlefield | Execute$ TrigLoseLife | TriggerDescription$ Whenever a player gains life, that player loses 2 life for each 1 life he or she gained.
-SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount$ X | References$ X
+SVar:GainLife:Mode$ LifeGained | ValidPlayer$ Player | TriggerZones$ Command | Execute$ TrigLoseLife | TriggerDescription$ Whenever a player gains life, that player loses 2 life for each 1 life he or she gained.
+SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount$ X | References$ X
 SVar:X:TriggerCount$LifeAmount/Times.2
 SVar:RemRandomDeck:True
 SVar:PlayMain1:TRUE

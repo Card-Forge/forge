@@ -10,7 +10,7 @@ K:MayEffectFromOpeningHand:TokenOnUpkeep
 SVar:TokenOnUpkeep:AB$ Effect | Cost$ 0 | Triggers$ TrigToken | SVars$ EffToken,RemoveMe | Name$ Chancellor of the Forge effect
 SVar:TrigToken:Mode$ Phase | Phase$ Upkeep | Execute$ EffToken | TriggerDescription$ At the beginning of the first upkeep, put a 1/1 red Goblin creature token with haste onto the battlefield.
 SVar:EffToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenOwner$ You | TokenName$ Goblin | TokenTypes$ Creature,Goblin | TokenColors$ Red | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Haste | SubAbility$ RemoveMe
-SVar:RemoveMe:DB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Exile
+SVar:RemoveMe:DB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chancellor_of_the_forge.jpg
 SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/81.jpg
