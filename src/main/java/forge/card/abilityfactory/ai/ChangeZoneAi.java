@@ -62,7 +62,6 @@ public class ChangeZoneAi extends SpellAiLogic {
         }
 
         if (sa.hasParam("AILogic")) {
-            System.out.println("HERE.");
             if (sa.getParam("AILogic").equals("Always")) {
                 return true;
             }
