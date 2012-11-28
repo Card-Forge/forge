@@ -140,61 +140,6 @@ public class CardFactoryCreatures {
         card.addSpellAbility(a1);
     }
 
-    private static void getCard_PhylacteryLich(final Card card) {
-        final Command intoPlay = new Command() {
-            private static final long serialVersionUID = -1601957445498569156L;
-
-            @Override
-            public void execute() {
-
-                final List<Card> artifacts =
-                        CardLists.filter(card.getController().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.ARTIFACTS);
-                if (card.getController().isHuman()) {
-
-                    if (artifacts.size() != 0) {
-                        final Card c = GuiChoose.one("Select an artifact put a phylactery counter on", artifacts);
-                        if (c != null) {
-                            c.addCounter(CounterType.PHYLACTERY, 1, true);
-                        }
-                    }
-
-                } else { // computer
-                    List<Card> list = new ArrayList<Card>(artifacts);
-                    list = CardLists.filter(list, new Predicate<Card>() {
-                        @Override
-                        public boolean apply(final Card c) {
-                            return c.getIntrinsicKeyword().contains("Indestructible");
-                        }
-                    });
-
-                    Card chosen = null;
-                    if (!list.isEmpty()) {
-                        chosen = list.get(0);
-                    } else if (!artifacts.isEmpty()) {
-                        chosen = artifacts.get(0);
-                    }
-                    if (chosen != null) {
-                        chosen.addCounter(CounterType.PHYLACTERY, 1, true);
-                    }
-                } // else
-            } // execute()
-        };
-        // Do not remove SpellAbilities created by AbilityFactory or
-        // Keywords.
-        card.clearFirstSpell();
-        card.addSpellAbility(new SpellPermanent(card) {
-
-            private static final long serialVersionUID = -1506199222879057809L;
-
-            @Override
-            public boolean canPlayAI() {
-                return Iterables.any(getActivatingPlayer().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.ARTIFACTS)
-                     && Singletons.getModel().getGame().getZoneOf(this.getSourceCard()).is(ZoneType.Hand);
-            }
-        });
-        card.addComesIntoPlayCommand(intoPlay);
-    }
-
     private static void getCard_PainterServant(final Card card) {
         final long[] timeStamp = new long[1];
         final String[] color = new String[1];
@@ -1098,8 +1043,6 @@ public class CardFactoryCreatures {
 
         if (cardName.equals("Gilder Bairn")) {
             getCard_GilderBairn(card);
-        } else if (cardName.equals("Phylactery Lich")) {
-            getCard_PhylacteryLich(card);
         } else if (cardName.equals("Painter's Servant")) {
             getCard_PainterServant(card);
         } else if (cardName.equals("Stangg")) {
