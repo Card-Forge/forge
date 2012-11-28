@@ -33,8 +33,12 @@ def initSets():
 	forgeSets.append('M12')
 	forgeSets.append('M13')
 
-	# Multiplayer Sets
+	# Casual Variants and Multiplayer
 	forgeSets.append('COM')
+	forgeSets.append('VAN')
+	forgeSets.append('ARC')
+	forgeSets.append('HOP')
+	forgeSets.append('PC2')
 
 	# Portal
 	forgeSets.append('POR')
@@ -284,7 +288,7 @@ while line:
                         prevLine = tmpLine.replace(mtgName,'CARDNAME')
                 # if card is not creature, set foundPT to true
                 if foundType and not foundPT :
-                        if card.types.find('Creature') == -1 and card.types.find('Planeswalker') == -1: foundPT = True
+                        if card.types.find('Creature') == -1 and card.types.find('Planeswalker') == -1 and card.types.find('Vanguard') == -1 : foundPT = True
                 line = mtgdata.readline()
         # found blank line or end of file so store last line as set info
         card.sets = prevLine.rstrip()
@@ -305,10 +309,14 @@ while inputName != 'quit' :
                 print 'ManaCost:'+cardData.cost
                 print 'Types:'+cardData.types
                 print 'Text:no text'
-                if cardData.types.find('Creature') != -1:
+                if cardData.types.find('Creature') != -1 :
                         print 'PT:'+cardData.pt
                 elif cardData.types.find('Planeswalker') != -1 :
                         print 'Loyalty:'+cardData.pt
+                elif cardData.types.find('Vanguard') != -1 :
+                	    vangModifier = cardData.pt.replace('Hand ','')
+                	    vangModifier = vangModifier.replace(', life ','/')
+                	    print 'HandLifeModifier:'+vangModifier
                 
                 for text in cardData.oracle :
                         # do some prescripting
@@ -348,6 +356,8 @@ while inputName != 'quit' :
                                         rarity = 'Rare'
                                 elif edition[1] == 'M' :
                                         rarity = 'Mythic'
+                                elif edition[1] == 'S' :
+                                        rarity = 'Special'
                                 setInfoStr = 'SetInfo:'+edition[0]+'|'+rarity+'|'+'http://dummy.com/dummy.jpg'
                                 setInfo.append(setInfoStr)
                 print 'SVar:Rarity:'+rarity
