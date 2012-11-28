@@ -61,6 +61,13 @@ public class ChangeZoneAi extends SpellAiLogic {
             origin = sa.getParam("Origin");
         }
 
+        if (sa.hasParam("AILogic")) {
+            System.out.println("HERE.");
+            if (sa.getParam("AILogic").equals("Always")) {
+                return true;
+            }
+        }
+
         if (ZoneType.isHidden(origin, sa.hasParam("Hidden"))) {
             return hiddenOriginCanPlayAI(aiPlayer, sa);
         } else if (ZoneType.isKnown(origin)) {
