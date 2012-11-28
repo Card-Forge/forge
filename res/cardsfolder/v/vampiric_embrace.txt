@@ -4,7 +4,7 @@ Types:Enchantment Aura
 Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 B B | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying | AddHiddenKeyword$ HIDDEN Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME. | Description$ Enchanted creature gets +2/+2 and has flying. Whenever a creature dealt damage by enchanted creature this turn is put into a graveyard, put a +1/+1 counter on that creature.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Flying | AddHiddenKeyword$ Whenever a creature dealt damage by CARDNAME this turn is put into a graveyard, put a +1/+1 counter on CARDNAME. | Description$ Enchanted creature gets +2/+2 and has flying. Whenever a creature dealt damage by enchanted creature this turn is put into a graveyard, put a +1/+1 counter on that creature.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vampiric_embrace.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/164.jpg

@@ -6,7 +6,7 @@ Text:no text
 A:SP$ Attach | Cost$ U | ValidTgts$ Creature | AILogic$ KeepTapped
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigTap | TriggerDescription$ When CARDNAME enters the battlefield, tap enchanted creature.
 SVar:TrigTap:AB$ Tap | Cost$ 0 | Defined$ Enchanted
-S:Mode$ Continuous | Affected$ Creature.AttachedBy+attackedLastTurn | AddHiddenKeyword$ HIDDEN CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step if it attacked during its controller's last turn.
+S:Mode$ Continuous | Affected$ Creature.AttachedBy+attackedLastTurn | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Enchanted creature doesn't untap during its controller's untap step if it attacked during its controller's last turn.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tangle_kelp.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/36.jpg

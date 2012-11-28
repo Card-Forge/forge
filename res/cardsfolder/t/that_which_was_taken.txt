@@ -2,7 +2,7 @@ Name:That Which Was Taken
 ManaCost:5
 Types:Legendary Artifact
 Text:no text
-S:Mode$ Continuous | Affected$ Permanent.counters_GE1_DIVINITY | AddHiddenKeyword$ HIDDEN Indestructible | Description$ Each permanent with a divinity counter on it is indestructible.
+S:Mode$ Continuous | Affected$ Permanent.counters_GE1_DIVINITY | AddHiddenKeyword$ Indestructible | Description$ Each permanent with a divinity counter on it is indestructible.
 A:AB$ PutCounter | Cost$ 4 T | ValidTgts$ Permanent.Other | TgtPrompt$ Select target permanent other than That Which Was Taken | CounterType$ DIVINITY | CounterNum$ 1 | SpellDescription$ Put a divinity counter on target permanent other than CARDNAME.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/that_which_was_taken.jpg

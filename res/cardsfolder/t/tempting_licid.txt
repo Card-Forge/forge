@@ -22,7 +22,7 @@ Types:Enchantment Aura
 Text:All creatures able to block enchanted creature do so.
 K:Enchant creature
 A:SP$ Attach | Cost$ 0 | ValidTgts$ Creature | AILogic$ Pump
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ HIDDEN All creatures able to block CARDNAME do so. | Description$ All creatures able to block enchanted creature do so.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ All creatures able to block CARDNAME do so. | Description$ All creatures able to block enchanted creature do so.
 A:AB$ SetState | Cost$ G | Defined$ Self | NewState$ Original | SpellDescription$ End this effect.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

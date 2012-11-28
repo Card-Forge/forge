@@ -3,7 +3,7 @@ ManaCost:2 G
 Types:Creature Dryad
 Text:no text
 PT:2/2
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ HIDDEN Unblockable | CheckSVar$ X | SVarCompare$ GE1 | Description$ Each creature you control is unblockable as long as defending player controls an artifact land.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ Unblockable | CheckSVar$ X | SVarCompare$ GE1 | Description$ Each creature you control is unblockable as long as defending player controls an artifact land.
 SVar:X:Count$Valid Land.Artifact+YouDontCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tanglewalker.jpg

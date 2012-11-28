@@ -8,7 +8,7 @@ T:Mode$ DamageDone | ValidSource$ Creature.Self | ValidTarget$ Opponent | Execut
 T:Mode$ DamageDone | ValidSource$ Creature.Self | ValidTarget$ You | Execute$ TrigTapYou | Secondary$ True | TriggerDescription$ Whenever CARDNAME deals damage to a player, tap target creature that player controls.
 SVar:TrigTapOpp:AB$ Tap | Cost$ 0 | ValidTgts$ Creature.YouDontCtrl | SubAbility$ DBSomnophoreAnimate | TriggerDescription$ That creature doesn't untap during its controller's untap step for as long as CARDNAME remains on the battlefield.
 SVar:TrigTapYou:AB$ Tap | Cost$ 0 | ValidTgts$ Creature.YouCtrl | SubAbility$ DBSomnophoreAnimate | TriggerDescription$ That creature doesn't untap during its controller's untap step for as long as CARDNAME remains on the battlefield.
-SVar:DBSomnophoreAnimate:DB$ Animate | Defined$ Targeted | HiddenKeywords$ HIDDEN CARDNAME doesn't untap during your untap step. | UntilHostLeavesPlay$ True
+SVar:DBSomnophoreAnimate:DB$ Animate | Defined$ Targeted | HiddenKeywords$ CARDNAME doesn't untap during your untap step. | UntilHostLeavesPlay$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/somnophore.jpg

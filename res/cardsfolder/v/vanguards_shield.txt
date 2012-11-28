@@ -3,7 +3,7 @@ ManaCost:2
 Types:Artifact Equipment
 Text:no text
 K:Equip 3
-S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddHiddenKeyword$ HIDDEN CARDNAME can block an additional creature. | AddToughness$ 3 | Description$ Equipped creature gets +0/+3 and can block an additional creature.
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddHiddenKeyword$ CARDNAME can block an additional creature. | AddToughness$ 3 | Description$ Equipped creature gets +0/+3 and can block an additional creature.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vanguards_shield.jpg
 SetInfo:AVR|Common|http://magiccards.info/scans/en/avr/223.jpg

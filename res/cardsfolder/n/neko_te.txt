@@ -5,7 +5,7 @@ Text:no text
 A:AB$ Attach | Cost$ 2 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SorcerySpeed$ True | PrecostDesc$ Equip - | SpellDescription$ Attach CARDNAME to target creature you control.
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Creature | Execute$ TrigNekoTeTap | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals damage to a creature, tap that creature. That creature doesn't untap during its controller's untap step for as long as CARDNAME remains on the battlefield.
 SVar:TrigNekoTeTap:AB$ Tap | Cost$ 0 | Defined$ TriggeredTarget | SubAbility$ DBNekoTeAnimate
-SVar:DBNekoTeAnimate:DB$ Animate | Defined$ TriggeredTarget | HiddenKeywords$ HIDDEN CARDNAME doesn't untap during your untap step. | UntilHostLeavesPlay$ True
+SVar:DBNekoTeAnimate:DB$ Animate | Defined$ TriggeredTarget | HiddenKeywords$ CARDNAME doesn't untap during your untap step. | UntilHostLeavesPlay$ True
 T:Mode$ DamageDone | ValidSource$ Card.AttachedBy | ValidTarget$ Player | Execute$ TrigNekoTeLoseLife | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals damage to a player, that player loses 1 life.
 SVar:TrigNekoTeLoseLife:AB$ LoseLife | Cost$ 0 | LifeAmount$ 1 | Defined$ TriggeredTarget
 SVar:Rarity:Rare
