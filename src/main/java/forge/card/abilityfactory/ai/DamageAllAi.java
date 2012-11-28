@@ -48,10 +48,8 @@ public class  DamageAllAi extends SpellAiLogic {
         }
 
         Player opp = ai.getOpponent();
-
         final List<Card> humanList = this.getKillableCreatures(sa, opp, dmg);
         List<Card> computerList = this.getKillableCreatures(sa, ai, dmg);
-
 
         final Target tgt = sa.getTarget();
         if (tgt != null && sa.canTarget(opp)) {
@@ -165,31 +163,36 @@ public class  DamageAllAi extends SpellAiLogic {
             validP = sa.getParam("ValidPlayers");
         }
 
+        // Evaluate creatures getting killed
         Player enemy = ai.getOpponent();
+        final List<Card> humanList = this.getKillableCreatures(sa, enemy, dmg);
+        List<Card> computerList = this.getKillableCreatures(sa, ai, dmg);
         final Target tgt = sa.getTarget();
-        if (tgt == null) {
-            // If it's not mandatory check a few things
-            if (mandatory) {
-                return true;
-            }
-            // Don't get yourself killed
-            if (validP.contains("Each") && (ai.getLife() <= ai.predictDamage(dmg, source, false))) {
-                return false;
-            }
+        
+        if (tgt != null && sa.canTarget(enemy)) {
+            tgt.resetTargets();
+            sa.getTarget().addTarget(enemy);
+            computerList.clear();
+        }
 
-            // if we can kill human, do it
-            if ((validP.contains("Each") || validP.contains("EachOpponent") || validP.contains("Targeted"))
-                    && (enemy.getLife() <= enemy.predictDamage(dmg, source, false))) {
-                return true;
-            }
+        // If it's not mandatory check a few things
+        if (mandatory) {
+            return true;
+        }
+        // Don't get yourself killed
+        if (validP.contains("Each") && (ai.getLife() <= ai.predictDamage(dmg, source, false))) {
+            return false;
+        }
 
-            // Evaluate creatures getting killed
-            final List<Card> humanList = this.getKillableCreatures(sa, enemy, dmg);
-            final List<Card> computerList = this.getKillableCreatures(sa, ai, dmg);
-            if (!computerList.isEmpty() && CardFactoryUtil.evaluateCreatureList(computerList) + 50 >= CardFactoryUtil
-                    .evaluateCreatureList(humanList)) {
-                return false;
-            }
+        // if we can kill human, do it
+        if ((validP.contains("Each") || validP.contains("EachOpponent") || validP.contains("Targeted"))
+                && (enemy.getLife() <= enemy.predictDamage(dmg, source, false))) {
+            return true;
+        }
+
+        if (!computerList.isEmpty() && CardFactoryUtil.evaluateCreatureList(computerList) + 50 >= CardFactoryUtil
+                .evaluateCreatureList(humanList)) {
+            return false;
         }
 
         return true;
