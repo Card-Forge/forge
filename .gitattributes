@@ -4562,6 +4562,7 @@ res/cardsfolder/h/hellkite_igniter.txt svneol=native#text/plain
 res/cardsfolder/h/hellkite_overlord.txt svneol=native#text/plain
 res/cardsfolder/h/hellrider.txt -text
 res/cardsfolder/h/hells_caretaker.txt svneol=native#text/plain
+res/cardsfolder/h/hells_caretaker_avatar.txt -text
 res/cardsfolder/h/hells_thunder.txt svneol=native#text/plain
 res/cardsfolder/h/hellspark_elemental.txt svneol=native#text/plain
 res/cardsfolder/h/helm_of_awakening.txt svneol=native#text/plain

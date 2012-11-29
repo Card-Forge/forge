@@ -8,4 +8,5 @@ SVar:Rarity:Special
 SVar:Picture:
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=182251&type=card
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/goblin-warchief.jpg
+Oracle:Hand +1, life +2\nAttacking creatures you control get +1/+0.
 End
