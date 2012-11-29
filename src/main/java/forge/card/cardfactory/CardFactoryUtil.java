@@ -3180,12 +3180,7 @@ public class CardFactoryUtil {
             Card temp = CardFactoryUtil.copyStats(c);
 
             for (final String kw : intrinsicKeywords) {
-                if (kw.startsWith("HIDDEN")) {
-                    temp.addHiddenExtrinsicKeyword(kw);
-                    // extrinsic keywords won't survive the copyStats treatment
-                } else {
-                    temp.addIntrinsicKeyword(kw);
-                }
+                temp.addIntrinsicKeyword(kw);
             }
             temp.setOwner(controller);
             temp.setToken(true);

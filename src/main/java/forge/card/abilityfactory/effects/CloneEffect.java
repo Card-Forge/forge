@@ -231,12 +231,7 @@ public class CloneEffect extends SpellEffect {
                     keywords.add("\"" + k + "\"");
                     keywords.remove(k);
                 }
-                if (keywords.get(i).startsWith("HIDDEN")) {
-                    tgtCard.addHiddenExtrinsicKeyword(keywords.get(i));
-                }
-                else {
-                    tgtCard.addIntrinsicKeyword(keywords.get(i));
-                }
+                tgtCard.addIntrinsicKeyword(keywords.get(i));
             }
         }
 
