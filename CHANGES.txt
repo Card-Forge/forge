@@ -294,6 +294,20 @@ Fixes/Features:
 - Fixed doTriggerAINoCost in CounterAI when the stack is empty.
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed max hand size.
+- Removed a debug line from ChangeZone (related to Nafs Asp).
+- Made the effect names for Nafs Asp and Glass Asp more descriptive.
+- Somebody had overwritten worlds.txt in the SVN with an obsolete (incorrect) version, restored.
+- Fix for Squeaking Pie Grubfellows.
+- Removing unnecessary "HIDDEN" strings (WIP).
+- Removing unnecessary "HIDDEN" strings (WIP).
+- Made static effects reset hand size correctly for Vanguard.
+- Added a LQ pic URL.
+- CheckStyle.
+- AI fix for Karn Liberated.
+- Removing unnecessary "HIDDEN" strings (WIP).
+- Fixed freeze whenever AI cast a creature with Tahngarth avatar
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -320,13 +334,17 @@ Etched Oracle Avatar
 Fallen Angel Avatar
 Gerrard
 Gix
+Goblin Warchief Avatar
 Greven il-Vec
 Grinning Demon Avatar
 Hanna
+Hell's Caretaker Avatar
 Karn
 Lyna
+Lyzolda, the Blood Witch Avatar
 Maraxus
 Mishra
+Morinfen Avatar
 Multani
 Oracle
 Orim
@@ -395,6 +413,9 @@ Saprazzan Breaker
 Shoving Match
 Aladdin's Lamp
 Shell of the Last Kappa
+Nafs Asp
+Glass Asp
+Auriok Steelshaper
 
 
 end
