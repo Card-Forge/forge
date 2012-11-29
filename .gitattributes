@@ -5872,6 +5872,7 @@ res/cardsfolder/l/lys_alana_bowmaster.txt svneol=native#text/plain
 res/cardsfolder/l/lys_alana_huntmaster.txt svneol=native#text/plain
 res/cardsfolder/l/lys_alana_scarblade.txt -text
 res/cardsfolder/l/lyzolda_the_blood_witch.txt svneol=native#text/plain
+res/cardsfolder/l/lyzolda_the_blood_witch_avatar.txt -text
 res/cardsfolder/m/ma_chao_western_warrior.txt svneol=native#text/plain
 res/cardsfolder/m/maalfeld_twins.txt -text
 res/cardsfolder/m/macabre_waltz.txt svneol=native#text/plain
