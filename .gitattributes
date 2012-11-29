@@ -4113,6 +4113,7 @@ res/cardsfolder/g/goblin_war_paint.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_war_strike.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_war_wagon.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_warchief.txt svneol=native#text/plain
+res/cardsfolder/g/goblin_warchief_avatar.txt -text
 res/cardsfolder/g/goblin_wardriver.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_warrens.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_wizard.txt svneol=native#text/plain

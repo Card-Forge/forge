@@ -1,0 +1,11 @@
+Name:Goblin Warchief Avatar
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:+1/+2
+S:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.attacking+YouCtrl | AddPower$ 1 | Description$ Attacking creatures you control get +1/+0.
+SVar:Rarity:Special
+SVar:Picture:
+SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=182251&type=card
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/goblin-warchief.jpg
+End
