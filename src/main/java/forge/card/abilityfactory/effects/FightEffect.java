@@ -15,29 +15,7 @@ public class FightEffect extends SpellEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        Card fighter1 = null;
-        Card fighter2 = null;
-        final Target tgt = sa.getTarget();
-        ArrayList<Card> tgts = null;
-        if (tgt != null) {
-            tgts = tgt.getTargetCards();
-            if (tgts.size() > 0) {
-                fighter1 = tgts.get(0);
-            }
-        }
-        if (sa.hasParam("Defined")) {
-            ArrayList<Card> defined = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
-            // Allow both fighters to come from defined list if first fighter not already found
-            if (defined.size() > 1 && fighter1 == null) {
-                fighter1 = defined.get(0);
-                fighter2 = defined.get(1);
-            }
-            else {
-                fighter2 = defined.get(0);
-            }
-        } else if (tgts.size() > 1) {
-            fighter2 = tgts.get(1);
-        }
+        ArrayList<Card> fighters = getFighters(sa);
 
         if (sa instanceof AbilitySub) {
             sb.append(" ");
@@ -45,7 +23,12 @@ public class FightEffect extends SpellEffect {
             sb.append(sa.getSourceCard()).append(" - ");
         }
 
-        sb.append(fighter1 + " fights " + fighter2);
+        if (fighters.size() > 1) {
+            sb.append(fighters.get(0) + " fights " + fighters.get(1));
+        }
+        else {
+            sb.append(fighters.get(0) + " fights unknown");
+        }
         return sb.toString();
     }
 
@@ -54,6 +37,21 @@ public class FightEffect extends SpellEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
+        ArrayList<Card> fighters = getFighters(sa);
+
+        if (fighters.size() < 2 || !fighters.get(0).isInPlay()
+                || !fighters.get(1).isInPlay()) {
+            return;
+        }
+
+        int dmg2 = fighters.get(1).getNetAttack();
+        fighters.get(1).addDamage(fighters.get(0).getNetAttack(), fighters.get(0));
+        fighters.get(0).addDamage(dmg2, fighters.get(1));
+    }
+
+    private static ArrayList<Card> getFighters(SpellAbility sa) {
+        final ArrayList<Card> fighterList = new ArrayList<Card>();
+
         Card fighter1 = null;
         Card fighter2 = null;
         final Target tgt = sa.getTarget();
@@ -67,25 +65,23 @@ public class FightEffect extends SpellEffect {
         if (sa.hasParam("Defined")) {
             ArrayList<Card> defined = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
             // Allow both fighters to come from defined list if first fighter not already found
-            if (defined.size() > 1 && fighter1 == null) {
-                fighter1 = defined.get(0);
-                fighter2 = defined.get(1);
-            }
-            else {
-                fighter2 = defined.get(0);
+            if (!defined.isEmpty()) {
+                if (defined.size() > 1 && fighter1 == null) {
+                    fighter1 = defined.get(0);
+                    fighter2 = defined.get(1);
+                }
+                else {
+                    fighter2 = defined.get(0);
+                }
             }
         } else if (tgts.size() > 1) {
             fighter2 = tgts.get(1);
         }
 
-        if (fighter1 == null || fighter2 == null || !fighter1.isInPlay()
-                || !fighter2.isInPlay()) {
-            return;
-        }
+        if (fighter1 != null) fighterList.add(fighter1);
+        if (fighter2 != null) fighterList.add(fighter2);
 
-        int dmg2 = fighter2.getNetAttack();
-        fighter2.addDamage(fighter1.getNetAttack(), fighter1);
-        fighter1.addDamage(dmg2, fighter2);
+        return fighterList;
     }
 
 }
