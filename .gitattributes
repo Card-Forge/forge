@@ -574,6 +574,7 @@ res/cardsfolder/a/auriok_edgewright.txt svneol=native#text/plain
 res/cardsfolder/a/auriok_glaivemaster.txt svneol=native#text/plain
 res/cardsfolder/a/auriok_replica.txt -text
 res/cardsfolder/a/auriok_salvagers.txt svneol=native#text/plain
+res/cardsfolder/a/auriok_steelshaper.txt -text
 res/cardsfolder/a/auriok_sunchaser.txt svneol=native#text/plain
 res/cardsfolder/a/auriok_survivors.txt -text
 res/cardsfolder/a/auriok_transfixer.txt svneol=native#text/plain

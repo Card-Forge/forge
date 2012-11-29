@@ -194,6 +194,9 @@ public class StaticAbilityCostChange {
             }
             if (params.get("Type").equals("Cycling") && !sa.isCycling()) {
                 return originalCost;
+            } else if (params.get("Type").equals("Equip")
+                    && (!(sa instanceof AbilityActivated) || !sa.hasParam("Equip"))) {
+                return originalCost;
             }
         }
         if (params.containsKey("ValidTarget")) {
