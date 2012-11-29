@@ -37,7 +37,7 @@ public class PlayerZone extends Zone {
 
     private final Player player;
 
-    
+
 
     /**
      * <p>
@@ -97,12 +97,12 @@ public class PlayerZone extends Zone {
         }
 
         this.cardList.add(c);
-        
+
         if (update) {
             this.update();
         }
     }
-    
+
 
     /**
      * Checks if is.
@@ -116,7 +116,7 @@ public class PlayerZone extends Zone {
     public final boolean is(final ZoneType zone, final Player player) {
         return (zone == this.zoneName && this.player.equals(player));
     }
-    
+
     /**
      * <p>
      * Getter for the field <code>player</code>.
@@ -148,6 +148,6 @@ public class PlayerZone extends Zone {
     public void updateLabelObservers() {
         getPlayer().updateLabelObservers();
     }
-    
+
 
 }

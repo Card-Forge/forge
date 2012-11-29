@@ -21,21 +21,21 @@ public class MatchStartHelper {
     private final Map<LobbyPlayer, PlayerStartConditions> players = new HashMap<LobbyPlayer, PlayerStartConditions>();
 
     public void addPlayer(final LobbyPlayer player, final PlayerStartConditions c) {
-        players.put(player,c);
+        players.put(player, c);
     }
-    
+
     public void addPlayer(final LobbyPlayer player, final Deck deck) {
         PlayerStartConditions start = new PlayerStartConditions(deck);
         players.put(player, start);
     }
-    
-    public void addVanguardPlayer(final LobbyPlayer player, final Deck deck, final CardPrinted avatar)
-    {
+
+    public void addVanguardPlayer(final LobbyPlayer player, final Deck deck, final CardPrinted avatar) {
+
         PlayerStartConditions start = new PlayerStartConditions(deck);
-        
+
         start.setStartingLife(start.getStartingLife() + avatar.getCard().getLife());
         start.setStartingHand(start.getStartingHand() + avatar.getCard().getHand());
-        
+
         start.setCardsInCommand(new Supplier<Iterable<Card>>() {
 
             @Override
@@ -44,14 +44,14 @@ public class MatchStartHelper {
                 res.add(avatar.toForgeCard());
                 return res;
             }
-            
+
         });
-        
+
         players.put(player, start);
     }
-    
-    public Map<LobbyPlayer, PlayerStartConditions> getPlayerMap() 
-    {
+
+    public Map<LobbyPlayer, PlayerStartConditions> getPlayerMap() {
+
         return players;
     }
 

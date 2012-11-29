@@ -121,7 +121,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
             if (c.isLand()) {
 
                 // Tectonic Instability
-                final List<Card> tis = 
+                final List<Card> tis =
                         CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Tectonic Instability"));
                 final Card tisLand = c;
                 for (final Card ti : tis) {
@@ -280,14 +280,14 @@ public class PlayerZoneBattlefield extends PlayerZone {
         this.leavesTrigger = b;
     }
 
-    private static Predicate<Card> isNotPhased = new Predicate<Card>(){
+    private static Predicate<Card> isNotPhased = new Predicate<Card>() {
         @Override
         public boolean apply(Card crd) {
             return !crd.isPhasedOut();
         }
-        
+
     };
-    
+
     /*
      * (non-Javadoc)
      * 

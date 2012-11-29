@@ -205,7 +205,7 @@ public class Deck extends DeckBase {
         d.getMain().set(Deck.readCardList(sections.get("main")));
         d.getSideboard().set(Deck.readCardList(sections.get("sideboard")));
         List<String> cmd = Deck.readCardList(sections.get("commander"));
-        String cmdName = cmd.isEmpty() ? null : cmd.get(0); 
+        String cmdName = cmd.isEmpty() ? null : cmd.get(0);
         d.commander = CardDb.instance().isCardSupported(cmdName) ? CardDb.instance().getCard(cmdName) : null;
         d.getPlanes().set(Deck.readCardList(sections.get("planes")));
         d.getSchemes().set(Deck.readCardList(sections.get("schemes")));
@@ -251,7 +251,7 @@ public class Deck extends DeckBase {
         }
         return out;
     }
-    
+
     private static String serializeSingleCard(CardPrinted card, Integer n) {
 
         final boolean hasBadSetInfo = "???".equals(card.getEdition()) || StringUtils.isBlank(card.getEdition());
@@ -259,7 +259,7 @@ public class Deck extends DeckBase {
             return String.format("%d %s", n, card.getName());
         } else {
             return String.format("%d %s|%s", n, card.getName(), card.getEdition());
-        }        
+        }
     }
 
     /**
@@ -285,15 +285,15 @@ public class Deck extends DeckBase {
 
         out.add(String.format("%s", "[sideboard]"));
         out.addAll(Deck.writeCardPool(this.getSideboard()));
-        
-        if ( getCommander() != null ) {
+
+        if (getCommander() != null) {
             out.add(String.format("%s", "[commander]"));
             out.add(Deck.serializeSingleCard(getCommander(), 1));
         }
-        
+
         out.add(String.format("%s", "[planes]"));
         out.addAll(Deck.writeCardPool(this.getPlanes()));
-        
+
         out.add(String.format("%s", "[schemes]"));
         out.addAll(Deck.writeCardPool(this.getSchemes()));
         return out;
@@ -352,46 +352,54 @@ public class Deck extends DeckBase {
             return false;
         }
 
-        if(type == GameType.Commander)
-        {//Must contain exactly 1 legendary Commander and no sideboard.
+        if (type == GameType.Commander) { //Must contain exactly 1 legendary Commander and no sideboard.
+
             //TODO:Enforce color identity
-            if ( null == getCommander())
+            if (null == getCommander()) {
                 return false;
-            
-            if(!getCommander().getCard().getType().isLegendary())
+            }
+            if (!getCommander().getCard().getType().isLegendary()) {
                 return false;
-            
+            }
+
             //No sideboarding in Commander
-            if(!getSideboard().isEmpty())
+            if (!getSideboard().isEmpty()) {
                 return false;
+            }
         }
-        else if(type == GameType.Planechase) 
-        {//Must contain at least 10 planes/phenomenons, but max 2 phenomenons. Singleton.
-            if(getPlanes().countAll() < 10)
+        else if (type == GameType.Planechase) { //Must contain at least 10 planes/phenomenons, but max 2 phenomenons. Singleton.
+
+            if (getPlanes().countAll() < 10) {
                 return false;
+            }
             int phenoms = 0;
-            for(CardPrinted cp : getPlanes().toFlatList())
-            {
-                if(cp.getType().contains("Phenomenon"))
+            for (CardPrinted cp : getPlanes().toFlatList()) {
+
+                if (cp.getType().contains("Phenomenon")) {
                     phenoms++;
-                if(getPlanes().count(cp) > 1)
+                }
+                if (getPlanes().count(cp) > 1) {
                     return false;
+                }
             }
-            if(phenoms > 2)
+            if (phenoms > 2) {
                 return false;
-        }
-        else if(type == GameType.Archenemy) 
-        {//Must contain at least 20 schemes, max 2 of each.
-            if(getSchemes().countAll() < 20)
-                return false;
-            
-            for(CardPrinted cp : getSchemes().toFlatList())
-            {
-                if(getSchemes().count(cp) > 2)
-                    return false;
             }
         }
-        
+        else if (type == GameType.Archenemy)  { //Must contain at least 20 schemes, max 2 of each.
+
+            if (getSchemes().countAll() < 20) {
+                return false;
+            }
+
+            for (CardPrinted cp : getSchemes().toFlatList()) {
+
+                if (getSchemes().count(cp) > 2) {
+                    return false;
+                }
+            }
+        }
+
         return true;
     }
 

@@ -44,14 +44,14 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
 
     /** The cards. */
     protected final List<Card> cardList = new ArrayList<Card>();
-    protected final List<Card> roCardList;    
+    protected final List<Card> roCardList;
     protected final ZoneType zoneName;
     protected boolean update = true;
 
     protected final List<Card> cardsAddedThisTurn = new ArrayList<Card>();
     protected final ArrayList<ZoneType> cardsAddedThisTurnSource = new ArrayList<ZoneType>();
 
-    
+
 
     /**
      * <p>
@@ -91,13 +91,13 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
         c.setTapped(false);
 
         this.cardList.add(c);
-        
+
         if (update) {
             this.update();
         }
     }
-    
-    
+
+
     /**
      * Adds the.
      * 
@@ -207,8 +207,9 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
     @Override
     public final void setCards(final Iterable<Card> cards) {
         cardList.clear();
-        for(Card c : cards)
+        for (Card c : cards) {
             cardList.add(c);
+        }
         this.update();
     }
 
@@ -226,11 +227,11 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
         return zone == this.zoneName;
     }
 
-    // PlayerZone should override it with a correct implementation 
+    // PlayerZone should override it with a correct implementation
     public boolean is(final ZoneType zone, final Player player) {
         return false;
-    }    
-    
+    }
+
     /*
      * (non-Javadoc)
      * 

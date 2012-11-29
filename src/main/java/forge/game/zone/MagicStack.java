@@ -488,8 +488,9 @@ public class MagicStack extends MyObservable {
             //GuiDisplayUtil.updateGUI();
         } else {
             if (sp.getOptionalAdditionalCosts() != null) {
-                for (String s : sp.getOptionalAdditionalCosts())
+                for (String s : sp.getOptionalAdditionalCosts()) {
                     sp.getSourceCard().addOptionalAdditionalCostsPaid(s);
+                }
             }
             if (sp.getSourceCard().isCopiedSpell()) {
                 this.push(sp);
@@ -609,7 +610,7 @@ public class MagicStack extends MyObservable {
                         }
                     }
                 };
-                Player activating = sp.getActivatingPlayer(); 
+                Player activating = sp.getActivatingPlayer();
 
                 if (activating.isHuman()) {
                     final ManaCost manaCost = this.getMultiKickerSpellCostChange(ability);
@@ -716,7 +717,7 @@ public class MagicStack extends MyObservable {
             }
 
         }
-        
+
         // Copied spells aren't cast
         // per se so triggers shouldn't
         // run for them.
@@ -864,7 +865,7 @@ public class MagicStack extends MyObservable {
             // when something is added we need to setPriority
             game.getPhaseHandler().setPriority(sp.getActivatingPlayer());
         }
-        
+
         SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
         this.updateObservers();
 
@@ -1004,18 +1005,18 @@ public class MagicStack extends MyObservable {
                 && game.getZoneOf(source).is(ZoneType.Stack)
                 && source.getOwner().equals(source.getController())) //"If you cast this spell from your hand"
         {
-            
+
             //Move rebounding card to exile
             source = game.getAction().exile(source);
 
-            source.setSVar("ReboundAbilityTrigger", "DB$ Play | Defined$ Self " +
-            		"| WithoutManaCost$ True | Optional$ True");
+            source.setSVar("ReboundAbilityTrigger", "DB$ Play | Defined$ Self "
+                    + "| WithoutManaCost$ True | Optional$ True");
 
             //Setup a Rebound-trigger
-            final Trigger reboundTrigger = forge.card.trigger.TriggerHandler.parseTrigger("Mode$ Phase " +
-            		"| Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | Execute$ ReboundAbilityTrigger " +
-            		"| TriggerDescription$ At the beginning of your next upkeep, you may cast " + source.toString() 
-            		+ " without paying it's manacost.", source, true);
+            final Trigger reboundTrigger = forge.card.trigger.TriggerHandler.parseTrigger("Mode$ Phase "
+                    + "| Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | Execute$ ReboundAbilityTrigger "
+                    + "| TriggerDescription$ At the beginning of your next upkeep, you may cast " + source.toString()
+                    + " without paying it's manacost.", source, true);
 
             game.getTriggerHandler().registerDelayedTrigger(reboundTrigger);
         }
@@ -1086,13 +1087,13 @@ public class MagicStack extends MyObservable {
      * @return a boolean.
      */
     public final boolean hasFizzled(final SpellAbility sa, final Card source, final boolean parentFizzled) {
-		// Can't fizzle unless there are some targets
+        // Can't fizzle unless there are some targets
         boolean fizzle = false;
-        
+
         Target tgt = sa.getTarget();
         if (tgt != null) {
             if (tgt.getMinTargets(source, sa) == 0 && tgt.getNumTargeted() == 0) {
-                // Nothing targeted, and nothing needs to be targeted. 
+                // Nothing targeted, and nothing needs to be targeted.
             }
             else {
                 // Some targets were chosen, fizzling for this subability is now possible
@@ -1114,11 +1115,11 @@ public class MagicStack extends MyObservable {
                     else if (o instanceof Card) {
                         final Card card = (Card) o;
                         Card current = game.getCardState(card);
-                        
+
                         invalidTarget = current.getTimestamp() != card.getTimestamp();
-                        
+
                         invalidTarget |= !(CardFactoryUtil.isTargetStillValid(sa, card));
-                        
+
                         if (invalidTarget) {
                             choices.removeTarget(card);
                         }
@@ -1133,12 +1134,12 @@ public class MagicStack extends MyObservable {
                         }
                     }
                     fizzle &= invalidTarget;
-                }              
+                }
             }
         }
         else if (sa.getTargetCard() != null) {
             fizzle = !CardFactoryUtil.isTargetStillValid(sa, sa.getTargetCard());
-        } 
+        }
         else if (sa.getTargetPlayer() != null) {
             fizzle = !sa.getTargetPlayer().canBeTargetedBy(sa);
         }
@@ -1146,11 +1147,11 @@ public class MagicStack extends MyObservable {
             // Set fizzle to the same as the parent if there's no target info
             fizzle = parentFizzled;
         }
-        
+
         if (sa.getSubAbility() == null) {
             return fizzle;
         }
-        
+
         return hasFizzled(sa.getSubAbility(), source, fizzle) && fizzle;
     }
 
@@ -1370,12 +1371,11 @@ public class MagicStack extends MyObservable {
                 } else {
                     this.add(next);
                 }
-            }
-            else{
+            } else {
                 // Otherwise, gave a dual list form to create instead of needing to do it one at a time
                 List<SpellAbility> orderedSAs = GuiChoose.getOrderChoices("Select order for Simultaneous Spell Abilities", "Resolve first", 0, activePlayerSAs, null, null);
                 int size = orderedSAs.size();
-                for(int i = size-1; i >= 0; i--){
+                for (int i = size - 1; i >= 0; i--) {
                     SpellAbility next = orderedSAs.get(i);
                     if (next.isTrigger()) {
                         game.getAction().playSpellAbility(next);
@@ -1385,7 +1385,7 @@ public class MagicStack extends MyObservable {
                 }
             }
         }
-        
+
     }
 
     /**

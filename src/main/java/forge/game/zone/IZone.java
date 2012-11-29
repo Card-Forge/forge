@@ -67,7 +67,7 @@ interface IZone {
      *            a {@link java.lang.Object} object.
      */
     void add(Object o);
-    
+
     void add(Object o, boolean b);
 
     /**

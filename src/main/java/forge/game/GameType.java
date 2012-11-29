@@ -37,7 +37,7 @@ public enum GameType {
     /** The Planechase. */
     Planechase(false, 60),
     /** The Archenemy. */
-    Archenemy(false, 60),    
+    Archenemy(false, 60),
     /** */
     Gauntlet(true, 40);
 
