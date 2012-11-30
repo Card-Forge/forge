@@ -119,7 +119,7 @@ public enum VHomeUI implements IVTopLevelUI {
         //allSubmenus.add(VSubmenuExit.SINGLETON_INSTANCE);
 
         allSubmenus.add(VSubmenuArchenemy.SINGLETON_INSTANCE);
-        
+
         allSubmenus.add(VSubmenuVanguard.SINGLETON_INSTANCE);
 
         // For each group: init its panel

@@ -352,18 +352,18 @@ public abstract class GuiDownloader extends DefaultBoundedRangeModel implements 
                         System.out.println("Can't create folder" + base.getAbsolutePath());
                     }
                     // Don't allow redirections here!
-                    
+
                     URL imageUrl = new URL(url);
-                    HttpURLConnection conn = (HttpURLConnection)imageUrl.openConnection();
+                    HttpURLConnection conn = (HttpURLConnection) imageUrl.openConnection();
                     conn.setInstanceFollowRedirects(false);
                     conn.connect();
-                    
+
                     if (conn.getResponseCode() != 200) {
                         conn.disconnect();
                         System.out.println("Skipped Download for: " + fileDest.getPath());
                         continue;
                     }
-                    
+
                     in = new BufferedInputStream(conn.getInputStream());
                     out = new BufferedOutputStream(new FileOutputStream(fileDest));
 

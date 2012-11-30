@@ -78,8 +78,12 @@ public class FightEffect extends SpellEffect {
             fighter2 = tgts.get(1);
         }
 
-        if (fighter1 != null) fighterList.add(fighter1);
-        if (fighter2 != null) fighterList.add(fighter2);
+        if (fighter1 != null) {
+            fighterList.add(fighter1);
+        }
+        if (fighter2 != null) {
+            fighterList.add(fighter2);
+        }
 
         return fighterList;
     }

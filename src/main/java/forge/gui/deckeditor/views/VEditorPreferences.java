@@ -197,7 +197,7 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
     public JCheckBox getChbCatalogAI() {
         return chbCatalogAI;
     }
-    
+
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getChbCatalogPower() {
         return chbCatalogPower;
@@ -232,7 +232,7 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
     public JCheckBox getChbDeckAI() {
         return chbDeckAI;
     }
-    
+
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getChbDeckPower() {
         return chbDeckPower;

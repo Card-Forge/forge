@@ -326,7 +326,7 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
 
         //Re-rename buttons
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText(ccAddLabel);
-        
+
         //Re-add buttons
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setVisible(true);

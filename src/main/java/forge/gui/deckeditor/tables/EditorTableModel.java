@@ -318,7 +318,7 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
         @SuppressWarnings("unchecked")
         public void add(final TableColumnInfo<T> col0) {
             this.sorter = null;
-            
+
             // Found at top level, should invert
             if (colsToSort.size() > 0 && colsToSort.get(0).equals(col0)) {
                 this.colsToSort.get(0).setSortState(
@@ -357,13 +357,14 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
         }
 
         public TableSorterCascade<InventoryItem> getSorter() {
-            if ( this.sorter == null )
+            if (this.sorter == null) {
                 this.sorter = createSorter();
+            }
             return this.sorter;
         }
-        
-        private TableSorterCascade<InventoryItem> createSorter()
-        {
+
+        private TableSorterCascade<InventoryItem> createSorter() {
+
             final List<TableSorter<InventoryItem>> oneColSorters
                 = new ArrayList<TableSorter<InventoryItem>>(maxSortDepth);
 
