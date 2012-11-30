@@ -1,0 +1,12 @@
+Name:Catalyst Stone
+ManaCost:2
+Types:Artifact
+Text:no text
+S:Mode$ ReduceCost | ValidCard$ Card | Type$ Flashback | Activator$ You | Amount$ 2 | Description$ Flashback costs you pay cost up to 2 less.
+S:Mode$ RaiseCost | ValidCard$ Card | Type$ Flashback | Activator$ Opponent | Amount$ 2 | Description$ Flashback costs your opponents pay cost 2 more.
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/catalyst_stone.jpg
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/297.jpg
+Oracle:Flashback costs you pay cost up to {2} less.\nFlashback costs your opponents pay cost {2} more.
+End

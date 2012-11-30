@@ -73,9 +73,14 @@ public class StaticAbilityCostChange {
                 if (!(sa instanceof AbilityActivated)) {
                     return originalCost;
                 }
-            } else if (params.get("Type").equals("NonManaAbility")
-                    && (!(sa instanceof AbilityActivated) || null != sa.getManaPart())) {
-                return originalCost;
+            } else if (params.get("Type").equals("NonManaAbility")) {
+                    if (!(sa instanceof AbilityActivated) || null != sa.getManaPart()) {
+                        return originalCost;
+                    }
+            } else if (params.get("Type").equals("Flashback")) {
+                    if (!sa.isFlashBackAbility()) {
+                        return originalCost;
+                    }
             }
         }
         if (params.containsKey("AffectedZone") && !card.isInZone(ZoneType.smartValueOf(params.get("AffectedZone")))) {
@@ -186,17 +191,26 @@ public class StaticAbilityCostChange {
             return originalCost;
         }
         if (params.containsKey("Type")) {
-            if (params.get("Type").equals("Spell") && !sa.isSpell()) {
-                return originalCost;
-            }
-            if (params.get("Type").equals("Ability") && !(sa instanceof AbilityActivated)) {
-                return originalCost;
-            }
-            if (params.get("Type").equals("Cycling") && !sa.isCycling()) {
-                return originalCost;
-            } else if (params.get("Type").equals("Equip")
-                    && (!(sa instanceof AbilityActivated) || !sa.hasParam("Equip"))) {
-                return originalCost;
+            if (params.get("Type").equals("Spell")) {
+                if (!sa.isSpell()) {
+                    return originalCost;
+                }
+            } else if (params.get("Type").equals("Ability")) {
+                if (!(sa instanceof AbilityActivated)) {
+                    return originalCost;
+                }
+            } else if (params.get("Type").equals("Cycling")) {
+                if (!sa.isCycling()) {
+                    return originalCost;
+                }
+            } else if (params.get("Type").equals("Equip")) {
+                if (!(sa instanceof AbilityActivated) || !sa.hasParam("Equip")) {
+                    return originalCost;
+                }
+            } else if (params.get("Type").equals("Flashback")) {
+                if (!sa.isFlashBackAbility()) {
+                    return originalCost;
+                }
             }
         }
         if (params.containsKey("ValidTarget")) {
