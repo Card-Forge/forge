@@ -13292,6 +13292,7 @@ src/main/java/forge/gui/toolbox/FProgressBar.java -text
 src/main/java/forge/gui/toolbox/FRadioButton.java -text
 src/main/java/forge/gui/toolbox/FScrollPane.java -text
 src/main/java/forge/gui/toolbox/FSkin.java -text
+src/main/java/forge/gui/toolbox/FTabbedPane.java -text
 src/main/java/forge/gui/toolbox/FTextArea.java -text
 src/main/java/forge/gui/toolbox/FTextField.java -text
 src/main/java/forge/gui/toolbox/SaveOpenDialog.java -text

@@ -29,6 +29,7 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JLayeredPane;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
 import forge.Singletons;
@@ -145,6 +146,12 @@ public enum FControl {
     public void initialize() {
         // Preloads skin components (using progress bar).
         FSkin.loadFull();
+        
+        //This must be done here or at least between the skin being loaded and any FTabbedPanes being created.
+        //Why,Swing? Why is this not a property of JTabbbedPane?
+        UIManager.put("TabbedPane.selected", FSkin.getColor(FSkin.Colors.CLR_ACTIVE));
+        UIManager.put("TabbedPane.contentOpaque", FSkin.getColor(FSkin.Colors.CLR_THEME));
+        UIManager.put("TabbedPane.unselectedBackground", FSkin.getColor(FSkin.Colors.CLR_THEME2));             
 
         // Does not use progress bar, due to be deprecated with battlefield refactoring.
         CardFaceSymbols.loadImages();

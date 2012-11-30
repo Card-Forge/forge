@@ -2,34 +2,21 @@ package forge.gui.home.variant;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
-import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
-import javax.swing.ButtonModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingConstants;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
-import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import net.miginfocom.swing.MigLayout;
-import forge.card.CardCoreType;
-import forge.card.CardRules;
-import forge.card.CardRulesPredicates;
 import forge.game.player.PlayerType;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
@@ -47,6 +34,7 @@ import forge.gui.toolbox.FPanel;
 import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FTabbedPane;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 
@@ -80,7 +68,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
 
     //////////////////////////////
 
-    private final JTabbedPane tabPane = new JTabbedPane();
+    private final FTabbedPane tabPane = new FTabbedPane();
     private final List<FPanel> playerPanels = new ArrayList<FPanel>();
     private final List<FDeckChooser> deckChoosers = new ArrayList<FDeckChooser>();
     private final List<FList> avatarLists = new ArrayList<FList>();
