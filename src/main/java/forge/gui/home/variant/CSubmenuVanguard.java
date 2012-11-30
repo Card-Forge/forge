@@ -19,13 +19,11 @@ import forge.deck.Deck;
 import forge.game.GameType;
 import forge.game.MatchController;
 import forge.game.MatchStartHelper;
-import forge.game.PlayerStartConditions;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.PlayerType;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FDeckChooser;
-import forge.gui.toolbox.FList;
 import forge.item.CardPrinted;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
@@ -56,8 +54,7 @@ public enum CSubmenuVanguard implements ICDoc {
     @Override
     public void initialize() {
         final ForgePreferences prefs = Singletons.getModel().getPreferences();
-        for(FDeckChooser fdc : view.getDeckChoosers())
-        {
+        for (FDeckChooser fdc : view.getDeckChoosers()) {
             fdc.initialize();
         }
 
@@ -103,7 +100,6 @@ public enum CSubmenuVanguard implements ICDoc {
         view.getCbRemoveSmall().setSelected(prefs.getPrefBoolean(FPref.DECKGEN_NOSMALL));
     }
 
-    
 
     /** @param lists0 &emsp; {@link java.util.List}<{@link javax.swing.JList}> */
     private void startGame() {
@@ -119,62 +115,51 @@ public enum CSubmenuVanguard implements ICDoc {
             @Override
             public Object doInBackground() {
                 Random rnd = new Random();
-                
+
                 List<Deck> playerDecks = new ArrayList<Deck>();
-                for(int i=0;i<view.getNumPlayers();i++)
-                {
+                for (int i = 0; i < view.getNumPlayers(); i++) {
                     Deck d = view.getDeckChoosers().get(i).getDeck();
-                    
-                    if(d == null)
-                    {
+
+                    if (d == null) {
                         //ERROR!
-                        GameActionUtil.showInfoDialg("No deck selected for player " + (i+1));
+                        GameActionUtil.showInfoDialg("No deck selected for player " + (i + 1));
                         return null;
                     }
                     playerDecks.add(d);
                 }
-                
+
                 List<CardPrinted> playerAvatars = new ArrayList<CardPrinted>();
-                for(int i=0;i<view.getNumPlayers();i++)
-                {
+                for (int i = 0; i < view.getNumPlayers(); i++) {
                     CardPrinted avatar = null;
                     Object obj = view.getAvatarLists().get(i).getSelectedValue();
-                    if(obj instanceof String)
-                    {
+                    if (obj instanceof String) {
                         //Random is the only string in the list so grab a random avatar.
-                        if(i == 0)
-                        {
+                        if (i == 0)  {
                             //HUMAN
-                            avatar = Iterables.get(view.getAllAvatars(),rnd.nextInt(Iterables.size(view.getAllAvatars())));
-                        }
-                        else
-                        {
+                            avatar = Iterables.get(view.getAllAvatars(), rnd.nextInt(Iterables.size(view.getNonRandomHumanAvatars())));
+                        } else {
                             //AI
-                            avatar = Iterables.get(view.getAllAiAvatars(),rnd.nextInt(Iterables.size(view.getAllAiAvatars())));
+                            avatar = Iterables.get(view.getAllAiAvatars(), rnd.nextInt(Iterables.size(view.getNonRandomAiAvatars())));
                         }
-                    }
-                    else
-                    {
+                    } else {
                         avatar = (CardPrinted) obj;
                     }
-                    if(avatar == null)
-                    {
+                    if (avatar == null) {
                         //ERROR!
-                        GameActionUtil.showInfoDialg("No avatar selected for player " + (i+1));
+                        GameActionUtil.showInfoDialg("No avatar selected for player " + (i + 1));
                         return null;
                     }
                     playerAvatars.add(avatar);
                 }
-                
+
                 Lobby lobby = Singletons.getControl().getLobby();
                 MatchStartHelper helper = new MatchStartHelper();
-                for(int i=0;i<view.getNumPlayers();i++)
-                {
+                for (int i = 0; i < view.getNumPlayers(); i++) {
                     LobbyPlayer player = lobby.findLocalPlayer(i == 0 ? PlayerType.HUMAN : PlayerType.COMPUTER);
-                    
+
                     helper.addVanguardPlayer(player, playerDecks.get(i), playerAvatars.get(i));
                 }
-                MatchController mc = Singletons.getModel().getMatch(); 
+                MatchController mc = Singletons.getModel().getMatch();
                 mc.initMatch(GameType.Vanguard, helper.getPlayerMap());
                 mc.startRound();
 
