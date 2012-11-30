@@ -120,8 +120,7 @@ class CardFactoryAuras {
                     newType[0] = landTypes[minAt];
                     List<Card> list = opp.getLandsInPlay();
                     list = CardLists.getNotType(list, newType[0]); // Don't enchant lands
-                                                        // that already have the
-                                                        // type
+                                                        // that already have the type
                     if (list.isEmpty()) {
                         return false;
                     }

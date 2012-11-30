@@ -527,5 +527,4 @@ class CardFactoryArtifacts {
             card.addSpellAbility(ability);
         } // *************** END ************ END **************************
     }
-
 }

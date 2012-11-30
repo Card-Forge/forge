@@ -304,8 +304,6 @@ public class CardFactory {
             CardFactoryCreatures.buildCard(card, cardName);
         } else if (card.isAura()) {
             CardFactoryAuras.buildCard(card, cardName);
-        } else if (card.isEquipment()) {
-            CardFactoryEquipment.buildCard(card, cardName);
         } else if (card.isPlaneswalker()) {
             CardFactoryPlaneswalkers.buildCard(card);
         } else if (card.isLand()) {

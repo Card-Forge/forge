@@ -433,18 +433,12 @@ public class CardFactoryCreatures {
             }
         }
         final AbilityActivated ability = new MasterOfTheWildHuntAbility(card, abCost, abTgt);
-
         card.addSpellAbility(ability);
     }
 
     private static void getCard_ApocalypseHydra(final Card card) {
         final SpellAbility spell = new SpellPermanent(card) {
             private static final long serialVersionUID = -11489323313L;
-
-            /*
-             * @Override public boolean canPlayAI() { return super.canPlay()
-             * && (5 <= (ComputerUtil.getAvailableMana().size() - 2)); }
-             */
 
             @Override
             public void resolve() {
@@ -469,8 +463,6 @@ public class CardFactoryCreatures {
             @Override
             public void resolve() {
                 card.addCounter(CounterType.P1P1, this.countKithkin(), true);
-                // System.out.println("all counters: "
-                // +card.sumAllCounters());
             } // resolve()
 
             public int countKithkin() {

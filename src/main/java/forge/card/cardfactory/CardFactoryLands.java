@@ -17,26 +17,18 @@
  */
 package forge.card.cardfactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
-
-import com.google.common.base.Predicate;
 
 import forge.Card;
 
 import forge.CardLists;
 import forge.Command;
-import forge.CounterType;
 import forge.GameActionUtil;
 import forge.Singletons;
-import forge.card.cost.Cost;
-import forge.card.spellability.AbilityActivated;
-import forge.card.spellability.Target;
 import forge.control.input.Input;
 import forge.control.input.InputSelectManyCards;
-import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -74,7 +66,6 @@ class CardFactoryLands {
                 || cardName.equals("Stomping Ground") || cardName.equals("Temple Garden")
                 || cardName.equals("Watery Grave")) {
             // if this isn't done, computer plays more than 1 copy
-            // card.clearSpellAbility();
             card.clearSpellKeepManaAbility();
 
             card.addComesIntoPlayCommand(new Command() {
@@ -125,8 +116,7 @@ class CardFactoryLands {
                 } // execute()
 
                 private void tapCard() {
-                    // it enters the battlefield this way, and should not fire
-                    // triggers
+                    // it enters the battlefield this way, and should not fire triggers
                     card.setTapped(true);
                 }
             });
