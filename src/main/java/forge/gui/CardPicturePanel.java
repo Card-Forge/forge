@@ -106,7 +106,7 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
         this.card = null;
         this.inventoryItem = cp;
         if (!this.isShowing()) {
-		// This line didn't seem to be helping, and doesn't exist down there
+        // This line didn't seem to be helping, and doesn't exist down there
         //    return;
         }
 

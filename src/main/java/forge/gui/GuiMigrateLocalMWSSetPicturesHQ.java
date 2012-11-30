@@ -491,8 +491,8 @@ public final class GuiMigrateLocalMWSSetPicturesHQ extends DefaultBoundedRangeMo
         final String urlBase = "C:\\MTGForge\\HQPICS\\";
         String imgFN = "";
 
-        for (final CardPrinted cp : CardDb.instance().getAllTraditionalCards()) 
-        {
+        for (final CardPrinted cp : CardDb.instance().getAllTraditionalCards()) {
+
             // String url = c.getSVar("Picture");
             // String[] URLs = url.split("\\\\");
             String edCode = cp.getEdition();
@@ -504,8 +504,8 @@ public final class GuiMigrateLocalMWSSetPicturesHQ extends DefaultBoundedRangeMo
                 final int maxIndex = cp.getCard().getEditionInfo(cp.getEdition()).getCopiesCount();
                 String k = maxIndex > 1 ? Integer.valueOf(cp.getArtIndex() + 1).toString() : "";
                 final String fn = GuiDisplayUtil.cleanStringMWS(cp.getName()) + k + ".full.jpg";
-                final String destFn = imgBase + File.pathSeparator + edCode + File.pathSeparator + imgFN + k + ".jpg"; 
-                cList.add(new MCard( destFn, urlBase + setCode2 + "\\" + fn, edCode));
+                final String destFn = imgBase + File.pathSeparator + edCode + File.pathSeparator + imgFN + k + ".jpg";
+                cList.add(new MCard(destFn, urlBase + setCode2 + "\\" + fn, edCode));
             }
 
             // Log.error(iName + ".jpg" + "\t" + URLs[0]);

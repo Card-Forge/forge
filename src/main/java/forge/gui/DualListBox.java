@@ -99,7 +99,7 @@ public class DualListBox<T> extends JPanel {
     private void fillListModel(UnsortedListModel<T> model, ListModel newValues) {
         int size = newValues.getSize();
         for (int i = 0; i < size; i++) {
-            model.add((T)newValues.getElementAt(i));
+            model.add((T) newValues.getElementAt(i));
         }
     }
 

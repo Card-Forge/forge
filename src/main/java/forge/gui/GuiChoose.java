@@ -190,7 +190,7 @@ public class GuiChoose {
                     CMatchUI.SINGLETON_INSTANCE.setCard((Card) list.getSelectedValue());
 
                     GuiUtils.clearPanelSelections();
-                    GuiUtils.setPanelSelection((Card)list.getSelectedValue());
+                    GuiUtils.setPanelSelection((Card) list.getSelectedValue());
                 }
                 if (list.getSelectedValue() instanceof InventoryItem) {
                     CMatchUI.SINGLETON_INSTANCE.setCard((InventoryItem) list.getSelectedValue());

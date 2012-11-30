@@ -91,7 +91,7 @@ public final class SEditorUtil  {
         int sum = Aggregates.sum(Iterables.filter(deck, Predicates.compose(predicate, deck.getFnToCard())), deck.getFnToCount());
         label.setText(String.valueOf(sum));
     }
-    
+
     /**
      * setStats.
      * 

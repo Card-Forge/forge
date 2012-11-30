@@ -44,10 +44,10 @@ public enum CEditorPreferences implements ICDoc {
         SEditorIO.loadPreferences();
 
         HashMap<JCheckBox, ColumnName> prefsDict = new HashMap<JCheckBox, SColumnUtil.ColumnName>();
-        
+
         // Simplified Column Preferences
         VEditorPreferences prefsInstance = VEditorPreferences.SINGLETON_INSTANCE;
-        
+
         // Catalog
         prefsDict.put(prefsInstance.getChbCatalogColor(), ColumnName.CAT_COLOR);
         prefsDict.put(prefsInstance.getChbCatalogRarity(), ColumnName.CAT_RARITY);
@@ -56,7 +56,7 @@ public enum CEditorPreferences implements ICDoc {
         prefsDict.put(prefsInstance.getChbCatalogAI(), ColumnName.CAT_AI);
         prefsDict.put(prefsInstance.getChbCatalogPower(), ColumnName.CAT_POWER);
         prefsDict.put(prefsInstance.getChbCatalogToughness(), ColumnName.CAT_TOUGHNESS);
-        
+
         // Deck
         prefsDict.put(prefsInstance.getChbDeckColor(), ColumnName.DECK_COLOR);
         prefsDict.put(prefsInstance.getChbDeckRarity(), ColumnName.DECK_RARITY);
@@ -71,7 +71,7 @@ public enum CEditorPreferences implements ICDoc {
             final ColumnName name = prefsDict.get(key);
             key.setSelected(SColumnUtil.getColumn(name).isShowing());
             key.addItemListener(new ItemListener() {
-                
+
                 @Override
                 public void itemStateChanged(ItemEvent arg0) {
                     SColumnUtil.toggleColumn(SColumnUtil.getColumn(name));

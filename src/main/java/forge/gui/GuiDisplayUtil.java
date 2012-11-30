@@ -338,8 +338,8 @@ public final class GuiDisplayUtil {
      * </p>
      */
     public static void updateGUI() {
-        for( Player p : Singletons.getModel().getGame().getRegisteredPlayers())
-        {
+        for (Player p : Singletons.getModel().getGame().getRegisteredPlayers()) {
+
             // why was it written twice?
             p.getZone(ZoneType.Battlefield).updateObservers();
         }
@@ -459,7 +459,7 @@ public final class GuiDisplayUtil {
 
         final Player human = Singletons.getControl().getPlayer();
         final Player ai = human.getOpponent();
-        
+
         if (!tChangePlayer.trim().toLowerCase().equals("none")) {
             if (tChangePlayer.trim().toLowerCase().equals("human")) {
                 Singletons.getModel().getGame().getPhaseHandler().setPlayerTurn(human);
@@ -470,7 +470,7 @@ public final class GuiDisplayUtil {
         }
 
 
-        
+
         if (!tChangePhase.trim().toLowerCase().equals("none")) {
             Singletons.getModel().getGame().getPhaseHandler().setDevPhaseState(forge.game.phase.PhaseType.smartValueOf(tChangePhase));
         }
@@ -740,7 +740,7 @@ public final class GuiDisplayUtil {
             }
         }
     }
-    
+
     /**
      * <p>
      * devModeTutorAnyCard.
@@ -751,15 +751,19 @@ public final class GuiDisplayUtil {
     public static void devModeCardToHand() {
         final List<Player> players = Singletons.getModel().getGame().getPlayers();
         final Player p = GuiChoose.oneOrNone("Put card in play for which player?", players);
-        if (null == p) return;
+        if (null == p) {
+            return;
+        }
 
         final List<CardPrinted> cards =  Lists.newArrayList(CardDb.instance().getAllUniqueCards());
         Collections.sort(cards);
-        
+
         // use standard forge's list selection dialog
         final CardPrinted c = GuiChoose.oneOrNone("Name the card", cards);
-        if (c == null) return;
-        
+        if (c == null) {
+            return;
+        }
+
         Card forgeCard = c.toForgeCard(p);
         Singletons.getModel().getGame().getAction().moveToHand(forgeCard);
 
@@ -768,22 +772,30 @@ public final class GuiDisplayUtil {
     public static void devModeCardToBattlefield() {
         final List<Player> players = Singletons.getModel().getGame().getPlayers();
         final Player p = GuiChoose.oneOrNone("Put card in play for which player?", players);
-        if (null == p) return;
+        if (null == p) {
+            return;
+        }
 
         final List<CardPrinted> cards =  Lists.newArrayList(CardDb.instance().getAllUniqueCards());
         Collections.sort(cards);
 
         // use standard forge's list selection dialog
         final CardPrinted c = GuiChoose.oneOrNone("Name the card", cards);
-        if (c == null) return;
-        
-        Card forgeCard = c.toForgeCard(p);
-        
-        final List<SpellAbility> choices = forgeCard.getBasicSpells();
-        if (choices.isEmpty()) return; // when would it happen?
+        if (c == null) {
+            return;
+        }
 
-        final SpellAbility sa = choices.size() == 1 ? choices.get(0) : GuiChoose.oneOrNone("Choose", choices); 
-        if (sa == null) return; // happens if cancelled
+        Card forgeCard = c.toForgeCard(p);
+
+        final List<SpellAbility> choices = forgeCard.getBasicSpells();
+        if (choices.isEmpty()) {
+            return; // when would it happen?
+        }
+
+        final SpellAbility sa = choices.size() == 1 ? choices.get(0) : GuiChoose.oneOrNone("Choose", choices);
+        if (sa == null) {
+            return; // happens if cancelled
+        }
 
         sa.setActivatingPlayer(p);
 
@@ -791,8 +803,8 @@ public final class GuiDisplayUtil {
         game.getAction().moveToHand(forgeCard); // this is really needed
         game.getAction().playSpellAbilityForFree(sa);
 
-        
-    }    
+
+    }
 
     public static void devModeBreakpoint() {
         List<Player> Players = Singletons.getModel().getGame().getPlayers();

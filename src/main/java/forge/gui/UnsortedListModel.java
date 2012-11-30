@@ -33,8 +33,9 @@ public class UnsortedListModel<T> extends AbstractListModel { // Java 7 has a ge
     }
 
     public void addAll(T[] elements) {
-        for(T e : elements)
+        for (T e : elements) {
             model.add(e);
+        }
         fireContentsChanged(this, 0, getSize());
     }
 
@@ -42,8 +43,8 @@ public class UnsortedListModel<T> extends AbstractListModel { // Java 7 has a ge
         model.addAll(elements);
         fireContentsChanged(this, 0, getSize());
     }
-    
-    
+
+
     public void clear() {
         model.clear();
         fireContentsChanged(this, 0, getSize());

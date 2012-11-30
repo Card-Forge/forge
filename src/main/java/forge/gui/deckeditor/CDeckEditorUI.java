@@ -60,14 +60,14 @@ public enum CDeckEditorUI implements CardContainer {
     }
 
     /**
-     * Set Pack, for when Packs can be shown in the CardPicturePanel
+     * Set Pack, for when Packs can be shown in the CardPicturePanel.
      * @param item
      */
     public void setCard(final InventoryItem item) {
         CDetail.SINGLETON_INSTANCE.showCard(item);
         CPicture.SINGLETON_INSTANCE.showCard(item);
     }
-    
+
     //========= Accessor/mutator methods
     /**
      * @return ACEditorBase<?, ?>

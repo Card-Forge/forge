@@ -88,7 +88,7 @@ public class DeckImport<TItem extends InventoryItem, TModel extends DeckBase> ex
     private final JButton cmdAccept = new JButton("Import Deck");
     private final JButton cmdCancel = new JButton("Cancel");
     private final JCheckBox newEditionCheck = new JCheckBox("Import latest version of card", true);
-    
+
     /** The tokens. */
     private final List<DeckRecognizer.Token> tokens = new ArrayList<DeckRecognizer.Token>();
 

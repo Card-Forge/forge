@@ -203,7 +203,7 @@ public final class GuiUtils {
      * Highlight a card on the playfield.
      * 
      * @param c
-     *           a card to be highlighted 
+     *           a card to be highlighted
      */
     public static void setPanelSelection(final Card c) {
         mainLoop:
