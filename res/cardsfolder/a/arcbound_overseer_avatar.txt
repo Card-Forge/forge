@@ -8,7 +8,7 @@ SVar:BuildCounter:AB$ PutCounter | Cost$ 0 | CounterType$ P1P1 | CounterNum$ 1 |
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ ChargeCounter | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may put a charge counter on target permanent you control.
 SVar:ChargeCounter:AB$ PutCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ 1 | ValidTgts$ Permanent.YouCtrl | TgtPrompt$ Select target permanent you control
 SVar:Rarity:Special
-SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=182296&type=card
+SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/arcbound_overseer_avatar.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/arcbound-overseer.jpg
 Oracle:Hand +0, life +3\nAt the beginning of your upkeep, you may put a +1/+1 counter on target creature you control.\nAt the beginning of your upkeep, you may put a charge counter on target permanent you control.
 End

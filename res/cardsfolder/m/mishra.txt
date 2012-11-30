@@ -9,7 +9,7 @@ SVar:DmgTimes2:AB$ DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource
 SVar:DmgTimes2Combat:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ X | References$ X
 SVar:X:ReplaceCount$DamageAmount/Twice
 SVar:Rarity:Special
-SVar:Picture:http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=12327
+SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/mishra.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard/mishra.jpg
 Oracle:Hand +0, life -3\nIf a creature you control would deal damage, it deals double that damage instead.
 End
