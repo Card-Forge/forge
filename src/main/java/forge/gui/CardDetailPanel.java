@@ -319,12 +319,11 @@ public class CardDetailPanel extends JPanel implements CardContainer {
                 && !card.getController().getZone(ZoneType.Library).isEmpty()) {
             area.append("\r\nTop card of your library: ");
             area.append(card.getController().getCardsIn(ZoneType.Library, 1));
-        }
-        if (card.hasKeyword("Players play with the top card of their libraries revealed.")
-                && (card.getController() != null) && card.isInZone(ZoneType.Battlefield)
-                && !card.getController().getOpponent().getZone(ZoneType.Library).isEmpty()) {
-            area.append("\r\nTop card of your opponent's library: ");
-            area.append(card.getController().getOpponent().getCardsIn(ZoneType.Library, 1));
+            if (card.hasKeyword("Players play with the top card of their libraries revealed.")
+                    && !card.getController().getOpponent().getZone(ZoneType.Library).isEmpty()) {
+                area.append("\r\nTop card of your opponent's library: ");
+                area.append(card.getController().getOpponent().getCardsIn(ZoneType.Library, 1));
+            }
         }
 
         // chosen type

@@ -34,7 +34,7 @@ public class DamagePreventEffect extends SpellEffect {
                 } else {
                     sb.append(tgtC);
                 }
-            } else {
+            } else if (o instanceof Player){
                 sb.append(o.toString());
             }
         }
