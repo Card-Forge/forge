@@ -17,7 +17,7 @@ public interface IVQuestStats {
 
     /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
     ExperimentalLabel getBtnUnlock();
-    
+
     /** @return {@link javax.swing.JLabel} */
     JLabel getLblCredits();
 

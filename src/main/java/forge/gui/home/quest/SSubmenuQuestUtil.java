@@ -250,7 +250,7 @@ public class SSubmenuQuestUtil {
         if (toUnlock == null) {
             return;
         }
-        
+
         CardEdition unlocked = toUnlock.left;
         qData.getAssets().subtractCredits(toUnlock.right);
         JOptionPane.showMessageDialog(null, "You have successfully unlocked " + unlocked.getName() + "!",
@@ -288,7 +288,7 @@ public class SSubmenuQuestUtil {
         final SwingWorker<Object, Void> worker = new SwingWorker<Object, Void>() {
             @Override
             public Object doInBackground() {
-                
+
                 qData.getChallengesManager().randomizeOpponents();
                 qData.getDuelsManager().randomizeOpponents();
                 qData.setCurrentEvent(event);
@@ -304,7 +304,7 @@ public class SSubmenuQuestUtil {
         };
         worker.execute();
         PlayerStartConditions humanStart = new PlayerStartConditions(SSubmenuQuestUtil.getCurrentDeck());
-        PlayerStartConditions aiStart = new PlayerStartConditions(event.getEventDeck()); 
+        PlayerStartConditions aiStart = new PlayerStartConditions(event.getEventDeck());
 
         if (qData.getMode() == QuestMode.Fantasy) {
             int lifeAI = 20;
@@ -328,11 +328,11 @@ public class SSubmenuQuestUtil {
         } // End isFantasy
 
         MatchStartHelper msh = new MatchStartHelper();
-        msh.addPlayer( Singletons.getControl().getLobby().getQuestPlayer(), humanStart );
+        msh.addPlayer(Singletons.getControl().getLobby().getQuestPlayer(), humanStart);
 
         LobbyPlayer aiPlayer = Singletons.getControl().getLobby().findLocalPlayer(PlayerType.COMPUTER, event.getName());
         aiPlayer.setPicture(event.getIconFilename());
-        msh.addPlayer( aiPlayer, aiStart );
+        msh.addPlayer(aiPlayer, aiStart);
 
         Singletons.getModel().getMatch().initMatch(GameType.Quest, msh.getPlayerMap());
         Singletons.getModel().getMatch().startRound();

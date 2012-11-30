@@ -44,7 +44,7 @@ public enum CSubmenuQuestData implements ICDoc {
     private final VSubmenuQuestData view = VSubmenuQuestData.SINGLETON_INSTANCE;
     private final List<String> customFormatCodes = new ArrayList<String>();
     private final List<String> customPrizeFormatCodes = new ArrayList<String>();
-    
+
     private final Command cmdQuestSelect = new Command() { @Override
         public void execute() { changeQuest(); } };
 
@@ -59,13 +59,13 @@ public enum CSubmenuQuestData implements ICDoc {
         view.getBtnEmbark().setCommand(
                 new Command() { @Override public void execute() { newQuest(); } });
 
-        view.getBtnCustomFormat().setCommand( new Command() { @Override public void execute() { 
+        view.getBtnCustomFormat().setCommand(new Command() { @Override public void execute() {
             new DialogCustomFormat(customFormatCodes);
-        }});
-        
-        view.getBtnPrizeCustomFormat().setCommand( new Command() { @Override public void execute() { 
+        } });
+
+        view.getBtnPrizeCustomFormat().setCommand(new Command() { @Override public void execute() {
             new DialogCustomFormat(customPrizeFormatCodes);
-        }});        
+        } });
     }
 
     /* (non-Javadoc)
@@ -143,39 +143,40 @@ public enum CSubmenuQuestData implements ICDoc {
             case Rotating:
                 fmtStartPool = view.getRotatingFormat();
                 break;
-        
+
             case CustomFormat:
-                if ( customFormatCodes.isEmpty() )
-                {
+                if (customFormatCodes.isEmpty()) {
+
                     int answer = JOptionPane.showConfirmDialog(null, "You have defined custom format as containing no sets.\nThis will start a game without restriction.\n\nContinue?");
-                    if ( JOptionPane.YES_OPTION != answer )
+                    if (JOptionPane.YES_OPTION != answer) {
                         return;
+                    }
                 }
                 fmtStartPool = customFormatCodes.isEmpty() ? null : new GameFormatQuest("Custom", customFormatCodes, null); // chosen sets and no banend cards
                 break;
 
             case SealedDeck:
                 dckStartPool = view.getSelectedDeck();
-                if ( null == dckStartPool )
-                {
+                if (null == dckStartPool) {
+
                     JOptionPane.showMessageDialog(null, "You have not selected a deck to start", "Cannot start a quest", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 break;
-                
+
             case DraftDeck:
                 dckStartPool = view.getSelectedDeck();
-                if ( null == dckStartPool )
-                {
+                if (null == dckStartPool) {
+
                     JOptionPane.showMessageDialog(null, "You have not selected a deck to start", "Cannot start a quest", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 break;
-                
+
             case Precon:
                 dckStartPool = QuestController.getPrecons().get(view.getSelectedPrecon()).getDeck();
                 break;
-                
+
             case Complete:
             default:
                 // leave everything as nulls
@@ -184,43 +185,47 @@ public enum CSubmenuQuestData implements ICDoc {
 
         GameFormat fmtPrizes = null;
         StartingPoolType prizedPoolType = view.getPrizedPoolType();
-        if ( null == prizedPoolType ) {
+        if (null == prizedPoolType) {
             fmtPrizes = fmtStartPool;
-            if ( null == fmtPrizes && dckStartPool != null) { // build it form deck
+            if (null == fmtPrizes && dckStartPool != null) { // build it form deck
                 List<String> sets = new ArrayList<String>();
-                for(Entry<CardPrinted, Integer> c : dckStartPool.getMain()) {
+                for (Entry<CardPrinted, Integer> c : dckStartPool.getMain()) {
                     String edition = c.getKey().getEdition();
-                    if ( !sets.contains(edition) )
+                    if (!sets.contains(edition)) {
                         sets.add(edition);
+                    }
                 }
-                for(Entry<CardPrinted, Integer> c : dckStartPool.getSideboard()) {
+                for (Entry<CardPrinted, Integer> c : dckStartPool.getSideboard()) {
                     String edition = c.getKey().getEdition();
-                    if ( !sets.contains(edition) )
+                    if (!sets.contains(edition)) {
                         sets.add(edition);
+                    }
                 }
                 fmtPrizes = new GameFormat("From deck", sets, null);
             }
-        } else
+        } else {
             switch(prizedPoolType) {
                 case Complete:
                     fmtPrizes = null;
                     break;
                 case CustomFormat:
-                    if ( customPrizeFormatCodes.isEmpty() )
-                    {
+                    if (customPrizeFormatCodes.isEmpty()) {
+
                         int answer = JOptionPane.showConfirmDialog(null, "You have defined custom format as containing no sets.\nThis will choose all editions without restriction as prized.\n\nContinue?");
-                        if ( JOptionPane.YES_OPTION != answer )
+                        if (JOptionPane.YES_OPTION != answer) {
                             return;
+                        }
                     }
                     fmtPrizes = customPrizeFormatCodes.isEmpty() ? null : new GameFormat("Custom Prizes", customPrizeFormatCodes, null); // chosen sets and no banend cards
                     break;
                 case Rotating:
                     fmtPrizes = view.getPrizedRotatingFormat();
                     break;
-                default: 
+                default:
                     throw new RuntimeException("Should not get this result");
             }
-            
+        }
+
 
         final Object o = JOptionPane.showInputDialog(null, "Poets will remember your quest as:", "Quest Name", JOptionPane.OK_CANCEL_OPTION);
         if (o == null) { return; }
@@ -234,9 +239,9 @@ public enum CSubmenuQuestData implements ICDoc {
 
 
 
-        
-        QuestController qc = Singletons.getModel().getQuest(); 
-        
+
+        QuestController qc = Singletons.getModel().getQuest();
+
         qc.newGame(questName, difficulty, mode, fmtPrizes, view.isUnlockSetsAllowed(), dckStartPool, fmtStartPool);
         Singletons.getModel().getQuest().save();
 

@@ -89,7 +89,7 @@ public enum CSubmenuConstructed implements ICDoc {
         view.getCbRemoveSmall().setSelected(prefs.getPrefBoolean(FPref.DECKGEN_NOSMALL));
     }
 
-    
+
 
     /** @param lists0 &emsp; {@link java.util.List}<{@link javax.swing.JList}> */
     private void startGame() {
@@ -111,11 +111,11 @@ public enum CSubmenuConstructed implements ICDoc {
                 Lobby lobby = Singletons.getControl().getLobby();
                 starter.addPlayer(lobby.findLocalPlayer(PlayerType.HUMAN), humanDeck);
                 starter.addPlayer(lobby.findLocalPlayer(PlayerType.COMPUTER), aiDeck);
-                
-                MatchController mc = Singletons.getModel().getMatch(); 
+
+                MatchController mc = Singletons.getModel().getMatch();
                 mc.initMatch(GameType.Constructed, starter.getPlayerMap());
                 mc.startRound();
-                
+
                 return null;
             }
 

@@ -73,8 +73,8 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     public final FDeckChooser getDcAi() {
         return dcAi;
     }
-    
-    
+
+
     /* (non-Javadoc)
      * @see forge.gui.home.IVSubmenu#getMenuTitle()
      */
@@ -100,7 +100,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().setLayout(new MigLayout("insets 0, gap 0, wrap 2, ax right"));
 
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(lblTitle, "w 80%!, h 40px!, gap 0 0 15px 15px, span 2, ax right");
-        
+
         dcAi.populate();
         dcHuman.populate();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(dcAi, "w 44%!, gap 0 0 20px 20px, growy, pushy");
@@ -116,7 +116,7 @@ public enum VSubmenuConstructed implements IVSubmenu<CSubmenuConstructed> {
     public JButton getBtnStart() {
         return this.btnStart;
     }
-    
+
 
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbSingletons() {

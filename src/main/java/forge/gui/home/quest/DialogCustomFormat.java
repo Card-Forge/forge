@@ -54,14 +54,14 @@ public class DialogCustomFormat extends JDialog {
               editions.add(ce);
           }
         }
-        
+
         Collections.sort(editions);
         Collections.reverse(editions);
 
         final int numEditions = editions.size();
         final int columns = 3;
         final int rows = numEditions / columns + (numEditions % columns == 0 ? 0 : 1);
-        
+
 
         int getIdx = 0;
 
@@ -73,7 +73,7 @@ public class DialogCustomFormat extends JDialog {
             for (int col = 0; col < columns; col++) {
                 getIdx = row + (col * rows);
                 JCheckBox box;
-                if ( getIdx < numEditions ) {
+                if (getIdx < numEditions) {
                     CardEdition edition = getIdx < numEditions ? editions.get(getIdx) : null;
                     box = new JCheckBox(edition.getName());
                     box.setName(edition.getCode());
@@ -128,7 +128,7 @@ public class DialogCustomFormat extends JDialog {
      * 
      */
     private boolean canChoose(final String setCode) {
-        if (setCode == null ) {
+        if (setCode == null) {
             return true;
         }
         return !setCode.equals("LEA") && !setCode.equals("LEB") && !"MBP".equals(setCode);
