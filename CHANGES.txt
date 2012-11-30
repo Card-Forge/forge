@@ -308,6 +308,17 @@ Fixes/Features:
 - Removing unnecessary "HIDDEN" strings (WIP).
 - Fixed freeze whenever AI cast a creature with Tahngarth avatar
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- changed "getParentTargeting" methods to skip checking the "child" SpellAbility first
+- consolidated code to find the fighters into one common method
+- CheckStyle.
+- reverting earlier changes until better solution is found
+- After a draft finishes, properly reset buttons used in the Deck Editor
+- Updated LQ pic urls for vanguard avatars to replace the cruddy ones from Gatherer
+- Made Vanguard tab panel conform (a little) better to skin theme. Unfortunately, due to *clenches fist* Swing some out of place code had to be added because you can't specify colors for certain parts of the JTabbedPane component in it's actual class because that would make too much sense.
+- Cleanup: Removed duplicate instances of TriggerZones param
+- Vanguard avatar selection will now remove cards with RemRandomDeck flag from the list when choosing Random. Useful for cards like Diamond Queen Avatar that are still great in the right deck.
+- Updated some avatar flags
+- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -346,6 +357,7 @@ Maraxus
 Mishra
 Morinfen Avatar
 Multani
+Nekrataal Avatar
 Oracle
 Orim
 Rofellos
