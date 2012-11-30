@@ -494,7 +494,7 @@ public class StaticAbility {
                 return false;
             }
         }
-        
+
         if (params.containsKey("Condition")) {
             if (params.get("Condition").equals("Threshold")) {
                 if (!controller.hasThreshold()) {

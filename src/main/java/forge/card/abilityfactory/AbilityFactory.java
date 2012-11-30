@@ -1647,9 +1647,9 @@ public class AbilityFactory {
                         }
                     }
                 }
-                
+
                 // AI will only pay when it's not already payed and only opponents abilities
-                if (paid || (payers.size() > 1 
+                if (paid || (payers.size() > 1
                         && (sa.getActivatingPlayer().equals(payer) && !"OnlyOwn".equals(sa.getParam("UnlessAI"))))) {
                     continue;
                 }

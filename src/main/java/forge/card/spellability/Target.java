@@ -674,7 +674,7 @@ public class Target {
      */
     public final boolean canTgtCreature() {
         for (final String s : this.validTgts) {
-            if ((s.contains("Creature") || CardUtil.isACreatureType(s) || s.startsWith("Permanent")) 
+            if ((s.contains("Creature") || CardUtil.isACreatureType(s) || s.startsWith("Permanent"))
                     && !s.contains("nonCreature")) {
                 return true;
             }

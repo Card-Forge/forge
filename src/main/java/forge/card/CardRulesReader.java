@@ -111,9 +111,9 @@ public class CardRulesReader {
                     this.characteristics[this.curCharacteristics].setDeckNeeds(CardRulesReader.getValueAfterKey(line, "DeckNeeds:"));
                 }
                 break;
-                
+
             case 'H':
-                if(line.startsWith("HandLifeModifier:")) {
+                if (line.startsWith("HandLifeModifier:")) {
                     this.characteristics[this.curCharacteristics].setPtLine(CardRulesReader.getValueAfterKey(line, "HandLifeModifier:"));
                 }
                 break;

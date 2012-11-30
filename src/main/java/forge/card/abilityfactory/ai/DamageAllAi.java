@@ -168,7 +168,7 @@ public class  DamageAllAi extends SpellAiLogic {
         final List<Card> humanList = this.getKillableCreatures(sa, enemy, dmg);
         List<Card> computerList = this.getKillableCreatures(sa, ai, dmg);
         final Target tgt = sa.getTarget();
-        
+
         if (tgt != null && sa.canTarget(enemy)) {
             tgt.resetTargets();
             sa.getTarget().addTarget(enemy);

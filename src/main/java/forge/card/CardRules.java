@@ -46,7 +46,7 @@ public final class CardRules {
     private String toughness = null;
 
     private String loyalty = null;
-    
+
     //Vanguard avatar modifiers
     private Integer life = null;
     private Integer hand = null;
@@ -267,8 +267,8 @@ public final class CardRules {
             if (slashPos == -1) {
                 throw new RuntimeException(String.format("Vanguard '%s' has bad hand/life stats", this.getName()));
             }
-            this.hand = Integer.parseInt(pt.substring(0,pt.indexOf('/')).replace("+", ""));
-            this.life = Integer.parseInt(pt.substring(pt.indexOf('/')+1).replace("+", ""));
+            this.hand = Integer.parseInt(pt.substring(0, pt.indexOf('/')).replace("+", ""));
+            this.life = Integer.parseInt(pt.substring(pt.indexOf('/') + 1).replace("+", ""));
         }
 
         if (this.characteristics.getSetsData().isEmpty()) {
@@ -416,5 +416,3 @@ public final class CardRules {
 
 
 }
-
-

@@ -3189,7 +3189,7 @@ public class CardFactoryUtil {
             Singletons.getModel().getGame().getAction().moveToPlay(temp);
             list.add(temp);
         }
-        
+
         Singletons.getModel().getGame().getEvents().post(new TokenCreatedEvent());
 
         return list;
