@@ -63,6 +63,7 @@ public class Deck extends DeckBase {
 
     private final DeckSection main;
     private final DeckSection sideboard;
+    private CardPrinted avatar;
     private CardPrinted commander;
     private final DeckSection planes;
     private final DeckSection schemes;
@@ -86,6 +87,7 @@ public class Deck extends DeckBase {
         super(name0);
         this.main = new DeckSection();
         this.sideboard = new DeckSection();
+        this.avatar = null;
         this.commander = null;
         this.planes = new DeckSection();
         this.schemes = new DeckSection();
@@ -150,6 +152,8 @@ public class Deck extends DeckBase {
         final Deck result = (Deck) clone;
         result.main.addAll(this.main);
         result.sideboard.addAll(this.sideboard);
+        result.avatar = this.avatar;
+        result.commander = this.commander;
     }
 
     /*
@@ -207,6 +211,9 @@ public class Deck extends DeckBase {
         List<String> cmd = Deck.readCardList(sections.get("commander"));
         String cmdName = cmd.isEmpty() ? null : cmd.get(0);
         d.commander = CardDb.instance().isCardSupported(cmdName) ? CardDb.instance().getCard(cmdName) : null;
+        List<String> av = Deck.readCardList(sections.get("avatar"));
+        String avName = av.isEmpty() ? null : av.get(0);
+        d.avatar = CardDb.instance().isCardSupported(avName) ? CardDb.instance().getCard(avName) : null;
         d.getPlanes().set(Deck.readCardList(sections.get("planes")));
         d.getSchemes().set(Deck.readCardList(sections.get("schemes")));
         return d;
@@ -289,6 +296,10 @@ public class Deck extends DeckBase {
         if (getCommander() != null) {
             out.add(String.format("%s", "[commander]"));
             out.add(Deck.serializeSingleCard(getCommander(), 1));
+        }
+        if (getAvatar() != null) {
+            out.add(String.format("%s", "[avatar]"));
+            out.add(Deck.serializeSingleCard(getAvatar(), 1));
         }
 
         out.add(String.format("%s", "[planes]"));
@@ -422,6 +433,13 @@ public class Deck extends DeckBase {
      */
     public DeckSection getSchemes() {
         return schemes;
+    }
+
+    /**
+     * @return the avatar
+     */
+    public CardPrinted getAvatar() {
+        return avatar;
     }
 
     public static final Function<Deck, String> FN_NAME_SELECTOR = new Function<Deck, String>() {

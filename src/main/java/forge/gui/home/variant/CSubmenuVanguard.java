@@ -115,6 +115,9 @@ public enum CSubmenuVanguard implements ICDoc {
             @Override
             public Object doInBackground() {
                 Random rnd = new Random();
+                String nl = System.getProperty("line.separator");
+                boolean usedDefaults = false;
+                StringBuilder defaultAvatarInfo = new StringBuilder("The following decks will use a default avatar:" + nl);
 
                 List<Deck> playerDecks = new ArrayList<Deck>();
                 for (int i = 0; i < view.getNumPlayers(); i++) {
@@ -132,17 +135,31 @@ public enum CSubmenuVanguard implements ICDoc {
                 for (int i = 0; i < view.getNumPlayers(); i++) {
                     CardPrinted avatar = null;
                     Object obj = view.getAvatarLists().get(i).getSelectedValue();
-                    if (obj instanceof String) {
-                        //Random is the only string in the list so grab a random avatar.
-                        if (i == 0)  {
-                            //HUMAN
-                            avatar = Iterables.get(view.getAllAvatars(), rnd.nextInt(Iterables.size(view.getNonRandomHumanAvatars())));
+                    
+                    boolean useDefault = VSubmenuVanguard.SINGLETON_INSTANCE.getCbDefaultAvatars().isSelected();
+                    useDefault &= playerDecks.get(i).getAvatar() != null;
+                    
+                    if(useDefault)
+                    {
+                        avatar = playerDecks.get(i).getAvatar();
+                        defaultAvatarInfo.append("Player " + (i+1) + ": ");
+                        defaultAvatarInfo.append(avatar.getName() + nl);
+                        usedDefaults = true;
+                    }
+                    else
+                    {
+                        if (obj instanceof String) {
+                            //Random is the only string in the list so grab a random avatar.
+                            if (i == 0)  {
+                                //HUMAN
+                                avatar = Iterables.get(view.getAllAvatars(), rnd.nextInt(Iterables.size(view.getNonRandomHumanAvatars())));
+                            } else {
+                                //AI
+                                avatar = Iterables.get(view.getAllAiAvatars(), rnd.nextInt(Iterables.size(view.getNonRandomAiAvatars())));
+                            }
                         } else {
-                            //AI
-                            avatar = Iterables.get(view.getAllAiAvatars(), rnd.nextInt(Iterables.size(view.getNonRandomAiAvatars())));
+                            avatar = (CardPrinted) obj;
                         }
-                    } else {
-                        avatar = (CardPrinted) obj;
                     }
                     if (avatar == null) {
                         //ERROR!
@@ -150,6 +167,11 @@ public enum CSubmenuVanguard implements ICDoc {
                         return null;
                     }
                     playerAvatars.add(avatar);
+                }
+                
+                if(usedDefaults)
+                {
+                    GameActionUtil.showInfoDialg(defaultAvatarInfo.toString());
                 }
 
                 Lobby lobby = Singletons.getControl().getLobby();

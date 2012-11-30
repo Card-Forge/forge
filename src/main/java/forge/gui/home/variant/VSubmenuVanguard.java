@@ -77,6 +77,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
 
     private final List<JRadioButton> fieldRadios = new ArrayList<JRadioButton>();
     private final ButtonGroup grpFields = new ButtonGroup();
+    private final FCheckBox cbDefaultAvatars = new FCheckBox("Use deck-default avatars if possible.");
     private int currentNumTabsShown = 8;
 
     //////////////////////////////
@@ -140,6 +141,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
         }
         settingsPanel.add(radioPane);
         settingsPanel.add(new FLabel.Builder().text("Set number of opponents").build());
+        settingsPanel.add(cbDefaultAvatars);
         tabPane.add("Settings", settingsPanel);
 
         //Player panels (Human + 7 AIs)
@@ -350,5 +352,12 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
      */
     public List<CardPrinted> getNonRandomAiAvatars() {
         return nonRandomAiAvatars;
+    }
+
+    /**
+     * @return the cbDefaultAvatars
+     */
+    public FCheckBox getCbDefaultAvatars() {
+        return cbDefaultAvatars;
     }
 }
