@@ -2,7 +2,7 @@ Name:Customs Depot
 ManaCost:1 U
 Types:Enchantment
 Text:no text
-T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigLoot | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a creature spell, you may pay 1. If you do, draw a card, then discard a card.
+T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | Execute$ TrigLoot | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever you cast a creature spell, you may pay 1. If you do, draw a card, then discard a card.
 SVar:TrigLoot:AB$Draw | Cost$ 1 | NumCards$ 1 | SubAbility$ DBDiscard
 SVar:DBDiscard:DB$Discard | Defined$ You | Mode$ TgtChoose | NumCards$ 1
 SVar:RemAIDeck:True
