@@ -308,7 +308,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         if (preventNextDamage > 0) {
             area.append("\n");
             area.append("Prevent the next ").append(preventNextDamage).append(" damage that would be dealt to ");
-            area.append(card.getName()).append(" it this turn.");
+            area.append(card.getName()).append(" this turn.");
         }
 
         // top revealed
