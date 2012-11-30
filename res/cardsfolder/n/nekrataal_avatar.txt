@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/nekrataal_avatar.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/nekrataal.jpg
+Oracle:Hand -1, life -4\nCreature spells you cast cost {B} less to cast. This effect reduces only the amount of colored mana you pay.
 End

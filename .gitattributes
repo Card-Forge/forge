@@ -6955,6 +6955,7 @@ res/cardsfolder/o/opal_archangel.txt svneol=native#text/plain
 res/cardsfolder/o/opal_avenger.txt -text svneol=unset#text/plain
 res/cardsfolder/o/opal_caryatid.txt svneol=native#text/plain
 res/cardsfolder/o/opal_champion.txt svneol=native#text/plain
+res/cardsfolder/o/opal_eye_kondas_yojimbo.txt -text
 res/cardsfolder/o/opal_gargoyle.txt svneol=native#text/plain
 res/cardsfolder/o/opal_guardian.txt svneol=native#text/plain
 res/cardsfolder/o/opal_titan.txt -text svneol=unset#text/plain
