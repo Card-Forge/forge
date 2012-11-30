@@ -6688,6 +6688,7 @@ res/cardsfolder/n/nefashu.txt svneol=native#text/plain
 res/cardsfolder/n/negate.txt svneol=native#text/plain
 res/cardsfolder/n/neko_te.txt -text svneol=unset#text/plain
 res/cardsfolder/n/nekrataal.txt svneol=native#text/plain
+res/cardsfolder/n/nekrataal_avatar.txt -text
 res/cardsfolder/n/nema_siltlurker.txt svneol=native#text/plain
 res/cardsfolder/n/nemata_grove_guardian.txt svneol=native#text/plain
 res/cardsfolder/n/nemesis_mask.txt svneol=native#text/plain
