@@ -1705,11 +1705,11 @@ public abstract class SpellAbility implements ISpellAbility {
 
         while (parent.getParent() != null) {
 
-            parent = parent.getParent();
             Target tgt = parent.getTarget();
             if (tgt != null && tgt.getTargetCards() != null && !tgt.getTargetCards().isEmpty()) {
                 break;
             }
+            parent = parent.getParent();
 
         }
         return parent;
@@ -1726,11 +1726,11 @@ public abstract class SpellAbility implements ISpellAbility {
         SpellAbility parent = this;
         while (parent.getParent() != null) {
 
-            parent = parent.getParent();
             Target tgt = parent.getTarget();
             if (tgt != null && tgt.getTargetSAs() != null && !tgt.getTargetSAs().isEmpty()) {
                 break;
             }
+            parent = parent.getParent();
 
         }
         return parent;
@@ -1747,11 +1747,11 @@ public abstract class SpellAbility implements ISpellAbility {
         SpellAbility parent = this;
         while (parent.getParent() != null) {
 
-            parent = parent.getParent();
             Target tgt = parent.getTarget();
             if (tgt != null && tgt.getTargetPlayers() != null && !tgt.getTargetPlayers().isEmpty()) {
                 break;
             }
+            parent = parent.getParent();
 
         }
         return parent;
