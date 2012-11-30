@@ -165,15 +165,13 @@ public class SacrificeEffect extends SpellEffect {
             if (list.isEmpty()) {
                 break;
             }
-            Object o;
+            Card c;
             if (optional) {
-                o = GuiChoose.oneOrNone("Select a card to sacrifice", list);
+                c = GuiChoose.oneOrNone("Select a card to sacrifice", list);
             } else {
-                o = GuiChoose.one("Select a card to sacrifice", list);
+                c = GuiChoose.one("Select a card to sacrifice", list);
             }
-            if (o != null) {
-                final Card c = (Card) o;
-
+            if (c != null) {
                 if (destroy) {
                     if (Singletons.getModel().getGame().getAction().destroy(c)) {
                         sacList.add(c);
