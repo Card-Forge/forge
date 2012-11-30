@@ -54,7 +54,7 @@ import forge.view.FView;
 public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup> {
     private IBoosterDraft boosterDraft;
 
-    private String ccAddLabel = new String();
+    private String ccAddLabel = "Add card";
     private DragCell filtersParent = null;
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;
@@ -267,10 +267,7 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
         this.getTableDeck().setDeck((Iterable<InventoryItem>) null);
 
         //Remove buttons
-        VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().remove(VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4());
-
-        VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().remove(VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove());
-        VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().remove(VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4());
+        VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4().setVisible(false);
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(false);
 
@@ -327,16 +324,15 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
     public boolean exit() {
         CSubmenuDraft.SINGLETON_INSTANCE.update();
 
-        //Re-add buttons
-        VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().add(VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4());
-
-        VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().add(VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove());
-        VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().add(VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4());
-
-        VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
-
         //Re-rename buttons
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText(ccAddLabel);
+        
+        //Re-add buttons
+        VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4().setVisible(true);
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setVisible(true);
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setVisible(true);
+
+        VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
 
         //Re-add tabs
         if (filtersParent != null) {
