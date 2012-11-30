@@ -1,10 +1,10 @@
-Forge Beta: 1#-##-2012 ver 1.3.2
+Forge Beta: 11-30-2012 ver 1.3.2
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 (Thanks to the MAGE team for permission to use their targeting arrows.)
 (Thanks to http://www.freesound.org/browse/ for providing some sound files.)
 
-11### cards in total.
+11623 cards in total.
 
 
 All sounds use the event bus model now and are not called directly. Two new sounds to the list of sounds supported by Forge, Blocker Assigned and Token Created. We could use some help in finding interesting sounds that we can add to forge.
@@ -17,7 +17,7 @@ http://www.freesound.org/browse/
 
 You should note that sound files can be large sized and we would like to avoid this if possible. A good size to shoot for would be 50 K or less. There is a freeware sound editor that may have versions for all operating systems. This app is named Audacity.
 
-Some initial work is being done in an effort to implement a Vanguard mode. This is a work in progress, it is not yet finished. This version includes the new Vanguard mode. The older match layout files are incompatible with the new Vanguard mode. The original match_default.xml, match_preferred.xml and the match_preferred.xml saved to a different name files need to be deleted and can no longer be used. You can keep your editor_preferred.xml file. But you will have to setup your match view panels using the new match_default.xml file.
+We now have a Vanguard mode implemented. This is a work in progress. The older match layout files are incompatible with the new Vanguard mode. The original match_default.xml, match_preferred.xml and the match_preferred.xml saved to a different name files need to be deleted and can no longer be used. You can keep your editor_preferred.xml file. But you will have to setup your match view panels using the new match_default.xml file.
 
 The visuals for targeting arrows has been improved and looks better, with an adaptation of the arrow drawing code from MAGE. Thanks to the MAGE team for permission for the adaptation.
 
@@ -319,11 +319,24 @@ Fixes/Features:
 - Vanguard avatar selection will now remove cards with RemRandomDeck flag from the list when choosing Random. Useful for cards like Diamond Queen Avatar that are still great in the right deck.
 - Updated some avatar flags
 - Added the recent commit logs to changes.txt. Preparing for the beta build and release.
+- Preparing the changes.txt file for the next beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-
+Agetian
+ArsenalNut
+bigapple90
+Gos
+Hellfish
+Marc
+Max
+RumbleBBU
+Sloth
+Sol
+Swordshine
+Zirbert
+Chris H
 
 
 Added the following Vanguard Avatars:
@@ -379,55 +392,55 @@ Xantcha
 
 Added the following cards:
 
-Island Sanctuary
-Chronomantic Escape
-Kamahl's Sledge
-Crypt Rats
-Crimson Hellkite
-Equal Treatment
-Terastodon
-Demonfire
-Mirror of Fate
-Vassal's Duty
-Sivvi's Valor
-Chromeshell Crab
-Icy Prison
-Kill Switch
-Kaho, Minamo Historian
-Nomad Mythmaker
-Honorable Scout
+Aladdin's Lamp
+Assembly Hall
+Atalya, Samite Master
+Auriok Steelshaper
 Chaotic Backlash
-Complicate
+Chromeshell Crab
+Chronomantic Escape
 Circle of Solace
-Pay No Heed
-Prahv, Spires of Order
-Rith's Charm
+Complicate
 Cragganwick Cremator
+Credit Voucher
+Crimson Hellkite
+Crypt Rats
+Demonfire
+Dromar, the Banisher
+Elfhame Sanctuary
+Ember Gale
+Equal Treatment
+Glass Asp
+Honorable Scout
+Icy Prison
+Island Sanctuary
+Journey of Discovery
+Kaho, Minamo Historian
+Kamahl's Sledge
+Kill Switch
+Lumengrid Augur
+Mirror of Fate
 Mischievous Quanar
+Nafs Asp
+Nomad Mythmaker
+Pay No Heed
 Pilgrim of Justice
 Pilgrim of Virtue
-Ember Gale
-Tower Above
-Journey of Discovery
-War Elemental
-Dromar, the Banisher
-Tsabo's Web
-Assembly Hall
-Credit Voucher
-Lumengrid Augur
+Prahv, Spires of Order
 Proteus Staff
-Shrouded Serpent
-Spoils of the Vault
-Atalya, Samite Master
-Elfhame Sanctuary
 Righteous Indignation
+Rith's Charm
 Saprazzan Breaker
-Shoving Match
-Aladdin's Lamp
 Shell of the Last Kappa
-Nafs Asp
-Glass Asp
-Auriok Steelshaper
+Shoving Match
+Shrouded Serpent
+Sivvi's Valor
+Spoils of the Vault
+Terastodon
+Tower Above
+Tsabo's Web
+Vassal's Duty
+War Elemental
 
 
 end
