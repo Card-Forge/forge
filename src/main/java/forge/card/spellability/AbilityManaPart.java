@@ -23,7 +23,6 @@ import java.util.Map;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.cost.Cost;
 import forge.card.mana.Mana;
 import forge.card.mana.ManaPool;
 import forge.card.trigger.TriggerType;
@@ -54,8 +53,6 @@ public class AbilityManaPart implements java.io.Serializable {
     private boolean canceled = false;
 
     private final transient Card sourceCard;
-
-    private transient Cost cost;
 
     // Spells paid with this mana spell can't be countered.
     private boolean cannotCounterSpell;
@@ -408,13 +405,7 @@ public class AbilityManaPart implements java.io.Serializable {
 
         final AbilityManaPart abm = (AbilityManaPart) o;
 
-//        if (abm.getType() != this.getType()) {
-//            return false;
-//        }
-
-        return cost.equals(abm.cost) && sourceCard.equals(abm.sourceCard);
-
-//        return abm.toUnsuppressedString().equals(this.toUnsuppressedString());
+        return sourceCard.equals(abm.sourceCard) && origProduced.equals(abm.getOrigProduced());
     }
 
     /** {@inheritDoc} */

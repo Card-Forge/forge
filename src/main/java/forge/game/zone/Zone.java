@@ -43,12 +43,12 @@ public class Zone extends MyObservable implements IZone, Observer, java.io.Seria
     private static final long serialVersionUID = -5687652485777639176L;
 
     /** The cards. */
-    protected final List<Card> cardList = new ArrayList<Card>();
-    protected final List<Card> roCardList;
+    protected transient final List<Card> cardList = new ArrayList<Card>();
+    protected transient final List<Card> roCardList;
     protected final ZoneType zoneName;
     protected boolean update = true;
 
-    protected final List<Card> cardsAddedThisTurn = new ArrayList<Card>();
+    protected transient final List<Card> cardsAddedThisTurn = new ArrayList<Card>();
     protected final ArrayList<ZoneType> cardsAddedThisTurnSource = new ArrayList<ZoneType>();
 
 
