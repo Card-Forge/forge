@@ -13,11 +13,14 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import com.google.common.collect.Iterables;
 
 import net.miginfocom.swing.MigLayout;
 import forge.game.player.PlayerType;
+import forge.gui.CardDetailPanel;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -78,6 +81,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
     private final List<JRadioButton> fieldRadios = new ArrayList<JRadioButton>();
     private final ButtonGroup grpFields = new ButtonGroup();
     private final FCheckBox cbDefaultAvatars = new FCheckBox("Use deck-default avatars if possible.");
+    private final List<CardDetailPanel> cdpAvatarDetails = new ArrayList<CardDetailPanel>();
     private int currentNumTabsShown = 8;
 
     //////////////////////////////
@@ -118,18 +122,38 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
             }
 
         };
+        
+        //This listener will look for an avatar being selected in the lists and update
+        //the corresponding detail panel.
+        ListSelectionListener lsListener = new ListSelectionListener() {
+
+            @Override
+            public void valueChanged(ListSelectionEvent arg0) {
+                int index = avatarLists.indexOf(arg0.getSource());
+                Object obj = avatarLists.get(index).getSelectedValue();
+                
+                if(!(obj instanceof String))
+                {
+                    cdpAvatarDetails.get(index).setCard(((CardPrinted)obj).toForgeCard());
+                }
+            }
+            
+        };
 
         //Create all 8 player settings panel
         FRadioButton tempRadio = null;
         FPanel tempPanel;
         FDeckChooser tempChooser;
         FList tempList;
+        CardDetailPanel tempDetail;
 
         //Settings panel
         FPanel settingsPanel = new FPanel();
+        settingsPanel.setLayout(new MigLayout("wrap 2"));
         FPanel radioPane = new FPanel();
         radioPane.setLayout(new MigLayout("wrap 1"));
         radioPane.setOpaque(false);
+        radioPane.add(new FLabel.Builder().text("Set number of opponents").build(),"wrap");
         for (int i = 1; i < 8; i++) {
             tempRadio = new FRadioButton();
             tempRadio.setText(String.valueOf(i));
@@ -137,17 +161,16 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
             grpFields.add(tempRadio);
             tempRadio.setSelected(true);
             tempRadio.addItemListener(iListener);
-            radioPane.add(tempRadio, "wrap");
+            radioPane.add(tempRadio, "wrap,align 50% 50%");
         }
-        settingsPanel.add(radioPane);
-        settingsPanel.add(new FLabel.Builder().text("Set number of opponents").build());
+        settingsPanel.add(radioPane,"span 1 2");        
         settingsPanel.add(cbDefaultAvatars);
         tabPane.add("Settings", settingsPanel);
 
         //Player panels (Human + 7 AIs)
         for (int i = 0; i < 8; i++) {
             tempPanel = new FPanel();
-            tempPanel.setLayout(new MigLayout("insets 0, gap 0 , wrap 2"));
+            tempPanel.setLayout(new MigLayout("insets 0, gap 0 , wrap 2, flowy"));
 
             tempChooser = new FDeckChooser("Select deck:", i == 0 ? PlayerType.HUMAN : PlayerType.COMPUTER);
             tempChooser.initialize();
@@ -157,16 +180,22 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
             tempList.setListData(i == 0 ? humanListData : aiListData);
             tempList.setSelectedIndex(0);
             tempList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-
+            tempList.addListSelectionListener(lsListener);
+            
             deckChoosers.add(tempChooser);
             avatarLists.add(tempList);
 
-            tempPanel.add(tempChooser, "span 1 2, w 44%!, gap 0 0 20px 20px, growy, pushy");
+            tempPanel.add(tempChooser, "span 1 2, w 44%!, gap 0 0 20px 20px, growy, pushy, wrap");
 
-            tempPanel.add(new FLabel.Builder().text("Select Avatar:").build());
+            tempPanel.add(new FLabel.Builder().text("Select Avatar:").build(),"flowy");
 
             JScrollPane scrAvatar = new FScrollPane(tempList, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-            tempPanel.add(scrAvatar, "h 90%!");
+            tempPanel.add(scrAvatar, "h 90%!,wrap");
+            
+            tempDetail = new CardDetailPanel(null);
+            cdpAvatarDetails.add(tempDetail);
+            
+            tempPanel.add(tempDetail,"span 1 2,growy,pushy,growx,pushx");
 
             playerPanels.add(tempPanel);
             if (i == 0) {
