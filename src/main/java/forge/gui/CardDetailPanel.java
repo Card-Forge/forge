@@ -39,6 +39,11 @@ import forge.CounterType;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.game.zone.ZoneType;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FScrollPane;
+import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FTextArea;
 
 /**
  * The class CardDetailPanel. Shows the details of a card.
@@ -46,7 +51,7 @@ import forge.game.zone.ZoneType;
  * @author Clemens Koza
  * @version V0.0 17.02.2010
  */
-public class CardDetailPanel extends JPanel implements CardContainer {
+public class CardDetailPanel extends FPanel implements CardContainer {
     /** Constant <code>serialVersionUID=-8461473263764812323L</code>. */
     private static final long serialVersionUID = -8461473263764812323L;
 
@@ -54,13 +59,13 @@ public class CardDetailPanel extends JPanel implements CardContainer {
 
     private Card card;
 
-    private final JLabel nameCostLabel;
-    private final JLabel typeLabel;
-    private final JLabel powerToughnessLabel;
-    private final JLabel idLabel;
-    private final JLabel setInfoLabel;
-    private final JTextArea cdArea;
-    private final JScrollPane scrArea;
+    private final FLabel nameCostLabel;
+    private final FLabel typeLabel;
+    private final FLabel powerToughnessLabel;
+    private final FLabel idLabel;
+    private final FLabel setInfoLabel;
+    private final FTextArea cdArea;
+    private final FScrollPane scrArea;
 
     /**
      * <p>
@@ -71,6 +76,7 @@ public class CardDetailPanel extends JPanel implements CardContainer {
      *            a {@link forge.Card} object.
      */
     public CardDetailPanel(final Card card) {
+        super();
         this.setLayout(new GridBagLayout());
         this.setBorder(new EtchedBorder());
 
@@ -81,14 +87,18 @@ public class CardDetailPanel extends JPanel implements CardContainer {
         labelConstrains.weightx = 1.0;
 
         final JPanel cdLabels = new JPanel(new GridLayout(0, 1, 0, 5));
-        this.nameCostLabel = new JLabel();
-        this.typeLabel = new JLabel();
-        this.powerToughnessLabel = new JLabel();
+        cdLabels.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
+        cdLabels.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
+        this.nameCostLabel = new FLabel.Builder().build();
+        this.typeLabel = new FLabel.Builder().build();
+        this.powerToughnessLabel = new FLabel.Builder().build();
         cdLabels.add(this.nameCostLabel);
         cdLabels.add(this.typeLabel);
         cdLabels.add(this.powerToughnessLabel);
 
         final JPanel idr = new JPanel(new GridBagLayout());
+        idr.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
+        idr.setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         final GridBagConstraints c1 = new GridBagConstraints();
         final GridBagConstraints c2 = new GridBagConstraints();
 
@@ -96,13 +106,13 @@ public class CardDetailPanel extends JPanel implements CardContainer {
 
         c1.gridwidth = 2;
         c1.weightx = 1.0;
-        this.idLabel = new JLabel();
+        this.idLabel = new FLabel.Builder().build();
         idr.add(this.idLabel, c1);
 
         c2.gridwidth = 1;
         c2.weightx = 0.3;
         c2.fill = GridBagConstraints.HORIZONTAL;
-        this.setInfoLabel = new JLabel();
+        this.setInfoLabel = new FLabel.Builder().build();
         idr.add(this.setInfoLabel, c2);
 
         cdLabels.add(idr);
@@ -115,8 +125,9 @@ public class CardDetailPanel extends JPanel implements CardContainer {
 
         this.setInfoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        this.cdArea = new JTextArea(4, 12);
-        this.scrArea = new JScrollPane(this.cdArea);
+        //4, 12
+        this.cdArea = new FTextArea();
+        this.scrArea = new FScrollPane(this.cdArea);
 
         GridBagConstraints areaConstraints = new GridBagConstraints();
         areaConstraints.fill = GridBagConstraints.BOTH;
