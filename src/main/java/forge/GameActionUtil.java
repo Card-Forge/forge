@@ -57,6 +57,7 @@ import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.GuiUtils;
 import forge.gui.match.CMatchUI;
 import forge.sound.SoundEffectType;
 import forge.util.MyRandom;
@@ -499,10 +500,15 @@ public final class GameActionUtil {
                     break;
                 }
 
+                GuiUtils.clearPanelSelections();
+                GuiUtils.setPanelSelection(source);
+
                 if (!showYesNoDialog(source, "Do you want to pay the sacrifice cost?")) {
                     hasPaid = false;
                     break;
                 }
+
+                GuiUtils.clearPanelSelections();
 
                 for (int i = 0; i < amount; i++) {
                     if (list.isEmpty()) {
