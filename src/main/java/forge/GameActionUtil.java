@@ -50,8 +50,6 @@ import forge.card.spellability.SpellAbilityRestriction;
 import forge.control.input.InputPayDiscardCost;
 import forge.control.input.InputPayManaCostAbility;
 import forge.control.input.InputPayReturnCost;
-import forge.control.input.InputPaySacCost;
-import forge.game.GameLossReason;
 import forge.game.event.CardDamagedEvent;
 import forge.game.event.FlipCoinEvent;
 import forge.game.event.LifeLossEvent;
@@ -536,6 +534,10 @@ public final class GameActionUtil {
             throw new RuntimeException("GameActionUtil::payCostDuringAbilityResolve - Too many payment types - " + source);
         }
         costPart = remainingParts.get(0);
+
+        //TODO: if a full-featured algorithm to chain together input-based costs is implemented
+        //      at some point in time, it's possible to restore the InputPaySacCost-based input
+        //      interface for sacrifice costs (instead of the menu-based one above).
 
         //the following costs need inputs and can't be combined at the moment
         if (costPart instanceof CostReturn) {
