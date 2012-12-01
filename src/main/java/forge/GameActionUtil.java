@@ -505,11 +505,8 @@ public final class GameActionUtil {
 
                 if (!showYesNoDialog(source, "Do you want to pay the sacrifice cost?")) {
                     hasPaid = false;
-                    GuiUtils.clearPanelSelections();
                     break;
                 }
-
-                GuiUtils.clearPanelSelections();
 
                 for (int i = 0; i < amount; i++) {
                     if (list.isEmpty()) {
@@ -529,6 +526,9 @@ public final class GameActionUtil {
                 remainingParts.remove(part);
             }
         }
+
+        GuiUtils.clearPanelSelections();
+
         if (!hasPaid) {
             unpaid.execute();
             return;
