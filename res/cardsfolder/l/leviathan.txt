@@ -14,8 +14,9 @@ SVar:Y:Count$Valid Island.YouCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leviathan.jpg
-SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/97.jpg
-SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/79.jpg
-SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/28.jpg
+SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/23.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/29.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/80.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/98.jpg
 Oracle:Trample\nLeviathan enters the battlefield tapped and doesn't untap during your untap step.\nAt the beginning of your upkeep, you may sacrifice two Islands. If you do, untap Leviathan.\nLeviathan can't attack unless you sacrifice two Islands.
 End
