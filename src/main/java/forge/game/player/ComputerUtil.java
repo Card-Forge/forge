@@ -52,6 +52,7 @@ import forge.card.mana.ManaCost;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilityStatic;
+import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.control.input.InputPayManaCostUtil;
@@ -395,7 +396,7 @@ public class ComputerUtil {
         newSA.setDescription(sb.toString());
         newSA.setActivatingPlayer(ai);
 
-        if (!ComputerUtil.canPayAdditionalCosts(ai, newSA)) {
+        if (!ComputerUtil.canPayAdditionalCosts(newSA, ai)) {
             return;
         }
 
@@ -500,7 +501,25 @@ public class ComputerUtil {
      * @return a boolean.
      */
     public static boolean canPayCost(final SpellAbility sa, final Player player) {
-        if (!ComputerUtil.payManaCost(sa, player, true, 0, true)) {
+
+        // Check for stuff like Nether Void
+        int extraManaNeeded = 0;
+        if (sa instanceof Spell && player.isComputer()) {
+            for (Player opp : player.getOpponents()) {
+                for (Card c : opp.getCardsIn(ZoneType.Battlefield)) {
+                    final String snem = c.getSVar("SpellsNeedExtraMana");
+                    if (!snem.equals("")) {
+                        try {
+                            extraManaNeeded += Integer.parseInt(snem);
+                        } catch (final NumberFormatException e) {
+                            System.out.println("wrong SpellsNeedExtraMana SVar format on " + c);
+                        } 
+                    }
+                }
+            }
+        }
+
+        if (!ComputerUtil.payManaCost(sa, player, true, extraManaNeeded, true)) {
             return false;
         }
 
@@ -531,19 +550,6 @@ public class ComputerUtil {
         }
 
         return xMana;
-    }
-
-    /**
-     * <p>
-     * canPayAdditionalCosts.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
-    public static boolean canPayAdditionalCosts(final Player ai, final SpellAbility sa) {
-        return ComputerUtil.canPayAdditionalCosts(sa, ai);
     }
 
     /**
@@ -887,11 +893,12 @@ public class ComputerUtil {
 
         final Card card = sa.getSourceCard();
         // Tack xMana Payments into mana here if X is a set value
-        if ((sa.getPayCosts() != null) && (cost.getXcounter() > 0)) {
+        if ((sa.getPayCosts() != null) && (cost.getXcounter() > 0 || extraMana > 0)) {
 
             int manaToAdd = 0;
-            if (test && (extraMana > 0)) {
-                manaToAdd = extraMana * cost.getXcounter();
+            if (test && extraMana > 0) {
+                final int multiplicator = Math.max(cost.getXcounter(), 1);
+                manaToAdd = extraMana * multiplicator;
             } else {
                 // For Count$xPaid set PayX in the AFs then use that here
                 // Else calculate it as appropriate.
