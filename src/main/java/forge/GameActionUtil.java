@@ -380,6 +380,7 @@ public final class GameActionUtil {
         final ArrayList<CostPart> parts =  cost.getCostParts();
         ArrayList<CostPart> remainingParts =  new ArrayList<CostPart>(cost.getCostParts());
         CostPart costPart = null;
+        int num_parts = parts.size();
         if (!parts.isEmpty()) {
             costPart = parts.get(0);
         }
@@ -486,6 +487,42 @@ public final class GameActionUtil {
                     }
                 }
             }
+            else if (part instanceof CostSacrifice) {
+                
+                CostSacrifice sacCost = (CostSacrifice)part;
+                Player p = Singletons.getControl().getPlayer();
+                String valid = sacCost.getType();
+                int amount = Integer.parseInt(sacCost.getAmount());
+                List<Card> list = AbilityFactory.filterListByType(p.getCardsIn(ZoneType.Battlefield), valid, ability);
+
+                if (list.size() < amount) {
+                    // unable to pay (not enough cards)
+                    hasPaid = false;
+                    break;
+                }
+                
+                if (!showYesNoDialog(source, "Do you want to pay the sacrifice cost?")) {
+                    hasPaid = false;
+                    break;
+                }
+
+                for (int i = 0; i < amount; i++) {
+                    if (list.isEmpty()) {
+                        hasPaid = false;
+                        break;
+                    }
+                    Object o = GuiChoose.one("Select a card to sacrifice", list);
+                    if (o != null) {
+                        final Card c = (Card) o;
+
+                        Singletons.getModel().getGame().getAction().sacrifice(c, ability);
+
+                        list.remove(c);
+                    }
+                }
+
+                remainingParts.remove(part);
+            }
         }
         if (!hasPaid) {
             unpaid.execute();
@@ -501,13 +538,7 @@ public final class GameActionUtil {
         costPart = remainingParts.get(0);
 
         //the following costs need inputs and can't be combined at the moment
-        if (costPart instanceof CostSacrifice) {
-            final boolean bResolving = Singletons.getModel().getGame().getStack().isResolving();
-            Singletons.getModel().getGame().getStack().setResolving(false);
-            Singletons.getModel().getMatch().getInput().setInput(new InputPaySacCost((CostSacrifice) costPart, ability, paid, unpaid));
-            Singletons.getModel().getGame().getStack().setResolving(bResolving);
-        }
-        else if (costPart instanceof CostReturn) {
+        if (costPart instanceof CostReturn) {
             final boolean bResolving = Singletons.getModel().getGame().getStack().isResolving();
             Singletons.getModel().getGame().getStack().setResolving(false);
             Singletons.getModel().getMatch().getInput().setInput(new InputPayReturnCost((CostReturn) costPart, ability, paid, unpaid));

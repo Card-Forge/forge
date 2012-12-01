@@ -1,0 +1,20 @@
+Name:Leviathan
+ManaCost:5 U U U U
+Types:Creature Leviathan
+Text:no text
+PT:10/10
+K:Trample
+K:CARDNAME enters the battlefield tapped.
+K:CARDNAME doesn't untap during your untap step.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | OptionalDecider$ You | Execute$ TrigUntap | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may sacrifice two Islands. If you do, untap CARDNAME.
+SVar:TrigUntap:AB$ Untap | Cost$ Sac<2/Island>
+S:Mode$ CantAttackUnless | ValidCard$ Creature.Self | Target$ Player,Planeswalker | Cost$ Sac<2/Island> | Description$ CARDNAME can't attack unless you sacrifice two islands.
+SVar:NeedsToPlayVar:Y GE4
+SVar:Y:Count$Valid Island.YouCtrl
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/leviathan.jpg
+SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/97.jpg
+SetInfo:4ED|Rare|http://magiccards.info/scans/en/4e/79.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/28.jpg
+Oracle:Trample\nLeviathan enters the battlefield tapped and doesn't untap during your untap step.\nAt the beginning of your upkeep, you may sacrifice two Islands. If you do, untap Leviathan.\nLeviathan can't attack unless you sacrifice two Islands.
+End

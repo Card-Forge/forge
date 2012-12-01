@@ -3158,6 +3158,7 @@ res/cardsfolder/e/evolution_charm.txt svneol=native#text/plain
 res/cardsfolder/e/evolution_vat.txt svneol=native#text/plain
 res/cardsfolder/e/evolving_wilds.txt svneol=native#text/plain
 res/cardsfolder/e/exalted_angel.txt svneol=native#text/plain
+res/cardsfolder/e/exalted_dragon.txt -text
 res/cardsfolder/e/excavation.txt svneol=native#text/plain
 res/cardsfolder/e/excise.txt svneol=native#text/plain
 res/cardsfolder/e/exclude.txt svneol=native#text/plain
@@ -3536,6 +3537,7 @@ res/cardsfolder/f/floodchaser.txt svneol=native#text/plain
 res/cardsfolder/f/flooded_grove.txt svneol=native#text/plain
 res/cardsfolder/f/flooded_shoreline.txt svneol=native#text/plain
 res/cardsfolder/f/flooded_strand.txt svneol=native#text/plain
+res/cardsfolder/f/flooded_woodlands.txt -text
 res/cardsfolder/f/floodgate.txt -text
 res/cardsfolder/f/floodwater_dam.txt svneol=native#text/plain
 res/cardsfolder/f/floral_spuzzem.txt svneol=native#text/plain
@@ -5634,6 +5636,7 @@ res/cardsfolder/l/lesser_gargadon.txt svneol=native#text/plain
 res/cardsfolder/l/lesser_werewolf.txt -text svneol=unset#text/plain
 res/cardsfolder/l/lethargy_trap.txt svneol=native#text/plain
 res/cardsfolder/l/leveler.txt svneol=native#text/plain
+res/cardsfolder/l/leviathan.txt -text
 res/cardsfolder/l/levitation.txt svneol=native#text/plain
 res/cardsfolder/l/ley_druid.txt svneol=native#text/plain
 res/cardsfolder/l/leyline_of_anticipation.txt svneol=native#text/plain
@@ -7900,6 +7903,7 @@ res/cardsfolder/r/reckless_spite.txt svneol=native#text/plain
 res/cardsfolder/r/reckless_waif_merciless_predator.txt -text
 res/cardsfolder/r/reckless_wurm.txt svneol=native#text/plain
 res/cardsfolder/r/reclaim.txt svneol=native#text/plain
+res/cardsfolder/r/reclamation.txt -text
 res/cardsfolder/r/reclusive_wight.txt svneol=native#text/plain
 res/cardsfolder/r/recoil.txt svneol=native#text/plain
 res/cardsfolder/r/recollect.txt svneol=native#text/plain
