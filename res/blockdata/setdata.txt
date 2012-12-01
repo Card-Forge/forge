@@ -92,3 +92,4 @@ Index:82|Code2:M13|Code3:M13|Name:Magic 2013
 Index:83|Code2:RTR|Code3:RTR|Name:Return to Ravnica
 
 Index:86|Code2:VAN|Code3:VAN|Name:Vanguard
+Index:87|Code2:ARC|Code3:ARC|Name:Archenemy
