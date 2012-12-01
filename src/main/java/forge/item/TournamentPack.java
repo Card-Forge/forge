@@ -61,7 +61,7 @@ public class TournamentPack extends OpenablePack {
     public final boolean isStarterDeck() {
         return contents.getCommon() < 30;
     }
-    
+
 
     @Override
     public final String getType() {

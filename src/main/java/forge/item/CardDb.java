@@ -94,7 +94,7 @@ public final class CardDb {
     private final Map<String, Map<String, CardPrinted[]>> allCardsBySet = new Hashtable<String, Map<String, CardPrinted[]>>();
     // this is the same list in flat storage
     private final List<CardPrinted> allTraditionalCardsFlat = new ArrayList<CardPrinted>();
-    
+
     private final List<CardPrinted> allNonTraditionalCardsFlat = new ArrayList<CardPrinted>();
 
     // Lambda to get rules for selects from list of printed cards
@@ -169,7 +169,7 @@ public final class CardDb {
         setMap.put(cardName, cardCopies);
         for (int i = 0; i < count; i++) {
             lastAdded = CardPrinted.build(card, set, s.getValue().getRarity(), i);
-            if(lastAdded.isTraditional()) {
+            if (lastAdded.isTraditional()) {
                 this.allTraditionalCardsFlat.add(lastAdded);
             } else {
                 this.allNonTraditionalCardsFlat.add(lastAdded);
@@ -220,8 +220,10 @@ public final class CardDb {
      * @return true, if is card supported
      */
     public boolean isCardSupported(final String cardName0) {
-        if ( null == cardName0 ) return false;  // obviously
-        
+        if (null == cardName0) {
+            return false;  // obviously
+        }
+
         final boolean isFoil = this.isFoil(cardName0);
         final String cardName = isFoil ? this.removeFoilSuffix(cardName0) : cardName0;
         final ImmutablePair<String, String> nameWithSet = CardDb.splitCardName(cardName);
@@ -230,8 +232,8 @@ public final class CardDb {
         }
         return isCardSupported(nameWithSet.left, nameWithSet.right);
     }
-        
-    public boolean isCardSupported(final String cardName, String setName) {        
+
+    public boolean isCardSupported(final String cardName, String setName) {
         // Set exists?
         final Map<String, CardPrinted[]> cardsFromset = this.allCardsBySet.get(setName.toUpperCase());
         if (cardsFromset == null) {
@@ -371,7 +373,7 @@ public final class CardDb {
     public Iterable<CardPrinted> getAllTraditionalCards() {
         return this.allTraditionalCardsFlat;
     }
-    
+
     public Iterable<CardPrinted> getAllNonTraditionalCards() {
         return this.allNonTraditionalCardsFlat;
     }
@@ -409,7 +411,7 @@ public final class CardDb {
                 if (null == result) {
                     throw new NoSuchElementException(String.format("Card '%s' not found in our database.", name));
                 }
-                
+
             }
         }
         if (isFoil) {

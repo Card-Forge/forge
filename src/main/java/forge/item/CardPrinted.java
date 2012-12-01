@@ -110,7 +110,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
     public boolean isFoil() {
         return this.foiled;
     }
-    
+
     public boolean isTraditional() {
         return !getCard().getType().isVanguard();
     }
@@ -182,8 +182,8 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
         public Integer apply(final CardPrinted from) {
             return Integer.valueOf(Singletons.getModel().getEditions().get(from.getEdition()).getIndex());
         }
-    };    
-    
+    };
+
     // Constructor is private. All non-foiled instances are stored in CardDb
     private CardPrinted(final CardRules c, final String edition0, final CardRarity rare, final int index, final boolean foil) {
         this.card = c;
@@ -322,7 +322,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
      * Number of filters based on CardPrinted values.
      */
     public abstract static class Predicates {
-        
+
         /**
          * Type.
          * @param t
@@ -440,20 +440,20 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
                 this.mustContain = shouldContain;
             }
         }
-        
+
         private static class PredicateType implements Predicate<CardPrinted> {
             private final String operand;
-            
+
             @Override
             public boolean apply(final CardPrinted card) {
                 return card.getType().contains(operand);
             }
-            
-            
+
+
             public PredicateType(final String op) {
                 operand = op;
             }
-            
+
         }
 
         private static class PredicateName extends PredicateString<CardPrinted> {
@@ -518,9 +518,9 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
 
             /** The Constant exceptLands. */
             public static final Predicate<CardPrinted> EXCEPT_LANDS = Predicates.rarity(false, CardRarity.BasicLand);
-            
-            public static final Predicate<CardPrinted> NONTRADITIONAL = com.google.common.base.Predicates.or(Predicates.type("Vanguard"),Predicates.type("Scheme"),Predicates.type("Plane"));
-            
+
+            public static final Predicate<CardPrinted> NONTRADITIONAL = com.google.common.base.Predicates.or(Predicates.type("Vanguard"), Predicates.type("Scheme"), Predicates.type("Plane"));
+
             public static final Predicate<CardPrinted> TRADITIONAL = com.google.common.base.Predicates.not(Presets.NONTRADITIONAL);
         }
     }
