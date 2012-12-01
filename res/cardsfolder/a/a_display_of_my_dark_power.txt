@@ -9,4 +9,5 @@ SVar:DarkMana:AB$ ManaReflected | Cost$ 0 | ColorOrType$ Type | Valid$ Defined.T
 SVar:Rarity:Common
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=212578&type=card
 SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/a-display-of-my-dark-power.jpg
+Oracle:When you set this scheme in motion, until your next turn, whenever a player taps a land for mana, that player adds one mana to his or her mana pool of any type that land produced.
 End

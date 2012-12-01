@@ -95,7 +95,8 @@ public enum CSubmenuArchenemy implements ICDoc {
                 //Debugging
                 List<CardPrinted> schemes = new ArrayList<CardPrinted>();
                 schemes.add(CardDb.instance().getCard("A Display of My Dark Power"));
-                schemes.add(CardDb.instance().getCard("I Know All, I See All"));    
+                schemes.add(CardDb.instance().getCard("Behold the Power of Destruction"));
+                schemes.add(CardDb.instance().getCard("I Know All, I See All"));
                 
                 starter.addArchenemy(lobby.findLocalPlayer(PlayerType.HUMAN), humanDeck, schemes);
                 
