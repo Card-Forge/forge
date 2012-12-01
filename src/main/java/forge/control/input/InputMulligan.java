@@ -39,6 +39,7 @@ import forge.game.zone.ZoneType;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.VMatchUI;
+import forge.gui.match.nonsingleton.VField;
 import forge.gui.match.views.VMessage;
 import forge.view.ButtonUtil;
  /**
@@ -175,6 +176,12 @@ public class InputMulligan extends Input {
 
         ga.checkStateEffects();
         Singletons.getModel().getMatch().getInput().clearInput();
+        
+        //Set Field shown to current player.
+        Player next = game.getPhaseHandler().getPlayerTurn();
+        VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(next);
+        SDisplayUtil.showTab(nextField);
+        
         game.getPhaseHandler().nextPhase();
     }
 

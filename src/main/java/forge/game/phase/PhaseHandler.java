@@ -33,6 +33,9 @@ import forge.game.event.EndOfTurnEvent;
 import forge.game.event.ManaBurnEvent;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.gui.framework.SDisplayUtil;
+import forge.gui.match.CMatchUI;
+import forge.gui.match.nonsingleton.VField;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.MyObservable;
 
@@ -528,7 +531,11 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             p.removeKeyword("Skip the untap step of this turn.");
         }
 
-        return getNextActivePlayer();
+        Player next = getNextActivePlayer();
+        VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(next);
+        SDisplayUtil.showTab(nextField);
+                
+        return next;
     }
 
     /**
