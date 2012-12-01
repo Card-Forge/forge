@@ -161,9 +161,10 @@ public class QuestController {
      * @return QuestPreconManager
      */
     public static IStorageView<PreconDeck> getPrecons() {
-        if ( null == preconManager )
+        if (null == preconManager) {
             preconManager = new StorageView<PreconDeck>(new PreconReader(ForgeProps.getFile(NewConstants.Quest.PRECONS)));
-        
+        }
+
         return QuestController.preconManager;
     }
 
@@ -217,23 +218,24 @@ public class QuestController {
      * @param userDeck
      *      user-specified starting deck
      */
-    public void newGame(final String name, final int difficulty, final QuestMode mode, 
+    public void newGame(final String name, final int difficulty, final QuestMode mode,
             final GameFormat formatPrizes, final boolean allowSetUnlocks,
             final Deck startingCards, final GameFormat formatStartingPool) {
 
         this.load(new QuestData(name, difficulty, mode, formatPrizes, allowSetUnlocks)); // pass awards and unlocks here
-        
-        if ( null != startingCards )
+
+        if (null != startingCards) {
             this.myCards.addDeck(startingCards);
-        else {
+        } else {
             Predicate<CardPrinted> filter = Predicates.alwaysTrue();
-            if ( formatStartingPool != null ) 
+            if (formatStartingPool != null) {
                 filter = formatStartingPool.getFilterPrinted();
+            }
             this.myCards.setupNewGameCardPool(filter, difficulty);
         }
 
         this.getAssets().setCredits(Singletons.getModel().getQuestPreferences().getPreferenceInt(QPref.STARTING_CREDITS, difficulty));
-        
+
     }
 
     /**
@@ -266,8 +268,8 @@ public class QuestController {
     public QuestWorld getWorld() {
         return this.model == null ? null : Singletons.getModel().getWorlds().get(this.model.getWorldId());
     }
-    
-    
+
+
     /**
      * TODO: Write javadoc for this method.
      *
@@ -319,8 +321,8 @@ public class QuestController {
         return this.duelManager;
     }
 
-   
-    
+
+
     /**
      * 
      * TODO: Write javadoc for this method.
@@ -359,9 +361,9 @@ public class QuestController {
 
         int cntLocked = this.questFormat.getLockedSets().size();
         int unlocksAvaliable = wins / 20;
-        int unlocksSpent = this.questFormat.getUnlocksUsed(); 
-        
-        return unlocksAvaliable > unlocksSpent ? Math.min(unlocksAvaliable - unlocksSpent, cntLocked) : 0; 
+        int unlocksSpent = this.questFormat.getUnlocksUsed();
+
+        return unlocksAvaliable > unlocksSpent ? Math.min(unlocksAvaliable - unlocksSpent, cntLocked) : 0;
     }
 
 }

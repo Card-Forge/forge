@@ -56,13 +56,13 @@ public final class GameFormatQuest extends GameFormat {
     public GameFormatQuest(final String newName, final List<String> setsToAllow, final List<String> cardsToBan, boolean allowSetUnlocks) {
         super(newName, setsToAllow, cardsToBan);
         allowUnlocks = allowSetUnlocks;
-    }    
+    }
     /**
      * Instantiates a new game format based on an existing format.
      * 
      * @param toCopy
      *      an existing format
-     * @param allowSetUnlocks 
+     * @param allowSetUnlocks
      */
     public GameFormatQuest(final GameFormat toCopy, boolean allowSetUnlocks) {
         super(toCopy.getName(), toCopy.getAllowedSetCodes(), toCopy.getBannedCardNames());

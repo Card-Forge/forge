@@ -78,13 +78,16 @@ public final class QuestUtilCards {
         if (usedFormat != null) {
             List<String> availableEditions = usedFormat.getAllowedSetCodes();
             for (String edition : availableEditions) {
-                if (db.isCardSupported("Plains", edition))
+                if (db.isCardSupported("Plains", edition)) {
                     landCodes.add(edition);
+                }
             }
-            if (usedFormat.isSetLegal("ICE"))
+            if (usedFormat.isSetLegal("ICE")) {
                 snowLandCodes.add("ICE");
-            if (usedFormat.isSetLegal("CSP"))
+            }
+            if (usedFormat.isSetLegal("CSP")) {
                 snowLandCodes.add("CSP");
+            }
         } else {
             Iterable<CardEdition> allEditions = Singletons.getModel().getEditions();
             for (CardEdition edition : Iterables.filter(allEditions, CardEdition.Predicates.hasBasicLands)) {
@@ -95,8 +98,9 @@ public final class QuestUtilCards {
         }
 
         String landCode = Aggregates.random(landCodes);
-        if ( null == landCode )
+        if (null == landCode) {
             landCode = "M10";
+        }
 
         pool.add(db.getCard("Forest", landCode), nBasic);
         pool.add(db.getCard("Mountain", landCode), nBasic);
@@ -307,8 +311,8 @@ public final class QuestUtilCards {
 
     public void loseCard(final CardPrinted card) {
         this.sellCard(card, 0, false);
-    }    
-    
+    }
+
     /**
      * Sell card.
      * 

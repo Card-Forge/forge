@@ -46,7 +46,7 @@ public final class QuestData {
 
     private GameFormatQuest format;
     private final String name;
-    
+
     // Quest mode - there should be an enum :(
     /** The mode. */
     private QuestMode mode;
@@ -72,13 +72,14 @@ public final class QuestData {
      *      String, persistent format for the quest (null if none).
      * @param userFormat
      *      user-defined format, if any (null if none).
-     * @param allowSetUnlocks 
+     * @param allowSetUnlocks
      */
     public QuestData(String name2, int diff, QuestMode mode2, GameFormat userFormat, boolean allowSetUnlocks) {
         this.name = name2;
 
-        if ( userFormat != null)
+        if (userFormat != null) {
             this.format = new GameFormatQuest(userFormat, allowSetUnlocks);
+        }
         this.mode = mode2;
         this.achievements = new QuestAchievements(diff);
         this.assets = new QuestAssets(format);
