@@ -4,7 +4,7 @@ Types:Sorcery
 Text:You may play an additional land this turn. Draw a card.
 Text:no text
 A:SP$ Effect | Cost$ 1 G | Name$ Explore Effect | StaticAbilities$ Exploration | AILogic$ Always | SubAbility$ DBDraw | SpellDescription$ You may play an additional land this turn. Draw a card.
-SVar:Exploration:Mode$ Continuous | Affected$ You | AddKeyword$ AdjustLandPlays:1 | Description$ You may play an additional land this turn.
+SVar:Exploration:Mode$ Continuous | Affected$ You | AddKeyword$ AdjustLandPlays:1 | EffectZone$ Command | Description$ You may play an additional land this turn.
 SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 1
 SVar:NeedsToPlayVar:LandInHand GE1
 SVar:HandInLand:Count$InYourHand.Land

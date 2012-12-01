@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Sorcery
 Text:no text
 A:SP$ Effect | Cost$ 1 G | Name$ Bloom Effect | StaticAbilities$ BloomingLand | AILogic$ Always | SpellDescription$ You may play up to three additional lands this turn.
-SVar:BloomingLand:Mode$ Continuous | Affected$ You | AddKeyword$ AdjustLandPlays:3 | Description$ You may play up to three additional lands this turn.
+SVar:BloomingLand:Mode$ Continuous | Affected$ You | AddKeyword$ AdjustLandPlays:3 | EffectZone$ Command | Description$ You may play up to three additional lands this turn.
 SVar:NeedsToPlayVar:LandInHand GE1
 SVar:HandInLand:Count$InYourHand.Land
 SVar:PlayMain1:TRUE
