@@ -112,6 +112,7 @@ res/cardsfolder/a/aether_figment.txt svneol=native#text/plain
 res/cardsfolder/a/aether_flash.txt svneol=native#text/plain
 res/cardsfolder/a/aether_membrane.txt svneol=native#text/plain
 res/cardsfolder/a/aether_mutation.txt svneol=native#text/plain
+res/cardsfolder/a/aether_rift.txt -text
 res/cardsfolder/a/aether_shockwave.txt svneol=native#text/plain
 res/cardsfolder/a/aether_spellbomb.txt svneol=native#text/plain
 res/cardsfolder/a/aether_sting.txt svneol=native#text/plain
@@ -5339,6 +5340,7 @@ res/cardsfolder/k/kiln_walker.txt svneol=native#text/plain
 res/cardsfolder/k/kilnmouth_dragon.txt -text
 res/cardsfolder/k/kindercatch.txt -text
 res/cardsfolder/k/kindle.txt svneol=native#text/plain
+res/cardsfolder/k/kindle_the_carnage.txt -text
 res/cardsfolder/k/kindled_fury.txt svneol=native#text/plain
 res/cardsfolder/k/king_cheetah.txt svneol=native#text/plain
 res/cardsfolder/k/king_crab.txt svneol=native#text/plain
@@ -7081,6 +7083,7 @@ res/cardsfolder/o/oxidda_scrapmelter.txt svneol=native#text/plain
 res/cardsfolder/o/oxidize.txt svneol=native#text/plain
 res/cardsfolder/o/oyobi_who_split_the_heavens.txt svneol=native#text/plain
 res/cardsfolder/p/pacifism.txt svneol=native#text/plain
+res/cardsfolder/p/pack_hunt.txt -text
 res/cardsfolder/p/pack_rat.txt -text
 res/cardsfolder/p/packs_disdain.txt svneol=native#text/plain
 res/cardsfolder/p/pact_of_negation.txt svneol=native#text/plain

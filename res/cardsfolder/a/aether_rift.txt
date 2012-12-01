@@ -1,0 +1,14 @@
+Name:AEther Rift
+ManaCost:1 R G
+Types:Enchantment
+Text:no text
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, discard a card at random. If you discard a creature card this way, return it from your graveyard to the battlefield unless any player pays 5 life.
+SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ You | NumCards$ 1 | Mode$ Random | RememberDiscarded$ True | SubAbility$ DBReturn | SpellDescription$ Discard a card at random. If you discard a creature card this way, return it from your graveyard to the battlefield unless any player pays 5 life.
+SVar:DBReturn:DB$ ChangeZoneAll | Cost$ 0 | ChangeType$ Card.IsRemembered | Origin$ Graveyard | Destination$ Battlefield | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | ConditionCompare$ EQ1 | UnlessCost$ PayLife<5> | UnlessPayer$ Player | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIdeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/aether_rift.jpg
+SetInfo:INV|Rare|http://magiccards.info/scans/en/in/227.jpg
+Oracle:At the beginning of your upkeep, discard a card at random. If you discard a creature card this way, return it from your graveyard to the battlefield unless any player pays 5 life.
+End
