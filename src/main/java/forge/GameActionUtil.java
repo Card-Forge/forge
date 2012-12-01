@@ -486,8 +486,8 @@ public final class GameActionUtil {
                 }
             }
             else if (part instanceof CostSacrifice) {
-                
-                CostSacrifice sacCost = (CostSacrifice)part;
+
+                CostSacrifice sacCost = (CostSacrifice) part;
                 Player p = Singletons.getControl().getPlayer();
                 String valid = sacCost.getType();
                 int amount = Integer.parseInt(sacCost.getAmount());
@@ -498,7 +498,7 @@ public final class GameActionUtil {
                     hasPaid = false;
                     break;
                 }
-                
+
                 if (!showYesNoDialog(source, "Do you want to pay the sacrifice cost?")) {
                     hasPaid = false;
                     break;

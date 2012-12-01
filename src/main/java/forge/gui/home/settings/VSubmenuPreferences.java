@@ -84,7 +84,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbScaleLarger = new OptionsCheckBox("Scale Image Larger");
     private final JCheckBox cbRandomFoil = new OptionsCheckBox("Random Foil");
     private final JCheckBox cbEnableSounds = new OptionsCheckBox("Enable Sounds");
-    
+
     /**
      * Constructor.
      */
@@ -147,7 +147,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbEnableSounds, regularConstraints);
         pnlPrefs.add(new NoteLabel("Enable sound effects during the game."), regularConstraints);
-        
+
         // Keyboard shortcuts
         final JLabel lblShortcuts = new SectionLabel("Keyboard Shortcuts");
         pnlPrefs.add(lblShortcuts, sectionConstraints);

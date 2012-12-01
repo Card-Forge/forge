@@ -41,7 +41,7 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
     private final List<JRadioButton> fieldRadios = new ArrayList<JRadioButton>();
     private final StartButton btnStart = new StartButton();
     private final ButtonGroup grpFields = new ButtonGroup();
-    
+
     private final FDeckChooser dcHuman = new FDeckChooser("Choose your deck", PlayerType.HUMAN);
 
     private VSubmenuArchenemy() {
@@ -88,7 +88,7 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(pnlFields, "w 41%!, gap 6% 6% 50px 0, growy, pushy");
         dcHuman.populate();
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(dcHuman, "w 41%!, gap 0 0 50px 0, growy, pushy");
-        
+
         VHomeUI.SINGLETON_INSTANCE.getPnlDisplay().add(new FLabel.Builder()
             .text("Starts a new game with preconstructed 2 color decks for each field.")
             .build(), "gap 0 0 50px 5px, ax center, span 2");

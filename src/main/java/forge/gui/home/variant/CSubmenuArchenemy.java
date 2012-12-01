@@ -85,18 +85,19 @@ public enum CSubmenuArchenemy implements ICDoc {
 
                 MatchStartHelper starter = new MatchStartHelper();
                 Lobby lobby = Singletons.getControl().getLobby();
-                
+
                 PlayerStartConditions humanStart = new PlayerStartConditions(humanDeck);
                 starter.addPlayer(lobby.findLocalPlayer(PlayerType.HUMAN), humanStart);
                 humanStart.setStartingLife(10 + 10 * numFields); // will have 40 life to play against 3 opponents
-                
-                for( int i = 0; i < numFields; i++ )
+
+                for (int i = 0; i < numFields; i++) {
                     starter.addPlayer(lobby.findLocalPlayer(PlayerType.COMPUTER), DeckgenUtil.getRandomColorDeck(PlayerType.COMPUTER));
-                
-                MatchController mc = Singletons.getModel().getMatch(); 
+                }
+
+                MatchController mc = Singletons.getModel().getMatch();
                 mc.initMatch(GameType.Constructed, starter.getPlayerMap());
                 mc.startRound();
-                
+
                 return null;
             }
 

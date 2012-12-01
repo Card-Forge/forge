@@ -135,19 +135,18 @@ public enum CSubmenuVanguard implements ICDoc {
                 for (int i = 0; i < view.getNumPlayers(); i++) {
                     CardPrinted avatar = null;
                     Object obj = view.getAvatarLists().get(i).getSelectedValue();
-                    
+
                     boolean useDefault = VSubmenuVanguard.SINGLETON_INSTANCE.getCbDefaultAvatars().isSelected();
                     useDefault &= playerDecks.get(i).getAvatar() != null;
-                    
-                    if(useDefault)
-                    {
+
+                    if (useDefault) {
+
                         avatar = playerDecks.get(i).getAvatar();
-                        defaultAvatarInfo.append("Player " + (i+1) + ": ");
+                        defaultAvatarInfo.append("Player " + (i + 1) + ": ");
                         defaultAvatarInfo.append(avatar.getName() + nl);
                         usedDefaults = true;
-                    }
-                    else
-                    {
+                    } else {
+
                         if (obj instanceof String) {
                             //Random is the only string in the list so grab a random avatar.
                             if (i == 0)  {
@@ -168,9 +167,9 @@ public enum CSubmenuVanguard implements ICDoc {
                     }
                     playerAvatars.add(avatar);
                 }
-                
-                if(usedDefaults)
-                {
+
+                if (usedDefaults) {
+
                     GameActionUtil.showInfoDialg(defaultAvatarInfo.toString());
                 }
 

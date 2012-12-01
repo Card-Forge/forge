@@ -122,7 +122,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
             }
 
         };
-        
+
         //This listener will look for an avatar being selected in the lists and update
         //the corresponding detail panel.
         ListSelectionListener lsListener = new ListSelectionListener() {
@@ -131,13 +131,13 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
             public void valueChanged(ListSelectionEvent arg0) {
                 int index = avatarLists.indexOf(arg0.getSource());
                 Object obj = avatarLists.get(index).getSelectedValue();
-                
-                if(!(obj instanceof String))
-                {
-                    cdpAvatarDetails.get(index).setCard(((CardPrinted)obj).toForgeCard());
+
+                if (!(obj instanceof String)) {
+
+                    cdpAvatarDetails.get(index).setCard(((CardPrinted) obj).toForgeCard());
                 }
             }
-            
+
         };
 
         //Create all 8 player settings panel
@@ -153,7 +153,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
         FPanel radioPane = new FPanel();
         radioPane.setLayout(new MigLayout("wrap 1"));
         radioPane.setOpaque(false);
-        radioPane.add(new FLabel.Builder().text("Set number of opponents").build(),"wrap");
+        radioPane.add(new FLabel.Builder().text("Set number of opponents").build(), "wrap");
         for (int i = 1; i < 8; i++) {
             tempRadio = new FRadioButton();
             tempRadio.setText(String.valueOf(i));
@@ -163,7 +163,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
             tempRadio.addItemListener(iListener);
             radioPane.add(tempRadio, "wrap,align 50% 50%");
         }
-        settingsPanel.add(radioPane,"span 1 2");        
+        settingsPanel.add(radioPane, "span 1 2");
         settingsPanel.add(cbDefaultAvatars);
         tabPane.add("Settings", settingsPanel);
 
@@ -181,21 +181,21 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
             tempList.setSelectedIndex(0);
             tempList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
             tempList.addListSelectionListener(lsListener);
-            
+
             deckChoosers.add(tempChooser);
             avatarLists.add(tempList);
 
             tempPanel.add(tempChooser, "span 1 2, w 44%!, gap 0 0 20px 20px, growy, pushy, wrap");
 
-            tempPanel.add(new FLabel.Builder().text("Select Avatar:").build(),"flowy");
+            tempPanel.add(new FLabel.Builder().text("Select Avatar:").build(), "flowy");
 
             JScrollPane scrAvatar = new FScrollPane(tempList, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             tempPanel.add(scrAvatar, "h 90%!,wrap");
-            
+
             tempDetail = new CardDetailPanel(null);
             cdpAvatarDetails.add(tempDetail);
-            
-            tempPanel.add(tempDetail,"span 1 2,growy,pushy,growx,pushx");
+
+            tempPanel.add(tempDetail, "span 1 2, growy, pushy, growx, pushx");
 
             playerPanels.add(tempPanel);
             if (i == 0) {
