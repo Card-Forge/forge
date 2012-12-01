@@ -2729,6 +2729,13 @@ public class CardFactoryUtil {
 
             return CardFactoryUtil.doXMath(mmc, m, c);
         }
+        
+        //Count$Random.<Min>.<Max>
+        if (sq[0].equals("Random")) {
+            int min = Integer.parseInt(sq[1]);
+            int max = Integer.parseInt(sq[2]);
+            return forge.util.MyRandom.getRandom().nextInt(max)+min;
+        }
 
         n = someCards.size();
 

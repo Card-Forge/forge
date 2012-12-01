@@ -3480,6 +3480,7 @@ res/cardsfolder/f/flames_of_the_firebrand.txt -text
 res/cardsfolder/f/flameshot.txt svneol=native#text/plain
 res/cardsfolder/f/flamestick_courier.txt svneol=native#text/plain
 res/cardsfolder/f/flametongue_kavu.txt svneol=native#text/plain
+res/cardsfolder/f/flametongue_kavu_avatar.txt -text
 res/cardsfolder/f/flamewave_invoker.txt svneol=native#text/plain
 res/cardsfolder/f/flaming_sword.txt svneol=native#text/plain
 res/cardsfolder/f/flanking_troops.txt svneol=native#text/plain
