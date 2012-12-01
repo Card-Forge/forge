@@ -7856,6 +7856,7 @@ res/cardsfolder/r/razortooth_rats.txt svneol=native#text/plain
 res/cardsfolder/r/razorverge_thicket.txt svneol=native#text/plain
 res/cardsfolder/r/reach_of_branches.txt svneol=native#text/plain
 res/cardsfolder/r/reach_through_mists.txt svneol=native#text/plain
+res/cardsfolder/r/read_the_runes.txt -text
 res/cardsfolder/r/reality_acid.txt -text
 res/cardsfolder/r/reality_anchor.txt svneol=native#text/plain
 res/cardsfolder/r/reality_ripple.txt -text
@@ -8987,6 +8988,7 @@ res/cardsfolder/s/sinstrikers_will.txt -text
 res/cardsfolder/s/sir_shandlar_of_eberyn.txt svneol=native#text/plain
 res/cardsfolder/s/sire_of_the_storm.txt svneol=native#text/plain
 res/cardsfolder/s/sirens_call.txt svneol=native#text/plain
+res/cardsfolder/s/sirocco.txt -text
 res/cardsfolder/s/sisay.txt -text
 res/cardsfolder/s/sisays_ingenuity.txt -text svneol=unset#text/plain
 res/cardsfolder/s/sisays_ring.txt svneol=native#text/plain
