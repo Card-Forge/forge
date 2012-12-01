@@ -82,20 +82,20 @@ public class VAssignDamage {
 
     private boolean canAssignToIndex(Integer selectedIndex) {
         Integer active = this.activeIndex;
-        
+
         if (selectedIndex == null) {
             // Trying to assign to the opponent
             if (active == null) {
                 return true;
             }
-            
-            if (active != this.lstDamage.size() -1) {
+
+            if (active != this.lstDamage.size() - 1) {
                 return false;
             }
-            
+
             int activeLethal = this.deathtouch ? 1 : lstDefenders.get(active).getLethalDamage();
-            int assignedToActive = lstDamage.get(active); 
-            
+            int assignedToActive = lstDamage.get(active);
+
             if (assignedToActive < activeLethal) {
                 return false;
             }
@@ -105,22 +105,22 @@ public class VAssignDamage {
             if (active == null) {
                 return false;
             }
-            
+
             if (active.equals(selectedIndex)) {
                 return true;
             }
-            
+
             int activeLethal = this.deathtouch ? 1 : lstDefenders.get(active).getLethalDamage();
-            int assignedToActive = lstDamage.get(active); 
-            
+            int assignedToActive = lstDamage.get(active);
+
             if (active != selectedIndex - 1 || assignedToActive < activeLethal) {
                 return false;
             }
         }
-        
+
         return true;
     }
-    
+
     // Mouse actions
     private final MouseAdapter madDefender = new MouseAdapter() {
         @Override
@@ -143,7 +143,7 @@ public class VAssignDamage {
         public void mousePressed(final MouseEvent evt) {
             Card source = ((CardPanel) evt.getSource()).getCard();
             int index = lstDefenders.indexOf(source);
-            
+
             // Allow click if this is active, or next to active and active has lethal
             if (!VAssignDamage.this.canAssignToIndex(index)) {
                 return;
@@ -154,7 +154,7 @@ public class VAssignDamage {
             // If lethal damage has already been assigned just act like it's 0.
             int lethal = VAssignDamage.this.deathtouch ? 1 : Math.max(0, source.getLethalDamage());
             int assignedDamage = 1;
-            
+
             // Add damage for left clicks, as much as we can for ctrl clicking
             if (SwingUtilities.isLeftMouseButton(evt)) {
                 if (meta) {
@@ -166,7 +166,7 @@ public class VAssignDamage {
 
                 assignCombatantDamage(source, assignedDamage);
             }
-            
+
             // Remove damage for right clicks, as much as we can for ctrl clicking
             else if (SwingUtilities.isRightMouseButton(evt)) {
                 if (meta) {
@@ -246,10 +246,10 @@ public class VAssignDamage {
 
     private final Command cmdOK = new Command() { @Override
         public void execute() { finish(); } };
-        
+
     private final Command cmdReset = new Command() { @Override
         public void execute() { resetAssignDamage(); } };
-        
+
     private final Command cmdAuto = new Command() { @Override
         public void execute() { autoAssignDamage(); } };
 

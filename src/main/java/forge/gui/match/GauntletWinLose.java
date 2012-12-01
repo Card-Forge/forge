@@ -44,7 +44,7 @@ public class GauntletWinLose extends ControlWinLose {
      * Instantiates a new gauntlet win/lose handler.
      * 
      * @param view0 ViewWinLose object
-     * @param match 
+     * @param match
      */
     public GauntletWinLose(final ViewWinLose view0, MatchController match) {
         super(view0, match);
@@ -82,7 +82,8 @@ public class GauntletWinLose extends ControlWinLose {
         LobbyPlayer questPlayer = Singletons.getControl().getLobby().getQuestPlayer();
         if (match.isMatchOver()) {
             // In all cases, update stats.
-            lstEventRecords.set(gd.getCompleted(), match.getGamesWonBy(questPlayer) + " - " + ( match.getPlayedGames().size() - match.getGamesWonBy(questPlayer) ) );
+            lstEventRecords.set(gd.getCompleted(), match.getGamesWonBy(questPlayer) + " - "
+                    + (match.getPlayedGames().size() - match.getGamesWonBy(questPlayer)));
             gd.setCompleted(gd.getCompleted() + 1);
 
             // Win match case

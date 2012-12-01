@@ -181,7 +181,7 @@ public class LimitedWinLose extends ControlWinLose {
             SOverlayUtils.hideOverlay();
             saveOptions();
             gauntlet.nextRound();
-        } 
+        }
         else { // noone will get here - if round is lost, the button is inivisible anyway
             super.actionOnContinue();
         }

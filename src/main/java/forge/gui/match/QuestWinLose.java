@@ -92,7 +92,7 @@ public class QuestWinLose extends ControlWinLose {
      * Instantiates a new quest win lose handler.
      * 
      * @param view0 ViewWinLose object
-     * @param match2 
+     * @param match2
      */
     public QuestWinLose(final ViewWinLose view0, MatchController match2) {
         super(view0, match2);
@@ -117,28 +117,32 @@ public class QuestWinLose extends ControlWinLose {
     public final boolean populateCustomPanel() {
         this.getView().getBtnRestart().setVisible(false);
         qData.getCards().resetNewList();
-        QuestController qc = Singletons.getModel().getQuest(); 
+        QuestController qc = Singletons.getModel().getQuest();
         LobbyPlayer questPlayer = Singletons.getControl().getLobby().getQuestPlayer();
         if (isAnte) {
             //do per-game actions
             GameOutcome outcome = match.getLastGameOutcome();
-            
+
             // Ante returns to owners in a draw
             if (!outcome.isDraw()) {
                 boolean isHumanWinner = outcome.getWinner().equals(questPlayer);
                 final List<CardPrinted> anteCards = new ArrayList<CardPrinted>();
-                for( Player p : Singletons.getModel().getGame().getRegisteredPlayers() ) {
-                    if (p.getLobbyPlayer().equals(questPlayer) == isHumanWinner) continue;
-                    for(Card c : p.getCardsIn(ZoneType.Ante))
+                for (Player p : Singletons.getModel().getGame().getRegisteredPlayers()) {
+                    if (p.getLobbyPlayer().equals(questPlayer) == isHumanWinner) {
+                        continue;
+                    }
+                    for (Card c : p.getCardsIn(ZoneType.Ante)) {
                         anteCards.add(CardDb.instance().getCard(c));
+                    }
                 }
-                    
+
                 if (isHumanWinner) {
                     qc.getCards().addAllCards(anteCards);
                     this.anteWon(anteCards);
                 } else {
-                    for(CardPrinted c : anteCards)
+                    for (CardPrinted c : anteCards) {
                         qc.getCards().loseCard(c);
+                    }
                     this.anteLost(anteCards);
                 }
             }
@@ -159,7 +163,7 @@ public class QuestWinLose extends ControlWinLose {
         // TODO: We don't have a enum for difficulty?
         int difficulty = qData.getAchievements().getDifficulty();
 
-        
+
         final int wins = qData.getAchievements().getWin();
         // Win case
         if (this.wonMatch) {
@@ -181,7 +185,7 @@ public class QuestWinLose extends ControlWinLose {
             }
 
             // Award jackpot every 80 games won (currently 10 rares)
-            
+
             if ((wins > 0) && ((wins % 80) == 0)) {
                 this.awardJackpot();
             }
@@ -335,23 +339,23 @@ public class QuestWinLose extends ControlWinLose {
         sb.append(diff + " opponent: " + credBase + " credits.<br>");
         // Gameplay bonuses (for each game win)
         boolean hasNeverLost = true;
-        
-        LobbyPlayer localHuman = Singletons.getControl().getLobby().getQuestPlayer(); 
+
+        LobbyPlayer localHuman = Singletons.getControl().getLobby().getQuestPlayer();
         for (final GameOutcome game : match.getPlayedGames()) {
             if (!game.isWinner(localHuman)) {
                 hasNeverLost = false;
                 continue; // no rewards for losing a game
             }
             // Alternate win
-            
-//            final PlayerStatistics aiRating = game.getStatistics(computer.getName());
+
+            // final PlayerStatistics aiRating = game.getStatistics(computer.getName());
             PlayerStatistics humanRating = null;
-            for(Entry<LobbyPlayer, PlayerStatistics> kvRating : game ) {
-                if( kvRating.getKey().equals(localHuman)) {
+            for (Entry<LobbyPlayer, PlayerStatistics> kvRating : game) {
+                if (kvRating.getKey().equals(localHuman)) {
                     humanRating = kvRating.getValue();
                     continue;
                 }
-                
+
                 final PlayerOutcome outcome = kvRating.getValue().getOutcome();
                 final GameLossReason whyAiLost = outcome.lossState;
                 final int altReward = this.getCreditsRewardForAltWin(whyAiLost);
@@ -375,7 +379,7 @@ public class QuestWinLose extends ControlWinLose {
                             break;
                         }
                     }
-    
+
                     credGameplay += 50;
                     sb.append(String.format("Alternate win condition: <u>%s</u>! " + "Bonus: %d credits.<br>",
                             winConditionName, 50));
@@ -708,9 +712,11 @@ public class QuestWinLose extends ControlWinLose {
      * @return int
      */
     private int getCreditsRewardForAltWin(final GameLossReason whyAiLost) {
-        QuestPreferences qp = Singletons.getModel().getQuestPreferences(); 
-        if ( null == whyAiLost) // Felidar, Helix Pinnacle, etc.
+        QuestPreferences qp = Singletons.getModel().getQuestPreferences();
+        if (null == whyAiLost) {
+            // Felidar, Helix Pinnacle, etc.
             return qp.getPreferenceInt(QPref.REWARDS_UNDEFEATED);
+        }
         switch (whyAiLost) {
         case LifeReachedZero:
             return 0; // nothing special here, ordinary kill

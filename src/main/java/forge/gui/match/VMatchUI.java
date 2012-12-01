@@ -45,7 +45,7 @@ public enum VMatchUI implements IVTopLevelUI {
             EDocID.valueOf("FIELD_" + i).setDoc(
                     new VEmptyDoc(EDocID.valueOf("FIELD_" + i)));
         }
-        
+
      // Create empty docs for all field slots
         for (int i = 0; i < 8; i++) {
             EDocID.valueOf("COMMAND_" + i).setDoc(
@@ -103,7 +103,7 @@ public enum VMatchUI implements IVTopLevelUI {
                 lstFields.get(1).getParentCell().addDoc(lstFields.get(i));
             }
         }
-        
+
      // Add extra players alternatively to existing user/AI field panels.
         for (int i = 2; i < lstCommands.size(); i++) {
             // If already in layout, no need to add again.

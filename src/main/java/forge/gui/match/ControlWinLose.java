@@ -32,7 +32,7 @@ public class ControlWinLose {
     private final ViewWinLose view;
     protected final MatchController match;
 
-    /** @param v &emsp; ViewWinLose 
+    /** @param v &emsp; ViewWinLose
      * @param match */
     public ControlWinLose(final ViewWinLose v, MatchController match) {
         this.view = v;
@@ -69,14 +69,14 @@ public class ControlWinLose {
     public void actionOnContinue() {
         SOverlayUtils.hideOverlay();
         saveOptions();
-        
+
         boolean isAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
 
         //This is called from QuestWinLose also.  If we're in a quest, this is already handled elsewhere
         if (isAnte && match.getGameType() != GameType.Quest) {
             executeAnte();
-        }        
-        
+        }
+
         match.startRound();
     }
 
@@ -111,14 +111,19 @@ public class ControlWinLose {
      */
     private void executeAnte() {
         List<GameOutcome> games = match.getPlayedGames();
-        
+
 
         GameOutcome lastGame = match.getLastGameOutcome();
-        if ( games.isEmpty() ) return;
-        
-        for (Player p: Singletons.getModel().getGame().getRegisteredPlayers()) {
-            if (!p.getName().equals(lastGame.getWinner().getName())) continue; // not a loser
-            
+        if (games.isEmpty()) {
+            return;
+        }
+
+        for (Player p : Singletons.getModel().getGame().getRegisteredPlayers()) {
+            if (!p.getName().equals(lastGame.getWinner().getName())) {
+
+                continue; // not a loser
+            }
+
             // remove all the lost cards from owners' decks
             List<CardPrinted> losses = new ArrayList<CardPrinted>();
             for (Player loser : Singletons.getModel().getGame().getRegisteredPlayers()) {

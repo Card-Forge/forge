@@ -60,20 +60,21 @@ public enum CMatchUI implements CardContainer {
         String strAvatarIcon = p.getLobbyPlayer().getPicture();
         if (strAvatarIcon != null) {
             final File f = new File(ForgeProps.getFile(NewConstants.IMAGE_ICON), strAvatarIcon);
-            if (f.exists())
+            if (f.exists()) {
                 return new ImageIcon(f.getPath()).getImage();
+            }
         }
         int iAvatar = p.getLobbyPlayer().getAvatarIndex();
         return FSkin.getAvatars().get(iAvatar >= 0 ? iAvatar : defaultIndex);
     }
-    
-    
-    private void setAvatar(final VField view, final Image img)
-    {
+
+
+    private void setAvatar(final VField view, final Image img) {
+
         view.getLblAvatar().setIcon(new ImageIcon(img));
-        view.getLblAvatar().getResizeTimer().start();        
+        view.getLblAvatar().getResizeTimer().start();
     }
-    
+
     /**
      * Instantiates at a match with a specified number of players
      * and hands.
@@ -83,10 +84,10 @@ public enum CMatchUI implements CardContainer {
      */
     public void initMatch(final List<Player> players, Player localPlayer) {
         // TODO fix for use with multiplayer
-        
+
         final String[] indices = Singletons.getModel().getPreferences().getPref(FPref.UI_AVATARS).split(",");
-        
-        // Instantiate all required field slots (user at 0) <-- that's not guaranteed 
+
+        // Instantiate all required field slots (user at 0) <-- that's not guaranteed
         final List<VField> fields = new ArrayList<VField>();
         final List<VCommand> commands = new ArrayList<VCommand>();
 
@@ -97,14 +98,16 @@ public enum CMatchUI implements CardContainer {
         setAvatar(humanField, FSkin.getAvatars().get(Integer.parseInt(indices[0])));
         humanField.getLayoutControl().initialize();
         humanCommand.getLayoutControl().initialize();
-        
+
         int i = 1;
         for (Player p : players) {
-            if (p.equals(localPlayer)) continue;
+            if (p.equals(localPlayer)) {
+                continue;
+            }
             // A field must be initialized after it's instantiated, to update player info.
             // No player, no init.
             VField f = new VField(EDocID.valueOf("FIELD_" + i), p);
-            setAvatar(f, getPlayerAvatar(p, Integer.parseInt(indices[i%2])));
+            setAvatar(f, getPlayerAvatar(p, Integer.parseInt(indices[i % 2])));
             f.getLayoutControl().initialize();
             fields.add(f);
             VCommand c = new VCommand(EDocID.valueOf("COMMAND_" + i), p);
@@ -112,11 +115,11 @@ public enum CMatchUI implements CardContainer {
             commands.add(c);
             i++;
         }
-    
+
 
         // Instantiate all required hand slots (user at 0)
         final List<VHand> hands = new ArrayList<VHand>();
-        VHand newHand = new VHand(EDocID.HAND_0, localPlayer); 
+        VHand newHand = new VHand(EDocID.HAND_0, localPlayer);
         newHand.getLayoutControl().initialize();
         hands.add(newHand);
 
@@ -167,12 +170,13 @@ public enum CMatchUI implements CardContainer {
 
     public VField getFieldViewFor(Player p) {
         for (final VField f : VMatchUI.SINGLETON_INSTANCE.getFieldViews()) {
-            if ( f.getLayoutControl().getPlayer().equals(p))
+            if (f.getLayoutControl().getPlayer().equals(p)) {
                 return f;
+            }
         }
         return null;
     }
-    
+
     /**
      * 
      * Fires up trample dialog.  Very old code, due for refactoring with new UI.
@@ -235,8 +239,8 @@ public enum CMatchUI implements CardContainer {
     public void setCard(final InventoryItem c) {
         CDetail.SINGLETON_INSTANCE.showCard(c);
         CPicture.SINGLETON_INSTANCE.showCard(c);
-    }    
-    
+    }
+
     @Override
     public Card getCard() {
         return CDetail.SINGLETON_INSTANCE.getCurrentCard();

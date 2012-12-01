@@ -58,7 +58,7 @@ public enum TargetingOverlay {
     private final List<Point[]> arcs = new ArrayList<Point[]>();
 
     private CardPanel activePanel = null;
-    
+
     /**
      * Semi-transparent overlay panel. Should be used with layered panes.
      */
@@ -122,7 +122,7 @@ public enum TargetingOverlay {
             // Only work with the active panel
             if (activePanel == null) { return; }
             Card c = activePanel.getCard();
-            
+
             Card enchanting = c.getEnchantingCard();
             List<Card> enchantedBy = c.getEnchantedBy();
             List<Card> blocking = c.getBlockedThisTurn();
@@ -207,7 +207,7 @@ public enum TargetingOverlay {
          */
 
         // Arrow drawing code by the MAGE team, used with permission.
-        private Area getArrow (float length, float bendPercent) {
+        private Area getArrow(float length, float bendPercent) {
             float p1x = 0, p1y = 0;
             float p2x = length, p2y = 0;
             float cx = length / 2, cy = length / 8f * bendPercent;
@@ -216,10 +216,10 @@ public enum TargetingOverlay {
             float headSize = 17;
 
             float adjSize, ex, ey, abs_e;
-            adjSize = (float)(bodyWidth / 2 / Math.sqrt(2));
+            adjSize = (float) (bodyWidth / 2 / Math.sqrt(2));
             ex = p2x - cx;
             ey = p2y - cy;
-            abs_e = (float)Math.sqrt(ex * ex + ey * ey);
+            abs_e = (float) Math.sqrt(ex * ex + ey * ey);
             ex /= abs_e;
             ey /= abs_e;
             GeneralPath bodyPath = new GeneralPath();
@@ -229,10 +229,10 @@ public enum TargetingOverlay {
             bodyPath.quadTo(cx, cy, p2x - (ey + ex) * adjSize, p2y + (ex - ey) * adjSize);
             bodyPath.closePath();
 
-            adjSize = (float)(headSize / Math.sqrt(2));
+            adjSize = (float) (headSize / Math.sqrt(2));
             ex = p2x - cx;
             ey = p2y - cy;
-            abs_e = (float)Math.sqrt(ex * ex + ey * ey);
+            abs_e = (float) Math.sqrt(ex * ex + ey * ey);
             ex /= abs_e;
             ey /= abs_e;
             GeneralPath headPath = new GeneralPath();
@@ -251,10 +251,12 @@ public enum TargetingOverlay {
             float ey = endY - startY;
             if (ex == 0 && ey == 0) { return; }
 
-            float length = (float)Math.sqrt(ex * ex + ey * ey);
-            float bendPercent = (float)Math.asin(ey / length);
+            float length = (float) Math.sqrt(ex * ex + ey * ey);
+            float bendPercent = (float) Math.asin(ey / length);
 
-            if (endX > startX) bendPercent = -bendPercent;
+            if (endX > startX) {
+                bendPercent = -bendPercent;
+            }
 
             Area arrow = getArrow(length, bendPercent);
             AffineTransform af = g2d.getTransform();
@@ -289,16 +291,16 @@ public enum TargetingOverlay {
             assembleArcs();
             if (arcs.size() < 1) { return; }
 
-            
+
             for (Point[] p : arcs) {
                 if (p[0] == null || p[1] == null) {
                     continue;
                 }
-                
-                int endX = (int)p[0].getX();
-                int endY = (int)p[0].getY();
-                int startX = (int)p[1].getX();
-                int startY = (int)p[1].getY();
+
+                int endX = (int) p[0].getX();
+                int endY = (int) p[0].getY();
+                int startX = (int) p[1].getX();
+                int startY = (int) p[1].getY();
 
                 Color color = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
                 drawArrow(g2d, startX, startY, endX, endY, color);
