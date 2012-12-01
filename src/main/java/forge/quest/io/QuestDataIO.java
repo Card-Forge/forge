@@ -431,10 +431,10 @@ public class QuestDataIO {
             }
             GameFormatQuest res = new GameFormatQuest(name, allowedSets, bannedCards);
             try {
-                if ( StringUtils.isNotEmpty(unlocksUsed)) {
+                if (StringUtils.isNotEmpty(unlocksUsed)) {
                     setFinalField(GameFormatQuest.class, "unlocksUsed", res, Integer.parseInt(unlocksUsed));
                 }
-                setFinalField(GameFormatQuest.class, "allowUnlocks", res, canUnlock);                
+                setFinalField(GameFormatQuest.class, "allowUnlocks", res, canUnlock);
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
@@ -442,7 +442,7 @@ public class QuestDataIO {
             } catch (NoSuchFieldException e) {
                 e.printStackTrace();
             }
-            
+
             return res;
         }
     }
@@ -462,7 +462,7 @@ public class QuestDataIO {
         @Override
         public Object unmarshal(final HierarchicalStreamReader reader, final UnmarshallingContext context) {
             final String value = reader.getValue();
-            return GameType.smartValueOf(value, GameType.Quest); 
+            return GameType.smartValueOf(value, GameType.Quest);
         }
     }
 

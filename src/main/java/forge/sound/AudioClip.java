@@ -39,22 +39,23 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * 
  * @author Agetian
  */
-public class AudioClip implements IAudioClip{
+public class AudioClip implements IAudioClip {
     private final Clip clip;
     private final int SOUND_SYSTEM_DELAY = 30;
 
-    private final static String PathToSound = "res/sound";  
-    
-    public static boolean fileExists(String fileName) { 
+    private static final String PathToSound = "res/sound";
+
+    public static boolean fileExists(String fileName) {
         File fSound = new File(PathToSound, fileName);
         return fSound.exists();
     }
-    
+
     public AudioClip(final String filename) {
         File fSound = new File(PathToSound, filename);
-        if ( !fSound.exists() )
+        if (!fSound.exists()) {
             throw new IllegalArgumentException("Sound file " + fSound.toString() + " does not exist, cannot make a clip of it");
-        
+        }
+
         try {
             AudioInputStream stream = AudioSystem.getAudioInputStream(fSound);
             AudioFormat format = stream.getFormat();
@@ -74,8 +75,9 @@ public class AudioClip implements IAudioClip{
     }
 
     public final void play() {
-        if (null == clip)
+        if (null == clip) {
             return;
+        }
         clip.setMicrosecondPosition(0);
         try {
             Thread.sleep(SOUND_SYSTEM_DELAY);
@@ -86,8 +88,9 @@ public class AudioClip implements IAudioClip{
     }
 
     public final void loop() {
-        if (null == clip)
+        if (null == clip) {
             return;
+        }
         clip.setMicrosecondPosition(0);
         try {
             Thread.sleep(SOUND_SYSTEM_DELAY);
@@ -98,14 +101,16 @@ public class AudioClip implements IAudioClip{
     }
 
     public final void stop() {
-        if (null == clip)
+        if (null == clip) {
             return;
+        }
         clip.stop();
     }
 
     public final boolean isDone() {
-        if (null == clip)
+        if (null == clip) {
             return false;
+        }
         return !clip.isRunning();
     }
 }

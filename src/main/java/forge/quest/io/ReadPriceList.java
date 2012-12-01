@@ -77,14 +77,17 @@ public class ReadPriceList {
     private HashMap<String, Integer> readFile(final File file) {
         final HashMap<String, Integer> map = new HashMap<String, Integer>();
         final Random r = MyRandom.getRandom();
-        
+
         List<String> lines = FileUtil.readFile(file);
         for (String line : lines) {
-            if ( line.trim().length() == 0 ) break;
-            
-            if (line.startsWith(ReadPriceList.COMMENT)) 
-                continue; 
-            
+            if (line.trim().length() == 0) {
+                break;
+            }
+
+            if (line.startsWith(ReadPriceList.COMMENT)) {
+                continue;
+            }
+
             final String[] s = line.split("=");
             final String name = s[0].trim();
             final String price = s[1].trim();
@@ -120,7 +123,7 @@ public class ReadPriceList {
             } catch (final NumberFormatException nfe) {
                 Log.warn("NumberFormatException: " + nfe.getMessage());
             }
-        } 
+        }
         return map;
     } // readFile()
 

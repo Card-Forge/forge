@@ -43,11 +43,11 @@ public enum SoundEffectType {
     Block("block.wav", false),
     BlueLand("blue_land.wav", false),
     Creature("creature.wav", false),
-    Damage("damage.wav", true), 
+    Damage("damage.wav", true),
     Destroy("destroy.wav", true),
     Discard("discard.wav", false),
     Draw("draw.wav", false),
-    Enchantment("enchant.wav", false), 
+    Enchantment("enchant.wav", false),
     EndOfTurn("end_of_turn.wav", false),
     Equip("equip.wav", false),
     FlipCoin("flip_coin.wav", false),
@@ -71,7 +71,7 @@ public enum SoundEffectType {
     WhiteLand("white_land.wav", false),
     WinDuel("win_duel.wav", false);
 
-    
+
     private final String resourceFileName;
     private final boolean isSynced;
 
@@ -82,7 +82,7 @@ public enum SoundEffectType {
         return resourceFileName;
     }
     /**
-     * @param filename 
+     * @param filename
      *              name of the sound file associated with the entry.
      * @param isSoundSynced
      *              determines if only one instance of the sound can be played

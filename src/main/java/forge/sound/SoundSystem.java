@@ -15,26 +15,27 @@ import forge.properties.ForgePreferences.FPref;
  */
 public class SoundSystem {
 
-    private final static IAudioClip emptySound = new NoSoundClip();
-    private final static Map<SoundEffectType, IAudioClip> loadedClips = new EnumMap<SoundEffectType, IAudioClip>(SoundEffectType.class);
-    
+    private static final IAudioClip emptySound = new NoSoundClip();
+    private static final Map<SoundEffectType, IAudioClip> loadedClips = new EnumMap<SoundEffectType, IAudioClip>(SoundEffectType.class);
+
     private final EventVisualizer visualizer = new EventVisualizer();
-    
+
     protected IAudioClip fetchResource(SoundEffectType type) {
 
-        if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ENABLE_SOUNDS))
+        if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ENABLE_SOUNDS)) {
             return emptySound;
+        }
 
         IAudioClip clip = loadedClips.get(type);
-        if ( null == clip ) { // cache miss
+        if (null == clip) { // cache miss
             String resource = type.getResourceFileName();
             clip = AudioClip.fileExists(resource) ? new AudioClip(resource) : emptySound;
             loadedClips.put(type, clip);
         }
         return clip;
     }
-    
-    
+
+
     /**
      * Play the sound associated with the Sounds enumeration element.
      */
@@ -67,16 +68,19 @@ public class SoundSystem {
     public void stop(SoundEffectType type) {
         fetchResource(type).stop();
     }
-    
+
     @Subscribe
     public void receiveEvent(Event evt) {
         SoundEffectType effect = visualizer.getSoundForEvent(evt);
-        if ( null == effect ) return;
+        if (null == effect) {
+            return;
+        }
         boolean isSync = visualizer.isSyncSound(effect);
-        if ( isSync ) 
+        if (isSync) {
             playSync(effect);
-        else 
+        } else {
             play(effect);
+        }
     }
 
 }
