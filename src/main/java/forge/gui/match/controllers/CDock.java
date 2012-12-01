@@ -61,17 +61,17 @@ import forge.view.FView;
 public enum CDock implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
-    
+
     private int arcState;
     private GameState game;
     private Player player;
 
-    public void onGameStarts(GameState game0, Player player0)
-    {
+    public void onGameStarts(GameState game0, Player player0) {
+
         game = game0;
         player = player0;
     }
-    
+
 
     /** Concede game, bring up WinLose UI. */
     public void concede() {
@@ -104,7 +104,7 @@ public enum CDock implements ICDoc {
         };
         w.execute();
     }
-    
+
     private void saveLayout() {
         final SwingWorker<Void, Void> w = new SwingWorker<Void, Void>() {
             @Override

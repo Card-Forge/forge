@@ -76,8 +76,8 @@ public enum CMessage implements ICDoc {
         VMessage.SINGLETON_INSTANCE.getTarMessage().setText(s0);
     }
 
-    /** Updates counter label in message area. 
-     * @param match 
+    /** Updates counter label in message area.
+     * @param match
      * @param gameState */
     public void updateGameInfo(MatchController match) {
         VMessage.SINGLETON_INSTANCE.getLblGames().setText(

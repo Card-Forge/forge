@@ -48,7 +48,7 @@ public class ViewWinLose {
         btnContinue = new FButton();
         btnRestart = new FButton();
         btnQuit = new FButton();
-        
+
         final LobbyPlayer human = Singletons.getControl().getPlayer().getLobbyPlayer();
 
         // Control of the win/lose is handled differently for various game modes.
@@ -58,7 +58,9 @@ public class ViewWinLose {
                 control = new QuestWinLose(this, match);
                 break;
             case Draft:
-                if (!Singletons.getModel().getGauntletMini().isGauntletDraft()) break;
+                if (!Singletons.getModel().getGauntletMini().isGauntletDraft()) {
+                    break;
+                }
             case Sealed:
                 control = new LimitedWinLose(this, match);
                 break;
@@ -68,9 +70,10 @@ public class ViewWinLose {
             default: // will catch it after switch
                 break;
         }
-        if( null == control) 
+        if (null == control) {
             control = new ControlWinLose(this, match);
-        
+        }
+
 
         pnlLeft.setOpaque(false);
         pnlRight.setOpaque(false);
@@ -103,7 +106,7 @@ public class ViewWinLose {
         }
 
         // Show Wins and Loses
-        
+
         final int humanWins = match.getGamesWonBy(human);
         final int humanLosses = match.getPlayedGames().size() - humanWins;
 

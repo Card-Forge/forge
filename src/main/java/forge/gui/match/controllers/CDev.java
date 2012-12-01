@@ -75,8 +75,8 @@ public enum CDev implements ICDoc {
     private final MouseListener madCardToBattlefield = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
             GuiDisplayUtil.devModeCardToBattlefield(); } };
-            
-            
+
+
     private final MouseListener madBreakpoint = new MouseAdapter() { @Override
         public void mousePressed(final MouseEvent e) {
             GuiDisplayUtil.devModeBreakpoint(); } };
@@ -110,7 +110,7 @@ public enum CDev implements ICDoc {
         VDev.SINGLETON_INSTANCE.getLblCardToBattlefield().addMouseListener(madCardToBattlefield);
 
         ForgePreferences prefs = Singletons.getModel().getPreferences();
-        
+
         VDev.SINGLETON_INSTANCE.getLblMilling().setEnabled(prefs.getPrefBoolean(FPref.DEV_MILLING_LOSS));
         //VDev.SINGLETON_INSTANCE.getLblMilling().setEnabled(Constant.Runtime.MILL[0]);
         VDev.SINGLETON_INSTANCE.getLblUnlimitedLands().setEnabled(prefs.getPrefBoolean(FPref.DEV_UNLIMITED_LAND));
