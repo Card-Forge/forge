@@ -83,38 +83,38 @@ public abstract class PredicateString<T> implements Predicate<T> {
     public StringOp getOperator() {
         return operator;
     }
-    
-    public static PredicateString<String> contains(final String what) { 
+
+    public static PredicateString<String> contains(final String what) {
         return new PredicateString<String>(StringOp.CONTAINS) {
             @Override
             public boolean apply(String subject) {
                 return op(subject, what);
-            } 
+            }
         };
     }
-    public static PredicateString<String> containsIgnoreCase(final String what) { 
+    public static PredicateString<String> containsIgnoreCase(final String what) {
         return new PredicateString<String>(StringOp.CONTAINS_IC) {
             @Override
             public boolean apply(String subject) {
                 return op(subject, what);
-            } 
+            }
         };
     }
-    public static PredicateString<String> equals(final String what) { 
+    public static PredicateString<String> equals(final String what) {
         return new PredicateString<String>(StringOp.EQUALS) {
             @Override
             public boolean apply(String subject) {
                 return op(subject, what);
-            } 
+            }
         };
     }
-    public static PredicateString<String> equalsIgnoreCase(final String what) { 
+    public static PredicateString<String> equalsIgnoreCase(final String what) {
         return new PredicateString<String>(StringOp.EQUALS_IC) {
             @Override
             public boolean apply(String subject) {
                 return op(subject, what);
-            } 
+            }
         };
     }
-    
+
 }
