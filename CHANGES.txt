@@ -1,27 +1,13 @@
-Forge Beta: 11-30-2012 ver 1.3.2
+Forge Beta: 12-##-2012 ver 1.3.3
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 (Thanks to the MAGE team for permission to use their targeting arrows.)
 (Thanks to http://www.freesound.org/browse/ for providing some sound files.)
 
-11623 cards in total.
+11### cards in total.
 
 
-All sounds use the event bus model now and are not called directly. Two new sounds to the list of sounds supported by Forge, Blocker Assigned and Token Created. We could use some help in finding interesting sounds that we can add to forge.
 
-The sound files need to be in wav or au format, wav appears to be more wide spread but the code can handle either format. The sound files need to be copy right free and they should be in the public domain.
-
-You can either record your own sounds if you have the necessary equipment or you may be able to find an appropriate sound on a web site such as this site:
-
-http://www.freesound.org/browse/
-
-You should note that sound files can be large sized and we would like to avoid this if possible. A good size to shoot for would be 50 K or less. There is a freeware sound editor that may have versions for all operating systems. This app is named Audacity.
-
-We now have a Vanguard mode implemented. This is a work in progress. The older match layout files are incompatible with the new Vanguard mode. The original match_default.xml, match_preferred.xml and the match_preferred.xml saved to a different name files need to be deleted and can no longer be used. You can keep your editor_preferred.xml file. But you will have to setup your match view panels using the new match_default.xml file.
-
-The visuals for targeting arrows has been improved and looks better, with an adaptation of the arrow drawing code from MAGE. Thanks to the MAGE team for permission for the adaptation.
-
-There were reports that special challenge decks would cause a co-modification error in quest mode. This bug is likely fixed at this time.
 
 --
 
@@ -53,394 +39,50 @@ Some people use the Windows application 7zip. This utility can be found at http:
 
 Fixes/Features:
 
+- Fixed Korozda Monitor.
+- Simplified sacrificeHuman.
+- Removed CardFactoryEquipment.
+- Cleanup.
+- CheckStyle.
+- Cleanup and FindBugs fixes.
+- Added [avatar] decksection (for deck-default vanguard avatars)
+- Little text fix for preventNextDamage.
+- More text fixes.
+- Fixing a poorly scripted Warden of the Wall
+- Bludgeoned MigLayout into adding a CardDetailPanel to Vanguard home screen. Please tell me/tweak it if it looks horrible on resolutions beyond 1280x1024
+- The AI will now react to Nether Void.
+- Fixed Coalition Relic.
+- Fixed Explore and Summer Bloom.
+- Added a possibility to couple sacrifice costs with other costs (currently by sacrificing, pun semi-intended, the input-based sacrifice interface and replacing it with a menu-based selection one).
 - Cleared out the changes.txt file, now ready for new material.
-- CheckStyle.
-- Tweaked doTriggerAINoCost of AF DamageAll.
-- Tweaked shouldPumpCard.
-- CheckStyle.
-- Fixed Squandered Resources.
-- Fixed optional Replacement effects not firing again after "No" is chosen once (experimental).
-- Little script updates.
-- When a game is restarted, set lands played back to 0.
-- remove unused imports
-- InputSelectManyCards uses only overloads syntax. made abstract
-- Fixed AF Mana used on subabilities.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- CheckStyle.
-- More Improvements of AI for Auras with "AILogic$ Curse".
-- Fixing accidental submission of potential Sideboard code
-- Changed the "spend only <color> mana on X" mechanism from using a SVar to using an ability parameter (first step towards implementing e.g. Soul Burn).
-- Fixed AI code meddling with damage replacements.
-- Fixed ConcurrentModificationException in InputMulligan.
-- Fixed InputSelectMany.
-- Improved ChooseSource AI.
-- Fixed a shouldPumpCard call switching P/T.
-- fixed NPE bug in initialize of colorX in InputPayManaX class
-- added code to allow AI to make Charm choice
-- modified inputUntapUpToNType so same card cannot be chosen more than once
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Sound System: improved the performance of the sound system by synchronizing certain sounds that tend to occur multiple times in rapid succession (damage, life loss, bury a creature) so that only one can play at a time.
-- CheckStyle.
-- Added some LQ pic URLs.
-- added ability to loop over defined cards to RepeatEachEffect. added InGraveyard to Card.hasProperty.
-- Added a LQ pic URL.
-- Fixed Steel Hellkite.
-- ChangeZoneAll with destination Library will now let you choose the order.
-- Fixed spell description for Hypnotic Cloud
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- CheckStyle
-- CheckStyle
-- small script tweaks
-- Fixed Enlightened Tutor not shuffling the library.
-- Added the global rule change: "Each creature assigns combat damage equal to its toughness rather than its power.".
-- Converted Doran, the Siege Tower.
-- Converted Shifting Sliver to script.
-- Cleanup.
-- Created Variants branch.
-- Variants: Created command zone view.
-- Variants: Moved effects and emblems to command zone.
-- Variants: Added a bunch of Vanguard cards (Thanks, Marc!)
-- Variants: Added a Vanguard home screen.
-- Variants: Created command zone view.
-- Variants:2 files weren't added correctly.
-- You no longer have to choose the order of cards for Elixir of Immortality.
-- Fixed payment of phyrexian mana.
-- Fixed Shocklands not using canPayLife(2).
-- The AI will now better react to Platinum Emperion.
-- Added a Java 7 compatibility fluff piece to the changes.txt file.
-- If lethal damage has already been assigned just treat is as 0 in VAssignDamage
-- Minor text change
-- CheckStyle.
-- Vanguard: added AffectedZone parameter to Birds of Paradise Avatar
-- ChangeZone can now remember cards moved from the stack
-- CheckStyle
-- The AI can now use Icy Prison.
-- Cleanup AF can now be used to clear individual defined cards from remembered lists
-- Removed a println I left in my previous commit
-- Variants - Fixed Archangel of Strife
-- Variants - Changed ValidGrave count method to Valid<coma delimited zones> eg:Count$ValidBattlefield,Graveyard Card.YouCtrl
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Variants: Fixed CardRules parser choking on "+" characters.
-- Fixed the wrong player gaining life when GainLife has a targetPlayer and a defined player. Defined player takes preference again as it used to. This fixes Divine Congregation, Gerrard Capashen and Spoils of Evil
-- setinfo and oracle data for Chaotic Backlash
-- Fixed Nomad Mythmaker targeting.
-- CheckStyle.
-- Another fix for Nomad Mythmaker.
-- Fixed Exotic Curse.
-- Reverted Nomad Mythmaker.
-- Cleanup of getLKICopy functions.
-- Fixed Starlit Sanctum.
-- Hopefully the final fix for Nomad Mythmaker
-- More fixing for Nomad Mythmaker.
-- The AI will no longer choose non-Pump Auras with Nomad Mythmaker.
-- The AI will no longer choose non-Pump Auras with Nomad Mythmaker.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- CheckStyle.
-- Added an AI SVar to Zombie Mob.
-- Booster Draft: added four more choices to block booster draft set order selection (e.g. so that MRD/DST/5DN is possible in addition to only 5DN/DST/MRD, etc.)
-- corrected static ability name in effect script for Ember Gale
-- Variants - Added Ertai (vanguard avatar)
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Made the SVar granted by Tower Above unique.
-- Variants - Added the following avatars: Gerrard, Gix and Greven il-Vec
-- Variants - Hand and life modifiers will now be displayed in the card info panel
-- Variants - Added the following avatars: Grinning Demon Avatar, Hanna and Karn
-- Variants - Added the missing EffectZone param to Hanna and Karn
-- Variants - Added the following avatars: Lyna, Maraxus, Mishra, and Multani
-- CheckStyle.
-- Variants - Added the following avatars: Oracle, Orim, Rofellos, Selenia, and Serra
-- Variants - Fixed TriggerZones for Rofellos
-- Temporary fix for quest challenges.
-- Variants - Added the following avatars: Volrath and Xantcha
-- SoundEffectType holds only filename, unable to reproduce sounds by itself,
-- EventBus added to GameState to properly route the ingame events to Sound system, game log and remote players (when time comes)
-- AudioClips are cached at first request, this may lead to slowdowns (will precache if this is an issue)
-- Most calls to sound system are still preformed directly, with a few only converted to events
-- Variants: Removed avatars with RemAiDeck:True from AI's avatar list.
-- Variants: Made AI aware of the avatar.
-- Merged changes from trunk to Variants: r18254-r18318
-- fix typo for sound
-- setupPlayZone will now call doLayout directly and only once (hopefully fixes the ConcurrentModificationException).
-- Convert Erg Raiders to script
-- Variants - Added the following avatars: Sidar Kondo, Sisay, Squee, Urza, and Sliver Queen, Brood Mother
-- Merged changes from trunk to Variants: r18319-r18323
-- removed '3' from addpoison event
-- the correct parameter is num
-- Variants - Added the following avatars: Starke, Tahngarth, Takara, and Tawnos
-- Changed AdjustLandPlays to a player keyword
-- Converted Explore and Summer Bloom to script
-- More preparations for quest worlds.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Sound System: converted counter sounds to the event bus system, NPE fix when making an audio clip, various minor fixes and typo corrections in sound system and event classes.
-- CheckStyle.
-- Removed some unnecessary updateObservers calls in startRound.
-- Sound System: converted tap/untap sound playback to an event, preliminary support for synced sounds using the event model.
-- Sound System: both synced and non-synced sounds are supported now using the event model (the type of the sound is declared in SoundEffectType constructors).
-- Sound System: converted shuffle and flipcoin sounds to events, some minor stylistic changes.
-- Sound System: converted more sounds to events.
-- Sound System: done converting sounds to events.
-- Sound System: last of the direct sound calls converted to an event.
-- Moved most of the stuff happening in startGame outside of the swingWorker (to fix the ConcurrentModificationException error).
-- Added Arcbound Fiend and Matsu-Tribe Decoy by swordshine.
-- Fixed AI of Aegis Angel.
-- Reimplemented "StackDescription$ SpellDescription".
-- Fixed the global rule change "No more than one creature can attack each combat".
-- Fixed Sleeper Agent.
-- move questWorld out of QuestData package (because only things being serialized should be kept there)
-- remove unused imports (soundeffecttype mostly)
-- Fixed MustBlockCards not being checked for still attacking.
-- Counter class renamed to CounterType
-- CheckStyle.
-- Convert Lighthouse Chronologist to script
-- counters: united calls using multipliers and ignoring them, 
-- removed useless setCounter wrapper
-- Variants: WIP new Vanguard Home screen for multiplayer shenanigans (Does not work yet)
-- CheckStyle.
-- Merged changes from trunk to Variants: r18323-r18354
-- Converted Spirit of Resistance to script.
-- Variants - Added the following avatars: Titania
-- Reorganized Conditions of static abilities (WIP).
-- Variants:Fixed the UI side of the new Vanguard home screen. (Now to make the match actually start!)
-- Variants:Added some apparently unadded scripts from trunk.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Reorganized Conditions of static abilities (WIP).
-- Fixed Alpha Status.
-- CheckStyle.
-- Unblocked missed script folder revisions.
-- Sound System: added two new sounds (Block and Token), fixed a bug that caused the destroy sound to be continuously played at every phase when a planeswalker was on the field.
-- Check for null arrays before assigning in SDisplayUtil
-- Re-Merged 18323-18354 and merged 18357-18366 into Variants. *crosses fingers*
-- Variants - Added setinfo to avatars and uploaded images to cardforge (they should download like any other card now)
-- Variants - Reverted setinfo to avatars (caused crash on set image downloads)
-- Variants:Added VAN set.
-- Variants:Added SetInfo to avatars, courtesy of Marc.
-- Variants:Replaced CardDb.getAllCards() with CardDb.getTraditionalCards() where appropriate.
-- Variants:Reverted preferences.
-- Updated some SVars.
-- Added a fluff piece to the changes.txt file.
-- Cleanup of CloneEffect.
-- Bundled inZone property of cards.
-- Targeting Overlay: much prettier targeting arrows (thanks to the MAGE team for permission for adaptation), some initial work for the "mouseover-only" mode fix (not enabled yet).
-- Variants: Keep separate lists of traditional/nontraditional CardPrinted's in CardDb.
-- Variants: Fixed crash when only playing against 1 opponent on vanguard.
-- Variants: Fixed vanguard match not starting when selecting non-random avatar.
-- Targeting Overlay: Card mouseover mode fixed and enabled, should work fine and should show only the targeting arrows (both combat and non-combat) for the card the mouse is hovering over.
-- Converted the property "SameNameAsImprinted" to the "SharesNameWith" group.
-- Variants - Added the following avatars: Erhnam Djinn Avatar, Etched Oracle Avatar, and Fallen Angel Avatar
-- Targeting Overlay: Fixed a bug with the combat targeting arrows shown both ways in card mouseover mode.
-- Added a fluff piece to the changes.txt file.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Variants: Added error handling for managing not to select deck/avatar in vanguard mode.
-- Variants: Prevented user from selecting multiple avatars.
-- Removed unused imports.
-- Organized imports a little bit better.
-- Cleanup.
-- CheckStyle.
-- renamed CounterAdd/Remove events
-- removed impropper use of CardPrinted getType method
-- commander stored as a single card in deck/Deck.java
-- removed inpropper use of getType of InventoryItem objects
-- check 4 traditionality of card
-- Small renaming in GameAction
-- Reorganized Conditions of static abilities (WIP).
-- Slightly increased the size of the stats panel to better display long winning streaks.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- CheckStyle.
-- Fixed Haunting Echoes.
-- Variant: Fixed non-Random Vanguard selected.
-- Fixed Karn Avatar.
-- Cleanup of xCount.
-- More cleanup of xCount.
-- Removing unnecessary "HIDDEN" strings (WIP).
-- Removing unnecessary "HIDDEN" strings (WIP).
-- Convert Sylvan Library to Script
-- Fixed sharesNameWith Imprinted
-- Converted Haunting Echoes to Script
-- Small cleanup in files
-- Added PermanentNoncreature AF
-- Converted Standstill and Bridge from Below to script
-- Targeting Overlay: in the "card mouseover" mode, during the order of blockers declaration, the targeting overlay will first show all the blockers for the card for which the order of blockers is declared, and will also show individual arrows for each blocker when the blocker is selected in the blocker order list.
-- Fixed Erg Raiders
-- Removing unnecessary "HIDDEN" strings (WIP).
-- Removing unnecessary "HIDDEN" strings (WIP).
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Variants:Fixed exile origins for some effects
-- CheckStyle.
-- Fixed MaxhandSize < 0 case in InputCleanup.
-- Fixed Oath of Druids.
-- Sound System: Added a previously missed link for the "Life Loss" sound event (now the sound will play during certain damage dealing effect resolutions which were previously missed).
-- Sound System: TODO point removed.
-- Targeting Overlay: minor stylistic fix in the code.
-- Moved generatedMana from ManaEffect to GameActionUtil to use it for the AI to predict what a mana ability will produce (it seems to be the only function that is actually up to date).
-- Removed getProducedMana from AbilityManaPart (it wasn't really functional anyway).
-- Merged r18371-r18427 from trunk into Variants
-- Merged Variants into trunk. You may need to delete match_preferred.xml
-- Convert Lich to Script
-- Convert Phylactery Lich to script
-- Converted Noviken Heart of Progress to script
-- Rechanged ValidGrave to Valid<AnyZone> count method that was lost in the merge.
-- Fixed description for Titania's Song
-- Updated cardTemplateScript.py for variants
-- Updated CHANGES.txt
-- Fixed Jace, Architect of Thought's first ability
-- Added some AI code for casting Bonfire of the Damned via Miracle.
-- Changed Gather Specimens to a replacement instead of triggered effect
-- Fixed some triggers for use from command zone (WIP)
-- Fixed some triggers for use from command zone (Done)
-- Minor script changes
-- Made player tabs in Vanguard setup more descriptive
-- Updated tooltip text for hand icon so that it indicates the player's maximum hand size.
-- Fixed Vanguard player tab names when re-adding players in setup
-- Fixed doTriggerAINoCost in CounterAI when the stack is empty.
-- Added a fluff piece to the changes.txt file.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed max hand size.
-- Removed a debug line from ChangeZone (related to Nafs Asp).
-- Made the effect names for Nafs Asp and Glass Asp more descriptive.
-- Somebody had overwritten worlds.txt in the SVN with an obsolete (incorrect) version, restored.
-- Fix for Squeaking Pie Grubfellows.
-- Removing unnecessary "HIDDEN" strings (WIP).
-- Removing unnecessary "HIDDEN" strings (WIP).
-- Made static effects reset hand size correctly for Vanguard.
-- Added a LQ pic URL.
-- CheckStyle.
-- AI fix for Karn Liberated.
-- Removing unnecessary "HIDDEN" strings (WIP).
-- Fixed freeze whenever AI cast a creature with Tahngarth avatar
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- changed "getParentTargeting" methods to skip checking the "child" SpellAbility first
-- consolidated code to find the fighters into one common method
-- CheckStyle.
-- reverting earlier changes until better solution is found
-- After a draft finishes, properly reset buttons used in the Deck Editor
-- Updated LQ pic urls for vanguard avatars to replace the cruddy ones from Gatherer
-- Made Vanguard tab panel conform (a little) better to skin theme. Unfortunately, due to *clenches fist* Swing some out of place code had to be added because you can't specify colors for certain parts of the JTabbedPane component in it's actual class because that would make too much sense.
-- Cleanup: Removed duplicate instances of TriggerZones param
-- Vanguard avatar selection will now remove cards with RemRandomDeck flag from the list when choosing Random. Useful for cards like Diamond Queen Avatar that are still great in the right deck.
-- Updated some avatar flags
-- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
-- Preparing the changes.txt file for the next beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-Agetian
-ArsenalNut
-bigapple90
-Gos
-Hellfish
-Marc
-Max
-RumbleBBU
-Sloth
-Sol
-Swordshine
-Zirbert
-Chris H
+
 
 
 Added the following Vanguard Avatars:
 
-Arcbound Overseer Avatar
-Ashling the Pilgrim Avatar
-Ashnod
-Barrin
-Birds of Paradise Avatar
-Chronatog Avatar
-Crovax
-Dauntless Escort Avatar
-Diamond Faerie Avatar
-Eladamri
-Eladamri, Lord of Leaves Avatar
-Erhnam Djinn Avatar
-Ertai
-Etched Oracle Avatar
-Fallen Angel Avatar
-Gerrard
-Gix
-Goblin Warchief Avatar
-Greven il-Vec
-Grinning Demon Avatar
-Hanna
-Hell's Caretaker Avatar
-Karn
-Lyna
-Lyzolda, the Blood Witch Avatar
-Maraxus
-Mishra
-Morinfen Avatar
-Multani
-Nekrataal Avatar
-Oracle
-Orim
-Rofellos
-Selenia
-Serra
-Sidar Kondo
-Sisay
-Sliver Queen, Brood Mother
-Squee
-Starke
-Tahngarth
-Takara
-Tawnos
-Titania
-Urza
-Volrath
-Xantcha
+Flametongue Kavu Avatar
 
 
 Added the following cards:
 
-Aladdin's Lamp
-Assembly Hall
-Atalya, Samite Master
-Auriok Steelshaper
-Chaotic Backlash
-Chromeshell Crab
-Chronomantic Escape
-Circle of Solace
-Complicate
-Cragganwick Cremator
-Credit Voucher
-Crimson Hellkite
-Crypt Rats
-Demonfire
-Dromar, the Banisher
-Elfhame Sanctuary
-Ember Gale
-Equal Treatment
-Glass Asp
-Honorable Scout
-Icy Prison
-Island Sanctuary
-Journey of Discovery
-Kaho, Minamo Historian
-Kamahl's Sledge
-Kill Switch
-Lumengrid Augur
-Mirror of Fate
-Mischievous Quanar
-Nafs Asp
-Nomad Mythmaker
-Pay No Heed
-Pilgrim of Justice
-Pilgrim of Virtue
-Prahv, Spires of Order
-Proteus Staff
-Righteous Indignation
-Rith's Charm
-Saprazzan Breaker
-Shell of the Last Kappa
-Shoving Match
-Shrouded Serpent
-Sivvi's Valor
-Spoils of the Vault
-Terastodon
-Tower Above
-Tsabo's Web
-Vassal's Duty
-War Elemental
+Catalyst Stone
+Opal-Eye
+Konda's Yojimbo
+Read the Runes
+Sirocco
+Spelltithe Enforcer
+AEther Rift
+Kindle the Carnage
+Pack Hunt
+Leviathan
+Exalted Dragon
+Reclamation
+Flooded Woodlands
 
 
 end
