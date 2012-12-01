@@ -243,7 +243,11 @@ public class DeckgenUtil {
         final String dName = deck.getName();
 
         deckList.append(dName == null ? "" : dName + nl + nl);
-
+        
+        if(deck.getAvatar() != null)
+            deckList.append("Avatar: " + deck.getAvatar().getName() + nl + nl);
+        if(deck.getCommander() != null)
+            deckList.append("Commander: " + deck.getCommander().getName() + nl + nl);
 
         for (final Entry<String, Integer> ev : deckMap.entrySet()) {
             deckList.append(ev.getValue() + " x " + ev.getKey() + nl);
