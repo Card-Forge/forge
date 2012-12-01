@@ -17,6 +17,7 @@ import forge.gui.home.EMenuGroup;
 import forge.gui.home.IVSubmenu;
 import forge.gui.home.StartButton;
 import forge.gui.home.VHomeUI;
+import forge.gui.toolbox.ExperimentalLabel;
 import forge.gui.toolbox.FDeckChooser;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
@@ -42,6 +43,8 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
     private final StartButton btnStart = new StartButton();
     private final ButtonGroup grpFields = new ButtonGroup();
 
+    private ExperimentalLabel lblEditor = new ExperimentalLabel("Scheme Deck Editor");
+    
     private final FDeckChooser dcHuman = new FDeckChooser("Choose your deck", PlayerType.HUMAN);
 
     private VSubmenuArchenemy() {
@@ -59,10 +62,12 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
         pnlFields = new FPanel();
         pnlFields.setLayout(new MigLayout("insets 0, gap 0, wrap"));
         pnlFields.add(new FLabel.Builder().text("How many AI opponents are you ready to handle?").build(), "h 30px!");
-
+        
         for (JRadioButton rad : fieldRadios) {
             pnlFields.add(rad, "w 100px!, h 30px!, gap 30px 0 0 0");
         }
+        
+        pnlFields.add(lblEditor);
 
         fieldRadios.get(0).setSelected(true);
     }
@@ -166,5 +171,12 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
 
     public final FDeckChooser getDcHuman() {
         return dcHuman;
+    }
+
+    /**
+     * @return the lblEditor
+     */
+    public ExperimentalLabel getLblEditor() {
+        return lblEditor;
     }
 }

@@ -5788,6 +5788,7 @@ res/cardsfolder/l/long_forgotten_gohei.txt svneol=native#text/plain
 res/cardsfolder/l/long_term_plans.txt svneol=native#text/plain
 res/cardsfolder/l/longbow_archer.txt svneol=native#text/plain
 res/cardsfolder/l/longhorn_firebeast.txt -text
+res/cardsfolder/l/look_skyward_and_despair.txt -text
 res/cardsfolder/l/looming_hoverguard.txt svneol=native#text/plain
 res/cardsfolder/l/looming_shade.txt svneol=native#text/plain
 res/cardsfolder/l/looter_il_kor.txt svneol=native#text/plain
@@ -6549,6 +6550,7 @@ res/cardsfolder/m/muzzle.txt svneol=native#text/plain
 res/cardsfolder/m/mwonvuli_acid_moss.txt svneol=native#text/plain
 res/cardsfolder/m/mwonvuli_beast_tracker.txt -text
 res/cardsfolder/m/mwonvuli_ooze.txt svneol=native#text/plain
+res/cardsfolder/m/my_genius_knows_no_bounds.txt -text
 res/cardsfolder/m/mycoid_shepherd.txt svneol=native#text/plain
 res/cardsfolder/m/mycologist.txt svneol=native#text/plain
 res/cardsfolder/m/mycoloth.txt svneol=native#text/plain
@@ -13152,6 +13154,7 @@ src/main/java/forge/gui/deckeditor/controllers/CEditorLimited.java -text
 src/main/java/forge/gui/deckeditor/controllers/CEditorPreferences.java -text
 src/main/java/forge/gui/deckeditor/controllers/CEditorQuest.java svneol=native#text/plain
 src/main/java/forge/gui/deckeditor/controllers/CEditorQuestCardShop.java -text
+src/main/java/forge/gui/deckeditor/controllers/CEditorScheme.java -text
 src/main/java/forge/gui/deckeditor/controllers/CFilters.java -text
 src/main/java/forge/gui/deckeditor/controllers/CProbabilities.java -text
 src/main/java/forge/gui/deckeditor/controllers/CStatistics.java -text

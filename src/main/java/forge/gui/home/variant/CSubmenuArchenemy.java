@@ -12,6 +12,7 @@ import javax.swing.SwingWorker;
 import forge.Card;
 import forge.Command;
 import forge.Singletons;
+import forge.control.FControl;
 import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.deck.DeckgenUtil;
@@ -21,7 +22,11 @@ import forge.game.MatchStartHelper;
 import forge.game.PlayerStartConditions;
 import forge.game.player.PlayerType;
 import forge.gui.SOverlayUtils;
+import forge.gui.deckeditor.CDeckEditorUI;
+import forge.gui.deckeditor.controllers.CEditorConstructed;
+import forge.gui.deckeditor.controllers.CEditorScheme;
 import forge.gui.framework.ICDoc;
+import forge.gui.home.VHomeUI;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 
@@ -48,6 +53,14 @@ public enum CSubmenuArchenemy implements ICDoc {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
                 start();
+            }
+        });
+        
+        VSubmenuArchenemy.SINGLETON_INSTANCE.getLblEditor().setCommand(new Command() {
+            @Override
+            public void execute() {
+                CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(new CEditorScheme());
+                FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_CONSTRUCTED);
             }
         });
     }
@@ -97,6 +110,8 @@ public enum CSubmenuArchenemy implements ICDoc {
                 schemes.add(CardDb.instance().getCard("A Display of My Dark Power"));
                 schemes.add(CardDb.instance().getCard("Behold the Power of Destruction"));
                 schemes.add(CardDb.instance().getCard("I Know All, I See All"));
+                schemes.add(CardDb.instance().getCard("Look Skyward and Despair"));
+                schemes.add(CardDb.instance().getCard("My Genius Knows No Bounds"));
                 
                 starter.addArchenemy(lobby.findLocalPlayer(PlayerType.HUMAN), humanDeck, schemes);
                 
