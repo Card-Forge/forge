@@ -49,6 +49,29 @@ public class MatchStartHelper {
 
         players.put(player, start);
     }
+    
+    public void addArchenemy(final LobbyPlayer player, final Deck deck, final Iterable<CardPrinted> schemes) {
+        PlayerStartConditions start = new PlayerStartConditions(deck);
+        
+        start.setStartingLife(40);
+        
+        start.setSchemes(new Supplier<Iterable<Card>>() {
+
+            @Override
+            public Iterable<Card> get() {
+                List<Card> res = new ArrayList<Card>();
+                for(CardPrinted cp : schemes)
+                {
+                    res.add(cp.toForgeCard());
+                }
+                
+                return res;
+            }
+            
+        });
+        
+        players.put(player, start);
+    }
 
     public Map<LobbyPlayer, PlayerStartConditions> getPlayerMap() {
 

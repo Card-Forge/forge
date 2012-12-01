@@ -46,6 +46,7 @@ import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRequirements;
+import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
 import forge.card.staticability.StaticAbility;
@@ -1070,6 +1071,7 @@ public class GameAction {
                         }
                     }
                 } // if isEquipped()
+                
 
                 if (c.isEquipping()) {
                     final Card equippedCreature = c.getEquipping().get(0);

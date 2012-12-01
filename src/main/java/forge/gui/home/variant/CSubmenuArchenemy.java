@@ -2,10 +2,14 @@ package forge.gui.home.variant;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JRadioButton;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
+import forge.Card;
 import forge.Command;
 import forge.Singletons;
 import forge.control.Lobby;
@@ -18,6 +22,8 @@ import forge.game.PlayerStartConditions;
 import forge.game.player.PlayerType;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
 
 /** 
  * Controls the deck editor submenu option in the home UI.
@@ -86,16 +92,19 @@ public enum CSubmenuArchenemy implements ICDoc {
                 MatchStartHelper starter = new MatchStartHelper();
                 Lobby lobby = Singletons.getControl().getLobby();
 
-                PlayerStartConditions humanStart = new PlayerStartConditions(humanDeck);
-                starter.addPlayer(lobby.findLocalPlayer(PlayerType.HUMAN), humanStart);
-                humanStart.setStartingLife(10 + 10 * numFields); // will have 40 life to play against 3 opponents
-
+                //Debugging
+                List<CardPrinted> schemes = new ArrayList<CardPrinted>();
+                schemes.add(CardDb.instance().getCard("A Display of My Dark Power"));
+                schemes.add(CardDb.instance().getCard("I Know All, I See All"));    
+                
+                starter.addArchenemy(lobby.findLocalPlayer(PlayerType.HUMAN), humanDeck, schemes);
+                
                 for (int i = 0; i < numFields; i++) {
                     starter.addPlayer(lobby.findLocalPlayer(PlayerType.COMPUTER), DeckgenUtil.getRandomColorDeck(PlayerType.COMPUTER));
                 }
 
                 MatchController mc = Singletons.getModel().getMatch();
-                mc.initMatch(GameType.Constructed, starter.getPlayerMap());
+                mc.initMatch(GameType.Archenemy, starter.getPlayerMap());
                 mc.startRound();
 
                 return null;

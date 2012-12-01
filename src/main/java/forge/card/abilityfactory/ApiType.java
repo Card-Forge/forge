@@ -10,6 +10,7 @@ import forge.card.abilityfactory.effects.*;
  */
 public enum ApiType {
 
+    Abandon (AbandonEffect.class, AlwaysPlayAi.class),
     AddTurn (AddTurnEffect.class, AddTurnAi.class),
     Animate (AnimateEffect.class, AnimateAi.class),
     AnimateAll (AnimateAllEffect.class, AnimateAllAi.class),

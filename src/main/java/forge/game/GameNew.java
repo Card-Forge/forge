@@ -144,10 +144,17 @@ public class GameNew {
             if (inCommand != null) {
                 for (final Card c : inCommand) {
                     c.setOwner(player);
+                    
                     com.add(c, false);
                     c.refreshUniqueNumber();
                 }
             }
+            
+            Iterable<Card> schemes = p.getValue().getSchemes();
+            if(schemes != null) {
+                player.setSchemeDeck(schemes);
+            }
+            
 
             prepareSingleLibrary(player, p.getValue().getDeck(), removedAnteCards, rAICards, canRandomFoil);
             player.updateObservers();

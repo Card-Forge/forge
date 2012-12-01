@@ -22,6 +22,7 @@ res/blockdata/setdata.txt svneol=native#text/plain
 res/blockdata/starters.txt -text
 res/booster-decks -text
 res/cardTemplateScript.py -text svneol=unset#text/x-python
+res/cardsfolder/a/a_display_of_my_dark_power.txt -text
 res/cardsfolder/a/abandon_hope.txt -text
 res/cardsfolder/a/abandoned_outpost.txt svneol=native#text/plain
 res/cardsfolder/a/abattoir_ghoul.txt -text
@@ -4796,6 +4797,7 @@ res/cardsfolder/h/hypnox.txt -text
 res/cardsfolder/h/hypochondria.txt svneol=native#text/plain
 res/cardsfolder/h/hysterical_blindness.txt -text
 res/cardsfolder/h/hystrodon.txt svneol=native#text/plain
+res/cardsfolder/i/i_know_all_i_see_all.txt -text
 res/cardsfolder/i/ib_halfheart_goblin_tactician.txt -text svneol=unset#text/plain
 res/cardsfolder/i/icatian_crier.txt svneol=native#text/plain
 res/cardsfolder/i/icatian_javelineers.txt svneol=native#text/plain
@@ -12750,6 +12752,7 @@ src/main/java/forge/card/abilityfactory/ai/TwoPilesAi.java -text
 src/main/java/forge/card/abilityfactory/ai/UnattachAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/UntapAi.java -text
 src/main/java/forge/card/abilityfactory/ai/UntapAllAi.java -text
+src/main/java/forge/card/abilityfactory/effects/AbandonEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/AddTurnEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/AnimateAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/AnimateEffect.java -text
@@ -12952,6 +12955,7 @@ src/main/java/forge/card/trigger/TriggerLifeLost.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerLosesGame.java -text
 src/main/java/forge/card/trigger/TriggerPhase.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerSacrificed.java svneol=native#text/plain
+src/main/java/forge/card/trigger/TriggerSetInMotion.java -text
 src/main/java/forge/card/trigger/TriggerShuffled.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerSpellAbilityCast.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerTaps.java svneol=native#text/plain
