@@ -3,6 +3,7 @@ ManaCost:2 W G
 Types:Enchantment
 Text:no text
 S:Mode$ CantAttackUnless | ValidCard$ Creature.Black | Target$ Player,Planeswalker | Cost$ Sac<1/Land> | Description$ Black creatures can't attack unless their controller sacrifices a land for each black creature he or she controls that's attacking.
+SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reclamation.jpg
 SetInfo:ICE|Rare|http://magiccards.info/scans/en/ia/377.jpg
