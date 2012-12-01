@@ -548,7 +548,8 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         } else {
             // Worship does not reduce the damage dealt but changes the effect
             // of the damage
-            if (PlayerUtil.worshipFlag(this) && (this.life <= damageToDo)) {
+            if (this.hasKeyword("Damage that would reduce your life total to less than 1 reduces it to 1 instead.") 
+                    && this.life <= damageToDo) {
                 this.loseLife(Math.min(damageToDo, this.life - 1));
             } else {
                 // rule 118.2. Damage dealt to a player normally causes that

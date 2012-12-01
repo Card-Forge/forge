@@ -3,7 +3,7 @@ ManaCost:2 R R
 Types:Creature Human
 Text:no text
 PT:0/1
-K:Damage that would reduce your life total to less than 1 reduces it to 1 instead.
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Damage that would reduce your life total to less than 1 reduces it to 1 instead. | Description$ Damage that would reduce your life total to less than 1 reduces it to 1 instead.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ali_from_cairo.jpg
 SetInfo:ARN|Uncommon|http://magiccards.info/scans/en/an/44.jpg
