@@ -531,9 +531,7 @@ public class AbilityFactory {
 
             if (calcX[0].startsWith("Count")) {
                 return CardFactoryUtil.xCount(card, calcX[1], ability) * multiplier;
-            }
-
-            if (calcX[0].startsWith("Number")) {
+            } else if (calcX[0].startsWith("Number")) {
                 return CardFactoryUtil.xCount(card, svarval) * multiplier;
             } else if (calcX[0].startsWith("SVar")) {
                 final String[] l = calcX[1].split("/");

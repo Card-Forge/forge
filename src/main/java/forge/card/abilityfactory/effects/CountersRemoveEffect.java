@@ -147,7 +147,6 @@ public class CountersRemoveEffect extends SpellEffect {
                             counterAmount = Integer.parseInt(o);
                         }
                     }
-                    tgtCard.subtractCounter(CounterType.valueOf(type), counterAmount);
                     if (rememberRemoved) {
                         if (counterAmount > tgtCard.getCounters(CounterType.valueOf(type))) {
                             counterAmount = tgtCard.getCounters(CounterType.valueOf(type));
@@ -156,6 +155,7 @@ public class CountersRemoveEffect extends SpellEffect {
                             card.addRemembered(CounterType.valueOf(type));
                         }
                     }
+                    tgtCard.subtractCounter(CounterType.valueOf(type), counterAmount);
                 }
             }
         }
