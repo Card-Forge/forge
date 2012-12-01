@@ -505,6 +505,7 @@ public final class GameActionUtil {
 
                 if (!showYesNoDialog(source, "Do you want to pay the sacrifice cost?")) {
                     hasPaid = false;
+                    GuiUtils.clearPanelSelections();
                     break;
                 }
 
