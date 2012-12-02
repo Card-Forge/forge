@@ -914,7 +914,6 @@ public class ComputerUtil {
                 }
             }
 
-            System.out.println("Mana X Color: " + manaXColor);
             if (manaXColor.isEmpty()) {
                 cost.increaseColorlessMana(manaToAdd);
             } else {
