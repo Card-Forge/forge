@@ -49,6 +49,7 @@ import forge.card.cost.CostPayLife;
 import forge.card.cost.CostPayment;
 import forge.card.cost.CostUtil;
 import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostShard;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilityStatic;
@@ -896,6 +897,7 @@ public class ComputerUtil {
         if ((sa.getPayCosts() != null) && (cost.getXcounter() > 0 || extraMana > 0)) {
 
             int manaToAdd = 0;
+            String manaXColor = sa.hasParam("XColor") ? sa.getParam("XColor") : "";
             if (test && extraMana > 0) {
                 final int multiplicator = Math.max(cost.getXcounter(), 1);
                 manaToAdd = extraMana * multiplicator;
@@ -912,7 +914,42 @@ public class ComputerUtil {
                 }
             }
 
-            cost.increaseColorlessMana(manaToAdd);
+            System.out.println("Mana X Color: " + manaXColor);
+            if (manaXColor.isEmpty()) {
+                cost.increaseColorlessMana(manaToAdd);
+            } else {
+                if (manaXColor.equals("B")) {
+                    cost.increaseShard(ManaCostShard.BLACK, manaToAdd);
+                } else if (manaXColor.equals("G")) {
+                    cost.increaseShard(ManaCostShard.GREEN, manaToAdd);
+                } else if (manaXColor.equals("R")) {
+                    cost.increaseShard(ManaCostShard.RED, manaToAdd);
+                } else if (manaXColor.equals("U")) {
+                    cost.increaseShard(ManaCostShard.BLUE, manaToAdd);
+                } else if (manaXColor.equals("W")) {
+                    cost.increaseShard(ManaCostShard.WHITE, manaToAdd);
+                } else if (manaXColor.contains("B") && manaXColor.contains("G")) {
+                    cost.increaseShard(ManaCostShard.BG, manaToAdd);
+                } else if (manaXColor.contains("B") && manaXColor.contains("R")) {
+                    cost.increaseShard(ManaCostShard.BR, manaToAdd);
+                } else if (manaXColor.contains("R") && manaXColor.contains("G")) {
+                    cost.increaseShard(ManaCostShard.RG, manaToAdd);
+                } else if (manaXColor.contains("U") && manaXColor.contains("B")) {
+                    cost.increaseShard(ManaCostShard.UB, manaToAdd);
+                } else if (manaXColor.contains("U") && manaXColor.contains("G")) {
+                    cost.increaseShard(ManaCostShard.UG, manaToAdd);
+                } else if (manaXColor.contains("U") && manaXColor.contains("R")) {
+                    cost.increaseShard(ManaCostShard.UR, manaToAdd);
+                } else if (manaXColor.contains("W") && manaXColor.contains("B")) {
+                    cost.increaseShard(ManaCostShard.WB, manaToAdd);
+                } else if (manaXColor.contains("W") && manaXColor.contains("G")) {
+                    cost.increaseShard(ManaCostShard.WG, manaToAdd);
+                } else if (manaXColor.contains("W") && manaXColor.contains("R")) {
+                    cost.increaseShard(ManaCostShard.WR, manaToAdd);
+                } else if (manaXColor.contains("W") && manaXColor.contains("U")) {
+                    cost.increaseShard(ManaCostShard.WU, manaToAdd);
+                }
+            }
             if (!test) {
                 card.setXManaCostPaid(manaToAdd / cost.getXcounter());
             }
