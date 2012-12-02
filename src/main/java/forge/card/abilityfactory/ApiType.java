@@ -92,6 +92,7 @@ public enum ApiType {
     Sacrifice (SacrificeEffect.class, SacrificeAi.class),
     SacrificeAll (SacrificeAllEffect.class, SacrificeAllAi.class),
     Scry (ScryEffect.class, ScryAi.class),
+    SetInMotion (SetInMotionEffect.class, AlwaysPlayAi.class),
     SetLife (LifeSetEffect.class, LifeSetAi.class),
     SetState (SetStateEffect.class, SetStateAi.class),
     SetStateAll (SetStateAllEffect.class, SetStateAllAi.class),

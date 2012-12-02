@@ -7415,6 +7415,7 @@ res/cardsfolder/p/platinum_angel.txt svneol=native#text/plain
 res/cardsfolder/p/platinum_emperion.txt svneol=native#text/plain
 res/cardsfolder/p/plaxcaster_frogling.txt -text
 res/cardsfolder/p/plaxmanta.txt -text
+res/cardsfolder/p/plots-that-span-centuries.txt -text
 res/cardsfolder/p/plover_knights.txt svneol=native#text/plain
 res/cardsfolder/p/plow_through_reito.txt -text
 res/cardsfolder/p/plow_under.txt svneol=native#text/plain
@@ -12849,6 +12850,7 @@ src/main/java/forge/card/abilityfactory/effects/RevealHandEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/SacrificeAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/SacrificeEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ScryEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/SetInMotionEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/SetStateAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/SetStateEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ShuffleEffect.java -text
@@ -12909,6 +12911,7 @@ src/main/java/forge/card/replacement/ReplaceDraw.java -text
 src/main/java/forge/card/replacement/ReplaceGainLife.java -text
 src/main/java/forge/card/replacement/ReplaceGameLoss.java -text
 src/main/java/forge/card/replacement/ReplaceMoved.java -text
+src/main/java/forge/card/replacement/ReplaceSetInMotion.java -text
 src/main/java/forge/card/replacement/ReplacementEffect.java -text
 src/main/java/forge/card/replacement/ReplacementHandler.java -text
 src/main/java/forge/card/replacement/ReplacementLayer.java -text

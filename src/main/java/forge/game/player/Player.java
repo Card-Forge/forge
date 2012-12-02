@@ -233,6 +233,15 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     
     public void setSchemeInMotion()
     {
+        // Replacement effects
+        final HashMap<String, Object> repRunParams = new HashMap<String, Object>();
+        repRunParams.put("Event", "SetInMotion");
+        repRunParams.put("Affected", this);
+
+        if (game.getReplacementHandler().run(repRunParams) != ReplacementResult.NotReplaced) {
+            return;
+        }
+        
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
        
         activeScheme = schemeDeck.get(0);

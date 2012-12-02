@@ -2,7 +2,7 @@ Name:Perhaps You've Met My Cohort
 ManaCost:no cost
 Types:Scheme
 Text:no text
-T:Mode$ SetInMotion | Execute$ DarkEffect | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, search your library for a planeswalker card and put that card onto the battlefield, then shuffle your library.
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DarkEffect | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, search your library for a planeswalker card and put that card onto the battlefield, then shuffle your library.
 SVar:DarkEffect:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Planeswalker.YouOwn | ChangeNum$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://magiccards.info/extras/scheme/archenemy/perhaps-youve-met-my-cohort.jpg
