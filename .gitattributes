@@ -1842,6 +1842,7 @@ res/cardsfolder/c/conjurers_bauble.txt svneol=native#text/plain
 res/cardsfolder/c/conquer.txt svneol=native#text/plain
 res/cardsfolder/c/conquering_manticore.txt svneol=native#text/plain
 res/cardsfolder/c/conquerors_pledge.txt svneol=native#text/plain
+res/cardsfolder/c/consecrate_land.txt -text
 res/cardsfolder/c/consecrated_sphinx.txt svneol=native#text/plain
 res/cardsfolder/c/conservator.txt svneol=native#text/plain
 res/cardsfolder/c/consign_to_dream.txt -text

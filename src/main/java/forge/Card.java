@@ -8832,7 +8832,8 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         if (this.hasProtectionFrom(aura)
-            || (this.hasKeyword("CARDNAME can't be enchanted.") && !aura.getName().equals("Anti-Magic Aura"))
+            || (this.hasKeyword("CARDNAME can't be enchanted.") && !aura.getName().equals("Anti-Magic Aura")
+                    && !(aura.getName().equals("Consecrate Land") && aura.isInZone(ZoneType.Battlefield)))
             || ((tgt != null) && !this.isValid(tgt.getValidTgts(), aura.getController(), aura))) {
             return false;
         }

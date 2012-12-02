@@ -5,7 +5,7 @@ Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 2 U | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ CantTarget | ValidCard$ Creature.EnchantedBy | Spell$ True | Description$ Enchanted creature can't be the target of spells and can't be enchanted. This effect doesn't remove CARDNAME.
-S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ CARDNAME can't be enchanted.
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddHiddenKeyword$ CARDNAME can't be enchanted.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/anti_magic_aura.jpg
 SetInfo:5ED|Uncommon|http://magiccards.info/scans/en/5e/72.jpg
