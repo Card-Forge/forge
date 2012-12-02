@@ -2,7 +2,7 @@ Name:Liliana's Caress
 ManaCost:1 B
 Types:Enchantment
 Text:no text
-T:Mode$ Discarded | ValidCard$ Card.YouDontCtrl | TriggerZones$ Battlefield | Execute$TrigLoseLife | TriggerDescription$ Whenever an opponent discards a card, that player loses 2 life.
+T:Mode$ Discarded | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | Execute$TrigLoseLife | TriggerDescription$ Whenever an opponent discards a card, that player loses 2 life.
 SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ Opponent | LifeAmount$ 2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lilianas_caress.jpg

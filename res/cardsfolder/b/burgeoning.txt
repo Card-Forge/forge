@@ -2,7 +2,7 @@ Name:Burgeoning
 ManaCost:G
 Types:Enchantment
 Text:no text
-T:Mode$ LandPlayed | ValidCard$ Land.YouDontCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDropLand | TriggerDescription$ Whenever an opponent plays a land, you may put a land card from your hand onto the battlefield.
+T:Mode$ LandPlayed | ValidCard$ Land.OppCtrl | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigDropLand | TriggerDescription$ Whenever an opponent plays a land, you may put a land card from your hand onto the battlefield.
 SVar:TrigDropLand:AB$ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Land | ChangeNum$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burgeoning.jpg
