@@ -7,7 +7,7 @@ Forge Beta: 12-##-2012 ver 1.3.3
 11### cards in total.
 
 
-
+Some initial work is being done to add Schemes to a branch and this work is not yet available in this build.
 
 --
 
@@ -56,11 +56,53 @@ Fixes/Features:
 - Added a possibility to couple sacrifice costs with other costs (currently by sacrificing, pun semi-intended, the input-based sacrifice interface and replacing it with a menu-based selection one).
 - Cleared out the changes.txt file, now ready for new material.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added a TODO note to GameActionUtil (if fully chained inputs are implemented in the future), fixed imports.
+- Bring active players VField to the front. Helps keep track in 8 player games.
+- Made CardDetailPanel conform to skin colors.
+- Added EffectZone$ Command to a few missed AF_Effect scripts
+- CheckStyle.
+- When the user is asked whether he wants to pay the sacrifice cost, the card for which the sacrifice cost is paid will be highlighted on the playfield.
+- A little fix for the previous commit.
+- Minor edit and fix to changes.txt
+- Consolidated some calls related to card panel highlighting for the Sacrifice costs.
+- Reverted the example Gauntlet contest to start at 0% progress (used to be 11% progress in the very beginning).
+- Added listing of the avatar and commander to FDeckChooser decklists.
+- Removing Variants branch
+- Created Schemes branch
+- Schemes:Base commit for Schemes.
+- Added AF_Abandon.
+- Added Trigger SetInMotion
+- Added schemes A Display of My Dark Power (Thanks,Marc!) and I Know All, I See All.
+- Schemes:Added ARC to setdata.
+- Schemes: Added Behold the Power of Destruction.
+- Updated some SVars.
+- Added Timeshifted setinfo to Leviathan.
+- Converted "Damage that would reduce your life total to less than 1 reduces it to 1 instead." to a player keyword.
+- Fixed Angel's Grace.
+- Added beginnings of a Scheme Deck editor.
+- Made exiting the scheme editor dump you at the archenemy home screen.
+- Made scheme deck editor save correctly.
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
 
+
+
+Added the following Schemes (They are not yet available in this build):
+
+A Display of My Dark Power
+I Know All, I See All
+Behold the Power of Destruction
+Look Skyward and Despair
+My Genius Knows No Bounds
+Realms Befitting My Majesty
+Roots of All Evil
+The Iron Guardian Stirs
+The Very Soil Shall Shake
+Which of You Burns Brightest?
 
 
 Added the following Vanguard Avatars:
@@ -82,6 +124,9 @@ Leviathan
 Exalted Dragon
 Reclamation
 Flooded Woodlands
+Impromptu Raid
+Riptide Mangler
+Wand of Ith
 
 
 end
