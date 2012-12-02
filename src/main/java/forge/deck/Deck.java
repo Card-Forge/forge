@@ -154,6 +154,7 @@ public class Deck extends DeckBase {
         result.sideboard.addAll(this.sideboard);
         result.avatar = this.avatar;
         result.commander = this.commander;
+        result.schemes.addAll(this.schemes);
     }
 
     /*
