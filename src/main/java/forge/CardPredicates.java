@@ -39,7 +39,7 @@ import forge.util.PredicateString;
  */
 public final class CardPredicates {
 
-    public final static Predicate<Card> isController(final Player p) {
+    public static final Predicate<Card> isController(final Player p) {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -47,7 +47,7 @@ public final class CardPredicates {
             }
         };
     }
-    public final static Predicate<Card> isOwner(final Player p) {
+    public static final Predicate<Card> isOwner(final Player p) {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -56,7 +56,7 @@ public final class CardPredicates {
         };
     }
 
-    public final static Predicate<Card> isType(final String cardType) {
+    public static final Predicate<Card> isType(final String cardType) {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -65,7 +65,7 @@ public final class CardPredicates {
         };
     }
 
-    public final static Predicate<Card> hasKeyword(final String keyword) {
+    public static final Predicate<Card> hasKeyword(final String keyword) {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -74,7 +74,7 @@ public final class CardPredicates {
         };
     }
 
-    public final static Predicate<Card> containsKeyword(final String keyword) {
+    public static final Predicate<Card> containsKeyword(final String keyword) {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -83,7 +83,7 @@ public final class CardPredicates {
         };
     }
 
-    public final static Predicate<Card> isTargetableBy(final SpellAbility source) {
+    public static final Predicate<Card> isTargetableBy(final SpellAbility source) {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -92,7 +92,7 @@ public final class CardPredicates {
         };
     }
 
-    public final static Predicate<Card> nameEquals(final String name) {
+    public static final Predicate<Card> nameEquals(final String name) {
         return new Predicate<Card>() {
             @Override
             public boolean apply(Card c) {
@@ -101,7 +101,7 @@ public final class CardPredicates {
         };
     }
 
-    public final static Predicate<Card> possibleBlockers(final Card attacker) {
+    public static final Predicate<Card> possibleBlockers(final Card attacker) {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -110,7 +110,7 @@ public final class CardPredicates {
         };
     }
 
-    public final static Predicate<Card> possibleBlockerForAtLeastOne(final Iterable<Card> attackers) {
+    public static final Predicate<Card> possibleBlockerForAtLeastOne(final Iterable<Card> attackers) {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -119,7 +119,7 @@ public final class CardPredicates {
         };
     }
 
-    public final static Predicate<Card> isProtectedFrom(final Card source) {
+    public static final Predicate<Card> isProtectedFrom(final Card source) {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -128,7 +128,7 @@ public final class CardPredicates {
         };
     }
 
-    public final static Predicate<Card> restriction(final String[] restrictions, final Player sourceController, final Card source) {
+    public static final Predicate<Card> restriction(final String[] restrictions, final Player sourceController, final Card source) {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {

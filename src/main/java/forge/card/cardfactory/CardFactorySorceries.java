@@ -251,7 +251,7 @@ public class CardFactorySorceries {
 
     }
 
-    private final static SpellAbility getGlobalRuin(final Card card) {
+    private static final SpellAbility getGlobalRuin(final Card card) {
         final List<Card> target = new ArrayList<Card>();
         final List<Card> saveList = new ArrayList<Card>();
         // need to use arrays so we can declare them final and still set the
@@ -435,7 +435,7 @@ public class CardFactorySorceries {
         return spell;
     }
 
-    private final static void balanceLands(Spell card) {
+    private static final void balanceLands(Spell card) {
 
         List<List<Card>> lands = new ArrayList<List<Card>>();
         for (Player p : Singletons.getModel().getGame().getPlayers()) {
@@ -467,7 +467,7 @@ public class CardFactorySorceries {
         }
     }
 
-    private final static void balanceHands(Spell card) {
+    private static final void balanceHands(Spell card) {
 
         List<List<Card>> hands = new ArrayList<List<Card>>();
         for (Player p : Singletons.getModel().getGame().getPlayers()) {
@@ -491,7 +491,7 @@ public class CardFactorySorceries {
         }
     }
 
-    private final static void balanceCreatures(Spell card) {
+    private static final void balanceCreatures(Spell card) {
         List<List<Card>> creats = new ArrayList<List<Card>>();
         for (Player p : Singletons.getModel().getGame().getPlayers()) {
 
@@ -523,7 +523,7 @@ public class CardFactorySorceries {
         }
     }
 
-    private final static SpellAbility getBalance(final Card card) {
+    private static final SpellAbility getBalance(final Card card) {
         return new Spell(card) {
             private static final long serialVersionUID = -5941893280103164961L;
 
@@ -557,7 +557,7 @@ public class CardFactorySorceries {
         };
     }
 
-    private final static SpellAbility getWindfall(final Card card) {
+    private static final SpellAbility getWindfall(final Card card) {
         return new Spell(card) {
             private static final long serialVersionUID = -7707012960887790709L;
 
@@ -594,7 +594,7 @@ public class CardFactorySorceries {
         };
     }
 
-    private final static SpellAbility getPatriarchsBidding(final Card card) {
+    private static final SpellAbility getPatriarchsBidding(final Card card) {
 
         final SpellAbility spell = new Spell(card) {
             private static final long serialVersionUID = -2182173662547136798L;
@@ -645,7 +645,7 @@ public class CardFactorySorceries {
         return spell;
     }
 
-    private final static SpellAbility getLeeches(final Card card) {
+    private static final SpellAbility getLeeches(final Card card) {
         /*
          * Target player loses all poison counters. Leeches deals that much
          * damage to that player.
@@ -686,7 +686,7 @@ public class CardFactorySorceries {
         };
     }
 
-    private final static SpellAbility getSanityGrinding(final Card card) {
+    private static final SpellAbility getSanityGrinding(final Card card) {
         /*
          * Chroma - Reveal the top ten cards of your library. For each blue
          * mana symbol in the mana costs of the revealed cards, target
@@ -734,7 +734,7 @@ public class CardFactorySorceries {
         };
     }
 
-    private final static SpellAbility getProfaneCommand(final Card card) {
+    private static final SpellAbility getProfaneCommand(final Card card) {
         // not sure what to call variables, so I just made up something
         final Player[] ab0player = new Player[1];
         final Card[] ab1card = new Card[1];
@@ -1162,7 +1162,7 @@ public class CardFactorySorceries {
         return spell;
     }
 
-    private final static SpellAbility getTransmuteArtifact(final Card card) {
+    private static final SpellAbility getTransmuteArtifact(final Card card) {
         /*
          * Sacrifice an artifact. If you do, search your library for an
          * artifact card. If that card's converted mana cost is less than or

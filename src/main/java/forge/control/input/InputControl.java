@@ -43,7 +43,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
     private final Stack<Input> inputStack = new Stack<Input>();
     private final Stack<Input> urgentInputStack = new Stack<Input>();
 
-    transient private final GameState game;
+    private final transient GameState game;
     /**
      * TODO Write javadoc for Constructor.
      * 
