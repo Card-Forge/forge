@@ -157,7 +157,7 @@ public final class CEditorScheme extends ACEditorBase<CardPrinted, Deck> {
     @Override
     public boolean exit() {
         // Override the submenu save choice - tell it to go to "constructed".
-        Singletons.getModel().getPreferences().setPref(FPref.SUBMENU_CURRENTMENU, EDocID.HOME_MULTITEST.toString());
+        Singletons.getModel().getPreferences().setPref(FPref.SUBMENU_CURRENTMENU, EDocID.HOME_ARCHENEMY.toString());
 
         return SEditorIO.confirmSaveChanges();
     }

@@ -211,7 +211,7 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
      */
     @Override
     public EDocID getItemEnum() {
-        return EDocID.HOME_MULTITEST;
+        return EDocID.HOME_ARCHENEMY;
     }
 
     /* (non-Javadoc)
@@ -266,7 +266,7 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
      */
     @Override
     public EDocID getDocumentID() {
-        return EDocID.HOME_MULTITEST;
+        return EDocID.HOME_ARCHENEMY;
     }
 
     /* (non-Javadoc)

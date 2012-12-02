@@ -68,7 +68,7 @@ public enum EDocID { /** */
     HOME_GAUNTLETLOAD (VSubmenuGauntletLoad.SINGLETON_INSTANCE), /** */
     HOME_GAUNTLETQUICK (VSubmenuGauntletQuick.SINGLETON_INSTANCE), /** */
     HOME_GAUNTLETCONTESTS (VSubmenuGauntletContests.SINGLETON_INSTANCE), /** */
-    HOME_MULTITEST (VSubmenuArchenemy.SINGLETON_INSTANCE), /** */
+    HOME_ARCHENEMY (VSubmenuArchenemy.SINGLETON_INSTANCE), /** */
     HOME_PREFERENCES (VSubmenuPreferences.SINGLETON_INSTANCE), /** */
     HOME_AVATARS (VSubmenuAvatars.SINGLETON_INSTANCE), /** */
     HOME_UTILITIES (VSubmenuDownloaders.SINGLETON_INSTANCE), /** */

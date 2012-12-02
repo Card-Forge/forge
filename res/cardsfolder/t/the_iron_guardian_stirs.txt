@@ -7,4 +7,5 @@ SVar:DarkEffect:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Golem | TokenT
 SVar:Rarity:Common
 SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=212594&type=card
 SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/the-iron-guardian-stirs.jpg
+Oracle:When you set this scheme in motion, put a 4/6 colorless Golem artifact creature token onto the battlefield.
 End
