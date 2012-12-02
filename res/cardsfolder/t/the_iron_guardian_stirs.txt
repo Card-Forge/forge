@@ -1,0 +1,10 @@
+Name:The Iron Guardian Stirs
+ManaCost:no cost
+Types:Scheme
+Text:no text
+T:Mode$ SetInMotion | Execute$ DarkEffect | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, put a 5/5 red Dragon creature token with flying onto the battlefield.
+SVar:DarkEffect:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Golem | TokenTypes$ Artifact,Creature,Golem | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 4 | TokenToughness$ 6
+SVar:Rarity:Common
+SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=212594&type=card
+SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/the-iron-guardian-stirs.jpg
+End

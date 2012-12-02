@@ -7875,6 +7875,7 @@ res/cardsfolder/r/reality_ripple.txt -text
 res/cardsfolder/r/reality_spasm.txt svneol=native#text/plain
 res/cardsfolder/r/reality_strobe.txt svneol=native#text/plain
 res/cardsfolder/r/realm_razer.txt -text svneol=unset#text/plain
+res/cardsfolder/r/realms_befitting_my_majesty.txt -text
 res/cardsfolder/r/realms_uncharted.txt -text
 res/cardsfolder/r/reanimate.txt svneol=native#text/plain
 res/cardsfolder/r/reap.txt -text
@@ -8235,6 +8236,7 @@ res/cardsfolder/r/rootgrapple.txt svneol=native#text/plain
 res/cardsfolder/r/rooting_kavu.txt -text
 res/cardsfolder/r/rootrunner.txt svneol=native#text/plain
 res/cardsfolder/r/roots.txt svneol=native#text/plain
+res/cardsfolder/r/roots_of_all_evil.txt -text
 res/cardsfolder/r/rootwalla.txt svneol=native#text/plain
 res/cardsfolder/r/rootwater_alligator.txt svneol=native#text/plain
 res/cardsfolder/r/rootwater_commando.txt svneol=native#text/plain
@@ -10189,10 +10191,12 @@ res/cardsfolder/t/the_abyss.txt svneol=native#text/plain
 res/cardsfolder/t/the_brute.txt svneol=native#text/plain
 res/cardsfolder/t/the_fallen.txt -text
 res/cardsfolder/t/the_hive.txt svneol=native#text/plain
+res/cardsfolder/t/the_iron_guardian_stirs.txt -text
 res/cardsfolder/t/the_lady_of_the_mountain.txt svneol=native#text/plain
 res/cardsfolder/t/the_rack.txt svneol=native#text/plain
 res/cardsfolder/t/the_tabernacle_at_pendrell_vale.txt svneol=native#text/plain
 res/cardsfolder/t/the_unspeakable.txt svneol=native#text/plain
+res/cardsfolder/t/the_very_soil_shall_shake.txt -text
 res/cardsfolder/t/the_wretched.txt -text svneol=unset#text/plain
 res/cardsfolder/t/theft_of_dreams.txt svneol=native#text/plain
 res/cardsfolder/t/thelonite_druid.txt -text
@@ -11338,6 +11342,7 @@ res/cardsfolder/w/wheel_of_torture.txt svneol=native#text/plain
 res/cardsfolder/w/where_ancients_tread.txt svneol=native#text/plain
 res/cardsfolder/w/whetstone.txt svneol=native#text/plain
 res/cardsfolder/w/whetwheel.txt svneol=native#text/plain
+res/cardsfolder/w/which_of_you_burns_brightest.txt -text
 res/cardsfolder/w/whimwader.txt svneol=native#text/plain
 res/cardsfolder/w/whip_sergeant.txt svneol=native#text/plain
 res/cardsfolder/w/whip_silk.txt svneol=native#text/plain

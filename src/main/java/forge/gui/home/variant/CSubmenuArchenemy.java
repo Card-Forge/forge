@@ -112,6 +112,11 @@ public enum CSubmenuArchenemy implements ICDoc {
                 schemes.add(CardDb.instance().getCard("I Know All, I See All"));
                 schemes.add(CardDb.instance().getCard("Look Skyward and Despair"));
                 schemes.add(CardDb.instance().getCard("My Genius Knows No Bounds"));
+                schemes.add(CardDb.instance().getCard("Realms Befitting My Majesty"));
+                schemes.add(CardDb.instance().getCard("Roots of All Evil"));
+                schemes.add(CardDb.instance().getCard("The Iron Guardian Stirs"));
+                schemes.add(CardDb.instance().getCard("The Very Soil Shall Shake"));
+                schemes.add(CardDb.instance().getCard("Which of You Burns Brightest?"));
                 
                 starter.addArchenemy(lobby.findLocalPlayer(PlayerType.HUMAN), humanDeck, schemes);
                 

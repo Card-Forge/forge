@@ -123,7 +123,7 @@ public final class CEditorScheme extends ACEditorBase<CardPrinted, Deck> {
     public void resetTables() {
         // Constructed mode can use all cards, no limitations.
         this.getTableCatalog().setDeck(ItemPool.createFrom(Iterables.filter(CardDb.instance().getAllNonTraditionalCards(),CardPrinted.Predicates.type("Scheme")), CardPrinted.class));
-        this.getTableDeck().setDeck(this.controller.getModel().getMain());
+        this.getTableDeck().setDeck(this.controller.getModel().getSchemes());
     }
 
     /*
@@ -158,7 +158,7 @@ public final class CEditorScheme extends ACEditorBase<CardPrinted, Deck> {
     @Override
     public boolean exit() {
         // Override the submenu save choice - tell it to go to "constructed".
-        Singletons.getModel().getPreferences().setPref(FPref.SUBMENU_CURRENTMENU, EDocID.HOME_CONSTRUCTED.toString());
+        Singletons.getModel().getPreferences().setPref(FPref.SUBMENU_CURRENTMENU, EDocID.HOME_MULTITEST.toString());
 
         return SEditorIO.confirmSaveChanges();
     }
