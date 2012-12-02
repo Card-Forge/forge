@@ -2,7 +2,7 @@ Name:The Very Soil Shall Shake
 ManaCost:no cost
 Types:Ongoing Scheme
 Text:no text
-S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Trample | Description$ Creatures you control get +2/+2 and have trample.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | EffectZone$ Command | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Trample | Description$ Creatures you control get +2/+2 and have trample.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | Execute$ Abandon | TriggerDescription$ When a creature you control dies, abandon this scheme.
 SVar:Abandon:AB$ Abandon | Cost$ 0
 SVar:Rarity:Common

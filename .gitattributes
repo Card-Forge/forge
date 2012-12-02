@@ -4832,6 +4832,7 @@ res/cardsfolder/i/igneous_golem.txt svneol=native#text/plain
 res/cardsfolder/i/igneous_pouncer.txt svneol=native#text/plain
 res/cardsfolder/i/ignite_disorder.txt svneol=native#text/plain
 res/cardsfolder/i/ignite_memories.txt svneol=native#text/plain
+res/cardsfolder/i/ignite_the_cloneforge.txt -text
 res/cardsfolder/i/ignoble_soldier.txt -text
 res/cardsfolder/i/ignorant_bliss.txt -text
 res/cardsfolder/i/ihsans_shade.txt svneol=native#text/plain
@@ -7218,6 +7219,7 @@ res/cardsfolder/p/peppersmoke.txt svneol=native#text/plain
 res/cardsfolder/p/peregrine_drake.txt svneol=native#text/plain
 res/cardsfolder/p/peregrine_griffin.txt svneol=native#text/plain
 res/cardsfolder/p/peregrine_mask.txt svneol=native#text/plain
+res/cardsfolder/p/perhaps_youve_met_my_cohort.txt -text
 res/cardsfolder/p/perilous_forays.txt svneol=native#text/plain
 res/cardsfolder/p/perilous_myr.txt svneol=native#text/plain
 res/cardsfolder/p/perilous_research.txt svneol=native#text/plain
