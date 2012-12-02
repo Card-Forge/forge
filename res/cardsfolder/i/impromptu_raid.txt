@@ -1,0 +1,12 @@
+Name:Impromptu Raid
+ManaCost:3 RG
+Types:Enchantment
+Text:no text
+A:AB$ Dig | Cost$ 2 RG | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature | DestinationZone$ Battlefield | DestinationZone2$ Graveyard | RememberChanged$ True | SubAbility$ DBPump | SpellDescription$ Reveal the top card of your library. If it isn't a creature card, put it into your graveyard. Otherwise, put that card onto the battlefield. That creature gains haste. Sacrifice it at the beginning of the next end step.
+SVar:DBPump:DB$ Pump | KW$ Haste & HIDDEN At the beginning of the end step, sacrifice CARDNAME. | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/impromptu_raid.jpg
+SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/209.jpg
+Oracle:{2}{R/G}: Reveal the top card of your library. If it isn't a creature card, put it into your graveyard. Otherwise, put that card onto the battlefield. That creature gains haste. Sacrifice it at the beginning of the next end step.
+End

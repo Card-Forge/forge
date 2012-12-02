@@ -4866,6 +4866,7 @@ res/cardsfolder/i/imperious_perfect.txt svneol=native#text/plain
 res/cardsfolder/i/implements_of_sacrifice.txt svneol=native#text/plain
 res/cardsfolder/i/implode.txt svneol=native#text/plain
 res/cardsfolder/i/imposing_visage.txt -text
+res/cardsfolder/i/impromptu_raid.txt -text
 res/cardsfolder/i/improvised_armor.txt svneol=native#text/plain
 res/cardsfolder/i/imps_taunt.txt -text
 res/cardsfolder/i/impulse.txt svneol=native#text/plain
@@ -8133,6 +8134,7 @@ res/cardsfolder/r/riptide_crab.txt svneol=native#text/plain
 res/cardsfolder/r/riptide_director.txt svneol=native#text/plain
 res/cardsfolder/r/riptide_entrancer.txt svneol=native#text/plain
 res/cardsfolder/r/riptide_laboratory.txt svneol=native#text/plain
+res/cardsfolder/r/riptide_mangler.txt -text
 res/cardsfolder/r/riptide_pilferer.txt svneol=native#text/plain
 res/cardsfolder/r/riptide_replicator.txt -text
 res/cardsfolder/r/riptide_shapeshifter.txt -text svneol=unset#text/plain
@@ -11204,6 +11206,7 @@ res/cardsfolder/w/wall_of_water.txt svneol=native#text/plain
 res/cardsfolder/w/wall_of_wonder.txt svneol=native#text/plain
 res/cardsfolder/w/wall_of_wood.txt svneol=native#text/plain
 res/cardsfolder/w/wallop.txt svneol=native#text/plain
+res/cardsfolder/w/wand_of_ith.txt -text
 res/cardsfolder/w/wand_of_the_elements.txt svneol=native#text/plain
 res/cardsfolder/w/wanderbrine_rootcutters.txt svneol=native#text/plain
 res/cardsfolder/w/wanderers_twig.txt svneol=native#text/plain

@@ -1,0 +1,13 @@
+Name:Wand of Ith
+ManaCost:4
+Types:Artifact
+A:AB$ Reveal | Cost$ 3 T | ValidTgts$ Player | TgtPrompt$ Select target player | Random$ True | IsCursed$ True | PlayerTurn$ True | RememberRevealed$ True | SubAbility$ DBDiscard1 | SpellDescription$ Target player reveals a card at random from his or her hand. If it's a land card, that player discards it unless he or she pays 1 life. If it isn't a land card, the player discards it unless he or she pays life equal to its converted mana cost. Activate this ability only during your turn.
+SVar:DBDiscard1:DB$ Discard | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ConditionCompare$ EQ1 | Mode$ Defined | DefinedCards$ Remembered | UnlessCost$ PayLife<1> | UnlessPayer$ RememberedController | SubAbility$ DBDiscard2
+SVar:DBDiscard2:DB$ Discard | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ EQ1 | Mode$ Defined | DefinedCards$ Remembered | UnlessCost$ PayLife<X> | UnlessPayer$ RememberedController | SubAbility$ DBCleanup | References$ X
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardManaCost
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wand_of_ith.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/111.jpg
+Oracle:{3}, {T}: Target player reveals a card at random from his or her hand. If it's a land card, that player discards it unless he or she pays 1 life. If it isn't a land card, the player discards it unless he or she pays life equal to its converted mana cost. Activate this ability only during your turn.
+End
