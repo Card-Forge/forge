@@ -787,21 +787,25 @@ public final class GuiDisplayUtil {
 
         Card forgeCard = c.toForgeCard(p);
 
-        final List<SpellAbility> choices = forgeCard.getBasicSpells();
-        if (choices.isEmpty()) {
-            return; // when would it happen?
-        }
-
-        final SpellAbility sa = choices.size() == 1 ? choices.get(0) : GuiChoose.oneOrNone("Choose", choices);
-        if (sa == null) {
-            return; // happens if cancelled
-        }
-
-        sa.setActivatingPlayer(p);
-
         final GameState game = Singletons.getModel().getGame();
-        game.getAction().moveToHand(forgeCard); // this is really needed
-        game.getAction().playSpellAbilityForFree(sa);
+        if (forgeCard.getType().contains("Land")) {
+            forgeCard.setOwner(p);
+            game.getAction().moveToPlay(forgeCard);
+        } else {
+            final List<SpellAbility> choices = forgeCard.getBasicSpells();
+            if (choices.isEmpty()) {
+                return; // when would it happen?
+            }
+    
+            final SpellAbility sa = choices.size() == 1 ? choices.get(0) : GuiChoose.oneOrNone("Choose", choices);
+            if (sa == null) {
+                return; // happens if cancelled
+            }
+    
+            sa.setActivatingPlayer(p);
+            game.getAction().moveToHand(forgeCard); // this is really needed
+            game.getAction().playSpellAbilityForFree(sa);
+        }
 
 
     }
