@@ -1175,6 +1175,7 @@ res/cardsfolder/b/braids_conjurer_adept.txt svneol=native#text/plain
 res/cardsfolder/b/braidwood_cup.txt svneol=native#text/plain
 res/cardsfolder/b/braidwood_sextant.txt svneol=native#text/plain
 res/cardsfolder/b/brain_freeze.txt svneol=native#text/plain
+res/cardsfolder/b/brain_gorgers.txt -text
 res/cardsfolder/b/brain_pry.txt -text
 res/cardsfolder/b/brain_weevil.txt -text
 res/cardsfolder/b/brainbite.txt svneol=native#text/plain
