@@ -84,6 +84,33 @@ Fixes/Features:
 - Made scheme deck editor save correctly.
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Implemented X color restrictions for the AI, now Crypt Rats should be correctly used by the AI. Hopefully the support will work for all color restrictions including two-color ones (like the Soul Burn which may potentially be implemented later).
+- Removed a debug line.
+- Schemes: Let the player specify the deck of each opponent in Archenemy mode.
+- Let the player specify his own scheme deck.
+- Fixed Scheme deck editor.
+- CheckStyle.
+- Schemes: Changed Archenemy's DocID.
+- Added Oracle to schemes.
+- PerSetTracking.py will now also check Archenemy.
+- Made some cards with "Whenever an opponent" triggers multiplayer compatible.
+- Schemes: Added AF_SetInMotion,added ReplaceSetInMotion
+- Fixed multiple schemes being set into motion consecutively.
+- Schemes: Removed debug script
+- Fixing Viscerid Drone's activation costs
+- Fixed the spell description for Judge Unworthy
+- Convert Goblin Charbelcher to script
+- Enable DevMode to add Lands directly into play
+- Convert Gilder Bairn and Vampire Hexmage to script
+- Added support for Repeating over Counters
+- changed target style to newer ValidTgts version
+- reworked methods for finding SpellAbility targets
+- Fixed Liliana of the Veil.
+- Fixed AI choosing logic of AF TwoPiles.
+- Fixed mana costs not always coming first in combineCosts.
+- Added AILogic parameter to AF TwoPiles.
+- Added the parameter "UnlessSwitched" to SpellAbilities (to switch paid and unpaid commands).
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -103,6 +130,11 @@ Roots of All Evil
 The Iron Guardian Stirs
 The Very Soil Shall Shake
 Which of You Burns Brightest?
+Ignite the Cloneforge!
+Perhaps You've Met My Cohort
+Tooth, Claw, and Tail
+Your Will Is Not Your Own
+Plots That Span Centuries
 
 
 Added the following Vanguard Avatars:
@@ -127,6 +159,8 @@ Flooded Woodlands
 Impromptu Raid
 Riptide Mangler
 Wand of Ith
+Consecrate Land
+Dash Hopes
 
 
 end
