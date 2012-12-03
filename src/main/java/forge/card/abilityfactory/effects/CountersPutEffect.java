@@ -21,7 +21,6 @@ public class CountersPutEffect extends SpellEffect {
         final StringBuilder sb = new StringBuilder();
         final Card card = sa.getSourceCard();
 
-
         final CounterType cType = CounterType.valueOf(sa.getParam("CounterType"));
         final int amount = AbilityFactory.calculateAmount(card, sa.getParam("CounterNum"), sa);
         sb.append("Put ");
@@ -57,7 +56,16 @@ public class CountersPutEffect extends SpellEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getSourceCard();
-        final String type = sa.getParam("CounterType");
+        
+        CounterType counterType;
+        
+        try{
+            counterType = AbilityFactory.getCounterType(sa.getParam("CounterType"), sa);
+        } catch(Exception e) {
+            System.out.println("Counter type doesn't match, nor does an SVar exist with the type name.");
+            return;
+        }
+        
         int counterAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
         final int max = sa.hasParam("MaxFromEffect") ? Integer.parseInt(sa.getParam("MaxFromEffect")) : -1;
 
@@ -86,16 +94,16 @@ public class CountersPutEffect extends SpellEffect {
         for (final Card tgtCard : tgtCards) {
             if ((tgt == null) || tgtCard.canBeTargetedBy(sa)) {
                 if (max != -1) {
-                    counterAmount = max - tgtCard.getCounters(CounterType.valueOf(type));
+                    counterAmount = max - tgtCard.getCounters(counterType);
                 }
                 final Zone zone = Singletons.getModel().getGame().getZoneOf(tgtCard);
                 if (zone == null) {
                     // Do nothing, token disappeared
                 } else if (zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Stack)) {
-                    tgtCard.addCounter(CounterType.valueOf(type), counterAmount, true);
+                    tgtCard.addCounter(counterType, counterAmount, true);
                 } else {
                     // adding counters to something like re-suspend cards
-                    tgtCard.addCounter(CounterType.valueOf(type), counterAmount, false);
+                    tgtCard.addCounter(counterType, counterAmount, false);
                 }
             }
         }

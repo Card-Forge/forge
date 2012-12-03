@@ -29,6 +29,7 @@ import forge.CardLists;
 import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
+import forge.CounterType;
 import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -1767,4 +1768,24 @@ public class AbilityFactory {
         }
     }
 
+    public static CounterType getCounterType(String name, SpellAbility sa) throws Exception {
+        CounterType counterType;
+        
+        try{
+            counterType = CounterType.getType(name);
+        } catch(Exception e) {
+            String type = sa.getSVar(name);
+            if (type.equals("")) {
+                type = sa.getSourceCard().getSVar(name);
+            }
+            
+            if (type.equals("")) {
+                throw new Exception("Counter type doesn't match, nor does an SVar exist with the type name.");
+            }
+            counterType = CounterType.getType(type);
+        }
+        
+        return counterType;
+    }
+    
 } // end class AbilityFactory
