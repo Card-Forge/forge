@@ -2165,12 +2165,10 @@ public class CardFactoryUtil {
         //  Count$TargetedLifeTotal (targeted player's life total)
         if (sq[0].contains("TargetedLifeTotal")) {
             for (final SpellAbility sa : c.getCharacteristics().getSpellAbility()) {
-                final SpellAbility parent = sa.getParentTargetingPlayer();
-                if (parent.getTarget() != null) {
-                    for (final Object tgtP : parent.getTarget().getTargetPlayers()) {
-                        if (tgtP instanceof Player) {
-                            return CardFactoryUtil.doXMath(((Player) tgtP).getLife(), m, c);
-                        }
+                final SpellAbility saTargeting = sa.getSATargetingPlayer();
+                if (saTargeting != null) {
+                    for (final Player tgtP : saTargeting.getTarget().getTargetPlayers()) {
+                        return CardFactoryUtil.doXMath(tgtP.getLife(), m, c);
                     }
                 }
             }
@@ -2608,14 +2606,10 @@ public class CardFactoryUtil {
         //  Count$InTargetedHand (targeted player's cards in hand)
         if (sq[0].contains("InTargetedHand")) {
             for (final SpellAbility sa : c.getCharacteristics().getSpellAbility()) {
-                final SpellAbility parent = sa.getParentTargetingPlayer();
-                if (parent != null) {
-                    if (parent.getTarget() != null) {
-                        for (final Object tgtP : parent.getTarget().getTargetPlayers()) {
-                            if (tgtP instanceof Player) {
-                                someCards.addAll(((Player) tgtP).getCardsIn(ZoneType.Hand));
-                            }
-                        }
+                final SpellAbility saTargeting = sa.getSATargetingPlayer();
+                if (saTargeting != null) {
+                    for (final Player tgtP : saTargeting.getTarget().getTargetPlayers()) {
+                        someCards.addAll(tgtP.getCardsIn(ZoneType.Hand));
                     }
                 }
             }

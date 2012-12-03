@@ -6,7 +6,7 @@ K:Equip 2
 S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 2 | AddToughness$ 2 | AddKeyword$ Protection from red & Protection from white | Description$ Equipped creature gets +2/+2 and has protection from red and from white.
 T:Mode$ DamageDone | ValidSource$ Creature.EquippedBy | ValidTarget$ Player | CombatDamage$ True | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever equipped creature deals combat damage to a player, CARDNAME deals damage to that player equal to the number of cards in his or her hand and you gain 1 life for each card in your hand.
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredTarget | NumDmg$ X | References$ X | SubAbility$ DBGain
-SVar:X:TargetedPlayer$CardsInHand
+SVar:X:TriggeredTarget$CardsInHand
 SVar:DBGain:DB$ GainLife | Defined$ You | LifeAmount$ Y | References$ Y
 SVar:Y:Count$CardsInYourHand
 SVar:Rarity:Mythic

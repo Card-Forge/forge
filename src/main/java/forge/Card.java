@@ -6315,13 +6315,11 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.equals("TargetedPlayerCtrl")) {
             for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
-                final SpellAbility parent = sa.getParentTargetingPlayer();
-                if (parent.getTarget() != null) {
-                    for (final Object o : parent.getTarget().getTargetPlayers()) {
-                        if (o instanceof Player) {
-                            if (!this.getController().equals(o)) {
-                                return false;
-                            }
+                final SpellAbility saTargeting = sa.getSATargetingPlayer();
+                if (saTargeting != null) {
+                    for (final Player p : saTargeting.getTarget().getTargetPlayers()) {
+                        if (!this.getController().equals(p)) {
+                            return false;
                         }
                     }
                 }
@@ -6365,13 +6363,11 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.equals("TargetedPlayerOwn")) {
             for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
-                final SpellAbility parent = sa.getParentTargetingPlayer();
-                if (parent.getTarget() != null) {
-                    for (final Object o : parent.getTarget().getTargetPlayers()) {
-                        if (o instanceof Player) {
-                            if (!this.getOwner().equals(o)) {
-                                return false;
-                            }
+                final SpellAbility saTargeting = sa.getSATargetingPlayer();
+                if (saTargeting != null) {
+                    for (final Player p : saTargeting.getTarget().getTargetPlayers()) {
+                        if (!this.getOwner().equals(p)) {
+                            return false;
                         }
                     }
                 }
