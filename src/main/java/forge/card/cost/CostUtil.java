@@ -215,8 +215,14 @@ public class CostUtil {
                 if (typeList.size() > ai.getMaxHandSize()) {
                     continue;
                 }
-                if (ComputerUtil.getCardPreference(ai, source, "DiscardCost", typeList) == null) {
-                    return false;
+                int num = AbilityFactory.calculateAmount(source, disc.getAmount(), null);
+                for (int i = 0; i < num; i++) {
+                    Card pref = ComputerUtil.getCardPreference(ai, source, "DiscardCost", typeList);
+                    if (pref == null) {
+                        return false;
+                    } else {
+                        typeList.remove(pref);
+                    }
                 }
             }
         }

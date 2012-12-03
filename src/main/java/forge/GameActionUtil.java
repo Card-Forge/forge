@@ -379,7 +379,6 @@ public final class GameActionUtil {
         final ArrayList<CostPart> parts =  cost.getCostParts();
         ArrayList<CostPart> remainingParts =  new ArrayList<CostPart>(cost.getCostParts());
         CostPart costPart = null;
-        int num_parts = parts.size();
         if (!parts.isEmpty()) {
             costPart = parts.get(0);
         }
@@ -396,7 +395,7 @@ public final class GameActionUtil {
             return;
         }
         boolean hasPaid = true;
-        //the three following costs do not need inputs
+        //the following costs do not need inputs
         for (CostPart part : parts) {
             if (part instanceof CostPayLife) {
                 String amountString = part.getAmount();
@@ -449,6 +448,7 @@ public final class GameActionUtil {
                 }
                 remainingParts.remove(part);
             }
+
             else if (part instanceof CostExile) {
                 Player p = Singletons.getControl().getPlayer();
                 if ("All".equals(part.getType())) {
@@ -486,6 +486,7 @@ public final class GameActionUtil {
                     }
                 }
             }
+
             else if (part instanceof CostSacrifice) {
 
                 CostSacrifice sacCost = (CostSacrifice) part;
@@ -522,7 +523,10 @@ public final class GameActionUtil {
                         list.remove(c);
                     }
                 }
-
+                remainingParts.remove(part);
+            }
+            
+            else if (part instanceof CostMana && ((CostMana) part).getManaToPay().equals("0")) {
                 remainingParts.remove(part);
             }
         }

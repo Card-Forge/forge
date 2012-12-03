@@ -1628,6 +1628,7 @@ public class AbilityFactory {
                 }
                 if (ComputerUtil.canPayCost(ability, payer) && CostUtil.checkLifeCost(payer, cost, source, 4, sa)
                         && CostUtil.checkDamageCost(payer, cost, source, 4)
+                        && CostUtil.checkDiscardCost(payer, cost, source)
                         && (!source.getName().equals("Tyrannize") || payer.getCardsIn(ZoneType.Hand).size() > 2)
                         && (!source.getName().equals("Breaking Point") || payer.getCreaturesInPlay().size() > 1)) {
                     // AI was crashing because the blank ability used to pay costs
