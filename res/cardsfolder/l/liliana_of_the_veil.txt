@@ -6,7 +6,7 @@ Loyalty:3
 A:AB$ Discard | Cost$ AddCounter<1/LOYALTY> | NumCards$ 1 | Mode$ TgtChoose | Defined$ Each | Planeswalker$ True | SpellDescription$ Each player discards a card.
 A:AB$ Sacrifice | Cost$ SubCounter<2/LOYALTY> | ValidTgts$ Player | SacValid$ Creature | SacMessage$ Creature | Planeswalker$ True | SpellDescription$ Target player sacrifices a creature.
 A:AB$ TwoPiles | Cost$ SubCounter<6/LOYALTY> | ValidTgts$ Player | TgtPrompt$ Select target player | Separator$ You | ChosenPile$ DBSacAll | ValidCards$ Permanent | Zone$ Battlefield | Planeswalker$ True | Ultimate$ True | SpellDescription$ Separate all permanents target player controls into two piles. That player sacrifices all permanents in the pile of his or her choice.
-SVar:DBSacAll:DB$ SacrificeAll | ValidCards$ Permanent | Defined$ Remembered | SubAbility$ Cleanup
+SVar:DBSacAll:DB$ SacrificeAll | ValidCards$ Permanent.IsRemembered | SubAbility$ Cleanup
 SVar:Cleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Mythic

@@ -233,7 +233,7 @@ public class TwoPilesEffect extends SpellEffect {
                 // for now, this assumes that the outcome will be bad
                 // TODO: This should really have a ChooseLogic param to
                 // figure this out
-                pile1WasChosen = cmc1 >= cmc2;
+                pile1WasChosen = cmc1 <= cmc2;
                 if (pile1WasChosen) {
                     JOptionPane.showMessageDialog(null, "Computer chooses the Pile 1", "",
                             JOptionPane.INFORMATION_MESSAGE);
