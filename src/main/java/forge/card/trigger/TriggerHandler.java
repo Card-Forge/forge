@@ -420,18 +420,17 @@ public class TriggerHandler {
         }
 
         // Torpor Orb check
-        if (!regtrig.isStatic() && mode.equals(TriggerType.ChangesZone)) {
+        if (game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCreatureETBTriggers)
+                && !regtrig.isStatic() && mode.equals(TriggerType.ChangesZone)) {
             if (runParams.get("Destination") instanceof String) {
                 String dest = (String) runParams.get("Destination");
                 if (dest.equals("Battlefield") && runParams.get("Card") instanceof Card) {
                     Card card = (Card) runParams.get("Card");
-                    if (card.isCreature()
-                            && game.getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCreatureETBTriggers)) {
+                    if (card.isCreature()) {
                         return false;
                     }
                 }
             }
-
         } // Torpor Orb check
 
         // Any trigger should cause the phase not to skip
@@ -484,12 +483,10 @@ public class TriggerHandler {
         }
 
         sa.setStackDescription(sa.toString());
-        // ---TODO - for Charms to supports AI, this needs to be removed
-        //if (sa[0].getActivatingPlayer().isHuman()) {
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
             CharmEffect.makeChoices(sa);
         }
-        //}
+
         Player decider = null;
         boolean mand = false;
         if (triggerParams.containsKey("OptionalDecider")) {
@@ -515,15 +512,6 @@ public class TriggerHandler {
         wrapperAbility.setTrigger(true);
         wrapperAbility.setMandatory(isMandatory);
         wrapperAbility.setDescription(wrapperAbility.getStackDescription());
-        /*
-         * if(host.getController().isHuman()) {
-         * Singletons.getModel().getGameAction().playSpellAbility(wrapperAbility); } else {
-         * wrapperAbility.doTrigger(isMandatory);
-         * ComputerUtil.playStack(wrapperAbility); }
-         */
-
-        // Card src = (Card)(sa[0].getSourceCard().getTriggeringObject("Card"));
-        // System.out.println("Trigger going on stack for "+mode+".  Card = "+src);
 
         if (regtrig.isStatic()) {
             if (wrapperAbility.getActivatingPlayer().isHuman()) {
@@ -532,7 +520,6 @@ public class TriggerHandler {
                 wrapperAbility.doTrigger(isMandatory);
                 ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility);
             }
-            //Singletons.getModel().getGameAction().playSpellAbilityNoStack(wrapperAbility, false);
         } else {
             game.getStack().addSimultaneousStackEntry(wrapperAbility);
         }

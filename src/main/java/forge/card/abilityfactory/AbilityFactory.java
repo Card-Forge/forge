@@ -1580,7 +1580,7 @@ public class AbilityFactory {
             }
         };
 
-        final Command paidCommand = new Command() {
+        Command paidCommand = new Command() {
             private static final long serialVersionUID = 8094833091127334678L;
 
             @Override
@@ -1601,6 +1601,13 @@ public class AbilityFactory {
                 AbilityFactory.resolveSubAbilities(sa, usedStack);
             }
         };
+
+        if (sa.hasParam("UnlessSwitched")) {
+            final Command dummy = paidCommand;
+            paidCommand = unpaidCommand;
+            unpaidCommand = dummy;
+        }
+
         boolean paid = false;
         for (Player payer : payers) {
             if (payer.isComputer()) {
