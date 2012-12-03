@@ -1,0 +1,16 @@
+Name:Approach My Molten Realm
+ManaCost:no cost
+Types:Scheme
+Text:no text
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ MoltenEffect | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, until your next turn, if a source would deal damage, it deals double that damage instead.
+SVar:MoltenEffect:AB$ Effect | Cost$ 0 | Name$ Molten Realm Effect | ReplacementEffects$ MoltenRealm,MoltenRealmCombat | SVars$ DmgTimes2,DmgTimes2Combat,MoltenX | Duration$ UntilYourNextTurn
+SVar:MoltenRealm:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Card | ReplaceWith$ DmgTimes2 | IsCombat$ False | Description$ Until your next turn, if a source would deal damage, it deals double that damage instead.
+SVar:MoltenRealmCombat:Event$ DamageDone | ActiveZones$ Command | ValidSource$ Card | ReplaceWith$ DmgTimes2Combat | IsCombat$ True | Secondary$ True | Description$ Until your next turn, if a source would deal damage, it deals double that damage instead.
+SVar:DmgTimes2:AB$ DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ MoltenX | References$ MoltenX
+SVar:DmgTimes2Combat:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ MoltenX | References$ MoltenX
+SVar:MoltenX:ReplaceCount$DamageAmount/Twice
+SVar:Rarity:Common
+SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=212591&type=card
+SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/approach-my-molten-realm.jpg
+Oracle:When you set this scheme in motion, until your next turn, if a source would deal damage, it deals double that damage instead.
+End
