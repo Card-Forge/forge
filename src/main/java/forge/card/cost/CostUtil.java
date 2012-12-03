@@ -472,7 +472,7 @@ public class CostUtil {
                     oldManaCost.combineManaCost(newCostMana.toString());
                     newCostMana.setMana(oldManaCost.toString(false));
                 } else {
-                    cost2.getCostParts().add(part);
+                    cost2.getCostParts().add(0, part);
                 }
             }
         }
