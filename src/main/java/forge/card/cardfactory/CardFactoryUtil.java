@@ -4686,7 +4686,6 @@ public class CardFactoryUtil {
                         + "where X is the damage dealt to your opponents this turn.)";
                 card.setSVar("X", "Count$BloodthirstAmount");
             }
-            card.setSVar("X", "Count$BloodthirstAmount");
 
             card.addIntrinsicKeyword("etbCounter:P1P1:" + numCounters + ":Bloodthirst$ True:" + desc);
         } // bloodthirst
