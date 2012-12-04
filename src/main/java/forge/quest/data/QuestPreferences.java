@@ -226,10 +226,10 @@ public class QuestPreferences implements Serializable {
     /** Instantiates a QuestPreferences object. */
     public QuestPreferences() {
         this.preferenceValues = new HashMap<QPref, String>();
-        
+
         List<String> lines = FileUtil.readFile(ForgeProps.getFile(Quest.PREFS));
-        
-        for (String line : lines ) {
+
+        for (String line : lines) {
             if (line.startsWith("#") || (line.length() == 0)) {
                 continue;
             }

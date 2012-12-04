@@ -19,10 +19,7 @@ package forge.game.player;
 
 import java.util.List;
 
-import com.google.common.base.Predicate;
-
 import forge.Card;
-
 import forge.CardLists;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
@@ -45,29 +42,6 @@ public final class PlayerUtil {
 
     private PlayerUtil() {
         throw new AssertionError();
-    }
-
-    /**
-     * <p>
-     * worshipFlag.
-     * </p>
-     * 
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     * @return a boolean.
-     */
-    public static boolean worshipFlag(final Player player) {
-        // Instead of hardcoded Ali from Cairo like cards, it is now a Keyword
-        List<Card> list = player.getCardsIn(ZoneType.Battlefield);
-        list = CardLists.getKeyword(list, "Damage that would reduce your life total to less than 1 reduces it to 1 instead.");
-        list = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return !c.isFaceDown();
-            }
-        });
-
-        return list.size() > 0;
     }
 
     /**

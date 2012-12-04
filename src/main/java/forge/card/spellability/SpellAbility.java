@@ -1695,36 +1695,110 @@ public abstract class SpellAbility implements ISpellAbility {
 
     /**
      * <p>
-     * findParentsTargetedCard.
+     * findTargetCards.
+     * </p>
+     * 
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public ArrayList<Card> findTargetedCards() {
+
+        ArrayList<Card> list = new ArrayList<Card>();
+        Target tgt = this.getTarget();
+        // First search for targeted cards associated with current ability
+        if (tgt != null && tgt.getTargetCards() != null && !tgt.getTargetCards().isEmpty()) {
+            return tgt.getTargetCards();
+        }
+        // Next search for source cards of targeted SAs associated with current ability
+        else if (tgt != null && tgt.getTargetSAs() != null && !tgt.getTargetSAs().isEmpty()) {
+            for (final SpellAbility ability : tgt.getTargetSAs()) {
+                list.add(ability.getSourceCard());
+            }
+            return list;
+        }
+        // Lastly Search parent SAs for target cards
+        else {
+            // Check for a parent that targets a card
+            SpellAbility parent = this.getParentTargetingCard();
+            if (null != parent) {
+                return parent.getTarget().getTargetCards();
+            }
+         // Check for a parent that targets an SA
+            parent = this.getParentTargetingSA();
+            if (null != parent) {
+                for (final SpellAbility ability : parent.getTarget().getTargetSAs()) {
+                    list.add(ability.getSourceCard());
+                }
+            }
+        }
+        return list;
+    }
+
+    /**
+     * <p>
+     * getSATargetingCard.
+     * </p>
+     * 
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public SpellAbility getSATargetingCard() {
+
+        Target tgt = this.getTarget();
+        if (tgt != null && tgt.getTargetCards() != null && !tgt.getTargetCards().isEmpty()) {
+            return this;
+        }
+        else {
+            return this.getParentTargetingCard();
+        }
+    }
+
+    /**
+     * <p>
+     * getParentTargetingCard.
      * </p>
      * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public SpellAbility getParentTargetingCard() {
-        SpellAbility parent = this;
+        SpellAbility parent = this.getParent();
 
-        while (parent.getParent() != null) {
-
+        while (parent != null) {
             Target tgt = parent.getTarget();
             if (tgt != null && tgt.getTargetCards() != null && !tgt.getTargetCards().isEmpty()) {
                 break;
             }
             parent = parent.getParent();
-
         }
         return parent;
     }
 
     /**
      * <p>
-     * findParentsTargetedSpellAbility.
+     * getSATargetingSA.
+     * </p>
+     * 
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public SpellAbility getSATargetingSA() {
+        Target tgt = this.getTarget();
+        if (tgt != null && tgt.getTargetSAs() != null && !tgt.getTargetSAs().isEmpty()) {
+            return this;
+        }
+        else {
+            return this.getParentTargetingSA();
+        }
+    }
+
+    /**
+     * <p>
+     * getParentTargetingSA.
      * </p>
      * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public SpellAbility getParentTargetingSA() {
-        SpellAbility parent = this;
-        while (parent.getParent() != null) {
+        SpellAbility parent = this.getParent();
+
+        while (parent != null) {
 
             Target tgt = parent.getTarget();
             if (tgt != null && tgt.getTargetSAs() != null && !tgt.getTargetSAs().isEmpty()) {
@@ -1738,14 +1812,31 @@ public abstract class SpellAbility implements ISpellAbility {
 
     /**
      * <p>
+     * getSATargetingPlayer.
+     * </p>
+     * 
+     * @return a {@link forge.card.spellability.SpellAbility} object.
+     */
+    public SpellAbility getSATargetingPlayer() {
+        Target tgt = this.getTarget();
+        if (tgt != null && tgt.getTargetPlayers() != null && !tgt.getTargetPlayers().isEmpty()) {
+            return this;
+        }
+        else {
+            return this.getParentTargetingPlayer();
+        }
+    }
+
+    /**
+     * <p>
      * findParentsTargetedPlayer.
      * </p>
      * 
      * @return a {@link forge.card.spellability.SpellAbility} object.
      */
     public SpellAbility getParentTargetingPlayer() {
-        SpellAbility parent = this;
-        while (parent.getParent() != null) {
+        SpellAbility parent = this.getParent();
+        while (parent != null) {
 
             Target tgt = parent.getTarget();
             if (tgt != null && tgt.getTargetPlayers() != null && !tgt.getTargetPlayers().isEmpty()) {

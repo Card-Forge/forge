@@ -102,6 +102,11 @@ public class DrawAi extends SpellAiLogic {
                 && !sa.hasParam("ActivationPhases")) {
             return false;
         }
+        if (!Singletons.getModel().getGame().getPhaseHandler().getNextTurn().equals(ai)
+                && !sa.hasParam("PlayerTurn") && !AbilityFactory.isSorcerySpeed(sa) 
+                && ai.getCardsIn(ZoneType.Hand).size() < 2) {
+            return false;
+        }
 
         // Don't tap creatures that may be able to block
         if (ComputerUtil.waitForBlocking(sa)) {

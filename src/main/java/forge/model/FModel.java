@@ -80,14 +80,14 @@ public enum FModel {
     // Someone should take care of 2 gauntlets here
     private GauntletData gauntletData;
     private GauntletMini gauntlet;
-    
+
     private final CardFactory cardFactory;
     private final QuestController quest;
     private final CardCollections decks;
-    
+
     private final MatchController match;
     private GameState gameState;
-    
+
     private final EditionCollection editions;
     private final FormatCollection formats;
     private final IStorageView<BoosterData> boosters;
@@ -150,10 +150,10 @@ public enum FModel {
 
 
         testNetworkConnection();
-        
+
         this.setBuildInfo(new BuildInfo());
         this.loadDynamicGamedata();
-        
+
         // Loads all cards (using progress bar).
         this.cardFactory = new CardFactory(ForgeProps.getFile(NewConstants.CARDSFOLDER));
         this.decks = new CardCollections(ForgeProps.getFile(NewConstants.NEW_DECKS));
@@ -166,11 +166,11 @@ public enum FModel {
 
     /**
      * Tests if draft upload is technically possible.
-     * Separate thread, no more hangs when network connection is limited 
+     * Separate thread, no more hangs when network connection is limited
      */
     private void testNetworkConnection() {
-     // 
-        Runnable runNetworkTest = new Runnable() { 
+
+        Runnable runNetworkTest = new Runnable() {
             @Override
             public void run() {
                 final HttpUtil pinger = new HttpUtil();
@@ -425,7 +425,7 @@ public enum FModel {
 
     /**
      * TODO: Write javadoc for this method.
-     * @param players 
+     * @param players
      */
     public GameState newGame(Iterable<LobbyPlayer> players) {
         gameState = new GameState(players);
@@ -439,7 +439,7 @@ public enum FModel {
     public CardFactory getCardFactory() {
         return cardFactory;
     }
-    
+
     public GauntletMini getGauntletMini() {
 
         if (gauntlet == null) {

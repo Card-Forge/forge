@@ -726,6 +726,7 @@ res/cardsfolder/b/bant_panorama.txt svneol=native#text/plain
 res/cardsfolder/b/bant_sojourners.txt svneol=native#text/plain
 res/cardsfolder/b/bant_sureblade.txt svneol=native#text/plain
 res/cardsfolder/b/bar_the_door.txt -text
+res/cardsfolder/b/barbarian_bully.txt -text
 res/cardsfolder/b/barbarian_general.txt svneol=native#text/plain
 res/cardsfolder/b/barbarian_horde.txt svneol=native#text/plain
 res/cardsfolder/b/barbarian_lunatic.txt svneol=native#text/plain
@@ -1179,6 +1180,7 @@ res/cardsfolder/b/braids_conjurer_adept.txt svneol=native#text/plain
 res/cardsfolder/b/braidwood_cup.txt svneol=native#text/plain
 res/cardsfolder/b/braidwood_sextant.txt svneol=native#text/plain
 res/cardsfolder/b/brain_freeze.txt svneol=native#text/plain
+res/cardsfolder/b/brain_gorgers.txt -text
 res/cardsfolder/b/brain_pry.txt -text
 res/cardsfolder/b/brain_weevil.txt -text
 res/cardsfolder/b/brainbite.txt svneol=native#text/plain
@@ -1846,6 +1848,7 @@ res/cardsfolder/c/conjurers_bauble.txt svneol=native#text/plain
 res/cardsfolder/c/conquer.txt svneol=native#text/plain
 res/cardsfolder/c/conquering_manticore.txt svneol=native#text/plain
 res/cardsfolder/c/conquerors_pledge.txt svneol=native#text/plain
+res/cardsfolder/c/consecrate_land.txt -text
 res/cardsfolder/c/consecrated_sphinx.txt svneol=native#text/plain
 res/cardsfolder/c/conservator.txt svneol=native#text/plain
 res/cardsfolder/c/consign_to_dream.txt -text
@@ -2118,6 +2121,7 @@ res/cardsfolder/c/cursebreak.txt -text
 res/cardsfolder/c/cursecatcher.txt svneol=native#text/plain
 res/cardsfolder/c/cursed_flesh.txt svneol=native#text/plain
 res/cardsfolder/c/cursed_land.txt svneol=native#text/plain
+res/cardsfolder/c/cursed_monstrosity.txt -text
 res/cardsfolder/c/cursed_rack.txt svneol=native#text/plain
 res/cardsfolder/c/cursed_ronin.txt svneol=native#text/plain
 res/cardsfolder/c/cursed_scroll.txt svneol=native#text/plain
@@ -2224,6 +2228,7 @@ res/cardsfolder/d/daru_sanctifier.txt svneol=native#text/plain
 res/cardsfolder/d/daru_spiritualist.txt -text
 res/cardsfolder/d/daru_stinger.txt -text
 res/cardsfolder/d/daru_warchief.txt svneol=native#text/plain
+res/cardsfolder/d/dash_hopes.txt -text
 res/cardsfolder/d/daunting_defender.txt svneol=native#text/plain
 res/cardsfolder/d/dauntless_dourbark.txt svneol=native#text/plain
 res/cardsfolder/d/dauntless_escort.txt svneol=native#text/plain
@@ -2593,6 +2598,7 @@ res/cardsfolder/d/dominating_licid.txt -text
 res/cardsfolder/d/domineer.txt svneol=native#text/plain
 res/cardsfolder/d/dominus_of_fealty.txt svneol=native#text/plain
 res/cardsfolder/d/donate.txt svneol=native#text/plain
+res/cardsfolder/d/dong_zhou_the_tyrant.txt -text
 res/cardsfolder/d/doom_blade.txt svneol=native#text/plain
 res/cardsfolder/d/doom_cannon.txt -text
 res/cardsfolder/d/doomed_necromancer.txt svneol=native#text/plain
@@ -4874,6 +4880,7 @@ res/cardsfolder/i/implements_of_sacrifice.txt svneol=native#text/plain
 res/cardsfolder/i/implode.txt svneol=native#text/plain
 res/cardsfolder/i/imposing_visage.txt -text
 res/cardsfolder/i/imprison_this_insolent_wretch.txt -text
+res/cardsfolder/i/impromptu_raid.txt -text
 res/cardsfolder/i/improvised_armor.txt svneol=native#text/plain
 res/cardsfolder/i/imps_taunt.txt -text
 res/cardsfolder/i/impulse.txt svneol=native#text/plain
@@ -5190,6 +5197,7 @@ res/cardsfolder/j/juniper_order_advocate.txt svneol=native#text/plain
 res/cardsfolder/j/juniper_order_druid.txt svneol=native#text/plain
 res/cardsfolder/j/juniper_order_ranger.txt svneol=native#text/plain
 res/cardsfolder/j/junk_diver.txt svneol=native#text/plain
+res/cardsfolder/j/junk_golem.txt -text
 res/cardsfolder/j/junktroller.txt svneol=native#text/plain
 res/cardsfolder/j/junkyo_bell.txt -text
 res/cardsfolder/j/juntu_stakes.txt svneol=native#text/plain
@@ -5381,6 +5389,7 @@ res/cardsfolder/k/kithkin_healer.txt svneol=native#text/plain
 res/cardsfolder/k/kithkin_rabble.txt svneol=native#text/plain
 res/cardsfolder/k/kithkin_shielddare.txt svneol=native#text/plain
 res/cardsfolder/k/kithkin_spellduster.txt svneol=native#text/plain
+res/cardsfolder/k/kithkin_zealot.txt -text
 res/cardsfolder/k/kithkin_zephyrnaut.txt svneol=native#text/plain
 res/cardsfolder/k/kitsune_blademaster.txt svneol=native#text/plain
 res/cardsfolder/k/kitsune_bonesetter.txt -text
@@ -7255,6 +7264,7 @@ res/cardsfolder/p/petrified_plating.txt svneol=native#text/plain
 res/cardsfolder/p/petrified_wood_kin.txt -text
 res/cardsfolder/p/pewter_golem.txt svneol=native#text/plain
 res/cardsfolder/p/phage_the_untouchable.txt -text
+res/cardsfolder/p/phantasmagorian.txt -text
 res/cardsfolder/p/phantasmal_abomination.txt svneol=native#text/plain
 res/cardsfolder/p/phantasmal_bear.txt svneol=native#text/plain
 res/cardsfolder/p/phantasmal_dragon.txt svneol=native#text/plain
@@ -8148,6 +8158,7 @@ res/cardsfolder/r/riptide_crab.txt svneol=native#text/plain
 res/cardsfolder/r/riptide_director.txt svneol=native#text/plain
 res/cardsfolder/r/riptide_entrancer.txt svneol=native#text/plain
 res/cardsfolder/r/riptide_laboratory.txt svneol=native#text/plain
+res/cardsfolder/r/riptide_mangler.txt -text
 res/cardsfolder/r/riptide_pilferer.txt svneol=native#text/plain
 res/cardsfolder/r/riptide_replicator.txt -text
 res/cardsfolder/r/riptide_shapeshifter.txt -text svneol=unset#text/plain
@@ -11224,6 +11235,7 @@ res/cardsfolder/w/wall_of_water.txt svneol=native#text/plain
 res/cardsfolder/w/wall_of_wonder.txt svneol=native#text/plain
 res/cardsfolder/w/wall_of_wood.txt svneol=native#text/plain
 res/cardsfolder/w/wallop.txt svneol=native#text/plain
+res/cardsfolder/w/wand_of_ith.txt -text
 res/cardsfolder/w/wand_of_the_elements.txt svneol=native#text/plain
 res/cardsfolder/w/wanderbrine_rootcutters.txt svneol=native#text/plain
 res/cardsfolder/w/wanderers_twig.txt svneol=native#text/plain
@@ -12190,6 +12202,7 @@ res/quest/duels/George[!!-~]of[!!-~]the[!!-~]Jungle[!!-~]3.dck -text
 res/quest/duels/Ghost[!!-~]Rider[!!-~]3.dck -text
 res/quest/duels/Gimli[!!-~]2.dck -text
 res/quest/duels/Gimli[!!-~]3.dck -text
+res/quest/duels/Gold[!!-~]Finger[!!-~]1.dck -text
 res/quest/duels/Gold[!!-~]Finger[!!-~]3.dck -text
 res/quest/duels/Gold[!!-~]Finger[!!-~]4.dck -text
 res/quest/duels/Gollum[!!-~]2.dck -text

@@ -7,7 +7,7 @@ Forge Beta: 12-##-2012 ver 1.3.3
 11### cards in total.
 
 
-
+Some initial work is being done to add Schemes to a branch and this work is not yet available in this build.
 
 --
 
@@ -56,11 +56,101 @@ Fixes/Features:
 - Added a possibility to couple sacrifice costs with other costs (currently by sacrificing, pun semi-intended, the input-based sacrifice interface and replacing it with a menu-based selection one).
 - Cleared out the changes.txt file, now ready for new material.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added a TODO note to GameActionUtil (if fully chained inputs are implemented in the future), fixed imports.
+- Bring active players VField to the front. Helps keep track in 8 player games.
+- Made CardDetailPanel conform to skin colors.
+- Added EffectZone$ Command to a few missed AF_Effect scripts
+- CheckStyle.
+- When the user is asked whether he wants to pay the sacrifice cost, the card for which the sacrifice cost is paid will be highlighted on the playfield.
+- A little fix for the previous commit.
+- Minor edit and fix to changes.txt
+- Consolidated some calls related to card panel highlighting for the Sacrifice costs.
+- Reverted the example Gauntlet contest to start at 0% progress (used to be 11% progress in the very beginning).
+- Added listing of the avatar and commander to FDeckChooser decklists.
+- Removing Variants branch
+- Created Schemes branch
+- Schemes:Base commit for Schemes.
+- Added AF_Abandon.
+- Added Trigger SetInMotion
+- Added schemes A Display of My Dark Power (Thanks,Marc!) and I Know All, I See All.
+- Schemes:Added ARC to setdata.
+- Schemes: Added Behold the Power of Destruction.
+- Updated some SVars.
+- Added Timeshifted setinfo to Leviathan.
+- Converted "Damage that would reduce your life total to less than 1 reduces it to 1 instead." to a player keyword.
+- Fixed Angel's Grace.
+- Added beginnings of a Scheme Deck editor.
+- Made exiting the scheme editor dump you at the archenemy home screen.
+- Made scheme deck editor save correctly.
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Implemented X color restrictions for the AI, now Crypt Rats should be correctly used by the AI. Hopefully the support will work for all color restrictions including two-color ones (like the Soul Burn which may potentially be implemented later).
+- Removed a debug line.
+- Schemes: Let the player specify the deck of each opponent in Archenemy mode.
+- Let the player specify his own scheme deck.
+- Fixed Scheme deck editor.
+- CheckStyle.
+- Schemes: Changed Archenemy's DocID.
+- Added Oracle to schemes.
+- PerSetTracking.py will now also check Archenemy.
+- Made some cards with "Whenever an opponent" triggers multiplayer compatible.
+- Schemes: Added AF_SetInMotion,added ReplaceSetInMotion
+- Fixed multiple schemes being set into motion consecutively.
+- Schemes: Removed debug script
+- Fixing Viscerid Drone's activation costs
+- Fixed the spell description for Judge Unworthy
+- Convert Goblin Charbelcher to script
+- Enable DevMode to add Lands directly into play
+- Convert Gilder Bairn and Vampire Hexmage to script
+- Added support for Repeating over Counters
+- changed target style to newer ValidTgts version
+- reworked methods for finding SpellAbility targets
+- Fixed Liliana of the Veil.
+- Fixed AI choosing logic of AF TwoPiles.
+- Fixed mana costs not always coming first in combineCosts.
+- Added AILogic parameter to AF TwoPiles.
+- Added the parameter "UnlessSwitched" to SpellAbilities (to switch paid and unpaid commands).
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Expanded checkDiscardCost.
+- Fixed Bloodthirst overwriting the X SVar.
+- Fixed StackDescription of AF PumpAll.
+- Fixed Venser, the Sojourner emblem name.
+- Schemes: Changed DefinedPlayer Opponent so that it adds all opponents
+- Added a NeedsToPlay SVar to Sunken City.
+- Added a chkAIDrawback function to AF LoseLife.
+- Schemes: Changed LQ image links to better images. Can be used as template for other schemes
+- Fixed Brass Squire.
+- Removed some unnecessary chkAIDrawback overrides.
+- Updated cardTemplateScript to automatically add correct LQ pic urls.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
 
+
+
+Added the following Schemes (They are not yet available in this build):
+
+A Display of My Dark Power
+I Know All, I See All
+Behold the Power of Destruction
+Look Skyward and Despair
+My Genius Knows No Bounds
+Realms Befitting My Majesty
+Roots of All Evil
+The Iron Guardian Stirs
+The Very Soil Shall Shake
+Which of You Burns Brightest?
+Ignite the Cloneforge!
+Perhaps You've Met My Cohort
+Tooth, Claw, and Tail
+Your Will Is Not Your Own
+Plots That Span Centuries
+All Shall Smolder in My Wake
+Approach My Molten Realm
+Embrace My Diabolical Vision
+Your Puny Minds Cannot Fathom
 
 
 Added the following Vanguard Avatars:
@@ -82,6 +172,17 @@ Leviathan
 Exalted Dragon
 Reclamation
 Flooded Woodlands
+Impromptu Raid
+Riptide Mangler
+Wand of Ith
+Consecrate Land
+Dash Hopes
+Phantasmagorian
+Brain Gorgers
+Barbarian Bully
+Cursed Monstrosity
+Dong Zhou, the Tyrant
+Kithkin Zealot
 
 
 end

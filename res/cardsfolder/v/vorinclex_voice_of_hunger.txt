@@ -6,7 +6,7 @@ PT:7/6
 K:Trample
 T:Mode$ TapsForMana | ValidCard$ Land.YouCtrl | Execute$ TrigMana | TriggerZones$ Battlefield | Static$ True | TriggerDescription$ Whenever you tap a land for mana, add one mana to your mana pool of any type that land produced.
 SVar:TrigMana:AB$ManaReflected | Cost$ 0 | ColorOrType$ Type | Valid$ Defined.Triggered | ReflectProperty$ Produced | Defined$ You
-T:Mode$ TapsForMana | ValidCard$ Land.YouDontCtrl | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent taps a land for mana, that land doesn't untap during its controller's next untap step.
+T:Mode$ TapsForMana | ValidCard$ Land.OppCtrl | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ Whenever an opponent taps a land for mana, that land doesn't untap during its controller's next untap step.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ TriggeredCard | Permanent$ True | KW$ HIDDEN This card doesn't untap during your next untap step.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vorinclex_voice_of_hunger.jpg

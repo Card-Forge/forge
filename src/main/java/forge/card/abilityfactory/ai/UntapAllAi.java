@@ -8,11 +8,6 @@ import forge.game.player.Player;
 public class UntapAllAi extends SpellAiLogic {
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        return true;
-    }
-
-    @Override
     protected boolean canPlayAI(Player aiPlayer, SpellAbility sa) {
         // check SubAbilities DoTrigger?
         final AbilitySub abSub = sa.getSubAbility();

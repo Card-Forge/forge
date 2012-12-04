@@ -146,6 +146,7 @@ public class DigUntilEffect extends SpellEffect {
                     }
                 }
 
+                // TODO Use getOrderChoices before this moveTo call for the Human
                 final Iterator<Card> itr = revealed.iterator();
                 while (itr.hasNext()) {
                     final Card c = itr.next();

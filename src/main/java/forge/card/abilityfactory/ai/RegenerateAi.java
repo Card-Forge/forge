@@ -167,11 +167,6 @@ public class RegenerateAi extends SpellAiLogic {
         return chance;
     }
 
-    @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        return true;
-    }
-
     private static boolean regenMandatoryTarget(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Card hostCard = sa.getSourceCard();
         final Target tgt = sa.getTarget();

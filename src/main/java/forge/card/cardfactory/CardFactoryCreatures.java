@@ -76,70 +76,6 @@ import forge.util.Aggregates;
  * @version $Id$
  */
 public class CardFactoryCreatures {
-
-    private static void getCard_GilderBairn(final Card card) {
-        final Cost abCost = new Cost(card, "2 GU Untap", true);
-        final Target tgt = new Target(card, "Select target permanent.", new String[] { "Permanent" });
-        class GilderBairnAbility extends AbilityActivated {
-            public GilderBairnAbility(final Card ca, final Cost co, final Target t) {
-                super(ca, co, t);
-            }
-
-            private static final long serialVersionUID = -1847685865277129366L;
-
-            @Override
-            public void resolve() {
-                final Card c = this.getTargetCard();
-
-                if (c.sumAllCounters() == 0) {
-                    return;
-                } else if (c.isInPlay() && c.canBeTargetedBy(this)) {
-                    // zerker clean up:
-                    for (final CounterType c1 : CounterType.values()) {
-                        if (c.getCounters(c1) > 0) {
-                            c.addCounter(c1, c.getCounters(c1), true);
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public AbilityActivated getCopy() {
-                return new GilderBairnAbility(getSourceCard(), getPayCosts(), new Target(getTarget()));
-            }
-
-            @Override
-            public boolean canPlayAI() {
-                List<Card> perms = new ArrayList<Card>(getActivatingPlayer().getCardsIn(ZoneType.Battlefield));
-                perms = CardLists.filter(CardLists.getTargetableCards(perms, this), new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card c) {
-                        //if (c.getCounters().isEmpty())
-                        return (c.sumAllCounters() > 0);
-                    }
-                });
-                if (perms.isEmpty()) {
-                    return false;
-                }
-                CardLists.shuffle(perms);
-                this.setTargetCard(perms.get(0));
-                return true;
-            }
-
-            @Override
-            public String getDescription() {
-                final StringBuilder sb = new StringBuilder();
-                sb.append(getPayCosts());
-                sb.append("For each counter on target permanent, ");
-                sb.append("put another of those counters on that permanent.");
-                return sb.toString();
-            }
-        }
-        final AbilityActivated a1 = new GilderBairnAbility(card, abCost, tgt);
-
-        card.addSpellAbility(a1);
-    }
-
     private static void getCard_PainterServant(final Card card) {
         final long[] timeStamp = new long[1];
         final String[] color = new String[1];
@@ -551,78 +487,6 @@ public class CardFactoryCreatures {
         };
         card.addComesIntoPlayCommand(comesIntoPlay);
     }
-
-    private static void getCard_VampireHexmage(final Card card) {
-        /*
-         * Sacrifice Vampire Hexmage: Remove all counters from target
-         * permanent.
-         */
-
-        final Cost cost = new Cost(card, "Sac<1/CARDNAME>", true);
-        final Target tgt = new Target(card, "Select a permanent", "Permanent".split(","));
-        class VampireHexmageAbility extends AbilityActivated {
-            public VampireHexmageAbility(final Card ca, final Cost co, final Target t) {
-                super(ca, co, t);
-            }
-
-            @Override
-            public AbilityActivated getCopy() {
-                return new VampireHexmageAbility(getSourceCard(),
-                        getPayCosts(), new Target(getTarget()));
-            }
-
-            private static final long serialVersionUID = -5084369399105353155L;
-
-            @Override
-            public boolean canPlayAI() {
-
-                // Dark Depths:
-                final Player ai = getActivatingPlayer();
-                List<Card> list = ai.getCardsIn(ZoneType.Battlefield, "Dark Depths");
-                list = CardLists.filter(list, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card crd) {
-                        return crd.getCounters(CounterType.ICE) >= 3;
-                    }
-                });
-
-                if (list.size() > 0) {
-                    tgt.addTarget(list.get(0));
-                    return true;
-                }
-
-                // Get rid of Planeswalkers:
-                list = new ArrayList<Card>(ai.getOpponent().getCardsIn(ZoneType.Battlefield));
-                list = CardLists.filter(list, new Predicate<Card>() {
-                    @Override
-                    public boolean apply(final Card crd) {
-                        return crd.isPlaneswalker() && (crd.getCounters(CounterType.LOYALTY) >= 5);
-                    }
-                });
-
-                if (list.size() > 0) {
-                    tgt.addTarget(list.get(0));
-                    return true;
-                }
-
-                return false;
-            }
-
-            @Override
-            public void resolve() {
-                final Card c = this.getTargetCard();
-                // need a copy to avoid exception caused by modification of Iterable being enumerated
-                Map<CounterType, Integer> copy = new HashMap<CounterType, Integer>(c.getCounters());
-                for (final Entry<CounterType, Integer> counter : copy.entrySet()) {
-                    c.subtractCounter(counter.getKey(), counter.getValue());
-                }
-            }
-        }
-        final SpellAbility ability = new VampireHexmageAbility(card, cost, tgt);
-
-        card.addSpellAbility(ability);
-    }
-
     private static void getCard_SurturedGhoul(final Card card) {
         final int[] numCreatures = new int[1];
         final int[] sumPower = new int[1];
@@ -1033,9 +897,7 @@ public class CardFactoryCreatures {
 
     public static void buildCard(final Card card, final String cardName) {
 
-        if (cardName.equals("Gilder Bairn")) {
-            getCard_GilderBairn(card);
-        } else if (cardName.equals("Painter's Servant")) {
+        if (cardName.equals("Painter's Servant")) {
             getCard_PainterServant(card);
         } else if (cardName.equals("Stangg")) {
             getCard_Stangg(card);
@@ -1050,8 +912,6 @@ public class CardFactoryCreatures {
         } else if (cardName.equals("Gnarlid Pack") || cardName.equals("Apex Hawks") || cardName.equals("Enclave Elite")
                 || cardName.equals("Quag Vampires") || cardName.equals("Skitter of Lizards") || cardName.equals("Joraga Warcaller")) {
             getCard_MultikickerP1P1(card, cardName);
-        } else if (cardName.equals("Vampire Hexmage")) {
-            getCard_VampireHexmage(card);
         } else if (cardName.equals("Sutured Ghoul")) {
             getCard_SurturedGhoul(card);
         } else if (cardName.equals("Yosei, the Morning Star")) {

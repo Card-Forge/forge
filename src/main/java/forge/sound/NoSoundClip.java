@@ -4,15 +4,15 @@ package forge.sound;
 public class NoSoundClip implements IAudioClip {
 
     @Override
-    public void play() {}
+    public void play() { }
     @Override
     public boolean isDone() { return false; }
 
 
     @Override
-    public void stop() {}
+    public void stop() { }
 
     @Override
-    public void loop() {} 
-    
+    public void loop() { }
+
 }

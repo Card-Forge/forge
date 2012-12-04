@@ -189,7 +189,7 @@ public enum VDev implements IVDoc<CDev> {
     public DevLabel getLblCardToHand() {
         return this.lblCardToHand;
     }
-    
+
     /** @return {@link forge.gui.match.views.VDev.DevLabel} */
     public final DevLabel getLblCardToBattlefield() {
         return lblCardToBattlefield;

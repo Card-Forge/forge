@@ -175,13 +175,13 @@ public abstract class QuestEvent {
     public void setIconFilename(final String s0) {
         this.iconFilename = s0;
     }
-    
-    
+
+
     public List<String> getHumanExtraCards() {
         return Collections.emptyList();
     }
-    
+
     public List<String> getAiExtraCards() {
         return Collections.emptyList();
-    }    
+    }
 }

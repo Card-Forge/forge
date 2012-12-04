@@ -1,0 +1,14 @@
+Name:Riptide Mangler
+ManaCost:1 U
+Types:Creature Beast
+Text:no text
+PT:0/3
+A:AB$ Pump | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target Creature | SubAbility$ DBChangePower | StackDescription$ None | SpellDescription$ Change CARDNAME's power to target creature's power.
+SVar:DBChangePower:DB$ Animate | Cost$ 0 | Defined$ Self | Power$ X | References$ X | Permanent$ True
+SVar:X:Targeted$CardPower
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/riptide_mangler.jpg
+SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/51.jpg
+Oracle:{1}{U}: Change Riptide Mangler's power to target creature's power. (This effect lasts indefinitely.)
+End

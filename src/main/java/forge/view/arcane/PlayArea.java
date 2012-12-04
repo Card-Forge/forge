@@ -129,8 +129,8 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
         return allLands;
     }
-    
-    
+
+
     private final CardStackRow collectAllTokens() {
         final CardStackRow allTokens = new CardStackRow();
         outerLoop:
@@ -179,7 +179,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         }
         return allTokens;
     }
-    
+
     @Override
     public final CardPanel addCard(final Card card) {
         final CardPanel placeholder = new CardPanel(card);
@@ -254,13 +254,13 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         this.revalidate();
         positionAllCards();
     }
-     
-    private void positionAllCards() 
-    {
+
+    private void positionAllCards()  {
+
         // Position all card panels.
         int x = 0;
         int y = PlayArea.GUTTER_Y;
-        
+
         for (final CardStackRow row : this.rows) {
             int rowBottom = 0;
             x = PlayArea.GUTTER_X;
@@ -298,7 +298,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         this.stackSpacingY = Math.round(this.cardHeight * PlayArea.STACK_SPACING_Y);
 
         int afterFirstRow;
-        
+
         if (this.mirror) {
             // Wrap all creatures and lands.
             this.wrap(lands, this.rows, -1);
@@ -342,7 +342,7 @@ public class PlayArea extends CardPanelContainer implements CardPanelMouseListen
         // If that still doesn't fit, scale down.
         return creatures.isEmpty() && tokens.isEmpty() && lands.isEmpty() && others.isEmpty();
     }
-    
+
     /**
      * <p>
      * wrap.

@@ -140,11 +140,6 @@ public class ChangeZoneEffect extends SpellEffect {
             sb.append(" to your ").append(destination);
         }
 
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
-        }
-
         return sb.toString();
     }
 
@@ -264,11 +259,6 @@ public class ChangeZoneEffect extends SpellEffect {
             sb.append("Put").append(targetname);
             sb.append(" from ").append(origin);
             sb.append(" into").append(pronoun).append("owner's graveyard.");
-        }
-
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
         }
 
         return sb.toString();

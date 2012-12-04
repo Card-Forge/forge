@@ -66,7 +66,7 @@ public class VCommand implements IVDoc<CCommand> {
 
         // TODO player is hard-coded into tabletop...should be dynamic
         // (haven't looked into it too deeply). Doublestrike 12-04-12
-        tabletop = new PlayArea(scroller, id0 == EDocID.COMMAND_0 );
+        tabletop = new PlayArea(scroller, id0 == EDocID.COMMAND_0);
 
         control = new CCommand(player, this);
 

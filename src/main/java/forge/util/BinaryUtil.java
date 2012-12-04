@@ -14,7 +14,7 @@ public class BinaryUtil {
         }
         return c;
     } // bit count
-    
+
     public static int bitCount(final byte num) {
         byte v = num;
         int c = 0;
@@ -23,7 +23,7 @@ public class BinaryUtil {
         }
         return c;
     } // bit count
-    
+
     public static int bitCount(final short num) {
         short v = num;
         int c = 0;
@@ -31,5 +31,5 @@ public class BinaryUtil {
             v &= v - 1;
         }
         return c;
-    } // bit count    
+    } // bit count
 }

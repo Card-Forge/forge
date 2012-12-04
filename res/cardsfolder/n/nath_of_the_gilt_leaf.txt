@@ -4,9 +4,9 @@ Types:Legendary Creature Elf Warrior
 Text:no text
 PT:4/4
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDiscard | OptionalDecider$ You | TriggerDescription$ At the beginning of your upkeep, you may have target opponent discard a card at random.
-SVar:TrigDiscard:AB$Discard | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumCards$ 1 | Mode$ Random
-T:Mode$ Discarded | ValidCard$ Card.YouDontCtrl | TriggerZones$ Battlefield | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ Whenever an opponent discards a card, you may put a 1/1 green Elf Warrior creature token onto the battlefield.
-SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Elf Warrior | TokenTypes$ Creature,Elf,Warrior | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
+SVar:TrigDiscard:AB$ Discard | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | NumCards$ 1 | Mode$ Random
+T:Mode$ Discarded | ValidCard$ Card.OppOwn | TriggerZones$ Battlefield | Execute$ TrigToken | OptionalDecider$ You | TriggerDescription$ Whenever an opponent discards a card, you may put a 1/1 green Elf Warrior creature token onto the battlefield.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Elf Warrior | TokenTypes$ Creature,Elf,Warrior | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nath_of_the_gilt_leaf.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/250.jpg

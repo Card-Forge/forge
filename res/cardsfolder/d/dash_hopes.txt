@@ -1,0 +1,12 @@
+Name:Dash Hopes
+ManaCost:B B
+Types:Instant
+Text:no text
+T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigCounter | TriggerDescription$ When you cast CARDNAME, any player may pay 5 life. If a player does, counter CARDNAME.
+SVar:TrigCounter:DB$ Counter | Cost$ 0 | UnlessCost$ PayLife<5> | Defined$ TriggeredSpellAbility | UnlessPayer$ Player | UnlessSwitched$ True
+A:SP$ Counter | Cost$ B B | TargetType$ Spell | ValidTgts$ Card | SpellDescription$ Counter target spell.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dash_hopes.jpg
+SetInfo:PLC|Common|http://magiccards.info/scans/en/pc/68.jpg
+Oracle:When you cast Dash Hopes, any player may pay 5 life. If a player does, counter Dash Hopes.\nCounter target spell.
+End

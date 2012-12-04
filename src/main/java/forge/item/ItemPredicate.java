@@ -49,7 +49,7 @@ public abstract class ItemPredicate {
 
         @Override
         public boolean apply(final InventoryItem card) {
-            return card instanceof TournamentPack && !((TournamentPack)card).isStarterDeck();
+            return card instanceof TournamentPack && !((TournamentPack) card).isStarterDeck();
         }
     };
 
@@ -62,7 +62,7 @@ public abstract class ItemPredicate {
 
         @Override
         public boolean apply(final InventoryItem card) {
-            return card instanceof TournamentPack && ((TournamentPack)card).isStarterDeck();
+            return card instanceof TournamentPack && ((TournamentPack) card).isStarterDeck();
         }
     };
 

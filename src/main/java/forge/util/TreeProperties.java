@@ -111,8 +111,8 @@ import java.util.Set;
  * @author Clemens Koza
  * @version V0.0 19.08.2009
  * @see Properties
- */ 
-public class TreeProperties /* implements Iterable<PropertyElement> */{
+ */
+public class TreeProperties /* implements Iterable<PropertyElement> */ {
     /** Constant <code>suffixes</code>. */
     private static final Map<String, PropertyType<?>> SUFFIXES;
     /** Constant <code>types</code>. */
@@ -451,8 +451,8 @@ public class TreeProperties /* implements Iterable<PropertyElement> */{
          * @return a T object.
          */
         T toObject(TreeProperties p, String s);
-    }    
-    
+    }
+
     public static class FileType implements PropertyType<File> {
         /** Constant <code>suffix="file"</code>. */
         public static final String SUFFIX = "file";

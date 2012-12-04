@@ -234,6 +234,9 @@ public class TwoPilesEffect extends SpellEffect {
                 // TODO: This should really have a ChooseLogic param to
                 // figure this out
                 pile1WasChosen = cmc1 >= cmc2;
+                if ("Worst".equals(sa.getParam("AILogic"))) {
+                    pile1WasChosen = !pile1WasChosen;
+                }
                 if (pile1WasChosen) {
                     JOptionPane.showMessageDialog(null, "Computer chooses the Pile 1", "",
                             JOptionPane.INFORMATION_MESSAGE);

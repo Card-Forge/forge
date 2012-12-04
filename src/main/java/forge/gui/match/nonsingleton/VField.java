@@ -121,7 +121,7 @@ public class VField implements IVDoc<CField> {
 
         // TODO player is hard-coded into tabletop...should be dynamic
         // (haven't looked into it too deeply). Doublestrike 12-04-12
-        tabletop = new PlayArea(scroller, id0 == EDocID.FIELD_1 );
+        tabletop = new PlayArea(scroller, id0 == EDocID.FIELD_1);
 
         control = new CField(player, this);
 

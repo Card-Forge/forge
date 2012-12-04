@@ -103,8 +103,50 @@ public class  DamageAllAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        // check AI life before playing this drawback?
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+        final Card source = sa.getSourceCard();
+        String validP = "";
+
+        final String damage = sa.getParam("NumDmg");
+        int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
+
+        if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
+            // Set PayX here to maximum value.
+            dmg = ComputerUtil.determineLeftoverMana(sa, ai);
+            source.setSVar("PayX", Integer.toString(dmg));
+        }
+
+        if (sa.hasParam("ValidPlayers")) {
+            validP = sa.getParam("ValidPlayers");
+        }
+
+        // Evaluate creatures getting killed
+        Player enemy = ai.getOpponent();
+        final List<Card> humanList = this.getKillableCreatures(sa, enemy, dmg);
+        List<Card> computerList = this.getKillableCreatures(sa, ai, dmg);
+        final Target tgt = sa.getTarget();
+
+        if (tgt != null && sa.canTarget(enemy)) {
+            tgt.resetTargets();
+            sa.getTarget().addTarget(enemy);
+            computerList.clear();
+        }
+        // Don't get yourself killed
+        if (validP.contains("Each") && (ai.getLife() <= ai.predictDamage(dmg, source, false))) {
+            return false;
+        }
+
+        // if we can kill human, do it
+        if ((validP.contains("Each") || validP.contains("EachOpponent") || validP.contains("Targeted"))
+                && (enemy.getLife() <= enemy.predictDamage(dmg, source, false))) {
+            return true;
+        }
+
+        if (!computerList.isEmpty() && CardFactoryUtil.evaluateCreatureList(computerList) > CardFactoryUtil
+                .evaluateCreatureList(humanList)) {
+            return false;
+        }
+
         return true;
     }
 
@@ -151,7 +193,6 @@ public class  DamageAllAi extends SpellAiLogic {
 
         final String damage = sa.getParam("NumDmg");
         int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
-
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.

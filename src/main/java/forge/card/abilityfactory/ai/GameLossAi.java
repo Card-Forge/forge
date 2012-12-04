@@ -28,11 +28,6 @@ public class GameLossAi extends SpellAiLogic {
     }
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        return true;
-    }
-
-    @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
 
         // Phage the Untouchable

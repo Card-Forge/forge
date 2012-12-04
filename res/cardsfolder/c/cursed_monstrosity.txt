@@ -1,0 +1,14 @@
+Name:Cursed Monstrosity
+ManaCost:4 B
+Types:Creature Horror
+Text:no text
+PT:4/3
+K:Flying
+T:Mode$ BecomesTarget | ValidTarget$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ When CARDNAME becomes the target of a spell or ability, sacrifice it unless you discard a land card.
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self | UnlessCost$ Discard<1/Land> | UnlessPayer$ You
+SVar:Targeting:Dies
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/cursed_monstrosity.jpg
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/126.jpg
+Oracle:Flying\nWhenever Cursed Monstrosity becomes the target of a spell or ability, sacrifice it unless you discard a land card.
+End

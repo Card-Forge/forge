@@ -1,9 +1,12 @@
 package forge.card.abilityfactory.effects;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import forge.Card;
 import forge.CardLists;
+import forge.CounterType;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
@@ -72,6 +75,18 @@ public class RepeatEachEffect extends SpellEffect {
                 source.addRemembered(player);
                 AbilityFactory.resolve(repeat, false);
                 source.removeRemembered(player);
+            }
+        }
+        
+        if (sa.hasParam("RepeatCounters")) {
+            Card target = sa.getTargetCard();
+            Set<CounterType> types = new HashSet<CounterType>(target.getCounters().keySet());
+            for (CounterType type : types) {
+                StringBuilder sb = new StringBuilder();
+                sb.append("Number$").append(target.getCounters(type));
+                source.setSVar("RepeatSVarCounter", type.getName().toUpperCase());
+                source.setSVar("RepeatCounterAmount", sb.toString());
+                AbilityFactory.resolve(repeat, false);
             }
         }
     }

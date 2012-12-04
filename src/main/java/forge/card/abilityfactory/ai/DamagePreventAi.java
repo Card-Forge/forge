@@ -21,10 +21,6 @@ import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
 public class DamagePreventAi extends SpellAiLogic {
-    @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        return true;
-    }
 
     @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {

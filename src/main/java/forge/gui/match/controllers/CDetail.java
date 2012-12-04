@@ -60,7 +60,7 @@ public enum CDetail implements ICDoc {
         VDetail.SINGLETON_INSTANCE.getPnlDetail().setCard(null);
         VDetail.SINGLETON_INSTANCE.getParentCell().repaintSelf();
     }
-    
+
     /**
      * Gets the current card.
      * 

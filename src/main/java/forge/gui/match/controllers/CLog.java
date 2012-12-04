@@ -30,9 +30,9 @@ public enum CLog implements ICDoc, Observer {
      */
     @Override
     public void initialize() {
-        
+
     }
-    
+
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#update()
      */

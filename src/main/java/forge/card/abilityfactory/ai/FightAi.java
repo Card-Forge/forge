@@ -82,12 +82,6 @@ public class FightAi extends SpellAiLogic {
         return false;
     }
 
-    @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        // check AI life before playing this drawback?
-        return true;
-    }
-
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */

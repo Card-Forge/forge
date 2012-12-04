@@ -31,12 +31,10 @@ public class CountersRemoveEffect extends SpellEffect {
         if ("Any".matches(counterName)) {
             if (amount == 1) {
                 sb.append("a counter");
-            }
-            else {
+            } else {
                 sb.append(amount).append(" ").append(" counter");
             }
-        }
-        else {
+        } else {
             sb.append(amount).append(" ").append(CounterType.valueOf(counterName).getName()).append(" counter");
         }
         if (amount != 1) {
@@ -63,6 +61,15 @@ public class CountersRemoveEffect extends SpellEffect {
             counterAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
         }
 
+        CounterType counterType;
+
+        try {
+            counterType = AbilityFactory.getCounterType(type, sa);
+        } catch (Exception e) {
+            System.out.println("Counter type doesn't match, nor does an SVar exist with the type name.");
+            return;
+        }
+
         final Target tgt = sa.getTarget();
 
         boolean rememberRemoved = false;
@@ -73,7 +80,7 @@ public class CountersRemoveEffect extends SpellEffect {
             if ((tgt == null) || tgtCard.canBeTargetedBy(sa)) {
                 final Zone zone = Singletons.getModel().getGame().getZoneOf(tgtCard);
                 if (sa.getParam("CounterNum").equals("All")) {
-                    counterAmount = tgtCard.getCounters(CounterType.valueOf(type));
+                    counterAmount = tgtCard.getCounters(counterType);
                 }
 
                 if (type.matches("Any")) {
@@ -92,8 +99,7 @@ public class CountersRemoveEffect extends SpellEffect {
                             if (typeChoices.size() > 1) {
                                 String prompt = "Select type counters to remove";
                                 chosenType = GuiChoose.one(prompt, typeChoices);
-                            }
-                            else {
+                            } else {
                                 chosenType = typeChoices.get(0);
                             }
                             chosenAmount = tgtCounters.get(chosenType);
@@ -110,9 +116,10 @@ public class CountersRemoveEffect extends SpellEffect {
                                 String prompt = "Select the number of " + chosenType.getName() + " counters to remove";
                                 chosenAmount = GuiChoose.one(prompt, choices);
                             }
-                        }
-                        else {
-                            // TODO: ArsenalNut (06 Feb 12) - computer needs better logic to pick a counter type and probably an initial target
+                        } else {
+                            // TODO: ArsenalNut (06 Feb 12)computer needs
+                            // better logic to pick a counter type and probably
+                            // an initial target
                             // find first nonzero counter on target
                             for (Object key : tgtCounters.keySet()) {
                                 if (tgtCounters.get(key) > 0) {
@@ -134,8 +141,7 @@ public class CountersRemoveEffect extends SpellEffect {
                         }
                         counterAmount -= chosenAmount;
                     }
-                }
-                else {
+                } else {
                     if (zone.is(ZoneType.Battlefield) || zone.is(ZoneType.Exile)) {
                         if (sa.hasParam("UpTo") && sa.getActivatingPlayer().isHuman()) {
                             final ArrayList<String> choices = new ArrayList<String>();
@@ -148,14 +154,14 @@ public class CountersRemoveEffect extends SpellEffect {
                         }
                     }
                     if (rememberRemoved) {
-                        if (counterAmount > tgtCard.getCounters(CounterType.valueOf(type))) {
-                            counterAmount = tgtCard.getCounters(CounterType.valueOf(type));
+                        if (counterAmount > tgtCard.getCounters(counterType)) {
+                            counterAmount = tgtCard.getCounters(counterType);
                         }
                         for (int i = 0; i < counterAmount; i++) {
-                            card.addRemembered(CounterType.valueOf(type));
+                            card.addRemembered(counterType);
                         }
                     }
-                    tgtCard.subtractCounter(CounterType.valueOf(type), counterAmount);
+                    tgtCard.subtractCounter(counterType, counterAmount);
                 }
             }
         }

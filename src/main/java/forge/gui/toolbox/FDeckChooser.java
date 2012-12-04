@@ -45,26 +45,26 @@ public class FDeckChooser extends JPanel {
         CUSTOM, /** */
         QUESTEVENTS
     }
-    
+
     private final QuestController quest = Singletons.getModel().getQuest();
-    
+
     private final JRadioButton radColors = new FRadioButton("Fully random color deck");
     private final JRadioButton radThemes = new FRadioButton("Semi-random theme deck");
     private final JRadioButton radCustom = new FRadioButton("Custom user deck");
     private final JRadioButton radQuests = new FRadioButton("Quest opponent deck");
- 
+
     private final JList lstDecks      = new FList();
     private final ExperimentalLabel btnRandom = new ExperimentalLabel("Random");
 
     private final JScrollPane scrDecks  = new FScrollPane(lstDecks, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-    
+
     private final FLabel lblDecklist = new FLabel.Builder()
     .text("Double click a non-random deck for its decklist.")
     .fontSize(12).build();
-    
+
     private final JPanel pnlRadios = new JPanel(new MigLayout("insets 0, gap 0, wrap"));
     private final PlayerType playerType;
-        
+
 
     private final MouseAdapter madDecklist = new MouseAdapter() {
         @Override
@@ -76,24 +76,24 @@ public class FDeckChooser extends JPanel {
                 DeckgenUtil.showDecklist(src);
             }
         }
-    };    
-    
-    public FDeckChooser(String titleText, PlayerType pt)
-    {
+    };
+
+    public FDeckChooser(String titleText, PlayerType pt) {
+
         playerType = pt;
-        
+
         // Radio button panels: Human and AI
         final String strRadioConstraints = "w 100%!, h 30px!";
-        
+
         this.setOpaque(false);
-        
+
         // Radio button group: Human
         final ButtonGroup grpRadios = new ButtonGroup();
         grpRadios.add(radCustom);
         grpRadios.add(radQuests);
         grpRadios.add(radColors);
         grpRadios.add(radThemes);
-        
+
         pnlRadios.setOpaque(false);
         pnlRadios.add(new FLabel.Builder().text(titleText)
                 .fontStyle(Font.BOLD).fontSize(16)
@@ -103,10 +103,10 @@ public class FDeckChooser extends JPanel {
         pnlRadios.add(radQuests, strRadioConstraints);
         pnlRadios.add(radColors, strRadioConstraints);
         pnlRadios.add(radThemes, strRadioConstraints);
-        pnlRadios.add(btnRandom, "w 200px!, h 30px!, gap 0 0 10px 0, ax center");        
+        pnlRadios.add(btnRandom, "w 200px!, h 30px!, gap 0 0 10px 0, ax center");
 
     }
-    
+
     public void initialize() {
         // Radio button event handling
         getRadColors().addActionListener(new ActionListener() { @Override
@@ -124,13 +124,13 @@ public class FDeckChooser extends JPanel {
         getRadQuests().addActionListener(new ActionListener() { @Override
             public void actionPerformed(final ActionEvent arg0) {
                 updateQuestEvents(); } });
-        
+
         // First run: colors
         getRadColors().setSelected(true);
         updateColors();
     }
-    
-    
+
+
     /** @return {@link javax.swing.JList} */
     public JList getLstDecks() {
         return this.lstDecks;
@@ -173,7 +173,7 @@ public class FDeckChooser extends JPanel {
 
         final ExperimentalLabel btn = getBtnRandom();
 
-        btn.setCommand(new Command() { @Override public void execute() { lst.setSelectedIndices( DeckgenUtil.randomSelectColors()); } });
+        btn.setCommand(new Command() { @Override public void execute() { lst.setSelectedIndices(DeckgenUtil.randomSelectColors()); } });
 
         // Init basic two color deck
         lst.setSelectedIndices(new int[]{0, 1});
@@ -249,8 +249,8 @@ public class FDeckChooser extends JPanel {
 
         // Init first in list
         lst.setSelectedIndex(0);
-    }    
-    
+    }
+
     /** Generates deck from current list selection(s). */
     public Deck getDeck() {
         JList lst0 = getLstDecks();
@@ -293,12 +293,12 @@ public class FDeckChooser extends JPanel {
      * TODO: Write javadoc for this method.
      */
     public void populate() {
-        
+
         this.setLayout(new MigLayout("insets 0, gap 0, flowy, ax right"));
-        
+
         this.add(pnlRadios, "w 100%!, gap 0 0 20px 20px");
         this.add(scrDecks, "w 100%!, growy, pushy");
-                
-    }    
-    
+
+    }
+
 }

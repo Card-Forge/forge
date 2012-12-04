@@ -132,7 +132,7 @@ public class QuestEventChallenge extends QuestEvent {
      * 
      * @return the aiExtraCards
      */
-    @Override    
+    @Override
     public List<String> getAiExtraCards() {
         return this.aiExtraCards;
     }
@@ -223,8 +223,8 @@ public class QuestEventChallenge extends QuestEvent {
      * @return the card reward list
      */
     public final List<CardPrinted> getCardRewardList() {
-        if ( cardRewardList == null )
-        {
+        if (cardRewardList == null) {
+
             this.cardRewardList = BoosterUtils.generateCardRewardList(cardReward);
         }
         return this.cardRewardList.open();

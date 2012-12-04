@@ -7,13 +7,13 @@ public enum StartingPoolType {
     Precon("Event or starter deck"),
     SealedDeck("My sealed deck"),
     DraftDeck("My draft deck");
-    
+
     private final String caption;
-    
+
     private StartingPoolType(String caption0) {
         caption = caption0;
     }
-    
+
     /* (non-Javadoc)
      * @see java.lang.Enum#toString()
      */

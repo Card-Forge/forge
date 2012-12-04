@@ -30,14 +30,14 @@ import forge.game.event.SpellResolvedEvent;
 import forge.game.event.TokenCreatedEvent;
 
 /** 
- * This class is in charge of converting any forge.game.event.Event to a SoundEffectType
+ * This class is in charge of converting any forge.game.event.Event to a SoundEffectType.
  *
  */
 public class EventVisualizer {
 
-    final static Map<Class<?>, SoundEffectType> matchTable = new HashMap<Class<?>, SoundEffectType>();
-    
-    public EventVisualizer() { 
+    static final Map<Class<?>, SoundEffectType> matchTable = new HashMap<Class<?>, SoundEffectType>();
+
+    public EventVisualizer() {
         matchTable.put(CounterAddedEvent.class, SoundEffectType.AddCounter);
         matchTable.put(BlockerAssignedEvent.class, SoundEffectType.Block);
         matchTable.put(CardDamagedEvent.class, SoundEffectType.Damage);
@@ -55,8 +55,8 @@ public class EventVisualizer {
         matchTable.put(ShuffleEvent.class, SoundEffectType.Shuffle);
         matchTable.put(TokenCreatedEvent.class, SoundEffectType.Token);
     }
-    
-    
+
+
     public final SoundEffectType getSoundForEvent(Event evt) {
         SoundEffectType fromMap = matchTable.get(evt.getClass());
 
@@ -86,7 +86,7 @@ public class EventVisualizer {
 
         return fromMap;
     }
-    
+
     /**
      * Plays the sound corresponding to the outcome of the duel.
      * 
@@ -113,7 +113,9 @@ public class EventVisualizer {
             // if there's a specific effect for this particular card, play it and
             // we're done.
             SoundEffectType specialEffect = getSpecificCardEffect(source);
-            if( specialEffect != null ) return specialEffect;
+            if (specialEffect != null) {
+                return specialEffect;
+            }
 
             if (source.isCreature() && source.isArtifact()) {
                 return SoundEffectType.ArtifactCreature;
@@ -145,7 +147,7 @@ public class EventVisualizer {
     public static SoundEffectType getSoundEffectForTapState(boolean tapped_state) {
         return tapped_state ? SoundEffectType.Tap : SoundEffectType.Untap;
     }
-    
+
     /**
      * Plays the sound corresponding to the land type when the land is played.
      *
@@ -160,7 +162,9 @@ public class EventVisualizer {
         // if there's a specific effect for this particular card, play it and
         // we're done.
         SoundEffectType specialEffect = getSpecificCardEffect(land);
-        if( specialEffect != null ) return specialEffect;
+        if (specialEffect != null) {
+            return specialEffect;
+        }
 
 
         final List<SpellAbility> manaProduced = land.getManaAbility();
@@ -209,6 +213,6 @@ public class EventVisualizer {
     public boolean isSyncSound(SoundEffectType effect) {
 
         return effect.getIsSynced();
-    }    
+    }
 
 }
