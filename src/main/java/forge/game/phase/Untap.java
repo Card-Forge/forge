@@ -321,7 +321,7 @@ public class Untap extends Phase {
             c.removeAllExtrinsicKeyword("HIDDEN This card doesn't untap during your next untap step.");
             if (c.hasKeyword("This card doesn't untap during your next two untap steps.")) {
                 c.removeAllExtrinsicKeyword("HIDDEN This card doesn't untap during your next two untap steps.");
-                c.addHiddenExtrinsicKeyword("This card doesn't untap during your next untap step.");
+                c.addHiddenExtrinsicKeyword("HIDDEN This card doesn't untap during your next untap step.");
             }
         }
     } // end doUntap
