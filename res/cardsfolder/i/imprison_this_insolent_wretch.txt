@@ -1,5 +1,5 @@
 Name:Imprison This Insolent Wretch
-ManaCost:3
+ManaCost:no cost
 Types:Ongoing Scheme
 Text:no text
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ ChooseTheWretch | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, choose an opponent.
