@@ -2519,6 +2519,10 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
                 return false;
             }
         } else if (property.equals("Opponent")) {
+            if (this.equals(sourceController) || !this.isHostileTo(sourceController)) {
+                return false;
+            }
+        } else if (property.equals("NotSelf")) {
             if (this.equals(sourceController)) {
                 return false;
             }

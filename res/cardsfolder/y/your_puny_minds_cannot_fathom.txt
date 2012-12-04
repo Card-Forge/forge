@@ -9,4 +9,5 @@ SVar:STHandSize:Mode$ Continuous | EffectZone$ Command | Affected$ You | SetMaxH
 SVar:Rarity:Common
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/your_puny_minds_cannot_fathom.jpg
 SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/your-puny-minds-cannot-fathom.jpg
+Oracle:When you set this scheme in motion, draw four cards. You have no maximum hand size until your next turn.
 End
