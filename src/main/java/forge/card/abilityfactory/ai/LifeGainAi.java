@@ -96,18 +96,19 @@ public class LifeGainAi extends SpellAiLogic {
                 && !sa.hasParam("ActivationPhases")) {
             return false;
         }
+        // Don't use lifegain before main 2 if possible
+        if (!lifeCritical && !Singletons.getModel().getGame().getPhaseHandler().getNextTurn().equals(ai)
+                && !sa.hasParam("PlayerTurn") && !AbilityFactory.isSorcerySpeed(sa)) {
+            return false;
+        }
 
         // Don't tap creatures that may be able to block
         if (ComputerUtil.waitForBlocking(sa)) {
             return false;
         }
 
-        // TODO handle proper calculation of X values based on Cost and what
-        // would be paid
-        // final int amount = calculateAmount(af.getHostCard(), amountStr, sa);
-
         // prevent run-away activations - first time will always return true
-        final boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
+        final boolean chance = r.nextFloat() <= Math.pow(.9, sa.getActivationsThisTurn());
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
