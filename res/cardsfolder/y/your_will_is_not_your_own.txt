@@ -6,6 +6,7 @@ T:Mode$ SetInMotion | Execute$ DarkEffect | TriggerZones$ Command | TriggerDescr
 SVar:DarkEffect:AB$ GainControl | Cost$ 0 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | Untap$ True | LoseControl$ EOT | SubAbility$ DBPump
 SVar:DBPump:DB$ Pump | Defined$ Targeted | NumAtt$ +3 | NumDef$ +3 | KW$ Haste & Trample
 SVar:Rarity:Common
-SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=212609&type=card
+SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/your_will_is_not_your_own.jpg
+SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/your-will-is-not-your-own.jpg
 Oracle:When you set this scheme in motion, gain control of target creature an opponent controls until end of turn. Untap that creature. It gets +3/+3 and gains haste and trample until end of turn.
 End

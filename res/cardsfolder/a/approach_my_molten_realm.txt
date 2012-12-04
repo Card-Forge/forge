@@ -10,7 +10,7 @@ SVar:DmgTimes2:AB$ DealDamage | Cost$ 0 | Defined$ ReplacedTarget | DamageSource
 SVar:DmgTimes2Combat:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | NumDmg$ MoltenX | References$ MoltenX
 SVar:MoltenX:ReplaceCount$DamageAmount/Twice
 SVar:Rarity:Common
-SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=212591&type=card
+SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/approach_my_molten_realm.jpg
 SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/approach-my-molten-realm.jpg
 Oracle:When you set this scheme in motion, until your next turn, if a source would deal damage, it deals double that damage instead.
 End

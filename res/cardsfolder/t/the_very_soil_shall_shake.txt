@@ -6,7 +6,7 @@ S:Mode$ Continuous | Affected$ Creature.YouCtrl | EffectZone$ Command | AddPower
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | Execute$ Abandon | TriggerDescription$ When a creature you control dies, abandon this scheme.
 SVar:Abandon:AB$ Abandon | Cost$ 0
 SVar:Rarity:Common
-SVar:Picture:http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=212615&type=card
+SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/the_very_soil_shall_shake.jpg
 SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/the-very-soil-shall-shake.jpg
 Oracle:(An ongoing scheme remains face up until it's abandoned.)\nCreatures you control get +2/+2 and have trample.\nWhen a creature you control dies, abandon this scheme.
 End
