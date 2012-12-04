@@ -1,0 +1,13 @@
+Name:My Wish Is Your Command
+ManaCost:no cost
+Types:Scheme
+Text:no text
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ MyWish | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, each opponent reveals his or her hand. You may choose a noncreature, nonland card revealed this way and cast it without paying its mana cost.
+SVar:MyWish:AB$ RevealHand | Cost$ 0 | Defined$ Player.Opponent | RememberRevealed$ True | SubAbility$ MyPleasure
+SVar:MyPleasure:DB$ Play | Valid$ Card.nonCreature+nonLand+IsRemembered | WithoutManaCost$ True | Optional$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Rarity:Common
+SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/my_wish_is_your_command.jpg
+SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/my-wish-is-your-command.jpg
+Oracle:When you set this scheme in motion, each opponent reveals his or her hand. You may choose a noncreature, nonland card revealed this way and cast it without paying its mana cost.
+End
