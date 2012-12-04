@@ -13,14 +13,6 @@ import forge.game.player.Player;
 public class DamagePreventAllAi extends SpellAiLogic {
 
     /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
-     */
-    @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        return true;
-    }
-
-    /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
     @Override

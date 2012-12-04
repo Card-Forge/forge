@@ -77,6 +77,7 @@ public class SacrificeAllAi extends SpellAiLogic {
 
     @Override
     public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
+        //TODO: Add checks for bad outcome
         return true;
     }
 }

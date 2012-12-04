@@ -57,11 +57,6 @@ public class TwoPilesAi extends SpellAiLogic  {
         return size > 2;
     }
 
-    @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        return true;
-    }
-
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.SpellAiLogic#doTriggerAINoCost(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility, boolean)
      */

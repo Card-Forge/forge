@@ -15,14 +15,6 @@ public class CanPlayAsDrawbackAi extends SpellAiLogic {
         return false;
     }
 
-    /* (non-Javadoc)
-     * @see forge.card.abilityfactory.SpellAiLogic#chkAIDrawback(java.util.Map, forge.card.spellability.SpellAbility, forge.game.player.Player)
-     */
-    @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        return true;
-    }
-
     /**
      * <p>
      * copySpellTriggerAI.

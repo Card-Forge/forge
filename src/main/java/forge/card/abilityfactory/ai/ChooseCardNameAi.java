@@ -9,11 +9,6 @@ import forge.game.player.Player;
 public class ChooseCardNameAi extends SpellAiLogic {
 
     @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        return true;
-    }
-
-    @Override
     protected boolean canPlayAI(Player ai, SpellAbility sa) {
 
         if (sa.hasParam("AILogic")) {

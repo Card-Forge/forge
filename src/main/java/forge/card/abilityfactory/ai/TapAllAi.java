@@ -146,10 +146,4 @@ public class TapAllAi extends SpellAiLogic {
 
         return false;
     }
-
-    @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        return true;
-    }
-
 }

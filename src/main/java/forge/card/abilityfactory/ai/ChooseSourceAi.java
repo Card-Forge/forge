@@ -123,9 +123,4 @@ public class ChooseSourceAi extends SpellAiLogic {
 
         return true;
     }
-
-    @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
-        return true;
-    }
 }

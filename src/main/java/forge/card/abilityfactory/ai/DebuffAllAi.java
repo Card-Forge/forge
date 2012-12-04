@@ -63,21 +63,4 @@ public class DebuffAllAi extends SpellAiLogic {
     protected boolean doTriggerAINoCost(Player aiPlayer, SpellAbility sa, boolean mandatory) {
         return true;
     }
-
-    /**
-     * <p>
-     * debuffAllChkDrawbackAI.
-     * </p>
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param af
-     *            a {@link forge.card.abilityfactory.AbilityFactory} object.
-     * 
-     * @return a boolean.
-     */
-    @Override
-    public boolean chkAIDrawback(SpellAbility sa, Player aiPlayer) {
-        return true;
-    }
-
 }
