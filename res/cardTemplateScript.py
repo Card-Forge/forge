@@ -361,7 +361,12 @@ while inputName != 'quit' :
                                 setInfoStr = 'SetInfo:'+edition[0]+'|'+rarity+'|'+'http://dummy.com/dummy.jpg'
                                 setInfo.append(setInfoStr)
                 print 'SVar:Rarity:'+rarity
-                print 'SVar:Picture:http://www.wizards.com/global/images/magic/general/'+cleanName+'.jpg'
+                if cardData.types.find('Scheme') != -1 :
+                        print 'SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/'+cleanName+'.jpg'
+                elif cardData.types.find('Vanguard') != -1 :
+						print 'SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/'+cleanName+'.jpg'
+                else :
+						print 'SVar:Picture:http://www.wizards.com/global/images/magic/general/'+cleanName+'.jpg'
                 print 'End\n'
         else :
                 print inputName+' not found\n'
