@@ -4,7 +4,7 @@ Types:Artifact Creature Myr
 Text:no text
 PT:1/3
 A:AB$ Pump | Cost$ T | ValidTgts$ Equipment.YouCtrl | TgtPrompt$ Select target equipment you control | SubAbility$ BrassSquireAttach | StackDescription$ None | SpellDescription$ Attach target Equipment you control to target creature you control.
-SVar:BrassSquireAttach:DB$ Attach | Object$ Targeted | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control.
+SVar:BrassSquireAttach:DB$ Attach | Object$ ParentTarget | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/brass_squire.jpg
