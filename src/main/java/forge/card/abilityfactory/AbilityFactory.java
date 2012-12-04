@@ -1123,7 +1123,7 @@ public class AbilityFactory {
             }
 
             if (defined.equals("Opponent") || defined.equals("Each")) {
-                players.add(sa.getActivatingPlayer().getOpponent());
+                players.addAll(sa.getActivatingPlayer().getOpponents());
             }
         } else {
             for (Player p : Singletons.getModel().getGame().getPlayers()) {
