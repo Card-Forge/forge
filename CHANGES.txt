@@ -111,6 +111,18 @@ Fixes/Features:
 - Added AILogic parameter to AF TwoPiles.
 - Added the parameter "UnlessSwitched" to SpellAbilities (to switch paid and unpaid commands).
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Expanded checkDiscardCost.
+- Fixed Bloodthirst overwriting the X SVar.
+- Fixed StackDescription of AF PumpAll.
+- Fixed Venser, the Sojourner emblem name.
+- Schemes: Changed DefinedPlayer Opponent so that it adds all opponents
+- Added a NeedsToPlay SVar to Sunken City.
+- Added a chkAIDrawback function to AF LoseLife.
+- Schemes: Changed LQ image links to better images. Can be used as template for other schemes
+- Fixed Brass Squire.
+- Removed some unnecessary chkAIDrawback overrides.
+- Updated cardTemplateScript to automatically add correct LQ pic urls.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -135,6 +147,10 @@ Perhaps You've Met My Cohort
 Tooth, Claw, and Tail
 Your Will Is Not Your Own
 Plots That Span Centuries
+All Shall Smolder in My Wake
+Approach My Molten Realm
+Embrace My Diabolical Vision
+Your Puny Minds Cannot Fathom
 
 
 Added the following Vanguard Avatars:
@@ -161,6 +177,12 @@ Riptide Mangler
 Wand of Ith
 Consecrate Land
 Dash Hopes
+Phantasmagorian
+Brain Gorgers
+Barbarian Bully
+Cursed Monstrosity
+Dong Zhou, the Tyrant
+Kithkin Zealot
 
 
 end
