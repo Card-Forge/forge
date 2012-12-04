@@ -18,6 +18,35 @@ import forge.util.MyRandom;
 
 public class LifeLoseAi extends SpellAiLogic {
 
+    @Override
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+
+        final Target tgt = sa.getTarget();
+        ArrayList<Player> tgtPlayers;
+        if (tgt != null) {
+            tgtPlayers = tgt.getTargetPlayers();
+        } else {
+            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
+        }
+
+        final Card source = sa.getSourceCard();
+        final String amountStr = sa.getParam("LifeAmount");
+        int amount = 0;
+        if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
+            // Set PayX here to maximum value.
+            final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
+            source.setSVar("PayX", Integer.toString(xPay));
+            amount = xPay;
+        } else {
+            amount = AbilityFactory.calculateAmount(source, amountStr, sa);
+        }
+
+        if (tgtPlayers.contains(ai) && amount > 0 && amount + 3 > ai.getLife()) {
+            return false;
+        }
+        return true;
+    }
+
     /* (non-Javadoc)
      * @see forge.card.abilityfactory.AbilityFactoryAlterLife.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
      */
@@ -141,11 +170,9 @@ public class LifeLoseAi extends SpellAiLogic {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
 
-        if (!mandatory && tgtPlayers.contains(ai)) {
+        if (!mandatory && tgtPlayers.contains(ai) && amount > 0 && amount + 3 > ai.getLife()) {
             // For cards like Foul Imp, ETB you lose life
-            if ((amount + 3) > ai.getLife()) {
-                return false;
-            }
+            return false;
         }
 
         return true;
