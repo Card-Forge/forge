@@ -1,0 +1,15 @@
+Name:Dong Zhou, the Tyrant
+ManaCost:4 R
+Types:Legendary Creature Human Soldiers
+Text:no text
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDmgOpp | TriggerDescription$ When CARDNAME enters the battlefield, target creature an opponent controls deals damage equal to its power to that player.
+SVar:TrigDmgOpp:AB$ Pump | Cost$ 0 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target target creature an opponent controls | RememberObjects$ Targeted | SubAbility$ DBDmgOpp | StackDescription$ None | IsCurse$ True | SpellDescription$ Target creature an opponent controls deals damage equal to its power to that player.
+SVar:DBDmgOpp:DB$ DealDamage | DamageSource$ Remembered | Defined$ RememberedController | NumDmg$ X | SubAbility$ DBCleanup | References$ X
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$CardPower
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dong_zhou_the_tyrant.jpg
+SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/109.jpg
+Oracle:When Dong Zhou, the Tyrant enters the battlefield, target creature an opponent controls deals damage equal to its power to that player.
+End

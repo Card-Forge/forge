@@ -723,6 +723,7 @@ res/cardsfolder/b/bant_panorama.txt svneol=native#text/plain
 res/cardsfolder/b/bant_sojourners.txt svneol=native#text/plain
 res/cardsfolder/b/bant_sureblade.txt svneol=native#text/plain
 res/cardsfolder/b/bar_the_door.txt -text
+res/cardsfolder/b/barbarian_bully.txt -text
 res/cardsfolder/b/barbarian_general.txt svneol=native#text/plain
 res/cardsfolder/b/barbarian_horde.txt svneol=native#text/plain
 res/cardsfolder/b/barbarian_lunatic.txt svneol=native#text/plain
@@ -2116,6 +2117,7 @@ res/cardsfolder/c/cursebreak.txt -text
 res/cardsfolder/c/cursecatcher.txt svneol=native#text/plain
 res/cardsfolder/c/cursed_flesh.txt svneol=native#text/plain
 res/cardsfolder/c/cursed_land.txt svneol=native#text/plain
+res/cardsfolder/c/cursed_monstrosity.txt -text
 res/cardsfolder/c/cursed_rack.txt svneol=native#text/plain
 res/cardsfolder/c/cursed_ronin.txt svneol=native#text/plain
 res/cardsfolder/c/cursed_scroll.txt svneol=native#text/plain
@@ -2592,6 +2594,7 @@ res/cardsfolder/d/dominating_licid.txt -text
 res/cardsfolder/d/domineer.txt svneol=native#text/plain
 res/cardsfolder/d/dominus_of_fealty.txt svneol=native#text/plain
 res/cardsfolder/d/donate.txt svneol=native#text/plain
+res/cardsfolder/d/dong_zhou_the_tyrant.txt -text
 res/cardsfolder/d/doom_blade.txt svneol=native#text/plain
 res/cardsfolder/d/doom_cannon.txt -text
 res/cardsfolder/d/doomed_necromancer.txt svneol=native#text/plain
@@ -5377,6 +5380,7 @@ res/cardsfolder/k/kithkin_healer.txt svneol=native#text/plain
 res/cardsfolder/k/kithkin_rabble.txt svneol=native#text/plain
 res/cardsfolder/k/kithkin_shielddare.txt svneol=native#text/plain
 res/cardsfolder/k/kithkin_spellduster.txt svneol=native#text/plain
+res/cardsfolder/k/kithkin_zealot.txt -text
 res/cardsfolder/k/kithkin_zephyrnaut.txt svneol=native#text/plain
 res/cardsfolder/k/kitsune_blademaster.txt svneol=native#text/plain
 res/cardsfolder/k/kitsune_bonesetter.txt -text
