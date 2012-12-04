@@ -38,6 +38,7 @@ import forge.card.cost.CostPart;
 import forge.card.cost.CostPayLife;
 import forge.card.cost.CostMana;
 import forge.card.cost.CostPutCounter;
+import forge.card.cost.CostRemoveCounter;
 import forge.card.cost.CostReturn;
 import forge.card.cost.CostSacrifice;
 import forge.card.cost.CostUtil;
@@ -377,6 +378,7 @@ public final class GameActionUtil {
             final Command unpaid, SpellAbility sourceAbility) {
         final Card source = ability.getSourceCard();
         final ArrayList<CostPart> parts =  cost.getCostParts();
+        Player p = Singletons.getControl().getPlayer();
         ArrayList<CostPart> remainingParts =  new ArrayList<CostPart>(cost.getCostParts());
         CostPart costPart = null;
         if (!parts.isEmpty()) {
@@ -402,7 +404,6 @@ public final class GameActionUtil {
 
                 final int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
                         : AbilityFactory.calculateAmount(source, amountString, sourceAbility);
-                Player p = Singletons.getControl().getPlayer();
                 if (p.canPayLife(amount) && showYesNoDialog(source, "Do you want to pay " + amount + " life?" + orString)) {
                     p.payLife(amount, null);
                 } else {
@@ -416,7 +417,6 @@ public final class GameActionUtil {
                 String amountString = part.getAmount();
                 final int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
                         : CardFactoryUtil.xCount(source, source.getSVar(amountString));
-                Player p = Singletons.getControl().getPlayer();
                 if (p.canPayLife(amount) && showYesNoDialog(source, "Do you want " + source + " to deal " + amount + " damage to you?")) {
                     p.addDamage(amount, source);
                 } else {
@@ -449,8 +449,24 @@ public final class GameActionUtil {
                 remainingParts.remove(part);
             }
 
+            else if (part instanceof CostRemoveCounter) {
+                String amountString = part.getAmount();
+                CounterType counterType = ((CostRemoveCounter) part).getCounter();
+                int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
+                        : CardFactoryUtil.xCount(source, source.getSVar(amountString));
+                String plural = amount > 1 ? "s" : "";
+                if (part.canPay(sourceAbility, source, p, cost) && 
+                        showYesNoDialog(source, "Do you want to remove " + amount + " " + counterType.getName()
+                        + " counter" + plural + " from " + source + "?")) {
+                    source.subtractCounter(counterType, amount);
+                } else {
+                    hasPaid = false;
+                    break;
+                }
+                remainingParts.remove(part);
+            }
+
             else if (part instanceof CostExile) {
-                Player p = Singletons.getControl().getPlayer();
                 if ("All".equals(part.getType())) {
                     if (showYesNoDialog(source, "Do you want to exile all cards in your graveyard?")) {
                         List<Card> cards = new ArrayList<Card>(p.getCardsIn(ZoneType.Graveyard));
@@ -488,9 +504,7 @@ public final class GameActionUtil {
             }
 
             else if (part instanceof CostSacrifice) {
-
                 CostSacrifice sacCost = (CostSacrifice) part;
-                Player p = Singletons.getControl().getPlayer();
                 String valid = sacCost.getType();
                 int amount = Integer.parseInt(sacCost.getAmount());
                 List<Card> list = AbilityFactory.filterListByType(p.getCardsIn(ZoneType.Battlefield), valid, ability);
