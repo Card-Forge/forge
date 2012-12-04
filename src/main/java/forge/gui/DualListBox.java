@@ -22,6 +22,12 @@ import javax.swing.event.ListSelectionListener;
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 import forge.gui.match.CMatchUI;
+import forge.gui.toolbox.FButton;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FList;
+import forge.gui.toolbox.FPanel;
+import forge.gui.toolbox.FScrollPane;
+import forge.gui.toolbox.FSkin;
 
 // An input box for handling the order of choices.
 // Left box has the original choices
@@ -34,25 +40,25 @@ import forge.gui.match.CMatchUI;
 // Single ok button, disabled until left box is empty
 
 @SuppressWarnings("serial")
-public class DualListBox<T> extends JPanel {
-    private JList sourceList;
+public class DualListBox<T> extends FPanel {
+    private FList sourceList;
 
     private UnsortedListModel<T> sourceListModel;
 
-    private JList destList;
+    private FList destList;
 
     private UnsortedListModel<T> destListModel;
 
-    private JButton addButton;
-    private JButton addAllButton;
+    private FButton addButton;
+    private FButton addAllButton;
 
-    private JButton removeButton;
-    private JButton removeAllButton;
+    private FButton removeButton;
+    private FButton removeAllButton;
 
-    private JButton okButton;
-    private JButton autoButton;
+    private FButton okButton;
+    private FButton autoButton;
 
-    private JLabel orderedLabel;
+    private FLabel orderedLabel;
 
     private int remainingObjects = 0;
 
@@ -161,48 +167,53 @@ public class DualListBox<T> extends JPanel {
     private void initScreen() {
         setPreferredSize(new Dimension(650, 300));
         setLayout(new GridLayout(0, 3));
+        setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME));
+        setForeground(FSkin.getColor(FSkin.Colors.CLR_TEXT));
         sourceListModel = new UnsortedListModel<T>();
-        sourceList = new JList(sourceListModel);
+        sourceList = new FList(sourceListModel);
 
         // Dual List control buttons
-        addButton = new JButton(">");
+        addButton = new FButton(">");
         addButton.addActionListener(new AddListener());
-        addAllButton = new JButton(">>");
+        addAllButton = new FButton(">>");
         addAllButton.addActionListener(new AddAllListener());
-        removeButton = new JButton("<");
+        removeButton = new FButton("<");
         removeButton.addActionListener(new RemoveListener());
-        removeAllButton = new JButton("<<");
+        removeAllButton = new FButton("<<");
         removeAllButton.addActionListener(new RemoveAllListener());
 
         // Dual List Complete Buttons
-        okButton = new JButton("OK");
+        okButton = new FButton("OK");
         okButton.addActionListener(new OkListener());
 
-        autoButton = new JButton("Auto");
+        autoButton = new FButton("Auto");
         autoButton.addActionListener(new AutoListener());
 
         destListModel = new UnsortedListModel<T>();
-        destList = new JList(destListModel);
+        destList = new FList(destListModel);
 
-        JPanel leftPanel = new JPanel(new BorderLayout());
+        FPanel leftPanel = new FPanel(new BorderLayout());
+        FLabel selectOrder = new FLabel.Builder().build();
+        selectOrder.setText("Select Order:");
         leftPanel.setSize(300, 300);
-        leftPanel.add(new JLabel("Select Order:"), BorderLayout.NORTH);
-        leftPanel.add(new JScrollPane(sourceList), BorderLayout.CENTER);
+        leftPanel.add(selectOrder, BorderLayout.NORTH);
+        leftPanel.add(new FScrollPane(sourceList), BorderLayout.CENTER);
         leftPanel.add(okButton, BorderLayout.SOUTH);
 
-        JPanel centerPanel = new JPanel(new GridLayout(5, 1));
+        FPanel centerPanel = new FPanel(new GridLayout(5, 1));
         centerPanel.setSize(50, this.getHeight());
         centerPanel.add(addButton);
         centerPanel.add(addAllButton);
         centerPanel.add(removeButton);
         centerPanel.add(removeAllButton);
 
-        orderedLabel = new JLabel("Selected Elements:");
+        orderedLabel = new FLabel.Builder().build();
+        orderedLabel.setText("Selected Elements:");
 
-        JPanel rightPanel = new JPanel(new BorderLayout());
+        FPanel rightPanel = new FPanel(new BorderLayout());
         rightPanel.setSize(300, 300);
         rightPanel.add(orderedLabel, BorderLayout.NORTH);
-        rightPanel.add(new JScrollPane(destList), BorderLayout.CENTER);
+        rightPanel.add(new FScrollPane(destList), BorderLayout.CENTER);
         rightPanel.add(autoButton, BorderLayout.SOUTH);
 
         add(leftPanel);
