@@ -231,7 +231,7 @@ public enum CCurrentDeck implements ICDoc {
 
     private File getPrintProxiesFilename() {
         final JFileChooser save = new JFileChooser(previousDirectory);
-        save.setDialogTitle("Print Proxes");
+        save.setDialogTitle("Print Proxies");
         save.setDialogType(JFileChooser.SAVE_DIALOG);
         save.setFileFilter(DeckSerializer.HTML_FILTER);
 
