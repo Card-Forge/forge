@@ -465,6 +465,7 @@ public class CombatUtil {
 
             List<Card> orderedAttacker = null;
             if (blocker.getController().isHuman()) {
+                GuiUtils.setPanelSelection(blocker);
                 List<Card> ordered = GuiChoose.getOrderChoices("Choose Blocking Order", "Damaged First", 0, attackers, null, blocker);
 
                 orderedAttacker = new ArrayList<Card>();
