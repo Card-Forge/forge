@@ -43,12 +43,16 @@ import forge.util.MyRandom;
 
 public class DrawAi extends SpellAiLogic {
 
-    /* (non-Javadoc)
-         * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
-         */
-        @Override
-        protected boolean canPlayAI(Player ai, SpellAbility sa) {
+    @Override
+    public boolean chkAIDrawback(SpellAbility sa, Player ai) {
+        return targetAI(ai, sa, false);
+    }
 
+    /* (non-Javadoc)
+     * @see forge.card.abilityfactory.SpellAiLogic#canPlayAI(forge.game.player.Player, java.util.Map, forge.card.spellability.SpellAbility)
+     */
+    @Override
+    protected boolean canPlayAI(Player ai, SpellAbility sa) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
         final Cost abCost = sa.getPayCosts();
@@ -102,9 +106,10 @@ public class DrawAi extends SpellAiLogic {
                 && !sa.hasParam("ActivationPhases")) {
             return false;
         }
-        if (!Singletons.getModel().getGame().getPhaseHandler().getNextTurn().equals(ai)
+        if ((!Singletons.getModel().getGame().getPhaseHandler().getNextTurn().equals(ai)
+                    || Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
                 && !sa.hasParam("PlayerTurn") && !AbilityFactory.isSorcerySpeed(sa) 
-                && ai.getCardsIn(ZoneType.Hand).size() < 2) {
+                && ai.getCardsIn(ZoneType.Hand).size() > 1) {
             return false;
         }
 
@@ -135,7 +140,7 @@ public class DrawAi extends SpellAiLogic {
     private boolean targetAI(final Player ai, final SpellAbility sa, final boolean mandatory) {
         final Target tgt = sa.getTarget();
         final Card source = sa.getSourceCard();
-
+        final boolean drawback = (sa instanceof AbilitySub);
         Player opp = ai.getOpponent();
 
         int computerHandSize = ai.getCardsIn(ZoneType.Hand).size();
@@ -216,7 +221,7 @@ public class DrawAi extends SpellAiLogic {
                 }
             }
 
-            if (numCards == 0 && !mandatory) {
+            if (numCards == 0 && !mandatory && !drawback) {
                 return false;
             }
 
@@ -227,27 +232,25 @@ public class DrawAi extends SpellAiLogic {
             } else {
                 return false;
             }
-        } else {
+        } else if (!mandatory) {
             // TODO: consider if human is the defined player
 
             // ability is not targeted
             if (numCards >= computerLibrarySize) {
                 // Don't deck yourself
-                if (!mandatory) {
-                    return false;
-                }
-            }
-
-            if (numCards == 0 && !mandatory) {
                 return false;
             }
 
-            if (((computerHandSize + numCards) > computerMaxHandSize)
+            if (numCards == 0  && !drawback) {
+                return false;
+            }
+
+            if ((computerHandSize + numCards > computerMaxHandSize)
                     && Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().isComputer()
                     && !sa.isTrigger()) {
                 // Don't draw too many cards and then risk discarding cards at
                 // EOT
-                if (!(sa.hasParam("NextUpkeep") || (sa instanceof AbilitySub)) && !mandatory) {
+                if (!sa.hasParam("NextUpkeep") && !drawback) {
                     return false;
                 }
             }

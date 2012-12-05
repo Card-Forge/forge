@@ -98,8 +98,8 @@ public class ChooseCardEffect extends SpellEffect {
                             }
                             choice = CardFactoryUtil.getBestCreatureAI(choices);
                         } else if (logic.equals("Clone")) {
-                            if (!CardLists.getValidCards(choices, "Permanent.YouDontCtrl,Permanent.NonLegendary", host.getController(), host).isEmpty()) {
-                                choices = CardLists.getValidCards(choices, "Permanent.YouDontCtrl,Permanent.NonLegendary", host.getController(), host);
+                            if (!CardLists.getValidCards(choices, "Permanent.YouDontCtrl,Permanent.nonLegendary", host.getController(), host).isEmpty()) {
+                                choices = CardLists.getValidCards(choices, "Permanent.YouDontCtrl,Permanent.nonLegendary", host.getController(), host);
                             }
                             choice = CardFactoryUtil.getBestAI(choices);
                         }
