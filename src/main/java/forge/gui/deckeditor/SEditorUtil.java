@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import forge.Command;
 
 
 import forge.card.CardRulesPredicates;
@@ -13,6 +14,7 @@ import forge.card.CardRules;
 import forge.gui.deckeditor.views.ITableContainer;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
+import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.item.InventoryItem;
 import forge.item.ItemPoolView;
@@ -137,5 +139,9 @@ public final class SEditorUtil  {
 
         VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("Card Catalog");
         VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText("Current Deck");
+
+        ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnSave())
+            .setCommand(new Command() { @Override
+                public void execute() { SEditorIO.saveDeck(); } });
     }
 }

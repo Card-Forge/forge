@@ -100,6 +100,20 @@ public class SEditorIO {
      */
     @SuppressWarnings("unchecked")
     public static boolean saveDeck() {
+        return saveDeck(false);
+    }
+
+    /**
+     * Saves the current deck, with various prompts depending on the
+     * current save environment.
+     * 
+     * @param limitedDeckMode if true, the editor is in limited deck mode, 
+     * so the overwrite prompt should be adjusted accordingly.
+     * 
+     * @return boolean, true if success
+     */
+    @SuppressWarnings("unchecked")
+    public static boolean saveDeck(boolean limitedDeckMode) {
         final DeckController<DeckBase> controller = (DeckController<DeckBase>) CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getDeckController();
         final String name = VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().getText();
 
@@ -114,8 +128,9 @@ public class SEditorIO {
         // Confirm if overwrite
         else if (controller.fileExists(name)) {
             final int m = JOptionPane.showConfirmDialog(null,
+                    limitedDeckMode ? "Would you like to save changes to your deck?" : 
                     "There is already a deck named '" + name + "'. Overwrite?",
-                    "Overwrite Deck?",
+                    limitedDeckMode ? "Save changes?" : "Overwrite Deck?",
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE);
 

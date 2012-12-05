@@ -18,6 +18,7 @@
 package forge.gui.deckeditor.controllers;
 
 import com.google.common.base.Supplier;
+import forge.Command;
 
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
@@ -30,6 +31,7 @@ import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.home.sanctioned.CSubmenuDraft;
 import forge.gui.home.sanctioned.CSubmenuSealed;
+import forge.gui.toolbox.FLabel;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.util.IStorage;
@@ -151,7 +153,10 @@ public final class CEditorLimited extends ACEditorBase<CardPrinted, DeckGroup> {
         SEditorUtil.resetUI();
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(false);
-        VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(false);
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(true);
+        ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnSave())
+            .setCommand(new Command() { @Override
+                public void execute() { SEditorIO.saveDeck(true); } });
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().setVisible(false);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnNew().setVisible(false);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().setVisible(false);
