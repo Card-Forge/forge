@@ -123,6 +123,20 @@ Fixes/Features:
 - Removed some unnecessary chkAIDrawback overrides.
 - Updated cardTemplateScript to automatically add correct LQ pic urls.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Schemes: Added player property NotSelf
+- Schemes: removed early debugging cost for Imprison This Insolent Wretch that I forgot to revert
+- Added CostRemoveCounter to payCostDuringAbilityResolve.
+- GUI: Themed order selection window.
+- Fix imports.
+- Schemes: Renamed player property NotSelf to Other
+- Removed duplicate StackDescription of SubAbilities from AF ChangeZone.
+- Schemes: Reverted my earlier change to getDefinedPlayers:Opponent. (Will slowly go through each case after merging at a later stage to make multiplayer compatible using Player.Other or Player.Opponent where applicable)
+- Little CanPlayAI updates.
+- Fixed Telekinesis.
+- Added an easy version of the Gold Finger opponent.
+- Schemes:Merged in r18521-18589 from trunk
+- Fixed Repay in Kind for multiplayer
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -151,6 +165,13 @@ All Shall Smolder in My Wake
 Approach My Molten Realm
 Embrace My Diabolical Vision
 Your Puny Minds Cannot Fathom
+Imprison This Insolent Wretch
+Your Fate Is Thrice Sealed
+The Pieces Are Coming Together
+My Wish Is Your Command
+Nothing Can Stop Me Now
+Dance, Pathetic Marionette
+Mortal Flesh Is Weak
 
 
 Added the following Vanguard Avatars:
@@ -183,6 +204,8 @@ Barbarian Bully
 Cursed Monstrosity
 Dong Zhou, the Tyrant
 Kithkin Zealot
+Junk Golem
+Retether
 
 
 end
