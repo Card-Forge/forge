@@ -8041,6 +8041,7 @@ res/cardsfolder/r/resuscitate.txt svneol=native#text/plain
 res/cardsfolder/r/retaliate.txt svneol=native#text/plain
 res/cardsfolder/r/retaliation.txt -text svneol=unset#text/plain
 res/cardsfolder/r/retaliator_griffin.txt -text
+res/cardsfolder/r/retether.txt -text
 res/cardsfolder/r/rethink.txt -text
 res/cardsfolder/r/retraced_image.txt -text svneol=unset#text/plain
 res/cardsfolder/r/retract.txt svneol=native#text/plain
