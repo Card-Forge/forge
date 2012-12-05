@@ -52,7 +52,7 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
     private final JList lstAI = new FList();
 
     private final JRadioButton radSingle = new FRadioButton("Play one opponent");
-    private final JRadioButton radAll = new FRadioButton("Play all 8 opponents");
+    private final JRadioButton radAll = new FRadioButton("Play all 7 opponents");
 
     private final JLabel lblInfo = new FLabel.Builder()
         .fontAlign(SwingConstants.LEFT).fontSize(16).fontStyle(Font.BOLD)
