@@ -1,0 +1,13 @@
+Name:Dance, Pathetic Marionette
+ManaCost:no cost
+Types:Scheme
+Text:no text
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ LibraryDance | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, each opponent reveals cards from the top of his or her library until he or she reveals a creature card. Choose one of the revealed creature cards and put it onto the battlefield under your control. Put all other cards revealed this way into their owners' graveyards.
+SVar:LibraryDance:AB$ DigUntil | Cost$ 0 | Defined$ Player.Opponent | Valid$ Creature | ValidDescription$ creature | RememberFound$ True | NoMoveFound$ True | FoundDestination$ Library | FoundLibraryPosition$ 0 | RevealedDestination$ Graveyard | SubAbility$ MakeItDance
+SVar:MakeItDance:DB$ ChangeZone | Defined$ Remembered | ChangeNum$ 1 | Origin$ Library | Destination$ Battlefield | Mandatory$ True | SelectPrompt$ Choose one of the revealed creature cards: | GainControl$ True | ForgetChanged$ True | SubAbility$ TakeOutTheTrash
+SVar:TakeOutTheTrash:DB$ ChangeZoneAll | ChangeType$ Card.IsRemembered | Origin$ Library | Destination$ Graveyard | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Rarity:Common
+SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/dance_pathetic_marionette.jpg
+SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/dance-pathetic-marionette.jpg
+End

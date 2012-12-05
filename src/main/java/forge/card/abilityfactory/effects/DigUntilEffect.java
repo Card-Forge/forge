@@ -133,6 +133,8 @@ public class DigUntilEffect extends SpellEffect {
                         if (sa.hasParam("GainControl") && foundDest.equals(ZoneType.Battlefield)) {
                             c.addController(sa.getSourceCard());
                             Singletons.getModel().getGame().getAction().moveTo(c.getController().getZone(foundDest), c);
+                        } else if (sa.hasParam("NoMoveFound") && foundDest.equals(ZoneType.Library)) {
+                            //Don't do anything
                         } else {
                             Singletons.getModel().getGame().getAction().moveTo(foundDest, c, foundLibPos);
                         }
