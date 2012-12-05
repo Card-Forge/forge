@@ -10,4 +10,5 @@ SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/dance_pathetic_marionette.jpg
 SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/dance-pathetic-marionette.jpg
+Oracle:When you set this scheme in motion, each opponent reveals cards from the top of his or her library until he or she reveals a creature card. Choose one of the revealed creature cards and put it onto the battlefield under your control. Put all other cards revealed this way into their owners' graveyards.
 End

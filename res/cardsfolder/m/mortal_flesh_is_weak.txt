@@ -1,0 +1,12 @@
+Name:Mortal Flesh Is Weak
+ManaCost:no cost
+Types:Scheme
+Text:no text
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ ShowTheWeakness | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, each opponent's life total becomes the lowest life total among your opponents.
+SVar:ShowTheWeakness:AB$ SetLife | Cost$ 0 | Defined$ Player.Opponent | LifeAmount$ X | References$ X
+SVar:X:Count$LowestLifeTotal Opponent
+SVar:Rarity:Common
+SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/mortal_flesh_is_weak.jpg
+SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/mortal-flesh-is-weak.jpg
+Oracle:When you set this scheme in motion, each opponent's life total becomes the lowest life total among your opponents.
+End
