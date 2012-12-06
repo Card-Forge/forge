@@ -116,7 +116,7 @@ public abstract class GenerateColoredDeckBase {
             }
 
             Card tCard = c.toForgeCard();
-            tCard.setCurSetCode(Aggregates.random(c.toForgeCard().getSets()).getCode());
+            tCard.setRandomSetCode();
             
             tDeck.add(CardDb.instance().getCard(tCard));
             final int n = this.cardCounts.get(c.getName());
@@ -137,7 +137,7 @@ public abstract class GenerateColoredDeckBase {
             // not an error if looped too much - could play singleton mode, with 6 slots for 3 non-basic lands.
 
             Card tCard = CardDb.instance().getCard(s).toForgeCard();
-            tCard.setCurSetCode(Aggregates.random(tCard.getSets()).getCode());
+            tCard.setRandomSetCode();
 
             tDeck.add(CardDb.instance().getCard(tCard));
             final int n = this.cardCounts.get(s);
@@ -174,7 +174,7 @@ public abstract class GenerateColoredDeckBase {
             this.cardCounts.put(color, nLand);
 
             Card tCard = CardDb.instance().getCard(color).toForgeCard();
-            tCard.setCurSetCode(Aggregates.random(tCard.getSets()).getCode());
+            tCard.setRandomSetCode();
             for (int j = 0; j <= nLand; j++) {
                 tDeck.add(CardDb.instance().getCard(tCard));
             }
