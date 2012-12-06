@@ -1066,6 +1066,7 @@ public class ChangeZoneAi extends SpellAiLogic {
         final Target tgt = sa.getTarget();
         final Card card = sa.getSourceCard();
         final boolean defined = sa.hasParam("Defined");
+        final Player activator = sa.getActivatingPlayer();
 
         if (tgt != null) {
             if (!tgt.getTargetPlayers().isEmpty()) {
@@ -1146,7 +1147,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                             return true;
                         }
                     });
-                    if (player.isHuman() && sa.hasParam("GainControl")) {
+                    if (player.isHuman() && sa.hasParam("GainControl") && activator.equals(ai)) {
                         fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
                             @Override
                             public boolean apply(final Card c) {
@@ -1171,7 +1172,11 @@ public class ChangeZoneAi extends SpellAiLogic {
                 } else if (ZoneType.Hand.equals(destination) && CardLists.getNotType(fetchList, "Creature").size() == 0) {
                     c = chooseCreature(ai, fetchList);
                 } else if (ZoneType.Battlefield.equals(destination) || ZoneType.Graveyard.equals(destination)) {
-                    c = CardFactoryUtil.getBestAI(fetchList);
+                    if (!activator.equals(ai) && sa.hasParam("GainControl")) {
+                        c = CardFactoryUtil.getWorstAI(fetchList);
+                    } else {
+                        c = CardFactoryUtil.getBestAI(fetchList);
+                    }
                 } else {
                     // Don't fetch another tutor with the same name
                     List<Card> sameNamed = CardLists.filter(fetchList, Predicates.not(CardPredicates.nameEquals(card.getName())));

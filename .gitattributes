@@ -8572,6 +8572,7 @@ res/cardsfolder/s/scroll_of_griselbrand.txt -text
 res/cardsfolder/s/scroll_of_origins.txt -text
 res/cardsfolder/s/scroll_rack.txt svneol=native#text/plain
 res/cardsfolder/s/scroll_thief.txt svneol=native#text/plain
+res/cardsfolder/s/scrounge.txt -text
 res/cardsfolder/s/scrubland.txt svneol=native#text/plain
 res/cardsfolder/s/scryb_ranger.txt svneol=native#text/plain
 res/cardsfolder/s/scryb_sprites.txt svneol=native#text/plain
