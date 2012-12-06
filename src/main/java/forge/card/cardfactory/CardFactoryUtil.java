@@ -2234,8 +2234,14 @@ public class CardFactoryUtil {
 
         // Count$LowestLifeTotal
         if (sq[0].contains("LowestLifeTotal")) {
-            return CardFactoryUtil.doXMath(
-                    Aggregates.min(Singletons.getModel().getGame().getPlayers(), Player.Accessors.FN_GET_LIFE), m, c);
+            final String[] playerType = sq[0].split(" ");
+            if (playerType.length > 1 && playerType[1].equals("Opponent")) {
+                return CardFactoryUtil.doXMath(
+                        Aggregates.min(cardController.getOpponents(), Player.Accessors.FN_GET_LIFE), m, c);
+            } else {
+                return CardFactoryUtil.doXMath(
+                        Aggregates.min(Singletons.getModel().getGame().getPlayers(), Player.Accessors.FN_GET_LIFE), m, c);
+            }
         }
 
         // Count$TopOfLibraryCMC
