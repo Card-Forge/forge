@@ -137,6 +137,18 @@ Fixes/Features:
 - Schemes:Merged in r18521-18589 from trunk
 - Fixed Repay in Kind for multiplayer
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Updated some more AI functions.
+- Added a "save deck" button to the Limited deck editor to avoid confusion. The button will generate a proper confirmation message, so it won't confuse the player by just saying that the deck with the given name already exists (which is not appropriate for Limited since there is only one deck anyway).
+- Changed the draft mode option text from "Play all 8 opponents" to "Play all 7 opponents" since the human is the 8th player and he has seven opponents.
+- Added card panel highlighting to orderBlockingMultipleAttackers.
+- Corrected a mistype.
+- Reversed order of game log.
+- Converted Sarpadian Empires, Vol. VII
+- Added code for "CARDNAME can attack as though it didn't have defender." to isUsefulPumpKeyword.
+- Randomly generated decks will now feature cards from random editions (so, no more "all lands Zendikar" etc.).
+- Simplified the code for random set codes in generated decks.
+- Fixed NotEnchantedBy broken in my previous commit
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -206,6 +218,7 @@ Dong Zhou, the Tyrant
 Kithkin Zealot
 Junk Golem
 Retether
+Aura Graft
 
 
 end
