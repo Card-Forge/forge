@@ -114,7 +114,7 @@ public class DrawAi extends SpellAiLogic {
         }
 
         // Don't tap creatures that may be able to block
-        if (ComputerUtil.waitForBlocking(sa)) {
+        if (ComputerUtil.waitForBlocking(sa) && !sa.hasParam("ActivationPhases")) {
             return false;
         }
 

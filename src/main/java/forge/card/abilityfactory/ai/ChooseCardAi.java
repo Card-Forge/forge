@@ -50,7 +50,7 @@ public class ChooseCardAi extends SpellAiLogic {
                     return false;
                 }
             } else if (sa.getParam("AILogic").equals("Clone")) {
-                choices = CardLists.getValidCards(choices, "Permanent.YouDontCtrl,Permanent.NonLegendary", host.getController(), host);
+                choices = CardLists.getValidCards(choices, "Permanent.YouDontCtrl,Permanent.nonLegendary", host.getController(), host);
                 if (choices.isEmpty()) {
                     return false;
                 }

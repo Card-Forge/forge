@@ -29,7 +29,7 @@ public class TapAi extends TapAiBase {
             // Tap things down if it's Human's turn
         } else if (turn.isComputer() && phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS)) {
             // Tap creatures down if in combat -- handled in tapPrefTargeting().
-        } else if (source.isSorcery()) {
+        } else if (AbilityFactory.isSorcerySpeed(sa)) {
             // Cast it if it's a sorcery.
         } else {
             // Generally don't want to tap things with an Instant during AI turn outside of combat
