@@ -6438,8 +6438,22 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("NotEnchantedBy")) {
-            if (this.getEnchantedBy().contains(source)) {
-                return false;
+            final String rest = property.split("NotEnchantedBy")[1];
+            if (rest.equals("Targeted")) {
+                for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
+                    final SpellAbility saTargeting = sa.getSATargetingCard();
+                    if (saTargeting != null) {
+                        for (final Card c : saTargeting.getTarget().getTargetCards()) {
+                            if (this.getEnchantedBy().contains(c)) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            } else {
+                if (this.getEnchantedBy().contains(source)) {
+                    return false;
+                }
             }
         } else if (property.startsWith("Enchanted")) {
             if (!source.equals(this.enchanting)) {
@@ -6449,9 +6463,24 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!source.canBeEnchantedBy(this)) {
                 return false;
             }
-        } else if (property.startsWith("CanBeEnchantedBySource")) {
-            if (!this.canBeEnchantedBy(source)) {
-                return false;
+        } else if (property.startsWith("CanBeEnchantedBy")) {
+            Card aura = source;
+            final String rest = property.split("CanBeEnchantedBy")[1];
+            if (rest.equals("Targeted")) {
+                for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
+                    final SpellAbility saTargeting = sa.getSATargetingCard();
+                    if (saTargeting != null) {
+                        for (final Card c : saTargeting.getTarget().getTargetCards()) {
+                            if (!this.canBeEnchantedBy(c)) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            } else {
+                if (!this.canBeEnchantedBy(source)) {
+                    return false;
+                }
             }
         } else if (property.startsWith("EquippedBy")) {
             if (!this.equippedBy.contains(source)) {
