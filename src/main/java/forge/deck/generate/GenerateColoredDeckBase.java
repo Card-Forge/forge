@@ -28,6 +28,7 @@ import java.util.TreeMap;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import forge.Card;
 
 import forge.Constant;
 import forge.Singletons;
@@ -114,7 +115,10 @@ public abstract class GenerateColoredDeckBase {
                 throw new RuntimeException("Generate2ColorDeck : get2ColorDeck -- looped too much -- Cr12");
             }
 
-            tDeck.add(c);
+            Card tCard = c.toForgeCard();
+            tCard.setCurSetCode(Aggregates.random(c.toForgeCard().getSets()).getCode());
+            
+            tDeck.add(CardDb.instance().getCard(tCard));
             final int n = this.cardCounts.get(c.getName());
             this.cardCounts.put(c.getName(), n + 1);
             tmpDeck.append(c.getName() + " " + c.getCard().getManaCost() + "\n");
@@ -132,7 +136,10 @@ public abstract class GenerateColoredDeckBase {
             } while ((this.cardCounts.get(s) > 3) && (lc <= 20));
             // not an error if looped too much - could play singleton mode, with 6 slots for 3 non-basic lands.
 
-            tDeck.add(CardDb.instance().getCard(s));
+            Card tCard = CardDb.instance().getCard(s).toForgeCard();
+            tCard.setCurSetCode(Aggregates.random(tCard.getSets()).getCode());
+
+            tDeck.add(CardDb.instance().getCard(tCard));
             final int n = this.cardCounts.get(s);
             this.cardCounts.put(s, n + 1);
             tmpDeck.append(s + "\n");
@@ -166,8 +173,10 @@ public abstract class GenerateColoredDeckBase {
             // code
             this.cardCounts.put(color, nLand);
 
+            Card tCard = CardDb.instance().getCard(color).toForgeCard();
+            tCard.setCurSetCode(Aggregates.random(tCard.getSets()).getCode());
             for (int j = 0; j <= nLand; j++) {
-                tDeck.add(CardDb.instance().getCard(color));
+                tDeck.add(CardDb.instance().getCard(tCard));
             }
         }
     }
