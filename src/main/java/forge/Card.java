@@ -6438,8 +6438,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("NotEnchantedBy")) {
-            final String rest = property.split("NotEnchantedBy")[1];
-            if (rest.equals("Targeted")) {
+            if (property.substring(14).equals("Targeted")) {
                 for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
                     final SpellAbility saTargeting = sa.getSATargetingCard();
                     if (saTargeting != null) {
@@ -6464,9 +6463,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 return false;
             }
         } else if (property.startsWith("CanBeEnchantedBy")) {
-            Card aura = source;
-            final String rest = property.split("CanBeEnchantedBy")[1];
-            if (rest.equals("Targeted")) {
+            if (property.substring(16).equals("Targeted")) {
                 for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
                     final SpellAbility saTargeting = sa.getSATargetingCard();
                     if (saTargeting != null) {
