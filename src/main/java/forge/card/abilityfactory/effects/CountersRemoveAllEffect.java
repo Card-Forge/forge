@@ -58,6 +58,10 @@ public class CountersRemoveAllEffect extends SpellEffect {
         }
 
         for (final Card tgtCard : cards) {
+            if (sa.hasParam("AllCounterTypes")) {
+                tgtCard.getCounters().clear();
+                continue;
+            }
             if (sa.hasParam("AllCounters")) {
                 counterAmount = tgtCard.getCounters(CounterType.valueOf(type));
             }
