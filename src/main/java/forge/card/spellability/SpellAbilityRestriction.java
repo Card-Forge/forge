@@ -134,6 +134,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             this.setActivateCardsInHand(Integer.parseInt(params.get("ActivationCardsInHand")));
         }
 
+        if (params.containsKey("ActivationChosenColor")) {
+            this.setColorToCheck(params.get("ActivationChosenColor"));
+        }
+
         if (params.containsKey("Planeswalker")) {
             this.setPlaneswalker(true);
             this.setSorcerySpeed(true);
@@ -325,6 +329,12 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
                 return false;
             }
         }
+
+        if (this.getColorToCheck() != null) {
+            if (!sa.getSourceCard().getChosenColor().contains(this.getColorToCheck())) {
+                return false;
+            }
+        }
         if (this.isHellbent()) {
             if (!activator.hasHellbent()) {
                 return false;
@@ -409,6 +419,16 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
         if (this.getsVarToCheck() != null) {
             final int svarValue = AbilityFactory.calculateAmount(c, this.getsVarToCheck(), sa);
             final int operandValue = AbilityFactory.calculateAmount(c, this.getsVarOperand(), sa);
+
+            if (!Expressions.compare(svarValue, this.getsVarOperator(), operandValue)) {
+                return false;
+            }
+
+        }
+
+        if (this.getsVarToCheck() != null) {
+            final int svarValue = AbilityFactory.calculateAmount(sa.getSourceCard(), this.getsVarToCheck(), sa);
+            final int operandValue = AbilityFactory.calculateAmount(sa.getSourceCard(), this.getsVarOperand(), sa);
 
             if (!Expressions.compare(svarValue, this.getsVarOperator(), operandValue)) {
                 return false;

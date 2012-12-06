@@ -114,6 +114,10 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
             this.setActivateCardsInHand(Integer.parseInt(params.get("ConditionCardsInHand")));
         }
 
+        if (params.containsKey("ConditionChosenColor")) {
+            this.setColorToCheck(params.get("ConditionChosenColor"));
+        }
+
         // Condition version of IsPresent stuff
         if (params.containsKey("ConditionPresent")) {
             this.setIsPresent(params.get("ConditionPresent"));
@@ -246,6 +250,12 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
         if (this.getCardsInHand() != -1) {
             // Can handle Library of Alexandria, or Hellbent
             if (activator.getCardsIn(ZoneType.Hand).size() != this.getCardsInHand()) {
+                return false;
+            }
+        }
+
+        if (this.getColorToCheck() != null) {
+            if (!sa.getSourceCard().getChosenColor().contains(this.getColorToCheck())) {
                 return false;
             }
         }

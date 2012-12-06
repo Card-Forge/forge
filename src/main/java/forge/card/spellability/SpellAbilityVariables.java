@@ -65,6 +65,7 @@ public class SpellAbilityVariables {
         this.numberTurnActivations = sav.getNumberTurnActivations();
         this.activationNumberSacrifice = sav.getActivationNumberSacrifice();
         this.cardsInHand = sav.getCardsInHand();
+        this.chosenColors = sav.getColorToCheck();
         this.threshold = sav.isThreshold();
         this.metalcraft = sav.isThreshold();
         this.hellbent = sav.isHellbent();
@@ -178,6 +179,9 @@ public class SpellAbilityVariables {
 
     /** The not all m12 empires. */
     private boolean notAllM12Empires = false;
+
+    /** The chosen colors string. */
+    private String chosenColors = null;
 
     /**
      * <p>
@@ -444,7 +448,7 @@ public class SpellAbilityVariables {
      * Setter for the field <code>phases</code>.
      * </p>
      * 
-     * @param phasesString
+     * @param phases
      *            a {@link java.lang.String} object.
      */
     public final void setPhases(final List<PhaseType> phases) {
@@ -508,7 +512,7 @@ public class SpellAbilityVariables {
     }
 
     /**
-     * @param kicked0 the kicked to set
+     * @param kicked the kicked to set
      */
     public void setKicked(boolean kicked) {
         this.kicked = kicked;
@@ -941,6 +945,29 @@ public class SpellAbilityVariables {
      */
     public void setOpponentOnly(boolean opponentOnly) {
         this.opponentOnly = opponentOnly;
+    }
+
+    /**
+     * <p>
+     * Setter for the field <code>ColorToCheck</code>.
+     * </p>
+     * 
+     * @param s
+     *            a {@link java.lang.String} object.
+     */
+    public final void setColorToCheck(final String s) {
+        this.chosenColors = s;
+    }
+
+    /**
+     * <p>
+     * Getter for the field <code>ColorToCheck</code>.
+     * </p>
+     * 
+     * @return the String, chosenColors.
+     */
+    public final String getColorToCheck() {
+        return this.chosenColors;
     }
 
 } // end class SpellAbilityVariables
