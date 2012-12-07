@@ -13,6 +13,22 @@ Some initial work is being done to add Schemes to a branch and this work is not 
 
 --
 
+This version of forge includes a few sound files for the new sound effect system. While we have several sounds assigned to a few of the available events there are a number of events that do not yet have a assigned sound file. This should be considered a work in progress and we could use some help in finding interesting sounds that we can add to forge.
+
+The sound files need to be in wav or au format, wav appears to be more wide spread but the code can handle either format. The sound files need to be copy right free and they should be in the public domain.
+
+You can either record your own sounds if you have the necessary equipment or you may be able to find an appropriate sound on a web site such as this site:
+
+http://www.freesound.org/browse/
+
+You should note that sound files can be large sized and we would like to avoid this if possible. A good size to shoot for would be 50 K or less. There is a freeware sound editor that may have versions for all operating systems. This app is named Audacity.
+
+We have a forge forum topic at the Collectible Card Games Headquarters web site that is devoted to finding sounds for this new sound system. Please visit this topic and contribute a sound or two. We can use your help and assistance. :)
+
+http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=8570
+
+--
+
 On several occasions people have noticed that the forge deck editor and/or quest mode card shop would not open or display. We have also received reports that some of the tabs/panels in the deck editor are missing. Try deleting the file named "editor_preferred.xml" which is found in the "res/layouts" folder. This should force forge to then use the "editor_default.xml" file instead.
 
 Several people have noticed that the cards displayed on the battlefield will fail to be displayed when the number of cards on the battlefield increases. Maximizing the human panel can help to re-display the cards.
