@@ -4,8 +4,10 @@ Types:Creature Human Advisor
 Text:no text
 PT:2/3
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDrain | TriggerDescription$ At the beginning of your upkeep, each opponent loses 1 life. You gain life equal to the life lost this way.
-SVar:TrigDrain:AB$LoseLife | Cost$ 0 | Defined$ Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1
+SVar:TrigDrain:AB$ LoseLife | Cost$ 0 | Defined$ Player.Opponent | LifeAmount$ 1 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost
+SVar:AFLifeLost:Number$0
+#AFLifeLost will be set by LoseLife
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/agent_of_masks.jpg
 SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/100.jpg

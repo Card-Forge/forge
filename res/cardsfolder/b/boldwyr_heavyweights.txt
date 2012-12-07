@@ -5,7 +5,7 @@ Text:no text
 PT:8/8
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, each opponent may search his or her library for a creature card and put it onto the battlefield. Then each player who searched his or her library this way shuffles it.
-SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature | DefinedPlayer$ Opponent | ChangeNum$ 1
+SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Creature | DefinedPlayer$ Player.Opponent | ChangeNum$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boldwyr_heavyweights.jpg
 SetInfo:MOR|Rare|http://magiccards.info/scans/en/mt/85.jpg
