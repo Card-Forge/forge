@@ -69,7 +69,7 @@ class PnlEvent extends JPanel {
         hSrc = img.getHeight(null);
 
         // Title and description
-        this.rad = new FRadioButton(event.getName());
+        this.rad = new FRadioButton(event.getTitle());
         this.rad.setFont(FSkin.getBoldFont(16));
 
         final FTextArea tarDesc = new FTextArea();
