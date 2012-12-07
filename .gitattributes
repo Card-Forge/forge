@@ -2036,6 +2036,7 @@ res/cardsfolder/c/crown_of_empires.txt -text
 res/cardsfolder/c/crown_of_flames.txt svneol=native#text/plain
 res/cardsfolder/c/crown_of_fury.txt -text
 res/cardsfolder/c/crown_of_suspicion.txt -text
+res/cardsfolder/c/crown_of_the_ages.txt -text
 res/cardsfolder/c/crown_of_vigor.txt -text
 res/cardsfolder/c/crucible_of_fire.txt svneol=native#text/plain
 res/cardsfolder/c/crucible_of_worlds.txt svneol=native#text/plain
@@ -5392,6 +5393,7 @@ res/cardsfolder/k/kitsune_dawnblade.txt svneol=native#text/plain
 res/cardsfolder/k/kitsune_diviner.txt svneol=native#text/plain
 res/cardsfolder/k/kitsune_healer.txt -text
 res/cardsfolder/k/kitsune_loreweaver.txt svneol=native#text/plain
+res/cardsfolder/k/kitsune_mystic_autumn_tail_kitsune_sage.txt -text
 res/cardsfolder/k/kitsune_palliator.txt -text
 res/cardsfolder/k/kitsune_riftwalker.txt svneol=native#text/plain
 res/cardsfolder/k/kiyomaro_first_to_stand.txt -text
@@ -7685,6 +7687,7 @@ res/cardsfolder/q/quest_for_renewal.txt svneol=native#text/plain
 res/cardsfolder/q/quest_for_the_gemblades.txt svneol=native#text/plain
 res/cardsfolder/q/quest_for_the_goblin_lord.txt svneol=native#text/plain
 res/cardsfolder/q/quest_for_the_gravelord.txt svneol=native#text/plain
+res/cardsfolder/q/quest_for_the_holy_relic.txt -text
 res/cardsfolder/q/quest_for_the_nihil_stone.txt svneol=native#text/plain
 res/cardsfolder/q/quest_for_ulas_temple.txt -text svneol=unset#text/plain
 res/cardsfolder/q/questing_phelddagrif.txt svneol=native#text/plain
