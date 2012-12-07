@@ -1,0 +1,12 @@
+Name:I Call on the Ancient Magics
+ManaCost:no cost
+Types:Scheme
+Text:no text
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ OppTutor | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, each other player searches his or her library for a card, reveals it, and puts it into his or her hand. Then you search your library for two cards and put them into your hand. Each player shuffles his or her library.
+SVar:OppTutor:AB$ ChangeZone | Cost$ 0 | DefinedPlayer$ Player.Other | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 1 | Reveal$ True | Mandatory$ True | SubAbility$ MyMagic
+SVar:MyMagic:DB$ ChangeZone | DefinedPlayer$ You | Origin$ Library | Destination$ Hand | ChangeType$ Card | ChangeNum$ 2 | Mandatory$ True
+SVar:Rarity:Common
+SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/i_call_on_the_ancient_magics.jpg
+SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/i-call-on-the-ancient-magics.jpg
+Oracle:When you set this scheme in motion, each other player searches his or her library for a card, reveals it, and puts it into his or her hand. Then you search your library for two cards and put them into your hand. Each player shuffles his or her library.
+End

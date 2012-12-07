@@ -4811,6 +4811,7 @@ res/cardsfolder/h/hypnox.txt -text
 res/cardsfolder/h/hypochondria.txt svneol=native#text/plain
 res/cardsfolder/h/hysterical_blindness.txt -text
 res/cardsfolder/h/hystrodon.txt svneol=native#text/plain
+res/cardsfolder/i/i_call_on_the_ancient_magics.txt -text
 res/cardsfolder/i/i_know_all_i_see_all.txt -text
 res/cardsfolder/i/ib_halfheart_goblin_tactician.txt -text svneol=unset#text/plain
 res/cardsfolder/i/icatian_crier.txt svneol=native#text/plain
