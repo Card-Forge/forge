@@ -1588,14 +1588,20 @@ public class CardFactoryUtil {
      */
     public static List<Card> getExternalZoneActivationCards(final Player activator) {
         final List<Card> cl = new ArrayList<Card>();
-        final Player opponent = activator.getOpponent();
 
         cl.addAll(CardFactoryUtil.getActivateablesFromZone(activator.getZone(ZoneType.Graveyard), activator));
         cl.addAll(CardFactoryUtil.getActivateablesFromZone(activator.getZone(ZoneType.Exile), activator));
         cl.addAll(CardFactoryUtil.getActivateablesFromZone(activator.getZone(ZoneType.Library), activator));
         cl.addAll(CardFactoryUtil.getActivateablesFromZone(activator.getZone(ZoneType.Command), activator));
-        cl.addAll(CardFactoryUtil.getActivateablesFromZone(opponent.getZone(ZoneType.Exile), activator));
-        cl.addAll(CardFactoryUtil.getActivateablesFromZone(opponent.getZone(ZoneType.Graveyard), activator));
+
+        //External activatables from all opponents
+        for (final Player opponent : activator.getOpponents()) {
+            cl.addAll(CardFactoryUtil.getActivateablesFromZone(opponent.getZone(ZoneType.Exile), activator));
+            cl.addAll(CardFactoryUtil.getActivateablesFromZone(opponent.getZone(ZoneType.Graveyard), activator));
+            if (opponent.hasKeyword("Play with your hand revealed.")) {
+                cl.addAll(CardFactoryUtil.getActivateablesFromZone(opponent.getZone(ZoneType.Hand), activator));
+            }
+        }
 
         return cl;
     }
