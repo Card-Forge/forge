@@ -7,6 +7,8 @@ Forge Beta: 12-##-2012 ver 1.3.3
 11### cards in total.
 
 
+The Alara Reborn set is now 100% implemented.
+
 Some initial work is being done to add Schemes to a branch and this work is not yet available in this build.
 
 --
@@ -149,6 +151,21 @@ Fixes/Features:
 - Simplified the code for random set codes in generated decks.
 - Fixed NotEnchantedBy broken in my previous commit
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Schemes: Forgot to commit some code for Mortal Flesh Is Weak
+- Slight tweak to ChangeZoneAll so that you won't be given a choice ordering box when moving cards to the library if the list has fewer than two cards
+- Added the scheme and the sound directories to the SVN trunk.
+- The AI will now activate Lu Su, Wu Advisor and other little AI tweaks.
+- Updating Crocodile Pet for Static OpponentTurn changes
+- Actual right fix for Crocs
+- Allow Auras to Enchant cards in graveyards for (Animate Dead and Spellwewaver Volute)
+- Convert Animate Dead and Dance of the Dead to script (oh joyous day)
+- Some small changes in AF_Animate to grant spells with the right timing
+- Only move Auras into play if it's a cast spell
+- Sound System: Enabling sounds by default, adding the currently available free sounds to the SVN.
+- Made CardFactoryUtil.getExternalZoneActivationCards compatible with multiplayer
+- Use the more verbose title instead of name for duels and challenges in quests (it used to be this way).
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -184,6 +201,10 @@ My Wish Is Your Command
 Nothing Can Stop Me Now
 Dance, Pathetic Marionette
 Mortal Flesh Is Weak
+Every Hope Shall Vanish
+Every Last Vestige Shall Rot
+Evil Comes to Fruition
+I Call on the Ancient Magics
 
 
 Added the following Vanguard Avatars:
@@ -219,6 +240,14 @@ Kithkin Zealot
 Junk Golem
 Retether
 Aura Graft
+AEther Snap
+Scrounge
+Bruna, Light of Alabaster
+Sen Triplets
+Withdraw
+Crown of the Ages
+Kitsune Mystic
+Quest for the Holy Relic
 
 
 end
