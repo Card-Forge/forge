@@ -156,21 +156,19 @@ public class TriggerSpellAbilityCast extends Trigger {
 
         if (this.getMapParams().containsKey("SpellSpeed")) {
             if (this.getMapParams().get("SpellSpeed").equals("NotSorcerySpeed")) {
-                boolean notSorcerySpeed = true;
                 if (this.getHostCard().getController().couldCastSorcery(spellAbility)) {
-                    notSorcerySpeed = false;
-                } else if (this.getHostCard().hasKeyword("You may cast CARDNAME as though it had flash. If you cast it any time a "
+                    return false;
+                }
+                if (this.getHostCard().hasKeyword("You may cast CARDNAME as though it had flash. If you cast it any time a "
                         + "sorcery couldn't have been cast, the controller of the permanent it becomes sacrifices it at the beginning"
-                        + " of the next cleanup step.") && !this.getHostCard().getController().couldCastSorcery(spellAbility)) {
-                    boolean instantmentCast = true;
+                        + " of the next cleanup step.")) {
                     // for these cards the trigger must only fire if using their own ability to cast at instant speed
                     if (this.getHostCard().hasKeyword("Flash")
                             || this.getHostCard().getController().hasKeyword("You may cast nonland cards as though they had flash.")) {
-                        instantmentCast = false;
+                        return false;
                     }
-                    notSorcerySpeed = instantmentCast;
                 }
-                return notSorcerySpeed;
+                return true;
             }
         }
 

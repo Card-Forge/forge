@@ -2936,7 +2936,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         boolean onlyThis = true;
 
         for (final Card card : game.getCardsIn(ZoneType.Stack)) {
-            if (card != source) {
+            if (!card.equals(source)) {
                 onlyThis = false;
                 //System.out.println("StackCard: " + card + " vs SourceCard: " + source);
             }
