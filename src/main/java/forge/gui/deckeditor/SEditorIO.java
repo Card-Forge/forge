@@ -49,7 +49,8 @@ public class SEditorIO {
     /** Preferences (must match with PREFS file). */
     public enum EditorPreference { /** */
         stats_deck, /** */
-        stats_catalog
+        stats_catalog,
+        display_unique_only
     }
 
     private static final XMLEventFactory EVENT_FACTORY = XMLEventFactory.newInstance();

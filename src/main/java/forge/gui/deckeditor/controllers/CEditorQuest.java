@@ -90,6 +90,9 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
         final EditorTableView<CardPrinted> tblCatalog = new EditorTableView<CardPrinted>(false, CardPrinted.class);
         final EditorTableView<CardPrinted> tblDeck = new EditorTableView<CardPrinted>(false, CardPrinted.class);
 
+        tblCatalog.setAlwaysNonUnique(true);
+        tblDeck.setAlwaysNonUnique(true);
+
         VCardCatalog.SINGLETON_INSTANCE.setTableView(tblCatalog.getTable());
         VCurrentDeck.SINGLETON_INSTANCE.setTableView(tblDeck.getTable());
 

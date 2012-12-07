@@ -52,6 +52,7 @@ public final class EditorTableView<T extends InventoryItem> {
     private final JTable table = new JTable();
     private Predicate<T> filter = null;
     private boolean wantUnique = false;
+    private boolean alwaysNonUnique = false;
 
     private final Class<T> genericType;
 
@@ -299,6 +300,46 @@ public final class EditorTableView<T extends InventoryItem> {
      */
     public ItemPoolView<T> getCards() {
         return this.pool;
+    }
+
+    /**
+     * 
+     * getWantUnique.
+     * 
+     * @return true if the editor is in "unique card names only" mode.
+     */
+    public boolean getWantUnique() {
+        return this.wantUnique;
+    }
+
+    /**
+     * 
+     * setWantUnique
+     * 
+     * @param unique if true, the editor will be set to the "unique card names only" mode.
+     */
+    public void setWantUnique(boolean unique) {
+        this.wantUnique = this.alwaysNonUnique ? false : unique;
+    }
+
+    /**
+     * 
+     * getAlwaysNonUnique
+     * 
+     * @return if ture, this editor must always show non-unique cards (e.g. quest editor).
+     */
+    public boolean getAlwaysNonUnique() {
+        return this.alwaysNonUnique;
+    }
+
+    /**
+     * 
+     * setAlwaysNonUnique
+     * 
+     * @param nonUniqueOnly if true, this editor must always show non-unique cards (e.g. quest editor). 
+     */
+    public void setAlwaysNonUnique(boolean nonUniqueOnly) {
+        this.alwaysNonUnique = nonUniqueOnly;
     }
 
 }

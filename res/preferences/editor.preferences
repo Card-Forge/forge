@@ -2,6 +2,7 @@
 <preferences type="editor">
         <pref name="stats_catalog" value="true"></pref>
         <pref name="stats_deck" value="true"></pref>
+	<pref name="display_unique_only" value="false"></pref>
         <col enumval="CAT_QUANTITY" identifier="Quantity" show="true" sortpriority="1" sortstate="DESC" width="39"></col>
         <col enumval="CAT_NAME" identifier="Name" show="true" sortpriority="2" sortstate="DESC" width="50"></col>
         <col enumval="CAT_COST" identifier="Cost" show="true" sortpriority="3" sortstate="DESC" width="36"></col>

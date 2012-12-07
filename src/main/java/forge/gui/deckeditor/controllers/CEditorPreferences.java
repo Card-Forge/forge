@@ -7,6 +7,7 @@ import java.util.HashMap;
 import javax.swing.JCheckBox;
 
 import forge.Command;
+import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.SEditorIO.EditorPreference;
 import forge.gui.deckeditor.tables.SColumnUtil;
@@ -85,12 +86,23 @@ public enum CEditorPreferences implements ICDoc {
                 SEditorIO.getPref(EditorPreference.stats_catalog));
         VEditorPreferences.SINGLETON_INSTANCE.getChbDeckStats().setSelected(
                 SEditorIO.getPref(EditorPreference.stats_deck));
+        VEditorPreferences.SINGLETON_INSTANCE.getChbCardDisplayUnique().setSelected(
+                SEditorIO.getPref(EditorPreference.display_unique_only));
 
         if (!SEditorIO.getPref(EditorPreference.stats_deck)) {
             VCurrentDeck.SINGLETON_INSTANCE.getPnlStats().setVisible(false);
         }
         if (!SEditorIO.getPref(EditorPreference.stats_catalog)) {
             VCardCatalog.SINGLETON_INSTANCE.getPnlStats().setVisible(false);
+        }
+        
+        boolean wantUnique = SEditorIO.getPref(EditorPreference.display_unique_only);
+        ACEditorBase<?, ?> curEditor = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
+        if (curEditor != null) {
+            curEditor.getTableCatalog().setWantUnique(wantUnique);
+            curEditor.getTableCatalog().updateView(true);
+            curEditor.getTableDeck().setWantUnique(wantUnique);
+            curEditor.getTableDeck().updateView(true);
         }
 
         VEditorPreferences.SINGLETON_INSTANCE.getChbCatalogStats().addItemListener(new ItemListener() {
@@ -105,6 +117,19 @@ public enum CEditorPreferences implements ICDoc {
                 VCurrentDeck.SINGLETON_INSTANCE.getPnlStats().setVisible(
                         ((JCheckBox) e.getSource()).isSelected());
                 SEditorIO.setPref(EditorPreference.stats_deck, ((JCheckBox) e.getSource()).isSelected());
+                SEditorIO.savePreferences(); } });
+
+        VEditorPreferences.SINGLETON_INSTANCE.getChbCardDisplayUnique().addItemListener(new ItemListener() {
+            @Override public void itemStateChanged(final ItemEvent e) {
+                ACEditorBase<?, ?> curEditor = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
+                boolean wantUnique = ((JCheckBox) e.getSource()).isSelected();
+                if (curEditor != null) {
+                    curEditor.getTableCatalog().setWantUnique(wantUnique);
+                    curEditor.getTableCatalog().updateView(true);
+                    curEditor.getTableDeck().setWantUnique(wantUnique);
+                    curEditor.getTableDeck().updateView(true);
+                }
+                SEditorIO.setPref(EditorPreference.display_unique_only, wantUnique);
                 SEditorIO.savePreferences(); } });
     }
 

@@ -23,6 +23,7 @@ import forge.Command;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.gui.deckeditor.SEditorIO;
+import forge.gui.deckeditor.SEditorIO.EditorPreference;
 import forge.gui.deckeditor.SEditorUtil;
 import forge.gui.deckeditor.tables.DeckController;
 import forge.gui.deckeditor.tables.EditorTableView;
@@ -56,11 +57,14 @@ public final class CEditorLimited extends ACEditorBase<CardPrinted, DeckGroup> {
      * @param deckMap0 &emsp; {@link forge.deck.DeckGroup}<{@link forge.util.IStorage}>
      */
     public CEditorLimited(final IStorage<DeckGroup> deckMap0) {
-        final EditorTableView<CardPrinted> tblCatalog = new EditorTableView<CardPrinted>(true, CardPrinted.class);
-        final EditorTableView<CardPrinted> tblDeck = new EditorTableView<CardPrinted>(true, CardPrinted.class);
+        final EditorTableView<CardPrinted> tblCatalog = new EditorTableView<CardPrinted>(false, CardPrinted.class);
+        final EditorTableView<CardPrinted> tblDeck = new EditorTableView<CardPrinted>(false, CardPrinted.class);
 
         VCardCatalog.SINGLETON_INSTANCE.setTableView(tblCatalog.getTable());
         VCurrentDeck.SINGLETON_INSTANCE.setTableView(tblDeck.getTable());
+
+        tblCatalog.setAlwaysNonUnique(true);
+        tblDeck.setAlwaysNonUnique(true);
 
         this.setTableCatalog(tblCatalog);
         this.setTableDeck(tblDeck);

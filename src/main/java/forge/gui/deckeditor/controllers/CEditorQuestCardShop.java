@@ -98,6 +98,9 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         final EditorTableView<InventoryItem> tblCatalog = new EditorTableView<InventoryItem>(false, InventoryItem.class);
         final EditorTableView<InventoryItem> tblDeck = new EditorTableView<InventoryItem>(false, InventoryItem.class);
 
+        tblCatalog.setAlwaysNonUnique(true);
+        tblDeck.setAlwaysNonUnique(true);
+
         VCardCatalog.SINGLETON_INSTANCE.setTableView(tblCatalog.getTable());
         VCurrentDeck.SINGLETON_INSTANCE.setTableView(tblDeck.getTable());
 

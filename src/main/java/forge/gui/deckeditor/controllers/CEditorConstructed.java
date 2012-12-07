@@ -24,6 +24,7 @@ import com.google.common.base.Supplier;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.gui.deckeditor.SEditorIO;
+import forge.gui.deckeditor.SEditorIO.EditorPreference;
 import forge.gui.deckeditor.SEditorUtil;
 import forge.gui.deckeditor.tables.DeckController;
 import forge.gui.deckeditor.tables.SColumnUtil;
@@ -61,8 +62,10 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
     public CEditorConstructed() {
         super();
 
-        final EditorTableView<CardPrinted> tblCatalog = new EditorTableView<CardPrinted>(true, CardPrinted.class);
-        final EditorTableView<CardPrinted> tblDeck = new EditorTableView<CardPrinted>(true, CardPrinted.class);
+        boolean wantUnique = SEditorIO.getPref(EditorPreference.display_unique_only);
+        
+        final EditorTableView<CardPrinted> tblCatalog = new EditorTableView<CardPrinted>(wantUnique, CardPrinted.class);
+        final EditorTableView<CardPrinted> tblDeck = new EditorTableView<CardPrinted>(wantUnique, CardPrinted.class);
 
         VCardCatalog.SINGLETON_INSTANCE.setTableView(tblCatalog.getTable());
         VCurrentDeck.SINGLETON_INSTANCE.setTableView(tblDeck.getTable());
