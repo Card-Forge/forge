@@ -150,6 +150,7 @@ r_6_6_dragon_rtr.jpg                   http://www.cardforge.org/fpics/tokens/RTR
 r_7_1_elemental.jpg                    http://www.cardforge.org/fpics/tokens/r_7_1_elemental.jpg
 r_x_x_elemental.jpg                    http://www.cardforge.org/fpics/tokens/r_x_x_elemental.jpg
 rg_3_4_stangg_twin.jpg                 http://www.cardforge.org/fpics/tokens/rg_3_4_stangg_twin.jpg
+rg_4_4_giant_warrior.jpg               http://www.cardforge.org/fpics/tokens/rg_4_4_giant_warrior.jpg
 rw_1_1_goblin_soldier.jpg              http://www.cardforge.org/fpics/tokens/rw_1_1_goblin_soldier.jpg
 u_0_1_homunculus.jpg                   http://www.cardforge.org/fpics/tokens/u_0_1_homunculus.jpg
 u_0_1_plant_wall.jpg                   http://www.cardforge.org/fpics/tokens/u_0_1_plant_wall.jpg
@@ -169,6 +170,7 @@ u_2_2_illusion.jpg                     http://www.cardforge.org/fpics/tokens/u_2
 u_3_3_weird.jpg                        http://www.cardforge.org/fpics/tokens/u_3_3_weird.jpg
 u_5_5_dragon_spirit.jpg                http://www.cardforge.org/fpics/tokens/u_5_5_dragon_spirit.jpg
 u_5_5_wall.jpg                         http://www.cardforge.org/fpics/tokens/u_5_5_wall.jpg
+u_x_x_orb.jpg                          http://www.cardforge.org/fpics/tokens/u_x_x_orb.jpg
 ub_1_1_faerie_rogue.jpg                http://www.cardforge.org/fpics/tokens/ub_1_1_faerie_rogue.jpg
 ub_1_1_zombie_wizard.jpg               http://www.cardforge.org/fpics/tokens/ub_1_1_zombie_wizard.jpg
 ur_5_5_elemental.jpg                   http://www.cardforge.org/fpics/tokens/ur_5_5_elemental.jpg
@@ -225,7 +227,5 @@ morph.jpg                              http://www.cardforge.org/fpics/effects/mo
 # //g_1_1_wolves_of_the_hunt.jpg           http://www.cardforge.org/fpics/tokens/g_1_1_wolves_of_the_hunt.jpg           [LEG] Master of the Hunt
 # //r_1_1_warrior.jpg                      http://www.cardforge.org/fpics/tokens/r_1_1_warrior.jpg                      [SOK] Rally the Horde
 # //rg_1_1_goblin_warrior.jpg              http://www.cardforge.org/fpics/tokens/rg_1_1_goblin_warrior.jpg              [SHM] Wort, the Raidmother
-# //rg_4_4_giant_warrior.jpg               http://www.cardforge.org/fpics/tokens/rg_4_4_giant_warrior.jpg               [SHM] Giantbaiting
 # //u_1_1_merfolk.jpg                      http://www.cardforge.org/fpics/tokens/u_1_1_merfolk.jpg                      [ZEN] Lullmage Mentor
-# //u_x_x_orb.jpg                          http://www.cardforge.org/fpics/tokens/u_x_x_orb.jpg                          [ALL] Phantasmal Sphere
 # //w_1_1_knight.jpg                       http://www.cardforge.org/fpics/tokens/w_1_1_knight.jpg                       [ALL] Errand of Duty
