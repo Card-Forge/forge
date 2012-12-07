@@ -12608,6 +12608,17 @@ res/skins/the_simpsons/bg_texture.jpg -text
 res/skins/the_simpsons/font1.ttf -text
 res/skins/the_simpsons/sprite_avatars.png -text
 res/skins/the_simpsons/sprite_icons.png -text
+res/sound/artifact.wav -text
+res/sound/black_land.wav -text
+res/sound/blue_land.wav -text
+res/sound/draw.wav -text
+res/sound/equip.wav -text
+res/sound/green_land.wav -text
+res/sound/lose_duel.wav -text
+res/sound/poison.wav -text
+res/sound/shuffle.wav -text
+res/sound/tap.wav -text
+res/sound/untap.wav -text
 res/token-images.txt -text
 src/main/config/Forge.icns -text
 src/main/config/backgroundImage.jpg -text svneol=unset#image/jpeg
