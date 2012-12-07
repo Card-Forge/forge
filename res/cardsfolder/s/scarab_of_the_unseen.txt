@@ -1,0 +1,13 @@
+Name:Scarab of the Unseen
+ManaCost:2
+Types:Artifact
+Text:no text
+A:AB$ ChangeZoneAll | Cost$ T Sac<1/CARDNAME> | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Permanent.YouOwn | TgtPrompt$ Select target permanent you own | ChangeType$ Aura.AttachedTo Targeted | SubAbility$ DBDraw | SpellDescription$ Return all Auras attached to target permanent you own to their owners' hands. Draw a card at the beginning of the next turn's upkeep.
+SVar:DBDraw:DB$Draw | NumCards$ 1 | NextUpkeep$ True
+SVar:RemRandomDeck:True
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scarab_of_the_unseen.jpg
+SetInfo:ALL|Uncommon|http://magiccards.info/scans/en/ai/171.jpg
+Oracle:{T}, Sacrifice Scarab of the Unseen: Return all Auras attached to target permanent you own to their owners' hands. Draw a card at the beginning of the next turn's upkeep.
+End
