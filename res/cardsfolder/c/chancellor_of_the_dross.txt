@@ -6,11 +6,13 @@ PT:6/6
 K:MayEffectFromOpeningHand:DrainOnUpkeep
 K:Flying
 K:Lifelink
-SVar:DrainOnUpkeep:AB$ Effect | Cost$ 0 | Triggers$ TrigDrain | SVars$ Drain1,Drain2,RemoveMe | Name$ Chancellor of the Dross effect
-SVar:TrigDrain:Mode$ Phase | Phase$ Upkeep | Execute$ Drain1 | TriggerDescription$ At the beginning of the first upkeep, each opponent loses 3 life, then you gain life equal to the life lost this way.
-SVar:Drain1:AB$ LoseLife | Cost$ 0 | Defined$ Opponent | LifeAmount$ 3 | SubAbility$ Drain2
-SVar:Drain2:DB$ GainLife | Defined$ You | LifeAmount$ 3 | SubAbility$ RemoveMe
+SVar:DrainOnUpkeep:AB$ Effect | Cost$ 0 | Triggers$ TrigDrain | SVars$ DrainLife,GainLife,RemoveMe,AFLifeLost | Name$ Chancellor of the Dross effect
+SVar:TrigDrain:Mode$ Phase | Phase$ Upkeep | Execute$ DrainLife | TriggerDescription$ At the beginning of the first upkeep, each opponent loses 3 life, then you gain life equal to the life lost this way.
+SVar:DrainLife:AB$ LoseLife | Cost$ 0 | Defined$ Player.Opponent | LifeAmount$ 3 | SubAbility$ GainLife
+SVar:GainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost | SubAbility$ RemoveMe
 SVar:RemoveMe:DB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:AFLifeLost:Number$0
+#AFLifeLost will be set by LoseLife
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chancellor_of_the_dross.jpg
 SetInfo:NPH|Rare|http://magiccards.info/scans/en/nph/54.jpg

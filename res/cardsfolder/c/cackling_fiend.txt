@@ -4,7 +4,7 @@ Types:Creature Zombie
 Text:no text
 PT:2/1
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, each opponent discards a card.
-SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ Opponent | NumCards$ 1 | Mode$ TgtChoose
+SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ Player.Opponent | NumCards$ 1 | Mode$ TgtChoose
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cackling_fiend.jpg
 SetInfo:USG|Common|http://magiccards.info/scans/en/us/121.jpg

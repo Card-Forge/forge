@@ -4,9 +4,10 @@ Types:Instant Arcane
 Text:no text
 A:SP$ LoseLife | Cost$ 4 B | ValidTgts$ Player | TgtPrompt$ Select a player | LifeAmount$ 1 | SubAbility$ DBGainLife | SpellDescription$ Target player loses 1 life and you gain 1 life.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Graveyard | IsPresent$ Card | PresentZone$ Hand | PresentPlayer$ Opponent | PresentCompare$ LTX | OptionalDecider$ You | Execute$ TrigReturn | TriggerDescription$ At the beginning of your upkeep, if you have more cards in hand than each opponent, you may return CARDNAME from your graveyard to your hand.
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ 1
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 1
 SVar:X:Count$InYourHand
-SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+SVar:TrigReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Destination$ Hand
+SVar:RemMultiplayer:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/death_of_a_thousand_stings.jpg
 SetInfo:SOK|Common|http://magiccards.info/scans/en/sok/64.jpg
