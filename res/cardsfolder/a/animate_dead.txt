@@ -1,7 +1,16 @@
 Name:Animate Dead
 ManaCost:1 B
 Types:Enchantment Aura
-Text:Enchant creature card in a graveyard\r\nWhen Animate Dead enters the battlefield, if it's on the battlefield, it loses "enchant creature card in a graveyard" and gains "enchant creature put onto the battlefield with Animate Dead." Return enchanted creature card to the battlefield under your control and attach Animate Dead to it. When Animate Dead leaves the battlefield, that creature's controller sacrifices it.
+Text:no text
+K:Enchant creature card in a graveyard
+A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | TgtZone$ Graveyard | AILogic$ Reanimate
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReanimate | TriggerDescription$ When CARDNAME enters the battlefield, if it's on the battlefield, it loses "enchant creature card in a graveyard" and gains "enchant creature put onto the battlefield with CARDNAME." Return enchanted creature card to the battlefield under your control and attach CARDNAME to it.
+SVar:TrigReanimate:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ Enchanted | RememberChanged$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Self | OverwriteSpells$ True | Abilities$ NewAttach | Keywords$ Enchant creature put onto the battlefield with CARDNAME | RemoveKeywords$ Enchant creature card in a graveyard | Permanent$ True | SubAbility$ DBAttach
+SVar:DBAttach:DB$ Attach | Defined$ Remembered
+SVar:NewAttach:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature.IsRemembered | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigSacrifice | TriggerDescription$ When Animate Dead leaves the battlefield, that creature's controller sacrifices it.
+SVar:TrigSacrifice:DB$ Destroy | Sacrifice$ True | Defined$ Remembered
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -1 | Description$ Enchanted creature gets -1/-0.
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/5e/en-us/card3823.jpg

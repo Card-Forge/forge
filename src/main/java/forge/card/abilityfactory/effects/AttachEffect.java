@@ -25,7 +25,7 @@ public class AttachEffect extends SpellEffect {
      */
     @Override
     public void resolve(SpellAbility sa) {
-        if (sa.getSourceCard().isAura()) {
+        if (sa.getSourceCard().isAura() && sa.isSpell()) {
 
             // The Spell_Permanent (Auras) version of this AF needs to
             // move the card into play before Attaching

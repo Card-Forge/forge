@@ -309,6 +309,34 @@ public class AttachAi extends SpellAiLogic {
 
         return c;
     }
+    
+    /**
+     * Attach ai control preference.
+     * 
+     * @param sa
+     *            the sa
+     * @param list
+     *            the list
+     * @param mandatory
+     *            the mandatory
+     * @param attachSource
+     *            the attach source
+     * @return the card
+     */
+    private static Card attachAIReanimatePreference(final SpellAbility sa, final List<Card> list, final boolean mandatory,
+            final Card attachSource) {
+        // AI For choosing a Card to Animate.
+        // TODO Add some more restrictions for Reanimation Auras
+        final Card c = CardFactoryUtil.getBestCreatureAI(list);
+
+        // If Mandatory (brought directly into play without casting) gotta
+        // choose something
+        if (c == null && mandatory) {
+            return chooseLessPreferred(mandatory, list);
+        }
+
+        return c;
+    }
 
     // Should generalize this code a bit since they all have similar structures
     /**
@@ -786,6 +814,8 @@ public class AttachAi extends SpellAiLogic {
             c = attachAIKeepTappedPreference(sa, prefList, mandatory, attachSource);
         } else if ("Animate".equals(logic)) {
             c = attachAIAnimatePreference(sa, prefList, mandatory, attachSource);
+        } else if ("Reanimate".equals(logic)) {
+            c = attachAIReanimatePreference(sa, prefList, mandatory, attachSource);
         }
 
         return c;

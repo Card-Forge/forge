@@ -147,6 +147,22 @@ public class AnimateEffect extends AnimateEffectBase {
             final long colorTimestamp = doAnimate(c, sa, power, toughness, types, removeTypes,
                     finalDesc, keywords, removeKeywords, hiddenKeywords, timestamp);
 
+            // remove abilities
+            final ArrayList<SpellAbility> removedAbilities = new ArrayList<SpellAbility>();
+            boolean clearAbilities = sa.hasParam("OverwriteAbilities");
+            boolean clearSpells = sa.hasParam("OverwriteSpells");
+            boolean removeAll = sa.hasParam("RemoveAllAbilities");
+            
+            if (clearAbilities || clearSpells || removeAll) {
+                for (final SpellAbility ab : c.getSpellAbilities()) {
+                    if (removeAll || (ab.isAbility() && clearAbilities) || 
+                            (ab.isSpell() && clearSpells)) {
+                        c.removeSpellAbility(ab);
+                        removedAbilities.add(ab);
+                    }
+                }
+            }
+            
             // give abilities
             final ArrayList<SpellAbility> addedAbilities = new ArrayList<SpellAbility>();
             if (abilities.size() > 0) {
@@ -156,17 +172,6 @@ public class AnimateEffect extends AnimateEffectBase {
                     final SpellAbility grantedAbility = newAF.getAbility(actualAbility, c);
                     addedAbilities.add(grantedAbility);
                     c.addSpellAbility(grantedAbility);
-                }
-            }
-
-            // remove abilities
-            final ArrayList<SpellAbility> removedAbilities = new ArrayList<SpellAbility>();
-            if (sa.hasParam("OverwriteAbilities") || sa.hasParam("RemoveAllAbilities")) {
-                for (final SpellAbility ab : c.getSpellAbilities()) {
-                    if (ab.isAbility()) {
-                        c.removeSpellAbility(ab);
-                        removedAbilities.add(ab);
-                    }
                 }
             }
 
@@ -182,7 +187,7 @@ public class AnimateEffect extends AnimateEffectBase {
 
             // suppress triggers from the animated card
             final ArrayList<Trigger> removedTriggers = new ArrayList<Trigger>();
-            if (sa.hasParam("OverwriteTriggers") || sa.hasParam("RemoveAllAbilities")) {
+            if (sa.hasParam("OverwriteTriggers") || removeAll) {
                 final List<Trigger> triggersToRemove = c.getTriggers();
                 for (final Trigger trigger : triggersToRemove) {
                     trigger.setSuppressed(true);
@@ -209,7 +214,7 @@ public class AnimateEffect extends AnimateEffectBase {
 
             // suppress static abilities from the animated card
             final ArrayList<StaticAbility> removedStatics = new ArrayList<StaticAbility>();
-            if (sa.hasParam("OverwriteStatics") || sa.hasParam("RemoveAllAbilities")) {
+            if (sa.hasParam("OverwriteStatics") || removeAll) {
                 final ArrayList<StaticAbility> staticsToRemove = c.getStaticAbilities();
                 for (final StaticAbility stAb : staticsToRemove) {
                     stAb.setTemporarilySuppressed(true);
@@ -219,7 +224,7 @@ public class AnimateEffect extends AnimateEffectBase {
 
             // suppress static abilities from the animated card
             final ArrayList<ReplacementEffect> removedReplacements = new ArrayList<ReplacementEffect>();
-            if (sa.hasParam("OverwriteReplacements") || sa.hasParam("RemoveAllAbilities")) {
+            if (sa.hasParam("OverwriteReplacements") || removeAll) {
                 final ArrayList<ReplacementEffect> replacementsToRemove = c.getReplacementEffects();
                 for (final ReplacementEffect re : replacementsToRemove) {
                     re.setTemporarilySuppressed(true);
