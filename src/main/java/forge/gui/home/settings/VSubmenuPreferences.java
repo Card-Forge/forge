@@ -83,7 +83,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbTextMana = new OptionsCheckBox("Text / Mana Overlay");
     private final JCheckBox cbScaleLarger = new OptionsCheckBox("Scale Image Larger");
     private final JCheckBox cbRandomFoil = new OptionsCheckBox("Random Foil");
-    private final JCheckBox cbRandomizeArt = new OptionsCheckBox("Randomize Human's Card Art");
+    private final JCheckBox cbRandomizeArt = new OptionsCheckBox("Randomize Card Art");
     private final JCheckBox cbEnableSounds = new OptionsCheckBox("Enable Sounds");
 
     /**
