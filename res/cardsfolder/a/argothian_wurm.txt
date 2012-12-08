@@ -1,0 +1,13 @@
+Name:Argothian Wurm
+ManaCost:3 G
+Types:Creature Beast
+Text:no text
+PT:6/6
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigSac | TriggerDescription$ When CARDNAME enters the battlefield, any player may sacrifice a land. If a player does, put CARDNAME on top of its owner's library.
+SVar:TrigSac:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Library | LibraryPosition$ 0 | Defined$ Self | UnlessCost$ Sac<1/Land> | UnlessPayer$ Player | UnlessSwitched$ True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/argothian_wurm.jpg
+SetInfo:USG|Rare|http://magiccards.info/scans/en/us/236.jpg
+Oracle:Trample\nWhen Argothian Wurm enters the battlefield, any player may sacrifice a land. If a player does, put Argothian Wurm on top of its owner's library.
+End

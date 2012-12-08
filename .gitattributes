@@ -457,6 +457,7 @@ res/cardsfolder/a/argothian_enchantress.txt svneol=native#text/plain
 res/cardsfolder/a/argothian_pixies.txt svneol=native#text/plain
 res/cardsfolder/a/argothian_swine.txt svneol=native#text/plain
 res/cardsfolder/a/argothian_treefolk.txt svneol=native#text/plain
+res/cardsfolder/a/argothian_wurm.txt -text
 res/cardsfolder/a/arid_mesa.txt svneol=native#text/plain
 res/cardsfolder/a/ark_of_blight.txt svneol=native#text/plain
 res/cardsfolder/a/arm_with_aether.txt -text
@@ -6061,6 +6062,7 @@ res/cardsfolder/m/marsh_lurker.txt svneol=native#text/plain
 res/cardsfolder/m/marsh_threader.txt svneol=native#text/plain
 res/cardsfolder/m/marsh_viper.txt svneol=native#text/plain
 res/cardsfolder/m/marshaling_cry.txt svneol=native#text/plain
+res/cardsfolder/m/marshaling_the_troops.txt -text
 res/cardsfolder/m/marshals_anthem.txt svneol=native#text/plain
 res/cardsfolder/m/marshdrinker_giant.txt svneol=native#text/plain
 res/cardsfolder/m/martial_coup.txt svneol=native#text/plain
