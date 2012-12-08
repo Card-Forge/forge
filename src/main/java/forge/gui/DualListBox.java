@@ -10,7 +10,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.JDialog;
-import javax.swing.JList;
 import javax.swing.ListModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -139,7 +138,7 @@ public class DualListBox<T> extends FPanel {
         return destListModel.model;
     }
 
-    private static void addCardViewListener(final JList list) {
+    private static void addCardViewListener(final FList list) {
         list.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(final ListSelectionEvent ev) {
