@@ -278,10 +278,12 @@ public class TriggerHandler {
     }
         
     public final void runWaitingTriggers() {
-        for (TriggerWaiting wt : waitingTriggers) {
+        ArrayList<TriggerWaiting> waiting = new ArrayList<TriggerWaiting>(waitingTriggers);
+        waitingTriggers.clear();
+
+        for (TriggerWaiting wt : waiting) {
             runWaitingTrigger(wt);
         }
-        waitingTriggers.clear();
     }
     
     public final void runWaitingTrigger(TriggerWaiting wt) {
