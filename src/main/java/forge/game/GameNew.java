@@ -55,7 +55,7 @@ public class GameNew {
                 final Card card = cardPrinted.toForgeCard(player);
 
                 // apply random pictures for cards
-                if (player.isComputer()) {
+                if (player.isComputer() || Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_CARD_ART)) {
                     final int cntVariants = cardPrinted.getCard().getEditionInfo(cardPrinted.getEdition()).getCopiesCount();
                     if (cntVariants > 1) {
                         card.setRandomPicture(generator.nextInt(cntVariants - 1) + 1);

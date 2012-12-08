@@ -141,6 +141,14 @@ public enum CSubmenuPreferences implements ICDoc {
             }
         });
 
+        view.getCbRandomizeArt().addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(final ItemEvent arg0) {
+                prefs.setPref(FPref.UI_RANDOM_CARD_ART, view.getCbRandomizeArt().isSelected());
+                prefs.save();
+            }
+        });
+
         view.getCbEnableSounds().addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(final ItemEvent arg0) {
@@ -176,6 +184,7 @@ public enum CSubmenuPreferences implements ICDoc {
         view.getCbStackLand().setSelected(prefs.getPrefBoolean(FPref.UI_SMOOTH_LAND));
         view.getCbDevMode().setSelected(prefs.getPrefBoolean(FPref.DEV_MODE_ENABLED));
         view.getCbRandomFoil().setSelected(prefs.getPrefBoolean(FPref.UI_RANDOM_FOIL));
+        view.getCbRandomizeArt().setSelected(prefs.getPrefBoolean(FPref.UI_RANDOM_CARD_ART));
         view.getCbScaleLarger().setSelected(prefs.getPrefBoolean(FPref.UI_SCALE_LARGER));
         view.getCbTextMana().setSelected(prefs.getPrefBoolean(FPref.UI_CARD_OVERLAY));
         view.getCbEnableSounds().setSelected(prefs.getPrefBoolean(FPref.UI_ENABLE_SOUNDS));
