@@ -182,6 +182,24 @@ Fixes/Features:
 - Use the more verbose title instead of name for duels and challenges in quests (it used to be this way).
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- uncommented some recently included tokens' download links
+- minor tweak
+- Fixed Armor of Thorns.
+- Fixed Demoralize.
+- Fixing text of Sen Triplets
+- The Constructed deck editor now has an option to either show all cards from all sets or show unique cards only (see the Preferences tab), the Sealed Mode, Draft Mode, and Quest Mode deck editors will always show cards from all sets in order to avoid issues and confusion.
+- Made the default value of the "Show Unique Cards Only" (in Constructed) "true" (checked) to mimic the original Forge behavior.
+- Player.Opponent now returns opponents only, while Player.Other returns all other players
+- Converted some cards for multiplayer compatibility
+- improved stack description for LoseLife
+- converted a few more cards for multiplayer compatibility
+- Added a fluff piece to the changes.txt file.
+- BuildInfo.getVersion() is once again returning an incorrct SVN number ("-r18445").
+- add check to drawing miracle so that miracle cost is not triggered in opening hand.
+- Triggers will now wait to trigger if the Stack is frozen. (Fixes Valakut not triggering enough times)
+- Convert Earthbind to Script now that the timing works
+- Fixed Mind Swords.
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -264,6 +282,13 @@ Withdraw
 Crown of the Ages
 Kitsune Mystic // Autumn-Tail, Kitsune Sage
 Quest for the Holy Relic
+Phantasmal Sphere
+Scarab of the Unseen
+Argothian Wurm
+Marshaling the Troops
+Cinder Cloud
+Harmony of Nature
+Shivan Wumpus
 
 
 end
