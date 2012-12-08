@@ -4,7 +4,7 @@ Types:Sorcery
 Text:no text
 A:SP$ ChangeZone | Cost$ 1 B | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 2 | Hidden$ True | Mandatory$ True | SubAbility$ DBExileOpp | SpellDescription$ Each player exiles two cards from his or her hand.
 A:SP$ ChangeZone | Cost$ Sac<1/Creature> | IsPresent$ Swamp.YouCtrl | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 2 | Hidden$ True | Mandatory$ True | SubAbility$ DBExileOpp | CostDesc$ If you control a Swamp, you may sacrifice a creature | SpellDescription$ rather than pay CARDNAME's mana cost.
-SVar:DBExileOpp:DB$ChangeZone | Defined$ Opponent | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 2 | Mandatory$ True | Hidden$ True
+SVar:DBExileOpp:DB$ ChangeZone | DefinedPlayer$ Opponent | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 2 | Mandatory$ True | Hidden$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_swords.jpg
