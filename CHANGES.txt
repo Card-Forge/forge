@@ -200,6 +200,10 @@ Fixes/Features:
 - Convert Earthbind to Script now that the timing works
 - Fixed Mind Swords.
 - Added the recent commit logs to changes.txt.
+- Explicitly shuffle Haunting Echoes instead of using it inside RepeatEach
+- Fixed Tower Above.
+- Sigh, missed a new class.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
