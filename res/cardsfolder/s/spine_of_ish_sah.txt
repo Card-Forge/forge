@@ -7,6 +7,7 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigDestroy:DB$Destroy | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
 SVar:TrigChangeZone:AB$ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand
 SVar:SacMe:4
+SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spine_of_ish_sah.jpg
 SetInfo:MBS|Rare|http://magiccards.info/scans/en/mbs/136.jpg

@@ -1663,6 +1663,7 @@ res/cardsfolder/c/chronosavant.txt svneol=native#text/plain
 res/cardsfolder/c/chronozoa.txt -text
 res/cardsfolder/c/chub_toad.txt svneol=native#text/plain
 res/cardsfolder/c/churning_eddy.txt svneol=native#text/plain
+res/cardsfolder/c/cinder_cloud.txt -text
 res/cardsfolder/c/cinder_crawler.txt svneol=native#text/plain
 res/cardsfolder/c/cinder_elemental.txt svneol=native#text/plain
 res/cardsfolder/c/cinder_giant.txt svneol=native#text/plain
@@ -4458,6 +4459,7 @@ res/cardsfolder/h/harmless_assault.txt -text
 res/cardsfolder/h/harmonic_convergence.txt svneol=native#text/plain
 res/cardsfolder/h/harmonic_sliver.txt -text
 res/cardsfolder/h/harmonize.txt svneol=native#text/plain
+res/cardsfolder/h/harmony_of_nature.txt -text
 res/cardsfolder/h/harpoon_sniper.txt svneol=native#text/plain
 res/cardsfolder/h/harrier_griffin.txt svneol=native#text/plain
 res/cardsfolder/h/harrow.txt svneol=native#text/plain
@@ -8874,6 +8876,7 @@ res/cardsfolder/s/shivan_phoenix.txt svneol=native#text/plain
 res/cardsfolder/s/shivan_raptor.txt svneol=native#text/plain
 res/cardsfolder/s/shivan_reef.txt svneol=native#text/plain
 res/cardsfolder/s/shivan_sand_mage.txt -text
+res/cardsfolder/s/shivan_wumpus.txt -text
 res/cardsfolder/s/shivan_wurm.txt svneol=native#text/plain
 res/cardsfolder/s/shivan_zombie.txt svneol=native#text/plain
 res/cardsfolder/s/shivs_embrace.txt svneol=native#text/plain
