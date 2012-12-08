@@ -1,8 +1,13 @@
 Name:Earthbind
 ManaCost:R
 Types:Enchantment Aura
-Text:When Earthbind enters the battlefield, if enchanted creature has flying, Earthbind deals 2 damage to that creature and enchanted creature loses flying.
+Text:no text
 K:Enchant creature
+A:SP$ Attach | Cost$ R | ValidTgts$ Creature | AILogic$ Curse | AITgts$ Creature.withFlying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | IsPresent$ Card.EnchantedBy+withFlying | PresentCompare$ EQ1 | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, if enchanted creature has flying, CARDNAME deals 2 damage to that creature and CARDNAME gains "Enchanted creature loses flying."
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ Valid Card.EnchantedBy | NumDmg$ 2 | SubAbility$ DBLoseFlying
+SVar:DBLoseFlying:DB$ Animate | Defined$ Self | staticAbilities$ LoseFlyingStatic | Permanent$ True
+SVar:LoseFlyingStatic:Mode$ Continuous | Affected$ Card.EnchantedBy | RemoveKeyword$ Flying | Description$ Enchanted creature loses flying.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/earthbind.jpg
 SetInfo:LEA|Common|http://magiccards.info/scans/en/al/146.jpg

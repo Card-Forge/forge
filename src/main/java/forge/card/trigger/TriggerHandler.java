@@ -49,11 +49,12 @@ import forge.game.zone.ZoneType;
  * @author Forge
  * @version $Id$
  */
-public class TriggerHandler {
 
+public class TriggerHandler {
     private final ArrayList<TriggerType> suppressedModes = new ArrayList<TriggerType>();
 
     private final ArrayList<Trigger> delayedTriggers = new ArrayList<Trigger>();
+    private final List<TriggerWaiting> waitingTriggers = new ArrayList<TriggerWaiting>();
 
     /**
      * Clean up temporary triggers.
@@ -266,6 +267,26 @@ public class TriggerHandler {
         if (this.suppressedModes.contains(mode)) {
             return;
         }
+        
+        final GameState game = Singletons.getModel().getGame();
+        
+        if (game.getStack().isFrozen()) {
+            waitingTriggers.add(new TriggerWaiting(mode, runParams));
+        } else {
+            runWaitingTrigger(new TriggerWaiting(mode, runParams));
+        }
+    }
+        
+    public final void runWaitingTriggers() {
+        for (TriggerWaiting wt : waitingTriggers) {
+            runWaitingTrigger(wt);
+        }
+        waitingTriggers.clear();
+    }
+    
+    public final void runWaitingTrigger(TriggerWaiting wt) {
+        final TriggerType mode = wt.getMode();
+        final Map<String, Object> runParams = wt.getParams();
         final GameState game = Singletons.getModel().getGame();
 
         final Player playerAP = game.getPhaseHandler().getPlayerTurn();
@@ -274,10 +295,6 @@ public class TriggerHandler {
             // abort.
             return;
         }
-
-//        if( 0 == 1 ) {
-//            System.out.println("T:" + mode.toString() + " > " + forge.util.TextUtil.mapToString(runParams) );
-//        }
 
         // This is done to allow the list of triggers to be modified while
         // triggers are running.
@@ -297,13 +314,15 @@ public class TriggerHandler {
             }
         }
 
+        // Commenting out the checkStaticAbilities() section
+        // Since this should generally be called from within checkStaticAbilities
         if (checkStatics) {
-            game.getAction().checkStaticAbilities();
+            //game.getAction().checkStaticAbilities();
         } else if (runParams.containsKey("Destination")) {
             // Check static abilities when a card enters the battlefield
             String type = (String) runParams.get("Destination");
             if (type.equals("Battlefield")) {
-                game.getAction().checkStaticAbilities();
+                //game.getAction().checkStaticAbilities();
             }
         }
 

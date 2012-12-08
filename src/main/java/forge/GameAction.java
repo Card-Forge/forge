@@ -1224,6 +1224,8 @@ public class GameAction {
 
         this.handleLegendRule();
         this.handlePlaneswalkerRule();
+        
+        game.getTriggerHandler().runWaitingTriggers();
 
         if (!refreeze) {
             game.getStack().unfreezeStack();
