@@ -13002,6 +13002,7 @@ src/main/java/forge/card/trigger/TriggerTurnFaceUp.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerType.java -text
 src/main/java/forge/card/trigger/TriggerUnequip.java svneol=native#text/plain
 src/main/java/forge/card/trigger/TriggerUntaps.java svneol=native#text/plain
+src/main/java/forge/card/trigger/TriggerWaiting.java -text
 src/main/java/forge/card/trigger/WrappedAbility.java -text
 src/main/java/forge/card/trigger/ZCTrigger.java svneol=native#text/plain
 src/main/java/forge/card/trigger/package-info.java svneol=native#text/plain
