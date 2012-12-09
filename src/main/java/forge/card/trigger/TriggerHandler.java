@@ -277,13 +277,15 @@ public class TriggerHandler {
         }
     }
         
-    public final void runWaitingTriggers() {
+    public final boolean runWaitingTriggers() {
         ArrayList<TriggerWaiting> waiting = new ArrayList<TriggerWaiting>(waitingTriggers);
         waitingTriggers.clear();
-
+        boolean haveWaiting = !waiting.isEmpty();
         for (TriggerWaiting wt : waiting) {
             runWaitingTrigger(wt);
         }
+        
+        return haveWaiting;
     }
     
     public final void runWaitingTrigger(TriggerWaiting wt) {

@@ -142,8 +142,8 @@ public class ChooseTypeEffect extends SpellEffect {
                                 card.setChosenType(choice);
                             }
                         } else {
-                            // TODO
-                            // computer will need to choose a type
+                            // TODO AttachAI for ChosenType should have the exact same logic
+                            card.setChosenType("Island");
                         }
                     }
                 } else if (type.equals("Land")) {

@@ -12891,7 +12891,6 @@ src/main/java/forge/card/abilityfactory/effects/UntapEffect.java -text
 src/main/java/forge/card/abilityfactory/package-info.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactory.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactoryArtifacts.java -text
-src/main/java/forge/card/cardfactory/CardFactoryAuras.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactoryCreatures.java svneol=native#text/plain
 src/main/java/forge/card/cardfactory/CardFactoryEnchantments.java -text
 src/main/java/forge/card/cardfactory/CardFactoryLands.java svneol=native#text/plain

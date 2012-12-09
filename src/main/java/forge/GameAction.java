@@ -1182,6 +1182,8 @@ public class GameAction {
 
             } // while it.hasNext()
 
+            checkAgain |= game.getTriggerHandler().runWaitingTriggers();
+            
             if (!checkAgain) {
                 break; // do not continue the loop
             }
@@ -1224,8 +1226,6 @@ public class GameAction {
 
         this.handleLegendRule();
         this.handlePlaneswalkerRule();
-        
-        game.getTriggerHandler().runWaitingTriggers();
 
         if (!refreeze) {
             game.getStack().unfreezeStack();

@@ -163,6 +163,12 @@ public class AttachAi extends SpellAiLogic {
                 type = stab.get("AddType");
             }
         }
+        
+        if ("ChosenType".equals(type)) {
+            // TODO ChosenTypeEffect should have exact same logic that's here
+            // For now, Island is as good as any for a default value
+            type = "Island";
+        }
 
         list = CardLists.getNotType(list, type); // Filter out Basic Lands that have the
                                       // same type as the changing type
