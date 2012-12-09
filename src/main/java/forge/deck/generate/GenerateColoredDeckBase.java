@@ -104,24 +104,21 @@ public abstract class GenerateColoredDeckBase {
 
     protected void addSome(int cnt, List<CardPrinted> source) {
         for (int i = 0; i < cnt; i++) {
-            CardPrinted c;
+            CardPrinted cp;
             int lc = 0;
             do {
-                c = source.get(this.r.nextInt(source.size()));
+                cp = source.get(this.r.nextInt(source.size()));
                 lc++;
-            } while ((this.cardCounts.get(c.getName()) > (this.maxDuplicates - 1)) && (lc <= 100));
+            } while ((this.cardCounts.get(cp.getName()) > (this.maxDuplicates - 1)) && (lc <= 100));
 
             if (lc > 100) {
                 throw new RuntimeException("Generate2ColorDeck : get2ColorDeck -- looped too much -- Cr12");
             }
 
-            Card tCard = c.toForgeCard();
-            tCard.setRandomSetCode();
-            
-            tDeck.add(CardDb.instance().getCard(tCard));
-            final int n = this.cardCounts.get(c.getName());
-            this.cardCounts.put(c.getName(), n + 1);
-            tmpDeck.append(c.getName() + " " + c.getCard().getManaCost() + "\n");
+            tDeck.add(CardDb.instance().getCard(cp.getName(), Aggregates.random(cp.getCard().getSetsPrinted()).getKey()));
+            final int n = this.cardCounts.get(cp.getName());
+            this.cardCounts.put(cp.getName(), n + 1);
+            tmpDeck.append(cp.getName() + " " + cp.getCard().getManaCost() + "\n");
         }
     }
 
@@ -136,10 +133,9 @@ public abstract class GenerateColoredDeckBase {
             } while ((this.cardCounts.get(s) > 3) && (lc <= 20));
             // not an error if looped too much - could play singleton mode, with 6 slots for 3 non-basic lands.
 
-            Card tCard = CardDb.instance().getCard(s).toForgeCard();
-            tCard.setRandomSetCode();
+            CardPrinted cp = CardDb.instance().getCard(s);
+            tDeck.add(CardDb.instance().getCard(cp.getName(), Aggregates.random(cp.getCard().getSetsPrinted()).getKey()));
 
-            tDeck.add(CardDb.instance().getCard(tCard));
             final int n = this.cardCounts.get(s);
             this.cardCounts.put(s, n + 1);
             tmpDeck.append(s + "\n");
@@ -173,10 +169,10 @@ public abstract class GenerateColoredDeckBase {
             // code
             this.cardCounts.put(color, nLand);
 
-            Card tCard = CardDb.instance().getCard(color).toForgeCard();
-            tCard.setRandomSetCode();
+            CardPrinted cp = CardDb.instance().getCard(color);
+            String basicLandSet = Aggregates.random(cp.getCard().getSetsPrinted()).getKey();
             for (int j = 0; j <= nLand; j++) {
-                tDeck.add(CardDb.instance().getCard(tCard));
+                tDeck.add(CardDb.instance().getCard(cp.getName(), basicLandSet));
             }
         }
     }
