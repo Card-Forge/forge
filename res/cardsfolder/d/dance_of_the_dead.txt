@@ -5,7 +5,7 @@ Text:no text
 K:Enchant creature card in a graveyard
 A:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature | TgtZone$ Graveyard | AILogic$ Reanimate
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigReanimate | TriggerDescription$ When CARDNAME enters the battlefield, if it's on the battlefield, it loses "enchant creature card in a graveyard" and gains "enchant creature put onto the battlefield with CARDNAME." Return enchanted creature card to the battlefield under your control and attach CARDNAME to it.
-SVar:TrigReanimate:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ Enchanted | RememberChanged$ True | SubAbility$ DBAnimate
+SVar:TrigReanimate:DB$ ChangeZone | Origin$ Graveyard | Destination$ Battlefield | Defined$ Enchanted | RememberChanged$ True | GainControl$ True | Tapped$ True | SubAbility$ DBAnimate
 SVar:DBAnimate:DB$ Animate | Defined$ Self | OverwriteSpells$ True | Abilities$ NewAttach | Keywords$ Enchant creature put onto the battlefield with CARDNAME | RemoveKeywords$ Enchant creature card in a graveyard | Permanent$ True | SubAbility$ DBAttach
 SVar:DBAttach:DB$ Attach | Defined$ Remembered
 SVar:NewAttach:SP$ Attach | Cost$ 1 B | ValidTgts$ Creature.IsRemembered | AILogic$ Pump
