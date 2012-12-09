@@ -204,6 +204,17 @@ Fixes/Features:
 - Fixed Tower Above.
 - Sigh, missed a new class.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixing rarity on Aura Finesse
+- Added an option to the preferences window to randomize card art in the human decks (e.g. different card art for basic lands from the same set) for whoever likes variety.
+- Better name for the card art randomization option.
+- Minor code cleanup.
+- Fix to avoid Comodification errors with Waiting Triggers and infinite loops with multiple resolving Waiting Triggers
+- Convert Guilty Conscience to Script
+- Fixing a crash in Island Sanctuary before the game starts
+- Convert Convincing Mirage and Phantasmal Terrain to script
+- Small tweak to Triggers to allow them to refire Statics when they finish resolving (useful for Conving Mirage to actually grant its ability immediately upon resolving)
+- Made the random set generation for random decks more optimal.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
