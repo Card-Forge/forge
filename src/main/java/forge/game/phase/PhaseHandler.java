@@ -94,7 +94,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * @return a boolean.
      */
     public final boolean isPlayerTurn(final Player player) {
-        return this.playerTurn.equals(player);
+        return player.equals(this.playerTurn);
     }
 
     /**
