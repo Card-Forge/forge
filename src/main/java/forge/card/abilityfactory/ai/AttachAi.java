@@ -337,6 +337,44 @@ public class AttachAi extends SpellAiLogic {
 
         return c;
     }
+    
+    /**
+     * Attach ai control preference.
+     * 
+     * @param sa
+     *            the sa
+     * @param list
+     *            the list
+     * @param mandatory
+     *            the mandatory
+     * @param attachSource
+     *            the attach source
+     * @return the card
+     */
+    private static Card attachAISpecifcCardPreference(final SpellAbility sa, final List<Card> list, final boolean mandatory,
+            final Card attachSource) {
+        // I know this isn't much better than Hardcoding, but some cards need it for now
+        Player ai = sa.getActivatingPlayer();
+        Card chosen = null;
+        if ("Guilty Conscience".equals(sa.getSourceCard().getName())) {    
+            List<Card> aiStuffies = CardLists.filter(list, Predicates.and(CardPredicates.isController(ai), CardPredicates.nameEquals("Stuffy Doll")));
+            if (!aiStuffies.isEmpty()) {
+                chosen = aiStuffies.get(0);
+            } else {
+                // Improve this to include all Opponent creatures
+                final List<Card> creatures = ai.getOpponent().getCreaturesInPlay();
+                chosen = CardFactoryUtil.getBestCreatureAI(creatures);
+            }
+        }
+        
+        // If Mandatory (brought directly into play without casting) gotta
+        // choose something
+        if (chosen == null && mandatory) {
+            return chooseLessPreferred(mandatory, list);
+        }
+
+        return chosen;
+    }
 
     // Should generalize this code a bit since they all have similar structures
     /**
@@ -792,7 +830,14 @@ public class AttachAi extends SpellAiLogic {
         }
         // Some ChangeType cards are beneficial, and PrefPlayer should be
         // changed to represent that
-        final List<Card> prefList = CardLists.filterControlledBy(list, prefPlayer);
+        final List<Card> prefList;
+        
+        if ("Reanimate".equals(logic) || "SpecificCard".equals(logic)) {
+            // Reanimate or SpecificCard aren't so restrictive
+            prefList = list;
+        } else {
+            prefList = CardLists.filterControlledBy(list, prefPlayer);
+        }
 
         // If there are no preferred cards, and not mandatory bail out
         if (prefList.size() == 0) {
@@ -816,6 +861,8 @@ public class AttachAi extends SpellAiLogic {
             c = attachAIAnimatePreference(sa, prefList, mandatory, attachSource);
         } else if ("Reanimate".equals(logic)) {
             c = attachAIReanimatePreference(sa, prefList, mandatory, attachSource);
+        } else if ("SpecificCard".equals(logic)) {
+            c = attachAISpecifcCardPreference(sa, prefList, mandatory, attachSource);
         }
 
         return c;

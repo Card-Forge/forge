@@ -21,30 +21,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.esotericsoftware.minlog.Log;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
-
 import forge.Card;
 
 import forge.CardLists;
-import forge.CardPredicates.Presets;
 import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
 import forge.Singletons;
-import forge.card.cost.Cost;
-import forge.card.spellability.Ability;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.SpellPermanent;
-import forge.card.spellability.Target;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCost;
 import forge.control.input.InputSelectManyCards;
 import forge.game.player.Player;
-import forge.game.zone.PlayerZone;
-import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
@@ -276,61 +265,6 @@ class CardFactoryAuras {
             };
             runtime.setMessage("Select target land");
             spell.setBeforePayMana(runtime);
-        } // *************** END ************ END **************************
-
-        // *************** START *********** START **************************
-        else if (cardName.equals("Guilty Conscience")) {
-            final Cost cost = new Cost(card, card.getManaCost(), false);
-            final Target tgt = new Target(card, "C");
-            final SpellAbility spell = new SpellPermanent(card, cost, tgt) {
-
-                private static final long serialVersionUID = 1169151960692309514L;
-
-                @Override
-                public boolean canPlayAI() {
-
-                    final List<Card> stuffy = getActivatingPlayer().getCardsIn(ZoneType.Battlefield, "Stuffy Doll");
-
-                    if (stuffy.size() > 0) {
-                        this.setTargetCard(stuffy.get(0));
-                        return true;
-                    } else {
-                        final List<Card> list = getActivatingPlayer().getOpponent().getCreaturesInPlay();
-
-                        if (list.isEmpty()) {
-                            return false;
-                        }
-
-                        // else
-                        CardLists.sortAttack(list);
-                        CardLists.sortFlying(list);
-
-                        for (int i = 0; i < list.size(); i++) {
-                            if (list.get(i).canBeTargetedBy(this)
-                                    && (list.get(i).getNetAttack() >= list.get(i).getNetDefense())
-                                    && (list.get(i).getNetAttack() >= 3)) {
-                                this.setTargetCard(list.get(i));
-                                return super.canPlayAI();
-                            }
-                        }
-                    }
-                    return false;
-
-                } // canPlayAI()
-
-                @Override
-                public void resolve() {
-                    final Card aura = Singletons.getModel().getGame().getAction().moveToPlay(card);
-
-                    final Card c = this.getTargetCard();
-
-                    if (c.isInPlay() && c.canBeTargetedBy(this)) {
-                        aura.enchantEntity(c);
-                    }
-                } // resolve()
-            }; // SpellAbility
-
-            card.addSpellAbility(spell);
         } // *************** END ************ END **************************
 
         else if (CardFactoryUtil.hasKeyword(card, "enchant") != -1) {
