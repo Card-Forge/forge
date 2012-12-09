@@ -308,8 +308,6 @@ public class CardFactory {
             CardFactoryLands.buildCard(card, cardName);
         } else if (card.isSorcery()) {
             CardFactorySorceries.buildCard(card, cardName);
-        } else if (card.isEnchantment()) {
-            CardFactoryEnchantments.buildCard(card, cardName);
         } else if (card.isArtifact()) {
             CardFactoryArtifacts.buildCard(card, cardName);
         }

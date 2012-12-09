@@ -163,6 +163,7 @@ public class Cost {
     private static final String EXILE_FROM_GRAVE_STR = "ExileFromGrave<";
     private static final String EXILE_FROM_STACK_STR = "ExileFromStack<";
     private static final String EXILE_FROM_TOP_STR = "ExileFromTop<";
+    private static final String EXILE_SAME_GRAVE_STR = "ExileSameGrave<";
     private static final String RETURN_STR = "Return<";
     private static final String REVEAL_STR = "Reveal<";
     private static final String XCANTBE0_STR = "XCantBe0";
@@ -320,6 +321,14 @@ public class Cost {
 
             final String description = splitStr.length > 2 ? splitStr[2] : null;
             this.costParts.add(new CostExile(splitStr[0], splitStr[1], description, ZoneType.Library));
+        }
+        
+        while (parse.contains(Cost.EXILE_SAME_GRAVE_STR)) {
+            final String[] splitStr = this.abCostParse(parse, Cost.EXILE_SAME_GRAVE_STR, 3);
+            parse = this.abUpdateParse(parse, Cost.EXILE_SAME_GRAVE_STR);
+
+            final String description = splitStr.length > 2 ? splitStr[2] : null;
+            this.costParts.add(new CostExile(splitStr[0], splitStr[1], description, ZoneType.Graveyard, true));
         }
 
         while (parse.contains(Cost.RETURN_STR)) {

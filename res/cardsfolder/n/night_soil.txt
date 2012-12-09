@@ -2,6 +2,7 @@ Name:Night Soil
 ManaCost:G G
 Types:Enchantment
 Text:no text
+A:AB$ Token | Cost$ 1 ExileSameGrave<2/Creature> | TokenAmount$ 1 | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | SpellDescription$ Put a 1/1 green Saproling creature token onto the battlefield.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/night_soil.jpg
