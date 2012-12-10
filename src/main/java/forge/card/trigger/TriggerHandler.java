@@ -270,11 +270,15 @@ public class TriggerHandler {
         
         final GameState game = Singletons.getModel().getGame();
         
+        runWaitingTrigger(new TriggerWaiting(mode, runParams));
+        /* Temporarily commented out while timing kinks with some other cards are worked out
         if (game.getStack().isFrozen()) {
             waitingTriggers.add(new TriggerWaiting(mode, runParams));
         } else {
             runWaitingTrigger(new TriggerWaiting(mode, runParams));
         }
+        
+        */
     }
         
     public final boolean runWaitingTriggers() {
