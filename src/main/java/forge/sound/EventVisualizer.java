@@ -112,10 +112,8 @@ public class EventVisualizer {
         if (sa.isSpell()) {
             // if there's a specific effect for this particular card, play it and
             // we're done.
-            SoundEffectType specialEffect = getSpecificCardEffect(source);
-            if (specialEffect != null) {
-                return specialEffect;
-            }
+            if (getSpecificCardEffect(source))
+                return SoundEffectType.ScriptedEffect;
 
             if (source.isCreature() && source.isArtifact()) {
                 return SoundEffectType.ArtifactCreature;
@@ -161,11 +159,8 @@ public class EventVisualizer {
 
         // if there's a specific effect for this particular card, play it and
         // we're done.
-        SoundEffectType specialEffect = getSpecificCardEffect(land);
-        if (specialEffect != null) {
-            return specialEffect;
-        }
-
+        if (getSpecificCardEffect(land))
+            return SoundEffectType.ScriptedEffect;
 
         final List<SpellAbility> manaProduced = land.getManaAbility();
 
@@ -199,11 +194,27 @@ public class EventVisualizer {
      * @param c the card to play the sound effect for.
      * @return the sound effect type
      */
-    private static SoundEffectType getSpecificCardEffect(final Card c) {
+    private static boolean getSpecificCardEffect(final Card c) {
         // Implement sound effects for specific cards here, if necessary.
-        return null;
+        String effect = "";
+        if (null != c) {
+            effect = c.getSVar("SoundEffect");
+        }
+        return effect.isEmpty() ? false : true;
     }
 
+
+    String getScriptedSoundEffectName(Event evt) {
+        Card c = null;
+        
+        if (evt instanceof SpellResolvedEvent) {
+            c = ((SpellResolvedEvent) evt).Source;
+        } else if (evt instanceof LandPlayedEvent) {
+            c = ((LandPlayedEvent) evt).Land;
+        }
+
+        return c != null ? c.getSVar("SoundEffect") : "";
+    }
 
     /**
      * Determine if the event will potentially produce a lot of overlapping

@@ -63,8 +63,9 @@ public enum SoundEffectType {
     Regen("regeneration.wav", false),
     RemoveCounter("remove_counter.wav", false),
     Sacrifice("sacrifice.wav", false),
-    Sorcery("sorcery.wav", false),
+    ScriptedEffect("", false), // Plays the effect defined by SVar:SoundEffect
     Shuffle("shuffle.wav", false),
+    Sorcery("sorcery.wav", false),
     Tap("tap.wav", false),
     Token("token.wav", false),
     Untap("untap.wav", false),
