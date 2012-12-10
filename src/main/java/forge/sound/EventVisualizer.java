@@ -204,7 +204,15 @@ public class EventVisualizer {
     }
 
 
-    String getScriptedSoundEffectName(Event evt) {
+    /**
+     * Returns the value of the SoundEffect SVar of the card that triggered
+     * the event, otherwise returns an empty string.
+     * 
+     * @param evt the event which is the source of the sound effect
+     * @return a string containing the SoundEffect SVar, or empty string if
+     * SVar:SoundEffect does not exist.
+     */
+    public String getScriptedSoundEffectName(Event evt) {
         Card c = null;
         
         if (evt instanceof SpellResolvedEvent) {
