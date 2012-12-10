@@ -27,6 +27,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.Singletons;
+import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.trigger.TriggerType;
 import forge.game.GameState;
 import forge.game.event.EndOfTurnEvent;
@@ -268,6 +269,11 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 } else {
                     this.getPlayerTurn().drawCards(1, true);
                 }
+                break;
+                
+            case MAIN1:
+                if(this.getPlayerTurn().isArchenemy())
+                    this.getPlayerTurn().setSchemeInMotion();
                 break;
 
             case COMBAT_BEGIN:
@@ -710,6 +716,36 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         // stop game if it's outcome is clear
         if (game.isGameOver()) {
             return;
+        }
+        
+        //904.10. If a non-ongoing scheme card is face up in the 
+        //command zone, and it isn't the source of a triggered ability 
+        //that has triggered but not yet left the stack, that scheme card 
+        //is turned face down and put on the bottom of its owner's scheme 
+        //deck the next time a player would receive priority. 
+        //(This is a state-based action. See rule 704.)
+        for (int i=0; i<game.getCardsIn(ZoneType.Command).size();i++) {
+            Card c = game.getCardsIn(ZoneType.Command).get(i);
+            if(c.isScheme() && !c.isType("Ongoing"))
+            {
+                boolean foundonstack = false;
+                for(SpellAbilityStackInstance si : game.getStack().getStack()) {
+                    if(si.getSourceCard().equals(c))
+                    {
+                        foundonstack = true;
+                        break;
+                    }
+                }
+                if(!foundonstack)
+                {
+                    game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+                    c.getController().getZone(ZoneType.Command).remove(c);
+                    i--;
+                    game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+                    
+                    c.getController().getSchemeDeck().add(c);
+                }
+            }
         }
 
         final Player actingPlayer = this.getPriorityPlayer();

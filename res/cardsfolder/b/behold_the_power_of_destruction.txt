@@ -1,0 +1,11 @@
+Name:Behold the Power of Destruction
+ManaCost:no cost
+Types:Scheme
+Text:no text
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DarkEffect | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, destroy all nonland permanents target opponent controls.
+SVar:DarkEffect:AB$ DestroyAll | Cost$ 0 | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | ValidCards$ Permanent.nonLand
+SVar:Rarity:Common
+SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/behold_the_power_of_destruction.jpg
+SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/behold-the-power-of-destruction.jpg
+Oracle:When you set this scheme in motion, destroy all nonland permanents target opponent controls.
+End

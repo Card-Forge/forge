@@ -1,0 +1,15 @@
+Name:Imprison This Insolent Wretch
+ManaCost:no cost
+Types:Ongoing Scheme
+Text:no text
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ ChooseTheWretch | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, choose an opponent.
+SVar:ChooseTheWretch:AB$ ChoosePlayer | Cost$ 0 | Defined$ You | Choices$ Opponent | AILogic$ Curse
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Permanent.ChosenCtrl | AffectedZone$ Battlefield | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Permanents the chosen player controls don't untap during his or her untap step.
+T:Mode$ Attacks | ValidCard$ Card | Attacked$ Player.Chosen | Execute$ Abandon | TriggerZones$ Command | TriggerDescription$ When the chosen player is attacked or becomes the target of a spell or ability, abandon this scheme.
+T:Mode$ SpellAbilityCast | TargetsValid$ Player.Chosen | TriggerZones$ Command | Execute$ Abandon | Secondary$ True | TriggerDescription$ When the chosen player is attacked or becomes the target of a spell or ability, abandon this scheme.
+SVar:Abandon:AB$ Abandon | Cost$ 0
+SVar:Rarity:Common
+SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/imprison_this_insolent_wretch.jpg
+SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/imprison-this-insolent-wretch.jpg
+Oracle:When you set this scheme in motion, choose an opponent.\nPermanents the chosen player controls don't untap during his or her untap step.\nWhen the chosen player is attacked or becomes the target of a spell or ability, abandon this scheme.
+End

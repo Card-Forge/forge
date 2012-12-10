@@ -5430,6 +5430,10 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean isEquipment() {
         return this.typeContains("Equipment");
     }
+    
+    public final boolean isScheme() {
+        return this.typeContains("Scheme");
+    }
 
     /**
      * <p>

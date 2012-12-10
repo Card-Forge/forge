@@ -1,0 +1,11 @@
+Name:Every Hope Shall Vanish
+ManaCost:no cost
+Types:Scheme
+Text:no text
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ DiscardHope | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, each opponent reveals his or her hand. Choose a nonland card from each of those hands. Those players discard those cards.
+SVar:DiscardHope:AB$ Discard | Cost$ 0 | Defined$ Player.Opponent | Mode$ RevealYouChoose | DiscardValid$ Card.nonLand | NumCards$ 1
+SVar:Rarity:Common
+SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/every_hope_shall_vanish.jpg
+SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/every-hope-shall-vanish.jpg
+Oracle:When you set this scheme in motion, each opponent reveals his or her hand. Choose a nonland card from each of those hands. Those players discard those cards.
+End

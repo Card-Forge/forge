@@ -1,0 +1,13 @@
+Name:All Shall Smolder in My Wake
+ManaCost:no cost
+Types:Scheme
+Text:no text
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ Ignite | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, destroy up to one target artifact, up to one target enchantment, and up to one target nonbasic land.
+SVar:Ignite:AB$ Destroy | Cost$ 0 | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact to destroy | SubAbility$ Burn
+SVar:Burn:DB$ Destroy | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Enchantment | TgtPrompt$ Select target enchantment to destroy | SubAbility$ Smolder
+SVar:Smolder:DB$ Destroy | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land to destroy
+SVar:Rarity:Common
+SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/all_shall_smolder_in_my_wake.jpg
+SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/all-shall-smolder-in-my-wake.jpg
+Oracle:When you set this scheme in motion, destroy up to one target artifact, up to one target enchantment, and up to one target nonbasic land.
+End

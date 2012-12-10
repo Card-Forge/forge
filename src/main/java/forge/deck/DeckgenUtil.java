@@ -16,17 +16,22 @@ import javax.swing.JOptionPane;
 
 import org.apache.commons.lang3.ArrayUtils;
 
+import com.google.common.collect.Iterables;
+
 import forge.Singletons;
 import forge.deck.generate.Generate2ColorDeck;
 import forge.deck.generate.Generate3ColorDeck;
 import forge.deck.generate.Generate5ColorDeck;
 import forge.deck.generate.GenerateThemeDeck;
 import forge.game.player.PlayerType;
+import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventManager;
 import forge.util.IStorage;
+import forge.util.MyRandom;
 
 /** 
  * Utility collection for various types of decks.
@@ -301,5 +306,33 @@ public class DeckgenUtil {
             result = false;
         }
         return result;
+    }
+    
+    public static Deck generateSchemeDeck() {
+        Deck res = new Deck();
+        
+        Iterable<CardPrinted> allSchemes = Iterables.filter(CardDb.instance().getAllNonTraditionalCards(),CardPrinted.Predicates.type("Scheme"));
+        
+        for(int i=0;i<20;i++) {
+            CardPrinted cp = Iterables.get(allSchemes, MyRandom.getRandom().nextInt(Iterables.size(allSchemes)));
+            int appearances = 0;
+            for(CardPrinted added : res.getSchemes().toFlatList()) {
+                if(added.getName().equals(cp.getName()))
+                {
+                    appearances++;
+                }
+            }
+            
+            if(appearances < 2)
+            {
+                res.getSchemes().add(cp);
+            }
+            else
+            {
+                i--;
+            }
+        }
+        
+        return res;
     }
 }

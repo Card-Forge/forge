@@ -1310,8 +1310,9 @@ public class ChangeZoneAi extends SpellAiLogic {
             player.shuffle();
         }
 
-        if (!ZoneType.Battlefield.equals(destination) && !"Card".equals(type) && !defined) {
-            final String picked = sa.getSourceCard().getName() + " - Computer picked:";
+        if ((!ZoneType.Battlefield.equals(destination) && !"Card".equals(type) && !defined)
+                || (sa.hasParam("Reveal") && !fetched.isEmpty())) {
+            final String picked = player + " picked:";
             if (fetched.size() > 0) {
                 GuiChoose.one(picked, fetched);
             } else {

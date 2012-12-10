@@ -14,6 +14,7 @@ public class PlayerStartConditions {
     private int startingHand = 7;
     private Supplier<Iterable<Card>> cardsOnBattlefield = null;
     private Supplier<Iterable<Card>> cardsInCommand = null;
+    private Supplier<Iterable<Card>> schemes = null;
 
     public PlayerStartConditions(Deck deck0) {
         deck = deck0;
@@ -63,6 +64,20 @@ public class PlayerStartConditions {
      */
     public void setCardsInCommand(Supplier<Iterable<Card>> cardsInCommand0) {
         this.cardsInCommand = cardsInCommand0;
+    }
+
+    /**
+     * @return the schemes
+     */
+    public Iterable<Card> getSchemes() {
+        return schemes == null ? null : schemes.get();
+    }
+
+    /**
+     * @param schemes0 the schemes to set
+     */
+    public void setSchemes(Supplier<Iterable<Card>> s) {
+        this.schemes = s;
     }
 
 

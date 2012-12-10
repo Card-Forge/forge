@@ -1,0 +1,11 @@
+Name:Tooth, Claw, and Tail
+ManaCost:no cost
+Types:Scheme
+Text:no text
+T:Mode$ SetInMotion | Execute$ DarkEffect | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, destroy up to three target nonland permanents.
+SVar:DarkEffect:AB$ Destroy | Cost$ 0 | TargetMin$ 0 | TargetMax$ 3 | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent
+SVar:Rarity:Common
+SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/tooth_claw_and_tail.jpg
+SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/tooth-claw-and-tail.jpg
+Oracle:When you set this scheme in motion, destroy up to three target nonland permanents.
+End

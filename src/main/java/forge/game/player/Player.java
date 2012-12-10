@@ -142,6 +142,9 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     private final Map<ZoneType, PlayerZone> zones = new EnumMap<ZoneType, PlayerZone>(ZoneType.class);
 
     private PlayerStatistics stats = new PlayerStatistics();
+    
+    private final List<Card> schemeDeck = new ArrayList<Card>();
+    private Card activeScheme = null;
 
     /** The Constant ALL_ZONES. */
     public static final List<ZoneType> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(ZoneType.Battlefield,
@@ -205,6 +208,55 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     //@Deprecated
     public abstract boolean isComputer();
     public abstract PlayerType getType();
+    
+    public List<Card> getSchemeDeck()
+    {
+        return schemeDeck;
+    }
+    
+    public void setSchemeDeck(Iterable<Card> sd)
+    {
+        schemeDeck.clear();
+        for(Card c : sd)
+        {
+            schemeDeck.add(c);
+            c.setOwner(this);
+        }
+        CardLists.shuffle(schemeDeck);
+    }
+    
+    public boolean isArchenemy()
+    {
+        //Only the archenemy has schemes.
+        return schemeDeck.size() > 0;
+    }
+    
+    public void setSchemeInMotion()
+    {
+        // Replacement effects
+        final HashMap<String, Object> repRunParams = new HashMap<String, Object>();
+        repRunParams.put("Event", "SetInMotion");
+        repRunParams.put("Affected", this);
+
+        if (game.getReplacementHandler().run(repRunParams) != ReplacementResult.NotReplaced) {
+            return;
+        }
+        
+        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+       
+        activeScheme = schemeDeck.get(0);
+        
+        schemeDeck.remove(0);
+        
+        this.getZone(ZoneType.Command).add(activeScheme);
+        
+        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+        
+        // Run triggers
+        final HashMap<String, Object> runParams = new HashMap<String, Object>();
+        runParams.put("Scheme", activeScheme);
+        game.getTriggerHandler().runTrigger(TriggerType.SetInMotion, runParams);
+    }
 
     /**
      * <p>

@@ -282,6 +282,8 @@ public class ReplacementHandler {
             ret = new ReplaceGameLoss(mapParams, host);
         } else if (eventToReplace.equals("Moved")) {
             ret = new ReplaceMoved(mapParams, host);
+        } else if (eventToReplace.equals("SetInMotion")) {
+            ret = new ReplaceSetInMotion(mapParams, host);
         }
 
         String activeZones = mapParams.get("ActiveZones");

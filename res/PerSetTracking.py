@@ -80,7 +80,7 @@ for currentSet in setCodes :
 	if currentSet == 'VG4' or currentSet == 'VGO' or currentSet == 'VG ' : continue
 	if currentSet == 'FVD' or currentSet == 'FVE' or currentSet == 'FVR' : continue
 	if currentSet == 'SDC' or currentSet == 'AST' or currentSet == 'DKM' : continue
-	if currentSet == 'BTD' or currentSet == 'ARC' or currentSet == 'COM' : continue
+	if currentSet == 'BTD' or currentSet == 'COM' : continue
 	#if currentSet == 'CHR' or currentSet == 'MED' or currentSet == 'H09' : continue
 	if currentSet == 'ME2' or currentSet == 'ME3' or currentSet == 'ME4' : continue
 	if currentSet == 'ATH' or currentSet == 'HOP' or currentSet == 'BRB' : continue
