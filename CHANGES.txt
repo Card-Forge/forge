@@ -215,6 +215,16 @@ Fixes/Features:
 - Small tweak to Triggers to allow them to refire Statics when they finish resolving (useful for Conving Mirage to actually grant its ability immediately upon resolving)
 - Made the random set generation for random decks more optimal.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Small fixes to Animate Dead and Dance of the Dead
+- Fixed the ability cost for Engineered Explosives.
+- Convert Night Soil to script (done with CF_Enchantments)
+- Temporarily disable changes needed for Valakut timing properly, since it seemed to have adversely effect a bunch of other triggers
+- Fixed Elfhame Sanctuary.
+- Fixed getGamesWonBy crashing when the game was a draw.
+- Fixed Yawgmoth's Will.
+- Sound system: Added a way to play card-specific sound effects depending on the presence of the SoundEffect SVar on a card. If the SVar is present, the sound file specified in the SVar must be present, otherwise no sound is played.
+- Improved doTriggerAINoCost in AF Attach.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
