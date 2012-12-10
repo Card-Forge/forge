@@ -370,11 +370,7 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
 
             int right = 1;
             final String rightString = this.getPresentCompare().substring(2);
-            if (rightString.equals("X")) {
-                right = CardFactoryUtil.xCount(c, c.getSVar("X"));
-            } else {
-                right = Integer.parseInt(this.getPresentCompare().substring(2));
-            }
+            right = AbilityFactory.calculateAmount(c, rightString, sa);
             final int left = list.size();
 
             if (!Expressions.compare(left, this.getPresentCompare(), right)) {

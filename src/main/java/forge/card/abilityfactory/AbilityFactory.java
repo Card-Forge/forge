@@ -539,6 +539,16 @@ public class AbilityFactory {
                 final String[] m = CardFactoryUtil.parseMath(l);
                 return CardFactoryUtil.doXMath(AbilityFactory.calculateAmount(card, l[0], ability), m, card)
                         * multiplier;
+            } else if (calcX[0].startsWith("PlayerCount")) {
+                final String hType = calcX[0].substring(11);
+                final ArrayList<Player> players = new ArrayList<Player>();
+                if (hType.equals("Players") || hType.equals("")) {
+                    players.addAll(Singletons.getModel().getGame().getPlayers());
+                    return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+                } else if (hType.equals("Opponents")) {
+                    players.addAll(card.getController().getOpponents());
+                    return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+                }
             } else if (calcX[0].startsWith("Remembered")) {
                 // Add whole Remembered list to handlePaid
                 final List<Card> list = new ArrayList<Card>();

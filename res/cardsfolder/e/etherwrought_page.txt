@@ -6,7 +6,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigCharm | TriggerZ
 SVar:TrigCharm:AB$ Charm | Cost$ 0 | Choices$ DBGainLife,DBDig,DBLoseLife | CharmNum$ 1
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
 SVar:DBDig:DB$ Dig | DigNum$ 1 | ChangeNum$ 1 | DestinationZone$ Graveyard | Optional$ True | LibraryPosition2$ 0 | SpellDescription$ Look at the top card of your library, then you may put that card into your graveyard.
-SVar:DBLoseLife:DB$ LoseLife | Defined$ Opponent | LifeAmount$ 1 | SpellDescription$ Opponent loses 1 life.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Player.Opponent | LifeAmount$ 1 | SpellDescription$ Opponent loses 1 life.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/etherwrought_page.jpg

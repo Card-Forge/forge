@@ -1769,8 +1769,34 @@ public class CardFactoryUtil {
 
         int n = 0;
 
+        // methods for getting the highest/lowest playerXCount from a range of players
+        if (l[0].startsWith("Highest")) {
+            for (final Player player : players) {
+                final ArrayList<Player> temp = new ArrayList<Player>();
+                temp.add(player);
+                final int current = CardFactoryUtil.playerXCount(temp, s.replace("Highest", ""), source);
+                if (current > n) {
+                    n = current;
+                }
+            }
+
+            return CardFactoryUtil.doXMath(n, m, source);
+        } else if (l[0].startsWith("Lowest")) {
+            n = 99999; // if no players have fewer than 99999 valids, the game is frozen anyway
+            for (final Player player : players) {
+                final ArrayList<Player> temp = new ArrayList<Player>();
+                temp.add(player);
+                final int current = CardFactoryUtil.playerXCount(temp, s.replace("Lowest", ""), source);
+                if (current < n) {
+                    n = current;
+                }
+            }
+
+            return CardFactoryUtil.doXMath(n, m, source);
+        }
+
         // count valid cards on the battlefield
-        if (l[0].startsWith("Valid")) {
+        if (l[0].startsWith("Valid ")) {
             final String restrictions = l[0].substring(6);
             final String[] rest = restrictions.split(",");
             List<Card> cardsonbattlefield = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
@@ -1783,6 +1809,11 @@ public class CardFactoryUtil {
 
         final String[] sq;
         sq = l[0].split("\\.");
+
+        // the number of players passed in
+        if (sq[0].equals("Amount")) {
+            return CardFactoryUtil.doXMath(players.size(), m, source);
+        }
 
         if (sq[0].contains("CardsInHand")) {
             if (players.size() > 0) {
