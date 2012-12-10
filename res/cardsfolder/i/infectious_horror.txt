@@ -4,7 +4,7 @@ Types:Creature Zombie Horror
 Text:no text
 PT:2/2
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ Whenever CARDNAME attacks, each opponent loses 2 life.
-SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ Opponent | LifeAmount$ 2
+SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ Player.Opponent | LifeAmount$ 2
 SVar:HasAttackEffect:TRUE
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/infectious_horror.jpg

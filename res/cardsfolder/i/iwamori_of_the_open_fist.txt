@@ -5,7 +5,7 @@ Text:no text
 PT:5/5
 K:Trample
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, each opponent may put a legendary creature card from his or her hand onto the battlefield.
-SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Legendary | DefinedPlayer$ Opponent | ChangeNum$ 1
+SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature.Legendary | DefinedPlayer$ Player.Opponent | ChangeNum$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iwamori_of_the_open_fist.jpg
 SetInfo:BOK|Rare|http://magiccards.info/scans/en/bok/130.jpg

@@ -4,7 +4,7 @@ Types:Legendary Creature Zombie Elf
 Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | Description$ CARDNAME gets +1/+1 for each creature card in your graveyard.
-A:AB$ LoseLife | Cost$ 1 B G Sac<1/Creature.Other/creature other than CARDNAME> | Defined$ Opponent | LifeAmount$ LichLeech | References$ LichLeech | SpellDescription$ Each opponent loses life equal to the sacrificed creature's power.
+A:AB$ LoseLife | Cost$ 1 B G Sac<1/Creature.Other/creature other than CARDNAME> | Defined$ Player.Opponent | LifeAmount$ LichLeech | References$ LichLeech | SpellDescription$ Each opponent loses life equal to the sacrificed creature's power.
 A:AB$ ChangeZone | Cost$ Sac<1/Swamp> Sac<1/Forest> | Origin$ Graveyard | Destination$ Hand | ActivationZone$ Graveyard | SpellDescription$ Return CARDNAME from your graveyard to your hand.
 SVar:X:Count$TypeInYourYard.Creature
 SVar:LichLeech:Sacrificed$CardPower

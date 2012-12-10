@@ -702,7 +702,7 @@ public class Upkeep extends Phase {
      */
     private static void upkeepInkDissolver() {
         final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
-        final Player opponent = player.getOpponent();
+        final List<Player> opponents = player.getOpponents();
         final List<Card> kinship = player.getCardsIn(ZoneType.Battlefield, "Ink Dissolver");
 
         final PlayerZone library = player.getZone(ZoneType.Library);
@@ -742,7 +742,7 @@ public class Upkeep extends Phase {
                         if (player.isHuman()) {
                             final StringBuilder question = new StringBuilder();
                             question.append("Your top card is ").append(peek[0].getName());
-                            question.append(". Reveal card and opponent puts the top 3 ");
+                            question.append(". Reveal card and opponents each put the top 3 ");
                             question.append("cards of his library into his graveyard?");
                             if (GameActionUtil.showYesNoDialog(k, question.toString())) {
                                 wantToMillOpponent = true;
@@ -760,7 +760,9 @@ public class Upkeep extends Phase {
                     }
 
                     if (wantToMillOpponent) {
-                        opponent.mill(3);
+                        for (final Player opponent : opponents) {
+                            opponent.mill(3);
+                        }
                     }
                 } // resolve()
 

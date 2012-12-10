@@ -2419,7 +2419,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         final String[] incR = restriction.split("\\.");
 
         if (incR[0].equals("Opponent")) {
-            if (this.equals(sourceController)) {
+            if (this.equals(sourceController) || !this.isHostileTo(sourceController)) {
                 return false;
             }
         } else if (incR[0].equals("You")) {
