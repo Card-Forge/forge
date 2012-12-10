@@ -5882,6 +5882,7 @@ res/cardsfolder/l/lumengrid_sentinel.txt svneol=native#text/plain
 res/cardsfolder/l/lumengrid_warden.txt svneol=native#text/plain
 res/cardsfolder/l/luminarch_ascension.txt -text
 res/cardsfolder/l/luminesce.txt -text
+res/cardsfolder/l/luminescent_rain.txt -text
 res/cardsfolder/l/luminous_angel.txt svneol=native#text/plain
 res/cardsfolder/l/luminous_guardian.txt -text
 res/cardsfolder/l/luminous_wake.txt svneol=native#text/plain
@@ -7877,6 +7878,7 @@ res/cardsfolder/r/ravenous_demon_archdemon_of_greed.txt -text
 res/cardsfolder/r/ravenous_rats.txt svneol=native#text/plain
 res/cardsfolder/r/ravenous_skirge.txt svneol=native#text/plain
 res/cardsfolder/r/ravenous_trap.txt svneol=native#text/plain
+res/cardsfolder/r/ravenous_vampire.txt -text
 res/cardsfolder/r/ravens_crime.txt svneol=native#text/plain
 res/cardsfolder/r/ravens_run_dragoon.txt svneol=native#text/plain
 res/cardsfolder/r/raving_oni_slave.txt svneol=native#text/plain

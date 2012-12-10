@@ -1,0 +1,17 @@
+Name:Ravenous Vampire
+ManaCost:3 B B
+Types:Creature Vampire
+Text:no text
+PT:3/3
+K:Flying
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigSacrifice | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, you may sacrifice a nonartifact creature. If you do, put a +1/+1 counter on CARDNAME. If you don't, tap CARDNAME.
+SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0 | Optional$ True | SacValid$ Creature.nonArtifact | Amount$ 1 | RememberSacrificed$ True | SubAbility$ DBPutCounter
+SVar:DBPutCounter:DB$ PutCounter | CounterType$ P1P1 | CounterNum$ 1 | ConditionDefined$ Remembered | ConditionPresent$ Creature.nonArtifact | ConditionCompare$ GE1 | SubAbility$ DBTap
+SVar:DBTap:DB$ Tap | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Creature.nonArtifact | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ravenous_vampire.jpg
+SetInfo:MIR|Uncommon|http://magiccards.info/scans/en/mr/34.jpg
+Oracle:Flying\nAt the beginning of your upkeep, you may sacrifice a nonartifact creature. If you do, put a +1/+1 counter on Ravenous Vampire. If you don't, tap Ravenous Vampire.
+End
