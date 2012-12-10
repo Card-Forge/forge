@@ -552,7 +552,7 @@ public class AttachAi extends SpellAiLogic {
         if (tgt == null) {
             targets = AbilityFactory.getDefinedObjects(sa.getSourceCard(), sa.getParam("Defined"), sa);
         } else {
-            AttachAi.attachPreference(sa, tgt, false);
+            AttachAi.attachPreference(sa, tgt, mandatory);
         }
 
         if (!mandatory && card.isEquipment() && !targets.isEmpty()) {
