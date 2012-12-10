@@ -995,10 +995,10 @@ public class AbilityFactory {
                 triggeringType = triggeringType.substring(0, triggeringType.length() - 8);
                 final Object c = root.getTriggeringObject(triggeringType);
                 if (c instanceof Card) {
-                    o = ((Card) c).getController().getOpponent();
+                    o = ((Card) c).getController().getOpponents();
                 }
                 if (c instanceof SpellAbility) {
-                    o = ((SpellAbility) c).getSourceCard().getController().getOpponent();
+                    o = ((SpellAbility) c).getSourceCard().getController().getOpponents();
                 }
             } else if (defined.endsWith("Owner")) {
                 String triggeringType = defined.substring(9);
@@ -1016,6 +1016,15 @@ public class AbilityFactory {
                     final Player p = (Player) o;
                     if (!players.contains(p)) {
                         players.add(p);
+                    }
+                }
+                if (o instanceof List<?>) {
+                    @SuppressWarnings("unchecked")
+                    final List<Player> pList = (List<Player>) o;
+                    for (final Player p : pList) {
+                        if (!players.contains(p)) {
+                            players.add(p);
+                        }
                     }
                 }
             }
