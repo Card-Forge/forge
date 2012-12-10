@@ -2,7 +2,7 @@ Name:Bottled Cloister
 ManaCost:4
 Types:Artifact
 Text:no text
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.Opponent | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each opponent's upkeep, exile all cards from your hand face down.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Execute$ TrigExile | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each opponent's upkeep, exile all cards from your hand face down.
 SVar:TrigExile:AB$ ChangeZoneAll | Cost$ 0 | Origin$ Hand | Destination$ Exile | ExileFaceDown$ True | ChangeType$ Card.YouCtrl | RememberChanged$ True
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigReturn | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of your upkeep, return all cards you own exiled with CARDNAME to your hand, then draw a card.
 SVar:TrigReturn:AB$ ChangeZoneAll | Cost$ 0 | Origin$ Exile | Destination$ Hand | ChangeType$ Card.IsRemembered | SubAbility$ DBDraw

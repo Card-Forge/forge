@@ -4,7 +4,7 @@ Types:Creature Goblin Shaman
 Text:no text
 PT:2/2
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever you cast an instant or sorcery spell, CARDNAME deals 2 damage to each opponent.
-SVar:TrigDamage:AB$ DealDamage | Cost$ 0| Defined$ Opponent | NumDmg$ 2
+SVar:TrigDamage:AB$ DealDamage | Cost$ 0| Defined$ Player.Opponent | NumDmg$ 2
 DeckHints:Type$Instant|Sorcery
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/guttersnipe.jpg
