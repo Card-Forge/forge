@@ -232,7 +232,7 @@ public class MatchController {
     public int getGamesWonBy(LobbyPlayer questPlayer) {
         int sum = 0;
         for (GameOutcome go : gamesPlayed) {
-            if (go.getWinner().equals(questPlayer)) {
+            if (questPlayer.equals(go.getWinner())) {
                 sum++;
             }
         }
