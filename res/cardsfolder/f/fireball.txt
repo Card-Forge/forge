@@ -2,10 +2,10 @@ Name:Fireball
 ManaCost:X R
 Types:Sorcery
 Text:no text
-A:SP$ DealDamage | Cost$ X R | Tgt$ TgtCP | NumDmg$ X | TargetMin$ 0 | TargetMax$ MaxTargets | DivideEvenly$ RoundedDown | References$ X | SpellDescription$ CARDNAME deals X damage divided evenly, rounded down, among any number of target creatures and/or players.
+A:SP$ DealDamage | Cost$ X R | Tgt$ TgtCP | NumDmg$ X | TargetMin$ 0 | TargetMax$ MaxTargets | DivideEvenly$ RoundedDown | References$ X,MaxTargets | SpellDescription$ CARDNAME deals X damage divided evenly, rounded down, among any number of target creatures and/or players.
 S:Mode$ RaiseCost | ValidCard$ Card.Self | Type$ Spell | Amount$ IncreaseCost | EffectZone$ All | Description$ CARDNAME costs 1 more to cast for each target beyond the first.
 SVar:X:Count$xPaid
-SVar:MaxTargets:Valid Creature/Plus.2
+SVar:MaxTargets:Count$Valid Creature/Plus.2
 SVar:IncreaseCost:TargetedObjects$Amount/Minus.1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fireball.jpg
