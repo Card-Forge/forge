@@ -225,6 +225,21 @@ Fixes/Features:
 - Sound system: Added a way to play card-specific sound effects depending on the presence of the SoundEffect SVar on a card. If the SVar is present, the sound file specified in the SVar must be present, otherwise no sound is played.
 - Improved doTriggerAINoCost in AF Attach.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Converted some more cards for multiplayer.
+- Added some basic count methods for use in multiplayer situations
+- Converted more cards for multiplayer and improved Player.isValid:Opponent
+- Converted more cards for multiplayer
+- Converted more cards for multiplayer (my last ones for the day)
+- Sound System: Minor tweaks to the individual card sound effect system.
+- Reintegrated the Schemes branch.
+- Renamed the file of Plots That Span Centuries.
+- Made two cards multiplayer compatible.
+- Fixed Fireball.
+- Made a few more cards multiplayer compatible
+- It is now possible to give challenge opponents (players) names that are different from the actual challenge names.
+- Fix javadoc for QuestEvent.getOpponent().
+- Pattern of Rebirth will now grant a SacMe SVar to the enchanted creature.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -232,7 +247,7 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 
 
-Added the following Schemes (They are not yet available in this build):
+Added the following Schemes:
 
 A Display of My Dark Power
 I Know All, I See All
@@ -314,6 +329,16 @@ Marshaling the Troops
 Cinder Cloud
 Harmony of Nature
 Shivan Wumpus
+Luminescent Rain
+Ravenous Vampire
+Chameleon Spirit
+Desperate Research
+Evershrike
+Mercadian Lift
+Mtenda Lion
+Nakaya Shade
+Rhystic Cave
+Soul Strings
 
 
 end
