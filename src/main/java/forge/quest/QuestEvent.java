@@ -63,6 +63,18 @@ public abstract class QuestEvent {
 
     /**
      * <p>
+     * getOpponentName.
+     * Returns null for standard quest events, may return something different for challenges.
+     * </p>
+     * 
+     * @return a {@link java.lang.String}.
+     */
+    public String getOpponent() {
+        return null;
+    }
+
+    /**
+     * <p>
      * getDifficulty.
      * </p>
      * 

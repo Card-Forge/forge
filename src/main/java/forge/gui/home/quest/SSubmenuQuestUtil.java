@@ -330,7 +330,7 @@ public class SSubmenuQuestUtil {
         MatchStartHelper msh = new MatchStartHelper();
         msh.addPlayer(Singletons.getControl().getLobby().getQuestPlayer(), humanStart);
 
-        LobbyPlayer aiPlayer = Singletons.getControl().getLobby().findLocalPlayer(PlayerType.COMPUTER, event.getTitle());
+        LobbyPlayer aiPlayer = Singletons.getControl().getLobby().findLocalPlayer(PlayerType.COMPUTER, event.getOpponent() == null ? event.getTitle() : event.getOpponent());
         aiPlayer.setPicture(event.getIconFilename());
         msh.addPlayer(aiPlayer, aiStart);
 

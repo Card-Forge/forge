@@ -281,6 +281,8 @@ public class QuestEventManager {
 
             if (key.equalsIgnoreCase("ID")) {
                 qc.setId(Integer.parseInt(value));
+            } else if (key.equalsIgnoreCase("OpponentName")) {
+                qc.setOpponent(value);
             } else if (key.equalsIgnoreCase("Repeat")) {
                 qc.setRepeatable(Boolean.parseBoolean(value));
             } else if (key.equalsIgnoreCase("AILife")) {

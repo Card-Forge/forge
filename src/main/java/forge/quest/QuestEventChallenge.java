@@ -37,6 +37,9 @@ public class QuestEventChallenge extends QuestEvent {
     /** The id. */
     private int id = -1;
 
+    // Opponent name if different from the challenge name
+    private String opponentName = null;
+
     // Default vals if none provided for this ID
     /** The ai life. */
     private int aiLife = 25;
@@ -105,6 +108,19 @@ public class QuestEventChallenge extends QuestEvent {
 
     /**
      * <p>
+     * get the opponent's name, or null if not explicitly set.
+     *
+     * </p>
+     * 
+     * @return {@link java.lang.String}.
+     */
+    @Override
+    public final String getOpponent() {
+        return this.opponentName;
+    }
+
+    /**
+     * <p>
      * getWinsReqd.
      * </p>
      * 
@@ -155,6 +171,16 @@ public class QuestEventChallenge extends QuestEvent {
      */
     public void setId(final int id0) {
         this.id = id0;
+    }
+
+    /**
+     * Sets the opponent's name.
+     * 
+     * @param newName
+     *            the name to set
+     */
+    public void setOpponent(final String newName) {
+        this.opponentName = newName;
     }
 
     /**
