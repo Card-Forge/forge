@@ -1560,6 +1560,7 @@ res/cardsfolder/c/chalice_of_the_void.txt svneol=native#text/plain
 res/cardsfolder/c/chambered_nautilus.txt svneol=native#text/plain
 res/cardsfolder/c/chameleon_blur.txt -text
 res/cardsfolder/c/chameleon_colossus.txt svneol=native#text/plain
+res/cardsfolder/c/chameleon_spirit.txt -text
 res/cardsfolder/c/champion_lancer.txt svneol=native#text/plain
 res/cardsfolder/c/champion_of_lambholt.txt -text
 res/cardsfolder/c/champion_of_the_parish.txt -text
@@ -2447,6 +2448,7 @@ res/cardsfolder/d/desolation_angel.txt svneol=native#text/plain
 res/cardsfolder/d/desolation_giant.txt svneol=native#text/plain
 res/cardsfolder/d/desperate_charge.txt svneol=native#text/plain
 res/cardsfolder/d/desperate_ravings.txt -text
+res/cardsfolder/d/desperate_research.txt -text
 res/cardsfolder/d/desperate_ritual.txt -text
 res/cardsfolder/d/despise.txt svneol=native#text/plain
 res/cardsfolder/d/despoil.txt svneol=native#text/plain
@@ -3166,6 +3168,7 @@ res/cardsfolder/e/everglove_courier.txt svneol=native#text/plain
 res/cardsfolder/e/everlasting_torment.txt -text
 res/cardsfolder/e/evermind.txt -text
 res/cardsfolder/e/evernight_shade.txt -text
+res/cardsfolder/e/evershrike.txt -text
 res/cardsfolder/e/every_hope_shall_vanish.txt -text
 res/cardsfolder/e/every_last_vestige_shall_rot.txt -text
 res/cardsfolder/e/evil_comes_to_fruition.txt -text
@@ -6175,6 +6178,7 @@ res/cardsfolder/m/mental_note.txt svneol=native#text/plain
 res/cardsfolder/m/mentor_of_the_meek.txt -text
 res/cardsfolder/m/mephidross_vampire.txt svneol=native#text/plain
 res/cardsfolder/m/mephitic_ooze.txt svneol=native#text/plain
+res/cardsfolder/m/mercadian_lift.txt -text
 res/cardsfolder/m/mercenary_informer.txt svneol=native#text/plain
 res/cardsfolder/m/mercenary_knight.txt -text
 res/cardsfolder/m/merchant_of_secrets.txt svneol=native#text/plain
@@ -6542,6 +6546,7 @@ res/cardsfolder/m/mox_ruby.txt svneol=native#text/plain
 res/cardsfolder/m/mox_sapphire.txt svneol=native#text/plain
 res/cardsfolder/m/mtenda_griffin.txt svneol=native#text/plain
 res/cardsfolder/m/mtenda_herder.txt svneol=native#text/plain
+res/cardsfolder/m/mtenda_lion.txt -text
 res/cardsfolder/m/muck_rats.txt svneol=native#text/plain
 res/cardsfolder/m/mudbrawler_cohort.txt svneol=native#text/plain
 res/cardsfolder/m/mudbrawler_raiders.txt svneol=native#text/plain
@@ -6641,6 +6646,7 @@ res/cardsfolder/n/nacatl_savage.txt svneol=native#text/plain
 res/cardsfolder/n/nacre_talisman.txt svneol=native#text/plain
 res/cardsfolder/n/nafs_asp.txt -text
 res/cardsfolder/n/nagao_bound_by_honor.txt svneol=native#text/plain
+res/cardsfolder/n/nakaya_shade.txt -text
 res/cardsfolder/n/nameless_inversion.txt svneol=native#text/plain
 res/cardsfolder/n/nameless_one.txt svneol=native#text/plain
 res/cardsfolder/n/nameless_race.txt svneol=native#text/plain
@@ -8118,6 +8124,7 @@ res/cardsfolder/r/rhox_pikemaster.txt svneol=native#text/plain
 res/cardsfolder/r/rhox_war_monk.txt svneol=native#text/plain
 res/cardsfolder/r/rhys_the_exiled.txt svneol=native#text/plain
 res/cardsfolder/r/rhys_the_redeemed.txt svneol=native#text/plain
+res/cardsfolder/r/rhystic_cave.txt -text
 res/cardsfolder/r/rhystic_deluge.txt svneol=native#text/plain
 res/cardsfolder/r/rhystic_study.txt svneol=native#text/plain
 res/cardsfolder/r/rhystic_tutor.txt -text
@@ -9372,6 +9379,7 @@ res/cardsfolder/s/soul_snare.txt svneol=native#text/plain
 res/cardsfolder/s/soul_snuffers.txt svneol=native#text/plain
 res/cardsfolder/s/soul_spike.txt svneol=native#text/plain
 res/cardsfolder/s/soul_stair_expedition.txt svneol=native#text/plain
+res/cardsfolder/s/soul_strings.txt -text
 res/cardsfolder/s/soul_tithe.txt -text
 res/cardsfolder/s/soul_warden.txt svneol=native#text/plain
 res/cardsfolder/s/soulblast.txt -text

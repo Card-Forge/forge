@@ -335,6 +335,9 @@ public enum CounterType {
     /** The WAGE. */
     WAGE(),
 
+    /** The WINCH. */
+    WINCH(),
+
     /** The WIND. */
     WIND(),
 

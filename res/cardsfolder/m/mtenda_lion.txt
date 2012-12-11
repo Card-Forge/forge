@@ -1,0 +1,12 @@
+Name:Mtenda Lion
+ManaCost:G
+Types:Creature Cat
+Text:no text
+PT:2/1
+T:Mode$ Attacks | ValidCard$ Creature.Self | Execute$ MtendaLionPump | TriggerDescription$ Whenever CARDNAME attacks, defending player may pay U. If that player does, prevent all combat damage that would be dealt by CARDNAME this turn.
+SVar:MtendaLionPump:AB$ Pump | Cost$ 0 | KW$ HIDDEN Prevent all combat damage that would be dealt by CARDNAME. | UnlessCost$ U | UnlessPayer$ DefendingPlayer | UnlessSwitched$ True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mtenda_lion.jpg
+SetInfo:MIR|Common|http://magiccards.info/scans/en/mr/128.jpg
+Oracle:Whenever Mtenda Lion attacks, defending player may pay {U}. If that player does, prevent all combat damage that would be dealt by Mtenda Lion this turn.
+End

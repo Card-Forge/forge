@@ -90,6 +90,9 @@ public class ChooseColorEffect extends SpellEffect {
                         else if (logic.equals("MostProminentComputerControls")) {
                             chosen.add(CardFactoryUtil.getMostProminentColor(ai.getCardsIn(ZoneType.Battlefield)));
                         }
+                        else if (logic.equals("MostProminentHumanControls")) {
+                            chosen.add(CardFactoryUtil.getMostProminentColor(ai.getOpponent().getCardsIn(ZoneType.Battlefield)));
+                        }
                         else if (logic.equals("MostProminentPermanent")) {
                             final List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
                             chosen.add(CardFactoryUtil.getMostProminentColor(list));

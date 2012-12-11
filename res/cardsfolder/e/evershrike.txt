@@ -1,0 +1,19 @@
+Name:Evershrike
+ManaCost:3 WB WB
+Types:Creature Elemental Spirit
+Text:no text
+PT:2/2
+K:Flying
+S:Mode$ Continuous | Affected$ Card.Self | AddPower$ Y | AddToughness$ Y | References$ Y | Description$ CARDNAME gets +2/+2 for each Aura attached to it.
+SVar:Y:Count$Valid Aura.Attached/Times.2
+A:AB$ ChangeZone | Cost$ X WB WB | Origin$ Graveyard | Destination$ Battlefield | ActivationZone$ Graveyard | SubAbility$ AttachAura | SpellDescription$ Return CARDNAME from your graveyard to the battlefield. You may put an Aura card with converted mana cost X or less from your hand onto the battlefield attached to it. If you don't, exile CARDNAME.
+SVar:AttachAura:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Aura.CanEnchantSource+YouCtrl+cmcLEX | AttachedTo$ Self | RememberChanged$ True | SubAbility$ DBExile
+SVar:DBExile:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | Defined$ Self | ConditionDefined$ Remembered | ConditionPresent$ Aura | ConditionCompare$ EQ0 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/evershrike.jpg
+SetInfo:EVE|Rare|http://magiccards.info/scans/en/eve/88.jpg
+Oracle:Flying\nEvershrike gets +2/+2 for each Aura attached to it.\n{X}{W/B}{W/B}: Return Evershrike from your graveyard to the battlefield. You may put an Aura card with converted mana cost X or less from your hand onto the battlefield attached to it. If you don't, exile Evershrike.
+End
