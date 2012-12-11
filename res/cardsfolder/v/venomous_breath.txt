@@ -3,7 +3,7 @@ ManaCost:3 G
 Types:Instant
 Text:no text
 A:SP$ Effect | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | Name$ Venomous Breath Effect | Triggers$ DelTrig | SVars$ TrigDestroy | RememberObjects$ Targeted | SpellDescription$ Choose target creature. At end of combat, destroy all creatures that blocked or were blocked by it this turn.
-SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | TriggerZones$ Battlefield | ValidPlayer$ Player | Execute$ TrigDestroy | TriggerDescription$ At end of combat, destroy all creatures that blocked or were blocked by that creature this turn.
+SVar:DelTrig:Mode$ Phase | Phase$ EndCombat | TriggerZones$ Battlefield | TriggerZones$ Command | ValidPlayer$ Player | Execute$ TrigDestroy | TriggerDescription$ At end of combat, destroy all creatures that blocked or were blocked by that creature this turn.
 SVar:TrigDestroy:AB$ DestroyAll | Cost$ 0 | ValidCards$ Creature.blockedRemembered,Creature.blockedByRemembered
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
