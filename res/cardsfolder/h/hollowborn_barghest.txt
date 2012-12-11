@@ -7,7 +7,7 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | I
 SVar:TrigLoseLifeEachOpp:AB$ LoseLife | Cost$ 0 | Defined$ Player.Opponent | LifeAmount$ 2
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | TriggerZones$ Battlefield | CheckSVar$ TrigHand | SVarCompare$ EQ0 | Execute$ TrigLoseLife | TriggerDescription$ At the beginning of each opponent's upkeep, if that player has no cards in hand, he or she loses 2 life.
 SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount$ 2
-SVar:TrigHand:TriggeredPlayer$CardsInHand
+SVar:TrigHand:Count$ValidHand Card.ActivePlayerCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hollowborn_barghest.jpg
 SetInfo:SHM|Rare|http://magiccards.info/scans/en/shm/68.jpg
