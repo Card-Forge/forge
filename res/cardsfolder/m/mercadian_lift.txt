@@ -5,6 +5,7 @@ Text:no text
 A:AB$ PutCounter | Cost$ 1 T | CounterType$ WINCH | CounterNum$ 1 | SpellDescription$ Put a winch counter on CARDNAME.
 A:AB$ ChangeZone | Cost$ T SubCounter<X/WINCH> | ChangeNum$ 1 | ChangeType$ Creature.cmcEQChosenX | Origin$ Hand | Destination$ Battlefield | References$ X | Optional$ True | SpellDescription$ You may put a creature card with converted mana cost X from your hand onto the battlefield.
 SVar:X:XChoice
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mercadian_lift.jpg
 SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/306.jpg
