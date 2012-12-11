@@ -1999,6 +1999,23 @@ public class ComputerUtil {
                         continue; // Can't play ability
                     }
 
+                    if (controller.isComputer()) {
+                        final Cost abCost = sa.getPayCosts();
+                        if (abCost != null) {
+                            // AI currently disabled for these costs
+                            if (!CostUtil.checkLifeCost(controller, abCost, c, 4, null)) {
+                                continue; // Won't play ability
+                            }
+
+                            if (!CostUtil.checkSacrificeCost(controller, abCost, c)) {
+                                continue; // Won't play ability
+                            }
+
+                            if (!CostUtil.checkCreatureSacrificeCost(controller, abCost, c)) {
+                                continue; // Won't play ability
+                            }
+                        }
+                    }
 
                     final Target tgt = sa.getTarget();
                     if (tgt != null) {
