@@ -8,6 +8,7 @@ SVar:MoldChoice:AB$ Charm | Cost$ 0 | Defined$ You | Choices$ GroundMold,AirMold
 SVar:GroundMold:DB$ Animate | Defined$ Self | Permanent$ True | Power$ 3 | Toughness$ 3 | SpellDescription$ CARDNAME is 3/3
 SVar:AirMold:DB$ Animate | Defined$ Self | Permanent$ True | Power$ 2 | Toughness$ 2 | Keywords$ Flying | SpellDescription$ CARDNAME is 2/2 with flying
 SVar:WallMold:DB$ Animate | Defined$ Self | Permanent$ True | Power$ 1 | Toughness$ 6 | Types$ Wall | Keywords$ Defender | SpellDescription$ CARDNAME is 1/6 with defender and is a wall in addition to its other types
+SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/4e/en-us/card2065.jpg
 SetInfo:5ED|Rare|http://magiccards.info/scans/en/5e/395.jpg
