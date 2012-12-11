@@ -63,7 +63,7 @@ public abstract class QuestEvent {
 
     /**
      * <p>
-     * getOpponentName.
+     * getOpponent.
      * Returns null for standard quest events, may return something different for challenges.
      * </p>
      * 
