@@ -33,11 +33,6 @@ public class LifeSetEffect extends SpellEffect {
         final StringBuilder sb = new StringBuilder();
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("LifeAmount"), sa);
 
-        final String conditionDesc = sa.getParam("ConditionDescription");
-        if (conditionDesc != null) {
-            sb.append(conditionDesc).append(" ");
-        }
-
         List<Player> tgtPlayers = getTargetPlayers(sa);
 
         for (final Player player : tgtPlayers) {

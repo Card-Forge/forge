@@ -24,11 +24,6 @@ public class LifeLoseEffect extends SpellEffect {
         final StringBuilder sb = new StringBuilder();
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("LifeAmount"), sa);
 
-        final String conditionDesc = sa.getParam("ConditionDescription");
-        if (conditionDesc != null) {
-            sb.append(conditionDesc).append(" ");
-        }
-
         int affected = getTargetPlayers(sa).size();
         for (int i = 0; i < affected; i++) {
             final Player player = getTargetPlayers(sa).get(i);

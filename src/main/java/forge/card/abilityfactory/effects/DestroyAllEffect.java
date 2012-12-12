@@ -21,12 +21,6 @@ public class DestroyAllEffect extends SpellEffect {
         final StringBuilder sb = new StringBuilder();
         final boolean noRegen = sa.hasParam("NoRegen");
 
-
-        final String conditionDesc = sa.getParam("ConditionDescription");
-        if (conditionDesc != null) {
-            sb.append(conditionDesc).append(" ");
-        }
-
         ArrayList<Card> tgtCards;
 
         final Target tgt = sa.getTarget();

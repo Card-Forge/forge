@@ -27,11 +27,6 @@ public class DiscardEffect extends RevealEffectBase {
 
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
-        final String conditionDesc = sa.getParam("ConditionDescription");
-        if (conditionDesc != null) {
-            sb.append(conditionDesc).append(" ");
-        }
-
         if (tgtPlayers.size() > 0) {
 
             for (final Player p : tgtPlayers) {

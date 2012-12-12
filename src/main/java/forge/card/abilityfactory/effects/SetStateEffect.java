@@ -14,11 +14,6 @@ public class SetStateEffect extends SpellEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final String conditionDesc = sa.getParam("ConditionDescription");
-        if (conditionDesc != null) {
-            sb.append(conditionDesc).append(" ");
-        }
-
         final List<Card> tgtCards = getTargetCards(sa);
 
         if (sa.hasParam("Flip")) {

@@ -40,11 +40,6 @@ import forge.game.player.Player;
             final StringBuilder sb = new StringBuilder();
             final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Num"), sa);
 
-            final String conditionDesc = sa.getParam("ConditionDescription");
-            if (conditionDesc != null) {
-                sb.append(conditionDesc).append(" ");
-            }
-
             final List<Player> tgtPlayers = getTargetPlayers(sa);
 
             sb.append(StringUtils.join(tgtPlayers, ", "));

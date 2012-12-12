@@ -66,10 +66,18 @@ import forge.game.player.Player;
                     sb.append(stackDesc.replace("CARDNAME", sa.getSourceCard().getName()));
                 }
             } else {
-                sb.append(this.getStackDescription(sa));
+                final String conditionDesc = sa.getParam("ConditionDescription");
+                final String baseDesc = this.getStackDescription(sa);
+                if (conditionDesc != null) {
+                    sb.append(conditionDesc).append(" ");
+                    sb.append(baseDesc.substring(0, 2).toLowerCase());
+                    sb.append(baseDesc.substring(2));
+                } else {
+                    sb.append(this.getStackDescription(sa));
+                }
             }
 
-            // This inlcudes all subAbilities
+            // This includes all subAbilities
             final AbilitySub abSub = sa.getSubAbility();
             if (abSub != null) {
                 sb.append(abSub.getStackDescription());

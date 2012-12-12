@@ -18,11 +18,6 @@ public class SacrificeAllEffect extends SpellEffect {
 
         final StringBuilder sb = new StringBuilder();
 
-        final String conditionDesc = sa.getParam("ConditionDescription");
-        if (conditionDesc != null) {
-            sb.append(conditionDesc).append(" ");
-        }
-
         /*
          * This is not currently targeted ArrayList<Player> tgtPlayers;
          * 

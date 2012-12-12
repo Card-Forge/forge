@@ -36,12 +36,6 @@ public class ShuffleEffect extends SpellEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-
-        final String conditionDesc = sa.getParam("ConditionDescription");
-        if (conditionDesc != null) {
-            sb.append(conditionDesc).append(" ");
-        }
-
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         if (tgtPlayers.size() > 0) {

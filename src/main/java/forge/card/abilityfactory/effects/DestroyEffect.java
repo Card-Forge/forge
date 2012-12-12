@@ -21,11 +21,6 @@ public class DestroyEffect extends SpellEffect {
         final boolean noRegen = sa.hasParam("NoRegen");
         final StringBuilder sb = new StringBuilder();
 
-        final String conditionDesc = sa.getParam("ConditionDescription");
-        if (conditionDesc != null) {
-            sb.append(conditionDesc).append(" ");
-        }
-
         final List<Card> tgtCards = getTargetCards(sa);
 
         if (sa.hasParam("Sacrifice")) {
@@ -68,11 +63,6 @@ public class DestroyEffect extends SpellEffect {
             sb.append(" can't be regenerated");
         }
         sb.append(".");
-
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
-        }
 
         return sb.toString();
     }

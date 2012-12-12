@@ -28,11 +28,6 @@ public class PumpAllEffect extends SpellEffect {
 
         sb.append(desc);
 
-        final AbilitySub abSub = sa.getSubAbility();
-        if (abSub != null) {
-            sb.append(abSub.getStackDescription());
-        }
-
         return sb.toString();
     } // pumpAllStackDescription()
 

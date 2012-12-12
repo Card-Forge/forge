@@ -19,11 +19,6 @@ public class DrawEffect extends SpellEffect {
     protected String getStackDescription(SpellAbility sa) {
         final StringBuilder sb = new StringBuilder();
 
-        final String conditionDesc = sa.getParam("ConditionDescription");
-        if (conditionDesc != null) {
-            sb.append(conditionDesc).append(" ");
-        }
-
         final List<Player> tgtPlayers = getDefinedPlayersBeforeTargetOnes(sa);
 
         if (!tgtPlayers.isEmpty()) {
