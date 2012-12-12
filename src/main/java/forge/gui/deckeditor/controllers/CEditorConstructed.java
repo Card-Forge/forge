@@ -20,6 +20,7 @@ package forge.gui.deckeditor.controllers;
 import java.util.List;
 
 import com.google.common.base.Supplier;
+import forge.Command;
 
 import forge.Singletons;
 import forge.deck.Deck;
@@ -34,6 +35,7 @@ import forge.gui.deckeditor.tables.EditorTableView;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.EDocID;
+import forge.gui.toolbox.FLabel;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
@@ -52,6 +54,7 @@ import forge.properties.ForgePreferences.FPref;
  */
 public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
     private final DeckController<Deck> controller;
+    private boolean sideboardMode = false;
 
     //=========== Constructor
     /**
@@ -96,6 +99,9 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
 
         final CardPrinted card = (CardPrinted) item;
         this.getTableDeck().addCard(card);
+        if (sideboardMode) {
+            this.getTableCatalog().removeCard(card);
+        }
         this.controller.notifyModelChanged();
         VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText("*Current Deck");
     }
@@ -112,6 +118,9 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
 
         final CardPrinted card = (CardPrinted) item;
         this.getTableDeck().removeCard(card);
+        if (sideboardMode) {
+            this.getTableCatalog().addCard(card);
+        }
         this.controller.notifyModelChanged();
         VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText("*Current Deck");
     }
@@ -138,6 +147,29 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
         return this.controller;
     }
 
+    /**
+     * Switch between the main deck and the sideboard editor.
+     */
+    public void switchEditorMode(boolean isSideboarding) {
+        final List<TableColumnInfo<InventoryItem>> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
+
+        if (isSideboarding) {
+            
+            this.getTableCatalog().setAvailableColumns(lstCatalogCols);
+            this.getTableCatalog().setDeck(this.controller.getModel().getMain());
+            this.getTableDeck().setDeck(this.controller.getModel().getSideboard());
+            VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("Main Deck");
+        } else {
+            lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
+            this.getTableCatalog().setAvailableColumns(lstCatalogCols);
+            this.getTableCatalog().setDeck(ItemPool.createFrom(CardDb.instance().getAllTraditionalCards(), CardPrinted.class));
+            this.getTableDeck().setDeck(this.controller.getModel().getMain());
+            VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("Card Catalog");
+        }
+
+        this.controller.notifyModelChanged();
+    }
+
     /* (non-Javadoc)
      * @see forge.gui.deckeditor.ACEditorBase#show(forge.Command)
      */
@@ -150,6 +182,17 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
         this.getTableDeck().setup(VCurrentDeck.SINGLETON_INSTANCE, SColumnUtil.getDeckDefaultColumns());
 
         SEditorUtil.resetUI();
+
+// SIDEBOARD IMPLEMENTATION - DISABLED UNTIL V1.3.3
+/*
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard().setVisible(true);
+        ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard())
+            .setCommand(new Command() { @Override
+                public void execute() {
+                    sideboardMode = !sideboardMode;
+                    switchEditorMode(sideboardMode);
+            } });
+*/
 
         this.controller.newModel();
     }

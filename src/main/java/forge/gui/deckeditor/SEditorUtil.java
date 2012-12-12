@@ -140,6 +140,8 @@ public final class SEditorUtil  {
         VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("Card Catalog");
         VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText("Current Deck");
 
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard().setVisible(false);
+
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnSave())
             .setCommand(new Command() { @Override
                 public void execute() { SEditorIO.saveDeck(); } });

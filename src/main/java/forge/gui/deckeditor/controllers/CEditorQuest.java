@@ -25,6 +25,7 @@ import java.util.Map.Entry;
 
 import com.google.common.base.Function;
 import com.google.common.base.Supplier;
+import forge.Command;
 
 import forge.Singletons;
 import forge.deck.Deck;
@@ -38,6 +39,8 @@ import forge.gui.deckeditor.tables.EditorTableView;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.home.quest.CSubmenuQuestDecks;
+import forge.gui.toolbox.FLabel;
+import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
@@ -58,6 +61,7 @@ import forge.quest.QuestController;
 public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
     private final QuestController questData;
     private final DeckController<Deck> controller;
+    private boolean sideboardMode = false;
 
     private Map<CardPrinted, Integer> decksUsingMyCards;
 
@@ -178,6 +182,8 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
         cardpool.addAll(this.questData.getCards().getCardpool());
         // remove bottom cards that are in the deck from the card pool
         cardpool.removeAll(deck.getMain());
+        // remove sideboard cards from the catalog
+        cardpool.removeAll(deck.getSideboard());
         // show cards, makes this user friendly
         this.getTableCatalog().setDeck(cardpool);
         this.getTableDeck().setDeck(deck.getMain());
@@ -193,6 +199,22 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
     @Override
     public DeckController<Deck> getDeckController() {
         return this.controller;
+    }
+
+    /**
+     * Switch between the main deck and the sideboard editor.
+     */
+    public void switchEditorMode(boolean isSideboarding) {
+        if (isSideboarding) {
+            this.getTableCatalog().setDeck(this.controller.getModel().getMain());
+            this.getTableDeck().setDeck(this.controller.getModel().getSideboard());
+            VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("Main Deck");
+        } else {
+            resetTables();
+            VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("Card Catalog");
+        }
+
+        this.controller.notifyModelChanged();
     }
 
     /* (non-Javadoc)
@@ -227,6 +249,17 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
 
 
         SEditorUtil.resetUI();
+
+// SIDEBOARD IMPLEMENTATION - DISABLED UNTIL V1.3.3
+/*
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard().setVisible(true);
+        ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard())
+            .setCommand(new Command() { @Override
+                public void execute() {
+                    sideboardMode = !sideboardMode;
+                    switchEditorMode(sideboardMode);
+        } });
+*/
 
         this.getDeckController().setModel(deck);
     }

@@ -94,6 +94,13 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_MINUS))
             .iconScaleAuto(false).hoverable(true).build();
 
+    private final JLabel btnDoSideboard = new FLabel.Builder()
+            .fontSize(14)
+            .text("Deck/Sideboard")
+            .tooltip("Edit the sideboard for this deck")
+            .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_NEW))
+            .iconScaleAuto(false).hoverable(true).build();
+
     private final JTextField txfTitle = new FTextField();
 
     private final JPanel pnlRemove = new JPanel();
@@ -150,8 +157,9 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
 
         pnlRemove.setOpaque(false);
         pnlRemove.setLayout(new MigLayout("insets 0, gap 0, ax center"));
-        pnlRemove.add(btnRemove, "w 40%!, h 100%!, gap 5% 5% 0 0");
-        pnlRemove.add(btnRemove4, "w 40%!, h 100%!");
+        pnlRemove.add(btnRemove, "w 35%!, h 100%!, gap 5% 5% 0 0");
+        pnlRemove.add(btnRemove4, "w 35%!, h 100%!, gap 5% 5% 0 0");
+        pnlRemove.add(btnDoSideboard, "w 35%!, h 100%!");
 
         scroller.setOpaque(false);
         scroller.getViewport().setOpaque(false);
@@ -195,8 +203,9 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
         pnlStats.add(lblSorcery, constraints);
 
         pnlRemoveButtons.setOpaque(false);
-        pnlRemoveButtons.add(btnRemove, "w 42%!, h 30px!, gap 0 0 5px 5px");
-        pnlRemoveButtons.add(btnRemove4, "w 42%!, h 30px!, gap 5% 5% 5px 5px");
+        pnlRemoveButtons.add(btnRemove, "w 35%!, h 30px!, gap 0 0 5px 5px");
+        pnlRemoveButtons.add(btnRemove4, "w 35%!, h 30px!, gap 0 0 5px 5px");
+        pnlRemoveButtons.add(btnDoSideboard, "w 35%!, h 30px!, gap 0 0 5px 5px");
     }
 
     //========== Overridden from IVDoc
@@ -409,6 +418,11 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
     /** @return {@link javax.swing.JPanel} */
     public JPanel getPnlRemButtons() {
         return pnlRemoveButtons;
+    }
+
+    /** @return {@link javax.swing.JPanel} */
+    public JLabel getBtnDoSideboard() {
+        return btnDoSideboard;
     }
 
     //========== Other methods

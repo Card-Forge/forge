@@ -137,6 +137,18 @@ public final class EditorTableView<T extends InventoryItem> {
         });
     }
 
+    @SuppressWarnings("unchecked")
+    public void setAvailableColumns(final List<TableColumnInfo<InventoryItem>> cols0) {
+        final DefaultTableColumnModel colmodel = new DefaultTableColumnModel();
+
+        for (TableColumnInfo<InventoryItem> item : cols0) {
+            item.setModelIndex(colmodel.getColumnCount());
+            if (item.isShowing()) { colmodel.addColumn(item); }
+        }
+
+        this.table.setColumnModel(colmodel);
+    }
+
     /**
      * 
      * fixSelection. Call this after deleting an item from table.
