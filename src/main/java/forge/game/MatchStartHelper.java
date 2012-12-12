@@ -53,8 +53,6 @@ public class MatchStartHelper {
     public void addArchenemy(final LobbyPlayer player, final Deck deck, final Iterable<CardPrinted> schemes) {
         PlayerStartConditions start = new PlayerStartConditions(deck);
         
-        start.setStartingLife(40);
-        
         start.setSchemes(new Supplier<Iterable<Card>>() {
 
             @Override

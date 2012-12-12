@@ -192,6 +192,7 @@ public enum CSubmenuArchenemy implements ICDoc {
                     if(i == 0)
                     {
                         helper.addArchenemy(player, playerDecks.get(i), schemes);
+                        helper.getPlayerMap().get(player).setStartingLife(10 + (10*(view.getNumPlayers()-1)));
                     }
                     else
                     {

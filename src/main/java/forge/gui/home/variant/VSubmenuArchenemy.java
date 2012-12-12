@@ -13,16 +13,11 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-
-import com.google.common.collect.Iterables;
 
 import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.game.player.PlayerType;
-import forge.gui.CardDetailPanel;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.DragTab;
 import forge.gui.framework.EDocID;
@@ -41,8 +36,6 @@ import forge.gui.toolbox.FRadioButton;
 import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FTabbedPane;
-import forge.item.CardDb;
-import forge.item.CardPrinted;
 
 /** 
  * Assembles Swing components of constructed submenu singleton.

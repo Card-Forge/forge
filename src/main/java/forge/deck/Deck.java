@@ -154,7 +154,11 @@ public class Deck extends DeckBase {
         result.sideboard.addAll(this.sideboard);
         result.avatar = this.avatar;
         result.commander = this.commander;
-        result.schemes.addAll(this.schemes);
+        
+        //This if clause is really only necessary when cloning decks that were
+        //around before schemes.
+        if(this.schemes != null)
+            result.schemes.addAll(this.schemes);
     }
 
     /*
