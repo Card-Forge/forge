@@ -240,6 +240,14 @@ Fixes/Features:
 - Fix javadoc for QuestEvent.getOpponent().
 - Pattern of Rebirth will now grant a SacMe SVar to the enchanted creature.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added some AI checks to canRegenerate.
+- Fixed Acidic Dagger and Venomous Breath.
+- Added "SVar:RemAIDeck:True" to Akroma's Blessing and Primal Clay.
+- Reenabling CheckStaticEffects in triggerhandler
+- Moved ConditionDescription into SpellEffect.getStackDescriptionWithSubs and stopped PumpAllEffect and DestroyEffect from grabbing stack description for subabilities (already handled in main shared method)
+- More cards ready for multiplayer
+- Converted Omnath, Locus of Mana to script by keywording his ability.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
