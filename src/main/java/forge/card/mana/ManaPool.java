@@ -190,7 +190,7 @@ public class ManaPool {
             return numRemoved;
         }
 
-        if (isEndOfPhase && this.owner.isCardInPlay("Omnath, Locus of Mana")) {
+        if (isEndOfPhase && this.owner.hasKeyword("Green mana doesn't empty from your mana pool as steps and phases end.")){
             // Omnath in play, clear all non-green mana
             int i = 0;
             while (i < this.floatingMana.size()) {

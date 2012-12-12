@@ -1,11 +1,11 @@
 Name:Omnath, Locus of Mana
 ManaCost:2 G
 Types:Legendary Creature Elemental
-Text:Green mana doesn't empty from your mana pool as steps and phases end.
+Text:no text
 PT:1/1
+S:Mode$ Continuous | Affected$ You | AddKeyword$ Green mana doesn't empty from your mana pool as steps and phases end. | Description$ Green mana doesn't empty from your mana pool as steps and phases end.
 S:Mode$ Continuous | Affected$ Card.Self | AddPower$ X | AddToughness$ X | References$ X | Description$ CARDNAME gets +1/+1 for each green mana in your mana pool.
 SVar:X:Count$ManaPool:green
-#AI doesn't have a mana pool
 SVar:RemAIDeck:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/omnath_locus_of_mana.jpg
