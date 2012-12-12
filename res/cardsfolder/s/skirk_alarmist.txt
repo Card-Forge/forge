@@ -5,9 +5,9 @@ Text:no text
 PT:1/2
 K:Haste
 A:AB$ SetState | Cost$ T | ValidTgts$ Creature.YouCtrl+faceDown | RememberChanged$ True | Mode$ TurnFace | SubAbility$ DBDelTrig | SpellDescription$ Turn target face-down creature you control face up. At the beginning of the next end step, sacrifice it.
-SVar:DBDelTrig:DB$DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigSac | TriggerDescription$ At the beginning of the next end step, sacrifice it.
-SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Remembered | SubAbility$ DBCleanup
-SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:DBDelTrig:DB$ DelayedTrigger | Mode$ Phase | Phase$ End of Turn | Execute$ TrigSac | TriggerDescription$ At the beginning of the next end step, sacrifice it.
+SVar:TrigSac:AB$ SacrificeAll | Cost$ 0 | Defined$ Remembered | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skirk_alarmist.jpg
 SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/111.jpg
