@@ -248,6 +248,15 @@ Fixes/Features:
 - More cards ready for multiplayer
 - Converted Omnath, Locus of Mana to script by keywording his ability.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Tolarian Entrancer.
+- Further fix for Tolarian Entrancer
+- Fixed Skirk Alarmist.
+- Fixed AI possibly pumping opposing creatures (plus multiplayer considerations).
+- Sideboarding: Initial commit of phase 1-related code (sideboard mode for deck editor). Currently DISABLED and should not affect anything in the code, will be updated and enabled after v1.3.3.
+- Reverted Archenemy starting life to 10+(10*<Number of opponents>)
+- Fixed saving pre-scheme decks.
+- Cleaned up imports.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -287,6 +296,7 @@ Every Hope Shall Vanish
 Every Last Vestige Shall Rot
 Evil Comes to Fruition
 I Call on the Ancient Magics
+I Delight in Your Convulsions
 
 
 Added the following Vanguard Avatars:
