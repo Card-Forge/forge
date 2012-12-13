@@ -1,5 +1,5 @@
 Name:High Ground
-ManaCost:2 W
+ManaCost:W
 Types:Enchantment
 Text:no text
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME can block an additional creature. | Description$ Each creature you control can block an additional creature.
