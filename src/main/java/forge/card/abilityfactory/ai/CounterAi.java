@@ -106,7 +106,6 @@ public class CounterAi extends SpellAiLogic {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        boolean toReturn = true;
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
@@ -165,7 +164,7 @@ public class CounterAi extends SpellAiLogic {
 
         // But really it should be more picky about how it counters things
 
-        return toReturn;
+        return true;
     }
 
 }

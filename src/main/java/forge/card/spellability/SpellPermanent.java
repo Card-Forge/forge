@@ -292,7 +292,8 @@ public class SpellPermanent extends Spell {
         }
         // Wait for Main2 if possible
         if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.MAIN1)
-                && !ComputerUtil.castPermanentInMain1(ai, this)) {
+                && !ComputerUtil.castPermanentInMain1(ai, this)
+                && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai)) {
             return false;
         }
         // save cards with flash for surprise blocking
@@ -410,9 +411,13 @@ public class SpellPermanent extends Spell {
     }
 
     private static boolean checkETBEffects(final Card card, final SpellAbility sa, final ApiType api, final Player ai) {
+        boolean rightapi = false;
 
         if (card.isCreature()
                 && Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCreatureETBTriggers)) {
+            if (api != null) {
+                return false;
+            }
             return true;
         }
 
@@ -477,8 +482,12 @@ public class SpellPermanent extends Spell {
             }
             final SpellAbility exSA = af.getAbility(card.getSVar(execute), card);
 
-            if (api != null && exSA.getApi() != api) {
-                continue;
+            if (api != null) { 
+                if(exSA.getApi() != api) {
+                    continue;
+                } else {
+                    rightapi = true;
+                }
             }
 
             if (sa != null) {
@@ -504,6 +513,9 @@ public class SpellPermanent extends Spell {
                 // else
                 // otherwise, return false 50% of the time?
             }
+        }
+        if (api != null && !rightapi) {
+            return false;
         }
 
         // Replacement effects
