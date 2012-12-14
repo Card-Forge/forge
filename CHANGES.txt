@@ -1,17 +1,16 @@
-Forge Beta: 12-##-2012 ver 1.3.3
+Forge Beta: 12-14-2012 ver 1.3.3
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 (Thanks to the MAGE team for permission to use their targeting arrows.)
 (Thanks to http://www.freesound.org/browse/ for providing some sound files.)
 
-11### cards in total.
+11674 cards in total.
 
 
 The Alara Reborn set is now 100% implemented.
 
-Some initial work is being done to add Schemes to a branch and this work is not yet available in this build.
+Schemes have been added to the Archenemy mode. This is a work in progress and there may be a bug or two for us to find. Please discuss this new feature in the 1.3.3 beta release topic.
 
---
 
 This version of forge includes a few sound files for the new sound effect system. While we have several sounds assigned to a few of the available events there are a number of events that do not yet have a assigned sound file. This should be considered a work in progress and we could use some help in finding interesting sounds that we can add to forge.
 
@@ -266,46 +265,56 @@ Fixes/Features:
 - Decks for the sample 'Shandalar' world. No images (due to copyright reasons). Will be enabled AFTER the next beta release.
 - applied script fixed by swordshine
 - Added the recent commit logs to changes.txt. Preparing for the beta build and release.
+- Preparing the changes.txt file for the next beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-
+Agetian
+ArsenalNut
+Gos
+Hellfish
+Marc
+RumbleBBU
+Sloth
+Sol
+Swordshine
+Chris H
 
 
 Added the following Schemes:
 
 A Display of My Dark Power
-I Know All, I See All
-Behold the Power of Destruction
-Look Skyward and Despair
-My Genius Knows No Bounds
-Realms Befitting My Majesty
-Roots of All Evil
-The Iron Guardian Stirs
-The Very Soil Shall Shake
-Which of You Burns Brightest?
-Ignite the Cloneforge!
-Perhaps You've Met My Cohort
-Tooth, Claw, and Tail
-Your Will Is Not Your Own
-Plots That Span Centuries
 All Shall Smolder in My Wake
 Approach My Molten Realm
-Embrace My Diabolical Vision
-Your Puny Minds Cannot Fathom
-Imprison This Insolent Wretch
-Your Fate Is Thrice Sealed
-The Pieces Are Coming Together
-My Wish Is Your Command
-Nothing Can Stop Me Now
+Behold the Power of Destruction
 Dance, Pathetic Marionette
-Mortal Flesh Is Weak
+Embrace My Diabolical Vision
 Every Hope Shall Vanish
 Every Last Vestige Shall Rot
 Evil Comes to Fruition
 I Call on the Ancient Magics
 I Delight in Your Convulsions
+I Know All, I See All
+Ignite the Cloneforge!
+Imprison This Insolent Wretch
+Look Skyward and Despair
+Mortal Flesh Is Weak
+My Genius Knows No Bounds
+My Wish Is Your Command
+Nothing Can Stop Me Now
+Perhaps You've Met My Cohort
+Plots That Span Centuries
+Realms Befitting My Majesty
+Roots of All Evil
+The Iron Guardian Stirs
+The Pieces Are Coming Together
+The Very Soil Shall Shake
+Tooth, Claw, and Tail
+Which of You Burns Brightest?
+Your Fate Is Thrice Sealed
+Your Puny Minds Cannot Fathom
+Your Will Is Not Your Own
 
 
 Added the following Vanguard Avatars:
@@ -315,57 +324,57 @@ Flametongue Kavu Avatar
 
 Added the following cards:
 
-Catalyst Stone
-Opal-Eye, Konda's Yojimbo
-Read the Runes
-Sirocco
-Spelltithe Enforcer
 AEther Rift
-Kindle the Carnage
-Pack Hunt
-Leviathan
-Exalted Dragon
-Reclamation
-Flooded Woodlands
-Impromptu Raid
-Riptide Mangler
-Wand of Ith
-Consecrate Land
-Dash Hopes
-Phantasmagorian
-Brain Gorgers
-Barbarian Bully
-Cursed Monstrosity
-Dong Zhou, the Tyrant
-Kithkin Zealot
-Junk Golem
-Retether
-Aura Graft
 AEther Snap
-Scrounge
-Bruna, Light of Alabaster
-Sen Triplets
-Withdraw
-Crown of the Ages
-Kitsune Mystic // Autumn-Tail, Kitsune Sage
-Quest for the Holy Relic
-Phantasmal Sphere
-Scarab of the Unseen
 Argothian Wurm
-Marshaling the Troops
-Cinder Cloud
-Harmony of Nature
-Shivan Wumpus
-Luminescent Rain
-Ravenous Vampire
+Aura Graft
+Barbarian Bully
+Brain Gorgers
+Bruna, Light of Alabaster
+Catalyst Stone
 Chameleon Spirit
+Cinder Cloud
+Consecrate Land
+Crown of the Ages
+Cursed Monstrosity
+Dash Hopes
 Desperate Research
+Dong Zhou, the Tyrant
 Evershrike
+Exalted Dragon
+Flooded Woodlands
+Harmony of Nature
+Impromptu Raid
+Junk Golem
+Kindle the Carnage
+Kithkin Zealot
+Kitsune Mystic // Autumn-Tail, Kitsune Sage
+Leviathan
+Luminescent Rain
+Marshaling the Troops
 Mercadian Lift
 Mtenda Lion
 Nakaya Shade
+Opal-Eye, Konda's Yojimbo
+Pack Hunt
+Phantasmagorian
+Phantasmal Sphere
+Quest for the Holy Relic
+Ravenous Vampire
+Read the Runes
+Reclamation
+Retether
 Rhystic Cave
+Riptide Mangler
+Scarab of the Unseen
+Scrounge
+Sen Triplets
+Shivan Wumpus
+Sirocco
 Soul Strings
+Spelltithe Enforcer
+Wand of Ith
+Withdraw
 
 
 end
