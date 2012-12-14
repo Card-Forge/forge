@@ -237,7 +237,7 @@ public final class GuiDisplayUtil {
         char c;
         for (int i = 0; i < in.length(); i++) {
             c = in.charAt(i);
-            if ((c == '"') || (c == '/') || (c == ':')) {
+            if ((c == '"') || (c == '/') || (c == ':') || (c == '?')) {
                 out.append("");
             } else {
                 out.append(c);
