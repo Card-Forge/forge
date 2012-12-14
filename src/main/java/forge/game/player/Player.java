@@ -148,7 +148,8 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
 
     /** The Constant ALL_ZONES. */
     public static final List<ZoneType> ALL_ZONES = Collections.unmodifiableList(Arrays.asList(ZoneType.Battlefield,
-            ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante));
+            ZoneType.Library, ZoneType.Graveyard, ZoneType.Hand, ZoneType.Exile, ZoneType.Command, ZoneType.Ante,
+            ZoneType.Sideboard));
 
 
     private final PlayerController controller;

@@ -50,6 +50,7 @@ public class GameNew {
     private static void prepareFirstGameLibrary(Player player, Deck deck, Map<Player, List<String>> removedAnteCards, List<String> rAICards, boolean canRandomFoil, Random generator, boolean useAnte) { 
     
         PlayerZone library = player.getZone(ZoneType.Library);
+        PlayerZone sideboard = player.getZone(ZoneType.Sideboard);
         for (final Entry<CardPrinted, Integer> stackOfCards : deck.getMain()) {
             final CardPrinted cardPrinted = stackOfCards.getKey();
             for (int i = 0; i < stackOfCards.getValue(); i++) {
@@ -78,6 +79,44 @@ public class GameNew {
                     removedAnteCards.get(player).add(card.getName());
                 } else {
                     library.add(card);
+                }
+
+                // mark card as difficult for AI to play
+                if (player.isComputer() && card.getSVar("RemAIDeck").equals("True") && !rAICards.contains(card.getName())) {
+                    rAICards.add(card.getName());
+                    // get card picture so that it is in the image cache
+                    // ImageCache.getImage(card);
+                }
+            }
+        }
+        for (final Entry<CardPrinted, Integer> stackOfCards : deck.getSideboard()) {
+            final CardPrinted cardPrinted = stackOfCards.getKey();
+            for (int i = 0; i < stackOfCards.getValue(); i++) {
+
+                final Card card = cardPrinted.toForgeCard(player);
+
+                // apply random pictures for cards
+                if (player.isComputer() || Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_CARD_ART)) {
+                    final int cntVariants = cardPrinted.getCard().getEditionInfo(cardPrinted.getEdition()).getCopiesCount();
+                    if (cntVariants > 1) {
+                        card.setRandomPicture(generator.nextInt(cntVariants - 1) + 1);
+                        card.setImageFilename(CardUtil.buildFilename(card));
+                    }
+                }
+
+                // Assign random foiling on approximately 1:20 cards
+                if (cardPrinted.isFoil() || (canRandomFoil && MyRandom.percentTrue(5))) {
+                    final int iFoil = MyRandom.getRandom().nextInt(9) + 1;
+                    card.setFoil(iFoil);
+                }
+
+                if (!useAnte && card.hasKeyword("Remove CARDNAME from your deck before playing if you're not playing for ante.")) {
+                    if (!removedAnteCards.containsKey(player)) {
+                        removedAnteCards.put(player, new ArrayList<String>());
+                    }
+                    removedAnteCards.get(player).add(card.getName());
+                } else {
+                    sideboard.add(card);
                 }
 
                 // mark card as difficult for AI to play
