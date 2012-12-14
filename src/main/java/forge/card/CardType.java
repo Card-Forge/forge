@@ -212,7 +212,7 @@ public final class CardType implements Comparable<CardType> {
     public boolean isVanguard() {
         return this.coreType.contains(CardCoreType.Vanguard);
     }
-    
+
     /**
      * Checks if is scheme.
      * 
@@ -220,7 +220,7 @@ public final class CardType implements Comparable<CardType> {
      */
     public boolean isScheme() {
         return this.coreType.contains(CardCoreType.Scheme);
-    } 
+    }
 
     /**
      * Checks if is enchantment.

@@ -56,16 +56,16 @@ public class CountersPutEffect extends SpellEffect {
     @Override
     public void resolve(SpellAbility sa) {
         final Card card = sa.getSourceCard();
-        
+
         CounterType counterType;
-        
-        try{
+
+        try {
             counterType = AbilityFactory.getCounterType(sa.getParam("CounterType"), sa);
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("Counter type doesn't match, nor does an SVar exist with the type name.");
             return;
         }
-        
+
         int counterAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
         final int max = sa.hasParam("MaxFromEffect") ? Integer.parseInt(sa.getParam("MaxFromEffect")) : -1;
 

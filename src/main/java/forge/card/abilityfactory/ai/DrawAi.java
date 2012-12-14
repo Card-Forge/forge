@@ -108,7 +108,7 @@ public class DrawAi extends SpellAiLogic {
         }
         if ((!Singletons.getModel().getGame().getPhaseHandler().getNextTurn().equals(ai)
                     || Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.END_OF_TURN))
-                && !sa.hasParam("PlayerTurn") && !AbilityFactory.isSorcerySpeed(sa) 
+                && !sa.hasParam("PlayerTurn") && !AbilityFactory.isSorcerySpeed(sa)
                 && ai.getCardsIn(ZoneType.Hand).size() > 1) {
             return false;
         }

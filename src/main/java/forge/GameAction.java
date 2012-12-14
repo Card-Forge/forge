@@ -1064,7 +1064,7 @@ public class GameAction {
                         }
                     }
                 } // if isEquipped()
-                
+
 
                 if (c.isEquipping()) {
                     final Card equippedCreature = c.getEquipping().get(0);
@@ -1178,7 +1178,7 @@ public class GameAction {
             } // while it.hasNext()
 
             checkAgain |= game.getTriggerHandler().runWaitingTriggers();
-            
+
             if (!checkAgain) {
                 break; // do not continue the loop
             }

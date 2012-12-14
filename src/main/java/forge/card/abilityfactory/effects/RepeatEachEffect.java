@@ -77,7 +77,7 @@ public class RepeatEachEffect extends SpellEffect {
                 source.removeRemembered(player);
             }
         }
-        
+
         if (sa.hasParam("RepeatCounters")) {
             Card target = sa.getTargetCard();
             Set<CounterType> types = new HashSet<CounterType>(target.getCounters().keySet());

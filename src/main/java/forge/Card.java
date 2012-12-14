@@ -600,6 +600,14 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.rememberedObjects.add(o);
     }
 
+    /**
+     * <p>
+     * removeRemembered.
+     * </p>
+     * 
+     * @param o
+     *            a {@link java.lang.Object} object.
+     */
     public final void removeRemembered(final Object o) {
         this.rememberedObjects.remove(o);
     }
@@ -5430,7 +5438,14 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final boolean isEquipment() {
         return this.typeContains("Equipment");
     }
-    
+
+    /**
+     * <p>
+     * isScheme.
+     * </p>
+     * 
+     * @return a boolean.
+     */
     public final boolean isScheme() {
         return this.typeContains("Scheme");
     }

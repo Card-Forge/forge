@@ -455,8 +455,8 @@ public final class GameActionUtil {
                 int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
                         : CardFactoryUtil.xCount(source, source.getSVar(amountString));
                 String plural = amount > 1 ? "s" : "";
-                if (part.canPay(sourceAbility, source, p, cost) && 
-                        showYesNoDialog(source, "Do you want to remove " + amount + " " + counterType.getName()
+                if (part.canPay(sourceAbility, source, p, cost)
+                        && showYesNoDialog(source, "Do you want to remove " + amount + " " + counterType.getName()
                         + " counter" + plural + " from " + source + "?")) {
                     source.subtractCounter(counterType, amount);
                 } else {
@@ -539,7 +539,7 @@ public final class GameActionUtil {
                 }
                 remainingParts.remove(part);
             }
-            
+
             else if (part instanceof CostMana && ((CostMana) part).getManaToPay().equals("0")) {
                 remainingParts.remove(part);
             }

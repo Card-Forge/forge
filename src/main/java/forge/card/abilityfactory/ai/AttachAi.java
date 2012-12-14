@@ -163,7 +163,7 @@ public class AttachAi extends SpellAiLogic {
                 type = stab.get("AddType");
             }
         }
-        
+
         if ("ChosenType".equals(type)) {
             // TODO ChosenTypeEffect should have exact same logic that's here
             // For now, Island is as good as any for a default value
@@ -315,7 +315,7 @@ public class AttachAi extends SpellAiLogic {
 
         return c;
     }
-    
+
     /**
      * Attach ai control preference.
      * 
@@ -343,7 +343,7 @@ public class AttachAi extends SpellAiLogic {
 
         return c;
     }
-    
+
     /**
      * Attach ai control preference.
      * 
@@ -362,7 +362,7 @@ public class AttachAi extends SpellAiLogic {
         // I know this isn't much better than Hardcoding, but some cards need it for now
         Player ai = sa.getActivatingPlayer();
         Card chosen = null;
-        if ("Guilty Conscience".equals(sa.getSourceCard().getName())) {    
+        if ("Guilty Conscience".equals(sa.getSourceCard().getName())) {
             List<Card> aiStuffies = CardLists.filter(list, Predicates.and(CardPredicates.isController(ai), CardPredicates.nameEquals("Stuffy Doll")));
             if (!aiStuffies.isEmpty()) {
                 chosen = aiStuffies.get(0);
@@ -372,7 +372,7 @@ public class AttachAi extends SpellAiLogic {
                 chosen = CardFactoryUtil.getBestCreatureAI(creatures);
             }
         }
-        
+
         // If Mandatory (brought directly into play without casting) gotta
         // choose something
         if (chosen == null && mandatory) {
@@ -839,7 +839,7 @@ public class AttachAi extends SpellAiLogic {
         // Some ChangeType cards are beneficial, and PrefPlayer should be
         // changed to represent that
         final List<Card> prefList;
-        
+
         if ("Reanimate".equals(logic) || "SpecificCard".equals(logic)) {
             // Reanimate or SpecificCard aren't so restrictive
             prefList = list;

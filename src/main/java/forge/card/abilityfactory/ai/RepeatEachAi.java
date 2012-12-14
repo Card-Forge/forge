@@ -83,7 +83,7 @@ public class RepeatEachAi extends SpellAiLogic {
             if (list.isEmpty()) {
                 return false;
             }
-            
+
             tgt.addTarget(list.get(0));
         }
 

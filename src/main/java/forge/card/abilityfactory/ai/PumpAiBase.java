@@ -181,7 +181,7 @@ public abstract class PumpAiBase extends SpellAiLogic {
             Predicate<Card> flyingOrReach = Predicates.or(CardPredicates.hasKeyword("Flying"), CardPredicates.hasKeyword("Reach"));
             if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || card.isAttacking())
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY)
-                    || card.getNetCombatDamage() <= 0 
+                    || card.getNetCombatDamage() <= 0
                     || !Iterables.any(CardLists.filter(opp.getCreaturesInPlay(), CardPredicates.possibleBlockers(card)),
                             Predicates.not(flyingOrReach))) {
                 return false;

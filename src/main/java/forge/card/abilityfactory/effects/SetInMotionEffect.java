@@ -21,16 +21,16 @@ public class SetInMotionEffect extends SpellEffect {
         System.out.println("AF_SIM");
         Card source = sa.getSourceCard();
         Player controller = source.getController();
-        
+
         int repeats = 1;
-        
-        if(sa.hasParam("RepeatNum"))
-        {
+
+        if (sa.hasParam("RepeatNum")) {
+
             repeats = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("RepeatNum"), sa);
         }
-        
-        for(int i=0;i<repeats;i++)
-        {
+
+        for (int i = 0; i < repeats; i++) {
+
             controller.setSchemeInMotion();
         }
     }

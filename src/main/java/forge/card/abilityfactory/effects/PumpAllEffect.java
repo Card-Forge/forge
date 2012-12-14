@@ -22,7 +22,7 @@ public class PumpAllEffect extends SpellEffect {
         String desc = "";
         if (sa.hasParam("PumpAllDescription")) {
             desc = sa.getParam("PumpAllDescription");
-        } else if (sa.hasParam("SpellDescription")){
+        } else if (sa.hasParam("SpellDescription")) {
             desc = sa.getParam("SpellDescription").replace("CARDNAME", sa.getSourceCard().getName());
         }
 
