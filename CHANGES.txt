@@ -257,6 +257,15 @@ Fixes/Features:
 - Fixed saving pre-scheme decks.
 - Cleaned up imports.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed the casting cost of High Ground.
+- CheckStyle.
+- Fixed Necropotence.
+- Made a few more cards multiplayer compatible
+- Added LocalCount to resolve of DamageDealEffect and DrawEffect which allows calculated variables to be calculated per player (should allow a few more cards to be made multiplayer compatible)
+- Fixed ChangeZoneAll so that it works correctly when Defined returns more than one player
+- Decks for the sample 'Shandalar' world. No images (due to copyright reasons). Will be enabled AFTER the next beta release.
+- applied script fixed by swordshine
+- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
