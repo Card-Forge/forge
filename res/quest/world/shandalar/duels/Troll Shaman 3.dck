@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Troll Shaman 3
+Title=Troll Shaman
+Icon=TrollShaman.jpg
+Difficulty=hard
+Description=Largish Red creatures and some burn.
+Deck Type=constructed
+[main]
+2 Cave People|DRK
+2 Conservator|LEB
+2 Dancing Scimitar|ARN
+3 Fireball|4ED
+4 Hill Giant|4ED
+2 Hurloon Minotaur|LEB
+3 Lightning Bolt|2ED
+2 Mijae Djinn|ARN
+22 Mountain|4ED
+2 Oasis|ARN
+2 Pyrotechnics|LEG
+2 Shatter|4ED
+2 Shivan Dragon|2ED
+4 Stone Giant|4ED
+2 Strip Mine|ATQ
+4 Uthden Troll|4ED
+[sideboard]

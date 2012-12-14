@@ -1,0 +1,37 @@
+[quest]
+id=1
+OpponentName=Astral Visionary
+AILife=30
+Repeat=true
+Wins=30
+Card Reward=4 blue rares
+Credit Reward=250
+HumanExtras=Crystal Rod
+AIExtras=Zephyr Falcon
+[metadata]
+Name=quest1
+Title=Blue Castle (Blue)
+Difficulty=hard
+Description=This is the castle of the powerful Blue Wizardess, The Astral Visionary.
+Icon=Astral.jpg
+Deck Type=constructed
+[main]
+1 Ancestral Recall|2ED
+1 Black Lotus|2ED
+4 Black Vise|4ED
+2 Boomerang|LEG
+1 Copy Artifact|3ED
+4 Counterspell|2ED
+2 Feedback|3ED
+1 Feldon's Cane|ATQ
+4 Howling Mine|2ED
+24 Island|2ED
+1 Ivory Tower|4ED
+2 Mana Drain|LEG
+1 Mox Sapphire|2ED
+4 Polar Kraken|ICE
+4 Stasis|2ED
+1 Time Walk|2ED
+2 Twiddle|2ED
+4 Yotian Soldier|ATQ
+[sideboard]

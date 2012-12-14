@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Winged Stallion 2
+Title=Winged Stallion
+Icon=WingedStallion.jpg
+Difficulty=medium
+Description=UW deck with emphasis on fliers.
+Deck Type=constructed
+[main]
+1 Conversion|LEB
+2 Counterspell|2ED
+2 Dancing Scimitar|ARN
+1 Disenchant|2ED
+3 Holy Armor|2ED
+3 Holy Strength|2ED
+3 Howling Mine|4ED
+12 Island|2ED
+2 Karma|LEB
+1 Lifetap|LEB
+2 Moat|LEG
+2 Flight|2ED
+2 Phantasmal Forces|LEB
+12 Plains|2ED
+4 Psionic Entity|LEG
+2 Segovian Leviathan|LEG
+2 Serra Angel|2ED
+2 Siren's Call|LEB
+2 Swords to Plowshares|LEB
+4 Thunder Spirit|LEG
+[sideboard]

@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Thought Invoker 4
+Title=Thought Invoker
+Icon=ThoughtInvoker.jpg
+Difficulty=very hard
+Description=Big Blue fliers and effects to impede opponent's progress.
+Deck Type=constructed
+[main]
+1 Ancestral Recall|LEB
+2 Control Magic|LEB
+2 Energy Flux|4ED
+4 Ghost Ship|DRK
+4 Giant Tortoise|ARN
+22 Island|4ED
+2 Mahamoti Djinn|LEB
+4 Mana Short|LEB
+1 Mox Sapphire|LEB
+4 Phantom Monster|LEB
+4 Power Sink|4ED
+4 Psychic Venom|LEB
+1 Sol Ring|LEB
+2 Time Elemental|LEG
+3 Twiddle|LEB
+[sideboard]

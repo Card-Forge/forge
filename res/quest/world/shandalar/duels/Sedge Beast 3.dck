@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Sedge Beast 3
+Title=Sedge Beast
+Icon=SedgeBeast.jpg
+Difficulty=hard
+Description=RB land destruction.
+Deck Type=constructed
+[main]
+4 Blight|LEG
+4 Cyclopean Mummy|LEG
+2 Dancing Scimitar|ARN
+2 Diabolic Machine|DRK
+4 Erg Raiders|ARN
+4 Fissure|DRK
+2 Immolation|LEG
+4 Ironclaw Orcs|LEB
+10 Mountain|4ED
+4 Stone Rain|2ED
+4 Strip Mine|ATQ
+10 Swamp|2ED
+4 Uthden Troll|4ED
+2 Weakness|4ED
+[sideboard]

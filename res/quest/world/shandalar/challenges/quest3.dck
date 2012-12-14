@@ -1,0 +1,35 @@
+[quest]
+id=3
+OpponentName=Astral Visionary
+AILife=25
+Repeat=true
+Wins=20
+Card Reward=3 blue rares
+Credit Reward=150
+HumanExtras=Crystal Rod
+AIExtras=Crystal Rod
+[metadata]
+Name=quest3
+Title=Blue Outpost (Blue)
+Difficulty=medium
+Description=This is a remote outpost the powerful Blue Wizardess, The Astral Visionary. Here she is at her weakest.
+Icon=Astral.jpg
+Deck Type=constructed
+[main]
+1 Ancestral Recall|LEB
+1 Black Lotus|LEB
+1 Copy Artifact|LEB
+4 Counterspell|2ED
+4 Howling Mine|2ED
+24 Island|2ED
+3 Mana Drain|LEG
+1 Mox Sapphire|LEB
+4 Polar Kraken|ICE
+4 Stasis|LEB
+1 Time Walk|LEB
+1 Timetwister|LEB
+2 Twiddle|LEB
+3 Unstable Mutation|TSB
+4 Yotian Soldier|ATQ
+4 Zephyr Falcon|LEG
+[sideboard]

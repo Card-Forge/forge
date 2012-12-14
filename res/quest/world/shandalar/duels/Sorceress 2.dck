@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Sorceress 2
+Title=Sorceress
+Icon=Sorceress.jpg
+Difficulty=medium
+Description=Pumpable Red weenies with Dwarven Warriors and Meekstone.
+Deck Type=constructed
+[main]
+3 Ball Lightning|4ED
+4 Bird Maiden|ARN
+4 Blood Lust|LEG
+3 Dragon Whelp|4ED
+4 Dwarven Warriors|LEB
+2 Fire Drake|CHR
+4 Firebreathing|4ED
+2 Hurloon Minotaur|LEB
+4 Hurr Jackal|ARN
+3 Iron Star|LEB
+2 Meekstone|LEB
+23 Mountain|4ED
+2 Shatter|4ED
+[sideboard]

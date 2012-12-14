@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Whim 2
+Title=Whim
+Icon=Whim.jpg
+Difficulty=medium
+Description=UBW tap-dancing deck.
+Deck Type=constructed
+[main]
+1 Alabaster Potion|LEG
+1 Black Lotus|LEB
+2 Carrion Ants|LEG
+2 Colossus of Sardia|ATQ
+1 Flood|DRK
+1 Icy Manipulator|2ED
+7 Island|4ED
+2 Kismet|LEG
+1 Kormus Bell|LEB
+2 Meekstone|LEB
+1 Mox Jet|LEB
+1 Mox Pearl|LEB
+1 Mox Sapphire|LEB
+6 Plains|4ED
+4 Power Sink|4ED
+4 Psychic Venom|LEB
+4 Royal Assassin|2ED
+2 Serra Angel|4ED
+2 Shapeshifter|ATQ
+2 Siren's Call|LEB
+6 Swamp|4ED
+2 Twiddle|LEB
+2 Word of Binding|DRK
+4 Yotian Soldier|4ED
+[sideboard]

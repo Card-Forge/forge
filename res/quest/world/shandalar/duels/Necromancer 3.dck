@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Necromancer 3
+Title=Necromancer
+Icon=Necromancer.jpg
+Difficulty=hard
+Description=Black swampwalking reanimator deck.
+Deck Type=constructed
+[main]
+1 Aladdin's Ring|ARN
+4 Animate Dead|LEB
+4 Bad Moon|4ED
+4 Bog Wraith|4ED
+2 Dark Ritual|4ED
+1 Demonic Tutor|LEB
+6 Evil Presence|4ED
+4 Lost Soul|LEG
+1 Mox Jet|LEB
+1 Pestilence|4ED
+4 Scathe Zombies|LEB
+21 Swamp|4ED
+3 Unholy Strength|4ED
+4 Zombie Master|LEB
+[sideboard]

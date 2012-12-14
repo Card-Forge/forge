@@ -1,0 +1,25 @@
+[metadata]
+Name=Enchantress 1
+Title=Enchantress
+Icon=Enchantress.jpg
+Difficulty=easy
+Description=Green Lure + Regenerating Basilisk/Cockatrice.
+Deck Type=constructed
+[main]
+4 Aspect of Wolf|LEB
+3 Cockatrice|4ED
+2 Coral Helm|ATQ
+3 Desert Twister|4ED
+2 Durkwood Boars|4ED
+22 Forest|4ED
+2 Instill Energy|LEB
+1 Ivory Tower|ATQ
+3 Living Artifact|LEB
+4 Llanowar Elves|4ED
+3 Lure|4ED
+3 Regeneration|4ED
+3 Thicket Basilisk|LEB
+3 Verduran Enchantress|LEB
+2 Web|LEB
+2 Wild Growth|LEB
+[sideboard]

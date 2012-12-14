@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Sorcerer 2
+Title=Sorcerer
+Icon=Sorcerer.jpg
+Difficulty=medium
+Description=Red weenies with Manabarbs.
+Deck Type=constructed
+[main]
+3 Ali Baba|ARN
+3 Ankh of Mishra|LEB
+4 Giant Strength|4ED
+4 Goblin Balloon Brigade|4ED
+3 Hurr Jackal|ARN
+3 Immolation|LEG
+4 Lightning Bolt|2ED
+4 Manabarbs|4ED
+4 Mons's Goblin Raiders|LEB
+16 Mountain|4ED
+4 Sisters of the Flame|DRK
+4 Strip Mine|ATQ
+4 Winds of Change|4ED
+[sideboard]

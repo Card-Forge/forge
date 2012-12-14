@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Sedge Beast 4
+Title=Sedge Beast
+Icon=SedgeBeast.jpg
+Difficulty=very hard
+Description=RB land destruction.
+Deck Type=constructed
+[main]
+4 Badlands|LEB
+4 Blight|LEG
+2 Cyclopean Mummy|LEG
+4 Erg Raiders|ARN
+4 Fissure|DRK
+2 Immolation|LEG
+4 Ironclaw Orcs|LEB
+8 Mountain|2ED
+4 Sedge Troll|LEB
+4 Sinkhole|LEB
+4 Stone Rain|2ED
+4 Strip Mine|ATQ
+8 Swamp|2ED
+4 Uthden Troll|4ED
+[sideboard]

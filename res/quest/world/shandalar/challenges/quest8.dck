@@ -1,0 +1,37 @@
+[quest]
+id=8
+OpponentName=Kzzy'n
+AILife=25
+Repeat=true
+Wins=20
+Card Reward=3 red rares
+Credit Reward=150
+HumanExtras=Iron Star
+AIExtras=Iron Star
+[metadata]
+Name=quest8
+Title=Red Outpost (Red)
+Difficulty=medium
+Description=This is a remote outpost the powerful Red Wizardess, Kzzy'n the Dragon Lord. Here she is at her weakest.
+Icon=Kzzyn.jpg
+Deck Type=constructed
+[main]
+4 Birds of Paradise|4ED
+4 Celestial Prism|LEB
+2 Craw Wurm|4ED
+2 Disenchant|4ED
+2 Dragon Engine|ATQ
+4 Dragon Whelp|4ED
+2 Elder Land Wurm|LEG
+4 Fellwar Stone|DRK
+2 Fire Drake|CHR
+2 Forest|4ED
+1 Ivory Tower|ATQ
+4 Lightning Bolt|4ED
+2 Mana Flare|LEB
+18 Mountain|4ED
+2 Plains|4ED
+2 Rukh Egg|ARN
+4 Shivan Dragon|4ED
+3 Winds of Change|4ED
+[sideboard]

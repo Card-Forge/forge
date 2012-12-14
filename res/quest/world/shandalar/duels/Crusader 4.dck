@@ -1,0 +1,26 @@
+[duel]
+[metadata]
+Name=Crusader 4
+Title=Crusader
+Icon=Crusader.jpg
+Difficulty=very hard
+Description=White aggro/weenie
+Deck Type=constructed
+[main]
+4 Angelic Voices|LEG
+2 Army of Allah|ARN
+1 Blessing|LEB
+4 Crusade|LEB
+2 Dancing Scimitar|ARN
+3 Disenchant|2ED
+2 Moorish Cavalry|ARN
+3 Northern Paladin|3ED
+22 Plains|2ED
+2 Squire|DRK
+1 Holy Light|DRK
+2 Holy Strength|4ED
+2 Lance|LEA
+4 Swords to Plowshares|LEB
+2 Veteran Bodyguard|LEA
+4 White Knight|2ED
+[sideboard]

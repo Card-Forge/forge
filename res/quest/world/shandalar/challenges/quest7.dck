@@ -1,0 +1,39 @@
+[quest]
+id=7
+OpponentName=Morgane
+AILife=30
+Repeat=true
+Wins=30
+Card Reward=4 green rares
+Credit Reward=250
+HumanExtras=Concordant Crossroads
+AIExtras=Ghazban Ogre
+[metadata]
+Name=quest7
+Title=Green Castle (Green)
+Difficulty=hard
+Description=This is the castle of the powerful Green Wizard, Morgane the Great Druid.
+Icon=Morgane.jpg
+Deck Type=constructed
+[main]
+1 Berserk|LEB
+2 Cockatrice|4ED
+3 Desert Twister|4ED
+2 Force of Nature|LEB
+22 Forest|4ED
+1 Gaea's Avenger|ATQ
+4 Gaea's Liege|4ED
+2 Ifh-Biff Efreet|ARN
+1 Island of Wak-Wak|ARN
+1 Ivory Tower|ATQ
+2 Jayemdae Tome|4ED
+4 Killer Bees|LEG
+4 Llanowar Elves|4ED
+1 Mox Emerald|LEB
+1 Regrowth|LEB
+2 Sandstorm|4ED
+1 Sol Ring|LEB
+2 Triskelion|4ED
+3 Untamed Wilds|4ED
+1 Willow Satyr|LEG
+[sideboard]

@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Mind Stealer 4
+Title=Mind Stealer
+Icon=MindStealer.jpg
+Difficulty=very hard
+Description=UB deck with tough fliers and creature stealing.
+Deck Type=constructed
+[main]
+2 Amnesia|DRK
+4 Animate Dead|LEB
+4 Control Magic|LEB
+2 Fellwar Stone|DRK
+3 Hypnotic Specter|4ED
+9 Island|4ED
+1 Mind Twist|LEB
+1 Old Man of the Sea|ARN
+2 Phantasmal Forces|LEB
+2 Phantom Monster|LEB
+4 Sengir Vampire|4ED
+3 Sindbad|4ED
+2 Siren's Call|LEB
+2 Steal Artifact|LEB
+9 Swamp|4ED
+4 Underground Sea|LEB
+3 Unholy Strength|4ED
+2 Vesuvan Doppelganger|LEB
+3 Will-o'-the-Wisp|LEB
+[sideboard]

@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Vampire Lord 3
+Title=Vampire Lord
+Icon=VampireLord.jpg
+Difficulty=hard
+Description=Vampire deck with mana accelerators.
+Deck Type=constructed
+[main]
+4 Animate Dead|LEB
+4 Dark Ritual|4ED
+3 Howl from Beyond|LEB
+3 Howling Mine|4ED
+4 Mana Vault|LEB
+2 Nettling Imp|LEB
+4 Sengir Vampire|4ED
+2 Sorceress Queen|ARN
+22 Swamp|4ED
+4 Terror|4ED
+2 Uncle Istvan|4ED
+4 Vampire Bats|LEG
+2 Will-o'-the-Wisp|LEB
+[sideboard]

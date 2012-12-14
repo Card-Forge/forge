@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Goblin Lord 4
+Title=Goblin Lord
+Icon=GoblinLord.jpg
+Difficulty=very hard
+Description=Very fast tribal Goblin deck.
+Deck Type=constructed
+[main]
+2 Gauntlet of Might|LEA
+4 Giant Strength|4ED
+4 Goblin Balloon Brigade|4ED
+2 Goblin Digging Team|DRK
+4 Goblin Hero|DRK
+4 Goblin King|LEB
+2 Goblins of the Flarg|DRK
+2 Immolation|LEG
+4 Keldon Warlord|LEB
+2 Manabarbs|4ED
+4 Mons's Goblin Raiders|LEB
+21 Mountain|4ED
+4 Orcish Oriflamme|LEB
+1 Shatter|4ED
+[sideboard]

@@ -1,0 +1,28 @@
+[metadata]
+Name=Elementalist 3
+Title=Elementalist
+Icon=Elementalist.jpg
+Difficulty=hard
+Description=UR deck that tries to stall you with Walls until it gets big Elementals out.
+Deck Type=constructed
+[main]
+3 Air Elemental|2ED
+3 Earth Elemental|2ED
+3 Earthquake|2ED
+2 Energy Flux|4ED
+3 Fire Elemental|2ED
+4 Fireball|2ED
+11 Island|2ED
+2 Lightning Bolt|2ED
+2 Mana Drain|LEG
+2 Mana Vault|LEB
+11 Mountain|2ED
+1 Sword of the Ages|LEG
+2 Unstable Mutation|4ED
+4 Volcanic Island|LEB
+1 Wall of Air|LEB
+1 Wall of Fire|2ED
+1 Wall of Stone|4ED
+1 Wall of Water|2ED
+3 Water Elemental|2ED
+[sideboard]

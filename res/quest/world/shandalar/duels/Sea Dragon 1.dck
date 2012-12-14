@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Sea Dragon 1
+Title=Sea Dragon
+Icon=SeaDragon.jpg
+Difficulty=easy
+Description=Big Blue sea creatures.
+Deck Type=constructed
+[main]
+3 Counterspell|4ED
+4 Creature Bond|LEB
+4 Giant Tortoise|ARN
+22 Island|4ED
+2 Island Fish Jasconius|ARN
+4 Jump|4ED
+2 Mana Vault|LEB
+4 Phantasmal Terrain|LEB
+1 Polar Kraken|ICE
+4 Sea Serpent|LEB
+4 Segovian Leviathan|LEG
+4 Siren's Call|LEB
+2 Water Elemental|4ED
+[sideboard]

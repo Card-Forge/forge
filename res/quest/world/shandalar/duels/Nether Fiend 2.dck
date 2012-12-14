@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Nether Fiend 2
+Title=Nether Fiend
+Icon=NetherFiend.jpg
+Difficulty=medium
+Description=Black Lord of the Pit deck.
+Deck Type=constructed
+[main]
+4 Animate Dead|LEB
+4 Black Knight|4ED
+4 Erg Raiders|ARN
+2 Khabal Ghoul|ARN
+4 Lord of the Pit|LEB
+4 Mishra's Factory|ATQ
+4 Nether Shadow|LEB
+2 Raise Dead|4ED
+2 Soul Net|LEB
+21 Swamp|4ED
+3 Terror|4ED
+2 Tetravus|ATQ
+4 The Hive|LEB
+[sideboard]

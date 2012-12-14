@@ -1,0 +1,38 @@
+[quest]
+id=5
+OpponentName=Azaar
+AILife=30
+Repeat=true
+Wins=30
+Card Reward=4 black rares
+Credit Reward=250
+HumanExtras=Bad Moon
+AIExtras=Nether Shadow
+[metadata]
+Name=quest5
+Title=Black Castle (Black)
+Difficulty=hard
+Description=This is the castle of the powerful Black Wizard, Azaar the Lich-Lord.
+Icon=Azaar.jpg
+Deck Type=constructed
+[main]
+1 Black Lotus|LEB
+4 Dark Ritual|4ED
+1 Demonic Tutor|LEB
+4 Drain Life|LEB
+2 Greed|LEG
+2 Howl from Beyond|LEB
+4 Hypnotic Specter|4ED
+2 Juzam Djinn|ARN
+2 Lord of the Pit|LEB
+1 Mind Twist|LEB
+1 Mox Jet|LEB
+2 Nightmare|4ED
+2 Oubliette|ARN
+4 Sengir Vampire|4ED
+1 Sol Ring|LEB
+23 Swamp|4ED
+1 Terror|4ED
+2 Tetravus|ATQ
+3 Will-o'-the-Wisp|LEB
+[sideboard]

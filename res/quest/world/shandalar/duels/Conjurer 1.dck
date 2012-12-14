@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Conjurer 1
+Title=Conjurer
+Icon=Conjurer.jpg
+Difficulty=easy
+Description=Blue/Artifact 'poker' deck.
+Deck Type=constructed
+[main]
+2 Aladdin's Ring|ARN
+2 Animate Artifact|LEB
+4 Apprentice Wizard|DRK
+2 Counterspell|4ED
+2 Fellwar Stone|DRK
+3 Giant Tortoise|ARN
+22 Island|4ED
+3 Jayemdae Tome|4ED
+4 Pirate Ship|4ED
+4 Prodigal Sorcerer|4ED
+4 Rod of Ruin|4ED
+2 Steal Artifact|LEB
+2 Unsummon|4ED
+2 Wall of Air|LEB
+2 Wall of Water|LEB
+[sideboard]

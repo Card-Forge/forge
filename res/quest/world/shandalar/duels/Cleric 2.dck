@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Cleric 2
+Title=Cleric
+Icon=Cleric.jpg
+Difficulty=medium
+Description=White weenie with some extra annoying cards.
+Deck Type=constructed
+[main]
+4 Amrou Kithkin|LEG
+3 Disenchant|4ED
+4 Exorcist|DRK
+4 Holy Armor|LEB
+4 Holy Strength|4ED
+3 Meekstone|LEB
+1 Miracle Worker|DRK
+3 Morale|4ED
+21 Plains|4ED
+2 Samite Healer|LEB
+4 Swords to Plowshares|LEB
+4 White Knight|4ED
+3 Witch Hunter|DRK
+[sideboard]

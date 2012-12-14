@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Summoner 3
+Title=Summoner
+Icon=Summoner.jpg
+Difficulty=hard
+Description=Big Green creatures with a splash of White.
+Deck Type=constructed
+[main]
+4 Birds of Paradise|4ED
+1 Channel|4ED
+2 Colossus of Sardia|4ED
+2 Disenchant|4ED
+3 Force of Nature|2ED
+20 Forest|4ED
+3 Giant Growth|2ED
+2 Healing Salve|2ED
+3 Holy Strength|2ED
+4 Hurricane|4ED
+4 Plains|4ED
+4 Radjan Spirit|4ED
+4 Spirit Link|LEG
+4 War Mammoth|2ED
+[sideboard]

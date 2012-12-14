@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Prismat 2
+Title=Prismat
+Icon=Prismat.jpg
+Difficulty=medium
+Description=Mostly creatureless GRW deck.
+Deck Type=constructed
+[main]
+1 Black Lotus|LEB
+2 Detonate|4ED
+2 Disenchant|4ED
+4 Earthquake|4ED
+2 Fellwar Stone|DRK
+2 Forest|4ED
+4 Healing Salve|4ED
+4 Hurricane|4ED
+4 Inferno|DRK
+3 Living Artifact|LEB
+2 Moat|LEG
+2 Mountain|4ED
+1 Mox Emerald|LEB
+1 Mox Pearl|LEB
+1 Mox Ruby|LEB
+4 Onulet|ATQ
+2 Palladia-Mors|CHR
+2 Plains|4ED
+4 Plateau|LEB
+4 Savannah|LEB
+1 Sol Ring|LEB
+2 Stream of Life|LEB
+4 Taiga|LEB
+2 Wrath of God|4ED
+[sideboard]

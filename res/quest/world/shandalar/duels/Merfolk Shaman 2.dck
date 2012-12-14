@@ -1,0 +1,22 @@
+[duel]
+[metadata]
+Name=Merfolk Shaman 2
+Title=Merfolk Shaman
+Icon=MerfolkShaman.jpg
+Difficulty=medium
+Description=Blue Merfolk theme deck.
+Deck Type=constructed
+[main]
+3 Invisibility|LEA
+22 Island|4ED
+2 Island Fish Jasconius|ARN
+3 Lifetap|LEB
+4 Lord of Atlantis|4ED
+4 Merfolk of the Pearl Trident|4ED
+4 Phantasmal Terrain|LEB
+3 Pirate Ship|4ED
+3 Sea Serpent|LEB
+4 Segovian Leviathan|LEG
+4 Unstable Mutation|4ED
+4 Unsummon|4ED
+[sideboard]

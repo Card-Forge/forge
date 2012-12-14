@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Lord of Fate 3
+Title=Lord of Fate
+Icon=LordOfFate.jpg
+Difficulty=hard
+Description=BW enchanted fliers and reanimation.
+Deck Type=constructed
+[main]
+2 Animate Dead|4ED
+2 Castle|LEB
+2 Dark Ritual|4ED
+2 Divine Transformation|LEG
+3 Drudge Skeletons|4ED
+3 Healing Salve|4ED
+3 Holy Strength|4ED
+2 Khabal Ghoul|ARN
+2 Ornithopter|4ED
+3 Osai Vultures|LEG
+3 Pestilence|4ED
+9 Plains|4ED
+4 Scrubland|LEB
+4 Serra Angel|4ED
+9 Swamp|4ED
+3 Unholy Strength|4ED
+1 White Knight|4ED
+3 Yotian Soldier|4ED
+[sideboard]

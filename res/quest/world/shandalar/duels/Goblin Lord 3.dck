@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Goblin Lord 3
+Title=Goblin Lord
+Icon=GoblinLord.jpg
+Difficulty=hard
+Description=Fast tribal Goblin deck.
+Deck Type=constructed
+[main]
+2 Blood Lust|LEG
+4 Gauntlet of Might|LEA
+4 Giant Strength|4ED
+4 Goblin Balloon Brigade|4ED
+2 Goblin Digging Team|DRK
+2 Goblin Hero|DRK
+4 Goblin King|LEB
+2 Immolation|LEG
+4 Keldon Warlord|LEB
+2 Manabarbs|4ED
+4 Mons's Goblin Raiders|3ED
+21 Mountain|4ED
+4 Orcish Oriflamme|LEB
+1 Shatter|4ED
+[sideboard]

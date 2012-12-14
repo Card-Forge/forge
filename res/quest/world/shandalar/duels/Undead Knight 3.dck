@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Undead Knight 3
+Title=Undead Knight
+Icon=UndeadKnight.jpg
+Difficulty=hard
+Description=Black weenie/aggro with a Knight theme.
+Deck Type=constructed
+[main]
+4 Bad Moon|4ED
+4 Black Knight|4ED
+4 Cyclopean Mummy|LEG
+2 Drudge Skeletons|4ED
+2 Frozen Shade|LEB
+3 Howl from Beyond|LEB
+2 Hypnotic Specter|4ED
+2 Lost Soul|LEG
+2 Nightmare|4ED
+2 Scathe Zombies|LEB
+2 Spirit Shackle|LEG
+22 Swamp|4ED
+3 Terror|4ED
+4 Unholy Strength|4ED
+2 Walking Dead|LEG
+[sideboard]

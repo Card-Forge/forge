@@ -1,0 +1,38 @@
+[quest]
+id=2
+OpponentName=Astral Visionary
+AILife=40
+Repeat=true
+Wins=50
+Card Reward=5 blue rares
+Credit Reward=500
+HumanExtras=Crystal Rod
+AIExtras=Zephyr Falcon
+[metadata]
+Name=quest2
+Title=Blue Sanctum (Blue)
+Difficulty=very hard
+Description=This is the secret sanctum of the powerful Blue Wizardess, The Astral Visionary. Here she is more powerful than anywhere else. Do you dare take the challenge?
+Icon=Astral.jpg
+Deck Type=constructed
+[main]
+1 Ancestral Recall|LEB
+1 Balance|LEB
+1 Black Lotus|LEB
+4 Black Vise|LEB
+2 Disenchant|2ED
+4 Howling Mine|2ED
+12 Island|2ED
+1 Ivory Tower|ATQ
+2 Kismet|LEG
+4 Moat|LEG
+1 Mox Pearl|LEB
+1 Mox Sapphire|LEB
+8 Plains|2ED
+4 Serra Angel|2ED
+1 Sol Ring|LEB
+4 Stasis|LEB
+4 Swords to Plowshares|LEB
+1 Time Walk|LEB
+4 Tundra|LEB
+[sideboard]

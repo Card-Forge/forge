@@ -1,0 +1,37 @@
+[metadata]
+Name=Dracur 2
+Title=Dracur
+Icon=Dracur.jpg
+Difficulty=medium
+Description=BRU hand & land destruction and burn.
+Deck Type=constructed
+[main]
+1 Badlands|LEA
+1 Bayou|LEA
+1 Black Lotus|LEB
+2 Blight|LEG
+2 Desert Twister|4ED
+2 Dingus Egg|LEB
+2 Disintegrate|4ED
+2 Disrupting Scepter|LEB
+2 Earthquake|4ED
+2 Fellwar Stone|DRK
+2 Fireball|4ED
+3 Fissure|DRK
+5 Forest|4ED
+4 Hypnotic Specter|4ED
+2 Lightning Bolt|4ED
+2 Mana Flare|LEB
+1 Mind Twist|LEB
+5 Mountain|4ED
+1 Mox Emerald|LEB
+1 Mox Jet|LEB
+1 Mox Ruby|LEB
+2 Rag Man|DRK
+4 Stone Rain|4ED
+2 Strip Mine|ATQ
+5 Swamp|4ED
+1 Taiga|LEA
+1 Tranquility|4ED
+3 Wall of Dust|LEG
+[sideboard]

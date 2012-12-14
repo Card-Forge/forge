@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Centaur Warchief 3
+Title=Centaur War-Chief
+Difficulty=hard
+Description=RW Smoke deck
+Icon=CentaurWarchief.jpg
+Deck Type=constructed
+[main]
+2 Ali Baba|ARN
+2 Cave People|DRK
+1 Colossus of Sardia|ATQ
+2 Dragon Whelp|4ED
+2 Eternal Warrior|LEG
+2 Healing Salve|4ED
+3 Kismet|LEG
+1 Land Tax|LEG
+2 Lightning Bolt|4ED
+10 Mountain|4ED
+10 Plains|4ED
+4 Plateau|LEB
+2 Savannah Lions|LEB
+4 Serra Angel|4ED
+3 Smoke|LEB
+3 Swords to Plowshares|LEB
+2 Wall of Swords|4ED
+2 Windseeker Centaur|MBP
+3 Yotian Soldier|ATQ
+[sideboard]

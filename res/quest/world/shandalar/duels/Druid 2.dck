@@ -1,0 +1,27 @@
+[metadata]
+Name=Druid 2
+Title=Druid
+Icon=Druid.jpg
+Difficulty=medium
+Description=Green animal aggro deck.
+Deck Type=constructed
+[main]
+2 Citanul Druid|ATQ
+2 Craw Wurm|4ED
+2 Desert|ARN
+2 Durkwood Boars|4ED
+18 Forest|4ED
+4 Giant Growth|4ED
+2 Giant Spider|4ED
+3 Grizzly Bears|4ED
+2 Hornet Cobra|LEG
+3 Instill Energy|LEB
+2 Ironroot Treefolk|LEB
+2 Killer Bees|LEG
+4 Ley Druid|LEB
+3 Llanowar Elves|4ED
+4 Mishra's Factory|ATQ
+1 Oasis|ARN
+2 Wall of Wood|LEB
+2 Wooden Sphere|LEB
+[sideboard]

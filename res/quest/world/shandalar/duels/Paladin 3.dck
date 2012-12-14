@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Paladin 3
+Title=Paladin
+Icon=Paladin.jpg
+Difficulty=hard
+Description=BU deck with landwalking/evasion, reworked from the Shandalar version.
+Deck Type=constructed
+[main]
+4 Angry Mob|DRK
+1 Disenchant|4ED
+1 Exorcist|DRK
+4 Flight|4ED
+2 Guardian Angel|LEA
+3 Holy Strength|4ED
+4 Invisibility|LEA
+8 Island|4ED
+3 Karma|LEB
+4 Northern Paladin|LEB
+12 Plains|4ED
+1 Righteous Avengers|LEG
+1 Segovian Leviathan|LEG
+2 Swords to Plowshares|LEB
+4 Tundra|LEB
+4 White Knight|4ED
+1 White Ward|LEB
+1 Witch Hunter|CHR
+[sideboard]
