@@ -93,6 +93,12 @@ public enum CSubmenuConstructed implements ICDoc {
 
     /** @param lists0 &emsp; {@link java.util.List}<{@link javax.swing.JList}> */
     private void startGame() {
+        Deck humanDeck = VSubmenuConstructed.SINGLETON_INSTANCE.getDcHuman().getDeck();
+
+        if (!humanDeck.meetsGameTypeRequirements(GameType.Constructed, false)) {
+            return;
+        }
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {

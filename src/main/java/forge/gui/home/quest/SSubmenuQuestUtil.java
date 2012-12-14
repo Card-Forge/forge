@@ -270,10 +270,10 @@ public class SSubmenuQuestUtil {
             JOptionPane.showMessageDialog(null, msg, "No Deck", JOptionPane.ERROR_MESSAGE);
             System.out.println(msg);
             return;
-        } else if (!deck.meetsGameTypeRequirements(GameType.Quest)) {
-            String msg = "Chosen Deck doesn't meet the requirements (Minimum 40 cards). Please edit or choose a different deck.";
-            JOptionPane.showMessageDialog(null, msg, "Invalid Deck", JOptionPane.ERROR_MESSAGE);
-            System.out.println(msg);
+        } else if (!deck.meetsGameTypeRequirements(GameType.Quest, false)) {
+            //String msg = "Chosen Deck doesn't meet the requirements. Please edit or choose a different deck.";
+            //JOptionPane.showMessageDialog(null, msg, "Invalid Deck", JOptionPane.ERROR_MESSAGE);
+            //System.out.println(msg);
             return;
         }
 

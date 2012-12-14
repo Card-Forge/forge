@@ -40,7 +40,6 @@ import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.home.quest.CSubmenuQuestDecks;
 import forge.gui.toolbox.FLabel;
-import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
@@ -208,11 +207,18 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
         if (isSideboarding) {
             this.getTableCatalog().setDeck(this.controller.getModel().getMain());
             this.getTableDeck().setDeck(this.controller.getModel().getSideboard());
-            VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("Main Deck");
         } else {
             resetTables();
-            VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("Card Catalog");
         }
+
+        VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText(isSideboarding ? "Main Deck" : "Card Catalog");
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnNew().setVisible(!isSideboarding);
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().setVisible(!isSideboarding);
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(!isSideboarding);
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().setVisible(!isSideboarding);
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(!isSideboarding);
+        VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setVisible(!isSideboarding);
+        VCurrentDeck.SINGLETON_INSTANCE.getLblTitle().setText(isSideboarding ? "Sideboard" : "Title:");
 
         this.controller.notifyModelChanged();
     }
@@ -247,11 +253,9 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
 
         Deck deck = new Deck();
 
-
         SEditorUtil.resetUI();
 
-// SIDEBOARD IMPLEMENTATION - DISABLED UNTIL V1.3.3
-/*
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard().setVisible(true);
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard())
             .setCommand(new Command() { @Override
@@ -259,7 +263,6 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
                     sideboardMode = !sideboardMode;
                     switchEditorMode(sideboardMode);
         } });
-*/
 
         this.getDeckController().setModel(deck);
     }

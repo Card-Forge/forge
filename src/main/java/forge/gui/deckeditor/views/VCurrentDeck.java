@@ -98,7 +98,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
             .fontSize(14)
             .text("Deck/Sideboard")
             .tooltip("Edit the sideboard for this deck")
-            .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_NEW))
+            .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_EDIT))
             .iconScaleAuto(false).hoverable(true).build();
 
     private final JTextField txfTitle = new FTextField();
@@ -157,9 +157,9 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
 
         pnlRemove.setOpaque(false);
         pnlRemove.setLayout(new MigLayout("insets 0, gap 0, ax center"));
-        pnlRemove.add(btnRemove, "w 35%!, h 100%!, gap 5% 5% 0 0");
-        pnlRemove.add(btnRemove4, "w 35%!, h 100%!, gap 5% 5% 0 0");
-        pnlRemove.add(btnDoSideboard, "w 35%!, h 100%!");
+        pnlRemove.add(btnRemove, "w 30%!, h 100%!, gap 5% 5% 0 0");
+        pnlRemove.add(btnRemove4, "w 30%!, h 100%!, gap 5% 5% 0 0");
+        pnlRemove.add(btnDoSideboard, "w 30%!, h 100%!");
 
         scroller.setOpaque(false);
         scroller.getViewport().setOpaque(false);
@@ -203,9 +203,9 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
         pnlStats.add(lblSorcery, constraints);
 
         pnlRemoveButtons.setOpaque(false);
-        pnlRemoveButtons.add(btnRemove, "w 35%!, h 30px!, gap 0 0 5px 5px");
-        pnlRemoveButtons.add(btnRemove4, "w 35%!, h 30px!, gap 0 0 5px 5px");
-        pnlRemoveButtons.add(btnDoSideboard, "w 35%!, h 30px!, gap 0 0 5px 5px");
+        pnlRemoveButtons.add(btnRemove, "w 30%!, h 30px!, gap 0 0 5px 5px");
+        pnlRemoveButtons.add(btnRemove4, "w 30%!, h 30px!, gap 0 0 5px 5px");
+        pnlRemoveButtons.add(btnDoSideboard, "w 30%!, h 30px!, gap 0 0 5px 5px");
     }
 
     //========== Overridden from IVDoc
@@ -284,6 +284,11 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
      */
     @Override
     public JLabel getLblTotal() { return lblTotal; }
+
+    /* (non-Javadoc)
+     * @see forge.gui.deckeditor.views.ITableContainer#getLblTotal()
+     */
+    public JLabel getLblTitle() { return lblTitle; }
 
     /* (non-Javadoc)
      * @see forge.gui.deckeditor.views.ITableContainer#getLblBlack()

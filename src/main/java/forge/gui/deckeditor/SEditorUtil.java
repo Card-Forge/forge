@@ -127,6 +127,7 @@ public final class SEditorUtil  {
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setVisible(true);
 
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnNew().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnOpen().setVisible(true);
@@ -140,7 +141,12 @@ public final class SEditorUtil  {
         VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText("Card Catalog");
         VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText("Current Deck");
 
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(true);
+
         VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard().setVisible(false);
+
+        VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setVisible(true);
+        VCurrentDeck.SINGLETON_INSTANCE.getLblTitle().setText("Title:");
 
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnSave())
             .setCommand(new Command() { @Override

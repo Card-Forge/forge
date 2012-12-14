@@ -42,6 +42,8 @@ import forge.game.GameType;
 import forge.game.limited.ReadDraftRankings;
 import forge.util.FileSection;
 import forge.util.FileUtil;
+import java.util.TreeMap;
+import javax.swing.JOptionPane;
 
 /**
  * <p>
@@ -359,12 +361,26 @@ public class Deck extends DeckBase {
     }
 
     public boolean meetsGameTypeRequirements(GameType type) {
+        return meetsGameTypeRequirements(type, true);
+    }
+    
+    public boolean meetsGameTypeRequirements(GameType type, boolean silent) {
         int deckSize = main.countAll();
         int deckDistinct = main.countDistinct();
         Integer max = type.getDeckMaximum();
 
-        if (deckSize < type.getDeckMinimum() || (max != null && deckSize > max)
-                || (type.isSingleton() && deckDistinct != deckSize)) {
+        if (deckSize < type.getDeckMinimum()) {
+            if (!silent) {
+                StringBuilder errMsg = new StringBuilder("Current deck doesn't meet the requirements (minimum ");
+                errMsg.append(type.getDeckMinimum());
+                errMsg.append(" cards), please correct or choose another deck.");
+                
+                JOptionPane.showMessageDialog(null, errMsg.toString(), "Invalid deck", JOptionPane.ERROR_MESSAGE);
+            }
+            return false;
+        }
+            
+        if ((max != null && deckSize > max) || (type.isSingleton() && deckDistinct != deckSize)) {
             return false;
         }
 
@@ -414,6 +430,40 @@ public class Deck extends DeckBase {
                     return false;
                 }
             }
+        }
+        else if (type == GameType.Constructed || type == GameType.Quest)  { 
+            //Must contain no more than 4 of the same card
+            //shared among the main deck and sideboard, except
+            //basic lands and Relentless Rats
+            TreeMap<CardPrinted, Integer> cardCounts = new TreeMap<CardPrinted, Integer>();
+            
+            DeckSection tmp = new DeckSection(this.getMain());
+            tmp.addAll(this.getSideboard());
+
+            for (CardPrinted cp : tmp.toFlatList()) {
+                if (tmp.count(cp) > 4 && !cp.getName().equals("Plains") && !cp.getName().equals("Mountain") &&
+                    !cp.getName().equals("Swamp") && !cp.getName().equals("Forest") &&
+                    !cp.getName().equals("Island") && !cp.getName().equals("Relentless Rats")) {
+                    if (!silent) {
+                        StringBuilder errMsg = new StringBuilder("More than four \"");
+                        errMsg.append(cp.getName());
+                        errMsg.append("\" cards are placed in your deck, please correct or choose another deck.");
+                        
+                        JOptionPane.showMessageDialog(null, errMsg.toString(), "Invalid deck", JOptionPane.ERROR_MESSAGE);
+                    }
+                    return false;
+                }
+            }
+
+            // The sideboard must contain either 0 or 15 cards
+            int sideboardSize = this.getSideboard().countAll();
+            if (sideboardSize != 0 && sideboardSize != 15) {
+                if (!silent) {
+                    JOptionPane.showMessageDialog(null, "The sideboard must contain either 0 or 15 cards, please correct or choose another deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
+                }
+                return false;
+            }
+            
         }
 
         return true;

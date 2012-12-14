@@ -54,8 +54,11 @@ public class DualListBox<T> extends FPanel {
     private FButton autoButton;
 
     private FLabel orderedLabel;
+    private FLabel selectOrder;
 
     private int remainingObjects = 0;
+
+    private boolean sideboardingMode = false;
 
     public DualListBox(int remainingObjects, String label, List<T> sourceElements, List<T> destElements,
             Card referenceCard) {
@@ -69,6 +72,19 @@ public class DualListBox<T> extends FPanel {
             addDestinationElements(destElements);
         }
         this.setButtonState();
+    }
+
+    public DualListBox(int remainingObjects, String label, List<T> sourceElements, List<T> destElements, Card referenceCard, boolean isSideboardDialog) {
+        this(remainingObjects, label, sourceElements, destElements, referenceCard);
+
+        this.sideboardingMode = isSideboardDialog;
+        if (sideboardingMode) {
+            addAllButton.setVisible(false);
+            removeAllButton.setVisible(false);
+            autoButton.setEnabled(false);
+            selectOrder.setText("Sideboard (" + sourceListModel.getSize() + "):");
+            orderedLabel.setText("Main Deck (" + destListModel.getSize() + "):");
+        }
     }
 
     public void clearSourceListModel() {
@@ -138,6 +154,10 @@ public class DualListBox<T> extends FPanel {
         return destListModel.model;
     }
 
+    public List<T> getRemainingSourceList() {
+        return sourceListModel.model;
+    }
+
     private static void addCardViewListener(final FList list) {
         list.addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -188,7 +208,7 @@ public class DualListBox<T> extends FPanel {
         destList = new FList(destListModel);
 
         FPanel leftPanel = new FPanel(new BorderLayout());
-        FLabel selectOrder = new FLabel.Builder().build();
+        selectOrder = new FLabel.Builder().build();
         selectOrder.setText("Select Order:");
         leftPanel.setSize(300, 300);
         leftPanel.add(selectOrder, BorderLayout.NORTH);
@@ -266,11 +286,22 @@ public class DualListBox<T> extends FPanel {
     }
 
     public void setButtonState() {
+        if (sideboardingMode) {
+            removeAllButton.setVisible(false);
+            addAllButton.setVisible(false);
+            selectOrder.setText("Sideboard (" + sourceListModel.getSize() + "):");
+            orderedLabel.setText("Main Deck (" + destListModel.getSize() + "):");
+        }
+        
         if (remainingObjects != -1) {
             okButton.setEnabled(sourceListModel.getSize() == remainingObjects);
         }
         if (remainingObjects < 1) {
-            autoButton.setEnabled(sourceListModel.getSize() != remainingObjects);
+            if (!sideboardingMode) {
+                autoButton.setEnabled(sourceListModel.getSize() != remainingObjects);
+            } else {
+                autoButton.setEnabled(false);
+            }
         } else {
             autoButton.setEnabled(false);
         }
