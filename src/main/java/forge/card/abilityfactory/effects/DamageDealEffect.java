@@ -8,6 +8,7 @@ import forge.Card;
 import forge.CardUtil;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 
@@ -137,6 +138,16 @@ public class DamageDealEffect extends SpellEffect {
             } else if (o instanceof Player) {
                 final Player p = (Player) o;
                 if (!targeted || p.canBeTargetedBy(sa)) {
+                    // Some multiplayer compatibility so that calculated damage amounts
+                    // can be localised to the player
+                    if (sa.hasParam("LocalCount")) {
+                        // playerXCount needs a player array
+                        final ArrayList<Player> players = new ArrayList<Player>();
+                        players.add(p);
+                        dmg = damage.matches("[0-9][0-9]?") ? Integer.parseInt(damage)
+                                        : CardFactoryUtil.playerXCount(players,
+                                                sa.getSourceCard().getSVar(damage), sa.getSourceCard());
+                    }
                     if (noPrevention) {
                         p.addDamageWithoutPrevention(dmg, source);
                     } else if (combatDmg) {

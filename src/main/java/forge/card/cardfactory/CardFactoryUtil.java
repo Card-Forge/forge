@@ -1795,6 +1795,20 @@ public class CardFactoryUtil {
             return CardFactoryUtil.doXMath(n, m, source);
         }
 
+     // count valid cards in any specified zone/s
+        System.out.println("Passed string: " + s);
+        if (l[0].startsWith("Valid") && !l[0].contains("Valid ")) {
+            String[] lparts = l[0].split(" ", 2);
+            final List<ZoneType> vZone = ZoneType.listValueOf(lparts[0].split("Valid")[1]);
+            String restrictions = l[0].replace(lparts[0] + " ", "");
+            final String[] rest = restrictions.split(",");
+            List<Card> cards = Singletons.getModel().getGame().getCardsIn(vZone);
+            cards = CardLists.getValidCards(cards, rest, players.get(0), source);
+
+            n = cards.size();
+
+            return CardFactoryUtil.doXMath(n, m, source);
+        }
         // count valid cards on the battlefield
         if (l[0].startsWith("Valid ")) {
             final String restrictions = l[0].substring(6);
@@ -2026,7 +2040,7 @@ public class CardFactoryUtil {
             return CardFactoryUtil.doXMath(n, m, c);
         }
         // count valid cards on the battlefield
-        if (l[0].startsWith("Valid")) {
+        if (l[0].startsWith("Valid ")) {
             String restrictions = l[0].substring(6);
             final String[] rest = restrictions.split(",");
             List<Card> cardsonbattlefield = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);

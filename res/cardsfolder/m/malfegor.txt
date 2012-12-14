@@ -6,7 +6,7 @@ PT:6/6
 K:Flying
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, discard your hand. Each opponent sacrifices a creature for each card discarded this way.
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBSacrifice
-SVar:DBSacrifice:DB$ Sacrifice | Defined$ Opponent | SacValid$ Creature | SacMessage$ Creature | Amount$ X | References$ X | SubAbility$ DBCleanup
+SVar:DBSacrifice:DB$ Sacrifice | Defined$ Player.Opponent | SacValid$ Creature | SacMessage$ Creature | Amount$ X | References$ X | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:Rarity:Rare

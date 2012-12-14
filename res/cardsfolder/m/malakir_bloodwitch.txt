@@ -6,8 +6,10 @@ PT:4/4
 K:Flying
 K:Protection from white
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, each opponent loses life equal to the number of Vampires you control. You gain life equal to the life lost this way.
-SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ Opponent | LifeAmount$ X | References$ X | SubAbility$ DBGainLife
-SVar:DBGainLife:DB$GainLife | Defined$ You | LifeAmount$ X | References$ X
+SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ Player.Opponent | LifeAmount$ X | References$ X | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost
+SVar:AFLifeLost:Number$0
+#AFLifeLost will be set by LoseLife
 SVar:X:Count$Valid Vampire.YouCtrl
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

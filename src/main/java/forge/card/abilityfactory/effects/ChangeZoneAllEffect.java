@@ -38,7 +38,7 @@ public class ChangeZoneAllEffect extends SpellEffect {
         final ZoneType destination = ZoneType.smartValueOf(sa.getParam("Destination"));
         final List<ZoneType> origin = ZoneType.listValueOf(sa.getParam("Origin"));
 
-        List<Card> cards = null;
+        List<Card> cards = new ArrayList<Card>();
 
         ArrayList<Player> tgtPlayers = null;
 
@@ -52,7 +52,9 @@ public class ChangeZoneAllEffect extends SpellEffect {
         if ((tgtPlayers == null) || tgtPlayers.isEmpty() || sa.hasParam("UseAllOriginZones")) {
             cards = Singletons.getModel().getGame().getCardsIn(origin);
         } else {
-            cards = tgtPlayers.get(0).getCardsIn(origin);
+            for (final Player p : tgtPlayers) {
+                cards.addAll(p.getCardsIn(origin));
+            }
         }
 
         cards = AbilityFactory.filterListByType(cards, sa.getParam("ChangeType"), sa);

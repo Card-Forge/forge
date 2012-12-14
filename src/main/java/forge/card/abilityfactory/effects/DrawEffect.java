@@ -1,5 +1,6 @@
 package forge.card.abilityfactory.effects;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -8,6 +9,7 @@ import forge.Card;
 import forge.GameActionUtil;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -84,6 +86,16 @@ public class DrawEffect extends SpellEffect {
                             continue;
                         }
                     }
+                }
+                // Some multiplayer compatibility so that calculated draw amounts
+                // can be localised to the player
+                if (sa.hasParam("LocalCount")) {
+                    // playerXCount needs a player array
+                    final ArrayList<Player> players = new ArrayList<Player>();
+                    players.add(p);
+                    numCards = sa.getParam("NumCards").matches("[0-9][0-9]?") ? Integer.parseInt(sa.getParam("NumCards"))
+                                    : CardFactoryUtil.playerXCount(players,
+                                            sa.getSourceCard().getSVar(sa.getParam("NumCards")), sa.getSourceCard());
                 }
 
                 if (slowDraw) {
