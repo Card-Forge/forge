@@ -1,0 +1,12 @@
+Name:Living Wish
+ManaCost:1 G
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZone | Cost$ 1 G | Origin$ Sideboard | Destination$ Hand | ChangeType$ Creature,Land | ChangeNum$ 1 | SubAbility$ DBChange | SpellDescription$ You may choose a creature or land card you own from outside the game, reveal that card, and put it into your hand. Exile CARDNAME.
+SVar:DBChange:DB$ ChangeZone | Origin$ Stack | Destination$ Exile
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/living_wish.jpg
+SetInfo:JUD|Rare|http://magiccards.info/scans/en/ju/124.jpg
+Oracle:You may choose a creature or land card you own from outside the game, reveal that card, and put it into your hand. Exile Living Wish.
+End

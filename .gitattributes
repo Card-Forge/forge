@@ -1316,6 +1316,7 @@ res/cardsfolder/b/burning_palm_efreet.txt -text
 res/cardsfolder/b/burning_sands.txt -text
 res/cardsfolder/b/burning_shield_askari.txt svneol=native#text/plain
 res/cardsfolder/b/burning_vengeance.txt -text
+res/cardsfolder/b/burning_wish.txt -text
 res/cardsfolder/b/burnout.txt -text
 res/cardsfolder/b/burnt_offering.txt -text
 res/cardsfolder/b/burr_grafter.txt svneol=native#text/plain
@@ -2106,6 +2107,7 @@ res/cardsfolder/c/cunning_advisor.txt svneol=native#text/plain
 res/cardsfolder/c/cunning_bandit_azamuki_treachery_incarnate.txt -text
 res/cardsfolder/c/cunning_lethemancer.txt svneol=native#text/plain
 res/cardsfolder/c/cunning_sparkmage.txt svneol=native#text/plain
+res/cardsfolder/c/cunning_wish.txt -text
 res/cardsfolder/c/curfew.txt svneol=native#text/plain
 res/cardsfolder/c/curiosity.txt svneol=native#text/plain
 res/cardsfolder/c/curse_artifact.txt -text
@@ -5783,6 +5785,7 @@ res/cardsfolder/l/living_plane.txt svneol=native#text/plain
 res/cardsfolder/l/living_terrain.txt -text
 res/cardsfolder/l/living_tsunami.txt -text
 res/cardsfolder/l/living_wall.txt svneol=native#text/plain
+res/cardsfolder/l/living_wish.txt -text
 res/cardsfolder/l/livonya_silone.txt svneol=native#text/plain
 res/cardsfolder/l/lizard_warrior.txt svneol=native#text/plain
 res/cardsfolder/l/llanowar_augur.txt svneol=native#text/plain
