@@ -67,6 +67,7 @@ public class ManaCostRenderer extends DefaultTableCellRenderer {
         float xpos = padding;
 
         final int genericManaCost = this.value.getGenericCost();
+        final int xManaCosts = this.value.countX();
         final boolean hasGeneric = (genericManaCost > 0) || this.value.isPureGeneric();
         final List<ManaCostShard> shards = this.value.getShards();
 
@@ -76,6 +77,15 @@ public class ManaCostRenderer extends DefaultTableCellRenderer {
                 : elemtWidth + elemtGap;
         final float offset = Math.min(elemtWidth + elemtGap, offsetIfNoSpace);
 
+		// Display X Mana before any other type of mana
+        if (xManaCosts > 0) {
+            for(int i = 0; i < xManaCosts; i++) {
+                CardFaceSymbols.drawSymbol(ManaCostShard.X.getImageKey(), g, (int) xpos, 1);
+                xpos += offset;
+            }
+        }
+        
+		// Display colorless mana before colored mana
         if (hasGeneric) {
             final String sGeneric = Integer.toString(genericManaCost);
             CardFaceSymbols.drawSymbol(sGeneric, g, (int) xpos, 1);
@@ -83,6 +93,10 @@ public class ManaCostRenderer extends DefaultTableCellRenderer {
         }
 
         for (final ManaCostShard s : shards) {
+            if (s.equals(ManaCostShard.X)) {
+				// X costs already drawn up above
+                continue;
+            }
             CardFaceSymbols.drawSymbol(s.getImageKey(), g, (int) xpos, 1);
             xpos += offset;
         }
