@@ -2671,6 +2671,7 @@ res/cardsfolder/d/dragonstalker.txt svneol=native#text/plain
 res/cardsfolder/d/dragonstorm.txt svneol=native#text/plain
 res/cardsfolder/d/drain_life.txt -text
 res/cardsfolder/d/drain_the_well.txt svneol=native#text/plain
+res/cardsfolder/d/draining_whelk.txt -text
 res/cardsfolder/d/drainpipe_vermin.txt -text
 res/cardsfolder/d/drake_familiar.txt -text
 res/cardsfolder/d/drake_hatchling.txt svneol=native#text/plain
@@ -3410,6 +3411,7 @@ res/cardsfolder/f/fiery_hellhound.txt svneol=native#text/plain
 res/cardsfolder/f/fiery_mantle.txt svneol=native#text/plain
 res/cardsfolder/f/fiery_temper.txt svneol=native#text/plain
 res/cardsfolder/f/fight_to_the_death.txt svneol=native#text/plain
+res/cardsfolder/f/fighting_chance.txt -text
 res/cardsfolder/f/fighting_drake.txt svneol=native#text/plain
 res/cardsfolder/f/figure_of_destiny.txt svneol=native#text/plain
 res/cardsfolder/f/filigree_angel.txt svneol=native#text/plain
@@ -6262,6 +6264,7 @@ res/cardsfolder/m/militant_monk.txt svneol=native#text/plain
 res/cardsfolder/m/militias_pride.txt -text
 res/cardsfolder/m/millikin.txt svneol=native#text/plain
 res/cardsfolder/m/millstone.txt svneol=native#text/plain
+res/cardsfolder/m/mimeofacture.txt -text
 res/cardsfolder/m/mimic_vat.txt -text
 res/cardsfolder/m/minamo_school_at_waters_edge.txt svneol=native#text/plain
 res/cardsfolder/m/minamo_scrollkeeper.txt svneol=native#text/plain
@@ -9389,6 +9392,7 @@ res/cardsfolder/s/soulcage_fiend.txt -text
 res/cardsfolder/s/soulcatcher.txt svneol=native#text/plain
 res/cardsfolder/s/soulcatchers_aerie.txt svneol=native#text/plain
 res/cardsfolder/s/souldrinker.txt svneol=native#text/plain
+res/cardsfolder/s/soulgorger_orgg.txt -text
 res/cardsfolder/s/soulless_one.txt svneol=native#text/plain
 res/cardsfolder/s/soulless_revival.txt -text
 res/cardsfolder/s/soulquake.txt svneol=native#text/plain

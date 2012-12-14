@@ -1,0 +1,16 @@
+Name:Draining Whelk
+ManaCost:4 U U
+Types:Creature Illusion
+Text:no text
+PT:1/1
+K:Flash
+K:Flying
+T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigCounter | TriggerDescription$ When CARDNAME enters the battlefield, counter target spell. Put X +1/+1 counters on CARDNAME, where X is that spell's converted mana cost.
+SVar:TrigCounter:DB$ Counter | Cost$ 0 | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell | SubAbility$ DBPutcounter
+SVar:DBPutcounter:DB$ PutCounter | CounterType$ P1P1 | Defined$ Self | CounterNum$ X | References$ X
+SVar:X:Targeted$CardManaCost
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/draining_whelk.jpg
+SetInfo:TSP|Rare|http://magiccards.info/scans/en/ts/57.jpg
+Oracle:Flash (You may cast this spell any time you could cast an instant.)\nFlying\nWhen Draining Whelk enters the battlefield, counter target spell. Put X +1/+1 counters on Draining Whelk, where X is that spell's converted mana cost.
+End

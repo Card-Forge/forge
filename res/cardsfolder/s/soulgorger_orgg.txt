@@ -1,0 +1,20 @@
+Name:Soulgorger Orgg
+ManaCost:3 R R
+Types:Creature Nightmare Orgg
+Text:no text
+PT:6/6
+K:Trample
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Self | Execute$ TrigLoseLife | TriggerDescription$ When CARDNAME enters the battlefield, you lose all but 1 life.
+SVar:TrigLoseLife:AB$ StoreSVar | Cost$ 0 | References$ LifeAllButOne | SVar$ LifePaidOnETB | Type$ CountSVar | Expression$ LifeAllButOne | SubAbility$ DBLoseLife
+SVar:DBLoseLife:DB$ LoseLife | Cost$ 0 | LifeAmount$ LifePaidOnETB | References$ LifePaidOnETB
+SVar:LifePaidOnETB:Number$0
+SVar:LifeAllButOne:Count$YourLifeTotal/Minus.1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME leaves the battlefield, you gain life equal to the
+life you lost when it entered the battlefield.
+SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ LifePaidOnETB | References$ LifePaidOnETB
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soulgorger_orgg.jpg
+SetInfo:JUD|Uncommon|http://magiccards.info/scans/en/ju/99.jpg
+Oracle:Trample\nWhen Soulgorger Orgg enters the battlefield, you lose all but 1 life.\nWhen Soulgorger Orgg leaves the battlefield, you gain life equal to the life you lost when it entered the battlefield.
+End

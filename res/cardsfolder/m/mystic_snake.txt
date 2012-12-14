@@ -5,7 +5,7 @@ Text:no text
 PT:2/2
 K:Flash
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigCounter | TriggerDescription$ When CARDNAME enters the battlefield, counter target spell.
-SVar:TrigCounter:DB$Counter | Cost$ 0 | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell
+SVar:TrigCounter:DB$ Counter | Cost$ 0 | TargetType$ Spell | ValidTgts$ Card | TgtPrompt$ Select target spell
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_snake.jpg
 SetInfo:APC|Rare|http://magiccards.info/scans/en/ap/112.jpg
