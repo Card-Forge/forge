@@ -13,6 +13,7 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghazban_ogre.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/160.jpg
+SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/37.jpg
 SetInfo:ARN|Common|http://magiccards.info/scans/en/an/33.jpg
 Oracle:At the beginning of your upkeep, if a player has more life than each other player, the player with the most life gains control of Ghazban Ogre.
 End

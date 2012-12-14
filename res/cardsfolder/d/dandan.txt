@@ -10,6 +10,7 @@ SVar:NeedsToPlay:Island.YouCtrl
 SVar:Rarity:Common
 SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card106631.jpg
 SetInfo:5ED|Common|http://magiccards.info/scans/en/5e/79.jpg
+SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/18.jpg
 SetInfo:TSB|Special|http://magiccards.info/scans/en/tsts/19.jpg
 SetInfo:ARN|Common|http://magiccards.info/scans/en/an/16.jpg
 Oracle:Dandan can't attack unless defending player controls an Island.\nWhen you control no Islands, sacrifice Dandan.

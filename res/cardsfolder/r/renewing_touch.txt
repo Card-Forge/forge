@@ -7,6 +7,7 @@ SVar:X:Count$TypeInYourYard.Creature
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://serv3.tcgimages.eu/img/cards/Portal_Second_Age/renewing_touch.jpg
+SetInfo:S99|Uncommon|http://magiccards.info/scans/en/st/140.jpg
 SetInfo:PO2|Uncommon|http://magiccards.info/scans/en/po2/83.jpg
 Oracle:Shuffle any number of target creature cards from your graveyard into your library.
 End
