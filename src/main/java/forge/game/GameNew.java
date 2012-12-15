@@ -134,11 +134,12 @@ public class GameNew {
         boolean useAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
 
         if (Singletons.getModel().getMatch().getPlayedGames().size() == 0) {
+            // TODO: this is potentially not network-friendly. If network play is 
+            // implemented, and, as such, more than one human player becomes possible
+            // in a game, DeckTempStorage may have to be converted to something like an array
+            // for each human player or something like that, I imagine...
+            // (I could be wrong). Also see other deck usages for DeckTempStorage.
             if (player.isHuman()) {
-                // TODO: this is not network-friendly. If network play is implemented,
-                // DeckTempStorage will have to be converted to something like an array
-                // for each human player or something like that, I imagine...
-                // (I could be wrong).
                 DeckTempStorage.setHumanMain(deck.getMain().toForgeCardList());
                 DeckTempStorage.setHumanSideboard(deck.getSideboard().toForgeCardList());
             }
