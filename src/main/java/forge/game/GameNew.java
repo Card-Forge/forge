@@ -120,7 +120,7 @@ public class GameNew {
                 }
 
                 // mark card as difficult for AI to play
-                if (player.isComputer() && card.getSVar("RemAIDeck").equals("True") && !rAICards.contains(card.getName())) {
+                if (player.isComputer() && card.getSVar("RemAIDeck").equals("True") && !rAICards.contains(card.getName()) && !player.getZone(ZoneType.Sideboard).contains(card)) {
                     rAICards.add(card.getName());
                     // get card picture so that it is in the image cache
                     // ImageCache.getImage(card);
