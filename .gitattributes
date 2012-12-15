@@ -500,6 +500,7 @@ res/cardsfolder/a/arsenal_thresher.txt -text
 res/cardsfolder/a/artful_dodge.txt -text
 res/cardsfolder/a/artifact_blast.txt svneol=native#text/plain
 res/cardsfolder/a/artifact_mutation.txt svneol=native#text/plain
+res/cardsfolder/a/artifact_possession.txt -text
 res/cardsfolder/a/artifact_ward.txt svneol=native#text/plain
 res/cardsfolder/a/artificers_intuition.txt svneol=native#text/plain
 res/cardsfolder/a/artillerize.txt svneol=native#text/plain
