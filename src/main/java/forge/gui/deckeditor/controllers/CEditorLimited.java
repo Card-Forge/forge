@@ -156,6 +156,7 @@ public final class CEditorLimited extends ACEditorBase<CardPrinted, DeckGroup> {
 
         SEditorUtil.resetUI();
 
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(false);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(true);
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnSave())

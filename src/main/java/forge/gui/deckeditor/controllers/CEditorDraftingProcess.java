@@ -274,6 +274,8 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
         //Remove buttons
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4().setVisible(false);
 
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard().setVisible(false);
+        
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(false);
 
         if (VDeckgen.SINGLETON_INSTANCE.getParentCell() != null) {
