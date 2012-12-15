@@ -237,11 +237,6 @@ public class WrappedAbility extends Ability implements ISpellAbility {
         return sa.getTargetCard();
     }
 
-//        @Override
-//        public List<Card> getTargetList() {
-//            return sa.getTargetList();
-//        }
-
     @Override
     public Player getTargetPlayer() {
         return sa.getTargetPlayer();

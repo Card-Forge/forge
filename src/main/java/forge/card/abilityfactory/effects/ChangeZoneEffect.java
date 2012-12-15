@@ -409,15 +409,23 @@ public class ChangeZoneEffect extends SpellEffect {
                                 } else { // AI player
                                     attachedTo = CardFactoryUtil.getBestAI(list);
                                 }
-                                if (tgtC.isEnchanting()) {
-                                    // If this Card is already Enchanting something, need
-                                    // to unenchant it, then clear out the commands
-                                    final GameEntity oldEnchanted = tgtC.getEnchanting();
-                                    tgtC.removeEnchanting(oldEnchanted);
-                                    tgtC.clearEnchantCommand();
-                                    tgtC.clearUnEnchantCommand();
+                                if (tgtC.isAura()) {
+                                    if (tgtC.isEnchanting()) {
+                                        // If this Card is already Enchanting something, need
+                                        // to unenchant it, then clear out the commands
+                                        final GameEntity oldEnchanted = tgtC.getEnchanting();
+                                        tgtC.removeEnchanting(oldEnchanted);
+                                        tgtC.clearEnchantCommand();
+                                        tgtC.clearUnEnchantCommand();
+                                    }
+                                    tgtC.enchantEntity(attachedTo);
+                                } else {//Equipment
+                                    if (tgtC.isEquipping()) {
+                                        final Card oldEquiped = tgtC.getEquippingCard();
+                                        tgtC.removeEquipping(oldEquiped);
+                                    }
+                                    tgtC.equipCard(attachedTo);
                                 }
-                                tgtC.enchantEntity(attachedTo);
                             } else { // When it should enter the battlefield attached to an illegal permanent it fails
                                 continue;
                             }
@@ -671,15 +679,23 @@ public class ChangeZoneEffect extends SpellEffect {
                             } else {
                                 attachedTo = list.get(0);
                             }
-                            if (c.isEnchanting()) {
-                                // If this Card is already Enchanting something, need
-                                // to unenchant it, then clear out the commands
-                                final GameEntity oldEnchanted = c.getEnchanting();
-                                c.removeEnchanting(oldEnchanted);
-                                c.clearEnchantCommand();
-                                c.clearUnEnchantCommand();
+                            if (c.isAura()) {
+                                if (c.isEnchanting()) {
+                                    // If this Card is already Enchanting something, need
+                                    // to unenchant it, then clear out the commands
+                                    final GameEntity oldEnchanted = c.getEnchanting();
+                                    c.removeEnchanting(oldEnchanted);
+                                    c.clearEnchantCommand();
+                                    c.clearUnEnchantCommand();
+                                }
+                                c.enchantEntity(attachedTo);
+                            } else {//Equipment
+                                if (c.isEquipping()) {
+                                    final Card oldEquiped = c.getEquippingCard();
+                                    c.removeEquipping(oldEquiped);
+                                }
+                                c.equipCard(attachedTo);
                             }
-                            c.enchantEntity(attachedTo);
                         } else { // When it should enter the battlefield attached to an illegal permanent it fails
                             continue;
                         }
