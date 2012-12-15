@@ -15,6 +15,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Card;
+import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardUtil;
@@ -211,6 +212,12 @@ public class GameNew {
            
             for (Card c : newDeck) {
                 c.setOwner(player);
+               
+                if (c.isFlipCard() && c.isFlipped()) {
+                    c.changeToState(CardCharacteristicName.Original);
+                    c.setFlipStaus(false);
+                }
+                
                 CardPrinted cp = CardDb.instance().getCard(c);
 
                 // TODO: avoid code duplication below? (currently copied from prepareFirstGameLibrary)
