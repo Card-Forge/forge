@@ -211,8 +211,6 @@ public class GameNew {
             }
            
             for (Card c : newDeck) {
-                c.setOwner(player);
-               
                 if (c.isFlipCard() && c.isFlipped()) {
                     c.changeToState(CardCharacteristicName.Original);
                     c.setFlipStaus(false);
@@ -235,6 +233,7 @@ public class GameNew {
                     c.setFoil(iFoil);
                 }
 
+                c.setOwner(player);
                 library.add(c);
             }
         }
