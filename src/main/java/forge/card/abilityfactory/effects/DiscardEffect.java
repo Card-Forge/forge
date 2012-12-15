@@ -50,6 +50,11 @@ public class DiscardEffect extends RevealEffectBase {
                 sb.append("his or her hand");
             } else if (mode.equals("RevealDiscardAll")) {
                 sb.append("All");
+            } else if (sa.hasParam("AnyNumber")) {
+                sb.append("any number");
+            } else if (sa.hasParam("NumCards") && sa.getParam("NumCards").equals("X") && 
+                    sa.getSVar("X").equals("Remembered$Amount")) {
+                sb.append("that many");
             } else {
                 sb.append(numCards);
             }
@@ -83,6 +88,7 @@ public class DiscardEffect extends RevealEffectBase {
     public void resolve(SpellAbility sa) {
         final Card source = sa.getSourceCard();
         final String mode = sa.getParam("Mode");
+        final boolean anyNumber = sa.hasParam("AnyNumber");
 
         final Target tgt = sa.getTarget();
 
@@ -272,7 +278,14 @@ public class DiscardEffect extends RevealEffectBase {
                             for (int i = 0; i < numCards; i++) {
                                 if (dPChHand.size() > 0) {
                                     Card dC = null;
-                                    if (sa.hasParam("Optional")) {
+                                    if (sa.hasParam("AnyNumber")) {
+                                        dPChHand = getDiscardedList(p, dPChHand, dPChHand.size(), true);
+                                        for (Card c : dPChHand) {
+                                            discarded.add(c);
+                                            p.discard(c, sa);
+                                        }
+                                    }
+                                    else if (sa.hasParam("Optional")) {
                                         dC = GuiChoose.oneOrNone("Choose a card to be discarded", dPChHand);
                                     } else {
                                         dC = GuiChoose.one("Choose a card to be discarded", dPChHand);
@@ -297,4 +310,33 @@ public class DiscardEffect extends RevealEffectBase {
 
     } // discardResolve()
 
+    public static List<Card> getDiscardedList(final Player player, final List<Card> valid, final int max, boolean anyNumber) {
+        final List<Card> chosen = new ArrayList<Card>();
+        final int validamount = Math.min(valid.size(), max);
+
+        if (anyNumber && player.isHuman() && validamount > 0) {
+            final List<Card> selection = GuiChoose.getOrderChoices("Choose Which Cards to Discard", "Discarded", -1, valid, null, null);
+            for (final Object o : selection) {
+                if (o != null && o instanceof Card) {
+                    chosen.add((Card) o);
+                }
+            }
+        } else {
+            for (int i = 0; i < validamount; i++) {
+                if (player.isHuman()) {
+                    final Card o = GuiChoose.one("Choose card(s) to discard", valid);
+                    if (o != null) {
+                        chosen.add(o);
+                        valid.remove(o);
+                    } else {
+                        break;
+                    }
+                } else { // Computer
+                    chosen.add(valid.get(0));
+                    valid.remove(valid.get(0));
+                }
+            }
+        }
+        return chosen;
+    }
 }

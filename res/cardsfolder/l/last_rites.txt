@@ -1,0 +1,13 @@
+Name:Last Rites
+ManaCost:2 B
+Types:Sorcery
+Text:no text
+A:SP$ Discard | Cost$ 2 B | AnyNumber$ True | References$ X | Optional$ True | Mode$ TgtChoose | RememberDiscarded$ True | SubAbility$ DBLastRitesDiscard | SpellDescription$ Discard any number of cards. Target player reveals his or her hand, then you choose a nonland card from it for each card discarded this way. That player discards those cards.
+SVar:DBLastRitesDiscard:DB$ Discard | Mode$ RevealYouChoose | NumCards$ X | DiscardValid$ Card.nonLand | ValidTgts$ Opponent | References$ X
+SVar:DBLastRitesCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SetInfo:ODY|Common|http://magiccards.info/scans/en/od/146.jpg
+Oracle:Discard any number of cards. Target player reveals his or her hand, then you choose a nonland card from it for each card discarded this way. That player discards those cards.
+End

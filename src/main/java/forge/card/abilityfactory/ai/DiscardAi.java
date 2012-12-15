@@ -75,7 +75,7 @@ public class DiscardAi extends SpellAiLogic {
         }
 
         if (!sa.getParam("Mode").equals("Hand") && !sa.getParam("Mode").equals("RevealDiscardAll")) {
-            if (sa.getParam("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")) {
+           if (sa.hasParam("NumCards") && sa.getParam("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
                 final int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa, ai), ai.getOpponent()
                         .getCardsIn(ZoneType.Hand).size());
@@ -83,6 +83,8 @@ public class DiscardAi extends SpellAiLogic {
             }
         }
 
+        // TODO: Implement support for Discard AI for cards with AnyNumber set to true.
+        
         // Don't use draw abilities before main 2 if possible
         if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && !sa.hasParam("ActivationPhases")) {
