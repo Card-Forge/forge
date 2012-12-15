@@ -7,7 +7,7 @@ SVar:DBLastRitesDiscard:DB$ Discard | Mode$ RevealYouChoose | NumCards$ X | Disc
 SVar:DBLastRitesCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$Amount
 SVar:RemAIDeck:True
-SVar:Rarity:Rare
+SVar:Rarity:Common
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/146.jpg
 Oracle:Discard any number of cards. Target player reveals his or her hand, then you choose a nonland card from it for each card discarded this way. That player discards those cards.
 End
