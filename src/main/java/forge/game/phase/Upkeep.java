@@ -45,7 +45,6 @@ import forge.control.input.InputSelectManyCards;
 import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
-import forge.game.player.PlayerUtil;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -619,8 +618,14 @@ public class Upkeep extends Phase {
         for (int i = 0; i < cards.size(); i++) {
 
             final Card c = cards.get(i);
+            
+            final Ability cost = new Ability(c, "B B B") {
+                @Override
+                public void resolve() {
+                } 
+            }; // end cost ability
 
-            final Ability noPay = new Ability(c, "B B B") {
+            final Ability noPay = new Ability(c, "0") {
                 @Override
                 public void resolve() {
                     final List<Card> playerLand = player.getLandsInPlay();
@@ -628,9 +633,9 @@ public class Upkeep extends Phase {
                     c.tap();
                     if (c.getController().isComputer()) {
                         if (playerLand.size() > 0) {
-                            Singletons.getModel().getMatch().getInput().setInput(
-                                    PlayerUtil.inputSacrificePermanent(playerLand, c.getName()
-                                            + " - Select a land to sacrifice."));
+                            final Card target = GuiChoose.one("Select a card to sacrifice", playerLand);
+                            
+                            Singletons.getModel().getGame().getAction().sacrifice(target, null);
                         }
                     } else {
                         final Card target = CardFactoryUtil.getBestLandAI(playerLand);
@@ -648,9 +653,9 @@ public class Upkeep extends Phase {
                         @Override
                         public void resolve() {
                             if (Singletons.getModel().getGame().getZoneOf(c).is(ZoneType.Battlefield)) {
-                                final StringBuilder cost = new StringBuilder();
-                                cost.append("Pay cost for ").append(c).append("\r\n");
-                                GameActionUtil.payManaDuringAbilityResolve(cost.toString(), noPay.getManaCost(),
+                                final StringBuilder coststring = new StringBuilder();
+                                coststring.append("Pay cost for ").append(c).append("\r\n");
+                                GameActionUtil.payManaDuringAbilityResolve(coststring.toString(), cost.getManaCost(),
                                         Command.BLANK, Command.BLANK);
                             }
                         } // end resolve()
@@ -670,18 +675,19 @@ public class Upkeep extends Phase {
                 }
             } // end human
             else { // computer
-                if (cp.isComputer() && ComputerUtil.canPayCost(noPay, cp)) {
+                noPay.setActivatingPlayer(cp);
+                if (ComputerUtil.canPayCost(cost, cp)) {
                     final Ability computerPay = new Ability(c, "0") {
                         @Override
                         public void resolve() {
-                            ComputerUtil.payManaCost(cp, noPay);
+                            ComputerUtil.payManaCost(cp, cost);
                         }
                     };
                     computerPay.setStackDescription("Computer pays Demonic Hordes upkeep cost");
 
                     Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(computerPay);
-
                 } else {
+                    noPay.setStackDescription("Demonic Hordes - Upkeep Cost");
                     Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(noPay);
 
                 }
