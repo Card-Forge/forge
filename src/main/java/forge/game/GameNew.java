@@ -119,11 +119,18 @@ public class GameNew {
                     sideboard.add(card);
                 }
 
+                // TODO: Enable the code below for Limited modes only when the AI can play all the 
+                // cards in the sideboard (probably means all cards in Forge because in Limited mode,
+                // any cards can end up in the AI sideboard?)
+                
                 // mark card as difficult for AI to play
-                if (player.isComputer() && card.getSVar("RemAIDeck").equals("True") && !rAICards.contains(card.getName()) && !player.getZone(ZoneType.Sideboard).contains(card)) {
-                    rAICards.add(card.getName());
-                    // get card picture so that it is in the image cache
-                    // ImageCache.getImage(card);
+                if (player.isComputer() && card.getSVar("RemAIDeck").equals("True") && !rAICards.contains(card.getName())) {
+                    if (Singletons.getModel().getMatch().getGameType() != GameType.Draft && 
+                        Singletons.getModel().getMatch().getGameType() != GameType.Sealed) {
+                        rAICards.add(card.getName());
+                        // get card picture so that it is in the image cache
+                        // ImageCache.getImage(card);
+                    }
                 }
             }
         }
