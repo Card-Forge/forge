@@ -1,0 +1,14 @@
+Name:Chamber of Manipulation
+ManaCost:2 U U
+Types:Enchantment Aura
+Text:no text
+K:Enchant land
+A:SP$ Attach | Cost$ 2 U U | ValidTgts$ Land | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ ChamberofManipulationTap | Description$ Enchanted land has "Tap, Discard a card: Gain control of target creature until end of turn."
+SVar:ChamberofManipulationTap:AB$ GainControl | Cost$ T Discard<1/Card> | ValidTgts$ Creature | LoseControl$ EOT | SpellDescription$ Gain control of target creature until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/chamber_of_manipulation.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/76.jpg
+Oracle:Enchant land\nEnchanted land has "{T}, Discard a card: Gain control of target creature until end of turn."
+End

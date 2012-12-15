@@ -1,0 +1,15 @@
+Name:Laquatus's Creativity
+ManaCost:4 U
+Types:Sorcery
+Text:no text
+A:SP$ Draw | Cost$ 4 U | NumCards$ X | ValidTgts$ Player | TgtPrompt$ Select target player | References$ X | RememberDrawn$ True | SubAbility$ DBDiscard | SpellDescription$ Target player draws cards equal to the number of cards in his or her hand, then discards that many cards.
+SVar:DBDiscard:DB$ Discard | Defined$ Targeted | Mode$ TgtChoose | NumCards$ Y | References$ Y | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:TargetedPlayer$CardsInHand
+SVar:Y:Remembered$Amount
+SVar:RemAIDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/laquatuss_creativity.jpg
+SetInfo:ODY|Uncommon|http://magiccards.info/scans/en/od/88.jpg
+Oracle:Target player draws cards equal to the number of cards in his or her hand, then discards that many cards.
+End

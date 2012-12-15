@@ -1,0 +1,12 @@
+Name:New Frontiers
+ManaCost:X G
+Types:Sorcery
+Text:no text
+A:SP$ ChangeZone | Cost$ X G | Origin$ Library | Destination$ Battlefield | ChangeType$ Land.Basic | DefinedPlayer$ Each | ChangeNum$ X | Tapped$ True | References$ X | Shuffle$ True | SpellDescription$ Each player may search his or her library for up to X basic land cards and put them onto the battlefield tapped. Then each player who searched his or her library this way shuffles it.
+SVar:X:Count$xPaid
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/new_frontiers.jpg
+SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/257.jpg
+Oracle:Each player may search his or her library for up to X basic land cards and put them onto the battlefield tapped. Then each player who searched his or her library this way shuffles it.
+End

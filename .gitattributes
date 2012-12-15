@@ -1558,6 +1558,7 @@ res/cardsfolder/c/chainflinger.txt svneol=native#text/plain
 res/cardsfolder/c/chains_of_mephistopheles.txt svneol=native#text/plain
 res/cardsfolder/c/chalice_of_life_chalice_of_death.txt -text
 res/cardsfolder/c/chalice_of_the_void.txt svneol=native#text/plain
+res/cardsfolder/c/chamber_of_manipulation.txt -text
 res/cardsfolder/c/chambered_nautilus.txt svneol=native#text/plain
 res/cardsfolder/c/chameleon_blur.txt -text
 res/cardsfolder/c/chameleon_colossus.txt svneol=native#text/plain
@@ -5589,6 +5590,7 @@ res/cardsfolder/l/lantern_spirit.txt -text
 res/cardsfolder/l/lapis_lazuli_talisman.txt svneol=native#text/plain
 res/cardsfolder/l/lapse_of_certainty.txt svneol=native#text/plain
 res/cardsfolder/l/laquatuss_champion.txt svneol=native#text/plain
+res/cardsfolder/l/laquatuss_creativity.txt -text
 res/cardsfolder/l/laquatuss_disdain.txt -text
 res/cardsfolder/l/larceny.txt svneol=native#text/plain
 res/cardsfolder/l/lash_out.txt svneol=native#text/plain
@@ -6783,6 +6785,7 @@ res/cardsfolder/n/nevermaker.txt svneol=native#text/plain
 res/cardsfolder/n/nevermore.txt -text
 res/cardsfolder/n/nevinyrrals_disk.txt svneol=native#text/plain
 res/cardsfolder/n/new_benalia.txt svneol=native#text/plain
+res/cardsfolder/n/new_frontiers.txt -text
 res/cardsfolder/n/new_prahv_guildmage.txt -text
 res/cardsfolder/n/nezumi_bone_reader.txt svneol=native#text/plain
 res/cardsfolder/n/nezumi_cutthroat.txt svneol=native#text/plain
@@ -8384,6 +8387,7 @@ res/cardsfolder/r/rustrazor_butcher.txt svneol=native#text/plain
 res/cardsfolder/r/rustspore_ram.txt svneol=native#text/plain
 res/cardsfolder/r/ruthless_cullblade.txt svneol=native#text/plain
 res/cardsfolder/r/ruthless_invasion.txt svneol=native#text/plain
+res/cardsfolder/r/rysorian_badger.txt -text
 res/cardsfolder/r/ryusei_the_falling_star.txt svneol=native#text/plain
 res/cardsfolder/s/saber_ants.txt svneol=native#text/plain
 res/cardsfolder/s/saberclaw_golem.txt svneol=native#text/plain
