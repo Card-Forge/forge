@@ -55,7 +55,17 @@ Some people use the Windows application 7zip. This utility can be found at http:
 
 Fixes/Features:
 
-
+- Sideboarding: Initial commit. Added full sideboard support with the ability to create sideboards for Constructed and Quest decks, as well as use sideboard in Limited modes; full deck validation depending on the game format; ingame sideboarding that is persistent across the duels of one match. *No AI support yet, hopefully someone will be able to add it in the future*
+- Converted Winds of Change to use RepeatEach so moomarc can use it as an example
+- Display X costs in the deck editor before Colorless Mana (X 1 B instead of 1 X B)
+- Fixed and polished AI using ETB Counterspells (like Mystic Snake).
+- The sideboard is now available as a zone.
+- Added a few missing SetInfos.
+- Preparing the changes.txt file for the next beta build and release.
+- Sideboarding: fixed the sideboard becoming fubar after playing at least one quest match.
+- Sideboarding: minor TODO comment update.
+- Fixed Quest for the Holy Relic.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -75,7 +85,19 @@ Added the following Vanguard Avatars:
 
 Added the following cards:
 
-
+Golden Wish
+Burning Wish
+Cunning Wish
+Living Wish
+Draining Whelk
+Fighting Chance
+Mimeofacture
+Soulgorger Orgg
+Artifact Possession
+Chamber of Manipulation
+Laquatus's Creativity
+New Frontiers
+Rysorian Badger
 
 
 end
