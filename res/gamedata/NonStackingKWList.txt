@@ -1,5 +1,6 @@
 All creatures able to block CARDNAME do so.
 CARDNAME attacks each turn if able.
+CARDNAME can't be regenerated.
 CARDNAME doesn't untap during your untap step.
 Changeling
 Convoke

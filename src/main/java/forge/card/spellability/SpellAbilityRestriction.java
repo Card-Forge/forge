@@ -118,6 +118,10 @@ public class SpellAbilityRestriction extends SpellAbilityVariables {
             this.setAnyPlayer(true);
         }
 
+        if (params.containsKey("AnyOpponent")) {
+            this.setOpponentOnly(true);
+        }
+
         if (params.containsKey("ActivationLimit")) {
             this.setLimitToCheck(params.get("ActivationLimit"));
         }

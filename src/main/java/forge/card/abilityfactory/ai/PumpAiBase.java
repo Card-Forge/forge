@@ -130,9 +130,14 @@ public abstract class PumpAiBase extends SpellAiLogic {
                 return false;
             }
         } else if (keyword.endsWith("CARDNAME can't be regenerated.")) {
-            if (card.getShield() <= 0) {
-                return false;
+            if (card.getShield() > 0) {
+                return true;
             }
+            if (card.hasKeyword("If CARDNAME would be destroyed, regenerate it.") 
+                    && (card.isBlocked() || card.isBlocking())) {
+                return true;
+            }
+            return false;
         } else if (keyword.endsWith("CARDNAME's activated abilities can't be activated.")) {
             return false; //too complex
         }

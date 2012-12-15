@@ -1,0 +1,12 @@
+Name:Clergy of the Holy Nimbus
+ManaCost:W
+Types:Creature Human Cleric
+Text:no text
+PT:1/1
+K:If CARDNAME would be destroyed, regenerate it.
+A:AB$ Pump | Cost$ 2 | AnyOpponent$ True | Defined$ Self | KW$ HIDDEN CARDNAME can't be regenerated. | IsCurse$ True | SpellDescription$ CARDNAME can't be regenerated this turn. Only any opponent may activate this ability.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/clergy_of_the_holy_nimbus.jpg
+SetInfo:LEG|Common|http://magiccards.info/scans/en/lg/175.jpg
+Oracle:If Clergy of the Holy Nimbus would be destroyed, regenerate it.\n{1}: Clergy of the Holy Nimbus can't be regenerated this turn. Only any opponent may activate this ability.
+End

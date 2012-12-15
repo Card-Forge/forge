@@ -46,7 +46,6 @@ import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRequirements;
-import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
 import forge.card.staticability.StaticAbility;
@@ -1528,7 +1527,8 @@ public class GameAction {
             return false;
         }
 
-        if (c.canBeShielded() && (c.getShield() > 0)) {
+        if (c.canBeShielded() 
+                && (c.getShield() > 0 || c.hasKeyword("If CARDNAME would be destroyed, regenerate it."))) {
             c.subtractShield();
             c.setDamage(0);
             c.tap();
