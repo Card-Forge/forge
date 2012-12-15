@@ -1,16 +1,15 @@
-Forge Beta: 12-14-2012 ver 1.3.3
+Forge Beta: 12-##-2012 ver 1.3.4
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 (Thanks to the MAGE team for permission to use their targeting arrows.)
 (Thanks to http://www.freesound.org/browse/ for providing some sound files.)
 
-11674 cards in total.
+11### cards in total.
 
 
-The Alara Reborn set is now 100% implemented.
 
-Schemes have been added to the Archenemy mode. This is a work in progress and there may be a bug or two for us to find. Please discuss this new feature in the 1.3.3 beta release topic.
 
+--
 
 This version of forge includes a few sound files for the new sound effect system. While we have several sounds assigned to a few of the available events there are a number of events that do not yet have a assigned sound file. This should be considered a work in progress and we could use some help in finding interesting sounds that we can add to forge.
 
@@ -56,325 +55,27 @@ Some people use the Windows application 7zip. This utility can be found at http:
 
 Fixes/Features:
 
-- Fixed Korozda Monitor.
-- Simplified sacrificeHuman.
-- Removed CardFactoryEquipment.
-- Cleanup.
-- CheckStyle.
-- Cleanup and FindBugs fixes.
-- Added [avatar] decksection (for deck-default vanguard avatars)
-- Little text fix for preventNextDamage.
-- More text fixes.
-- Fixing a poorly scripted Warden of the Wall
-- Bludgeoned MigLayout into adding a CardDetailPanel to Vanguard home screen. Please tell me/tweak it if it looks horrible on resolutions beyond 1280x1024
-- The AI will now react to Nether Void.
-- Fixed Coalition Relic.
-- Fixed Explore and Summer Bloom.
-- Added a possibility to couple sacrifice costs with other costs (currently by sacrificing, pun semi-intended, the input-based sacrifice interface and replacing it with a menu-based selection one).
-- Cleared out the changes.txt file, now ready for new material.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Added a TODO note to GameActionUtil (if fully chained inputs are implemented in the future), fixed imports.
-- Bring active players VField to the front. Helps keep track in 8 player games.
-- Made CardDetailPanel conform to skin colors.
-- Added EffectZone$ Command to a few missed AF_Effect scripts
-- CheckStyle.
-- When the user is asked whether he wants to pay the sacrifice cost, the card for which the sacrifice cost is paid will be highlighted on the playfield.
-- A little fix for the previous commit.
-- Minor edit and fix to changes.txt
-- Consolidated some calls related to card panel highlighting for the Sacrifice costs.
-- Reverted the example Gauntlet contest to start at 0% progress (used to be 11% progress in the very beginning).
-- Added listing of the avatar and commander to FDeckChooser decklists.
-- Removing Variants branch
-- Created Schemes branch
-- Schemes:Base commit for Schemes.
-- Added AF_Abandon.
-- Added Trigger SetInMotion
-- Added schemes A Display of My Dark Power (Thanks,Marc!) and I Know All, I See All.
-- Schemes:Added ARC to setdata.
-- Schemes: Added Behold the Power of Destruction.
-- Updated some SVars.
-- Added Timeshifted setinfo to Leviathan.
-- Converted "Damage that would reduce your life total to less than 1 reduces it to 1 instead." to a player keyword.
-- Fixed Angel's Grace.
-- Added beginnings of a Scheme Deck editor.
-- Made exiting the scheme editor dump you at the archenemy home screen.
-- Made scheme deck editor save correctly.
-- Added a fluff piece to the changes.txt file.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Implemented X color restrictions for the AI, now Crypt Rats should be correctly used by the AI. Hopefully the support will work for all color restrictions including two-color ones (like the Soul Burn which may potentially be implemented later).
-- Removed a debug line.
-- Schemes: Let the player specify the deck of each opponent in Archenemy mode.
-- Let the player specify his own scheme deck.
-- Fixed Scheme deck editor.
-- CheckStyle.
-- Schemes: Changed Archenemy's DocID.
-- Added Oracle to schemes.
-- PerSetTracking.py will now also check Archenemy.
-- Made some cards with "Whenever an opponent" triggers multiplayer compatible.
-- Schemes: Added AF_SetInMotion,added ReplaceSetInMotion
-- Fixed multiple schemes being set into motion consecutively.
-- Schemes: Removed debug script
-- Fixing Viscerid Drone's activation costs
-- Fixed the spell description for Judge Unworthy
-- Convert Goblin Charbelcher to script
-- Enable DevMode to add Lands directly into play
-- Convert Gilder Bairn and Vampire Hexmage to script
-- Added support for Repeating over Counters
-- changed target style to newer ValidTgts version
-- reworked methods for finding SpellAbility targets
-- Fixed Liliana of the Veil.
-- Fixed AI choosing logic of AF TwoPiles.
-- Fixed mana costs not always coming first in combineCosts.
-- Added AILogic parameter to AF TwoPiles.
-- Added the parameter "UnlessSwitched" to SpellAbilities (to switch paid and unpaid commands).
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Expanded checkDiscardCost.
-- Fixed Bloodthirst overwriting the X SVar.
-- Fixed StackDescription of AF PumpAll.
-- Fixed Venser, the Sojourner emblem name.
-- Schemes: Changed DefinedPlayer Opponent so that it adds all opponents
-- Added a NeedsToPlay SVar to Sunken City.
-- Added a chkAIDrawback function to AF LoseLife.
-- Schemes: Changed LQ image links to better images. Can be used as template for other schemes
-- Fixed Brass Squire.
-- Removed some unnecessary chkAIDrawback overrides.
-- Updated cardTemplateScript to automatically add correct LQ pic urls.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Schemes: Added player property NotSelf
-- Schemes: removed early debugging cost for Imprison This Insolent Wretch that I forgot to revert
-- Added CostRemoveCounter to payCostDuringAbilityResolve.
-- GUI: Themed order selection window.
-- Fix imports.
-- Schemes: Renamed player property NotSelf to Other
-- Removed duplicate StackDescription of SubAbilities from AF ChangeZone.
-- Schemes: Reverted my earlier change to getDefinedPlayers:Opponent. (Will slowly go through each case after merging at a later stage to make multiplayer compatible using Player.Other or Player.Opponent where applicable)
-- Little CanPlayAI updates.
-- Fixed Telekinesis.
-- Added an easy version of the Gold Finger opponent.
-- Schemes:Merged in r18521-18589 from trunk
-- Fixed Repay in Kind for multiplayer
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Updated some more AI functions.
-- Added a "save deck" button to the Limited deck editor to avoid confusion. The button will generate a proper confirmation message, so it won't confuse the player by just saying that the deck with the given name already exists (which is not appropriate for Limited since there is only one deck anyway).
-- Changed the draft mode option text from "Play all 8 opponents" to "Play all 7 opponents" since the human is the 8th player and he has seven opponents.
-- Added card panel highlighting to orderBlockingMultipleAttackers.
-- Corrected a mistype.
-- Reversed order of game log.
-- Converted Sarpadian Empires, Vol. VII
-- Added code for "CARDNAME can attack as though it didn't have defender." to isUsefulPumpKeyword.
-- Randomly generated decks will now feature cards from random editions (so, no more "all lands Zendikar" etc.).
-- Simplified the code for random set codes in generated decks.
-- Fixed NotEnchantedBy broken in my previous commit
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Schemes: Forgot to commit some code for Mortal Flesh Is Weak
-- Slight tweak to ChangeZoneAll so that you won't be given a choice ordering box when moving cards to the library if the list has fewer than two cards
-- Added the scheme and the sound directories to the SVN trunk.
-- The AI will now activate Lu Su, Wu Advisor and other little AI tweaks.
-- Updating Crocodile Pet for Static OpponentTurn changes
-- Actual right fix for Crocs
-- Allow Auras to Enchant cards in graveyards for (Animate Dead and Spellwewaver Volute)
-- Convert Animate Dead and Dance of the Dead to script (oh joyous day)
-- Some small changes in AF_Animate to grant spells with the right timing
-- Only move Auras into play if it's a cast spell
-- Sound System: Enabling sounds by default, adding the currently available free sounds to the SVN.
-- Made CardFactoryUtil.getExternalZoneActivationCards compatible with multiplayer
-- Use the more verbose title instead of name for duels and challenges in quests (it used to be this way).
-- Added a fluff piece to the changes.txt file.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- uncommented some recently included tokens' download links
-- minor tweak
-- Fixed Armor of Thorns.
-- Fixed Demoralize.
-- Fixing text of Sen Triplets
-- The Constructed deck editor now has an option to either show all cards from all sets or show unique cards only (see the Preferences tab), the Sealed Mode, Draft Mode, and Quest Mode deck editors will always show cards from all sets in order to avoid issues and confusion.
-- Made the default value of the "Show Unique Cards Only" (in Constructed) "true" (checked) to mimic the original Forge behavior.
-- Player.Opponent now returns opponents only, while Player.Other returns all other players
-- Converted some cards for multiplayer compatibility
-- improved stack description for LoseLife
-- converted a few more cards for multiplayer compatibility
-- Added a fluff piece to the changes.txt file.
-- BuildInfo.getVersion() is once again returning an incorrct SVN number ("-r18445").
-- add check to drawing miracle so that miracle cost is not triggered in opening hand.
-- Triggers will now wait to trigger if the Stack is frozen. (Fixes Valakut not triggering enough times)
-- Convert Earthbind to Script now that the timing works
-- Fixed Mind Swords.
-- Added the recent commit logs to changes.txt.
-- Explicitly shuffle Haunting Echoes instead of using it inside RepeatEach
-- Fixed Tower Above.
-- Sigh, missed a new class.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixing rarity on Aura Finesse
-- Added an option to the preferences window to randomize card art in the human decks (e.g. different card art for basic lands from the same set) for whoever likes variety.
-- Better name for the card art randomization option.
-- Minor code cleanup.
-- Fix to avoid Comodification errors with Waiting Triggers and infinite loops with multiple resolving Waiting Triggers
-- Convert Guilty Conscience to Script
-- Fixing a crash in Island Sanctuary before the game starts
-- Convert Convincing Mirage and Phantasmal Terrain to script
-- Small tweak to Triggers to allow them to refire Statics when they finish resolving (useful for Conving Mirage to actually grant its ability immediately upon resolving)
-- Made the random set generation for random decks more optimal.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Small fixes to Animate Dead and Dance of the Dead
-- Fixed the ability cost for Engineered Explosives.
-- Convert Night Soil to script (done with CF_Enchantments)
-- Temporarily disable changes needed for Valakut timing properly, since it seemed to have adversely effect a bunch of other triggers
-- Fixed Elfhame Sanctuary.
-- Fixed getGamesWonBy crashing when the game was a draw.
-- Fixed Yawgmoth's Will.
-- Sound system: Added a way to play card-specific sound effects depending on the presence of the SoundEffect SVar on a card. If the SVar is present, the sound file specified in the SVar must be present, otherwise no sound is played.
-- Improved doTriggerAINoCost in AF Attach.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Converted some more cards for multiplayer.
-- Added some basic count methods for use in multiplayer situations
-- Converted more cards for multiplayer and improved Player.isValid:Opponent
-- Converted more cards for multiplayer
-- Converted more cards for multiplayer (my last ones for the day)
-- Sound System: Minor tweaks to the individual card sound effect system.
-- Reintegrated the Schemes branch.
-- Renamed the file of Plots That Span Centuries.
-- Made two cards multiplayer compatible.
-- Fixed Fireball.
-- Made a few more cards multiplayer compatible
-- It is now possible to give challenge opponents (players) names that are different from the actual challenge names.
-- Fix javadoc for QuestEvent.getOpponent().
-- Pattern of Rebirth will now grant a SacMe SVar to the enchanted creature.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Added some AI checks to canRegenerate.
-- Fixed Acidic Dagger and Venomous Breath.
-- Added "SVar:RemAIDeck:True" to Akroma's Blessing and Primal Clay.
-- Reenabling CheckStaticEffects in triggerhandler
-- Moved ConditionDescription into SpellEffect.getStackDescriptionWithSubs and stopped PumpAllEffect and DestroyEffect from grabbing stack description for subabilities (already handled in main shared method)
-- More cards ready for multiplayer
-- Converted Omnath, Locus of Mana to script by keywording his ability.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed Tolarian Entrancer.
-- Further fix for Tolarian Entrancer
-- Fixed Skirk Alarmist.
-- Fixed AI possibly pumping opposing creatures (plus multiplayer considerations).
-- Sideboarding: Initial commit of phase 1-related code (sideboard mode for deck editor). Currently DISABLED and should not affect anything in the code, will be updated and enabled after v1.3.3.
-- Reverted Archenemy starting life to 10+(10*<Number of opponents>)
-- Fixed saving pre-scheme decks.
-- Cleaned up imports.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed the casting cost of High Ground.
-- CheckStyle.
-- Fixed Necropotence.
-- Made a few more cards multiplayer compatible
-- Added LocalCount to resolve of DamageDealEffect and DrawEffect which allows calculated variables to be calculated per player (should allow a few more cards to be made multiplayer compatible)
-- Fixed ChangeZoneAll so that it works correctly when Defined returns more than one player
-- Decks for the sample 'Shandalar' world. No images (due to copyright reasons). Will be enabled AFTER the next beta release.
-- applied script fixed by swordshine
-- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
-- Preparing the changes.txt file for the next beta build and release.
+
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-Agetian
-ArsenalNut
-Gos
-Hellfish
-Marc
-RumbleBBU
-Sloth
-Sol
-Swordshine
-Chris H
+
 
 
 Added the following Schemes:
 
-A Display of My Dark Power
-All Shall Smolder in My Wake
-Approach My Molten Realm
-Behold the Power of Destruction
-Dance, Pathetic Marionette
-Embrace My Diabolical Vision
-Every Hope Shall Vanish
-Every Last Vestige Shall Rot
-Evil Comes to Fruition
-I Call on the Ancient Magics
-I Delight in Your Convulsions
-I Know All, I See All
-Ignite the Cloneforge!
-Imprison This Insolent Wretch
-Look Skyward and Despair
-Mortal Flesh Is Weak
-My Genius Knows No Bounds
-My Wish Is Your Command
-Nothing Can Stop Me Now
-Perhaps You've Met My Cohort
-Plots That Span Centuries
-Realms Befitting My Majesty
-Roots of All Evil
-The Iron Guardian Stirs
-The Pieces Are Coming Together
-The Very Soil Shall Shake
-Tooth, Claw, and Tail
-Which of You Burns Brightest?
-Your Fate Is Thrice Sealed
-Your Puny Minds Cannot Fathom
-Your Will Is Not Your Own
+
 
 
 Added the following Vanguard Avatars:
 
-Flametongue Kavu Avatar
+
 
 
 Added the following cards:
 
-AEther Rift
-AEther Snap
-Argothian Wurm
-Aura Graft
-Barbarian Bully
-Brain Gorgers
-Bruna, Light of Alabaster
-Catalyst Stone
-Chameleon Spirit
-Cinder Cloud
-Consecrate Land
-Crown of the Ages
-Cursed Monstrosity
-Dash Hopes
-Desperate Research
-Dong Zhou, the Tyrant
-Evershrike
-Exalted Dragon
-Flooded Woodlands
-Harmony of Nature
-Impromptu Raid
-Junk Golem
-Kindle the Carnage
-Kithkin Zealot
-Kitsune Mystic // Autumn-Tail, Kitsune Sage
-Leviathan
-Luminescent Rain
-Marshaling the Troops
-Mercadian Lift
-Mtenda Lion
-Nakaya Shade
-Opal-Eye, Konda's Yojimbo
-Pack Hunt
-Phantasmagorian
-Phantasmal Sphere
-Quest for the Holy Relic
-Ravenous Vampire
-Read the Runes
-Reclamation
-Retether
-Rhystic Cave
-Riptide Mangler
-Scarab of the Unseen
-Scrounge
-Sen Triplets
-Shivan Wumpus
-Sirocco
-Soul Strings
-Spelltithe Enforcer
-Wand of Ith
-Withdraw
+
 
 
 end
