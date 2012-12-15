@@ -134,8 +134,14 @@ public class GameNew {
         boolean useAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
 
         if (Singletons.getModel().getMatch().getPlayedGames().size() == 0) {
-            DeckTempStorage.setHumanMain(deck.getMain().toForgeCardList());
-            DeckTempStorage.setHumanSideboard(deck.getSideboard().toForgeCardList());
+            if (player.isHuman()) {
+                // TODO: this is not network-friendly. If network play is implemented,
+                // DeckTempStorage will have to be converted to something like an array
+                // for each human player or something like that, I imagine...
+                // (I could be wrong).
+                DeckTempStorage.setHumanMain(deck.getMain().toForgeCardList());
+                DeckTempStorage.setHumanSideboard(deck.getSideboard().toForgeCardList());
+            }
             prepareFirstGameLibrary(player, deck, removedAnteCards, rAICards, canRandomFoil, generator, useAnte);
         } else {
             if (!sideboardAndPrepareLibrary(player, deck, canRandomFoil, generator, useAnte)) {
