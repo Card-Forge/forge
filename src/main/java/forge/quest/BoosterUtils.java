@@ -233,7 +233,9 @@ public final class BoosterUtils {
         final int qty = Integer.parseInt(temp[0]);
         // Determine rarity
         Predicate<CardPrinted> rar = CardPrinted.Predicates.Presets.IS_UNCOMMON;
-        if (temp[2].equalsIgnoreCase("rare") || temp[2].equalsIgnoreCase("rares")) {
+
+        if ((temp.length > 2 && (temp[2].equalsIgnoreCase("rare") || temp[2].equalsIgnoreCase("rares")))
+                || (temp[1].equalsIgnoreCase("rare") || temp[1].equalsIgnoreCase("rares"))) {
             rar = CardPrinted.Predicates.Presets.IS_RARE_OR_MYTHIC;
         }
 
