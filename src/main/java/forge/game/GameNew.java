@@ -165,7 +165,7 @@ public class GameNew {
        
         PlayerZone library = player.getZone(ZoneType.Library);
         DeckSection sideboard = deck.getSideboard();
-        int sideboardSize = gameType.isLimited() ? -1 : sideboard.countAll();
+        int sideboardSize = (gameType == GameType.Draft || gameType == GameType.Sealed) ? -1 : sideboard.countAll();
        
         if (!hasSideboard) {
             return false;
