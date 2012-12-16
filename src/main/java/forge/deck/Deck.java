@@ -64,11 +64,8 @@ public class Deck extends DeckBase {
      */
     private static final long serialVersionUID = -7478025567887481994L;
 
-    private transient boolean isEdited = false;
     private final DeckSection main;
     private final DeckSection sideboard;
-    private transient DeckSection mainEdited;
-    private transient DeckSection sideboardEdited;
     private CardPrinted avatar;
     private CardPrinted commander;
     private final DeckSection planes;
@@ -93,8 +90,6 @@ public class Deck extends DeckBase {
         super(name0);
         this.main = new DeckSection();
         this.sideboard = new DeckSection();
-        this.mainEdited = new DeckSection();
-        this.sideboardEdited = new DeckSection();
         this.avatar = null;
         this.commander = null;
         this.planes = new DeckSection();
@@ -127,7 +122,7 @@ public class Deck extends DeckBase {
      * @return a {@link java.util.List} object.
      */
     public DeckSection getMain() {
-        return isEdited ? this.mainEdited : this.main;
+        return this.main;
     }
 
     /**
@@ -138,7 +133,7 @@ public class Deck extends DeckBase {
      * @return a {@link java.util.List} object.
      */
     public DeckSection getSideboard() {
-        return isEdited ? this.sideboardEdited : this.sideboard;
+        return this.sideboard;
     }
 
     /*
@@ -148,7 +143,7 @@ public class Deck extends DeckBase {
      */
     @Override
     public ItemPoolView<CardPrinted> getCardPool() {
-        return isEdited ? this.mainEdited : this.main;
+        return this.main;
     }
 
     /* (non-Javadoc)
@@ -371,8 +366,8 @@ public class Deck extends DeckBase {
     }
     
     public boolean meetsGameTypeRequirements(GameType type, boolean silent) {
-        int deckSize = getMain().countAll();
-        int deckDistinct = getMain().countDistinct();
+        int deckSize = main.countAll();
+        int deckDistinct = main.countDistinct();
         Integer max = type.getDeckMaximum();
 
         if (deckSize < type.getDeckMinimum()) {
@@ -511,28 +506,4 @@ public class Deck extends DeckBase {
             return arg1.getName();
         }
     };
-
-    public void clearDeckEdits() {
-        isEdited = false;
-        if (mainEdited != null) {
-            mainEdited.clear();
-        } else {
-            mainEdited = new DeckSection();
-        }
-        if (sideboardEdited != null) {
-            sideboardEdited.clear();
-        } else {
-            sideboardEdited = new DeckSection();
-        }
-    }
-    
-    public void allowDeckEdits() {
-        isEdited = true;
-        if (mainEdited.countAll() == 0) {
-            mainEdited.add(main.toFlatList());
-        }
-        if (sideboardEdited.countAll() == 0) {
-            sideboardEdited.add(sideboard.toFlatList());
-        }
-    }
 }
