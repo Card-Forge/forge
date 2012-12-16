@@ -3699,6 +3699,7 @@ public class CardFactoryUtil {
             final StringBuilder sb = new StringBuilder();
             sb.append(card.getName()).append(" (Evoked)");
             evokedSpell.setStackDescription(sb.toString());
+            evokedSpell.setBasicSpell(false);
 
             card.addSpellAbility(evokedSpell);
         }
