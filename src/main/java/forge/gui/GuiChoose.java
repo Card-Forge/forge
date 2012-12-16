@@ -13,7 +13,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import forge.Card;
-import forge.deck.DeckTempStorage;
 import forge.gui.match.CMatchUI;
 import forge.item.InventoryItem;
 
@@ -234,10 +233,6 @@ public class GuiChoose {
         dialog.setVisible(true);
 
         List<T> objects = dual.getOrderedList();
-        if (sideboardingMode) {
-            DeckTempStorage.setHumanMain((List<Card>)objects);
-            DeckTempStorage.setHumanSideboard((List<Card>)dual.getRemainingSourceList());
-        }
 
         dialog.dispose();
         GuiUtils.clearPanelSelections();

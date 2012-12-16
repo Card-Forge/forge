@@ -13204,7 +13204,6 @@ src/main/java/forge/deck/DeckBase.java -text
 src/main/java/forge/deck/DeckGroup.java -text
 src/main/java/forge/deck/DeckRecognizer.java -text
 src/main/java/forge/deck/DeckSection.java -text
-src/main/java/forge/deck/DeckTempStorage.java -text
 src/main/java/forge/deck/DeckgenUtil.java -text
 src/main/java/forge/deck/generate/Generate2ColorDeck.java svneol=native#text/plain
 src/main/java/forge/deck/generate/Generate3ColorDeck.java svneol=native#text/plain

@@ -27,7 +27,6 @@ import forge.control.input.InputControl;
 import forge.control.input.InputMulligan;
 import forge.deck.Deck;
 import forge.deck.DeckSection;
-import forge.deck.DeckTempStorage;
 import forge.game.event.FlipCoinEvent;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -142,15 +141,6 @@ public class GameNew {
         boolean useAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
 
         if (Singletons.getModel().getMatch().getPlayedGames().size() == 0) {
-            // TODO: this is potentially not network-friendly. If network play is 
-            // implemented, and, as such, more than one human player becomes possible
-            // in a game, DeckTempStorage may have to be converted to something like an array
-            // for each human player or something like that, I imagine...
-            // (I could be wrong). Also see other deck usages for DeckTempStorage.
-            if (player.isHuman()) {
-                DeckTempStorage.setHumanMain(deck.getMain().toForgeCardList());
-                DeckTempStorage.setHumanSideboard(deck.getSideboard().toForgeCardList());
-            }
             prepareFirstGameLibrary(player, deck, removedAnteCards, rAICards, canRandomFoil, generator, useAnte);
         } else {
             if (!sideboardAndPrepareLibrary(player, deck, canRandomFoil, generator, useAnte)) {
@@ -175,7 +165,7 @@ public class GameNew {
        
         PlayerZone library = player.getZone(ZoneType.Library);
         DeckSection sideboard = deck.getSideboard();
-        int sideboardSize = (gameType == GameType.Draft || gameType == GameType.Sealed) ? -1 : sideboard.countAll();
+        int sideboardSize = gameType.isLimited() ? -1 : sideboard.countAll();
        
         if (!hasSideboard) {
             return false;
@@ -200,7 +190,7 @@ public class GameNew {
                 newDeck = GuiChoose.getOrderChoices("Sideboard", "Main Deck", sideboardSize,
                     deck.getSideboard().toForgeCardList(), deck.getMain().toForgeCardList(), null, true);
 
-                if (newDeck.size() >= deckMinSize || (gameType != GameType.Draft && gameType != GameType.Sealed)) {
+                if (newDeck.size() >= deckMinSize || !gameType.isLimited()) {
                     validDeck = true;
                 } else {
                     StringBuilder errMsg = new StringBuilder("Too few cards in your main deck (minimum ");
