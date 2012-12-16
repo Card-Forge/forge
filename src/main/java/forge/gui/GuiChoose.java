@@ -13,6 +13,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import forge.Card;
+import forge.deck.Deck;
 import forge.gui.match.CMatchUI;
 import forge.item.InventoryItem;
 
@@ -204,11 +205,11 @@ public class GuiChoose {
 
     public static <T> List<T> getOrderChoices(final String title, final String top, int remainingObjects,
             final List<T> sourceChoices, List<T> destChoices, Card referenceCard) {
-        return getOrderChoices(title, top, remainingObjects, sourceChoices, destChoices, referenceCard, false);
+        return getOrderChoices(title, top, remainingObjects, sourceChoices, destChoices, referenceCard, false, null);
     }
 
     public static <T> List<T> getOrderChoices(final String title, final String top, int remainingObjects,
-            final List<T> sourceChoices, List<T> destChoices, Card referenceCard, boolean sideboardingMode) {
+            final List<T> sourceChoices, List<T> destChoices, Card referenceCard, boolean sideboardingMode, Deck persistentDeck) {
         // An input box for handling the order of choices.
         final JFrame frame = new JFrame();
         DualListBox<T> dual = new DualListBox<T>(remainingObjects, top, sourceChoices, destChoices, referenceCard, sideboardingMode);
@@ -233,6 +234,13 @@ public class GuiChoose {
         dialog.setVisible(true);
 
         List<T> objects = dual.getOrderedList();
+
+        if (sideboardingMode) {
+            persistentDeck.getMain().clear();
+            persistentDeck.getMain().add((List<Card>)dual.getOrderedList());
+            persistentDeck.getSideboard().clear();
+            persistentDeck.getSideboard().add((List<Card>)dual.getRemainingSourceList());
+        }
 
         dialog.dispose();
         GuiUtils.clearPanelSelections();

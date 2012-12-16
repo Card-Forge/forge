@@ -47,7 +47,7 @@ import forge.util.MyRandom;
  * All of these methods can and should be static.
  */
 public class GameNew {
-    private static void prepareFirstGameLibrary(Player player, Deck deck, Map<Player, List<String>> removedAnteCards, List<String> rAICards, boolean canRandomFoil, Random generator, boolean useAnte) { 
+    private static void prepareGameLibrary(Player player, Deck deck, Map<Player, List<String>> removedAnteCards, List<String> rAICards, boolean canRandomFoil, Random generator, boolean useAnte) { 
     
         PlayerZone library = player.getZone(ZoneType.Library);
         PlayerZone sideboard = player.getZone(ZoneType.Sideboard);
@@ -140,13 +140,13 @@ public class GameNew {
         final Random generator = MyRandom.getRandom();
         boolean useAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
 
-        if (Singletons.getModel().getMatch().getPlayedGames().size() == 0) {
-            prepareFirstGameLibrary(player, deck, removedAnteCards, rAICards, canRandomFoil, generator, useAnte);
+        if (Singletons.getModel().getMatch().getPlayedGames().size() != 0) {
+            deck.allowDeckEdits();
+            sideboardAndPrepareLibrary(player, deck, canRandomFoil, generator, useAnte);
         } else {
-            if (!sideboardAndPrepareLibrary(player, deck, canRandomFoil, generator, useAnte)) {
-                prepareFirstGameLibrary(player, deck, removedAnteCards, rAICards, canRandomFoil, generator, useAnte);
-            }
+            deck.clearDeckEdits();
         }
+        prepareGameLibrary(player, deck, removedAnteCards, rAICards, canRandomFoil, generator, useAnte);
 
         // Shuffling
         // Ai may cheat
@@ -175,7 +175,7 @@ public class GameNew {
             // Here is where the AI could sideboard, but needs to gather hints during the first game about what to SB
 
             // TODO: also something needs to be done with the random card pictures / foiling code
-            //       which normally fires from prepareFirstGameLibrary - the code below (for human)
+            //       which normally fires from prepareGameLibrary - the code below (for human)
             //       is actually repetitive, it would be good to avoid code duplication both below
             //       and potentially here in the AI sideboarding part.
 
@@ -183,14 +183,13 @@ public class GameNew {
         } else {
             // Human Sideboarding
             boolean validDeck = false;
-            List<Card> newDeck = null;
             int deckMinSize = Math.min(deck.getMain().countAll(), gameType.getDeckMinimum());
 
             while (!validDeck) {
-                newDeck = GuiChoose.getOrderChoices("Sideboard", "Main Deck", sideboardSize,
-                    deck.getSideboard().toForgeCardList(), deck.getMain().toForgeCardList(), null, true);
+                GuiChoose.getOrderChoices("Sideboard", "Main Deck", sideboardSize,
+                    deck.getSideboard().toForgeCardList(), deck.getMain().toForgeCardList(), null, true, deck);
 
-                if (newDeck.size() >= deckMinSize) {
+                if (deck.getMain().countAll() >= deckMinSize) {
                     validDeck = true;
                 } else {
                     StringBuilder errMsg = new StringBuilder("Too few cards in your main deck (minimum ");
@@ -200,32 +199,6 @@ public class GameNew {
                 }
             }
            
-            for (Card c : newDeck) {
-                if (c.isFlipCard() && c.isFlipped()) {
-                    c.changeToState(CardCharacteristicName.Original);
-                    c.setFlipStaus(false);
-                }
-                
-                CardPrinted cp = CardDb.instance().getCard(c);
-
-                // TODO: avoid code duplication below? (currently copied from prepareFirstGameLibrary)
-                // apply random pictures for cards
-                if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_RANDOM_CARD_ART)) {
-                    final int cntVariants = cp.getCard().getEditionInfo(cp.getEdition()).getCopiesCount();
-                    if (cntVariants > 1) {
-                        c.setRandomPicture(generator.nextInt(cntVariants - 1) + 1);
-                        c.setImageFilename(CardUtil.buildFilename(c));
-                    }
-                }
-                // Assign random foiling on approximately 1:20 cards
-                if (cp.isFoil() || (canRandomFoil && MyRandom.percentTrue(5))) {
-                    final int iFoil = MyRandom.getRandom().nextInt(9) + 1;
-                    c.setFoil(iFoil);
-                }
-
-                c.setOwner(player);
-                library.add(c);
-            }
         }
         return true;
     }
