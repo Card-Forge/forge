@@ -184,13 +184,13 @@ public class GameNew {
             // Human Sideboarding
             boolean validDeck = false;
             List<Card> newDeck = null;
-            int deckMinSize = gameType.getDeckMinimum();
+            int deckMinSize = Math.min(deck.getMain().countAll(), gameType.getDeckMinimum());
 
             while (!validDeck) {
                 newDeck = GuiChoose.getOrderChoices("Sideboard", "Main Deck", sideboardSize,
                     deck.getSideboard().toForgeCardList(), deck.getMain().toForgeCardList(), null, true);
 
-                if (newDeck.size() >= deckMinSize || !gameType.isLimited()) {
+                if (newDeck.size() >= deckMinSize) {
                     validDeck = true;
                 } else {
                     StringBuilder errMsg = new StringBuilder("Too few cards in your main deck (minimum ");
