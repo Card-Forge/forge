@@ -8145,7 +8145,9 @@ res/cardsfolder/r/rhox_war_monk.txt svneol=native#text/plain
 res/cardsfolder/r/rhys_the_exiled.txt svneol=native#text/plain
 res/cardsfolder/r/rhys_the_redeemed.txt svneol=native#text/plain
 res/cardsfolder/r/rhystic_cave.txt -text
+res/cardsfolder/r/rhystic_circle.txt -text
 res/cardsfolder/r/rhystic_deluge.txt svneol=native#text/plain
+res/cardsfolder/r/rhystic_shield.txt -text
 res/cardsfolder/r/rhystic_study.txt svneol=native#text/plain
 res/cardsfolder/r/rhystic_tutor.txt -text
 res/cardsfolder/r/rib_cage_spider.txt svneol=native#text/plain
@@ -8226,6 +8228,8 @@ res/cardsfolder/r/rite_of_passage.txt svneol=native#text/plain
 res/cardsfolder/r/rite_of_replication.txt svneol=native#text/plain
 res/cardsfolder/r/rites_of_flourishing.txt svneol=native#text/plain
 res/cardsfolder/r/rites_of_reaping.txt -text
+res/cardsfolder/r/rites_of_refusal.txt -text
+res/cardsfolder/r/rites_of_spring.txt -text
 res/cardsfolder/r/rith_the_awakener.txt svneol=native#text/plain
 res/cardsfolder/r/riths_attendant.txt svneol=native#text/plain
 res/cardsfolder/r/riths_charm.txt -text
@@ -8413,6 +8417,7 @@ res/cardsfolder/s/sacred_knight.txt svneol=native#text/plain
 res/cardsfolder/s/sacred_mesa.txt -text
 res/cardsfolder/s/sacred_nectar.txt svneol=native#text/plain
 res/cardsfolder/s/sacred_prey.txt svneol=native#text/plain
+res/cardsfolder/s/sacred_rites.txt -text
 res/cardsfolder/s/sacred_wolf.txt svneol=native#text/plain
 res/cardsfolder/s/sacrifice.txt svneol=native#text/plain
 res/cardsfolder/s/sadistic_augermage.txt svneol=native#text/plain
