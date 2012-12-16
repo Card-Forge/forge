@@ -25,6 +25,7 @@ import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.GameState;
+import forge.game.GameType;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
@@ -208,7 +209,8 @@ public class HumanPlayer extends Player {
     public final int doMulligan() {
         int newHand = super.doMulligan();
         final QuestController quest = Singletons.getModel().getQuest();
-        if (quest.isLoaded() && quest.getAssets().hasItem(QuestItemType.SLEIGHT) && (getStats().getMulliganCount() == 1)) {
+        final boolean isQuest = Singletons.getModel().getMatch().getGameType().equals(GameType.Quest);
+        if (isQuest && quest.getAssets().hasItem(QuestItemType.SLEIGHT) && (getStats().getMulliganCount() == 1)) {
             drawCard();
             newHand++;
             getStats().notifyOpeningHandSize(newHand);
