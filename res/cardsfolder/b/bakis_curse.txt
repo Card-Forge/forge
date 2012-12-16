@@ -1,0 +1,14 @@
+Name:Baki's Curse
+ManaCost:2 U U
+Types:Sorcery
+Text:no text
+A:SP$ RepeatEach | Cost$ 2 U U | RepeatCards$ Creature | Zone$ Battlefield | RepeatSubAbility$ DBDmg | SpellDescription$ CARDNAME deals 2 damage to each creature for each Aura attached to that creature.
+SVar:DBDmg:DB$ DealDamage | Defined$ Remembered | NumDmg$ X | References$ X
+SVar:X:Count$Valid Aura.AttachedTo Creature.IsRemembered/Times.2
+SVar:RemRandomDeck:True
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/bakis_curse.jpg
+SetInfo:HML|Rare|http://magiccards.info/scans/en/hl/27.jpg
+Oracle:Baki's Curse deals 2 damage to each creature for each Aura attached to that creature.
+End

@@ -1,0 +1,13 @@
+Name:Unified Will
+ManaCost:1 U
+Types:Instant
+Text:no text
+A:SP$ Counter | Cost$ 1 U | TargetType$ Spell | ValidTgts$ Card | ConditionCheckSVar$ YourPeerGroup | ConditionSVarCompare$ GTY | References$ YourPeerGroup,Y | SpellDescription$ Counter target spell if you control more creatures than that spell's controller.
+SVar:YourPeerGroup:Count$Valid Creature.YouCtrl
+SVar:Y:Count$Valid Creature.TargetedControllerCtrl
+SVar:NeedsToPlayVar:YourPeerGroup GTY
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/unified_will.jpg
+SetInfo:ROE|Uncommon|http://magiccards.info/scans/en/roe/92.jpg
+Oracle:Counter target spell if you control more creatures than that spell's controller.
+End

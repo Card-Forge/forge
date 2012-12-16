@@ -678,6 +678,7 @@ res/cardsfolder/b/backslide.txt -text
 res/cardsfolder/b/bad_moon.txt svneol=native#text/plain
 res/cardsfolder/b/bad_river.txt svneol=native#text/plain
 res/cardsfolder/b/badlands.txt svneol=native#text/plain
+res/cardsfolder/b/bakis_curse.txt -text
 res/cardsfolder/b/baku_altar.txt svneol=native#text/plain
 res/cardsfolder/b/bala_ged_scorpion.txt svneol=native#text/plain
 res/cardsfolder/b/bala_ged_thief.txt -text
@@ -2314,6 +2315,7 @@ res/cardsfolder/d/death_stroke.txt svneol=native#text/plain
 res/cardsfolder/d/death_ward.txt svneol=native#text/plain
 res/cardsfolder/d/death_watch.txt -text
 res/cardsfolder/d/death_wind.txt -text
+res/cardsfolder/d/death_wish.txt -text
 res/cardsfolder/d/deathbringer_liege.txt svneol=native#text/plain
 res/cardsfolder/d/deathbringer_thoctar.txt svneol=native#text/plain
 res/cardsfolder/d/deathcoil_wurm.txt -text
@@ -3601,6 +3603,7 @@ res/cardsfolder/f/flowstone_wyvern.txt svneol=native#text/plain
 res/cardsfolder/f/fluctuator.txt svneol=native#text/plain
 res/cardsfolder/f/flurry_of_wings.txt svneol=native#text/plain
 res/cardsfolder/f/flusterstorm.txt svneol=native#text/plain
+res/cardsfolder/f/flux.txt -text
 res/cardsfolder/f/flying_carpet.txt svneol=native#text/plain
 res/cardsfolder/f/flying_men.txt svneol=native#text/plain
 res/cardsfolder/f/fodder_cannon.txt svneol=native#text/plain
@@ -4010,6 +4013,7 @@ res/cardsfolder/g/glistening_oil.txt svneol=native#text/plain
 res/cardsfolder/g/glitterfang.txt svneol=native#text/plain
 res/cardsfolder/g/glittering_lion.txt -text
 res/cardsfolder/g/glittering_lynx.txt -text
+res/cardsfolder/g/glittering_wish.txt -text
 res/cardsfolder/g/global_ruin.txt svneol=native#text/plain
 res/cardsfolder/g/gloom.txt svneol=native#text/plain
 res/cardsfolder/g/gloom_surgeon.txt -text
@@ -6933,6 +6937,7 @@ res/cardsfolder/o/oakgnarl_warrior.txt svneol=native#text/plain
 res/cardsfolder/o/oasis.txt svneol=native#text/plain
 res/cardsfolder/o/oath_of_druids.txt svneol=native#text/plain
 res/cardsfolder/o/oath_of_ghouls.txt svneol=native#text/plain
+res/cardsfolder/o/oath_of_lim_dul.txt -text
 res/cardsfolder/o/oathsworn_giant.txt svneol=native#text/plain
 res/cardsfolder/o/ob_nixilis_the_fallen.txt svneol=native#text/plain
 res/cardsfolder/o/obelisk_of_alara.txt svneol=native#text/plain
@@ -10790,6 +10795,7 @@ res/cardsfolder/u/unhinge.txt svneol=native#text/plain
 res/cardsfolder/u/unholy_grotto.txt svneol=native#text/plain
 res/cardsfolder/u/unholy_strength.txt svneol=native#text/plain
 res/cardsfolder/u/unified_strike.txt -text
+res/cardsfolder/u/unified_will.txt -text
 res/cardsfolder/u/unifying_theory.txt svneol=native#text/plain
 res/cardsfolder/u/unlikely_alliance.txt svneol=native#text/plain
 res/cardsfolder/u/unliving_psychopath.txt svneol=native#text/plain
