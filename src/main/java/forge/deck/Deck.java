@@ -446,7 +446,7 @@ public class Deck extends DeckBase {
                     "Snow-Covered Swamp", "Relentless Rats");
 
             for (CardPrinted cp : tmp.toFlatList()) {
-                if (tmp.count(cp) > 4 && !cp.getName().equals("Plains") && !limitExceptions.contains(cp.getName())) {
+                if (tmp.count(cp) > 4 && !limitExceptions.contains(cp.getName())) {
                     if (!silent) {
                         StringBuilder errMsg = new StringBuilder("More than four \"");
                         errMsg.append(cp.getName());
