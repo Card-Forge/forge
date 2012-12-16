@@ -198,9 +198,9 @@ public class GameNew {
 
             while (!validDeck) {
                 newDeck = GuiChoose.getOrderChoices("Sideboard", "Main Deck", sideboardSize,
-                    DeckTempStorage.getHumanSideboard(), DeckTempStorage.getHumanMain(), null, true);
+                    deck.getSideboard().toForgeCardList(), deck.getMain().toForgeCardList(), null, true);
 
-                if (newDeck.size() >= deckMinSize) {
+                if (newDeck.size() >= deckMinSize || (gameType != GameType.Draft && gameType != GameType.Sealed)) {
                     validDeck = true;
                 } else {
                     StringBuilder errMsg = new StringBuilder("Too few cards in your main deck (minimum ");
