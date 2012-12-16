@@ -42,6 +42,7 @@ import forge.game.GameType;
 import forge.game.limited.ReadDraftRankings;
 import forge.util.FileSection;
 import forge.util.FileUtil;
+import java.util.Arrays;
 import java.util.TreeMap;
 import javax.swing.JOptionPane;
 
@@ -440,10 +441,12 @@ public class Deck extends DeckBase {
             DeckSection tmp = new DeckSection(this.getMain());
             tmp.addAll(this.getSideboard());
 
+            List<String> limitExceptions = Arrays.asList("Plains", "Mountain", "Swamp", "Forest", "Island",
+                    "Snow-Covered Plains", "Snow-Covered Forest", "Snow-Covered Mountain", "Snow-Covered Island",
+                    "Snow-Covered Swamp", "Relentless Rats");
+
             for (CardPrinted cp : tmp.toFlatList()) {
-                if (tmp.count(cp) > 4 && !cp.getName().equals("Plains") && !cp.getName().equals("Mountain") &&
-                    !cp.getName().equals("Swamp") && !cp.getName().equals("Forest") &&
-                    !cp.getName().equals("Island") && !cp.getName().equals("Relentless Rats")) {
+                if (tmp.count(cp) > 4 && !cp.getName().equals("Plains") && !limitExceptions.contains(cp.getName())) {
                     if (!silent) {
                         StringBuilder errMsg = new StringBuilder("More than four \"");
                         errMsg.append(cp.getName());
