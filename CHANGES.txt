@@ -66,6 +66,25 @@ Fixes/Features:
 - Sideboarding: minor TODO comment update.
 - Fixed Quest for the Holy Relic.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added a way to discard any number of cards via a two-panel interface to the AF Discard.
+- Added the keyword "If CARDNAME would be destroyed, regenerate it.".
+- Corrected the rarity of Last Rites.
+- Sideboarding: the drafting window will no longer show an option to switch between the main and the sideboard (only the drafted deck editor will).
+- The game will no longer complain about the RemAIDeck cards that are located in the AI sideboard (otherwise it polluted limited mode with a list of all cards that the AI drafted but did not put into its deck as if they were put into the deck).
+- A more appropriate measure for the AI complaints about non-AI friendly cards in sideboard: in Limited modes, the AI will currently not complain (because the non-AI friendly cards end up in the sideboard anyway), but in Constructed modes, the AI will complain if any unplayable cards are included in the sideboard.
+- Fixed Demonic Hordes.
+- Sideboarding: Fixed the interaction of sideboarding with flip cards which caused a crash if the card was flipped at the end of the game.
+- Sideboarding: Attempt at fixing interaction of sideboarding with the mulligan in rounds 2 and 3 (experimental, might not actually do the trick).
+- Fixed Jerrard of the Closed Fist.
+- Fixing Sleight of Hand in Quest mode not allowing a free mulligan
+- Sideboarding: Temporarily disabled main/sideboard persistence across duels in a match because the current implementation results in many difficult to fix bugs. Will hopefully reimplement this soon in another way.
+- Sideboarding: removed the old deck persistence system. Hopefully a new implementation will follow soon enough (as soon as I understand how it can be done or someone volunteers to help).
+- Sideboarding: during deck validation between the duels in a match, the deck will be considered valid if it's no less than either the format-enforced minimum or the minimum after the previous duel in a match (to account for the possibility of losing a card on ante).
+- Sideboarding: you can now put any number of snow-covered basic lands into your deck, per MTG rules.
+- A little correction to the previous commit.
+- Evoke is now flagged as non-basic cost.
+- Sideboarding: Attempt two at in-match deck configuration persistence. Currently still not 100% functional (Constructed and Limited seem to work fine, no cards disappearing between matches bugs and persistence works; in Quest, persistence also works but it lasts longer than the match). Ante seems to work correctly, at least in Quest mode.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -98,6 +117,20 @@ Chamber of Manipulation
 Laquatus's Creativity
 New Frontiers
 Rysorian Badger
+Last Rites
+Clergy of the Holy Nimbus
+Knight of the Holy Nimbus
+Baki's Curse
+Death Wish
+Flux
+Glittering Wish
+Oath of Lim-Dul
+Unified Will
+Rhystic Circle
+Rhystic Shield
+Rites of Refusal
+Rites of Spring
+Sacred Rites
 
 
 end
