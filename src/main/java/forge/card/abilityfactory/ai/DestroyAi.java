@@ -14,6 +14,8 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
+import forge.card.cost.CostPart;
+import forge.card.cost.CostSacrifice;
 import forge.card.cost.CostUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -75,6 +77,22 @@ public class DestroyAi extends SpellAiLogic {
                 list = CardLists.filter(list, new Predicate<Card>() {
                     @Override
                     public boolean apply(final Card c) {
+                        //Check for cards that can be sacrificed in response
+                        for (final SpellAbility ability : c.getAllSpellAbilities()) {
+                            if (ability.isAbility()) {
+                                final Cost cost = ability.getPayCosts();
+                                for (final CostPart part : cost.getCostParts()) {
+                                    if (!(part instanceof CostSacrifice)) {
+                                        continue;
+                                    }
+                                    CostSacrifice sacCost = (CostSacrifice) part;
+                                    if (sacCost.getThis() && ComputerUtil.canPayCost(ability, c.getController())) {
+                                        return false;
+                                    }
+                                }
+                            }
+                        }
+                        //Check for undying
                         return (!c.hasKeyword("Undying") || c.getCounters(CounterType.P1P1) > 0);
                     }
                 });
@@ -91,7 +109,6 @@ public class DestroyAi extends SpellAiLogic {
                     }
                 });
             }
-
 
             if (list.size() == 0) {
                 return false;
