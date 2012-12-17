@@ -141,7 +141,7 @@ public class GameNew {
         boolean useAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
 
         if (Singletons.getModel().getMatch().getPlayedGames().size() != 0) {
-            deck.allowDeckEdits();
+            deck.startDeckEdits();
             sideboardAndPrepareLibrary(player, deck, canRandomFoil, generator, useAnte);
         } else {
             deck.clearDeckEdits();

@@ -526,7 +526,7 @@ public class Deck extends DeckBase {
         }
     }
     
-    public void allowDeckEdits() {
+    public void startDeckEdits() {
         isEdited = true;
         if (mainEdited.countAll() == 0) {
             mainEdited.add(main.toFlatList());
