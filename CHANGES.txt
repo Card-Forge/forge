@@ -85,6 +85,16 @@ Fixes/Features:
 - Evoke is now flagged as non-basic cost.
 - Sideboarding: Attempt two at in-match deck configuration persistence. Currently still not 100% functional (Constructed and Limited seem to work fine, no cards disappearing between matches bugs and persistence works; in Quest, persistence also works but it lasts longer than the match). Ante seems to work correctly, at least in Quest mode.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Sideboarding: reverting the last implementation of persistence (again). Another dead idea.
+- Sideboarding: Quest mode now properly requires a sideboard of either 0 or 15 cards.
+- Sideboarding: Take three on trying to befriend sideboarding with ante and all the other stuff. Will either commit to this or revert later if it fails as well.
+- Sideboarding: an off-game sideboard editor button will no longer show for the Limited modes (doesn't make sense for them anyway).
+- Sideboarding: Correctly remove cards that are lost on ante in quest mode from all decks and trunk.
+- Allow a generic reward of 'n rares' (with no color specification) without crashing the game.
+- Sideboarding: removed a no-longer-relevant TODO comment.
+- Sideboarding: renamed a method to startDeckEdits for clarity.
+- Sideboarding: minor code cleanup.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -131,6 +141,8 @@ Rhystic Shield
 Rites of Refusal
 Rites of Spring
 Sacred Rites
+Ring of Ma'ruf
+Spawnsire of Ulamog
 
 
 end
