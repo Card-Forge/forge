@@ -1039,7 +1039,7 @@ public class CombatUtil {
         if (!attacked.canLoseLife()) {
             return 0;
         }
-        damage += CombatUtil.predictPowerBonusOfAttacker(attacker, null, combat);
+        damage += CombatUtil.predictPowerBonusOfAttacker(attacker, null, combat, false);
         if (!attacker.hasKeyword("Infect")) {
             sum = attacked.predictDamage(damage, attacker, true);
             if (attacker.hasKeyword("Double Strike")) {
@@ -1066,7 +1066,7 @@ public class CombatUtil {
     public static int poisonIfUnblocked(final Card attacker, final Player attacked) {
         int damage = attacker.getNetCombatDamage();
         int poison = 0;
-        damage += CombatUtil.predictPowerBonusOfAttacker(attacker, null, null);
+        damage += CombatUtil.predictPowerBonusOfAttacker(attacker, null, null, false);
         if (attacker.hasKeyword("Infect")) {
             poison += attacked.predictDamage(damage, attacker, true);
             if (attacker.hasKeyword("Double Strike")) {
@@ -1840,7 +1840,8 @@ public class CombatUtil {
      *            a {@link forge.game.phase.Combat} object.
      * @return a int.
      */
-    public static int predictPowerBonusOfAttacker(final Card attacker, final Card defender, final Combat combat) {
+    public static int predictPowerBonusOfAttacker(final Card attacker, final Card defender, final Combat combat
+            , boolean withoutAbilities) {
         int power = 0;
 
         power += attacker.getKeywordMagnitude("Bushido");
@@ -1953,6 +1954,28 @@ public class CombatUtil {
                 }
                 power += CardFactoryUtil.xCount(source, bonus);
 
+            }
+        }
+        if (withoutAbilities) {
+            return power;
+        }
+        for (SpellAbility ability : attacker.getAllSpellAbilities()) {
+            if (!(ability instanceof AbilityActivated) || ability.getPayCosts() == null) {
+                continue;
+            }
+            if (ability.getApi() != ApiType.Pump) {
+                continue;
+            }
+
+            if (!ability.hasParam("NumAtt")) {
+                continue;
+            }
+
+            if (!ability.getPayCosts().getTap() && ComputerUtil.canPayCost(ability, attacker.getController())) {
+                int pBonus = AbilityFactory.calculateAmount(ability.getSourceCard(), ability.getParam("NumAtt"), ability);
+                if (pBonus > 0) {
+                    power += pBonus;
+                }
             }
         }
         return power;
@@ -2263,7 +2286,7 @@ public class CombatUtil {
         int defenderDamage = defender.getNetAttack()
                 + CombatUtil.predictPowerBonusOfBlocker(attacker, defender, withoutAbilities);
         int attackerDamage = attacker.getNetAttack()
-                + CombatUtil.predictPowerBonusOfAttacker(attacker, defender, combat);
+                + CombatUtil.predictPowerBonusOfAttacker(attacker, defender, combat, withoutAbilities);
         if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.toughnessAssignsDamage)) {
             defenderDamage = defender.getNetDefense()
                     + CombatUtil.predictToughnessBonusOfBlocker(attacker, defender, withoutAbilities);
@@ -2411,7 +2434,7 @@ public class CombatUtil {
         int defenderDamage = defender.getNetAttack()
                 + CombatUtil.predictPowerBonusOfBlocker(attacker, defender, withoutAbilities);
         int attackerDamage = attacker.getNetAttack()
-                + CombatUtil.predictPowerBonusOfAttacker(attacker, defender, combat);
+                + CombatUtil.predictPowerBonusOfAttacker(attacker, defender, combat, withoutAbilities);
         if (Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.toughnessAssignsDamage)) {
             defenderDamage = defender.getNetDefense()
                     + CombatUtil.predictToughnessBonusOfBlocker(attacker, defender, withoutAbilities);
