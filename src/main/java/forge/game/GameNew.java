@@ -174,11 +174,6 @@ public class GameNew {
         if (player.isComputer()) {
             // Here is where the AI could sideboard, but needs to gather hints during the first game about what to SB
 
-            // TODO: also something needs to be done with the random card pictures / foiling code
-            //       which normally fires from prepareGameLibrary - the code below (for human)
-            //       is actually repetitive, it would be good to avoid code duplication both below
-            //       and potentially here in the AI sideboarding part.
-
             return false;
         } else {
             // Human Sideboarding
