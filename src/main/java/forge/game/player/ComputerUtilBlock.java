@@ -426,7 +426,7 @@ public class ComputerUtilBlock {
                     CardLists.sortAttack(firstStrikeBlockers);
                     for (final Card blocker : firstStrikeBlockers) {
                         final int damageNeeded = attacker.getKillDamage()
-                                + CombatUtil.predictToughnessBonusOfAttacker(attacker, blocker, combat);
+                                + CombatUtil.predictToughnessBonusOfAttacker(attacker, blocker, combat, false);
                         // if the total damage of the blockgang was not enough
                         // without but is enough with this blocker finish the
                         // blockgang
@@ -493,7 +493,7 @@ public class ComputerUtilBlock {
                         .getEnoughDamageToKill(attacker.getNetCombatDamage(), attacker, true);
                 final int addedValue = CardFactoryUtil.evaluateCreature(blocker);
                 final int damageNeeded = attacker.getKillDamage()
-                        + CombatUtil.predictToughnessBonusOfAttacker(attacker, blocker, combat);
+                        + CombatUtil.predictToughnessBonusOfAttacker(attacker, blocker, combat, false);
                 if ((damageNeeded > currentDamage || CombatUtil.needsBlockers(attacker) > blockGang.size())
                         && !(damageNeeded > currentDamage + additionalDamage)
                         // The attacker will be killed
@@ -666,7 +666,7 @@ public class ComputerUtilBlock {
             safeBlockers = ComputerUtilBlock.getSafeBlockers(attacker, blockers, combat);
             for (final Card blocker : safeBlockers) {
                 final int damageNeeded = attacker.getKillDamage()
-                        + CombatUtil.predictToughnessBonusOfAttacker(attacker, blocker, combat);
+                        + CombatUtil.predictToughnessBonusOfAttacker(attacker, blocker, combat, false);
                 // Add an additional blocker if the current blockers are not
                 // enough and the new one would deal additional damage
                 if ((damageNeeded > CombatUtil.totalDamageOfBlockers(attacker, combat.getBlockers(attacker)))
@@ -690,7 +690,7 @@ public class ComputerUtilBlock {
 
             for (final Card blocker : safeBlockers) {
                 final int damageNeeded = attacker.getKillDamage()
-                        + CombatUtil.predictToughnessBonusOfAttacker(attacker, blocker, combat);
+                        + CombatUtil.predictToughnessBonusOfAttacker(attacker, blocker, combat, false);
                 // Add an additional blocker if the current blockers are not
                 // enough and the new one would deal the remaining damage
                 final int currentDamage = CombatUtil.totalDamageOfBlockers(attacker, combat.getBlockers(attacker));

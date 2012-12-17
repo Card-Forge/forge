@@ -1996,7 +1996,8 @@ public class CombatUtil {
      *            a {@link forge.game.phase.Combat} object.
      * @return a int.
      */
-    public static int predictToughnessBonusOfAttacker(final Card attacker, final Card defender, final Combat combat) {
+    public static int predictToughnessBonusOfAttacker(final Card attacker, final Card defender, final Combat combat
+            , boolean withoutAbilities) {
         int toughness = 0;
 
         //check Exalted only for the first attacker
@@ -2119,6 +2120,25 @@ public class CombatUtil {
                     bonus = bonus.replace("TriggerCount$NumBlockers", "Number$1");
                 }
                 toughness += CardFactoryUtil.xCount(source, bonus);
+            }
+        }
+        if (withoutAbilities) {
+            return toughness;
+        }
+        for (SpellAbility ability : attacker.getAllSpellAbilities()) {
+            if (!(ability instanceof AbilityActivated) || ability.getPayCosts() == null) {
+                continue;
+            }
+
+            if (ability.getApi() != ApiType.Pump || !ability.hasParam("NumDef")) {
+                continue;
+            }
+
+            if (!ability.getPayCosts().getTap() && ComputerUtil.canPayCost(ability, attacker.getController())) {
+                int tBonus = AbilityFactory.calculateAmount(ability.getSourceCard(), ability.getParam("NumDef"), ability);
+                if (tBonus > 0) {
+                    toughness += tBonus;
+                }
             }
         }
         return toughness;
@@ -2291,7 +2311,7 @@ public class CombatUtil {
             defenderDamage = defender.getNetDefense()
                     + CombatUtil.predictToughnessBonusOfBlocker(attacker, defender, withoutAbilities);
             attackerDamage = attacker.getNetDefense()
-                    + CombatUtil.predictToughnessBonusOfAttacker(attacker, defender, combat);
+                    + CombatUtil.predictToughnessBonusOfAttacker(attacker, defender, combat, withoutAbilities);
         }
 
         int possibleDefenderPrevention = 0;
@@ -2308,7 +2328,7 @@ public class CombatUtil {
         final int defenderLife = defender.getKillDamage()
                 + CombatUtil.predictToughnessBonusOfBlocker(attacker, defender, withoutAbilities);
         final int attackerLife = attacker.getKillDamage()
-                + CombatUtil.predictToughnessBonusOfAttacker(attacker, defender, combat);
+                + CombatUtil.predictToughnessBonusOfAttacker(attacker, defender, combat, withoutAbilities);
 
         if (defender.hasKeyword("Double Strike")) {
             if (defenderDamage > 0 && (defender.hasKeyword("Deathtouch")
@@ -2439,7 +2459,7 @@ public class CombatUtil {
             defenderDamage = defender.getNetDefense()
                     + CombatUtil.predictToughnessBonusOfBlocker(attacker, defender, withoutAbilities);
             attackerDamage = attacker.getNetDefense()
-                    + CombatUtil.predictToughnessBonusOfAttacker(attacker, defender, combat);
+                    + CombatUtil.predictToughnessBonusOfAttacker(attacker, defender, combat, withoutAbilities);
         }
 
         int possibleDefenderPrevention = 0;
@@ -2464,7 +2484,7 @@ public class CombatUtil {
         final int defenderLife = defender.getKillDamage()
                 + CombatUtil.predictToughnessBonusOfBlocker(attacker, defender, withoutAbilities);
         final int attackerLife = attacker.getKillDamage()
-                + CombatUtil.predictToughnessBonusOfAttacker(attacker, defender, combat);
+                + CombatUtil.predictToughnessBonusOfAttacker(attacker, defender, combat, withoutAbilities);
 
         if (attacker.hasKeyword("Double Strike")) {
             if (attackerDamage > 0 && (attacker.hasKeyword("Deathtouch")
