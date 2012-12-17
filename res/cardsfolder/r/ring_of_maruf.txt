@@ -1,0 +1,15 @@
+Name:Ring of Ma'ruf
+ManaCost:5
+Types:Artifact
+Text:no text
+A:AB$ Effect | Cost$ 5 T Exile<1/CARDNAME> | Name$ Ring of Ma'ruf Effect | ReplacementEffects$ DrawReplace | SVars$ ExileEffect,TutorSideboard | SpellDescription$ The next time you would draw a card this turn, instead choose a card you own from outside the game and put it into your hand.
+SVar:DrawReplace:Event$ Draw | ValidPlayer$ You | ReplaceWith$ TutorSideboard | Description$ The next time you would draw a card this turn, instead choose a card you own from outside the game and put it into your hand.
+SVar:TutorSideboard:AB$ ChangeZone | Cost$ 0 | Origin$ Sideboard | Destination$ Hand | ChangeType$ Card.YouOwn | ChangeNum$ 1 | Hidden$ True | SubAbility$ ExileEffect
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ring_of_maruf.jpg
+SetInfo:ARN|Rare|http://magiccards.info/scans/en/an/82.jpg
+Oracle:{5}, {T}, Exile Ring of Ma'ruf: The next time you would draw a card this turn, instead choose a card you own from outside the game and put it into your hand.
+End

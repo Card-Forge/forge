@@ -2590,6 +2590,13 @@ public class CardFactoryUtil {
             }
         }
 
+        if (sq[0].contains("InYourSideboard")) {
+            if (!mh) {
+                someCards.addAll(cardController.getCardsIn(ZoneType.Sideboard));
+                mh = true;
+            }
+        }
+
         if (sq[0].contains("OppCtrl")) {
             if (!of) {
                 someCards.addAll(oppController.getCardsIn(ZoneType.Battlefield));

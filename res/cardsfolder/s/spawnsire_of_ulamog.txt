@@ -1,0 +1,15 @@
+Name:Spawnsire of Ulamog
+ManaCost:10
+Types:Creature Eldrazi
+Text:no text
+PT:7/11
+K:Annihilator 1
+A:AB$ Token | Cost$ 4 | TokenAmount$ 2 | TokenName$ Eldrazi Spawn | TokenTypes$ Creature,Eldrazi,Spawn | TokenOwner$ You | TokenColors$ Colorless | TokenPower$ 0 | TokenToughness$ 1 | TokenAbilities$ ABEldraziMana | SpellDescription$ Put two 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add 1 to your mana pool."
+SVar:ABEldraziMana:AB$ Mana | Cost$ Sac<1/CARDNAME> | Produced$ 1 | Amount$ 1 | SpellDescription$ Add 1 to your mana pool.
+A:AB$ Play | Cost$ 20 | Valid$ Card.Eldrazi+YouOwn | ValidZone$ Sideboard | WithoutManaCost$ True | Amount$ SpawnsireX | Controller$ You | Optional$ True | References$ SpawnsireX | SpellDescription$ Cast any number of Eldrazi cards you own from outside the game without paying their mana costs.
+SVar:SpawnsireX:Count$TypeInYourSideboard.Eldrazi
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/spawnsire_of_ulamog.jpg
+SetInfo:ROE|Rare|http://magiccards.info/scans/en/roe/11.jpg
+Oracle:Annihilator 1 (Whenever this creature attacks, defending player sacrifices a permanent.)\n{4}: Put two 0/1 colorless Eldrazi Spawn creature tokens onto the battlefield. They have "Sacrifice this creature: Add {1} to your mana pool."\n{20}: Cast any number of Eldrazi cards you own from outside the game without paying their mana costs.
+End

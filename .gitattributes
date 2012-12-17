@@ -8191,6 +8191,7 @@ res/cardsfolder/r/ring_of_evos_isle.txt -text
 res/cardsfolder/r/ring_of_gix.txt svneol=native#text/plain
 res/cardsfolder/r/ring_of_immortals.txt svneol=native#text/plain
 res/cardsfolder/r/ring_of_kalonia.txt -text
+res/cardsfolder/r/ring_of_maruf.txt -text
 res/cardsfolder/r/ring_of_renewal.txt svneol=native#text/plain
 res/cardsfolder/r/ring_of_thune.txt -text
 res/cardsfolder/r/ring_of_valkas.txt -text
@@ -9450,6 +9451,7 @@ res/cardsfolder/s/spawn_of_rix_maadi.txt -text
 res/cardsfolder/s/spawning_breath.txt svneol=native#text/plain
 res/cardsfolder/s/spawning_pit.txt svneol=native#text/plain
 res/cardsfolder/s/spawning_pool.txt svneol=native#text/plain
+res/cardsfolder/s/spawnsire_of_ulamog.txt -text
 res/cardsfolder/s/spawnwrithe.txt svneol=native#text/plain
 res/cardsfolder/s/spearbreaker_behemoth.txt svneol=native#text/plain
 res/cardsfolder/s/specters_shroud.txt svneol=native#text/plain
