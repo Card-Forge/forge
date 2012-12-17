@@ -140,7 +140,7 @@ public class GameNew {
         final Random generator = MyRandom.getRandom();
         boolean useAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
 
-        if (Singletons.getModel().getMatch().getPlayedGames().size() != 0) {
+        if (!Singletons.getModel().getMatch().getPlayedGames().isEmpty()) {
             deck.startDeckEdits();
             sideboardAndPrepareLibrary(player, deck, canRandomFoil, generator, useAnte);
         } else {
