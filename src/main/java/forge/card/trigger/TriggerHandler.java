@@ -267,9 +267,9 @@ public class TriggerHandler {
         if (this.suppressedModes.contains(mode)) {
             return;
         }
-        
+
         final GameState game = Singletons.getModel().getGame();
-        
+
         runWaitingTrigger(new TriggerWaiting(mode, runParams));
         /* Temporarily commented out while timing kinks with some other cards are worked out
         if (game.getStack().isFrozen()) {
@@ -277,10 +277,10 @@ public class TriggerHandler {
         } else {
             runWaitingTrigger(new TriggerWaiting(mode, runParams));
         }
-        
+
         */
     }
-        
+
     public final boolean runWaitingTriggers() {
         ArrayList<TriggerWaiting> waiting = new ArrayList<TriggerWaiting>(waitingTriggers);
         waitingTriggers.clear();
@@ -288,10 +288,10 @@ public class TriggerHandler {
         for (TriggerWaiting wt : waiting) {
             runWaitingTrigger(wt);
         }
-        
+
         return haveWaiting;
     }
-    
+
     public final void runWaitingTrigger(TriggerWaiting wt) {
         final TriggerType mode = wt.getMode();
         final Map<String, Object> runParams = wt.getParams();

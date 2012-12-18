@@ -133,7 +133,7 @@ public abstract class PumpAiBase extends SpellAiLogic {
             if (card.getShield() > 0) {
                 return true;
             }
-            if (card.hasKeyword("If CARDNAME would be destroyed, regenerate it.") 
+            if (card.hasKeyword("If CARDNAME would be destroyed, regenerate it.")
                     && (card.isBlocked() || card.isBlocking())) {
                 return true;
             }

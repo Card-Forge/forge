@@ -322,7 +322,7 @@ public class Cost {
             final String description = splitStr.length > 2 ? splitStr[2] : null;
             this.costParts.add(new CostExile(splitStr[0], splitStr[1], description, ZoneType.Library));
         }
-        
+
         while (parse.contains(Cost.EXILE_SAME_GRAVE_STR)) {
             final String[] splitStr = this.abCostParse(parse, Cost.EXILE_SAME_GRAVE_STR, 3);
             parse = this.abUpdateParse(parse, Cost.EXILE_SAME_GRAVE_STR);

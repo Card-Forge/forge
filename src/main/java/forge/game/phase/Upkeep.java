@@ -618,11 +618,11 @@ public class Upkeep extends Phase {
         for (int i = 0; i < cards.size(); i++) {
 
             final Card c = cards.get(i);
-            
+
             final Ability cost = new Ability(c, "B B B") {
                 @Override
                 public void resolve() {
-                } 
+                }
             }; // end cost ability
 
             final Ability noPay = new Ability(c, "0") {
@@ -634,7 +634,7 @@ public class Upkeep extends Phase {
                     if (c.getController().isComputer()) {
                         if (playerLand.size() > 0) {
                             final Card target = GuiChoose.one("Select a card to sacrifice", playerLand);
-                            
+
                             Singletons.getModel().getGame().getAction().sacrifice(target, null);
                         }
                     } else {

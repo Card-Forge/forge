@@ -52,8 +52,8 @@ public class DiscardEffect extends RevealEffectBase {
                 sb.append("All");
             } else if (sa.hasParam("AnyNumber")) {
                 sb.append("any number");
-            } else if (sa.hasParam("NumCards") && sa.getParam("NumCards").equals("X") && 
-                    sa.getSVar("X").equals("Remembered$Amount")) {
+            } else if (sa.hasParam("NumCards") && sa.getParam("NumCards").equals("X")
+                    && sa.getSVar("X").equals("Remembered$Amount")) {
                 sb.append("that many");
             } else {
                 sb.append(numCards);

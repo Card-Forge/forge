@@ -162,11 +162,12 @@ public class Deck extends DeckBase {
         result.sideboard.addAll(this.sideboard);
         result.avatar = this.avatar;
         result.commander = this.commander;
-        
+
         //This if clause is really only necessary when cloning decks that were
         //around before schemes.
-        if(this.schemes != null)
+        if (this.schemes != null) {
             result.schemes.addAll(this.schemes);
+        }
     }
 
     /*
@@ -369,7 +370,7 @@ public class Deck extends DeckBase {
     public boolean meetsGameTypeRequirements(GameType type) {
         return meetsGameTypeRequirements(type, true);
     }
-    
+
     public boolean meetsGameTypeRequirements(GameType type, boolean silent) {
         int deckSize = getMain().countAll();
         int deckDistinct = getMain().countDistinct();
@@ -380,12 +381,12 @@ public class Deck extends DeckBase {
                 StringBuilder errMsg = new StringBuilder("Current deck doesn't meet the requirements (minimum ");
                 errMsg.append(type.getDeckMinimum());
                 errMsg.append(" cards), please correct or choose another deck.");
-                
+
                 JOptionPane.showMessageDialog(null, errMsg.toString(), "Invalid deck", JOptionPane.ERROR_MESSAGE);
             }
             return false;
         }
-            
+
         if ((max != null && deckSize > max) || (type.isSingleton() && deckDistinct != deckSize)) {
             return false;
         }
@@ -437,12 +438,12 @@ public class Deck extends DeckBase {
                 }
             }
         }
-        else if (type == GameType.Constructed || type == GameType.Quest)  { 
+        else if (type == GameType.Constructed || type == GameType.Quest)  {
             //Must contain no more than 4 of the same card
             //shared among the main deck and sideboard, except
             //basic lands and Relentless Rats
             TreeMap<CardPrinted, Integer> cardCounts = new TreeMap<CardPrinted, Integer>();
-            
+
             DeckSection tmp = new DeckSection(this.getMain());
             tmp.addAll(this.getSideboard());
 
@@ -456,7 +457,7 @@ public class Deck extends DeckBase {
                         StringBuilder errMsg = new StringBuilder("More than four \"");
                         errMsg.append(cp.getName());
                         errMsg.append("\" cards are placed in your deck, please correct or choose another deck.");
-                        
+
                         JOptionPane.showMessageDialog(null, errMsg.toString(), "Invalid deck", JOptionPane.ERROR_MESSAGE);
                     }
                     return false;
@@ -471,7 +472,7 @@ public class Deck extends DeckBase {
                 }
                 return false;
             }
-            
+
         }
 
         return true;
@@ -525,7 +526,7 @@ public class Deck extends DeckBase {
             sideboardEdited = new DeckSection();
         }
     }
-    
+
     public void startDeckEdits() {
         isEdited = true;
         if (mainEdited.countAll() == 0) {

@@ -84,7 +84,7 @@ public class DiscardAi extends SpellAiLogic {
         }
 
         // TODO: Implement support for Discard AI for cards with AnyNumber set to true.
-        
+
         // Don't use draw abilities before main 2 if possible
         if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.MAIN2)
                 && !sa.hasParam("ActivationPhases")) {

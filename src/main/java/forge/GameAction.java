@@ -1527,7 +1527,7 @@ public class GameAction {
             return false;
         }
 
-        if (c.canBeShielded() 
+        if (c.canBeShielded()
                 && (c.getShield() > 0 || c.hasKeyword("If CARDNAME would be destroyed, regenerate it."))) {
             c.subtractShield();
             c.setDamage(0);

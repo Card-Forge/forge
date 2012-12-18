@@ -482,8 +482,8 @@ public class SpellPermanent extends Spell {
             }
             final SpellAbility exSA = af.getAbility(card.getSVar(execute), card);
 
-            if (api != null) { 
-                if(exSA.getApi() != api) {
+            if (api != null) {
+                if (exSA.getApi() != api) {
                     continue;
                 } else {
                     rightapi = true;

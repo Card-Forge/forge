@@ -656,6 +656,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.imprintedCards.addAll(list);
     }
 
+    /**
+     * TODO: Write javadoc for this method.
+     */
     public final void removeImprinted(final Object o) {
         this.imprintedCards.remove(o);
     }

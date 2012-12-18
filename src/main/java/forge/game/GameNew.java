@@ -47,8 +47,8 @@ import forge.util.MyRandom;
  * All of these methods can and should be static.
  */
 public class GameNew {
-    private static void prepareGameLibrary(Player player, Deck deck, Map<Player, List<String>> removedAnteCards, List<String> rAICards, boolean canRandomFoil, Random generator, boolean useAnte) { 
-    
+    private static void prepareGameLibrary(Player player, Deck deck, Map<Player, List<String>> removedAnteCards, List<String> rAICards, boolean canRandomFoil, Random generator, boolean useAnte) {
+
         PlayerZone library = player.getZone(ZoneType.Library);
         PlayerZone sideboard = player.getZone(ZoneType.Sideboard);
         for (final Entry<CardPrinted, Integer> stackOfCards : deck.getMain()) {
@@ -119,14 +119,14 @@ public class GameNew {
                     sideboard.add(card);
                 }
 
-                // TODO: Enable the code below for Limited modes only when the AI can play all the 
+                // TODO: Enable the code below for Limited modes only when the AI can play all the
                 // cards in the sideboard (probably means all cards in Forge because in Limited mode,
                 // any cards can end up in the AI sideboard?)
-                
+
                 // mark card as difficult for AI to play
                 if (player.isComputer() && card.getSVar("RemAIDeck").equals("True") && !rAICards.contains(card.getName())) {
-                    if (Singletons.getModel().getMatch().getGameType() != GameType.Draft && 
-                        Singletons.getModel().getMatch().getGameType() != GameType.Sealed) {
+                    if (Singletons.getModel().getMatch().getGameType() != GameType.Draft
+                            && Singletons.getModel().getMatch().getGameType() != GameType.Sealed) {
                         rAICards.add(card.getName());
                         // get card picture so that it is in the image cache
                         // ImageCache.getImage(card);
@@ -162,15 +162,15 @@ public class GameNew {
     private static boolean sideboardAndPrepareLibrary(final Player player, final Deck deck, boolean canRandomFoil, Random generator, boolean useAnte) {
         final GameType gameType = Singletons.getModel().getMatch().getGameType();
         boolean hasSideboard = (deck.getSideboard().countAll() > 0);
-       
+
         PlayerZone library = player.getZone(ZoneType.Library);
         DeckSection sideboard = deck.getSideboard();
         int sideboardSize = (gameType == GameType.Draft || gameType == GameType.Sealed) ? -1 : sideboard.countAll();
-       
+
         if (!hasSideboard) {
             return false;
         }
-       
+
         if (player.isComputer()) {
             // Here is where the AI could sideboard, but needs to gather hints during the first game about what to SB
 
@@ -193,7 +193,7 @@ public class GameNew {
                     JOptionPane.showMessageDialog(null, errMsg.toString(), "Invalid deck", JOptionPane.ERROR_MESSAGE);
                 }
             }
-           
+
         }
         return true;
     }
@@ -243,17 +243,17 @@ public class GameNew {
             if (inCommand != null) {
                 for (final Card c : inCommand) {
                     c.setOwner(player);
-                    
+
                     com.add(c, false);
                     c.refreshUniqueNumber();
                 }
             }
-            
+
             Iterable<Card> schemes = p.getValue().getSchemes();
-            if(schemes != null) {
+            if (schemes != null) {
                 player.setSchemeDeck(schemes);
             }
-            
+
 
             prepareSingleLibrary(player, p.getValue().getDeck(), removedAnteCards, rAICards, canRandomFoil);
             player.updateObservers();

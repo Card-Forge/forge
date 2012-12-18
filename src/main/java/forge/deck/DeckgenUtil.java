@@ -248,11 +248,13 @@ public class DeckgenUtil {
         final String dName = deck.getName();
 
         deckList.append(dName == null ? "" : dName + nl + nl);
-        
-        if(deck.getAvatar() != null)
+
+        if (deck.getAvatar() != null) {
             deckList.append("Avatar: " + deck.getAvatar().getName() + nl + nl);
-        if(deck.getCommander() != null)
+        }
+        if (deck.getCommander() != null) {
             deckList.append("Commander: " + deck.getCommander().getName() + nl + nl);
+        }
 
         for (final Entry<String, Integer> ev : deckMap.entrySet()) {
             deckList.append(ev.getValue() + " x " + ev.getKey() + nl);
@@ -307,32 +309,31 @@ public class DeckgenUtil {
         }
         return result;
     }
-    
+
     public static Deck generateSchemeDeck() {
         Deck res = new Deck();
-        
-        Iterable<CardPrinted> allSchemes = Iterables.filter(CardDb.instance().getAllNonTraditionalCards(),CardPrinted.Predicates.type("Scheme"));
-        
-        for(int i=0;i<20;i++) {
+
+        Iterable<CardPrinted> allSchemes = Iterables.filter(CardDb.instance().getAllNonTraditionalCards(), CardPrinted.Predicates.type("Scheme"));
+
+        for (int i = 0; i < 20; i++) {
             CardPrinted cp = Iterables.get(allSchemes, MyRandom.getRandom().nextInt(Iterables.size(allSchemes)));
             int appearances = 0;
-            for(CardPrinted added : res.getSchemes().toFlatList()) {
-                if(added.getName().equals(cp.getName()))
-                {
+            for (CardPrinted added : res.getSchemes().toFlatList()) {
+                if (added.getName().equals(cp.getName())) {
+
                     appearances++;
                 }
             }
-            
-            if(appearances < 2)
-            {
+
+            if (appearances < 2) {
+
                 res.getSchemes().add(cp);
-            }
-            else
-            {
+            } else {
+
                 i--;
             }
         }
-        
+
         return res;
     }
 }

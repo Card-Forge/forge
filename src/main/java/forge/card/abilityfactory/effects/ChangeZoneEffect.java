@@ -419,7 +419,7 @@ public class ChangeZoneEffect extends SpellEffect {
                                         tgtC.clearUnEnchantCommand();
                                     }
                                     tgtC.enchantEntity(attachedTo);
-                                } else {//Equipment
+                                } else { //Equipment
                                     if (tgtC.isEquipping()) {
                                         final Card oldEquiped = tgtC.getEquippingCard();
                                         tgtC.removeEquipping(oldEquiped);
@@ -689,7 +689,7 @@ public class ChangeZoneEffect extends SpellEffect {
                                     c.clearUnEnchantCommand();
                                 }
                                 c.enchantEntity(attachedTo);
-                            } else {//Equipment
+                            } else { //Equipment
                                 if (c.isEquipping()) {
                                     final Card oldEquiped = c.getEquippingCard();
                                     c.removeEquipping(oldEquiped);
