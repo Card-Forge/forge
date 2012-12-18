@@ -119,8 +119,9 @@ public class QuestWinLose extends ControlWinLose {
         qData.getCards().resetNewList();
         QuestController qc = Singletons.getModel().getQuest();
 
-        if (match.isMatchOver())
+        if (match.isMatchOver()) {
             restoreQuestDeckEdits();
+        }
 
         LobbyPlayer questPlayer = Singletons.getControl().getLobby().getQuestPlayer();
         if (isAnte) {
