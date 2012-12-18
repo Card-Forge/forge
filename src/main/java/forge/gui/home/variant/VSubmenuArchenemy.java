@@ -133,21 +133,21 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
             deckChoosers.add(tempChooser);
 
             tempPanel.add(tempChooser, "span 1 2, w 44%!, gap 0 0 20px 20px, growy, pushy, wrap");
-            if(i == 0)
-            {
+            if (i == 0) {
+
                 tempPanel.add(new FLabel.Builder().text("Select Scheme deck:").build(), "flowy");
-                    
+
                 Vector<Object> listData = new Vector<Object>();
                 listData.add("Random");
                 listData.add("Generate");
-                for(Deck schemeDeck : Singletons.getModel().getDecks().getScheme()) {
+                for (Deck schemeDeck : Singletons.getModel().getDecks().getScheme()) {
                     listData.add(schemeDeck);
                 }
-                
+
                 archenemySchemes.setListData(listData);
                 archenemySchemes.setSelectedIndex(0);
                 archenemySchemes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-                
+
                 JScrollPane scrSchemes = new FScrollPane(archenemySchemes, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
                 tempPanel.add(scrSchemes, "h 90%!,wrap");
             }

@@ -326,7 +326,7 @@ public final class EditorTableView<T extends InventoryItem> {
 
     /**
      * 
-     * setWantUnique
+     * setWantUnique.
      * 
      * @param unique if true, the editor will be set to the "unique card names only" mode.
      */
@@ -336,7 +336,7 @@ public final class EditorTableView<T extends InventoryItem> {
 
     /**
      * 
-     * getAlwaysNonUnique
+     * getAlwaysNonUnique.
      * 
      * @return if ture, this editor must always show non-unique cards (e.g. quest editor).
      */
@@ -346,9 +346,9 @@ public final class EditorTableView<T extends InventoryItem> {
 
     /**
      * 
-     * setAlwaysNonUnique
+     * setAlwaysNonUnique.
      * 
-     * @param nonUniqueOnly if true, this editor must always show non-unique cards (e.g. quest editor). 
+     * @param nonUniqueOnly if true, this editor must always show non-unique cards (e.g. quest editor).
      */
     public void setAlwaysNonUnique(boolean nonUniqueOnly) {
         this.alwaysNonUnique = nonUniqueOnly;

@@ -108,7 +108,7 @@ public class SEditorIO {
      * Saves the current deck, with various prompts depending on the
      * current save environment.
      * 
-     * @param limitedDeckMode if true, the editor is in limited deck mode, 
+     * @param limitedDeckMode if true, the editor is in limited deck mode,
      * so the overwrite prompt should be adjusted accordingly.
      * 
      * @return boolean, true if success
@@ -129,8 +129,8 @@ public class SEditorIO {
         // Confirm if overwrite
         else if (controller.fileExists(name)) {
             final int m = JOptionPane.showConfirmDialog(null,
-                    limitedDeckMode ? "Would you like to save changes to your deck?" : 
-                    "There is already a deck named '" + name + "'. Overwrite?",
+                    limitedDeckMode ? "Would you like to save changes to your deck?"
+                    : "There is already a deck named '" + name + "'. Overwrite?",
                     limitedDeckMode ? "Save changes?" : "Overwrite Deck?",
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE);

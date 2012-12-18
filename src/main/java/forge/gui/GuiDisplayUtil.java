@@ -796,12 +796,12 @@ public final class GuiDisplayUtil {
             if (choices.isEmpty()) {
                 return; // when would it happen?
             }
-    
+
             final SpellAbility sa = choices.size() == 1 ? choices.get(0) : GuiChoose.oneOrNone("Choose", choices);
             if (sa == null) {
                 return; // happens if cancelled
             }
-    
+
             sa.setActivatingPlayer(p);
             game.getAction().moveToHand(forgeCard); // this is really needed
             game.getAction().playSpellAbilityForFree(sa);

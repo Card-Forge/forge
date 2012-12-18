@@ -237,9 +237,9 @@ public class GuiChoose {
 
         if (sideboardingMode) {
             persistentDeck.getMain().clear();
-            persistentDeck.getMain().add((List<Card>)dual.getOrderedList());
+            persistentDeck.getMain().add((List<Card>) dual.getOrderedList());
             persistentDeck.getSideboard().clear();
-            persistentDeck.getSideboard().add((List<Card>)dual.getRemainingSourceList());
+            persistentDeck.getSideboard().add((List<Card>) dual.getRemainingSourceList());
         }
 
         dialog.dispose();

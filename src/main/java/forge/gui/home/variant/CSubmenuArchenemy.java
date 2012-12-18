@@ -57,7 +57,7 @@ public enum CSubmenuArchenemy implements ICDoc {
      */
     @Override
     public void initialize() {
-        
+
         VSubmenuArchenemy.SINGLETON_INSTANCE.getLblEditor().setCommand(new Command() {
             @Override
             public void execute() {
@@ -65,7 +65,7 @@ public enum CSubmenuArchenemy implements ICDoc {
                 FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_CONSTRUCTED);
             }
         });
-        
+
         final ForgePreferences prefs = Singletons.getModel().getPreferences();
         for (FDeckChooser fdc : view.getDeckChoosers()) {
             fdc.initialize();
@@ -155,22 +155,21 @@ public enum CSubmenuArchenemy implements ICDoc {
                     schemes = playerDecks.get(0).getSchemes().toFlatList();
                     System.out.println(schemes.toString());
                     usedDefaults = true;
-                    
+
                 } else {
 
                     if (obj instanceof String) {
-                        String sel = (String)obj;
-                        if(sel.equals("Random"))
-                        {
+                        String sel = (String) obj;
+                        if (sel.equals("Random")) {
+
                             schemes = Iterables.get(view.getAllSchemeDecks(), rnd.nextInt(Iterables.size(view.getAllSchemeDecks()))).getSchemes().toFlatList();
-                        }
-                        else
-                        {
+                        } else {
+
                             //Generate
                             schemes = DeckgenUtil.generateSchemeDeck().getSchemes().toFlatList();
                         }
                     } else {
-                        schemes = ((Deck)obj).getSchemes().toFlatList();
+                        schemes = ((Deck) obj).getSchemes().toFlatList();
                     }
                 }
                 if (schemes == null) {
@@ -189,13 +188,12 @@ public enum CSubmenuArchenemy implements ICDoc {
                 for (int i = 0; i < view.getNumPlayers(); i++) {
                     LobbyPlayer player = lobby.findLocalPlayer(i == 0 ? PlayerType.HUMAN : PlayerType.COMPUTER);
 
-                    if(i == 0)
-                    {
+                    if (i == 0) {
+
                         helper.addArchenemy(player, playerDecks.get(i), schemes);
-                        helper.getPlayerMap().get(player).setStartingLife(10 + (10*(view.getNumPlayers()-1)));
-                    }
-                    else
-                    {
+                        helper.getPlayerMap().get(player).setStartingLife(10 + (10 * (view.getNumPlayers() - 1)));
+                    } else {
+
                         helper.addPlayer(player, playerDecks.get(i));
                     }
                 }

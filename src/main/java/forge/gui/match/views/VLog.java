@@ -122,7 +122,7 @@ public enum VLog implements IVDoc<CLog> {
 
         pnl.removeAll();
 
-        for (int i = size-1; i >= 0; i--) {
+        for (int i = size - 1; i >= 0; i--) {
             JTextArea tar = new JTextArea(data.get(i).getMessage());
 
             if (i % 2 == 1) { tar.setOpaque(false); }

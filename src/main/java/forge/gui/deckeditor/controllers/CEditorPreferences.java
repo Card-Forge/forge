@@ -95,7 +95,7 @@ public enum CEditorPreferences implements ICDoc {
         if (!SEditorIO.getPref(EditorPreference.stats_catalog)) {
             VCardCatalog.SINGLETON_INSTANCE.getPnlStats().setVisible(false);
         }
-        
+
         boolean wantUnique = SEditorIO.getPref(EditorPreference.display_unique_only);
         ACEditorBase<?, ?> curEditor = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
         if (curEditor != null) {

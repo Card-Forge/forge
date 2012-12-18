@@ -121,7 +121,7 @@ public final class CEditorScheme extends ACEditorBase<CardPrinted, Deck> {
      */
     @Override
     public void resetTables() {
-        this.getTableCatalog().setDeck(ItemPool.createFrom(Iterables.filter(CardDb.instance().getAllNonTraditionalCards(),CardPrinted.Predicates.type("Scheme")), CardPrinted.class));
+        this.getTableCatalog().setDeck(ItemPool.createFrom(Iterables.filter(CardDb.instance().getAllNonTraditionalCards(), CardPrinted.Predicates.type("Scheme")), CardPrinted.class));
         this.getTableDeck().setDeck(this.controller.getModel().getSchemes());
     }
 

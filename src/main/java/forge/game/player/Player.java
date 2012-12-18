@@ -142,7 +142,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     private final Map<ZoneType, PlayerZone> zones = new EnumMap<ZoneType, PlayerZone>(ZoneType.class);
 
     private PlayerStatistics stats = new PlayerStatistics();
-    
+
     private final List<Card> schemeDeck = new ArrayList<Card>();
     private Card activeScheme = null;
 
@@ -209,31 +209,31 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     //@Deprecated
     public abstract boolean isComputer();
     public abstract PlayerType getType();
-    
-    public List<Card> getSchemeDeck()
-    {
+
+    public List<Card> getSchemeDeck() {
+
         return schemeDeck;
     }
-    
-    public void setSchemeDeck(Iterable<Card> sd)
-    {
+
+    public void setSchemeDeck(Iterable<Card> sd) {
+
         schemeDeck.clear();
-        for(Card c : sd)
-        {
+        for (Card c : sd) {
+
             schemeDeck.add(c);
             c.setOwner(this);
         }
         CardLists.shuffle(schemeDeck);
     }
-    
-    public boolean isArchenemy()
-    {
+
+    public boolean isArchenemy() {
+
         //Only the archenemy has schemes.
         return schemeDeck.size() > 0;
     }
-    
-    public void setSchemeInMotion()
-    {
+
+    public void setSchemeInMotion() {
+
         // Replacement effects
         final HashMap<String, Object> repRunParams = new HashMap<String, Object>();
         repRunParams.put("Event", "SetInMotion");
@@ -242,17 +242,17 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         if (game.getReplacementHandler().run(repRunParams) != ReplacementResult.NotReplaced) {
             return;
         }
-        
+
         game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-       
+
         activeScheme = schemeDeck.get(0);
-        
+
         schemeDeck.remove(0);
-        
+
         this.getZone(ZoneType.Command).add(activeScheme);
-        
+
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-        
+
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Scheme", activeScheme);
@@ -601,7 +601,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         } else {
             // Worship does not reduce the damage dealt but changes the effect
             // of the damage
-            if (this.hasKeyword("Damage that would reduce your life total to less than 1 reduces it to 1 instead.") 
+            if (this.hasKeyword("Damage that would reduce your life total to less than 1 reduces it to 1 instead.")
                     && this.life <= damageToDo) {
                 this.loseLife(Math.min(damageToDo, this.life - 1));
             } else {

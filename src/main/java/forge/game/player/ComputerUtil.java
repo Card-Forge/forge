@@ -514,7 +514,7 @@ public class ComputerUtil {
                             extraManaNeeded += Integer.parseInt(snem);
                         } catch (final NumberFormatException e) {
                             System.out.println("wrong SpellsNeedExtraMana SVar format on " + c);
-                        } 
+                        }
                     }
                 }
             }

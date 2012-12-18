@@ -66,7 +66,7 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
         super();
 
         boolean wantUnique = SEditorIO.getPref(EditorPreference.display_unique_only);
-        
+
         final EditorTableView<CardPrinted> tblCatalog = new EditorTableView<CardPrinted>(wantUnique, CardPrinted.class);
         final EditorTableView<CardPrinted> tblDeck = new EditorTableView<CardPrinted>(wantUnique, CardPrinted.class);
 
@@ -154,7 +154,7 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
         final List<TableColumnInfo<InventoryItem>> lstCatalogCols = SColumnUtil.getCatalogDefaultColumns();
 
         if (isSideboarding) {
-            
+
             this.getTableCatalog().setAvailableColumns(lstCatalogCols);
             this.getTableCatalog().setDeck(this.controller.getModel().getMain());
             this.getTableDeck().setDeck(this.controller.getModel().getSideboard());

@@ -65,7 +65,7 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
     private JCheckBox chbCatalogStats = new FCheckBox("Show stats in card catalog");
 
     private JCheckBox chbCardDisplayUnique = new FCheckBox("Show unique cards only (only affects Constructed)");
-    
+
     private JPanel pnl = new JPanel(new MigLayout("insets 0, gap 0, wrap 2, ax center"));
     private JScrollPane scroller = new JScrollPane(pnl);
 
@@ -122,7 +122,7 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
         pnl.add(chbDeckPower, constraints);
         pnl.add(chbDeckToughness, constraints);
         pnl.add(chbDeckAI, constraints + ", wrap");
-        
+
         pnl.add(lblDisplay, constraints + ", span 2 1");
         pnl.add(chbCardDisplayUnique, "h 25px!, gap 5px 5px 5px 5px, ax center, span 2 1");
 

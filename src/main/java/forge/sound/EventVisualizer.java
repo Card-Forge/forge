@@ -112,8 +112,9 @@ public class EventVisualizer {
         if (sa.isSpell()) {
             // if there's a specific effect for this particular card, play it and
             // we're done.
-            if (getSpecificCardEffect(source))
+            if (getSpecificCardEffect(source)) {
                 return SoundEffectType.ScriptedEffect;
+            }
 
             if (source.isCreature() && source.isArtifact()) {
                 return SoundEffectType.ArtifactCreature;
@@ -159,8 +160,9 @@ public class EventVisualizer {
 
         // if there's a specific effect for this particular card, play it and
         // we're done.
-        if (getSpecificCardEffect(land))
+        if (getSpecificCardEffect(land)) {
             return SoundEffectType.ScriptedEffect;
+        }
 
         final List<SpellAbility> manaProduced = land.getManaAbility();
 
@@ -214,7 +216,7 @@ public class EventVisualizer {
      */
     public String getScriptedSoundEffectName(Event evt) {
         Card c = null;
-        
+
         if (evt instanceof SpellResolvedEvent) {
             c = ((SpellResolvedEvent) evt).Source;
         } else if (evt instanceof LandPlayedEvent) {
