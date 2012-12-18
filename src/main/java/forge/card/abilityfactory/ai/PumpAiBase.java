@@ -163,9 +163,9 @@ public abstract class PumpAiBase extends SpellAiLogic {
         }
 
         final boolean evasive = (keyword.endsWith("Unblockable") || keyword.endsWith("Fear")
-                || keyword.endsWith("Intimidate") || keyword.endsWith("Shadow"));
-        final boolean combatRelevant = (keyword.endsWith("First Strike")
-                || keyword.contains("Bushido"));
+                || keyword.endsWith("Intimidate") || keyword.endsWith("Shadow")
+                || keyword.contains("CantBeBlockedBy"));
+        final boolean combatRelevant = (keyword.endsWith("First Strike") || keyword.contains("Bushido"));
         // give evasive keywords to creatures that can or do attack
         if (evasive) {
             if (ph.isPlayerTurn(opp) || !(CombatUtil.canAttack(card, opp) || card.isAttacking())
