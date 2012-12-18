@@ -106,6 +106,16 @@ Fixes/Features:
 - Sideboarding: renamed a method to startDeckEdits for clarity.
 - Sideboarding: minor code cleanup.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added a fluff piece to the changes.txt file.
+- The AI will no longer try to destroy fetchlands.
+- The AI will now attack with Frozen Shade.
+- More combat AI improvements (predicting pump abilities).
+- Sideboarding: Correctly restore the initial state of quest decks after a match.
+- Sideboarding: A more appropriate location for the quest deck reinitialization, now interacts correctly with winning/losing cards on ante.
+- Add the regular quest environment as a special index 0 world.
+- Added code for CantBeBlockedBy keywords to isUsefulPumpKeyword.
+- Sideboarding: A little code style-related change.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -154,6 +164,10 @@ Rites of Spring
 Sacred Rites
 Ring of Ma'ruf
 Spawnsire of Ulamog
+Rime Transfusion
+Colfenor's Plans
+Razorfin Abolisher
+Rites of Initiation
 
 
 end
