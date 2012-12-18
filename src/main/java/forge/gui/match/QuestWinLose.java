@@ -118,6 +118,10 @@ public class QuestWinLose extends ControlWinLose {
         this.getView().getBtnRestart().setVisible(false);
         qData.getCards().resetNewList();
         QuestController qc = Singletons.getModel().getQuest();
+
+        if (match.isMatchOver())
+            restoreQuestDeckEdits();
+
         LobbyPlayer questPlayer = Singletons.getControl().getLobby().getQuestPlayer();
         if (isAnte) {
             //do per-game actions
@@ -158,7 +162,6 @@ public class QuestWinLose extends ControlWinLose {
             } else {
                 this.getView().getBtnQuit().setText("OK");
             }
-            restoreQuestDeckEdits();
         }
 
         // TODO: We don't have a enum for difficulty?
