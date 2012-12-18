@@ -1812,6 +1812,7 @@ res/cardsfolder/c/cold_eyed_selkie.txt svneol=native#text/plain
 res/cardsfolder/c/cold_snap.txt -text
 res/cardsfolder/c/cold_storage.txt -text
 res/cardsfolder/c/coldsteel_heart.txt -text
+res/cardsfolder/c/colfenors_plans.txt -text
 res/cardsfolder/c/colfenors_urn.txt -text
 res/cardsfolder/c/collapsing_borders.txt -text
 res/cardsfolder/c/collective_blessing.txt -text
@@ -7923,6 +7924,7 @@ res/cardsfolder/r/razor_swine.txt svneol=native#text/plain
 res/cardsfolder/r/razorclaw_bear.txt svneol=native#text/plain
 res/cardsfolder/r/razorfield_rhino.txt svneol=native#text/plain
 res/cardsfolder/r/razorfield_thresher.txt svneol=native#text/plain
+res/cardsfolder/r/razorfin_abolisher.txt -text
 res/cardsfolder/r/razorfin_hunter.txt svneol=native#text/plain
 res/cardsfolder/r/razorfoot_griffin.txt svneol=native#text/plain
 res/cardsfolder/r/razorgrass_screen.txt svneol=native#text/plain
@@ -8229,6 +8231,7 @@ res/cardsfolder/r/rite_of_flame.txt svneol=native#text/plain
 res/cardsfolder/r/rite_of_passage.txt svneol=native#text/plain
 res/cardsfolder/r/rite_of_replication.txt svneol=native#text/plain
 res/cardsfolder/r/rites_of_flourishing.txt svneol=native#text/plain
+res/cardsfolder/r/rites_of_initiation.txt -text
 res/cardsfolder/r/rites_of_reaping.txt -text
 res/cardsfolder/r/rites_of_refusal.txt -text
 res/cardsfolder/r/rites_of_spring.txt -text
