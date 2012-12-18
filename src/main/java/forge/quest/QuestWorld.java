@@ -71,7 +71,7 @@ public class QuestWorld {
      * @return String, the duels directory
      */
     public String getDuelsDir() {
-        return dir + "/duels";
+        return dir == null ? null : dir + "/duels";
     }
 
     /**
@@ -79,7 +79,7 @@ public class QuestWorld {
      * @return String, the challenges directory
      */
     public String getChallengesDir() {
-        return dir + "/challenges";
+        return dir == null ? null : dir + "/challenges";
     }
 
     /**
@@ -145,21 +145,23 @@ public class QuestWorld {
                     bannedCards.addAll(Arrays.asList(kv[1].split("; ")));
                 }
             }
-            if (useIdx < 1) {
+            if (useIdx < 0) {
                 throw new RuntimeException("Illegal index " + useIdx + "! Check worlds.txt file");
             }
             else if (useName == null) {
                 throw new RuntimeException("World " + useIdx + " must have a name! Check worlds.txt file");
             }
-            else if (useDir == null) {
+            else if (useDir == null && useIdx != 0) {
                 throw new RuntimeException("World '" + useName + "' must have a directory! Check worlds.txt file");
             }
 
             if (!sets.isEmpty() || bannedCards.isEmpty()) {
                 useFormat = new GameFormatQuest(useName, sets, bannedCards);
             }
+
             // System.out.println("Creating quest world " + useName + " (index " + useIdx + ", dir: " + useDir);
             // if (useFormat != null) { System.out.println("SETS: " + sets + "\nBANNED: " + bannedCards); }
+
             return new QuestWorld(useIdx, useName, useDir, useFormat);
 
         }
