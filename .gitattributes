@@ -4797,6 +4797,7 @@ res/cardsfolder/h/hunted_lammasu.txt svneol=native#text/plain
 res/cardsfolder/h/hunted_phantasm.txt svneol=native#text/plain
 res/cardsfolder/h/hunted_troll.txt svneol=native#text/plain
 res/cardsfolder/h/hunted_wumpus.txt svneol=native#text/plain
+res/cardsfolder/h/hunter_of_eyeblights.txt -text
 res/cardsfolder/h/hunter_sliver.txt -text
 res/cardsfolder/h/hunters_feast.txt svneol=native#text/plain
 res/cardsfolder/h/hunters_insight.txt -text
@@ -11590,6 +11591,7 @@ res/cardsfolder/w/wizened_cenn.txt svneol=native#text/plain
 res/cardsfolder/w/wizened_snitches.txt -text
 res/cardsfolder/w/woebearer.txt svneol=native#text/plain
 res/cardsfolder/w/woebringer_demon.txt -text
+res/cardsfolder/w/woeleecher.txt -text
 res/cardsfolder/w/wojek_apothecary.txt -text
 res/cardsfolder/w/wojek_embermage.txt svneol=native#text/plain
 res/cardsfolder/w/wojek_siren.txt -text
