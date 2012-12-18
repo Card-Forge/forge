@@ -631,17 +631,16 @@ public class Upkeep extends Phase {
                     final List<Card> playerLand = player.getLandsInPlay();
 
                     c.tap();
-                    if (c.getController().isComputer()) {
-                        if (playerLand.size() > 0) {
-                            final Card target = GuiChoose.one("Select a card to sacrifice", playerLand);
-
-                            Singletons.getModel().getGame().getAction().sacrifice(target, null);
-                        }
-                    } else {
-                        final Card target = CardFactoryUtil.getBestLandAI(playerLand);
-
-                        Singletons.getModel().getGame().getAction().sacrifice(target, null);
+                    if (playerLand.isEmpty()) {
+                        return;
                     }
+                    Card target = null;
+                    if (c.getController().isComputer()) {
+                        target = GuiChoose.one("Select a card to sacrifice", playerLand);
+                    } else {
+                        target = CardFactoryUtil.getBestLandAI(playerLand);
+                    }
+                    Singletons.getModel().getGame().getAction().sacrifice(target, null);
                 } // end resolve()
             }; // end noPay ability
 
