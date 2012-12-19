@@ -116,6 +116,11 @@ Fixes/Features:
 - Added code for CantBeBlockedBy keywords to isUsefulPumpKeyword.
 - Sideboarding: A little code style-related change.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- CheckStyle.
+- Another fix for Demonic Hordes.
+- Fixed The Pieces Are Coming Together.
+- made some TgtPrompt more specific
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -168,6 +173,8 @@ Rime Transfusion
 Colfenor's Plans
 Razorfin Abolisher
 Rites of Initiation
+Hunter of Eyeblights
+Woeleecher
 
 
 end
