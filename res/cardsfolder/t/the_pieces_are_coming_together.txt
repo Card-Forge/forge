@@ -3,8 +3,9 @@ ManaCost:no cost
 Types:Scheme
 Text:no text
 T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ ConstructDestiny | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, draw two cards. Artifact spells you cast this turn cost 2 less to cast.
-SVar:ConstructDestiny:AB$ Effect | Cost$ 0 | Name$ Pieces Coming Together | StaticAbilities$ CheapParts
+SVar:ConstructDestiny:AB$ Effect | Cost$ 0 | Name$ Pieces Coming Together | StaticAbilities$ CheapParts | SubAbility$ DBDraw
 SVar:CheapParts:Mode$ ReduceCost | EffectZone$ Command | ValidCard$ Artifact | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Artifact spells you cast this turn cost 2 less to cast.
+SVar:DBDraw:DB$ Draw | Defined$ You | NumCards$ 2
 SVar:Rarity:Common
 SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/the_pieces_are_coming_together.jpg
 SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/the-pieces-are-coming-together.jpg
