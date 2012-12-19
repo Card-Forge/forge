@@ -218,9 +218,11 @@ public class DiscardEffect extends RevealEffectBase {
                                 if (mode.startsWith("Reveal")) {
                                     GuiChoose.oneOrNone("Computer has chosen", list);
                                 }
-                                discarded.addAll(list);
-                                for (Card card : list) {
-                                    p.discard(card, sa);
+                                if (list != null) {
+                                    discarded.addAll(list);
+                                    for (Card card : list) {
+                                        p.discard(card, sa);
+                                    }
                                 }
                                 continue;
                             }
