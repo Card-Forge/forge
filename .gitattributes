@@ -2156,7 +2156,6 @@ res/cardsfolder/c/cystbearer.txt svneol=native#text/plain
 res/cardsfolder/c/cytoplast_manipulator.txt -text
 res/cardsfolder/c/cytoplast_root_kin.txt -text
 res/cardsfolder/c/cytospawn_shambler.txt -text
-res/cardsfolder/c/knight_of_the_holy_nimbus.txt -text
 res/cardsfolder/d/daggerback_basilisk.txt svneol=native#text/plain
 res/cardsfolder/d/daggerclaw_imp.txt svneol=native#text/plain
 res/cardsfolder/d/daggerdrome_imp.txt -text
@@ -5456,6 +5455,7 @@ res/cardsfolder/k/knight_of_meadowgrain.txt svneol=native#text/plain
 res/cardsfolder/k/knight_of_new_alara.txt svneol=native#text/plain
 res/cardsfolder/k/knight_of_stromgald.txt svneol=native#text/plain
 res/cardsfolder/k/knight_of_sursi.txt svneol=native#text/plain
+res/cardsfolder/k/knight_of_the_holy_nimbus.txt -text
 res/cardsfolder/k/knight_of_the_mists.txt -text
 res/cardsfolder/k/knight_of_the_reliquary.txt svneol=native#text/plain
 res/cardsfolder/k/knight_of_the_skyward_eye.txt svneol=native#text/plain

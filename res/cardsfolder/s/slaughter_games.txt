@@ -3,7 +3,7 @@ ManaCost:2 B R
 Types:Sorcery
 Text:no text
 K:CARDNAME can't be countered.
-A:SP$ NameCard | Cost$ 2 B R | Defined$ You | ValidCards$ Card.nonLand | ValidDesc$ nonland | SubAbility$ ExileYard | SpellDescription$ Name a nonland card. Search target opponent's graveyard, hand, and library for all cards with that name and exile them. Then that player shuffles his or her library.
+A:SP$ NameCard | Cost$ 2 B R | Defined$ You | ValidCards$ Card.nonLand | ValidDesc$ nonland | SubAbility$ ExileYard | SpellDescription$ Name a nonland card. Search target opponent's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles his or her library.
 SVar:ExileYard:DB$ ChangeZone | Origin$ Graveyard | Destination$ Exile | ValidTgts$ Player.Opponent | TgtPrompt$ Select target opponent | ChangeType$ Card.NamedCard | Chooser$ You | ChangeNum$ NumInYard | Hidden$ True | SubAbility$ ExileHand | StackDescription$ Search target opponent's graveyard, hand, and library for any number of cards with that name and exile them. Then that player shuffles his or her library.
 SVar:ExileHand:DB$ ChangeZone | Origin$ Hand | Destination$ Exile | DefinedPlayer$ Targeted | ChangeType$ Card.NamedCard | ChangeNum$ NumInHand | Chooser$ You | SubAbility$ ExileLib | StackDescription$ None
 SVar:ExileLib:DB$ ChangeZone | Origin$ Library | Destination$ Exile | DefinedPlayer$ Targeted | ChangeType$ Card.NamedCard | ChangeNum$ NumInLib | Chooser$ You | Shuffle$ True | StackDescription$ None

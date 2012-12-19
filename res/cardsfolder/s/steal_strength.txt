@@ -2,8 +2,8 @@ Name:Steal Strength
 ManaCost:1 B
 Types:Instant
 Text:no text
-A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature |TgtPrompt$ Select target creature | NumAtt$ +1 | NumDef$ +1 | SubAbility$ DBPumpNeg | SpellDescription$ Target creature gets +1/+1 until end of turn. Another target creature gets -1/-1 until end of turn.
-SVar:DBPumpNeg:DB$ Pump | ValidTgts$ Creature |TgtPrompt$ Select another creature | TargetUnique$ True | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
+A:SP$ Pump | Cost$ 1 B | ValidTgts$ Creature | TgtPrompt$ Select target creature to get +1/+1 | NumAtt$ +1 | NumDef$ +1 | SubAbility$ DBPumpNeg | SpellDescription$ Target creature gets +1/+1 until end of turn. Another target creature gets -1/-1 until end of turn.
+SVar:DBPumpNeg:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select another creature to get -1/-1 | TargetUnique$ True | NumAtt$ -1 | NumDef$ -1 | IsCurse$ True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/steal_strength.jpg
 SetInfo:PCY|Common|http://magiccards.info/scans/en/pr/79.jpg
