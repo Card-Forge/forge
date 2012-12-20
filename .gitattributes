@@ -4220,6 +4220,7 @@ res/cardsfolder/g/govern_the_guildless.txt -text
 res/cardsfolder/g/grab_the_reins.txt -text
 res/cardsfolder/g/graceful_adept.txt svneol=native#text/plain
 res/cardsfolder/g/graceful_antelope.txt -text svneol=unset#text/plain
+res/cardsfolder/g/graceful_reprieve.txt -text
 res/cardsfolder/g/grafdiggers_cage.txt -text
 res/cardsfolder/g/grafted_exoskeleton.txt svneol=native#text/plain
 res/cardsfolder/g/grafted_skullcap.txt svneol=native#text/plain
@@ -6049,6 +6050,7 @@ res/cardsfolder/m/manalith.txt svneol=native#text/plain
 res/cardsfolder/m/manamorphose.txt -text
 res/cardsfolder/m/manaplasm.txt svneol=native#text/plain
 res/cardsfolder/m/mangara_of_corondor.txt svneol=native#text/plain
+res/cardsfolder/m/mangaras_blessing.txt -text
 res/cardsfolder/m/maniacal_rage.txt svneol=native#text/plain
 res/cardsfolder/m/manic_vandal.txt svneol=native#text/plain
 res/cardsfolder/m/manipulate_fate.txt svneol=native#text/plain
