@@ -334,10 +334,10 @@ public class SSubmenuQuestUtil {
             JOptionPane.showMessageDialog(null, msg, "No Deck", JOptionPane.ERROR_MESSAGE);
             System.out.println(msg);
             return;
-        } else if (!deck.meetsGameTypeRequirements(GameType.Quest, false)) {
-            //String msg = "Chosen Deck doesn't meet the requirements. Please edit or choose a different deck.";
-            //JOptionPane.showMessageDialog(null, msg, "Invalid Deck", JOptionPane.ERROR_MESSAGE);
-            //System.out.println(msg);
+        }
+        String errorMessage = deck.getGameTypeConformanceMessage(GameType.Quest);
+        if ( null != errorMessage ) {
+            JOptionPane.showMessageDialog(null, "Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
             return;
         }
 

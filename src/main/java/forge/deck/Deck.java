@@ -32,6 +32,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
 
+import forge.card.CardCoreType;
 import forge.deck.io.DeckFileHeader;
 import forge.deck.io.DeckSerializer;
 import forge.gui.deckeditor.tables.TableSorter;
@@ -44,7 +45,7 @@ import forge.util.FileSection;
 import forge.util.FileUtil;
 import java.util.Arrays;
 import java.util.TreeMap;
-import javax.swing.JOptionPane;
+
 
 /**
  * <p>
@@ -367,74 +368,69 @@ public class Deck extends DeckBase {
         return (20.0 / (best + (2 * value)));
     }
 
-    public boolean meetsGameTypeRequirements(GameType type) {
-        return meetsGameTypeRequirements(type, true);
+    public String meetsGameTypeRequirements(GameType type) {
+        return getGameTypeConformanceMessage(type);
     }
 
-    public boolean meetsGameTypeRequirements(GameType type, boolean silent) {
+    public String getGameTypeConformanceMessage(GameType type) {
         int deckSize = getMain().countAll();
         int deckDistinct = getMain().countDistinct();
         Integer max = type.getDeckMaximum();
 
         if (deckSize < type.getDeckMinimum()) {
-            if (!silent) {
-                StringBuilder errMsg = new StringBuilder("Current deck doesn't meet the requirements (minimum ");
-                errMsg.append(type.getDeckMinimum());
-                errMsg.append(" cards), please correct or choose another deck.");
-
-                JOptionPane.showMessageDialog(null, errMsg.toString(), "Invalid deck", JOptionPane.ERROR_MESSAGE);
-            }
-            return false;
+            return String.format("should have a minimum of %d cards", type.getDeckMinimum());
         }
 
-        if ((max != null && deckSize > max) || (type.isSingleton() && deckDistinct != deckSize)) {
-            return false;
+        if (max != null && deckSize > max) {
+            return String.format("should not exceed a maximum of %d cards", max);
+        }
+        if (type.isSingleton() && deckDistinct != deckSize) {
+            return "should contain an only copy of each card";
         }
 
         if (type == GameType.Commander) { //Must contain exactly 1 legendary Commander and no sideboard.
 
             //TODO:Enforce color identity
             if (null == getCommander()) {
-                return false;
+                return "is missing a commander";
             }
             if (!getCommander().getCard().getType().isLegendary()) {
-                return false;
+                return "has a commander that is not a legendary creature";
             }
 
             //No sideboarding in Commander
             if (!getSideboard().isEmpty()) {
-                return false;
+                return "has sideboard";
             }
         }
         else if (type == GameType.Planechase) { //Must contain at least 10 planes/phenomenons, but max 2 phenomenons. Singleton.
 
             if (getPlanes().countAll() < 10) {
-                return false;
+                return "should gave at least 10 planes";
             }
             int phenoms = 0;
-            for (CardPrinted cp : getPlanes().toFlatList()) {
+            for (Entry<CardPrinted, Integer> cp : getPlanes()) {
 
-                if (cp.getType().contains("Phenomenon")) {
+                if (cp.getKey().getCard().getType().typeContains(CardCoreType.Phenomenon)) {
                     phenoms++;
                 }
-                if (getPlanes().count(cp) > 1) {
-                    return false;
-                }
+                if(cp.getValue() > 1)
+                   return "must not contain multiple copies of any Phenomena";
+
             }
             if (phenoms > 2) {
-                return false;
+                return "must not contain more than 2 Phenomena";
             }
         }
         else if (type == GameType.Archenemy)  { //Must contain at least 20 schemes, max 2 of each.
 
             if (getSchemes().countAll() < 20) {
-                return false;
+                return "must contain at least 20 schemes";
             }
 
-            for (CardPrinted cp : getSchemes().toFlatList()) {
-
-                if (getSchemes().count(cp) > 2) {
-                    return false;
+            for (Entry<CardPrinted, Integer> cp : getSchemes()) {
+                if (cp.getValue() > 2) {
+                    return "must not contain more than 2 copies of any Scheme";
                 }
             }
         }
@@ -447,35 +443,25 @@ public class Deck extends DeckBase {
             DeckSection tmp = new DeckSection(this.getMain());
             tmp.addAll(this.getSideboard());
 
-            List<String> limitExceptions = Arrays.asList("Plains", "Mountain", "Swamp", "Forest", "Island",
-                    "Snow-Covered Plains", "Snow-Covered Forest", "Snow-Covered Mountain", "Snow-Covered Island",
-                    "Snow-Covered Swamp", "Relentless Rats");
+            List<String> limitExceptions = Arrays.asList("Relentless Rats");
 
-            for (CardPrinted cp : tmp.toFlatList()) {
-                if (tmp.count(cp) > 4 && !limitExceptions.contains(cp.getName())) {
-                    if (!silent) {
-                        StringBuilder errMsg = new StringBuilder("More than four \"");
-                        errMsg.append(cp.getName());
-                        errMsg.append("\" cards are placed in your deck, please correct or choose another deck.");
-
-                        JOptionPane.showMessageDialog(null, errMsg.toString(), "Invalid deck", JOptionPane.ERROR_MESSAGE);
-                    }
-                    return false;
+            for (Entry<CardPrinted, Integer> cp : tmp) {
+                boolean canHaveMultiple = cp.getKey().getCard().getType().isBasicLand() || limitExceptions.contains(cp.getKey().getName());
+                
+                if (!canHaveMultiple && cp.getValue() > 4) {
+                    return String.format("must not conatin more than 4 of '%s' card", cp.getKey().getName());
                 }
             }
 
             // The sideboard must contain either 0 or 15 cards
             int sideboardSize = this.getSideboard().countAll();
             if (sideboardSize != 0 && sideboardSize != 15) {
-                if (!silent) {
-                    JOptionPane.showMessageDialog(null, "The sideboard must contain either 0 or 15 cards, please correct or choose another deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
-                }
-                return false;
+                return "must have a sideboard of exactly 15 cards or no sideboard at all";
             }
 
         }
 
-        return true;
+        return null;
     }
 
     /**

@@ -2,6 +2,8 @@ package forge.gui.home.sanctioned;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
@@ -95,7 +97,9 @@ public enum CSubmenuConstructed implements ICDoc {
     private void startGame() {
         Deck humanDeck = VSubmenuConstructed.SINGLETON_INSTANCE.getDcHuman().getDeck();
 
-        if (!humanDeck.meetsGameTypeRequirements(GameType.Constructed, false)) {
+        String errorMessage = humanDeck.getGameTypeConformanceMessage(GameType.Constructed);
+        if ( null != errorMessage ) {
+            JOptionPane.showMessageDialog(null, "Your deck " + errorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
             return;
         }
 

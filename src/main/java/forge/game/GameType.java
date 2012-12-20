@@ -43,7 +43,7 @@ public enum GameType {
 
     private final boolean bLimited;
     private final int deckMinimum;
-    private final Integer deckMaximum;
+    private final int deckMaximum;
     private final boolean singleton;
 
     /**
@@ -59,7 +59,7 @@ public enum GameType {
         return this.deckMinimum;
     }
 
-    public final Integer getDeckMaximum() {
+    public final int getDeckMaximum() {
         return this.deckMaximum;
     }
 
@@ -68,7 +68,7 @@ public enum GameType {
     }
 
     GameType(final boolean isLimited, int min) {
-        this(isLimited, min, null, false);
+        this(isLimited, min, Integer.MAX_VALUE, false);
     }
 
 
@@ -78,7 +78,7 @@ public enum GameType {
      * @param isLimited
      *            the is limited
      */
-    GameType(final boolean isLimited, int min, Integer max, boolean singleton) {
+    GameType(final boolean isLimited, int min, int max, boolean singleton) {
         this.bLimited = isLimited;
         this.deckMinimum = min;
         this.deckMaximum = max;
