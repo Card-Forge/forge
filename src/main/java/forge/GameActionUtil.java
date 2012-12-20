@@ -949,7 +949,7 @@ public final class GameActionUtil {
                 @Override
                 public void resolve() {
 
-                    final List<Card> libList = opponent.getCardsIn(ZoneType.Library);
+                    final List<Card> libList = new ArrayList<Card>(opponent.getCardsIn(ZoneType.Library));
                     int count = 0;
                     int broken = 0;
                     for (int i = 0; i < libList.size(); i = i + 4) {
