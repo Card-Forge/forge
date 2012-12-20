@@ -2064,7 +2064,7 @@ public class CardFactoryUtil {
         }
 
         if (l[0].startsWith("ImprintedCardManaCost")) {
-            if (c.getImprinted().get(0).getCMC() > 0) {
+            if (!c.getImprinted().isEmpty()) {
                 return c.getImprinted().get(0).getCMC();
             }
         }
