@@ -52,7 +52,9 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
     private final JLabel lblZep   = new FLabel.Builder().text("<html>Launch<br>Zeppelin</html>")
             .hoverable(true).icon(FSkin.getIcon(FSkin.QuestIcons.ICO_ZEP))
             .fontSize(16).build();
-
+    private final FLabel lblWorld   = new FLabel.Builder()
+        .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_MAP))
+        .fontSize(15).build();
     private final FLabel lblLife      = new FLabel.Builder()
         .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_LIFE))
         .fontSize(15).build();
@@ -83,6 +85,7 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
         .fontSize(12).build();
 
     private final ExperimentalLabel btnUnlock = new ExperimentalLabel("Unlock Sets");
+    private final ExperimentalLabel btnTravel = new ExperimentalLabel("Travel");
     private final ExperimentalLabel btnBazaar = new ExperimentalLabel("Bazaar");
     private final ExperimentalLabel btnSpellShop = new ExperimentalLabel("Spell Shop");
 
@@ -97,6 +100,7 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
         final String constraints = "h 30px!, gap 0 0 0 5px";
         pnlStats.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 3"));
         pnlStats.add(btnUnlock, "w 150px!, h 30px!, gap 0 0 0 10px");
+        pnlStats.add(btnTravel, "w 150px!, h 30px!, gap 0 0 0 10px");
         pnlStats.add(btnSpellShop, "w 150px!, h 30px!, gap 0 0 0 10px");
         pnlStats.add(btnBazaar, "w 150px!, h 30px!, gap 0 0 0 10px");
         pnlStats.add(lblWins, constraints);
@@ -104,6 +108,7 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
         pnlStats.add(lblCredits, constraints);
         pnlStats.add(lblWinStreak, constraints);
         pnlStats.add(lblLife, constraints);
+        pnlStats.add(lblWorld, constraints);
         pnlStats.add(cbPlant, constraints);
         pnlStats.add(cbxPet, constraints);
         pnlStats.add(lblZep, "w 130px!, h 60px!, gap 0 0 0 5px");
@@ -174,6 +179,12 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
         return lblTitle;
     }
 
+    /** @return {@link javax.swing.JLabel} */
+    @Override
+    public FLabel getLblWorld() {
+        return lblWorld;
+    }
+
     @Override
     public FLabel getLblLife() {
         return lblLife;
@@ -219,6 +230,10 @@ public enum VSubmenuChallenges implements IVSubmenu<CSubmenuChallenges>, IVQuest
         return btnUnlock;
     }
 
+    @Override
+    public ExperimentalLabel getBtnTravel() {
+        return btnTravel;
+    }
     @Override
     public ExperimentalLabel getBtnSpellShop() {
         return btnSpellShop;

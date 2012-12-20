@@ -41,6 +41,10 @@ public enum CSubmenuDuels implements ICDoc {
                 new Command() { @Override
                     public void execute() { SSubmenuQuestUtil.showBazaar(); } });
 
+        view.getBtnTravel().setCommand(
+                new Command() { @Override
+                    public void execute() { SSubmenuQuestUtil.travelWorld(); CSubmenuDuels.this.update(); } });
+
         view.getBtnUnlock().setCommand(
                 new Command() { @Override
                     public void execute() { SSubmenuQuestUtil.chooseAndUnlockEdition(); CSubmenuDuels.this.update(); } });

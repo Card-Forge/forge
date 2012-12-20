@@ -18,11 +18,17 @@ public interface IVQuestStats {
     /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
     ExperimentalLabel getBtnUnlock();
 
+    /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
+    ExperimentalLabel getBtnTravel();
+
     /** @return {@link javax.swing.JLabel} */
     JLabel getLblCredits();
 
     /** @return {@link javax.swing.JLabel} */
     JLabel getLblLife();
+
+    /** @return {@link javax.swing.JLabel} */
+    JLabel getLblWorld();
 
     /** @return {@link javax.swing.JLabel} */
     JLabel getLblWins();

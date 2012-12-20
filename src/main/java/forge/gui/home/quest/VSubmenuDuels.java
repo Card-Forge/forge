@@ -51,6 +51,9 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
     private final JLabel lblZep   = new FLabel.Builder().text("Launch Zeppelin")
             .fontSize(14).build();
 
+    private final FLabel lblWorld   = new FLabel.Builder()
+        .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_MAP))
+        .fontSize(15).build();
     private final FLabel lblLife = new FLabel.Builder()
         .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_LIFE))
         .fontSize(15).build();
@@ -81,6 +84,7 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
         .fontSize(12).build();
 
     private final ExperimentalLabel btnUnlock = new ExperimentalLabel("Unlock Sets");
+    private final ExperimentalLabel btnTravel = new ExperimentalLabel("Travel");
     private final ExperimentalLabel btnBazaar = new ExperimentalLabel("Bazaar");
     private final ExperimentalLabel btnSpellShop = new ExperimentalLabel("Spell Shop");
 
@@ -95,6 +99,7 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
         final String constraints = "h 30px!, gap 0 0 0 5px";
         pnlStats.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 0"));
         pnlStats.add(btnUnlock, "w 150px!, h 30px!, gap 0 0 0 10px");
+        pnlStats.add(btnTravel, "w 150px!, h 30px!, gap 0 0 0 10px");
         pnlStats.add(btnSpellShop, "w 150px!, h 30px!, gap 0 0 0 10px");
         pnlStats.add(btnBazaar, "w 150px!, h 30px!, gap 0 0 0 10px");
         pnlStats.add(lblWins, constraints);
@@ -102,6 +107,7 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
         pnlStats.add(lblCredits, constraints);
         pnlStats.add(lblWinStreak, constraints);
         pnlStats.add(lblLife, constraints);
+        pnlStats.add(lblWorld, constraints);
         pnlStats.add(cbPlant, constraints);
         pnlStats.add(cbxPet, constraints);
         pnlStats.setOpaque(false);
@@ -167,6 +173,12 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
         return lblTitle;
     }
 
+    /** @return {@link javax.swing.JLabel} */
+    @Override
+    public FLabel getLblWorld() {
+        return lblWorld;
+    }
+
     @Override
     public FLabel getLblLife() {
         return lblLife;
@@ -210,6 +222,11 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
     @Override
     public ExperimentalLabel getBtnUnlock() {
         return btnUnlock;
+    }
+
+    @Override
+    public ExperimentalLabel getBtnTravel() {
+        return btnTravel;
     }
 
     @Override

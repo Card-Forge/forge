@@ -17,6 +17,7 @@
  */
 package forge.quest;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -181,6 +182,8 @@ public class QuestController {
         this.questFormat = this.model == null ? null : this.model.getFormat();
         this.currentEvent = null;
 
+        this.resetDuelsManager();
+        this.resetChallengesManager();
         this.getChallengesManager().randomizeOpponents();
         this.getDuelsManager().randomizeOpponents();
     }
@@ -266,7 +269,21 @@ public class QuestController {
      * @return QuestWorld or null, if using regular duels and challenges.
      */
     public QuestWorld getWorld() {
-        return this.model == null ? null : Singletons.getModel().getWorlds().get(this.model.getWorldId());
+        return this.model == null || this.model.getWorldId() == null ? null : Singletons.getModel().getWorlds().get(this.model.getWorldId());
+    }
+
+    /**
+     * Sets a new QuestWorld.
+     * 
+     * @param newWorld
+     *      string, the new world id
+     */
+    public void setWorld(final QuestWorld newWorld) {
+        if (this.model == null) {
+            return;
+        }
+
+        this.model.setWorldId(newWorld == null ? null : newWorld.getName());
     }
 
 
@@ -316,12 +333,10 @@ public class QuestController {
      */
     public QuestEventManager getDuelsManager() {
         if (this.duelManager == null) {
-            this.duelManager = new QuestEventManager(ForgeProps.getFile(NewConstants.Quest.DUELS));
+            resetDuelsManager();
         }
         return this.duelManager;
     }
-
-
 
     /**
      * 
@@ -330,9 +345,46 @@ public class QuestController {
      */
     public QuestEventManager getChallengesManager() {
         if (this.challengesManager == null) {
-            this.challengesManager = new QuestEventManager(ForgeProps.getFile(NewConstants.Quest.CHALLENGES));
+            resetChallengesManager();
         }
         return this.challengesManager;
+    }
+
+    /**
+     * 
+     * Reset the duels manager.
+     */
+    public void resetDuelsManager() {
+        if (this.model.getWorldId() == null) {
+            this.duelManager = new QuestEventManager(ForgeProps.getFile(NewConstants.Quest.DUELS));
+        } else {
+            QuestWorld world = Singletons.getModel().getWorlds().get(this.model.getWorldId());
+
+            if (world == null || world.getDuelsDir() == null) {
+                this.duelManager = new QuestEventManager(ForgeProps.getFile(NewConstants.Quest.DUELS));
+            } else {
+                this.duelManager = new QuestEventManager(new File("res/quest/world/" + world.getDuelsDir()));
+            }
+        }
+    }
+
+    /**
+     * 
+     * Reset the challenges manager.
+     */
+    public void resetChallengesManager() {
+        if (this.model.getWorldId() == null) {
+            this.challengesManager = new QuestEventManager(ForgeProps.getFile(NewConstants.Quest.CHALLENGES));
+        }
+        else {
+            QuestWorld world = Singletons.getModel().getWorlds().get(this.model.getWorldId());
+
+            if (world == null || world.getChallengesDir() == null) {
+                this.challengesManager = new QuestEventManager(ForgeProps.getFile(NewConstants.Quest.CHALLENGES));
+            } else {
+                this.challengesManager = new QuestEventManager(new File("res/quest/world/" + world.getChallengesDir()));
+            }
+        }
     }
 
     /**

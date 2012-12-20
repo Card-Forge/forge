@@ -17,6 +17,7 @@
  */
 package forge.quest.data;
 
+import forge.Singletons;
 import forge.game.GameFormat;
 import forge.quest.QuestMode;
 import forge.quest.io.QuestDataIO;
@@ -162,6 +163,19 @@ public final class QuestData {
 
     public String getWorldId() {
         return worldId;
+    }
+
+    /**
+     * Sets the world id to null or a legal world id.
+     * @param newId
+     *      String, the world id to set (must be null or legal).
+     */
+    public void setWorldId(final String newId) {
+        if (newId != null && Singletons.getModel().getWorlds().get(newId) == null) {
+            throw new RuntimeException("Tried to set illegal (unknown) world id: " + newId);
+        }
+
+        worldId = newId;
     }
 
 }

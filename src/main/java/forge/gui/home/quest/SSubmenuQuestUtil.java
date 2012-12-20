@@ -1,6 +1,7 @@
 package forge.gui.home.quest;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JLabel;
@@ -22,6 +23,7 @@ import forge.game.MatchStartHelper;
 import forge.game.PlayerStartConditions;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.PlayerType;
+import forge.gui.GuiChoose;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.CEditorQuestCardShop;
@@ -32,6 +34,7 @@ import forge.quest.QuestEventChallenge;
 import forge.quest.QuestMode;
 import forge.quest.QuestUtil;
 import forge.quest.QuestUtilUnlockSets;
+import forge.quest.QuestWorld;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.bazaar.QuestPetController;
 import forge.quest.data.QuestAchievements;
@@ -160,6 +163,7 @@ public class SSubmenuQuestUtil {
         view0.getLblLife().setText("Life: " + qS.getLife(qCtrl.getMode()));
         view0.getLblWins().setText("Wins: " + qA.getWin());
         view0.getLblLosses().setText("Losses: " + qA.getLost());
+        view0.getLblWorld().setText("World: " + (qCtrl.getWorld() == null ? "(none)" : qCtrl.getWorld()));
 
         // Show or hide the set unlocking button
 
@@ -258,6 +262,66 @@ public class SSubmenuQuestUtil {
                 JOptionPane.PLAIN_MESSAGE);
 
         QuestUtilUnlockSets.doUnlock(qData, unlocked);
+    }
+
+    /** */
+    public static void travelWorld() {
+
+        List<QuestWorld> worlds = new ArrayList<QuestWorld>();
+        final QuestController qCtrl = Singletons.getModel().getQuest();
+
+        for (QuestWorld qw : Singletons.getModel().getWorlds()) {
+            worlds.add(qw);
+        }
+
+        if (worlds.size() < 1) {
+            JOptionPane.showMessageDialog(null, "There are currently no worlds\nin this version of Forge.", "No worlds", JOptionPane.ERROR_MESSAGE);
+        }
+
+        final String setPrompt = "Where do you wish to travel?";
+        final QuestWorld newWorld = GuiChoose.oneOrNone(setPrompt, worlds);
+
+        if (worlds.indexOf(newWorld) < 0) {
+            return;
+        }
+
+        if (qCtrl.getWorld() != newWorld) {
+
+            boolean needRemove = false;
+            if (nextChallengeInWins() < 1 && qCtrl.getAchievements().getCurrentChallenges().size() > 0) {
+                needRemove = true;
+
+                final int confirmLoss = JOptionPane.showConfirmDialog(null,
+                        "You have uncompleted challenges in your current world. If you travel now, they will be LOST!"
+                        + "\nAre you sure you wish to travel anyway?\n"
+                        + "(Click \"No\" to go back  and complete your current challenges first.)",
+                        "WARNING: Uncompleted challenges", JOptionPane.YES_NO_OPTION);
+
+                if (confirmLoss == JOptionPane.NO_OPTION) {
+                    return;
+                }
+            }
+
+            if (needRemove) {
+                // Remove current challenges.
+                while (nextChallengeInWins() == 0) {
+                    qCtrl.getAchievements().addChallengesPlayed();
+                }
+
+                Singletons.getModel().getQuest().getAchievements().getCurrentChallenges().clear();
+            }
+
+            qCtrl.setWorld(newWorld);
+            qCtrl.resetDuelsManager();
+            qCtrl.resetChallengesManager();
+            // Note that the following can be (ab)used to re-randomize your opponents by travelling to a different
+            // world and back. To prevent this, simply delete the following line that randomizes DuelsManager.
+            // (OTOH, you can 'swap' opponents even more easily  by simply selecting a different quest data file and
+            // then re-selecting your current quest data file.)
+            qCtrl.getDuelsManager().randomizeOpponents();
+            qCtrl.getChallengesManager().randomizeOpponents();
+            qCtrl.save();
+        }
     }
 
     /** */

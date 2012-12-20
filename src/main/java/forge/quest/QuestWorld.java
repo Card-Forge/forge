@@ -91,6 +91,18 @@ public class QuestWorld {
     }
 
     /**
+     * <p>
+     * toString.
+     * </p>
+     * 
+     * @return a {@link java.lang.String} object.
+     */
+    @Override
+    public final String toString() {
+        return this.getName();
+    }
+
+    /**
      * FN_GET_NAME for reader.
      */
     public static final Function<QuestWorld, String> FN_GET_NAME = new Function<QuestWorld, String>() {
