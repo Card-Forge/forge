@@ -5436,6 +5436,7 @@ res/cardsfolder/k/kjeldoran_dead.txt svneol=native#text/plain
 res/cardsfolder/k/kjeldoran_elite_guard.txt -text
 res/cardsfolder/k/kjeldoran_frostbeast.txt -text
 res/cardsfolder/k/kjeldoran_gargoyle.txt svneol=native#text/plain
+res/cardsfolder/k/kjeldoran_guard.txt -text
 res/cardsfolder/k/kjeldoran_home_guard.txt svneol=native#text/plain
 res/cardsfolder/k/kjeldoran_javelineer.txt svneol=native#text/plain
 res/cardsfolder/k/kjeldoran_outpost.txt svneol=native#text/plain
@@ -7317,6 +7318,7 @@ res/cardsfolder/p/phantasmal_dragon.txt svneol=native#text/plain
 res/cardsfolder/p/phantasmal_fiend.txt svneol=native#text/plain
 res/cardsfolder/p/phantasmal_forces.txt svneol=native#text/plain
 res/cardsfolder/p/phantasmal_image.txt -text
+res/cardsfolder/p/phantasmal_mount.txt -text
 res/cardsfolder/p/phantasmal_sphere.txt -text
 res/cardsfolder/p/phantasmal_terrain.txt svneol=native#text/plain
 res/cardsfolder/p/phantatog.txt svneol=native#text/plain
