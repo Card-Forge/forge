@@ -23,7 +23,6 @@ import forge.Command;
 import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.gui.deckeditor.SEditorIO;
-import forge.gui.deckeditor.SEditorIO.EditorPreference;
 import forge.gui.deckeditor.SEditorUtil;
 import forge.gui.deckeditor.tables.DeckController;
 import forge.gui.deckeditor.tables.EditorTableView;

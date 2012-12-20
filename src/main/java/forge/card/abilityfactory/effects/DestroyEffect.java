@@ -8,7 +8,6 @@ import forge.Card;
 import forge.CardUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 

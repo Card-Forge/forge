@@ -8,7 +8,6 @@ import java.util.Map;
 import com.google.common.base.Supplier;
 
 import forge.Card;
-import forge.card.CardRules;
 import forge.deck.Deck;
 import forge.game.player.LobbyPlayer;
 import forge.item.CardPrinted;

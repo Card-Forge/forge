@@ -15,7 +15,6 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Card;
-import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardUtil;
@@ -36,7 +35,6 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.gui.match.views.VAntes;
-import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
@@ -142,7 +140,7 @@ public class GameNew {
 
         if (!Singletons.getModel().getMatch().getPlayedGames().isEmpty()) {
             deck.startDeckEdits();
-            sideboardAndPrepareLibrary(player, deck, canRandomFoil, generator, useAnte);
+            sideboard(player, deck, canRandomFoil, generator, useAnte);
         } else {
             deck.clearDeckEdits();
         }
@@ -159,11 +157,10 @@ public class GameNew {
         }
     }
 
-    private static boolean sideboardAndPrepareLibrary(final Player player, final Deck deck, boolean canRandomFoil, Random generator, boolean useAnte) {
+    private static boolean sideboard(final Player player, final Deck deck, boolean canRandomFoil, Random generator, boolean useAnte) {
         final GameType gameType = Singletons.getModel().getMatch().getGameType();
         boolean hasSideboard = (deck.getSideboard().countAll() > 0);
 
-        PlayerZone library = player.getZone(ZoneType.Library);
         DeckSection sideboard = deck.getSideboard();
         int sideboardSize = (gameType == GameType.Draft || gameType == GameType.Sealed) ? -1 : sideboard.countAll();
 
@@ -178,7 +175,7 @@ public class GameNew {
         } else {
             // Human Sideboarding
             boolean validDeck = false;
-            int deckMinSize = Math.min(deck.getMain().countAll(), gameType.getDeckMinimum());
+            int deckMinSize = Math.min(deck.getMain().countAll(), gameType.getMainRange().getMinimumInteger());
 
             while (!validDeck) {
                 GuiChoose.getOrderChoices("Sideboard", "Main Deck", sideboardSize,

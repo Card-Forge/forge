@@ -18,11 +18,7 @@
 package forge.card.cardfactory;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import javax.swing.JOptionPane;
 
 import org.apache.commons.lang3.StringUtils;

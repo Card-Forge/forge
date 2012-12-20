@@ -177,6 +177,12 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
             return from.card;
         }
     };
+    public static final Function<CardPrinted, String> FN_GET_NAME = new Function<CardPrinted, String>() {
+        @Override
+        public String apply(final CardPrinted from) {
+            return from.getName();
+        }
+    };    
 
     public static final Function<CardPrinted, Integer> FN_GET_EDITION_INDEX = new Function<CardPrinted, Integer>() {
         @Override

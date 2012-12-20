@@ -1,9 +1,11 @@
 package forge.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.google.common.base.Function;
 
@@ -137,6 +139,20 @@ public class Aggregates {
             }
         }
         return null;
+    }
+
+
+    public static <T, U> Iterable<Entry<U, Integer>> groupSumBy(Iterable<Entry<T, Integer>> source, Function<T, U> fnGetField) {
+        Map<U, Integer> result = new HashMap<U, Integer>();
+        for(Entry<T, Integer> kv : source) {
+            U k = fnGetField.apply(kv.getKey());
+            Integer v = kv.getValue();
+            Integer sum = result.get(k);
+            int n = v == null ? 0 : v.intValue();
+            int s = sum == null ? 0 : sum.intValue();
+            result.put(k, Integer.valueOf(s + n)); 
+        }
+        return result.entrySet();
     }
 
 }

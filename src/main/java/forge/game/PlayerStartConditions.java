@@ -3,9 +3,7 @@ package forge.game;
 import com.google.common.base.Supplier;
 
 import forge.Card;
-import forge.card.CardRules;
 import forge.deck.Deck;
-import forge.item.CardPrinted;
 
 
 public class PlayerStartConditions {

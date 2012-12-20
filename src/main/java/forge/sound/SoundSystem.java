@@ -6,7 +6,6 @@ import java.util.Map;
 
 import com.google.common.eventbus.Subscribe;
 
-import forge.Card;
 import forge.Singletons;
 import forge.game.event.Event;
 import forge.properties.ForgePreferences.FPref;

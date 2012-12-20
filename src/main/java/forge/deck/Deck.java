@@ -28,23 +28,28 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
+import org.apache.commons.lang.math.IntRange;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 
 import forge.card.CardCoreType;
+import forge.card.CardRules;
+import forge.card.CardRulesPredicates;
 import forge.deck.io.DeckFileHeader;
 import forge.deck.io.DeckSerializer;
 import forge.gui.deckeditor.tables.TableSorter;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.game.GameType;
 import forge.game.limited.ReadDraftRankings;
+import forge.util.Aggregates;
 import forge.util.FileSection;
 import forge.util.FileUtil;
 import java.util.Arrays;
-import java.util.TreeMap;
 
 
 /**
@@ -374,20 +379,18 @@ public class Deck extends DeckBase {
 
     public String getGameTypeConformanceMessage(GameType type) {
         int deckSize = getMain().countAll();
-        int deckDistinct = getMain().countDistinct();
-        Integer max = type.getDeckMaximum();
 
-        if (deckSize < type.getDeckMinimum()) {
-            return String.format("should have a minimum of %d cards", type.getDeckMinimum());
+        int min = type.getMainRange().getMinimumInteger();
+        int max = type.getMainRange().getMaximumInteger();
+
+        if (deckSize < min) {
+            return String.format("should have a minimum of %d cards", min);
         }
 
-        if (max != null && deckSize > max) {
+        if (deckSize > max) {
             return String.format("should not exceed a maximum of %d cards", max);
         }
-        if (type.isSingleton() && deckDistinct != deckSize) {
-            return "should contain an only copy of each card";
-        }
-
+        
         if (type == GameType.Commander) { //Must contain exactly 1 legendary Commander and no sideboard.
 
             //TODO:Enforce color identity
@@ -434,30 +437,36 @@ public class Deck extends DeckBase {
                 }
             }
         }
-        else if (type == GameType.Constructed || type == GameType.Quest)  {
+        
+        int maxCopies = type.getMaxCardCopies();
+        if ( maxCopies < Integer.MAX_VALUE )  {
             //Must contain no more than 4 of the same card
             //shared among the main deck and sideboard, except
             //basic lands and Relentless Rats
-            TreeMap<CardPrinted, Integer> cardCounts = new TreeMap<CardPrinted, Integer>();
 
             DeckSection tmp = new DeckSection(this.getMain());
             tmp.addAll(this.getSideboard());
+            if ( null != this.getCommander())
+                tmp.add(this.getCommander());
 
             List<String> limitExceptions = Arrays.asList("Relentless Rats");
 
-            for (Entry<CardPrinted, Integer> cp : tmp) {
-                boolean canHaveMultiple = cp.getKey().getCard().getType().isBasicLand() || limitExceptions.contains(cp.getKey().getName());
+            // should group all cards by name, so that different editions of same card are really counted as the same card
+            for (Entry<String, Integer> cp : Aggregates.groupSumBy(tmp, CardPrinted.FN_GET_NAME)) {
                 
-                if (!canHaveMultiple && cp.getValue() > 4) {
-                    return String.format("must not conatin more than 4 of '%s' card", cp.getKey().getName());
+                CardPrinted simpleCard = CardDb.instance().getCard(cp.getKey());
+                boolean canHaveMultiple = simpleCard.getCard().getType().isBasicLand() || limitExceptions.contains(cp.getKey());
+                
+                if (!canHaveMultiple && cp.getValue() > maxCopies) {
+                    return String.format("must not conatin more than %d of '%s' card", maxCopies, cp.getKey());
                 }
             }
 
             // The sideboard must contain either 0 or 15 cards
             int sideboardSize = this.getSideboard().countAll();
-            if (sideboardSize != 0 && sideboardSize != 15) {
-                return "must have a sideboard of exactly 15 cards or no sideboard at all";
-            }
+            IntRange sbRange = type.getSideRange();  
+            if ( sbRange != null && sideboardSize > 0 && !sbRange.containsInteger(sideboardSize))
+                return String.format("must have a sideboard of %d to %d cards or no sideboard at all", sbRange.getMinimumInteger(), sbRange.getMaximumInteger());
 
         }
 

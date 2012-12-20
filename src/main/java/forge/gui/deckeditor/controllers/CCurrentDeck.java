@@ -9,8 +9,6 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import forge.Command;
-import forge.Singletons;
-import forge.control.FControl;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.io.DeckSerializer;

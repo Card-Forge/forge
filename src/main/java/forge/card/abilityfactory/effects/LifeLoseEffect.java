@@ -1,13 +1,7 @@
 package forge.card.abilityfactory.effects;
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import forge.Card;
 import forge.card.abilityfactory.AbilityFactory;
-import forge.card.abilityfactory.ApiType;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;

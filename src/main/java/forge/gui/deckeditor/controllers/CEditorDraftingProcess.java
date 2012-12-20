@@ -26,8 +26,6 @@ import forge.deck.Deck;
 import forge.deck.DeckGroup;
 import forge.game.limited.BoosterDraft;
 import forge.game.limited.IBoosterDraft;
-import forge.gui.deckeditor.SEditorIO;
-import forge.gui.deckeditor.SEditorIO.EditorPreference;
 import forge.gui.deckeditor.tables.DeckController;
 import forge.gui.deckeditor.tables.EditorTableView;
 import forge.gui.deckeditor.tables.SColumnUtil;

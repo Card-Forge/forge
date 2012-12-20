@@ -2,14 +2,10 @@ package forge.card.abilityfactory.effects;
 
 
 import forge.Card;
-import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.trigger.TriggerType;
-import forge.game.GameState;
 import forge.game.player.Player;
-import forge.game.zone.ZoneType;
 
 public class SetInMotionEffect extends SpellEffect {
 

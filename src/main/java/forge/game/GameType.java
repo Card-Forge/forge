@@ -17,35 +17,30 @@
  */
 package forge.game;
 
+import org.apache.commons.lang.math.IntRange;
+
 /**
  * GameType is an enum to determine the type of current game. :)
  */
 public enum GameType {
 
-    /** The Constructed. */
-    Constructed(false, 60),
-    /** The Sealed. */
-    Sealed(true, 40),
-    /** The Draft. */
-    Draft(true, 40),
-    /** The Commander. */
-    Commander(false, 100, 100, true),
-    /** The Quest. */
-    Quest(true, 40),
-    /** The Vanguard. */
-    Vanguard(false, 60),
-    /** The Planechase. */
-    Planechase(false, 60),
-    /** The Archenemy. */
-    Archenemy(false, 60),
-    /** */
-    Gauntlet(true, 40);
+    //           Limited  Main board: allowed size             SB: allowed size   Max distinct non basic cards
+    Constructed ( false,  new IntRange(60, Integer.MAX_VALUE), new IntRange(15),  4),
+    Sealed      ( true,   new IntRange(40, Integer.MAX_VALUE), null,              Integer.MAX_VALUE),
+    Draft       ( true,   new IntRange(40, Integer.MAX_VALUE), null,              Integer.MAX_VALUE),
+    Commander   ( false,  new IntRange(99 /* +cmndr aside */), new IntRange(0),   1),
+    Quest       ( true,   new IntRange(40, Integer.MAX_VALUE), new IntRange(15),  4),
+    Vanguard    ( false,  new IntRange(60, Integer.MAX_VALUE), new IntRange(0),   4),
+    Planechase  ( false,  new IntRange(60, Integer.MAX_VALUE), new IntRange(0),   4),
+    Archenemy   ( false,  new IntRange(60, Integer.MAX_VALUE), new IntRange(0),   4),
+    Gauntlet    ( true,   new IntRange(40, Integer.MAX_VALUE), null,              Integer.MAX_VALUE);
 
     private final boolean bLimited;
-    private final int deckMinimum;
-    private final int deckMaximum;
-    private final boolean singleton;
+    private final IntRange mainRange;
+    private final IntRange sideRange; // null => no check
+    private final int maxCardCopies;
 
+    
     /**
      * Checks if is limited.
      * 
@@ -55,22 +50,6 @@ public enum GameType {
         return this.bLimited;
     }
 
-    public final int getDeckMinimum() {
-        return this.deckMinimum;
-    }
-
-    public final int getDeckMaximum() {
-        return this.deckMaximum;
-    }
-
-    public final boolean isSingleton() {
-        return this.singleton;
-    }
-
-    GameType(final boolean isLimited, int min) {
-        this(isLimited, min, Integer.MAX_VALUE, false);
-    }
-
 
     /**
      * Instantiates a new game type.
@@ -78,11 +57,11 @@ public enum GameType {
      * @param isLimited
      *            the is limited
      */
-    GameType(final boolean isLimited, int min, int max, boolean singleton) {
+    GameType(final boolean isLimited, IntRange main, IntRange side, int maxCopies) {
         this.bLimited = isLimited;
-        this.deckMinimum = min;
-        this.deckMaximum = max;
-        this.singleton = singleton;
+        mainRange = main;
+        sideRange = side;
+        maxCardCopies = maxCopies;
     }
 
     /**
@@ -105,5 +84,29 @@ public enum GameType {
         }
 
         throw new IllegalArgumentException("No element named " + value + " in enum GameType");
+    }
+
+
+    /**
+     * @return the sideRange
+     */
+    public IntRange getSideRange() {
+        return sideRange;
+    }
+
+
+    /**
+     * @return the mainRange
+     */
+    public IntRange getMainRange() {
+        return mainRange;
+    }
+
+
+    /**
+     * @return the maxCardCopies
+     */
+    public int getMaxCardCopies() {
+        return maxCardCopies;
     }
 }

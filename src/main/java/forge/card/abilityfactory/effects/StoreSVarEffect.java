@@ -1,13 +1,9 @@
 package forge.card.abilityfactory.effects;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import forge.Card;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 
 public class StoreSVarEffect extends SpellEffect {
 

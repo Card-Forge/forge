@@ -26,7 +26,6 @@ import forge.deck.generate.GenerateThemeDeck;
 import forge.game.player.PlayerType;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
-import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventManager;
