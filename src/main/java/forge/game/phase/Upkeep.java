@@ -660,6 +660,7 @@ public class Upkeep extends Phase {
                         } // end resolve()
                     }; // end pay ability
                     pay.setStackDescription("Demonic Hordes - Upkeep Cost");
+                    pay.setDescription("Demonic Hordes - Upkeep Cost");
 
                     Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(pay);
 

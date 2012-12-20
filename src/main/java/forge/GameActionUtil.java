@@ -1006,6 +1006,7 @@ public final class GameActionUtil {
             sb.append(" exiles the top four cards of his or her library. ");
             sb.append("If two or more of those cards have the same name, repeat this process.");
             ability.setStackDescription(sb.toString());
+            ability.setDescription(sb.toString());
 
             Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
 
