@@ -1,5 +1,5 @@
 Name:Simic Basilisk
-ManaCost:3 G G
+ManaCost:4 G G
 Types:Creature Basilisk Mutant
 Text:no text
 PT:0/0
