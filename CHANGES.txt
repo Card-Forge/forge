@@ -20,6 +20,10 @@ We don't yet have:
 * Sorting in the in-game sideboard editor.
 * AI sideboarding.
 
+Quest Worlds, stage 1. This version simply allows you to travel between the regular quest world and the newly-added Shandalar world to get different duel opponents and challenges. You will have to complete your current challenges before travelling or you will lose them. 
+
+World-specific format enforcing and starting world selection will be added in later stages. Also, something has to be done about locked (non-repeatabled) challenges so they do not end up locking other challenges in different worlds.
+
 --
 
 This version of forge includes a few sound files for the new sound effect system. While we have several sounds assigned to a few of the available events there are a number of events that do not yet have a assigned sound file. This should be considered a work in progress and we could use some help in finding interesting sounds that we can add to forge.
@@ -121,6 +125,17 @@ Fixes/Features:
 - Fixed The Pieces Are Coming Together.
 - made some TgtPrompt more specific
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed a NPE in AF Discard.
+- Fixed Thragtusk.
+- The rev number displayed in the title bar is once again displaying an old SVN revision number, remove it.
+- Fixed some missing ability description.
+- Another fix for Scalpelexis.
+- Fixed a possible bug in targetAI related to PayX SVars.
+- Fixed ImprintedCardManaCost xCount.
+- Quest Worlds, stage 1. This version simply allows you to travel between the regular quest world and the newly-added Shandalar world to get different duel opponents and challenges. You will have to complete your current challenges before travelling or you will lose them. 
+- World-specific format enforcing and starting world selection will be added in later stages. Also, something has to be done about locked (non-repeatabled) challenges so they do not end up locking other challenges in different worlds.
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -175,6 +190,10 @@ Razorfin Abolisher
 Rites of Initiation
 Hunter of Eyeblights
 Woeleecher
+Graceful Reprieve
+Mangara's Blessing
+Kjeldoran Guard
+Phantasmal Mount
 
 
 end
