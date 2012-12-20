@@ -136,6 +136,9 @@ Fixes/Features:
 - World-specific format enforcing and starting world selection will be added in later stages. Also, something has to be done about locked (non-repeatabled) challenges so they do not end up locking other challenges in different worlds.
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Renumbered the Shandalar challenges to make them unique (in order to prevent potential conflicts with non-repeatable challenges in the main challenges folder).
+- Fixed cost of Simic Basilisk.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
