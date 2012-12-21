@@ -42,6 +42,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityCondition;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.phase.PhaseType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -894,15 +895,20 @@ public class AbilityFactory {
 
             else if (defined.startsWith("Tapped")) {
                 list = sa.getRootAbility().getPaidList("Tapped");
+            } 
+            
+            else if (defined.startsWith("Valid ")) {
+                String validDefined = defined.substring("Valid ".length());
+                GameState game = Singletons.getModel().getGame();
+                
+                list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), validDefined.split(","), hostCard.getController(), hostCard);
             }
 
             else {
                 return cards;
             }
 
-            for (final Card cl : list) {
-                cards.add(cl);
-            }
+            cards.addAll(list);
         }
 
         if (c != null) {
