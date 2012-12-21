@@ -1182,6 +1182,7 @@ res/cardsfolder/b/brackwater_elemental.txt svneol=native#text/plain
 res/cardsfolder/b/braid_of_fire.txt svneol=native#text/plain
 res/cardsfolder/b/braids_cabal_minion.txt svneol=native#text/plain
 res/cardsfolder/b/braids_conjurer_adept.txt svneol=native#text/plain
+res/cardsfolder/b/braids_conjurer_adept_avatar.txt -text
 res/cardsfolder/b/braidwood_cup.txt svneol=native#text/plain
 res/cardsfolder/b/braidwood_sextant.txt svneol=native#text/plain
 res/cardsfolder/b/brain_freeze.txt svneol=native#text/plain
