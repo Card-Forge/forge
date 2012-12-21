@@ -269,7 +269,7 @@ public class SSubmenuQuestUtil {
 
         List<QuestWorld> worlds = new ArrayList<QuestWorld>();
         final QuestController qCtrl = Singletons.getModel().getQuest();
-        
+
         for (QuestWorld qw : Singletons.getModel().getWorlds()) {
             if (qCtrl.getWorld() != qw) {
                 worlds.add(qw);
