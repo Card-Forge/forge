@@ -5878,6 +5878,7 @@ res/cardsfolder/l/loxodon_anchorite.txt svneol=native#text/plain
 res/cardsfolder/l/loxodon_convert.txt svneol=native#text/plain
 res/cardsfolder/l/loxodon_gatekeeper.txt svneol=native#text/plain
 res/cardsfolder/l/loxodon_hierarch.txt svneol=native#text/plain
+res/cardsfolder/l/loxodon_hierarch_avatar.txt -text
 res/cardsfolder/l/loxodon_mender.txt svneol=native#text/plain
 res/cardsfolder/l/loxodon_mystic.txt svneol=native#text/plain
 res/cardsfolder/l/loxodon_partisan.txt svneol=native#text/plain
@@ -7012,6 +7013,7 @@ res/cardsfolder/o/one_eyed_scarecrow.txt -text
 res/cardsfolder/o/one_with_nature.txt svneol=native#text/plain
 res/cardsfolder/o/one_with_nothing.txt svneol=native#text/plain
 res/cardsfolder/o/oni_of_wild_places.txt svneol=native#text/plain
+res/cardsfolder/o/oni_of_wild_places_avatar.txt -text
 res/cardsfolder/o/oni_possession.txt svneol=native#text/plain
 res/cardsfolder/o/onslaught.txt svneol=native#text/plain
 res/cardsfolder/o/onulet.txt svneol=native#text/plain
@@ -8343,6 +8345,7 @@ res/cardsfolder/r/rouse.txt svneol=native#text/plain
 res/cardsfolder/r/rowan_treefolk.txt svneol=native#text/plain
 res/cardsfolder/r/rowen.txt -text
 res/cardsfolder/r/royal_assassin.txt svneol=native#text/plain
+res/cardsfolder/r/royal_assassin_avatar.txt -text
 res/cardsfolder/r/royal_decree.txt svneol=native#text/plain
 res/cardsfolder/r/royal_falcon.txt svneol=native#text/plain
 res/cardsfolder/r/royal_herbalist.txt svneol=native#text/plain
@@ -8362,6 +8365,7 @@ res/cardsfolder/r/rukh_egg.txt svneol=native#text/plain
 res/cardsfolder/r/rule_of_law.txt -text
 res/cardsfolder/r/rumbling_crescendo.txt svneol=native#text/plain
 res/cardsfolder/r/rumbling_slum.txt svneol=native#text/plain
+res/cardsfolder/r/rumbling_slum_avatar.txt -text
 res/cardsfolder/r/rummaging_goblin.txt -text
 res/cardsfolder/r/rummaging_wizard.txt svneol=native#text/plain
 res/cardsfolder/r/run_wild.txt svneol=native#text/plain
@@ -8808,6 +8812,7 @@ res/cardsfolder/s/serpents_gift.txt -text
 res/cardsfolder/s/serra.txt -text
 res/cardsfolder/s/serra_advocate.txt svneol=native#text/plain
 res/cardsfolder/s/serra_angel.txt svneol=native#text/plain
+res/cardsfolder/s/serra_angel_avatar.txt -text
 res/cardsfolder/s/serra_ascendant.txt svneol=native#text/plain
 res/cardsfolder/s/serra_avatar.txt svneol=native#text/plain
 res/cardsfolder/s/serra_avenger.txt svneol=native#text/plain
@@ -9655,6 +9660,7 @@ res/cardsfolder/s/squeaking_pie_sneak.txt -text
 res/cardsfolder/s/squealing_devil.txt -text
 res/cardsfolder/s/squee.txt -text
 res/cardsfolder/s/squee_goblin_nabob.txt svneol=native#text/plain
+res/cardsfolder/s/squee_goblin_nabob_avatar.txt -text
 res/cardsfolder/s/squees_embrace.txt svneol=native#text/plain
 res/cardsfolder/s/squees_toy.txt svneol=native#text/plain
 res/cardsfolder/s/squeeze.txt svneol=native#text/plain
@@ -9678,6 +9684,7 @@ res/cardsfolder/s/stalking_assassin.txt svneol=native#text/plain
 res/cardsfolder/s/stalking_bloodsucker.txt svneol=native#text/plain
 res/cardsfolder/s/stalking_stones.txt svneol=native#text/plain
 res/cardsfolder/s/stalking_tiger.txt svneol=native#text/plain
+res/cardsfolder/s/stalking_tiger_avatar.txt -text
 res/cardsfolder/s/stalking_vengeance.txt svneol=native#text/plain
 res/cardsfolder/s/stalking_yeti.txt -text
 res/cardsfolder/s/stalwart_shield_bearers.txt svneol=native#text/plain
