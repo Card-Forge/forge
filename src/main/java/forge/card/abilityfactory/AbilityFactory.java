@@ -1021,9 +1021,11 @@ public class AbilityFactory {
                 if (o instanceof List<?>) {
                     @SuppressWarnings("unchecked")
                     final List<Player> pList = (List<Player>) o;
-                    for (final Player p : pList) {
-                        if (!players.contains(p)) {
-                            players.add(p);
+                    if (!pList.isEmpty() && pList.get(0) instanceof Player) {
+                        for (final Player p : pList) {
+                            if (!players.contains(p)) {
+                                players.add(p);
+                            }
                         }
                     }
                 }
