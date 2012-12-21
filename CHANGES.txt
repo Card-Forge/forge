@@ -139,6 +139,18 @@ Fixes/Features:
 - Renumbered the Shandalar challenges to make them unique (in order to prevent potential conflicts with non-repeatable challenges in the main challenges folder).
 - Fixed cost of Simic Basilisk.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added Phenomena core type,
+- Removed Swing reference from Deck class
+- add org.apache.commons-lang
+- 1. GameType store deck restrictions in a more structured way
+- 2. Check for multiple unique cards considers name the only key attribute 
+- 3. Removed warnings for unused imports
+- Added some missing setinfos for Vanguard Avatars
+- Fixed Royal Assassin Avatar and Oni of Wild Places Avatar
+- Do not display the current world in the Travel destination dialog.
+- CheckStyle.
+- Very minor CheckStyle.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -148,12 +160,22 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 Added the following Schemes:
 
-
+Introductions Are in Order
 
 
 Added the following Vanguard Avatars:
 
-
+Loxodon Hierarch Avatar
+Oni of Wild Places Avatar
+Royal Assassin Avatar
+Rumbling Slum Avatar
+Serra Angel Avatar
+Squee, Goblin Nabob Avatar
+Stalking Tiger Avatar
+Reaper King Avatar
+Rith the Awakener Avatar
+Tesya, Orzhov Scion Avatar
+Braids Conjurer Adept Avatar
 
 
 Added the following cards:
