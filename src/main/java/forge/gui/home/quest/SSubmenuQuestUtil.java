@@ -269,13 +269,15 @@ public class SSubmenuQuestUtil {
 
         List<QuestWorld> worlds = new ArrayList<QuestWorld>();
         final QuestController qCtrl = Singletons.getModel().getQuest();
-
+        
         for (QuestWorld qw : Singletons.getModel().getWorlds()) {
-            worlds.add(qw);
+            if (qCtrl.getWorld() != qw) {
+                worlds.add(qw);
+            }
         }
 
         if (worlds.size() < 1) {
-            JOptionPane.showMessageDialog(null, "There are currently no worlds\nin this version of Forge.", "No worlds", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "There are currently no worlds you can travel to\nin this version of Forge.", "No worlds", JOptionPane.ERROR_MESSAGE);
         }
 
         final String setPrompt = "Where do you wish to travel?";
@@ -336,7 +338,7 @@ public class SSubmenuQuestUtil {
             return;
         }
         String errorMessage = deck.getGameTypeConformanceMessage(GameType.Quest);
-        if ( null != errorMessage ) {
+        if (null != errorMessage) {
             JOptionPane.showMessageDialog(null, "Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
             return;
         }
