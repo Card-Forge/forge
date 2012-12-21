@@ -2,11 +2,12 @@ Name:Oni of Wild Places Avatar
 ManaCost:no cost
 Types:Vanguard
 Text:no text
-HandLifeModifier:+0/-2
+HandLifeModifier:+1/-2
 S:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures you control have haste.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Creature | PresentZone$ Battlefield | PresentPlayer$ You | Execute$ TrigBounce | TriggerZones$ Command | TriggerDescription$ At the beginning of your upkeep, return a creature you control to its owner's hand.
 SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Hand | Mandatory$ True | Hidden$ True | ChangeType$ Creature.YouCtrl
 SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/oni_of_wild_places_avatar.jpg
-Oracle:Hand +0, life -2\nCreatures you control have haste.\nAt the beginning of your upkeep, return a creature you control to its owner's hand.
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/oni-of-wild-places.jpg
+Oracle:Hand +1, life -2\nCreatures you control have haste.\nAt the beginning of your upkeep, return a creature you control to its owner's hand.
 End

@@ -5035,6 +5035,7 @@ res/cardsfolder/i/into_the_roil.txt svneol=native#text/plain
 res/cardsfolder/i/into_the_void.txt -text
 res/cardsfolder/i/into_thin_air.txt svneol=native#text/plain
 res/cardsfolder/i/intrepid_hero.txt svneol=native#text/plain
+res/cardsfolder/i/introductions_are_in_order.txt -text
 res/cardsfolder/i/intruder_alarm.txt svneol=native#text/plain
 res/cardsfolder/i/intuition.txt svneol=native#text/plain
 res/cardsfolder/i/inundate.txt svneol=native#text/plain
@@ -7956,6 +7957,7 @@ res/cardsfolder/r/reap_and_sow.txt svneol=native#text/plain
 res/cardsfolder/r/reap_the_seagraf.txt -text
 res/cardsfolder/r/reaper_from_the_abyss.txt -text
 res/cardsfolder/r/reaper_king.txt svneol=native#text/plain
+res/cardsfolder/r/reaper_king_avatar.txt -text
 res/cardsfolder/r/reaper_of_sheoldred.txt svneol=native#text/plain
 res/cardsfolder/r/reaping_the_graves.txt svneol=native#text/plain
 res/cardsfolder/r/reaping_the_rewards.txt svneol=native#text/plain
@@ -8243,6 +8245,7 @@ res/cardsfolder/r/rites_of_reaping.txt -text
 res/cardsfolder/r/rites_of_refusal.txt -text
 res/cardsfolder/r/rites_of_spring.txt -text
 res/cardsfolder/r/rith_the_awakener.txt svneol=native#text/plain
+res/cardsfolder/r/rith_the_awakener_avatar.txt -text
 res/cardsfolder/r/riths_attendant.txt svneol=native#text/plain
 res/cardsfolder/r/riths_charm.txt -text
 res/cardsfolder/r/riths_grove.txt svneol=native#text/plain

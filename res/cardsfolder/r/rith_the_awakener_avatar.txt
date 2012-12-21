@@ -1,0 +1,12 @@
+Name:Rith, the Awakener Avatar
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:+0/+6
+T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigToken | TriggerZones$ Command | TriggerDescription$ Whenever a creature you control deals combat damage to a player, you may pay 5. If you do, put a 5/5 red Dragon creature token with flying onto the battlefield.
+SVar:TrigToken:AB$ Token | Cost$ 5 | TokenOwner$ You | TokenAmount$ 1 | TokenName$ Dragon | TokenTypes$ Creature,Dragon | TokenColors$ Red | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Flying | SpellDescription$ Put a 5/5 red Dragon creature token with flying onto the battlefield.
+SVar:Rarity:Special
+SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/rith_the_awakener_avatar.jpg
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo-2/rith-the-awakener.jpg
+Oracle:Hand +0, life +6\nWhenever a creature you control deals combat damage to a player, you may pay {5}. If you do, put a 5/5 red Dragon creature token with flying onto the battlefield.
+End
