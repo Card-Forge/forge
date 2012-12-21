@@ -2,12 +2,12 @@ Name:Royal Assassin Avatar
 ManaCost:no cost
 Types:Vanguard
 Text:no text
-HandLifeModifier:-2/-3
+HandLifeModifier:-2/+0
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ DrawLoselife | TriggerDescription$ At the beginning of your upkeep, you draw a card and you lose 1 life.
 SVar:DrawLoselife:AB$ Draw | Cost$ 0 | NumCards$ 1 | SubAbility$ DBLoseLife
 SVar:DBLoseLife:DB$ LoseLife | LifeAmount$ 1
 SVar:Rarity:Special
 SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/royal_assassin_avatar.jpg
 SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/royal-assassin.jpg
-Oracle:Hand -2, life -3\nAt the beginning of your upkeep, you draw a card and you lose 1 life.
+Oracle:Hand -2, life +0\nAt the beginning of your upkeep, you draw a card and you lose 1 life.
 End

@@ -1,0 +1,10 @@
+Name:Teysa, Orzhov Scion Avatar
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:+0/-2
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.nonToken | TriggerZones$ Command | Execute$ TrigToken | TriggerDescription$ Whenever a nontoken creature dies, put a 1/1 white Spirit creature token with flying onto the battlefield.
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Spirit | TokenTypes$ Creature,Spirit | TokenOwner$ You | TokenColors$ White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying
+SVar:Rarity:Special
+SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/teysa_orzhov_scion_avatar.jpg
+End
