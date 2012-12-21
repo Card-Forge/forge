@@ -6,7 +6,6 @@ PT:4/3
 S:Mode$ Continuous | Affected$ Creature.withPlainswalk | AddHiddenKeyword$ May be blocked as though it doesn't have Plainswalk. | Description$ Creatures with plainswalk can be blocked as though they didn't have plainswalk.
 S:Mode$ Continuous | Affected$ Creature.withForestwalk | AddHiddenKeyword$ May be blocked as though it doesn't have Forestwalk. | Description$ Creatures with forestwalk can be blocked as though they didn't have forestwalk.
 K:First Strike
-SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_magnus.jpg
 SetInfo:LEG|Uncommon|http://magiccards.info/scans/en/lg/283.jpg

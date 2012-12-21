@@ -10,7 +10,6 @@ A:AB$ Pump | Cost$ SubCounter<All/P1P1> | ValidTgts$ Creature | TgtPrompt$ Selec
 SVar:Y:Sacrificed$CardPower
 SVar:X:SVar$CostCountersRemoved
 SVar:RemAIDeck:True
-SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vish_kal_blood_arbiter.jpg
 SetInfo:COM|Rare|http://magiccards.info/scans/en/cmd/234.jpg
