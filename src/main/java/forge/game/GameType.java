@@ -17,7 +17,18 @@
  */
 package forge.game;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map.Entry;
+
 import org.apache.commons.lang.math.IntRange;
+
+import forge.card.CardCoreType;
+import forge.deck.Deck;
+import forge.deck.DeckSection;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
+import forge.util.Aggregates;
 
 /**
  * GameType is an enum to determine the type of current game. :)
@@ -108,5 +119,108 @@ public enum GameType {
      */
     public int getMaxCardCopies() {
         return maxCardCopies;
+    }
+
+
+    
+    @SuppressWarnings("incomplete-switch")
+    public String getDeckConformanceProblem(Deck deck) {
+        int deckSize = deck.getMain().countAll();
+    
+        int min = getMainRange().getMinimumInteger();
+        int max = getMainRange().getMaximumInteger();
+    
+        if (deckSize < min) {
+            return String.format("should have a minimum of %d cards", min);
+        }
+    
+        if (deckSize > max) {
+            return String.format("should not exceed a maximum of %d cards", max);
+        }
+        
+        switch(this) {
+            case Commander: //Must contain exactly 1 legendary Commander and no sideboard.
+    
+                //TODO:Enforce color identity
+                if (null == deck.getCommander()) {
+                    return "is missing a commander";
+                }
+                if (!deck.getCommander().getCard().getType().isLegendary()) {
+                    return "has a commander that is not a legendary creature";
+                }
+        
+                //No sideboarding in Commander
+                if (!deck.getSideboard().isEmpty()) {
+                    return "has sideboard";
+                }
+                break;
+
+            case Planechase: //Must contain at least 10 planes/phenomenons, but max 2 phenomenons. Singleton.
+                if (deck.getPlanes().countAll() < 10) {
+                    return "should gave at least 10 planes";
+                }
+                int phenoms = 0;
+                for (Entry<CardPrinted, Integer> cp : deck.getPlanes()) {
+        
+                    if (cp.getKey().getCard().getType().typeContains(CardCoreType.Phenomenon)) {
+                        phenoms++;
+                    }
+                    if(cp.getValue() > 1)
+                       return "must not contain multiple copies of any Phenomena";
+        
+                }
+                if (phenoms > 2) {
+                    return "must not contain more than 2 Phenomena";
+                }
+                break;
+                
+            case Archenemy:  //Must contain at least 20 schemes, max 2 of each.
+                if (deck.getSchemes().countAll() < 20) {
+                    return "must contain at least 20 schemes";
+                }
+
+                for (Entry<CardPrinted, Integer> cp : deck.getSchemes()) {
+                    if (cp.getValue() > 2) {
+                        return "must not contain more than 2 copies of any Scheme";
+                    }
+                }
+                break;
+        }
+        
+        int maxCopies = getMaxCardCopies();
+        if ( maxCopies < Integer.MAX_VALUE )  {
+            //Must contain no more than 4 of the same card
+            //shared among the main deck and sideboard, except
+            //basic lands and Relentless Rats
+    
+            DeckSection tmp = new DeckSection(deck.getMain());
+            tmp.addAll(deck.getSideboard());
+            if ( null != deck.getCommander())
+                tmp.add(deck.getCommander());
+    
+            List<String> limitExceptions = Arrays.asList("Relentless Rats");
+    
+            // should group all cards by name, so that different editions of same card are really counted as the same card
+            for (Entry<String, Integer> cp : Aggregates.groupSumBy(tmp, CardPrinted.FN_GET_NAME)) {
+                
+                CardPrinted simpleCard = CardDb.instance().getCard(cp.getKey());
+                boolean canHaveMultiple = simpleCard.getCard().getType().isBasicLand() || limitExceptions.contains(cp.getKey());
+                
+                if (!canHaveMultiple && cp.getValue() > maxCopies) {
+                    return String.format("must not contain more than %d of '%s' card", maxCopies, cp.getKey());
+                }
+            }
+    
+            // The sideboard must contain either 0 or 15 cards
+            int sideboardSize = deck.getSideboard().countAll();
+            IntRange sbRange = getSideRange();  
+            if ( sbRange != null && sideboardSize > 0 && !sbRange.containsInteger(sideboardSize))
+                return sbRange.getMinimumInteger() == sbRange.getMaximumInteger() 
+                ? String.format("must have a sideboard of %d cards or no sideboard at all", sbRange.getMaximumInteger()) 
+                : String.format("must have a sideboard of %d to %d cards or no sideboard at all", sbRange.getMinimumInteger(), sbRange.getMaximumInteger());
+    
+        }
+    
+        return null;
     }
 }

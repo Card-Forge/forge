@@ -323,22 +323,6 @@ public final class CardDb {
         return this.getCard(name);
     }
 
-    // Multiple fetch
-    /**
-     * Gets the cards.
-     * 
-     * @param names
-     *            the names
-     * @return the cards
-     */
-    public List<CardPrinted> getCards(final Iterable<String> names) {
-        final List<CardPrinted> result = new ArrayList<CardPrinted>();
-        for (final String name : names) {
-            result.add(this.getCard(name));
-        }
-        return result;
-    }
-
     /**
      * Gets the cards from latest sets.
      *

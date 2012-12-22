@@ -28,22 +28,17 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-import org.apache.commons.lang.math.IntRange;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
-import forge.card.CardCoreType;
 import forge.deck.io.DeckFileHeader;
 import forge.deck.io.DeckSerializer;
 import forge.gui.deckeditor.tables.TableSorter;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
-import forge.game.GameType;
-import forge.util.Aggregates;
 import forge.util.FileSection;
 import forge.util.FileUtil;
-import java.util.Arrays;
 
 
 /**
@@ -67,12 +62,14 @@ public class Deck extends DeckBase {
     private transient boolean isEdited = false;
     private final DeckSection main;
     private final DeckSection sideboard;
+    private final DeckSection planes;
+    private final DeckSection schemes;
+    
     private transient DeckSection mainEdited;
     private transient DeckSection sideboardEdited;
     private CardPrinted avatar;
     private CardPrinted commander;
-    private final DeckSection planes;
-    private final DeckSection schemes;
+
 
     // gameType is from Constant.GameType, like GameType.Regular
     /**
@@ -244,8 +241,7 @@ public class Deck extends DeckBase {
         final Iterator<String> lineIterator = lines.iterator();
         while (lineIterator.hasNext()) {
             final String line = lineIterator.next();
-            if (line.startsWith(";")) { continue; } // that is a comment or not-yet-supported card
-            if (line.startsWith("[")) { break; } // there comes another section
+            if (line.startsWith(";") || line.startsWith("#")) { continue; } // that is a comment or not-yet-supported card
 
             final Matcher m = p.matcher(line.trim());
             m.matches();
@@ -322,106 +318,6 @@ public class Deck extends DeckBase {
         out.add(String.format("%s", "[schemes]"));
         out.addAll(Deck.writeCardPool(this.getSchemes()));
         return out;
-    }
-
-    public String meetsGameTypeRequirements(GameType type) {
-        return getGameTypeConformanceMessage(type);
-    }
-
-    public String getGameTypeConformanceMessage(GameType type) {
-        int deckSize = getMain().countAll();
-
-        int min = type.getMainRange().getMinimumInteger();
-        int max = type.getMainRange().getMaximumInteger();
-
-        if (deckSize < min) {
-            return String.format("should have a minimum of %d cards", min);
-        }
-
-        if (deckSize > max) {
-            return String.format("should not exceed a maximum of %d cards", max);
-        }
-        
-        if (type == GameType.Commander) { //Must contain exactly 1 legendary Commander and no sideboard.
-
-            //TODO:Enforce color identity
-            if (null == getCommander()) {
-                return "is missing a commander";
-            }
-            if (!getCommander().getCard().getType().isLegendary()) {
-                return "has a commander that is not a legendary creature";
-            }
-
-            //No sideboarding in Commander
-            if (!getSideboard().isEmpty()) {
-                return "has sideboard";
-            }
-        }
-        else if (type == GameType.Planechase) { //Must contain at least 10 planes/phenomenons, but max 2 phenomenons. Singleton.
-
-            if (getPlanes().countAll() < 10) {
-                return "should gave at least 10 planes";
-            }
-            int phenoms = 0;
-            for (Entry<CardPrinted, Integer> cp : getPlanes()) {
-
-                if (cp.getKey().getCard().getType().typeContains(CardCoreType.Phenomenon)) {
-                    phenoms++;
-                }
-                if(cp.getValue() > 1)
-                   return "must not contain multiple copies of any Phenomena";
-
-            }
-            if (phenoms > 2) {
-                return "must not contain more than 2 Phenomena";
-            }
-        }
-        else if (type == GameType.Archenemy)  { //Must contain at least 20 schemes, max 2 of each.
-
-            if (getSchemes().countAll() < 20) {
-                return "must contain at least 20 schemes";
-            }
-
-            for (Entry<CardPrinted, Integer> cp : getSchemes()) {
-                if (cp.getValue() > 2) {
-                    return "must not contain more than 2 copies of any Scheme";
-                }
-            }
-        }
-        
-        int maxCopies = type.getMaxCardCopies();
-        if ( maxCopies < Integer.MAX_VALUE )  {
-            //Must contain no more than 4 of the same card
-            //shared among the main deck and sideboard, except
-            //basic lands and Relentless Rats
-
-            DeckSection tmp = new DeckSection(this.getMain());
-            tmp.addAll(this.getSideboard());
-            if ( null != this.getCommander())
-                tmp.add(this.getCommander());
-
-            List<String> limitExceptions = Arrays.asList("Relentless Rats");
-
-            // should group all cards by name, so that different editions of same card are really counted as the same card
-            for (Entry<String, Integer> cp : Aggregates.groupSumBy(tmp, CardPrinted.FN_GET_NAME)) {
-                
-                CardPrinted simpleCard = CardDb.instance().getCard(cp.getKey());
-                boolean canHaveMultiple = simpleCard.getCard().getType().isBasicLand() || limitExceptions.contains(cp.getKey());
-                
-                if (!canHaveMultiple && cp.getValue() > maxCopies) {
-                    return String.format("must not contain more than %d of '%s' card", maxCopies, cp.getKey());
-                }
-            }
-
-            // The sideboard must contain either 0 or 15 cards
-            int sideboardSize = this.getSideboard().countAll();
-            IntRange sbRange = type.getSideRange();  
-            if ( sbRange != null && sideboardSize > 0 && !sbRange.containsInteger(sideboardSize))
-                return sbRange.getMinimumInteger() == sbRange.getMaximumInteger() ? String.format("must have a sideboard of %d cards or no sideboard at all", sbRange.getMaximumInteger()) : String.format("must have a sideboard of %d to %d cards or no sideboard at all", sbRange.getMinimumInteger(), sbRange.getMaximumInteger());
-
-        }
-
-        return null;
     }
 
     /**

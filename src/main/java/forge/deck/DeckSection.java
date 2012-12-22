@@ -57,7 +57,9 @@ public class DeckSection extends ItemPool<CardPrinted> {
      */
     public void set(final Iterable<String> cardNames) {
         this.clear();
-        this.addAllFlat(CardDb.instance().getCards(cardNames));
+        for (final String name : cardNames) {
+            this.add(CardDb.instance().getCard(name));
+        }
     }
 
     /**

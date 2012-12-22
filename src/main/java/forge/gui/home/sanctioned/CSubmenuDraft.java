@@ -100,7 +100,7 @@ public enum CSubmenuDraft implements ICDoc {
                     "No deck selected for human!\r\n(You may need to build a new deck.)",
                     "No deck", JOptionPane.ERROR_MESSAGE);
             return;
-        } else if (null != humanDeck.meetsGameTypeRequirements(GameType.Draft)) {
+        } else if (null != GameType.Draft.getDeckConformanceProblem(humanDeck)) {
             JOptionPane.showMessageDialog(null,
                     "The selected deck doesn't have enough cards to play (minimum 40)."
                     + "\r\nUse the deck editor to choose the cards you want before starting.",
