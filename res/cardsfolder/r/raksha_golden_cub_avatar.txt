@@ -1,0 +1,12 @@
+Name:Raksha Golden Cub Avatar
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:+1/+9
+S:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddToughness$ 1 | Description$ Creatures you control get +0/+1.
+S:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl+equipped | AddPower$ 1 | AddKeyword$ First Strike | Description$ Equipped creatures you control get +1/+0 and have first strike.
+SVar:Rarity:Special
+SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/raksha_golden_cub_avatar.jpg
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/raksha-golden-cub.jpg
+Oracle:Hand +1, life +9\nCreatures you control get +0/+1.\nEquipped creatures you control get +1/+0 and have first strike.
+End

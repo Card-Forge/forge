@@ -1,0 +1,13 @@
+Name:Into the Earthen Maw
+ManaCost:no cost
+Types:Scheme
+Text:no text
+T:Mode$ SetInMotion | ValidCard$ Card.Self | Execute$ ExileFlying | TriggerZones$ Command | TriggerDescription$ When you set this scheme in motion, exile up to one target creature with flying, up to one target creature without flying, and all cards from up to one target opponent's graveyard.
+SVar:ExileFlying:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.withFlying | TgtPrompt$ Select target creature with Flying | SubAbility$ ExileWithoutFly
+SVar:ExileWithoutFly:DB$ ChangeZone | Origin$ Battlefield | Destination$ Exile | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Creature.withoutFlying | TgtPrompt$ Select target creature without Flying | SubAbility$ ExileAllYard
+SVar:ExileAllYard:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Exile | TargetMin$ 0 | TargetMax$ 1 | ValidTgts$ Opponent | ChangeType$ Card
+SVar:Rarity:Common
+SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/into_the_earthen_maw.jpg
+SetInfo:ARC|Common|http://magiccards.info/extras/scheme/archenemy/into-the-earthen-maw.jpg
+Oracle:When you set this scheme in motion, exile up to one target creature with flying, up to one target creature without flying, and all cards from up to one target opponent's graveyard.
+End

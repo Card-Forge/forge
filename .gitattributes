@@ -4628,6 +4628,7 @@ res/cardsfolder/h/heretics_punishment.txt -text svneol=unset#text/plain
 res/cardsfolder/h/heritage_druid.txt svneol=native#text/plain
 res/cardsfolder/h/hermetic_study.txt svneol=native#text/plain
 res/cardsfolder/h/hermit_druid.txt svneol=native#text/plain
+res/cardsfolder/h/hermit_druid_avatar.txt -text
 res/cardsfolder/h/hero_of_bladehold.txt svneol=native#text/plain
 res/cardsfolder/h/hero_of_oxid_ridge.txt svneol=native#text/plain
 res/cardsfolder/h/heroes_remembered.txt svneol=native#text/plain
@@ -4664,6 +4665,7 @@ res/cardsfolder/h/highland_giant.txt svneol=native#text/plain
 res/cardsfolder/h/highland_weald.txt svneol=native#text/plain
 res/cardsfolder/h/highway_robber.txt svneol=native#text/plain
 res/cardsfolder/h/higure_the_still_wind.txt svneol=native#text/plain
+res/cardsfolder/h/higure_the_still_wind_avatar.txt -text
 res/cardsfolder/h/hikari_twilight_guardian.txt -text
 res/cardsfolder/h/hill_giant.txt svneol=native#text/plain
 res/cardsfolder/h/hillcomber_giant.txt svneol=native#text/plain
@@ -5029,6 +5031,7 @@ res/cardsfolder/i/intimidation.txt svneol=native#text/plain
 res/cardsfolder/i/intimidation_bolt.txt -text svneol=unset#text/plain
 res/cardsfolder/i/intimidator_initiate.txt svneol=native#text/plain
 res/cardsfolder/i/into_the_core.txt svneol=native#text/plain
+res/cardsfolder/i/into_the_earthen_maw.txt -text
 res/cardsfolder/i/into_the_fray.txt -text
 res/cardsfolder/i/into_the_maw_of_hell.txt -text
 res/cardsfolder/i/into_the_north.txt svneol=native#text/plain
@@ -7858,6 +7861,7 @@ res/cardsfolder/r/raking_canopy.txt svneol=native#text/plain
 res/cardsfolder/r/rakish_heir.txt -text
 res/cardsfolder/r/rakka_mar.txt svneol=native#text/plain
 res/cardsfolder/r/raksha_golden_cub.txt svneol=native#text/plain
+res/cardsfolder/r/raksha_golden_cub_avatar.txt -text
 res/cardsfolder/r/rally.txt svneol=native#text/plain
 res/cardsfolder/r/rally_the_forces.txt svneol=native#text/plain
 res/cardsfolder/r/rally_the_peasants.txt -text
