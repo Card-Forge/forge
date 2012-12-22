@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -19,6 +20,7 @@ import forge.control.FControl;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.deck.DeckGroup;
+import forge.game.limited.ReadDraftRankings;
 import forge.game.GameType;
 import forge.game.limited.SealedDeck;
 import forge.game.limited.SealedDeckFormat;
@@ -218,7 +220,7 @@ public enum CSubmenuSealed implements ICDoc {
         }
 
         // Rank the AI decks
-        sealed.rankAiDecks();
+        sealed.rankAiDecks(new DeckComparer());
 
         Singletons.getModel().getDecks().getSealed().add(sealed);
 
@@ -236,5 +238,54 @@ public enum CSubmenuSealed implements ICDoc {
     @Override
     public Command getCommandOnSelect() {
         return null;
+    }
+    
+    static class DeckComparer implements java.util.Comparator<Deck> {
+        ReadDraftRankings ranker = new ReadDraftRankings();
+
+        public double getDraftValue(Deck d) {
+            double value = 0;
+            double divider = 0;
+
+
+
+            if (d.getMain().isEmpty()) {
+                return 0;
+            }
+
+            double best = 1.0;
+
+            for (Entry<CardPrinted, Integer> kv : d.getMain()) {
+                CardPrinted evalCard = kv.getKey();
+                int count = kv.getValue();
+                if (ranker.getRanking(evalCard.getName(), evalCard.getEdition()) != null) {
+                    double add = ranker.getRanking(evalCard.getName(), evalCard.getEdition());
+                    // System.out.println(evalCard.getName() + " is worth " + add);
+                    value += add * count;
+                    divider += count;
+                    if (best > add) {
+                        best = add;
+                    }
+                }
+            }
+
+            if (divider == 0 || value == 0) {
+                return 0;
+            }
+
+            value /= divider;
+
+            return (20.0 / (best + (2 * value)));
+        }
+
+        
+        @Override
+        public int compare(Deck o1, Deck o2) {
+            double delta = getDraftValue(o1) - getDraftValue(o2);
+            if ( delta > 0 ) return 1;
+            if ( delta < 0 ) return -1;
+            return 0;
+        }
+        
     }
 }

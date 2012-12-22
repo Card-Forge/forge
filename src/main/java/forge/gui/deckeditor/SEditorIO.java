@@ -99,7 +99,6 @@ public class SEditorIO {
      * 
      * @return boolean, true if success
      */
-    @SuppressWarnings("unchecked")
     public static boolean saveDeck() {
         return saveDeck(false);
     }

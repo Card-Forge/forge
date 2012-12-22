@@ -40,7 +40,6 @@ import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
 import forge.game.GameType;
-import forge.game.limited.ReadDraftRankings;
 import forge.util.Aggregates;
 import forge.util.FileSection;
 import forge.util.FileUtil;
@@ -323,49 +322,6 @@ public class Deck extends DeckBase {
         out.add(String.format("%s", "[schemes]"));
         out.addAll(Deck.writeCardPool(this.getSchemes()));
         return out;
-    }
-
-    /**
-     * <p>
-     * getDraftValue.
-     * </p>
-     *
-     * @return the combined draft values of cards in the main deck
-     */
-    public double getDraftValue() {
-
-        double value = 0;
-        double divider = 0;
-
-        ReadDraftRankings ranker = new ReadDraftRankings();
-
-        if (this.getMain().isEmpty()) {
-            return 0;
-        }
-
-        double best = 1.0;
-
-        for (Entry<CardPrinted, Integer> kv : this.getMain()) {
-            CardPrinted evalCard = kv.getKey();
-            int count = kv.getValue();
-            if (ranker.getRanking(evalCard.getName(), evalCard.getEdition()) != null) {
-                double add = ranker.getRanking(evalCard.getName(), evalCard.getEdition());
-                // System.out.println(evalCard.getName() + " is worth " + add);
-                value += add * count;
-                divider += count;
-                if (best > add) {
-                    best = add;
-                }
-            }
-        }
-
-        if (divider == 0 || value == 0) {
-            return 0;
-        }
-
-        value /= divider;
-
-        return (20.0 / (best + (2 * value)));
     }
 
     public String meetsGameTypeRequirements(GameType type) {

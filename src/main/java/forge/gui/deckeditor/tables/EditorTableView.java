@@ -137,7 +137,6 @@ public final class EditorTableView<T extends InventoryItem> {
         });
     }
 
-    @SuppressWarnings("unchecked")
     public void setAvailableColumns(final List<TableColumnInfo<InventoryItem>> cols0) {
         final DefaultTableColumnModel colmodel = new DefaultTableColumnModel();
 

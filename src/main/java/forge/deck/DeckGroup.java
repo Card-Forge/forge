@@ -18,7 +18,8 @@
 package forge.deck;
 
 import java.util.ArrayList;
-import java.util.TreeMap;
+import java.util.Collections;
+import java.util.Comparator;
 // import java.lang.Double;
 import java.util.List;
 
@@ -79,24 +80,11 @@ public class DeckGroup extends DeckBase {
      *
      * 
      */
-    public final void rankAiDecks() {
+    public final void rankAiDecks(Comparator<Deck> comparator) {
         if (this.aiDecks.size() < 2) {
             return;
         }
-
-        // double [] draftValues = new double [this.aiDecks.size()];
-        TreeMap<Double, Deck> draftData = new TreeMap<Double, Deck>();
-
-        for (int i = 0; i < this.aiDecks.size(); i++) {
-            // draftValues[i] = this.aiDecks.get(i).getDraftValue();
-            draftData.put(new Double(this.aiDecks.get(i).getDraftValue()), this.aiDecks.get(i));
-            // System.out.println("\nAI Deck " + i  + "(" + this.aiDecks.get(i) + ") has draft value:" + this.aiDecks.get(i).getDraftValue() + "\n\n");
-        }
-
-        List<Deck> sortedData = new ArrayList<Deck>(draftData.values());
-
-        this.aiDecks = sortedData;
-
+        Collections.sort(aiDecks, comparator);
     }
 
     @Override
