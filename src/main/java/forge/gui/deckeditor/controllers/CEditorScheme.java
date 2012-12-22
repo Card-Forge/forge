@@ -17,11 +17,10 @@
  */
 package forge.gui.deckeditor.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.base.Supplier;
-import com.google.common.collect.Iterables;
-
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.gui.deckeditor.SEditorIO;
@@ -121,7 +120,12 @@ public final class CEditorScheme extends ACEditorBase<CardPrinted, Deck> {
      */
     @Override
     public void resetTables() {
-        this.getTableCatalog().setDeck(ItemPool.createFrom(Iterables.filter(CardDb.instance().getAllNonTraditionalCards(), CardPrinted.Predicates.type("Scheme")), CardPrinted.class));
+        List<CardPrinted> schemes = new ArrayList<CardPrinted>();
+        for(CardPrinted cp : CardDb.instance().getAllNonTraditionalCards()) {
+            if ( cp.getCard().getType().isScheme() ) 
+                schemes.add(cp);
+        }
+        this.getTableCatalog().setDeck(ItemPool.createFrom(schemes, CardPrinted.class));
         this.getTableDeck().setDeck(this.controller.getModel().getSchemes());
     }
 

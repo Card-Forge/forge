@@ -423,7 +423,8 @@ public final class SColumnUtil {
     private static final Function<Entry<InventoryItem, Integer>, Comparable<?>> FN_TYPE_COMPARE = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
         @Override
         public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
-            return from.getKey().getType();
+            InventoryItem i = from.getKey();
+            return i instanceof CardPrinted ? ((CardPrinted)i).getCard().getType().toString() : i.getItemType();
         }
     };
 
@@ -431,7 +432,8 @@ public final class SColumnUtil {
     private static final Function<Entry<InventoryItem, Integer>, Object> FN_TYPE_GET = new Function<Entry<InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
-            return from.getKey().getType();
+            InventoryItem i = from.getKey();
+            return i instanceof CardPrinted ? ((CardPrinted)i).getCard().getType().toString() : i.getItemType();
         }
     };
 

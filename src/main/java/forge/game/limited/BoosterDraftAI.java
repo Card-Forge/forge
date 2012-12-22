@@ -254,17 +254,17 @@ public class BoosterDraftAI {
             if (rankedPlayableCards.containsValue(best.getValue())) {
                 // If best card is playable, pick it.
                 pickedCard = best.getValue();
-                System.out.println("Chose Best: " + "[" + best.getKey() + "] " + pickedCard.getName() + " ("
-                        + pickedCard.getCard().getManaCost() + ") " + pickedCard.getType().toString());
+                System.out.println("Choose Best: " + "[" + best.getKey() + "] " + pickedCard.getName() + " ("
+                        + pickedCard.getCard().getManaCost() + ") " + pickedCard.getCard().getType().toString());
             } else {
                 // If not, find the best card that is playable.
                 Map.Entry<Double, CardPrinted> bestPlayable = rankedPlayableCards.firstEntry();
                 if (bestPlayable == null) {
                     // Nothing is playable, so just take the best card.
                     pickedCard = best.getValue();
-                    System.out.println("Nothing playable, chose Best: " + "[" + best.getKey() + "] "
+                    System.out.println("Nothing playable, choose Best: " + "[" + best.getKey() + "] "
                             + pickedCard.getName() + " (" + pickedCard.getCard().getManaCost() + ") "
-                            + pickedCard.getType().toString());
+                            + pickedCard.getCard().getType().toString());
                 } else {
                     // If the best card is far better than the best playable,
                     // take the best. Otherwise, take the one that is playable.
@@ -272,14 +272,14 @@ public class BoosterDraftAI {
                         pickedCard = best.getValue();
                         System.out.println("Best is much better than playable; chose Best: " + "[" + best.getKey()
                                 + "] " + pickedCard.getName() + " (" + pickedCard.getCard().getManaCost() + ") "
-                                + pickedCard.getType().toString());
+                                + pickedCard.getCard().getType().toString());
                         System.out.println("Playable was: " + "[" + bestPlayable.getKey() + "] "
                                 + bestPlayable.getValue().getName());
                     } else {
                         pickedCard = bestPlayable.getValue();
-                        System.out.println("Chose Playable: " + "[" + bestPlayable.getKey() + "] "
+                        System.out.println("Chosen Playable: " + "[" + bestPlayable.getKey() + "] "
                                 + pickedCard.getName() + " (" + pickedCard.getCard().getManaCost() + ") "
-                                + pickedCard.getType().toString());
+                                + pickedCard.getCard().getType().toString());
                         System.out.println("Best was: " + "[" + best.getKey() + "] " + best.getValue().getName());
                     }
                 }

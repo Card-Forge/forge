@@ -66,7 +66,7 @@ public class BoosterPack extends OpenablePack {
     }
 
     @Override
-    public final String getType() {
+    public final String getItemType() {
         return "Booster Pack";
     }
 

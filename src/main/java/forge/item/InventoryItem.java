@@ -42,5 +42,5 @@ public interface InventoryItem {
      * 
      * @return the type
      */
-    String getType();
+    String getItemType();
 }

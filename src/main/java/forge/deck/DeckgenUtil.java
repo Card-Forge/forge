@@ -16,8 +16,6 @@ import javax.swing.JOptionPane;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-import com.google.common.collect.Iterables;
-
 import forge.Singletons;
 import forge.deck.generate.Generate2ColorDeck;
 import forge.deck.generate.Generate3ColorDeck;
@@ -29,8 +27,8 @@ import forge.item.CardPrinted;
 import forge.item.ItemPoolView;
 import forge.quest.QuestEvent;
 import forge.quest.QuestEventManager;
+import forge.util.Aggregates;
 import forge.util.IStorage;
-import forge.util.MyRandom;
 
 /** 
  * Utility collection for various types of decks.
@@ -311,25 +309,22 @@ public class DeckgenUtil {
 
     public static Deck generateSchemeDeck() {
         Deck res = new Deck();
+        List<CardPrinted> allSchemes = new ArrayList<CardPrinted>();
+        for( CardPrinted c : CardDb.instance().getAllNonTraditionalCards() ) {
+            if ( c.getCard().getType().isScheme())
+                allSchemes.add(c);
+        }
 
-        Iterable<CardPrinted> allSchemes = Iterables.filter(CardDb.instance().getAllNonTraditionalCards(), CardPrinted.Predicates.type("Scheme"));
-
-        for (int i = 0; i < 20; i++) {
-            CardPrinted cp = Iterables.get(allSchemes, MyRandom.getRandom().nextInt(Iterables.size(allSchemes)));
-            int appearances = 0;
-            for (CardPrinted added : res.getSchemes().toFlatList()) {
-                if (added.getName().equals(cp.getName())) {
-
-                    appearances++;
-                }
-            }
-
+        int schemesToAdd = 20;
+        int attemptsLeft = 100; // to avoid endless loop
+        while(schemesToAdd > 0 && attemptsLeft > 0) {
+            CardPrinted cp = Aggregates.random(allSchemes);
+            int appearances = res.getSchemes().count(cp) + 1;
             if (appearances < 2) {
-
                 res.getSchemes().add(cp);
+                schemesToAdd--;
             } else {
-
-                i--;
+                attemptsLeft--;
             }
         }
 

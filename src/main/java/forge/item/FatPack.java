@@ -63,7 +63,7 @@ public class FatPack extends OpenablePack {
 
 
     @Override
-    public final String getType() {
+    public final String getItemType() {
         return "Fat Pack";
     }
 

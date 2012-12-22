@@ -70,7 +70,7 @@ public class PreconDeck implements InventoryItemFromSet {
      * @see forge.item.InventoryItem#getType()
      */
     @Override
-    public String getType() {
+    public String getItemType() {
         return "Prebuilt Deck";
     }
 

@@ -64,7 +64,7 @@ public class TournamentPack extends OpenablePack {
 
 
     @Override
-    public final String getType() {
+    public final String getItemType() {
         return !isStarterDeck() ? "Tournament Pack" : "Starter Deck";
     }
 

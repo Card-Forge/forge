@@ -16,8 +16,6 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import com.google.common.collect.Iterables;
-
 import net.miginfocom.swing.MigLayout;
 import forge.game.player.PlayerType;
 import forge.gui.CardDetailPanel;
@@ -66,7 +64,8 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
     private final JCheckBox cbArtifacts = new FCheckBox("Remove Artifacts");
     private final JCheckBox cbRemoveSmall = new FCheckBox("Remove Small Creatures");
 
-    private final Iterable<CardPrinted> allAvatars = Iterables.filter(CardDb.instance().getAllNonTraditionalCards(), CardPrinted.Predicates.type("Vanguard"));
+    private final List<CardPrinted> allAvatars = new ArrayList<CardPrinted>();
+    
     private final List<CardPrinted> allAiAvatars = new ArrayList<CardPrinted>();
     private final List<CardPrinted> nonRandomHumanAvatars = new ArrayList<CardPrinted>();
     private final List<CardPrinted> nonRandomAiAvatars = new ArrayList<CardPrinted>();
@@ -94,7 +93,7 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
         Vector<Object> aiListData = new Vector<Object>();
         humanListData.add("Random");
         aiListData.add("Random");
-        for (CardPrinted cp : allAvatars) {
+        for (CardPrinted cp : getAllAvatars()) {
             humanListData.add(cp);
             if (!cp.getCard().getRemRandomDecks()) {
                 nonRandomHumanAvatars.add(cp);
@@ -359,6 +358,12 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
      * @return the allAvatars
      */
     public Iterable<CardPrinted> getAllAvatars() {
+        if ( allAvatars.isEmpty() ) {
+            for(CardPrinted c : CardDb.instance().getAllNonTraditionalCards()) {
+                if( c.getCard().getType().isVanguard())
+                    allAvatars.add(c);
+            }
+        }
         return allAvatars;
     }
 

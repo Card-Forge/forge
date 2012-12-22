@@ -32,17 +32,12 @@ import org.apache.commons.lang.math.IntRange;
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
-
 import forge.card.CardCoreType;
-import forge.card.CardRules;
-import forge.card.CardRulesPredicates;
 import forge.deck.io.DeckFileHeader;
 import forge.deck.io.DeckSerializer;
 import forge.gui.deckeditor.tables.TableSorter;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
-import forge.item.ItemPool;
 import forge.item.ItemPoolView;
 import forge.game.GameType;
 import forge.game.limited.ReadDraftRankings;
