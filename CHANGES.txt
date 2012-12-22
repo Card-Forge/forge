@@ -151,6 +151,19 @@ Fixes/Features:
 - CheckStyle.
 - Very minor CheckStyle.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Small fix to Braids Avatar
+- Fixed Lightmine Field.
+- Added SVar:RemAIDeck:True to Waiting in the Weeds.
+- Added Valid filtering for Defined, used by Earthbind
+- The AI can now use Hidetsugu's Second Rite.
+- Updated some SVars.
+- Fixed Mage Slayer
+- Mistype correction.
+- Min/max sideboard size message tweaks.
+- Code simplification.
+- More code simplification.
+- Targeting overlay: Added support for showing arrows for paired creatures, performed some code cleanup.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -161,6 +174,7 @@ Many people helped with this version. A special thank you goes out to them. (Att
 Added the following Schemes:
 
 Introductions Are in Order
+Into the Earthen Maw
 
 
 Added the following Vanguard Avatars:
@@ -176,6 +190,10 @@ Reaper King Avatar
 Rith the Awakener Avatar
 Tesya, Orzhov Scion Avatar
 Braids Conjurer Adept Avatar
+Mirri, the Cursed Avatar
+Hermit Druid Avatar
+Higure, the Still Wind Avatar
+Raksha Golden Cub Avatar
 
 
 Added the following cards:
