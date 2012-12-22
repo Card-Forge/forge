@@ -458,7 +458,7 @@ public class Deck extends DeckBase {
                 boolean canHaveMultiple = simpleCard.getCard().getType().isBasicLand() || limitExceptions.contains(cp.getKey());
                 
                 if (!canHaveMultiple && cp.getValue() > maxCopies) {
-                    return String.format("must not conatin more than %d of '%s' card", maxCopies, cp.getKey());
+                    return String.format("must not contain more than %d of '%s' card", maxCopies, cp.getKey());
                 }
             }
 
@@ -466,7 +466,7 @@ public class Deck extends DeckBase {
             int sideboardSize = this.getSideboard().countAll();
             IntRange sbRange = type.getSideRange();  
             if ( sbRange != null && sideboardSize > 0 && !sbRange.containsInteger(sideboardSize))
-                return String.format("must have a sideboard of %d to %d cards or no sideboard at all", sbRange.getMinimumInteger(), sbRange.getMaximumInteger());
+                return sbRange.getMinimumInteger() == sbRange.getMaximumInteger() ? String.format("must have a sideboard of %d cards or no sideboard at all", sbRange.getMaximumInteger()) : String.format("must have a sideboard of %d to %d cards or no sideboard at all", sbRange.getMinimumInteger(), sbRange.getMaximumInteger());
 
         }
 
