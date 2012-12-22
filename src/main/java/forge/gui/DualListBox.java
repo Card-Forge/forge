@@ -82,8 +82,8 @@ public class DualListBox<T> extends FPanel {
             addAllButton.setVisible(false);
             removeAllButton.setVisible(false);
             autoButton.setEnabled(false);
-            selectOrder.setText("Sideboard (" + sourceListModel.getSize() + "):");
-            orderedLabel.setText("Main Deck (" + destListModel.getSize() + "):");
+            selectOrder.setText(String.format("Sideboard (%d):", sourceListModel.getSize()));
+            orderedLabel.setText(String.format("Main Deck (%d):", destListModel.getSize()));
         }
     }
 
@@ -289,8 +289,8 @@ public class DualListBox<T> extends FPanel {
         if (sideboardingMode) {
             removeAllButton.setVisible(false);
             addAllButton.setVisible(false);
-            selectOrder.setText(String.format("Sideboard (%d)", sourceListModel.getSize()));
-            orderedLabel.setText(String.format("Main Deck (%d)", destListModel.getSize()));
+            selectOrder.setText(String.format("Sideboard (%d):", sourceListModel.getSize()));
+            orderedLabel.setText(String.format("Main Deck (%d):", destListModel.getSize()));
         }
         
         if (remainingObjects != -1) {
