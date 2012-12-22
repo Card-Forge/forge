@@ -125,8 +125,7 @@ public enum TargetingOverlay {
 
             Card enchanting = c.getEnchantingCard();
             List<Card> enchantedBy = c.getEnchantedBy();
-            List<Card> blocking = c.getBlockedThisTurn();
-            List<Card> blockedBy = c.getBlockedByThisTurn();
+            Card paired = c.getPairedWith();
 
             if (null != enchanting) {
                 if (!enchanting.getController().equals(c.getController())) {
@@ -146,6 +145,13 @@ public enum TargetingOverlay {
                     });
                     }
                 }
+            }
+
+            if (null != paired) {
+                arcs.add(new Point[] {
+                    endpoints.get(paired.getUniqueNumber()),
+                    endpoints.get(c.getUniqueNumber())
+                });
             }
 
             for (Card attackingCard : Singletons.getModel().getGame().getCombat().getAttackers()) {
