@@ -19,23 +19,13 @@ package forge.game.limited;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.TreeMap;
+import org.apache.commons.lang3.tuple.Pair;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-
-import forge.Constant;
 import forge.Constant.Preferences;
 import forge.card.ColorSet;
-import forge.card.CardRulesPredicates;
-import forge.card.CardRules;
 import forge.deck.Deck;
-import forge.deck.generate.GenerateDeckUtil;
 import forge.item.CardPrinted;
+import forge.util.Aggregates;
 
 /**
  * <p>
@@ -79,141 +69,50 @@ public class BoosterDraftAI {
             System.out.println("Player[" + player + "] pack: " + chooseFrom.toString());
         }
 
-        CardPrinted pickedCard = null;
+        DeckColors deckCols = this.playerColors.get(player);
+        ColorSet currentChoice = deckCols.getChosenColors();
+        boolean canAddMoreColors = deckCols.canChoseMoreColors();
+        
+        List<Pair<CardPrinted, Double>> rankedCards = rankCards(chooseFrom);
+        
+        for(Pair<CardPrinted, Double> p : rankedCards) {
+            // If a card is not ai playable, somewhat decreare its rating
+            if( p.getKey().getCard().getRemAIDecks() )
+                p.setValue(p.getValue() - TAKE_BEST_THRESHOLD);
 
-        Predicate<CardPrinted> pred = Predicates.compose(CardRulesPredicates.IS_KEPT_IN_AI_DECKS, CardPrinted.FN_GET_RULES);
-        Iterable<CardPrinted> aiPlayablesView = Iterables.filter(chooseFrom, pred);
-        List<CardPrinted> aiPlayables = Lists.newArrayList(aiPlayablesView);
-
-        TreeMap<Double, CardPrinted> rankedCards = rankCards(chooseFrom);
-
-        if (this.playerColors.get(player).getColor1().equals("none")
-                && this.playerColors.get(player).getColor2().equals("none")) {
-            // Generally the first pick of the draft, no colors selected yet.
-
-            // Sort playable cards by rank
-            TreeMap<Double, CardPrinted> rankedPlayableCards = rankCards(aiPlayables);
-
-            pickedCard = pickCard(rankedCards, rankedPlayableCards);
-
-            if (!pickedCard.getCard().getColor().isColorless() && aiPlayables.contains(pickedCard)) {
-                ColorSet color = pickedCard.getCard().getColor();
-                if (color.isMonoColor()) {
-                    this.playerColors.get(player).setColor1(color.toString());
-                } else {
-                    // Arbitrary ordering here...
-                    if (color.hasWhite()) {
-                        this.playerColors.get(player).setColor1(Constant.Color.WHITE);
-                    }
-                    if (color.hasBlue()) {
-                        if (this.playerColors.get(player).getColor1().equals("none")) {
-                            this.playerColors.get(player).setColor1(Constant.Color.BLUE);
-                        } else {
-                            this.playerColors.get(player).setColor2(Constant.Color.BLUE);
-                        }
-                    }
-                    if (color.hasBlack()) {
-                        if (this.playerColors.get(player).getColor1().equals("none")) {
-                            this.playerColors.get(player).setColor1(Constant.Color.BLACK);
-                        } else {
-                            this.playerColors.get(player).setColor2(Constant.Color.BLACK);
-                        }
-                    }
-                    if (color.hasRed()) {
-                        if (this.playerColors.get(player).getColor1().equals("none")) {
-                            this.playerColors.get(player).setColor1(Constant.Color.RED);
-                        } else {
-                            this.playerColors.get(player).setColor2(Constant.Color.RED);
-                        }
-                    }
-                    if (color.hasGreen()) {
-                        if (this.playerColors.get(player).getColor1().equals("none")) {
-                            this.playerColors.get(player).setColor1(Constant.Color.GREEN);
-                        } else {
-                            this.playerColors.get(player).setColor2(Constant.Color.GREEN);
-                        }
-                    }
-                }
-                if (Preferences.DEV_MODE) {
-                    System.out.println("Player[" + player + "] Color1: " + this.playerColors.get(player).getColor1());
-                    if (!this.playerColors.get(player).getColor2().equals("none")) {
-                        System.out.println("Player[" + player + "] Color2: "
-                                + this.playerColors.get(player).getColor2());
-                    }
-                }
-            }
-        } else if (!this.playerColors.get(player).getColor1().equals("none")
-                && this.playerColors.get(player).getColor2().equals("none")) {
-            // Has already picked one color, but not the second.
-
-            // Sort playable, on-color, or mono-colored, or colorless cards
-            TreeMap<Double, CardPrinted> rankedPlayableCards = new TreeMap<Double, CardPrinted>();
-            for (CardPrinted card : aiPlayables) {
-                ColorSet currentColor1 = ColorSet.fromNames(this.playerColors.get(player).getColor1());
-                ColorSet color = card.getCard().getColor();
-                if (color.isColorless() || color.sharesColorWith(currentColor1) || color.isMonoColor()) {
-                    Double rkg = draftRankings.getRanking(card.getName(), card.getEdition());
-                    if (rkg != null) {
-                        rankedPlayableCards.put(rkg, card);
-                    } else {
-                        rankedPlayableCards.put(0.0, card);
-                    }
-                }
-            }
-
-            pickedCard = pickCard(rankedCards, rankedPlayableCards);
-
-            ColorSet color = pickedCard.getCard().getColor();
-            if (!color.isColorless() && aiPlayables.contains(pickedCard)) {
-                ColorSet currentColor1 = ColorSet.fromNames(this.playerColors.get(player).getColor1());
-                if (color.isMonoColor()) {
-                    if (!color.sharesColorWith(currentColor1)) {
-                        this.playerColors.get(player).setColor2(color.toString());
-                    }
-                } else {
-                    // Arbitrary ordering...
-                    if (color.hasWhite() && !currentColor1.isWhite()) {
-                        this.playerColors.get(player).setColor2(Constant.Color.WHITE);
-                    } else if (color.hasBlue() && !currentColor1.isBlue()) {
-                        this.playerColors.get(player).setColor2(Constant.Color.BLUE);
-                    } else if (color.hasBlack() && !currentColor1.isBlack()) {
-                        this.playerColors.get(player).setColor2(Constant.Color.BLACK);
-                    } else if (color.hasRed() && !currentColor1.isRed()) {
-                        this.playerColors.get(player).setColor2(Constant.Color.RED);
-                    } else if (color.hasGreen() && !currentColor1.isGreen()) {
-                        this.playerColors.get(player).setColor2(Constant.Color.GREEN);
-                    }
-                }
-                if (Preferences.DEV_MODE) {
-                    System.out.println("Player[" + player + "] Color2: " + this.playerColors.get(player).getColor2());
-                }
-            }
-        } else {
-            // Has already picked both colors.
-            DeckColors dckColors = this.playerColors.get(player);
-            ColorSet colors = ColorSet.fromNames(dckColors.getColor1(), dckColors.getColor2());
-            Predicate<CardRules> hasColor = Predicates.or(new GenerateDeckUtil.CanBePaidWithColors(colors),
-                    GenerateDeckUtil.COLORLESS_CARDS);
-
-            Iterable<CardPrinted> colorList = Iterables.filter(aiPlayables, Predicates.compose(hasColor, CardPrinted.FN_GET_RULES));
-
-            // Sort playable, on-color cards by rank
-            TreeMap<Double, CardPrinted> rankedPlayableCards = rankCards(colorList);
-
-            pickedCard = pickCard(rankedCards, rankedPlayableCards);
+            // if I cannot choose more colors, and the card cannot be played with chosen colors, decrease its rating.
+            if( !canAddMoreColors && !p.getKey().getCard().getManaCost().canBePaidWithAvaliable(currentChoice))
+                p.setValue(p.getValue() - 10);
         }
 
-        if (pickedCard == null) {
-            final Random r = new Random();
-            pickedCard = chooseFrom.get(r.nextInt(chooseFrom.size()));
+        int cntBestCards = 0;
+        double bestRating = Double.NEGATIVE_INFINITY;
+        CardPrinted bestPick = null;
+        for(Pair<CardPrinted, Double> p : rankedCards) { 
+            double rating = p.getValue();
+            if( rating > bestRating )
+            {
+                bestRating = rating;
+                bestPick = p.getKey();
+                cntBestCards = 1;
+            } else if ( rating == bestRating ) {
+                cntBestCards++;
+            }
         }
 
-        if (pickedCard != null) {
-            chooseFrom.remove(pickedCard);
-            this.deck.get(player).add(pickedCard);
+        if (cntBestCards > 1) {
+            final List<CardPrinted> possiblePick = new ArrayList<CardPrinted>();
+            for(Pair<CardPrinted, Double> p : rankedCards) {
+                if ( p.getValue() == bestRating )
+                    possiblePick.add(p.getKey());
+            }
+            bestPick = Aggregates.random(possiblePick);
         }
 
-        return pickedCard;
+        if (canAddMoreColors)
+            deckCols.addColorsOf(bestPick);
+        
+        return bestPick;
     }
 
     /**
@@ -225,67 +124,18 @@ public class BoosterDraftAI {
      *            List of cards
      * @return map of rankings
      */
-    private TreeMap<Double, CardPrinted> rankCards(final Iterable<CardPrinted> chooseFrom) {
-        TreeMap<Double, CardPrinted> rankedCards = new TreeMap<Double, CardPrinted>();
+    private List<Pair<CardPrinted, Double>> rankCards(final Iterable<CardPrinted> chooseFrom) {
+        List<Pair<CardPrinted, Double>> rankedCards = new ArrayList<Pair<CardPrinted,Double>>();
         for (CardPrinted card : chooseFrom) {
             Double rkg = draftRankings.getRanking(card.getName(), card.getEdition());
             if (rkg != null) {
-                rankedCards.put(rkg, card);
+                rankedCards.add(Pair.of(card, rkg));
             } else {
                 System.out.println("Draft Rankings - Card Not Found: " + card.getName());
-                rankedCards.put(0.0, card);
+                rankedCards.add(Pair.of(card, 0.0));
             }
         }
         return rankedCards;
-    }
-
-    /**
-     * Pick a card.
-     * 
-     * @param rankedCards
-     * @param rankedPlayableCards
-     * @return CardPrinted
-     */
-    private CardPrinted pickCard(TreeMap<Double, CardPrinted> rankedCards,
-            TreeMap<Double, CardPrinted> rankedPlayableCards) {
-        CardPrinted pickedCard = null;
-        Map.Entry<Double, CardPrinted> best = rankedCards.firstEntry();
-        if (best != null) {
-            if (rankedPlayableCards.containsValue(best.getValue())) {
-                // If best card is playable, pick it.
-                pickedCard = best.getValue();
-                System.out.println("Choose Best: " + "[" + best.getKey() + "] " + pickedCard.getName() + " ("
-                        + pickedCard.getCard().getManaCost() + ") " + pickedCard.getCard().getType().toString());
-            } else {
-                // If not, find the best card that is playable.
-                Map.Entry<Double, CardPrinted> bestPlayable = rankedPlayableCards.firstEntry();
-                if (bestPlayable == null) {
-                    // Nothing is playable, so just take the best card.
-                    pickedCard = best.getValue();
-                    System.out.println("Nothing playable, choose Best: " + "[" + best.getKey() + "] "
-                            + pickedCard.getName() + " (" + pickedCard.getCard().getManaCost() + ") "
-                            + pickedCard.getCard().getType().toString());
-                } else {
-                    // If the best card is far better than the best playable,
-                    // take the best. Otherwise, take the one that is playable.
-                    if (best.getKey() + TAKE_BEST_THRESHOLD < bestPlayable.getKey()) {
-                        pickedCard = best.getValue();
-                        System.out.println("Best is much better than playable; chose Best: " + "[" + best.getKey()
-                                + "] " + pickedCard.getName() + " (" + pickedCard.getCard().getManaCost() + ") "
-                                + pickedCard.getCard().getType().toString());
-                        System.out.println("Playable was: " + "[" + bestPlayable.getKey() + "] "
-                                + bestPlayable.getValue().getName());
-                    } else {
-                        pickedCard = bestPlayable.getValue();
-                        System.out.println("Chosen Playable: " + "[" + bestPlayable.getKey() + "] "
-                                + pickedCard.getName() + " (" + pickedCard.getCard().getManaCost() + ") "
-                                + pickedCard.getCard().getType().toString());
-                        System.out.println("Best was: " + "[" + best.getKey() + "] " + best.getValue().getName());
-                    }
-                }
-            }
-        }
-        return pickedCard;
     }
 
     /**

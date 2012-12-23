@@ -115,13 +115,11 @@ public class AbilityManaPart implements java.io.Serializable {
         for (final String c : produced.split(" ")) {
             try {
                 int colorlessAmount = Integer.parseInt(c);
-                final String color = InputPayManaCostUtil.getLongColorString(c);
                 for (int i = 0; i < colorlessAmount; i++) {
-                    this.lastProduced.add(new Mana(color, source, this));
+                    this.lastProduced.add(new Mana(c, source, this));
                 }
             } catch (NumberFormatException e) {
-                final String color = InputPayManaCostUtil.getLongColorString(c);
-                this.lastProduced.add(new Mana(color, source, this));
+                this.lastProduced.add(new Mana(c, source, this));
             }
         }
 

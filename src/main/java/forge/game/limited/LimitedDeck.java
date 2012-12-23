@@ -66,7 +66,7 @@ public class LimitedDeck {
     public LimitedDeck(List<CardPrinted> dList, DeckColors pClrs) {
         this.availableList = dList;
         this.deckColors = pClrs;
-        this.colors = pClrs.getCardColors();
+        this.colors = pClrs.getChosenColors();
 
         // removeUnplayables();
         Iterable<CardPrinted> playables = Iterables.filter(availableList,

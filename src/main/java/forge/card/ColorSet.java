@@ -58,7 +58,7 @@ public final class ColorSet implements Comparable<ColorSet> {
     }
 
     public static ColorSet fromMask(final int mask) {
-        int mask32 = (mask & 0x3E) >> 1;
+        int mask32 = (mask & MagicColor.ALL_COLORS) >> 1;
         if (allColors[mask32] == null) {
             allColors[mask32] = new ColorSet((byte) mask);
         }

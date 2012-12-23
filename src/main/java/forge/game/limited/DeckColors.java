@@ -17,7 +17,10 @@
  */
 package forge.game.limited;
 
+import forge.card.CardManaCost;
 import forge.card.ColorSet;
+import forge.card.MagicColor;
+import forge.item.CardPrinted;
 
 /**
  * Created by IntelliJ IDEA. User: dhudson Date: 6/24/11 Time: 8:42 PM To change
@@ -25,96 +28,45 @@ import forge.card.ColorSet;
  */
 class DeckColors {
 
-    /** The Color1. */
-    private String color1 = "none";
-
-    /** The Color2. */
-    private String color2 = "none";
-
+    private ColorSet chosen;
+    private int colorMask;
+    public final static int MAX_COLORS = 2;
     // public String Splash = "none";
 
-    /**
-     * <p>
-     * Constructor for deckColors.
-     * </p>
-     * 
-     * @param c1
-     *            a {@link java.lang.String} object.
-     * @param c2
-     *            a {@link java.lang.String} object.
-     * @param sp
-     *            a {@link java.lang.String} object.
-     */
-    public DeckColors(final String c1, final String c2, final String sp) {
-        this.setColor1(c1);
-        this.setColor2(c2);
-        // Splash = sp;
+    public ColorSet getChosenColors() {
+        if ( null == chosen )
+            chosen = ColorSet.fromMask(colorMask);
+        return chosen; 
     }
 
     /**
-     * <p>
-     * Constructor for DeckColors.
-     * </p>
+     * TODO: Write javadoc for this method.
+     * @param pickedCard
      */
-    public DeckColors() {
+    public void addColorsOf(CardPrinted pickedCard) {
+        
+        CardManaCost colorsInCard = pickedCard.getCard().getManaCost();
 
+        int colorsCanAdd = MagicColor.ALL_COLORS & ~getChosenColors().getColor();
+        int colorsWantAdd = colorsInCard.getColorProfile() & colorsCanAdd;
+        ColorSet toAdd = ColorSet.fromMask(colorsWantAdd);
+
+        int cntColorsAssigned = getChosenColors().countColors();
+        boolean haveSpace = cntColorsAssigned < MAX_COLORS;
+        if( !haveSpace || toAdd.isColorless() )
+            return;
+
+        for(int i = 0; i < MagicColor.NUMBER_OR_COLORS && cntColorsAssigned < MAX_COLORS; i++ )
+        if (( colorsWantAdd & MagicColor.WHITE << i ) > 0) {
+            colorMask |= MagicColor.WHITE << i;
+            chosen = null; // invalidate color set
+            cntColorsAssigned++;
+        }
     }
 
-    /**
-     * Gets the color1.
-     * 
-     * @return the color1
-     */
-    public String getColor1() {
-        return this.color1;
-    }
 
-    /**
-     * Sets the color1.
-     * 
-     * @param color1in
-     *            the color1 to set
-     */
-    public void setColor1(final String color1in) {
-        this.color1 = color1in;
-    }
-
-    /**
-     * Gets the color2.
-     * 
-     * @return the color2
-     */
-    public String getColor2() {
-        return this.color2;
-    }
-
-    /**
-     * Sets the color2.
-     * 
-     * @param color2in
-     *            the color2 to set
-     */
-    public void setColor2(final String color2in) {
-        this.color2 = color2in;
-    }
-
-    /**
-     * Convert this to CardColor.
-     * 
-     * @return equivalent CardColor
-     */
-    public ColorSet getCardColors() {
-        return ColorSet.fromNames(color1, color2);
-    }
-
-    /**
-     * toString.
-     * 
-     * @return description.
-     */
-    @Override
-    public String toString() {
-        return color1 + '/' + color2;
+    public boolean canChoseMoreColors() {
+        return getChosenColors().countColors() < MAX_COLORS;
     }
 
 }

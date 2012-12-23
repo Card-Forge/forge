@@ -14,7 +14,9 @@ public class MagicColor {
     public static final byte RED = 1 << 4;
     public static final byte WHITE = 1 << 1;
 
-
+    public static final byte ALL_COLORS = BLACK | BLUE | WHITE | RED | GREEN;
+    public static final int NUMBER_OR_COLORS = 5;
+    
 
     public static byte fromName(String s) {
         if (s.equalsIgnoreCase(Constant.Color.WHITE) || s.equalsIgnoreCase("w")) {
