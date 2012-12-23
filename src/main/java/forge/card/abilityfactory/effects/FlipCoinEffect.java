@@ -38,7 +38,13 @@ public class FlipCoinEffect extends SpellEffect {
         }
 
         final AbilityFactory afOutcomes = new AbilityFactory();
-        final boolean victory = GameActionUtil.flipACoin(caller.get(0), sa.getSourceCard());
+        boolean victory;
+        if (sa.hasParam("FlipOnly")) {
+          victory = GameActionUtil.flipACoin(null, sa.getSourceCard());
+        }
+        else {
+          victory = GameActionUtil.flipACoin(caller.get(0), sa.getSourceCard());
+        }
 
         // Run triggers
         // HashMap<String,Object> runParams = new HashMap<String,Object>();
