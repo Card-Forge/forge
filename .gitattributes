@@ -4116,6 +4116,7 @@ res/cardsfolder/g/goblin_outlander.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_patrol.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_piker.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_piledriver.txt svneol=native#text/plain
+res/cardsfolder/g/goblin_psychopath.txt -text
 res/cardsfolder/g/goblin_pyromancer.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_raider.txt svneol=native#text/plain
 res/cardsfolder/g/goblin_rally.txt -text
@@ -4919,6 +4920,7 @@ res/cardsfolder/i/impromptu_raid.txt -text
 res/cardsfolder/i/improvised_armor.txt svneol=native#text/plain
 res/cardsfolder/i/imps_taunt.txt -text
 res/cardsfolder/i/impulse.txt svneol=native#text/plain
+res/cardsfolder/i/impulsive_maneuvers.txt -text
 res/cardsfolder/i/in_the_eye_of_chaos.txt svneol=native#text/plain
 res/cardsfolder/i/in_the_web_of_war.txt svneol=native#text/plain
 res/cardsfolder/i/inaction_injunction.txt -text
