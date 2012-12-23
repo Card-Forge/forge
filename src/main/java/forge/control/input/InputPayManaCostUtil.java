@@ -210,12 +210,12 @@ public class InputPayManaCostUtil {
      * activateManaAbility.
      * </p>
      * @param color a String that represents the Color the mana is coming from
-     * @param sa a SpellAbility that is being paid for
+     * @param saBeingPaidFor a SpellAbility that is being paid for
      * @param manaCost the amount of mana remaining to be paid
      * 
      * @return ManaCost the amount of mana remaining to be paid after the mana is activated
      */
-    public static ManaCost activateManaAbility(String color, final SpellAbility sa, ManaCost manaCost) {
+    public static ManaCost activateManaAbility(String color, final SpellAbility saBeingPaidFor, ManaCost manaCost) {
         ManaPool mp = Singletons.getControl().getPlayer().getManaPool();
 
         // Convert Color to short String
@@ -224,7 +224,7 @@ public class InputPayManaCostUtil {
             manaStr = CardUtil.getShortColor(color);
         }
 
-        return mp.payManaFromPool(sa, manaCost, manaStr);
+        return mp.payManaFromPool(saBeingPaidFor, manaCost, manaStr);
     }
 
     /**

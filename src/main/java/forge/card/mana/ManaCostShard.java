@@ -287,6 +287,44 @@ public class ManaCostShard {
         }
         throw new RuntimeException(String.format("Not found: mana shard with profile = %x", atoms));
     }
+    
+    public static ManaCostShard parseNonGeneric(final String unparsed) {
+        int atoms = 0;
+        for (int iChar = 0; iChar < unparsed.length(); iChar++) {
+            switch (unparsed.charAt(iChar)) {
+            case 'W':
+                atoms |= ManaCostShard.Atom.WHITE;
+                break;
+            case 'U':
+                atoms |= ManaCostShard.Atom.BLUE;
+                break;
+            case 'B':
+                atoms |= ManaCostShard.Atom.BLACK;
+                break;
+            case 'R':
+                atoms |= ManaCostShard.Atom.RED;
+                break;
+            case 'G':
+                atoms |= ManaCostShard.Atom.GREEN;
+                break;
+            case '2':
+                atoms |= ManaCostShard.Atom.OR_2_COLORLESS;
+                break;
+            case 'P':
+                atoms |= ManaCostShard.Atom.OR_2_LIFE;
+                break;
+            case 'S':
+                atoms |= ManaCostShard.Atom.IS_SNOW;
+                break;
+            case 'X':
+                atoms |= ManaCostShard.Atom.IS_X;
+                break;
+            default:
+                break;
+            }
+        }
+        return ManaCostShard.valueOf(atoms);
+    }
 
     /*
      * (non-Javadoc)
