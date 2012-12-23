@@ -30,7 +30,8 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import forge.Constant;
 import forge.Singletons;
-import forge.card.CardColor;
+import forge.card.MagicColor;
+import forge.card.ColorSet;
 import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
 import forge.deck.generate.GenerateDeckUtil.FilterCMC;
@@ -55,7 +56,7 @@ public abstract class GenerateColoredDeckBase {
     protected final Map<String, Integer> cardCounts = new HashMap<String, Integer>();
     protected int maxDuplicates;
 
-    protected CardColor colors;
+    protected ColorSet colors;
     protected final ItemPool<CardPrinted> tDeck;
 
     // 2-colored deck generator has its own constants. The rest works fine with these ones
@@ -218,7 +219,7 @@ public abstract class GenerateColoredDeckBase {
         // start with all cards
         // remove cards that generated decks don't like
         Predicate<CardRules> canPlay = pt == PlayerType.HUMAN ? GenerateDeckUtil.HUMAN_CAN_PLAY : GenerateDeckUtil.AI_CAN_PLAY;
-        Predicate<CardRules> hasColor = new GenerateDeckUtil.ContainsAllColorsFrom(colors);
+        Predicate<CardRules> hasColor = new GenerateDeckUtil.CanBePaidWithColors(colors);
 
         if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.DECKGEN_ARTIFACTS)) {
             hasColor = Predicates.or(hasColor, GenerateDeckUtil.COLORLESS_CARDS);
@@ -237,15 +238,15 @@ public abstract class GenerateColoredDeckBase {
 
             int profile = cpe.getKey().getCard().getManaCost().getColorProfile();
 
-            if ((profile & CardColor.WHITE) != 0) {
+            if ((profile & MagicColor.WHITE) != 0) {
                 increment(res, Constant.Color.BASIC_LANDS.get(0), cpe.getValue());
-            } else if ((profile & CardColor.BLUE) != 0) {
+            } else if ((profile & MagicColor.BLUE) != 0) {
                 increment(res, Constant.Color.BASIC_LANDS.get(1), cpe.getValue());
-            } else if ((profile & CardColor.BLACK) != 0) {
+            } else if ((profile & MagicColor.BLACK) != 0) {
                 increment(res, Constant.Color.BASIC_LANDS.get(2), cpe.getValue());
-            } else if ((profile & CardColor.RED) != 0) {
+            } else if ((profile & MagicColor.RED) != 0) {
                 increment(res, Constant.Color.BASIC_LANDS.get(3), cpe.getValue());
-            } else if ((profile & CardColor.GREEN) != 0) {
+            } else if ((profile & MagicColor.GREEN) != 0) {
                 increment(res, Constant.Color.BASIC_LANDS.get(4), cpe.getValue());
             }
 

@@ -84,7 +84,7 @@ public class DeckHints {
             ret = new ArrayList<CardPrinted>();
             String[] colors = filterParam.split("\\|");
             for (String color : colors) {
-                CardColor cc = CardColor.fromNames(color);
+                ColorSet cc = ColorSet.fromNames(color);
                 addMatchingItems(ret, cardList, CardRulesPredicates.isColor(cc.getColor()), CardPrinted.FN_GET_RULES);
             }
             break;

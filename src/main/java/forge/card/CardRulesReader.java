@@ -99,7 +99,7 @@ public class CardRulesReader {
                     // This is forge.card.CardColor not forge.CardColor.
                     // Why do we have two classes with the same name?
                     final String value = line.substring("Colors:".length());
-                    CardColor newCol = CardColor.fromNames(value.split(","));
+                    ColorSet newCol = ColorSet.fromNames(value.split(","));
                     this.characteristics[this.curCharacteristics].setColor(newCol);
                 }
                 break;

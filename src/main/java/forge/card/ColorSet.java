@@ -30,19 +30,13 @@ import forge.util.BinaryUtil;
  * 
  * 
  */
-public final class CardColor implements Comparable<CardColor> {
-
-    public static final byte WHITE = 1 << 1;
-    public static final byte BLUE = 1 << 2;
-    public static final byte BLACK = 1 << 3;
-    public static final byte RED = 1 << 4;
-    public static final byte GREEN = 1 << 5;
+public final class ColorSet implements Comparable<ColorSet> {
 
     private final byte myColor;
     private final int orderWeight;
 
-    private static CardColor[] allColors = new CardColor[32];
-    private static final CardColor noColor = new CardColor();
+    private static ColorSet[] allColors = new ColorSet[32];
+    private static final ColorSet noColor = new ColorSet();
 
     // TODO: some cards state "CardName is %color%" (e.g. pacts of...) - fix
     // this later
@@ -52,48 +46,34 @@ public final class CardColor implements Comparable<CardColor> {
      * @param mana
      *            the mana
      */
-    private CardColor() {
+    private ColorSet() {
         myColor = 0;
         orderWeight = -1;
     }
 
-    private CardColor(final byte mask) {
+    private ColorSet(final byte mask) {
         this.myColor = mask;
         this.orderWeight = this.getOrderWeight();
 
     }
 
-    public static CardColor fromMask(final int mask) {
+    public static ColorSet fromMask(final int mask) {
         int mask32 = (mask & 0x3E) >> 1;
         if (allColors[mask32] == null) {
-            allColors[mask32] = new CardColor((byte) mask);
+            allColors[mask32] = new ColorSet((byte) mask);
         }
         return allColors[mask32];
     }
 
-    public static CardColor fromNames(String... colors) {
+    public static ColorSet fromNames(String... colors) {
         byte mask = 0;
         for (String s : colors) {
-            if (s.equalsIgnoreCase(Constant.Color.WHITE) || s.equalsIgnoreCase("w")) {
-                mask |= WHITE;
-            }
-            if (s.equalsIgnoreCase(Constant.Color.BLUE) || s.equalsIgnoreCase("u")) {
-                mask |= BLUE;
-            }
-            if (s.equalsIgnoreCase(Constant.Color.BLACK) || s.equalsIgnoreCase("b")) {
-                mask |= BLACK;
-            }
-            if (s.equalsIgnoreCase(Constant.Color.RED) || s.equalsIgnoreCase("r")) {
-                mask |= RED;
-            }
-            if (s.equalsIgnoreCase(Constant.Color.GREEN) || s.equalsIgnoreCase("g")) {
-                mask |= GREEN;
-            }
+            mask |= MagicColor.fromName(s);
         }
         return fromMask(mask);
     }
 
-    public static CardColor fromManaCost(final CardManaCost mana) {
+    public static ColorSet fromManaCost(final CardManaCost mana) {
         return fromMask(mana.getColorProfile());
     }
 
@@ -193,7 +173,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
     @Override
-    public int compareTo(final CardColor other) {
+    public int compareTo(final ColorSet other) {
         return this.orderWeight - other.orderWeight;
     }
 
@@ -204,7 +184,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if successful
      */
     public boolean hasWhite() {
-        return this.hasAnyColor(CardColor.WHITE);
+        return this.hasAnyColor(MagicColor.WHITE);
     }
 
     /**
@@ -213,7 +193,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if successful
      */
     public boolean hasBlue() {
-        return this.hasAnyColor(CardColor.BLUE);
+        return this.hasAnyColor(MagicColor.BLUE);
     }
 
     /**
@@ -222,7 +202,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if successful
      */
     public boolean hasBlack() {
-        return this.hasAnyColor(CardColor.BLACK);
+        return this.hasAnyColor(MagicColor.BLACK);
     }
 
     /**
@@ -231,7 +211,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if successful
      */
     public boolean hasRed() {
-        return this.hasAnyColor(CardColor.RED);
+        return this.hasAnyColor(MagicColor.RED);
     }
 
     /**
@@ -240,7 +220,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if successful
      */
     public boolean hasGreen() {
-        return this.hasAnyColor(CardColor.GREEN);
+        return this.hasAnyColor(MagicColor.GREEN);
     }
 
     /**
@@ -249,7 +229,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if is white
      */
     public boolean isWhite() {
-        return this.isEqual(CardColor.WHITE);
+        return this.isEqual(MagicColor.WHITE);
     }
 
     /**
@@ -258,7 +238,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if is blue
      */
     public boolean isBlue() {
-        return this.isEqual(CardColor.BLUE);
+        return this.isEqual(MagicColor.BLUE);
     }
 
     /**
@@ -267,7 +247,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if is black
      */
     public boolean isBlack() {
-        return this.isEqual(CardColor.BLACK);
+        return this.isEqual(MagicColor.BLACK);
     }
 
     /**
@@ -276,7 +256,7 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if is red
      */
     public boolean isRed() {
-        return this.isEqual(CardColor.RED);
+        return this.isEqual(MagicColor.RED);
     }
 
     /**
@@ -285,12 +265,12 @@ public final class CardColor implements Comparable<CardColor> {
      * @return true, if is green
      */
     public boolean isGreen() {
-        return this.isEqual(CardColor.GREEN);
+        return this.isEqual(MagicColor.GREEN);
     }
 
-    public CardColor inverse() {
+    public ColorSet inverse() {
         byte mask = this.myColor;
-        mask ^= (WHITE | BLUE | BLACK | GREEN | RED);
+        mask ^= (MagicColor.WHITE | MagicColor.BLUE | MagicColor.BLACK | MagicColor.GREEN | MagicColor.RED);
         return fromMask(mask);
     }
 
@@ -311,15 +291,15 @@ public final class CardColor implements Comparable<CardColor> {
         switch (this.myColor) {
         case 0:
             return Constant.Color.COLORLESS;
-        case WHITE:
+        case MagicColor.WHITE:
             return Constant.Color.WHITE;
-        case BLUE:
+        case MagicColor.BLUE:
             return Constant.Color.BLUE;
-        case BLACK:
+        case MagicColor.BLACK:
             return Constant.Color.BLACK;
-        case RED:
+        case MagicColor.RED:
             return Constant.Color.RED;
-        case GREEN:
+        case MagicColor.GREEN:
             return Constant.Color.GREEN;
         default:
             return "multi";
@@ -331,7 +311,7 @@ public final class CardColor implements Comparable<CardColor> {
      * 
      * @return the nullColor
      */
-    public static CardColor getNullColor() {
+    public static ColorSet getNullColor() {
         return noColor;
     }
 
@@ -341,11 +321,11 @@ public final class CardColor implements Comparable<CardColor> {
      * @param ccOther the cc other
      * @return true, if successful
      */
-    public boolean sharesColorWith(CardColor ccOther) {
+    public boolean sharesColorWith(ColorSet ccOther) {
         return (this.myColor & ccOther.myColor) != 0;
     }
 
-    public CardColor getOffColors(CardColor ccOther) {
-        return CardColor.fromMask(~this.myColor & ccOther.myColor);
+    public ColorSet getOffColors(ColorSet ccOther) {
+        return ColorSet.fromMask(~this.myColor & ccOther.myColor);
     }
 }

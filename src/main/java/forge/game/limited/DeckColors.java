@@ -17,7 +17,7 @@
  */
 package forge.game.limited;
 
-import forge.card.CardColor;
+import forge.card.ColorSet;
 
 /**
  * Created by IntelliJ IDEA. User: dhudson Date: 6/24/11 Time: 8:42 PM To change
@@ -103,8 +103,8 @@ class DeckColors {
      * 
      * @return equivalent CardColor
      */
-    public CardColor getCardColors() {
-        return CardColor.fromNames(color1, color2);
+    public ColorSet getCardColors() {
+        return ColorSet.fromNames(color1, color2);
     }
 
     /**

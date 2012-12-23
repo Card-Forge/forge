@@ -17,7 +17,8 @@
  */
 package forge.card.mana;
 
-import forge.card.CardColor;
+import forge.card.MagicColor;
+import forge.card.ColorSet;
 import forge.util.BinaryUtil;
 
 /**
@@ -72,19 +73,19 @@ public class ManaCostShard {
         public static final int COLORLESS = 1 << 0;
 
         /** The Constant WHITE. */
-        public static final int WHITE = CardColor.WHITE; // 1 << 1;
+        public static final int WHITE = MagicColor.WHITE; // 1 << 1;
 
         /** The Constant BLUE. */
-        public static final int BLUE = CardColor.BLUE; // 1 << 2;
+        public static final int BLUE = MagicColor.BLUE; // 1 << 2;
 
         /** The Constant BLACK. */
-        public static final int BLACK = CardColor.BLACK; // 1 << 3;
+        public static final int BLACK = MagicColor.BLACK; // 1 << 3;
 
         /** The Constant RED. */
-        public static final int RED = CardColor.RED; // 1 << 4;
+        public static final int RED = MagicColor.RED; // 1 << 4;
 
         /** The Constant GREEN. */
-        public static final int GREEN = CardColor.GREEN; // 1 << 5;
+        public static final int GREEN = MagicColor.GREEN; // 1 << 5;
 
         /** The Constant IS_X. */
         public static final int IS_X = 1 << 8;
@@ -97,8 +98,9 @@ public class ManaCostShard {
 
         /** The Constant IS_SNOW. */
         public static final int IS_SNOW = 1 << 11;
-
     }
+    
+    public static final int COLORS_SUPERPOSITION = Atom.WHITE | Atom.BLUE | Atom.BLACK | Atom.RED | Atom.GREEN;
 
     /*
      * Why boxed values are here? They is meant to be constant and require no
@@ -193,7 +195,7 @@ public class ManaCostShard {
     /** The Constant G2. */
     public static final ManaCostShard G2 = new ManaCostShard(Atom.GREEN | Atom.OR_2_COLORLESS, "2/G", "2G");
 
-    private static final ManaCostShard[] ALL_POSSIBLE = new ManaCostShard[] { ManaCostShard.X,
+    private static final ManaCostShard[] ALL_POSSIBLE = new ManaCostShard[] { ManaCostShard.X, ManaCostShard.COLORLESS,
             ManaCostShard.WHITE, ManaCostShard.BLUE, ManaCostShard.BLACK, ManaCostShard.RED,
             ManaCostShard.GREEN, ManaCostShard.PW, ManaCostShard.PU, ManaCostShard.PB,
             ManaCostShard.PR, ManaCostShard.PG, ManaCostShard.WU, ManaCostShard.WB,
@@ -255,19 +257,19 @@ public class ManaCostShard {
     public final byte getColorMask() {
         byte result = 0;
         if (0 != (this.shard & Atom.WHITE)) {
-            result |= CardColor.WHITE;
+            result |= MagicColor.WHITE;
         }
         if (0 != (this.shard & Atom.BLUE)) {
-            result |= CardColor.BLUE;
+            result |= MagicColor.BLUE;
         }
         if (0 != (this.shard & Atom.BLACK)) {
-            result |= CardColor.BLACK;
+            result |= MagicColor.BLACK;
         }
         if (0 != (this.shard & Atom.RED)) {
-            result |= CardColor.RED;
+            result |= MagicColor.RED;
         }
         if (0 != (this.shard & Atom.GREEN)) {
-            result |= CardColor.GREEN;
+            result |= MagicColor.GREEN;
         }
         return result;
     }
@@ -285,44 +287,34 @@ public class ManaCostShard {
                 return element;
             }
         }
-        throw new RuntimeException(String.format("Not found: mana shard with profile = %x", atoms));
+        return null; // will consider anything else plain colorless;
+
+        //throw new RuntimeException(String.format("Not found: mana shard with profile = %x", atoms));
     }
     
     public static ManaCostShard parseNonGeneric(final String unparsed) {
         int atoms = 0;
         for (int iChar = 0; iChar < unparsed.length(); iChar++) {
-            switch (unparsed.charAt(iChar)) {
-            case 'W':
-                atoms |= ManaCostShard.Atom.WHITE;
-                break;
-            case 'U':
-                atoms |= ManaCostShard.Atom.BLUE;
-                break;
-            case 'B':
-                atoms |= ManaCostShard.Atom.BLACK;
-                break;
-            case 'R':
-                atoms |= ManaCostShard.Atom.RED;
-                break;
-            case 'G':
-                atoms |= ManaCostShard.Atom.GREEN;
-                break;
-            case '2':
-                atoms |= ManaCostShard.Atom.OR_2_COLORLESS;
-                break;
-            case 'P':
-                atoms |= ManaCostShard.Atom.OR_2_LIFE;
-                break;
-            case 'S':
-                atoms |= ManaCostShard.Atom.IS_SNOW;
-                break;
-            case 'X':
-                atoms |= ManaCostShard.Atom.IS_X;
-                break;
-            default:
-                break;
+            char c = unparsed.charAt(iChar);
+            switch (c) {
+                case 'W': atoms |= Atom.WHITE;      break; 
+                case 'U': atoms |= Atom.BLUE;       break;
+                case 'B': atoms |= Atom.BLACK;      break;
+                case 'R': atoms |= Atom.RED;        break;
+                case 'G': atoms |= Atom.GREEN;      break;
+                case 'P': atoms |= Atom.OR_2_LIFE;  break;
+                case 'S': atoms |= Atom.IS_SNOW;    break;
+                case 'X': atoms |= Atom.IS_X;       break;
+                case '2': atoms |= Atom.OR_2_COLORLESS; break;
+                default: 
+                    if ( c <= '9' && c >= '0' ) 
+                        atoms |= Atom.COLORLESS;
+                    break;
             }
         }
+        // for cases when unparsed equals '2' or unparsed is like '12' or '20'
+        if ( atoms == Atom.OR_2_COLORLESS || atoms == (Atom.OR_2_COLORLESS | Atom.COLORLESS) )  
+            atoms = Atom.COLORLESS;
         return ManaCostShard.valueOf(atoms);
     }
 
@@ -380,34 +372,33 @@ public class ManaCostShard {
     }
 
     public boolean isMonoColor() {
-        int colormask = this.shard & (Atom.WHITE | Atom.BLUE | Atom.BLACK | Atom.RED | Atom.GREEN);
+        int colormask = this.shard & COLORS_SUPERPOSITION;
         return BinaryUtil.bitCount(colormask) == 1;
 
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @return
-     */
     public boolean isOr2Colorless() {
         return (this.shard & Atom.OR_2_COLORLESS) != 0;
     }
-
     /**
      * TODO: Can pay for this shard with unlimited mana of given color combination?
      * @param color
      * @return
      */
-    public boolean canBePaidWithManaOfColor(CardColor color) {
+    public boolean canBePaidWithAvaliable(ColorSet color) {
         // can pay with life?
-        if ((this.shard & Atom.OR_2_LIFE) != 0) {
+        if (this.isPhyrexian()) {
             return true;
         }
         // can pay with any color?
-        if ((this.shard & Atom.OR_2_COLORLESS) != 0 || 0 != (this.shard & Atom.COLORLESS)) {
+        if (this.isOr2Colorless()) {
             return true;
         }
         // either colored part is empty, or there are same colors in shard and mana source
-        return (0xFF & this.shard) == 0 || (color.getColor() & this.shard) > 0;
+        return (COLORS_SUPERPOSITION & this.shard) == 0 || (color.getColor() & this.shard) > 0;
+    }
+
+    public boolean canBePaidWithManaOfColor(byte colorCode) {
+        return this.isOr2Colorless() || (COLORS_SUPERPOSITION & this.shard) == 0 || (colorCode & this.shard) > 0;
     }
 }

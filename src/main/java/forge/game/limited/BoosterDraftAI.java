@@ -30,7 +30,7 @@ import com.google.common.collect.Lists;
 
 import forge.Constant;
 import forge.Constant.Preferences;
-import forge.card.CardColor;
+import forge.card.ColorSet;
 import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
 import forge.deck.Deck;
@@ -97,7 +97,7 @@ public class BoosterDraftAI {
             pickedCard = pickCard(rankedCards, rankedPlayableCards);
 
             if (!pickedCard.getCard().getColor().isColorless() && aiPlayables.contains(pickedCard)) {
-                CardColor color = pickedCard.getCard().getColor();
+                ColorSet color = pickedCard.getCard().getColor();
                 if (color.isMonoColor()) {
                     this.playerColors.get(player).setColor1(color.toString());
                 } else {
@@ -149,8 +149,8 @@ public class BoosterDraftAI {
             // Sort playable, on-color, or mono-colored, or colorless cards
             TreeMap<Double, CardPrinted> rankedPlayableCards = new TreeMap<Double, CardPrinted>();
             for (CardPrinted card : aiPlayables) {
-                CardColor currentColor1 = CardColor.fromNames(this.playerColors.get(player).getColor1());
-                CardColor color = card.getCard().getColor();
+                ColorSet currentColor1 = ColorSet.fromNames(this.playerColors.get(player).getColor1());
+                ColorSet color = card.getCard().getColor();
                 if (color.isColorless() || color.sharesColorWith(currentColor1) || color.isMonoColor()) {
                     Double rkg = draftRankings.getRanking(card.getName(), card.getEdition());
                     if (rkg != null) {
@@ -163,9 +163,9 @@ public class BoosterDraftAI {
 
             pickedCard = pickCard(rankedCards, rankedPlayableCards);
 
-            CardColor color = pickedCard.getCard().getColor();
+            ColorSet color = pickedCard.getCard().getColor();
             if (!color.isColorless() && aiPlayables.contains(pickedCard)) {
-                CardColor currentColor1 = CardColor.fromNames(this.playerColors.get(player).getColor1());
+                ColorSet currentColor1 = ColorSet.fromNames(this.playerColors.get(player).getColor1());
                 if (color.isMonoColor()) {
                     if (!color.sharesColorWith(currentColor1)) {
                         this.playerColors.get(player).setColor2(color.toString());
@@ -191,8 +191,8 @@ public class BoosterDraftAI {
         } else {
             // Has already picked both colors.
             DeckColors dckColors = this.playerColors.get(player);
-            CardColor colors = CardColor.fromNames(dckColors.getColor1(), dckColors.getColor2());
-            Predicate<CardRules> hasColor = Predicates.or(new GenerateDeckUtil.ContainsAllColorsFrom(colors),
+            ColorSet colors = ColorSet.fromNames(dckColors.getColor1(), dckColors.getColor2());
+            Predicate<CardRules> hasColor = Predicates.or(new GenerateDeckUtil.CanBePaidWithColors(colors),
                     GenerateDeckUtil.COLORLESS_CARDS);
 
             Iterable<CardPrinted> colorList = Iterables.filter(aiPlayables, Predicates.compose(hasColor, CardPrinted.FN_GET_RULES));

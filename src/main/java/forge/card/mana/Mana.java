@@ -18,9 +18,8 @@
 package forge.card.mana;
 
 import forge.Card;
-import forge.Constant;
+import forge.card.MagicColor;
 import forge.card.spellability.AbilityManaPart;
-import forge.control.input.InputPayManaCostUtil;
 
 /**
  * <p>
@@ -31,9 +30,9 @@ import forge.control.input.InputPayManaCostUtil;
  * @version $Id$
  */
 public class Mana {
-    private String color;
+    private byte color;
     private Card sourceCard = null;
-    private AbilityManaPart sourceAbility = null;
+    private AbilityManaPart manaAbility = null;
     private boolean hasRestrictions = false;
     private boolean pumpCounterMagic = false;
 
@@ -50,9 +49,9 @@ public class Mana {
      *            a {@link forge.card.spellability.AbilityMana} object
      */
     public Mana(final String col, final Card source, final AbilityManaPart manaAbility) {
-        this.color = col;
+        this.color = MagicColor.fromName(col);
         if (manaAbility != null) {
-          this.sourceAbility = manaAbility;
+          this.manaAbility = manaAbility;
           if (!manaAbility.getManaRestrictions().isEmpty()) {
               this.hasRestrictions = true;
           }
@@ -64,7 +63,24 @@ public class Mana {
             return;
         }
 
+        
         this.sourceCard = source;
+    }
+    
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof Mana)) return false;
+        Mana m2 = (Mana) other;
+
+        if ( color != m2.color )
+            return false;
+
+        AbilityManaPart mp = this.getManaAbility();
+        AbilityManaPart mp2 = m2.getManaAbility();
+        if ( (mp == null) != (mp2 == null) )
+            return false;
+
+        return mp == mp2 || mp.getManaRestrictions().equals(mp2.getManaRestrictions());
     }
 
     /**
@@ -76,15 +92,7 @@ public class Mana {
      */
     @Override
     public final String toString() {
-        String manaString = "";
-        if (this.color.equals(Constant.Color.COLORLESS)) {
-            manaString = "1";
-        }
-        else {
-            manaString = InputPayManaCostUtil.getShortColorString(this.color);
-        }
-
-        return manaString;
+        return MagicColor.toShortString(color);
     }
 
     /**
@@ -130,26 +138,7 @@ public class Mana {
      * @return a boolean.
      */
     public final boolean isColor(final String col) {
-        return this.color.equals(col);
-    }
-
-    /**
-     * <p>
-     * isColor.
-     * </p>
-     * 
-     * @param colors
-     *            an array of {@link java.lang.String} objects.
-     * @return a boolean.
-     */
-    public final boolean isColor(final String[] colors) {
-        for (final String col : colors) {
-            if (this.color.equals(col)) {
-                return true;
-            }
-        }
-
-        return false;
+        return this.getColor().equals(col);
     }
 
     /**
@@ -160,7 +149,7 @@ public class Mana {
      * @return a {@link java.lang.String} object.
      */
     public final String getColor() {
-        return this.color;
+        return MagicColor.toLongString(this.color);
     }
 
     /**
@@ -176,39 +165,22 @@ public class Mana {
 
     /**
      * <p>
-     * fromSourceCard.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a boolean.
-     */
-    public final boolean fromSourceCard(final Card c) {
-        return this.sourceCard.equals(c);
-    }
-
-    /**
-     * <p>
      * Getter for the field <code>sourceCard</code>.
      * </p>
      * 
      * @return a {@link forge.card.spellability.AbilityMana} object.
      */
-    public final AbilityManaPart getSourceAbility() {
-        return this.sourceAbility;
+    public final AbilityManaPart getManaAbility() {
+        return this.manaAbility;
     }
 
-    /**
-     * <p>
-     * fromSourceCard.
-     * </p>
-     * 
-     * @param ma
-     *            a {@link forge.Card} object.
-     * @return a boolean.
-     */
-    public final boolean fromSourceAbility(final AbilityManaPart ma) {
-        return this.sourceAbility.equals(ma);
+    public byte getColorCode() {
+        return color;
+    }
+
+
+    public boolean isColorless() {
+        return color == 0;
     }
 
 }

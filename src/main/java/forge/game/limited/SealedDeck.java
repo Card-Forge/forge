@@ -11,7 +11,7 @@ import com.google.common.collect.Iterables;
 
 import forge.Constant;
 import forge.Constant.Color;
-import forge.card.CardColor;
+import forge.card.ColorSet;
 import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
 import forge.item.CardPrinted;
@@ -39,7 +39,7 @@ public class SealedDeck extends LimitedDeck {
      * 
      * @return DeckColors
      */
-    private CardColor chooseColors() {
+    private ColorSet chooseColors() {
         List<Pair<Double, CardPrinted>> rankedCards = rankCards(getAiPlayables());
 
         // choose colors based on top 33% of cards
@@ -94,6 +94,6 @@ public class SealedDeck extends LimitedDeck {
 
         System.out.println("COLOR = " + color1);
         System.out.println("COLOR = " + color2);
-        return CardColor.fromNames(color1, color2);
+        return ColorSet.fromNames(color1, color2);
     }
 }

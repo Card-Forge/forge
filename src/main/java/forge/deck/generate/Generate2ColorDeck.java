@@ -19,7 +19,9 @@ package forge.deck.generate;
 
 import java.util.Arrays;
 import java.util.List;
-import forge.card.CardColor;
+
+import forge.card.MagicColor;
+import forge.card.ColorSet;
 import forge.deck.generate.GenerateDeckUtil.FilterCMC;
 import forge.error.ErrorViewer;
 import forge.game.player.PlayerType;
@@ -69,9 +71,9 @@ public class Generate2ColorDeck extends GenerateColoredDeckBase {
         if (clr1.equals("AI")) {
             int color1 = r.nextInt(5);
             int color2 = (color1 + 1 + r.nextInt(4)) % 5;
-            colors = CardColor.fromMask(CardColor.WHITE << color1 | CardColor.WHITE << color2);
+            colors = ColorSet.fromMask(MagicColor.WHITE << color1 | MagicColor.WHITE << color2);
         } else {
-            colors = CardColor.fromNames(clr1, clr2);
+            colors = ColorSet.fromNames(clr1, clr2);
         }
     }
 

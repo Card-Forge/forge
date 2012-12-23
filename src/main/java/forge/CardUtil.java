@@ -143,19 +143,19 @@ public final class CardUtil {
         final byte colorProfile = m.getColorProfile();
 
         final Set<String> colors = new HashSet<String>();
-        if ((colorProfile & forge.card.CardColor.WHITE) > 0) {
+        if ((colorProfile & forge.card.MagicColor.WHITE) > 0) {
             colors.add(Constant.Color.WHITE);
         }
-        if ((colorProfile & forge.card.CardColor.BLACK) > 0) {
+        if ((colorProfile & forge.card.MagicColor.BLACK) > 0) {
             colors.add(Constant.Color.BLACK);
         }
-        if ((colorProfile & forge.card.CardColor.BLUE) > 0) {
+        if ((colorProfile & forge.card.MagicColor.BLUE) > 0) {
             colors.add(Constant.Color.BLUE);
         }
-        if ((colorProfile & forge.card.CardColor.RED) > 0) {
+        if ((colorProfile & forge.card.MagicColor.RED) > 0) {
             colors.add(Constant.Color.RED);
         }
-        if ((colorProfile & forge.card.CardColor.GREEN) > 0) {
+        if ((colorProfile & forge.card.MagicColor.GREEN) > 0) {
             colors.add(Constant.Color.GREEN);
         }
 

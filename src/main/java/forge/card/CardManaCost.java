@@ -248,9 +248,9 @@ public final class CardManaCost implements Comparable<CardManaCost> {
      * @return
      */
 
-    public boolean canBePaidWithManaOfColor(CardColor color) {
+    public boolean canBePaidWithAvaliable(ColorSet color) {
         for (ManaCostShard shard : shards) {
-            if (!shard.canBePaidWithManaOfColor(color)) {
+            if (!shard.canBePaidWithAvaliable(color)) {
                 return false;
             }
         }

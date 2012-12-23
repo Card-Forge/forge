@@ -95,7 +95,7 @@ public final class CardRules {
      * 
      * @return the color
      */
-    public CardColor getColor() {
+    public ColorSet getColor() {
         return this.characteristics.getColor();
     }
 

@@ -19,7 +19,7 @@ package forge.deck.generate;
 
 import java.util.Arrays;
 import java.util.List;
-import forge.card.CardColor;
+import forge.card.ColorSet;
 import forge.deck.generate.GenerateDeckUtil.FilterCMC;
 import forge.error.ErrorViewer;
 import forge.game.player.PlayerType;
@@ -52,7 +52,7 @@ public class Generate5ColorDeck extends GenerateColoredDeckBase {
      * Instantiates a new generate5 color deck.
      */
     public Generate5ColorDeck() {
-        colors = CardColor.fromMask(0).inverse();
+        colors = ColorSet.fromMask(0).inverse();
     }
 
     /**

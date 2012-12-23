@@ -30,7 +30,7 @@ import javax.swing.table.TableColumnModel;
 import com.google.common.base.Function;
 
 import forge.Singletons;
-import forge.card.CardColor;
+import forge.card.ColorSet;
 import forge.card.CardEdition;
 import forge.card.CardManaCost;
 import forge.card.CardRarity;
@@ -307,8 +307,8 @@ public final class SColumnUtil {
         return i instanceof CardPrinted ? ((CardPrinted) i).getCard().getManaCost() : CardManaCost.EMPTY;
     }
 
-    private static CardColor toColor(final InventoryItem i) {
-        return i instanceof CardPrinted ? ((CardPrinted) i).getCard().getColor() : CardColor.getNullColor();
+    private static ColorSet toColor(final InventoryItem i) {
+        return i instanceof CardPrinted ? ((CardPrinted) i).getCard().getColor() : ColorSet.getNullColor();
     }
 
     private static Integer toPower(final InventoryItem i) {

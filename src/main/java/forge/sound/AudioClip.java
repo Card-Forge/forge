@@ -40,7 +40,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * @author Agetian
  */
 public class AudioClip implements IAudioClip {
-    private final Clip clip;
+    private Clip clip;
     private final int SOUND_SYSTEM_DELAY = 30;
 
     private static final String PathToSound = "res/sound";
@@ -69,7 +69,9 @@ public class AudioClip implements IAudioClip {
         } catch (LineUnavailableException ex) {
             System.err.println("Error initializing sound system: " + ex);
         } catch (UnsupportedAudioFileException ex) {
-            System.err.println("Unsupported file type of the sound file: " + ex);
+            System.err.println("Unsupported file type of the sound file: " + fSound.toString() + " - " + ex.getMessage());
+            clip = null;
+            return;
         }
         throw new MissingResourceException("Sound clip failed to load", this.getClass().getName(), filename);
     }

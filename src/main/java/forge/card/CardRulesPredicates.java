@@ -530,19 +530,19 @@ public final class CardRulesPredicates {
                         Predicates.and(Presets.IS_ARTIFACT, Predicates.not(Presets.IS_CREATURE)));
 
         /** The Constant isWhite. */
-        public static final Predicate<CardRules> IS_WHITE = CardRulesPredicates.isColor(CardColor.WHITE);
+        public static final Predicate<CardRules> IS_WHITE = CardRulesPredicates.isColor(MagicColor.WHITE);
 
         /** The Constant isBlue. */
-        public static final Predicate<CardRules> IS_BLUE = CardRulesPredicates.isColor(CardColor.BLUE);
+        public static final Predicate<CardRules> IS_BLUE = CardRulesPredicates.isColor(MagicColor.BLUE);
 
         /** The Constant isBlack. */
-        public static final Predicate<CardRules> IS_BLACK = CardRulesPredicates.isColor(CardColor.BLACK);
+        public static final Predicate<CardRules> IS_BLACK = CardRulesPredicates.isColor(MagicColor.BLACK);
 
         /** The Constant isRed. */
-        public static final Predicate<CardRules> IS_RED = CardRulesPredicates.isColor(CardColor.RED);
+        public static final Predicate<CardRules> IS_RED = CardRulesPredicates.isColor(MagicColor.RED);
 
         /** The Constant isGreen. */
-        public static final Predicate<CardRules> IS_GREEN = CardRulesPredicates.isColor(CardColor.GREEN);
+        public static final Predicate<CardRules> IS_GREEN = CardRulesPredicates.isColor(MagicColor.GREEN);
 
         /** The Constant isColorless. */
         public static final Predicate<CardRules> IS_COLORLESS = CardRulesPredicates.hasCntColors((byte) 0);

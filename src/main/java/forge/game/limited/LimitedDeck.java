@@ -18,7 +18,8 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.Constant.Preferences;
-import forge.card.CardColor;
+import forge.card.MagicColor;
+import forge.card.ColorSet;
 import forge.card.CardManaCost;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
@@ -38,7 +39,7 @@ public class LimitedDeck {
 
     private int numSpellsNeeded = 22;
     private int landsNeeded = 18;
-    private CardColor colors;
+    private ColorSet colors;
     private final DeckColors deckColors;
     private Predicate<CardRules> hasColor;
     private final List<CardPrinted> availableList;
@@ -96,7 +97,7 @@ public class LimitedDeck {
      */
     public Deck buildDeck() {
         // 1. Prepare
-        hasColor = Predicates.or(new GenerateDeckUtil.ContainsAllColorsFrom(colors), GenerateDeckUtil.COLORLESS_CARDS);
+        hasColor = Predicates.or(new GenerateDeckUtil.CanBePaidWithColors(colors), GenerateDeckUtil.COLORLESS_CARDS);
         colorList = Iterables.filter(aiPlayables, Predicates.compose(hasColor, CardPrinted.FN_GET_RULES));
         onColorCreatures = Iterables.filter(colorList,
                 Predicates.compose(CardRulesPredicates.Presets.IS_CREATURE, CardPrinted.FN_GET_RULES));
@@ -362,19 +363,19 @@ public class LimitedDeck {
             for (ManaCostShard shard : mc.getShards()) {
                 byte mask = shard.getColorMask();
 
-                if ((mask & CardColor.WHITE) > 0 && colors.hasWhite()) {
+                if ((mask & MagicColor.WHITE) > 0 && colors.hasWhite()) {
                     clrCnts[0].setCount(clrCnts[0].getCount() + 1);
                 }
-                if ((mask & CardColor.BLUE) > 0 && colors.hasBlue()) {
+                if ((mask & MagicColor.BLUE) > 0 && colors.hasBlue()) {
                     clrCnts[1].setCount(clrCnts[1].getCount() + 1);
                 }
-                if ((mask & CardColor.BLACK) > 0 && colors.hasBlack()) {
+                if ((mask & MagicColor.BLACK) > 0 && colors.hasBlack()) {
                     clrCnts[2].setCount(clrCnts[2].getCount() + 1);
                 }
-                if ((mask & CardColor.RED) > 0 && colors.hasRed()) {
+                if ((mask & MagicColor.RED) > 0 && colors.hasRed()) {
                     clrCnts[3].setCount(clrCnts[3].getCount() + 1);
                 }
-                if ((mask & CardColor.GREEN) > 0 && colors.hasGreen()) {
+                if ((mask & MagicColor.GREEN) > 0 && colors.hasGreen()) {
                     clrCnts[4].setCount(clrCnts[4].getCount() + 1);
                 }
             }
@@ -421,14 +422,14 @@ public class LimitedDeck {
             List<Pair<Double, CardPrinted>> ranked = rankCards(others);
             for (Pair<Double, CardPrinted> bean : ranked) {
                 // Want a card that has just one "off" color.
-                CardColor off = colors.getOffColors(bean.getValue().getCard().getColor());
+                ColorSet off = colors.getOffColors(bean.getValue().getCard().getColor());
                 if (off.isWhite() || off.isBlue() || off.isBlack() || off.isRed() || off.isGreen()) {
-                    colors = CardColor.fromMask(colors.getColor() | off.getColor());
+                    colors = ColorSet.fromMask(colors.getColor() | off.getColor());
                     break;
                 }
             }
 
-            hasColor = Predicates.or(new GenerateDeckUtil.ContainsAllColorsFrom(colors),
+            hasColor = Predicates.or(new GenerateDeckUtil.CanBePaidWithColors(colors),
                     GenerateDeckUtil.COLORLESS_CARDS);
             Iterable<CardPrinted> threeColorList = Iterables.filter(aiPlayables,
                     Predicates.compose(hasColor, CardPrinted.FN_GET_RULES));
@@ -728,7 +729,7 @@ public class LimitedDeck {
     /**
      * @return the colors
      */
-    public CardColor getColors() {
+    public ColorSet getColors() {
         return colors;
     }
 
@@ -736,7 +737,7 @@ public class LimitedDeck {
      * @param colors
      *            the colors to set
      */
-    public void setColors(CardColor colors) {
+    public void setColors(ColorSet colors) {
         this.colors = colors;
     }
 

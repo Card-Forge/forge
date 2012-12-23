@@ -30,7 +30,7 @@ public class CardRuleCharacteristics {
     private String cardName = null;
     private CardType cardType = null;
     private CardManaCost manaCost = CardManaCost.EMPTY;
-    private CardColor color = null;
+    private ColorSet color = null;
     private String ptLine = null;
     private String[] cardRules = null;
     private Map<String, CardInSet> setsData = new TreeMap<String, CardInSet>();
@@ -94,7 +94,7 @@ public class CardRuleCharacteristics {
      */
     public final void setManaCost(final CardManaCost manaCost0) {
         this.manaCost = manaCost0;
-        this.color = CardColor.fromManaCost(this.manaCost);
+        this.color = ColorSet.fromManaCost(this.manaCost);
     }
 
     /**
@@ -102,7 +102,7 @@ public class CardRuleCharacteristics {
      * 
      * @return the color
      */
-    public final CardColor getColor() {
+    public final ColorSet getColor() {
         return this.color;
     }
 
@@ -112,7 +112,7 @@ public class CardRuleCharacteristics {
      * @param color0
      *            the color to set
      */
-    public final void setColor(final CardColor color0) {
+    public final void setColor(final ColorSet color0) {
         this.color = color0;
     }
 
