@@ -2456,6 +2456,7 @@ res/cardsfolder/d/desolate_lighthouse.txt -text
 res/cardsfolder/d/desolation_angel.txt svneol=native#text/plain
 res/cardsfolder/d/desolation_giant.txt svneol=native#text/plain
 res/cardsfolder/d/desperate_charge.txt svneol=native#text/plain
+res/cardsfolder/d/desperate_gambit.txt -text
 res/cardsfolder/d/desperate_ravings.txt -text
 res/cardsfolder/d/desperate_research.txt -text
 res/cardsfolder/d/desperate_ritual.txt -text

@@ -1,0 +1,20 @@
+Name:Desperate Gambit
+ManaCost:R
+Types:Instant
+Text:no text
+A:SP$ ChooseSource | Cost$ R | Choices$ Card.YouCtrl | RememberChosen$ True | SubAbility$ CoinFlip | SpellDescription$ Choose a source you control and flip a coin. If you win the flip, the next time that source would deal damage this turn, it deals double that damage instead. If you lose the flip, the next time it would deal damage this turn, prevent that damage.
+SVar:CoinFlip:DB$ FlipACoin | WinSubAbility$ CreateWinEffect | LoseSubAbility$ CreateLossEffect | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
+# Winning Effect
+SVar:CreateWinEffect:DB$ Effect | Name$ Desperate Gambit Win Effect | ReplacementEffects$ EventWinDamageDone | SVars$ DGDmgTimes2,WinX,ExileEffect | References$ EventWinDamageDone,DGDmgTimes2,WinX | RememberObjects$ Remembered
+SVar:EventWinDamageDone:Event$ DamageDone | ValidSource$ Card.IsRemembered | ReplaceWith$ DGDmgTimes2 | Description$ The next time source would deal damage this turn, it deals double that damage instead.
+SVar:DGDmgTimes2:AB$ DealDamage | Cost$ 0 | CombatDamage$ True | NumDmg$ WinX | References$ WinX | Defined$ ReplacedTarget | DamageSource$ ReplacedSource | SubAbility$ ExileEffect
+SVar:WinX:ReplaceCount$DamageAmount/Times.2
+# Losing Effect
+SVar:CreateLossEffect:DB$ Effect | Name$ Desperate Gambit Loss Effect | ReplacementEffects$ EventLossDamageDone | SVars$ ExileEffect | References$ EventLossDamageDone,ExileEffect | RememberObjects$ Remembered
+SVar:EventLossDamageDone:Event$ DamageDone | ValidSource$ Card.IsRemembered | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time it would deal damage this turn, prevent that damage.
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/desperate_gambit.jpg
+Oracle:Choose a source you control and flip a coin. If you win the flip, the next time that source would deal damage this turn, it deals double that damage instead. If you lose the flip, the next time it would deal damage this turn, prevent that damage.
+SetInfo:WTH|Uncommon|http://magiccards.info/scans/en/wl/96.jpg
+End
