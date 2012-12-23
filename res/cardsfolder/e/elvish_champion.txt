@@ -5,6 +5,7 @@ Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.Elf+Other | AddPower$ 1 | AddToughness$ 1 | AddKeyword$ Forestwalk | Description$ Other Elf creatures get +1/+1 and have forestwalk.
 SVar:PlayMain1:TRUE
+SVar:BuffedBy:Elf
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elvish_champion.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/241.jpg

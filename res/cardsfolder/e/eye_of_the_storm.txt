@@ -1,0 +1,13 @@
+Name:Eye of the Storm
+ManaCost:5 U U
+Types:Enchantment
+Text:no text
+T:Mode$ SpellCast | ValidCard$ Card.Instant,Card.Sorcery | Execute$ TrigExileSpell | TriggerZones$ Battlefield | TriggerDescription$ Whenever a player casts an instant or sorcery card, exile it. Then that player copies each instant or sorcery card exiled with CARDNAME. For each copy, the player may cast the copy without paying its mana cost.
+SVar:TrigExileSpell:AB$ ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Stack | Destination$ Exile | Fizzle$ True | RememberChanged$ True | SubAbility$ DBPlaySpell
+SVar:DBPlaySpell:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Card.IsRemembered | ChooseOrder$ True | Zone$ Exile | RepeatSubAbility$ DBPlay
+SVar:DBPlay:DB$ Play | Defined$ Imprinted | Controller$ TriggeredCardController | WithoutManaCost$ True | CopyCard$ True | Optional$ True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/eye_of_the_storm.jpg
+SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/48.jpg
+Oracle:Whenever a player casts an instant or sorcery card, exile it. Then that player copies each instant or sorcery card exiled with Eye of the Storm. For each copy, the player may cast the copy without paying its mana cost.
+End

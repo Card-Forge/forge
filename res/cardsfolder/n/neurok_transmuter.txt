@@ -1,0 +1,12 @@
+Name:Neurok Transmuter
+ManaCost:2 U
+Types:Creature Human Wizard
+Text:no text
+PT:2/2
+A:AB$ Animate | Cost$ U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Types$ Artifact | SpellDescription$ Target creature becomes an artifact in addition to its other types until end of turn.
+A:AB$ Animate | Cost$ U | ValidTgts$ Creature.Artifact | TgtPrompt$ Select target artifact creature | Colors$ Blue | OverwriteColors$ True | RemoveTypes$ Artifact | SpellDescription$ Until end of turn, target artifact creature becomes blue and isn't an artifact.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/neurok_transmuter.jpg
+SetInfo:DST|Uncommon|http://magiccards.info/scans/en/ds/27.jpg
+Oracle:{U}: Target creature becomes an artifact in addition to its other types until end of turn.\n{U}: Until end of turn, target artifact creature becomes blue and isn't an artifact.
+End
