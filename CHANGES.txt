@@ -164,6 +164,22 @@ Fixes/Features:
 - More code simplification.
 - Targeting overlay: Added support for showing arrows for paired creatures, performed some code cleanup.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- put an end to impropper use of inventoryitem.getType to make checks against card types
+- draft value estimation moved outside of deck class
+- Moved code that checks if a deck matches format to class describing format (althogh a separate validator class might be even a better idea)
+- added a ChooseOrder switch to RepeatEach effect
+- added check that disabled deck checking if developer mode is enabled
+- Modified coin flips to allow just counting heads or tails. Added Fiery Gambit.
+- Read card text more carefully. Reverted changes to FlipCoinEffect.java and flipACoin method. Adjusted Fiery Gambit script.
+- Fixed Academy Researchers can be enchanted by auras that can't legally enchant it
+- Delete Eye of the Storm (with some rule text conflicts)
+- Some SVar updates
+- renamed parameter for better understanding of payments from ManaPool
+- moved colorful part of mana shard parsing inside the mana/ManaCostShard.java file to eliminate code duplication
+- CardColor renamed to ColorSet which reflects class purpose better,
+- Mana stores color in a byte internally (one of MagicColor constants or 0 for colorless)
+- ManaPool.getMana - a cleaner choice of mana to pay.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -175,6 +191,7 @@ Added the following Schemes:
 
 Introductions Are in Order
 Into the Earthen Maw
+My Undead Horde Awakens
 
 
 Added the following Vanguard Avatars:
@@ -194,6 +211,8 @@ Mirri, the Cursed Avatar
 Hermit Druid Avatar
 Higure, the Still Wind Avatar
 Raksha Golden Cub Avatar
+Phage the Untouchable Avatar
+Prodigal Sorcerer Avatar
 
 
 Added the following cards:
@@ -237,6 +256,12 @@ Graceful Reprieve
 Mangara's Blessing
 Kjeldoran Guard
 Phantasmal Mount
+Fiery Gambit
+Neurok Transmuter
+Overwhelming Instinct
+Total War
+Goblin Psychopath
+Impulsive Maneuvers
 
 
 end
