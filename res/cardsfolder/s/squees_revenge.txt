@@ -1,0 +1,22 @@
+Name:Squee's Revenge
+ManaCost:1 U R
+Types:Sorcery
+Text:no text
+A:SP$ ChooseNumber | Cost$ 1 U R | SubAbility$ RepeatFlip | SpellDescription$ Choose a number. Flip a coin that many times or until you lose a flip, whichever comes first. If you win all the flips, draw two cards for each flip.
+# Repeat Flip
+SVar:RepeatFlip:DB$ Repeat | RepeatSubAbility$ FlipAgain | ConditionCheckSVar$ TimesToFlip | ConditionSVarCompare$ GT0 | RepeatCheckSVar$ FlipsDone | RepeatSVarCompare$ LTTimesToFlip | SubAbility$ DrawIfWin
+SVar:FlipAgain:DB$ FlipACoin | WinSubAbility$ IncrementFlips | LoseSubAbility$ IncrementLoss
+SVar:IncrementFlips:DB$ StoreSVar | SVar$ FlipsDone | Type$ CountSVar | Expression$ FlipsDone/Plus.1
+SVar:IncrementLoss:DB$ StoreSVar | SVar$ Loss | Type$ CountSVar | Expression$ Loss/Plus.1 | SubAbility$ SetFilpsDone
+SVar:SetFilpsDone:DB$ StoreSVar | SVar$ FlipsDone | Type$ CountSVar | Expression$ TimesToFlip
+# Draw Cards
+SVar:DrawIfWin:DB$ Draw | Defined$ You | NumCards$ CardsToDraw | ConditionCheckSVar$ Loss | ConditionSVarCompare$ EQ0
+SVar:TimesToFlip:Number$ChosenNumber
+SVar:FlipsDone:Number$0
+SVar:Loss:Number$0
+SVar:CardsToDraw:Count$ChosenNumber/Times.2
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/squees_revenge.jpg
+Oracle:Choose a number. Flip a coin that many times or until you lose a flip, whichever comes first. If you win all the flips, draw two cards for each flip.
+SetInfo:APC|Uncommon|http://magiccards.info/scans/en/ap/123.jpg
+End
