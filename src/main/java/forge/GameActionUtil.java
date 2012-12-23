@@ -664,35 +664,20 @@ public final class GameActionUtil {
         final String[] choices = { "heads", "tails" };
 
         final boolean flip = MyRandom.getRandom().nextBoolean();
-        if (null == caller) {
-            choice = "heads";
-        }
-        else if (caller.isHuman()) {
+        if (caller.isHuman()) {
             choice = GuiChoose.one(source.getName() + " - Call coin flip", choices);
         } else {
             choice = choices[MyRandom.getRandom().nextInt(2)];
         }
 
         final boolean winFlip = flip == choice.equals("heads");
-        String winMsg = "";
-        if (null == caller) {
-            winMsg = flip ? "heads." : "tails.";
-        }
-        else {
-          winMsg = winFlip ? " wins flip." : " loses flip.";
-        }
+        final String winMsg = winFlip ? " wins flip." : " loses flip.";
 
         // Play the Flip A Coin sound
         Singletons.getModel().getGame().getEvents().post(new FlipCoinEvent());
 
-        if (null == caller) {
-            JOptionPane.showMessageDialog(null, source.getName() + " - Coin flip was " + winMsg, source.getName(),
-                    JOptionPane.PLAIN_MESSAGE);
-        }
-        else {
-            JOptionPane.showMessageDialog(null, source.getName() + " - " + caller + winMsg, source.getName(),
-                    JOptionPane.PLAIN_MESSAGE);
-        }
+        JOptionPane.showMessageDialog(null, source.getName() + " - " + caller + winMsg, source.getName(),
+                JOptionPane.PLAIN_MESSAGE);
         return winFlip;
     }
 

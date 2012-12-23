@@ -5,21 +5,21 @@ Text:no text
 # Target a creature for three damage
 A:SP$ Pump | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Choose target creature for 3 damage | SubAbility$ RepeatFlip | StackDescription$ None | SpellDescription$ Flip a coin until you lose a flip or choose to stop flipping. If you lose a flip, CARDNAME has no effect.  If you win one or more flips, CARDNAME deals 3 damage to target creature. If you win two or more flips, CARDNAME deals 6 damage to each opponent. If you win three or more flips, draw nine cards and untap all lands you control.
 # Repeat Flip
-SVar:RepeatFlip:DB$ Repeat | RepeatSubAbility$ FlipAgain | RepeatCheckSVar$ Tails | RepeatSVarCompare$ EQ0 | RepeatOptional$ True | SubAbility$ DamageCreature
-SVar:FlipAgain:DB$ FlipACoin | FlipOnly$ True | WinSubAbility$ IncrementHeads | LoseSubAbility$ IncrementTails
-SVar:IncrementHeads:DB$ StoreSVar | SVar$ Heads | Type$ CountSVar | Expression$ Heads/Plus.1
-SVar:IncrementTails:DB$ StoreSVar | SVar$ Tails | Type$ CountSVar | Expression$ Tails/Plus.1 | SubAbility$ ResetHeads
-SVar:ResetHeads:DB$ StoreSVar | SVar$ Heads | Type$ Number | Expression$ 0
+SVar:RepeatFlip:DB$ Repeat | RepeatSubAbility$ FlipAgain | RepeatCheckSVar$ Loss | RepeatSVarCompare$ EQ0 | RepeatOptional$ True | SubAbility$ DamageCreature
+SVar:FlipAgain:DB$ FlipACoin | FlipOnly$ True | WinSubAbility$ IncrementWins | LoseSubAbility$ IncrementLoss
+SVar:IncrementWins:DB$ StoreSVar | SVar$ Wins | Type$ CountSVar | Expression$ Wins/Plus.1
+SVar:IncrementLoss:DB$ StoreSVar | SVar$ Loss | Type$ CountSVar | Expression$ Loss/Plus.1 | SubAbility$ ResetWins
+SVar:ResetWins:DB$ StoreSVar | SVar$ Wins | Type$ Number | Expression$ 0
 # Damage target creature
-SVar:DamageCreature:DB$ DealDamage | Defined$ Targeted | NumDmg$ 3 | ConditionCheckSVar$ Heads | ConditionSVarCompare$ GE1 | SubAbility$ DamageOpponents
+SVar:DamageCreature:DB$ DealDamage | Defined$ Targeted | NumDmg$ 3 | ConditionCheckSVar$ Wins | ConditionSVarCompare$ GE1 | SubAbility$ DamageOpponents
 # Damage each opponent
-SVar:DamageOpponents:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 6 | ConditionCheckSVar$ Heads | ConditionSVarCompare$ GE2 | SubAbility$ DrawNine
+SVar:DamageOpponents:DB$ DealDamage | Defined$ Player.Opponent | NumDmg$ 6 | ConditionCheckSVar$ Wins | ConditionSVarCompare$ GE2 | SubAbility$ DrawNine
 # Draw Nine Cards
-SVar:DrawNine:DB$ Draw | Defined$ You | NumCards$ 9 | ConditionCheckSVar$ Heads | ConditionSVarCompare$ GE3 | SubAbility$ UntapLands
+SVar:DrawNine:DB$ Draw | Defined$ You | NumCards$ 9 | ConditionCheckSVar$ Wins | ConditionSVarCompare$ GE3 | SubAbility$ UntapLands
 # Untap Lands
-SVar:UntapLands:DB$ UntapAll | ValidCards$ Land.YouCtrl | ConditionCheckSVar$ Heads | ConditionSVarCompare$ GE3
-SVar:Heads:Number$0
-SVar:Tails:Number$0
+SVar:UntapLands:DB$ UntapAll | ValidCards$ Land.YouCtrl | ConditionCheckSVar$ Wins | ConditionSVarCompare$ GE3
+SVar:Wins:Number$0
+SVar:Loss:Number$0
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fiery_gambit.jpg
 SetInfo:MRD|Rare|http://magiccards.info/scans/en/mi/90.jpg
