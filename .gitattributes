@@ -3241,6 +3241,7 @@ res/cardsfolder/e/extruder.txt svneol=native#text/plain
 res/cardsfolder/e/exuberant_firestoker.txt svneol=native#text/plain
 res/cardsfolder/e/eye_of_nowhere.txt svneol=native#text/plain
 res/cardsfolder/e/eye_of_ramos.txt svneol=native#text/plain
+res/cardsfolder/e/eye_of_the_storm.txt -text
 res/cardsfolder/e/eye_of_ugin.txt svneol=native#text/plain
 res/cardsfolder/e/eye_spy.txt svneol=native#text/plain
 res/cardsfolder/e/eyeblights_ending.txt svneol=native#text/plain
@@ -4529,6 +4530,7 @@ res/cardsfolder/h/havoc.txt svneol=native#text/plain
 res/cardsfolder/h/havoc_demon.txt svneol=native#text/plain
 res/cardsfolder/h/havoc_festival.txt -text
 res/cardsfolder/h/hawkeater_moth.txt svneol=native#text/plain
+res/cardsfolder/h/haze_frog.txt -text
 res/cardsfolder/h/haze_of_rage.txt svneol=native#text/plain
 res/cardsfolder/h/hazerider_drake.txt svneol=native#text/plain
 res/cardsfolder/h/hazezon_tamar.txt svneol=native#text/plain
