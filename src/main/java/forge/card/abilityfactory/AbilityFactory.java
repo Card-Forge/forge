@@ -549,6 +549,13 @@ public class AbilityFactory {
                 } else if (hType.equals("Opponents")) {
                     players.addAll(card.getController().getOpponents());
                     return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+                } else if (hType.equals("Remembered")) {
+                    for (final Object o : card.getRemembered()) {
+                        if (o instanceof Player) {
+                            players.add((Player) o);
+                        }
+                    }
+                    return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
                 }
             } else if (calcX[0].startsWith("Remembered")) {
                 // Add whole Remembered list to handlePaid
@@ -895,12 +902,12 @@ public class AbilityFactory {
 
             else if (defined.startsWith("Tapped")) {
                 list = sa.getRootAbility().getPaidList("Tapped");
-            } 
-            
+            }
+
             else if (defined.startsWith("Valid ")) {
                 String validDefined = defined.substring("Valid ".length());
                 GameState game = Singletons.getModel().getGame();
-                
+
                 list = CardLists.getValidCards(game.getCardsIn(ZoneType.Battlefield), validDefined.split(","), hostCard.getController(), hostCard);
             }
 

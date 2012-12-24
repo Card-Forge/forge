@@ -87,16 +87,6 @@ public class DrawEffect extends SpellEffect {
                         }
                     }
                 }
-                // Some multiplayer compatibility so that calculated draw amounts
-                // can be localised to the player
-                if (sa.hasParam("LocalCount")) {
-                    // playerXCount needs a player array
-                    final ArrayList<Player> players = new ArrayList<Player>();
-                    players.add(p);
-                    numCards = sa.getParam("NumCards").matches("[0-9][0-9]?") ? Integer.parseInt(sa.getParam("NumCards"))
-                                    : CardFactoryUtil.playerXCount(players,
-                                            sa.getSourceCard().getSVar(sa.getParam("NumCards")), sa.getSourceCard());
-                }
 
                 if (slowDraw) {
                     for (int i = 0; i < numCards; i++) {
