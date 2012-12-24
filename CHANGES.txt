@@ -180,6 +180,9 @@ Fixes/Features:
 - Mana stores color in a byte internally (one of MagicColor constants or 0 for colorless)
 - ManaPool.getMana - a cleaner choice of mana to pay.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- cleaned up Fiery Gambit
+- Greatly simplified BoosterDraftAI to pick cards based on calculated card rating.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -262,6 +265,10 @@ Overwhelming Instinct
 Total War
 Goblin Psychopath
 Impulsive Maneuvers
+Squee's Revenge
+Desperate Gambit
+Haze Frog
+Eye of the Storm
 
 
 end
