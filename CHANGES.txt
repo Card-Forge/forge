@@ -183,6 +183,13 @@ Fixes/Features:
 - cleaned up Fiery Gambit
 - Greatly simplified BoosterDraftAI to pick cards based on calculated card rating.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- It would appear that I forgot to commit the changes to the ability factory effects when I moved ConditionDescription to the common stack description handler.
+- Reverted LocalCount in favor of RepeatPlayer in RepeatEach (Molten Psyche and Netherborn Phalanx)
+- Converted Myojin of Night's Reach and Imprison This Insolent Wretch to multiplayer scripts
+- Fixed Molten Psyche cost
+- Fixed Divine Light
+- Created Gatecrash branch
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -195,6 +202,7 @@ Added the following Schemes:
 Introductions Are in Order
 Into the Earthen Maw
 My Undead Horde Awakens
+Know Naught but Fire
 
 
 Added the following Vanguard Avatars:
@@ -269,6 +277,8 @@ Squee's Revenge
 Desperate Gambit
 Haze Frog
 Eye of the Storm
+Lammastide Weave
+Roots of Life
 
 
 end
