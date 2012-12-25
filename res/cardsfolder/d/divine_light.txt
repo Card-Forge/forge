@@ -1,6 +1,6 @@
 Name:Divine Light
 ManaCost:W
-Types:Instant
+Types:Sorcery
 Text:no text
 A:SP$ Effect | Cost$ W | Name$ Divine Light Effect | StaticAbilities$ STPrevent | SpellDescription$ Prevent all damage that would be dealt this turn to creatures you control.
 SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Target$ Creature.YouCtrl | Description$ Prevent all damage that would be dealt this turn to creatures you control.
