@@ -5596,6 +5596,7 @@ res/cardsfolder/l/lagac_lizard.txt svneol=native#text/plain
 res/cardsfolder/l/lair_delve.txt -text
 res/cardsfolder/l/lake_of_the_dead.txt svneol=native#text/plain
 res/cardsfolder/l/lambholt_elder_silverpelt_werewolf.txt -text
+res/cardsfolder/l/lammastide_weave.txt -text
 res/cardsfolder/l/lance.txt svneol=native#text/plain
 res/cardsfolder/l/lancers_en_kor.txt -text
 res/cardsfolder/l/land_cap.txt svneol=native#text/plain
@@ -8340,6 +8341,7 @@ res/cardsfolder/r/rooting_kavu.txt -text
 res/cardsfolder/r/rootrunner.txt svneol=native#text/plain
 res/cardsfolder/r/roots.txt svneol=native#text/plain
 res/cardsfolder/r/roots_of_all_evil.txt -text
+res/cardsfolder/r/roots_of_life.txt -text
 res/cardsfolder/r/rootwalla.txt svneol=native#text/plain
 res/cardsfolder/r/rootwater_alligator.txt svneol=native#text/plain
 res/cardsfolder/r/rootwater_commando.txt svneol=native#text/plain
