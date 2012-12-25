@@ -288,22 +288,10 @@ public final class ColorSet implements Comparable<ColorSet> {
         if (this.orderWeight == -1) {
             return "n/a";
         }
-        switch (this.myColor) {
-        case 0:
-            return Constant.Color.COLORLESS;
-        case MagicColor.WHITE:
-            return Constant.Color.WHITE;
-        case MagicColor.BLUE:
-            return Constant.Color.BLUE;
-        case MagicColor.BLACK:
-            return Constant.Color.BLACK;
-        case MagicColor.RED:
-            return Constant.Color.RED;
-        case MagicColor.GREEN:
-            return Constant.Color.GREEN;
-        default:
+        String toReturn = MagicColor.toLongString(myColor);
+        if ( toReturn == Constant.Color.COLORLESS && myColor != 0 )
             return "multi";
-        }
+        return toReturn;
     }
 
     /**

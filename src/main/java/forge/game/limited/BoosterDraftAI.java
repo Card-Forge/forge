@@ -19,6 +19,8 @@ package forge.game.limited;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.lang3.tuple.MutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.Constant.Preferences;
@@ -129,10 +131,10 @@ public class BoosterDraftAI {
         for (CardPrinted card : chooseFrom) {
             Double rkg = draftRankings.getRanking(card.getName(), card.getEdition());
             if (rkg != null) {
-                rankedCards.add(Pair.of(card, rkg));
+                rankedCards.add(MutablePair.of(card, rkg));
             } else {
                 System.out.println("Draft Rankings - Card Not Found: " + card.getName());
-                rankedCards.add(Pair.of(card, 0.0));
+                rankedCards.add(MutablePair.of(card, 0.0));
             }
         }
         return rankedCards;
