@@ -5478,6 +5478,7 @@ res/cardsfolder/k/knighthood.txt svneol=native#text/plain
 res/cardsfolder/k/knightly_valor.txt -text
 res/cardsfolder/k/knotvine_mystic.txt svneol=native#text/plain
 res/cardsfolder/k/knotvine_paladin.txt svneol=native#text/plain
+res/cardsfolder/k/know_naught_but_fire.txt -text
 res/cardsfolder/k/knowledge_pool.txt -text svneol=unset#text/plain
 res/cardsfolder/k/knowledge_vault.txt -text svneol=unset#text/plain
 res/cardsfolder/k/knucklebone_witch.txt svneol=native#text/plain
