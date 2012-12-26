@@ -105,7 +105,7 @@ public enum PhaseType {
     }
 
     /**
-     * TODO: Write javadoc for this method.
+     * Get the next PhaseType in turn order. 
      * @return
      */
     public PhaseType getNextPhase() {

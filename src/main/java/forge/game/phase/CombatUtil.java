@@ -3092,41 +3092,6 @@ public class CombatUtil {
         }
 
         final Player phasingPlayer = c.getController();
-        // Finest Hour untaps the creature on the first combat phase
-        if ((phasingPlayer.getCardsIn(ZoneType.Battlefield, "Finest Hour").size() > 0)
-                && Singletons.getModel().getGame().getPhaseHandler().isFirstCombat()) {
-            // Untap the attacking creature
-            final Ability fhUntap = new Ability(c, "0") {
-                @Override
-                public void resolve() {
-                    crd.untap();
-                }
-            };
-
-            final StringBuilder sbUntap = new StringBuilder();
-            sbUntap.append(c).append(" - (Finest Hour) untap.");
-            fhUntap.setDescription(sbUntap.toString());
-            fhUntap.setStackDescription(sbUntap.toString());
-
-            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(fhUntap);
-
-            // If any Finest Hours, queue up a new combat phase
-            for (int ix = 0; ix < phasingPlayer.getCardsIn(ZoneType.Battlefield, "Finest Hour").size(); ix++) {
-                final Ability fhAddCombat = new Ability(c, "0") {
-                    @Override
-                    public void resolve() {
-                        Singletons.getModel().getGame().getPhaseHandler().addExtraCombat();
-                    }
-                };
-
-                final StringBuilder sbACom = new StringBuilder();
-                sbACom.append(c).append(" - (Finest Hour) ").append(phasingPlayer).append(" gets Extra Combat Phase.");
-                fhAddCombat.setDescription(sbACom.toString());
-                fhAddCombat.setStackDescription(sbACom.toString());
-
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(fhAddCombat);
-            }
-        }
 
         if (phasingPlayer.getCardsIn(ZoneType.Battlefield, "Sovereigns of Lost Alara").size() > 0) {
             for (int i = 0; i < phasingPlayer.getCardsIn(ZoneType.Battlefield, "Sovereigns of Lost Alara").size(); i++) {

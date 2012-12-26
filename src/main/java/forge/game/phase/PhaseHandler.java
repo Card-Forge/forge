@@ -19,6 +19,7 @@ package forge.game.phase;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 import com.esotericsoftware.minlog.Log;
@@ -59,8 +60,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     // Start turn at 0, so first untap step will turn it to 1
 
     private final transient Stack<ExtraTurn> extraTurns = new Stack<ExtraTurn>();
-
-    private int extraCombats = 0;
+    private final transient Map<PhaseType, Stack<PhaseType>> extraPhases = new HashMap<PhaseType, Stack<PhaseType>>();
 
     private int nCombatsThisTurn = 0;
     private boolean bPreventCombatDamageThisTurn  = false;
@@ -465,17 +465,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 this.resetAttackedThisCombat(this.getPlayerTurn());
                 this.bCombat = false;
 
-                // TODO: ExtraCombat needs to be changed for other spell/abilities
-                // that give extra combat can do it like ExtraTurn stack ExtraPhases
-                if (this.extraCombats > 0) {
-                    final Player player = this.getPlayerTurn();
-
-                    this.bCombat = true;
-                    this.extraCombats--;
-                    game.getCombat().reset();
-                    game.getCombat().setAttackingPlayer(player);
-                    this.phase = PhaseType.COMBAT_BEGIN;
-                }
                 break;
 
             case CLEANUP:
@@ -489,13 +478,29 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             default: // no action
         }
 
+        StringBuilder sb = new StringBuilder();
         if (this.bRepeat) { // for when Cleanup needs to repeat itself
             this.bRepeat = false;
+            sb.append("Repeat Phase");
         } else {
-            this.phase = phase.getNextPhase();
+            // If the phase that's ending has a stack of additional phases
+            // Take the LIFO one and move to that instead of the normal one
+            if (this.extraPhases.containsKey(phase)) {
+                PhaseType nextPhase = this.extraPhases.get(phase).pop();
+                // If no more additional phases are available, remove it from the map
+                // and let the next add, reput the key
+                if (this.extraPhases.get(phase).isEmpty()) {
+                    this.extraPhases.remove(phase);
+                }
+                this.phase = nextPhase;
+                sb.append("Additional Phase");
+            } else {
+                this.phase = phase.getNextPhase();
+                sb.append("Phase");
+            }
         }
 
-        game.getGameLog().add("Phase", this.getPlayerTurn() + " " + this.getPhase().Name, 6);
+        game.getGameLog().add(sb.toString(), this.getPlayerTurn() + " " + this.getPhase().Name, 6);
 
         // **** Anything BELOW Here is actually in the next phase. Maybe move
         // this to handleBeginPhase
@@ -659,15 +664,20 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         return this.extraTurns.push(new ExtraTurn(player));
     }
 
-
     /**
      * <p>
-     * addExtraCombat.
+     * addExtraPhase.
      * </p>
+     * 
      */
-    public final void addExtraCombat() {
-        // Extra combats can only happen
-        this.extraCombats++;
+    public final void addExtraPhase(final PhaseType afterPhase, final PhaseType extraPhase) {
+        // 300.7. Some effects can add phases to a turn. They do this by adding the phases directly after the specified phase. 
+        // If multiple extra phases are created after the same phase, the most recently created phase will occur first.
+        if (!this.extraPhases.containsKey(afterPhase)) {
+            this.extraPhases.put(afterPhase, new Stack<PhaseType>());
+        }
+        
+        this.extraPhases.get(afterPhase).push(extraPhase);
     }
 
     /**

@@ -12918,6 +12918,7 @@ src/main/java/forge/card/abilityfactory/CommonDrawback.java svneol=native#text/p
 src/main/java/forge/card/abilityfactory/CommonSpell.java -text
 src/main/java/forge/card/abilityfactory/SpellAiLogic.java -text
 src/main/java/forge/card/abilityfactory/SpellEffect.java -text
+src/main/java/forge/card/abilityfactory/ai/AddPhaseAi.java -text
 src/main/java/forge/card/abilityfactory/ai/AddTurnAi.java svneol=native#text/plain
 src/main/java/forge/card/abilityfactory/ai/AlwaysPlayAi.java -text
 src/main/java/forge/card/abilityfactory/ai/AnimateAi.java -text
@@ -13013,6 +13014,7 @@ src/main/java/forge/card/abilityfactory/ai/UnattachAllAi.java -text
 src/main/java/forge/card/abilityfactory/ai/UntapAi.java -text
 src/main/java/forge/card/abilityfactory/ai/UntapAllAi.java -text
 src/main/java/forge/card/abilityfactory/effects/AbandonEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/AddPhaseEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/AddTurnEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/AnimateAllEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/AnimateEffect.java -text

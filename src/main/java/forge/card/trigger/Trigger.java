@@ -32,6 +32,7 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -227,20 +228,27 @@ public abstract class Trigger extends TriggerReplacementBase {
      * @return a boolean.
      */
     public final boolean phasesCheck() {
+        PhaseHandler phaseHandler = Singletons.getModel().getGame().getPhaseHandler();
         if (null != validPhases) {
-            if (!validPhases.contains(Singletons.getModel().getGame().getPhaseHandler().getPhase())) {
+            if (!validPhases.contains(phaseHandler.getPhase())) {
                 return false;
             }
         }
 
         if (this.getMapParams().containsKey("PlayerTurn")) {
-            if (!Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(this.getHostCard().getController())) {
+            if (!phaseHandler.isPlayerTurn(this.getHostCard().getController())) {
                 return false;
             }
         }
 
         if (this.getMapParams().containsKey("OpponentTurn")) {
-            if (Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(this.getHostCard().getController())) {
+            if (phaseHandler.isPlayerTurn(this.getHostCard().getController())) {
+                return false;
+            }
+        }
+        
+        if (this.getMapParams().containsKey("FirstCombat")) {
+            if (!phaseHandler.isFirstCombat()) {
                 return false;
             }
         }
