@@ -38,20 +38,24 @@ public class MagicColor {
     }
 
     public static String toShortString(byte color) {
-        if ( color == GREEN ) return "G";
-        if ( color == RED ) return "R";
-        if ( color == BLUE ) return "U";
-        if ( color == BLACK ) return "B";
-        if ( color == WHITE ) return "W";
-        return "1";
+        switch(color){
+            case GREEN: return "G";
+            case RED: return "R";
+            case BLUE: return "U";
+            case BLACK: return "B";
+            case WHITE: return "W";
+            default: return "1";
+        }
     }
 
     public static String toLongString(byte color) {
-        if ( color == GREEN ) return Constant.Color.GREEN ;
-        if ( color == RED ) return Constant.Color.RED;
-        if ( color == BLUE ) return Constant.Color.BLUE;
-        if ( color == BLACK ) return Constant.Color.BLACK;
-        if ( color == WHITE ) return Constant.Color.WHITE;
-        return Constant.Color.COLORLESS;
+        switch(color){
+            case GREEN: return Constant.Color.GREEN ;
+            case RED: return Constant.Color.RED;
+            case BLUE: return Constant.Color.BLUE;
+            case BLACK: return Constant.Color.BLACK;
+            case WHITE: return Constant.Color.WHITE;
+            default: return Constant.Color.COLORLESS;
+        }
     }
 }
