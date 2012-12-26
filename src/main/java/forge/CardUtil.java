@@ -129,47 +129,6 @@ public final class CardUtil {
         return c.determineColor().toStringList();
     }
 
-    /**
-     * <p>
-     * getOnlyColors.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a {@link java.util.ArrayList} object.
-     */
-    public static ArrayList<String> getOnlyColors(final Card c) {
-        final CardManaCost m = c.getManaCost();
-        final byte colorProfile = m.getColorProfile();
-
-        final Set<String> colors = new HashSet<String>();
-        if ((colorProfile & forge.card.MagicColor.WHITE) > 0) {
-            colors.add(Constant.Color.WHITE);
-        }
-        if ((colorProfile & forge.card.MagicColor.BLACK) > 0) {
-            colors.add(Constant.Color.BLACK);
-        }
-        if ((colorProfile & forge.card.MagicColor.BLUE) > 0) {
-            colors.add(Constant.Color.BLUE);
-        }
-        if ((colorProfile & forge.card.MagicColor.RED) > 0) {
-            colors.add(Constant.Color.RED);
-        }
-        if ((colorProfile & forge.card.MagicColor.GREEN) > 0) {
-            colors.add(Constant.Color.GREEN);
-        }
-
-        for (final String kw : c.getKeyword()) {
-            if (kw.startsWith(c.getName() + " is ") || kw.startsWith("CARDNAME is ")) {
-                for (final String color : Constant.Color.COLORS) {
-                    if (kw.endsWith(color + ".")) {
-                        colors.add(color);
-                    }
-                }
-            }
-        }
-        return new ArrayList<String>(colors);
-    }
 
     // probably should put this somewhere else, but not sure where
     /**
