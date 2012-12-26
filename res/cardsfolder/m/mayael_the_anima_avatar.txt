@@ -1,0 +1,15 @@
+Name:Mayael the Anima Avatar
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:+1/+5
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ TrigDig | TriggerDescription$ At the beginning of your upkeep, reveal the top card of your library. If it's a creature card with power 5 or greater, put it into your hand. Otherwise, you may put it on the bottom of your library.
+SVar:TrigDig:AB$ Dig | Cost$ 0 | DigNum$ 1 | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature.powerGE5 | LibraryPosition2$ 0  | RememberChanged$ True | SubAbility$ DBDig
+SVar:DBDig:DB$ Dig | DigNum$ 1 | DestinationZone$ Library | Optional$ True | LibraryPosition$ -1 | LibraryPosition2$ 0  | ConditionCheckSVar$ X | ConditionSVarCompare$ EQ0 | SubAbility$ DBCleanup | References$ X
+SVar:X:Remembered$Amount
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
+SVar:Rarity:Special
+SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/mayael_the_anima_avatar.jpg
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo-2/mayael-the-anima.jpg
+Oracle:Hand +1, life +5\nAt the beginning of your upkeep, reveal the top card of your library. If it's a creature card with power 5 or greater, put it into your hand. Otherwise, you may put it on the bottom of your library.
+End
