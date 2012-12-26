@@ -18,10 +18,13 @@
 package forge.card.mana;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
 import forge.Constant;
@@ -227,7 +230,11 @@ public class ManaPool {
      */
     private Mana getMana(final String manaStr, final SpellAbility saBeingPaidFor) {
         final ArrayList<Mana> pool = this.floatingMana;
+        
+        //System.out.format("ManaStr='%s' ...", manaStr);
         ManaCostShard shard = ManaCostShard.parseNonGeneric(manaStr);
+        //System.out.format("Shard=%s (%d)", shard.toString(), shard.getColorMask() );
+        //System.out.println();
 
         // What are the available options?
         final List<Pair<Mana, Integer>> weightedOptions = new ArrayList<Pair<Mana, Integer>>();
@@ -424,25 +431,21 @@ public class ManaPool {
             return manaCost;
         }
 
-        boolean keepPayingFromPool = true;
         final ArrayList<Mana> manaPaid = saBeingPaidFor.getPayingMana();
 
-        while (keepPayingFromPool) {
-            final String costStr = manaCost.toString().replace("X ", "").replace("P", "").replace(" ", "/");
-            // get a mana of this type from floating, bail if none available
-            final Mana mana = this.getMana(costStr, saBeingPaidFor);
-            if (mana == null) {
-                keepPayingFromPool = false; // no matching mana in the pool
-            }
-            else {
-                manaCost.payMana(mana);
-                manaPaid.add(mana);
-                this.removeManaFrom(this.floatingMana, mana);
-                if (mana.addsNoCounterMagic() && saBeingPaidFor.getSourceCard() != null) {
-                    saBeingPaidFor.getSourceCard().setCanCounter(false);
-                }
-                if (manaCost.isPaid()) {
-                    keepPayingFromPool = false;
+        List<String> splitCost = Arrays.asList(manaCost.toString().replace("X ", "").replace("P", "").split(" "));
+        Collections.reverse(splitCost); // reverse to pay colorful parts first with matching-color mana while it lasts. 
+        for(String part : splitCost) {
+            int loops = StringUtils.isNumeric(part) ? Integer.parseInt(part) : 1;
+            for(int i = 0; i < loops; i++ ) {
+                final Mana mana = this.getMana(part, saBeingPaidFor);
+                if (mana != null) {
+                    manaCost.payMana(mana);
+                    manaPaid.add(mana);
+                    this.removeManaFrom(this.floatingMana, mana);
+                    if (mana.addsNoCounterMagic() && saBeingPaidFor.getSourceCard() != null) {
+                        saBeingPaidFor.getSourceCard().setCanCounter(false);
+                    }
                 }
             }
         }
