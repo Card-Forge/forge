@@ -26,6 +26,7 @@ import forge.Card;
 
 import forge.CardLists;
 import forge.CardPredicates.Presets;
+import forge.CardPredicates;
 import forge.CounterType;
 import forge.GameActionUtil;
 import forge.GameEntity;
@@ -184,14 +185,16 @@ public class Untap extends Phase {
             }
         }
 
-        // opponent untapping during your untap phase
-        final List<Card> opp = new ArrayList<Card>(player.getOpponent().getCardsIn(ZoneType.Battlefield));
-        for (final Card oppCard : opp) {
-            if (oppCard.hasKeyword("CARDNAME untaps during each other player's untap step.")) {
-                oppCard.untap();
-                // end opponent untapping during your untap phase
-            }
+        // other players untapping during your untap phase
+        final List<Card> cardsWithKW = CardLists.getKeyword(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield),
+                "CARDNAME untaps during each other player's untap step.");
+        final List<Player> otherPlayers = player.getOpponents();
+        otherPlayers.addAll(player.getAllies());
+        CardLists.filter(cardsWithKW, CardPredicates.hasListController(otherPlayers));
+        for (final Card cardWithKW : cardsWithKW) {
+            cardWithKW.untap();
         }
+        // end other players untapping during your untap phase
 
         if (Untap.canOnlyUntapOneLand()) {
             if (player.isComputer()) {
