@@ -4,8 +4,7 @@ Types:Creature Horror
 Text:no text
 PT:4/3
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME is put into a graveyard from the battlefield, each player discards his or her hand.
-SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ You | Mode$ Hand | SubAbility$ DBDiscard
-SVar:DBDiscard:DB$Discard | Defined$ Opponent | Mode$ Hand
+SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ Player | Mode$ Hand
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindslicer.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/149.jpg
