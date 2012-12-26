@@ -190,6 +190,18 @@ Fixes/Features:
 - Fixed Divine Light
 - Created Gatecrash branch
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Converted Nezumi Shortfang for multiplayer
+- fix crash during drafts
+- tweak ColorSet toString
+- Added very basic AddPhase AF
+- Added support in PhaseHandler for Additional phases
+- Convert Finest Hour to AddPhase
+- Converted Mass Mutiny for multiplayer.
+- Added TargetsWithDifferentControllers param for targeting with different controllers (should supercede TargetsFromDifferentZone in most cases as it works with player lists instead of using getOpponent)
+- Converted Blatant Thievery for multiplayer.
+- Fixed keyword "CARDNAME untaps during each other player's untap step." for correct application in multiplayer.
+- More cards ready for multiplayer
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -224,6 +236,8 @@ Higure, the Still Wind Avatar
 Raksha Golden Cub Avatar
 Phage the Untouchable Avatar
 Prodigal Sorcerer Avatar
+Mirror Entity Avatar
+Mayael the Anima Avatar
 
 
 Added the following cards:
