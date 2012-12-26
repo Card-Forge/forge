@@ -24,7 +24,17 @@ public class DeckHints {
      * Enum of types of DeckHints.
      */
     public enum Type {
-        COLOR, KEYWORD, NAME, TYPE,  NONE
+
+        /** The Color. */
+        COLOR,
+        /** The Keyword. */
+        KEYWORD,
+        /** The Name. */
+        NAME,
+        /** The Type. */
+        TYPE,
+        /** The None. */
+        NONE
     }
 
     private Type type = Type.NONE;

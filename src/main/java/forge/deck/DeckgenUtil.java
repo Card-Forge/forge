@@ -310,14 +310,15 @@ public class DeckgenUtil {
     public static Deck generateSchemeDeck() {
         Deck res = new Deck();
         List<CardPrinted> allSchemes = new ArrayList<CardPrinted>();
-        for( CardPrinted c : CardDb.instance().getAllNonTraditionalCards() ) {
-            if ( c.getCard().getType().isScheme())
+        for (CardPrinted c : CardDb.instance().getAllNonTraditionalCards()) {
+            if (c.getCard().getType().isScheme()) {
                 allSchemes.add(c);
+            }
         }
 
         int schemesToAdd = 20;
         int attemptsLeft = 100; // to avoid endless loop
-        while(schemesToAdd > 0 && attemptsLeft > 0) {
+        while (schemesToAdd > 0 && attemptsLeft > 0) {
             CardPrinted cp = Aggregates.random(allSchemes);
             int appearances = res.getSchemes().count(cp) + 1;
             if (appearances < 2) {

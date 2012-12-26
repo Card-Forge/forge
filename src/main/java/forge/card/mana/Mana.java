@@ -63,22 +63,26 @@ public class Mana {
             return;
         }
 
-        
+
         this.sourceCard = source;
     }
-    
+
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof Mana)) return false;
+        if (!(other instanceof Mana)) {
+            return false;
+        }
         Mana m2 = (Mana) other;
 
-        if ( color != m2.color )
+        if (color != m2.color) {
             return false;
+        }
 
         AbilityManaPart mp = this.getManaAbility();
         AbilityManaPart mp2 = m2.getManaAbility();
-        if ( (mp == null) != (mp2 == null) )
+        if ((mp == null) != (mp2 == null)) {
             return false;
+        }
 
         return mp == mp2 || mp.getManaRestrictions().equals(mp2.getManaRestrictions());
     }

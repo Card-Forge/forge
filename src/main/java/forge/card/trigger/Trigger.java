@@ -246,7 +246,7 @@ public abstract class Trigger extends TriggerReplacementBase {
                 return false;
             }
         }
-        
+
         if (this.getMapParams().containsKey("FirstCombat")) {
             if (!phaseHandler.isFirstCombat()) {
                 return false;

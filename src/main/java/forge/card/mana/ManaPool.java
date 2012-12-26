@@ -230,72 +230,85 @@ public class ManaPool {
         ManaCostShard shard = ManaCostShard.parseNonGeneric(manaStr);
 
         // What are the available options?
-        final List<Pair<Mana, Integer>> weightedOptions = new ArrayList<Pair<Mana,Integer>>();
+        final List<Pair<Mana, Integer>> weightedOptions = new ArrayList<Pair<Mana, Integer>>();
         for (final Mana thisMana : pool) {
 
-            if (!thisMana.getManaAbility().meetsManaRestrictions(saBeingPaidFor))
+            if (!thisMana.getManaAbility().meetsManaRestrictions(saBeingPaidFor)) {
                 continue;
+            }
 
             boolean canPay = shard.canBePaidWithManaOfColor(thisMana.getColorCode());
-            if (!canPay || (shard.isSnow() && !thisMana.isSnow()))
+            if (!canPay || (shard.isSnow() && !thisMana.isSnow())) {
                 continue;
+            }
 
-            // prefer colorless mana to spend 
+            // prefer colorless mana to spend
             int weight = thisMana.isColorless() ? 5 : 0;
 
             // prefer restricted mana to spend
-            if ( thisMana.isRestricted() ) weight += 2;
+            if (thisMana.isRestricted()) {
+                weight += 2;
+            }
 
             // Spend non-snow mana first
-            if ( !thisMana.isSnow() ) weight += 1;
+            if (!thisMana.isSnow()) {
+                weight += 1;
+            }
 
             weightedOptions.add(Pair.of(thisMana, weight));
         }
 
         // Exclude border case
-        if ( weightedOptions.isEmpty() ) return null; // There is no matching mana in the pool
+        if (weightedOptions.isEmpty()) {
+
+            return null; // There is no matching mana in the pool
+        }
 
         // have at least one option at this moment
         int maxWeight = Integer.MIN_VALUE;
         int equalWeights = 0;
         Mana toPay = null;
-        for( Pair<Mana, Integer> option : weightedOptions ) {
-            int thisWeight = option.getRight(); 
-            if (thisWeight > maxWeight ) {
+        for (Pair<Mana, Integer> option : weightedOptions) {
+            int thisWeight = option.getRight();
+            if (thisWeight > maxWeight) {
                 maxWeight = thisWeight;
                 equalWeights = 1;
                 toPay = option.getLeft();
-            } else if( thisWeight == maxWeight ) {
+            } else if (thisWeight == maxWeight) {
                 equalWeights++;
             }
         }
 
         // got an only one best option?
-        if (equalWeights == 1) 
+        if (equalWeights == 1) {
             return toPay;
+        }
 
         // select equal weight possibilities
         List<Mana> options = new ArrayList<Mana>();
-        for( Pair<Mana, Integer> option : weightedOptions ) {
+        for (Pair<Mana, Integer> option : weightedOptions) {
             int thisWeight = option.getRight();
-            if ( maxWeight == thisWeight) 
+            if (maxWeight == thisWeight) {
                 options.add(option.getLeft());
+            }
         }
 
         // if the options are equal, there is no difference on which to spend
         toPay = options.get(0);
         boolean allAreEqual = true;
-        for(int i = 1; i < options.size(); i++) {
-            if ( !toPay.equals(options.get(i)) )
-            {
+        for (int i = 1; i < options.size(); i++) {
+            if (!toPay.equals(options.get(i))) {
+
                 allAreEqual = false;
                 break;
             }
         }
-        
-        if ( allAreEqual ) return toPay;
-        
-        // Not found a good one - then let them choose 
+
+        if (allAreEqual) {
+            return toPay;
+        }
+
+        // Not found a good one - then let them choose
         final List<Mana> manaChoices = options;
         Mana payment = null;
 

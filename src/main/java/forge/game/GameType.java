@@ -35,23 +35,32 @@ import forge.util.Aggregates;
  */
 public enum GameType {
 
-    //           Limited  Main board: allowed size             SB: allowed size   Max distinct non basic cards
-    Constructed ( false,  new IntRange(60, Integer.MAX_VALUE), new IntRange(15),  4),
-    Sealed      ( true,   new IntRange(40, Integer.MAX_VALUE), null,              Integer.MAX_VALUE),
-    Draft       ( true,   new IntRange(40, Integer.MAX_VALUE), null,              Integer.MAX_VALUE),
-    Commander   ( false,  new IntRange(99 /* +cmndr aside */), new IntRange(0),   1),
-    Quest       ( true,   new IntRange(40, Integer.MAX_VALUE), new IntRange(15),  4),
-    Vanguard    ( false,  new IntRange(60, Integer.MAX_VALUE), new IntRange(0),   4),
-    Planechase  ( false,  new IntRange(60, Integer.MAX_VALUE), new IntRange(0),   4),
-    Archenemy   ( false,  new IntRange(60, Integer.MAX_VALUE), new IntRange(0),   4),
-    Gauntlet    ( true,   new IntRange(40, Integer.MAX_VALUE), null,              Integer.MAX_VALUE);
+    //          Limited  Main board: allowed size             SB: allowed size   Max distinct non basic cards
+    /** The Constructed. */
+    Constructed (false,  new IntRange(60, Integer.MAX_VALUE), new IntRange(15),  4),
+    /** The Sealed. */
+    Sealed      (true,   new IntRange(40, Integer.MAX_VALUE), null,              Integer.MAX_VALUE),
+    /** The Draft. */
+    Draft       (true,   new IntRange(40, Integer.MAX_VALUE), null,              Integer.MAX_VALUE),
+    /** The Commander. */
+    Commander   (false,  new IntRange(99 /* +cmndr aside */), new IntRange(0),   1),
+    /** The Quest. */
+    Quest       (true,   new IntRange(40, Integer.MAX_VALUE), new IntRange(15),  4),
+    /** The Vanguard. */
+    Vanguard    (false,  new IntRange(60, Integer.MAX_VALUE), new IntRange(0),   4),
+    /** The Planechase. */
+    Planechase  (false,  new IntRange(60, Integer.MAX_VALUE), new IntRange(0),   4),
+    /** The Archenemy. */
+    Archenemy   (false,  new IntRange(60, Integer.MAX_VALUE), new IntRange(0),   4),
+    /** The Gauntlet. */
+    Gauntlet    (true,   new IntRange(40, Integer.MAX_VALUE), null,              Integer.MAX_VALUE);
 
     private final boolean bLimited;
     private final IntRange mainRange;
     private final IntRange sideRange; // null => no check
     private final int maxCardCopies;
 
-    
+
     /**
      * Checks if is limited.
      * 
@@ -122,25 +131,25 @@ public enum GameType {
     }
 
 
-    
+
     @SuppressWarnings("incomplete-switch")
     public String getDeckConformanceProblem(Deck deck) {
         int deckSize = deck.getMain().countAll();
-    
+
         int min = getMainRange().getMinimumInteger();
         int max = getMainRange().getMaximumInteger();
-    
+
         if (deckSize < min) {
             return String.format("should have a minimum of %d cards", min);
         }
-    
+
         if (deckSize > max) {
             return String.format("should not exceed a maximum of %d cards", max);
         }
-        
+
         switch(this) {
             case Commander: //Must contain exactly 1 legendary Commander and no sideboard.
-    
+
                 //TODO:Enforce color identity
                 if (null == deck.getCommander()) {
                     return "is missing a commander";
@@ -148,7 +157,7 @@ public enum GameType {
                 if (!deck.getCommander().getCard().getType().isLegendary()) {
                     return "has a commander that is not a legendary creature";
                 }
-        
+
                 //No sideboarding in Commander
                 if (!deck.getSideboard().isEmpty()) {
                     return "has sideboard";
@@ -161,19 +170,20 @@ public enum GameType {
                 }
                 int phenoms = 0;
                 for (Entry<CardPrinted, Integer> cp : deck.getPlanes()) {
-        
+
                     if (cp.getKey().getCard().getType().typeContains(CardCoreType.Phenomenon)) {
                         phenoms++;
                     }
-                    if(cp.getValue() > 1)
-                       return "must not contain multiple copies of any Phenomena";
-        
+                    if (cp.getValue() > 1) {
+                        return "must not contain multiple copies of any Phenomena";
+                    }
+
                 }
                 if (phenoms > 2) {
                     return "must not contain more than 2 Phenomena";
                 }
                 break;
-                
+
             case Archenemy:  //Must contain at least 20 schemes, max 2 of each.
                 if (deck.getSchemes().countAll() < 20) {
                     return "must contain at least 20 schemes";
@@ -186,41 +196,43 @@ public enum GameType {
                 }
                 break;
         }
-        
+
         int maxCopies = getMaxCardCopies();
-        if ( maxCopies < Integer.MAX_VALUE )  {
+        if (maxCopies < Integer.MAX_VALUE) {
             //Must contain no more than 4 of the same card
             //shared among the main deck and sideboard, except
             //basic lands and Relentless Rats
-    
+
             DeckSection tmp = new DeckSection(deck.getMain());
             tmp.addAll(deck.getSideboard());
-            if ( null != deck.getCommander())
+            if (null != deck.getCommander()) {
                 tmp.add(deck.getCommander());
-    
+            }
+
             List<String> limitExceptions = Arrays.asList("Relentless Rats");
-    
+
             // should group all cards by name, so that different editions of same card are really counted as the same card
             for (Entry<String, Integer> cp : Aggregates.groupSumBy(tmp, CardPrinted.FN_GET_NAME)) {
-                
+
                 CardPrinted simpleCard = CardDb.instance().getCard(cp.getKey());
                 boolean canHaveMultiple = simpleCard.getCard().getType().isBasicLand() || limitExceptions.contains(cp.getKey());
-                
+
                 if (!canHaveMultiple && cp.getValue() > maxCopies) {
                     return String.format("must not contain more than %d of '%s' card", maxCopies, cp.getKey());
                 }
             }
-    
+
             // The sideboard must contain either 0 or 15 cards
             int sideboardSize = deck.getSideboard().countAll();
-            IntRange sbRange = getSideRange();  
-            if ( sbRange != null && sideboardSize > 0 && !sbRange.containsInteger(sideboardSize))
-                return sbRange.getMinimumInteger() == sbRange.getMaximumInteger() 
-                ? String.format("must have a sideboard of %d cards or no sideboard at all", sbRange.getMaximumInteger()) 
+            IntRange sbRange = getSideRange();
+            if (sbRange != null && sideboardSize > 0 && !sbRange.containsInteger(sideboardSize)) {
+                return sbRange.getMinimumInteger() == sbRange.getMaximumInteger()
+                ? String.format("must have a sideboard of %d cards or no sideboard at all", sbRange.getMaximumInteger())
                 : String.format("must have a sideboard of %d to %d cards or no sideboard at all", sbRange.getMinimumInteger(), sbRange.getMaximumInteger());
-    
+            }
+
         }
-    
+
         return null;
     }
 }

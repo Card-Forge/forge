@@ -289,8 +289,9 @@ public final class ColorSet implements Comparable<ColorSet> {
             return "n/a";
         }
         String toReturn = MagicColor.toLongString(myColor);
-        if ( toReturn == Constant.Color.COLORLESS && myColor != 0 )
+        if (toReturn == Constant.Color.COLORLESS && myColor != 0) {
             return "multi";
+        }
         return toReturn;
     }
 

@@ -99,7 +99,7 @@ public class ManaCostShard {
         /** The Constant IS_SNOW. */
         public static final int IS_SNOW = 1 << 11;
     }
-    
+
     public static final int COLORS_SUPERPOSITION = Atom.WHITE | Atom.BLUE | Atom.BLACK | Atom.RED | Atom.GREEN;
 
     /*
@@ -291,30 +291,32 @@ public class ManaCostShard {
 
         //throw new RuntimeException(String.format("Not found: mana shard with profile = %x", atoms));
     }
-    
+
     public static ManaCostShard parseNonGeneric(final String unparsed) {
         int atoms = 0;
         for (int iChar = 0; iChar < unparsed.length(); iChar++) {
             char c = unparsed.charAt(iChar);
             switch (c) {
-                case 'W': atoms |= Atom.WHITE;      break; 
-                case 'U': atoms |= Atom.BLUE;       break;
-                case 'B': atoms |= Atom.BLACK;      break;
-                case 'R': atoms |= Atom.RED;        break;
-                case 'G': atoms |= Atom.GREEN;      break;
-                case 'P': atoms |= Atom.OR_2_LIFE;  break;
-                case 'S': atoms |= Atom.IS_SNOW;    break;
-                case 'X': atoms |= Atom.IS_X;       break;
+                case 'W': atoms |= Atom.WHITE;          break;
+                case 'U': atoms |= Atom.BLUE;           break;
+                case 'B': atoms |= Atom.BLACK;          break;
+                case 'R': atoms |= Atom.RED;            break;
+                case 'G': atoms |= Atom.GREEN;          break;
+                case 'P': atoms |= Atom.OR_2_LIFE;      break;
+                case 'S': atoms |= Atom.IS_SNOW;        break;
+                case 'X': atoms |= Atom.IS_X;           break;
                 case '2': atoms |= Atom.OR_2_COLORLESS; break;
-                default: 
-                    if ( c <= '9' && c >= '0' ) 
+                default:
+                    if (c <= '9' && c >= '0') {
                         atoms |= Atom.COLORLESS;
+                    }
                     break;
             }
         }
         // for cases when unparsed equals '2' or unparsed is like '12' or '20'
-        if ( atoms == Atom.OR_2_COLORLESS || atoms == (Atom.OR_2_COLORLESS | Atom.COLORLESS) )  
+        if (atoms == Atom.OR_2_COLORLESS || atoms == (Atom.OR_2_COLORLESS | Atom.COLORLESS)) {
             atoms = Atom.COLORLESS;
+        }
         return ManaCostShard.valueOf(atoms);
     }
 

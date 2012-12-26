@@ -11,12 +11,12 @@ import forge.game.phase.PhaseType;
  *
  */
 public class AddPhaseEffect extends SpellEffect {
-    
+
     @Override
     public void resolve(SpellAbility sa) {
         PhaseHandler phaseHandler = Singletons.getModel().getGame().getPhaseHandler();
         PhaseType extra = PhaseType.smartValueOf(sa.getParam("ExtraPhase"));
-        
+
         PhaseType after;
         if (sa.hasParam("AfterPhase")) {
             after = PhaseType.smartValueOf(sa.getParam("AfterPhase"));
@@ -24,7 +24,7 @@ public class AddPhaseEffect extends SpellEffect {
         else {
             after = phaseHandler.getPhase();
         }
-        
+
         phaseHandler.addExtraPhase(after, extra);
     }
 

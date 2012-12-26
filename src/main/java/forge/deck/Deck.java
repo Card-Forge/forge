@@ -64,7 +64,7 @@ public class Deck extends DeckBase {
     private final DeckSection sideboard;
     private final DeckSection planes;
     private final DeckSection schemes;
-    
+
     private transient DeckSection mainEdited;
     private transient DeckSection sideboardEdited;
     private CardPrinted avatar;

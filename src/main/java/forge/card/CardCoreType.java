@@ -44,6 +44,6 @@ public enum CardCoreType {
     Tribal,
     /** The Vanguard. */
     Vanguard,
-    
+    /** The Phenomenon. */
     Phenomenon
 }
