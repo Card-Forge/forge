@@ -45,6 +45,7 @@ public class Target {
     private boolean uniqueTargets = false;
     private boolean singleZone = false;
     private boolean differentZone = false;
+    private boolean differentControllers = false;
     private boolean withoutSameCreatureType = false;
     private String definedController = null;
     private TargetChoices choice = null;
@@ -809,6 +810,20 @@ public class Target {
      */
     public void setDifferentZone(boolean different) {
         this.differentZone = different;
+    }
+
+    /**
+     * @return the differentControllers
+     */
+    public boolean isDifferentControllers() {
+        return differentControllers;
+    }
+
+    /**
+     * @param different the differentControllers to set
+     */
+    public void setDifferentControllers(boolean different) {
+        this.differentControllers = different;
     }
 
     /**

@@ -295,6 +295,14 @@ public class TargetSelection {
         if (tgt.isDifferentZone() && !targeted.isEmpty()) {
             choices = CardLists.filterControlledBy(choices, targeted.get(0).getController().getOpponent());
         }
+        // If all cards must have different controllers
+        if (tgt.isDifferentControllers() && !targeted.isEmpty()) {
+            final List<Player> availableControllers = new ArrayList<Player>(Singletons.getModel().getGame().getPlayers());
+            for (int i = 0; i < targeted.size(); i++) {
+                availableControllers.remove(targeted.get(i).getController());
+            }
+            choices = CardLists.filterControlledBy(choices, availableControllers);
+        }
         // If the cards can't share a creature type
         if (tgt.isWithoutSameCreatureType() && !targeted.isEmpty()) {
             final Card card = targeted.get(0);

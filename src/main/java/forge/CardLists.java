@@ -275,6 +275,9 @@ public class CardLists {
         return CardLists.filter(cardList, CardPredicates.isController(player));
     }
 
+    public static List<Card> filterControlledBy(Iterable<Card> cardList, List<Player> player) {
+        return CardLists.filter(cardList, CardPredicates.hasListController(player));
+    }
 
     public static List<Card> getValidCards(Iterable<Card> cardList, String[] restrictions, Player sourceController, Card source) {
         return CardLists.filter(cardList, CardPredicates.restriction(restrictions, sourceController, source));

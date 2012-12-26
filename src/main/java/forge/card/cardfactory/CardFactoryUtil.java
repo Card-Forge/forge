@@ -1795,8 +1795,7 @@ public class CardFactoryUtil {
             return CardFactoryUtil.doXMath(n, m, source);
         }
 
-     // count valid cards in any specified zone/s
-        System.out.println("Passed string: " + s);
+        // count valid cards in any specified zone/s
         if (l[0].startsWith("Valid") && !l[0].contains("Valid ")) {
             String[] lparts = l[0].split(" ", 2);
             final List<ZoneType> vZone = ZoneType.listValueOf(lparts[0].split("Valid")[1]);

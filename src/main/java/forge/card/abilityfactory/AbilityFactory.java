@@ -212,6 +212,9 @@ public class AbilityFactory {
             if (mapParams.containsKey("TargetsWithDefinedController")) {
                 abTgt.setDefinedController(mapParams.get("TargetsWithDefinedController"));
             }
+            if (mapParams.containsKey("TargetsWithDifferentControllers")) {
+                abTgt.setDifferentControllers(true);
+            }
         }
 
         // ***********************************

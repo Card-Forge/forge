@@ -17,6 +17,8 @@
  */
 package forge;
 
+import java.util.List;
+
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -44,6 +46,14 @@ public final class CardPredicates {
             @Override
             public boolean apply(final Card c) {
                 return c.getController().equals(p);
+            }
+        };
+    }
+    public static final Predicate<Card> hasListController(final List<Player> pList) {
+        return new Predicate<Card>() {
+            @Override
+            public boolean apply(final Card c) {
+                return pList.contains((Player) c.getController());
             }
         };
     }
