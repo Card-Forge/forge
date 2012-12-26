@@ -35,25 +35,16 @@ import forge.util.Aggregates;
  */
 public enum GameType {
 
-    //          Limited  Main board: allowed size             SB: allowed size   Max distinct non basic cards
-    /** The Constructed. */
-    Constructed (false,  new IntRange(60, Integer.MAX_VALUE), new IntRange(15),  4),
-    /** The Sealed. */
-    Sealed      (true,   new IntRange(40, Integer.MAX_VALUE), null,              Integer.MAX_VALUE),
-    /** The Draft. */
-    Draft       (true,   new IntRange(40, Integer.MAX_VALUE), null,              Integer.MAX_VALUE),
-    /** The Commander. */
-    Commander   (false,  new IntRange(99 /* +cmndr aside */), new IntRange(0),   1),
-    /** The Quest. */
-    Quest       (true,   new IntRange(40, Integer.MAX_VALUE), new IntRange(15),  4),
-    /** The Vanguard. */
-    Vanguard    (false,  new IntRange(60, Integer.MAX_VALUE), new IntRange(0),   4),
-    /** The Planechase. */
-    Planechase  (false,  new IntRange(60, Integer.MAX_VALUE), new IntRange(0),   4),
-    /** The Archenemy. */
-    Archenemy   (false,  new IntRange(60, Integer.MAX_VALUE), new IntRange(0),   4),
-    /** The Gauntlet. */
-    Gauntlet    (true,   new IntRange(40, Integer.MAX_VALUE), null,              Integer.MAX_VALUE);
+    //           Limited  Main board: allowed size             SB: allowed size   Max distinct non basic cards
+    Constructed ( false,  new IntRange(60, Integer.MAX_VALUE), new IntRange(15),  4),
+    Sealed      ( true,   new IntRange(40, Integer.MAX_VALUE), null,              Integer.MAX_VALUE),
+    Draft       ( true,   new IntRange(40, Integer.MAX_VALUE), null,              Integer.MAX_VALUE),
+    Commander   ( false,  new IntRange(99 /* +cmndr aside */), new IntRange(0),   1),
+    Quest       ( true,   new IntRange(40, Integer.MAX_VALUE), new IntRange(15),  4),
+    Vanguard    ( false,  new IntRange(60, Integer.MAX_VALUE), new IntRange(0),   4),
+    Planechase  ( false,  new IntRange(60, Integer.MAX_VALUE), new IntRange(0),   4),
+    Archenemy   ( false,  new IntRange(60, Integer.MAX_VALUE), new IntRange(0),   4),
+    Gauntlet    ( true,   new IntRange(40, Integer.MAX_VALUE), null,              Integer.MAX_VALUE);
 
     private final boolean bLimited;
     private final IntRange mainRange;
