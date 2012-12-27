@@ -3369,6 +3369,7 @@ res/cardsfolder/f/fencing_ace.txt -text
 res/cardsfolder/f/fend_off.txt svneol=native#text/plain
 res/cardsfolder/f/fendeep_summoner.txt svneol=native#text/plain
 res/cardsfolder/f/feral_animist.txt svneol=native#text/plain
+res/cardsfolder/f/feral_contest.txt -text
 res/cardsfolder/f/feral_deceiver.txt svneol=native#text/plain
 res/cardsfolder/f/feral_hydra.txt svneol=native#text/plain
 res/cardsfolder/f/feral_instinct.txt svneol=native#text/plain
@@ -4445,6 +4446,7 @@ res/cardsfolder/h/hagra_crocodile.txt svneol=native#text/plain
 res/cardsfolder/h/hagra_diabolist.txt svneol=native#text/plain
 res/cardsfolder/h/hail_storm.txt svneol=native#text/plain
 res/cardsfolder/h/hair_strung_koto.txt svneol=native#text/plain
+res/cardsfolder/h/hakim_loreweaver.txt -text
 res/cardsfolder/h/halberdier.txt svneol=native#text/plain
 res/cardsfolder/h/halcyon_glaze.txt svneol=native#text/plain
 res/cardsfolder/h/halimar_depths.txt svneol=native#text/plain
@@ -4798,6 +4800,7 @@ res/cardsfolder/h/hunger_of_the_howlpack.txt -text
 res/cardsfolder/h/hunger_of_the_nim.txt svneol=native#text/plain
 res/cardsfolder/h/hungry_mist.txt svneol=native#text/plain
 res/cardsfolder/h/hungry_spriggan.txt svneol=native#text/plain
+res/cardsfolder/h/hunt_down.txt -text
 res/cardsfolder/h/hunted_dragon.txt svneol=native#text/plain
 res/cardsfolder/h/hunted_ghoul.txt -text
 res/cardsfolder/h/hunted_horror.txt svneol=native#text/plain
@@ -8217,6 +8220,7 @@ res/cardsfolder/r/rime_dryad.txt svneol=native#text/plain
 res/cardsfolder/r/rime_transfusion.txt -text
 res/cardsfolder/r/rimebound_dead.txt svneol=native#text/plain
 res/cardsfolder/r/rimefeather_owl.txt -text
+res/cardsfolder/r/rimehorn_aurochs.txt -text
 res/cardsfolder/r/rimescale_dragon.txt svneol=native#text/plain
 res/cardsfolder/r/rimewind_cryomancer.txt svneol=native#text/plain
 res/cardsfolder/r/rimewind_taskmage.txt svneol=native#text/plain
