@@ -4,9 +4,8 @@ Types:Legendary Creature Human Wizard
 Text:no text
 PT:2/4
 K:Flying
-A:AB$ ChangeZone | Cost$ U U | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Aura.YouOwn | AttachedTo$ Self | ActivationPhases$ Upkeep | PlayerTurn$ True | ConditionCheckSVar$ HakimX | ConditionSVarCompare$ EQ0 | SpellDescription$ Return target Aura card from your graveyard to the battlefield attached to CARDNAME. Activate this ability only during your upkeep and only if CARDNAME isn't enchanted.
+A:AB$ ChangeZone | Cost$ U U | Origin$ Graveyard | Destination$ Battlefield | ValidTgts$ Aura.YouOwn | AttachedTo$ Self | ActivationPhases$ Upkeep | PlayerTurn$ True | IsPresent$ Aura.Attached | PresentCompare$ EQ0 | SpellDescription$ Return target Aura card from your graveyard to the battlefield attached to CARDNAME. Activate this ability only during your upkeep and only if CARDNAME isn't enchanted.
 A:AB$ DestroyAll | Cost$ U U T | ValidCards$ Card.Aura+AttachedTo Card.Self | SpellDescription$ Destroy all Auras attached to CARDNAME.
-SVar:HakimX:Count$Valid Aura.AttachedTo Self
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hakim_loreweaver.jpg
 SetInfo:MIR|Rare|http://magiccards.info/scans/en/mr/68.jpg
