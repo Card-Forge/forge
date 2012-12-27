@@ -190,7 +190,7 @@ public class Untap extends Phase {
                 "CARDNAME untaps during each other player's untap step.");
         final List<Player> otherPlayers = player.getOpponents();
         otherPlayers.addAll(player.getAllies());
-        CardLists.filter(cardsWithKW, CardPredicates.hasListController(otherPlayers));
+        CardLists.filter(cardsWithKW, CardPredicates.isControlledByAnyOf(otherPlayers));
         for (final Card cardWithKW : cardsWithKW) {
             cardWithKW.untap();
         }

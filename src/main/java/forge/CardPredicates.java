@@ -49,7 +49,7 @@ public final class CardPredicates {
             }
         };
     }
-    public static final Predicate<Card> hasListController(final List<Player> pList) {
+    public static final Predicate<Card> isControlledByAnyOf(final List<Player> pList) {
         return new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
