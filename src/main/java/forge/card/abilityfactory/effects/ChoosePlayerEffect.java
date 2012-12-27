@@ -34,7 +34,7 @@ public class ChoosePlayerEffect extends SpellEffect {
 
         final Target tgt = sa.getTarget();
 
-        final ArrayList<Player> choices = sa.hasParam("Choices") ? AbilityFactory.getDefinedPlayers(
+        final List<Player> choices = sa.hasParam("Choices") ? AbilityFactory.getDefinedPlayers(
                 sa.getSourceCard(), sa.getParam("Choices"), sa) : new ArrayList<Player>(Singletons.getModel().getGame().getPlayers());
 
         final String choiceDesc = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a player";
@@ -55,7 +55,19 @@ public class ChoosePlayerEffect extends SpellEffect {
                 } else {
                     if (sa.hasParam("AILogic")) {
                         if (sa.getParam("AILogic").equals("Curse")) {
-                            card.setChosenPlayer(p.getOpponent());
+                            int curseChoice;
+                            for (curseChoice = 0; curseChoice < choices.size(); curseChoice++) {
+                                System.out.println("Current player iterated: " + choices.get(curseChoice));
+                                if (choices.get(curseChoice).isHostileTo(p)) {
+                                    card.setChosenPlayer(choices.get(curseChoice));
+                                    System.out.println("Set chosen player to " + card.getChosenPlayer());
+                                    break;
+                                }
+                            }
+                            if (card.getChosenPlayer() == null) {
+                                System.out.println("No good curse choices. Picking first available: " + choices.get(0));
+                                card.setChosenPlayer(choices.get(0));
+                            }
                         } else {
                             card.setChosenPlayer(p);
                         }

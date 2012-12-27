@@ -2063,6 +2063,12 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         }
 
+        if (this.chosenPlayer != null) {
+            sb.append("\r\n[Chosen player: ");
+            sb.append(this.getChosenPlayer());
+            sb.append("]\r\n");
+        }
+
         if (this.hauntedBy.size() != 0) {
             sb.append("Haunted by: ");
             for (final Card c : this.hauntedBy) {
