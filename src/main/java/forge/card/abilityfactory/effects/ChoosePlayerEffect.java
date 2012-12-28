@@ -57,10 +57,8 @@ public class ChoosePlayerEffect extends SpellEffect {
                         if (sa.getParam("AILogic").equals("Curse")) {
                             int curseChoice;
                             for (curseChoice = 0; curseChoice < choices.size(); curseChoice++) {
-                                System.out.println("Current player iterated: " + choices.get(curseChoice));
                                 if (choices.get(curseChoice).isHostileTo(p)) {
                                     card.setChosenPlayer(choices.get(curseChoice));
-                                    System.out.println("Set chosen player to " + card.getChosenPlayer());
                                     break;
                                 }
                             }
