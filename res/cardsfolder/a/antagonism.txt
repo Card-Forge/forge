@@ -2,13 +2,11 @@ Name:Antagonism
 ManaCost:3 R
 Types:Enchantment
 Text:no text
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | Execute$ TeaseYou | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's end step, CARDNAME deals 2 damage to that player unless one of his or her opponents was dealt damage this turn.
-SVar:TeaseYou:DB$ DealDamage | Defined$ You | NumDmg$ 2 | ConditionCheckSVar$ AntagonismX | ConditionSVarCompare$ LE0 | References$ AntagonismX 
-SVar:AntagonismX:Count$OppDamageThisTurn
-T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Opponent | Execute$ TeaseOpp | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ At the beginning of each player's end step, CARDNAME deals 2  damage to that player unless one of his or her opponents was dealt damage this turn.
-SVar:TeaseOpp:DB$ DealDamage | Defined$ Opponent | NumDmg$ 2 | ConditionCheckSVar$ AntagonismY | ConditionSVarCompare$ LE0 | References$ AntagonismY | 
-SVar:AntagonismY:Count$YourDamageThisTurn
-SVar:NeedsToPlayVar:AntagonismX GE1
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ Player | Execute$ TeaseYou | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's end step, CARDNAME deals 2 damage to that player unless one of his or her opponents was dealt damage this turn.
+SVar:TeaseYou:DB$ DealDamage | Defined$ TriggeredPlayer | NumDmg$ 2 | ConditionCheckSVar$ AntagonismX | ConditionSVarCompare$ LE0 | References$ AntagonismX 
+SVar:AntagonismX:TriggeredPlayer$DamageToOppsThisTurn
+SVar:Check:PlayerCountOpponents$DamageToOppsThisTurn
+SVar:NeedsToPlayVar:Check GE1
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/antagonism.jpg

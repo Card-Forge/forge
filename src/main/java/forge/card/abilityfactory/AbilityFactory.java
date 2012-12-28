@@ -1126,14 +1126,12 @@ public class AbilityFactory {
             if (!players.contains(p)) {
                 players.add(p);
             }
-        } else if (defined.equals("You") || defined.equals("Opponent") || defined.equals("Each")) {
-            if (defined.equals("You") || defined.equals("Each")) {
-                players.add(sa.getActivatingPlayer());
-            }
-
-            if (defined.equals("Opponent") || defined.equals("Each")) {
-                players.add(sa.getActivatingPlayer().getOpponent());
-            }
+        } else if (defined.equals("You")) {
+            players.add(sa.getActivatingPlayer());
+        } else if (defined.equals("Each")) {
+            players.addAll(Singletons.getModel().getGame().getPlayers());
+        } else if (defined.equals("Opponent")) {
+            players.add(sa.getActivatingPlayer().getOpponent());
         } else {
             for (Player p : Singletons.getModel().getGame().getPlayers()) {
                 if (p.isValid(defined, sa.getActivatingPlayer(), sa.getSourceCard())) {

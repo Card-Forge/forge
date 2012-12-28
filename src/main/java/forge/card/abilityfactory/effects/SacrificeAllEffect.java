@@ -42,13 +42,6 @@ public class SacrificeAllEffect extends SpellEffect {
             valid = sa.getParam("ValidCards");
         }
 
-        // Ugh. If calculateAmount needs to be called with DestroyAll it _needs_
-        // to use the X variable
-        // We really need a better solution to this
-        if (valid.contains("X")) {
-            valid = valid.replace("X", Integer.toString(AbilityFactory.calculateAmount(card, "X", sa)));
-        }
-
         List<Card> list;
         if (sa.hasParam("Defined")) {
             list = new ArrayList<Card>(AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa));

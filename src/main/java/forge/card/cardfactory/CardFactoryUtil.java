@@ -1884,7 +1884,9 @@ public class CardFactoryUtil {
         }
 
         if (sq[0].contains("LifeLostThisTurn")) {
-            return CardFactoryUtil.doXMath(players.get(0).getLifeLostThisTurn(), m, source);
+            if (players.size() > 0) {
+                return CardFactoryUtil.doXMath(players.get(0).getLifeLostThisTurn(), m, source);
+            }
         }
 
         if (sq[0].contains("TopOfLibraryCMC")) {
@@ -1915,6 +1917,26 @@ public class CardFactoryUtil {
         if (sq[0].equals("DamageDoneToPlayerBy")) {
             if (players.size() > 0) {
                 return CardFactoryUtil.doXMath(source.getDamageDoneToPlayerBy(players.get(0).getName()), m, source);
+            }
+        }
+
+        if (sq[0].contains("DamageToOppsThisTurn")) {
+            if (players.size() > 0) {
+                int oppDmg = 0;
+                for (Player opp : players.get(0).getOpponents()) {
+                    oppDmg += opp.getAssignedDamage();
+                }
+                return CardFactoryUtil.doXMath(oppDmg, m, source);
+            }
+        }
+
+        if (sq[0].contains("DamageThisTurn")) {
+            if (players.size() > 0) {
+                int totDmg = 0;
+                for (Player p : players) {
+                    totDmg += p.getAssignedDamage();
+                }
+                return CardFactoryUtil.doXMath(totDmg, m, source);
             }
         }
 

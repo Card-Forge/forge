@@ -7,8 +7,8 @@ T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.Self+counters
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.Self+counters_EQ0_SCREAM | PresentZone$ Exile | Execute$ TrigMoveToGraveyard | TriggerZones$ Exile | Secondary$ True | TriggerDescription$ Put CARDNAME into your graveyard and return all creatures to the battlefield.
 SVar:TrigRemoveCounter:AB$ RemoveCounter | Cost$ 0 | Defined$ Self | CounterType$ SCREAM | CounterNum$ 1
 SVar:TrigMoveToGraveyard:AB$ ChangeZone | Cost$ 0 | Origin$ Exile | Destination$ Graveyard | Defined$ Self | SubAbility$ DBResurrection
-SVar:DBResurrection:DB$ChangeZoneAll | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature
-SVar:DBPutCounter:DB$PutCounter | Defined$ Remembered | CounterType$ SCREAM | CounterNum$ 2
+SVar:DBResurrection:DB$ ChangeZoneAll | Origin$ Graveyard | Destination$ Battlefield | ChangeType$ Creature
+SVar:DBPutCounter:DB$ PutCounter | Defined$ Remembered | CounterType$ SCREAM | CounterNum$ 2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/all_hallows_eve.jpg
 SetInfo:LEG|Rare|http://magiccards.info/scans/en/lg/2.jpg
