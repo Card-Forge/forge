@@ -18,10 +18,10 @@ public class CardDamageHistory {
     private boolean creatureGotBlockedThisCombat = false;
     private boolean creatureGotBlockedThisTurn = false;
 
-    private final List<Player> creatureAttackedLastTurnOf = new ArrayList<Player>(2);
-    private final List<Player> damagedThisTurn = new ArrayList<Player>(2);
-    private final List<Player> damagedThisTurnInCombat = new ArrayList<Player>(2);
-    private final List<Player> damagedThisGame = new ArrayList<Player>(2);
+    private final List<Player> creatureAttackedLastTurnOf = new ArrayList<Player>(Singletons.getModel().getGame().getPlayers().size());
+    private final List<Player> damagedThisTurn = new ArrayList<Player>(Singletons.getModel().getGame().getPlayers().size());
+    private final List<Player> damagedThisTurnInCombat = new ArrayList<Player>(Singletons.getModel().getGame().getPlayers().size());
+    private final List<Player> damagedThisGame = new ArrayList<Player>(Singletons.getModel().getGame().getPlayers().size());
     // used to see if an attacking creature with a triggering attack ability
     // triggered this phase:
     /**
@@ -75,7 +75,7 @@ public class CardDamageHistory {
      * Setter for the field <code>creatureAttackedLastTurn</code>.
      * </p>
      * 
-     * @param b
+     * @param value
      *            a boolean.
      */
     public final void setCreatureAttackedLastTurnOf(final Player p, boolean value) {
@@ -216,6 +216,9 @@ public class CardDamageHistory {
     public void registerDamage(Player player) {
         if (!damagedThisTurn.contains(player)) {
             damagedThisTurn.add(player);
+        }
+        if (!damagedThisGame.contains(player)) {
+            damagedThisGame.add(player);
         }
     }
 
