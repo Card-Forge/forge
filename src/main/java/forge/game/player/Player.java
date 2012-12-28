@@ -2556,6 +2556,13 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             if (source.getChosenPlayer() == null || !source.getChosenPlayer().equals(this)) {
                 return false;
             }
+        } else if (property.startsWith("withMore")) {
+            final String cardType = property.split("sThan")[0].substring(8);
+            final List<Card> oppList = CardLists.filter(this.getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
+            final List<Card> yourList = CardLists.filter(source.getController().getCardsIn(ZoneType.Battlefield), CardPredicates.isType(cardType));
+            if (oppList.size() <= yourList.size()) {
+                return false;
+            }
         }
 
         return true;

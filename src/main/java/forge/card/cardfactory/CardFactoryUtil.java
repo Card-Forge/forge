@@ -1883,6 +1883,10 @@ public class CardFactoryUtil {
             }
         }
 
+        if (sq[0].contains("LifeLostThisTurn")) {
+            return CardFactoryUtil.doXMath(players.get(0).getLifeLostThisTurn(), m, source);
+        }
+
         if (sq[0].contains("TopOfLibraryCMC")) {
             if (players.size() > 0) {
                 return CardFactoryUtil.doXMath(Aggregates.sum(players.get(0).getCardsIn(ZoneType.Library, 1), CardPredicates.Accessors.fnGetCmc),
@@ -2228,7 +2232,7 @@ public class CardFactoryUtil {
             return CardFactoryUtil.doXMath(cardController.getLifeLostThisTurn(), m, c);
         }
 
-        if (sq[0].contains("LifeOppLostThisTurn")) {
+        if (sq[0].contains("LifeOppsLostThisTurn")) {
             int lost = 0;
             for (Player opp : cardController.getOpponents()) {
                 lost += opp.getLifeLostThisTurn();
