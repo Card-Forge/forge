@@ -7,7 +7,7 @@ K:Intimidate
 S:Mode$ Continuous | Affected$ Creature.Other+YouCtrl | AddKeyword$ Intimidate | Description$ Other creatures you control have Intimidate.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigLoseLife | TriggerDescription$ Whenever Vela the Night-Clad or another creature you control leaves the battlefield, each opponent loses 1 life.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Secondary$ True | Execute$ TrigLoseLife | TriggerDescription$ Whenever Vela the Night-Clad or another creature you control leaves the battlefield, each opponent loses 1 life.
-SVar:TrigLoseLife:AB$LoseLife | Cost$ 0 | Defined$ Opponent | LifeAmount$ 1
+SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ Player.Opponent | LifeAmount$ 1
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vela_the_night_clad.jpg
 SetInfo:PC2|Mythic|http://magiccards.info/scans/en/pc2/107.jpg
