@@ -3,9 +3,10 @@ ManaCost:1 G
 Types:Creature Wurm
 Text:no text
 PT:5/5
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME enters the battlefield, each opponent may put any number of artifact, creature, enchantment, and/or land cards from his or her hand onto the battlefield.
-SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Artifact,Creature,Enchantment,Land | DefinedPlayer$ Opponent | ChangeNum$ X | References$ X
-SVar:X:Count$InOppHand
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ EachOpponent | TriggerDescription$ When CARDNAME enters the battlefield, each opponent may put any number of artifact, creature, enchantment, and/or land cards from his or her hand onto the battlefield.
+SVar:EachOpponent:AB$ RepeatEach | Cost$ 0 | RepeatPlayers$ Player.Opponent | RepeatSubAbility$ TemptingChange
+SVar:TemptingChange:DB$ ChangeZone | Origin$ Hand | Destination$ Battlefield | ChangeType$ Artifact,Creature,Enchantment,Land | DefinedPlayer$ Remembered | ChangeNum$ X | References$ X
+SVar:X:Count$ValidHand Artifact.RememberedPlayerCtrl,Creature.RememberedPlayerCtrl,Enchantment.RememberedPlayerCtrl,Land.RememberedPlayerCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tempting_wurm.jpg
 SetInfo:ONS|Rare|http://magiccards.info/scans/en/on/291.jpg
