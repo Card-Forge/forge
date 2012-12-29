@@ -934,7 +934,7 @@ public class MagicStack extends MyObservable {
                     Singletons.getModel().getMatch().getInput().setInput(target);
                 } else {
                     // AI choosing what to haunt
-                    final List<Card> oppCreats = CardLists.filterControlledBy(creats, source.getController().getOpponent());
+                    final List<Card> oppCreats = CardLists.filterControlledBy(creats, source.getController().getOpponents());
                     if (oppCreats.size() != 0) {
                         haunterDiesWork.setTargetCard(CardFactoryUtil.getWorstCreatureAI(oppCreats));
                     } else {
@@ -1284,7 +1284,9 @@ public class MagicStack extends MyObservable {
         this.chooseOrderOfSimultaneousStackEntry(playerTurn);
 
         if (playerTurn != null) {
-            this.chooseOrderOfSimultaneousStackEntry(playerTurn.getOpponent());
+            for (final Player otherP : playerTurn.getAllOtherPlayers()) {
+                this.chooseOrderOfSimultaneousStackEntry(otherP);
+            }
         }
     }
 

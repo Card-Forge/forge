@@ -314,6 +314,17 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         return result;
     }
 
+    /**
+     * returns all other players.
+     * Should keep player relations somewhere in the match structure
+     * @return
+     */
+    public final List<Player> getAllOtherPlayers() {
+        List<Player> result = new ArrayList<Player>(game.getPlayers());
+        result.remove(this);
+        return result;
+    }
+
 
 
     // ////////////////////////
