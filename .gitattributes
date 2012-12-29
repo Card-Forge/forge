@@ -5029,6 +5029,7 @@ res/cardsfolder/i/inspiration.txt svneol=native#text/plain
 res/cardsfolder/i/inspired_charge.txt svneol=native#text/plain
 res/cardsfolder/i/inspired_sprite.txt svneol=native#text/plain
 res/cardsfolder/i/inspirit.txt svneol=native#text/plain
+res/cardsfolder/i/instigator.txt -text
 res/cardsfolder/i/instigator_gang_wildblood_pack.txt -text
 res/cardsfolder/i/instill_energy.txt svneol=native#text/plain
 res/cardsfolder/i/instill_furor.txt svneol=native#text/plain
@@ -6579,6 +6580,7 @@ res/cardsfolder/m/mountain_titan.txt -text svneol=unset#text/plain
 res/cardsfolder/m/mountain_valley.txt svneol=native#text/plain
 res/cardsfolder/m/mountain_yeti.txt svneol=native#text/plain
 res/cardsfolder/m/mounted_archers.txt -text
+res/cardsfolder/m/mourners_shield.txt -text
 res/cardsfolder/m/mournful_zombie.txt svneol=native#text/plain
 res/cardsfolder/m/mourning.txt svneol=native#text/plain
 res/cardsfolder/m/mourning_thrull.txt svneol=native#text/plain
@@ -7507,6 +7509,7 @@ res/cardsfolder/p/plated_sliver.txt svneol=native#text/plain
 res/cardsfolder/p/plated_spider.txt svneol=native#text/plain
 res/cardsfolder/p/plated_wurm.txt svneol=native#text/plain
 res/cardsfolder/p/platinum_angel.txt svneol=native#text/plain
+res/cardsfolder/p/platinum_angel_avatar.txt -text
 res/cardsfolder/p/platinum_emperion.txt svneol=native#text/plain
 res/cardsfolder/p/plaxcaster_frogling.txt -text
 res/cardsfolder/p/plaxmanta.txt -text
