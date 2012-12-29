@@ -3064,6 +3064,7 @@ res/cardsfolder/e/energy_field.txt svneol=native#text/plain
 res/cardsfolder/e/energy_flux.txt svneol=native#text/plain
 res/cardsfolder/e/energy_storm.txt svneol=native#text/plain
 res/cardsfolder/e/energy_tap.txt svneol=native#text/plain
+res/cardsfolder/e/energy_vortex.txt -text
 res/cardsfolder/e/enervate.txt svneol=native#text/plain
 res/cardsfolder/e/enfeeblement.txt svneol=native#text/plain
 res/cardsfolder/e/engineered_explosives.txt -text
@@ -3259,6 +3260,7 @@ res/cardsfolder/f/fabricate.txt svneol=native#text/plain
 res/cardsfolder/f/face_of_fear.txt svneol=native#text/plain
 res/cardsfolder/f/faceless_butcher.txt svneol=native#text/plain
 res/cardsfolder/f/faceless_devourer.txt svneol=native#text/plain
+res/cardsfolder/f/faces_of_the_past.txt -text
 res/cardsfolder/f/facevaulter.txt svneol=native#text/plain
 res/cardsfolder/f/fact_or_fiction.txt svneol=native#text/plain
 res/cardsfolder/f/fade_from_memory.txt svneol=native#text/plain
