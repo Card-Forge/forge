@@ -1443,8 +1443,10 @@ res/cardsfolder/c/carrion_beetles.txt -text
 res/cardsfolder/c/carrion_call.txt svneol=native#text/plain
 res/cardsfolder/c/carrion_feeder.txt svneol=native#text/plain
 res/cardsfolder/c/carrion_howler.txt svneol=native#text/plain
+res/cardsfolder/c/carrion_rats.txt -text
 res/cardsfolder/c/carrion_thrash.txt svneol=native#text/plain
 res/cardsfolder/c/carrion_wall.txt svneol=native#text/plain
+res/cardsfolder/c/carrion_wurm.txt -text
 res/cardsfolder/c/carrionette.txt -text
 res/cardsfolder/c/cartographer.txt svneol=native#text/plain
 res/cardsfolder/c/carven_caryatid.txt svneol=native#text/plain
