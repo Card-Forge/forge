@@ -76,7 +76,6 @@ public class MagicStack extends MyObservable {
 
     private boolean frozen = false;
     private boolean bResolving = false;
-    private int splitSecondOnStack = 0;
 
     private final List<Card> thisTurnCast = new ArrayList<Card>();
     private List<Card> lastTurnCast = new ArrayList<Card>();
@@ -124,7 +123,6 @@ public class MagicStack extends MyObservable {
         this.getStack().clear();
         this.simultaneousStackEntryList.clear();
         this.frozen = false;
-        this.splitSecondOnStack = 0;
         this.lastTurnCast.clear();
         this.thisTurnCast.clear();
         this.curResolvingCard = null;
@@ -140,39 +138,12 @@ public class MagicStack extends MyObservable {
      * @return a boolean.
      */
     public final boolean isSplitSecondOnStack() {
-        return this.splitSecondOnStack > 0;
-    }
-
-    /**
-     * <p>
-     * incrementSplitSecond.
-     * </p>
-     * 
-     * @param sp
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public final void incrementSplitSecond(final SpellAbility sp) {
-        if (sp.getSourceCard().hasKeyword("Split second")) {
-            this.splitSecondOnStack++;
+        for(SpellAbilityStackInstance si : this.getStack()) {
+            if (si.isSpell() && si.getSourceCard().hasKeyword("Split second")) {
+                return true;
+            }
         }
-    }
-
-    /**
-     * <p>
-     * decrementSplitSecond.
-     * </p>
-     * 
-     * @param sp
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public final void decrementSplitSecond(final SpellAbility sp) {
-        if (sp.getSourceCard().hasKeyword("Split second")) {
-            this.splitSecondOnStack--;
-        }
-
-        if (this.splitSecondOnStack < 0) {
-            this.splitSecondOnStack = 0;
-        }
+        return false;
     }
 
     /**
@@ -854,8 +825,6 @@ public class MagicStack extends MyObservable {
             System.out.println(sp.getSourceCard().getName() + " - activatingPlayer not set before adding to stack.");
         }
 
-        this.incrementSplitSecond(sp);
-
         final SpellAbilityStackInstance si = new SpellAbilityStackInstance(sp);
         this.getStack().push(si);
 
@@ -1165,7 +1134,6 @@ public class MagicStack extends MyObservable {
     public final SpellAbility pop() {
         final SpellAbilityStackInstance si = this.getStack().pop();
         final SpellAbility sp = si.getSpellAbility();
-        this.decrementSplitSecond(sp);
         // NOTE (12/04/22): Update Observers here causes multi-targeting bug
         // We Update Observers after the Stack Finishes Resolving
         // No need to do it sooner
@@ -1253,9 +1221,7 @@ public class MagicStack extends MyObservable {
      *            object.
      */
     public final void remove(final SpellAbilityStackInstance si) {
-        if (this.getStack().remove(si)) {
-            this.decrementSplitSecond(si.getSpellAbility());
-        }
+        this.getStack().remove(si);
         this.getFrozenStack().remove(si);
         this.updateObservers();
     }
