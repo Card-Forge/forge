@@ -13,6 +13,7 @@ SVar:WinX:ReplaceCount$DamageAmount/Times.2
 SVar:CreateLossEffect:DB$ Effect | Name$ Desperate Gambit Loss Effect | ReplacementEffects$ EventLossDamageDone | SVars$ ExileEffect | References$ EventLossDamageDone,ExileEffect | RememberObjects$ Remembered
 SVar:EventLossDamageDone:Event$ DamageDone | ValidSource$ Card.IsRemembered | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time it would deal damage this turn, prevent that damage.
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/desperate_gambit.jpg
 Oracle:Choose a source you control and flip a coin. If you win the flip, the next time that source would deal damage this turn, it deals double that damage instead. If you lose the flip, the next time it would deal damage this turn, prevent that damage.
