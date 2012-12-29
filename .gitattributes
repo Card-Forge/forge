@@ -4609,6 +4609,7 @@ res/cardsfolder/h/hellhole_flailer.txt -text
 res/cardsfolder/h/hellhole_rats.txt svneol=native#text/plain
 res/cardsfolder/h/hellion_crucible.txt -text
 res/cardsfolder/h/hellion_eruption.txt svneol=native#text/plain
+res/cardsfolder/h/hellkite_charger.txt -text
 res/cardsfolder/h/hellkite_hatchling.txt svneol=native#text/plain
 res/cardsfolder/h/hellkite_igniter.txt svneol=native#text/plain
 res/cardsfolder/h/hellkite_overlord.txt svneol=native#text/plain
@@ -4939,6 +4940,7 @@ res/cardsfolder/i/incendiary_command.txt svneol=native#text/plain
 res/cardsfolder/i/incinerate.txt svneol=native#text/plain
 res/cardsfolder/i/incite.txt svneol=native#text/plain
 res/cardsfolder/i/incite_hysteria.txt -text
+res/cardsfolder/i/incite_war.txt -text
 res/cardsfolder/i/increasing_ambition.txt -text
 res/cardsfolder/i/increasing_confusion.txt -text
 res/cardsfolder/i/increasing_devotion.txt -text
@@ -7150,6 +7152,7 @@ res/cardsfolder/o/outrider_en_kor.txt -text
 res/cardsfolder/o/outrider_of_jhess.txt svneol=native#text/plain
 res/cardsfolder/o/outwit.txt -text
 res/cardsfolder/o/overbeing_of_myth.txt svneol=native#text/plain
+res/cardsfolder/o/overblaze.txt -text
 res/cardsfolder/o/overburden.txt svneol=native#text/plain
 res/cardsfolder/o/overeager_apprentice.txt -text
 res/cardsfolder/o/overgrown_battlement.txt svneol=native#text/plain
@@ -8559,6 +8562,7 @@ res/cardsfolder/s/sarkhan_the_mad.txt svneol=native#text/plain
 res/cardsfolder/s/sarkhan_vol.txt svneol=native#text/plain
 res/cardsfolder/s/sarpadian_empires_vol_vii.txt svneol=native#text/plain
 res/cardsfolder/s/savaen_elves.txt -text
+res/cardsfolder/s/savage_beating.txt -text
 res/cardsfolder/s/savage_conception.txt svneol=native#text/plain
 res/cardsfolder/s/savage_firecat.txt svneol=native#text/plain
 res/cardsfolder/s/savage_gorilla.txt svneol=native#text/plain
@@ -11440,6 +11444,7 @@ res/cardsfolder/w/weatherseed_faeries.txt svneol=native#text/plain
 res/cardsfolder/w/weatherseed_treefolk.txt svneol=native#text/plain
 res/cardsfolder/w/weaver_of_lies.txt -text svneol=unset#text/plain
 res/cardsfolder/w/web.txt svneol=native#text/plain
+res/cardsfolder/w/web_of_inertia.txt -text
 res/cardsfolder/w/wee_dragonauts.txt svneol=native#text/plain
 res/cardsfolder/w/weed_pruner_poplar.txt svneol=native#text/plain
 res/cardsfolder/w/weed_strangle.txt -text
