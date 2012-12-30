@@ -290,7 +290,7 @@ public class QuestController {
     /**
      * Gets the QuestWorld Format, if any.
      * 
-     * @return QuestWorld Format or null.
+     * @return GameFormatQuest or null.
      */
     public GameFormatQuest getWorldFormat() {
         if (this.model == null || this.model.getWorldId() == null) {
