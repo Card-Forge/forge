@@ -31,7 +31,6 @@ import forge.util.StorageReaderFile;
  *
  */
 public class QuestWorld {
-    private final int index; // Used internally to identify the quest world
     private final String name;
     private final String dir;
     private final GameFormatQuest format;
@@ -43,19 +42,10 @@ public class QuestWorld {
      * @param useDir String, the basedir that contains the duels and challenges for the quest world
      * @param useFormat GameFormatQuest that contains the initial format for the world
      */
-    public QuestWorld(final int useIdx, final String useName, final String useDir, final GameFormatQuest useFormat) {
-        index = useIdx;
+    public QuestWorld(final String useName, final String useDir, final GameFormatQuest useFormat) {
         name = useName;
         dir = useDir;
         format = useFormat;
-    }
-
-    /**
-     * The quest world internal identifier.
-     * @return int, the index
-     */
-    public int getIndex() {
-        return index;
     }
 
     /**
@@ -134,7 +124,6 @@ public class QuestWorld {
         protected QuestWorld read(String line) {
             String useName = null;
             String useDir = null;
-            int useIdx = 0;
             GameFormatQuest useFormat = null;
 
             final List<String> sets = new ArrayList<String>();
@@ -145,9 +134,7 @@ public class QuestWorld {
             for (final String sPart : sParts) {
                 final String[] kv = sPart.split(":", 2);
                 final String key = kv[0].toLowerCase();
-                if ("index".equals(key)) {
-                    useIdx = new Integer(kv[1]);
-                } else if ("name".equals(key)) {
+                if ("name".equals(key)) {
                     useName = kv[1];
                 } else if ("dir".equals(key)) {
                     useDir = kv[1];
@@ -157,14 +144,9 @@ public class QuestWorld {
                     bannedCards.addAll(Arrays.asList(kv[1].split("; ")));
                 }
             }
-            if (useIdx < 0) {
-                throw new RuntimeException("Illegal index " + useIdx + "! Check worlds.txt file");
-            }
-            else if (useName == null) {
-                throw new RuntimeException("World " + useIdx + " must have a name! Check worlds.txt file");
-            }
-            else if (useDir == null && useIdx != 0) {
-                throw new RuntimeException("World '" + useName + "' must have a directory! Check worlds.txt file");
+
+            if (useName == null) {
+                throw new RuntimeException("A Quest World  must have a name! Check worlds.txt file");
             }
 
             if (!sets.isEmpty() || !bannedCards.isEmpty()) {
@@ -174,7 +156,7 @@ public class QuestWorld {
             // System.out.println("Creating quest world " + useName + " (index " + useIdx + ", dir: " + useDir);
             // if (useFormat != null) { System.out.println("SETS: " + sets + "\nBANNED: " + bannedCards); }
 
-            return new QuestWorld(useIdx, useName, useDir, useFormat);
+            return new QuestWorld(useName, useDir, useFormat);
 
         }
 
