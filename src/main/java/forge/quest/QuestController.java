@@ -135,7 +135,8 @@ public class QuestController {
      * @return GameFormatQuest, the game format (if persistent).
      */
     public GameFormatQuest getFormat() {
-        return this.questFormat;
+
+        return (getWorldFormat() == null ? this.questFormat : getWorldFormat());
     }
 
     /**
@@ -286,6 +287,24 @@ public class QuestController {
         this.model.setWorldId(newWorld == null ? null : newWorld.getName());
     }
 
+    /**
+     * Gets the QuestWorld Format, if any.
+     * 
+     * @return QuestWorld Format or null.
+     */
+    public GameFormatQuest getWorldFormat() {
+        if (this.model == null || this.model.getWorldId() == null) {
+            return null;
+        }
+
+        final QuestWorld curQw = Singletons.getModel().getWorlds().get(this.model.getWorldId());
+
+        if (curQw == null) {
+            return null;
+        }
+
+        return curQw.getFormat();
+    }
 
     /**
      * TODO: Write javadoc for this method.

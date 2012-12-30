@@ -167,7 +167,7 @@ public class SSubmenuQuestUtil {
 
         // Show or hide the set unlocking button
 
-        view0.getBtnUnlock().setVisible(qCtrl.getUnlocksTokens() > 0);
+        view0.getBtnUnlock().setVisible(qCtrl.getUnlocksTokens() > 0 && qCtrl.getWorldFormat() == null);
 
         // Challenge in wins
         final int num = SSubmenuQuestUtil.nextChallengeInWins();
