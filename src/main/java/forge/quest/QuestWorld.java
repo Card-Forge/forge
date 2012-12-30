@@ -167,7 +167,7 @@ public class QuestWorld {
                 throw new RuntimeException("World '" + useName + "' must have a directory! Check worlds.txt file");
             }
 
-            if (!sets.isEmpty() || bannedCards.isEmpty()) {
+            if (!sets.isEmpty() || !bannedCards.isEmpty()) {
                 useFormat = new GameFormatQuest(useName, sets, bannedCards);
             }
 
