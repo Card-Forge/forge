@@ -238,11 +238,9 @@ public enum CSubmenuQuestData implements ICDoc {
         }
 
 
-
-
         QuestController qc = Singletons.getModel().getQuest();
 
-        qc.newGame(questName, difficulty, mode, fmtPrizes, view.isUnlockSetsAllowed(), dckStartPool, fmtStartPool);
+        qc.newGame(questName, difficulty, mode, fmtPrizes, view.isUnlockSetsAllowed(), dckStartPool, fmtStartPool, null);
         Singletons.getModel().getQuest().save();
 
         // Save in preferences.

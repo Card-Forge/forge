@@ -74,8 +74,12 @@ public final class QuestData {
      * @param userFormat
      *      user-defined format, if any (null if none).
      * @param allowSetUnlocks
+     *      allow set unlocking during quest
+     * @param startingWorld
+     *      starting world
      */
-    public QuestData(String name2, int diff, QuestMode mode2, GameFormat userFormat, boolean allowSetUnlocks) {
+    public QuestData(String name2, int diff, QuestMode mode2, GameFormat userFormat, 
+            boolean allowSetUnlocks, final String startingWorld) {
         this.name = name2;
 
         if (userFormat != null) {
@@ -84,7 +88,7 @@ public final class QuestData {
         this.mode = mode2;
         this.achievements = new QuestAchievements(diff);
         this.assets = new QuestAssets(format);
-        this.worldId = null; // Default to "no world", i.e. regular opponents and challenges
+        this.worldId = startingWorld; // Default to "no world", i.e. regular opponents and challenges
 
     }
 

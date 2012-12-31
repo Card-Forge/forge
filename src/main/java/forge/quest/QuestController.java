@@ -221,12 +221,15 @@ public class QuestController {
      *      enforce the format for the whole quest
      * @param userDeck
      *      user-specified starting deck
+     * @param startingWorld
+     *      starting world
      */
     public void newGame(final String name, final int difficulty, final QuestMode mode,
             final GameFormat formatPrizes, final boolean allowSetUnlocks,
-            final Deck startingCards, final GameFormat formatStartingPool) {
+            final Deck startingCards, final GameFormat formatStartingPool,
+            final String startingWorld) {
 
-        this.load(new QuestData(name, difficulty, mode, formatPrizes, allowSetUnlocks)); // pass awards and unlocks here
+        this.load(new QuestData(name, difficulty, mode, formatPrizes, allowSetUnlocks, startingWorld)); // pass awards and unlocks here
 
         if (null != startingCards) {
             this.myCards.addDeck(startingCards);
