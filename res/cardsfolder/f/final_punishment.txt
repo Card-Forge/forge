@@ -1,0 +1,12 @@
+Name:Final Punishment
+ManaCost:3 B B
+Types:Sorcery
+Text:no text
+A:SP$ LoseLife | Cost$ 3 B B | ValidTgts$ Player | LifeAmount$ X | References$ X | SpellDescription$ Target player loses life equal to the damage already dealt to him or her this turn.
+SVar:X:TargetedPlayer$DamageThisTurn
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/final_punishment.jpg
+SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/67.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/131.jpg
+Oracle:Target player loses life equal to the damage already dealt to him or her this turn.
+End

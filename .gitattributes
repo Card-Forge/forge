@@ -822,6 +822,7 @@ res/cardsfolder/b/bazaar_trader.txt -text svneol=unset#text/plain
 res/cardsfolder/b/beacon_behemoth.txt svneol=native#text/plain
 res/cardsfolder/b/beacon_hawk.txt svneol=native#text/plain
 res/cardsfolder/b/beacon_of_creation.txt svneol=native#text/plain
+res/cardsfolder/b/beacon_of_destiny.txt -text
 res/cardsfolder/b/beacon_of_destruction.txt svneol=native#text/plain
 res/cardsfolder/b/beacon_of_immortality.txt svneol=native#text/plain
 res/cardsfolder/b/beacon_of_tomorrows.txt svneol=native#text/plain
@@ -1715,6 +1716,7 @@ res/cardsfolder/c/civic_saber.txt -text
 res/cardsfolder/c/civic_wayfinder.txt svneol=native#text/plain
 res/cardsfolder/c/civilized_scholar_homicidal_brute.txt -text
 res/cardsfolder/c/clairvoyance.txt svneol=native#text/plain
+res/cardsfolder/c/clarion_ultimatum.txt -text
 res/cardsfolder/c/clash_of_realities.txt -text
 res/cardsfolder/c/claustrophobia.txt -text
 res/cardsfolder/c/claws_of_gix.txt svneol=native#text/plain
@@ -3439,6 +3441,7 @@ res/cardsfolder/f/filth.txt svneol=native#text/plain
 res/cardsfolder/f/filthy_cur.txt svneol=native#text/plain
 res/cardsfolder/f/final_fortune.txt -text
 res/cardsfolder/f/final_judgment.txt svneol=native#text/plain
+res/cardsfolder/f/final_punishment.txt -text
 res/cardsfolder/f/final_revels.txt svneol=native#text/plain
 res/cardsfolder/f/final_sting_faerie.txt svneol=native#text/plain
 res/cardsfolder/f/final_strike.txt svneol=native#text/plain

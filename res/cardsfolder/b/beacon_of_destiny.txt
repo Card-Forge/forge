@@ -1,0 +1,21 @@
+Name:Beacon of Destiny
+ManaCost:1 W
+Types:Creature Human Cleric
+Text:no text
+PT:1/3
+A:AB$ ChooseSource | Cost$ T | Choices$ Card | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SpellDescription$ The next time a source of your choice would deal damage to you this turn, that damage is dealt to CARDNAME instead.
+SVar:DBEffect:DB$ Effect | ReplacementEffects$ SelflessCombat,SelflessNonCombat | Triggers$ OutOfSight | SVars$ CombatDmg,NonCombatDmg,ExileEffect,X | References$ SelflessCombat,SelflessNonCombat,OutOfSight,CombatDmg,NonCombatDmg,ExileEffect,X | RememberObjects$ Remembered | ImprintCards$ Self | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
+SVar:SelflessCombat:Event$ DamageDone | ValidTarget$ You | ValidSource$ Card.IsRemembered | IsCombat$ True | ReplaceWith$ CombatDmg | Description$ The next time a source of your choice would deal damage to you this turn, that damage is dealt to CARDNAME instead.
+SVar:SelflessNonCombat:Event$ DamageDone | ValidTarget$ You | ValidSource$ Card.IsRemembered | IsCombat$ False | ReplaceWith$ NonCombatDmg | Secondary$ True | Description$ The next time a source of your choice would deal damage to you this turn, that damage is dealt to CARDNAME instead.
+SVar:CombatDmg:AB$ DealDamage | Cost$ 0 | Defined$ Imprinted | DamageSource$ ReplacedSource | CombatDamage$ True | NumDmg$ X | SubAbility$ ExileEffect
+SVar:NonCombatDmg:AB$ DealDamage | Cost$ 0 | Defined$ Imprinted | DamageSource$ ReplacedSource | NumDmg$ X | SubAbility$ ExileEffect
+SVar:OutOfSight:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Defined$ Imprinted | Execute$ ExileEffect | Static$ True
+SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile | Static$ True
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:ReplaceCount$DamageAmount
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/beacon_of_destiny.jpg
+SetInfo:LGN|Rare|http://magiccards.info/scans/en/le/5.jpg
+Oracle:{T}: The next time a source of your choice would deal damage to you this turn, that damage is dealt to Beacon of Destiny instead.
+End
