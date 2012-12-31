@@ -88,7 +88,7 @@ public final class QuestData {
         this.mode = mode2;
         this.achievements = new QuestAchievements(diff);
         this.assets = new QuestAssets(format);
-        this.worldId = startingWorld; // Default to "no world", i.e. regular opponents and challenges
+        this.worldId = startingWorld;
 
     }
 
