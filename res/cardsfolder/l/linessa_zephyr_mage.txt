@@ -6,9 +6,9 @@ PT:3/3
 A:AB$ ChangeZone | Cost$ X U U T | Origin$ Battlefield | Destination$ Hand | ValidTgts$ Creature | ChangeNum$ 1 | References$ X | SpellDescription$ Return target creature with converted mana cost X to its owner's hand.
 SVar:X:Targeted$CardManaCost
 A:AB$ ChangeZone | Cost$ Discard<1/Card.namedLinessa, Zephyr Mage> | CostDesc$ Grandeur - Discard another card named CARDNAME:| ValidTgts$ Player | TgtPrompt$ Select target player | RememberTargets$ True | ForgetOtherTargets$ True | Chooser$ Targeted | Mandatory$ True | Hidden$ True | Origin$ Battlefield | Destination$ Hand | ChangeType$ Creature | SubAbility$ DBArtifact | SpellDescription$ Target player returns a creature he or she controls to its owner's hand, then repeats this process for an artifact, an enchantment, and a land.
-SVar:DBArtifact:DB$ ChangeZone | Cost$ 0 | Defined$ Remembered | ChangeType$ Artifact | Origin$ Battlefield | Destination$ Hand | Chooser$ Remembered | Mandatory$ True | Hidden$ True | SubAbility$ DBEnchant
-SVar:DBEnchant:DB$ ChangeZone | Cost$ 0 | Defined$ Remembered | ChangeType$ Enchantment | Origin$ Battlefield | Destination$ Hand | Chooser$ Remembered | Mandatory$ True | Hidden$ True | SubAbility$ DBLand
-SVar:DBLand:DB$ ChangeZone | Cost$ 0 | Defined$ Remembered | ChangeType$ Land | Origin$ Battlefield | Destination$ Hand | Chooser$ Remembered | Mandatory$ True | Hidden$ True
+SVar:DBArtifact:DB$ ChangeZone | Cost$ 0 | DefinedPlayer$ Remembered | ChangeType$ Artifact | Origin$ Battlefield | Destination$ Hand | Chooser$ Remembered | Mandatory$ True | Hidden$ True | SubAbility$ DBEnchant
+SVar:DBEnchant:DB$ ChangeZone | Cost$ 0 | DefinedPlayer$ Remembered | ChangeType$ Enchantment | Origin$ Battlefield | Destination$ Hand | Chooser$ Remembered | Mandatory$ True | Hidden$ True | SubAbility$ DBLand
+SVar:DBLand:DB$ ChangeZone | Cost$ 0 | DefinedPlayer$ Remembered | ChangeType$ Land | Origin$ Battlefield | Destination$ Hand | Chooser$ Remembered | Mandatory$ True | Hidden$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/linessa_zephyr_mage.jpg
 SetInfo:FUT|Rare|http://magiccards.info/scans/en/fut/51.jpg
