@@ -6,6 +6,7 @@ A:SP$ ChooseCard | Cost$ W W W U U G G | Defined$ You | Amount$ 5 | Choices$ Per
 SVar:DBSearch:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Permanent.IsRemembered | ChooseOrder$ True | Zone$ Battlefield | RepeatSubAbility$ DBClarion | SubAbility$ DBCleanup
 SVar:DBClarion:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Card.sharesNameWith Imprinted | ChangeNum$ 1 | Tapped$ True
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clarion_ultimatum.jpg
 SetInfo:ALA|Rare|http://magiccards.info/scans/en/ala/163.jpg

@@ -3,7 +3,7 @@ ManaCost:R
 Types:Instant
 Text:no text
 A:SP$ Pump | Cost$ R | ValidTgts$ Equipment | TgtPrompt$ Select target equipment | IsCurse$ True | SubAbility$ MagneticTheft | StackDescription$ None | SpellDescription$ Attach target Equipment to target creature. (Control of the Equipment doesn't change.)
-SVar:MagneticTheft:DB$ Attach | Object$ Targeted | ValidTgts$ Creature | TgtPrompt$ Select target creature
+SVar:MagneticTheft:DB$ Attach | Object$ ParentTarget | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magnetic_theft.jpg

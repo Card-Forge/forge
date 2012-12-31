@@ -5,7 +5,7 @@ Text:no text
 PT:2/3
 K:Flying
 A:AB$ Pump | Cost$ T | ValidTgts$ Equipment.YouCtrl | TgtPrompt$ Select target equipment you control | SubAbility$ WindwalkerAttach | StackDescription$ None | SpellDescription$ Attach target Equipment you control to target creature you control.
-SVar:WindwalkerAttach:DB$ Attach | Object$ Targeted | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control.
+SVar:WindwalkerAttach:DB$ Attach | Object$ ParentTarget | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/auriok_windwalker.jpg
