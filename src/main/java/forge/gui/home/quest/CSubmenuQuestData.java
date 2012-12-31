@@ -20,6 +20,7 @@ import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 import forge.quest.QuestController;
 import forge.quest.QuestMode;
+import forge.quest.QuestWorld;
 import forge.quest.StartingPoolType;
 import forge.quest.data.GameFormatQuest;
 import forge.quest.data.QuestData;
@@ -139,7 +140,12 @@ public enum CSubmenuQuestData implements ICDoc {
 
         Deck dckStartPool = null;
         GameFormat fmtStartPool = null;
-        switch(view.getStartingPoolType()) {
+        QuestWorld startWorld = Singletons.getModel().getWorlds().get(view.getStartingWorldName());
+
+        GameFormat worldFormat = (startWorld == null ? null : startWorld.getFormat());
+
+        if (worldFormat == null) {
+         switch(view.getStartingPoolType()) {
             case Rotating:
                 fmtStartPool = view.getRotatingFormat();
                 break;
@@ -181,11 +187,17 @@ public enum CSubmenuQuestData implements ICDoc {
             default:
                 // leave everything as nulls
                 break;
+         }
+        }
+        else {
+            fmtStartPool = worldFormat;
         }
 
+
         GameFormat fmtPrizes = null;
-        StartingPoolType prizedPoolType = view.getPrizedPoolType();
-        if (null == prizedPoolType) {
+        if (worldFormat == null) {
+         StartingPoolType prizedPoolType = view.getPrizedPoolType();
+         if (null == prizedPoolType) {
             fmtPrizes = fmtStartPool;
             if (null == fmtPrizes && dckStartPool != null) { // build it form deck
                 List<String> sets = new ArrayList<String>();
@@ -203,7 +215,7 @@ public enum CSubmenuQuestData implements ICDoc {
                 }
                 fmtPrizes = new GameFormat("From deck", sets, null);
             }
-        } else {
+         } else {
             switch(prizedPoolType) {
                 case Complete:
                     fmtPrizes = null;
@@ -224,8 +236,12 @@ public enum CSubmenuQuestData implements ICDoc {
                 default:
                     throw new RuntimeException("Should not get this result");
             }
+         }
+        } else {
+            fmtPrizes = worldFormat;
         }
 
+        final boolean allowUnlocks = worldFormat == null ? view.isUnlockSetsAllowed() : false;
 
         final Object o = JOptionPane.showInputDialog(null, "Poets will remember your quest as:", "Quest Name", JOptionPane.OK_CANCEL_OPTION);
         if (o == null) { return; }
@@ -237,10 +253,9 @@ public enum CSubmenuQuestData implements ICDoc {
             return;
         }
 
-
         QuestController qc = Singletons.getModel().getQuest();
 
-        qc.newGame(questName, difficulty, mode, fmtPrizes, view.isUnlockSetsAllowed(), dckStartPool, fmtStartPool, null);
+        qc.newGame(questName, difficulty, mode, fmtPrizes, allowUnlocks, dckStartPool, fmtStartPool, view.getStartingWorldName());
         Singletons.getModel().getQuest().save();
 
         // Save in preferences.

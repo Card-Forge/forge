@@ -38,6 +38,7 @@ import forge.gui.toolbox.FScrollPane;
 import forge.gui.toolbox.FSkin;
 import forge.item.PreconDeck;
 import forge.quest.QuestController;
+import forge.quest.QuestWorld;
 import forge.quest.StartingPoolType;
 import forge.util.IStorage;
 import forge.util.IStorageView;
@@ -77,6 +78,10 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     private final JRadioButton radHard = new FRadioButton("Hard");
     private final JRadioButton radExpert = new FRadioButton("Expert");
     private final JCheckBox boxFantasy = new FCheckBox("Fantasy Mode");
+
+    private final JLabel lblStartingWorld = new FLabel.Builder().text("Starting world:").build();
+    private final JComboBox cbxStartingWorld = new JComboBox();
+
 
     /* Second column */
 
@@ -157,6 +162,29 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         }
     };
 
+    /* Listeners */
+    private final ActionListener alStartingWorld = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            updateEnableFormats();
+        }
+     };
+
+    /**
+     * Aux function for enabling or disabling the format selection according to world selection.
+     */
+     private void updateEnableFormats() {
+         final QuestWorld qw = Singletons.getModel().getWorlds().get(getStartingWorldName());
+         if (qw != null) {
+             cbxStartingPool.setEnabled(qw.getFormat() == null);
+             cbxFormat.setEnabled(qw.getFormat() == null);
+             cbxPrizeFormat.setEnabled(qw.getFormat() == null);
+             cboAllowUnlocks.setEnabled(qw.getFormat() == null);
+             cbxPrizedCards.setEnabled(qw.getFormat() == null);
+             cbxCustomDeck.setEnabled(qw.getFormat() == null);
+         }
+     }
+
     /**
      * Constructor.
      */
@@ -195,6 +223,12 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
             cbxFormat.addItem(gf);
             cbxPrizeFormat.addItem(gf);
         }
+
+        for (QuestWorld qw : Singletons.getModel().getWorlds()) {
+            cbxStartingWorld.addItem(qw);
+        }
+        cbxStartingWorld.addActionListener(alStartingWorld);
+        updateEnableFormats();
 
         cboAllowUnlocks.setSelected(true);
 
@@ -283,6 +317,10 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         pnlRestrictions.add(lblPrizeUnrestricted, constraints + hidemode + "spanx 2");
 
         pnlRestrictions.add(cboAllowUnlocks, constraints + "spanx 2, ax right");
+
+        pnlRestrictions.add(lblStartingWorld, constraints + lblWidthStart);
+        pnlRestrictions.add(cbxStartingWorld, constraints + cboWidthStart);
+
 //        cboAllowUnlocks.setOpaque(false);
         pnlRestrictions.setOpaque(false);
         pnlOptions.add(pnlRestrictions, "pushx, ay top");
@@ -423,6 +461,10 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
     public StartingPoolType getPrizedPoolType() {
          Object v = cbxPrizedCards.getSelectedItem();
          return v instanceof StartingPoolType ? (StartingPoolType) v : null;
+    }
+
+    public String getStartingWorldName() {
+        return cbxStartingWorld.getSelectedItem().toString();
     }
 
     public boolean isFantasy() {
