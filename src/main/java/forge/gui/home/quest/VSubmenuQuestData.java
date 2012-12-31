@@ -178,10 +178,12 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
          if (qw != null) {
              cbxStartingPool.setEnabled(qw.getFormat() == null);
              cbxFormat.setEnabled(qw.getFormat() == null);
-             cbxPrizeFormat.setEnabled(qw.getFormat() == null);
-             cboAllowUnlocks.setEnabled(qw.getFormat() == null);
-             cbxPrizedCards.setEnabled(qw.getFormat() == null);
              cbxCustomDeck.setEnabled(qw.getFormat() == null);
+             // Do NOT disable the following...
+             // cbxPrizeFormat.setEnabled(qw.getFormat() == null);
+             // cboAllowUnlocks.setEnabled(qw.getFormat() == null);
+             // cbxPrizedCards.setEnabled(qw.getFormat() == null);
+
          }
      }
 

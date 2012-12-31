@@ -195,9 +195,11 @@ public enum CSubmenuQuestData implements ICDoc {
 
 
         GameFormat fmtPrizes = null;
-        if (worldFormat == null) {
-         StartingPoolType prizedPoolType = view.getPrizedPoolType();
-         if (null == prizedPoolType) {
+
+        // The starting QuestWorld format should NOT affect what you get if you travel to a world that doesn't have one...
+        // if (worldFormat == null) {
+        StartingPoolType prizedPoolType = view.getPrizedPoolType();
+        if (null == prizedPoolType) {
             fmtPrizes = fmtStartPool;
             if (null == fmtPrizes && dckStartPool != null) { // build it form deck
                 List<String> sets = new ArrayList<String>();
@@ -236,12 +238,10 @@ public enum CSubmenuQuestData implements ICDoc {
                 default:
                     throw new RuntimeException("Should not get this result");
             }
-         }
-        } else {
-            fmtPrizes = worldFormat;
         }
-
-        final boolean allowUnlocks = worldFormat == null ? view.isUnlockSetsAllowed() : false;
+        // } else {
+        //    fmtPrizes = worldFormat;
+        // }
 
         final Object o = JOptionPane.showInputDialog(null, "Poets will remember your quest as:", "Quest Name", JOptionPane.OK_CANCEL_OPTION);
         if (o == null) { return; }
@@ -255,7 +255,7 @@ public enum CSubmenuQuestData implements ICDoc {
 
         QuestController qc = Singletons.getModel().getQuest();
 
-        qc.newGame(questName, difficulty, mode, fmtPrizes, allowUnlocks, dckStartPool, fmtStartPool, view.getStartingWorldName());
+        qc.newGame(questName, difficulty, mode, fmtPrizes, view.isUnlockSetsAllowed(), dckStartPool, fmtStartPool, view.getStartingWorldName());
         Singletons.getModel().getQuest().save();
 
         // Save in preferences.
