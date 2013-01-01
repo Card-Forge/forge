@@ -53,9 +53,10 @@ public class AddTurnAi extends SpellAiLogic {
                     }
             	}
                 if (!sa.getTarget().isMinTargetsChosen(sa.getSourceCard(), sa) && sa.canTarget(opp)) {
-                sa.getTarget().addTarget(opp);
-            } else {
-                return false;
+                    sa.getTarget().addTarget(opp);
+                } else {
+                    return false;
+                }
             }
         } else {
             final ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
