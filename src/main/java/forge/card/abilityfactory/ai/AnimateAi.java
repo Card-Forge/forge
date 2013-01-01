@@ -47,7 +47,7 @@ public class AnimateAi extends SpellAiLogic {
             return false;
         }
 
-        Player opponent = aiPlayer.getOpponent();
+        Player opponent = aiPlayer.getWeakestOpponent();
         // don't animate if the AI won't attack anyway
         if (Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(aiPlayer)
                 && aiPlayer.getLife() < 6

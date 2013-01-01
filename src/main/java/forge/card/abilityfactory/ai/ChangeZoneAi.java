@@ -806,7 +806,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                     && ai.getCreaturesInPlay().isEmpty()) {
                 return false;
             }
-            list = CardLists.filterControlledBy(list, ai.getOpponent());
+            list = CardLists.filterControlledBy(list, ai.getOpponents());
             list = CardLists.filter(list, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {

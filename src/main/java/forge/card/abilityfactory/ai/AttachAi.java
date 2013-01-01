@@ -255,25 +255,52 @@ public class AttachAi extends SpellAiLogic {
      */
     private static Player attachToPlayerAIPreferences(final Player aiPlayer, final SpellAbility sa,
             final boolean mandatory) {
-        Player p;
+        List<Player> targetable = new ArrayList<Player>();
+        for (final Player player : Singletons.getModel().getGame().getPlayers()) {
+            if (sa.canTarget(player)) {
+                targetable.add(player);
+            }
+        }
 
         if ("Curse".equals(sa.getParam("AILogic"))) {
-            p = aiPlayer.getOpponent();
+            if (!mandatory) {
+                targetable.removeAll(aiPlayer.getAllies());
+                targetable.remove(aiPlayer);
+            }
+            if (targetable.size() > 0) {
+                // first try get weakest opponent to reduce opponents faster
+                if (targetable.contains(aiPlayer.getWeakestOpponent())) {
+                    return aiPlayer.getWeakestOpponent();
+                } else {
+                    // then try any other opponent
+                    for (final Player curseChoice : targetable) {
+                        if (curseChoice.isHostileTo(aiPlayer)) {
+                            return curseChoice;
+                        }
+                    }
+                    // only reaches here if no preferred targets are targetable and sa is mandatory
+                    return targetable.get(0);
+                }
+            }
         } else {
-            p = aiPlayer;
-        }
-
-        if (sa.canTarget(p)) {
-            return p;
-        }
-
-        if (!mandatory) {
-            return null;
-        }
-
-        p = p.getOpponent();
-        if (sa.canTarget(p)) {
-            return p;
+            if (!mandatory) {
+                targetable.removeAll(aiPlayer.getOpponents());
+            }
+            if (targetable.size() > 0) {
+                // first try self
+                if (targetable.contains(aiPlayer)) {
+                    return aiPlayer;
+                } else {
+                    // then try allies
+                    for (final Player boonChoice : targetable) {
+                        if (!boonChoice.isHostileTo(aiPlayer)) {
+                            return boonChoice;
+                        }
+                    }
+                    // only reaches here if no preferred choices are targetable and sa is mandatory
+                    return targetable.get(0);
+                }
+            }
         }
 
         return null;
@@ -357,7 +384,7 @@ public class AttachAi extends SpellAiLogic {
      *            the attach source
      * @return the card
      */
-    private static Card attachAISpecifcCardPreference(final SpellAbility sa, final List<Card> list, final boolean mandatory,
+    private static Card attachAISpecificCardPreference(final SpellAbility sa, final List<Card> list, final boolean mandatory,
             final Card attachSource) {
         // I know this isn't much better than Hardcoding, but some cards need it for now
         Player ai = sa.getActivatingPlayer();
@@ -368,7 +395,7 @@ public class AttachAi extends SpellAiLogic {
                 chosen = aiStuffies.get(0);
             } else {
                 // Improve this to include all Opponent creatures
-                final List<Card> creatures = ai.getOpponent().getCreaturesInPlay();
+                final List<Card> creatures = CardLists.filterControlledBy(list, ai.getOpponents());
                 chosen = CardFactoryUtil.getBestCreatureAI(creatures);
             }
         }
@@ -658,7 +685,7 @@ public class AttachAi extends SpellAiLogic {
             magnetList = CardLists.filter(magnetList, new Predicate<Card>() {
                 @Override
                 public boolean apply(final Card c) {
-                    return CombatUtil.canAttack(c, ai.getOpponent());
+                    return CombatUtil.canAttack(c, ai.getWeakestOpponent());
                 }
             });
 
@@ -832,7 +859,7 @@ public class AttachAi extends SpellAiLogic {
      */
     private static Card attachGeneralAI(final Player ai, final SpellAbility sa, final List<Card> list, final boolean mandatory,
             final Card attachSource, final String logic) {
-        Player prefPlayer = ai.getOpponent();
+        Player prefPlayer = ai.getWeakestOpponent();
         if ("Pump".equals(logic) || "Animate".equals(logic)) {
             prefPlayer = ai;
         }
@@ -870,7 +897,7 @@ public class AttachAi extends SpellAiLogic {
         } else if ("Reanimate".equals(logic)) {
             c = attachAIReanimatePreference(sa, prefList, mandatory, attachSource);
         } else if ("SpecificCard".equals(logic)) {
-            c = attachAISpecifcCardPreference(sa, prefList, mandatory, attachSource);
+            c = attachAISpecificCardPreference(sa, prefList, mandatory, attachSource);
         }
 
         return c;
@@ -926,7 +953,6 @@ public class AttachAi extends SpellAiLogic {
      */
     private static boolean isUsefulAttachKeyword(final String keyword, final Card card, final SpellAbility sa) {
         final PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler();
-        final Player human = sa.getActivatingPlayer().getOpponent();
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
             return false;
         }
@@ -942,7 +968,7 @@ public class AttachAi extends SpellAiLogic {
                 return false;
             }
         } else if (keyword.equals("Haste")) {
-            if (!card.hasSickness() || ph.isPlayerTurn(human) || card.isTapped()
+            if (!card.hasSickness() || !ph.isPlayerTurn(sa.getActivatingPlayer()) || card.isTapped()
                     || card.getNetCombatDamage() <= 0
                     || card.hasKeyword("CARDNAME can attack as though it had haste.")
                     || ph.getPhase().isAfter(PhaseType.COMBAT_DECLARE_ATTACKERS)
@@ -1022,7 +1048,6 @@ public class AttachAi extends SpellAiLogic {
      */
     private static boolean isUsefulCurseKeyword(final String keyword, final Card card, final SpellAbility sa) {
         final Player ai = sa.getActivatingPlayer();
-        //final Player human = ai.getOpponent();
         if (!CardUtil.isStackingKeyword(keyword) && card.hasKeyword(keyword)) {
             return false;
         }

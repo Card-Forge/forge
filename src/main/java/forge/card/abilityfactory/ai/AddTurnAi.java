@@ -38,14 +38,21 @@ public class AddTurnAi extends SpellAiLogic {
 
     @Override
     protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
-        final Player opp = ai.getOpponent();
+        final Player opp = ai.getWeakestOpponent();
         final Target tgt = sa.getTarget();
 
         if (sa.getTarget() != null) {
             tgt.resetTargets();
             if (sa.canTarget(ai)) {
                 sa.getTarget().addTarget(ai);
-            } else if (mandatory && sa.canTarget(opp)) {
+            } else if (mandatory) {
+            	for (final Player ally : ai.getAllies()) {
+                    if (sa.canTarget(ally)) {
+                    	sa.getTarget().addTarget(ally);
+                    	break;
+                    }
+            	}
+                if (!sa.getTarget().isMinTargetsChosen(sa.getSourceCard(), sa) && sa.canTarget(opp)) {
                 sa.getTarget().addTarget(opp);
             } else {
                 return false;
@@ -53,7 +60,7 @@ public class AddTurnAi extends SpellAiLogic {
         } else {
             final ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
             for (final Player p : tgtPlayers) {
-                if (p.isHuman() && !mandatory) {
+                if (p.isHostileTo(ai) && !mandatory) {
                     return false;
                 }
             }

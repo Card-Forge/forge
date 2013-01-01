@@ -325,6 +325,21 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         return result;
     }
 
+    /**
+     * returns the weakest opponent (based on life totals).
+     * Should keep player relations somewhere in the match structure
+     * @return
+     */
+    public final Player getWeakestOpponent() {
+        Player weakest = this.getOpponents().get(0);
+        for (int i = 1; i < this.getOpponents().size(); i++) {
+            if (weakest.getLife() > this.getOpponents().get(i).getLife()) {
+                weakest = this.getOpponents().get(i);
+            }
+        }
+        return weakest;
+    }
+
 
 
     // ////////////////////////
