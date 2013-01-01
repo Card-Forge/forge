@@ -202,6 +202,43 @@ Fixes/Features:
 - Fixed keyword "CARDNAME untaps during each other player's untap step." for correct application in multiplayer.
 - More cards ready for multiplayer
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- More cards ready for multiplayer
+- CheckStyle.
+- reverting uglifying checkstyle changes
+- fixing a crash when AI had spare mana after playing a spell.
+- removal of unused code
+- if chains changed to switches
+- Fixed Hakim, Loreweaver
+- Fixed Voyager Staff
+- Fixed Ethereal Haze
+- Improved method name for isControlledByAnyOf predicate
+- Converted Black Vise for multiplayer
+- Removed some printlns I left in a earlier commit.
+- More cards ready for multiplayer
+- Fixed The Fallen (damagedThisGame in CardDamageHistory was never adding damaged players to the array, also made multiplayer compatible)
+- Changed initial array sizes in CardDamageHistory to the number of players in the game
+- More cards ready for multiplayer
+- More cards ready for multiplayer
+- missed two files with my last commit
+- More cards ready for multiplayer
+- Simplified Split Second
+- added SVar:RemAIDeck:True to recently added coin flip cards
+- Hopefully fixed trigger bug in multiplayer.
+- fixed potential bug with Haunt mechanism in multiplayer
+- The Quest world format, if present, overrides the user-defined format.
+- Fixed bad logic in QuestWorld.java.
+- Get rid of the superficial Index parameter. Quest Worlds are identified by their name.
+- Fix misleading JavaDoc in QuestController.java.
+- Converted a few cards by bbbbbbbbba
+- Fixed Linessa, Zephyr Mage
+- Another fix of linessa zephyr mage
+- Support for initial Quest World definition in QuestData.java and QuestController.java when starting a new Quest.
+- Removed an obsolete comment from QuestData.java
+- Allow selection of starting world. If the selected world has a format, it is enforced instead of a user-defined one. (More documentation to follow on the Forge forum.)
+- Disabled the starting Quest World format overriding prized cards format and unlocking. This means that you can now define a custom format and unlock new sets even if you start the game in a format enforcing world, by travelling to a different world that does not enforce a format.
+- Got rid of some getOpponent() calls for multiplayer compatibility
+- Fixing syntax error in AddTurnAI
+- Added the recent commit logs to changes.txt.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -238,6 +275,7 @@ Phage the Untouchable Avatar
 Prodigal Sorcerer Avatar
 Mirror Entity Avatar
 Mayael the Anima Avatar
+Platinum Angel Avatar
 
 
 Added the following cards:
@@ -293,6 +331,24 @@ Haze Frog
 Eye of the Storm
 Lammastide Weave
 Roots of Life
+Feral Contest
+Hakim, Loreweaver
+Hunt Down
+Rimehorn Aurochs
+Hellkite Charger
+Incite War
+Overblaze
+Savage Beating
+Web of Inertia
+Carrion Rats
+Carrion Wurm
+Mourner's Shield
+Instigator
+Energy Vortex
+Faces of the Past
+Beacon of Destiny
+Final Punishment
+Clarion Ultimatum
 
 
 end
