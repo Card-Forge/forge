@@ -2355,6 +2355,7 @@ res/cardsfolder/d/decree_of_annihilation.txt svneol=native#text/plain
 res/cardsfolder/d/decree_of_justice.txt svneol=native#text/plain
 res/cardsfolder/d/decree_of_pain.txt -text svneol=unset#text/plain
 res/cardsfolder/d/decree_of_savagery.txt svneol=native#text/plain
+res/cardsfolder/d/decree_of_silence.txt -text
 res/cardsfolder/d/dedicated_martyr.txt svneol=native#text/plain
 res/cardsfolder/d/deep_analysis.txt svneol=native#text/plain
 res/cardsfolder/d/deep_reconnaissance.txt svneol=native#text/plain
