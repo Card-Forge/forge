@@ -239,6 +239,11 @@ Fixes/Features:
 - Got rid of some getOpponent() calls for multiplayer compatibility
 - Fixing syntax error in AddTurnAI
 - Added the recent commit logs to changes.txt.
+- Fixed Victimize
+- Tweaked CardFactory.copySpellOntoStack to accomodate abilities.
+- Fixed CardDamageHistory crash in deckeditors
+- Renamed AF_CopySpell for clarity
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -349,6 +354,8 @@ Faces of the Past
 Beacon of Destiny
 Final Punishment
 Clarion Ultimatum
+Decree of Silence
+Rings of Brighthearth
 
 
 end
