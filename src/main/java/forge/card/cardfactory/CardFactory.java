@@ -27,6 +27,7 @@ import forge.CardUtil;
 import forge.Singletons;
 import forge.card.CardRules;
 import forge.card.cost.Cost;
+import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
@@ -174,7 +175,15 @@ public class CardFactory {
         c.setCopiedSpell(true);
         c.refreshUniqueNumber();
 
-        final SpellAbility copySA = sa.copy();
+        final SpellAbility copySA;
+        if(sa instanceof AbilityActivated)
+        {
+            copySA = ((AbilityActivated)sa).getCopy();
+        }
+        else
+        {
+            copySA = sa.copy();
+        }
         //remove all costs
         copySA.setPayCosts(new Cost(c, "", sa.isAbility()));
         if (sa.getTarget() != null) {
@@ -182,6 +191,7 @@ public class CardFactory {
             target.setSourceCard(c);
             copySA.setTarget(target);
         }
+        copySA.setActivatingPlayer(controller);
         copySA.setSourceCard(c);
 
         if (bCopyDetails) {

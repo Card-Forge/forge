@@ -18,10 +18,10 @@ public class CardDamageHistory {
     private boolean creatureGotBlockedThisCombat = false;
     private boolean creatureGotBlockedThisTurn = false;
 
-    private final List<Player> creatureAttackedLastTurnOf = new ArrayList<Player>(Singletons.getModel().getGame().getPlayers().size());
-    private final List<Player> damagedThisTurn = new ArrayList<Player>(Singletons.getModel().getGame().getPlayers().size());
-    private final List<Player> damagedThisTurnInCombat = new ArrayList<Player>(Singletons.getModel().getGame().getPlayers().size());
-    private final List<Player> damagedThisGame = new ArrayList<Player>(Singletons.getModel().getGame().getPlayers().size());
+    private final List<Player> creatureAttackedLastTurnOf = new ArrayList<Player>();
+    private final List<Player> damagedThisTurn = new ArrayList<Player>();
+    private final List<Player> damagedThisTurnInCombat = new ArrayList<Player>();
+    private final List<Player> damagedThisGame = new ArrayList<Player>();
     // used to see if an attacking creature with a triggering attack ability
     // triggered this phase:
     /**
