@@ -3,7 +3,7 @@ ManaCost:7
 Types:Planeswalker Karn
 Text:no text
 Loyalty:6
-A:AB$ ChangeZone | Cost$ AddCounter<4/LOYALTY> | Planeswalker$ True | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | RememberChanged$ True | Chooser$ Targeted | Hidden$ True | IsCurse$ True | SpellDescription$ Target player exiles a card from his or her hand.
+A:AB$ ChangeZone | Cost$ AddCounter<4/LOYALTY> | Planeswalker$ True | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Hand | Destination$ Exile | ChangeType$ Card | ChangeNum$ 1 | RememberChanged$ True | Chooser$ Targeted | Hidden$ True | IsCurse$ True | Mandatory$ True | SpellDescription$ Target player exiles a card from his or her hand.
 A:AB$ ChangeZone | Cost$ SubCounter<3/LOYALTY> | Planeswalker$ True | ValidTgts$ Permanent | TgtPrompt$ Select target permanent | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True | SpellDescription$ Exile target permanent.
 A:AB$ RestartGame | Cost$ SubCounter<14/LOYALTY> | Planeswalker$ True | Ultimate$ True | RestrictFromZone$ Exile | RestrictFromValid$ Card.IsNotRemembered,Spell,Card.Aura | SubAbility$ ReturnFromExile | SpellDescription$ Restart the game, leaving in exile all non-Aura permanent cards exiled with CARDNAME. Then put those cards onto the battlefield under your control.
 SVar:ReturnFromExile:DB$ ChangeZoneAll | ChangeType$ Permanent.nonAura+IsRemembered | Origin$ Exile | Destination$ Battlefield | GainControl$ True | SubAbility$ DBCleanup
