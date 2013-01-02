@@ -221,7 +221,7 @@ public class AbilityFactory {
         // Match API keywords. These are listed in alphabetical order.
 
 
-        if (api == ApiType.CopySpell) {
+        if (api == ApiType.CopySpellAbility) {
             if (isTargeted) {
                 // Since all "CopySpell" ABs copy things on the Stack no need for it to be everywhere
                 abTgt.setZone(ZoneType.Stack);

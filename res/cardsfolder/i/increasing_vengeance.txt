@@ -3,8 +3,8 @@ ManaCost:R R
 Types:Instant
 Text:no text
 K:Flashback 3 R R
-A:SP$ CopySpell | Cost$ R R | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | SubAbility$ DBCopy2 | SpellDescription$ Copy target instant or sorcery spell you control. If CARDNAME was cast from a graveyard, copy that spell twice instead. You may choose new targets for the copies.
-SVar:DBCopy2:DB$ CopySpell | Cost$ 0 | Defined$ Targeted | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X
+A:SP$ CopySpellAbility | Cost$ R R | ValidTgts$ Instant.YouCtrl,Sorcery.YouCtrl | SubAbility$ DBCopy2 | SpellDescription$ Copy target instant or sorcery spell you control. If CARDNAME was cast from a graveyard, copy that spell twice instead. You may choose new targets for the copies.
+SVar:DBCopy2:DB$ CopySpellAbility | Cost$ 0 | Defined$ Targeted | ConditionCheckSVar$ X | ConditionSVarCompare$ GE1 | References$ X
 SVar:X:Count$wasCastFromGraveyard.1.0
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

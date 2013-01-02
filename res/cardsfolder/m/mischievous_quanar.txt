@@ -6,7 +6,7 @@ PT:3/3
 K:Morph:1 U U
 A:AB$ SetState | Cost$ 3 U U | Defined$ Self | Mode$ TurnFace | SpellDescription$ Turn CARDNAME face down.
 T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, copy target instant or sorcery spell. You may choose new targets for that copy.
-SVar:TrigCopy:AB$ CopySpell | Cost$ 0 |  ValidTgts$ Instant,Sorcery
+SVar:TrigCopy:AB$ CopySpellAbility | Cost$ 0 |  ValidTgts$ Instant,Sorcery
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mischievous_quanar.jpg

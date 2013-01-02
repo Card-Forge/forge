@@ -7,7 +7,7 @@ SVar:DBDamage:DB$ DealDamage | Cost$ 0 | Defined$ TargetedController | DamageSou
 SVar:X:Targeted$CardPower
 K:Conspire
 T:Mode$ SpellCast | ValidCard$ Card.Self | Conspire$ True | Execute$ Conspire | Secondary$ True | TriggerDescription$ Copy CARDNAME if its conspire cost was paid
-SVar:Conspire:AB$ CopySpell | Cost$ 0 | Defined$ TriggeredSpellAbility | Amount$ 1
+SVar:Conspire:AB$ CopySpellAbility | Cost$ 0 | Defined$ TriggeredSpellAbility | Amount$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/traitors_roar.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/200.jpg

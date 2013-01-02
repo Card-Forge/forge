@@ -31,7 +31,7 @@ public enum ApiType {
     Cleanup (CleanUpEffect.class, AlwaysPlayAi.class),
     Clone (CloneEffect.class, CloneAi.class),
     CopyPermanent (CopyPermanentEffect.class, CopyPermanentAi.class),
-    CopySpell (CopySpellEffect.class, CanPlayAsDrawbackAi.class),
+    CopySpellAbility (CopySpellAbilityEffect.class, CanPlayAsDrawbackAi.class),
     Counter (CounterEffect.class, CounterAi.class),
     DamageAll (DamageAllEffect.class, DamageAllAi.class),
     DealDamage (DamageDealEffect.class, DamageDealAi.class),

@@ -6,7 +6,7 @@ A:SP$ Draw | Cost$ 2 U | NumCards$ 2 | SpellDescription$ Draw two cards, then di
 SVar:DBDiscard:DB$Discard | Defined$ You | NumCards$ 1 | Mode$ TgtChoose
 K:Conspire
 T:Mode$ SpellCast | ValidCard$ Card.Self | Conspire$ True | Execute$ Conspire | Secondary$ True | TriggerDescription$ Copy CARDNAME if its conspire cost was paid
-SVar:Conspire:AB$ CopySpell | Cost$ 0 | Defined$ TriggeredSpellAbility | Amount$ 1
+SVar:Conspire:AB$ CopySpellAbility | Cost$ 0 | Defined$ TriggeredSpellAbility | Amount$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghastly_discovery.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/39.jpg

@@ -5,7 +5,7 @@ Text:no text
 A:SP$ Destroy | Cost$ 1 G | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment | SpellDescription$ Destroy target artifact or enchantment.
 K:Conspire
 T:Mode$ SpellCast | ValidCard$ Card.Self | Conspire$ True | Execute$ Conspire | Secondary$ True | TriggerDescription$ Copy CARDNAME if its conspire cost was paid
-SVar:Conspire:AB$ CopySpell | Cost$ 0 | Defined$ TriggeredSpellAbility | Amount$ 1
+SVar:Conspire:AB$ CopySpellAbility | Cost$ 0 | Defined$ TriggeredSpellAbility | Amount$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gleeful_sabotage.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/116.jpg

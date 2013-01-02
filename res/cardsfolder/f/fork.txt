@@ -2,7 +2,7 @@ Name:Fork
 ManaCost:R R
 Types:Instant
 Text:no text
-A:SP$ CopySpell | Cost$ R R | ValidTgts$ Instant,Sorcery | CopyIsColor$ Red | OverwriteColors$ True | SpellDescription$ Copy target instant or sorcery spell, except that the copy is red. You may choose new targets for the copy.
+A:SP$ CopySpellAbility | Cost$ R R | ValidTgts$ Instant,Sorcery | CopyIsColor$ Red | OverwriteColors$ True | SpellDescription$ Copy target instant or sorcery spell, except that the copy is red. You may choose new targets for the copy.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fork.jpg

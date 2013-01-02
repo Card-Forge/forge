@@ -3,7 +3,7 @@ ManaCost:5 U R
 Types:Enchantment
 Text:no text
 T:Mode$ SpellCast | ValidCard$ Instant.MultiColor,Sorcery.MultiColor | ValidActivatingPlayer$ You | Execute$ TrigCopy | TriggerZones$ Battlefield | TriggerDescription$ Whenever you cast a multicolored instant or sorcery spell, you may pay 1. If you do, copy that spell. You may choose new targets for the copy.
-SVar:TrigCopy:AB$ CopySpell | Cost$ 1 | Defined$ TriggeredSpellAbility
+SVar:TrigCopy:AB$ CopySpellAbility | Cost$ 1 | Defined$ TriggeredSpellAbility
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cloven_casting.jpg

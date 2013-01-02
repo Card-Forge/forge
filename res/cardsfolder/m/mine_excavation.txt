@@ -5,7 +5,7 @@ Text:no text
 A:SP$ ChangeZone | Cost$ 1 W | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment in a graveyard to return | Origin$ Graveyard | Destination$ Hand| SpellDescription$ Return target artifact or enchantment card from a graveyard to its owner's hand.
 K:Conspire
 T:Mode$ SpellCast | ValidCard$ Card.Self | Conspire$ True | Execute$ Conspire | Secondary$ True | TriggerDescription$ Copy CARDNAME if its conspire cost was paid
-SVar:Conspire:AB$ CopySpell | Cost$ 0 | Defined$ TriggeredSpellAbility | Amount$ 1
+SVar:Conspire:AB$ CopySpellAbility | Cost$ 0 | Defined$ TriggeredSpellAbility | Amount$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mine_excavation.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/13.jpg

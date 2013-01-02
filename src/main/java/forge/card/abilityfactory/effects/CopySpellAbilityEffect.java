@@ -12,7 +12,7 @@ import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
-public class CopySpellEffect extends SpellEffect {
+public class CopySpellAbilityEffect extends SpellEffect {
 
     // *************************************************************************
     // ************************* CopySpell *************************************

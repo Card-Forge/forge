@@ -13059,7 +13059,7 @@ src/main/java/forge/card/abilityfactory/effects/CloneEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ControlExchangeEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/ControlGainEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/CopyPermanentEffect.java -text
-src/main/java/forge/card/abilityfactory/effects/CopySpellEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/CopySpellAbilityEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/CounterEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/CountersMoveEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/CountersProliferateEffect.java -text

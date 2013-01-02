@@ -5,7 +5,7 @@ Text:no text
 A:SP$ Pump | Cost$ GW | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
 K:Conspire
 T:Mode$ SpellCast | ValidCard$ Card.Self | Conspire$ True | Execute$ Conspire | Secondary$ True | TriggerDescription$ Copy CARDNAME if its conspire cost was paid
-SVar:Conspire:AB$ CopySpell | Cost$ 0 | Defined$ TriggeredSpellAbility | Amount$ 1
+SVar:Conspire:AB$ CopySpellAbility | Cost$ 0 | Defined$ TriggeredSpellAbility | Amount$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barkshell_blessing.jpg
 SetInfo:SHM|Common|http://magiccards.info/scans/en/shm/224.jpg

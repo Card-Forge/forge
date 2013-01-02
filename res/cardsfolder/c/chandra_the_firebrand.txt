@@ -7,7 +7,7 @@ A:AB$DealDamage | Cost$ AddCounter<1/LOYALTY> | Planeswalker$ True | Tgt$ TgtCP 
 A:AB$Effect | Cost$ SubCounter<2/LOYALTY> | Planeswalker$ True | Name$ Chandra, the Firebrand effect. | Image$ chandra_the_firebrand_effect | Triggers$ TrigCopy | SVars$ TrigCopyMain,DBCleanup | SpellDescription$ When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
 A:AB$DealDamage | Cost$ SubCounter<6/LOYALTY> | Planeswalker$ True | Ultimate$ True | Tgt$ TgtCP | TargetMin$ 0 | TargetMax$ 6 | NumDmg$ 6 | SpellDescription$ CARDNAME deals 6 damage to each of up to six target creatures and/or players.
 SVar:TrigCopy:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ You | Execute$ TrigCopyMain | TriggerDescription$ When you cast your next instant or sorcery spell this turn, copy that spell. You may choose new targets for the copy.
-SVar:TrigCopyMain:AB$ CopySpell | Cost$ 0 | Defined$ TriggeredSpellAbility | SubAbility$ DBCleanup
+SVar:TrigCopyMain:AB$ CopySpellAbility | Cost$ 0 | Defined$ TriggeredSpellAbility | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Battlefield | Destination$ Graveyard
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/chandra_the_firebrand.jpg
