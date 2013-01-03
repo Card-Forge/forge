@@ -3,18 +3,18 @@ ManaCost:2 G U B
 Types:Legendary Creature Ooze
 Text:no text
 PT:0/0
-K:ETBReplacement:Copy:MimeoExileTwo:Optional
+K:ETBReplacement:Copy:MimeoChooseTwo:Optional
 # Make SVars for granting abilities and triggers on clones distinct to avoid SVars getting overwritten when cloning a clone
-SVar:MimeoExileTwo:DB$ ChangeZone | ConditionCheckSVar$ MimeoInYard | ConditionSVarCompare$ GE2 | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card.Creature | ChangeNum$ 2 | Hidden$ True | Mandatory$ True | RememberChanged$ True | SubAbility$ MimeoChoose | SpellDescription$ As CARDNAME enters the battlefield, you may exile two creature cards from graveyards. If you do, it enters the battlefield as a copy of one of those cards with a number of additional +1/+1 counters on it equal to the power of the other card.
-SVar:MimeoChoose:DB$ ChooseCard | ConditionCheckSVar$ MimeoNumRemembered | ConditionSVarCompare$ EQ2 | Defined$ You | Amount$ 1 | Mandatory$ True | AILogic$ Clone | ChoiceTitle$ Choose creature to copy | Choices$ Creature.IsRemembered | ChoiceZone$ Exile | ForgetChosen$ True | SubAbility$ MimeoAddCounters
+SVar:MimeoChooseTwo:DB$ ChooseCard | ConditionCheckSVar$ MimeoInYard | ConditionSVarCompare$ GE2 | Defined$ You | Amount$ 2 | Mandatory$ True | AILogic$ Clone | ChoiceTitle$ Choose creature to exile | Choices$ Creature | ChoiceZone$ Graveyard | RememberChosen$ True | SubAbility$ MimeoExile | SpellDescription$ As CARDNAME enters the battlefield, you may exile two creature cards from graveyards. If you do, it enters the battlefield as a copy of one of those cards with a number of additional +1/+1 counters on it equal to the power of the other card.
+SVar:MimeoExile:DB$ ChangeZoneAll | ConditionCheckSVar$ MimeoNumRemembered | ConditionSVarCompare$ EQ2 | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card.IsRemembered | RememberChanged$ True | ForgetOtherRemembered$ True | SubAbility$ MimeoChooseCopy
+SVar:MimeoChooseCopy:DB$ ChooseCard | ConditionCheckSVar$ MimeoNumRemembered | ConditionSVarCompare$ EQ2 | Defined$ You | Amount$ 1 | Mandatory$ True | AILogic$ Clone | ChoiceTitle$ Choose creature to copy | Choices$ Creature.IsRemembered | ChoiceZone$ Exile | ForgetChosen$ True | SubAbility$ MimeoAddCounters
 # Order matters here, put counters first so clone doesn't have to add SVars 
 SVar:MimeoAddCounters:DB$ PutCounter | Defined$ Self | ConditionCheckSVar$ MimeoNumRemembered | ConditionSVarCompare$ EQ1 | CounterType$ P1P1 | CounterNum$ MimeoX | SubAbility$ MimeoCopyChosen
-SVar:MimeoCopyChosen:DB$ Clone | Defined$ ChosenCard | ConditionCheckSVar$ MimeoNumRemembered | ConditionSVarCompare$ EQ1 
+SVar:MimeoCopyChosen:DB$ Clone | Defined$ ChosenCard | ConditionCheckSVar$ MimeoNumRemembered | ConditionSVarCompare$ EQ1
 SVar:MimeoInYard:Count$TypeInAllYards.Creature
 SVar:MimeoNumRemembered:Remembered$Amount
 SVar:MimeoX:Remembered$CardPower
 SVar:NeedsToPlayVar:MimeoInYard GE2
-SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_mimeoplasm.jpg
 SetInfo:COM|Mythic|http://magiccards.info/scans/en/cmd/210.jpg
 Oracle:As The Mimeoplasm enters the battlefield, you may exile two creature cards from graveyards. If you do, it enters the battlefield as a copy of one of those cards with a number of additional +1/+1 counters on it equal to the power of the other card.
