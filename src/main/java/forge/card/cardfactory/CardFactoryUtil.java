@@ -4183,7 +4183,7 @@ public class CardFactoryUtil {
                         eff.addStaticAbility("Mode$ CantBeCast | ValidCard$ Card | Caster$ You "
                                 + "| Description$ For the rest of the game, you can't cast spells.");
 
-                        eff.setSVar("EpicCopy", "AB$ CopySpell | Cost$ 0 | Defined$ EffectSource");
+                        eff.setSVar("EpicCopy", "AB$ CopySpellAbility | Cost$ 0 | Defined$ EffectSource");
 
                         final Trigger copyTrigger = forge.card.trigger.TriggerHandler.parseTrigger(
                                 "Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ EpicCopy | TriggerDescription$ "
@@ -4782,7 +4782,7 @@ public class CardFactoryUtil {
                             + "| TriggerDescription$ Storm (When you cast this spell, "
                             + "copy it for each spell cast before it this turn.)");
 
-            card.setSVar("Storm", "AB$CopySpell | Cost$ 0 | Defined$ TriggeredSpellAbility | Amount$ StormCount");
+            card.setSVar("Storm", "AB$ CopySpellAbility | Cost$ 0 | Defined$ TriggeredSpellAbility | Amount$ StormCount");
             card.setSVar("StormCount", "Count$StormCount");
             final Trigger stormTrigger = TriggerHandler.parseTrigger(trigScript.toString(), card, true);
 
