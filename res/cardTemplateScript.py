@@ -15,147 +15,6 @@ class Card:
 		self.oracle = []
 		self.sets = ""
 
-def initSets():
-        # Note: These set codes match the codes used in mtg-data.txt which do not always 
-        #       match the official 3 letter codes e.g. 1E => LEA or CMD => COM
-        
-	# Base Sets
-	forgeSets.append('1E')
-	forgeSets.append('2E')
-	forgeSets.append('2U')
-	forgeSets.append('3E')
-	forgeSets.append('4E')
-	forgeSets.append('5E')
-	forgeSets.append('6E')
-	forgeSets.append('7E')
-	forgeSets.append('8ED')
-	forgeSets.append('9ED')
-	forgeSets.append('10E')
-	forgeSets.append('M10')
-	forgeSets.append('M11')
-	forgeSets.append('M12')
-	forgeSets.append('M13')
-
-	# Casual Variants and Multiplayer
-	forgeSets.append('CMD')
-	forgeSets.append('VAN')
-	forgeSets.append('ARC')
-	forgeSets.append('HOP')
-	forgeSets.append('PC2')
-
-	# Portal
-	forgeSets.append('POR')
-	forgeSets.append('PO2')
-	forgeSets.append('PTK')
-
-	# Starter
-	forgeSets.append('S99')
-	forgeSets.append('S00')
-
-	# Early Sets
-	forgeSets.append('AN')
-	forgeSets.append('AQ')
-	forgeSets.append('LE')
-	forgeSets.append('DK')
-	forgeSets.append('FE')
-	forgeSets.append('HM')
-
-	# Ice Age
-	forgeSets.append('IA')
-	forgeSets.append('AL')
-	forgeSets.append('CSP')
-
-	# Mirage
-	forgeSets.append('MI')
-	forgeSets.append('VI')
-	forgeSets.append('WL')
-
-	# Rath Cycle
-	forgeSets.append('TE')
-	forgeSets.append('ST')
-	forgeSets.append('EX')
-
-	# Artifacts Cycle
-	forgeSets.append('UZ')
-	forgeSets.append('GU')
-	forgeSets.append('CG')
-
-	# Masques
-	forgeSets.append('MM')
-	forgeSets.append('NE')
-	forgeSets.append('PR')
-
-	# Invasion
-	forgeSets.append('IN')
-	forgeSets.append('PS')
-	forgeSets.append('AP')
-
-	# Odyssey
-	forgeSets.append('OD')
-	forgeSets.append('TOR')
-	forgeSets.append('JUD')
-
-	# Onslaught
-	forgeSets.append('ONS')
-	forgeSets.append('LGN')
-	forgeSets.append('SCG')
-
-	# Mirrodin
-	forgeSets.append('MRD')
-	forgeSets.append('DST')
-	forgeSets.append('5DN')
-
-	# Kamigawa
-	forgeSets.append('CHK')
-	forgeSets.append('BOK')
-	forgeSets.append('SOK')
-
-	# Ravnica
-	forgeSets.append('RAV')
-	forgeSets.append('GPT')
-	forgeSets.append('DIS')
-
-	# Time Spiral
-	forgeSets.append('TSP')
-	forgeSets.append('TSB')
-	forgeSets.append('PLC')
-	forgeSets.append('FUT')
-
-	# Lorwyn
-	forgeSets.append('LRW')
-	forgeSets.append('MOR')
-
-	# Shadowmoor
-	forgeSets.append('SHM')
-	forgeSets.append('EVE')
-
-	# Alara
-	forgeSets.append('ALA')
-	forgeSets.append('CON')
-	forgeSets.append('ARB')
-
-	# Zendikar
-	forgeSets.append('ZEN')
-	forgeSets.append('WWK')
-	forgeSets.append('ROE')
-
-	# Scars of Mirrodin
-	forgeSets.append('SOM')
-	forgeSets.append('MBS')
-	forgeSets.append('NPH')
-	
-	# Innistrad
-	forgeSets.append('ISD')
-	forgeSets.append('DKA')
-	forgeSets.append('AVR')
-	
-	# Return to Ravnica
-	forgeSets.append('RTR')
-	#forgeSets.append('GTC')
-	#forgeSets.append('DGM')
-
-
-
 def initKeywords():
         keyWords.append('Cascade')
         keyWords.append('Convoke')
@@ -228,7 +87,6 @@ if not os.path.exists(pathToMtgData) :
         raw_input("")
         sys.exit()
 
-forgeSets = []
 keyWords = []
 mtgDataCards = {}
 setCodes = []
@@ -236,7 +94,6 @@ tmpName = ""
 line = ""
 
 # initialize sets supported by Forge
-initSets()
 initKeywords()
 #Parse mtg-data
 mtgdata = open(pathToMtgData,"r")
@@ -347,25 +204,6 @@ while inputName != 'quit' :
                                 if handleKeyords(text,keyWords) == False:
                                         print text
                 #print "\n"
-                tmpSets = cardData.sets
-                tmpSets = tmpSets.split(', ')
-                setInfo = [];
-                for edition in tmpSets :
-                        edition = edition.split(' ');
-                        if forgeSets.count(edition[0]) != 0 :
-                                if edition[1] == 'C' :
-                                        rarity = 'Common'
-                                elif edition[1] == 'U' :
-                                        rarity = 'Uncommon'
-                                elif edition[1] == 'R' :
-                                        rarity = 'Rare'
-                                elif edition[1] == 'M' :
-                                        rarity = 'Mythic'
-                                elif edition[1] == 'S' :
-                                        rarity = 'Special'
-                                setInfoStr = 'SetInfo:'+edition[0]+'|'+rarity+'|'+'http://dummy.com/dummy.jpg'
-                                setInfo.append(setInfoStr)
-                print 'SVar:Rarity:'+rarity
                 if cardData.types.find('Scheme') != -1 :
                         print 'SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/'+cleanName+'.jpg'
                 elif cardData.types.find('Vanguard') != -1 :
