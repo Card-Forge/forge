@@ -156,7 +156,7 @@ def initSets():
 	# Return to Ravnica
 	allSets['Return to Ravnica']='RTR'
 	#allSets['Gatecrash']='GTC'
-	#allSets['Sinker']='UNK'
+	#allSets['Dragon\'s Maze']='DGM'
 
 def addSets(card):
 	html = getURL('http://magiccards.info/query?q=!'+card.name)
