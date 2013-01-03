@@ -900,11 +900,6 @@ public class CardFactoryUtil {
             @Override
             public void resolve() {
                 if (sourceCard.turnFaceUp()) {
-                    // Run triggers
-                    final Map<String, Object> runParams = new TreeMap<String, Object>();
-                    runParams.put("Card", sourceCard);
-                    Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.TurnFaceUp, runParams);
-
                     StringBuilder sb = new StringBuilder();
                     sb.append(this.getActivatingPlayer()).append(" has unmorphed ");
                     sb.append(sourceCard.getName());

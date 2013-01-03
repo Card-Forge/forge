@@ -98,6 +98,12 @@ public class SetStateEffect extends SpellEffect {
                     }
                 } else if (mode.equals("TurnFace")) {
                     if (tgt.getCurState() == CardCharacteristicName.Original) {
+                        // Reset cloned state if Vesuvan Shapeshifter
+                        if (tgt.isCloned() && tgt.getState(CardCharacteristicName.Cloner).getName().equals("Vesuvan Shapeshifter")) {
+                            tgt.switchStates(CardCharacteristicName.Cloner, CardCharacteristicName.Original);
+                            tgt.setState(CardCharacteristicName.Original);
+                            tgt.clearStates(CardCharacteristicName.Cloner);
+                        }
                         if (tgt.turnFaceDown() && remChanged) {
                             host.addRemembered(tgt);
                         }

@@ -364,7 +364,20 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public boolean turnFaceUp() {
         if (this.curCharacteristics == CardCharacteristicName.FaceDown) {
-            return this.setState(this.preTFDCharacteristic);
+            boolean result = this.setState(this.preTFDCharacteristic);
+            if (result) {
+                // Run replacement effects
+                HashMap<String, Object> repParams = new HashMap<String, Object>();
+                repParams.put("Event", "TurnFaceUp");
+                repParams.put("Affected", this);
+                Singletons.getModel().getGame().getReplacementHandler().run(repParams);
+
+                // Run triggers
+                final Map<String, Object> runParams = new TreeMap<String, Object>();
+                runParams.put("Card", this);
+                Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.TurnFaceUp, runParams);
+            }
+            return result;
         }
 
         return false;

@@ -199,7 +199,7 @@ public class ReplacementHandler {
             } while(tailend != null);
         }
 
-        // Decider gets to choose wether or not to apply the replacement.
+        // Decider gets to choose whether or not to apply the replacement.
         if (replacementEffect.getMapParams().containsKey("Optional")) {
             Player optDecider = decider;
             if (mapParams.containsKey("OptionalDecider") && (effectSA != null)) {
@@ -284,6 +284,8 @@ public class ReplacementHandler {
             ret = new ReplaceMoved(mapParams, host);
         } else if (eventToReplace.equals("SetInMotion")) {
             ret = new ReplaceSetInMotion(mapParams, host);
+        } else if (eventToReplace.equals("TurnFaceUp")) {
+            ret = new ReplaceTurnFaceUp(mapParams, host);
         }
 
         String activeZones = mapParams.get("ActiveZones");

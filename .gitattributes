@@ -11085,6 +11085,7 @@ res/cardsfolder/v/vesper_ghoul.txt svneol=native#text/plain
 res/cardsfolder/v/vessel_of_endless_rest.txt -text
 res/cardsfolder/v/vesuva.txt -text
 res/cardsfolder/v/vesuvan_doppelganger.txt svneol=native#text/plain
+res/cardsfolder/v/vesuvan_shapeshifter.txt -text
 res/cardsfolder/v/veteran_armorer.txt svneol=native#text/plain
 res/cardsfolder/v/veteran_armorsmith.txt svneol=native#text/plain
 res/cardsfolder/v/veteran_bodyguard.txt -text
@@ -13184,6 +13185,7 @@ src/main/java/forge/card/replacement/ReplaceGainLife.java -text
 src/main/java/forge/card/replacement/ReplaceGameLoss.java -text
 src/main/java/forge/card/replacement/ReplaceMoved.java -text
 src/main/java/forge/card/replacement/ReplaceSetInMotion.java -text
+src/main/java/forge/card/replacement/ReplaceTurnFaceUp.java -text
 src/main/java/forge/card/replacement/ReplacementEffect.java -text
 src/main/java/forge/card/replacement/ReplacementHandler.java -text
 src/main/java/forge/card/replacement/ReplacementLayer.java -text
