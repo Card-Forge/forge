@@ -77,7 +77,12 @@ public class ChooseCardEffect extends SpellEffect {
                 for (int i = 0; i < validAmount; i++) {
                     if (p.isHuman()) {
                         final String choiceTitle = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a card ";
-                        final Card o = GuiChoose.oneOrNone(choiceTitle, choices);
+                        Card o;
+                        if (sa.hasParam("Mandatory")) {
+                            o = GuiChoose.one(choiceTitle, choices);
+                        } else {
+                            o = GuiChoose.oneOrNone(choiceTitle, choices);
+                        }
                         if (o != null) {
                             chosen.add(o);
                             choices.remove(o);
@@ -115,6 +120,11 @@ public class ChooseCardEffect extends SpellEffect {
                 if (sa.hasParam("RememberChosen")) {
                     for (final Card rem : chosen) {
                         host.addRemembered(rem);
+                    }
+                }
+                if (sa.hasParam("ForgetChosen")) {
+                    for (final Card rem : chosen) {
+                        host.removeRemembered(rem);
                     }
                 }
             }

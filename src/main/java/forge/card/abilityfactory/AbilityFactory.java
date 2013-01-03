@@ -889,6 +889,10 @@ public class AbilityFactory {
             for (final Card cl : CardUtil.getThisTurnEntered(destination, origin, validFilter, hostCard)) {
                 cards.add(cl);
             }
+        } else if (defined.equals("ChosenCard")) {
+            for (final Card chosen : hostCard.getChosenCard()) {
+                cards.add(Singletons.getModel().getGame().getCardState(chosen));
+            }
         } else {
             List<Card> list = null;
             if (defined.startsWith("Sacrificed")) {
