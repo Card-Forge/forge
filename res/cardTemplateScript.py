@@ -16,6 +16,9 @@ class Card:
 		self.sets = ""
 
 def initSets():
+        # Note: These set codes match the codes used in mtg-data.txt which do not always 
+        #       match the official 3 letter codes e.g. 1E => LEA or CMD => COM
+        
 	# Base Sets
 	forgeSets.append('1E')
 	forgeSets.append('2E')
@@ -34,7 +37,7 @@ def initSets():
 	forgeSets.append('M13')
 
 	# Casual Variants and Multiplayer
-	forgeSets.append('COM')
+	forgeSets.append('CMD')
 	forgeSets.append('VAN')
 	forgeSets.append('ARC')
 	forgeSets.append('HOP')
@@ -149,7 +152,9 @@ def initSets():
 	# Return to Ravnica
 	forgeSets.append('RTR')
 	#forgeSets.append('GTC')
-	#forgeSets.append('UNK')
+	#forgeSets.append('DGM')
+
+
 
 def initKeywords():
         keyWords.append('Cascade')
@@ -364,9 +369,9 @@ while inputName != 'quit' :
                 if cardData.types.find('Scheme') != -1 :
                         print 'SVar:Picture:http://www.cardforge.org/fpics/lq_schemes/'+cleanName+'.jpg'
                 elif cardData.types.find('Vanguard') != -1 :
-						print 'SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/'+cleanName+'.jpg'
+                        print 'SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/'+cleanName+'.jpg'
                 else :
-						print 'SVar:Picture:http://www.wizards.com/global/images/magic/general/'+cleanName+'.jpg'
+                        print 'SVar:Picture:http://www.wizards.com/global/images/magic/general/'+cleanName+'.jpg'
                 print 'End\n'
         else :
                 print inputName+' not found\n'
