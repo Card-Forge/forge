@@ -1,0 +1,20 @@
+Name:Relentless Assault
+ManaCost:2 R R
+Types:Sorcery
+Text:no text
+A:SP$ UntapAll | Cost$ 2 R R | ValidCards$ Creature.attackedThisTurn | SubAbility$ DBAddCombat | SpellDescription$ Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.
+SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ BeginCombat | FollowedBy$ ThisPhase | ConditionPhases$ Main1,Main2
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/relentless_assault.jpg
+SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/214.jpg
+SetInfo:PTK|Rare|http://magiccards.info/scans/en/p3k/119.jpg
+SetInfo:7ED|Rare|http://magiccards.info/scans/en/7e/214.jpg
+SetInfo:PO2|Rare|http://magiccards.info/scans/en/po2/115.jpg
+SetInfo:9ED|Rare|http://magiccards.info/scans/en/9e/212.jpg
+SetInfo:10E|Rare|http://magiccards.info/scans/en/10e/225.jpg
+SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/91.jpg
+SetInfo:6ED|Rare|http://magiccards.info/scans/en/6e/202.jpg
+SetInfo:S99|Rare|http://magiccards.info/scans/en/st/115.jpg
+Oracle:Untap all creatures that attacked this turn. After this main phase, there is an additional combat phase followed by an additional main phase.
+End
