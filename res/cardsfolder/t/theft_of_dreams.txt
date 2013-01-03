@@ -2,8 +2,8 @@ Name:Theft of Dreams
 ManaCost:2 U
 Types:Sorcery
 Text:no text
-A:SP$ Draw | Cost$ 2 U | NumCards$ X | References$ X | SpellDescription$ Draw a card for each tapped creature target opponent controls.
-SVar:X:Count$TypeOppCtrlTapped.Creature
+A:SP$ Draw | Cost$ 2 U | Defined$ You | ValidTgts$ Opponent | NumCards$ X | References$ X | SpellDescription$ Draw a card for each tapped creature target opponent controls.
+SVar:X:Count$Valid Creature.tapped+TargetedPlayerCtrl
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/theft_of_dreams.jpg
 SetInfo:EXO|Common|http://magiccards.info/scans/en/ex/49.jpg

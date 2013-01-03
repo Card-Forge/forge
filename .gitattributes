@@ -5490,6 +5490,7 @@ res/cardsfolder/k/knight_of_the_white_orchid.txt svneol=native#text/plain
 res/cardsfolder/k/knight_of_valor.txt svneol=native#text/plain
 res/cardsfolder/k/knighthood.txt svneol=native#text/plain
 res/cardsfolder/k/knightly_valor.txt -text
+res/cardsfolder/k/knollspine_dragon.txt -text
 res/cardsfolder/k/knotvine_mystic.txt svneol=native#text/plain
 res/cardsfolder/k/knotvine_paladin.txt svneol=native#text/plain
 res/cardsfolder/k/know_naught_but_fire.txt -text
@@ -8196,6 +8197,7 @@ res/cardsfolder/r/rhys_the_redeemed.txt svneol=native#text/plain
 res/cardsfolder/r/rhystic_cave.txt -text
 res/cardsfolder/r/rhystic_circle.txt -text
 res/cardsfolder/r/rhystic_deluge.txt svneol=native#text/plain
+res/cardsfolder/r/rhystic_scrying.txt -text
 res/cardsfolder/r/rhystic_shield.txt -text
 res/cardsfolder/r/rhystic_study.txt svneol=native#text/plain
 res/cardsfolder/r/rhystic_tutor.txt -text
@@ -8501,6 +8503,7 @@ res/cardsfolder/s/sages_of_the_anima.txt -text
 res/cardsfolder/s/sai_of_the_shinobi.txt -text
 res/cardsfolder/s/sailmonger.txt svneol=native#text/plain
 res/cardsfolder/s/sakashima_the_impostor.txt -text
+res/cardsfolder/s/sakashima_the_impostor_avatar.txt -text
 res/cardsfolder/s/sakashimas_student.txt -text
 res/cardsfolder/s/sakura_tribe_elder.txt svneol=native#text/plain
 res/cardsfolder/s/sakura_tribe_scout.txt svneol=native#text/plain

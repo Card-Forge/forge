@@ -1,0 +1,13 @@
+Name:Sakashima the Impostor Avatar
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:+0/+1
+A:AB$ ChooseCard | Cost$ 2 | ActivationZone$ Command | Choices$ Creature.YouCtrl | Amount$ 1 | AILogic$ Clone | RememberChosen$ True | SubAbility$ DBClone | SpellDescription$ Choose a creature you control. It becomes a copy of target creature except for its name.
+SVar:DBClone:DB$ Clone | CloneTarget$ Remembered | ValidTgts$ Creature | TgtPrompt$ Select target creature to copy | KeepName$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Rarity:Special
+SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/sakashima_the_impostor_avatar.jpg
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo/sakashima-the-impostor.jpg
+Oracle:Hand +0, life +1\n{2}: Choose a creature you control. It becomes a copy of target creature except for its name.
+End

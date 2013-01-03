@@ -2,9 +2,8 @@ Name:Borrowing 100,000 Arrows
 ManaCost:2 U
 Types:Sorcery
 Text:no text
-A:SP$ Draw | Cost$ 2 U | NumCards$ X | References$ X | SpellDescription$ Draw a card for each tapped creature target opponent controls.
-SVar:X:Count$TypeOppCtrlTapped.Creature
-SVar:RemRandomDeck:True
+A:SP$ Draw | Cost$ 2 U | Defined$ You | ValidTgts$ Opponent | NumCards$ X | References$ X | SpellDescription$ Draw a card for each tapped creature target opponent controls.
+SVar:X:Count$Valid Creature.tapped+TargetedPlayerCtrl
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/borrowing_100000_arrows.jpg
 SetInfo:PTK|Uncommon|http://magiccards.info/scans/en/p3k/35.jpg
