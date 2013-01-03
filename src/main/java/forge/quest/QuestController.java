@@ -377,7 +377,7 @@ public class QuestController {
      * Reset the duels manager.
      */
     public void resetDuelsManager() {
-        if (this.model.getWorldId() == null) {
+        if (this.model == null || this.model.getWorldId() == null) {
             this.duelManager = new QuestEventManager(ForgeProps.getFile(NewConstants.Quest.DUELS));
         } else {
             QuestWorld world = Singletons.getModel().getWorlds().get(this.model.getWorldId());
@@ -395,7 +395,7 @@ public class QuestController {
      * Reset the challenges manager.
      */
     public void resetChallengesManager() {
-        if (this.model.getWorldId() == null) {
+        if (this.model == null || this.model.getWorldId() == null) {
             this.challengesManager = new QuestEventManager(ForgeProps.getFile(NewConstants.Quest.CHALLENGES));
         }
         else {
