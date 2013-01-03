@@ -70,7 +70,7 @@ public class CharmEffect extends SpellEffect {
                 chosen.add(a);
             }
         } else {
-            chosen = CharmAi.chooseOptionsAi(activator, true, choices, num, min);
+            chosen = CharmAi.chooseOptionsAi(activator, false, choices, num, min);
         }
 
         chainAbilities(sa, chosen);
