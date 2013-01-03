@@ -284,6 +284,9 @@ public class LimitedDeck {
         for (int i = 0; i < 5; i++) {
             totalColor += clrCnts[i].getCount();
         }
+        if (totalColor == 0) {
+            throw new RuntimeException("Add Lands to empty deck list!");
+        }
 
         // do not update landsNeeded until after the loop, because the
         // calculation involves landsNeeded
