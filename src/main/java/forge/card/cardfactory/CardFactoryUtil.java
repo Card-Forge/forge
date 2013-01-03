@@ -4583,7 +4583,7 @@ public class CardFactoryUtil {
                 card.addSpellAbility(CardFactoryUtil.abilityMorphUp(card, cost));
                 card.setSVars(sVars); // for Warbreak Trumpeter.
 
-                card.turnFaceUp();
+                card.setState(CardCharacteristicName.Original);
             }
         } // Morph
 
