@@ -72,6 +72,8 @@ print("Comparing datasets and outputting results.")
 totalData = {}
 currentMissing = []
 currentImplemented = []
+allMissing = set()
+allImplemented = set()
 total = 0
 percentage = 0
 for currentSet in setCodes :
@@ -111,6 +113,8 @@ for currentSet in setCodes :
 		output.write("Total: " + str(total) + "\n")
 		output.write("Percentage implemented: " + str(round(percentage,2)) + "%\n")
 	totalData[currentSet] = (len(currentImplemented),len(currentMissing),total,percentage)
+	allMissing |= set(currentMissing)
+	allImplemented |= set(currentImplemented)
 	del currentMissing[:]
 	del currentImplemented[:]
 
@@ -131,5 +135,27 @@ with open(sys.path[0] + os.sep + "PerSetTrackingResults" + os.sep + "CompleteSta
 	totalPercentage = totalImplemented / fullTotal
 	statsfile.write("\n")
 	statsfile.write("Total over all sets: " + str(totalImplemented) + " (" + str(totalMissing) + ") / " + str(fullTotal))
+
+# Add another file that will print out distinct cards implemented/missing
+# Convert back to lists so they can be sorted
+impCount = len(allImplemented)
+misCount = len(allMissing)
+#implemented = list(allImplemented)
+#implemented.sort()
+missing = list(allMissing)
+missing.sort()
+totalCount = impCount+misCount
+with open(sys.path[0] + os.sep + "PerSetTrackingResults" + os.sep + "DistinctStats.txt", "w") as distinctfile:
+	distinctfile.write("Distinct: Implemented (Missing) / Total = Percentage Implemented\n")
+	distinctfile.write("%d (%d) / %d = %.2f %%\n" % (impCount, misCount, totalCount, float(impCount)/totalCount*100))
+
+	# Currently only print missing cards, implemented cards are less important
+	#distinctfile.write("\nImplemented (%d):" % impCount)
+	#for s in implemented:
+	#	distinctfile.write("\n%s" % s)
+
+	distinctfile.write("\nMissing (%d):" % misCount)
+	for s in missing:
+		distinctfile.write("\n%s" % s)
 
 print "Done!"
