@@ -4236,8 +4236,23 @@ public class CardFactoryUtil {
             card.setSVar("TrigBondSelf", abStringOther);
         }
 
+        if (card.hasKeyword("Extort")) {
+            final String extortTrigger = "Mode$ SpellCast | ValidCard$ Card | ValidActivatingPlayer$ You | "
+                    + "TriggerZones$ Battlefield | Execute$ ExtortOpps";
+                    //" | TriggerDescription$ Extort (Whenever you cast a spell, you may pay WB. If you do, "
+                    //+ "each opponent loses 1 life and you gain that much life.)";
+            final String abString = "AB$ LoseLife | Cost$ WB | Defined$ Player.Opponent | "
+                    + "LifeAmount$ 1 | SubAbility$ DBGainLife";
+            final String dbString = "DB$ GainLife | Defined$ You | LifeAmount$ AFLifeLost";
+            final Trigger parsedTrigger = TriggerHandler.parseTrigger(extortTrigger, card, true);
+            card.addTrigger(parsedTrigger);
+            card.setSVar("ExtortOpps", abString);
+            card.setSVar("DBGainLife", dbString);
+            card.setSVar("AFLifeLost", "Number$0");
+        }
+
         if (card.hasStartOfKeyword("Amplify")) {
-            // find position of Equip keyword
+            // find position of Amplify keyword
             final int equipPos = card.getKeywordPosition("Amplify");
             final String[] ampString = card.getKeyword().get(equipPos).split(":");
             final String amplifyMagnitude = ampString[1];
