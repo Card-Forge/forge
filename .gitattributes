@@ -140,6 +140,7 @@ res/cardsfolder/a/agent_of_masks.txt svneol=native#text/plain
 res/cardsfolder/a/agent_of_shauku.txt svneol=native#text/plain
 res/cardsfolder/a/agent_of_stromgald.txt svneol=native#text/plain
 res/cardsfolder/a/aggravate.txt -text
+res/cardsfolder/a/aggravated_assault.txt -text
 res/cardsfolder/a/aggression.txt svneol=native#text/plain
 res/cardsfolder/a/aggressive_urge.txt svneol=native#text/plain
 res/cardsfolder/a/agility.txt svneol=native#text/plain
@@ -3768,6 +3769,7 @@ res/cardsfolder/f/furnace_spirit.txt svneol=native#text/plain
 res/cardsfolder/f/furnace_whelp.txt svneol=native#text/plain
 res/cardsfolder/f/furor_of_the_bitten.txt -text
 res/cardsfolder/f/fury_charm.txt -text
+res/cardsfolder/f/fury_of_the_horde.txt -text
 res/cardsfolder/f/fury_sliver.txt svneol=native#text/plain
 res/cardsfolder/f/furyborn_hellkite.txt svneol=native#text/plain
 res/cardsfolder/f/furystoke_giant.txt -text
@@ -8800,6 +8802,7 @@ res/cardsfolder/s/seismic_shudder.txt svneol=native#text/plain
 res/cardsfolder/s/seismic_spike.txt svneol=native#text/plain
 res/cardsfolder/s/seismic_strike.txt svneol=native#text/plain
 res/cardsfolder/s/seizan_perverter_of_truth.txt svneol=native#text/plain
+res/cardsfolder/s/seize_the_day.txt -text
 res/cardsfolder/s/seize_the_initiative.txt svneol=native#text/plain
 res/cardsfolder/s/seize_the_soul.txt -text
 res/cardsfolder/s/seizures.txt svneol=native#text/plain
@@ -11444,6 +11447,7 @@ res/cardsfolder/w/wave_elemental.txt svneol=native#text/plain
 res/cardsfolder/w/wave_of_indifference.txt svneol=native#text/plain
 res/cardsfolder/w/wave_of_reckoning.txt -text
 res/cardsfolder/w/wave_of_terror.txt svneol=native#text/plain
+res/cardsfolder/w/waves_of_aggression.txt -text
 res/cardsfolder/w/waveskimmer_aven.txt svneol=native#text/plain
 res/cardsfolder/w/waxmane_baku.txt -text
 res/cardsfolder/w/wayfarers_bauble.txt svneol=native#text/plain
