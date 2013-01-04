@@ -63,7 +63,7 @@ public class CostUntap extends CostPart {
      */
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
-        return source.isTapped() && (!source.hasSickness() || !source.isCreature());
+        return source.isTapped() && (!source.isSick() || source.hasKeyword("CARDNAME may activate abilities as though it has haste."));
     }
 
     /*
