@@ -4,7 +4,7 @@ Types:Creature Elemental
 Text:no text
 PT:6/5
 K:Morph:5 G G
-T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME is turned face up, you may put a creature card from your hand onto the battlefield.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, you may put a creature card from your hand onto the battlefield.
 SVar:TrigChange:AB$ChangeZone | Cost$ 0 | Origin$ Hand | Destination$ Battlefield | ChangeType$ Creature | ChangeNum$ 1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/root_elemental.jpg

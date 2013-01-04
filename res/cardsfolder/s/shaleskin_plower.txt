@@ -4,7 +4,7 @@ Types:Creature Beast
 Text:no text
 PT:3/2
 K:Morph:4 R
-T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME is turned face up, destroy target land.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, destroy target land.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Land | TgtPrompt$ Select target land
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shaleskin_plower.jpg

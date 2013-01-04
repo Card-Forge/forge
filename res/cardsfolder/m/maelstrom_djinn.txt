@@ -5,7 +5,7 @@ Text:no text
 PT:5/6
 K:Flying
 K:Morph:2 U
-T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigVanishing | TriggerDescription$ When CARDNAME is turned face up, put two time counters on it and it gains vanishing.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigVanishing | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, put two time counters on it and it gains vanishing.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.Self+counters_GE2_TIME | Secondary$ True | Execute$ TrigRemoveCounter | TriggerDescription$ Remove time counter.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.Self+counters_EQ1_TIME | Secondary$ True | Execute$ TrigSacrifice | TriggerDescription$ Sacrifice CARDNAME.
 SVar:TrigVanishing:AB$PutCounter | Cost$ 0 | CounterType$ TIME | CounterNum$ 2

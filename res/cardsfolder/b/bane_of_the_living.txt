@@ -4,7 +4,7 @@ Types:Creature Insect
 Text:no text
 PT:4/3
 K:Morph:X B B
-T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME is turned face up, all creatures get -X/-X until end of turn.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, all creatures get -X/-X until end of turn.
 SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature | NumAtt$ -X | NumDef$ -X | References$ X
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True

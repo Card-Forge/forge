@@ -4,7 +4,7 @@ Types:Creature Human Cleric
 Text:no text
 PT:1/1
 K:Morph:W
-T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigRegenerate | TriggerDescription$ When CARDNAME is turned face up, regenerate target creature.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigRegenerate | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, regenerate target creature.
 SVar:TrigRegenerate:AB$Regenerate | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/daru_mender.jpg

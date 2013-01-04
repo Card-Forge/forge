@@ -4,7 +4,7 @@ Types:Creature Human Cleric
 Text:no text
 PT:2/2
 K:Morph:3 B
-T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigChange | TriggerDescription$ When CARDNAME is turned face up, return all Zombie cards from all graveyards to their owners' hands.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigChange | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, return all Zombie cards from all graveyards to their owners' hands.
 SVar:TrigChange:AB$ChangeZoneAll | Cost$ 0 | ChangeType$ Zombie | Origin$ Graveyard | Destination$ Hand
 SVar:RemRandomDeck:True
 SVar:Rarity:Common

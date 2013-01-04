@@ -4,7 +4,7 @@ Types:Creature Human Wizard
 Text:no text
 PT:2/1
 K:Morph:1 U U
-T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME is turned face up, discard two cards, then draw three cards.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, discard two cards, then draw three cards.
 SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ You | NumCards$ 2 | Mode$ TgtChoose | SubAbility$ DBDraw
 SVar:DBDraw:DB$Draw | NumCards$ 3
 SVar:RemAIDeck:True

@@ -4,7 +4,7 @@ Types:Artifact Creature Shapeshifter
 Text:no text
 PT:2/2
 K:Morph:0
-T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerDescription$ When CARDNAME is turned face up, it becomes the creature type of your choice. (This effect lasts indefinitely.)
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigChoose | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, it becomes the creature type of your choice. (This effect lasts indefinitely.)
 SVar:TrigChoose:DB$ ChooseType | Cost$ 1 | Defined$ You | Type$ Creature | SubAbility$ DBAnimate | AILogic$ MostProminentInComputerDeck
 SVar:DBAnimate:DB$ Animate | Defined$ Self | Types$ ChosenType | OverwriteTypes$ True | KeepSupertypes$ True | KeepCardTypes$ True
 SVar:Rarity:Uncommon

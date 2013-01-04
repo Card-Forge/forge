@@ -4,7 +4,7 @@ Types:Creature Human Wizard
 Text:no text
 PT:3/1
 K:Morph:3 B
-T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPump | TriggerDescription$ When CARDNAME is turned face up, target creature gets -3/-3 until end of turn.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPump | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, target creature gets -3/-3 until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ -3 | NumDef$ -3 | IsCurse$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aphetto_exterminator.jpg

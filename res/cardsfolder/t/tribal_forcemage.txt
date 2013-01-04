@@ -4,7 +4,7 @@ Types:Creature Elf Wizard
 Text:no text
 PT:1/1
 K:Morph:1 G
-T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigChooseType | TriggerDescription$ When CARDNAME is turned face up, creatures of the creature type of your choice get +2/+2 and gain trample until end of turn.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigChooseType | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, creatures of the creature type of your choice get +2/+2 and gain trample until end of turn.
 SVar:TrigChooseType:AB$ ChooseType | Cost$ 0 | Defined$ You | Type$ Creature | AILogic$ MostProminentComputerControls | SubAbility$ DBPumpAll
 SVar:DBPumpAll:DB$PumpAll | ValidCards$ Creature.ChosenType | NumAtt$ +2 | NumDef$ +2 | KW$ Trample
 SVar:Rarity:Rare

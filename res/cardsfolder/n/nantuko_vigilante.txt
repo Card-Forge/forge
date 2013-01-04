@@ -4,7 +4,7 @@ Types:Creature Insect Druid Mutant
 Text:no text
 PT:3/2
 K:Morph:1 G
-T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME is turned face up, destroy target artifact or enchantment.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, destroy target artifact or enchantment.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Artifact,Enchantment | TgtPrompt$ Select target artifact or enchantment
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nantuko_vigilante.jpg

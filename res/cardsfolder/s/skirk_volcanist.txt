@@ -4,7 +4,7 @@ Types:Creature Goblin
 Text:no text
 PT:3/1
 K:Morph:Sac<2/Mountain>
-T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME is turned face up, it deals 3 damage divided as you choose among one, two, or three target creatures.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, it deals 3 damage divided as you choose among one, two, or three target creatures.
 SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature (1) | NumDmg$ 1 | SubAbility$ DBDamage2
 SVar:DBDamage2:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ target creature (2) | NumDmg$ 1 | SubAbility$ DBDamage3
 SVar:DBDamage3:DB$DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ target creature (3) | NumDmg$ 1

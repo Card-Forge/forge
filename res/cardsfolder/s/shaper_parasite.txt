@@ -4,7 +4,7 @@ Types:Creature Illusion
 Text:no text
 PT:2/3
 K:Morph:2 U
-T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigChoice | TriggerDescription$ When CARDNAME is turned face up, target creature gets +2/-2 or -2/+2 until end of turn.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigChoice | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, target creature gets +2/-2 or -2/+2 until end of turn.
 SVar:TrigChoice:AB$ GenericChoice | ValidTgts$ Creature | TgtPrompt$ Select target creature | Cost$ 0 | Defined$ You | Choices$ TrigPump1,TrigPump2
 SVar:TrigPump1:DB$Pump | Cost$ 0 | Defined$ Targeted | NumAtt$ +2 | NumDef$ -2 | IsCurse$ True | ChoiceDescription$ +2/-2
 SVar:TrigPump2:DB$Pump | Cost$ 0 | Defined$ Targeted | NumAtt$ -2 | NumDef$ +2 | IsCurse$ True | ChoiceDescription$ -2/+2

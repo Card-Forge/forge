@@ -4,7 +4,7 @@ Types:Creature Beast
 Text:no text
 PT:3/4
 K:Morph:6 R
-T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerDescription$ When CARDNAME is turned face up, Beast creatures you control get +3/+0 until end of turn.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigPumpAll | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, Beast creatures you control get +3/+0 until end of turn.
 SVar:TrigPumpAll:AB$PumpAll | Cost$ 0 | ValidCards$ Creature.Beast+YouCtrl | NumAtt$ +3
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bloodstoke_howler.jpg

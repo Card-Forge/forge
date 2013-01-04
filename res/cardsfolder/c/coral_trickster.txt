@@ -4,7 +4,7 @@ Types:Creature Merfolk Rogue
 Text:no text
 PT:2/1
 K:Morph:U
-T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigTapOrUntap | TriggerDescription$ When CARDNAME is turned face up, you may tap or untap target permanent.
+T:Mode$ TurnFaceUp | ValidCard$ Card.Self | Execute$ TrigTapOrUntap | TriggerZones$ Battlefield | TriggerDescription$ When CARDNAME is turned face up, you may tap or untap target permanent.
 SVar:TrigTapOrUntap:AB$TapOrUntap | Cost$ 0 | ValidTgts$ Permanent | TgtPrompt$ Select target permanent
 SVar:RemAIDeck:True
 SVar:Rarity:Common
