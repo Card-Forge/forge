@@ -1,6 +1,6 @@
 Name:Overblaze
 ManaCost:3 R
-Types:Instant
+Types:Instant Arcane
 Text:no text
 K:Splice onto Arcane 2 R R
 A:SP$ Effect | Cost$ 3 R | Name$ Overblaze Effect | ValidTgts$ Permanent | RememberObjects$ Targeted | ReplacementEffects$ OverblazeEvent1,OverblazeEvent2 | SVars$ DmgTwice,DmgTwiceCombat,X | References$ OverblazeEvent1,OverblazeEvent2,DmgTwice,DmgTwiceCombat,X | SpellDescription$ Each time target permanent would deal damage to a creature or player this turn, it deals double that damage to that creature or player instead.
