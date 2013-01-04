@@ -34,6 +34,7 @@ import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
 
@@ -333,6 +334,26 @@ public abstract class Trigger extends TriggerReplacementBase {
                 return false;
             }
 
+        }
+
+        if (this.getMapParams().containsKey("APlayerHasMoreLifeThanEachOther")) {
+            int highestLife = -50; // Negative base just in case a few Lich's or Platinum Angels are running around
+            final List<Player> healthiest = new ArrayList<Player>();
+            for (final Player p : Singletons.getModel().getGame().getPlayers()) {
+                if (p.getLife() > highestLife) {
+                    healthiest.clear();
+                    highestLife = p.getLife();
+                    healthiest.add(p);
+                } else if (p.getLife() == highestLife) {
+                    highestLife = p.getLife();
+                    healthiest.add(p);
+                }
+            }
+
+            if (healthiest.size() != 1) {
+                // More than one player tied for most life
+                return false;
+            }
         }
 
         if (this.getMapParams().containsKey("IsPresent")) {

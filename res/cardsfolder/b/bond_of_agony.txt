@@ -2,7 +2,7 @@ Name:Bond of Agony
 ManaCost:X B
 Types:Sorcery
 Text:no text
-A:SP$ LoseLife | Cost$ X B PayLife<X> | Defined$ Opponent | LifeAmount$ X | References$ X | SpellDescription$ Each other player loses X life.
+A:SP$ LoseLife | Cost$ X B PayLife<X> | Defined$ Player.Other | LifeAmount$ X | References$ X | SpellDescription$ Each other player loses X life.
 SVar:X:Count$xPaid
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

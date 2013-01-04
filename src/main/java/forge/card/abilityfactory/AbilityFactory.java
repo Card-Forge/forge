@@ -552,6 +552,9 @@ public class AbilityFactory {
                 } else if (hType.equals("Opponents")) {
                     players.addAll(card.getController().getOpponents());
                     return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+                } else if (hType.equals("Other")) {
+                    players.addAll(card.getController().getAllOtherPlayers());
+                    return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
                 } else if (hType.equals("Remembered")) {
                     for (final Object o : card.getRemembered()) {
                         if (o instanceof Player) {

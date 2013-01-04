@@ -7,6 +7,7 @@ A:SP$ Attach | Cost$ 4 U | ValidTgts$ Player | AILogic$ Curse
 T:Mode$ SpellCast | ValidCard$ Instant,Sorcery | ValidActivatingPlayer$ Player.EnchantedBy | Execute$ TrigCopy | TriggerZones$ Battlefield | OptionalDecider$ TriggeredCardOpponent | TriggerDescription$ Whenever enchanted player casts an instant or sorcery spell, each other player may copy that spell and may choose new targets for the copy he or she controls.
 SVar:TrigCopy:AB$ CopySpellAbility | Cost$ 0 | Defined$ TriggeredSpellAbility | Controller$ TriggeredCardOpponent
 SVar:RemAIDeck:True
+SVar:RemMultiplayer:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/curse_of_echoes.jpg
 SetInfo:DKA|Rare|http://magiccards.info/scans/en/dka/34.jpg

@@ -5,7 +5,7 @@ Text:no text
 A:SP$ Dig | Cost$ 2/U 2/U 2/U | DigNum$ 4 | ChangeNum$ 1 | SubAbility$ Dig2 | ConditionCheckSVar$ X | ConditionSVarCompare$ LEY | References$ X,Y | SpellDescription$ Look at the top five cards of your library. If you control more creatures than each other player, put two of those cards into your hand. Otherwise, put one of them into your hand. Then put the rest on the bottom of your library in any order.
 SVar:Dig2:DB$ Dig | DigNum$ 4 | ChangeNum$ 2 | ConditionCheckSVar$ X | ConditionSVarCompare$ GTY | References$ X,Y
 SVar:X:Count$Valid Creature.YouCtrl
-SVar:Y:Count$Valid Creature.YouDontCtrl
+SVar:Y:PlayerCountOther$HighestValid Creature.YouCtrl
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/advice_from_the_fae.jpg

@@ -3,7 +3,7 @@ ManaCost:1 B B B
 Types:Enchantment
 Text:no text
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigSac | TriggerDescription$ Whenever a creature you control is put into a graveyard from the battlefield, each other player sacrifices a creature.
-SVar:TrigSac:AB$Sacrifice | Cost$ 0 | Defined$ Opponent | SacValid$ Creature
+SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Player.Other | SacValid$ Creature
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/grave_pact.jpg
 SetInfo:8ED|Rare|http://magiccards.info/scans/en/8e/137.jpg

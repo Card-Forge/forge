@@ -2589,6 +2589,18 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             if (oppList.size() <= yourList.size()) {
                 return false;
             }
+        } else if (property.startsWith("withMostLife")) {
+            int highestLife = -50; // Negative base just in case a few Lich's are running around
+            Player healthiest = null;
+            for (final Player p : Singletons.getModel().getGame().getPlayers()) {
+                if (p.getLife() > highestLife) {
+                    highestLife = p.getLife();
+                    healthiest = p;
+                }
+            }
+            if (!this.equals(healthiest)) {
+                return false;
+            }
         }
 
         return true;
