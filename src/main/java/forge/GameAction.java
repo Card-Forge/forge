@@ -1754,7 +1754,7 @@ public class GameAction {
 
                     final Integer chosenAmount = GuiChoose.one("Exile how many cards?", cntChoice);
                     System.out.println("Delve for " + chosenAmount);
-                    final List<Card> choices = pc.getCardsIn(ZoneType.Graveyard);
+                    final List<Card> choices = new ArrayList<Card>(pc.getCardsIn(ZoneType.Graveyard));
                     final List<Card> chosen = new ArrayList<Card>();
                     for (int i = 0; i < chosenAmount; i++) {
                         final Card nowChosen = GuiChoose.oneOrNone("Exile which card?", choices);
