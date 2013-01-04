@@ -1,0 +1,13 @@
+Name:Shapesharer
+ManaCost:1 U
+Types:Creature Shapeshifter
+Text:no text
+PT:1/1
+S:Mode$ Continuous | EffectZone$ All | Affected$ Card.Self | CharacteristicDefining$ True | AddType$ AllCreatureTypes | Description$ Changeling (This card is every creature type at all times.)
+A:AB$ Pump | Cost$ 2 U | ValidTgts$ Creature.Shapeshifter | TgtPrompt$ Choose target Shapeshifter | AILogic$ Pump | SubAbility$ ShapesharerCopy | StackDescription$ None | SpellDescription$ Target Shapeshifter becomes a copy of target creature until your next turn.
+SVar:ShapesharerCopy:DB$ Clone | ValidTgts$ Creature | TgtPrompt$ Choose target creature to copy  | CloneTarget$ ParentTarget | Duration$ UntilYourNextTurn
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shapesharer.jpg
+SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/85.jpg
+Oracle:Changeling (This card is every creature type at all times.)\n{2}{U}: Target Shapeshifter becomes a copy of target creature until your next turn.
+End

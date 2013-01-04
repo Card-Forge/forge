@@ -2161,6 +2161,7 @@ res/cardsfolder/c/cylian_sunsinger.txt svneol=native#text/plain
 res/cardsfolder/c/cystbearer.txt svneol=native#text/plain
 res/cardsfolder/c/cytoplast_manipulator.txt -text
 res/cardsfolder/c/cytoplast_root_kin.txt -text
+res/cardsfolder/c/cytoshape.txt -text
 res/cardsfolder/c/cytospawn_shambler.txt -text
 res/cardsfolder/d/daggerback_basilisk.txt svneol=native#text/plain
 res/cardsfolder/d/daggerclaw_imp.txt svneol=native#text/plain
@@ -6448,6 +6449,7 @@ res/cardsfolder/m/mitotic_manipulation.txt svneol=native#text/plain
 res/cardsfolder/m/mitotic_slime.txt svneol=native#text/plain
 res/cardsfolder/m/mizzium_mortars.txt -text
 res/cardsfolder/m/mizzium_skin.txt -text
+res/cardsfolder/m/mizzium_transreliquat.txt -text
 res/cardsfolder/m/mnemonic_nexus.txt svneol=native#text/plain
 res/cardsfolder/m/mnemonic_sliver.txt svneol=native#text/plain
 res/cardsfolder/m/mnemonic_wall.txt svneol=native#text/plain
@@ -8102,6 +8104,7 @@ res/cardsfolder/r/rend_spirit.txt svneol=native#text/plain
 res/cardsfolder/r/rendclaw_trow.txt svneol=native#text/plain
 res/cardsfolder/r/rending_vines.txt -text
 res/cardsfolder/r/renegade_demon.txt -text
+res/cardsfolder/r/renegade_doppelganger.txt -text
 res/cardsfolder/r/renegade_troops.txt svneol=native#text/plain
 res/cardsfolder/r/renegade_warlord.txt -text
 res/cardsfolder/r/renewal.txt svneol=native#text/plain
@@ -8652,6 +8655,7 @@ res/cardsfolder/s/school_of_piranha.txt svneol=native#text/plain
 res/cardsfolder/s/school_of_the_unseen.txt svneol=native#text/plain
 res/cardsfolder/s/scion_of_darkness.txt svneol=native#text/plain
 res/cardsfolder/s/scion_of_oona.txt svneol=native#text/plain
+res/cardsfolder/s/scion_of_the_ur_dragon.txt -text
 res/cardsfolder/s/scion_of_the_wild.txt svneol=native#text/plain
 res/cardsfolder/s/scorch_the_fields.txt -text
 res/cardsfolder/s/scorched_earth.txt -text
@@ -8924,6 +8928,7 @@ res/cardsfolder/s/shape_anew.txt -text
 res/cardsfolder/s/shape_stealer.txt -text svneol=unset#text/plain
 res/cardsfolder/s/shaper_guildmage.txt svneol=native#text/plain
 res/cardsfolder/s/shaper_parasite.txt -text
+res/cardsfolder/s/shapesharer.txt -text
 res/cardsfolder/s/shapeshifter.txt svneol=native#text/plain
 res/cardsfolder/s/shapeshifters_marrow.txt -text
 res/cardsfolder/s/shard_convergence.txt svneol=native#text/plain

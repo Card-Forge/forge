@@ -7,12 +7,16 @@ import java.util.Map;
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardUtil;
+import forge.Command;
 import forge.GameActionUtil;
+import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 
@@ -172,6 +176,29 @@ public class CloneEffect extends SpellEffect {
         // check if clone is now an Aura that needs to be attached
         if (tgtCard.isAura()) {
             AttachEffect.attachAuraOnIndirectEnterBattlefield(tgtCard);
+        }
+
+        if (sa.hasParam("Duration")) {
+            final Card cloneCard = tgtCard;
+            final Command unclone = new Command() {
+                private static final long serialVersionUID = -78375985476256279L;
+
+                @Override
+                public void execute() {
+                    if (cloneCard.isCloned()) {
+                      cloneCard.switchStates(CardCharacteristicName.Cloner, CardCharacteristicName.Original);
+                      cloneCard.setState(CardCharacteristicName.Original);
+                      cloneCard.clearStates(CardCharacteristicName.Cloner);
+                    }
+                }
+            };
+
+            String duration = sa.getParam("Duration");
+            if (duration.equals("UntilEndOfTurn")) {
+                Singletons.getModel().getGame().getEndOfTurn().addUntil(unclone);
+            } else if (duration.equals("UntilYourNextTurn")) {
+                Singletons.getModel().getGame().getCleanup().addUntilYourNextTurn(host.getController(), unclone);
+            }
         }
 
     } // cloneResolve
