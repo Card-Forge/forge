@@ -1,10 +1,10 @@
-Forge Beta: 12-##-2012 ver 1.3.4
+Forge Beta: 01-04-2013 ver 1.3.4
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 (Thanks to the MAGE team for permission to use their targeting arrows.)
 (Thanks to http://www.freesound.org/browse/ for providing some sound files.)
 
-11### cards in total.
+11760 cards in total.
 
 
 Sideboards have been implemented for Human players. We currently have:
@@ -271,134 +271,146 @@ Fixes/Features:
 - Nonmana-root abilities with mana subabilities are now properly recognized as mana abilities (Metalworker)
 - Fixed draft AI not building decks.
 - Added the recent commit logs to changes.txt. Preparing for the beta build and release.
+- Preparing the changes.txt file for the next beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-
+Agetian
+ArsenalNut
+bbbbbbbbba
+Gos
+Hellfish
+Marc
+Max
+RumbleBBU
+Sloth
+Sol
+Swordshine
+Chris H
 
 
 Added the following Schemes:
 
-Introductions Are in Order
 Into the Earthen Maw
-My Undead Horde Awakens
+Introductions Are in Order
 Know Naught but Fire
+My Undead Horde Awakens
 
 
 Added the following Vanguard Avatars:
 
+Braids Conjurer Adept Avatar
+Hermit Druid Avatar
+Higure, the Still Wind Avatar
 Loxodon Hierarch Avatar
+Mayael the Anima Avatar
+Mirri, the Cursed Avatar
+Mirror Entity Avatar
 Oni of Wild Places Avatar
+Phage the Untouchable Avatar
+Platinum Angel Avatar
+Prodigal Sorcerer Avatar
+Raksha Golden Cub Avatar
+Reaper King Avatar
+Rith the Awakener Avatar
 Royal Assassin Avatar
 Rumbling Slum Avatar
+Sakashima the Impostor Avatar
 Serra Angel Avatar
 Squee, Goblin Nabob Avatar
 Stalking Tiger Avatar
-Reaper King Avatar
-Rith the Awakener Avatar
 Tesya, Orzhov Scion Avatar
-Braids Conjurer Adept Avatar
-Mirri, the Cursed Avatar
-Hermit Druid Avatar
-Higure, the Still Wind Avatar
-Raksha Golden Cub Avatar
-Phage the Untouchable Avatar
-Prodigal Sorcerer Avatar
-Mirror Entity Avatar
-Mayael the Anima Avatar
-Platinum Angel Avatar
-Sakashima the Impostor Avatar
 
 
 Added the following cards:
 
-Golden Wish
-Burning Wish
-Cunning Wish
-Living Wish
-Draining Whelk
-Fighting Chance
-Mimeofacture
-Soulgorger Orgg
+Aggravated Assault
 Artifact Possession
-Chamber of Manipulation
-Laquatus's Creativity
-New Frontiers
-Rysorian Badger
-Last Rites
-Clergy of the Holy Nimbus
-Knight of the Holy Nimbus
 Baki's Curse
-Death Wish
-Flux
-Glittering Wish
-Oath of Lim-Dul
-Unified Will
-Rhystic Circle
-Rhystic Shield
-Rites of Refusal
-Rites of Spring
-Sacred Rites
-Ring of Ma'ruf
-Spawnsire of Ulamog
-Rime Transfusion
-Colfenor's Plans
-Razorfin Abolisher
-Rites of Initiation
-Hunter of Eyeblights
-Woeleecher
-Graceful Reprieve
-Mangara's Blessing
-Kjeldoran Guard
-Phantasmal Mount
-Fiery Gambit
-Neurok Transmuter
-Overwhelming Instinct
-Total War
-Goblin Psychopath
-Impulsive Maneuvers
-Squee's Revenge
-Desperate Gambit
-Haze Frog
-Eye of the Storm
-Lammastide Weave
-Roots of Life
-Feral Contest
-Hakim, Loreweaver
-Hunt Down
-Rimehorn Aurochs
-Hellkite Charger
-Incite War
-Overblaze
-Savage Beating
-Web of Inertia
+Beacon of Destiny
+Burning Wish
 Carrion Rats
 Carrion Wurm
-Mourner's Shield
-Instigator
-Energy Vortex
-Faces of the Past
-Beacon of Destiny
-Final Punishment
+Chamber of Manipulation
 Clarion Ultimatum
-Decree of Silence
-Rings of Brighthearth
-Knollspine Dragon
-Rhystic Scrying
-Relentless Assault
-Vesuvan Shapeshifter
-The Mimeoplasm
-Aggravated Assault
-Fury of the Horde
-Seize the Day
-Waves of Aggression
+Clergy of the Holy Nimbus
+Colfenor's Plans
+Cunning Wish
 Cytoshape
+Death Wish
+Decree of Silence
+Desperate Gambit
+Draining Whelk
+Energy Vortex
+Eye of the Storm
+Faces of the Past
+Feral Contest
+Fiery Gambit
+Fighting Chance
+Final Punishment
+Flux
+Fury of the Horde
+Glittering Wish
+Goblin Psychopath
+Golden Wish
+Graceful Reprieve
+Hakim, Loreweaver
+Haze Frog
+Hellkite Charger
+Hunt Down
+Hunter of Eyeblights
+Impulsive Maneuvers
+Incite War
+Instigator
+Kjeldoran Guard
+Knight of the Holy Nimbus
+Knollspine Dragon
+Lammastide Weave
+Laquatus's Creativity
+Last Rites
+Living Wish
+Mangara's Blessing
+Mimeofacture
 Mizzium Transreliquant
+Mourner's Shield
+Neurok Transmuter
+New Frontiers
+Oath of Lim-Dul
+Overblaze
+Overwhelming Instinct
+Phantasmal Mount
+Razorfin Abolisher
+Relentless Assault
 Renegade Doppleganger
+Rhystic Circle
+Rhystic Scrying
+Rhystic Shield
+Rime Transfusion
+Rimehorn Aurochs
+Ring of Ma'ruf
+Rings of Brighthearth
+Rites of Initiation
+Rites of Refusal
+Rites of Spring
+Roots of Life
+Rysorian Badger
+Sacred Rites
+Savage Beating
 Scion of the Ur Dragon
+Seize the Day
 Shapesharer
+Soulgorger Orgg
+Spawnsire of Ulamog
+Squee's Revenge
+The Mimeoplasm
 Thousand-Year Elixir
+Total War
+Unified Will
+Vesuvan Shapeshifter
+Waves of Aggression
+Web of Inertia
+Woeleecher
 
 
 end
