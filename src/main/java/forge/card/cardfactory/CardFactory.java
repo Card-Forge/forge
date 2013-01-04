@@ -156,7 +156,6 @@ public class CardFactory {
         final Card c = Singletons.getModel().getCardFactory().copyCard(original);
 
         // change the color of the copy (eg: Fork)
-        // Currently won't work for abilities, only for spells
         final SpellAbility sourceSA = source.getFirstSpellAbility();
         if (null != sourceSA && sourceSA.hasParam("CopyIsColor")) {
             String tmp = "";
@@ -179,11 +178,14 @@ public class CardFactory {
         if(sa instanceof AbilityActivated)
         {
             copySA = ((AbilityActivated)sa).getCopy();
+            copySA.setSourceCard(original);
         }
         else
         {
             copySA = sa.copy();
+            copySA.setSourceCard(c);
         }
+        copySA.setCopied(true);
         //remove all costs
         copySA.setPayCosts(new Cost(c, "", sa.isAbility()));
         if (sa.getTarget() != null) {
@@ -192,7 +194,6 @@ public class CardFactory {
             copySA.setTarget(target);
         }
         copySA.setActivatingPlayer(controller);
-        copySA.setSourceCard(c);
 
         if (bCopyDetails) {
             c.addXManaCostPaid(original.getXManaCostPaid());

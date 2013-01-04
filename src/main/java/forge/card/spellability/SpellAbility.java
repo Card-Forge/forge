@@ -117,14 +117,25 @@ public abstract class SpellAbility implements ISpellAbility {
     private AbilityManaPart manaPart = null;
 
     private boolean undoable;
+    
+    private boolean isCopied = false;
 
     public final AbilityManaPart getManaPart() {
         return manaPart;
     }
-    public final boolean isManaAbility() {
-        return manaPart != null && isAbility();
-    }
 
+    public final boolean isManaAbility() {
+        if(manaPart != null && isAbility())
+        {
+            return true;
+        }
+        if(this.getSubAbility() != null)
+        {
+            return this.getSubAbility().isManaAbility();
+        }
+        
+        return false;
+    }
 
     public final void setManaPart(AbilityManaPart manaPart) {
         this.manaPart = manaPart;
@@ -1871,6 +1882,20 @@ public abstract class SpellAbility implements ISpellAbility {
      */
     public void setUndoable(boolean b) {
         this.undoable = b;
+    }
+
+    /**
+     * @return the isCopied
+     */
+    public boolean isCopied() {
+        return isCopied;
+    }
+
+    /**
+     * @param isCopied0 the isCopied to set
+     */
+    public void setCopied(boolean isCopied0) {
+        this.isCopied = isCopied0; 
     }
 
 

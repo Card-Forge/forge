@@ -278,7 +278,8 @@ public class MagicStack extends MyObservable {
 
             // TODO: make working triggered abilities!
             if (sp.isManaAbility() || (sp instanceof AbilityTriggered)) {
-                sp.resolve();
+                AbilityFactory.resolve(sp, false);
+                //sp.resolve();
             } else {
                 this.push(sp);
                 /*
@@ -392,7 +393,8 @@ public class MagicStack extends MyObservable {
         final ArrayList<TargetChoices> chosenTargets = sp.getAllTargetChoices();
 
         if (sp.isManaAbility()) { // Mana Abilities go straight through
-            sp.resolve();
+            AbilityFactory.resolve(sp, false);
+            //sp.resolve();
             sp.resetOnceResolved();
             game.getGameLog().add("Mana", sp.getSourceCard() + " - " + sp.getDescription(), 4);
             return;
@@ -692,7 +694,7 @@ public class MagicStack extends MyObservable {
         // Copied spells aren't cast
         // per se so triggers shouldn't
         // run for them.
-        if (!sp.getSourceCard().isCopiedSpell() && !(sp instanceof AbilityStatic)) {
+        if (!sp.getSourceCard().isCopiedSpell() && !(sp instanceof AbilityStatic) && !sp.isCopied()) {
             // Run SpellAbilityCast triggers
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Cost", sp.getPayCosts());
