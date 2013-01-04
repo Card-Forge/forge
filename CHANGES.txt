@@ -244,6 +244,33 @@ Fixes/Features:
 - Fixed CardDamageHistory crash in deckeditors
 - Renamed AF_CopySpell for clarity
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Made Karn Liberated first ability mandatory
+- Added Mandatory$ True to Parallax Nexus
+- Made Borrowing 100000 Arrows and Theft of Dreams ready for multiplayer
+- Added FollowedBy Parameter in AddPhase which is common to many of these combat + main phase adders
+- Fixed NPEs in QuestController.java when the data directory is empty.
+- added Dragon's Maze 3 letter code
+- fixed some indentation issues. changed Commander set code to match mtg-data.txt
+- Removed code that generates SVar:Rarity line. Rarity SVar is not a required field and is not actually used by Forge.
+- Added replacement effect handler for turns face up. Moved running of triggers for TurnFaceUp to turnFaceUp method in Card.java.
+- Added ChosenCard to defined card types. 
+- Added ForgetChosen parameter to ChooseCardEffect to remove chosen card from host card remembered object list.
+- Added Mandatory parameter to ChooseCardEffect.
+- restructured The Mimeoplasm to somewhat playable by AI
+- Fixed AF Charm AI.
+- Better fix for AF Charm AI.
+- Fixed Zektar Shrine Expedition.
+- Fixed Storm and Epic keywords.
+- Fixed a bug with morphs.
+- The buildDeck function will now throw an error instead of looping infinitely.
+- Adding Arcane type to Overblaze
+- Fixing apostrophe that doesn't display properly
+- added "TriggerZones$ Battlefield" to TurnsFaceUp triggers
+- Added Duration parameter Clone effect.
+- Made copied abilities actually register as copied (and not trigger Rings of Brighthearth again,for example)
+- Nonmana-root abilities with mana subabilities are now properly recognized as mana abilities (Metalworker)
+- Fixed draft AI not building decks.
+- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -281,6 +308,7 @@ Prodigal Sorcerer Avatar
 Mirror Entity Avatar
 Mayael the Anima Avatar
 Platinum Angel Avatar
+Sakashima the Impostor Avatar
 
 
 Added the following cards:
@@ -356,6 +384,21 @@ Final Punishment
 Clarion Ultimatum
 Decree of Silence
 Rings of Brighthearth
+Knollspine Dragon
+Rhystic Scrying
+Relentless Assault
+Vesuvan Shapeshifter
+The Mimeoplasm
+Aggravated Assault
+Fury of the Horde
+Seize the Day
+Waves of Aggression
+Cytoshape
+Mizzium Transreliquant
+Renegade Doppleganger
+Scion of the Ur Dragon
+Shapesharer
+Thousand-Year Elixir
 
 
 end
