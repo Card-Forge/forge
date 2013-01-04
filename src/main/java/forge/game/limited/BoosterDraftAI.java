@@ -114,6 +114,8 @@ public class BoosterDraftAI {
         if (canAddMoreColors)
             deckCols.addColorsOf(bestPick);
         
+        this.deck.get(player).add(bestPick);
+        
         return bestPick;
     }
 
