@@ -3,7 +3,7 @@ ManaCost:2 GU
 Types:Instant
 Text:no text
 A:SP$ Animate | Cost$ 2 GU | ValidTgts$ Creature | TgtPrompt$ Select target creature | Power$ 1 | Toughness$ 1 | RemoveAllAbilities$ True | Colors$ Green | OverwriteColors$ True | Types$ Snake | RemoveCreatureTypes$ True | SubAbility$ DBDraw | SpellDescription$ Target creature loses all abilities and becomes a 1/1 green Snake until end of turn. Draw a card.
-SVar:DBDraw:DB$Draw | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:DBDraw:DB$Draw | NumCards$ 1
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/snakeform.jpg
