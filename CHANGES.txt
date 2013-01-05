@@ -55,7 +55,22 @@ Some people use the Windows application 7zip. This utility can be found at http:
 
 Fixes/Features:
 
-
+- Cleared out the changes.txt file, now ready for new material.
+- More cards ready for multiplayer
+- Added distinct card information to PerSetTracking.py
+- Added Extort keyword
+- Fixed Delve.
+- Added TriggerDescription to Extort.
+- Valakut was unbanned in Modern in October
+- Fix description in Martyr of Frost
+- Added an extra word
+- Fixing triggers reliant on timing for cards like Earthbind and Valakut. (Doesn't effect triggers that target being a touch odd)
+- Added Planeswalker Type Domri
+- Fixing Spell Description on Snakeform
+- Added more precons by Xitax and Lexusex.
+- Fixed Grave Betrayal
+- Removed a duplicate precon.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -75,7 +90,24 @@ Added the following Vanguard Avatars:
 
 Added the following cards:
 
+Mirrorweave
+Petals of Insight
 
+
+Added the following new Gatecrash cards to the Gatecrash branch. These cards are not yet available in game use.:
+
+Alms Beast
+Drakewing Krasis
+Treasury Thrull
+Domri Rade
+Boros Guildgate
+Dimir Guildgate
+Gruul Guildgate
+Orzhov Guildgate
+Simic Guildgate
+Lazav, Dimir Mastermind
+Rubblehulk
+Obzedat, Ghost Council
 
 
 end
