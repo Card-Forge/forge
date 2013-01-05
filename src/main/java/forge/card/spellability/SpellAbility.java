@@ -125,16 +125,28 @@ public abstract class SpellAbility implements ISpellAbility {
     }
 
     public final boolean isManaAbility() {
-        if(manaPart != null && isAbility())
+        SpellAbility tail = this;
+        boolean manaProducing = false;
+        if(getRestrictions() != null)
         {
-            return true;
+            if(getRestrictions().getPlaneswalker()) 
+            {
+                return false; //Loyalty ability, not a mana ability.
+            }
         }
-        if(this.getSubAbility() != null)
-        {
-            return this.getSubAbility().isManaAbility();
+        while(tail != null) {
+            if(tail.getTarget() != null) {
+                return false; //Targeted ability,not a mana ability.
+            }
+            if(tail.getManaPart() != null)
+            {
+                manaProducing = true; //Can add mana to a players mana pool, possible mana ability.
+            }            
+            
+            tail = tail.getSubAbility();
         }
         
-        return false;
+        return manaProducing;
     }
 
     public final void setManaPart(AbilityManaPart manaPart) {

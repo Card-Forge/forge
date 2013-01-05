@@ -82,8 +82,16 @@ public class InputPayManaCostUtil {
 
         for (SpellAbility ma : card.getManaAbility()) {
             ma.setActivatingPlayer(Singletons.getControl().getPlayer());
-            AbilityManaPart m = ma.getManaPart();
-            if (!ma.canPlay()) {
+            AbilityManaPart m = null;
+            SpellAbility tail = ma;
+            while(m == null && tail != null)
+            {
+                m = tail.getManaPart();
+                tail = tail.getSubAbility();
+            }
+            if(m == null) {
+                continue;
+            } else if (!ma.canPlay()) {
                 continue;
             } else if (!InputPayManaCostUtil.canMake(ma, cneeded.toString())) {
                 continue;
@@ -191,9 +199,15 @@ public class InputPayManaCostUtil {
             }
             chosen = GuiChoose.one("Choose mana ability", abilities);
         }
+        
+        SpellAbility subchosen = chosen;
+        while(subchosen.getManaPart() == null)
+        {
+            subchosen = subchosen.getSubAbility();
+        }
 
         // save off color needed for use by any mana and reflected mana
-        chosen.getManaPart().setExpressChoice(colorsNeeded);
+        subchosen.getManaPart().setExpressChoice(colorsNeeded);
 
         Singletons.getModel().getGame().getAction().playSpellAbility(chosen);
 

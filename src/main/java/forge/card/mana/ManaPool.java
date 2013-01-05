@@ -511,9 +511,17 @@ public class ManaPool {
 
         final List<SpellAbility> paidAbs = sa.getPayingManaAbilities();
         final List<Mana> manaPaid = sa.getPayingMana();
+        
+        SpellAbility tail = ma;
+        AbilityManaPart abManaPart = null;
+        while(abManaPart == null && tail != null)
+        {
+            abManaPart = tail.getManaPart();
+            tail = tail.getSubAbility();
+        }
 
         paidAbs.add(ma); // assumes some part on the mana produced by the ability will get used
-        for (final Mana mana : ma.getManaPart().getLastProduced()) {
+        for (final Mana mana : abManaPart.getLastProduced()) {
             if (manaCost.isNeeded(mana)) {
                 manaCost.payMana(mana);
                 manaPaid.add(mana);
