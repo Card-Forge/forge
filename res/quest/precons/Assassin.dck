@@ -1,0 +1,41 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Assassin
+Description=Send in a swarm of small, black creatures backed up with creature destruction and discard effects to put a hit on the opposition and keep them on the run.
+Deck Type=constructed
+Set=UDS
+Image=assassin.jpg
+[main]
+1 Mantis Engine|UDS
+16 Swamp|6ED
+1 Body Snatcher|UDS
+1 Bone Shredder|ULG
+2 Disease Carriers|UDS
+2 Looming Shade|USG
+2 Nightshade Seer|UDS
+2 Order of Yawgmoth|USG
+1 Plague Dogs|UDS
+4 Ravenous Rats|UDS
+1 Sanguine Guard|USG
+2 Slinking Skirge|UDS
+2 Squirming Mass|UDS
+1 Attrition|UDS
+1 Despondency|USG
+1 Dying Wail|UDS
+1 Engineered Plague|ULG
+1 Festering Wound|UDS
+2 Sicken|USG
+2 Dark Ritual|USG
+2 Scent of Nightshade|UDS
+4 Polluted Mire|USG
+1 Spawning Pool|ULG
+2 Duress|USG
+1 Eradicate|UDS
+1 Ostracize|ULG
+1 Soul Feast|UDS
+2 Unnerve|USG
+[sideboard]

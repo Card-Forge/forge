@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Trounce-O-Matic
+Description=Introducing the "Trounce-O-Matic" deck! It slices, it dices, it minces... your opponents. If you love win-win situations, this is your kind of deck. Its cheap creatures start out strong and only get stronger when you reach threshold.
+Deck Type=constructed
+Set=ODY
+Image=trounce-o-matic.jpg
+[main]
+2 Careful Study|ODY
+2 Cephalid Looter|ODY
+2 Crashing Centaur|ODY
+1 Deluge|ODY
+2 Diligent Farmhand|ODY
+13 Forest|ODY
+9 Island|ODY
+1 Ivy Elemental|ODY
+2 Krosan Avenger|ODY
+2 Metamorphic Wurm|ODY
+2 Muscle Burst|ODY
+2 Nimble Mongoose|ODY
+1 Overrun|ODY
+2 Peek|ODY
+2 Predict|ODY
+2 Repel|ODY
+1 Roar of the Wurm|ODY
+1 Seafloor Debris|ODY
+1 Seton's Desire|ODY
+2 Springing Tiger|ODY
+1 Stone-Tongue Basilisk|ODY
+1 Sylvan Might|ODY
+1 Timberland Ruins|ODY
+1 Twigwalker|ODY
+2 Werebear|ODY
+2 Wild Mongrel|ODY
+[sideboard]

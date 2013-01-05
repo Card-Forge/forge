@@ -1,0 +1,35 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Elvish Rage
+Description=No spells? No problem! Smash your opponent senseless with your overwhelming horde of Elves. Every card in the "Elvish Rage" deck is either a forest or an Elf, so you'll be putting Elves into play quickly and attacking relentlessly until your opponent is history.
+Deck Type=constructed
+Set=LGN
+Image=elvish_rage.jpg
+[main]
+1 Elvish Pioneer|ONS
+1 Elvish Scrapper|ONS
+2 Wirewood Channeler|LGN
+1 Elvish Pathcutter|ONS
+1 Wellwisher|ONS
+2 Everglove Courier|ONS
+3 Defiant Elf|LGN
+1 Heedless One|ONS
+2 Wirewood Elf|ONS
+1 Birchlore Rangers|ONS
+2 Taunting Elf|ONS
+1 Bloodline Shaman|ONS
+1 Elvish Warrior|ONS
+2 Elven Riders|ONS
+25 Forest|ONS
+3 Patron of the Wild|LGN
+2 Gempalm Strider|LGN
+1 Elvish Soultiller|LGN
+1 Tribal Forcemage|LGN
+3 Stonewood Invoker|LGN
+2 Wirewood Hivemaster|LGN
+2 Timberwatch Elf|LGN
+[sideboard]

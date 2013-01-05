@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Selesnya Surge
+Description=Unite together behind the banner of Selesnya, and take command of an army that adds to its ranks with every step. This deck centers around the Selesnya guild's populate mechanic, which allows you to make a copy of any creature token you control. That means your first order of business is getting a token onto the battlefield as quickly as possible.
+Deck Type=constructed
+Set=RTR
+Image=selesnya_surge.jpg
+[main]
+1 Arbor Elf|M13
+1 Rootborn Defenses|RTR
+1 Wayfaring Temple|RTR
+2 Eyes in the Skies|RTR
+2 Selesnya Keyrune|RTR
+1 Coursers' Accord|RTR
+1 Centaur Healer|RTR
+3 Seller of Songbirds|RTR
+2 Call of the Conclave|RTR
+2 Chorus of Might|RTR
+1 Brushstrider|RTR
+1 Axebane Stag|RTR
+2 Centaur's Herald|RTR
+2 Savage Surge|RTR
+1 Vitu-Ghazi Guildmage|RTR
+1 Phantom General|RTR
+1 Grove of the Guardian|RTR
+1 Selesnya Guildgate|RTR
+1 Healer of the Pride|M13
+2 Bountiful Harvest|M13
+3 Centaur Courser|M13
+1 Druid's Deliverance|RTR
+2 Trostani's Judgment|RTR
+1 Risen Sanctuary|RTR
+1 Heroes' Reunion|RTR
+12 Forest|RTR
+11 Plains|RTR
+[sideboard]

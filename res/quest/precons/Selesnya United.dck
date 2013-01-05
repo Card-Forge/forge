@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Selesnya United
+Description=The "Selesnya United" deck generates wave upon wave of creatures to drown your opponent under an ocean of Saprolings and their mighty friends! Token-making cards like Fists of Ironwood, Selesnya Evangel, and Scatter the Seeds can create a frenzy of Saprolings in no time. The convoke ability then lets you tap these creepy fungus monsters to help pay for gigantic creatures like Siege Wurm or crushing spells like Overwhelm.
+Deck Type=constructed
+Set=RAV
+Image=selesnya_united.jpg
+[main]
+2 Caregiver|RAV
+2 Centaur Safeguard|RAV
+2 Conclave Phalanx|RAV
+1 Conclave's Blessing|RAV
+1 Dowsing Shaman|RAV
+1 Dryad's Caress|RAV
+2 Elvish Skysweeper|RAV
+4 Fists of Ironwood|RAV
+11 Forest|RAV
+3 Gather Courage|RAV
+2 Nullmage Shepherd|RAV
+1 Overwhelm|RAV
+10 Plains|RAV
+2 Root-Kin Ally|RAV
+2 Sandsower|RAV
+2 Scatter the Seeds|RAV
+1 Scion of the Wild|RAV
+2 Selesnya Evangel|RAV
+1 Selesnya Guildmage|RAV
+2 Selesnya Sanctuary|RAV
+3 Siege Wurm|RAV
+1 Tolsimir Wolfblood|RAV
+1 Vitu-Ghazi, the City-Tree|RAV
+1 Watchwolf|RAV
+[sideboard]

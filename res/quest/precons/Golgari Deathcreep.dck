@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Golgari Deathcreep
+Description=With the "Golgari Deathcreep" deck, death isn't where life ends—it's where it begins. Your graveyard will be your greatest resource while playing this deck. Why settle for what might be on top of your library when you can instead pick the best dredge card in your graveyard each turn?
+Deck Type=constructed
+Set=RAV
+Image=golgari_deathcreep.jpg
+[main]
+2 Darkblast|RAV
+2 Drooling Groodion|RAV
+2 Elves of Deep Shadow|RAV
+1 Elvish Skysweeper|RAV
+11 Forest|RAV
+2 Golgari Brownscale|RAV
+1 Golgari Grave-Troll|RAV
+1 Golgari Guildmage|RAV
+1 Golgari Rot Farm|RAV
+2 Golgari Rotwurm|RAV
+3 Greater Mossdog|RAV
+2 Infectious Host|RAV
+2 Last Gasp|RAV
+1 Moldervine Cloak|RAV
+1 Necromantic Thirst|RAV
+2 Putrefy|RAV
+2 Recollect|RAV
+1 Rolling Spoil|RAV
+1 Savra, Queen of the Golgari|RAV
+2 Shambling Shell|RAV
+2 Stinkweed Imp|RAV
+1 Svogthos, the Restless Tomb|RAV
+11 Swamp|RAV
+1 Thoughtpicker Witch|RAV
+1 Vigor Mortis|RAV
+2 Woodwraith Strangler|RAV
+[sideboard]

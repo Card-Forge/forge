@@ -1,0 +1,30 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Army of Justice
+Description=White magic is all about taking control of combat, and that's exactly what the "Army of Justice" deck lets you do. You can lock your opponent's biggest creatures out of the battle entirely, and then pick off the leftover smaller creatures that dare to fight you. Your cheap creatures let you strike early, before your opponent's defenses are up, and then your Angels can finish the game with a powerful air attack.
+Deck Type=constructed
+Set=9ED
+Image=army_of_justice.jpg
+[main]
+3 Angel of Mercy|9ED
+1 Angel's Feather|9ED
+1 Ballista Squad|9ED
+1 Chastise|9ED
+3 Crossbow Infantry|9ED
+1 Glorious Anthem|9ED
+1 Infantry Veteran|9ED
+2 Master Decoy|9ED
+1 Mending Hands|9ED
+2 Pacifism|9ED
+1 Phyrexian Hulk|9ED
+16 Plains|9ED
+1 Righteousness|9ED
+1 Skyhunter Prowler|9ED
+2 Suntail Hawk|9ED
+1 Venerable Monk|9ED
+2 Veteran Cavalier|9ED
+[sideboard]

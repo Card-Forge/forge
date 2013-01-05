@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Pummel
+Description=The bigger they come, the harder they fall on your opponents. That's the basic idea of the "Pummel" deck, with some of the most powerful Prophecy brutes waiting for thumpin' to happen.
+Deck Type=constructed
+Set=PCY
+Image=pummel.jpg
+[main]
+2 Deepwood Wolverine|MMQ
+2 Vine Trellis|MMQ
+1 Silverglade Elemental|MMQ
+1 Tranquility|MMQ
+1 Invigorate|MMQ
+2 Hickory Woodlot|MMQ
+2 Hunted Wumpus|MMQ
+1 Lumbering Satyr|MMQ
+20 Forest|MMQ
+1 Stampede Driver|NMS
+2 Blastoderm|NMS
+1 Treetop Bracers|NMS
+1 Seal of Strength|NMS
+2 Animate Land|NMS
+1 Skyshroud Claim|NMS
+1 Vintara Elephant|PCY
+2 Spore Frog|PCY
+2 Darba|PCY
+3 Thresher Beast|PCY
+1 Jolrael's Favor|PCY
+2 Wild Might|PCY
+2 Pygmy Razorback|PCY
+1 Spitting Spider|PCY
+2 Living Terrain|PCY
+2 Snag|PCY
+1 Avatar of Might|PCY
+1 Vitalizing Wind|PCY
+[sideboard]

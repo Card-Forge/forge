@@ -1,0 +1,32 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Sliver Shivers
+Description=They're back! It's been a few years, but Slivers make their long-awaited return in the Legions set, complete with some cool new abilities. The "Sliver Shivers" deck isn't the fastest deck on the planet, but what it lacks in speed it makes up for in strategy and great mid-game strength.
+Deck Type=constructed
+Set=LGN
+Image=sliver_shivers.jpg
+[main]
+7 Forest|ONS
+5 Island|ONS
+9 Plains|ONS
+1 Brood Sliver|LGN
+1 Essence Sliver|LGN
+3 Mistform Dreamer|ONS
+4 Plated Sliver|LGN
+4 Quick Sliver|LGN
+1 Root Sliver|LGN
+3 Shifting Sliver|LGN
+3 Ward Sliver|LGN
+1 Crown of Vigor|ONS
+4 Pacifism|ONS
+2 Akroma's Blessing|ONS
+2 Mage's Guile|ONS
+2 Tribal Unity|ONS
+2 Lonely Sandbar|ONS
+4 Secluded Steppe|ONS
+2 Explosive Vegetation|ONS
+[sideboard]

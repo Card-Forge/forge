@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=The Spikes
+Description="The Spikes" deck introduces new creatures that sling +1/+1 counters from card to card, giving a player more control over the battlefield. As a starting point for more sophisticated decks using Spike creatures, this green and red deck is sure to be popular around gaming tables.
+Deck Type=constructed
+Set=STH
+Image=the_spikes.jpg
+[main]
+1 Bayou Dragonfly|TMP
+1 Canopy Spider|TMP
+1 Elven Rite|STH
+1 Fanning the Flames|STH
+12 Forest|TMP
+2 Heartstone|STH
+1 Hermit Druid|STH
+4 Kindle|TMP
+1 Lowland Basilisk|STH
+9 Mountain|TMP
+2 Pincher Beetles|TMP
+2 Rampant Growth|TMP
+2 Shock|STH
+4 Skyshroud Elf|TMP
+1 Spike Breeder|STH
+2 Spike Colony|STH
+4 Spike Drone|TMP
+2 Spike Feeder|STH
+2 Spike Soldier|STH
+3 Spike Worker|STH
+1 Tempting Licid|STH
+1 Tranquility|TMP
+1 Verdant Touch|STH
+[sideboard]

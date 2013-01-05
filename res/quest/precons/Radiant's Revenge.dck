@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Radiant's Revenge
+Description=Before Urza can complete the famed ship Weatherlight, the planeswalker must face the new ruler of Serra's realm, an archangel hell-bent on revenge. "Radiant's Revenge" is a time bomb that explodes with artifact and opportunity spells.
+Deck Type=constructed
+Set=ULG
+Image=radiants_revenge.jpg
+[main]
+1 Catalog|USG
+1 Disenchant|USG
+2 Dragon Blood|USG
+1 Drifting Meadow|USG
+1 Erase|ULG
+1 Fog Bank|USG
+12 Island|USG
+2 Miscalculation|ULG
+1 Mobile Fort|USG
+1 Mother of Runes|ULG
+2 Opal Champion|ULG
+2 Opportunity|ULG
+1 Pacifism|USG
+2 Path of Peace|USG
+11 Plains|USG
+1 Power Sink|USG
+1 Radiant's Dragoons|ULG
+3 Radiant's Judgment|ULG
+1 Raven Familiar|ULG
+2 Remote Isle|USG
+1 Ring of Gix|ULG
+2 Sanctum Custodian|USG
+2 Sustainer of the Realm|ULG
+1 Thornwind Faeries|ULG
+2 Ticking Gnomes|ULG
+1 Urza's Blueprints|ULG
+2 Vigilant Drake|ULG
+[sideboard]

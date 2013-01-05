@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Kami Reborn
+Description=The spirits of Kamigawa practice their own form of magic, and the "Kami Reborn" deck puts it at your fingertips. Many of the creatures have "spiritcraft" abilities that do something whenever you play a Spirit or Arcane spell. For example, Soilshaper turns a land into a 3/3 creature until end of turn and Thief of Hope steals 1 life from your opponent. Of course, all but a handful of your spells are Spirits or Arcane.
+Deck Type=constructed
+Set=CHK
+Image=kami_reborn.jpg
+[main]
+2 Kodama's Reach|CHK
+2 Burr Grafter|CHK
+2 Hana Kami|CHK
+2 Thief of Hope|CHK
+2 Kami of Lunacy|CHK
+2 Scuttling Death|CHK
+2 Gibbering Kami|CHK
+2 Pull Under|CHK
+2 Venerable Kumo|CHK
+12 Swamp|CHK
+12 Forest|CHK
+2 Swallowing Plague|CHK
+1 Dance of Shadows|CHK
+1 Honden of Night's Reach|CHK
+1 Devouring Greed|CHK
+2 Soilshaper|CHK
+1 Honden of Life's Web|CHK
+2 Kami of the Hunt|CHK
+1 Iname, Death Aspect|CHK
+2 Ashen-Skin Zubera|CHK
+2 Dripping-Tongue Zubera|CHK
+1 Long-Forgotten Gohei|CHK
+2 Kodama's Might|CHK
+[sideboard]

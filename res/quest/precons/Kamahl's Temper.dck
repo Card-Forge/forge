@@ -1,0 +1,31 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Kamahl's Temper
+Description=Patience is no virtue. With the pit fighter Kamahl and a horde of temper-challenged "haste" creatures at your command, you'll scorch your way to victory before your enemy even finds the snooze button. Attack and burn anything that stands in your way. Why wait? 
+Deck Type=constructed
+Set=10E
+Image=kamahls_temper.jpg
+[main]
+1 Beacon of Destruction|10E
+1 Blaze|10E
+2 Bloodrock Cyclops|10E
+2 Bogardan Firefiend|10E
+1 Dragon's Claw|10E
+1 Furnace Whelp|10E
+2 Incinerate|10E
+1 Kamahl, Pit Fighter|10E
+2 Lightning Elemental|10E
+17 Mountain|10E
+1 Phyrexian Vault|10E
+1 Prodigal Pyromancer|10E
+1 Raging Goblin|10E
+1 Shock|10E
+2 Spitting Earth|10E
+1 Threaten|10E
+2 Thundering Giant|10E
+1 Viashino Sandscout|10E
+[sideboard]

@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Sleeper
+Description=This mono white deck exploits the many sleeping enchantments in Urza's Saga that will awaken and transform into powerful creatures. 
+Deck Type=constructed
+Set=USG
+Image=sleeper.jpg
+[main]
+3 Angelic Page|USG
+1 Barrin's Codex|USG
+4 Brilliant Halo|USG
+2 Clear|USG
+1 Disciple of Grace|USG
+1 Disciple of Law|USG
+1 Disenchant|USG
+2 Dragon Blood|USG
+4 Drifting Meadow|USG
+1 Endoskeleton|USG
+2 Humble|USG
+1 Monk Idealist|USG
+2 Monk Realist|USG
+2 Opal Caryatid|USG
+3 Opal Gargoyle|USG
+1 Opal Titan|USG
+2 Pacifism|USG
+3 Pegasus Charger|USG
+18 Plains|USG
+1 Sanctum Custodian|USG
+1 Serra's Embrace|USG
+2 Songstitcher|USG
+1 Voice of Grace|USG
+1 Waylay|USG
+[sideboard]

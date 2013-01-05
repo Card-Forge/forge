@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Rituals of Rebirth
+Description=Some view death as a door into another world. The “Rituals of Rebirth” deck views death as a revolving door that leads right back onto the battlefield!
+Deck Type=constructed
+Set=PLC
+Image=rituals_of_rebirth.jpg
+[main]
+1 Sengir Autocrat|TSB
+1 Wall of Roots|TSB
+2 Search for Tomorrow|TSP
+2 Havenwood Wurm|TSP
+2 Greenseeker|TSP
+1 Twisted Abomination|TSB
+1 Resurrection|TSB
+2 Icatian Crier|TSP
+1 Spike Feeder|TSB
+2 Jedit's Dragoons|TSP
+3 Dread Return|TSP
+2 Terramorphic Expanse|TSP
+7 Swamp|TSP
+4 Plains|TSP
+11 Forest|TSP
+2 Rebuff the Wicked|PLC
+1 Bog Serpent|PLC
+2 Harmonize|PLC
+3 Fa'adiyah Seer|PLC
+2 Essence Warden|PLC
+3 Evolution Charm|PLC
+1 Teneb, the Harvester|PLC
+1 Jedit Ojanen of Efrava|PLC
+3 Phantasmagorian|PLC
+[sideboard]

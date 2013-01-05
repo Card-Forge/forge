@@ -1,0 +1,34 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Evincar's Tyranny
+Description=The throne of power is not for the weak. It takes a strong mind and an even stronger stomach to dispense such darkness, spell after spell. Summon the tyrannical evincar Crovax himself to crush your enemy under the weight of your sinister minions. 
+Deck Type=constructed
+Set=10E
+Image=evincars_tyranny.jpg
+[main]
+1 Ascendant Evincar|10E
+1 Assassinate|10E
+1 Bottle Gnomes|10E
+1 Consume Spirit|10E
+1 Cruel Edict|10E
+1 Demon's Horn|10E
+1 Diabolic Tutor|10E
+1 Dross Crocodile|10E
+1 Drudge Skeletons|10E
+1 Essence Drain|10E
+1 Gravedigger|10E
+1 Looming Shade|10E
+1 Mass of Ghouls|10E
+2 Mind Rot|10E
+1 Mortivore|10E
+2 Severed Legion|10E
+17 Swamp|10E
+1 Terror|10E
+1 Thrull Surgeon|10E
+1 Unholy Strength|10E
+2 Vampire Bats|10E
+[sideboard]

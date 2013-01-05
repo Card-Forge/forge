@@ -1,0 +1,26 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Expulsion
+Description=The "Expulsion" deck is all about making your opponent discard cards. Your plan is to use your discard spells and abilities to cripple your opponents-they can't play what they can't hold on to!
+Deck Type=constructed
+Set=8ED
+Image=expulsion.jpg
+[main]
+2 Abyssal Specter|8ED
+1 Coercion|8ED
+2 Dark Banishing|8ED
+2 Deathgazer|8ED
+1 Disrupting Scepter|8ED
+2 Dusk Imp|8ED
+1 Larceny|8ED
+3 Maggot Carrier|8ED
+2 Megrim|8ED
+4 Ravenous Rats|8ED
+1 Sever Soul|8ED
+2 Severed Legion|8ED
+17 Swamp|8ED
+[sideboard]

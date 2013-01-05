@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Azorius Advance
+Description=The Azorius aren't the usual tedious, droning bureaucrats. They take a more "activist" approach. Start the game off with a few threats like Concordia Pegasus, Soulsworn Spirit, or Stealer of Secrets, then capitalize on the detain mechanic to ensure that your opponent's threats never get in the way of your attack.
+Deck Type=constructed
+Set=RTR
+Image=azorius_advance.jpg
+[main]
+2 Azorius Keyrune|RTR
+2 Vassal Soul|RTR
+1 Dramatic Rescue|RTR
+1 Righteous Authority|RTR
+2 Concordia Pegasus|RTR
+2 Arrest|RTR
+2 Bazaar Krovod|RTR
+1 Archon of the Triumvirate|RTR
+2 Trained Caracal|RTR
+1 Angel's Mercy|M13
+2 Battleflight Eagle|M13
+1 Inaction Injunction|RTR
+1 Lyev Skyknight|RTR
+2 Stealer of Secrets|RTR
+1 Swift Justice|RTR
+2 Show of Valor|M13
+3 Silvercoat Lion|M13
+1 Tablet of the Guilds|RTR
+1 Soulsworn Spirit|RTR
+1 New Prahv Guildmage|RTR
+1 Azorius Justiciar|RTR
+1 Azorius Guildgate|RTR
+2 Azorius Arrester|RTR
+1 Skyline Predator|RTR
+12 Island|RTR
+12 Plains|RTR
+[sideboard]

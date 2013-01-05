@@ -1,0 +1,34 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=The Swarm
+Description="The Swarm" is a Tempest green theme deck featuring elves.
+Set=TMP
+Image=the_swarm.jpg
+[main]
+1 Aluren|TMP
+1 Anoint|TMP
+1 Disenchant|TMP
+1 Elven Warhounds|TMP
+1 Elvish Fury|TMP
+14 Forest|TMP
+1 Krakilin|TMP
+3 Master Decoy|TMP
+4 Muscle Sliver|TMP
+1 Needle Storm|TMP
+2 Overrun|TMP
+3 Pacifism|TMP
+3 Pincher Beetles|TMP
+7 Plains|TMP
+2 Ranger en-Vec|TMP
+1 Recycle|TMP
+3 Rootwalla|TMP
+3 Skyshroud Elf|TMP
+1 Soltari Crusader|TMP
+2 Soltari Trooper|TMP
+3 Trained Armodon|TMP
+2 Vec Townships|TMP
+[sideboard]

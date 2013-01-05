@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Izzet Ingenuity
+Description=The mad geniuses of the Izzet League are known for their brilliant innovation—and catastrophic experimentation. The "Izzet Ingenuity" deck takes advantage of both. When you win, you win big. Harness the genius of the Izzet League, and immolate your opponents with a flurry of arcane power.
+Deck Type=constructed
+Set=RTR
+Image=izzet_ingenuity.jpg
+[main]
+1 Chandra's Fury|M13
+2 Izzet Keyrune|RTR
+2 Electrickery|RTR
+2 Goblin Electromancer|RTR
+1 Thoughtflare|RTR
+1 Teleportal|RTR
+1 Blustersquall|RTR
+1 Mizzium Mortars|RTR
+1 Tenement Crasher|RTR
+1 Hypersonic Dragon|RTR
+1 Wild Guess|M13
+2 Krenko's Command|M13
+3 Cobblebrute|RTR
+1 Downsize|RTR
+1 Pursuit of Flight|RTR
+2 Guttersnipe|RTR
+1 Explosive Impact|RTR
+3 Runewing|RTR
+1 Nivix Guildmage|RTR
+2 Goblin Rally|RTR
+2 Annihilating Fire|RTR
+1 Izzet Guildgate|RTR
+1 Welkin Tern|M13
+2 Blistercoil Weird|RTR
+12 Island|RTR
+12 Mountain|RTR
+[sideboard]

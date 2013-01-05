@@ -1,0 +1,30 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Cho Manno's Resolve
+Description=Let your enemies' aggression be their own undoing. You'll parry every strike, neutralize every creature, and roadblock every assault in your foe's arsenal, then win by a well-aimed stroke. Remember Cho-Manno's motto: "The first principle of war is to be the last to die."
+Deck Type=constructed
+Set=10E
+Image=cho_mannos_resolve.jpg
+[main]
+1 Ancestor's Chosen|10E
+2 Angel of Mercy|10E
+1 Angel's Feather|10E
+2 Benalish Knight|10E
+1 Cho-Manno, Revolutionary|10E
+1 Condemn|10E
+1 Ghost Warden|10E
+1 Icy Manipulator|10E
+2 Loxodon Mystic|10E
+2 Pacifism|10E
+1 Pariah|10E
+17 Plains|10E
+1 Serra's Embrace|10E
+2 Skyhunter Patrol|10E
+1 Venerable Monk|10E
+2 Wild Griffin|10E
+2 Youthful Knight|10E
+[sideboard]

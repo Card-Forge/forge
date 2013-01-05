@@ -1,0 +1,34 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Bomber
+Description=Fly the friendly skies? Your opponent will think twice about that after facing the "Bomber" deck. You'll take control of the game with tricky blue spells and Wizards, and then your big flying creatures will really deliver a beating. You won't always attack much in the beginning of the game, but by the end, you'll be on top of the world. 
+Deck Type=constructed
+Set=7ED
+Image=bomber.jpg
+[main]
+1 Air Elemental|7ED
+1 Ancestral Memories|7ED
+2 Boomerang|7ED
+1 Confiscate|7ED
+1 Coral Merfolk|7ED
+2 Counterspell|7ED
+1 Daring Apprentice|7ED
+1 Fighting Drake|7ED
+1 Force Spike|7ED
+1 Glacial Wall|7ED
+1 Horned Turtle|7ED
+1 Inspiration|7ED
+17 Island|7ED
+1 Merfolk Looter|7ED
+1 Merfolk of the Pearl Trident|7ED
+1 Prodigal Sorcerer|7ED
+1 Sage Owl|7ED
+1 Thieving Magpie|7ED
+1 Unsummon|7ED
+1 Wall of Air|7ED
+2 Wind Drake|7ED
+[sideboard]

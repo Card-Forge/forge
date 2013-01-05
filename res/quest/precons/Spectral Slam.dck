@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Spectral Slam
+Description=Do you hate losing your creatures in combat? Does the thought of a single direct damage spell sweeping away the troops you spent so long building up keep you awake at night? Then the Judgment set has the creatures for you! Meet the Phantoms, a new race of creatures with built-in damage prevention abilities. Their ghostly powers will have your opponents fleeing in fear.
+Deck Type=constructed
+Set=JUD
+Image=spectral_slam.jpg
+[main]
+1 Battlewise Aven|JUD
+2 Benevolent Bodyguard|JUD
+2 Blessed Orator|ODY
+2 Elephant Guide|JUD
+1 Exoskeletal Armor|JUD
+1 Forcemage Advocate|JUD
+12 Forest|ODY
+1 Guided Strike|JUD
+2 Hallowed Healer|ODY
+2 Ironshell Beetle|JUD
+1 Krosan Verge|JUD
+1 Mirari's Wake|JUD
+1 Nantuko Monastery|JUD
+1 Patrol Hound|ODY
+2 Phantom Centaur|JUD
+2 Phantom Flock|JUD
+1 Phantom Nantuko|JUD
+4 Phantom Nomad|JUD
+3 Phantom Tiger|JUD
+12 Plains|ODY
+2 Second Thoughts|ODY
+2 Seton's Desire|ODY
+1 Spirit Flare|TOR
+1 Strength of Isolation|TOR
+[sideboard]

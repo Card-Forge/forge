@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Fate Blaster
+Description=The "Fate Blaster" deck is designed to let you get ahead of yourself. That’s because you’ll have your head in the future, molding fate to your whims. 
+Deck Type=constructed
+Set=FUT
+Image=fate_blaster.jpg
+[main]
+1 Dandan|TSB
+1 Uthden Troll|TSB
+2 Barbed Shocker|TSP
+2 Sage of Epityr|TSP
+14 Island|TSP
+11 Mountain|TSP
+1 Frozen AEther|PLC
+3 Cryptic Annelid|FUT
+3 Blind Phantasm|FUT
+2 Mystic Speculation|FUT
+2 Riddle of Lightning|FUT
+2 Vedalken AEthermage|FUT
+2 Spin into Myth|FUT
+1 Foresee|FUT
+1 Boldwyr Intimidator|FUT
+1 Fatal Attraction|FUT
+2 Emberwilde Augur|FUT
+2 Aven Augur|FUT
+1 Shivan Meteor|PLC
+2 Stingscourger|PLC
+1 Magus of the Future|FUT
+2 Venser's Diffusion|FUT
+1 Shapeshifter's Marrow|FUT
+[sideboard]

@@ -1,0 +1,39 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Azorius Ascendant
+Description=With the Azorius, you have the law on your side. The proud armada of white and blue fliers contained in the “Azorius Ascendant” deck will soar over the battlefield right into your opponent’s face. Meanwhile, your opponent’s attackers will be bogged down in your defensive web. Winning should be a mere formality. 
+Deck Type=constructed
+Set=DIS
+Image=azorius_ascendant.jpg
+[main]
+1 Faith's Fetters|RAV
+3 Tidewater Minion|RAV
+1 To Arms!|GPT
+1 Halcyon Glaze|RAV
+1 Zephyr Spirit|RAV
+2 Benevolent Ancestor|RAV
+9 Island|RAV
+12 Plains|RAV
+1 Sinstriker's Will|GPT
+1 Azorius Guildmage|DIS
+2 Minister of Impediments|DIS
+2 Azorius Chancery|DIS
+2 Azorius First-Wing|DIS
+2 Sky Hussar|DIS
+1 Steeling Stance|DIS
+1 Prahv, Spires of Order|DIS
+1 Palliation Accord|DIS
+2 Mistral Charger|DIS
+2 Ocular Halo|DIS
+2 Plumes of Peace|DIS
+1 Paladin of Prahv|DIS
+3 Soulsworn Jury|DIS
+1 Isperia the Inscrutable|DIS
+2 Stoic Ephemera|DIS
+3 Beacon Hawk|DIS
+1 Wakestone Gargoyle|DIS
+[sideboard]

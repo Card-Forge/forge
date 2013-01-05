@@ -1,0 +1,42 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Golgari Growth
+Description=The Golgari don't discriminate based on paltry factors like whether a creature is alive. Any warm—or cold—body will do the job. That's why the scavenge mechanic is so powerful: when you put that card's power back on the battlefield in the form of +1/+1 counters, it's like the creature never died at all!
+Deck Type=constructed
+Set=RTR
+Image=golgari_growth.jpg
+[main]
+1 Serpent's Gift|M13
+1 Dreg Mangler|RTR
+1 Corpsejack Menace|RTR
+2 Slitherhead|RTR
+1 Sluiceway Scorpion|RTR
+1 Gobbling Ooze|RTR
+2 Golgari Keyrune|RTR
+1 Veilborn Ghoul|M13
+1 Murder|M13
+1 Disentomb|M13
+3 Walking Corpse|M13
+1 Stonefare Crocodile|RTR
+2 Drudge Beetle|RTR
+1 Acidic Slime|M13
+2 Daggerdrome Imp|RTR
+1 Korozda Guildmage|RTR
+1 Slum Reaper|RTR
+1 Treasured Find|RTR
+2 Launch Party|RTR
+1 Wild Beastmaster|RTR
+2 Korozda Monitor|RTR
+1 Golgari Guildgate|RTR
+1 Grisly Salvage|RTR
+1 Rites of Reaping|RTR
+1 Terrus Wurm|RTR
+1 Aerial Predation|RTR
+2 Golgari Longlegs|RTR
+12 Forest|RTR
+12 Swamp|RTR
+[sideboard]

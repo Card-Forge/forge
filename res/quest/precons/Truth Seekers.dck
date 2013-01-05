@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Truth Seekers
+Description=With the "Truth Seekers" deck you'll be loving life—it's packed with spells and abilities that'll raise your life total to the skies. The rest of the deck is filled with Spirits, and they have some nifty tricks up their sleeves. Many have "spiritcraft" abilities, which means they give you a benefit whenever you play another Spirit or Arcane spell.
+Deck Type=constructed
+Set=SOK
+Image=truth_seekers.jpg
+[main]
+1 Shinen of Life's Roar|SOK
+2 Haru-Onna|SOK
+3 Ghost-Lit Redeemer|SOK
+2 Briarknit Kami|SOK
+2 Elder Pine of Jukai|SOK
+1 Shinen of Stars' Light|SOK
+2 Spiritual Visit|SOK
+1 Eiganjo Free-Riders|SOK
+1 Gnarled Mass|BOK
+1 Terashi's Grasp|BOK
+2 Vital Surge|BOK
+1 Bounteous Kirin|SOK
+11 Plains|CHK
+12 Forest|CHK
+1 Honden of Cleansing Fire|CHK
+1 Honden of Life's Web|CHK
+1 Tranquil Garden|CHK
+2 Silent-Chant Zubera|CHK
+2 Dripping-Tongue Zubera|CHK
+1 Kodama's Might|CHK
+1 Kami of the Honored Dead|BOK
+1 Nikko-Onna|SOK
+2 Moonwing Moth|SOK
+1 Dosan's Oldest Chant|SOK
+2 Torii Watchward|SOK
+1 Rune-Tail, Kitsune Ascendant|SOK
+2 Nightsoil Kami|SOK
+[sideboard]

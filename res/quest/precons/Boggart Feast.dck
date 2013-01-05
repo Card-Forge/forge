@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Boggart Feast
+Description=When playing the “Boggart Feast” deck, you're running a raucous warren of expendable, accident-prone Goblins. Enjoy the sadistic delight of offing your own creatures for fun and profit, since that's what Facevaulter, Tar Pitcher, and Fodder Launch do.
+Deck Type=constructed
+Set=LRW
+Image=boggart_feast.jpg
+[main]
+2 Boggart Harbinger|LRW
+2 Boggart Shenanigans|LRW
+2 Ghostly Changeling|LRW
+1 Tar Pitcher|LRW
+2 Tarfire|LRW
+2 Marsh Flitter|LRW
+1 Mad Auntie|LRW
+1 Squeaking Pie Sneak|LRW
+2 Mudbutton Torchrunner|LRW
+2 Lowland Oaf|LRW
+1 Boggart Mob|LRW
+2 Shimmering Grotto|LRW
+2 Hornet Harasser|LRW
+2 Boggart Birth Rite|LRW
+3 Facevaulter|LRW
+1 Goatnapper|LRW
+12 Swamp|LRW
+10 Mountain|LRW
+2 Warren Pilferers|LRW
+3 Adder-Staff Boggart|LRW
+1 Hoarder's Greed|LRW
+2 Exiled Boggart|LRW
+1 Spiderwig Boggart|LRW
+1 Fodder Launch|LRW
+[sideboard]

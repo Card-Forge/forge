@@ -1,0 +1,42 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Rakdos Raid
+Description=With the "Rakdos Raid" deck, you'll rein in the chaos of the Rakdos horde, and revel in the carnage of your enemy's downfall. At the core of the deck are creatures with the unleash ability. A creature with unleash can enter the battlefield with a +1/+1 counter on it—if it gives up the idea of playing defense. Get ready to start attacking your opponent and hit hard and fast.
+Deck Type=constructed
+Set=RTR
+Image=rakdos_raid.jpg
+[main]
+3 Tormented Soul|M13
+1 Spawn of Rix Maadi|RTR
+1 Sewer Shambler|RTR
+1 Auger Spree|RTR
+2 Rakdos Shred-Freak|RTR
+2 Rakdos Cackler|RTR
+2 Rakdos Keyrune|RTR
+2 Crippling Blight|M13
+2 Canyon Minotaur|M13
+1 Deviant Glee|RTR
+1 Mind Rot|RTR
+1 Shrieking Affliction|RTR
+1 Cryptborn Horror|RTR
+1 Rix Maadi Guildmage|RTR
+1 Bloodfray Giant|RTR
+2 Gore-House Chainwalker|RTR
+1 Minotaur Aggressor|RTR
+1 Rakdos Guildgate|RTR
+1 Carnival Hellsteed|RTR
+2 Zombie Goliath|M13
+1 Ravenous Rats|M13
+1 Blood Reckoning|M13
+1 Cower in Fear|M13
+1 Hellhole Flailer|RTR
+1 Bellows Lizard|RTR
+1 Assassin's Strike|RTR
+1 Traitorous Instinct|RTR
+12 Mountain|RTR
+12 Swamp|RTR
+[sideboard]

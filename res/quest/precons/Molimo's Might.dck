@@ -1,0 +1,31 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Molimo's Might
+Description=The "Molimo’s Might" deck starts off a little slowly, but it finishes with a wallop. Early in the game, get as many Forests into play as possible. Rampant Growth and Civic Wayfinder are great ways to find more. Once you’ve got a bunch of lands out, you can play creatures that are just plain bigger than your opponent’s creatures. Half a dozen of them have a power of 5 or more!
+Deck Type=constructed
+Set=10E
+Image=molimos_might.jpg
+[main]
+2 Blanchwood Armor|10E
+2 Canopy Spider|10E
+2 Civic Wayfinder|10E
+2 Commune with Nature|10E
+1 Craw Wurm|10E
+1 Enormous Baloth|10E
+16 Forest|10E
+1 Giant Growth|10E
+1 Hurricane|10E
+1 Kavu Climber|10E
+1 Mantis Engine|10E
+1 Molimo, Maro-Sorcerer|10E
+1 Overrun|10E
+2 Rampant Growth|10E
+2 Rootwalla|10E
+2 Spined Wurm|10E
+1 Stampeding Wildebeests|10E
+1 Wurm's Tooth|10E
+[sideboard]

@@ -1,0 +1,40 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Tombstone
+Description=Blue/black/white is a powerful combination in this reanimator deck. Cycling allows you to get the cards you need when you need them!
+Deck Type=constructed
+Set=USG
+Image=tombstone.jpg
+[main]
+1 Sicken|USG
+1 Exhume|USG
+3 Pendrell Drake|USG
+3 Disenchant|USG
+1 Abyssal Horror|USG
+1 Phyrexian Ghoul|USG
+1 Stern Proctor|USG
+2 Humble|USG
+1 Turnabout|USG
+1 Somnophore|USG
+2 Power Sink|USG
+2 Drifting Meadow|USG
+2 Remote Isle|USG
+2 Polluted Mire|USG
+1 Rescind|USG
+1 Sandbar Merfolk|USG
+1 Expunge|USG
+3 Plains|USG
+9 Island|USG
+9 Swamp|USG
+1 Wizard Mentor|USG
+3 Sandbar Serpent|USG
+2 Catalog|USG
+1 Confiscate|USG
+3 Diabolic Servitude|USG
+2 Victimize|USG
+1 Despondency|USG
+[sideboard]

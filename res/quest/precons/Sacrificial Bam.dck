@@ -1,0 +1,37 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Sacrificial Bam
+Description=The "Sacrificial Bam" deck appeals to your self-destructive side - it encourages you to smash your own artifacts. The deck is filled with artifacts that sacrifice themselves for some cool effect, cards that get very happy when you feed them artifacts, and even ways to get those abused artifacts back from the graveyard.
+Deck Type=constructed
+Set=MRD
+Image=sacrificial_bam.jpg
+[main]
+2 Talisman of Indulgence|MRD
+2 Krark-Clan Grunt|MRD
+2 Leaden Myr|MRD
+3 Nim Replica|MRD
+2 Iron Myr|MRD
+3 Goblin Replica|MRD
+2 Necrogen Spellbomb|MRD
+4 Vault of Whispers|MRD
+4 Great Furnace|MRD
+2 Atog|MRD
+2 Myr Retriever|MRD
+1 Dross Scorpion|MRD
+1 Megatog|MRD
+1 Pentavus|MRD
+2 Pyrite Spellbomb|MRD
+2 Rust Elemental|MRD
+2 Cathodion|MRD
+8 Mountain|MRD
+7 Swamp|MRD
+2 Irradiate|MRD
+3 Disciple of the Vault|MRD
+1 Skeleton Shard|MRD
+1 Shrapnel Blast|MRD
+1 Nuisance Engine|MRD
+[sideboard]

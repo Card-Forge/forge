@@ -1,0 +1,30 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Infestation
+Description=You can describe the "Infestation" deck in four words: Goblins, Goblins, Goblins, and Goblins. Of the decks's sixteen creatures, twelve of them are Goblins. You even get the Goblin King! How do you win with "Infestation"? Overrun your opponents with Goblins. While your opponent tries to fend off your horde, you can use your instants and sorceries to blow things up. 
+Deck Type=constructed
+Set=AVR
+Image=infestation.jpg
+[main]
+1 Blaze|7ED
+1 Fire Elemental|7ED
+2 Goblin Chariot|7ED
+2 Goblin Digging Team|7ED
+2 Goblin Gardener|7ED
+1 Goblin Glider|7ED
+1 Goblin King|7ED
+1 Goblin Matron|7ED
+2 Goblin Raider|7ED
+1 Lightning Blast|7ED
+16 Mountain|7ED
+1 Patagia Golem|7ED
+2 Pillage|7ED
+2 Raging Goblin|7ED
+2 Shock|7ED
+2 Spitting Earth|7ED
+1 Trained Orgg|7ED
+[sideboard]

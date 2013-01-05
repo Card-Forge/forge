@@ -1,0 +1,28 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Speed Scorch
+Description=The "Speed Scorch" deck is chock-full of everyone's favorite little red creatures. All but one of the deck's creatures are Goblins, and the last creature is the Goblin King! Your mission is clear: overrun your opponent with Goblins. While your opponent tries to fend off your horde, you can use your instants and sorceries to blow things up.
+Deck Type=constructed
+Set=8ED
+Image=speed_scorch.jpg
+[main]
+1 Blaze|8ED
+1 Demolish|8ED
+1 Enrage|8ED
+1 Fodder Cannon|8ED
+4 Goblin Chariot|8ED
+1 Goblin Glider|8ED
+1 Goblin King|8ED
+4 Goblin Raider|8ED
+1 Guerrilla Tactics|8ED
+1 Lightning Blast|8ED
+1 Mogg Sentry|8ED
+17 Mountain|8ED
+4 Raging Goblin|8ED
+1 Shock|8ED
+1 Volcanic Hammer|8ED
+[sideboard]

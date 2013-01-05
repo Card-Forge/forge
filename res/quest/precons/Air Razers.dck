@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Air Razers
+Description=The "Air Razers" deck has a simple philosophy: Whatever it can't fly over, it burns out of the way. The deck comes equipped with fliers, fliers, and more fliers, plus a healthy amount of red direct damage. This deck wins quickly and viciously.
+Deck Type=constructed
+Set=JUD
+Image=air_razers.jpg
+[main]
+2 Skywing Aven|TOR
+1 Aven Windreader|ODY
+2 Churning Eddy|TOR
+1 Chainflinger|ODY
+2 Barbarian Lunatic|ODY
+3 Lava Dart|JUD
+2 Flash of Insight|JUD
+2 Shower of Coals|ODY
+1 Scalpelexis|JUD
+1 Concentrate|ODY
+12 Island|ODY
+12 Mountain|ODY
+2 Aven Fisher|ODY
+2 Fiery Temper|TOR
+1 Wonder|JUD
+1 Violent Eruption|TOR
+2 Compulsion|TOR
+2 Barbarian Bully|JUD
+2 Wormfang Turtle|JUD
+1 Worldgorger Dragon|JUD
+2 Hapless Researcher|JUD
+2 Dwarven Scorcher|JUD
+2 Swelter|JUD
+[sideboard]

@@ -1,0 +1,38 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Master Blaster
+Description=The point of the "Master Blaster" deck is to blow things up. Well, that's not the whole point. It's also about cards that are really tough to deal with. In other words, the "Master Blaster" deck tries to destroy as much as it can while making it as difficult as possible for opponents to slog through its powerful threats.
+Deck Type=constructed
+Set=DST
+Image=master_blaster.jpg
+[main]
+2 Darksteel Brute|DST
+1 Granite Shard|MRD
+2 Pyrite Spellbomb|MRD
+2 Talon of Pain|DST
+2 Duskworker|MRD
+1 Gemini Engine|DST
+1 Goblin Replica|MRD
+2 Hematite Golem|MRD
+2 Iron Myr|MRD
+3 Oxidda Golem|DST
+2 Steel Wall|MRD
+3 Darksteel Citadel|DST
+3 Great Furnace|MRD
+18 Mountain|MRD
+1 Krark-Clan Grunt|MRD
+3 Krark-Clan Stoker|DST
+1 Rustmouth Ogre|MRD
+2 Vulshok War Boar|DST
+2 Barbed Lightning|DST
+2 Electrostatic Bolt|MRD
+1 Grab the Reins|MRD
+1 Pulse of the Forge|DST
+1 Detonate|MRD
+1 Fireball|DST
+1 Molten Rain|MRD
+[sideboard]

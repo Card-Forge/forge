@@ -1,0 +1,36 @@
+[shop]
+WinsToUnlock=0
+Credits=1200
+MinDifficulty=0
+MaxDifficulty=5
+[metadata]
+Name=Little Bashers
+Description=The "Little Bashers" deck may look like a typical white weenie deck, but the Mirrodin expansion's Equipment adds a new dimension to this classic deck type. "Little Bashers" gives you plenty of weapons to make your forces more deadly. To win with this deck, you play creatures, arm them to the teeth, and press the attack.
+Deck Type=constructed
+Set=MRD
+Image=little_bashers.jpg
+[main]
+4 Leonin Den-Guard|MRD
+2 Leonin Skyhunter|MRD
+2 Auriok Transfixer|MRD
+2 Myr Adapter|MRD
+1 Viridian Longbow|MRD
+2 Gold Myr|MRD
+2 Soldier Replica|MRD
+2 Leonin Scimitar|MRD
+2 Slith Ascendant|MRD
+1 Taj-Nar Swordsmith|MRD
+1 Auriok Steelshaper|MRD
+1 Loxodon Punisher|MRD
+2 Bonesplitter|MRD
+3 Skyhunter Cub|MRD
+1 Roar of the Kha|MRD
+1 Banshee's Blade|MRD
+1 Fireshrieker|MRD
+2 Altar's Light|MRD
+22 Plains|MRD
+1 Skyhunter Patrol|MRD
+2 Arrest|MRD
+2 Auriok Bladewarden|MRD
+1 Loxodon Warhammer|MRD
+[sideboard]
