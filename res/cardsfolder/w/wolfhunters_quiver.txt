@@ -4,7 +4,7 @@ Types:Artifact Equipment
 Text:no text
 K:Equip 5
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddAbility$ Damage & DamageWerewolf | Description$ Equipped creature has "Tap: This creature deals 1 damage to target creature or player" and "Tap: This creature deals 3 damage to target Werewolf creature."
-SVar:Damage:AB$DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
+SVar:Damage:AB$DealDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 SVar:DamageWerewolf:AB$DealDamage | Cost$ T | ValidTgts$ Creature.Werewolf | TgtPrompt$ Select target Werewolf creature | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target Werewolf creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wolfhunters_quiver.jpg
 SetInfo:DKA|Uncommon|http://magiccards.info/scans/en/dka/154.jpg

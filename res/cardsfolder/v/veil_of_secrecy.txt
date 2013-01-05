@@ -2,7 +2,7 @@ Name:Veil of Secrecy
 ManaCost:1 U
 Types:Instant Arcane
 Text:no text
-A:SP$Pump | Cost$ 1 U | Tgt$ TgtC | KW$ Shroud & HIDDEN Unblockable | SpellDescription$ Target creature gains shroud until end of turn and is unblockable this turn.
+A:SP$Pump | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ Shroud & HIDDEN Unblockable | SpellDescription$ Target creature gains shroud until end of turn and is unblockable this turn.
 K:Splice onto Arcane Return<1/Creature.Blue/blue creature>
 SVar:RemAIDeck:True
 SVar:Rarity:Common

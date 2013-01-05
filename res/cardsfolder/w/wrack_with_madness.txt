@@ -2,7 +2,7 @@ Name:Wrack with Madness
 ManaCost:3 R
 Types:Sorcery
 Text:no text
-A:SP$ DealDamage | Cost$ 3 R | Tgt$ TgtC | DamageSource$ Targeted | NumDmg$ X | SpellDescription$ Target creature deals damage to itself equal to its power.
+A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | DamageSource$ Targeted | NumDmg$ X | SpellDescription$ Target creature deals damage to itself equal to its power.
 SVar:X:Targeted$CardPower
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wrack_with_madness.jpg
