@@ -47,7 +47,7 @@ import forge.game.zone.ZoneType;
  */
 public class RegenerateAi extends SpellAiLogic {
 
-    // Ex: A:SP$Regenerate | Cost$W | Tgt$TgtC | SpellDescription$Regenerate
+    // Ex: A:SP$Regenerate | Cost$W | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$Regenerate
     // target creature.
     // http://www.slightlymagic.net/wiki/Forge_AbilityFactory#Regenerate
 

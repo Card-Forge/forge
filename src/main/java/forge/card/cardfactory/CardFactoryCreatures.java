@@ -819,7 +819,7 @@ public class CardFactoryCreatures {
                 final AbilityFactory createAb = new AbilityFactory();
                 final StringBuilder abilityBuilder = new StringBuilder("AB$Pump | Cost$ ");
                 abilityBuilder.append(theCost);
-                abilityBuilder.append(" | Tgt$ TgtC | IsCurse$ True | KW$ ");
+                abilityBuilder.append(" | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | KW$ ");
                 abilityBuilder.append(keywordBuilder.toString());
                 abilityBuilder.append(" | SpellDescription$ Target creature can't block CARDNAME this turn.");
                 final SpellAbility myAb = createAb.getAbility(abilityBuilder.toString(), card);
