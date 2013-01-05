@@ -6403,6 +6403,7 @@ res/cardsfolder/m/mirror_sigil_sergeant.txt svneol=native#text/plain
 res/cardsfolder/m/mirror_strike.txt -text
 res/cardsfolder/m/mirror_universe.txt svneol=native#text/plain
 res/cardsfolder/m/mirror_wall.txt svneol=native#text/plain
+res/cardsfolder/m/mirrorweave.txt -text
 res/cardsfolder/m/mirrorworks.txt svneol=native#text/plain
 res/cardsfolder/m/miscalculation.txt svneol=native#text/plain
 res/cardsfolder/m/mischievous_poltergeist.txt svneol=native#text/plain
@@ -7344,6 +7345,7 @@ res/cardsfolder/p/pestilence_rats.txt svneol=native#text/plain
 res/cardsfolder/p/pestilent_kathari.txt svneol=native#text/plain
 res/cardsfolder/p/pestilent_souleater.txt svneol=native#text/plain
 res/cardsfolder/p/petalmane_baku.txt -text
+res/cardsfolder/p/petals_of_insight.txt -text
 res/cardsfolder/p/petra_sphinx.txt -text
 res/cardsfolder/p/petradon.txt svneol=native#text/plain
 res/cardsfolder/p/petrahydrox.txt svneol=native#text/plain
