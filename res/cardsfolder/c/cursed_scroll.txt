@@ -4,7 +4,7 @@ Types:Artifact
 Text:no text
 A:AB$ NameCard | Cost$ 3 T | Defined$ You | SubAbility$ DBReveal | SpellDescription$ Name a card. Reveal a card at random from your hand. If it's the named card, CARDNAME deals 2 damage to target creature or player.
 SVar:DBReveal:DB$ Reveal | Random$ True | RememberRevealed$ True | Defined$ You | SubAbility$ DBDamage
-SVar:DBDamage:DB$ DealDamage | NumDmg$ 2 | Tgt$ TgtCP | ConditionDefined$ Remembered | ConditionPresent$ Card.NamedCard | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBDamage:DB$ DealDamage | NumDmg$ 2 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | ConditionDefined$ Remembered | ConditionPresent$ Card.NamedCard | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

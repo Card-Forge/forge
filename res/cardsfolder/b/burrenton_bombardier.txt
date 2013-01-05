@@ -3,7 +3,7 @@ ManaCost:2 W
 Types:Creature Kithkin Soldier
 Text:no text
 K:Flying
-A:AB$ PutCounter | Cost$ 2 W Discard<1/CARDNAME> | Tgt$ TgtC | CounterType$ P1P1 | ActivationZone$ Hand | CounterNum$ 2 | PrecostDesc$ Reinforce 2 - | SpellDescription$ Put two +1/+1 counters on target creature.
+A:AB$ PutCounter | Cost$ 2 W Discard<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | ActivationZone$ Hand | CounterNum$ 2 | PrecostDesc$ Reinforce 2 - | SpellDescription$ Put two +1/+1 counters on target creature.
 PT:2/2
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/burrenton_bombardier.jpg

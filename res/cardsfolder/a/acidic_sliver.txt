@@ -4,7 +4,7 @@ Types:Creature Sliver
 Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Damage | Description$ All Slivers have "2, Sacrifice this permanent: This permanent deals 2 damage to target creature or player."
-SVar:Damage:AB$DealDamage | Cost$ 2 Sac<1/CARDNAME> | Tgt$ TgtCP | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
+SVar:Damage:AB$DealDamage | Cost$ 2 Sac<1/CARDNAME> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
 SVar:BuffedBy:Sliver
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/acidic_sliver.jpg

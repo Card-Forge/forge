@@ -3,9 +3,9 @@ ManaCost:2 R
 Types:Instant
 Text:no text
 A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | SpellDescription$ Choose one - CARDNAME deals 3 damage to target creature;
-A:SP$ DealDamage | Cost$ 2 R | Tgt$ TgtP | NumDmg$ 3 | SpellDescription$ or CARDNAME deals 3 damage to target player.
+A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 3 | SpellDescription$ or CARDNAME deals 3 damage to target player.
 A:SP$ DealDamage | Cost$ 4 R | PrecostDesc$ Entwine | CostDesc$ 2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 3 | NonBasicSpell$ True | SpellDescription$ (Choose both if you pay the entwine cost.) | SubAbility$ DBDamage
-SVar:DBDamage:DB$DealDamage| Tgt$ TgtP | NumDmg$ 3 |
+SVar:DBDamage:DB$DealDamage| ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 3 |
 SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/barbed_lightning.jpg

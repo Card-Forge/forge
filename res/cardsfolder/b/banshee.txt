@@ -3,7 +3,7 @@ ManaCost:2 B B
 Types:Creature Spirit
 Text:no text
 PT:0/1
-A:AB$ DealDamage | Cost$ X T | Tgt$ TgtCP | NumDmg$ HalfXDown | SubAbility$ DBDamage | References$ X,HalfXDown | SpellDescription$ CARDNAME deals half X damage, rounded down, to target creature or player, and half X damage, rounded up, to you.
+A:AB$ DealDamage | Cost$ X T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ HalfXDown | SubAbility$ DBDamage | References$ X,HalfXDown | SpellDescription$ CARDNAME deals half X damage, rounded down, to target creature or player, and half X damage, rounded up, to you.
 SVar:DBDamage:DB$ DealDamage | Defined$ You | NumDmg$ HalfXUp | References$ HalfXUp 
 SVar:X:Count$xPaid
 SVar:HalfXDown:Count$xPaid/HalfDown

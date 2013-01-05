@@ -4,7 +4,7 @@ Types:Creature Human Wizard
 Text:no text
 PT:1/1
 A:AB$ Reveal | Cost$ 2 R T | Defined$ You | RevealValid$ Card.Red | AnyNumber$ True | RememberRevealed$ True | SubAbility$ DBCinderDamage | SpellDescription$ Reveal any number of red cards in your hand. CARDNAME deals X damage to target creature or player, where X is the number of cards revealed this way.
-SVar:DBCinderDamage:DB$ DealDamage | Tgt$ TgtCP | NumDmg$ X | SubAbility$ DBCinderCleanup | References$ X
+SVar:DBCinderDamage:DB$ DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | SubAbility$ DBCinderCleanup | References$ X
 SVar:X:Remembered$Amount
 SVar:DBCinderCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True

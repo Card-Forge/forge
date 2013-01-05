@@ -3,7 +3,7 @@ ManaCost:3
 Types:Artifact Creature Cleric
 Text:no text
 PT:1/3
-A:AB$ Tap | Cost$ PW T | Tgt$ TgtC | SpellDescription$ Tap target creature.
+A:AB$ Tap | Cost$ PW T | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Tap target creature.
 DeckNeeds:Color$white
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/blinding_souleater.jpg

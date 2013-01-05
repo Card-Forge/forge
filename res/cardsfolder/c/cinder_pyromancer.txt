@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Creature Elemental Shaman
 Text:no text
 PT:0/1
-A:AB$ DealDamage | Cost$ T | Tgt$ TgtP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target player.
 T:Mode$ SpellCast | ValidCard$ Card.Red | ValidActivatingPlayer$ You  | TriggerZones$ Battlefield | OptionalDecider$ You | Execute$ TrigUntap | TriggerDescription$ Whenever you cast a red spell, you may untap CARDNAME.
 SVar:TrigUntap:AB$Untap | Cost$ 0 | Defined$ Self
 SVar:Rarity:Common

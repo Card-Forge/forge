@@ -7,7 +7,7 @@ S:Mode$ Continuous | Affected$ Creature.Red+Other+YouCtrl | AddPower$ 1 | AddTou
 S:Mode$ Continuous | Affected$ Creature.White+Other+YouCtrl | AddPower$ 1 | AddToughness$ 1 | Description$ Other white creatures you control get +1/+1.
 T:Mode$ SpellCast | ValidCard$ Card.Red | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast a red spell, CARDNAME deals 3 damage to target player.
 T:Mode$ SpellCast | ValidCard$ Card.White | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigGainLife | TriggerDescription$ Whenever you cast a white spell, you gain 3 life.
-SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtP | NumDmg$ 3
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 3
 SVar:TrigGainLife:AB$GainLife | Cost$ 0 | Defined$ You | LifeAmount$ 3
 SVar:PlayMain1:TRUE
 SVar:BuffedBy:Card.Red,Card.White

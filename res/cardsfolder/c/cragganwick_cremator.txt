@@ -5,7 +5,7 @@ Text:no text
 PT:5/4
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDiscard | TriggerDescription$ When CARDNAME enters the battlefield, discard a card at random. If you discard a creature card this way, CARDNAME deals damage equal to that card's power to target player.
 SVar:TrigDiscard:AB$ Discard | Cost$ 0 | Defined$ You | NumCards$ 1 | Mode$ Random | RememberDiscarded$ True | SubAbility$ DBDmg
-SVar:DBDmg:DB$ DealDamage | Cost$ 0 | Tgt$ TgtP | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | ConditionCompare$ EQ1 | NumDmg$ X | SubAbility$ DBCleanup | References$ X
+SVar:DBDmg:DB$ DealDamage | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | ConditionDefined$ Remembered | ConditionPresent$ Card.Creature | ConditionCompare$ EQ1 | NumDmg$ X | SubAbility$ DBCleanup | References$ X
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:X:Remembered$CardPower
 SVar:Rarity:Rare
