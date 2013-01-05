@@ -4,7 +4,7 @@ Types:Creature Human Soldier
 Text:no text
 PT:1/1
 K:etbCounter:JAVELIN:1
-A:AB$ DealDamage | Cost$ T SubCounter<1/JAVELIN> | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
+A:AB$ DealDamage | Cost$ T SubCounter<1/JAVELIN> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/icatian_javelineers.jpg
 SetInfo:FEM|Common|http://magiccards.info/scans/en/fe/148.jpg|3

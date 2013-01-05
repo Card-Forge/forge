@@ -4,7 +4,7 @@ Types:Creature Goblin Warrior
 Text:no text
 PT:3/3
 A:AB$ PutCounter | Cost$ 2 R T | CounterType$ M1M1 | CounterNum$ 1 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature you control | SubAbility$ DBDamage | SpellDescription$ Put a -1/-1 counter on a creature you control: CARDNAME deals 2 damage to target creature or player.
-SVar:DBDamage:DB$DealDamage | Tgt$ TgtCP | NumDmg$ 2
+SVar:DBDamage:DB$DealDamage | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hatchet_bully.jpg
 SetInfo:EVE|Uncommon|http://magiccards.info/scans/en/eve/54.jpg

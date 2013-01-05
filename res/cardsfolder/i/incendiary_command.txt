@@ -3,7 +3,7 @@ ManaCost:3 R R
 Types:Sorcery
 Text:no text
 A:SP$ Charm | Cost$ 3 R R | Choices$ DBDamageP,DBDamageC,DBDestroy,DBDiscard | CharmNum$ 2 | SpellDescription$ Choose two - CARDNAME deals 4 damage to target player; or CARDNAME deals 2 damage to each creature; or destroy target nonbasic land; or each player discards all the cards in his or her hand, then draws that many cards.
-SVar:DBDamageP:DB$ DealDamage | Tgt$ TgtP | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target player.
+SVar:DBDamageP:DB$ DealDamage | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target player.
 SVar:DBDamageC:DB$ DamageAll | ValidCards$ Creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to each creature.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | SpellDescription$ Destroy target nonbasic land.
 SVar:DBDiscard:DB$ Discard | Defined$ You | RememberDiscarded$ True | Mode$ Hand | SubAbility$ YouDraw | SpellDescription$ Each player discards all the cards in his or her hand, then draws that many cards.

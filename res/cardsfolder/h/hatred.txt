@@ -2,7 +2,7 @@ Name:Hatred
 ManaCost:3 B B
 Types:Instant
 Text:no text
-A:SP$ Pump | Cost$ 3 B B PayLife<X> | Tgt$ TgtC | NumAtt$ ChosenX | References$ X | SpellDescription$ Target creature gets +X/+0 until end of turn.
+A:SP$ Pump | Cost$ 3 B B PayLife<X> | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ ChosenX | References$ X | SpellDescription$ Target creature gets +X/+0 until end of turn.
 SVar:X:XChoice
 #ChosenX SVar created by Cost payment
 SVar:RemAIDeck:True

@@ -5,7 +5,7 @@ Text:no text
 PT:5/5
 K:Amplify:3:Dragon
 K:Flying
-A:AB$ DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to the number of +1/+1 counters on it to target creature or player.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to the number of +1/+1 counters on it to target creature or player.
 SVar:X:Count$CardCounters.P1P1
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kilnmouth_dragon.jpg

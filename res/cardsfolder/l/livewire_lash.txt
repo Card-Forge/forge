@@ -5,7 +5,7 @@ Text:no text
 K:Equip 2
 S:Mode$ Continuous | Affected$ Card.EquippedBy | AddPower$ 2 | AddTrigger$ PumpTrigger | AddSVar$ LivewireDamage | Description$ Equipped creature gets +2/+0 and has "Whenever this creature becomes the target of a spell, this creature deals 2 damage to target creature or player."
 SVar:PumpTrigger:Mode$ BecomesTarget | SourceType$ Spell | ValidTarget$ Card.Self | Execute$ LivewireDamage | TriggerDescription$ Whenever this creature becomes the target of a spell, this creature deals 2 damage to target creature or player.
-SVar:LivewireDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtCP | NumDmg$ 2
+SVar:LivewireDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/livewire_lash.jpg
 SetInfo:SOM|Rare|http://magiccards.info/scans/en/som/172.jpg

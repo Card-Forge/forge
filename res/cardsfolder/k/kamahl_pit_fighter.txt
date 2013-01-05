@@ -4,7 +4,7 @@ Types:Legendary Creature Human Barbarian
 Text:no text
 PT:6/1
 K:Haste
-A:AB$ DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature or player.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 3 | SpellDescription$ CARDNAME deals 3 damage to target creature or player.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kamahl_pit_fighter.jpg
 SetInfo:ODY|Rare|http://magiccards.info/scans/en/od/198.jpg

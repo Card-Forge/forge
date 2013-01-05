@@ -20,7 +20,7 @@ Colors:black
 Types:Legendary Creature Spirit
 Text:no text
 PT:4/4
-A:AB$ Pump | Cost$ SubCounter<1/KI> | KW$ Fear | Tgt$ TgtC | SpellDescription$ Target creature gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
+A:AB$ Pump | Cost$ SubCounter<1/KI> | KW$ Fear | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Target creature gains fear until end of turn. (It can't be blocked except by artifact creatures and/or black creatures.)
 SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/BOK/scarmaker.jpg
 # This link may be a temporary solution and could change in the near future.
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/168.jpg

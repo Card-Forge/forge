@@ -2,7 +2,7 @@ Name:Haunting Misery
 ManaCost:1 B B
 Types:Sorcery
 Text:no text
-A:SP$ DealDamage | Cost$ 1 B B ExileFromGrave<X/Creature> | Tgt$ TgtP | NumDmg$ ChosenX | References$ X | SpellDescription$ CARDNAME deals X damage to target player.
+A:SP$ DealDamage | Cost$ 1 B B ExileFromGrave<X/Creature> | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ ChosenX | References$ X | SpellDescription$ CARDNAME deals X damage to target player.
 SVar:X:XChoice
 #ChosenX SVar created by Cost payment
 SVar:RemAIDeck:True

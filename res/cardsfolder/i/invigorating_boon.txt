@@ -3,7 +3,7 @@ ManaCost:1 G
 Types:Enchantment
 Text:no text
 T:Mode$ Cycled | ValidCard$ Card | Execute$ TrigPutCounter | TriggerZones$ Battlefield | OptionalDecider$ You | TriggerDescription$ Whenever a player cycles a card, you may put a +1/+1 counter on target creature.
-SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Tgt$ TgtC | CounterType$ P1P1 | CounterNum$ 1
+SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | CounterType$ P1P1 | CounterNum$ 1
 SVar:RemRandomDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/invigorating_boon.jpg
 SVar:Rarity:Uncommon

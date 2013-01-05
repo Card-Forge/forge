@@ -3,7 +3,7 @@ ManaCost:U R
 Types:Instant
 Text:no text
 K:Replicate U R
-A:SP$ Pump | Cost$ U R | Tgt$ TgtC | NumAtt$ 1 | KW$ Flying & First Strike | SpellDescription$ Target creature gets +1/+0 and gains flying and first strike until end of turn.
+A:SP$ Pump | Cost$ U R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | KW$ Flying & First Strike | SpellDescription$ Target creature gets +1/+0 and gains flying and first strike until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leap_of_flame.jpg
 SetInfo:GPT|Common|http://magiccards.info/scans/en/gp/121.jpg
