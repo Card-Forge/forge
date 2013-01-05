@@ -13168,6 +13168,7 @@ src/main/java/forge/card/abilityfactory/ai/LifeSetAi.java -text
 src/main/java/forge/card/abilityfactory/ai/MillAi.java -text
 src/main/java/forge/card/abilityfactory/ai/MustAttackAi.java -text
 src/main/java/forge/card/abilityfactory/ai/MustBlockAi.java -text
+src/main/java/forge/card/abilityfactory/ai/PeekAndRevealAi.java -text
 src/main/java/forge/card/abilityfactory/ai/PermanentCreatureAi.java -text
 src/main/java/forge/card/abilityfactory/ai/PermanentNoncreatureAi.java -text
 src/main/java/forge/card/abilityfactory/ai/PhasesAi.java -text
@@ -13269,6 +13270,7 @@ src/main/java/forge/card/abilityfactory/effects/ManaReflectedEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/MillEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/MustAttackEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/MustBlockEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/PeekAndRevealEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/PermanentCreatureEfect.java -text
 src/main/java/forge/card/abilityfactory/effects/PermanentNoncreatureEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/PhasesEffect.java -text
