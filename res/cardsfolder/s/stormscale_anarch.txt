@@ -3,7 +3,7 @@ ManaCost:2 R R
 Types:Creature Viashino Shaman
 Text:no text
 PT:2/2
-A:AB$ DealDamage | Cost$ 2 R Discard<1/Random> | Tgt$ TgtCP | NumDmg$ X | SpellDescription$ CARDNAME deals 2 damage to target creature or player. If the discarded card was multicolored, CARDNAME deals 4 damage to that creature or player instead.
+A:AB$ DealDamage | Cost$ 2 R Discard<1/Random> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | SpellDescription$ CARDNAME deals 2 damage to target creature or player. If the discarded card was multicolored, CARDNAME deals 4 damage to that creature or player instead.
 SVar:X:Discarded$CardMulticolor.4.2
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

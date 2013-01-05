@@ -3,7 +3,7 @@ ManaCost:3 R
 Types:Sorcery
 Text:no text
 K:Flashback 9 R
-A:SP$ DealDamage | Cost$ 3 R | Tgt$ TgtP | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target player.
+A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target player.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scorching_missile.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/219.jpg

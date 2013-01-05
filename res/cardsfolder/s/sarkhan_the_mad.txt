@@ -10,7 +10,7 @@ SVar:Y:Remembered$CardManaCost
 A:AB$ Destroy | Cost$ SubCounter<2/LOYALTY> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Sacrifice$ True | SubAbility$ DBToken | Planeswalker$ True | SpellDescription$ Target creature's controller sacrifices it, then that player puts a 5/5 red Dragon creature token with flying onto the battlefield.
 SVar:DBToken:DB$ Token | TokenAmount$ 1 | TokenName$ Dragon | TokenTypes$ Creature,Dragon | TokenOwner$ TargetedController | TokenColors$ Red | TokenPower$ 5 | TokenToughness$ 5 | TokenKeywords$ Flying 
 #for this AF, the DefinedCards$ Self is the target for Each damaging.  They EachDamage themselves.
-A:AB$ EachDamage | Cost$ SubCounter<4/LOYALTY> | ValidCards$ Dragon.Creature+YouCtrl | ValidDescription$ Dragon creature you control | NumDmg$ X | DamageDesc$ damage equal to its power | Tgt$ TgtP | Planeswalker$ True | Ultimate$ True | References$ X | SpellDescription$ Each Dragon creature you control deals damage equal to its power to target player.
+A:AB$ EachDamage | Cost$ SubCounter<4/LOYALTY> | ValidCards$ Dragon.Creature+YouCtrl | ValidDescription$ Dragon creature you control | NumDmg$ X | DamageDesc$ damage equal to its power | ValidTgts$ Player | TgtPrompt$ Select target player | Planeswalker$ True | Ultimate$ True | References$ X | SpellDescription$ Each Dragon creature you control deals damage equal to its power to target player.
 #NumDmg isn't really used here.  It is left for clarity.  The AF pulls Damage straight from "X" hardcoded.
 SVar:X:Count$CardPower
 SVar:RemAIDeck:True

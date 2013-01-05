@@ -2,8 +2,8 @@ Name:Soul Spike
 ManaCost:5 B B
 Types:Instant
 Text:no text
-A:SP$ DealDamage | Cost$ 5 B B | Tgt$ TgtCP | NumDmg$ 4 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 4 damage to target creature or player and you gain 4 life.
-A:SP$ DealDamage | Cost$ ExileFromHand<2/Card.Black> | Tgt$ TgtCP | NumDmg$ 4 | SubAbility$ DBGainLife | CostDesc$ You may exile two black cards from your hand | SpellDescription$ rather than pay CARDNAME's mana cost.
+A:SP$ DealDamage | Cost$ 5 B B | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 4 | SubAbility$ DBGainLife | SpellDescription$ CARDNAME deals 4 damage to target creature or player and you gain 4 life.
+A:SP$ DealDamage | Cost$ ExileFromHand<2/Card.Black> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 4 | SubAbility$ DBGainLife | CostDesc$ You may exile two black cards from your hand | SpellDescription$ rather than pay CARDNAME's mana cost.
 SVar:DBGainLife:DB$GainLife | Cost$ 0 | LifeAmount$ 4
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_spike.jpg

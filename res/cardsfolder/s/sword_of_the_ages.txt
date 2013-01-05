@@ -3,7 +3,7 @@ ManaCost:6
 Types:Artifact
 Text:no text
 K:CARDNAME enters the battlefield tapped.
-A:AB$ DealDamage | Cost$ T Exile<1/CARDNAME> Exile<X/Creature> | NumDmg$ Y | Tgt$ TgtCP | CostDesc$ Exile Sword of the Ages and any number of creatures you control: | References$ X,Y | SpellDescription$ CARDNAME deals X damage to target creature or player, where X is the total power of the creatures exiled this way.
+A:AB$ DealDamage | Cost$ T Exile<1/CARDNAME> Exile<X/Creature> | NumDmg$ Y | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | CostDesc$ Exile Sword of the Ages and any number of creatures you control: | References$ X,Y | SpellDescription$ CARDNAME deals X damage to target creature or player, where X is the total power of the creatures exiled this way.
 SVar:X:XChoice
 SVar:Y:Exiled$CardPower
 SVar:RemAIDeck:True

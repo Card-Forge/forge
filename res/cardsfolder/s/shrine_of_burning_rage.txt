@@ -5,7 +5,7 @@ Text:no text
 T:Mode$ SpellCast | ValidCard$ Card.Red | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAddCounter | TriggerDescription$ At the beginning of your upkeep or whenever you cast a red spell, put a charge counter on CARDNAME.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigAddCounter | Secondary$ True | TriggerDescription$ At the beginning of your upkeep or whenever you cast a red spell, put a charge counter on CARDNAME.
 SVar:TrigAddCounter:AB$PutCounter | Cost$ 0 | CounterType$ CHARGE | CounterNum$ 1
-A:AB$ DealDamage | Cost$ 3 T Sac<1/CARDNAME> | Tgt$TgtCP | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to the number of charge counters on it to target creature or player.
+A:AB$ DealDamage | Cost$ 3 T Sac<1/CARDNAME> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to the number of charge counters on it to target creature or player.
 SVar:X:Count$CardCounters.CHARGE
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shrine_of_burning_rage.jpg

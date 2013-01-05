@@ -6,7 +6,7 @@ PT:2/2
 K:Kicker R
 K:Kicker W
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked R | Execute$ TrigKicker | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked with its R kicker, it deals 2 damage to target creature or player.
-SVar:TrigKicker:DB$ DealDamage | Cost$ 0 | Tgt$ TgtCP | NumDmg$ 2
+SVar:TrigKicker:DB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self+kicked W | Execute$ TrigKicker2 | TriggerDescription$ When CARDNAME enters the battlefield, if it was kicked with its W kicker, destroy target artifact.
 SVar:TrigKicker2:DB$ Destroy | Cost$ 0 | ValidTgts$ Artifact | TgtPrompt$ Select target artifact
 SVar:PlayMain1:TRUE

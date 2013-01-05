@@ -2,7 +2,7 @@ Name:Spiraling Embers
 ManaCost:3 R
 Types:Sorcery Arcane
 Text:no text
-A:SP$ DealDamage | Cost$ 3 R | Tgt$ TgtCP | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage to target creature or player equal to the number of cards in your hand.
+A:SP$ DealDamage | Cost$ 3 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage to target creature or player equal to the number of cards in your hand.
 SVar:X:Count$InYourHand
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/spiraling_embers.jpg

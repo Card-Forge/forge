@@ -2,7 +2,7 @@ Name:Searing Touch
 ManaCost:R
 Types:Instant
 Text:no text
-A:SP$ DealDamage | Cost$ R | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
+A:SP$ DealDamage | Cost$ R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 K:Buyback 4
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/searing_touch.jpg

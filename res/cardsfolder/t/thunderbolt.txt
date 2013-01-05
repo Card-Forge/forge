@@ -2,7 +2,7 @@ Name:Thunderbolt
 ManaCost:1 R
 Types:Instant
 Text:no text
-A:SP$ DealDamage | Cost$ 1 R | Tgt$ TgtP | NumDmg$ 3 | SpellDescription$ Choose one - CARDNAME deals 3 damage to target player;
+A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 3 | SpellDescription$ Choose one - CARDNAME deals 3 damage to target player;
 A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature.withFlying | NumDmg$ 4 | SpellDescription$ or CARDNAME deals 4 damage to target creature with flying.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/thunderbolt.jpg

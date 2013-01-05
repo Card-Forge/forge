@@ -4,7 +4,7 @@ Types:Creature Kithkin Knight
 Text:no text
 PT:2/1
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigClash | TriggerDescription$ Whenever CARDNAME attacks, clash with an opponent. If you win, target creature gains double strike until end of turn.
-SVar:TrigClash:AB$Clash | Cost$ 0 | Tgt$ TgtC | WinSubAbility$ DBPump
+SVar:TrigClash:AB$Clash | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | WinSubAbility$ DBPump
 SVar:DBPump:DB$Pump | Defined$ Targeted | KW$ Double Strike
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/springjack_knight.jpg
