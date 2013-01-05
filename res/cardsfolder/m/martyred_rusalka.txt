@@ -3,7 +3,7 @@ ManaCost:W
 Types:Creature Spirit
 Text:no text
 PT:1/1
-A:AB$ Pump | Cost$ W Sac<1/Creature> | Tgt$ TgtC | KW$ HIDDEN CARDNAME can't attack. | SpellDescription$ Target creature can't attack this turn.
+A:AB$ Pump | Cost$ W Sac<1/Creature> | ValidTgts$ Creature | TgtPrompt$ Select target creature | KW$ HIDDEN CARDNAME can't attack. | SpellDescription$ Target creature can't attack this turn.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/martyred_rusalka.jpg

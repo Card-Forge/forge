@@ -2,7 +2,7 @@ Name:Mutagenic Growth
 ManaCost:PG
 Types:Instant
 Text:no text
-A:SP$ Pump | Cost$ PG | Tgt$ TgtC | NumAtt$ 2 | NumDef$ 2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
+A:SP$ Pump | Cost$ PG | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 2 | NumDef$ 2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mutagenic_growth.jpg
 SetInfo:NPH|Common|http://magiccards.info/scans/en/nph/116.jpg

@@ -2,7 +2,7 @@ Name:Prophetic Bolt
 ManaCost:3 U R
 Types:Instant
 Text:no text
-A:SP$ DealDamage | Cost$ 3 U R | Tgt$TgtCP | NumDmg$ 4 | SubAbility$ DBDig | SpellDescription$ CARDNAME deals 4 damage to target creature or player. Look at the top four cards of your library. Put one of those cards into your hand and the rest on the bottom of your library in any order.
+A:SP$ DealDamage | Cost$ 3 U R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 4 | SubAbility$ DBDig | SpellDescription$ CARDNAME deals 4 damage to target creature or player. Look at the top four cards of your library. Put one of those cards into your hand and the rest on the bottom of your library in any order.
 SVar:DBDig:DB$Dig | DigNum$ 4
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/prophetic_bolt.jpg

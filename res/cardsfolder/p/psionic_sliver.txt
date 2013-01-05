@@ -4,7 +4,7 @@ Types:Creature Sliver
 Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Sliver | AddAbility$ DamageOther | AddSVar$ DBDamageSelf | Description$ All Sliver creatues have "tap: This creature deals 2 damage to target creature or player and 3 damage to itself."
-SVar:DamageOther:AB$DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 2 | SubAbility$ DBDamageSelf | SpellDescription$ This creature deals 2 damage to target creature or player and 3 damage to itself.
+SVar:DamageOther:AB$DealDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SubAbility$ DBDamageSelf | SpellDescription$ This creature deals 2 damage to target creature or player and 3 damage to itself.
 SVar:DBDamageSelf:DB$DealDamage | NumDmg$ 3 | Defined$ Self
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/psionic_sliver.jpg

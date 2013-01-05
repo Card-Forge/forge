@@ -4,7 +4,7 @@ Types:Creature Sliver
 Text:no text
 PT:2/2
 S:Mode$ Continuous | Affected$ Sliver | AddAbility$ Discard | Description$ All Slivers have "2, Sacrifice this permanent: Target player discards a card at random. Activate this ability only any time you could cast a sorcery."
-SVar:Discard:AB$Discard | Cost$ 2 Sac<1/CARDNAME> | Tgt$ TgtP | NumCards$ 1 | Mode$ Random | SpellDescription$ Target player discards a card at random. Activate this ability only any time you could cast a sorcery.
+SVar:Discard:AB$Discard | Cost$ 2 Sac<1/CARDNAME> | ValidTgts$ Player | TgtPrompt$ Select target player | NumCards$ 1 | Mode$ Random | SpellDescription$ Target player discards a card at random. Activate this ability only any time you could cast a sorcery.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindwhip_sliver.jpg
 SetInfo:TMP|Uncommon|http://magiccards.info/scans/en/tp/39.jpg

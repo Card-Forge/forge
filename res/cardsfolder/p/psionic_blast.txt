@@ -2,7 +2,7 @@ Name:Psionic Blast
 ManaCost:2 U
 Types:Instant
 Text:no text
-A:SP$ DealDamage | Cost$ 2 U | Tgt$ TgtCP | NumDmg$ 4 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 4 damage to target creature or player and 2 damage to you.
+A:SP$ DealDamage | Cost$ 2 U | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 4 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 4 damage to target creature or player and 2 damage to you.
 SVar:DBDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 2
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/tsb/en-us/card108812.jpg

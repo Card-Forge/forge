@@ -2,7 +2,7 @@ Name:Pyromancy
 ManaCost:2 R R
 Types:Enchantment
 Text:no text
-A:AB$ DealDamage | Cost$ 3 Discard<1/Random> | Tgt$ TgtCP | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage to target creature or player equal to the converted mana cost of the discarded card.
+A:AB$ DealDamage | Cost$ 3 Discard<1/Random> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage to target creature or player equal to the converted mana cost of the discarded card.
 SVar:X:Discarded$CardManaCost
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

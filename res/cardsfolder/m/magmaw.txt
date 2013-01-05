@@ -3,7 +3,7 @@ ManaCost:3 R R
 Types:Creature Elemental
 Text:no text
 PT:4/4
-A:AB$ DealDamage | Cost$ 1 Sac<1/Permanent.nonLand/nonland permanent> | Tgt$ TgtCP | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
+A:AB$ DealDamage | Cost$ 1 Sac<1/Permanent.nonLand/nonland permanent> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to target creature or player.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/magmaw.jpg

@@ -2,7 +2,7 @@ Name:Red Sun's Zenith
 ManaCost:X R
 Types:Sorcery
 Text:no text
-A:SP$ DealDamage | Cost$ X R | Tgt$ TgtCP | NumDmg$ X | References$ X | SubAbility$ DBCurse | SpellDescription$ CARDNAME deals X damage to target creature or player. If a creature dealt damage this way would be put into a graveyard this turn, exile it instead. Shuffle CARDNAME into its owner's library.
+A:SP$ DealDamage | Cost$ X R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | SubAbility$ DBCurse | SpellDescription$ CARDNAME deals X damage to target creature or player. If a creature dealt damage this way would be put into a graveyard this turn, exile it instead. Shuffle CARDNAME into its owner's library.
 SVar:X:Count$xPaid
 SVar:DBCurse:DB$Pump | KW$ HIDDEN If CARDNAME would be put into a graveyard, exile it instead. | Defined$ Targeted | SubAbility$ DBShuffle
 SVar:DBShuffle:DB$ChangeZone | Origin$ Stack | Destination$ Library | Shuffle$ True

@@ -2,7 +2,7 @@ Name:Rekindled Flame
 ManaCost:2 R R
 Types:Sorcery
 Text:no text
-A:SP$ DealDamage | Cost$ 2 R R | Tgt$ TgtCP | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature or player.
+A:SP$ DealDamage | Cost$ 2 R R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target creature or player.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | IsPresent$ Card.YouDontCtrl | PresentZone$ Hand | PresentCompare$ EQ0 | Execute$ TrigReturn | TriggerZones$ Graveyard | TriggerDescription$ At the beginning of your upkeep, if an opponent has no cards in hand, you may return CARDNAME from your graveyard to your hand.
 SVar:TrigReturn:AB$ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Graveyard | Destination$ Hand
 SVar:Rarity:Rare

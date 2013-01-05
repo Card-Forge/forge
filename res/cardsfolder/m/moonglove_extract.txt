@@ -2,7 +2,7 @@ Name:Moonglove Extract
 ManaCost:3
 Types:Artifact
 Text:no text
-A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | Tgt$ TgtCP | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
+A:AB$ DealDamage | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/moonglove_extract.jpg
 SetInfo:LRW|Common|http://magiccards.info/scans/en/lw/258.jpg

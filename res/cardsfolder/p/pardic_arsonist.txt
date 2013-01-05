@@ -4,7 +4,7 @@ Types:Creature Human Barbarian
 Text:no text
 PT:3/3
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | Threshold$ True | TriggerDescription$ Threshold - As long as seven or more cards are in your graveyard, CARDNAME has "When CARDNAME enters the battlefield, it deals 3 damage to target creature or player."
-SVar:TrigDealDamage:AB$ DealDamage | Cost$ 0 | Tgt$ TgtCP | NumDmg$ 3
+SVar:TrigDealDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pardic_arsonist.jpg
 SetInfo:TOR|Uncommon|http://magiccards.info/scans/en/tr/105.jpg

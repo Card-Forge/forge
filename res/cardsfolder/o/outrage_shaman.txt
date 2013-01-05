@@ -4,7 +4,7 @@ Types:Creature Goblin Shaman
 Text:no text
 PT:2/2
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ Chroma - When CARDNAME enters the battlefield, it deals damage to target creature equal to the number of red mana symbols in the mana costs of permanents you control.
-SVar:TrigDealDamage:DB$DealDamage | Tgt$ TgtC | NumDmg$ X | References$ X
+SVar:TrigDealDamage:DB$DealDamage | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X
 SVar:X:Count$Chroma.R
 SVar:PlayMain1:TRUE
 SVar:Rarity:Uncommon

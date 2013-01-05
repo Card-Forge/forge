@@ -4,7 +4,7 @@ Types:Instant
 Text:no text
 A:SP$Scry | Cost$ 3 R R | ScryNum$ 3 | SubAbility$ DBReveal | SpellDescription$ Choose target creature or player. Scry 3, then reveal the top card of your library. CARDNAME deals damage equal to that card's converted mana cost to that creature or player. (To scry 3, look at the top three cards of your library, then put any number of them on the bottom of your library and the rest on top in any order.)
 SVar:DBReveal:DB$ Dig | Cost$ 0 | DigNum$ 1 | Reveal$ True | DestinationZone$ Library | LibraryPosition$ 0 | SubAbility$ DBDamage
-SVar:DBDamage:DB$ DealDamage | Cost$ 0 | Tgt$ TgtCP | NumDmg$ X | References$ X
+SVar:DBDamage:DB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X
 SVar:X:Count$TopOfLibraryCMC
 SVar:RemAIDeck:True
 SVar:Rarity:Common
