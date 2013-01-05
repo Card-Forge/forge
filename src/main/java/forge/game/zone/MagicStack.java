@@ -170,10 +170,6 @@ public class MagicStack extends MyObservable {
                         .getActivationNumberSacrifice())) {
             ability.getSourceCard().addExtrinsicKeyword("At the beginning of the end step, sacrifice CARDNAME.");
         }
-        // triggered abilities should go on the frozen stack
-        if (!ability.isTrigger()) {
-            this.frozen = false;
-        }
 
         // if the ability is a spell, but not a copied spell and its not already
         // on the stack zone, move there
@@ -183,12 +179,10 @@ public class MagicStack extends MyObservable {
                 ability.setSourceCard(game.getAction().moveToStack(source));
             }
         }
-
+        
+        // Always add the ability here and always unfreeze the stack
         this.add(ability);
-
-        if (ability.isTrigger()) {
-            this.unfreezeStack();
-        }
+        this.unfreezeStack();
     }
 
     /**
@@ -198,12 +192,16 @@ public class MagicStack extends MyObservable {
      */
     public final void unfreezeStack() {
         this.frozen = false;
-        final boolean checkState = !this.getFrozenStack().isEmpty();
+        boolean checkState = !this.getFrozenStack().isEmpty();
+        // Add all Frozen Abilities onto the stack
         while (!this.getFrozenStack().isEmpty()) {
             final SpellAbility sa = this.getFrozenStack().pop().getSpellAbility();
             this.add(sa);
         }
+        // Add all waiting triggers onto the stack
+        checkState |= Singletons.getModel().getGame().getTriggerHandler().runWaitingTriggers(false);
         if (checkState) {
+            this.chooseOrderOfSimultaneousStackEntryAll();
             game.getAction().checkStateEffects();
         }
     }

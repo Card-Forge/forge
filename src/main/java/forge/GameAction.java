@@ -1019,13 +1019,13 @@ public class GameAction {
             return;
         }
 
-        final boolean refreeze = game.getStack().isFrozen();
-        game.getStack().setFrozen(true);
-
         final JFrame frame = Singletons.getView().getFrame();
         if (!frame.isDisplayable()) {
             return;
         }
+
+        final boolean refreeze = game.getStack().isFrozen();
+        game.getStack().setFrozen(true);
 
         MatchController match = Singletons.getModel().getMatch();
         if (this.checkEndGameState(match, match.getCurrentGame())) {
@@ -1176,47 +1176,16 @@ public class GameAction {
 
             } // while it.hasNext()
 
-            checkAgain |= game.getTriggerHandler().runWaitingTriggers();
+            if (game.getTriggerHandler().runWaitingTriggers(true)) {
+                checkAgain = true;
+                // Place triggers on stack
+            }
 
             if (!checkAgain) {
                 break; // do not continue the loop
             }
 
         } // for q=0;q<2
-        /*
-        //Experiment Kraj experiment
-        List<Card> krajs = AllZoneUtil.getCardsIn(ZoneType.Battlefield).filter(new Predicate<Card>() {
-            @Override
-            public boolean addCard(Card c) {
-                return c.getName().equals("Experiment Kraj");
-            }
-        });
-        List<Card> P1P1s = AllZoneUtil.getCardsIn(ZoneType.Battlefield).filter(new Predicate<Card>() {
-            @Override
-            public boolean addCard(Card c) {
-                return c.getCounters(Counters.P1P1) > 0;
-            }
-        });
-        for(final Card kraj : krajs)
-        {
-            kraj.clearAllButFirstSpellAbility();
-            CardFactoryUtil.addAbilityFactoryAbilities(kraj);
-            for(final Card P1P1 : P1P1s)
-            {
-                if(!P1P1.equals(kraj)) {
-                    for(SpellAbility sa : P1P1.getSpellAbilities())
-                    {
-                        if(sa instanceof AbilityActivated)
-                        {
-                            AbilityActivated newSA = ((AbilityActivated)sa).getCopy();
-                            newSA.setSourceCard(kraj);
-                            kraj.addSpellAbility(newSA);
-                        }
-                    }
-                }
-            }
-        }
-        */
 
         this.handleLegendRule();
         this.handlePlaneswalkerRule();

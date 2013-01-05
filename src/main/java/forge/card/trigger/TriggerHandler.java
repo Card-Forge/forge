@@ -270,29 +270,32 @@ public class TriggerHandler {
 
         final GameState game = Singletons.getModel().getGame();
 
-        runWaitingTrigger(new TriggerWaiting(mode, runParams));
-        /* Temporarily commented out while timing kinks with some other cards are worked out
+        //runWaitingTrigger(new TriggerWaiting(mode, runParams));
+        
         if (game.getStack().isFrozen()) {
             waitingTriggers.add(new TriggerWaiting(mode, runParams));
         } else {
-            runWaitingTrigger(new TriggerWaiting(mode, runParams));
+            runWaitingTrigger(new TriggerWaiting(mode, runParams), true);
         }
-
-        */
+        // Tell auto stop to stop
     }
 
-    public final boolean runWaitingTriggers() {
+    public final boolean runWaitingTriggers(boolean runStaticEffects) {
         ArrayList<TriggerWaiting> waiting = new ArrayList<TriggerWaiting>(waitingTriggers);
         waitingTriggers.clear();
-        boolean haveWaiting = !waiting.isEmpty();
+        if (waiting.isEmpty()) {
+            return false;
+        }
+
+        boolean haveWaiting = false;
         for (TriggerWaiting wt : waiting) {
-            runWaitingTrigger(wt);
+            haveWaiting |= runWaitingTrigger(wt, runStaticEffects);
         }
 
         return haveWaiting;
     }
 
-    public final void runWaitingTrigger(TriggerWaiting wt) {
+    public final boolean runWaitingTrigger(TriggerWaiting wt, boolean runStaticEffects) {
         final TriggerType mode = wt.getMode();
         final Map<String, Object> runParams = wt.getParams();
         final GameState game = Singletons.getModel().getGame();
@@ -301,7 +304,7 @@ public class TriggerHandler {
         if (playerAP == null) {
             // This should only happen outside of games, so it's safe to just
             // abort.
-            return;
+            return false;
         }
 
         // This is done to allow the list of triggers to be modified while
@@ -322,14 +325,10 @@ public class TriggerHandler {
             }
         }
 
-        if (checkStatics) {
-            game.getAction().checkStaticAbilities();
-        } else if (runParams.containsKey("Destination")) {
+        if (runParams.containsKey("Destination")) {
             // Check static abilities when a card enters the battlefield
             String type = (String) runParams.get("Destination");
-            if (type.equals("Battlefield")) {
-                game.getAction().checkStaticAbilities();
-            }
+            checkStatics |= type.equals("Battlefield");
         }
 
         // AP
@@ -346,7 +345,7 @@ public class TriggerHandler {
         for (final Card c : allCards) {
             for (final Trigger t : c.getTriggers()) {
                 if (!t.isStatic()) {
-                    this.runSingleTrigger(t, mode, runParams);
+                    checkStatics |= this.runSingleTrigger(t, mode, runParams);
                 }
             }
         }
@@ -379,7 +378,7 @@ public class TriggerHandler {
             for (final Card c : allCards) {
                 for (final Trigger t : c.getTriggers()) {
                     if (!t.isStatic()) {
-                        this.runSingleTrigger(t, mode, runParams);
+                        checkStatics |= this.runSingleTrigger(t, mode, runParams);
                     }
                 }
             }
@@ -391,6 +390,8 @@ public class TriggerHandler {
                 }
             }
         }
+
+        return checkStatics;
     }
 
     // Checks if the conditions are right for a single trigger to go off, and

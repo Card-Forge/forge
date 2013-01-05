@@ -39,6 +39,8 @@ public class SpellAbilityRequirements {
     private CostPayment payment = null;
     private boolean isFree = false;
     private boolean skipStack = false;
+    private boolean bCasting = false;
+    private Zone fromZone = null;
     private Integer zonePosition = null;
 
     /**
@@ -65,8 +67,7 @@ public class SpellAbilityRequirements {
         this.isFree = bFree;
     }
 
-    private Zone fromZone = null;
-    private boolean bCasting = false;
+
 
     /**
      * <p>
