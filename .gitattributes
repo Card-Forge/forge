@@ -2763,6 +2763,7 @@ res/cardsfolder/d/dromars_attendant.txt svneol=native#text/plain
 res/cardsfolder/d/dromars_cavern.txt svneol=native#text/plain
 res/cardsfolder/d/dromars_charm.txt -text svneol=unset#text/plain
 res/cardsfolder/d/dromosaur.txt svneol=native#text/plain
+res/cardsfolder/d/droning_bureaucrats.txt -text
 res/cardsfolder/d/drooling_groodion.txt svneol=native#text/plain
 res/cardsfolder/d/drooling_ogre.txt svneol=native#text/plain
 res/cardsfolder/d/drop_of_honey.txt svneol=native#text/plain

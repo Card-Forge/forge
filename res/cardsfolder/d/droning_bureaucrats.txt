@@ -1,0 +1,15 @@
+Name:Droning Bureaucrats
+ManaCost:3 W
+Types:Creature Human Advisor
+Text:no text
+PT:1/4
+A:AB$ StoreSVar | Cost$ X T  | SVar$ DroningX | Type$ Count | Expression$ xPaid | SubAbility$ CreateDroningEffect | SpellDescription$ Each creature with converted mana cost X can't attack or block this turn.
+SVar:CreateDroningEffect:DB$ Effect | Name$ Droning Bureaucrats Effect | StaticAbilities$ NoCombat | References$ NoCombat | SVars$ DroningX
+SVar:NoCombat:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.cmcEQDroningX | AddHiddenKeyword$ CARDNAME can't attack or block. | Description$ Each creature with converted mana cost X can't attack or block this turn.
+SVar:X:Count$xPaid
+SVar:DroningX:Number$0
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/droning_bureaucrats.jpg
+SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/4.jpg
+Oracle:{X}, {T}: Each creature with converted mana cost X can't attack or block this turn.
+End
