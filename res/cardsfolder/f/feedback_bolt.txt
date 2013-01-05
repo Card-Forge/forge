@@ -2,7 +2,7 @@ Name:Feedback Bolt
 ManaCost:4 R
 Types:Instant
 Text:no text
-A:SP$ DealDamage | Cost$ 4 R | Tgt$ TgtP | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage to target player equal to the number of artifacts you control.
+A:SP$ DealDamage | Cost$ 4 R | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage to target player equal to the number of artifacts you control.
 SVar:X:Count$TypeYouCtrl.Artifact
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon

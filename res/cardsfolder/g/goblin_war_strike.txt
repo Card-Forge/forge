@@ -2,7 +2,7 @@ Name:Goblin War Strike
 ManaCost:R
 Types:Sorcery
 Text:no text
-A:SP$ DealDamage | Cost$ R | Tgt$ TgtP | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to the number of Goblins you control to target player.
+A:SP$ DealDamage | Cost$ R | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage equal to the number of Goblins you control to target player.
 SVar:X:Count$TypeYouCtrl.Goblin
 SVar:RemRandomDeck:True
 SVar:Rarity:Common

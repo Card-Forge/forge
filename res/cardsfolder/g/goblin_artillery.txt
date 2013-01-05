@@ -3,7 +3,7 @@ ManaCost:1 R R
 Types:Creature Goblin Warrior
 Text:no text
 PT:1/3
-A:AB$ DealDamage | Cost$ T | Tgt$ TgtCP | NumDmg$ 2 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 2 damage to target creature or player and 3 damage to you.
+A:AB$ DealDamage | Cost$ T | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SubAbility$ DBDealDamage | SpellDescription$ CARDNAME deals 2 damage to target creature or player and 3 damage to you.
 SVar:DBDealDamage:DB$DealDamage | Defined$ You | NumDmg$ 3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goblin_artillery.jpg

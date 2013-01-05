@@ -2,7 +2,7 @@ Name:Drain Life
 ManaCost:X 1 B
 Types:Sorcery
 Text:no text
-A:SP$ StoreSVar | Cost$ X 1 B | XColor$ B | Tgt$ TgtCP | SVar$ Limit | Type$ Targeted | Expression$ CardToughness | SubAbility$ StoreTgtP | ConditionDefined$ Targeted | ConditionPresent$ Card.Creature | ConditionCompare$ GE1 | SpellDescription$ CARDNAME deals X damage to target creature or player. You gain life equal to the damage dealt, but not more life than the player's life total before CARDNAME dealt damage or the creature's toughness.
+A:SP$ StoreSVar | Cost$ X 1 B | XColor$ B | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | SVar$ Limit | Type$ Targeted | Expression$ CardToughness | SubAbility$ StoreTgtP | ConditionDefined$ Targeted | ConditionPresent$ Card.Creature | ConditionCompare$ GE1 | SpellDescription$ CARDNAME deals X damage to target creature or player. You gain life equal to the damage dealt, but not more life than the player's life total before CARDNAME dealt damage or the creature's toughness.
 SVar:StoreTgtP:DB$ StoreSVar | SVar$ Limit | Type$ Count | Expression$ TargetedLifeTotal | SubAbility$ DBDamage | ConditionDefined$ Targeted | ConditionPresent$ Card.Creature | ConditionCompare$ EQ0
 SVar:DBDamage:DB$ DealDamage | Defined$ Targeted | NumDmg$ X | SubAbility$ DBGainLife | References$ X
 SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ DrainedLifeCard | References$ DrainedLifeCard

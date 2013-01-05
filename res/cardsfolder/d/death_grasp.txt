@@ -2,7 +2,7 @@ Name:Death Grasp
 ManaCost:X W B
 Types:Sorcery
 Text:no text
-A:SP$ DealDamage | Cost$ X W B | Tgt$ TgtCP | NumDmg$ X | SubAbility$ DBGainLife | References$ X | SpellDescription$ CARDNAME deals X damage to target creature or player. You gain X life.
+A:SP$ DealDamage | Cost$ X W B | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | SubAbility$ DBGainLife | References$ X | SpellDescription$ CARDNAME deals X damage to target creature or player. You gain X life.
 SVar:DBGainLife:DB$GainLife | LifeAmount$ X | References$ X
 SVar:X:Count$xPaid
 SVar:Rarity:Rare

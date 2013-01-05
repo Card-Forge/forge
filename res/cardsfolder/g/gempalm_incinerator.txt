@@ -5,7 +5,7 @@ Text:no text
 PT:2/1
 K:Cycling:1 R
 T:Mode$ Cycled | ValidCard$ Card.Self | Execute$ TrigDamage | OptionalDecider$ You | TriggerDescription$ When you cycle CARDNAME, you may have it deal X damage to target creature, where X is the number of Goblins on the battlefield.
-SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Tgt$ TgtC | NumDmg$ X | References$ X 
+SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ X | References$ X 
 SVar:X:Count$Valid Goblin
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gempalm_incinerator.jpg
 SVar:Rarity:Uncommon

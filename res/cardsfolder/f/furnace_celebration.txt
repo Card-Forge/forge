@@ -3,7 +3,7 @@ ManaCost:1 R R
 Types:Enchantment
 Text:no text
 T:Mode$ Sacrificed | ValidCard$ Permanent.Other | Execute$ TrigDealDamage | OptionalDecider$ You | TriggerZones$ Battlefield | ValidPlayer$ You | TriggerDescription$ Whenever you sacrifice another permanent, you may pay 2. If you do, CARDNAME deals 2 damage to target creature or player.
-SVar:TrigDealDamage:AB$DealDamage | Cost$ 2 | Tgt$ TgtCP | NumDmg$ 2
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 2 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/furnace_celebration.jpg

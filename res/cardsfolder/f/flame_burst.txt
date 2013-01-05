@@ -2,7 +2,7 @@ Name:Flame Burst
 ManaCost:1 R
 Types:Instant
 Text:no text
-A:SP$ DealDamage | Cost$ 1 R | Tgt$ TgtCP | NumDmg$ X | References$ X,Y | SpellDescription$ CARDNAME deals X damage to target creature or player, where X is 2 plus the number of cards named CARDNAME in all graveyards.
+A:SP$ DealDamage | Cost$ 1 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X,Y | SpellDescription$ CARDNAME deals X damage to target creature or player, where X is 2 plus the number of cards named CARDNAME in all graveyards.
 SVar:X:Count$NamedInAllYards.Flame Burst/Plus.Y
 SVar:Y:Count$NamedInAllYards.Pardic Firecat/Plus.2
 SVar:Rarity:Common

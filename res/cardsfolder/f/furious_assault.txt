@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Enchantment
 Text:no text
 T:Mode$ SpellCast | ValidCard$ Creature | ValidActivatingPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever you cast a creature spell, CARDNAME deals 1 damage to target player.
-SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtP | NumDmg$ 1
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 1
 SVar:BuffedBy:Creature
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/furious_assault.jpg

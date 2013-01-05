@@ -2,7 +2,7 @@ Name:Fires of Undeath
 ManaCost:2 R
 Types:Instant
 Text:no text
-A:SP$ DealDamage | Cost$ 2 R | Tgt$ TgtCP | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
+A:SP$ DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target creature or player.
 K:Flashback 5 B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fires_of_undeath.jpg

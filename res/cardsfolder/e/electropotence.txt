@@ -3,7 +3,7 @@ ManaCost:2 R
 Types:Enchantment
 Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ Whenever a creature enters the battlefield under your control, you may pay 2 R.  If you do, that creature deals damage equal to its power to target creature or player.
-SVar:TrigDamage:AB$DealDamage | Cost$ 2 R | Tgt$ TgtCP | DamageSource$ TriggeredCard  | NumDmg$ Damage | References$ Damage
+SVar:TrigDamage:AB$DealDamage | Cost$ 2 R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | DamageSource$ TriggeredCard  | NumDmg$ Damage | References$ Damage
 SVar:Damage:TriggeredCard$CardPower
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/electropotence.jpg

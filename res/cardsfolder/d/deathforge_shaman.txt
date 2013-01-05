@@ -5,7 +5,7 @@ Text:no text
 PT:4/3
 K:Multikicker R
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals damage to target player equal to twice the number of times it was kicked.
-SVar:TrigDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtP | NumDmg$ X | References$ X
+SVar:TrigDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ X | References$ X
 SVar:X:Count$TimesKicked/Times.2
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/Deathforge_Shaman.jpg

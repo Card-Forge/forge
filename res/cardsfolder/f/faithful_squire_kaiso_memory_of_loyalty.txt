@@ -20,7 +20,7 @@ Colors:white
 Types:Legendary Creature Spirit
 Text:no text
 PT:3/4
-A:AB$ Pump | Cost$ SubCounter<1/KI> | KW$ HIDDEN Prevent all damage that would be dealt to CARDNAME. | Tgt$ TgtC | SpellDescription$ Prevent all damage that would be dealt to target creature this turn.
+A:AB$ Pump | Cost$ SubCounter<1/KI> | KW$ HIDDEN Prevent all damage that would be dealt to CARDNAME. | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Prevent all damage that would be dealt to target creature this turn.
 SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/BOK/kaiso_memory_of_loyalty.jpg
 # This link may be a temporary solution and could change in the near future.
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/166.jpg

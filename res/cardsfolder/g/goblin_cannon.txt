@@ -2,7 +2,7 @@ Name:Goblin Cannon
 ManaCost:4
 Types:Artifact
 Text:no text
-A:AB$DealDamage | Cost$ 2 | Tgt$ TgtCP | NumDmg$ 1 | SubAbility$ DBSac | SpellDescription$ CARDNAME deals 1 damage to target creature or player. Sacrifice CARDNAME.
+A:AB$DealDamage | Cost$ 2 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 1 | SubAbility$ DBSac | SpellDescription$ CARDNAME deals 1 damage to target creature or player. Sacrifice CARDNAME.
 SVar:DBSac:DB$Sacrifice | Defined$ Self
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

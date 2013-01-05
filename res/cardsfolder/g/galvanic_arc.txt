@@ -6,7 +6,7 @@ K:Enchant creature
 A:SP$ Attach | Cost$ 2 R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ First Strike | Description$ Enchanted creature has first strike.
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDealDamage | TriggerDescription$ When CARDNAME enters the battlefield, it deals 3 damage to target creature or player.
-SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Tgt$ TgtCP | NumDmg$ 3
+SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 3
 SVar:Picture:http://www.wizards.com/global/images/magic/general/galvanic_arc.jpg
 SVar:Rarity:Common
 SetInfo:RAV|Common|http://magiccards.info/scans/en/rav/126.jpg

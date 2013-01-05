@@ -5,7 +5,7 @@ Text:no text
 PT:4/2
 K:Undying
 T:Mode$ ChangesZone | Origin$ Graveyard | Destination$ Battlefield | TriggerZones$ Battlefield | ValidCard$ Creature.YouOwn | Execute$ ReanimateDmg | TriggerDescription$ Whenever CARDNAME or another creature enters the battlefield from your graveyard, that creature deals damage equal to its power to target creature or player.
-SVar:ReanimateDmg:AB$DealDamage | Cost$ 0 | Tgt$ TgtCP | DamageSource$ TriggeredCard  | NumDmg$ Damage | References$ Damage
+SVar:ReanimateDmg:AB$DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | DamageSource$ TriggeredCard  | NumDmg$ Damage | References$ Damage
 SVar:Damage:TriggeredCard$CardPower
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/flayer_of_the_hatebound.jpg

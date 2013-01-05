@@ -5,7 +5,7 @@ Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 4 R | ValidTgts$ Creature | AILogic$ Pump
 T:Mode$ Attacks | ValidCard$ Card.AttachedBy | Execute$ TrigDamage | TriggerZones$ Battlefield | TriggerDescription$ Whenever enchanted creature attacks, it deals 2 damage to target creature or player.
-SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | Tgt$ TgtCP | DamageSource$ TriggeredAttacker | NumDmg$ 2
+SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | DamageSource$ TriggeredAttacker | NumDmg$ 2
 S:Mode$ Continuous | Affected$ Creature.AttachedBy | AddSVar$ AE
 SVar:AE:SVar:HasAttackEffect:TRUE
 SVar:Rarity:Uncommon

@@ -4,7 +4,7 @@ Types:Creature Human Wizard
 Text:no text
 PT:2/2
 A:AB$ Pump | Cost$ W U B R G | NumAtt$ +2 | NumDef$ +2 | KW$ Fear | ActivationLimit$ 1 | SubAbility$ DBPump | SpellDescription$ CARDNAME gets +2/+2 and gains fear until end of turn.
-SVar:DBPump:DB$Pump | Cost$ 0 | NumAtt$ -2 | NumDef$ -2 | Tgt$ TgtC | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn. Activate this ability only once each turn.
+SVar:DBPump:DB$Pump | Cost$ 0 | NumAtt$ -2 | NumDef$ -2 | ValidTgts$ Creature | TgtPrompt$ Select target creature | IsCurse$ True | SpellDescription$ Target creature gets -2/-2 until end of turn. Activate this ability only once each turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fleshformer.jpg
 SVar:Rarity:Uncommon
 SetInfo:CFX|Uncommon|http://magiccards.info/scans/en/cfx/45.jpg

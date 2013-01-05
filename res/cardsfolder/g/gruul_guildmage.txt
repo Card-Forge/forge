@@ -4,7 +4,7 @@ Types:Creature Human Shaman
 Text:no text
 PT:2/2
 A:AB$ Pump | Cost$ 3 G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ +2 | NumDef$ +2 | SpellDescription$ Target creature gets +2/+2 until end of turn.
-A:AB$ DealDamage | Cost$ 3 R Sac<1/Land> | Tgt$ TgtP | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target player.
+A:AB$ DealDamage | Cost$ 3 R Sac<1/Land> | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to target player.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_guildmage.jpg
 SetInfo:GPT|Uncommon|http://magiccards.info/scans/en/gp/144.jpg
