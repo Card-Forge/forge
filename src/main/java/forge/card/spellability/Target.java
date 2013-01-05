@@ -467,20 +467,7 @@ public class Target {
      * <p>
      * Constructor for Target.
      * </p>
-     * 
-     * @param src
-     *            a {@link forge.Card} object.
-     * @param parse
-     *            a {@link java.lang.String} object.
-     */
-    public Target(final Card src, final String parse) {
-        this(src, parse, "1", "1");
-    }
-
-    /**
-     * <p>
-     * Constructor for Target.
-     * </p>
+     *  DEPRECATED!!! This will be removed after 1.3.5 is released
      * 
      * @param src
      *            a {@link forge.Card} object.
@@ -491,6 +478,7 @@ public class Target {
      * @param max
      *            a {@link java.lang.String} object.
      */
+    @Deprecated
     public Target(final Card src, String parse, final String min, final String max) {
         // parse=Tgt{C}{P} - Primarily used for Pump or Damage
         // C = Creature P=Player/Planeswalker

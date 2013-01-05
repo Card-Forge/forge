@@ -174,6 +174,7 @@ public class AbilityFactory {
                 sb.append(prompt);
                 abTgt = new Target(hostC, sb.toString(), mapParams.get("ValidTgts").split(","), min, max);
             } else {
+                // This will be removed after 1.3.5 is released
                 abTgt = new Target(hostC, mapParams.get("Tgt"), min, max);
             }
 
