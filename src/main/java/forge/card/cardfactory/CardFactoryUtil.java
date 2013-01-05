@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
-import java.util.TreeMap;
 
 import com.esotericsoftware.minlog.Log;
 import com.google.common.base.Predicate;
@@ -324,6 +323,8 @@ public class CardFactoryUtil {
      * doesCreatureAttackAI.
      * </p>
      * 
+     * @param ai
+     *            the AI player
      * @param card
      *            a {@link forge.Card} object.
      * @return a boolean.
@@ -888,10 +889,6 @@ public class CardFactoryUtil {
      *            a {@link forge.Card} object.
      * @param cost
      *            a {@link forge.card.cost.Cost} object.
-     * @param a
-     *            a int.
-     * @param d
-     *            a int.
      * @return a {@link forge.card.spellability.AbilityActivated} object.
      */
     public static AbilityStatic abilityMorphUp(final Card sourceCard, final Cost cost) {
@@ -4249,6 +4246,22 @@ public class CardFactoryUtil {
             card.setSVar("ExtortOpps", abString);
             card.setSVar("DBGainLife", dbString);
             card.setSVar("AFLifeLost", "Number$0");
+        }
+
+        if (card.hasKeyword("Evolve")) {
+            final String evolveTrigger = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
+                    + "ValidCard$ Creature.powerGTEvoX+YouCtrl,Creature.toughnessGTEvoY+YouCtrl | "
+                    + "TriggerZones$ Battlefield | Execute$ EvolveCounter | Secondary$ True | "
+                    + "TriggerDescription$ Evolve (Whenever a creature enters the battlefield under your "
+                    + "control, if that creature has greater power or toughness than this creature, put a "
+                    + "+1/+1 counter on this creature.)";
+            final String abString = "AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | "
+                    + "CounterNum$ 1";
+            final Trigger parsedTrigger = TriggerHandler.parseTrigger(evolveTrigger, card, true);
+            card.addTrigger(parsedTrigger);
+            card.setSVar("EvolveCounter", abString);
+            card.setSVar("EvoX", "Count$CardPower");
+            card.setSVar("EvoY", "Count$CardToughness");
         }
 
         if (card.hasStartOfKeyword("Amplify")) {
