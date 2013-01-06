@@ -256,7 +256,6 @@ public abstract class Trigger extends TriggerReplacementBase {
 
         return true;
     }
-
     /**
      * <p>
      * requirementsCheck.
@@ -265,6 +264,19 @@ public abstract class Trigger extends TriggerReplacementBase {
      * @return a boolean.
      */
     public final boolean requirementsCheck() {
+        return this.requirementsCheck(this.getRunParams());
+    }
+
+    /**
+     * <p>
+     * requirementsCheck.
+     * </p>
+     * 
+     * @param runParams2
+     *            a {@link java.util.HashMap} object.
+     * @return a boolean.
+     */
+    public final boolean requirementsCheck(final java.util.Map<String, Object> runParams2) {
         if (this.getMapParams().containsKey("FatefulHour")) {
             if (this.getMapParams().get("FatefulHour").equals("True")
                     && !(this.getHostCard().getController().getLife() <= 5)) {
@@ -473,6 +485,22 @@ public abstract class Trigger extends TriggerReplacementBase {
             final List<Card> opp = CardUtil.getLastTurnCast("Card.YouDontCtrl", this.getHostCard());
             if (!((you.size() > 1) || (opp.size() > 1))) {
                 return false;
+            }
+        }
+
+        if (this.getMapParams().containsKey("EvolveCondition")) {
+            if (this.getMapParams().get("EvolveCondition").equals("True")) {
+                final Card moved = (Card) runParams2.get("Card");
+                if (moved == null) {
+                    final StringBuilder sb = new StringBuilder();
+                    sb.append("Trigger::requirementsCheck() - EvolveCondition condition being checked without a moved card. ");
+                    sb.append(this.getHostCard().getName());
+                    throw new RuntimeException(sb.toString());
+                }
+                if (moved.getNetAttack() <= this.getHostCard().getNetAttack()
+                        && moved.getNetDefense() <= this.getHostCard().getNetDefense()) {
+                    return false;
+                }
             }
         }
 

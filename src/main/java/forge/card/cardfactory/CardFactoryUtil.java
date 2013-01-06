@@ -4250,8 +4250,8 @@ public class CardFactoryUtil {
 
         if (card.hasKeyword("Evolve")) {
             final String evolveTrigger = "Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | "
-                    + "ValidCard$ Creature.powerGTEvoX+YouCtrl,Creature.toughnessGTEvoY+YouCtrl | "
-                    + "TriggerZones$ Battlefield | Execute$ EvolveCounter | Secondary$ True | "
+                    + " ValidCard$ Creature.YouCtrl+Other | EvolveCondition$ True | "
+                    + "TriggerZones$ Battlefield | Execute$ EvolveAddCounter | Secondary$ True | "
                     + "TriggerDescription$ Evolve (Whenever a creature enters the battlefield under your "
                     + "control, if that creature has greater power or toughness than this creature, put a "
                     + "+1/+1 counter on this creature.)";
@@ -4259,9 +4259,7 @@ public class CardFactoryUtil {
                     + "CounterNum$ 1";
             final Trigger parsedTrigger = TriggerHandler.parseTrigger(evolveTrigger, card, true);
             card.addTrigger(parsedTrigger);
-            card.setSVar("EvolveCounter", abString);
-            card.setSVar("EvoX", "Count$CardPower");
-            card.setSVar("EvoY", "Count$CardToughness");
+            card.setSVar("EvolveAddCounter", abString);
         }
 
         if (card.hasStartOfKeyword("Amplify")) {

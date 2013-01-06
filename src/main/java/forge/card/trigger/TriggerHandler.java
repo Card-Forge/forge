@@ -422,7 +422,7 @@ public class TriggerHandler {
             return false; // It's not the right phase to go off.
         }
 
-        if (!regtrig.requirementsCheck()) {
+        if (!regtrig.requirementsCheck(runParams)) {
             return false; // Conditions aren't right.
         }
         if (regtrig.getHostCard().isFaceDown() && regtrig.isIntrinsic()) {
