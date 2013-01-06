@@ -71,6 +71,31 @@ Fixes/Features:
 - Fixed Grave Betrayal
 - Removed a duplicate precon.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Small conversions of Tgt to ValidTgts
+- Corrected mana ability flagging.
+- Fixed crash when using Metalworker-likes during mana payment.
+- Added Evolve keyword
+- Converting A-C Tgt$ cards
+- Converting D-G Tgt$ cards
+- Converting H-L Tgt$ cards
+- Converting M-R Tgt$ cards
+- Converting S-U Tgt$ cards
+- Converting V-Z Tgt$ cards
+- Marking Old Targeting Scheme as deprecated. (Only used in AF.getAbility()) Will be removing it after next release.
+- merging r18843-r18961 from Trunk into GTC branch
+- Adding PeekAndReveal AF. It was simpler to create this subset of Dig than force Kinship cards to have a complex and ugly script.
+- Converted all Kinship cards to script
+- Adding MostProminentColor as a property to be used with the Invasion Djinns
+- Applying a patch that refreshes the Bazaar credit count after purchasing stuff
+- Allow OS to set location
+- Fix issue with Qasali Ambusher
+- Fixing crash for pressing OK for Murmuring Bosk and friends
+- Commenting out direct calls to resolveDrawback in ManaEffect. They are not needed after abilityfactory refactor.
+- Updated some SVars.
+- Added Limited Resources
+- Fixed Annihilator getting the wrong defender.
+- GTC: Added a parameter to Obzedat, Ghost Council
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -92,6 +117,20 @@ Added the following cards:
 
 Mirrorweave
 Petals of Insight
+Droning Bureaucrats
+Chlorophant
+Contempt
+Crag Saurian
+Decaying Soil
+Epicenter
+Kusari-Gama
+Goham Djinn
+Halam Djinn
+Ruham Djinn
+Sulam Djinn
+Zanam Djinn
+Discordant Spirit
+Erratic Mutation
 
 
 Added the following new Gatecrash cards to the Gatecrash branch. These cards are not yet available in game use.:
@@ -108,6 +147,9 @@ Simic Guildgate
 Lazav, Dimir Mastermind
 Rubblehulk
 Obzedat, Ghost Council
+Basilica Guards
+Gridlock
+Fathom Mage
 
 
 end
