@@ -1,4 +1,4 @@
- Name:Bloodchief Ascension
+Name:Bloodchief Ascension
 ManaCost:B
 Types:Enchantment
 Text:no text
