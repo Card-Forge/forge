@@ -357,6 +357,9 @@ public class ChangeZoneEffect extends SpellEffect {
 
         if (tgtCards.size() != 0) {
             for (final Card tgtC : tgtCards) {
+                if (tgt != null && tgtC.isInPlay() && !tgtC.canBeTargetedBy(sa)) {
+                    continue;
+                }
                 final StringBuilder sb = new StringBuilder();
                 sb.append("Do you want to move " + tgtC + " from " + origin + " to " + destination + "?");
                 if (player.isHuman() && optional
