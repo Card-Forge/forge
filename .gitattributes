@@ -2557,6 +2557,7 @@ res/cardsfolder/d/disciple_of_tevesh_szat.txt svneol=native#text/plain
 res/cardsfolder/d/disciple_of_the_vault.txt svneol=native#text/plain
 res/cardsfolder/d/discombobulate.txt svneol=native#text/plain
 res/cardsfolder/d/discordant_dirge.txt svneol=native#text/plain
+res/cardsfolder/d/discordant_spirit.txt -text
 res/cardsfolder/d/disease_carriers.txt svneol=native#text/plain
 res/cardsfolder/d/diseased_vermin.txt -text
 res/cardsfolder/d/disembowel.txt svneol=native#text/plain
@@ -3127,6 +3128,7 @@ res/cardsfolder/e/errant_doomsayers.txt svneol=native#text/plain
 res/cardsfolder/e/errant_ephemeron.txt svneol=native#text/plain
 res/cardsfolder/e/errantry.txt -text
 res/cardsfolder/e/erratic_explosion.txt svneol=native#text/plain
+res/cardsfolder/e/erratic_mutation.txt -text
 res/cardsfolder/e/erratic_portal.txt svneol=native#text/plain
 res/cardsfolder/e/ertai.txt -text
 res/cardsfolder/e/ertai_the_corrupted.txt svneol=native#text/plain
