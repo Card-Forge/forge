@@ -144,7 +144,6 @@ public class TokenEffect extends SpellEffect {
         readParameters(sa);
 
         String imageName = "";
-        Player controller;
         String cost = "";
         // Construct colors
         final String[] substitutedColors = Arrays.copyOf(this.tokenColors, this.tokenColors.length);
@@ -183,8 +182,6 @@ public class TokenEffect extends SpellEffect {
 
         cost = colorDesc.replace('C', '1').trim();
 
-        controller = AbilityFactory.getDefinedPlayers(host, this.tokenOwner, sa).get(0);
-
         final int finalPower = AbilityFactory.calculateAmount(host, this.tokenPower, sa);
         final int finalToughness = AbilityFactory.calculateAmount(host, this.tokenToughness, sa);
         final int finalAmount = AbilityFactory.calculateAmount(host, this.tokenAmount, sa);
@@ -198,85 +195,87 @@ public class TokenEffect extends SpellEffect {
         final String substitutedName = this.tokenName.equals("ChosenType") ? host.getChosenType() : this.tokenName;
 
         final String remember = sa.getParam("RememberTokens");
-        for (int i = 0; i < finalAmount; i++) {
-            final List<Card> tokens = CardFactoryUtil.makeToken(substitutedName, imageName, controller, cost,
-                    substitutedTypes, finalPower, finalToughness, this.tokenKeywords);
+        for (final Player controller : AbilityFactory.getDefinedPlayers(host, this.tokenOwner, sa)) {
+            for (int i = 0; i < finalAmount; i++) {
+                final List<Card> tokens = CardFactoryUtil.makeToken(substitutedName, imageName, controller, cost,
+                        substitutedTypes, finalPower, finalToughness, this.tokenKeywords);
 
-            // Grant rule changes
-            if (this.tokenHiddenKeywords != null) {
-                for (final String s : this.tokenHiddenKeywords) {
-                    for (final Card c : tokens) {
-                        c.addHiddenExtrinsicKeyword(s);
+                // Grant rule changes
+                if (this.tokenHiddenKeywords != null) {
+                    for (final String s : this.tokenHiddenKeywords) {
+                        for (final Card c : tokens) {
+                            c.addHiddenExtrinsicKeyword(s);
+                        }
                     }
                 }
-            }
 
-            // Grant abilities
-            if (this.tokenAbilities != null) {
-                final AbilityFactory af = new AbilityFactory();
-                for (final String s : this.tokenAbilities) {
-                    final String actualAbility = host.getSVar(s);
-                    for (final Card c : tokens) {
-                        final SpellAbility grantedAbility = af.getAbility(actualAbility, c);
-                        c.addSpellAbility(grantedAbility);
+                // Grant abilities
+                if (this.tokenAbilities != null) {
+                    final AbilityFactory af = new AbilityFactory();
+                    for (final String s : this.tokenAbilities) {
+                        final String actualAbility = host.getSVar(s);
+                        for (final Card c : tokens) {
+                            final SpellAbility grantedAbility = af.getAbility(actualAbility, c);
+                            c.addSpellAbility(grantedAbility);
+                        }
                     }
                 }
-            }
 
-            // Grant triggers
-            if (this.tokenTriggers != null) {
+                // Grant triggers
+                if (this.tokenTriggers != null) {
 
-                for (final String s : this.tokenTriggers) {
-                    final String actualTrigger = host.getSVar(s);
+                    for (final String s : this.tokenTriggers) {
+                        final String actualTrigger = host.getSVar(s);
 
-                    for (final Card c : tokens) {
+                        for (final Card c : tokens) {
 
-                        final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c, true);
-                        final String ability = host.getSVar(parsedTrigger.getMapParams().get("Execute"));
-                        parsedTrigger.setOverridingAbility(new AbilityFactory().getAbility(ability, c));
-                        c.addTrigger(parsedTrigger);
+                            final Trigger parsedTrigger = TriggerHandler.parseTrigger(actualTrigger, c, true);
+                            final String ability = host.getSVar(parsedTrigger.getMapParams().get("Execute"));
+                            parsedTrigger.setOverridingAbility(new AbilityFactory().getAbility(ability, c));
+                            c.addTrigger(parsedTrigger);
+                        }
                     }
                 }
-            }
 
-            // Grant SVars
-            if (this.tokenSVars != null) {
-                for (final String s : this.tokenSVars) {
-                    String actualSVar = host.getSVar(s);
-                    String name = s;
-                    if (actualSVar.startsWith("SVar")) {
-                        actualSVar = actualSVar.split("SVar:")[1];
-                        name = actualSVar.split(":")[0];
-                        actualSVar = actualSVar.split(":")[1];
-                    }
-                    for (final Card c : tokens) {
-                        c.setSVar(name, actualSVar);
-                    }
-                }
-            }
-
-            // Grant static abilities
-            if (this.tokenStaticAbilities != null) {
-                for (final String s : this.tokenStaticAbilities) {
-                    final String actualAbility = host.getSVar(s);
-                    for (final Card c : tokens) {
-                        c.addStaticAbility(actualAbility);
+                // Grant SVars
+                if (this.tokenSVars != null) {
+                    for (final String s : this.tokenSVars) {
+                        String actualSVar = host.getSVar(s);
+                        String name = s;
+                        if (actualSVar.startsWith("SVar")) {
+                            actualSVar = actualSVar.split("SVar:")[1];
+                            name = actualSVar.split(":")[0];
+                            actualSVar = actualSVar.split(":")[1];
+                        }
+                        for (final Card c : tokens) {
+                            c.setSVar(name, actualSVar);
+                        }
                     }
                 }
-            }
 
-            for (final Card c : tokens) {
-                if (this.tokenTapped) {
-                    c.setTapped(true);
+                // Grant static abilities
+                if (this.tokenStaticAbilities != null) {
+                    for (final String s : this.tokenStaticAbilities) {
+                        final String actualAbility = host.getSVar(s);
+                        for (final Card c : tokens) {
+                            c.addStaticAbility(actualAbility);
+                        }
+                    }
                 }
-                if (this.tokenAttacking) {
-                    Singletons.getModel().getGame().getCombat().addAttacker(c);
-                }
-                if (remember != null) {
-                    Singletons.getModel().getGame().getCardState(sa.getSourceCard()).addRemembered(c);
-                }
-                if (sa.getParam("RememberSource") != null) {
-                    Singletons.getModel().getGame().getCardState(c).addRemembered(host);
+
+                for (final Card c : tokens) {
+                    if (this.tokenTapped) {
+                        c.setTapped(true);
+                    }
+                    if (this.tokenAttacking) {
+                        Singletons.getModel().getGame().getCombat().addAttacker(c);
+                    }
+                    if (remember != null) {
+                        Singletons.getModel().getGame().getCardState(sa.getSourceCard()).addRemembered(c);
+                    }
+                    if (sa.getParam("RememberSource") != null) {
+                        Singletons.getModel().getGame().getCardState(c).addRemembered(host);
+                    }
                 }
             }
         }

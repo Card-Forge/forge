@@ -563,6 +563,10 @@ public class AbilityFactory {
                         }
                     }
                     return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
+                } else if (hType.equals("NonActive")) {
+                    players.addAll(Singletons.getModel().getGame().getPlayers());
+                    players.remove(Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn());
+                    return CardFactoryUtil.playerXCount(players, calcX[1], card) * multiplier;
                 }
             } else if (calcX[0].startsWith("Remembered")) {
                 // Add whole Remembered list to handlePaid
