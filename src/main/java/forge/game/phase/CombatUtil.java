@@ -2817,12 +2817,12 @@ public class CombatUtil {
                         @Override
                         public void resolve() {
                             final Player cp = crd.getController();
+                            final Player opponent = Singletons.getModel().getGame().getCombat().getDefendingPlayerRelatedTo(c);
                             if (cp.isHuman()) {
-                                final List<Card> list = cp.getOpponent().getCardsIn(ZoneType.Battlefield);
-                                ComputerUtil.sacrificePermanents(cp.getOpponent(),  a, list, false, this);
+                                final List<Card> list = opponent.getCardsIn(ZoneType.Battlefield);
+                                ComputerUtil.sacrificePermanents(opponent,  a, list, false, this);
                             } else {
-                                SacrificeEffect.sacrificeHuman(cp.getOpponent(), a, "Permanent", this,
-                                        false, false);
+                                SacrificeEffect.sacrificeHuman(opponent, a, "Permanent", this, false, false);
                             }
                         }
                     };
