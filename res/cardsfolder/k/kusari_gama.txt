@@ -10,7 +10,6 @@ SVar:KusariPump:DB$ Pump | Defined$ TriggeredTarget | RememberObjects$ Triggered
 SVar:GamaDamage:DB$ DamageAll | NumDmg$ X | References$ X | ValidCards$ Creature.DefenderCtrl+IsNotRemembered | SubAbility$ CleanUp
 SVar:CleanUp:DB$ Cleanup | ClearRemembered$ True
 SVar:X:TriggerCount$DamageAmount
-SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kusari_gama.jpg
 SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/260.jpg
