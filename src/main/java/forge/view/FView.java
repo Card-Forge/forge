@@ -112,7 +112,9 @@ public enum FView {
 
         FView.this.frmSplash.dispose();
         FView.this.frmSplash = null;
-
+         
+        // Allow OS to set location. Hopefully this doesn't cause issues
+        frmDocument.setLocationByPlatform(true);
         frmDocument.setVisible(true);
     }
 
