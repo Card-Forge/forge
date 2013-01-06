@@ -32,6 +32,7 @@ import forge.control.input.InputSelectManyCards;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.view.ButtonUtil;
 
 /**
  * <p>
@@ -223,6 +224,10 @@ class CardFactoryLands {
 
                         @Override
                         protected Input onDone() {
+                            if (selected.isEmpty()) {
+                                return onCancel();
+                            }
+                            
                             String cardName = selected.get(0).getName();
                             JOptionPane.showMessageDialog(null, "Revealed card: " + cardName, cardName, JOptionPane.PLAIN_MESSAGE);
                             return null;
