@@ -205,6 +205,7 @@ public enum FView {
             throw new IllegalArgumentException("FView$getViewBazaar\n"
                     + "may only be called while the bazaar UI is showing.");
         }
+        bazaar.refreshLastInstance();
         return FView.this.bazaar;
     }
 
