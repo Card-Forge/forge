@@ -144,6 +144,7 @@ public class ChooseTypeEffect extends SpellEffect {
                         } else {
                             // TODO AttachAI for ChosenType should have the exact same logic
                             card.setChosenType("Island");
+                            valid = true;
                         }
                     }
                 } else if (type.equals("Land")) {
@@ -162,6 +163,8 @@ public class ChooseTypeEffect extends SpellEffect {
                         } else {
                             // TODO
                             // computer will need to choose a type
+                            card.setChosenType("Island");
+                            valid = true;
                         }
                     }
                 } // end if-else if
