@@ -2831,6 +2831,7 @@ public class CombatUtil {
                     ability.setStackDescription(sb.toString());
                     ability.setDescription(sb.toString());
                     ability.setActivatingPlayer(c.getController());
+                    ability.setTrigger(true);
 
                     Singletons.getModel().getGame().getStack().add(ability);
                 } // find
