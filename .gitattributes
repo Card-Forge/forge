@@ -4465,6 +4465,7 @@ res/cardsfolder/h/hagra_diabolist.txt svneol=native#text/plain
 res/cardsfolder/h/hail_storm.txt svneol=native#text/plain
 res/cardsfolder/h/hair_strung_koto.txt svneol=native#text/plain
 res/cardsfolder/h/hakim_loreweaver.txt -text
+res/cardsfolder/h/halam_djinn.txt -text
 res/cardsfolder/h/halberdier.txt svneol=native#text/plain
 res/cardsfolder/h/halcyon_glaze.txt svneol=native#text/plain
 res/cardsfolder/h/halimar_depths.txt svneol=native#text/plain
@@ -8418,6 +8419,7 @@ res/cardsfolder/r/ruby_leech.txt svneol=native#text/plain
 res/cardsfolder/r/ruby_medallion.txt svneol=native#text/plain
 res/cardsfolder/r/rude_awakening.txt svneol=native#text/plain
 res/cardsfolder/r/rugged_prairie.txt svneol=native#text/plain
+res/cardsfolder/r/ruham_djinn.txt -text
 res/cardsfolder/r/ruhan_of_the_fomori.txt svneol=native#text/plain
 res/cardsfolder/r/ruin_ghost.txt svneol=native#text/plain
 res/cardsfolder/r/ruination.txt svneol=native#text/plain
@@ -9977,6 +9979,7 @@ res/cardsfolder/s/sudden_strength.txt svneol=native#text/plain
 res/cardsfolder/s/suffer_the_past.txt svneol=native#text/plain
 res/cardsfolder/s/suffocating_blast.txt svneol=native#text/plain
 res/cardsfolder/s/suicidal_charge.txt svneol=native#text/plain
+res/cardsfolder/s/sulam_djinn.txt -text
 res/cardsfolder/s/suleimans_legacy.txt svneol=native#text/plain
 res/cardsfolder/s/sulfur_elemental.txt svneol=native#text/plain
 res/cardsfolder/s/sulfur_falls.txt -text
@@ -11828,6 +11831,7 @@ res/cardsfolder/y/yuan_shao_the_indecisive.txt svneol=native#text/plain
 res/cardsfolder/y/yuan_shaos_infantry.txt svneol=native#text/plain
 res/cardsfolder/y/yuki_onna.txt svneol=native#text/plain
 res/cardsfolder/y/yukora_the_prisoner.txt svneol=native#text/plain
+res/cardsfolder/z/zanam_djinn.txt -text
 res/cardsfolder/z/zanikev_locust.txt -text
 res/cardsfolder/z/zap.txt svneol=native#text/plain
 res/cardsfolder/z/zealot_il_vec.txt svneol=native#text/plain
