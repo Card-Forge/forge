@@ -1,0 +1,12 @@
+Name:Goham Djinn
+ManaCost:5 B
+Types:Creature Djinn
+Text:no text
+PT:5/5
+A:AB$ Regenerate | Cost$ 1 B | SpellDescription$ Regenerate CARDNAME.
+S:Mode$ Continuous | Affected$ Card.Self+MostProminentColor black | AddPower$ -2 | AddToughness$ -2 | Description$ CARDNAME gets -2/-2 as long as black is the most common color among all permanents or is tied for most common.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/goham_djinn.jpg
+SetInfo:INV|Uncommon|http://magiccards.info/scans/en/in/107.jpg
+Oracle:{1}{B}: Regenerate Goham Djinn.\nGoham Djinn gets -2/-2 as long as black is the most common color among all permanents or is tied for most common.
+End

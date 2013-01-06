@@ -6628,6 +6628,17 @@ public class Card extends GameEntity implements Comparable<Card> {
                     return false;
                 }
             }
+        } else if (property.startsWith("MostProminentColor")) {
+            // MostProminentColor <color> 
+            // e.g. MostProminentColor black
+            String[] props = property.split(" ");
+            if (props.length == 1) {
+                System.out.println("WARNING! Using MostProminentColor property without a color.");
+                return false;
+            }
+            String color = props[1];
+            
+            return CardFactoryUtil.isMostProminentColor(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), color);
         } else if (property.startsWith("sharesCreatureTypeWith")) {
             if (property.equals("sharesCreatureTypeWith")) {
                 if (!this.sharesCreatureTypeWith(source)) {
