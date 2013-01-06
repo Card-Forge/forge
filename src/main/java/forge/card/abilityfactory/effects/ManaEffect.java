@@ -26,10 +26,10 @@ public class ManaEffect extends SpellEffect {
         final Card card = sa.getSourceCard();
 
         AbilityManaPart abMana = sa.getManaPart();
-        if (!AbilityFactory.checkConditional(sa)) {
-            resolveDrawback(sa);
-            return;
-        }
+        //if (!AbilityFactory.checkConditional(sa)) {
+        //    resolveDrawback(sa);
+        //    return;
+        //}
 
         // Spells are not undoable
         sa.setUndoable(sa.isAbility() && sa.isUndoable());
@@ -179,7 +179,7 @@ public class ManaEffect extends SpellEffect {
             }
         }
 
-        resolveDrawback(sa);
+        //resolveDrawback(sa);
     }
 
     /**
