@@ -1,0 +1,13 @@
+Name:Crag Saurian
+ManaCost:R R R
+Types:Creature Lizard
+Text:no text
+PT:4/4
+T:Mode$ DamageDone | ValidTarget$ Card.Self | Execute$ Traitor | TriggerZones$ Battlefield | TriggerDescription$ Whenever a source deals damage to CARDNAME, that source's controller gains control of CARDNAME.
+SVar:Traitor:AB$ GainControl | Cost$ 0 | Defined$ Self | NewController$ TriggeredSourceController
+SVar:RemRandomDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/crag_saurian.jpg
+SetInfo:MMQ|Rare|http://magiccards.info/scans/en/mm/185.jpg
+Oracle:Whenever a source deals damage to Crag Saurian, that source's controller gains control of Crag Saurian.
+End

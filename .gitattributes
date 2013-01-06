@@ -1647,6 +1647,7 @@ res/cardsfolder/c/chimeric_sphere.txt -text
 res/cardsfolder/c/chimeric_staff.txt svneol=native#text/plain
 res/cardsfolder/c/chimney_imp.txt svneol=native#text/plain
 res/cardsfolder/c/chittering_rats.txt svneol=native#text/plain
+res/cardsfolder/c/chlorophant.txt -text
 res/cardsfolder/c/cho_arrim_alchemist.txt -text
 res/cardsfolder/c/cho_arrim_bruiser.txt svneol=native#text/plain
 res/cardsfolder/c/cho_arrim_legate.txt -text
@@ -1888,6 +1889,7 @@ res/cardsfolder/c/contagious_nim.txt svneol=native#text/plain
 res/cardsfolder/c/contaminated_bond.txt svneol=native#text/plain
 res/cardsfolder/c/contaminated_ground.txt svneol=native#text/plain
 res/cardsfolder/c/contemplation.txt svneol=native#text/plain
+res/cardsfolder/c/contempt.txt -text
 res/cardsfolder/c/contested_cliffs.txt -text
 res/cardsfolder/c/contested_war_zone.txt svneol=native#text/plain
 res/cardsfolder/c/contract_from_below.txt -text
@@ -1982,6 +1984,7 @@ res/cardsfolder/c/cradle_of_vitality.txt svneol=native#text/plain
 res/cardsfolder/c/cradle_to_grave.txt svneol=native#text/plain
 res/cardsfolder/c/crafty_pathmage.txt svneol=native#text/plain
 res/cardsfolder/c/crag_puca.txt svneol=native#text/plain
+res/cardsfolder/c/crag_saurian.txt -text
 res/cardsfolder/c/cragganwick_cremator.txt -text
 res/cardsfolder/c/cranial_extraction.txt svneol=native#text/plain
 res/cardsfolder/c/cranial_plating.txt -text
@@ -2345,6 +2348,7 @@ res/cardsfolder/d/deaths_presence.txt -text
 res/cardsfolder/d/deaths_shadow.txt svneol=native#text/plain
 res/cardsfolder/d/deathspore_thallid.txt svneol=native#text/plain
 res/cardsfolder/d/debtors_knell.txt svneol=native#text/plain
+res/cardsfolder/d/decaying_soil.txt -text
 res/cardsfolder/d/deceiver_exarch.txt -text
 res/cardsfolder/d/deception.txt svneol=native#text/plain
 res/cardsfolder/d/decimate.txt svneol=native#text/plain
@@ -3108,6 +3112,7 @@ res/cardsfolder/e/ephemeron.txt svneol=native#text/plain
 res/cardsfolder/e/epic_experiment.txt -text
 res/cardsfolder/e/epic_proportions.txt svneol=native#text/plain
 res/cardsfolder/e/epic_struggle.txt svneol=native#text/plain
+res/cardsfolder/e/epicenter.txt -text
 res/cardsfolder/e/equal_treatment.txt -text
 res/cardsfolder/e/equilibrium.txt svneol=native#text/plain
 res/cardsfolder/e/eradicate.txt svneol=native#text/plain
@@ -5591,6 +5596,7 @@ res/cardsfolder/k/kuon_ogre_ascendant_kuons_essence.txt -text
 res/cardsfolder/k/kurgadon.txt svneol=native#text/plain
 res/cardsfolder/k/kuro_pitlord.txt svneol=native#text/plain
 res/cardsfolder/k/kuros_taken.txt svneol=native#text/plain
+res/cardsfolder/k/kusari_gama.txt -text
 res/cardsfolder/k/kyoki_sanitys_eclipse.txt svneol=native#text/plain
 res/cardsfolder/k/kyren_archive.txt -text svneol=unset#text/plain
 res/cardsfolder/k/kyren_glider.txt svneol=native#text/plain
