@@ -3,7 +3,7 @@ ManaCost:3 G
 Types:Creature Beast
 Text:no text
 PT:2/2
-SVar:AltCost:Cost$ OppGainLife<5> | IsPresent$ Forest.YouCtrl | Description$ If you control a Forest, rather than pay Skyshroud Cutter's mana cost, you may have each other player gain 5 life.
+SVar:AltCost:Cost$ OthersEachGainLife<5> | IsPresent$ Forest.YouCtrl | Description$ If you control a Forest, rather than pay Skyshroud Cutter's mana cost, you may have each other player gain 5 life.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyshroud_cutter.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/118.jpg

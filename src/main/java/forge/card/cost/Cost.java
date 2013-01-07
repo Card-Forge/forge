@@ -154,6 +154,7 @@ public class Cost {
     private static final String ADD_STR = "AddCounter<";
     private static final String LIFE_STR = "PayLife<";
     private static final String LIFE_GAIN_STR = "OppGainLife<";
+    private static final String EACH_OTHER_LIFE_GAIN_STR = "OthersEachGainLife<";
     private static final String DAMAGE_STR = "DamageYou<";
     private static final String MILL_STR = "Mill<";
     private static final String DISC_STR = "Discard<";
@@ -247,6 +248,14 @@ public class Cost {
             parse = this.abUpdateParse(parse, Cost.LIFE_GAIN_STR);
 
             this.costParts.add(new CostGainLife(splitStr[0]));
+        }
+
+        while (parse.contains(Cost.EACH_OTHER_LIFE_GAIN_STR)) {
+            // PayLife<LifeCost>
+            final String[] splitStr = this.abCostParse(parse, Cost.EACH_OTHER_LIFE_GAIN_STR, 1);
+            parse = this.abUpdateParse(parse, Cost.EACH_OTHER_LIFE_GAIN_STR);
+
+            this.costParts.add(new CostGainLifeEachOther(splitStr[0]));
         }
 
         while (parse.contains(Cost.DAMAGE_STR)) {

@@ -17,19 +17,16 @@
  */
 package forge.card.cost;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import forge.Card;
+import forge.GameActionUtil;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
-import forge.gui.GuiChoose;
 
 /**
  * The Class CostGainLife.
  */
-public class CostGainLife extends CostPart {
+public class CostGainLifeEachOther extends CostPart {
     private int lastPaidAmount = 0;
 
     /**
@@ -57,7 +54,7 @@ public class CostGainLife extends CostPart {
      * @param amount
      *            the amount
      */
-    public CostGainLife(final String amount) {
+    public CostGainLifeEachOther(final String amount) {
         this.setAmount(amount);
     }
 
@@ -69,7 +66,7 @@ public class CostGainLife extends CostPart {
     @Override
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Have an opponent gain ").append(this.getAmount()).append(" life");
+        sb.append("Have each other player gain ").append(this.getAmount()).append(" life");
         return sb.toString();
     }
 
@@ -93,17 +90,15 @@ public class CostGainLife extends CostPart {
     @Override
     public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
         final Integer amount = this.convertAmount();
-        boolean oppCanGainLife = false;
         if (amount != null) {
-            for (final Player opp : activator.getOpponents()) {
-                if (opp.canGainLife()) {
-                    oppCanGainLife = true;
-                    break;
+            for (final Player otherP : activator.getAllOtherPlayers()) {
+                if (!otherP.canGainLife()) {
+                    return false;
                 }
             }
         }
 
-        return oppCanGainLife;
+        return true;
     }
 
     /*
@@ -114,13 +109,9 @@ public class CostGainLife extends CostPart {
      */
     @Override
     public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
-        final List<Player> oppsThatCanGainLife = new ArrayList<Player>();
-        for (final Player opp : ai.getOpponents()) {
-            if (opp.canGainLife()) {
-                oppsThatCanGainLife.add(opp);
-            }
+        for (final Player otherP : ai.getAllOtherPlayers()) {
+            otherP.gainLife(this.getLastPaidAmount(), null);
         }
-        oppsThatCanGainLife.get(0).gainLife(this.getLastPaidAmount(), null);
     }
 
     /*
@@ -147,26 +138,28 @@ public class CostGainLife extends CostPart {
             }
         }
 
-        final List<Player> oppsThatCanGainLife = new ArrayList<Player>();
-        for (final Player opp : activator.getOpponents()) {
-            if (opp.canGainLife()) {
-                oppsThatCanGainLife.add(opp);
+        for (final Player other : activator.getAllOtherPlayers()) {
+            // each other player MUST be able to gain life
+            if (!other.canGainLife()) {
+                payment.setCancel(true);
+                payment.getRequirements().finishPaying();
+                return false;
             }
         }
 
         final StringBuilder sb = new StringBuilder();
-        sb.append(source.getName()).append(" - Choose an opponent to gain ").append(c).append(" life:");
+        sb.append(source.getName()).append(" - Have each other player gain ").append(c).append(" life?");
 
-        final Player chosenToGain = GuiChoose.oneOrNone(sb.toString(), oppsThatCanGainLife);
-        if (null == chosenToGain) {
+        if (GameActionUtil.showYesNoDialog(source, sb.toString())) {
+            for (final Player playerToGain : activator.getAllOtherPlayers()) {
+                playerToGain.gainLife(c, null);
+                this.setLastPaidAmount(c);
+                payment.setPaidManaPart(this);
+            }
+        } else {
             payment.setCancel(true);
             payment.getRequirements().finishPaying();
             return false;
-        } else {
-            final Player chosen = chosenToGain;
-            chosen.gainLife(c, null);
-            this.setLastPaidAmount(c);
-            payment.setPaidManaPart(this);
         }
         return true;
     }
@@ -193,15 +186,10 @@ public class CostGainLife extends CostPart {
             }
         }
 
-        final List<Player> oppsThatCanGainLife = new ArrayList<Player>();
-        for (final Player opp : ai.getOpponents()) {
-            if (opp.canGainLife()) {
-                oppsThatCanGainLife.add(opp);
+        for (final Player otherP : ai.getAllOtherPlayers()) {
+            if (!otherP.canGainLife()) {
+                return false;
             }
-        }
-
-        if (oppsThatCanGainLife.size() == 0) {
-            return false;
         }
         this.setLastPaidAmount(c);
         return true;

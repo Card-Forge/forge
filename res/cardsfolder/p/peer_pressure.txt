@@ -5,7 +5,7 @@ Text:no text
 A:SP$ ChooseType | Cost$ 3 U | Defined$ You | Type$ Creature | SubAbility$ ApplyPressure | SpellDescription$ Choose a creature type. If you control more creatures of that type than each other player, you gain control of all creatures of that type. (This effect lasts indefinitely.)
 SVar:ApplyPressure:DB$ GainControl | AllValid$ Creature.ChosenType | NewController$ You | ConditionCheckSVar$ YourPeerGroup | ConditionSVarCompare$ GTY | References$ YourPeerGroup,Y
 SVar:YourPeerGroup:Count$Valid Creature.ChosenType+YouCtrl
-SVar:Y:Count$Valid Creature.ChosenType+YouDontCtrl
+SVar:Y:PlayerCountOther$HighestValid Creature.ChosenType+YouCtrl
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
