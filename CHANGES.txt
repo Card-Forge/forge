@@ -96,6 +96,15 @@ Fixes/Features:
 - Fixed Annihilator getting the wrong defender.
 - GTC: Added a parameter to Obzedat, Ghost Council
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Annihilator not being flagged as triggered ability.
+- Fixed Ashes to Ashes if one target gains shroud.
+- Fixed Phantasmal Terrain.
+- More cards ready for multiplayer
+- Token AF can put tokens into play under multiple players' control.
+- New PlayerCount<Type>: NonActive
+- Added EvolveCondition to requirementsCheck.
+- Fixed Bloodchief Ascension not showing up in the game
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -150,6 +159,14 @@ Obzedat, Ghost Council
 Basilica Guards
 Gridlock
 Fathom Mage
+Cloudfin Raptor
+Borborygmos Enraged
+Dimir Keyrune
+Enter the Infinite
+Gruul Keyrune
+Simic Fluxmage
+Boros Keyrune
+Crocanura
 
 
 end
