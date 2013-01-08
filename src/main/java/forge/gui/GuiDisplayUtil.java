@@ -458,7 +458,7 @@ public final class GuiDisplayUtil {
         List<Card> computerDevExileSetup = new ArrayList<Card>();
 
         final Player human = Singletons.getControl().getPlayer();
-        final Player ai = human.getOpponent();
+        final Player ai = human.getOpponents().get(0);
 
         if (!tChangePlayer.trim().toLowerCase().equals("none")) {
             if (tChangePlayer.trim().toLowerCase().equals("human")) {

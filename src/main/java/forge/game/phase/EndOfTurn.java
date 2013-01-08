@@ -130,7 +130,7 @@ public class EndOfTurn extends Phase {
                             + "destroy CARDNAME if it attacked this turn.");
                 }
             }
-            if (c.hasKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.")) {
+            /*if (c.hasKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.")) {
                 final Card vale = c;
                 final SpellAbility change = new Ability(vale, "0") {
                     @Override
@@ -153,7 +153,7 @@ public class EndOfTurn extends Phase {
 
                 Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(change);
 
-            }
+            }*/
 
             if (c.hasKeyword("At the beginning of your end step, return CARDNAME to its owner's hand.")
                     && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(c.getController())) {

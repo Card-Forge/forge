@@ -37,6 +37,7 @@ import forge.Card;
 import forge.CounterType;
 import forge.GameEntity;
 import forge.Singletons;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
@@ -329,10 +330,18 @@ public class CardDetailPanel extends FPanel implements CardContainer {
                 && !card.getController().getZone(ZoneType.Library).isEmpty()) {
             area.append("\r\nTop card of your library: ");
             area.append(card.getController().getCardsIn(ZoneType.Library, 1));
-            if (card.hasKeyword("Players play with the top card of their libraries revealed.")
-                    && !card.getController().getOpponent().getZone(ZoneType.Library).isEmpty()) {
-                area.append("\r\nTop card of your opponent's library: ");
-                area.append(card.getController().getOpponent().getCardsIn(ZoneType.Library, 1));
+            if (card.hasKeyword("Players play with the top card of their libraries revealed.")) {
+                for (final Player p : card.getController().getAllOtherPlayers()) {
+                    if (p.getZone(ZoneType.Library).isEmpty()) {
+                        area.append(p.getName());
+                        area.append("'s library is empty.");
+                    } else {
+                        area.append("\r\nTop card of ");
+                        area.append(p.getName());
+                        area.append("'s library: ");
+                        area.append(p.getCardsIn(ZoneType.Library, 1));
+                    }
+                }
             }
         }
 
