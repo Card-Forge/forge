@@ -217,6 +217,8 @@ public class TokenEffect extends SpellEffect {
                         for (final Card c : tokens) {
                             final SpellAbility grantedAbility = af.getAbility(actualAbility, c);
                             c.addSpellAbility(grantedAbility);
+                            // added ability to intrinsic list so copies and clones work
+                            c.getIntrinsicAbilities().add(actualAbility);
                         }
                     }
                 }

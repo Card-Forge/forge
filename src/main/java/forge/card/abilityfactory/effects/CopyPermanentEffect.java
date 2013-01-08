@@ -105,6 +105,8 @@ public class CopyPermanentEffect extends SpellEffect {
 
                         copy.setBaseAttack(c.getBaseAttack());
                         copy.setBaseDefense(c.getBaseDefense());
+
+                        CardFactoryUtil.addAbilityFactoryAbilities(copy);
                     }
 
                     // add keywords from sa
