@@ -5,7 +5,7 @@ Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 3 R | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddAbility$ Token | AddSVar$ ElementalMasteryCount | Description$ Enchanted creature has "Tap: Put X 1/1 red Elemental creature tokens with haste onto the battlefield, where X is this creature's power. Exile them at the beginning of the next end step."
-SVar:Token:AB$Token | Cost$ T | TokenAmount$ ElementalMasteryCount | TokenImage$ r 1 1 elemental | TokenName$ Elemental | TokenColors$ Red | TokenTypes$ Creature,Elemental | TokenKeywords$ Haste<>HIDDEN At the beginning of the end step, exile CARDNAME. | TokenPower$ 1 | TokenToughness$ 1 | References$ ElementalMasteryCount | SpellDescription$ Put X 1/1 red Elemental creature tokens with haste onto the battlefield, where X is this creature's power. Exile them at the beginning of the next end step.
+SVar:Token:AB$Token | Cost$ T | TokenAmount$ ElementalMasteryCount | TokenImage$ r 1 1 elemental | TokenName$ Elemental | TokenColors$ Red | TokenTypes$ Creature,Elemental | TokenKeywords$ Haste | TokenHiddenKeywords$ At the beginning of the end step, exile CARDNAME. | TokenPower$ 1 | TokenToughness$ 1 | References$ ElementalMasteryCount | SpellDescription$ Put X 1/1 red Elemental creature tokens with haste onto the battlefield, where X is this creature's power. Exile them at the beginning of the next end step.
 SVar:ElementalMasteryCount:Count$CardPower
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/elemental_mastery.jpg
