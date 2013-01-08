@@ -2619,8 +2619,9 @@ public class Card extends GameEntity implements Comparable<Card> {
         for (final SpellAbility a : this.getManaAbility()) {
 
             // if a mana ability has a mana cost the AI will miscalculate
+            // if there is a parent ability the AI can't use it
             final Cost cost = a.getPayCosts();
-            if (!cost.hasNoManaCost()) {
+            if (!cost.hasNoManaCost() || !a.getApi().equals("Mana")) {
                 continue;
             }
 
