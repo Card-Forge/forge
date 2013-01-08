@@ -395,7 +395,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Phase", this.getPhase().Name);
             runParams.put("Player", this.getPlayerTurn());
-            game.getTriggerHandler().runTrigger(TriggerType.Phase, runParams);
+            game.getTriggerHandler().runTrigger(TriggerType.Phase, runParams, false);
 
         }
 

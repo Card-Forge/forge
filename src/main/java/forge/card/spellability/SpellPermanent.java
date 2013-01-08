@@ -120,7 +120,7 @@ public class SpellPermanent extends Spell {
                     final HashMap<String, Object> runParams = new HashMap<String, Object>();
                     runParams.put("Card", source);
                     runParams.put("Championed", source.getChampionedCard());
-                    Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Championed, runParams);
+                    Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Championed, runParams, false);
                 } else {
                     Singletons.getModel().getGame().getAction().sacrifice(this.getSourceCard(), null);
                 }

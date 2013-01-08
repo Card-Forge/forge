@@ -269,7 +269,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 || (cur == CardCharacteristicName.Transformed && state == CardCharacteristicName.Original)) {
             HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Transformer", this);
-            Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Transformed, runParams);
+            Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Transformed, runParams, false);
         }
 
         return true;
@@ -375,7 +375,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 // Run triggers
                 final Map<String, Object> runParams = new TreeMap<String, Object>();
                 runParams.put("Card", this);
-                Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.TurnFaceUp, runParams);
+                Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.TurnFaceUp, runParams, false);
             }
             return result;
         }
@@ -1243,7 +1243,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         runParams.put("Card", this);
         runParams.put("CounterType", counterType);
         for (int i = 0; i < addAmount; i++) {
-            Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.CounterAdded, runParams);
+            Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.CounterAdded, runParams, false);
         }
 
         // play the Add Counter sound
@@ -1282,7 +1282,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         runParams.put("Card", this);
         runParams.put("CounterType", counterName);
         for (int i = 0; i < delta; i++) {
-            Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemoved, runParams);
+            Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.CounterRemoved, runParams, false);
         }
 
         if (counterName.equals(CounterType.TIME) && (newValue == 0)) {
@@ -3834,7 +3834,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         final Map<String, Object> runParams = new TreeMap<String, Object>();
         runParams.put("Equipment", this);
         runParams.put("Card", c);
-        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Unequip, runParams);
+        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Unequip, runParams, false);
     }
 
     /**
@@ -4838,7 +4838,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             // Run triggers
             final Map<String, Object> runParams = new TreeMap<String, Object>();
             runParams.put("Card", this);
-            Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Taps, runParams);
+            Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Taps, runParams, false);
         }
         this.setTapped(true);
 
@@ -4856,7 +4856,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             // Run triggers
             final Map<String, Object> runParams = new TreeMap<String, Object>();
             runParams.put("Card", this);
-            Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Untaps, runParams);
+            Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Untaps, runParams, false);
 
             // Play the Untap sound
             Singletons.getModel().getGame().getEvents().post(new SetTappedEvent(false));
@@ -8278,7 +8278,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         runParams.put("DamageTarget", this);
         runParams.put("DamageAmount", damageToAdd);
         runParams.put("IsCombatDamage", isCombat);
-        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams);
+        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, false);
 
         if (this.isPlaneswalker()) {
             this.subtractCounter(CounterType.LOYALTY, damageToAdd);

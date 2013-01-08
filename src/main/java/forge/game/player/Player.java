@@ -256,7 +256,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Scheme", activeScheme);
-        game.getTriggerHandler().runTrigger(TriggerType.SetInMotion, runParams);
+        game.getTriggerHandler().runTrigger(TriggerType.SetInMotion, runParams, false);
     }
 
     /**
@@ -458,7 +458,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Player", this);
             runParams.put("LifeAmount", lifeGain);
-            game.getTriggerHandler().runTrigger(TriggerType.LifeGained, runParams);
+            game.getTriggerHandler().runTrigger(TriggerType.LifeGained, runParams, false);
         } else {
             System.out.println("Player - trying to gain negative or 0 life");
         }
@@ -514,7 +514,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Player", this);
         runParams.put("LifeAmount", toLose);
-        game.getTriggerHandler().runTrigger(TriggerType.LifeLost, runParams);
+        game.getTriggerHandler().runTrigger(TriggerType.LifeLost, runParams, false);
 
         return lifeLost;
     }
@@ -654,7 +654,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         runParams.put("DamageTarget", this);
         runParams.put("DamageAmount", damageToDo);
         runParams.put("IsCombatDamage", isCombat);
-        game.getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams);
+        game.getTriggerHandler().runTrigger(TriggerType.DamageDone, runParams, false);
 
         return true;
     }
@@ -1438,7 +1438,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Card", c);
             runParams.put("Number", this.numDrawnThisTurn);
-            game.getTriggerHandler().runTrigger(TriggerType.Drawn, runParams);
+            game.getTriggerHandler().runTrigger(TriggerType.Drawn, runParams, false);
         }
         // lose:
         else if (!Preferences.DEV_MODE || Singletons.getModel().getPreferences().getPrefBoolean(FPref.DEV_MILLING_LOSS)) {
@@ -1723,7 +1723,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         runParams.put("Player", this);
         runParams.put("Card", c);
         runParams.put("Cause", cause);
-        game.getTriggerHandler().runTrigger(TriggerType.Discarded, runParams);
+        game.getTriggerHandler().runTrigger(TriggerType.Discarded, runParams, false);
 
     } // end doDiscard
 
@@ -1895,7 +1895,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Player", this);
-        game.getTriggerHandler().runTrigger(TriggerType.Shuffled, runParams);
+        game.getTriggerHandler().runTrigger(TriggerType.Shuffled, runParams, false);
 
         // Play the shuffle sound
         Singletons.getModel().getGame().getEvents().post(new ShuffleEvent());
@@ -1963,7 +1963,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             // Run triggers
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Card", land);
-            game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, runParams);
+            game.getTriggerHandler().runTrigger(TriggerType.LandPlayed, runParams, false);
         }
 
         game.getStack().unfreezeStack();

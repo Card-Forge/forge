@@ -237,7 +237,7 @@ public class GameAction {
             runParams.put("Origin", null);
         }
         runParams.put("Destination", zoneTo.getZoneType().name());
-        game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams);
+        game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams, false);
         // AllZone.getStack().chooseOrderOfSimultaneousStackEntryAll();
 
         if (suppress) {
@@ -443,7 +443,7 @@ public class GameAction {
 
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", c);
-        game.getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams);
+        game.getTriggerHandler().runTrigger(TriggerType.ChangesController, runParams, false);
 
         game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
         for (Player p : game.getPlayers()) {
@@ -700,7 +700,7 @@ public class GameAction {
             runParams.put("Origin", null);
         }
         runParams.put("Destination", ZoneType.Library.name());
-        game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams);
+        game.getTriggerHandler().runTrigger(TriggerType.ChangesZone, runParams, false);
 
         if (p != null) {
             p.updateLabelObservers();
@@ -1050,7 +1050,7 @@ public class GameAction {
             this.checkStaticAbilities();
 
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
-            game.getTriggerHandler().runTrigger(TriggerType.Always, runParams);
+            game.getTriggerHandler().runTrigger(TriggerType.Always, runParams, false);
 
             for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
 
@@ -1292,7 +1292,7 @@ public class GameAction {
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", c);
-        game.getTriggerHandler().runTrigger(TriggerType.Sacrificed, runParams);
+        game.getTriggerHandler().runTrigger(TriggerType.Sacrificed, runParams, false);
 
         return true;
     }

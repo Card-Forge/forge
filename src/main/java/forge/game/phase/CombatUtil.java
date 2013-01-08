@@ -2799,7 +2799,7 @@ public class CombatUtil {
         otherAttackers.remove(c);
         runParams.put("OtherAttackers", otherAttackers);
         runParams.put("Attacked", Singletons.getModel().getGame().getCombat().getDefenderByAttacker(c));
-        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Attacks, runParams);
+        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Attacks, runParams, false);
 
         // Annihilator:
         if (!c.getDamageHistory().getCreatureAttackedThisCombat()) {
@@ -2917,7 +2917,7 @@ public class CombatUtil {
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Card", c);
-        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.AttackerUnblocked, runParams);
+        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.AttackerUnblocked, runParams, false);
     }
 
     /**
@@ -2958,12 +2958,12 @@ public class CombatUtil {
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Attacker", a);
         runParams.put("Blocker", b);
-        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Blocks, runParams);
+        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Blocks, runParams, false);
 
         if (!a.getDamageHistory().getCreatureGotBlockedThisCombat()) {
             final int blockers = Singletons.getModel().getGame().getCombat().getBlockers(a).size();
             runParams.put("NumBlockers", blockers);
-            Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams);
+            Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.AttackerBlocked, runParams, false);
 
             // Bushido
             for (final Ability ab : CardFactoryUtil.getBushidoEffects(a)) {

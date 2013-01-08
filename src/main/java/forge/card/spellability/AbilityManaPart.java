@@ -144,7 +144,7 @@ public class AbilityManaPart implements java.io.Serializable {
         runParams.put("Player", player);
         runParams.put("AbilityMana", sa);
         runParams.put("Produced", produced);
-        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.TapsForMana, runParams);
+        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.TapsForMana, runParams, false);
 
     } // end produceMana(String)
 

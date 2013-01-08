@@ -502,7 +502,7 @@ public class GameState {
 
         final Map<String, Object> runParams = new TreeMap<String, Object>();
         runParams.put("Player", p);
-        this.getTriggerHandler().runTrigger(TriggerType.LosesGame, runParams);
+        this.getTriggerHandler().runTrigger(TriggerType.LosesGame, runParams, false);
 
     }
 

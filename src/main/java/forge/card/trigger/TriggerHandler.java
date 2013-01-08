@@ -262,8 +262,9 @@ public class TriggerHandler {
      *            a {@link java.lang.String} object.
      * @param runParams
      *            a {@link java.util.Map} object.
+     * @param forceHeldTriggers Force certain triggers to be added the waitingTriggers if stack isnt frozen
      */
-    public final void runTrigger(final TriggerType mode, final Map<String, Object> runParams) {
+    public final void runTrigger(final TriggerType mode, final Map<String, Object> runParams, boolean holdTrigger) {
         if (this.suppressedModes.contains(mode)) {
             return;
         }
@@ -272,7 +273,7 @@ public class TriggerHandler {
 
         //runWaitingTrigger(new TriggerWaiting(mode, runParams));
         
-        if (game.getStack().isFrozen()) {
+        if (game.getStack().isFrozen() || holdTrigger) {
             waitingTriggers.add(new TriggerWaiting(mode, runParams));
         } else {
             runWaitingTrigger(new TriggerWaiting(mode, runParams), true);

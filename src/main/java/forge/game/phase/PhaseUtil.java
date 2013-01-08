@@ -200,7 +200,7 @@ public class PhaseUtil {
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Attackers", list);
         runParams.put("AttackingPlayer", Singletons.getModel().getGame().getCombat().getAttackingPlayer());
-        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.AttackersDeclared, runParams);
+        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.AttackersDeclared, runParams, false);
 
         for (final Card c : list) {
             CombatUtil.checkDeclareAttackers(c);

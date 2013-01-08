@@ -19,6 +19,7 @@ package forge.game.zone;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Stack;
 
@@ -694,40 +695,48 @@ public class MagicStack extends MyObservable {
         // run for them.
         if (!sp.getSourceCard().isCopiedSpell() && !(sp instanceof AbilityStatic) && !sp.isCopied()) {
             // Run SpellAbilityCast triggers
-            final HashMap<String, Object> runParams = new HashMap<String, Object>();
+            HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Cost", sp.getPayCosts());
             runParams.put("Player", sp.getSourceCard().getController());
             runParams.put("Activator", sp.getActivatingPlayer());
             runParams.put("CastSA", sp);
-            game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams);
+            game.getTriggerHandler().runTrigger(TriggerType.SpellAbilityCast, runParams, true);
 
             // Run SpellCast triggers
             if (sp.isSpell()) {
-                game.getTriggerHandler().runTrigger(TriggerType.SpellCast, runParams);
+                game.getTriggerHandler().runTrigger(TriggerType.SpellCast, runParams, true);
             }
 
             // Run AbilityCast triggers
             if (sp.isAbility() && !sp.isTrigger()) {
-                game.getTriggerHandler().runTrigger(TriggerType.AbilityCast, runParams);
+                game.getTriggerHandler().runTrigger(TriggerType.AbilityCast, runParams, true);
             }
 
             // Run Cycled triggers
             if (sp.isCycling()) {
                 runParams.clear();
                 runParams.put("Card", sp.getSourceCard());
-                game.getTriggerHandler().runTrigger(TriggerType.Cycled, runParams);
+                game.getTriggerHandler().runTrigger(TriggerType.Cycled, runParams, false);
             }
 
             // Run BecomesTarget triggers
-            runParams.clear();
+            // Create a new object, since the triggers aren't happening right away
+            runParams = new HashMap<String, Object>();
             runParams.put("SourceSA", sp);
-            if (chosenTargets.size() > 0) {
+            if (chosenTargets.size() > 0) { 
+                HashSet<Object> distinctObjects = new HashSet<Object>();
                 for (final TargetChoices tc : chosenTargets) {
                     if ((tc != null) && (tc.getTargetCards() != null)) {
                         for (final Object tgt : tc.getTargets()) {
+                            // Track distinct objects so Becomes targets don't trigger for things like:
+                            // Seeds of Strength or Pyrotechnics
+                            if (distinctObjects.contains(tgt)) {
+                                continue;
+                            }
+                            
+                            distinctObjects.add(tgt);
                             runParams.put("Target", tgt);
-
-                            game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
+                            game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
                         }
                     }
                 }
@@ -738,11 +747,11 @@ public class MagicStack extends MyObservable {
             else if (sp.getTargetCard() != null) {
                 runParams.put("Target", sp.getTargetCard());
 
-                game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
+                game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
             } else if (sp.getTargetPlayer() != null) {
                 runParams.put("Target", sp.getTargetPlayer());
 
-                game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams);
+                game.getTriggerHandler().runTrigger(TriggerType.BecomesTarget, runParams, false);
             }
         }
 

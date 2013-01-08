@@ -1247,7 +1247,7 @@ public class CardFactoryUtil {
                         final HashMap<String, Object> runParams = new HashMap<String, Object>();
                         runParams.put("Card", spell.getSourceCard());
                         runParams.put("Championed", card);
-                        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Championed, runParams);
+                        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Championed, runParams, false);
                     }
                 }
             } // selectCard()

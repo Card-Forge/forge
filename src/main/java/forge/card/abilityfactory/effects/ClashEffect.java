@@ -53,7 +53,7 @@ public class ClashEffect extends SpellEffect {
             runParams.put("Won", "False");
         }
 
-        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Clashed, runParams);
+        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Clashed, runParams, false);
     }
 
 }
