@@ -18,8 +18,7 @@ public class FlipCoinEffect extends SpellEffect {
     @Override
     protected String getStackDescription(SpellAbility sa) {
         final Card host = sa.getSourceCard();
-        final Player player = sa.hasParam("OpponentCalls") ? host.getController().getOpponent() : host
-                .getController();
+        final Player player = host.getController();
 
         final StringBuilder sb = new StringBuilder();
 
