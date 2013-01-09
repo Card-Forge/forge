@@ -105,6 +105,19 @@ Fixes/Features:
 - Added EvolveCondition to requirementsCheck.
 - Fixed Bloodchief Ascension not showing up in the game
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Split OppGainLife costs into the two types, "you may have an opponent gain" and "you may have each other player gain"
+- Force certain triggers to wait for the next WaitingTrigger run (e.g. Fix Balefire Liege issue), there may be a few more of these that need to be forced
+- Fixed "BecomesTarget" triggering for the same Object more than once for the same spell
+- Converted a few instances of getOpponent()
+- Converted Rainbow Vale to script
+- merging r18962-r18994 from Trunk into GTC branch
+- fixed issue with copies and clones of tokens with abilities
+- Removed OpponentCalls param from FlipACoin as it was no longer used (I assume it was replaced by Caller)
+- Added Spectral Searchlight fix by swordshine.
+- Fixed Elemental Mastery.
+- Added an exile effect SVar to Runesword
+- Disabled variants from custom Quest formats + more uniform style.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -140,6 +153,8 @@ Sulam Djinn
 Zanam Djinn
 Discordant Spirit
 Erratic Mutation
+Necromancer's Magemark
+Runesword
 
 
 Added the following new Gatecrash cards to the Gatecrash branch. These cards are not yet available in game use.:
@@ -167,6 +182,24 @@ Gruul Keyrune
 Simic Fluxmage
 Boros Keyrune
 Crocanura
+Tin Street Market
+Urban Evolution
+Hellkite Tyrant
+Rapid Hybridization
+Consuming Aberration
+Duskmantle Guildmage
+Mind Grind
+Clan Defiance
+Crypt Ghast
+Gateway Shade
+Skarrg Goliath
+Viashino Shanktail
+Zhur-Taa Swine
+Syndic of Tithes
+Experiment One
+Burning-Tree Emissary
+Elusive Krasis
+Gideon, Champion of Justice
 
 
 end
