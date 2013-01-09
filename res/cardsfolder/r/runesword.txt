@@ -1,0 +1,16 @@
+Name:Runesword
+ManaCost:6
+Types:Artifact
+Text:no text
+A:AB$ Pump | Cost$ 3 T | NumAtt$ +2 | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | SubAbility$ RuneswordEffect | SpellDescription$ Target attacking creature gets +2/+0 until end of turn. When that creature leaves the battlefield this turn, sacrifice CARDNAME. If the creature deals damage to a creature this turn, the creature dealt damage can't be regenerated this turn. If a creature dealt damage by the targeted creature would die this turn, exile that creature instead.
+SVar:RuneswordEffect:DB$ Effect | Name$ Runesword Effect | Triggers$ TrigSacRunesword,TrigNoregen | SVars$ RuneswordSac,PumpNogen | References$ TrigSacRunesword,TrigNoregen,RuneswordSac,PumpNogen | RememberObjects$ Targeted | ImprintCards$ Self
+SVar:TrigSacRunesword:Mode$ ChangesZone | ValidCard$ Card.IsRemembered | Origin$ Battlefield | Destination$ Any | Execute$ RuneswordSac | TriggerDescription$ When the targeted creature leaves the battlefield this turn, sacrifice Kjeldoran Elite Guard.
+SVar:RuneswordSac:DB$ SacrificeAll | Defined$ Imprinted
+SVar:TrigNoregen:Mode$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ Creature | Execute$ PumpNogen | Static$ True | TriggerDescription$ If the creature deals damage to a creature this turn, the creature dealt damage can't be regenerated this turn.If a creature dealt damage by the targeted creature would die this turn, exile that creature instead.
+SVar:PumpNogen:AB$ Pump | Cost$ 0 | KW$ HIDDEN CARDNAME can't be regenerated. & HIDDEN If CARDNAME would be put into a graveyard, exile it instead. | Defined$ TriggeredTarget
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/runesword.jpg
+SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/104.jpg
+SetInfo:CHR|Common|http://magiccards.info/scans/en/ch/86.jpg
+Oracle:{3}, {T}: Target attacking creature gets +2/+0 until end of turn. When that creature leaves the battlefield this turn, sacrifice Runesword. If the creature deals damage to a creature this turn, the creature dealt damage can't be regenerated this turn. If a creature dealt damage by the targeted creature would die this turn, exile that creature instead.
+End

@@ -6786,6 +6786,7 @@ res/cardsfolder/n/necrogen_spellbomb.txt svneol=native#text/plain
 res/cardsfolder/n/necrogenesis.txt svneol=native#text/plain
 res/cardsfolder/n/necrologia.txt -text
 res/cardsfolder/n/necromancers_covenant.txt -text
+res/cardsfolder/n/necromancers_magemark.txt -text
 res/cardsfolder/n/necromancy.txt -text
 res/cardsfolder/n/necromantic_thirst.txt svneol=native#text/plain
 res/cardsfolder/n/necropede.txt svneol=native#text/plain
@@ -8455,6 +8456,7 @@ res/cardsfolder/r/runed_servitor.txt svneol=native#text/plain
 res/cardsfolder/r/runed_stalactite.txt svneol=native#text/plain
 res/cardsfolder/r/runeflare_trap.txt -text
 res/cardsfolder/r/runes_of_the_deus.txt svneol=native#text/plain
+res/cardsfolder/r/runesword.txt -text
 res/cardsfolder/r/runewing.txt -text
 res/cardsfolder/r/runic_repetition.txt -text
 res/cardsfolder/r/rupture.txt svneol=native#text/plain
