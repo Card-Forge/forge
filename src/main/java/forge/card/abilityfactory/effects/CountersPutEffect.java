@@ -85,7 +85,7 @@ public class CountersPutEffect extends SpellEffect {
         ArrayList<Card> tgtCards;
 
         final Target tgt = sa.getTarget();
-        if (tgt != null) {
+        if (tgt != null && (tgt.getTargetPlayers().size() == 0)) {
             tgtCards = tgt.getTargetCards();
         } else {
             tgtCards = AbilityFactory.getDefinedCards(card, sa.getParam("Defined"), sa);
