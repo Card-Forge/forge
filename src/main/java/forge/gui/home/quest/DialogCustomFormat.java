@@ -131,7 +131,9 @@ public class DialogCustomFormat extends JDialog {
         if (setCode == null) {
             return true;
         }
-        return !setCode.equals("LEA") && !setCode.equals("LEB") && !"MBP".equals(setCode);
+        return !"LEA".equals(setCode) && !"LEB".equals(setCode)
+                && !"MBP".equals(setCode) && !"VAN".equals(setCode)
+                && !"ARC".equals(setCode) && !"PC2".equals(setCode);
     }
 
     /**
