@@ -82,6 +82,8 @@ public class ForgePreferences {
         SUBMENU_SETTINGS ("false"), /** */
         SUBMENU_UTILITIES ("false"), /** */
 
+        ENFORCE_DECK_LEGALITY ("true"), /** */
+
         DEV_MODE_ENABLED ("false"), /** */
         DEV_MILLING_LOSS ("true"), /** */
         DEV_UNLIMITED_LAND ("false"), /** */

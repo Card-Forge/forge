@@ -80,6 +80,7 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     private final JCheckBox cbStackLand = new OptionsCheckBox("Stack AI Land");
     private final JCheckBox cbManaBurn = new OptionsCheckBox("Mana Burn");
     private final JCheckBox cbDevMode = new OptionsCheckBox(ForgeProps.getLocalized(NewGameText.DEV_MODE));
+    private final JCheckBox cbEnforceDeckLegality = new OptionsCheckBox("Deck Conformance");
     private final JCheckBox cbTextMana = new OptionsCheckBox("Text / Mana Overlay");
     private final JCheckBox cbScaleLarger = new OptionsCheckBox("Scale Image Larger");
     private final JCheckBox cbRandomFoil = new OptionsCheckBox("Random Foil");
@@ -126,6 +127,9 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
 
         pnlPrefs.add(cbDevMode, regularConstraints);
         pnlPrefs.add(new NoteLabel("Enables menu with functions for testing during development."), regularConstraints);
+
+        pnlPrefs.add(cbEnforceDeckLegality, regularConstraints);
+        pnlPrefs.add(new NoteLabel("Enforces deck legality relevant to each environment (minimum deck sizes, max card count etc)"), regularConstraints);
 
         // Graphic Options
         pnlPrefs.add(new SectionLabel("Graphic Options"), sectionConstraints);
@@ -410,6 +414,11 @@ public enum VSubmenuPreferences implements IVSubmenu<CSubmenuPreferences> {
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getCbDevMode() {
         return cbDevMode;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getCbEnforceDeckLegality() {
+        return cbEnforceDeckLegality;
     }
 
     /** @return {@link javax.swing.JCheckBox} */

@@ -79,6 +79,15 @@ public enum CSubmenuPreferences implements ICDoc {
             }
         });
 
+        view.getCbEnforceDeckLegality().addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(final ItemEvent arg0) {
+                final boolean toggle = view.getCbEnforceDeckLegality().isSelected();
+                prefs.setPref(FPref.ENFORCE_DECK_LEGALITY, String.valueOf(toggle));
+                prefs.save();
+            }
+        });
+
         view.getCbRemoveSmall().addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(final ItemEvent arg0) {
@@ -183,6 +192,7 @@ public enum CSubmenuPreferences implements ICDoc {
         view.getCbUploadDraft().setSelected(prefs.getPrefBoolean(FPref.UI_UPLOAD_DRAFT));
         view.getCbStackLand().setSelected(prefs.getPrefBoolean(FPref.UI_SMOOTH_LAND));
         view.getCbDevMode().setSelected(prefs.getPrefBoolean(FPref.DEV_MODE_ENABLED));
+        view.getCbEnforceDeckLegality().setSelected(prefs.getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY));
         view.getCbRandomFoil().setSelected(prefs.getPrefBoolean(FPref.UI_RANDOM_FOIL));
         view.getCbRandomizeArt().setSelected(prefs.getPrefBoolean(FPref.UI_RANDOM_CARD_ART));
         view.getCbScaleLarger().setSelected(prefs.getPrefBoolean(FPref.UI_SCALE_LARGER));
