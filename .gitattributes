@@ -13141,6 +13141,7 @@ src/main/java/forge/card/abilityfactory/ai/CharmAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ChooseCardAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ChooseCardNameAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ChooseColorAi.java -text
+src/main/java/forge/card/abilityfactory/ai/ChoosePlayerAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ChooseSourceAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ChooseTypeAi.java -text
 src/main/java/forge/card/abilityfactory/ai/ClashAi.java -text
