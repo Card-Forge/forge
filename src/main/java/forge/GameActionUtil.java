@@ -178,6 +178,7 @@ public final class GameActionUtil {
                                 final List<SpellAbility> choices = cascadedCard.getBasicSpells();
 
                                 for (final SpellAbility sa : choices) {
+                                    sa.setActivatingPlayer(p);
                                     //Spells
                                     if (sa instanceof Spell) {
                                         Spell spell = (Spell) sa;
