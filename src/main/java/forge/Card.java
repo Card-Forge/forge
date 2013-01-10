@@ -39,6 +39,7 @@ import forge.card.CardCharacteristics;
 import forge.card.CardManaCost;
 import forge.card.EditionInfo;
 import forge.card.abilityfactory.AbilityFactory;
+import forge.card.abilityfactory.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCost;
@@ -2621,7 +2622,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             // if a mana ability has a mana cost the AI will miscalculate
             // if there is a parent ability the AI can't use it
             final Cost cost = a.getPayCosts();
-            if (!cost.hasNoManaCost() || !a.getApi().equals("Mana")) {
+            if (!cost.hasNoManaCost()
+                || (!a.getApi().equals(ApiType.Mana) && !a.getApi().equals(ApiType.ManaReflected))) {
                 continue;
             }
 
