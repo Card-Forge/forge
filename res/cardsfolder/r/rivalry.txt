@@ -2,11 +2,10 @@ Name:Rivalry
 ManaCost:2 R
 Types:Enchantment
 Text:no text
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ TrigDamageYou | IsPresent$ Land.YouCtrl | PresentCompare$ GTX | References$ X | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, if that player controls more lands than each other player, CARDNAME deals 2 damage to him or her.
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Opponent | Execute$ TrigDamageOpp | TriggerZones$ Battlefield | Secondary$ True | IsPresent$ Land.YouCtrl | PresentCompare$ LTX | References$ X | TriggerDescription$ At the beginning of each player's upkeep, if that player controls more lands than each other player, CARDNAME deals 2 damage to him or her.
-SVar:TrigDamageYou:AB$DealDamage | Cost$ 0 | NumDmg$ 2 | Defined$ You
-SVar:TrigDamageOpp:AB$DealDamage | Cost$ 0 | NumDmg$ 2 | Defined$ Opponent
-SVar:X:Count$Valid Land.YouDontCtrl
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player | Execute$ RivalDamage | CheckSVar$ ActiveLands | SVarCompare$ GTRivalLands | References$ ActiveLands,RivalLands | TriggerZones$ Battlefield | TriggerDescription$ At the beginning of each player's upkeep, if that player controls more lands than each other player, CARDNAME deals 2 damage to him or her.
+SVar:RivalDamage:AB$ DealDamage | Cost$ 0 | NumDmg$ 2 | Defined$ TriggeredPlayer
+SVar:ActiveLands:Count$Valid Land.ActivePlayerCtrl
+SVar:RivalLands:PlayerCountNonActive$HighestValid Land.YouCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rivalry.jpg
 SetInfo:ULG|Rare|http://magiccards.info/scans/en/ul/90.jpg

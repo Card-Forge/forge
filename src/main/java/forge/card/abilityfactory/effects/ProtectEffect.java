@@ -116,9 +116,12 @@ public class ProtectEffect extends SpellEffect {
                 if (sa.hasParam("AILogic")) {
                     final String logic = sa.getParam("AILogic");
                     if (logic.equals("MostProminentHumanCreatures")) {
-                        List<Card> list = ai.getOpponent().getCreaturesInPlay();
+                        List<Card> list = new ArrayList<Card>();
+                        for (Player opp : ai.getOpponents()) {
+                            list.addAll(opp.getCreaturesInPlay());
+                        }
                         if (list.isEmpty()) {
-                            list = CardLists.filterControlledBy(Singletons.getModel().getGame().getCardsInGame(), ai.getOpponent());
+                            list = CardLists.filterControlledBy(Singletons.getModel().getGame().getCardsInGame(), ai.getOpponents());
                         }
                         if (!list.isEmpty()) {
                             choice = CardFactoryUtil.getMostProminentColor(list);

@@ -368,6 +368,26 @@ public abstract class Trigger extends TriggerReplacementBase {
             }
         }
 
+        if (this.getMapParams().containsKey("APlayerHasMostCardsInHand")) {
+            int largestHand = 0;
+            final List<Player> withLargestHand = new ArrayList<Player>();
+            for (final Player p : Singletons.getModel().getGame().getPlayers()) {
+                if (p.getCardsIn(ZoneType.Hand).size() > largestHand) {
+                    withLargestHand.clear();
+                    largestHand = p.getCardsIn(ZoneType.Hand).size();
+                    withLargestHand.add(p);
+                } else if (p.getCardsIn(ZoneType.Hand).size() == largestHand) {
+                    largestHand = p.getCardsIn(ZoneType.Hand).size();
+                    withLargestHand.add(p);
+                }
+            }
+
+            if (withLargestHand.size() != 1) {
+                // More than one player tied for most life
+                return false;
+            }
+        }
+
         if (this.getMapParams().containsKey("IsPresent")) {
             final String sIsPresent = this.getMapParams().get("IsPresent");
             String presentCompare = "GE1";

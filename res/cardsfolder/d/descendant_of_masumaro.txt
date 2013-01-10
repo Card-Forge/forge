@@ -4,9 +4,9 @@ Types:Creature Human Monk
 Text:no text
 PT:1/1
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on CARDNAME for each card in your hand, then remove a +1/+1 counter from CARDNAME for each card in target opponent's hand.
-SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | SubAbility$ SelectOpponent | References$ X
-SVar:SelectOpponent:DB$Pump | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ TrigRemoveCounter
-SVar:TrigRemoveCounter:DB$RemoveCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ Y | References$ Y
+SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ X | SubAbility$ SelectOpponent | References$ X
+SVar:SelectOpponent:DB$ Pump | ValidTgts$ Opponent | TgtPrompt$ Select target opponent | SubAbility$ TrigRemoveCounter
+SVar:TrigRemoveCounter:DB$ RemoveCounter | Defined$ Self | CounterType$ P1P1 | CounterNum$ Y | References$ Y
 SVar:X:Count$InYourHand
 SVar:Y:TargetedPlayer$CardsInHand
 SVar:RemAIDeck:True

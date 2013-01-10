@@ -128,10 +128,6 @@ public class AbilityManaPart implements java.io.Serializable {
 
         // TODO all of the following would be better as trigger events
         // "tapped for mana"
-        /*if (source.getName().equals("Rainbow Vale")) {
-            source.addExtrinsicKeyword("An opponent gains control of CARDNAME at the beginning of the next end step.");
-        }*/
-
         if (source.getName().equals("Undiscovered Paradise")) {
             // Probably best to conver this to an Extrinsic Ability
             source.setBounceAtUntap(true);

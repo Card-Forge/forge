@@ -5,8 +5,8 @@ Text:no text
 PT:2/2
 T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Creature.Black | TriggerZones$ Battlefield | Execute$ TrigSacrifice | OptionalDecider$ You | TriggerDescription$ Whenever you sacrifice a black creature, you may pay 2 life. If you do, each other player sacrifices a creature.
 T:Mode$ Sacrificed | ValidPlayer$ You | ValidCard$ Creature.Green | TriggerZones$ Battlefield | Execute$ TrigGainLife | OptionalDecider$ You | TriggerDescription$ Whenever you sacrifice a green creature, you may gain 2 life.
-SVar:TrigSacrifice:AB$Sacrifice | Cost$ PayLife<2> | Defined$ Opponent | SacValid$ Creature | SacMessage$ Creature
-SVar:TrigGainLife:AB$GainLife | Cost$ 0 | LifeAmount$ 2
+SVar:TrigSacrifice:AB$ Sacrifice | Cost$ PayLife<2> | Defined$ Player.Other | SacValid$ Creature | SacMessage$ Creature
+SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ 2
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/savra_queen_of_the_golgari.jpg

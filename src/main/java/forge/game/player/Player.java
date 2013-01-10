@@ -2589,17 +2589,32 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             if (oppList.size() <= yourList.size()) {
                 return false;
             }
-        } else if (property.startsWith("withMostLife")) {
-            int highestLife = -50; // Negative base just in case a few Lich's are running around
-            Player healthiest = null;
-            for (final Player p : Singletons.getModel().getGame().getPlayers()) {
-                if (p.getLife() > highestLife) {
-                    highestLife = p.getLife();
-                    healthiest = p;
+        } else if (property.startsWith("withMost")) {
+            if (property.substring(8).equals("Life")) {
+                int highestLife = -50; // Negative base just in case a few Lich's are running around
+                Player healthiest = null;
+                for (final Player p : Singletons.getModel().getGame().getPlayers()) {
+                    if (p.getLife() > highestLife) {
+                        highestLife = p.getLife();
+                        healthiest = p;
+                    }
+                }
+                if (!this.equals(healthiest)) {
+                    return false;
                 }
             }
-            if (!this.equals(healthiest)) {
-                return false;
+            else if (property.substring(8).equals("CardsInHand")) {
+                int largestHand = 0;
+                Player withLargestHand = null;
+                for (final Player p : Singletons.getModel().getGame().getPlayers()) {
+                    if (p.getCardsIn(ZoneType.Hand).size() > largestHand) {
+                        largestHand = p.getCardsIn(ZoneType.Hand).size();
+                        withLargestHand = p;
+                    }
+                }
+                if (!this.equals(withLargestHand)) {
+                    return false;
+                }
             }
         }
 
