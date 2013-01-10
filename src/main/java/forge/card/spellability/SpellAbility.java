@@ -127,6 +127,10 @@ public abstract class SpellAbility implements ISpellAbility {
     public final boolean isManaAbility() {
         SpellAbility tail = this;
         boolean manaProducing = false;
+        // Check whether spell or ability first
+        if (this.isSpell()) {
+            return false;
+        }
         if(getRestrictions() != null)
         {
             if(getRestrictions().getPlaneswalker()) 
