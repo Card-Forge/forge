@@ -736,7 +736,8 @@ public class ComputerUtil {
                         sourceCard.tap();
                     }
                     // resolve mana ability
-                    ma.resolve();
+                    //ma.resolve();
+                    AbilityFactory.resolve(ma, false);
                     // subtract mana from mana pool
                     cost = manapool.payManaFromAbility(sa, cost, ma);
                 } else {
