@@ -13272,6 +13272,7 @@ src/main/java/forge/card/abilityfactory/effects/DiscardEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/DrainManaEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/DrawEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/EffectEffect.java -text
+src/main/java/forge/card/abilityfactory/effects/EncodeEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/EndTurnEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/FightEffect.java -text
 src/main/java/forge/card/abilityfactory/effects/FlipCoinEffect.java -text

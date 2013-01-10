@@ -47,6 +47,7 @@ public enum ApiType {
     Draw (DrawEffect.class, DrawAi.class),
     EachDamage (DamageEachEffect.class, DamageEachAi.class),
     Effect (EffectEffect.class, EffectAi.class),
+    Encode (EncodeEffect.class, CannotPlayAi.class),
     EndTurn (EndTurnEffect.class, EndTurnAi.class),
     ExchangeLife (LifeExchangeEffect.class, LifeExchangeAi.class),
     ExchangeControl (ControlExchangeEffect.class, ControlExchangeAi.class),

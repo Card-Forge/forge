@@ -122,6 +122,7 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private final ArrayList<Object> rememberedObjects = new ArrayList<Object>();
     private final ArrayList<Card> imprintedCards = new ArrayList<Card>();
+    private final ArrayList<Card> encodedCards = new ArrayList<Card>();
     private Card championedCard = null;
     private final List<Card> devouredCards = new ArrayList<Card>();
 
@@ -696,6 +697,57 @@ public class Card extends GameEntity implements Comparable<Card> {
     public final void clearImprinted() {
         this.imprintedCards.clear();
     }
+    
+    /**
+     * <p>
+     * addEncoded.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     */
+    public final void addEncoded(final Card c) {
+        this.encodedCards.add(c);
+    }
+
+    /**
+     * <p>
+     * addEncoded.
+     * </p>
+     * 
+     * @param list
+     *            a {@link java.util.ArrayList} object.
+     */
+    public final void addEncoded(final ArrayList<Card> list) {
+        this.encodedCards.addAll(list);
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     */
+    public final void removeEncoded(final Object o) {
+        this.encodedCards.remove(o);
+    }
+
+    /**
+     * <p>
+     * getEncoded.
+     * </p>
+     * 
+     * @return a {@link java.util.ArrayList} object.
+     */
+    public final ArrayList<Card> getEncoded() {
+        return this.encodedCards;
+    }
+
+    /**
+     * <p>
+     * clearEncoded.
+     * </p>
+     */
+    public final void clearEncoded() {
+        this.encodedCards.clear();
+    }    
 
     /**
      * <p>

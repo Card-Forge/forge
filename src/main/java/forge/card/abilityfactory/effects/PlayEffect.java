@@ -54,6 +54,7 @@ public class PlayEffect extends SpellEffect {
         boolean optional = sa.hasParam("Optional");
         boolean remember = sa.hasParam("RememberPlayed");
         boolean wasFaceDown = false;
+        boolean useEncoded = false;
         int amount = 1;
         if (sa.hasParam("Amount") && !sa.getParam("Amount").equals("All")) {
             amount = AbilityFactory.calculateAmount(source, sa.getParam("Amount"), sa);
@@ -73,7 +74,14 @@ public class PlayEffect extends SpellEffect {
             }
             tgtCards = Singletons.getModel().getGame().getCardsIn(zone);
             tgtCards = AbilityFactory.filterListByType(tgtCards, sa.getParam("Valid"), sa);
-        } else {
+        }
+        else if (sa.hasParam("Encoded")) {
+            final ArrayList<Card> encodedCards = source.getEncoded();
+            final int encodedIndex = Integer.parseInt(sa.getParam("Encoded")) - 1;
+            tgtCards.add(encodedCards.get(encodedIndex));
+            useEncoded = true;
+        }
+        else {
             tgtCards = getTargetCards(sa);
         }
 
@@ -144,6 +152,10 @@ public class PlayEffect extends SpellEffect {
 
                 tgtCard.setToken(true);
                 tgtCard.setCopiedSpell(true);
+
+                if (useEncoded) {
+                    tgtCard.setSVar("IsEncoded", "Number$1");
+                }
             }
             // lands will be played
             if (tgtCard.isLand()) {
