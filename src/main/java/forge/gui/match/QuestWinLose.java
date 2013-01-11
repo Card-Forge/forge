@@ -592,9 +592,9 @@ public class QuestWinLose extends ControlWinLose {
             if (this.wonMatch) {
                 maxChoices++;
                 final int wins = qData.getAchievements().getWin();
-                if (wins > 0 && wins % 5 == 0) { maxChoices++; }
-                if (wins > 0 && wins % 20 == 0) { maxChoices++; }
-                if (wins > 0 && wins % 50 == 0) { maxChoices++; }
+                if (wins > 0 && (wins + 1) % 5 == 0) { maxChoices++; }
+                if (wins > 0 && (wins + 1) % 20 == 0) { maxChoices++; }
+                if (wins > 0 && (wins + 1) % 50 == 0) { maxChoices++; }
             }
 
             if (sets.size() > maxChoices) {
