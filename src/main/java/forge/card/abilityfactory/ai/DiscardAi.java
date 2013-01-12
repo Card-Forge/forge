@@ -74,12 +74,16 @@ public class DiscardAi extends SpellAiLogic {
             }
         }
 
-        if (!sa.getParam("Mode").equals("Hand") && !sa.getParam("Mode").equals("RevealDiscardAll")) {
-           if (sa.hasParam("NumCards") && sa.getParam("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")) {
+        if (sa.hasParam("NumCards")) {
+           if (sa.getParam("NumCards").equals("X") && source.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
                 final int cardsToDiscard = Math.min(ComputerUtil.determineLeftoverMana(sa, ai), ai.getOpponent()
                         .getCardsIn(ZoneType.Hand).size());
                 source.setSVar("PayX", Integer.toString(cardsToDiscard));
+            } else {
+                if (AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa) < 1) {
+                    return false;
+                }
             }
         }
 
