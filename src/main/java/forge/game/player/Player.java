@@ -800,6 +800,10 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     public final int staticReplaceDamage(final int damage, final Card source, final boolean isCombat) {
 
         int restDamage = damage;
+        
+        if (this.hasKeyword("Damage that would reduce your life total to less than 1 reduces it to 1 instead.")) {
+            restDamage = Math.min(restDamage, this.life - 1);
+        }
 
         for (Card c : game.getCardsIn(ZoneType.Battlefield)) {
             if (c.getName().equals("Sulfuric Vapors")) {
