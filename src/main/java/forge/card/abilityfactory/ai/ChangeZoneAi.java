@@ -730,7 +730,7 @@ public class ChangeZoneAi extends SpellAiLogic {
 
                     if (!threatenedTargets.isEmpty()) {
                         // Choose "best" of the remaining to save
-                        tgt.addTarget(CardFactoryUtil.getBestCreatureAI(threatenedTargets));
+                        tgt.addTarget(CardFactoryUtil.getBestAI(threatenedTargets));
                         return true;
                     }
                 }
