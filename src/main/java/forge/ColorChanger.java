@@ -19,7 +19,7 @@ package forge;
 
 import java.util.ArrayList;
 
-import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostBeingPaid;
 
 /**
  * class ColorChanger. TODO Write javadoc for this type.
@@ -47,7 +47,7 @@ public class ColorChanger {
         if (bIncrease) {
             CardColor.increaseTimestamp();
         }
-        this.globalColorChanges.add(new CardColor(new ManaCost(s), c, addToColors, false));
+        this.globalColorChanges.add(new CardColor(new ManaCostBeingPaid(s), c, addToColors, false));
         return CardColor.getTimestamp();
     }
 

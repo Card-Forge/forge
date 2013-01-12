@@ -27,7 +27,7 @@ import forge.GameEntity;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
-import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -354,7 +354,7 @@ public class StaticAbility {
      *            the originalCost
      * @return the modified ManaCost
      */
-    public final ManaCost applyAbility(final String mode, final SpellAbility sa, final ManaCost originalCost) {
+    public final ManaCostBeingPaid applyAbility(final String mode, final SpellAbility sa, final ManaCostBeingPaid originalCost) {
 
         // don't apply the ability if it hasn't got the right mode
         if (!this.params.get("Mode").equals(mode)) {

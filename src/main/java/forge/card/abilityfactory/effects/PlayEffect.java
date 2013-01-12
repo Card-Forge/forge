@@ -12,6 +12,7 @@ import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.GameActionUtil;
 import forge.Singletons;
+import forge.card.SpellManaCost;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -214,7 +215,7 @@ public class PlayEffect extends SpellEffect {
                         }
                     }
                     newSA.setPayCosts(cost);
-                    newSA.setManaCost("");
+                    newSA.setManaCost(SpellManaCost.EMPTY);
                     newSA.setDescription(newSA.getDescription() + " (without paying its mana cost)");
                     Singletons.getModel().getGame().getAction().playSpellAbility(newSA);
                     if (remember) {

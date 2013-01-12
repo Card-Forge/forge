@@ -135,8 +135,8 @@ public class CardRulesReader {
             case 'M':
                 if (line.startsWith("ManaCost:")) {
                     final String sCost = CardRulesReader.getValueAfterKey(line, "ManaCost:");
-                    this.characteristics[this.curCharacteristics].setManaCost("no cost".equals(sCost) ? CardManaCost.EMPTY
-                            : new CardManaCost(new ParserCardnameTxtManaCost(sCost)));
+                    this.characteristics[this.curCharacteristics].setManaCost("no cost".equals(sCost) ? SpellManaCost.EMPTY
+                            : new SpellManaCost(new ParserCardnameTxtManaCost(sCost)));
                 }
 
             case 'N':

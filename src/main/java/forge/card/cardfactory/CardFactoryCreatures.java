@@ -39,6 +39,7 @@ import forge.Command;
 import forge.Constant;
 import forge.CounterType;
 import forge.Singletons;
+import forge.card.SpellManaCost;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
 import forge.card.replacement.ReplacementEffect;
@@ -131,7 +132,7 @@ public class CardFactoryCreatures {
 
     private static void getCard_Stangg(final Card card) {
 
-        final Ability ability = new Ability(card, "0") {
+        final Ability ability = new Ability(card, SpellManaCost.ZERO) {
             @Override
             public void resolve() {
                 final List<Card> cl = CardFactoryUtil.makeToken("Stangg Twin", "RG 3 4 Stangg Twin",
@@ -181,7 +182,7 @@ public class CardFactoryCreatures {
     }
 
     private static void getCard_SphinxJwar(final Card card) {
-        final SpellAbility ability1 = new AbilityStatic(card, "0") {
+        final SpellAbility ability1 = new AbilityStatic(card, SpellManaCost.ZERO) {
             @Override
             public void resolve() {
                 final Player player = card.getController();
@@ -391,7 +392,7 @@ public class CardFactoryCreatures {
     }
 
     private static void getCard_KinsbaileBorderguard(final Card card) {
-        final SpellAbility ability = new Ability(card, "0") {
+        final SpellAbility ability = new Ability(card, SpellManaCost.ZERO) {
             @Override
             public void resolve() {
                 card.addCounter(CounterType.P1P1, this.countKithkin(), true);
@@ -425,7 +426,7 @@ public class CardFactoryCreatures {
             }
         };
 
-        final SpellAbility ability2 = new Ability(card, "0") {
+        final SpellAbility ability2 = new Ability(card, SpellManaCost.ZERO) {
             @Override
             public void resolve() {
                 for (int i = 0; i < card.sumAllCounters(); i++) {
@@ -459,7 +460,7 @@ public class CardFactoryCreatures {
     }
 
     private static void getCard_MultikickerP1P1(final Card card, final String cardName) {
-        final AbilityStatic ability = new AbilityStatic(card, "0") {
+        final AbilityStatic ability = new AbilityStatic(card, SpellManaCost.ZERO) {
             @Override
             public void resolve() {
                 card.addCounter(CounterType.P1P1, card.getMultiKickerMagnitude(), true);
@@ -554,7 +555,7 @@ public class CardFactoryCreatures {
 
     private static void getCard_YoseiTheMorningStar(final Card card) {
         final List<Card> targetPerms = new ArrayList<Card>();
-        final SpellAbility ability = new Ability(card, "0") {
+        final SpellAbility ability = new Ability(card, SpellManaCost.ZERO) {
             @Override
             public void resolve() {
                 final Player p = this.getTargetPlayer();
@@ -689,7 +690,7 @@ public class CardFactoryCreatures {
             }
         }; // Input
 
-        final Ability sacOrSac = new Ability(card, "") {
+        final Ability sacOrSac = new Ability(card, SpellManaCost.EMPTY) {
             @Override
             public void resolve() {
                 if (player.isHuman()) {
@@ -853,7 +854,7 @@ public class CardFactoryCreatures {
              * @param sourceCard
              * @param manaCost
              */
-            public EOTWReplacement(Card sourceCard, String manaCost) {
+            public EOTWReplacement(Card sourceCard, SpellManaCost manaCost) {
                 super(sourceCard, manaCost);
             }
 
@@ -876,7 +877,7 @@ public class CardFactoryCreatures {
 
         }
 
-        SpellAbility repAb = new EOTWReplacement(card, "0");
+        SpellAbility repAb = new EOTWReplacement(card, SpellManaCost.ZERO);
         CardFactoryUtil.setupETBReplacementAbility(repAb);
 
         ReplacementEffect re = ReplacementHandler.parseReplacement("Event$ Moved | ValidCard$ Creature.Other+YouCtrl | Destination$ Battlefield | ActiveZones$ Battlefield | Description$ Creatures you control enter the battlefield as copies of CARDNAME.", card);

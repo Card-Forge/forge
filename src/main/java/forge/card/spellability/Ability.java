@@ -21,6 +21,7 @@ import com.esotericsoftware.minlog.Log;
 
 import forge.Card;
 import forge.Singletons;
+import forge.card.SpellManaCost;
 
 /**
  * <p>
@@ -42,7 +43,7 @@ public abstract class Ability extends SpellAbility {
      * @param manaCost
      *            a {@link java.lang.String} object.
      */
-    public Ability(final Card sourceCard, final String manaCost) {
+    public Ability(final Card sourceCard, final SpellManaCost manaCost) {
         super(sourceCard);
         this.setManaCost(manaCost);
     }
@@ -59,7 +60,7 @@ public abstract class Ability extends SpellAbility {
      * @param stackDescription
      *            a {@link java.lang.String} object.
      */
-    public Ability(final Card sourceCard, final String manaCost, final String stackDescription) {
+    public Ability(final Card sourceCard, final SpellManaCost manaCost, final String stackDescription) {
         this(sourceCard, manaCost);
         this.setStackDescription(stackDescription);
         Log.debug("an ability is being played from" + sourceCard.getName());

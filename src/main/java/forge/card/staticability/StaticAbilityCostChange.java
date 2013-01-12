@@ -22,7 +22,7 @@ import java.util.HashMap;
 import forge.Card;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostShard;
 import forge.card.spellability.AbilityActivated;
 import forge.card.spellability.SpellAbility;
@@ -45,14 +45,14 @@ public class StaticAbilityCostChange {
      * @param originalCost
      *            a ManaCost
      */
-    public static ManaCost applyRaiseCostAbility(final StaticAbility staticAbility, final SpellAbility sa
-            , final ManaCost originalCost) {
+    public static ManaCostBeingPaid applyRaiseCostAbility(final StaticAbility staticAbility, final SpellAbility sa
+            , final ManaCostBeingPaid originalCost) {
         final HashMap<String, String> params = staticAbility.getMapParams();
         final Card hostCard = staticAbility.getHostCard();
         final Player activator = sa.getActivatingPlayer();
         final Card card = sa.getSourceCard();
         final String amount = params.get("Amount");
-        final ManaCost manaCost = new ManaCost(originalCost.toString());
+        final ManaCostBeingPaid manaCost = new ManaCostBeingPaid(originalCost.toString());
 
         if (params.containsKey("ValidCard")
                 && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {
@@ -169,8 +169,8 @@ public class StaticAbilityCostChange {
      * @param originalCost
      *            a ManaCost
      */
-    public static ManaCost applyReduceCostAbility(final StaticAbility staticAbility, final SpellAbility sa
-            , final ManaCost originalCost) {
+    public static ManaCostBeingPaid applyReduceCostAbility(final StaticAbility staticAbility, final SpellAbility sa
+            , final ManaCostBeingPaid originalCost) {
         //Can't reduce zero cost
         if (originalCost.toString().equals("0")) {
             return originalCost;
@@ -180,7 +180,7 @@ public class StaticAbilityCostChange {
         final Player activator = sa.getActivatingPlayer();
         final Card card = sa.getSourceCard();
         final String amount = params.get("Amount");
-        final ManaCost manaCost = new ManaCost(originalCost.toString());
+        final ManaCostBeingPaid manaCost = new ManaCostBeingPaid(originalCost.toString());
 
         if (params.containsKey("ValidCard")
                 && !card.isValid(params.get("ValidCard").split(","), hostCard.getController(), hostCard)) {

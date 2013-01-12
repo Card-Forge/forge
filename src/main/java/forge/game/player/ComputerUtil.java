@@ -37,6 +37,7 @@ import forge.CardUtil;
 import forge.Constant;
 import forge.GameActionUtil;
 import forge.Singletons;
+import forge.card.SpellManaCost;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.ApiType;
 import forge.card.abilityfactory.effects.CharmEffect;
@@ -48,7 +49,7 @@ import forge.card.cost.CostPart;
 import forge.card.cost.CostPayLife;
 import forge.card.cost.CostPayment;
 import forge.card.cost.CostUtil;
-import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostShard;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.AbilityManaPart;
@@ -391,7 +392,7 @@ public class ComputerUtil {
             }
         }
         newSA.setPayCosts(cost);
-        newSA.setManaCost("0");
+        newSA.setManaCost(SpellManaCost.ZERO);
         final StringBuilder sb = new StringBuilder();
         sb.append(sa.getDescription()).append(" (without paying its mana cost)");
         newSA.setDescription(sb.toString());
@@ -607,7 +608,7 @@ public class ComputerUtil {
      */
     public static boolean payManaCost(final SpellAbility sa, final Player ai, final boolean test,
             final int extraMana, boolean checkPlayable) {
-        ManaCost cost = calculateManaCost(sa, test, extraMana);
+        ManaCostBeingPaid cost = calculateManaCost(sa, test, extraMana);
 
         final ManaPool manapool = ai.getManaPool();
 
@@ -644,7 +645,7 @@ public class ComputerUtil {
         int nPriority = 0;
         while (nPriority < partPriority.size()) {
             final int nPart = partPriority.get(nPriority);
-            final ManaCost costPart = new ManaCost(costParts[nPart]);
+            final ManaCostBeingPaid costPart = new ManaCostBeingPaid(costParts[nPart]);
             // Loop over mana abilities that can be used to current mana cost part
             for (final SpellAbility ma : partSources.get(nPart)) {
                 final Card sourceCard = ma.getSourceCard();
@@ -886,10 +887,10 @@ public class ComputerUtil {
      * @param extraMana
      * @return ManaCost
      */
-    private static ManaCost calculateManaCost(final SpellAbility sa, final boolean test, final int extraMana) {
-        final String mana = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : sa.getManaCost();
+    private static ManaCostBeingPaid calculateManaCost(final SpellAbility sa, final boolean test, final int extraMana) {
+        final SpellManaCost mana = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : sa.getManaCost();
 
-        ManaCost cost = new ManaCost(mana);
+        ManaCostBeingPaid cost = new ManaCostBeingPaid(mana);
 
         cost = Singletons.getModel().getGame().getAction().getSpellCostChange(sa, cost);
 
@@ -1208,10 +1209,10 @@ public class ComputerUtil {
      * @param saRoot
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param cost
-     *            a {@link forge.card.mana.ManaCost} object.
+     *            a {@link forge.card.mana.ManaCostBeingPaid} object.
      * @return String
      */
-    public static String getComboManaChoice(final Player ai, final SpellAbility manaAb, final SpellAbility saRoot, final ManaCost cost) {
+    public static String getComboManaChoice(final Player ai, final SpellAbility manaAb, final SpellAbility saRoot, final ManaCostBeingPaid cost) {
 
         final StringBuilder choiceString = new StringBuilder();
 
@@ -1221,7 +1222,7 @@ public class ComputerUtil {
 
         if (abMana.isComboMana()) {
             int amount = manaAb.hasParam("Amount") ? AbilityFactory.calculateAmount(source, manaAb.getParam("Amount"), saRoot) : 1;
-            final ManaCost testCost = new ManaCost(cost.toString().replace("X ", ""));
+            final ManaCostBeingPaid testCost = new ManaCostBeingPaid(cost.toString().replace("X ", ""));
             final String[] comboColors = abMana.getComboColors().split(" ");
             for (int nMana = 1; nMana <= amount; nMana++) {
                 String choice = "";
@@ -1846,8 +1847,8 @@ public class ComputerUtil {
         final Comparator<SpellAbility> c = new Comparator<SpellAbility>() {
             @Override
             public int compare(final SpellAbility a, final SpellAbility b) {
-                int a1 = CardUtil.getConvertedManaCost(a.getManaCost());
-                int b1 = CardUtil.getConvertedManaCost(b.getManaCost());
+                int a1 = a.getManaCost().getCMC();
+                int b1 = b.getManaCost().getCMC();
 
                 // cast 0 mana cost spells first (might be a Mox)
                 if (a1 == 0) {

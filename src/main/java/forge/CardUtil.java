@@ -31,7 +31,7 @@ import com.google.common.collect.Iterables;
 import forge.card.CardCharacteristics;
 import forge.card.EditionInfo;
 import forge.card.abilityfactory.AbilityFactory;
-import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayManaCostUtil;
@@ -146,24 +146,6 @@ public final class CardUtil {
             xPaid = c.getXManaCostPaid() * c.getManaCost().countX();
         }
         return c.getManaCost().getCMC() + xPaid;
-    }
-
-    /**
-     * <p>
-     * getConvertedManaCost.
-     * </p>
-     * 
-     * @param manaCost
-     *            a {@link java.lang.String} object.
-     * @return a int.
-     */
-    public static int getConvertedManaCost(final String manaCost) {
-        if (manaCost.equals("")) {
-            return 0;
-        }
-
-        final ManaCost cost = new ManaCost(manaCost);
-        return cost.getConvertedManaCost();
     }
 
     /**
@@ -699,7 +681,7 @@ public final class CardUtil {
      *            the cost
      * @return the convokable colors
      */
-    public static ArrayList<String> getConvokableColors(final Card cardToConvoke, final ManaCost cost) {
+    public static ArrayList<String> getConvokableColors(final Card cardToConvoke, final ManaCostBeingPaid cost) {
         final ArrayList<String> usableColors = new ArrayList<String>();
 
         if (cost.getColorlessManaAmount() > 0) {

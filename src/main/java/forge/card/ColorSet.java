@@ -73,7 +73,7 @@ public final class ColorSet implements Comparable<ColorSet> {
         return fromMask(mask);
     }
 
-    public static ColorSet fromManaCost(final CardManaCost mana) {
+    public static ColorSet fromManaCost(final SpellManaCost mana) {
         return fromMask(mana.getColorProfile());
     }
 

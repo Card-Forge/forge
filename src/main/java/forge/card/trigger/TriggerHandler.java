@@ -27,6 +27,7 @@ import forge.Card;
 
 import forge.CardLists;
 import forge.Singletons;
+import forge.card.SpellManaCost;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.ApiType;
 import forge.card.abilityfactory.effects.CharmEffect;
@@ -487,7 +488,7 @@ public class TriggerHandler {
         sa = regtrig.getOverridingAbility();
         if (sa == null) {
             if (!triggerParams.containsKey("Execute")) {
-                sa = new Ability(regtrig.getHostCard(), "0") {
+                sa = new Ability(regtrig.getHostCard(), SpellManaCost.ZERO) {
                     @Override
                     public void resolve() {
                     }

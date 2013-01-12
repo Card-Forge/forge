@@ -32,6 +32,7 @@ import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.GameActionUtil;
 import forge.Singletons;
+import forge.card.SpellManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
@@ -126,7 +127,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
                 final Card tisLand = c;
                 for (final Card ti : tis) {
                     final Card source = ti;
-                    final SpellAbility ability = new Ability(source, "") {
+                    final SpellAbility ability = new Ability(source, SpellManaCost.EMPTY) {
                         @Override
                         public void resolve() {
                             List<Card> lands = CardLists.filter(tisLand.getController().getCardsIn(ZoneType.Battlefield), Presets.LANDS);
@@ -147,7 +148,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
                 final Card lesLand = c;
                 if (les.size() > 0) {
                     final Card source = les.get(0);
-                    final SpellAbility ability = new Ability(source, "") {
+                    final SpellAbility ability = new Ability(source, SpellManaCost.EMPTY) {
                         @Override
                         public void resolve() {
                             final List<Card> lands = lesLand.getOwner().getLandsInPlay();

@@ -25,7 +25,7 @@ import forge.Card;
 import forge.CardLists;
 import forge.CounterType;
 import forge.card.abilityfactory.AbilityFactory;
-import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
@@ -473,7 +473,7 @@ public class CostUtil {
             } else {
                 CostMana newCostMana = cost2.getCostMana();
                 if (newCostMana != null) {
-                    ManaCost oldManaCost = new ManaCost(part.toString());
+                    ManaCostBeingPaid oldManaCost = new ManaCostBeingPaid(part.toString());
                     newCostMana.setXMana(oldManaCost.getXcounter() + newCostMana.getXMana());
                     oldManaCost.combineManaCost(newCostMana.toString());
                     newCostMana.setMana(oldManaCost.toString(false));

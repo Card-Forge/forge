@@ -24,6 +24,7 @@ import forge.card.spellability.AbilityManaPart;
 /**
  * <p>
  * Mana class.
+ * This represents a single mana 'globe' floating in a player's pool.
  * </p>
  * 
  * @author Forge

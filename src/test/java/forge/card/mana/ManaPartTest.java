@@ -24,47 +24,47 @@ public class ManaPartTest {
     public void testPayManaCost() {
         // test constructor
         @SuppressWarnings("unused")
-        ManaCost p = new ManaCost("G");
-        p = new ManaCost("U");
-        p = new ManaCost("W");
-        p = new ManaCost("R");
-        p = new ManaCost("B");
-        p = new ManaCost("0");
-        p = new ManaCost("1");
-        p = new ManaCost("2");
-        p = new ManaCost("3");
-        p = new ManaCost("4");
-        p = new ManaCost("5");
-        p = new ManaCost("6");
-        p = new ManaCost("7");
-        p = new ManaCost("8");
-        p = new ManaCost("9");
-        p = new ManaCost("10");
+        ManaCostBeingPaid p = new ManaCostBeingPaid("G");
+        p = new ManaCostBeingPaid("U");
+        p = new ManaCostBeingPaid("W");
+        p = new ManaCostBeingPaid("R");
+        p = new ManaCostBeingPaid("B");
+        p = new ManaCostBeingPaid("0");
+        p = new ManaCostBeingPaid("1");
+        p = new ManaCostBeingPaid("2");
+        p = new ManaCostBeingPaid("3");
+        p = new ManaCostBeingPaid("4");
+        p = new ManaCostBeingPaid("5");
+        p = new ManaCostBeingPaid("6");
+        p = new ManaCostBeingPaid("7");
+        p = new ManaCostBeingPaid("8");
+        p = new ManaCostBeingPaid("9");
+        p = new ManaCostBeingPaid("10");
 
-        p = new ManaCost("GW");
-        p = new ManaCost("1 G");
-        p = new ManaCost("1 GW");
-        p = new ManaCost("GW GW");
-        p = new ManaCost("GW GW GW");
-        p = new ManaCost("GW GW GW GW");
+        p = new ManaCostBeingPaid("GW");
+        p = new ManaCostBeingPaid("1 G");
+        p = new ManaCostBeingPaid("1 GW");
+        p = new ManaCostBeingPaid("GW GW");
+        p = new ManaCostBeingPaid("GW GW GW");
+        p = new ManaCostBeingPaid("GW GW GW GW");
 
-        p = new ManaCost("G G");
-        p = new ManaCost("G G G");
-        p = new ManaCost("G G G");
-        p = new ManaCost("G G G G");
+        p = new ManaCostBeingPaid("G G");
+        p = new ManaCostBeingPaid("G G G");
+        p = new ManaCostBeingPaid("G G G");
+        p = new ManaCostBeingPaid("G G G G");
 
-        p = new ManaCost("2 GW GW GW");
-        p = new ManaCost("3 G G G");
-        p = new ManaCost("12 GW GW GW");
-        p = new ManaCost("11 G G G");
+        p = new ManaCostBeingPaid("2 GW GW GW");
+        p = new ManaCostBeingPaid("3 G G G");
+        p = new ManaCostBeingPaid("12 GW GW GW");
+        p = new ManaCostBeingPaid("11 G G G");
 
-        p = new ManaCost("2/U");
-        p = new ManaCost("2/B 2/B");
-        p = new ManaCost("2/G 2/G 2/G");
-        p = new ManaCost("2/R 2/R 2/R 2/R");
-        p = new ManaCost("2/W 2/B 2/U 2/R 2/G");
+        p = new ManaCostBeingPaid("2/U");
+        p = new ManaCostBeingPaid("2/B 2/B");
+        p = new ManaCostBeingPaid("2/G 2/G 2/G");
+        p = new ManaCostBeingPaid("2/R 2/R 2/R 2/R");
+        p = new ManaCostBeingPaid("2/W 2/B 2/U 2/R 2/G");
 
-        final ManaCost p1 = new ManaCost("2/U");
+        final ManaCostBeingPaid p1 = new ManaCostBeingPaid("2/U");
 
         this.check(0.3, p1.isNeeded("G"));
         this.check(0.4, p1.isNeeded("U"));
@@ -78,7 +78,7 @@ public class ManaPartTest {
 
         this.check(0.91, !p1.isNeeded("R"));
 
-        final ManaCost p2 = new ManaCost("G");
+        final ManaCostBeingPaid p2 = new ManaCostBeingPaid("G");
         this.check(1, p2.isNeeded("G"));
 
         this.check(1.1, !p2.isNeeded("U"));
@@ -92,7 +92,7 @@ public class ManaPartTest {
 
         this.check(2.1, !p2.isNeeded("G"));
 
-        final ManaCost p4 = new ManaCost("1");
+        final ManaCostBeingPaid p4 = new ManaCostBeingPaid("1");
 
         this.check(3, p4.isNeeded("G"));
         this.check(4, p4.isNeeded("U"));
@@ -106,7 +106,7 @@ public class ManaPartTest {
 
         this.check(9.1, !p4.isNeeded("R"));
 
-        final ManaCost p5 = new ManaCost("GW");
+        final ManaCostBeingPaid p5 = new ManaCostBeingPaid("GW");
 
         this.check(10, p5.isNeeded("G"));
         this.check(13, p5.isNeeded("W"));
@@ -121,7 +121,7 @@ public class ManaPartTest {
 
         this.check(17, !p5.isNeeded("W"));
 
-        final ManaCost p6 = new ManaCost("BR");
+        final ManaCostBeingPaid p6 = new ManaCostBeingPaid("BR");
 
         this.check(17.1, p6.isNeeded("B"));
         this.check(17.2, p6.isNeeded("R"));
@@ -136,7 +136,7 @@ public class ManaPartTest {
 
         this.check(17.8, !p6.isNeeded("R"));
 
-        final ManaCost p7 = new ManaCost("1 G G");
+        final ManaCostBeingPaid p7 = new ManaCostBeingPaid("1 G G");
 
         p7.addMana("G");
 
@@ -154,7 +154,7 @@ public class ManaPartTest {
 
         this.check(18.8, !p7.isNeeded("W"));
 
-        final ManaCost p8 = new ManaCost("0");
+        final ManaCostBeingPaid p8 = new ManaCostBeingPaid("0");
 
         this.check(19.1, !p8.isNeeded("1"));
         this.check(19.2, !p8.isNeeded("G"));
@@ -164,7 +164,7 @@ public class ManaPartTest {
 
         this.check(19.5, !p8.isNeeded("R"));
 
-        final ManaCost p9 = new ManaCost("G G");
+        final ManaCostBeingPaid p9 = new ManaCostBeingPaid("G G");
 
         this.check(20.1, !p9.isNeeded("1"));
         this.check(20.2, p9.isNeeded("G"));
@@ -178,7 +178,7 @@ public class ManaPartTest {
 
         this.check(20.5, !p9.isNeeded("B"));
 
-        final ManaCost p10 = new ManaCost("G G G");
+        final ManaCostBeingPaid p10 = new ManaCostBeingPaid("G G G");
 
         this.check(21.1, !p10.isNeeded("W"));
         this.check(21.2, p10.isNeeded("G"));
@@ -193,7 +193,7 @@ public class ManaPartTest {
 
         this.check(21.5, !p10.isNeeded("U"));
 
-        final ManaCost p11 = new ManaCost("G G G G");
+        final ManaCostBeingPaid p11 = new ManaCostBeingPaid("G G G G");
 
         this.check(22.1, !p11.isNeeded("W"));
         this.check(22.2, p11.isNeeded("G"));
@@ -209,7 +209,7 @@ public class ManaPartTest {
 
         this.check(22.5, !p11.isNeeded("G"));
 
-        final ManaCost p12 = new ManaCost("GW");
+        final ManaCostBeingPaid p12 = new ManaCostBeingPaid("GW");
 
         this.check(23.1, p12.isNeeded("W"));
         this.check(23.2, p12.isNeeded("G"));
@@ -221,7 +221,7 @@ public class ManaPartTest {
 
         this.check(23.5, !p12.isNeeded("G"));
 
-        final ManaCost p13 = new ManaCost("GW");
+        final ManaCostBeingPaid p13 = new ManaCostBeingPaid("GW");
 
         this.check(24.1, p13.isNeeded("W"));
         this.check(24.2, p13.isNeeded("G"));
@@ -233,7 +233,7 @@ public class ManaPartTest {
 
         this.check(24.5, !p13.isNeeded("W"));
 
-        final ManaCost p14 = new ManaCost("3 GW GW");
+        final ManaCostBeingPaid p14 = new ManaCostBeingPaid("3 GW GW");
 
         this.check(25.1, p14.isNeeded("W"));
         this.check(25.2, p14.isNeeded("G"));
@@ -257,7 +257,7 @@ public class ManaPartTest {
         this.check(25.10, !p14.isNeeded("1"));
         this.check(25.11, !p14.isNeeded("R"));
 
-        final ManaCost p15 = new ManaCost("4");
+        final ManaCostBeingPaid p15 = new ManaCostBeingPaid("4");
 
         this.check(26.1, p15.isNeeded("W"));
         this.check(26.2, p15.isNeeded("G"));
@@ -270,7 +270,7 @@ public class ManaPartTest {
 
         this.check(26.4, p15.isPaid());
 
-        final ManaCost p16 = new ManaCost("10");
+        final ManaCostBeingPaid p16 = new ManaCostBeingPaid("10");
 
         p16.addMana("G");
         p16.addMana("W");
@@ -287,7 +287,7 @@ public class ManaPartTest {
 
         this.check(27, p16.isPaid());
 
-        final ManaCost p17 = new ManaCost("12 G GW");
+        final ManaCostBeingPaid p17 = new ManaCostBeingPaid("12 G GW");
 
         for (int i = 0; i < 12; i++) {
             p17.addMana("R");
@@ -298,7 +298,7 @@ public class ManaPartTest {
 
         this.check(28, p17.isPaid());
 
-        final ManaCost p18 = new ManaCost("2 W B U R G");
+        final ManaCostBeingPaid p18 = new ManaCostBeingPaid("2 W B U R G");
 
         for (int i = 0; i < 1; i++) {
             p18.addMana("R");
@@ -317,7 +317,7 @@ public class ManaPartTest {
         }
         this.check(29, p18.isPaid());
 
-        final ManaCost p19 = new ManaCost("W B U R G W");
+        final ManaCostBeingPaid p19 = new ManaCostBeingPaid("W B U R G W");
 
         p19.addMana("R");
         p19.addMana("G");
@@ -329,7 +329,7 @@ public class ManaPartTest {
 
         this.check(30, p19.isPaid());
 
-        final ManaCost p20 = new ManaCost("W B U R G W B U R G");
+        final ManaCostBeingPaid p20 = new ManaCostBeingPaid("W B U R G W B U R G");
 
         for (int i = 0; i < 2; i++) {
             p20.addMana("W");
@@ -341,7 +341,7 @@ public class ManaPartTest {
 
         this.check(31, p20.isPaid());
 
-        final ManaCost p21 = new ManaCost("2 W B U R G W B U R G G");
+        final ManaCostBeingPaid p21 = new ManaCostBeingPaid("2 W B U R G W B U R G G");
 
         for (int i = 0; i < 2; i++) {
             p21.addMana("W");
@@ -357,7 +357,7 @@ public class ManaPartTest {
 
         this.check(32, p21.isPaid());
 
-        final ManaCost p22 = new ManaCost("1 B R");
+        final ManaCostBeingPaid p22 = new ManaCostBeingPaid("1 B R");
 
         p22.addMana("B");
         p22.addMana("1");
@@ -365,14 +365,14 @@ public class ManaPartTest {
 
         this.check(33, p22.isPaid());
 
-        final ManaCost p23 = new ManaCost("B R");
+        final ManaCostBeingPaid p23 = new ManaCostBeingPaid("B R");
 
         p23.addMana("B");
         p23.addMana("R");
 
         this.check(34, p23.isPaid());
 
-        final ManaCost p24 = new ManaCost("2/B 2/B 2/B");
+        final ManaCostBeingPaid p24 = new ManaCostBeingPaid("2/B 2/B 2/B");
 
         this.check(35, p24.isNeeded("G"));
 
@@ -385,7 +385,7 @@ public class ManaPartTest {
         p24.addMana("B");
         this.check(38, p24.isPaid());
 
-        final ManaCost p25 = new ManaCost("2/G");
+        final ManaCostBeingPaid p25 = new ManaCostBeingPaid("2/G");
 
         p25.addMana("1");
         this.check(39, p25.toString().equals("1"));
@@ -393,7 +393,7 @@ public class ManaPartTest {
         p25.addMana("W");
         this.check(40, p25.isPaid());
 
-        final ManaCost p27 = new ManaCost("2/R 2/R");
+        final ManaCostBeingPaid p27 = new ManaCostBeingPaid("2/R 2/R");
 
         p27.addMana("1");
         this.check(41, p27.toString().equals("2/R 1"));
@@ -401,7 +401,7 @@ public class ManaPartTest {
         p27.addMana("W");
         this.check(42, p27.toString().equals("2/R"));
 
-        final ManaCost p26 = new ManaCost("2/W 2/W");
+        final ManaCostBeingPaid p26 = new ManaCostBeingPaid("2/W 2/W");
 
         for (int i = 0; i < 4; i++) {
             this.check(43, !p26.isPaid());
@@ -410,7 +410,7 @@ public class ManaPartTest {
 
         this.check(44, p26.isPaid());
 
-        final ManaCost p28 = new ManaCost("2/W 2/B 2/U 2/R 2/G");
+        final ManaCostBeingPaid p28 = new ManaCostBeingPaid("2/W 2/B 2/U 2/R 2/G");
         this.check(45, !p28.isPaid());
 
         p28.addMana("B");
@@ -421,7 +421,7 @@ public class ManaPartTest {
 
         this.check(45.1, p28.isPaid(), p28);
 
-        final ManaCost p29 = new ManaCost("2/W 2/B 2/U 2/R 2/G");
+        final ManaCostBeingPaid p29 = new ManaCostBeingPaid("2/W 2/B 2/U 2/R 2/G");
         this.check(46, !p29.isPaid());
 
         final Card c = new Card();
@@ -462,9 +462,9 @@ public class ManaPartTest {
      * @param b
      *            a boolean.
      * @param p
-     *            a {@link forge.card.mana.ManaCost} object.
+     *            a {@link forge.card.mana.ManaCostBeingPaid} object.
      */
-    void check(final double n, final boolean b, final ManaCost p) {
+    void check(final double n, final boolean b, final ManaCostBeingPaid p) {
         if (!b) {
             System.out.println("failed : " + n);
             System.out.println(p.toString());

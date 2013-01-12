@@ -22,7 +22,7 @@ import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
 
-import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostBeingPaid;
 
 /**
  * <p>
@@ -93,7 +93,7 @@ public class CardColor implements Iterable<Color> {
      * </p>
      * 
      * @param mc
-     *            a {@link forge.card.mana.ManaCost} object.
+     *            a {@link forge.card.mana.ManaCostBeingPaid} object.
      * @param c
      *            a {@link forge.Card} object.
      * @param addToColors
@@ -101,7 +101,7 @@ public class CardColor implements Iterable<Color> {
      * @param baseColor
      *            a boolean.
      */
-    CardColor(final ManaCost mc, final Card c, final boolean addToColors, final boolean baseColor) {
+    CardColor(final ManaCostBeingPaid mc, final Card c, final boolean addToColors, final boolean baseColor) {
         this.additional = addToColors;
         this.col = Color.convertManaCostToColor(mc);
         this.effectingCard = c;

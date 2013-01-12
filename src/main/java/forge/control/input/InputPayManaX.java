@@ -4,7 +4,7 @@ import forge.Card;
 import forge.Singletons;
 import forge.card.cost.CostMana;
 import forge.card.cost.CostPayment;
-import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
@@ -16,7 +16,7 @@ public class InputPayManaX extends InputPayMana {
     private final String colorX;
     private final String strX;
     private String colorsPaid;
-    private ManaCost manaCost;
+    private ManaCostBeingPaid manaCost;
     private final CostMana costMana;
     private final CostPayment payment;
     private final SpellAbility sa;
@@ -31,7 +31,7 @@ public class InputPayManaX extends InputPayMana {
         colorsPaid = sa.getSourceCard().getColorsPaid();
         costMana = costMana0;
         strX = Integer.toString(costMana.getXMana());
-        manaCost = new ManaCost(strX);
+        manaCost = new ManaCostBeingPaid(strX);
     }
 
     @Override
@@ -59,12 +59,12 @@ public class InputPayManaX extends InputPayMana {
     @Override
     public void selectCard(final Card card) {
         this.manaCost = InputPayManaCostUtil.activateManaAbility(sa, card,
-                this.colorX.isEmpty() ? this.manaCost : new ManaCost(this.colorX));
+                this.colorX.isEmpty() ? this.manaCost : new ManaCostBeingPaid(this.colorX));
         if (this.manaCost.isPaid()) {
             if (!this.colorsPaid.contains(this.manaCost.getColorsPaid())) {
                 this.colorsPaid += this.manaCost.getColorsPaid();
             }
-            this.manaCost = new ManaCost(strX);
+            this.manaCost = new ManaCostBeingPaid(strX);
             this.xPaid++;
         }
 
@@ -92,12 +92,12 @@ public class InputPayManaX extends InputPayMana {
     @Override
     public void selectManaPool(String color) {
         this.manaCost = InputPayManaCostUtil.activateManaAbility(color, sa,
-                this.colorX.isEmpty() ? this.manaCost : new ManaCost(this.colorX));
+                this.colorX.isEmpty() ? this.manaCost : new ManaCostBeingPaid(this.colorX));
         if (this.manaCost.isPaid()) {
             if (!this.colorsPaid.contains(this.manaCost.getColorsPaid())) {
                 this.colorsPaid += this.manaCost.getColorsPaid();
             }
-            this.manaCost = new ManaCost(strX);
+            this.manaCost = new ManaCostBeingPaid(strX);
             this.xPaid++;
         }
 

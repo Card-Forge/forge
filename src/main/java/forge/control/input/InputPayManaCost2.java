@@ -4,7 +4,7 @@ import forge.Card;
 import forge.Singletons;
 import forge.card.cost.CostMana;
 import forge.card.cost.CostPayment;
-import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -13,7 +13,7 @@ import forge.view.ButtonUtil;
 
 public class InputPayManaCost2 extends InputPayMana {
 
-    private ManaCost manaCost;
+    private ManaCostBeingPaid manaCost;
     private final CostMana costMana;
     // I would kill the one who made 2 classes like above
     private final String originalManaCost;
@@ -22,7 +22,7 @@ public class InputPayManaCost2 extends InputPayMana {
     private final CostPayment payment;
 
     public InputPayManaCost2(CostMana costMana, SpellAbility spellAbility, final CostPayment payment, int toAdd) {
-        manaCost = new ManaCost(costMana.getManaToPay());
+        manaCost = new ManaCostBeingPaid(costMana.getManaToPay());
         manaCost.increaseColorlessMana(toAdd);
 
         this.costMana = costMana;
@@ -40,7 +40,7 @@ public class InputPayManaCost2 extends InputPayMana {
     private int phyLifeToLose = 0;
 
     private void resetManaCost() {
-        this.manaCost = new ManaCost(this.originalManaCost);
+        this.manaCost = new ManaCostBeingPaid(this.originalManaCost);
         this.phyLifeToLose = 0;
     }
 

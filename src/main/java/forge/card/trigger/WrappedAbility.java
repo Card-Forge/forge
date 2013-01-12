@@ -9,6 +9,7 @@ import forge.Card;
 import forge.Command;
 import forge.GameActionUtil;
 import forge.Singletons;
+import forge.card.SpellManaCost;
 import forge.card.abilityfactory.ApiType;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
@@ -36,7 +37,7 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     boolean mandatory = false;
 
     public WrappedAbility(final Trigger regTrig, final SpellAbility sa0, final Player decider0) {
-        super(regTrig.getHostCard(), "0");
+        super(regTrig.getHostCard(), SpellManaCost.ZERO);
         regtrig = regTrig;
         sa = sa0;
         decider = decider0;
@@ -183,12 +184,12 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public String getMultiKickerManaCost() {
+    public SpellManaCost getMultiKickerManaCost() {
         return sa.getMultiKickerManaCost();
     }
 
     @Override
-    public String getReplicateManaCost() {
+    public SpellManaCost getReplicateManaCost() {
         return sa.getReplicateManaCost();
     }
 
@@ -243,7 +244,7 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public String getXManaCost() {
+    public int getXManaCost() {
         return sa.getXManaCost();
     }
 
@@ -359,12 +360,12 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public void setMultiKickerManaCost(final String cost) {
+    public void setMultiKickerManaCost(final SpellManaCost cost) {
         sa.setMultiKickerManaCost(cost);
     }
 
     @Override
-    public void setReplicateManaCost(final String cost) {
+    public void setReplicateManaCost(final SpellManaCost cost) {
         sa.setReplicateManaCost(cost);
     }
 
@@ -419,7 +420,7 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     }
 
     @Override
-    public void setXManaCost(final String cost) {
+    public void setXManaCost(final int cost) {
         sa.setXManaCost(cost);
     }
 

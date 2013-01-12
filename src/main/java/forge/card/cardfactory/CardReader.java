@@ -39,7 +39,7 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardColor;
 import forge.CardUtil;
-import forge.card.CardManaCost;
+import forge.card.SpellManaCost;
 import forge.card.CardRules;
 import forge.card.CardRulesReader;
 import forge.card.EditionInfo;
@@ -402,7 +402,7 @@ public class CardReader {
                 final String value = line.substring(9);
                 // System.out.println(s);
                 if (!"no cost".equals(value)) {
-                    card.setManaCost(new CardManaCost(new ManaCostParser(value)));
+                    card.setManaCost(new SpellManaCost(new ManaCostParser(value)));
                 }
             }
             break;

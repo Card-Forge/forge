@@ -33,7 +33,7 @@ import forge.card.mana.IParserManaCost;
  * @version $Id: CardManaCost.java 9708 2011-08-09 19:34:12Z jendave $
  */
 
-public final class CardManaCost implements Comparable<CardManaCost> {
+public final class SpellManaCost implements Comparable<SpellManaCost> {
     private final List<ManaCostShard> shards;
     private final int genericCost;
     private final boolean hasNoCost; // lands cost
@@ -42,12 +42,12 @@ public final class CardManaCost implements Comparable<CardManaCost> {
     private Float compareWeight = null;
 
     /** The Constant empty. */
-    public static final CardManaCost EMPTY = new CardManaCost(-1);
-    public static final CardManaCost ZERO = new CardManaCost(0);
-    public static final CardManaCost ONE = new CardManaCost(1);
+    public static final SpellManaCost EMPTY = new SpellManaCost(-1);
+    public static final SpellManaCost ZERO = new SpellManaCost(0);
+    public static final SpellManaCost ONE = new SpellManaCost(1);
 
     // pass mana cost parser here
-    private CardManaCost(int cmc) {
+    private SpellManaCost(int cmc) {
         this.hasNoCost = cmc < 0;
         this.genericCost = cmc < 0 ? 0 : cmc;
         this.shards = Collections.unmodifiableList(new ArrayList<ManaCostShard>());
@@ -61,7 +61,7 @@ public final class CardManaCost implements Comparable<CardManaCost> {
      * @param parser
      *            the parser
      */
-    public CardManaCost(final IParserManaCost parser) {
+    public SpellManaCost(final IParserManaCost parser) {
         if (!parser.hasNext()) {
             throw new RuntimeException("Empty manacost passed to parser (this should have been handled before)");
         }
@@ -187,7 +187,7 @@ public final class CardManaCost implements Comparable<CardManaCost> {
      * @see java.lang.Comparable#compareTo(java.lang.Object)
      */
     @Override
-    public int compareTo(final CardManaCost o) {
+    public int compareTo(final SpellManaCost o) {
         return this.getCompareWeight().compareTo(o.getCompareWeight());
     }
 

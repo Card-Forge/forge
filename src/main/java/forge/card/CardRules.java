@@ -86,7 +86,7 @@ public final class CardRules {
      * 
      * @return the mana cost
      */
-    public CardManaCost getManaCost() {
+    public SpellManaCost getManaCost() {
         return this.characteristics.getManaCost();
     }
 

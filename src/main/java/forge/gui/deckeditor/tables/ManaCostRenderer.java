@@ -24,7 +24,7 @@ import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
-import forge.card.CardManaCost;
+import forge.card.SpellManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.gui.toolbox.CardFaceSymbols;
 
@@ -34,7 +34,7 @@ import forge.gui.toolbox.CardFaceSymbols;
 public class ManaCostRenderer extends DefaultTableCellRenderer {
     private static final long serialVersionUID = 1770527102334163549L;
 
-    private CardManaCost value;
+    private SpellManaCost value;
 
     /*
      * (non-Javadoc)
@@ -46,7 +46,7 @@ public class ManaCostRenderer extends DefaultTableCellRenderer {
     @Override
     public final Component getTableCellRendererComponent(final JTable table, final Object value,
             final boolean isSelected, final boolean hasFocus, final int row, final int column) {
-        this.value = (CardManaCost) value;
+        this.value = (SpellManaCost) value;
         this.setToolTipText(this.value.toString());
         return super.getTableCellRendererComponent(table, "", isSelected, hasFocus, row, column);
     }

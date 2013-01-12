@@ -8,6 +8,7 @@ import forge.Card;
 import forge.Command;
 import forge.GameEntity;
 import forge.Singletons;
+import forge.card.SpellManaCost;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.Ability;
@@ -203,7 +204,7 @@ public class ControlGainEffect extends SpellEffect {
 
             @Override
             public void execute() {
-                final Ability ability = new Ability(hostCard, "0") {
+                final Ability ability = new Ability(hostCard, SpellManaCost.ZERO) {
                     @Override
                     public void resolve() {
 

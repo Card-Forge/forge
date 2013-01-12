@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import forge.Constant;
-import forge.card.CardManaCost;
+import forge.card.SpellManaCost;
 import forge.control.input.InputPayManaCostUtil;
 
 /**
@@ -33,7 +33,7 @@ import forge.control.input.InputPayManaCostUtil;
  * @author Forge
  * @version $Id$
  */
-public class ManaCost {
+public class ManaCostBeingPaid {
     // holds Mana_Part objects
     // ManaPartColor is stored before ManaPartColorless
     private final HashMap<ManaCostShard, Integer> unpaidShards = new HashMap<ManaCostShard, Integer>();
@@ -54,12 +54,14 @@ public class ManaCost {
      * @param manaCost
      *            a {@link java.lang.String} object.
      */
-    public ManaCost(String sCost) {
-        if ("0".equals(sCost) || "C".equals(sCost) || sCost.isEmpty()) {
-            return;
-        }
+    public ManaCostBeingPaid(String sCost) {
+        this("0".equals(sCost) || "C".equals(sCost) || sCost.isEmpty() ? null : new SpellManaCost(new ManaCostParser(sCost)));
+    }
 
-        final CardManaCost manaCost = new CardManaCost(new ManaCostParser(sCost));
+    public ManaCostBeingPaid(SpellManaCost manaCost) {
+        if ( null == manaCost )
+            return;
+
         for (ManaCostShard shard : manaCost.getShards()) {
             if (shard == ManaCostShard.X) {
                 cntX++;
@@ -519,7 +521,7 @@ public class ManaCost {
      *            a {@link java.lang.String} object.
      */
     public final void combineManaCost(final String extra) {
-        final CardManaCost manaCost = new CardManaCost(new ManaCostParser(extra));
+        final SpellManaCost manaCost = new SpellManaCost(new ManaCostParser(extra));
         for (ManaCostShard shard : manaCost.getShards()) {
             if (shard == ManaCostShard.X) {
                 cntX++;

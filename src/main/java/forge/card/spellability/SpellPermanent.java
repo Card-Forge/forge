@@ -30,6 +30,7 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.Command;
 import forge.Singletons;
+import forge.card.SpellManaCost;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -90,7 +91,7 @@ public class SpellPermanent extends Spell {
     }; // CommandReturn
 
     /** The champion ability comes. */
-    private final SpellAbility championAbilityComes = new Ability(this.getSourceCard(), "0") {
+    private final SpellAbility championAbilityComes = new Ability(this.getSourceCard(), SpellManaCost.ZERO) {
         @Override
         public void resolve() {
 
@@ -151,7 +152,7 @@ public class SpellPermanent extends Spell {
         @Override
         public void execute() {
 
-            final SpellAbility ability = new Ability(SpellPermanent.this.getSourceCard(), "0") {
+            final SpellAbility ability = new Ability(SpellPermanent.this.getSourceCard(), SpellManaCost.ZERO) {
                 @Override
                 public void resolve() {
                     final Card c = this.getSourceCard().getChampionedCard();
@@ -249,7 +250,7 @@ public class SpellPermanent extends Spell {
             sourceCard.addLeavesPlayCommand(this.championCommandLeavesPlay);
         }
 
-        if (this.getManaCost().contains("X")) {
+        if (this.getManaCost().countX() > 0) {
 
             if (!this.getSourceCard().getSVar("X").equals("")) {
                 this.setSVar("X", this.getSourceCard().getSVar("X"));
@@ -280,9 +281,9 @@ public class SpellPermanent extends Spell {
     public boolean canPlayAI() {
 
         final Card card = this.getSourceCard();
-        String mana = this.getPayCosts().getTotalMana();
+        SpellManaCost mana = this.getPayCosts().getTotalMana();
         Player ai = getActivatingPlayer();
-        if (mana.contains("X")) {
+        if (mana.countX() > 0) {
             // Set PayX here to maximum value.
             final int xPay = ComputerUtil.determineLeftoverMana(this, ai);
             if (xPay <= 0) {
@@ -327,7 +328,7 @@ public class SpellPermanent extends Spell {
         }
         final Player ai = getActivatingPlayer();
         final Card card = this.getSourceCard();
-        String mana = this.getPayCosts().getTotalMana();
+        SpellManaCost mana = this.getPayCosts().getTotalMana();
         final Cost cost = this.getPayCosts();
 
         if (cost != null) {
@@ -380,7 +381,7 @@ public class SpellPermanent extends Spell {
         }
 
         if (card.isCreature() && (card.getNetDefense() <= 0) && !card.hasStartOfKeyword("etbCounter")
-                && !mana.contains("X") && !ComputerAIGeneral.hasETBTrigger(card)
+                && mana.countX() == 0 && !ComputerAIGeneral.hasETBTrigger(card)
                 && !ComputerAIGeneral.hasETBReplacement(card)) {
             return false;
         }

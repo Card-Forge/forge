@@ -33,9 +33,11 @@ import forge.CardPredicates.Presets;
 import forge.Command;
 import forge.GameActionUtil;
 import forge.Singletons;
+import forge.card.SpellManaCost;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostBeingPaid;
+import forge.card.mana.ManaCostParser;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.AbilityTriggered;
@@ -297,16 +299,16 @@ public class MagicStack extends MyObservable {
      * 
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link forge.card.mana.ManaCost} object.
+     * @return a {@link forge.card.mana.ManaCostBeingPaid} object.
      */
-    public final ManaCost getMultiKickerSpellCostChange(final SpellAbility sa) {
+    public final ManaCostBeingPaid getMultiKickerSpellCostChange(final SpellAbility sa) {
         final int max = 25;
         final String[] numbers = new String[max];
         for (int no = 0; no < max; no++) {
             numbers[no] = String.valueOf(no);
         }
 
-        ManaCost manaCost = new ManaCost(sa.getManaCost());
+        ManaCostBeingPaid manaCost = new ManaCostBeingPaid(sa.getManaCost());
         String mana = manaCost.toString();
 
         int multiKickerPaid = game.getAction().getCostCuttingGetMultiKickerManaCostPaid();
@@ -340,7 +342,7 @@ public class MagicStack extends MyObservable {
             if (mana.equals("")) {
                 mana = "0";
             }
-            manaCost = new ManaCost(mana);
+            manaCost = new ManaCostBeingPaid(mana);
         }
         final String colorCut = game.getAction().getCostCuttingGetMultiKickerManaCostPaidColored();
 
@@ -357,7 +359,7 @@ public class MagicStack extends MyObservable {
                 if (mana.equals("")) {
                     mana = "0";
                 }
-                manaCost = new ManaCost(mana);
+                manaCost = new ManaCostBeingPaid(mana);
             }
         }
 
@@ -372,10 +374,10 @@ public class MagicStack extends MyObservable {
      * 
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link forge.card.mana.ManaCost} object.
+     * @return a {@link forge.card.mana.ManaCostBeingPaid} object.
      */
-    public final ManaCost getReplicateSpellCostChange(final SpellAbility sa) {
-        final ManaCost manaCost = new ManaCost(sa.getManaCost());
+    public final ManaCostBeingPaid getReplicateSpellCostChange(final SpellAbility sa) {
+        final ManaCostBeingPaid manaCost = new ManaCostBeingPaid(sa.getManaCost());
         // String Mana = manaCost.toString();
         return manaCost;
     }
@@ -473,7 +475,8 @@ public class MagicStack extends MyObservable {
             } else if (sp.isXCost()) {
                 // TODO: convert any X costs to use abCost so it happens earlier
                 final SpellAbility sa = sp;
-                final Ability ability = new Ability(sp.getSourceCard(), sa.getXManaCost()) {
+                final SpellManaCost mc = new SpellManaCost( new ManaCostParser(Integer.toString(sa.getXManaCost())));
+                final Ability ability = new Ability(sp.getSourceCard(), mc) {
                     @Override
                     public void resolve() {
                         final Card crd = this.getSourceCard();
@@ -499,7 +502,7 @@ public class MagicStack extends MyObservable {
                         final Card crd = sa.getSourceCard();
                         Singletons.getModel().getMatch().getInput().setInput(
                                 new InputPayManaCostAbility("Pay X cost for " + crd.getName() + " (X="
-                                        + crd.getXManaCostPaid() + ")\r\n", ability.getManaCost(), this, unpaidCommand,
+                                        + crd.getXManaCostPaid() + ")\r\n", ability.getManaCost().toString(), this, unpaidCommand,
                                         true));
                     }
                 };
@@ -509,7 +512,7 @@ public class MagicStack extends MyObservable {
                 if (player.isHuman()) {
                     Singletons.getModel().getMatch().getInput().setInput(
                             new InputPayManaCostAbility("Pay X cost for " + sp.getSourceCard().getName() + " (X="
-                                    + crd.getXManaCostPaid() + ")\r\n", ability.getManaCost(), paidCommand,
+                                    + crd.getXManaCostPaid() + ")\r\n", ability.getManaCost().toString(), paidCommand,
                                     unpaidCommand, true));
                 } else {
                     // computer
@@ -548,7 +551,7 @@ public class MagicStack extends MyObservable {
                     @Override
                     public void execute() {
                         ability.resolve();
-                        final ManaCost manaCost = MagicStack.this.getMultiKickerSpellCostChange(ability);
+                        final ManaCostBeingPaid manaCost = MagicStack.this.getMultiKickerSpellCostChange(ability);
                         if (manaCost.isPaid()) {
                             this.execute();
                         } else {
@@ -585,7 +588,7 @@ public class MagicStack extends MyObservable {
                 Player activating = sp.getActivatingPlayer();
 
                 if (activating.isHuman()) {
-                    final ManaCost manaCost = this.getMultiKickerSpellCostChange(ability);
+                    final ManaCostBeingPaid manaCost = this.getMultiKickerSpellCostChange(ability);
 
                     if (manaCost.isPaid()) {
                         paidCommand.execute();
@@ -653,7 +656,7 @@ public class MagicStack extends MyObservable {
                     @Override
                     public void execute() {
                         ability.resolve();
-                        final ManaCost manaCost = MagicStack.this.getReplicateSpellCostChange(ability);
+                        final ManaCostBeingPaid manaCost = MagicStack.this.getReplicateSpellCostChange(ability);
                         if (manaCost.isPaid()) {
                             this.execute();
                         } else {
@@ -668,7 +671,7 @@ public class MagicStack extends MyObservable {
 
                 Player controller = sp.getSourceCard().getController();
                 if (controller.isHuman()) {
-                    final ManaCost manaCost = this.getMultiKickerSpellCostChange(ability);
+                    final ManaCostBeingPaid manaCost = this.getMultiKickerSpellCostChange(ability);
 
                     if (manaCost.isPaid()) {
                         paidCommand.execute();
@@ -778,7 +781,7 @@ public class MagicStack extends MyObservable {
                 // be
                 // 1...
                 for (final Card bazaar : bazaars) {
-                    final SpellAbility counter = new Ability(bazaar, "0") {
+                    final SpellAbility counter = new Ability(bazaar, SpellManaCost.ZERO) {
                         @Override
                         public void resolve() {
                             if (game.getStack().size() > 0) {
@@ -898,7 +901,7 @@ public class MagicStack extends MyObservable {
         if (source.hasStartOfKeyword("Haunt") && !source.isCreature()
                 && game.getZoneOf(source).is(ZoneType.Graveyard)) {
             final List<Card> creats = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
-            final Ability haunterDiesWork = new Ability(source, "0") {
+            final Ability haunterDiesWork = new Ability(source, SpellManaCost.ZERO) {
                 @Override
                 public void resolve() {
                     game.getAction().exile(source);

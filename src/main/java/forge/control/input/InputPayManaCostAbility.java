@@ -20,7 +20,7 @@ package forge.control.input;
 import forge.Card;
 import forge.Command;
 import forge.Singletons;
-import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -47,7 +47,7 @@ public class InputPayManaCostAbility extends InputPayMana {
 
     private String originalManaCost;
     private String message = "";
-    private ManaCost manaCost;
+    private ManaCostBeingPaid manaCost;
     private SpellAbility fakeAbility;
     private int phyLifeToLose = 0;
 
@@ -138,7 +138,7 @@ public class InputPayManaCostAbility extends InputPayMana {
         this.phyLifeToLose = 0;
         this.message = m;
 
-        this.manaCost = new ManaCost(this.originalManaCost);
+        this.manaCost = new ManaCostBeingPaid(this.originalManaCost);
         this.paidCommand = paidCommand2;
         this.unpaidCommand = unpaidCommand2;
         this.showOnlyOKButton = showOKButton;
@@ -150,7 +150,7 @@ public class InputPayManaCostAbility extends InputPayMana {
      * </p>
      */
     public final void resetManaCost() {
-        this.manaCost = new ManaCost(this.originalManaCost);
+        this.manaCost = new ManaCostBeingPaid(this.originalManaCost);
     }
 
     @Override

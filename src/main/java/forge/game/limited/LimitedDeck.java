@@ -20,7 +20,7 @@ import com.google.common.collect.Lists;
 import forge.Constant.Preferences;
 import forge.card.MagicColor;
 import forge.card.ColorSet;
-import forge.card.CardManaCost;
+import forge.card.SpellManaCost;
 import forge.card.CardRules;
 import forge.card.CardRulesPredicates;
 import forge.card.DeckHints;
@@ -360,7 +360,7 @@ public class LimitedDeck {
 
         // count each card color using mana costs
         for (int i = 0; i < deckList.size(); i++) {
-            final CardManaCost mc = deckList.get(i).getCard().getManaCost();
+            final SpellManaCost mc = deckList.get(i).getCard().getManaCost();
 
             // count each mana symbol in the mana cost
             for (ManaCostShard shard : mc.getShards()) {

@@ -19,7 +19,7 @@ package forge;
 
 import java.util.EnumSet;
 
-import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostBeingPaid;
 
 /**
  * <p>
@@ -127,10 +127,10 @@ public enum Color {
      * </p>
      * 
      * @param m
-     *            a {@link forge.card.mana.ManaCost} object.
+     *            a {@link forge.card.mana.ManaCostBeingPaid} object.
      * @return a {@link java.util.EnumSet} object.
      */
-    public static EnumSet<Color> convertManaCostToColor(final ManaCost m) {
+    public static EnumSet<Color> convertManaCostToColor(final ManaCostBeingPaid m) {
         final EnumSet<Color> colors = EnumSet.of(Color.Colorless);
 
         if (m.isColor("W")) {

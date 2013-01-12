@@ -28,6 +28,7 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import forge.CardPredicates.Presets;
+import forge.card.SpellManaCost;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
@@ -48,6 +49,7 @@ import forge.card.spellability.AbilitySub;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
+import forge.control.input.Input;
 import forge.control.input.InputPayDiscardCost;
 import forge.control.input.InputPayManaCostAbility;
 import forge.control.input.InputPayReturnCost;
@@ -130,7 +132,7 @@ public final class GameActionUtil {
             void doCascade(final Card c, final Player controller) {
                 final Card cascCard = c;
 
-                final Ability ability = new Ability(c, "0") {
+                final Ability ability = new Ability(c, SpellManaCost.ZERO) {
                     @Override
                     public void resolve() {
                         final List<Card> topOfLibrary = controller.getCardsIn(ZoneType.Library);
@@ -253,7 +255,7 @@ public final class GameActionUtil {
                         activateRipple = true;
                 }
                 if (activateRipple) {
-                    final Ability ability = new Ability(c, "0") {
+                    final Ability ability = new Ability(c, SpellManaCost.ZERO) {
                         @Override
                         public void resolve() {
                             final List<Card> topOfLibrary = controller.getCardsIn(ZoneType.Library);
@@ -343,20 +345,20 @@ public final class GameActionUtil {
      * 
      * @param message
      *            a {@link java.lang.String} object.
-     * @param manaCost
+     * @param spellManaCost
      *            a {@link java.lang.String} object.
      * @param paid
      *            a {@link forge.Command} object.
      * @param unpaid
      *            a {@link forge.Command} object.
      */
-    public static void payManaDuringAbilityResolve(final String message, final String manaCost, final Command paid,
+    public static void payManaDuringAbilityResolve(final String message, final SpellManaCost spellManaCost, final Command paid,
             final Command unpaid) {
         // temporarily disable the Resolve flag, so the user can payMana for the
         // resolving Ability
         final boolean bResolving = Singletons.getModel().getGame().getStack().isResolving();
         Singletons.getModel().getGame().getStack().setResolving(false);
-        Singletons.getModel().getMatch().getInput().setInput(new InputPayManaCostAbility(message, manaCost, paid, unpaid));
+        Singletons.getModel().getMatch().getInput().setInput(new InputPayManaCostAbility(message, spellManaCost.toString(), paid, unpaid));
         Singletons.getModel().getGame().getStack().setResolving(bResolving);
     }
 
@@ -566,24 +568,24 @@ public final class GameActionUtil {
         //      interface for sacrifice costs (instead of the menu-based one above).
 
         //the following costs need inputs and can't be combined at the moment
+        Input toSet = null;
         if (costPart instanceof CostReturn) {
-            final boolean bResolving = Singletons.getModel().getGame().getStack().isResolving();
-            Singletons.getModel().getGame().getStack().setResolving(false);
-            Singletons.getModel().getMatch().getInput().setInput(new InputPayReturnCost((CostReturn) costPart, ability, paid, unpaid));
-            Singletons.getModel().getGame().getStack().setResolving(bResolving);
+            toSet = new InputPayReturnCost((CostReturn) costPart, ability, paid, unpaid);
         }
         else if (costPart instanceof CostDiscard) {
-            final boolean bResolving = Singletons.getModel().getGame().getStack().isResolving();
-            Singletons.getModel().getGame().getStack().setResolving(false);
-            Singletons.getModel().getMatch().getInput().setInput(new InputPayDiscardCost((CostDiscard) costPart, ability, paid, unpaid));
-            Singletons.getModel().getGame().getStack().setResolving(bResolving);
+            toSet = new InputPayDiscardCost((CostDiscard) costPart, ability, paid, unpaid);
         }
         else if (costPart instanceof CostMana) {
+            toSet = new InputPayManaCostAbility(source + "\r\n", ability.getManaCost().toString(), paid, unpaid);
+        }
+        
+        
+        if (toSet != null) {
             // temporarily disable the Resolve flag, so the user can payMana for the
             // resolving Ability
             final boolean bResolving = Singletons.getModel().getGame().getStack().isResolving();
             Singletons.getModel().getGame().getStack().setResolving(false);
-            Singletons.getModel().getMatch().getInput().setInput(new InputPayManaCostAbility(source + "\r\n", ability.getManaCost(), paid, unpaid));
+            Singletons.getModel().getMatch().getInput().setInput(toSet);
             Singletons.getModel().getGame().getStack().setResolving(bResolving);
         }
     }
@@ -727,14 +729,14 @@ public final class GameActionUtil {
         }
 
         if (affected.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it.")) {
-            final Ability ability = new Ability(source, "0") {
+            final Ability ability = new Ability(source, SpellManaCost.ZERO) {
                 @Override
                 public void resolve() {
                     Singletons.getModel().getGame().getAction().destroy(affected);
                 }
             };
 
-            final Ability ability2 = new Ability(source, "0") {
+            final Ability ability2 = new Ability(source, SpellManaCost.ZERO) {
                 @Override
                 public void resolve() {
                     Singletons.getModel().getGame().getAction().destroyNoRegeneration(affected);
@@ -782,7 +784,7 @@ public final class GameActionUtil {
                                             + "this turn is put into a graveyard, put")) {
                 final Card thisCard = c;
                 final String kw = a.get(i).toString();
-                final Ability ability2 = new Ability(c, "0") {
+                final Ability ability2 = new Ability(c, SpellManaCost.ZERO) {
                     @Override
                     public void resolve() {
                         CounterType counter = CounterType.P1P1;
@@ -860,7 +862,7 @@ public final class GameActionUtil {
             final int poison = Integer.parseInt(k[1]);
             final Card crd = c;
 
-            final Ability ability = new Ability(c, "0") {
+            final Ability ability = new Ability(c, SpellManaCost.ZERO) {
                 @Override
                 public void resolve() {
                     final Player player = crd.getController();
@@ -917,7 +919,7 @@ public final class GameActionUtil {
         final ArrayList<Card> auras = enchanted.getEnchantedBy();
         for (final Card aura : auras) {
             if (aura.getName().equals("Celestial Mantle")) {
-                final Ability doubleLife = new Ability(aura, "0") {
+                final Ability doubleLife = new Ability(aura, SpellManaCost.ZERO) {
                     @Override
                     public void resolve() {
                         final int life = enchanted.getController().getLife();
@@ -946,7 +948,7 @@ public final class GameActionUtil {
         final Player opponent = player.getOpponent();
 
         if (c.getNetAttack() > 0) {
-            final Ability ability = new Ability(c, "0") {
+            final Ability ability = new Ability(c, SpellManaCost.ZERO) {
                 @Override
                 public void resolve() {
 
@@ -1461,7 +1463,7 @@ public final class GameActionUtil {
                 }
                 newSA.setBasicSpell(false);
                 newSA.setPayCosts(cost);
-                newSA.setManaCost("");
+                newSA.setManaCost(SpellManaCost.EMPTY);
                 newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
                 alternatives.add(newSA);
             }
@@ -1482,7 +1484,7 @@ public final class GameActionUtil {
                 }
                 newSA.setBasicSpell(false);
                 newSA.setPayCosts(cost);
-                newSA.setManaCost("");
+                newSA.setManaCost(SpellManaCost.EMPTY);
                 newSA.setDescription(sa.getDescription() + " (without paying its mana cost)");
                 alternatives.add(newSA);
             }
@@ -1502,7 +1504,7 @@ public final class GameActionUtil {
                 }
                 newSA.setBasicSpell(false);
                 newSA.setPayCosts(cost);
-                newSA.setManaCost("");
+                newSA.setManaCost(SpellManaCost.EMPTY);
                 newSA.setDescription(sa.getDescription() + " (without paying its mana cost and as though it has flash)");
                 alternatives.add(newSA);
             }
@@ -1518,7 +1520,7 @@ public final class GameActionUtil {
                 }
                 newSA.setBasicSpell(false);
                 newSA.setPayCosts(cost);
-                newSA.setManaCost("");
+                newSA.setManaCost(SpellManaCost.EMPTY);
                 String costString = cost.toSimpleString();
                 if (costString.equals("")) {
                     costString = "0";
@@ -1574,7 +1576,7 @@ public final class GameActionUtil {
                     final SpellAbility newSA = s.copy();
                     newSA.setBasicSpell(false);
                     newSA.setPayCosts(combineCosts(newSA, keyword.substring(19)));
-                    newSA.setManaCost("");
+                    newSA.setManaCost(SpellManaCost.EMPTY);
                     newSA.setDescription(s.getDescription() + " (Splicing " + c + " onto it)");
                     newSA.addSplicedCards(c);
                     SpellAbility child = newSA;
@@ -1620,7 +1622,7 @@ public final class GameActionUtil {
                     final SpellAbility newSA = sa.copy();
                     newSA.setBasicSpell(false);
                     newSA.setPayCosts(GameActionUtil.combineCosts(newSA, keyword.substring(8)));
-                    newSA.setManaCost("");
+                    newSA.setManaCost(SpellManaCost.EMPTY);
                     newSA.setDescription(sa.getDescription() + " (with Buyback)");
                     ArrayList<String> newoacs = new ArrayList<String>();
                     newoacs.addAll(sa.getOptionalAdditionalCosts());
@@ -1637,7 +1639,7 @@ public final class GameActionUtil {
                     final SpellAbility newSA = sa.copy();
                     newSA.setBasicSpell(false);
                     newSA.setPayCosts(GameActionUtil.combineCosts(newSA, keyword.substring(7)));
-                    newSA.setManaCost("");
+                    newSA.setManaCost(SpellManaCost.EMPTY);
                     final Cost cost = new Cost(source, keyword.substring(7), false);
                     newSA.setDescription(sa.getDescription() + " (Kicker " + cost.toSimpleString() + ")");
                     ArrayList<String> newoacs = new ArrayList<String>();
@@ -1657,7 +1659,7 @@ public final class GameActionUtil {
                     final SpellAbility newSA = sa.copy();
                     newSA.setBasicSpell(false);
                     newSA.setPayCosts(GameActionUtil.combineCosts(newSA, costString1));
-                    newSA.setManaCost("");
+                    newSA.setManaCost(SpellManaCost.EMPTY);
                     final Cost cost1 = new Cost(source, costString1, false);
                     newSA.setDescription(sa.getDescription() + " (Additional cost " + cost1.toSimpleString() + ")");
                     ArrayList<String> newoacs = new ArrayList<String>();
@@ -1670,7 +1672,7 @@ public final class GameActionUtil {
                     final SpellAbility newSA2 = sa.copy();
                     newSA2.setBasicSpell(false);
                     newSA2.setPayCosts(GameActionUtil.combineCosts(newSA2, costString2));
-                    newSA2.setManaCost("");
+                    newSA2.setManaCost(SpellManaCost.EMPTY);
                     final Cost cost2 = new Cost(source, costString2, false);
                     newSA2.setDescription(sa.getDescription() + " (Additional cost " + cost2.toSimpleString() + ")");
                     ArrayList<String> newoacs2 = new ArrayList<String>();
@@ -1690,7 +1692,7 @@ public final class GameActionUtil {
                     final String conspireCost = "tapXType<2/Creature.SharesColorWith/untapped creature you control"
                             + " that shares a color with " + source.getName() + ">";
                     newSA.setPayCosts(GameActionUtil.combineCosts(newSA, conspireCost));
-                    newSA.setManaCost("");
+                    newSA.setManaCost(SpellManaCost.EMPTY);
                     newSA.setDescription(sa.getDescription() + " (Conspire)");
                     ArrayList<String> newoacs = new ArrayList<String>();
                     newoacs.addAll(sa.getOptionalAdditionalCosts());

@@ -421,10 +421,10 @@ public class ManaPool {
      * @param saBeingPaidFor
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param manaCost
-     *            a {@link forge.card.mana.ManaCost} object.
-     * @return a {@link forge.card.mana.ManaCost} object.
+     *            a {@link forge.card.mana.ManaCostBeingPaid} object.
+     * @return a {@link forge.card.mana.ManaCostBeingPaid} object.
      */
-    public final ManaCost payManaFromPool(final SpellAbility saBeingPaidFor, ManaCost manaCost) {
+    public final ManaCostBeingPaid payManaFromPool(final SpellAbility saBeingPaidFor, ManaCostBeingPaid manaCost) {
 
         // paying from Mana Pool
         if (manaCost.isPaid() || this.isEmpty()) {
@@ -461,12 +461,12 @@ public class ManaPool {
      * @param saBeingPaidFor
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param manaCost
-     *            a {@link forge.card.mana.ManaCost} object.
+     *            a {@link forge.card.mana.ManaCostBeingPaid} object.
      * @param manaStr
      *            a {@link java.lang.String} object.
-     * @return a {@link forge.card.mana.ManaCost} object.
+     * @return a {@link forge.card.mana.ManaCostBeingPaid} object.
      */
-    public final ManaCost payManaFromPool(final SpellAbility saBeingPaidFor, final ManaCost manaCost, final String manaStr) {
+    public final ManaCostBeingPaid payManaFromPool(final SpellAbility saBeingPaidFor, final ManaCostBeingPaid manaCost, final String manaStr) {
         if (manaStr.trim().equals("") || manaCost.isPaid()) {
             return manaCost;
         }
@@ -497,12 +497,12 @@ public class ManaPool {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param manaCost
-     *            a {@link forge.card.mana.ManaCost} object.
+     *            a {@link forge.card.mana.ManaCostBeingPaid} object.
      * @param ma
      *            a {@link forge.card.spellability.AbilityMana} object.
-     * @return a {@link forge.card.mana.ManaCost} object.
+     * @return a {@link forge.card.mana.ManaCostBeingPaid} object.
      */
-    public final ManaCost payManaFromAbility(final SpellAbility sa, ManaCost manaCost, final SpellAbility ma) {
+    public final ManaCostBeingPaid payManaFromAbility(final SpellAbility sa, ManaCostBeingPaid manaCost, final SpellAbility ma) {
         if (manaCost.isPaid() || this.isEmpty()) {
             return manaCost;
         }

@@ -19,7 +19,7 @@ package forge.control.input;
 
 import forge.Card;
 import forge.Singletons;
-import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostBeingPaid;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -47,7 +47,7 @@ public class InputPayManaCost extends InputPayMana {
     private final Card originalCard;
 
     /** The mana cost. */
-    private ManaCost manaCost;
+    private ManaCostBeingPaid manaCost;
 
     private final SpellAbility spell;
 
@@ -67,7 +67,7 @@ public class InputPayManaCost extends InputPayMana {
      */
     public InputPayManaCost(final SpellAbility sa, final boolean noStack) {
         this.skipStack = noStack;
-        this.originalManaCost = sa.getManaCost(); // Change
+        this.originalManaCost = sa.getManaCost().toString(); // Change
         this.originalCard = sa.getSourceCard();
 
         this.spell = sa;
@@ -77,14 +77,14 @@ public class InputPayManaCost extends InputPayMana {
                 if (this.spell.getAfterPayMana() != null) {
                     this.stopSetNext(this.spell.getAfterPayMana());
                 } else {
-                    this.manaCost = new ManaCost("0");
+                    this.manaCost = new ManaCostBeingPaid("0");
                     Singletons.getModel().getGame().getStack().add(this.spell);
                 }
             } else {
-                this.manaCost = Singletons.getModel().getGame().getAction().getSpellCostChange(sa, new ManaCost(this.originalManaCost));
+                this.manaCost = Singletons.getModel().getGame().getAction().getSpellCostChange(sa, new ManaCostBeingPaid(this.originalManaCost));
             }
         } else {
-            this.manaCost = new ManaCost(sa.getManaCost());
+            this.manaCost = new ManaCostBeingPaid(sa.getManaCost());
         }
     }
 
@@ -97,7 +97,7 @@ public class InputPayManaCost extends InputPayMana {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     public InputPayManaCost(final SpellAbility sa) {
-        this(sa, new ManaCost(sa.getManaCost()));
+        this(sa, new ManaCostBeingPaid(sa.getManaCost()));
     }
 
     /**
@@ -109,9 +109,9 @@ public class InputPayManaCost extends InputPayMana {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * 
      * @param manaCostToPay
-     *            a {@link forge.card.mana.ManaCost} object.
+     *            a {@link forge.card.mana.ManaCostBeingPaid} object.
      */
-    public InputPayManaCost(final SpellAbility sa, final ManaCost manaCostToPay) {
+    public InputPayManaCost(final SpellAbility sa, final ManaCostBeingPaid manaCostToPay) {
         this.originalManaCost = manaCostToPay.toString(); // Change
         this.originalCard = sa.getSourceCard();
 
@@ -122,14 +122,14 @@ public class InputPayManaCost extends InputPayMana {
                 if (this.spell.getAfterPayMana() != null) {
                     this.stopSetNext(this.spell.getAfterPayMana());
                 } else {
-                    this.manaCost = new ManaCost("0");
+                    this.manaCost = new ManaCostBeingPaid("0");
                     Singletons.getModel().getGame().getStack().add(this.spell);
                 }
             } else {
                 this.manaCost = manaCostToPay;
             }
         } else {
-            this.manaCost = new ManaCost(sa.getManaCost());
+            this.manaCost = new ManaCostBeingPaid(sa.getManaCost());
         }
     }
 
@@ -139,7 +139,7 @@ public class InputPayManaCost extends InputPayMana {
      * </p>
      */
     private void resetManaCost() {
-        this.manaCost = new ManaCost(this.originalManaCost);
+        this.manaCost = new ManaCostBeingPaid(this.originalManaCost);
         this.phyLifeToLose = 0;
     }
 
@@ -266,7 +266,7 @@ public class InputPayManaCost extends InputPayMana {
         }
 
         CMatchUI.SINGLETON_INSTANCE.showMessage(msg.toString());
-        if (this.manaCost.isPaid() && !new ManaCost(this.originalManaCost).isPaid()) {
+        if (this.manaCost.isPaid() && !new ManaCostBeingPaid(this.originalManaCost).isPaid()) {
             this.originalCard.setSunburstValue(this.manaCost.getSunburst());
             this.done();
         }

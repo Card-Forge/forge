@@ -13099,7 +13099,6 @@ src/main/java/forge/card/CardCharacteristics.java -text
 src/main/java/forge/card/CardCoreType.java -text
 src/main/java/forge/card/CardEdition.java -text
 src/main/java/forge/card/CardInSet.java -text
-src/main/java/forge/card/CardManaCost.java -text
 src/main/java/forge/card/CardRarity.java -text
 src/main/java/forge/card/CardRuleCharacteristics.java -text
 src/main/java/forge/card/CardRules.java -text
@@ -13116,6 +13115,7 @@ src/main/java/forge/card/FormatCollection.java -text
 src/main/java/forge/card/MagicColor.java -text
 src/main/java/forge/card/MetaSet.java -text
 src/main/java/forge/card/MtgDataParser.java -text
+src/main/java/forge/card/SpellManaCost.java -text
 src/main/java/forge/card/TriggerReplacementBase.java -text
 src/main/java/forge/card/UnOpenedMeta.java -text
 src/main/java/forge/card/UnOpenedProduct.java -text
@@ -13360,7 +13360,7 @@ src/main/java/forge/card/cost/CostUtil.java -text
 src/main/java/forge/card/cost/package-info.java svneol=native#text/plain
 src/main/java/forge/card/mana/IParserManaCost.java -text
 src/main/java/forge/card/mana/Mana.java svneol=native#text/plain
-src/main/java/forge/card/mana/ManaCost.java svneol=native#text/plain
+src/main/java/forge/card/mana/ManaCostBeingPaid.java svneol=native#text/plain
 src/main/java/forge/card/mana/ManaCostParser.java -text
 src/main/java/forge/card/mana/ManaCostShard.java -text
 src/main/java/forge/card/mana/ManaPool.java svneol=native#text/plain

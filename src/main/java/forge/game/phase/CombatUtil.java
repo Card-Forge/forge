@@ -39,6 +39,7 @@ import forge.CounterType;
 import forge.GameActionUtil;
 import forge.GameEntity;
 import forge.Singletons;
+import forge.card.SpellManaCost;
 import forge.card.TriggerReplacementBase;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.ApiType;
@@ -2813,7 +2814,7 @@ public class CombatUtil {
                     final int a = Integer.valueOf(k[1]);
                     final Card crd = c;
 
-                    final Ability ability = new Ability(c, "0") {
+                    final Ability ability = new Ability(c, SpellManaCost.ZERO) {
                         @Override
                         public void resolve() {
                             final Player cp = crd.getController();
@@ -2849,7 +2850,7 @@ public class CombatUtil {
         else if (c.getName().equals("Witch-Maw Nephilim") && !c.getDamageHistory().getCreatureAttackedThisCombat()
                 && (c.getNetAttack() >= 10)) {
             final Card charger = c;
-            final Ability ability2 = new Ability(c, "0") {
+            final Ability ability2 = new Ability(c, SpellManaCost.ZERO) {
                 @Override
                 public void resolve() {
 
@@ -3000,7 +3001,7 @@ public class CombatUtil {
             }
             final int mag = flankingMagnitude;
             final Card blocker = b;
-            final Ability ability2 = new Ability(b, "0") {
+            final Ability ability2 = new Ability(b, SpellManaCost.ZERO) {
                 @Override
                 public void resolve() {
 
@@ -3058,7 +3059,7 @@ public class CombatUtil {
         Ability ability;
 
         for (int i = 0; i < magnitude; i++) {
-            ability = new Ability(c, "0") {
+            ability = new Ability(c, SpellManaCost.ZERO) {
                 @Override
                 public void resolve() {
                     final Command untilEOT = new Command() {
@@ -3097,7 +3098,7 @@ public class CombatUtil {
         if (phasingPlayer.getCardsIn(ZoneType.Battlefield, "Sovereigns of Lost Alara").size() > 0) {
             for (int i = 0; i < phasingPlayer.getCardsIn(ZoneType.Battlefield, "Sovereigns of Lost Alara").size(); i++) {
                 final Card attacker = c;
-                final Ability ability4 = new Ability(c, "0") {
+                final Ability ability4 = new Ability(c, SpellManaCost.ZERO) {
                     @Override
                     public void resolve() {
                         List<Card> enchantments =
@@ -3167,7 +3168,7 @@ public class CombatUtil {
 
         // numBlockers -1 since it is for every creature beyond the first
         for (int i = 0; i < (numBlockers - 1); i++) {
-            ability = new Ability(c, "0") {
+            ability = new Ability(c, SpellManaCost.ZERO) {
                 @Override
                 public void resolve() {
                     final Command untilEOT = new Command() {

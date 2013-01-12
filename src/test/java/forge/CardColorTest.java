@@ -4,7 +4,7 @@ import java.util.EnumSet;
 
 import org.testng.annotations.Test;
 
-import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostBeingPaid;
 
 /**
  * The Class CardColorTest.
@@ -17,7 +17,7 @@ public class CardColorTest {
      */
     @Test(groups = { "UnitTest", "fast" }, timeOut = 1000)
     public void cardColorTest1() {
-        final ManaCost mc = new ManaCost("R W U");
+        final ManaCostBeingPaid mc = new ManaCostBeingPaid("R W U");
         final EnumSet<Color> col = Color.convertManaCostToColor(mc);
         System.out.println(col.toString());
     }

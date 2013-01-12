@@ -34,8 +34,10 @@ import forge.Command;
 import forge.CounterType;
 import forge.GameActionUtil;
 import forge.Singletons;
+import forge.card.SpellManaCost;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
+import forge.card.mana.ManaCostParser;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilityStatic;
@@ -120,7 +122,7 @@ public class Upkeep extends Phase {
 
             final StringBuilder sb = new StringBuilder();
             sb.append("Cumulative Upkeep for ").append(c).append("\n");
-            final Ability upkeepAbility = new Ability(c, "0") {
+            final Ability upkeepAbility = new Ability(c, SpellManaCost.ZERO) {
                 @Override
                 public void resolve() {
                     c.addCounter(CounterType.AGE, 1, true);
@@ -182,7 +184,7 @@ public class Upkeep extends Phase {
                 final StringBuilder sb = new StringBuilder();
                 sb.append("Echo for ").append(c).append("\n");
 
-                final Ability sacAbility = new Ability(c, "0") {
+                final Ability sacAbility = new Ability(c, SpellManaCost.ZERO) {
                     @Override
                     public void resolve() {
                         Player controller = c.getController();
@@ -233,7 +235,7 @@ public class Upkeep extends Phase {
             // otherwise another slowtrip gets added
             card.removeIntrinsicKeyword("Draw a card at the beginning of the next turn's upkeep.");
 
-            final Ability slowtrip = new Ability(card, "0") {
+            final Ability slowtrip = new Ability(card, SpellManaCost.ZERO) {
                 @Override
                 public void resolve() {
                     player.drawCard();
@@ -266,7 +268,7 @@ public class Upkeep extends Phase {
                 // destroy
                 if (ability.startsWith("At the beginning of your upkeep, destroy CARDNAME")) {
                     final String[] k = ability.split(" pay ");
-                    final String upkeepCost = k[1].toString();
+                    final SpellManaCost upkeepCost = new SpellManaCost(new ManaCostParser(k[1]));
 
                     final Command unpaidCommand = new Command() {
                         private static final long serialVersionUID = 8942537892273123542L;
@@ -282,16 +284,15 @@ public class Upkeep extends Phase {
 
                     final Command paidCommand = Command.BLANK;
 
-                    final Ability aiPaid = Upkeep.BlankAbility(c, upkeepCost);
+                    final Ability aiPaid = Upkeep.BlankAbility(c, upkeepCost.toString());
 
                     final StringBuilder sb = new StringBuilder();
                     sb.append("Upkeep for ").append(c).append("\n");
-                    final Ability upkeepAbility = new Ability(c, "0") {
+                    final Ability upkeepAbility = new Ability(c, SpellManaCost.ZERO) {
                         @Override
                         public void resolve() {
                             if (controller.isHuman()) {
-                                GameActionUtil.payManaDuringAbilityResolve(sb.toString(), upkeepCost, paidCommand,
-                                        unpaidCommand);
+                                GameActionUtil.payManaDuringAbilityResolve(sb.toString(), upkeepCost, paidCommand, unpaidCommand);
                             } else { // computer
                                 if (ComputerUtil.canPayCost(aiPaid, controller) && !c.hasKeyword("Indestructible")) {
                                     ComputerUtil.playNoStack(controller, aiPaid);
@@ -344,7 +345,7 @@ public class Upkeep extends Phase {
 
                     final Ability blankAbility = Upkeep.BlankAbility(c, upkeepCost);
 
-                    final Ability upkeepAbility = new Ability(c, "0") {
+                    final Ability upkeepAbility = new Ability(c, SpellManaCost.ZERO) {
                         @Override
                         public void resolve() {
                             if (controller.isHuman()) {
@@ -371,7 +372,7 @@ public class Upkeep extends Phase {
                     final String s1 = k[1].substring(0, 2);
                     final int upkeepDamage = Integer.parseInt(s1.trim());
                     final String[] l = k[1].split(" pay ");
-                    final String upkeepCost = l[1].toString();
+                    final SpellManaCost upkeepCost = new SpellManaCost(new ManaCostParser(l[1]));
 
                     final Command unpaidCommand = new Command() {
                         private static final long serialVersionUID = 1238166187561501928L;
@@ -384,16 +385,15 @@ public class Upkeep extends Phase {
 
                     final Command paidCommand = Command.BLANK;
 
-                    final Ability aiPaid = Upkeep.BlankAbility(c, upkeepCost);
+                    final Ability aiPaid = Upkeep.BlankAbility(c, upkeepCost.toString());
 
                     final StringBuilder sb = new StringBuilder();
                     sb.append("Damage upkeep for ").append(c).append("\n");
-                    final Ability upkeepAbility = new Ability(c, "0") {
+                    final Ability upkeepAbility = new Ability(c, SpellManaCost.ZERO) {
                         @Override
                         public void resolve() {
                             if (controller.isHuman()) {
-                                GameActionUtil.payManaDuringAbilityResolve(sb.toString(), upkeepCost, paidCommand,
-                                        unpaidCommand);
+                                GameActionUtil.payManaDuringAbilityResolve(sb.toString(), upkeepCost, paidCommand, unpaidCommand);
                             } else { // computers
                                 if (ComputerUtil.canPayCost(aiPaid, controller)
                                         && (controller.predictDamage(upkeepDamage, c, false) > 0)) {
@@ -461,7 +461,7 @@ public class Upkeep extends Phase {
 
             final List<Card> abyssGetTargets = CardLists.filter(player.getCreaturesInPlay(), Presets.NON_ARTIFACTS);
 
-            final Ability sacrificeCreature = new Ability(abyss, "") {
+            final Ability sacrificeCreature = new Ability(abyss, SpellManaCost.EMPTY) {
                 @Override
                 public void resolve() {
                     final List<Card> targets = CardLists.getTargetableCards(abyssGetTargets, this);
@@ -529,7 +529,7 @@ public class Upkeep extends Phase {
         for (int i = 0; i < cards.size(); i++) {
             final Card c = cards.get(i);
 
-            final Ability ability = new Ability(c, "") {
+            final Ability ability = new Ability(c, SpellManaCost.EMPTY) {
                 @Override
                 public void resolve() {
                     final List<Card> creatures = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
@@ -604,13 +604,13 @@ public class Upkeep extends Phase {
 
             final Card c = cards.get(i);
 
-            final Ability cost = new Ability(c, "B B B") {
+            final Ability cost = new Ability(c, new SpellManaCost(new ManaCostParser("B B B"))) {
                 @Override
                 public void resolve() {
                 }
             }; // end cost ability
 
-            final Ability noPay = new Ability(c, "0") {
+            final Ability noPay = new Ability(c, SpellManaCost.ZERO) {
                 @Override
                 public void resolve() {
                     final List<Card> playerLand = player.getLandsInPlay();
@@ -633,7 +633,7 @@ public class Upkeep extends Phase {
             if (cp.isHuman()) {
                 final String question = "Pay Demonic Hordes upkeep cost?";
                 if (GameActionUtil.showYesNoDialog(c, question)) {
-                    final Ability pay = new Ability(c, "0") {
+                    final Ability pay = new Ability(c, SpellManaCost.ZERO) {
                         @Override
                         public void resolve() {
                             if (Singletons.getModel().getGame().getZoneOf(c).is(ZoneType.Battlefield)) {
@@ -662,7 +662,7 @@ public class Upkeep extends Phase {
             else { // computer
                 noPay.setActivatingPlayer(cp);
                 if (ComputerUtil.canPayCost(cost, cp)) {
-                    final Ability computerPay = new Ability(c, "0") {
+                    final Ability computerPay = new Ability(c, SpellManaCost.ZERO) {
                         @Override
                         public void resolve() {
                             ComputerUtil.payManaCost(cp, cost);
@@ -729,7 +729,7 @@ public class Upkeep extends Phase {
         if (list.size() > 0) {
             for (int i = 0; i < list.size(); i++) {
                 final Card card = list.get(i);
-                final Ability ability = new Ability(card, "0") {
+                final Ability ability = new Ability(card, SpellManaCost.ZERO) {
                     @Override
                     public void resolve() {
                         card.subtractCounter(CounterType.TIME, 1);
@@ -767,7 +767,7 @@ public class Upkeep extends Phase {
         if (list.size() > 0) {
             for (int i = 0; i < list.size(); i++) {
                 final Card card = list.get(i);
-                final Ability ability = new Ability(card, "0") {
+                final Ability ability = new Ability(card, SpellManaCost.ZERO) {
                     @Override
                     public void resolve() {
                         final int fadeCounters = card.getCounters(CounterType.FADE);
@@ -809,7 +809,7 @@ public class Upkeep extends Phase {
         if (GameState.compareTypeAmountInPlay(player, "Creature") < 0) {
             for (int i = 0; i < oathList.size(); i++) {
                 final Card oath = oathList.get(i);
-                final Ability ability = new Ability(oath, "0") {
+                final Ability ability = new Ability(oath, SpellManaCost.ZERO) {
                     @Override
                     public void resolve() {
                         final List<Card> libraryList = new ArrayList<Card>(player.getCardsIn(ZoneType.Library));
@@ -889,7 +889,7 @@ public class Upkeep extends Phase {
 
         if (GameState.compareTypeAmountInGraveyard(player, "Creature") > 0) {
             for (int i = 0; i < oathList.size(); i++) {
-                final Ability ability = new Ability(oathList.get(0), "0") {
+                final Ability ability = new Ability(oathList.get(0), SpellManaCost.ZERO) {
                     @Override
                     public void resolve() {
                         final List<Card> graveyardCreatures =
@@ -943,7 +943,7 @@ public class Upkeep extends Phase {
         // battlefield have each of them deal damage.
         if (0 < karmas.size()) {
             for (final Card karma : karmas) {
-                final Ability ability = new Ability(karma, "0") {
+                final Ability ability = new Ability(karma, SpellManaCost.ZERO) {
                     @Override
                     public void resolve() {
                         if (damage > 0) {
@@ -982,7 +982,7 @@ public class Upkeep extends Phase {
 
         for (final Card surge : list) {
             final Card source = surge;
-            final Ability ability = new Ability(source, "0") {
+            final Ability ability = new Ability(source, SpellManaCost.ZERO) {
                 @Override
                 public void resolve() {
                     player.addDamage(damage, source);
@@ -1010,7 +1010,7 @@ public class Upkeep extends Phase {
         final List<Card> wires = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Tangle Wire"));
 
         for (final Card source : wires) {
-            final SpellAbility ability = new Ability(source, "0") {
+            final SpellAbility ability = new Ability(source, SpellManaCost.ZERO) {
                 @Override
                 public void resolve() {
                     final int num = source.getCounters(CounterType.FADE);
@@ -1104,7 +1104,7 @@ public class Upkeep extends Phase {
 
         for (int i = 0; i < blaze.size(); i++) {
             final Card source = blaze.get(i);
-            final Ability ability = new Ability(blaze.get(i), "0") {
+            final Ability ability = new Ability(blaze.get(i),SpellManaCost.ZERO) {
                 @Override
                 public void resolve() {
                     player.addDamage(1, source);
@@ -1134,7 +1134,7 @@ public class Upkeep extends Phase {
         for (int i = 0; i < misfortunes.size(); i++) {
             final Card source = misfortunes.get(i);
 
-            final Ability ability = new Ability(source, "0") {
+            final Ability ability = new Ability(source, SpellManaCost.ZERO) {
                 @Override
                 public void resolve() {
                     final List<Card> enchantmentsAttached = new ArrayList<Card>(source.getEnchantingPlayer().getEnchantedBy());

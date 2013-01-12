@@ -10,6 +10,7 @@ import forge.Card;
 import forge.Command;
 import forge.CounterType;
 import forge.Singletons;
+import forge.card.SpellManaCost;
 import forge.card.cost.Cost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityActivated;
@@ -222,7 +223,7 @@ class CardFactoryArtifacts {
              */
             final Card[] topCard = new Card[1];
 
-            final Ability freeCast = new Ability(card, "0") {
+            final Ability freeCast = new Ability(card, SpellManaCost.ZERO) {
 
                 @Override
                 public boolean canPlay() {

@@ -59,7 +59,7 @@ public class AttachAi extends SpellAiLogic {
             }
         }
 
-        if (abCost.getTotalMana().contains("X") && source.getSVar("X").equals("Count$xPaid")) {
+        if (abCost.getTotalMana().countX() > 0 && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value. (Endless Scream and Venarian
             // Gold)
             final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);

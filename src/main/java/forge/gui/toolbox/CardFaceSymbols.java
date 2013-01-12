@@ -27,7 +27,7 @@ import java.util.StringTokenizer;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.card.CardManaCost;
+import forge.card.SpellManaCost;
 import forge.card.mana.ManaCostShard;
 import forge.view.arcane.util.UI;
 
@@ -134,7 +134,7 @@ public class CardFaceSymbols {
      * @param y
      *            a int.
      */
-    public static void draw(Graphics g, CardManaCost manaCost, int x, int y) {
+    public static void draw(Graphics g, SpellManaCost manaCost, int x, int y) {
         if (manaCost.isEmpty()) {
             return;
         }
@@ -232,7 +232,7 @@ public class CardFaceSymbols {
      *            a {@link java.lang.String} object.
      * @return a int.
      */
-    public static int getWidth(final CardManaCost manaCost) {
+    public static int getWidth(final SpellManaCost manaCost) {
         int width = manaCost.getShards().size();
         if (manaCost.getGenericCost() > 0 || (manaCost.getGenericCost() == 0 && width == 0)) {
             width++;

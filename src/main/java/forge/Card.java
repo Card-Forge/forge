@@ -36,13 +36,13 @@ import com.google.common.collect.Iterables;
 
 import forge.CardPredicates.Presets;
 import forge.card.CardCharacteristics;
-import forge.card.CardManaCost;
+import forge.card.SpellManaCost;
 import forge.card.EditionInfo;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostBeingPaid;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementResult;
 import forge.card.spellability.AbilityManaPart;
@@ -1623,7 +1623,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * @param s
      *            a {@link java.lang.String} object.
      */
-    public final void setManaCost(final CardManaCost s) {
+    public final void setManaCost(final SpellManaCost s) {
         this.getCharacteristics().setManaCost(s);
     }
 
@@ -1634,7 +1634,7 @@ public class Card extends GameEntity implements Comparable<Card> {
      * 
      * @return a {@link java.lang.String} object.
      */
-    public final CardManaCost getManaCost() {
+    public final SpellManaCost getManaCost() {
         return this.getCharacteristics().getManaCost();
     }
 
@@ -1650,7 +1650,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (s.equals("")) {
             s = "0";
         }
-        this.getCharacteristics().getCardColor().add(new CardColor(new ManaCost(s), this, false, true));
+        this.getCharacteristics().getCardColor().add(new CardColor(new ManaCostBeingPaid(s), this, false, true));
     }
 
     /**
@@ -1672,7 +1672,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         if (bIncrease) {
             CardColor.increaseTimestamp();
         }
-        this.getCharacteristics().getCardColor().add(new CardColor(new ManaCost(s), c, addToColors, false));
+        this.getCharacteristics().getCardColor().add(new CardColor(new ManaCostBeingPaid(s), c, addToColors, false));
         return CardColor.getTimestamp();
     }
 

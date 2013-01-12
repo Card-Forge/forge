@@ -27,7 +27,7 @@ import forge.CardUtil;
 import forge.Constant;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
-import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
@@ -53,10 +53,10 @@ public class InputPayManaCostUtil {
      * @param card
      *            a {@link forge.Card} object.
      * @param manaCost
-     *            a {@link forge.card.mana.ManaCost} object.
-     * @return a {@link forge.card.mana.ManaCost} object.
+     *            a {@link forge.card.mana.ManaCostBeingPaid} object.
+     * @return a {@link forge.card.mana.ManaCostBeingPaid} object.
      */
-    public static ManaCost activateManaAbility(final SpellAbility sa, final Card card, ManaCost manaCost) {
+    public static ManaCostBeingPaid activateManaAbility(final SpellAbility sa, final Card card, ManaCostBeingPaid manaCost) {
         // make sure computer's lands aren't selected
         if (card.getController().isComputer()) {
             return manaCost;
@@ -229,7 +229,7 @@ public class InputPayManaCostUtil {
      * 
      * @return ManaCost the amount of mana remaining to be paid after the mana is activated
      */
-    public static ManaCost activateManaAbility(String color, final SpellAbility saBeingPaidFor, ManaCost manaCost) {
+    public static ManaCostBeingPaid activateManaAbility(String color, final SpellAbility saBeingPaidFor, ManaCostBeingPaid manaCost) {
         ManaPool mp = Singletons.getControl().getPlayer().getManaPool();
 
         // Convert Color to short String

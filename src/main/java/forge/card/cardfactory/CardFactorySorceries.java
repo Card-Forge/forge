@@ -39,7 +39,9 @@ import forge.CardUtil;
 import forge.Command;
 import forge.Constant;
 import forge.Singletons;
+import forge.card.SpellManaCost;
 import forge.card.cost.Cost;
+import forge.card.mana.ManaCostParser;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -1058,7 +1060,7 @@ public class CardFactorySorceries {
                         return;
                     }
                     x[0] = answer;
-                    spell.setManaCost(x[0] + " B B");
+                    spell.setManaCost(new SpellManaCost( new ManaCostParser(x[0] + " B B")));
                     spell.setIsXCost(false);
 
                     if (userChoice.contains(cardChoice[0])) {

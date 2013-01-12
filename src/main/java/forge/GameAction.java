@@ -29,6 +29,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
+import forge.card.SpellManaCost;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.ApiType;
 import forge.card.abilityfactory.effects.AttachEffect;
@@ -36,7 +37,7 @@ import forge.card.abilityfactory.effects.CharmEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
-import forge.card.mana.ManaCost;
+import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostShard;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementResult;
@@ -548,7 +549,7 @@ public class GameAction {
                     final StringBuilder sb = new StringBuilder();
                     sb.append("Recover ").append(recoverable).append("\n");
 
-                    final Ability recoverAbility = new Ability(recoverable, "0") {
+                    final Ability recoverAbility = new Ability(recoverable, SpellManaCost.ZERO) {
                         @Override
                         public void resolve() {
                             Player p = recoverable.getController();
@@ -806,7 +807,7 @@ public class GameAction {
         miracle.setStackDescription(sb.toString());
 
         // TODO Convert this to a Trigger
-        final Ability activate = new Ability(card, "0") {
+        final Ability activate = new Ability(card, SpellManaCost.ZERO) {
             @Override
             public void resolve() {
                 // pay miracle cost here.
@@ -856,7 +857,7 @@ public class GameAction {
         madness.setStackDescription(sb.toString());
 
         // TODO Convert this to a Trigger
-        final Ability activate = new Ability(card, "0") {
+        final Ability activate = new Ability(card, SpellManaCost.ZERO) {
             @Override
             public void resolve() {
                 // pay madness cost here.
@@ -1334,7 +1335,7 @@ public class GameAction {
                 }
 
                 final Card card = c;
-                final AbilityStatic ability = new AbilityStatic(crd, "0") {
+                final AbilityStatic ability = new AbilityStatic(crd, SpellManaCost.ZERO) {
                     @Override
                     public void resolve() {
                         GameAction.this.destroy(crd);
@@ -1441,7 +1442,7 @@ public class GameAction {
 
         if (persist) {
             final Card persistCard = newCard;
-            final Ability persistAb = new Ability(persistCard, "0") {
+            final Ability persistAb = new Ability(persistCard, SpellManaCost.ZERO) {
 
                 @Override
                 public void resolve() {
@@ -1461,7 +1462,7 @@ public class GameAction {
 
         if (undying) {
             final Card undyingCard = newCard;
-            final Ability undyingAb = new Ability(undyingCard, "0") {
+            final Ability undyingAb = new Ability(undyingCard, SpellManaCost.ZERO) {
 
                 @Override
                 public void resolve() {
@@ -1674,7 +1675,7 @@ public class GameAction {
 
             game.getStack().add(sa, x);
         } else {
-            sa.setManaCost("0"); // Beached As
+            sa.setManaCost(SpellManaCost.ZERO); // Beached As
             Singletons.getModel().getMatch().getInput().setInput(sa.getBeforePayMana());
         }
     }
@@ -1693,15 +1694,15 @@ public class GameAction {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @param originalCost
-     *            a {@link forge.card.mana.ManaCost} object.
-     * @return a {@link forge.card.mana.ManaCost} object.
+     *            a {@link forge.card.mana.ManaCostBeingPaid} object.
+     * @return a {@link forge.card.mana.ManaCostBeingPaid} object.
      */
-    public final ManaCost getSpellCostChange(final SpellAbility sa, final ManaCost originalCost) {
+    public final ManaCostBeingPaid getSpellCostChange(final SpellAbility sa, final ManaCostBeingPaid originalCost) {
         // Beached
         final Card originalCard = sa.getSourceCard();
         final SpellAbility spell = sa;
         String mana = originalCost.toString();
-        ManaCost manaCost = new ManaCost(mana);
+        ManaCostBeingPaid manaCost = new ManaCostBeingPaid(mana);
         if (sa.isXCost() && !originalCard.isCopiedSpell()) {
             originalCard.setXManaCostPaid(0);
         }
@@ -1742,7 +1743,7 @@ public class GameAction {
                         this.exile(c);
                     }
 
-                    manaCost = new ManaCost(originalCost.toString());
+                    manaCost = new ManaCostBeingPaid(originalCost.toString());
                     manaCost.decreaseColorlessMana(chosenAmount);
                 } else {
                     // AI
@@ -1780,7 +1781,7 @@ public class GameAction {
 
                         this.exile(chosen);
                     }
-                    manaCost = new ManaCost(originalCost.toString());
+                    manaCost = new ManaCostBeingPaid(originalCost.toString());
                     manaCost.decreaseColorlessMana(numToExile);
                 }
             } else if (spell.getSourceCard().hasKeyword("Convoke")) {
@@ -1794,7 +1795,7 @@ public class GameAction {
                     }
                     choices.add("DONE");
                     ArrayList<String> usableColors = new ArrayList<String>();
-                    ManaCost newCost = new ManaCost(originalCost.toString());
+                    ManaCostBeingPaid newCost = new ManaCostBeingPaid(originalCost.toString());
                     Object tapForConvoke = null;
                     if (sa.getActivatingPlayer().isHuman()) {
                         tapForConvoke = GuiChoose.oneOrNone("Tap for Convoke? " + newCost.toString(),
@@ -1826,7 +1827,7 @@ public class GameAction {
                                 String newCostStr = newCost.toString();
                                 newCostStr = newCostStr.replaceFirst(
                                         InputPayManaCostUtil.getShortColorString(chosenColor), "").replaceFirst("  ", " ");
-                                newCost = new ManaCost(newCostStr.trim());
+                                newCost = new ManaCostBeingPaid(newCostStr.trim());
                             }
 
                             sa.addTappedForConvoke(workingCard);
@@ -1988,11 +1989,11 @@ public class GameAction {
             final SpellAbilityRequirements req = new SpellAbilityRequirements(sa, ts, payment);
             req.fillRequirements();
         } else {
-            ManaCost manaCost = new ManaCost(sa.getManaCost());
+            ManaCostBeingPaid manaCost = new ManaCostBeingPaid(sa.getManaCost());
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
-                manaCost = new ManaCost("0");
+                manaCost = new ManaCostBeingPaid("0");
             } else {
-                manaCost = this.getSpellCostChange(sa, new ManaCost(sa.getManaCost()));
+                manaCost = this.getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost()));
             }
             if (manaCost.isPaid() && (sa.getBeforePayMana() == null)) {
                 if (sa.getAfterPayMana() == null) {
@@ -2039,11 +2040,11 @@ public class GameAction {
             req.setSkipStack(true);
             req.fillRequirements(skipTargeting);
         } else {
-            ManaCost manaCost = new ManaCost(sa.getManaCost());
+            ManaCostBeingPaid manaCost = new ManaCostBeingPaid(sa.getManaCost());
             if (sa.getSourceCard().isCopiedSpell() && sa.isSpell()) {
-                manaCost = new ManaCost("0");
+                manaCost = new ManaCostBeingPaid("0");
             } else {
-                manaCost = this.getSpellCostChange(sa, new ManaCost(sa.getManaCost()));
+                manaCost = this.getSpellCostChange(sa, new ManaCostBeingPaid(sa.getManaCost()));
             }
             if (manaCost.isPaid() && (sa.getBeforePayMana() == null)) {
                 if (sa.getAfterPayMana() == null) {
