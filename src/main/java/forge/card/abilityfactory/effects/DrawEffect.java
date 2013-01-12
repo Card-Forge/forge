@@ -1,6 +1,5 @@
 package forge.card.abilityfactory.effects;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -9,7 +8,6 @@ import forge.Card;
 import forge.GameActionUtil;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
-import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;

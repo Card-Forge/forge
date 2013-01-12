@@ -20,21 +20,15 @@ package forge;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
-
-
-
 import org.apache.commons.lang3.StringUtils;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 import forge.card.CardCharacteristics;
-import forge.card.CardManaCost;
 import forge.card.EditionInfo;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.mana.ManaCost;

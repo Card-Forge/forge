@@ -13,10 +13,8 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.cardfactory.CardFactoryUtil;
-import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 
