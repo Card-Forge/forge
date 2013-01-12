@@ -183,6 +183,7 @@ public class ReplacementHandler {
             final AbilityFactory abilityFactory = new AbilityFactory();
 
             effectSA = abilityFactory.getAbility(effectAbString, replacementEffect.getHostCard());
+            effectSA.setTrigger(true);
 
             SpellAbility tailend = effectSA;
             do {

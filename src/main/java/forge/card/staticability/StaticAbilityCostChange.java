@@ -74,7 +74,7 @@ public class StaticAbilityCostChange {
                     return originalCost;
                 }
             } else if (params.get("Type").equals("NonManaAbility")) {
-                    if (!(sa instanceof AbilityActivated) || null != sa.getManaPart()) {
+                    if (!(sa instanceof AbilityActivated) || sa.isManaAbility()) {
                         return originalCost;
                     }
             } else if (params.get("Type").equals("Flashback")) {
