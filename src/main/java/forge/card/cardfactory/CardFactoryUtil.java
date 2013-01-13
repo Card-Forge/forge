@@ -2127,7 +2127,7 @@ public class CardFactoryUtil {
         }
 
         if (l[0].startsWith("RememberedSize")) {
-            return c.getRemembered().size();
+            return CardFactoryUtil.doXMath(c.getRemembered().size(), m, c);
         }
 
         final String[] sq;
