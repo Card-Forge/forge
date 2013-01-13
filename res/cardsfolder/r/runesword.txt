@@ -9,6 +9,7 @@ SVar:RuneswordSac:DB$ SacrificeAll | Defined$ Imprinted | SubAbility$ ExileEffec
 SVar:ExileEffect:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
 SVar:TrigNoregen:Mode$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ Creature | Execute$ PumpNogen | Static$ True | TriggerDescription$ If the creature deals damage to a creature this turn, the creature dealt damage can't be regenerated this turn.If a creature dealt damage by the targeted creature would die this turn, exile that creature instead.
 SVar:PumpNogen:AB$ Pump | Cost$ 0 | KW$ HIDDEN CARDNAME can't be regenerated. & HIDDEN If CARDNAME would be put into a graveyard, exile it instead. | Defined$ TriggeredTarget
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/runesword.jpg
 SetInfo:DRK|Rare|http://magiccards.info/scans/en/dk/104.jpg
