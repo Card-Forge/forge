@@ -62,6 +62,7 @@ public class Deck extends DeckBase {
     private final DeckSection main;
     private final DeckSection sideboard; // commander, planes or schemes are also stored here
     private CardPrinted avatar;
+    private CardPrinted commander;
 
     // gameType is from Constant.GameType, like GameType.Regular
     /**
@@ -132,6 +133,7 @@ public class Deck extends DeckBase {
         result.main.addAll(this.main);
         result.sideboard.addAll(this.sideboard);
         result.avatar = this.avatar;
+        result.commander = this.commander;
     }
 
     /*
@@ -189,11 +191,15 @@ public class Deck extends DeckBase {
         // try also earlier deck formats
         if ( d.getSideboard().isEmpty() ) { d.getSideboard().set(Deck.readCardList(sections.get("schemes"))); }
         if ( d.getSideboard().isEmpty() ) { d.getSideboard().set(Deck.readCardList(sections.get("planes"))); }
-        if ( d.getSideboard().isEmpty() ) { d.getSideboard().set(Deck.readCardList(sections.get("commander"))); }
         
         List<String> av = Deck.readCardList(sections.get("avatar"));
         String avName = av.isEmpty() ? null : av.get(0);
         d.avatar = CardDb.instance().isCardSupported(avName) ? CardDb.instance().getCard(avName) : null;
+
+        List<String> cmd = Deck.readCardList(sections.get("commander"));
+        String cmdName = cmd.isEmpty() ? null : cmd.get(0);
+        d.commander = CardDb.instance().isCardSupported(cmdName) ? CardDb.instance().getCard(cmdName) : null;
+
         return d;
     }
 
@@ -267,12 +273,17 @@ public class Deck extends DeckBase {
         out.add(String.format("%s", "[main]"));
         out.addAll(Deck.writeCardPool(this.getMain()));
 
-        out.add(String.format("%s", "[sideboard]"));
+        out.add("[sideboard]");
         out.addAll(Deck.writeCardPool(this.getSideboard()));
 
         if (getAvatar() != null) {
-            out.add(String.format("%s", "[avatar]"));
+            out.add("[avatar]");
             out.add(Deck.serializeSingleCard(getAvatar(), 1));
+        }
+
+        if (getCommander() != null) {
+            out.add("[commander]");
+            out.add(Deck.serializeSingleCard(getCommander(), 1));
         }
         return out;
     }
@@ -281,7 +292,7 @@ public class Deck extends DeckBase {
      * @return the commander
      */
     public CardPrinted getCommander() {
-        return sideboard != null && !sideboard.isEmpty() ? sideboard.get(0) : null;
+        return commander;
     }
 
 

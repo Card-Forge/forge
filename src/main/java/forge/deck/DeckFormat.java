@@ -34,12 +34,12 @@ import forge.util.Aggregates;
 public enum DeckFormat {
 
     //            Main board: allowed size             SB: restriction    Max distinct non basic cards
-    Constructed ( new IntRange(60, Integer.MAX_VALUE), new IntRange(15),  4),
-    Limited     ( new IntRange(40, Integer.MAX_VALUE), null,              Integer.MAX_VALUE),
-    Commander   ( new IntRange(99 /* commndr in SB*/), new IntRange(1),   1),
-    Vanguard    ( new IntRange(60, Integer.MAX_VALUE), new IntRange(0),   4),
-    Planechase  ( new IntRange(60, Integer.MAX_VALUE), new IntRange(0),   4),
-    Archenemy   ( new IntRange(60, Integer.MAX_VALUE), new IntRange(0),   4);
+    Constructed ( new IntRange(60, Integer.MAX_VALUE), new IntRange(15),    4),
+    Limited     ( new IntRange(40, Integer.MAX_VALUE), null,                Integer.MAX_VALUE),
+    Commander   ( new IntRange(99),                    new IntRange(0, 10), 1),
+    Vanguard    ( new IntRange(60, Integer.MAX_VALUE), new IntRange(0),     4),
+    Planechase  ( new IntRange(60, Integer.MAX_VALUE), new IntRange(0),     4),
+    Archenemy   ( new IntRange(60, Integer.MAX_VALUE), new IntRange(0),     4);
 
     private final IntRange mainRange;
     private final IntRange sideRange; // null => no check
@@ -131,11 +131,7 @@ public enum DeckFormat {
                 if (!deck.getCommander().getCard().getType().isLegendary()) {
                     return "has a commander that is not a legendary creature";
                 }
-
-                //No sideboarding in Commander
-                if (!deck.getSideboard().isEmpty()) {
-                    return "has sideboard";
-                }
+                
                 break;
 
             case Planechase: //Must contain at least 10 planes/phenomenons, but max 2 phenomenons. Singleton.
