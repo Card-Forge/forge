@@ -320,9 +320,9 @@ public class DeckgenUtil {
         int attemptsLeft = 100; // to avoid endless loop
         while (schemesToAdd > 0 && attemptsLeft > 0) {
             CardPrinted cp = Aggregates.random(allSchemes);
-            int appearances = res.getSchemes().count(cp) + 1;
+            int appearances = res.getSideboard().count(cp) + 1;
             if (appearances < 2) {
-                res.getSchemes().add(cp);
+                res.getSideboard().add(cp);
                 schemesToAdd--;
             } else {
                 attemptsLeft--;

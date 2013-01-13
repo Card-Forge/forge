@@ -138,12 +138,6 @@ public class GameNew {
         final Random generator = MyRandom.getRandom();
         boolean useAnte = Singletons.getModel().getPreferences().getPrefBoolean(FPref.UI_ANTE);
 
-        if (!Singletons.getModel().getMatch().getPlayedGames().isEmpty()) {
-            deck.startDeckEdits();
-            sideboard(player, deck, canRandomFoil, generator, useAnte);
-        } else {
-            deck.clearDeckEdits();
-        }
         prepareGameLibrary(player, deck, removedAnteCards, rAICards, canRandomFoil, generator, useAnte);
 
         // Shuffling
@@ -157,42 +151,54 @@ public class GameNew {
         }
     }
 
-    private static boolean sideboard(final Player player, final Deck deck, boolean canRandomFoil, Random generator, boolean useAnte) {
+    private static Deck sideboard(final Player player, final Deck deck) {
         final GameType gameType = Singletons.getModel().getMatch().getGameType();
-        boolean hasSideboard = (deck.getSideboard().countAll() > 0);
+        boolean deckHasSideboard = (deck.getSideboard().countAll() > 0);
 
         DeckSection sideboard = deck.getSideboard();
-        int sideboardSize = (gameType == GameType.Draft || gameType == GameType.Sealed) ? -1 : sideboard.countAll();
 
-        if (!hasSideboard) {
-            return false;
+
+        if (!deckHasSideboard || !gameType.isSideboardingAllowed()) {
+            return deck;
         }
 
-        if (player.isComputer()) {
+        if (player.isComputer())
             // Here is where the AI could sideboard, but needs to gather hints during the first game about what to SB
+            return deck;
 
-            return false;
-        } else {
-            // Human Sideboarding
-            boolean validDeck = false;
-            int deckMinSize = Math.min(deck.getMain().countAll(), gameType.getMainRange().getMinimumInteger());
+        // Human Sideboarding
 
-            while (!validDeck) {
-                GuiChoose.getOrderChoices("Sideboard", "Main Deck", sideboardSize,
-                    deck.getSideboard().toForgeCardList(), deck.getMain().toForgeCardList(), null, true, deck);
+        int deckMinSize = Math.min(deck.getMain().countAll(), gameType.getDecksFormat().getMainRange().getMinimumInteger());
+        //IntRange sbRange = gameType.getDecksFormat().getSideRange();
+        int sideboardSize = sideboard.countAll();
 
-                if (deck.getMain().countAll() >= deckMinSize) {
-                    validDeck = true;
-                } else {
-                    StringBuilder errMsg = new StringBuilder("Too few cards in your main deck (minimum ");
-                    errMsg.append(deckMinSize);
-                    errMsg.append("), please make modifications to your deck again.");
-                    JOptionPane.showMessageDialog(null, errMsg.toString(), "Invalid deck", JOptionPane.ERROR_MESSAGE);
-                }
+        DeckSection newSb = new DeckSection();
+        List<CardPrinted> newMain = null;
+        
+ 
+        while (newMain == null || newMain.size() < deckMinSize) {
+            
+            if ( newMain != null ) {
+                String errMsg = String.format("Too few cards in your main deck (minimum %d), please make modifications to your deck again.", deckMinSize);
+                JOptionPane.showMessageDialog(null, errMsg, "Invalid deck", JOptionPane.ERROR_MESSAGE);
             }
-
+            
+            newMain = GuiChoose.getOrderChoices("Sideboard", "Main Deck", sideboardSize, deck.getSideboard().toFlatList(), deck.getMain().toFlatList(), null, true);
         }
-        return true;
+
+        newSb.clear();
+        newSb.addAll(deck.getMain());
+        newSb.addAll(deck.getSideboard());
+        for(CardPrinted c : newMain)
+            newSb.remove(c);
+
+        Deck res = (Deck) deck.copyTo(deck.getName());
+        res.getMain().clear();
+        res.getMain().add(newMain);
+        res.getSideboard().clear();
+        res.getSideboard().addAll(newSb);
+        return res;
+
     }
 
     /**
@@ -252,7 +258,16 @@ public class GameNew {
             }
 
 
-            prepareSingleLibrary(player, p.getValue().getDeck(), removedAnteCards, rAICards, canRandomFoil);
+            Deck toUse;
+            boolean isFirstGame = Singletons.getModel().getMatch().getPlayedGames().isEmpty();
+            if (!isFirstGame) {
+                toUse = sideboard(player, p.getValue().getCurrentDeck());
+            } else { 
+                p.getValue().restoreOriginalDeck();
+                toUse = p.getValue().getCurrentDeck();
+            }
+
+            prepareSingleLibrary(player, toUse, removedAnteCards, rAICards, canRandomFoil);
             player.updateObservers();
             bf.updateObservers();
             player.getZone(ZoneType.Hand).updateObservers();

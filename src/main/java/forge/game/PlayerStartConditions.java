@@ -7,7 +7,9 @@ import forge.deck.Deck;
 
 
 public class PlayerStartConditions {
-    private final Deck deck;
+    private final Deck originalDeck;
+    private Deck currentDeck;
+    
     private int startingLife = 20;
     private int startingHand = 7;
     private Supplier<Iterable<Card>> cardsOnBattlefield = null;
@@ -15,12 +17,18 @@ public class PlayerStartConditions {
     private Supplier<Iterable<Card>> schemes = null;
 
     public PlayerStartConditions(Deck deck0) {
-        deck = deck0;
+        originalDeck = deck0;
+        currentDeck = originalDeck;
     }
 
-    public final Deck getDeck() {
-        return deck;
+    public final Deck getOriginalDeck() {
+        return originalDeck;
     }
+    
+    public final Deck getCurrentDeck() {
+        return currentDeck;
+    }
+    
     public final int getStartingLife() {
         return startingLife;
     }
@@ -76,6 +84,13 @@ public class PlayerStartConditions {
      */
     public void setSchemes(Supplier<Iterable<Card>> s) {
         this.schemes = s;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     */
+    public void restoreOriginalDeck() {
+        currentDeck = originalDeck;
     }
 
 

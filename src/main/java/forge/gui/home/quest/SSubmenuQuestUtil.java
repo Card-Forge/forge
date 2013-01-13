@@ -337,7 +337,7 @@ public class SSubmenuQuestUtil {
             System.out.println(msg);
             return;
         }
-        String errorMessage = GameType.Quest.getDeckConformanceProblem(deck);
+        String errorMessage = GameType.Quest.getDecksFormat().getDeckConformanceProblem(deck);
         if (null != errorMessage) {
             JOptionPane.showMessageDialog(null, "Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
             return;

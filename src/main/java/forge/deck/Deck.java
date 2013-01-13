@@ -59,17 +59,9 @@ public class Deck extends DeckBase {
      */
     private static final long serialVersionUID = -7478025567887481994L;
 
-    private transient boolean isEdited = false;
     private final DeckSection main;
-    private final DeckSection sideboard;
-    private final DeckSection planes;
-    private final DeckSection schemes;
-
-    private transient DeckSection mainEdited;
-    private transient DeckSection sideboardEdited;
+    private final DeckSection sideboard; // commander, planes or schemes are also stored here
     private CardPrinted avatar;
-    private CardPrinted commander;
-
 
     // gameType is from Constant.GameType, like GameType.Regular
     /**
@@ -90,12 +82,7 @@ public class Deck extends DeckBase {
         super(name0);
         this.main = new DeckSection();
         this.sideboard = new DeckSection();
-        this.mainEdited = new DeckSection();
-        this.sideboardEdited = new DeckSection();
         this.avatar = null;
-        this.commander = null;
-        this.planes = new DeckSection();
-        this.schemes = new DeckSection();
     }
 
     /**
@@ -116,26 +103,13 @@ public class Deck extends DeckBase {
         return this.getName();
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>main</code>.
-     * </p>
-     * 
-     * @return a {@link java.util.List} object.
-     */
     public DeckSection getMain() {
-        return isEdited ? this.mainEdited : this.main;
+        return this.main;
     }
 
-    /**
-     * <p>
-     * Getter for the field <code>sideboard</code>.
-     * </p>
-     * 
-     * @return a {@link java.util.List} object.
-     */
+    // variants' extra deck sections used instead of sideboard (planes, commander, schemes) are here as well as usual sideboards
     public DeckSection getSideboard() {
-        return isEdited ? this.sideboardEdited : this.sideboard;
+        return this.sideboard;
     }
 
     /*
@@ -145,7 +119,7 @@ public class Deck extends DeckBase {
      */
     @Override
     public ItemPoolView<CardPrinted> getCardPool() {
-        return isEdited ? this.mainEdited : this.main;
+        return this.main;
     }
 
     /* (non-Javadoc)
@@ -158,13 +132,6 @@ public class Deck extends DeckBase {
         result.main.addAll(this.main);
         result.sideboard.addAll(this.sideboard);
         result.avatar = this.avatar;
-        result.commander = this.commander;
-
-        //This if clause is really only necessary when cloning decks that were
-        //around before schemes.
-        if (this.schemes != null) {
-            result.schemes.addAll(this.schemes);
-        }
     }
 
     /*
@@ -219,14 +186,14 @@ public class Deck extends DeckBase {
 
         d.getMain().set(Deck.readCardList(sections.get("main")));
         d.getSideboard().set(Deck.readCardList(sections.get("sideboard")));
-        List<String> cmd = Deck.readCardList(sections.get("commander"));
-        String cmdName = cmd.isEmpty() ? null : cmd.get(0);
-        d.commander = CardDb.instance().isCardSupported(cmdName) ? CardDb.instance().getCard(cmdName) : null;
+        // try also earlier deck formats
+        if ( d.getSideboard().isEmpty() ) { d.getSideboard().set(Deck.readCardList(sections.get("schemes"))); }
+        if ( d.getSideboard().isEmpty() ) { d.getSideboard().set(Deck.readCardList(sections.get("planes"))); }
+        if ( d.getSideboard().isEmpty() ) { d.getSideboard().set(Deck.readCardList(sections.get("commander"))); }
+        
         List<String> av = Deck.readCardList(sections.get("avatar"));
         String avName = av.isEmpty() ? null : av.get(0);
         d.avatar = CardDb.instance().isCardSupported(avName) ? CardDb.instance().getCard(avName) : null;
-        d.getPlanes().set(Deck.readCardList(sections.get("planes")));
-        d.getSchemes().set(Deck.readCardList(sections.get("schemes")));
         return d;
     }
 
@@ -303,20 +270,10 @@ public class Deck extends DeckBase {
         out.add(String.format("%s", "[sideboard]"));
         out.addAll(Deck.writeCardPool(this.getSideboard()));
 
-        if (getCommander() != null) {
-            out.add(String.format("%s", "[commander]"));
-            out.add(Deck.serializeSingleCard(getCommander(), 1));
-        }
         if (getAvatar() != null) {
             out.add(String.format("%s", "[avatar]"));
             out.add(Deck.serializeSingleCard(getAvatar(), 1));
         }
-
-        out.add(String.format("%s", "[planes]"));
-        out.addAll(Deck.writeCardPool(this.getPlanes()));
-
-        out.add(String.format("%s", "[schemes]"));
-        out.addAll(Deck.writeCardPool(this.getSchemes()));
         return out;
     }
 
@@ -324,22 +281,9 @@ public class Deck extends DeckBase {
      * @return the commander
      */
     public CardPrinted getCommander() {
-        return commander;
+        return sideboard != null && !sideboard.isEmpty() ? sideboard.get(0) : null;
     }
 
-    /**
-     * @return the planes
-     */
-    public DeckSection getPlanes() {
-        return planes;
-    }
-
-    /**
-     * @return the schemes
-     */
-    public DeckSection getSchemes() {
-        return schemes;
-    }
 
     /**
      * @return the avatar
@@ -354,40 +298,4 @@ public class Deck extends DeckBase {
             return arg1.getName();
         }
     };
-
-    public void clearDeckEdits() {
-        isEdited = false;
-        if (mainEdited != null) {
-            mainEdited.clear();
-        } else {
-            mainEdited = new DeckSection();
-        }
-        if (sideboardEdited != null) {
-            sideboardEdited.clear();
-        } else {
-            sideboardEdited = new DeckSection();
-        }
-    }
-
-    public void startDeckEdits() {
-        isEdited = true;
-        if (mainEdited.countAll() == 0) {
-            mainEdited.add(main.toFlatList());
-        }
-        if (sideboardEdited.countAll() == 0) {
-            sideboardEdited.add(sideboard.toFlatList());
-        }
-    }
-
-    public DeckSection getOriginalMain() {
-        return this.main;
-    }
-
-    public DeckSection getOriginalSideboard() {
-        return this.sideboard;
-    }
-
-    public boolean isEditedDeck() {
-        return this.isEdited;
-    }
 }

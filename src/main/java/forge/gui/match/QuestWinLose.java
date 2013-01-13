@@ -119,10 +119,6 @@ public class QuestWinLose extends ControlWinLose {
         qData.getCards().resetNewList();
         QuestController qc = Singletons.getModel().getQuest();
 
-        if (match.isMatchOver()) {
-            restoreQuestDeckEdits();
-        }
-
         LobbyPlayer questPlayer = Singletons.getControl().getLobby().getQuestPlayer();
         if (isAnte) {
             //do per-game actions
@@ -244,18 +240,6 @@ public class QuestWinLose extends ControlWinLose {
         this.getView().getPnlCustom().add(this.lblTemp1, QuestWinLose.CONSTRAINTS_TITLE);
         this.getView().getPnlCustom().add(
                 new QuestWinLoseCardViewer(antesWon), QuestWinLose.CONSTRAINTS_CARDS);
-    }
-
-    /**
-     * <p>
-     * restoreQuestDeckEdits
-     * </p>
-     * Reverts the persistent sideboard changes in quest decks.
-     */
-    private void restoreQuestDeckEdits() {
-        for (LobbyPlayer p : Singletons.getModel().getMatch().getPlayers().keySet()) {
-            Singletons.getModel().getMatch().getPlayersDeck(p).clearDeckEdits();
-        }
     }
 
     /**

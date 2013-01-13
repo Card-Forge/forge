@@ -11,8 +11,8 @@ import forge.Card;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
-import forge.game.GameOutcome;
 import forge.game.GameType;
+import forge.game.GameOutcome;
 import forge.game.MatchController;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -133,10 +133,13 @@ public class ControlWinLose {
 
                 List<Card> compAntes = new ArrayList<Card>(loser.getCardsIn(ZoneType.Ante));
                 Deck cDeck = match.getPlayersDeck(loser.getLobbyPlayer());
+                Deck oDeck = match.getPlayersOriginalDeck(loser.getLobbyPlayer());
 
                 for (Card c : compAntes) {
                     CardPrinted toRemove = CardDb.instance().getCard(c);
                     cDeck.getMain().remove(toRemove);
+                    if ( cDeck != oDeck )
+                        oDeck.getMain().remove(toRemove);
                 }
             }
 

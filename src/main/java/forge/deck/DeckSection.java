@@ -128,4 +128,33 @@ public class DeckSection extends ItemPool<CardPrinted> {
         this.add(CardDb.instance().getCard(cardName));
     }
 
+    /**
+     * returns n-th card from this DeckSection. LINEAR time. 
+     * @param i
+     * @return
+     */
+    public CardPrinted get(int n) {
+        for(Entry<CardPrinted, Integer> e : this)
+        {
+            n -= e.getValue();
+            if ( n <= 0 ) return e.getKey();
+        }
+        return null;
+    }
+    
+    @Override
+    public String toString() {
+        if (this.isEmpty()) return "[]";
+
+        boolean isFirst = true;
+        StringBuilder sb = new StringBuilder();
+        sb.append('[');
+        for (Entry<CardPrinted, Integer> e : this) {
+            if ( isFirst ) isFirst = false; 
+            else sb.append(", ");
+
+            sb.append(e.getValue()).append(" x ").append(e.getKey().getName());
+        }
+        return sb.append(']').toString();
+    }
 }

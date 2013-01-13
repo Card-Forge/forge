@@ -257,9 +257,15 @@ public class MatchController {
      */
     public Deck getPlayersDeck(LobbyPlayer lobbyPlayer) {
         PlayerStartConditions cond = players.get(lobbyPlayer);
-        return cond == null ? null : cond.getDeck();
+        return cond == null ? null : cond.getCurrentDeck();
     }
 
+    public Deck getPlayersOriginalDeck(LobbyPlayer lobbyPlayer) {
+        PlayerStartConditions cond = players.get(lobbyPlayer);
+        return cond == null ? null : cond.getOriginalDeck();
+    }    
+    
+    
     public Map<LobbyPlayer, PlayerStartConditions> getPlayers() {
         return players;
     }

@@ -17,7 +17,7 @@
  */
 package forge.deck.io;
 
-import forge.game.GameType;
+import forge.deck.DeckFormat;
 import forge.game.player.PlayerType;
 import forge.util.FileSection;
 
@@ -39,7 +39,7 @@ public class DeckFileHeader {
     private static final String CSTM_POOL = "Custom Pool";
     private static final String PLAYER_TYPE = "PlayerType";
 
-    private final GameType deckType;
+    private final DeckFormat deckType;
     private final PlayerType playerType;
     private final boolean customPool;
 
@@ -55,11 +55,10 @@ public class DeckFileHeader {
     public DeckFileHeader(final FileSection kvPairs) {
         this.name = kvPairs.get(DeckFileHeader.NAME);
         this.comment = kvPairs.get(DeckFileHeader.COMMENT);
-        this.deckType = GameType.smartValueOf(kvPairs.get(DeckFileHeader.DECK_TYPE), GameType.Constructed);
+        this.deckType = DeckFormat.smartValueOf(kvPairs.get(DeckFileHeader.DECK_TYPE), DeckFormat.Constructed);
         this.customPool = kvPairs.getBoolean(DeckFileHeader.CSTM_POOL);
-        this.playerType = "computer".equalsIgnoreCase(kvPairs.get(DeckFileHeader.PLAYER))
-                || "ai".equalsIgnoreCase(kvPairs.get(DeckFileHeader.PLAYER_TYPE)) ? PlayerType.COMPUTER
-                : PlayerType.HUMAN;
+        boolean isForAi = "computer".equalsIgnoreCase(kvPairs.get(DeckFileHeader.PLAYER)) || "ai".equalsIgnoreCase(kvPairs.get(DeckFileHeader.PLAYER_TYPE));
+        this.playerType = isForAi ? PlayerType.COMPUTER : PlayerType.HUMAN;
     }
 
     /**
@@ -103,7 +102,7 @@ public class DeckFileHeader {
      * 
      * @return the deck type
      */
-    public final GameType getDeckType() {
+    public final DeckFormat getDeckType() {
         return this.deckType;
     }
 

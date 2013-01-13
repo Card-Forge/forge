@@ -13476,6 +13476,7 @@ src/main/java/forge/control/package-info.java -text
 src/main/java/forge/deck/CardCollections.java -text
 src/main/java/forge/deck/Deck.java svneol=native#text/plain
 src/main/java/forge/deck/DeckBase.java -text
+src/main/java/forge/deck/DeckFormat.java -text
 src/main/java/forge/deck/DeckGroup.java -text
 src/main/java/forge/deck/DeckRecognizer.java -text
 src/main/java/forge/deck/DeckSection.java -text

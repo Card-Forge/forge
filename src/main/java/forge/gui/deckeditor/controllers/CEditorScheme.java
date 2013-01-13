@@ -126,7 +126,7 @@ public final class CEditorScheme extends ACEditorBase<CardPrinted, Deck> {
                 schemes.add(cp);
         }
         this.getTableCatalog().setDeck(ItemPool.createFrom(schemes, CardPrinted.class));
-        this.getTableDeck().setDeck(this.controller.getModel().getSchemes());
+        this.getTableDeck().setDeck(this.controller.getModel().getSideboard());
     }
 
     /*

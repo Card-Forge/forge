@@ -4,12 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
-
-import com.google.common.collect.Iterables;
 
 import forge.Command;
 import forge.GameActionUtil;
@@ -31,6 +27,7 @@ import forge.gui.toolbox.FDeckChooser;
 import forge.item.CardPrinted;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+import forge.util.Aggregates;
 
 /** 
  * Controls the constructed submenu in the home UI.
@@ -42,7 +39,7 @@ public enum CSubmenuArchenemy implements ICDoc {
     /** */
     SINGLETON_INSTANCE;
     private final VSubmenuArchenemy view = VSubmenuArchenemy.SINGLETON_INSTANCE;
-
+    
 
     /* (non-Javadoc)
      * @see forge.gui.home.ICSubmenu#initialize()
@@ -127,8 +124,6 @@ public enum CSubmenuArchenemy implements ICDoc {
         final SwingWorker<Object, Void> worker = new SwingWorker<Object, Void>() {
             @Override
             public Object doInBackground() {
-                Random rnd = new Random();
-                String nl = System.getProperty("line.separator");
                 boolean usedDefaults = false;
 
                 List<Deck> playerDecks = new ArrayList<Deck>();
@@ -147,12 +142,12 @@ public enum CSubmenuArchenemy implements ICDoc {
                 Object obj = view.getArchenemySchemes().getSelectedValue();
 
                 boolean useDefault = VSubmenuArchenemy.SINGLETON_INSTANCE.getCbUseDefaultSchemes().isSelected();
-                useDefault &= !playerDecks.get(0).getSchemes().isEmpty();
+                useDefault &= !playerDecks.get(0).getSideboard().isEmpty();
 
                 System.out.println(useDefault);
                 if (useDefault) {
 
-                    schemes = playerDecks.get(0).getSchemes().toFlatList();
+                    schemes = playerDecks.get(0).getSideboard().toFlatList();
                     System.out.println(schemes.toString());
                     usedDefaults = true;
 
@@ -162,14 +157,14 @@ public enum CSubmenuArchenemy implements ICDoc {
                         String sel = (String) obj;
                         if (sel.equals("Random")) {
 
-                            schemes = Iterables.get(view.getAllSchemeDecks(), rnd.nextInt(Iterables.size(view.getAllSchemeDecks()))).getSchemes().toFlatList();
+                            schemes = Aggregates.random(view.getAllSchemeDecks()).getSideboard().toFlatList();
                         } else {
 
                             //Generate
-                            schemes = DeckgenUtil.generateSchemeDeck().getSchemes().toFlatList();
+                            schemes = DeckgenUtil.generateSchemeDeck().getSideboard().toFlatList();
                         }
                     } else {
-                        schemes = ((Deck) obj).getSchemes().toFlatList();
+                        schemes = ((Deck) obj).getSideboard().toFlatList();
                     }
                 }
                 if (schemes == null) {

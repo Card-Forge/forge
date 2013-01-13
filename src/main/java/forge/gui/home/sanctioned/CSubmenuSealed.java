@@ -19,6 +19,7 @@ import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
+import forge.deck.DeckFormat;
 import forge.deck.DeckGroup;
 import forge.game.limited.ReadDraftRankings;
 import forge.game.GameType;
@@ -112,7 +113,7 @@ public enum CSubmenuSealed implements ICDoc {
                     "Please build and/or select a deck for yourself.",
                     "No deck", JOptionPane.ERROR_MESSAGE);
             return;
-        } else if (null != GameType.Sealed.getDeckConformanceProblem(human)) {
+        } else if (null != DeckFormat.Limited.getDeckConformanceProblem(human)) {
             JOptionPane.showMessageDialog(null,
                     "The selected deck doesn't have enough cards to play (minimum 40)."
                     + "\r\nUse the deck editor to choose the cards you want before starting.",
@@ -125,7 +126,6 @@ public enum CSubmenuSealed implements ICDoc {
         Singletons.getModel().getGauntletMini().launch(matches, human, GameType.Sealed);
     }
 
-    /** */
     @SuppressWarnings("unchecked")
     private <T extends DeckBase> void setupSealed() {
 

@@ -187,8 +187,8 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
      * @param card
      *            a T
      */
-    public void remove(final T card) {
-        this.remove(card, 1);
+    public boolean remove(final T card) {
+        return this.remove(card, 1);
     }
 
     /**
@@ -200,10 +200,10 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
      * @param amount
      *            a int
      */
-    public void remove(final T card, final int amount) {
+    public boolean remove(final T card, final int amount) {
         final int count = this.count(card);
         if ((count == 0) || (amount <= 0)) {
-            return;
+            return false;
         }
         if (count <= amount) {
             this.getCards().remove(card);
@@ -211,6 +211,7 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
             this.getCards().put(card, count - amount);
         }
         this.setListInSync(false);
+        return true;
     }
 
     /**

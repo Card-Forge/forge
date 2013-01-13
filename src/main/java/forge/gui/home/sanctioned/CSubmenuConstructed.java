@@ -11,6 +11,7 @@ import forge.Command;
 import forge.Singletons;
 import forge.control.Lobby;
 import forge.deck.Deck;
+import forge.deck.DeckFormat;
 import forge.game.GameType;
 import forge.game.MatchController;
 import forge.game.MatchStartHelper;
@@ -98,7 +99,7 @@ public enum CSubmenuConstructed implements ICDoc {
         Deck humanDeck = VSubmenuConstructed.SINGLETON_INSTANCE.getDcHuman().getDeck();
 
         if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            String errorMessage = GameType.Constructed.getDeckConformanceProblem(humanDeck);
+            String errorMessage = DeckFormat.Constructed.getDeckConformanceProblem(humanDeck);
             if (null != errorMessage) {
                 JOptionPane.showMessageDialog(null, "Your deck " + errorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
                 return;

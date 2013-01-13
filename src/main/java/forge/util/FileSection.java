@@ -156,7 +156,7 @@ public class FileSection {
      */
     @SuppressWarnings("unchecked")
     public static Map<String, List<String>> parseSections(final List<String> source) {
-        final Map<String, List<String>> result = new HashMap<String, List<String>>();
+        final Map<String, List<String>> result = new TreeMap<String, List<String>>(String.CASE_INSENSITIVE_ORDER);
         String currentSection = "";
         List<String> currentList = null;
 

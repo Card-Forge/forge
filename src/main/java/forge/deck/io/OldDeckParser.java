@@ -214,7 +214,7 @@ public class OldDeckParser {
                 }
                 break;
 
-            case Sealed:
+            case Limited:
                 final boolean isAi = dh.getPlayerType() == PlayerType.COMPUTER;
                 name = name.startsWith("AI_") ? name.replace("AI_", "") : name;
 

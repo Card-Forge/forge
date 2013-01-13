@@ -57,7 +57,6 @@ import forge.Singletons;
 import forge.card.CardEdition;
 import forge.deck.DeckSection;
 import forge.error.ErrorViewer;
-import forge.game.GameType;
 import forge.quest.data.GameFormatQuest;
 import forge.item.BoosterPack;
 import forge.item.CardDb;
@@ -99,7 +98,6 @@ public class QuestDataIO {
         final XStream xStream = isIgnoring ? new IgnoringXStream() : new XStream();
         xStream.registerConverter(new ItemPoolToXml());
         xStream.registerConverter(new DeckSectionToXml());
-        xStream.registerConverter(new GameTypeToXml());
         xStream.registerConverter(new GameFormatQuestToXml());
         xStream.registerConverter(new QuestModeToXml());
         xStream.autodetectAnnotations(true);
@@ -444,25 +442,6 @@ public class QuestDataIO {
             }
 
             return res;
-        }
-    }
-
-    private static class GameTypeToXml implements Converter {
-        @SuppressWarnings("rawtypes")
-        @Override
-        public boolean canConvert(final Class clasz) {
-            return clasz.equals(GameType.class);
-        }
-
-        @Override
-        public void marshal(final Object source, final HierarchicalStreamWriter writer, final MarshallingContext context) {
-            // not used
-        }
-
-        @Override
-        public Object unmarshal(final HierarchicalStreamReader reader, final UnmarshallingContext context) {
-            final String value = reader.getValue();
-            return GameType.smartValueOf(value, GameType.Quest);
         }
     }
 
