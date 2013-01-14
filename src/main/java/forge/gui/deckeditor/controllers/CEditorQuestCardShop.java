@@ -173,6 +173,11 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
                 final Integer amount = result.get(card);
                 result.put(card, Integer.valueOf(amount == null ? 1 : 1 + amount.intValue()));
             }
+            for (final Entry<CardPrinted, Integer> e : deck.getSideboard()) {
+                final CardPrinted card = e.getKey();
+                final Integer amount = result.get(card);
+                result.put(card, Integer.valueOf(amount == null ? 1 : 1 + amount.intValue()));
+            }
         }
         return result;
     }
