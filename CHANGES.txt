@@ -139,19 +139,36 @@ Fixes/Features:
 - Replacement effect abilities are now flagged as trigger (to not be confused with a activated ability). This fixes the interaction of Suppression Field and replacement effects.
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Rakdos Guildmage.
+- Fixed AI using Discordant Dirge.
+- The AI can now use bounce spells to save non-creature permanents.
+- The AI will now anticipate effects with "Damage that would reduce your life total to less than 1 reduces it to 1 instead.".
+- forge.card.CardManaCost => SpellManaCost
+- forge.card.mana.ManaCost => ManaCostBeingPaid
+- Ability ctor now accepts SpellManaCost as 2nd argument.
+- Fixed Contested Cliffs
+- Fixed a few cards by updating TokenHiddenKeywords
+- Fixed Divine Reckoning and made it ready for multiplayer
+- Better sideboarding: decks have no extra fields for changed parts, they are copied on sideboarding, new deck composition moved outside of GuiChoose.java
+- Decks have no extra sections for variants (sideboard works in most cases)
+- Deck Format restrictions are in a separate class not related to GameType
+- DeckSection has its own toString overload
+- DualListBox operates CardPrinted properly (sideboarding dialog uses cardprinted instances)
+- ItemPool.remove method returns true if any elements were removed.
+- Deck: commander decks may have 0-10 cards sideboard
+- Made xCount handling of RememberedSize consistent with other count keywords
+- More cards ready for multiplayer
+- Cards in sideboard are now marked in the quest shop as cards present in deck. The bug with the card not being sold correctly from the sideboard is still there for now though.
+- Commander: SB is 0 or 10 cards
+- Quest: sold cards should be correctly removed from sideboard
+- url field moved to CardInSet - that allows proxy creation right from cardprinted
+- sideboard checked independently of maximum amount of same cards in deck
+- schemes and planes generation code in GameNew.java now demands a player.
+- toForgeCardList method removed
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
-
-
-
-
-Added the following Schemes:
-
-
-
-
-Added the following Vanguard Avatars:
 
 
 
@@ -178,7 +195,7 @@ Necromancer's Magemark
 Runesword
 
 
-Added the following new Gatecrash cards to the Gatecrash branch. These cards are not yet available in game use.:
+Added the following new Gatecrash cards to the Gatecrash branch. These cards are not yet available for in game use.:
 
 Alms Beast
 Drakewing Krasis
@@ -228,6 +245,19 @@ Deathpact Angel
 Call of the Nightwing
 Boros Elite
 Firemane Avenger
+Boros Charm
+Dimir Charm
+Giant Adephage
+Illusionist's Bracers
+Prime Speaker Zegana
+Simic Keyrune
+Hellraiser Goblin
+Frontline Medic
+Hands of Binding
+Undercity Plague
+Stolen Identity
+Whispering Madness
+Five-Alarm Fire
 
 
 end
