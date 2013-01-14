@@ -208,7 +208,10 @@ public enum CounterType {
 
     /** The MUSIC. */
     MUSIC(),
-
+    
+    /** The MUSTER. */
+    MUSTER(),
+    
     /** The OMEN. */
     OMEN(),
 
