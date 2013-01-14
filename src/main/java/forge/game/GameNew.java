@@ -242,17 +242,15 @@ public class GameNew {
             }
 
             PlayerZone com = player.getZone(ZoneType.Command);
-            Iterable<Card> inCommand = p.getValue().getCardsInCommand();
+            Iterable<Card> inCommand = p.getValue().getCardsInCommand(player);
             if (inCommand != null) {
                 for (final Card c : inCommand) {
-                    c.setOwner(player);
-
                     com.add(c, false);
-                    c.refreshUniqueNumber();
+                    c.refreshUniqueNumber(); // really need it?
                 }
             }
 
-            Iterable<Card> schemes = p.getValue().getSchemes();
+            Iterable<Card> schemes = p.getValue().getSchemes(player);
             if (schemes != null) {
                 player.setSchemeDeck(schemes);
             }

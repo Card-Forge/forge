@@ -33,7 +33,6 @@ import javax.swing.filechooser.FileFilter;
 
 import org.apache.commons.lang3.StringUtils;
 
-import forge.Card;
 import forge.deck.Deck;
 import forge.item.CardPrinted;
 import forge.util.FileSection;
@@ -147,10 +146,11 @@ public class DeckSerializer extends StorageReaderFolder<Deck> implements IItemSe
             final Map<String, Object> root = new HashMap<String, Object>();
             root.put("title", d.getName());
             final List<String> list = new ArrayList<String>();
-            for (final Card card : d.getMain().toForgeCardList()) {
-                // System.out.println(card.getSets().get(card.getSets().size() -
-                // 1).URL);
-                list.add(card.getSets().get(card.getSets().size() - 1).getUrl());
+            for (final Entry<CardPrinted, Integer> card : d.getMain()) {
+                // System.out.println(card.getSets().get(card.getSets().size() - 1).URL);
+                for( int i = card.getValue().intValue(); i > 0; --i ) {
+                    list.add(card.getKey().getCard().getEditionInfo(card.getKey().getEdition()).getUrl());
+                }
             }
             /*
              * List<String> nameList = new ArrayList<String>(); for (Card card :

@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Supplier;
-
+import com.google.common.base.Function;
 import forge.Card;
 import forge.deck.Deck;
 import forge.game.player.LobbyPlayer;
+import forge.game.player.Player;
 import forge.item.CardPrinted;
 
 /** 
@@ -35,12 +35,12 @@ public class MatchStartHelper {
         start.setStartingLife(start.getStartingLife() + avatar.getCard().getLife());
         start.setStartingHand(start.getStartingHand() + avatar.getCard().getHand());
 
-        start.setCardsInCommand(new Supplier<Iterable<Card>>() {
+        start.setCardsInCommand(new Function<Player, Iterable<Card>>() {
 
             @Override
-            public Iterable<Card> get() {
+            public Iterable<Card> apply(Player p) {
                 List<Card> res = new ArrayList<Card>();
-                res.add(avatar.toForgeCard());
+                res.add(avatar.toForgeCard(p));
                 return res;
             }
 
@@ -52,14 +52,13 @@ public class MatchStartHelper {
     public void addArchenemy(final LobbyPlayer player, final Deck deck, final Iterable<CardPrinted> schemes) {
         PlayerStartConditions start = new PlayerStartConditions(deck);
 
-        start.setSchemes(new Supplier<Iterable<Card>>() {
+        start.setSchemes(new Function<Player, Iterable<Card>>() {
 
             @Override
-            public Iterable<Card> get() {
+            public Iterable<Card> apply(Player p) {
                 List<Card> res = new ArrayList<Card>();
                 for (CardPrinted cp : schemes) {
-
-                    res.add(cp.toForgeCard());
+                    res.add(cp.toForgeCard(p));
                 }
 
                 return res;

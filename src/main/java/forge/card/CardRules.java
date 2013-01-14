@@ -272,7 +272,7 @@ public final class CardRules {
         }
 
         if (this.characteristics.getSetsData().isEmpty()) {
-            this.characteristics.getSetsData().put("???", new CardInSet(CardRarity.Unknown, 1));
+            this.characteristics.getSetsData().put("???", new CardInSet(CardRarity.Unknown, 1, null));
         }
         this.setsPrinted = this.characteristics.getSetsData();
     }

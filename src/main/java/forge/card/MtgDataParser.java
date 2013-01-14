@@ -273,7 +273,7 @@ public final class MtgDataParser implements Iterator<CardRules> {
             final String sN = unparsed.substring(bracketAt + 2, unparsed.indexOf(')', bracketAt));
             number = Integer.parseInt(sN);
         }
-        return new CardInSet(rating, number);
+        return new CardInSet(rating, number, null);
     }
 
     /*

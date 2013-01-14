@@ -1,9 +1,11 @@
 package forge.game;
 
+import com.google.common.base.Function;
 import com.google.common.base.Supplier;
 
 import forge.Card;
 import forge.deck.Deck;
+import forge.game.player.Player;
 
 
 public class PlayerStartConditions {
@@ -13,8 +15,8 @@ public class PlayerStartConditions {
     private int startingLife = 20;
     private int startingHand = 7;
     private Supplier<Iterable<Card>> cardsOnBattlefield = null;
-    private Supplier<Iterable<Card>> cardsInCommand = null;
-    private Supplier<Iterable<Card>> schemes = null;
+    private Function<Player, Iterable<Card>> cardsInCommand = null;
+    private Function<Player, Iterable<Card>> schemes = null;
 
     public PlayerStartConditions(Deck deck0) {
         originalDeck = deck0;
@@ -61,28 +63,28 @@ public class PlayerStartConditions {
     /**
      * @return the cardsInCommand
      */
-    public Iterable<Card> getCardsInCommand() {
-        return cardsInCommand == null ? null : cardsInCommand.get();
+    public Iterable<Card> getCardsInCommand(Player p) {
+        return cardsInCommand == null ? null : cardsInCommand.apply(p);
     }
 
     /**
-     * @param cardsInCommand0 the cardsInCommand to set
+     * @param function the cardsInCommand to set
      */
-    public void setCardsInCommand(Supplier<Iterable<Card>> cardsInCommand0) {
-        this.cardsInCommand = cardsInCommand0;
+    public void setCardsInCommand(Function<Player, Iterable<Card>> function) {
+        this.cardsInCommand = function;
     }
 
     /**
      * @return the schemes
      */
-    public Iterable<Card> getSchemes() {
-        return schemes == null ? null : schemes.get();
+    public Iterable<Card> getSchemes(Player p) {
+        return schemes == null ? null : schemes.apply(p);
     }
 
     /**
      * @param schemes0 the schemes to set
      */
-    public void setSchemes(Supplier<Iterable<Card>> s) {
+    public void setSchemes(Function<Player, Iterable<Card>> s) {
         this.schemes = s;
     }
 

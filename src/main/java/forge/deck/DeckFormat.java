@@ -122,7 +122,7 @@ public enum DeckFormat {
         }
 
         switch(this) {
-            case Commander: //Must contain exactly 1 legendary Commander and no sideboard.
+            case Commander: //Must contain exactly 1 legendary Commander and a sideboard of 10 or zero cards.
 
                 //TODO:Enforce color identity
                 if (null == deck.getCommander()) {
@@ -191,16 +191,15 @@ public enum DeckFormat {
                     return String.format("must not contain more than %d of '%s' card", maxCopies, cp.getKey());
                 }
             }
+        }
 
-            // The sideboard must contain either 0 or 15 cards
-            int sideboardSize = deck.getSideboard().countAll();
-            IntRange sbRange = getSideRange();
-            if (sbRange != null && sideboardSize > 0 && !sbRange.containsInteger(sideboardSize)) {
-                return sbRange.getMinimumInteger() == sbRange.getMaximumInteger()
-                ? String.format("must have a sideboard of %d cards or no sideboard at all", sbRange.getMaximumInteger())
-                : String.format("must have a sideboard of %d to %d cards or no sideboard at all", sbRange.getMinimumInteger(), sbRange.getMaximumInteger());
-            }
-
+        // The sideboard must contain either 0 or 15 cards
+        int sideboardSize = deck.getSideboard().countAll();
+        IntRange sbRange = getSideRange();
+        if (sbRange != null && sideboardSize > 0 && !sbRange.containsInteger(sideboardSize)) {
+            return sbRange.getMinimumInteger() == sbRange.getMaximumInteger()
+            ? String.format("must have a sideboard of %d cards or no sideboard at all", sbRange.getMaximumInteger())
+            : String.format("must have a sideboard of %d to %d cards or no sideboard at all", sbRange.getMinimumInteger(), sbRange.getMaximumInteger());
         }
 
         return null;
