@@ -2,7 +2,7 @@ Name:Cleansing
 ManaCost:W W W
 Types:Sorcery
 A:SP$ RepeatEach | Cost$ W W W | RepeatSubAbility$ DBSac | RepeatCards$ Land | SpellDescription$ For each land, destroy that land unless any player pays 1 life.
-SVar:DBSac:DB$ Destroy | UnlessCost$ PayLife<1> | UnlessPayer$ RememberedController | Defined$ Remembered
+SVar:DBSac:DB$ Destroy | UnlessCost$ PayLife<1> | UnlessPayer$ Player | Defined$ Remembered
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cleansing.jpg

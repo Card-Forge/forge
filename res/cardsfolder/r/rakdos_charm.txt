@@ -2,13 +2,11 @@ Name:Rakdos Charm
 ManaCost:B R
 Types:Instant
 Text:no text
-A:SP$ Charm | Cost$ B R | Choices$ Exile,Smash,DamageYou | CharmNum$ 1 | SpellDescription$ Choose one - Exile all cards from target player's graveyard; or destroy target artifact; or each creature deals 1 damage to its controller.
+A:SP$ Charm | Cost$ B R | Choices$ Exile,Smash,CreatureDamage | CharmNum$ 1 | SpellDescription$ Choose one - Exile all cards from target player's graveyard; or destroy target artifact; or each creature deals 1 damage to its controller.
 SVar:Exile:DB$ ChangeZoneAll | ValidTgts$ Player | TgtPrompt$ Select target player | Origin$ Graveyard | Destination$ Exile | ChangeType$ Card | IsCurse$ True | SpellDescription$ Exile all cards from target player's graveyard.
 SVar:Smash:DB$ Destroy | ValidTgts$ Artifact | TgtPrompt$ Select target artifact | SpellDescription$ Destroy target artifact.
-#NumDmg isn't really used here.  It is left for clarity.  The AF pulls Damage straight from "X" hardcoded.
-SVar:DamageYou:DB$ EachDamage | ValidCards$ Creature.YouCtrl | ValidDescription$ creature you control | DefinedPlayers$ You | References$ X | NumDmg$ X | SubAbility$ DamageOpp | SpellDescription$ Each creature deals 1 damage to its controller.
-SVar:DamageOpp:DB$ EachDamage | ValidCards$ Creature.OppCtrl | ValidDescription$ creature your opponent controls | References$ X | DefinedPlayers$ Opponent | NumDmg$ X
-SVar:X:Number$1
+SVar:CreatureDamage:DB$ RepeatEach | RepeatCards$ Creature | RepeatSubAbility$ DBDamage | SpellDescription$ Each creature deals 1 damage to its controller.
+SVar:DBDamage:DB$ DealDamage | Defined$ RememberedController | DamageSource$ Remembered | NumDmg$ 1
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rakdos_charm.jpg

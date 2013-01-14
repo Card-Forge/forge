@@ -3,10 +3,10 @@ ManaCost:2 W
 Types:Creature Cleric
 Text:no text
 PT:2/2
-A:AB$ LoseLife | Cost$ T | Defined$ Opponent | LifeAmount$ X | References$ X | SubAbility$ DBLoseLife | SpellDescription$ Each player loses 1 life for each Swamp he or she controls.
-SVar:DBLoseLife:DB$LoseLife | Defined$ You | LifeAmount$ Y | References$ Y
-SVar:X:Count$TypeOppCtrl.Swamp
-SVar:Y:Count$TypeYouCtrl.Swamp
+A:AB$ RepeatEach | Cost$ T | RepeatPlayers$ Player | RepeatSubAbility$ DBLoseLife | SpellDescription$ Each player loses 1 life for each Swamp he or she controls.
+SVar:DBLoseLife:DB$ LoseLife | Defined$ Remembered | LifeAmount$ X | References$ X | SubAbility$ DBcleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Count$Valid Swamp.RememberedPlayerCtrl
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://resources.wizards.com/magic/cards/tor/en-us/card35082.jpg

@@ -6,14 +6,11 @@ A:SP$ Charm | Cost$ 3 R R | Choices$ DBDamageP,DBDamageC,DBDestroy,DBDiscard | C
 SVar:DBDamageP:DB$ DealDamage | ValidTgts$ Player | TgtPrompt$ Select target player | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target player.
 SVar:DBDamageC:DB$ DamageAll | ValidCards$ Creature | NumDmg$ 2 | SpellDescription$ CARDNAME deals 2 damage to each creature.
 SVar:DBDestroy:DB$ Destroy | ValidTgts$ Land.nonBasic | TgtPrompt$ Select target nonbasic land | SpellDescription$ Destroy target nonbasic land.
-SVar:DBDiscard:DB$ Discard | Defined$ You | RememberDiscarded$ True | Mode$ Hand | SubAbility$ YouDraw | SpellDescription$ Each player discards all the cards in his or her hand, then draws that many cards.
-SVar:YouDraw:DB$ Draw | Defined$ You | NumCards$ X | SubAbility$ YourCleanup | References$ X
-SVar:YourCleanup:DB$ Cleanup | ClearRemembered$ True | SubAbility$ OppDiscard
-SVar:OppDiscard:DB$ Discard | Defined$ Opponent | RememberDiscarded$ True | Mode$ Hand | SubAbility$ OppDraw
-SVar:OppDraw:DB$ Draw | Defined$ Opponent | NumCards$ Y | SubAbility$ OppCleanup | References$ Y
-SVar:OppCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Remembered$Amount
-SVar:Y:Remembered$Amount
+SVar:DBDiscard:DB$ RepeatEach | RepeatPlayers$ Player | RepeatSubAbility$ DBIncendiaryDiscard | SubAbility$ DBDraw | SpellDescription$ Each player discards all the cards in his or her hand, then draws that many cards.
+SVar:DBIncendiaryDiscard:DB$ Discard | Defined$ Player.IsRemembered | Mode$ Hand | RememberDiscarded$ True | SubAbility$ DBIncendiaryDraw
+SVar:DBIncendiaryDraw:DB$ Draw | NumCards$ X | Defined$ Player.IsRemembered | References$ X | SubAbility$ CleanIncendiary
+SVar:CleanIncendiary:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount/Minus.1
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/lrw/en/card141830.jpg
 SetInfo:LRW|Rare|http://magiccards.info/scans/en/lw/179.jpg
