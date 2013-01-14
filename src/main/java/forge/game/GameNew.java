@@ -228,18 +228,7 @@ public class GameNew {
             int hand = p.getValue().getStartingHand();
             player.setMaxHandSize(hand);
             player.setStartingHandSize(hand);
-            // what if I call it for AI player?
-            PlayerZone bf = player.getZone(ZoneType.Battlefield);
-            Iterable<Card> onTable = p.getValue().getCardsOnBattlefield();
-            if (onTable != null) {
-                for (final Card c : onTable) {
-                    c.setOwner(player);
-                    bf.add(c, false);
-                    c.setSickness(true);
-                    c.setStartsGameInPlay(true);
-                    c.refreshUniqueNumber();
-                }
-            }
+            putCardsOnBattlefield(player, p.getValue().getCardsOnBattlefield(player));
 
             PlayerZone com = player.getZone(ZoneType.Command);
             Iterable<Card> inCommand = p.getValue().getCardsInCommand(player);
@@ -267,7 +256,7 @@ public class GameNew {
 
             prepareSingleLibrary(player, toUse, removedAnteCards, rAICards, canRandomFoil);
             player.updateObservers();
-            bf.updateObservers();
+            player.getZone(ZoneType.Battlefield).updateObservers();
             player.getZone(ZoneType.Hand).updateObservers();
             player.getZone(ZoneType.Command).updateObservers();
             player.getZone(ZoneType.Battlefield).updateObservers();
@@ -290,7 +279,22 @@ public class GameNew {
 
         GameNew.actuateGame(game, false);
     }
+    
+    private static void putCardsOnBattlefield(Player player, Iterable<Card> cards) {
+        PlayerZone bf = player.getZone(ZoneType.Battlefield);
+        if (cards != null) {
+            for (final Card c : cards) {
+                c.addController(player);
+                bf.add(c, false);
+                c.setSickness(true);
+                c.setStartsGameInPlay(true);
+                c.refreshUniqueNumber();
+            }
+        }
+    
+    }
 
+    // ultimate of Karn the Liberated
     public static void restartGame(final GameState game, final Player startingTurn, Map<Player, List<Card>> playerLibraries) {
         MatchController match = Singletons.getModel().getMatch();
 
@@ -320,19 +324,7 @@ public class GameNew {
             final Player player = p.getKey();
             player.setStartingLife(p.getValue().getStartingLife());
             player.setNumLandsPlayed(0);
-            // what if I call it for AI player?
-            PlayerZone bf = player.getZone(ZoneType.Battlefield);
-            Iterable<Card> onTable = p.getValue().getCardsOnBattlefield();
-            if (onTable != null) {
-                for (final Card c : onTable) {
-                    c.addController(player);
-                    c.setOwner(player);
-                    bf.add(c, false);
-                    c.setSickness(true);
-                    c.setStartsGameInPlay(true);
-                    c.refreshUniqueNumber();
-                }
-            }
+            putCardsOnBattlefield(player, p.getValue().getCardsOnBattlefield(player));
 
             PlayerZone library = player.getZone(ZoneType.Library);
             List<Card> newLibrary = playerLibraries.get(player);
@@ -341,7 +333,7 @@ public class GameNew {
             }
 
             player.shuffle();
-            bf.updateObservers();
+            player.getZone(ZoneType.Battlefield).updateObservers();
             player.updateObservers();
             player.getZone(ZoneType.Hand).updateObservers();
         }

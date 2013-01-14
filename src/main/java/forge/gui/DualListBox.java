@@ -170,7 +170,7 @@ public class DualListBox<T> extends FPanel {
                 } else if (obj instanceof SpellAbility) {
                     card = ((SpellAbility) obj).getSourceCard();
                 } else if (obj instanceof CardPrinted) {
-                    card = ((CardPrinted) obj).toForgeCard();
+                    card = ((CardPrinted) obj).getMatchingForgeCard();
                 }
 
                 GuiUtils.clearPanelSelections();

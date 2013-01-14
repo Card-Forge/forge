@@ -179,7 +179,7 @@ public enum VProbabilities implements IVDoc<CProbabilities> {
                     if (name2.length() > name1.length()) { continue; }
 
                     if (name2.equals(name1.substring(0, name2.length()))) {
-                        CDeckEditorUI.SINGLETON_INSTANCE.setCard(c.toForgeCard());
+                        CDeckEditorUI.SINGLETON_INSTANCE.setCard(c.getMatchingForgeCard());
                         break;
                     }
                 }

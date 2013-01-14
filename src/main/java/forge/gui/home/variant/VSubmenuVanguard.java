@@ -131,9 +131,8 @@ public enum VSubmenuVanguard implements IVSubmenu<CSubmenuVanguard> {
                 int index = avatarLists.indexOf(arg0.getSource());
                 Object obj = avatarLists.get(index).getSelectedValue();
 
-                if (!(obj instanceof String)) {
-
-                    cdpAvatarDetails.get(index).setCard(((CardPrinted) obj).toForgeCard());
+                if (obj instanceof CardPrinted) {
+                    cdpAvatarDetails.get(index).setCard(((CardPrinted) obj).getMatchingForgeCard());
                 }
             }
 

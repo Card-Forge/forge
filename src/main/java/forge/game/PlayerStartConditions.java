@@ -1,8 +1,6 @@
 package forge.game;
 
 import com.google.common.base.Function;
-import com.google.common.base.Supplier;
-
 import forge.Card;
 import forge.deck.Deck;
 import forge.game.player.Player;
@@ -14,7 +12,7 @@ public class PlayerStartConditions {
     
     private int startingLife = 20;
     private int startingHand = 7;
-    private Supplier<Iterable<Card>> cardsOnBattlefield = null;
+    private Function<Player, Iterable<Card>> cardsOnBattlefield = null;
     private Function<Player, Iterable<Card>> cardsInCommand = null;
     private Function<Player, Iterable<Card>> schemes = null;
 
@@ -34,15 +32,15 @@ public class PlayerStartConditions {
     public final int getStartingLife() {
         return startingLife;
     }
-    public final Iterable<Card> getCardsOnBattlefield() {
-        return cardsOnBattlefield == null ? null : cardsOnBattlefield.get();
+    public final Iterable<Card> getCardsOnBattlefield(Player p) {
+        return cardsOnBattlefield == null ? null : cardsOnBattlefield.apply(p);
     }
 
     public final void setStartingLife(int startingLife) {
         this.startingLife = startingLife;
     }
 
-    public final void setCardsOnBattlefield(Supplier<Iterable<Card>> cardsOnTable) {
+    public final void setCardsOnBattlefield(Function<Player, Iterable<Card>> cardsOnTable) {
         this.cardsOnBattlefield = cardsOnTable;
     }
 

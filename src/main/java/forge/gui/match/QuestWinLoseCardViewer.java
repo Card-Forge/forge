@@ -26,7 +26,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import net.miginfocom.swing.MigLayout;
-import forge.Card;
 import forge.gui.CardDetailPanel;
 import forge.gui.CardPicturePanel;
 import forge.gui.toolbox.FList;
@@ -98,26 +97,14 @@ public class QuestWinLoseCardViewer extends FPanel {
     }
 
     private class SelListener implements ListSelectionListener {
-        private Card[] cache = null;
-
         @Override
         public void valueChanged(final ListSelectionEvent e) {
             final int row = QuestWinLoseCardViewer.this.jList.getSelectedIndex();
             // (String) jList.getSelectedValue();
             if ((row >= 0) && (row < QuestWinLoseCardViewer.this.list.size())) {
                 final CardPrinted cp = QuestWinLoseCardViewer.this.list.get(row);
-                this.ensureCacheHas(row, cp);
-                QuestWinLoseCardViewer.this.detail.setCard(this.cache[row]);
+                QuestWinLoseCardViewer.this.detail.setCard(cp.getMatchingForgeCard());
                 QuestWinLoseCardViewer.this.picture.setCard(cp);
-            }
-        }
-
-        private void ensureCacheHas(final int row, final CardPrinted cp) {
-            if (this.cache == null) {
-                this.cache = new Card[QuestWinLoseCardViewer.this.list.size()];
-            }
-            if (null == this.cache[row]) {
-                this.cache[row] = cp.toForgeCard();
             }
         }
     }

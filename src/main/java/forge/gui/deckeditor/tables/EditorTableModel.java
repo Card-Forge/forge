@@ -187,17 +187,14 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
         final int row = table.getSelectedRow();
         if (row != -1) {
             final T cp = this.rowToCard(row).getKey();
-            final Card card2;
             if (cp instanceof CardPrinted) {
-                card2 = ((CardPrinted) cp).toForgeCard();
-                CDeckEditorUI.SINGLETON_INSTANCE.setCard(card2);
+                CDeckEditorUI.SINGLETON_INSTANCE.setCard(((CardPrinted) cp).getMatchingForgeCard());
             }
             else if (cp != null) {
                 CDeckEditorUI.SINGLETON_INSTANCE.setCard(cp);
             }
             else {
-                card2 = null;
-                CDeckEditorUI.SINGLETON_INSTANCE.setCard(card2);
+                CDeckEditorUI.SINGLETON_INSTANCE.setCard((Card)null);
             }
         }
     }

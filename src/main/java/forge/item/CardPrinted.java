@@ -18,7 +18,9 @@
 package forge.item;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -295,8 +297,14 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
      * 
      * @return the card
      */
-    public Card toForgeCard() {
-        return toForgeCard(null);
+    private static final Map<CardPrinted, Card> cp2card = new HashMap<CardPrinted, Card>();
+    public Card getMatchingForgeCard() {
+        Card res = cp2card.get(this);
+        if (null == res) { 
+            res = toForgeCard(null); 
+            cp2card.put(this, res);
+        }
+        return res;
     }
 
     /**

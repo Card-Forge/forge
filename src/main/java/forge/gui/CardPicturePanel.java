@@ -159,8 +159,8 @@ public final class CardPicturePanel extends JPanel implements CardContainer {
      */
     @Override
     public Card getCard() {
-        if ((this.card == null) && (this.inventoryItem != null) && (this.inventoryItem instanceof CardPrinted)) {
-            this.card = ((CardPrinted) this.inventoryItem).toForgeCard();
+        if ((this.card == null) && this.inventoryItem instanceof CardPrinted) {
+            this.card = ((CardPrinted) this.inventoryItem).getMatchingForgeCard();
         }
         return this.card;
     }

@@ -27,7 +27,6 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import forge.Card;
 import forge.gui.CardDetailPanel;
 import forge.gui.CardPicturePanel;
 import forge.item.CardPrinted;
@@ -87,28 +86,17 @@ public class CardViewer extends JPanel {
     }
 
     private class SelListener implements ListSelectionListener {
-        private Card[] cache = null;
-
         @Override
         public void valueChanged(final ListSelectionEvent e) {
             final int row = CardViewer.this.jList.getSelectedIndex();
             // (String) jList.getSelectedValue();
             if ((row >= 0) && (row < CardViewer.this.list.size())) {
                 final CardPrinted cp = CardViewer.this.list.get(row);
-                this.ensureCacheHas(row, cp);
-                CardViewer.this.detail.setCard(this.cache[row]);
+                CardViewer.this.detail.setCard(cp.getMatchingForgeCard());
                 CardViewer.this.picture.setCard(cp);
             }
         }
 
-        private void ensureCacheHas(final int row, final CardPrinted cp) {
-            if (this.cache == null) {
-                this.cache = new Card[CardViewer.this.list.size()];
-            }
-            if (null == this.cache[row]) {
-                this.cache[row] = cp.toForgeCard();
-            }
-        }
     }
 
 }

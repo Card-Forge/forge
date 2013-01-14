@@ -37,7 +37,6 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import forge.Card;
 import forge.item.CardPrinted;
 
 /**
@@ -194,7 +193,6 @@ public class CardListViewer {
     }
 
     private class SelListener implements ListSelectionListener {
-        private Card[] cache = null;
 
         @Override
         public void valueChanged(final ListSelectionEvent e) {
@@ -202,20 +200,12 @@ public class CardListViewer {
             // (String) jList.getSelectedValue();
             if ((row >= 0) && (row < CardListViewer.this.list.size())) {
                 final CardPrinted cp = CardListViewer.this.list.get(row);
-                this.ensureCacheHas(row, cp);
-                CardListViewer.this.detail.setCard(this.cache[row]);
+                CardListViewer.this.detail.setCard(cp.getMatchingForgeCard());
                 CardListViewer.this.picture.setCard(cp);
             }
         }
 
-        private void ensureCacheHas(final int row, final CardPrinted cp) {
-            if (this.cache == null) {
-                this.cache = new Card[CardListViewer.this.list.size()];
-            }
-            if (null == this.cache[row]) {
-                this.cache[row] = cp.toForgeCard();
-            }
-        }
+
     }
 
 }

@@ -301,7 +301,7 @@ public final class BoosterDraft implements IBoosterDraft {
             final List<Card> forAi = new ArrayList<Card>();
             final List<CardPrinted> booster = this.pack.get((iHumansBooster + i) % this.pack.size());
             for (final CardPrinted cr : booster) {
-                forAi.add(cr.toForgeCard());
+                forAi.add(cr.getMatchingForgeCard());
             }
 
             final CardPrinted aiPick = this.draftAI.choose(booster, iPlayer++);
