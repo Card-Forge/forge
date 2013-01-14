@@ -336,7 +336,19 @@ public final class QuestUtilCards {
         final int leftInPool = this.qa.getCardPool().count(card);
         // remove sold cards from all decks:
         for (final Deck deck : this.qc.getMyDecks()) {
-            deck.getMain().remove(card, deck.getMain().count(card) - leftInPool);
+            int cntInMain = deck.getMain().count(card);
+            int cntInSb = deck.getSideboard().count(card);
+            int nToRemoveFromThisDeck = cntInMain + cntInSb - leftInPool;
+            if ( nToRemoveFromThisDeck <= 0 ) continue; // this is not the deck you are looking for
+
+            int nToRemoveFromSb = cntInSb - nToRemoveFromThisDeck;
+            if( nToRemoveFromSb > 0 ) {
+                deck.getSideboard().remove(card, nToRemoveFromSb);
+                nToRemoveFromThisDeck -= cntInSb; // actual removed count should be, but I take upper bound here
+                if ( nToRemoveFromThisDeck <= 0 ) continue; // done here
+            }
+
+            deck.getMain().remove(card, nToRemoveFromThisDeck);
         }
     }
 

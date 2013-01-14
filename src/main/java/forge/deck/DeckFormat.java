@@ -33,13 +33,13 @@ import forge.util.Aggregates;
  */
 public enum DeckFormat {
 
-    //            Main board: allowed size             SB: restriction    Max distinct non basic cards
-    Constructed ( new IntRange(60, Integer.MAX_VALUE), new IntRange(15),    4),
-    Limited     ( new IntRange(40, Integer.MAX_VALUE), null,                Integer.MAX_VALUE),
-    Commander   ( new IntRange(99),                    new IntRange(0, 10), 1),
-    Vanguard    ( new IntRange(60, Integer.MAX_VALUE), new IntRange(0),     4),
-    Planechase  ( new IntRange(60, Integer.MAX_VALUE), new IntRange(0),     4),
-    Archenemy   ( new IntRange(60, Integer.MAX_VALUE), new IntRange(0),     4);
+    //            Main board: allowed size             SB: restriction   Max distinct non basic cards
+    Constructed ( new IntRange(60, Integer.MAX_VALUE), new IntRange(15), 4),
+    Limited     ( new IntRange(40, Integer.MAX_VALUE), null,             Integer.MAX_VALUE),
+    Commander   ( new IntRange(99),                    new IntRange(10), 1),
+    Vanguard    ( new IntRange(60, Integer.MAX_VALUE), new IntRange(0),  4),
+    Planechase  ( new IntRange(60, Integer.MAX_VALUE), new IntRange(0),  4),
+    Archenemy   ( new IntRange(60, Integer.MAX_VALUE), new IntRange(0),  4);
 
     private final IntRange mainRange;
     private final IntRange sideRange; // null => no check
