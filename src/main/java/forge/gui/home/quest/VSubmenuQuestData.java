@@ -229,6 +229,9 @@ public enum VSubmenuQuestData implements IVSubmenu<CSubmenuQuestData> {
         for (QuestWorld qw : Singletons.getModel().getWorlds()) {
             cbxStartingWorld.addItem(qw);
         }
+        // Default to 'Main world'
+        cbxStartingWorld.setSelectedItem(Singletons.getModel().getWorlds().get("Main world"));
+
         cbxStartingWorld.addActionListener(alStartingWorld);
         updateEnableFormats();
 
