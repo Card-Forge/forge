@@ -12,7 +12,7 @@ public enum GameType {
     Sealed      ( DeckFormat.Limited, true, true ),
     Draft       ( DeckFormat.Limited, true, true ),
     Gauntlet    ( DeckFormat.Limited, true, true ),
-    Quest       ( DeckFormat.Constructed, true, true ),
+    Quest       ( DeckFormat.QuestDeck, true, true ),
     Constructed ( DeckFormat.Constructed, false, true ), 
     Archenemy   ( DeckFormat.Archenemy, false, false ),
     Planechase  ( DeckFormat.Planechase, false, false ),

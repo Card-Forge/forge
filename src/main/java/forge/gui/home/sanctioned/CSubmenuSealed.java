@@ -19,7 +19,6 @@ import forge.Singletons;
 import forge.control.FControl;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
-import forge.deck.DeckFormat;
 import forge.deck.DeckGroup;
 import forge.game.limited.ReadDraftRankings;
 import forge.game.GameType;
@@ -73,7 +72,7 @@ public enum CSubmenuSealed implements ICDoc {
                         SwingUtilities.invokeLater(new Runnable() {
                             @Override
                             public void run() {
-                                startGame();
+                                startGame(GameType.Sealed);
                             }
                         });
                     }
@@ -105,7 +104,7 @@ public enum CSubmenuSealed implements ICDoc {
         VSubmenuSealed.SINGLETON_INSTANCE.getLstDecks().setDecks(humanDecks);
     }
 
-    private void startGame() {
+    private void startGame(final GameType gameType) {
         final Deck human = VSubmenuSealed.SINGLETON_INSTANCE.getLstDecks().getSelectedDeck();
 
         if (human == null) {
@@ -113,17 +112,16 @@ public enum CSubmenuSealed implements ICDoc {
                     "Please build and/or select a deck for yourself.",
                     "No deck", JOptionPane.ERROR_MESSAGE);
             return;
-        } else if (null != DeckFormat.Limited.getDeckConformanceProblem(human)) {
-            JOptionPane.showMessageDialog(null,
-                    "The selected deck doesn't have enough cards to play (minimum 40)."
-                    + "\r\nUse the deck editor to choose the cards you want before starting.",
-                    "Invalid deck", JOptionPane.ERROR_MESSAGE);
+        } 
+        
+        String errorMessage = gameType.getDecksFormat().getDeckConformanceProblem(human);
+        if (null != errorMessage) {
+            JOptionPane.showMessageDialog(null, "Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         int matches = Singletons.getModel().getDecks().getSealed().get(human.getName()).getAiDecks().size();
-
-        Singletons.getModel().getGauntletMini().launch(matches, human, GameType.Sealed);
+        Singletons.getModel().getGauntletMini().launch(matches, human, gameType);
     }
 
     @SuppressWarnings("unchecked")

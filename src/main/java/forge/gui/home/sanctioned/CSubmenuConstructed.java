@@ -11,7 +11,6 @@ import forge.Command;
 import forge.Singletons;
 import forge.control.Lobby;
 import forge.deck.Deck;
-import forge.deck.DeckFormat;
 import forge.game.GameType;
 import forge.game.MatchController;
 import forge.game.MatchStartHelper;
@@ -54,7 +53,7 @@ public enum CSubmenuConstructed implements ICDoc {
         view.getBtnStart().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent arg0) {
-                startGame();
+                startGame(GameType.Constructed);
             }
         });
 
@@ -94,12 +93,13 @@ public enum CSubmenuConstructed implements ICDoc {
 
 
 
-    /** @param lists0 &emsp; {@link java.util.List}<{@link javax.swing.JList}> */
-    private void startGame() {
+    /** @param gameType 
+     * @param lists0 &emsp; {@link java.util.List}<{@link javax.swing.JList}> */
+    private void startGame(final GameType gameType) {
         Deck humanDeck = VSubmenuConstructed.SINGLETON_INSTANCE.getDcHuman().getDeck();
 
         if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            String errorMessage = DeckFormat.Constructed.getDeckConformanceProblem(humanDeck);
+            String errorMessage = gameType.getDecksFormat().getDeckConformanceProblem(humanDeck);
             if (null != errorMessage) {
                 JOptionPane.showMessageDialog(null, "Your deck " + errorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -126,7 +126,7 @@ public enum CSubmenuConstructed implements ICDoc {
                 starter.addPlayer(lobby.findLocalPlayer(PlayerType.COMPUTER), aiDeck);
 
                 MatchController mc = Singletons.getModel().getMatch();
-                mc.initMatch(GameType.Constructed, starter.getPlayerMap());
+                mc.initMatch(gameType, starter.getPlayerMap());
                 mc.startRound();
 
                 return null;

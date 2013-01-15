@@ -14,7 +14,6 @@ import forge.Singletons;
 import forge.control.FControl;
 import forge.control.Lobby;
 import forge.deck.Deck;
-import forge.deck.DeckFormat;
 import forge.deck.DeckGroup;
 import forge.game.GameType;
 import forge.game.MatchController;
@@ -67,7 +66,7 @@ public enum CSubmenuDraft implements ICDoc {
                         SwingUtilities.invokeLater(new Runnable() {
                             @Override
                             public void run() {
-                                startGame();
+                                startGame(GameType.Draft);
                             }
                         });
                     }
@@ -91,7 +90,7 @@ public enum CSubmenuDraft implements ICDoc {
         }
     }
 
-    private void startGame() {
+    private void startGame(final GameType gameType) {
         final boolean gauntlet = VSubmenuDraft.SINGLETON_INSTANCE.getRadSingle().isSelected() ? false : true;
         final Deck humanDeck = VSubmenuDraft.SINGLETON_INSTANCE.getLstDecks().getSelectedDeck();
         final int aiIndex = (int) Math.floor(Math.random() * 8);
@@ -101,11 +100,10 @@ public enum CSubmenuDraft implements ICDoc {
                     "No deck selected for human!\r\n(You may need to build a new deck.)",
                     "No deck", JOptionPane.ERROR_MESSAGE);
             return;
-        } else if (null != DeckFormat.Limited.getDeckConformanceProblem(humanDeck)) {
-            JOptionPane.showMessageDialog(null,
-                    "The selected deck doesn't have enough cards to play (minimum 40)."
-                    + "\r\nUse the deck editor to choose the cards you want before starting.",
-                    "Invalid deck", JOptionPane.ERROR_MESSAGE);
+        } 
+        String errorMessage = gameType.getDecksFormat().getDeckConformanceProblem(humanDeck);
+        if (null != errorMessage) {
+            JOptionPane.showMessageDialog(null, "Your deck " + errorMessage +  " Please edit or choose a different deck.", "Invalid deck", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -113,7 +111,7 @@ public enum CSubmenuDraft implements ICDoc {
 
         if (gauntlet) {
             int rounds = Singletons.getModel().getDecks().getDraft().get(humanDeck.getName()).getAiDecks().size();
-            Singletons.getModel().getGauntletMini().launch(rounds, humanDeck, GameType.Draft);
+            Singletons.getModel().getGauntletMini().launch(rounds, humanDeck, gameType);
             return;
         }
 
