@@ -211,7 +211,7 @@ public class PumpAi extends PumpAiBase {
         if (Singletons.getModel().getGame().getStack().size() == 0) {
             // If the cost is tapping, don't activate before declare
             // attack/block
-            if ((sa.getPayCosts() != null) && sa.getPayCosts().getTap()) {
+            if ((sa.getPayCosts() != null) && sa.getPayCosts().hasTapCost()) {
                 if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                         && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai)) {
                     list.remove(sa.getSourceCard());

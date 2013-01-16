@@ -1972,7 +1972,7 @@ public class CombatUtil {
                 continue;
             }
 
-            if (!ability.getPayCosts().getTap() && ComputerUtil.canPayCost(ability, attacker.getController())) {
+            if (!ability.getPayCosts().hasTapCost() && ComputerUtil.canPayCost(ability, attacker.getController())) {
                 int pBonus = AbilityFactory.calculateAmount(ability.getSourceCard(), ability.getParam("NumAtt"), ability);
                 if (pBonus > 0) {
                     power += pBonus;
@@ -2135,7 +2135,7 @@ public class CombatUtil {
                 continue;
             }
 
-            if (!ability.getPayCosts().getTap() && ComputerUtil.canPayCost(ability, attacker.getController())) {
+            if (!ability.getPayCosts().hasTapCost() && ComputerUtil.canPayCost(ability, attacker.getController())) {
                 int tBonus = AbilityFactory.calculateAmount(ability.getSourceCard(), ability.getParam("NumDef"), ability);
                 if (tBonus > 0) {
                     toughness += tBonus;

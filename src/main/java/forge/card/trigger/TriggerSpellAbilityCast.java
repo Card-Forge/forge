@@ -143,7 +143,7 @@ public class TriggerSpellAbilityCast extends Trigger {
 
         if (this.getMapParams().containsKey("NonTapCost")) {
             final Cost cost = (Cost) (runParams2.get("Cost"));
-            if (cost.getTap()) {
+            if (cost.hasTapCost()) {
                 return false;
             }
         }

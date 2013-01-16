@@ -121,7 +121,7 @@ public class CostTapType extends CostPartWithList {
 
         typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
 
-        if (cost.getTap()) {
+        if (cost.hasTapCost()) {
             typeList.remove(source);
         }
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);
@@ -185,7 +185,7 @@ public class CostTapType extends CostPartWithList {
      */
     @Override
     public final boolean decideAIPayment(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
-        final boolean tap = payment.getCost().getTap();
+        final boolean tap = payment.getCost().hasTapCost();
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         if (c == null) {

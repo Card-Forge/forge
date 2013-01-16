@@ -195,7 +195,7 @@ public class ProtectAi extends SpellAiLogic {
         if (Singletons.getModel().getGame().getStack().isEmpty()) {
             // If the cost is tapping, don't activate before declare
             // attack/block
-            if ((sa.getPayCosts() != null) && sa.getPayCosts().getTap()) {
+            if ((sa.getPayCosts() != null) && sa.getPayCosts().hasTapCost()) {
                 if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
                         && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai)) {
                     list.remove(sa.getSourceCard());

@@ -106,7 +106,7 @@ public class CountersPutAllAi extends SpellAiLogic {
             //Check for cards that could profit from the ability
             PhaseHandler phase = Singletons.getModel().getGame().getPhaseHandler();
             if (type.equals("P1P1") && sa.isAbility() && source.isCreature()
-                    && sa.getPayCosts() != null && sa.getPayCosts().getTap()
+                    && sa.getPayCosts() != null && sa.getPayCosts().hasTapCost()
                     && sa instanceof AbilitySub
                     && (!phase.getNextTurn().equals(ai)
                     || phase.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY))) {

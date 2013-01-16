@@ -2250,7 +2250,7 @@ public class ComputerUtil {
         final PhaseHandler ph = Singletons.getModel().getGame().getPhaseHandler();
 
         return (sa.getSourceCard().isCreature()
-                && sa.getPayCosts().getTap()
+                && sa.getPayCosts().hasTapCost()
                 && (ph.getPhase().isBefore(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
                  || !ph.getNextTurn().equals(sa.getActivatingPlayer())));
     }

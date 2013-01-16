@@ -124,7 +124,7 @@ public class CostUntapType extends CostPartWithList {
 
         typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
 
-        if (cost.getUntap()) {
+        if (cost.hasUntapCost()) {
             typeList.remove(source);
         }
         typeList = CardLists.filter(typeList, Presets.TAPPED);
@@ -159,7 +159,7 @@ public class CostUntapType extends CostPartWithList {
      */
     @Override
     public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
-        final boolean untap = payment.getCost().getUntap();
+        final boolean untap = payment.getCost().hasUntapCost();
         List<Card> typeList = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         typeList = CardLists.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
         typeList = CardLists.filter(typeList, Presets.TAPPED);
@@ -192,7 +192,7 @@ public class CostUntapType extends CostPartWithList {
      */
     @Override
     public final boolean decideAIPayment(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
-        final boolean untap = payment.getCost().getUntap();
+        final boolean untap = payment.getCost().hasUntapCost();
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         if (c == null) {

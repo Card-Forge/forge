@@ -28,6 +28,7 @@ import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaCostParser;
 import forge.card.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.util.TextUtil;
 
 /**
  * <p>
@@ -51,41 +52,20 @@ public class Cost {
     }
 
     private boolean sacCost = false;
+    private boolean tapCost = false;
+    private boolean untapCost = false;
 
-    /**
-     * <p>
-     * Getter for the field <code>sacCost</code>.
-     * </p>
-     * 
-     * @return a boolean.
-     */
+
     public final boolean getSacCost() {
         return this.sacCost;
     }
 
-    private boolean tapCost = false;
 
-    /**
-     * <p>
-     * getTap.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean getTap() {
+    public final boolean hasTapCost() {
         return this.tapCost;
     }
 
-    private boolean untapCost = false;
-
-    /**
-     * <p>
-     * getUntap.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean getUntap() {
+    public final boolean hasUntapCost() {
         return this.untapCost;
     }
 
@@ -97,18 +77,7 @@ public class Cost {
      * @return a boolean.
      */
     public final boolean hasNoManaCost() {
-        if (this.getTotalMana().equals("")) {
-            return true;
-        }
-        // This is only used for AI Mana Abilities, since none of these have optional costs
-        // It's not as necessary for this functional
-        for (final CostPart part : this.costParts) {
-            if (part instanceof CostMana) {
-                return false;
-            }
-        }
-
-        return true;
+        return this.getTotalMana() == SpellManaCost.ZERO;
     }
 
     /**
@@ -149,26 +118,6 @@ public class Cost {
     private final String name;
 
     // Parsing Strings
-    private static final String TAP_X_STR = "tapXType<";
-    private static final String UNTAP_Y_STR = "untapYType<";
-    private static final String SUB_STR = "SubCounter<";
-    private static final String ADD_STR = "AddCounter<";
-    private static final String LIFE_STR = "PayLife<";
-    private static final String LIFE_GAIN_STR = "OppGainLife<";
-    private static final String EACH_OTHER_LIFE_GAIN_STR = "OthersEachGainLife<";
-    private static final String DAMAGE_STR = "DamageYou<";
-    private static final String MILL_STR = "Mill<";
-    private static final String DISC_STR = "Discard<";
-    private static final String SAC_STR = "Sac<";
-    private static final String EXILE_STR = "Exile<";
-    private static final String EXILE_FROM_HAND_STR = "ExileFromHand<";
-    private static final String EXILE_FROM_GRAVE_STR = "ExileFromGrave<";
-    private static final String EXILE_FROM_STACK_STR = "ExileFromStack<";
-    private static final String EXILE_FROM_TOP_STR = "ExileFromTop<";
-    private static final String EXILE_SAME_GRAVE_STR = "ExileSameGrave<";
-    private static final String RETURN_STR = "Return<";
-    private static final String REVEAL_STR = "Reveal<";
-    private static final String XCANTBE0_STR = "XCantBe0";
 
     public Cost(final Card card, SpellManaCost cost, final boolean bAbility) {
         this(card, cost.toString(), bAbility);
@@ -188,214 +137,187 @@ public class Cost {
     public Cost(final Card card, String parse, final boolean bAbility) {
         this.isAbility = bAbility;
         // when adding new costs for cost string, place them here
-        String name = "";
-        if (card != null) {
-            name = card.getName();
+        this.name = card != null ? card.getName() : "";
+
+        boolean xCantBe0 = false;
+        int amountX = 0;
+
+        StringBuilder manaParts = new StringBuilder();
+        String[] parts = TextUtil.splitWithParenthesis(parse, ' ', '<', '>');
+        for(String part : parts) {
+            if( "XCantBe0".equals(part) )
+                xCantBe0 = true;
+            else if ( "X".equals(part) )
+                amountX++;
+            else {
+                CostPart cp = parseCostPart(part);
+                if ( null != cp )
+                    this.costParts.add(cp);
+                else
+                    manaParts.append(part).append(" ");
+            }
+            
         }
-        this.name = name;
 
-        while (parse.contains(Cost.TAP_X_STR)) {
-            final String[] splitStr = this.abCostParse(parse, Cost.TAP_X_STR, 3);
-            parse = this.abUpdateParse(parse, Cost.TAP_X_STR);
+        if ((amountX > 0) || manaParts.length() > 0) {
+            this.costParts.add(0, new CostMana(manaParts.toString(), amountX, xCantBe0));
+        }
+        
+        
+        // inspect parts to set Sac, {T} and {Q} flags
+        for (int iCp = 0; iCp < costParts.size(); iCp++) {
+            CostPart cp = costParts.get(iCp);
+            if( cp instanceof CostSacrifice ) sacCost = true;
 
+            // my guess why Q/T are to be first and are followed by mana parts 
+            // is because Q/T are undoable and mana is interactive, so it well be easy to rollback if player refuses to pay 
+            if( cp instanceof CostUntap ) {
+                costParts.remove(iCp);
+                costParts.add(0, cp);
+                untapCost = true;
+            }
+            if( cp instanceof CostTap ) {
+                costParts.remove(iCp);
+                costParts.add(0, cp);
+                tapCost = true;
+            }
+        }
+    }
+
+    private static CostPart parseCostPart(String parse) {
+
+        if(parse.startsWith("tapXType<")) {
+            final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
-            this.costParts.add(new CostTapType(splitStr[0], splitStr[1], description));
+            return new CostTapType(splitStr[0], splitStr[1], description);
         }
-
-        while (parse.contains(Cost.UNTAP_Y_STR)) {
-            final String[] splitStr = this.abCostParse(parse, Cost.UNTAP_Y_STR, 3);
-            parse = this.abUpdateParse(parse, Cost.UNTAP_Y_STR);
-
+    
+        if(parse.startsWith("untapYType<")) {
+            final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
-            this.costParts.add(new CostUntapType(splitStr[0], splitStr[1], description));
+            return new CostUntapType(splitStr[0], splitStr[1], description);
         }
-
-        while (parse.contains(Cost.SUB_STR)) {
+    
+        if(parse.startsWith("SubCounter<")) {
             // SubCounter<NumCounters/CounterType>
-            final String[] splitStr = this.abCostParse(parse, Cost.SUB_STR, 5);
-            parse = this.abUpdateParse(parse, Cost.SUB_STR);
-
+            final String[] splitStr = abCostParse(parse, 5);
             final String type = splitStr.length > 2 ? splitStr[2] : "CARDNAME";
             final String description = splitStr.length > 3 ? splitStr[3] : null;
             final ZoneType zone = splitStr.length > 4 ? ZoneType.smartValueOf(splitStr[4]) : ZoneType.Battlefield;
-
-            this.costParts.add(new CostRemoveCounter(splitStr[0], CounterType.valueOf(splitStr[1]), type, description, zone));
+    
+            return new CostRemoveCounter(splitStr[0], CounterType.valueOf(splitStr[1]), type, description, zone);
         }
-
-        while (parse.contains(Cost.ADD_STR)) {
+    
+        if(parse.startsWith("AddCounter<")) {
             // AddCounter<NumCounters/CounterType>
-            final String[] splitStr = this.abCostParse(parse, Cost.ADD_STR, 4);
-            parse = this.abUpdateParse(parse, Cost.ADD_STR);
-
+            final String[] splitStr = abCostParse(parse, 4);
             final String type = splitStr.length > 2 ? splitStr[2] : "CARDNAME";
             final String description = splitStr.length > 3 ? splitStr[3] : null;
-
-            this.costParts.add(new CostPutCounter(splitStr[0], CounterType.valueOf(splitStr[1]), type, description));
+            return new CostPutCounter(splitStr[0], CounterType.valueOf(splitStr[1]), type, description);
         }
-
+    
         // While no card has "PayLife<2> PayLife<3> there might be a card that
         // Changes Cost by adding a Life Payment
-        while (parse.contains(Cost.LIFE_STR)) {
+        if(parse.startsWith("PayLife<")) {
             // PayLife<LifeCost>
-            final String[] splitStr = this.abCostParse(parse, Cost.LIFE_STR, 1);
-            parse = this.abUpdateParse(parse, Cost.LIFE_STR);
-
-            this.costParts.add(new CostPayLife(splitStr[0]));
+            final String[] splitStr = abCostParse(parse, 1);
+            return new CostPayLife(splitStr[0]);
         }
-
-        while (parse.contains(Cost.LIFE_GAIN_STR)) {
+    
+        if(parse.startsWith("OppGainLife<")) {
             // PayLife<LifeCost>
-            final String[] splitStr = this.abCostParse(parse, Cost.LIFE_GAIN_STR, 1);
-            parse = this.abUpdateParse(parse, Cost.LIFE_GAIN_STR);
-
-            this.costParts.add(new CostGainLife(splitStr[0]));
+            final String[] splitStr = abCostParse(parse, 1);
+            return new CostGainLife(splitStr[0]);
         }
-
-        while (parse.contains(Cost.EACH_OTHER_LIFE_GAIN_STR)) {
+    
+        if(parse.startsWith("OthersEachGainLife<")) {
             // PayLife<LifeCost>
-            final String[] splitStr = this.abCostParse(parse, Cost.EACH_OTHER_LIFE_GAIN_STR, 1);
-            parse = this.abUpdateParse(parse, Cost.EACH_OTHER_LIFE_GAIN_STR);
-
-            this.costParts.add(new CostGainLifeEachOther(splitStr[0]));
+            final String[] splitStr = abCostParse(parse, 1);
+            return new CostGainLifeEachOther(splitStr[0]);
         }
-
-        while (parse.contains(Cost.DAMAGE_STR)) {
+    
+        if(parse.startsWith("DamageYou<")) {
             // PayLife<LifeCost>
-            final String[] splitStr = this.abCostParse(parse, Cost.DAMAGE_STR, 1);
-            parse = this.abUpdateParse(parse, Cost.DAMAGE_STR);
-
-            this.costParts.add(new CostDamage(splitStr[0]));
+            final String[] splitStr = abCostParse(parse, 1);
+            return new CostDamage(splitStr[0]);
         }
-
-        while (parse.contains(Cost.MILL_STR)) {
+    
+        if(parse.startsWith("Mill<")) {
             // PayLife<LifeCost>
-            final String[] splitStr = this.abCostParse(parse, Cost.MILL_STR, 1);
-            parse = this.abUpdateParse(parse, Cost.MILL_STR);
-
-            this.costParts.add(new CostMill(splitStr[0]));
+            final String[] splitStr = abCostParse(parse, 1);
+            return new CostMill(splitStr[0]);
         }
-
-        while (parse.contains(Cost.DISC_STR)) {
+    
+        if(parse.startsWith("Discard<")) {
             // Discard<NumCards/Type>
-            final String[] splitStr = this.abCostParse(parse, Cost.DISC_STR, 3);
-            parse = this.abUpdateParse(parse, Cost.DISC_STR);
-
+            final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
-            this.costParts.add(new CostDiscard(splitStr[0], splitStr[1], description));
+            return new CostDiscard(splitStr[0], splitStr[1], description);
         }
-
-        while (parse.contains(Cost.SAC_STR)) {
-            this.sacCost = true;
-            final String[] splitStr = this.abCostParse(parse, Cost.SAC_STR, 3);
-            parse = this.abUpdateParse(parse, Cost.SAC_STR);
-
+    
+        if(parse.startsWith("Sac<")) {
+            final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
-            this.costParts.add(new CostSacrifice(splitStr[0], splitStr[1], description));
+            return new CostSacrifice(splitStr[0], splitStr[1], description);
         }
-
-        while (parse.contains(Cost.EXILE_STR)) {
-            final String[] splitStr = this.abCostParse(parse, Cost.EXILE_STR, 3);
-            parse = this.abUpdateParse(parse, Cost.EXILE_STR);
-
+    
+        if(parse.startsWith("Exile<")) {
+            final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
-            this.costParts.add(new CostExile(splitStr[0], splitStr[1], description, ZoneType.Battlefield));
+            return new CostExile(splitStr[0], splitStr[1], description, ZoneType.Battlefield);
         }
-
-        while (parse.contains(Cost.EXILE_FROM_HAND_STR)) {
-            final String[] splitStr = this.abCostParse(parse, Cost.EXILE_FROM_HAND_STR, 3);
-            parse = this.abUpdateParse(parse, Cost.EXILE_FROM_HAND_STR);
-
+    
+        if(parse.startsWith("ExileFromHand<")) {
+            final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
-            this.costParts.add(new CostExile(splitStr[0], splitStr[1], description, ZoneType.Hand));
+            return new CostExile(splitStr[0], splitStr[1], description, ZoneType.Hand);
         }
-
-        while (parse.contains(Cost.EXILE_FROM_GRAVE_STR)) {
-            final String[] splitStr = this.abCostParse(parse, Cost.EXILE_FROM_GRAVE_STR, 3);
-            parse = this.abUpdateParse(parse, Cost.EXILE_FROM_GRAVE_STR);
-
+    
+        if(parse.startsWith("ExileFromGrave<")) {
+            final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
-            this.costParts.add(new CostExile(splitStr[0], splitStr[1], description, ZoneType.Graveyard));
+            return new CostExile(splitStr[0], splitStr[1], description, ZoneType.Graveyard);
         }
-
-        while (parse.contains(Cost.EXILE_FROM_STACK_STR)) {
-            final String[] splitStr = this.abCostParse(parse, Cost.EXILE_FROM_STACK_STR, 3);
-            parse = this.abUpdateParse(parse, Cost.EXILE_FROM_STACK_STR);
-
+    
+        if(parse.startsWith("ExileFromStack<")) {
+            final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
-            this.costParts.add(new CostExile(splitStr[0], splitStr[1], description, ZoneType.Stack));
+            return new CostExile(splitStr[0], splitStr[1], description, ZoneType.Stack);
         }
-
-        while (parse.contains(Cost.EXILE_FROM_TOP_STR)) {
-            final String[] splitStr = this.abCostParse(parse, Cost.EXILE_FROM_TOP_STR, 3);
-            parse = this.abUpdateParse(parse, Cost.EXILE_FROM_TOP_STR);
-
+    
+        if(parse.startsWith("ExileFromTop<")) {
+            final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
-            this.costParts.add(new CostExile(splitStr[0], splitStr[1], description, ZoneType.Library));
+            return new CostExile(splitStr[0], splitStr[1], description, ZoneType.Library);
         }
-
-        while (parse.contains(Cost.EXILE_SAME_GRAVE_STR)) {
-            final String[] splitStr = this.abCostParse(parse, Cost.EXILE_SAME_GRAVE_STR, 3);
-            parse = this.abUpdateParse(parse, Cost.EXILE_SAME_GRAVE_STR);
-
+    
+        if(parse.startsWith("ExileSameGrave<")) {
+            final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
-            this.costParts.add(new CostExile(splitStr[0], splitStr[1], description, ZoneType.Graveyard, true));
+            return new CostExile(splitStr[0], splitStr[1], description, ZoneType.Graveyard, true);
         }
-
-        while (parse.contains(Cost.RETURN_STR)) {
-            final String[] splitStr = this.abCostParse(parse, Cost.RETURN_STR, 3);
-            parse = this.abUpdateParse(parse, Cost.RETURN_STR);
-
+    
+        if(parse.startsWith("Return<")) {
+            final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
-            this.costParts.add(new CostReturn(splitStr[0], splitStr[1], description));
+            return new CostReturn(splitStr[0], splitStr[1], description);
         }
-
-        while (parse.contains(Cost.REVEAL_STR)) {
-            final String[] splitStr = this.abCostParse(parse, Cost.REVEAL_STR, 3);
-            parse = this.abUpdateParse(parse, Cost.REVEAL_STR);
-
+    
+        if(parse.startsWith("Reveal<")) {
+            final String[] splitStr = abCostParse(parse, 3);
             final String description = splitStr.length > 2 ? splitStr[2] : null;
-            this.costParts.add(new CostReveal(splitStr[0], splitStr[1], description));
+            return new CostReveal(splitStr[0], splitStr[1], description);
         }
-
-        int manaLocation = 0;
+        
         // These won't show up with multiples
-        if (parse.contains("Untap")) {
-            parse = parse.replace("Untap", "").trim();
-            this.costParts.add(0, new CostUntap());
-            manaLocation++;
+        if (parse.equals("Untap") || parse.equals("Q")) {
+            return new CostUntap();
         }
-
-        if (parse.contains("Q")) {
-            this.untapCost = true;
-            parse = parse.replace("Q", "").trim();
-            this.costParts.add(0, new CostUntap());
-            manaLocation++;
+    
+        if (parse.equals("T")) {
+            return new CostTap();
         }
-
-        if (parse.contains("T")) {
-            this.tapCost = true;
-            parse = parse.replace("T", "").trim();
-            this.costParts.add(0, new CostTap());
-            manaLocation++;
-        }
-
-        boolean xCantBe0 = parse.contains(XCANTBE0_STR);
-        if (xCantBe0) {
-            parse = parse.replaceAll(XCANTBE0_STR, "");
-        }
-
-        final String stripXCost = parse.replaceAll("X", "");
-
-        final int amountX = parse.length() - stripXCost.length();
-
-        String mana = stripXCost.trim();
-        if (mana.equals("")) {
-            mana = "0";
-        }
-
-        if ((amountX > 0) || !mana.equals("0")) {
-            this.costParts.add(manaLocation, new CostMana(mana, amountX, xCantBe0));
-        }
+        return null;
     }
 
     /**
@@ -411,33 +333,13 @@ public class Cost {
      *            a int.
      * @return an array of {@link java.lang.String} objects.
      */
-    private String[] abCostParse(final String parse, final String subkey, final int numParse) {
-        final int startPos = parse.indexOf(subkey);
+    private static String[] abCostParse(final String parse, final int numParse) {
+        final int startPos = parse.indexOf("<");
         final int endPos = parse.indexOf(">", startPos);
-        String str = parse.substring(startPos, endPos);
-
-        str = str.replace(subkey, "");
+        String str = parse.substring(startPos + 1, endPos);
 
         final String[] splitStr = str.split("/", numParse);
         return splitStr;
-    }
-
-    /**
-     * <p>
-     * abUpdateParse.
-     * </p>
-     * 
-     * @param parse
-     *            a {@link java.lang.String} object.
-     * @param subkey
-     *            a {@link java.lang.String} object.
-     * @return a {@link java.lang.String} object.
-     */
-    private String abUpdateParse(final String parse, final String subkey) {
-        final int startPos = parse.indexOf(subkey);
-        final int endPos = parse.indexOf(">", startPos);
-        final String str = parse.substring(startPos, endPos + 1);
-        return parse.replace(str, "").trim();
     }
 
     /**
@@ -664,8 +566,7 @@ public class Cost {
      * Constant.
      * <code>numNames="{zero, a, two, three, four, five, six, "{trunked}</code>
      */
-    private static final String[] NUM_NAMES = { "zero", "a", "two", "three", "four", "five", "six", "seven", "eight",
-            "nine", "ten" };
+    private static final String[] NUM_NAMES = { "zero", "a", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten" };
     /** Constant <code>vowelPattern</code>. */
     private static final Pattern VOWEL_PATTERN = Pattern.compile("^[aeiou]", Pattern.CASE_INSENSITIVE);
 
