@@ -216,23 +216,6 @@ public class CardLists {
         });
     } // getColor()
 
-    /**
-     * <p>
-     * getGoldCards.
-     * </p>
-     * 
-     * @param list
-     *            a {@link forge.CardList} object.
-     * @return a {@link forge.CardList} object.
-     */
-    public static List<Card> getGoldCards(final List<Card> list) {
-        return CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                return CardUtil.getColors(c).size() >= 2;
-            }
-        });
-    }
 
     /**
      * 

@@ -77,12 +77,13 @@ public class QuestUtil {
      * getHumanStartingCards.
      * </p>
      * Returns list of current plant/pet configuration only.
+     * @param human 
      * 
      * @param qd
      *            a {@link forge.quest.data.QuestData} object.
      * @return a {@link forge.CardList} object.
      */
-    public static List<Card> getHumanStartingCards(final QuestController qc) {
+    public static List<Card> getHumanStartingCards(final QuestController qc, Player human) {
         final List<Card> list = new ArrayList<Card>();
 
         for (int iSlot = 0; iSlot < QuestController.MAX_PET_SLOTS; iSlot++) {
@@ -92,7 +93,7 @@ public class QuestUtil {
             if (pet != null) {
                 Card c = pet.getPetCard(qc.getAssets());
                 if (c != null) {
-                    Card copy = CardFactory.getCard2(c, null);
+                    Card copy = CardFactory.getCard2(c, human);
                     copy.setSickness(true);
                     copy.setImageName(c.getImageName());
                     copy.setToken(true);
@@ -118,7 +119,7 @@ public class QuestUtil {
      * @return a {@link forge.CardList} object.
      */
     public static List<Card> getHumanStartingCards(final QuestController qc, final QuestEvent qe, final Player human) {
-        final List<Card> list = QuestUtil.getHumanStartingCards(qc);
+        final List<Card> list = QuestUtil.getHumanStartingCards(qc, human);
         for (final String s : qe.getHumanExtraCards()) {
             list.add(QuestUtil.readExtraCard(s, human));
         }
