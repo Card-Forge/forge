@@ -166,6 +166,17 @@ Fixes/Features:
 - schemes and planes generation code in GameNew.java now demands a player.
 - toForgeCardList method removed
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Added MUSTER to CounterType
+- GTC: Little card script tweaks.
+- caching implementation CardPrinted.getMatchingForgeCard replaces toForgeCard without parameters.
+-  Custom deck format for quest mode: 40 cards + 0 or 15 of sideboard, no more than 4 cards of a kind
+- All gui.home.sanctioned.CSubmenu* controllers use deck format as specified in GameType
+- Always default to Main world when starting a new quest.
+- The "Sanctioned Format: Constructed" view should now be compatible with displays that are only 600 pixels verticle. The list at 600 pixels tall should now display three lines of text rather than less than a single line of text.
+- Removing the wrong SVN rev number from title bar.
+- removed unused method from CardLists
+- pets will have its owner initialized
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -258,6 +269,15 @@ Undercity Plague
 Stolen Identity
 Whispering Madness
 Five-Alarm Fire
+Assemble the Legion
+Biomass Mutation
+Blind Obedience
+Ghor-Clan Rampager
+High Priest of Penance
+Leyline Phantom
+Shambleshark
+Skarrg Guildmage
+Skullcrack
 
 
 end
