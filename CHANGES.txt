@@ -7,6 +7,8 @@ Forge Beta: 01-##-2013 ver 1.3.5
 11### cards in total.
 
 
+The "Sanctioned Format: Constructed" view should now be compatible with displays that are only 600 pixels tall. The deck list at 600 pixels tall should now display three lines of text rather than less than a single line of text.
+
 The deck conformance/legality is now a user-togglable preference and is enabled by default. You no longer need to turn on dev mode to play an illegal deck.
 
 Work on the quest worlds continue. Information on this new game format can be found in this topic:
@@ -192,6 +194,17 @@ Fixes/Features:
 - removed unused method from CardLists
 - pets will have its owner initialized
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Updated quest icon download links to include icons for Jamuraa quest world
+- Fixed LKI copies forgetting their equipped/enchanted lists (Fixes Skullclamp).
+- Cost - rewrite of parsing code
+- Fixed Novijen, Heart of Progress
+- Added the second Quest World, Jamuraa. A readme update will follow shortly.
+- Added a description of Jamuraa to the changes.txt file.
+- Updated the Jamuraa definition include Weatherlight, as advertised.
+- Slightly improved a Jamuraa challenge deck against certain counterstrategies.
+- Made two cards ready for multiplayer
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -219,6 +232,8 @@ Discordant Spirit
 Erratic Mutation
 Necromancer's Magemark
 Runesword
+Scattering Stroke
+Sworn Defender
 
 
 Added the following new Gatecrash cards to the Gatecrash branch. These cards are not yet available for in game use.:
@@ -293,6 +308,8 @@ Leyline Phantom
 Shambleshark
 Skarrg Guildmage
 Skullcrack
+Thespian's Stage
+Orzhov Keyrune
 
 
 end
