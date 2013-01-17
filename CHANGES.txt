@@ -15,6 +15,21 @@ http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=9258
 
 --
 
+A second Quest World, Jamuraa, has been added to Forge. When playing Quest mode, it is now possible to 'Travel' between the regular Quest environment and the two Worlds, Shandalar and Jamuraa, both of which include special formats, opponents and challenges. Or you can start a new Quest in any of them.
+
+Like Shandalar, Jamuraa is a fantasy world. Its peaceful existence has recently been wrecked by a planar conjunction that shattered the barriers between Jamuraa and the infernal planes known as Jahim, Saqar, and Jahannam. The demon planeswalkers who rule those planes, and their hellish sister, Lilith, are now extending their influence over Jamuraa and gradually destroying the whole continent. Your task is to fight their minions and ultimately challenge the four demons - but beware, their destructive might is unfathomable!
+
+From a technical perspective, the following sets are available to the player in Jamuraa: 
+5th Edition, Arabian Nights, Mirage, Visions, Weatherlight.
+
+Jamuraa contains:
+- 81 opponent decks, broken down as follows: 13 'easy' decks, 17 'medium' decks, 31 'hard' decks, and 20 'very hard' decks.
+- 9 challenges, including the 4 demon planeswalkers (the 3 demon rulers and Lilith) and 5 other special scenarios set in Jamuraa. All challenges are repeatable. All are fairly hard, and the 4 demon challenges are especially fiendish.
+For the most part, the opponent duel and challenge decks are built with the same format restrictions as your own cardpool, and some of the easiest opponent decks were in fact based on a limited cardpool. But there will be exceptions, especially in the hard/very hard decks and challenges, which can be more like Vintage/T1 decks than pure Mirage + 5th Edition decks. There will be older cards here and there, and maybe even a random Tempest card or two (although these are extremely scarce!). 
+Hint: if you find the later 'Vintage' opponent decks unfair or near-impossible to beat with your 5th Edition/Mirage block cards, you can Travel to Shandalar and collect some old power cards there, and then return to Jamuraa. Just remember to complete your challenges before traveling. 
+
+--
+
 This version of forge includes a few sound files for the new sound effect system. While we have several sounds assigned to a few of the available events there are a number of events that do not yet have a assigned sound file. This should be considered a work in progress and we could use some help in finding interesting sounds that we can add to forge.
 
 The sound files need to be in wav or au format, wav appears to be more wide spread but the code can handle either format. The sound files need to be copy right free and they should be in the public domain.
