@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Ukulunkulu 3
+Title=Ukulunkulu
+Icon=Ukulunkulu.jpg
+Difficulty=hard
+Description=Ukulunkulu plays a GW Maro-ErhnieGeddon deck.
+Deck Type=constructed
+[main]
+4 Armageddon|5ED
+2 Disenchant|5ED
+4 Erhnam Djinn|ARN
+10 Forest|MIR
+2 Gaea's Blessing|WTH
+2 Gerrard's Wisdom|WTH
+3 Jolrael's Centaur|MIR
+4 Land Tax|LEG
+4 Maro|MIR
+7 Plains|MIR
+4 Quirion Ranger|VIS
+3 River Boa|VIS
+4 Savannah|LEB
+4 Swords to Plowshares|LEB
+2 Sylvan Library|LEG
+1 Whirling Dervish|LEG
+[sideboard]
+[planes]
+[schemes]

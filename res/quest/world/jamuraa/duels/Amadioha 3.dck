@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Amadioha 3
+Title=Amadioha
+Icon=Amadioha.jpg
+Difficulty=hard
+Description=Amadioha plays Ju-Neon Kim's 'Brother of Fire' deck from the 1997 Worlds tournament.
+Deck Type=constructed
+[main]
+2 Ball Lightning|DRK
+4 Brothers of Fire|DRK
+2 Fireblast|VIS
+2 Hammer of Bogardan|MIR
+4 Incinerate|MIR
+4 Ironclaw Orcs|LEB
+2 Jokulhaups|ICE
+17 Mountain|MIR
+4 Nevinyrral's Disk|LEB
+2 Orgg|5ED
+1 Phyrexian Furnace|WTH
+4 Pyrokinesis|ALL
+4 Quicksand|VIS
+4 Suq'Ata Lancer|VIS
+2 Thawing Glaciers|ALL
+2 Viashino Sandstalker|VIS
+[sideboard]
+[planes]
+[schemes]

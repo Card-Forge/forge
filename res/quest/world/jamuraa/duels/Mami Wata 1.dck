@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Mami Wata 1
+Title=Mami Wata
+Icon=MamiWata.jpg
+Difficulty=easy
+Description=Mami Wata plays a limited BG deck.
+Deck Type=constructed
+[main]
+1 Abyssal Specter|5ED
+1 Aladdin's Ring|ARN
+1 Dark Banishing|MIR
+1 Desert Twister|ARN
+1 Enfeeblement|MIR
+1 Fallen Askari|VIS
+1 Fellwar Stone|5ED
+2 Feral Shadow|MIR
+8 Forest|MIR
+1 Giant Mantis|MIR
+1 Grasslands|MIR
+1 Killer Bees|5ED
+1 Natural Order|VIS
+1 Nettletooth Djinn|MIR
+1 Radjan Spirit|5ED
+1 River Boa|VIS
+1 Shadow Guildmage|MIR
+1 Skulking Ghost|MIR
+1 Spirit of the Night|MIR
+9 Swamp|MIR
+1 Urborg Stalker|WTH
+1 War Mammoth|5ED
+1 Whirling Dervish|5ED
+1 Winter Blast|5ED
+[sideboard]
+[planes]
+[schemes]

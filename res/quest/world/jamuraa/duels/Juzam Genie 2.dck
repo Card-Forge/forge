@@ -1,0 +1,48 @@
+[duel]
+[metadata]
+Name=Juzam Genie 2
+Title=Juzam Genie
+Icon=JuzamGenie.jpg
+Difficulty=medium
+Description=Juzam Genie plays a modified version of T1 'Elder Dragon' deck.
+Deck Type=constructed
+[main]
+1 Ancestral Recall|LEB
+2 Arcades Sabboth|LEG
+1 Black Lotus|LEB
+2 Chromium|LEG
+4 City of Brass|5ED
+1 Concordant Crossroads|LEG
+1 Dark Ritual|LEB
+1 Demonic Tutor|LEB
+2 Force of Will|ALL
+1 Fork|LEB
+4 Gemstone Mine|WTH
+1 Ivory Tower|ATQ
+1 Juzam Djinn|ARN
+1 Library of Alexandria|ARN
+2 Lightning Bolt|LEB
+4 Lotus Petal|TMP
+2 Lotus Vale|WTH
+2 Mana Drain|LEG
+1 Mox Emerald|LEB
+1 Mox Jet|LEB
+1 Mox Pearl|LEB
+1 Mox Ruby|LEB
+1 Mox Sapphire|LEB
+2 Nicol Bolas|LEG
+2 Palladia-Mors|LEG
+4 Reflecting Pool|TMP
+1 Regrowth|LEB
+1 Serra Angel|LEB
+1 Standing Stones|DRK
+1 Swords to Plowshares|LEB
+1 Time Walk|LEB
+1 Timetwister|LEB
+4 Undiscovered Paradise|VIS
+2 Vaevictis Asmadi|LEG
+1 Wheel of Fortune|LEB
+1 Zuran Orb|ICE
+[sideboard]
+[planes]
+[schemes]

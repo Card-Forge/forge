@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Yewa 1
+Title=Yewa
+Icon=Yewa.jpg
+Difficulty=easy
+Description=Yewa plays Nicoloff's 5-color Green deck.
+Deck Type=constructed
+[main]
+4 Arcane Denial|ALL
+1 Armageddon|5ED
+2 Armor of Thorns|MIR
+4 Birds of Paradise|LEB
+3 City of Brass|5ED
+2 Disenchant|5ED
+9 Forest|MIR
+4 Granger Guildmage|MIR
+4 Incinerate|MIR
+2 Jolrael's Centaur|MIR
+1 Karoo Meerkat|MIR
+3 Maro|MIR
+4 Quirion Ranger|VIS
+4 River Boa|VIS
+2 Terror|LEB
+4 Undiscovered Paradise|VIS
+4 Whirling Dervish|LEG
+3 Winter Orb|LEB
+[sideboard]
+[planes]
+[schemes]

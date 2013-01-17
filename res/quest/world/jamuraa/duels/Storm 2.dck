@@ -1,0 +1,23 @@
+[duel]
+[metadata]
+Name=Storm 2
+Title=Storm
+Icon=Storm2.jpg
+Difficulty=medium
+Description=Storm plays a modified version of Darwin Kastle's 'Sumu' deck from PT Paris 1997.
+Deck Type=constructed
+[main]
+4 Cloud Elemental|VIS
+4 Fireblast|VIS
+4 Goblin Elite Infantry|MIR
+4 Incinerate|MIR
+10 Island|MIR
+4 Kaervek's Torch|MIR
+4 Man-o'-War|VIS
+4 Memory Lapse|MIR
+14 Mountain|MIR
+4 Suq'Ata Lancer|VIS
+4 Waterspout Djinn|VIS
+[sideboard]
+[planes]
+[schemes]

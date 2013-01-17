@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Bumba 4
+Title=Bumba
+Icon=Bumba.jpg
+Difficulty=very hard
+Description=Bumba plays a variant of Svendspaar Geertsten's 'Senor Stompy' deck from the 1997 Worlds tournament.
+Deck Type=constructed
+[main]
+2 Berserk|LEB
+16 Forest|MIR
+4 Llanowar Elves|5ED
+4 Ghazban Ogre|ARN
+4 Giant Growth|LEB
+3 Harvest Wurm|WTH
+2 Heart of Yavimaya|ALL
+2 Jolrael's Centaur|MIR
+3 Lhurgoyf|ICE
+4 Quirion Ranger|VIS
+4 Rogue Elephant|WTH
+4 Spectral Bears|HML
+2 Uktabi Orangutan|VIS
+2 Whirling Dervish|5ED
+4 Winter Orb|LEB
+[sideboard]
+[planes]
+[schemes]

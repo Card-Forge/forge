@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Ododua 3
+Title=Ododua
+Icon=Ododua.jpg
+Difficulty=hard
+Description=Ododua plays a modified version of Andrew MacDonald's 'Green Machine' deck.
+Deck Type=constructed
+[main]
+1 Armor of Thorns|MIR
+1 Aspect of Wolf|LEB
+1 Elvish Spirit Guide|ALL
+2 Emerald Charm|VIS
+3 Fallow Wurm|WTH
+16 Forest|MIR
+3 Ghazban Ogre|ARN
+3 Giant Growth|5ED
+4 Harvest Wurm|WTH
+2 Heart of Yavimaya|ALL
+2 Hurricane|LEB
+1 Kaysa|ALL
+3 Llanowar Elves|5ED
+2 Nettletooth Djinn|MIR
+3 Quirion Ranger|VIS
+4 River Boa|VIS
+3 Rogue Elephant|WTH
+1 Spectral Bears|HML
+1 Thawing Glaciers|ALL
+2 Uktabi Orangutan|VIS
+1 Undiscovered Paradise|VIS
+1 Whirling Dervish|LEG
+[sideboard]
+[planes]
+[schemes]

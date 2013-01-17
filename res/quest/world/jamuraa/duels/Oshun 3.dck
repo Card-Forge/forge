@@ -1,0 +1,33 @@
+[duel]
+[metadata]
+Name=Oshun 3
+Title=Oshun
+Icon=Oshun.jpg
+Difficulty=hard
+Description=Oshun plays a variant of UW 'Four by Two' deck.
+Deck Type=constructed
+[main]
+1 Ancestral Memories|MIR
+2 Boomerang|MIR
+4 Disempower|MIR
+4 Dissipate|MIR
+1 Enlightened Tutor|MIR
+1 Ethereal Champion|MIR
+2 Flood Plain|MIR
+10 Island|MIR
+4 Mana Drain|LEG
+2 Mangara's Blessing|MIR
+1 Marble Diamond|MIR
+4 Memory Lapse|MIR
+2 Mist Dragon|MIR
+3 Pacifism|MIR
+1 Pearl Dragon|MIR
+9 Plains|MIR
+2 Prismatic Circle|MIR
+1 Sky Diamond|MIR
+2 Suq'Ata Firewalker|MIR
+1 Tidal Wave|MIR
+3 Zhalfirin Knight|MIR
+[sideboard]
+[planes]
+[schemes]

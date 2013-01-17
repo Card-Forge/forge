@@ -1,0 +1,28 @@
+[duel]
+[metadata]
+Name=Babalu Aye 3
+Title=Babalu Aye
+Icon=BabaluAye.jpg
+Difficulty=hard
+Description=Babalu Aye plays BG 'Card Burner' deck.
+Deck Type=constructed
+[main]
+2 Anvil of Bogardan|VIS
+4 Dissipate|MIR
+1 Fog|MIR
+9 Forest|MIR
+12 Island|MIR
+2 Jester's Cap|ICE
+4 Malignant Growth|MIR
+2 Memory Lapse|MIR
+3 Misers' Cage|MIR
+3 Power Sink|MIR
+4 Prosperity|VIS
+4 Quirion Elves|MIR
+3 Rampant Growth|MIR
+2 Tranquil Domain|MIR
+3 Wall of Air|5ED
+2 Wall of Roots|MIR
+[sideboard]
+[planes]
+[schemes]

@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Ajok 3
+Title=Ajok
+Icon=Ajok.jpg
+Difficulty=hard
+Description=Lauer's CounterPost deck.
+Deck Type=constructed
+[main]
+4 Brainstorm|ICE
+1 Circle of Protection: Red|5ED
+4 Counterspell|5ED
+1 Disenchant|5ED
+4 Dissipate|MIR
+4 Force of Will|ALL
+4 Impulse|VIS
+12 Island|MIR
+4 Kjeldoran Outpost|ALL
+3 Lodestone Bauble|ALL
+4 Nevinyrral's Disk|LEB
+6 Plains|MIR
+1 Political Trickery|MIR
+4 Thawing Glaciers|ALL
+4 Wrath of God|5ED
+[sideboard]
+[planes]
+[schemes]

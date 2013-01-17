@@ -1,0 +1,34 @@
+[duel]
+[metadata]
+Name=Mahamoti Genie 4
+Title=Mahamoti Genie
+Icon=MahamotiGenie.jpg
+Difficulty=very hard
+Description=Mahamoti Genie plays a T1 UR 'Fat Moti' deck.
+Deck Type=constructed
+[main]
+2 Control Magic|LEB
+4 Counterspell|5ED
+4 Dissipate|MIR
+2 Earthquake|LEB
+4 Force of Will|ALL
+1 Fork|LEB
+2 Guerrilla Tactics|ALL
+1 Hammer of Bogardan|MIR
+8 Island|MIR
+1 Ivory Tower|ATQ
+4 Lightning Bolt|LEB
+4 Mahamoti Djinn|LEB
+4 Mishra's Factory|ATQ
+7 Mountain|MIR
+1 Pillage|ALL
+1 Pyroclasm|ICE
+2 Pyrokinesis|ALL
+1 Rainbow Efreet|VIS
+1 Sol Ring|LEB
+4 Thawing Glaciers|ALL
+1 Volcanic Island|LEB
+1 Zuran Orb|ICE
+[sideboard]
+[planes]
+[schemes]

@@ -1,0 +1,29 @@
+[duel]
+[metadata]
+Name=Donkey Kong 3
+Title=Donkey Kong
+Icon=DonkeyKong.jpg
+Difficulty=hard
+Description=RG 'Timberline' deck based on 5th Edition cards with fast mana and aggro creatures.
+Deck Type=constructed
+[main]
+2 Blood Lust|5ED
+2 Carapace|5ED
+2 Dwarven Warriors|5ED
+4 Fireball|5ED
+10 Forest|MIR
+3 Giant Growth|5ED
+2 Giant Spider|5ED
+1 Giant Strength|5ED
+4 Grizzly Bears|5ED
+1 Hungry Mist|5ED
+3 Incinerate|5ED
+4 Ironclaw Orcs|5ED
+3 Llanowar Elves|5ED
+4 Mons's Goblin Raiders|5ED
+10 Mountain|MIR
+2 Nature's Lore|5ED
+3 Scryb Sprites|5ED
+[sideboard]
+[planes]
+[schemes]

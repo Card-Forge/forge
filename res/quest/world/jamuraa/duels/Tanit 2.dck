@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Tanit 2
+Title=Tanit
+Icon=Tanit.jpg
+Difficulty=medium
+Description=Tanit plays a limited WR deck.
+Deck Type=constructed
+[main]
+1 Ardent Militia|WTH
+1 Bogardan Firefiend|WTH
+1 Bottle of Suleiman|5ED
+1 Brassclaw Orcs|5ED
+1 Brothers of Fire|5ED
+1 Ekundu Griffin|MIR
+1 Freewind Falcon|VIS
+1 Giant Strength|5ED
+1 Hulking Cyclops|VIS
+1 Incinerate|MIR
+1 Infantry Veteran|VIS
+1 Moss Diamond|MIR
+11 Mountain|MIR
+6 Plains|MIR
+1 Raging Gorilla|VIS
+1 Repentant Blacksmith|5ED
+2 Retribution of the Meek|VIS
+1 Sawtooth Ogre|WTH
+1 Serrated Biskelion|WTH
+1 Shapeshifter|5ED
+1 Urza's Power Plant|5ED
+1 Viashino Sandstalker|VIS
+1 Volcanic Geyser|MIR
+1 Zhalfirin Knight|MIR
+[sideboard]
+[planes]
+[schemes]

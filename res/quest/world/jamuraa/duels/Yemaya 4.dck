@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Yemaya 4
+Title=Yemaya
+Icon=Yemaya.jpg
+Difficulty=very hard
+Description=Yemaya plays Sheppard's 'Comerish Turbo-Xerox' deck.
+Deck Type=constructed
+[main]
+4 Brainstorm|ICE
+4 Counterspell|5ED
+3 Dissipate|MIR
+4 Force of Will|ALL
+4 Foreshadow|VIS
+1 Foresight|ALL
+4 Impulse|VIS
+14 Island|MIR
+3 Man-o'-War|VIS
+4 Memory Lapse|MIR
+4 Portent|ICE
+3 Power Sink|5ED
+2 Quicksand|VIS
+3 Suq'Ata Firewalker|MIR
+3 Waterspout Djinn|VIS
+[sideboard]
+[planes]
+[schemes]

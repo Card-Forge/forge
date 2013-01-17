@@ -1,0 +1,47 @@
+[duel]
+[metadata]
+Name=Brother Voodoo 4
+Title=Brother Voodoo
+Icon=BrotherVoodoo.jpg
+Difficulty=very hard
+Description=Brother Voodoo plays a T1 'Basket of Ophies' deck.
+Deck Type=constructed
+[main]
+1 Amnesia|DRK
+1 Ancestral Recall|LEB
+1 Balance|LEB
+1 Black Lotus|LEB
+1 Braingeyser|LEB
+4 City of Brass|5ED
+1 Demonic Tutor|LEB
+3 Force of Will|ALL
+2 Gorilla Shaman|ALL
+3 Island|MIR
+2 Kaervek's Torch|MIR
+1 Library of Alexandria|ARN
+4 Lightning Bolt|LEB
+4 Mana Drain|LEG
+1 Mirror Universe|LEG
+1 Mox Emerald|LEB
+1 Mox Jet|LEB
+1 Mox Pearl|LEB
+1 Mox Ruby|LEB
+1 Mox Sapphire|LEB
+2 Mystical Tutor|MIR
+3 Ophidian|WTH
+1 Regrowth|LEB
+3 Serendib Efreet|ARN
+1 Snake Basket|VIS
+1 Sol Ring|LEB
+4 Strip Mine|ATQ
+1 Time Walk|LEB
+1 Timetwister|LEB
+1 Tropical Island|LEB
+1 Tundra|LEB
+4 Volcanic Island|LEB
+1 Wasteland|TMP
+1 Wheel of Fortune|LEB
+1 Zuran Orb|ICE
+[sideboard]
+[planes]
+[schemes]

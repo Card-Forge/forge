@@ -1,0 +1,25 @@
+[duel]
+[metadata]
+Name=Ga-Gorib 3
+Title=Ga-Gorib
+Icon=Ga-Gorib.jpg
+Difficulty=hard
+Description=Ga-Gorib plays a monored deck designed by Seth Burn.
+Deck Type=constructed
+[main]
+1 Dwarven Miner|MIR
+4 Fireblast|VIS
+4 Goblin Elite Infantry|MIR
+4 Hammer of Bogardan|MIR
+4 Incinerate|MIR
+2 Kaervek's Torch|MIR
+20 Mountain|MIR
+2 Orcish Settlers|WTH
+4 Quicksand|VIS
+4 Suq'Ata Lancer|VIS
+4 Talruum Minotaur|MIR
+4 Thunderbolt|WTH
+3 Viashino Sandstalker|VIS
+[sideboard]
+[planes]
+[schemes]

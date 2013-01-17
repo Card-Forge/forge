@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Isa Bere 2
+Title=Isa Bere
+Icon=IsaBere.jpg
+Difficulty=medium
+Description=Isa Bere plays the preconstructed 'Burning Sky' Mirage deck (with minor changes).
+Deck Type=constructed
+[main]
+2 Azimaet Drake|MIR
+3 Bay Falcon|MIR
+2 Boomerang|MIR
+1 Burning Palm Efreet|MIR
+1 Dissipate|MIR
+2 Dream Cache|MIR
+1 Dream Fighter|MIR
+2 Flame Elemental|MIR
+1 Goblin Scouts|MIR
+1 Harmattan Efreet|MIR
+1 Incinerate|MIR
+12 Island|MIR
+1 Kaervek's Torch|MIR
+2 Mana Drain|LEG
+1 Mist Dragon|MIR
+12 Mountain|MIR
+1 Mystical Tutor|MIR
+1 Power Sink|LEB
+3 Pyric Salamander|MIR
+1 Subterranean Spirit|MIR
+1 Suq'Ata Firewalker|MIR
+2 Talruum Minotaur|MIR
+3 Teferi's Drake|MIR
+1 Vaporous Djinn|MIR
+2 Wildfire Emissary|MIR
+[sideboard]
+[planes]
+[schemes]

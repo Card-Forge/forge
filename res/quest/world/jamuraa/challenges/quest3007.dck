@@ -1,0 +1,43 @@
+[quest]
+id=3007
+OpponentName=Saladin
+AILife=33
+Repeat=true
+Wins=25
+Card Reward=5 rares
+Credit Reward=500
+HumanExtras=Crusade
+AIExtras=Crusade|Royal Assassin|Kjeldoran Outpost
+[metadata]
+Name=quest3007
+Title=The Unsung Crusade
+Difficulty=very hard
+Description=Alas, Saladin's troops have captured The Holy City! Your mission is to lay siege to its sacred walls and liberate it from the clutch of the infidels. Go forth and conquer, o virtuous hero!
+Icon=Saladin.jpg
+Deck Type=constructed
+[main]
+1 Armageddon|5ED
+2 Control Magic|LEB
+2 Disenchant|5ED
+2 Fireball|LEB
+4 Flood Plain|MIR
+3 Kjeldoran Outpost|ALL
+4 Lightning Bolt|LEB
+4 Mana Drain|LEG
+2 Mishra's Factory|ATQ
+4 Order of Leitbur|FEM
+4 Order of the White Shield|ICE
+2 Plains|MIR
+4 Plateau|LEB
+1 Power Sink|5ED
+4 Savannah Lions|LEB
+2 Serrated Arrows|HML
+2 Swords to Plowshares|LEB
+4 Tithe|VIS
+4 Tundra|LEB
+1 Undiscovered Paradise|VIS
+4 Volcanic Island|LEB
+4 White Knight|5ED
+[sideboard]
+[planes]
+[schemes]

@@ -1,0 +1,37 @@
+[duel]
+[metadata]
+Name=Shango 2
+Title=Shango
+Icon=Shango.jpg
+Difficulty=medium
+Description=Shango plays a GR 'Savage Stompdown' deck.
+Deck Type=constructed
+[main]
+1 Bull Elephant|VIS
+1 Crash of Rhinos|MIR
+1 Creeping Mold|VIS
+1 Earthquake|LEB
+1 Emerald Charm|VIS
+3 Feral Instinct|VIS
+1 Fireball|LEB
+12 Forest|MIR
+2 Giant Caterpillar|VIS
+1 Granger Guildmage|MIR
+1 Hearth Charm|VIS
+3 Hill Giant|LEB
+2 Hulking Cyclops|VIS
+2 Jungle Troll|MIR
+1 King Cheetah|VIS
+2 Kyscu Drake|VIS
+1 Locust Swarm|MIR
+12 Mountain|MIR
+1 Natural Order|VIS
+2 Quirion Elves|MIR
+3 Raging Gorilla|VIS
+2 Spitting Drake|VIS
+2 Unyaro Bee Sting|MIR
+1 Viashivan Dragon|VIS
+1 Volcanic Geyser|MIR
+[sideboard]
+[planes]
+[schemes]

@@ -1,0 +1,61 @@
+[quest]
+id=3002
+OpponentName=Prester John
+AILife=35
+Repeat=true
+Wins=20
+Card Reward=4 rares
+Credit Reward=400
+HumanExtras=Bazaar of Wonders
+AIExtras=Bazaar of Wonders|Mox Jet|Mox Sapphire|Mox Pearl|Mox Emerald|Mox Ruby
+[metadata]
+Name=quest3002
+Title=Prester John's Mighty Empire
+Difficulty=hard
+Description=You have reached the wondrous realm of the legendary ruler, Prester John. Are you brave enough to challenge him for its riches?
+Icon=PresterJohn.jpg
+Deck Type=constructed
+[main]
+1 Abyssal Specter|5ED
+1 Amber Prison|MIR
+1 Ancestral Recall|LEB
+1 Ashen Powder|MIR
+4 Bad River|MIR
+1 Betrayal|VIS
+1 Binding Grasp|5ED
+1 Cadaverous Knight|MIR
+1 Charcoal Diamond|MIR
+1 Coercion|VIS
+1 Control Magic|LEB
+1 Daring Apprentice|MIR
+1 Dark Banishing|MIR
+1 Dirtwater Wraith|MIR
+1 Dissipate|MIR
+1 Dream Cache|MIR
+1 Feldon's Cane|5ED
+1 Force of Will|ALL
+1 Gravebane Zombie|MIR
+9 Island|MIR
+1 Jayemdae Tome|5ED
+1 Mana Drain|LEG
+1 Memory Lapse|MIR
+1 Merfolk Raiders|MIR
+1 Mystical Tutor|MIR
+1 Nekrataal|VIS
+1 Odylic Wraith|WTH
+1 Phantom Warrior|WTH
+1 Power Sink|MIR
+1 Python|VIS
+1 Sage Owl|WTH
+1 Serpent Generator|LEG
+1 Shallow Grave|MIR
+1 Sky Diamond|MIR
+2 Snake Basket|VIS
+1 Steal Artifact|LEB
+1 Straw Golem|WTH
+8 Swamp|MIR
+2 Teferi's Isle|MIR
+1 The Hive|LEB
+[sideboard]
+[planes]
+[schemes]

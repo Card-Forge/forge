@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Ikenga 3
+Title=Ikenga
+Icon=Ikenga.jpg
+Difficulty=hard
+Description=GR big creature deck with some card drawing manipulation and affects.
+Deck Type=constructed
+[main]
+2 Anvil of Bogardan|VIS
+4 Black Vise|LEB
+4 Braingeyser|LEB
+11 Forest|MIR
+2 Howling Mine|LEB
+4 Icy Manipulator|LEB
+11 Island|MIR
+3 Malignant Growth|MIR
+4 Maro|MIR
+4 Prosperity|VIS
+2 Psionic Blast|LEB
+2 Rainbow Efreet|VIS
+1 Relic Barrier|LEG
+3 Storm Seeker|LEG
+3 Waterspout Djinn|VIS
+[sideboard]
+[planes]
+[schemes]

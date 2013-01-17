@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Seth 1
+Title=Seth
+Icon=Seth.jpg
+Difficulty=easy
+Description=Seth plays a Squandered Resources / Jokulhaups deck.
+Deck Type=constructed
+[main]
+2 Ball Lightning|DRK
+2 Birds of Paradise|LEB
+2 Earthquake|LEB
+3 Fireblast|VIS
+7 Forest|MIR
+2 Incinerate|MIR
+4 Jokulhaups|ICE
+2 Misinformation|ALL
+8 Mountain|MIR
+2 Pillage|ALL
+2 River Boa|VIS
+2 Rowen|VIS
+2 Savage Twister|MIR
+3 Soldevi Digger|ALL
+4 Squandered Resources|VIS
+2 Suq'Ata Lancer|VIS
+5 Swamp|MIR
+2 Sylvan Library|LEG
+4 Thawing Glaciers|ALL
+2 Yavimaya Ants|ALL
+[sideboard]
+[planes]
+[schemes]

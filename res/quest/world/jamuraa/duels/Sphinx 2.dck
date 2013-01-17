@@ -1,0 +1,24 @@
+[duel]
+[metadata]
+Name=Sphinx 2
+Title=Sphinx
+Icon=Sphinx.jpg
+Difficulty=medium
+Description=A variant of the monowhite 'Griffin Mill' theme deck.
+Deck Type=constructed
+[main]
+3 Disenchant|5ED
+4 Ekundu Griffin|MIR
+4 Griffin Canyon|VIS
+4 Jabari's Banner|WTH
+3 Marble Diamond|MIR
+4 Mistmoon Griffin|WTH
+4 Mtenda Griffin|MIR
+20 Plains|MIR
+2 Serra Angel|LEB
+4 Unyaro Griffin|MIR
+4 Ward of Lights|MIR
+4 Zuberi, Golden Feather|MIR
+[sideboard]
+[planes]
+[schemes]

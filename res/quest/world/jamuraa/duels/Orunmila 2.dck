@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Orunmila 2
+Title=Orunmila
+Icon=Orunmila.jpg
+Difficulty=medium
+Description=Orunmila plays a 3-color blue 'Phaser' deck.
+Deck Type=constructed
+[main]
+4 Breezekeeper|VIS
+4 Disenchant|MIR
+4 Dissipate|MIR
+3 Earthquake|5ED
+2 Enlightened Tutor|MIR
+4 Floodgate|MIR
+4 Fog Elemental|WTH
+4 Gemstone Mine|WTH
+10 Island|MIR
+3 Phantom Warrior|WTH
+5 Plains|MIR
+3 Sandbar Crocodile|MIR
+3 Teferi's Veil|WTH
+3 Tolarian Drake|WTH
+4 Undiscovered Paradise|VIS
+[sideboard]
+[planes]
+[schemes]

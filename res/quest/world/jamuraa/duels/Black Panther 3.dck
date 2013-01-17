@@ -1,0 +1,30 @@
+[duel]
+[metadata]
+Name=Black Panther 3
+Title=Black Panther
+Icon=BlackPanther.jpg
+Difficulty=hard
+Description=Black Panther plays a T1 'African Zoo' deck.
+Deck Type=constructed
+[main]
+4 Armageddon|5ED
+1 Balance|LEB
+4 Disenchant|5ED
+2 Forest|MIR
+2 Kjeldoran Outpost|ALL
+2 Land Tax|LEG
+1 Mox Emerald|LEB
+1 Mox Pearl|LEB
+4 Mtenda Lion|MIR
+4 Order of Leitbur|FEM
+4 Order of the White Shield|ICE
+6 Plains|MIR
+4 River Boa|VIS
+4 Savannah|LEB
+4 Savannah Lions|LEB
+4 Swords to Plowshares|LEB
+4 Tundra|LEB
+1 Zuran Orb|ICE
+[sideboard]
+[planes]
+[schemes]

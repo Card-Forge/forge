@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Osiris 4
+Title=Osiris
+Icon=Osiris.jpg
+Difficulty=very hard
+Description=Team Clean's version of the 'Forgotten Orb' deck.
+Deck Type=constructed
+[main]
+2 Arcane Denial|ALL
+4 Black Knight|5ED
+1 City of Brass|5ED
+2 Contagion|ALL
+3 Erg Raiders|ARN
+4 Fallen Askari|VIS
+3 Island|MIR
+3 Knight of Stromgald|ICE
+3 Man-o'-War|VIS
+4 Memory Lapse|MIR
+3 Nekrataal|VIS
+2 Phyrexian War Beast|ALL
+2 Quicksand|VIS
+1 Shadow Guildmage|MIR
+3 Skulking Ghost|MIR
+10 Swamp|MIR
+4 Underground River|ICE
+2 Undiscovered Paradise|VIS
+1 Vampiric Tutor|VIS
+3 Winter Orb|LEB
+[sideboard]
+[planes]
+[schemes]

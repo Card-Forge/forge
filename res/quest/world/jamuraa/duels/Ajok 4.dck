@@ -1,0 +1,27 @@
+[duel]
+[metadata]
+Name=Ajok 4
+Title=Ajok
+Icon=Ajok.jpg
+Difficulty=very hard
+Description=UW Counterpost deck.
+Deck Type=constructed
+[main]
+4 Arcane Denial|ALL
+3 Binding Grasp|5ED
+4 Counterspell|5ED
+2 Desertion|VIS
+2 Disenchant|5ED
+2 Dissipate|MIR
+4 Force of Will|ALL
+11 Island|MIR
+4 Kjeldoran Outpost|ALL
+2 Nevinyrral's Disk|LEB
+9 Plains|MIR
+4 Suq'Ata Firewalker|MIR
+3 Thawing Glaciers|ALL
+2 Waterspout Djinn|VIS
+4 Wrath of God|LEB
+[sideboard]
+[planes]
+[schemes]

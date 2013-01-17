@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Baron Cimitiere 1
+Title=Baron Cimitiere
+Icon=BaronCimitiere.jpg
+Difficulty=easy
+Description=A Tombstone Stairwell deck with UW weenies.
+Deck Type=constructed
+[main]
+4 Dark Ritual|LEB
+2 Death Speakers|HML
+2 Disenchant|LEB
+3 Ebony Charm|MIR
+3 Fallen Angel|LEG
+1 Hecatomb|ICE
+1 Ihsan's Shade|HML
+1 Jalum Tome|ATQ
+1 Phyrexian Vault|MIR
+7 Plains|LEB
+3 Savannah Lions|LEB
+3 Sengir Vampire|LEB
+3 Sewer Rats|MIR
+3 Skulking Ghost|MIR
+14 Swamp|LEB
+4 Swords to Plowshares|LEB
+3 Tombstone Stairwell|MIR
+3 Vampire Bats|LEG
+1 Zuran Orb|ICE
+[sideboard]
+[planes]
+[schemes]

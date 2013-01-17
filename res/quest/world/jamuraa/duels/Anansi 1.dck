@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Anansi 1
+Title=Anansi
+Icon=Anansi.jpg
+Difficulty=easy
+Description=Anansi plays a variant of Tommi Hovi's 'SqStasisHaups' deck from the 1997 Worlds tournament.
+Deck Type=constructed
+[main]
+4 Adarkar Wastes|ICE
+4 Arcane Denial|ALL
+2 Boomerang|MIR
+4 City of Brass|5ED
+2 Counterspell|5ED
+1 Despotic Scepter|ICE
+4 Enlightened Tutor|MIR
+1 Feldon's Cane|ATQ
+4 Force of Will|ALL
+3 Gemstone Mine|WTH
+4 Howling Mine|LEB
+8 Island|MIR
+1 Kismet|LEG
+3 Pyroclasm|ICE
+2 Sheltered Valley|ALL
+1 Shimmer|MIR
+4 Squandered Resources|VIS
+4 Stasis|LEB
+4 Undiscovered Paradise|VIS
+[sideboard]
+[planes]
+[schemes]

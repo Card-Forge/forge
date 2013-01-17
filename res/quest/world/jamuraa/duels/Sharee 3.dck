@@ -1,0 +1,35 @@
+[duel]
+[metadata]
+Name=Sharee 3
+Title=Sharee
+Icon=Sharee.jpg
+Difficulty=hard
+Description=Sharee plays a variation of the T1 'Geeba LD' deck.
+Deck Type=constructed
+[main]
+4 Army Ants|VIS
+4 Badlands|LEB
+2 Dragon Whelp|LEB
+3 Dwarven Miner|MIR
+2 Fallen Askari|VIS
+2 Forest|MIR
+4 Granger Guildmage|MIR
+1 Guerrilla Tactics|ALL
+1 Hammer of Bogardan|MIR
+3 Incinerate|MIR
+4 Kird Ape|ARN
+4 Lightning Bolt|LEB
+3 Mishra's Factory|ATQ
+2 Mountain|MIR
+3 Orcish Artillery|LEB
+2 Pillage|ALL
+1 Sheltered Valley|ALL
+3 Spectral Bears|HML
+2 Swamp|MIR
+4 Taiga|LEB
+2 Thawing Glaciers|ALL
+3 Undiscovered Paradise|VIS
+2 Vampiric Tutor|VIS
+[sideboard]
+[planes]
+[schemes]

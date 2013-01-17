@@ -1,0 +1,52 @@
+[quest]
+id=3001
+OpponentName=Tutankhamon
+AILife=30
+Repeat=true
+Wins=20
+Card Reward=3 rares
+Credit Reward=300
+HumanExtras=Mightstone
+AIExtras=Serpent Generator|Pit Scorpion
+[metadata]
+Name=quest3001
+Title=Pharaoh's Tomb
+Difficulty=hard
+Description=You have discovered a legendary Pharaoh's tomb. Reputedly, fabulous treasure can be found here - but grave robbers should be wary of the Pharaoh's curse...
+Icon=Tutankhamon.jpg
+Deck Type=constructed
+[main]
+1 Ancestral Recall|LEB
+1 Armageddon|LEB
+1 Balance|LEB
+1 Braingeyser|LEB
+4 City of Brass|ARN
+3 Counterspell|LEB
+1 Demonic Tutor|LEB
+3 Disenchant|LEB
+3 Erhnam Djinn|ARN
+2 Fireball|LEB
+4 Island|MIR
+3 Mana Drain|LEG
+2 Mana Vault|LEB
+1 Mox Emerald|LEB
+1 Mox Pearl|LEB
+1 Mox Sapphire|LEB
+3 Plains|MIR
+1 Plateau|LEB
+1 Regrowth|LEB
+4 Serendib Efreet|ARN
+1 Sol Ring|LEB
+1 Soldevi Simulacrum|ICE
+3 Strip Mine|ATQ
+3 Swords to Plowshares|LEB
+1 Sylvan Library|LEG
+2 Tropical Island|LEB
+2 Tundra|LEB
+4 Unstable Mutation|TSB
+1 Volcanic Island|LEB
+1 Wheel of Fortune|LEB
+[sideboard]
+[planes]
+[schemes]
+

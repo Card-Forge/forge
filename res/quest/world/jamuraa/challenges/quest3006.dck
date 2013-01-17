@@ -1,0 +1,43 @@
+[quest]
+id=3006
+OpponentName=Shaitan
+AILife=66
+Repeat=true
+Wins=50
+Card Reward=5 rares
+Credit Reward=500
+HumanExtras=Quagmire
+AIExtras=Gloom|Gloom|Deathgrip|Disrupting Scepter
+[metadata]
+Name=quest3006
+Title=Jahannam
+Difficulty=very hard
+Description=You have come across Jahannam, a plane of utter, impenetrable darkness. Surely the mightiest of all demons must live here.
+Icon=Shaitan.jpg
+Deck Type=constructed
+[main]
+1 Ancestral Recall|LEB
+4 Badlands|LEB
+1 Black Lotus|LEB
+2 Choking Sands|MIR
+2 City of Brass|5ED
+1 Demonic Tutor|LEB
+2 Dwarven Miner|MIR
+2 Gorilla Shaman|ALL
+4 Icequake|ICE
+4 Juzam Djinn|ARN
+4 Knight of Stromgald|ICE
+4 Mishra's Factory|ATQ
+4 Mox Jet|LEB
+1 Mox Ruby|LEB
+2 Mox Sapphire|LEB
+4 Nether Void|LEG
+4 Sinkhole|LEB
+1 Sol Ring|LEB
+4 Strip Mine|ATQ
+5 Swamp|MIR
+1 Time Walk|LEB
+4 Underground Sea|LEB
+[sideboard]
+[planes]
+[schemes]

@@ -1,0 +1,36 @@
+[duel]
+[metadata]
+Name=Anastacia 3
+Title=Anastacia
+Icon=StAnastacia.jpg
+Difficulty=hard
+Description=Anastacia plays a modified version of David Mills' Type 1.x URW 'Frenetic Control' deck.
+Deck Type=constructed
+[main]
+2 Control Magic|LEB
+4 Counterspell|5ED
+1 Desertion|VIS
+2 Disenchant|5ED
+1 Disrupt|WTH
+1 Earthquake|LEB
+2 Fireball|LEB
+2 Flood Plain|MIR
+2 Force of Will|ALL
+4 Impulse|VIS
+2 Island|MIR
+3 Kjeldoran Outpost|ALL
+4 Lightning Bolt|LEB
+4 Mishra's Factory|ATQ
+1 Plains|MIR
+4 Plateau|LEB
+1 Serrated Arrows|HML
+1 Suq'Ata Firewalker|MIR
+1 Swords to Plowshares|LEB
+4 Tithe|VIS
+4 Tundra|LEB
+4 Volcanic Island|LEB
+4 Waterspout Djinn|VIS
+4 Wildfire Emissary|MIR
+[sideboard]
+[planes]
+[schemes]

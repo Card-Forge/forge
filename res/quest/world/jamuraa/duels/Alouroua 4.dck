@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Alouroua 4
+Title=Alouroua
+Icon=Alouroua.jpg
+Difficulty=very hard
+Description=Green stompy, fast mana and big creatures.
+Deck Type=constructed
+[main]
+1 Crumble|ATQ
+1 Desert Twister|ARN
+2 Elvish Archers|LEB
+4 Erhnam Djinn|ARN
+2 Fallow Earth|MIR
+1 Force of Nature|LEB
+15 Forest|MIR
+4 Llanowar Elves|5ED
+3 Giant Growth|LEB
+2 Hurricane|LEB
+2 Icy Manipulator|LEB
+1 Jayemdae Tome|LEB
+2 Jolrael's Centaur|MIR
+4 Lhurgoyf|ICE
+4 Mishra's Factory|ATQ
+3 Mtenda Lion|MIR
+3 Nature's Lore|ICE
+2 Woolly Spider|ICE
+4 Yavimaya Ants|ALL
+[sideboard]
+[planes]
+[schemes]

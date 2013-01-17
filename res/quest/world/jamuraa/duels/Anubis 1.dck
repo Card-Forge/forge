@@ -1,0 +1,31 @@
+[duel]
+[metadata]
+Name=Anubis 1
+Title=Anubis
+Icon=Anubis.jpg
+Difficulty=easy
+Description=Anubis plays Frayman's FreneticHammer deck.
+Deck Type=constructed
+[main]
+3 Binding Grasp|ICE
+4 Counterspell|5ED
+1 Desertion|VIS
+2 Earthquake|LEB
+1 Fireball|LEB
+3 Force of Will|ALL
+3 Frenetic Efreet|MIR
+2 Hammer of Bogardan|MIR
+3 Impulse|VIS
+4 Incinerate|MIR
+10 Island|MIR
+1 Kaervek's Torch|MIR
+9 Mountain|MIR
+4 Nevinyrral's Disk|LEB
+2 Pillage|ALL
+1 Rainbow Efreet|VIS
+1 Soldevi Excavations|ALL
+2 Suq'Ata Firewalker|MIR
+4 Thawing Glaciers|ALL
+[sideboard]
+[planes]
+[schemes]

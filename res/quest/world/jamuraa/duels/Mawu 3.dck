@@ -1,0 +1,32 @@
+[duel]
+[metadata]
+Name=Mawu 3
+Title=Mawu
+Icon=Mawu.jpg
+Difficulty=hard
+Description=Mawu plays Jason Zila's '3-color Black' deck from the PT Paris 1997.
+Deck Type=constructed
+[main]
+2 Amber Prison|MIR
+3 Bad River|MIR
+3 Cadaverous Knight|MIR
+1 Coercion|VIS
+3 Impulse|VIS
+4 Incinerate|MIR
+5 Island|MIR
+2 Kaervek's Torch|MIR
+4 Mountain|MIR
+2 Necromancy|VIS
+1 Necrosavant|VIS
+4 Nekrataal|VIS
+3 Power Sink|5ED
+3 Rocky Tar Pit|MIR
+3 Shadow Guildmage|MIR
+3 Skulking Ghost|MIR
+1 Snake Basket|VIS
+4 Stupor|MIR
+7 Swamp|MIR
+2 Undiscovered Paradise|VIS
+[sideboard]
+[planes]
+[schemes]

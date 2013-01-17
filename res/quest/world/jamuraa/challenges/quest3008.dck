@@ -1,0 +1,56 @@
+[quest]
+id=3008
+OpponentName=Lilith
+AILife=36
+Repeat=true
+Wins=30
+Card Reward=4 rares
+Credit Reward=400
+HumanExtras=Howling Mine
+AIExtras=Underworld Dreams|Black Vise
+[metadata]
+Name=quest3008
+Title=Nightmare
+Difficulty=very hard
+Description=You wake up in the middle of the night, all sweaty and shaking. It was the worst nightmare you have ever had. Or was it a dream at all...what if it was real?
+Icon=Lilith.jpg
+Deck Type=constructed
+[main]
+1 Ancestral Recall|LEB
+2 Anvil of Bogardan|VIS
+1 Badlands|LEB
+1 Bayou|LEB
+1 Black Vise|LEB
+4 City of Brass|5ED
+1 Demonic Tutor|LEB
+1 Fastbond|LEB
+1 Feldon's Cane|ATQ
+2 Fellwar Stone|DRK
+3 Gaea's Blessing|WTH
+4 Gemstone Mine|WTH
+3 Gerrard's Wisdom|WTH
+4 Howling Mine|LEB
+2 Incinerate|MIR
+4 Lightning Bolt|LEB
+1 Mox Emerald|LEB
+1 Mox Jet|LEB
+1 Mox Pearl|LEB
+1 Mox Ruby|LEB
+1 Mox Sapphire|LEB
+4 Prosperity|VIS
+4 Reflecting Pool|TMP
+1 Regrowth|LEB
+1 Savannah|LEB
+1 Sol Ring|LEB
+1 Storm Cauldron|ALL
+1 Strip Mine|ATQ
+1 Time Walk|LEB
+1 Tundra|LEB
+1 Underworld Dreams|LEG
+4 Undiscovered Paradise|VIS
+2 Vampiric Tutor|VIS
+1 Volcanic Island|LEB
+2 Zuran Orb|ICE
+[sideboard]
+[planes]
+[schemes]
