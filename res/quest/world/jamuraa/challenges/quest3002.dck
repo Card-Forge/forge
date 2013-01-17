@@ -20,7 +20,8 @@ Deck Type=constructed
 1 Amber Prison|MIR
 1 Ancestral Recall|LEB
 1 Ashen Powder|MIR
-4 Bad River|MIR
+3 Bad River|MIR
+4 Bazaar of Wonders|MIR
 1 Betrayal|VIS
 1 Binding Grasp|5ED
 1 Cadaverous Knight|MIR
@@ -33,7 +34,6 @@ Deck Type=constructed
 1 Dissipate|MIR
 1 Dream Cache|MIR
 1 Feldon's Cane|5ED
-1 Force of Will|ALL
 1 Gravebane Zombie|MIR
 9 Island|MIR
 1 Jayemdae Tome|5ED
@@ -46,11 +46,10 @@ Deck Type=constructed
 1 Phantom Warrior|WTH
 1 Power Sink|MIR
 1 Python|VIS
-1 Sage Owl|WTH
 1 Serpent Generator|LEG
 1 Shallow Grave|MIR
 1 Sky Diamond|MIR
-2 Snake Basket|VIS
+1 Snake Basket|VIS
 1 Steal Artifact|LEB
 1 Straw Golem|WTH
 8 Swamp|MIR
