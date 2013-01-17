@@ -8650,6 +8650,7 @@ res/cardsfolder/s/scarwood_hag.txt svneol=native#text/plain
 res/cardsfolder/s/scarwood_treefolk.txt svneol=native#text/plain
 res/cardsfolder/s/scathe_zombies.txt svneol=native#text/plain
 res/cardsfolder/s/scatter_the_seeds.txt -text
+res/cardsfolder/s/scattering_stroke.txt -text
 res/cardsfolder/s/scattershot.txt svneol=native#text/plain
 res/cardsfolder/s/scattershot_archer.txt svneol=native#text/plain
 res/cardsfolder/s/scavenged_weaponry.txt svneol=native#text/plain
@@ -10114,6 +10115,7 @@ res/cardsfolder/s/sword_of_the_paruns.txt svneol=native#text/plain
 res/cardsfolder/s/sword_of_vengeance.txt svneol=native#text/plain
 res/cardsfolder/s/sword_of_war_and_peace.txt svneol=native#text/plain
 res/cardsfolder/s/swords_to_plowshares.txt svneol=native#text/plain
+res/cardsfolder/s/sworn_defender.txt -text
 res/cardsfolder/s/sygg_river_cutthroat.txt -text
 res/cardsfolder/s/sygg_river_guide.txt svneol=native#text/plain
 res/cardsfolder/s/sylvan_basilisk.txt svneol=native#text/plain
