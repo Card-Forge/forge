@@ -1,10 +1,10 @@
-Forge Beta: 01-##-2013 ver 1.3.5
+Forge Beta: 01-18-2013 ver 1.3.5
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 (Thanks to the MAGE team for permission to use their targeting arrows.)
 (Thanks to http://www.freesound.org/browse/ for providing some sound files.)
 
-11### cards in total.
+11782 cards in total.
 
 
 The "Sanctioned Format: Constructed" view should now be compatible with displays that are only 600 pixels tall. The deck list at 600 pixels tall should now display three lines of text rather than less than a single line of text.
@@ -208,118 +208,133 @@ Fixes/Features:
 - Yet another technical improvement to a Jamuraa challenge.
 - Fixed random scheme deck selection
 - Added the recent commit logs to changes.txt. Preparing for the beta build and release.
+- Preparing the changes.txt file for the next beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-
+ArsenalNut
+Gos
+Hellfish
+Lexusex
+Marc
+Max
+PowerClaws
+RumbleBBU
+Sloth
+Sol
+Squee1968
+Swordshine
+Xitax
+ZzzzSleep
+Chris H
 
 
 Added the following cards:
 
-Mirrorweave
-Petals of Insight
-Droning Bureaucrats
 Chlorophant
 Contempt
 Crag Saurian
 Decaying Soil
+Discordant Spirit
+Droning Bureaucrats
 Epicenter
-Kusari-Gama
+Erratic Mutation
 Goham Djinn
 Halam Djinn
-Ruham Djinn
-Sulam Djinn
-Zanam Djinn
-Discordant Spirit
-Erratic Mutation
+Kusari-Gama
+Mirrorweave
 Necromancer's Magemark
+Petals of Insight
+Ruham Djinn
 Runesword
 Scattering Stroke
-Sworn Defender
 Sentinel
+Sulam Djinn
+Sworn Defender
+Zanam Djinn
 
 
 Added the following new Gatecrash cards to the Gatecrash branch. These cards are not yet available for in game use.:
 
+Aetherize
 Alms Beast
-Drakewing Krasis
-Treasury Thrull
-Domri Rade
-Boros Guildgate
-Dimir Guildgate
-Gruul Guildgate
-Orzhov Guildgate
-Simic Guildgate
-Lazav, Dimir Mastermind
-Rubblehulk
-Obzedat, Ghost Council
-Basilica Guards
-Gridlock
-Fathom Mage
-Cloudfin Raptor
-Borborygmos Enraged
-Dimir Keyrune
-Enter the Infinite
-Gruul Keyrune
-Simic Fluxmage
-Boros Keyrune
-Crocanura
-Tin Street Market
-Urban Evolution
-Hellkite Tyrant
-Rapid Hybridization
-Consuming Aberration
-Duskmantle Guildmage
-Mind Grind
-Clan Defiance
-Crypt Ghast
-Gateway Shade
-Skarrg Goliath
-Viashino Shanktail
-Zhur-Taa Swine
-Syndic of Tithes
-Experiment One
-Burning-Tree Emissary
-Elusive Krasis
-Gideon, Champion of Justice
-Foundry Champion
-Pit Fight
-Sunhome Guildmage
-Deathpact Angel
-Call of the Nightwing
-Boros Elite
-Firemane Avenger
-Boros Charm
-Dimir Charm
-Giant Adephage
-Illusionist's Bracers
-Prime Speaker Zegana
-Simic Keyrune
-Hellraiser Goblin
-Frontline Medic
-Hands of Binding
-Undercity Plague
-Stolen Identity
-Whispering Madness
-Five-Alarm Fire
+Angelic Skirmisher
 Assemble the Legion
+Basilica Guards
 Biomass Mutation
 Blind Obedience
+Borborygmos Enraged
+Boros Charm
+Boros Elite
+Boros Guildgate
+Boros Keyrune
+Burning-Tree Emissary
+Call of the Nightwing
+Clan Defiance
+Cloudfin Raptor
+Consuming Aberration
+Crocanura
+Crypt Ghast
+Deathpact Angel
+Dimir Charm
+Dimir Guildgate
+Dimir Keyrune
+Domri Rade
+Drakewing Krasis
+Duskmantle Guildmage
+Elusive Krasis
+Enter the Infinite
+Experiment One
+Fathom Mage
+Firemane Avenger
+Five-Alarm Fire
+Foundry Champion
+Frontline Medic
+Gateway Shade
 Ghor-Clan Rampager
+Giant Adephage
+Gideon, Champion of Justice
+Gridlock
+Gruul Guildgate
+Gruul Keyrune
+Hands of Binding
+Hellkite Tyrant
+Hellraiser Goblin
 High Priest of Penance
+Illusionist's Bracers
+Lazav, Dimir Mastermind
 Leyline Phantom
+Mind Grind
+Mystic Genesis
+Obzedat, Ghost Council
+Orzhov Guildgate
+Orzhov Keyrune
+Pit Fight
+Prime Speaker Zegana
+Rapid Hybridization
+Realmwright
+Rubblehulk
 Shambleshark
+Simic Charm
+Simic Fluxmage
+Simic Guildgate
+Simic Keyrune
+Skarrg Goliath
 Skarrg Guildmage
 Skullcrack
-Thespian's Stage
-Orzhov Keyrune
-Mystic Genesis
-Simic Charm
-Aetherize
-Angelic Skirmisher
-Realmwright
 Spark Trooper
+Stolen Identity
+Sunhome Guildmage
+Syndic of Tithes
+Thespian's Stage
+Tin Street Market
+Treasury Thrull
+Undercity Plague
+Urban Evolution
+Viashino Shanktail
+Whispering Madness
+Zhur-Taa Swine
 
 
 end
