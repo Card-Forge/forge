@@ -122,6 +122,12 @@ public enum VSubmenuArchenemy implements IVSubmenu<CSubmenuArchenemy> {
         settingsPanel.add(lblEditor);
         tabPane.add("Settings", settingsPanel);
 
+        for (Deck schemeDeck : Singletons.getModel().getDecks().getScheme()) {
+            if (!allSchemeDecks.contains(schemeDeck)) {
+                allSchemeDecks.add(schemeDeck);
+            }
+        }
+
         //Player panels (Human + 7 AIs)
         for (int i = 0; i < 8; i++) {
             tempPanel = new FPanel();

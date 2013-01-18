@@ -156,10 +156,15 @@ public enum CSubmenuArchenemy implements ICDoc {
                     if (obj instanceof String) {
                         String sel = (String) obj;
                         if (sel.equals("Random")) {
-
-                            schemes = Aggregates.random(view.getAllSchemeDecks()).getSideboard().toFlatList();
+                            if (view.getAllSchemeDecks().isEmpty()) {
+                                //Generate if no constructed scheme decks are available
+                                System.out.println("Generating scheme deck - no others available");
+                                schemes = DeckgenUtil.generateSchemeDeck().getSideboard().toFlatList();
+                            } else {
+                                System.out.println("Using scheme deck: " + Aggregates.random(view.getAllSchemeDecks()).getName());
+                                schemes = Aggregates.random(view.getAllSchemeDecks()).getSideboard().toFlatList();
+                            }
                         } else {
-
                             //Generate
                             schemes = DeckgenUtil.generateSchemeDeck().getSideboard().toFlatList();
                         }
