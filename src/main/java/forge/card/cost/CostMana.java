@@ -161,9 +161,8 @@ public class CostMana extends CostPart {
         final StringBuilder sb = new StringBuilder();
 
         sb.append(Strings.repeat("X ", this.amountX));
-        if (!this.mana.equals("0")) {
+        if ( sb.length() == 0 || mana != "0" )
             sb.append(this.mana);
-        }
 
         return sb.toString().trim();
     }
