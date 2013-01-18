@@ -61,13 +61,15 @@ public class CountersRemoveEffect extends SpellEffect {
             counterAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
         }
 
-        CounterType counterType;
+        CounterType counterType = null;
 
         try {
             counterType = AbilityFactory.getCounterType(type, sa);
         } catch (Exception e) {
-            System.out.println("Counter type doesn't match, nor does an SVar exist with the type name.");
-            return;
+            if (!type.matches("Any")) {
+                System.out.println("Counter type doesn't match, nor does an SVar exist with the type name.");
+                return;
+            }
         }
 
         final Target tgt = sa.getTarget();
