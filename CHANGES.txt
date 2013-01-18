@@ -1,19 +1,13 @@
-Forge Beta: 01-18-2013 ver 1.3.5
+Forge Beta: 01-##-2013 ver 1.3.6
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 (Thanks to the MAGE team for permission to use their targeting arrows.)
 (Thanks to http://www.freesound.org/browse/ for providing some sound files.)
 
-11782 cards in total.
+11### cards in total.
 
 
-The "Sanctioned Format: Constructed" view should now be compatible with displays that are only 600 pixels tall. The deck list at 600 pixels tall should now display three lines of text rather than less than a single line of text.
 
-The deck conformance/legality is now a user-togglable preference and is enabled by default. You no longer need to turn on dev mode to play an illegal deck.
-
-Work on the quest worlds continue. Information on this new game format can be found in this topic:
-
-http://www.slightlymagic.net/forum/viewtopic.php?f=26&t=9258
 
 --
 
@@ -76,183 +70,17 @@ Some people use the Windows application 7zip. This utility can be found at http:
 
 Fixes/Features:
 
-- Cleared out the changes.txt file, now ready for new material.
-- More cards ready for multiplayer
-- Added distinct card information to PerSetTracking.py
-- Added Extort keyword
-- Fixed Delve.
-- Added TriggerDescription to Extort.
-- Valakut was unbanned in Modern in October
-- Fix description in Martyr of Frost
-- Added an extra word
-- Fixing triggers reliant on timing for cards like Earthbind and Valakut. (Doesn't effect triggers that target being a touch odd)
-- Added Planeswalker Type Domri
-- Fixing Spell Description on Snakeform
-- Added more precons by Xitax and Lexusex.
-- Fixed Grave Betrayal
-- Removed a duplicate precon.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Small conversions of Tgt to ValidTgts
-- Corrected mana ability flagging.
-- Fixed crash when using Metalworker-likes during mana payment.
-- Added Evolve keyword
-- Converting A-C Tgt$ cards
-- Converting D-G Tgt$ cards
-- Converting H-L Tgt$ cards
-- Converting M-R Tgt$ cards
-- Converting S-U Tgt$ cards
-- Converting V-Z Tgt$ cards
-- Marking Old Targeting Scheme as deprecated. (Only used in AF.getAbility()) Will be removing it after next release.
-- merging r18843-r18961 from Trunk into GTC branch
-- Adding PeekAndReveal AF. It was simpler to create this subset of Dig than force Kinship cards to have a complex and ugly script.
-- Converted all Kinship cards to script
-- Adding MostProminentColor as a property to be used with the Invasion Djinns
-- Applying a patch that refreshes the Bazaar credit count after purchasing stuff
-- Allow OS to set location
-- Fix issue with Qasali Ambusher
-- Fixing crash for pressing OK for Murmuring Bosk and friends
-- Commenting out direct calls to resolveDrawback in ManaEffect. They are not needed after abilityfactory refactor.
-- Updated some SVars.
-- Added Limited Resources
-- Fixed Annihilator getting the wrong defender.
-- GTC: Added a parameter to Obzedat, Ghost Council
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed Annihilator not being flagged as triggered ability.
-- Fixed Ashes to Ashes if one target gains shroud.
-- Fixed Phantasmal Terrain.
-- More cards ready for multiplayer
-- Token AF can put tokens into play under multiple players' control.
-- New PlayerCount<Type>: NonActive
-- Added EvolveCondition to requirementsCheck.
-- Fixed Bloodchief Ascension not showing up in the game
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Split OppGainLife costs into the two types, "you may have an opponent gain" and "you may have each other player gain"
-- Force certain triggers to wait for the next WaitingTrigger run (e.g. Fix Balefire Liege issue), there may be a few more of these that need to be forced
-- Fixed "BecomesTarget" triggering for the same Object more than once for the same spell
-- Converted a few instances of getOpponent()
-- Converted Rainbow Vale to script
-- merging r18962-r18994 from Trunk into GTC branch
-- fixed issue with copies and clones of tokens with abilities
-- Removed OpponentCalls param from FlipACoin as it was no longer used (I assume it was replaced by Caller)
-- Added Spectral Searchlight fix by swordshine.
-- Fixed Elemental Mastery.
-- Added an exile effect SVar to Runesword
-- Disabled variants from custom Quest formats + more uniform style.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fix for Gideon's ultimate
-- Made deck conformance/legality a user-togglable preference (enabled by default)
-- fixed bug in getAIPlayableMana method
-- added really basic AI method for choosePlayer
-- changed resolution of AI mana abilities to use AbilityFactory.resolve so that subabilities resolve correctly.
-- fixed issue with spells that generate mana (bug id#0000648)
-- Fixed Cascade AI not setting activating player.
-- added Cipher mechanic
-- Constructed deck conformance check is now independent of dev mode.
-- A few more cards and abilities ready for multiplayer
-- Cleanup
-- The multiple-choice booster reward thresholds were off by one.
-- remove unused imports (and the warnings they originated)
-- Fixed Plaxcaster Frogling.
-- Replacement effect abilities are now flagged as trigger (to not be confused with a activated ability). This fixes the interaction of Suppression Field and replacement effects.
-- Added a fluff piece to the changes.txt file.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Fixed Rakdos Guildmage.
-- Fixed AI using Discordant Dirge.
-- The AI can now use bounce spells to save non-creature permanents.
-- The AI will now anticipate effects with "Damage that would reduce your life total to less than 1 reduces it to 1 instead.".
-- forge.card.CardManaCost => SpellManaCost
-- forge.card.mana.ManaCost => ManaCostBeingPaid
-- Ability ctor now accepts SpellManaCost as 2nd argument.
-- Fixed Contested Cliffs
-- Fixed a few cards by updating TokenHiddenKeywords
-- Fixed Divine Reckoning and made it ready for multiplayer
-- Better sideboarding: decks have no extra fields for changed parts, they are copied on sideboarding, new deck composition moved outside of GuiChoose.java
-- Decks have no extra sections for variants (sideboard works in most cases)
-- Deck Format restrictions are in a separate class not related to GameType
-- DeckSection has its own toString overload
-- DualListBox operates CardPrinted properly (sideboarding dialog uses cardprinted instances)
-- ItemPool.remove method returns true if any elements were removed.
-- Deck: commander decks may have 0-10 cards sideboard
-- Made xCount handling of RememberedSize consistent with other count keywords
-- More cards ready for multiplayer
-- Cards in sideboard are now marked in the quest shop as cards present in deck. The bug with the card not being sold correctly from the sideboard is still there for now though.
-- Commander: SB is 0 or 10 cards
-- Quest: sold cards should be correctly removed from sideboard
-- url field moved to CardInSet - that allows proxy creation right from cardprinted
-- sideboard checked independently of maximum amount of same cards in deck
-- schemes and planes generation code in GameNew.java now demands a player.
-- toForgeCardList method removed
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Added MUSTER to CounterType
-- GTC: Little card script tweaks.
-- caching implementation CardPrinted.getMatchingForgeCard replaces toForgeCard without parameters.
--  Custom deck format for quest mode: 40 cards + 0 or 15 of sideboard, no more than 4 cards of a kind
-- All gui.home.sanctioned.CSubmenu* controllers use deck format as specified in GameType
-- Always default to Main world when starting a new quest.
-- The "Sanctioned Format: Constructed" view should now be compatible with displays that are only 600 pixels verticle. The list at 600 pixels tall should now display three lines of text rather than less than a single line of text.
-- Removing the wrong SVN rev number from title bar.
-- removed unused method from CardLists
-- pets will have its owner initialized
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Updated quest icon download links to include icons for Jamuraa quest world
-- Fixed LKI copies forgetting their equipped/enchanted lists (Fixes Skullclamp).
-- Cost - rewrite of parsing code
-- Fixed Novijen, Heart of Progress
-- Added the second Quest World, Jamuraa. A readme update will follow shortly.
-- Added a description of Jamuraa to the changes.txt file.
-- Updated the Jamuraa definition include Weatherlight, as advertised.
-- Slightly improved a Jamuraa challenge deck against certain counterstrategies.
-- Made two cards ready for multiplayer
-- Added a fluff piece to the changes.txt file.
-- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
-- Yet another technical improvement to a Jamuraa challenge.
-- Fixed random scheme deck selection
-- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
-- Preparing the changes.txt file for the next beta build and release.
+
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-ArsenalNut
-Gos
-Hellfish
-Lexusex
-Marc
-Max
-PowerClaws
-RumbleBBU
-Sloth
-Sol
-Squee1968
-Swordshine
-Xitax
-ZzzzSleep
-Chris H
+
 
 
 Added the following cards:
 
-Chlorophant
-Contempt
-Crag Saurian
-Decaying Soil
-Discordant Spirit
-Droning Bureaucrats
-Epicenter
-Erratic Mutation
-Goham Djinn
-Halam Djinn
-Kusari-Gama
-Mirrorweave
-Necromancer's Magemark
-Petals of Insight
-Ruham Djinn
-Runesword
-Scattering Stroke
-Sentinel
-Sulam Djinn
-Sworn Defender
-Zanam Djinn
+
 
 
 Added the following new Gatecrash cards to the Gatecrash branch. These cards are not yet available for in game use.:
