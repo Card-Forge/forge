@@ -205,6 +205,9 @@ Fixes/Features:
 - Made two cards ready for multiplayer
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Yet another technical improvement to a Jamuraa challenge.
+- Fixed random scheme deck selection
+- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -234,6 +237,7 @@ Necromancer's Magemark
 Runesword
 Scattering Stroke
 Sworn Defender
+Sentinel
 
 
 Added the following new Gatecrash cards to the Gatecrash branch. These cards are not yet available for in game use.:
@@ -310,6 +314,12 @@ Skarrg Guildmage
 Skullcrack
 Thespian's Stage
 Orzhov Keyrune
+Mystic Genesis
+Simic Charm
+Aetherize
+Angelic Skirmisher
+Realmwright
+Spark Trooper
 
 
 end
