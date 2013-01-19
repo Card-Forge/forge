@@ -1368,7 +1368,7 @@ public class Card extends GameEntity implements Comparable<Card> {
         }
 
         if (c.getOwner().isHuman()) {
-            Singletons.getModel().getGame().getAction().playCardWithoutManaCost(c);
+            Singletons.getModel().getGame().getAction().playCardWithoutManaCost(c, c.getOwner());
         } else {
             final List<SpellAbility> choices = this.getBasicSpells();
 

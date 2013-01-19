@@ -18,6 +18,7 @@
 package forge.card.cost;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import forge.Card;
 import forge.card.spellability.SpellAbility;
@@ -288,7 +289,7 @@ public class CostPayment {
         this.ability.setActivatingPlayer(ai);
 
         final Card source = this.ability.getSourceCard();
-        final ArrayList<CostPart> parts = this.cost.getCostParts();
+        final List<CostPart> parts = this.cost.getCostParts();
 
         if (this.getCost().getCostMana() == null) {
             parts.add(new CostMana("0", 0, false));

@@ -75,4 +75,13 @@ public abstract class Ability extends SpellAbility {
 
         return this.getSourceCard().isInPlay() && !this.getSourceCard().isFaceDown();
     }
+    
+    public static final Ability PLAY_LAND_SURROGATE = new Ability(null, null){
+        @Override
+        public void resolve() {
+            // TODO Auto-generated method stub
+            throw new RuntimeException("This ability is intended to indicate \"land to play\" choice only");
+        }}; 
+        @Override
+        public String toUnsuppressedString() { return "Play land"; }
 }

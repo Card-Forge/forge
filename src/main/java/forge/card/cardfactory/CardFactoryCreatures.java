@@ -690,7 +690,7 @@ public class CardFactoryCreatures {
             }
         }; // Input
 
-        final Ability sacOrSac = new Ability(card, SpellManaCost.EMPTY) {
+        final Ability sacOrSac = new Ability(card, SpellManaCost.NO_COST) {
             @Override
             public void resolve() {
                 if (player.isHuman()) {

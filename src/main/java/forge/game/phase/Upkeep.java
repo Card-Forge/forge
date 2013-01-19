@@ -461,7 +461,7 @@ public class Upkeep extends Phase {
 
             final List<Card> abyssGetTargets = CardLists.filter(player.getCreaturesInPlay(), Presets.NON_ARTIFACTS);
 
-            final Ability sacrificeCreature = new Ability(abyss, SpellManaCost.EMPTY) {
+            final Ability sacrificeCreature = new Ability(abyss, SpellManaCost.NO_COST) {
                 @Override
                 public void resolve() {
                     final List<Card> targets = CardLists.getTargetableCards(abyssGetTargets, this);
@@ -529,7 +529,7 @@ public class Upkeep extends Phase {
         for (int i = 0; i < cards.size(); i++) {
             final Card c = cards.get(i);
 
-            final Ability ability = new Ability(c, SpellManaCost.EMPTY) {
+            final Ability ability = new Ability(c, SpellManaCost.NO_COST) {
                 @Override
                 public void resolve() {
                     final List<Card> creatures = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);

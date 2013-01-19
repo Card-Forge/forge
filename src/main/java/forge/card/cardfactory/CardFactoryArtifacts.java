@@ -244,7 +244,7 @@ class CardFactoryArtifacts {
                                         JOptionPane.INFORMATION_MESSAGE);
                             }
                         } else {
-                            Singletons.getModel().getGame().getAction().playCardWithoutManaCost(freeCard);
+                            Singletons.getModel().getGame().getAction().playCardWithoutManaCost(freeCard, player);
                         }
                     } else {
                         final StringBuilder sb = new StringBuilder();

@@ -1,7 +1,11 @@
 package forge.game.player;
 
+import java.util.List;
+
 import forge.Singletons;
+import forge.card.spellability.SpellAbility;
 import forge.game.phase.PhaseType;
+import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
 
 
@@ -56,6 +60,19 @@ public class PlayerController {
      */
     public void setAiInput(ComputerAIInput computerAIInput) {
         aiInput = computerAIInput;
+    }
+
+    /**
+     * Uses GUI to learn which spell the player (human in our case) would like to play
+     */
+    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities) {
+        if (abilities.size() == 0) {
+            return null;
+        } else if (abilities.size() == 1) {
+            return abilities.get(0);
+        } else {
+            return GuiChoose.oneOrNone("Choose", abilities); // some day network interaction will be here
+        }
     }
 
 }

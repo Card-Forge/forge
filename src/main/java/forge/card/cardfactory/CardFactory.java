@@ -284,9 +284,8 @@ public class CardFactory {
         }
         // may have to change the spell
 
-        // this is so permanents like creatures and artifacts have a "default"
-        // spell
-        if (card.isPermanent() && !card.isLand() && !card.isAura()) {
+        // this is the "default" spell for permanents like creatures and artifacts 
+        if (card.isPermanent() && !card.isAura() && !card.getManaCost().isNoCost()) {
             card.addSpellAbility(new SpellPermanent(card));
         }
 

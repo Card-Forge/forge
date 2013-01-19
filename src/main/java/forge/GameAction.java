@@ -791,8 +791,9 @@ public class GameAction {
      * 
      * @param card
      *            a {@link forge.Card} object.
+     * @param player 
      */
-    public final void drawMiracle(final Card card) {
+    public final void drawMiracle(final Card card, final Player player) {
         // Whenever a card with miracle is the first card drawn in a turn,
         // you may cast it for it's miracle cost
         if (card.getMiracleCost() == null) {
@@ -813,7 +814,7 @@ public class GameAction {
                 // pay miracle cost here.
                 if (card.getOwner().isHuman()) {
                     if (GameActionUtil.showYesNoDialog(card, card + " - Drawn. Pay Miracle Cost?")) {
-                        Singletons.getModel().getGame().getAction().playSpellAbility(miracle);
+                        Singletons.getModel().getGame().getAction().playSpellAbility(miracle, player);
                     }
                 } else {
                     Spell spell = (Spell) miracle;
@@ -841,8 +842,9 @@ public class GameAction {
      * 
      * @param card
      *            a {@link forge.Card} object.
+     * @param player 
      */
-    public final void discardMadness(final Card card) {
+    public final void discardMadness(final Card card, final Player player) {
         // Whenever a card with madness is discarded, you may cast it for it's
         // madness cost
         if (card.getMadnessCost() == null) {
@@ -863,7 +865,7 @@ public class GameAction {
                 // pay madness cost here.
                 if (card.getOwner().isHuman()) {
                     if (GameActionUtil.showYesNoDialog(card, card + " - Discarded. Pay Madness Cost?")) {
-                        Singletons.getModel().getGame().getAction().playSpellAbility(madness);
+                        Singletons.getModel().getGame().getAction().playSpellAbility(madness, player);
                     }
                 } else {
                     Spell spell = (Spell) madness;
@@ -1552,99 +1554,23 @@ public class GameAction {
 
     /**
      * <p>
-     * playCard.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a boolean.
-     */
-    public final boolean playCard(final Card c) {
-        // this can only be called by the Human
-        final HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
-
-        final List<String> choices = new ArrayList<String>();
-        final Player human = Singletons.getControl().getPlayer();
-        final Zone zone = game.getZoneOf(c);
-
-        if (c.isLand() && human.canPlayLand()) {
-            if (zone.is(ZoneType.Hand) || ((!zone.is(ZoneType.Battlefield)) && c.hasStartOfKeyword("May be played"))) {
-                choices.add("Play land");
-            }
-        }
-
-        final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
-        for (SpellAbility sa : c.getSpellAbilities()) {
-            sa.setActivatingPlayer(human);
-            //add alternative costs as additional spell abilities
-            abilities.add(sa);
-            abilities.addAll(GameActionUtil.getAlternativeCosts(sa));
-        }
-
-        for (final SpellAbility sa : abilities) {
-            sa.setActivatingPlayer(human);
-            if (sa.canPlay()) {
-                choices.add(sa.toString());
-                map.put(sa.toString(), sa);
-            }
-        }
-
-        String choice;
-        if (choices.size() == 0) {
-            return false;
-        } else if (choices.size() == 1) {
-            choice = choices.get(0);
-        } else {
-            choice = GuiChoose.oneOrNone("Choose", choices);
-        }
-
-        if (choice == null) {
-            return false;
-        }
-
-        if (choice.equals("Play land")) {
-            human.playLand(c);
-            return true;
-        }
-
-        final SpellAbility ability = map.get(choice);
-        if (ability != null) {
-            this.playSpellAbility(ability);
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * <p>
      * playCardWithoutManaCost.
      * </p>
      * 
      * @param c
      *            a {@link forge.Card} object.
      */
-    public final void playCardWithoutManaCost(final Card c) {
+    public final void playCardWithoutManaCost(final Card c, Player player) {
         final List<SpellAbility> choices = c.getBasicSpells();
-        SpellAbility sa;
-
         // TODO add Buyback, Kicker, ... , spells here
-        if (choices.size() == 0) {
-            return;
-        } else if (choices.size() == 1) {
-            sa = choices.get(0);
-        } else {
-            sa = GuiChoose.oneOrNone("Choose", choices);
-        }
+
+        SpellAbility sa = player.getController().getAbilityToPlay(choices);
 
         if (sa == null) {
             return;
         }
 
-        // Ripple causes a crash because it doesn't set the activatingPlayer in
-        // this entrance
-        if (sa.getActivatingPlayer() == null) {
-            sa.setActivatingPlayer(Singletons.getControl().getPlayer());
-        }
+        sa.setActivatingPlayer(player);
         this.playSpellAbilityForFree(sa);
     }
 
@@ -1954,8 +1880,8 @@ public class GameAction {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public final void playSpellAbility(SpellAbility sa) {
-        sa.setActivatingPlayer(Singletons.getControl().getPlayer());
+    public final void playSpellAbility(SpellAbility sa, Player activator) {
+        sa.setActivatingPlayer(activator);
 
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
             CharmEffect.makeChoices(sa);

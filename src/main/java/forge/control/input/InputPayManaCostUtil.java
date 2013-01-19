@@ -31,6 +31,7 @@ import forge.card.mana.ManaCostBeingPaid;
 import forge.card.mana.ManaPool;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
+import forge.game.player.Player;
 import forge.gui.GuiChoose;
 
 /**
@@ -208,10 +209,11 @@ public class InputPayManaCostUtil {
 
         // save off color needed for use by any mana and reflected mana
         subchosen.getManaPart().setExpressChoice(colorsNeeded);
+        
+        Player p = sa.getActivatingPlayer();
+        Singletons.getModel().getGame().getAction().playSpellAbility(chosen, p);
 
-        Singletons.getModel().getGame().getAction().playSpellAbility(chosen);
-
-        manaCost = Singletons.getControl().getPlayer().getManaPool().payManaFromAbility(sa, manaCost, chosen);
+        manaCost = p.getManaPool().payManaFromAbility(sa, manaCost, chosen);
 
         //AllZone.getHumanPlayer().getZone(ZoneType.Battlefield).updateObservers();
         // DO NOT REMOVE THIS, otherwise the cards don't always tap (copied)

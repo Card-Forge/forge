@@ -135,7 +135,7 @@ public class CardFaceSymbols {
      *            a int.
      */
     public static void draw(Graphics g, SpellManaCost manaCost, int x, int y) {
-        if (manaCost.isEmpty()) {
+        if (manaCost.isNoCost()) {
             return;
         }
 

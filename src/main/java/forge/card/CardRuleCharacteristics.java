@@ -29,7 +29,7 @@ import java.util.TreeMap;
 public class CardRuleCharacteristics {
     private String cardName = null;
     private CardType cardType = null;
-    private SpellManaCost manaCost = SpellManaCost.EMPTY;
+    private SpellManaCost manaCost = SpellManaCost.NO_COST;
     private ColorSet color = null;
     private String ptLine = null;
     private String[] cardRules = null;

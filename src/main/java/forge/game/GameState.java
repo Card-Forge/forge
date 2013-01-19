@@ -30,10 +30,13 @@ import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.ColorChanger;
 import forge.GameAction;
+import forge.GameActionUtil;
 import forge.GameLog;
 import forge.Singletons;
 import forge.StaticEffects;
 import forge.card.replacement.ReplacementHandler;
+import forge.card.spellability.Ability;
+import forge.card.spellability.SpellAbility;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
 import forge.game.phase.Cleanup;
@@ -511,5 +514,40 @@ public class GameState {
      */
     public EventBus getEvents() {
         return events;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param card
+     * @param player
+     * @return
+     */
+    public List<SpellAbility> getAbilitesOfCard(Card c, Player player) {
+        // this can only be called by the Human
+        final Zone zone = this.getZoneOf(c);
+
+        final List<SpellAbility> abilities = new ArrayList<SpellAbility>();
+        for (SpellAbility sa : c.getSpellAbilities()) {
+            //add alternative costs as additional spell abilities
+            abilities.add(sa);
+            abilities.addAll(GameActionUtil.getAlternativeCosts(sa));
+        }
+
+        for (int iSa = 0; iSa < abilities.size();) {
+            SpellAbility sa = abilities.get(iSa); 
+            sa.setActivatingPlayer(player);
+            if (!sa.canPlay())
+                abilities.remove(iSa);
+            else
+                iSa++;
+        }
+
+        if (c.isLand() && player.canPlayLand()) {
+            if (zone.is(ZoneType.Hand) || (!zone.is(ZoneType.Battlefield) && c.hasStartOfKeyword("May be played"))) {
+                abilities.add(Ability.PLAY_LAND_SURROGATE);
+            }
+        }
+
+        return abilities;
     }
 }

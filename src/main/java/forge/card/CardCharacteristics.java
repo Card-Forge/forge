@@ -35,13 +35,13 @@ import forge.card.trigger.Trigger;
 public class CardCharacteristics {
     private String name = "";
     private ArrayList<String> type = new ArrayList<String>();
-    private SpellManaCost manaCost = SpellManaCost.EMPTY;
+    private SpellManaCost manaCost = SpellManaCost.NO_COST;
     private ArrayList<CardColor> cardColor = new ArrayList<CardColor>();
     private boolean cardColorsOverridden = false;
     private int baseAttack = 0;
     private int baseDefense = 0;
     private ArrayList<String> intrinsicKeyword = new ArrayList<String>();
-    private ArrayList<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
+    private final ArrayList<SpellAbility> spellAbility = new ArrayList<SpellAbility>();
     private ArrayList<String> intrinsicAbility = new ArrayList<String>();
     private final List<SpellAbility> manaAbility = new ArrayList<SpellAbility>();
     private ArrayList<Trigger> triggers = new ArrayList<Trigger>();
@@ -215,15 +215,6 @@ public class CardCharacteristics {
         return this.spellAbility;
     }
 
-    /**
-     * Sets the spell ability.
-     * 
-     * @param spellAbility0
-     *            the spellAbility to set
-     */
-    public final void setSpellAbility(final ArrayList<SpellAbility> spellAbility0) {
-        this.spellAbility = spellAbility0;
-    }
 
     /**
      * Gets the intrinsic ability.

@@ -304,7 +304,7 @@ public final class SColumnUtil {
     private static final Pattern AE_FINDER = Pattern.compile("AE", Pattern.LITERAL);
 
     private static SpellManaCost toManaCost(final InventoryItem i) {
-        return i instanceof CardPrinted ? ((CardPrinted) i).getCard().getManaCost() : SpellManaCost.EMPTY;
+        return i instanceof CardPrinted ? ((CardPrinted) i).getCard().getManaCost() : SpellManaCost.NO_COST;
     }
 
     private static ColorSet toColor(final InventoryItem i) {

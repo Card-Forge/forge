@@ -58,7 +58,7 @@ public class GenerateDeckUtil {
         @Override
         public boolean apply(CardRules c) {
             SpellManaCost mc = c.getManaCost();
-            return mc.getColorProfile() == 0 && !mc.isEmpty();
+            return mc.getColorProfile() == 0 && !mc.isNoCost();
         }
     };
 
@@ -90,7 +90,7 @@ public class GenerateDeckUtil {
         public boolean apply(CardRules c) {
             SpellManaCost mc = c.getManaCost();
             int cmc = mc.getCMC();
-            return cmc >= min && cmc <= max && !mc.isEmpty();
+            return cmc >= min && cmc <= max && !mc.isNoCost();
         }
     }
 

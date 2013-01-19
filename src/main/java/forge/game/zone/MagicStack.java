@@ -1347,7 +1347,7 @@ public class MagicStack extends MyObservable {
             if (activePlayerSAs.size() == 1) {
                 SpellAbility next = activePlayerSAs.get(0);
                 if (next.isTrigger()) {
-                    game.getAction().playSpellAbility(next);
+                    game.getAction().playSpellAbility(next, activePlayer);
                 } else {
                     this.add(next);
                 }
@@ -1358,7 +1358,7 @@ public class MagicStack extends MyObservable {
                 for (int i = size - 1; i >= 0; i--) {
                     SpellAbility next = orderedSAs.get(i);
                     if (next.isTrigger()) {
-                        game.getAction().playSpellAbility(next);
+                        game.getAction().playSpellAbility(next, activePlayer);
                     } else {
                         this.add(next);
                     }

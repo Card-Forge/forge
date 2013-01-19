@@ -215,9 +215,9 @@ public class PlayEffect extends SpellEffect {
                         }
                     }
                     newSA.setPayCosts(cost);
-                    newSA.setManaCost(SpellManaCost.EMPTY);
+                    newSA.setManaCost(SpellManaCost.NO_COST);
                     newSA.setDescription(newSA.getDescription() + " (without paying its mana cost)");
-                    Singletons.getModel().getGame().getAction().playSpellAbility(newSA);
+                    Singletons.getModel().getGame().getAction().playSpellAbility(newSA, activator);
                     if (remember) {
                         source.addRemembered(tgtSA.getSourceCard());
                     }
@@ -234,7 +234,7 @@ public class PlayEffect extends SpellEffect {
                 }
             } else {
                 if (controller.isHuman()) {
-                    Singletons.getModel().getGame().getAction().playSpellAbility(tgtSA);
+                    Singletons.getModel().getGame().getAction().playSpellAbility(tgtSA, activator);
                     if (remember) {
                         source.addRemembered(tgtSA.getSourceCard());
                     }

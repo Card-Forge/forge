@@ -42,7 +42,7 @@ public final class SpellManaCost implements Comparable<SpellManaCost> {
     private Float compareWeight = null;
 
     /** The Constant empty. */
-    public static final SpellManaCost EMPTY = new SpellManaCost(-1);
+    public static final SpellManaCost NO_COST = new SpellManaCost(-1);
     public static final SpellManaCost ZERO = new SpellManaCost(0);
     public static final SpellManaCost ONE = new SpellManaCost(1);
 
@@ -82,7 +82,7 @@ public final class SpellManaCost implements Comparable<SpellManaCost> {
 
     private String getSimpleString() {
         if (this.hasNoCost) {
-            return "";
+            return "no cost";
         }
         if (this.shards.isEmpty()) {
             return Integer.toString(this.genericCost);
@@ -168,7 +168,7 @@ public final class SpellManaCost implements Comparable<SpellManaCost> {
      * 
      * @return true, if is empty
      */
-    public boolean isEmpty() {
+    public boolean isNoCost() {
         return this.hasNoCost;
     }
 
@@ -178,7 +178,7 @@ public final class SpellManaCost implements Comparable<SpellManaCost> {
      * @return true, if is pure generic
      */
     public boolean isPureGeneric() {
-        return this.shards.isEmpty() && !this.isEmpty();
+        return this.shards.isEmpty() && !this.isNoCost();
     }
 
     /*

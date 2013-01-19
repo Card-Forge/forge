@@ -18,6 +18,7 @@
 package forge.card.cost;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import forge.Card;
@@ -47,7 +48,7 @@ public class Cost {
      * 
      * @return the cost parts
      */
-    public final ArrayList<CostPart> getCostParts() {
+    public final List<CostPart> getCostParts() {
         return this.costParts;
     }
 
@@ -141,7 +142,7 @@ public class Cost {
 
         boolean xCantBe0 = false;
         int amountX = 0;
-
+        
         StringBuilder manaParts = new StringBuilder();
         String[] parts = TextUtil.splitWithParenthesis(parse, ' ', '<', '>');
         for(String part : parts) {

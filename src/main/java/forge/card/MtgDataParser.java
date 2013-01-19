@@ -168,7 +168,7 @@ public final class MtgDataParser implements Iterator<CardRules> {
         }
 
         String manaCost = this.it.next();
-        ret.setManaCost(SpellManaCost.EMPTY);
+        ret.setManaCost(SpellManaCost.NO_COST);
         CardType type = null;
         if (manaCost.startsWith("{")) {
             ret.setManaCost(new SpellManaCost(new ManaParserMtgData(manaCost)));

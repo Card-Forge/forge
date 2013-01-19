@@ -48,6 +48,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.mana.ManaPool;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementResult;
+import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
 import forge.card.trigger.TriggerType;
@@ -1435,7 +1436,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
 
             // Miracle draws
             if (this.numDrawnThisTurn == 1 && game.getPhaseHandler().getTurn() != 0) {
-                game.getAction().drawMiracle(c);
+                game.getAction().drawMiracle(c, this);
             }
 
             // Run triggers
@@ -1695,7 +1696,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             sa.addCostToHashList(c, "Discarded");
         }*/
 
-        game.getAction().discardMadness(c);
+        game.getAction().discardMadness(c, this);
 
         boolean hasPutIntoPlayInsteadOfDiscard = c.hasKeyword("If a spell or ability an opponent controls causes you "
                 + "to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.");
@@ -3154,6 +3155,18 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     public void setStartingHandSize(int shs) {
 
         this.startingHandSize = shs;
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     * @param card
+     * @param ab
+     */
+    public void playSpellAbility(Card c, SpellAbility ab) {
+        if (ab == Ability.PLAY_LAND_SURROGATE) {
+            this.playLand(c);
+        } else
+            game.getAction().playSpellAbility(ab, this);
     }
 
 }

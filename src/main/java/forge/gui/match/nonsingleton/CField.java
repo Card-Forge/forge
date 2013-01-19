@@ -35,6 +35,7 @@ import forge.Constant;
 import forge.Constant.Preferences;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
+import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.control.input.InputAttack;
 import forge.control.input.InputBlock;
@@ -42,6 +43,7 @@ import forge.control.input.InputPayMana;
 import forge.control.input.InputPayManaCost;
 import forge.control.input.InputPayManaCostAbility;
 import forge.control.input.InputPaySacCost;
+import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
@@ -332,7 +334,7 @@ public class CField implements ICDoc {
 
     /** */
     private void flashbackAction() {
-        if (!CField.this.player.isComputer()) {
+        if (!CField.this.player.isHuman()) {
             new ZoneAction(player.getZone(ZoneType.Graveyard),
                     NewConstants.Lang.GuiDisplay.HUMAN_FLASHBACK) {
 
@@ -345,7 +347,12 @@ public class CField implements ICDoc {
 
                 @Override
                 protected void doAction(final Card c) {
-                    Singletons.getModel().getGame().getAction().playCard(c);
+                    GameState game = Singletons.getModel().getGame();
+                    SpellAbility ab = player.getController().getAbilityToPlay(game.getAbilitesOfCard(c, player));
+                    if ( null != ab) {
+                        player.playSpellAbility(c, ab);
+                        Singletons.getModel().getGame().getPhaseHandler().setPriority(player);
+                    }
                 }
             } .actionPerformed(null);
         }
@@ -362,7 +369,7 @@ public class CField implements ICDoc {
 
                 @Override
                 protected void doAction(final Card c) {
-                    Singletons.getModel().getGame().getAction().playCard(c);
+                    // you cannot play computer's card from graveyard
                 }
             } .actionPerformed(null);
         }

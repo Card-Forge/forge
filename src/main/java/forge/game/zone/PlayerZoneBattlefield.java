@@ -127,7 +127,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
                 final Card tisLand = c;
                 for (final Card ti : tis) {
                     final Card source = ti;
-                    final SpellAbility ability = new Ability(source, SpellManaCost.EMPTY) {
+                    final SpellAbility ability = new Ability(source, SpellManaCost.NO_COST) {
                         @Override
                         public void resolve() {
                             List<Card> lands = CardLists.filter(tisLand.getController().getCardsIn(ZoneType.Battlefield), Presets.LANDS);
@@ -148,7 +148,7 @@ public class PlayerZoneBattlefield extends PlayerZone {
                 final Card lesLand = c;
                 if (les.size() > 0) {
                     final Card source = les.get(0);
-                    final SpellAbility ability = new Ability(source, SpellManaCost.EMPTY) {
+                    final SpellAbility ability = new Ability(source, SpellManaCost.NO_COST) {
                         @Override
                         public void resolve() {
                             final List<Card> lands = lesLand.getOwner().getLandsInPlay();
