@@ -335,8 +335,23 @@ public class CField implements ICDoc {
     /** */
     private void flashbackAction() {
         if (!CField.this.player.isHuman()) {
-            new ZoneAction(player.getZone(ZoneType.Graveyard),
-                    NewConstants.Lang.GuiDisplay.HUMAN_FLASHBACK) {
+            new ZoneAction(player.getZone(ZoneType.Graveyard), NewConstants.Lang.GuiDisplay.COMPUTER_FLASHBACK) {
+
+                private static final long serialVersionUID = 8120331222693706164L;
+
+                @Override
+                protected List<Card> getCardsAsIterable() {
+                    return CardFactoryUtil.getExternalZoneActivationCards(player);
+                }
+
+                @Override
+                protected void doAction(final Card c) {
+                    // you cannot play computer's card from graveyard
+                }
+            } .actionPerformed(null);
+        }
+        else {
+            new ZoneAction(CField.this.player.getZone(ZoneType.Graveyard), NewConstants.Lang.GuiDisplay.HUMAN_FLASHBACK) {
 
                 private static final long serialVersionUID = 8120331222693706164L;
 
@@ -353,23 +368,6 @@ public class CField implements ICDoc {
                         player.playSpellAbility(c, ab);
                         Singletons.getModel().getGame().getPhaseHandler().setPriority(player);
                     }
-                }
-            } .actionPerformed(null);
-        }
-        else {
-            new ZoneAction(CField.this.player.getZone(ZoneType.Graveyard),
-                    NewConstants.Lang.GuiDisplay.COMPUTER_FLASHBACK) {
-
-                private static final long serialVersionUID = 8120331222693706164L;
-
-                @Override
-                protected List<Card> getCardsAsIterable() {
-                    return CardFactoryUtil.getExternalZoneActivationCards(player);
-                }
-
-                @Override
-                protected void doAction(final Card c) {
-                    // you cannot play computer's card from graveyard
                 }
             } .actionPerformed(null);
         }
