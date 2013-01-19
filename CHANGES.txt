@@ -70,7 +70,14 @@ Some people use the Windows application 7zip. This utility can be found at http:
 
 Fixes/Features:
 
-
+- Cleared out the changes.txt file, now ready for new material.
+- Fixed "CounterType$ Any" in AF CounterRemove.
+- fixing issues with zero mana cost (such as suspend of Lotus Bloom)
+- GameAction playXXXX now require a player parameter
+- playCard method split into several simplier ones.
+- merging r18995-r19086 from Trunk into GTC branch
+- Computer and human flashback zones were mixed up
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -163,6 +170,11 @@ Urban Evolution
 Viashino Shanktail
 Whispering Madness
 Zhur-Taa Swine
+
+Firefist Striker
+Thrull Parasite
+Gruul Charm
+Merciless Eviction
 
 
 end
