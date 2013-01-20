@@ -1783,12 +1783,18 @@ public final class GameActionUtil {
             amount += bonus;
         }
 
-        try {
-            if ((sa.getParam("Amount") != null) && (amount != Integer.parseInt(sa.getParam("Amount")))) {
+        if (sa.getSubAbility() != null) {
+            // Mark SAs with subAbilities as undoable. These are generally things like damage, and other stuff
+            // that's hard to track and remove
+            sa.setUndoable(false);
+        } else {      
+            try {
+                if ((sa.getParam("Amount") != null) && (amount != Integer.parseInt(sa.getParam("Amount")))) {
+                    sa.setUndoable(false);
+                }
+            } catch (final NumberFormatException n) {
                 sa.setUndoable(false);
             }
-        } catch (final NumberFormatException n) {
-            sa.setUndoable(false);
         }
 
         final StringBuilder sb = new StringBuilder();

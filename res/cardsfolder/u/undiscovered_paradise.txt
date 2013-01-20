@@ -1,8 +1,9 @@
 Name:Undiscovered Paradise
 ManaCost:no cost
 Types:Land
-Text:Whenever you tap CARDNAME for mana, return it to it's owner's hand during the controller's next untap phase.
-A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ Any | SpellDescription$ Add one mana of any color to your mana pool | SubAbility$ DBReturn
+SVar:DBReturn:DB$ Pump | Defined$ Self | KW$ HIDDEN During your next untap step, as you untap your permanents, return CARDNAME to its owner's hand. | Permanent$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/undiscovered_paradise.jpg
 SetInfo:VIS|Rare|http://magiccards.info/scans/en/vi/167.jpg

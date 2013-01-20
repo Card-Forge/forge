@@ -150,7 +150,6 @@ public class Card extends GameEntity implements Comparable<Card> {
     private boolean evoked = false;
 
     private boolean levelUp = false;
-    private boolean bounceAtUntap = false;
 
     private boolean unearth = false;
     private boolean unearthed;
@@ -1200,29 +1199,6 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final boolean getSacrificeAtEOT() {
         return this.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.");
-    }
-
-    /**
-     * <p>
-     * Getter for the field <code>bounceAtUntap</code>.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public final boolean getBounceAtUntap() {
-        return this.bounceAtUntap;
-    }
-
-    /**
-     * <p>
-     * Setter for the field <code>bounceAtUntap</code>.
-     * </p>
-     * 
-     * @param bounce
-     *            a boolean.
-     */
-    public final void setBounceAtUntap(final boolean bounce) {
-        this.bounceAtUntap = bounce;
     }
 
     /**

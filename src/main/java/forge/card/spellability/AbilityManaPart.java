@@ -126,13 +126,6 @@ public class AbilityManaPart implements java.io.Serializable {
         // add the mana produced to the mana pool
         manaPool.addManaToFloating(this.lastProduced);
 
-        // TODO all of the following would be better as trigger events
-        // "tapped for mana"
-        if (source.getName().equals("Undiscovered Paradise")) {
-            // Probably best to conver this to an Extrinsic Ability
-            source.setBounceAtUntap(true);
-        }
-
         // Run triggers
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
 

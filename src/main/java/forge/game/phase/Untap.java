@@ -114,10 +114,9 @@ public class Untap extends Phase {
 
         List<Card> list = new ArrayList<Card>(player.getCardsIn(ZoneType.Battlefield));
 
-        for (final Card c : list) {
-            if (c.getBounceAtUntap() && c.getName().contains("Undiscovered Paradise")) {
-                Singletons.getModel().getGame().getAction().moveToHand(c);
-            }
+        List<Card> bounceList = CardLists.getKeyword(list, "During your next untap step, as you untap your permanents, return CARDNAME to its owner's hand.");
+        for (final Card c : bounceList) {
+            Singletons.getModel().getGame().getAction().moveToHand(c);
         }
 
         list = CardLists.filter(list, new Predicate<Card>() {
