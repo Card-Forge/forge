@@ -31,6 +31,7 @@ import forge.Singletons;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.trigger.TriggerType;
 import forge.game.GameState;
+import forge.game.GameType;
 import forge.game.event.EndOfTurnEvent;
 import forge.game.event.ManaBurnEvent;
 import forge.game.player.Player;
@@ -64,7 +65,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
     private int nCombatsThisTurn = 0;
     private boolean bPreventCombatDamageThisTurn  = false;
-
+    private int planarDiceRolledthisTurn = 0;
+    
     private Player playerTurn = null;
 
     // priority player
@@ -472,6 +474,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 if (!this.bRepeat) {
                     this.setPlayerTurn(this.handleNextTurn());
                 }
+                this.planarDiceRolledthisTurn = 0;
                 // Play the End Turn sound
                 Singletons.getModel().getGame().getEvents().post(new EndOfTurnEvent());
                 break;
@@ -546,6 +549,16 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         Player next = getNextActivePlayer();
         VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(next);
         SDisplayUtil.showTab(nextField);
+        
+        if(game.getType() == GameType.Planechase) {
+            Card p = game.getActivePlane();
+            if(p != null)
+            {
+                p.clearControllers();
+                p.addController(next);
+                game.getAction().controllerChangeZoneCorrection(p);
+            }
+        }
 
         return next;
     }
@@ -735,26 +748,29 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         //is turned face down and put on the bottom of its owner's scheme
         //deck the next time a player would receive priority.
         //(This is a state-based action. See rule 704.)
-        for (int i = 0; i < game.getCardsIn(ZoneType.Command).size(); i++) {
-            Card c = game.getCardsIn(ZoneType.Command).get(i);
-            if (c.isScheme() && !c.isType("Ongoing")) {
-
-                boolean foundonstack = false;
-                for (SpellAbilityStackInstance si : game.getStack().getStack()) {
-                    if (si.getSourceCard().equals(c)) {
-
-                        foundonstack = true;
-                        break;
+        if(game.getType() == GameType.Archenemy) 
+        {
+            for (int i = 0; i < game.getCardsIn(ZoneType.Command).size(); i++) {
+                Card c = game.getCardsIn(ZoneType.Command).get(i);
+                if (c.isScheme() && !c.isType("Ongoing")) {
+    
+                    boolean foundonstack = false;
+                    for (SpellAbilityStackInstance si : game.getStack().getStack()) {
+                        if (si.getSourceCard().equals(c)) {
+    
+                            foundonstack = true;
+                            break;
+                        }
                     }
-                }
-                if (!foundonstack) {
-
-                    game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-                    c.getController().getZone(ZoneType.Command).remove(c);
-                    i--;
-                    game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-
-                    c.getController().getSchemeDeck().add(c);
+                    if (!foundonstack) {
+    
+                        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+                        c.getController().getZone(ZoneType.Command).remove(c);
+                        i--;
+                        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+    
+                        c.getController().getSchemeDeck().add(c);
+                    }
                 }
             }
         }
@@ -845,4 +861,17 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
     public final void setPreventCombatDamageThisTurn(final boolean b) {
         this.bPreventCombatDamageThisTurn = true;
     }
+
+    /**
+     * @return the planarDiceRolledthisTurn
+     */
+    public int getPlanarDiceRolledthisTurn() {
+        return planarDiceRolledthisTurn;
+    }
+
+
+    public void incPlanarDiceRolledthisTurn() {
+        this.planarDiceRolledthisTurn++;
+    }
+
 }

@@ -35,6 +35,7 @@ public class CardCollections {
     private final IStorage<DeckGroup> sealed;
     private final IStorage<Deck> cube;
     private final IStorage<Deck> scheme;
+    private final IStorage<Deck> plane;
 
     /**
      * TODO: Write javadoc for Constructor.
@@ -47,6 +48,7 @@ public class CardCollections {
         this.sealed = new StorageImmediatelySerialized<DeckGroup>(new DeckGroupSerializer(new File(file, "sealed")));
         this.cube = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(file, "cube")));
         this.scheme = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(file, "scheme")));
+        this.plane = new StorageImmediatelySerialized<Deck>(new DeckSerializer(new File(file, "plane")));
 
         System.out.printf("Read decks: %d constructed, %d sealed, %d draft, %d cubes, %d scheme.%n", constructed.getCount(), sealed.getCount(), draft.getCount(), cube.getCount(), scheme.getCount());
 
@@ -97,6 +99,13 @@ public class CardCollections {
      */
     public IStorage<Deck> getScheme() {
         return this.scheme;
+    }
+
+    /**
+     * @return the plane
+     */
+    public IStorage<Deck> getPlane() {
+        return plane;
     }
 
 }

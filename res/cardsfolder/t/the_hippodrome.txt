@@ -1,0 +1,16 @@
+Name:The Hippodrome
+ManaCost:no cost
+Types:Plane Segovia
+Text:no text
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature | AddPower$ -5 | Description$ All Creatures get -5/-0.
+T:Mode$ PlanarDice | Result$ Chaos | OptionalDecider$ You | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, you may destroy target creature if it's power is 0 or less.
+SVar:RolledChaos:AB$ Destroy | Cost$ 0 | ValidCards$ Creature | ConditionCheckSVar$ TgtPow | ConditionCompareSVar$ LE0
+SVar:TgtPow:Targeted$CardPower
+T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ RolledWalk | Secondary$ True | TriggerDescription$ Whenever you roll Planeswalk, put this card on the bottom of its owner's planar deck face down, then move the top card of your planar deck off that planar deck and turn it face up.
+SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
+A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
+SVar:X:Count$RolledThisTurn
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/the_hippodrome.jpg
+SetInfo:HOP|Common|http://magiccards.info/extras/plane/planechase/the-hippodrome.jpg
+End

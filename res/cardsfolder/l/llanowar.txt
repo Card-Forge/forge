@@ -1,0 +1,16 @@
+Name:Llanowar
+ManaCost:no cost
+Types:Plane Dominaria
+Text:no text
+S:Mode$ Continuous | Affected$ Creature | EffectZone$ Command | AddAbility$ LlanowarAb | Description$ All creatures have "T: Add G G to your mana pool.".
+SVar:LlanowarAb:AB$ Mana | Cost$ T | Amount$ 2 | Produced$ G | SpellDescription$ Add G G to your mana pool.
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, untap all creatures you control.
+SVar:RolledChaos:AB$ UntapAll | Cost$ 0 | ValidCards$ Creature.YouCtrl
+T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ RolledWalk | Secondary$ True | TriggerDescription$ Whenever you roll Planeswalk, put this card on the bottom of its owner's planar deck face down, then move the top card of your planar deck off that planar deck and turn it face up
+SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
+A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
+SVar:X:Count$RolledThisTurn
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/llanowar.jpg
+SetInfo:HOP|Common|http://magiccards.info/extras/plane/planechase/llanowar.jpg
+End

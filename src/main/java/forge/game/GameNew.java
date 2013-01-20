@@ -243,6 +243,17 @@ public class GameNew {
             if (schemes != null) {
                 player.setSchemeDeck(schemes);
             }
+            
+            Iterable<Card> planes = p.getValue().getPlanes(player);
+            if (planes != null) {
+                ArrayList<Card> l = new ArrayList<Card>();
+                for(Card c : planes)
+                {
+                    l.add(c);
+                }
+                CardLists.shuffle(l);
+                player.setPlanarDeck(l);
+            }
 
 
             Deck toUse;

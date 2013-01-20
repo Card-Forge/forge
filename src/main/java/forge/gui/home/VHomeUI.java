@@ -55,6 +55,7 @@ import forge.gui.home.settings.VSubmenuAvatars;
 import forge.gui.home.settings.VSubmenuDownloaders;
 import forge.gui.home.settings.VSubmenuPreferences;
 import forge.gui.home.variant.VSubmenuArchenemy;
+import forge.gui.home.variant.VSubmenuPlanechase;
 import forge.gui.home.variant.VSubmenuVanguard;
 import forge.gui.toolbox.ExperimentalLabel;
 import forge.gui.toolbox.FLabel;
@@ -119,8 +120,8 @@ public enum VHomeUI implements IVTopLevelUI {
         //allSubmenus.add(VSubmenuExit.SINGLETON_INSTANCE);
 
         allSubmenus.add(VSubmenuArchenemy.SINGLETON_INSTANCE);
-
-        allSubmenus.add(VSubmenuVanguard.SINGLETON_INSTANCE);
+        allSubmenus.add(VSubmenuVanguard.SINGLETON_INSTANCE);        
+        allSubmenus.add(VSubmenuPlanechase.SINGLETON_INSTANCE);
 
         // For each group: init its panel
         final SortedMap<EMenuGroup, JPanel> allGroupPanels = new TreeMap<EMenuGroup, JPanel>();

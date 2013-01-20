@@ -93,3 +93,5 @@ Index:83|Code2:RTR|Code3:RTR|Name:Return to Ravnica
 
 Index:86|Code2:VAN|Code3:VAN|Name:Vanguard
 Index:87|Code2:ARC|Code3:ARC|Name:Archenemy
+Index:88|Code2:HOP|Code3:HOP|Name:Planechase
+Index:89|Code2:PC2|Code3:PC2|Name:Planechase 2012 Edition

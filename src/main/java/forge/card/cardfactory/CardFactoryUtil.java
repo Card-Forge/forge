@@ -2129,6 +2129,10 @@ public class CardFactoryUtil {
         if (l[0].startsWith("RememberedSize")) {
             return CardFactoryUtil.doXMath(c.getRemembered().size(), m, c);
         }
+        
+        if (l[0].startsWith("RolledThisTurn")) {
+            return Singletons.getModel().getGame().getPhaseHandler().getPlanarDiceRolledthisTurn();
+        }
 
         final String[] sq;
         sq = l[0].split("\\.");

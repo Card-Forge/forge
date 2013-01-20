@@ -61,10 +61,14 @@ import forge.game.zone.ZoneType;
  * "cleaned up" at each new game.
  */
 public class GameState {
+    private final GameType type;
     private final List<Player> roIngamePlayers;
     private final List<Player> allPlayers;
     private final List<Player> ingamePlayers = new ArrayList<Player>();
-
+    
+    private final List<Card> communalPlanarDeck = new ArrayList<Card>();
+    private Card activePlane = null;
+    
     private final Cleanup cleanup = new Cleanup();
     private final EndOfTurn endOfTurn = new EndOfTurn();
     private final EndOfCombat endOfCombat = new EndOfCombat();
@@ -91,7 +95,8 @@ public class GameState {
      * Constructor.
      * @param players2
      */
-    public GameState(Iterable<LobbyPlayer> players2) { /* no more zones to map here */
+    public GameState(Iterable<LobbyPlayer> players2, GameType t) { /* no more zones to map here */
+        type = t;
         List<Player> players = new ArrayList<Player>();
         for (LobbyPlayer p : players2) {
             Player pl = getIngamePlayer(p);
@@ -517,6 +522,13 @@ public class GameState {
     }
 
     /**
+     * @return the type of game (Constructed/Limited/Planechase/etc...)
+     */
+    public GameType getType() {
+        return type;
+    }
+
+    /**
      * TODO: Write javadoc for this method.
      * @param card
      * @param player
@@ -549,5 +561,60 @@ public class GameState {
         }
 
         return abilities;
+    }
+
+    /**
+     * @return the activePlane
+     */
+    public Card getActivePlane() {
+        return activePlane;
+    }
+
+    /**
+     * @param activePlane0 the activePlane to set
+     */
+    public void setActivePlane(Card activePlane0) {
+        this.activePlane = activePlane0;
+    }
+    
+    /**
+     * 
+     * Currently unused. Base for the Single Planar deck option. (Rule 901.15)
+     */
+    public void setCommunalPlaneDeck(List<Card> deck) {
+        communalPlanarDeck.clear();
+        communalPlanarDeck.addAll(deck);
+        CardLists.shuffle(communalPlanarDeck);
+        
+        for(Player p : roIngamePlayers)
+        {
+            p.setPlanarDeck(communalPlanarDeck);
+        }
+    }
+        
+    /**
+     * 
+     * Currently unused. Base for the Single Planar deck option. (Rule 901.15)
+     */
+    public void initCommunalPlane()
+    {
+        getTriggerHandler().suppressMode(TriggerType.PlaneswalkedTo);
+        Card firstPlane = null;
+        while(true)
+        {
+            firstPlane = communalPlanarDeck.get(0);
+            communalPlanarDeck.remove(0);
+            if(firstPlane.getType().contains("Phenomenon"))
+            {
+                communalPlanarDeck.add(firstPlane);
+            }
+            else
+            {
+                this.getPhaseHandler().getPlayerTurn().getZone(ZoneType.Command).add(firstPlane);
+                break;
+            }
+        }
+
+        getTriggerHandler().clearSuppression(TriggerType.PlaneswalkedTo);
     }
 }

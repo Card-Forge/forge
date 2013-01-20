@@ -1,6 +1,7 @@
 package forge.game;
 
 import com.google.common.base.Function;
+
 import forge.Card;
 import forge.deck.Deck;
 import forge.game.player.Player;
@@ -15,6 +16,7 @@ public class PlayerStartConditions {
     private Function<Player, Iterable<Card>> cardsOnBattlefield = null;
     private Function<Player, Iterable<Card>> cardsInCommand = null;
     private Function<Player, Iterable<Card>> schemes = null;
+    private Function<Player, Iterable<Card>> planes = null;
 
     public PlayerStartConditions(Deck deck0) {
         originalDeck = deck0;
@@ -91,6 +93,20 @@ public class PlayerStartConditions {
      */
     public void restoreOriginalDeck() {
         currentDeck = originalDeck;
+    }
+
+    /**
+     * @return the planes
+     */
+    public Iterable<Card> getPlanes(final Player p) {
+        return planes == null ? null : planes.apply(p);
+    }
+
+    /**
+     * @param planes0 the planes to set
+     */
+    public void setPlanes(Function<Player, Iterable<Card>> planes0) {
+        this.planes = planes0;
     }
 
 

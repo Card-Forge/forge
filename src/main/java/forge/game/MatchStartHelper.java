@@ -68,6 +68,26 @@ public class MatchStartHelper {
 
         players.put(player, start);
     }
+    
+    public void addPlanechasePlayer(final LobbyPlayer player, final Deck deck, final Iterable<CardPrinted> planes) {
+        PlayerStartConditions start = new PlayerStartConditions(deck);
+
+        start.setPlanes(new Function<Player, Iterable<Card>>() {
+
+            @Override
+            public Iterable<Card> apply(Player p) {
+                List<Card> res = new ArrayList<Card>();
+                for (CardPrinted cp : planes) {
+                    res.add(cp.toForgeCard(p));
+                }
+
+                return res;
+            }
+
+        });
+
+        players.put(player, start);
+    }
 
     public Map<LobbyPlayer, PlayerStartConditions> getPlayerMap() {
 

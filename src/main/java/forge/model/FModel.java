@@ -36,6 +36,7 @@ import forge.card.cardfactory.CardFactory;
 import forge.deck.CardCollections;
 import forge.error.ExceptionHandler;
 import forge.game.GameState;
+import forge.game.GameType;
 import forge.game.MatchController;
 import forge.game.limited.GauntletMini;
 import forge.game.player.LobbyPlayer;
@@ -427,8 +428,8 @@ public enum FModel {
      * TODO: Write javadoc for this method.
      * @param players
      */
-    public GameState newGame(Iterable<LobbyPlayer> players) {
-        gameState = new GameState(players);
+    public GameState newGame(Iterable<LobbyPlayer> players, GameType type) {
+        gameState = new GameState(players,type);
         return gameState;
     }
 

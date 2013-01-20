@@ -1,0 +1,18 @@
+Name:Raven's Run
+ManaCost:no cost
+Types:Plane Shadowmoor
+Text:no text
+S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature | AddKeyword$ Wither | Description$ All Creatures have Wither (They deal damage to creatures in the form of -1/-1 counters.)
+T:Mode$ PlanarDice | Result$ Chaos | OptionalDecider$ You | TriggerZones$ Command | Execute$ RolledChaos1 | TriggerDescription$ Whenever you roll Chaos, put a -1/-1 counter on target creature, two -1/-1 counters on another target creature, and three -1/-1 counters on a third target creature.
+SVar:RolledChaos1:AB$ PutCounter | Cost$ 0 | ValidTgts$ Creature | CounterType$ M1M1 | CounterNum$ 1 | RememberTargets$ True | SubAbility$ RolledChaos2
+SVar:RolledChaos2:DB$ PutCounter | ValidTgts$ Creature.IsNotRemembered | CounterType$ M1M1 | CounterNum$ 2 | RememberTargets$ True | SubAbility$ RolledChaos3
+SVar:RolledChaos3:DB$ PutCounter | ValidTgts$ Creature.IsNotRemembered | CounterType$ M1M1 | CounterNum$ 3 | SubAbility$ RolledChaosCleanup
+SVar:RolledChaosCleanup:DB$ Cleanup | ClearRemembered$ True
+T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ RolledWalk | Secondary$ True | TriggerDescription$ Whenever you roll Planeswalk, put this card on the bottom of its owner's planar deck face down, then move the top card of your planar deck off that planar deck and turn it face up.
+SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
+A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
+SVar:X:Count$RolledThisTurn
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ravens_run.jpg
+SetInfo:HOP|Common|http://magiccards.info/extras/plane/planechase/ravens-run.jpg
+End

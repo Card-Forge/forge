@@ -1,0 +1,16 @@
+Name:Panopticon
+ManaCost:no cost
+Types:Plane Mirrodin
+Text:no text
+T:Mode$ PlaneswalkedTo | ValidCard$ Card.Self | TriggerZones$ Command | Execute$ PanopticonDraw | TriggerDescription$ When you planeswalk to CARDNAME, draw a card.
+T:Mode$ Phase | Phase$ Draw | ValidPlayer$ You | Execute$ PanopticonDraw | TriggerDescription$ At the beginning of your draw step, draw an additional card.
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ PanopticonDraw | TriggerDescription$ Whenever you roll Chaos, draw a card.
+SVar:PanopticonDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ RolledWalk | Secondary$ True | TriggerDescription$ Whenever you roll Planeswalk, put this card on the bottom of its owner's planar deck face down, then move the top card of your planar deck off that planar deck and turn it face up
+SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
+A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
+SVar:X:Count$RolledThisTurn
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/panopticon.jpg
+SetInfo:HOP|Common|http://magiccards.info/extras/plane/planechase/panopticon.jpg
+End

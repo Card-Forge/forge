@@ -31,7 +31,9 @@ import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
+import forge.card.trigger.TriggerType;
 import forge.game.GameState;
+import forge.game.GameType;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
@@ -176,9 +178,15 @@ public class InputMulligan extends Input {
 
         ga.checkStateEffects();
         Singletons.getModel().getMatch().getInput().clearInput();
-
-        //Set Field shown to current player.
+        
         Player next = game.getPhaseHandler().getPlayerTurn();
+        
+        if(game.getType() == GameType.Planechase)
+        {
+            next.initPlane();
+        }
+
+        //Set Field shown to current player.        
         VField nextField = CMatchUI.SINGLETON_INSTANCE.getFieldViewFor(next);
         SDisplayUtil.showTab(nextField);
 

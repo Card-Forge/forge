@@ -65,6 +65,7 @@ import forge.game.event.SpellResolvedEvent;
 import forge.game.phase.PhaseHandler;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.PlayerZoneBattlefield;
+import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.properties.ForgePreferences.FPref;
@@ -142,6 +143,9 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     /** The zones. */
     private final Map<ZoneType, PlayerZone> zones = new EnumMap<ZoneType, PlayerZone>(ZoneType.class);
 
+    private List<Card> planarDeck = new ArrayList<Card>();
+    private Card currentPlane = null;
+    
     private PlayerStatistics stats = new PlayerStatistics();
 
     private final List<Card> schemeDeck = new ArrayList<Card>();
@@ -3169,4 +3173,73 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             game.getAction().playSpellAbility(ab, this);
     }
 
+    /**
+     * 
+     * Takes the top plane of the planar deck and put it face up in the command zone.
+     * Then runs triggers. 
+     */
+    public void planeswalk()
+    {
+        //Run PlaneswalkedFrom triggers here.
+        HashMap<String,Object> runParams = new HashMap<String,Object>();
+        runParams.put("Card", currentPlane);
+        game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedFrom, runParams,false);
+        
+        currentPlane = planarDeck.get(0);
+        
+        planarDeck.remove(0);
+        getZone(ZoneType.Command).add(currentPlane);
+        
+        game.setActivePlane(currentPlane);
+        //Run PlaneswalkedTo triggers here.
+        runParams.put("Card", currentPlane);
+        game.getTriggerHandler().runTrigger(TriggerType.PlaneswalkedTo, runParams,false);
+    }
+    
+    /**
+     * 
+     * Puts my currently active plane, if any, at the bottom of my planar deck.
+     */
+    public void leaveCurrentPlane()
+    {        
+        if(currentPlane != null)
+        {
+            Zone com = game.getZoneOf(currentPlane);
+            com.remove(currentPlane);
+            currentPlane.clearControllers();
+            planarDeck.add(currentPlane);
+            currentPlane = null;
+        }
+    }
+    
+    public void setPlanarDeck(List<Card> pd)
+    {
+        planarDeck = pd;   
+    }
+    
+    /**
+     * 
+     * Sets up the first plane of a round.
+     */
+    public void initPlane()
+    {
+        Card firstPlane = null;
+        while(true)
+        {
+            firstPlane = planarDeck.get(0);
+            planarDeck.remove(0);
+            if(firstPlane.getType().contains("Phenomenon"))
+            {
+                planarDeck.add(firstPlane);
+            }
+            else
+            {
+                currentPlane = firstPlane;
+                getZone(ZoneType.Command).add(firstPlane);
+                break;
+            }
+        }
+        
+        game.setActivePlane(currentPlane);
+    }
 }

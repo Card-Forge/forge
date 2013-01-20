@@ -1,0 +1,16 @@
+Name:Fields of Summer
+ManaCost:no cost
+Types:Plane Moag
+Text:no text
+T:Mode$ SpellCast | OptionalDecider$ TriggeredPlayer | TriggerZones$ Command | Execute$ LifeSummer | TriggerDescription$ Whenever a player casts a spell, that player may gain 2 life.
+SVar:LifeSummer:AB$ GainLife | Cost$ 0 | Defined$ TriggeredPlayer | LifeAmount$ 2
+T:Mode$ PlanarDice | Result$ Chaos | OptionalDecider$ You | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, you may gain 10 life.
+SVar:RolledChaos:AB$ GainLife | Cost$ 0 | LifeAmount$ 10 | Defined$ You
+T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ RolledWalk | Secondary$ True | TriggerDescription$ Whenever you roll Planeswalk, put this card on the bottom of its owner's planar deck face down, then move the top card of your planar deck off that planar deck and turn it face up.
+SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
+A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
+SVar:X:Count$RolledThisTurn
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fields_of_summer.jpg
+SetInfo:HOP|Common|http://magiccards.info/extras/plane/planechase/fields-of-summer.jpg
+End

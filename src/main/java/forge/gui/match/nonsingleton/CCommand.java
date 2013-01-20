@@ -36,7 +36,7 @@ import forge.gui.framework.ICDoc;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.controllers.CMessage;
 /**
- * Controls Swing components of a player's field instance.
+ * Controls Swing components of a player's command instance.
  */
 public class CCommand implements ICDoc {
     private final Player player;
@@ -61,10 +61,10 @@ public class CCommand implements ICDoc {
     };
 
     /**
-     * Controls Swing components of a player's field instance.
+     * Controls Swing components of a player's command instance.
      * 
      * @param p0 &emsp; {@link forge.game.player.Player}
-     * @param v0 &emsp; {@link forge.gui.match.nonsingleton.VField}
+     * @param v0 &emsp; {@link forge.gui.match.nonsingleton.VCommand}
      */
     public CCommand(final Player p0, final VCommand v0) {
         this.player = p0;

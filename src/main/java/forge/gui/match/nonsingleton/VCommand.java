@@ -31,7 +31,7 @@ import forge.gui.toolbox.FSkin;
 import forge.view.arcane.PlayArea;
 
 /** 
- * Assembles Swing components of a player field instance.
+ * Assembles Swing components of a player command instance.
  * 
  * <br><br><i>(V at beginning of class name denotes a view class.)</i>
  */
@@ -51,7 +51,7 @@ public class VCommand implements IVDoc<CCommand> {
 
     //========= Constructor
     /**
-     * Assembles Swing components of a player field instance.
+     * Assembles Swing components of a player command instance.
      * 
      * @param player0 &emsp; {@link forge.game.player.Player}
      * @param id0 &emsp; {@link forge.gui.framework.EDocID}
@@ -136,7 +136,7 @@ public class VCommand implements IVDoc<CCommand> {
 
     //========= Retrieval methods
     /**
-     * Gets the player currently associated with this field.
+     * Gets the player currently associated with this command.
      * @return {@link forge.game.player.Player}
      */
     public Player getPlayer() {
@@ -146,7 +146,7 @@ public class VCommand implements IVDoc<CCommand> {
     /**
      * Gets the tabletop.
      *
-     * @return PlayArea where cards for this field are in play
+     * @return PlayArea where cards for this command are in play
      */
     public PlayArea getTabletop() {
         return this.tabletop;

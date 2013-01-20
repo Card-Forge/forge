@@ -1,0 +1,15 @@
+Name:The Great Forest
+ManaCost:no cost
+Types:Plane Lorwyn
+Text:no text
+S:Mode$ Continuous |  EffectZone$ Command | GlobalRule$ Each creature assigns combat damage equal to its toughness rather than its power. | Description$ Each creature assigns combat damage equal to its toughness rather than its power.
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos,creatures you control get +0/+2 and gain trample until end of turn.
+SVar:RolledChaos:AB$ PumpAll | Cost$ 0 | ValidCards$ Creature.ActivePlayerCtrl | NumDef$ 2 | KW$ Trample
+T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ RolledWalk | Secondary$ True | TriggerDescription$ Whenever you roll Planeswalk, put this card on the bottom of its owner's planar deck face down, then move the top card of your planar deck off that planar deck and turn it face up
+SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
+A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
+SVar:X:Count$RolledThisTurn
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/the_great_forest.jpg
+SetInfo:HOP|Common|http://magiccards.info/extras/plane/planechase/the-great-forest.jpg
+End
