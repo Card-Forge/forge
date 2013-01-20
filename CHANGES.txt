@@ -78,6 +78,11 @@ Fixes/Features:
 - merging r18995-r19086 from Trunk into GTC branch
 - Computer and human flashback zones were mixed up
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixing CC of Crosswinds
+- a correct handling lotus bloom and its suspension
+- removed duplicate in GameAction
+- fixes crash when Rupture Spire ETB
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
