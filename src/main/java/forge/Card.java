@@ -7194,15 +7194,13 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!this.isInZone(realZone)) {
                 return false;
             }
+        } else if (property.equals("ChosenType")) {
+            if (!this.isType(source.getChosenType())) {
+                return false;
+            }
         } else {
-            if (property.equals("ChosenType")) {
-                if (!this.isType(source.getChosenType())) {
-                    return false;
-                }
-            } else {
-                if (!this.isType(property)) {
-                    return false;
-                }
+            if (!this.isType(property)) {
+                return false;
             }
         }
         return true;

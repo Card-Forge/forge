@@ -23,9 +23,11 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang.math.IntRange;
 
+import forge.Singletons;
 import forge.card.CardCoreType;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.properties.ForgePreferences.FPref;
 import forge.util.Aggregates;
 
 /**
@@ -109,6 +111,11 @@ public enum DeckFormat {
 
     @SuppressWarnings("incomplete-switch")
     public String getDeckConformanceProblem(Deck deck) {
+        // That's really a bad dependence
+        if (!Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
+            return null;
+        }
+
         int deckSize = deck.getMain().countAll();
 
         int min = getMainRange().getMinimumInteger();

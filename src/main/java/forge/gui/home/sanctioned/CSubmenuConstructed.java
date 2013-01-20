@@ -98,12 +98,10 @@ public enum CSubmenuConstructed implements ICDoc {
     private void startGame(final GameType gameType) {
         Deck humanDeck = VSubmenuConstructed.SINGLETON_INSTANCE.getDcHuman().getDeck();
 
-        if (Singletons.getModel().getPreferences().getPrefBoolean(FPref.ENFORCE_DECK_LEGALITY)) {
-            String errorMessage = gameType.getDecksFormat().getDeckConformanceProblem(humanDeck);
-            if (null != errorMessage) {
-                JOptionPane.showMessageDialog(null, "Your deck " + errorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
+        String errorMessage = gameType.getDecksFormat().getDeckConformanceProblem(humanDeck);
+        if (null != errorMessage) {
+            JOptionPane.showMessageDialog(null, "Your deck " + errorMessage, "Invalid deck", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
         SwingUtilities.invokeLater(new Runnable() {
