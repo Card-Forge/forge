@@ -62,6 +62,8 @@ public class InputPayManaCostUtil {
         if (card.getController().isComputer()) {
             return manaCost;
         }
+        
+        Player payer = Singletons.getControl().getPlayer();
 
         final StringBuilder cneeded = new StringBuilder();
         final StringBuilder colorRequired = new StringBuilder();
@@ -82,7 +84,7 @@ public class InputPayManaCostUtil {
         // you can't remove unneeded abilities inside a for(am:abilities) loop :(
 
         for (SpellAbility ma : card.getManaAbility()) {
-            ma.setActivatingPlayer(Singletons.getControl().getPlayer());
+            ma.setActivatingPlayer(payer);
             AbilityManaPart m = null;
             SpellAbility tail = ma;
             while(m == null && tail != null)
@@ -210,7 +212,7 @@ public class InputPayManaCostUtil {
         // save off color needed for use by any mana and reflected mana
         subchosen.getManaPart().setExpressChoice(colorsNeeded);
         
-        Player p = sa.getActivatingPlayer();
+        Player p = chosen.getActivatingPlayer();
         Singletons.getModel().getGame().getAction().playSpellAbility(chosen, p);
 
         manaCost = p.getManaPool().payManaFromAbility(sa, manaCost, chosen);
