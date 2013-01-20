@@ -62,6 +62,9 @@ public enum CSubmenuChallenges implements ICDoc {
                 new Command() {
                     @Override
                     public void execute() {
+                        if (!SSubmenuQuestUtil.checkActiveQuest("Launch a Zeppelin.")) {
+                            return;
+                        }
                         Singletons.getModel().getQuest().getAchievements().setCurrentChallenges(null);
                         Singletons.getModel().getQuest().getAssets().setItemLevel(QuestItemType.ZEPPELIN, 2);
                         update();

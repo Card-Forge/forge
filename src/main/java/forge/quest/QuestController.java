@@ -199,15 +199,6 @@ public class QuestController {
     }
 
     /**
-     * TODO: Write javadoc for this method.
-     *
-     * @return true, if is loaded
-     */
-    public boolean isLoaded() {
-        return false;
-    }
-
-    /**
      * New game.
      *
      * @param name the name

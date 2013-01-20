@@ -234,8 +234,22 @@ public class SSubmenuQuestUtil {
         SSubmenuQuestUtil.event = event0;
     }
 
+    public static boolean checkActiveQuest(String location) {
+        QuestController qc = Singletons.getModel().getQuest();
+        if (qc == null || qc.getAssets() == null) {
+            String msg = "Please create a Quest before attempting to " + location;
+            JOptionPane.showMessageDialog(null, msg, "No Quest", JOptionPane.ERROR_MESSAGE);
+            System.out.println(msg);
+            return false;
+        }
+        return true;
+    }
+    
     /** */
     public static void showSpellShop() {
+        if (!checkActiveQuest("visit the Spell Shop.")) {
+            return;
+        }
         CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(
                 new CEditorQuestCardShop(Singletons.getModel().getQuest()));
         FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_QUEST);
@@ -243,12 +257,18 @@ public class SSubmenuQuestUtil {
 
     /** */
     public static void showBazaar() {
+        if (!checkActiveQuest("Visit the Bazzar.")) {
+            return;
+        }
         Singletons.getControl().changeState(FControl.QUEST_BAZAAR);
         Singletons.getView().getFrame().validate();
     }
 
     /** */
     public static void chooseAndUnlockEdition() {
+        if (!checkActiveQuest("Unlock Editions.")) {
+            return;
+        }
         final QuestController qData = Singletons.getModel().getQuest();
         ImmutablePair<CardEdition, Integer> toUnlock = QuestUtilUnlockSets.chooseSetToUnlock(qData, false, null);
         if (toUnlock == null) {
@@ -266,7 +286,9 @@ public class SSubmenuQuestUtil {
 
     /** */
     public static void travelWorld() {
-
+        if (!checkActiveQuest("Travel between worlds.")) {
+            return;
+        }
         List<QuestWorld> worlds = new ArrayList<QuestWorld>();
         final QuestController qCtrl = Singletons.getModel().getQuest();
 
@@ -328,6 +350,9 @@ public class SSubmenuQuestUtil {
 
     /** */
     public static void startGame() {
+        if (!checkActiveQuest("Start a duel.")) {
+            return;
+        }
         final QuestController qData = Singletons.getModel().getQuest();
 
         Deck deck = SSubmenuQuestUtil.getCurrentDeck();
