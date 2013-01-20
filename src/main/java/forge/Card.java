@@ -344,6 +344,10 @@ public class Card extends GameEntity implements Comparable<Card> {
         this.characteristicsMap.remove(state);
     }
 
+    public void setPreFaceDownCharacteristic(CardCharacteristicName preCharacteristic) {
+        this.preTFDCharacteristic = preCharacteristic;
+    }
+    
     /**
      * Turn face down.
      * 

@@ -858,7 +858,8 @@ public class CardFactoryUtil {
 
             @Override
             public void resolve() {
-                Singletons.getModel().getGame().getAction().moveToPlay(sourceCard);
+                Card c = Singletons.getModel().getGame().getAction().moveToPlay(sourceCard);
+                c.setPreFaceDownCharacteristic(CardCharacteristicName.Original);
             }
 
             @Override
