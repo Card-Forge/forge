@@ -760,6 +760,10 @@ public class CombatUtil {
         if (attacker.hasKeyword("CARDNAME can't be blocked except by black creatures.") && !blocker.isBlack()) {
             return false;
         }
+        
+        if (attacker.hasKeyword("CARDNAME can't be blocked by creature tokens.") && blocker.isToken()) {
+            return false;
+        }        
 
         return true;
     } // canBlock()

@@ -80,6 +80,9 @@ public class GuiChoose {
     }
 
     public static <T> T one(final String message, final Collection<T> choices) {
+        if ((choices == null) || (choices.size() == 0)) {
+            return null;
+        }
         final List<T> choice = GuiChoose.getChoices(message, 1, 1, choices);
         assert choice.size() == 1;
         return choice.get(0);
