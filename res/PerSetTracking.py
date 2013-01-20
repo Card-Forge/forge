@@ -76,17 +76,15 @@ allMissing = set()
 allImplemented = set()
 total = 0
 percentage = 0
+
+ignoredSet = [ 'ASTRAL', 'ATH', 'BD', 'BR', 'DD2', 'DDC', 'DDD', 'DDE', 'DDF',
+	'DDG', 'DDH', 'DDI', 'DDJ', 'DKM', 'DRB', 'EVG', 'H09', 'ME2',
+	'ME3', 'ME4', 'MED', 'PD2', 'PD3', 'SDC', 'UGL', 'UNH', 
+	'V09', 'V10', 'V11', 'V12',]
+
 for currentSet in setCodes :
-	if currentSet == 'UNH' or currentSet == 'UGL' : continue #skip Unhinged and Unglued since they are only counting basic lands anyway
-	if currentSet == 'VG1' or currentSet == 'VG2' or currentSet == 'VG3' : continue
-	if currentSet == 'VG4' or currentSet == 'VGO' or currentSet == 'VG ' : continue
-	if currentSet == 'FVD' or currentSet == 'FVE' or currentSet == 'FVR' : continue
-	if currentSet == 'SDC' or currentSet == 'AST' or currentSet == 'DKM' : continue
-	if currentSet == 'BTD' or currentSet == 'COM' : continue
-	#if currentSet == 'CHR' or currentSet == 'MED' or currentSet == 'H09' : continue
-	if currentSet == 'ME2' or currentSet == 'ME3' or currentSet == 'ME4' : continue
-	if currentSet == 'ATH' or currentSet == 'HOP' or currentSet == 'BRB' : continue
-	if currentSet == 'EVG' or currentSet == 'GVL' or currentSet == 'JVC' : continue
+	# Ignore the following sets for tab calculation
+	if currentSet in ignoredSet: continue
 	for key in mtgDataCards.keys() :
 		setList = mtgDataCards[key]
 		if currentSet in setList:
