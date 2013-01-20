@@ -1847,28 +1847,12 @@ public class GameAction {
     public static SpellAbility chooseOptionalAdditionalCosts(final SpellAbility original) {
         final HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
         final ArrayList<SpellAbility> abilities = GameActionUtil.getOptionalAdditionalCosts(original);
-        final ArrayList<String> choices = new ArrayList<String>();
         final Player human = Singletons.getControl().getPlayer();
         if (!original.isSpell()) {
             return original;
         }
 
-        for (final SpellAbility sa : abilities) {
-            sa.setActivatingPlayer(human);
-            choices.add(sa.toString());
-            map.put(sa.toString(), sa);
-        }
-
-        String choice;
-        if (choices.isEmpty()) {
-            return null;
-        } else if (choices.size() == 1) {
-            choice = choices.get(0);
-        } else {
-            choice = GuiChoose.oneOrNone("Choose", choices);
-        }
-        final SpellAbility ability = map.get(choice);
-
+        final SpellAbility ability = human.getController().getAbilityToPlay(abilities);
         return ability;
     }
 

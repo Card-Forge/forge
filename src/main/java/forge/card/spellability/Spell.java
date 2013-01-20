@@ -108,7 +108,7 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
             return false;
         }
         // for uncastables like lotus bloom, check if manaCost is blank
-        if (isBasicSpell() && getManaCost().equals("")) {
+        if (isBasicSpell() && getManaCost().isNoCost()) {
             return false;
         }
 
