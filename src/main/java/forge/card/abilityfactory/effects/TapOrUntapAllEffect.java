@@ -5,10 +5,12 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
+import forge.CardLists;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 
@@ -42,10 +44,16 @@ public class TapOrUntapAllEffect extends SpellEffect {
     @Override
     public void resolve(SpellAbility sa) {
         List<Card> validCards = getTargetCards(sa);
+        
+        List<Player> targetedPlayers = getTargetPlayersEmptyAsDefault(sa);
 
         if (sa.hasParam("ValidCards")) {
             validCards = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
             validCards = AbilityFactory.filterListByType(validCards, sa.getParam("ValidCards"), sa);
+        }
+        
+        if (!targetedPlayers.isEmpty()) {
+            validCards = CardLists.filterControlledBy(validCards, targetedPlayers);
         }
 
         // Default to tapping for AI
