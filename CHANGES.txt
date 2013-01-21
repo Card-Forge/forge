@@ -83,11 +83,48 @@ Fixes/Features:
 - removed duplicate in GameAction
 - fixes crash when Rupture Spire ETB
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Removed an in-play card that could cause problems in a Jamuraa challenge.
+- Updating PerSetTracking.py to ignore specific sets
+- Some improvements to the structure of PerSetTracking.py 
+- Stats about Standard Format printed, similar to Distinct
+- Cloud key giving unsuitable options (http://www.slightlymagic.net/forum/viewtopic.php?p=107918)
+- Fixing issue with Mana Abilities and Undoable timing
+- Convert Undiscovered Paradise to script
+- Initial Planechase commit
+- Deck format checkbox also disables checks for limited and quest modes
+- Added can't be blocked by creature token keyword. Made mandatory choice box return null is choice list is null or empty.
+- Fix for AI demorphing creatures by Making sure preTFD is set properly when Morph spell resolves
+- NPE checks for fresh Forge install with no quests created
+- Fix for Turnabout
+- NOTE Apparently the "TargetedPlayerCtrl" property doesn't actually work. It seems like 14 other scripts use this property
+- Activating player is not always the player revealing cards. Added parameter to set number of cards to reveal.
+- Modified encode effect to require a creature under activator's control before exile choice.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
 
+
+
+Added the following Planes:
+
+Academy at Tolaria West
+Fields of Summer
+Goldmeadow
+Krosa
+Lethe Lake
+Llanowar
+Panopticon
+Raven's Run
+The Fourth Sphere
+The Great Forest
+The Hippodrome
+
+
+Added the following Phenomenons:
+
+Mutual Epiphany
 
 
 Added the following cards:
@@ -180,6 +217,27 @@ Firefist Striker
 Thrull Parasite
 Gruul Charm
 Merciless Eviction
+Ground Assault
+Truefire Paladin
+Diluvian Primordial
+Legion Loyalist
+Lord of the Void
+Luminate Primordial
+Molten Primordial
+Murder Investigation
+Ogre Slumlord
+Sepulchral Primordial
+Undercity Informer
+Biovisionary
+Vizkopa Confessor
+Gruul Ragebeast
+Gyre Sage
+Slaughterhorn
+Zameck Guildmage
+Duskmantle Seer
+Miming Slime
+Serene Remembrance
+Unexpected Results
 
 
 end
