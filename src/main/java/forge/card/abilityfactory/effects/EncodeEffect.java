@@ -34,6 +34,14 @@ public class EncodeEffect extends SpellEffect {
         final Card host = sa.getSourceCard();
         final Player player = sa.getActivatingPlayer();
 
+        // make list of creatures that controller has on Battlefield
+        List<Card> choices = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
+        choices = CardLists.getValidCards(choices, "Creature.YouCtrl", host.getController(), host);
+
+        // if no creatures on battlefield, cannot encoded
+        if (choices.size() == 0) {
+
+        }
         // Handle choice of whether or not to encoded
         final StringBuilder sb = new StringBuilder();
         sb.append("Do you want to exile " + host + " and encode it onto a creature you control?");
@@ -41,14 +49,13 @@ public class EncodeEffect extends SpellEffect {
                 && !GameActionUtil.showYesNoDialog(host, sb.toString())) {
             return;
         }
-        // TODO add AI choice here
+        // Note: AI will always choose to encode
+        // TODO add better AI choice here
 
         // move host card to exile
         Card movedCard = Singletons.getModel().getGame().getAction().moveTo(ZoneType.Exile, host);
 
         // choose a creature
-        List<Card> choices = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
-        choices = CardLists.getValidCards(choices, "Creature.YouCtrl", host.getController(), host);
         Card choice = null;
         if (player.isHuman()) {
             final String choiceTitle = "Choose a creature you control to encode ";
