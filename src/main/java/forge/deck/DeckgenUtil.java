@@ -29,6 +29,7 @@ import forge.quest.QuestEvent;
 import forge.quest.QuestEventManager;
 import forge.util.Aggregates;
 import forge.util.IStorage;
+import forge.util.MyRandom;
 
 /** 
  * Utility collection for various types of decks.
@@ -326,6 +327,41 @@ public class DeckgenUtil {
                 schemesToAdd--;
             } else {
                 attemptsLeft--;
+            }
+        }
+
+        return res;
+    }
+    
+    public static Deck generatePlanarDeck() {
+        Deck res = new Deck();
+        List<CardPrinted> allPlanars = new ArrayList<CardPrinted>();
+        for (CardPrinted c : CardDb.instance().getAllNonTraditionalCards()) {
+            if (c.getCard().getType().isPlane() || c.getCard().getType().isPhenomenon()) {
+                allPlanars.add(c);
+            }
+        }
+
+        int phenoms = 0;
+        int targetsize = MyRandom.getRandom().nextInt(allPlanars.size()-10)+10;
+        while(true)
+        {
+            CardPrinted rndPlane = Aggregates.random(allPlanars);
+            allPlanars.remove(rndPlane);
+            
+            if(rndPlane.getCard().getType().isPhenomenon() && phenoms < 2)
+            {
+                res.getSideboard().add(rndPlane);
+                phenoms++;
+            }
+            else if (rndPlane.getCard().getType().isPlane())
+            {
+                res.getSideboard().add(rndPlane);
+            }
+            
+            if(allPlanars.isEmpty() || res.getSideboard().countAll() == targetsize)
+            {
+                break;
             }
         }
 

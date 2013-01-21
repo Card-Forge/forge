@@ -31,6 +31,7 @@ import forge.gui.toolbox.FDeckChooser;
 import forge.item.CardPrinted;
 import forge.properties.ForgePreferences;
 import forge.properties.ForgePreferences.FPref;
+import forge.util.Aggregates;
 
 /** 
  * Controls the constructed submenu in the home UI.
@@ -164,12 +165,19 @@ public enum CSubmenuPlanechase implements ICDoc {
                         if (obj instanceof String) {
                             String sel = (String) obj;
                             if (sel.equals("Random")) {
-    
-                                planes = Iterables.get(view.getAllPlanarDecks(), rnd.nextInt(Iterables.size(view.getAllPlanarDecks()))).getSideboard().toFlatList();
+                                if (view.getAllPlanarDecks().isEmpty()) {
+                                    //Generate if no constructed scheme decks are available
+                                    System.out.println("Generating planar deck - no others available");
+                                    planes = DeckgenUtil.generatePlanarDeck().getSideboard().toFlatList();
+                                } else {
+                                    System.out.println("Using planar deck: " + Aggregates.random(view.getAllPlanarDecks()).getName());
+                                    planes = Aggregates.random(view.getAllPlanarDecks()).getSideboard().toFlatList();
+                                }
+                                
                             } else {
     
                                 //Generate
-                                planes = DeckgenUtil.generateSchemeDeck().getSideboard().toFlatList();
+                                planes = DeckgenUtil.generatePlanarDeck().getSideboard().toFlatList();
                             }
                         } else {
                             planes = ((Deck) obj).getSideboard().toFlatList();

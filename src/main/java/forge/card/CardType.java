@@ -338,4 +338,20 @@ public final class CardType implements Comparable<CardType> {
 
         return false;
     }
+
+    /**
+     * Returns wether or not this card is a Plane.
+     * @return a boolean
+     */
+    public boolean isPlane() {
+        return this.coreType.contains(CardCoreType.Plane);
+    }
+    
+    /**
+     * Returns wether or not this card is a Phenomenon.
+     * @return a boolean
+     */
+    public boolean isPhenomenon() {
+        return this.coreType.contains(CardCoreType.Phenomenon);
+    }
 }
