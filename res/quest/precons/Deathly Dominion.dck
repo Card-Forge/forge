@@ -7,7 +7,7 @@ MaxDifficulty=5
 Name=Deathly Dominion
 Description=While playing the "Deathly Dominion" deck, you'll delve deep into the dark arts to harness the fearsome powers of death. Even killing your own creatures can work to your advantage! When death itself is on your side, who can stand in your way?
 Deck Type=constructed
-Set=INS
+Set=ISD
 Image=deathly_dominion.jpg
 [main]
 1 Prey Upon|ISD
