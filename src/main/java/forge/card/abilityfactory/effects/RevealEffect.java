@@ -6,6 +6,7 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.CardUtil;
+import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
@@ -38,8 +39,13 @@ public class RevealEffect extends RevealEffectBase {
                         if (sa.hasParam("AnyNumber")) {
                             max = valid.size();
                         }
-                        revealed.addAll(getRevealedList(sa.getActivatingPlayer(), valid, max, anyNumber));
-                        if (sa.getActivatingPlayer().isComputer()) {
+                        else if (sa.hasParam("NumCards")) {
+                            max = Math.min(valid.size(), AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumCards"), sa));
+                        }
+                        //revealed.addAll(getRevealedList(sa.getActivatingPlayer(), valid, max, anyNumber));
+                        revealed.addAll(getRevealedList(p, valid, max, anyNumber));
+                        //if (sa.getActivatingPlayer().isComputer()) {
+                        if (p.isComputer()) {
                             GuiChoose.oneOrNone("Revealed card(s)", revealed);
                         }
                     }
