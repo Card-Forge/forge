@@ -88,7 +88,7 @@ public class DiscardEffect extends RevealEffectBase {
     public void resolve(SpellAbility sa) {
         final Card source = sa.getSourceCard();
         final String mode = sa.getParam("Mode");
-        final boolean anyNumber = sa.hasParam("AnyNumber");
+        //final boolean anyNumber = sa.hasParam("AnyNumber");
 
         final Target tgt = sa.getTarget();
 

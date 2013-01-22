@@ -4,17 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
-
-import com.google.common.collect.Iterables;
 
 import forge.Command;
 import forge.GameActionUtil;
 import forge.Singletons;
-import forge.control.FControl;
 import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.deck.DeckgenUtil;
@@ -24,8 +19,6 @@ import forge.game.MatchStartHelper;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.PlayerType;
 import forge.gui.SOverlayUtils;
-import forge.gui.deckeditor.CDeckEditorUI;
-import forge.gui.deckeditor.controllers.CEditorScheme;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FDeckChooser;
 import forge.item.CardPrinted;
@@ -60,6 +53,8 @@ public enum CSubmenuPlanechase implements ICDoc {
     public void initialize() {
 
         VSubmenuPlanechase.SINGLETON_INSTANCE.getLblEditor().setCommand(new Command() {
+            private static final long serialVersionUID = -5279533218897076308L;
+
             @Override
             public void execute() {
                 //TODO:Enter Planar deck editor here!
@@ -129,7 +124,6 @@ public enum CSubmenuPlanechase implements ICDoc {
         final SwingWorker<Object, Void> worker = new SwingWorker<Object, Void>() {
             @Override
             public Object doInBackground() {
-                Random rnd = new Random();
 
                 boolean usedDefaults = false;
 

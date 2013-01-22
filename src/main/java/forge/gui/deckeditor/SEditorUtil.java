@@ -149,7 +149,9 @@ public final class SEditorUtil  {
         VCurrentDeck.SINGLETON_INSTANCE.getLblTitle().setText("Title:");
 
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnSave())
-            .setCommand(new Command() { @Override
+            .setCommand(new Command() { private static final long serialVersionUID = -7995834050136126035L;
+
+            @Override
                 public void execute() { SEditorIO.saveDeck(); } });
     }
 }

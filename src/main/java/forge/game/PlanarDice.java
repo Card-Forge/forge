@@ -1,8 +1,6 @@
 package forge.game;
 
 import java.util.HashMap;
-import java.util.TreeMap;
-
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
 import forge.game.player.Player;

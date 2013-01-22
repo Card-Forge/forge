@@ -56,6 +56,8 @@ public enum CSubmenuArchenemy implements ICDoc {
     public void initialize() {
 
         VSubmenuArchenemy.SINGLETON_INSTANCE.getLblEditor().setCommand(new Command() {
+            private static final long serialVersionUID = -4548064747843903896L;
+
             @Override
             public void execute() {
                 CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(new CEditorScheme());

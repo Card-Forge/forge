@@ -31,7 +31,6 @@ import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
-import forge.card.trigger.TriggerType;
 import forge.game.GameState;
 import forge.game.GameType;
 import forge.game.player.ComputerUtil;

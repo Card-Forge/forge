@@ -1845,7 +1845,7 @@ public class GameAction {
      * @return an ArrayList<SpellAbility>.
      */
     public static SpellAbility chooseOptionalAdditionalCosts(final SpellAbility original) {
-        final HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
+        //final HashMap<String, SpellAbility> map = new HashMap<String, SpellAbility>();
         final ArrayList<SpellAbility> abilities = GameActionUtil.getOptionalAdditionalCosts(original);
         final Player human = Singletons.getControl().getPlayer();
         if (!original.isSpell()) {

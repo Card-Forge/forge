@@ -38,7 +38,6 @@ import forge.Singletons;
 import forge.control.FControl;
 import forge.gui.match.controllers.CDock;
 import forge.gui.match.nonsingleton.CField;
-import forge.gui.match.nonsingleton.VField;
 import forge.gui.toolbox.FSkin;
 import forge.view.FView;
 import forge.view.arcane.CardPanel;
@@ -79,7 +78,7 @@ public enum TargetingOverlay {
         arcs.clear();
         cardPanels.clear();
 
-        List<VField> fields = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
+        //List<VField> fields = VMatchUI.SINGLETON_INSTANCE.getFieldViews();
 
         switch (CDock.SINGLETON_INSTANCE.getArcState()) {
             case 0:
@@ -104,7 +103,7 @@ public enum TargetingOverlay {
                 }
         }
 
-        final Point docOffsets = FView.SINGLETON_INSTANCE.getLpnDocument().getLocationOnScreen();
+        //final Point docOffsets = FView.SINGLETON_INSTANCE.getLpnDocument().getLocationOnScreen();
         // Locations of arc endpoint, per card, with ID as primary key.
         final Map<Integer, Point> endpoints = new HashMap<Integer, Point>();
 

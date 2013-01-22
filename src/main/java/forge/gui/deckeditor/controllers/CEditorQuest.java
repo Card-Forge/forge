@@ -258,7 +258,9 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard().setVisible(true);
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard())
-            .setCommand(new Command() { @Override
+            .setCommand(new Command() { private static final long serialVersionUID = -1177583666770872667L;
+
+            @Override
                 public void execute() {
                     sideboardMode = !sideboardMode;
                     switchEditorMode(sideboardMode);

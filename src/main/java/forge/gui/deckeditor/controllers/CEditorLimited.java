@@ -158,7 +158,9 @@ public final class CEditorLimited extends ACEditorBase<CardPrinted, DeckGroup> {
         VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(false);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSave().setVisible(true);
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnSave())
-            .setCommand(new Command() { @Override
+            .setCommand(new Command() { private static final long serialVersionUID = -51755892076058261L;
+
+            @Override
                 public void execute() { SEditorIO.saveDeck(true); } });
         VCurrentDeck.SINGLETON_INSTANCE.getBtnSaveAs().setVisible(false);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnNew().setVisible(false);
