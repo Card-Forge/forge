@@ -22,6 +22,7 @@ import forge.card.cost.CostPart;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
+import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -50,6 +51,7 @@ public class PlayEffect extends SpellEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
+        final GameState game = Singletons.getModel().getGame();
         final Card source = sa.getSourceCard();
         Player activator = sa.getActivatingPlayer();
         boolean optional = sa.hasParam("Optional");
@@ -73,7 +75,7 @@ public class PlayEffect extends SpellEffect {
             if (sa.hasParam("ValidZone")) {
                 zone = ZoneType.smartValueOf(sa.getParam("ValidZone"));
             }
-            tgtCards = Singletons.getModel().getGame().getCardsIn(zone);
+            tgtCards = game.getCardsIn(zone);
             tgtCards = AbilityFactory.filterListByType(tgtCards, sa.getParam("Valid"), sa);
         }
         else if (sa.hasParam("Encoded")) {
@@ -217,7 +219,7 @@ public class PlayEffect extends SpellEffect {
                     newSA.setPayCosts(cost);
                     newSA.setManaCost(SpellManaCost.NO_COST);
                     newSA.setDescription(newSA.getDescription() + " (without paying its mana cost)");
-                    Singletons.getModel().getGame().getAction().playSpellAbility(newSA, activator);
+                    game.getAction().playSpellAbility(newSA, activator);
                     if (remember) {
                         source.addRemembered(tgtSA.getSourceCard());
                     }
@@ -225,7 +227,7 @@ public class PlayEffect extends SpellEffect {
                     if (tgtSA instanceof Spell) {
                         Spell spell = (Spell) tgtSA;
                         if (spell.canPlayFromEffectAI(!optional, true) || !optional) {
-                            ComputerUtil.playSpellAbilityWithoutPayingManaCost(controller, tgtSA);
+                            ComputerUtil.playSpellAbilityWithoutPayingManaCost(controller, tgtSA, game);
                             if (remember) {
                                 source.addRemembered(tgtSA.getSourceCard());
                             }
@@ -234,7 +236,7 @@ public class PlayEffect extends SpellEffect {
                 }
             } else {
                 if (controller.isHuman()) {
-                    Singletons.getModel().getGame().getAction().playSpellAbility(tgtSA, activator);
+                    game.getAction().playSpellAbility(tgtSA, activator);
                     if (remember) {
                         source.addRemembered(tgtSA.getSourceCard());
                     }
@@ -242,7 +244,7 @@ public class PlayEffect extends SpellEffect {
                     if (tgtSA instanceof Spell) {
                         Spell spell = (Spell) tgtSA;
                         if (spell.canPlayFromEffectAI(!optional, false) || !optional) {
-                            ComputerUtil.playStack(tgtSA, controller);
+                            ComputerUtil.playStack(tgtSA, controller, game);
                             if (remember) {
                                 source.addRemembered(tgtSA.getSourceCard());
                             }

@@ -55,6 +55,7 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
+import forge.game.GameState;
 import forge.game.GlobalRuleChange;
 import forge.game.player.ComputerUtil;
 import forge.game.player.ComputerUtilBlock;
@@ -2706,11 +2707,12 @@ public class CombatUtil {
      */
     public static void checkPropagandaEffects(final Card c, final boolean bLast) {
         Cost attackCost = new Cost(c, "0", true);
+        final GameState game = Singletons.getModel().getGame();
         // Sort abilities to apply them in proper order
         for (Card card : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
             final ArrayList<StaticAbility> staticAbilities = card.getStaticAbilities();
             for (final StaticAbility stAb : staticAbilities) {
-                Cost additionalCost = stAb.getCostAbility("CantAttackUnless", c, Singletons.getModel().getGame().getCombat().getDefenderByAttacker(c));
+                Cost additionalCost = stAb.getCostAbility("CantAttackUnless", c, game.getCombat().getDefenderByAttacker(c));
                 attackCost = CostUtil.combineCosts(attackCost, additionalCost);
             }
         }
@@ -2727,7 +2729,8 @@ public class CombatUtil {
 
         final Card crd = c;
 
-        final PhaseType phase = Singletons.getModel().getGame().getPhaseHandler().getPhase();
+        
+        final PhaseType phase = game.getPhaseHandler().getPhase();
 
         if (phase == PhaseType.COMBAT_DECLARE_ATTACKERS || phase == PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY) {
             final Ability ability = new AbilityStatic(c, attackCost, null) {
@@ -2743,7 +2746,7 @@ public class CombatUtil {
 
                 @Override
                 public void execute() {
-                    Singletons.getModel().getGame().getCombat().removeFromCombat(crd);
+                    game.getCombat().removeFromCombat(crd);
 
                     if (bLast) {
                         PhaseUtil.handleAttackingTriggers();
@@ -2768,17 +2771,17 @@ public class CombatUtil {
             };
 
             if (c.getController().isHuman()) {
-                GameActionUtil.payCostDuringAbilityResolve(ability, attackCost, paidCommand, unpaidCommand, null);
+                GameActionUtil.payCostDuringAbilityResolve(ability, attackCost, paidCommand, unpaidCommand, null, game);
             } else { // computer
                 if (ComputerUtil.canPayCost(ability, c.getController())) {
-                    ComputerUtil.playNoStack(c.getController(), ability);
+                    ComputerUtil.playNoStack(c.getController(), ability, game);
                     if (!crd.hasKeyword("Vigilance")) {
                         crd.tap();
                     }
                 } else {
                     // TODO remove the below line after Propaganda occurs
                     // during Declare_Attackers
-                    Singletons.getModel().getGame().getCombat().removeFromCombat(crd);
+                    game.getCombat().removeFromCombat(crd);
                 }
                 if (bLast) {
                     PhaseUtil.handleAttackingTriggers();

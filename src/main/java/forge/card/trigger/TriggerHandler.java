@@ -546,7 +546,7 @@ public class TriggerHandler {
                 game.getAction().playSpellAbilityNoStack(wrapperAbility, false);
             } else {
                 wrapperAbility.doTrigger(isMandatory);
-                ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility);
+                ComputerUtil.playNoStack(wrapperAbility.getActivatingPlayer(), wrapperAbility, game);
             }
         } else {
             game.getStack().addSimultaneousStackEntry(wrapperAbility);

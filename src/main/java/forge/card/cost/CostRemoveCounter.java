@@ -28,6 +28,7 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -97,14 +98,15 @@ public class CostRemoveCounter extends CostPartWithList {
      */
     public CostRemoveCounter(final String amount, final CounterType counter, final String type, final String description, ZoneType zone) {
         super(amount, type, description);
-        this.setReusable(true);
 
         this.counter = counter;
-        this.setType(type);
-        this.setTypeDescription(description);
         this.setZone(zone);
     }
 
+    @Override
+    public boolean isReusable() { return true; }
+
+    
     /*
      * (non-Javadoc)
      * 
@@ -126,7 +128,7 @@ public class CostRemoveCounter extends CostPartWithList {
 
             sb.append(" from ");
 
-            if (this.getThis()) {
+            if (this.isTargetingThis()) {
                 sb.append(this.getType());
             } else {
                 final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
@@ -156,11 +158,11 @@ public class CostRemoveCounter extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
+    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
         final CounterType cntrs = this.getCounter();
 
         final Integer amount = this.convertAmount();
-        if (this.getThis()) {
+        if (this.isTargetingThis()) {
             if ((amount != null) && ((source.getCounters(cntrs) - amount) < 0)) {
                 return false;
             }
@@ -187,7 +189,7 @@ public class CostRemoveCounter extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         if (c == null) {
@@ -198,7 +200,7 @@ public class CostRemoveCounter extends CostPartWithList {
             }
         }
 
-        if (this.getThis()) {
+        if (this.isTargetingThis()) {
             source.subtractCounter(this.counter, c);
         } else {
             for (final Card card : this.getList()) {
@@ -216,12 +218,12 @@ public class CostRemoveCounter extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         int maxCounters = 0;
 
-        if (!this.getThis()) {
+        if (!this.isTargetingThis()) {
             if (this.getZone().equals(ZoneType.Battlefield)) {
                 final Input inp = CostRemoveCounter.removeCounterType(ability, this.getType(), payment, this, c);
                 Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
@@ -287,7 +289,7 @@ public class CostRemoveCounter extends CostPartWithList {
             }
         }
 
-        if (!this.getThis()) {
+        if (!this.isTargetingThis()) {
             this.getList().clear();
             final List<Card> typeList =
                     CardLists.getValidCards(ai.getCardsIn(this.getZone()), this.getType().split(";"), ai, source);

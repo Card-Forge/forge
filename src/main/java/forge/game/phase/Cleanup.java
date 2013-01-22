@@ -17,6 +17,8 @@
  */
 package forge.game.phase;
 
+import forge.game.GameState;
+
 /**
  * <p>
  * Handles "until your next turn" effects and Cleanup hardcoded triggers.
@@ -26,7 +28,10 @@ package forge.game.phase;
  */
 public class Cleanup extends Phase {
 
+    
     /** Constant <code>serialVersionUID=-6993476643509826990L</code>. */
     private static final long serialVersionUID = -6993476643509826990L;
 
+    public Cleanup(final GameState game) { super(game); }
+    
 } // end class Cleanup

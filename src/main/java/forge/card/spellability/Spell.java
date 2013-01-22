@@ -29,6 +29,7 @@ import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.staticability.StaticAbility;
 import forge.error.ErrorViewer;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Expressions;
@@ -86,7 +87,8 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
     /** {@inheritDoc} */
     @Override
     public boolean canPlay() {
-        if (Singletons.getModel().getGame().getStack().isSplitSecondOnStack()) {
+        final GameState game = Singletons.getModel().getGame();
+        if (game.getStack().isSplitSecondOnStack()) {
             return false;
         }
 
@@ -113,13 +115,13 @@ public abstract class Spell extends SpellAbility implements java.io.Serializable
         }
 
         if (this.getPayCosts() != null) {
-            if (!CostPayment.canPayAdditionalCosts(this.getPayCosts(), this)) {
+            if (!CostPayment.canPayAdditionalCosts(game, this.getPayCosts(), this)) {
                 return false;
             }
         }
 
         // CantBeCast static abilities
-        final List<Card> allp = new ArrayList<Card>(Singletons.getModel().getGame().getCardsIn(ZoneType.listValueOf("Battlefield,Command")));
+        final List<Card> allp = new ArrayList<Card>(game.getCardsIn(ZoneType.listValueOf("Battlefield,Command")));
         allp.add(card);
         for (final Card ca : allp) {
             final ArrayList<StaticAbility> staticAbilities = ca.getStaticAbilities();

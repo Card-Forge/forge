@@ -33,6 +33,7 @@ import forge.GameEntity;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.control.input.Input;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -51,9 +52,12 @@ import forge.view.ButtonUtil;
  * @version $Id: Untap 12482 2011-12-06 11:14:11Z Sloth $
  */
 public class Untap extends Phase {
-
     private static final long serialVersionUID = 4515266331266259123L;
 
+    public Untap(final GameState game0) {
+        super(game0);
+    }
+    
     /**
      * <p>
      * Executes any hardcoded triggers that happen "at end of combat".
@@ -63,7 +67,7 @@ public class Untap extends Phase {
     public void executeAt() {
         this.execute(this.getAt());
 
-        final Player turn = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
+        final Player turn = game.getPhaseHandler().getPlayerTurn();
         Untap.doPhasing(turn);
 
         Untap.doUntap();

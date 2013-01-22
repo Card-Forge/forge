@@ -29,6 +29,7 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -68,7 +69,7 @@ public class CostReturn extends CostPartWithList {
         final Integer i = this.convertAmount();
         String pronoun = "its";
 
-        if (this.getThis()) {
+        if (this.isTargetingThis()) {
             sb.append(this.getType());
         } else {
             final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
@@ -90,24 +91,13 @@ public class CostReturn extends CostPartWithList {
     /*
      * (non-Javadoc)
      * 
-     * @see forge.card.cost.CostPart#refund(forge.Card)
-     */
-    @Override
-    public void refund(final Card source) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
      * @see
      * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
-        if (!this.getThis()) {
+    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
+        if (!this.isTargetingThis()) {
             List<Card> typeList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
             typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
 
@@ -129,7 +119,7 @@ public class CostReturn extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         for (final Card c : this.getList()) {
             Singletons.getModel().getGame().getAction().moveToHand(c);
         }
@@ -143,7 +133,7 @@ public class CostReturn extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
         final Player activator = ability.getActivatingPlayer();
@@ -157,7 +147,7 @@ public class CostReturn extends CostPartWithList {
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }
         }
-        if (this.getThis()) {
+        if (this.isTargetingThis()) {
             final Input inp = CostReturn.returnThis(ability, payment, this);
             Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
         } else {
@@ -177,7 +167,7 @@ public class CostReturn extends CostPartWithList {
     @Override
     public final boolean decideAIPayment(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         this.resetList();
-        if (this.getThis()) {
+        if (this.isTargetingThis()) {
             this.getList().add(source);
         } else {
             Integer c = this.convertAmount();

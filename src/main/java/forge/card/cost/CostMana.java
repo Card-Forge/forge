@@ -26,6 +26,7 @@ import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCost2;
 import forge.control.input.InputPayManaX;
+import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 
@@ -133,7 +134,13 @@ public class CostMana extends CostPart {
 
         return this.mana;
     }
+    
+    @Override
+    public boolean isReusable() { return true; }
 
+    @Override
+    public boolean isUndoable() { return true; }
+    
     /**
      * Instantiates a new cost mana.
      * 
@@ -146,8 +153,6 @@ public class CostMana extends CostPart {
     public CostMana(final String mana, final int amount, boolean xCantBe0) {
         this.mana = mana.trim();
         this.amountX = amount;
-        this.setUndoable(true);
-        this.setReusable(true);
         this.setxCantBe0(xCantBe0);
     }
 
@@ -170,23 +175,12 @@ public class CostMana extends CostPart {
     /*
      * (non-Javadoc)
      * 
-     * @see forge.card.cost.CostPart#refund(forge.Card)
-     */
-    @Override
-    public void refund(final Card source) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
      * @see
      * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
+    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
         // For now, this will always return true. But this should probably be
         // checked at some point
         return true;
@@ -199,7 +193,7 @@ public class CostMana extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         ComputerUtil.payManaCost(ai, ability);
     }
 
@@ -211,7 +205,7 @@ public class CostMana extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         int manaToAdd = 0;
         if (!this.hasNoXManaCost()) {
             // if X cost is a defined value, other than xPaid

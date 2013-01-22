@@ -17,6 +17,8 @@
  */
 package forge.game.phase;
 
+import forge.game.GameState;
+
 /**
  * <p>
  * Handles "until end of combat" effects and "at end of combat" hardcoded triggers.
@@ -30,4 +32,6 @@ public class EndOfCombat extends Phase {
     /** Constant <code>serialVersionUID=3035250030566186842L</code>. */
     private static final long serialVersionUID = 3035250030566186842L;
 
+    public EndOfCombat(final GameState game) { super(game); }
+    
 } // end class EndOfCombat

@@ -69,6 +69,7 @@ import forge.card.trigger.TriggerHandler;
 import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCostUtil;
+import forge.game.GameState;
 import forge.game.event.TokenCreatedEvent;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -4168,6 +4169,7 @@ public class CardFactoryUtil {
 
                 @Override
                 public void resolve() {
+                    final GameState game = Singletons.getModel().getGame();
 
                     String name = card.toString() + " Epic";
                     if (card.getController().getCardsIn(ZoneType.Battlefield, name).isEmpty()) {
@@ -4196,15 +4198,15 @@ public class CardFactoryUtil {
 
                         eff.addTrigger(copyTrigger);
 
-                        Singletons.getModel().getGame().getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-                        Singletons.getModel().getGame().getAction().moveToPlay(eff);
-                        Singletons.getModel().getGame().getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
+                        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
+                        game.getAction().moveToPlay(eff);
+                        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
                     }
 
                     if (card.getController().isHuman()) {
-                        Singletons.getModel().getGame().getAction().playSpellAbilityNoStack(origSA, false);
+                        game.getAction().playSpellAbilityNoStack(origSA, false);
                     } else {
-                        ComputerUtil.playNoStack(card.getController(), origSA);
+                        ComputerUtil.playNoStack(card.getController(), origSA, game);
                     }
                 }
             };

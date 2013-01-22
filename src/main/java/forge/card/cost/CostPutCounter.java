@@ -28,6 +28,7 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
@@ -73,13 +74,13 @@ public class CostPutCounter extends CostPartWithList {
      *            the description
      */
     public CostPutCounter(final String amount, final CounterType cntr, final String type, final String description) {
-        this.setReusable(true);
-        this.setAmount(amount);
+        super(amount, type, description);
         this.counter = cntr;
-
-        this.setType(type);
-        this.setTypeDescription(description);
     }
+
+    
+    @Override
+    public boolean isReusable() { return true; }
 
     /*
      * (non-Javadoc)
@@ -89,7 +90,7 @@ public class CostPutCounter extends CostPartWithList {
     @Override
     public final String toString() {
         final StringBuilder sb = new StringBuilder();
-        if (this.counter.getName().equals("Loyalty")) {
+        if (this.counter == CounterType.LOYALTY) {
             sb.append("+").append(this.getAmount());
         } else {
             sb.append("Put ");
@@ -97,7 +98,7 @@ public class CostPutCounter extends CostPartWithList {
             sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), this.counter.getName() + " counter"));
 
             sb.append(" on ");
-            if (this.getThis()) {
+            if (this.isTargetingThis()) {
                 sb.append(this.getType());
             } else {
                 final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
@@ -127,8 +128,8 @@ public class CostPutCounter extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
-        if (this.getThis()) {
+    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
+        if (this.isTargetingThis()) {
             if (source.hasKeyword("CARDNAME can't have counters placed on it.")) {
                 return false;
             }
@@ -155,13 +156,13 @@ public class CostPutCounter extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         Integer c = this.convertAmount();
         if (c == null) {
             c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
         }
 
-        if (this.getThis()) {
+        if (this.isTargetingThis()) {
             source.addCounter(this.getCounter(), c, false);
         } else {
             // Put counter on chosen card
@@ -179,13 +180,13 @@ public class CostPutCounter extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         Integer c = this.convertAmount();
         if (c == null) {
             c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
         }
 
-        if (this.getThis()) {
+        if (this.isTargetingThis()) {
             source.addCounter(this.getCounter(), c, false);
             payment.setPaidManaPart(this);
             this.addToList(source);
@@ -207,7 +208,7 @@ public class CostPutCounter extends CostPartWithList {
     @Override
     public final boolean decideAIPayment(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         this.resetList();
-        if (this.getThis()) {
+        if (this.isTargetingThis()) {
             this.addToList(source);
             return true;
         } else {

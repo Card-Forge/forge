@@ -109,7 +109,7 @@ public class CostUtil {
         for (final CostPart part : cost.getCostParts()) {
             if (part instanceof CostSacrifice) {
                 final CostSacrifice sac = (CostSacrifice) part;
-                if (sac.getThis() && source.isCreature()) {
+                if (sac.isTargetingThis() && source.isCreature()) {
                     return false;
                 }
                 final String type = sac.getType();
@@ -257,7 +257,7 @@ public class CostUtil {
                 final CounterType type = remCounter.getCounter();
                 final double percent = type.name().equals("P1P1") ? p1p1Percent : otherPercent;
                 final int currentNum = source.getCounters(type);
-                if (!part.getThis()) {
+                if (!part.isTargetingThis()) {
                     if (type.name().equals("P1P1")) {
                         return false;
                     }

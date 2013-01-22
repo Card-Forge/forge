@@ -28,6 +28,7 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
@@ -52,8 +53,11 @@ public class CostTapType extends CostPartWithList {
      */
     public CostTapType(final String amount, final String type, final String description) {
         super(amount, type, description);
-        this.setReusable(true);
     }
+
+    @Override
+    public boolean isReusable() { return true; }
+
 
     /**
      * Gets the description.
@@ -84,16 +88,6 @@ public class CostTapType extends CostPartWithList {
         return sb.toString();
     }
 
-    /**
-     * Adds the to tapped list.
-     * 
-     * @param c
-     *            the c
-     */
-    public final void addToTappedList(final Card c) {
-        this.getList().add(c);
-    }
-
     /*
      * (non-Javadoc)
      * 
@@ -116,7 +110,7 @@ public class CostTapType extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
+    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
         List<Card> typeList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Battlefield));
 
         typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
@@ -141,7 +135,7 @@ public class CostTapType extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         for (final Card c : this.getList()) {
             c.tap();
         }
@@ -155,7 +149,7 @@ public class CostTapType extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         List<Card> typeList = new ArrayList<Card>(ability.getActivatingPlayer().getCardsIn(ZoneType.Battlefield));
         typeList = CardLists.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());
         typeList = CardLists.filter(typeList, Presets.UNTAPPED);

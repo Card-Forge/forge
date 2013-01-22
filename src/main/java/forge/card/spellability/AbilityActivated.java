@@ -25,6 +25,7 @@ import forge.Singletons;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPayment;
 import forge.card.staticability.StaticAbility;
+import forge.game.GameState;
 import forge.game.GlobalRuleChange;
 import forge.game.zone.ZoneType;
 
@@ -82,7 +83,8 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
     /** {@inheritDoc} */
     @Override
     public boolean canPlay() {
-        if (Singletons.getModel().getGame().getStack().isSplitSecondOnStack() && !this.isManaAbility()) {
+        final GameState game = Singletons.getModel().getGame();
+        if (game.getStack().isSplitSecondOnStack() && !this.isManaAbility()) {
             return false;
         }
 
@@ -115,7 +117,7 @@ public abstract class AbilityActivated extends SpellAbility implements java.io.S
             return false;
         }
 
-        return CostPayment.canPayAdditionalCosts(this.getPayCosts(), this);
+        return CostPayment.canPayAdditionalCosts(game, this.getPayCosts(), this);
     }
 
     /* (non-Javadoc)

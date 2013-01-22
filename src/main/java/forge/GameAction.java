@@ -555,10 +555,10 @@ public class GameAction {
                             Player p = recoverable.getController();
                             if (p.isHuman()) {
                                 GameActionUtil.payCostDuringAbilityResolve(abRecover, abRecover.getPayCosts(),
-                                        paidCommand, unpaidCommand, null);
+                                        paidCommand, unpaidCommand, null, game);
                             } else { // computer
                                 if (ComputerUtil.canPayCost(abRecover, p)) {
-                                    ComputerUtil.playNoStack(p, abRecover);
+                                    ComputerUtil.playNoStack(p, abRecover, game);
                                 } else {
                                     Singletons.getModel().getGame().getAction().exile(recoverable);
                                 }
@@ -820,7 +820,7 @@ public class GameAction {
                     Spell spell = (Spell) miracle;
                     spell.setActivatingPlayer(card.getOwner());
                     if (spell.canPlayFromEffectAI(false, false)) {
-                        ComputerUtil.playStack(miracle, card.getOwner());
+                        ComputerUtil.playStack(miracle, card.getOwner(), game);
                     }
                 }
             }
@@ -870,7 +870,7 @@ public class GameAction {
                 } else {
                     Spell spell = (Spell) madness;
                     if (spell.canPlayFromEffectAI(false, false)) {
-                        ComputerUtil.playStack(madness, card.getOwner());
+                        ComputerUtil.playStack(madness, card.getOwner(), game);
                     }
                 }
             }
@@ -1585,7 +1585,7 @@ public class GameAction {
     public final void playSpellAbilityForFree(final SpellAbility sa) {
         if (sa.getPayCosts() != null) {
             final TargetSelection ts = new TargetSelection(sa.getTarget(), sa);
-            final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
+            final CostPayment payment = new CostPayment(sa.getPayCosts(), sa, game);
 
             final SpellAbilityRequirements req = new SpellAbilityRequirements(sa, ts, payment);
             req.setFree(true);
@@ -1891,9 +1891,9 @@ public class GameAction {
             final TargetSelection ts = new TargetSelection(sa.getTarget(), sa);
             CostPayment payment = null;
             if (sa.getPayCosts() == null) {
-                payment = new CostPayment(new Cost(sa.getSourceCard(), "0", sa.isAbility()), sa);
+                payment = new CostPayment(new Cost(sa.getSourceCard(), "0", sa.isAbility()), sa, game);
             } else {
-                payment = new CostPayment(sa.getPayCosts(), sa);
+                payment = new CostPayment(sa.getPayCosts(), sa, game);
             }
 
             final SpellAbilityRequirements req = new SpellAbilityRequirements(sa, ts, payment);
@@ -1940,7 +1940,7 @@ public class GameAction {
 
         if (sa.getPayCosts() != null) {
             final TargetSelection ts = new TargetSelection(sa.getTarget(), sa);
-            final CostPayment payment = new CostPayment(sa.getPayCosts(), sa);
+            final CostPayment payment = new CostPayment(sa.getPayCosts(), sa, game);
 
             if (!sa.isTrigger()) {
                 payment.changeCost();

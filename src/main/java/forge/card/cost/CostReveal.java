@@ -27,6 +27,7 @@ import forge.CardLists;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
@@ -63,12 +64,12 @@ public class CostReveal extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
+    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
         List<Card> handList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Hand));
         final String type = this.getType();
         final Integer amount = this.convertAmount();
 
-        if (this.getThis()) {
+        if (this.isTargetingThis()) {
             if (!source.isInZone(ZoneType.Hand)) {
                 return false;
             }
@@ -102,7 +103,7 @@ public class CostReveal extends CostPartWithList {
         List<Card> hand = new ArrayList<Card>(ai.getCardsIn(ZoneType.Hand));
         this.resetList();
 
-        if (this.getThis()) {
+        if (this.isTargetingThis()) {
             if (!hand.contains(source)) {
                 return false;
             }
@@ -135,7 +136,7 @@ public class CostReveal extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         GuiChoose.oneOrNone("Revealed cards:", this.getList());
     }
 
@@ -147,12 +148,12 @@ public class CostReveal extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         final Player activator = ability.getActivatingPlayer();
         final String amount = this.getAmount();
         this.resetList();
 
-        if (this.getThis()) {
+        if (this.isTargetingThis()) {
             this.addToList(source);
             payment.setPaidManaPart(this);
         } else if (this.getType().equals("Hand")) {
@@ -196,7 +197,7 @@ public class CostReveal extends CostPartWithList {
 
         final Integer i = this.convertAmount();
 
-        if (this.getThis()) {
+        if (this.isTargetingThis()) {
             sb.append(this.getType());
         } else if (this.getType().equals("Hand")) {
             return ("Reveal you hand");
@@ -215,16 +216,6 @@ public class CostReveal extends CostPartWithList {
         sb.append(" from your hand");
 
         return sb.toString();
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see forge.card.cost.CostPart#refund(forge.Card)
-     */
-    @Override
-    public void refund(final Card source) {
-
     }
 
     // Inputs

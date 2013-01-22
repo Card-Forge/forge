@@ -53,6 +53,7 @@ import forge.control.input.Input;
 import forge.control.input.InputPayDiscardCost;
 import forge.control.input.InputPayManaCostAbility;
 import forge.control.input.InputPayReturnCost;
+import forge.game.GameState;
 import forge.game.event.CardDamagedEvent;
 import forge.game.event.FlipCoinEvent;
 import forge.game.event.LifeLossEvent;
@@ -135,6 +136,7 @@ public final class GameActionUtil {
                 final Ability ability = new Ability(c, SpellManaCost.ZERO) {
                     @Override
                     public void resolve() {
+                        final GameState game = Singletons.getModel().getGame();
                         final List<Card> topOfLibrary = controller.getCardsIn(ZoneType.Library);
                         final List<Card> revealed = new ArrayList<Card>();
 
@@ -173,7 +175,7 @@ public final class GameActionUtil {
                                         title.toString(), JOptionPane.YES_NO_OPTION);
 
                                 if (answer == JOptionPane.YES_OPTION) {
-                                    Singletons.getModel().getGame().getAction().playCardWithoutManaCost(cascadedCard, p);
+                                    game.getAction().playCardWithoutManaCost(cascadedCard, p);
                                     revealed.remove(cascadedCard);
                                 }
                             } else {
@@ -192,7 +194,7 @@ public final class GameActionUtil {
                                             continue;
                                         }
                                     }
-                                    ComputerUtil.playSpellAbilityWithoutPayingManaCost(p, sa);
+                                    ComputerUtil.playSpellAbilityWithoutPayingManaCost(p, sa, game);
                                     revealed.remove(cascadedCard);
                                     break;
                                 }
@@ -200,7 +202,7 @@ public final class GameActionUtil {
                         }
                         CardLists.shuffle(revealed);
                         for (final Card bottom : revealed) {
-                            Singletons.getModel().getGame().getAction().moveToBottomOfLibrary(bottom);
+                            game.getAction().moveToBottomOfLibrary(bottom);
                         }
                     }
                 };
@@ -258,6 +260,7 @@ public final class GameActionUtil {
                     final Ability ability = new Ability(c, SpellManaCost.ZERO) {
                         @Override
                         public void resolve() {
+                            final GameState game = Singletons.getModel().getGame();
                             final List<Card> topOfLibrary = controller.getCardsIn(ZoneType.Library);
                             final List<Card> revealed = new ArrayList<Card>();
                             int rippleNumber = rippleCount;
@@ -293,7 +296,7 @@ public final class GameActionUtil {
                                                 JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
                                                 possibleValues, possibleValues[0]);
                                         if (q.equals(0)) {
-                                            Singletons.getModel().getGame().getAction().playCardWithoutManaCost(rippledCards[i], p);
+                                            game.getAction().playCardWithoutManaCost(rippledCards[i], p);
                                             revealed.remove(rippledCards[i]);
                                         }
                                     } else {
@@ -311,7 +314,7 @@ public final class GameActionUtil {
                                                     continue;
                                                 }
                                             }
-                                            ComputerUtil.playSpellAbilityWithoutPayingManaCost(p, sa);
+                                            ComputerUtil.playSpellAbilityWithoutPayingManaCost(p, sa, game);
                                             revealed.remove(rippledCards[i]);
                                             break;
                                         }
@@ -378,7 +381,7 @@ public final class GameActionUtil {
      * @param sourceAbility TODO
      */
     public static void payCostDuringAbilityResolve(final SpellAbility ability, final Cost cost, final Command paid,
-            final Command unpaid, SpellAbility sourceAbility) {
+            final Command unpaid, SpellAbility sourceAbility, final GameState game) {
         final Card source = ability.getSourceCard();
         final List<CostPart> parts =  cost.getCostParts();
         Player p = Singletons.getControl().getPlayer();
@@ -458,7 +461,7 @@ public final class GameActionUtil {
                 int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
                         : CardFactoryUtil.xCount(source, source.getSVar(amountString));
                 String plural = amount > 1 ? "s" : "";
-                if (part.canPay(sourceAbility, source, p, cost)
+                if (part.canPay(sourceAbility, source, p, cost, game)
                         && showYesNoDialog(source, "Do you want to remove " + amount + " " + counterType.getName()
                         + " counter" + plural + " from " + source + "?")) {
                     source.subtractCounter(counterType, amount);

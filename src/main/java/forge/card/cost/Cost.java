@@ -212,9 +212,9 @@ public class Cost {
         if(parse.startsWith("AddCounter<")) {
             // AddCounter<NumCounters/CounterType>
             final String[] splitStr = abCostParse(parse, 4);
-            final String type = splitStr.length > 2 ? splitStr[2] : "CARDNAME";
+            final String target = splitStr.length > 2 ? splitStr[2] : "CARDNAME";
             final String description = splitStr.length > 3 ? splitStr[3] : null;
-            return new CostPutCounter(splitStr[0], CounterType.valueOf(splitStr[1]), type, description);
+            return new CostPutCounter(splitStr[0], CounterType.valueOf(splitStr[1]), target, description);
         }
     
         // While no card has "PayLife<2> PayLife<3> there might be a card that
@@ -225,16 +225,11 @@ public class Cost {
             return new CostPayLife(splitStr[0]);
         }
     
-        if(parse.startsWith("OppGainLife<")) {
+        if(parse.startsWith("GainLife<")) {
             // PayLife<LifeCost>
-            final String[] splitStr = abCostParse(parse, 1);
-            return new CostGainLife(splitStr[0]);
-        }
-    
-        if(parse.startsWith("OthersEachGainLife<")) {
-            // PayLife<LifeCost>
-            final String[] splitStr = abCostParse(parse, 1);
-            return new CostGainLifeEachOther(splitStr[0]);
+            final String[] splitStr = abCostParse(parse, 3);
+            int cnt = splitStr.length > 2 ? "*".equals(splitStr[2]) ? Integer.MAX_VALUE : Integer.parseInt(splitStr[2]) : 1;
+            return new CostGainLife(splitStr[0], splitStr[1], cnt);
         }
     
         if(parse.startsWith("DamageYou<")) {

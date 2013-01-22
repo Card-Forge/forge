@@ -27,6 +27,7 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
@@ -51,9 +52,12 @@ public class CostUntapType extends CostPartWithList {
      */
     public CostUntapType(final String amount, final String type, final String description) {
         super(amount, type, description);
-        this.setReusable(true);
     }
 
+    @Override
+    public boolean isReusable() { return true; }
+
+    
     /**
      * Gets the description.
      * 
@@ -119,7 +123,7 @@ public class CostUntapType extends CostPartWithList {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
+    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
         List<Card> typeList = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
 
         typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
@@ -144,7 +148,7 @@ public class CostUntapType extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         for (final Card c : this.getList()) {
             c.untap();
         }
@@ -158,7 +162,7 @@ public class CostUntapType extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         final boolean untap = payment.getCost().hasUntapCost();
         List<Card> typeList = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
         typeList = CardLists.getValidCards(typeList, this.getType().split(";"), ability.getActivatingPlayer(), ability.getSourceCard());

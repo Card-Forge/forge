@@ -23,6 +23,7 @@ import java.util.List;
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRequirements;
+import forge.game.GameState;
 import forge.game.player.Player;
 
 /**
@@ -40,6 +41,7 @@ public class CostPayment {
     private SpellAbilityRequirements req = null;
     private boolean bCancel = false;
     private final ArrayList<CostPart> paidCostParts = new ArrayList<CostPart>();
+    private final GameState game;
 
     /**
      * <p>
@@ -129,10 +131,11 @@ public class CostPayment {
      * @param abil
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public CostPayment(final Cost cost, final SpellAbility abil) {
+    public CostPayment(final Cost cost, final SpellAbility abil, final GameState game) {
         this.cost = cost;
         this.ability = abil;
         this.card = abil.getSourceCard();
+        this.game = game;
     }
 
     /**
@@ -146,7 +149,7 @@ public class CostPayment {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean canPayAdditionalCosts(final Cost cost, final SpellAbility ability) {
+    public static boolean canPayAdditionalCosts(final GameState game, final Cost cost, final SpellAbility ability) {
         if (cost == null) {
             return true;
         }
@@ -159,7 +162,7 @@ public class CostPayment {
         }
 
         for (final CostPart part : cost.getCostParts()) {
-            if (!part.canPay(ability, card, activator, cost)) {
+            if (!part.canPay(ability, card, activator, cost, game)) {
                 return false;
             }
         }
@@ -218,7 +221,7 @@ public class CostPayment {
                 continue;
             }
 
-            if (!part.payHuman(this.ability, this.card, this)) {
+            if (!part.payHuman(this.ability, this.card, this, game)) {
                 return false;
             }
         }
@@ -281,7 +284,7 @@ public class CostPayment {
      * 
      * @return a boolean.
      */
-    public final boolean payComputerCosts(final Player ai) {
+    public final boolean payComputerCosts(final Player ai, final GameState game) {
         // canPayAdditionalCosts now Player Agnostic
 
         // Just in case it wasn't set, but honestly it shouldn't have gotten
@@ -303,7 +306,7 @@ public class CostPayment {
         }
 
         for (final CostPart part : parts) {
-            part.payAI(ai, this.ability, this.ability.getSourceCard(), this);
+            part.payAI(ai, this.ability, this.ability.getSourceCard(), this, game);
         }
         return true;
     }

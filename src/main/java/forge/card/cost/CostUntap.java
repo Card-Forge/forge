@@ -19,6 +19,7 @@ package forge.card.cost;
 
 import forge.Card;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.player.Player;
 
 /**
@@ -30,10 +31,15 @@ public class CostUntap extends CostPart {
      * Instantiates a new cost untap.
      */
     public CostUntap() {
-        this.setReusable(true);
-        this.setUndoable(true);
     }
 
+    @Override
+    public boolean isReusable() { return true; }
+
+    @Override
+    public boolean isUndoable() { return true; }
+
+    
     /*
      * (non-Javadoc)
      * 
@@ -62,7 +68,7 @@ public class CostUntap extends CostPart {
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
+    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
         return source.isTapped() && (!source.isSick() || source.hasKeyword("CARDNAME may activate abilities as though it has haste."));
     }
 
@@ -73,7 +79,7 @@ public class CostUntap extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         source.untap();
     }
 
@@ -85,7 +91,7 @@ public class CostUntap extends CostPart {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         // if (!canPay(ability, source, ability.getActivatingPlayer(),
         // payment.getCost()))
         // return false;

@@ -59,6 +59,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.control.input.InputPayManaCostUtil;
 import forge.error.ErrorViewer;
+import forge.game.GameState;
 import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
@@ -90,7 +91,7 @@ public class ComputerUtil {
      *            objects.
      * @return a boolean.
      */
-    public static boolean playSpellAbilities(final Player ai, final List<SpellAbility> all) {
+    public static boolean playSpellAbilities(final Player ai, final List<SpellAbility> all, final GameState game) {
         // not sure "playing biggest spell" matters?
         ComputerUtil.sortSpellAbilityByCost(all);
         ArrayList<SpellAbility> abilities = new ArrayList<SpellAbility>();
@@ -113,7 +114,7 @@ public class ComputerUtil {
             }
             sa.setActivatingPlayer(ai);
 
-            if (ComputerUtil.canBePlayedAndPayedByAI(ai, sa) && ComputerUtil.handlePlayingSpellAbility(ai, sa)) {
+            if (ComputerUtil.canBePlayedAndPayedByAI(ai, sa) && ComputerUtil.handlePlayingSpellAbility(ai, sa, game)) {
                 return false;
             }
         }
@@ -129,26 +130,26 @@ public class ComputerUtil {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean handlePlayingSpellAbility(final Player ai, final SpellAbility sa) {
-
+    public static boolean handlePlayingSpellAbility(final Player ai, final SpellAbility sa, final GameState game) {
+        
         if (sa instanceof AbilityStatic) {
             final Cost cost = sa.getPayCosts();
             if (cost == null && ComputerUtil.payManaCost(sa, ai, false, 0, true)) {
                 sa.resolve();
             } else {
-                final CostPayment pay = new CostPayment(cost, sa);
-                if (pay.payComputerCosts(ai)) {
+                final CostPayment pay = new CostPayment(cost, sa, game);
+                if (pay.payComputerCosts(ai, game)) {
                     sa.resolve();
                 }
             }
             return false;
         }
 
-        Singletons.getModel().getGame().getStack().freezeStack();
+        game.getStack().freezeStack();
         final Card source = sa.getSourceCard();
 
         if (sa.isSpell() && !source.isCopiedSpell()) {
-            sa.setSourceCard(Singletons.getModel().getGame().getAction().moveToStack(source));
+            sa.setSourceCard(game.getAction().moveToStack(source));
         }
 
         if (sa.getApi() == ApiType.Charm && !sa.isWrapper()) {
@@ -160,12 +161,12 @@ public class ComputerUtil {
         if (cost == null) {
             ComputerUtil.payManaCost(ai, sa);
             sa.getBeforePayManaAI().execute();
-            Singletons.getModel().getGame().getStack().addAndUnfreeze(sa);
+            game.getStack().addAndUnfreeze(sa);
             return true;
         } else {
-            final CostPayment pay = new CostPayment(cost, sa);
-            if (pay.payComputerCosts(ai)) {
-                Singletons.getModel().getGame().getStack().addAndUnfreeze(sa);
+            final CostPayment pay = new CostPayment(cost, sa, game);
+            if (pay.payComputerCosts(ai, game)) {
+                game.getStack().addAndUnfreeze(sa);
                 if (sa.getSplicedCards() != null && !sa.getSplicedCards().isEmpty()) {
                     GuiChoose.oneOrNone("Computer reveals spliced cards:", sa.getSplicedCards());
                 }
@@ -259,6 +260,7 @@ public class ComputerUtil {
      * @return a boolean.
      */
     public static boolean playCounterSpell(final Player ai, final ArrayList<SpellAbility> possibleCounters) {
+        final GameState game = Singletons.getModel().getGame(); 
         SpellAbility bestSA = null;
         int bestRestriction = Integer.MIN_VALUE;
         final ArrayList<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
@@ -301,11 +303,11 @@ public class ComputerUtil {
         // TODO - "Look" at Targeted SA and "calculate" the threshold
         // if (bestRestriction < targetedThreshold) return false;
 
-        Singletons.getModel().getGame().getStack().freezeStack();
+        game.getStack().freezeStack();
         final Card source = bestSA.getSourceCard();
 
         if (bestSA.isSpell() && !source.isCopiedSpell()) {
-            bestSA.setSourceCard(Singletons.getModel().getGame().getAction().moveToStack(source));
+            bestSA.setSourceCard(game.getAction().moveToStack(source));
         }
 
         final Cost cost = bestSA.getPayCosts();
@@ -314,11 +316,11 @@ public class ComputerUtil {
             // Honestly Counterspells shouldn't use this branch
             ComputerUtil.payManaCost(ai, bestSA);
             bestSA.getBeforePayManaAI().execute();
-            Singletons.getModel().getGame().getStack().addAndUnfreeze(bestSA);
+            game.getStack().addAndUnfreeze(bestSA);
         } else {
-            final CostPayment pay = new CostPayment(cost, bestSA);
-            if (pay.payComputerCosts(ai)) {
-                Singletons.getModel().getGame().getStack().addAndUnfreeze(bestSA);
+            final CostPayment pay = new CostPayment(cost, bestSA, game);
+            if (pay.payComputerCosts(ai, game)) {
+                game.getStack().addAndUnfreeze(bestSA);
             }
         }
 
@@ -334,21 +336,21 @@ public class ComputerUtil {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static final void playStack(final SpellAbility sa, final Player ai) {
+    public static final void playStack(final SpellAbility sa, final Player ai, final GameState game) {
         sa.setActivatingPlayer(ai);
         if (ComputerUtil.canPayCost(sa, ai)) {
             final Card source = sa.getSourceCard();
             if (sa.isSpell() && !source.isCopiedSpell()) {
-                sa.setSourceCard(Singletons.getModel().getGame().getAction().moveToStack(source));
+                sa.setSourceCard(game.getAction().moveToStack(source));
             }
             final Cost cost = sa.getPayCosts();
             if (cost == null) {
                 ComputerUtil.payManaCost(ai, sa);
-                Singletons.getModel().getGame().getStack().add(sa);
+                game.getStack().add(sa);
             } else {
-                final CostPayment pay = new CostPayment(cost, sa);
-                if (pay.payComputerCosts(ai)) {
-                    Singletons.getModel().getGame().getStack().add(sa);
+                final CostPayment pay = new CostPayment(cost, sa, game);
+                if (pay.payComputerCosts(ai, game)) {
+                    game.getStack().add(sa);
                 }
             }
         }
@@ -381,7 +383,7 @@ public class ComputerUtil {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static final void playSpellAbilityWithoutPayingManaCost(final Player ai, final SpellAbility sa) {
+    public static final void playSpellAbilityWithoutPayingManaCost(final Player ai, final SpellAbility sa, final GameState game) {
         final SpellAbility newSA = sa.copy();
         final Cost cost = new Cost(sa.getSourceCard(), "", false);
         if (newSA.getPayCosts() != null) {
@@ -398,19 +400,19 @@ public class ComputerUtil {
         newSA.setDescription(sb.toString());
         newSA.setActivatingPlayer(ai);
 
-        if (!ComputerUtil.canPayAdditionalCosts(newSA, ai)) {
+        if (!ComputerUtil.canPayAdditionalCosts(newSA, ai, game)) {
             return;
         }
 
         final Card source = newSA.getSourceCard();
         if (newSA.isSpell() && !source.isCopiedSpell()) {
-            newSA.setSourceCard(Singletons.getModel().getGame().getAction().moveToStack(source));
+            newSA.setSourceCard(game.getAction().moveToStack(source));
         }
 
-        final CostPayment pay = new CostPayment(cost, newSA);
-        pay.payComputerCosts(ai);
+        final CostPayment pay = new CostPayment(cost, newSA, game);
+        pay.payComputerCosts(ai, game);
 
-        Singletons.getModel().getGame().getStack().add(newSA);
+        game.getStack().add(newSA);
     }
 
     /**
@@ -421,13 +423,12 @@ public class ComputerUtil {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static final void playNoStack(final Player ai, final SpellAbility sa) {
+    public static final void playNoStack(final Player ai, final SpellAbility sa, final GameState game) {
         // TODO: We should really restrict what doesn't use the Stack
-
         if (ComputerUtil.canPayCost(sa, ai)) {
             final Card source = sa.getSourceCard();
             if (sa.isSpell() && !source.isCopiedSpell()) {
-                sa.setSourceCard(Singletons.getModel().getGame().getAction().moveToStack(source));
+                sa.setSourceCard(game.getAction().moveToStack(source));
             }
 
             sa.setActivatingPlayer(ai);
@@ -436,14 +437,14 @@ public class ComputerUtil {
             if (cost == null) {
                 ComputerUtil.payManaCost(ai, sa);
             } else {
-                final CostPayment pay = new CostPayment(cost, sa);
-                pay.payComputerCosts(ai);
+                final CostPayment pay = new CostPayment(cost, sa, game);
+                pay.payComputerCosts(ai, game);
             }
 
             AbilityFactory.resolve(sa, false);
 
             // destroys creatures if they have lethal damage, etc..
-            Singletons.getModel().getGame().getAction().checkStateEffects();
+            game.getAction().checkStateEffects();
         }
     } // play()
 
@@ -504,6 +505,7 @@ public class ComputerUtil {
      */
     public static boolean canPayCost(final SpellAbility sa, final Player player) {
 
+        final GameState game = Singletons.getModel().getGame();
         // Check for stuff like Nether Void
         int extraManaNeeded = 0;
         if (sa instanceof Spell && player.isComputer()) {
@@ -525,7 +527,7 @@ public class ComputerUtil {
             return false;
         }
 
-        return ComputerUtil.canPayAdditionalCosts(sa, player);
+        return ComputerUtil.canPayAdditionalCosts(sa, player, game);
     } // canPayCost()
 
     /**
@@ -565,7 +567,7 @@ public class ComputerUtil {
      *            a {@link forge.game.player.Player} object.
      * @return a boolean.
      */
-    public static boolean canPayAdditionalCosts(final SpellAbility sa, final Player player) {
+    public static boolean canPayAdditionalCosts(final SpellAbility sa, final Player player, final GameState game) {
         if (sa.getActivatingPlayer() == null) {
             final StringBuilder sb = new StringBuilder();
             sb.append(sa.getSourceCard());
@@ -573,7 +575,7 @@ public class ComputerUtil {
             System.out.println(sb.toString());
             sa.setActivatingPlayer(player);
         }
-        return CostPayment.canPayAdditionalCosts(sa.getPayCosts(), sa);
+        return CostPayment.canPayAdditionalCosts(game, sa.getPayCosts(), sa);
     }
 
     /**
@@ -610,6 +612,7 @@ public class ComputerUtil {
             final int extraMana, boolean checkPlayable) {
         ManaCostBeingPaid cost = calculateManaCost(sa, test, extraMana);
 
+        final GameState game = Singletons.getModel().getGame();
         final ManaPool manapool = ai.getManaPool();
 
         cost = manapool.payManaFromPool(sa, cost);
@@ -659,7 +662,7 @@ public class ComputerUtil {
                 ma.setActivatingPlayer(ai);
                 // if the AI can't pay the additional costs skip the mana ability
                 if (ma.getPayCosts() != null && checkPlayable) {
-                    if (!ComputerUtil.canPayAdditionalCosts(ma, ai)) {
+                    if (!ComputerUtil.canPayAdditionalCosts(ma, ai, game)) {
                         continue;
                     }
                 } else if (sourceCard.isTapped() && checkPlayable) {
@@ -729,8 +732,8 @@ public class ComputerUtil {
                 if (!test) {
                     // Pay additional costs
                     if (ma.getPayCosts() != null) {
-                        final CostPayment pay = new CostPayment(ma.getPayCosts(), ma);
-                        if (!pay.payComputerCosts(ai)) {
+                        final CostPayment pay = new CostPayment(ma.getPayCosts(), ma, game);
+                        if (!pay.payComputerCosts(ai, game)) {
                             continue;
                         }
                     } else {
@@ -991,6 +994,7 @@ public class ComputerUtil {
      * @return a {@link forge.CardList} object.
      */
     public static List<Card> getAvailableMana(final Player ai, final boolean checkPlayable) {
+        final GameState game = Singletons.getModel().getGame();
         final List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
         final List<Card> manaSources = CardLists.filter(list, new Predicate<Card>() {
             @Override
@@ -1054,7 +1058,7 @@ public class ComputerUtil {
                 // ability
                 m.setActivatingPlayer(ai);
                 if (cost != null) {
-                    if (!ComputerUtil.canPayAdditionalCosts(m, ai)) {
+                    if (!ComputerUtil.canPayAdditionalCosts(m, ai, game)) {
                         continue;
                     }
                 }

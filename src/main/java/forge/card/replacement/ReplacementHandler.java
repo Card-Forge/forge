@@ -27,6 +27,7 @@ import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -42,6 +43,7 @@ public class ReplacementHandler {
 
     public ReplacementResult run(final HashMap<String, Object> runParams) {
         final Object affected = runParams.get("Affected");
+        final GameState game = Singletons.getModel().getGame();
         Player decider = null;
 
         // Figure out who decides which of multiple replacements to apply
@@ -53,25 +55,25 @@ public class ReplacementHandler {
         }
 
         if (runParams.get("Event").equals("Moved")) {
-            ReplacementResult res = run(runParams, ReplacementLayer.Control, decider);
+            ReplacementResult res = run(runParams, ReplacementLayer.Control, decider, game);
             if (res != ReplacementResult.NotReplaced) {
                 return res;
             }
-            res = run(runParams, ReplacementLayer.Copy, decider);
+            res = run(runParams, ReplacementLayer.Copy, decider, game);
             if (res != ReplacementResult.NotReplaced) {
                 return res;
             }
-            res = run(runParams, ReplacementLayer.Other, decider);
+            res = run(runParams, ReplacementLayer.Other, decider, game);
             if (res != ReplacementResult.NotReplaced) {
                 return res;
             }
-            res = run(runParams, ReplacementLayer.None, decider);
+            res = run(runParams, ReplacementLayer.None, decider, game);
             if (res != ReplacementResult.NotReplaced) {
                 return res;
             }
         }
         else {
-            ReplacementResult res = run(runParams, ReplacementLayer.None, decider);
+            ReplacementResult res = run(runParams, ReplacementLayer.None, decider, game);
             if (res != ReplacementResult.NotReplaced) {
                 return res;
             }
@@ -89,7 +91,7 @@ public class ReplacementHandler {
      *            the run params,same as for triggers.
      * @return true if the event was replaced.
      */
-    public ReplacementResult run(final HashMap<String, Object> runParams, final ReplacementLayer layer, final Player decider) {
+    public ReplacementResult run(final HashMap<String, Object> runParams, final ReplacementLayer layer, final Player decider, final GameState game) {
 
         final List<ReplacementEffect> possibleReplacers = new ArrayList<ReplacementEffect>();
         // Round up Non-static replacement effects ("Until EOT," or
@@ -101,7 +103,7 @@ public class ReplacementHandler {
         }*/
 
         // Round up Static replacement effects
-        for (final Player p : Singletons.getModel().getGame().getPlayers()) {
+        for (final Player p : game.getPlayers()) {
             for (final Card crd : p.getAllCards()) {
                 for (final ReplacementEffect replacementEffect : crd.getReplacementEffects()) {
                     if (!replacementEffect.hasRun()
@@ -109,7 +111,7 @@ public class ReplacementHandler {
                             && replacementEffect.requirementsCheck()
                             && replacementEffect.canReplace(runParams)
                             && !possibleReplacers.contains(replacementEffect)
-                            && replacementEffect.zonesCheck(Singletons.getModel().getGame().getZoneOf(crd))) {
+                            && replacementEffect.zonesCheck(game.getZoneOf(crd))) {
                         possibleReplacers.add(replacementEffect);
                     }
                 }
@@ -141,7 +143,7 @@ public class ReplacementHandler {
 
         if (chosenRE != null) {
             chosenRE.setHasRun(true);
-            ReplacementResult res = this.executeReplacement(runParams, chosenRE, decider);
+            ReplacementResult res = this.executeReplacement(runParams, chosenRE, decider, game);
             if (res != ReplacementResult.NotReplaced) {
                 chosenRE.setHasRun(false);
                 Singletons.getModel().getGame().getGameLog().add("ReplacementEffect", chosenRE.toString(), 2);
@@ -171,7 +173,7 @@ public class ReplacementHandler {
      *            the replacement effect to run
      */
     private ReplacementResult executeReplacement(final HashMap<String, Object> runParams,
-        final ReplacementEffect replacementEffect, final Player decider) {
+        final ReplacementEffect replacementEffect, final Player decider, final GameState game) {
         final HashMap<String, String> mapParams = replacementEffect.getMapParams();
 
         SpellAbility effectSA = null;
@@ -234,9 +236,9 @@ public class ReplacementHandler {
 
         Player player = replacementEffect.getHostCard().getController();
         if (player.isHuman()) {
-            Singletons.getModel().getGame().getAction().playSpellAbilityNoStack(effectSA, false);
+            game.getAction().playSpellAbilityNoStack(effectSA, false);
         } else {
-            ComputerUtil.playNoStack(player, effectSA);
+            ComputerUtil.playNoStack(player, effectSA, game);
         }
 
         return ReplacementResult.Replaced;

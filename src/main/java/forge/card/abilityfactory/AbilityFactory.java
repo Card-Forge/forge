@@ -1584,18 +1584,18 @@ public class AbilityFactory {
      * @param usedStack
      *            a boolean.
      */
-    public static void passUnlessCost(final SpellAbility sa, final boolean usedStack) {
+    public static void passUnlessCost(final SpellAbility sa, final boolean usedStack, final GameState game) {
         final Card source = sa.getSourceCard();
         final ApiType api = sa.getApi();
         if (api == null) {
             sa.resolve();
-            AbilityFactory.resolveSubAbilities(sa, usedStack);
+            AbilityFactory.resolveSubAbilities(sa, usedStack, game);
             return;
         }
         // Nothing to do
         if (sa.getParam("UnlessCost") == null) {
             sa.resolve();
-            AbilityFactory.resolveSubAbilities(sa, usedStack);
+            AbilityFactory.resolveSubAbilities(sa, usedStack, game);
             return;
         }
 
@@ -1632,7 +1632,7 @@ public class AbilityFactory {
 
             @Override
             public void execute() {
-                AbilityFactory.resolveSubAbilities(sa, usedStack);
+                AbilityFactory.resolveSubAbilities(sa, usedStack, game);
             }
         };
 
@@ -1645,7 +1645,7 @@ public class AbilityFactory {
                 if (sa.hasParam("PowerSink")) {
                     GameActionUtil.doPowerSink(sa.getActivatingPlayer());
                 }
-                AbilityFactory.resolveSubAbilities(sa, usedStack);
+                AbilityFactory.resolveSubAbilities(sa, usedStack, game);
             }
         };
 
@@ -1682,7 +1682,7 @@ public class AbilityFactory {
                     // Didn't have any of the data on the original SA to pay dependant costs
                     ability.setActivatingPlayer(payer);
                     ability.setTarget(sa.getTarget());
-                    ComputerUtil.playNoStack(payer, ability); // Unless cost was payed - no resolve
+                    ComputerUtil.playNoStack(payer, ability, game); // Unless cost was payed - no resolve
                     paid = true;
                 }
             }
@@ -1694,20 +1694,20 @@ public class AbilityFactory {
                 if (paid) {
                     unpaidCommand = paidCommand;
                 }
-                GameActionUtil.payCostDuringAbilityResolve(ability, cost, paidCommand, unpaidCommand, sa);
+                GameActionUtil.payCostDuringAbilityResolve(ability, cost, paidCommand, unpaidCommand, sa, game);
                 waitForInput = true; // wait for the human input
                 break; // multiple human players are not supported
             }
         }
         if (!waitForInput) {
             if (paid) {
-                AbilityFactory.resolveSubAbilities(sa, usedStack);
+                AbilityFactory.resolveSubAbilities(sa, usedStack, game);
             } else {
                 sa.resolve();
                 if (sa.hasParam("PowerSink")) {
                     GameActionUtil.doPowerSink(payers.get(0));
                 }
-                AbilityFactory.resolveSubAbilities(sa, usedStack);
+                AbilityFactory.resolveSubAbilities(sa, usedStack, game);
             }
         }
 
@@ -1735,17 +1735,18 @@ public class AbilityFactory {
             }
             return;
         }
-
+        
+        final GameState game = Singletons.getModel().getGame();
         // check conditions
         if (AbilityFactory.checkConditional(sa)) {
             if (sa.isWrapper()) {
                 sa.resolve();
-                AbilityFactory.resolveSubAbilities(sa, usedStack);
+                AbilityFactory.resolveSubAbilities(sa, usedStack, game);
             } else {
-                AbilityFactory.passUnlessCost(sa, usedStack);
+                AbilityFactory.passUnlessCost(sa, usedStack, game);
             }
         } else {
-            AbilityFactory.resolveSubAbilities(sa, usedStack);
+            AbilityFactory.resolveSubAbilities(sa, usedStack, game);
         }
     }
 
@@ -1758,7 +1759,7 @@ public class AbilityFactory {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @since 1.0.15
      */
-    public static void resolveSubAbilities(final SpellAbility sa, boolean usedStack) {
+    public static void resolveSubAbilities(final SpellAbility sa, boolean usedStack, final GameState game) {
         final AbilitySub abSub = sa.getSubAbility();
         if (abSub == null || sa.isWrapper()) {
             // every resolving spellAbility will end here
@@ -1770,9 +1771,9 @@ public class AbilityFactory {
         }
         // check conditions
         if (AbilityFactory.checkConditional(abSub)) {
-            AbilityFactory.passUnlessCost(abSub, usedStack);
+            AbilityFactory.passUnlessCost(abSub, usedStack, game);
         } else {
-            AbilityFactory.resolveSubAbilities(abSub, usedStack);
+            AbilityFactory.resolveSubAbilities(abSub, usedStack, game);
         }
     }
 

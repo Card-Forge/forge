@@ -30,6 +30,7 @@ import forge.CardLists;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
@@ -69,7 +70,7 @@ public class CostDiscard extends CostPartWithList {
 
         final Integer i = this.convertAmount();
 
-        if (this.getThis()) {
+        if (this.isTargetingThis()) {
             sb.append(this.getType());
         } else if (this.getType().equals("Hand")) {
             sb.append("your hand");
@@ -98,28 +99,17 @@ public class CostDiscard extends CostPartWithList {
     /*
      * (non-Javadoc)
      * 
-     * @see forge.card.cost.CostPart#refund(forge.Card)
-     */
-    @Override
-    public void refund(final Card source) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
      * @see
      * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
+    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
         List<Card> handList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Hand));
         String type = this.getType();
         final Integer amount = this.convertAmount();
 
-        if (this.getThis()) {
+        if (this.isTargetingThis()) {
             if (!source.isInZone(ZoneType.Hand)) {
                 return false;
             }
@@ -164,7 +154,7 @@ public class CostDiscard extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         for (final Card c : this.getList()) {
             ai.discard(c, ability);
         }
@@ -178,14 +168,14 @@ public class CostDiscard extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         final Player activator = ability.getActivatingPlayer();
         List<Card> handList = new ArrayList<Card>(activator.getCardsIn(ZoneType.Hand));
         String discType = this.getType();
         final String amount = this.getAmount();
         this.resetList();
 
-        if (this.getThis()) {
+        if (this.isTargetingThis()) {
             if (!handList.contains(source)) {
                 return false;
             }
@@ -283,7 +273,7 @@ public class CostDiscard extends CostPartWithList {
             this.addToList(ai.getLastDrawnCard());
         }
 
-        else if (this.getThis()) {
+        else if (this.isTargetingThis()) {
             if (!hand.contains(source)) {
                 return false;
             }

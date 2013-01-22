@@ -519,7 +519,7 @@ public class MagicStack extends MyObservable {
                     final int neededDamage = CardFactoryUtil.getNeededXDamage(sa);
 
                     while (ComputerUtil.canPayCost(ability, player) && (neededDamage != sa.getSourceCard().getXManaCostPaid())) {
-                        ComputerUtil.playNoStack(player, ability);
+                        ComputerUtil.playNoStack(player, ability, game);
                     }
                     this.push(sa);
                 }
@@ -620,7 +620,7 @@ public class MagicStack extends MyObservable {
                     // computer
 
                     while (ComputerUtil.canPayCost(ability, activating)) {
-                        ComputerUtil.playNoStack(activating, ability);
+                        ComputerUtil.playNoStack(activating, ability, game);
                     }
 
                     this.push(sa);
@@ -684,7 +684,7 @@ public class MagicStack extends MyObservable {
                 } else {
                     // computer
                     while (ComputerUtil.canPayCost(ability, controller)) {
-                        ComputerUtil.playNoStack(controller, ability);
+                        ComputerUtil.playNoStack(controller, ability, game);
                     }
 
                     this.push(sa);
@@ -1340,7 +1340,7 @@ public class MagicStack extends MyObservable {
         if (activePlayer.isComputer()) {
             for (final SpellAbility sa : activePlayerSAs) {
                 sa.doTrigger(sa.isMandatory());
-                ComputerUtil.playStack(sa, activePlayer);
+                ComputerUtil.playStack(sa, activePlayer, game);
             }
         } else {
             // If only one, just add as necessary

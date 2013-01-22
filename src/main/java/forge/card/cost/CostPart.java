@@ -19,6 +19,7 @@ package forge.card.cost;
 
 import forge.Card;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.player.Player;
 
 /**
@@ -26,31 +27,24 @@ import forge.game.player.Player;
  */
 public abstract class CostPart {
 
-    /** The is reusable. */
-    private boolean isReusable = false;
-
-    /** The is undoable. */
-    private boolean isUndoable = false;
-
     /** The optional. */
     // private boolean optional = false;
-
-    /** The optional type. */
-    private String optionalType = null;
 
     /** The amount. */
     private String amount = "1";
 
     /** The type. */
-    private String type = "Card";
+    private final String type;
 
     /** The type description. */
-    private String typeDescription = null;
+    private final String typeDescription;
 
     /**
      * Instantiates a new cost part.
      */
     public CostPart() {
+        type = "Card";
+        typeDescription = null;
     }
 
     /**
@@ -65,8 +59,8 @@ public abstract class CostPart {
      */
     public CostPart(final String amount, final String type, final String description) {
         this.setAmount(amount);
-        this.setType(type);
-        this.setTypeDescription(description);
+        this.type = type;
+        this.typeDescription = description;
     }
 
     /**
@@ -92,7 +86,7 @@ public abstract class CostPart {
      * 
      * @return the this
      */
-    public final boolean getThis() {
+    public final boolean isTargetingThis() {
         return this.getType().equals("CARDNAME");
     }
 
@@ -119,8 +113,8 @@ public abstract class CostPart {
      * 
      * @return true, if is reusable
      */
-    public final boolean isReusable() {
-        return this.isReusable;
+    public boolean isReusable() {
+        return false;
     }
 
     /**
@@ -128,27 +122,8 @@ public abstract class CostPart {
      * 
      * @return true, if is undoable
      */
-    public final boolean isUndoable() {
-        return this.isUndoable;
-    }
-
-    /**
-     * Gets the optional type.
-     * 
-     * @return the optional type
-     */
-    public final String getOptionalType() {
-        return this.optionalType;
-    }
-
-    /**
-     * Sets the optional type.
-     * 
-     * @param optionalType
-     *            the new optional type
-     */
-    public final void setOptionalType(final String optionalType) {
-        this.optionalType = optionalType;
+    public boolean isUndoable() {
+        return false;
     }
 
     /**
@@ -176,9 +151,10 @@ public abstract class CostPart {
      *            the activator
      * @param cost
      *            the cost
+     * @param game 
      * @return true, if successful
      */
-    public abstract boolean canPay(SpellAbility ability, Card source, Player activator, Cost cost);
+    public abstract boolean canPay(SpellAbility ability, Card source, Player activator, Cost cost, GameState game);
 
     /**
      * Decide ai payment.
@@ -198,8 +174,9 @@ public abstract class CostPart {
      * @param ability {@link forge.card.spellability.SpellAbility}
      * @param source {@link forge.Card}
      * @param payment {@link forge.card.cost.CostPayment}
+     * @param game 
      */
-    public abstract void payAI(final Player ai, SpellAbility ability, Card source, CostPayment payment);
+    public abstract void payAI(final Player ai, SpellAbility ability, Card source, CostPayment payment, GameState game);
 
     /**
      * Pay human.
@@ -207,9 +184,10 @@ public abstract class CostPart {
      * @param ability {@link forge.card.spellability.SpellAbility}
      * @param source {@link forge.Card}
      * @param payment {@link forge.card.cost.CostPayment}
+     * @param game 
      * @return true, if successful
      */
-    public abstract boolean payHuman(SpellAbility ability, Card source, CostPayment payment);
+    public abstract boolean payHuman(SpellAbility ability, Card source, CostPayment payment, GameState game);
 
     /*
      * (non-Javadoc)
@@ -220,22 +198,13 @@ public abstract class CostPart {
     public abstract String toString();
 
     /**
-     * Refund.
+     * Refund. Overridden in classes which know how to refund.
      * 
      * @param source
      *            the source
      */
-    public abstract void refund(Card source);
+    public void refund(Card source) {}
 
-    /**
-     * Sets the reusable.
-     * 
-     * @param isReusableIn
-     *            the isReusable to set
-     */
-    public void setReusable(final boolean isReusableIn) {
-        this.isReusable = isReusableIn;
-    }
 
     /**
      * Sets the amount.
@@ -245,35 +214,5 @@ public abstract class CostPart {
      */
     public void setAmount(final String amountIn) {
         this.amount = amountIn;
-    }
-
-    /**
-     * Sets the type.
-     * 
-     * @param typeIn
-     *            the type to set
-     */
-    public void setType(final String typeIn) {
-        this.type = typeIn;
-    }
-
-    /**
-     * Sets the type description.
-     * 
-     * @param typeDescriptionIn
-     *            the typeDescription to set
-     */
-    public void setTypeDescription(final String typeDescriptionIn) {
-        this.typeDescription = typeDescriptionIn;
-    }
-
-    /**
-     * Sets the undoable.
-     * 
-     * @param isUndoableIn
-     *            the isUndoable to set
-     */
-    public void setUndoable(final boolean isUndoableIn) {
-        this.isUndoable = isUndoableIn;
     }
 }

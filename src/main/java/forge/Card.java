@@ -55,6 +55,7 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
+import forge.game.GameState;
 import forge.game.GlobalRuleChange;
 import forge.game.event.CounterAddedEvent;
 import forge.game.event.CardEquippedEvent;
@@ -1338,17 +1339,18 @@ public class Card extends GameEntity implements Comparable<Card> {
 
     private void playFromSuspend() {
         final Card c = this;
+        final GameState game = Singletons.getModel().getGame();
 
         c.setSuspendCast(true);
         // set activating player for base spell ability
         c.getSpellAbility()[0].setActivatingPlayer(c.getOwner());
         // Any trigger should cause the phase not to skip
-        for (Player p : Singletons.getModel().getGame().getPlayers()) {
+        for (Player p : game.getPlayers()) {
             p.getController().autoPassCancel();
         }
 
         if (c.getOwner().isHuman()) {
-            Singletons.getModel().getGame().getAction().playCardWithoutManaCost(c, c.getOwner());
+            game.getAction().playCardWithoutManaCost(c, c.getOwner());
         } else {
             final List<SpellAbility> choices = this.getBasicSpells();
 
@@ -1364,7 +1366,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                         continue;
                     }
                 }
-                ComputerUtil.playSpellAbilityWithoutPayingManaCost(c.getOwner(), sa);
+                ComputerUtil.playSpellAbilityWithoutPayingManaCost(c.getOwner(), sa, game);
                 break;
             }
         }

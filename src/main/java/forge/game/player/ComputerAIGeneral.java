@@ -81,7 +81,7 @@ public class ComputerAIGeneral implements Computer {
     private void playSpellAbilitiesStackEmpty() {
         final List<Card> list = getAvailableCards();
 
-        final boolean nextPhase = ComputerUtil.playSpellAbilities(player, getSpellAbilities(list));
+        final boolean nextPhase = ComputerUtil.playSpellAbilities(player, getSpellAbilities(list), game);
 
         if (nextPhase) {
             game.getPhaseHandler().passPriority();
@@ -360,7 +360,7 @@ public class ComputerAIGeneral implements Computer {
 
         possibleCounters.clear();
         possibleCounters = this.getPossibleETBCounters();
-        if ((possibleCounters.size() > 0) && !ComputerUtil.playSpellAbilities(player, possibleCounters)) {
+        if ((possibleCounters.size() > 0) && !ComputerUtil.playSpellAbilities(player, possibleCounters, game)) {
             // Responding Permanent w/ ETB Counter is on the Stack
             // If playSpellAbilities returns false, a Spell is hitting the Stack
             return;
@@ -368,7 +368,7 @@ public class ComputerAIGeneral implements Computer {
         final ArrayList<SpellAbility> sas = this.getSpellAbilities(cards);
         if (sas.size() > 0) {
             // Spell not Countered
-            if (!ComputerUtil.playSpellAbilities(player, sas)) {
+            if (!ComputerUtil.playSpellAbilities(player, sas, game)) {
                 return;
             }
         }

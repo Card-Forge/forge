@@ -22,6 +22,7 @@ import java.util.HashMap;
 import forge.Command;
 import forge.CommandList;
 import forge.Singletons;
+import forge.game.GameState;
 import forge.game.player.Player;
 
 
@@ -39,7 +40,12 @@ public abstract class Phase implements java.io.Serializable {
 
     /** The at. */
     private final CommandList at = new CommandList();
-
+    protected final GameState game;
+    
+    public Phase(final GameState game0) {
+        game = game0;
+    }
+    
     /**
      * Gets the at.
      *

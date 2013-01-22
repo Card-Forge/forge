@@ -24,6 +24,7 @@ import forge.card.SpellManaCost;
 import forge.card.spellability.Ability;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameLossReason;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -40,6 +41,7 @@ public class EndOfTurn extends Phase {
     /** Constant <code>serialVersionUID=-3656715295379727275L</code>. */
     private static final long serialVersionUID = -3656715295379727275L;
 
+    public EndOfTurn(final GameState game) { super(game); }
     /**
      * <p>
      * Handles all the hardcoded events that happen "at end of turn".
@@ -48,11 +50,11 @@ public class EndOfTurn extends Phase {
     @Override
     public final void executeAt() {
         // reset mustAttackEntity for me
-        Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().setMustAttackEntity(null);
+        game.getPhaseHandler().getPlayerTurn().setMustAttackEntity(null);
 
-        Singletons.getModel().getGame().getStaticEffects().rePopulateStateBasedList();
+        game.getStaticEffects().rePopulateStateBasedList();
 
-        for (final Card c : Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield)) {
+        for (final Card c : game.getCardsIn(ZoneType.Battlefield)) {
             if (!c.isFaceDown() && c.hasKeyword("At the beginning of the end step, sacrifice CARDNAME.")) {
                 final Card card = c;
                 final SpellAbility sac = new Ability(card, SpellManaCost.ZERO) {
@@ -68,7 +70,7 @@ public class EndOfTurn extends Phase {
                 sac.setStackDescription(sb.toString());
                 sac.setDescription(sb.toString());
 
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(sac);
+                game.getStack().addSimultaneousStackEntry(sac);
 
             }
             if (!c.isFaceDown() && c.hasKeyword("At the beginning of the end step, exile CARDNAME.")) {
@@ -86,7 +88,7 @@ public class EndOfTurn extends Phase {
                 exile.setStackDescription(sb.toString());
                 exile.setDescription(sb.toString());
 
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(exile);
+                game.getStack().addSimultaneousStackEntry(exile);
 
             }
             if (!c.isFaceDown() && c.hasKeyword("At the beginning of the end step, destroy CARDNAME.")) {
@@ -95,7 +97,7 @@ public class EndOfTurn extends Phase {
                     @Override
                     public void resolve() {
                         if (card.isInPlay()) {
-                            Singletons.getModel().getGame().getAction().destroy(card);
+                            game.getAction().destroy(card);
                         }
                     }
                 };
@@ -104,7 +106,7 @@ public class EndOfTurn extends Phase {
                 destroy.setStackDescription(sb.toString());
                 destroy.setDescription(sb.toString());
 
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(destroy);
+                game.getStack().addSimultaneousStackEntry(destroy);
 
             }
             // Berserk is using this, so don't check isFaceDown()
@@ -115,7 +117,7 @@ public class EndOfTurn extends Phase {
                         @Override
                         public void resolve() {
                             if (card.isInPlay()) {
-                                Singletons.getModel().getGame().getAction().destroy(card);
+                                game.getAction().destroy(card);
                             }
                         }
                     };
@@ -124,7 +126,7 @@ public class EndOfTurn extends Phase {
                     sac.setStackDescription(sb.toString());
                     sac.setDescription(sb.toString());
 
-                    Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(sac);
+                    game.getStack().addSimultaneousStackEntry(sac);
 
                 } else {
                     c.removeAllExtrinsicKeyword("At the beginning of the next end step, "
@@ -133,13 +135,13 @@ public class EndOfTurn extends Phase {
             }
 
             if (c.hasKeyword("At the beginning of your end step, return CARDNAME to its owner's hand.")
-                    && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(c.getController())) {
+                    && game.getPhaseHandler().isPlayerTurn(c.getController())) {
                 final Card source = c;
                 final SpellAbility change = new Ability(source, SpellManaCost.ZERO) {
                     @Override
                     public void resolve() {
                         if (source.isInPlay()) {
-                            Singletons.getModel().getGame().getAction().moveToHand(source);
+                            game.getAction().moveToHand(source);
                         }
                     }
                 };
@@ -148,12 +150,12 @@ public class EndOfTurn extends Phase {
                 change.setStackDescription(sb.toString());
                 change.setDescription(sb.toString());
 
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(change);
+                game.getStack().addSimultaneousStackEntry(change);
 
             }
 
         }
-        Player activePlayer = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
+        Player activePlayer = game.getPhaseHandler().getPlayerTurn();
         if (activePlayer.hasKeyword("At the beginning of this turn's end step, you lose the game.")) {
             final Card source = new Card();
             final SpellAbility change = new Ability(source, SpellManaCost.ZERO) {
@@ -166,7 +168,7 @@ public class EndOfTurn extends Phase {
             change.setDescription("At the beginning of this turn's end step, you lose the game.");
             change.setActivatingPlayer(activePlayer);
 
-            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(change);
+            game.getStack().addSimultaneousStackEntry(change);
         }
 
         this.execute(this.getAt());

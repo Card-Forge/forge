@@ -86,7 +86,7 @@ public class DestroyAi extends SpellAiLogic {
                                         continue;
                                     }
                                     CostSacrifice sacCost = (CostSacrifice) part;
-                                    if (sacCost.getThis() && ComputerUtil.canPayCost(ability, c.getController())) {
+                                    if (sacCost.isTargetingThis() && ComputerUtil.canPayCost(ability, c.getController())) {
                                         return false;
                                     }
                                 }

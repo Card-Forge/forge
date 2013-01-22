@@ -69,6 +69,8 @@ import forge.view.ButtonUtil;
 public class Upkeep extends Phase {
     private static final long serialVersionUID = 6906459482978819354L;
 
+    public Upkeep(final GameState game) { super(game); }
+    
     /**
      * <p>
      * Handles all the hardcoded events that happen at the beginning of each
@@ -80,29 +82,30 @@ public class Upkeep extends Phase {
      */
     @Override
     public final void executeAt() {
-        Singletons.getModel().getGame().getStack().freezeStack();
-        Upkeep.upkeepBraidOfFire();
+         
+        game.getStack().freezeStack();
+        Upkeep.upkeepBraidOfFire(game);
 
-        Upkeep.upkeepSlowtrips(); // for "Draw a card at the beginning of the next turn's upkeep."
-        Upkeep.upkeepUpkeepCost(); // sacrifice unless upkeep cost is paid
-        Upkeep.upkeepEcho();
+        Upkeep.upkeepSlowtrips(game); // for "Draw a card at the beginning of the next turn's upkeep."
+        Upkeep.upkeepUpkeepCost(game); // sacrifice unless upkeep cost is paid
+        Upkeep.upkeepEcho(game);
 
-        Upkeep.upkeepTheAbyss();
-        Upkeep.upkeepDropOfHoney();
-        Upkeep.upkeepDemonicHordes();
-        Upkeep.upkeepTangleWire();
+        Upkeep.upkeepTheAbyss(game);
+        Upkeep.upkeepDropOfHoney(game);
+        Upkeep.upkeepDemonicHordes(game);
+        Upkeep.upkeepTangleWire(game);
 
-        Upkeep.upkeepKarma();
-        Upkeep.upkeepOathOfDruids();
-        Upkeep.upkeepOathOfGhouls();
-        Upkeep.upkeepSuspend();
-        Upkeep.upkeepVanishing();
-        Upkeep.upkeepFading();
-        Upkeep.upkeepBlazeCounters();
-        Upkeep.upkeepCurseOfMisfortunes();
-        Upkeep.upkeepPowerSurge();
+        Upkeep.upkeepKarma(game);
+        Upkeep.upkeepOathOfDruids(game);
+        Upkeep.upkeepOathOfGhouls(game);
+        Upkeep.upkeepSuspend(game);
+        Upkeep.upkeepVanishing(game);
+        Upkeep.upkeepFading(game);
+        Upkeep.upkeepBlazeCounters(game);
+        Upkeep.upkeepCurseOfMisfortunes(game);
+        Upkeep.upkeepPowerSurge(game);
 
-        Singletons.getModel().getGame().getStack().unfreezeStack();
+        game.getStack().unfreezeStack();
     }
 
     // UPKEEP CARDS:
@@ -112,8 +115,8 @@ public class Upkeep extends Phase {
      * upkeepBraidOfFire.
      * </p>
      */
-    private static void upkeepBraidOfFire() {
-        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
+    private static void upkeepBraidOfFire(final GameState game) {
+        final Player player = game.getPhaseHandler().getPlayerTurn();
 
         final List<Card> braids = player.getCardsIn(ZoneType.Battlefield, "Braid of Fire");
 
@@ -138,14 +141,14 @@ public class Upkeep extends Phase {
                     } else if (GameActionUtil.showYesNoDialog(c, sb.toString())) {
                         abMana.produceMana(this);
                     } else {
-                        Singletons.getModel().getGame().getAction().sacrifice(c, null);
+                        game.getAction().sacrifice(c, null);
                     }
 
                 }
             };
             upkeepAbility.setStackDescription(sb.toString());
 
-            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(upkeepAbility);
+            game.getStack().addSimultaneousStackEntry(upkeepAbility);
 
         }
     } // upkeepBraidOfFire
@@ -155,8 +158,8 @@ public class Upkeep extends Phase {
      * upkeepEcho.
      * </p>
      */
-    private static void upkeepEcho() {
-        List<Card> list = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().getCardsIn(ZoneType.Battlefield);
+    private static void upkeepEcho(final GameState game) {
+        List<Card> list = game.getPhaseHandler().getPlayerTurn().getCardsIn(ZoneType.Battlefield);
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
@@ -175,7 +178,7 @@ public class Upkeep extends Phase {
 
                     @Override
                     public void execute() {
-                        Singletons.getModel().getGame().getAction().sacrifice(c, null);
+                        game.getAction().sacrifice(c, null);
                     }
                 };
 
@@ -187,15 +190,16 @@ public class Upkeep extends Phase {
                 final Ability sacAbility = new Ability(c, SpellManaCost.ZERO) {
                     @Override
                     public void resolve() {
+                        
                         Player controller = c.getController();
                         if (controller.isHuman()) {
                             Cost cost = new Cost(c, c.getEchoCost().trim(), true);
-                            GameActionUtil.payCostDuringAbilityResolve(blankAbility, cost, paidCommand, unpaidCommand, null);
+                            GameActionUtil.payCostDuringAbilityResolve(blankAbility, cost, paidCommand, unpaidCommand, null, game);
                         } else { // computer
                             if (ComputerUtil.canPayCost(blankAbility, controller)) {
-                                ComputerUtil.playNoStack(controller, blankAbility);
+                                ComputerUtil.playNoStack(controller, blankAbility, game);
                             } else {
-                                Singletons.getModel().getGame().getAction().sacrifice(c, null);
+                                game.getAction().sacrifice(c, null);
                             }
                         }
                     }
@@ -203,7 +207,7 @@ public class Upkeep extends Phase {
                 sacAbility.setStackDescription(sb.toString());
                 sacAbility.setDescription(sb.toString());
 
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(sacAbility);
+                game.getStack().addSimultaneousStackEntry(sacAbility);
 
                 c.removeAllExtrinsicKeyword("(Echo unpaid)");
             }
@@ -215,20 +219,20 @@ public class Upkeep extends Phase {
      * upkeepSlowtrips. Draw a card at the beginning of the next turn's upkeep.
      * </p>
      */
-    private static void upkeepSlowtrips() {
-        Player turnOwner = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
+    private static void upkeepSlowtrips(final GameState game) {
+        Player turnOwner = game.getPhaseHandler().getPlayerTurn();
 
         // does order matter here?
-        drawForSlowtrips(turnOwner);
-        for (Player p : Singletons.getModel().getGame().getPlayers()) {
+        drawForSlowtrips(turnOwner, game);
+        for (Player p : game.getPlayers()) {
             if (p == turnOwner) {
                 continue;
             }
-            drawForSlowtrips(p);
+            drawForSlowtrips(p, game);
         }
     }
 
-    public static void drawForSlowtrips(final Player player) {
+    public static void drawForSlowtrips(final Player player, final GameState game) {
         List<Card> list = player.getSlowtripList();
 
         for (Card card : list) {
@@ -244,7 +248,7 @@ public class Upkeep extends Phase {
             slowtrip.setStackDescription(card + " - Draw a card.");
             slowtrip.setDescription(card + " - Draw a card.");
 
-            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(slowtrip);
+            game.getStack().addSimultaneousStackEntry(slowtrip);
 
         }
         player.clearSlowtripList();
@@ -255,8 +259,9 @@ public class Upkeep extends Phase {
      * upkeepUpkeepCost.
      * </p>
      */
-    private static void upkeepUpkeepCost() {
-        final List<Card> list = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn().getCardsIn(ZoneType.Battlefield);
+    private static void upkeepUpkeepCost(final GameState game) {
+        
+        final List<Card> list = game.getPhaseHandler().getPlayerTurn().getCardsIn(ZoneType.Battlefield);
 
         for (int i = 0; i < list.size(); i++) {
             final Card c = list.get(i);
@@ -278,7 +283,7 @@ public class Upkeep extends Phase {
                             if (c.getName().equals("Cosmic Horror")) {
                                 controller.addDamage(7, c);
                             }
-                            Singletons.getModel().getGame().getAction().destroy(c);
+                            game.getAction().destroy(c);
                         }
                     };
 
@@ -295,12 +300,12 @@ public class Upkeep extends Phase {
                                 GameActionUtil.payManaDuringAbilityResolve(sb.toString(), upkeepCost, paidCommand, unpaidCommand);
                             } else { // computer
                                 if (ComputerUtil.canPayCost(aiPaid, controller) && !c.hasKeyword("Indestructible")) {
-                                    ComputerUtil.playNoStack(controller, aiPaid);
+                                    ComputerUtil.playNoStack(controller, aiPaid, game);
                                 } else {
                                     if (c.getName().equals("Cosmic Horror")) {
                                         controller.addDamage(7, c);
                                     }
-                                    Singletons.getModel().getGame().getAction().destroy(c);
+                                    game.getAction().destroy(c);
                                 }
                             }
                         }
@@ -308,7 +313,7 @@ public class Upkeep extends Phase {
                     upkeepAbility.setStackDescription(sb.toString());
                     upkeepAbility.setDescription(sb.toString());
 
-                    Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(upkeepAbility);
+                    game.getStack().addSimultaneousStackEntry(upkeepAbility);
                 } // destroy
 
                 // sacrifice
@@ -337,7 +342,7 @@ public class Upkeep extends Phase {
 
                         @Override
                         public void execute() {
-                            Singletons.getModel().getGame().getAction().sacrifice(c, null);
+                            game.getAction().sacrifice(c, null);
                         }
                     };
 
@@ -350,12 +355,12 @@ public class Upkeep extends Phase {
                         public void resolve() {
                             if (controller.isHuman()) {
                                 GameActionUtil.payCostDuringAbilityResolve(blankAbility, blankAbility.getPayCosts(),
-                                        paidCommand, unpaidCommand, null);
+                                        paidCommand, unpaidCommand, null, game);
                             } else { // computer
                                 if (ComputerUtil.shouldPayCost(controller, c, upkeepCost) && ComputerUtil.canPayCost(blankAbility, controller)) {
-                                    ComputerUtil.playNoStack(controller, blankAbility);
+                                    ComputerUtil.playNoStack(controller, blankAbility, game);
                                 } else {
-                                    Singletons.getModel().getGame().getAction().sacrifice(c, null);
+                                    game.getAction().sacrifice(c, null);
                                 }
                             }
                         }
@@ -363,7 +368,7 @@ public class Upkeep extends Phase {
                     upkeepAbility.setStackDescription(sb.toString());
                     upkeepAbility.setDescription(sb.toString());
 
-                    Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(upkeepAbility);
+                    game.getStack().addSimultaneousStackEntry(upkeepAbility);
                 } // sacrifice
 
                 // destroy
@@ -397,7 +402,7 @@ public class Upkeep extends Phase {
                             } else { // computers
                                 if (ComputerUtil.canPayCost(aiPaid, controller)
                                         && (controller.predictDamage(upkeepDamage, c, false) > 0)) {
-                                    ComputerUtil.playNoStack(controller, aiPaid);
+                                    ComputerUtil.playNoStack(controller, aiPaid, game);
                                 } else {
                                     controller.addDamage(upkeepDamage, c);
                                 }
@@ -407,7 +412,7 @@ public class Upkeep extends Phase {
                     upkeepAbility.setStackDescription(sb.toString());
                     upkeepAbility.setDescription(sb.toString());
 
-                    Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(upkeepAbility);
+                    game.getStack().addSimultaneousStackEntry(upkeepAbility);
                 } // destroy
             }
 
@@ -442,15 +447,15 @@ public class Upkeep extends Phase {
      * upkeepTheAbyss.
      * </p>
      */
-    private static void upkeepTheAbyss() {
+    private static void upkeepTheAbyss(final GameState game) {
         /*
          * At the beginning of each player's upkeep, destroy target nonartifact
          * creature that player controls of his or her choice. It can't be
          * regenerated.
          */
-        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
-        final List<Card> the = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("The Abyss"));
-        final List<Card> magus = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Magus of the Abyss"));
+        final Player player = game.getPhaseHandler().getPlayerTurn();
+        final List<Card> the = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("The Abyss"));
+        final List<Card> magus = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Magus of the Abyss"));
 
         final List<Card> cards = new ArrayList<Card>();
         cards.addAll(the);
@@ -480,7 +485,7 @@ public class Upkeep extends Phase {
 
                         @Override
                         protected Input onDone() {
-                            Singletons.getModel().getGame().getAction().destroyNoRegeneration(selected.get(0));
+                            game.getAction().destroyNoRegeneration(selected.get(0));
                             return null;
                         }
                     };
@@ -490,13 +495,13 @@ public class Upkeep extends Phase {
 
                         final List<Card> indestruct = CardLists.getKeyword(targets, "Indestructible");
                         if (indestruct.size() > 0) {
-                            Singletons.getModel().getGame().getAction().destroyNoRegeneration(indestruct.get(0));
+                            game.getAction().destroyNoRegeneration(indestruct.get(0));
                         } else if (targets.size() > 0) {
                             final Card target = CardFactoryUtil.getWorstCreatureAI(targets);
                             if (null == target) {
                                 // must be nothing valid to destroy
                             } else {
-                                Singletons.getModel().getGame().getAction().destroyNoRegeneration(target);
+                                game.getAction().destroyNoRegeneration(target);
                             }
                         }
                     }
@@ -506,7 +511,7 @@ public class Upkeep extends Phase {
             final StringBuilder sb = new StringBuilder();
             sb.append(abyss.getName()).append(" - destroy a nonartifact creature of your choice.");
             sacrificeCreature.setStackDescription(sb.toString());
-            Singletons.getModel().getGame().getStack().addAndUnfreeze(sacrificeCreature);
+            game.getStack().addAndUnfreeze(sacrificeCreature);
         } // end for
     } // The Abyss
 
@@ -515,13 +520,13 @@ public class Upkeep extends Phase {
      * upkeepDropOfHoney.
      * </p>
      */
-    private static void upkeepDropOfHoney() {
+    private static void upkeepDropOfHoney(final GameState game) {
         /*
          * At the beginning of your upkeep, destroy the creature with the least
          * power. It can't be regenerated. If two or more creatures are tied for
          * least power, you choose one of them.
          */
-        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
+        final Player player = game.getPhaseHandler().getPlayerTurn();
         final List<Card> drops = player.getCardsIn(ZoneType.Battlefield, "Drop of Honey");
         drops.addAll(player.getCardsIn(ZoneType.Battlefield, "Porphyry Nodes"));
         final List<Card> cards = drops;
@@ -532,7 +537,7 @@ public class Upkeep extends Phase {
             final Ability ability = new Ability(c, SpellManaCost.NO_COST) {
                 @Override
                 public void resolve() {
-                    final List<Card> creatures = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+                    final List<Card> creatures = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
                     if (creatures.size() > 0) {
                         CardLists.sortAttackLowFirst(creatures);
                         final int power = creatures.get(0).getNetAttack();
@@ -542,7 +547,7 @@ public class Upkeep extends Phase {
                                             "Select creature with power: " + power + " to sacrifice."));
                         } else { // computer
                             final Card compyTarget = this.getCompyCardToDestroy(creatures);
-                            Singletons.getModel().getGame().getAction().destroyNoRegeneration(compyTarget);
+                            game.getAction().destroyNoRegeneration(compyTarget);
                         }
                     }
                 } // resolve
@@ -580,7 +585,7 @@ public class Upkeep extends Phase {
             sb.append(c.getName()).append(" - destroy 1 creature with lowest power.");
             ability.setStackDescription(sb.toString());
 
-            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
+            game.getStack().addSimultaneousStackEntry(ability);
 
         } // end for
     } // upkeepDropOfHoney()
@@ -590,14 +595,14 @@ public class Upkeep extends Phase {
      * upkeepDemonicHordes.
      * </p>
      */
-    private static void upkeepDemonicHordes() {
+    private static void upkeepDemonicHordes(final GameState game) {
 
         /*
          * At the beginning of your upkeep, unless you pay BBB, tap Demonic
          * Hordes and sacrifice a land of an opponent's choice.
          */
 
-        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
+        final Player player = game.getPhaseHandler().getPlayerTurn();
         final List<Card> cards = player.getCardsIn(ZoneType.Battlefield, "Demonic Hordes");
 
         for (int i = 0; i < cards.size(); i++) {
@@ -625,7 +630,7 @@ public class Upkeep extends Phase {
                     } else {
                         target = CardFactoryUtil.getBestLandAI(playerLand);
                     }
-                    Singletons.getModel().getGame().getAction().sacrifice(target, null);
+                    game.getAction().sacrifice(target, null);
                 } // end resolve()
             }; // end noPay ability
 
@@ -636,7 +641,7 @@ public class Upkeep extends Phase {
                     final Ability pay = new Ability(c, SpellManaCost.ZERO) {
                         @Override
                         public void resolve() {
-                            if (Singletons.getModel().getGame().getZoneOf(c).is(ZoneType.Battlefield)) {
+                            if (game.getZoneOf(c).is(ZoneType.Battlefield)) {
                                 final StringBuilder coststring = new StringBuilder();
                                 coststring.append("Pay cost for ").append(c).append("\r\n");
                                 GameActionUtil.payManaDuringAbilityResolve(coststring.toString(), cost.getManaCost(),
@@ -647,7 +652,7 @@ public class Upkeep extends Phase {
                     pay.setStackDescription("Demonic Hordes - Upkeep Cost");
                     pay.setDescription("Demonic Hordes - Upkeep Cost");
 
-                    Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(pay);
+                    game.getStack().addSimultaneousStackEntry(pay);
 
                 } // end choice
                 else {
@@ -655,7 +660,7 @@ public class Upkeep extends Phase {
                     sb.append(c.getName()).append(" - is tapped and you must sacrifice a land of opponent's choice");
                     noPay.setStackDescription(sb.toString());
 
-                    Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(noPay);
+                    game.getStack().addSimultaneousStackEntry(noPay);
 
                 }
             } // end human
@@ -670,10 +675,10 @@ public class Upkeep extends Phase {
                     };
                     computerPay.setStackDescription("Computer pays Demonic Hordes upkeep cost");
 
-                    Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(computerPay);
+                    game.getStack().addSimultaneousStackEntry(computerPay);
                 } else {
                     noPay.setStackDescription("Demonic Hordes - Upkeep Cost");
-                    Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(noPay);
+                    game.getStack().addSimultaneousStackEntry(noPay);
 
                 }
             } // end computer
@@ -687,8 +692,8 @@ public class Upkeep extends Phase {
      * upkeepSuspend.
      * </p>
      */
-    private static void upkeepSuspend() {
-        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
+    private static void upkeepSuspend(final GameState game) {
+        final Player player = game.getPhaseHandler().getPlayerTurn();
 
         List<Card> list = player.getCardsIn(ZoneType.Exile);
 
@@ -716,9 +721,9 @@ public class Upkeep extends Phase {
      * upkeepVanishing.
      * </p>
      */
-    private static void upkeepVanishing() {
+    private static void upkeepVanishing(final GameState game) {
 
-        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
+        final Player player = game.getPhaseHandler().getPlayerTurn();
         List<Card> list = player.getCardsIn(ZoneType.Battlefield);
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
@@ -743,7 +748,7 @@ public class Upkeep extends Phase {
                 ability.setDescription(sb.toString());
                 ability.setActivatingPlayer(card.getController());
 
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
+                game.getStack().addSimultaneousStackEntry(ability);
 
             }
         }
@@ -754,9 +759,9 @@ public class Upkeep extends Phase {
      * upkeepFading.
      * </p>
      */
-    private static void upkeepFading() {
+    private static void upkeepFading(final GameState game) {
 
-        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
+        final Player player = game.getPhaseHandler().getPlayerTurn();
         List<Card> list = player.getCardsIn(ZoneType.Battlefield);
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
@@ -772,7 +777,7 @@ public class Upkeep extends Phase {
                     public void resolve() {
                         final int fadeCounters = card.getCounters(CounterType.FADE);
                         if (fadeCounters <= 0) {
-                            Singletons.getModel().getGame().getAction().sacrifice(card, null);
+                            game.getAction().sacrifice(card, null);
                         } else {
                             card.subtractCounter(CounterType.FADE, 1);
                         }
@@ -786,7 +791,7 @@ public class Upkeep extends Phase {
                 ability.setDescription(sb.toString());
                 ability.setActivatingPlayer(card.getController());
 
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
+                game.getStack().addSimultaneousStackEntry(ability);
 
             }
         }
@@ -797,14 +802,14 @@ public class Upkeep extends Phase {
      * upkeepOathOfDruids.
      * </p>
      */
-    private static void upkeepOathOfDruids() {
-        final List<Card> oathList = CardLists.filter(Singletons.getModel().getGame()
+    private static void upkeepOathOfDruids(final GameState game) {
+        final List<Card> oathList = CardLists.filter(game
                 .getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Oath of Druids"));
         if (oathList.isEmpty()) {
             return;
         }
 
-        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
+        final Player player = game.getPhaseHandler().getPlayerTurn();
 
         if (GameState.compareTypeAmountInPlay(player, "Creature") < 0) {
             for (int i = 0; i < oathList.size(); i++) {
@@ -845,10 +850,10 @@ public class Upkeep extends Phase {
                                 for (final Card c : libraryList) {
                                     cardsToReveal.add(c);
                                     if (c.isCreature()) {
-                                        Singletons.getModel().getGame().getAction().moveTo(battlefield, c);
+                                        game.getAction().moveTo(battlefield, c);
                                         break;
                                     } else {
-                                        Singletons.getModel().getGame().getAction().moveToGraveyard(c);
+                                        game.getAction().moveToGraveyard(c);
                                     }
                                 } // for loop
                                 if (cardsToReveal.size() > 0) {
@@ -869,7 +874,7 @@ public class Upkeep extends Phase {
                 ability.setDescription(sb.toString());
                 ability.setActivatingPlayer(oath.getController());
 
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
+                game.getStack().addSimultaneousStackEntry(ability);
             }
         }
     } // upkeepOathOfDruids()
@@ -879,13 +884,13 @@ public class Upkeep extends Phase {
      * upkeepOathOfGhouls.
      * </p>
      */
-    private static void upkeepOathOfGhouls() {
-        final List<Card> oathList = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Oath of Ghouls"));
+    private static void upkeepOathOfGhouls(final GameState game) {
+        final List<Card> oathList = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Oath of Ghouls"));
         if (oathList.isEmpty()) {
             return;
         }
 
-        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
+        final Player player = game.getPhaseHandler().getPlayerTurn();
 
         if (GameState.compareTypeAmountInGraveyard(player, "Creature") > 0) {
             for (int i = 0; i < oathList.size(); i++) {
@@ -901,12 +906,12 @@ public class Upkeep extends Phase {
                                 if (o != null) {
                                     final Card card = o;
 
-                                    Singletons.getModel().getGame().getAction().moveToHand(card);
+                                    game.getAction().moveToHand(card);
                                 }
                             } else if (player.isComputer()) {
                                 final Card card = graveyardCreatures.get(0);
 
-                                Singletons.getModel().getGame().getAction().moveToHand(card);
+                                game.getAction().moveToHand(card);
                             }
                         }
                     }
@@ -919,7 +924,7 @@ public class Upkeep extends Phase {
                 ability.setDescription(sb.toString());
                 ability.setActivatingPlayer(oathList.get(0).getController());
 
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
+                game.getStack().addSimultaneousStackEntry(ability);
 
             }
         }
@@ -930,10 +935,10 @@ public class Upkeep extends Phase {
      * upkeepKarma.
      * </p>
      */
-    private static void upkeepKarma() {
-        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
+    private static void upkeepKarma(final GameState game) {
+        final Player player = game.getPhaseHandler().getPlayerTurn();
         final List<Card> karmas =
-                CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Karma"));
+                CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Karma"));
         final List<Card> swamps = CardLists.getType(player.getCardsIn(ZoneType.Battlefield), "Swamp");
 
         // determine how much damage to deal the current player
@@ -959,7 +964,7 @@ public class Upkeep extends Phase {
                 ability.setDescription(sb.toString());
                 ability.setActivatingPlayer(karma.getController());
 
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
+                game.getStack().addSimultaneousStackEntry(ability);
                 }
             }
         } // if
@@ -970,14 +975,14 @@ public class Upkeep extends Phase {
      * upkeepPowerSurge.
      * </p>
      */
-    private static void upkeepPowerSurge() {
+    private static void upkeepPowerSurge(final GameState game) {
         /*
          * At the beginning of each player's upkeep, Power Surge deals X damage
          * to that player, where X is the number of untapped lands he or she
          * controlled at the beginning of this turn.
          */
-        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
-        final List<Card> list = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Power Surge"));
+        final Player player = game.getPhaseHandler().getPlayerTurn();
+        final List<Card> list = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Power Surge"));
         final int damage = player.getNumPowerSurgeLands();
 
         for (final Card surge : list) {
@@ -995,7 +1000,7 @@ public class Upkeep extends Phase {
             ability.setDescription(sb.toString());
 
             if (damage > 0) {
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
+                game.getStack().addSimultaneousStackEntry(ability);
             }
         } // for
     } // upkeepPowerSurge()
@@ -1005,9 +1010,9 @@ public class Upkeep extends Phase {
      * upkeepTangleWire.
      * </p>
      */
-    private static void upkeepTangleWire() {
-        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
-        final List<Card> wires = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Tangle Wire"));
+    private static void upkeepTangleWire(final GameState game) {
+        final Player player = game.getPhaseHandler().getPlayerTurn();
+        final List<Card> wires = CardLists.filter(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Tangle Wire"));
 
         for (final Card source : wires) {
             final SpellAbility ability = new Ability(source, SpellManaCost.ZERO) {
@@ -1064,7 +1069,7 @@ public class Upkeep extends Phase {
 
                                 @Override
                                 public void selectCard(final Card card) {
-                                    Zone zone = Singletons.getModel().getGame().getZoneOf(card);
+                                    Zone zone = game.getZoneOf(card);
                                     if (zone.is(ZoneType.Battlefield, player) && list.contains(card)) {
                                         card.tap();
                                         list.remove(card);
@@ -1081,7 +1086,7 @@ public class Upkeep extends Phase {
             ability.setDescription(source.getName() + " - " + player
                     + " taps X artifacts, creatures or lands he or she controls.");
 
-            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
+            game.getStack().addSimultaneousStackEntry(ability);
 
         } // foreach(wire)
     } // upkeepTangleWire()
@@ -1091,8 +1096,8 @@ public class Upkeep extends Phase {
      * upkeepBlazeCounters.
      * </p>
      */
-    private static void upkeepBlazeCounters() {
-        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
+    private static void upkeepBlazeCounters(final GameState game) {
+        final Player player = game.getPhaseHandler().getPlayerTurn();
 
         List<Card> blaze = player.getCardsIn(ZoneType.Battlefield);
         blaze = CardLists.filter(blaze, new Predicate<Card>() {
@@ -1116,7 +1121,7 @@ public class Upkeep extends Phase {
             sb.append(player).append(".");
             ability.setStackDescription(sb.toString());
 
-            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
+            game.getStack().addSimultaneousStackEntry(ability);
 
         }
     }
@@ -1126,8 +1131,8 @@ public class Upkeep extends Phase {
      * upkeepCurseOfMisfortunes.
      * </p>
      */
-    private static void upkeepCurseOfMisfortunes() {
-        final Player player = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
+    private static void upkeepCurseOfMisfortunes(final GameState game) {
+        final Player player = game.getPhaseHandler().getPlayerTurn();
 
         final List<Card> misfortunes = player.getCardsIn(ZoneType.Battlefield, "Curse of Misfortunes");
 
@@ -1163,8 +1168,8 @@ public class Upkeep extends Phase {
                         enchantment = CardFactoryUtil.getBestEnchantmentAI(enchantmentsInLibrary, this, false);
                     }
                     if (enchantment != null) {
-                        Singletons.getModel().getGame().getAction().changeZone(
-                                Singletons.getModel().getGame().getZoneOf(enchantment),
+                        game.getAction().changeZone(
+                                game.getZoneOf(enchantment),
                                 enchantment.getOwner().getZone(ZoneType.Battlefield), enchantment, null);
                         enchantment.enchantEntity(source.getEnchantingPlayer());
                     }
@@ -1178,7 +1183,7 @@ public class Upkeep extends Phase {
                             + " the same name as a Curse attached to enchanted player, "
                             + "put it onto the battlefield attached to that player, then shuffle you library.");
             ability.setStackDescription(sb.toString());
-            Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
+            game.getStack().addSimultaneousStackEntry(ability);
         }
     } // upkeepCurseOfMisfortunes
 

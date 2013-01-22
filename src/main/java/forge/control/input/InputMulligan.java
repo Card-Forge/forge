@@ -160,7 +160,7 @@ public class InputMulligan extends Input {
                                 // Is there a better way for the AI to decide this?
                                 if (effect.doTrigger(false)) {
                                     GameActionUtil.showInfoDialg("Computer reveals " + c.getName() + "(" + c.getUniqueNumber() + ").");
-                                    ComputerUtil.playNoStack(p, effect);
+                                    ComputerUtil.playNoStack(p, effect, game);
                                 }
                             }
                         }

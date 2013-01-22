@@ -19,6 +19,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
+import forge.game.GameState;
 import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 
@@ -454,6 +455,7 @@ public class WrappedAbility extends Ability implements ISpellAbility {
     // //////////////////////////////////////
     @Override
     public void resolve() {
+        final GameState game = Singletons.getModel().getGame();
         if (!(regtrig instanceof TriggerAlways)) {
             // State triggers
             // don't do the whole
@@ -463,7 +465,7 @@ public class WrappedAbility extends Ability implements ISpellAbility {
                 return;
             }
         }
-        TriggerHandler th = Singletons.getModel().getGame().getTriggerHandler();
+        TriggerHandler th = game.getTriggerHandler();
         Map<String, String> triggerParams = regtrig.getMapParams();
 
         if (decider != null) {
@@ -508,12 +510,12 @@ public class WrappedAbility extends Ability implements ISpellAbility {
         }
 
         if (getActivatingPlayer().isHuman()) {
-            Singletons.getModel().getGame().getAction().playSpellAbilityNoStack(sa, true);
+            game.getAction().playSpellAbilityNoStack(sa, true);
         } else {
             // commented out because i don't think this should be called
             // again here
             // sa.doTrigger(isMandatory);
-            ComputerUtil.playNoStack(getActivatingPlayer(), sa);
+            ComputerUtil.playNoStack(getActivatingPlayer(), sa, game);
         }
 
         // Add eventual delayed trigger.

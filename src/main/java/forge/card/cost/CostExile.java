@@ -98,7 +98,7 @@ public class CostExile extends CostPartWithList {
         final Integer i = this.convertAmount();
         sb.append("Exile ");
 
-        if (this.getThis()) {
+        if (this.isTargetingThis()) {
             sb.append(this.getType());
             if (!this.from.equals(ZoneType.Battlefield)) {
                 sb.append(" from your ").append(this.from);
@@ -113,7 +113,7 @@ public class CostExile extends CostPartWithList {
             final String desc = this.getTypeDescription() == null ? this.getType() : this.getTypeDescription();
 
             sb.append(Cost.convertAmountTypeToWords(i, this.getAmount(), desc));
-            if (!this.getThis()) {
+            if (!this.isTargetingThis()) {
                 sb.append(" you control");
             }
             return sb.toString();
@@ -146,25 +146,13 @@ public class CostExile extends CostPartWithList {
     /*
      * (non-Javadoc)
      * 
-     * @see forge.card.cost.CostPart#refund(forge.Card)
-     */
-    @Override
-    public void refund(final Card source) {
-        // TODO Currently there's no way to refund an exiled cost
-
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
      * @see
      * forge.card.cost.CostPart#canPay(forge.card.spellability.SpellAbility,
      * forge.Card, forge.Player, forge.card.cost.Cost)
      */
     @Override
-    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost) {
+    public final boolean canPay(final SpellAbility ability, final Card source, final Player activator, final Cost cost, final GameState game) {
         List<Card> typeList = new ArrayList<Card>();
-        final GameState game = Singletons.getModel().getGame();
         if (this.getType().equals("All")) {
             return true; // this will always work
         }
@@ -179,7 +167,7 @@ public class CostExile extends CostPartWithList {
                 typeList = new ArrayList<Card>(activator.getCardsIn(this.getFrom()));
             }
         }
-        if (!this.getThis()) {
+        if (!this.isTargetingThis()) {
             typeList = CardLists.getValidCards(typeList, this.getType().split(";"), activator, source);
 
             final Integer amount = this.convertAmount();
@@ -214,7 +202,7 @@ public class CostExile extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         for (final Card c : this.getList()) {
             Singletons.getModel().getGame().getAction().exile(c);
             if (this.from.equals(ZoneType.Stack)) {
@@ -237,10 +225,9 @@ public class CostExile extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final boolean payHuman(final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         final String amount = this.getAmount();
         Integer c = this.convertAmount();
-        final GameState game = Singletons.getModel().getGame();
         final Player activator = ability.getActivatingPlayer();
         List<Card> list;
 
@@ -269,7 +256,7 @@ public class CostExile extends CostPartWithList {
                 c = AbilityFactory.calculateAmount(source, amount, ability);
             }
         }
-        if (this.getThis()) {
+        if (this.isTargetingThis()) {
             final Input inp = CostExile.exileThis(ability, payment, this);
             Singletons.getModel().getMatch().getInput().setInputInterrupt(inp);
         } else if (this.from.equals(ZoneType.Battlefield) || this.from.equals(ZoneType.Hand)) {
@@ -311,7 +298,7 @@ public class CostExile extends CostPartWithList {
     @Override
     public final boolean decideAIPayment(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         this.resetList();
-        if (this.getThis()) {
+        if (this.isTargetingThis()) {
             this.getList().add(source);
         } else if (this.getType().equals("All")) {
             this.setList(new ArrayList<Card>(ability.getActivatingPlayer().getCardsIn(this.getFrom())));

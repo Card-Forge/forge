@@ -69,13 +69,13 @@ public class GameState {
     private final List<Card> communalPlanarDeck = new ArrayList<Card>();
     private Card activePlane = null;
     
-    private final Cleanup cleanup = new Cleanup();
-    private final EndOfTurn endOfTurn = new EndOfTurn();
-    private final EndOfCombat endOfCombat = new EndOfCombat();
-    private final Untap untap = new Untap();
-    private final Upkeep upkeep = new Upkeep();
+    public final Cleanup cleanup;
+    public final EndOfTurn endOfTurn;
+    public final EndOfCombat endOfCombat;
+    public final Untap untap;
+    public final Upkeep upkeep;
     private final PhaseHandler phaseHandler;
-    private final MagicStack stack;
+    public final MagicStack stack;
     private final StaticEffects staticEffects = new StaticEffects();
     private final TriggerHandler triggerHandler = new TriggerHandler();
     private final ReplacementHandler replacementHandler = new ReplacementHandler();
@@ -89,7 +89,7 @@ public class GameState {
     private final Zone stackZone = new Zone(ZoneType.Stack);
 
     private long timestamp = 0;
-    private final GameAction action;
+    public final GameAction action;
 
     /**
      * Constructor.
@@ -108,6 +108,12 @@ public class GameState {
         action = new GameAction(this);
         stack = new MagicStack(this);
         phaseHandler = new PhaseHandler(this);
+        
+        untap = new Untap(this);
+        upkeep = new Upkeep(this);
+        cleanup = new Cleanup(this);
+        endOfTurn = new EndOfTurn(this);
+        endOfCombat = new EndOfCombat(this);
 
         events.register(Singletons.getControl().getSoundSystem());
         events.register(gameLog);

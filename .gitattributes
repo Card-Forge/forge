@@ -13447,7 +13447,6 @@ src/main/java/forge/card/cost/CostDamage.java -text
 src/main/java/forge/card/cost/CostDiscard.java -text
 src/main/java/forge/card/cost/CostExile.java -text
 src/main/java/forge/card/cost/CostGainLife.java -text
-src/main/java/forge/card/cost/CostGainLifeEachOther.java -text
 src/main/java/forge/card/cost/CostMana.java -text
 src/main/java/forge/card/cost/CostMill.java -text
 src/main/java/forge/card/cost/CostPart.java -text
