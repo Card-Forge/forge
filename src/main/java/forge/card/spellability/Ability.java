@@ -81,7 +81,8 @@ public abstract class Ability extends SpellAbility {
         public void resolve() {
             // TODO Auto-generated method stub
             throw new RuntimeException("This ability is intended to indicate \"land to play\" choice only");
-        }}; 
+        }
         @Override
         public String toUnsuppressedString() { return "Play land"; }
+    }; 
 }

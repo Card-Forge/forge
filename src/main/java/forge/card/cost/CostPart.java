@@ -151,7 +151,7 @@ public abstract class CostPart {
      *            the activator
      * @param cost
      *            the cost
-     * @param game 
+     * @param game
      * @return true, if successful
      */
     public abstract boolean canPay(SpellAbility ability, Card source, Player activator, Cost cost, GameState game);
@@ -159,10 +159,14 @@ public abstract class CostPart {
     /**
      * Decide ai payment.
      * 
-     * @param ai {@link forge.player.Player}
-     * @param ability {@link forge.card.spellability.SpellAbility}
-     * @param source {@link forge.Card}
-     * @param payment {@link forge.card.cost.CostPayment}
+     * @param ai
+     *            {@link forge.player.Player}
+     * @param ability
+     *            {@link forge.card.spellability.SpellAbility}
+     * @param source
+     *            {@link forge.Card}
+     * @param payment
+     *            {@link forge.card.cost.CostPayment}
      * @return true, if successful
      */
     public abstract boolean decideAIPayment(final Player ai, SpellAbility ability, Card source, CostPayment payment);
@@ -170,21 +174,28 @@ public abstract class CostPart {
     /**
      * Pay ai.
      * 
-     * @param ai {@link forge.player.Player}
-     * @param ability {@link forge.card.spellability.SpellAbility}
-     * @param source {@link forge.Card}
-     * @param payment {@link forge.card.cost.CostPayment}
-     * @param game 
+     * @param ai
+     *            {@link forge.player.Player}
+     * @param ability
+     *            {@link forge.card.spellability.SpellAbility}
+     * @param source
+     *            {@link forge.Card}
+     * @param payment
+     *            {@link forge.card.cost.CostPayment}
+     * @param game
      */
     public abstract void payAI(final Player ai, SpellAbility ability, Card source, CostPayment payment, GameState game);
 
     /**
      * Pay human.
      * 
-     * @param ability {@link forge.card.spellability.SpellAbility}
-     * @param source {@link forge.Card}
-     * @param payment {@link forge.card.cost.CostPayment}
-     * @param game 
+     * @param ability
+     *            {@link forge.card.spellability.SpellAbility}
+     * @param source
+     *            {@link forge.Card}
+     * @param payment
+     *            {@link forge.card.cost.CostPayment}
+     * @param game
      * @return true, if successful
      */
     public abstract boolean payHuman(SpellAbility ability, Card source, CostPayment payment, GameState game);
@@ -203,8 +214,8 @@ public abstract class CostPart {
      * @param source
      *            the source
      */
-    public void refund(Card source) {}
-
+    public void refund(Card source) {
+    }
 
     /**
      * Sets the amount.
