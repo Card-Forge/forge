@@ -3,7 +3,7 @@ ManaCost:3 G
 Types:Sorcery
 Text:no text
 A:SP$ DestroyAll | Cost$ 3 G | ValidCards$ Enchantment | SpellDescription$ Destroy all enchantments.
-A:SP$ DestroyAll | Cost$ OthersEachGainLife<6> | ValidCards$ Enchantment | IsPresent$ Forest.YouCtrl | PrecostDesc$ If you control a Forest, rather than pay CARDNAME's mana cost, | CostDesc$ you may have each other player gain 6 life | SpellDescription$ .
+A:SP$ DestroyAll | Cost$ GainLife<6/Player.Other/*> | ValidCards$ Enchantment | IsPresent$ Forest.YouCtrl | PrecostDesc$ If you control a Forest, rather than pay CARDNAME's mana cost, | CostDesc$ you may have each other player gain 6 life | SpellDescription$ .
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/reverent_silence.jpg
 SetInfo:NMS|Common|http://magiccards.info/scans/en/ne/111.jpg
