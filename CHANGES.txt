@@ -100,6 +100,17 @@ Fixes/Features:
 - Activating player is not always the player revealing cards. Added parameter to set number of cards to reveal.
 - Modified encode effect to require a creature under activator's control before exile choice.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed the Deathly Dominion precon Set code
+- Made the Generate option for planar decks actually generate a planar deck and not a scheme deck!
+- fixes 15 warnings eclipse showed up
+- Fixed the trigger description of Phantasmal Sphere
+- Costs: removed isUndoable, isReusable backing fields, appropiate values are returned by method overloads in classes
+- Costs: joined all CostGainLife implementations. Syntax is: GainLife<LifeAmount/Player.Selector/[cntPlayers|*]> asterisk in last parameter means "all players".
+- Changed a lot of methods to pass GameState as a parameter rather than get it from Singletons.*
+- updated scritps with new GainLife syntax
+- fixing "play land" name popping for abilities that were not related to lands
+- CostPart.java got autoformatted
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -238,6 +249,51 @@ Duskmantle Seer
 Miming Slime
 Serene Remembrance
 Unexpected Results
+Angelic Edict
+Shielded Passage
+Totally Lost
+Armored Transport
+Millennial Gargoyle
+Razortip Whip
+Riot Gear
+Shattering Blow
+Skyblinder Staff
+Aerial Maneuver
+Court Street Denizen
+Daring Skyjek
+Debtor's Pulpit
+Dutiful Thrull
+Guildscorn Ward
+Hold the Gates
+Holy Mantle
+Arrow of Justice
+Boros Reckoner
+Coerced Confession
+Deathcult Rogue
+Gift of Orzhova
+Immortal Servitude
+Merfolk of the Depths
+Rubblebelt Raiders
+Adaptive Snapjaw
+Alpha Authority
+Burst of Strength
+Crowned Ceratok
+Disciple of the Old Ways
+Forced Adaptation
+Greenside Watcher
+Scab-Clan Charger
+Spire Tracer
+Tower Defense
+Wasteland Viper
+Wildwood Rebirth
+Vizkopa Guildmage
+Wojek Halberdiers
+Skinbrand Goblin
+Structural Collapse
+Towering Thunderfist
+Warmind Infantry
+Wojek Halberdiers
+Wrecking Ogre
 
 
 end
