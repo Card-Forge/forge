@@ -4,7 +4,7 @@ Types:Creature Illusion
 Text:no text
 PT:0/1
 K:Flying
-T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on CARDNAME.
+T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigPutCounter | TriggerDescription$ At the beginning of your upkeep, put a +1/+1 counter on CARDNAME, then sacrifice CARDNAME unless you pay 1 for each +1/+1 counter on it.
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ Self | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ SacSelf
 SVar:SacSelf:DB$ Sacrifice | Defined$ Card.Self | UnlessCost$ X | UnlessPayer$ You
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ OrbToken | TriggerDescription$ When CARDNAME leaves the battlefield, put a blue Orb creature token with flying onto the battlefield under target opponent's control. That creature's power and toughness are each equal to the number of +1/+1 counters on CARDNAME.
