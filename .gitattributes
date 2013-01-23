@@ -5628,6 +5628,7 @@ res/cardsfolder/l/lady_sun.txt -text svneol=unset#text/plain
 res/cardsfolder/l/lady_zhurong_warrior_queen.txt svneol=native#text/plain
 res/cardsfolder/l/lagac_lizard.txt svneol=native#text/plain
 res/cardsfolder/l/lair_delve.txt -text
+res/cardsfolder/l/lairwatch_giant.txt -text
 res/cardsfolder/l/lake_of_the_dead.txt svneol=native#text/plain
 res/cardsfolder/l/lambholt_elder_silverpelt_werewolf.txt -text
 res/cardsfolder/l/lammastide_weave.txt -text

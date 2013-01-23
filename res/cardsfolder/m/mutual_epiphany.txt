@@ -8,4 +8,5 @@ SVar:PWAway:DB$ Planeswalk | Cost$ 0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mutual_epiphany.jpg
 SetInfo:PC2|Common|http://magiccards.info/extras/phenomenon/planechase-2012-edition/mutual-epiphany.jpg
+Oracle:When you encounter Mutual Epiphany, each player draws four cards. (Then planeswalk away from this phenomenon.)
 End

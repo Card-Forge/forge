@@ -3,9 +3,9 @@ ManaCost:no cost
 Types:Plane Arkhos
 Text:no text
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Command | Execute$ LetheMill | TriggerDescription$ At the beginning of your upkeep, put the top ten cards of your library into your graveyard.
-SVar:LetheMill:AB$ Mill | Cost$ 0 | Defined$ You | NumCards$ 10 
+SVar:LetheMill:AB$ Mill | Cost$ 0 | Defined$ You | NumCards$ 10
 T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, target player puts the top 10 cards of his or her library into his or her graveyard.
-SVar:RolledChaos:AB$ Mill | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Choose target player to mill. | NumCards$ 10 
+SVar:RolledChaos:AB$ Mill | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Choose target player to mill. | NumCards$ 10
 T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ RolledWalk | Secondary$ True | TriggerDescription$ Whenever you roll Planeswalk, put this card on the bottom of its owner's planar deck face down, then move the top card of your planar deck off that planar deck and turn it face up
 SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
 A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
@@ -13,4 +13,5 @@ SVar:X:Count$RolledThisTurn
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lethe_lake.jpg
 SetInfo:HOP|Common|http://magiccards.info/extras/plane/planechase/lethe-lake.jpg
+Oracle:At the beginning of your upkeep, put the top ten cards of your library into your graveyard.\nWhenever you roll {C}, target player puts the top ten cards of his or her library into his or her graveyard.
 End

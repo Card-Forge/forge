@@ -12,4 +12,5 @@ SVar:X:Count$RolledThisTurn
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/the_great_forest.jpg
 SetInfo:HOP|Common|http://magiccards.info/extras/plane/planechase/the-great-forest.jpg
+Oracle:Each creature assigns combat damage equal to its toughness rather than its power.\nWhenever you roll {C}, creatures you control get +0/+2 and gain trample until end of turn.
 End

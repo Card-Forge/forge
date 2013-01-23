@@ -13,4 +13,5 @@ SVar:X:Count$RolledThisTurn
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/panopticon.jpg
 SetInfo:HOP|Common|http://magiccards.info/extras/plane/planechase/panopticon.jpg
+Oracle:When you planeswalk to Panopticon, draw a card.\nAt the beginning of your draw step, draw an additional card.\nWhenever you roll {C}, draw a card.
 End

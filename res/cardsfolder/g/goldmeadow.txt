@@ -13,4 +13,5 @@ SVar:X:Count$RolledThisTurn
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/goldmeadow.jpg
 SetInfo:HOP|Common|http://magiccards.info/extras/plane/planechase/goldmeadow.jpg
+Oracle:Whenever a land enters the battlefield, that land's controller puts three 0/1 white Goat creature tokens onto the battlefield.\nWhenever you roll {C}, put a 0/1 white Goat creature token onto the battlefield.
 End

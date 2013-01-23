@@ -12,4 +12,5 @@ SVar:X:Count$RolledThisTurn
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/krosa.jpg
 SetInfo:HOP|Common|http://magiccards.info/extras/plane/planechase/krosa.jpg
+Oracle:All creatures get +2/+2.\nWhenever you roll {C}, you may add {W}{U}{B}{R}{G} to your mana pool.
 End

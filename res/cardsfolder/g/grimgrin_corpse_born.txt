@@ -5,7 +5,7 @@ Text:no text
 PT:5/5
 K:CARDNAME enters the battlefield tapped.
 K:CARDNAME doesn't untap during your untap step.
-A:AB$ Untap | Cost$ Sac<1/Creature.Other> | SubAbility$ DBPutCounter | SpellDescription$ Untap CARDNAME and put a +1/+1 counter on it.
+A:AB$ Untap | Cost$ Sac<1/Creature.Other/another creature> | SubAbility$ DBPutCounter | SpellDescription$ Untap CARDNAME and put a +1/+1 counter on it.
 SVar:DBPutCounter:DB$PutCounter | Cost$ 0 | CounterType$ P1P1 | CounterNum$1
 T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigDestroy | TriggerDescription$ Whenever CARDNAME attacks, destroy target creature defending player controls, then put a +1/+1 counter on CARDNAME.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | ValidTgts$ Creature.DefenderCtrl | TgtPrompt$ Select target creature | SubAbility$ DBPutCounter
