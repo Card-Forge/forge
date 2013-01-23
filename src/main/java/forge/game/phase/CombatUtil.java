@@ -2942,6 +2942,12 @@ public class CombatUtil {
                 for (final Ability ab : CardFactoryUtil.getBushidoEffects(c)) {
                     Singletons.getModel().getGame().getStack().add(ab);
                 }
+                // Run triggers
+                final HashMap<String, Object> runParams = new HashMap<String, Object>();
+                runParams.put("Blocker", c);
+                final Card attacker = Singletons.getModel().getGame().getCombat().getAttackersBlockedBy(c).get(0);
+                runParams.put("Attacker", attacker);
+                Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Blocks, runParams, false);
             }
 
             c.getDamageHistory().setCreatureBlockedThisCombat(true);
@@ -2966,7 +2972,7 @@ public class CombatUtil {
         final HashMap<String, Object> runParams = new HashMap<String, Object>();
         runParams.put("Attacker", a);
         runParams.put("Blocker", b);
-        Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Blocks, runParams, false);
+        //Singletons.getModel().getGame().getTriggerHandler().runTrigger(TriggerType.Blocks, runParams, false);
 
         if (!a.getDamageHistory().getCreatureGotBlockedThisCombat()) {
             final int blockers = Singletons.getModel().getGame().getCombat().getBlockers(a).size();

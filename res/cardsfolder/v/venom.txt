@@ -4,7 +4,7 @@ Types:Enchantment Aura
 Text:no text
 K:Enchant creature
 A:SP$ Attach | Cost$ 1 G G | ValidTgts$ Creature | AILogic$ Pump
-T:Mode$ Blocks | ValidCard$ Card.AttachedBy | ValidBlocked$ Creature.nonWall | DelayedTrigger$ DelTrigBlocked | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked by a non-Wall creature, destroy the other creature at end of combat.
+T:Mode$ AttackerBlocked | ValidCard$ Creature.nonWall | ValidBlocker$ Card.AttachedBy | DelayedTrigger$ DelTrigBlocked | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked by a non-Wall creature, destroy the other creature at end of combat.
 T:Mode$ Blocks | ValidCard$ Creature.nonWall | ValidBlocked$ Card.AttachedBy | DelayedTrigger$ DelTrigBlocker | Secondary$ True | TriggerDescription$ Whenever enchanted creature blocks or becomes blocked by a non-Wall creature, destroy the other creature at end of combat.
 SVar:DelTrigBlocked:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroyBlocked | TriggerDescription$ Destroy blocked creature at end of combat.
 SVar:DelTrigBlocker:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDestroyBlocker | TriggerDescription$ Destroy blocking creature at end of combat.

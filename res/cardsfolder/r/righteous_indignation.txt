@@ -2,7 +2,7 @@ Name:Righteous Indignation
 ManaCost:2 W
 Types:Enchantment
 Text:no text
-T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Creature.Black,Creature.Red | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature blocks a black or red creature, the blocking creature gets +1/+1 until end of turn.
+T:Mode$ AttackerBlocked | ValidCard$ Creature.Black,Creature.Red | ValidBlocker$ Creature | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever a creature blocks a black or red creature, the blocking creature gets +1/+1 until end of turn.
 SVar:TrigPump:AB$ Pump | Cost$ 0 | NumAtt$ +1 | NumDef$ +1 | Defined$ TriggeredBlocker | SpellDescription$ The blocking creature gets +1/+1 until end of turn.
 SVar:RemRandomDeck:True
 SVar:Rarity:Uncommon

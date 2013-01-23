@@ -3,10 +3,10 @@ ManaCost:4 R R
 Types:Creature Elemental
 Text:no text
 PT:4/4
-T:Mode$ Blocks | ValidBlocked$ Card.Self | Execute$ TrigDealDamageAttack | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME deals 3 damage to that creature.
-T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigDealDamageBlock | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME deals 3 damage to that creature.
-SVar:TrigDealDamageBlock:AB$DealDamage | Cost$ 0 | Defined$ TriggeredAttacker | NumDmg$ 3
-SVar:TrigDealDamageAttack:AB$DealDamage | Cost$ 0 | Defined$ TriggeredBlocker | NumDmg$ 3
+T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigDealDamageAttack | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME deals 3 damage to that creature.
+T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | Execute$ TrigDealDamageBlock | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME deals 3 damage to that creature.
+SVar:TrigDealDamageAttack:AB$DealDamage | Cost$ 0 | Defined$ TriggeredAttacker | NumDmg$ 3
+SVar:TrigDealDamageBlock:AB$DealDamage | Cost$ 0 | Defined$ TriggeredBlocker | NumDmg$ 3
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/inferno_elemental.jpg
 SetInfo:M10|Uncommon|http://magiccards.info/scans/en/m10/142.jpg

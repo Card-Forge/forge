@@ -5,7 +5,7 @@ Text:no text
 PT:6/6
 K:Vigilance
 K:Trample
-T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME blocks a creature, CARDNAME deals damage to that creature's controller equal to CARDNAME's power.
+T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self  | TriggerZones$ Battlefield | Execute$ TrigDealDamage | TriggerDescription$ Whenever CARDNAME blocks a creature, CARDNAME deals damage to that creature's controller equal to CARDNAME's power.
 SVar:TrigDealDamage:AB$DealDamage | Cost$ 0 | Defined$ TriggeredAttackerController | NumDmg$ X | References$ X
 SVar:X:Count$CardPower
 SVar:Rarity:Rare

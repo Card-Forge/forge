@@ -4,7 +4,7 @@ Types:Creature Wall
 Text:no text
 PT:0/7
 K:Defender
-T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature | DelayedTrigger$ DelTrigBlocked | Static$ True | TriggerDescription$ At end of combat, exile all creatures blocked by CARDNAME.
+T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | DelayedTrigger$ DelTrigBlocked | Static$ True | TriggerDescription$ At end of combat, exile all creatures blocked by CARDNAME.
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Card.Self | Execute$ TrigReturn | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME leaves the battlefield, return all cards exiled with CARDNAME to the battlefield under their owners' control.
 SVar:DelTrigBlocked:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigExile | TriggerDescription$ Exile blocked creature at end of combat.
 SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ TriggeredAttacker | Origin$ Battlefield | Destination$ Exile | RememberChanged$ True

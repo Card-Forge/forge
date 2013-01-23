@@ -3,8 +3,8 @@ ManaCost:2 U
 Types:Creature Human Soldier
 Text:no text
 PT:1/1
-T:Mode$ Blocks | ValidCard$ Card.Self | TriggerZones$ Battlefield | ValidBlocked$ Creature | Execute$ TrigPhaseAttacker | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, Dream Fighter and that creature phase out.
-T:Mode$ Blocks | ValidCard$ Creature | TriggerZones$ Battlefield | ValidBlocked$ Card.Self | Execute$ TrigPhaseBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, Dream Fighter and that creature phase out.
+T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPhaseAttacker | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, Dream Fighter and that creature phase out.
+T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | TriggerZones$ Battlefield | Execute$ TrigPhaseBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, Dream Fighter and that creature phase out.
 SVar:TrigPhaseAttacker:DB$ Phases | Defined$ TriggeredAttacker | SubAbility$ DBPhaseSelf
 SVar:TrigPhaseBlocker:DB$ Phases | Defined$ TriggeredBlocker | SubAbility$ DBPhaseSelf
 SVar:DBPhaseSelf:DB$ Phases | Defined$ Self

@@ -4,7 +4,7 @@ Types:Creature Minotaur
 Text:no text
 PT:3/3
 K:First Strike
-T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature | Execute$ TrigBlocks | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature loses first strike until end of turn.
+T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigBlocks | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature loses first strike until end of turn.
 T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | Execute$ TrigBlocked | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature loses first strike until end of turn.
 SVar:TrigBlocks:AB$ Debuff | Cost$ 0 | Defined$ TriggeredAttacker | Keywords$ First Strike
 SVar:TrigBlocked:AB$ Debuff | Cost$ 0 | Defined$ TriggeredBlocker | Keywords$ First Strike

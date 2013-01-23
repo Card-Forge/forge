@@ -3,7 +3,7 @@ ManaCost:U U
 Types:Creature Shapeshifter Spirit
 Text:no text
 PT:1/1
-T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature | Execute$ TrigAnimateBlocker | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, change CARDNAME's power and toughness to that creature's power and toughness until end of turn.
+T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigAnimateBlocker | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, change CARDNAME's power and toughness to that creature's power and toughness until end of turn.
 T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | Execute$ TrigAnimateAttacker | TriggerZones$ Battlefield | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, change CARDNAME's power and toughness to that creature's power and toughness until end of turn.
 SVar:TrigAnimateBlocker:AB$ Animate | Cost$ 0 | Power$ W | Toughness$ X | References$ W,X
 SVar:TrigAnimateAttacker:AB$ Animate | Cost$ 0 | Power$ Y | Toughness$ Z | References$ Y,Z

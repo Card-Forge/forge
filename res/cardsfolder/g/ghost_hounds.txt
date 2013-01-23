@@ -4,7 +4,7 @@ Types:Creature Hound Spirit
 Text:no text
 PT:1/1
 K:Vigilance
-T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature.White | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a white creature, CARDNAME gains first strike until end of turn.
+T:Mode$ AttackerBlocked | ValidCard$ Creature.White | ValidBlocker$ Card.Self  | Execute$ TrigPump | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a white creature, CARDNAME gains first strike until end of turn.
 T:Mode$ Blocks | ValidCard$ Creature.White | ValidBlocked$ Card.Self | Execute$ TrigPump | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a white creature, CARDNAME gains first strike until end of turn.
 SVar:TrigPump:AB$Pump | Cost$ 0 | Defined$ Self | KW$ First Strike
 SVar:Rarity:Uncommon

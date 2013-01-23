@@ -3,7 +3,7 @@ ManaCost:W
 Types:Creature Human Soldier
 Text:no text
 PT:1/1
-T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME blocks a creature, destroy that creature and CARDNAME.
+T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self  | Execute$ TrigDestroy | TriggerDescription$ When CARDNAME blocks a creature, destroy that creature and CARDNAME.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredAttacker | SubAbility$ DestroySelf
 SVar:DestroySelf:DB$Destroy | Cost$ 0 | Defined$ Self
 SVar:Rarity:Rare

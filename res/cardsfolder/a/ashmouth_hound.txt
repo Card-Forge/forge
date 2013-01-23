@@ -3,10 +3,10 @@ ManaCost:1 R
 Types:Creature Elemental Hound
 Text:no text
 PT:2/1
-T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigDamage1 | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME deals 1 damage to that creature.
-T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | Execute$ TrigDamage2 | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME deals 1 damage to that creature.
-SVar:TrigDamage1:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredAttacker | NumDmg$ 1
-SVar:TrigDamage2:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredBlocker | NumDmg$ 1
+T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self  | Execute$ TrigDamageAttacker | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME deals 1 damage to that creature.
+T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self  | Execute$ TrigDamageBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, CARDNAME deals 1 damage to that creature.
+SVar:TrigDamageAttacker:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredAttacker | NumDmg$ 1
+SVar:TrigDamageBlocker:AB$ DealDamage | Cost$ 0 | Defined$ TriggeredBlocker | NumDmg$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ashmouth_hound.jpg
 SetInfo:ISD|Common|http://magiccards.info/scans/en/isd/128.jpg

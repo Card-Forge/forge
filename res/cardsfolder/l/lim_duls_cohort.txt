@@ -3,7 +3,7 @@ ManaCost:1 B B
 Types:Creature Zombie
 Text:no text
 PT:2/3
-T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature | Execute$ TrigBlocks | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature can't be regenerated this turn.
+T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | Execute$ TrigBlocks | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature can't be regenerated this turn.
 T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | Execute$ TrigBlocked | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, that creature can't be regenerated this turn.
 SVar:TrigBlocks:AB$Pump | Cost$ 0 | Defined$ TriggeredAttacker | KW$ HIDDEN CARDNAME can't be regenerated.
 SVar:TrigBlocked:AB$Pump | Cost$ 0 | Defined$ TriggeredBlocker | KW$ HIDDEN CARDNAME can't be regenerated.

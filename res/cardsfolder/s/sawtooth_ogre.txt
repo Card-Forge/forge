@@ -3,7 +3,7 @@ ManaCost:2 R R
 Types:Creature Ogre
 Text:no text
 PT:3/3
-T:Mode$ Blocks | ValidCard$ Card.Self | ValidBlocked$ Creature | DelayedTrigger$ DelTrigBlocked | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, Sawtooth Ogre deals 1 damage to that creature at end of combat.
+T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Card.Self | DelayedTrigger$ DelTrigBlocked | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, Sawtooth Ogre deals 1 damage to that creature at end of combat.
 T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Card.Self | DelayedTrigger$ DelTrigBlocker | Secondary$ True | TriggerDescription$ Whenever CARDNAME blocks or becomes blocked by a creature, Sawtooth Ogre deals 1 damage to that creature at end of combat.
 SVar:DelTrigBlocked:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDamageBlocked | TriggerDescription$ CARDNAME deals 1 damage to blocked creature at end of combat.
 SVar:DelTrigBlocker:Mode$ Phase | Phase$ EndCombat | ValidPlayer$ Player | Execute$ TrigDamageBlocker | TriggerDescription$ CARDNAME deals 1 damage to blocking creature at end of combat.

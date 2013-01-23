@@ -3,7 +3,7 @@ ManaCost:1
 Types:Artifact Equipment
 Text:no text
 K:Equip 2
-T:Mode$ Blocks | ValidCard$ Creature.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever equipped creature blocks or becomes blocked by a creature, destroy both creatures.
+T:Mode$ AttackerBlocked | ValidCard$ Creature | ValidBlocker$ Creature.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDestroy | TriggerDescription$ Whenever equipped creature blocks or becomes blocked by a creature, destroy both creatures.
 T:Mode$ Blocks | ValidCard$ Creature | ValidBlocked$ Creature.AttachedBy | TriggerZones$ Battlefield | Execute$ TrigDestroy | Secondary$ True | TriggerDescription$ Whenever equipped creature blocks or becomes blocked by a creature, destroy both creatures.
 SVar:TrigDestroy:AB$Destroy | Cost$ 0 | Defined$ TriggeredAttacker | SubAbility$ DBDestroy
 SVar:DBDestroy:DB$Destroy | Defined$ TriggeredBlocker
