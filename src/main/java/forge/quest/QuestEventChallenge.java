@@ -64,7 +64,7 @@ public class QuestEventChallenge extends QuestEvent {
     private List<String> aiExtraCards = new ArrayList<String>();
 
     /** The card reward list. */
-    private UnOpenedProduct cardRewardList = null;
+    private List<CardPrinted> cardRewardList = null;
 
     /**
      * Instantiates a new quest challenge.
@@ -250,10 +250,9 @@ public class QuestEventChallenge extends QuestEvent {
      */
     public final List<CardPrinted> getCardRewardList() {
         if (cardRewardList == null) {
-
-            this.cardRewardList = BoosterUtils.generateCardRewardList(cardReward);
+            this.cardRewardList = new ArrayList<CardPrinted>(BoosterUtils.generateCardRewardList(cardReward));
         }
-        return this.cardRewardList.open();
+        return this.cardRewardList;
     }
 
     /**

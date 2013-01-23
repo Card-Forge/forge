@@ -20,7 +20,7 @@ package forge.quest;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
+import java.util.Map;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -28,16 +28,16 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
-
-
 import forge.Singletons;
 import forge.card.BoosterGenerator;
 import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
 import forge.card.UnOpenedProduct;
+import forge.gui.GuiChoose;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.util.Aggregates;
+import forge.item.ItemPool;
 import forge.util.MyRandom;
 
 // The BoosterPack generates cards for the Card Pool in Quest Mode
@@ -218,6 +218,86 @@ public final class BoosterUtils {
     }
 
     /**
+     * parseReward - used internally to parse individual items in a challenge reward definition.
+     * @param s
+     *      String, the reward to parse
+     * @return List<CardPrinted>
+     */
+    private static List<CardPrinted> parseReward(final String s) {
+
+        String[] temp = s.split(" ");
+        List<CardPrinted> exactCards = new ArrayList<CardPrinted>();
+
+        if ((temp.length > 2 && (temp[2].equalsIgnoreCase("rare") || temp[2].equalsIgnoreCase("rares")))
+                || (temp.length > 1 && (temp[1].equalsIgnoreCase("rare") || temp[1].equalsIgnoreCase("rares")))) {
+            // Type 1: 'n (color) rares'
+            final int qty = Integer.parseInt(temp[0]);
+            // Determine rarity
+            Predicate<CardPrinted> rar = CardPrinted.Predicates.Presets.IS_UNCOMMON;
+
+            rar = CardPrinted.Predicates.Presets.IS_RARE_OR_MYTHIC;
+
+            // Determine color ("random" defaults to null color)
+            Predicate<CardRules> col = Predicates.alwaysTrue();
+            if (temp[1].equalsIgnoreCase("black")) {
+                col = CardRulesPredicates.Presets.IS_BLACK;
+            } else if (temp[1].equalsIgnoreCase("blue")) {
+                col = CardRulesPredicates.Presets.IS_BLUE;
+            } else if (temp[1].equalsIgnoreCase("colorless")) {
+                col = CardRulesPredicates.Presets.IS_COLORLESS;
+            } else if (temp[1].equalsIgnoreCase("green")) {
+                col = CardRulesPredicates.Presets.IS_GREEN;
+            } else if (temp[1].equalsIgnoreCase("multicolor")) {
+                col = CardRulesPredicates.Presets.IS_MULTICOLOR;
+            } else if (temp[1].equalsIgnoreCase("red")) {
+                col = CardRulesPredicates.Presets.IS_RED;
+            } else if (temp[1].equalsIgnoreCase("white")) {
+                col = CardRulesPredicates.Presets.IS_WHITE;
+            }
+
+            Function<BoosterGenerator, List<CardPrinted>> openWay = new Function<BoosterGenerator, List<CardPrinted>>() {
+                @Override
+                public List<CardPrinted> apply(BoosterGenerator arg1) {
+                    return arg1.getSingletonBoosterPack(qty);
+                }
+            };
+            Predicate<CardPrinted> colorPred = Predicates.compose(col, CardPrinted.FN_GET_RULES);
+            Predicate<CardPrinted> rarAndColor = Predicates.and(rar, colorPred);
+            if (Singletons.getModel().getQuest().getFormat() != null) {
+                rarAndColor = Predicates.and(Singletons.getModel().getQuest().getFormat().getFilterPrinted(), rarAndColor);
+            }
+            return (new UnOpenedProduct(openWay, new BoosterGenerator(rarAndColor))).open(); // qty))
+        } else if (temp.length == 2 && temp[0].equalsIgnoreCase("duplicate") && temp[1].equalsIgnoreCase("card")) {
+            // Type 2: a duplicate card of the players choice
+
+            final ItemPool<CardPrinted> playerCards = Singletons.getModel().getQuest().getAssets().getCardPool();
+            if (!playerCards.isEmpty()) { // Maybe a redundant check since it's hard to win a duel without any cards...
+
+                List<CardPrinted> cardChoices = new ArrayList<CardPrinted>();
+                for (final Map.Entry<CardPrinted, Integer> card : playerCards) {
+                    cardChoices.add(card.getKey());
+                }
+                Collections.sort(cardChoices);
+
+                final CardPrinted duplicate = GuiChoose.one("You have won a duplicate card!", cardChoices);
+                if (duplicate != null) {
+                    exactCards.add(duplicate);
+                }
+            }
+        } else if (temp.length > 0) {
+            // Type 3: assume we are asking for a single copy of a specific card
+            final CardPrinted specific = CardDb.instance().getCard(s);
+            if (specific != null) {
+                exactCards.add(specific);
+            }
+        }
+
+        // Return the duplicate, a specified card, or an empty list
+        return exactCards;
+    }
+
+
+    /**
      * <p>
      * generateCardRewardList.
      * </p>
@@ -225,49 +305,35 @@ public final class BoosterUtils {
      * 
      * @param s
      *            Properties string of reward (97 multicolor rares)
-     * @return CardList
+     * @return List<CardPrinted>
      */
-    public static UnOpenedProduct generateCardRewardList(final String s) {
-        final String[] temp = s.split(" ");
+    public static List<CardPrinted> generateCardRewardList(final String s) {
 
-        final int qty = Integer.parseInt(temp[0]);
-        // Determine rarity
-        Predicate<CardPrinted> rar = CardPrinted.Predicates.Presets.IS_UNCOMMON;
+        final String[] items = s.split(";");
+        final List<CardPrinted> rewards = new ArrayList<CardPrinted>();
 
-        if ((temp.length > 2 && (temp[2].equalsIgnoreCase("rare") || temp[2].equalsIgnoreCase("rares")))
-                || (temp[1].equalsIgnoreCase("rare") || temp[1].equalsIgnoreCase("rares"))) {
-            rar = CardPrinted.Predicates.Presets.IS_RARE_OR_MYTHIC;
-        }
+        for (final String item : items) {
 
-        // Determine color ("random" defaults to null color)
-        Predicate<CardRules> col = Predicates.alwaysTrue();
-        if (temp[1].equalsIgnoreCase("black")) {
-            col = CardRulesPredicates.Presets.IS_BLACK;
-        } else if (temp[1].equalsIgnoreCase("blue")) {
-            col = CardRulesPredicates.Presets.IS_BLUE;
-        } else if (temp[1].equalsIgnoreCase("colorless")) {
-            col = CardRulesPredicates.Presets.IS_COLORLESS;
-        } else if (temp[1].equalsIgnoreCase("green")) {
-            col = CardRulesPredicates.Presets.IS_GREEN;
-        } else if (temp[1].equalsIgnoreCase("multicolor")) {
-            col = CardRulesPredicates.Presets.IS_MULTICOLOR;
-        } else if (temp[1].equalsIgnoreCase("red")) {
-            col = CardRulesPredicates.Presets.IS_RED;
-        } else if (temp[1].equalsIgnoreCase("white")) {
-            col = CardRulesPredicates.Presets.IS_WHITE;
-        }
+            String input = null;
 
-        Function<BoosterGenerator, List<CardPrinted>> openWay = new Function<BoosterGenerator, List<CardPrinted>>() {
-            @Override
-            public List<CardPrinted> apply(BoosterGenerator arg1) {
-                return arg1.getSingletonBoosterPack(qty);
+            if (item.contains("%")) {
+                String[] tmp = item.split("%");
+                final int chance = Integer.parseInt(tmp[0].trim());
+                if (chance > 0 && tmp.length > 1 && MyRandom.percentTrue(chance)) {
+                    input = tmp[1].trim();
+                }
+            } else {
+                input = item;
             }
-        };
-        Predicate<CardPrinted> colorPred = Predicates.compose(col, CardPrinted.FN_GET_RULES);
-        Predicate<CardPrinted> rarAndColor = Predicates.and(rar, colorPred);
-        if (Singletons.getModel().getQuest().getFormat() != null) {
-            rarAndColor = Predicates.and(Singletons.getModel().getQuest().getFormat().getFilterPrinted(), rarAndColor);
+            if (input != null) {
+                List<CardPrinted> reward = parseReward(input);
+
+                if (reward != null) {
+                    rewards.addAll(reward);
+                }
+            }
         }
-        return new UnOpenedProduct(openWay, new BoosterGenerator(rarAndColor)); // qty))
+
+        return rewards;
     }
 }
