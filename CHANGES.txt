@@ -111,6 +111,17 @@ Fixes/Features:
 - fixing "play land" name popping for abilities that were not related to lands
 - CostPart.java got autoformatted
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed issues with blocking triggers
+- merging r19087-19136 from Trunk into GTC branch
+- Unified variant deck editor initial commit (Does not work 100% yet)
+- Fixed new Planar deck editor
+- More options to challenge rewards:
+* Duplicate card of player's choice
+* A specific card and edition
+* n% chance for a given reward
+- Added oracles for planes
+- Fixed cost description of Grimgrin, Corpse-Born
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -140,7 +151,7 @@ Mutual Epiphany
 
 Added the following cards:
 
-
+Lairwatch Giant
 
 
 Added the following new Gatecrash cards to the Gatecrash branch. These cards are not yet available for in game use.:
@@ -294,6 +305,32 @@ Towering Thunderfist
 Warmind Infantry
 Wojek Halberdiers
 Wrecking Ogre
+Knight of Obligation
+Knight Watch
+Nav Squad Commandos
+Urbis Protector
+Zarichi Tiger
+Clinging Anemones
+Keymaster Rogue
+Scatter Arc
+Spell Rupture
+Nimbus Swimmer
+One Thousand Lashes
+Ordruun Veteran
+Orzhov Charm
+Paranoid Delusions
+Primal Visitation
+Psychic Strike
+Purge the Profane
+Hydroform
+Kingpin's Pet
+Martial Glory
+Mortus Strider
+Ruination Wurm
+Cartel Aristocrat
+Dinrova Horror
+Executioner's Swing
+Guardian of the Gateless
 
 
 end
