@@ -13739,7 +13739,7 @@ src/main/java/forge/gui/deckeditor/controllers/CEditorLimited.java -text
 src/main/java/forge/gui/deckeditor/controllers/CEditorPreferences.java -text
 src/main/java/forge/gui/deckeditor/controllers/CEditorQuest.java svneol=native#text/plain
 src/main/java/forge/gui/deckeditor/controllers/CEditorQuestCardShop.java -text
-src/main/java/forge/gui/deckeditor/controllers/CEditorScheme.java -text
+src/main/java/forge/gui/deckeditor/controllers/CEditorVariant.java -text
 src/main/java/forge/gui/deckeditor/controllers/CFilters.java -text
 src/main/java/forge/gui/deckeditor/controllers/CProbabilities.java -text
 src/main/java/forge/gui/deckeditor/controllers/CStatistics.java -text

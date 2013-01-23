@@ -7,6 +7,8 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
+import com.google.common.base.Predicate;
+
 import forge.Command;
 import forge.GameActionUtil;
 import forge.Singletons;
@@ -21,7 +23,8 @@ import forge.game.player.LobbyPlayer;
 import forge.game.player.PlayerType;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
-import forge.gui.deckeditor.controllers.CEditorScheme;
+import forge.gui.deckeditor.controllers.CEditorVariant;
+import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FDeckChooser;
 import forge.item.CardPrinted;
@@ -60,7 +63,22 @@ public enum CSubmenuArchenemy implements ICDoc {
 
             @Override
             public void execute() {
-                CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(new CEditorScheme());
+                
+                Predicate<CardPrinted> predSchemes = new Predicate<CardPrinted>() {
+
+                    @Override
+                    public boolean apply(CardPrinted arg0) {
+                        if(arg0.getCard().getType().isScheme())
+                        {
+                            return true;
+                        }
+                        
+                        return false;
+                    }
+                    
+                };
+                
+                CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(new CEditorVariant(Singletons.getModel().getDecks().getScheme(),predSchemes,EDocID.HOME_ARCHENEMY));
                 FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_CONSTRUCTED);
             }
         });

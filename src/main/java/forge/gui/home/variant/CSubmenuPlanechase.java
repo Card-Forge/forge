@@ -7,9 +7,12 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 
+import com.google.common.base.Predicate;
+
 import forge.Command;
 import forge.GameActionUtil;
 import forge.Singletons;
+import forge.control.FControl;
 import forge.control.Lobby;
 import forge.deck.Deck;
 import forge.deck.DeckgenUtil;
@@ -19,6 +22,9 @@ import forge.game.MatchStartHelper;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.PlayerType;
 import forge.gui.SOverlayUtils;
+import forge.gui.deckeditor.CDeckEditorUI;
+import forge.gui.deckeditor.controllers.CEditorVariant;
+import forge.gui.framework.EDocID;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FDeckChooser;
 import forge.item.CardPrinted;
@@ -57,9 +63,23 @@ public enum CSubmenuPlanechase implements ICDoc {
 
             @Override
             public void execute() {
-                //TODO:Enter Planar deck editor here!
-                //CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(new CEditorScheme());
-                //FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_CONSTRUCTED);
+                Predicate<CardPrinted> predPlanes = new Predicate<CardPrinted>() {
+
+                    @Override
+                    public boolean apply(CardPrinted arg0) {
+                        if(arg0.getCard().getType().isPlane() || arg0.getCard().getType().isPhenomenon())
+                        {
+                            return true;
+                        }
+                        
+                        return false;
+                    }
+                    
+                };
+                
+                CDeckEditorUI.SINGLETON_INSTANCE.setCurrentEditorController(new CEditorVariant(Singletons.getModel().getDecks().getPlane(),predPlanes,EDocID.HOME_PLANECHASE));
+                FControl.SINGLETON_INSTANCE.changeState(FControl.DECK_EDITOR_CONSTRUCTED);
+                
             }
         });
 

@@ -17,10 +17,12 @@
  */
 package forge.gui.deckeditor.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.base.Predicate;
 import com.google.common.base.Supplier;
+import com.google.common.collect.Iterables;
+
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.gui.deckeditor.SEditorIO;
@@ -38,6 +40,7 @@ import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
 import forge.properties.ForgePreferences.FPref;
+import forge.util.IStorage;
 
 /**
  * Child controller for constructed deck editor UI.
@@ -49,8 +52,10 @@ import forge.properties.ForgePreferences.FPref;
  * @author Forge
  * @version $Id: CEditorConstructed.java 18430 2012-11-27 22:42:36Z Hellfish $
  */
-public final class CEditorScheme extends ACEditorBase<CardPrinted, Deck> {
+public final class CEditorVariant extends ACEditorBase<CardPrinted, Deck> {
     private final DeckController<Deck> controller;
+    private final Predicate<CardPrinted> cardPoolCondition;
+    private final EDocID exitToScreen;
 
     //=========== Constructor
     /**
@@ -58,9 +63,12 @@ public final class CEditorScheme extends ACEditorBase<CardPrinted, Deck> {
      * This is the least restrictive mode;
      * all cards are available.
      */
-    public CEditorScheme() {
+    public CEditorVariant(final IStorage<Deck> folder, final Predicate<CardPrinted> poolCondition, final EDocID exitTo) {
         super();
-
+        
+        cardPoolCondition = poolCondition;
+        exitToScreen = exitTo;
+        
         final EditorTableView<CardPrinted> tblCatalog = new EditorTableView<CardPrinted>(true, CardPrinted.class);
         final EditorTableView<CardPrinted> tblDeck = new EditorTableView<CardPrinted>(true, CardPrinted.class);
 
@@ -76,7 +84,7 @@ public final class CEditorScheme extends ACEditorBase<CardPrinted, Deck> {
                 return new Deck();
             }
         };
-        this.controller = new DeckController<Deck>(Singletons.getModel().getDecks().getScheme(), this, newCreator);
+        this.controller = new DeckController<Deck>(folder, this, newCreator);
     }
 
     //=========== Overridden from ACEditorBase
@@ -120,12 +128,11 @@ public final class CEditorScheme extends ACEditorBase<CardPrinted, Deck> {
      */
     @Override
     public void resetTables() {
-        List<CardPrinted> schemes = new ArrayList<CardPrinted>();
-        for(CardPrinted cp : CardDb.instance().getAllNonTraditionalCards()) {
-            if ( cp.getCard().getType().isScheme() ) 
-                schemes.add(cp);
-        }
-        this.getTableCatalog().setDeck(ItemPool.createFrom(schemes, CardPrinted.class));
+        
+        Iterable<CardPrinted> allNT = CardDb.instance().getAllNonTraditionalCards();
+        allNT = Iterables.filter(allNT, cardPoolCondition);
+        
+        this.getTableCatalog().setDeck(ItemPool.createFrom(allNT, CardPrinted.class));
         this.getTableDeck().setDeck(this.controller.getModel().getSideboard());
     }
 
@@ -161,7 +168,7 @@ public final class CEditorScheme extends ACEditorBase<CardPrinted, Deck> {
     @Override
     public boolean exit() {
         // Override the submenu save choice - tell it to go to "constructed".
-        Singletons.getModel().getPreferences().setPref(FPref.SUBMENU_CURRENTMENU, EDocID.HOME_ARCHENEMY.toString());
+        Singletons.getModel().getPreferences().setPref(FPref.SUBMENU_CURRENTMENU, exitToScreen.toString());
 
         return SEditorIO.confirmSaveChanges();
     }
