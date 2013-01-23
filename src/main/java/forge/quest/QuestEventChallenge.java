@@ -20,8 +20,7 @@ package forge.quest;
 import java.util.ArrayList;
 import java.util.List;
 
-import forge.card.UnOpenedProduct;
-import forge.item.CardPrinted;
+import forge.item.InventoryItem;
 
 /**
  * <p>
@@ -64,7 +63,7 @@ public class QuestEventChallenge extends QuestEvent {
     private List<String> aiExtraCards = new ArrayList<String>();
 
     /** The card reward list. */
-    private List<CardPrinted> cardRewardList = null;
+    private List<InventoryItem> cardRewardList = null;
 
     /**
      * Instantiates a new quest challenge.
@@ -248,9 +247,9 @@ public class QuestEventChallenge extends QuestEvent {
      * 
      * @return the card reward list
      */
-    public final List<CardPrinted> getCardRewardList() {
+    public final List<InventoryItem> getCardRewardList() {
         if (cardRewardList == null) {
-            this.cardRewardList = new ArrayList<CardPrinted>(BoosterUtils.generateCardRewardList(cardReward));
+            this.cardRewardList = new ArrayList<InventoryItem>(BoosterUtils.generateCardRewardList(cardReward));
         }
         return this.cardRewardList;
     }

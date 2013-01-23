@@ -20,7 +20,6 @@ package forge.quest;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -33,11 +32,10 @@ import forge.card.BoosterGenerator;
 import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
 import forge.card.UnOpenedProduct;
-import forge.gui.GuiChoose;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.item.InventoryItem;
 import forge.util.Aggregates;
-import forge.item.ItemPool;
 import forge.util.MyRandom;
 
 // The BoosterPack generates cards for the Card Pool in Quest Mode
@@ -223,10 +221,10 @@ public final class BoosterUtils {
      *      String, the reward to parse
      * @return List<CardPrinted>
      */
-    private static List<CardPrinted> parseReward(final String s) {
+    private static List<InventoryItem> parseReward(final String s) {
 
         String[] temp = s.split(" ");
-        List<CardPrinted> exactCards = new ArrayList<CardPrinted>();
+        List<InventoryItem> rewards = new ArrayList<InventoryItem>();
 
         if ((temp.length > 2 && (temp[2].equalsIgnoreCase("rare") || temp[2].equalsIgnoreCase("rares")))
                 || (temp.length > 1 && (temp[1].equalsIgnoreCase("rare") || temp[1].equalsIgnoreCase("rares")))) {
@@ -266,34 +264,20 @@ public final class BoosterUtils {
             if (Singletons.getModel().getQuest().getFormat() != null) {
                 rarAndColor = Predicates.and(Singletons.getModel().getQuest().getFormat().getFilterPrinted(), rarAndColor);
             }
-            return (new UnOpenedProduct(openWay, new BoosterGenerator(rarAndColor))).open(); // qty))
+            rewards.addAll(new UnOpenedProduct(openWay, new BoosterGenerator(rarAndColor)).open());
         } else if (temp.length == 2 && temp[0].equalsIgnoreCase("duplicate") && temp[1].equalsIgnoreCase("card")) {
             // Type 2: a duplicate card of the players choice
-
-            final ItemPool<CardPrinted> playerCards = Singletons.getModel().getQuest().getAssets().getCardPool();
-            if (!playerCards.isEmpty()) { // Maybe a redundant check since it's hard to win a duel without any cards...
-
-                List<CardPrinted> cardChoices = new ArrayList<CardPrinted>();
-                for (final Map.Entry<CardPrinted, Integer> card : playerCards) {
-                    cardChoices.add(card.getKey());
-                }
-                Collections.sort(cardChoices);
-
-                final CardPrinted duplicate = GuiChoose.one("You have won a duplicate card!", cardChoices);
-                if (duplicate != null) {
-                    exactCards.add(duplicate);
-                }
-            }
+            rewards.add(new QuestRewardCardChooser("duplicate"));
         } else if (temp.length > 0) {
             // Type 3: assume we are asking for a single copy of a specific card
             final CardPrinted specific = CardDb.instance().getCard(s);
             if (specific != null) {
-                exactCards.add(specific);
+                rewards.add(specific);
             }
         }
 
         // Return the duplicate, a specified card, or an empty list
-        return exactCards;
+        return rewards;
     }
 
 
@@ -307,10 +291,10 @@ public final class BoosterUtils {
      *            Properties string of reward (97 multicolor rares)
      * @return List<CardPrinted>
      */
-    public static List<CardPrinted> generateCardRewardList(final String s) {
+    public static List<InventoryItem> generateCardRewardList(final String s) {
 
         final String[] items = s.split(";");
-        final List<CardPrinted> rewards = new ArrayList<CardPrinted>();
+        final List<InventoryItem> rewards = new ArrayList<InventoryItem>();
 
         for (final String item : items) {
 
@@ -326,7 +310,7 @@ public final class BoosterUtils {
                 input = item;
             }
             if (input != null) {
-                List<CardPrinted> reward = parseReward(input);
+                List<InventoryItem> reward = parseReward(input);
 
                 if (reward != null) {
                     rewards.addAll(reward);

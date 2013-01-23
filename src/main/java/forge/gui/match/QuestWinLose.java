@@ -42,10 +42,12 @@ import forge.gui.home.quest.CSubmenuDuels;
 import forge.gui.toolbox.FSkin;
 import forge.item.CardDb;
 import forge.item.CardPrinted;
+import forge.item.InventoryItem;
 import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestEventChallenge;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
+import forge.quest.QuestRewardCardChooser;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
@@ -55,7 +57,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.BorderFactory;
@@ -641,7 +645,7 @@ public class QuestWinLose extends ControlWinLose {
      * 
      */
     private void awardChallengeWin() {
-        final List<CardPrinted> cardsWon = ((QuestEventChallenge) qEvent).getCardRewardList();
+        final List<InventoryItem> itemsWon = ((QuestEventChallenge) qEvent).getCardRewardList();
         final long questRewardCredits = ((QuestEventChallenge) qEvent).getCreditsReward();
 
         final StringBuilder sb = new StringBuilder();
@@ -649,6 +653,18 @@ public class QuestWinLose extends ControlWinLose {
         sb.append("Challenge bounty: <b>" + questRewardCredits + " credits.</b></html>");
 
         qData.getAssets().addCredits(questRewardCredits);
+
+        final List<CardPrinted> cardsWon = new ArrayList<CardPrinted>();
+        for (InventoryItem ii : itemsWon) {
+            if (ii instanceof CardPrinted) {
+                cardsWon.add((CardPrinted) ii);
+            } else if (ii instanceof QuestRewardCardChooser) {
+                final CardPrinted chosenCard = ((QuestRewardCardChooser) ii).toCardPrinted();
+                if (null != chosenCard) {
+                    cardsWon.add(chosenCard);
+                }
+            }
+        }
 
         // Generate Swing components and attach.
         this.icoTemp = QuestWinLose.getResizedIcon(FSkin.getIcon(FSkin.QuestIcons.ICO_BOX), 0.5);
