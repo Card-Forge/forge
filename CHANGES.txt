@@ -122,6 +122,20 @@ Fixes/Features:
 - Added oracles for planes
 - Fixed cost description of Grimgrin, Corpse-Born
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Second iteration of the new challenge rewards code. Put the card chooser into a new class. Currently its only type option is "duplicate", new types may be added later.
+- Cleaned up unused imports.
+- Converted Flash of Defiance to an effect
+- Added a card restriction "IsNotImprinted"
+- myk's code contributions (vol. 1)
+* adds tooltips for the filter checkboxes (issue 657)
+* ensures the filter checkboxes are always in the same order
+* puts all labels and checkboxes in "official" order from the mtg rules book:
+* color order: WHITE, BLUE, BLACK, RED, GREEN, COLORLESS, MULTICOLOR
+* type order: LAND, ARTIFACT, CREATURE, ENCHANTMENT, PLANESWALKER, INSTANT, SORCERY
+- myk's (vol 1.1) code improvements to filter enums
+- Technical improvements to the new challenge rewards code.
+- Added "InEnchantedYard" (used in Death's Approach)
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -331,6 +345,53 @@ Cartel Aristocrat
 Dinrova Horror
 Executioner's Swing
 Guardian of the Gateless
+Hindervines
+Ivy Lane Denizen
+Predator's Rapport
+Rust Scarab
+Massive Raid
+Mugging
+Ripscale Predator
+Skinbrand Goblin
+Basilica Screecher
+Bomber Corps
+Crackling Perimeter
+Foundry Street Denizen
+Furious Resistance
+Gutter Skulk
+Homing Lightning
+Madcap Skills
+Mark for Death
+Syndicate Enforcer
+Balustrade Spy
+Corpse Blockade
+Devour Flesh
+Horror of the Dim
+Illness in the Ranks
+Shadow Alley Denizen
+Agoraphobia
+Sapphire Drake
+Frilled Oculus
+Last Thoughts
+Metropolis Sprite
+Mindeye Drake
+Sage's Row Denizen
+Skygames
+Sylvan Primordial
+Verdant Haven
+Voidwalk
+Way of the Thief
+Incursion Specialist
+Fortress Cyclops
+Slate Street Ruffian
+Smog Elemental
+Wight of Precinct Six
+Grisly Spectacle
+Mental Vapors
+Midnight Recovery
+Shadow Slice
+Death's Approach
+Dying Wish
 
 
 end
