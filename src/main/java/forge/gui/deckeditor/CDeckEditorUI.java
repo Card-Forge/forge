@@ -25,6 +25,7 @@ import java.awt.event.MouseEvent;
 import forge.Card;
 import forge.gui.CardContainer;
 import forge.gui.deckeditor.controllers.ACEditorBase;
+import forge.gui.deckeditor.views.VFilters;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CPicture;
 import forge.item.InventoryItem;
@@ -83,6 +84,7 @@ public enum CDeckEditorUI implements CardContainer {
     public void setCurrentEditorController(ACEditorBase<?, ?> editor0) {
         this.childController = editor0;
         updateController();
+        VFilters.SINGLETON_INSTANCE.getLayoutControl().buildFilter();
     }
 
     //========== Other methods
