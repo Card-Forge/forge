@@ -1,10 +1,10 @@
-quest]
+[quest]
 id=3004
 OpponentName=Baal
 AILife=40
 Repeat=true
 Wins=35
-Card Reward=5 rares
+Card Reward=50% duplicate card;3 rares;66% 1 black rare;66% 1 black rare;66% Sinkhole|LEB
 Credit Reward=500
 HumanExtras=Dingus Egg
 AIExtras=Dingus Egg
