@@ -264,7 +264,9 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
         EditorTableModel.this.refreshSort();
         EditorTableModel.this.table.tableChanged(new TableModelEvent(EditorTableModel.this));
         EditorTableModel.this.table.repaint();
-        EditorTableModel.this.table.setRowSelectionInterval(0, 0);
+        if (EditorTableModel.this.table.getRowCount() > 0) {
+            EditorTableModel.this.table.setRowSelectionInterval(0, 0);
+        }
         SEditorIO.savePreferences();
     }
 
