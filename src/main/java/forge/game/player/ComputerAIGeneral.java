@@ -33,7 +33,6 @@ import forge.card.spellability.SpellPermanent;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.game.GameState;
-import forge.game.phase.CombatUtil;
 import forge.game.zone.ZoneType;
 
 /**
@@ -285,35 +284,18 @@ public class ComputerAIGeneral implements Computer {
         for (final Card element : att) {
             // tapping of attackers happens after Propaganda is paid for
             final StringBuilder sb = new StringBuilder();
-            sb.append("Computer just assigned ");
-            sb.append(element.getName()).append(" as an attacker.");
+            sb.append("Computer just assigned ").append(element.getName()).append(" as an attacker.");
             Log.debug(sb.toString());
         }
 
         player.getZone(ZoneType.Battlefield).updateObservers();
 
-        game.getPhaseHandler().setPlayerMayHavePriority(false);
+        game.getPhaseHandler().setPlayersPriorityPermission(false);
 
         // ai is about to attack, cancel all phase skipping
         for (Player p : game.getPlayers()) {
             p.getController().autoPassCancel();
         }
-    }
-
-    /**
-     * <p>
-     * declare_blockers.
-     * </p>
-     */
-    @Override
-    public final void declareBlockers() {
-        final List<Card> blockers = player.getCreaturesInPlay();
-
-        game.setCombat(ComputerUtilBlock.getBlockers(player, game.getCombat(), blockers));
-
-        CombatUtil.orderMultipleCombatants(game.getCombat());
-
-        game.getPhaseHandler().setPlayerMayHavePriority(false);
     }
 
 

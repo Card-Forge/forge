@@ -4,6 +4,7 @@ import java.util.List;
 
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
+import forge.control.input.Input;
 import forge.game.phase.PhaseType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
@@ -18,18 +19,20 @@ public class PlayerController {
 
     // Should keep some 'Model' of player here.
     // Yet I have little idea of what is model now.
-    private final Player player;
+    private Player player;
 
     private PhaseType autoPassUntil = null;
 
-    private ComputerAIInput aiInput;
+    private Input defaultInput;
+    private Input blockInput;
 
-    public final ComputerAIInput getAiInput() {
-        return aiInput;
+    public final Input getDefaultInput() {
+        return defaultInput;
     }
 
-    public PlayerController(Player player0) {
-        player = player0;
+    public PlayerController() {}
+    void setPlayer(Player p) {
+        player = p;
     }
 
     /**
@@ -51,15 +54,12 @@ public class PlayerController {
 
 
     public boolean isUiSetToSkipPhase(final Player turn, final PhaseType phase) {
-        return player.equals(Singletons.getControl().getPlayer()) && !CMatchUI.SINGLETON_INSTANCE.stopAtPhase(turn, phase);
+        boolean isLocalPlayer = player.equals(Singletons.getControl().getPlayer());
+        return isLocalPlayer && !CMatchUI.SINGLETON_INSTANCE.stopAtPhase(turn, phase);
     }
 
-    /**
-     * TODO: Write javadoc for this method.
-     * @param computerAIInput
-     */
-    public void setAiInput(ComputerAIInput computerAIInput) {
-        aiInput = computerAIInput;
+    void setDefaultInput(Input input) {
+        defaultInput = input;
     }
 
     /**
@@ -73,6 +73,15 @@ public class PlayerController {
         } else {
             return GuiChoose.oneOrNone("Choose", abilities); // some day network interaction will be here
         }
+    }
+
+    /** Input to use when player has to declare blockers */
+    public Input getBlockInput() {
+        return blockInput;
+    }
+
+    void setBlockInput(Input blockInput0) {
+        this.blockInput = blockInput0; 
     }
 
 }

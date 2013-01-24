@@ -24,6 +24,7 @@ import java.util.List;
 import forge.Card;
 
 import forge.Singletons;
+import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
@@ -96,12 +97,13 @@ public class InputBlock extends Input {
     /** {@inheritDoc} */
     @Override
     public final void selectButtonOK() {
-        if (CombatUtil.finishedMandatoryBlocks(Singletons.getModel().getGame().getCombat(), defender)) {
+        final GameState game = Singletons.getModel().getGame();
+        if (CombatUtil.finishedMandatoryBlocks(game.getCombat(), defender)) {
             // Done blocking
             ButtonUtil.reset();
-            CombatUtil.orderMultipleCombatants(Singletons.getModel().getGame().getCombat());
+            CombatUtil.orderMultipleCombatants(game.getCombat());
 
-            Singletons.getModel().getGame().getPhaseHandler().passPriority();
+            game.getPhaseHandler().passPriority();
         }
     }
 

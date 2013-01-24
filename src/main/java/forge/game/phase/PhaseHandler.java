@@ -258,7 +258,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     for (Player p : game.getPlayers()) {
                         p.clearSlowtripList();
                     }
-                    this.setPlayerMayHavePriority(false);
+                    this.setPlayersPriorityPermission(false);
                 } else {
                     game.getUpkeep().executeUntil(this.getPlayerTurn());
                     game.getUpkeep().executeAt();
@@ -267,7 +267,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
             case DRAW:
                 if (getTurn() == 1 || PhaseUtil.skipDraw(this.getPlayerTurn())) {
-                    this.setPlayerMayHavePriority(false);
+                    this.setPlayersPriorityPermission(false);
                 } else {
                     this.getPlayerTurn().drawCards(1, true);
                 }
@@ -282,13 +282,13 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             case COMBAT_BEGIN:
                 //PhaseUtil.verifyCombat();
                 if (playerTurn.isSkippingCombat()) {
-                    this.setPlayerMayHavePriority(false);
+                    this.setPlayersPriorityPermission(false);
                 }
                 break;
 
             case COMBAT_DECLARE_ATTACKERS:
                 if (playerTurn.isSkippingCombat()) {
-                    this.setPlayerMayHavePriority(false);
+                    this.setPlayersPriorityPermission(false);
                     playerTurn.removeKeyword("Skip your next combat phase.");
                 }
                 break;
@@ -298,7 +298,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     PhaseUtil.handleDeclareAttackers(game.getCombat());
                     CombatUtil.showCombat();
                 } else {
-                    this.setPlayerMayHavePriority(false);
+                    this.setPlayersPriorityPermission(false);
                 }
                 break;
             // we can skip AfterBlockers and AfterAttackers if necessary
@@ -307,7 +307,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     game.getCombat().verifyCreaturesInPlay();
                     CombatUtil.showCombat();
                 } else {
-                    this.setPlayerMayHavePriority(false);
+                    this.setPlayersPriorityPermission(false);
                 }
                 break;
 
@@ -318,19 +318,19 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                     PhaseUtil.handleDeclareBlockers(game);
                     CombatUtil.showCombat();
                 } else {
-                    this.setPlayerMayHavePriority(false);
+                    this.setPlayersPriorityPermission(false);
                 }
                 break;
 
             case COMBAT_FIRST_STRIKE_DAMAGE:
                 if (!this.inCombat()) {
-                    this.setPlayerMayHavePriority(false);
+                    this.setPlayersPriorityPermission(false);
                 } else {
                     game.getCombat().verifyCreaturesInPlay();
 
                     // no first strikers, skip this step
                     if (!game.getCombat().assignCombatDamage(true)) {
-                        this.setPlayerMayHavePriority(false);
+                        this.setPlayersPriorityPermission(false);
                     } else {
                         game.getCombat().dealAssignedDamage();
                         game.getAction().checkStateEffects();
@@ -341,12 +341,12 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
             case COMBAT_DAMAGE:
                 if (!this.inCombat()) {
-                    this.setPlayerMayHavePriority(false);
+                    this.setPlayersPriorityPermission(false);
                 } else {
                     game.getCombat().verifyCreaturesInPlay();
 
                     if (!game.getCombat().assignCombatDamage(false)) {
-                        this.setPlayerMayHavePriority(false);
+                        this.setPlayersPriorityPermission(false);
                     } else {
                         game.getCombat().dealAssignedDamage();
                         game.getAction().checkStateEffects();
@@ -392,7 +392,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
                 break;
           }
 
-        if (this.mayPlayerHavePriority()) {
+        if (this.isPlayerPriorityAllowed()) {
             // Run triggers if phase isn't being skipped
             final HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Phase", this.getPhase().Name);
@@ -427,7 +427,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      */
     public final void nextPhase() {
 
-        this.setPlayerMayHavePriority(true); //  PlayerPriorityAllowed = false;
+        this.setPlayersPriorityPermission(true); //  PlayerPriorityAllowed = false;
 
         // If the Stack isn't empty why is nextPhase being called?
         if (game.getStack().size() != 0) {
@@ -787,7 +787,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             if (game.getStack().isEmpty()) {
                 this.setPriority(this.getPlayerTurn()); // this needs to be set early as we exit the phase
                 // end phase
-                setPlayerMayHavePriority(true);
+                setPlayersPriorityPermission(true);
                 nextPhase();
                 return;
             } else if (!game.getStack().hasSimultaneousStackEntries()) {
@@ -810,7 +810,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * @param needToNextPhase
      *            a boolean.
      */
-    public final void setPlayerMayHavePriority(final boolean mayHavePriority) {
+    public final void setPlayersPriorityPermission(final boolean mayHavePriority) {
         this.isPlayerPriorityAllowed = mayHavePriority;
     }
 
@@ -821,7 +821,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
      * 
      * @return a boolean.
      */
-    public final boolean mayPlayerHavePriority() {
+    public final boolean isPlayerPriorityAllowed() {
         return this.isPlayerPriorityAllowed;
     }
 

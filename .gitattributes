@@ -13679,6 +13679,7 @@ src/main/java/forge/game/player/AIPlayer.java svneol=native#text/plain
 src/main/java/forge/game/player/Computer.java svneol=native#text/plain
 src/main/java/forge/game/player/ComputerAIGeneral.java svneol=native#text/plain
 src/main/java/forge/game/player/ComputerAIInput.java svneol=native#text/plain
+src/main/java/forge/game/player/ComputerAiInputBlock.java -text
 src/main/java/forge/game/player/ComputerUtil.java svneol=native#text/plain
 src/main/java/forge/game/player/ComputerUtilAttack.java svneol=native#text/plain
 src/main/java/forge/game/player/ComputerUtilBlock.java svneol=native#text/plain

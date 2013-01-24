@@ -52,7 +52,7 @@ public class GuiInput extends MyObservable implements Observer {
         if (tmp != null) {
             // System.out.println(ph.getPlayerTurn() + "'s " + ph.getPhase() + ", priority of " + ph.getPriorityPlayer() + " @ input is " + tmp.getClass().getName() );
             this.setInput(tmp);
-        } else if (!ph.mayPlayerHavePriority()) {
+        } else if (!ph.isPlayerPriorityAllowed()) {
             //System.out.println("cannot have priority, forced to pass");
             ph.passPriority();
         }

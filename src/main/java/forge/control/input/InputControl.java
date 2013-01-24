@@ -23,6 +23,7 @@ import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
+import forge.game.player.PlayerController;
 import forge.game.zone.MagicStack;
 import forge.util.MyObservable;
 
@@ -189,7 +190,7 @@ public class InputControl extends MyObservable implements java.io.Serializable {
 
         // If the Phase we're in doesn't allow for Priority, return null to move
         // to next phase
-        if (!handler.mayPlayerHavePriority()) {
+        if (!handler.isPlayerPriorityAllowed()) {
             return null;
         }
 
@@ -205,18 +206,13 @@ public class InputControl extends MyObservable implements java.io.Serializable {
 
             case COMBAT_DECLARE_BLOCKERS:
                 stack.freezeStack();
-                boolean isUnderAttack = game.getCombat().isPlayerAttacked(priority);
-                if (!isUnderAttack) { // noone attacks you
-                    handler.passPriority();
-                    return null;
+
+                if (game.getCombat().isPlayerAttacked(priority)) {
+                    return priority.getController().getBlockInput();
                 }
 
-                if (priority.isHuman()) {
-                    return new InputBlock(priority);
-                }
-
-                // ai is under attack
-                priority.getController().getAiInput().getComputer().declareBlockers();
+                // noone attacks you
+                handler.passPriority();
                 return null;
 
             case CLEANUP:
@@ -234,20 +230,19 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         // *********************
         // Special phases handled above, everything else is handled simply by
         // priority
-        if (priority == null) {
+        if (priority == null)
             return null;
-        } else if (priority.isHuman()) {
-            boolean prioritySkip = priority.getController().mayAutoPass(phase)
-                    || priority.getController().isUiSetToSkipPhase(playerTurn, phase);
-            if (this.game.getStack().isEmpty() && prioritySkip) {
-                handler.passPriority();
-                return null;
-            } else {
-                priority.getController().autoPassCancel(); // probably cancel, since something has happened
-                return new InputPassPriority();
-            }
-        } else // if (playerTurn.isComputer()) {
-            return priority.getController().getAiInput();
+        
+        PlayerController pc = priority.getController();
+
+        boolean prioritySkip = pc.mayAutoPass(phase) || pc.isUiSetToSkipPhase(playerTurn, phase);
+        if (this.game.getStack().isEmpty() && prioritySkip) {
+            handler.passPriority();
+            return null;
+        } else
+            pc.autoPassCancel(); // probably cancel, since something has happened
+
+         return pc.getDefaultInput();
     } // getInput()
 
 } // InputControl

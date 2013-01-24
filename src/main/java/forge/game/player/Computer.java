@@ -38,13 +38,6 @@ public interface Computer {
      */
     void declareAttackers();
 
-    /**
-     * <p>
-     * declare_blockers.
-     * </p>
-     */
-    void declareBlockers(); // this is called after when the Human or Computer
-                            // blocks
 
     /**
      * <p>

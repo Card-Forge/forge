@@ -24,6 +24,8 @@ import forge.Card;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.control.input.InputBlock;
+import forge.control.input.InputPassPriority;
 import forge.game.GameType;
 import forge.game.GameState;
 import forge.game.zone.ZoneType;
@@ -51,7 +53,9 @@ public class HumanPlayer extends Player {
      *            a {@link java.lang.String} object.
      */
     public HumanPlayer(final LobbyPlayer player, GameState game) {
-        super(player, game);
+        super(player, game, new PlayerController());
+        getController().setDefaultInput(new InputPassPriority());
+        getController().setBlockInput(new InputBlock(this));
     }
 
     // //////////////

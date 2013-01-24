@@ -52,8 +52,9 @@ public class AIPlayer extends Player {
      *            a {@link java.lang.String} object.
      */
     public AIPlayer(final LobbyPlayer player, final GameState game) {
-        super(player, game);
-        getController().setAiInput(new ComputerAIInput(new ComputerAIGeneral(this, game)));
+        super(player, game, new PlayerController());
+        getController().setDefaultInput(new ComputerAIInput(new ComputerAIGeneral(this, game)));
+        getController().setBlockInput(new ComputerAiInputBlock(game, this));
     }
 
 

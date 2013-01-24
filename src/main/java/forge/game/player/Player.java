@@ -178,7 +178,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * @param myPoisonCounters
      *            a int.
      */
-    public Player(LobbyPlayer lobbyPlayer0, GameState game0) {
+    public Player(LobbyPlayer lobbyPlayer0, GameState game0, PlayerController pc) {
         lobbyPlayer = lobbyPlayer0;
         game = game0;
         for (final ZoneType z : Player.ALL_ZONES) {
@@ -188,7 +188,9 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             this.zones.put(z, toPut);
         }
         this.setName(lobbyPlayer.getName());
-        controller = new PlayerController(this);
+        pc.setPlayer(this);
+        controller = pc;
+        
     }
 
     public final PlayerStatistics getStats() {
