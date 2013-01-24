@@ -103,19 +103,19 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
 
         final String constraints = "w 57px!, h 20px!";
         pnlStats.add(lblTotal, constraints);
-        pnlStats.add(lblBlack, constraints);
-        pnlStats.add(lblBlue, constraints);
-        pnlStats.add(lblGreen, constraints);
-        pnlStats.add(lblRed, constraints);
         pnlStats.add(lblWhite, constraints);
+        pnlStats.add(lblBlue, constraints);
+        pnlStats.add(lblBlack, constraints);
+        pnlStats.add(lblRed, constraints);
+        pnlStats.add(lblGreen, constraints);
         pnlStats.add(lblColorless, constraints);
 
+        pnlStats.add(lblLand, constraints);
         pnlStats.add(lblArtifact, constraints);
         pnlStats.add(lblCreature, constraints);
         pnlStats.add(lblEnchantment, constraints);
-        pnlStats.add(lblInstant, constraints);
-        pnlStats.add(lblLand, constraints);
         pnlStats.add(lblPlaneswalker, constraints);
+        pnlStats.add(lblInstant, constraints);
         pnlStats.add(lblSorcery, constraints);
 
         pnlAddButtons.setOpaque(false);
