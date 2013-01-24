@@ -39,24 +39,56 @@ import forge.util.PredicateString.StringOp;
 public class SFilterUtil {
     /** An enum to reference checkbox objects in the color filter map. */
     private enum ColorFilterProperty {
-        WHITE,
-        BLUE,
-        BLACK,
-        RED,
-        GREEN,
-        COLORLESS,
-        MULTICOLOR
+        WHITE      (SEditorUtil.ICO_WHITE.getImage(),     "White Cards"),
+        BLUE       (SEditorUtil.ICO_BLUE.getImage(),      "Blue Cards"),
+        BLACK      (SEditorUtil.ICO_BLACK.getImage(),     "Black Cards"),
+        RED        (SEditorUtil.ICO_RED.getImage(),       "Red Cards"),
+        GREEN      (SEditorUtil.ICO_GREEN.getImage(),     "Green Cards"),
+        COLORLESS  (SEditorUtil.ICO_COLORLESS.getImage(), "Colorless Cards"),
+        MULTICOLOR (SEditorUtil.ICO_MULTI.getImage(),     "Multicolor Cards");
+
+        private final Image img;
+        private final String tooltip;
+
+        ColorFilterProperty(final Image img0, final String tooltip0) {
+            img = img0;
+            tooltip = tooltip0;
+        }
+        
+        public Image getImage() {
+            return img;
+        }
+        
+        public String getTooltip() {
+            return tooltip;
+        }
     }
 
     /** An enum to reference checkbox objects in the type filter map. */
     private enum TypeFilterProperty {
-        LAND,
-        ARTIFACT,
-        CREATURE,
-        ENCHANTMENT,
-        PLANESWALKER,
-        INSTANT,
-        SORCERY
+        LAND         (SEditorUtil.ICO_LAND.getImage(),         "Land Cards"),
+        ARTIFACT     (SEditorUtil.ICO_ARTIFACT.getImage(),     "Artifact Cards"),
+        CREATURE     (SEditorUtil.ICO_CREATURE.getImage(),     "Creature Cards"),
+        ENCHANTMENT  (SEditorUtil.ICO_ENCHANTMENT.getImage(),  "Enchantment Cards"),
+        PLANESWALKER (SEditorUtil.ICO_PLANESWALKER.getImage(), "Planeswalker Cards"),
+        INSTANT      (SEditorUtil.ICO_INSTANT.getImage(),      "Instant Cards"),
+        SORCERY      (SEditorUtil.ICO_SORCERY.getImage(),      "Sorcery Cards");
+
+        private final Image img;
+        private final String tooltip;
+
+        TypeFilterProperty(final Image img0, final String tooltip0) {
+            img = img0;
+            tooltip = tooltip0;
+        }
+        
+        public Image getImage() {
+            return img;
+        }
+        
+        public String getTooltip() {
+            return tooltip;
+        }
     }
 
     private static final Map<ColorFilterProperty, ChbPnl> MAP_COLOR_CHECKBOXES =
@@ -98,29 +130,16 @@ public class SFilterUtil {
      * @return {@link javax.swing.JPanel}
      */
     public static JPanel populateColorFilters() {
-        MAP_COLOR_CHECKBOXES.clear();
-
-        MAP_COLOR_CHECKBOXES.put(ColorFilterProperty.WHITE,
-                new ChbPnl(SEditorUtil.ICO_WHITE.getImage(), "White Cards"));
-        MAP_COLOR_CHECKBOXES.put(ColorFilterProperty.BLUE,
-                new ChbPnl(SEditorUtil.ICO_BLUE.getImage(), "Blue Cards"));
-        MAP_COLOR_CHECKBOXES.put(ColorFilterProperty.BLACK,
-                new ChbPnl(SEditorUtil.ICO_BLACK.getImage(), "Black Cards"));
-        MAP_COLOR_CHECKBOXES.put(ColorFilterProperty.RED,
-                new ChbPnl(SEditorUtil.ICO_RED.getImage(), "Red Cards"));
-        MAP_COLOR_CHECKBOXES.put(ColorFilterProperty.GREEN,
-                new ChbPnl(SEditorUtil.ICO_GREEN.getImage(), "Green Cards"));
-        MAP_COLOR_CHECKBOXES.put(ColorFilterProperty.COLORLESS,
-                new ChbPnl(SEditorUtil.ICO_COLORLESS.getImage(), "Colorless Cards"));
-        MAP_COLOR_CHECKBOXES.put(ColorFilterProperty.MULTICOLOR,
-                new ChbPnl(SEditorUtil.ICO_MULTI.getImage(), "Multicolor Cards"));
-
         final JPanel pnl = new JPanel(new WrapLayout(SwingConstants.CENTER, 10, 5));
         pnl.setOpaque(false);
 
+        MAP_COLOR_CHECKBOXES.clear();
         for (ColorFilterProperty p : ColorFilterProperty.values()) {
-            pnl.add(MAP_COLOR_CHECKBOXES.get(p));
+            ChbPnl chbPnl = new ChbPnl(p.getImage(), p.getTooltip());
+            MAP_COLOR_CHECKBOXES.put(p, chbPnl);
+            pnl.add(chbPnl);
         }
+        
         return pnl;
     }
 
@@ -130,29 +149,16 @@ public class SFilterUtil {
      * @return {@link javax.swing.JPanel}
      */
     public static JPanel populateTypeFilters() {
-        MAP_TYPE_CHECKBOXES.clear();
-
-        MAP_TYPE_CHECKBOXES.put(TypeFilterProperty.LAND,
-                new ChbPnl(SEditorUtil.ICO_LAND.getImage(), "Land Cards"));
-        MAP_TYPE_CHECKBOXES.put(TypeFilterProperty.ARTIFACT,
-                new ChbPnl(SEditorUtil.ICO_ARTIFACT.getImage(), "Artifact Cards"));
-        MAP_TYPE_CHECKBOXES.put(TypeFilterProperty.CREATURE,
-                new ChbPnl(SEditorUtil.ICO_CREATURE.getImage(), "Creature Cards"));
-        MAP_TYPE_CHECKBOXES.put(TypeFilterProperty.ENCHANTMENT,
-                new ChbPnl(SEditorUtil.ICO_ENCHANTMENT.getImage(), "Enchantment Cards"));
-        MAP_TYPE_CHECKBOXES.put(TypeFilterProperty.PLANESWALKER,
-                new ChbPnl(SEditorUtil.ICO_PLANESWALKER.getImage(), "Planeswalker Cards"));
-        MAP_TYPE_CHECKBOXES.put(TypeFilterProperty.INSTANT,
-                new ChbPnl(SEditorUtil.ICO_INSTANT.getImage(), "Instant Cards"));
-        MAP_TYPE_CHECKBOXES.put(TypeFilterProperty.SORCERY,
-                new ChbPnl(SEditorUtil.ICO_SORCERY.getImage(), "Sorcery Cards"));
-
         final JPanel pnl = new JPanel(new WrapLayout(SwingConstants.CENTER, 10, 5));
         pnl.setOpaque(false);
 
+        MAP_TYPE_CHECKBOXES.clear();
         for (TypeFilterProperty p : TypeFilterProperty.values()) {
-            pnl.add(MAP_TYPE_CHECKBOXES.get(p));
+            ChbPnl chbPnl = new ChbPnl(p.getImage(), p.getTooltip());
+            MAP_TYPE_CHECKBOXES.put(p, chbPnl);
+            pnl.add(chbPnl);
         }
+        
         return pnl;
     }
 

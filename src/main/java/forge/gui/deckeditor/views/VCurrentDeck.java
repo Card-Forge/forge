@@ -202,6 +202,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
         pnlStats.add(lblInstant, constraints);
         pnlStats.add(lblSorcery, constraints);
 
+        pnlRemoveButtons.setOpaque(false);
         pnlRemoveButtons.add(btnRemove, "w 30%!, h 30px!, gap 0 0 5px 5px");
         pnlRemoveButtons.add(btnRemove4, "w 30%!, h 30px!, gap 0 0 5px 5px");
         pnlRemoveButtons.add(btnDoSideboard, "w 30%!, h 30px!, gap 0 0 5px 5px");
