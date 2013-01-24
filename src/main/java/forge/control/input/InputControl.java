@@ -246,12 +246,8 @@ public class InputControl extends MyObservable implements java.io.Serializable {
                 priority.getController().autoPassCancel(); // probably cancel, since something has happened
                 return new InputPassPriority();
             }
-        } else if (playerTurn.isComputer()) {
+        } else // if (playerTurn.isComputer()) {
             return priority.getController().getAiInput();
-        } else {
-            priority.getController().getAiInput().getComputer().playSpellAbilities();
-            return null;
-        }
     } // getInput()
 
 } // InputControl

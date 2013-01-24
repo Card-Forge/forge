@@ -64,29 +64,17 @@ public class ComputerAIGeneral implements Computer {
      * </p>
      */
     @Override
-    public final void main() {
-        ComputerUtil.chooseLandsToPlay(player);
-        this.playSpellAbilitiesStackEmpty();
-    } // main()
-
-
-    /**
-     * <p>
-     * playCards.
-     * </p>
-     * 
-     * @param phase
-     *            a {@link java.lang.String} object.
-     */
-    private void playSpellAbilitiesStackEmpty() {
-        final List<Card> list = getAvailableCards();
-
-        final boolean nextPhase = ComputerUtil.playSpellAbilities(player, getSpellAbilities(list), game);
-
-        if (nextPhase) {
-            game.getPhaseHandler().passPriority();
+    public final void playLands()
+    {
+        List<Card> landsWannaPlay = ComputerUtil.getLandsToPlay(player);
+        
+        while(landsWannaPlay != null && !landsWannaPlay.isEmpty() && player.canPlayLand()) {
+            Card land = ComputerUtil.chooseBestLandToPlay(landsWannaPlay, player);
+            landsWannaPlay.remove(land);
+            player.playLand(land);
         }
-    } // playCards()
+    }
+    
 
     /**
      * <p>
@@ -335,44 +323,30 @@ public class ComputerAIGeneral implements Computer {
      * </p>
      */
     @Override
-    public final void playSpellAbilities() {
-        if (game.getStack().isEmpty()) {
-            this.playSpellAbilitiesStackEmpty();
-            return;
-        }
-
+    public final List<SpellAbility> getSpellAbilitiesToPlay() {
         // if top of stack is owned by me
-        if (game.getStack().peekInstance().getActivatingPlayer().isComputer()) {
-            // probably should let my stuff resolve to force Human to respond to
-            // it
-            game.getPhaseHandler().passPriority();
-            return;
+        if (!game.getStack().isEmpty() && game.getStack().peekInstance().getActivatingPlayer().equals(player)) {
+            // probably should let my stuff resolve
+            return null;
         }
         final List<Card> cards = getAvailableCards();
-        // top of stack is owned by human,
-        ArrayList<SpellAbility> possibleCounters = getPlayableCounters(cards);
 
-        if ((possibleCounters.size() > 0) && ComputerUtil.playCounterSpell(player, possibleCounters)) {
-            // Responding CounterSpell is on the Stack trying to Counter the Spell
-            // If playCounterSpell returns true, a Spell is hitting the Stack
-            return;
+        if ( !game.getStack().isEmpty() ) {
+            List<SpellAbility> counter = ComputerUtil.playCounterSpell(player, getPlayableCounters(cards), game);
+            if( counter == null || counter.isEmpty())
+                return counter;
+    
+            List<SpellAbility> counterETB = ComputerUtil.playSpellAbilities(player, this.getPossibleETBCounters(), game);
+            if( counterETB == null || counterETB.isEmpty())
+                return counterETB;
         }
 
-        possibleCounters.clear();
-        possibleCounters = this.getPossibleETBCounters();
-        if ((possibleCounters.size() > 0) && !ComputerUtil.playSpellAbilities(player, possibleCounters, game)) {
-            // Responding Permanent w/ ETB Counter is on the Stack
-            // If playSpellAbilities returns false, a Spell is hitting the Stack
-            return;
-        }
-        final ArrayList<SpellAbility> sas = this.getSpellAbilities(cards);
-        if (sas.size() > 0) {
-            // Spell not Countered
-            if (!ComputerUtil.playSpellAbilities(player, sas, game)) {
-                return;
-            }
-        }
-        // if this hasn't been covered above, just PassPriority()
-        game.getPhaseHandler().passPriority();
+        return ComputerUtil.playSpellAbilities(player, getSpellAbilities(cards), game);
+    }
+    
+    @Override
+    public Player getPlayer()
+    {
+        return player;
     }
 }

@@ -17,6 +17,10 @@
  */
 package forge.game.player;
 
+import java.util.List;
+
+import forge.card.spellability.SpellAbility;
+
 /**
  * <p>
  * Computer interface.
@@ -26,12 +30,6 @@ package forge.game.player;
  * @version $Id$
  */
 public interface Computer {
-    /**
-     * <p>
-     * main.
-     * </p>
-     */
-    void main();
 
     /**
      * <p>
@@ -53,6 +51,13 @@ public interface Computer {
      * stack_not_empty.
      * </p>
      */
-    void playSpellAbilities();
+    List<SpellAbility> getSpellAbilitiesToPlay();
+
+    /**
+     * TODO: Write javadoc for this method.
+     */
+    void playLands();
+    
+    public Player getPlayer();
 
 }

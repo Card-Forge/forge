@@ -2770,6 +2770,7 @@ public class CombatUtil {
                 }
             };
 
+            ability.setActivatingPlayer(c.getController());
             if (c.getController().isHuman()) {
                 GameActionUtil.payCostDuringAbilityResolve(ability, attackCost, paidCommand, unpaidCommand, null, game);
             } else { // computer

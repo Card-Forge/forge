@@ -91,7 +91,10 @@ public class ComputerUtil {
      *            objects.
      * @return a boolean.
      */
-    public static boolean playSpellAbilities(final Player ai, final List<SpellAbility> all, final GameState game) {
+    public static List<SpellAbility> playSpellAbilities(final Player ai, final List<SpellAbility> all, final GameState game) {
+        if ( all == null || all.isEmpty() )
+            return null;
+
         // not sure "playing biggest spell" matters?
         ComputerUtil.sortSpellAbilityByCost(all);
         ArrayList<SpellAbility> abilities = new ArrayList<SpellAbility>();
@@ -106,6 +109,8 @@ public class ComputerUtil {
             sa.setActivatingPlayer(ai);
             newAbilities.addAll(GameActionUtil.getOptionalAdditionalCosts(sa));
         }
+        
+        List<SpellAbility> toPlay = new ArrayList<SpellAbility>(); 
         abilities = newAbilities;
         for (final SpellAbility sa : abilities) {
             // Don't add Counterspells to the "normal" playcard lookups
@@ -113,12 +118,14 @@ public class ComputerUtil {
                 continue;
             }
             sa.setActivatingPlayer(ai);
+            
+            if (!ComputerUtil.canBePlayedAndPayedByAI(ai, sa))
+                continue;
 
-            if (ComputerUtil.canBePlayedAndPayedByAI(ai, sa) && ComputerUtil.handlePlayingSpellAbility(ai, sa, game)) {
-                return false;
-            }
+            toPlay.add(sa);
         }
-        return true;
+        
+        return toPlay;
     } // playCards()
 
     /**
@@ -259,8 +266,10 @@ public class ComputerUtil {
      *            a {@link java.util.ArrayList} object.
      * @return a boolean.
      */
-    public static boolean playCounterSpell(final Player ai, final ArrayList<SpellAbility> possibleCounters) {
-        final GameState game = Singletons.getModel().getGame(); 
+    public static List<SpellAbility> playCounterSpell(final Player ai, final ArrayList<SpellAbility> possibleCounters, final GameState game) {
+        if ( possibleCounters == null || possibleCounters.isEmpty())
+            return null;;
+        
         SpellAbility bestSA = null;
         int bestRestriction = Integer.MIN_VALUE;
         final ArrayList<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
@@ -296,35 +305,12 @@ public class ComputerUtil {
             }
         }
 
-        if (bestSA == null) {
-            return false;
-        }
-
         // TODO - "Look" at Targeted SA and "calculate" the threshold
         // if (bestRestriction < targetedThreshold) return false;
 
-        game.getStack().freezeStack();
-        final Card source = bestSA.getSourceCard();
-
-        if (bestSA.isSpell() && !source.isCopiedSpell()) {
-            bestSA.setSourceCard(game.getAction().moveToStack(source));
-        }
-
-        final Cost cost = bestSA.getPayCosts();
-
-        if (cost == null) {
-            // Honestly Counterspells shouldn't use this branch
-            ComputerUtil.payManaCost(ai, bestSA);
-            bestSA.getBeforePayManaAI().execute();
-            game.getStack().addAndUnfreeze(bestSA);
-        } else {
-            final CostPayment pay = new CostPayment(cost, bestSA, game);
-            if (pay.payComputerCosts(ai, game)) {
-                game.getStack().addAndUnfreeze(bestSA);
-            }
-        }
-
-        return true;
+        List<SpellAbility> cSa = new ArrayList<SpellAbility>();
+        cSa.add(bestSA);
+        return cSa;
     } // playCounterSpell()
 
     // this is used for AI's counterspells
@@ -1288,25 +1274,26 @@ public class ComputerUtil {
      * 
      * @return a boolean.
      */
-    public static boolean chooseLandsToPlay(final Player ai) {
+    public static List<Card> getLandsToPlay(final Player ai) {
         if (!ai.canPlayLand()) {
-            return false;
+            return null;
         }
+
         final List<Card> hand = ai.getCardsIn(ZoneType.Hand);
         List<Card> landList = CardLists.filter(hand, Presets.LANDS);
         List<Card> nonLandList = CardLists.filter(hand, Predicates.not(CardPredicates.Presets.LANDS));
 
-        final List<Card> lands = new ArrayList<Card>(ai.getCardsIn(ZoneType.Graveyard));
+        final List<Card> landsNotInHand = new ArrayList<Card>(ai.getCardsIn(ZoneType.Graveyard));
         if (!ai.getCardsIn(ZoneType.Library).isEmpty()) {
-            lands.add(ai.getCardsIn(ZoneType.Library).get(0));
+            landsNotInHand.add(ai.getCardsIn(ZoneType.Library).get(0));
         }
-        for (final Card crd : lands) {
+        for (final Card crd : landsNotInHand) {
             if (crd.isLand() && crd.hasKeyword("May be played")) {
                 landList.add(crd);
             }
         }
         if (landList.isEmpty()) {
-            return false;
+            return null;
         }
         if (landList.size() == 1 && nonLandList.size() < 3) {
             List<Card> cardsInPlay = ai.getCardsIn(ZoneType.Battlefield);
@@ -1322,7 +1309,7 @@ public class ComputerUtil {
                         if (sa.getPayCosts() != null) {
                             for (CostPart part : sa.getPayCosts().getCostParts()) {
                                 if (part instanceof CostDiscard) {
-                                    return false;
+                                    return null;
                                 }
                             }
                         }
@@ -1370,57 +1357,57 @@ public class ComputerUtil {
             }
         });
 
-        while (!landList.isEmpty() && ai.canPlayLand()) {
-            // play as many lands as you can
-            int ix = 0;
-            while (landList.get(ix).isReflectedLand() && ((ix + 1) < landList.size())) {
-                // Skip through reflected lands. Choose last if they are all
-                // reflected.
-                ix++;
-            }
+        return landList;
+    }
+    
+    public static Card chooseBestLandToPlay(List<Card> landList, Player ai)
+    {
+        if (landList.isEmpty() || !ai.canPlayLand())
+            return null;
 
-            Card land = landList.get(ix);
-            //play basic lands that are needed the most
-            if (Iterables.any(landList, CardPredicates.Presets.BASIC_LANDS)) {
-                final List<Card> combined = ai.getCardsIn(ZoneType.Battlefield);
-
-                final ArrayList<String> basics = new ArrayList<String>();
-
-                // what types can I go get?
-                for (final String name : Constant.CardTypes.BASIC_TYPES) {
-                    if (!CardLists.getType(landList, name).isEmpty()) {
-                        basics.add(name);
-                    }
-                }
-
-                // Which basic land is least available from hand and play, that I still
-                // have in my deck
-                int minSize = Integer.MAX_VALUE;
-                String minType = null;
-
-                for (int i = 0; i < basics.size(); i++) {
-                    final String b = basics.get(i);
-                    final int num = CardLists.getType(combined, b).size();
-                    if (num < minSize) {
-                        minType = b;
-                        minSize = num;
-                    }
-                }
-
-                if (minType != null) {
-                    landList = CardLists.getType(landList, minType);
-                }
-
-                land = landList.get(0);
-            }
-            landList.remove(land);
-            ai.playLand(land);
-
-            if (Singletons.getModel().getGame().getStack().size() != 0) {
-                return true;
-            }
+        // play as many lands as you can
+        int ix = 0;
+        while (landList.get(ix).isReflectedLand() && ((ix + 1) < landList.size())) {
+            // Skip through reflected lands. Choose last if they are all
+            // reflected.
+            ix++;
         }
-        return false;
+
+        Card land = landList.get(ix);
+        //play basic lands that are needed the most
+        if (Iterables.any(landList, CardPredicates.Presets.BASIC_LANDS)) {
+            final List<Card> combined = ai.getCardsIn(ZoneType.Battlefield);
+
+            final ArrayList<String> basics = new ArrayList<String>();
+
+            // what types can I go get?
+            for (final String name : Constant.CardTypes.BASIC_TYPES) {
+                if (!CardLists.getType(landList, name).isEmpty()) {
+                    basics.add(name);
+                }
+            }
+
+            // Which basic land is least available from hand and play, that I still
+            // have in my deck
+            int minSize = Integer.MAX_VALUE;
+            String minType = null;
+
+            for (int i = 0; i < basics.size(); i++) {
+                final String b = basics.get(i);
+                final int num = CardLists.getType(combined, b).size();
+                if (num < minSize) {
+                    minType = b;
+                    minSize = num;
+                }
+            }
+
+            if (minType != null) {
+                landList = CardLists.getType(landList, minType);
+            }
+
+            land = landList.get(0);
+        }
+        return land;
     }
 
     /**

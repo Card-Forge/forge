@@ -17,10 +17,14 @@
  */
 package forge.game.player;
 
+import java.util.List;
+
 import com.esotericsoftware.minlog.Log;
 
 import forge.Singletons;
+import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.game.GameState;
 import forge.game.phase.PhaseType;
 
 /**
@@ -49,17 +53,6 @@ public class ComputerAIInput extends Input {
         this.computer = iComputer;
     }
 
-    // wrapper method that ComputerAI_StackNotEmpty class calls
-    // ad-hoc way for ComptuerAI_StackNotEmpty to get to the Computer class
-    /**
-     * <p>
-     * stackNotEmpty.
-     * </p>
-     */
-    public final void playSpellAbilities() {
-        this.computer.playSpellAbilities();
-    }
-
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
@@ -75,9 +68,44 @@ public class ComputerAIInput extends Input {
          * send the \"Stack Report\" and the
          * \"Detailed Error Trace\" to the Forge forum.");
          */
-        this.think();
+        GameState game = Singletons.getModel().getGame();
+        final PhaseType phase = game.getPhaseHandler().getPhase();
+        
+        if (game.getStack().size() > 0) {
+            playSpellAbilities(game);
+        } else {
+            switch(phase) {
+                case COMBAT_DECLARE_ATTACKERS:
+                    this.computer.declareAttackers();
+                    
+                    break;
+
+                case MAIN1:
+                case MAIN2:
+                    Log.debug("Computer " + phase.toString());
+                    this.computer.playLands();
+                    // fall through is intended
+                default:
+                    playSpellAbilities(game);
+                    break;
+            }
+        }
+        game.getPhaseHandler().passPriority();
     } // getMessage();
 
+    protected void playSpellAbilities(final GameState game)
+    {
+        Player ai = computer.getPlayer();
+        List<SpellAbility> toPlay = computer.getSpellAbilitiesToPlay();
+        if ( toPlay != null ) {
+            for(SpellAbility sa : toPlay) {
+                //System.out.print(sa);
+                if (ComputerUtil.canBePlayedAndPayedByAI(ai, sa))
+                    ComputerUtil.handlePlayingSpellAbility(ai, sa, game);
+            }
+        }
+    }
+    
     /**
      * <p>
      * Getter for the field <code>computer</code>.
@@ -88,39 +116,6 @@ public class ComputerAIInput extends Input {
     public final Computer getComputer() {
         return this.computer;
     }
-
-    /**
-     * <p>
-     * think.
-     * </p>
-     */
-    private void think() {
-        // TODO instead of setNextPhase, pass priority
-        final PhaseType phase = Singletons.getModel().getGame().getPhaseHandler().getPhase();
-
-        if (Singletons.getModel().getGame().getStack().size() > 0) {
-            this.computer.playSpellAbilities();
-        } else {
-            switch(phase) {
-                case MAIN1:
-                    Log.debug("Computer main1");
-                    this.computer.main();
-                    break;
-                case COMBAT_DECLARE_ATTACKERS:
-                    this.computer.declareAttackers();
-                    Singletons.getModel().getGame().getPhaseHandler().passPriority();
-                    break;
-                case MAIN2:
-                    Log.debug("Computer main2");
-                    this.computer.main();
-                    break;
-                default:
-                    this.computer.playSpellAbilities();
-                    break;
-            }
-        }
-
-    } // think
 
     /* (non-Javadoc)
      * @see forge.control.input.Input#isClassUpdated()
