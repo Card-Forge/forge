@@ -85,20 +85,17 @@ public class WrapLayout extends FlowLayout {
 */
 private Dimension layoutSize(Container target, boolean preferred) {
 synchronized (target.getTreeLock()) {
-    //  Each row must fit with the width allocated to the containter.
+    //  Each row must fit with the width allocated to the container.
     //  When the container width = 0, the preferred width of the container
-    //  has not yet been calculated so lets ask for the maximum.
-
-    int targetWidth = target.getSize().width;
-
-    if (targetWidth == 0) {
-        targetWidth = Integer.MAX_VALUE;
-    }
+    //  has not yet been calculated so we use a width guaranteed to be less
+    //  than we need so that it gets recalculated later when the widget is
+    //  shown.
 
     int hgap = getHgap();
     int vgap = getVgap();
     Insets insets = target.getInsets();
     int horizontalInsetsAndGap = insets.left + insets.right + (hgap * 2);
+    int targetWidth = Math.max(horizontalInsetsAndGap, target.getSize().width);
     int maxWidth = targetWidth - horizontalInsetsAndGap;
 
     //  Fit components into the allowed width
