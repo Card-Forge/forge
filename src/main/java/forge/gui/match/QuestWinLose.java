@@ -57,9 +57,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.BorderFactory;
@@ -659,7 +657,8 @@ public class QuestWinLose extends ControlWinLose {
             if (ii instanceof CardPrinted) {
                 cardsWon.add((CardPrinted) ii);
             } else if (ii instanceof QuestRewardCardChooser) {
-                final CardPrinted chosenCard = ((QuestRewardCardChooser) ii).toCardPrinted();
+                final List<CardPrinted> cardChoices = ((QuestRewardCardChooser) ii).getChoices();
+                final CardPrinted chosenCard = (null == cardChoices ? null : GuiChoose.one("You have won a duplicate card!", cardChoices));
                 if (null != chosenCard) {
                     cardsWon.add(chosenCard);
                 }

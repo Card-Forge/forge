@@ -267,7 +267,7 @@ public final class BoosterUtils {
             rewards.addAll(new UnOpenedProduct(openWay, new BoosterGenerator(rarAndColor)).open());
         } else if (temp.length == 2 && temp[0].equalsIgnoreCase("duplicate") && temp[1].equalsIgnoreCase("card")) {
             // Type 2: a duplicate card of the players choice
-            rewards.add(new QuestRewardCardChooser("duplicate"));
+            rewards.add(new QuestRewardCardChooser("duplicate card"));
         } else if (temp.length > 0) {
             // Type 3: assume we are asking for a single copy of a specific card
             final CardPrinted specific = CardDb.instance().getCard(s);

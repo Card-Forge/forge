@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import forge.Singletons;
-import forge.gui.GuiChoose;
 import forge.item.CardPrinted;
 import forge.item.InventoryItem;
 import forge.item.ItemPool;
@@ -14,6 +13,7 @@ import forge.item.ItemPool;
 /** 
  * Resolves a card chooser InventoryItem into a CardPrinted.
  * The initial version includes "duplicate", other type may be added later.
+ * Note that the type should probably be an enum (than a string) if more types are added.
  *
  */
 public class QuestRewardCardChooser implements InventoryItem  {
@@ -29,12 +29,15 @@ public class QuestRewardCardChooser implements InventoryItem  {
     }
 
     /**
-     * The name (this should not be displayed anywhere).
+     * The name.
      * 
      * @return the name
      */
     @Override
     public String getName() {
+        if ("duplicate card".equals(type)) {
+            return "a duplicate card of your choice";
+        }
         return "a chosen card";
     }
 
@@ -60,12 +63,12 @@ public class QuestRewardCardChooser implements InventoryItem  {
     }
 
     /**
-     * Produces a CardPrinted of the player's choice.
+     * Produces a list of options to choose from.
      * 
-     * @return a CardPrinted or null if could not choose one.
+     * @return a List<CardPrinted> or null if could not create a list.
      */
-    public final CardPrinted toCardPrinted() {
-        if ("duplicate".equals(type)) {
+    public final List<CardPrinted> getChoices() {
+        if ("duplicate card".equals(type)) {
             final ItemPool<CardPrinted> playerCards = Singletons.getModel().getQuest().getAssets().getCardPool();
             if (!playerCards.isEmpty()) { // Maybe a redundant check since it's hard to win a duel without any cards...
 
@@ -75,8 +78,7 @@ public class QuestRewardCardChooser implements InventoryItem  {
                 }
                 Collections.sort(cardChoices);
 
-                final CardPrinted duplicate = GuiChoose.one("You have won a duplicate card!", cardChoices);
-                return duplicate;
+                return cardChoices;
             }
 
         } else {
