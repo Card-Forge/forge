@@ -17,6 +17,9 @@
  */
 package forge.quest.data;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import forge.Singletons;
 import forge.game.GameFormat;
 import forge.quest.QuestMode;
@@ -37,7 +40,7 @@ import forge.quest.io.QuestDataIO;
 public final class QuestData {
 
     /** Holds the latest version of the Quest Data. */
-    public static final int CURRENT_VERSION_NUMBER = 5;
+    public static final int CURRENT_VERSION_NUMBER = 6;
 
     // This field places the version number into QD instance,
     // but only when the object is created through the constructor
@@ -58,7 +61,7 @@ public final class QuestData {
 
     private final QuestAssets assets;
     private final QuestAchievements achievements;
-
+    private final Map<Integer, String> petSlots = new HashMap<Integer, String>();
 
 
     /**
@@ -160,6 +163,9 @@ public final class QuestData {
         return assets;
     }
 
+    public Map<Integer, String> getPetSlots() {
+        return petSlots;
+    }
 
     public QuestAchievements getAchievements() {
         return achievements;

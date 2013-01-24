@@ -76,6 +76,7 @@ public enum CSubmenuChallenges implements ICDoc {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 quest.selectPet(0, view.getCbPlant().isSelected() ? "Plant" : null);
+                quest.save();
             }
         });
 
@@ -87,6 +88,7 @@ public enum CSubmenuChallenges implements ICDoc {
                 List<QuestPetController> pets = quest.getPetsStorage().getAvaliablePets(slot, quest.getAssets());
                 String petName = index <= 0 || index > pets.size() ? null : pets.get(index - 1).getName();
                 quest.selectPet(slot, petName);
+                quest.save();
             }
         });
     }

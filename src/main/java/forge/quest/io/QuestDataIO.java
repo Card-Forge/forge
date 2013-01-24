@@ -197,7 +197,11 @@ public class QuestDataIO {
         if (saveVersion < 5) {
             QuestDataIO.setFinalField(QuestAssets.class, "combatPets", newData.getAssets(), new HashMap<String, QuestItemCondition>());
         }
-
+        
+        if (saveVersion < 6) {
+            QuestDataIO.setFinalField(QuestData.class, "petSlots", newData, new HashMap<Integer, String>());
+        }
+        
         final QuestAssets qS = newData.getAssets();
 
         switch (saveVersion) {
@@ -346,7 +350,7 @@ public class QuestDataIO {
      * @param qd
      *            a {@link forge.quest.data.QuestData} object.
      */
-    public static void saveData(final QuestData qd) {
+    public static synchronized void saveData(final QuestData qd) {
         try {
             final XStream xStream = QuestDataIO.getSerializer(false);
 
