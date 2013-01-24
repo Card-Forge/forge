@@ -2718,7 +2718,19 @@ public class CardFactoryUtil {
                 someCards.addAll(controller.getCardsIn(ZoneType.Hand));
             }
         }
-
+        if (sq[0].contains("InEnchantedYard")) {
+            GameEntity o = c.getEnchanting();
+            Player controller = null;
+            if (o instanceof Card) {
+                controller = ((Card) o).getController();
+            }
+            else {
+                controller = (Player) o;
+            }
+            if (controller != null) {
+                someCards.addAll(controller.getCardsIn(ZoneType.Graveyard));
+            }
+        }
         // filter lists based on the specified quality
 
         // "Clerics you control" - Count$TypeYouCtrl.Cleric
