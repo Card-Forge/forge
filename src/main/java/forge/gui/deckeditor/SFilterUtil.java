@@ -37,35 +37,16 @@ import forge.util.PredicateString.StringOp;
  * <i>(S at beginning of class name denotes a static factory.)</i>
  */
 public class SFilterUtil {
-    /** An enum to reference checkbox objects in the color filter map. */
-    private enum ColorFilterProperty {
+    /** An enum to encapsulate metadata for the checkbox objects in the color/type filter maps. */
+    private enum FilterProperty {
         WHITE      (SEditorUtil.ICO_WHITE.getImage(),     "White Cards"),
         BLUE       (SEditorUtil.ICO_BLUE.getImage(),      "Blue Cards"),
         BLACK      (SEditorUtil.ICO_BLACK.getImage(),     "Black Cards"),
         RED        (SEditorUtil.ICO_RED.getImage(),       "Red Cards"),
         GREEN      (SEditorUtil.ICO_GREEN.getImage(),     "Green Cards"),
         COLORLESS  (SEditorUtil.ICO_COLORLESS.getImage(), "Colorless Cards"),
-        MULTICOLOR (SEditorUtil.ICO_MULTI.getImage(),     "Multicolor Cards");
+        MULTICOLOR (SEditorUtil.ICO_MULTI.getImage(),     "Multicolor Cards"),
 
-        private final Image img;
-        private final String tooltip;
-
-        ColorFilterProperty(final Image img0, final String tooltip0) {
-            img = img0;
-            tooltip = tooltip0;
-        }
-        
-        public Image getImage() {
-            return img;
-        }
-        
-        public String getTooltip() {
-            return tooltip;
-        }
-    }
-
-    /** An enum to reference checkbox objects in the type filter map. */
-    private enum TypeFilterProperty {
         LAND         (SEditorUtil.ICO_LAND.getImage(),         "Land Cards"),
         ARTIFACT     (SEditorUtil.ICO_ARTIFACT.getImage(),     "Artifact Cards"),
         CREATURE     (SEditorUtil.ICO_CREATURE.getImage(),     "Creature Cards"),
@@ -73,11 +54,11 @@ public class SFilterUtil {
         PLANESWALKER (SEditorUtil.ICO_PLANESWALKER.getImage(), "Planeswalker Cards"),
         INSTANT      (SEditorUtil.ICO_INSTANT.getImage(),      "Instant Cards"),
         SORCERY      (SEditorUtil.ICO_SORCERY.getImage(),      "Sorcery Cards");
-
+        
         private final Image img;
         private final String tooltip;
 
-        TypeFilterProperty(final Image img0, final String tooltip0) {
+        FilterProperty(final Image img0, final String tooltip0) {
             img = img0;
             tooltip = tooltip0;
         }
@@ -91,11 +72,31 @@ public class SFilterUtil {
         }
     }
 
-    private static final Map<ColorFilterProperty, ChbPnl> MAP_COLOR_CHECKBOXES =
-            new HashMap<ColorFilterProperty, ChbPnl>();
+    private static final FilterProperty[] COLOR_FILTER_PROPERTIES = {
+        FilterProperty.WHITE,
+        FilterProperty.BLUE,
+        FilterProperty.BLACK,
+        FilterProperty.RED,
+        FilterProperty.GREEN,
+        FilterProperty.COLORLESS,
+        FilterProperty.MULTICOLOR
+    };
 
-    private static final Map<TypeFilterProperty, ChbPnl> MAP_TYPE_CHECKBOXES =
-            new HashMap<TypeFilterProperty, ChbPnl>();
+    private static final FilterProperty[] TYPE_FILTER_PROPERTIES = {
+        FilterProperty.LAND,
+        FilterProperty.ARTIFACT,
+        FilterProperty.CREATURE,
+        FilterProperty.ENCHANTMENT,
+        FilterProperty.PLANESWALKER,
+        FilterProperty.INSTANT,
+        FilterProperty.SORCERY
+    };
+
+    private static final Map<FilterProperty, ChbPnl> MAP_COLOR_CHECKBOXES =
+            new HashMap<FilterProperty, ChbPnl>();
+
+    private static final Map<FilterProperty, ChbPnl> MAP_TYPE_CHECKBOXES =
+            new HashMap<FilterProperty, ChbPnl>();
 
     /**
 
@@ -134,7 +135,7 @@ public class SFilterUtil {
         pnl.setOpaque(false);
 
         MAP_COLOR_CHECKBOXES.clear();
-        for (ColorFilterProperty p : ColorFilterProperty.values()) {
+        for (FilterProperty p : COLOR_FILTER_PROPERTIES) {
             ChbPnl chbPnl = new ChbPnl(p.getImage(), p.getTooltip());
             MAP_COLOR_CHECKBOXES.put(p, chbPnl);
             pnl.add(chbPnl);
@@ -153,7 +154,7 @@ public class SFilterUtil {
         pnl.setOpaque(false);
 
         MAP_TYPE_CHECKBOXES.clear();
-        for (TypeFilterProperty p : TypeFilterProperty.values()) {
+        for (FilterProperty p : TYPE_FILTER_PROPERTIES) {
             ChbPnl chbPnl = new ChbPnl(p.getImage(), p.getTooltip());
             MAP_TYPE_CHECKBOXES.put(p, chbPnl);
             pnl.add(chbPnl);
@@ -190,16 +191,16 @@ public class SFilterUtil {
 
         final List<Predicate<CardRules>> colors = new ArrayList<Predicate<CardRules>>();
 
-        if (MAP_COLOR_CHECKBOXES.get(ColorFilterProperty.WHITE).getCheckBox().isSelected()) { colors.add(CardRulesPredicates.Presets.IS_WHITE); }
-        if (MAP_COLOR_CHECKBOXES.get(ColorFilterProperty.BLUE).getCheckBox().isSelected()) { colors.add(CardRulesPredicates.Presets.IS_BLUE); }
-        if (MAP_COLOR_CHECKBOXES.get(ColorFilterProperty.BLACK).getCheckBox().isSelected()) { colors.add(CardRulesPredicates.Presets.IS_BLACK); }
-        if (MAP_COLOR_CHECKBOXES.get(ColorFilterProperty.RED).getCheckBox().isSelected()) { colors.add(CardRulesPredicates.Presets.IS_RED); }
-        if (MAP_COLOR_CHECKBOXES.get(ColorFilterProperty.GREEN).getCheckBox().isSelected()) { colors.add(CardRulesPredicates.Presets.IS_GREEN); }
-        if (MAP_COLOR_CHECKBOXES.get(ColorFilterProperty.COLORLESS).getCheckBox().isSelected()) { colors.add(CardRulesPredicates.Presets.IS_COLORLESS); }
+        if (MAP_COLOR_CHECKBOXES.get(FilterProperty.WHITE).getCheckBox().isSelected()) { colors.add(CardRulesPredicates.Presets.IS_WHITE); }
+        if (MAP_COLOR_CHECKBOXES.get(FilterProperty.BLUE).getCheckBox().isSelected()) { colors.add(CardRulesPredicates.Presets.IS_BLUE); }
+        if (MAP_COLOR_CHECKBOXES.get(FilterProperty.BLACK).getCheckBox().isSelected()) { colors.add(CardRulesPredicates.Presets.IS_BLACK); }
+        if (MAP_COLOR_CHECKBOXES.get(FilterProperty.RED).getCheckBox().isSelected()) { colors.add(CardRulesPredicates.Presets.IS_RED); }
+        if (MAP_COLOR_CHECKBOXES.get(FilterProperty.GREEN).getCheckBox().isSelected()) { colors.add(CardRulesPredicates.Presets.IS_GREEN); }
+        if (MAP_COLOR_CHECKBOXES.get(FilterProperty.COLORLESS).getCheckBox().isSelected()) { colors.add(CardRulesPredicates.Presets.IS_COLORLESS); }
 
         final Predicate<CardRules> preColors = colors.size() == 6 ? null : Predicates.or(colors);
 
-        boolean wantMulticolor = MAP_COLOR_CHECKBOXES.get(ColorFilterProperty.MULTICOLOR).getCheckBox().isSelected();
+        boolean wantMulticolor = MAP_COLOR_CHECKBOXES.get(FilterProperty.MULTICOLOR).getCheckBox().isSelected();
         final Predicate<CardRules> preExceptMulti = wantMulticolor ? null : Predicates.not(CardRulesPredicates.Presets.IS_MULTICOLOR);
 
         Predicate<CardRules> preFinal = colors.isEmpty() && wantMulticolor ? CardRulesPredicates.Presets.IS_MULTICOLOR : optimizedAnd(preExceptMulti, preColors);
@@ -243,13 +244,13 @@ public class SFilterUtil {
         if (MAP_TYPE_CHECKBOXES.isEmpty()) { return Predicates.alwaysTrue(); }
 
         final List<Predicate<CardRules>> ors = new ArrayList<Predicate<CardRules>>();
-        if (MAP_TYPE_CHECKBOXES.get(TypeFilterProperty.LAND).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_LAND); }
-        if (MAP_TYPE_CHECKBOXES.get(TypeFilterProperty.ARTIFACT).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_ARTIFACT); }
-        if (MAP_TYPE_CHECKBOXES.get(TypeFilterProperty.CREATURE).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_CREATURE); }
-        if (MAP_TYPE_CHECKBOXES.get(TypeFilterProperty.ENCHANTMENT).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_ENCHANTMENT); }
-        if (MAP_TYPE_CHECKBOXES.get(TypeFilterProperty.PLANESWALKER).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_PLANESWALKER); }
-        if (MAP_TYPE_CHECKBOXES.get(TypeFilterProperty.INSTANT).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_INSTANT); }
-        if (MAP_TYPE_CHECKBOXES.get(TypeFilterProperty.SORCERY).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_SORCERY); }
+        if (MAP_TYPE_CHECKBOXES.get(FilterProperty.LAND).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_LAND); }
+        if (MAP_TYPE_CHECKBOXES.get(FilterProperty.ARTIFACT).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_ARTIFACT); }
+        if (MAP_TYPE_CHECKBOXES.get(FilterProperty.CREATURE).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_CREATURE); }
+        if (MAP_TYPE_CHECKBOXES.get(FilterProperty.ENCHANTMENT).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_ENCHANTMENT); }
+        if (MAP_TYPE_CHECKBOXES.get(FilterProperty.PLANESWALKER).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_PLANESWALKER); }
+        if (MAP_TYPE_CHECKBOXES.get(FilterProperty.INSTANT).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_INSTANT); }
+        if (MAP_TYPE_CHECKBOXES.get(FilterProperty.SORCERY).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_SORCERY); }
 
         if (ors.size() == 7) {
             return Predicates.alwaysTrue();
