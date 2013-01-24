@@ -3,7 +3,7 @@ package forge.card.abilityfactory;
 
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.game.player.ComputerUtil;
+import forge.game.ai.ComputerUtil;
 import forge.game.player.Player;
 
 public abstract class SpellAiLogic {

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.game.player;
+package forge.game.ai;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -64,6 +64,7 @@ import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
 import forge.util.Aggregates;
@@ -2089,7 +2090,7 @@ public class ComputerUtil {
         if (card.getSVar("PlayMain1").equals("TRUE")) {
             return true;
         }
-        if ((card.isCreature() && (ComputerAIGeneral.hasACardGivingHaste(ai)
+        if ((card.isCreature() && (ComputerUtil.hasACardGivingHaste(ai)
                 || card.hasKeyword("Haste"))) || card.hasKeyword("Exalted")) {
             return true;
         }
@@ -2265,4 +2266,41 @@ public class ComputerUtil {
 
         return r.nextFloat() <= Math.pow(.95, activations);
     }
+
+    /**
+     * <p>
+     * hasACardGivingHaste.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public static boolean hasACardGivingHaste(final Player ai) {
+        final List<Card> all = new ArrayList<Card>(ai.getCardsIn(ZoneType.Battlefield));
+        all.addAll(CardFactoryUtil.getExternalZoneActivationCards(ai));
+        all.addAll(ai.getCardsIn(ZoneType.Hand));
+    
+        for (final Card c : all) {
+            for (final SpellAbility sa : c.getSpellAbility()) {
+    
+                if (sa.getApi() == null) {
+                    continue;
+                }
+    
+                /// ????
+                // if ( sa.isAbility() || sa.isSpell() && sa.getApi() != ApiType.Pump ) continue
+                if (sa.hasParam("AB") && !sa.getParam("AB").equals("Pump")) {
+                    continue;
+                }
+                if (sa.hasParam("SP") && !sa.getParam("SP").equals("Pump")) {
+                    continue;
+                }
+    
+                if (sa.hasParam("KW") && sa.getParam("KW").contains("Haste")) {
+                    return true;
+                }
+            }
+        }
+    
+        return false;
+    } // hasACardGivingHaste
 }

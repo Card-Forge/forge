@@ -43,8 +43,8 @@ import forge.card.spellability.SpellAbilityCondition;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
 import forge.game.GameState;
+import forge.game.ai.ComputerUtil;
 import forge.game.phase.PhaseType;
-import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 

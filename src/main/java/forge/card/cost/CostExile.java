@@ -34,7 +34,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.control.input.Input;
 import forge.game.GameState;
-import forge.game.player.ComputerUtil;
+import forge.game.ai.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;

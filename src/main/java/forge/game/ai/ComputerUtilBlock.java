@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.game.player;
+package forge.game.ai;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +32,7 @@ import forge.GameEntity;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
+import forge.game.player.Player;
 
 
 /**

@@ -43,6 +43,7 @@ import forge.card.abilityfactory.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.mana.ManaCostBeingPaid;
+import forge.card.replacement.ReplaceMoved;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementResult;
 import forge.card.spellability.AbilityManaPart;
@@ -57,12 +58,12 @@ import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
 import forge.game.GameState;
 import forge.game.GlobalRuleChange;
+import forge.game.ai.ComputerUtil;
 import forge.game.event.CounterAddedEvent;
 import forge.game.event.CardEquippedEvent;
 import forge.game.event.CounterRemovedEvent;
 import forge.game.event.SetTappedEvent;
 import forge.game.phase.Combat;
-import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.item.CardDb;
@@ -9067,6 +9068,60 @@ public class Card extends GameEntity implements Comparable<Card> {
         getDamageHistory().setCreatureGotBlockedThisTurn(false);
         clearBlockedByThisTurn();
         clearBlockedThisTurn();
+    }
+
+    /**
+     * <p>
+     * hasETBTrigger.
+     * </p>
+     * 
+     * @param card
+     *            a {@link forge.Card} object.
+     * @return a boolean.
+     */
+    public boolean hasETBTrigger() {
+        for (final Trigger tr : this.getTriggers()) {
+            final HashMap<String, String> params = tr.getMapParams();
+            if (tr.getMode() != TriggerType.ChangesZone) {
+                continue;
+            }
+    
+            if (!params.get("Destination").equals(ZoneType.Battlefield.toString())) {
+                continue;
+            }
+    
+            if (params.containsKey("ValidCard") && !params.get("ValidCard").contains("Self")) {
+                continue;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * <p>
+     * hasETBTrigger.
+     * </p>
+     * 
+     * @return a boolean.
+     */
+    public boolean hasETBReplacement() {
+        for (final ReplacementEffect re : getReplacementEffects()) {
+            final HashMap<String, String> params = re.getMapParams();
+            if (!(re instanceof ReplaceMoved)) {
+                continue;
+            }
+    
+            if (!params.get("Destination").equals(ZoneType.Battlefield.toString())) {
+                continue;
+            }
+    
+            if (params.containsKey("ValidCard") && !params.get("ValidCard").contains("Self")) {
+                continue;
+            }
+            return true;
+        }
+        return false;
     }
 
 } // end Card class

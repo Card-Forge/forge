@@ -33,7 +33,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.error.ErrorViewer;
-import forge.game.player.ComputerUtil;
+import forge.game.ai.ComputerUtil;
 import forge.game.player.Player;
 import forge.gui.GuiUtils;
 import forge.item.CardDb;

@@ -10,8 +10,8 @@ import forge.card.cost.Cost;
 import forge.card.cost.CostUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtil;
 import forge.game.phase.PhaseType;
-import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 
 public class PoisonAi extends SpellAiLogic {

@@ -15,17 +15,19 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.game.player;
+package forge.game.ai;
 
 import java.util.List;
 
 import com.esotericsoftware.minlog.Log;
 
-import forge.Singletons;
+import forge.Card;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.GameState;
 import forge.game.phase.PhaseType;
+import forge.game.player.Player;
+import forge.game.zone.ZoneType;
 
 /**
  * <p>
@@ -35,11 +37,13 @@ import forge.game.phase.PhaseType;
  * @author Forge
  * @version $Id$
  */
-public class ComputerAIInput extends Input {
+public class AiInputCommon extends Input {
     /** Constant <code>serialVersionUID=-3091338639571662216L</code>. */
     private static final long serialVersionUID = -3091338639571662216L;
 
-    private final Computer computer;
+    private final AiController computer;
+    private final Player player; 
+    private final GameState game;
 
     /**
      * <p>
@@ -49,15 +53,17 @@ public class ComputerAIInput extends Input {
      * @param iComputer
      *            a {@link forge.game.player.Computer} object.
      */
-    public ComputerAIInput(final Computer iComputer) {
+    public AiInputCommon(final AiController iComputer) {
         this.computer = iComputer;
+        player = computer.getPlayer();
+        this.game = computer.getGame();
     }
 
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
         // should not think when the game is over
-        if (Singletons.getModel().getGame().isGameOver()) {
+        if (game.isGameOver()) {
             return;
         }
 
@@ -68,7 +74,7 @@ public class ComputerAIInput extends Input {
          * send the \"Stack Report\" and the
          * \"Detailed Error Trace\" to the Forge forum.");
          */
-        GameState game = Singletons.getModel().getGame();
+        
         final PhaseType phase = game.getPhaseHandler().getPhase();
         
         if (game.getStack().size() > 0) {
@@ -76,14 +82,13 @@ public class ComputerAIInput extends Input {
         } else {
             switch(phase) {
                 case COMBAT_DECLARE_ATTACKERS:
-                    this.computer.declareAttackers();
-                    
+                    declareAttackers();
                     break;
 
                 case MAIN1:
                 case MAIN2:
                     Log.debug("Computer " + phase.toString());
-                    this.computer.playLands();
+                    playLands();
                     // fall through is intended
                 default:
                     playSpellAbilities(game);
@@ -93,29 +98,61 @@ public class ComputerAIInput extends Input {
         game.getPhaseHandler().passPriority();
     } // getMessage();
 
+    /**
+     * TODO: Write javadoc for this method.
+     */
+    private void declareAttackers() {
+        // 12/2/10(sol) the decision making here has moved to getAttackers()
+        game.setCombat(ComputerUtil.getAttackers(player));
+
+        final List<Card> att = game.getCombat().getAttackers();
+        if (!att.isEmpty()) {
+            game.getPhaseHandler().setCombat(true);
+        }
+
+        for (final Card element : att) {
+            // tapping of attackers happens after Propaganda is paid for
+            final StringBuilder sb = new StringBuilder();
+            sb.append("Computer just assigned ").append(element.getName()).append(" as an attacker.");
+            Log.debug(sb.toString());
+        }
+
+        player.getZone(ZoneType.Battlefield).updateObservers();
+
+        game.getPhaseHandler().setPlayersPriorityPermission(false);
+
+        // ai is about to attack, cancel all phase skipping
+        for (Player p : game.getPlayers()) {
+            p.getController().autoPassCancel();
+        }
+    }
+
+    /**
+     * TODO: Write javadoc for this method.
+     */
+    private void playLands() {
+        final Player player = computer.getPlayer();
+        List<Card> landsWannaPlay = ComputerUtil.getLandsToPlay(player);
+        
+        while(landsWannaPlay != null && !landsWannaPlay.isEmpty() && player.canPlayLand()) {
+            Card land = ComputerUtil.chooseBestLandToPlay(landsWannaPlay, player);
+            landsWannaPlay.remove(land);
+            player.playLand(land);
+        }
+    }
+
     protected void playSpellAbilities(final GameState game)
     {
-        Player ai = computer.getPlayer();
         List<SpellAbility> toPlay = computer.getSpellAbilitiesToPlay();
         if ( toPlay != null ) {
             for(SpellAbility sa : toPlay) {
                 //System.out.print(sa);
-                if (ComputerUtil.canBePlayedAndPayedByAI(ai, sa))
-                    ComputerUtil.handlePlayingSpellAbility(ai, sa, game);
+                if (ComputerUtil.canBePlayedAndPayedByAI(player, sa))
+                    ComputerUtil.handlePlayingSpellAbility(player, sa, game);
             }
         }
     }
     
-    /**
-     * <p>
-     * Getter for the field <code>computer</code>.
-     * </p>
-     * 
-     * @return a {@link forge.game.player.Computer} object.
-     */
-    public final Computer getComputer() {
-        return this.computer;
-    }
 
     /* (non-Javadoc)
      * @see forge.control.input.Input#isClassUpdated()

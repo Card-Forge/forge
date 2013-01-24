@@ -13621,6 +13621,12 @@ src/main/java/forge/game/MatchController.java -text
 src/main/java/forge/game/MatchStartHelper.java -text
 src/main/java/forge/game/PlanarDice.java -text
 src/main/java/forge/game/PlayerStartConditions.java -text
+src/main/java/forge/game/ai/AiController.java svneol=native#text/plain
+src/main/java/forge/game/ai/AiInputBlock.java -text
+src/main/java/forge/game/ai/AiInputCommon.java svneol=native#text/plain
+src/main/java/forge/game/ai/ComputerUtil.java svneol=native#text/plain
+src/main/java/forge/game/ai/ComputerUtilAttack.java svneol=native#text/plain
+src/main/java/forge/game/ai/ComputerUtilBlock.java svneol=native#text/plain
 src/main/java/forge/game/event/BlockerAssignedEvent.java -text
 src/main/java/forge/game/event/CardDamagedEvent.java -text
 src/main/java/forge/game/event/CardDestroyedEvent.java -text
@@ -13676,13 +13682,6 @@ src/main/java/forge/game/phase/Untap.java -text
 src/main/java/forge/game/phase/Upkeep.java svneol=native#text/plain
 src/main/java/forge/game/phase/package-info.java svneol=native#text/plain
 src/main/java/forge/game/player/AIPlayer.java svneol=native#text/plain
-src/main/java/forge/game/player/Computer.java svneol=native#text/plain
-src/main/java/forge/game/player/ComputerAIGeneral.java svneol=native#text/plain
-src/main/java/forge/game/player/ComputerAIInput.java svneol=native#text/plain
-src/main/java/forge/game/player/ComputerAiInputBlock.java -text
-src/main/java/forge/game/player/ComputerUtil.java svneol=native#text/plain
-src/main/java/forge/game/player/ComputerUtilAttack.java svneol=native#text/plain
-src/main/java/forge/game/player/ComputerUtilBlock.java svneol=native#text/plain
 src/main/java/forge/game/player/HumanPlayer.java svneol=native#text/plain
 src/main/java/forge/game/player/LobbyPlayer.java -text
 src/main/java/forge/game/player/Player.java svneol=native#text/plain

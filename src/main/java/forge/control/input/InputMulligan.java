@@ -33,7 +33,7 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.GameType;
-import forge.game.player.ComputerUtil;
+import forge.game.ai.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;

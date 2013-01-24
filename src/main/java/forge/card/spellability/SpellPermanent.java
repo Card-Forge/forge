@@ -42,9 +42,8 @@ import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.game.GlobalRuleChange;
+import forge.game.ai.ComputerUtil;
 import forge.game.phase.PhaseType;
-import forge.game.player.ComputerAIGeneral;
-import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.view.ButtonUtil;
@@ -299,7 +298,7 @@ public class SpellPermanent extends Spell {
         }
         // save cards with flash for surprise blocking
         if (card.hasKeyword("Flash")
-                && !ComputerAIGeneral.hasETBTrigger(card)
+                && !card.hasETBTrigger()
                 && (Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai)
                      || Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS_INSTANT_ABILITY))) {
             return false;
@@ -381,8 +380,8 @@ public class SpellPermanent extends Spell {
         }
 
         if (card.isCreature() && (card.getNetDefense() <= 0) && !card.hasStartOfKeyword("etbCounter")
-                && mana.countX() == 0 && !ComputerAIGeneral.hasETBTrigger(card)
-                && !ComputerAIGeneral.hasETBReplacement(card)) {
+                && mana.countX() == 0 && !card.hasETBTrigger()
+                && !card.hasETBReplacement()) {
             return false;
         }
 

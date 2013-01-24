@@ -1,4 +1,4 @@
-package forge.game.player;
+package forge.game.ai;
 
 import java.util.List;
 
@@ -6,12 +6,13 @@ import forge.Card;
 import forge.control.input.Input;
 import forge.game.GameState;
 import forge.game.phase.CombatUtil;
+import forge.game.player.Player;
 
 /** 
  * TODO: Write javadoc for this type.
  *
  */
-public class ComputerAiInputBlock extends Input {
+public class AiInputBlock extends Input {
 
     private final GameState game;
     /**
@@ -19,7 +20,7 @@ public class ComputerAiInputBlock extends Input {
      * @param game
      * @param player
      */
-    public ComputerAiInputBlock(GameState game, Player player) {
+    public AiInputBlock(GameState game, Player player) {
         super();
         this.game = game;
         this.player = player;

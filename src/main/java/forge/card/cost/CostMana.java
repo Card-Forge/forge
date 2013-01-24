@@ -27,7 +27,7 @@ import forge.control.input.Input;
 import forge.control.input.InputPayManaCost2;
 import forge.control.input.InputPayManaX;
 import forge.game.GameState;
-import forge.game.player.ComputerUtil;
+import forge.game.ai.ComputerUtil;
 import forge.game.player.Player;
 
 /**

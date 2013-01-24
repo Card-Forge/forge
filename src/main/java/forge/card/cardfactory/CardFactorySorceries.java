@@ -48,7 +48,7 @@ import forge.card.spellability.Target;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCost;
 import forge.control.input.InputPayManaCostAbility;
-import forge.game.player.ComputerUtil;
+import forge.game.ai.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.player.PlayerUtil;
 import forge.game.zone.PlayerZone;

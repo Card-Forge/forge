@@ -45,7 +45,7 @@ import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.control.input.InputSelectManyCards;
 import forge.game.GameState;
-import forge.game.player.ComputerUtil;
+import forge.game.ai.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;

@@ -28,6 +28,10 @@ import forge.CardPredicates;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
+import forge.game.ai.AiController;
+import forge.game.ai.AiInputBlock;
+import forge.game.ai.AiInputCommon;
+import forge.game.ai.ComputerUtil;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
@@ -42,6 +46,7 @@ import forge.util.MyRandom;
  */
 public class AIPlayer extends Player {
 
+    private final AiController brains;
     /**
      * <p>
      * Constructor for AIPlayer.
@@ -53,8 +58,9 @@ public class AIPlayer extends Player {
      */
     public AIPlayer(final LobbyPlayer player, final GameState game) {
         super(player, game, new PlayerController());
-        getController().setDefaultInput(new ComputerAIInput(new ComputerAIGeneral(this, game)));
-        getController().setBlockInput(new ComputerAiInputBlock(game, this));
+        brains = new AiController(this, game);
+        getController().setDefaultInput(new AiInputCommon(brains));
+        getController().setBlockInput(new AiInputBlock(game, this));
     }
 
 

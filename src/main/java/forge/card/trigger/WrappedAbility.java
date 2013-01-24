@@ -20,7 +20,7 @@ import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
 import forge.control.input.Input;
 import forge.game.GameState;
-import forge.game.player.ComputerUtil;
+import forge.game.ai.ComputerUtil;
 import forge.game.player.Player;
 
 // Wrapper ability that checks the requirements again just before

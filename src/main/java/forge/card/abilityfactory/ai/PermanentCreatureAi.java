@@ -11,8 +11,8 @@ import forge.Singletons;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
+import forge.game.ai.ComputerUtil;
 import forge.game.phase.PhaseType;
-import forge.game.player.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 

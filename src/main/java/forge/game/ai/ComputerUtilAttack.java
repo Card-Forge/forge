@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package forge.game.player;
+package forge.game.ai;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +35,7 @@ import forge.card.trigger.TriggerType;
 import forge.game.GameState;
 import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
+import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
 
