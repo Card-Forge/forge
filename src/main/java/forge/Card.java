@@ -7148,6 +7148,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!source.getImprinted().contains(this)) {
                 return false;
             }
+        } else if (property.equals("IsNotImprinted")) {
+            if (source.getImprinted().contains(this)) {
+                return false;
+            }
         } else if (property.equals("hasActivatedAbilityWithTapCost")) {
             for (final SpellAbility sa : this.getSpellAbilities()) {
                 if (sa.isAbility() && (sa.getPayCosts() != null) && sa.getPayCosts().hasTapCost()) {
