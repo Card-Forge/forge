@@ -98,6 +98,7 @@ public class QuestController {
         if (this.model != null) {
                 this.model.getPetSlots().put(slot, name);
         }
+    }
     /**
      * 
      * @param slot &emsp; int
