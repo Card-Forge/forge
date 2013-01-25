@@ -31,11 +31,12 @@ import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cost.Cost;
 import forge.card.cost.CostDiscard;
 import forge.card.cost.CostPart;
-import forge.card.cost.CostUtil;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCost;
+import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -59,15 +60,15 @@ public class DrawAi extends SpellAiLogic {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkCreatureSacrificeCost(ai, abCost, source)) {
+            if (!ComputerUtilCost.checkCreatureSacrificeCost(ai, abCost, source)) {
                 return false;
             }
 
-            if (!CostUtil.checkLifeCost(ai, abCost, source, 4, null)) {
+            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, null)) {
                 return false;
             }
 
-            if (!CostUtil.checkDiscardCost(ai, abCost, source)) {
+            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
                 for (final CostPart part : abCost.getCostParts()) {
                     if (part instanceof CostDiscard) {
                         CostDiscard cd = (CostDiscard) part;
@@ -82,7 +83,7 @@ public class DrawAi extends SpellAiLogic {
                 }
             }
 
-            if (!CostUtil.checkRemoveCounterCost(abCost, source)) {
+            if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source)) {
                 return false;
             }
 
@@ -165,7 +166,7 @@ public class DrawAi extends SpellAiLogic {
             if (sa instanceof AbilitySub && !source.getSVar("PayX").equals("")) {
                 numCards = Integer.parseInt(source.getSVar("PayX"));
             } else {
-                numCards = ComputerUtil.determineLeftoverMana(sa, ai);
+                numCards = ComputerUtilMana.determineLeftoverMana(sa, ai);
                 source.setSVar("PayX", Integer.toString(numCards));
             }
             xPaid = true;

@@ -13,10 +13,10 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.card.cost.CostUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCost;
+import forge.game.ai.ComputerUtilMana;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -39,7 +39,7 @@ public class  DamageAllAi extends SpellAiLogic {
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            dmg = ComputerUtil.determineLeftoverMana(sa, ai);
+            dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(dmg));
         }
 
@@ -61,7 +61,7 @@ public class  DamageAllAi extends SpellAiLogic {
         // abCost stuff that should probably be centralized...
         if (abCost != null) {
             // AI currently disabled for some costs
-            if (!CostUtil.checkLifeCost(ai, abCost, source, 4, null)) {
+            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, null)) {
                 return false;
             }
         }
@@ -112,7 +112,7 @@ public class  DamageAllAi extends SpellAiLogic {
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            dmg = ComputerUtil.determineLeftoverMana(sa, ai);
+            dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(dmg));
         }
 
@@ -196,7 +196,7 @@ public class  DamageAllAi extends SpellAiLogic {
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            dmg = ComputerUtil.determineLeftoverMana(sa, ai);
+            dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(dmg));
         }
 

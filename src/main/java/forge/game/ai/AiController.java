@@ -18,6 +18,8 @@
 package forge.game.ai;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.google.common.base.Predicate;
@@ -411,9 +413,8 @@ public class AiController {
     private SpellAbility chooseSpellAbilities(final List<SpellAbility> all, boolean skipCounter) {
         if ( all == null || all.isEmpty() )
             return null;
-    
-        // not sure "playing biggest spell" matters?
-        ComputerUtil.sortSpellAbilityByCost(all);
+
+        Collections.sort(all, saComparator); // put best spells first
         
         for (final SpellAbility sa : getOriginalAndAltCostAbilities(all)) {
             // Don't add Counterspells to the "normal" playcard lookups
@@ -433,7 +434,51 @@ public class AiController {
 
 
     // This is for playing spells regularly (no Cascade/Ripple etc.)
-    public boolean canPlayAndPayFor(final SpellAbility sa) {
-        return sa.canPlay() && sa.canPlayAI() && ComputerUtil.canPayCost(sa, player);
+    private boolean canPlayAndPayFor(final SpellAbility sa) {
+        return sa.canPlay() && sa.canPlayAI() && ComputerUtilCost.canPayCost(sa, player);
     }
+    
+    // not sure "playing biggest spell" matters?
+     private final static Comparator<SpellAbility> saComparator = new Comparator<SpellAbility>() {
+        @Override
+        public int compare(final SpellAbility a, final SpellAbility b) {
+            // sort from highest cost to lowest
+            // we want the highest costs first
+            int a1 = a.getManaCost().getCMC();
+            int b1 = b.getManaCost().getCMC();
+
+            // cast 0 mana cost spells first (might be a Mox)
+            if (a1 == 0) {
+                b1 = -2;
+            } else if (b1 == 0) {
+                a1 = -2;
+            }
+
+            a1 += getSpellAbilityPriority(a);
+            b1 += getSpellAbilityPriority(b);
+
+            return b1 - a1;
+        }
+        
+        private int getSpellAbilityPriority(SpellAbility sa) {
+            int p = 0;
+            // puts creatures in front of spells
+            if (sa.getSourceCard().isCreature()) {
+                p += 1;
+            }
+            // sort planeswalker abilities for ultimate
+            if (sa.getRestrictions().getPlaneswalker()) {
+                if (sa.hasParam("Ultimate")) {
+                    p += 9;
+                }
+            }
+    
+            if (ApiType.DestroyAll == sa.getApi()) {
+                p += 4;
+            }
+    
+            return p;
+        }
+    }; // Comparator
 }
+

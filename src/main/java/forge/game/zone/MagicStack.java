@@ -53,6 +53,7 @@ import forge.control.input.Input;
 import forge.control.input.InputPayManaCostAbility;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCost;
 import forge.game.event.SpellResolvedEvent;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -518,7 +519,7 @@ public class MagicStack extends MyObservable {
                     // computer
                     final int neededDamage = CardFactoryUtil.getNeededXDamage(sa);
 
-                    while (ComputerUtil.canPayCost(ability, player) && (neededDamage != sa.getSourceCard().getXManaCostPaid())) {
+                    while (ComputerUtilCost.canPayCost(ability, player) && (neededDamage != sa.getSourceCard().getXManaCostPaid())) {
                         ComputerUtil.playNoStack(player, ability, game);
                     }
                     this.push(sa);
@@ -551,7 +552,9 @@ public class MagicStack extends MyObservable {
                     @Override
                     public void execute() {
                         ability.resolve();
+                        
                         final ManaCostBeingPaid manaCost = MagicStack.this.getMultiKickerSpellCostChange(ability);
+                        
                         if (manaCost.isPaid()) {
                             this.execute();
                         } else {
@@ -619,7 +622,7 @@ public class MagicStack extends MyObservable {
                 } else {
                     // computer
 
-                    while (ComputerUtil.canPayCost(ability, activating)) {
+                    while (ComputerUtilCost.canPayCost(ability, activating)) {
                         ComputerUtil.playNoStack(activating, ability, game);
                     }
 
@@ -683,7 +686,7 @@ public class MagicStack extends MyObservable {
                     }
                 } else {
                     // computer
-                    while (ComputerUtil.canPayCost(ability, controller)) {
+                    while (ComputerUtilCost.canPayCost(ability, controller)) {
                         ComputerUtil.playNoStack(controller, ability, game);
                     }
 

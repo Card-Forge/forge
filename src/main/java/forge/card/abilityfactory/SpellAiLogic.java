@@ -3,7 +3,7 @@ package forge.card.abilityfactory;
 
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
-import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCost;
 import forge.game.player.Player;
 
 public abstract class SpellAiLogic {
@@ -19,7 +19,7 @@ public abstract class SpellAiLogic {
     protected abstract boolean canPlayAI(final Player aiPlayer, final SpellAbility sa);
 
     public final boolean doTriggerAI(final Player aiPlayer, final SpellAbility sa, final boolean mandatory) {
-        if (!ComputerUtil.canPayCost(sa, aiPlayer) && !mandatory) {
+        if (!ComputerUtilCost.canPayCost(sa, aiPlayer) && !mandatory) {
             return false;
         }
 

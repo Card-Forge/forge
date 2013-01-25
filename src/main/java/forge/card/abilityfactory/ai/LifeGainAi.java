@@ -7,11 +7,12 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cost.Cost;
-import forge.card.cost.CostUtil;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCost;
+import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -38,7 +39,7 @@ public class LifeGainAi extends SpellAiLogic {
         int lifeAmount = 0;
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
+            final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(xPay));
             lifeAmount = xPay;
         } else {
@@ -70,19 +71,19 @@ public class LifeGainAi extends SpellAiLogic {
                 .lifeInDanger(ai, Singletons.getModel().getGame().getCombat()));
 
         if (abCost != null && !lifeCritical) {
-            if (!CostUtil.checkSacrificeCost(ai, abCost, source, false)) {
+            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source, false)) {
                 return false;
             }
 
-            if (!CostUtil.checkLifeCost(ai, abCost, source, 4, null)) {
+            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, null)) {
                 return false;
             }
 
-            if (!CostUtil.checkDiscardCost(ai, abCost, source)) {
+            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
                 return false;
             }
 
-            if (!CostUtil.checkRemoveCounterCost(abCost, source)) {
+            if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source)) {
                 return false;
             }
         }
@@ -166,7 +167,7 @@ public class LifeGainAi extends SpellAiLogic {
         final String amountStr = sa.getParam("LifeAmount");
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
+            final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(xPay));
         }
 

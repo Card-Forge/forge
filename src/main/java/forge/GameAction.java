@@ -60,6 +60,7 @@ import forge.game.GameState;
 import forge.game.GlobalRuleChange;
 import forge.game.MatchController;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCost;
 import forge.game.event.CardDestroyedEvent;
 import forge.game.event.CardRegeneratedEvent;
 import forge.game.event.CardSacrificedEvent;
@@ -557,7 +558,7 @@ public class GameAction {
                                 GameActionUtil.payCostDuringAbilityResolve(abRecover, abRecover.getPayCosts(),
                                         paidCommand, unpaidCommand, null, game);
                             } else { // computer
-                                if (ComputerUtil.canPayCost(abRecover, p)) {
+                                if (ComputerUtilCost.canPayCost(abRecover, p)) {
                                     ComputerUtil.playNoStack(p, abRecover, game);
                                 } else {
                                     Singletons.getModel().getGame().getAction().exile(recoverable);

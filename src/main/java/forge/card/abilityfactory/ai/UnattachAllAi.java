@@ -11,7 +11,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.util.MyRandom;
@@ -41,7 +41,7 @@ public class UnattachAllAi extends SpellAiLogic {
         }
 
         if (abCost != null && abCost.getTotalMana().countX() > 0 && source.getSVar("X").equals("Count$xPaid")) {
-            final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
+            final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
 
             if (xPay == 0) {
                 return false;

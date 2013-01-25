@@ -12,9 +12,9 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.card.cost.CostUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCost;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -30,7 +30,7 @@ public class UntapAi extends SpellAiLogic {
         final Card source = sa.getSourceCard();
         final Cost cost = sa.getPayCosts();
 
-        if (!CostUtil.checkAddM1M1CounterCost(cost, source)) {
+        if (!ComputerUtilCost.checkAddM1M1CounterCost(cost, source)) {
             return false;
         }
 

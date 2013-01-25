@@ -27,7 +27,7 @@ import forge.control.input.Input;
 import forge.control.input.InputPayManaCost2;
 import forge.control.input.InputPayManaX;
 import forge.game.GameState;
-import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilMana;
 import forge.game.player.Player;
 
 /**
@@ -194,7 +194,7 @@ public class CostMana extends CostPart {
      */
     @Override
     public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
-        ComputerUtil.payManaCost(ai, ability);
+        ComputerUtilMana.payManaCost(ai, ability);
     }
 
     /*

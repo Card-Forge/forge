@@ -25,7 +25,6 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostDiscard;
 import forge.card.cost.CostPart;
-import forge.card.cost.CostUtil;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
@@ -33,6 +32,8 @@ import forge.card.spellability.Target;
 import forge.game.GlobalRuleChange;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilBlock;
+import forge.game.ai.ComputerUtilCost;
+import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
@@ -173,16 +174,16 @@ public class ChangeZoneAi extends SpellAiLogic {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkSacrificeCost(ai, abCost, source)
+            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source)
                     && !(destination.equals("Battlefield") && !source.isLand())) {
                 return false;
             }
 
-            if (!CostUtil.checkLifeCost(ai, abCost, source, 4, null)) {
+            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, null)) {
                 return false;
             }
 
-            if (!CostUtil.checkDiscardCost(ai, abCost, source)) {
+            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
                 for (final CostPart part : abCost.getCostParts()) {
                     if (part instanceof CostDiscard) {
                         CostDiscard cd = (CostDiscard) part;
@@ -259,7 +260,7 @@ public class ChangeZoneAi extends SpellAiLogic {
         if (type != null) {
             if (type.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
+                final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
                 source.setSVar("PayX", Integer.toString(xPay));
                 type = type.replace("X", Integer.toString(xPay));
             }
@@ -359,7 +360,7 @@ public class ChangeZoneAi extends SpellAiLogic {
         final String type = sa.getParam("ChangeType");
         if ((type != null) && type.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
+            final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(xPay));
         }
 
@@ -498,7 +499,7 @@ public class ChangeZoneAi extends SpellAiLogic {
             // need something AI can cast now
             CardLists.sortByEvaluateCreature(list);
             for (Card c : list) {
-               if (ComputerUtil.payManaCost(c.getFirstSpellAbility(), ai, true, 0, false)) {
+               if (ComputerUtilMana.payManaCost(c.getFirstSpellAbility(), ai, true, 0, false)) {
                    card = c;
                    break;
                }
@@ -540,19 +541,19 @@ public class ChangeZoneAi extends SpellAiLogic {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkSacrificeCost(ai, abCost, source)) {
+            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source)) {
                 return false;
             }
 
-            if (!CostUtil.checkLifeCost(ai, abCost, source, 4, null)) {
+            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, null)) {
                 return false;
             }
 
-            if (!CostUtil.checkDiscardCost(ai, abCost, source)) {
+            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
                 return false;
             }
 
-            if (!CostUtil.checkRemoveCounterCost(abCost, source)) {
+            if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source)) {
                 return false;
             }
         }
@@ -862,7 +863,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                             System.out.println("5 Life or less, trying to find something castable.");
                             CardLists.sortByMostExpensive(nonLands);
                             for (Card potentialCard : nonLands) {
-                               if (ComputerUtil.payManaCost(potentialCard.getFirstSpellAbility(), ai, true, 0, false)) {
+                               if (ComputerUtilMana.payManaCost(potentialCard.getFirstSpellAbility(), ai, true, 0, false)) {
                                    choice = potentialCard;
                                    break;
                                }
@@ -973,7 +974,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                             System.out.println("5 Life or less, trying to find something castable.");
                             CardLists.sortByMostExpensive(nonLands);
                             for (Card potentialCard : nonLands) {
-                               if (ComputerUtil.payManaCost(potentialCard.getFirstSpellAbility(), ai, true, 0, false)) {
+                               if (ComputerUtilMana.payManaCost(potentialCard.getFirstSpellAbility(), ai, true, 0, false)) {
                                    choice = potentialCard;
                                    break;
                                }
@@ -1189,7 +1190,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                     if (CardLists.filter(hand, Presets.LANDS).size() == 0 && CardLists.filter(ai.getCardsIn(ZoneType.Battlefield), Presets.LANDS).size() < 4) {
                         boolean canCastSomething = false;
                         for (Card cardInHand : hand) {
-                            canCastSomething |= ComputerUtil.payManaCost(cardInHand.getFirstSpellAbility(), ai, true, 0, false);
+                            canCastSomething |= ComputerUtilMana.payManaCost(cardInHand.getFirstSpellAbility(), ai, true, 0, false);
                         }
                         if (!canCastSomething) {
                             System.out.println("Pulling a land as there are none in hand, less than 4 on the board, and nothing in hand is castable.");
@@ -1208,7 +1209,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                             System.out.println("5 Life or less, trying to find something castable.");
                             CardLists.sortByMostExpensive(fetchList);
                             for (Card potentialCard : fetchList) {
-                               if (ComputerUtil.payManaCost(potentialCard.getFirstSpellAbility(), ai, true, 0, false)) {
+                               if (ComputerUtilMana.payManaCost(potentialCard.getFirstSpellAbility(), ai, true, 0, false)) {
                                    c = potentialCard;
                                    break;
                                }

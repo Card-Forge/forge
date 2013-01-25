@@ -24,7 +24,7 @@ import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.staticability.StaticAbility;
-import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -62,7 +62,7 @@ public class AttachAi extends SpellAiLogic {
         if (abCost.getTotalMana().countX() > 0 && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value. (Endless Scream and Venarian
             // Gold)
-            final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
+            final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
 
             if (xPay == 0) {
                 return false;

@@ -34,7 +34,6 @@ import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.card.cost.CostUtil;
 import forge.card.spellability.Ability;
 import forge.card.spellability.AbilityStatic;
 import forge.card.spellability.AbilitySub;
@@ -44,6 +43,7 @@ import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -1673,9 +1673,9 @@ public class AbilityFactory {
                         && (sa.getActivatingPlayer().equals(payer) && !"OnlyOwn".equals(sa.getParam("UnlessAI"))))) {
                     continue;
                 }
-                if (ComputerUtil.canPayCost(ability, payer) && CostUtil.checkLifeCost(payer, cost, source, 4, sa)
-                        && CostUtil.checkDamageCost(payer, cost, source, 4)
-                        && CostUtil.checkDiscardCost(payer, cost, source)
+                if (ComputerUtilCost.canPayCost(ability, payer) && ComputerUtilCost.checkLifeCost(payer, cost, source, 4, sa)
+                        && ComputerUtilCost.checkDamageCost(payer, cost, source, 4)
+                        && ComputerUtilCost.checkDiscardCost(payer, cost, source)
                         && (!source.getName().equals("Tyrannize") || payer.getCardsIn(ZoneType.Hand).size() > 2)
                         && (!source.getName().equals("Breaking Point") || payer.getCreaturesInPlay().size() > 1)) {
                     // AI was crashing because the blank ability used to pay costs

@@ -46,6 +46,8 @@ import forge.control.input.Input;
 import forge.control.input.InputSelectManyCards;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCost;
+import forge.game.ai.ComputerUtilMana;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
@@ -196,7 +198,7 @@ public class Upkeep extends Phase {
                             Cost cost = new Cost(c, c.getEchoCost().trim(), true);
                             GameActionUtil.payCostDuringAbilityResolve(blankAbility, cost, paidCommand, unpaidCommand, null, game);
                         } else { // computer
-                            if (ComputerUtil.canPayCost(blankAbility, controller)) {
+                            if (ComputerUtilCost.canPayCost(blankAbility, controller)) {
                                 ComputerUtil.playNoStack(controller, blankAbility, game);
                             } else {
                                 game.getAction().sacrifice(c, null);
@@ -299,7 +301,7 @@ public class Upkeep extends Phase {
                             if (controller.isHuman()) {
                                 GameActionUtil.payManaDuringAbilityResolve(sb.toString(), upkeepCost, paidCommand, unpaidCommand);
                             } else { // computer
-                                if (ComputerUtil.canPayCost(aiPaid, controller) && !c.hasKeyword("Indestructible")) {
+                                if (ComputerUtilCost.canPayCost(aiPaid, controller) && !c.hasKeyword("Indestructible")) {
                                     ComputerUtil.playNoStack(controller, aiPaid, game);
                                 } else {
                                     if (c.getName().equals("Cosmic Horror")) {
@@ -357,7 +359,7 @@ public class Upkeep extends Phase {
                                 GameActionUtil.payCostDuringAbilityResolve(blankAbility, blankAbility.getPayCosts(),
                                         paidCommand, unpaidCommand, null, game);
                             } else { // computer
-                                if (ComputerUtil.shouldPayCost(controller, c, upkeepCost) && ComputerUtil.canPayCost(blankAbility, controller)) {
+                                if (ComputerUtilCost.shouldPayCost(controller, c, upkeepCost) && ComputerUtilCost.canPayCost(blankAbility, controller)) {
                                     ComputerUtil.playNoStack(controller, blankAbility, game);
                                 } else {
                                     game.getAction().sacrifice(c, null);
@@ -400,7 +402,7 @@ public class Upkeep extends Phase {
                             if (controller.isHuman()) {
                                 GameActionUtil.payManaDuringAbilityResolve(sb.toString(), upkeepCost, paidCommand, unpaidCommand);
                             } else { // computers
-                                if (ComputerUtil.canPayCost(aiPaid, controller)
+                                if (ComputerUtilCost.canPayCost(aiPaid, controller)
                                         && (controller.predictDamage(upkeepDamage, c, false) > 0)) {
                                     ComputerUtil.playNoStack(controller, aiPaid, game);
                                 } else {
@@ -666,11 +668,11 @@ public class Upkeep extends Phase {
             } // end human
             else { // computer
                 noPay.setActivatingPlayer(cp);
-                if (ComputerUtil.canPayCost(cost, cp)) {
+                if (ComputerUtilCost.canPayCost(cost, cp)) {
                     final Ability computerPay = new Ability(c, SpellManaCost.ZERO) {
                         @Override
                         public void resolve() {
-                            ComputerUtil.payManaCost(cp, cost);
+                            ComputerUtilMana.payManaCost(cp, cost);
                         }
                     };
                     computerPay.setStackDescription("Computer pays Demonic Hordes upkeep cost");

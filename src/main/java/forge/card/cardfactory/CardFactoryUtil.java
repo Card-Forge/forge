@@ -72,6 +72,7 @@ import forge.control.input.InputPayManaCostUtil;
 import forge.game.GameState;
 import forge.game.ai.AiAttackController;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCost;
 import forge.game.event.TokenCreatedEvent;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -828,7 +829,7 @@ public class CardFactoryUtil {
                 if (phase.getPhase().isAfter(PhaseType.MAIN1) || !phase.isPlayerTurn(getActivatingPlayer())) {
                     return false;
                 }
-                return ComputerUtil.canPayCost(this, getActivatingPlayer());
+                return ComputerUtilCost.canPayCost(this, getActivatingPlayer());
             }
         }
         final AbilityActivated unearth = new AbilityUnearth(sourceCard, cost, null);

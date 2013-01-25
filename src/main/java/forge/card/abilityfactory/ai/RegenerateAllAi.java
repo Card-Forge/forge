@@ -10,8 +10,8 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cost.Cost;
-import forge.card.cost.CostUtil;
 import forge.card.spellability.SpellAbility;
+import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -26,15 +26,15 @@ public class RegenerateAllAi extends SpellAiLogic {
         final Cost abCost = sa.getPayCosts();
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkSacrificeCost(ai, abCost, hostCard)) {
+            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, hostCard)) {
                 return false;
             }
 
-            if (!CostUtil.checkCreatureSacrificeCost(ai, abCost, hostCard)) {
+            if (!ComputerUtilCost.checkCreatureSacrificeCost(ai, abCost, hostCard)) {
                 return false;
             }
 
-            if (!CostUtil.checkLifeCost(ai, abCost, hostCard, 4, null)) {
+            if (!ComputerUtilCost.checkLifeCost(ai, abCost, hostCard, 4, null)) {
                 return false;
             }
         }

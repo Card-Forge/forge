@@ -13,9 +13,9 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.card.cost.CostUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -118,19 +118,19 @@ public class ProtectAi extends SpellAiLogic {
         final Cost cost = sa.getPayCosts();
 
         // temporarily disabled until better AI
-        if (!CostUtil.checkLifeCost(ai, cost, hostCard, 4, null)) {
+        if (!ComputerUtilCost.checkLifeCost(ai, cost, hostCard, 4, null)) {
             return false;
         }
 
-        if (!CostUtil.checkDiscardCost(ai, cost, hostCard)) {
+        if (!ComputerUtilCost.checkDiscardCost(ai, cost, hostCard)) {
             return false;
         }
 
-        if (!CostUtil.checkCreatureSacrificeCost(ai, cost, hostCard)) {
+        if (!ComputerUtilCost.checkCreatureSacrificeCost(ai, cost, hostCard)) {
             return false;
         }
 
-        if (!CostUtil.checkRemoveCounterCost(cost, hostCard)) {
+        if (!ComputerUtilCost.checkRemoveCounterCost(cost, hostCard)) {
             return false;
         }
 

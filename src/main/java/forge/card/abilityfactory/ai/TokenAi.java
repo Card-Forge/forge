@@ -7,10 +7,11 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cost.Cost;
-import forge.card.cost.CostUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCost;
+import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -128,19 +129,19 @@ public class TokenAi extends SpellAiLogic {
         }
 
         if (cost != null) {
-            if (!CostUtil.checkLifeCost(ai, cost, source, 4, null)) {
+            if (!ComputerUtilCost.checkLifeCost(ai, cost, source, 4, null)) {
                 return false;
             }
 
-            if (!CostUtil.checkDiscardCost(ai, cost, source)) {
+            if (!ComputerUtilCost.checkDiscardCost(ai, cost, source)) {
                 return false;
             }
 
-            if (!CostUtil.checkSacrificeCost(ai, cost, source)) {
+            if (!ComputerUtilCost.checkSacrificeCost(ai, cost, source)) {
                 return false;
             }
 
-            if (!CostUtil.checkRemoveCounterCost(cost, source)) {
+            if (!ComputerUtilCost.checkRemoveCounterCost(cost, source)) {
                 return false;
             }
         }
@@ -149,7 +150,7 @@ public class TokenAi extends SpellAiLogic {
             int x = AbilityFactory.calculateAmount(sa.getSourceCard(), this.tokenAmount, sa);
             if (source.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                x = ComputerUtil.determineLeftoverMana(sa, ai);
+                x = ComputerUtilMana.determineLeftoverMana(sa, ai);
                 source.setSVar("PayX", Integer.toString(x));
             }
             if (x <= 0) {
@@ -188,7 +189,7 @@ public class TokenAi extends SpellAiLogic {
             int x = AbilityFactory.calculateAmount(source, this.tokenAmount, sa);
             if (source.getSVar("X").equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                x = ComputerUtil.determineLeftoverMana(sa, ai);
+                x = ComputerUtilMana.determineLeftoverMana(sa, ai);
                 source.setSVar("PayX", Integer.toString(x));
             }
             if (x <= 0) {

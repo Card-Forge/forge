@@ -9,7 +9,7 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.util.MyRandom;
@@ -42,7 +42,7 @@ public class LifeSetAi extends SpellAiLogic {
         // we shouldn't have to worry too much about PayX for SetLife
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
+            final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(xPay));
             amount = xPay;
         } else {
@@ -113,7 +113,7 @@ public class LifeSetAi extends SpellAiLogic {
         int amount;
         if (amountStr.equals("X") && source.getSVar(amountStr).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
+            final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(xPay));
             amount = xPay;
         } else {

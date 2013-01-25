@@ -59,6 +59,7 @@ import forge.game.GameState;
 import forge.game.GlobalRuleChange;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilBlock;
+import forge.game.ai.ComputerUtilCost;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
@@ -1709,7 +1710,7 @@ public class CombatUtil {
                 continue;
             }
 
-            if (ComputerUtil.canPayCost(ability, defender.getController())) {
+            if (ComputerUtilCost.canPayCost(ability, defender.getController())) {
                 int pBonus = AbilityFactory.calculateAmount(ability.getSourceCard(), ability.getParam("NumAtt"), ability);
                 if (pBonus > 0) {
                     power += pBonus;
@@ -1821,7 +1822,7 @@ public class CombatUtil {
                 continue;
             }
 
-            if (ComputerUtil.canPayCost(ability, defender.getController())) {
+            if (ComputerUtilCost.canPayCost(ability, defender.getController())) {
                 int tBonus = AbilityFactory.calculateAmount(ability.getSourceCard(), ability.getParam("NumDef"), ability);
                 if (tBonus > 0) {
                     toughness += tBonus;
@@ -1977,7 +1978,7 @@ public class CombatUtil {
                 continue;
             }
 
-            if (!ability.getPayCosts().hasTapCost() && ComputerUtil.canPayCost(ability, attacker.getController())) {
+            if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
                 int pBonus = AbilityFactory.calculateAmount(ability.getSourceCard(), ability.getParam("NumAtt"), ability);
                 if (pBonus > 0) {
                     power += pBonus;
@@ -2140,7 +2141,7 @@ public class CombatUtil {
                 continue;
             }
 
-            if (!ability.getPayCosts().hasTapCost() && ComputerUtil.canPayCost(ability, attacker.getController())) {
+            if (!ability.getPayCosts().hasTapCost() && ComputerUtilCost.canPayCost(ability, attacker.getController())) {
                 int tBonus = AbilityFactory.calculateAmount(ability.getSourceCard(), ability.getParam("NumDef"), ability);
                 if (tBonus > 0) {
                     toughness += tBonus;
@@ -2774,7 +2775,7 @@ public class CombatUtil {
             if (c.getController().isHuman()) {
                 GameActionUtil.payCostDuringAbilityResolve(ability, attackCost, paidCommand, unpaidCommand, null, game);
             } else { // computer
-                if (ComputerUtil.canPayCost(ability, c.getController())) {
+                if (ComputerUtilCost.canPayCost(ability, c.getController())) {
                     ComputerUtil.playNoStack(c.getController(), ability, game);
                     if (!crd.hasKeyword("Vigilance")) {
                         crd.tap();

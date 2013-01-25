@@ -13,10 +13,10 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.card.cost.CostUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -38,15 +38,15 @@ public class DebuffAi extends SpellAiLogic {
         final Cost cost = sa.getPayCosts();
 
         // temporarily disabled until AI is improved
-        if (!CostUtil.checkCreatureSacrificeCost(ai, cost, source)) {
+        if (!ComputerUtilCost.checkCreatureSacrificeCost(ai, cost, source)) {
             return false;
         }
 
-        if (!CostUtil.checkLifeCost(ai, cost, source, 40, null)) {
+        if (!ComputerUtilCost.checkLifeCost(ai, cost, source, 40, null)) {
             return false;
         }
 
-        if (!CostUtil.checkRemoveCounterCost(cost, source)) {
+        if (!ComputerUtilCost.checkRemoveCounterCost(cost, source)) {
             return false;
         }
 

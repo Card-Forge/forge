@@ -8,7 +8,7 @@ import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilMana;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -40,7 +40,7 @@ public class SacrificeAi extends SpellAiLogic {
             final Card source = sa.getSourceCard();
             if (num.equals("X") && source.getSVar(num).equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                final int xPay = Math.min(ComputerUtil.determineLeftoverMana(sa, ai), amount);
+                final int xPay = Math.min(ComputerUtilMana.determineLeftoverMana(sa, ai), amount);
                 source.setSVar("PayX", Integer.toString(xPay));
             }
 
@@ -112,7 +112,7 @@ public class SacrificeAi extends SpellAiLogic {
             final Card source = sa.getSourceCard();
             if (num.equals("X") && source.getSVar(num).equals("Count$xPaid")) {
                 // Set PayX here to maximum value.
-                amount = Math.min(ComputerUtil.determineLeftoverMana(sa, ai), amount);
+                amount = Math.min(ComputerUtilMana.determineLeftoverMana(sa, ai), amount);
             }
 
             List<Card> humanList =

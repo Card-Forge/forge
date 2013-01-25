@@ -6,11 +6,11 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.card.cost.CostUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
-import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCost;
+import forge.game.ai.ComputerUtilMana;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 
@@ -27,10 +27,10 @@ public class CounterAi extends SpellAiLogic {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkSacrificeCost(ai, abCost, source)) {
+            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source)) {
                 return false;
             }
-            if (!CostUtil.checkLifeCost(ai, abCost, source, 4, null)) {
+            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, null)) {
                 return false;
             }
         }
@@ -66,7 +66,7 @@ public class CounterAi extends SpellAiLogic {
             boolean setPayX = false;
             if (unlessCost.equals("X") && source.getSVar(unlessCost).equals("Count$xPaid")) {
                 setPayX = true;
-                toPay = ComputerUtil.determineLeftoverMana(sa, ai);
+                toPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
             } else {
                 toPay = AbilityFactory.calculateAmount(source, unlessCost, sa);
             }
@@ -134,7 +134,7 @@ public class CounterAi extends SpellAiLogic {
                 boolean setPayX = false;
                 if (unlessCost.equals("X") && source.getSVar(unlessCost).equals("Count$xPaid")) {
                     setPayX = true;
-                    toPay = ComputerUtil.determineLeftoverMana(sa, ai);
+                    toPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
                 } else {
                     toPay = AbilityFactory.calculateAmount(source, unlessCost, sa);
                 }

@@ -35,7 +35,6 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.ApiType;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.card.cost.CostUtil;
 import forge.card.replacement.ReplaceMoved;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.trigger.Trigger;
@@ -43,6 +42,8 @@ import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.game.GlobalRuleChange;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCost;
+import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -284,7 +285,7 @@ public class SpellPermanent extends Spell {
         Player ai = getActivatingPlayer();
         if (mana.countX() > 0) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtil.determineLeftoverMana(this, ai);
+            final int xPay = ComputerUtilMana.determineLeftoverMana(this, ai);
             if (xPay <= 0) {
                 return false;
             }
@@ -332,19 +333,19 @@ public class SpellPermanent extends Spell {
 
         if (cost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkLifeCost(ai, cost, card, 4, null)) {
+            if (!ComputerUtilCost.checkLifeCost(ai, cost, card, 4, null)) {
                 return false;
             }
 
-            if (!CostUtil.checkDiscardCost(ai, cost, card)) {
+            if (!ComputerUtilCost.checkDiscardCost(ai, cost, card)) {
                 return false;
             }
 
-            if (!CostUtil.checkSacrificeCost(ai, cost, card)) {
+            if (!ComputerUtilCost.checkSacrificeCost(ai, cost, card)) {
                 return false;
             }
 
-            if (!CostUtil.checkRemoveCounterCost(cost, card)) {
+            if (!ComputerUtilCost.checkRemoveCounterCost(cost, card)) {
                 return false;
             }
         }

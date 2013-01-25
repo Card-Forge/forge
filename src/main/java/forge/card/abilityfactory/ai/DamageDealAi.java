@@ -12,11 +12,12 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.card.cost.CostUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.spellability.TargetSelection;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCost;
+import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -33,7 +34,7 @@ public class DamageDealAi extends DamageAiBase {
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            dmg = ComputerUtil.determineLeftoverMana(sa, ai);
+            dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(dmg));
         }
         if (!this.damageTargetAI(ai, sa, dmg)) {
@@ -53,7 +54,7 @@ public class DamageDealAi extends DamageAiBase {
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            dmg = ComputerUtil.determineLeftoverMana(sa, ai);
+            dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(dmg));
         }
 
@@ -62,15 +63,15 @@ public class DamageDealAi extends DamageAiBase {
         }
 
         // temporarily disabled until better AI
-        if (!CostUtil.checkLifeCost(ai, abCost, source, 4, null)) {
+        if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, null)) {
             return false;
         }
 
-        if (!CostUtil.checkSacrificeCost(ai, abCost, source)) {
+        if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source)) {
             return false;
         }
 
-        if (!CostUtil.checkRemoveCounterCost(abCost, source)) {
+        if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source)) {
             return false;
         }
 
@@ -385,7 +386,7 @@ public class DamageDealAi extends DamageAiBase {
 
         if (damage.equals("X") && sa.getSVar(damage).equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            dmg = ComputerUtil.determineLeftoverMana(sa, ai);
+            dmg = ComputerUtilMana.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(dmg));
         }
 

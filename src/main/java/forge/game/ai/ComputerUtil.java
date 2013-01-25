@@ -19,11 +19,9 @@ package forge.game.ai;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
+
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -33,7 +31,6 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
-import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.SpellManaCost;
 import forge.card.abilityfactory.AbilityFactory;
@@ -43,18 +40,11 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostMana;
 import forge.card.cost.CostPart;
-import forge.card.cost.CostPayLife;
 import forge.card.cost.CostPayment;
 import forge.card.cost.CostUtil;
-import forge.card.mana.ManaCostBeingPaid;
-import forge.card.mana.ManaCostShard;
-import forge.card.mana.ManaPool;
-import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilityStatic;
-import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.control.input.InputPayManaCostUtil;
 import forge.error.ErrorViewer;
 import forge.game.GameState;
 import forge.game.phase.Combat;
@@ -91,7 +81,7 @@ public class ComputerUtil {
         
         if (sa instanceof AbilityStatic) {
             final Cost cost = sa.getPayCosts();
-            if (cost == null && ComputerUtil.payManaCost(sa, ai, false, 0, true)) {
+            if (cost == null && ComputerUtilMana.payManaCost(ai, sa)) {
                 sa.resolve();
             } else {
                 final CostPayment pay = new CostPayment(cost, sa, game);
@@ -116,7 +106,7 @@ public class ComputerUtil {
         final Cost cost = sa.getPayCosts();
 
         if (cost == null) {
-            ComputerUtil.payManaCost(ai, sa);
+            ComputerUtilMana.payManaCost(ai, sa);
             sa.getBeforePayManaAI().execute();
             game.getStack().addAndUnfreeze(sa);
             return true;
@@ -217,14 +207,14 @@ public class ComputerUtil {
      */
     public static final void playStack(final SpellAbility sa, final Player ai, final GameState game) {
         sa.setActivatingPlayer(ai);
-        if (ComputerUtil.canPayCost(sa, ai)) {
+        if (ComputerUtilCost.canPayCost(sa, ai)) {
             final Card source = sa.getSourceCard();
             if (sa.isSpell() && !source.isCopiedSpell()) {
                 sa.setSourceCard(game.getAction().moveToStack(source));
             }
             final Cost cost = sa.getPayCosts();
             if (cost == null) {
-                ComputerUtil.payManaCost(ai, sa);
+                ComputerUtilMana.payManaCost(ai, sa);
                 game.getStack().add(sa);
             } else {
                 final CostPayment pay = new CostPayment(cost, sa, game);
@@ -279,7 +269,7 @@ public class ComputerUtil {
         newSA.setDescription(sb.toString());
         newSA.setActivatingPlayer(ai);
 
-        if (!ComputerUtil.canPayAdditionalCosts(newSA, ai, game)) {
+        if (!ComputerUtilCost.canPayAdditionalCosts(newSA, ai, game)) {
             return;
         }
 
@@ -304,7 +294,7 @@ public class ComputerUtil {
      */
     public static final void playNoStack(final Player ai, final SpellAbility sa, final GameState game) {
         // TODO: We should really restrict what doesn't use the Stack
-        if (ComputerUtil.canPayCost(sa, ai)) {
+        if (ComputerUtilCost.canPayCost(sa, ai)) {
             final Card source = sa.getSourceCard();
             if (sa.isSpell() && !source.isCopiedSpell()) {
                 sa.setSourceCard(game.getAction().moveToStack(source));
@@ -314,7 +304,7 @@ public class ComputerUtil {
 
             final Cost cost = sa.getPayCosts();
             if (cost == null) {
-                ComputerUtil.payManaCost(ai, sa);
+                ComputerUtilMana.payManaCost(ai, sa);
             } else {
                 final CostPayment pay = new CostPayment(cost, sa, game);
                 pay.payComputerCosts(ai, game);
@@ -326,823 +316,6 @@ public class ComputerUtil {
             game.getAction().checkStateEffects();
         }
     } // play()
-
-    /**
-     * <p>
-     * shouldPayCost.
-     * </p>
-     * 
-     * @param hostCard
-     *            a {@link forge.Card} object.
-     * @param costString
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
-    public static boolean shouldPayCost(final Player ai, final Card hostCard, final String costString) {
-        final Cost cost = new Cost(hostCard, costString, false);
-
-        for (final CostPart part : cost.getCostParts()) {
-            if (part instanceof CostPayLife) {
-                final int remainingLife = ai.getLife();
-                final int lifeCost = ((CostPayLife) part).convertAmount();
-                if ((remainingLife - lifeCost) < 10) {
-                    return false; //Don't pay life if it would put AI under 10 life
-                } else if ((remainingLife / lifeCost) < 4) {
-                    return false; //Don't pay life if it is more than 25% of current life
-                }
-            }
-        }
-
-        return true;
-    } // shouldPayCost()
-
-    /**
-     * <p>
-     * canPayCost.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     * @return a boolean.
-     */
-    public static boolean canPayCost(final SpellAbility sa, final Player player) {
-
-        final GameState game = Singletons.getModel().getGame();
-        // Check for stuff like Nether Void
-        int extraManaNeeded = 0;
-        if (sa instanceof Spell && player.isComputer()) {
-            for (Player opp : player.getOpponents()) {
-                for (Card c : opp.getCardsIn(ZoneType.Battlefield)) {
-                    final String snem = c.getSVar("SpellsNeedExtraMana");
-                    if (!snem.equals("")) {
-                        try {
-                            extraManaNeeded += Integer.parseInt(snem);
-                        } catch (final NumberFormatException e) {
-                            System.out.println("wrong SpellsNeedExtraMana SVar format on " + c);
-                        }
-                    }
-                }
-            }
-        }
-
-        if (!ComputerUtil.payManaCost(sa, player, true, extraManaNeeded, true)) {
-            return false;
-        }
-
-        return ComputerUtil.canPayAdditionalCosts(sa, player, game);
-    } // canPayCost()
-
-    /**
-     * <p>
-     * determineLeftoverMana.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     * @return a int.
-     * @since 1.0.15
-     */
-    public static int determineLeftoverMana(final SpellAbility sa, final Player player) {
-
-        int xMana = 0;
-
-        for (int i = 1; i < 99; i++) {
-            if (!ComputerUtil.payManaCost(sa, player, true, i, true)) {
-                break;
-            }
-            xMana = i;
-        }
-
-        return xMana;
-    }
-
-    /**
-     * <p>
-     * canPayAdditionalCosts.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     * @return a boolean.
-     */
-    public static boolean canPayAdditionalCosts(final SpellAbility sa, final Player player, final GameState game) {
-        if (sa.getActivatingPlayer() == null) {
-            final StringBuilder sb = new StringBuilder();
-            sb.append(sa.getSourceCard());
-            sb.append(" in ComputerUtil.canPayAdditionalCosts() without an activating player");
-            System.out.println(sb.toString());
-            sa.setActivatingPlayer(player);
-        }
-        return CostPayment.canPayAdditionalCosts(game, sa.getPayCosts(), sa);
-    }
-
-    /**
-     * <p>
-     * payManaCost.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     */
-    public static void payManaCost(final Player ai, final SpellAbility sa) {
-        ComputerUtil.payManaCost(sa, ai, false, 0, true);
-    }
-
-    /**
-     * <p>
-     * payManaCost.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param ai
-     *            a {@link forge.game.player.Player} object.
-     * @param test
-     *            (is for canPayCost, if true does not change the game state)
-     * @param extraMana
-     *            a int.
-     * @param checkPlayable
-     *            should we check if playable? use for hypothetical "can AI play this"
-     * @return a boolean.
-     * @since 1.0.15
-     */
-    public static boolean payManaCost(final SpellAbility sa, final Player ai, final boolean test,
-            final int extraMana, boolean checkPlayable) {
-        ManaCostBeingPaid cost = calculateManaCost(sa, test, extraMana);
-
-        final GameState game = Singletons.getModel().getGame();
-        final ManaPool manapool = ai.getManaPool();
-
-        cost = manapool.payManaFromPool(sa, cost);
-
-        if (cost.isPaid()) {
-            // refund any mana taken from mana pool when test
-            manapool.clearManaPaid(sa, test);
-            return true;
-        }
-
-        // get map of mana abilities
-        final Map<String, List<SpellAbility>> manaAbilityMap = ComputerUtil.mapManaSources(ai, checkPlayable);
-        // initialize ArrayList list for mana needed
-        final List<List<SpellAbility>> partSources = new ArrayList<List<SpellAbility>>();
-        final List<Integer> partPriority = new ArrayList<Integer>();
-        final String[] costParts = cost.toString().replace("X ", "").split(" ");
-        boolean foundAllSources = findManaSources(ai, manaAbilityMap, partSources, partPriority, costParts);
-        if (!foundAllSources) {
-            if (!test) {
-                // real payment should not arrive here
-                throw new RuntimeException("ComputerUtil : payManaCost() cost was not paid for " + sa.getSourceCard());
-            }
-            manapool.clearManaPaid(sa, test); // refund any mana taken from mana pool
-            return false;
-        }
-
-        // Create array to keep track of sources used
-        final ArrayList<Card> usedSources = new ArrayList<Card>();
-        // this is to prevent errors for mana sources that have abilities that
-        // cost mana.
-        usedSources.add(sa.getSourceCard());
-        // Loop over mana needed
-        int nPriority = 0;
-        while (nPriority < partPriority.size()) {
-            final int nPart = partPriority.get(nPriority);
-            final ManaCostBeingPaid costPart = new ManaCostBeingPaid(costParts[nPart]);
-            // Loop over mana abilities that can be used to current mana cost part
-            for (final SpellAbility ma : partSources.get(nPart)) {
-                final Card sourceCard = ma.getSourceCard();
-
-                // Check if source has already been used
-                if (usedSources.contains(sourceCard)) {
-                    continue;
-                }
-
-                // Check if AI can still play this mana ability
-                ma.setActivatingPlayer(ai);
-                // if the AI can't pay the additional costs skip the mana ability
-                if (ma.getPayCosts() != null && checkPlayable) {
-                    if (!ComputerUtil.canPayAdditionalCosts(ma, ai, game)) {
-                        continue;
-                    }
-                } else if (sourceCard.isTapped() && checkPlayable) {
-                    continue;
-                }
-
-                AbilityManaPart m = ma.getManaPart();
-                // Check for mana restrictions
-                if (!m.meetsManaRestrictions(sa)) {
-                    continue;
-                }
-
-                String manaProduced;
-                // Check if paying snow mana
-                if ("S".equals(costParts[nPart])) {
-                    manaProduced = "S";
-                } else {
-                    if (m.isComboMana()) {
-                        String colorChoice = costParts[nPart];
-                        m.setExpressChoice(colorChoice);
-                        colorChoice = getComboManaChoice(ai, ma, sa, cost);
-                        m.setExpressChoice(colorChoice);
-                    }
-                    // check if ability produces any color
-                    else if (m.isAnyMana()) {
-                        String colorChoice = costParts[nPart];
-                        final ArrayList<String> negEffect = cost.getManaNeededToAvoidNegativeEffect();
-                        final ArrayList<String> negEffectPaid = cost.getManaPaidToAvoidNegativeEffect();
-                        // Check for
-                        // 1) Colorless
-                        // 2) Split e.g. 2/G
-                        // 3) Hybrid e.g. UG
-                        if (costParts[nPart].matches("[0-9]+")) {
-                            colorChoice = "W";
-                            for (int n = 0; n < negEffect.size(); n++) {
-                                if (!negEffectPaid.contains(negEffect.get(n))) {
-                                    colorChoice = negEffect.get(n);
-                                    break;
-                                }
-                            }
-                        } else if (costParts[nPart].contains("/")) {
-                            colorChoice = costParts[nPart].replace("2/", "");
-                        } else if (costParts[nPart].length() > 1) {
-                            colorChoice = costParts[nPart].substring(0, 1);
-                            for (int n = 0; n < negEffect.size(); n++) {
-                                if (costParts[nPart].contains(negEffect.get(n))
-                                        && !negEffectPaid.contains(negEffect.get(n))) {
-                                    colorChoice = negEffect.get(n);
-                                    break;
-                                }
-                            }
-                        }
-                        m.setExpressChoice(colorChoice);
-                    }
-                    // get produced mana
-                    manaProduced = GameActionUtil.generatedMana(ma);
-                    if (manaProduced.matches("0")) {
-                        continue;
-                    }
-                }
-
-                // add source card to used list
-                usedSources.add(sourceCard);
-
-                costPart.payMultipleMana(manaProduced);
-
-                if (!test) {
-                    // Pay additional costs
-                    if (ma.getPayCosts() != null) {
-                        final CostPayment pay = new CostPayment(ma.getPayCosts(), ma, game);
-                        if (!pay.payComputerCosts(ai, game)) {
-                            continue;
-                        }
-                    } else {
-                        sourceCard.tap();
-                    }
-                    // resolve mana ability
-                    //ma.resolve();
-                    AbilityFactory.resolve(ma, false);
-                    // subtract mana from mana pool
-                    cost = manapool.payManaFromAbility(sa, cost, ma);
-                } else {
-                    cost.payMultipleMana(manaProduced);
-                }
-                // check if cost part is paid
-                if (costPart.isPaid() || cost.isPaid()) {
-                    break;
-                }
-            } // end of mana ability loop
-
-            if (!costPart.isPaid() || cost.isPaid()) {
-                break;
-            } else {
-                nPriority++;
-            }
-        } // end of cost parts loop
-
-        //check for phyrexian mana
-        if (!cost.isPaid() && cost.containsPhyrexianMana() && ai.getLife() > 5 && ai.canPayLife(2)) {
-            cost.payPhyrexian();
-            if (!test) {
-                ai.payLife(2, sa.getSourceCard());
-            }
-        }
-
-        manapool.clearManaPaid(sa, test);
-        // check if paid
-        if (cost.isPaid()) {
-            // if (sa instanceof Spell_Permanent) // should probably add this
-            sa.getSourceCard().setColorsPaid(cost.getColorsPaid());
-            sa.getSourceCard().setSunburstValue(cost.getSunburst());
-            return true;
-        }
-
-        if (!test) {
-            final StringBuilder sb = new StringBuilder();
-            sb.append("ComputerUtil : payManaCost() cost was not paid for ");
-            sb.append(sa.getSourceCard().getName());
-            throw new RuntimeException(sb.toString());
-        }
-
-        return false;
-
-    } // payManaCost()
-
-    /**
-     * Find all mana sources.
-     * @param manaAbilityMap
-     * @param partSources
-     * @param partPriority
-     * @param costParts
-     * @param foundAllSources
-     * @return Were all mana sources found?
-     */
-    private static boolean findManaSources(final Player ai, final Map<String, List<SpellAbility>> manaAbilityMap,
-            final List<List<SpellAbility>> partSources, final List<Integer> partPriority,
-            final String[] costParts) {
-        final String[] shortColors = { "W", "U", "B", "R", "G" };
-        boolean foundAllSources;
-        if (manaAbilityMap.isEmpty()) {
-            foundAllSources = false;
-        } else {
-            foundAllSources = true;
-            // loop over cost parts
-            for (int nPart = 0; nPart < costParts.length; nPart++) {
-                final List<SpellAbility> srcFound = new ArrayList<SpellAbility>();
-                // Test for:
-                // 1) Colorless
-                // 2) Split e.g. 2/G
-                // 3) Hybrid e.g. U/G
-                // defaults to single short color
-                if (costParts[nPart].matches("[0-9]+")) { // Colorless
-                    srcFound.addAll(manaAbilityMap.get("1"));
-                } else if (costParts[nPart].contains("2/")) { // Split
-                    final String colorKey = costParts[nPart].replace("2/", "");
-                    // add specified color sources first
-                    if (manaAbilityMap.containsKey(colorKey)) {
-                        srcFound.addAll(manaAbilityMap.get(colorKey));
-                    }
-                    // add other available colors
-                    for (final String color : shortColors) {
-                        if (!colorKey.contains(color)) {
-                            // Is source available?
-                            if (manaAbilityMap.containsKey(color)) {
-                                srcFound.addAll(manaAbilityMap.get(color));
-                            }
-                        }
-                    }
-                } else if (costParts[nPart].contains("P")) { // Phyrexian
-                    String newPart = costParts[nPart].replace("/P", "");
-                    if (manaAbilityMap.containsKey(newPart)) {
-                        srcFound.addAll(manaAbilityMap.get(newPart));
-                    } else if (ai.getLife() > 8) { //Pay with life
-                        partSources.add(nPart, srcFound);
-                        continue;
-                    }
-                } else if (costParts[nPart].length() > 1) { // Hybrid
-                    final String firstColor = costParts[nPart].substring(0, 1);
-                    final String secondColor = costParts[nPart].substring(2);
-                    final boolean foundFirst = manaAbilityMap.containsKey(firstColor);
-                    final boolean foundSecond = manaAbilityMap.containsKey(secondColor);
-                    if (foundFirst || foundSecond) {
-                        if (!foundFirst) {
-                            srcFound.addAll(manaAbilityMap.get(secondColor));
-                        } else if (!foundSecond) {
-                            srcFound.addAll(manaAbilityMap.get(firstColor));
-                        } else if (manaAbilityMap.get(firstColor).size() > manaAbilityMap.get(secondColor).size()) {
-                            srcFound.addAll(manaAbilityMap.get(firstColor));
-                            srcFound.addAll(manaAbilityMap.get(secondColor));
-                        } else {
-                            srcFound.addAll(manaAbilityMap.get(secondColor));
-                            srcFound.addAll(manaAbilityMap.get(firstColor));
-                        }
-                    }
-                } else { // single color
-                    if (manaAbilityMap.containsKey(costParts[nPart])) {
-                        srcFound.addAll(manaAbilityMap.get(costParts[nPart]));
-                    }
-                }
-
-                // add sources to array lists
-                partSources.add(nPart, srcFound);
-                // add to sorted priority list
-                if (srcFound.size() > 0) {
-                    int i;
-                    for (i = 0; i < partPriority.size(); i++) {
-                        if (srcFound.size() <= partSources.get(i).size()) {
-                            break;
-                        }
-                    }
-                    partPriority.add(i, nPart);
-                } else {
-                    foundAllSources = false;
-                    break;
-                }
-            }
-        }
-        return foundAllSources;
-    }
-
-    /**
-     * Calculate the ManaCost for the given SpellAbility.
-     * @param sa
-     * @param test
-     * @param extraMana
-     * @return ManaCost
-     */
-    private static ManaCostBeingPaid calculateManaCost(final SpellAbility sa, final boolean test, final int extraMana) {
-        final SpellManaCost mana = sa.getPayCosts() != null ? sa.getPayCosts().getTotalMana() : sa.getManaCost();
-
-        ManaCostBeingPaid cost = new ManaCostBeingPaid(mana);
-
-        cost = Singletons.getModel().getGame().getAction().getSpellCostChange(sa, cost);
-
-        final Card card = sa.getSourceCard();
-        // Tack xMana Payments into mana here if X is a set value
-        if ((sa.getPayCosts() != null) && (cost.getXcounter() > 0 || extraMana > 0)) {
-
-            int manaToAdd = 0;
-            String manaXColor = sa.hasParam("XColor") ? sa.getParam("XColor") : "";
-            if (test && extraMana > 0) {
-                final int multiplicator = Math.max(cost.getXcounter(), 1);
-                manaToAdd = extraMana * multiplicator;
-            } else {
-                // For Count$xPaid set PayX in the AFs then use that here
-                // Else calculate it as appropriate.
-                final String xSvar = card.getSVar("X").startsWith("Count$xPaid") ? "PayX" : "X";
-                if (!card.getSVar(xSvar).equals("")) {
-                    if (xSvar.equals("PayX")) {
-                        manaToAdd = Integer.parseInt(card.getSVar(xSvar)) * cost.getXcounter(); // X
-                    } else {
-                        manaToAdd = AbilityFactory.calculateAmount(card, xSvar, sa) * cost.getXcounter();
-                    }
-                }
-            }
-
-            if (manaXColor.isEmpty()) {
-                cost.increaseColorlessMana(manaToAdd);
-            } else {
-                if (manaXColor.equals("B")) {
-                    cost.increaseShard(ManaCostShard.BLACK, manaToAdd);
-                } else if (manaXColor.equals("G")) {
-                    cost.increaseShard(ManaCostShard.GREEN, manaToAdd);
-                } else if (manaXColor.equals("R")) {
-                    cost.increaseShard(ManaCostShard.RED, manaToAdd);
-                } else if (manaXColor.equals("U")) {
-                    cost.increaseShard(ManaCostShard.BLUE, manaToAdd);
-                } else if (manaXColor.equals("W")) {
-                    cost.increaseShard(ManaCostShard.WHITE, manaToAdd);
-                } else if (manaXColor.contains("B") && manaXColor.contains("G")) {
-                    cost.increaseShard(ManaCostShard.BG, manaToAdd);
-                } else if (manaXColor.contains("B") && manaXColor.contains("R")) {
-                    cost.increaseShard(ManaCostShard.BR, manaToAdd);
-                } else if (manaXColor.contains("R") && manaXColor.contains("G")) {
-                    cost.increaseShard(ManaCostShard.RG, manaToAdd);
-                } else if (manaXColor.contains("U") && manaXColor.contains("B")) {
-                    cost.increaseShard(ManaCostShard.UB, manaToAdd);
-                } else if (manaXColor.contains("U") && manaXColor.contains("G")) {
-                    cost.increaseShard(ManaCostShard.UG, manaToAdd);
-                } else if (manaXColor.contains("U") && manaXColor.contains("R")) {
-                    cost.increaseShard(ManaCostShard.UR, manaToAdd);
-                } else if (manaXColor.contains("W") && manaXColor.contains("B")) {
-                    cost.increaseShard(ManaCostShard.WB, manaToAdd);
-                } else if (manaXColor.contains("W") && manaXColor.contains("G")) {
-                    cost.increaseShard(ManaCostShard.WG, manaToAdd);
-                } else if (manaXColor.contains("W") && manaXColor.contains("R")) {
-                    cost.increaseShard(ManaCostShard.WR, manaToAdd);
-                } else if (manaXColor.contains("W") && manaXColor.contains("U")) {
-                    cost.increaseShard(ManaCostShard.WU, manaToAdd);
-                }
-            }
-            if (!test) {
-                card.setXManaCostPaid(manaToAdd / cost.getXcounter());
-            }
-        }
-
-        // Make mana needed to avoid negative effect a mandatory cost for the AI
-        if (!card.getSVar("ManaNeededToAvoidNegativeEffect").equals("")) {
-            final String[] negEffects = card.getSVar("ManaNeededToAvoidNegativeEffect").split(",");
-            int amountAdded = 0;
-            for (int nStr = 0; nStr < negEffects.length; nStr++) {
-                // convert long color strings to short color strings
-                if (negEffects[nStr].length() > 1) {
-                    negEffects[nStr] = InputPayManaCostUtil.getShortColorString(negEffects[nStr]);
-                }
-                // make mana mandatory for AI
-                if (!cost.isColor(negEffects[nStr])) {
-                    cost.combineManaCost(negEffects[nStr]);
-                    amountAdded++;
-                }
-            }
-            cost.setManaNeededToAvoidNegativeEffect(negEffects);
-            // TODO: should it be an error condition if amountAdded is greater
-            // than the colorless in the original cost? (ArsenalNut - 120102)
-            // adjust colorless amount to account for added mana
-            cost.decreaseColorlessMana(amountAdded);
-        }
-        return cost;
-    }
-
-    /**
-     * <p>
-     * getAvailableMana.
-     * </p>
-     * 
-     * @param ai
-     *            a {@link forge.game.player.Player} object.
-     * @param checkPlayable
-     * @return a {@link forge.CardList} object.
-     */
-    public static List<Card> getAvailableMana(final Player ai, final boolean checkPlayable) {
-        final GameState game = Singletons.getModel().getGame();
-        final List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
-        final List<Card> manaSources = CardLists.filter(list, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                if (checkPlayable) {
-                    for (final SpellAbility am : c.getAIPlayableMana()) {
-                        am.setActivatingPlayer(ai);
-                        if (am.canPlay()) {
-                            return true;
-                        }
-                    }
-
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-        }); // CardListFilter
-
-        final List<Card> sortedManaSources = new ArrayList<Card>();
-        final List<Card> otherManaSources = new ArrayList<Card>();
-        final List<Card> colorlessManaSources = new ArrayList<Card>();
-        final List<Card> oneManaSources = new ArrayList<Card>();
-        final List<Card> twoManaSources = new ArrayList<Card>();
-        final List<Card> threeManaSources = new ArrayList<Card>();
-        final List<Card> fourManaSources = new ArrayList<Card>();
-        final List<Card> fiveManaSources = new ArrayList<Card>();
-        final List<Card> anyColorManaSources = new ArrayList<Card>();
-
-        // Sort mana sources
-        // 1. Use lands that can only produce colorless mana without
-        // drawback/cost first
-        // 2. Search for mana sources that have a certain number of abilities
-        // 3. Use lands that produce any color many
-        // 4. all other sources (creature, costs, drawback, etc.)
-        for (int i = 0; i < manaSources.size(); i++) {
-            final Card card = manaSources.get(i);
-
-            if (card.isCreature() || card.isEnchanted()) {
-                otherManaSources.add(card);
-                continue; // don't use creatures before other permanents
-            }
-
-            int usableManaAbilities = 0;
-            boolean needsLimitedResources = false;
-            boolean producesAnyColor = false;
-            final ArrayList<SpellAbility> manaAbilities = card.getAIPlayableMana();
-
-            for (final SpellAbility m : manaAbilities) {
-
-                if (m.getManaPart().isAnyMana()) {
-                    producesAnyColor = true;
-                }
-
-                final Cost cost = m.getPayCosts();
-                if (cost != null) {
-                    needsLimitedResources |= !cost.isReusuableResource();
-                }
-
-                // if the AI can't pay the additional costs skip the mana
-                // ability
-                m.setActivatingPlayer(ai);
-                if (cost != null) {
-                    if (!ComputerUtil.canPayAdditionalCosts(m, ai, game)) {
-                        continue;
-                    }
-                }
-
-                // don't use abilities with dangerous drawbacks
-                if (m.getSubAbility() != null && !card.getName().equals("Pristine Talisman")) {
-                    if (!m.getSubAbility().chkAIDrawback()) {
-                        continue;
-                    }
-                    needsLimitedResources = true; // TODO: check for good
-                                                  // drawbacks (gainLife)
-                }
-                usableManaAbilities++;
-            }
-
-            if (needsLimitedResources) {
-                otherManaSources.add(card);
-            } else if (producesAnyColor) {
-                anyColorManaSources.add(card);
-            } else if (usableManaAbilities == 1) {
-                if (manaAbilities.get(0).getManaPart().mana().equals("1")) {
-                    colorlessManaSources.add(card);
-                } else {
-                    oneManaSources.add(card);
-                }
-            } else if (usableManaAbilities == 2) {
-                twoManaSources.add(card);
-            } else if (usableManaAbilities == 3) {
-                threeManaSources.add(card);
-            } else if (usableManaAbilities == 4) {
-                fourManaSources.add(card);
-            } else {
-                fiveManaSources.add(card);
-            }
-
-        }
-        sortedManaSources.addAll(colorlessManaSources);
-        sortedManaSources.addAll(oneManaSources);
-        sortedManaSources.addAll(twoManaSources);
-        sortedManaSources.addAll(threeManaSources);
-        sortedManaSources.addAll(fourManaSources);
-        sortedManaSources.addAll(fiveManaSources);
-        sortedManaSources.addAll(anyColorManaSources);
-        //use better creatures later
-        CardLists.sortByEvaluateCreature(otherManaSources);
-        Collections.reverse(otherManaSources);
-        sortedManaSources.addAll(otherManaSources);
-        return sortedManaSources;
-    } // getAvailableMana()
-
-    /**
-     * <p>
-     * mapManaSources.
-     * </p>
-     * 
-     * @param ai
-     *            a {@link forge.game.player.Player} object.
-     * @param checkPlayable TODO
-     * @return HashMap<String, List<Card>>
-     */
-    public static Map<String, List<SpellAbility>> mapManaSources(final Player ai, boolean checkPlayable) {
-        final Map<String, List<SpellAbility>> manaMap = new HashMap<String, List<SpellAbility>>();
-
-        final List<SpellAbility> whiteSources = new ArrayList<SpellAbility>();
-        final List<SpellAbility> blueSources = new ArrayList<SpellAbility>();
-        final List<SpellAbility> blackSources = new ArrayList<SpellAbility>();
-        final List<SpellAbility> redSources = new ArrayList<SpellAbility>();
-        final List<SpellAbility> greenSources = new ArrayList<SpellAbility>();
-        final List<SpellAbility> colorlessSources = new ArrayList<SpellAbility>();
-        final List<SpellAbility> snowSources = new ArrayList<SpellAbility>();
-
-        // Get list of current available mana sources
-        final List<Card> manaSources = ComputerUtil.getAvailableMana(ai, checkPlayable);
-
-        // Loop over all mana sources
-        for (int i = 0; i < manaSources.size(); i++) {
-            final Card sourceCard = manaSources.get(i);
-            final ArrayList<SpellAbility> manaAbilities = sourceCard.getAIPlayableMana();
-
-            // Loop over all mana abilities for a source
-            for (final SpellAbility m : manaAbilities) {
-                m.setActivatingPlayer(ai);
-                if (!m.canPlay() && checkPlayable) {
-                    continue;
-                }
-
-                // don't use abilities with dangerous drawbacks
-                if (m.getSubAbility() != null) {
-                    if (!m.getSubAbility().chkAIDrawback()) {
-                        continue;
-                    }
-                }
-
-                // add to colorless source list
-                colorlessSources.add(m);
-
-                // find possible colors
-                if (m.getManaPart().canProduce("W")) {
-                    whiteSources.add(m);
-                }
-                if (m.getManaPart().canProduce("U")) {
-                    blueSources.add(m);
-                }
-                if (m.getManaPart().canProduce("B")) {
-                    blackSources.add(m);
-                }
-                if (m.getManaPart().canProduce("R")) {
-                    redSources.add(m);
-                }
-                if (m.getManaPart().canProduce("G")) {
-                    greenSources.add(m);
-                }
-                if (m.getManaPart().isSnow()) {
-                    snowSources.add(m);
-                }
-            } // end of mana abilities loop
-        } // end of mana sources loop
-
-        // Add sources
-        if (!whiteSources.isEmpty()) {
-            manaMap.put("W", whiteSources);
-        }
-        if (!blueSources.isEmpty()) {
-            manaMap.put("U", blueSources);
-        }
-        if (!blackSources.isEmpty()) {
-            manaMap.put("B", blackSources);
-        }
-        if (!redSources.isEmpty()) {
-            manaMap.put("R", redSources);
-        }
-        if (!greenSources.isEmpty()) {
-            manaMap.put("G", greenSources);
-        }
-        if (!colorlessSources.isEmpty()) {
-            manaMap.put("1", colorlessSources);
-        }
-        if (!snowSources.isEmpty()) {
-            manaMap.put("S", snowSources);
-        }
-
-        return manaMap;
-    }
-
-    /**
-     * <p>
-     * getComboManaChoice.
-     * </p>
-     * 
-     * @param abMana
-     *            a {@link forge.card.spellability.AbilityMana} object.
-     * @param saRoot
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @param cost
-     *            a {@link forge.card.mana.ManaCostBeingPaid} object.
-     * @return String
-     */
-    public static String getComboManaChoice(final Player ai, final SpellAbility manaAb, final SpellAbility saRoot, final ManaCostBeingPaid cost) {
-
-        final StringBuilder choiceString = new StringBuilder();
-
-
-        final Card source = manaAb.getSourceCard();
-        final AbilityManaPart abMana = manaAb.getManaPart();
-
-        if (abMana.isComboMana()) {
-            int amount = manaAb.hasParam("Amount") ? AbilityFactory.calculateAmount(source, manaAb.getParam("Amount"), saRoot) : 1;
-            final ManaCostBeingPaid testCost = new ManaCostBeingPaid(cost.toString().replace("X ", ""));
-            final String[] comboColors = abMana.getComboColors().split(" ");
-            for (int nMana = 1; nMana <= amount; nMana++) {
-                String choice = "";
-                // Use expressChoice first
-                if (!abMana.getExpressChoice().isEmpty()) {
-                    choice = abMana.getExpressChoice();
-                    abMana.clearExpressChoice();
-                    if (abMana.canProduce(choice) && testCost.isNeeded(choice)) {
-                        choiceString.append(choice);
-                        testCost.payMultipleMana(choice);
-                        continue;
-                    }
-                }
-                // check colors needed for cost
-                if (!testCost.isPaid()) {
-                    // Loop over combo colors
-                    for (String color :  comboColors) {
-                        if (testCost.isNeeded(color)) {
-                            testCost.payMultipleMana(color);
-                            if (nMana != 1) {
-                                choiceString.append(" ");
-                            }
-                            choiceString.append(color);
-                            choice = color;
-                            break;
-                        }
-                    }
-                    if (!choice.isEmpty()) {
-                        continue;
-                    }
-                }
-                // check if combo mana can produce most common color in hand
-                String commonColor = CardFactoryUtil.getMostProminentColor(ai.getCardsIn(
-                        ZoneType.Hand));
-                if (!commonColor.isEmpty() && abMana.getComboColors().contains(InputPayManaCostUtil.getShortColorString(commonColor))) {
-                    choice = InputPayManaCostUtil.getShortColorString(commonColor);
-                }
-                else {
-                    // default to first color
-                    choice = comboColors[0];
-                }
-                if (nMana != 1) {
-                    choiceString.append(" ");
-                }
-                choiceString.append(choice);
-            }
-        }
-        if (choiceString.toString().isEmpty()) {
-            choiceString.append("0");
-        }
-        return choiceString.toString();
-    }
 
     /**
      * <p>
@@ -1543,59 +716,7 @@ public class ComputerUtil {
         return ComputerUtilBlock.getBlockers(ai, Singletons.getModel().getGame().getCombat(), blockers);
     }
 
-    /**
-     * <p>
-     * sortSpellAbilityByCost.
-     * </p>
-     * 
-     * @param sa
-     *            an array of {@link forge.card.spellability.SpellAbility}
-     *            objects.
-     */
-    static void sortSpellAbilityByCost(final List<SpellAbility> sa) {
-        // sort from highest cost to lowest
-        // we want the highest costs first
-        final Comparator<SpellAbility> c = new Comparator<SpellAbility>() {
-            @Override
-            public int compare(final SpellAbility a, final SpellAbility b) {
-                int a1 = a.getManaCost().getCMC();
-                int b1 = b.getManaCost().getCMC();
 
-                // cast 0 mana cost spells first (might be a Mox)
-                if (a1 == 0) {
-                    b1 = -2;
-                } else if (b1 == 0) {
-                    a1 = -2;
-                }
-
-                a1 += getSpellAbilityPriority(a);
-                b1 += getSpellAbilityPriority(b);
-
-                return b1 - a1;
-            }
-        }; // Comparator
-        Collections.sort(sa, c);
-    } // sortSpellAbilityByCost()
-
-    public static int getSpellAbilityPriority(SpellAbility sa) {
-        int p = 0;
-        // puts creatures in front of spells
-        if (sa.getSourceCard().isCreature()) {
-            p += 1;
-        }
-        // sort planeswalker abilities for ultimate
-        if (sa.getRestrictions().getPlaneswalker()) {
-            if (sa.hasParam("Ultimate")) {
-                p += 9;
-            }
-        }
-
-        if (ApiType.DestroyAll == sa.getApi()) {
-            p += 4;
-        }
-
-        return p;
-    }
 
     /**
      * <p>
@@ -1708,7 +829,7 @@ public class ComputerUtil {
                     }
 
                     // sa.setActivatingPlayer(controller);
-                    if (!(sa.canPlay() && ComputerUtil.canPayCost(sa, controller))) {
+                    if (!(sa.canPlay() && ComputerUtilCost.canPayCost(sa, controller))) {
                         continue; // Can't play ability
                     }
 
@@ -1716,15 +837,15 @@ public class ComputerUtil {
                         final Cost abCost = sa.getPayCosts();
                         if (abCost != null) {
                             // AI currently disabled for these costs
-                            if (!CostUtil.checkLifeCost(controller, abCost, c, 4, null)) {
+                            if (!ComputerUtilCost.checkLifeCost(controller, abCost, c, 4, null)) {
                                 continue; // Won't play ability
                             }
 
-                            if (!CostUtil.checkSacrificeCost(controller, abCost, c)) {
+                            if (!ComputerUtilCost.checkSacrificeCost(controller, abCost, c)) {
                                 continue; // Won't play ability
                             }
 
-                            if (!CostUtil.checkCreatureSacrificeCost(controller, abCost, c)) {
+                            if (!ComputerUtilCost.checkCreatureSacrificeCost(controller, abCost, c)) {
                                 continue; // Won't play ability
                             }
                         }
@@ -1774,7 +895,7 @@ public class ComputerUtil {
                     }
 
                     if (sa.getApi() == ApiType.PreventDamage && sa.canPlay()
-                            && ComputerUtil.canPayCost(sa, controller)) {
+                            && ComputerUtilCost.canPayCost(sa, controller)) {
                         if (AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa).contains(card)) {
                             prevented += AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("Amount"), sa);
                         }

@@ -16,10 +16,10 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.cost.CostPart;
 import forge.card.cost.CostSacrifice;
-import forge.card.cost.CostUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCost;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -48,15 +48,15 @@ public class DestroyAi extends SpellAiLogic {
         List<Card> list;
 
         if (abCost != null) {
-            if (!CostUtil.checkSacrificeCost(ai, abCost, source)) {
+            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source)) {
                 return false;
             }
 
-            if (!CostUtil.checkLifeCost(ai, abCost, source, 4, null)) {
+            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, null)) {
                 return false;
             }
 
-            if (!CostUtil.checkDiscardCost(ai, abCost, source)) {
+            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
                 return false;
             }
         }
@@ -86,7 +86,7 @@ public class DestroyAi extends SpellAiLogic {
                                         continue;
                                     }
                                     CostSacrifice sacCost = (CostSacrifice) part;
-                                    if (sacCost.isTargetingThis() && ComputerUtil.canPayCost(ability, c.getController())) {
+                                    if (sacCost.isTargetingThis() && ComputerUtilCost.canPayCost(ability, c.getController())) {
                                         return false;
                                     }
                                 }

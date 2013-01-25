@@ -17,6 +17,8 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.card.spellability.Target;
 import forge.game.ai.ComputerUtil;
+import forge.game.ai.ComputerUtilCost;
+import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -35,19 +37,19 @@ public class PumpAi extends PumpAiBase {
         final String numDefense = sa.hasParam("NumDef") ? sa.getParam("NumDef") : "";
         final String numAttack = sa.hasParam("NumAtt") ? sa.getParam("NumAtt") : "";
 
-        if (!CostUtil.checkLifeCost(ai, cost, sa.getSourceCard(), 4, null)) {
+        if (!ComputerUtilCost.checkLifeCost(ai, cost, sa.getSourceCard(), 4, null)) {
             return false;
         }
 
-        if (!CostUtil.checkDiscardCost(ai, cost, sa.getSourceCard())) {
+        if (!ComputerUtilCost.checkDiscardCost(ai, cost, sa.getSourceCard())) {
             return false;
         }
 
-        if (!CostUtil.checkCreatureSacrificeCost(ai, cost, sa.getSourceCard())) {
+        if (!ComputerUtilCost.checkCreatureSacrificeCost(ai, cost, sa.getSourceCard())) {
             return false;
         }
 
-        if (!CostUtil.checkRemoveCounterCost(cost, sa.getSourceCard())) {
+        if (!ComputerUtilCost.checkRemoveCounterCost(cost, sa.getSourceCard())) {
             return false;
         }
 
@@ -92,7 +94,7 @@ public class PumpAi extends PumpAiBase {
         int defense;
         if (numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
+            final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(xPay));
             defense = xPay;
             if (numDefense.equals("-X")) {
@@ -108,7 +110,7 @@ public class PumpAi extends PumpAiBase {
             final String toPay = source.getSVar("PayX");
 
             if (toPay.equals("")) {
-                final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
+                final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
                 source.setSVar("PayX", Integer.toString(xPay));
                 attack = xPay;
             } else {
@@ -343,7 +345,7 @@ public class PumpAi extends PumpAiBase {
         int defense;
         if (numDefense.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             // Set PayX here to maximum value.
-            final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
+            final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
             source.setSVar("PayX", Integer.toString(xPay));
             defense = xPay;
         } else {
@@ -356,7 +358,7 @@ public class PumpAi extends PumpAiBase {
             final String toPay = source.getSVar("PayX");
 
             if (toPay.equals("")) {
-                final int xPay = ComputerUtil.determineLeftoverMana(sa, ai);
+                final int xPay = ComputerUtilMana.determineLeftoverMana(sa, ai);
                 source.setSVar("PayX", Integer.toString(xPay));
                 attack = xPay;
             } else {
@@ -396,7 +398,7 @@ public class PumpAi extends PumpAiBase {
         if (numAttack.contains("X") && source.getSVar("X").equals("Count$xPaid")) {
             if (source.getSVar("PayX").equals("")) {
                 // X is not set yet
-                final int xPay = ComputerUtil.determineLeftoverMana(sa.getRootAbility(), ai);
+                final int xPay = ComputerUtilMana.determineLeftoverMana(sa.getRootAbility(), ai);
                 source.setSVar("PayX", Integer.toString(xPay));
                 attack = xPay;
             } else {

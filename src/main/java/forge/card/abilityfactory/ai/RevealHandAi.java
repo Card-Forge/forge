@@ -5,8 +5,8 @@ import java.util.Random;
 import forge.Card;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cost.Cost;
-import forge.card.cost.CostUtil;
 import forge.card.spellability.SpellAbility;
+import forge.game.ai.ComputerUtilCost;
 import forge.game.player.Player;
 import forge.util.MyRandom;
 
@@ -23,19 +23,19 @@ public class RevealHandAi extends RevealAiBase {
 
         if (abCost != null) {
             // AI currently disabled for these costs
-            if (!CostUtil.checkLifeCost(ai, abCost, source, 4, null)) {
+            if (!ComputerUtilCost.checkLifeCost(ai, abCost, source, 4, null)) {
                 return false;
             }
 
-            if (!CostUtil.checkDiscardCost(ai, abCost, source)) {
+            if (!ComputerUtilCost.checkDiscardCost(ai, abCost, source)) {
                 return false;
             }
 
-            if (!CostUtil.checkSacrificeCost(ai, abCost, source)) {
+            if (!ComputerUtilCost.checkSacrificeCost(ai, abCost, source)) {
                 return false;
             }
 
-            if (!CostUtil.checkRemoveCounterCost(abCost, source)) {
+            if (!ComputerUtilCost.checkRemoveCounterCost(abCost, source)) {
                 return false;
             }
 
