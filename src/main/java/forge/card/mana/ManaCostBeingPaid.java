@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import forge.Constant;
+import forge.card.MagicColor;
 import forge.card.SpellManaCost;
 import forge.control.input.InputPayManaCostUtil;
 
@@ -392,7 +393,7 @@ public class ManaCostBeingPaid {
             System.out.println("ManaCost : addMana() error, mana not needed - " + mana);
             //throw new RuntimeException("ManaCost : addMana() error, mana not needed - " + mana);
         }
-
+        byte colorMask = MagicColor.fromName(mana);
         ManaCostShard choice = null;
         for (ManaCostShard toPay : unpaidShards.keySet()) {
             if (canBePaidWith(toPay, mana)) {
@@ -401,7 +402,7 @@ public class ManaCostBeingPaid {
                     choice = toPay;
                     continue;
                 }
-                if (isFirstChoiceBetter(toPay, choice)) {
+                if (isFirstChoiceBetter(toPay, choice, colorMask)) {
                     choice = toPay;
                 }
             }
@@ -411,7 +412,7 @@ public class ManaCostBeingPaid {
         }
 
         decreaseShard(choice, 1);
-        if (choice.isOr2Colorless() && !this.isColor(mana)) {
+        if (choice.isOr2Colorless() && choice.getColorMask() != colorMask ) {
             this.increaseColorlessMana(1);
         }
 
@@ -425,20 +426,20 @@ public class ManaCostBeingPaid {
         return true;
     }
 
-    private boolean isFirstChoiceBetter(ManaCostShard s1, ManaCostShard s2) {
-        return getPayPriority(s1) > getPayPriority(s2);
+    private boolean isFirstChoiceBetter(ManaCostShard s1, ManaCostShard s2, byte b) {
+        return getPayPriority(s1, b) > getPayPriority(s2, b);
     }
 
-    private int getPayPriority(ManaCostShard s1) {
-        if (s1 == ManaCostShard.COLORLESS) {
+    private int getPayPriority(ManaCostShard bill, byte paymentColor) {
+        if (bill == ManaCostShard.COLORLESS) {
             return 0;
         }
 
-        if (s1.isMonoColor()) {
-            if (s1.isOr2Colorless()) {
-                return 9;
+        if (bill.isMonoColor()) {
+            if (bill.isOr2Colorless()) {
+                return bill.getColorMask() == paymentColor ? 9 : 4;
             }
-            if (!s1.isPhyrexian()) {
+            if (!bill.isPhyrexian()) {
                 return 10;
             }
             return 8;
@@ -486,7 +487,7 @@ public class ManaCostBeingPaid {
                     choice = toPay;
                     continue;
                 }
-                if (isFirstChoiceBetter(toPay, choice)) {
+                if (isFirstChoiceBetter(toPay, choice, mana.getColorCode())) {
                     choice = toPay;
                 }
             }
@@ -497,10 +498,10 @@ public class ManaCostBeingPaid {
 
         String manaColor = mana.getColor();
 
-        if (choice.isOr2Colorless() && !this.isColor(InputPayManaCostUtil.getShortColorString(manaColor))) {
+        decreaseShard(choice, 1);
+        if (choice.isOr2Colorless() && choice.getColorMask() != mana.getColorCode() ) {
             this.increaseColorlessMana(1);
         }
-        decreaseShard(choice, 1);
 
         if (!mana.isColor(Constant.Color.COLORLESS)) {
             if (this.sunburstMap.containsKey(manaColor)) {
