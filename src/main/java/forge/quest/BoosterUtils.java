@@ -216,6 +216,47 @@ public final class BoosterUtils {
     }
 
     /**
+     * Parse a limitation for a reward or chosen card.
+     * @param input
+     *      String, the limitation as text.
+     * @return Predicate<CardRules> the text parsed into a CardRules predicate.
+     * 
+     */
+    public static Predicate<CardRules> parseRulesLimitation(final String input) {
+        if (null == input) {
+            return null;
+        }
+        if (input.equalsIgnoreCase("black")) {
+            return CardRulesPredicates.Presets.IS_BLACK;
+        } else if (input.equalsIgnoreCase("blue")) {
+            return CardRulesPredicates.Presets.IS_BLUE;
+        } else if (input.equalsIgnoreCase("colorless")) {
+            return CardRulesPredicates.Presets.IS_COLORLESS;
+        } else if (input.equalsIgnoreCase("green")) {
+            return CardRulesPredicates.Presets.IS_GREEN;
+        } else if (input.equalsIgnoreCase("multicolor")) {
+            return CardRulesPredicates.Presets.IS_MULTICOLOR;
+        } else if (input.equalsIgnoreCase("red")) {
+            return CardRulesPredicates.Presets.IS_RED;
+        } else if (input.equalsIgnoreCase("white")) {
+            return CardRulesPredicates.Presets.IS_WHITE;
+        } else if (input.equalsIgnoreCase("creature")) {
+            return CardRulesPredicates.Presets.IS_CREATURE;
+        } else if (input.equalsIgnoreCase("artifact")) {
+            return CardRulesPredicates.Presets.IS_ARTIFACT;
+        } else if (input.equalsIgnoreCase("planeswalker")) {
+            return CardRulesPredicates.Presets.IS_PLANESWALKER;
+        } else if (input.equalsIgnoreCase("instant")) {
+            return CardRulesPredicates.Presets.IS_INSTANT;
+        } else if (input.equalsIgnoreCase("sorcery")) {
+            return CardRulesPredicates.Presets.IS_SORCERY;
+        } else if (input.equalsIgnoreCase("enchantment")) {
+            return CardRulesPredicates.Presets.IS_ENCHANTMENT;
+        }
+        // No CardRules limitations could be parsed
+        return null;
+    }
+    /**
      * parseReward - used internally to parse individual items in a challenge reward definition.
      * @param s
      *      String, the reward to parse
@@ -231,26 +272,14 @@ public final class BoosterUtils {
             // Type 1: 'n (color) rares'
             final int qty = Integer.parseInt(temp[0]);
             // Determine rarity
-            Predicate<CardPrinted> rar = CardPrinted.Predicates.Presets.IS_UNCOMMON;
-
-            rar = CardPrinted.Predicates.Presets.IS_RARE_OR_MYTHIC;
+            final Predicate<CardPrinted> rar = CardPrinted.Predicates.Presets.IS_RARE_OR_MYTHIC;
 
             // Determine color ("random" defaults to null color)
             Predicate<CardRules> col = Predicates.alwaysTrue();
-            if (temp[1].equalsIgnoreCase("black")) {
-                col = CardRulesPredicates.Presets.IS_BLACK;
-            } else if (temp[1].equalsIgnoreCase("blue")) {
-                col = CardRulesPredicates.Presets.IS_BLUE;
-            } else if (temp[1].equalsIgnoreCase("colorless")) {
-                col = CardRulesPredicates.Presets.IS_COLORLESS;
-            } else if (temp[1].equalsIgnoreCase("green")) {
-                col = CardRulesPredicates.Presets.IS_GREEN;
-            } else if (temp[1].equalsIgnoreCase("multicolor")) {
-                col = CardRulesPredicates.Presets.IS_MULTICOLOR;
-            } else if (temp[1].equalsIgnoreCase("red")) {
-                col = CardRulesPredicates.Presets.IS_RED;
-            } else if (temp[1].equalsIgnoreCase("white")) {
-                col = CardRulesPredicates.Presets.IS_WHITE;
+            final Predicate<CardRules> colorRules = parseRulesLimitation(temp[1]);
+
+            if (colorRules != null) {
+                col = colorRules;
             }
 
             Function<BoosterGenerator, List<CardPrinted>> openWay = new Function<BoosterGenerator, List<CardPrinted>>() {
@@ -267,15 +296,17 @@ public final class BoosterUtils {
             rewards.addAll(new UnOpenedProduct(openWay, new BoosterGenerator(rarAndColor)).open());
         } else if (temp.length == 2 && temp[0].equalsIgnoreCase("duplicate") && temp[1].equalsIgnoreCase("card")) {
             // Type 2: a duplicate card of the players choice
-            rewards.add(new QuestRewardCardChooser("duplicate card"));
+            rewards.add(new QuestRewardCardChooser(QuestRewardCardChooser.poolType.playerCards, temp));
+        } else if (temp.length >= 2 && temp[0].equalsIgnoreCase("chosen") && temp[1].equalsIgnoreCase("card")) {
+            // Type 2: a duplicate card of the players choice
+            rewards.add(new QuestRewardCardChooser(QuestRewardCardChooser.poolType.predicateFilter, temp));
         } else if (temp.length > 0) {
-            // Type 3: assume we are asking for a single copy of a specific card
+            // Type 4: assume we are asking for a single copy of a specific card
             final CardPrinted specific = CardDb.instance().getCard(s);
             if (specific != null) {
                 rewards.add(specific);
             }
         }
-
         // Return the duplicate, a specified card, or an empty list
         return rewards;
     }

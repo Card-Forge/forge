@@ -658,7 +658,9 @@ public class QuestWinLose extends ControlWinLose {
                 cardsWon.add((CardPrinted) ii);
             } else if (ii instanceof QuestRewardCardChooser) {
                 final List<CardPrinted> cardChoices = ((QuestRewardCardChooser) ii).getChoices();
-                final CardPrinted chosenCard = (null == cardChoices ? null : GuiChoose.one("You have won a duplicate card!", cardChoices));
+                final String rewardText = (((QuestRewardCardChooser) ii).getType() == QuestRewardCardChooser.poolType.playerCards
+                        ? "You have won a duplicate card!" : "Choose " + ((QuestRewardCardChooser) ii).getName() + ":");
+                final CardPrinted chosenCard = (null == cardChoices ? null : GuiChoose.one(rewardText, cardChoices));
                 if (null != chosenCard) {
                     cardsWon.add(chosenCard);
                 }

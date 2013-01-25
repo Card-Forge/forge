@@ -18,6 +18,8 @@
 package forge.quest;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -87,6 +89,8 @@ public class QuestController {
     /** */
     public static final int MAX_PET_SLOTS = 2;
 
+    private Map<Integer, String> selectedPets = new HashMap<Integer, String>();
+
     /**
      * 
      * TODO: Write javadoc for this method.
@@ -94,9 +98,7 @@ public class QuestController {
      * @param name &emsp; String
      */
     public void selectPet(Integer slot, String name) {
-        if (this.model != null) {
-            this.model.getPetSlots().put(slot, name);
-        }
+        selectedPets.put(slot, name);
     }
 
     /**
@@ -105,7 +107,7 @@ public class QuestController {
      * @return String
      */
     public String getSelectedPet(Integer slot) {
-        return this.model == null ? null :  this.model.getPetSlots().get(slot);
+        return selectedPets.get(slot);
     }
 
     // Cards - class uses data from here
