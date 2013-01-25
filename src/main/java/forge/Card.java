@@ -8884,8 +8884,10 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
 
                 if (kw.equals("Hexproof")) {
-                    if (!sa.getActivatingPlayer().equals(this.getController())) {
-                        return false;
+                    if (sa.getActivatingPlayer().getOpponents().contains(this.getController())) {
+                        if (!sa.getActivatingPlayer().getKeywords().contains("Spells and abilities you control can target hexproof creatures")) {
+                            return false;
+                        }
                     }
                 }
 
