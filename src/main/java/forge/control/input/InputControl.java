@@ -194,6 +194,10 @@ public class InputControl extends MyObservable implements java.io.Serializable {
             return null;
         }
 
+        if (priority == null)
+            return null;
+        PlayerController pc = priority.getController();
+        
         // Special Inputs needed for the following phases:
         switch (phase) {
             case COMBAT_DECLARE_ATTACKERS:
@@ -208,19 +212,18 @@ public class InputControl extends MyObservable implements java.io.Serializable {
                 stack.freezeStack();
 
                 if (game.getCombat().isPlayerAttacked(priority)) {
-                    return priority.getController().getBlockInput();
+                    return pc.getBlockInput();
                 }
 
                 // noone attacks you
-                handler.passPriority();
+                pc.passPriority();
                 return null;
 
             case CLEANUP:
                 // discard
                 if (stack.isEmpty()) {
-                    // resolve things
-                    // like Madness
-                    return new InputCleanup();
+                    // resolve things like Madness
+                    return pc.getCleanupInput();
                 }
                 break;
             default:
@@ -230,14 +233,10 @@ public class InputControl extends MyObservable implements java.io.Serializable {
         // *********************
         // Special phases handled above, everything else is handled simply by
         // priority
-        if (priority == null)
-            return null;
-        
-        PlayerController pc = priority.getController();
 
         boolean prioritySkip = pc.mayAutoPass(phase) || pc.isUiSetToSkipPhase(playerTurn, phase);
         if (this.game.getStack().isEmpty() && prioritySkip) {
-            handler.passPriority();
+            pc.passPriority();
             return null;
         } else
             pc.autoPassCancel(); // probably cancel, since something has happened

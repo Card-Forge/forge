@@ -81,6 +81,10 @@ public class AiInputCommon extends Input {
             playSpellAbilities(game);
         } else {
             switch(phase) {
+                case CLEANUP:
+                    computer.cleanupDiscard();
+                    break;
+
                 case COMBAT_DECLARE_ATTACKERS:
                     declareAttackers();
                     break;
@@ -95,7 +99,7 @@ public class AiInputCommon extends Input {
                     break;
             }
         }
-        game.getPhaseHandler().passPriority();
+        player.getController().passPriority();
     } // getMessage();
 
     /**
@@ -147,6 +151,7 @@ public class AiInputCommon extends Input {
         do { 
             sa = computer.getSpellAbilityToPlay();
             if ( sa == null ) break;
+            //System.out.println("Playing sa: " + sa);
             ComputerUtil.handlePlayingSpellAbility(player, sa, game);
         } while ( sa != null );
     }

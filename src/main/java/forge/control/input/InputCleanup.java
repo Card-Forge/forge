@@ -40,18 +40,15 @@ public class InputCleanup extends Input {
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
-        final Player active = Singletons.getModel().getGame().getPhaseHandler().getPlayerTurn();
-        if (active.isComputer()) {
-            this.aiCleanupDiscard(active);
-            Singletons.getModel().getGame().getPhaseHandler().passPriority();
-            return;
-        }
+        final Player active = Singletons.getModel().getGame().getPhaseHandler().getPriorityPlayer();
 
         final int n = active.getCardsIn(ZoneType.Hand).size();
         final int max = active.getMaxHandSize();
         // goes to the next phase
         if (active.isUnlimitedHandSize() || n <= max || n <= 0) {
-            Singletons.getModel().getGame().getPhaseHandler().passPriority();
+            active.getController().passPriority();
+            
+            
             return;
         }
         ButtonUtil.disableAll();
@@ -81,14 +78,7 @@ public class InputCleanup extends Input {
      * AI_CleanupDiscard.
      * </p>
      */
-    public void aiCleanupDiscard(final Player ai) {
-        final int size = ai.getCardsIn(ZoneType.Hand).size();
 
-        if (!ai.isUnlimitedHandSize()) {
-            final int numDiscards = size - ai.getMaxHandSize();
-            ai.discard(numDiscards, null);
-        }
-    }
 
     /* (non-Javadoc)
      * @see forge.control.input.Input#isClassUpdated()

@@ -18,17 +18,13 @@
 package forge.game.phase;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
 import com.esotericsoftware.minlog.Log;
 
 import forge.Card;
-import forge.CardLists;
-import forge.CardPredicates;
 import forge.Singletons;
-import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.trigger.TriggerType;
 import forge.game.GameState;
 import forge.game.GameType;
@@ -464,7 +460,7 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             case COMBAT_END:
                 //SDisplayUtil.showTab(EDocID.REPORT_STACK.getDoc());
                 game.getCombat().reset();
-                this.resetAttackedThisCombat(this.getPlayerTurn());
+                this.getPlayerTurn().resetAttackedThisCombat();
                 this.bCombat = false;
 
                 break;
@@ -706,33 +702,6 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
 
     /**
      * <p>
-     * resetAttackedThisCombat.
-     * </p>
-     * 
-     * @param player
-     *            a {@link forge.game.player.Player} object.
-     */
-    public final void resetAttackedThisCombat(final Player player) {
-        // resets the status of attacked/blocked this phase
-        List<Card> list = CardLists.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
-
-        for (int i = 0; i < list.size(); i++) {
-            final Card c = list.get(i);
-            if (c.getDamageHistory().getCreatureAttackedThisCombat()) {
-                c.getDamageHistory().setCreatureAttackedThisCombat(false);
-            }
-            if (c.getDamageHistory().getCreatureBlockedThisCombat()) {
-                c.getDamageHistory().setCreatureBlockedThisCombat(false);
-            }
-
-            if (c.getDamageHistory().getCreatureGotBlockedThisCombat()) {
-                c.getDamageHistory().setCreatureGotBlockedThisCombat(false);
-            }
-        }
-    }
-
-    /**
-     * <p>
      * passPriority.
      * </p>
      */
@@ -742,38 +711,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
             return;
         }
 
-        //904.10. If a non-ongoing scheme card is face up in the
-        //command zone, and it isn't the source of a triggered ability
-        //that has triggered but not yet left the stack, that scheme card
-        //is turned face down and put on the bottom of its owner's scheme
-        //deck the next time a player would receive priority.
-        //(This is a state-based action. See rule 704.)
         if(game.getType() == GameType.Archenemy) 
-        {
-            for (int i = 0; i < game.getCardsIn(ZoneType.Command).size(); i++) {
-                Card c = game.getCardsIn(ZoneType.Command).get(i);
-                if (c.isScheme() && !c.isType("Ongoing")) {
-    
-                    boolean foundonstack = false;
-                    for (SpellAbilityStackInstance si : game.getStack().getStack()) {
-                        if (si.getSourceCard().equals(c)) {
-    
-                            foundonstack = true;
-                            break;
-                        }
-                    }
-                    if (!foundonstack) {
-    
-                        game.getTriggerHandler().suppressMode(TriggerType.ChangesZone);
-                        c.getController().getZone(ZoneType.Command).remove(c);
-                        i--;
-                        game.getTriggerHandler().clearSuppression(TriggerType.ChangesZone);
-    
-                        c.getController().getSchemeDeck().add(c);
-                    }
-                }
-            }
-        }
+            game.archenemy904_10();
 
         final Player actingPlayer = this.getPriorityPlayer();
         final Player firstAction = this.getFirstPriority();
@@ -783,6 +722,8 @@ public class PhaseHandler extends MyObservable implements java.io.Serializable {
         // of Priority
 
         Player nextPlayer = game.getNextPlayerAfter(actingPlayer);
+
+        // System.out.println(String.format("%s %s: %s passes priority to %s", playerTurn, phase, actingPlayer, nextPlayer));
         if (firstAction.equals(nextPlayer)) {
             if (game.getStack().isEmpty()) {
                 this.setPriority(this.getPlayerTurn()); // this needs to be set early as we exit the phase

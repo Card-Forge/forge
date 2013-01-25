@@ -480,5 +480,14 @@ public class AiController {
             return p;
         }
     }; // Comparator
+    
+    public void cleanupDiscard() {
+        final int size = player.getCardsIn(ZoneType.Hand).size();
+
+        if (!player.isUnlimitedHandSize()) {
+            final int numDiscards = size - player.getMaxHandSize();
+            player.discard(numDiscards, null);
+        }
+    }
 }
 

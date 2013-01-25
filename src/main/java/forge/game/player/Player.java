@@ -1704,10 +1704,8 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
 
         game.getAction().discardMadness(c, this);
 
-        boolean hasPutIntoPlayInsteadOfDiscard = c.hasKeyword("If a spell or ability an opponent controls causes you "
-                + "to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.");
-        boolean hasPutIntoPlayWith2xP1P1InsteadOfDiscard = c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, "
-                + "put it onto the battlefield with two +1/+1 counters on it instead of putting it into your graveyard.");
+        boolean hasPutIntoPlayInsteadOfDiscard = c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield instead of putting it into your graveyard.");
+        boolean hasPutIntoPlayWith2xP1P1InsteadOfDiscard = c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME, put it onto the battlefield with two +1/+1 counters on it instead of putting it into your graveyard.");
 
         if ((hasPutIntoPlayInsteadOfDiscard || hasPutIntoPlayWith2xP1P1InsteadOfDiscard)
                 && null != sa && sa.getSourceCard().getController().isHostileTo(c.getController())) {
@@ -1722,7 +1720,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             game.getAction().moveToGraveyard(c);
 
             // Play the Discard sound
-            Singletons.getModel().getGame().getEvents().post(new CardDiscardedEvent());
+            game.getEvents().post(new CardDiscardedEvent());
         }
 
         // Run triggers
@@ -3243,6 +3241,33 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         }
         
         game.setActivePlane(currentPlane);
+    }
+
+    /**
+     * <p>
+     * resetAttackedThisCombat.
+     * </p>
+     * 
+     * @param player
+     *            a {@link forge.game.player.Player} object.
+     */
+    public final void resetAttackedThisCombat() {
+        // resets the status of attacked/blocked this phase
+        List<Card> list = CardLists.filter(getCardsIn(ZoneType.Battlefield), Presets.CREATURES);
+    
+        for (int i = 0; i < list.size(); i++) {
+            final Card c = list.get(i);
+            if (c.getDamageHistory().getCreatureAttackedThisCombat()) {
+                c.getDamageHistory().setCreatureAttackedThisCombat(false);
+            }
+            if (c.getDamageHistory().getCreatureBlockedThisCombat()) {
+                c.getDamageHistory().setCreatureBlockedThisCombat(false);
+            }
+    
+            if (c.getDamageHistory().getCreatureGotBlockedThisCombat()) {
+                c.getDamageHistory().setCreatureGotBlockedThisCombat(false);
+            }
+        }
     }
 
 }

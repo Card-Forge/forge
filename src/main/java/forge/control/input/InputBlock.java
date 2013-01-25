@@ -24,6 +24,7 @@ import java.util.List;
 import forge.Card;
 
 import forge.Singletons;
+import forge.control.FControl;
 import forge.game.GameState;
 import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
@@ -103,7 +104,7 @@ public class InputBlock extends Input {
             ButtonUtil.reset();
             CombatUtil.orderMultipleCombatants(game.getCombat());
 
-            game.getPhaseHandler().passPriority();
+            FControl.SINGLETON_INSTANCE.getPlayer().getController().passPriority();
         }
     }
 

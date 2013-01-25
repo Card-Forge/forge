@@ -20,6 +20,7 @@ package forge.control.input;
 import forge.Card;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
+import forge.control.FControl;
 import forge.game.GameState;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -73,7 +74,7 @@ public class InputPassPriority extends Input {
     /** {@inheritDoc} */
     @Override
     public final void selectButtonOK() {
-        Singletons.getModel().getGame().getPhaseHandler().passPriority();
+        FControl.SINGLETON_INSTANCE.getPlayer().getController().passPriority();
     }
 
     /** {@inheritDoc} */

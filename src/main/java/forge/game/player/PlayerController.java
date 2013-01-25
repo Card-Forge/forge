@@ -5,6 +5,8 @@ import java.util.List;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.game.GameState;
+import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
@@ -25,12 +27,18 @@ public class PlayerController {
 
     private Input defaultInput;
     private Input blockInput;
+    private Input cleanupInput;
+    
+    private final GameState game;
+
 
     public final Input getDefaultInput() {
         return defaultInput;
     }
 
-    public PlayerController() {}
+    public PlayerController(GameState game0) {
+        game = game0;
+    }
     void setPlayer(Player p) {
         player = p;
     }
@@ -62,6 +70,12 @@ public class PlayerController {
         defaultInput = input;
     }
 
+
+    void setCleanupInput(Input input) {
+        // TODO Auto-generated method stub
+        cleanupInput = input;
+    }
+
     /**
      * Uses GUI to learn which spell the player (human in our case) would like to play
      */
@@ -83,5 +97,24 @@ public class PlayerController {
     void setBlockInput(Input blockInput0) {
         this.blockInput = blockInput0; 
     }
+
+    /**
+     * TODO: Write javadoc for this method.
+     */
+    public void passPriority() {
+        PhaseHandler handler = game.getPhaseHandler();
+        // may pass only priority is has
+        if ( handler.getPriorityPlayer() == player )
+            game.getPhaseHandler().passPriority();
+    }
+
+    /**
+     * @return the cleanupInput
+     */
+    public Input getCleanupInput() {
+        return cleanupInput;
+    }
+
+
 
 }
