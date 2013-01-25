@@ -216,22 +216,6 @@ public final class PlayerUtil {
      * 
      * @param nCards
      *            a int.
-     * @return a {@link forge.control.input.Input} object.
-     * @since 1.0.15
-     */
-    public static Input inputSacrificePermanents(final int nCards) {
-        final List<Card> list = Singletons.getControl().getPlayer().getCardsIn(ZoneType.Battlefield);
-
-        return PlayerUtil.inputSacrificePermanentsFromList(nCards, list, "Select a permanent to sacrifice");
-    } // input_sacrificePermanents()
-
-    /**
-     * <p>
-     * input_sacrificePermanents.
-     * </p>
-     * 
-     * @param nCards
-     *            a int.
      * @param type
      *            a {@link java.lang.String} object.
      * @return a {@link forge.control.input.Input} object.

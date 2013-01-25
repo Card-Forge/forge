@@ -103,7 +103,7 @@ public class AiInputCommon extends Input {
      */
     private void declareAttackers() {
         // 12/2/10(sol) the decision making here has moved to getAttackers()
-        game.setCombat(ComputerUtil.getAttackers(player));
+        game.setCombat(new AiAttackController(player, player.getOpponent()).getAttackers());
 
         final List<Card> att = game.getCombat().getAttackers();
         if (!att.isEmpty()) {
@@ -132,10 +132,10 @@ public class AiInputCommon extends Input {
      */
     private void playLands() {
         final Player player = computer.getPlayer();
-        List<Card> landsWannaPlay = ComputerUtil.getLandsToPlay(player);
+        List<Card> landsWannaPlay = computer.getLandsToPlay();
         
         while(landsWannaPlay != null && !landsWannaPlay.isEmpty() && player.canPlayLand()) {
-            Card land = ComputerUtil.chooseBestLandToPlay(landsWannaPlay, player);
+            Card land = computer.chooseBestLandToPlay(landsWannaPlay);
             landsWannaPlay.remove(land);
             player.playLand(land);
         }
@@ -143,14 +143,12 @@ public class AiInputCommon extends Input {
 
     protected void playSpellAbilities(final GameState game)
     {
-        List<SpellAbility> toPlay = computer.getSpellAbilitiesToPlay();
-        if ( toPlay != null ) {
-            for(SpellAbility sa : toPlay) {
-                //System.out.print(sa);
-                if (ComputerUtil.canBePlayedAndPayedByAI(player, sa))
-                    ComputerUtil.handlePlayingSpellAbility(player, sa, game);
-            }
-        }
+        SpellAbility sa;
+        do { 
+            sa = computer.getSpellAbilityToPlay();
+            if ( sa == null ) break;
+            ComputerUtil.handlePlayingSpellAbility(player, sa, game);
+        } while ( sa != null );
     }
     
 

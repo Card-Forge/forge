@@ -70,6 +70,7 @@ import forge.card.trigger.TriggerType;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCostUtil;
 import forge.game.GameState;
+import forge.game.ai.AiAttackController;
 import forge.game.ai.ComputerUtil;
 import forge.game.event.TokenCreatedEvent;
 import forge.game.phase.PhaseHandler;
@@ -333,7 +334,7 @@ public class CardFactoryUtil {
      * @return a boolean.
      */
     public static boolean doesCreatureAttackAI(final Player ai, final Card card) {
-        final List<Card> att = ComputerUtil.getAttackers(ai).getAttackers();
+        final List<Card> att = new AiAttackController(ai, ai.getOpponent()).getAttackers().getAttackers();
 
         return att.contains(card);
     }

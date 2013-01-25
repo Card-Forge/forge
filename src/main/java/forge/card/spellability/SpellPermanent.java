@@ -415,10 +415,7 @@ public class SpellPermanent extends Spell {
 
         if (card.isCreature()
                 && Singletons.getModel().getGame().getStaticEffects().getGlobalRuleChange(GlobalRuleChange.noCreatureETBTriggers)) {
-            if (api != null) {
-                return false;
-            }
-            return true;
+            return api == null;
         }
 
         // Trigger play improvements

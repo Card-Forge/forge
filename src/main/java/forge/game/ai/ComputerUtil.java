@@ -26,7 +26,6 @@ import java.util.Map;
 import java.util.Random;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 import forge.Card;
@@ -34,7 +33,6 @@ import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardPredicates.Presets;
 import forge.CardUtil;
-import forge.Constant;
 import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.SpellManaCost;
@@ -43,7 +41,6 @@ import forge.card.abilityfactory.ApiType;
 import forge.card.abilityfactory.effects.CharmEffect;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
-import forge.card.cost.CostDiscard;
 import forge.card.cost.CostMana;
 import forge.card.cost.CostPart;
 import forge.card.cost.CostPayLife;
@@ -80,54 +77,6 @@ import forge.util.MyRandom;
  * @version $Id$
  */
 public class ComputerUtil {
-
-    // if return true, go to next phase
-    /**
-     * <p>
-     * playSpellAbilities.
-     * </p>
-     * 
-     * @param all
-     *            an array of {@link forge.card.spellability.SpellAbility}
-     *            objects.
-     * @return a boolean.
-     */
-    public static List<SpellAbility> playSpellAbilities(final Player ai, final List<SpellAbility> all, final GameState game) {
-        if ( all == null || all.isEmpty() )
-            return null;
-
-        // not sure "playing biggest spell" matters?
-        ComputerUtil.sortSpellAbilityByCost(all);
-        ArrayList<SpellAbility> abilities = new ArrayList<SpellAbility>();
-        final ArrayList<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
-        for (SpellAbility sa : all) {
-            abilities.add(abilities.size(), sa);
-            sa.setActivatingPlayer(ai);
-            //add alternative costs as additional spell abilities
-            abilities.addAll(GameActionUtil.getAlternativeCosts(sa));
-        }
-        for (SpellAbility sa : abilities) {
-            sa.setActivatingPlayer(ai);
-            newAbilities.addAll(GameActionUtil.getOptionalAdditionalCosts(sa));
-        }
-        
-        List<SpellAbility> toPlay = new ArrayList<SpellAbility>(); 
-        abilities = newAbilities;
-        for (final SpellAbility sa : abilities) {
-            // Don't add Counterspells to the "normal" playcard lookups
-            if (sa.getApi() == ApiType.Counter) {
-                continue;
-            }
-            sa.setActivatingPlayer(ai);
-            
-            if (!ComputerUtil.canBePlayedAndPayedByAI(ai, sa))
-                continue;
-
-            toPlay.add(sa);
-        }
-        
-        return toPlay;
-    } // playCards()
 
     /**
      * <p>
@@ -257,63 +206,6 @@ public class ComputerUtil {
         return restrict;
     }
 
-    // if return true, go to next phase
-    /**
-     * <p>
-     * playCounterSpell.
-     * </p>
-     * 
-     * @param possibleCounters
-     *            a {@link java.util.ArrayList} object.
-     * @return a boolean.
-     */
-    public static List<SpellAbility> playCounterSpell(final Player ai, final ArrayList<SpellAbility> possibleCounters, final GameState game) {
-        if ( possibleCounters == null || possibleCounters.isEmpty())
-            return null;;
-        
-        SpellAbility bestSA = null;
-        int bestRestriction = Integer.MIN_VALUE;
-        final ArrayList<SpellAbility> newAbilities = new ArrayList<SpellAbility>();
-        for (SpellAbility sa : possibleCounters) {
-            sa.setActivatingPlayer(ai);
-            //add alternative costs as additional spell abilities
-            newAbilities.addAll(GameActionUtil.getAlternativeCosts(sa));
-        }
-        possibleCounters.addAll(newAbilities);
-        newAbilities.clear();
-        for (SpellAbility sa : possibleCounters) {
-            sa.setActivatingPlayer(ai);
-            newAbilities.addAll(GameActionUtil.getOptionalAdditionalCosts(sa));
-        }
-        possibleCounters.addAll(newAbilities);
-        for (final SpellAbility sa : possibleCounters) {
-            SpellAbility currentSA = sa;
-            sa.setActivatingPlayer(ai);
-            // check everything necessary
-            if (ComputerUtil.canBePlayedAndPayedByAI(ai, currentSA)) {
-                if (bestSA == null) {
-                    bestSA = currentSA;
-                    bestRestriction = ComputerUtil.counterSpellRestriction(ai, currentSA);
-                } else {
-                    // Compare bestSA with this SA
-                    final int restrictionLevel = ComputerUtil.counterSpellRestriction(ai, currentSA);
-
-                    if (restrictionLevel > bestRestriction) {
-                        bestRestriction = restrictionLevel;
-                        bestSA = currentSA;
-                    }
-                }
-            }
-        }
-
-        // TODO - "Look" at Targeted SA and "calculate" the threshold
-        // if (bestRestriction < targetedThreshold) return false;
-
-        List<SpellAbility> cSa = new ArrayList<SpellAbility>();
-        cSa.add(bestSA);
-        return cSa;
-    } // playCounterSpell()
-
     // this is used for AI's counterspells
     /**
      * <p>
@@ -434,21 +326,6 @@ public class ComputerUtil {
             game.getAction().checkStateEffects();
         }
     } // play()
-
-    // This is for playing spells regularly (no Cascade/Ripple etc.)
-    /**
-     * <p>
-     * canBePlayedAndPayedByAI.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     * @since 1.0.15
-     */
-    public static boolean canBePlayedAndPayedByAI(final Player ai, final SpellAbility sa) {
-        return sa.canPlay() && sa.canPlayAI() && ComputerUtil.canPayCost(sa, ai);
-    }
 
     /**
      * <p>
@@ -1267,150 +1144,6 @@ public class ComputerUtil {
         return choiceString.toString();
     }
 
-    // plays a land if one is available
-    /**
-     * <p>
-     * chooseLandsToPlay.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    public static List<Card> getLandsToPlay(final Player ai) {
-        if (!ai.canPlayLand()) {
-            return null;
-        }
-
-        final List<Card> hand = ai.getCardsIn(ZoneType.Hand);
-        List<Card> landList = CardLists.filter(hand, Presets.LANDS);
-        List<Card> nonLandList = CardLists.filter(hand, Predicates.not(CardPredicates.Presets.LANDS));
-
-        final List<Card> landsNotInHand = new ArrayList<Card>(ai.getCardsIn(ZoneType.Graveyard));
-        if (!ai.getCardsIn(ZoneType.Library).isEmpty()) {
-            landsNotInHand.add(ai.getCardsIn(ZoneType.Library).get(0));
-        }
-        for (final Card crd : landsNotInHand) {
-            if (crd.isLand() && crd.hasKeyword("May be played")) {
-                landList.add(crd);
-            }
-        }
-        if (landList.isEmpty()) {
-            return null;
-        }
-        if (landList.size() == 1 && nonLandList.size() < 3) {
-            List<Card> cardsInPlay = ai.getCardsIn(ZoneType.Battlefield);
-            List<Card> landsInPlay = CardLists.filter(cardsInPlay, Presets.LANDS);
-            List<Card> allCards = new ArrayList<Card>(ai.getCardsIn(ZoneType.Graveyard));
-            allCards.addAll(cardsInPlay);
-            int maxCmcInHand = Aggregates.max(hand, CardPredicates.Accessors.fnGetCmc);
-            int max = Math.max(maxCmcInHand, 6);
-            // consider not playing lands if there are enough already and an ability with a discard cost is present
-            if (landsInPlay.size() + landList.size() > max) {
-                for (Card c : allCards) {
-                    for (SpellAbility sa : c.getSpellAbilities()) {
-                        if (sa.getPayCosts() != null) {
-                            for (CostPart part : sa.getPayCosts().getCostParts()) {
-                                if (part instanceof CostDiscard) {
-                                    return null;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        landList = CardLists.filter(landList, new Predicate<Card>() {
-            @Override
-            public boolean apply(final Card c) {
-                if (c.getSVar("NeedsToPlay").length() > 0) {
-                    final String needsToPlay = c.getSVar("NeedsToPlay");
-                    List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
-
-                    list = CardLists.getValidCards(list, needsToPlay.split(","), c.getController(), c);
-                    if (list.isEmpty()) {
-                        return false;
-                    }
-                }
-                if (c.isType("Legendary") && !c.getName().equals("Flagstones of Trokair")) {
-                    final List<Card> list = ai.getCardsIn(ZoneType.Battlefield);
-                    if (Iterables.any(list, CardPredicates.nameEquals(c.getName()))) {
-                        return false;
-                    }
-                }
-
-                // don't play the land if it has cycling and enough lands are
-                // available
-                final ArrayList<SpellAbility> spellAbilities = c.getSpellAbilities();
-
-                final List<Card> hand = ai.getCardsIn(ZoneType.Hand);
-                List<Card> lands = ai.getCardsIn(ZoneType.Battlefield);
-                lands.addAll(hand);
-                lands = CardLists.filter(lands, CardPredicates.Presets.LANDS);
-                int maxCmcInHand = Aggregates.max(hand, CardPredicates.Accessors.fnGetCmc);
-                for (final SpellAbility sa : spellAbilities) {
-                    if (sa.isCycling()) {
-                        if (lands.size() >= Math.max(maxCmcInHand, 6)) {
-                            return false;
-                        }
-                    }
-                }
-                return true;
-            }
-        });
-
-        return landList;
-    }
-    
-    public static Card chooseBestLandToPlay(List<Card> landList, Player ai)
-    {
-        if (landList.isEmpty() || !ai.canPlayLand())
-            return null;
-
-        // play as many lands as you can
-        int ix = 0;
-        while (landList.get(ix).isReflectedLand() && ((ix + 1) < landList.size())) {
-            // Skip through reflected lands. Choose last if they are all
-            // reflected.
-            ix++;
-        }
-
-        Card land = landList.get(ix);
-        //play basic lands that are needed the most
-        if (Iterables.any(landList, CardPredicates.Presets.BASIC_LANDS)) {
-            final List<Card> combined = ai.getCardsIn(ZoneType.Battlefield);
-
-            final ArrayList<String> basics = new ArrayList<String>();
-
-            // what types can I go get?
-            for (final String name : Constant.CardTypes.BASIC_TYPES) {
-                if (!CardLists.getType(landList, name).isEmpty()) {
-                    basics.add(name);
-                }
-            }
-
-            // Which basic land is least available from hand and play, that I still
-            // have in my deck
-            int minSize = Integer.MAX_VALUE;
-            String minType = null;
-
-            for (int i = 0; i < basics.size(); i++) {
-                final String b = basics.get(i);
-                final int num = CardLists.getType(combined, b).size();
-                if (num < minSize) {
-                    minType = b;
-                    minSize = num;
-                }
-            }
-
-            if (minType != null) {
-                landList = CardLists.getType(landList, minType);
-            }
-
-            land = landList.get(0);
-        }
-        return land;
-    }
-
     /**
      * <p>
      * getCardPreference.
@@ -1795,20 +1528,6 @@ public class ComputerUtil {
             returnList.add(typeList.get(i));
         }
         return returnList;
-    }
-
-    /**
-     * <p>
-     * getAttackers.
-     * </p>
-     * 
-     * @return a {@link forge.game.phase.Combat} object.
-     */
-    public static Combat getAttackers(final Player ai) {
-        final Player opp = ai.getOpponent();
-        final ComputerUtilAttack att = new ComputerUtilAttack(ai, opp);
-
-        return att.getAttackers(ai, opp);
     }
 
     /**

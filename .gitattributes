@@ -13621,11 +13621,11 @@ src/main/java/forge/game/MatchController.java -text
 src/main/java/forge/game/MatchStartHelper.java -text
 src/main/java/forge/game/PlanarDice.java -text
 src/main/java/forge/game/PlayerStartConditions.java -text
+src/main/java/forge/game/ai/AiAttackController.java svneol=native#text/plain
 src/main/java/forge/game/ai/AiController.java svneol=native#text/plain
 src/main/java/forge/game/ai/AiInputBlock.java -text
 src/main/java/forge/game/ai/AiInputCommon.java svneol=native#text/plain
 src/main/java/forge/game/ai/ComputerUtil.java svneol=native#text/plain
-src/main/java/forge/game/ai/ComputerUtilAttack.java svneol=native#text/plain
 src/main/java/forge/game/ai/ComputerUtilBlock.java svneol=native#text/plain
 src/main/java/forge/game/event/BlockerAssignedEvent.java -text
 src/main/java/forge/game/event/CardDamagedEvent.java -text

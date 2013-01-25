@@ -49,7 +49,7 @@ import forge.util.MyRandom;
  * @author Forge
  * @version $Id$
  */
-public class ComputerUtilAttack {
+public class AiAttackController {
 
     // possible attackers and blockers
     private final List<Card> attackers;
@@ -58,11 +58,15 @@ public class ComputerUtilAttack {
     private final Random random = MyRandom.getRandom();
     private final int randomInt = this.random.nextInt();
 
-    private List<Card> humanList; // holds human player creatures
-    private List<Card> computerList; // holds computer creatures
-
-    private int aiAggression = 0; // added by Masher, how aggressive the ai
+    private List<Card> oppList; // holds human player creatures
+    private List<Card> myList; // holds computer creatures
+    
+    private final Player ai;
+    private final Player opponent;
+    
+    private int aiAggression = 0; // added by Masher, how aggressive the ai is
                                   // attack will be depending on circumstances
+    
 
     /**
      * <p>
@@ -74,17 +78,21 @@ public class ComputerUtilAttack {
      * @param possibleBlockers
      *            a {@link forge.CardList} object.
      */
-    public ComputerUtilAttack(final Player ai, final Player human) {
-        this.humanList = human.getCreaturesInPlay();
-        this.computerList = ai.getCreaturesInPlay();
+    public AiAttackController(final Player ai, final Player opponent) {
+        this.ai = ai;
+        this.opponent = opponent;
+        
+        this.oppList = opponent.getCreaturesInPlay();
+        this.myList = ai.getCreaturesInPlay();
+        
 
         this.attackers = new ArrayList<Card>();
-        for (Card c : computerList) {
-            if (CombatUtil.canAttack(c, human)) {
+        for (Card c : myList) {
+            if (CombatUtil.canAttack(c, opponent)) {
                 attackers.add(c);
             }
         }
-        this.blockers = this.getPossibleBlockers(humanList, this.attackers);
+        this.blockers = this.getPossibleBlockers(oppList, this.attackers);
     } // constructor
 
     /**
@@ -227,13 +235,13 @@ public class ComputerUtilAttack {
         if (Singletons.getModel().getGame().getPhaseHandler().getNextTurn().equals(ai)) {
             return attackers;
         }
-        for (final Card c : this.computerList) {
+        for (final Card c : this.myList) {
             if (c.getName().equals("Masako the Humorless")) {
                 // "Tapped creatures you control can block as though they were untapped."
                 return attackers;
             }
             if (!attackers.contains(c)) { // this creature can't attack anyway
-                if (canBlockAnAttacker(c, this.humanList)) {
+                if (canBlockAnAttacker(c, this.oppList)) {
                     fixedBlockers++;
                 }
                 continue;
@@ -241,16 +249,16 @@ public class ComputerUtilAttack {
             if (c.hasKeyword("Vigilance")) {
                 vigilantes.add(c);
                 notNeededAsBlockers.remove(c); // they will be re-added later
-                if (canBlockAnAttacker(c, this.humanList)) {
+                if (canBlockAnAttacker(c, this.oppList)) {
                     fixedBlockers++;
                 }
             }
         }
         CardLists.sortAttackLowFirst(attackers);
-        int blockersNeeded = this.humanList.size();
+        int blockersNeeded = this.oppList.size();
 
         // don't hold back creatures that can't block any of the human creatures
-        final List<Card> list = this.getPossibleBlockers(attackers, this.humanList);
+        final List<Card> list = this.getPossibleBlockers(attackers, this.oppList);
 
         //Calculate the amount of creatures necessary
         for (int i = 0; i < list.size(); i++) {
@@ -285,11 +293,11 @@ public class ComputerUtilAttack {
         if (humanExaltedBonus > 0) {
             final int nFinestHours = opp.getCardsIn(ZoneType.Battlefield, "Finest Hour").size();
 
-            if (((blockersNeeded == 0) || (nFinestHours > 0)) && (this.humanList.size() > 0)) {
+            if (((blockersNeeded == 0) || (nFinestHours > 0)) && (this.oppList.size() > 0)) {
                 //
                 // total attack = biggest creature + exalted, *2 if Rafiq is in
                 // play
-                int humanBaseAttack = this.getAttack(this.humanList.get(0)) + humanExaltedBonus;
+                int humanBaseAttack = this.getAttack(this.oppList.get(0)) + humanExaltedBonus;
                 if (nFinestHours > 0) {
                     // For Finest Hour, one creature could attack and get the
                     // bonus TWICE
@@ -334,7 +342,7 @@ public class ComputerUtilAttack {
             return false;
         }
 
-        for (Card attacker : humanList) {
+        for (Card attacker : oppList) {
             if (!CombatUtil.canAttackNextTurn(attacker)) {
                 continue;
             }
@@ -439,7 +447,7 @@ public class ComputerUtilAttack {
      * @param bAssault
      *            a boolean.
      */
-    public final void chooseDefender(final Player ai, final Combat c, final boolean bAssault) {
+    public final void chooseDefender(final Combat c, final boolean bAssault) {
         final List<GameEntity> defs = c.getDefenders();
 
         // Start with last planeswalker
@@ -473,7 +481,7 @@ public class ComputerUtilAttack {
      * 
      * @return a {@link forge.game.phase.Combat} object.
      */
-    public final Combat getAttackers(final Player ai, final Player opponent) {
+    public final Combat getAttackers() {
         // if this method is called multiple times during a turn,
         // it will always return the same value
         // randomInt is used so that the computer doesn't always
@@ -495,7 +503,7 @@ public class ComputerUtilAttack {
 
         final boolean bAssault = this.doAssault(ai);
         // Determine who will be attacked
-        this.chooseDefender(ai, combat, bAssault);
+        this.chooseDefender(combat, bAssault);
         List<Card> attackersLeft = new ArrayList<Card>(this.attackers);
         // Attackers that don't really have a choice
         for (final Card attacker : this.attackers) {
@@ -580,7 +588,7 @@ public class ComputerUtilAttack {
         final List<Card> nextTurnAttackers = new ArrayList<Card>();
         int candidateCounterAttackDamage = 0;
 
-        for (final Card pCard : this.humanList) {
+        for (final Card pCard : this.oppList) {
             // if the creature can attack next turn add it to counter attackers
             // list
             if (CombatUtil.canAttackNextTurn(pCard)) {
@@ -607,7 +615,7 @@ public class ComputerUtilAttack {
         // get the potential damage and strength of the AI forces
         final List<Card> candidateAttackers = new ArrayList<Card>();
         int candidateUnblockedDamage = 0;
-        for (final Card pCard : this.computerList) {
+        for (final Card pCard : this.myList) {
             // if the creature can attack then it's a potential attacker this
             // turn, assume summoning sickness creatures will be able to
             if (CombatUtil.canAttackNextTurn(pCard)) {
@@ -716,7 +724,7 @@ public class ComputerUtilAttack {
             boolean isUnblockableCreature = true;
             // check blockers individually, as the bulk canBeBlocked doesn't
             // check all circumstances
-            for (final Card blocker : this.computerList) {
+            for (final Card blocker : this.myList) {
                 if (CombatUtil.canBlock(attacker, blocker, true)) {
                     isUnblockableCreature = false;
                     break;
