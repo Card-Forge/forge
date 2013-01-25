@@ -1,0 +1,15 @@
+Name:Luminate Primordial
+ManaCost:5 W W
+Types:Creature Avatar
+Text:no text
+PT:4/7
+K:Vigilance
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ ExileOneEach | TriggerDescription$ When CARDNAME enters the battlefield, for each opponent, exile up to one target creature that player controls and that player gains life equal to its power.
+SVar:ExileOneEach:AB$ ChangeZone | Cost$ 0 | Origin$ Battlefield | Destination$ Exile | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature each opponent controls. | TargetMin$ 0 | TargetMax$ OneEach | References$ OneEach | TargetsWithDifferentControllers$ True | SubAbility$ LoopTgts
+SVar:LoopTgts:DB$ RepeatEach | RepeatSubAbility$ GiveLifeEach | DefinedCards$ Targeted
+SVar:GiveLifeEach:DB$ GainLife | Defined$ RememberedController | LifeAmount$ TgtPower
+SVar:OneEach:PlayerCountOpponents$Amount
+SVar:TgtPower:Remembered$CardPower
+SVar:Picture:http://www.wizards.com/global/images/magic/general/luminate_primordial.jpg
+SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/20.jpg
+End

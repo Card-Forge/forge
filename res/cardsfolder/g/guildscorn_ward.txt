@@ -1,0 +1,10 @@
+Name:Guildscorn Ward
+ManaCost:W
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ W | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection:Card.MultiColor:Protection from multicolored | Description$ Enchanted creature has protection from multicolored.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/guildscorn_ward.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/15.jpg
+End

@@ -1,0 +1,13 @@
+Name:Dimir Keyrune
+ManaCost:3
+Types:Artifact
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
+A:AB$ Animate | Cost$ U B | Defined$ Self | Power$ 2 | Toughness$ 2 | Types$ Artifact,Creature,Horror | Colors$ Blue,Black | HiddenKeywords$ Unblockable | SpellDescription$ CARDNAME becomes a 2/2 blue and black Horror artifact creature until end of turn and is unblockable this turn.
+SVar:RemRandomDeck:True
+DeckNeeds:Color$Blue|Black
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/dimir_keyrune.jpg
+SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/228.jpg
+End

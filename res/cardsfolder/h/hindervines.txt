@@ -1,0 +1,10 @@
+Name:Hindervines
+ManaCost:2 G
+Types:Instant
+Text:no text
+A:SP$ Effect | Cost$ 2 G | Name$ Hindervines Effect | StaticAbilities$ STPrevent | AILogic$ Fog | SpellDescription$ Prevent all combat damage that would be dealt this turn by creatures with no +1/+1 counters.
+SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Source$ Creature.counters_EQ0_P1P1 | CombatDamage$ True | Description$ Prevent all combat damage that would be dealt by creatures with no +1/+1 counters.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hindervines.jpg
+SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/124.jpg
+End

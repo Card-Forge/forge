@@ -1,0 +1,11 @@
+Name:Experiment One
+ManaCost:G
+Types:Creature Human Ooze
+Text:no text
+PT:1/1
+K:Evolve
+A:AB$ Regenerate | Cost$ SubCounter<2/P1P1> | SpellDescription$ Regenerate CARDNAME.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/experiment_one.jpg
+SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/119.jpg
+End

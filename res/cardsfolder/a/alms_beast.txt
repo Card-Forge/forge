@@ -1,0 +1,10 @@
+Name:Alms Beast
+ManaCost:2 W B
+Types:Creature Beast
+Text:no text
+PT:6/6
+S:Mode$ Continuous | Affected$ Creature.blockedBySource,Creature.blockingSource | AddKeyword$ Lifelink | Description$ Creatures blocking or blocked by CARDNAME have lifelink.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/alms_beast.jpg
+SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/141.jpg
+End

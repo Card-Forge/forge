@@ -1,0 +1,11 @@
+Name:Skarrg Guildmage
+ManaCost:R G
+Types:Creature Human Shaman
+Text:no text
+PT:2/2
+A:AB$ PumpAll | Cost$ R G | ValidCards$ Creature.YouCtrl | KW$ Trample | SpellDescription$ Creatures you control gain trample until end of turn.
+A:AB$ Animate | Cost$ 1 R G | ValidTgts$ Land.YouCtrl | TgtPrompt$ Select target land you control | Power$ 4 | Toughness$ 4 | Types$ Creature,Elemental | SpellDescription$ Target land you control becomes a 4/4 Elemental creature until end of turn. It's still a land.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skarrg_guildmage.jpg
+SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/196.jpg
+End

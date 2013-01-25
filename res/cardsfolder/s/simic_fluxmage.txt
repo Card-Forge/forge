@@ -1,0 +1,11 @@
+Name:Simic Fluxmage
+ManaCost:2 U
+Types:Creature Merfolk Wizard
+Text:no text
+PT:1/2
+K:Evolve
+A:AB$ MoveCounter | Cost$ 1 U T | CounterType$ P1P1 | CounterNum$ 1 | Source$ Self | ValidTgts$ Creature | SpellDescription$ Move a +1/+1 counter from CARDNAME onto target creature.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/simic_fluxmage.jpg
+SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/49.jpg
+End

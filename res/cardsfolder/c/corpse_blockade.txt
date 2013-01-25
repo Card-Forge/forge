@@ -1,0 +1,12 @@
+Name:Corpse Blockade
+ManaCost:2 B
+Types:Creature Zombie
+Text:no text
+PT:1/4
+K:Defender
+A:AB$ Pump | Cost$ Sac<1/Creature.Other/another creature> | KW$ Deathtouch | SpellDescription$ CARDNAME gains deathtouch until end of turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/corpse_blockade.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/60.jpg
+End

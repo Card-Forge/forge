@@ -1,0 +1,11 @@
+Name:Elusive Krasis
+ManaCost:1 U G
+Types:Creature Fish Mutant
+Text:no text
+PT:0/4
+K:Unblockable
+K:Evolve
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/elusive_krasis.jpg
+SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/160.jpg
+End

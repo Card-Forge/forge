@@ -1,0 +1,11 @@
+Name:Greenside Watcher
+ManaCost:1 G
+Types:Creature Elf Druid
+Text:no text
+PT:2/1
+A:AB$ Untap | Cost$ T | ValidTgts$ Gate | TgtPrompt$ Select target gate | SpellDescription$ Untap target Gate.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/greenside_watcher.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/122.jpg
+End

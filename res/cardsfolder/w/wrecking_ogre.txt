@@ -1,0 +1,11 @@
+Name:Wrecking Ogre
+ManaCost:4 R
+Types:Creature Ogre Warrior
+Text:no text
+PT:3/3
+K:Double Strike
+A:AB$ Pump | Cost$ 3 R R Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ Bloodrush - | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumAtt$ +3 | NumDef$ +3 | KW$ Double Strike | SpellDescription$ Target attacking creature gets +3/+3 and gains double strike until end of turn.
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wrecking_ogre.jpg
+SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/112.jpg
+End

@@ -1,0 +1,15 @@
+Name:Prime Speaker Zegana
+ManaCost:2 G G U U
+Types:Legendary Creature Merfolk Wizard
+Text:no text
+PT:1/1
+K:etbCounter:P1P1:X:no Condition:CARDNAME enters the battlefield with X +1/+1 counters on it, where X is the greatest power among other creatures you control.
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDraw | TriggerDescription$ When CARDNAME enters the battlefield, draw cards equal to its power.
+SVar:TrigDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ Y | References$ Y
+SVar:X:Count$GreatestPowerYouControl
+SVar:Y:TriggeredCard$CardPower
+SVar:NeedsToPlayVar:X GE3
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/prime_speaker_zegana.jpg
+SetInfo:GTC|Mythic|http://magiccards.info/scans/en/gtc/188.jpg
+End

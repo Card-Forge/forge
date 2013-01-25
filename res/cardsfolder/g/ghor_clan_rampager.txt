@@ -1,0 +1,11 @@
+Name:Ghor-Clan Rampager
+ManaCost:2 R G
+Types:Creature Beast
+Text:no text
+PT:4/4
+K:Trample
+A:AB$ Pump | Cost$ R G Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ Bloodrush | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumAtt$ +4 | NumDef$ +4 | KW$ Trample | SpellDescription$ Target attacking creature gets +4/+4 and gains trample until end of turn.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/ghor_clan_rampager.jpg
+SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/167.jpg
+End

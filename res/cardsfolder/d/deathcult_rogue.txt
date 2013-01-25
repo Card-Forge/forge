@@ -1,0 +1,10 @@
+Name:Deathcult Rogue
+ManaCost:1 UB UB
+Types:Creature Human Rogue
+Text:CARDNAME can't be blocked except by Rogues.
+PT:2/2
+K:CantBeBlockedBy Creature.nonRogue
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deathcult_rogue.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/218.jpg
+End

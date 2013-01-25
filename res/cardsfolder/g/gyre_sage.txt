@@ -1,0 +1,11 @@
+Name:Gyre Sage
+ManaCost:1 G
+Types:Creature Elf Druid
+Text:no text
+PT:1/2
+K:Evolve
+A:AB$ Mana | Cost$ T | Produced$ G | Amount$ X | References$ X | SpellDescription$ Add G to your mana pool for each +1/+1 counter on CARDNAME.
+SVar:X:Count$NumCounters.P1P1
+SVar:Picture:http://www.wizards.com/global/images/magic/general/gyre_sage.jpg
+SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/123.jpg
+End

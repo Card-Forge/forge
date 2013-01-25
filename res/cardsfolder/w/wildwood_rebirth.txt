@@ -1,0 +1,9 @@
+Name:Wildwood Rebirth
+ManaCost:1 G
+Types:Instant
+Text:no text
+A:SP$ ChangeZone | Cost$ 1 G | Origin$ Graveyard | Destination$ Hand | TgtPrompt$ Choose target creature card in your graveyard | ValidTgts$ Creature.YouOwn | SpellDescription$ Return target creature card from your graveyard to your hand.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/wildwood_rebirth.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/140.jpg
+End

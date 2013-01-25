@@ -1,0 +1,13 @@
+Name:Hellraiser Goblin
+ManaCost:2 R
+Types:Creature Goblin Berserker
+Text:no text
+PT:2/2
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddKeyword$ Haste | Description$ Creatures you control have haste and attack each combat if able.
+S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddHiddenKeyword$ CARDNAME attacks each turn if able.
+SVar:PlayMain1:TRUE
+SVar:BuffedBy:Creature
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hellraiser_goblin.jpg
+SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/95.jpg
+End

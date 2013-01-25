@@ -1,0 +1,13 @@
+Name:Tin Street Market
+ManaCost:4 R
+Types:Enchantment Aura
+Text:no text
+K:Enchant land
+A:SP$ Attach | Cost$ 4 R | ValidTgts$ Land | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ UCDraw | Description$ Enchanted land has "T, Discard a card: Draw a card."
+SVar:UCDraw:AB$ Draw | Cost$ T Discard<1/Card> | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/tin_street_market.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/108.jpg
+End

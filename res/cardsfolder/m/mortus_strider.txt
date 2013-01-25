@@ -1,0 +1,12 @@
+Name:Mortus Strider
+ManaCost:1 U B
+Types:Creature Skeleton
+Text:no text
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigChangeZone | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, return it to its owner's hand.
+SVar:TrigChangeZone:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Hand
+SVar:SacMe:2
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/mortus_strider.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/179.jpg
+End

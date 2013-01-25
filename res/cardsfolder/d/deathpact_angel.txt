@@ -1,0 +1,13 @@
+Name:Deathpact Angel
+ManaCost:3 W B B
+Types:Creature Angel
+Text:no text
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Card.Self | Execute$ TrigToken | TriggerController$ TriggeredCardController | TriggerDescription$ When CARDNAME dies, put a 1/1 white and black Cleric creature token onto the battlefield. It has "3 W B B, Tap, Sacrifice this creature: Return a card named Deathpact Angel from your graveyard to the battlefield."
+SVar:TrigToken:AB$ Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Cleric | TokenTypes$ Creature,Cleric | TokenOwner$ You | TokenColors$ White,Black | TokenPower$ 1 | TokenToughness$ 1 | TokenAbilities$ ABDeathpact
+SVar:ABDeathpact:AB$ ChangeZone | Cost$ 3 W B B T Sac<1/CARDNAME> | ChangeType$ Card.namedDeathpact Angel+YouOwn | ChangeNum$ 1 | Origin$ Graveyard | Destination$ Battlefield | Hidden$ True | SpellDescription$ Return a card named Deathpact Angel from your graveyard to the battlefield.
+SVar:SacMe:1
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/deathpact_angel.jpg
+SetInfo:GTC|Mythic|http://magiccards.info/scans/en/gtc/153.jpg
+End

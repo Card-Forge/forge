@@ -1,0 +1,11 @@
+Name:Sunhome Guildmage
+ManaCost:R W
+Types:Creature Human Wizard
+Text:no text
+PT:2/2
+A:AB$ PumpAll | Cost$ 1 R W | ValidCards$ Creature.YouCtrl | NumAtt$ +1 | SpellDescription$ Creatures you control get +1/+0 until end of turn.
+A:AB$ Token | Cost$ 2 R W | TokenAmount$ 1 | TokenName$ Soldier | TokenTypes$ Creature,Soldier | TokenOwner$ You | TokenColors$ Red,White | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Haste | SpellDescription$ Put a 1/1 red and white Soldier creature token with haste onto the battlefield.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sunhome_guildmage.jpg
+SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/200.jpg
+End

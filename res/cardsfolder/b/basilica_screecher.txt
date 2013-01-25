@@ -1,0 +1,11 @@
+Name:Basilica Screecher
+ManaCost:1 B
+Types:Creature Bat
+Text:no text
+PT:1/2
+K:Flying
+K:Extort
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/basilica_screecher.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/58.jpg
+End

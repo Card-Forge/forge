@@ -1,0 +1,14 @@
+Name:Diluvian Primordial
+ManaCost:5 U U
+Types:Creature Avatar
+Text:no text
+PT:5/5
+K:Flying
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ PickOneEach | TriggerDescription$ When CARDNAME enters the battlefield, for each opponent, you may cast up to one target instant or sorcery card from that player's graveyard without paying its mana cost. If a card cast this way would be put into a graveyard this turn, exile it instead.
+SVar:PickOneEach:AB$ Pump | Cost$ 0 | ValidTgts$ Instant.OppCtrl,Sorcery.OppCtrl | TgtZone$ Graveyard | TgtPrompt$ Select target instant or sorcery card in each opponent's graveyard | TargetMin$ 0 | TargetMax$ OneEach | References$ OneEach | TargetsWithDifferentControllers$ True | KW$ HIDDEN If CARDNAME would be put into a graveyard, exile it instead. | PumpZone$ Graveyard | SubAbility$ LoopTgts
+SVar:LoopTgts:DB$ RepeatEach | RepeatSubAbility$ CastEach | DefinedCards$ Targeted
+SVar:CastEach:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | Optional$ True
+SVar:OneEach:PlayerCountOpponents$Amount
+SVar:Picture:http://www.wizards.com/global/images/magic/general/diluvian_primordial.jpg
+SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/33.jpg
+End

@@ -1,0 +1,12 @@
+Name:Fathom Mage
+ManaCost:2 G U
+Types:Creature Human Wizard
+Text:no text
+PT:1/1
+K:Evolve
+T:Mode$ CounterAdded | ValidCard$ Card.Self | TriggerZones$ Battlefield | CounterType$ P1P1 | Execute$ FathomDraw | OptionalDecider$ You | TriggerDescription$ Whenever a +1/+1 counter is placed on CARDNAME, you may draw a card.
+SVar:FathomDraw:AB$ Draw | Cost$ 0 | Defined$ You | NumCards$ 1
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fathom_mage.jpg
+SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/162.jpg
+End

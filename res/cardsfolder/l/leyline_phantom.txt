@@ -1,0 +1,11 @@
+Name:Leyline Phantom
+ManaCost:4 U
+Types:Creature Illusion
+Text:no text
+PT:5/5
+T:Mode$ DamageDone | ValidSource$ Card.Self | Execute$ TrigBounce | CombatDamage$ True | TriggerDescription$ Whenever CARDNAME deals combat damage, return it to its owner's hand.
+SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Hand
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/leyline_phantom.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/41.jpg
+End

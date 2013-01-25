@@ -1,0 +1,10 @@
+Name:Adaptive Snapjaw
+ManaCost:4 G
+Types:Creature Lizard Beast
+Text:no text
+PT:6/2
+K:Evolve
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/adaptive_snapjaw.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/113.jpg
+End

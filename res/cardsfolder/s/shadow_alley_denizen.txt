@@ -1,0 +1,11 @@
+Name:Shadow Alley Denizen
+ManaCost:B
+Types:Creature Vampire Rogue
+Text:no text
+PT:1/1
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl+Black | TriggerZones$ Battlefield | Execute$ TrigPump | TriggerDescription$ Whenever another black creature enters the battlefield under your control, target creature gains intimidate until end of turn.
+SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature to gain intimidate | KW$ Intimidate
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shadow_alley_denizen.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/76.jpg
+End

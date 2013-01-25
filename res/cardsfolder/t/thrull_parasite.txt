@@ -1,0 +1,11 @@
+Name:Thrull Parasite
+ManaCost:B
+Types:Creature Thrull
+Text:no text
+PT:1/1
+K:Extort
+A:AB$ RemoveCounter | Cost$ T PayLife<2> | ValidTgts$ Permanent.nonLand | TgtPrompt$ Select target nonland permanent | CounterType$ Any | CounterNum$ 1 | SpellDescription$ Remove a counter from target nonland permanent.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/thrull_parasite.jpg
+SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/81.jpg
+End

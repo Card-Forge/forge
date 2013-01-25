@@ -1,0 +1,13 @@
+Name:Simic Keyrune
+ManaCost:3
+Types:Artifact
+Text:no text
+A:AB$ Mana | Cost$ T | Produced$ G | SpellDescription$ Add G to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ U | SpellDescription$ Add U to your mana pool.
+A:AB$ Animate | Cost$ G U | Defined$ Self | Power$ 2 | Toughness$ 3 | Types$ Artifact,Creature,Crab | Colors$ Green,Blue | Keywords$ Hexproof | SpellDescription$ CARDNAME becomes a 2/3 green and blue Crab artifact creature with hexproof until end of turn.
+SVar:RemRandomDeck:True
+DeckNeeds:Color$Green|Blue
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/simic_keyrune.jpg
+SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/237.jpg
+End

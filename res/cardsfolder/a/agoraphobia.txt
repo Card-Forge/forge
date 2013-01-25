@@ -1,0 +1,11 @@
+Name:Agoraphobia
+ManaCost:1 U
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 U | ValidTgts$ Creature | AILogic$ Curse
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ -5 | Description$ Enchanted creature gets -5/-0.
+A:AB$ ChangeZone | Cost$ 2 U | Origin$ Battlefield | Destination$ Hand | SpellDescription$ Return CARDNAME to its owner's hand.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/agoraphobia.jpg
+SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/30.jpg
+End

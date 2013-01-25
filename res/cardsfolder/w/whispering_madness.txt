@@ -1,0 +1,19 @@
+Name:Whispering Madness
+ManaCost:2 U B
+Types:Sorcery
+Text:no text
+A:SP$ RepeatEach | Cost$ 2 U B | RepeatPlayers$ Player | RepeatSubAbility$ MadnessDiscard | SubAbility$ MadnessDraw | SpellDescription$Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way. Cipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)
+SVar:MadnessDiscard:DB$ Discard | Defined$ Player.IsRemembered | Mode$ Hand | RememberDiscarded$ True | SubAbility$ MadnessSaveAmount
+SVar:MadnessSaveAmount:DB$ StoreSVar | SVar$ MaxDiscard | Type$ CountSVar | Expression$ NumDiscard | ConditionCheckSVar$ NumDiscard | ConditionSVarCompare$ GTMaxDiscard | SubAbility$ MadnessCleanUp
+SVar:MadnessCleanUp:DB$ Cleanup | ClearRemembered$ True
+SVar:MadnessDraw:DB$ Draw | Defined$ Each | NumCards$ MaxDiscard | SubAbility$ MadnessReset
+SVar:MadnessReset:DB$ StoreSVar | SVar$ MaxDiscard | Type$ Number | Expression$ 0 | SubAbility$ Cipher
+SVar:Cipher:DB$ Encode | Defined$ Self | ConditionCheckSVar$ IsEncoded | ConditionSVarCompare$ EQ0
+SVar:IsEncoded:Number$0
+SVar:NumDiscard:Count$RememberedSize/Minus.1
+SVar:MaxDiscard:Number$0
+SVar:RemAIDeck:True
+SVar:RemRandomDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/whispering_madness.jpg
+SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/207.jpg
+End

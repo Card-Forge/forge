@@ -1,0 +1,10 @@
+Name:Riot Gear
+ManaCost:2
+Types:Artifact Equipment
+Text:no text
+K:Equip 2
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$ 2 | Description$ Equipped creature gets +1/+2.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/riot_gear.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/236.jpg
+End

@@ -1,0 +1,11 @@
+Name:Massive Raid
+ManaCost:1 R R
+Types:Instant
+Text:no text
+A:SP$ DealDamage | Cost$ 1 R R | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ X | References$ X | SpellDescription$ CARDNAME deals damage to target creature or player equal to the number of creatures you control.
+SVar:X:Count$Valid Creature.YouCtrl
+SVar:RemRandomDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/massive_raid.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/100.jpg
+End

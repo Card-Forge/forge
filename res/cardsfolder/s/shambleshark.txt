@@ -1,0 +1,11 @@
+Name:Shambleshark
+ManaCost:G U
+Types:Creature Fish Crab
+Text:no text
+PT:2/1
+K:Flash
+K:Evolve
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shambleshark.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/193.jpg
+End

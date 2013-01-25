@@ -155,7 +155,7 @@ def initSets():
 	
 	# Return to Ravnica
 	allSets['Return to Ravnica']='RTR'
-	#allSets['Gatecrash']='GTC'
+	allSets['Gatecrash']='GTC'
 	#allSets['Dragon\'s Maze']='DGM'
 
 def addSets(card):

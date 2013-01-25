@@ -1,0 +1,10 @@
+Name:Shielded Passage
+ManaCost:W
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ W | KW$ HIDDEN Prevent all damage that would be dealt to CARDNAME. | ValidTgts$ Creature | TgtPrompt$ Select target creature | SpellDescription$ Prevent all damage that would be dealt to target creature this turn.
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/shielded_passage.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/24.jpg
+End

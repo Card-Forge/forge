@@ -1,0 +1,12 @@
+Name:Fortress Cyclops
+ManaCost:3 R W
+Types:Creature Cyclops Soldier
+Text:no text
+PT:3/3
+T:Mode$ Attacks | ValidCard$ Card.Self | Execute$ TrigPumpAttack | TriggerDescription$ Whenever CARDNAME attacks, it gets +3/+0 until end of turn.
+SVar:TrigPumpAttack:AB$Pump | Cost$ 0 | Defined$ Self | NumAtt$ 3
+T:Mode$ Blocks | ValidCard$ Card.Self | Execute$ TrigPumpBlock | TriggerDescription$ Whenever CARDNAME blocks, it gets +0/+3 until end of turn.
+SVar:TrigPumpBlock:AB$Pump | Cost$ 0 | Defined$ Self | NumDef$ 3
+SVar:Picture:http://www.wizards.com/global/images/magic/general/fortress_cyclops.jpg
+SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/164.jpg
+End

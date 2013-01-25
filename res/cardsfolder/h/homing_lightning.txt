@@ -1,0 +1,10 @@
+Name:Homing Lightning
+ManaCost:2 R R
+Types:Instant
+Text:no text
+A:SP$ DealDamage | Cost$ 2 R R | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumDmg$ 4 | SubAbility$ DamageSame | SpellDescription$ CARDNAME deals 4 damage to target creature and to each other creature with the same name as that creature.
+SVar:DamageSame:DB$ DamageAll | ValidCards$ Targeted.sameName+Other | ValidDescription$ each other creature with the same name as that creature. | NumDmg$ 4
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/homing_lightning.jpg
+SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/96.jpg
+End

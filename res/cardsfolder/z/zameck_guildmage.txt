@@ -1,0 +1,13 @@
+Name:Zameck Guildmage
+ManaCost:G U
+Types:Creature Elf Wizard
+Text:no text
+PT:2/2
+A:AB$ Effect | Cost$ G U | Name$ Zameck Guildmage Effect | ReplacementEffects$ ExtraETBCounter | SVars$ AddExtraCounter,MoveToBattlefield | SpellDescription$ This turn, each creature you control enters the battlefield with an additional +1/+1 counter on it.
+SVar:ExtraETBCounter:Event$ Moved | ActiveZones$ Command | Destination$ Battlefield | ValidCard$ Creature.YouCtrl | ReplaceWith$ AddExtraCounter | Description$ This turn, each creature you control enters the battlefield with an additional +1/+1 counter on it.
+SVar:AddExtraCounter:AB$ PutCounter | Cost$ 0 | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ MoveToBattlefield
+SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
+A:AB$ Draw |Cost$ G U SubCounter<1/P1P1/Creature.YouCtrl/Creature you Control> | Defined$ You | NumCards$ 1 | SpellDescription$ Draw a card.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/zameck_guildmage.jpg
+SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/209.jpg
+End

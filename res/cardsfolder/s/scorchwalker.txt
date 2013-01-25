@@ -1,0 +1,10 @@
+Name:Skinbrand Goblin
+ManaCost:3 R
+Types:Creature Elemental
+Text:no text
+PT:5/1
+A:AB$ Pump | Cost$ 1 R R Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ Bloodrush - | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumAtt$ +5 | NumDef$ +1 | SpellDescription$ Target attacking creature gets +5/+1 until end of turn.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/scorchwalker.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/105.jpg
+End

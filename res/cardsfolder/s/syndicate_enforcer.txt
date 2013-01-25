@@ -1,0 +1,10 @@
+Name:Syndicate Enforcer
+ManaCost:3 B
+Types:Creature Human Rogue
+Text:no text
+PT:3/2
+K:Extort
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/syndicate_enforcer.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/80.jpg
+End

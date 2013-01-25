@@ -1,0 +1,12 @@
+Name:Duskmantle Guildmage
+ManaCost:U B
+Types:Creature Human Wizard
+Text:no text
+PT:2/2
+A:AB$ Effect | Cost$ 1 U B | Name$ Duskmantle Guildmage Effect | Triggers$ DuskmantleCardToGrave | SVars$ TrigLoseLife | SpellDescription$ Whenever a card is put into an opponent's graveyard from anywhere this turn, that player loses 1 life.
+SVar:DuskmantleCardToGrave:Mode$ ChangesZone | Origin$ Any | Destination$ Graveyard | ValidCard$ Card.nonToken+OppOwn | TriggerZones$ Command | Execute$ TrigLoseLife | TriggerDescription$ Whenever a card is put into an opponent's graveyard from anywhere this turn, that player loses 1 life.
+SVar:TrigLoseLife:AB$ LoseLife | Cost$ 0 | Defined$ TriggeredCardOwner | LifeAmount$ 1
+A:AB$ Mill | Cost$ 2 U B | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Choose a player | SpellDescription$ Target player puts the top two cards of his or her library into his or her graveyard.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/duskmantle_guildmage.jpg
+SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/158.jpg
+End

@@ -1,0 +1,11 @@
+Name:Pit Fight
+ManaCost:1 RG
+Types:Instant
+Text:no text
+A:SP$ Pump | Cost$ 1 RG | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Choose target creature you control | SubAbility$ DBPitFight | StackDescription$ None | SpellDescription$ Target creature you control fights another target creature.
+SVar:DBPitFight:DB$ Fight | Defined$ ParentTarget | ValidTgts$ Creature | TargetUnique$ True | TgtPrompt$ Choose target creature to fight the first target
+SVar:RemAIDeck:True
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/pit_fight.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/223.jpg
+End

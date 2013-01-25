@@ -1,0 +1,11 @@
+Name:Illness in the Ranks
+ManaCost:B
+Types:Enchantment
+Text:no text
+S:Mode$ Continuous | Affected$ Creature.token | AddPower$ -1 | AddToughness$ -1 | Description$ Creature tokens get -1/-1.
+SVar:PlayMain1:TRUE
+SVar:RemRandomDeck:True
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/illness_in_the_ranks.jpg
+SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/69.jpg
+End

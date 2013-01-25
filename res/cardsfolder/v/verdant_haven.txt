@@ -1,0 +1,14 @@
+Name:Verdant Haven
+ManaCost:2 G
+Types:Enchantment Aura
+Text:no text
+K:Enchant land
+A:SP$ Attach | Cost$ 1 G | ValidTgts$ Land | AILogic$ Pump
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigGainLife | TriggerDescription$ When CARDNAME enters the battlefield, you gain 2 life.
+SVar:TrigGainLife:AB$ GainLife | Cost$ 0 | LifeAmount$ 2
+T:Mode$ TapsForMana | ValidCard$ Card.AttachedBy | Execute$ TrigMana | Static$ True | TriggerDescription$ Whenever enchanted land is tapped for mana, its controller adds one mana of any color to his or her mana pool (in addition to the mana the land produces).
+SVar:TrigMana:AB$Mana | Cost$ 0 | Produced$ Any | Amount$ 1 | Defined$ TriggeredCardController
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/verdant_haven.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/138.jpg
+End

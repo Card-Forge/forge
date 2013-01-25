@@ -1,0 +1,9 @@
+Name:Zhur-Taa Swine
+ManaCost:3 R G
+Types:Creature Boar
+Text:no text
+PT:5/4
+A:AB$ Pump | Cost$ 1 R G Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ Bloodrush | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumAtt$ +5 | NumDef$ +4 | SpellDescription$ Target attacking creature gets +5/+4 until end of turn.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/zhur_taa_swine.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/210.jpg
+End

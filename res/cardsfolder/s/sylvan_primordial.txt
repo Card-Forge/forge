@@ -1,0 +1,15 @@
+Name:Sylvan Primordial
+ManaCost:5 G G
+Types:Creature Avatar
+Text:no text
+PT:6/8
+K:Reach
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ DestroyOneEach | TriggerDescription$ When CARDNAME enters the battlefield, for each opponent, destroy target noncreature permanent that player controls. For each permanent destroyed this way, search your library for a Forest card and put that card onto the battlefield tapped. Then shuffle your library.
+SVar:DestroyOneEach:AB$ Destroy | Cost$ 0 | ValidTgts$ Permanent.nonCreature+OppCtrl | TgtPrompt$ Select a noncreature permanent each opponent controls. | TargetMin$ 0 | TargetMax$ OneEach | References$ OneEach | TargetsWithDifferentControllers$ True | RememberDestroyed$ True | SubAbility$ GetForests
+SVar:GetForests:DB$ ChangeZone | Origin$ Library | Destination$ Battlefield | ChangeType$ Forest | ChangeNum$ X | Tapped$ True | References$ X | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:X:Remembered$Amount
+SVar:OneEach:PlayerCountOpponents$Amount
+SVar:Picture:http://www.wizards.com/global/images/magic/general/sylvan_primordial.jpg
+SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/136.jpg
+End

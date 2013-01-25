@@ -1,0 +1,11 @@
+Name:Smog Elemental
+ManaCost:4 B B
+Types:Creature Elemental
+Text:no text
+PT:3/3
+K:Flying
+S:Mode$ Continuous | Affected$ Creature.withFlying+OppCtrl | AddPower$ -1 | AddToughness$ -1 | Description$ Creatures with flying your opponents control get -1/-1.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/smog_elemental.jpg
+SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/79.jpg
+End

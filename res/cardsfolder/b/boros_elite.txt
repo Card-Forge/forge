@@ -1,0 +1,11 @@
+Name:Boros Elite
+ManaCost:W
+Types:Creature Human Soldier
+Text:no text
+PT:1/1
+T:Mode$ Attacks | ValidCard$ Card.Self | TriggerZones$ Battlefield | CheckSVar$ BattalionTest | SVarCompare$ GE2 | Execute$ TrigBattalionPump | TriggerDescription$ Battalion - Whenever CARDNAME and at least two other creatures attack, CARDNAME gets +2/+2 until end of turn.
+SVar:TrigBattalionPump:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2 | NumDef$ 2
+SVar:BattalionTest:Count$Valid Creature.attacking+Other
+SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_elite.jpg
+SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/7.jpg
+End

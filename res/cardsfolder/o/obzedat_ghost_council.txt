@@ -1,0 +1,19 @@
+Name:Obzedat, Ghost Council
+ManaCost:1 W W B B
+Types:Legendary Creature Spirit Advisor
+Text:no text
+PT:5/5
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigDrain | TriggerDescription$ When CARDNAME enters the battlefield, target opponent loses 2 life and you gain 2 life.
+SVar:TrigDrain:AB$ LoseLife | Cost$ 0 | ValidTgts$ Opponent | LifeAmount$ 2 | SubAbility$ DBGainLife
+SVar:DBGainLife:DB$ GainLife | Defined$ You | LifeAmount$ 2
+T:Mode$ Phase | Phase$ End of Turn | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigExile | OptionalDecider$ You | TriggerDescription$ At the beginning of your end step you may exile CARDNAME. If you do, return it to the battlefield under it's owner's control at the beginning of your next upkeep. It gains haste.
+SVar:TrigExile:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield | Destination$ Exile | SubAbility$ DBDelaytrig
+SVar:DBDelaytrig:DB$ Effect | Name$ Obzedat Effect | Triggers$ TrigEOT | SVars$ ObzedatReturn,ObzedatPump,ObzedatCleanup | References$ TrigEOT,ObzedatReturn,ObzedatPump,ObzedatCleanup | RememberObjects$ Self | Duration$ Permanent
+SVar:TrigEOT:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | Execute$ ObzedatReturn | TriggerDescription$ Return CARDNAME to the battlefield under it's owner's control. It gains haste.
+SVar:ObzedatReturn:AB$ ChangeZone | Cost$ 0 | Defined$ Remembered | Origin$ Exile | Destination$ Battlefield | SubAbility$ ObzedatPump
+SVar:ObzedatPump:DB$ Pump | Defined$ Remembered | KW$ Haste | Permanent$ True | SubAbility$ ObzedatCleanup
+SVar:ObzedatCleanup:DB$ ChangeZone | Defined$ Self | Origin$ Command | Destination$ Exile
+SVar:Rarity:Mythic
+SVar:Picture:http://www.wizards.com/global/images/magic/general/obzedat_ghost_council.jpg
+SetInfo:GTC|Mythic|http://magiccards.info/scans/en/gtc/182.jpg
+End

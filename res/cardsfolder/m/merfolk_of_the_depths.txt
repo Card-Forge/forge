@@ -1,0 +1,10 @@
+Name:Merfolk of the Depths
+ManaCost:4 GU GU
+Types:Creature Merfolk Soldier
+Text:no text
+PT:4/2
+K:Flash
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/merfolk_of_the_depths.jpg
+SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/221.jpg
+End

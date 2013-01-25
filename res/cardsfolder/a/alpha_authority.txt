@@ -1,0 +1,11 @@
+Name:Alpha Authority
+ManaCost:1 G
+Types:Enchantment Aura
+Text:no text
+K:Enchant creature
+A:SP$ Attach | Cost$ 1 G | ValidTgts$ Creature | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Hexproof | AddHiddenKeyword$ CARDNAME can't be blocked by more than one creature. | Description$ Enchanted creature has hexproof and can't be blocked by more than one creature.
+SVar:Rarity:Uncommon
+SVar:Picture:http://www.wizards.com/global/images/magic/general/alpha_authority.jpg
+SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/114.jpg
+End

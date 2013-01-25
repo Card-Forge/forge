@@ -1,0 +1,11 @@
+Name:Boros Guildgate
+ManaCost:no cost
+Types:Land Gate
+Text:no text
+K:CARDNAME enters the battlefield tapped.
+A:AB$ Mana | Cost$ T | Produced$ W | SpellDescription$ Add W to your mana pool.
+A:AB$ Mana | Cost$ T | Produced$ R | SpellDescription$ Add R to your mana pool.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_guildgate.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/239.jpg
+End

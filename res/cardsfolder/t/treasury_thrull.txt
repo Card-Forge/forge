@@ -1,0 +1,12 @@
+Name:Treasury Thrull
+ManaCost:4 W B
+Types:Creature Thrull
+Text:no text
+PT:4/4
+K:Extort
+T:Mode$ Attacks | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigBounce | TriggerDescription$ Whenever CARDNAME attacks, you may return target artifact, creature, or enchantment card from your graveyard to your hand.
+SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Artifact.YouOwn,Creature.YouOwn,Enchantment.YouOwn | Origin$ Graveyard | Destination$ Hand
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/treasury_thrull.jpg
+SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/201.jpg
+End

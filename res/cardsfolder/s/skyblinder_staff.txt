@@ -1,0 +1,10 @@
+Name:Skyblinder Staff
+ManaCost:1
+Types:Artifact Equipment
+Text:no text
+K:Equip 3
+S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddHiddenKeyword$ CantBeBlockedBy Creature.withFlying | Description$ Equipped creature can't be blocked by creatures with flying.
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skyblinder_staff.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/238.jpg
+End

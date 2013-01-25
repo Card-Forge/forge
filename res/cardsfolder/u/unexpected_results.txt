@@ -1,0 +1,13 @@
+Name:Unexpected Results
+ManaCost:2 G U
+Types:Sorcery
+Text:no text
+A:SP$ Shuffle | Cost$ 2 G U | Defined$ You | SubAbility$ RevealCard | SpellDescription$ Shuffle your libary, then reveal the top card. If it's a nonland card, you may cast it without paying it's mana cost. If it's a land card, you may put it onto the battlefield and return Unexpected Results to its owner's hand.
+SVar:RevealCard:DB$ Dig | Defined$ You | DigNum$ 1 | Reveal$ True | RememberRevealed$ True | NoMove$ True | SubAbility$ CastCard
+SVar:CastCard:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | Optional$ True | ConditionDefined$ Remembered | ConditionPresent$ Card.nonLand | ConditionCompare$ EQ1 | SubAbility$ MoveLand
+SVar:MoveLand:DB$ ChangeZone | Defined$ Remembered | Origin$ Library | Destination$ Battlefield | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ConditionCompare$ EQ1 | SubAbility$ MoveSelf
+SVar:MoveSelf:DB$ ChangeZone | Defined$ Self | Origin$ Stack | Destination$ Hand | ConditionDefined$ Remembered | ConditionPresent$ Card.Land | ConditionCompare$ EQ1 | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/unexpected_results.jpg
+SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/203.jpg
+End

@@ -1,0 +1,10 @@
+Name:Call of the Nightwing
+ManaCost:2 U B
+Types:Sorcery
+Text:no text
+A:SP$ Token | Cost$ 2 U B | TokenAmount$ 1 | TokenName$ Horror | TokenTypes$ Creature,Horror | TokenOwner$ You | TokenColors$ Blue,Black | TokenPower$ 1 | TokenToughness$ 1 | TokenKeywords$ Flying | SubAbility$ Cipher | SpellDescription$ Put a 1/1/ blue and black Horror creature token with flying onto the battlefield. Cipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)
+SVar:Cipher:DB$ Encode | Defined$ Self | ConditionCheckSVar$ IsEncoded | ConditionSVarCompare$ EQ0
+SVar:IsEncoded:Number$0
+SVar:Picture:http://www.wizards.com/global/images/magic/general/call_of_the_nightwing.jpg
+SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/149.jpg
+End

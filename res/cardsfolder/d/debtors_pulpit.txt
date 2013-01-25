@@ -1,0 +1,11 @@
+Name:Debtor's Pulpit
+ManaCost:4 W
+Types:Enchantment Aura
+Text:no text
+K:Enchant land
+A:SP$ Attach | Cost$ 4 W | ValidTgts$ Land | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ DPTapCreature | Description$ Enchanted land has "T: Tap target creature."
+SVar:DPTapCreature:AB$ Tap | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Choose target creature.| SpellDescription$ Tap target creature.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/debtors_pulpit.jpg
+SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/10.jpg
+End

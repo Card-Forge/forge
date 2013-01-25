@@ -1,0 +1,11 @@
+Name:Hands of Binding
+ManaCost:1 U
+Types:Sorcery
+Text:no text
+A:SP$ Tap | Cost$ 1 U | ValidTgts$ Creature | SubAbility$ DBPump | SpellDescription$ Tap target creature an opponent controls. That creature doesn't untap during its controller's next untap step. Cipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)
+SVar:DBPump:DB$ Pump | Cost$ 0 | Defined$ Targeted | KW$ HIDDEN This card doesn't untap during your next untap step. | Permanent$ True | SubAbility$ Cipher
+SVar:Cipher:DB$ Encode | Defined$ Self | ConditionCheckSVar$ IsEncoded | ConditionSVarCompare$ EQ0
+SVar:IsEncoded:Number$0
+SVar:Picture:http://www.wizards.com/global/images/magic/general/hands_of_binding.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/37.jpg
+End

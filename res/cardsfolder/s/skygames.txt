@@ -1,0 +1,11 @@
+Name:Skygames
+ManaCost:1 U
+Types:Enchantment Aura
+Text:no text
+K:Enchant land
+A:SP$ Attach | Cost$ 1 U | ValidTgts$ Land | AILogic$ Pump
+S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ DPTapCreature | Description$ Enchanted land has "Tap: Target creature gains flying until end of turn. Activate this ability only any time you could cast a sorcery."
+SVar:DPTapCreature:AB$ Pump | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Choose target creature. | KW$ Flying | SorcerySpeed$ True | SpellDescription$ Target creature gains flying until end of turn. Activate this ability only any time you could cast a sorcery.
+SVar:Picture:http://www.wizards.com/global/images/magic/general/skygames.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/51.jpg
+End

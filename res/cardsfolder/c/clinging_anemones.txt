@@ -1,0 +1,11 @@
+Name:Clinging Anemones
+ManaCost:3 U
+Types:Creature Jellyfish
+Text:no text
+PT:1/4
+K:Defender
+K:Evolve
+SVar:Rarity:Common
+SVar:Picture:http://www.wizards.com/global/images/magic/general/clinging_anemones.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/31.jpg
+End
