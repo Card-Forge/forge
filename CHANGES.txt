@@ -136,6 +136,29 @@ Fixes/Features:
 - Technical improvements to the new challenge rewards code.
 - Added "InEnchantedYard" (used in Death's Approach)
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Changed the Jamuraa challenge rewards to use the new features.
+- Replaced the Beta rewards with Unlimited Edition.
+- myk patch 1.2 - refactoring of filter enums as per Max mtg's suggestions
+- myk patch 2: reapply card filters on deck editor controller change (issue 652)
+- myk patch 3: make deck editor columns resizable; fix NPE when tables are empty and header is clicked
+- patch 4: fix filter checkboxes not wrapping on initial display (issue 653)
+- myk patch 5: save/restore state of quest plant/pet widgets
+* saved quest data when pet settings are modified
+* moved the selectedPets map from QuestController to QuestData (since it now gets persisted); also renamed it petSlots for clarity
+* incremented the quest file format version
+* added code to bring older file formats up to date
+* finally, while researching how the data is saved, I noticed that saveData() can be called from multiple threads. I made the method synchronized to prevent file corruption
+- AI separation from game: playSpellAbilities does not play them, only choice is made.
+- InputControl is invariant of player type
+- forge.game.ai created - just a small step towards AI isolation
+- Moved some methods from ComputerUtil to AiController, made them instanced (non-static)
+- renamed AiAttackController
+- AiController returns a single SA to play.
+- fixed payment for cards with 2/Color (eg Reaper King)
+- Fixed Cursebreak
+- Fixed cardname of AEtherize
+- updates to handle Glaring spotlight
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -166,6 +189,8 @@ Mutual Epiphany
 Added the following cards:
 
 Lairwatch Giant
+Shimatsu the Bloodcloaked
+Parallectric Feedback
 
 
 Added the following new Gatecrash cards to the Gatecrash branch. These cards are not yet available for in game use.:
@@ -392,6 +417,8 @@ Midnight Recovery
 Shadow Slice
 Death's Approach
 Dying Wish
+Master Biomancer
+Glaring Spotlight
 
 
 end
