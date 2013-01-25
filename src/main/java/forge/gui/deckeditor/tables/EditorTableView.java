@@ -18,6 +18,9 @@
 package forge.gui.deckeditor.tables;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -25,6 +28,9 @@ import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -49,7 +55,7 @@ import forge.util.Aggregates;
 public final class EditorTableView<T extends InventoryItem> {
     private ItemPool<T> pool;
     private EditorTableModel<T> model;
-    private final JTable table = new JTable();
+    private final JTable table;
     private Predicate<T> filter = null;
     private boolean wantUnique = false;
     private boolean alwaysNonUnique = false;
@@ -83,14 +89,69 @@ public final class EditorTableView<T extends InventoryItem> {
      *            a boolean
      * @param type0 the cls
      */
+    @SuppressWarnings("serial")
     public EditorTableView(final boolean forceUnique, final Class<T> type0) {
         this.genericType = type0;
         this.wantUnique = forceUnique;
 
+        // subclass JTable to show tooltips when hovering over column headers
+        // and cell data that are truncated due to too-small column widths
+        table = new JTable() {
+            private String _getCellTooltip(
+                    TableCellRenderer renderer, int row, int col, Object val) {
+                Component headerComp =
+                        renderer.getTableCellRendererComponent(
+                                table, val, false, false, row, col);
+                int requiredWidth = headerComp.getPreferredSize().width;
+
+                // if there's enough room (or there's no value), no tooltip
+                // we use '>' here instead of '>=' since that seems to be the
+                // threshold for where the ellipses appear for the default
+                // JTable renderer
+                TableColumn tableColumn = columnModel.getColumn(col);
+                if (null == val || tableColumn.getWidth() > requiredWidth) {
+                    return null;
+                }
+                
+                // otherwise, show the full text in the tooltip
+                return String.valueOf(val);
+            }
+            
+            // column headers
+            @Override
+            protected JTableHeader createDefaultTableHeader() {
+                return new JTableHeader(columnModel) {
+                    public String getToolTipText(MouseEvent e) {
+                        int col = columnModel.getColumnIndexAtX(e.getPoint().x);
+                        TableColumn tableColumn = columnModel.getColumn(col);
+                        TableCellRenderer headerRenderer = tableColumn.getHeaderRenderer();
+                        if (null == headerRenderer) {
+                            headerRenderer = getDefaultRenderer();
+                        }
+                        
+                        return _getCellTooltip(
+                                headerRenderer, -1, col, tableColumn.getHeaderValue());
+                    }
+                };
+            }
+            
+            // cell data
+            @Override
+            public String getToolTipText(MouseEvent e) {
+                Point p = e.getPoint();
+                int row = rowAtPoint(p);
+                int col = columnAtPoint(p);
+                Object val = table.getValueAt(row, col);
+
+                return _getCellTooltip(getCellRenderer(row, col), row, col, val);
+            }
+        };
+        
         table.setFont(FSkin.getFont(12));
         table.setBorder(null);
         table.getTableHeader().setBorder(null);
         table.setRowHeight(18);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
     }
 
     /**
