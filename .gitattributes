@@ -7265,6 +7265,7 @@ res/cardsfolder/p/parallax_inhibitor.txt svneol=native#text/plain
 res/cardsfolder/p/parallax_nexus.txt -text
 res/cardsfolder/p/parallax_tide.txt svneol=native#text/plain
 res/cardsfolder/p/parallax_wave.txt svneol=native#text/plain
+res/cardsfolder/p/parallectric_feedback.txt -text
 res/cardsfolder/p/parallel_evolution.txt svneol=native#text/plain
 res/cardsfolder/p/parallel_lives.txt -text
 res/cardsfolder/p/paralyzing_grasp.txt svneol=native#text/plain
@@ -9007,6 +9008,7 @@ res/cardsfolder/s/shifting_sky.txt -text
 res/cardsfolder/s/shifting_sliver.txt svneol=native#text/plain
 res/cardsfolder/s/shifting_wall.txt svneol=native#text/plain
 res/cardsfolder/s/shifty_doppelganger.txt -text svneol=unset#text/plain
+res/cardsfolder/s/shimatsu_the_bloodcloaked.txt -text
 res/cardsfolder/s/shimian_night_stalker.txt -text
 res/cardsfolder/s/shimian_specter.txt svneol=native#text/plain
 res/cardsfolder/s/shimmer.txt -text
