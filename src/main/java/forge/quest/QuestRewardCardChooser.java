@@ -67,6 +67,8 @@ public class QuestRewardCardChooser implements InventoryItem  {
                 String[] tmp = s.split(":");
                 if (tmp.length > 1) {
                     buildDesc = new String(tmp[1]);
+                } else {
+                    buildDesc = new String();
                 }
             } else if (buildDesc != null) {
                 if (s.contains(":")) {
