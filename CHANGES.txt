@@ -7,7 +7,7 @@ Forge Beta: 01-##-2013 ver 1.3.6
 11### cards in total.
 
 
-Many of the new Gatecrash cards are now scripted and are included in this snapshot build for you to playtest. It looks like 221 of the 249 cards are now implemented. Someone reported that 240 of 249 cards were implemented but our deck editor only reports 221 when sorted to inclue only the Gatecrash cards. :) This is a work in progress.
+Many of the new Gatecrash cards are now scripted and are included in this snapshot build for you to playtest. It looks like 240 of the 249 cards are now implemented. This includes cards that are new to Forge and cards that are reprints of existing cards. This is a work in progress.
 
 At this time Forge will only download the Gatecrash low quality pitures. The Gatecrash set pictures are not yet available and it may take a few weeks for the to become available.
 
