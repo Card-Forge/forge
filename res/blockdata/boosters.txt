@@ -28,6 +28,7 @@ Set:EXO|Commons:11|Uncommons:3|Rares:1
 Set:FEM|Commons:5|Uncommons:2|Rares:1
 Set:FUT|Commons:11|Uncommons:3|Rares:1
 Set:GPT|Commons:11|Uncommons:3|Rares:1
+Set:GTC|Commons:10|Uncommons:3|Rares:1
 Set:HML|Commons:6|Uncommons:2
 Set:ICE|Commons:11|Uncommons:3|Rares:1
 Set:INV|Commons:11|Uncommons:3|Rares:1

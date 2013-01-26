@@ -49,3 +49,4 @@ Index:43|Set0:AVR|Name:Avacyn Restored|DraftPacks:3|LandSetCode:AVR|SealedPacks:
 Index:44|Set0:M13|Name:Magic 2013|DraftPacks:3|LandSetCode:M13|SealedPacks:6
 Index:45|Set0:RTR|Name:Return to Ravnica|DraftPacks:3|LandSetCode:RTR|SealedPacks:6
 Index:46|Set0:RTR|Set1:RTR|Set2:RTR|Set3:RTR|Set4:RTR|Meta0:CHOOSE1/CUBE/RtRGuildAzorius/Azorius Guild;CUBE/RtRGuildIzzet/Izzet Guild;CUBE/RtRGuildRakdos/Rakdos Guild;CUBE/RtRGuildGolgari/Golgari Guild;CUBE/RtRGuildSelesnya/Selesnya Guild/GUILD|Meta1:CHOOSE1/CUBE/RtRPromoAzorius/Azorius Guild;CUBE/RtRPromoIzzet/Izzet Guild;CUBE/RtRPromoRakdos/Rakdos Guild;CUBE/RtRPromoGolgari/Golgari Guild;CUBE/RtRPromoSelesnya/Selesnya Guild/PROMO|Name:Return to Ravnica Guild Sealed|DraftPacks:3|LandSetCode:RTR|SealedPacks:7
+Index:47|Set0:GTC|Name:Gatecrash|DraftPacks:3|LandSetCode:RTR|SealedPacks:6

@@ -46,3 +46,4 @@ Set:DKA|LandSet:ISD|Boosters:9|BasicLands:60
 Set:AVR|LandSet:AVR|Boosters:9|BasicLands:60
 Set:M13|LandSet:M13|Boosters:9|BasicLands:80
 Set:RTR|LandSet:RTR|Boosters:9|BasicLands:40
+Set:GTC|LandSet:RTR|Boosters:9|BasicLands:40
