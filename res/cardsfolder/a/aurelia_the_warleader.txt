@@ -11,4 +11,5 @@ SVar:TrigUntap:AB$ UntapAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | SubAbilit
 SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ BeginCombat | AfterPhase$ EndCombat
 SVar:PlayMain1:TRUE
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aurelia_the_warleader.jpg
+SetInfo:GTC|Mythic|http://magiccards.info/scans/en/gtc/143.jpg
 End

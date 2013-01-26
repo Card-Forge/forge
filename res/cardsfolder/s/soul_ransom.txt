@@ -8,4 +8,5 @@ A:AB$ Sacrifice | Cost$ Discard<2/Card> | AnyOpponent$ True | SacValid$ Self | S
 SVar:DBDraw:DB$ Draw | NumCards$ 2 | Defined$ SourceController
 SVar:RemAIDeck:True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_ransom.jpg
+SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/198.jpg
 End
