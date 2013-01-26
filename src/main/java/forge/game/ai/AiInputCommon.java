@@ -82,7 +82,8 @@ public class AiInputCommon extends Input {
         } else {
             switch(phase) {
                 case CLEANUP:
-                    computer.cleanupDiscard();
+                    if ( game.getPhaseHandler().getPlayerTurn() == player )
+                        computer.cleanupDiscard();
                     break;
 
                 case COMBAT_DECLARE_ATTACKERS:

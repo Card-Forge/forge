@@ -57,7 +57,7 @@ public class HumanPlayer extends Player {
         super(player, game, new PlayerController(game));
         getController().setDefaultInput(new InputPassPriority());
         getController().setBlockInput(new InputBlock(this));
-        getController().setCleanupInput(new InputCleanup());
+        getController().setCleanupInput(new InputCleanup(game));
     }
 
     // //////////////

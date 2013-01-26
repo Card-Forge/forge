@@ -19,6 +19,7 @@ package forge.control.input;
 
 import forge.Card;
 import forge.Singletons;
+import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -36,19 +37,28 @@ import forge.view.ButtonUtil;
 public class InputCleanup extends Input {
     /** Constant <code>serialVersionUID=-4164275418971547948L</code>. */
     private static final long serialVersionUID = -4164275418971547948L;
+    private final GameState game;
+    
+    /**
+     * TODO: Write javadoc for Constructor.
+     * @param game
+     */
+    public InputCleanup(GameState game) {
+        super();
+        this.game = game;
+    }
 
     /** {@inheritDoc} */
     @Override
     public final void showMessage() {
-        final Player active = Singletons.getModel().getGame().getPhaseHandler().getPriorityPlayer();
+        final Player active = game.getPhaseHandler().getPriorityPlayer();
+        final Player turnOwner = game.getPhaseHandler().getPlayerTurn();
 
         final int n = active.getCardsIn(ZoneType.Hand).size();
         final int max = active.getMaxHandSize();
         // goes to the next phase
-        if (active.isUnlimitedHandSize() || n <= max || n <= 0) {
+        if (active.isUnlimitedHandSize() || n <= max || n <= 0 || active != turnOwner) {
             active.getController().passPriority();
-            
-            
             return;
         }
         ButtonUtil.disableAll();
