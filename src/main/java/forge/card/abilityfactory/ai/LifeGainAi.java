@@ -10,10 +10,10 @@ import forge.card.cost.Cost;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
-import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.util.MyRandom;
@@ -67,7 +67,7 @@ public class LifeGainAi extends SpellAiLogic {
             return false;
         }
         boolean lifeCritical = life <= 5;
-        lifeCritical |= (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DAMAGE) && CombatUtil
+        lifeCritical |= (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DAMAGE) && ComputerUtilCombat
                 .lifeInDanger(ai, Singletons.getModel().getGame().getCombat()));
 
         if (abCost != null && !lifeCritical) {

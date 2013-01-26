@@ -140,15 +140,15 @@ public class AiAttackController {
     public final boolean isEffectiveAttacker(final Player ai, final Card attacker, final Combat combat) {
 
         // if the attacker will die when attacking don't attack
-        if ((attacker.getNetDefense() + CombatUtil.predictToughnessBonusOfAttacker(attacker, null, combat, true)) <= 0) {
+        if ((attacker.getNetDefense() + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, null, combat, true)) <= 0) {
             return false;
         }
 
         final Player opp = ai.getOpponent();
-        if (CombatUtil.damageIfUnblocked(attacker, opp, combat) > 0) {
+        if (ComputerUtilCombat.damageIfUnblocked(attacker, opp, combat) > 0) {
             return true;
         }
-        if (CombatUtil.poisonIfUnblocked(attacker, opp) > 0) {
+        if (ComputerUtilCombat.poisonIfUnblocked(attacker, opp) > 0) {
             return true;
         }
         if (this.attackers.size() == 1 && attacker.hasKeyword("Exalted")) {
@@ -158,7 +158,7 @@ public class AiAttackController {
         final List<Card> controlledByCompy = ai.getCardsIn(ZoneType.STATIC_ABILITIES_SOURCE_ZONES);
         for (final Card c : controlledByCompy) {
             for (final Trigger trigger : c.getTriggers()) {
-                if (CombatUtil.combatTriggerWillTrigger(attacker, null, trigger, combat)) {
+                if (ComputerUtilCombat.combatTriggerWillTrigger(attacker, null, trigger, combat)) {
                     return true;
                 }
             }
@@ -350,8 +350,8 @@ public class AiAttackController {
                 blockersLeft--;
                 continue;
             }
-            totalAttack += CombatUtil.damageIfUnblocked(attacker, ai, null);
-            totalPoison += CombatUtil.poisonIfUnblocked(attacker, ai);
+            totalAttack += ComputerUtilCombat.damageIfUnblocked(attacker, ai, null);
+            totalPoison += ComputerUtilCombat.poisonIfUnblocked(attacker, ai);
         }
 
         if (totalAttack > 0 && ai.getLife() <= totalAttack
@@ -425,12 +425,12 @@ public class AiAttackController {
         }
         unblockedAttackers.addAll(remainingAttackers);
 
-        if ((CombatUtil.sumDamageIfUnblocked(remainingAttackers, opp) >= opp.getLife())
+        if ((ComputerUtilCombat.sumDamageIfUnblocked(remainingAttackers, opp) >= opp.getLife())
                 && !((opp.cantLoseForZeroOrLessLife() || ai.cantWin()) && (opp.getLife() < 1))) {
             return true;
         }
 
-        if (CombatUtil.sumPoisonIfUnblocked(remainingAttackers, opp) >= (10 - opp.getPoisonCounters())) {
+        if (ComputerUtilCombat.sumPoisonIfUnblocked(remainingAttackers, opp) >= (10 - opp.getPoisonCounters())) {
             return true;
         }
 
@@ -621,7 +621,7 @@ public class AiAttackController {
             if (CombatUtil.canAttackNextTurn(pCard)) {
                 candidateAttackers.add(pCard);
                 if (pCard.getNetCombatDamage() > 0) {
-                    candidateUnblockedDamage += CombatUtil.damageIfUnblocked(pCard, opp, null);
+                    candidateUnblockedDamage += ComputerUtilCombat.damageIfUnblocked(pCard, opp, null);
                     computerForces += 1;
                 }
 
@@ -717,7 +717,7 @@ public class AiAttackController {
                 }
             }
             if (isUnblockableCreature) {
-                unblockableDamage += CombatUtil.damageIfUnblocked(attacker, opp, combat);
+                unblockableDamage += ComputerUtilCombat.damageIfUnblocked(attacker, opp, combat);
             }
         }
         for (final Card attacker : nextTurnAttackers) {
@@ -731,7 +731,7 @@ public class AiAttackController {
                 }
             }
             if (isUnblockableCreature) {
-                nextUnblockableDamage += CombatUtil.damageIfUnblocked(attacker, opp, null);
+                nextUnblockableDamage += ComputerUtilCombat.damageIfUnblocked(attacker, opp, null);
             }
         }
         if (unblockableDamage > 0 && !opp.cantLoseForZeroOrLessLife()
@@ -785,7 +785,7 @@ public class AiAttackController {
         for (int i = 0; i < attackersLeft.size(); i++) {
             final Card attacker = attackersLeft.get(i);
             if (this.aiAggression < 5 && !attacker.hasFirstStrike() && !attacker.hasDoubleStrike()
-                    && CombatUtil.getTotalFirstStrikeBlockPower(attacker, ai.getOpponent())
+                    && ComputerUtilCombat.getTotalFirstStrikeBlockPower(attacker, ai.getOpponent())
                     >= attacker.getKillDamage()) {
                 continue;
             }
@@ -803,7 +803,7 @@ public class AiAttackController {
                     CardLists.sortAttackLowFirst(attacking);
                     for (Card atta : attacking) {
                         if (attackNum >= blockNum || !CombatUtil.canBeBlocked(attacker, this.blockers)) {
-                            damage += CombatUtil.damageIfUnblocked(atta, opp, null);
+                            damage += ComputerUtilCombat.damageIfUnblocked(atta, opp, null);
                         } else if (CombatUtil.canBeBlocked(attacker, this.blockers)) {
                             attackNum++;
                         }
@@ -901,7 +901,7 @@ public class AiAttackController {
             if ((isWorthLessThanAllKillers || canKillAllDangerous || numberOfPossibleBlockers < 2)
                     && CombatUtil.canBlock(attacker, defender)) {
                 numberOfPossibleBlockers += 1;
-                if (isWorthLessThanAllKillers && CombatUtil.canDestroyAttacker(attacker, defender, combat, false)
+                if (isWorthLessThanAllKillers && ComputerUtilCombat.canDestroyAttacker(attacker, defender, combat, false)
                         && !(attacker.hasKeyword("Undying") && attacker.getCounters(CounterType.P1P1) == 0)) {
                     canBeKilledByOne = true; // there is a single creature on
                                              // the battlefield that can kill
@@ -915,7 +915,7 @@ public class AiAttackController {
                 }
                 // see if this attacking creature can destroy this defender, if
                 // not record that it can't kill everything
-                if (canKillAllDangerous && !CombatUtil.canDestroyBlocker(defender, attacker, combat, false)) {
+                if (canKillAllDangerous && !ComputerUtilCombat.canDestroyBlocker(defender, attacker, combat, false)) {
                     canKillAll = false;
                     if (!canKillAllDangerous) {
                         continue;

@@ -13,6 +13,7 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtil;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
@@ -90,7 +91,7 @@ public class PumpAllAi extends PumpAiBase {
                     totalPower += Math.min(c.getNetAttack(), power * -1);
                     if (phase == PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY
                             && Singletons.getModel().getGame().getCombat().getUnblockedAttackers().contains(c)) {
-                        if (CombatUtil.lifeInDanger(sa.getActivatingPlayer(), Singletons.getModel().getGame().getCombat())) {
+                        if (ComputerUtilCombat.lifeInDanger(sa.getActivatingPlayer(), Singletons.getModel().getGame().getCombat())) {
                             return true;
                         }
                         totalPower += Math.min(c.getNetAttack(), power * -1);

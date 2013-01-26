@@ -13,8 +13,8 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
-import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -68,13 +68,13 @@ public class DamagePreventAi extends SpellAiLogic {
                     for (final Object o : objects) {
                         if (o instanceof Card) {
                             final Card c = (Card) o;
-                            flag |= CombatUtil.combatantWouldBeDestroyed(c);
+                            flag |= ComputerUtilCombat.combatantWouldBeDestroyed(c);
                         } else if (o instanceof Player) {
                             // Don't need to worry about Combat Damage during AI's turn
                             final Player p = (Player) o;
                             if (!handler.isPlayerTurn(p)) {
-                                flag |= (p.isComputer() && ((CombatUtil.wouldLoseLife(ai, Singletons.getModel().getGame().getCombat()) && sa
-                                        .isAbility()) || CombatUtil.lifeInDanger(ai, Singletons.getModel().getGame().getCombat())));
+                                flag |= (p.isComputer() && ((ComputerUtilCombat.wouldLoseLife(ai, Singletons.getModel().getGame().getCombat()) && sa
+                                        .isAbility()) || ComputerUtilCombat.lifeInDanger(ai, Singletons.getModel().getGame().getCombat())));
                             }
                         }
                     }
@@ -117,8 +117,8 @@ public class DamagePreventAi extends SpellAiLogic {
 
         } // Protect combatants
         else if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
-            if (sa.canTarget(ai) && CombatUtil.wouldLoseLife(ai, Singletons.getModel().getGame().getCombat())
-                    && (CombatUtil.lifeInDanger(ai, Singletons.getModel().getGame().getCombat()) || sa.isAbility())
+            if (sa.canTarget(ai) && ComputerUtilCombat.wouldLoseLife(ai, Singletons.getModel().getGame().getCombat())
+                    && (ComputerUtilCombat.lifeInDanger(ai, Singletons.getModel().getGame().getCombat()) || sa.isAbility())
                     && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai.getOpponent())) {
                 tgt.addTarget(ai);
                 chance = true;
@@ -134,7 +134,7 @@ public class DamagePreventAi extends SpellAiLogic {
                 CardLists.sortByEvaluateCreature(combatants);
 
                 for (final Card c : combatants) {
-                    if (CombatUtil.combatantWouldBeDestroyed(c)) {
+                    if (ComputerUtilCombat.combatantWouldBeDestroyed(c)) {
                         tgt.addTarget(c);
                         chance = true;
                         break;
@@ -195,7 +195,7 @@ public class DamagePreventAi extends SpellAiLogic {
             CardLists.sortByEvaluateCreature(combatants);
             if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 for (final Card c : combatants) {
-                    if (CombatUtil.combatantWouldBeDestroyed(c)) {
+                    if (ComputerUtilCombat.combatantWouldBeDestroyed(c)) {
                         tgt.addTarget(c);
                         return true;
                     }

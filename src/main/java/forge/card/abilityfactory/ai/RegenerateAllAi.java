@@ -11,8 +11,8 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
+import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
-import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -68,7 +68,7 @@ public class RegenerateAllAi extends SpellAiLogic {
                 final List<Card> combatants = CardLists.filter(list, CardPredicates.Presets.CREATURES);
 
                 for (final Card c : combatants) {
-                    if (c.getShield() == 0 && CombatUtil.combatantWouldBeDestroyed(c)) {
+                    if (c.getShield() == 0 && ComputerUtilCombat.combatantWouldBeDestroyed(c)) {
                         numSaved++;
                     }
                 }

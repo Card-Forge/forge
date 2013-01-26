@@ -13,6 +13,7 @@ import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCombat;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
@@ -72,10 +73,10 @@ public class MustBlockAi extends SpellAiLogic {
                     if (!CombatUtil.canBlock(definedAttacker, c)) {
                         return false;
                     }
-                    if (CombatUtil.canDestroyAttacker(definedAttacker, c, null, false)) {
+                    if (ComputerUtilCombat.canDestroyAttacker(definedAttacker, c, null, false)) {
                         return false;
                     }
-                    if (!CombatUtil.canDestroyBlocker(c, definedAttacker, null, false)) {
+                    if (!ComputerUtilCombat.canDestroyBlocker(c, definedAttacker, null, false)) {
                         return false;
                     }
                     c.setTapped(tapped);

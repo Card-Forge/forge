@@ -4,7 +4,7 @@ package forge.card.abilityfactory.ai;
 import forge.Singletons;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
-import forge.game.phase.CombatUtil;
+import forge.game.ai.ComputerUtilCombat;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 
@@ -34,7 +34,7 @@ public class FogAi extends SpellAiLogic {
         }
 
         // Cast it if life is in danger
-        return CombatUtil.lifeInDanger(ai, Singletons.getModel().getGame().getCombat());
+        return ComputerUtilCombat.lifeInDanger(ai, Singletons.getModel().getGame().getCombat());
     }
 
     @Override

@@ -1006,7 +1006,7 @@ public class ComputerUtil {
                 }
             }
             combat = ComputerUtilBlock.getBlockers(ai, combat, ai.getCreaturesInPlay());
-            if (!CombatUtil.lifeInDanger(ai, combat)) {
+            if (!ComputerUtilCombat.lifeInDanger(ai, combat)) {
                 // Otherwise, return false. Do not play now.
                 ret = false;
             }

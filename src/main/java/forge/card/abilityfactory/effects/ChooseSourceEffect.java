@@ -14,7 +14,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityStackInstance;
 import forge.card.spellability.Target;
-import forge.game.phase.CombatUtil;
+import forge.game.ai.ComputerUtilCombat;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -178,7 +178,7 @@ public class ChooseSourceEffect extends SpellEffect {
                                         if (!c.isAttacking(ai) || !Singletons.getModel().getGame().getCombat().isUnblocked(c)) {
                                             return false;
                                         }
-                                        return CombatUtil.damageIfUnblocked(c, ai, Singletons.getModel().getGame().getCombat()) > 0;
+                                        return ComputerUtilCombat.damageIfUnblocked(c, ai, Singletons.getModel().getGame().getCombat()) > 0;
                                     }
                                 });
                                 chosen.add(CardFactoryUtil.getBestCreatureAI(sourcesToChooseFrom));

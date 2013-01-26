@@ -13,6 +13,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.GameState;
+import forge.game.ai.ComputerUtilCombat;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
@@ -50,7 +51,7 @@ public class EffectAi extends SpellAiLogic {
                 if (game.getPhaseHandler().isPreventCombatDamageThisTurn()) {
                     return false;
                 }
-                if (!CombatUtil.lifeInDanger(ai, game.getCombat())) {
+                if (!ComputerUtilCombat.lifeInDanger(ai, game.getCombat())) {
                     return false;
                 }
                 final Target tgt = sa.getTarget();

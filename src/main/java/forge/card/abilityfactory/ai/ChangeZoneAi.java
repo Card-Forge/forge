@@ -30,12 +30,12 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.game.GlobalRuleChange;
+import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilBlock;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.Combat;
-import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -495,7 +495,7 @@ public class ChangeZoneAi extends SpellAiLogic {
         }
         combat = ComputerUtilBlock.getBlockers(ai, combat, ai.getCreaturesInPlay());
 
-        if (CombatUtil.lifeInDanger(ai, combat)) {
+        if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
             // need something AI can cast now
             CardLists.sortByEvaluateCreature(list);
             for (Card c : list) {
@@ -741,7 +741,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                     CardLists.sortByEvaluateCreature(combatants);
 
                     for (final Card c : combatants) {
-                        if (c.getShield() == 0 && CombatUtil.combatantWouldBeDestroyed(c) && !c.getOwner().isHuman() && !c.isToken()) {
+                        if (c.getShield() == 0 && ComputerUtilCombat.combatantWouldBeDestroyed(c) && !c.getOwner().isHuman() && !c.isToken()) {
                             tgt.addTarget(c);
                             return true;
                         }

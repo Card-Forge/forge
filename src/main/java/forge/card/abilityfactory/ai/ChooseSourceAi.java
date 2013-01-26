@@ -14,8 +14,8 @@ import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
-import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -112,7 +112,7 @@ public class ChooseSourceAi extends SpellAiLogic {
                         if (!c.isAttacking(ai) || !Singletons.getModel().getGame().getCombat().isUnblocked(c)) {
                             return false;
                         }
-                        return CombatUtil.damageIfUnblocked(c, ai, Singletons.getModel().getGame().getCombat()) > 0;
+                        return ComputerUtilCombat.damageIfUnblocked(c, ai, Singletons.getModel().getGame().getCombat()) > 0;
                     }
                 });
                 if (choices.isEmpty()) {

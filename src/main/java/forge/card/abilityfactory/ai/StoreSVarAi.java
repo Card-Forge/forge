@@ -4,8 +4,8 @@ import forge.Card;
 import forge.Singletons;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
+import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtil;
-import forge.game.phase.CombatUtil;
 import forge.game.player.Player;
 
 public class StoreSVarAi extends SpellAiLogic {
@@ -16,7 +16,7 @@ public class StoreSVarAi extends SpellAiLogic {
 
         final Card source = sa.getSourceCard();
         if (ComputerUtil.waitForBlocking(sa) || ai.getLife() + 1 >= source.getNetDefense()
-                || (ai.getLife() > 5 && !CombatUtil.lifeInSeriousDanger(ai, Singletons.getModel().getGame().getCombat()))) {
+                || (ai.getLife() > 5 && !ComputerUtilCombat.lifeInSeriousDanger(ai, Singletons.getModel().getGame().getCombat()))) {
             return false;
         }
 

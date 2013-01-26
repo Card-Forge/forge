@@ -15,8 +15,8 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
-import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -90,14 +90,14 @@ public class ProtectAi extends SpellAiLogic {
                 // is the creature blocking and unable to destroy the attacker
                 // or would be destroyed itself?
                 if (c.isBlocking()
-                        && (CombatUtil.blockerWouldBeDestroyed(c))) {
+                        && (ComputerUtilCombat.blockerWouldBeDestroyed(c))) {
                     return true;
                 }
 
                 // is the creature in blocked and the blocker would survive
                 if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
                         && Singletons.getModel().getGame().getCombat().isAttacking(c) && Singletons.getModel().getGame().getCombat().isBlocked(c)
-                        && CombatUtil.blockerWouldBeDestroyed(Singletons.getModel().getGame().getCombat().getBlockers(c).get(0))) {
+                        && ComputerUtilCombat.blockerWouldBeDestroyed(Singletons.getModel().getGame().getCombat().getBlockers(c).get(0))) {
                     return true;
                 }
 

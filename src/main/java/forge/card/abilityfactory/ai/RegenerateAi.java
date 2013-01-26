@@ -31,8 +31,8 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
-import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseType;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
@@ -95,7 +95,7 @@ public class RegenerateAi extends SpellAiLogic {
 
                     for (final Card c : list) {
                         if (c.getShield() == 0) {
-                            flag |= CombatUtil.combatantWouldBeDestroyed(c);
+                            flag |= ComputerUtilCombat.combatantWouldBeDestroyed(c);
                         }
                     }
 
@@ -139,7 +139,7 @@ public class RegenerateAi extends SpellAiLogic {
                     CardLists.sortByEvaluateCreature(combatants);
 
                     for (final Card c : combatants) {
-                        if ((c.getShield() == 0) && CombatUtil.combatantWouldBeDestroyed(c)) {
+                        if ((c.getShield() == 0) && ComputerUtilCombat.combatantWouldBeDestroyed(c)) {
                             tgt.addTarget(c);
                             chance = true;
                             break;
@@ -190,7 +190,7 @@ public class RegenerateAi extends SpellAiLogic {
             CardLists.sortByEvaluateCreature(combatants);
             if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 for (final Card c : combatants) {
-                    if ((c.getShield() == 0) && CombatUtil.combatantWouldBeDestroyed(c)) {
+                    if ((c.getShield() == 0) && ComputerUtilCombat.combatantWouldBeDestroyed(c)) {
                         tgt.addTarget(c);
                         return true;
                     }
