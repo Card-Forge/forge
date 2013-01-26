@@ -1,8 +1,9 @@
-Name:Arrow of Justice
+Name:Arrows of Justice
 ManaCost:2 RW
 Types:Instant
 Text:no text
 A:SP$ DealDamage | Cost$ 2 RW | ValidTgts$ Creature.attacking,Creature.blocking | TgtPrompt$ Select target attacking or blocking creature | NumDmg$ 4 | SpellDescription$ CARDNAME deals 4 damage to target attacking or blocking creature.
 SVar:Rarity:Uncommon
-SVar:Picture:http://www.wizards.com/global/images/magic/general/arrow_of_justice.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/arrows_of_justice.jpg
+SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/211.jpg
 End

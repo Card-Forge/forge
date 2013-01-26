@@ -506,8 +506,8 @@ res/cardsfolder/a/arrest.txt svneol=native#text/plain
 res/cardsfolder/a/arrogant_bloodlord.txt svneol=native#text/plain
 res/cardsfolder/a/arrogant_vampire.txt svneol=native#text/plain
 res/cardsfolder/a/arrogant_wurm.txt svneol=native#text/plain
-res/cardsfolder/a/arrow_of_justice.txt -text
 res/cardsfolder/a/arrow_volley_trap.txt svneol=native#text/plain
+res/cardsfolder/a/arrows_of_justice.txt -text
 res/cardsfolder/a/arsenal_thresher.txt -text
 res/cardsfolder/a/artful_dodge.txt -text
 res/cardsfolder/a/artifact_blast.txt svneol=native#text/plain
@@ -4810,6 +4810,7 @@ res/cardsfolder/h/hisokas_defiance.txt svneol=native#text/plain
 res/cardsfolder/h/hisokas_guard.txt svneol=native#text/plain
 res/cardsfolder/h/hissing_iguanar.txt svneol=native#text/plain
 res/cardsfolder/h/hissing_miasma.txt svneol=native#text/plain
+res/cardsfolder/h/hive_mind.txt -text
 res/cardsfolder/h/hivestone.txt svneol=native#text/plain
 res/cardsfolder/h/hivis_of_the_scale.txt svneol=native#text/plain
 res/cardsfolder/h/hoar_shade.txt svneol=native#text/plain
