@@ -185,11 +185,13 @@ public final class SColumnUtil {
         SColumnUtil.getColumn(ColumnName.CAT_POWER).setCellRenderer(new IntegerRenderer());
         SColumnUtil.getColumn(ColumnName.CAT_TOUGHNESS).setCellRenderer(new IntegerRenderer());
         SColumnUtil.getColumn(ColumnName.CAT_CMC).setCellRenderer(new IntegerRenderer());
+        SColumnUtil.getColumn(ColumnName.CAT_SET).setCellRenderer(new SetCodeRenderer());
 
         SColumnUtil.getColumn(ColumnName.DECK_COST).setCellRenderer(new ManaCostRenderer());
         SColumnUtil.getColumn(ColumnName.DECK_POWER).setCellRenderer(new IntegerRenderer());
         SColumnUtil.getColumn(ColumnName.DECK_TOUGHNESS).setCellRenderer(new IntegerRenderer());
         SColumnUtil.getColumn(ColumnName.DECK_CMC).setCellRenderer(new IntegerRenderer());
+        SColumnUtil.getColumn(ColumnName.DECK_SET).setCellRenderer(new SetCodeRenderer());
     }
 
     /**

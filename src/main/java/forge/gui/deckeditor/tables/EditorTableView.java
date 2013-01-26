@@ -24,6 +24,7 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Map.Entry;
 
+import javax.swing.JComponent;
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -99,20 +100,35 @@ public final class EditorTableView<T extends InventoryItem> {
         table = new JTable() {
             private String _getCellTooltip(
                     TableCellRenderer renderer, int row, int col, Object val) {
-                Component headerComp =
-                        renderer.getTableCellRendererComponent(
-                                table, val, false, false, row, col);
-                int requiredWidth = headerComp.getPreferredSize().width;
-
-                // if there's enough room (or there's no value), no tooltip
-                // we use '>' here instead of '>=' since that seems to be the
-                // threshold for where the ellipses appear for the default
-                // JTable renderer
-                TableColumn tableColumn = columnModel.getColumn(col);
-                if (null == val || tableColumn.getWidth() > requiredWidth) {
-                    return null;
-                }
+                Component cell = renderer.getTableCellRendererComponent(
+                                        table, val, false, false, row, col);
                 
+                // if we're conditionally showing the tooltip, check to see
+                // if we shouldn't show it
+                if (!(cell instanceof AlwaysShowToolTip))
+                {
+                    // if there's enough room (or there's no value), no tooltip
+                    // we use '>' here instead of '>=' since that seems to be the
+                    // threshold for where the ellipses appear for the default
+                    // JTable renderer
+                    int requiredWidth = cell.getPreferredSize().width;
+                    TableColumn tableColumn = columnModel.getColumn(col);
+                    if (null == val || tableColumn.getWidth() > requiredWidth) {
+                        return null;
+                    }
+                }
+
+                // use a pre-set tooltip if it exists
+                if (cell instanceof JComponent)
+                {
+                    JComponent jcell = (JComponent)cell;
+                    String tip = jcell.getToolTipText();
+                    if (null != tip)
+                    {
+                        return tip;
+                    }
+                }
+
                 // otherwise, show the full text in the tooltip
                 return String.valueOf(val);
             }
