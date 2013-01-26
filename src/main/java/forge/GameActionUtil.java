@@ -77,6 +77,325 @@ import forge.util.MyRandom;
  */
 public final class GameActionUtil {
 
+    
+    /** 
+     * TODO: Write javadoc for this type.
+     *
+     */
+    private static final class AbilityDestroy extends Ability {
+        private final Card affected;
+        private final boolean canRegenerate;
+
+        public AbilityDestroy(Card sourceCard, Card affected, boolean canRegenerate) {
+            super(sourceCard, SpellManaCost.ZERO);
+            this.affected = affected;
+            this.canRegenerate = canRegenerate;
+        }
+
+        @Override
+        public void resolve() {
+            final GameState game = Singletons.getModel().getGame(); 
+            if ( canRegenerate )
+                game.getAction().destroy(affected);
+            else
+                game.getAction().destroyNoRegeneration(affected);
+        }
+    }
+
+    private static final class CascadeAbility extends Ability {
+        private final Player controller;
+        private final Card cascCard;
+
+        /**
+         * TODO: Write javadoc for Constructor.
+         * @param sourceCard
+         * @param manaCost
+         * @param controller
+         * @param cascCard
+         */
+        private CascadeAbility(Card sourceCard, SpellManaCost manaCost, Player controller, Card cascCard) {
+            super(sourceCard, manaCost);
+            this.controller = controller;
+            this.cascCard = cascCard;
+        }
+
+        @Override
+        public void resolve() {
+            final GameState game = Singletons.getModel().getGame(); 
+            final List<Card> topOfLibrary = controller.getCardsIn(ZoneType.Library);
+            final List<Card> revealed = new ArrayList<Card>();
+
+            if (topOfLibrary.size() == 0) {
+                return;
+            }
+
+            Card cascadedCard = null;
+            Card crd;
+            int count = 0;
+            while (cascadedCard == null) {
+                crd = topOfLibrary.get(count++);
+                revealed.add(crd);
+                if ((!crd.isLand() && (crd.getManaCost().getCMC() < cascCard.getManaCost().getCMC()))) {
+                    cascadedCard = crd;
+                }
+
+                if (count == topOfLibrary.size()) {
+                    break;
+                }
+
+            } // while
+            GuiChoose.oneOrNone("Revealed cards:", revealed);
+
+            if (cascadedCard != null) {
+                Player p = cascadedCard.getController();
+
+                if (p.isHuman()) {
+                    final StringBuilder title = new StringBuilder();
+                    title.append(cascCard.getName()).append(" - Cascade Ability");
+                    final StringBuilder question = new StringBuilder();
+                    question.append("Cast ").append(cascadedCard.getName());
+                    question.append(" without paying its mana cost?");
+
+                    final int answer = JOptionPane.showConfirmDialog(null, question.toString(),
+                            title.toString(), JOptionPane.YES_NO_OPTION);
+
+                    if (answer == JOptionPane.YES_OPTION) {
+                        game.getAction().playCardWithoutManaCost(cascadedCard, p);
+                        revealed.remove(cascadedCard);
+                    }
+                } else {
+                    final List<SpellAbility> choices = cascadedCard.getBasicSpells();
+
+                    for (final SpellAbility sa : choices) {
+                        sa.setActivatingPlayer(p);
+                        //Spells
+                        if (sa instanceof Spell) {
+                            Spell spell = (Spell) sa;
+                            if (!spell.canPlayFromEffectAI(false, true)) {
+                                continue;
+                            }
+                        } else {
+                            if (!sa.canPlayAI()) {
+                                continue;
+                            }
+                        }
+                        ComputerUtil.playSpellAbilityWithoutPayingManaCost(p, sa, game);
+                        revealed.remove(cascadedCard);
+                        break;
+                    }
+                }
+            }
+            CardLists.shuffle(revealed);
+            for (final Card bottom : revealed) {
+                game.getAction().moveToBottomOfLibrary(bottom);
+            }
+        }
+    }
+
+    private static final class CascadeExecutor implements Command {
+        private final Card c;
+        private final GameState game;
+        private final Player controller;
+        
+        private static final long serialVersionUID = -845154812215847505L;
+
+        /**
+         * TODO: Write javadoc for Constructor.
+         * @param controller
+         * @param c
+         */
+        private CascadeExecutor(Player controller, Card c, final GameState game) {
+            this.controller = controller;
+            this.c = c;
+            this.game = game;
+        }
+
+        @Override
+        public void execute() {
+            if (!c.isCopiedSpell()) {
+                final List<Card> maelstromNexii = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Maelstrom Nexus"));
+
+                for (final Card nexus : maelstromNexii) {
+                    if (CardUtil.getThisTurnCast("Card.YouCtrl", nexus).size() == 1) {
+                        this.doCascade(c, controller);
+                    }
+                }
+            }
+
+            for (String keyword : c.getKeyword()) {
+                if (keyword.equals("Cascade")) {
+                    this.doCascade(c, controller);
+                }
+            }
+        } // execute()
+
+        void doCascade(final Card c, final Player controller) {
+            final Card cascCard = c;
+
+            final Ability ability = new CascadeAbility(c, SpellManaCost.ZERO, controller, cascCard);
+            final StringBuilder sb = new StringBuilder();
+            sb.append(c).append(" - Cascade.");
+            ability.setStackDescription(sb.toString());
+            ability.setActivatingPlayer(controller);
+
+            game.getStack().addSimultaneousStackEntry(ability);
+
+        }
+    }
+    
+    /** 
+     * TODO: Write javadoc for this type.
+     *
+     */
+    private static final class RippleAbility extends Ability {
+        private final Player controller;
+        private final int rippleCount;
+        private final Card rippleCard;
+    
+        /**
+         * TODO: Write javadoc for Constructor.
+         * @param sourceCard
+         * @param manaCost
+         * @param controller
+         * @param rippleCount
+         * @param rippleCard
+         */
+        private RippleAbility(Card sourceCard, SpellManaCost manaCost, Player controller, int rippleCount,
+                Card rippleCard) {
+            super(sourceCard, manaCost);
+            this.controller = controller;
+            this.rippleCount = rippleCount;
+            this.rippleCard = rippleCard;
+        }
+    
+        @Override
+        public void resolve() {
+            final GameState game = Singletons.getModel().getGame();
+            final List<Card> topOfLibrary = controller.getCardsIn(ZoneType.Library);
+            final List<Card> revealed = new ArrayList<Card>();
+            int rippleNumber = rippleCount;
+            if (topOfLibrary.size() == 0) {
+                return;
+            }
+    
+            // Shouldn't Have more than Ripple 10, seeing as no
+            // cards exist with a ripple greater than 4
+            final int rippleMax = 10;
+            final Card[] rippledCards = new Card[rippleMax];
+            Card crd;
+            if (topOfLibrary.size() < rippleNumber) {
+                rippleNumber = topOfLibrary.size();
+            }
+    
+            for (int i = 0; i < rippleNumber; i++) {
+                crd = topOfLibrary.get(i);
+                revealed.add(crd);
+                if (crd.getName().equals(rippleCard.getName())) {
+                    rippledCards[i] = crd;
+                }
+            } // for
+            GuiChoose.oneOrNone("Revealed cards:", revealed);
+            for (int i = 0; i < rippleMax; i++) {
+                if (rippledCards[i] != null) {
+                    Player p = rippledCards[i].getController();
+    
+                    if (p.isHuman()) {
+                        final Object[] possibleValues = { "Yes", "No" };
+                        final Object q = JOptionPane.showOptionDialog(null,
+                                "Cast " + rippledCards[i].getName() + "?", "Ripple",
+                                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
+                                possibleValues, possibleValues[0]);
+                        if (q.equals(0)) {
+                            game.getAction().playCardWithoutManaCost(rippledCards[i], p);
+                            revealed.remove(rippledCards[i]);
+                        }
+                    } else {
+                        final List<SpellAbility> choices = rippledCards[i].getBasicSpells();
+    
+                        for (final SpellAbility sa : choices) {
+                          //Spells
+                            if (sa instanceof Spell) {
+                                Spell spell = (Spell) sa;
+                                if (!spell.canPlayFromEffectAI(false, true)) {
+                                    continue;
+                                }
+                            } else {
+                                if (!sa.canPlayAI() && !sa.getSourceCard().isType("Legendary")) {
+                                    continue;
+                                }
+                            }
+                            ComputerUtil.playSpellAbilityWithoutPayingManaCost(p, sa, game);
+                            revealed.remove(rippledCards[i]);
+                            break;
+                        }
+                    }
+                }
+            }
+            CardLists.shuffle(revealed);
+            for (final Card bottom : revealed) {
+                Singletons.getModel().getGame().getAction().moveToBottomOfLibrary(bottom);
+            }
+        }
+    
+    }
+
+    /** 
+     * TODO: Write javadoc for this type.
+     *
+     */
+    private static final class RippleExecutor implements Command {
+        private final Player controller;
+        private final Card c;
+        private static final long serialVersionUID = -845154812215847505L;
+
+        /**
+         * TODO: Write javadoc for Constructor.
+         * @param controller
+         * @param c
+         */
+        private RippleExecutor(Player controller, Card c) {
+            this.controller = controller;
+            this.c = c;
+        }
+
+        @Override
+        public void execute() {
+
+            final List<Card> thrummingStones = controller.getCardsIn(ZoneType.Battlefield, "Thrumming Stone");
+            for (int i = 0; i < thrummingStones.size(); i++) {
+                c.addExtrinsicKeyword("Ripple:4");
+            }
+
+            final ArrayList<String> a = c.getKeyword();
+            for (int x = 0; x < a.size(); x++) {
+                if (a.get(x).toString().startsWith("Ripple")) {
+                    final String parse = c.getKeyword().get(x).toString();
+                    final String[] k = parse.split(":");
+                    this.doRipple(c, Integer.valueOf(k[1]), controller);
+                }
+            }
+        } // execute()
+
+        void doRipple(final Card c, final int rippleCount, final Player controller) {
+            final Card rippleCard = c;
+            boolean activateRipple = false;
+            if (controller.isComputer() || GameActionUtil.showYesNoDialog(c, "Activate Ripple for " + c + "?")) {
+                    activateRipple = true;
+            }
+            if (activateRipple) {
+                final Ability ability = new RippleAbility(c, SpellManaCost.ZERO, controller, rippleCount, rippleCard);
+                final StringBuilder sb = new StringBuilder();
+                sb.append(c).append(" - Ripple.");
+                ability.setStackDescription(sb.toString());
+                ability.setDescription(sb.toString());
+                ability.setActivatingPlayer(controller);
+
+                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
+
+            }
+        }
+    }
+
     private GameActionUtil() {
         throw new AssertionError();
     }
@@ -92,254 +411,12 @@ public final class GameActionUtil {
     public static void executePlayCardEffects(final SpellAbility sa) {
         // (called in MagicStack.java)
 
-        GameActionUtil.playCardCascade(sa);
-        GameActionUtil.playCardRipple(sa);
-    }
-
-    /**
-     * <p>
-     * playCardCascade.
-     * </p>
-     * 
-     * @param sa
-     *            a SpellAbility object.
-     */
-    public static void playCardCascade(final SpellAbility sa) {
-        final Card c = sa.getSourceCard();
-        final Player controller = sa.getActivatingPlayer();
-        final Command cascade = new Command() {
-            private static final long serialVersionUID = -845154812215847505L;
-
-            @Override
-            public void execute() {
-
-                if (!c.isCopiedSpell()) {
-                    final List<Card> maelstromNexii = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Maelstrom Nexus"));
-
-                    for (final Card nexus : maelstromNexii) {
-                        if (CardUtil.getThisTurnCast("Card.YouCtrl", nexus).size() == 1) {
-                            this.doCascade(c, controller);
-                        }
-                    }
-                }
-
-                for (String keyword : c.getKeyword()) {
-                    if (keyword.equals("Cascade")) {
-                        this.doCascade(c, controller);
-                    }
-                }
-            } // execute()
-
-            void doCascade(final Card c, final Player controller) {
-                final Card cascCard = c;
-
-                final Ability ability = new Ability(c, SpellManaCost.ZERO) {
-                    @Override
-                    public void resolve() {
-                        final GameState game = Singletons.getModel().getGame();
-                        final List<Card> topOfLibrary = controller.getCardsIn(ZoneType.Library);
-                        final List<Card> revealed = new ArrayList<Card>();
-
-                        if (topOfLibrary.size() == 0) {
-                            return;
-                        }
-
-                        Card cascadedCard = null;
-                        Card crd;
-                        int count = 0;
-                        while (cascadedCard == null) {
-                            crd = topOfLibrary.get(count++);
-                            revealed.add(crd);
-                            if ((!crd.isLand() && (crd.getManaCost().getCMC() < cascCard.getManaCost().getCMC()))) {
-                                cascadedCard = crd;
-                            }
-
-                            if (count == topOfLibrary.size()) {
-                                break;
-                            }
-
-                        } // while
-                        GuiChoose.oneOrNone("Revealed cards:", revealed);
-
-                        if (cascadedCard != null) {
-                            Player p = cascadedCard.getController();
-
-                            if (p.isHuman()) {
-                                final StringBuilder title = new StringBuilder();
-                                title.append(cascCard.getName()).append(" - Cascade Ability");
-                                final StringBuilder question = new StringBuilder();
-                                question.append("Cast ").append(cascadedCard.getName());
-                                question.append(" without paying its mana cost?");
-
-                                final int answer = JOptionPane.showConfirmDialog(null, question.toString(),
-                                        title.toString(), JOptionPane.YES_NO_OPTION);
-
-                                if (answer == JOptionPane.YES_OPTION) {
-                                    game.getAction().playCardWithoutManaCost(cascadedCard, p);
-                                    revealed.remove(cascadedCard);
-                                }
-                            } else {
-                                final List<SpellAbility> choices = cascadedCard.getBasicSpells();
-
-                                for (final SpellAbility sa : choices) {
-                                    sa.setActivatingPlayer(p);
-                                    //Spells
-                                    if (sa instanceof Spell) {
-                                        Spell spell = (Spell) sa;
-                                        if (!spell.canPlayFromEffectAI(false, true)) {
-                                            continue;
-                                        }
-                                    } else {
-                                        if (!sa.canPlayAI()) {
-                                            continue;
-                                        }
-                                    }
-                                    ComputerUtil.playSpellAbilityWithoutPayingManaCost(p, sa, game);
-                                    revealed.remove(cascadedCard);
-                                    break;
-                                }
-                            }
-                        }
-                        CardLists.shuffle(revealed);
-                        for (final Card bottom : revealed) {
-                            game.getAction().moveToBottomOfLibrary(bottom);
-                        }
-                    }
-                };
-                final StringBuilder sb = new StringBuilder();
-                sb.append(c).append(" - Cascade.");
-                ability.setStackDescription(sb.toString());
-                ability.setActivatingPlayer(controller);
-
-                Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
-
-            }
-        };
+        final GameState game = Singletons.getModel().getGame(); 
+        final Command cascade = new CascadeExecutor(sa.getActivatingPlayer(), sa.getSourceCard(), game);
         cascade.execute();
-    } // end playCardCascade
-
-    /**
-     * <p>
-     * playCardRipple.
-     * </p>
-     * 
-     * @param sa
-     *            a SpellAbility object.
-     */
-    public static void playCardRipple(final SpellAbility sa) {
-        final Card c = sa.getSourceCard();
-        final Player controller = sa.getActivatingPlayer();
-        final Command ripple = new Command() {
-            private static final long serialVersionUID = -845154812215847505L;
-
-            @Override
-            public void execute() {
-
-                final List<Card> thrummingStones = controller.getCardsIn(ZoneType.Battlefield, "Thrumming Stone");
-                for (int i = 0; i < thrummingStones.size(); i++) {
-                    c.addExtrinsicKeyword("Ripple:4");
-                }
-
-                final ArrayList<String> a = c.getKeyword();
-                for (int x = 0; x < a.size(); x++) {
-                    if (a.get(x).toString().startsWith("Ripple")) {
-                        final String parse = c.getKeyword().get(x).toString();
-                        final String[] k = parse.split(":");
-                        this.doRipple(c, Integer.valueOf(k[1]), controller);
-                    }
-                }
-            } // execute()
-
-            void doRipple(final Card c, final int rippleCount, final Player controller) {
-                final Card rippleCard = c;
-                boolean activateRipple = false;
-                if (controller.isComputer() || GameActionUtil.showYesNoDialog(c, "Activate Ripple for " + c + "?")) {
-                        activateRipple = true;
-                }
-                if (activateRipple) {
-                    final Ability ability = new Ability(c, SpellManaCost.ZERO) {
-                        @Override
-                        public void resolve() {
-                            final GameState game = Singletons.getModel().getGame();
-                            final List<Card> topOfLibrary = controller.getCardsIn(ZoneType.Library);
-                            final List<Card> revealed = new ArrayList<Card>();
-                            int rippleNumber = rippleCount;
-                            if (topOfLibrary.size() == 0) {
-                                return;
-                            }
-
-                            // Shouldn't Have more than Ripple 10, seeing as no
-                            // cards exist with a ripple greater than 4
-                            final int rippleMax = 10;
-                            final Card[] rippledCards = new Card[rippleMax];
-                            Card crd;
-                            if (topOfLibrary.size() < rippleNumber) {
-                                rippleNumber = topOfLibrary.size();
-                            }
-
-                            for (int i = 0; i < rippleNumber; i++) {
-                                crd = topOfLibrary.get(i);
-                                revealed.add(crd);
-                                if (crd.getName().equals(rippleCard.getName())) {
-                                    rippledCards[i] = crd;
-                                }
-                            } // for
-                            GuiChoose.oneOrNone("Revealed cards:", revealed);
-                            for (int i = 0; i < rippleMax; i++) {
-                                if (rippledCards[i] != null) {
-                                    Player p = rippledCards[i].getController();
-
-                                    if (p.isHuman()) {
-                                        final Object[] possibleValues = { "Yes", "No" };
-                                        final Object q = JOptionPane.showOptionDialog(null,
-                                                "Cast " + rippledCards[i].getName() + "?", "Ripple",
-                                                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null,
-                                                possibleValues, possibleValues[0]);
-                                        if (q.equals(0)) {
-                                            game.getAction().playCardWithoutManaCost(rippledCards[i], p);
-                                            revealed.remove(rippledCards[i]);
-                                        }
-                                    } else {
-                                        final List<SpellAbility> choices = rippledCards[i].getBasicSpells();
-
-                                        for (final SpellAbility sa : choices) {
-                                          //Spells
-                                            if (sa instanceof Spell) {
-                                                Spell spell = (Spell) sa;
-                                                if (!spell.canPlayFromEffectAI(false, true)) {
-                                                    continue;
-                                                }
-                                            } else {
-                                                if (!sa.canPlayAI() && !sa.getSourceCard().isType("Legendary")) {
-                                                    continue;
-                                                }
-                                            }
-                                            ComputerUtil.playSpellAbilityWithoutPayingManaCost(p, sa, game);
-                                            revealed.remove(rippledCards[i]);
-                                            break;
-                                        }
-                                    }
-                                }
-                            }
-                            CardLists.shuffle(revealed);
-                            for (final Card bottom : revealed) {
-                                Singletons.getModel().getGame().getAction().moveToBottomOfLibrary(bottom);
-                            }
-                        }
-                    };
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append(c).append(" - Ripple.");
-                    ability.setStackDescription(sb.toString());
-                    ability.setDescription(sb.toString());
-                    ability.setActivatingPlayer(controller);
-
-                    Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
-
-                }
-            }
-        };
+        final Command ripple = new RippleExecutor(sa.getActivatingPlayer(), sa.getSourceCard());
         ripple.execute();
-    } // playCardRipple()
+    }
 
     /**
      * <p>
@@ -732,26 +809,14 @@ public final class GameActionUtil {
         }
 
         if (affected.hasStartOfKeyword("When CARDNAME is dealt damage, destroy it.")) {
-            final Ability ability = new Ability(source, SpellManaCost.ZERO) {
-                @Override
-                public void resolve() {
-                    Singletons.getModel().getGame().getAction().destroy(affected);
-                }
-            };
-
-            final Ability ability2 = new Ability(source, SpellManaCost.ZERO) {
-                @Override
-                public void resolve() {
-                    Singletons.getModel().getGame().getAction().destroyNoRegeneration(affected);
-                }
-            };
+            final Ability ability = new AbilityDestroy(source, affected, true);
+            final Ability ability2 = new AbilityDestroy(source, affected, false);
 
             final StringBuilder sb = new StringBuilder();
             sb.append(affected).append(" - destroy");
             ability.setStackDescription(sb.toString());
             ability2.setStackDescription(sb.toString());
-            final int amount = affected
-                    .getAmountOfKeyword("When CARDNAME is dealt damage, destroy it. It can't be regenerated.");
+            final int amount = affected.getAmountOfKeyword("When CARDNAME is dealt damage, destroy it. It can't be regenerated.");
 
             for (int i = 0; i < amount; i++) {
                 Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability2);
