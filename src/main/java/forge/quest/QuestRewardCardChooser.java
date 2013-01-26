@@ -120,7 +120,7 @@ public class QuestRewardCardChooser implements InventoryItem  {
                         for (String rule : ruleCodes) {
                             final Predicate<CardRules> newRule = BoosterUtils.parseRulesLimitation(rule);
                             if (newRule != null) {
-                                filterRules = (filterRules == null ? newRule : Predicates.or(filterRules, newRule));
+                                filterRules = (filterRules == null ? newRule : Predicates.and(filterRules, newRule));
                             }
                         }
                     }
