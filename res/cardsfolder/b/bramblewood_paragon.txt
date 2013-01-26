@@ -3,8 +3,9 @@ ManaCost:1 G
 Types:Creature Elf Warrior
 Text:no text
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Warrior+Other+YouCtrl |TriggerZones$ Battlefield | Execute$ TrigPutCounter | Static$ True | TriggerDescription$ Each other Warrior creature you control enters the battlefield with an additional +1/+1 counter on it.
-SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ TriggeredCard | CounterType$ P1P1 | CounterNum$ 1
+R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Battlefield | ValidCard$ Creature.Warrior+YouCtrl+Other | ReplaceWith$ AddExtraCounter | Description$ Each other Warrior creature you control enters the battlefield with an additional +1/+1 counter on it.
+SVar:AddExtraCounter:AB$ PutCounter | Cost$ 0 | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ MoveToBattlefield
+SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
 S:Mode$ Continuous | Affected$ Creature.YouCtrl+counters_GE1_P1P1 | AddKeyword$ Trample | Description$ Each creature you control with a +1/+1 counter on it has trample.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/bramblewood_paragon.jpg

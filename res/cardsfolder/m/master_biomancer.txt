@@ -3,9 +3,10 @@ ManaCost:2 G U
 Types:Creature Elf Wizard
 Text:no text
 PT:2/4
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Other+YouCtrl | TriggerZones$ Battlefield | Execute$ TrigPutCounter | Static$ True | TriggerDescription$ Each other creature you control enters the battlefield with a number of additional +1/+1 counters on it equal to Master Biomancer's power and as a Mutant in addition to its other types.
-SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | Defined$ TriggeredCard | CounterType$ P1P1 | CounterNum$ X | References$ X | SubAbility$ DBAnimate
-SVar:DBAnimate:DB$ Animate | Types$ Mutant | Permanent$ True | Defined$ TriggeredCard
+R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+Other | ReplaceWith$ AddExtraCounter | Description$ Each other creature you control enters the battlefield with a number of additional +1/+1 counters on it equal to CARDNAME's power and as a Mutant in addition to its other types.
+SVar:AddExtraCounter:AB$ PutCounter | Cost$ 0 | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ X | References$ X | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Types$ Mutant | Permanent$ True | Defined$ ReplacedCard | SubAbility$ MoveToBattlefield
+SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
 SVar:X:Count$CardPower
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/master_biomancer.jpg
