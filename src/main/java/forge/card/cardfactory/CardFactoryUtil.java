@@ -2877,6 +2877,12 @@ public class CardFactoryUtil {
             return num * -1;
         } else if (s[0].contains("Times")) {
             return num * secondaryNum;
+        } else if (s[0].contains("DivideEvenlyDown")) {
+            if (secondaryNum == 0) {
+                return 0;
+            } else {
+                return num / secondaryNum;
+            }
         } else if (s[0].contains("Mod")) {
             return num % secondaryNum;
         } else if (s[0].contains("LimitMax")) {

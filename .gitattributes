@@ -2898,6 +2898,7 @@ res/cardsfolder/d/dwarven_armory.txt svneol=native#text/plain
 res/cardsfolder/d/dwarven_berserker.txt svneol=native#text/plain
 res/cardsfolder/d/dwarven_blastminer.txt svneol=native#text/plain
 res/cardsfolder/d/dwarven_bloodboiler.txt svneol=native#text/plain
+res/cardsfolder/d/dwarven_catapult.txt -text
 res/cardsfolder/d/dwarven_demolition_team.txt svneol=native#text/plain
 res/cardsfolder/d/dwarven_driller.txt -text
 res/cardsfolder/d/dwarven_grunt.txt svneol=native#text/plain
