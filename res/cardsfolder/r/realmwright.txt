@@ -8,6 +8,6 @@ SVar:DBChooseBasic:AB$ ChooseType | Cost$ 0 | Type$ Basic Land
 S:Mode$ Continuous | Affected$ Land.YouCtrl | AddType$ ChosenType | Description$ Lands you control are the chosen type in addition to their other types.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
-SVar:Picture:http://www.wizards.com/global/images/magic/general/phantasmal_terrain.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/realmwright.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/45.jpg
 End
