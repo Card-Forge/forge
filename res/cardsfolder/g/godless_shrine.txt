@@ -5,5 +5,6 @@ Text:As CARDNAME enters the battlefield, you may pay 2 life. If you don't, CARDN
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/gpt/en-us/card96935.jpg
 SetInfo:GPT|Rare|http://magiccards.info/scans/en/gp/157.jpg
+SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/242.jpg
 Oracle:({T}: Add {W} or {B} to your mana pool.)\nAs Godless Shrine enters the battlefield, you may pay 2 life. If you don't, Godless Shrine enters the battlefield tapped.
 End

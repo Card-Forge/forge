@@ -5,5 +5,6 @@ Text:As CARDNAME enters the battlefield, you may pay 2 life. If you don't, CARDN
 SVar:Rarity:Rare
 SVar:Picture:http://resources.wizards.com/magic/cards/rav/en-us/card83731.jpg
 SetInfo:RAV|Rare|http://magiccards.info/scans/en/rav/286.jpg
+SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/249.jpg
 Oracle:({T}: Add {U} or {B} to your mana pool.)\nAs Watery Grave enters the battlefield, you may pay 2 life. If you don't, Watery Grave enters the battlefield tapped.
 End

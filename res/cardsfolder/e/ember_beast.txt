@@ -7,5 +7,6 @@ K:CARDNAME can't attack or block alone.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ember_beast.jpg
 SetInfo:ODY|Common|http://magiccards.info/scans/en/od/190.jpg
+SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/89.jpg
 Oracle:Ember Beast can't attack or block alone.
 End
