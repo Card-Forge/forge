@@ -2,8 +2,9 @@ Name:Cabal Conditioning
 ManaCost:6 B
 Types:Sorcery
 Text:no text
-A:SP$ Discard | Cost$ 6 B | ValidTgts$ Player | TgtPrompt$ Select target player | TargetMin$ 0 | TargetMax$ 2 | NumCards$ X | Mode$ TgtChoose | References$ X | SpellDescription$ Any number of target players each discard a number of cards equal to the highest converted mana cost among permanents you control.
+A:SP$ Discard | Cost$ 6 B | ValidTgts$ Player | TgtPrompt$ Select target player | TargetMin$ 0 | TargetMax$ MaxTgt | References$ MaxTgt | NumCards$ X | Mode$ TgtChoose | References$ X | SpellDescription$ Any number of target players each discard a number of cards equal to the highest converted mana cost among permanents you control.
 SVar:X:Count$MaxCMCYouCtrl
+SVar:MaxTgt:PlayerCountPlayers$Amount
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cabal_conditioning.jpg
 SetInfo:SCG|Rare|http://magiccards.info/scans/en/sc/56.jpg

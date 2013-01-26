@@ -2,7 +2,8 @@ Name:Hunters' Feast
 ManaCost:3 G
 Types:Sorcery
 Text:no text
-A:SP$ GainLife | Cost$ 3 G | ValidTgts$ Player | TgtPrompt$ Select target player | TargetMin$ 0 | TargetMax$ 2 | LifeAmount$ 6 | SpellDescription$ Any number of target players each gain 6 life.
+A:SP$ GainLife | Cost$ 3 G | ValidTgts$ Player | TgtPrompt$ Select target player | TargetMin$ 0 | TargetMax$ MaxTgt | References$ MaxTgt | LifeAmount$ 6 | SpellDescription$ Any number of target players each gain 6 life.
+SVar:MaxTgt:PlayerCountPlayers$Amount
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hunters_feast.jpg
 SetInfo:M11|Common|http://magiccards.info/scans/en/m11/182.jpg
