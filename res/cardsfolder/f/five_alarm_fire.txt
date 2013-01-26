@@ -6,6 +6,6 @@ T:Mode$ DamageDone | ValidSource$ Creature.YouCtrl | CombatDamage$ True | Execut
 SVar:TrigPutCounter:AB$ PutCounter | Cost$ 0 | CounterType$ BLAZE | CounterNum$ 1
 A:AB$ DealDamage | Cost$ SubCounter<5/BLAZE> | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | NumDmg$ 5 | SpellDescription$ CARDNAME deals 5 damage to target creature or player.
 SVar:Rarity:Rare
-SVar:Picture:http://www.wizards.com/global/images/magic/general/five_alarm_fire.jpg
+SVar:Picture:http://www.wizards.com/global/images/magic/general/five-alarm_fire.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/91.jpg
 End

@@ -21,7 +21,7 @@ Types:Legendary Creature Spirit
 Text:no text
 PT:5/2
 A:AB$ GainControl | Cost$ SubCounter<1/KI> | ValidTgts$ Creature | TgtPrompt$ Select target creature | LoseControl$ EOT | SpellDescription$ Gain control of target creature until end of turn.
-SVar:Picture:www.marc-fowler-design.com/cardforge/flippedcards/BOK/azamuki_treachery_incarnate.jpg
+SVar:Picture:http://www.marc-fowler-design.com/cardforge/flippedcards/BOK/azamuki_treachery_incarnate.jpg
 # This link may be a temporary solution and could change in the near future.
 SetInfo:BOK|Uncommon|http://magiccards.info/scans/en/bok/169.jpg
 Oracle:Remove a ki counter from Azamuki, Treachery Incarnate: Gain control of target creature until end of turn.
