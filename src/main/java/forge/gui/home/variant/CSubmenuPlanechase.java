@@ -145,8 +145,6 @@ public enum CSubmenuPlanechase implements ICDoc {
             @Override
             public Object doInBackground() {
 
-                boolean usedDefaults = false;
-
                 Lobby lobby = Singletons.getControl().getLobby();
                 MatchStartHelper helper = new MatchStartHelper();
                 List<Deck> playerDecks = new ArrayList<Deck>();
@@ -163,7 +161,7 @@ public enum CSubmenuPlanechase implements ICDoc {
     
                     List<CardPrinted> planes = null;
                     Object obj = view.getPlanarDeckLists().get(i).getSelectedValue();
-    
+
                     boolean useDefault = VSubmenuPlanechase.SINGLETON_INSTANCE.getCbUseDefaultPlanes().isSelected();
                     useDefault &= !playerDecks.get(i).getSideboard().isEmpty();
     
@@ -172,7 +170,6 @@ public enum CSubmenuPlanechase implements ICDoc {
     
                         planes = playerDecks.get(i).getSideboard().toFlatList();
                         System.out.println(planes.toString());
-                        usedDefaults = true;
     
                     } else {
     
@@ -203,7 +200,7 @@ public enum CSubmenuPlanechase implements ICDoc {
                         return null;
                     }
     
-                    if (usedDefaults) {
+                    if (useDefault) {
     
                         GameActionUtil.showInfoDialg("Player " + (i+1) + " will use a default planar deck.");
                     }
