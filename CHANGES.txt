@@ -7,7 +7,9 @@ Forge Beta: 01-##-2013 ver 1.3.6
 11### cards in total.
 
 
+Many of the new Gatecrash cards are now scripted and are included in this snapshot build for you to playtest. It looks like 221 of the 249 cards are now implemented. Someone reported that 240 of 249 cards were implemented but our deck editor only reports 221 when sorted to inclue only the Gatecrash cards. :) This is a work in progress.
 
+We have the start of a new Planechase game variant in place but this is not finished at this time.
 
 --
 
@@ -159,6 +161,34 @@ Fixes/Features:
 - Fixed cardname of AEtherize
 - updates to handle Glaring spotlight
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Arranging AI methods by functionality: move mana-related and cost-related methods to respective static CoupterUtilXXXX classes
+- Added more functionality to quest rewards, a second type of QuestRewardCardChooser that allows the player to select a card from a limited pool. The code is still somewhat experimental, if there are problems, let me know.
+- Undid accidental commit of an earlier QuestController.java.
+- Further minor fix.
+- show tooltips in the deck editor when narrow cells truncate their contents
+- merging r19137-19177 from Trunk into GTC branch
+- Merged revision(s) 19179-19184 from trunk/res/cardsfolder:
+- Reintegrated Gatecrash cardfolder branch into Trunk. Updated setdata.txt and setInfoScript.py for Gatecrash
+- passPriority is called from PlayerController, to avoid priority being passed by players who don't have it.
+- show explanatory tooltips for edition set abbreviations in the card editor
+- Made 5 cards ready for multiplayer
+- Minor cleanup of earlier commit; made variables final or unmodifiable where applicable.
+- Converted several cards with etb replacement effects
+- The rules predicated needs an AND, not an OR.
+- Added missing preset IS_LAND predicate parsing to BoosterUtils.
+- players won't be asked to discard in cleanup phase of other players
+- A QuestRewardCardChooser description can start with a space now.
+- Deck editors now use a single filechooser for import/export, one which filters out non-.dck files.
+- Made planechase submenu correctly report which players used a default planar deck.
+- Removed duplicate Planechase 2012 setdata entry
+- Made Fireball ready for multiplayer
+- removed old Target syntax (Tgt$)
+- in abilityFactory target parsing code extracted as a single method
+- due to getDefinedCards return type generalization, a lot of classes had to declare variables as List (not arraylist)
+- RippleAbility, CascadeAbility are now nested classes (previously they were inlined)
+- Fixed Arrows of Justice
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -191,9 +221,11 @@ Added the following cards:
 Lairwatch Giant
 Shimatsu the Bloodcloaked
 Parallectric Feedback
+Dwarven Catapult
+Hive Mind
 
 
-Added the following new Gatecrash cards to the Gatecrash branch. These cards are not yet available for in game use.:
+Added the following new Gatecrash cards:
 
 Aetherize
 Alms Beast
