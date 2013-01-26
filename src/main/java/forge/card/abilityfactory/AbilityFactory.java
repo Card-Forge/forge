@@ -109,9 +109,6 @@ public class AbilityFactory {
         boolean isSp = false;
         boolean isDb = false;
 
-        boolean isTargeted = false;
-        boolean hasValid = false;
-        Target abTgt = null;
         ApiType api = null;
 
         Card hostC = hostCard;
@@ -150,80 +147,14 @@ public class AbilityFactory {
 
         }
 
-        if (mapParams.containsKey("ValidTgts")) {
-            hasValid = true;
-            isTargeted = true;
-        }
-
-        if (mapParams.containsKey("Tgt")) {
-            isTargeted = true;
-        }
-
-        if (isTargeted) {
-            final String min = mapParams.containsKey("TargetMin") ? mapParams.get("TargetMin") : "1";
-            final String max = mapParams.containsKey("TargetMax") ? mapParams.get("TargetMax") : "1";
-
-            if (hasValid) {
-                // TgtPrompt now optional
-                final StringBuilder sb = new StringBuilder();
-                if (hostC != null) {
-                    sb.append(hostC + " - ");
-                }
-                final String prompt = mapParams.containsKey("TgtPrompt") ? mapParams.get("TgtPrompt")
-                        : "Select target " + mapParams.get("ValidTgts");
-                sb.append(prompt);
-                abTgt = new Target(hostC, sb.toString(), mapParams.get("ValidTgts").split(","), min, max);
-            } else {
-                // This will be removed after 1.3.5 is released
-                abTgt = new Target(hostC, mapParams.get("Tgt"), min, max);
-            }
-
-            if (mapParams.containsKey("TgtZone")) { // if Targeting
-                                                         // something
-                // not in play, this Key
-                // should be set
-                abTgt.setZone(ZoneType.listValueOf(mapParams.get("TgtZone")));
-            }
-
-            // Target Type mostly for Counter: Spell,Activated,Triggered,Ability
-            // (or any combination of)
-            // Ability = both activated and triggered abilities
-            if (mapParams.containsKey("TargetType")) {
-                abTgt.setTargetSpellAbilityType(mapParams.get("TargetType"));
-            }
-
-            // TargetValidTargeting most for Counter: e.g. target spell that
-            // targets X.
-            if (mapParams.containsKey("TargetValidTargeting")) {
-                abTgt.setSAValidTargeting(mapParams.get("TargetValidTargeting"));
-            }
-
-            if (mapParams.containsKey("TargetUnique")) {
-                abTgt.setUniqueTargets(true);
-            }
-            if (mapParams.containsKey("TargetsFromSingleZone")) {
-                abTgt.setSingleZone(true);
-            }
-            if (mapParams.containsKey("TargetsFromDifferentZone")) {
-                abTgt.setDifferentZone(true);
-            }
-            if (mapParams.containsKey("TargetsWithoutSameCreatureType")) {
-                abTgt.setWithoutSameCreatureType(true);
-            }
-            if (mapParams.containsKey("TargetsWithDefinedController")) {
-                abTgt.setDefinedController(mapParams.get("TargetsWithDefinedController"));
-            }
-            if (mapParams.containsKey("TargetsWithDifferentControllers")) {
-                abTgt.setDifferentControllers(true);
-            }
-        }
+        Target abTgt = mapParams.containsKey("ValidTgts") ? readTarget(hostC, mapParams) : null;
 
         // ***********************************
         // Match API keywords. These are listed in alphabetical order.
 
 
         if (api == ApiType.CopySpellAbility) {
-            if (isTargeted) {
+            if (abTgt != null) {
                 // Since all "CopySpell" ABs copy things on the Stack no need for it to be everywhere
                 abTgt.setZone(ZoneType.Stack);
             }
@@ -234,7 +165,7 @@ public class AbilityFactory {
         else if (api == ApiType.Counter) {
             // Since all "Counter" ABs Counter things on the Stack no need for
             // it to be everywhere
-            if (isTargeted) {
+            if (abTgt != null) {
                 abTgt.setZone(ZoneType.Stack);
             }
         }
@@ -320,6 +251,62 @@ public class AbilityFactory {
         makeConditions(spellAbility, mapParams);
 
         return spellAbility;
+    }
+
+    private Target readTarget(Card hostC, Map<String, String> mapParams) {
+        final String min = mapParams.containsKey("TargetMin") ? mapParams.get("TargetMin") : "1";
+        final String max = mapParams.containsKey("TargetMax") ? mapParams.get("TargetMax") : "1";
+
+
+        // TgtPrompt now optional
+        final StringBuilder sb = new StringBuilder();
+        if (hostC != null) {
+            sb.append(hostC + " - ");
+        }
+        final String prompt = mapParams.containsKey("TgtPrompt") ? mapParams.get("TgtPrompt") : "Select target " + mapParams.get("ValidTgts");
+        sb.append(prompt);
+        
+        Target abTgt = new Target(hostC, sb.toString(), mapParams.get("ValidTgts").split(","), min, max);
+        
+        if (mapParams.containsKey("TgtZone")) { // if Targeting
+                                                     // something
+            // not in play, this Key
+            // should be set
+            abTgt.setZone(ZoneType.listValueOf(mapParams.get("TgtZone")));
+        }
+
+        // Target Type mostly for Counter: Spell,Activated,Triggered,Ability
+        // (or any combination of)
+        // Ability = both activated and triggered abilities
+        if (mapParams.containsKey("TargetType")) {
+            abTgt.setTargetSpellAbilityType(mapParams.get("TargetType"));
+        }
+
+        // TargetValidTargeting most for Counter: e.g. target spell that
+        // targets X.
+        if (mapParams.containsKey("TargetValidTargeting")) {
+            abTgt.setSAValidTargeting(mapParams.get("TargetValidTargeting"));
+        }
+
+        if (mapParams.containsKey("TargetUnique")) {
+            abTgt.setUniqueTargets(true);
+        }
+        if (mapParams.containsKey("TargetsFromSingleZone")) {
+            abTgt.setSingleZone(true);
+        }
+        if (mapParams.containsKey("TargetsFromDifferentZone")) {
+            abTgt.setDifferentZone(true);
+        }
+        if (mapParams.containsKey("TargetsWithoutSameCreatureType")) {
+            abTgt.setWithoutSameCreatureType(true);
+        }
+        if (mapParams.containsKey("TargetsWithDefinedController")) {
+            abTgt.setDefinedController(mapParams.get("TargetsWithDefinedController"));
+        }
+        if (mapParams.containsKey("TargetsWithDifferentControllers")) {
+            abTgt.setDifferentControllers(true);
+        }
+        return abTgt;
     }
 
     /**
@@ -637,8 +624,8 @@ public class AbilityFactory {
                 }
                 if (calcX[0].startsWith("TargetedController")) {
                     final ArrayList<Player> players = new ArrayList<Player>();
-                    final ArrayList<Card> list = AbilityFactory.getDefinedCards(card, "Targeted", ability);
-                    final ArrayList<SpellAbility> sas = AbilityFactory.getDefinedSpellAbilities(card, "Targeted",
+                    final List<Card> list = AbilityFactory.getDefinedCards(card, "Targeted", ability);
+                    final List<SpellAbility> sas = AbilityFactory.getDefinedSpellAbilities(card, "Targeted",
                             ability);
 
                     for (final Card c : list) {
@@ -658,7 +645,7 @@ public class AbilityFactory {
                 if (calcX[0].startsWith("TriggeredPlayer") || calcX[0].startsWith("TriggeredTarget")) {
                     final SpellAbility root = ability.getRootAbility();
                     Object o = root.getTriggeringObject(calcX[0].substring(9));
-                    final ArrayList<Player> players = new ArrayList<Player>();
+                    final List<Player> players = new ArrayList<Player>();
                     if (o instanceof Player) {
                         players.add((Player) o);
                     }
@@ -774,8 +761,8 @@ public class AbilityFactory {
      * @return a {@link java.util.ArrayList} object.
      */
     @SuppressWarnings("unchecked")
-    public static ArrayList<Card> getDefinedCards(final Card hostCard, final String def, final SpellAbility sa) {
-        final ArrayList<Card> cards = new ArrayList<Card>();
+    public static List<Card> getDefinedCards(final Card hostCard, final String def, final SpellAbility sa) {
+        final List<Card> cards = new ArrayList<Card>();
         final String defined = (def == null) ? "Self" : def; // default to Self
 
         Card c = null;
@@ -813,7 +800,7 @@ public class AbilityFactory {
                 c = lib.get(0);
             } else {
                 // we don't want this to fall through and return the "Self"
-                return new ArrayList<Card>();
+                return cards;
             }
         }
 
@@ -953,8 +940,8 @@ public class AbilityFactory {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a {@link java.util.ArrayList} object.
      */
-    public static ArrayList<Player> getDefinedPlayers(final Card card, final String def, final SpellAbility sa) {
-        final ArrayList<Player> players = new ArrayList<Player>();
+    public static List<Player> getDefinedPlayers(final Card card, final String def, final SpellAbility sa) {
+        final List<Player> players = new ArrayList<Player>();
         final String defined = (def == null) ? "You" : def;
 
         if (defined.equals("Targeted")) {
@@ -963,8 +950,8 @@ public class AbilityFactory {
                 players.addAll(saTargeting.getTarget().getTargetPlayers());
             }
         } else if (defined.equals("TargetedController")) {
-            final ArrayList<Card> list = AbilityFactory.getDefinedCards(card, "Targeted", sa);
-            final ArrayList<SpellAbility> sas = AbilityFactory.getDefinedSpellAbilities(card, "Targeted", sa);
+            final List<Card> list = AbilityFactory.getDefinedCards(card, "Targeted", sa);
+            final List<SpellAbility> sas = AbilityFactory.getDefinedSpellAbilities(card, "Targeted", sa);
 
             for (final Card c : list) {
                 final Player p = c.getController();
@@ -979,7 +966,7 @@ public class AbilityFactory {
                 }
             }
         } else if (defined.equals("TargetedOwner")) {
-            final ArrayList<Card> list = AbilityFactory.getDefinedCards(card, "Targeted", sa);
+            final List<Card> list = AbilityFactory.getDefinedCards(card, "Targeted", sa);
 
             for (final Card c : list) {
                 final Player p = c.getOwner();
@@ -1601,7 +1588,7 @@ public class AbilityFactory {
 
         // The player who has the chance to cancel the ability
         final String pays = sa.hasParam("UnlessPayer") ? sa.getParam("UnlessPayer") : "TargetedController";
-        final ArrayList<Player> payers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), pays, sa);
+        final List<Player> payers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), pays, sa);
 
         // The cost
         String unlessCost = sa.getParam("UnlessCost").trim();

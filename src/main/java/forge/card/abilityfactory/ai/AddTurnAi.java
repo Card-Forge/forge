@@ -17,7 +17,7 @@
  */
 package forge.card.abilityfactory.ai;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
@@ -59,7 +59,7 @@ public class AddTurnAi extends SpellAiLogic {
                 }
             }
         } else {
-            final ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            final List<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
             for (final Player p : tgtPlayers) {
                 if (p.isHostileTo(ai) && !mandatory) {
                     return false;

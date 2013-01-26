@@ -1,7 +1,5 @@
 package forge.card.abilityfactory.ai;
 
-import java.util.ArrayList;
-
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.spellability.SpellAbility;
@@ -26,8 +24,7 @@ public class ChooseTypeAi extends SpellAiLogic {
             tgt.resetTargets();
             sa.getTarget().addTarget(ai);
         } else {
-            final ArrayList<Player> tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
-            for (final Player p : tgtPlayers) {
+            for (final Player p : AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa)) {
                 if (p.isHuman() && !mandatory) {
                     return false;
                 }

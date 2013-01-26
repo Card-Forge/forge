@@ -1,6 +1,5 @@
 package forge.card.abilityfactory.effects;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import forge.Card;
@@ -18,7 +17,7 @@ public class CountersMoveEffect extends SpellEffect {
         final Card host = sa.getSourceCard();
 
         Card source = null;
-        ArrayList<Card> srcCards;
+        List<Card> srcCards;
         final Target tgt = sa.getTarget();
         if (!sa.hasParam("Source") && tgt != null) {
             srcCards = tgt.getTargetCards();
@@ -52,7 +51,7 @@ public class CountersMoveEffect extends SpellEffect {
         final int amount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("CounterNum"), sa);
 
         Card source = null;
-        ArrayList<Card> srcCards;
+        List<Card> srcCards;
         final Target tgt = sa.getTarget();
         if (!sa.hasParam("Source") && tgt != null) {
             srcCards = tgt.getTargetCards();
@@ -62,7 +61,7 @@ public class CountersMoveEffect extends SpellEffect {
         if (srcCards.size() > 0) {
             source = srcCards.get(0);
         }
-        ArrayList<Card> tgtCards;
+        List<Card> tgtCards;
         if (!sa.hasParam("Defined") && tgt != null) {
             tgtCards = tgt.getTargetCards();
         } else {

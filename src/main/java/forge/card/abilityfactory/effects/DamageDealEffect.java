@@ -27,7 +27,7 @@ public class DamageDealEffect extends SpellEffect {
         List<Object> tgts = getTargetObjects(sa);
         if (tgts.size() > 0) {
 
-            final ArrayList<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("DamageSource"), sa);
+            final List<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("DamageSource"), sa);
             final Card source = definedSources.get(0);
 
             if (source != sa.getSourceCard()) {
@@ -112,8 +112,7 @@ public class DamageDealEffect extends SpellEffect {
             }
         }
 
-        final ArrayList<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(),
-                sa.getParam("DamageSource"), sa);
+        final List<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("DamageSource"), sa);
         if (definedSources == null) {
             return;
         }

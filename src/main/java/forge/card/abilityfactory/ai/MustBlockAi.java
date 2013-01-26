@@ -1,6 +1,5 @@
 package forge.card.abilityfactory.ai;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.base.Predicate;
@@ -45,8 +44,7 @@ public class MustBlockAi extends SpellAiLogic {
 
         Card attacker = null;
         if (sa.hasParam("DefinedAttacker")) {
-            final ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(),
-                    sa.getParam("DefinedAttacker"), sa);
+            final List<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("DefinedAttacker"), sa);
             if (cards.isEmpty()) {
                 return false;
             }

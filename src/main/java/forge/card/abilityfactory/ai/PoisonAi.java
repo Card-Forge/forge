@@ -1,6 +1,6 @@
 package forge.card.abilityfactory.ai;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import forge.Card;
 import forge.Singletons;
@@ -77,8 +77,7 @@ public class PoisonAi extends SpellAiLogic {
         if (tgt != null) {
             tgt.addTarget(ai.getOpponent());
         } else {
-            final ArrayList<Player> players = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
-                    sa.getParam("Defined"), sa);
+            final List<Player> players = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
             for (final Player p : players) {
                 if (!mandatory && p.isComputer() && (p.getPoisonCounters() > p.getOpponent().getPoisonCounters())) {
                     return false;

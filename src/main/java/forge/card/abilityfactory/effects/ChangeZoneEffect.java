@@ -490,7 +490,7 @@ public class ChangeZoneEffect extends SpellEffect {
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
     private static void changeHiddenOriginResolve(final SpellAbility sa) {
-        ArrayList<Player> fetchers;
+        List<Player> fetchers;
 
         if (sa.hasParam("DefinedPlayer")) {
             fetchers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("DefinedPlayer"), sa);

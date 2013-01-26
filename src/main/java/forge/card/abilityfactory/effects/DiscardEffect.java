@@ -97,8 +97,7 @@ public class DiscardEffect extends RevealEffectBase {
         for (final Player p : getTargetPlayers(sa)) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (mode.equals("Defined")) {
-                    final ArrayList<Card> toDiscard = AbilityFactory.getDefinedCards(source, sa.getParam("DefinedCards"),
-                            sa);
+                    final List<Card> toDiscard = AbilityFactory.getDefinedCards(source, sa.getParam("DefinedCards"), sa);
                     for (final Card c : toDiscard) {
                         discarded.addAll(p.discard(c, sa));
                     }

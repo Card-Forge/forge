@@ -1757,7 +1757,7 @@ public class CardFactoryUtil {
      *            a {@link forge.Card} object.
      * @return a int.
      */
-    public static int playerXCount(final ArrayList<Player> players, final String s, final Card source) {
+    public static int playerXCount(final List<Player> players, final String s, final Card source) {
         if (players.size() == 0) {
             return 0;
         }

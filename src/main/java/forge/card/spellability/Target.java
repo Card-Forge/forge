@@ -478,47 +478,47 @@ public class Target {
      * @param max
      *            a {@link java.lang.String} object.
      */
-    @Deprecated
-    public Target(final Card src, String parse, final String min, final String max) {
-        // parse=Tgt{C}{P} - Primarily used for Pump or Damage
-        // C = Creature P=Player/Planeswalker
-        // CP = All three
-
-        this.tgtValid = true;
-        this.srcCard = src;
-
-        if (parse.contains("Tgt")) {
-            parse = parse.replace("Tgt", "");
-        }
-
-        String valid;
-        String prompt;
-        final StringBuilder sb = new StringBuilder();
-
-        if (parse.equals("CP")) {
-            valid = "Creature,Player";
-            prompt = "Select target creature or player";
-        } else if (parse.equals("C")) {
-            valid = "Creature";
-            prompt = "Select target creature";
-        } else if (parse.equals("P")) {
-            valid = "Player";
-            prompt = "Select player";
-        } else {
-            System.out.println("Bad Parsing in Target(parse, min, max): " + parse);
-            return;
-        }
-
-        if (src != null) {
-            sb.append(src + " - ");
-        }
-        sb.append(prompt);
-        this.vtSelection = sb.toString();
-        this.validTgts = valid.split(",");
-
-        this.minTargets = min;
-        this.maxTargets = max;
-    }
+//    @Deprecated
+//    public Target(final Card src, String parse, final String min, final String max) {
+//        // parse=Tgt{C}{P} - Primarily used for Pump or Damage
+//        // C = Creature P=Player/Planeswalker
+//        // CP = All three
+//
+//        this.tgtValid = true;
+//        this.srcCard = src;
+//
+//        if (parse.contains("Tgt")) {
+//            parse = parse.replace("Tgt", "");
+//        }
+//
+//        String valid;
+//        String prompt;
+//        final StringBuilder sb = new StringBuilder();
+//
+//        if (parse.equals("CP")) {
+//            valid = "Creature,Player";
+//            prompt = "Select target creature or player";
+//        } else if (parse.equals("C")) {
+//            valid = "Creature";
+//            prompt = "Select target creature";
+//        } else if (parse.equals("P")) {
+//            valid = "Player";
+//            prompt = "Select player";
+//        } else {
+//            System.out.println("Bad Parsing in Target(parse, min, max): " + parse);
+//            return;
+//        }
+//
+//        if (src != null) {
+//            sb.append(src + " - ");
+//        }
+//        sb.append(prompt);
+//        this.vtSelection = sb.toString();
+//        this.validTgts = valid.split(",");
+//
+//        this.minTargets = min;
+//        this.maxTargets = max;
+//    }
 
     /**
      * <p>

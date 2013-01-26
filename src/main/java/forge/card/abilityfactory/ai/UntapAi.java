@@ -1,6 +1,5 @@
 package forge.card.abilityfactory.ai;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -38,8 +37,7 @@ public class UntapAi extends SpellAiLogic {
         boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn() + 1);
 
         if (tgt == null) {
-            final ArrayList<Card> pDefined = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"),
-                    sa);
+            final List<Card> pDefined = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
             if ((pDefined != null) && pDefined.get(0).isUntapped() && pDefined.get(0).getController().isComputer()) {
                 return false;
             }
@@ -62,8 +60,7 @@ public class UntapAi extends SpellAiLogic {
             }
 
             // TODO: use Defined to determine, if this is an unfavorable result
-            final ArrayList<Card> pDefined = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"),
-                    sa);
+            final List<Card> pDefined = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
             if ((pDefined != null) && pDefined.get(0).isUntapped() && pDefined.get(0).getController().isComputer()) {
                 return false;
             }

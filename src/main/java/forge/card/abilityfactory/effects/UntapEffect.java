@@ -1,6 +1,5 @@
 package forge.card.abilityfactory.effects;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
@@ -73,8 +72,7 @@ public class UntapEffect extends SpellEffect {
         final int num = Integer.parseInt(sa.getParam("Amount"));
         final String valid = sa.getParam("UntapType");
 
-        final ArrayList<Player> definedPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
-                sa.getParam("Defined"), sa);
+        final List<Player> definedPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
 
         for (final Player p : definedPlayers) {
             if (p.isHuman()) {

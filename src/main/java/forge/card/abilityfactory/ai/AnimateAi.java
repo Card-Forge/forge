@@ -1,6 +1,7 @@
 package forge.card.abilityfactory.ai;
 
-import java.util.ArrayList;
+import java.util.List;
+
 import com.google.common.collect.Iterables;
 
 import forge.Card;
@@ -70,7 +71,7 @@ public class AnimateAi extends SpellAiLogic {
         }
 
         if (null == tgt) {
-            final ArrayList<Card> defined = AbilityFactory.getDefinedCards(source, sa.getParam("Defined"), sa);
+            final List<Card> defined = AbilityFactory.getDefinedCards(source, sa.getParam("Defined"), sa);
 
             boolean bFlag = false;
             for (final Card c : defined) {

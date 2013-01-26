@@ -12,7 +12,6 @@ import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -40,14 +39,7 @@ public class ChangeZoneAllEffect extends SpellEffect {
 
         List<Card> cards = new ArrayList<Card>();
 
-        ArrayList<Player> tgtPlayers = null;
-
-        final Target tgt = sa.getTarget();
-        if (tgt != null) {
-            tgtPlayers = tgt.getTargetPlayers();
-        } else if (sa.hasParam("Defined")) {
-            tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);
-        }
+        List<Player> tgtPlayers = getTargetPlayers(sa);
 
         if ((tgtPlayers == null) || tgtPlayers.isEmpty() || sa.hasParam("UseAllOriginZones")) {
             cards = Singletons.getModel().getGame().getCardsIn(origin);

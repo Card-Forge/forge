@@ -2,6 +2,7 @@ package forge.card.abilityfactory.effects;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import forge.Card;
@@ -30,7 +31,7 @@ public class CloneEffect extends SpellEffect {
         Card cardToCopy = host;
         final Target tgt = sa.getTarget();
         if (sa.hasParam("Defined")) {
-            ArrayList<Card> cloneSources = AbilityFactory.getDefinedCards(host, sa.getParam("Defined"), sa);
+            List<Card> cloneSources = AbilityFactory.getDefinedCards(host, sa.getParam("Defined"), sa);
             if (!cloneSources.isEmpty()) {
                 cardToCopy = cloneSources.get(0);
             }
@@ -38,7 +39,7 @@ public class CloneEffect extends SpellEffect {
             cardToCopy = tgt.getTargetCards().get(0);
         }
 
-        ArrayList<Card> cloneTargets = AbilityFactory.getDefinedCards(host, sa.getParam("CloneTarget"), sa);
+        List<Card> cloneTargets = AbilityFactory.getDefinedCards(host, sa.getParam("CloneTarget"), sa);
         if (!cloneTargets.isEmpty()) {
             tgtCard = cloneTargets.get(0);
         }
@@ -59,7 +60,7 @@ public class CloneEffect extends SpellEffect {
         Card cardToCopy = null;
         final Target tgt = sa.getTarget();
         if (sa.hasParam("Defined")) {
-            ArrayList<Card> cloneSources = AbilityFactory.getDefinedCards(host, sa.getParam("Defined"), sa);
+            List<Card> cloneSources = AbilityFactory.getDefinedCards(host, sa.getParam("Defined"), sa);
             if (!cloneSources.isEmpty()) {
                 cardToCopy = cloneSources.get(0);
             }
@@ -79,7 +80,7 @@ public class CloneEffect extends SpellEffect {
         }
 
         // find target of cloning i.e. card becoming a clone
-        ArrayList<Card> cloneTargets = AbilityFactory.getDefinedCards(host, sa.getParam("CloneTarget"), sa);
+        List<Card> cloneTargets = AbilityFactory.getDefinedCards(host, sa.getParam("CloneTarget"), sa);
         if (!cloneTargets.isEmpty()) {
             tgtCard = cloneTargets.get(0);
         }

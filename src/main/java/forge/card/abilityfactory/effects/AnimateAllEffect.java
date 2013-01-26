@@ -121,7 +121,7 @@ public class AnimateAllEffect extends AnimateEffectBase {
         }
 
         List<Card> list;
-        ArrayList<Player> tgtPlayers = null;
+        List<Player> tgtPlayers = null;
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {

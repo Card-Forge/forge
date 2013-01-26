@@ -170,10 +170,10 @@ public class PumpEffect extends SpellEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        ArrayList<Card> tgtCards = new ArrayList<Card>();
+        List<Card> tgtCards = new ArrayList<Card>();
         final ArrayList<Card> untargetedCards = new ArrayList<Card>();
         final Target tgt = sa.getTarget();
-        ArrayList<Player> tgtPlayers = new ArrayList<Player>();
+        List<Player> tgtPlayers = new ArrayList<Player>();
         String pumpRemembered = null;
 
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();

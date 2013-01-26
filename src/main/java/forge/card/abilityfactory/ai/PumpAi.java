@@ -127,7 +127,7 @@ public class PumpAi extends PumpAiBase {
 
         //Untargeted
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
-            final ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(),
+            final List<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(),
                     sa.getParam("Defined"), sa);
 
             if (cards.size() == 0) {

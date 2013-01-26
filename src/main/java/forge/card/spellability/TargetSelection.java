@@ -315,7 +315,7 @@ public class TargetSelection {
         }
         // If the cards must have a specific controller
         if (tgt.getDefinedController() != null) {
-            ArrayList<Player> pl = AbilityFactory.getDefinedPlayers(card, tgt.getDefinedController(), this.ability);
+            List<Player> pl = AbilityFactory.getDefinedPlayers(card, tgt.getDefinedController(), this.ability);
             if (pl != null && !pl.isEmpty()) {
                 Player controller = pl.get(0);
                 choices = CardLists.filterControlledBy(choices, controller);

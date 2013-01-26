@@ -1,6 +1,5 @@
 package forge.card.abilityfactory.effects;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import forge.Singletons;
@@ -41,7 +40,7 @@ public class AddTurnEffect extends SpellEffect {
     public void resolve(SpellAbility sa) {
         final int numTurns = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumTurns"), sa);
 
-        ArrayList<Player> tgtPlayers;
+        List<Player> tgtPlayers;
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {

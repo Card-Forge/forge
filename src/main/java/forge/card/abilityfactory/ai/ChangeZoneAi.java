@@ -237,7 +237,7 @@ public class ChangeZoneAi extends SpellAiLogic {
         // prevent run-away activations - first time will always return true
         boolean chance = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn());
 
-        ArrayList<Player> pDefined = new ArrayList<Player>();
+        List<Player> pDefined = new ArrayList<Player>();
         pDefined.add(source.getController());
         final Target tgt = sa.getTarget();
         if ((tgt != null) && tgt.canTgtPlayer()) {
@@ -364,7 +364,7 @@ public class ChangeZoneAi extends SpellAiLogic {
             source.setSVar("PayX", Integer.toString(xPay));
         }
 
-        ArrayList<Player> pDefined;
+        List<Player> pDefined;
         final Target tgt = sa.getTarget();
         if ((tgt != null) && tgt.canTgtPlayer()) {
             final Player opp = ai.getOpponent();
@@ -1032,8 +1032,7 @@ public class ChangeZoneAi extends SpellAiLogic {
         if (sa.getTarget() == null) {
             // Just in case of Defined cases
             if (!mandatory && sa.hasParam("AttachedTo")) {
-                final ArrayList<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(),
-                        sa.getParam("AttachedTo"), sa);
+                final List<Card> list = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("AttachedTo"), sa);
                 if (!list.isEmpty()) {
                     final Card attachedTo = list.get(0);
                     // This code is for the Dragon auras

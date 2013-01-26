@@ -1687,7 +1687,7 @@ public abstract class SpellAbility implements ISpellAbility {
      */
     public List<Card> knownDetermineDefined(final String defined) {
         final List<Card> ret = new ArrayList<Card>();
-        final ArrayList<Card> list = AbilityFactory.getDefinedCards(getSourceCard(), defined, this);
+        final List<Card> list = AbilityFactory.getDefinedCards(getSourceCard(), defined, this);
 
         for (final Card c : list) {
             final Card actualCard = Singletons.getModel().getGame().getCardState(c);

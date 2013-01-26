@@ -1,6 +1,6 @@
 package forge.card.abilityfactory.ai;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import forge.Card;
@@ -37,7 +37,7 @@ public class TapAi extends TapAiBase {
         }
 
         if (tgt == null) {
-            final ArrayList<Card> defined = AbilityFactory.getDefinedCards(source, sa.getParam("Defined"), sa);
+            final List<Card> defined = AbilityFactory.getDefinedCards(source, sa.getParam("Defined"), sa);
 
             boolean bFlag = false;
             for (final Card c : defined) {

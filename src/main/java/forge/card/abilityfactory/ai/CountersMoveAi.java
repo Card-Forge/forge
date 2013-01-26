@@ -1,6 +1,5 @@
 package forge.card.abilityfactory.ai;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -54,8 +53,8 @@ public class CountersMoveAi extends SpellAiLogic {
         boolean preferred = true;
 
         final CounterType cType = CounterType.valueOf(sa.getParam("CounterType"));
-        final ArrayList<Card> srcCards = AbilityFactory.getDefinedCards(host, sa.getParam("Source"), sa);
-        final ArrayList<Card> destCards = AbilityFactory.getDefinedCards(host, sa.getParam("Defined"), sa);
+        final List<Card> srcCards = AbilityFactory.getDefinedCards(host, sa.getParam("Source"), sa);
+        final List<Card> destCards = AbilityFactory.getDefinedCards(host, sa.getParam("Defined"), sa);
         if (abTgt == null) {
             if ((srcCards.size() > 0)
                     && cType.equals(CounterType.P1P1) // move +1/+1 counters away

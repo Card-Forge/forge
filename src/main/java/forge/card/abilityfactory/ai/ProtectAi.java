@@ -148,7 +148,7 @@ public class ProtectAi extends SpellAiLogic {
         }
 
         if ((sa.getTarget() == null) || !sa.getTarget().doesTarget()) {
-            final ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
+            final List<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
 
             if (cards.size() == 0) {
                 return false;

@@ -1,6 +1,5 @@
 package forge.card.abilityfactory.effects;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -82,7 +81,7 @@ public class CountersPutEffect extends SpellEffect {
             }
         }
 
-        ArrayList<Card> tgtCards;
+        List<Card> tgtCards;
 
         final Target tgt = sa.getTarget();
         if (tgt != null && (tgt.getTargetPlayers().size() == 0)) {

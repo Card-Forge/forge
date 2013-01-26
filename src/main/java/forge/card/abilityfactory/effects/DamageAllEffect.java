@@ -27,7 +27,7 @@ public class DamageAllEffect extends SpellEffect {
         final int dmg = AbilityFactory.calculateAmount(sa.getSourceCard(), damage, sa);
 
 
-        final ArrayList<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("DamageSource"), sa);
+        final List<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("DamageSource"), sa);
         final Card source = definedSources.get(0);
 
         if (source != sa.getSourceCard()) {
@@ -43,8 +43,7 @@ public class DamageAllEffect extends SpellEffect {
 
     @Override
     public void resolve(SpellAbility sa) {
-        final ArrayList<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(),
-                sa.getParam("DamageSource"), sa);
+        final List<Card> definedSources = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("DamageSource"), sa);
         final Card card = definedSources.get(0);
         final Card source = sa.getSourceCard();
 
@@ -81,7 +80,7 @@ public class DamageAllEffect extends SpellEffect {
         }
 
         if (!players.equals("")) {
-            final ArrayList<Player> playerList = AbilityFactory.getDefinedPlayers(card, players, sa);
+            final List<Player> playerList = AbilityFactory.getDefinedPlayers(card, players, sa);
             for (final Player p : playerList) {
                 if (p.addDamage(dmg, card) && sa.hasParam("RememberDamaged")) {
                     source.addRemembered(p);

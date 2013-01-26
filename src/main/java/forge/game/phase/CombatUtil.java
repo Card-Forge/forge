@@ -1670,7 +1670,7 @@ public class CombatUtil {
             if (abilityParams.containsKey("ValidTgts") || abilityParams.containsKey("Tgt")) {
                 continue; // targeted pumping not supported
             }
-            final ArrayList<Card> list = AbilityFactory.getDefinedCards(source, abilityParams.get("Defined"), null);
+            final List<Card> list = AbilityFactory.getDefinedCards(source, abilityParams.get("Defined"), null);
             if (abilityParams.containsKey("Defined") && abilityParams.get("Defined").equals("TriggeredBlocker")) {
                 list.add(defender);
             }
@@ -1785,7 +1785,7 @@ public class CombatUtil {
             if (abilityParams.containsKey("ValidTgts") || abilityParams.containsKey("Tgt")) {
                 continue; // targeted pumping not supported
             }
-            final ArrayList<Card> list = AbilityFactory.getDefinedCards(source, abilityParams.get("Defined"), null);
+            final List<Card> list = AbilityFactory.getDefinedCards(source, abilityParams.get("Defined"), null);
             if (abilityParams.containsKey("Defined") && abilityParams.get("Defined").equals("TriggeredBlocker")) {
                 list.add(defender);
             }
@@ -1924,7 +1924,7 @@ public class CombatUtil {
                     && !abilityParams.get("DB").equals("PumpAll")) {
                 continue;
             }
-            ArrayList<Card> list = new ArrayList<Card>();
+            List<Card> list = new ArrayList<Card>();
             if (!abilityParams.containsKey("ValidCards")) {
                 list = AbilityFactory.getDefinedCards(source, abilityParams.get("Defined"), null);
             }
@@ -2091,7 +2091,7 @@ public class CombatUtil {
                     && !abilityParams.get("DB").equals("PumpAll")) {
                 continue;
             }
-            ArrayList<Card> list = new ArrayList<Card>();
+            List<Card> list = new ArrayList<Card>();
             if (!abilityParams.containsKey("ValidCards")) {
                 list = AbilityFactory.getDefinedCards(source, abilityParams.get("Defined"), null);
             }

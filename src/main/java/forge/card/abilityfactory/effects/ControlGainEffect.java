@@ -28,8 +28,7 @@ public class ControlGainEffect extends SpellEffect {
 
         final Target tgt = sa.getTarget();
 
-        ArrayList<Player> newController = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
-                sa.getParam("NewController"), sa);
+        List<Player> newController = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("NewController"), sa);
         if ((tgt != null) && tgt.getTargetPlayers() != null && !tgt.getTargetPlayers().isEmpty()) {
             newController = tgt.getTargetPlayers();
         }
@@ -98,7 +97,7 @@ public class ControlGainEffect extends SpellEffect {
             tgtCards = getTargetCards(sa);
         }
 
-        ArrayList<Player> controllers = new ArrayList<Player>();
+        List<Player> controllers = new ArrayList<Player>();
 
         if (sa.hasParam("NewController")) {
             controllers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("NewController"), sa);

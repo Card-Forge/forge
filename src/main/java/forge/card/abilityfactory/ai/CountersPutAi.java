@@ -134,8 +134,7 @@ public class CountersPutAi extends SpellAiLogic {
                 abTgt.addTarget(choice);
             }
         } else {
-            final ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(),
-                    sa.getParam("Defined"), sa);
+            final List<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
             // Don't activate Curse abilities on my cards and non-curse abilites
             // on my opponents
             if (cards.isEmpty() || !cards.get(0).getController().equals(player)) {

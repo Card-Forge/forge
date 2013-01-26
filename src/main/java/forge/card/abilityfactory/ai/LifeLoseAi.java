@@ -1,6 +1,6 @@
 package forge.card.abilityfactory.ai;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import forge.Card;
@@ -23,7 +23,7 @@ public class LifeLoseAi extends SpellAiLogic {
     public boolean chkAIDrawback(SpellAbility sa, Player ai) {
 
         final Target tgt = sa.getTarget();
-        ArrayList<Player> tgtPlayers;
+        List<Player> tgtPlayers;
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {
@@ -164,7 +164,7 @@ public class LifeLoseAi extends SpellAiLogic {
             amount = AbilityFactory.calculateAmount(source, amountStr, sa);
         }
 
-        ArrayList<Player> tgtPlayers;
+        List<Player> tgtPlayers;
         if (tgt != null) {
             tgtPlayers = tgt.getTargetPlayers();
         } else {

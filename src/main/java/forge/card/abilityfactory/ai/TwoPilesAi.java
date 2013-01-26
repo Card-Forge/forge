@@ -31,7 +31,7 @@ public class TwoPilesAi extends SpellAiLogic  {
             valid = sa.getParam("ValidCards");
         }
 
-        ArrayList<Player> tgtPlayers;
+        List<Player> tgtPlayers;
         final Player opp = ai.getOpponent();
 
         final Target tgt = sa.getTarget();

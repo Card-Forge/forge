@@ -91,8 +91,7 @@ public class DigEffect extends SpellEffect {
         final List<Player> tgtPlayers = getTargetPlayers(sa);
 
         if (sa.hasParam("Choser")) {
-            final ArrayList<Player> chosers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(),
-                    sa.getParam("Choser"), sa);
+            final List<Player> chosers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Choser"), sa);
             if (!chosers.isEmpty()) {
                 choser = chosers.get(0);
             }

@@ -1,6 +1,5 @@
 package forge.card.abilityfactory.ai;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -29,7 +28,7 @@ public class PhasesAi extends SpellAiLogic {
         final Random r = MyRandom.getRandom();
         boolean randomReturn = r.nextFloat() <= Math.pow(.6667, sa.getActivationsThisTurn() + 1);
 
-        ArrayList<Card> tgtCards;
+        List<Card> tgtCards;
         if (tgt == null) {
             tgtCards = AbilityFactory.getDefinedCards(source, sa.getParam("Defined"), sa);
             if (tgtCards.contains(source)) {

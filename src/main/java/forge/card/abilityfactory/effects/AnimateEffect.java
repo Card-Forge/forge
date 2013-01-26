@@ -135,12 +135,7 @@ public class AnimateEffect extends AnimateEffectBase {
         }
 
         final Target tgt = sa.getTarget();
-        ArrayList<Card> tgts;
-        if (tgt != null) {
-            tgts = tgt.getTargetCards();
-        } else {
-            tgts = AbilityFactory.getDefinedCards(source, sa.getParam("Defined"), sa);
-        }
+        List<Card> tgts = tgt != null ? tgts = tgt.getTargetCards() : AbilityFactory.getDefinedCards(source, sa.getParam("Defined"), sa);
 
         for (final Card c : tgts) {
 

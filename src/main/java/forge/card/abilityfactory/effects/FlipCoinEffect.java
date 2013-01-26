@@ -1,6 +1,6 @@
 package forge.card.abilityfactory.effects;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import forge.Card;
 import forge.GameActionUtil;
@@ -31,8 +31,8 @@ public class FlipCoinEffect extends SpellEffect {
         final Card host = sa.getSourceCard();
         final Player player = host.getController();
 
-        final ArrayList<Player> caller = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Caller"), sa);
-        if (caller.size() == 0) {
+        final List<Player> caller = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Caller"), sa);
+        if (caller.isEmpty()) {
             caller.add(player);
         }
 

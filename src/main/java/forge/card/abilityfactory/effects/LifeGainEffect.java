@@ -2,6 +2,7 @@ package forge.card.abilityfactory.effects;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
@@ -36,7 +37,7 @@ public class LifeGainEffect extends SpellEffect {
         final int lifeAmount = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("LifeAmount"), sa);
 
         final Target tgt = sa.getTarget();
-        ArrayList<Player> tgtPlayers = new ArrayList<Player>();
+        List<Player> tgtPlayers = new ArrayList<Player>();
 
         if (sa.hasParam("Defined")) {
             tgtPlayers = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("Defined"), sa);

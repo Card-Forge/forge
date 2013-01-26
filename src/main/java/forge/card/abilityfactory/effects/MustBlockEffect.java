@@ -15,7 +15,7 @@ public class MustBlockEffect extends SpellEffect {
     public void resolve(SpellAbility sa) {
         final Card host = sa.getSourceCard();
 
-        ArrayList<Card> tgtCards;
+        List<Card> tgtCards;
 
         final Target tgt = sa.getTarget();
         if (tgt != null) {
@@ -24,7 +24,7 @@ public class MustBlockEffect extends SpellEffect {
             tgtCards = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("Defined"), sa);
         }
 
-        ArrayList<Card> cards;
+        List<Card> cards;
         if (sa.hasParam("DefinedAttacker")) {
             cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("DefinedAttacker"), sa);
         } else {
@@ -53,8 +53,7 @@ public class MustBlockEffect extends SpellEffect {
 
         String attacker = null;
         if (sa.hasParam("DefinedAttacker")) {
-            final ArrayList<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(),
-                    sa.getParam("DefinedAttacker"), sa);
+            final List<Card> cards = AbilityFactory.getDefinedCards(sa.getSourceCard(), sa.getParam("DefinedAttacker"), sa);
             attacker = cards.get(0).toString();
         } else {
             attacker = host.toString();

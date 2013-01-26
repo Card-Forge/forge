@@ -6112,9 +6112,8 @@ public class Card extends GameEntity implements Comparable<Card> {
      */
     public final int getAmountOfKeyword(final String k) {
         int count = 0;
-        final ArrayList<String> keywords = this.getKeyword();
-        for (int j = 0; j < keywords.size(); j++) {
-            if (keywords.get(j).equals(k)) {
+        for (String kw : this.getKeyword()) {
+            if (kw.equals(k)) {
                 count++;
             }
         }
@@ -6405,8 +6404,8 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
         } else if (property.equals("TargetedControllerCtrl")) {
             for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
-                final ArrayList<Card> list = AbilityFactory.getDefinedCards(source, "Targeted", sa);
-                final ArrayList<SpellAbility> sas = AbilityFactory.getDefinedSpellAbilities(source, "Targeted", sa);
+                final List<Card> list = AbilityFactory.getDefinedCards(source, "Targeted", sa);
+                final List<SpellAbility> sas = AbilityFactory.getDefinedSpellAbilities(source, "Targeted", sa);
                 for (final Card c : list) {
                     final Player p = c.getController();
                     if (!this.getController().equals(p)) {
@@ -6488,7 +6487,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                 if (!source.getCharacteristics().getTriggers().isEmpty()) {
                     for (final Trigger t : source.getCharacteristics().getTriggers()) {
                         final SpellAbility sa = t.getTriggeredSA();
-                        final ArrayList<Card> list = AbilityFactory.getDefinedCards(source, "Targeted", sa);
+                        final List<Card> list = AbilityFactory.getDefinedCards(source, "Targeted", sa);
                         for (final Card c : list) {
                             if (!this.equipping.contains(c) && !c.equals(this.enchanting)) {
                                 return false;
@@ -6497,7 +6496,7 @@ public class Card extends GameEntity implements Comparable<Card> {
                     }
                 } else {
                     for (final SpellAbility sa : source.getCharacteristics().getSpellAbility()) {
-                        final ArrayList<Card> list = AbilityFactory.getDefinedCards(source, "Targeted", sa);
+                        final List<Card> list = AbilityFactory.getDefinedCards(source, "Targeted", sa);
                         for (final Card c : list) {
                             if (!this.equipping.contains(c) && !c.equals(this.enchanting)) {
                                 return false;

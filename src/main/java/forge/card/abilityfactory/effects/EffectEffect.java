@@ -1,6 +1,6 @@
 package forge.card.abilityfactory.effects;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import forge.Card;
 import forge.Command;
@@ -91,8 +91,7 @@ public class EffectEffect extends SpellEffect {
         }
 
         if (sa.hasParam("EffectOwner")) {
-            ArrayList<Player> effectOwner;
-            effectOwner = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("EffectOwner"), sa);
+            List<Player> effectOwner = AbilityFactory.getDefinedPlayers(sa.getSourceCard(), sa.getParam("EffectOwner"), sa);
             ownerEff = effectOwner.get(0);
         }
 

@@ -110,7 +110,7 @@ public class ProtectAllEffect extends SpellEffect {
             players = sa.getParam("ValidPlayers");
         }
         if (!players.equals("")) {
-            final ArrayList<Player> playerList = AbilityFactory.getDefinedPlayers(host, players, sa);
+            final List<Player> playerList = AbilityFactory.getDefinedPlayers(host, players, sa);
             for (final Player player : playerList) {
                 for (final String gain : gains) {
                     player.addKeyword("Protection from " + gain);
