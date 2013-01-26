@@ -4,6 +4,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.io.File;
 
+import javax.swing.filechooser.FileFilter;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -37,7 +38,19 @@ public enum CCurrentDeck implements ICDoc {
 
     private File openStartDir = ForgeProps.getFile(NewConstants.NEW_DECKS);
 
+    private JFileChooser fileChooser = new JFileChooser("");
+    
     //========== Overridden methods
+    
+    private CCurrentDeck() {
+        FileFilter[] defaultFilters = fileChooser.getChoosableFileFilters();
+        for(FileFilter defFilter : defaultFilters)
+        {
+            fileChooser.removeChoosableFileFilter(defFilter);
+        }
+        
+        fileChooser.addChoosableFileFilter(DeckSerializer.DCK_FILTER);
+    }
 
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#getCommandOnSelect()
@@ -147,7 +160,7 @@ public enum CCurrentDeck implements ICDoc {
 
         final File file = this.getImportFilename();
 
-        if (file != null && file.getName().endsWith(".dck")) {
+        if (file != null) {
             try {
                 ((DeckController<DeckBase>) CDeckEditorUI.SINGLETON_INSTANCE
                         .getCurrentEditorController().getDeckController())
@@ -162,14 +175,14 @@ public enum CCurrentDeck implements ICDoc {
 
     /** */
     private File getImportFilename() {
-        final JFileChooser open = new JFileChooser(previousDirectory);
-        open.setDialogTitle("Import Deck");
-        open.addChoosableFileFilter(DeckSerializer.DCK_FILTER);
-        open.setCurrentDirectory(openStartDir);
-        final int returnVal = open.showOpenDialog(null);
+        fileChooser.setDialogTitle("Import Deck");
+        
+        fileChooser.setCurrentDirectory(openStartDir);
+        
+        final int returnVal = fileChooser.showOpenDialog(null);
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            final File file = open.getSelectedFile();
+            final File file = fileChooser.getSelectedFile();
             previousDirectory = file.getParentFile();
             return file;
         }
@@ -213,13 +226,12 @@ public enum CCurrentDeck implements ICDoc {
     }
 
     private File getExportFilename() {
-        final JFileChooser save = new JFileChooser(previousDirectory);
-        save.setDialogTitle("Export Deck");
-        save.setDialogType(JFileChooser.SAVE_DIALOG);
-        save.setFileFilter(DeckSerializer.DCK_FILTER);
-
-        if (save.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-            final File file = save.getSelectedFile();
+        fileChooser.setDialogTitle("Export Deck");
+        fileChooser.setDialogType(JFileChooser.SAVE_DIALOG);
+        fileChooser.setCurrentDirectory(previousDirectory);
+        
+        if (fileChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+            final File file = fileChooser.getSelectedFile();
             final String check = file.getAbsolutePath();
 
             previousDirectory = file.getParentFile();
