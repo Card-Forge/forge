@@ -240,6 +240,8 @@ public final class BoosterUtils {
             return CardRulesPredicates.Presets.IS_RED;
         } else if (input.equalsIgnoreCase("white")) {
             return CardRulesPredicates.Presets.IS_WHITE;
+        } else if (input.equalsIgnoreCase("land")) {
+            return CardRulesPredicates.Presets.IS_LAND;
         } else if (input.equalsIgnoreCase("creature")) {
             return CardRulesPredicates.Presets.IS_CREATURE;
         } else if (input.equalsIgnoreCase("artifact")) {
