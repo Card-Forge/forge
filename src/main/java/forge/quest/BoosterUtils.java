@@ -298,7 +298,7 @@ public final class BoosterUtils {
             // Type 2: a duplicate card of the players choice
             rewards.add(new QuestRewardCardChooser(QuestRewardCardChooser.poolType.playerCards, temp));
         } else if (temp.length >= 2 && temp[0].equalsIgnoreCase("chosen") && temp[1].equalsIgnoreCase("card")) {
-            // Type 2: a duplicate card of the players choice
+            // Type 3: a duplicate card of the players choice
             rewards.add(new QuestRewardCardChooser(QuestRewardCardChooser.poolType.predicateFilter, temp));
         } else if (temp.length > 0) {
             // Type 4: assume we are asking for a single copy of a specific card

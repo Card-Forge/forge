@@ -95,7 +95,7 @@ public class QuestRewardCardChooser implements InventoryItem  {
 
         for (String s : input) {
             if (s.startsWith("sets:") || s.startsWith("Sets:")) {
-                String[] tmp = s.split(":");
+                final String[] tmp = s.split(":");
                 if (tmp.length > 1) {
                     String [] setcodes = tmp[1].split(",");
                     if (setcodes.length > 0) {
@@ -113,12 +113,12 @@ public class QuestRewardCardChooser implements InventoryItem  {
                     }
                 }
             } else if (s.startsWith("rules:") || s.startsWith("Rules:")) {
-                String[] tmp = s.split(":");
+                final String[] tmp = s.split(":");
                 if (tmp.length > 1) {
                     String [] ruleCodes = tmp[1].split(",");
                     if (ruleCodes.length > 0) {
                         for (String rule : ruleCodes) {
-                            Predicate<CardRules> newRule = BoosterUtils.parseRulesLimitation(rule);
+                            final Predicate<CardRules> newRule = BoosterUtils.parseRulesLimitation(rule);
                             if (newRule != null) {
                                 filterRules = (filterRules == null ? newRule : Predicates.or(filterRules, newRule));
                             }
@@ -126,12 +126,11 @@ public class QuestRewardCardChooser implements InventoryItem  {
                     }
                 }
             } else if (s.startsWith("rarity:") || s.startsWith("Rarity:")) {
-                String[] tmp = s.split(":");
+                final String[] tmp = s.split(":");
                 if (tmp.length > 1) {
                     String [] rarityCodes = tmp[1].split(",");
                     if (rarityCodes.length > 0) {
                         for (String rarity : rarityCodes) {
-                            Predicate<CardPrinted> rarityRule = null;
                             if (rarity.startsWith("C") || rarity.startsWith("c")) {
                                 filterRarity = (filterRarity == null ? CardPrinted.Predicates.Presets.IS_COMMON : Predicates.or(filterRarity, CardPrinted.Predicates.Presets.IS_COMMON));
                             } else if (rarity.startsWith("U") || rarity.startsWith("u")) {
@@ -148,7 +147,7 @@ public class QuestRewardCardChooser implements InventoryItem  {
         }
 
         if (filterRules != null) {
-            Predicate<CardPrinted> rulesPrinted = Predicates.compose(filterRules, CardPrinted.FN_GET_RULES);
+            final Predicate<CardPrinted> rulesPrinted = Predicates.compose(filterRules, CardPrinted.FN_GET_RULES);
             filters = Predicates.and(filters, rulesPrinted);
         }
         if (filterRarity != null) {
@@ -216,7 +215,7 @@ public class QuestRewardCardChooser implements InventoryItem  {
                 }
                 Collections.sort(cardChoices);
 
-                return cardChoices;
+                return Collections.unmodifiableList(cardChoices);
             }
 
         } else if (type == poolType.predicateFilter) {
@@ -227,7 +226,7 @@ public class QuestRewardCardChooser implements InventoryItem  {
             }
             Collections.sort(cardChoices);
 
-            return cardChoices;
+            return Collections.unmodifiableList(cardChoices);
         } else {
             throw new RuntimeException("Unknown QuestRewardCardType: " + type);
         }
