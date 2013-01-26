@@ -1,0 +1,11 @@
+Name:Soul Ransom
+ManaCost:2 U B
+Types:Enchantment Aura
+Text:You control enchanted creature.
+K:Enchant creature
+A:SP$ Attach | Cost$ 2 U B | ValidTgts$ Creature | AILogic$ GainControl
+A:AB$ Sacrifice | Cost$ Discard<2/Card> | AnyOpponent$ True | SacValid$ Self | SubAbility$ DBDraw | SpellDescription$ CARDNAME's controller sacrifices it, then draws two cards. Only any opponent may activate this ability.
+SVar:DBDraw:DB$ Draw | NumCards$ 2 | Defined$ SourceController
+SVar:RemAIDeck:True
+SVar:Picture:http://www.wizards.com/global/images/magic/general/soul_ransom.jpg
+End

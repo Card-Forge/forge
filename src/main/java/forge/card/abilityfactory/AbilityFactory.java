@@ -1125,6 +1125,11 @@ public class AbilityFactory {
             if (!players.contains(p)) {
                 players.add(p);
             }
+        } else if (defined.equals("SourceController")) {
+            final Player p = sa.getSourceCard().getController();
+            if (!players.contains(p)) {
+                players.add(p);
+            }
         } else if (defined.equals("You")) {
             players.add(sa.getActivatingPlayer());
         } else if (defined.equals("Each")) {
