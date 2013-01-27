@@ -14,7 +14,7 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
-import forge.game.ai.ComputerUtil;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -84,6 +84,75 @@ public class DiscardEffect extends RevealEffectBase {
         return sb.toString();
     } // discardStackDescription()
 
+    private List<Card> discardComputerChooses(SpellAbility sa, Player victim, Player chooser, int numCards, String[] dValid, boolean isReveal){
+        // AI
+        final List<Card> dPChHand = new ArrayList<Card>(victim.getCardsIn(ZoneType.Hand));
+        final List<Card> discarded = new ArrayList<Card>();
+        
+        if (victim.isComputer()) { // discard AI cards
+            int max = chooser.getCardsIn(ZoneType.Hand).size();
+            max = Math.min(max, numCards);
+            List<Card> list = ((AIPlayer)victim).getAi().getCardsToDiscard(max, dValid, sa);
+            if (isReveal) {
+                GuiChoose.oneOrNone("Computer has chosen", list);
+            }
+            if (list != null) {
+                discarded.addAll(list);
+                for (Card card : list) {
+                    victim.discard(card, sa);
+                }
+            }
+            return discarded;
+        }
+        
+        // discard human cards
+        for (int i = 0; i < numCards; i++) {
+            if (dPChHand.size() > 0) {
+                List<Card> goodChoices = CardLists.filter(dPChHand, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        if (c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME,"
+                                + " put it onto the battlefield instead of putting it into your graveyard.")
+                                || !c.getSVar("DiscardMe").equals("")) {
+                            return false;
+                        }
+                        return true;
+                    }
+                });
+                if (goodChoices.isEmpty()) {
+                    goodChoices = dPChHand;
+                }
+                final List<Card> dChoices = new ArrayList<Card>();
+                if (sa.hasParam("DiscardValid")) {
+                    final String validString = sa.getParam("DiscardValid");
+                    if (validString.contains("Creature") && !validString.contains("nonCreature")) {
+                        final Card c = CardFactoryUtil.getBestCreatureAI(goodChoices);
+                        if (c != null) {
+                            dChoices.add(CardFactoryUtil.getBestCreatureAI(goodChoices));
+                        }
+                    }
+                }
+
+                Collections.sort(goodChoices, CardLists.TextLenReverseComparator);
+
+                CardLists.sortCMC(goodChoices);
+                dChoices.add(goodChoices.get(0));
+
+                final Card dC = CardUtil.getRandom(goodChoices);
+                dPChHand.remove(dC);
+
+                if (isReveal) {
+                    final List<Card> dCs = new ArrayList<Card>();
+                    dCs.add(dC);
+                    GuiChoose.oneOrNone("Computer has chosen", dCs);
+                }
+                discarded.add(dC);
+                victim.discard(dC, sa);
+            }
+        }
+        return discarded;
+    }
+    
     @Override
     public void resolve(SpellAbility sa) {
         final Card source = sa.getSourceCard();
@@ -209,67 +278,7 @@ public class DiscardEffect extends RevealEffectBase {
                         }
 
                         if (chooser.isComputer()) {
-                            // AI
-                            if (p.isComputer()) { // discard AI cards
-                                int max = chooser.getCardsIn(ZoneType.Hand).size();
-                                max = Math.min(max, numCards);
-                                List<Card> list = ComputerUtil.discardNumTypeAI(p, max, dValid, sa);
-                                if (mode.startsWith("Reveal")) {
-                                    GuiChoose.oneOrNone("Computer has chosen", list);
-                                }
-                                if (list != null) {
-                                    discarded.addAll(list);
-                                    for (Card card : list) {
-                                        p.discard(card, sa);
-                                    }
-                                }
-                                continue;
-                            }
-                            // discard human cards
-                            for (int i = 0; i < numCards; i++) {
-                                if (dPChHand.size() > 0) {
-                                    List<Card> goodChoices = CardLists.filter(dPChHand, new Predicate<Card>() {
-                                        @Override
-                                        public boolean apply(final Card c) {
-                                            if (c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME,"
-                                                    + " put it onto the battlefield instead of putting it into your graveyard.")
-                                                    || !c.getSVar("DiscardMe").equals("")) {
-                                                return false;
-                                            }
-                                            return true;
-                                        }
-                                    });
-                                    if (goodChoices.isEmpty()) {
-                                        goodChoices = dPChHand;
-                                    }
-                                    final List<Card> dChoices = new ArrayList<Card>();
-                                    if (sa.hasParam("DiscardValid")) {
-                                        final String validString = sa.getParam("DiscardValid");
-                                        if (validString.contains("Creature") && !validString.contains("nonCreature")) {
-                                            final Card c = CardFactoryUtil.getBestCreatureAI(goodChoices);
-                                            if (c != null) {
-                                                dChoices.add(CardFactoryUtil.getBestCreatureAI(goodChoices));
-                                            }
-                                        }
-                                    }
-
-                                    Collections.sort(goodChoices, CardLists.TextLenReverseComparator);
-
-                                    CardLists.sortCMC(goodChoices);
-                                    dChoices.add(goodChoices.get(0));
-
-                                    final Card dC = CardUtil.getRandom(goodChoices);
-                                    dPChHand.remove(dC);
-
-                                    if (mode.startsWith("Reveal")) {
-                                        final List<Card> dCs = new ArrayList<Card>();
-                                        dCs.add(dC);
-                                        GuiChoose.oneOrNone("Computer has chosen", dCs);
-                                    }
-                                    discarded.add(dC);
-                                    p.discard(dC, sa);
-                                }
-                            }
+                            discarded.addAll(discardComputerChooses(sa, p, chooser, numCards, dValid, mode.startsWith("Reveal")));
                         } else {
                             // human
                             if (mode.startsWith("Reveal")) {

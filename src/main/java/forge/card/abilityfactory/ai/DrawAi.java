@@ -38,6 +38,7 @@ import forge.game.ai.ComputerUtil;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.ai.ComputerUtilMana;
 import forge.game.phase.PhaseType;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.MyRandom;
@@ -72,7 +73,7 @@ public class DrawAi extends SpellAiLogic {
                 for (final CostPart part : abCost.getCostParts()) {
                     if (part instanceof CostDiscard) {
                         CostDiscard cd = (CostDiscard) part;
-                        cd.decideAIPayment(ai, sa, sa.getSourceCard(), null);
+                        cd.decideAIPayment((AIPlayer) ai, sa, sa.getSourceCard(), null);
                         List<Card> discards = cd.getList();
                         for (Card discard : discards) {
                             if (!ComputerUtil.isWorseThanDraw(ai, discard)) {

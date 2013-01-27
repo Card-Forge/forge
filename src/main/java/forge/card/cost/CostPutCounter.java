@@ -29,6 +29,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.GameState;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.match.CMatchUI;
@@ -156,7 +157,7 @@ public class CostPutCounter extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         Integer c = this.convertAmount();
         if (c == null) {
             c = AbilityFactory.calculateAmount(source, this.getAmount(), ability);
@@ -206,7 +207,7 @@ public class CostPutCounter extends CostPartWithList {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final boolean decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         this.resetList();
         if (this.isTargetingThis()) {
             this.addToList(source);

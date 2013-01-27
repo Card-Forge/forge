@@ -24,6 +24,7 @@ import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.InputPayManaCostUtil;
 import forge.game.GameState;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -175,7 +176,7 @@ public class ComputerUtilMana {
                     // Pay additional costs
                     if (ma.getPayCosts() != null) {
                         final CostPayment pay = new CostPayment(ma.getPayCosts(), ma, game);
-                        if (!pay.payComputerCosts(ai, game)) {
+                        if (!pay.payComputerCosts((AIPlayer)ai, game)) {
                             continue;
                         }
                     } else {

@@ -20,6 +20,7 @@ package forge.card.cost;
 import forge.Card;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 
 /**
@@ -169,7 +170,7 @@ public abstract class CostPart {
      *            {@link forge.card.cost.CostPayment}
      * @return true, if successful
      */
-    public abstract boolean decideAIPayment(final Player ai, SpellAbility ability, Card source, CostPayment payment);
+    public abstract boolean decideAIPayment(final AIPlayer ai, SpellAbility ability, Card source, CostPayment payment);
 
     /**
      * Pay ai.
@@ -184,7 +185,7 @@ public abstract class CostPart {
      *            {@link forge.card.cost.CostPayment}
      * @param game
      */
-    public abstract void payAI(final Player ai, SpellAbility ability, Card source, CostPayment payment, GameState game);
+    public abstract void payAI(final AIPlayer ai, SpellAbility ability, Card source, CostPayment payment, GameState game);
 
     /**
      * Pay human.

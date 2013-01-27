@@ -29,6 +29,7 @@ import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -148,7 +149,7 @@ public class CostUntapType extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         for (final Card c : this.getList()) {
             c.untap();
         }
@@ -195,7 +196,7 @@ public class CostUntapType extends CostPartWithList {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final boolean decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         final boolean untap = payment.getCost().hasUntapCost();
         final String amount = this.getAmount();
         Integer c = this.convertAmount();

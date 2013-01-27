@@ -30,17 +30,18 @@ public class PlayerControllerHuman extends PlayerController {
     private final Input defaultInput;
     private final Input blockInput;
     private final Input cleanupInput;
-
+    private final HumanPlayer player;
     
     public final Input getDefaultInput() {
         return defaultInput;
     }
 
     public PlayerControllerHuman(GameState game0, HumanPlayer p) {
-        super(game0, p);
+        super(game0);
+        player = p;
         
         defaultInput = new InputPassPriority();
-        blockInput = new InputBlock(player);
+        blockInput = new InputBlock(getPlayer());
         cleanupInput = new InputCleanup(game);
     }
 
@@ -51,7 +52,7 @@ public class PlayerControllerHuman extends PlayerController {
 
 
     public boolean isUiSetToSkipPhase(final Player turn, final PhaseType phase) {
-        boolean isLocalPlayer = player.equals(Singletons.getControl().getPlayer());
+        boolean isLocalPlayer = getPlayer().equals(Singletons.getControl().getPlayer());
         return isLocalPlayer && !CMatchUI.SINGLETON_INSTANCE.stopAtPhase(turn, phase);
     }
 
@@ -104,8 +105,9 @@ public class PlayerControllerHuman extends PlayerController {
         final int answer = JOptionPane.showConfirmDialog(null, question.toString(),
                 title.toString(), JOptionPane.YES_NO_OPTION);
 
-        boolean result =  answer == JOptionPane.YES_OPTION;
-        game.getAction().playCardWithoutManaCost(cascadedCard, player);
+        boolean result = answer == JOptionPane.YES_OPTION;
+        if ( result )
+            game.getAction().playCardWithoutManaCost(cascadedCard, getPlayer());
         return result;
     }
 
@@ -115,6 +117,14 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public void mayPlaySpellAbilityForFree(SpellAbility copySA) {
         game.getAction().playSpellAbilityForFree(copySA);
+    }
+
+    /**
+     * @return the player
+     */
+    @Override
+    public Player getPlayer() {
+        return player;
     }
 
 

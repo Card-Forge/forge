@@ -35,11 +35,13 @@ import forge.GameActionUtil;
 import forge.Singletons;
 
 import forge.card.abilityfactory.ApiType;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.CostDiscard;
 import forge.card.cost.CostPart;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.game.GameState;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
@@ -54,14 +56,14 @@ import forge.util.Aggregates;
  */
 public class AiController {
 
-    private final Player player;
+    private final AIPlayer player;
     private final GameState game;
     public GameState getGame()
     {
         return game;
     }
 
-    public Player getPlayer()
+    public AIPlayer getPlayer()
     {
         return player;
     }
@@ -71,7 +73,7 @@ public class AiController {
      * Constructor for ComputerAI_General.
      * </p>
      */
-    public AiController(final Player computerPlayer, final GameState game0) {
+    public AiController(final AIPlayer computerPlayer, final GameState game0) {
         player = computerPlayer;
         game = game0;
     }
@@ -481,13 +483,99 @@ public class AiController {
         }
     }; // Comparator
     
-    public void cleanupDiscard() {
-        final int size = player.getCardsIn(ZoneType.Hand).size();
-
-        if (!player.isUnlimitedHandSize()) {
-            final int numDiscards = size - player.getMaxHandSize();
-            player.discard(numDiscards, null);
+    /**
+     * <p>
+     * AI_discardNumType.
+     * </p>
+     * 
+     * @param numDiscard
+     *            a int.
+     * @param uTypes
+     *            an array of {@link java.lang.String} objects. May be null for
+     *            no restrictions.
+     * @param sa
+     *            a {@link forge.card.spellability.SpellAbility} object.
+     * @return a List<Card> of discarded cards.
+     */
+    public List<Card> getCardsToDiscard(final int numDiscard, final String[] uTypes, final SpellAbility sa) {
+        List<Card> hand = new ArrayList<Card>(player.getCardsIn(ZoneType.Hand));
+        Card sourceCard = null;
+    
+        if ((uTypes != null) && (sa != null)) {
+            hand = CardLists.getValidCards(hand, uTypes, sa.getActivatingPlayer(), sa.getSourceCard());
         }
+    
+        if (hand.size() < numDiscard) {
+            return null;
+        }
+    
+        final List<Card> discardList = new ArrayList<Card>();
+        int count = 0;
+        if (sa != null) {
+            sourceCard = sa.getSourceCard();
+        }
+    
+        // look for good discards
+        while (count < numDiscard) {
+            Card prefCard = null;
+            if (sa != null && sa.getActivatingPlayer() != null && sa.getActivatingPlayer().isHuman()) {
+                for (Card c : hand) {
+                    if (c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME,"
+                            + " put it onto the battlefield instead of putting it into your graveyard.")) {
+                        prefCard = c;
+                        break;
+                    }
+                }
+            }
+            if (prefCard == null) {
+                prefCard = ComputerUtil.getCardPreference(player, sourceCard, "DiscardCost", hand);
+            }
+            if (prefCard != null) {
+                discardList.add(prefCard);
+                hand.remove(prefCard);
+                count++;
+            } else {
+                break;
+            }
+        }
+    
+        final int discardsLeft = numDiscard - count;
+    
+        // choose rest
+        for (int i = 0; i < discardsLeft; i++) {
+            if (hand.isEmpty()) {
+                continue;
+            }
+            final int numLandsInPlay = Iterables.size(Iterables.filter(player.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS));
+            final List<Card> landsInHand = CardLists.filter(hand, CardPredicates.Presets.LANDS);
+            final int numLandsInHand = landsInHand.size();
+    
+            // Discard a land
+            boolean canDiscardLands = numLandsInHand > 3  || (numLandsInHand > 2 && numLandsInPlay > 0)
+            || (numLandsInHand > 1 && numLandsInPlay > 2) || (numLandsInHand > 0 && numLandsInPlay > 5);
+    
+            if (canDiscardLands) {
+                discardList.add(landsInHand.get(0));
+                hand.remove(landsInHand.get(0));
+            } else { // Discard other stuff
+                CardLists.sortCMC(hand);
+                int numLandsAvailable = numLandsInPlay;
+                if (numLandsInHand > 0) {
+                    numLandsAvailable++;
+                }
+                //Discard unplayable card
+                if (hand.get(0).getCMC() > numLandsAvailable) {
+                    discardList.add(hand.get(0));
+                    hand.remove(hand.get(0));
+                } else { //Discard worst card
+                    Card worst = CardFactoryUtil.getWorstAI(hand);
+                    discardList.add(worst);
+                    hand.remove(worst);
+                }
+            }
+        }
+    
+        return discardList;
     }
 }
 

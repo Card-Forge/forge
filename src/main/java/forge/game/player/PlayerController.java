@@ -19,15 +19,13 @@ import forge.gui.match.CMatchUI;
  */
 public abstract class PlayerController {
 
-    protected final Player player;
     protected final GameState game;
     
     private PhaseType autoPassUntil = null;
 
 
-    public PlayerController(GameState game0, Player p) {
+    public PlayerController(GameState game0) {
         game = game0;
-        player = p;
     }
     public abstract Input getDefaultInput();
     public abstract Input getBlockInput();
@@ -53,7 +51,7 @@ public abstract class PlayerController {
 
 
     public boolean isUiSetToSkipPhase(final Player turn, final PhaseType phase) {
-        boolean isLocalPlayer = player.equals(Singletons.getControl().getPlayer());
+        boolean isLocalPlayer = getPlayer().equals(Singletons.getControl().getPlayer());
         return isLocalPlayer && !CMatchUI.SINGLETON_INSTANCE.stopAtPhase(turn, phase);
     }
 
@@ -68,7 +66,7 @@ public abstract class PlayerController {
     public void passPriority() {
         PhaseHandler handler = game.getPhaseHandler();
         // may pass only priority is has
-        if ( handler.getPriorityPlayer() == player )
+        if ( handler.getPriorityPlayer() == getPlayer() )
             game.getPhaseHandler().passPriority();
     }
 
@@ -79,6 +77,10 @@ public abstract class PlayerController {
     public abstract void playFromSuspend(Card c);
     public abstract boolean playCascade(Card cascadedCard, Card sourceCard);
     public abstract void mayPlaySpellAbilityForFree(SpellAbility copySA);
+    /**
+     * @return the player
+     */
+    protected abstract Player getPlayer();
 
 
 

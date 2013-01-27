@@ -58,6 +58,7 @@ import forge.game.ai.ComputerUtil;
 import forge.game.event.CardDamagedEvent;
 import forge.game.event.FlipCoinEvent;
 import forge.game.event.LifeLossEvent;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -148,42 +149,9 @@ public final class GameActionUtil {
 
             if (cascadedCard != null) {
                 Player p = cascadedCard.getController();
-
-                if (p.isHuman()) {
-                    final StringBuilder title = new StringBuilder();
-                    title.append(cascCard.getName()).append(" - Cascade Ability");
-                    final StringBuilder question = new StringBuilder();
-                    question.append("Cast ").append(cascadedCard.getName());
-                    question.append(" without paying its mana cost?");
-
-                    final int answer = JOptionPane.showConfirmDialog(null, question.toString(),
-                            title.toString(), JOptionPane.YES_NO_OPTION);
-
-                    if (answer == JOptionPane.YES_OPTION) {
-                        game.getAction().playCardWithoutManaCost(cascadedCard, p);
-                        revealed.remove(cascadedCard);
-                    }
-                } else {
-                    final List<SpellAbility> choices = cascadedCard.getBasicSpells();
-
-                    for (final SpellAbility sa : choices) {
-                        sa.setActivatingPlayer(p);
-                        //Spells
-                        if (sa instanceof Spell) {
-                            Spell spell = (Spell) sa;
-                            if (!spell.canPlayFromEffectAI(false, true)) {
-                                continue;
-                            }
-                        } else {
-                            if (!sa.canPlayAI()) {
-                                continue;
-                            }
-                        }
-                        ComputerUtil.playSpellAbilityWithoutPayingManaCost(p, sa, game);
-                        revealed.remove(cascadedCard);
-                        break;
-                    }
-                }
+                // returns boolean, but spell resolution stays inside the method anyway (for now)
+                if ( p.getController().playCascade(cascadedCard, cascCard) )
+                    revealed.remove(cascadedCard);
             }
             CardLists.shuffle(revealed);
             for (final Card bottom : revealed) {
@@ -324,7 +292,7 @@ public final class GameActionUtil {
                                     continue;
                                 }
                             }
-                            ComputerUtil.playSpellAbilityWithoutPayingManaCost(p, sa, game);
+                            ComputerUtil.playSpellAbilityWithoutPayingManaCost((AIPlayer)p, sa, game);
                             revealed.remove(rippledCards[i]);
                             break;
                         }

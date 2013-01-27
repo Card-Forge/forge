@@ -31,7 +31,7 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.GameState;
-import forge.game.ai.ComputerUtil;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
@@ -154,7 +154,7 @@ public class CostDiscard extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         for (final Card c : this.getList()) {
             ai.discard(c, ability);
         }
@@ -261,7 +261,7 @@ public class CostDiscard extends CostPartWithList {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final boolean decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         final String type = this.getType();
 
         final List<Card> hand = ai.getCardsIn(ZoneType.Hand);
@@ -301,7 +301,7 @@ public class CostDiscard extends CostPartWithList {
             if (type.equals("Random")) {
                 this.setList(CardLists.getRandomSubList(hand, c));
             } else {
-                this.setList(ComputerUtil.discardNumTypeAI(ai, c, type.split(";"), ability));
+                this.setList(ai.getAi().getCardsToDiscard(c, type.split(";"), ability));
             }
         }
         return this.getList() != null;

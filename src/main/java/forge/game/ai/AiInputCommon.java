@@ -26,6 +26,7 @@ import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.GameState;
 import forge.game.phase.PhaseType;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 
@@ -42,7 +43,7 @@ public class AiInputCommon extends Input {
     private static final long serialVersionUID = -3091338639571662216L;
 
     private final AiController computer;
-    private final Player player; 
+    private final AIPlayer player; 
     private final GameState game;
 
     /**
@@ -82,8 +83,14 @@ public class AiInputCommon extends Input {
         } else {
             switch(phase) {
                 case CLEANUP:
-                    if ( game.getPhaseHandler().getPlayerTurn() == player )
-                        computer.cleanupDiscard();
+                    if ( game.getPhaseHandler().getPlayerTurn() == player ) {
+                        final int size = player.getCardsIn(ZoneType.Hand).size();
+                        
+                        if (!player.isUnlimitedHandSize()) {
+                            final int numDiscards = size - player.getMaxHandSize();
+                            player.discard(numDiscards, null);
+                        }
+                    }
                     break;
 
                 case COMBAT_DECLARE_ATTACKERS:

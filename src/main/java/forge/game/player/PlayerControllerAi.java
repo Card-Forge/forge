@@ -26,6 +26,7 @@ public class PlayerControllerAi extends PlayerController {
     private Input cleanupInput;
     
     private final AiController brains;
+    private final AIPlayer player;
     
 
     public final Input getDefaultInput() {
@@ -33,12 +34,13 @@ public class PlayerControllerAi extends PlayerController {
     }
 
     public PlayerControllerAi(GameState game, AIPlayer p) {
-        super(game, p);
+        super(game);
+        player = p;
         
-        brains = new AiController(player, game); 
+        brains = new AiController(p, game); 
         
         defaultInput = new AiInputCommon(brains);
-        blockInput = new AiInputBlock(game, player);
+        blockInput = new AiInputBlock(game, getPlayer());
         cleanupInput = getDefaultInput();
         
     }
@@ -101,7 +103,7 @@ public class PlayerControllerAi extends PlayerController {
         final List<SpellAbility> choices = cascadedCard.getBasicSpells();
 
         for (final SpellAbility sa : choices) {
-            sa.setActivatingPlayer(player);
+            sa.setActivatingPlayer(getPlayer());
             //Spells
             if (sa instanceof Spell) {
                 Spell spell = (Spell) sa;
@@ -113,8 +115,6 @@ public class PlayerControllerAi extends PlayerController {
                     continue;
                 }
             }
-            
-            
             ComputerUtil.playSpellAbilityWithoutPayingManaCost(player, sa, game);
             return true;
         }
@@ -137,11 +137,16 @@ public class PlayerControllerAi extends PlayerController {
         if (copySA instanceof Spell) {
             Spell spell = (Spell) copySA;
             if (spell.canPlayFromEffectAI(false, true)) {
-                ComputerUtil.playStackFree(player, copySA);
+                ComputerUtil.playStackFree(getPlayer(), copySA);
             }
         } else if (copySA.canPlayAI()) {
-            ComputerUtil.playStackFree(player, copySA);
+            ComputerUtil.playStackFree(getPlayer(), copySA);
         }
+    }
+
+    @Override
+    protected Player getPlayer() {
+        return player;
     }
 
 

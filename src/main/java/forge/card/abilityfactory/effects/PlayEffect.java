@@ -24,6 +24,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellAbilityRestriction;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -227,7 +228,7 @@ public class PlayEffect extends SpellEffect {
                     if (tgtSA instanceof Spell) {
                         Spell spell = (Spell) tgtSA;
                         if (spell.canPlayFromEffectAI(!optional, true) || !optional) {
-                            ComputerUtil.playSpellAbilityWithoutPayingManaCost(controller, tgtSA, game);
+                            ComputerUtil.playSpellAbilityWithoutPayingManaCost((AIPlayer)controller, tgtSA, game);
                             if (remember) {
                                 source.addRemembered(tgtSA.getSourceCard());
                             }

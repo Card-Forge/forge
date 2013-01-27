@@ -24,7 +24,6 @@ import java.util.Random;
 
 
 import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 
 import forge.Card;
 import forge.CardLists;
@@ -51,6 +50,7 @@ import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -77,7 +77,7 @@ public class ComputerUtil {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public static boolean handlePlayingSpellAbility(final Player ai, final SpellAbility sa, final GameState game) {
+    public static boolean handlePlayingSpellAbility(final AIPlayer ai, final SpellAbility sa, final GameState game) {
         
         if (sa instanceof AbilityStatic) {
             final Cost cost = sa.getPayCosts();
@@ -217,7 +217,7 @@ public class ComputerUtil {
                 game.getStack().add(sa);
             } else {
                 final CostPayment pay = new CostPayment(cost, sa, game);
-                if (pay.payComputerCosts(ai, game)) {
+                if (pay.payComputerCosts((AIPlayer)ai, game)) {
                     game.getStack().add(sa);
                 }
             }
@@ -251,7 +251,7 @@ public class ComputerUtil {
      * @param sa
      *            a {@link forge.card.spellability.SpellAbility} object.
      */
-    public static final void playSpellAbilityWithoutPayingManaCost(final Player ai, final SpellAbility sa, final GameState game) {
+    public static final void playSpellAbilityWithoutPayingManaCost(final AIPlayer ai, final SpellAbility sa, final GameState game) {
         final SpellAbility newSA = sa.copy();
         final Cost cost = new Cost(sa.getSourceCard(), "", false);
         if (newSA.getPayCosts() != null) {
@@ -306,7 +306,7 @@ public class ComputerUtil {
                 ComputerUtilMana.payManaCost(ai, sa);
             } else {
                 final CostPayment pay = new CostPayment(cost, sa, game);
-                pay.payComputerCosts(ai, game);
+                pay.payComputerCosts((AIPlayer)ai, game);
             }
 
             AbilityFactory.resolve(sa, false);
@@ -443,103 +443,6 @@ public class ComputerUtil {
         }
         return sacList;
     }
-
-    /**
-     * <p>
-     * AI_discardNumType.
-     * </p>
-     * 
-     * @param numDiscard
-     *            a int.
-     * @param uTypes
-     *            an array of {@link java.lang.String} objects. May be null for
-     *            no restrictions.
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a List<Card> of discarded cards.
-     */
-    public static List<Card> discardNumTypeAI(final Player ai, final int numDiscard, final String[] uTypes, final SpellAbility sa) {
-        List<Card> hand = new ArrayList<Card>(ai.getCardsIn(ZoneType.Hand));
-        Card sourceCard = null;
-
-        if ((uTypes != null) && (sa != null)) {
-            hand = CardLists.getValidCards(hand, uTypes, sa.getActivatingPlayer(), sa.getSourceCard());
-        }
-
-        if (hand.size() < numDiscard) {
-            return null;
-        }
-
-        final List<Card> discardList = new ArrayList<Card>();
-        int count = 0;
-        if (sa != null) {
-            sourceCard = sa.getSourceCard();
-        }
-
-        // look for good discards
-        while (count < numDiscard) {
-            Card prefCard = null;
-            if (sa != null && sa.getActivatingPlayer() != null && sa.getActivatingPlayer().isHuman()) {
-                for (Card c : hand) {
-                    if (c.hasKeyword("If a spell or ability an opponent controls causes you to discard CARDNAME,"
-                            + " put it onto the battlefield instead of putting it into your graveyard.")) {
-                        prefCard = c;
-                        break;
-                    }
-                }
-            }
-            if (prefCard == null) {
-                prefCard = ComputerUtil.getCardPreference(ai, sourceCard, "DiscardCost", hand);
-            }
-            if (prefCard != null) {
-                discardList.add(prefCard);
-                hand.remove(prefCard);
-                count++;
-            } else {
-                break;
-            }
-        }
-
-        final int discardsLeft = numDiscard - count;
-
-        // choose rest
-        for (int i = 0; i < discardsLeft; i++) {
-            if (hand.isEmpty()) {
-                continue;
-            }
-            final int numLandsInPlay = Iterables.size(Iterables.filter(ai.getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.LANDS));
-            final List<Card> landsInHand = CardLists.filter(hand, CardPredicates.Presets.LANDS);
-            final int numLandsInHand = landsInHand.size();
-
-            // Discard a land
-            boolean canDiscardLands = numLandsInHand > 3  || (numLandsInHand > 2 && numLandsInPlay > 0)
-            || (numLandsInHand > 1 && numLandsInPlay > 2) || (numLandsInHand > 0 && numLandsInPlay > 5);
-
-            if (canDiscardLands) {
-                discardList.add(landsInHand.get(0));
-                hand.remove(landsInHand.get(0));
-            } else { // Discard other stuff
-                CardLists.sortCMC(hand);
-                int numLandsAvailable = numLandsInPlay;
-                if (numLandsInHand > 0) {
-                    numLandsAvailable++;
-                }
-                //Discard unplayable card
-                if (hand.get(0).getCMC() > numLandsAvailable) {
-                    discardList.add(hand.get(0));
-                    hand.remove(hand.get(0));
-                } else { //Discard worst card
-                    Card worst = CardFactoryUtil.getWorstAI(hand);
-                    discardList.add(worst);
-                    hand.remove(worst);
-                }
-            }
-        }
-
-        return discardList;
-    }
-
-
 
     /**
      * <p>

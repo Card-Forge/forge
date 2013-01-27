@@ -1657,19 +1657,6 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
      * discard.
      * </p>
      * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a {@link forge.CardList} object.
-     */
-    public final void discard(final SpellAbility sa) {
-        this.discard(1, sa);
-    }
-
-    /**
-     * <p>
-     * discard.
-     * </p>
-     * 
      * @param c
      *            a {@link forge.Card} object.
      * @param sa

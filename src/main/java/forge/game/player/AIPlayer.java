@@ -29,7 +29,6 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.ai.AiController;
-import forge.game.ai.ComputerUtil;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
 import forge.util.MyRandom;
@@ -148,9 +147,9 @@ public class AIPlayer extends Player {
     public final void discard(final int num, final SpellAbility sa) {
         int max = this.getCardsIn(ZoneType.Hand).size();
         max = Math.min(max, num);
-        final List<Card> discarded = ComputerUtil.discardNumTypeAI(this, max, null, sa);
-        for (int i = 0; i < discarded.size(); i++) {
-            this.doDiscard(discarded.get(i), sa);
+        final List<Card> toDiscard = this.getAi().getCardsToDiscard(max, null, sa);
+        for (int i = 0; i < toDiscard.size(); i++) {
+            this.doDiscard(toDiscard.get(i), sa);
         }
     } // end discard
 
@@ -231,7 +230,7 @@ public class AIPlayer extends Player {
      */
     @Override
     protected final void discardChainsOfMephistopheles() {
-        this.discard(null);
+        this.discard(1, null);
         this.drawCard();
     }
 

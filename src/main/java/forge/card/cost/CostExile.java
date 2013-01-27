@@ -35,6 +35,7 @@ import forge.card.spellability.SpellAbilityStackInstance;
 import forge.control.input.Input;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
+import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
@@ -202,7 +203,7 @@ public class CostExile extends CostPartWithList {
      * forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final void payAI(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
+    public final void payAI(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment, final GameState game) {
         for (final Card c : this.getList()) {
             Singletons.getModel().getGame().getAction().exile(c);
             if (this.from.equals(ZoneType.Stack)) {
@@ -296,7 +297,7 @@ public class CostExile extends CostPartWithList {
      * , forge.Card, forge.card.cost.Cost_Payment)
      */
     @Override
-    public final boolean decideAIPayment(final Player ai, final SpellAbility ability, final Card source, final CostPayment payment) {
+    public final boolean decideAIPayment(final AIPlayer ai, final SpellAbility ability, final Card source, final CostPayment payment) {
         this.resetList();
         if (this.isTargetingThis()) {
             this.getList().add(source);
