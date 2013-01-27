@@ -51,7 +51,11 @@ public class DigUntilAi extends SpellAiLogic {
 
         if (sa.getTarget() != null) {
             tgt.resetTargets();
-            sa.getTarget().addTarget(ai);
+            if (sa.isCurse()) {
+                sa.getTarget().addTarget(ai.getOpponent());
+            } else {
+                sa.getTarget().addTarget(ai);
+            }
         }
 
         return true;
