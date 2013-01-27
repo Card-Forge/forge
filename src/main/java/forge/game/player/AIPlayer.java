@@ -29,8 +29,6 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
 import forge.game.GameState;
 import forge.game.ai.AiController;
-import forge.game.ai.AiInputBlock;
-import forge.game.ai.AiInputCommon;
 import forge.game.ai.ComputerUtil;
 import forge.game.zone.ZoneType;
 import forge.util.Aggregates;
@@ -46,7 +44,7 @@ import forge.util.MyRandom;
  */
 public class AIPlayer extends Player {
 
-    private final AiController brains;
+    private final PlayerControllerAi controller;
     /**
      * <p>
      * Constructor for AIPlayer.
@@ -57,14 +55,14 @@ public class AIPlayer extends Player {
      *            a {@link java.lang.String} object.
      */
     public AIPlayer(final LobbyPlayer player, final GameState game) {
-        super(player, game, new PlayerController(game));
-        brains = new AiController(this, game);
-        PlayerController pc = getController();
-        pc.setDefaultInput(new AiInputCommon(brains));
-        pc.setBlockInput(new AiInputBlock(game, this));
-        pc.setCleanupInput(pc.getDefaultInput());
+        super(player, game);
+        controller = new PlayerControllerAi(game, this);
     }
 
+    public AiController getAi() { 
+        return controller.getAi();
+    }
+    
 
     // //////////////
     // /
@@ -243,5 +241,14 @@ public class AIPlayer extends Player {
     @Override
     public PlayerType getType() {
         return PlayerType.COMPUTER;
+    }
+
+
+    /* (non-Javadoc)
+     * @see forge.game.player.Player#getController()
+     */
+    @Override
+    public PlayerController getController() {
+        return controller;
     }
 } // end AIPlayer class

@@ -2,13 +2,13 @@ package forge.game.player;
 
 import java.util.List;
 
+import forge.Card;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
 import forge.game.GameState;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
-import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
 
 
@@ -17,31 +17,22 @@ import forge.gui.match.CMatchUI;
  * 
  * Handles phase skips for now.
  */
-public class PlayerController {
+public abstract class PlayerController {
 
-    // Should keep some 'Model' of player here.
-    // Yet I have little idea of what is model now.
-    private Player player;
-
+    protected final Player player;
+    protected final GameState game;
+    
     private PhaseType autoPassUntil = null;
 
-    private Input defaultInput;
-    private Input blockInput;
-    private Input cleanupInput;
-    
-    private final GameState game;
 
-
-    public final Input getDefaultInput() {
-        return defaultInput;
-    }
-
-    public PlayerController(GameState game0) {
+    public PlayerController(GameState game0, Player p) {
         game = game0;
-    }
-    void setPlayer(Player p) {
         player = p;
     }
+    public abstract Input getDefaultInput();
+    public abstract Input getBlockInput();
+    public abstract Input getCleanupInput();
+
 
     /**
      * TODO: Write javadoc for this method.
@@ -66,37 +57,10 @@ public class PlayerController {
         return isLocalPlayer && !CMatchUI.SINGLETON_INSTANCE.stopAtPhase(turn, phase);
     }
 
-    void setDefaultInput(Input input) {
-        defaultInput = input;
-    }
-
-
-    void setCleanupInput(Input input) {
-        // TODO Auto-generated method stub
-        cleanupInput = input;
-    }
-
     /**
      * Uses GUI to learn which spell the player (human in our case) would like to play
      */
-    public SpellAbility getAbilityToPlay(List<SpellAbility> abilities) {
-        if (abilities.size() == 0) {
-            return null;
-        } else if (abilities.size() == 1) {
-            return abilities.get(0);
-        } else {
-            return GuiChoose.oneOrNone("Choose", abilities); // some day network interaction will be here
-        }
-    }
-
-    /** Input to use when player has to declare blockers */
-    public Input getBlockInput() {
-        return blockInput;
-    }
-
-    void setBlockInput(Input blockInput0) {
-        this.blockInput = blockInput0; 
-    }
+    public abstract SpellAbility getAbilityToPlay(List<SpellAbility> abilities);
 
     /**
      * TODO: Write javadoc for this method.
@@ -109,11 +73,12 @@ public class PlayerController {
     }
 
     /**
-     * @return the cleanupInput
+     * TODO: Write javadoc for this method.
+     * @param c
      */
-    public Input getCleanupInput() {
-        return cleanupInput;
-    }
+    public abstract void playFromSuspend(Card c);
+    public abstract boolean playCascade(Card cascadedCard, Card sourceCard);
+    public abstract void mayPlaySpellAbilityForFree(SpellAbility copySA);
 
 
 

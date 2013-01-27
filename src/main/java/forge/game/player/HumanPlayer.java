@@ -24,9 +24,6 @@ import forge.Card;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
-import forge.control.input.InputBlock;
-import forge.control.input.InputCleanup;
-import forge.control.input.InputPassPriority;
 import forge.game.GameType;
 import forge.game.GameState;
 import forge.game.zone.ZoneType;
@@ -44,7 +41,8 @@ import forge.quest.bazaar.QuestItemType;
  * @version $Id$
  */
 public class HumanPlayer extends Player {
-
+    private PlayerControllerHuman controller;
+    
     /**
      * <p>
      * Constructor for HumanPlayer.
@@ -54,10 +52,9 @@ public class HumanPlayer extends Player {
      *            a {@link java.lang.String} object.
      */
     public HumanPlayer(final LobbyPlayer player, GameState game) {
-        super(player, game, new PlayerController(game));
-        getController().setDefaultInput(new InputPassPriority());
-        getController().setBlockInput(new InputBlock(this));
-        getController().setCleanupInput(new InputCleanup(game));
+        super(player, game);
+        
+        controller = new PlayerControllerHuman(game, this);
     }
 
     // //////////////
@@ -77,6 +74,8 @@ public class HumanPlayer extends Player {
     public final boolean isHuman() {
         return true;
     }
+
+    
 
     /**
      * <p>
@@ -222,5 +221,13 @@ public class HumanPlayer extends Player {
             getStats().notifyOpeningHandSize(newHand);
         }
         return newHand;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.game.player.Player#getController()
+     */
+    @Override
+    public PlayerController getController() {
+        return controller;
     }
 } // end HumanPlayer class
