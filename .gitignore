@@ -271,6 +271,7 @@ res/decks/Zvi[!!-~]Mowshowitz's[!!-~]Mono-Black[!!-~]Control.dck
 res/decks/constructed/*.dck
 res/decks/draft/*
 res/decks/o1.bdk
+res/decks/plane/*.dck
 res/decks/sealed/*
 res/gauntlet
 res/images

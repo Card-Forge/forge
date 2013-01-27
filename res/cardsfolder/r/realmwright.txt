@@ -3,8 +3,8 @@ ManaCost:U
 Types:Creature Vedalken Wizard
 Text:no text
 PT:1/1
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ DBChooseBasic | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a basic land type.
-SVar:DBChooseBasic:AB$ ChooseType | Cost$ 0 | Type$ Basic Land
+K:ETBReplacement:Other:DBChooseBasic
+SVar:DBChooseBasic:DB$ ChooseType | Type$ Basic Land | SpellDescription$ As CARDNAME enters the battlefield, choose a basic land type.
 S:Mode$ Continuous | Affected$ Land.YouCtrl | AddType$ ChosenType | Description$ Lands you control are the chosen type in addition to their other types.
 SVar:RemAIDeck:True
 SVar:Rarity:Common
