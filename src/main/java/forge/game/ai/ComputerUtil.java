@@ -107,7 +107,6 @@ public class ComputerUtil {
 
         if (cost == null) {
             ComputerUtilMana.payManaCost(ai, sa);
-            sa.getBeforePayManaAI().execute();
             game.getStack().addAndUnfreeze(sa);
             return true;
         } else {

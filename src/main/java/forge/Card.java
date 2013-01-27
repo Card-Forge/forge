@@ -48,7 +48,6 @@ import forge.card.replacement.ReplacementEffect;
 import forge.card.replacement.ReplacementResult;
 import forge.card.spellability.AbilityManaPart;
 import forge.card.spellability.AbilityTriggered;
-import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
@@ -56,9 +55,7 @@ import forge.card.staticability.StaticAbility;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerType;
 import forge.card.trigger.ZCTrigger;
-import forge.game.GameState;
 import forge.game.GlobalRuleChange;
-import forge.game.ai.ComputerUtil;
 import forge.game.event.CounterAddedEvent;
 import forge.game.event.CardEquippedEvent;
 import forge.game.event.CounterRemovedEvent;
@@ -1328,7 +1325,7 @@ public class Card extends GameEntity implements Comparable<Card> {
             }
 
             if (this.hasSuspend() && Singletons.getModel().getGame().isCardExiled(this)) {
-                playFromSuspend();
+                getOwner().getController().playFromSuspend(this);
             }
         }
 
@@ -1336,41 +1333,6 @@ public class Card extends GameEntity implements Comparable<Card> {
         Singletons.getModel().getGame().getEvents().post(new CounterRemovedEvent(delta));
 
         this.updateObservers();
-    }
-
-    private void playFromSuspend() {
-        final Card c = this;
-        final GameState game = Singletons.getModel().getGame();
-
-        c.setSuspendCast(true);
-        // set activating player for base spell ability
-        c.getSpellAbility()[0].setActivatingPlayer(c.getOwner());
-        // Any trigger should cause the phase not to skip
-        for (Player p : game.getPlayers()) {
-            p.getController().autoPassCancel();
-        }
-
-        if (c.getOwner().isHuman()) {
-            game.getAction().playCardWithoutManaCost(c, c.getOwner());
-        } else {
-            final List<SpellAbility> choices = this.getBasicSpells();
-
-            for (final SpellAbility sa : choices) {
-                //Spells
-                if (sa instanceof Spell) {
-                    Spell spell = (Spell) sa;
-                    if (!spell.canPlayFromEffectAI(true, true)) {
-                        continue;
-                    }
-                } else {
-                    if (!sa.canPlayAI()) {
-                        continue;
-                    }
-                }
-                ComputerUtil.playSpellAbilityWithoutPayingManaCost(c.getOwner(), sa, game);
-                break;
-            }
-        }
     }
 
     /**

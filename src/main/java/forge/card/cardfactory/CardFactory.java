@@ -28,12 +28,10 @@ import forge.Singletons;
 import forge.card.CardRules;
 import forge.card.cost.Cost;
 import forge.card.spellability.AbilityActivated;
-import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.SpellPermanent;
 import forge.card.spellability.Target;
 import forge.error.ErrorViewer;
-import forge.game.ai.ComputerUtil;
 import forge.game.player.Player;
 import forge.gui.GuiUtils;
 import forge.item.CardDb;
@@ -209,16 +207,7 @@ public class CardFactory {
             }
         }
 
-        if (controller.isHuman()) {
-            Singletons.getModel().getGame().getAction().playSpellAbilityForFree(copySA);
-        } else if (copySA instanceof Spell) {
-            Spell spell = (Spell) copySA;
-            if (spell.canPlayFromEffectAI(false, true)) {
-                ComputerUtil.playStackFree(controller, copySA);
-            }
-        } else if (copySA.canPlayAI()) {
-            ComputerUtil.playStackFree(controller, copySA);
-        }
+        controller.getController().mayPlaySpellAbilityForFree(copySA);
 
         c.addController(originalController);
     }
