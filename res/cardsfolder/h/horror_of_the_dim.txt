@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ U | KW$ Hexproof | SpellDescription$ CARDNAME gains hexproof 
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/horror_of_the_dim.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/68.jpg
+Oracle:{U}: Horror of the Dim gains hexproof until end of turn. (It can't be the target of spells or abilities your opponents control.)
 End

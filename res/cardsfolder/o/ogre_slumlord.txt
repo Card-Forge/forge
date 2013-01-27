@@ -8,4 +8,5 @@ SVar:TrigToken:AB$Token | Cost$ 0 | TokenAmount$ 1 | TokenName$ Rat | TokenTypes
 S:Mode$ Continuous | Affected$ Creature.Rat+YouCtrl | AddKeyword$ Deathtouch | Description$ Rats you control have deathtouch.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ogre_slumlord.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/74.jpg
+Oracle:Whenever another nontoken creature dies, you may put a 1/1 black Rat creature token onto the battlefield.\nRats you control have deathtouch.
 End

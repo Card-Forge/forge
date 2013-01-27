@@ -9,4 +9,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gridlock.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/36.jpg
+Oracle:Tap X target nonland permanents.
 End

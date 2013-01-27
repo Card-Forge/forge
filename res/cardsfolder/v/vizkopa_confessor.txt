@@ -14,4 +14,5 @@ SVar:LifePaidOnETB:Number$0
 SVar:X:XChoice
 SVar:Picture:http://www.wizards.com/global/images/magic/general/vizkopa_confessor.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/205.jpg
+Oracle:Extort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)\nWhen Vizkopa Confessor enters the battlefield, pay any amount of life. Target opponent reveals that many cards from his or her hand. You choose one of them and exile it.
 End

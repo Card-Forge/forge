@@ -9,4 +9,5 @@ SVar:TakeOneEach:AB$ GainControl | Cost$ 0 | ValidTgts$ Creature.OppCtrl | TgtPr
 SVar:OneEach:PlayerCountOpponents$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/molten_primordial.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/101.jpg
+Oracle:Haste\nWhen Molten Primordial enters the battlefield, for each opponent, gain control of up to one target creature that player controls until end of turn. Untap those creatures. They gain haste until end of turn.
 End

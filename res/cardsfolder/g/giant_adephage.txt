@@ -9,4 +9,5 @@ SVar:TrigCopy:DB$ CopyPermanent | Defined$ Self | NumCopies$ 1
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/giant_adephage.jpg
 SetInfo:GTC|Mythic|http://magiccards.info/scans/en/gtc/121.jpg
+Oracle:Trample\nWhenever Giant Adephage deals combat damage to a player, put a token onto the battlefield that's a copy of Giant Adephage.
 End

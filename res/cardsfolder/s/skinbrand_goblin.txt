@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ R Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ B
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skinbrand_goblin.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/105.jpg
+Oracle:Bloodrush - {R}, Discard Skinbrand Goblin: Target attacking creature gets +2/+1 until end of turn.
 End

@@ -6,4 +6,5 @@ A:SP$ Pump | Cost$ R | ValidTgts$ Creature.blocking | NumAtt$ +3 | KW$ First Str
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/furious_resistance.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/93.jpg
+Oracle:Target blocking creature gets +3/+0 and gains first strike until end of turn.
 End

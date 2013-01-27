@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hydroform.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/172.jpg
+Oracle:Target land becomes a 3/3 Elemental creature with flying until end of turn. It's still a land.
 End

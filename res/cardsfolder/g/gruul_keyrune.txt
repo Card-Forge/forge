@@ -10,4 +10,5 @@ DeckNeeds:Color$Red|Green
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_keyrune.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/230.jpg
+Oracle:{T}: Add {R} or {G} to your mana pool.\n{R}{G}: Gruul Keyrune becomes a 3/2 red and green Beast artifact creature with trample until end of turn.
 End

@@ -8,4 +8,5 @@ SVar:X:Remembered$CardManaCost
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mystic_genesis.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/180.jpg
+Oracle:Counter target spell. Put an X/X green Ooze creature token onto the battlefield, where X is that spell's converted mana cost.
 End

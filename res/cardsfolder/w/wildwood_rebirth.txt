@@ -6,4 +6,5 @@ A:SP$ ChangeZone | Cost$ 1 G | Origin$ Graveyard | Destination$ Hand | TgtPrompt
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wildwood_rebirth.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/140.jpg
+Oracle:Return target creature card from your graveyard to your hand.
 End

@@ -8,4 +8,5 @@ SVar:TrigBounce:AB$ ChangeZone | Cost$ 0 | Defined$ Self | Origin$ Battlefield |
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leyline_phantom.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/41.jpg
+Oracle:When Leyline Phantom deals combat damage, return it to its owner's hand. (Return it only if it survived combat.)
 End

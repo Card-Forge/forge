@@ -8,4 +8,5 @@ SVar:TrigBattalionPump:AB$ Pump | Cost$ 0 | Defined$ Self | NumAtt$ 2 | NumDef$ 
 SVar:BattalionTest:Count$Valid Creature.attacking+Other
 SVar:Picture:http://www.wizards.com/global/images/magic/general/boros_elite.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/7.jpg
+Oracle:Battalion - Whenever Boros Elite and at least two other creatures attack, Boros Elite gets +2/+2 until end of turn.
 End

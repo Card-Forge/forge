@@ -9,4 +9,5 @@ SVar:BattalionTest:Count$Valid Creature.attacking+Other
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wojek_halberdiers.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/208.jpg
+Oracle:Battalion - Whenever Wojek Halberdiers and at least two other creatures attack, Wojek Halberdiers gains first strike until end of turn.
 End

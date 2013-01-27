@@ -7,4 +7,5 @@ SVar:STPrevent:Mode$ PreventDamage | EffectZone$ Command | Source$ Creature.coun
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/hindervines.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/124.jpg
+Oracle:Prevent all combat damage that would be dealt this turn by creatures with no +1/+1 counters on them.
 End

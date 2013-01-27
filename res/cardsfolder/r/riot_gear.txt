@@ -7,4 +7,5 @@ S:Mode$ Continuous | Affected$ Creature.EquippedBy | AddPower$ 1 | AddToughness$
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/riot_gear.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/236.jpg
+Oracle:Equipped creature gets +1/+2.\nEquip {2} ({2}: Attach to target creature you control. Equip only as a sorcery.)
 End

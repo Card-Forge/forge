@@ -11,4 +11,5 @@ SVar:X:Count$Valid Creature.YouCtrl
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/foundry_champion.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/165.jpg
+Oracle:When Foundry Champion enters the battlefield, it deals damage to target creature or player equal to the number of creatures you control.\n{R}: Foundry Champion gets +1/+0 until end of turn.\n{W}: Foundry Champion gets +0/+1 until end of turn.
 End

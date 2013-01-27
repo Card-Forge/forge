@@ -8,4 +8,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.S
 SVar:TrigMill:AB$ DigUntil | Cost$ 0 | ValidTgts$ Player | TgtPrompt$ Select target player | IsCurse$ True | Amount$ 1 | Valid$ Land | ValidDescription$ land | RevealedDestination$ Graveyard
 SVar:Picture:http://www.wizards.com/global/images/magic/general/balustrade_spy.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/57.jpg
+Oracle:Flying\nWhen Balustrade Spy enters the battlefield, target player reveals cards from the top of his or her library until he or she reveals a land card, then puts those cards into his or her graveyard.
 End

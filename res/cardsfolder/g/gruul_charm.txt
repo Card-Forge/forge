@@ -10,4 +10,5 @@ SVar:DmgAll:DB$ DamageAll | NumDmg$ 3 | ValidCards$ Creature.withFlying | ValidD
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gruul_charm.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/169.jpg
+Oracle:Choose one — Creatures without flying can't block this turn; or gain control of all permanents you own; or Gruul Charm deals 3 damage to each creature with flying.
 End

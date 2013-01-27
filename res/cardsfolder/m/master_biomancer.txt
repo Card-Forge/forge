@@ -11,4 +11,5 @@ SVar:X:Count$CardPower
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/master_biomancer.jpg
 SetInfo:GTC|Mythic|http://magiccards.info/scans/en/gtc/176.jpg
+Oracle:Each other creature you control enters the battlefield with a number of additional +1/+1 counters on it equal to Master Biomancer's power and as a Mutant in addition to its other types.
 End

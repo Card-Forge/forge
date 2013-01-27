@@ -11,4 +11,5 @@ SVar:X:TriggeredCard$CardPower
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dying_wish.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/64.jpg
+Oracle:Enchant creature you control\nWhen enchanted creature dies, target player loses X life and you gain X life, where X is its power.
 End

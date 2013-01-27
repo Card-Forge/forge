@@ -8,4 +8,5 @@ K:Extort
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/kingpins_pet.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/173.jpg
+Oracle:Flying\nExtort (Whenever you cast a spell, you may pay {W/B}. If you do, each opponent loses 1 life and you gain that much life.)
 End

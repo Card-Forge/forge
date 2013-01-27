@@ -11,4 +11,5 @@ SVar:MoveChosen:DB$ ChangeZone | Origin$ Exile | Destination$ Battlefield | Gain
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Picture:http://www.wizards.com/global/images/magic/general/lord_of_the_void.jpg
 SetInfo:GTC|Mythic|http://magiccards.info/scans/en/gtc/71.jpg
+Oracle:Flying\nWhenever Lord of the Void deals combat damage to a player, exile the top seven cards of that player's library, then put a creature card from among them onto the battlefield under your control.
 End

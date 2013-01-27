@@ -7,4 +7,5 @@ S:Mode$ Continuous | Affected$ Creature.blockedBySource,Creature.blockingSource 
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alms_beast.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/141.jpg
+Oracle:Creatures blocking or blocked by Alms Beast have lifelink.
 End

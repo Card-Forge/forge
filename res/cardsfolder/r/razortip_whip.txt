@@ -6,4 +6,5 @@ A:AB$ DealDamage | Cost$ 1 T | NumDmg$ 1 | Defined$ Player.Opponent | SpellDescr
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/razortip_whip.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/235.jpg
+Oracle:{1}, {T}: Razortip Whip deals 1 damage to target opponent.
 End

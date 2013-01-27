@@ -10,4 +10,5 @@ DeckNeeds:Color$White|Black
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orzhov_keyrune.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/233.jpg
+Oracle:{T}: Add {W} or {B} to your mana pool.\n{W}{B}: Orzhov Keyrune becomes a 1/4 white and black Thrull artifact creature with lifelink until end of turn.
 End

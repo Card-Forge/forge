@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.withFlying+OppCtrl | AddPower$ -1 | AddT
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/smog_elemental.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/79.jpg
+Oracle:Flying\nCreatures with flying your opponents control get -1/-1.
 End

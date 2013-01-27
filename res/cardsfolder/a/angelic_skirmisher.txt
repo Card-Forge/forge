@@ -12,4 +12,5 @@ SVar:PumpLifelink:DB$ PumpAll | ValidCards$ Creature.YouCtrl | KW$ Lifelink | Ch
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/angelic_skirmisher.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/3.jpg
+Oracle:Flying\nAt the beginning of each combat, choose first strike, vigilance, or lifelink. Creatures you control gain that ability until end of turn.
 End

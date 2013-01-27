@@ -10,4 +10,5 @@ SVar:ExilePlaneswalker:DB$ ChangeZoneAll | ChangeType$ Planeswalker | Origin$ Ba
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/merciless_eviction.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/177.jpg
+Oracle:Choose one — Exile all artifacts; or exile all creatures; or exile all enchantments; or exile all planeswalkers.
 End

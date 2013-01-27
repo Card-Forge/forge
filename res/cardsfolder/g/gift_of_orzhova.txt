@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 1 | AddToughness
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gift_of_orzhova.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/219.jpg
+Oracle:Enchant creature\nEnchanted creature gets +1/+1 and has flying and lifelink.
 End

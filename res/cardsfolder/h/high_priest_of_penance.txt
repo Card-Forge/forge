@@ -9,4 +9,5 @@ SVar:HasCombatEffect:TRUE
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/high_priest_of_penance.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/171.jpg
+Oracle:Whenever High Priest of Penance is dealt damage, you may destroy target nonland permanent.
 End

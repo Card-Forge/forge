@@ -10,4 +10,5 @@ SVar:ConsumingPT:Count$ValidGraveyard Card.OppOwn
 SVar:NeedsToPlayVar:ConsumingPT GT 0
 SVar:Picture:http://www.wizards.com/global/images/magic/general/consuming_aberration.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/152.jpg
+Oracle:Consuming Aberration's power and toughness are each equal to the number of cards in your opponents' graveyards.\nWhenever you cast a spell, each opponent reveals cards from the top of his or her library until he or she reveals a land card, then puts those cards into his or her graveyard.
 End

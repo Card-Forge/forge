@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddPower$ 3 | AddToughness
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/primal_visitation.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/187.jpg
+Oracle:Enchant creature\nEnchanted creature gets +3/+3 and has haste.
 End

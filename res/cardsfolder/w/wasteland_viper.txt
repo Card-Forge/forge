@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ G Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ B
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/wasteland_viper.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/139.jpg
+Oracle:Deathtouch\nBloodrush - {G}, Discard Wasteland Viper: Target attacking creature gets +1/+2 and gains deathtouch until end of turn.
 End

@@ -8,4 +8,5 @@ SVar:RemRandomDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/massive_raid.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/100.jpg
+Oracle:Massive Raid deals damage to target creature or player equal to the number of creatures you control.
 End

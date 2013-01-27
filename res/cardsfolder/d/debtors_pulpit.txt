@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Card.EnchantedBy | AddAbility$ DPTapCreature | De
 SVar:DPTapCreature:AB$ Tap | Cost$ T | ValidTgts$ Creature | TgtPrompt$ Choose target creature.| SpellDescription$ Tap target creature.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/debtors_pulpit.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/10.jpg
+Oracle:Enchant land\nEnchanted land has "{T}: Tap target creature."
 End

@@ -8,4 +8,5 @@ SVar:TrigPump:AB$ Pump | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select targe
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/shadow_alley_denizen.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/76.jpg
+Oracle:Whenever another black creature enters the battlefield under your control, target creature gains intimidate until end of turn. (It can't be blocked except by artifact creatures and/or creatures that share a color with it.)
 End

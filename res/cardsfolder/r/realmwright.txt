@@ -10,4 +10,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/realmwright.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/45.jpg
+Oracle:As Realmwright enters the battlefield, choose a basic land type.\nLands you control are the chosen type in addition to their other types.
 End

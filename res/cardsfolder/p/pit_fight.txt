@@ -8,4 +8,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pit_fight.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/223.jpg
+Oracle:Target creature you control fights another target creature. (Each deals damage equal to its power to the other.)
 End

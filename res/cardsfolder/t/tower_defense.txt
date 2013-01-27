@@ -7,4 +7,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/tower_defense.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/137.jpg
+Oracle:Creatures you control get +0/+5 and gain reach until end of turn.
 End

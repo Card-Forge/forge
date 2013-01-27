@@ -9,4 +9,5 @@ SVar:DamagePlayer:DB$ DealDamage | ValidTgts$ Player | TgtPrompt$ Select target 
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/clan_defiance.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/151.jpg
+Oracle:Choose one or more — Clan Defiance deals X damage to target creature with flying; Clan Defiance deals X damage to target creature without flying; and/or Clan Defiance deals X damage to target player.
 End

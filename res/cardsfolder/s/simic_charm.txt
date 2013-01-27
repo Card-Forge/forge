@@ -9,4 +9,5 @@ SVar:ReturnCard:DB$ ChangeZone | ValidTgts$ Creature | TgtPrompt$ Select target 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/simic_charm.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/195.jpg
+Oracle:Choose one — Target creature gets +3/+3 until end of turn; or permanents you control gain hexproof until end of turn; or return target creature to its owner's hand.
 End

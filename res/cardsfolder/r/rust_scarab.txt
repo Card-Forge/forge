@@ -8,4 +8,5 @@ SVar:TrigDestroy:AB$ Destroy | Cost$ 0 | ValidTgts$ Artifact.DefenderCtrl,Enchan
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rust_scarab.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/130.jpg
+Oracle:Whenever Rust Scarab becomes blocked, you may destroy target artifact or enchantment defending player controls.
 End

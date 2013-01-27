@@ -8,4 +8,5 @@ T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ 
 SVar:TrigMill:AB$ Mill | Cost$ 0 | NumCards$ 5 | ValidTgts$ Player | TgtPrompt$ Select target player
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mindeye_drake.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/43.jpg
+Oracle:Flying\nWhen Mindeye Drake dies, target player puts the top five cards of his or her library into his or her graveyard.
 End

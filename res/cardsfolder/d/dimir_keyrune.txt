@@ -10,4 +10,5 @@ DeckNeeds:Color$Blue|Black
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dimir_keyrune.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/228.jpg
+Oracle:{T}: Add {U} or {B} to your mana pool.\n{U}{B}: Dimir Keyrune becomes a 2/2 blue and black Horror artifact creature until end of turn and is unblockable this turn.
 End

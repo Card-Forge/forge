@@ -6,4 +6,5 @@ PT:3/2
 A:AB$ Pump | Cost$ G Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$ Bloodrush | ValidTgts$ Creature.attacking | TgtPrompt$ Select target attacking creature | NumAtt$ +3 | NumDef$ +2 | SpellDescription$ Target attacking creature gets +3/+2 until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slaughterhorn.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/134.jpg
+Oracle:Bloodrush - {G}, Discard Slaughterhorn: Target attacking creature gets +3/+2 until end of turn.
 End

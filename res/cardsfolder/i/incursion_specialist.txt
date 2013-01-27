@@ -8,4 +8,5 @@ SVar:TrigPump:AB$Pump | Cost$ 0 | NumAtt$ +2 | KW$ Unblockable | Defined$ Self
 SVar:YouCastThisTurn:Count$ThisTurnCast_Card.YouCtrl
 SVar:Picture:http://www.wizards.com/global/images/magic/general/incursion_specialist.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/38.jpg
+Oracle:Whenever you cast your second spell each turn, Incursion Specialist gets +2/+0 until end of turn and is unblockable this turn.
 End

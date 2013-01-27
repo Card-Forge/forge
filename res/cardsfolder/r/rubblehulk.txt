@@ -10,4 +10,5 @@ SVar:BuffedBy:Land
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/rubblehulk.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/191.jpg
+Oracle:Rubblehulk's power and toughness are each equal to the number of lands you control.\nBloodrush - {1}{R}{G}, Discard Rubblehulk: Target attacking creature gets +X/+X until end of turn, where X is the number of lands you control.
 End

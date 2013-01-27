@@ -120,8 +120,8 @@ def getOracleFromMagicCardsInfo(name):
 
     oracleStart = block.find(startOracle)
     oracleBlock = block[oracleStart:]
-
-    return oracleBlock[len(startOracle):], None
+    oracle = oracleBlock[len(startOracle):].replace('<br><br>', '\\n')
+    return oracle, None
 
 
 def hasOracleLine(cardFile, lines, offlineSource=True):

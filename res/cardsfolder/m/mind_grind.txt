@@ -6,4 +6,5 @@ A:SP$ DigUntil | Cost$ XCantBe0 X U B | Defined$ Player.Opponent | References$ X
 SVar:X:Count$xPaid
 SVar:Picture:http://www.wizards.com/global/images/magic/general/mind_grind.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/178.jpg
+Oracle:Each opponent reveals cards from the top of his or her library until he or she reveals X land cards, then puts all cards revealed this way into his or her graveyard. X can't be 0.
 End

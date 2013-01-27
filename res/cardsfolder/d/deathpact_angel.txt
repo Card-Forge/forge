@@ -10,4 +10,5 @@ SVar:SacMe:1
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/deathpact_angel.jpg
 SetInfo:GTC|Mythic|http://magiccards.info/scans/en/gtc/153.jpg
+Oracle:Flying\nWhen Deathpact Angel dies, put a 1/1 white and black Cleric creature token onto the battlefield. It has "{3}{W}{B}{B}, {T}, Sacrifice this creature: Return a card named Deathpact Angel from your graveyard to the battlefield."
 End

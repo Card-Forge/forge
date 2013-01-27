@@ -7,4 +7,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigMill:AB$ Mill | Cost$ 0 | NumCards$ 2 | ValidTgts$ Player | TgtPrompt$ Select target player
 SVar:Picture:http://www.wizards.com/global/images/magic/general/sages_row_denizen.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/46.jpg
+Oracle:Whenever another blue creature enters the battlefield under your control, target player puts the top two cards of his or her library into his or her graveyard.
 End

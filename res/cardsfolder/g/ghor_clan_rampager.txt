@@ -8,4 +8,5 @@ A:AB$ Pump | Cost$ R G Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/ghor-clan_rampager.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/167.jpg
+Oracle:Trample\nBloodrush - {R}{G}, Discard Ghor-Clan Rampager: Target attacking creature gets +4/+4 and gains trample until end of turn.
 End

@@ -13,4 +13,5 @@ SVar:RemAIDeck:True
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/gideon_champion_of_justice.jpg
 SetInfo:GTC|Mythic|http://magiccards.info/scans/en/gtc/13.jpg
+Oracle:+1: Put a loyalty counter on Gideon, Champion of Justice for each creature target opponent controls.\n0: Until end of turn, Gideon, Champion of Justice becomes an indestructible Human Soldier creature with power and toughness each equal to the number of loyalty counters on him. He's still a planeswalker. Prevent all damage that would be dealt to him this turn.\n-15: Exile all other permanents.
 End

@@ -8,4 +8,5 @@ A:AB$ DealDamage | Cost$ SubCounter<5/BLAZE> | ValidTgts$ Creature,Player | TgtP
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/five-alarm_fire.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/91.jpg
+Oracle:Whenever a creature you control deals combat damage, put a blaze counter on Five-Alarm Fire.\nRemove five blaze counters from Five-Alarm Fire: Five-Alarm Fire deals 5 damage to target creature or player.
 End

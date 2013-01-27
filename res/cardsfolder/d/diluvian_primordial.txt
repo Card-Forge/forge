@@ -11,4 +11,5 @@ SVar:CastEach:DB$ Play | Defined$ Remembered | WithoutManaCost$ True | Optional$
 SVar:OneEach:PlayerCountOpponents$Amount
 SVar:Picture:http://www.wizards.com/global/images/magic/general/diluvian_primordial.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/33.jpg
+Oracle:Flying\nWhen Diluvian Primordial enters the battlefield, for each opponent, you may cast up to one target instant or sorcery card from that player's graveyard without paying its mana cost. If a card cast this way would be put into a graveyard this turn, exile it instead.
 End

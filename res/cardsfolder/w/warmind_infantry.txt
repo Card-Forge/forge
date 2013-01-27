@@ -9,4 +9,5 @@ SVar:BattalionTest:Count$Valid Creature.attacking+Other
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/warmind_infantry.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/111.jpg
+Oracle:Battalion - Whenever Warmind Infantry and at least two other creatures attack, Warmind Infantry gets +2/+0 until end of turn.
 End

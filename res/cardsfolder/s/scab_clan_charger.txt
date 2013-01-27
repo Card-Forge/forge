@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ 1 G Discard<1/CARDNAME> | ActivationZone$ Hand | PrecostDesc$
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/scab-clan_charger.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/131.jpg
+Oracle:Bloodrush - {1}{G}, Discard Scab-Clan Charger: Target attacking creature gets +2/+4 until end of turn.
 End

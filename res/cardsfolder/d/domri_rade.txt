@@ -12,4 +12,5 @@ SVar:STDomri:Mode$ Continuous | EffectZone$ Command | Affected$ Creature.YouCtrl
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/domri_rade.jpg
 SetInfo:GTC|Mythic|http://magiccards.info/scans/en/gtc/156.jpg
+Oracle:+1: Look at the top card of your library. If it's a creature card, you may reveal it and put it into your hand.\n-2: Target creature you control fights another target creature.\n-7: You get an emblem with "Creatures you control have double strike, trample, hexproof, and haste."
 End

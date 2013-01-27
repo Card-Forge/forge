@@ -7,4 +7,5 @@ T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creatu
 SVar:TrigTap:AB$ Tap | Cost$ 0 | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Choose target creature an opponent controls.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/court_street_denizen.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/8.jpg
+Oracle:Whenever another white creature enters the battlefield under your control, tap target creature an opponent controls.
 End

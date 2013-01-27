@@ -6,4 +6,5 @@ PT:2/3
 A:AB$ GainLife | Cost$ 1 W T | LifeAmount$ 2 | SpellDescription$ You gain 2 life.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/zarichi_tiger.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/28.jpg
+Oracle:{1}{W}, {T}: You gain 2 life.
 End

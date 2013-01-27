@@ -9,4 +9,5 @@ SVar:X:Count$xPaid
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nimbus_swimmer.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/181.jpg
+Oracle:Flying\nNimbus Swimmer enters the battlefield with X +1/+1 counters on it.
 End

@@ -6,4 +6,5 @@ A:SP$ DealDamage | Cost$ 2 RW | ValidTgts$ Creature.attacking,Creature.blocking 
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/arrows_of_justice.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/211.jpg
+Oracle:Arrows of Justice deals 4 damage to target attacking or blocking creature.
 End

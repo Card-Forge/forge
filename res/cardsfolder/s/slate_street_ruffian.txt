@@ -8,4 +8,5 @@ SVar:TrigDiscard:AB$Discard | Cost$ 0 | Defined$ DefendingPlayer | NumCards$ 1 |
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/slate_street_ruffian.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/78.jpg
+Oracle:Whenever Slate Street Ruffian becomes blocked, defending player discards a card.
 End

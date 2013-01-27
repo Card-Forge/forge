@@ -12,4 +12,5 @@ SVar:OneEach:PlayerCountOpponents$Amount
 SVar:TgtPower:Remembered$CardPower
 SVar:Picture:http://www.wizards.com/global/images/magic/general/luminate_primordial.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/20.jpg
+Oracle:Vigilance\nWhen Luminate Primordial enters the battlefield, for each opponent, exile up to one target creature that player controls and that player gains life equal to its power.
 End

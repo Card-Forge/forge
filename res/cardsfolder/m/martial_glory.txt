@@ -7,4 +7,5 @@ SVar:DBPump:DB$ Pump | ValidTgts$ Creature | TgtPrompt$ Select target creature t
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/martial_glory.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/175.jpg
+Oracle:Target creature gets +3/+0 until end of turn.\nTarget creature gets +0/+3 until end of turn.
 End

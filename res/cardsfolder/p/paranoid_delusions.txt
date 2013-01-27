@@ -8,4 +8,5 @@ SVar:IsEncoded:Number$0
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/paranoid_delusions.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/186.jpg
+Oracle:Target player puts the top three cards of his or her library into his or her graveyard.\nCipher (Then you may exile this spell card encoded on a creature you control. Whenever that creature deals combat damage to a player, its controller may cast a copy of the encoded card without paying its mana cost.)
 End

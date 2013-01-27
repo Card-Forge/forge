@@ -5,4 +5,5 @@ Text:no text
 A:SP$ Pump | Cost$ 1 W | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 1 | KW$ Flying & First Strike | SpellDescription$ Target creature gets +1/+1 and gains flying and first strike until end of turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/aerial_maneuver.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/1.jpg
+Oracle:Target creature gets +1/+1 and gains flying and first strike until end of turn.
 End

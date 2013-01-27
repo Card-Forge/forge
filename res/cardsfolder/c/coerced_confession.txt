@@ -9,4 +9,5 @@ SVar:X:Remembered$Valid Creature
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/coerced_confession.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/217.jpg
+Oracle:Target player puts the top four cards of his or her library into his or her graveyard. You draw a card for each creature card put into that graveyard this way.
 End

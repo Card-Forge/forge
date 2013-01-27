@@ -8,4 +8,5 @@ S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Hexproof | Add
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/alpha_authority.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/114.jpg
+Oracle:Enchant creature\nEnchanted creature has hexproof and can't be blocked by more than one creature.
 End

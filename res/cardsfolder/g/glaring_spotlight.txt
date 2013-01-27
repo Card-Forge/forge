@@ -8,4 +8,5 @@ SVar:GSEffect:DB$ Effect | Name$ Glaring Spotlight Effect | StaticAbilities$ KWP
 SVar:KWPump:Mode$ Continuous | EffectZone$ Command | AffectedZone$ Battlefield | Affected$ Creature.YouCtrl | AddHiddenKeyword$ Unblockable | Description$ Creatures you control are unblockable this turn.
 SVar:Picture:http://www.wizards.com/global/images/magic/general/glaring_spotlight.jpg
 SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/229.jpg
+Oracle:Creatures your opponents control with hexproof can be the targets of spells and abilities you control as though they didn't have hexproof.\n{3}, Sacrifice Glaring Spotlight: Creatures you control gain hexproof until end of turn and are unblockable this turn.
 End

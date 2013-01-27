@@ -10,4 +10,5 @@ SVar:X:Count$InYourLibrary
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/enter_the_infinite.jpg
 SetInfo:GTC|Mythic|http://magiccards.info/scans/en/gtc/34.jpg
+Oracle:Draw cards equal to the number of cards in your library, then put a card from your hand on top of your library. You have no maximum hand size until your next turn.
 End

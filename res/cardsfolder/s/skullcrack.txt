@@ -9,4 +9,5 @@ SVar:DBDamage:DB$ DealDamage | ValidTgts$ Player | TgtPrompt$ Select another tar
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skullcrack.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/106.jpg
+Oracle:Players can't gain life this turn. Damage can't be prevented this turn. Skullcrack deals 3 damage to target player.
 End

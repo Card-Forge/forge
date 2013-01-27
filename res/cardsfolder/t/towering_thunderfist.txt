@@ -7,4 +7,5 @@ A:AB$ Pump | Cost$ W | KW$ Vigilance | SpellDescription$ CARDNAME gains vigilanc
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/towering_thunderfist.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/109.jpg
+Oracle:{W}: Towering Thunderfist gains vigilance until end of turn.
 End

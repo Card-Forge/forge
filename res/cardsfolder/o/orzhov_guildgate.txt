@@ -8,4 +8,5 @@ A:AB$ Mana | Cost$ T | Produced$ B | SpellDescription$ Add B to your mana pool.
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/orzhov_guildgate.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/244.jpg
+Oracle:Orzhov Guildgate enters the battlefield tapped.\n{T}: Add {W} or {B} to your mana pool.
 End

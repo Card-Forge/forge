@@ -9,4 +9,5 @@ A:AB$ Pump | Cost$ R W | KW$ First Strike | SpellDescription$ CARDNAME gains fir
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/truefire_paladin.jpg
 SetInfo:GTC|Uncommon|http://magiccards.info/scans/en/gtc/202.jpg
+Oracle:Vigilance\n{R}{W}: Truefire Paladin gets +2/+0 until end of turn.\n{R}{W}: Truefire Paladin gains first strike until end of turn.
 End

@@ -9,4 +9,5 @@ SVar:DBUntap:DB$ Untap | Defined$ Self
 SVar:BattalionTest:Count$Valid Creature.attacking+Other
 SVar:Picture:http://www.wizards.com/global/images/magic/general/nav_squad_commandos.jpg
 SetInfo:GTC|Common|http://magiccards.info/scans/en/gtc/22.jpg
+Oracle:Battalion - Whenever Nav Squad Commandos and at least two other creatures attack, Nav Squad Commandos gets +1/+1 until end of turn. Untap it.
 End
