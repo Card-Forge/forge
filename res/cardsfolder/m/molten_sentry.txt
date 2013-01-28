@@ -3,8 +3,8 @@ ManaCost:3 R
 Types:Creature Elemental
 Text:no text
 PT:*/*
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigFlip | Static$ True | TriggerDescription$ As Molten Sentry enters the battlefield, flip a coin. If the coin comes up heads, Molten Sentry enters the battlefield as a 5/2 creature with haste. If it comes up tails, Molten Sentry enters the battlefield as a 2/5 creature with defender.
-SVar:TrigFlip:AB$ FlipACoin | Cost$ 0 | WinSubAbility$ DBAttacker | LoseSubAbility$ DBDefender
+K:ETBReplacement:Other:TrigFlip
+SVar:TrigFlip:DB$ FlipACoin | WinSubAbility$ DBAttacker | LoseSubAbility$ DBDefender | SpellDescription$ As Molten Sentry enters the battlefield, flip a coin. If the coin comes up heads, Molten Sentry enters the battlefield as a 5/2 creature with haste. If it comes up tails, Molten Sentry enters the battlefield as a 2/5 creature with defender.
 SVar:DBAttacker:DB$ Animate | Cost$ 0 | Defined$ Self | Power$ 5 | Toughness$ 2 | Types$ Creature | Keywords$ Haste | Permanent$ True
 SVar:DBDefender:DB$ Animate | Cost$ 0 | Defined$ Self | Power$ 2 | Toughness$ 5 | Types$ Creature | Keywords$ Defender | Permanent$ True
 SVar:Rarity:Rare

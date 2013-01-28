@@ -3,8 +3,9 @@ ManaCost:2 U
 Types:Creature Merfolk Wizard
 Text:no text
 PT:2/2
-T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.Wizard+Other+YouCtrl |TriggerZones$ Battlefield | Execute$ TrigPutCounter | Static$ True | TriggerDescription$ Each other Wizard creature you control enters the battlefield with an additional +1/+1 counter on it.
-SVar:TrigPutCounter:AB$PutCounter | Cost$ 0 | Defined$ TriggeredCard | CounterType$ P1P1 | CounterNum$ 1
+R:Event$ Moved | ActiveZones$ Battlefield | Destination$ Battlefield | ValidCard$ Creature.Wizard+Other+YouCtrl | ReplaceWith$ AddExtraCounter | Description$ Each other Wizard creature you control enters the battlefield with an additional +1/+1 counter on it.
+SVar:AddExtraCounter:AB$ PutCounter | Cost$ 0 | Defined$ ReplacedCard | CounterType$ P1P1 | CounterNum$ 1 | SubAbility$ MoveToBattlefield
+SVar:MoveToBattlefield:DB$ ChangeZone | Origin$ All | Destination$ Battlefield | Defined$ ReplacedCard
 A:AB$ Draw | Cost$ 2 SubCounter<1/P1P1/Creature.YouCtrl/Creature you Control> | NumCards$ 1 | SpellDescription$ Draw a card.
 SVar:RemAIDeck:True
 SVar:Rarity:Uncommon

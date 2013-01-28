@@ -3,7 +3,7 @@ ManaCost:4
 Types:Artifact
 Text:no text
 K:ETBReplacement:Other:ChooseP
-SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent.
+SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent.
 S:Mode$ Continuous | Affected$ Player.Chosen | SetMaxHandSize$ 4 | Description$ The chosen player's maximum hand size is four.
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/cursed_rack.jpg
