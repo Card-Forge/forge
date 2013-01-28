@@ -8859,13 +8859,13 @@ public class Card extends GameEntity implements Comparable<Card> {
                 }
 
                 if (kw.equals("CARDNAME can't be enchanted.")) {
-                    if (source.isAura() && source.getController().isComputer()) {
+                    if (source.isAura()) {
                         return false;
                     }
                 } //Sets source as invalid enchant target for computer player only.
 
                 if (kw.equals("CARDNAME can't be equipped.")) {
-                    if (source.isEquipment() && source.getController().isComputer()) {
+                    if (source.isEquipment()) {
                         return false;
                     }
                 } //Sets source as invalid equip target for computer player only.

@@ -57,8 +57,6 @@ import forge.gui.match.controllers.CMessage;
 import forge.gui.toolbox.FLabel;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
-import forge.properties.NewConstants.Lang.GuiDisplay.ComputerHand;
-import forge.properties.NewConstants.Lang.GuiDisplay.ComputerLibrary;
 import forge.properties.NewConstants.Lang.GuiDisplay.HumanHand;
 import forge.properties.NewConstants.Lang.GuiDisplay.HumanLibrary;
 
@@ -66,7 +64,10 @@ import forge.properties.NewConstants.Lang.GuiDisplay.HumanLibrary;
  * Controls Swing components of a player's field instance.
  */
 public class CField implements ICDoc {
+    // The one who owns cards on this side of table
     private final Player player;
+    // Tho one who looks at screen and 'performs actions'
+    private final Player playerViewer;
     private final VField view;
     private boolean initializedAlready = false;
 
@@ -156,9 +157,11 @@ public class CField implements ICDoc {
      * 
      * @param p0 &emsp; {@link forge.game.player.Player}
      * @param v0 &emsp; {@link forge.gui.match.nonsingleton.VField}
+     * @param playerViewer 
      */
-    public CField(final Player p0, final VField v0) {
+    public CField(final Player p0, final VField v0, Player playerViewer) {
         this.player = p0;
+        this.playerViewer = playerViewer;;
         this.view = v0;
     }
 
@@ -291,7 +294,7 @@ public class CField implements ICDoc {
                 for (int i = 0; i < choices.size(); i++) {
                     final Card crd = choices.get(i);
                     if (crd.isFaceDown()) {
-                        if ((crd.getController().isComputer() && !crd.hasKeyword("Your opponent may look at this card."))
+                        if ((crd.getController() != playerViewer && !crd.hasKeyword("Your opponent may look at this card."))
                                 || !crd.hasKeyword("You may look at this card.")) {
                             final Card faceDown = new Card();
                             faceDown.setName("Face Down");
@@ -322,89 +325,53 @@ public class CField implements ICDoc {
 
     /** */
     private void handAction() {
-        if (!CField.this.player.isComputer()) {
+        if ( CField.this.player == playerViewer || Preferences.DEV_MODE || CField.this.player.hasKeyword("Play with your hand revealed.")) {
             new ZoneAction(CField.this.player.getZone(ZoneType.Hand), HumanHand.BASE)
-            .actionPerformed(null);
-        } else if (Preferences.DEV_MODE
-                || CField.this.player.hasKeyword("Play with your hand revealed.")) {
-            new ZoneAction(CField.this.player.getZone(ZoneType.Hand), ComputerHand.BASE)
             .actionPerformed(null);
         }
     }
 
     /** */
     private void flashbackAction() {
-        if (!CField.this.player.isHuman()) {
-            new ZoneAction(player.getZone(ZoneType.Graveyard), NewConstants.Lang.GuiDisplay.COMPUTER_FLASHBACK) {
+        new ZoneAction(CField.this.player.getZone(ZoneType.Graveyard), NewConstants.Lang.GuiDisplay.HUMAN_FLASHBACK) {
 
-                private static final long serialVersionUID = 8120331222693706164L;
+            private static final long serialVersionUID = 8120331222693706164L;
 
-                @Override
-                protected List<Card> getCardsAsIterable() {
-                    return CardFactoryUtil.getExternalZoneActivationCards(player);
+            @Override
+            protected List<Card> getCardsAsIterable() {
+                return CardFactoryUtil.getExternalZoneActivationCards(player);
+            }
+
+            @Override
+            protected void doAction(final Card c) {
+                if ( CField.this.player != CField.this.playerViewer )
+                    return;
+                
+                final GameState game = Singletons.getModel().getGame();
+                SpellAbility ab = player.getController().getAbilityToPlay(game.getAbilitesOfCard(c, player));
+                if ( null != ab) {
+                    player.playSpellAbility(c, ab);
+                    game.getPhaseHandler().setPriority(player);
                 }
+            }
+        }.actionPerformed(null);
 
-                @Override
-                protected void doAction(final Card c) {
-                    // you cannot play computer's card from graveyard
-                }
-            } .actionPerformed(null);
-        }
-        else {
-            new ZoneAction(CField.this.player.getZone(ZoneType.Graveyard), NewConstants.Lang.GuiDisplay.HUMAN_FLASHBACK) {
-
-                private static final long serialVersionUID = 8120331222693706164L;
-
-                @Override
-                protected List<Card> getCardsAsIterable() {
-                    return CardFactoryUtil.getExternalZoneActivationCards(player);
-                }
-
-                @Override
-                protected void doAction(final Card c) {
-                    GameState game = Singletons.getModel().getGame();
-                    SpellAbility ab = player.getController().getAbilityToPlay(game.getAbilitesOfCard(c, player));
-                    if ( null != ab) {
-                        player.playSpellAbility(c, ab);
-                        Singletons.getModel().getGame().getPhaseHandler().setPriority(player);
-                    }
-                }
-            } .actionPerformed(null);
-        }
     }
 
     /** */
     private void libraryAction() {
         if (!Preferences.DEV_MODE) { return; }
-
-        if (!CField.this.player.isComputer()) {
-            new ZoneAction(CField.this.player.getZone(ZoneType.Library), HumanLibrary.BASE)
-            .actionPerformed(null);
-        } else {
-            new ZoneAction(CField.this.player.getZone(ZoneType.Library), ComputerLibrary.BASE)
-            .actionPerformed(null);
-        }
+        
+        new ZoneAction(CField.this.player.getZone(ZoneType.Library), HumanLibrary.BASE).actionPerformed(null);
     }
 
     /** */
     private void exiledAction() {
-        if (CField.this.player.isComputer()) {
-            new ZoneAction(CField.this.player.getZone(ZoneType.Exile),
-                    NewConstants.Lang.GuiDisplay.COMPUTER_EXILED).actionPerformed(null);
-        } else {
-            new ZoneAction(CField.this.player.getZone(ZoneType.Exile),
-                    NewConstants.Lang.GuiDisplay.HUMAN_EXILED).actionPerformed(null);
-        }
+        new ZoneAction(CField.this.player.getZone(ZoneType.Exile), NewConstants.Lang.GuiDisplay.HUMAN_EXILED).actionPerformed(null);
     }
 
     private void graveyardAction() {
-        if (CField.this.player.isComputer()) {
-            new ZoneAction(CField.this.player.getZone(ZoneType.Graveyard),
-                    NewConstants.Lang.GuiDisplay.COMPUTER_GRAVEYARD).actionPerformed(null);
-        } else {
-            new ZoneAction(CField.this.player.getZone(ZoneType.Graveyard),
-                    NewConstants.Lang.GuiDisplay.HUMAN_GRAVEYARD).actionPerformed(null);
-        }
+        new ZoneAction(CField.this.player.getZone(ZoneType.Graveyard), NewConstants.Lang.GuiDisplay.HUMAN_GRAVEYARD).actionPerformed(null);
     }
 
     private void avatarAction() {
@@ -429,10 +396,8 @@ public class CField implements ICDoc {
         final Input input = CMessage.SINGLETON_INSTANCE.getInputControl().getInput();
 
         if (c != null && c.isInZone(ZoneType.Battlefield)) {
-            if (c.isTapped()
-                    && ((input instanceof InputPayManaCost) || (input instanceof InputPayManaCostAbility))) {
-                final forge.view.arcane.CardPanel cardPanel = CField.this.view.getTabletop().getCardPanel(
-                        c.getUniqueNumber());
+            if (c.isTapped() && (input instanceof InputPayManaCost || input instanceof InputPayManaCostAbility)) {
+                final forge.view.arcane.CardPanel cardPanel = CField.this.view.getTabletop().getCardPanel(c.getUniqueNumber());
                 for (final forge.view.arcane.CardPanel cp : cardPanel.getAttachedPanels()) {
                     if (cp.getCard().isUntapped()) {
                         break;
@@ -441,8 +406,7 @@ public class CField implements ICDoc {
             }
 
             final List<Card> att = Singletons.getModel().getGame().getCombat().getAttackerList();
-            if ((c.isTapped() || c.hasSickness() || ((c.hasKeyword("Vigilance")) && att.contains(c)))
-                    && (input instanceof InputAttack)) {
+            if ((c.isTapped() || c.hasSickness() || (c.hasKeyword("Vigilance") && att.contains(c))) && (input instanceof InputAttack)) {
                 final forge.view.arcane.CardPanel cardPanel = CField.this.view.getTabletop().getCardPanel(
                         c.getUniqueNumber());
                 for (final forge.view.arcane.CardPanel cp : cardPanel.getAttachedPanels()) {
@@ -483,10 +447,7 @@ public class CField implements ICDoc {
 
     /** */
     private void manaAction(String constantColor) {
-        if (CField.this.player.isComputer()) {
-            System.out.println("Stop trying to spend the AI's mana");
-            // TODO: Mindslaver might need to add changes here
-        } else {
+        if (CField.this.player == CField.this.playerViewer) {
             final Input in = Singletons.getModel().getMatch().getInput().getInput();
             if (in instanceof InputPayMana) {
                 // Do something

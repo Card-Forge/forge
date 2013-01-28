@@ -108,22 +108,22 @@ public class VField implements IVDoc<CField> {
     /**
      * Assembles Swing components of a player field instance.
      * 
-     * @param player0 &emsp; {@link forge.game.player.Player}
+     * @param playerOnwer &emsp; {@link forge.game.player.Player}
      * @param id0 &emsp; {@link forge.gui.framework.EDocID}
      */
-    public VField(final EDocID id0, final Player player0) {
+    public VField(final EDocID id0, final Player playerOnwer, Player playerViewer) {
         this.docID = id0;
         id0.setDoc(this);
 
-        this.player = player0;
-        if (player0 != null) { tab.setText(player0.getName() + " Field"); }
+        this.player = playerOnwer;
+        if (playerOnwer != null) { tab.setText(playerOnwer.getName() + " Field"); }
         else { tab.setText("NO PLAYER FOR " + docID.toString()); }
 
         // TODO player is hard-coded into tabletop...should be dynamic
         // (haven't looked into it too deeply). Doublestrike 12-04-12
         tabletop = new PlayArea(scroller, id0 == EDocID.FIELD_1);
 
-        control = new CField(player, this);
+        control = new CField(player, this, playerViewer);
 
         avatarArea.setOpaque(false);
         avatarArea.setBackground(FSkin.getColor(FSkin.Colors.CLR_HOVER));

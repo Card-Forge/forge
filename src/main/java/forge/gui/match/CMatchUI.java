@@ -91,7 +91,7 @@ public enum CMatchUI implements CardContainer {
         final List<VField> fields = new ArrayList<VField>();
         final List<VCommand> commands = new ArrayList<VCommand>();
 
-        VField humanField = new VField(EDocID.valueOf("FIELD_0"), localPlayer);
+        VField humanField = new VField(EDocID.valueOf("FIELD_0"), localPlayer, localPlayer);
         VCommand humanCommand = new VCommand(EDocID.COMMAND_0, localPlayer);
         fields.add(0, humanField);
         commands.add(0, humanCommand);
@@ -106,7 +106,7 @@ public enum CMatchUI implements CardContainer {
             }
             // A field must be initialized after it's instantiated, to update player info.
             // No player, no init.
-            VField f = new VField(EDocID.valueOf("FIELD_" + i), p);
+            VField f = new VField(EDocID.valueOf("FIELD_" + i), p, localPlayer);
             setAvatar(f, getPlayerAvatar(p, Integer.parseInt(indices[i % 2])));
             f.getLayoutControl().initialize();
             fields.add(f);
