@@ -1,10 +1,10 @@
 [quest]
 id=1010
 OpponentName=Arzakon
-AILife=100
+AILife=400
 Repeat=true
 Wins=100
-Card Reward=10 rares
+Card Reward=duplicate card;chosen card sets:3ED,4ED,ARN,ATQ,DRK,LEG desc:any card;1 blue rare;1 black rare;1 red rare;1 green rare;1 white rare;1 multicolor rare;1 colorless rare;1 artifact rare;1 land rare
 Credit Reward=1000
 HumanExtras=Mightstone
 AIExtras=Celestial Prism
