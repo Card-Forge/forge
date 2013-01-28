@@ -46,7 +46,7 @@ public class QuestRewardCardChooser implements InventoryItem  {
     public QuestRewardCardChooser(final poolType setType, final String[] creationParameters) {
         type = setType;
         if (type == poolType.playerCards) {
-            description = "a duplicate card of your choice";
+            description = "a duplicate card";
             predicates = null;
         } else {
             description = buildDescription(creationParameters);
