@@ -19,10 +19,12 @@ Forge Team
  */
 package forge.gui.deckeditor.tables;
 
+import java.awt.Cursor;
+import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -35,6 +37,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
@@ -207,28 +210,26 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
     public void addListeners() {
         // updates card detail, listens to any key strokes
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-
             @Override
             public void valueChanged(final ListSelectionEvent arg0) {
                 EditorTableModel.this.showSelectedCard(table);
             }
         });
-        table.addFocusListener(new FocusListener() {
-
-            @Override
-            public void focusLost(final FocusEvent e) {
-            }
-
+        
+        table.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(final FocusEvent e) {
                 EditorTableModel.this.showSelectedCard(table);
             }
         });
 
-        table.getTableHeader().addMouseListener(new MouseAdapter() {
+        final JTableHeader header = table.getTableHeader();
+        header.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(final MouseEvent e) {
-                headerClicked(e);
+                if (null == header.getResizingColumn()) {
+                    headerClicked(e);
+                }
             }
 
             @Override
