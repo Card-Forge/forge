@@ -430,4 +430,7 @@ public final class EditorTableView<T extends InventoryItem> {
         this.alwaysNonUnique = nonUniqueOnly;
     }
 
+    public void setWantElasticColumns(boolean value) {
+        table.setAutoResizeMode(value ? JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS : JTable.AUTO_RESIZE_NEXT_COLUMN);
+    }
 }

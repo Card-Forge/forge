@@ -88,6 +88,8 @@ public enum CEditorPreferences implements ICDoc {
                 SEditorIO.getPref(EditorPreference.stats_deck));
         VEditorPreferences.SINGLETON_INSTANCE.getChbCardDisplayUnique().setSelected(
                 SEditorIO.getPref(EditorPreference.display_unique_only));
+        VEditorPreferences.SINGLETON_INSTANCE.getChbElasticColumns().setSelected(
+                SEditorIO.getPref(EditorPreference.elastic_columns));
 
         if (!SEditorIO.getPref(EditorPreference.stats_deck)) {
             VCurrentDeck.SINGLETON_INSTANCE.getPnlStats().setVisible(false);
@@ -96,9 +98,12 @@ public enum CEditorPreferences implements ICDoc {
             VCardCatalog.SINGLETON_INSTANCE.getPnlStats().setVisible(false);
         }
 
+        boolean wantElastic = SEditorIO.getPref(EditorPreference.elastic_columns);
         boolean wantUnique = SEditorIO.getPref(EditorPreference.display_unique_only);
         ACEditorBase<?, ?> curEditor = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
         if (curEditor != null) {
+            curEditor.getTableCatalog().setWantElasticColumns(wantElastic);
+            curEditor.getTableDeck().setWantElasticColumns(wantElastic);
             curEditor.getTableCatalog().setWantUnique(wantUnique);
             curEditor.getTableCatalog().updateView(true);
             curEditor.getTableDeck().setWantUnique(wantUnique);
@@ -117,6 +122,17 @@ public enum CEditorPreferences implements ICDoc {
                 VCurrentDeck.SINGLETON_INSTANCE.getPnlStats().setVisible(
                         ((JCheckBox) e.getSource()).isSelected());
                 SEditorIO.setPref(EditorPreference.stats_deck, ((JCheckBox) e.getSource()).isSelected());
+                SEditorIO.savePreferences(); } });
+
+        VEditorPreferences.SINGLETON_INSTANCE.getChbElasticColumns().addItemListener(new ItemListener() {
+            @Override public void itemStateChanged(final ItemEvent e) {
+                ACEditorBase<?, ?> curEditor = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
+                boolean wantElastic = ((JCheckBox) e.getSource()).isSelected();
+                if (curEditor != null) {
+                    curEditor.getTableCatalog().setWantElasticColumns(wantElastic);
+                    curEditor.getTableDeck().setWantElasticColumns(wantElastic);
+                }
+                SEditorIO.setPref(EditorPreference.elastic_columns, wantElastic);
                 SEditorIO.savePreferences(); } });
 
         VEditorPreferences.SINGLETON_INSTANCE.getChbCardDisplayUnique().addItemListener(new ItemListener() {

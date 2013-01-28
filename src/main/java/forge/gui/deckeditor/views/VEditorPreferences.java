@@ -30,7 +30,7 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
     private final DragTab tab = new DragTab("Preferences");
 
     private JLabel lblStats = new FLabel.Builder()
-        .text("Stat Bars").tooltip("Toggle statistics bars")
+        .text("General").tooltip("Configure high-level UI components")
         .fontSize(12).build();
 
     private JLabel lblCatalog = new FLabel.Builder()
@@ -63,6 +63,7 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
 
     private JCheckBox chbDeckStats = new FCheckBox("Show stats in current deck");
     private JCheckBox chbCatalogStats = new FCheckBox("Show stats in card catalog");
+    private JCheckBox chbElasticColumns = new FCheckBox("Use elastic resizing when changing column widths");
 
     private JCheckBox chbCardDisplayUnique = new FCheckBox("Show unique cards only (only affects Constructed)");
 
@@ -94,8 +95,10 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
 
         chbDeckStats.setFont(FSkin.getFont(12));
         chbCatalogStats.setFont(FSkin.getFont(12));
+        chbElasticColumns.setFont(FSkin.getFont(12));
         chbDeckStats.setSelected(true);
         chbCatalogStats.setSelected(true);
+        chbElasticColumns.setSelected(false);
 
         chbCardDisplayUnique.setFont(FSkin.getFont(12));
         chbCardDisplayUnique.setSelected(false);
@@ -103,6 +106,7 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
         pnl.add(lblStats, "h 25px!, gap 5px 5px 5px 5px, ax center, span 2 1");
         pnl.add(chbCatalogStats, "h 25px!, gap 5px 5px 5px 5px, ax center, span 2 1");
         pnl.add(chbDeckStats, "h 25px!, gap 5px 5px 5px 5px, ax center, span 2 1");
+        pnl.add(chbElasticColumns, "h 25px!, gap 5px 5px 5px 5px, ax center, span 2 1");
 
         final String constraints = "w 75px, h 25px!, gap 5px 5px 5px 5px, ax center";
         pnl.add(lblCatalog, constraints + ", span 2 1");
@@ -260,6 +264,11 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
         return chbDeckStats;
     }
 
+    /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getChbElasticColumns() {
+        return chbElasticColumns;
+    }
+    
     /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getChbCatalogStats() {
         return chbCatalogStats;

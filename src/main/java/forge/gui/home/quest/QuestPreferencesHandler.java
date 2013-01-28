@@ -104,7 +104,7 @@ public class QuestPreferencesHandler extends JPanel {
         pnlDifficulty.setOpaque(false);
         pnlDifficulty.setLayout(new MigLayout("insets 0, gap 0, wrap 5"));
 
-        pnlDifficulty.add(new FLabel.Builder().text("Difficulty Adjustments").icon(new ImageIcon("res/images/icons/NotesIcon.png")), "w 100%!, h 30px!, span 5 1");
+        pnlDifficulty.add(new FLabel.Builder().text("Difficulty Adjustments").icon(new ImageIcon("res/images/icons/NotesIcon.png")).build(), "w 100%!, h 30px!, span 5 1");
         pnlDifficulty.add(lblErrDifficulty, "w 100%!, h 30px!, span 5 1");
 
         constraints1 = "w 60px!, h 26px!";

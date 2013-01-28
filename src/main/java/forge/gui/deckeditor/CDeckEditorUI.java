@@ -24,6 +24,7 @@ import java.awt.event.MouseEvent;
 
 import forge.Card;
 import forge.gui.CardContainer;
+import forge.gui.deckeditor.SEditorIO.EditorPreference;
 import forge.gui.deckeditor.controllers.ACEditorBase;
 import forge.gui.deckeditor.views.VFilters;
 import forge.gui.match.controllers.CDetail;
@@ -84,6 +85,14 @@ public enum CDeckEditorUI implements CardContainer {
     public void setCurrentEditorController(ACEditorBase<?, ?> editor0) {
         this.childController = editor0;
         updateController();
+        if (childController != null) {
+            boolean wantElastic = SEditorIO.getPref(EditorPreference.elastic_columns);
+            boolean wantUnique = SEditorIO.getPref(EditorPreference.display_unique_only);
+            childController.getTableCatalog().setWantElasticColumns(wantElastic);
+            childController.getTableDeck().setWantElasticColumns(wantElastic);
+            childController.getTableCatalog().setWantUnique(wantUnique);
+            childController.getTableDeck().setWantUnique(wantUnique);
+        }
         VFilters.SINGLETON_INSTANCE.getLayoutControl().buildFilter();
     }
 

@@ -50,7 +50,8 @@ public class SEditorIO {
     public enum EditorPreference { /** */
         stats_deck, /** */
         stats_catalog,
-        display_unique_only
+        display_unique_only,
+        elastic_columns
     }
 
     private static final XMLEventFactory EVENT_FACTORY = XMLEventFactory.newInstance();
