@@ -2,8 +2,8 @@ Name:Shifting Sky
 ManaCost:2 U
 Types:Enchantment
 Text:no text
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseColor | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a color.
-SVar:ChooseColor:AB$ ChooseColor | Cost$ 0 | Defined$ You
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
 S:Mode$ Continuous| Affected$ Permanent.nonLand | SetColor$ ChosenColor | Description$ All nonland permanents are the chosen color.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True

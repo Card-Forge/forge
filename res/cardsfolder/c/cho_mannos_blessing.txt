@@ -4,8 +4,8 @@ Types:Enchantment Aura
 Text:no text
 K:Flash
 K:Enchant creature
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseColor | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a color.
-SVar:ChooseColor:AB$ ChooseColor | Cost$ 0 | Defined$ You | AILogic$ MostProminentInHumanDeck
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInHumanDeck | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
 A:SP$ Attach | Cost$ W W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection:Card.ChosenColor:Protection from ChosenColor | Description$ Enchanted creature has protection from the chosen color. This effect doesn't remove CARDNAME.
 SVar:Rarity:Common

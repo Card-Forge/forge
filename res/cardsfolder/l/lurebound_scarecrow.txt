@@ -3,8 +3,8 @@ ManaCost:3
 Types:Artifact Creature Scarecrow
 Text:no text
 PT:4/4
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseColor | Static$ True| TriggerDescription$ As CARDNAME enters the battlefield, choose a color.
-SVar:ChooseColor:AB$ ChooseColor | Cost$ 0 | Defined$ You | AILogic$ MostProminentComputerControls
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color. | AILogic$ MostProminentComputerControls
 T:Mode$ Always | CheckSVar$ X | SVarCompare$ EQ0 | TriggerZones$ Battlefield | Static$ True | Execute$ TrigSacrifice | TriggerDescription$ When you control no permanents of the chosen color, sacrifice CARDNAME.
 SVar:TrigSacrifice:AB$ Sacrifice | Cost$ 0
 SVar:X:Count$Valid Permanent.YouCtrl+ChosenColor

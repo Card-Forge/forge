@@ -4,8 +4,8 @@ Types:Artifact Creature Golem
 Text:
 PT:2/2
 S:Mode$ Continuous | Affected$ Creature.ChosenType | AddPower$ 1 | AddToughness$ 1 | Description$ Creatures of the chosen type get +1/+1.
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseCT | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a creature type.
-SVar:ChooseCT:AB$ ChooseType | Cost$ 0 | Defined$ You | Type$ Creature | AILogic$ MostProminentInComputerDeck
+K:ETBReplacement:Other:ChooseCT
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type. | AILogic$ MostProminentInComputerDeck
 T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigDig | TriggerDescription$ When CARDNAME enters the battlefield, reveal the top four cards of your library. Put all creature cards of the chosen type revealed this way into your hand and the rest on the bottom of your library in any order.
 SVar:TrigDig:DB$ Dig | DigNum$ 4 | Reveal$ True | ChangeNum$ All | ChangeValid$ Creature.ChosenType
 SVar:PlayMain1:TRUE

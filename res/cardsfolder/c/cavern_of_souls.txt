@@ -2,8 +2,8 @@ Name:Cavern of Souls
 ManaCost:no cost
 Types:Land
 Text:no text
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseCT | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a creature type.
-SVar:ChooseCT:AB$ ChooseType | Cost$ 0 | Defined$ You | Type$ Creature | AILogic$ MostProminentInComputerDeck
+K:ETBReplacement:Other:ChooseCT
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type. | AILogic$ MostProminentInComputerDeck
 A:AB$ Mana | Cost$ T | Produced$ 1 | SpellDescription$ Add 1 to your mana pool.
 A:AB$ Mana | Cost$ T | Produced$ Any | RestrictValid$ Creature.ChosenType | AddsNoCounter$ True | SpellDescription$ Add one mana of any color to your mana pool. Spend this mana only to cast a creature spell of the chosen type, and that spell can't be countered.
 SVar:Rarity:Rare

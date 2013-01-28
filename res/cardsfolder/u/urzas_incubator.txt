@@ -2,8 +2,8 @@ Name:Urza's Incubator
 ManaCost:3
 Types:Artifact
 Text:no text
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Static$ True | TriggerZones$ Battlefield | Execute$ TrigChoose | TriggerDescription$ As CARDNAME enters the battlefield, choose a creature type.
-SVar:TrigChoose:AB$ ChooseType | Cost$ 0 | Defined$ You | Type$ Creature
+K:ETBReplacement:Other:ChooseCT
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type.
 S:Mode$ ReduceCost | ValidCard$ Creature.ChosenType | Type$ Spell | Activator$ You | Amount$ 2 | Description$ Creature spells of the chosen type cost 2 less to cast.
 SVar:RemAIDeck:True
 SVar:Rarity:Rare

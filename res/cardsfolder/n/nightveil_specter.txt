@@ -1,0 +1,18 @@
+Name:Nightveil Specter
+ManaCost:UB UB UB
+Types:Creature Specter
+Text:
+PT:2/3
+K:Flying
+T:Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Opponent | CombatDamage$ True | Execute$ TrigMill | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME deals combat damage to a player, that player exiles the top card of his or her library.
+SVar:TrigMill:AB$ Mill | Cost$ 0 | Defined$ TriggeredTarget | NumCards$ 1 | Destination$ Exile | RememberMilled$ True
+S:Mode$ Continuous | Affected$ Card.IsRemembered+OppOwn | AffectedZone$ Exile | AddHiddenKeyword$ May be played by your opponent | Description$ You may play cards exiled with CARDNAME.
+S:Mode$ Continuous | Affected$ Card.IsRemembered+YouOwn | AffectedZone$ Exile | AddHiddenKeyword$ May be played
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Excute$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
+SVar:RemAIDeck:True
+SVar:Rarity:Rare
+SVar:Picture:http://www.wizards.com/global/images/magic/general/nightveil_specter.jpg
+SetInfo:GTC|Rare|http://magiccards.info/scans/en/gtc/222.jpg
+Oracle:Flying\nWhenever Nightveil Specter deals combat damage to a player, that player exiles the top card of his or her library.\nYou may play cards exiled with Nightveil Specter.
+End

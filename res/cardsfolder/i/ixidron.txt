@@ -3,8 +3,8 @@ ManaCost:3 U U
 Types:Creature Illusion
 Text:no text
 PT:*/*
-T:Mode$ChangesZone | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigTurnFaceDown | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, turn all other nontoken creatures face down. (They're 2/2 creatures.)
-SVar:TrigTurnFaceDown:AB$SetStateAll | Cost$ 0 | ValidCards$ Creature.nonToken+Other+faceUp | Mode$ TurnFace
+K:ETBReplacement:Other:TrigTurnFaceDown
+SVar:TrigTurnFaceDown:DB$ SetStateAll | ValidCards$ Creature.nonToken+Other+faceUp | Mode$ TurnFace | SpellDescription$ As CARDNAME enters the battlefield, turn all other nontoken creatures face down. (They're 2/2 creatures.)
 S:Mode$ Continuous | EffectZone$ All | CharacteristicDefining$ True | SetPower$ X | SetToughness$ X | Description$ CARDNAME's power and toughness are each equal to the number of face-down creatures on the battlefield.
 SVar:X:Count$Valid Creature.faceDown
 SVar:Rarity:Rare

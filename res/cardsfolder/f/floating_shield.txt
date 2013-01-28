@@ -3,8 +3,8 @@ ManaCost:2 W
 Types:Enchantment Aura
 Text:no text
 K:Enchant creature
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseColor | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a color.
-SVar:ChooseColor:AB$ ChooseColor | Cost$ 0 | Defined$ You | AILogic$ MostProminentInHumanDeck
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color. | AILogic$ MostProminentInHumanDeck
 A:SP$ Attach | Cost$ 2 W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection:Card.ChosenColor:Protection from ChosenColor | Description$ Enchanted creature has protection from the chosen color. This effect doesn't remove CARDNAME.
 A:AB$ Protection | Cost$ Sac<1/CARDNAME> | ValidTgts$ Creature | TgtPrompt$ Select target creature | Gains$ ChosenColor | SpellDescription$ Target creature gains protection from the chosen color until end of turn.

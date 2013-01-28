@@ -2,8 +2,8 @@ Name:Energy Vortex
 ManaCost:3 U U
 Types:Enchantment
 Text:no text
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseP | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose an opponent.
-SVar:ChooseP:AB$ ChoosePlayer | Cost$ 0 | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse
+K:ETBReplacement:Other:ChooseP
+SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose an opponent.
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ You | TriggerZones$ Battlefield | Execute$ TrigRemove | TriggerDescription$ At the beginning of your upkeep, remove all energy counters from CARDNAME.
 SVar:TrigRemove:AB$ RemoveCounter | Cost$ 0 | CounterType$ ENERGY | CounterNum$ All
 T:Mode$ Phase | Phase$ Upkeep | ValidPlayer$ Player.Chosen | TriggerZones$ Battlefield | Execute$ TrigDamage | TriggerDescription$ At the beginning of the chosen player's upkeep, CARDNAME deals 3 damage to that player unless he or she pays {1} for each energy counter on CARDNAME.

@@ -2,8 +2,9 @@ Name:Jihad
 ManaCost:W W W
 Types:Enchantment
 Text:no text
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseColor | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a color and an opponent.
-SVar:ChooseColor:AB$ ChooseColor | Cost$ 0 | Defined$ You
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SubAbility$ ChooseP | SpellDescription$ As CARDNAME enters the battlefield, choose a color and an opponent.
+SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player.Opponent
 S:Mode$ Continuous | Affected$ Creature.White | AddPower$ 2 | AddToughness$ 1 | IsPresent$ Permanent.nontoken+ChosenColor+YouDontCtrl | Description$ White creatures get +2/+1 as long as the chosen player controls a nontoken permanent of the chosen color.
 T:Mode$ Always | TriggerZones$ Battlefield | IsPresent$ Permanent.nontoken+ChosenColor+YouDontCtrl | PresentCompare$ EQ0 | Execute$ TrigSac | TriggerDescription$ When the chosen player controls no nontoken permanents of the chosen color, sacrifice CARDNAME.
 SVar:TrigSac:AB$ Sacrifice | Cost$ 0 | Defined$ Self

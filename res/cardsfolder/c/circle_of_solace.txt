@@ -2,8 +2,8 @@ Name:Circle of Solace
 ManaCost:3 W
 Types:Enchantment
 Text:no text
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseCT | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a creature type.
-SVar:ChooseCT:AB$ ChooseType | Cost$ 0 | Defined$ You | Type$ Creature | AILogic$ MostProminentHumanControls
+K:ETBReplacement:Other:ChooseCT
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type. | AILogic$ MostProminentHumanControls
 A:AB$ ChooseCard | Cost$ 1 W | Choices$ Creature.ChosenType | RememberChosen$ True | AILogic$ NeedsPrevention | SubAbility$ DBEffect | SVars$ DBEffect,RPreventNextFromCreature,ExileEffect | SpellDescription$ The next time a creature of the chosen type would deal damage to you this turn, prevent that damage.
 SVar:DBEffect:DB$ Effect | ReplacementEffects$ RPreventNextFromCreature | RememberObjects$ Remembered | SVars$ RPreventNextFromCreature,ExileEffect | SubAbility$ DBCleanup | ConditionDefined$ Remembered | ConditionPresent$ Card | ConditionCompare$ GE1
 SVar:RPreventNextFromCreature:Event$ DamageDone | ValidSource$ Card.IsRemembered | ValidTarget$ You | ReplaceWith$ ExileEffect | PreventionEffect$ True | Description$ The next time a creature of the chosen type would deal damage to you this turn, prevent that damage.

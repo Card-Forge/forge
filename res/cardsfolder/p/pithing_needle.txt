@@ -2,8 +2,8 @@ Name:Pithing Needle
 ManaCost:1
 Types:Artifact
 Text:no text
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigName | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, name a card.
-SVar:TrigName:AB$ NameCard | Cost$ 0 | Defined$ You
+K:ETBReplacement:Other:DBNameCard
+SVar:DBNameCard:DB$ NameCard | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, name a card.
 S:Mode$ CantBeActivated | ValidCard$ Card.NamedCard | NonMana$ True | Description$ Activated abilities of sources with the chosen name can't be activated unless they're mana abilities.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

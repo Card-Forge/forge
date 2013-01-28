@@ -2,8 +2,8 @@ Name:Xenograft
 ManaCost:4 U
 Types:Enchantment
 Text:no text
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseCT | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a creature type.
-SVar:ChooseCT:AB$ ChooseType | Cost$ 0 | Defined$ You | Type$ Creature
+K:ETBReplacement:Other:ChooseCT
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type.
 S:Mode$ Continuous | Affected$ Creature.YouCtrl | AddType$ ChosenType | Description$ Each creature you control is the chosen type in addition to its other types.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True

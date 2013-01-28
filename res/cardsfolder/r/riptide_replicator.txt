@@ -2,8 +2,8 @@ Name:Riptide Replicator
 ManaCost:X 4
 Types:Artifact
 Text:no text
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseColor | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a color and a creature type.
-SVar:ChooseColor:AB$ ChooseColor | Cost$ 0 | Defined$ You | SubAbility$ ChooseCT
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SubAbility$ ChooseCT | SpellDescription$ As CARDNAME enters the battlefield, choose a color and a creature type.
 SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature
 K:etbCounter:CHARGE:X
 SVar:X:Count$xPaid

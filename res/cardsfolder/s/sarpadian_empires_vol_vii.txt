@@ -2,8 +2,8 @@ Name:Sarpadian Empires, Vol. VII
 ManaCost:3
 Types:Artifact
 Text:no text
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseColor | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling.
-SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInGame
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInGame | SpellDescription$ As CARDNAME enters the battlefield, choose white Citizen, blue Camarid, black Thrull, red Goblin, or green Saproling.
 # Went for MostProminentInGame logic to give the AI a possible out for situations where it might be locked down based on its colors
 A:AB$ Token | Cost$ 3 T | TokenAmount$ 1 | TokenName$ Citizen | TokenTypes$ Creature,Citizen | TokenOwner$ You | TokenColors$ white | TokenPower$ 1 | TokenToughness$ 1 | ConditionChosenColor$ white | SubAbility$ ChoseBlue | SpellDescription$ Put a 1/1 creature token of the chosen color and type onto the battlefield.
 SVar:ChoseBlue:DB$ Token | TokenAmount$ 1 | TokenName$ Camarid | TokenTypes$ Creature,Camarid | TokenOwner$ You | TokenColors$ blue | TokenPower$ 1 | TokenToughness$ 1 | ConditionChosenColor$ blue | SubAbility$ ChoseBlack

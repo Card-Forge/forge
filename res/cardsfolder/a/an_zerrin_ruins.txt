@@ -2,8 +2,8 @@ Name:An-Zerrin Ruins
 ManaCost:2 R R
 Types:Enchantment
 Text:no text
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseCT | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a creature type.
-SVar:ChooseCT:AB$ ChooseType | Cost$ 0 | Defined$ You | Type$ Creature | AILogic$ MostProminentHumanControls
+K:ETBReplacement:Other:ChooseCT
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | AILogic$ MostProminentHumanControls | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type.
 S:Mode$ Continuous | Affected$ Creature.ChosenType | AddHiddenKeyword$ CARDNAME doesn't untap during your untap step. | Description$ Creatures of the chosen type don't untap during their controllers' untap steps.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

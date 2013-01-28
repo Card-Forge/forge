@@ -4,8 +4,8 @@ Types:Legendary Creature Angel
 Text:no text
 PT:7/7
 K:Flying
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseColor | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a color.
-SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInHumanDeck
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color. | AILogic$ MostProminentInHumanDeck
 S:Mode$ CantBeCast | ValidCard$ Card.ChosenColor | Caster$ Opponent | Description$ Your opponents can't cast spells of the chosen color.
 SVar:Rarity:Mythic
 SVar:Picture:http://www.wizards.com/global/images/magic/general/iona_shield_of_emeria.jpg

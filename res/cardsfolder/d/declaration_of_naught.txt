@@ -2,8 +2,8 @@ Name:Declaration of Naught
 ManaCost:U U
 Types:Enchantment
 Text:no text
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ TrigName | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, name a card.
-SVar:TrigName:AB$ NameCard | Cost$ 0 | Defined$ You
+K:ETBReplacement:Other:DBNameCard
+SVar:DBNameCard:DB$ NameCard | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, name a card.
 A:AB$ Counter | Cost$ U | TargetType$ Spell | TgtPrompt$ Select target spell with the chosen name. | ValidTgts$ Card.NamedCard | SpellDescription$ Counter target spell with the chosen name.
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare

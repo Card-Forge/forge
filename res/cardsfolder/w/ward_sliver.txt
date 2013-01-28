@@ -3,8 +3,8 @@ ManaCost:4 W
 Types:Creature Sliver
 Text:no text
 PT:2/2
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseColor | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a color.
-SVar:ChooseColor:DB$ ChooseColor | Defined$ You
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color.
 S:Mode$ Continuous | Affected$ Sliver | AddKeyword$ Protection:Card.ChosenColor:Protection from ChosenColor | Description$ All Slivers have protection from the chosen color.
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True

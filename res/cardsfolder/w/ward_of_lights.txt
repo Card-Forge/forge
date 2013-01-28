@@ -8,8 +8,8 @@ T:Mode$ SpellCast | ValidCard$ Card.Self | Execute$ TrigDelayedSac | Static$ Tru
 SVar:TrigDelayedSac:AB$ Animate | Cost$ 0 | Defined$ Self | Triggers$ CleanupTrig | sVars$ Sac | Permanent$ True
 SVar:CleanupTrig:Mode$ Phase | Phase$ Cleanup | TriggerZones$ Battlefield | Execute$ Sac | TriggerDescription$ At the beginning of the next cleanup step, sacrifice CARDNAME.
 SVar:Sac:AB$ Sacrifice | Cost$ 0 | Defined$ Self
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseColor | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a color.
-SVar:ChooseColor:AB$ ChooseColor | Cost$ 0 | Defined$ You | AILogic$ MostProminentInHumanDeck
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color. | AILogic$ MostProminentInHumanDeck
 A:SP$ Attach | Cost$ W W | ValidTgts$ Creature | AILogic$ Pump
 S:Mode$ Continuous | Affected$ Creature.EnchantedBy | AddKeyword$ Protection:Card.ChosenColor:Protection from ChosenColor | Description$ Enchanted creature has protection from the chosen color. This effect doesn't remove CARDNAME.
 SVar:RemAIDeck:True

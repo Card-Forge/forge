@@ -4,8 +4,8 @@ Types:Creature Human Knight
 Text:no text
 PT:3/3
 K:Flanking
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseColor | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a color.
-SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInHumanDeck
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color. | AILogic$ MostProminentInHumanDeck
 A:AB$ Destroy | Cost$ W W T | ValidTgts$ Permanent.ChosenColor | TgtPrompt$ Select target permanent of the chosen color | SpellDescription$ Destroy target permanent of the chosen color.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/pentarch_paladin.jpg

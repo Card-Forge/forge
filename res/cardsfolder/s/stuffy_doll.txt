@@ -4,8 +4,8 @@ Types:Artifact Creature Construct
 Text:no text
 PT:0/1
 K:Indestructible
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseP | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a player.
-SVar:ChooseP:AB$ ChoosePlayer | Cost$ 0 | Defined$ You | Choices$ Player | AILogic$ Curse
+K:ETBReplacement:Other:ChooseP
+SVar:ChooseP:DB$ ChoosePlayer | Defined$ You | Choices$ Player | AILogic$ Curse | SpellDescription$ As CARDNAME enters the battlefield, choose a player.
 A:AB$ DealDamage | Cost$ T | NumDmg$ 1 | SpellDescription$ CARDNAME deals 1 damage to itself.
 T:Mode$ DamageDone | Execute$ TrigDamage | ValidTarget$ Card.Self | TriggerZones$ Battlefield | TriggerDescription$ Whenever CARDNAME is dealt damage, it deals that much damage to the chosen player.
 SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | NumDmg$ X | References$ X | Defined$ ChosenPlayer

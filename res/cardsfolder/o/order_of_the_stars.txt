@@ -4,8 +4,8 @@ Types:Creature Human Cleric
 Text:no text
 PT:0/1
 K:Defender
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseColor | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a color.
-SVar:ChooseColor:DB$ ChooseColor | Defined$ You | AILogic$ MostProminentInHumanDeck
+K:ETBReplacement:Other:ChooseColor
+SVar:ChooseColor:DB$ ChooseColor | Defined$ You | SpellDescription$ As CARDNAME enters the battlefield, choose a color. | AILogic$ MostProminentInHumanDeck
 K:Protection:Card.ChosenColor:CARDNAME has protection from the chosen color.
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/order_of_the_stars.jpg

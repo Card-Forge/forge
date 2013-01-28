@@ -4,8 +4,8 @@ Types:Creature Human Knight
 Text:no text
 PT:3/3
 K:Vigilance
-T:Mode$ ChangesZone | ValidCard$ Card.Self | Origin$ Any | Destination$ Battlefield | Execute$ ChooseType | Static$ True | TriggerDescription$ As CARDNAME enters the battlefield, choose a creature type.
-SVar:ChooseType:AB$ ChooseType | Cost$ 0 | Defined$ You | Type$ Creature | AILogic$ MostProminentHumanControls
+K:ETBReplacement:Other:ChooseCT
+SVar:ChooseCT:DB$ ChooseType | Defined$ You | Type$ Creature | SpellDescription$ As CARDNAME enters the battlefield, choose a creature type. | AILogic$ MostProminentHumanControls
 S:Mode$ Continuous | Affected$ Creature.Human+YouCtrl | AddKeyword$ Protection:Creature.ChosenType:Protection from ChosenType | Description$ Human creatures you control have protection from creatures of the chosen type.
 SVar:PlayMain1:TRUE
 SVar:Rarity:Rare
