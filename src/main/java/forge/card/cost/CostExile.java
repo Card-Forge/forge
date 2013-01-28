@@ -27,7 +27,6 @@ import forge.Card;
 
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
@@ -39,6 +38,7 @@ import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.GuiDialog;
 import forge.gui.match.CMatchUI;
 import forge.view.ButtonUtil;
 
@@ -361,7 +361,7 @@ public class CostExile extends CostPartWithList {
             return;
         }
 
-        final boolean doExile = GameActionUtil.showYesNoDialog(sa.getSourceCard(), sb.toString());
+        final boolean doExile = GuiDialog.confirm(sa.getSourceCard(), sb.toString());
         if (doExile) {
             final Iterator<Card> itr = list.iterator();
             while (itr.hasNext()) {

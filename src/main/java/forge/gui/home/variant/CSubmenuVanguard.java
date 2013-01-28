@@ -12,7 +12,6 @@ import javax.swing.SwingWorker;
 import com.google.common.collect.Iterables;
 
 import forge.Command;
-import forge.GameActionUtil;
 import forge.Singletons;
 import forge.control.Lobby;
 import forge.deck.Deck;
@@ -21,6 +20,7 @@ import forge.game.MatchController;
 import forge.game.MatchStartHelper;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.PlayerType;
+import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FDeckChooser;
@@ -125,7 +125,7 @@ public enum CSubmenuVanguard implements ICDoc {
 
                     if (d == null) {
                         //ERROR!
-                        GameActionUtil.showInfoDialg("No deck selected for player " + (i + 1));
+                        GuiDialog.message("No deck selected for player " + (i + 1));
                         return null;
                     }
                     playerDecks.add(d);
@@ -162,7 +162,7 @@ public enum CSubmenuVanguard implements ICDoc {
                     }
                     if (avatar == null) {
                         //ERROR!
-                        GameActionUtil.showInfoDialg("No avatar selected for player " + (i + 1));
+                        GuiDialog.message("No avatar selected for player " + (i + 1));
                         return null;
                     }
                     playerAvatars.add(avatar);
@@ -170,7 +170,7 @@ public enum CSubmenuVanguard implements ICDoc {
 
                 if (usedDefaults) {
 
-                    GameActionUtil.showInfoDialg(defaultAvatarInfo.toString());
+                    GuiDialog.message(defaultAvatarInfo.toString());
                 }
 
                 Lobby lobby = Singletons.getControl().getLobby();

@@ -56,16 +56,14 @@ import forge.control.input.InputPayReturnCost;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.event.CardDamagedEvent;
-import forge.game.event.FlipCoinEvent;
 import forge.game.event.LifeLossEvent;
 import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.GuiDialog;
 import forge.gui.GuiUtils;
-import forge.gui.match.CMatchUI;
 import forge.sound.SoundEffectType;
-import forge.util.MyRandom;
 
 
 /**
@@ -347,7 +345,7 @@ public final class GameActionUtil {
         void doRipple(final Card c, final int rippleCount, final Player controller) {
             final Card rippleCard = c;
             boolean activateRipple = false;
-            if (controller.isComputer() || GameActionUtil.showYesNoDialog(c, "Activate Ripple for " + c + "?")) {
+            if (controller.isComputer() || GuiDialog.confirm(c, "Activate Ripple for " + c + "?")) {
                     activateRipple = true;
             }
             if (activateRipple) {
@@ -440,7 +438,7 @@ public final class GameActionUtil {
             orString = " (or: " + sourceAbility.getStackDescription() + ")";
         }
         if (parts.isEmpty() || costPart.getAmount().equals("0")) {
-            if (showYesNoDialog(source, "Do you want to pay 0?" + orString)) {
+            if (GuiDialog.confirm(source, "Do you want to pay 0?" + orString)) {
                 paid.execute();
             } else {
                 unpaid.execute();
@@ -455,7 +453,7 @@ public final class GameActionUtil {
 
                 final int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
                         : AbilityFactory.calculateAmount(source, amountString, sourceAbility);
-                if (p.canPayLife(amount) && showYesNoDialog(source, "Do you want to pay " + amount + " life?" + orString)) {
+                if (p.canPayLife(amount) && GuiDialog.confirm(source, "Do you want to pay " + amount + " life?" + orString)) {
                     p.payLife(amount, null);
                 } else {
                     hasPaid = false;
@@ -468,7 +466,7 @@ public final class GameActionUtil {
                 String amountString = part.getAmount();
                 final int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
                         : CardFactoryUtil.xCount(source, source.getSVar(amountString));
-                if (p.canPayLife(amount) && showYesNoDialog(source, "Do you want " + source + " to deal " + amount + " damage to you?")) {
+                if (p.canPayLife(amount) && GuiDialog.confirm(source, "Do you want " + source + " to deal " + amount + " damage to you?")) {
                     p.addDamage(amount, source);
                 } else {
                     hasPaid = false;
@@ -483,7 +481,7 @@ public final class GameActionUtil {
                 int amount = amountString.matches("[0-9][0-9]?") ? Integer.parseInt(amountString)
                         : CardFactoryUtil.xCount(source, source.getSVar(amountString));
                 String plural = amount > 1 ? "s" : "";
-                if (showYesNoDialog(source, "Do you want to put " + amount + " " + counterType.getName()
+                if (GuiDialog.confirm(source, "Do you want to put " + amount + " " + counterType.getName()
                         + " counter" + plural + " on " + source + "?")) {
                     if (source.canHaveCountersPlacedOnIt(counterType)) {
                         source.addCounter(counterType, amount, false);
@@ -507,7 +505,7 @@ public final class GameActionUtil {
                         : CardFactoryUtil.xCount(source, source.getSVar(amountString));
                 String plural = amount > 1 ? "s" : "";
                 if (part.canPay(sourceAbility, source, p, cost, game)
-                        && showYesNoDialog(source, "Do you want to remove " + amount + " " + counterType.getName()
+                        && GuiDialog.confirm(source, "Do you want to remove " + amount + " " + counterType.getName()
                         + " counter" + plural + " from " + source + "?")) {
                     source.subtractCounter(counterType, amount);
                 } else {
@@ -519,7 +517,7 @@ public final class GameActionUtil {
 
             else if (part instanceof CostExile) {
                 if ("All".equals(part.getType())) {
-                    if (showYesNoDialog(source, "Do you want to exile all cards in your graveyard?")) {
+                    if (GuiDialog.confirm(source, "Do you want to exile all cards in your graveyard?")) {
                         List<Card> cards = new ArrayList<Card>(p.getCardsIn(ZoneType.Graveyard));
                         for (final Card card : cards) {
                             Singletons.getModel().getGame().getAction().exile(card);
@@ -569,7 +567,7 @@ public final class GameActionUtil {
                 GuiUtils.clearPanelSelections();
                 GuiUtils.setPanelSelection(source);
 
-                if (!showYesNoDialog(source, "Do you want to pay the sacrifice cost?")) {
+                if (!GuiDialog.confirm(source, "Do you want to pay the sacrifice cost?")) {
                     hasPaid = false;
                     break;
                 }
@@ -636,100 +634,6 @@ public final class GameActionUtil {
             Singletons.getModel().getMatch().getInput().setInput(toSet);
             Singletons.getModel().getGame().getStack().setResolving(bResolving);
         }
-    }
-
-    /**
-     * <p>
-     * showYesNoDialog.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @param question
-     *            a {@link java.lang.String} object.
-     * @return a boolean.
-     */
-    public static boolean showYesNoDialog(final Card c, final String question) {
-        return GameActionUtil.showYesNoDialog(c, question, true);
-    }
-
-    /**
-     * <p>
-     * showYesNoDialog.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @param question
-     *            a {@link java.lang.String} object.
-     * @param defaultNo
-     *            true if the default option should be "No", false otherwise
-     * @return a boolean.
-     */
-    public static boolean showYesNoDialog(final Card c, String question, final boolean defaultChoice) {
-        CMatchUI.SINGLETON_INSTANCE.setCard(c);
-        final StringBuilder title = new StringBuilder();
-        title.append(c.getName()).append(" - Ability");
-
-        if (!(question.length() > 0)) {
-            question = "Activate card's ability?";
-        }
-
-        int answer;
-        if (!defaultChoice) {
-            final Object[] options = { "Yes", "No" };
-            answer = JOptionPane.showOptionDialog(null, question, title.toString(), JOptionPane.YES_NO_OPTION,
-                    JOptionPane.PLAIN_MESSAGE, null, options, options[1]);
-        } else {
-            answer = JOptionPane.showConfirmDialog(null, question, title.toString(), JOptionPane.YES_NO_OPTION);
-        }
-
-        return answer == JOptionPane.YES_OPTION;
-    }
-
-    /**
-     * <p>
-     * showInfoDialg.
-     * </p>
-     * 
-     * @param message
-     *            a {@link java.lang.String} object.
-     */
-    public static void showInfoDialg(final String message) {
-        JOptionPane.showMessageDialog(null, message);
-    }
-
-    /**
-     * <p>
-     * flipACoin.
-     * </p>
-     * 
-     * @param caller
-     *            a {@link forge.game.player.Player} object.
-     * @param source
-     *            a {@link forge.Card} object.
-     * @return a boolean.
-     */
-    public static boolean flipACoin(final Player caller, final Card source) {
-        String choice = "";
-        final String[] choices = { "heads", "tails" };
-
-        final boolean flip = MyRandom.getRandom().nextBoolean();
-        if (caller.isHuman()) {
-            choice = GuiChoose.one(source.getName() + " - Call coin flip", choices);
-        } else {
-            choice = choices[MyRandom.getRandom().nextInt(2)];
-        }
-
-        final boolean winFlip = flip == choice.equals("heads");
-        final String winMsg = winFlip ? " wins flip." : " loses flip.";
-
-        // Play the Flip A Coin sound
-        Singletons.getModel().getGame().getEvents().post(new FlipCoinEvent());
-
-        JOptionPane.showMessageDialog(null, source.getName() + " - " + caller + winMsg, source.getName(),
-                JOptionPane.PLAIN_MESSAGE);
-        return winFlip;
     }
 
     // not restricted to combat damage, not restricted to dealing damage to
@@ -1333,7 +1237,7 @@ public final class GameActionUtil {
     };
 
     /** Constant <code>commands</code>. */
-    private static HashMap<String, Command> commands = new HashMap<String, Command>();
+    private final static HashMap<String, Command> commands = new HashMap<String, Command>();
 
     static {
         // Please add cards in alphabetical order so they are easier to find
@@ -1384,16 +1288,6 @@ public final class GameActionUtil {
      */
     public static HashMap<String, Command> getCommands() {
         return GameActionUtil.commands;
-    }
-
-    /**
-     * Sets the commands.
-     * 
-     * @param commands0
-     *            the commands to set
-     */
-    public static void setCommands(final HashMap<String, Command> commands0) {
-        GameActionUtil.commands = commands0;
     }
 
     /**

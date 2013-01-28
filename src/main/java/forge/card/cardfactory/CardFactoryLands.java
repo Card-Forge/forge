@@ -25,13 +25,13 @@ import forge.Card;
 
 import forge.CardLists;
 import forge.Command;
-import forge.GameActionUtil;
 import forge.Singletons;
 import forge.control.input.Input;
 import forge.control.input.InputSelectManyCards;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.gui.GuiDialog;
 
 /**
  * <p>
@@ -104,7 +104,7 @@ class CardFactoryLands {
 
                         final String question = String.format("Pay 2 life? If you don't, %s enters the battlefield tapped.", card.getName());
 
-                        if (GameActionUtil.showYesNoDialog(card, question.toString())) {
+                        if (GuiDialog.confirm(card, question.toString())) {
                             human.payLife(2, card);
                         } else {
                             this.tapCard();

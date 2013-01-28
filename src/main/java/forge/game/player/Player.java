@@ -68,6 +68,7 @@ import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.GuiDialog;
 import forge.properties.ForgePreferences.FPref;
 import forge.util.MyRandom;
 
@@ -3106,7 +3107,7 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
             final Card crd = vaults.get(0);
 
             if (isHuman()) {
-                if (GameActionUtil.showYesNoDialog(crd, "Untap " + crd + "?")) {
+                if (GuiDialog.confirm(crd, "Untap " + crd + "?")) {
                     crd.untap();
                     return true;
                 }

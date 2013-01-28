@@ -30,13 +30,13 @@ import forge.Card;
 
 import forge.CardLists;
 import forge.CardPredicates;
-import forge.GameActionUtil;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.trigger.TriggerType;
 import forge.game.event.BlockerAssignedEvent;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.gui.GuiDialog;
 import forge.gui.match.CMatchUI;
 
 /**
@@ -715,7 +715,7 @@ public class Combat {
     private final boolean assignDamageAsIfNotBlocked(Card attacker) {
         return attacker.hasKeyword("CARDNAME assigns its combat damage as though it weren't blocked.")
                 || (attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")
-                && GameActionUtil.showYesNoDialog(attacker, "Do you want to assign its combat damage as though it weren't blocked?"));
+                && GuiDialog.confirm(attacker, "Do you want to assign its combat damage as though it weren't blocked?"));
     }
 
     private final boolean assignAttackersDamage(boolean firstStrikeDamage) {

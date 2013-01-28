@@ -9,7 +9,6 @@ import java.util.Random;
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardLists;
-import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
@@ -20,6 +19,7 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.GuiDialog;
 import forge.util.MyRandom;
 
 public class DigEffect extends SpellEffect {
@@ -124,7 +124,7 @@ public class DigEffect extends SpellEffect {
                     for (final Card c : top) {
                         question += c + " ";
                     }
-                    if (p.isHuman() && GameActionUtil.showYesNoDialog(host, question)) {
+                    if (p.isHuman() && GuiDialog.confirm(host, question)) {
                         GuiChoose.one(host + "Revealing cards from library", top);
                         // Singletons.getModel().getGameAction().revealToCopmuter(top.toArray());
                     } else if (p.isComputer() && (top.get(0).isInstant() || top.get(0).isSorcery())) {

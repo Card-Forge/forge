@@ -53,6 +53,7 @@ import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.GuiDialog;
 import forge.gui.match.CMatchUI;
 
 import forge.view.ButtonUtil;
@@ -140,7 +141,7 @@ public class Upkeep extends Phase {
                     final AbilityManaPart abMana = new AbilityManaPart(c, produced);
                     if (player.isComputer()) {
                         abMana.produceMana(this);
-                    } else if (GameActionUtil.showYesNoDialog(c, sb.toString())) {
+                    } else if (GuiDialog.confirm(c, sb.toString())) {
                         abMana.produceMana(this);
                     } else {
                         game.getAction().sacrifice(c, null);
@@ -639,7 +640,7 @@ public class Upkeep extends Phase {
             final Player cp = c.getController();
             if (cp.isHuman()) {
                 final String question = "Pay Demonic Hordes upkeep cost?";
-                if (GameActionUtil.showYesNoDialog(c, question)) {
+                if (GuiDialog.confirm(c, question)) {
                     final Ability pay = new Ability(c, SpellManaCost.ZERO) {
                         @Override
                         public void resolve() {
@@ -828,7 +829,7 @@ public class Upkeep extends Phase {
                                 final StringBuilder question = new StringBuilder();
                                 question.append("Reveal cards from the top of your library and place ");
                                 question.append("the first creature revealed onto the battlefield?");
-                                if (!GameActionUtil.showYesNoDialog(oath, question.toString())) {
+                                if (!GuiDialog.confirm(oath, question.toString())) {
                                     oathFlag = false;
                                 }
                             } else { // if player == Computer

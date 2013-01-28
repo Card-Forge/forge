@@ -61,7 +61,7 @@ public class ChangeZoneAllEffect extends SpellEffect {
 
         if (sa.getActivatingPlayer().isHuman() && destination.equals(ZoneType.Library) && !sa.hasParam("Shuffle")
                 && cards.size() >= 2) {
-            cards = GuiChoose.getOrderChoices("Choose order of cards to put into the library", "Put first", 0, cards, null, null);
+            cards = GuiChoose.order("Choose order of cards to put into the library", "Put first", 0, cards, null, null);
         }
 
         for (final Card c : cards) {

@@ -7,7 +7,6 @@ import java.util.Map;
 
 import forge.Card;
 import forge.Command;
-import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.SpellManaCost;
 import forge.card.abilityfactory.ApiType;
@@ -22,6 +21,7 @@ import forge.control.input.Input;
 import forge.game.GameState;
 import forge.game.ai.ComputerUtil;
 import forge.game.player.Player;
+import forge.gui.GuiDialog;
 
 // Wrapper ability that checks the requirements again just before
 // resolving, for intervening if clauses.
@@ -486,7 +486,7 @@ public class WrappedAbility extends Ability implements ISpellAbility {
                         buildQuestion
                                 .append("[Attacker: " + sa.getTriggeringObjects().get("Attacker") + "]");
                     }
-                    if (!GameActionUtil.showYesNoDialog(regtrig.getHostCard(), buildQuestion.toString())) {
+                    if (!GuiDialog.confirm(regtrig.getHostCard(), buildQuestion.toString())) {
                         return;
                     }
                 }

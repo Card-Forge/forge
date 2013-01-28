@@ -1,11 +1,11 @@
 package forge.card.abilityfactory.effects;
 
-import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.game.PlanarDice;
 import forge.game.player.Player;
+import forge.gui.GuiDialog;
 
 /** 
  * TODO: Write javadoc for this type.
@@ -28,7 +28,7 @@ public class RollPlanarDiceEffect extends SpellEffect {
         }
         PlanarDice result = PlanarDice.roll(roller);
         
-        GameActionUtil.showInfoDialg(roller.getName() + " rolled " + result.toString());
+        GuiDialog.message(roller.getName() + " rolled " + result.toString());
 
     }
 }

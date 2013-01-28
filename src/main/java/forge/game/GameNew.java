@@ -183,7 +183,7 @@ public class GameNew {
                 JOptionPane.showMessageDialog(null, errMsg, "Invalid deck", JOptionPane.ERROR_MESSAGE);
             }
             
-            newMain = GuiChoose.getOrderChoices("Sideboard", "Main Deck", sideboardSize, deck.getSideboard().toFlatList(), deck.getMain().toFlatList(), null, true);
+            newMain = GuiChoose.order("Sideboard", "Main Deck", sideboardSize, deck.getSideboard().toFlatList(), deck.getMain().toFlatList(), null, true);
         }
 
         newSb.clear();

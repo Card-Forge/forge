@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import forge.Card;
-import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
@@ -14,6 +13,7 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.GuiDialog;
 
 public class RearrangeTopOfLibraryEffect extends SpellEffect {
 
@@ -116,13 +116,13 @@ public class RearrangeTopOfLibraryEffect extends SpellEffect {
             topCards.add(lib.get(j));
         }
 
-        List<Card> orderedCards = GuiChoose.getOrderChoices("Select order to Rearrange", "Top of Library", 0, topCards, null, src);
+        List<Card> orderedCards = GuiChoose.order("Select order to Rearrange", "Top of Library", 0, topCards, null, src);
         for (int i = maxCards - 1; i >= 0; i--) {
             Card next = orderedCards.get(i);
             Singletons.getModel().getGame().getAction().moveToLibrary(next, 0);
         }
         if (mayshuffle) {
-            if (GameActionUtil.showYesNoDialog(src, "Do you want to shuffle the library?")) {
+            if (GuiDialog.confirm(src, "Do you want to shuffle the library?")) {
                 player.shuffle();
             }
         }

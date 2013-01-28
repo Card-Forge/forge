@@ -205,12 +205,12 @@ public class GuiChoose {
         return c.getSelectedValues();
     } // getChoice()
 
-    public static <T> List<T> getOrderChoices(final String title, final String top, int remainingObjects,
+    public static <T> List<T> order(final String title, final String top, int remainingObjects,
             final List<T> sourceChoices, List<T> destChoices, Card referenceCard) {
-        return getOrderChoices(title, top, remainingObjects, sourceChoices, destChoices, referenceCard, false);
+        return order(title, top, remainingObjects, sourceChoices, destChoices, referenceCard, false);
     }
 
-    public static <T> List<T> getOrderChoices(final String title, final String top, int remainingObjects,
+    public static <T> List<T> order(final String title, final String top, int remainingObjects,
             final List<T> sourceChoices, List<T> destChoices, Card referenceCard, boolean sideboardingMode) {
         // An input box for handling the order of choices.
         final JFrame frame = new JFrame();

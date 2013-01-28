@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import forge.Card;
 import forge.CardLists;
-import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
@@ -12,6 +11,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.zone.ZoneType;
+import forge.gui.GuiDialog;
 import forge.util.Expressions;
 
 public class RepeatEffect extends SpellEffect {
@@ -125,7 +125,7 @@ public class RepeatEffect extends SpellEffect {
             } else {
                 final StringBuilder sb = new StringBuilder();
                 sb.append("Do you want to repeat this process again?");
-                if (!GameActionUtil.showYesNoDialog(sa.getSourceCard(), sb.toString())) {
+                if (!GuiDialog.confirm(sa.getSourceCard(), sb.toString())) {
                     return false;
                 }
             }

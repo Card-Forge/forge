@@ -10,7 +10,6 @@ import javax.swing.SwingWorker;
 import com.google.common.base.Predicate;
 
 import forge.Command;
-import forge.GameActionUtil;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.control.Lobby;
@@ -21,6 +20,7 @@ import forge.game.MatchController;
 import forge.game.MatchStartHelper;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.PlayerType;
+import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.CEditorVariant;
@@ -153,7 +153,7 @@ public enum CSubmenuPlanechase implements ICDoc {
 
                     if (d == null) {
                         //ERROR!
-                        GameActionUtil.showInfoDialg("No deck selected for player " + (i + 1));
+                        GuiDialog.message("No deck selected for player " + (i + 1));
                         return null;
                     }
                     playerDecks.add(d);
@@ -196,13 +196,13 @@ public enum CSubmenuPlanechase implements ICDoc {
                     }
                     if (planes == null) {
                         //ERROR!
-                        GameActionUtil.showInfoDialg("No planar deck selected for player" + (i+1) + "!");
+                        GuiDialog.message("No planar deck selected for player" + (i+1) + "!");
                         return null;
                     }
     
                     if (useDefault) {
     
-                        GameActionUtil.showInfoDialg("Player " + (i+1) + " will use a default planar deck.");
+                        GuiDialog.message("Player " + (i+1) + " will use a default planar deck.");
                     }
                     
                     LobbyPlayer player = lobby.findLocalPlayer(i == 0 ? PlayerType.HUMAN : PlayerType.COMPUTER);

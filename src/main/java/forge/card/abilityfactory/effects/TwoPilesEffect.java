@@ -91,7 +91,7 @@ public class TwoPilesEffect extends SpellEffect {
 
                 // first, separate the cards into piles
                 if (separator.isHuman()) {
-                    final List<Card> firstPile = GuiChoose.getOrderChoices("Place into two piles", "Pile 1", -1, pool, null, card);
+                    final List<Card> firstPile = GuiChoose.order("Place into two piles", "Pile 1", -1, pool, null, card);
                     for (final Object o : firstPile) {
                         pile1.add((Card) o);
                     }

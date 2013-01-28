@@ -1356,7 +1356,7 @@ public class MagicStack extends MyObservable {
                 }
             } else {
                 // Otherwise, gave a dual list form to create instead of needing to do it one at a time
-                List<SpellAbility> orderedSAs = GuiChoose.getOrderChoices("Select order for Simultaneous Spell Abilities", "Resolve first", 0, activePlayerSAs, null, null);
+                List<SpellAbility> orderedSAs = GuiChoose.order("Select order for Simultaneous Spell Abilities", "Resolve first", 0, activePlayerSAs, null, null);
                 int size = orderedSAs.size();
                 for (int i = size - 1; i >= 0; i--) {
                     SpellAbility next = orderedSAs.get(i);

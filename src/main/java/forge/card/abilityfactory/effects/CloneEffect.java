@@ -9,7 +9,6 @@ import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardUtil;
 import forge.Command;
-import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
@@ -18,6 +17,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
+import forge.gui.GuiDialog;
 
 public class CloneEffect extends SpellEffect {
     // TODO update this method
@@ -75,7 +75,7 @@ public class CloneEffect extends SpellEffect {
         sb.append("Do you want to copy " + cardToCopy + "?");
         boolean optional = sa.hasParam("Optional");
         if (host.getController().isHuman() && optional
-                && !GameActionUtil.showYesNoDialog(host, sb.toString())) {
+                && !GuiDialog.confirm(host, sb.toString())) {
             return;
         }
 

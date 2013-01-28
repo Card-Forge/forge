@@ -10,7 +10,6 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardCharacteristicName;
 import forge.CardLists;
-import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.SpellManaCost;
 import forge.card.abilityfactory.AbilityFactory;
@@ -28,6 +27,7 @@ import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.GuiDialog;
 import forge.item.CardDb;
 
 public class PlayEffect extends SpellEffect {
@@ -139,7 +139,7 @@ public class PlayEffect extends SpellEffect {
             final StringBuilder sb = new StringBuilder();
             sb.append("Do you want to play " + tgtCard + "?");
             if (controller.isHuman() && optional
-                    && !GameActionUtil.showYesNoDialog(source, sb.toString())) {
+                    && !GuiDialog.confirm(source, sb.toString())) {
                 // i--;  // This causes an infinite loop (ArsenalNut)
                 if (wasFaceDown) {
                     tgtCard.setState(CardCharacteristicName.FaceDown);

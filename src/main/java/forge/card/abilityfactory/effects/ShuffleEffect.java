@@ -4,11 +4,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import forge.Card;
-import forge.GameActionUtil;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
+import forge.gui.GuiDialog;
 
 public class ShuffleEffect extends SpellEffect {
 
@@ -24,7 +24,7 @@ public class ShuffleEffect extends SpellEffect {
         for (final Player p : tgtPlayers) {
             if ((tgt == null) || p.canBeTargetedBy(sa)) {
                 if (optional && sa.getActivatingPlayer().isHuman()
-                        && !GameActionUtil.showYesNoDialog(host, "Have " + p + " shuffle?")) {
+                        && !GuiDialog.confirm(host, "Have " + p + " shuffle?")) {
                 } else {
                     p.shuffle();
                 }

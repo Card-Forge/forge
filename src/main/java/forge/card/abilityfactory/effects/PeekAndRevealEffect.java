@@ -5,7 +5,6 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
-import forge.GameActionUtil;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.AbilitySub;
@@ -14,6 +13,7 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.GuiDialog;
 
 /** 
  * PeeakAndReveal is a simplified why of handling something that could
@@ -58,7 +58,7 @@ public class PeekAndRevealEffect extends SpellEffect {
             if (doReveal && revealOptional) {
                 StringBuilder question = new StringBuilder();
                 question.append("Reveal cards to other players?");
-                doReveal = GameActionUtil.showYesNoDialog(source, question.toString());
+                doReveal = GuiDialog.confirm(source, question.toString());
             }
         } else {
             if (doReveal && revealOptional) {

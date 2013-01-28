@@ -9,7 +9,6 @@ import forge.CardCharacteristicName;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.CardUtil;
-import forge.GameActionUtil;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
@@ -24,6 +23,7 @@ import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.GuiDialog;
 
 public class ChangeZoneEffect extends SpellEffect {
     @Override
@@ -363,7 +363,7 @@ public class ChangeZoneEffect extends SpellEffect {
                 final StringBuilder sb = new StringBuilder();
                 sb.append("Do you want to move " + tgtC + " from " + origin + " to " + destination + "?");
                 if (player.isHuman() && optional
-                        && !GameActionUtil.showYesNoDialog(hostCard, sb.toString())) {
+                        && !GuiDialog.confirm(hostCard, sb.toString())) {
                     continue;
                 }
                 final Zone originZone = Singletons.getModel().getGame().getZoneOf(tgtC);
@@ -571,7 +571,7 @@ public class ChangeZoneEffect extends SpellEffect {
             sb.append(sa.getParam("AlternativeMessage")).append(" ");
             sb.append(altFetchList.size()).append(" cards match your searching type in Alternate Zones.");
 
-            if (!GameActionUtil.showYesNoDialog(card, sb.toString())) {
+            if (!GuiDialog.confirm(card, sb.toString())) {
                 origin = alt;
             }
         }
@@ -581,7 +581,7 @@ public class ChangeZoneEffect extends SpellEffect {
             final StringBuilder sb = new StringBuilder();
             sb.append(sa.getParam("AlternativeDestinationMessage"));
 
-            if (!GameActionUtil.showYesNoDialog(card, sb.toString())) {
+            if (!GuiDialog.confirm(card, sb.toString())) {
                 destination = ZoneType.smartValueOf(sa.getParam("DestinationAlternative"));
                 libraryPos = sa.hasParam("LibraryPositionAlternative") ? Integer.parseInt(sa.getParam("LibraryPositionAlternative")) : 0;
             }
@@ -738,7 +738,7 @@ public class ChangeZoneEffect extends SpellEffect {
                 final int num = Math.min(fetchList.size(), changeNum - i);
                 sb.append("Cancel Search? Up to ").append(num).append(" more cards can change zones.");
 
-                if (((i + 1) == changeNum) || GameActionUtil.showYesNoDialog(card, sb.toString())) {
+                if (((i + 1) == changeNum) || GuiDialog.confirm(card, sb.toString())) {
                     break;
                 }
             }

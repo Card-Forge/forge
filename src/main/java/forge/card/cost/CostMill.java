@@ -23,7 +23,6 @@ import java.util.List;
 
 import forge.Card;
 
-import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
@@ -32,6 +31,7 @@ import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
+import forge.gui.GuiDialog;
 
 /**
  * This is for the "Mill" Cost. Putting cards from the top of your library into
@@ -152,7 +152,7 @@ public class CostMill extends CostPartWithList {
         final StringBuilder sb = new StringBuilder();
         sb.append("Mill ").append(c).append(" cards from your library?");
 
-        final boolean doMill = GameActionUtil.showYesNoDialog(source, sb.toString());
+        final boolean doMill = GuiDialog.confirm(source, sb.toString());
         if (doMill) {
             this.resetList();
             final Iterator<Card> itr = list.iterator();

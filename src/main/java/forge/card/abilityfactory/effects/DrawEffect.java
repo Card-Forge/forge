@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import forge.Card;
-import forge.GameActionUtil;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.SpellAbility;
@@ -13,6 +12,7 @@ import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.GuiDialog;
 
 public class DrawEffect extends SpellEffect {
     @Override
@@ -80,7 +80,7 @@ public class DrawEffect extends SpellEffect {
 
                         sb.append("?");
 
-                        if (!GameActionUtil.showYesNoDialog(sa.getSourceCard(), sb.toString())) {
+                        if (!GuiDialog.confirm(sa.getSourceCard(), sb.toString())) {
                             continue;
                         }
                     }

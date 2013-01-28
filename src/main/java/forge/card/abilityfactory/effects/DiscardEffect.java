@@ -9,7 +9,6 @@ import com.google.common.base.Predicate;
 import forge.Card;
 import forge.CardLists;
 import forge.CardUtil;
-import forge.GameActionUtil;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
@@ -18,6 +17,7 @@ import forge.game.player.AIPlayer;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.GuiDialog;
 
 public class DiscardEffect extends RevealEffectBase {
     @Override
@@ -214,7 +214,7 @@ public class DiscardEffect extends RevealEffectBase {
                            // TODO Ask if Human would like to discard a card at Random
                            StringBuilder sb = new StringBuilder("Would you like to discard ");
                            sb.append(numCards).append(" random card(s)?");
-                           runDiscard = GameActionUtil.showYesNoDialog(source, sb.toString());
+                           runDiscard = GuiDialog.confirm(source, sb.toString());
                        }
                        else {
                            // TODO For now AI will always discard Random used currently with:
@@ -325,7 +325,7 @@ public class DiscardEffect extends RevealEffectBase {
         final int validamount = Math.min(valid.size(), max);
 
         if (anyNumber && player.isHuman() && validamount > 0) {
-            final List<Card> selection = GuiChoose.getOrderChoices("Choose Which Cards to Discard", "Discarded", -1, valid, null, null);
+            final List<Card> selection = GuiChoose.order("Choose Which Cards to Discard", "Discarded", -1, valid, null, null);
             for (final Object o : selection) {
                 if (o != null && o instanceof Card) {
                     chosen.add((Card) o);

@@ -5,7 +5,6 @@ import java.util.List;
 import forge.Card;
 import forge.CardLists;
 import forge.Command;
-import forge.GameActionUtil;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
@@ -17,6 +16,7 @@ import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.GuiDialog;
 
 public class AttachEffect extends SpellEffect {
 
@@ -46,7 +46,7 @@ public class AttachEffect extends SpellEffect {
         final StringBuilder sb = new StringBuilder();
         sb.append("Do you want to attach " + card + " to " + targets + "?");
         if (sa.getActivatingPlayer().isHuman() && sa.hasParam("Optional")
-                && !GameActionUtil.showYesNoDialog(source, sb.toString())) {
+                && !GuiDialog.confirm(source, sb.toString())) {
             return;
         }
 

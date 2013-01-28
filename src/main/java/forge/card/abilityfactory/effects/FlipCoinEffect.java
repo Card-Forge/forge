@@ -3,12 +3,12 @@ package forge.card.abilityfactory.effects;
 import java.util.List;
 
 import forge.Card;
-import forge.GameActionUtil;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellEffect;
 import forge.card.spellability.AbilitySub;
 import forge.card.spellability.SpellAbility;
 import forge.game.player.Player;
+import forge.gui.GuiDialog;
 
 public class FlipCoinEffect extends SpellEffect {
 
@@ -37,7 +37,7 @@ public class FlipCoinEffect extends SpellEffect {
         }
 
         final AbilityFactory afOutcomes = new AbilityFactory();
-        final boolean victory = GameActionUtil.flipACoin(caller.get(0), sa.getSourceCard());
+        final boolean victory = GuiDialog.flipCoin(caller.get(0), sa.getSourceCard());
 
         // Run triggers
         // HashMap<String,Object> runParams = new HashMap<String,Object>();

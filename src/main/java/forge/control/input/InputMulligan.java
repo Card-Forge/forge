@@ -27,7 +27,6 @@ import forge.Card;
 import forge.CardLists;
 import forge.CardPredicates;
 import forge.GameAction;
-import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
@@ -37,6 +36,7 @@ import forge.game.ai.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.gui.GuiDialog;
 import forge.gui.framework.SDisplayUtil;
 import forge.gui.match.CMatchUI;
 import forge.gui.match.VMatchUI;
@@ -134,7 +134,7 @@ public class InputMulligan extends Input {
                             final String effName = kw.split(":")[1];
 
                             final SpellAbility effect = af.getAbility(c.getSVar(effName), c);
-                            if (GameActionUtil.showYesNoDialog(c, "Use this card's ability?")) {
+                            if (GuiDialog.confirm(c, "Use this card's ability?")) {
                                 // If we ever let the AI memorize cards in the players
                                 // hand, this would be a place to do so.
                                 ga.playSpellAbilityNoStack(effect, false);
@@ -142,7 +142,7 @@ public class InputMulligan extends Input {
                         }
                     }
                     if (c.getName().startsWith("Leyline")) {
-                        if (GameActionUtil.showYesNoDialog(c, "Use this card's ability?")) {
+                        if (GuiDialog.confirm(c, "Use this card's ability?")) {
                             ga.moveToPlay(c);
                         }
                     }
@@ -159,7 +159,7 @@ public class InputMulligan extends Input {
 
                                 // Is there a better way for the AI to decide this?
                                 if (effect.doTrigger(false)) {
-                                    GameActionUtil.showInfoDialg("Computer reveals " + c.getName() + "(" + c.getUniqueNumber() + ").");
+                                    GuiDialog.message("Computer reveals " + c.getName() + "(" + c.getUniqueNumber() + ").");
                                     ComputerUtil.playNoStack(p, effect, game);
                                 }
                             }
@@ -196,7 +196,7 @@ public class InputMulligan extends Input {
     public void selectCard(Card c0) {
         Zone z0 = Singletons.getModel().getGame().getZoneOf(c0);
         if (c0.getName().equals("Serum Powder") && z0.is(ZoneType.Hand)) {
-            if (GameActionUtil.showYesNoDialog(c0, "Use " + c0.getName() + "'s ability?")) {
+            if (GuiDialog.confirm(c0, "Use " + c0.getName() + "'s ability?")) {
                 List<Card> hand = new ArrayList<Card>(c0.getController().getCardsIn(ZoneType.Hand));
                 for (Card c : hand) {
                     Singletons.getModel().getGame().getAction().exile(c);

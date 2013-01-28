@@ -10,7 +10,6 @@ import javax.swing.SwingWorker;
 import com.google.common.base.Predicate;
 
 import forge.Command;
-import forge.GameActionUtil;
 import forge.Singletons;
 import forge.control.FControl;
 import forge.control.Lobby;
@@ -21,6 +20,7 @@ import forge.game.MatchController;
 import forge.game.MatchStartHelper;
 import forge.game.player.LobbyPlayer;
 import forge.game.player.PlayerType;
+import forge.gui.GuiDialog;
 import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.controllers.CEditorVariant;
@@ -152,7 +152,7 @@ public enum CSubmenuArchenemy implements ICDoc {
 
                     if (d == null) {
                         //ERROR!
-                        GameActionUtil.showInfoDialg("No deck selected for player " + (i + 1));
+                        GuiDialog.message("No deck selected for player " + (i + 1));
                         return null;
                     }
                     playerDecks.add(d);
@@ -194,13 +194,13 @@ public enum CSubmenuArchenemy implements ICDoc {
                 }
                 if (schemes == null) {
                     //ERROR!
-                    GameActionUtil.showInfoDialg("No scheme deck selected!");
+                    GuiDialog.message("No scheme deck selected!");
                     return null;
                 }
 
                 if (usedDefaults) {
 
-                    GameActionUtil.showInfoDialg("Using default scheme deck.");
+                    GuiDialog.message("Using default scheme deck.");
                 }
 
                 Lobby lobby = Singletons.getControl().getLobby();

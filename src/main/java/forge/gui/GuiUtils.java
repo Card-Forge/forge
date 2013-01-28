@@ -21,7 +21,6 @@ import forge.Card;
 import forge.gui.match.VMatchUI;
 import forge.gui.match.nonsingleton.VField;
 import forge.view.arcane.CardPanel;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -29,11 +28,8 @@ import java.awt.Rectangle;
 import java.awt.Window;
 import java.io.File;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.List;
 
-import javax.swing.Box;
-import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 /**
@@ -48,86 +44,6 @@ public final class GuiUtils {
     private GuiUtils() {
         throw new AssertionError();
     }
-
-    /**
-     * This method takes a collection of components and sets the width of each
-     * component to the maximum of the collection.
-     * 
-     * @param components
-     *            a {@link java.util.Collection} object.
-     */
-    public static void setWidthToMax(final Collection<Component> components) {
-        int maxWidth = 0;
-
-        for (final Component c : components) {
-            if (c.getPreferredSize().getWidth() > maxWidth) {
-                maxWidth = (int) c.getPreferredSize().getWidth();
-            }
-        }
-
-        for (final Component c : components) {
-            c.setMinimumSize(new Dimension(maxWidth, (int) c.getPreferredSize().getHeight()));
-            c.setMaximumSize(new Dimension(maxWidth, (int) c.getPreferredSize().getHeight()));
-            c.setPreferredSize(new Dimension(maxWidth, (int) c.getPreferredSize().getHeight()));
-        }
-
-    }
-
-    /**
-     * Adds a Horizontal Glue to panel.
-     * 
-     * @param panel
-     *            a {@link javax.swing.JPanel} object.
-     */
-    public static void addExpandingHorizontalSpace(final JPanel panel) {
-        panel.add(Box.createHorizontalGlue());
-    }
-
-    /**
-     * Adds a Vertical Glue to panel.
-     * 
-     * @param panel
-     *            a {@link javax.swing.JPanel} object.
-     */
-    public static void addExpandingVerticalSpace(final JPanel panel) {
-        panel.add(Box.createHorizontalGlue());
-    }
-
-    /**
-     * Adds a rigid area of size strutSize to panel.
-     * 
-     * @param panel
-     *            a {@link javax.swing.JPanel} object.
-     * @param strutSize
-     *            a int.
-     */
-    public static void addGap(final JPanel panel, final int strutSize) {
-        panel.add(Box.createRigidArea(new Dimension(strutSize, strutSize)));
-    }
-
-    /**
-     * Adds a rigid area of size 5 to panel.
-     * 
-     * @param panel
-     *            a {@link javax.swing.JPanel} object.
-     */
-    public static void addGap(final JPanel panel) {
-        panel.add(Box.createRigidArea(new Dimension(5, 5)));
-    }
-
-    /**
-     * Sets the font size of a component.
-     * 
-     * @param component
-     *            a {@link java.awt.Component} object.
-     * @param newSize
-     *            a int.
-     */
-    public static void setFontSize(final Component component, final int newSize) {
-        final Font oldFont = component.getFont();
-        component.setFont(oldFont.deriveFont((float) newSize));
-    }
-
 
     /**
      * Centers a frame on the screen based on its current size.

@@ -28,7 +28,6 @@ import forge.CardLists;
 import forge.CardPredicates.Presets;
 import forge.CardPredicates;
 import forge.CounterType;
-import forge.GameActionUtil;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.cardfactory.CardFactoryUtil;
@@ -37,6 +36,7 @@ import forge.game.GameState;
 import forge.game.player.Player;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
+import forge.gui.GuiDialog;
 import forge.gui.match.CMatchUI;
 
 import forge.view.ButtonUtil;
@@ -159,7 +159,7 @@ public class Untap extends Phase {
                                 }
                             }
                         }
-                        if (GameActionUtil.showYesNoDialog(c, prompt, defaultChoice)) {
+                        if (GuiDialog.confirm(c, prompt, defaultChoice)) {
                             c.untap();
                         }
                     } else { // computer

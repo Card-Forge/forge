@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import forge.Card;
-import forge.GameActionUtil;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
 import forge.card.spellability.SpellAbility;
@@ -32,6 +31,7 @@ import forge.game.ai.ComputerUtil;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.GuiDialog;
 
 /**
  * TODO: Write javadoc for this type.
@@ -217,7 +217,7 @@ public class ReplacementHandler {
                 buildQuestion.append("?\r\n(");
                 buildQuestion.append(replacementEffect.toString());
                 buildQuestion.append(")");
-                if (!GameActionUtil.showYesNoDialog(replacementEffect.getHostCard(), buildQuestion.toString())) {
+                if (!GuiDialog.confirm(replacementEffect.getHostCard(), buildQuestion.toString())) {
                     return ReplacementResult.NotReplaced;
                 }
             } else {

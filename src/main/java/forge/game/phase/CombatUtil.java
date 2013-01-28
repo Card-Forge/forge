@@ -55,6 +55,7 @@ import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.GuiDialog;
 import forge.gui.GuiUtils;
 import forge.gui.framework.EDocID;
 import forge.gui.framework.SDisplayUtil;
@@ -433,7 +434,7 @@ public class CombatUtil {
             List<Card> orderedBlockers = null;
             if (player.isHuman()) {
                 GuiUtils.setPanelSelection(attacker);
-                List<Card> ordered = GuiChoose.getOrderChoices("Choose Blocking Order", "Damaged First", 0, blockers, null, attacker);
+                List<Card> ordered = GuiChoose.order("Choose Blocking Order", "Damaged First", 0, blockers, null, attacker);
 
                 orderedBlockers = new ArrayList<Card>();
                 for (Object o : ordered) {
@@ -460,7 +461,7 @@ public class CombatUtil {
             List<Card> orderedAttacker = null;
             if (blocker.getController().isHuman()) {
                 GuiUtils.setPanelSelection(blocker);
-                List<Card> ordered = GuiChoose.getOrderChoices("Choose Blocking Order", "Damaged First", 0, attackers, null, blocker);
+                List<Card> ordered = GuiChoose.order("Choose Blocking Order", "Damaged First", 0, attackers, null, blocker);
 
                 orderedAttacker = new ArrayList<Card>();
                 for (Object o : ordered) {
@@ -1278,7 +1279,7 @@ public class CombatUtil {
 
         // Mijae Djinn
         if (c.getName().equals("Mijae Djinn")) {
-            if (!GameActionUtil.flipACoin(c.getController(), c)) {
+            if (!GuiDialog.flipCoin(c.getController(), c)) {
                 Singletons.getModel().getGame().getCombat().removeFromCombat(c);
                 c.tap();
             }

@@ -4,7 +4,6 @@ import java.util.List;
 
 import forge.Card;
 import forge.CardLists;
-import forge.GameActionUtil;
 import forge.Singletons;
 import forge.CardPredicates.Presets;
 import forge.card.abilityfactory.SpellEffect;
@@ -15,6 +14,7 @@ import forge.card.trigger.TriggerHandler;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.GuiDialog;
 
 public class EncodeEffect extends SpellEffect {
     @Override
@@ -46,7 +46,7 @@ public class EncodeEffect extends SpellEffect {
         final StringBuilder sb = new StringBuilder();
         sb.append("Do you want to exile " + host + " and encode it onto a creature you control?");
         if (player.isHuman()
-                && !GameActionUtil.showYesNoDialog(host, sb.toString())) {
+                && !GuiDialog.confirm(host, sb.toString())) {
             return;
         }
         // Note: AI will always choose to encode

@@ -72,6 +72,7 @@ import forge.game.zone.PlayerZoneBattlefield;
 import forge.game.zone.Zone;
 import forge.game.zone.ZoneType;
 import forge.gui.GuiChoose;
+import forge.gui.GuiDialog;
 import forge.gui.match.ViewWinLose;
 
 
@@ -814,7 +815,7 @@ public class GameAction {
             public void resolve() {
                 // pay miracle cost here.
                 if (card.getOwner().isHuman()) {
-                    if (GameActionUtil.showYesNoDialog(card, card + " - Drawn. Pay Miracle Cost?")) {
+                    if (GuiDialog.confirm(card, card + " - Drawn. Pay Miracle Cost?")) {
                         Singletons.getModel().getGame().getAction().playSpellAbility(miracle, player);
                     }
                 } else {
@@ -865,7 +866,7 @@ public class GameAction {
             public void resolve() {
                 // pay madness cost here.
                 if (card.getOwner().isHuman()) {
-                    if (GameActionUtil.showYesNoDialog(card, card + " - Discarded. Pay Madness Cost?")) {
+                    if (GuiDialog.confirm(card, card + " - Discarded. Pay Madness Cost?")) {
                         Singletons.getModel().getGame().getAction().playSpellAbility(madness, player);
                     }
                 } else {

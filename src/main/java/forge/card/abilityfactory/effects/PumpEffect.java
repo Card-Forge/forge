@@ -6,7 +6,6 @@ import java.util.List;
 import forge.Card;
 import forge.CardUtil;
 import forge.Command;
-import forge.GameActionUtil;
 import forge.GameEntity;
 import forge.Singletons;
 import forge.card.abilityfactory.AbilityFactory;
@@ -15,6 +14,7 @@ import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
 import forge.game.player.Player;
 import forge.game.zone.ZoneType;
+import forge.gui.GuiDialog;
 
 public class PumpEffect extends SpellEffect {
 
@@ -203,7 +203,7 @@ public class PumpEffect extends SpellEffect {
                 final String pumpDesc = sa.hasParam("OptionQuestion")
                         ? sa.getParam("OptionQuestion").replace("TARGETS", targets) : descBasic;
                 sb.append(pumpDesc);
-                if (!GameActionUtil.showYesNoDialog(sa.getSourceCard(), sb.toString())) {
+                if (!GuiDialog.confirm(sa.getSourceCard(), sb.toString())) {
                    return;
                 }
             } else { //Computer player
