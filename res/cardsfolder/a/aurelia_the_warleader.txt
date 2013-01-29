@@ -6,7 +6,7 @@ PT:3/4
 K:Flying
 K:Vigilance
 K:Haste
-T:Mode$ Attacks | ValidCard$ Creature.Self | TriggerZones$ Battlefield | Execute$ TrigUntap | FirstCombat$ True | TriggerDescription$ Whenever CARDNAME attacks for the first time each turn, untap all creatures you control. After this phase, there is an additional combat phase.
+T:Mode$ Attacks | ValidCard$ Creature.Self | TriggerZones$ Battlefield | Execute$ TrigUntap | FirstAttack$ True | TriggerDescription$ Whenever CARDNAME attacks for the first time each turn, untap all creatures you control. After this phase, there is an additional combat phase.
 SVar:TrigUntap:AB$ UntapAll | Cost$ 0 | ValidCards$ Creature.YouCtrl | SubAbility$ DBAddCombat
 SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ BeginCombat | AfterPhase$ EndCombat
 SVar:PlayMain1:TRUE

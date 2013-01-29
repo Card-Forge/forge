@@ -17,6 +17,7 @@ public class CardDamageHistory {
     private boolean creatureBlockedThisTurn = false;
     private boolean creatureGotBlockedThisCombat = false;
     private boolean creatureGotBlockedThisTurn = false;
+    private int attacksThisTurn = 0;
 
     private final List<Player> creatureAttackedLastTurnOf = new ArrayList<Player>();
     private final List<Player> damagedThisTurn = new ArrayList<Player>();
@@ -37,6 +38,7 @@ public class CardDamageHistory {
 
         if (hasAttacked) {
             this.setCreatureAttackedThisTurn(true);
+            this.attacksThisTurn++;
         }
     }
     /**
@@ -59,7 +61,7 @@ public class CardDamageHistory {
      */
     public final void setCreatureAttackedThisTurn(final boolean b) {
         this.creatureAttackedThisTurn = b;
-    }
+     }
     /**
      * <p>
      * Getter for the field <code>creatureAttackedThisTurn</code>.
@@ -69,6 +71,27 @@ public class CardDamageHistory {
      */
     public final boolean getCreatureAttackedThisTurn() {
         return this.creatureAttackedThisTurn;
+    }
+    /**
+     * <p>
+     * Setter for the field <code>attacksThisTurn</code>.
+     * </p>
+     * 
+     * @param num
+     *            a integer.
+     */
+    public final void setCreatureAttacksThisTurn(final int num) {
+        this.attacksThisTurn = num;
+    }
+    /**
+     * <p>
+     * Getter for the field <code>attacksThisTurn</code>.
+     * </p>
+     * 
+     * @return a int.
+     */
+    public final int getCreatureAttacksThisTurn() {
+        return this.attacksThisTurn;
     }
     /**
      * <p>

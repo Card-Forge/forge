@@ -86,6 +86,13 @@ public class TriggerAttacks extends Trigger {
             }
         }
 
+        if (this.getMapParams().containsKey("FirstAttack")) {
+            Card attacker = (Card) runParams2.get("Attacker");
+            if (attacker.getDamageHistory().getCreatureAttacksThisTurn() > 1) {
+                return false;
+            }
+        }
+
         return true;
     }
 
