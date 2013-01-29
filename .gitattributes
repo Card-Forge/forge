@@ -7281,6 +7281,7 @@ res/cardsfolder/o/orcish_oriflamme.txt svneol=native#text/plain
 res/cardsfolder/o/orcish_settlers.txt svneol=native#text/plain
 res/cardsfolder/o/orcish_spy.txt svneol=native#text/plain
 res/cardsfolder/o/orcish_squatters.txt -text svneol=unset#text/plain
+res/cardsfolder/o/orcish_squatters_avatar.txt -text
 res/cardsfolder/o/orcish_veteran.txt svneol=native#text/plain
 res/cardsfolder/o/order_of_leitbur.txt svneol=native#text/plain
 res/cardsfolder/o/order_of_the_ebon_hand.txt svneol=native#text/plain
