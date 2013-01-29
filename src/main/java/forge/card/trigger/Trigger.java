@@ -512,10 +512,11 @@ public abstract class Trigger extends TriggerReplacementBase {
             if (this.getMapParams().get("EvolveCondition").equals("True")) {
                 final Card moved = (Card) runParams2.get("Card");
                 if (moved == null) {
-                    final StringBuilder sb = new StringBuilder();
-                    sb.append("Trigger::requirementsCheck() - EvolveCondition condition being checked without a moved card. ");
-                    sb.append(this.getHostCard().getName());
-                    throw new RuntimeException(sb.toString());
+                    return false;
+                    // final StringBuilder sb = new StringBuilder();
+                    // sb.append("Trigger::requirementsCheck() - EvolveCondition condition being checked without a moved card. ");
+                    // sb.append(this.getHostCard().getName());
+                    // throw new RuntimeException(sb.toString());
                 }
                 if (moved.getNetAttack() <= this.getHostCard().getNetAttack()
                         && moved.getNetDefense() <= this.getHostCard().getNetDefense()) {
