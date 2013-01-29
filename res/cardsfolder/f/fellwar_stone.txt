@@ -3,6 +3,7 @@ ManaCost:2
 Types:Artifact
 Text:no text
 A:AB$ ManaReflected | Cost$ T | ColorOrType$ Color | Valid$ Land.OppCtrl | ReflectProperty$ Produce | SpellDescription$ Add to your mana pool one mana of any color that a land an opponent controls could produce.
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/fellwar_stone.jpg
 SetInfo:COM|Uncommon|http://magiccards.info/scans/en/cmd/248.jpg
