@@ -13,6 +13,8 @@ At this time Forge will only download the Gatecrash low quality pictures. The Ga
 
 We have the start of a new Planechase game variant in place but this is not finished at this time.
 
+Some work is being done on the various deck editors and we hope to add in additional features while improving the UI. Some of this work is now available in this build while other portions are located in a branch and will be merged in at a latter date. The main feature available at this time is that the column widths are saved when you change them and the two card tables should have the same column widths when you restart Forge at a later date.
+
 --
 
 A second Quest World, Jamuraa, has been added to Forge. When playing Quest mode, it is now possible to 'Travel' between the regular Quest environment and the two Worlds, Shandalar and Jamuraa, both of which include special formats, opponents and challenges. Or you can start a new Quest in any of them.
@@ -235,6 +237,29 @@ Fixes/Features:
 - add in user-settable preference (defaulting to false) for elastic resizing for deck editor columns
 - merge from trunk
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- refine filter view; add in interactive behavior
+- start implementing search as you type
+- implement accelerator keys for adding search terms to restrictions
+- make columns not sort when they are resized
+- remove unused imports
+- add a little width to the toggle buttons
+- merge latest trunk
+- reuse set choosing dialog for restriction
+- Updating Modern for new banned cards
+- clear the search text after using it to build a search restriction
+- make OK the default button for the set choosing dialog
+- ignore res/pics/GTC files
+- Modifications to keep track of number of attacks. Modified Aurelia, The Warleader to use new FirstAttack parameter for Attacks trigger.
+- two more cards are now ready for multiplayers
+- Fix issue with evolve trigger causing exception when AI evaluating blocks.
+- implement with/without combo box; don't sort columns on resize; add qty owned column in spell shop
+- Replaced the composite QuestRewardCardChooser class with two subclasses that implement a common interface. Removed the obsolete class.
+- Removed unused imports from QuestWinLose.java.
+- The preset cards in one of the Jamuraa challenges were not working very well, improved.
+- Added a card to a Jamuraa challenge deck.
+- Fixed Swirling Sandstorm
+- Added a fluff piece to the changes.txt file.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -242,9 +267,10 @@ Many people helped with this version. A special thank you goes out to them. (Att
 
 
 
-Added the following Vanguard Avatar:
+Added the following Vanguard Avatars:
 
 Ashling, the Extinguisher Avatar
+Orcish Squatters Avatar
 
 
 Added the following Planes:
@@ -274,237 +300,238 @@ Shimatsu the Bloodcloaked
 Parallectric Feedback
 Dwarven Catapult
 Hive Mind
+Godo, Bandit Warlord
+Tradewind Rider Avatar
 
 
 Added the following new Gatecrash cards:
 
+Adaptive Snapjaw
+Aerial Maneuver
 Aetherize
+Agoraphobia
 Alms Beast
+Alpha Authority
+Angelic Edict
 Angelic Skirmisher
+Armored Transport
+Arrow of Justice
 Assemble the Legion
+Aurelia, The Warleader
+Balustrade Spy
 Basilica Guards
+Basilica Screecher
 Biomass Mutation
+Biovisionary
 Blind Obedience
+Bomber Corps
 Borborygmos Enraged
 Boros Charm
 Boros Elite
 Boros Guildgate
 Boros Keyrune
+Boros Reckoner
 Burning-Tree Emissary
+Burst of Strength
 Call of the Nightwing
+Cartel Aristocrat
 Clan Defiance
+Clinging Anemones
 Cloudfin Raptor
+Coerced Confession
 Consuming Aberration
+Corpse Blockade
+Court Street Denizen
+Crackling Perimeter
 Crocanura
+Crowned Ceratok
 Crypt Ghast
+Daring Skyjek
+Death's Approach
+Deathcult Rogue
 Deathpact Angel
+Debtor's Pulpit
+Devour Flesh
+Diluvian Primordial
 Dimir Charm
 Dimir Guildgate
 Dimir Keyrune
+Dinrova Horror
+Disciple of the Old Ways
 Domri Rade
 Drakewing Krasis
 Duskmantle Guildmage
+Duskmantle Seer
+Dutiful Thrull
+Dying Wish
 Elusive Krasis
 Enter the Infinite
+Executioner's Swing
 Experiment One
 Fathom Mage
+Firefist Striker
 Firemane Avenger
 Five-Alarm Fire
+Forced Adaptation
+Fortress Cyclops
 Foundry Champion
+Foundry Street Denizen
+Frilled Oculus
 Frontline Medic
+Furious Resistance
 Gateway Shade
 Ghor-Clan Rampager
 Giant Adephage
 Gideon, Champion of Justice
+Gift of Orzhova
+Glaring Spotlight
+Greenside Watcher
 Gridlock
+Grisly Spectacle
+Ground Assault
+Gruul Charm
 Gruul Guildgate
 Gruul Keyrune
+Gruul Ragebeast
+Guardian of the Gateless
+Guildscorn Ward
+Gutter Skulk
+Gyre Sage
 Hands of Binding
 Hellkite Tyrant
 Hellraiser Goblin
 High Priest of Penance
+Hindervines
+Hold the Gates
+Holy Mantle
+Homing Lightning
+Horror of the Dim
+Hydroform
+Illness in the Ranks
 Illusionist's Bracers
+Immortal Servitude
+Incursion Specialist
+Ivy Lane Denizen
+Keymaster Rogue
+Kingpin's Pet
+Knight of Obligation
+Knight Watch
+Last Thoughts
 Lazav, Dimir Mastermind
+Legion Loyalist
 Leyline Phantom
+Lord of the Void
+Luminate Primordial
+Madcap Skills
+Mark for Death
+Martial Glory
+Massive Raid
+Master Biomancer
+Mental Vapors
+Merciless Eviction
+Merfolk of the Depths
+Metropolis Sprite
+Midnight Recovery
+Millennial Gargoyle
+Miming Slime
 Mind Grind
+Mindeye Drake
+Molten Primordial
+Mortus Strider
+Mugging
+Murder Investigation
 Mystic Genesis
+Nav Squad Commandos
+Nightveil Specter
+Nimbus Swimmer
 Obzedat, Ghost Council
+Ogre Slumlord
+One Thousand Lashes
+Ordruun Veteran
+Orzhov Charm
 Orzhov Guildgate
 Orzhov Keyrune
+Paranoid Delusions
 Pit Fight
+Predator's Rapport
+Primal Visitation
 Prime Speaker Zegana
+Psychic Strike
+Purge the Profane
 Rapid Hybridization
+Razortip Whip
 Realmwright
+Riot Gear
+Ripscale Predator
+Rubblebelt Raiders
 Rubblehulk
+Ruination Wurm
+Rust Scarab
+Sage's Row Denizen
+Sapphire Drake
+Scab-Clan Charger
+Scatter Arc
+Sepulchral Primordial
+Serene Remembrance
+Shadow Alley Denizen
+Shadow Slice
 Shambleshark
+Shattering Blow
+Shielded Passage
 Simic Charm
 Simic Fluxmage
 Simic Guildgate
 Simic Keyrune
 Skarrg Goliath
 Skarrg Guildmage
-Skullcrack
-Spark Trooper
-Stolen Identity
-Sunhome Guildmage
-Syndic of Tithes
-Thespian's Stage
-Tin Street Market
-Treasury Thrull
-Undercity Plague
-Urban Evolution
-Viashino Shanktail
-Whispering Madness
-Zhur-Taa Swine
-
-Firefist Striker
-Thrull Parasite
-Gruul Charm
-Merciless Eviction
-Ground Assault
-Truefire Paladin
-Diluvian Primordial
-Legion Loyalist
-Lord of the Void
-Luminate Primordial
-Molten Primordial
-Murder Investigation
-Ogre Slumlord
-Sepulchral Primordial
-Undercity Informer
-Biovisionary
-Vizkopa Confessor
-Gruul Ragebeast
-Gyre Sage
-Slaughterhorn
-Zameck Guildmage
-Duskmantle Seer
-Miming Slime
-Serene Remembrance
-Unexpected Results
-Angelic Edict
-Shielded Passage
-Totally Lost
-Armored Transport
-Millennial Gargoyle
-Razortip Whip
-Riot Gear
-Shattering Blow
-Skyblinder Staff
-Aerial Maneuver
-Court Street Denizen
-Daring Skyjek
-Debtor's Pulpit
-Dutiful Thrull
-Guildscorn Ward
-Hold the Gates
-Holy Mantle
-Arrow of Justice
-Boros Reckoner
-Coerced Confession
-Deathcult Rogue
-Gift of Orzhova
-Immortal Servitude
-Merfolk of the Depths
-Rubblebelt Raiders
-Adaptive Snapjaw
-Alpha Authority
-Burst of Strength
-Crowned Ceratok
-Disciple of the Old Ways
-Forced Adaptation
-Greenside Watcher
-Scab-Clan Charger
-Spire Tracer
-Tower Defense
-Wasteland Viper
-Wildwood Rebirth
-Vizkopa Guildmage
-Wojek Halberdiers
 Skinbrand Goblin
+Skinbrand Goblin
+Skullcrack
+Skyblinder Staff
+Skygames
+Slate Street Ruffian
+Slaughterhorn
+Smog Elemental
+Soul Ransom
+Spark Trooper
+Spell Rupture
+Spire Tracer
+Stolen Identity
 Structural Collapse
+Sunhome Guildmage
+Sylvan Primordial
+Syndic of Tithes
+Syndicate Enforcer
+Thespian's Stage
+Thrull Parasite
+Tin Street Market
+Totally Lost
+Tower Defense
 Towering Thunderfist
+Treasury Thrull
+Truefire Paladin
+Undercity Informer
+Undercity Plague
+Unexpected Results
+Urban Evolution
+Urbis Protector
+Verdant Haven
+Viashino Shanktail
+Vizkopa Confessor
+Vizkopa Guildmage
+Voidwalk
 Warmind Infantry
+Wasteland Viper
+Way of the Thief
+Whispering Madness
+Wight of Precinct Six
+Wildwood Rebirth
+Wojek Halberdiers
 Wojek Halberdiers
 Wrecking Ogre
-Knight of Obligation
-Knight Watch
-Nav Squad Commandos
-Urbis Protector
+Zameck Guildmage
 Zarichi Tiger
-Clinging Anemones
-Keymaster Rogue
-Scatter Arc
-Spell Rupture
-Nimbus Swimmer
-One Thousand Lashes
-Ordruun Veteran
-Orzhov Charm
-Paranoid Delusions
-Primal Visitation
-Psychic Strike
-Purge the Profane
-Hydroform
-Kingpin's Pet
-Martial Glory
-Mortus Strider
-Ruination Wurm
-Cartel Aristocrat
-Dinrova Horror
-Executioner's Swing
-Guardian of the Gateless
-Hindervines
-Ivy Lane Denizen
-Predator's Rapport
-Rust Scarab
-Massive Raid
-Mugging
-Ripscale Predator
-Skinbrand Goblin
-Basilica Screecher
-Bomber Corps
-Crackling Perimeter
-Foundry Street Denizen
-Furious Resistance
-Gutter Skulk
-Homing Lightning
-Madcap Skills
-Mark for Death
-Syndicate Enforcer
-Balustrade Spy
-Corpse Blockade
-Devour Flesh
-Horror of the Dim
-Illness in the Ranks
-Shadow Alley Denizen
-Agoraphobia
-Sapphire Drake
-Frilled Oculus
-Last Thoughts
-Metropolis Sprite
-Mindeye Drake
-Sage's Row Denizen
-Skygames
-Sylvan Primordial
-Verdant Haven
-Voidwalk
-Way of the Thief
-Incursion Specialist
-Fortress Cyclops
-Slate Street Ruffian
-Smog Elemental
-Wight of Precinct Six
-Grisly Spectacle
-Mental Vapors
-Midnight Recovery
-Shadow Slice
-Death's Approach
-Dying Wish
-Master Biomancer
-Glaring Spotlight
-Aurelia, The Warleader
-Soul Ransom
-Nightveil Specter
+Zhur-Taa Swine
 
 
 end
