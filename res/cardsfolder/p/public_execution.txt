@@ -2,8 +2,10 @@ Name:Public Execution
 ManaCost:5 B
 Types:Instant
 Text:no text
-A:SP$ Destroy | Cost$ 5 B | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | RememberTargets$ True | SubAbility$ WeakenOther | SpellDescription$ Destroy target creature an opponent controls. Each other creature that player controls gets -2/-0 until end of turn.
-SVar:WeakenOther:DB$ PumpAll | ValidCards$ Creature.OppCtrl+IsNotRemembered | NumAtt$ -2 | IsCurse$ True
+A:SP$ Pump | Cost$ 5 B | ValidTgts$ Creature.OppCtrl | TgtPrompt$ Select target creature an opponent controls | RememberObjects$ TargetedController | RememberTargets$ True | SubAbility$ DBDestroy | SpellDescription$ Destroy target creature an opponent controls. Each other creature that player controls gets -2/-0 until end of turn.
+SVar:DBDestroy:DB$ Destroy | Defined$ Targeted | SubAbility$ WeakenOther
+SVar:WeakenOther:DB$ PumpAll | ValidCards$ Creature.RememberedPlayerCtrl+IsNotRemembered | NumAtt$ -2 | IsCurse$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/public_execution.jpg
 SetInfo:M13|Uncommon|http://magiccards.info/scans/en/m13/105.jpg
