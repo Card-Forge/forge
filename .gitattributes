@@ -14168,6 +14168,7 @@ src/main/java/forge/properties/Preferences.java svneol=native#text/plain
 src/main/java/forge/properties/SavePreferencesListener.java svneol=native#text/plain
 src/main/java/forge/properties/package-info.java svneol=native#text/plain
 src/main/java/forge/quest/BoosterUtils.java svneol=native#text/plain
+src/main/java/forge/quest/IQuestRewardCard.java -text
 src/main/java/forge/quest/QuestController.java -text
 src/main/java/forge/quest/QuestDeckMap.java -text
 src/main/java/forge/quest/QuestEvent.java -text
@@ -14176,7 +14177,8 @@ src/main/java/forge/quest/QuestEventDifficulty.java -text
 src/main/java/forge/quest/QuestEventDuel.java svneol=native#text/plain
 src/main/java/forge/quest/QuestEventManager.java svneol=native#text/plain
 src/main/java/forge/quest/QuestMode.java -text
-src/main/java/forge/quest/QuestRewardCardChooser.java -text
+src/main/java/forge/quest/QuestRewardCardDuplicate.java -text
+src/main/java/forge/quest/QuestRewardCardFiltered.java -text
 src/main/java/forge/quest/QuestUtil.java svneol=native#text/plain
 src/main/java/forge/quest/QuestUtilCards.java -text
 src/main/java/forge/quest/QuestUtilUnlockSets.java -text

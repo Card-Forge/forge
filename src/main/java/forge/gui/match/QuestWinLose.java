@@ -47,7 +47,9 @@ import forge.properties.ForgePreferences.FPref;
 import forge.quest.QuestEventChallenge;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
-import forge.quest.QuestRewardCardChooser;
+import forge.quest.IQuestRewardCard;
+import forge.quest.QuestRewardCardDuplicate;
+import forge.quest.QuestRewardCardFiltered;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
@@ -656,9 +658,9 @@ public class QuestWinLose extends ControlWinLose {
         for (InventoryItem ii : itemsWon) {
             if (ii instanceof CardPrinted) {
                 cardsWon.add((CardPrinted) ii);
-            } else if (ii instanceof QuestRewardCardChooser) {
-                final List<CardPrinted> cardChoices = ((QuestRewardCardChooser) ii).getChoices();
-                final CardPrinted chosenCard = (null == cardChoices ? null : GuiChoose.one("Choose " + ((QuestRewardCardChooser) ii).getName() + ":", cardChoices));
+            } else if (ii instanceof IQuestRewardCard) {
+                final List<CardPrinted> cardChoices = ((IQuestRewardCard) ii).getChoices();
+                final CardPrinted chosenCard = (null == cardChoices ? null : GuiChoose.one("Choose " + ((IQuestRewardCard) ii).getName() + ":", cardChoices));
                 if (null != chosenCard) {
                     cardsWon.add(chosenCard);
                 }
