@@ -1,0 +1,14 @@
+Name:Godo, Bandit Warlord
+ManaCost:5 R
+Types:Legendary Creature Human Barbarian
+Text:no text
+PT:3/3
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | OptionalDecider$ You | Execute$ TrigTutorEquip | TriggerDescription$ When CARDNAME enters the battlefield, you may search your library for an Equipment card and put it onto the battlefield. If you do, shuffle your library.
+SVar:TrigTutorEquip:AB$ ChangeZone | Cost$ 0 | Origin$ Library | Destination$ Battlefield | ChangeType$ Equipment | ChangeNum$ 1
+T:Mode$ Attacks | ValidCard$ Creature.Self | TriggerZones$ Battlefield | Execute$ TrigUntap | FirstAttack$ True | TriggerDescription$ Whenever CARDNAME attacks for the first time each turn, untap it and all Samurai you control. After this phase, there is an additional combat phase.
+SVar:TrigUntap:AB$ UntapAll | Cost$ 0 | ValidCards$ Card.Self,Samurai.YouCtrl | SubAbility$ DBAddCombat
+SVar:DBAddCombat:DB$ AddPhase | ExtraPhase$ BeginCombat | AfterPhase$ EndCombat
+SVar:Picture:http://www.wizards.com/global/images/magic/general/godo_bandit_warlord.jpg
+SetInfo:CHK|Rare|http://magiccards.info/scans/en/chk/169.jpg
+Oracle:When Godo, Bandit Warlord enters the battlefield, you may search your library for an Equipment card and put it onto the battlefield. If you do, shuffle your library.\nWhenever Godo attacks for the first time each turn, untap it and all Samurai you control. After this phase, there is an additional combat phase.
+End

@@ -4270,6 +4270,7 @@ res/cardsfolder/g/goblin_wizard.txt svneol=native#text/plain
 res/cardsfolder/g/goblins_of_the_flarg.txt svneol=native#text/plain
 res/cardsfolder/g/godhead_of_awe.txt svneol=native#text/plain
 res/cardsfolder/g/godless_shrine.txt svneol=native#text/plain
+res/cardsfolder/g/godo_bandit_warlord.txt -text
 res/cardsfolder/g/godos_irregulars.txt svneol=native#text/plain
 res/cardsfolder/g/gods_eye_gate_to_the_reikai.txt svneol=native#text/plain
 res/cardsfolder/g/godsire.txt svneol=native#text/plain
@@ -10885,6 +10886,7 @@ res/cardsfolder/t/trackers_instincts.txt -text
 res/cardsfolder/t/trade_caravan.txt svneol=native#text/plain
 res/cardsfolder/t/trade_routes.txt svneol=native#text/plain
 res/cardsfolder/t/tradewind_rider.txt svneol=native#text/plain
+res/cardsfolder/t/tradewind_rider_avatar.txt -text
 res/cardsfolder/t/trading_post.txt -text
 res/cardsfolder/t/tragic_poet.txt svneol=native#text/plain
 res/cardsfolder/t/tragic_slip.txt -text
