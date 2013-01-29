@@ -48,8 +48,6 @@ import forge.quest.QuestEventChallenge;
 import forge.quest.QuestController;
 import forge.quest.QuestEvent;
 import forge.quest.IQuestRewardCard;
-import forge.quest.QuestRewardCardDuplicate;
-import forge.quest.QuestRewardCardFiltered;
 import forge.quest.bazaar.QuestItemType;
 import forge.quest.data.QuestPreferences;
 import forge.quest.data.QuestPreferences.QPref;
