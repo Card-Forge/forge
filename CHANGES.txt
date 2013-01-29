@@ -271,6 +271,7 @@ Added the following Vanguard Avatars:
 
 Ashling, the Extinguisher Avatar
 Orcish Squatters Avatar
+Tradewind Rider Avatar
 
 
 Added the following Planes:
@@ -301,7 +302,6 @@ Parallectric Feedback
 Dwarven Catapult
 Hive Mind
 Godo, Bandit Warlord
-Tradewind Rider Avatar
 
 
 Added the following new Gatecrash cards:
