@@ -2,6 +2,7 @@ package forge.gui.deckeditor;
 
 import javax.swing.SwingWorker;
 
+import forge.gui.deckeditor.controllers.CCardCatalog;
 import forge.gui.framework.IVTopLevelUI;
 import forge.gui.framework.SLayoutIO;
 
@@ -35,6 +36,7 @@ public enum VDeckEditorUI implements IVTopLevelUI {
             @Override
             public Void doInBackground() {
                 SLayoutIO.loadLayout(null);
+                CCardCatalog.SINGLETON_INSTANCE.applyCurrentFilter();
                 return null;
             }
         };
