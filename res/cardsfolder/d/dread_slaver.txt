@@ -4,8 +4,9 @@ Types:Creature Zombie Horror
 Text:no text
 PT:3/5
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Graveyard | ValidCard$ Creature.DamagedBy | Execute$ TrigChange | TriggerDescription$ Whenever a creature dealt damage by CARDNAME this turn dies, return it to the battlefield under your control. That creature is a black Zombie in addition to its other colors and types.
-SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ TriggeredCard | SubAbility$ DBAnimate
-SVar:DBAnimate:DB$ Animate | Defined$ TriggeredCard | Types$ Zombie | Colors$ Black | Permanent$ True
+SVar:TrigChange:AB$ ChangeZone | Cost$ 0 | Origin$ Graveyard | Destination$ Battlefield | GainControl$ True | Defined$ TriggeredCard | RememberChanged$ True | SubAbility$ DBAnimate
+SVar:DBAnimate:DB$ Animate | Defined$ Remembered | Types$ Zombie | Colors$ Black | Permanent$ True | SubAbility$ DBCleanup
+SVar:DBCleanup:DB$Cleanup | ClearRemembered$ True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/dread_slaver.jpg
 SetInfo:AVR|Rare|http://magiccards.info/scans/en/avr/98.jpg
