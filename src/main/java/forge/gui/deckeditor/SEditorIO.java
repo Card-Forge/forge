@@ -293,10 +293,12 @@ public class SEditorIO {
                 if (tagname.equals("pref")) {
                     // Retrieve name of pref
                     attributes = element.getAttributes();
-                    pref = EditorPreference.valueOf(((Attribute) attributes.next()).getValue());
+                    try {
+                        pref = EditorPreference.valueOf(((Attribute) attributes.next()).getValue());
 
-                    // Add to map
-                    PREFS.put(pref, Boolean.valueOf(((Attribute) attributes.next()).getValue()));
+                        // Add to map
+                        PREFS.put(pref, Boolean.valueOf(((Attribute) attributes.next()).getValue()));
+                    } catch (IllegalArgumentException e) { /* ignore; just don't use */ }
                 }
                 // Assemble columns
                 else if (tagname.equals("col")) {
