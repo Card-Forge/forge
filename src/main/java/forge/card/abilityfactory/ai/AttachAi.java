@@ -394,8 +394,17 @@ public class AttachAi extends SpellAiLogic {
             if (!aiStuffies.isEmpty()) {
                 chosen = aiStuffies.get(0);
             } else {
-                // Improve this to include all Opponent creatures
-                final List<Card> creatures = CardLists.filterControlledBy(list, ai.getOpponents());
+                List<Card> creatures = CardLists.filterControlledBy(list, ai.getOpponents());
+                creatures = CardLists.filter(creatures, new Predicate<Card>() {
+                    @Override
+                    public boolean apply(final Card c) {
+                        // Don't enchant creatures that can survive
+                        if (c.hasKeyword("Indestructible") || c.getNetCombatDamage() < c.getNetDefense()) {
+                            return false;
+                        }
+                        return true;
+                    }
+                });
                 chosen = CardFactoryUtil.getBestCreatureAI(creatures);
             }
         }
