@@ -260,6 +260,20 @@ Fixes/Features:
 - Fixed Swirling Sandstorm
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed the recent commit logs added to changes.txt.
+- good bit of cleanup before I start moving logic around
+- merge from trunk
+- get multi-line tooltips working
+- retrieve main world restrictions properly
+- handle null formats
+- Added SVar:RemAIDeck:True to 2 cards.
+- get all filtering except for intervals working; refactor a bunch of boilerplate code into enums and loops
+- merge latest trunk
+- Improved AI using Guilty Conscience.
+- The AI will no longer copy permanents with RemAIDeck SVar.
+- Added SVar:RemAIDeck:True to 2 more cards.
+- Fixed Dread Slaver.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -270,6 +284,7 @@ Many people helped with this version. A special thank you goes out to them. (Att
 Added the following Vanguard Avatars:
 
 Ashling, the Extinguisher Avatar
+Murderous Redcap Avatar
 Orcish Squatters Avatar
 Tradewind Rider Avatar
 
@@ -302,6 +317,9 @@ Parallectric Feedback
 Dwarven Catapult
 Hive Mind
 Godo, Bandit Warlord
+Helm of Kaldra
+Treefolk Mystic
+Wood Elemental
 
 
 Added the following new Gatecrash cards:
