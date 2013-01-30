@@ -1,0 +1,13 @@
+Name:Murderous Redcap Avatar
+ManaCost:no cost
+Types:Vanguard
+Text:no text
+HandLifeModifier:+0/-2
+T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Creature.YouCtrl+HasCounters | TriggerZones$ Command | Execute$ TrigDamage | TriggerDescription$ Whenever a creature enters the battlefield under your control with a counter on it, you may have it deal damage equal to its power to target creature or player.
+SVar:TrigDamage:AB$ DealDamage | Cost$ 0 | ValidTgts$ Creature,Player | TgtPrompt$ Select target creature or player | DamageSource$ TriggeredCard  | NumDmg$ Damage | References$ Damage
+SVar:Damage:TriggeredCard$CardPower
+SVar:Rarity:Special
+SVar:Picture:http://www.cardforge.org/fpics/vgd-lq/murderous_redcap_avatar.jpg
+SetInfo:VAN|Special|http://magiccards.info/extras/other/vanguard-mtgo-2/murderous-redcap.jpg
+Oracle:Hand +0, life -2\nWhenever a creature enters the battlefield under your control with a counter on it, you may have it deal damage equal to its power to target creature or player.
+End

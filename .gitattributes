@@ -4742,6 +4742,7 @@ res/cardsfolder/h/hells_caretaker_avatar.txt -text
 res/cardsfolder/h/hells_thunder.txt svneol=native#text/plain
 res/cardsfolder/h/hellspark_elemental.txt svneol=native#text/plain
 res/cardsfolder/h/helm_of_awakening.txt svneol=native#text/plain
+res/cardsfolder/h/helm_of_kaldra.txt -text
 res/cardsfolder/h/helm_of_obedience.txt -text
 res/cardsfolder/h/helm_of_possession.txt svneol=native#text/plain
 res/cardsfolder/h/helm_of_the_ghastlord.txt svneol=native#text/plain
@@ -6790,6 +6791,7 @@ res/cardsfolder/m/murder_investigation.txt -text
 res/cardsfolder/m/murder_of_crows.txt -text
 res/cardsfolder/m/murderous_betrayal.txt -text svneol=unset#text/plain
 res/cardsfolder/m/murderous_redcap.txt svneol=native#text/plain
+res/cardsfolder/m/murderous_redcap_avatar.txt -text
 res/cardsfolder/m/murderous_spoils.txt -text
 res/cardsfolder/m/murk_dwellers.txt svneol=native#text/plain
 res/cardsfolder/m/murkfiend_liege.txt svneol=native#text/plain
