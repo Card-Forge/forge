@@ -357,7 +357,12 @@ public final class EditorTableView<T extends InventoryItem> {
      *            a boolean
      */
     public void updateView(final boolean bForceFilter) {
-        final boolean useFilter = (bForceFilter && (this.filter != null)) || !this.isUnfiltered();
+        
+        if (this.pool == null) {
+            return;
+        }
+        
+        final boolean useFilter = bForceFilter && this.filter != null;
 
         if (useFilter || this.wantUnique || bForceFilter) {
             this.model.clear();
