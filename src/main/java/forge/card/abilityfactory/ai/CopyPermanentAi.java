@@ -1,7 +1,10 @@
 package forge.card.abilityfactory.ai;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+
+import com.google.common.base.Predicate;
 
 import forge.Card;
 import forge.CardLists;
@@ -57,6 +60,13 @@ public class CopyPermanentAi extends SpellAiLogic {
             List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
             list = CardLists.getValidCards(list, abTgt.getValidTgts(), source.getController(), source);
             list = CardLists.getTargetableCards(list, sa);
+            list = CardLists.filter(list, new Predicate<Card>() {
+                @Override
+                public boolean apply(final Card c) {
+                    final Map<String, String> vars = c.getSVars();
+                    return !vars.containsKey("RemAIDeck");
+                }
+            }); 
             abTgt.resetTargets();
             // target loop
             while (abTgt.getNumTargeted() < abTgt.getMaxTargets(sa.getSourceCard(), sa)) {
@@ -72,7 +82,7 @@ public class CopyPermanentAi extends SpellAiLogic {
                 }
 
                 Card choice;
-                if (CardLists.filter(list, Presets.CREATURES).size() > 0) {
+                if (!CardLists.filter(list, Presets.CREATURES).isEmpty()) {
                     choice = CardFactoryUtil.getBestCreatureAI(list);
                 } else {
                     choice = CardFactoryUtil.getMostExpensivePermanentAI(list, sa, true);
