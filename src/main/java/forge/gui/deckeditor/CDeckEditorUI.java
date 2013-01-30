@@ -27,7 +27,6 @@ import forge.deck.DeckBase;
 import forge.gui.CardContainer;
 import forge.gui.deckeditor.SEditorIO.EditorPreference;
 import forge.gui.deckeditor.controllers.ACEditorBase;
-import forge.gui.deckeditor.controllers.CCardCatalog;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CPicture;
 import forge.item.InventoryItem;
@@ -94,7 +93,6 @@ public enum CDeckEditorUI implements CardContainer {
             childController.getTableCatalog().setWantUnique(wantUnique);
             childController.getTableDeck().setWantUnique(wantUnique);
         }
-        CCardCatalog.SINGLETON_INSTANCE.applyCurrentFilter();
     }
 
     //========== Other methods

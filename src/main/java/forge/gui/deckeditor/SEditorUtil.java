@@ -87,8 +87,6 @@ public final class SEditorUtil  {
             case TOTAL:
                 view.getStatLabel(StatTypes.TOTAL).setText(String.valueOf(deck.countAll()));
                 break;
-            case COLORLESS:
-                break; // TODO: why?
             default:
                 view.getStatLabel(s).setText(String.valueOf(
                         Aggregates.sum(Iterables.filter(deck, Predicates.compose(s.predicate, deck.getFnToCard())), deck.getFnToCount())));
