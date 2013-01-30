@@ -1,33 +1,21 @@
 package forge.gui.deckeditor;
 
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
-import forge.card.CardEdition;
-import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
-import forge.game.GameFormat;
-import forge.gui.WrapLayout;
-import forge.gui.deckeditor.views.VFilters;
+import forge.card.CardRulesPredicates;
+import forge.gui.deckeditor.views.VCardCatalog;
+import forge.gui.deckeditor.views.VCardCatalog.RangeTypes;
+import forge.gui.toolbox.FLabel;
+import forge.gui.toolbox.FSpinner;
 import forge.item.CardPrinted;
 import forge.util.ComparableOp;
+import forge.util.Pair;
 import forge.util.PredicateString.StringOp;
 
 /** 
@@ -37,300 +25,96 @@ import forge.util.PredicateString.StringOp;
  * <i>(S at beginning of class name denotes a static factory.)</i>
  */
 public class SFilterUtil {
-    /** An enum to encapsulate metadata for the checkbox objects in the color/type filter maps. */
-    private enum FilterProperty {
-        WHITE      (SEditorUtil.ICO_WHITE.getImage(),     "White Cards"),
-        BLUE       (SEditorUtil.ICO_BLUE.getImage(),      "Blue Cards"),
-        BLACK      (SEditorUtil.ICO_BLACK.getImage(),     "Black Cards"),
-        RED        (SEditorUtil.ICO_RED.getImage(),       "Red Cards"),
-        GREEN      (SEditorUtil.ICO_GREEN.getImage(),     "Green Cards"),
-        COLORLESS  (SEditorUtil.ICO_COLORLESS.getImage(), "Colorless Cards"),
-        MULTICOLOR (SEditorUtil.ICO_MULTI.getImage(),     "Multicolor Cards"),
-
-        LAND         (SEditorUtil.ICO_LAND.getImage(),         "Land Cards"),
-        ARTIFACT     (SEditorUtil.ICO_ARTIFACT.getImage(),     "Artifact Cards"),
-        CREATURE     (SEditorUtil.ICO_CREATURE.getImage(),     "Creature Cards"),
-        ENCHANTMENT  (SEditorUtil.ICO_ENCHANTMENT.getImage(),  "Enchantment Cards"),
-        PLANESWALKER (SEditorUtil.ICO_PLANESWALKER.getImage(), "Planeswalker Cards"),
-        INSTANT      (SEditorUtil.ICO_INSTANT.getImage(),      "Instant Cards"),
-        SORCERY      (SEditorUtil.ICO_SORCERY.getImage(),      "Sorcery Cards");
-        
-        private final Image img;
-        private final String tooltip;
-
-        FilterProperty(final Image img0, final String tooltip0) {
-            img = img0;
-            tooltip = tooltip0;
-        }
-        
-        public Image getImage() {
-            return img;
-        }
-        
-        public String getTooltip() {
-            return tooltip;
-        }
-    }
-
-    private static final FilterProperty[] COLOR_FILTER_PROPERTIES = {
-        FilterProperty.WHITE,
-        FilterProperty.BLUE,
-        FilterProperty.BLACK,
-        FilterProperty.RED,
-        FilterProperty.GREEN,
-        FilterProperty.COLORLESS,
-        FilterProperty.MULTICOLOR
-    };
-
-    private static final FilterProperty[] TYPE_FILTER_PROPERTIES = {
-        FilterProperty.LAND,
-        FilterProperty.ARTIFACT,
-        FilterProperty.CREATURE,
-        FilterProperty.ENCHANTMENT,
-        FilterProperty.PLANESWALKER,
-        FilterProperty.INSTANT,
-        FilterProperty.SORCERY
-    };
-
-    private static final Map<FilterProperty, ChbPnl> MAP_COLOR_CHECKBOXES =
-            new HashMap<FilterProperty, ChbPnl>();
-
-    private static final Map<FilterProperty, ChbPnl> MAP_TYPE_CHECKBOXES =
-            new HashMap<FilterProperty, ChbPnl>();
-
     /**
-
-     */
-    private static boolean preventFiltering = false;
-
-    /**
-     * This will prevent a filter event on a checkbox state change.
-     * It's used for programmatic changes to the checkboxes when rebuilding
-     * the filter each time is expensive.
-     * 
-     * @return boolean &emsp; true if filtering is prevented
-     */
-    public static boolean isFilteringPrevented() {
-        return preventFiltering;
-    }
-
-    /**
-     * This will prevent a filter event on a checkbox state change.
-     * It's used for programmatic changes to the checkboxes when rebuilding
-     * the filter each time is expensive.
-     * 
-     * @param bool0 &emsp; true to prevent filtering
-     */
-    public static void setPreventFiltering(final boolean bool0) {
-        preventFiltering = bool0;
-    }
-
-    /**
-     * Fills and returns a JPanel with checkboxes for color filter set.
-     * 
-     * @return {@link javax.swing.JPanel}
-     */
-    public static JPanel populateColorFilters() {
-        final JPanel pnl = new JPanel(new WrapLayout(SwingConstants.CENTER, 10, 5));
-        pnl.setOpaque(false);
-
-        MAP_COLOR_CHECKBOXES.clear();
-        for (FilterProperty p : COLOR_FILTER_PROPERTIES) {
-            ChbPnl chbPnl = new ChbPnl(p.getImage(), p.getTooltip());
-            MAP_COLOR_CHECKBOXES.put(p, chbPnl);
-            pnl.add(chbPnl);
-        }
-        
-        return pnl;
-    }
-
-    /**
-     * Fills and returns a JPanel with checkboxes for type filter set.
-     * 
-     * @return {@link javax.swing.JPanel}
-     */
-    public static JPanel populateTypeFilters() {
-        final JPanel pnl = new JPanel(new WrapLayout(SwingConstants.CENTER, 10, 5));
-        pnl.setOpaque(false);
-
-        MAP_TYPE_CHECKBOXES.clear();
-        for (FilterProperty p : TYPE_FILTER_PROPERTIES) {
-            ChbPnl chbPnl = new ChbPnl(p.getImage(), p.getTooltip());
-            MAP_TYPE_CHECKBOXES.put(p, chbPnl);
-            pnl.add(chbPnl);
-        }
-        
-        return pnl;
-    }
-
-    /** Turns all type checkboxes off or on.
-     * @param select0 &emsp; boolean */
-    public static void toggleTypeCheckboxes(final boolean select0) {
-        for (ChbPnl p : MAP_TYPE_CHECKBOXES.values()) {
-           p.getCheckBox().setSelected(select0);
-        }
-    }
-
-    /** Turns all color checkboxes off or on.
-     * @param select0 &emsp; boolean */
-    public static void toggleColorCheckboxes(final boolean select0) {
-        for (ChbPnl p : MAP_COLOR_CHECKBOXES.values()) {
-           p.getCheckBox().setSelected(select0);
-        }
-    }
-
-    /**
-     * Assembles checkboxes for color and returns a filter predicate.
+     * queries color filters for state and returns a predicate.
      * <br><br>
      * Handles "multicolor" label, which is quite tricky.
-     * 
-     * @return Predicate<CardPrinted>
      */
-    public static Predicate<CardPrinted> buildColorFilter() {
-        if (MAP_COLOR_CHECKBOXES.isEmpty()) { return Predicates.alwaysTrue(); }
-
+    public static Predicate<CardPrinted> buildColorAndTypeFilter(Map<SEditorUtil.StatTypes, FLabel> statLabels) {
         final List<Predicate<CardRules>> colors = new ArrayList<Predicate<CardRules>>();
+        final List<Predicate<CardRules>> types = new ArrayList<Predicate<CardRules>>();
+        
+        boolean wantMulticolor = false;
+        Predicate<CardRules> preExceptMulti = null;
+        for (SEditorUtil.StatTypes s : SEditorUtil.StatTypes.values()) {
+            switch (s) {
+            case WHITE: case BLUE: case BLACK: case RED: case GREEN: case COLORLESS:
+                if (statLabels.get(s).isSelected()) { colors.add(s.predicate); }
+                break;
+            case MULTICOLOR:
+                wantMulticolor = statLabels.get(s).isSelected();
+                preExceptMulti = wantMulticolor ? null : Predicates.not(CardRulesPredicates.Presets.IS_MULTICOLOR);
+                break;
+            case LAND: case ARTIFACT: case CREATURE: case ENCHANTMENT: case PLANESWALKER: case INSTANT: case SORCERY:
+                if (statLabels.get(s).isSelected()) { types.add(s.predicate); }
+                break;
+                
+            case TOTAL:
+                // ignore
+                break;
+                
+            default:
+                throw new RuntimeException("unhandled enum value: " + s);
+            }
+        }
 
-        if (MAP_COLOR_CHECKBOXES.get(FilterProperty.WHITE).getCheckBox().isSelected()) { colors.add(CardRulesPredicates.Presets.IS_WHITE); }
-        if (MAP_COLOR_CHECKBOXES.get(FilterProperty.BLUE).getCheckBox().isSelected()) { colors.add(CardRulesPredicates.Presets.IS_BLUE); }
-        if (MAP_COLOR_CHECKBOXES.get(FilterProperty.BLACK).getCheckBox().isSelected()) { colors.add(CardRulesPredicates.Presets.IS_BLACK); }
-        if (MAP_COLOR_CHECKBOXES.get(FilterProperty.RED).getCheckBox().isSelected()) { colors.add(CardRulesPredicates.Presets.IS_RED); }
-        if (MAP_COLOR_CHECKBOXES.get(FilterProperty.GREEN).getCheckBox().isSelected()) { colors.add(CardRulesPredicates.Presets.IS_GREEN); }
-        if (MAP_COLOR_CHECKBOXES.get(FilterProperty.COLORLESS).getCheckBox().isSelected()) { colors.add(CardRulesPredicates.Presets.IS_COLORLESS); }
+        Predicate<CardRules> preColors = colors.size() == 6 ? null : Predicates.or(colors);
+        Predicate<CardRules> preFinal = colors.isEmpty() && wantMulticolor ?
+                CardRulesPredicates.Presets.IS_MULTICOLOR : optimizedAnd(preExceptMulti, preColors);
 
-        final Predicate<CardRules> preColors = colors.size() == 6 ? null : Predicates.or(colors);
+        if (null == preFinal && 7 == types.size()) {
+            return Predicates.alwaysTrue();
+        }
 
-        boolean wantMulticolor = MAP_COLOR_CHECKBOXES.get(FilterProperty.MULTICOLOR).getCheckBox().isSelected();
-        final Predicate<CardRules> preExceptMulti = wantMulticolor ? null : Predicates.not(CardRulesPredicates.Presets.IS_MULTICOLOR);
-
-        Predicate<CardRules> preFinal = colors.isEmpty() && wantMulticolor ? CardRulesPredicates.Presets.IS_MULTICOLOR : optimizedAnd(preExceptMulti, preColors);
-
+        Predicate<CardPrinted> typesFinal = Predicates.compose(Predicates.or(types), CardPrinted.FN_GET_RULES);
         if (null == preFinal) {
-            return Predicates.alwaysTrue();
+            return typesFinal;
         }
-
-        return Predicates.compose(preFinal, CardPrinted.FN_GET_RULES);
+        
+        Predicate<CardPrinted> colorFinal = Predicates.compose(preFinal, CardPrinted.FN_GET_RULES);
+        if (7 == types.size()) {
+            return colorFinal;
+        }
+        
+        return Predicates.and(colorFinal, typesFinal);
     }
 
     /**
-     * Filters the set/format combo box.
-     * 
-     * @return Predicate<CardPrinted>
+     * builds a string search filter
      */
-    public static Predicate<CardPrinted> buildSetAndFormatFilter() {
-        // Set/Format filter
-        JComboBox cbox = VFilters.SINGLETON_INSTANCE.getCbxSets();
-        if (cbox.getSelectedIndex() == 0) {
+    public static Predicate<CardPrinted> buildTextFilter(String text, boolean invert, boolean inName, boolean inType, boolean inText) {
+        if (text.trim().isEmpty()) {
             return Predicates.alwaysTrue();
         }
-
-        final Object selected = cbox.getSelectedItem();
-        final Predicate<CardPrinted> filter;
-        if (selected instanceof CardEdition) {
-            filter = CardPrinted.Predicates.printedInSets(((CardEdition) selected).getCode());
-        } else {
-            filter = ((GameFormat) selected).getFilterRules();
-        }
-
-        return filter;
-    }
-
-    /**
-     * Assembles checkboxes for type and returns a filter predicate.
-     *
-     * @return Predicate<CardPrinted>
-     */
-    public static Predicate<CardPrinted> buildTypeFilter() {
-        if (MAP_TYPE_CHECKBOXES.isEmpty()) { return Predicates.alwaysTrue(); }
-
-        final List<Predicate<CardRules>> ors = new ArrayList<Predicate<CardRules>>();
-        if (MAP_TYPE_CHECKBOXES.get(FilterProperty.LAND).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_LAND); }
-        if (MAP_TYPE_CHECKBOXES.get(FilterProperty.ARTIFACT).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_ARTIFACT); }
-        if (MAP_TYPE_CHECKBOXES.get(FilterProperty.CREATURE).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_CREATURE); }
-        if (MAP_TYPE_CHECKBOXES.get(FilterProperty.ENCHANTMENT).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_ENCHANTMENT); }
-        if (MAP_TYPE_CHECKBOXES.get(FilterProperty.PLANESWALKER).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_PLANESWALKER); }
-        if (MAP_TYPE_CHECKBOXES.get(FilterProperty.INSTANT).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_INSTANT); }
-        if (MAP_TYPE_CHECKBOXES.get(FilterProperty.SORCERY).getCheckBox().isSelected()) { ors.add(CardRulesPredicates.Presets.IS_SORCERY); }
-
-        if (ors.size() == 7) {
-            return Predicates.alwaysTrue();
-        }
-
-        return Predicates.compose(Predicates.or(ors), CardPrinted.FN_GET_RULES);
-    }
-
-    /**
-     * Validates text field input (from txfContains and txfWithout),
-     * then assembles AND and NOT predicates accordingly, ANDs
-     * together, and returns.
-     * 
-     * @return Predicate<CardPrinted>
-     */
-    public static Predicate<CardPrinted> buildTextFilter() {
-        Predicate<CardRules> filterAnd = null;
-        Predicate<CardRules> filterNot = null;
-
-        final String strContains = VFilters.SINGLETON_INSTANCE.getTxfContains().getText();
-        final String strWithout = VFilters.SINGLETON_INSTANCE.getTxfWithout().getText();
-
-        final boolean useName = VFilters.SINGLETON_INSTANCE.getChbTextName().isSelected();
-        final boolean useType = VFilters.SINGLETON_INSTANCE.getChbTextType().isSelected();
-        final boolean useText = VFilters.SINGLETON_INSTANCE.getChbTextText().isSelected();
-
-        if (!strContains.isEmpty()) {
-            final String[] splitContains = strContains
+        
+        String[] splitText = text
                     .replaceAll(",", "")
                     .replaceAll("  ", " ")
                     .toLowerCase().split(" ");
 
-            final List<Predicate<CardRules>> ands = new ArrayList<Predicate<CardRules>>();
+        List<Predicate<CardRules>> terms = new ArrayList<Predicate<CardRules>>();
+        for (String s : splitText) {
+            List<Predicate<CardRules>> subands = new ArrayList<Predicate<CardRules>>();
 
-            for (final String s : splitContains) {
-                final List<Predicate<CardRules>> subands = new ArrayList<Predicate<CardRules>>();
+            if (inName) { subands.add(CardRulesPredicates.name(StringOp.CONTAINS_IC, s)); }
+            if (inType) { subands.add(CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, s)); }
+            
+            // rules cannot compare in ignore-case way
+            if (inText) { subands.add(CardRulesPredicates.rules(StringOp.CONTAINS, s)); }
 
-                if (useName) { subands.add(CardRulesPredicates.name(StringOp.CONTAINS_IC, s)); }
-                if (useType) { subands.add(CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, s)); }
-                // rules cannot compare in ignore-case way
-                if (useText) { subands.add(CardRulesPredicates.rules(StringOp.CONTAINS, s)); }
-
-                ands.add(Predicates.or(subands));
-            }
-            filterAnd = Predicates.and(ands);
+            terms.add(Predicates.or(subands));
         }
-
-        if (!strWithout.isEmpty()) {
-            final String[] splitWithout = strWithout
-                    .replaceAll("  ", " ")
-                    .replaceAll(",", "")
-                    .toLowerCase().split(" ");
-
-            final List<Predicate<CardRules>> nots = new ArrayList<Predicate<CardRules>>();
-
-            for (final String s : splitWithout) {
-                final List<Predicate<CardRules>> subnots = new ArrayList<Predicate<CardRules>>();
-
-                if (useName) { subnots.add(CardRulesPredicates.name(StringOp.CONTAINS_IC, s)); }
-                if (useType) { subnots.add(CardRulesPredicates.joinedType(StringOp.CONTAINS_IC, s)); }
-                // rules cannot compare in ignore-case way
-                if (useText) { subnots.add(CardRulesPredicates.rules(StringOp.CONTAINS, s)); }
-
-                nots.add(Predicates.or(subnots));
-            }
-            filterNot = Predicates.not(Predicates.or(nots));
-        }
-        Predicate<CardRules> preResult = optimizedAnd(filterAnd, filterNot);
-        if (preResult == null) {
-            return Predicates.alwaysTrue();
-        }
-        return Predicates.compose(preResult, CardPrinted.FN_GET_RULES);
+        Predicate<CardRules> textFilter = invert ? Predicates.not(Predicates.or(terms)) : Predicates.and(terms);
+ 
+        return Predicates.compose(textFilter, CardPrinted.FN_GET_RULES);
     }
 
-    private static Predicate<CardRules> getCardRulesFieldPredicate(String min, String max, CardRulesPredicates.LeafNumber.CardField field) {
-        boolean hasMin = !("*".equals(min));
-        boolean hasMax = !("10+".equals(max));
+    private static Predicate<CardRules> getCardRulesFieldPredicate(int min, int max, CardRulesPredicates.LeafNumber.CardField field) {
+        boolean hasMin = 0 != min;
+        boolean hasMax = 10 != max;
 
-        Predicate<CardRules> pMin = !hasMin ? null : new CardRulesPredicates.LeafNumber(field, ComparableOp.GT_OR_EQUAL, Integer.valueOf(min));
-        Predicate<CardRules> pMax = !hasMax ? null : new CardRulesPredicates.LeafNumber(field, ComparableOp.LT_OR_EQUAL, Integer.valueOf(max));
+        Predicate<CardRules> pMin = !hasMin ? null : new CardRulesPredicates.LeafNumber(field, ComparableOp.GT_OR_EQUAL, min);
+        Predicate<CardRules> pMax = !hasMax ? null : new CardRulesPredicates.LeafNumber(field, ComparableOp.LT_OR_EQUAL, max);
 
         return optimizedAnd(pMin, pMax);
     }
@@ -341,78 +125,23 @@ public class SFilterUtil {
     }
 
     /**
-     * Validates combo box input, assembles predicate filters for each case,
-     * stacks them all together, and returns the predicate.
-     * 
-     * @return Predicate<CardPrinted>
+     * builds a filter for an interval on a card field
      */
-    public static Predicate<CardPrinted> buildIntervalFilter() {
-        final VFilters view = VFilters.SINGLETON_INSTANCE;
+    public static Predicate<CardPrinted> buildIntervalFilter(
+            Map<RangeTypes, Pair<FSpinner, FSpinner>> spinners, VCardCatalog.RangeTypes field) {
+        Pair<FSpinner, FSpinner> sPair = spinners.get(field);
+        Predicate<CardRules> fieldFilter = getCardRulesFieldPredicate(
+                Integer.valueOf(sPair.a.getValue().toString()), Integer.valueOf(sPair.b.getValue().toString()), field.cardField);
 
-        // Must include -1 so non-creatures are included by default.
-        Predicate<CardRules> preToughness = getCardRulesFieldPredicate(view.getCbxTLow().getSelectedItem().toString(), view.getCbxTHigh().getSelectedItem().toString(), CardRulesPredicates.LeafNumber.CardField.TOUGHNESS);
-        Predicate<CardRules> prePower = getCardRulesFieldPredicate(view.getCbxPLow().getSelectedItem().toString(), view.getCbxPHigh().getSelectedItem().toString(), CardRulesPredicates.LeafNumber.CardField.POWER);
-        Predicate<CardRules> preCMC = getCardRulesFieldPredicate(view.getCbxCMCLow().getSelectedItem().toString(), view.getCbxCMCHigh().getSelectedItem().toString(), CardRulesPredicates.LeafNumber.CardField.CMC);
+        if (null != fieldFilter && VCardCatalog.RangeTypes.CMC != field)
+        {
+            fieldFilter = Predicates.and(fieldFilter, CardRulesPredicates.Presets.IS_CREATURE);
+        }
 
-        Predicate<CardRules> preCreature = optimizedAnd(preToughness, prePower);
-        preCreature = preCreature == null ? null : Predicates.and(preCreature, CardRulesPredicates.Presets.IS_CREATURE);
-
-        Predicate<CardRules> preFinal = optimizedAnd(preCMC, preCreature);
-        if (preFinal == null) {
+        if (fieldFilter == null) {
             return Predicates.alwaysTrue();
         } else {
-            return Predicates.compose(preFinal, CardPrinted.FN_GET_RULES);
-        }
-    }
-
-    //========== Custom class handling
-
-    /**
-     * A panel with a checkbox and an icon, which will toggle the
-     * checkbox when anywhere in the panel is clicked.
-     */
-    @SuppressWarnings("serial")
-    private static class ChbPnl extends JPanel implements ItemListener {
-        private final JCheckBox checkBox = new JCheckBox();
-        private final Image img;
-
-        public ChbPnl(final Image img0, final String tooltip) {
-            super();
-            this.img = img0;
-            this.setOpaque(false);
-            checkBox.setBorder(new EmptyBorder(0, 20, 0, 0));
-            checkBox.setOpaque(false);
-            checkBox.setSelected(true);
-            checkBox.addItemListener(this);
-            checkBox.setToolTipText(tooltip);
-            add(checkBox);
-
-            this.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(final MouseEvent me) {
-                    checkBox.doClick();
-                }
-            });
-        }
-
-        public JCheckBox getCheckBox() {
-            return this.checkBox;
-        }
-
-        @Override
-        protected void paintComponent(final Graphics g) {
-            super.paintComponent(g);
-            g.drawImage(img, 0, 0, null);
-        }
-
-        /* (non-Javadoc)
-         * @see java.awt.event.ItemListener#itemStateChanged(java.awt.event.ItemEvent)
-         */
-        @Override
-        public void itemStateChanged(final ItemEvent arg0) {
-            if (!preventFiltering) {
-                VFilters.SINGLETON_INSTANCE.getLayoutControl().buildFilter();
-            }
+            return Predicates.compose(fieldFilter, CardPrinted.FN_GET_RULES);
         }
     }
 }

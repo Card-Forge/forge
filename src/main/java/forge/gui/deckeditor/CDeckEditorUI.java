@@ -23,10 +23,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import forge.Card;
+import forge.deck.DeckBase;
 import forge.gui.CardContainer;
 import forge.gui.deckeditor.SEditorIO.EditorPreference;
 import forge.gui.deckeditor.controllers.ACEditorBase;
-import forge.gui.deckeditor.views.VFilters;
+import forge.gui.deckeditor.controllers.CCardCatalog;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CPicture;
 import forge.item.InventoryItem;
@@ -74,7 +75,7 @@ public enum CDeckEditorUI implements CardContainer {
     /**
      * @return ACEditorBase<?, ?>
      */
-    public ACEditorBase<?, ?> getCurrentEditorController() {
+    public ACEditorBase<? extends InventoryItem, ? extends DeckBase> getCurrentEditorController() {
         return childController;
     }
 
@@ -93,7 +94,7 @@ public enum CDeckEditorUI implements CardContainer {
             childController.getTableCatalog().setWantUnique(wantUnique);
             childController.getTableDeck().setWantUnique(wantUnique);
         }
-        VFilters.SINGLETON_INSTANCE.getLayoutControl().buildFilter();
+        CCardCatalog.SINGLETON_INSTANCE.applyCurrentFilter();
     }
 
     //========== Other methods

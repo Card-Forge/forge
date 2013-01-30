@@ -1,7 +1,9 @@
 package forge.gui.deckeditor.views;
 
-import javax.swing.JLabel;
 import javax.swing.JTable;
+
+import forge.gui.deckeditor.SEditorUtil;
+import forge.gui.toolbox.FLabel;
 
 /** 
  * Dictates methods needed for a class to act as a container for
@@ -19,47 +21,5 @@ public interface ITableContainer {
      */
      void setTableView(JTable tbl0);
 
-     // Various card count total labels
-
-     /** @return {@link javax.swing.JLabel} */
-     JLabel getLblTotal();
-
-     /** @return {@link javax.swing.JLabel} */
-     JLabel getLblBlack();
-
-     /** @return {@link javax.swing.JLabel} */
-     JLabel getLblBlue();
-
-     /** @return {@link javax.swing.JLabel} */
-     JLabel getLblGreen();
-
-     /** @return {@link javax.swing.JLabel} */
-     JLabel getLblRed();
-
-     /** @return {@link javax.swing.JLabel} */
-     JLabel getLblWhite();
-
-     /** @return {@link javax.swing.JLabel} */
-     JLabel getLblColorless();
-
-     /** @return {@link javax.swing.JLabel} */
-     JLabel getLblArtifact();
-
-     /** @return {@link javax.swing.JLabel} */
-     JLabel getLblEnchantment();
-
-     /** @return {@link javax.swing.JLabel} */
-     JLabel getLblCreature();
-
-     /** @return {@link javax.swing.JLabel} */
-     JLabel getLblSorcery();
-
-     /** @return {@link javax.swing.JLabel} */
-     JLabel getLblInstant();
-
-     /** @return {@link javax.swing.JLabel} */
-     JLabel getLblPlaneswalker();
-
-     /** @return {@link javax.swing.JLabel} */
-     JLabel getLblLand();
-}
+     FLabel getStatLabel(SEditorUtil.StatTypes s);
+ }

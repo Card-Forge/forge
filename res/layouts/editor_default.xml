@@ -3,7 +3,6 @@
 	<cell x="0.77443" y="0.37698" w="0.22557" h="0.62302">
 		<doc>CARD_PICTURE</doc>
 		<doc>EDITOR_PREFERENCES</doc>
-		<doc>EDITOR_FILTERS</doc>
 	</cell>
 	<cell x="0.38722" y="0.0" w="0.38722" h="1.0">
 		<doc>EDITOR_CURRENTDECK</doc>

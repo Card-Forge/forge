@@ -117,15 +117,14 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         final List<TableColumnInfo<InventoryItem>> columnsCatalog = SColumnUtil.getCatalogDefaultColumns();
         final List<TableColumnInfo<InventoryItem>> columnsDeck = SColumnUtil.getDeckDefaultColumns();
 
-        // Add "price", "decks", and "new" column in catalog and deck
+        // Add spell shop-specific columns
         columnsCatalog.add(SColumnUtil.getColumn(ColumnName.CAT_PURCHASE_PRICE));
         columnsCatalog.get(columnsCatalog.size() - 1).setSortAndDisplayFunctions(
                 this.fnPriceCompare, this.fnPriceGet);
 
-        // card shop doesn't need "New" column
-        //columnsCatalog.add(SColumnUtil.getColumn(ColumnName.CAT_NEW));
-        //columnsCatalog.get(columnsCatalog.size() - 1).setSortAndDisplayFunctions(
-        //        this.questData.getCards().getFnNewCompare(), this.questData.getCards().getFnNewGet());
+        columnsCatalog.add(1, SColumnUtil.getColumn(ColumnName.CAT_OWNED));
+        columnsCatalog.get(1).setSortAndDisplayFunctions(
+                questData.getCards().getFnOwnedCompare(), questData.getCards().getFnOwnedGet());
 
         columnsDeck.add(SColumnUtil.getColumn(ColumnName.DECK_SALE_PRICE));
         columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
@@ -139,7 +138,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         columnsDeck.get(columnsDeck.size() - 1).setSortAndDisplayFunctions(
                 this.fnDeckCompare, this.fnDeckGet);
 
-        // don't need AI column for eaither table
+        // don't need AI column for either table
         columnsCatalog.remove(SColumnUtil.getColumn(ColumnName.CAT_AI));
         columnsDeck.remove(SColumnUtil.getColumn(ColumnName.DECK_AI));
 

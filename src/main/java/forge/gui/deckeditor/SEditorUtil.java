@@ -1,16 +1,14 @@
 package forge.gui.deckeditor;
 
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+
 import forge.Command;
-
-
-import forge.card.CardRulesPredicates;
 import forge.card.CardRules;
+import forge.card.CardRulesPredicates;
 import forge.gui.deckeditor.views.ITableContainer;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
@@ -19,6 +17,7 @@ import forge.gui.toolbox.FSkin;
 import forge.item.InventoryItem;
 import forge.item.ItemPoolView;
 import forge.util.Aggregates;
+import forge.util.TextUtil;
 
 
 /** 
@@ -31,53 +30,39 @@ import forge.util.Aggregates;
  *
  */
 public final class SEditorUtil  {
-    /** Pre-cached resized version. */
-    public static final ImageIcon ICO_ARTIFACT =
-            new ImageIcon(FSkin.getImage(FSkin.EditorImages.IMG_ARTIFACT, 18, 18));
-    /** Pre-cached resized version. */
-    public static final ImageIcon ICO_CREATURE =
-            new ImageIcon(FSkin.getImage(FSkin.EditorImages.IMG_CREATURE, 18, 18));
-    /** Pre-cached resized version. */
-    public static final ImageIcon ICO_ENCHANTMENT =
-            new ImageIcon(FSkin.getImage(FSkin.EditorImages.IMG_ENCHANTMENT, 18, 18));
-    /** Pre-cached resized version. */
-    public static final ImageIcon ICO_INSTANT =
-            new ImageIcon(FSkin.getImage(FSkin.EditorImages.IMG_INSTANT, 18, 18));
-    /** Pre-cached resized version. */
-    public static final ImageIcon ICO_LAND =
-            new ImageIcon(FSkin.getImage(FSkin.EditorImages.IMG_LAND, 18, 18));
-    /** Pre-cached resized version. */
-    public static final ImageIcon ICO_PLANESWALKER =
-            new ImageIcon(FSkin.getImage(FSkin.EditorImages.IMG_PLANESWALKER, 18, 18));
-    /** Pre-cached resized version. */
-    public static final ImageIcon ICO_SORCERY =
-            new ImageIcon(FSkin.getImage(FSkin.EditorImages.IMG_SORCERY, 18, 18));
+    /** An enum to encapsulate metadata for the stats/filter objects. */
+    public static enum StatTypes {
+        TOTAL      (FSkin.ZoneImages.ICO_HAND, null),
+        
+        WHITE      (FSkin.ManaImages.IMG_WHITE,     CardRulesPredicates.Presets.IS_WHITE),
+        BLUE       (FSkin.ManaImages.IMG_BLUE,      CardRulesPredicates.Presets.IS_BLUE),
+        BLACK      (FSkin.ManaImages.IMG_BLACK,     CardRulesPredicates.Presets.IS_BLACK),
+        RED        (FSkin.ManaImages.IMG_RED,       CardRulesPredicates.Presets.IS_RED),
+        GREEN      (FSkin.ManaImages.IMG_GREEN,     CardRulesPredicates.Presets.IS_GREEN),
+        COLORLESS  (FSkin.ManaImages.IMG_COLORLESS, CardRulesPredicates.Presets.IS_COLORLESS),
+        MULTICOLOR (FSkin.EditorImages.IMG_MULTI,   CardRulesPredicates.Presets.IS_MULTICOLOR),
 
-    /** Pre-cached resized version. */
-    public static final ImageIcon ICO_TOTAL =
-            new ImageIcon(FSkin.getImage(FSkin.ZoneImages.ICO_HAND, 18, 18));
-    /** Pre-cached resized version. */
-    public static final ImageIcon ICO_MULTI =
-            new ImageIcon(FSkin.getImage(FSkin.EditorImages.IMG_MULTI, 18, 18));
-    /** Pre-cached resized version. */
-    public static final ImageIcon ICO_BLACK =
-            new ImageIcon(FSkin.getImage(FSkin.ManaImages.IMG_BLACK, 18, 18));
-    /** Pre-cached resized version. */
-    public static final ImageIcon ICO_BLUE =
-            new ImageIcon(FSkin.getImage(FSkin.ManaImages.IMG_BLUE, 18, 18));
-    /** Pre-cached resized version. */
-    public static final ImageIcon ICO_GREEN =
-            new ImageIcon(FSkin.getImage(FSkin.ManaImages.IMG_GREEN, 18, 18));
-    /** Pre-cached resized version. */
-    public static final ImageIcon ICO_RED =
-            new ImageIcon(FSkin.getImage(FSkin.ManaImages.IMG_RED, 18, 18));
-    /** Pre-cached resized version. */
-    public static final ImageIcon ICO_WHITE =
-            new ImageIcon(FSkin.getImage(FSkin.ManaImages.IMG_WHITE, 18, 18));
-    /** Pre-cached resized version. */
-    public static final ImageIcon ICO_COLORLESS =
-            new ImageIcon(FSkin.getImage(FSkin.ColorlessManaImages.IMG_X, 18, 18));
+        LAND         (FSkin.EditorImages.IMG_LAND,         CardRulesPredicates.Presets.IS_LAND),
+        ARTIFACT     (FSkin.EditorImages.IMG_ARTIFACT,     CardRulesPredicates.Presets.IS_ARTIFACT),
+        CREATURE     (FSkin.EditorImages.IMG_CREATURE,     CardRulesPredicates.Presets.IS_CREATURE),
+        ENCHANTMENT  (FSkin.EditorImages.IMG_ENCHANTMENT,  CardRulesPredicates.Presets.IS_ENCHANTMENT),
+        PLANESWALKER (FSkin.EditorImages.IMG_PLANESWALKER, CardRulesPredicates.Presets.IS_PLANESWALKER),
+        INSTANT      (FSkin.EditorImages.IMG_INSTANT,      CardRulesPredicates.Presets.IS_INSTANT),
+        SORCERY      (FSkin.EditorImages.IMG_SORCERY,      CardRulesPredicates.Presets.IS_SORCERY);
+        
+        public final ImageIcon img;
+        public final Predicate<CardRules> predicate;
 
+        StatTypes(FSkin.SkinProp prop, Predicate<CardRules> pred) {
+            img = new ImageIcon(FSkin.getImage(prop, 18, 18));
+            predicate = pred;
+        }
+        
+        public String toLabelString() {
+            return TextUtil.enumToLabel(this) + " cards";
+        }
+    }
+    
     /**
      * Divides X by Y, multiplies by 100, rounds, returns.
      * 
@@ -86,12 +71,7 @@ public final class SEditorUtil  {
      * @return rounded result (int)
      */
     public static int calculatePercentage(final int x0, final int y0) {
-        return (int) Math.round((double) x0 / (double) y0 * 100);
-    }
-
-    public static <T extends InventoryItem> void setLabelTextSum(JLabel label, final ItemPoolView<T> deck, Predicate<CardRules> predicate) {
-        int sum = Aggregates.sum(Iterables.filter(deck, Predicates.compose(predicate, deck.getFnToCard())), deck.getFnToCount());
-        label.setText(String.valueOf(sum));
+        return (int) Math.round((double) (x0 * 100) / (double) y0);
     }
 
     /**
@@ -102,27 +82,25 @@ public final class SEditorUtil  {
      * @param view &emsp; {@link forge.gui.deckeditor.views.ITableContainer}
      */
     public static <T extends InventoryItem> void setStats(final ItemPoolView<T> deck, final ITableContainer view) {
-        view.getLblTotal().setText(String.valueOf(deck.countAll()));
-
-        setLabelTextSum(view.getLblCreature(), deck, CardRulesPredicates.Presets.IS_CREATURE);
-        setLabelTextSum(view.getLblLand(), deck, CardRulesPredicates.Presets.IS_LAND);
-        setLabelTextSum(view.getLblEnchantment(), deck, CardRulesPredicates.Presets.IS_ENCHANTMENT);
-        setLabelTextSum(view.getLblArtifact(), deck, CardRulesPredicates.Presets.IS_ARTIFACT);
-        setLabelTextSum(view.getLblInstant(), deck, CardRulesPredicates.Presets.IS_INSTANT);
-        setLabelTextSum(view.getLblSorcery(), deck, CardRulesPredicates.Presets.IS_SORCERY);
-        setLabelTextSum(view.getLblPlaneswalker(), deck, CardRulesPredicates.Presets.IS_PLANESWALKER);
-        setLabelTextSum(view.getLblColorless(), deck, CardRulesPredicates.Presets.IS_COLORLESS);
-        setLabelTextSum(view.getLblBlack(), deck, CardRulesPredicates.Presets.IS_BLACK);
-        setLabelTextSum(view.getLblBlue(), deck, CardRulesPredicates.Presets.IS_BLUE);
-        setLabelTextSum(view.getLblGreen(), deck, CardRulesPredicates.Presets.IS_GREEN);
-        setLabelTextSum(view.getLblRed(), deck, CardRulesPredicates.Presets.IS_RED);
-        setLabelTextSum(view.getLblWhite(), deck, CardRulesPredicates.Presets.IS_WHITE);
+        for (StatTypes s : StatTypes.values()) {
+            switch (s) {
+            case TOTAL:
+                view.getStatLabel(StatTypes.TOTAL).setText(String.valueOf(deck.countAll()));
+                break;
+            case COLORLESS:
+                break; // TODO: why?
+            default:
+                view.getStatLabel(s).setText(String.valueOf(
+                        Aggregates.sum(Iterables.filter(deck, Predicates.compose(s.predicate, deck.getFnToCard())), deck.getFnToCount())));
+            }
+        }
     } // getStats()
 
     /**
      * Resets components that may have been changed
      * by various configurations of the deck editor.
      */
+    @SuppressWarnings("serial")
     public static void resetUI() {
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setVisible(true);
@@ -142,16 +120,13 @@ public final class SEditorUtil  {
         VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText("Current Deck");
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnPrintProxies().setVisible(true);
-
         VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard().setVisible(false);
 
         VCurrentDeck.SINGLETON_INSTANCE.getTxfTitle().setVisible(true);
         VCurrentDeck.SINGLETON_INSTANCE.getLblTitle().setText("Title:");
 
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnSave())
-            .setCommand(new Command() { private static final long serialVersionUID = -7995834050136126035L;
-
-            @Override
-                public void execute() { SEditorIO.saveDeck(); } });
+            .setCommand(new Command() {
+                @Override public void execute() { SEditorIO.saveDeck(); } });
     }
 }

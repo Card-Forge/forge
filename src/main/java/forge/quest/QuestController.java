@@ -138,6 +138,13 @@ public class QuestController {
     }
 
     /**
+     * Gets the custom format for the main world, if any.
+     */
+    public GameFormatQuest getMainFormat() {
+        return this.questFormat;
+    }
+
+    /**
      * Gets the current event.
      *
      * @return the current event

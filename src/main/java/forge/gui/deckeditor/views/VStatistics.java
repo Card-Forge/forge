@@ -43,22 +43,22 @@ public enum VStatistics implements IVDoc<CStatistics> {
 
     // Total and color count labels
     private final JPanel pnlStats = new JPanel();
-    private final JLabel lblMulti = buildLabel(SEditorUtil.ICO_MULTI, true);
-    private final JLabel lblBlack = buildLabel(SEditorUtil.ICO_BLACK, false);
-    private final JLabel lblBlue = buildLabel(SEditorUtil.ICO_BLUE, true);
-    private final JLabel lblGreen = buildLabel(SEditorUtil.ICO_GREEN, false);
-    private final JLabel lblRed = buildLabel(SEditorUtil.ICO_RED, true);
-    private final JLabel lblWhite = buildLabel(SEditorUtil.ICO_WHITE, false);
-    private final JLabel lblColorless = buildLabel(SEditorUtil.ICO_COLORLESS, true);
+    private final JLabel lblMulti = buildLabel(SEditorUtil.StatTypes.MULTICOLOR, true);
+    private final JLabel lblBlack = buildLabel(SEditorUtil.StatTypes.BLACK, false);
+    private final JLabel lblBlue = buildLabel(SEditorUtil.StatTypes.BLUE, true);
+    private final JLabel lblGreen = buildLabel(SEditorUtil.StatTypes.GREEN, false);
+    private final JLabel lblRed = buildLabel(SEditorUtil.StatTypes.RED, true);
+    private final JLabel lblWhite = buildLabel(SEditorUtil.StatTypes.WHITE, false);
+    private final JLabel lblColorless = buildLabel(SEditorUtil.StatTypes.COLORLESS, true);
 
     // Card type labels
-    private final JLabel lblArtifact = buildLabel(SEditorUtil.ICO_ARTIFACT, true);
-    private final JLabel lblCreature = buildLabel(SEditorUtil.ICO_CREATURE, false);
-    private final JLabel lblEnchantment = buildLabel(SEditorUtil.ICO_ENCHANTMENT, true);
-    private final JLabel lblInstant = buildLabel(SEditorUtil.ICO_INSTANT, false);
-    private final JLabel lblLand = buildLabel(SEditorUtil.ICO_LAND, true);
-    private final JLabel lblPlaneswalker = buildLabel(SEditorUtil.ICO_PLANESWALKER, false);
-    private final JLabel lblSorcery = buildLabel(SEditorUtil.ICO_SORCERY, true);
+    private final JLabel lblArtifact = buildLabel(SEditorUtil.StatTypes.ARTIFACT, true);
+    private final JLabel lblCreature = buildLabel(SEditorUtil.StatTypes.CREATURE, false);
+    private final JLabel lblEnchantment = buildLabel(SEditorUtil.StatTypes.ENCHANTMENT, true);
+    private final JLabel lblInstant = buildLabel(SEditorUtil.StatTypes.INSTANT, false);
+    private final JLabel lblLand = buildLabel(SEditorUtil.StatTypes.LAND, true);
+    private final JLabel lblPlaneswalker = buildLabel(SEditorUtil.StatTypes.PLANESWALKER, false);
+    private final JLabel lblSorcery = buildLabel(SEditorUtil.StatTypes.SORCERY, true);
 
     // CMC labels
     private final JLabel lblCMC0 = buildLabel(
@@ -251,9 +251,9 @@ public enum VStatistics implements IVDoc<CStatistics> {
 
     //========== Other methods
 
-    private JLabel buildLabel(final ImageIcon icon0, final boolean zebra) {
+    private JLabel buildLabel(ImageIcon icon, boolean zebra) {
         final JLabel lbl = new FLabel.Builder().text("0")
-                .icon(icon0).iconScaleAuto(false)
+                .icon(icon).iconScaleAuto(false)
                 .fontSize(11).build();
 
         if (zebra) {
@@ -262,5 +262,9 @@ public enum VStatistics implements IVDoc<CStatistics> {
         }
 
         return lbl;
+    }
+    
+    private JLabel buildLabel(SEditorUtil.StatTypes statType, boolean zebra) {
+        return buildLabel(statType.img, zebra);
     }
 }

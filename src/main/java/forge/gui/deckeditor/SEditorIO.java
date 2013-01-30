@@ -47,9 +47,8 @@ public class SEditorIO {
     }
 
     /** Preferences (must match with PREFS file). */
-    public enum EditorPreference { /** */
-        stats_deck, /** */
-        stats_catalog,
+    public enum EditorPreference {
+        stats_deck,
         display_unique_only,
         elastic_columns
     }

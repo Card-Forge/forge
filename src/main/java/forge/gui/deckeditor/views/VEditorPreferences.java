@@ -52,6 +52,7 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
     private JCheckBox chbCatalogAI = new FCheckBox("AI");
     private JCheckBox chbCatalogPower = new FCheckBox("Power");
     private JCheckBox chbCatalogToughness = new FCheckBox("Toughness");
+    private JCheckBox chbCatalogOwned = new FCheckBox("Owned (Spell shop)");
 
     private JCheckBox chbDeckColor = new FCheckBox("Color");
     private JCheckBox chbDeckRarity = new FCheckBox("Rarity");
@@ -62,7 +63,6 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
     private JCheckBox chbDeckToughness = new FCheckBox("Toughness");
 
     private JCheckBox chbDeckStats = new FCheckBox("Show stats in current deck");
-    private JCheckBox chbCatalogStats = new FCheckBox("Show stats in card catalog");
     private JCheckBox chbElasticColumns = new FCheckBox("Use elastic resizing when changing column widths");
 
     private JCheckBox chbCardDisplayUnique = new FCheckBox("Show unique cards only (only affects Constructed)");
@@ -84,6 +84,7 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
         chbCatalogAI.setFont(FSkin.getFont(12));
         chbCatalogPower.setFont(FSkin.getFont(12));
         chbCatalogToughness.setFont(FSkin.getFont(12));
+        chbCatalogOwned.setFont(FSkin.getFont(12));
 
         chbDeckColor.setFont(FSkin.getFont(12));
         chbDeckRarity.setFont(FSkin.getFont(12));
@@ -94,17 +95,14 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
         chbDeckToughness.setFont(FSkin.getFont(12));
 
         chbDeckStats.setFont(FSkin.getFont(12));
-        chbCatalogStats.setFont(FSkin.getFont(12));
         chbElasticColumns.setFont(FSkin.getFont(12));
         chbDeckStats.setSelected(true);
-        chbCatalogStats.setSelected(true);
         chbElasticColumns.setSelected(false);
 
         chbCardDisplayUnique.setFont(FSkin.getFont(12));
         chbCardDisplayUnique.setSelected(false);
 
         pnl.add(lblStats, "h 25px!, gap 5px 5px 5px 5px, ax center, span 2 1");
-        pnl.add(chbCatalogStats, "h 25px!, gap 5px 5px 5px 5px, ax center, span 2 1");
         pnl.add(chbDeckStats, "h 25px!, gap 5px 5px 5px 5px, ax center, span 2 1");
         pnl.add(chbElasticColumns, "h 25px!, gap 5px 5px 5px 5px, ax center, span 2 1");
 
@@ -116,7 +114,8 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
         pnl.add(chbCatalogSet, constraints);
         pnl.add(chbCatalogPower, constraints);
         pnl.add(chbCatalogToughness, constraints);
-        pnl.add(chbCatalogAI, constraints + ", wrap");
+        pnl.add(chbCatalogAI, constraints);
+        pnl.add(chbCatalogOwned, constraints + ", wrap");
 
         pnl.add(lblDeck, constraints + ", span 2 1");
         pnl.add(chbDeckColor, constraints);
@@ -225,6 +224,11 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
     }
 
     /** @return {@link javax.swing.JCheckBox} */
+    public JCheckBox getChbCatalogOwned() {
+        return chbCatalogOwned;
+    }
+
+    /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getChbDeckColor() {
         return chbDeckColor;
     }
@@ -270,14 +274,7 @@ public enum VEditorPreferences implements IVDoc<CEditorPreferences> {
     }
     
     /** @return {@link javax.swing.JCheckBox} */
-    public JCheckBox getChbCatalogStats() {
-        return chbCatalogStats;
-    }
-
-    /** @return {@link javax.swing.JCheckBox} */
     public JCheckBox getChbCardDisplayUnique() {
         return chbCardDisplayUnique;
     }
-    //========== Other methods
-
 }

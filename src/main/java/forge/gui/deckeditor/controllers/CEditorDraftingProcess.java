@@ -33,7 +33,6 @@ import forge.gui.deckeditor.views.VAllDecks;
 import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VDeckgen;
-import forge.gui.deckeditor.views.VFilters;
 import forge.gui.framework.DragCell;
 import forge.gui.framework.SRearrangingUtil;
 import forge.gui.home.sanctioned.CSubmenuDraft;
@@ -55,7 +54,6 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
     private IBoosterDraft boosterDraft;
 
     private String ccAddLabel = "Add card";
-    private DragCell filtersParent = null;
     private DragCell allDecksParent = null;
     private DragCell deckGenParent = null;
 
@@ -297,17 +295,6 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
             }
         }
 
-        if (VFilters.SINGLETON_INSTANCE.getParentCell() != null) {
-            filtersParent = VFilters.SINGLETON_INSTANCE.getParentCell();
-            filtersParent.removeDoc(VFilters.SINGLETON_INSTANCE);
-            VFilters.SINGLETON_INSTANCE.setParentCell(null);
-
-            // If filters was first tab, the new first tab needs re-selecting.
-            if (filtersParent.getDocs().size() > 0) {
-                filtersParent.setSelected(filtersParent.getDocs().get(0));
-            }
-        }
-
         // Fill in gaps
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -340,16 +327,10 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(true);
 
         //Re-add tabs
-        if (filtersParent != null) {
-
-            filtersParent.addDoc(VFilters.SINGLETON_INSTANCE);
-        }
         if (deckGenParent != null) {
-
             deckGenParent.addDoc(VDeckgen.SINGLETON_INSTANCE);
         }
         if (allDecksParent != null) {
-
             allDecksParent.addDoc(VAllDecks.SINGLETON_INSTANCE);
         }
 

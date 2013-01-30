@@ -72,6 +72,7 @@ public final class SColumnUtil {
         CAT_AI, /** */
         CAT_NEW, /** */
         CAT_PURCHASE_PRICE, /** */
+        CAT_OWNED, /** */
         DECK_QUANTITY, /** */
         DECK_NAME, /** */
         DECK_COST, /** */

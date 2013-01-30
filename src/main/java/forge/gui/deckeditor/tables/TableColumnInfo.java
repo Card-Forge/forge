@@ -46,8 +46,6 @@ public class TableColumnInfo<T> extends TableColumn {
     /** */
     public TableColumnInfo() {
         super();
-        setResizable(true);
-        setMinWidth(30);
     }
 
     /**

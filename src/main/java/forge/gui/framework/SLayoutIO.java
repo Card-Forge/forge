@@ -190,7 +190,9 @@ public final class SLayoutIO {
                 }
                 else if (element.getName().getLocalPart().equals("doc")) {
                     event = reader.nextEvent();
-                    cell.addDoc(EDocID.valueOf(event.asCharacters().getData()).getDoc());
+                    try {
+                        cell.addDoc(EDocID.valueOf(event.asCharacters().getData()).getDoc());
+                    } catch (IllegalArgumentException e) { /* ignore; just don't add invalid element */ }
                 }
             }
         }

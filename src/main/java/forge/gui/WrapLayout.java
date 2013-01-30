@@ -39,8 +39,8 @@ public class WrapLayout extends FlowLayout {
     * and the indicated horizontal and vertical gaps.
     * <p>
     * The value of the alignment argument must be one of
-    * <code>WrapLayout</code>, <code>WrapLayout</code>,
-    * or <code>WrapLayout</code>.
+    * <code>FlowLayout.LEFT</code>, <code>FlowLayout.CENTER</code>,
+    * or <code>FlowLayout.RIGHT</code>.
     * @param align the alignment value
     * @param hgap the horizontal gap between components
     * @param vgap the vertical gap between components

@@ -1,7 +1,6 @@
 package forge.gui.home.gauntlet;
 
 import java.awt.Color;
-import java.awt.Insets;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -68,7 +67,7 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
     private final JScrollPane scrRight  = new FScrollPane(lstRight,
             ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-    private final JTextField txfFilename = new FTextField();
+    private final JTextField txfFilename = new FTextField.Builder().text(GauntletIO.TXF_PROMPT).build();
 
     private final FLabel lblDesc1 = new FLabel.Builder()
         .text("Left/right arrows add or remove decks.")
@@ -138,16 +137,6 @@ public enum VSubmenuGauntletBuild implements IVSubmenu<CSubmenuGauntletBuild> {
         grpRadios.add(radQuestDecks);
         grpRadios.add(radColorDecks);
         grpRadios.add(radThemeDecks);
-
-        // Text areas
-        txfFilename.setText(GauntletIO.TXF_PROMPT);
-        txfFilename.setMargin(new Insets(5, 5, 5, 5));
-        txfFilename.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        txfFilename.setOpaque(true);
-        txfFilename.setEditable(true);
-        txfFilename.setFocusable(true);
-        txfFilename.setOpaque(true);
-        txfFilename.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
 
         // File handling panel
         final FLabel lblFilename = new FLabel.Builder()

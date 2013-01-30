@@ -12,7 +12,6 @@ import forge.gui.deckeditor.SEditorIO;
 import forge.gui.deckeditor.SEditorIO.EditorPreference;
 import forge.gui.deckeditor.tables.SColumnUtil;
 import forge.gui.deckeditor.tables.SColumnUtil.ColumnName;
-import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VEditorPreferences;
 import forge.gui.framework.ICDoc;
@@ -57,6 +56,7 @@ public enum CEditorPreferences implements ICDoc {
         prefsDict.put(prefsInstance.getChbCatalogAI(), ColumnName.CAT_AI);
         prefsDict.put(prefsInstance.getChbCatalogPower(), ColumnName.CAT_POWER);
         prefsDict.put(prefsInstance.getChbCatalogToughness(), ColumnName.CAT_TOUGHNESS);
+        prefsDict.put(prefsInstance.getChbCatalogOwned(), ColumnName.CAT_OWNED);
 
         // Deck
         prefsDict.put(prefsInstance.getChbDeckColor(), ColumnName.DECK_COLOR);
@@ -82,8 +82,6 @@ public enum CEditorPreferences implements ICDoc {
         }
 
         // Catalog/Deck Stats
-        VEditorPreferences.SINGLETON_INSTANCE.getChbCatalogStats().setSelected(
-                SEditorIO.getPref(EditorPreference.stats_catalog));
         VEditorPreferences.SINGLETON_INSTANCE.getChbDeckStats().setSelected(
                 SEditorIO.getPref(EditorPreference.stats_deck));
         VEditorPreferences.SINGLETON_INSTANCE.getChbCardDisplayUnique().setSelected(
@@ -93,9 +91,6 @@ public enum CEditorPreferences implements ICDoc {
 
         if (!SEditorIO.getPref(EditorPreference.stats_deck)) {
             VCurrentDeck.SINGLETON_INSTANCE.getPnlStats().setVisible(false);
-        }
-        if (!SEditorIO.getPref(EditorPreference.stats_catalog)) {
-            VCardCatalog.SINGLETON_INSTANCE.getPnlStats().setVisible(false);
         }
 
         boolean wantElastic = SEditorIO.getPref(EditorPreference.elastic_columns);
@@ -109,13 +104,6 @@ public enum CEditorPreferences implements ICDoc {
             curEditor.getTableDeck().setWantUnique(wantUnique);
             curEditor.getTableDeck().updateView(true);
         }
-
-        VEditorPreferences.SINGLETON_INSTANCE.getChbCatalogStats().addItemListener(new ItemListener() {
-            @Override public void itemStateChanged(final ItemEvent e) {
-                VCardCatalog.SINGLETON_INSTANCE.getPnlStats().setVisible(
-                        ((JCheckBox) e.getSource()).isSelected());
-                SEditorIO.setPref(EditorPreference.stats_catalog, ((JCheckBox) e.getSource()).isSelected());
-                SEditorIO.savePreferences(); } });
 
         VEditorPreferences.SINGLETON_INSTANCE.getChbDeckStats().addItemListener(new ItemListener() {
             @Override public void itemStateChanged(final ItemEvent e) {

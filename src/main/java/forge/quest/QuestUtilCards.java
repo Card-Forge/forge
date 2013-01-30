@@ -576,20 +576,10 @@ public final class QuestUtilCards {
         this.qa.getNewCardList().clear();
     }
 
-    /**
-     * Gets the fn new compare.
-     * 
-     * @return the fnNewCompare
-     */
     public Function<Entry<InventoryItem, Integer>, Comparable<?>> getFnNewCompare() {
         return this.fnNewCompare;
     }
 
-    /**
-     * Gets the fn new get.
-     * 
-     * @return the fnNewGet
-     */
     public Function<Entry<InventoryItem, Integer>, Object> getFnNewGet() {
         return this.fnNewGet;
     }
@@ -600,7 +590,8 @@ public final class QuestUtilCards {
     // deck editors
     // Maybe we should consider doing so later
     /** The fn new compare. */
-    private final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare = new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+    private final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnNewCompare =
+            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
         @Override
         public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
             return QuestUtilCards.this.qa.getNewCardList().contains(from.getKey()) ? Integer.valueOf(1) : Integer
@@ -609,10 +600,38 @@ public final class QuestUtilCards {
     };
 
     /** The fn new get. */
-    private final Function<Entry<InventoryItem, Integer>, Object> fnNewGet = new Function<Entry<InventoryItem, Integer>, Object>() {
+    private final Function<Entry<InventoryItem, Integer>, Object> fnNewGet =
+            new Function<Entry<InventoryItem, Integer>, Object>() {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             return QuestUtilCards.this.qa.getNewCardList().contains(from.getKey()) ? "NEW" : "";
+        }
+    };
+    
+    public Function<Entry<InventoryItem, Integer>, Comparable<?>> getFnOwnedCompare() {
+        return this.fnOwnedCompare;
+    }
+
+    public Function<Entry<InventoryItem, Integer>, Object> getFnOwnedGet() {
+        return this.fnOwnedGet;
+    }
+
+    // These functions provide a way to sort and compare cards in the spell shop according to how many are already owned
+    private final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnOwnedCompare =
+            new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
+        @Override
+        public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
+            InventoryItem i = from.getKey();
+            return i instanceof CardPrinted ? QuestUtilCards.this.qa.getCardPool().count((CardPrinted)i) : null;
+        }
+    };
+
+    private final Function<Entry<InventoryItem, Integer>, Object> fnOwnedGet =
+            new Function<Entry<InventoryItem, Integer>, Object>() {
+        @Override
+        public Object apply(final Entry<InventoryItem, Integer> from) {
+            InventoryItem i = from.getKey();
+            return i instanceof CardPrinted ? QuestUtilCards.this.qa.getCardPool().count((CardPrinted)i) : null;
         }
     };
 }

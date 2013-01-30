@@ -1,8 +1,8 @@
 package forge.gui.deckeditor.views;
 
-import java.awt.Insets;
+import java.util.HashMap;
+import java.util.Map;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -101,7 +101,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_EDIT))
             .iconScaleAuto(false).hoverable(true).build();
 
-    private final JTextField txfTitle = new FTextField();
+    private final JTextField txfTitle = new FTextField.Builder().text("[New Deck]").build();
 
     private final JPanel pnlRemove = new JPanel();
     private final JPanel pnlHeader = new JPanel();
@@ -110,21 +110,8 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
             .fontSize(14).build();
 
     private final JPanel pnlStats = new JPanel();
-    private final JLabel lblTotal = buildLabel(SEditorUtil.ICO_TOTAL);
-    private final JLabel lblBlack = buildLabel(SEditorUtil.ICO_BLACK);
-    private final JLabel lblBlue = buildLabel(SEditorUtil.ICO_BLUE);
-    private final JLabel lblGreen = buildLabel(SEditorUtil.ICO_GREEN);
-    private final JLabel lblRed = buildLabel(SEditorUtil.ICO_RED);
-    private final JLabel lblWhite = buildLabel(SEditorUtil.ICO_WHITE);
-    private final JLabel lblColorless = buildLabel(SEditorUtil.ICO_COLORLESS);
-
-    private final JLabel lblArtifact = buildLabel(SEditorUtil.ICO_ARTIFACT);
-    private final JLabel lblCreature = buildLabel(SEditorUtil.ICO_CREATURE);
-    private final JLabel lblEnchantment = buildLabel(SEditorUtil.ICO_ENCHANTMENT);
-    private final JLabel lblInstant = buildLabel(SEditorUtil.ICO_INSTANT);
-    private final JLabel lblLand = buildLabel(SEditorUtil.ICO_LAND);
-    private final JLabel lblPlaneswalker = buildLabel(SEditorUtil.ICO_PLANESWALKER);
-    private final JLabel lblSorcery = buildLabel(SEditorUtil.ICO_SORCERY);
+    private final Map<SEditorUtil.StatTypes, FLabel> statLabels =
+            new HashMap<SEditorUtil.StatTypes, FLabel>();
 
     private JTable tblCards = null;
     private final JScrollPane scroller = new JScrollPane(tblCards);
@@ -132,16 +119,6 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
     //========== Constructor
 
     private VCurrentDeck() {
-        // Title text area
-        txfTitle.setText("[New Deck]");
-        txfTitle.setMargin(new Insets(5, 5, 5, 5));
-        txfTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-        txfTitle.setOpaque(true);
-        txfTitle.setEditable(true);
-        txfTitle.setFocusable(true);
-        txfTitle.setOpaque(true);
-        txfTitle.setBackground(FSkin.getColor(FSkin.Colors.CLR_THEME2));
-
         // Header area
         pnlHeader.setOpaque(false);
         pnlHeader.setLayout(new MigLayout("insets 0, gap 0, ax center, hidemode 3"));
@@ -166,41 +143,13 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
         scroller.setBorder(null);
         scroller.getViewport().setBorder(null);
 
-        lblTotal.setToolTipText("Total Card Count");
-        lblBlack.setToolTipText("Black Card Count");
-        lblBlue.setToolTipText("Blue Card Count");
-        lblGreen.setToolTipText("Green Card Count");
-        lblRed.setToolTipText("Red Card Count");
-        lblWhite.setToolTipText("White Card Count");
-        lblColorless.setToolTipText("Total Card Count");
-        lblArtifact.setToolTipText("Artifact Card Count");
-        lblCreature.setToolTipText("Creature Card Count");
-        lblColorless.setToolTipText("Colorless Card Count");
-        lblEnchantment.setToolTipText("Enchantment Card Count");
-        lblInstant.setToolTipText("Instant Card Count");
-        lblLand.setToolTipText("Land Card Count");
-        lblPlaneswalker.setToolTipText("Planeswalker Card Count");
-        lblSorcery.setToolTipText("Sorcery Card Count");
-
         pnlStats.setOpaque(false);
         pnlStats.setLayout(new MigLayout("insets 0, gap 5px, ax center, wrap 7"));
-
-        final String constraints = "w 55px!, h 20px!";
-        pnlStats.add(lblTotal, constraints);
-        pnlStats.add(lblWhite, constraints);
-        pnlStats.add(lblBlue, constraints);
-        pnlStats.add(lblBlack, constraints);
-        pnlStats.add(lblRed, constraints);
-        pnlStats.add(lblGreen, constraints);
-        pnlStats.add(lblColorless, constraints);
-
-        pnlStats.add(lblLand, constraints);
-        pnlStats.add(lblArtifact, constraints);
-        pnlStats.add(lblCreature, constraints);
-        pnlStats.add(lblEnchantment, constraints);
-        pnlStats.add(lblPlaneswalker, constraints);
-        pnlStats.add(lblInstant, constraints);
-        pnlStats.add(lblSorcery, constraints);
+        for (SEditorUtil.StatTypes s : SEditorUtil.StatTypes.values()) {
+            FLabel label = buildLabel(s);
+            statLabels.put(s, label);
+            pnlStats.add(label, "w 55px!, h 20px!");
+        }
 
         pnlRemoveButtons.setOpaque(false);
         pnlRemoveButtons.add(btnRemove, "w 30%!, h 30px!, gap 0 0 5px 5px");
@@ -278,95 +227,12 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
         scroller.setViewportView(tblCards);
     }
 
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblTotal()
-     */
-    @Override
-    public JLabel getLblTotal() { return lblTotal; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblTotal()
-     */
     public JLabel getLblTitle() { return lblTitle; }
 
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblBlack()
-     */
     @Override
-    public JLabel getLblBlack() { return lblBlack; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblBlue()
-     */
-    @Override
-    public JLabel getLblBlue() { return lblBlue; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblGreen()
-     */
-    @Override
-    public JLabel getLblGreen() { return lblGreen; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblRed()
-     */
-    @Override
-    public JLabel getLblRed() { return lblRed; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblWhite()
-     */
-    @Override
-    public JLabel getLblWhite() { return lblWhite; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblColorless()
-     */
-    @Override
-    public JLabel getLblColorless() { return lblColorless; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblArtifact()
-     */
-    @Override
-    public JLabel getLblArtifact() { return lblArtifact; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblEnchantment()
-     */
-    @Override
-    public JLabel getLblEnchantment() { return lblEnchantment; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblCreature()
-     */
-    @Override
-    public JLabel getLblCreature() { return lblCreature; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblSorcery()
-     */
-    @Override
-    public JLabel getLblSorcery() { return lblSorcery; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblInstant()
-     */
-    @Override
-    public JLabel getLblInstant() { return lblInstant; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblPlaneswalker()
-     */
-    @Override
-    public JLabel getLblPlaneswalker() { return lblPlaneswalker; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblLand()
-     */
-    @Override
-    public JLabel getLblLand() { return lblLand; }
+    public FLabel getStatLabel(SEditorUtil.StatTypes s) {
+        return statLabels.get(s);
+    }
 
     //========== Retrieval
 
@@ -432,12 +298,11 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
 
     //========== Other methods
 
-    private JLabel buildLabel(final ImageIcon icon0) {
-        final JLabel lbl = new FLabel.Builder().text("0")
-            .icon(icon0).iconScaleAuto(false)
-            .fontSize(11)
-            .build();
-
-        return lbl;
+    private FLabel buildLabel(SEditorUtil.StatTypes s) {
+        return new FLabel.Builder()
+                .icon(s.img).iconScaleAuto(false)
+                .text("0").fontSize(11)
+                .tooltip(s.toLabelString())
+                .build();
     }
 }

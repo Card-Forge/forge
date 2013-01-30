@@ -2,6 +2,7 @@ package forge.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -77,5 +78,13 @@ public class TextUtil {
 
         return result.toArray(ArrayUtils.EMPTY_STRING_ARRAY);
     }
-
+    
+    /**
+     * Converts an enum value to a printable label but upcasing the first letter
+     * and lcasing all subsequent letters
+     */
+    public static String enumToLabel(Enum<?> val) {
+        return val.toString().substring(0, 1).toUpperCase(Locale.ENGLISH) +
+                val.toString().substring(1).toLowerCase(Locale.ENGLISH);
+    }
 }

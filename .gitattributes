@@ -13984,7 +13984,6 @@ src/main/java/forge/gui/deckeditor/controllers/CEditorPreferences.java -text
 src/main/java/forge/gui/deckeditor/controllers/CEditorQuest.java svneol=native#text/plain
 src/main/java/forge/gui/deckeditor/controllers/CEditorQuestCardShop.java -text
 src/main/java/forge/gui/deckeditor/controllers/CEditorVariant.java -text
-src/main/java/forge/gui/deckeditor/controllers/CFilters.java -text
 src/main/java/forge/gui/deckeditor/controllers/CProbabilities.java -text
 src/main/java/forge/gui/deckeditor/controllers/CStatistics.java -text
 src/main/java/forge/gui/deckeditor/package-info.java -text
@@ -14004,7 +14003,6 @@ src/main/java/forge/gui/deckeditor/views/VCardCatalog.java -text
 src/main/java/forge/gui/deckeditor/views/VCurrentDeck.java -text
 src/main/java/forge/gui/deckeditor/views/VDeckgen.java -text
 src/main/java/forge/gui/deckeditor/views/VEditorPreferences.java -text
-src/main/java/forge/gui/deckeditor/views/VFilters.java -text
 src/main/java/forge/gui/deckeditor/views/VProbabilities.java -text
 src/main/java/forge/gui/deckeditor/views/VStatistics.java -text
 src/main/java/forge/gui/download/GuiDownloadPicturesLQ.java svneol=native#text/plain
@@ -14055,7 +14053,6 @@ src/main/java/forge/gui/home/quest/CSubmenuDuels.java -text
 src/main/java/forge/gui/home/quest/CSubmenuQuestData.java -text
 src/main/java/forge/gui/home/quest/CSubmenuQuestDecks.java -text
 src/main/java/forge/gui/home/quest/CSubmenuQuestPrefs.java -text
-src/main/java/forge/gui/home/quest/DialogCustomFormat.java -text
 src/main/java/forge/gui/home/quest/IVQuestStats.java -text
 src/main/java/forge/gui/home/quest/PnlEvent.java -text
 src/main/java/forge/gui/home/quest/QuestFileLister.java -text

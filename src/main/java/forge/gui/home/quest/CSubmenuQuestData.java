@@ -61,11 +61,11 @@ public enum CSubmenuQuestData implements ICDoc {
                 new Command() { @Override public void execute() { newQuest(); } });
 
         view.getBtnCustomFormat().setCommand(new Command() { @Override public void execute() {
-            new DialogCustomFormat(customFormatCodes);
+            new DialogChooseSets(customFormatCodes, null);
         } });
 
         view.getBtnPrizeCustomFormat().setCommand(new Command() { @Override public void execute() {
-            new DialogCustomFormat(customPrizeFormatCodes);
+            new DialogChooseSets(customPrizeFormatCodes, null);
         } });
     }
 

@@ -8,7 +8,6 @@ import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.deckeditor.views.VDeckgen;
 import forge.gui.deckeditor.views.VEditorPreferences;
-import forge.gui.deckeditor.views.VFilters;
 import forge.gui.deckeditor.views.VProbabilities;
 import forge.gui.deckeditor.views.VStatistics;
 import forge.gui.home.gauntlet.VSubmenuGauntletBuild;
@@ -51,7 +50,6 @@ public enum EDocID { /** */
     CARD_DETAIL (VDetail.SINGLETON_INSTANCE), /** */
     CARD_ANTES (VAntes.SINGLETON_INSTANCE), /** */
 
-    EDITOR_FILTERS (VFilters.SINGLETON_INSTANCE), /** */
     EDITOR_PREFERENCES (VEditorPreferences.SINGLETON_INSTANCE), /** */
     EDITOR_ALLDECKS (VAllDecks.SINGLETON_INSTANCE), /** */
     EDITOR_STATISTICS (VStatistics.SINGLETON_INSTANCE), /** */

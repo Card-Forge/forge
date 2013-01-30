@@ -1,12 +1,22 @@
 package forge.gui.deckeditor.views;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 import net.miginfocom.swing.MigLayout;
+import forge.Command;
+import forge.card.CardRulesPredicates;
+import forge.gui.WrapLayout;
 import forge.gui.deckeditor.SEditorUtil;
 import forge.gui.deckeditor.controllers.CCardCatalog;
 import forge.gui.framework.DragCell;
@@ -15,6 +25,10 @@ import forge.gui.framework.EDocID;
 import forge.gui.framework.IVDoc;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
+import forge.gui.toolbox.FSpinner;
+import forge.gui.toolbox.FTextField;
+import forge.util.Pair;
+import forge.util.TextUtil;
 
 /** 
  * Assembles Swing components of card catalog in deck editor.
@@ -25,55 +39,75 @@ import forge.gui.toolbox.FSkin;
 public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
     /** */
     SINGLETON_INSTANCE;
+    
+    public static final int SEARCH_MODE_INVERSE_INDEX = 1;
 
     // Fields used with interface IVDoc
     private DragCell parentCell;
     private final DragTab tab = new DragTab("Card Catalog");
 
-    // Total and color count labels
-    private final JPanel pnlStats = new JPanel();
-    private final JLabel lblTotal = buildLabel(SEditorUtil.ICO_TOTAL);
-    private final JLabel lblBlack = buildLabel(SEditorUtil.ICO_BLACK);
-    private final JLabel lblBlue = buildLabel(SEditorUtil.ICO_BLUE);
-    private final JLabel lblGreen = buildLabel(SEditorUtil.ICO_GREEN);
-    private final JLabel lblRed = buildLabel(SEditorUtil.ICO_RED);
-    private final JLabel lblWhite = buildLabel(SEditorUtil.ICO_WHITE);
-    private final JLabel lblColorless = buildLabel(SEditorUtil.ICO_COLORLESS);
-
-    // Card type labels
-    private final JLabel lblArtifact = buildLabel(SEditorUtil.ICO_ARTIFACT);
-    private final JLabel lblCreature = buildLabel(SEditorUtil.ICO_CREATURE);
-    private final JLabel lblEnchantment = buildLabel(SEditorUtil.ICO_ENCHANTMENT);
-    private final JLabel lblInstant = buildLabel(SEditorUtil.ICO_INSTANT);
-    private final JLabel lblLand = buildLabel(SEditorUtil.ICO_LAND);
-    private final JLabel lblPlaneswalker = buildLabel(SEditorUtil.ICO_PLANESWALKER);
-    private final JLabel lblSorcery = buildLabel(SEditorUtil.ICO_SORCERY);
-
-    private final JLabel lblTitle = new FLabel.Builder()
-            .fontSize(14).build();
-
+    // panel where special instructions appear
     private final JPanel pnlHeader = new JPanel(new MigLayout("insets 0, gap 0"));
+    private final FLabel lblTitle = new FLabel.Builder().fontSize(14).build();
 
+    // Total and color count labels/filter toggles
+    private final JPanel pnlStats = new JPanel();
+    private final Map<SEditorUtil.StatTypes, FLabel> statLabels =
+            new HashMap<SEditorUtil.StatTypes, FLabel>();
+
+    // card transfer buttons
     private final JPanel pnlAddButtons =
             new JPanel(new MigLayout("insets 0, gap 0, ax center, hidemode 3"));
-
-    private final JLabel btnAdd = new FLabel.Builder()
+    private final FLabel btnAdd = new FLabel.Builder()
             .fontSize(14)
             .text("Add card")
             .tooltip("Add selected card to current deck (or double click the row)")
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_PLUS))
             .iconScaleAuto(false).hoverable(true).build();
-
-    private final JLabel btnAdd4 = new FLabel.Builder()
+    private final FLabel btnAdd4 = new FLabel.Builder()
             .fontSize(14)
             .text("Add 4 of card")
             .tooltip("Add up to 4 of selected card to current deck")
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_PLUS))
             .iconScaleAuto(false).hoverable(true).build();
 
+    // restriction button and search widgets
+    private final JPanel pnlSearch = new JPanel(new MigLayout("insets 0, gap 5px, center"));
+    private final FLabel btnAddRestriction = new FLabel.Builder()
+            .text("Filter by")
+            .tooltip("Filter shown cards by various properties")
+            .hoverable(true).opaque(true).reactOnMouseDown(true).build();
+    private final JComboBox cbSearchMode = new JComboBox();
+    private final JTextField txfSearch = new FTextField.Builder().build();
+    private final FLabel lblName = new FLabel.Builder().text("Name").selectable(true).selected(true).hoverable(true).opaque(true).build();
+    private final FLabel lblType = new FLabel.Builder().text("Type").selectable(true).selected(true).hoverable(true).opaque(true).build();
+    private final FLabel lblText = new FLabel.Builder().text("Text").selectable(true).selected(true).hoverable(true).opaque(true).build();
+    private final JPanel pnlRestrictions = new JPanel(new WrapLayout(FlowLayout.LEFT, 10, 5));
+    
+    // restriction widgets
+    public static enum RangeTypes {
+        CMC       (CardRulesPredicates.LeafNumber.CardField.CMC),
+        POWER     (CardRulesPredicates.LeafNumber.CardField.POWER),
+        TOUGHNESS (CardRulesPredicates.LeafNumber.CardField.TOUGHNESS);
+        
+        public final CardRulesPredicates.LeafNumber.CardField cardField;
+        
+        RangeTypes(CardRulesPredicates.LeafNumber.CardField cardField) {
+            this.cardField = cardField;
+        }
+
+        public String toLabelString() {
+            if (this == CMC) { return toString(); }
+            return TextUtil.enumToLabel(this);
+        }
+    }
+    private final Map<RangeTypes, Pair<FSpinner, FSpinner>> spinners = new HashMap<RangeTypes, Pair<FSpinner, FSpinner>>();
+    
+    // card table
     private JTable tblCards = null;
     private final JScrollPane scroller = new JScrollPane();
 
+    
     //========== Constructor
     /** */
     private VCardCatalog() {
@@ -82,238 +116,172 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         scroller.setBorder(null);
         scroller.getViewport().setBorder(null);
 
-        lblTotal.setToolTipText("Total Card Count");
-        lblBlack.setToolTipText("Black Card Count");
-        lblBlue.setToolTipText("Blue Card Count");
-        lblGreen.setToolTipText("Green Card Count");
-        lblRed.setToolTipText("Red Card Count");
-        lblWhite.setToolTipText("White Card Count");
-        lblColorless.setToolTipText("Total Card Count");
-        lblArtifact.setToolTipText("Artifact Card Count");
-        lblCreature.setToolTipText("Creature Card Count");
-        lblColorless.setToolTipText("Colorless Card Count");
-        lblEnchantment.setToolTipText("Enchantment Card Count");
-        lblInstant.setToolTipText("Instant Card Count");
-        lblLand.setToolTipText("Land Card Count");
-        lblPlaneswalker.setToolTipText("Planeswalker Card Count");
-        lblSorcery.setToolTipText("Sorcery Card Count");
-
         pnlStats.setOpaque(false);
         pnlStats.setLayout(new MigLayout("insets 0, gap 5px, ax center, wrap 7"));
-
-        final String constraints = "w 57px!, h 20px!";
-        pnlStats.add(lblTotal, constraints);
-        pnlStats.add(lblWhite, constraints);
-        pnlStats.add(lblBlue, constraints);
-        pnlStats.add(lblBlack, constraints);
-        pnlStats.add(lblRed, constraints);
-        pnlStats.add(lblGreen, constraints);
-        pnlStats.add(lblColorless, constraints);
-
-        pnlStats.add(lblLand, constraints);
-        pnlStats.add(lblArtifact, constraints);
-        pnlStats.add(lblCreature, constraints);
-        pnlStats.add(lblEnchantment, constraints);
-        pnlStats.add(lblPlaneswalker, constraints);
-        pnlStats.add(lblInstant, constraints);
-        pnlStats.add(lblSorcery, constraints);
+        
+        for (SEditorUtil.StatTypes s : SEditorUtil.StatTypes.values()) {
+            FLabel label = buildToggleLabel(s, SEditorUtil.StatTypes.TOTAL != s);
+            statLabels.put(s, label);
+            pnlStats.add(label, "w 57px!, h 20px!");
+        }
+        
+        statLabels.get(SEditorUtil.StatTypes.TOTAL).setToolTipText("Total cards (click to toggle all filters)");
 
         pnlAddButtons.setOpaque(false);
         pnlAddButtons.add(btnAdd, "w 30%!, h 30px!, gap 0 0 5px 5px");
         pnlAddButtons.add(btnAdd4, "w 30%!, h 30px!, gap 5% 5% 5px 5px");
+        
+        pnlSearch.setOpaque(false);
+        pnlSearch.add(btnAddRestriction, "center, width pref+4");
+        cbSearchMode.addItem("With");
+        cbSearchMode.addItem("Without");
+        pnlSearch.add(cbSearchMode, "center");
+        pnlSearch.add(txfSearch, "pushx, growx");
+        pnlSearch.add(new FLabel.Builder().text("in").build());
+        pnlSearch.add(lblName, "width pref+4");
+        pnlSearch.add(lblType, "width pref+4");
+        pnlSearch.add(lblText, "width pref+4");
+
+        pnlRestrictions.setOpaque(false);
 
         pnlHeader.setOpaque(false);
         pnlHeader.add(lblTitle, "w 100%!, h 100%!");
+        
+        // fill spinner map
+        for (RangeTypes t : RangeTypes.values()) {
+            spinners.put(t, new Pair<FSpinner, FSpinner>(
+                    new FSpinner.Builder().maxValue(10).build(),
+                    new FSpinner.Builder().maxValue(10).build()));
+        }
     }
 
     //========== Overridden from IVDoc
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#getDocumentID()
-     */
     @Override
     public EDocID getDocumentID() {
         return EDocID.EDITOR_CATALOG;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#getTabLabel()
-     */
     @Override
     public DragTab getTabLabel() {
         return tab;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#getLayoutControl()
-     */
     @Override
     public CCardCatalog getLayoutControl() {
         return CCardCatalog.SINGLETON_INSTANCE;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#setParentCell(forge.gui.framework.DragCell)
-     */
     @Override
     public void setParentCell(DragCell cell0) {
         this.parentCell = cell0;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#getParentCell()
-     */
     @Override
     public DragCell getParentCell() {
         return this.parentCell;
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.framework.IVDoc#populate()
-     */
     @Override
     public void populate() {
-        parentCell.getBody().setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 3"));
-        parentCell.getBody().add(pnlHeader, "w 98%!, h 30px!, gap 1% 0 1% 10px");
-        parentCell.getBody().add(pnlStats, "w 96%, h 50px!, gap 2% 0 1% 1%");
-        parentCell.getBody().add(pnlAddButtons, "w 96%!, gap 2% 0 0 0");
-        parentCell.getBody().add(scroller, "w 98%!, h 100% - 35px, gap 1% 0 1% 1%");
+        JPanel parentBody = parentCell.getBody();
+        parentBody.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 3"));
+        parentBody.add(pnlHeader, "w 98%!, h 30px!, gap 1% 1% 0 0");
+        parentBody.add(pnlStats, "w 96%, h 50px!, gap 2% 0 1% 1%");
+        parentBody.add(pnlAddButtons, "w 96%!, gapleft 1%");
+        parentBody.add(pnlSearch, "w 96%, gapleft 1%");
+        parentBody.add(pnlRestrictions, "w 96%, gapleft 1%, gapright push");
+        parentBody.add(scroller, "w 98%!, h 100% - 35px, gap 1% 0 0 1%");
     }
 
     //========== Overridden from ITableContainer
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#setTableView()
-     */
     @Override
     public void setTableView(final JTable tbl0) {
         this.tblCards = tbl0;
         scroller.setViewportView(tblCards);
     }
 
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblTotal()
-     */
     @Override
-    public JLabel getLblTotal() { return lblTotal; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblBlack()
-     */
-    @Override
-    public JLabel getLblBlack() { return lblBlack; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblBlue()
-     */
-    @Override
-    public JLabel getLblBlue() { return lblBlue; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblGreen()
-     */
-    @Override
-    public JLabel getLblGreen() { return lblGreen; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblRed()
-     */
-    @Override
-    public JLabel getLblRed() { return lblRed; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblWhite()
-     */
-    @Override
-    public JLabel getLblWhite() { return lblWhite; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblColorless()
-     */
-    @Override
-    public JLabel getLblColorless() { return lblColorless; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblArtifact()
-     */
-    @Override
-    public JLabel getLblArtifact() { return lblArtifact; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblEnchantment()
-     */
-    @Override
-    public JLabel getLblEnchantment() { return lblEnchantment; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblCreature()
-     */
-    @Override
-    public JLabel getLblCreature() { return lblCreature; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblSorcery()
-     */
-    @Override
-    public JLabel getLblSorcery() { return lblSorcery; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblInstant()
-     */
-    @Override
-    public JLabel getLblInstant() { return lblInstant; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblPlaneswalker()
-     */
-    @Override
-    public JLabel getLblPlaneswalker() { return lblPlaneswalker; }
-
-    /* (non-Javadoc)
-     * @see forge.gui.deckeditor.views.ITableContainer#getLblLand()
-     */
-    @Override
-    public JLabel getLblLand() { return lblLand; }
+    public FLabel getStatLabel(SEditorUtil.StatTypes s) {
+        return statLabels.get(s);
+    }
 
     //========== Accessor/mutator methods
+    public JPanel getPnlHeader()     { return pnlHeader;     }
+    public FLabel getLblTitle()      { return lblTitle;      }
+    public JPanel getPnlAddButtons() { return pnlAddButtons; }
+    public FLabel getBtnAdd()        { return btnAdd;        }
+    public FLabel getBtnAdd4()       { return btnAdd4;       }
+    public FLabel getLblName()       { return lblName;       }
+    public FLabel getLblType()       { return lblType;       }
+    public FLabel getLblText()       { return lblText;       }
+    
+    public FLabel getBtnAddRestriction() { return btnAddRestriction; }
+    public JComboBox getCbSearchMode()   { return cbSearchMode;      }
+    public JTextField getTxfSearch()     { return txfSearch;         }
 
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getLblTitle() {
-        return lblTitle;
+    public Map<SEditorUtil.StatTypes, FLabel> getStatLabels() {
+        return statLabels;
     }
-
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getBtnAdd() {
-        return btnAdd;
+    public Map<RangeTypes, Pair<FSpinner, FSpinner>> getSpinners() {
+        return spinners;
     }
-
-    /** @return {@link javax.swing.JLabel} */
-    public JLabel getBtnAdd4() {
-        return btnAdd4;
-    }
-
-    /** @return {@link javax.swing.JPanel} */
-    public JPanel getPnlHeader() {
-        return pnlHeader;
-    }
-
-    /** @return {@link javax.swing.JPanel} */
-    public JPanel getPnlStats() {
-        return pnlStats;
-    }
-
-    /** @return {@link javax.swing.JPanel} */
-    public JPanel getPnlAddButtons() {
-        return pnlAddButtons;
-    }
-
+    
     //========== Other methods
-
-    private JLabel buildLabel(final ImageIcon icon0) {
-        final JLabel lbl = new FLabel.Builder().text("0")
-                .icon(icon0).iconScaleAuto(false)
-                .fontSize(11)
+    private FLabel buildToggleLabel(SEditorUtil.StatTypes s, boolean selectable) {
+        return new FLabel.Builder()
+                .icon(s.img).iconScaleAuto(false)
+                .text("0").fontSize(11)
+                .tooltip(s.toLabelString())
+                .hoverable(true).selectable(selectable).selected(selectable)
                 .build();
+    }
 
-            return lbl;
+    @SuppressWarnings("serial")
+    public void addRestrictionWidget(JComponent component, final Command onRemove) {
+        final JPanel pnl = new JPanel(new MigLayout("insets 2, gap 2, h 30!"));
+
+        pnl.setOpaque(false);
+        pnl.setBorder(BorderFactory.createMatteBorder(1, 2, 1, 2, FSkin.getColor(FSkin.Colors.CLR_TEXT)));
+        
+        final Container parent = pnlRestrictions.getParent();
+        
+        pnl.add(component, "h 30!, center");
+        pnl.add(new FLabel.Builder().text("X").fontSize(10).hoverable(true)
+                .tooltip("Remove filter").cmdClick(new Command() {
+                    @Override
+                    public void execute() {
+                        pnlRestrictions.remove(pnl);
+                        pnlRestrictions.validate();
+                        parent.validate();
+                        parent.repaint();
+                        
+                        onRemove.execute();
+                    }
+                }).build(), "top");
+
+        pnlRestrictions.add(pnl, "h 30!");
+
+        pnlRestrictions.validate();
+        parent.validate();
+        parent.repaint();
+    }
+    
+    public JComponent buildRangeRestrictionWidget(RangeTypes t) {
+        JPanel pnl = new JPanel(new MigLayout("insets 0, gap 2"));
+        pnl.setOpaque(false);
+        
+        Pair<FSpinner, FSpinner> s = spinners.get(t);
+        pnl.add(s.a, "w 45!");
+        pnl.add(new FLabel.Builder().text("<=").fontSize(11).build());
+        pnl.add(new FLabel.Builder().text(t.toLabelString()).fontSize(11).build());
+        pnl.add(new FLabel.Builder().text("<=").fontSize(11).build());
+        pnl.add(s.b, "w 45!");
+        
+        return pnl;
+    }
+
+    public JComponent buildPlainRestrictionWidget(String label, String tooltip) {
+        return new FLabel.Builder().text(label).tooltip(tooltip).fontSize(11).build();
     }
 }

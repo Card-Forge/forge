@@ -19,6 +19,7 @@ Forge Team
  */
 package forge.gui.deckeditor.tables;
 
+import java.awt.Cursor;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
@@ -225,7 +226,7 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
         header.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(final MouseEvent e) {
-                if (null == header.getResizingColumn()) {
+                if (Cursor.getPredefinedCursor(Cursor.E_RESIZE_CURSOR) != header.getCursor()) {
                     headerClicked(e);
                 }
             }
