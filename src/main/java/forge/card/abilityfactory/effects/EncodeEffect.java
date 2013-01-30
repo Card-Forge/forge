@@ -91,7 +91,7 @@ public class EncodeEffect extends SpellEffect {
         // add trigger
         final int numEncoded = choice.getEncoded().size();
         final StringBuilder cipherTrigger = new StringBuilder();
-        cipherTrigger.append("Mode$ DamageDone | ValidSource$ Card.Self | Execute$ PlayEncoded").append(numEncoded);
+        cipherTrigger.append("Mode$ DamageDone | ValidSource$ Card.Self | ValidTarget$ Player | Execute$ PlayEncoded").append(numEncoded);
         cipherTrigger.append(" | CombatDamage$ True | OptionalDecider$ You | TriggerDescription$ ");
         cipherTrigger.append("Whenever CARDNAME deals combat damage to a player, its controller may cast a copy of ");
         cipherTrigger.append(movedCard).append(" without paying its mana cost.");
