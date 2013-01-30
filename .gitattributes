@@ -10947,6 +10947,7 @@ res/cardsfolder/t/tree_of_redemption.txt -text
 res/cardsfolder/t/tree_of_tales.txt svneol=native#text/plain
 res/cardsfolder/t/treefolk_harbinger.txt svneol=native#text/plain
 res/cardsfolder/t/treefolk_healer.txt svneol=native#text/plain
+res/cardsfolder/t/treefolk_mystic.txt -text
 res/cardsfolder/t/treefolk_seedlings.txt svneol=native#text/plain
 res/cardsfolder/t/treespring_lorian.txt svneol=native#text/plain
 res/cardsfolder/t/treetop_bracers.txt svneol=native#text/plain
@@ -11945,6 +11946,7 @@ res/cardsfolder/w/wolfir_avenger.txt -text
 res/cardsfolder/w/wolfir_silverheart.txt -text
 res/cardsfolder/w/wolverine_pack.txt svneol=native#text/plain
 res/cardsfolder/w/wonder.txt svneol=native#text/plain
+res/cardsfolder/w/wood_elemental.txt -text
 res/cardsfolder/w/wood_elves.txt svneol=native#text/plain
 res/cardsfolder/w/wood_sage.txt -text
 res/cardsfolder/w/woodcloaker.txt svneol=native#text/plain
