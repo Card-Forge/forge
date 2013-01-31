@@ -78,7 +78,9 @@ public class ChooseCardEffect extends SpellEffect {
                     if (p.isHuman()) {
                         final String choiceTitle = sa.hasParam("ChoiceTitle") ? sa.getParam("ChoiceTitle") : "Choose a card ";
                         Card o;
-                        if (sa.hasParam("Mandatory")) {
+                        if (sa.hasParam("AtRandom")) {
+                            o = CardUtil.getRandom(choices);
+                        } else if (sa.hasParam("Mandatory")) {
                             o = GuiChoose.one(choiceTitle, choices);
                         } else {
                             o = GuiChoose.oneOrNone(choiceTitle, choices);
