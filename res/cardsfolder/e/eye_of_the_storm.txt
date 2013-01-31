@@ -6,6 +6,10 @@ T:Mode$ SpellCast | ValidCard$ Card.Instant,Card.Sorcery | Execute$ TrigExileSpe
 SVar:TrigExileSpell:AB$ ChangeZone | Cost$ 0 | Defined$ TriggeredCard | Origin$ Stack | Destination$ Exile | Fizzle$ True | RememberChanged$ True | SubAbility$ DBPlaySpell
 SVar:DBPlaySpell:DB$ RepeatEach | UseImprinted$ True | RepeatCards$ Card.IsRemembered | ChooseOrder$ True | Zone$ Exile | RepeatSubAbility$ DBPlay
 SVar:DBPlay:DB$ Play | Defined$ Imprinted | Controller$ TriggeredCardController | WithoutManaCost$ True | CopyCard$ True | Optional$ True
+T:Mode$ ChangesZone | Origin$ Exile | Destination$ Any | Static$ True | ValidCard$ Card.IsRemembered | Execute$ DBForget
+SVar:DBForget:DB$ Pump | Defined$ TriggeredCard | ForgetObjects$ TriggeredCard
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
+SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
 SVar:RemAIDeck:True
 SVar:RemRandomDeck:True
 SVar:Rarity:Rare
