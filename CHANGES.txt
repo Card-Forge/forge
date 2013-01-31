@@ -274,6 +274,45 @@ Fixes/Features:
 - Added SVar:RemAIDeck:True to 2 more cards.
 - Fixed Dread Slaver.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- get interval filters working
+- merge latest trunk
+- add note to tooltip that identical cards from other sets match set filters
+- split controller logic off from the view where it was prototyped
+- Cipher will now only trigger when damage is dealt to players.
+- merge latest trunk
+- Fixed Deck Editor editing Draft/Sealed decks.
+- merge from trunk
+- fixed resize cursor not appearing when hovering between columns in table headers
+- added forge-specific spinner widget (FSpinner)
+- allowed labels to have their toggle state read externally and added configuration to set whether the onClick command is executed on mouse button down or mouse button up (FLabel)
+- added builder pattern to FTextField and autoset properties to common values
+- fixed header comments in WrapLayout
+- renamed DialogCustomFormat to the more generic DialogChooseSets since I use it now from the filters too; extended its functionality to run a specified command on ok button click
+- removed Filters dockable panel
+- added old filters functionality to the stats buttons above the catalog table (stats can no longer be removed via a preference setting)
+- combined scattered metadata about the filters (e.g. icon, label, filter predicate) into a single enum
+- rewrote filter utility functions to not have any side effects (they now use no global data/singletons)
+- added "Owned" column to spell shop catalog, indicating number of cards already owned by player (can remove column with preference)
+- don't count the "click" as a sort command when resizing a column
+- exposed top-level main world custom format in QuestController -- other format-retrieving methods would be masked by the current world selection
+- added utility fn to TextUtils to create a (locale-independent) Title out of an ENUM
+- added a templated Pair<T, V> utility class for ad-hoc two-value parameter returning
+- prevented invalid enum values in editor_preferred.xml from causing errors
+- prevent invalid properties from letting the deck editor load
+- check in a new font for the default skin -- the existing one does not have vertical centering capabilities making the text on all labels permanently top-aligned -- will discuss on forum before making permanent
+- remove merged branch
+- revert r19291 for now -- it was preventing the catalog from updating in the quest deck editor and spell shop
+- prevent sealed mode from crashing
+- reapply the filters after the models have been initiated for all modes
+- fix targeting layer /properly/
+- add full catalog view to spell shop so players can compare their libraries to the full list of available cards; this way they can determine how close they are to completing a set
+- Fixed Overlaid Terrain
+- Fixed Nightveil Specter (when the exiled card changes zone, remove it from the remembered list)
+- make room so the sorcery toggle filter shows up
+- Fixed Dragon Appeasement
+- Added cleanup to some cards
+- allow filtering to a specific set, disallowing reprints in other sets
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -320,6 +359,10 @@ Godo, Bandit Warlord
 Helm of Kaldra
 Treefolk Mystic
 Wood Elemental
+Kill-Suit Cultist
+Skyship Weatherlight
+Spelljack
+Muse Vessel
 
 
 Added the following new Gatecrash cards:
