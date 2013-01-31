@@ -175,7 +175,8 @@ public class PumpEffect extends SpellEffect {
         final Target tgt = sa.getTarget();
         List<Player> tgtPlayers = new ArrayList<Player>();
         String pumpRemembered = null;
-
+        String pumpForget = null;
+        
         final List<String> keywords = sa.hasParam("KW") ? Arrays.asList(sa.getParam("KW").split(" & ")) : new ArrayList<String>();
         final int a = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumAtt"), sa);
         final int d = AbilityFactory.calculateAmount(sa.getSourceCard(), sa.getParam("NumDef"), sa);
@@ -225,6 +226,18 @@ public class PumpEffect extends SpellEffect {
             }
         }
 
+        if (sa.hasParam("ForgetObjects")) {
+            pumpForget = sa.getParam("ForgetObjects");
+        }
+
+        if (pumpForget != null) {
+            for (final Object o : AbilityFactory.getDefinedObjects(sa.getSourceCard(), pumpForget, sa)) {
+                if (sa.getSourceCard().getRemembered().contains(o)) {
+                    sa.getSourceCard().removeRemembered(o);
+                }
+            }
+        }
+        
         if (sa.hasParam("Radiance")) {
             for (final Card c : CardUtil.getRadiance(sa.getSourceCard(), tgtCards.get(0), sa.getParam("ValidTgts")
                     .split(","))) {
