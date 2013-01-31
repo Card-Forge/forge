@@ -3,7 +3,7 @@ ManaCost:2 G G
 Types:Enchantment
 Text:no text
 K:ETBReplacement:Other:TrigSac
-SVar:TrigSac:AB$ SacrificeAll | Cost$ 0 | ValidCards$ Land.YouCtrl | SpellDescription$ As CARDNAME enters the battlefield, sacrifice all lands you control.
+SVar:TrigSac:DB$ SacrificeAll | ValidCards$ Land.YouCtrl | SpellDescription$ As CARDNAME enters the battlefield, sacrifice all lands you control.
 S:Mode$ Continuous | Affected$ Land.YouCtrl | AddAbility$ AnyMana | Description$ Lands you control have "Tap: Add two mana of any one color to your mana pool."
 SVar:AnyMana:AB$ Mana | Cost$ T | Produced$ Any | Amount$ 2 | SpellDescription$ Add two mana of any one color to your mana pool.
 SVar:RemAIDeck:True
