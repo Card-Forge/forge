@@ -13,6 +13,7 @@ import javax.swing.Timer;
 import javax.swing.border.LineBorder;
 
 import net.miginfocom.swing.MigLayout;
+import forge.gui.match.TargetingOverlay;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FOverlay;
 import forge.gui.toolbox.FPanel;
@@ -28,9 +29,8 @@ public final class SOverlayUtils {
 
     /** 
      * A standardized overlay for a game start condition.
-     * @return {@link javax.swing.JPanel}
      */
-    public static JPanel startGameOverlay() {
+    public static void startGameOverlay() {
         final JPanel overlay = SOverlayUtils.genericOverlay();
         final int w = overlay.getWidth();
         final int h = overlay.getHeight();
@@ -50,8 +50,6 @@ public final class SOverlayUtils {
                 .fontSize(22).build(), "h 40px!, align center");
 
         overlay.add(pnl);
-
-        return FOverlay.SINGLETON_INSTANCE.getPanel();
     }
 
     /**
@@ -119,19 +117,26 @@ public final class SOverlayUtils {
         return overlay;
     }
 
-    /** @return {@link javax.swing.JPane} */
-    public static JPanel showOverlay() {
+    public static void showOverlay() {
         FOverlay.SINGLETON_INSTANCE.getPanel().setVisible(true);
-        return FOverlay.SINGLETON_INSTANCE.getPanel();
     }
 
     /**
      * Removes child components and closes overlay.
-     * @return {@link javax.swing.JPane}
      */
-    public static JPanel hideOverlay() {
+    public static void hideOverlay() {
         FOverlay.SINGLETON_INSTANCE.getPanel().removeAll();
         FOverlay.SINGLETON_INSTANCE.getPanel().setVisible(false);
-        return FOverlay.SINGLETON_INSTANCE.getPanel();
+    }
+
+    public static void showTargetingOverlay() {
+        TargetingOverlay.SINGLETON_INSTANCE.getPanel().setVisible(true);
+    }
+
+    /**
+     * Removes child components and closes overlay.
+     */
+    public static void hideTargetingOverlay() {
+        TargetingOverlay.SINGLETON_INSTANCE.getPanel().setVisible(false);
     }
 }

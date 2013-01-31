@@ -63,6 +63,8 @@ public enum TargetingOverlay {
      */
     private TargetingOverlay() {
         pnl.setOpaque(false);
+        pnl.setVisible(false);
+        pnl.setFocusTraversalKeysEnabled(false);
         pnl.setBackground(FSkin.getColor(FSkin.Colors.CLR_ZEBRA));
     }
 

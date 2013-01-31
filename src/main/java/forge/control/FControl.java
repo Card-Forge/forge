@@ -35,6 +35,7 @@ import javax.swing.WindowConstants;
 import forge.Singletons;
 import forge.control.KeyboardShortcuts.Shortcut;
 import forge.game.player.Player;
+import forge.gui.SOverlayUtils;
 import forge.gui.deckeditor.CDeckEditorUI;
 import forge.gui.deckeditor.VDeckEditorUI;
 import forge.gui.framework.SOverflowUtil;
@@ -204,6 +205,7 @@ public enum FControl {
         // Fire up new state
         switch (i0) {
             case HOME_SCREEN:
+                SOverlayUtils.hideTargetingOverlay();
                 VHomeUI.SINGLETON_INSTANCE.populate();
                 CHomeUI.SINGLETON_INSTANCE.initialize();
                 FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
@@ -216,6 +218,7 @@ public enum FControl {
                 FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
                 FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(FSkin.getIcon(FSkin.Backgrounds.BG_MATCH));
                 Singletons.getView().getFrame().addWindowListener(waConcede);
+                SOverlayUtils.showTargetingOverlay();
                 break;
 
             case DECK_EDITOR_CONSTRUCTED:
@@ -223,6 +226,7 @@ public enum FControl {
             case DECK_EDITOR_QUEST:
             case QUEST_CARD_SHOP:
             case DRAFTING_PROCESS:
+                SOverlayUtils.hideTargetingOverlay();
                 VDeckEditorUI.SINGLETON_INSTANCE.populate();
                 FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(true);
                 FView.SINGLETON_INSTANCE.getPnlInsets().setForegroundImage(new ImageIcon());
@@ -230,6 +234,7 @@ public enum FControl {
                 break;
 
             case QUEST_BAZAAR:
+                SOverlayUtils.hideTargetingOverlay();
                 display.add(Singletons.getView().getViewBazaar(), JLayeredPane.DEFAULT_LAYER);
                 FView.SINGLETON_INSTANCE.getPnlInsets().setVisible(false);
                 sizeChildren();
@@ -270,9 +275,11 @@ public enum FControl {
         Component[] children = display.getComponentsInLayer(JLayeredPane.DEFAULT_LAYER);
         if (children.length != 0) { children[0].setSize(display.getSize()); }
 
-        for (Component child : display.getComponentsInLayer(JLayeredPane.MODAL_LAYER)) {
-            child.setSize(display.getSize());
-        }
+        children = display.getComponentsInLayer(FView.TARGETING_LAYER);
+        if (children.length != 0) { children[0].setSize(display.getSize()); }
+
+        children = display.getComponentsInLayer(JLayeredPane.MODAL_LAYER);
+        if (children.length != 0) { children[0].setSize(display.getSize()); }
     }
 
     /** @return {@link forge.game.player.Player} */
