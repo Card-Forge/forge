@@ -29,6 +29,7 @@ import javax.swing.JOptionPane;
 
 import com.google.common.base.Function;
 
+import forge.Command;
 import forge.Singletons;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
@@ -45,6 +46,7 @@ import forge.gui.home.quest.CSubmenuQuestDecks;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.item.BoosterPack;
+import forge.item.CardDb;
 import forge.item.CardPrinted;
 import forge.item.FatPack;
 import forge.item.InventoryItem;
@@ -66,14 +68,30 @@ import forge.quest.io.ReadPriceList;
  */
 public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, DeckBase> {
     private final JLabel creditsLabel = new FLabel.Builder()
-        .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_COINSTACK))
-        .fontSize(15).build();
+            .icon(FSkin.getIcon(FSkin.QuestIcons.ICO_COINSTACK))
+            .fontSize(15).build();
+    
+    // TODO: move these to the view where they belong
     private final JLabel sellPercentageLabel = new FLabel.Builder().text("0")
             .fontSize(11)
+            .build();
+    @SuppressWarnings("serial")
+    private final JLabel fullCatalogToggle = new FLabel.Builder().text("See full catalog")
+            .fontSize(14).hoverable(true).cmdClick(new Command() {
+                @Override
+                public void execute() {
+                    toggleFullCatalog();
+                }
+            })
             .build();
 
     private double multiplier;
     private final QuestController questData;
+    
+    private ItemPoolView<InventoryItem> cardsForSale;
+    private final ItemPool<InventoryItem> fullCatalogCards =
+            ItemPool.createFrom(CardDb.instance().getAllTraditionalCards(), InventoryItem.class);
+    private boolean showingFullCatalog = false;
 
     // get pricelist:
     private final ReadPriceList r = new ReadPriceList();
@@ -108,11 +126,22 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         this.setTableDeck(tblDeck);
     }
 
-    /**
-     * <p>
-     * setup.
-     * </p>
-     */
+    private void toggleFullCatalog() {
+        showingFullCatalog = !showingFullCatalog;
+        
+        if (showingFullCatalog) {
+            this.getTableCatalog().setDeck(fullCatalogCards);
+            VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setEnabled(false);
+            VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setEnabled(false);
+            fullCatalogToggle.setText("Go back to spell shop");
+        } else {
+            this.getTableCatalog().setDeck(cardsForSale);
+            VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setEnabled(true);
+            VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setEnabled(true);
+            fullCatalogToggle.setText("See full catalog");
+        }
+    }
+    
     private void setup() {
         final List<TableColumnInfo<InventoryItem>> columnsCatalog = SColumnUtil.getCatalogDefaultColumns();
         final List<TableColumnInfo<InventoryItem>> columnsDeck = SColumnUtil.getDeckDefaultColumns();
@@ -259,6 +288,11 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
      */
     @Override
     public void addCard() {
+        if (showingFullCatalog) {
+            // no "buying" from the full catalog
+            return;
+        }
+        
         final InventoryItem item = this.getTableCatalog().getSelectedCard();
         if (item == null) {
             return;
@@ -319,6 +353,10 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
      */
     @Override
     public void removeCard() {
+        if (showingFullCatalog) {
+            // no "selling" to the full catalog
+            return;
+        }
         final InventoryItem item = this.getTableDeck().getSelectedCard();
         if ((item == null) || !(item instanceof CardPrinted)) {
             return;
@@ -366,17 +404,17 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
 
         this.multiplier = this.questData.getCards().getSellMultiplier();
 
-        ItemPoolView<InventoryItem> forSale = this.questData.getCards().getShopList();
-        if (forSale.isEmpty()) {
+        cardsForSale = this.questData.getCards().getShopList();
+        if (cardsForSale.isEmpty()) {
             this.questData.getCards().generateCardsInShop();
-            forSale = this.questData.getCards().getShopList();
+            cardsForSale = this.questData.getCards().getShopList();
         }
 
         // newCardsList = questData.getCards().getNewCards();
         final ItemPool<InventoryItem> ownedItems = new ItemPool<InventoryItem>(InventoryItem.class);
         ownedItems.addAll(this.questData.getCards().getCardpool().getView());
 
-        this.getTableCatalog().setDeck(forSale);
+        this.getTableCatalog().setDeck(cardsForSale);
         this.getTableDeck().setDeck(ownedItems);
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().remove(VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4());
@@ -392,6 +430,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             maxSellingPrice = String.format("Maximum selling price is %d credits.", maxSellPrice);
         }
         VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().remove(VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4());
+        VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().add(fullCatalogToggle, 0);
         VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().add(sellPercentageLabel);
         this.sellPercentageLabel.setText("<html>Selling cards at " + formatter.format(multiPercent)
                 + "% of their value.<br>" + maxSellingPrice + "</html>");
@@ -402,11 +441,16 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
      */
     @Override
     public boolean exit() {
+        if (showingFullCatalog) {
+            toggleFullCatalog();
+        }
+        
         Singletons.getModel().getQuest().save();
         CSubmenuQuestDecks.SINGLETON_INSTANCE.update();
 
         // undo Card Shop Specifics
         VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().remove(sellPercentageLabel);
+        VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().remove(fullCatalogToggle);
         VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().add(VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4());
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().remove(creditsLabel);

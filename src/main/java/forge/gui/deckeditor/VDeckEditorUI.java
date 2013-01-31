@@ -36,10 +36,10 @@ public enum VDeckEditorUI implements IVTopLevelUI {
             @Override
             public Void doInBackground() {
                 SLayoutIO.loadLayout(null);
-                CCardCatalog.SINGLETON_INSTANCE.applyCurrentFilter();
                 return null;
             }
         };
+        CCardCatalog.SINGLETON_INSTANCE.applyCurrentFilter();
         w.execute();
     }
 }

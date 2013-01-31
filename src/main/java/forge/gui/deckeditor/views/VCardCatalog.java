@@ -187,8 +187,8 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         JPanel parentBody = parentCell.getBody();
         parentBody.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 3"));
         parentBody.add(pnlHeader, "w 98%!, h 30px!, gap 1% 1% 0 0");
-        parentBody.add(pnlStats, "w 96%, h 50px!, gap 2% 0 1% 1%");
-        parentBody.add(pnlAddButtons, "w 96%!, gapleft 1%");
+        parentBody.add(pnlStats, "w 96%, h 50px!, gap 1% 1% 0 0");
+        parentBody.add(pnlAddButtons, "w 96%!, gap 1% 1% 1% 1%");
         parentBody.add(pnlSearch, "w 96%, gapleft 1%");
         parentBody.add(pnlRestrictions, "w 96%, gapleft 1%, gapright push");
         parentBody.add(scroller, "w 98%!, h 100% - 35px, gap 1% 0 0 1%");
