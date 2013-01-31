@@ -117,12 +117,12 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         scroller.getViewport().setBorder(null);
 
         pnlStats.setOpaque(false);
-        pnlStats.setLayout(new MigLayout("insets 0, gap 5px, ax center, wrap 7"));
+        pnlStats.setLayout(new MigLayout("insets 0, gap 5px, ax center, wrap 8"));
         
         for (SEditorUtil.StatTypes s : SEditorUtil.StatTypes.values()) {
             FLabel label = buildToggleLabel(s, SEditorUtil.StatTypes.TOTAL != s);
             statLabels.put(s, label);
-            pnlStats.add(label, "w 57px!, h 20px!");
+            pnlStats.add(label, "w 57px!, h 20px!" + (9 == statLabels.size() ? ", skip" : ""));
         }
         
         statLabels.get(SEditorUtil.StatTypes.TOTAL).setToolTipText("Total cards (click to toggle all filters)");

@@ -109,7 +109,7 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
     private final JLabel lblTitle = new FLabel.Builder().text("Title")
             .fontSize(14).build();
 
-    private final JPanel pnlStats = new JPanel();
+    private final JPanel pnlStats = new JPanel(new MigLayout("insets 0, gap 5px, ax center, wrap 8"));
     private final Map<SEditorUtil.StatTypes, FLabel> statLabels =
             new HashMap<SEditorUtil.StatTypes, FLabel>();
 
@@ -144,11 +144,10 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
         scroller.getViewport().setBorder(null);
 
         pnlStats.setOpaque(false);
-        pnlStats.setLayout(new MigLayout("insets 0, gap 5px, ax center, wrap 7"));
         for (SEditorUtil.StatTypes s : SEditorUtil.StatTypes.values()) {
             FLabel label = buildLabel(s);
             statLabels.put(s, label);
-            pnlStats.add(label, "w 55px!, h 20px!");
+            pnlStats.add(label, "w 57px!, h 20px!" + (9 == statLabels.size() ? ", skip" : ""));
         }
 
         pnlRemoveButtons.setOpaque(false);
