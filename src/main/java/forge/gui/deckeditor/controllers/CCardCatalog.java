@@ -21,6 +21,8 @@ import javax.swing.KeyStroke;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
@@ -44,7 +46,6 @@ import forge.item.InventoryItem;
 import forge.item.ItemPredicate;
 import forge.quest.QuestWorld;
 import forge.quest.data.GameFormatQuest;
-import forge.util.Pair;
 
 /** 
  * Controls the "card catalog" panel in the deck editor UI.
@@ -255,8 +256,8 @@ public enum CCardCatalog implements ICDoc {
         
         // ensure mins can's exceed maxes and maxes can't fall below mins
         for (Pair<FSpinner, FSpinner> sPair : VCardCatalog.SINGLETON_INSTANCE.getSpinners().values()) {
-            final FSpinner min = sPair.a;
-            final FSpinner max = sPair.b;
+            final FSpinner min = sPair.getLeft();
+            final FSpinner max = sPair.getRight();
             
             min.addChangeListener(new ChangeListener() {
                 @Override
@@ -367,13 +368,13 @@ public enum CCardCatalog implements ICDoc {
     
     @SuppressWarnings("serial")
     private <T> void addRestriction(Pair<JComponent, Predicate<CardPrinted>> restriction, final Set<T> activeSet, final T key) {
-        final Predicate<CardPrinted> predicate = restriction.b;
+        final Predicate<CardPrinted> predicate = restriction.getRight();
         
         if (null != predicate && activePredicates.contains(predicate)) {
             return;
         }
         
-        VCardCatalog.SINGLETON_INSTANCE.addRestrictionWidget(restriction.a, new Command() {
+        VCardCatalog.SINGLETON_INSTANCE.addRestrictionWidget(restriction.getLeft(), new Command() {
             @Override
             public void execute() {
                 if (null != key) {
@@ -397,11 +398,10 @@ public enum CCardCatalog implements ICDoc {
 
     private Pair<JComponent, Predicate<CardPrinted>> buildRangeRestriction(RangeTypes t) {
         Pair<FSpinner, FSpinner> s = VCardCatalog.SINGLETON_INSTANCE.getSpinners().get(t);
-        s.a.setValue(0);
-        s.b.setValue(10);
+        s.getLeft().setValue(0);
+        s.getRight().setValue(10);
         
-        return new Pair<JComponent, Predicate<CardPrinted>>(
-                VCardCatalog.SINGLETON_INSTANCE.buildRangeRestrictionWidget(t), null);
+        return Pair.of(VCardCatalog.SINGLETON_INSTANCE.buildRangeRestrictionWidget(t), null);
     }
     
     private String buildSearchRestrictionText(String text, boolean isInverse, boolean wantName, boolean wantType, boolean wantText) {
@@ -434,7 +434,7 @@ public enum CCardCatalog implements ICDoc {
         
         VCardCatalog.SINGLETON_INSTANCE.getTxfSearch().setText("");
         
-        return new Pair<JComponent, Predicate<CardPrinted>>(
+        return Pair.of(
                 VCardCatalog.SINGLETON_INSTANCE.buildPlainRestrictionWidget(shortText, fullText),
                 SFilterUtil.buildTextFilter(text, isInverse, wantName, wantType, wantText));
     }
@@ -495,7 +495,7 @@ public enum CCardCatalog implements ICDoc {
         }
         tooltip.append("</html>");
         
-        return new Pair<JComponent, Predicate<CardPrinted>>(
+        return Pair.of(
                 VCardCatalog.SINGLETON_INSTANCE.buildPlainRestrictionWidget(displayName, tooltip.toString()),
                 allowReprints ? format.getFilterRules() : format.getFilterPrinted());
     }

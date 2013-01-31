@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.tuple.Pair;
+
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
@@ -15,7 +17,6 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSpinner;
 import forge.item.CardPrinted;
 import forge.util.ComparableOp;
-import forge.util.Pair;
 import forge.util.PredicateString.StringOp;
 
 /** 
@@ -131,7 +132,8 @@ public class SFilterUtil {
             Map<RangeTypes, Pair<FSpinner, FSpinner>> spinners, VCardCatalog.RangeTypes field) {
         Pair<FSpinner, FSpinner> sPair = spinners.get(field);
         Predicate<CardRules> fieldFilter = getCardRulesFieldPredicate(
-                Integer.valueOf(sPair.a.getValue().toString()), Integer.valueOf(sPair.b.getValue().toString()), field.cardField);
+                Integer.valueOf(sPair.getLeft().getValue().toString()),
+                Integer.valueOf(sPair.getRight().getValue().toString()), field.cardField);
 
         if (null != fieldFilter && VCardCatalog.RangeTypes.CMC != field)
         {

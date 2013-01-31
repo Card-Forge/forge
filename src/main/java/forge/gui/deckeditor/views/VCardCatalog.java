@@ -14,6 +14,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import net.miginfocom.swing.MigLayout;
+
+import org.apache.commons.lang3.tuple.Pair;
+
 import forge.Command;
 import forge.card.CardRulesPredicates;
 import forge.gui.WrapLayout;
@@ -27,7 +30,6 @@ import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.gui.toolbox.FSpinner;
 import forge.gui.toolbox.FTextField;
-import forge.util.Pair;
 import forge.util.TextUtil;
 
 /** 
@@ -149,7 +151,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         
         // fill spinner map
         for (RangeTypes t : RangeTypes.values()) {
-            spinners.put(t, new Pair<FSpinner, FSpinner>(
+            spinners.put(t, Pair.of(
                     new FSpinner.Builder().maxValue(10).build(),
                     new FSpinner.Builder().maxValue(10).build()));
         }
@@ -272,11 +274,11 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         pnl.setOpaque(false);
         
         Pair<FSpinner, FSpinner> s = spinners.get(t);
-        pnl.add(s.a, "w 45!");
+        pnl.add(s.getLeft(), "w 45!");
         pnl.add(new FLabel.Builder().text("<=").fontSize(11).build());
         pnl.add(new FLabel.Builder().text(t.toLabelString()).fontSize(11).build());
         pnl.add(new FLabel.Builder().text("<=").fontSize(11).build());
-        pnl.add(s.b, "w 45!");
+        pnl.add(s.getRight(), "w 45!");
         
         return pnl;
     }
