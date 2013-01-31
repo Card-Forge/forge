@@ -60,12 +60,35 @@ public enum CSubmenuQuestData implements ICDoc {
         view.getBtnEmbark().setCommand(
                 new Command() { @Override public void execute() { newQuest(); } });
 
+        // disable the very powerful sets -- they can be unlocked later for a high price
+        final List<String> unselectableSets = new ArrayList<String>();
+        unselectableSets.add("LEA");
+        unselectableSets.add("LEB");
+        unselectableSets.add("MBP");
+        unselectableSets.add("VAN");
+        unselectableSets.add("ARC");
+        unselectableSets.add("PC2");
+        
         view.getBtnCustomFormat().setCommand(new Command() { @Override public void execute() {
-            new DialogChooseSets(customFormatCodes, null);
+            final DialogChooseSets dialog = new DialogChooseSets(customFormatCodes, unselectableSets, false);
+            dialog.setOkCallback(new Runnable() {
+                @Override
+                public void run() {
+                    customFormatCodes.clear();
+                    customFormatCodes.addAll(dialog.getSelectedSets());
+                }
+            });
         } });
 
         view.getBtnPrizeCustomFormat().setCommand(new Command() { @Override public void execute() {
-            new DialogChooseSets(customPrizeFormatCodes, null);
+            final DialogChooseSets dialog = new DialogChooseSets(customPrizeFormatCodes, unselectableSets, false);
+            dialog.setOkCallback(new Runnable() {
+                @Override
+                public void run() {
+                    customPrizeFormatCodes.clear();
+                    customPrizeFormatCodes.addAll(dialog.getSelectedSets());
+                }
+            });
         } });
     }
 

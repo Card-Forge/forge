@@ -66,10 +66,10 @@ public class GameFormat {
         this.bannedCardNames_ro = Collections.unmodifiableList(bannedCardNames);
 
         this.filterRules = this.buildFilterRules();
-        this.filterPrinted = this.buildFilterPritned();
+        this.filterPrinted = this.buildFilterPrinted();
     }
 
-    private Predicate<CardPrinted> buildFilterPritned() {
+    private Predicate<CardPrinted> buildFilterPrinted() {
         final Predicate<CardPrinted> banNames = CardPrinted.Predicates.namesExcept(this.bannedCardNames);
         if (this.allowedSetCodes == null || this.allowedSetCodes.isEmpty()) {
             return banNames;

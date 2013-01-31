@@ -157,7 +157,7 @@ public enum CCardCatalog implements ICDoc {
                     addMenuItem(fmt, f.getName(), !isActive(activeFormats, f), null, new Command() {
                         @Override
                         public void execute() {
-                            addRestriction(buildFormatRestriction(f.toString(), f), activeFormats, f);
+                            addRestriction(buildFormatRestriction(f.toString(), f, true), activeFormats, f);
                         }
                     });
                 }
@@ -165,15 +165,15 @@ public enum CCardCatalog implements ICDoc {
                 addMenuItem(popup, "Edition (set)...", true, null, new Command() {
                     @Override
                     public void execute() {
-                        final List<String> setCodes = new ArrayList<String>();
-                        new DialogChooseSets(setCodes, new Runnable() {
+                        final DialogChooseSets dialog = new DialogChooseSets(null, null, true);
+                        dialog.setOkCallback(new Runnable() {
                             @Override
                             public void run() {
+                                List<String> setCodes = dialog.getSelectedSets();
+                                
                                 if (setCodes.isEmpty()) {
                                     return;
                                 }
-                                
-                                GameFormat f = new GameFormat(null, setCodes, null);
                                 
                                 StringBuilder label = new StringBuilder("Sets:");
                                 boolean truncated = false;
@@ -195,7 +195,7 @@ public enum CCardCatalog implements ICDoc {
                                     label.append("...");
                                 }
                                 
-                                addRestriction(buildFormatRestriction(label.toString(), f), null, null);
+                                addRestriction(buildSetRestriction(label.toString(), setCodes, dialog.getWantReprints()), null, null);
                             }
                         });
                     }
@@ -438,8 +438,8 @@ public enum CCardCatalog implements ICDoc {
                 VCardCatalog.SINGLETON_INSTANCE.buildPlainRestrictionWidget(shortText, fullText),
                 SFilterUtil.buildTextFilter(text, isInverse, wantName, wantType, wantText));
     }
-
-    private Pair<JComponent, Predicate<CardPrinted>> buildFormatRestriction(String displayName, GameFormat format) {
+    
+    private Pair<JComponent, Predicate<CardPrinted>> buildFormatRestriction(String displayName, GameFormat format, boolean allowReprints) {
         EditionCollection editions = Singletons.getModel().getEditions();
         StringBuilder tooltip = new StringBuilder("<html>Sets:");
         
@@ -467,7 +467,9 @@ public enum CCardCatalog implements ICDoc {
             // chop off last comma
             tooltip.delete(tooltip.length() - 1, tooltip.length());
             
-            tooltip.append("<br><br>Allowing identical cards from other sets");
+            if (allowReprints) {
+                tooltip.append("<br><br>Allowing identical cards from other sets");
+            }
         }
 
         List<String> bannedCards = null == format ? null : format.getBannedCardNames();
@@ -495,15 +497,19 @@ public enum CCardCatalog implements ICDoc {
         
         return new Pair<JComponent, Predicate<CardPrinted>>(
                 VCardCatalog.SINGLETON_INSTANCE.buildPlainRestrictionWidget(displayName, tooltip.toString()),
-                format.getFilterRules());
+                allowReprints ? format.getFilterRules() : format.getFilterPrinted());
     }
     
+    private Pair<JComponent, Predicate<CardPrinted>> buildSetRestriction(String displayName, List<String> setCodes, boolean allowReprints) {
+        return buildFormatRestriction(displayName, new GameFormat(null, setCodes, null), allowReprints);
+    }
+
     private Pair<JComponent, Predicate<CardPrinted>> buildWorldRestriction(QuestWorld world) {
         GameFormatQuest format = world.getFormat();
         if (null == format) {
             // assumes that no world other than the main world will have a null format
             format = Singletons.getModel().getQuest().getMainFormat();
         }
-        return buildFormatRestriction(world.getName(), format);
+        return buildFormatRestriction(world.getName(), format, true);
     }
 }

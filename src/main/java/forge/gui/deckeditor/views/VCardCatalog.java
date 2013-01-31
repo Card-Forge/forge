@@ -74,7 +74,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
     // restriction button and search widgets
     private final JPanel pnlSearch = new JPanel(new MigLayout("insets 0, gap 5px, center"));
     private final FLabel btnAddRestriction = new FLabel.Builder()
-            .text("Filter by")
+            .text("Add filter")
             .tooltip("Filter shown cards by various properties")
             .hoverable(true).opaque(true).reactOnMouseDown(true).build();
     private final JComboBox cbSearchMode = new JComboBox();
@@ -128,11 +128,11 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         statLabels.get(SEditorUtil.StatTypes.TOTAL).setToolTipText("Total cards (click to toggle all filters)");
 
         pnlAddButtons.setOpaque(false);
-        pnlAddButtons.add(btnAdd, "w 30%!, h 30px!, gap 0 0 5px 5px");
+        pnlAddButtons.add(btnAdd, "w 30%!, h 30px!, gap 10 10 5 5");
         pnlAddButtons.add(btnAdd4, "w 30%!, h 30px!, gap 5% 5% 5px 5px");
         
         pnlSearch.setOpaque(false);
-        pnlSearch.add(btnAddRestriction, "center, width pref+4");
+        pnlSearch.add(btnAddRestriction, "center, w pref+6, h pref+6");
         cbSearchMode.addItem("With");
         cbSearchMode.addItem("Without");
         pnlSearch.add(cbSearchMode, "center");

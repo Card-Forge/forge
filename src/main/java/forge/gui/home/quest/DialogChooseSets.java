@@ -1,12 +1,13 @@
 package forge.gui.home.quest;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
@@ -14,145 +15,104 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
 
-import forge.card.CardEdition;
+import net.miginfocom.swing.MigLayout;
 import forge.Singletons;
+import forge.card.CardEdition;
 
-/** 
- * TODO: Write javadoc for this type.
- *
- */
+@SuppressWarnings("serial")
 public class DialogChooseSets extends JDialog {
-
-    private static final long serialVersionUID = 3155211532871888181L;
-    private JScrollPane scrollPane;
-    private final JButton btnOK = new JButton("OK");
-    private final JButton btnCancel = new JButton("Cancel");
-    private final JPanel buttonPanel = new JPanel();
-    private final List<String> customFormat;
-    private final Runnable onOk;
+    private final List<String> selectedSets = new ArrayList<String>();
+    private boolean wantReprints = true;
+    private Runnable okCallback;
+    
     private final List<JCheckBox> choices = new ArrayList<JCheckBox>();
+    private final JCheckBox cbWantReprints = new JCheckBox("Allow compatible reprints from other sets");
 
-
-    /**
-     * Create the dialog.
-     * 
-     * @param userFormat
-     *  GameFormatQuest, the user-defined format to update
-     * 
-     */
-    public DialogChooseSets(List<String> userFormat, Runnable onOk) {
-
-        customFormat = userFormat;
-        this.onOk = onOk;
+    // lists are of set codes (e.g. "2ED")
+    public DialogChooseSets(
+            Collection<String> preselectedSets, Collection<String> unselectableSets, boolean showWantReprintsCheckbox) {
         
-        if (customFormat == null) {
-            throw new RuntimeException("Null GameFormatQuest in DialogCustomFormat");
-        }
-
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        this.setSize(800, 600);
+        this.setLocationRelativeTo(null);
+        this.setTitle("Choose sets");
+        
+        // create a local copy of the editions list so we can sort it
         List<CardEdition> editions = new ArrayList<CardEdition>();
-
         for (CardEdition ce : Singletons.getModel().getEditions()) {
-          if (canChoose(ce.getCode())) {
-              editions.add(ce);
-          }
+            editions.add(ce);
         }
-
         Collections.sort(editions);
         Collections.reverse(editions);
-
-        final int numEditions = editions.size();
-        final int columns = 3;
-        final int rows = numEditions / columns + (numEditions % columns == 0 ? 0 : 1);
-
-
-        int getIdx = 0;
-
-        JPanel p = new JPanel();
-        p.setLayout(new GridLayout(rows, columns, 10, 0));
-
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < columns; col++) {
-                getIdx = row + (col * rows);
-                JCheckBox box;
-                if (getIdx < numEditions) {
-                    CardEdition edition = getIdx < numEditions ? editions.get(getIdx) : null;
-                    box = new JCheckBox(String.format("%s (%s)", edition.getName(), edition.getCode()));
-                    box.setName(edition.getCode());
-                    box.setSelected(customFormat.contains(edition.getCode()));
-                    choices.add(box);
-                } else {
-                    box = new JCheckBox();
-                    box.setEnabled(false);
-                }
-
-                p.add(box);
-            }
-        }
-      scrollPane = new JScrollPane(p);
-
-      getContentPane().add(scrollPane, BorderLayout.CENTER);
-      btnOK.addActionListener(new ActionListener() {
-          @Override
-          public void actionPerformed(final ActionEvent arg0) {
-              updateCustomFormat();
-              dispose();
-          }
-      });
-      buttonPanel.add(btnOK, BorderLayout.WEST);
-      getRootPane().setDefaultButton(btnOK);
-      
-      btnCancel.addActionListener(new ActionListener() {
-          @Override
-          public void actionPerformed(final ActionEvent arg0) {
-              dispose();
-          }
-      });
-      buttonPanel.add(btnCancel, BorderLayout.EAST);
-      getContentPane().add(buttonPanel, BorderLayout.SOUTH);
-
-      this.setSize(600, 450);
-      this.setLocationRelativeTo(null);
-      this.setTitle("Choose sets");
-      this.setVisible(true);
-
-    }
-
-    /**
-     * Make some sets unselectable (currently only Alpha and Beta).
-     * Note that these sets can still be (theoretically) unlocked
-     * later, for an exorbitant price. There'd be nothing to be
-     * gained from allowing these initially (Unlimited already covers
-     * their cardbase), and a lot to be lost (namely, easy early access
-     * to extremely expensive cards...) --BBU
-     *
-     * @param setCode
-     *      String, set code
-     * @return boolean, this set can be selected.
-     * 
-     */
-    private boolean canChoose(final String setCode) {
-        if (setCode == null) {
-            return true;
-        }
-        return !"LEA".equals(setCode) && !"LEB".equals(setCode)
-                && !"MBP".equals(setCode) && !"VAN".equals(setCode)
-                && !"ARC".equals(setCode) && !"PC2".equals(setCode);
-    }
-
-    /**
-     * Update the custom format in accordance with the selections.
-     */
-    void updateCustomFormat() {
-        customFormat.clear();
-        for (JCheckBox box : choices) {
-            if (box.isSelected()) {
-                customFormat.add(box.getName());
-            }
+        
+        JPanel p = new JPanel(new MigLayout("insets 0, gap 0, center, wrap 3"));
+        for (CardEdition ce : editions) {
+            String code = ce.getCode();
+            JCheckBox box = new JCheckBox(String.format("%s (%s)", ce.getName(), code));
+            box.setName(code);
+            box.setSelected(null == preselectedSets ? false : preselectedSets.contains(code));
+            box.setEnabled(null == unselectableSets ? true : !unselectableSets.contains(code));
+            p.add(box);
+            choices.add(box);
         }
         
-        if (null != onOk) {
-            onOk.run();
+        JPanel southPanel = new JPanel(new MigLayout("insets 10, gap 20, ax center"));
+        
+        if (showWantReprintsCheckbox) {
+            southPanel.add(cbWantReprints, "center, span, wrap");
+        }
+        
+        JButton btnOk = new JButton("OK");
+        this.getRootPane().setDefaultButton(btnOk);
+        btnOk.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                handleOk();
+            }
+        });
+
+        JButton btnCancel = new JButton("Cancel");
+        btnCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+
+        southPanel.add(btnOk, "center, w 40%, h 20!");
+        southPanel.add(btnCancel, "center, w 40%, h 20!");
+        
+        p.add(southPanel, "dock south");
+      
+        JScrollPane scrollPane = new JScrollPane(p);
+        getContentPane().add(scrollPane, BorderLayout.CENTER);
+
+        this.setVisible(true);
+    }
+    
+    public void setOkCallback(Runnable onOk) {
+        okCallback = onOk;
+    }
+    
+    // result accessors
+    public List<String> getSelectedSets() { return selectedSets; }
+    public boolean      getWantReprints() { return wantReprints; }
+
+    private void handleOk() {
+        for (JCheckBox box : choices) {
+            if (box.isSelected()) {
+                selectedSets.add(box.getName());
+            }
+            
+            wantReprints = cbWantReprints.isSelected();
+        }
+        
+        try {
+            if (null != okCallback) {
+                okCallback.run();
+            }
+        } finally {
+            dispose();
         }
     }
 }

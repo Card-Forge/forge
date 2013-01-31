@@ -43,7 +43,7 @@ public class SFilterUtil {
                 break;
             case MULTICOLOR:
                 wantMulticolor = statLabels.get(s).isSelected();
-                preExceptMulti = wantMulticolor ? null : Predicates.not(CardRulesPredicates.Presets.IS_MULTICOLOR);
+                preExceptMulti = wantMulticolor ? null : Predicates.not(s.predicate);
                 break;
             case LAND: case ARTIFACT: case CREATURE: case ENCHANTMENT: case PLANESWALKER: case INSTANT: case SORCERY:
                 if (statLabels.get(s).isSelected()) { types.add(s.predicate); }

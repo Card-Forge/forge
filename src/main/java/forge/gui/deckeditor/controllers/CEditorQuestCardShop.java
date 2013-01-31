@@ -133,7 +133,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             this.getTableCatalog().setDeck(fullCatalogCards);
             VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setEnabled(false);
             VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setEnabled(false);
-            fullCatalogToggle.setText("Go back to spell shop");
+            fullCatalogToggle.setText("Return to spell shop");
         } else {
             this.getTableCatalog().setDeck(cardsForSale);
             VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setEnabled(true);
@@ -430,7 +430,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             maxSellingPrice = String.format("Maximum selling price is %d credits.", maxSellPrice);
         }
         VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().remove(VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4());
-        VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().add(fullCatalogToggle, 0);
+        VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().add(fullCatalogToggle, "w 25%, h 30!", 0);
         VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().add(sellPercentageLabel);
         this.sellPercentageLabel.setText("<html>Selling cards at " + formatter.format(multiPercent)
                 + "% of their value.<br>" + maxSellingPrice + "</html>");

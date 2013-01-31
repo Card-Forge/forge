@@ -19,8 +19,10 @@ package forge.item;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -58,7 +60,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
                                                // set is assigned
 
     // need this to be sure that different cased names won't break the system
-    // (and create uniqie cardref entries)
+    // (and create unique cardref entries)
     private final transient String nameLcase;
 
     // image filename is calculated only after someone request it
@@ -434,7 +436,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
         }
 
         private static class PredicateSets implements Predicate<CardPrinted> {
-            private final List<String> sets;
+            private final Set<String> sets;
             private final boolean mustContain;
 
             @Override
@@ -443,7 +445,7 @@ public final class CardPrinted implements Comparable<CardPrinted>, InventoryItem
             }
 
             public PredicateSets(final List<String> wantSets, final boolean shouldContain) {
-                this.sets = wantSets; // maybe should make a copy here?
+                this.sets = new HashSet<String>(wantSets);
                 this.mustContain = shouldContain;
             }
         }
