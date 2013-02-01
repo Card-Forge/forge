@@ -3,14 +3,12 @@ ManaCost:4
 Types:Legendary Artifact
 Text:no text
 T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigSearch | TriggerDescription$ When CARDNAME enters the battlefield, search your library for any number of artifact and/or creature cards and exile them. Then shuffle your library.
-SVar:TrigSearch:AB$ ChangeZone | Cost$ 0 | ChangeType$ Creature.YouOwn,Artifact.YouOwn | ChangeNum$ Z | Origin$ Library | Destination$ Exile | RememberChanged$ True | References$ X,Y,Z
+SVar:TrigSearch:AB$ ChangeZone | Cost$ 0 | ChangeType$ Creature.YouOwn,Artifact.YouOwn | ChangeNum$ X | Origin$ Library | Destination$ Exile | RememberChanged$ True | References$ X
 A:AB$ ChooseCard | Cost$ 4 T | Defined$ You | Amount$ 1 | AtRandom$ True | Choices$ Card.IsRemembered | ChoiceZone$ Exile | SubAbility$ DBChange | SpellDescription$ Choose a card at random that was exiled with CARDNAME. Put that card into its owner's hand.
 SVar:DBChange:DB$ ChangeZone | Defined$ ChosenCard | Origin$ Exile | Destination$ Hand | ForgetChanged$ True | Hidden$ True
 T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | Static$ True | ValidCard$ Card.Self | Execute$ DBCleanup
 SVar:DBCleanup:DB$ Cleanup | ClearRemembered$ True
-SVar:X:Count$TypeInYourLibrary.Creature
-SVar:Y:Count$TypeInYourLibrary.Artiifact
-SVar:Z:SVar$X/Plus.Y
+SVar:X:Count$ValidLibrary Creature.YouOwn,Artifact.YouOwn
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/skyship_weatherlight.jpg
 SetInfo:PLS|Rare|http://magiccards.info/scans/en/ps/133a.jpg
