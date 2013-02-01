@@ -7,16 +7,18 @@ Description=Monowhite flier deck.
 Icon=ArchAngel.jpg
 Deck Type=constructed
 [main]
-4 Angelic Voices|LEG
-4 Mana Vault|LEB
-4 Mishra's Factory|ATQ
-4 Onulet|ATQ
+2 Angelic Voices|LEG
+1 Disenchant|LEB
+1 Mana Vault|LEB
+2 Mishra's Factory|ATQ
+3 Dancing Scimitar|ARB
 2 Osai Vultures|LEG
 22 Plains|LEB
 4 Serra Angel|2ED
-1 Swords to Plowshares|LEB
-4 Tetravus|ATQ
-2 The Hive|LEB
-2 Thunder Spirit|LEG
+4 Swords to Plowshares|LEB
+3 Tetravus|ATQ
+1 The Hive|LEB
+4 Thunder Spirit|LEG
 4 Wrath of God|2ED
+4 Moat|LEG
 [sideboard]
