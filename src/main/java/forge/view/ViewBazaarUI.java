@@ -57,10 +57,9 @@ public class ViewBazaarUI extends FPanel {
     public void populateStalls() {
         for (final String s : bazaar.getStallNames()) {
 
-            final FLabel lbl = new FLabel.Builder().text(s + "  ")
+            final FLabel lbl = new FLabel.ButtonBuilder().text(s + "  ")
                     .fontAlign(SwingConstants.RIGHT).iconInBackground(true)
-                    .fontSize(16).opaque(true).hoverable(true)
-                    .icon(FSkin.getIcon(bazaar.getStall(s).getIcon())).selectable(true).build();
+                    .fontSize(16).icon(FSkin.getIcon(bazaar.getStall(s).getIcon())).selectable().build();
 
             pnlAllStalls.add(lbl, "h 80px!, w 90%!, gap 0 0 10px 10px");
 

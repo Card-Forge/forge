@@ -57,7 +57,6 @@ import forge.gui.home.settings.VSubmenuPreferences;
 import forge.gui.home.variant.VSubmenuArchenemy;
 import forge.gui.home.variant.VSubmenuPlanechase;
 import forge.gui.home.variant.VSubmenuVanguard;
-import forge.gui.toolbox.ExperimentalLabel;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSkin;
 import forge.properties.ForgePreferences.FPref;
@@ -90,8 +89,8 @@ public enum VHomeUI implements IVTopLevelUI {
         .iconAlignX(SwingConstants.CENTER)
         .iconInBackground(true).iconScaleFactor(1.0).build();
 
-    private ExperimentalLabel lblExit = new ExperimentalLabel("Exit Forge");
-    private ExperimentalLabel lblEditor = new ExperimentalLabel("Deck Editor");
+    private final FLabel lblExit = new FLabel.ButtonBuilder().text("Exit Forge").fontSize(16).build();
+    private final FLabel lblEditor = new FLabel.ButtonBuilder().text("Deck Editor").fontSize(16).build();
 
     private VHomeUI() {
         pnlMenu.add(lblLogo, "w 150px!, h 150px!, gap 0 0 5px 10px, ax center");
@@ -164,12 +163,12 @@ public enum VHomeUI implements IVTopLevelUI {
     }
 
     /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
-    public ExperimentalLabel getLblExit() {
+    public FLabel getLblExit() {
         return this.lblExit;
     }
 
     /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
-    public ExperimentalLabel getLblEditor() {
+    public FLabel getLblEditor() {
         return this.lblEditor;
     }
 

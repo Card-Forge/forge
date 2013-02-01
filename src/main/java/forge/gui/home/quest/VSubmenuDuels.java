@@ -19,7 +19,6 @@ import forge.gui.home.IVSubmenu;
 import forge.gui.home.LblHeader;
 import forge.gui.home.StartButton;
 import forge.gui.home.VHomeUI;
-import forge.gui.toolbox.ExperimentalLabel;
 import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FScrollPane;
@@ -83,10 +82,10 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
         .text("Next challenge in wins hasn't been set yet.")
         .fontSize(12).build();
 
-    private final ExperimentalLabel btnUnlock = new ExperimentalLabel("Unlock Sets");
-    private final ExperimentalLabel btnTravel = new ExperimentalLabel("Travel");
-    private final ExperimentalLabel btnBazaar = new ExperimentalLabel("Bazaar");
-    private final ExperimentalLabel btnSpellShop = new ExperimentalLabel("Spell Shop");
+    private final FLabel btnUnlock = new FLabel.ButtonBuilder().text("Unlock Sets").fontSize(16).build();
+    private final FLabel btnTravel = new FLabel.ButtonBuilder().text("Travel").fontSize(16).build();
+    private final FLabel btnBazaar = new FLabel.ButtonBuilder().text("Bazaar").fontSize(16).build();
+    private final FLabel btnSpellShop = new FLabel.ButtonBuilder().text("Spell Shop").fontSize(16).build();
 
     /**
      * Constructor.
@@ -215,22 +214,22 @@ public enum VSubmenuDuels implements IVSubmenu<CSubmenuDuels>, IVQuestStats {
     }
 
     @Override
-    public ExperimentalLabel getBtnBazaar() {
+    public FLabel getBtnBazaar() {
         return btnBazaar;
     }
 
     @Override
-    public ExperimentalLabel getBtnUnlock() {
+    public FLabel getBtnUnlock() {
         return btnUnlock;
     }
 
     @Override
-    public ExperimentalLabel getBtnTravel() {
+    public FLabel getBtnTravel() {
         return btnTravel;
     }
 
     @Override
-    public ExperimentalLabel getBtnSpellShop() {
+    public FLabel getBtnSpellShop() {
         return btnSpellShop;
     }
 

@@ -40,14 +40,14 @@ public class SFilterUtil {
         for (SEditorUtil.StatTypes s : SEditorUtil.StatTypes.values()) {
             switch (s) {
             case WHITE: case BLUE: case BLACK: case RED: case GREEN: case COLORLESS:
-                if (statLabels.get(s).isSelected()) { colors.add(s.predicate); }
+                if (statLabels.get(s).getSelected()) { colors.add(s.predicate); }
                 break;
             case MULTICOLOR:
-                wantMulticolor = statLabels.get(s).isSelected();
+                wantMulticolor = statLabels.get(s).getSelected();
                 preExceptMulti = wantMulticolor ? null : Predicates.not(s.predicate);
                 break;
             case LAND: case ARTIFACT: case CREATURE: case ENCHANTMENT: case PLANESWALKER: case INSTANT: case SORCERY:
-                if (statLabels.get(s).isSelected()) { types.add(s.predicate); }
+                if (statLabels.get(s).getSelected()) { types.add(s.predicate); }
                 break;
                 
             case TOTAL:

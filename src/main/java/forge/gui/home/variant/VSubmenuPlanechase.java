@@ -26,7 +26,6 @@ import forge.gui.home.IVSubmenu;
 import forge.gui.home.LblHeader;
 import forge.gui.home.StartButton;
 import forge.gui.home.VHomeUI;
-import forge.gui.toolbox.ExperimentalLabel;
 import forge.gui.toolbox.FCheckBox;
 import forge.gui.toolbox.FDeckChooser;
 import forge.gui.toolbox.FLabel;
@@ -64,7 +63,7 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
 
     //////////////////////////////
 
-    private ExperimentalLabel lblEditor = new ExperimentalLabel("Planar Deck Editor");
+    private final FLabel lblEditor = new FLabel.ButtonBuilder().text("Planar Deck Editor").fontSize(16).build();
     private final FTabbedPane tabPane = new FTabbedPane();
     private final List<FPanel> playerPanels = new ArrayList<FPanel>();
     private final List<FDeckChooser> deckChoosers = new ArrayList<FDeckChooser>();
@@ -311,7 +310,7 @@ public enum VSubmenuPlanechase implements IVSubmenu<CSubmenuPlanechase> {
     /**
      * @return the lblEditor
      */
-    public ExperimentalLabel getLblEditor() {
+    public FLabel getLblEditor() {
         return lblEditor;
     }
 

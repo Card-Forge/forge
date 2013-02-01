@@ -299,9 +299,9 @@ public enum CCardCatalog implements ICDoc {
         cardPredicates.add(SFilterUtil.buildTextFilter(
                 VCardCatalog.SINGLETON_INSTANCE.getTxfSearch().getText(),
                 0 != VCardCatalog.SINGLETON_INSTANCE.getCbSearchMode().getSelectedIndex(),
-                VCardCatalog.SINGLETON_INSTANCE.getLblName().isSelected(),
-                VCardCatalog.SINGLETON_INSTANCE.getLblType().isSelected(),
-                VCardCatalog.SINGLETON_INSTANCE.getLblText().isSelected()));
+                VCardCatalog.SINGLETON_INSTANCE.getLblName().getSelected(),
+                VCardCatalog.SINGLETON_INSTANCE.getLblType().getSelected(),
+                VCardCatalog.SINGLETON_INSTANCE.getLblText().getSelected()));
         
         Predicate<? super CardPrinted> cardFilter = Predicates.and(cardPredicates);
         
@@ -322,9 +322,9 @@ public enum CCardCatalog implements ICDoc {
     
     private boolean canSearch() {
         return !VCardCatalog.SINGLETON_INSTANCE.getTxfSearch().getText().isEmpty() &&
-                (VCardCatalog.SINGLETON_INSTANCE.getLblName().isSelected() ||
-                 VCardCatalog.SINGLETON_INSTANCE.getLblType().isSelected() ||
-                 VCardCatalog.SINGLETON_INSTANCE.getLblText().isSelected());
+                (VCardCatalog.SINGLETON_INSTANCE.getLblName().getSelected() ||
+                 VCardCatalog.SINGLETON_INSTANCE.getLblType().getSelected() ||
+                 VCardCatalog.SINGLETON_INSTANCE.getLblText().getSelected());
     }
     
     private <T> boolean isActive(Set<T> activeSet, T key) {

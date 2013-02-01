@@ -4,22 +4,22 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
-import forge.gui.toolbox.ExperimentalLabel;
+import forge.gui.toolbox.FLabel;
 
 /** Dictates methods required for a panel with stats/pet display. */
 
 public interface IVQuestStats {
     /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
-    ExperimentalLabel getBtnBazaar();
+    FLabel getBtnBazaar();
 
     /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
-    ExperimentalLabel getBtnSpellShop();
+    FLabel getBtnSpellShop();
 
     /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
-    ExperimentalLabel getBtnUnlock();
+    FLabel getBtnUnlock();
 
     /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
-    ExperimentalLabel getBtnTravel();
+    FLabel getBtnTravel();
 
     /** @return {@link javax.swing.JLabel} */
     JLabel getLblCredits();

@@ -22,7 +22,6 @@ import forge.gui.home.LblHeader;
 import forge.gui.home.StartButton;
 import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.DeckLister;
-import forge.gui.toolbox.ExperimentalLabel;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FList;
 import forge.gui.toolbox.FRadioButton;
@@ -70,7 +69,7 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
         .text("Then, play against one or all of the AI opponents.")
         .fontSize(12).build();
 
-    private final ExperimentalLabel btnBuildDeck = new ExperimentalLabel("New Draft Mode Game");
+    private final FLabel btnBuildDeck = new FLabel.ButtonBuilder().text("New Draft Mode Game").fontSize(16).build();
 
 
     /**
@@ -119,7 +118,7 @@ public enum VSubmenuDraft implements IVSubmenu<CSubmenuDraft> {
     }
 
     /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
-    public ExperimentalLabel getBtnBuildDeck() {
+    public FLabel getBtnBuildDeck() {
         return this.btnBuildDeck;
     }
 

@@ -26,7 +26,6 @@ import forge.gui.home.LblHeader;
 import forge.gui.home.StartButton;
 import forge.gui.home.VHomeUI;
 import forge.gui.toolbox.DeckLister;
-import forge.gui.toolbox.ExperimentalLabel;
 import forge.gui.toolbox.FButton;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FPanel;
@@ -68,7 +67,7 @@ public enum VSubmenuSealed implements IVSubmenu<CSubmenuSealed> {
         .text("Then, you will play against each of the AI opponents.")
         .fontSize(12).build();
 
-    private final ExperimentalLabel btnBuildDeck = new ExperimentalLabel("New Sealed Mode Game");
+    private final FLabel btnBuildDeck = new FLabel.ButtonBuilder().text("New Sealed Mode Game").fontSize(16).build();
 
     private final JLabel btnDirections = new FLabel.Builder()
         .fontSize(16).opaque(true).hoverable(true)

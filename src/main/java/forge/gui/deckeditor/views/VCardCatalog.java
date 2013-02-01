@@ -65,25 +65,25 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
             .text("Add card")
             .tooltip("Add selected card to current deck (or double click the row or hit the spacebar)")
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_PLUS))
-            .iconScaleAuto(false).hoverable(true).build();
+            .iconScaleAuto(false).hoverable().build();
     private final FLabel btnAdd4 = new FLabel.Builder()
             .fontSize(14)
             .text("Add 4 of card")
             .tooltip("Add up to 4 of selected card to current deck")
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_PLUS))
-            .iconScaleAuto(false).hoverable(true).build();
+            .iconScaleAuto(false).hoverable().build();
 
     // restriction button and search widgets
     private final JPanel pnlSearch = new JPanel(new MigLayout("insets 0, gap 5px, center"));
-    private final FLabel btnAddRestriction = new FLabel.Builder()
+    private final FLabel btnAddRestriction = new FLabel.ButtonBuilder()
             .text("Add filter")
-            .tooltip("Filter shown cards by various properties")
-            .hoverable(true).opaque(true).reactOnMouseDown(true).build();
+            .tooltip("Click to add custom filters to the card list")
+            .reactOnMouseDown().build();
     private final JComboBox cbSearchMode = new JComboBox();
     private final JTextField txfSearch = new FTextField.Builder().build();
-    private final FLabel lblName = new FLabel.Builder().text("Name").selectable(true).selected(true).hoverable(true).opaque(true).build();
-    private final FLabel lblType = new FLabel.Builder().text("Type").selectable(true).selected(true).hoverable(true).opaque(true).build();
-    private final FLabel lblText = new FLabel.Builder().text("Text").selectable(true).selected(true).hoverable(true).opaque(true).build();
+    private final FLabel lblName = new FLabel.Builder().text("Name").hoverable().selectable().selected().build();
+    private final FLabel lblType = new FLabel.Builder().text("Type").hoverable().selectable().selected().build();
+    private final FLabel lblText = new FLabel.Builder().text("Text").hoverable().selectable().selected().build();
     private final JPanel pnlRestrictions = new JPanel(new WrapLayout(FlowLayout.LEFT, 10, 5));
     
     // restriction widgets
@@ -124,7 +124,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         for (SEditorUtil.StatTypes s : SEditorUtil.StatTypes.values()) {
             FLabel label = buildToggleLabel(s, SEditorUtil.StatTypes.TOTAL != s);
             statLabels.put(s, label);
-            pnlStats.add(label, "w 57px!, h 20px!" + (9 == statLabels.size() ? ", skip" : ""));
+            pnlStats.add(label, "w 60px!, h 24px!" + (9 == statLabels.size() ? ", skip" : ""));
         }
         
         statLabels.get(SEditorUtil.StatTypes.TOTAL).setToolTipText("Total cards (click to toggle all filters)");
@@ -134,15 +134,14 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         pnlAddButtons.add(btnAdd4, "w 30%!, h 30px!, gap 5% 5% 5px 5px");
         
         pnlSearch.setOpaque(false);
-        pnlSearch.add(btnAddRestriction, "center, w pref+6, h pref+6");
-        cbSearchMode.addItem("With");
-        cbSearchMode.addItem("Without");
-        pnlSearch.add(cbSearchMode, "center");
+        pnlSearch.add(btnAddRestriction, "center, w pref+8, h pref+8");
         pnlSearch.add(txfSearch, "pushx, growx");
-        pnlSearch.add(new FLabel.Builder().text("in").build());
-        pnlSearch.add(lblName, "width pref+4");
-        pnlSearch.add(lblType, "width pref+4");
-        pnlSearch.add(lblText, "width pref+4");
+        cbSearchMode.addItem("in");
+        cbSearchMode.addItem("not in");
+        pnlSearch.add(cbSearchMode, "center");
+        pnlSearch.add(lblName, "w pref+8, h pref+4");
+        pnlSearch.add(lblType, "w pref+8, h pref+4");
+        pnlSearch.add(lblText, "w pref+8, h pref+4");
 
         pnlRestrictions.setOpaque(false);
 
@@ -188,10 +187,10 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
     public void populate() {
         JPanel parentBody = parentCell.getBody();
         parentBody.setLayout(new MigLayout("insets 0, gap 0, wrap, hidemode 3"));
-        parentBody.add(pnlHeader, "w 98%!, h 30px!, gap 1% 1% 0 0");
-        parentBody.add(pnlStats, "w 96%, h 50px!, gap 1% 1% 0 0");
-        parentBody.add(pnlAddButtons, "w 96%!, gap 1% 1% 1% 1%");
-        parentBody.add(pnlSearch, "w 96%, gapleft 1%");
+        parentBody.add(pnlHeader, "w 98%!, gap 1% 1% 5 0");
+        parentBody.add(pnlStats, "w 96%, gap 1% 1% 5 0");
+        parentBody.add(pnlAddButtons, "w 96%!, gap 1% 1% 5 5");
+        parentBody.add(pnlSearch, "w 96%, gap 1% 1%");
         parentBody.add(pnlRestrictions, "w 96%, gapleft 1%, gapright push");
         parentBody.add(scroller, "w 98%!, h 100% - 35px, gap 1% 0 0 1%");
     }
@@ -235,7 +234,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
                 .icon(s.img).iconScaleAuto(false)
                 .text("0").fontSize(11)
                 .tooltip(s.toLabelString())
-                .hoverable(true).selectable(selectable).selected(selectable)
+                .hoverable().selectable(selectable).selected(selectable)
                 .build();
     }
 
@@ -284,11 +283,11 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         pnl.setOpaque(false);
         
         Pair<FSpinner, FSpinner> s = spinners.get(t);
-        pnl.add(s.getLeft(), "w 45!");
-        pnl.add(new FLabel.Builder().text("<=").fontSize(11).build());
-        pnl.add(new FLabel.Builder().text(t.toLabelString()).fontSize(11).build());
-        pnl.add(new FLabel.Builder().text("<=").fontSize(11).build());
-        pnl.add(s.getRight(), "w 45!");
+        pnl.add(s.getLeft(), "w 45!, h 26!, center");
+        pnl.add(new FLabel.Builder().text("<=").fontSize(11).build(), "h 26!, center");
+        pnl.add(new FLabel.Builder().text(t.toLabelString()).fontSize(11).build(), "h 26!, center");
+        pnl.add(new FLabel.Builder().text("<=").fontSize(11).build(), "h 26!, center");
+        pnl.add(s.getRight(), "w 45!, h 26!, center");
         
         return pnl;
     }

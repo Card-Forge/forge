@@ -53,10 +53,10 @@ public class FDeckChooser extends JPanel {
     private final JRadioButton radCustom = new FRadioButton("Custom user deck");
     private final JRadioButton radQuests = new FRadioButton("Quest opponent deck");
 
-    private final JList lstDecks      = new FList();
-    private final ExperimentalLabel btnRandom = new ExperimentalLabel("Random");
+    private final JList  lstDecks  = new FList();
+    private final FLabel btnRandom = new FLabel.ButtonBuilder().text("Random").fontSize(16).build();
 
-    private final JScrollPane scrDecks  = new FScrollPane(lstDecks, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+    private final JScrollPane scrDecks = new FScrollPane(lstDecks, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
     private final FLabel lblDecklist = new FLabel.Builder()
     .text("Double click a non-random deck for its decklist.")
@@ -136,7 +136,7 @@ public class FDeckChooser extends JPanel {
         return this.lstDecks;
     }
     /** @return {@link forge.gui.toolbox.ExperimentalLabel} */
-    public ExperimentalLabel getBtnRandom() {
+    public FLabel getBtnRandom() {
         return this.btnRandom;
     }
 
@@ -171,7 +171,7 @@ public class FDeckChooser extends JPanel {
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
 
-        final ExperimentalLabel btn = getBtnRandom();
+        final FLabel btn = getBtnRandom();
 
         btn.setCommand(new Command() { @Override public void execute() { lst.setSelectedIndices(DeckgenUtil.randomSelectColors()); } });
 
@@ -195,7 +195,7 @@ public class FDeckChooser extends JPanel {
         lst.setName(ESubmenuConstructedTypes.THEMES.toString());
         lst.removeMouseListener(madDecklist);
 
-        final ExperimentalLabel btn = getBtnRandom();
+        final FLabel btn = getBtnRandom();
         btn.setCommand(new Command() { @Override public void execute() { DeckgenUtil.randomSelect(lst); } });
 
         // Init first in list
@@ -216,7 +216,7 @@ public class FDeckChooser extends JPanel {
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
 
-        final ExperimentalLabel btn = getBtnRandom();
+        final FLabel btn = getBtnRandom();
 
         btn.setCommand(new Command() { @Override public void execute() { DeckgenUtil.randomSelect(lst); } });
 
@@ -244,7 +244,7 @@ public class FDeckChooser extends JPanel {
         lst.removeMouseListener(madDecklist);
         lst.addMouseListener(madDecklist);
 
-        final ExperimentalLabel btn = getBtnRandom();
+        final FLabel btn = getBtnRandom();
         btn.setCommand(new Command() { @Override public void execute() { DeckgenUtil.randomSelect(lst); } });
 
         // Init first in list

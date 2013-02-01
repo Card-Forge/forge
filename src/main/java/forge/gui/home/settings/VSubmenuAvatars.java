@@ -164,7 +164,7 @@ public enum VSubmenuAvatars implements IVSubmenu<CSubmenuAvatars> {
                 String[] indices = Singletons.getModel().getPreferences()
                         .getPref(FPref.UI_AVATARS).split(",");
 
-                if (lblAvatarAI.isSelected()) {
+                if (lblAvatarAI.getSelected()) {
                     lblAvatarAI.setIcon(new ImageIcon(FSkin.getAvatars().get(index0)));
                     lblAvatarAI.repaintSelf();
                     indices[1] = String.valueOf(index0);

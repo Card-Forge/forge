@@ -14134,7 +14134,6 @@ src/main/java/forge/gui/package-info.java svneol=native#text/plain
 src/main/java/forge/gui/toolbox/CardFaceSymbols.java svneol=native#text/plain
 src/main/java/forge/gui/toolbox/CardViewer.java -text
 src/main/java/forge/gui/toolbox/DeckLister.java -text
-src/main/java/forge/gui/toolbox/ExperimentalLabel.java -text
 src/main/java/forge/gui/toolbox/FButton.java -text
 src/main/java/forge/gui/toolbox/FCheckBox.java -text
 src/main/java/forge/gui/toolbox/FDeckChooser.java -text

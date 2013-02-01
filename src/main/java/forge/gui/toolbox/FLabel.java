@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -62,8 +63,8 @@ public class FLabel extends JLabel implements ILocalRepaint {
 
         private boolean bldSelectable       = false;
         private boolean bldSelected         = false;
-        private boolean bldHoverable        = false;
-        private boolean bldOpaque           = false;
+        protected boolean bldHoverable      = false;
+        protected boolean bldOpaque         = false;
         private boolean bldIconInBackground = false;
         private boolean bldIconScaleAuto    = true;
         private boolean reactOnMouseDown    = false;
@@ -97,22 +98,27 @@ public class FLabel extends JLabel implements ILocalRepaint {
         /**@param b0 &emsp; boolean
          * @return {@link forge.gui.toolbox.Builder} */
         public Builder opaque(final boolean b0) { this.bldOpaque = b0; return this; }
+        public Builder opaque() { opaque(true); return this; }
 
         /**@param b0 &emsp; boolean
          * @return {@link forge.gui.toolbox.Builder} */
         public Builder hoverable(final boolean b0) { this.bldHoverable = b0; return this; }
+        public Builder hoverable() { hoverable(true); return this; }
 
         /**@param b0 &emsp; boolean
          * @return {@link forge.gui.toolbox.Builder} */
         public Builder selectable(final boolean b0) { this.bldSelectable = b0; return this; }
+        public Builder selectable() { selectable(true); return this; }
         
         /**@param b0 &emsp; boolean
          * @return {@link forge.gui.toolbox.Builder} */
         public Builder selected(final boolean b0) { this.bldSelected = b0; return this; }
+        public Builder selected() { selected(true); return this; }
         
         /**@param b0 &emsp; boolean that controls when the label responds to mouse events
          * @return {@link forge.gui.toolbox.Builder} */
         public Builder reactOnMouseDown(final boolean b0) { this.reactOnMouseDown = b0; return this; }
+        public Builder reactOnMouseDown() { reactOnMouseDown(true); return this; }
 
         /**@param c0 &emsp; {@link forge.Command} to execute if clicked
          * @return {@link forge.gui.toolbox.Builder} */
@@ -152,7 +158,15 @@ public class FLabel extends JLabel implements ILocalRepaint {
          * @return {@link forge.gui.toolbox.Builder} */
         public Builder iconInsets(final Point i0) { this.bldIconInsets = i0; return this; }
     }
-
+    
+    // sets better defaults for button labels
+    public static class ButtonBuilder extends Builder {
+        public ButtonBuilder() {
+            bldHoverable = true;
+            bldOpaque    = true;
+        }
+    }
+    
     //========== Constructors
     /** Must have protected constructor to allow Builder to subclass. */
     protected FLabel() { }
@@ -186,7 +200,7 @@ public class FLabel extends JLabel implements ILocalRepaint {
 
         // Non-custom display properties
         this.setForeground(clrText);
-        this.setBackground(clrInactive);
+        this.setBackground(clrMain);
 
         // Resize adapter
         this.removeComponentListener(cadResize);
@@ -199,12 +213,18 @@ public class FLabel extends JLabel implements ILocalRepaint {
 
     //========== Variable initialization
     // Final inits
-    private final Color clrText = FSkin.getColor(FSkin.Colors.CLR_TEXT);
-    private final Color clrBorders = FSkin.getColor(FSkin.Colors.CLR_BORDERS);
     private final Color clrHover = FSkin.getColor(FSkin.Colors.CLR_HOVER);
-    private final Color clrInactive = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
-    private final Color clrActive = FSkin.getColor(FSkin.Colors.CLR_ACTIVE);
-
+    private final Color clrText = FSkin.getColor(FSkin.Colors.CLR_TEXT);
+    private final Color clrMain = FSkin.getColor(FSkin.Colors.CLR_INACTIVE);
+    private final Color d50 = FSkin.stepColor(clrMain, -50);
+    private final Color d30 = FSkin.stepColor(clrMain, -30);
+    private final Color d10 = FSkin.stepColor(clrMain, -10);
+    private final Color l00 = FSkin.stepColor(clrMain, 0);
+    private final Color l10 = FSkin.stepColor(clrMain, 10);
+    private final Color l20 = FSkin.stepColor(clrMain, 20);
+    private final Color l30 = FSkin.stepColor(clrMain, 30);
+    private final Color l40 = FSkin.stepColor(clrMain, 40);
+    
     // Custom properties, assigned either at realization (using builder)
     // or dynamically (using methods below).
     private double iconScaleFactor;
@@ -360,11 +380,6 @@ public class FLabel extends JLabel implements ILocalRepaint {
         return this.cmdClick;
     }
 
-    /** @return boolean */
-    public boolean isSelected() {
-        return selected;
-    }
-
     @Override
     // Must be public.
     public void setIcon(final Icon i0) {
@@ -406,7 +421,6 @@ public class FLabel extends JLabel implements ILocalRepaint {
         repaint(0, 0, d.width, d.height);
     }
 
-//    private int cntRepaints = 0;
     @Override
     public void paintComponent(final Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
@@ -414,27 +428,24 @@ public class FLabel extends JLabel implements ILocalRepaint {
         int w = getWidth();
         int h = getHeight();
 
-//        cntRepaints++;
-//        System.err.format("[%d] @ %d - Repaint: %s%n", new Date().getTime(), cntRepaints, this.getText());
-//        if ( cntRepaints > 200 ) {
-//            final Throwable ex = new Exception("Too many repaints");
-//            ex.printStackTrace(System.err);
-//        }
-
-        // Hover
-        if (hoverable && hovered && !selected && isEnabled()) {
-            g2d.setColor(clrHover);
-            g2d.fillRect(0, 0, w, h);
-            g2d.setColor(clrBorders);
-            g2d.drawRect(0, 0, w - 1, h - 1);
-        } else if (this.opaque && !selected) {  // Opacity, select
-            g2d.setColor(getBackground());
-            g2d.fillRect(0, 0, w, h);
-        } else if (selectable && selected) {
-            g2d.setColor(clrActive);
-            g2d.fillRect(0, 0, w, h);
+        if (opaque) {
+            if (selected) {
+                paintDown(g2d, w, h);
+            } else {
+                paintUp(g2d, w, h);
+            }
+        } else if (selectable) {
+            if (selected) {
+                paintDown(g2d, w, h);
+            } else {
+                paintBorder(g2d, w, h);
+            }
         }
 
+        if (hoverable && hovered && isEnabled()) {
+            paintHover(g2d, w, h);
+        }
+        
         // Icon in background
         if (iconInBackground) {
             int sh = (int) (h * iconScaleFactor);
@@ -453,6 +464,42 @@ public class FLabel extends JLabel implements ILocalRepaint {
         }
 
         super.paintComponent(g);
+    }
+
+    private void paintHover(final Graphics2D g, int w, int h) {
+        g.setColor(clrHover);
+        g.drawRect(0, 0, w - 2, h - 2);
+        g.setColor(l30);
+        g.drawRect(1, 1, w - 4, h - 4);
+    }
+
+    private void paintUp(final Graphics2D g, int w, int h) {
+        GradientPaint gradient = new GradientPaint(0, h, d10, 0, 0, l20);
+        g.setPaint(gradient);
+        g.fillRect(0, 0, w - 1, h - 1);
+
+        g.setColor(d50);
+        g.drawRect(0, 0, w - 2, h - 2);
+        g.setColor(l10);
+        g.drawRect(1, 1, w - 4, h - 4);
+    }
+
+    private void paintBorder(final Graphics2D g, int w, int h) {
+        g.setColor(l10);
+        g.drawRect(0, 0, w - 2, h - 2);
+        g.setColor(l30);
+        g.drawRect(1, 1, w - 4, h - 4);
+    }
+
+    private void paintDown(final Graphics2D g, int w, int h) {
+        GradientPaint gradient = new GradientPaint(0, h, d30, 0, 0, l10);
+        g.setPaint(gradient);
+        g.fillRect(0, 0, w - 1, h - 1);
+
+        g.setColor(d30);
+        g.drawRect(0, 0, w - 2, h - 2);
+        g.setColor(l10);
+        g.drawRect(1, 1, w - 4, h - 4);
     }
 
     private void resetIcon() {
