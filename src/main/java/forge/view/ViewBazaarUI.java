@@ -59,7 +59,7 @@ public class ViewBazaarUI extends FPanel {
 
             final FLabel lbl = new FLabel.ButtonBuilder().text(s + "  ")
                     .fontAlign(SwingConstants.RIGHT).iconInBackground(true)
-                    .fontSize(16).icon(FSkin.getIcon(bazaar.getStall(s).getIcon())).selectable().build();
+                    .fontSize(16).icon(FSkin.getIcon(bazaar.getStall(s).getIcon())).build();
 
             pnlAllStalls.add(lbl, "h 80px!, w 90%!, gap 0 0 10px 10px");
 
@@ -67,6 +67,7 @@ public class ViewBazaarUI extends FPanel {
                 @Override
                 public void execute() {
                     if (previousSelected != null) { previousSelected.setSelected(false); }
+                    lbl.setSelected(true);
                     previousSelected = lbl;
                     control.showStall(s);
                 }

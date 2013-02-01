@@ -219,11 +219,9 @@ public class FLabel extends JLabel implements ILocalRepaint {
     private final Color d50 = FSkin.stepColor(clrMain, -50);
     private final Color d30 = FSkin.stepColor(clrMain, -30);
     private final Color d10 = FSkin.stepColor(clrMain, -10);
-    private final Color l00 = FSkin.stepColor(clrMain, 0);
     private final Color l10 = FSkin.stepColor(clrMain, 10);
     private final Color l20 = FSkin.stepColor(clrMain, 20);
     private final Color l30 = FSkin.stepColor(clrMain, 30);
-    private final Color l40 = FSkin.stepColor(clrMain, 40);
     
     // Custom properties, assigned either at realization (using builder)
     // or dynamically (using methods below).

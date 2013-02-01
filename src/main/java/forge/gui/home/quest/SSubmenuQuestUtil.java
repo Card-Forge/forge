@@ -186,7 +186,7 @@ public class SSubmenuQuestUtil {
 
         view0.getLblWinStreak().setText(
                 "<html>Win streak: " + qA.getWinStreakCurrent()
-                + "<br>&nbsp; (Best:" + qA.getWinStreakBest() + ")</html>");
+                + "<br>&nbsp; (Best: " + qA.getWinStreakBest() + ")</html>");
 
         // Current deck message
         final JLabel lblCurrentDeck = view0.getLblCurrentDeck();
