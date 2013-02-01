@@ -552,90 +552,7 @@ public class CardFactoryCreatures {
             }
         });
     }
-
-    private static void getCard_YoseiTheMorningStar(final Card card) {
-        final List<Card> targetPerms = new ArrayList<Card>();
-        final SpellAbility ability = new Ability(card, SpellManaCost.ZERO) {
-            @Override
-            public void resolve() {
-                final Player p = this.getTargetPlayer();
-                if (p.canBeTargetedBy(this)) {
-                    p.addKeyword("Skip your next untap step.");
-                    for (final Card c : targetPerms) {
-                        if (c.isInPlay() && c.canBeTargetedBy(this)) {
-                            c.tap();
-                        }
-                    }
-                }
-                targetPerms.clear();
-            } // resolve()
-        };
-
-        final InputSelectMany<Card> targetInput = new InputSelectManyCards(0, 5) {
-            private static final long serialVersionUID = 905537202538752647L;
-
-            @Override
-            protected boolean isValidChoice(Card c) {
-                Zone zone = Singletons.getModel().getGame().getZoneOf(c);
-                return zone.is(ZoneType.Battlefield) && c.getController() == ability.getTargetPlayer() && c.canBeTargetedBy(ability);
-            }
-
-            @Override
-            protected Input onDone() {
-                final StringBuilder sb = new StringBuilder();
-                sb.append(card.getName());
-                sb.append(" - tap " + StringUtils.join(selected, ", ") + ". ");
-                sb.append("Target player skips his or her next untap step.");
-                ability.setStackDescription(sb.toString());
-
-                Singletons.getModel().getGame().getStack().add(ability);
-                return null;
-            }
-        };
-
-        targetInput.setMessage("Select up to 5 target permanents.  Selected (%d) so far.  Click OK when done.");
-
-        Predicate<Player> canTarget = new Predicate<Player>() {
-            @Override
-            public boolean apply(Player p) {
-                return p.canBeTargetedBy(ability);
-            }
-        };
-
-        Function<List<Player>, Input> onPlayerTargeted = new Function<List<Player>, Input>() {
-            @Override
-            public final Input apply(List<Player> selected) {
-                Player p = selected.get(0);
-                ability.setTargetPlayer(p);
-                return targetInput;
-            }
-        };
-
-        final InputSelectMany<Player> playerInput = new InputSelectManyPlayers(canTarget, 1, 1, onPlayerTargeted);
-        playerInput.setMessage(card.getName() + " - Select target player");
-
-        final Command destroy = new Command() {
-            private static final long serialVersionUID = -3868616119471172026L;
-
-            @Override
-            public void execute() {
-                final Player player = card.getController();
-
-                if (player.isHuman()) {
-                    Singletons.getModel().getMatch().getInput().setInput(playerInput);
-                } else  {
-                    List<Card> list = player.getOpponent().getCreaturesInPlay();
-                    list = CardLists.getTargetableCards(list, ability);
-                    if (!list.isEmpty()) {
-                        ability.setTargetCard(CardFactoryUtil.getBestCreatureAI(list));
-                        Singletons.getModel().getGame().getStack().addSimultaneousStackEntry(ability);
-                    }
-                }
-            } // execute()
-        };
-        card.addDestroyCommand(destroy);
-    }
-
+    
     private static void getCard_PhyrexianDreadnought(final Card card, final String cardName) {
         final Player player = card.getController();
 
@@ -911,8 +828,6 @@ public class CardFactoryCreatures {
             getCard_MultikickerP1P1(card, cardName);
         } else if (cardName.equals("Sutured Ghoul")) {
             getCard_SurturedGhoul(card);
-        } else if (cardName.equals("Yosei, the Morning Star")) {
-            getCard_YoseiTheMorningStar(card);
         } else if (cardName.equals("Phyrexian Dreadnought")) {
             getCard_PhyrexianDreadnought(card, cardName);
         } else if (cardName.equals("Nebuchadnezzar")) {
