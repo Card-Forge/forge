@@ -97,7 +97,10 @@ public class TriggerSpellAbilityCast extends Trigger {
         }
 
         if (this.getMapParams().containsKey("TargetsValid")) {
-            final SpellAbility sa = si.getSpellAbility();
+            SpellAbility sa = spellAbility;
+            if (si != null) {
+                sa = si.getSpellAbility();
+            }
             if (sa.getTarget() == null) {
                 if (sa.getTargetCard() == null) {
                     if (sa.getTargetPlayer() == null) {
