@@ -89,7 +89,7 @@ class PnlEvent extends JPanel {
         // Final layout
         this.setOpaque(false);
         this.setLayout(new MigLayout("insets 0, gap 0, wrap"));
-        this.add(rad, "w 300px!, gap " + (wImg + 15) + "px 0 10px 0");
+        this.add(rad, "gap " + (wImg + 15) + "px 0 10px 0");
         this.add(tarDesc, "w 100% - " + (wImg + 15) + "px!, gap " + (wImg + 15) + "px 0 5px 0");
    }
 
