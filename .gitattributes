@@ -10584,6 +10584,7 @@ res/cardsfolder/t/thatcher_revolt.txt -text
 res/cardsfolder/t/thaumatog.txt svneol=native#text/plain
 res/cardsfolder/t/thawing_glaciers.txt svneol=native#text/plain
 res/cardsfolder/t/the_abyss.txt svneol=native#text/plain
+res/cardsfolder/t/the_aether_flues.txt -text
 res/cardsfolder/t/the_brute.txt svneol=native#text/plain
 res/cardsfolder/t/the_fallen.txt -text
 res/cardsfolder/t/the_fourth_sphere.txt -text
