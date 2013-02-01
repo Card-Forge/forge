@@ -149,7 +149,7 @@ public enum CCardCatalog implements ICDoc {
                     });
                 }
                 popup.add(fmt);
-                addMenuItem(popup, "Edition (set)...", true, null, new Command() {
+                addMenuItem(popup, "Sets...", true, null, new Command() {
                     @Override
                     public void execute() {
                         final DialogChooseSets dialog = new DialogChooseSets(null, null, true);
