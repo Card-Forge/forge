@@ -158,11 +158,17 @@ public final class EditorTableView<T extends InventoryItem> {
                 Point p = e.getPoint();
                 int row = rowAtPoint(p);
                 int col = columnAtPoint(p);
+                
                 if (col >= table.getColumnCount() || row >= table.getRowCount()) {
                     return null;
                 }
+                
+                Object val = table.getValueAt(row, col);
+                if (null == val) {
+                    return null;
+                }
 
-                return _getCellTooltip(getCellRenderer(row, col), row, col, table.getValueAt(row, col));
+                return _getCellTooltip(getCellRenderer(row, col), row, col, val);
             }
         };
         
@@ -367,6 +373,10 @@ public final class EditorTableView<T extends InventoryItem> {
     
     public int getCardCount(final T card) {
         return this.pool.count(card);
+    }
+    
+    public Predicate<T> getFilter() {
+        return filter;
     }
 
     /**

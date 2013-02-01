@@ -299,7 +299,11 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
     @Override
     @SuppressWarnings("unchecked")
     public Object getValueAt(int iRow, int iCol) {
-        return ((TableColumnInfo<InventoryItem>) table.getColumnModel().getColumn(table.convertColumnIndexToView(iCol))).getFnDisplay().apply((Entry<InventoryItem, Integer>) this.rowToCard(iRow));
+        Entry<T, Integer> card = this.rowToCard(iRow);
+        if (null == card) {
+            return null;
+        }
+        return ((TableColumnInfo<T>) table.getColumnModel().getColumn(table.convertColumnIndexToView(iCol))).getFnDisplay().apply(card);
     }
 
     //========= Custom class handling
