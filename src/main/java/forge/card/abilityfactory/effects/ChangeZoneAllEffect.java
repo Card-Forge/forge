@@ -39,7 +39,7 @@ public class ChangeZoneAllEffect extends SpellEffect {
 
         List<Card> cards = new ArrayList<Card>();
 
-        List<Player> tgtPlayers = getTargetPlayers(sa);
+        List<Player> tgtPlayers = getTargetPlayersEmptyAsDefault(sa);
 
         if ((tgtPlayers == null) || tgtPlayers.isEmpty() || sa.hasParam("UseAllOriginZones")) {
             cards = Singletons.getModel().getGame().getCardsIn(origin);
