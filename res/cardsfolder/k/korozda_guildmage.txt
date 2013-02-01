@@ -4,7 +4,7 @@ Types:Creature Elf Shaman
 Text:no text
 PT:2/2
 A:AB$ Pump | Cost$ 1 B G | ValidTgts$ Creature | TgtPrompt$ Select target creature | NumAtt$ 1 | NumDef$ 1 | KW$ Intimidate | SpellDescription$ Target creature gets +1/+1 and gains intimidate until end of turn.
-A:AB$ Token | Cost$ 2 B G Sac<1/Creature> | TokenAmount$ X | References$ X | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g 1 1 saproling rtr | SpellDescription$ Put X 1/1 green Saproling creature tokens onto the battlefield, where X is the sacrificed creature's toughness.
+A:AB$ Token | Cost$ 2 B G Sac<1/Creature.nonToken/nontoken Creature> | TokenAmount$ X | References$ X | TokenName$ Saproling | TokenTypes$ Creature,Saproling | TokenOwner$ You | TokenColors$ Green | TokenPower$ 1 | TokenToughness$ 1 | TokenImage$ g 1 1 saproling rtr | SpellDescription$ Put X 1/1 green Saproling creature tokens onto the battlefield, where X is the sacrificed creature's toughness.
 SVar:X:Sacrificed$CardToughness
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/korozda_guildmage.jpg
