@@ -192,7 +192,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         parentBody.add(pnlAddButtons, "w 96%!, gap 1% 1% 5 5");
         parentBody.add(pnlSearch, "w 96%, gap 1% 1%");
         parentBody.add(pnlRestrictions, "w 96%, gapleft 1%, gapright push");
-        parentBody.add(scroller, "w 98%!, h 100% - 35px, gap 1% 0 0 1%");
+        parentBody.add(scroller, "w 98%!, h 100%, gap 1% 0 0 1%");
     }
 
     //========== Overridden from ITableContainer
@@ -233,7 +233,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
         return new FLabel.Builder()
                 .icon(s.img).iconScaleAuto(false)
                 .text("0").fontSize(11)
-                .tooltip(s.toLabelString())
+                .tooltip(s.toLabelString() + "(click to toggle the filter for this card type)")
                 .hoverable().selectable(selectable).selected(selectable)
                 .build();
     }
