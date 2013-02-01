@@ -141,13 +141,13 @@ public class InputMulligan extends Input {
                             }
                         }
                     }
-                    if (c.getName().startsWith("Leyline")) {
+                    if (c.getName().startsWith("Leyline of")) {
                         if (GuiDialog.confirm(c, "Use this card's ability?")) {
                             ga.moveToPlay(c);
                         }
                     }
                 } else { // Computer Leylines & Chancellors
-                    if (!c.getName().startsWith("Leyline")) {
+                    if (!c.getName().startsWith("Leyline of")) {
                         final ArrayList<String> kws = c.getKeyword();
                         for (int i = 0; i < kws.size(); i++) {
                             final String kw = kws.get(i);
@@ -165,7 +165,7 @@ public class InputMulligan extends Input {
                             }
                         }
                     }
-                    if (c.getName().startsWith("Leyline")
+                    if (c.getName().startsWith("Leyline of")
                             && !(c.getName().startsWith("Leyline of Singularity")
                             && (Iterables.any(game.getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Leyline of Singularity"))))) {
                         ga.moveToPlay(c);
