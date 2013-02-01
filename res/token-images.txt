@@ -63,6 +63,7 @@ c_3_3_golem.jpg                        http://www.cardforge.org/fpics/tokens/c_3
 c_3_3_wurm_deathtouch.jpg              http://www.cardforge.org/fpics/tokens/c_3_3_wurm_deathtouch.jpg
 c_3_3_wurm_lifelink.jpg                http://www.cardforge.org/fpics/tokens/c_3_3_wurm_lifelink.jpg
 c_3_4_gargoyle.jpg                     http://www.cardforge.org/fpics/tokens/c_3_4_gargoyle.jpg
+c_4_4_kaldra.jpg                       http://www.cardforge.org/fpics/tokens/c_4_4_kaldra.jpg
 c_5_5_djinn.jpg                        http://www.cardforge.org/fpics/tokens/c_5_5_djinn.jpg
 c_5_5_tuktuk_the_returned.jpg          http://www.cardforge.org/fpics/tokens/c_5_5_tuktuk_the_returned.jpg
 c_6_12_construct.jpg                   http://www.cardforge.org/fpics/tokens/c_6_12_construct.jpg
@@ -223,7 +224,6 @@ venser_the_sojourner_emblem.jpg        http://www.cardforge.org/fpics/effects/ve
 morph.jpg                              http://www.cardforge.org/fpics/effects/morph.jpg
 
 # //These tokens are not currently used by any cards in Forge, but links provided should they be scripted so the correct name is used:
-# //c_4_4_kaldra.jpg                       http://www.cardforge.org/fpics/tokens/c_4_4_kaldra.jpg                       [5DN] Helm of Kaldra
 # //g_1_1_wolves_of_the_hunt.jpg           http://www.cardforge.org/fpics/tokens/g_1_1_wolves_of_the_hunt.jpg           [LEG] Master of the Hunt
 # //r_1_1_warrior.jpg                      http://www.cardforge.org/fpics/tokens/r_1_1_warrior.jpg                      [SOK] Rally the Horde
 # //rg_1_1_goblin_warrior.jpg              http://www.cardforge.org/fpics/tokens/rg_1_1_goblin_warrior.jpg              [SHM] Wort, the Raidmother
