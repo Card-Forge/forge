@@ -42,7 +42,6 @@ import forge.gui.home.quest.DialogChooseSets;
 import forge.gui.toolbox.FLabel;
 import forge.gui.toolbox.FSpinner;
 import forge.item.CardPrinted;
-import forge.item.InventoryItem;
 import forge.item.ItemPredicate;
 import forge.quest.QuestWorld;
 import forge.quest.data.GameFormatQuest;
@@ -87,26 +86,13 @@ public enum CCardCatalog implements ICDoc {
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setCommand(new Command() {
             @Override
             public void execute() {
-                CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().addCard();
-                CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().getTableCatalog().getTable().requestFocusInWindow();
-                CStatistics.SINGLETON_INSTANCE.update();
-                CProbabilities.SINGLETON_INSTANCE.update();
+                CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(false);
             }
         });
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4().setCommand(new Command() {
             @Override
             public void execute() {
-                final InventoryItem item = CDeckEditorUI.SINGLETON_INSTANCE
-                        .getCurrentEditorController().getTableCatalog().getSelectedCard();
-
-                for (int i = 0; i < 4; i++) {
-                    if (item != null && item.equals(CDeckEditorUI.SINGLETON_INSTANCE
-                            .getCurrentEditorController().getTableCatalog().getSelectedCard())) {
-                        CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().addCard();
-                    }
-                }
-                CStatistics.SINGLETON_INSTANCE.update();
-                CProbabilities.SINGLETON_INSTANCE.update();
+                CDeckEditorUI.SINGLETON_INSTANCE.addSelectedCards(true);
             }
         });
         
@@ -328,8 +314,10 @@ public enum CCardCatalog implements ICDoc {
 
         // Apply to table
         // TODO: is there really no way to make this type safe?
-        ((ACEditorBase<CardPrinted, DeckBase>)CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController())
-            .getTableCatalog().setFilter(filter);
+        ACEditorBase<?, ?> editor = CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();
+        if (null != editor) {
+            ((ACEditorBase<CardPrinted, DeckBase>)editor).getTableCatalog().setFilter(filter);
+        }
     }
     
     private boolean canSearch() {

@@ -93,8 +93,7 @@ public final class CEditorVariant extends ACEditorBase<CardPrinted, Deck> {
      * @see forge.gui.deckeditor.ACEditorBase#addCard()
      */
     @Override
-    public void addCard() {
-        final InventoryItem item = this.getTableCatalog().getSelectedCard();
+    public void addCard(InventoryItem item) {
         if ((item == null) || !(item instanceof CardPrinted)) {
             return;
         }
@@ -109,8 +108,7 @@ public final class CEditorVariant extends ACEditorBase<CardPrinted, Deck> {
      * @see forge.gui.deckeditor.ACEditorBase#removeCard()
      */
     @Override
-    public void removeCard() {
-        final InventoryItem item = this.getTableDeck().getSelectedCard();
+    public void removeCard(InventoryItem item) {
         if ((item == null) || !(item instanceof CardPrinted)) {
             return;
         }
@@ -132,7 +130,7 @@ public final class CEditorVariant extends ACEditorBase<CardPrinted, Deck> {
         Iterable<CardPrinted> allNT = CardDb.instance().getAllNonTraditionalCards();
         allNT = Iterables.filter(allNT, cardPoolCondition);
         
-        this.getTableCatalog().setDeck(ItemPool.createFrom(allNT, CardPrinted.class));
+        this.getTableCatalog().setDeck(ItemPool.createFrom(allNT, CardPrinted.class, true));
         this.getTableDeck().setDeck(this.controller.getModel().getSideboard());
     }
 

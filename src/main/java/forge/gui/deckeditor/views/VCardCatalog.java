@@ -63,7 +63,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
     private final FLabel btnAdd = new FLabel.Builder()
             .fontSize(14)
             .text("Add card")
-            .tooltip("Add selected card to current deck (or double click the row)")
+            .tooltip("Add selected card to current deck (or double click the row or hit the spacebar)")
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_PLUS))
             .iconScaleAuto(false).hoverable(true).build();
     private final FLabel btnAdd4 = new FLabel.Builder()
@@ -239,6 +239,16 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
                 .build();
     }
 
+    public void focusTable() {
+        if (null != tblCards) {
+            tblCards.requestFocusInWindow();
+            
+            if (0 < tblCards.getRowCount()) {
+                tblCards.changeSelection(0, 0, false, false);
+            }
+        }
+    }
+    
     @SuppressWarnings("serial")
     public void addRestrictionWidget(JComponent component, final Command onRemove) {
         final JPanel pnl = new JPanel(new MigLayout("insets 2, gap 2, h 30!"));

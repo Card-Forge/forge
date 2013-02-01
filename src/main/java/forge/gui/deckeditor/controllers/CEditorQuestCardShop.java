@@ -90,7 +90,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     
     private ItemPoolView<InventoryItem> cardsForSale;
     private final ItemPool<InventoryItem> fullCatalogCards =
-            ItemPool.createFrom(CardDb.instance().getAllTraditionalCards(), InventoryItem.class);
+            ItemPool.createFrom(CardDb.instance().getAllTraditionalCards(), InventoryItem.class, true);
     private boolean showingFullCatalog = false;
 
     // get pricelist:
@@ -287,77 +287,76 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
      * @see forge.gui.deckeditor.ACEditorBase#addCard()
      */
     @Override
-    public void addCard() {
+    public void addCard(InventoryItem item) {
         if (showingFullCatalog) {
             // no "buying" from the full catalog
             return;
         }
         
-        final InventoryItem item = this.getTableCatalog().getSelectedCard();
         if (item == null) {
             return;
         }
 
         final int value = this.getCardValue(item);
 
-        if (value <= this.questData.getAssets().getCredits()) {
+        if (value > this.questData.getAssets().getCredits()) {
+            JOptionPane.showMessageDialog(null, "Not enough credits!");
+            return;
+        }
+        
+        if (item instanceof CardPrinted) {
+            this.getTableCatalog().removeCard(item);
 
-            if (item instanceof CardPrinted) {
-                this.getTableCatalog().removeCard(item);
+            final CardPrinted card = (CardPrinted) item;
+            this.getTableDeck().addCard(card);
+            this.questData.getCards().buyCard(card, value);
 
-                final CardPrinted card = (CardPrinted) item;
+        } else if (item instanceof OpenablePack) {
+            this.getTableCatalog().removeCard(item);
+
+            OpenablePack booster = null;
+            if (item instanceof BoosterPack) {
+                booster = (BoosterPack) ((BoosterPack) item).clone();
+            } else if (item instanceof TournamentPack) {
+                booster = (TournamentPack) ((TournamentPack) item).clone();
+            } else if (item instanceof FatPack) {
+                booster = (FatPack) ((FatPack) item).clone();
+            }
+            this.questData.getCards().buyPack(booster, value);
+            final List<CardPrinted> newCards = booster.getCards();
+            for (final CardPrinted card : newCards) {
                 this.getTableDeck().addCard(card);
-                this.questData.getCards().buyCard(card, value);
+            }
+            final CardListViewer c = new CardListViewer(booster.getName(),
+                    "You have found the following cards inside:", newCards);
+            c.show();
+        } else if (item instanceof PreconDeck) {
+            this.getTableCatalog().removeCard(item);
+            final PreconDeck deck = (PreconDeck) item;
+            this.questData.getCards().buyPreconDeck(deck, value);
 
-            } else if (item instanceof OpenablePack) {
-                this.getTableCatalog().removeCard(item);
-
-                OpenablePack booster = null;
-                if (item instanceof BoosterPack) {
-                    booster = (BoosterPack) ((BoosterPack) item).clone();
-                } else if (item instanceof TournamentPack) {
-                    booster = (TournamentPack) ((TournamentPack) item).clone();
-                } else if (item instanceof FatPack) {
-                    booster = (FatPack) ((FatPack) item).clone();
-                }
-                this.questData.getCards().buyPack(booster, value);
-                final List<CardPrinted> newCards = booster.getCards();
-                for (final CardPrinted card : newCards) {
-                    this.getTableDeck().addCard(card);
-                }
-                final CardListViewer c = new CardListViewer(booster.getName(),
-                        "You have found the following cards inside:", newCards);
-                c.show();
-            } else if (item instanceof PreconDeck) {
-                this.getTableCatalog().removeCard(item);
-                final PreconDeck deck = (PreconDeck) item;
-                this.questData.getCards().buyPreconDeck(deck, value);
-
-                for (final CardPrinted card : deck.getDeck().getMain().toFlatList()) {
-                    this.getTableDeck().addCard(card);
-                }
-                JOptionPane.showMessageDialog(null, String.format(
-                        "Deck '%s' was added to your decklist.%n%nCards from it were also added to your pool.",
-                        deck.getName()), "Thanks for purchasing!", JOptionPane.INFORMATION_MESSAGE);
-
+            for (final CardPrinted card : deck.getDeck().getMain().toFlatList()) {
+                this.getTableDeck().addCard(card);
             }
 
-            this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
-        } else {
-            JOptionPane.showMessageDialog(null, "Not enough credits!");
+            JOptionPane.showMessageDialog(null, String.format(
+                    "Deck '%s' was added to your decklist.%n%nCards from it were also added to your pool.",
+                    deck.getName()), "Thanks for purchasing!", JOptionPane.INFORMATION_MESSAGE);
         }
+
+        this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
     }
 
     /* (non-Javadoc)
      * @see forge.gui.deckeditor.ACEditorBase#removeCard()
      */
     @Override
-    public void removeCard() {
+    public void removeCard(InventoryItem item) {
         if (showingFullCatalog) {
             // no "selling" to the full catalog
             return;
         }
-        final InventoryItem item = this.getTableDeck().getSelectedCard();
+
         if ((item == null) || !(item instanceof CardPrinted)) {
             return;
         }
@@ -398,19 +397,12 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
      */
     @Override
     public void init() {
-        this.setup();
+        setup();
 
         this.decksUsingMyCards = this.countDecksForEachCard();
-
         this.multiplier = this.questData.getCards().getSellMultiplier();
+        this.cardsForSale = this.questData.getCards().getShopList();
 
-        cardsForSale = this.questData.getCards().getShopList();
-        if (cardsForSale.isEmpty()) {
-            this.questData.getCards().generateCardsInShop();
-            cardsForSale = this.questData.getCards().getShopList();
-        }
-
-        // newCardsList = questData.getCards().getNewCards();
         final ItemPool<InventoryItem> ownedItems = new ItemPool<InventoryItem>(InventoryItem.class);
         ownedItems.addAll(this.questData.getCards().getCardpool().getView());
 

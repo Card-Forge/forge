@@ -3,6 +3,7 @@ package forge.gui.deckeditor;
 import javax.swing.SwingWorker;
 
 import forge.gui.deckeditor.controllers.CCardCatalog;
+import forge.gui.deckeditor.views.VCardCatalog;
 import forge.gui.framework.IVTopLevelUI;
 import forge.gui.framework.SLayoutIO;
 
@@ -36,6 +37,7 @@ public enum VDeckEditorUI implements IVTopLevelUI {
             @Override
             public Void doInBackground() {
                 SLayoutIO.loadLayout(null);
+                VCardCatalog.SINGLETON_INSTANCE.focusTable();
                 return null;
             }
         };

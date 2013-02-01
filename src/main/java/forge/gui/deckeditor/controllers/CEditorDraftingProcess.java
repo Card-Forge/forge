@@ -116,8 +116,7 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
      * @see forge.gui.deckeditor.ACEditorBase#addCard()
      */
     @Override
-    public void addCard() {
-        final InventoryItem item = this.getTableCatalog().getSelectedCard();
+    public void addCard(InventoryItem item) {
         if ((item == null) || !(item instanceof CardPrinted)) {
             return;
         }
@@ -142,7 +141,7 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
      * @see forge.gui.deckeditor.ACEditorBase#removeCard()
      */
     @Override
-    public void removeCard() {
+    public void removeCard(InventoryItem item) {
     }
 
     /**
@@ -269,6 +268,8 @@ public class CEditorDraftingProcess extends ACEditorBase<CardPrinted, DeckGroup>
 
         //Remove buttons
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4().setVisible(false);
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setVisible(false);
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setVisible(false);
 
         VCurrentDeck.SINGLETON_INSTANCE.getBtnDoSideboard().setVisible(false);
 

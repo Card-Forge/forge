@@ -51,7 +51,7 @@ public class BoosterDraftTest implements IBoosterDraft {
         this.n--;
         BoosterData booster = Singletons.getModel().getBoosters().get("M11");
         final BoosterGenerator pack = new BoosterGenerator(booster.getEditionFilter());
-        return ItemPool.createFrom(pack.getBoosterPack(booster), CardPrinted.class);
+        return ItemPool.createFrom(pack.getBoosterPack(booster), CardPrinted.class, false);
     }
 
     /** {@inheritDoc} */

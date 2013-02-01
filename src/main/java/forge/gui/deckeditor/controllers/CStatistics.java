@@ -74,7 +74,7 @@ public enum CStatistics implements ICDoc {
         if (ed == null) { return; }
 
         final ItemPoolView<CardPrinted> deck = ItemPool.createFrom(
-                ed.getTableDeck().getCards(), CardPrinted.class);
+                ed.getTableDeck().getCards(), CardPrinted.class, false);
 
         int total = deck.countAll();
 

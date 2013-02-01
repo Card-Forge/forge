@@ -21,6 +21,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
@@ -157,9 +158,11 @@ public final class EditorTableView<T extends InventoryItem> {
                 Point p = e.getPoint();
                 int row = rowAtPoint(p);
                 int col = columnAtPoint(p);
-                Object val = table.getValueAt(row, col);
+                if (col >= table.getColumnCount() || row >= table.getRowCount()) {
+                    return null;
+                }
 
-                return _getCellTooltip(getCellRenderer(row, col), row, col, val);
+                return _getCellTooltip(getCellRenderer(row, col), row, col, table.getValueAt(row, col));
             }
         };
         
@@ -252,7 +255,7 @@ public final class EditorTableView<T extends InventoryItem> {
      *            an Iterable<InventoryITem>
      */
     public void setDeck(final Iterable<InventoryItem> cards) {
-        this.setDeckImpl(ItemPool.createFrom(cards, this.genericType));
+        this.setDeckImpl(ItemPool.createFrom(cards, this.genericType, false));
     }
 
     /**
@@ -262,7 +265,7 @@ public final class EditorTableView<T extends InventoryItem> {
      *            an ItemPoolView
      */
     public void setDeck(final ItemPoolView<T> poolView) {
-        this.setDeckImpl(ItemPool.createFrom(poolView, this.genericType));
+        this.setDeckImpl(ItemPool.createFrom(poolView, this.genericType, false));
     }
 
     /**
@@ -299,6 +302,17 @@ public final class EditorTableView<T extends InventoryItem> {
         final int iRow = this.table.getSelectedRow();
         return iRow >= 0 ? this.model.rowToCard(iRow).getKey() : null;
     }
+    
+    /**
+     * returns all selected cards
+     */
+    public List<InventoryItem> getSelectedCards() {
+        List<InventoryItem> items = new ArrayList<InventoryItem>();
+        for (int row : table.getSelectedRows()) {
+            items.add(model.rowToCard(row).getKey());
+        }
+        return items;
+    }
 
     private boolean isUnfiltered() {
         return this.filter == null;
@@ -313,7 +327,9 @@ public final class EditorTableView<T extends InventoryItem> {
      */
     public void setFilter(final Predicate<T> filterToSet) {
         this.filter = filterToSet;
-        this.updateView(true);
+        if (null != pool) {
+            this.updateView(true);
+        }
     }
 
     /**
@@ -328,7 +344,7 @@ public final class EditorTableView<T extends InventoryItem> {
         this.pool.add(card);
         if (this.isUnfiltered()) {
             this.model.addCard(card);
-        }
+       }
         this.updateView(false);
     }
 
@@ -347,6 +363,10 @@ public final class EditorTableView<T extends InventoryItem> {
         }
         this.updateView(false);
         this.fixSelection(n);
+    }
+    
+    public int getCardCount(final T card) {
+        return this.pool.count(card);
     }
 
     /**

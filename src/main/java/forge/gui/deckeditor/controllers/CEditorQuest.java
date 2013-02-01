@@ -141,8 +141,7 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
      * @see forge.gui.deckeditor.ACEditorBase#addCard()
      */
     @Override
-    public void addCard() {
-        final InventoryItem item = this.getTableCatalog().getSelectedCard();
+    public void addCard(InventoryItem item) {
         if ((item == null) || !(item instanceof CardPrinted)) {
             return;
         }
@@ -157,8 +156,7 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
      * @see forge.gui.deckeditor.ACEditorBase#removeCard()
      */
     @Override
-    public void removeCard() {
-        final InventoryItem item = this.getTableDeck().getSelectedCard();
+    public void removeCard(InventoryItem item) {
         if ((item == null) || !(item instanceof CardPrinted)) {
             return;
         }

@@ -504,7 +504,8 @@ public final class QuestUtilCards {
         if (qc.getFormat() == null) {
               cardList = CardDb.instance().getAllTraditionalCards(); }
         else {
-            cardList = Iterables.filter(CardDb.instance().getAllTraditionalCards(), qc.getFormat().getFilterPrinted());
+            cardList = Iterables.filter(CardDb.instance().getAllTraditionalCards(),
+                    qc.getFormat().getFilterPrinted());
         }
 
         final BoosterGenerator pack = new BoosterGenerator(cardList);

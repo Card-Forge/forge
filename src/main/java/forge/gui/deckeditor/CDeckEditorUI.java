@@ -21,12 +21,16 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
 import forge.Card;
 import forge.deck.DeckBase;
 import forge.gui.CardContainer;
 import forge.gui.deckeditor.SEditorIO.EditorPreference;
 import forge.gui.deckeditor.controllers.ACEditorBase;
+import forge.gui.deckeditor.controllers.CProbabilities;
+import forge.gui.deckeditor.controllers.CStatistics;
+import forge.gui.deckeditor.tables.EditorTableView;
 import forge.gui.match.controllers.CDetail;
 import forge.gui.match.controllers.CPicture;
 import forge.item.InventoryItem;
@@ -80,6 +84,7 @@ public enum CDeckEditorUI implements CardContainer {
 
     /**
      * Set controller for current configuration of editor.
+     * 
      * @param editor0 &emsp; {@link forge.gui.deckeditor.controllers.ACEditorBase}<?, ?>
      */
     public void setCurrentEditorController(ACEditorBase<?, ?> editor0) {
@@ -94,6 +99,46 @@ public enum CDeckEditorUI implements CardContainer {
             childController.getTableDeck().setWantUnique(wantUnique);
         }
     }
+    
+    private interface _MoveAction {
+        void move(InventoryItem item);
+    }
+
+    private void moveSelectedCards(
+            EditorTableView<InventoryItem> table, _MoveAction moveAction, boolean moveFour) {
+        List<InventoryItem> items = table.getSelectedCards();
+        for (InventoryItem item : items) {
+            final int numToMove = Math.min(moveFour? 4 : 1, table.getCardCount(item));
+            for (int count = 0; numToMove > count; ++count) {
+                moveAction.move(item);
+            }
+        }
+
+        CStatistics.SINGLETON_INSTANCE.update();
+        CProbabilities.SINGLETON_INSTANCE.update();
+    }
+
+    @SuppressWarnings("unchecked")
+    public void addSelectedCards(boolean addFour) {
+        moveSelectedCards((EditorTableView<InventoryItem>)childController.getTableCatalog(),
+                new _MoveAction() {
+            @Override
+            public void move(InventoryItem item) {
+                childController.addCard(item);
+            }
+        }, addFour);
+    }
+
+    @SuppressWarnings("unchecked")
+    public void removeSelectedCards(boolean removeFour) {
+        moveSelectedCards((EditorTableView<InventoryItem>)childController.getTableDeck(),
+                new _MoveAction() {
+            @Override
+            public void move(InventoryItem item) {
+                childController.removeCard(item);
+            }
+        }, removeFour);
+    }
 
     //========== Other methods
     /**
@@ -103,28 +148,28 @@ public enum CDeckEditorUI implements CardContainer {
         childController.getTableCatalog().getTable().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(final KeyEvent e) {
-                if (e.getKeyChar() == ' ') { childController.addCard(); }
+                if (e.getKeyChar() == ' ') { addSelectedCards(false); }
             }
         });
 
         childController.getTableDeck().getTable().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(final KeyEvent e) {
-                if (e.getKeyChar() == ' ') { childController.removeCard(); }
+                if (e.getKeyChar() == ' ') { removeSelectedCards(false); }
             }
         });
 
         childController.getTableCatalog().getTable().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(final MouseEvent e) {
-                if (e.getClickCount() == 2) { childController.addCard(); }
+                if (e.getClickCount() == 2) { addSelectedCards(false); }
             }
         });
 
         childController.getTableDeck().getTable().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(final MouseEvent e) {
-                if (e.getClickCount() == 2) { childController.removeCard(); }
+                if (e.getClickCount() == 2) { removeSelectedCards(false); }
             }
         });
 

@@ -4,10 +4,10 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.io.File;
 
-import javax.swing.filechooser.FileFilter;
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileFilter;
 
 import forge.Command;
 import forge.deck.Deck;
@@ -20,7 +20,6 @@ import forge.gui.deckeditor.tables.DeckController;
 import forge.gui.deckeditor.views.VCurrentDeck;
 import forge.gui.framework.ICDoc;
 import forge.gui.toolbox.FLabel;
-import forge.item.InventoryItem;
 import forge.properties.ForgeProps;
 import forge.properties.NewConstants;
 
@@ -104,22 +103,12 @@ public enum CCurrentDeck implements ICDoc {
 
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove()).setCommand(new Command() {
             @Override  public void execute() {
-                CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().removeCard();
+                CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(false);
             } });
 
         ((FLabel) VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4()).setCommand(new Command() {
             @Override  public void execute() {
-                final InventoryItem item = CDeckEditorUI.SINGLETON_INSTANCE
-                        .getCurrentEditorController().getTableDeck().getSelectedCard();
-
-                if (item == null) { return; }
-
-                for (int i = 0; i < 4; i++) {
-                    if (item.equals(CDeckEditorUI.SINGLETON_INSTANCE
-                            .getCurrentEditorController().getTableDeck().getSelectedCard())) {
-                        CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController().removeCard();
-                    }
-                }
+                CDeckEditorUI.SINGLETON_INSTANCE.removeSelectedCards(true);
             }
         });
     }

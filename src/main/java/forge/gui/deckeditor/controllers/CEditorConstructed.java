@@ -91,8 +91,7 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
      * @see forge.gui.deckeditor.ACEditorBase#addCard()
      */
     @Override
-    public void addCard() {
-        final InventoryItem item = this.getTableCatalog().getSelectedCard();
+    public void addCard(InventoryItem item) {
         if ((item == null) || !(item instanceof CardPrinted)) {
             return;
         }
@@ -110,8 +109,7 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
      * @see forge.gui.deckeditor.ACEditorBase#removeCard()
      */
     @Override
-    public void removeCard() {
-        final InventoryItem item = this.getTableDeck().getSelectedCard();
+    public void removeCard(InventoryItem item) {
         if ((item == null) || !(item instanceof CardPrinted)) {
             return;
         }
@@ -133,7 +131,7 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
     @Override
     public void resetTables() {
         // Constructed mode can use all cards, no limitations.
-        this.getTableCatalog().setDeck(ItemPool.createFrom(CardDb.instance().getAllTraditionalCards(), CardPrinted.class));
+        this.getTableCatalog().setDeck(ItemPool.createFrom(CardDb.instance().getAllTraditionalCards(), CardPrinted.class, true));
         this.getTableDeck().setDeck(this.controller.getModel().getMain());
     }
 
@@ -161,7 +159,7 @@ public final class CEditorConstructed extends ACEditorBase<CardPrinted, Deck> {
         } else {
             lstCatalogCols.remove(SColumnUtil.getColumn(ColumnName.CAT_QUANTITY));
             this.getTableCatalog().setAvailableColumns(lstCatalogCols);
-            this.getTableCatalog().setDeck(ItemPool.createFrom(CardDb.instance().getAllTraditionalCards(), CardPrinted.class));
+            this.getTableCatalog().setDeck(ItemPool.createFrom(CardDb.instance().getAllTraditionalCards(), CardPrinted.class, true));
             this.getTableDeck().setDeck(this.controller.getModel().getMain());
         }
 
