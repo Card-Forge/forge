@@ -11,6 +11,9 @@ import java.util.List;
 
 import javax.swing.JDialog;
 import javax.swing.ListModel;
+import javax.swing.SwingUtilities;
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -66,8 +69,15 @@ public class DualListBox<T> extends FPanel {
         this.remainingObjects = remainingObjects;
         initScreen();
         orderedLabel.setText(label);
-        if (sourceElements != null) {
+        if (sourceElements != null && !sourceElements.isEmpty()) {
             addSourceElements(sourceElements);
+            
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    sourceList.setSelectedIndex(0);
+                }
+            });
         }
         if (destElements != null) {
             addDestinationElements(destElements);
@@ -135,19 +145,17 @@ public class DualListBox<T> extends FPanel {
     }
 
     private void clearSourceSelected() {
-        Object[] selected = sourceList.getSelectedValues();
+        int[] selected = sourceList.getSelectedIndices();
         for (int i = selected.length - 1; i >= 0; --i) {
             sourceListModel.removeElement(selected[i]);
         }
-        sourceList.getSelectionModel().clearSelection();
     }
 
     private void clearDestinationSelected() {
-        Object[] selected = destList.getSelectedValues();
+        int[] selected = destList.getSelectedIndices();
         for (int i = selected.length - 1; i >= 0; --i) {
             destListModel.removeElement(selected[i]);
         }
-        destList.getSelectionModel().clearSelection();
     }
 
     public List<T> getOrderedList() {
@@ -159,25 +167,64 @@ public class DualListBox<T> extends FPanel {
         return sourceListModel.model;
     }
 
+    private static void showSelectedCard(Object obj) {
+        Card card = null;
+        if (obj instanceof Card) {
+            card = (Card) obj;
+        } else if (obj instanceof SpellAbility) {
+            card = ((SpellAbility) obj).getSourceCard();
+        } else if (obj instanceof CardPrinted) {
+            card = ((CardPrinted) obj).getMatchingForgeCard();
+        }
+
+        GuiUtils.clearPanelSelections();
+        if (card != null) {
+            CMatchUI.SINGLETON_INSTANCE.setCard(card);
+            GuiUtils.setPanelSelection(card);
+        }
+    }
+
     private static void addCardViewListener(final FList list) {
+        list.getModel().addListDataListener(new ListDataListener() {
+            @Override
+            public void intervalRemoved(ListDataEvent e) {
+                ListModel model = list.getModel();
+                if (0 == model.getSize()) {
+                    // nothing left to show
+                    return;
+                }
+                
+                int cardIdxPre = e.getIndex0();
+                if (model.getSize() <= cardIdxPre) {
+                    // the last element got removed, get the one above it
+                    --cardIdxPre;
+                }
+                final int cardIdx = cardIdxPre;
+                showSelectedCard(model.getElementAt(cardIdx));
+                
+                // invoke this later since the list is out of sync with the model
+                // at this moment.
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        list.setSelectedIndex(cardIdx);
+                    }
+                });
+            }
+            
+            @Override
+            public void intervalAdded(ListDataEvent e) {
+            }
+            
+            @Override
+            public void contentsChanged(ListDataEvent e) {
+            }
+        });
+        
         list.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(final ListSelectionEvent ev) {
-                Card card = null;
-                Object obj = list.getSelectedValue();
-                if (obj instanceof Card) {
-                    card = (Card) obj;
-                } else if (obj instanceof SpellAbility) {
-                    card = ((SpellAbility) obj).getSourceCard();
-                } else if (obj instanceof CardPrinted) {
-                    card = ((CardPrinted) obj).getMatchingForgeCard();
-                }
-
-                GuiUtils.clearPanelSelections();
-                if (card != null) {
-                    CMatchUI.SINGLETON_INSTANCE.setCard(card);
-                    GuiUtils.setPanelSelection(card);
-                }
+                showSelectedCard(list.getSelectedValue());
             }
         });
     }

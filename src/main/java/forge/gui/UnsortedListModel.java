@@ -1,8 +1,8 @@
 package forge.gui;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.AbstractListModel;
@@ -13,7 +13,7 @@ public class UnsortedListModel<T> extends AbstractListModel { // Java 7 has a ge
     List<T> model;
 
     public UnsortedListModel() {
-        model = new LinkedList<T>();
+        model = new ArrayList<T>();
     }
 
     @Override
@@ -58,11 +58,9 @@ public class UnsortedListModel<T> extends AbstractListModel { // Java 7 has a ge
         return model.iterator();
     }
 
-    public boolean removeElement(Object element) {
-        boolean removed = model.remove(element);
-        if (removed) {
-            fireContentsChanged(this, 0, getSize());
-        }
-        return removed;
+    public void removeElement(int idx) {
+        model.remove(idx);
+        fireIntervalRemoved(this, idx, idx);
+        fireContentsChanged(this, 0, getSize());
     }
 }
