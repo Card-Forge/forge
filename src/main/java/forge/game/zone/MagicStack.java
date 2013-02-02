@@ -699,7 +699,7 @@ public class MagicStack extends MyObservable {
         // Copied spells aren't cast
         // per se so triggers shouldn't
         // run for them.
-        if (!sp.getSourceCard().isCopiedSpell() && !(sp instanceof AbilityStatic) && !sp.isCopied()) {
+        if (!(sp instanceof AbilityStatic) && !sp.isCopied()) {
             // Run SpellAbilityCast triggers
             HashMap<String, Object> runParams = new HashMap<String, Object>();
             runParams.put("Cost", sp.getPayCosts());
