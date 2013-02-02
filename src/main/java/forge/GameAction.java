@@ -1134,17 +1134,8 @@ public class GameAction {
                         c.unEnchantEntity(c.getEnchanting());
                         checkAgain = true;
                     }
-                    if ((c.getNetDefense() <= c.getDamage()) && !c.hasKeyword("Indestructible")) {
+                    if (c.getNetDefense() <= 0 || c.getNetDefense() <= c.getDamage()) {
                         this.destroy(c);
-                        // this is untested with instants and abilities but
-                        // required for First Strike combat phase
-                        game.getCombat().removeFromCombat(c);
-                        checkAgain = true;
-                    } else if (c.getNetDefense() <= 0) {
-                        // TODO This shouldn't be a destroy, and should happen
-                        // before the damage check probably
-                        this.destroy(c);
-                        game.getCombat().removeFromCombat(c);
                         checkAgain = true;
                     }
                     // Soulbond unpairing
@@ -1304,6 +1295,38 @@ public class GameAction {
 
     /**
      * <p>
+     * destroy.
+     * </p>
+     * 
+     * @param c
+     *            a {@link forge.Card} object.
+     * @return a boolean.
+     */
+    public final boolean destroy(final Card c) {
+        if (!c.isInPlay()
+                || (c.hasKeyword("Indestructible") && (!c.isCreature() || c.getNetDefense() > 0))) {
+            return false;
+        }
+
+        if (c.canBeShielded() && (!c.isCreature() || c.getNetDefense() > 0)
+                && (c.getShield() > 0 || c.hasKeyword("If CARDNAME would be destroyed, regenerate it."))) {
+            c.subtractShield();
+            c.setDamage(0);
+            c.tap();
+            c.addRegeneratedThisTurn();
+            game.getCombat().removeFromCombat(c);
+
+            // Play the Regen sound
+            Singletons.getModel().getGame().getEvents().post(new CardRegeneratedEvent());
+
+            return false;
+        }
+
+        return this.destroyNoRegeneration(c);
+    }
+
+    /**
+     * <p>
      * destroyNoRegeneration.
      * </p>
      * 
@@ -1312,7 +1335,8 @@ public class GameAction {
      * @return a boolean.
      */
     public final boolean destroyNoRegeneration(final Card c) {
-        if (!c.isInPlay() || c.hasKeyword("Indestructible")) {
+        if (!c.isInPlay()
+                || (c.hasKeyword("Indestructible") && (!c.isCreature() || c.getNetDefense() > 0))) {
             return false;
         }
 
@@ -1429,6 +1453,8 @@ public class GameAction {
         final boolean persist = (c.hasKeyword("Persist") && (c.getCounters(CounterType.M1M1) == 0)) && !c.isToken();
 
         final boolean undying = (c.hasKeyword("Undying") && (c.getCounters(CounterType.P1P1) == 0)) && !c.isToken();
+        
+        game.getCombat().removeFromCombat(c);
 
         final Card newCard = this.moveToGraveyard(c);
 
@@ -1485,74 +1511,6 @@ public class GameAction {
         }
         return true;
     } // sacrificeDestroy()
-
-    /**
-     * <p>
-     * destroy.
-     * </p>
-     * 
-     * @param c
-     *            a {@link forge.Card} object.
-     * @return a boolean.
-     */
-    public final boolean destroy(final Card c) {
-        if (!c.isInPlay()
-                || (c.hasKeyword("Indestructible") && (!c.isCreature() || (c.getNetDefense() > 0)))) {
-            return false;
-        }
-
-        if (c.canBeShielded()
-                && (c.getShield() > 0 || c.hasKeyword("If CARDNAME would be destroyed, regenerate it."))) {
-            c.subtractShield();
-            c.setDamage(0);
-            c.tap();
-            c.addRegeneratedThisTurn();
-            game.getCombat().removeFromCombat(c);
-
-            // Play the Regen sound
-            Singletons.getModel().getGame().getEvents().post(new CardRegeneratedEvent());
-
-            return false;
-        }
-
-        if (c.isEnchanted()) {
-            List<Card> list = new ArrayList<Card>(c.getEnchantedBy());
-            list = CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card crd) {
-                    return crd.hasKeyword("Totem armor");
-                }
-            });
-            CardLists.sortCMC(list);
-
-            if (list.size() != 0) {
-                final Card crd;
-                if (list.size() == 1) {
-                    crd = list.get(0);
-                } else {
-                    if (c.getController().isHuman()) {
-                        crd = GuiChoose.oneOrNone("Select totem armor to destroy", list);
-                    } else {
-                        crd = list.get(0);
-                    }
-                }
-
-                c.setDamage(0);
-                this.destroy(crd);
-                System.out.println("Totem armor destroyed instead of original card");
-
-                // Play the Destroy sound
-                Singletons.getModel().getGame().getEvents().post(new CardDestroyedEvent());
-
-                return false;
-            }
-        } // totem armor
-
-        // Play the Destroy sound
-        Singletons.getModel().getGame().getEvents().post(new CardDestroyedEvent());
-
-        return this.sacrificeDestroy(c);
-    }
 
     /**
      * <p>
