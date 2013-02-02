@@ -2872,6 +2872,7 @@ res/cardsfolder/d/dunerider_outlaw.txt svneol=native#text/plain
 res/cardsfolder/d/dungeon_geists.txt -text
 res/cardsfolder/d/dungeon_shade.txt svneol=native#text/plain
 res/cardsfolder/d/dungrove_elder.txt svneol=native#text/plain
+res/cardsfolder/d/duplicant.txt -text
 res/cardsfolder/d/duress.txt svneol=native#text/plain
 res/cardsfolder/d/durkwood_baloth.txt svneol=native#text/plain
 res/cardsfolder/d/durkwood_boars.txt svneol=native#text/plain
@@ -8398,6 +8399,7 @@ res/cardsfolder/r/rhystic_deluge.txt svneol=native#text/plain
 res/cardsfolder/r/rhystic_scrying.txt -text
 res/cardsfolder/r/rhystic_shield.txt -text
 res/cardsfolder/r/rhystic_study.txt svneol=native#text/plain
+res/cardsfolder/r/rhystic_syphon.txt -text
 res/cardsfolder/r/rhystic_tutor.txt -text
 res/cardsfolder/r/rib_cage_spider.txt svneol=native#text/plain
 res/cardsfolder/r/ribbon_snake.txt -text

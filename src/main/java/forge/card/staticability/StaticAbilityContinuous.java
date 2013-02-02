@@ -188,6 +188,15 @@ public class StaticAbilityContinuous {
                 final String chosenType = hostCard.getChosenType();
                 addTypes[0] = chosenType;
                 se.setChosenType(chosenType);
+            } else if (addTypes[0].equals("ImprintedCreatureType")) {
+                final ArrayList<String> imprint = hostCard.getImprinted().get(0).getType();
+                ArrayList<String> imprinted = new ArrayList<String>(); 
+                for (String t : imprint ) {
+                    if (CardUtil.isACreatureType(t) || t.equals("AllCreatureTypes")) {
+                        imprinted.add(t);
+                    }
+                }
+                addTypes = imprinted.toArray(new String[imprinted.size()]);
             }
         }
 
