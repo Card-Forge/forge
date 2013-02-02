@@ -330,6 +330,28 @@ Fixes/Features:
 - highlight the enchantment icon in purple for the default skin so you can see it on the toggle button
 - Added a fluff piece to the changes.txt file.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- remove width restriction from challenger name widget
+- make wins/best streak widget label multiline
+- prevent bazaar current shop button from becoming unselected
+- Fixed Skyblinder Staff.
+- Fixed Scorchwalker.
+- Fixed Leyline Phantom bug.
+- Fixed possible NPE in performTest checking "TargetsValid".
+- don't try to get tooltips for items that have disappeared from the table
+- add info in tooltip about clicking filter toggles
+- Convert Yosei to script
+- Fixed Korozda Guildmage.
+- Updated 6 of the Shandalar World quest decks.
+- Fixed AEtherize.
+- Fixed Aven Mimeomancer.
+- Restructured Destroy functions in GameAction to fix Knight of the Holy Nimbus with zero toughness.
+- Convert Windfall to the script Whispering Madness uses
+- Convert Leeches to Script
+- removed redundant check on copied card to make copies that are cast work with triggers
+- Added spelldescription to Rhystic Syphon
+- Updated 4 of the Shandalar World quest decks.
+- autoselect first item when choosing order of simultaneous abilities and autoselect next item when current item is added/removed
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -381,6 +403,8 @@ Kill-Suit Cultist
 Skyship Weatherlight
 Spelljack
 Muse Vessel
+Rhystic Syphon
+Duplicant
 
 
 Added the following new Gatecrash cards:
