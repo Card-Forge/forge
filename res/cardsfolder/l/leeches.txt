@@ -1,7 +1,10 @@
 Name:Leeches
 ManaCost:1 W W
 Types:Sorcery
-Text:Target player loses all poison counters. Leeches deals that much damage to that player.
+Text:no text
+A:SP$ DealDamage | Cost$ 1 W W | ValidTgts$ Player | NumDmg$ X | SubAbility$ Unpoison | SpellDescription$ Target player loses all poison counters. Leeches deals that much damage to that player.
+SVar:Unpoison:DB$ Poison | Num$ -X
+SVar:X:TargetedPlayer$PoisonCounters
 SVar:RemAIDeck:True
 SVar:Rarity:Rare
 SVar:Picture:http://www.wizards.com/global/images/magic/general/leeches.jpg

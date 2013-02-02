@@ -610,47 +610,6 @@ public class CardFactorySorceries {
         return spell;
     }
 
-    private static final SpellAbility getLeeches(final Card card) {
-        /*
-         * Target player loses all poison counters. Leeches deals that much
-         * damage to that player.
-         */
-        final Target tgt = new Target(card, "Select target player", "Player");
-        final Cost cost = new Cost(card, "1 W W", false);
-        return new Spell(card, cost, tgt) {
-            private static final long serialVersionUID = 8555498267738686288L;
-
-            @Override
-            public void resolve() {
-                final Player p = tgt.getTargetPlayers().get(0);
-                final int counters = p.getPoisonCounters();
-                p.addDamage(counters, card);
-                p.subtractPoisonCounters(counters);
-            } // resolve()
-
-            @Override
-            public boolean canPlayAI() {
-                final Player ai = getActivatingPlayer();
-                final Player opp = ai.getOpponent();
-                final int humanPoison = opp.getPoisonCounters();
-                final int compPoison = ai.getPoisonCounters();
-
-                if (opp.getLife() <= humanPoison) {
-                    tgt.addTarget(opp);
-                    return true;
-                }
-
-                if ((((2 * (11 - compPoison)) < ai.getLife()) || (compPoison > 7))
-                        && (compPoison < (ai.getLife() - 2))) {
-                    tgt.addTarget(ai);
-                    return true;
-                }
-
-                return false;
-            }
-        };
-    }
-
     private static final SpellAbility getSanityGrinding(final Card card) {
         /*
          * Chroma - Reveal the top ten cards of your library. For each blue
@@ -1212,7 +1171,6 @@ public class CardFactorySorceries {
         } else if (cardName.equals("Global Ruin")) { card.addSpellAbility(getGlobalRuin(card));
         } else if (cardName.equals("Balance")) { card.addSpellAbility(getBalance(card));
         } else if (cardName.equals("Patriarch's Bidding")) { card.addSpellAbility(getPatriarchsBidding(card));
-        } else if (cardName.equals("Leeches")) { card.addSpellAbility(getLeeches(card));
         } else if (cardName.equals("Sanity Grinding")) { card.addSpellAbility(getSanityGrinding(card));
         } else if (cardName.equals("Profane Command")) { card.addSpellAbility(getProfaneCommand(card));
         } else if (cardName.equals("Transmute Artifact")) { card.addSpellAbility(getTransmuteArtifact(card));

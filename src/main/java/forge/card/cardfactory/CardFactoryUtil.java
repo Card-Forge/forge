@@ -1886,6 +1886,12 @@ public class CardFactoryUtil {
                 return CardFactoryUtil.doXMath(players.get(0).getLifeLostThisTurn(), m, source);
             }
         }
+        
+        if (sq[0].contains("PoisonCounters")) {
+            if (players.size() > 0) {
+                return CardFactoryUtil.doXMath(players.get(0).getPoisonCounters(), m, source);
+            }
+        }
 
         if (sq[0].contains("TopOfLibraryCMC")) {
             if (players.size() > 0) {
