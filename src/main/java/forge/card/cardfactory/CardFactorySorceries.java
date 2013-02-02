@@ -559,43 +559,6 @@ public class CardFactorySorceries {
         };
     }
 
-    private static final SpellAbility getWindfall(final Card card) {
-        return new Spell(card) {
-            private static final long serialVersionUID = -7707012960887790709L;
-
-            @Override
-            public boolean canPlayAI() {
-                /*
-                 * We want compy to have less cards in hand than the human
-                 */
-                final Player ai = getActivatingPlayer();
-                final Player opp = ai.getOpponent();
-                final List<Card> humanHand = opp.getCardsIn(ZoneType.Hand);
-                final List<Card> computerHand = ai.getCardsIn(ZoneType.Hand);
-                return computerHand.size() < humanHand.size();
-            }
-
-            @Override
-            public void resolve() {
-                int max = Integer.MIN_VALUE;
-                for (Player p : Singletons.getModel().getGame().getPlayers()) {
-
-                    int s = p.getZone(ZoneType.Hand).size();
-                    max = Math.max(max, s);
-                }
-                for (Player p : Singletons.getModel().getGame().getPlayers()) {
-
-                    this.discardDraw(p, max);
-                }
-            } // resolve()
-
-            void discardDraw(final Player player, final int num) {
-                player.discardHand(this);
-                player.drawCards(num);
-            }
-        };
-    }
-
     private static final SpellAbility getPatriarchsBidding(final Card card) {
 
         final SpellAbility spell = new Spell(card) {
@@ -1248,7 +1211,6 @@ public class CardFactorySorceries {
         if (cardName.equals("Brilliant Ultimatum")) { card.addSpellAbility(getBrilliantUltimatum(card));
         } else if (cardName.equals("Global Ruin")) { card.addSpellAbility(getGlobalRuin(card));
         } else if (cardName.equals("Balance")) { card.addSpellAbility(getBalance(card));
-        } else if (cardName.equals("Windfall")) { card.addSpellAbility(getWindfall(card));
         } else if (cardName.equals("Patriarch's Bidding")) { card.addSpellAbility(getPatriarchsBidding(card));
         } else if (cardName.equals("Leeches")) { card.addSpellAbility(getLeeches(card));
         } else if (cardName.equals("Sanity Grinding")) { card.addSpellAbility(getSanityGrinding(card));

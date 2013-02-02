@@ -1,7 +1,16 @@
 Name:Windfall
 ManaCost:2 U
 Types:Sorcery
-Text:Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way.
+Text:no text
+A:SP$ RepeatEach | Cost$ 2 U | RepeatPlayers$ Player | RepeatSubAbility$ WindfallDiscard | SubAbility$ WindfallDraw | SpellDescription$ Each player discards his or her hand, then draws cards equal to the greatest number of cards a player discarded this way.
+SVar:WindfallDiscard:DB$ Discard | Defined$ Player.IsRemembered | Mode$ Hand | RememberDiscarded$ True | SubAbility$ WindfallSaveAmount
+SVar:WindfallSaveAmount:DB$ StoreSVar | SVar$ MaxDiscard | Type$ CountSVar | Expression$ NumDiscard | ConditionCheckSVar$ NumDiscard | ConditionSVarCompare$ GTMaxDiscard | SubAbility$ WindfallCleanUp
+SVar:WindfallCleanUp:DB$ Cleanup | ClearRemembered$ True
+SVar:WindfallDraw:DB$ Draw | Defined$ Each | NumCards$ MaxDiscard | SubAbility$ WindfallReset
+SVar:WindfallReset:DB$ StoreSVar | SVar$ MaxDiscard | Type$ Number | Expression$ 0
+SVar:NumDiscard:Count$RememberedSize/Minus.1
+SVar:MaxDiscard:Number$0
+SVar:RemAIDeck:True
 SVar:Rarity:Uncommon
 SVar:Picture:http://www.wizards.com/global/images/magic/general/windfall.jpg
 SetInfo:USG|Uncommon|http://magiccards.info/scans/en/us/111.jpg
