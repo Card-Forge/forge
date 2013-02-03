@@ -166,7 +166,7 @@ public class SpellAbilityCondition extends SpellAbilityVariables {
      *            a {@link forge.card.spellability.SpellAbility} object.
      * @return a boolean.
      */
-    public final boolean checkConditions(final SpellAbility sa) {
+    public final boolean areMet(final SpellAbility sa) {
 
         Player activator = sa.getActivatingPlayer();
         if (activator == null) {

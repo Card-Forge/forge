@@ -901,7 +901,7 @@ public class AiAttackController {
             if ((isWorthLessThanAllKillers || canKillAllDangerous || numberOfPossibleBlockers < 2)
                     && CombatUtil.canBlock(attacker, defender)) {
                 numberOfPossibleBlockers += 1;
-                if (isWorthLessThanAllKillers && ComputerUtilCombat.canDestroyAttacker(attacker, defender, combat, false)
+                if (isWorthLessThanAllKillers && ComputerUtilCombat.canDestroyAttacker(ai, attacker, defender, combat, false)
                         && !(attacker.hasKeyword("Undying") && attacker.getCounters(CounterType.P1P1) == 0)) {
                     canBeKilledByOne = true; // there is a single creature on
                                              // the battlefield that can kill
@@ -915,7 +915,7 @@ public class AiAttackController {
                 }
                 // see if this attacking creature can destroy this defender, if
                 // not record that it can't kill everything
-                if (canKillAllDangerous && !ComputerUtilCombat.canDestroyBlocker(defender, attacker, combat, false)) {
+                if (canKillAllDangerous && !ComputerUtilCombat.canDestroyBlocker(ai, defender, attacker, combat, false)) {
                     canKillAll = false;
                     if (!canKillAllDangerous) {
                         continue;

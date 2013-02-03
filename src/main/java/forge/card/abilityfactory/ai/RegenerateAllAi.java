@@ -68,7 +68,7 @@ public class RegenerateAllAi extends SpellAiLogic {
                 final List<Card> combatants = CardLists.filter(list, CardPredicates.Presets.CREATURES);
 
                 for (final Card c : combatants) {
-                    if (c.getShield() == 0 && ComputerUtilCombat.combatantWouldBeDestroyed(c)) {
+                    if (c.getShield() == 0 && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c)) {
                         numSaved++;
                     }
                 }

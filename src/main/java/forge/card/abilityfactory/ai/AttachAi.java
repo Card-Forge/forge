@@ -816,7 +816,7 @@ public class AttachAi extends SpellAiLogic {
         // at some point can support attaching a different card
 
         // Don't equip if already equipping
-        if (attachSource.getEquippingCard() != null && attachSource.getEquippingCard().getController().isComputer()) {
+        if (attachSource.getEquippingCard() != null && attachSource.getEquippingCard().getController() == aiPlayer) {
             return null;
         }
 

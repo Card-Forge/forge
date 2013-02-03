@@ -16,6 +16,7 @@ import forge.card.abilityfactory.AbilityFactory;
 import forge.card.abilityfactory.SpellAiLogic;
 import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.spellability.SpellAbility;
+import forge.game.GameState;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.phase.Combat;
 import forge.game.phase.CombatUtil;
@@ -223,7 +224,7 @@ public abstract class PumpAiBase extends SpellAiLogic {
                 List<Card> attackers = combat.getAttackers();
                 for (Card attacker : attackers) {
                     if (CombatUtil.canBlock(attacker, card, combat)
-                            && !ComputerUtilCombat.canDestroyAttacker(attacker, card, combat, false)) {
+                            && !ComputerUtilCombat.canDestroyAttacker(ai, attacker, card, combat, false)) {
                         return true;
                     }
                 }
@@ -232,7 +233,7 @@ public abstract class PumpAiBase extends SpellAiLogic {
                 List<Card> blockers = opp.getCreaturesInPlay();
                 for (Card blocker : blockers) {
                     if (CombatUtil.canBlock(card, blocker, combat)
-                            && !ComputerUtilCombat.canDestroyBlocker(blocker, card, combat, false)) {
+                            && !ComputerUtilCombat.canDestroyBlocker(ai, blocker, card, combat, false)) {
                         return true;
                     }
                 }
@@ -382,7 +383,8 @@ public abstract class PumpAiBase extends SpellAiLogic {
 
     protected boolean shouldPumpCard(final Player ai, final SpellAbility sa, final Card c, final int defense, final int attack,
             final List<String> keywords) {
-        PhaseHandler phase = Singletons.getModel().getGame().getPhaseHandler();
+        final GameState game = Singletons.getModel().getGame();
+        PhaseHandler phase = game.getPhaseHandler();
 
         if (!c.canBeTargetedBy(sa)) {
             return false;
@@ -408,36 +410,35 @@ public abstract class PumpAiBase extends SpellAiLogic {
         // is the creature blocking and unable to destroy the attacker
         // or would be destroyed itself?
         if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY) && c.isBlocking()) {
-            if (defense > 0 && ComputerUtilCombat.blockerWouldBeDestroyed(c)) {
+            if (defense > 0 && ComputerUtilCombat.blockerWouldBeDestroyed(ai, c)) {
                 return true;
             }
             List<Card> blockedBy = Singletons.getModel().getGame().getCombat().getAttackersBlockedBy(c);
             // For now, Only care the first creature blocked by a card.
             // TODO Add in better BlockAdditional support
-            if (!blockedBy.isEmpty() && attack > 0 && !ComputerUtilCombat.attackerWouldBeDestroyed(blockedBy.get(0))) {
+            if (!blockedBy.isEmpty() && attack > 0 && !ComputerUtilCombat.attackerWouldBeDestroyed(ai, blockedBy.get(0))) {
                 return true;
             }
         }
 
         // is the creature unblocked and the spell will pump its power?
         if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)
-                && Singletons.getModel().getGame().getCombat().isAttacking(c)
-                && Singletons.getModel().getGame().getCombat().isUnblocked(c) && attack > 0) {
+                && game.getCombat().isAttacking(c) && game.getCombat().isUnblocked(c) && attack > 0) {
             return true;
         }
 
         // is the creature blocked and the blocker would survive
         if (phase.is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY) && attack > 0
-                && Singletons.getModel().getGame().getCombat().isAttacking(c)
-                && Singletons.getModel().getGame().getCombat().isBlocked(c)
-                && Singletons.getModel().getGame().getCombat().getBlockers(c) != null
-                && !Singletons.getModel().getGame().getCombat().getBlockers(c).isEmpty()
-                && !ComputerUtilCombat.blockerWouldBeDestroyed(Singletons.getModel().getGame().getCombat().getBlockers(c).get(0))) {
+                && game.getCombat().isAttacking(c)
+                && game.getCombat().isBlocked(c)
+                && game.getCombat().getBlockers(c) != null
+                && !game.getCombat().getBlockers(c).isEmpty()
+                && !ComputerUtilCombat.blockerWouldBeDestroyed(ai, game.getCombat().getBlockers(c).get(0))) {
             return true;
         }
 
         // if the life of the computer is in danger, try to pump blockers blocking Tramplers
-        List<Card> blockedBy = Singletons.getModel().getGame().getCombat().getAttackersBlockedBy(c);
+        List<Card> blockedBy = game.getCombat().getAttackersBlockedBy(c);
         boolean attackerHasTrample = false;
         for (Card b : blockedBy) {
             attackerHasTrample |= b.hasKeyword("Trample");
@@ -448,7 +449,7 @@ public abstract class PumpAiBase extends SpellAiLogic {
                 && c.isBlocking()
                 && defense > 0
                 && attackerHasTrample
-                && (sa.isAbility() || ComputerUtilCombat.lifeInDanger(ai, Singletons.getModel().getGame().getCombat()))) {
+                && (sa.isAbility() || ComputerUtilCombat.lifeInDanger(ai, game.getCombat()))) {
             return true;
         }
 

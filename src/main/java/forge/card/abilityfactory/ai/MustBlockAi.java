@@ -34,7 +34,7 @@ public class MustBlockAi extends SpellAiLogic {
     }
 
     @Override
-    protected boolean doTriggerAINoCost(Player ai, SpellAbility sa, boolean mandatory) {
+    protected boolean doTriggerAINoCost(final Player ai, SpellAbility sa, boolean mandatory) {
         final Card source = sa.getSourceCard();
         final Target abTgt = sa.getTarget();
 
@@ -73,10 +73,10 @@ public class MustBlockAi extends SpellAiLogic {
                     if (!CombatUtil.canBlock(definedAttacker, c)) {
                         return false;
                     }
-                    if (ComputerUtilCombat.canDestroyAttacker(definedAttacker, c, null, false)) {
+                    if (ComputerUtilCombat.canDestroyAttacker(ai, definedAttacker, c, null, false)) {
                         return false;
                     }
-                    if (!ComputerUtilCombat.canDestroyBlocker(c, definedAttacker, null, false)) {
+                    if (!ComputerUtilCombat.canDestroyBlocker(ai, c, definedAttacker, null, false)) {
                         return false;
                     }
                     c.setTapped(tapped);

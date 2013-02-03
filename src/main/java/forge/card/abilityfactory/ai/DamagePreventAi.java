@@ -68,7 +68,7 @@ public class DamagePreventAi extends SpellAiLogic {
                     for (final Object o : objects) {
                         if (o instanceof Card) {
                             final Card c = (Card) o;
-                            flag |= ComputerUtilCombat.combatantWouldBeDestroyed(c);
+                            flag |= ComputerUtilCombat.combatantWouldBeDestroyed(ai, c);
                         } else if (o instanceof Player) {
                             // Don't need to worry about Combat Damage during AI's turn
                             final Player p = (Player) o;
@@ -134,7 +134,7 @@ public class DamagePreventAi extends SpellAiLogic {
                 CardLists.sortByEvaluateCreature(combatants);
 
                 for (final Card c : combatants) {
-                    if (ComputerUtilCombat.combatantWouldBeDestroyed(c)) {
+                    if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c)) {
                         tgt.addTarget(c);
                         chance = true;
                         break;
@@ -195,7 +195,7 @@ public class DamagePreventAi extends SpellAiLogic {
             CardLists.sortByEvaluateCreature(combatants);
             if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 for (final Card c : combatants) {
-                    if (ComputerUtilCombat.combatantWouldBeDestroyed(c)) {
+                    if (ComputerUtilCombat.combatantWouldBeDestroyed(ai, c)) {
                         tgt.addTarget(c);
                         return true;
                     }

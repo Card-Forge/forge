@@ -517,18 +517,19 @@ public class ComputerUtilCombat {
      * <p>
      * combatantWouldBeDestroyed.
      * </p>
+     * @param ai 
      * 
      * @param combatant
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public static boolean combatantWouldBeDestroyed(final Card combatant) {
+    public static boolean combatantWouldBeDestroyed(Player ai, final Card combatant) {
 
         if (combatant.isAttacking()) {
-            return ComputerUtilCombat.attackerWouldBeDestroyed(combatant);
+            return ComputerUtilCombat.attackerWouldBeDestroyed(ai, combatant);
         }
         if (combatant.isBlocking()) {
-            return ComputerUtilCombat.blockerWouldBeDestroyed(combatant);
+            return ComputerUtilCombat.blockerWouldBeDestroyed(ai, combatant);
         }
         return false;
     }
@@ -538,16 +539,17 @@ public class ComputerUtilCombat {
      * <p>
      * attackerWouldBeDestroyed.
      * </p>
+     * @param ai 
      * 
      * @param attacker
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public static boolean attackerWouldBeDestroyed(final Card attacker) {
+    public static boolean attackerWouldBeDestroyed(Player ai, final Card attacker) {
         final List<Card> blockers = Singletons.getModel().getGame().getCombat().getBlockers(attacker);
 
         for (final Card defender : blockers) {
-            if (ComputerUtilCombat.canDestroyAttacker(attacker, defender, Singletons.getModel().getGame().getCombat(), true)
+            if (ComputerUtilCombat.canDestroyAttacker(ai, attacker, defender, Singletons.getModel().getGame().getCombat(), true)
                     && !(defender.hasKeyword("Wither") || defender.hasKeyword("Infect"))) {
                 return true;
             }
@@ -1343,6 +1345,7 @@ public class ComputerUtilCombat {
      * <p>
      * canDestroyAttacker.
      * </p>
+     * @param ai 
      * 
      * @param attacker
      *            a {@link forge.Card} object.
@@ -1354,7 +1357,7 @@ public class ComputerUtilCombat {
      *            a boolean.
      * @return a boolean.
      */
-    public static boolean canDestroyAttacker(final Card attacker, final Card defender, final Combat combat,
+    public static boolean canDestroyAttacker(Player ai, final Card attacker, final Card defender, final Combat combat,
             final boolean withoutAbilities) {
 
         if (attacker.getName().equals("Sylvan Basilisk") && !defender.hasKeyword("Indestructible")) {
@@ -1375,7 +1378,7 @@ public class ComputerUtilCombat {
             }
         } // flanking
 
-        if (((attacker.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(attacker) && !withoutAbilities)) && !(defender
+        if (((attacker.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(ai, attacker) && !withoutAbilities)) && !(defender
                 .hasKeyword("Wither") || defender.hasKeyword("Infect")))
                 || (attacker.hasKeyword("Persist") && !attacker.canHaveCountersPlacedOnIt(CounterType.M1M1) && (attacker
                         .getCounters(CounterType.M1M1) == 0))
@@ -1471,18 +1474,19 @@ public class ComputerUtilCombat {
      * <p>
      * blockerWouldBeDestroyed.
      * </p>
+     * @param ai 
      * 
      * @param blocker
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public static boolean blockerWouldBeDestroyed(final Card blocker) {
+    public static boolean blockerWouldBeDestroyed(Player ai, final Card blocker) {
         // TODO THis function only checks if a single attacker at a time would destroy a blocker
         // This needs to expand to tally up damage
         final List<Card> attackers = Singletons.getModel().getGame().getCombat().getAttackersBlockedBy(blocker);
 
         for (Card attacker : attackers) {
-            if (ComputerUtilCombat.canDestroyBlocker(blocker, attacker, Singletons.getModel().getGame().getCombat(), true)
+            if (ComputerUtilCombat.canDestroyBlocker(ai, blocker, attacker, Singletons.getModel().getGame().getCombat(), true)
                     && !(attacker.hasKeyword("Wither") || attacker.hasKeyword("Infect"))) {
                 return true;
             }
@@ -1495,6 +1499,7 @@ public class ComputerUtilCombat {
      * <p>
      * canDestroyBlocker.
      * </p>
+     * @param ai 
      * 
      * @param defender
      *            a {@link forge.Card} object.
@@ -1506,7 +1511,7 @@ public class ComputerUtilCombat {
      *            a boolean.
      * @return a boolean.
      */
-    public static boolean canDestroyBlocker(final Card defender, final Card attacker, final Combat combat,
+    public static boolean canDestroyBlocker(Player ai, final Card defender, final Card attacker, final Combat combat,
             final boolean withoutAbilities) {
 
         int flankingMagnitude = 0;
@@ -1522,7 +1527,7 @@ public class ComputerUtilCombat {
             }
         } // flanking
 
-        if (((defender.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(defender) && !withoutAbilities)) && !(attacker
+        if (((defender.hasKeyword("Indestructible") || (ComputerUtil.canRegenerate(ai, defender) && !withoutAbilities)) && !(attacker
                 .hasKeyword("Wither") || attacker.hasKeyword("Infect")))
                 || (defender.hasKeyword("Persist") && !defender.canHaveCountersPlacedOnIt(CounterType.M1M1) && (defender
                         .getCounters(CounterType.M1M1) == 0))

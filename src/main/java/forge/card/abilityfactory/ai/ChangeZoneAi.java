@@ -222,10 +222,10 @@ public class ChangeZoneAi extends SpellAiLogic {
         }
 
         // don't play if the conditions aren't met, unless it would trigger a beneficial sub-condition
-        if (!AbilityFactory.checkConditional(sa)) {
+        if (!sa.getConditions().areMet(sa)) {
             final AbilitySub abSub = sa.getSubAbility();
             if (abSub != null && !sa.isWrapper() && "True".equals(source.getSVar("AIPlayForSub"))) {
-                if (!AbilityFactory.checkConditional(abSub)) {
+                if (!abSub.getConditions().areMet(abSub)) {
                     return false;
                 }
             } else {
@@ -269,7 +269,7 @@ public class ChangeZoneAi extends SpellAiLogic {
         for (final Player p : pDefined) {
             List<Card> list = p.getCardsIn(origin);
 
-            if ((type != null) && p.isComputer()) {
+            if ((type != null) && p == ai) {
                 // AI only "knows" about his information
                 list = CardLists.getValidCards(list, type, source.getController(), source);
             }
@@ -402,7 +402,7 @@ public class ChangeZoneAi extends SpellAiLogic {
             List<Card> list = p.getCardsIn(origin);
 
             // Computer should "know" his deck
-            if (p.isComputer()) {
+            if (p == ai) {
                 list = AbilityFactory.filterListByType(list, sa.getParam("ChangeType"), sa);
             }
 
@@ -741,7 +741,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                     CardLists.sortByEvaluateCreature(combatants);
 
                     for (final Card c : combatants) {
-                        if (c.getShield() == 0 && ComputerUtilCombat.combatantWouldBeDestroyed(c) && !c.getOwner().isHuman() && !c.isToken()) {
+                        if (c.getShield() == 0 && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c) && c.getOwner() == ai && !c.isToken()) {
                             tgt.addTarget(c);
                             return true;
                         }
@@ -812,7 +812,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                 @Override
                 public boolean apply(final Card c) {
                     for (Card aura : c.getEnchantedBy()) {
-                        if (c.getOwner().isHuman() && aura.getController().equals(ai)) {
+                        if (c.getOwner().isHostileTo(ai) && aura.getController().equals(ai)) {
                             return false;
                         }
                     }
@@ -1036,7 +1036,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                 if (!list.isEmpty()) {
                     final Card attachedTo = list.get(0);
                     // This code is for the Dragon auras
-                    if (attachedTo.getController().isHuman()) {
+                    if (attachedTo.getController().isHostileTo(ai)) {
                         return false;
                     }
                 }
@@ -1147,7 +1147,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                             return true;
                         }
                     });
-                    if (player.isHuman() && sa.hasParam("GainControl") && activator.equals(ai)) {
+                    if (player.isHostileTo(ai) && sa.hasParam("GainControl") && activator.equals(ai)) {
                         fetchList = CardLists.filter(fetchList, new Predicate<Card>() {
                             @Override
                             public boolean apply(final Card c) {
@@ -1161,7 +1161,7 @@ public class ChangeZoneAi extends SpellAiLogic {
                 }
                 if (ZoneType.Exile.equals(destination) || origin.contains(ZoneType.Battlefield)) {
                     // Exiling or bouncing stuff
-                    if (player.isHuman()) {
+                    if (player.isHostileTo(ai)) {
                         c = CardFactoryUtil.getBestAI(fetchList);
                     } else {
                         c = CardFactoryUtil.getWorstAI(fetchList);

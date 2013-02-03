@@ -415,7 +415,7 @@ public class ComputerUtil {
             typeList = CardLists.getNotType(typeList, "Creature");
         }
 
-        if ((target != null) && target.getController().isComputer() && typeList.contains(target)) {
+        if ((target != null) && target.getController() == ai && typeList.contains(target)) {
             typeList.remove(target); // don't sacrifice the card we're pumping
         }
 
@@ -473,7 +473,7 @@ public class ComputerUtil {
         } else {
             typeList = CardLists.getValidCards(ai.getCardsIn(zone), type.split(","), activate.getController(), activate);
         }
-        if ((target != null) && target.getController().isComputer() && typeList.contains(target)) {
+        if ((target != null) && target.getController() == ai && typeList.contains(target)) {
             typeList.remove(target); // don't exile the card we're pumping
         }
 
@@ -588,7 +588,7 @@ public class ComputerUtil {
     public static List<Card> chooseReturnType(final Player ai, final String type, final Card activate, final Card target, final int amount) {
         final List<Card> typeList =
                 CardLists.getValidCards(ai.getCardsIn(ZoneType.Battlefield), type.split(","), activate.getController(), activate);
-        if ((target != null) && target.getController().isComputer() && typeList.contains(target)) {
+        if ((target != null) && target.getController() == ai && typeList.contains(target)) {
             // don't bounce the card we're pumping
             typeList.remove(target);
         }
@@ -709,12 +709,13 @@ public class ComputerUtil {
      * <p>
      * canRegenerate.
      * </p>
+     * @param ai 
      * 
      * @param card
      *            a {@link forge.Card} object.
      * @return a boolean.
      */
-    public static boolean canRegenerate(final Card card) {
+    public static boolean canRegenerate(Player ai, final Card card) {
 
         if (card.hasKeyword("CARDNAME can't be regenerated.")) {
             return false;
@@ -736,7 +737,7 @@ public class ComputerUtil {
                         continue; // Can't play ability
                     }
 
-                    if (controller.isComputer()) {
+                    if (controller == ai) {
                         final Cost abCost = sa.getPayCosts();
                         if (abCost != null) {
                             // AI currently disabled for these costs

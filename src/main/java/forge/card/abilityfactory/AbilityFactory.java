@@ -345,19 +345,6 @@ public class AbilityFactory {
         condition.setConditions(mapParams);
     }
 
-    /**
-     * <p>
-     * checkConditional.
-     * </p>
-     * 
-     * @param sa
-     *            a {@link forge.card.spellability.SpellAbility} object.
-     * @return a boolean.
-     */
-    public static boolean checkConditional(final SpellAbility sa) {
-        return sa.getConditions().checkConditions(sa);
-    }
-
     // Easy creation of SubAbilities
     /**
      * <p>
@@ -1579,13 +1566,7 @@ public class AbilityFactory {
     public static void passUnlessCost(final SpellAbility sa, final boolean usedStack, final GameState game) {
         final Card source = sa.getSourceCard();
         final ApiType api = sa.getApi();
-        if (api == null) {
-            sa.resolve();
-            AbilityFactory.resolveSubAbilities(sa, usedStack, game);
-            return;
-        }
-        // Nothing to do
-        if (sa.getParam("UnlessCost") == null) {
+        if (api == null || sa.getParam("UnlessCost") == null) {
             sa.resolve();
             AbilityFactory.resolveSubAbilities(sa, usedStack, game);
             return;
@@ -1730,7 +1711,7 @@ public class AbilityFactory {
         
         final GameState game = Singletons.getModel().getGame();
         // check conditions
-        if (AbilityFactory.checkConditional(sa)) {
+        if (sa.getConditions().areMet(sa)) {
             if (sa.isWrapper()) {
                 sa.resolve();
                 AbilityFactory.resolveSubAbilities(sa, usedStack, game);
@@ -1757,12 +1738,12 @@ public class AbilityFactory {
             // every resolving spellAbility will end here
             if (usedStack) {
                 SpellAbility root = sa.getRootAbility();
-                Singletons.getModel().getGame().getStack().finishResolving(root, false);
+                game.getStack().finishResolving(root, false);
             }
             return;
         }
         // check conditions
-        if (AbilityFactory.checkConditional(abSub)) {
+        if (abSub.getConditions().areMet(abSub)) {
             AbilityFactory.passUnlessCost(abSub, usedStack, game);
         } else {
             AbilityFactory.resolveSubAbilities(abSub, usedStack, game);

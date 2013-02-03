@@ -155,7 +155,7 @@ public class DamageDealAi extends DamageAiBase {
         final List<Card> killables = CardLists.filter(hPlay, new Predicate<Card>() {
             @Override
             public boolean apply(final Card c) {
-                return (c.getEnoughDamageToKill(d, source, false, noPrevention) <= d) && !ComputerUtil.canRegenerate(c)
+                return (c.getEnoughDamageToKill(d, source, false, noPrevention) <= d) && !ComputerUtil.canRegenerate(ai, c)
                         && !(c.getSVar("SacMe").length() > 0);
             }
         });

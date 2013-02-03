@@ -124,6 +124,7 @@ public class ChooseTypeEffect extends SpellEffect {
                             GuiChoose.one("Computer picked: ", new String[]{chosen});
                             chosenType = chosen;
                         }
+                        
                         if (CardUtil.isACreatureType(chosenType) && !invalidTypes.contains(chosenType)) {
                             valid = true;
                             card.setChosenType(chosenType);

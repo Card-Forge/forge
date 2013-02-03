@@ -229,11 +229,11 @@ public class ComputerUtilBlock {
      *            a {@link forge.game.phase.Combat} object.
      * @return a {@link forge.CardList} object.
      */
-    private static List<Card> getSafeBlockers(final Card attacker, final List<Card> blockersLeft, final Combat combat) {
+    private static List<Card> getSafeBlockers(final Player ai, final Card attacker, final List<Card> blockersLeft, final Combat combat) {
         final List<Card> blockers = new ArrayList<Card>();
 
         for (final Card b : blockersLeft) {
-            if (!ComputerUtilCombat.canDestroyBlocker(b, attacker, combat, false)) {
+            if (!ComputerUtilCombat.canDestroyBlocker(ai, b, attacker, combat, false)) {
                 blockers.add(b);
             }
         }
@@ -255,11 +255,11 @@ public class ComputerUtilBlock {
      *            a {@link forge.game.phase.Combat} object.
      * @return a {@link forge.CardList} object.
      */
-    private static List<Card> getKillingBlockers(final Card attacker, final List<Card> blockersLeft, final Combat combat) {
+    private static List<Card> getKillingBlockers(final Player ai, final Card attacker, final List<Card> blockersLeft, final Combat combat) {
         final List<Card> blockers = new ArrayList<Card>();
 
         for (final Card b : blockersLeft) {
-            if (ComputerUtilCombat.canDestroyAttacker(attacker, b, combat, false)) {
+            if (ComputerUtilCombat.canDestroyAttacker(ai, attacker, b, combat, false)) {
                 blockers.add(b);
             }
         }
@@ -337,7 +337,7 @@ public class ComputerUtilBlock {
      *            a {@link forge.game.phase.Combat} object.
      * @return a {@link forge.game.phase.Combat} object.
      */
-    private static Combat makeGoodBlocks(final Combat combat) {
+    private static Combat makeGoodBlocks(final Player ai, final Combat combat) {
 
         List<Card> currentAttackers = new ArrayList<Card>(ComputerUtilBlock.getAttackersLeft());
 
@@ -352,13 +352,13 @@ public class ComputerUtilBlock {
             final List<Card> blockers = ComputerUtilBlock.getPossibleBlockers(attacker,
                     ComputerUtilBlock.getBlockersLeft(), combat, true);
 
-            final List<Card> safeBlockers = ComputerUtilBlock.getSafeBlockers(attacker, blockers, combat);
+            final List<Card> safeBlockers = ComputerUtilBlock.getSafeBlockers(ai, attacker, blockers, combat);
             List<Card> killingBlockers;
 
             if (safeBlockers.size() > 0) {
                 // 1.Blockers that can destroy the attacker but won't get
                 // destroyed
-                killingBlockers = ComputerUtilBlock.getKillingBlockers(attacker, safeBlockers, combat);
+                killingBlockers = ComputerUtilBlock.getKillingBlockers(ai, attacker, safeBlockers, combat);
                 if (killingBlockers.size() > 0) {
                     blocker = CardFactoryUtil.getWorstCreatureAI(killingBlockers);
                 } else if (!attacker.hasKeyword("You may have CARDNAME assign its combat damage as though it weren't blocked.")) {
@@ -368,7 +368,7 @@ public class ComputerUtilBlock {
             } // no safe blockers
             else {
                 // 3.Blockers that can destroy the attacker and have an upside when dying
-                killingBlockers = ComputerUtilBlock.getKillingBlockers(attacker, blockers, combat);
+                killingBlockers = ComputerUtilBlock.getKillingBlockers(ai, attacker, blockers, combat);
                 for (Card b : killingBlockers) {
                     if ((b.hasKeyword("Undying") && b.getCounters(CounterType.P1P1) == 0)
                             || !b.getSVar("SacMe").equals("")) {
@@ -542,7 +542,7 @@ public class ComputerUtilBlock {
                 continue;
             }
 
-            killingBlockers = ComputerUtilBlock.getKillingBlockers(attacker,
+            killingBlockers = ComputerUtilBlock.getKillingBlockers(ai, attacker,
                     ComputerUtilBlock.getPossibleBlockers(attacker, ComputerUtilBlock.getBlockersLeft(), combat, true),
                     combat);
             if ((killingBlockers.size() > 0) && ComputerUtilCombat.lifeInDanger(ai, combat)) {
@@ -648,7 +648,7 @@ public class ComputerUtilBlock {
      *            a {@link forge.game.phase.Combat} object.
      * @return a {@link forge.game.phase.Combat} object.
      */
-    private static Combat reinforceBlockersToKill(final Combat combat) {
+    private static Combat reinforceBlockersToKill(final Player ai, final Combat combat) {
 
         List<Card> safeBlockers;
         List<Card> blockers;
@@ -664,7 +664,7 @@ public class ComputerUtilBlock {
             blockers.removeAll(combat.getBlockers(attacker));
 
             // Try to use safe blockers first
-            safeBlockers = ComputerUtilBlock.getSafeBlockers(attacker, blockers, combat);
+            safeBlockers = ComputerUtilBlock.getSafeBlockers(ai, attacker, blockers, combat);
             for (final Card blocker : safeBlockers) {
                 final int damageNeeded = attacker.getKillDamage()
                         + ComputerUtilCombat.predictToughnessBonusOfAttacker(attacker, blocker, combat, false);
@@ -808,7 +808,7 @@ public class ComputerUtilBlock {
         CardLists.sortAttackLowFirst(ComputerUtilBlock.getBlockersLeft());
 
         // == 1. choose best blocks first ==
-        combat = ComputerUtilBlock.makeGoodBlocks(combat);
+        combat = ComputerUtilBlock.makeGoodBlocks(ai, combat);
         combat = ComputerUtilBlock.makeGangBlocks(ai, combat);
         if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
             combat = ComputerUtilBlock.makeTradeBlocks(ai, combat); // choose
@@ -830,7 +830,7 @@ public class ComputerUtilBlock {
         // Support blockers not destroying the attacker with more blockers to
         // try to kill the attacker
         if (!ComputerUtilCombat.lifeInDanger(ai, combat)) {
-            combat = ComputerUtilBlock.reinforceBlockersToKill(combat);
+            combat = ComputerUtilBlock.reinforceBlockersToKill(ai, combat);
         }
 
         // == 2. If the AI life would still be in danger make a safer approach
@@ -845,7 +845,7 @@ public class ComputerUtilBlock {
                                                                 // necessary
                                                                 // trade blocks
             // if life is in danger
-            combat = ComputerUtilBlock.makeGoodBlocks(combat);
+            combat = ComputerUtilBlock.makeGoodBlocks(ai, combat);
             if (ComputerUtilCombat.lifeInDanger(ai, combat)) {
                 combat = ComputerUtilBlock.makeChumpBlocks(ai, combat); // choose
                                                                     // necessary
@@ -859,7 +859,7 @@ public class ComputerUtilBlock {
                 combat = ComputerUtilBlock.reinforceBlockersAgainstTrample(ai, combat);
             }
             combat = ComputerUtilBlock.makeGangBlocks(ai, combat);
-            combat = ComputerUtilBlock.reinforceBlockersToKill(combat);
+            combat = ComputerUtilBlock.reinforceBlockersToKill(ai, combat);
         }
 
         // == 3. If the AI life would be in serious danger make an even safer
@@ -878,7 +878,7 @@ public class ComputerUtilBlock {
             }
 
             if (!ComputerUtilCombat.lifeInDanger(ai, combat)) {
-                combat = ComputerUtilBlock.makeGoodBlocks(combat);
+                combat = ComputerUtilBlock.makeGoodBlocks(ai, combat);
             }
             // Reinforce blockers blocking attackers with trample if life is
             // still in danger
@@ -888,7 +888,7 @@ public class ComputerUtilBlock {
             combat = ComputerUtilBlock.makeGangBlocks(ai, combat);
             // Support blockers not destroying the attacker with more blockers
             // to try to kill the attacker
-            combat = ComputerUtilBlock.reinforceBlockersToKill(combat);
+            combat = ComputerUtilBlock.reinforceBlockersToKill(ai, combat);
         }
 
         // assign blockers that have to block

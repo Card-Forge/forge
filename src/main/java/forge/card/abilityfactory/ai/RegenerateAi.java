@@ -95,7 +95,7 @@ public class RegenerateAi extends SpellAiLogic {
 
                     for (final Card c : list) {
                         if (c.getShield() == 0) {
-                            flag |= ComputerUtilCombat.combatantWouldBeDestroyed(c);
+                            flag |= ComputerUtilCombat.combatantWouldBeDestroyed(ai, c);
                         }
                     }
 
@@ -139,7 +139,7 @@ public class RegenerateAi extends SpellAiLogic {
                     CardLists.sortByEvaluateCreature(combatants);
 
                     for (final Card c : combatants) {
-                        if ((c.getShield() == 0) && ComputerUtilCombat.combatantWouldBeDestroyed(c)) {
+                        if ((c.getShield() == 0) && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c)) {
                             tgt.addTarget(c);
                             chance = true;
                             break;
@@ -190,7 +190,7 @@ public class RegenerateAi extends SpellAiLogic {
             CardLists.sortByEvaluateCreature(combatants);
             if (Singletons.getModel().getGame().getPhaseHandler().is(PhaseType.COMBAT_DECLARE_BLOCKERS_INSTANT_ABILITY)) {
                 for (final Card c : combatants) {
-                    if ((c.getShield() == 0) && ComputerUtilCombat.combatantWouldBeDestroyed(c)) {
+                    if ((c.getShield() == 0) && ComputerUtilCombat.combatantWouldBeDestroyed(ai, c)) {
                         tgt.addTarget(c);
                         return true;
                     }

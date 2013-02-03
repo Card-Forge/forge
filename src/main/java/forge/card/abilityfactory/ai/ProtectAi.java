@@ -15,6 +15,7 @@ import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.cost.Cost;
 import forge.card.spellability.SpellAbility;
 import forge.card.spellability.Target;
+import forge.game.GameState;
 import forge.game.ai.ComputerUtilCombat;
 import forge.game.ai.ComputerUtilCost;
 import forge.game.phase.PhaseType;
@@ -66,7 +67,8 @@ public class ProtectAi extends SpellAiLogic {
      */
     private static List<Card> getProtectCreatures(final Player ai, final SpellAbility sa) {
         final ArrayList<String> gains = AbilityFactory.getProtectionList(sa);
-
+        final GameState game = Singletons.getModel().getGame();
+        
         List<Card> list = ai.getCreaturesInPlay();
         list = CardLists.filter(list, new Predicate<Card>() {
             @Override
@@ -81,8 +83,8 @@ public class ProtectAi extends SpellAiLogic {
                 }
 
                 // will the creature attack (only relevant for sorcery speed)?
-                if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
-                        && Singletons.getModel().getGame().getPhaseHandler().isPlayerTurn(ai)
+                if (game.getPhaseHandler().getPhase().isBefore(PhaseType.COMBAT_DECLARE_ATTACKERS)
+                        && game.getPhaseHandler().isPlayerTurn(ai)
                         && CardFactoryUtil.doesCreatureAttackAI(ai, c)) {
                     return true;
                 }
@@ -90,14 +92,14 @@ public class ProtectAi extends SpellAiLogic {
                 // is the creature blocking and unable to destroy the attacker
                 // or would be destroyed itself?
                 if (c.isBlocking()
-                        && (ComputerUtilCombat.blockerWouldBeDestroyed(c))) {
+                        && (ComputerUtilCombat.blockerWouldBeDestroyed(ai, c))) {
                     return true;
                 }
 
                 // is the creature in blocked and the blocker would survive
-                if (Singletons.getModel().getGame().getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
-                        && Singletons.getModel().getGame().getCombat().isAttacking(c) && Singletons.getModel().getGame().getCombat().isBlocked(c)
-                        && ComputerUtilCombat.blockerWouldBeDestroyed(Singletons.getModel().getGame().getCombat().getBlockers(c).get(0))) {
+                if (game.getPhaseHandler().getPhase().isAfter(PhaseType.COMBAT_DECLARE_BLOCKERS)
+                        && game.getCombat().isAttacking(c) && game.getCombat().isBlocked(c)
+                        && ComputerUtilCombat.blockerWouldBeDestroyed(ai, game.getCombat().getBlockers(c).get(0))) {
                     return true;
                 }
 
