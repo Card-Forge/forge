@@ -251,13 +251,15 @@ public class GameAction {
             return copied;
         }
 
+        // remove all counters from the card if destination is not the battlefield
+        // UNLESS we're dealing with Skullbriar, the Walking Grave
+        if (zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library) || 
+                (!zoneTo.is(ZoneType.Battlefield) && !c.getName().equals("Skullbriar, the Walking Grave"))) {
+            copied.clearCounters();
+        }
+
         if (zoneFrom.is(ZoneType.Battlefield)) {
             copied.setSuspendCast(false);
-            // remove all counters from the card if destination is not the battlefield
-            // UNLESS we're dealing with Skullbriar, the Walking Grave
-            if (zoneTo.is(ZoneType.Hand) || zoneTo.is(ZoneType.Library) || !c.getName().equals("Skullbriar, the Walking Grave")) {
-                copied.clearCounters();
-            }
             copied.setState(CardCharacteristicName.Original);
             // Soulbond unpairing
             if (c.isPaired()) {
@@ -302,9 +304,6 @@ public class GameAction {
             }
         } else if (zoneFrom.is(ZoneType.Exile) && !zoneTo.is(ZoneType.Battlefield)) {
             // Pull from Eternity used on a suspended card
-            if (!zoneTo.is(ZoneType.Graveyard) || !c.getName().equals("Skullbriar, the Walking Grave")) {
-                copied.clearCounters();
-            }
             copied.clearAdditionalCostsPaid();
             if (copied.isFaceDown()) {
                 copied.turnFaceUp();
