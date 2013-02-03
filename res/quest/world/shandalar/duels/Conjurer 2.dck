@@ -8,18 +8,18 @@ Description=Blue/Artifact 'poker' deck.
 Deck Type=constructed
 [main]
 2 Aladdin's Ring|ARN
-4 Apprentice Wizard|DRK
-2 Drafna's Restoration|ATQ
+1 Braingeyser|2ED
+3 Counterspell|2ED
 3 Giant Tortoise|ARN
-24 Island|4ED
+2 Grapeshot Catapult|ATQ
+24 Island|2ED
 3 Jayemdae Tome|4ED
 4 Pirate Ship|4ED
 4 Prodigal Sorcerer|4ED
+2 Psychic Purge|LEG
 2 Psionic Blast|2ED
 4 Rod of Ruin|4ED
-27 Triskelion|ATQ
-3 Triskelion|4ED
-1 Voodoo Doll|LEG
+2 Triskelion|ATQ
 2 Wall of Air|LEB
 2 Wall of Water|LEB
 [sideboard]

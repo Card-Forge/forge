@@ -15,13 +15,11 @@ Deck Type=constructed
 2 Disintegrate|4ED
 2 Disrupting Scepter|LEB
 2 Earthquake|4ED
-2 Fellwar Stone|DRK
 2 Fireball|4ED
 3 Fissure|DRK
 5 Forest|4ED
 4 Hypnotic Specter|4ED
 2 Lightning Bolt|4ED
-2 Mana Flare|LEB
 1 Mind Twist|LEB
 5 Mountain|4ED
 1 Mox Emerald|LEB
@@ -33,5 +31,6 @@ Deck Type=constructed
 5 Swamp|4ED
 1 Taiga|LEA
 1 Tranquility|4ED
+4 Untamed Wilds|LEG
 3 Wall of Dust|LEG
 [sideboard]
