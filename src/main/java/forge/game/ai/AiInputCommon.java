@@ -150,6 +150,7 @@ public class AiInputCommon extends Input {
             Card land = computer.chooseBestLandToPlay(landsWannaPlay);
             landsWannaPlay.remove(land);
             player.playLand(land);
+            game.getPhaseHandler().setPriority(player);
         }
     }
 
