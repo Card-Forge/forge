@@ -63,12 +63,23 @@ public class DualListBox<T> extends FPanel {
     private int remainingObjects = 0;
 
     private boolean sideboardingMode = false;
+    private boolean showCard = true;
 
     public DualListBox(int remainingObjects, String label, List<T> sourceElements, List<T> destElements,
             Card referenceCard) {
         this.remainingObjects = remainingObjects;
         initScreen();
         orderedLabel.setText(label);
+        if (destElements != null && !destElements.isEmpty()) {
+            addDestinationElements(destElements);
+            
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    destList.setSelectedIndex(0);
+                }
+            });
+        }
         if (sourceElements != null && !sourceElements.isEmpty()) {
             addSourceElements(sourceElements);
             
@@ -79,12 +90,9 @@ public class DualListBox<T> extends FPanel {
                 }
             });
         }
-        if (destElements != null) {
-            addDestinationElements(destElements);
-        }
         this.setButtonState();
     }
-
+    
     public DualListBox(int remainingObjects, String label, List<T> sourceElements, List<T> destElements, Card referenceCard, boolean isSideboardDialog) {
         this(remainingObjects, label, sourceElements, destElements, referenceCard);
 
@@ -123,12 +131,8 @@ public class DualListBox<T> extends FPanel {
         fillListModel(destListModel, newValue);
     }
 
-    @SuppressWarnings("unchecked") // Java 7 has type parameterized ListModel
     private void fillListModel(UnsortedListModel<T> model, ListModel newValues) {
-        int size = newValues.getSize();
-        for (int i = 0; i < size; i++) {
-            model.add((T) newValues.getElementAt(i));
-        }
+        model.addAll(newValues);
     }
 
     public void addSourceElements(List<T> newValue) {
@@ -167,7 +171,10 @@ public class DualListBox<T> extends FPanel {
         return sourceListModel.model;
     }
 
-    private static void showSelectedCard(Object obj) {
+    private void showSelectedCard(Object obj) {
+        if (!showCard) {
+            return;
+        }
         Card card = null;
         if (obj instanceof Card) {
             card = (Card) obj;
@@ -184,7 +191,7 @@ public class DualListBox<T> extends FPanel {
         }
     }
 
-    private static void addCardViewListener(final FList list) {
+    private void addCardViewListener(final FList list) {
         list.getModel().addListDataListener(new ListDataListener() {
             @Override
             public void intervalRemoved(ListDataEvent e) {
@@ -207,13 +214,35 @@ public class DualListBox<T> extends FPanel {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
+                        showCard = false;
                         list.setSelectedIndex(cardIdx);
+                        showCard = true;
+                        list.requestFocusInWindow();
                     }
                 });
             }
             
             @Override
-            public void intervalAdded(ListDataEvent e) {
+            public void intervalAdded(final ListDataEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        // select just-added items so user can undo the add with a single click
+                        int startIdx = Math.min(e.getIndex0(), e.getIndex1());
+                        int endIdx = Math.max(e.getIndex0(), e.getIndex1());
+                        int[] addedIndices = new int[endIdx - startIdx + 1];
+                        for (int idx = startIdx; idx <= endIdx; ++idx) {
+                            addedIndices[idx - startIdx] = idx;
+                        }
+                        // attempt to scroll to just-added item (setSelectedIndices does not scroll)
+                        // this will scroll to the wrong item if there are other identical items previously in the list
+                        showCard = false;
+                        list.setSelectedValue(list.getModel().getElementAt(
+                                Math.min(endIdx, startIdx + list.getVisibleRowCount())), true);
+                        list.setSelectedIndices(addedIndices);
+                        showCard = true;
+                    }
+                });
             }
             
             @Override
@@ -320,8 +349,8 @@ public class DualListBox<T> extends FPanel {
         public void actionPerformed(ActionEvent e) {
             @SuppressWarnings("unchecked")
             List<T> selected = (List<T>) Arrays.asList(destList.getSelectedValues());
-            addSourceElements(selected);
             clearDestinationSelected();
+            addSourceElements(selected);
             setButtonState();
         }
     }
