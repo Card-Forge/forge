@@ -352,6 +352,9 @@ Fixes/Features:
 - Updated 4 of the Shandalar World quest decks.
 - autoselect first item when choosing order of simultaneous abilities and autoselect next item when current item is added/removed
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- autoselect the items that were just added to the other list when choosing order for simultaneous abilities or cards from the sidebar between match rounds. this allows accidental moves to be undone with a single click
+- Fix for Skullbriar, the Walking Grave.
+- Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -411,7 +414,7 @@ Added the following new Gatecrash cards:
 
 Adaptive Snapjaw
 Aerial Maneuver
-Aetherize
+AEtherize
 Agoraphobia
 Alms Beast
 Alpha Authority
