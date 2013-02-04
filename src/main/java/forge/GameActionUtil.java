@@ -1016,29 +1016,6 @@ public final class GameActionUtil {
         } // execute()
     };
 
-    /** Constant <code>Ajani_Avatar_Token</code>. */
-    private static Command ajaniAvatarToken = new Command() {
-        private static final long serialVersionUID = 3027329837165436727L;
-
-        @Override
-        public void execute() {
-            List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
-
-            list = CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.getName().equals("Avatar") && c.getImageName().equals("W N N Avatar");
-                }
-            });
-            for (int i = 0; i < list.size(); i++) {
-                final Card card = list.get(i);
-                final int n = card.getController().getLife();
-                card.setBaseAttack(n);
-                card.setBaseDefense(n);
-            } // for
-        } // execute
-    }; // Ajani Avatar
-
     /** Constant <code>oldManOfTheSea</code>. */
     private static Command oldManOfTheSea = new Command() {
         private static final long serialVersionUID = 8076177362922156784L;
@@ -1179,9 +1156,7 @@ public final class GameActionUtil {
     static {
         // Please add cards in alphabetical order so they are easier to find
 
-        GameActionUtil.getCommands().put("Ajani_Avatar_Token", GameActionUtil.ajaniAvatarToken);
         GameActionUtil.getCommands().put("Alpha_Status", GameActionUtil.alphaStatus);
-
         GameActionUtil.getCommands().put("Liu_Bei", GameActionUtil.liuBei);
         GameActionUtil.getCommands().put("Old_Man_of_the_Sea", GameActionUtil.oldManOfTheSea);
         GameActionUtil.getCommands().put("Tarmogoyf", GameActionUtil.tarmogoyf);

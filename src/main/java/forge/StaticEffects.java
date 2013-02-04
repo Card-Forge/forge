@@ -288,10 +288,8 @@ public class StaticEffects {
         // value has to be an array, since certain cards have multiple commands
         // associated with them
 
-        StaticEffects.cardToEffectsList.put("Avatar", new String[] { "Ajani_Avatar_Token" });
         StaticEffects.cardToEffectsList.put("Alpha Status", new String[] { "Alpha_Status" });
         StaticEffects.cardToEffectsList.put("Liu Bei, Lord of Shu", new String[] { "Liu_Bei" });
-
         StaticEffects.cardToEffectsList.put("Old Man of the Sea", new String[] { "Old_Man_of_the_Sea" });
         StaticEffects.cardToEffectsList.put("Tarmogoyf", new String[] { "Tarmogoyf" });
         StaticEffects.cardToEffectsList.put("Umbra Stalker", new String[] { "Umbra_Stalker" });
