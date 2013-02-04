@@ -20,12 +20,15 @@ package forge.gui.deckeditor.controllers;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.common.base.Function;
 
@@ -103,6 +106,9 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     private String CCAddLabel = new String();
     private String CDTabLabel = new String();
     private String CDRemLabel = new String();
+    private String prevRem4Label = null;
+    private String prevRem4Tooltip = null;
+    private Command prevRem4Cmd = null;
 
     /**
      * Child controller for quest card shop UI.
@@ -133,11 +139,13 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             this.getTableCatalog().setDeck(fullCatalogCards);
             VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setEnabled(false);
             VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setEnabled(false);
+            VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setEnabled(false);
             fullCatalogToggle.setText("Return to spell shop");
         } else {
             this.getTableCatalog().setDeck(cardsForSale);
             VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setEnabled(true);
             VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setEnabled(true);
+            VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setEnabled(true);
             fullCatalogToggle.setText("See full catalog");
         }
     }
@@ -189,6 +197,10 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         CDRemLabel = VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().getText();
         VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setText("Sell Card");
 
+        prevRem4Label = VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().getText();
+        prevRem4Tooltip = VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().getToolTipText();
+        prevRem4Cmd = VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().getCommand();
+        
         VCurrentDeck.SINGLETON_INSTANCE.getPnlHeader().setVisible(false);
     }
 
@@ -288,11 +300,6 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
      */
     @Override
     public void addCard(InventoryItem item) {
-        if (showingFullCatalog) {
-            // no "buying" from the full catalog
-            return;
-        }
-        
         if (item == null) {
             return;
         }
@@ -324,9 +331,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             }
             this.questData.getCards().buyPack(booster, value);
             final List<CardPrinted> newCards = booster.getCards();
-            for (final CardPrinted card : newCards) {
-                this.getTableDeck().addCard(card);
-            }
+            final List<InventoryItem> newInventory = new LinkedList<InventoryItem>(newCards);
+            getTableDeck().addCards(newInventory);
             final CardListViewer c = new CardListViewer(booster.getName(),
                     "You have found the following cards inside:", newCards);
             c.show();
@@ -334,11 +340,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             this.getTableCatalog().removeCard(item);
             final PreconDeck deck = (PreconDeck) item;
             this.questData.getCards().buyPreconDeck(deck, value);
-
-            for (final CardPrinted card : deck.getDeck().getMain().toFlatList()) {
-                this.getTableDeck().addCard(card);
-            }
-
+            final ItemPool<InventoryItem> newInventory = ItemPool.createFrom(deck.getDeck().getMain(), InventoryItem.class, false);
+            getTableDeck().addCards(newInventory);
             JOptionPane.showMessageDialog(null, String.format(
                     "Deck '%s' was added to your decklist.%n%nCards from it were also added to your pool.",
                     deck.getName()), "Thanks for purchasing!", JOptionPane.INFORMATION_MESSAGE);
@@ -352,11 +355,6 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
      */
     @Override
     public void removeCard(InventoryItem item) {
-        if (showingFullCatalog) {
-            // no "selling" to the full catalog
-            return;
-        }
-
         if ((item == null) || !(item instanceof CardPrinted)) {
             return;
         }
@@ -367,11 +365,27 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
 
         final int price = Math.min((int) (this.multiplier * this.getCardValue(card)), this.questData.getCards()
                 .getSellPriceLimit());
-        this.questData.getCards().sellCard(card, price);
+        this.questData.getCards().sellCard(card, 1, price);
 
         this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
     }
+    
+    public void removeCards(List<Map.Entry<InventoryItem, Integer>> cardsToRemove) {
+        this.getTableDeck().removeCards(cardsToRemove);
+        this.getTableCatalog().addCards(cardsToRemove);
 
+        for (Map.Entry<InventoryItem, Integer> item : cardsToRemove) {
+            if (!(item.getKey() instanceof CardPrinted)) {
+                continue;
+            }
+            CardPrinted card = (CardPrinted)item.getKey();
+            final int price = Math.min((int) (this.multiplier * this.getCardValue(card)),
+                    this.questData.getCards().getSellPriceLimit());
+            this.questData.getCards().sellCard(card, item.getValue(), price);
+        }
+
+        this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
+    }
 
     /*
      * (non-Javadoc)
@@ -395,6 +409,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     /* (non-Javadoc)
      * @see forge.gui.deckeditor.ACEditorBase#show(forge.Command)
      */
+    @SuppressWarnings("serial")
     @Override
     public void init() {
         setup();
@@ -409,7 +424,21 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         this.getTableCatalog().setDeck(cardsForSale);
         this.getTableDeck().setDeck(ownedItems);
 
-        VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().remove(VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4());
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setText("Sell excess cards");
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setToolTipText("Sell extra non-basic land cards of which you have more than four copies");
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setCommand(new Command() {
+            @Override
+            public void execute() {
+                List<Map.Entry<InventoryItem, Integer>> cardsToRemove = new LinkedList<Map.Entry<InventoryItem,Integer>>();
+                for (Map.Entry<InventoryItem, Integer> item : getTableDeck().getCards()) {
+                    if (4 < item.getValue() && !"Basic Land - ".startsWith(item.getKey().getItemType())) {
+                        cardsToRemove.add(Pair.of(item.getKey(), item.getValue() - 4));
+                    }
+                }
+                removeCards(cardsToRemove);
+            }
+        });
+        
         VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().add(creditsLabel);
         this.creditsLabel.setText("Credits: " + this.questData.getAssets().getCredits());
 
@@ -446,14 +475,16 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         VCardCatalog.SINGLETON_INSTANCE.getPnlAddButtons().add(VCardCatalog.SINGLETON_INSTANCE.getBtnAdd4());
 
         VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().remove(creditsLabel);
-        VCurrentDeck.SINGLETON_INSTANCE.getPnlRemButtons().add(VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4());
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setText(prevRem4Label);
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setToolTipText(prevRem4Tooltip);
+        VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove4().setCommand(prevRem4Cmd);
 
         VCardCatalog.SINGLETON_INSTANCE.getTabLabel().setText(CCTabLabel);
         VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText(CDTabLabel);
 
         VCardCatalog.SINGLETON_INSTANCE.getBtnAdd().setText(CCAddLabel);
         VCurrentDeck.SINGLETON_INSTANCE.getBtnRemove().setText(CDRemLabel);
-
+        
         return true;
     }
 }

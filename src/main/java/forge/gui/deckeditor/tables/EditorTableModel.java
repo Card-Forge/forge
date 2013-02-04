@@ -139,10 +139,10 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
      * 
      * @param card0 &emsp; {@link forge.Card} object
      */
-    public void removeCard(final T card0) {
+    public void removeCard(final T card0, int qty) {
         final boolean wasThere = this.data.count(card0) > 0;
         if (wasThere) {
-            this.data.remove(card0);
+            this.data.remove(card0, qty);
             this.fireTableDataChanged();
         }
     }
@@ -152,8 +152,8 @@ public final class EditorTableModel<T extends InventoryItem> extends AbstractTab
      * 
      * @param card0 &emsp; {@link forge.Card} object.
      */
-    public void addCard(final T card0) {
-        this.data.add(card0);
+    public void addCard(final T card0, int qty) {
+        this.data.add(card0, qty);
         this.fireTableDataChanged();
     }
 

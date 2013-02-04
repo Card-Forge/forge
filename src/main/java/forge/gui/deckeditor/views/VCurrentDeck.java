@@ -80,14 +80,14 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
     private final JPanel pnlRemoveButtons =
             new JPanel(new MigLayout("insets 0, gap 0, ax center, hidemode 3"));
 
-    private final JLabel btnRemove = new FLabel.Builder()
+    private final FLabel btnRemove = new FLabel.Builder()
             .fontSize(14)
             .text("Remove card")
             .tooltip("Remove selected card to current deck (or double click the row)")
             .icon(FSkin.getIcon(FSkin.InterfaceIcons.ICO_MINUS))
             .iconScaleAuto(false).hoverable(true).build();
 
-    private final JLabel btnRemove4 = new FLabel.Builder()
+    private final FLabel btnRemove4 = new FLabel.Builder()
             .fontSize(14)
             .text("Remove 4 of card")
             .tooltip("Remove up to 4 of selected card to current deck")
@@ -236,12 +236,12 @@ public enum VCurrentDeck implements IVDoc<CCurrentDeck>, ITableContainer {
     //========== Retrieval
 
     /** @return {@link javax.swing.JLabel} */
-    public JLabel getBtnRemove() {
+    public FLabel getBtnRemove() {
         return btnRemove;
     }
 
     /** @return {@link javax.swing.JLabel} */
-    public JLabel getBtnRemove4() {
+    public FLabel getBtnRemove4() {
         return btnRemove4;
     }
 

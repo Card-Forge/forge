@@ -17,19 +17,6 @@
  */
 package forge.quest;
 
-import forge.Singletons;
-import forge.card.BoosterGenerator;
-import forge.card.CardEdition;
-import forge.card.FormatCollection;
-import forge.deck.Deck;
-import forge.quest.data.GameFormatQuest;
-import forge.item.*;
-import forge.quest.bazaar.QuestItemType;
-import forge.quest.data.QuestAssets;
-import forge.quest.data.QuestPreferences;
-import forge.quest.data.QuestPreferences.QPref;
-import forge.util.Aggregates;
-import forge.util.MyRandom;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
@@ -38,6 +25,29 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+
+import forge.Singletons;
+import forge.card.BoosterGenerator;
+import forge.card.CardEdition;
+import forge.card.FormatCollection;
+import forge.deck.Deck;
+import forge.item.BoosterPack;
+import forge.item.CardDb;
+import forge.item.CardPrinted;
+import forge.item.FatPack;
+import forge.item.InventoryItem;
+import forge.item.ItemPool;
+import forge.item.ItemPoolView;
+import forge.item.OpenablePack;
+import forge.item.PreconDeck;
+import forge.item.TournamentPack;
+import forge.quest.bazaar.QuestItemType;
+import forge.quest.data.GameFormatQuest;
+import forge.quest.data.QuestAssets;
+import forge.quest.data.QuestPreferences;
+import forge.quest.data.QuestPreferences.QPref;
+import forge.util.Aggregates;
+import forge.util.MyRandom;
 
 /**
  * This is a helper class to execute operations on QuestData. It has been
@@ -305,12 +315,12 @@ public final class QuestUtilCards {
      * @param price
      *            the price
      */
-    public void sellCard(final CardPrinted card, final int price) {
-        this.sellCard(card, price, true);
+    public void sellCard(final CardPrinted card, int qty, final int pricePerCard) {
+        this.sellCard(card, qty, pricePerCard, true);
     }
 
-    public void loseCard(final CardPrinted card) {
-        this.sellCard(card, 0, false);
+    public void loseCard(final CardPrinted card, int qty) {
+        this.sellCard(card, qty, 0, false);
     }
 
     /**
@@ -323,13 +333,13 @@ public final class QuestUtilCards {
      * @param addToShop
      *            true if this card should be added to the shop, false otherwise
      */
-    private void sellCard(final CardPrinted card, final int price, final boolean addToShop) {
-        if (price > 0) {
-            this.qa.setCredits(this.qa.getCredits() + price);
+    private void sellCard(final CardPrinted card, int qty, final int pricePerCard, final boolean addToShop) {
+        if (pricePerCard > 0) {
+            this.qa.setCredits(this.qa.getCredits() + (qty * pricePerCard));
         }
-        this.qa.getCardPool().remove(card);
+        this.qa.getCardPool().remove(card, qty);
         if (addToShop) {
-            this.qa.getShopList().add(card);
+            this.qa.getShopList().add(card, qty);
         }
 
         // remove card being sold from all decks
@@ -623,7 +633,13 @@ public final class QuestUtilCards {
         @Override
         public Comparable<?> apply(final Entry<InventoryItem, Integer> from) {
             InventoryItem i = from.getKey();
-            return i instanceof CardPrinted ? QuestUtilCards.this.qa.getCardPool().count((CardPrinted)i) : null;
+            if (i instanceof CardPrinted) {
+                return QuestUtilCards.this.qa.getCardPool().count((CardPrinted)i);
+            } else if (i instanceof PreconDeck) {
+                PreconDeck pDeck = (PreconDeck)i;
+                return Singletons.getModel().getQuest().getMyDecks().contains(pDeck.getName()) ? 1 : 0;
+            }
+            return null;
         }
     };
 
@@ -632,7 +648,13 @@ public final class QuestUtilCards {
         @Override
         public Object apply(final Entry<InventoryItem, Integer> from) {
             InventoryItem i = from.getKey();
-            return i instanceof CardPrinted ? QuestUtilCards.this.qa.getCardPool().count((CardPrinted)i) : null;
+            if (i instanceof CardPrinted) {
+                return QuestUtilCards.this.qa.getCardPool().count((CardPrinted)i);
+            } else if (i instanceof PreconDeck) {
+                PreconDeck pDeck = (PreconDeck)i;
+                return Singletons.getModel().getQuest().getMyDecks().contains(pDeck.getName()) ? "YES" : "NO";
+            }
+            return null;
         }
     };
 }

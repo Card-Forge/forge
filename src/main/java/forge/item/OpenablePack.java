@@ -26,6 +26,7 @@ import com.google.common.collect.Iterables;
 import forge.card.BoosterData;
 import forge.card.BoosterGenerator;
 import forge.card.CardRulesPredicates;
+import forge.deck.Deck;
 import forge.util.Aggregates;
 
 /**
@@ -80,7 +81,7 @@ public abstract class OpenablePack implements InventoryItemFromSet {
         }
         return this.cards;
     }
-
+    
     /**
      * Gets the total cards.
      *

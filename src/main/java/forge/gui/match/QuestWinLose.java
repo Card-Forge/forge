@@ -144,7 +144,7 @@ public class QuestWinLose extends ControlWinLose {
                     this.anteWon(anteCards);
                 } else {
                     for (CardPrinted c : anteCards) {
-                        qc.getCards().loseCard(c);
+                        qc.getCards().loseCard(c, 1);
                     }
                     this.anteLost(anteCards);
                 }

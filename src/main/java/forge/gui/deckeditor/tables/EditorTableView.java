@@ -22,11 +22,14 @@ import java.awt.Component;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.swing.JComponent;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableColumnModel;
@@ -243,13 +246,21 @@ public final class EditorTableView<T extends InventoryItem> {
      */
     public void fixSelection(final int rowLastSelected) {
         // 3 cases: 0 cards left, select the same row, select prev row
-        int newRow = rowLastSelected;
         final int cntRowsAbove = this.model.getRowCount();
-        if (cntRowsAbove != 0) {
+        if (0 <= rowLastSelected && cntRowsAbove != 0) {
+            int newRow = rowLastSelected;
             if (cntRowsAbove == newRow) {
+                // move selection away from the last, already missing, option
                 newRow--;
-            } // move selection away from the last, already missing, option
-            this.table.setRowSelectionInterval(newRow, newRow);
+            }
+            final int selectRow = newRow;
+            
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    table.setRowSelectionInterval(selectRow, selectRow);
+                }
+            });
         }
     }
 
@@ -346,12 +357,37 @@ public final class EditorTableView<T extends InventoryItem> {
      *            an InventoryItem
      */
     public void addCard(final T card) {
-        // int n = table.getSelectedRow();
+        final int n = this.table.getSelectedRow();
         this.pool.add(card);
         if (this.isUnfiltered()) {
-            this.model.addCard(card);
+            this.model.addCard(card, 1);
        }
         this.updateView(false);
+        this.fixSelection(n);
+    }
+
+    public void addCards(Iterable<Map.Entry<T, Integer>> cardsToAdd) {
+        final int n = this.table.getSelectedRow();
+        for (Map.Entry<T, Integer> item : cardsToAdd) {
+            this.pool.add(item.getKey(), item.getValue());
+            if (this.isUnfiltered()) {
+                this.model.addCard(item.getKey(), item.getValue());
+            }
+        }
+        this.updateView(false);
+        this.fixSelection(n);
+    }
+    
+    public void addCards(Collection<T> cardsToAdd) {
+        final int n = this.table.getSelectedRow();
+        for (T item : cardsToAdd) {
+            this.pool.add(item, 1);
+            if (this.isUnfiltered()) {
+                this.model.addCard(item, 1);
+            }
+        }
+        this.updateView(false);
+        this.fixSelection(n);
     }
 
     /**
@@ -365,7 +401,19 @@ public final class EditorTableView<T extends InventoryItem> {
         final int n = this.table.getSelectedRow();
         this.pool.remove(card);
         if (this.isUnfiltered()) {
-            this.model.removeCard(card);
+            this.model.removeCard(card, 1);
+        }
+        this.updateView(false);
+        this.fixSelection(n);
+    }
+
+    public void removeCards(List<Map.Entry<T, Integer>> cardsToRemove) {
+        final int n = this.table.getSelectedRow();
+        for (Map.Entry<T, Integer> item : cardsToRemove) {
+            this.pool.remove(item.getKey(), item.getValue());
+            if (this.isUnfiltered()) {
+                this.model.removeCard(item.getKey(), item.getValue());
+            }
         }
         this.updateView(false);
         this.fixSelection(n);
