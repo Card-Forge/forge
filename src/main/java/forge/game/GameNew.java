@@ -115,8 +115,8 @@ public class GameNew {
             
             GameType gameType = Singletons.getModel().getMatch().getGameType();
             boolean isFirstGame = Singletons.getModel().getMatch().getPlayedGames().isEmpty();
-            boolean hasSpareCards = myDeck.getMain().countAll() + myDeck.getSideboard().countAll() > gameType.getDecksFormat().getMainRange().getMinimumInteger();
-            boolean canSideBoard = !isFirstGame && gameType.isSideboardingAllowed() && hasSpareCards;
+            boolean hasSideboard = !psc.getOriginalDeck().getSideboard().isEmpty();
+            boolean canSideBoard = !isFirstGame && gameType.isSideboardingAllowed() && hasSideboard;
          
             if (canSideBoard) {
                 psc.setCurrentDeck(player.getController().sideboard(psc.getCurrentDeck(), gameType));
