@@ -1096,36 +1096,6 @@ public final class GameActionUtil {
 
     }; // Liu_Bei
 
-    /** Constant <code>soundTheCallWolf</code>. */
-    private static Command soundTheCallWolf = new Command() {
-        private static final long serialVersionUID = 4614281706799537283L;
-
-        @Override
-        public void execute() {
-            List<Card> list = Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield);
-            list = CardLists.filter(list, new Predicate<Card>() {
-                @Override
-                public boolean apply(final Card c) {
-                    return c.getName().equals("Wolf")
-                            && c.hasKeyword("This creature gets +1/+1 for each card "
-                                    + "named Sound the Call in each graveyard.");
-                }
-            });
-
-            for (int i = 0; i < list.size(); i++) {
-                final Card c = list.get(i);
-                c.setBaseAttack(1 + this.countSoundTheCalls());
-                c.setBaseDefense(c.getBaseAttack());
-            }
-        }
-
-        private int countSoundTheCalls() {
-            List<Card> list = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Graveyard), CardPredicates.nameEquals("Sound the Call"));
-            return list.size();
-        }
-
-    }; // sounTheCallWolf
-
     /** Constant <code>Tarmogoyf</code>. */
     private static Command tarmogoyf = new Command() {
         private static final long serialVersionUID = 5895665460018262987L;
@@ -1214,7 +1184,6 @@ public final class GameActionUtil {
 
         GameActionUtil.getCommands().put("Liu_Bei", GameActionUtil.liuBei);
         GameActionUtil.getCommands().put("Old_Man_of_the_Sea", GameActionUtil.oldManOfTheSea);
-        GameActionUtil.getCommands().put("Sound_the_Call_Wolf", GameActionUtil.soundTheCallWolf);
         GameActionUtil.getCommands().put("Tarmogoyf", GameActionUtil.tarmogoyf);
         GameActionUtil.getCommands().put("Umbra_Stalker", GameActionUtil.umbraStalker);
 
