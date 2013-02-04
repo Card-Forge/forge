@@ -11,7 +11,7 @@ import forge.item.CardPrinted;
 public class PlayerStartConditions {
     private final Deck originalDeck;
     private Deck currentDeck;
-    
+
     private int startingLife = 20;
     private int startingHand = 7;
     private Function<Player, Iterable<Card>> cardsOnBattlefield = null;
@@ -31,6 +31,11 @@ public class PlayerStartConditions {
     public final Deck getCurrentDeck() {
         return currentDeck;
     }
+    
+    public void setCurrentDeck(Deck currentDeck0) {
+        this.currentDeck = currentDeck0; 
+    }
+    
     
     public final int getStartingLife() {
         return startingLife;

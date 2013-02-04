@@ -119,7 +119,8 @@ public class GameNew {
             boolean canSideBoard = !isFirstGame && gameType.isSideboardingAllowed() && hasSpareCards;
          
             if (canSideBoard) {
-                myDeck = player.getController().sideboard(psc.getCurrentDeck(), gameType);
+                // This method changes the deck passed as parameter
+                player.getController().sideboard(psc.getCurrentDeck(), gameType);
             } else { 
                 psc.restoreOriginalDeck();
                 myDeck = psc.getCurrentDeck();
