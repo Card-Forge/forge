@@ -34,6 +34,7 @@ import com.google.common.base.Function;
 
 import forge.Command;
 import forge.Singletons;
+import forge.card.CardRarity;
 import forge.deck.Deck;
 import forge.deck.DeckBase;
 import forge.gui.CardListViewer;
@@ -340,7 +341,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             this.getTableCatalog().removeCard(item);
             final PreconDeck deck = (PreconDeck) item;
             this.questData.getCards().buyPreconDeck(deck, value);
-            final ItemPool<InventoryItem> newInventory = ItemPool.createFrom(deck.getDeck().getMain(), InventoryItem.class, false);
+            final ItemPool<InventoryItem> newInventory =
+                    ItemPool.createFrom(deck.getDeck().getMain(), InventoryItem.class, false);
             getTableDeck().addCards(newInventory);
             JOptionPane.showMessageDialog(null, String.format(
                     "Deck '%s' was added to your decklist.%n%nCards from it were also added to your pool.",
@@ -431,8 +433,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             public void execute() {
                 List<Map.Entry<InventoryItem, Integer>> cardsToRemove = new LinkedList<Map.Entry<InventoryItem,Integer>>();
                 for (Map.Entry<InventoryItem, Integer> item : getTableDeck().getCards()) {
-                    if (4 < item.getValue() &&
-                            !CardDb.instance().getCard(item.getKey().getName()).getMatchingForgeCard().isBasicLand()) {
+                    if (4 < item.getValue() && CardRarity.BasicLand != ((CardPrinted)item.getKey()).getRarity()) {
                         cardsToRemove.add(Pair.of(item.getKey(), item.getValue() - 4));
                     }
                 }

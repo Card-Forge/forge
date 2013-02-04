@@ -131,7 +131,7 @@ public enum VCardCatalog implements IVDoc<CCardCatalog>, ITableContainer {
 
         pnlAddButtons.setOpaque(false);
         pnlAddButtons.add(btnAdd, "w 30%!, h 30px!, gap 10 10 5 5");
-        pnlAddButtons.add(btnAdd4, "w 30%!, h 30px!, gap 5% 5% 5px 5px");
+        pnlAddButtons.add(btnAdd4, "w 30%!, h 30px!, gap 10 10 5 5");
         
         pnlSearch.setOpaque(false);
         pnlSearch.add(btnAddRestriction, "center, w pref+8, h pref+8");

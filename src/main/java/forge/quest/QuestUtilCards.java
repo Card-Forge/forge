@@ -29,6 +29,7 @@ import com.google.common.collect.Iterables;
 import forge.Singletons;
 import forge.card.BoosterGenerator;
 import forge.card.CardEdition;
+import forge.card.CardRarity;
 import forge.card.FormatCollection;
 import forge.deck.Deck;
 import forge.item.BoosterPack;
@@ -626,8 +627,27 @@ public final class QuestUtilCards {
     public Function<Entry<InventoryItem, Integer>, Object> getFnOwnedGet() {
         return this.fnOwnedGet;
     }
+    
+    public int getCompletionPercent(String edition) {
+        // get all cards in the specified edition
+        Predicate<CardPrinted> filter = CardPrinted.Predicates.printedInSets(edition);
+        Iterable<CardPrinted> editionCards = Iterables.filter(CardDb.instance().getAllTraditionalCards(), filter);
 
-    // These functions provide a way to sort and compare cards in the spell shop according to how many are already owned
+        ItemPool<CardPrinted> ownedCards = qa.getCardPool();
+        // 100% means at least one of every basic land and at least 4 of every other card in the set
+        int completeCards = 0;
+        int numOwnedCards = 0;
+        for (CardPrinted card : editionCards) {
+            final int target = CardRarity.BasicLand == card.getRarity() ? 1 : 4;
+            
+            completeCards += target;
+            numOwnedCards += Math.min(target, ownedCards.count(card));
+        }
+        
+        return (numOwnedCards * 100) / completeCards;
+    }
+
+    // These functions provide a way to sort and compare items in the spell shop according to how many are already owned
     private final Function<Entry<InventoryItem, Integer>, Comparable<?>> fnOwnedCompare =
             new Function<Entry<InventoryItem, Integer>, Comparable<?>>() {
         @Override
@@ -637,7 +657,10 @@ public final class QuestUtilCards {
                 return QuestUtilCards.this.qa.getCardPool().count((CardPrinted)i);
             } else if (i instanceof PreconDeck) {
                 PreconDeck pDeck = (PreconDeck)i;
-                return Singletons.getModel().getQuest().getMyDecks().contains(pDeck.getName()) ? 1 : 0;
+                return Singletons.getModel().getQuest().getMyDecks().contains(pDeck.getName()) ? -1 : -2;
+            } else if (i instanceof OpenablePack) {
+                OpenablePack oPack = (OpenablePack)i;
+                return getCompletionPercent(oPack.getEdition()) - 103;
             }
             return null;
         }
@@ -653,6 +676,9 @@ public final class QuestUtilCards {
             } else if (i instanceof PreconDeck) {
                 PreconDeck pDeck = (PreconDeck)i;
                 return Singletons.getModel().getQuest().getMyDecks().contains(pDeck.getName()) ? "YES" : "NO";
+            } else if (i instanceof OpenablePack) {
+                OpenablePack oPack = (OpenablePack)i;
+                return String.format("%d%%", getCompletionPercent(oPack.getEdition()));
             }
             return null;
         }
