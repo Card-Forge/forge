@@ -218,18 +218,18 @@ public enum CCardCatalog implements ICDoc {
             }
         });
         
-        VCardCatalog.SINGLETON_INSTANCE.getTxfSearch().addKeyListener(new KeyAdapter() {
+        Runnable addSearchRestriction = new Runnable() {
             @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == 10) {
-                    if (e.isControlDown() || e.isMetaDown()) {
-                        if (canSearch()) {
-                            addRestriction(buildSearchRestriction(), null, null);
-                        }
-                    }
+            public void run() {
+                if (canSearch()) {
+                    addRestriction(buildSearchRestriction(), null, null);
                 }
             }
-            
+        };
+        
+        // add search restriction on ctrl-enter from either the textbox or combobox
+        VCardCatalog.SINGLETON_INSTANCE.getCbSearchMode().addKeyListener(new _OnCtrlEnter(addSearchRestriction));
+        VCardCatalog.SINGLETON_INSTANCE.getTxfSearch().addKeyListener(new _OnCtrlEnter(addSearchRestriction) {
             @Override
             public void keyReleased(KeyEvent e) {
                 applyCurrentFilter();
@@ -271,6 +271,22 @@ public enum CCardCatalog implements ICDoc {
         }
     }
 
+    private class _OnCtrlEnter extends KeyAdapter {
+        private final Runnable action;
+        _OnCtrlEnter(Runnable action) {
+            this.action = action;
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if (e.getKeyCode() == 10) {
+                if (e.isControlDown() || e.isMetaDown()) {
+                    action.run();
+                }
+            }
+        }
+    }
+    
     /* (non-Javadoc)
      * @see forge.gui.framework.ICDoc#update()
      */
