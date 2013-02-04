@@ -173,20 +173,17 @@ public class CardDetailPanel extends FPanel implements CardContainer {
             return;
         }
 
-        final boolean faceDown = card.isFaceDown() && (card.getController() != Singletons.getControl().getPlayer());
-        if (!faceDown) {
+        final boolean canShowThis = canShowCard(card);
+        if (canShowThis) {
             if (card.getManaCost().toString().equals("") || card.isLand()) {
                 this.nameCostLabel.setText(card.getName());
             } else {
                 this.nameCostLabel.setText(card.getName() + " - " + card.getManaCost());
             }
+            this.typeLabel.setText(GuiDisplayUtil.formatCardType(card));
+            this.setInfoLabel.setText(card.getCurSetCode());
         } else {
             this.nameCostLabel.setText("Morph");
-        }
-
-        if (!faceDown) {
-            this.typeLabel.setText(GuiDisplayUtil.formatCardType(card));
-        } else {
             this.typeLabel.setText("Creature");
         }
         if (card.isCreature()) {
@@ -194,12 +191,6 @@ public class CardDetailPanel extends FPanel implements CardContainer {
         }
 
         this.idLabel.setText("Card ID  " + card.getUniqueNumber());
-
-        // rarity and set of a face down card should not be visible to the
-        // opponent
-        if (!card.isFaceDown() || card.getController().isHuman()) {
-            this.setInfoLabel.setText(card.getCurSetCode());
-        }
 
         if (!this.setInfoLabel.getText().equals("")) {
             this.setInfoLabel.setOpaque(true);
@@ -231,6 +222,22 @@ public class CardDetailPanel extends FPanel implements CardContainer {
 
         // fill the card text
 
+        this.cdArea.setText(composeCardText(card, canShowThis));
+
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                scrArea.getVerticalScrollBar().setValue(scrArea.getVerticalScrollBar().getMinimum());
+            }
+        });
+    }
+    
+    // here be checks for card owner and possibility to show to human Player watching this panel
+    private boolean canShowCard(final Card card) {
+        return !card.isFaceDown() && card.getController() == Singletons.getControl().getPlayer();
+    }
+
+    private String composeCardText(final Card card, final boolean canShow) {
         final StringBuilder area = new StringBuilder();
 
         // Token
@@ -238,7 +245,7 @@ public class CardDetailPanel extends FPanel implements CardContainer {
             area.append("Token");
         }
 
-        if (!faceDown) {
+        if (canShow) {
             // card text
             if (area.length() != 0) {
                 area.append("\n");
@@ -410,7 +417,7 @@ public class CardDetailPanel extends FPanel implements CardContainer {
 
             if (entity instanceof Card) {
                 final Card c = (Card) entity;
-                if (c.isFaceDown() && c.getController().isComputer()) {
+                if (!canShowCard(c)) {
                     area.append("Morph (");
                     area.append(card.getUniqueNumber());
                     area.append(")");
@@ -485,15 +492,7 @@ public class CardDetailPanel extends FPanel implements CardContainer {
             }
             area.append("Must block an attacker");
         }
-
-        this.cdArea.setText(area.toString());
-
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                scrArea.getVerticalScrollBar().setValue(scrArea.getVerticalScrollBar().getMinimum());
-            }
-        });
+        return area.toString();
     }
 
     /**
