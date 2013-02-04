@@ -1,10 +1,10 @@
-Forge Beta: 01-##-2013 ver 1.3.6
+Forge Beta: 02-04-2013 ver 1.3.6
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 (Thanks to the MAGE team for permission to use their targeting arrows.)
 (Thanks to http://www.freesound.org/browse/ for providing some sound files.)
 
-11### cards in total.
+11022 cards in total.
 
 
 Many of the new Gatecrash cards are now scripted and are included in this snapshot build for you to playtest. It looks like 241 of the 249 cards are now implemented. This includes cards that are new to Forge and cards that are reprints of existing cards. This is a work in progress.
@@ -414,11 +414,24 @@ Fixes/Features:
 - Cleanup (Ajani Goldmane's ultimate avatar's P/T was handled by both script and hardcoding)
 - adjust conditions to prompt sideboarding
 - Added the recent commit logs to changes.txt. Preparing for the beta build and release.
+- Preparing the changes.txt file for the next beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
 
-
+ArsenalNut
+Gos
+Hellfish
+Marc
+Max
+Myk
+PowerClaws
+RumbleBBU
+Sloth
+Sol
+Swordshine
+ZzzzSleep
+Chris H
 
 
 Added the following Vanguard Avatars:
@@ -454,21 +467,21 @@ Mutual Epiphany
 
 Added the following cards:
 
-Lairwatch Giant
-Shimatsu the Bloodcloaked
-Parallectric Feedback
+Duplicant
 Dwarven Catapult
-Hive Mind
 Godo, Bandit Warlord
 Helm of Kaldra
-Treefolk Mystic
-Wood Elemental
+Hive Mind
 Kill-Suit Cultist
+Lairwatch Giant
+Muse Vessel
+Parallectric Feedback
+Rhystic Syphon
+Shimatsu the Bloodcloaked
 Skyship Weatherlight
 Spelljack
-Muse Vessel
-Rhystic Syphon
-Duplicant
+Treefolk Mystic
+Wood Elemental
 
 
 Added the following new Gatecrash cards:
