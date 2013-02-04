@@ -174,28 +174,21 @@ public class GameNew {
 
     private static void initVariantsZones(final Player player, final PlayerStartConditions psc) {
         PlayerZone com = player.getZone(ZoneType.Command);
-        Iterable<CardPrinted> inCommand = psc.getCardsInCommand(player);
-        if (inCommand != null) {
-            for (final CardPrinted c : inCommand) {
-                com.add(c.toForgeCard(player), false);
-            }
+
+        // Mainly for avatar, but might find something else here
+        for (final CardPrinted c : psc.getCardsInCommand(player)) {
+            com.add(c.toForgeCard(player), false);
         }
 
-        Iterable<CardPrinted> schemes = psc.getSchemes(player);
-        if (schemes != null) {
-            List<Card> sd = new ArrayList<Card>();
-            for(CardPrinted cp : schemes) 
-                sd.add(cp.toForgeCard(player));
-            player.setSchemeDeck(sd);
-        }
-        
-        Iterable<CardPrinted> planes = psc.getPlanes(player);
-        if (planes != null) {
-            List<Card> l = new ArrayList<Card>();
-            for(CardPrinted cp : planes)
-                l.add(cp.toForgeCard(player));
-            player.setPlanarDeck(l);
-        }
+        // Schemes
+        List<Card> sd = new ArrayList<Card>();
+        for(CardPrinted cp : psc.getSchemes(player)) sd.add(cp.toForgeCard(player));
+        if ( !sd.isEmpty()) player.setSchemeDeck(sd);
+
+        // Planes
+        List<Card> l = new ArrayList<Card>();
+        for(CardPrinted cp : psc.getPlanes(player)) l.add(cp.toForgeCard(player));
+        if ( !l.isEmpty() ) player.setPlanarDeck(l);
     }
 
     private static List<CardPrinted> getCardsAiCantPlayWell(final Deck toUse) {

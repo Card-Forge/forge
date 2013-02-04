@@ -1,5 +1,8 @@
 package forge.game;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import com.google.common.base.Function;
 
 import forge.Card;
@@ -12,12 +15,13 @@ public class PlayerStartConditions {
     private final Deck originalDeck;
     private Deck currentDeck;
 
+    private static final Iterable<CardPrinted> EmptyList = Collections.unmodifiableList(new ArrayList<CardPrinted>());
     private int startingLife = 20;
     private int startingHand = 7;
     private Function<Player, Iterable<Card>> cardsOnBattlefield = null;
-    private Function<Player, Iterable<CardPrinted>> cardsInCommand = null;
-    private Function<Player, Iterable<CardPrinted>> schemes = null;
-    private Function<Player, Iterable<CardPrinted>> planes = null;
+    private Iterable<CardPrinted> cardsInCommand = null;
+    private Iterable<CardPrinted> schemes = null;
+    private Iterable<CardPrinted> planes = null;
 
     public PlayerStartConditions(Deck deck0) {
         originalDeck = deck0;
@@ -70,13 +74,13 @@ public class PlayerStartConditions {
      * @return the cardsInCommand
      */
     public Iterable<CardPrinted> getCardsInCommand(Player p) {
-        return cardsInCommand == null ? null : cardsInCommand.apply(p);
+        return cardsInCommand == null ? EmptyList : cardsInCommand;
     }
 
     /**
      * @param function the cardsInCommand to set
      */
-    public void setCardsInCommand(Function<Player, Iterable<CardPrinted>> function) {
+    public void setCardsInCommand(Iterable<CardPrinted> function) {
         this.cardsInCommand = function;
     }
 
@@ -84,13 +88,13 @@ public class PlayerStartConditions {
      * @return the schemes
      */
     public Iterable<CardPrinted> getSchemes(Player p) {
-        return schemes == null ? null : schemes.apply(p);
+        return schemes == null ? EmptyList : schemes;
     }
 
     /**
      * @param schemes0 the schemes to set
      */
-    public void setSchemes(Function<Player, Iterable<CardPrinted>> s) {
+    public void setSchemes(Iterable<CardPrinted> s) {
         this.schemes = s;
     }
 
@@ -105,13 +109,13 @@ public class PlayerStartConditions {
      * @return the planes
      */
     public Iterable<CardPrinted> getPlanes(final Player p) {
-        return planes == null ? null : planes.apply(p);
+        return planes == null ? EmptyList : planes;
     }
 
     /**
      * @param planes0 the planes to set
      */
-    public void setPlanes(Function<Player, Iterable<CardPrinted>> planes0) {
+    public void setPlanes(Iterable<CardPrinted> planes0) {
         this.planes = planes0;
     }
 
