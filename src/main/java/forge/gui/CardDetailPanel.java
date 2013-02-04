@@ -234,7 +234,7 @@ public class CardDetailPanel extends FPanel implements CardContainer {
     
     // here be checks for card owner and possibility to show to human Player watching this panel
     private boolean canShowCard(final Card card) {
-        return !card.isFaceDown() && card.getController() == Singletons.getControl().getPlayer();
+        return !card.isFaceDown() || card.getController() == Singletons.getControl().getPlayer();
     }
 
     private String composeCardText(final Card card, final boolean canShow) {
