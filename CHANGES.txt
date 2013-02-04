@@ -1,4 +1,4 @@
-Forge Beta: 02-04-2013 ver 1.3.6
+Forge Beta: 02-04-2013 ver 1.3.7
 
 (Quest icons used created by Teekatas, from his Legendora set http://raindropmemory.deviantart.com)
 (Thanks to the MAGE team for permission to use their targeting arrows.)
@@ -413,6 +413,7 @@ Fixes/Features:
 - Converted Sound the Call to script
 - Cleanup (Ajani Goldmane's ultimate avatar's P/T was handled by both script and hardcoding)
 - adjust conditions to prompt sideboarding
+- CardDetailPanel, fixes the morph problem
 - Added the recent commit logs to changes.txt. Preparing for the beta build and release.
 - Preparing the changes.txt file for the next beta build and release.
 
@@ -457,6 +458,7 @@ The Fourth Sphere
 The Great Forest
 The Hippodrome
 Trail of the Mage-Rings
+Truga Jungle
 Velis Vel
 
 
