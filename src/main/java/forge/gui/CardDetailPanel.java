@@ -63,7 +63,7 @@ public class CardDetailPanel extends FPanel implements CardContainer {
     private final FLabel typeLabel;
     private final FLabel powerToughnessLabel;
     private final FLabel idLabel;
-    private final FLabel setInfoLabel;
+    private final JLabel setInfoLabel;
     private final FTextArea cdArea;
     private final FScrollPane scrArea;
 
@@ -112,7 +112,7 @@ public class CardDetailPanel extends FPanel implements CardContainer {
         c2.gridwidth = 1;
         c2.weightx = 0.3;
         c2.fill = GridBagConstraints.HORIZONTAL;
-        this.setInfoLabel = new FLabel.Builder().build();
+        this.setInfoLabel = new JLabel();
         idr.add(this.setInfoLabel, c2);
 
         cdLabels.add(idr);
@@ -163,6 +163,7 @@ public class CardDetailPanel extends FPanel implements CardContainer {
         this.powerToughnessLabel.setText("");
         this.idLabel.setText("");
         this.setInfoLabel.setText("");
+        this.setInfoLabel.setToolTipText("");
         this.setInfoLabel.setOpaque(false);
         this.setInfoLabel.setBorder(null);
         this.cdArea.setText("");
@@ -182,6 +183,7 @@ public class CardDetailPanel extends FPanel implements CardContainer {
             }
             this.typeLabel.setText(GuiDisplayUtil.formatCardType(card));
             this.setInfoLabel.setText(card.getCurSetCode());
+            this.setInfoLabel.setToolTipText(Singletons.getModel().getEditions().get(card.getCurSetCode()).getName());
         } else {
             this.nameCostLabel.setText("Morph");
             this.typeLabel.setText("Creature");
