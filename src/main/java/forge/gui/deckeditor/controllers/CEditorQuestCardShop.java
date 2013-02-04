@@ -431,7 +431,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
             public void execute() {
                 List<Map.Entry<InventoryItem, Integer>> cardsToRemove = new LinkedList<Map.Entry<InventoryItem,Integer>>();
                 for (Map.Entry<InventoryItem, Integer> item : getTableDeck().getCards()) {
-                    if (4 < item.getValue() && !"Basic Land - ".startsWith(item.getKey().getItemType())) {
+                    if (4 < item.getValue() &&
+                            !CardDb.instance().getCard(item.getKey().getName()).getMatchingForgeCard().isBasicLand()) {
                         cardsToRemove.add(Pair.of(item.getKey(), item.getValue() - 4));
                     }
                 }
