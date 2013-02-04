@@ -384,6 +384,36 @@ Fixes/Features:
 - autoselect the items that were just added to the other list when choosing order for simultaneous abilities or cards from the sidebar between match rounds. this allows accidental moves to be undone with a single click
 - Fix for Skullbriar, the Walking Grave.
 - Added the recent commit logs to changes.txt. Preparing for the snapshot build release.
+- Fixed Khalni Garden freeze when Phase is set to skip.
+- Fixed Unmorph targeting trigger freeze when Phase is set to skip.
+- removed some calls to IsComputer in favour of comparision with player passed as parameter
+- checkConditions inlined
+- ComputerUtilCombat recieve ai player as parameter
+- Updated 11 of the Shandalar World quest decks.
+- add bulk addition and removal routines to editor model
+- add button to sell excess duplicates of all cards in spell shop
+- ensure table selection is restored properly after adding a card
+- fix basic land detection in sell excess cards routine
+- Improved Enchantment icon for deck editor
+- calculate how close a player is to completing a set in the spell shop
+- remove unused imports
+- re-disable buying and selling cards when the full catalog is being displayed in the spell shop
+- GameNew refactor - remove ante list and ai unplayables composition from code that builds libraries
+- removed variuos duplications in GameNew
+- moved sideboard code to PlayerController (to allow make an overload with AI sideboarding)
+- CardDetailPanel - text composition moved to a separate method
+- a method to determine if a player may see cards cntrolld by other player
+- saves changes made by sideboarding until 3rd match (this one and prevoius commit do)
+- removed functions where they were not needed
+- add tutorial on new filter and spell shop features
+- Converted Coat of Arms to script
+- Fixed chaos trigger on The Hippodrome
+- allow ctrl-enter to work from both the search textbox and the combobox
+- Forgot to commit these changes with my last commit
+- Converted Sound the Call to script
+- Cleanup (Ajani Goldmane's ultimate avatar's P/T was handled by both script and hardcoding)
+- adjust conditions to prompt sideboarding
+- Added the recent commit logs to changes.txt. Preparing for the beta build and release.
 
 
 Many people helped with this version. A special thank you goes out to them. (Attempted to list names alphabetically):
@@ -413,6 +443,8 @@ The AEther Flues
 The Fourth Sphere
 The Great Forest
 The Hippodrome
+Trail of the Mage-Rings
+Velis Vel
 
 
 Added the following Phenomenon:
