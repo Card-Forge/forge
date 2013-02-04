@@ -6,7 +6,9 @@ import forge.Card;
 import forge.Singletons;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.deck.Deck;
 import forge.game.GameState;
+import forge.game.GameType;
 import forge.game.phase.PhaseHandler;
 import forge.game.phase.PhaseType;
 import forge.gui.match.CMatchUI;
@@ -81,7 +83,9 @@ public abstract class PlayerController {
      * @return the player
      */
     protected abstract Player getPlayer();
-
+    
+    
+    public abstract Deck sideboard(final Deck deck, GameType gameType);
 
 
 }

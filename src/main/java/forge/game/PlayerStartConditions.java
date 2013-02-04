@@ -5,6 +5,7 @@ import com.google.common.base.Function;
 import forge.Card;
 import forge.deck.Deck;
 import forge.game.player.Player;
+import forge.item.CardPrinted;
 
 
 public class PlayerStartConditions {
@@ -14,9 +15,9 @@ public class PlayerStartConditions {
     private int startingLife = 20;
     private int startingHand = 7;
     private Function<Player, Iterable<Card>> cardsOnBattlefield = null;
-    private Function<Player, Iterable<Card>> cardsInCommand = null;
-    private Function<Player, Iterable<Card>> schemes = null;
-    private Function<Player, Iterable<Card>> planes = null;
+    private Function<Player, Iterable<CardPrinted>> cardsInCommand = null;
+    private Function<Player, Iterable<CardPrinted>> schemes = null;
+    private Function<Player, Iterable<CardPrinted>> planes = null;
 
     public PlayerStartConditions(Deck deck0) {
         originalDeck = deck0;
@@ -63,28 +64,28 @@ public class PlayerStartConditions {
     /**
      * @return the cardsInCommand
      */
-    public Iterable<Card> getCardsInCommand(Player p) {
+    public Iterable<CardPrinted> getCardsInCommand(Player p) {
         return cardsInCommand == null ? null : cardsInCommand.apply(p);
     }
 
     /**
      * @param function the cardsInCommand to set
      */
-    public void setCardsInCommand(Function<Player, Iterable<Card>> function) {
+    public void setCardsInCommand(Function<Player, Iterable<CardPrinted>> function) {
         this.cardsInCommand = function;
     }
 
     /**
      * @return the schemes
      */
-    public Iterable<Card> getSchemes(Player p) {
+    public Iterable<CardPrinted> getSchemes(Player p) {
         return schemes == null ? null : schemes.apply(p);
     }
 
     /**
      * @param schemes0 the schemes to set
      */
-    public void setSchemes(Function<Player, Iterable<Card>> s) {
+    public void setSchemes(Function<Player, Iterable<CardPrinted>> s) {
         this.schemes = s;
     }
 
@@ -98,14 +99,14 @@ public class PlayerStartConditions {
     /**
      * @return the planes
      */
-    public Iterable<Card> getPlanes(final Player p) {
+    public Iterable<CardPrinted> getPlanes(final Player p) {
         return planes == null ? null : planes.apply(p);
     }
 
     /**
      * @param planes0 the planes to set
      */
-    public void setPlanes(Function<Player, Iterable<Card>> planes0) {
+    public void setPlanes(Function<Player, Iterable<CardPrinted>> planes0) {
         this.planes = planes0;
     }
 

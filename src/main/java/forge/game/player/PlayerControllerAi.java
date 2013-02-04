@@ -6,7 +6,9 @@ import forge.Card;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
 import forge.control.input.Input;
+import forge.deck.Deck;
 import forge.game.GameState;
+import forge.game.GameType;
 import forge.game.ai.AiController;
 import forge.game.ai.AiInputBlock;
 import forge.game.ai.AiInputCommon;
@@ -147,6 +149,15 @@ public class PlayerControllerAi extends PlayerController {
     @Override
     protected Player getPlayer() {
         return player;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#sideboard(forge.deck.Deck)
+     */
+    @Override
+    public Deck sideboard(Deck deck, GameType gameType) {
+        // AI does not know how to sideboard
+        return deck;
     }
 
 

@@ -193,23 +193,9 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
         return stats;
     }
 
-    /**
-     * <p>
-     * isHuman.
-     * </p>
-     * 
-     * @return a boolean.
-     */
+    @Deprecated
     public abstract boolean isHuman();
-
-    /**
-     * <p>
-     * isComputer.
-     * </p>
-     * 
-     * @return a boolean.
-     */
-    //@Deprecated
+    @Deprecated
     public abstract boolean isComputer();
     public abstract PlayerType getType();
 
@@ -3195,7 +3181,8 @@ public abstract class Player extends GameEntity implements Comparable<Player> {
     
     public void setPlanarDeck(List<Card> pd)
     {
-        planarDeck = pd;   
+        planarDeck = pd;
+        Collections.shuffle(planarDeck);
     }
     
     /**

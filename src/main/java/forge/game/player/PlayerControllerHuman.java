@@ -11,10 +11,14 @@ import forge.control.input.Input;
 import forge.control.input.InputBlock;
 import forge.control.input.InputCleanup;
 import forge.control.input.InputPassPriority;
+import forge.deck.Deck;
+import forge.deck.DeckSection;
 import forge.game.GameState;
+import forge.game.GameType;
 import forge.game.phase.PhaseType;
 import forge.gui.GuiChoose;
 import forge.gui.match.CMatchUI;
+import forge.item.CardPrinted;
 
 
 /** 
@@ -125,6 +129,46 @@ public class PlayerControllerHuman extends PlayerController {
     @Override
     public Player getPlayer() {
         return player;
+    }
+
+    /* (non-Javadoc)
+     * @see forge.game.player.PlayerController#sideboard(forge.deck.Deck)
+     */
+    @Override
+    public Deck sideboard(Deck deck, GameType gameType) {
+        DeckSection sideboard = deck.getSideboard();
+
+        //  + deck.getSideboard().countAll()
+        int deckMinSize = Math.min(deck.getMain().countAll(), gameType.getDecksFormat().getMainRange().getMinimumInteger());
+        //IntRange sbRange = gameType.getDecksFormat().getSideRange();
+        int sideboardSize = sideboard.countAll();
+    
+        DeckSection newSb = new DeckSection();
+        List<CardPrinted> newMain = null;
+        
+    
+        while (newMain == null || newMain.size() < deckMinSize) {
+            
+            if ( newMain != null ) {
+                String errMsg = String.format("Too few cards in your main deck (minimum %d), please make modifications to your deck again.", deckMinSize);
+                JOptionPane.showMessageDialog(null, errMsg, "Invalid deck", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            newMain = GuiChoose.order("Sideboard", "Main Deck", sideboardSize, deck.getSideboard().toFlatList(), deck.getMain().toFlatList(), null, true);
+        }
+    
+        newSb.clear();
+        newSb.addAll(deck.getMain());
+        newSb.addAll(deck.getSideboard());
+        for(CardPrinted c : newMain)
+            newSb.remove(c);
+    
+        Deck res = (Deck) deck.copyTo(deck.getName());
+        res.getMain().clear();
+        res.getMain().add(newMain);
+        res.getSideboard().clear();
+        res.getSideboard().addAll(newSb);
+        return res;
     }
 
 

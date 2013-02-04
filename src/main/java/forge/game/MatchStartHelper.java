@@ -1,6 +1,7 @@
 package forge.game;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,13 +36,11 @@ public class MatchStartHelper {
         start.setStartingLife(start.getStartingLife() + avatar.getCard().getLife());
         start.setStartingHand(start.getStartingHand() + avatar.getCard().getHand());
 
-        start.setCardsInCommand(new Function<Player, Iterable<Card>>() {
+        start.setCardsInCommand(new Function<Player, Iterable<CardPrinted>>() {
 
             @Override
-            public Iterable<Card> apply(Player p) {
-                List<Card> res = new ArrayList<Card>();
-                res.add(avatar.toForgeCard(p));
-                return res;
+            public Iterable<CardPrinted> apply(Player p) {
+                return Arrays.asList(avatar) ;
             }
 
         });
@@ -52,16 +51,11 @@ public class MatchStartHelper {
     public void addArchenemy(final LobbyPlayer player, final Deck deck, final Iterable<CardPrinted> schemes) {
         PlayerStartConditions start = new PlayerStartConditions(deck);
 
-        start.setSchemes(new Function<Player, Iterable<Card>>() {
+        start.setSchemes(new Function<Player, Iterable<CardPrinted>>() {
 
             @Override
-            public Iterable<Card> apply(Player p) {
-                List<Card> res = new ArrayList<Card>();
-                for (CardPrinted cp : schemes) {
-                    res.add(cp.toForgeCard(p));
-                }
-
-                return res;
+            public Iterable<CardPrinted> apply(Player p) {
+                return schemes;
             }
 
         });
@@ -72,16 +66,12 @@ public class MatchStartHelper {
     public void addPlanechasePlayer(final LobbyPlayer player, final Deck deck, final Iterable<CardPrinted> planes) {
         PlayerStartConditions start = new PlayerStartConditions(deck);
 
-        start.setPlanes(new Function<Player, Iterable<Card>>() {
+        start.setPlanes(new Function<Player, Iterable<CardPrinted>>() {
 
             @Override
-            public Iterable<Card> apply(Player p) {
-                List<Card> res = new ArrayList<Card>();
-                for (CardPrinted cp : planes) {
-                    res.add(cp.toForgeCard(p));
-                }
+            public Iterable<CardPrinted> apply(Player p) {
 
-                return res;
+                return planes;
             }
 
         });
