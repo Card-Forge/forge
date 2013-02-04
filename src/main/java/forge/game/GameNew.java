@@ -111,8 +111,6 @@ public class GameNew {
 
             initVariantsZones(player, psc);
 
-            Deck myDeck = psc.getCurrentDeck();
-            
             GameType gameType = Singletons.getModel().getMatch().getGameType();
             boolean isFirstGame = Singletons.getModel().getMatch().getPlayedGames().isEmpty();
             boolean hasSideboard = !psc.getOriginalDeck().getSideboard().isEmpty();
@@ -122,8 +120,8 @@ public class GameNew {
                 psc.setCurrentDeck(player.getController().sideboard(psc.getCurrentDeck(), gameType));
             } else { 
                 psc.restoreOriginalDeck();
-                myDeck = psc.getCurrentDeck();
             }
+            Deck myDeck = psc.getCurrentDeck();
 
             Set<CardPrinted> myRemovedAnteCards = useAnte ? null : getRemovedAnteCards(myDeck);
             Random generator = MyRandom.getRandom();
