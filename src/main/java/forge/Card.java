@@ -6747,6 +6747,10 @@ public class Card extends GameEntity implements Comparable<Card> {
             if (!this.sharesTypeWith(source)) {
                 return false;
             }
+        } else if (property.startsWith("sharesCreatureTypeWith")) {
+            if (!this.sharesCreatureTypeWith(source)) {
+                return false;
+            }
         } else if (property.startsWith("withFlashback")) {
             boolean fb = false;
             if (this.hasStartOfUnHiddenKeyword("Flashback")) {

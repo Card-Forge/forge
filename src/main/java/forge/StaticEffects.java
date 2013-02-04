@@ -25,6 +25,8 @@ import java.util.List;
 
 import com.esotericsoftware.minlog.Log;
 
+import forge.card.abilityfactory.AbilityFactory;
+import forge.card.cardfactory.CardFactoryUtil;
 import forge.card.replacement.ReplacementEffect;
 import forge.card.spellability.SpellAbility;
 import forge.card.staticability.StaticAbility;
@@ -103,7 +105,9 @@ public class StaticEffects {
         final HashMap<String, String> params = se.getParams();
 
         int powerBonus = 0;
+        String addP = "";
         int toughnessBonus = 0;
+        String addT = "";
         int keywordMultiplier = 1;
         boolean setPT = false;
         String[] addKeywords = null;
@@ -115,22 +119,24 @@ public class StaticEffects {
         }
 
         if (params.containsKey("AddPower")) {
-            if (params.get("AddPower").equals("X")) {
-                powerBonus = se.getXValue();
-            } else if (params.get("AddPower").equals("Y")) {
-                powerBonus = se.getYValue();
+            addP = params.get("AddPower");
+            if (addP.matches("[0-9][0-9]?")) {
+                powerBonus = Integer.valueOf(addP);
+            } else if (addP.equals("AffectedX")) {
+                // gets calculated at runtime
             } else {
-                powerBonus = Integer.valueOf(params.get("AddPower"));
+                powerBonus = se.getXValue();
             }
         }
 
         if (params.containsKey("AddToughness")) {
-            if (params.get("AddToughness").equals("X")) {
-                toughnessBonus = se.getXValue();
-            } else if (params.get("AddToughness").equals("Y")) {
-                toughnessBonus = se.getYValue();
+            addT = params.get("AddToughness");
+            if (addT.matches("[0-9][0-9]?")) {
+                toughnessBonus = Integer.valueOf(addT);
+            } else if (addT.equals("AffectedX")) {
+                // gets calculated at runtime
             } else {
-                toughnessBonus = Integer.valueOf(params.get("AddToughness"));
+                toughnessBonus = se.getXValue();
             }
         }
 
@@ -186,6 +192,12 @@ public class StaticEffects {
             }
 
             // remove P/T bonus
+            if (addP.startsWith("AffectedX")) {
+                powerBonus = se.getXMapValue(affectedCard);
+            }
+            if (addT.startsWith("AffectedX")) {
+                toughnessBonus = se.getXMapValue(affectedCard);
+            }
             affectedCard.addSemiPermanentAttackBoost(powerBonus * -1);
             affectedCard.addSemiPermanentDefenseBoost(toughnessBonus * -1);
 
@@ -278,7 +290,6 @@ public class StaticEffects {
 
         StaticEffects.cardToEffectsList.put("Avatar", new String[] { "Ajani_Avatar_Token" });
         StaticEffects.cardToEffectsList.put("Alpha Status", new String[] { "Alpha_Status" });
-        StaticEffects.cardToEffectsList.put("Coat of Arms", new String[] { "Coat_of_Arms" });
         StaticEffects.cardToEffectsList.put("Liu Bei, Lord of Shu", new String[] { "Liu_Bei" });
 
         StaticEffects.cardToEffectsList.put("Old Man of the Sea", new String[] { "Old_Man_of_the_Sea" });

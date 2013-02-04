@@ -40,6 +40,7 @@ public class StaticEffect {
     private int xValue = 0;
     private int yValue = 0;
     private long timestamp = -1;
+    private HashMap<Card, Integer> xValueMap = new HashMap<Card, Integer>();
 
     private String chosenType;
     private HashMap<String, String> mapParams = new HashMap<String, String>();
@@ -819,6 +820,29 @@ public class StaticEffect {
      */
     public final int getYValue() {
         return this.yValue;
+    }
+
+    /**
+     * Store xValue relative to a specific card.
+     * @param affectedCard the card affected
+     * @param xValue the xValue
+     */
+    public final void addXMapValue(final Card affectedCard, final Integer xValue) {
+        if (this.xValueMap.containsKey(affectedCard)) {
+            if (!this.xValueMap.get(affectedCard).equals(xValue)) {
+                this.xValueMap.remove(affectedCard);
+            }
+        }
+        this.xValueMap.put(affectedCard, xValue);
+    }
+
+    /**
+     * Get the xValue for specific card.
+     * @param affectedCard the affected card
+     * @return an int.
+     */
+    public int getXMapValue(Card affectedCard) {
+        return this.xValueMap.get(affectedCard);
     }
 
     /**

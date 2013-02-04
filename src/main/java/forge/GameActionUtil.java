@@ -956,39 +956,6 @@ public final class GameActionUtil {
         }
     }
 
-    /** Constant <code>coatOfArms</code>. */
-    private static Command coatOfArms = new Command() {
-        private static final long serialVersionUID = 583505612126735693L;
-
-        private final List<Card> gloriousAnthemList = new ArrayList<Card>();
-
-        @Override
-        public void execute() {
-            final List<Card> list = this.gloriousAnthemList;
-            // reset all cards in list - aka "old" cards
-            for (int i2 = 0; i2 < list.size(); i2++) {
-                list.get(i2).addSemiPermanentAttackBoost(-1);
-                list.get(i2).addSemiPermanentDefenseBoost(-1);
-            }
-            // add +1/+1 to cards
-            list.clear();
-            final int num = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.nameEquals("Coat of Arms")).size();
-            final List<Card> creatures = CardLists.filter(Singletons.getModel().getGame().getCardsIn(ZoneType.Battlefield), CardPredicates.Presets.CREATURES);
-
-            for (Card c : creatures) {
-                for (Card c2 : creatures) {
-                    if (!c.equals(c2) && c.sharesCreatureTypeWith(c2)) {
-                        for (int j = 0; j < num; j++) {
-                            c.addSemiPermanentAttackBoost(1);
-                            c.addSemiPermanentDefenseBoost(1);
-                            this.gloriousAnthemList.add(c);
-                        }
-                    }
-                }
-            } // for outer
-        } // execute
-    }; // coatOfArms
-
     private static Command alphaStatus = new Command() {
         private static final long serialVersionUID = -3213793711304934358L;
 
@@ -1244,7 +1211,6 @@ public final class GameActionUtil {
 
         GameActionUtil.getCommands().put("Ajani_Avatar_Token", GameActionUtil.ajaniAvatarToken);
         GameActionUtil.getCommands().put("Alpha_Status", GameActionUtil.alphaStatus);
-        GameActionUtil.getCommands().put("Coat_of_Arms", GameActionUtil.coatOfArms);
 
         GameActionUtil.getCommands().put("Liu_Bei", GameActionUtil.liuBei);
         GameActionUtil.getCommands().put("Old_Man_of_the_Sea", GameActionUtil.oldManOfTheSea);

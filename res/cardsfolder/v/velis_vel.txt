@@ -1,0 +1,16 @@
+Name:Velis Vel
+ManaCost:no cost
+Types:Plane Lorwyn
+Text:no text
+S:Mode$ Continuous | Affected$ Creature | AddPower$ AffectedX | AddToughness$ AffectedX | EffectZone$ Command | Description$ Each creature gets +1/+1 for each other creature on the battlefield that shares at least one creature type with it. (For example, if two Elemental Shamans and an Elemental Spirit are on the battlefield, each gets +2/+2.)
+SVar:AffectedX:Count$Valid Creature.sharesCreatureTypeWith+Other
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, target creature gains all creature types until end of turn.
+SVar:RolledChaos:AB$ Animate | Cost$ 0 | ValidTgts$ Creature | TgtPrompt$ Select target creature | Types$ AllCreatureTypes
+T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ RolledWalk | Secondary$ True | TriggerDescription$ Whenever you roll Planeswalk, put this card on the bottom of its owner's planar deck face down, then move the top card of your planar deck off that planar deck and turn it face up
+SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
+A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
+SVar:X:Count$RolledThisTurn
+SVar:Picture:http://www.wizards.com/global/images/magic/general/velis_vel.jpg
+SetInfo:HOP|Common|http://magiccards.info/extras/plane/planechase/velis-vel.jpg
+Oracle:Each creature gets +1/+1 for each other creature on the battlefield that shares at least one creature type with it. (For example, if two Elemental Shamans and an Elemental Spirit are on the battlefield, each gets +2/+2.)\nWhenever you roll {C}, target creature gains all creature types until end of turn.
+End

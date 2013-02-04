@@ -4,7 +4,7 @@ Types:Plane Segovia
 Text:no text
 S:Mode$ Continuous | EffectZone$ Command | Affected$ Creature | AddPower$ -5 | Description$ All Creatures get -5/-0.
 T:Mode$ PlanarDice | Result$ Chaos | OptionalDecider$ You | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, you may destroy target creature if it's power is 0 or less.
-SVar:RolledChaos:AB$ Destroy | Cost$ 0 | ValidCards$ Creature | ConditionCheckSVar$ TgtPow | ConditionCompareSVar$ LE0
+SVar:RolledChaos:AB$ Destroy | Cost$ 0 | ValidTgts$ Creature | ConditionCheckSVar$ TgtPow | ConditionCompareSVar$ LE0 | AITgts$ Creature.OpponentCtrl+powerLE0
 SVar:TgtPow:Targeted$CardPower
 T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ RolledWalk | Secondary$ True | TriggerDescription$ Whenever you roll Planeswalk, put this card on the bottom of its owner's planar deck face down, then move the top card of your planar deck off that planar deck and turn it face up.
 SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
