@@ -301,7 +301,8 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
      */
     @Override
     public void addCard(InventoryItem item) {
-        if (item == null) {
+        // disallow "buying" cards while showing the full catalog
+        if (item == null || showingFullCatalog) {
             return;
         }
 
@@ -357,7 +358,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
      */
     @Override
     public void removeCard(InventoryItem item) {
-        if ((item == null) || !(item instanceof CardPrinted)) {
+        if ((item == null) || !(item instanceof CardPrinted) || showingFullCatalog) {
             return;
         }
 
@@ -373,6 +374,10 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
     }
     
     public void removeCards(List<Map.Entry<InventoryItem, Integer>> cardsToRemove) {
+        if (showingFullCatalog) {
+            return;
+        }
+        
         this.getTableDeck().removeCards(cardsToRemove);
         this.getTableCatalog().addCards(cardsToRemove);
 
