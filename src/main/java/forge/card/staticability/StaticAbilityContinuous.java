@@ -68,7 +68,9 @@ public class StaticAbilityContinuous {
         se.setSource(hostCard);
         Singletons.getModel().getGame().getStaticEffects().addStaticEffect(se);
 
+        String addP = "";
         int powerBonus = 0;
+        String addT = "";
         int toughnessBonus = 0;
         String setP = "";
         int setPower = -1;
@@ -111,26 +113,20 @@ public class StaticAbilityContinuous {
         }
 
         if (params.containsKey("AddPower")) {
-            if (params.get("AddPower").equals("X")) {
-                powerBonus = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
+            addP = params.get("AddPower");
+            powerBonus = addP.matches("[0-9][0-9]?") ? Integer.parseInt(addP)
+                    : AbilityFactory.calculateAmount(hostCard, addP, null);
+            if (!addP.matches("[0-9][0-9]?") && !addP.equals("AffectedX")) {
                 se.setXValue(powerBonus);
-            } else if (params.get("AddPower").equals("Y")) {
-                powerBonus = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("Y"));
-                se.setYValue(powerBonus);
-            } else {
-                powerBonus = Integer.valueOf(params.get("AddPower"));
             }
         }
 
         if (params.containsKey("AddToughness")) {
-            if (params.get("AddToughness").equals("X")) {
-                toughnessBonus = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("X"));
-                se.setXValue(toughnessBonus);
-            } else if (params.get("AddToughness").equals("Y")) {
-                toughnessBonus = CardFactoryUtil.xCount(hostCard, hostCard.getSVar("Y"));
-                se.setYValue(toughnessBonus);
-            } else {
-                toughnessBonus = Integer.valueOf(params.get("AddToughness"));
+            addT = params.get("AddToughness");
+            toughnessBonus = addT.matches("[0-9][0-9]?") ? Integer.parseInt(addT)
+                    : AbilityFactory.calculateAmount(hostCard, addT, null);
+            if (!addT.matches("[0-9][0-9]?") && !addT.equals("AffectedX")) {
+                se.setXValue(powerBonus);
             }
         }
 
@@ -190,8 +186,8 @@ public class StaticAbilityContinuous {
                 se.setChosenType(chosenType);
             } else if (addTypes[0].equals("ImprintedCreatureType")) {
                 final ArrayList<String> imprint = hostCard.getImprinted().get(0).getType();
-                ArrayList<String> imprinted = new ArrayList<String>(); 
-                for (String t : imprint ) {
+                ArrayList<String> imprinted = new ArrayList<String>();
+                for (String t : imprint) {
                     if (CardUtil.isACreatureType(t) || t.equals("AllCreatureTypes")) {
                         imprinted.add(t);
                     }
@@ -335,6 +331,14 @@ public class StaticAbilityContinuous {
             }
 
             // add P/T bonus
+            if (addP.startsWith("AffectedX")) {
+                powerBonus = CardFactoryUtil.xCount(affectedCard, hostCard.getSVar(addP));
+                se.addXMapValue(affectedCard, powerBonus);
+            }
+            if (addT.startsWith("AffectedX")) {
+                toughnessBonus = CardFactoryUtil.xCount(affectedCard, hostCard.getSVar(addT));
+                se.addXMapValue(affectedCard, toughnessBonus);
+            }
             affectedCard.addSemiPermanentAttackBoost(powerBonus);
             affectedCard.addSemiPermanentDefenseBoost(toughnessBonus);
 
