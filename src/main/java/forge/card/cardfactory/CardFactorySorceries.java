@@ -44,7 +44,6 @@ import forge.card.cost.Cost;
 import forge.card.mana.ManaCostParser;
 import forge.card.spellability.Spell;
 import forge.card.spellability.SpellAbility;
-import forge.card.spellability.Target;
 import forge.control.input.Input;
 import forge.control.input.InputPayManaCost;
 import forge.control.input.InputPayManaCostAbility;

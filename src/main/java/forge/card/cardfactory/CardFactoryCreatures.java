@@ -21,9 +21,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-import org.apache.commons.lang3.StringUtils;
-
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
@@ -54,9 +51,7 @@ import forge.card.spellability.Target;
 import forge.card.trigger.Trigger;
 import forge.card.trigger.TriggerHandler;
 import forge.control.input.Input;
-import forge.control.input.InputSelectMany;
 import forge.control.input.InputSelectManyCards;
-import forge.control.input.InputSelectManyPlayers;
 import forge.game.player.Player;
 import forge.game.zone.PlayerZone;
 import forge.game.zone.Zone;
