@@ -130,7 +130,7 @@ public class GenerateThemeDeck extends GenerateColoredDeckBase {
                 }
 
                 final int n = cardCounts.get(s);
-                tDeck.add(CardDb.instance().getCard(s), 1);
+                tDeck.add(CardDb.instance().getCard(s));
                 cardCounts.put(s, n + 1);
                 tmpDeck += s + "\n";
 

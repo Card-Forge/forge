@@ -228,9 +228,9 @@ public class MetaSet {
             // ItemPool<CardPrinted> cardPool = new ItemPool<CardPrinted>(CardPrinted.class);
             for (CardPrinted aCard : CardDb.instance().getAllTraditionalCards()) {
                 if (data.indexOf(aCard.getEdition()) > -1) {
-                    cardPool.add(aCard, 1);
+                    cardPool.add(aCard);
                     // System.out.println("Added card" + aCard.getName());
-                }
+                    }
             }
 
                 final BoosterGenerator bpSets = new BoosterGenerator(cardPool);
@@ -274,10 +274,10 @@ public class MetaSet {
             if (typeTest[0].equalsIgnoreCase("choose1") || typeTest[0].equalsIgnoreCase("random1")
                     || typeTest[0].equalsIgnoreCase("combo")) {
                         System.out.println("WARNING - MetaSet type '" + typeTest[0] + "' ignored in pool creation.");
-                }
+                    }
             else if (typeTest[0].equalsIgnoreCase("full")) {
                 for (CardPrinted aCard : CardDb.instance().getAllUniqueCards()) {
-                    cardPool.add(aCard, 1);
+                    cardPool.add(aCard);
                 }
                 return cardPool;
             }
@@ -296,10 +296,10 @@ public class MetaSet {
                 for (CardPrinted aCard : CardDb.instance().getAllTraditionalCards()) {
                     if (mData.indexOf(aCard.getEdition()) > -1) {
                         if (!cardPool.contains(aCard)) {
-                            cardPool.add(aCard, 1);
+                            cardPool.add(aCard);
                             // System.out.println(mSet.type + " " + mData + ":  Added card: " + aCard.getName());
+                            }
                         }
-                    }
                 }
             } else if (mSet.type.equalsIgnoreCase("cube")) {
                 final File dFolder = new File("res/sealed/");
@@ -317,9 +317,9 @@ public class MetaSet {
                 final CustomLimited myCube = CustomLimited.parse(dfData, Singletons.getModel().getDecks().getCubes());
                 for (CardPrinted aCard : myCube.getCardPool().toFlatList()) {
                         if (!cardPool.contains(aCard)) {
-                            cardPool.add(aCard, 1);
+                            cardPool.add(aCard);
                             // System.out.println(mSet.type + " " + mSet.data + ":  Added card: " + aCard.getName());
-                        }
+                            }
                 }
             }
         }

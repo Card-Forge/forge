@@ -137,9 +137,9 @@ public class ControlWinLose {
 
                 for (Card c : compAntes) {
                     CardPrinted toRemove = CardDb.instance().getCard(c);
-                    cDeck.getMain().remove(toRemove, 1);
+                    cDeck.getMain().remove(toRemove);
                     if ( cDeck != oDeck )
-                        oDeck.getMain().remove(toRemove, 1);
+                        oDeck.getMain().remove(toRemove);
                 }
             }
 
@@ -149,7 +149,7 @@ public class ControlWinLose {
                 if (null != chosen) {
                     Deck d = match.getPlayersDeck(p.getLobbyPlayer());
                     for (CardPrinted c : chosen) {
-                        d.getMain().add(c, 1);
+                        d.getMain().add(c);
                     }
                 }
             }

@@ -551,7 +551,7 @@ public class QuestDataIO {
                 final String nodename = reader.getNodeName();
 
                 if ("string".equals(nodename)) {
-                    result.add(CardDb.instance().getCard(reader.getValue()), cnt);
+                    result.add(CardDb.instance().getCard(reader.getValue()));
                 } else if ("card".equals(nodename)) { // new format
                     result.add(this.readCardPrinted(reader), cnt);
                 } else if ("booster".equals(nodename)) {
@@ -631,7 +631,7 @@ public class QuestDataIO {
                 final String nodename = reader.getNodeName();
 
                 if ("string".equals(nodename)) {
-                    result.add(CardDb.instance().getCard(reader.getValue()), cnt);
+                    result.add(CardDb.instance().getCard(reader.getValue()));
                 } else if ("card".equals(nodename)) { // new format
                     result.add(this.readCardPrinted(reader), cnt);
                 }

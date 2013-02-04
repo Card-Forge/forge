@@ -58,7 +58,7 @@ public class DeckSection extends ItemPool<CardPrinted> {
     public void set(final Iterable<String> cardNames) {
         this.clear();
         for (final String name : cardNames) {
-            this.add(CardDb.instance().getCard(name), 1);
+            this.add(CardDb.instance().getCard(name));
         }
     }
 
@@ -68,8 +68,20 @@ public class DeckSection extends ItemPool<CardPrinted> {
      * @param card
      *            the card
      */
-    public void add(final Card card, int qty) {
-        this.add(CardDb.instance().getCard(card), qty);
+    public void add(final Card card) {
+        this.add(CardDb.instance().getCard(card));
+    }
+
+    /**
+     * Adds the.
+     * 
+     * @param cardName
+     *            the card name
+     * @param setCode
+     *            the set code
+     */
+    public void add(final String cardName, final String setCode) {
+        this.add(CardDb.instance().getCard(cardName, setCode));
     }
 
     /**
@@ -79,8 +91,8 @@ public class DeckSection extends ItemPool<CardPrinted> {
      * @param setCode the set code
      * @param amount the amount
      */
-    public void add(final String cardName, final String setCode, final int qty) {
-        this.add(CardDb.instance().getCard(cardName, setCode), qty);
+    public void add(final String cardName, final String setCode, final int amount) {
+        this.add(CardDb.instance().getCard(cardName, setCode), amount);
     }
 
     /**
@@ -91,7 +103,7 @@ public class DeckSection extends ItemPool<CardPrinted> {
      */
     public void add(final List<Card> cardList) {
         for (final Card c : cardList) {
-            this.add(c, 1);
+            this.add(c);
         }
     }
 
@@ -103,7 +115,7 @@ public class DeckSection extends ItemPool<CardPrinted> {
      */
     public void add(final Iterable<CardPrinted> list) {
         for (CardPrinted cp : list) {
-            this.add(cp, 1);
+            this.add(cp);
         }
     }
 
@@ -112,8 +124,8 @@ public class DeckSection extends ItemPool<CardPrinted> {
      *
      * @param cardName the card name
      */
-    public void add(final String cardName, int qty) {
-        this.add(CardDb.instance().getCard(cardName), qty);
+    public void add(final String cardName) {
+        this.add(CardDb.instance().getCard(cardName));
     }
 
     /**
