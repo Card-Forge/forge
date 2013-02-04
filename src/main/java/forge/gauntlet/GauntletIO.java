@@ -185,7 +185,7 @@ public class GauntletIO {
                 final String nodename = reader.getNodeName();
 
                 if ("string".equals(nodename)) {
-                    result.add(CardDb.instance().getCard(reader.getValue()));
+                    result.add(CardDb.instance().getCard(reader.getValue()), cnt);
                 } else if ("card".equals(nodename)) { // new format
                     result.add(this.readCardPrinted(reader), cnt);
                 }

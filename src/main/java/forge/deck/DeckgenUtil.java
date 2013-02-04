@@ -323,7 +323,7 @@ public class DeckgenUtil {
             CardPrinted cp = Aggregates.random(allSchemes);
             int appearances = res.getSideboard().count(cp) + 1;
             if (appearances < 2) {
-                res.getSideboard().add(cp);
+                res.getSideboard().add(cp, 1);
                 schemesToAdd--;
             } else {
                 attemptsLeft--;
@@ -351,12 +351,12 @@ public class DeckgenUtil {
             
             if(rndPlane.getCard().getType().isPhenomenon() && phenoms < 2)
             {
-                res.getSideboard().add(rndPlane);
+                res.getSideboard().add(rndPlane, 1);
                 phenoms++;
             }
             else if (rndPlane.getCard().getType().isPlane())
             {
-                res.getSideboard().add(rndPlane);
+                res.getSideboard().add(rndPlane, 1);
             }
             
             if(allPlanars.isEmpty() || res.getSideboard().countAll() == targetsize)

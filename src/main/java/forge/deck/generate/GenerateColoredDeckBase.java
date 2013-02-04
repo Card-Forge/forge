@@ -114,7 +114,7 @@ public abstract class GenerateColoredDeckBase {
                 throw new RuntimeException("Generate2ColorDeck : get2ColorDeck -- looped too much -- Cr12");
             }
 
-            tDeck.add(CardDb.instance().getCard(cp.getName(), Aggregates.random(cp.getCard().getSetsPrinted()).getKey()));
+            tDeck.add(CardDb.instance().getCard(cp.getName(), Aggregates.random(cp.getCard().getSetsPrinted()).getKey()), 1);
             final int n = this.cardCounts.get(cp.getName());
             this.cardCounts.put(cp.getName(), n + 1);
             tmpDeck.append(cp.getName() + " " + cp.getCard().getManaCost() + "\n");
@@ -133,7 +133,7 @@ public abstract class GenerateColoredDeckBase {
             // not an error if looped too much - could play singleton mode, with 6 slots for 3 non-basic lands.
 
             CardPrinted cp = CardDb.instance().getCard(s);
-            tDeck.add(CardDb.instance().getCard(cp.getName(), Aggregates.random(cp.getCard().getSetsPrinted()).getKey()));
+            tDeck.add(CardDb.instance().getCard(cp.getName(), Aggregates.random(cp.getCard().getSetsPrinted()).getKey()), 1);
 
             final int n = this.cardCounts.get(s);
             this.cardCounts.put(s, n + 1);
@@ -171,7 +171,7 @@ public abstract class GenerateColoredDeckBase {
             CardPrinted cp = CardDb.instance().getCard(color);
             String basicLandSet = Aggregates.random(cp.getCard().getSetsPrinted()).getKey();
             for (int j = 0; j <= nLand; j++) {
-                tDeck.add(CardDb.instance().getCard(cp.getName(), basicLandSet));
+                tDeck.add(CardDb.instance().getCard(cp.getName(), basicLandSet), 1);
             }
         }
     }

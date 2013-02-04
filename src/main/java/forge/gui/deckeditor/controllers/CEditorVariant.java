@@ -93,13 +93,13 @@ public final class CEditorVariant extends ACEditorBase<CardPrinted, Deck> {
      * @see forge.gui.deckeditor.ACEditorBase#addCard()
      */
     @Override
-    public void addCard(InventoryItem item) {
+    public void addCard(InventoryItem item, int qty) {
         if ((item == null) || !(item instanceof CardPrinted)) {
             return;
         }
 
         final CardPrinted card = (CardPrinted) item;
-        this.getTableDeck().addCard(card);
+        this.getTableDeck().addCard(card, qty);
         this.controller.notifyModelChanged();
         VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText("*Current Deck");
     }
@@ -108,13 +108,13 @@ public final class CEditorVariant extends ACEditorBase<CardPrinted, Deck> {
      * @see forge.gui.deckeditor.ACEditorBase#removeCard()
      */
     @Override
-    public void removeCard(InventoryItem item) {
+    public void removeCard(InventoryItem item, int qty) {
         if ((item == null) || !(item instanceof CardPrinted)) {
             return;
         }
 
         final CardPrinted card = (CardPrinted) item;
-        this.getTableDeck().removeCard(card);
+        this.getTableDeck().removeCard(card, qty);
         this.controller.notifyModelChanged();
         VCurrentDeck.SINGLETON_INSTANCE.getTabLabel().setText("*Current Deck");
     }

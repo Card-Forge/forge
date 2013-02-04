@@ -184,7 +184,7 @@ public enum DeckFormat {
             DeckSection tmp = new DeckSection(deck.getMain());
             tmp.addAll(deck.getSideboard());
             if (null != deck.getCommander() && this == Commander) {
-                tmp.add(deck.getCommander());
+                tmp.add(deck.getCommander(), 1);
             }
 
             List<String> limitExceptions = Arrays.asList("Relentless Rats");

@@ -217,7 +217,7 @@ public final class EditorTableView<T extends InventoryItem> {
                 // Filter out non-card items (booster packs, etc.)
                 for (T item : deck) {
                     if (item instanceof CardPrinted) {
-                        filteredDeck.add(item);
+                        filteredDeck.add(item, 1);
                     }
                 }
 
@@ -356,11 +356,11 @@ public final class EditorTableView<T extends InventoryItem> {
      * @param card
      *            an InventoryItem
      */
-    public void addCard(final T card) {
+    public void addCard(final T card, int qty) {
         final int n = this.table.getSelectedRow();
-        this.pool.add(card);
+        this.pool.add(card, qty);
         if (this.isUnfiltered()) {
-            this.model.addCard(card, 1);
+            this.model.addCard(card, qty);
        }
         this.updateView(false);
         this.fixSelection(n);
@@ -397,11 +397,11 @@ public final class EditorTableView<T extends InventoryItem> {
      * @param card
      *            an InventoryItem
      */
-    public void removeCard(final T card) {
+    public void removeCard(final T card, int qty) {
         final int n = this.table.getSelectedRow();
-        this.pool.remove(card);
+        this.pool.remove(card, qty);
         if (this.isUnfiltered()) {
-            this.model.removeCard(card, 1);
+            this.model.removeCard(card, qty);
         }
         this.updateView(false);
         this.fixSelection(n);

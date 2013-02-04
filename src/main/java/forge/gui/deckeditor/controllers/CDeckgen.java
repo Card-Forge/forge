@@ -84,12 +84,12 @@ public enum CDeckgen implements ICDoc {
         Iterable<CardPrinted> source = Iterables.filter(CardDb.instance().getAllUniqueCards(), notBasicLand);
         randomDeck.getMain().addAllFlat(Aggregates.random(source, 15 * 5));
 
-        randomDeck.getMain().add("Plains");
-        randomDeck.getMain().add("Island");
-        randomDeck.getMain().add("Swamp");
-        randomDeck.getMain().add("Mountain");
-        randomDeck.getMain().add("Forest");
-        randomDeck.getMain().add("Terramorphic Expanse");
+        randomDeck.getMain().add("Plains", 1);
+        randomDeck.getMain().add("Island", 1);
+        randomDeck.getMain().add("Swamp", 1);
+        randomDeck.getMain().add("Mountain", 1);
+        randomDeck.getMain().add("Forest", 1);
+        randomDeck.getMain().add("Terramorphic Expanse", 1);
 
         final ACEditorBase<TItem, TModel> ed = (ACEditorBase<TItem, TModel>)
                 CDeckEditorUI.SINGLETON_INSTANCE.getCurrentEditorController();

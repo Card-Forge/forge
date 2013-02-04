@@ -113,18 +113,6 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
         return new ItemPoolView<T>(Collections.unmodifiableMap(this.getCards()), this.getMyClass());
     }
 
-    // Cards manipulation
-    /**
-     * 
-     * Add Card.
-     * 
-     * @param card
-     *            a T
-     */
-    public void add(final T card) {
-        this.add(card, 1);
-    }
-
     /**
      * 
      * add method.
@@ -159,7 +147,7 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
     public <U extends InventoryItem> void addAllFlat(final Iterable<U> cards) {
         for (final U cr : cards) {
             if (this.getMyClass().isInstance(cr)) {
-                this.add((T) cr);
+                this.add((T) cr, 1);
             }
         }
         this.setListInSync(false);
@@ -182,17 +170,6 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
             }
         }
         this.setListInSync(false);
-    }
-
-    /**
-     * 
-     * Remove.
-     * 
-     * @param card
-     *            a T
-     */
-    public boolean remove(final T card) {
-        return this.remove(card, 1);
     }
 
     /**
@@ -239,7 +216,7 @@ public class ItemPool<T extends InventoryItem> extends ItemPoolView<T> {
      */
     public void removeAllFlat(final Iterable<T> flat) {
         for (final T e : flat) {
-            this.remove(e);
+            this.remove(e, 1);
         }
         // need not set out-of-sync: either remove did set, or nothing was removed
     }

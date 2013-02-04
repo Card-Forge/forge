@@ -176,10 +176,10 @@ public final class QuestUtilCards {
      *            the card
      */
     public void addSingleCard(final CardPrinted card) {
-        this.qa.getCardPool().add(card);
+        this.qa.getCardPool().add(card, 1);
 
         // register card into that list so that it would appear as a new one.
-        this.qa.getNewCardList().add(card);
+        this.qa.getNewCardList().add(card, 1);
     }
 
     private static final Predicate<CardPrinted> RARE_PREDICATE = CardPrinted.Predicates.Presets.IS_RARE_OR_MYTHIC;
@@ -251,7 +251,7 @@ public final class QuestUtilCards {
     public void buyCard(final CardPrinted card, final int value) {
         if (this.qa.getCredits() >= value) {
             this.qa.setCredits(this.qa.getCredits() - value);
-            this.qa.getShopList().remove(card);
+            this.qa.getShopList().remove(card, 1);
             this.addSingleCard(card);
         }
     }
@@ -282,7 +282,7 @@ public final class QuestUtilCards {
     public void buyPreconDeck(final PreconDeck precon, final int value) {
         if (this.qa.getCredits() >= value) {
             this.qa.setCredits(this.qa.getCredits() - value);
-            this.qa.getShopList().remove(precon);
+            this.qa.getShopList().remove(precon, 1);
             addPreconDeck(precon);
         }
     }
@@ -456,7 +456,7 @@ public final class QuestUtilCards {
                 filter = Predicates.and(CardEdition.Predicates.CAN_MAKE_BOOSTER, isLegalInQuestFormat(qc.getFormat()));
             }
             Iterable<CardEdition> rightEditions = Iterables.filter(Singletons.getModel().getEditions(), filter);
-            this.qa.getShopList().add(BoosterPack.FN_FROM_SET.apply(Aggregates.random(rightEditions)));
+            this.qa.getShopList().add(BoosterPack.FN_FROM_SET.apply(Aggregates.random(rightEditions)), 1);
         }
     }
 

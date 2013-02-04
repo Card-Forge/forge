@@ -300,7 +300,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
      * @see forge.gui.deckeditor.ACEditorBase#addCard()
      */
     @Override
-    public void addCard(InventoryItem item) {
+    public void addCard(InventoryItem item, int qty) {
         // disallow "buying" cards while showing the full catalog
         if (item == null || showingFullCatalog) {
             return;
@@ -314,14 +314,14 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
         }
         
         if (item instanceof CardPrinted) {
-            this.getTableCatalog().removeCard(item);
+            this.getTableCatalog().removeCard(item, qty);
 
             final CardPrinted card = (CardPrinted) item;
-            this.getTableDeck().addCard(card);
+            this.getTableDeck().addCard(card, qty);
             this.questData.getCards().buyCard(card, value);
 
         } else if (item instanceof OpenablePack) {
-            this.getTableCatalog().removeCard(item);
+            this.getTableCatalog().removeCard(item, qty);
 
             OpenablePack booster = null;
             if (item instanceof BoosterPack) {
@@ -339,7 +339,7 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
                     "You have found the following cards inside:", newCards);
             c.show();
         } else if (item instanceof PreconDeck) {
-            this.getTableCatalog().removeCard(item);
+            this.getTableCatalog().removeCard(item, qty);
             final PreconDeck deck = (PreconDeck) item;
             this.questData.getCards().buyPreconDeck(deck, value);
             final ItemPool<InventoryItem> newInventory =
@@ -357,14 +357,14 @@ public final class CEditorQuestCardShop extends ACEditorBase<InventoryItem, Deck
      * @see forge.gui.deckeditor.ACEditorBase#removeCard()
      */
     @Override
-    public void removeCard(InventoryItem item) {
+    public void removeCard(InventoryItem item, int qty) {
         if ((item == null) || !(item instanceof CardPrinted) || showingFullCatalog) {
             return;
         }
 
         final CardPrinted card = (CardPrinted) item;
-        this.getTableDeck().removeCard(card);
-        this.getTableCatalog().addCard(card);
+        this.getTableDeck().removeCard(card, qty);
+        this.getTableCatalog().addCard(card, qty);
 
         final int price = Math.min((int) (this.multiplier * this.getCardValue(card)), this.questData.getCards()
                 .getSellPriceLimit());

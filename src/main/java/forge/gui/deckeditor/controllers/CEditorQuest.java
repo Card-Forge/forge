@@ -117,9 +117,9 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
      * 
      * @param card {@link forge.item.CardPrinted}
      */
-    public void addCheatCard(final CardPrinted card) {
-        this.getTableCatalog().addCard(card);
-        this.questData.getCards().getCardpool().add(card);
+    public void addCheatCard(final CardPrinted card, int qty) {
+        this.getTableCatalog().addCard(card, qty);
+        this.questData.getCards().getCardpool().add(card, qty);
     }
 
     // fills number of decks using each card
@@ -141,14 +141,14 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
      * @see forge.gui.deckeditor.ACEditorBase#addCard()
      */
     @Override
-    public void addCard(InventoryItem item) {
+    public void addCard(InventoryItem item, int qty) {
         if ((item == null) || !(item instanceof CardPrinted)) {
             return;
         }
 
         final CardPrinted card = (CardPrinted) item;
-        this.getTableCatalog().removeCard(card);
-        this.getTableDeck().addCard(card);
+        this.getTableCatalog().removeCard(card, qty);
+        this.getTableDeck().addCard(card, qty);
         this.controller.notifyModelChanged();
     }
 
@@ -156,14 +156,14 @@ public final class CEditorQuest extends ACEditorBase<CardPrinted, Deck> {
      * @see forge.gui.deckeditor.ACEditorBase#removeCard()
      */
     @Override
-    public void removeCard(InventoryItem item) {
+    public void removeCard(InventoryItem item, int qty) {
         if ((item == null) || !(item instanceof CardPrinted)) {
             return;
         }
 
         final CardPrinted card = (CardPrinted) item;
-        this.getTableCatalog().addCard(card);
-        this.getTableDeck().removeCard(card);
+        this.getTableCatalog().addCard(card, qty);
+        this.getTableDeck().removeCard(card, qty);
     }
 
     /*

@@ -101,17 +101,14 @@ public enum CDeckEditorUI implements CardContainer {
     }
     
     private interface _MoveAction {
-        void move(InventoryItem item);
+        void move(InventoryItem item, int qty);
     }
 
     private void moveSelectedCards(
             EditorTableView<InventoryItem> table, _MoveAction moveAction, boolean moveFour) {
         List<InventoryItem> items = table.getSelectedCards();
         for (InventoryItem item : items) {
-            final int numToMove = Math.min(moveFour? 4 : 1, table.getCardCount(item));
-            for (int count = 0; numToMove > count; ++count) {
-                moveAction.move(item);
-            }
+            moveAction.move(item, Math.min(moveFour ? 4 : 1, table.getCardCount(item)));
         }
 
         CStatistics.SINGLETON_INSTANCE.update();
@@ -123,8 +120,8 @@ public enum CDeckEditorUI implements CardContainer {
         moveSelectedCards((EditorTableView<InventoryItem>)childController.getTableCatalog(),
                 new _MoveAction() {
             @Override
-            public void move(InventoryItem item) {
-                childController.addCard(item);
+            public void move(InventoryItem item, int qty) {
+                childController.addCard(item, qty);
             }
         }, addFour);
     }
@@ -134,8 +131,8 @@ public enum CDeckEditorUI implements CardContainer {
         moveSelectedCards((EditorTableView<InventoryItem>)childController.getTableDeck(),
                 new _MoveAction() {
             @Override
-            public void move(InventoryItem item) {
-                childController.removeCard(item);
+            public void move(InventoryItem item, int qty) {
+                childController.removeCard(item, qty);
             }
         }, removeFour);
     }
