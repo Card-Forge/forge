@@ -3,7 +3,7 @@ ManaCost:1 U
 Types:Instant
 Text:no text
 A:SP$ ChangeZone | Cost$ 1 U | ValidTgts$ Creature | TgtPrompt$ Select target creature | Origin$ Battlefield | Destination$ Hand | SubAbility$ DBDraw | SpellDescription$ Return target creature to its owner's hand. Its controller draws a card.
-SVar:DBDraw:DB$Draw | Defined$ TargetedController | NumCards$ 1
+SVar:DBDraw:DB$ Draw | Defined$ TargetedController | NumCards$ 1
 SVar:Rarity:Common
 SVar:Picture:http://www.wizards.com/global/images/magic/general/call_to_heel.jpg
 SetInfo:ALA|Common|http://magiccards.info/scans/en/ala/32.jpg

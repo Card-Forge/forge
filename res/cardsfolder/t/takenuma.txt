@@ -1,0 +1,16 @@
+Name:Takenuma
+ManaCost:no cost
+Types:Plane Kamigawa
+Text:no text
+T:Mode$ ChangesZone | Origin$ Battlefield | Destination$ Any | ValidCard$ Creature | Execute$ TakenumaDraw | TriggerZones$ Command | TriggerDescription$ Whenever a creature leaves the battlefield, its controller draws a card.
+SVar:TakenumaDraw:AB$ Draw | Cost$ 0 | Defined$ TriggeredCardController | NumCards$ 1
+T:Mode$ PlanarDice | Result$ Chaos | TriggerZones$ Command | Execute$ RolledChaos | TriggerDescription$ Whenever you roll Chaos, return target creature you control to its owner's hand.
+SVar:RolledChaos:AB$ ChangeZone | Cost$ 0 | ValidTgts$ Creature.YouCtrl | TgtPrompt$ Select target creature to return to your hand | Origin$ Battlefield | Destination$ Hand
+T:Mode$ PlanarDice | Result$ Planeswalk | TriggerZones$ Command | Execute$ RolledWalk | Secondary$ True | TriggerDescription$ Whenever you roll Planeswalk, put this card on the bottom of its owner's planar deck face down, then move the top card of your planar deck off that planar deck and turn it face up
+SVar:RolledWalk:AB$ Planeswalk | Cost$ 0
+A:AB$ RollPlanarDice | Cost$ X | SorcerySpeed$ True | ActivationZone$ Command | SpellDescription$ Roll the planar dice.
+SVar:X:Count$RolledThisTurn
+SVar:Picture:http://www.wizards.com/global/images/magic/general/takenuma.jpg
+SetInfo:PC2|Common|http://magiccards.info/extras/plane/planechase-2012-edition/takenuma.jpg
+Oracle:Whenever a creature leaves the battlefield, its controller draws a card.\nWhenever you roll {C}, return target creature you control to its owner's hand.
+End
